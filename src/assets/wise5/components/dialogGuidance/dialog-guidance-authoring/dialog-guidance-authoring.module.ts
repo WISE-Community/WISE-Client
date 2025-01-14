@@ -12,7 +12,6 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { SessionService } from '../../../services/sessionService';
 import { StudentDataService } from '../../../services/studentDataService';
@@ -24,6 +23,7 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { FeedbackRuleHelpComponent } from '../../common/feedbackRule/feedback-rule-help/feedback-rule-help.component';
 import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @NgModule({
   declarations: [
@@ -49,12 +49,12 @@ import { ComponentAuthoringModule } from '../../component-authoring.module';
     ComputerAvatarService,
     ConfigService,
     DialogGuidanceService,
-    NodeService,
     ProjectAssetService,
     ProjectService,
     SessionService,
     StudentDataService,
     TagService,
+    TeacherNodeService,
     TeacherProjectService
   ],
   exports: [

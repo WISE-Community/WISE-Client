@@ -49,12 +49,12 @@ export class NodeGradingViewComponent implements OnInit {
     protected annotationService: AnnotationService,
     protected classroomStatusService: ClassroomStatusService,
     protected configService: ConfigService,
+    protected dataService: TeacherDataService,
     protected dialog: MatDialog,
     protected milestoneService: MilestoneService,
     protected notificationService: NotificationService,
     protected peerGroupService: TeacherPeerGroupService,
-    protected projectService: TeacherProjectService,
-    protected teacherDataService: TeacherDataService
+    protected projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +66,7 @@ export class NodeGradingViewComponent implements OnInit {
     this.maxScore = this.getMaxScore();
     this.node = this.projectService.getNode(this.nodeId);
     this.nodeHasWork = this.projectService.nodeHasWork(this.nodeId);
-    this.sort = this.teacherDataService.nodeGradingSort;
+    this.sort = this.dataService.nodeGradingSort;
     this.nodeContent = this.projectService.getNodeById(this.nodeId);
     this.milestoneReport = this.milestoneService.getMilestoneReportByNodeId(this.nodeId);
     this.peerGroupingTags = Array.from(this.peerGroupService.getPeerGroupingTags(this.node));
@@ -113,7 +113,7 @@ export class NodeGradingViewComponent implements OnInit {
     );
 
     this.subscriptions.add(
-      this.teacherDataService.studentWorkReceived$.subscribe(({ studentWork }) => {
+      this.dataService.studentWorkReceived$.subscribe(({ studentWork }) => {
         const workgroupId = studentWork.workgroupId;
         if (studentWork.nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
           this.updateWorkgroup(workgroupId);
@@ -122,14 +122,14 @@ export class NodeGradingViewComponent implements OnInit {
     );
 
     this.subscriptions.add(
-      this.teacherDataService.currentPeriodChanged$.subscribe(() => {
+      this.dataService.currentPeriodChanged$.subscribe(() => {
         this.milestoneReport = this.milestoneService.getMilestoneReportByNodeId(this.nodeId);
       })
     );
   }
 
   protected retrieveStudentData(node: Node = this.node): void {
-    this.teacherDataService.retrieveStudentDataForNode(node).subscribe(() => {
+    this.dataService.retrieveStudentDataForNode(node).subscribe(() => {
       this.teacherWorkgroupId = this.configService.getWorkgroupId();
       this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
         (workgroup) =>
@@ -298,7 +298,7 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   private getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
-    const componentStates = this.teacherDataService.getComponentStatesByNodeId(this.nodeId);
+    const componentStates = this.dataService.getComponentStatesByNodeId(this.nodeId);
     for (const componentState of componentStates.reverse()) {
       if (componentState.workgroupId === workgroupId) {
         return componentState.serverSaveTime;
@@ -308,7 +308,7 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   private getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
-    const annotations = this.teacherDataService.getAnnotationsByNodeId(this.nodeId);
+    const annotations = this.dataService.getAnnotationsByNodeId(this.nodeId);
     for (const annotation of annotations.reverse()) {
       // TODO: support checking for annotations from shared teachers
       if (
@@ -346,14 +346,14 @@ export class NodeGradingViewComponent implements OnInit {
   getNodeCompletion(nodeId: string): number {
     return this.classroomStatusService.getNodeCompletion(
       nodeId,
-      this.teacherDataService.getCurrentPeriodId()
+      this.dataService.getCurrentPeriodId()
     ).completionPct;
   }
 
   getNodeAverageScore(): any {
     const averageScore = this.classroomStatusService.getNodeAverageScore(
       this.nodeId,
-      this.teacherDataService.getCurrentPeriodId()
+      this.dataService.getCurrentPeriodId()
     );
     if (averageScore === null) {
       return 'N/A';
@@ -363,7 +363,7 @@ export class NodeGradingViewComponent implements OnInit {
   }
 
   isWorkgroupShown(workgroup: any): boolean {
-    return this.teacherDataService.isWorkgroupShown(workgroup);
+    return this.dataService.isWorkgroupShown(workgroup);
   }
 
   protected showRubric(): void {
@@ -379,7 +379,7 @@ export class NodeGradingViewComponent implements OnInit {
     } else {
       this.sort = value;
     }
-    this.teacherDataService.nodeGradingSort = this.sort;
+    this.dataService.nodeGradingSort = this.sort;
     this.sortWorkgroups();
   }
 

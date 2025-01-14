@@ -1,14 +1,8 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  SimpleChanges,
-  ViewEncapsulation
-} from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { NGSSStandards } from '../ngssStandards';
-import { Standard } from '../standard';
+import { ResearchProject, ResearchProjectTypes, Standard } from '../standard';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
 
@@ -34,9 +28,14 @@ export class LibraryFiltersComponent implements OnInit {
   disciplineValue = [];
   peOptions: Standard[] = [];
   peValue = [];
+  protected researchProjectOptions: ResearchProject[] = [];
+  private researchProjectValue: ResearchProjectTypes[] = [];
   showFilters: boolean = false;
 
-  constructor(private libraryService: LibraryService, private utilService: UtilService) {
+  constructor(
+    private libraryService: LibraryService,
+    private utilService: UtilService
+  ) {
     libraryService.officialLibraryProjectsSource$.subscribe((libraryProjects: LibraryProject[]) => {
       this.libraryProjects = libraryProjects;
       this.populateFilterOptions();
@@ -96,8 +95,22 @@ export class LibraryFiltersComponent implements OnInit {
           }
         }
       }
+      this.populateResearchProjects(project);
     }
     this.removeDuplicatesAndSortAlphabetically();
+  }
+
+  private populateResearchProjects(project: LibraryProject): void {
+    project.metadata.researchProjects?.forEach((researchProjectTypes: ResearchProjectTypes) => {
+      const researchProject: ResearchProject = {
+        id: researchProjectTypes,
+        name: researchProjectTypes,
+        children: []
+      };
+      if (!this.researchProjectOptions.map((option) => option.id).includes(researchProject.id)) {
+        this.researchProjectOptions.push(researchProject);
+      }
+    });
   }
 
   getAllProjects() {
@@ -156,7 +169,7 @@ export class LibraryFiltersComponent implements OnInit {
     this.emitFilterValues();
   }
 
-  filterUpdated(value: string[] = [], context: string = ''): void {
+  filterUpdated(value: string[] | ResearchProjectTypes[] = [], context: string = ''): void {
     switch (context) {
       case 'discipline':
         this.disciplineValue = value;
@@ -167,6 +180,9 @@ export class LibraryFiltersComponent implements OnInit {
       case 'pe':
         this.peValue = value;
         break;
+      case 'researchProject':
+        this.researchProjectValue = value as ResearchProjectTypes[];
+        break;
     }
     this.emitFilterValues();
   }
@@ -176,7 +192,8 @@ export class LibraryFiltersComponent implements OnInit {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
       dciArrangementValue: this.dciArrangementValue,
-      peValue: this.peValue
+      peValue: this.peValue,
+      researchProjectValue: this.researchProjectValue
     };
     this.libraryService.setFilterValues(filterOptions);
   }

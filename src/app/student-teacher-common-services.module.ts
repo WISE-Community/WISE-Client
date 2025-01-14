@@ -55,6 +55,10 @@ import { CompletionService } from '../assets/wise5/services/completionService';
 import { StudentNodeService } from '../assets/wise5/services/studentNodeService';
 import { StudentProjectTranslationService } from '../assets/wise5/services/studentProjectTranslationService';
 import { AiChatService } from '../assets/wise5/components/aiChat/aiChatService';
+import { TeacherNodeService } from '../assets/wise5/services/teacherNodeService';
+import { TeacherDataService } from '../assets/wise5/services/teacherDataService';
+import { TeacherWebSocketService } from '../assets/wise5/services/teacherWebSocketService';
+import { ClassroomStatusService } from '../assets/wise5/services/classroomStatusService';
 
 @NgModule({
   providers: [
@@ -65,6 +69,7 @@ import { AiChatService } from '../assets/wise5/components/aiChat/aiChatService';
     AudioOscillatorService,
     AudioRecorderService,
     BranchService,
+    ClassroomStatusService,
     ClickToSnipImageService,
     ConceptMapService,
     ConstraintService,
@@ -111,6 +116,9 @@ import { AiChatService } from '../assets/wise5/components/aiChat/aiChatService';
     TableService,
     TabulatorDataService,
     TagService,
+    TeacherDataService,
+    TeacherNodeService,
+    TeacherWebSocketService,
     StudentProjectTranslationService,
     VLEProjectService,
     WiseLinkService

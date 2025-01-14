@@ -21,18 +21,18 @@ import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
-import { AddComponentButtonComponent } from '../add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
-import { PreviewComponentButtonComponent } from '../../components/preview-component-button/preview-component-button.component';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { RouterTestingModule } from '@angular/router/testing';
 import { CreateComponentService } from '../../../services/createComponentService';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { VLEProjectService } from '../../../vle/vleProjectService';
+import { NotebookService } from '../../../services/notebookService';
+import { MatDividerModule } from '@angular/material/divider';
+import { AddComponentComponent } from '../add-component/add-component.component';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -51,7 +51,7 @@ describe('NodeAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [NodeAuthoringComponent],
       imports: [
-        AddComponentButtonComponent,
+        AddComponentComponent,
         BrowserAnimationsModule,
         ComponentAuthoringModule,
         ComponentTypeServiceModule,
@@ -60,11 +60,9 @@ describe('NodeAuthoringComponent', () => {
         EditNodeTitleComponent,
         FormsModule,
         MatCheckboxModule,
-        MatExpansionModule,
+        MatDividerModule,
         MatIconModule,
         MatInputModule,
-        PreviewComponentButtonComponent,
-        RouterTestingModule,
         StudentTeacherCommonServicesModule,
         TeacherNodeIconComponent
       ],
@@ -107,8 +105,8 @@ describe('NodeAuthoringComponent', () => {
     spyOn(document, 'getElementById').and.returnValue(document.createElement('div'));
     confirmSpy = spyOn(window, 'confirm');
     component1 = { id: 'component1', type: 'OpenResponse', showSubmitButton: true };
-    component2 = { id: 'component2', type: 'MultipleChoice', showSubmitButton: true };
-    component3 = { id: 'component3', type: 'Match', showSubmitButton: true };
+    component2 = { id: 'component2', type: 'MultipleChoice', showSubmitButton: true, choices: [] };
+    component3 = { id: 'component3', type: 'HTML', showSubmitButton: true, html: '' };
     node1Components = [component1, component2, component3];
     teacherProjectService = TestBed.inject(TeacherProjectService);
     const node1 = { components: node1Components };
@@ -127,6 +125,10 @@ describe('NodeAuthoringComponent', () => {
       new ProjectLocale({ default: 'en-US', supported: ['es'] })
     );
     spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
+    const vleProjectService = TestBed.inject(VLEProjectService);
+    vleProjectService.project = teacherProjectService.project;
+    spyOn(TestBed.inject(VLEProjectService), 'getSpeechToTextSettings').and.returnValue(null);
+    spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(false);
     saveProjectSpy = spyOn(teacherProjectService, 'saveProject').and.returnValue(Promise.resolve());
     fixture = TestBed.createComponent(NodeAuthoringComponent);
     component = fixture.componentInstance;
@@ -137,7 +139,6 @@ describe('NodeAuthoringComponent', () => {
 
   copyComponent();
   deleteComponent();
-  deleteComponents();
 });
 
 function copyComponent() {
@@ -166,39 +167,12 @@ function deleteComponent() {
       confirmSpy.and.returnValue(true);
       clickComponentDeleteButton(component2.id);
       expect(confirmSpy).toHaveBeenCalledWith(
-        `Are you sure you want to delete this component?\n2. MultipleChoice`
+        `Are you sure you want to delete this component?\n\n2. MultipleChoice`
       );
       expect(saveProjectSpy).toHaveBeenCalled();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual([component1, component3]);
     });
   });
-}
-
-function deleteComponents() {
-  describe('deleteComponents()', () => {
-    it('should delete components', () => {
-      clickComponentCheckbox(component1.id);
-      clickComponentCheckbox(component3.id);
-      fixture.detectChanges();
-      expect(component.components).toEqual(node1Components);
-      confirmSpy.and.returnValue(true);
-      clickDeleteComponentsButton();
-      expect(confirmSpy).toHaveBeenCalledWith(
-        `Are you sure you want to delete these components?\n1. OpenResponse\n3. Match`
-      );
-      expect(component.components).toEqual([component2]);
-      expect(expectCheckboxValue(component1.id)).toBeFalsy();
-      expect(expectCheckboxValue(component3.id)).toBeFalsy();
-    });
-  });
-}
-
-function expectCheckboxValue(componentId: string): void {
-  return fixture.debugElement.query(By.css(`#${componentId} mat-checkbox`)).nativeElement.checked;
-}
-
-function clickComponentCheckbox(componentId: string): void {
-  queryByCssAndClick(`#${componentId} mat-checkbox label`);
 }
 
 function clickComponent(componentId: string): void {
@@ -219,10 +193,6 @@ function queryByCssAndClickCopy(css: string): void {
 
 function clickComponentDeleteButton(componentId: string): void {
   queryByCssAndClickDelete(`#${componentId} button`);
-}
-
-function clickDeleteComponentsButton(): void {
-  queryByCssAndClickDelete('button');
 }
 
 function queryByCssAndClickDelete(css: string): void {

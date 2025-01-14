@@ -1,7 +1,7 @@
 import { EventEmitter, OnInit, Output, QueryList, ViewChildren, Directive } from '@angular/core';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { LibraryService } from '../../../services/library.service';
-import { Standard } from '../standard';
+import { ResearchProjectTypes, Standard } from '../standard';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
@@ -19,6 +19,7 @@ export abstract class LibraryComponent implements OnInit {
   peOptions: Standard[] = [];
   peValue = [];
   filterValues: ProjectFilterValues = new ProjectFilterValues();
+  private researchProjectValue: ResearchProjectTypes[] = [];
   showFilters: boolean = false;
   subscriptions: Subscription = new Subscription();
   pageSizeOptions: number[] = [12, 24, 48, 96];
@@ -31,7 +32,10 @@ export abstract class LibraryComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
 
-  constructor(protected dialog: MatDialog, protected libraryService: LibraryService) {}
+  constructor(
+    protected dialog: MatDialog,
+    protected libraryService: LibraryService
+  ) {}
 
   ngOnInit() {
     this.subscriptions.add(
@@ -81,6 +85,7 @@ export abstract class LibraryComponent implements OnInit {
     this.searchValue = this.filterValues.searchValue;
     this.disciplineValue = this.filterValues.disciplineValue;
     this.dciArrangementValue = this.filterValues.dciArrangementValue;
+    this.researchProjectValue = this.filterValues.researchProjectValue;
     this.peValue = this.filterValues.peValue;
     for (let project of this.projects) {
       let filterMatch = false;
@@ -102,9 +107,11 @@ export abstract class LibraryComponent implements OnInit {
 
   hasFilters(): boolean {
     return (
-      this.dciArrangementValue.length > 0 ||
-      this.peValue.length > 0 ||
-      this.disciplineValue.length > 0
+      this.dciArrangementValue.length +
+        this.peValue.length +
+        this.disciplineValue.length +
+        this.researchProjectValue.length >
+      0
     );
   }
 
@@ -168,6 +175,16 @@ export abstract class LibraryComponent implements OnInit {
               }
             }
           }
+        }
+      }
+      if (this.researchProjectValue.length > 0) {
+        const researchProjects: ResearchProjectTypes[] = project.metadata.researchProjects ?? [];
+        if (
+          researchProjects.some((researchProject) =>
+            this.researchProjectValue.includes(researchProject)
+          )
+        ) {
+          return true;
         }
       }
       return false;

@@ -20,12 +20,9 @@
       <mat-icon class="nav-item__collapse" *ngIf="isGroup && expanded" aria-label="collapse">
         remove
       </mat-icon>
-      <alert-status-corner
-        [hasAlert]="newAlert"
-        [hasNewAlert]="newAlert"
-        [message]="alertIconLabel"
-      >
-      </alert-status-corner>
+      @if (newAlert) {
+        <alert-status-corner [hasNewAlert]="newAlert" [message]="alertIconLabel" />
+      }
     </mat-card-header>
     <mat-card-content *ngIf="isGroup && expanded" class="nav-contents nav-contents--group">
       <mat-list class="nav-contents__list">

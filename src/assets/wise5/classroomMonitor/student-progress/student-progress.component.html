@@ -11,13 +11,14 @@
       fxLayoutAlign="center center"
     >
       <span>{{ sortOptions[sortBy].label }}</span>
-      <mat-icon
-        *ngIf="sort === sortBy || sort === '-' + sortBy"
-        class="table--list__thead__sort"
-        [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-' + sortBy }"
-      >
-        arrow_drop_up
-      </mat-icon>
+      @if (sort === sortBy || sort === '-' + sortBy) {
+        <mat-icon
+          class="table--list__thead__sort"
+          [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-' + sortBy }"
+        >
+          arrow_drop_up
+        </mat-icon>
+      }
     </button>
   </th>
 </ng-template>
@@ -33,69 +34,51 @@
       <table class="table--list mat-elevation-z1">
         <thead class="table--list__thead dark-theme">
           <tr>
-            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'team' }"></ng-container>
-            <ng-container *ngIf="!permissions.canViewStudentNames">
-              <ng-container
-                *ngTemplateOutlet="thead; context: { sortBy: 'student' }"
-              ></ng-container>
-            </ng-container>
-            <ng-container *ngIf="permissions.canViewStudentNames">
-              <ng-container
-                *ngTemplateOutlet="thead; context: { sortBy: 'firstName' }"
-              ></ng-container>
-              <ng-container
-                *ngTemplateOutlet="thead; context: { sortBy: 'lastName' }"
-              ></ng-container>
-            </ng-container>
-            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'location' }"></ng-container>
-            <ng-container
-              *ngTemplateOutlet="thead; context: { sortBy: 'completion' }"
-            ></ng-container>
-            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'score' }"></ng-container>
+            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'team' }" />
+            @if (permissions.canViewStudentNames) {
+              <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'firstName' }" />
+              <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'lastName' }" />
+            } @else {
+              <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'student' }" />
+            }
+            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'location' }" />
+            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'completion' }" />
+            <ng-container *ngTemplateOutlet="thead; context: { sortBy: 'score' }" />
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let student of sortedStudents">
-            <tr
-              class="list-item workgroup-row button"
-              *ngIf="isWorkgroupShown(student)"
-              (click)="showStudentGradingView(student)"
-            >
-              <td class="center">{{ student.workgroupId }}</td>
-              <td *ngIf="!permissions.canViewStudentNames" class="heavy td--wrap">
-                {{ student.username }}
-              </td>
-              <ng-container *ngIf="permissions.canViewStudentNames">
-                <td class="heavy td--max-width">
-                  {{ student.firstName }}
+          @for (student of sortedStudents; track $index) {
+            @if (isWorkgroupShown(student)) {
+              <tr class="list-item workgroup-row button" (click)="showStudentGradingView(student)">
+                <td class="center">{{ student.workgroupId }}</td>
+                @if (permissions.canViewStudentNames) {
+                  <td class="heavy td--max-width">{{ student.firstName }}</td>
+                  <td class="heavy td--max-width">{{ student.lastName }}</td>
+                } @else {
+                  <td class="heavy td--wrap">{{ student.username }}</td>
+                }
+                <td class="center td--wrap td--max-width">{{ student.position }}</td>
+                <td fxLayout="row" fxLayoutAlign="center center">
+                  <project-progress
+                    [completed]="student.completion.completedItems"
+                    [total]="student.completion.totalItems"
+                    [percent]="student.completion.completionPct"
+                  />
                 </td>
-                <td class="heavy td--max-width">
-                  {{ student.lastName }}
+                <td class="center">
+                  <div
+                    fxLayout="row"
+                    fxLayoutAlign="center center"
+                    class="layout-align-center-center layout-row"
+                  >
+                    <span class="mat-headline-5">{{ student.score }}</span
+                    >&nbsp;
+                    <span class="text-secondary mat-body-2">/{{ student.maxScore }}</span>
+                  </div>
                 </td>
-              </ng-container>
-              <td class="center td--wrap td--max-width">
-                {{ student.position }}
-              </td>
-              <td fxLayout="row" fxLayoutAlign="center center">
-                <project-progress
-                  [completed]="student.completion.completedItems"
-                  [total]="student.completion.totalItems"
-                  [percent]="student.completion.completionPct"
-                />
-              </td>
-              <td class="center">
-                <div
-                  fxLayout="row"
-                  fxLayoutAlign="center center"
-                  class="layout-align-center-center layout-row"
-                >
-                  <span class="mat-headline-5">{{ student.score }}</span
-                  >&nbsp;
-                  <span class="text-secondary mat-body-2">/{{ student.maxScore }}</span>
-                </div>
-              </td>
-            </tr>
-          </ng-container>
+              </tr>
+            }
+          }
         </tbody>
       </table>
     </mat-list>

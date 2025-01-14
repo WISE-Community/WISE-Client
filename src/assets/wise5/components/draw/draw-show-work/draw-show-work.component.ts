@@ -51,6 +51,7 @@ export class DrawShowWorkComponent extends ComponentShowWorkDirective {
       this.componentContent.height
     );
     this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, false);
+    this.drawingTool.canvasOnly();
     this.drawingTool.canvas.removeListeners();
   }
 

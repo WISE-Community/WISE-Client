@@ -22,7 +22,6 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
-import { ChooseComponentLocationComponent } from '../../assets/wise5/authoringTool/node/chooseComponentLocation/choose-component-location.component';
 import { TopBarComponent } from '../../assets/wise5/authoringTool/components/top-bar/top-bar.component';
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
@@ -47,7 +46,6 @@ import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/n
 import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
-import { AddComponentButtonComponent } from '../../assets/wise5/authoringTool/node/add-component-button/add-component-button.component';
 import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component';
 import { ProjectAuthoringLessonComponent } from '../../assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component';
 import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component';
@@ -57,10 +55,12 @@ import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
 import { CreateBranchComponent } from '../../assets/wise5/authoringTool/create-branch/create-branch.component';
-import { PreviewComponentButtonComponent } from '../../assets/wise5/authoringTool/components/preview-component-button/preview-component-button.component';
 import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add-component/add-component.component';
+import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
+import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +83,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     RubricAuthoringComponent
   ],
   imports: [
-    AddComponentButtonComponent,
+    AddComponentComponent,
     AddLessonButtonComponent,
     AddLessonChooseTemplateComponent,
     AddLessonConfigureComponent,
@@ -92,7 +92,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
     AddYourOwnNodeComponent,
     AuthoringToolBarComponent,
     ChooseAutomatedAssessmentComponent,
-    ChooseComponentLocationComponent,
     ChooseCopyNodeLocationComponent,
     ChooseImportStepComponent,
     ChooseImportUnitComponent,
@@ -112,14 +111,15 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ImportComponentModule,
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
+    MainMenuComponent,
     NgSelectModule,
     NodeAdvancedAuthoringModule,
     NodeIconAndTitleComponent,
     NodeWithMoveAfterButtonComponent,
-    PreviewComponentButtonComponent,
     ProjectAssetAuthoringModule,
     ProjectListComponent,
     RouterModule,
+    SideMenuComponent,
     StructureAuthoringModule,
     StudentTeacherCommonModule,
     TeacherNodeIconComponent,

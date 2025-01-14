@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class DataService {
+@Injectable()
+export abstract class DataService {
   currentNode = null;
   previousStep = null;
   private currentNodeChangedSource: Subject<any> = new Subject<any>();
@@ -13,13 +11,13 @@ export class DataService {
   private studentWorkReceivedSource: Subject<any> = new Subject<any>();
   public studentWorkReceived$ = this.studentWorkReceivedSource.asObservable();
 
-  constructor(protected ProjectService: ProjectService) {}
+  constructor(protected projectService: ProjectService) {}
 
-  getCurrentNode() {
+  getCurrentNode(): any {
     return this.currentNode;
   }
 
-  getCurrentNodeId() {
+  getCurrentNodeId(): string {
     if (this.currentNode != null) {
       return this.currentNode.id;
     }
@@ -30,34 +28,26 @@ export class DataService {
     return [];
   }
 
-  getStackHistory(): any[] {
-    return [];
-  }
-
-  evaluateCriterias(criteria) {}
-
+  // refactor: this should be only in studentDataService
   saveVLEEvent(nodeId, componentId, componentType, category, event, eventData) {}
 
-  setCurrentNodeByNodeId(nodeId) {
-    this.setCurrentNode(this.ProjectService.getNodeById(nodeId));
+  // refactor: replace this with setCurrentNode()
+  setCurrentNodeByNodeId(nodeId: string): void {
+    this.setCurrentNode(this.projectService.getNodeById(nodeId));
   }
 
-  setCurrentNode(node) {
+  setCurrentNode(node: any): void {
     const previousCurrentNode = this.currentNode;
     this.currentNode = node;
     if (previousCurrentNode !== node) {
-      if (previousCurrentNode && !this.ProjectService.isGroupNode(previousCurrentNode.id)) {
+      if (previousCurrentNode && !this.projectService.isGroupNode(previousCurrentNode.id)) {
         this.previousStep = previousCurrentNode;
       }
-      this.broadcastCurrentNodeChanged({
+      this.currentNodeChangedSource.next({
         previousNode: previousCurrentNode,
         currentNode: this.currentNode
       });
     }
-  }
-
-  broadcastCurrentNodeChanged(previousAndCurrentNode: any) {
-    this.currentNodeChangedSource.next(previousAndCurrentNode);
   }
 
   broadcastStudentWorkReceived(studentWork: any) {

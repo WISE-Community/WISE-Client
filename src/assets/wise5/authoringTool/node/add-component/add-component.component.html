@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="end center">
+  <mat-divider class="component-divider" [ngClass]="{ active: focus }" />
+  <add-component-button
+    [insertAfterComponentId]="afterComponentId"
+    [node]="node"
+    (newComponentsEvent)="newComponentsEvent.emit($event)"
+    (mouseover)="focus = true"
+    (mouseleave)="focus = false"
+    (focusin)="focus = true"
+    (focusout)="focus = false"
+  />
+</div>

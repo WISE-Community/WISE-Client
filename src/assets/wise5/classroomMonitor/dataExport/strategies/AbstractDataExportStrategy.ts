@@ -17,7 +17,7 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
   dataExportService: DataExportService;
   projectService: TeacherProjectService;
   protected allOrLatest: 'all' | 'latest' = 'all';
-  teacherDataService: TeacherDataService;
+  dataService: TeacherDataService;
 
   setDataExportContext(context: DataExportContext) {
     this.context = context;
@@ -26,7 +26,7 @@ export abstract class AbstractDataExportStrategy implements DataExportStrategy {
     this.configService = context.controller.configService;
     this.dataExportService = context.controller.dataExportService;
     this.projectService = context.controller.projectService;
-    this.teacherDataService = context.controller.dataService;
+    this.dataService = context.controller.dataService;
   }
 
   abstract export();

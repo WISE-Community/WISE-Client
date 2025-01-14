@@ -37,16 +37,10 @@ import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/not
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
-import { MainMenuComponent } from '../assets/wise5/common/main-menu/main-menu.component';
-import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
-  declarations: [
-    DialogResponseComponent,
-    DialogResponsesComponent,
-    MainMenuComponent,
-    SideMenuComponent
-  ],
+  declarations: [DialogResponseComponent, DialogResponsesComponent],
   imports: [
     CommonModule,
     DragDropModule,
@@ -82,6 +76,7 @@ import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.co
     NodeStatusIconComponent,
     NotebookModule,
     ReactiveFormsModule,
+    ScrollingModule,
     StudentTeacherCommonServicesModule
   ],
   exports: [
@@ -92,7 +87,6 @@ import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.co
     EditorModule,
     FlexLayoutModule,
     FormsModule,
-    MainMenuComponent,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -119,8 +113,7 @@ import { SideMenuComponent } from '../assets/wise5/common/side-menu/side-menu.co
     MathModule,
     NodeIconComponent,
     NotebookModule,
-    ReactiveFormsModule,
-    SideMenuComponent
+    ReactiveFormsModule
   ]
 })
 export class StudentTeacherCommonModule {}

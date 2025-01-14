@@ -7,7 +7,6 @@ import { ComponentService } from '../../components/componentService';
 import { ComponentStateWrapper } from '../../components/ComponentStateWrapper';
 import { ConfigService } from '../../services/configService';
 import { ConstraintService } from '../../services/constraintService';
-import { NodeService } from '../../services/nodeService';
 import { NodeStatusService } from '../../services/nodeStatusService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
@@ -19,6 +18,7 @@ import { ComponentComponent } from '../../components/component/component.compone
 import { MatButtonModule } from '@angular/material/button';
 import { ComponentStateInfoComponent } from '../../common/component-state-info/component-state-info.component';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
+import { StudentNodeService } from '../../services/studentNodeService';
 
 @Component({
   imports: [
@@ -70,7 +70,7 @@ export class NodeComponent implements OnInit {
     private componentService: ComponentService,
     private configService: ConfigService,
     private constraintService: ConstraintService,
-    private nodeService: NodeService,
+    private nodeService: StudentNodeService,
     private nodeStatusService: NodeStatusService,
     private projectService: VLEProjectService,
     private sessionService: SessionService,

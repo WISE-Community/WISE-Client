@@ -84,5 +84,20 @@
         [multiple]="true"
       />
     </div>
+    @if (researchProjectOptions.length > 0) {
+      <div class="library-filter" fxFlex.gt-sm="{{ isSplitScreen ? 100 : 33 }}">
+        <app-select-menu
+          id="researchProjectSelectMenu"
+          [options]="researchProjectOptions"
+          i18n-placeholderText
+          placeholderText="Research Project"
+          [value]="researchProjectValue"
+          (update)="filterUpdated($event, 'researchProject')"
+          [valueProp]="'id'"
+          [viewValueProp]="'name'"
+          [multiple]="true"
+        />
+      </div>
+    }
   </div>
 </div>

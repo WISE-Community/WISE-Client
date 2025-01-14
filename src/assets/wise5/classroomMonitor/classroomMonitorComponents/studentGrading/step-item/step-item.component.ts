@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   SimpleChanges,
   ViewEncapsulation
@@ -11,41 +10,60 @@ import { copy } from '../../../../common/object/object';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { calculateComponentVisibility } from '../../shared/grading-helpers/grading-helpers';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { StepInfoComponent } from '../../../../../../app/classroom-monitor/step-info/step-info.component';
+import { ComponentNewWorkBadgeComponent } from '../../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
+import { WorkgroupNodeStatusComponent } from '../../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
+import { WorkgroupNodeScoreComponent } from '../../shared/workgroupNodeScore/workgroup-node-score.component';
+import { WorkgroupComponentGradingComponent } from '../../workgroup-component-grading/workgroup-component-grading.component';
 
 @Component({
+  imports: [
+    CommonModule,
+    ComponentNewWorkBadgeComponent,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    StepInfoComponent,
+    WorkgroupComponentGradingComponent,
+    WorkgroupNodeStatusComponent,
+    WorkgroupNodeScoreComponent
+  ],
   selector: 'step-item',
+  standalone: true,
   templateUrl: './step-item.component.html',
-  styleUrls: ['./step-item.component.scss'],
+  styleUrl: './step-item.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class StepItemComponent implements OnInit {
-  componentIdToHasWork: { [componentId: string]: boolean } = {};
-  componentIdToIsVisible: { [componentId: string]: boolean } = {};
-  components: any[];
-  disabled: boolean;
+export class StepItemComponent {
+  protected componentIdToIsVisible: { [componentId: string]: boolean } = {};
+  protected components: any[];
+  protected disabled: boolean;
   @Input() expand: boolean;
-  hasAlert: boolean;
-  hasNewAlert: boolean;
-  hasNewWork: boolean;
+  protected hasAlert: boolean;
+  protected hasNewAlert: boolean;
+  protected hasNewWork: boolean;
   @Input() inView: boolean;
   @Input() maxScore: number;
   @Input() nodeId: string;
   @Output() onUpdateExpand: any = new EventEmitter();
-  score: any;
+  protected score: any;
   @Input() showScore: boolean;
-  status: any;
-  statusClass: string;
-  statusText: string = '';
+  private status: any;
+  protected statusClass: string;
+  protected statusText: string = '';
   @Input() stepData: any;
-  title: string;
   @Input() workgroupId: number;
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
     private projectService: TeacherProjectService
   ) {}
-
-  ngOnInit(): void {}
 
   ngOnChanges(changesObj: SimpleChanges): void {
     if (changesObj.maxScore) {
@@ -54,24 +72,20 @@ export class StepItemComponent implements OnInit {
     }
     if (changesObj.stepData) {
       const stepData = copy(changesObj.stepData.currentValue);
-      this.title = stepData.title;
       this.hasAlert = stepData.hasAlert;
       this.hasNewAlert = stepData.hasNewAlert;
       this.status = stepData.completionStatus;
       this.score = stepData.score >= 0 ? stepData.score : '-';
       this.components = this.projectService.getComponents(this.nodeId);
-      this.componentIdToHasWork = this.projectService.calculateComponentIdToHasWork(
-        this.components
-      );
       this.componentIdToIsVisible = calculateComponentVisibility(
-        this.componentIdToHasWork,
+        this.projectService.calculateComponentIdToHasWork(this.components),
         stepData.nodeStatus.componentStatuses
       );
     }
     this.update();
   }
 
-  update(): void {
+  private update(): void {
     switch (this.status) {
       case -1:
         this.statusClass = ' ';
@@ -103,14 +117,14 @@ export class StepItemComponent implements OnInit {
     this.disabled = this.status === -1;
   }
 
-  toggleExpand(): void {
+  protected toggleExpand(): void {
     if (this.showScore) {
       const expand = !this.expand;
       this.onUpdateExpand.emit({ nodeId: this.nodeId, value: expand });
     }
   }
 
-  getComponentTypeLabel(type: string): string {
+  protected getComponentTypeLabel(type: string): string {
     return this.componentServiceLookupService.getService(type).getComponentTypeLabel();
   }
 }

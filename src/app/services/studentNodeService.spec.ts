@@ -7,6 +7,7 @@ import { DataService } from './data.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Node } from '../../assets/wise5/common/Node';
+import { StudentDataService } from '../../assets/wise5/services/studentDataService';
 
 let dataService: DataService;
 let dialog: MatDialog;
@@ -21,7 +22,7 @@ describe('StudentNodeService', () => {
       imports: [MatDialogModule, StudentTeacherCommonServicesModule],
       providers: [provideHttpClient(withInterceptorsFromDi())]
     });
-    dataService = TestBed.inject(DataService);
+    dataService = TestBed.inject(StudentDataService);
     dialog = TestBed.inject(MatDialog);
     service = TestBed.inject(StudentNodeService);
     nodeStatusService = TestBed.inject(NodeStatusService);
