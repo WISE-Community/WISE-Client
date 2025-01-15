@@ -1,4 +1,4 @@
-import { EventEmitter, OnInit, Output, QueryList, ViewChildren, Directive } from '@angular/core';
+import { OnInit, QueryList, ViewChildren, Directive } from '@angular/core';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { LibraryService } from '../../../services/library.service';
 import { ResearchProjectTypes, Standard } from '../standard';
@@ -120,53 +120,52 @@ export abstract class LibraryComponent implements OnInit {
   }
 
   private isFilterMatch(project: LibraryProject): boolean {
-    const standardsAddressed = project.metadata.standardsAddressed;
-    if (standardsAddressed.ngss) {
-      const ngss = standardsAddressed.ngss;
-      if (this.dciArrangementValue.length > 0) {
-        const dciArrangements: Standard[] = ngss.dciArrangements ?? [];
-        for (let val of dciArrangements) {
-          for (let filter of this.dciArrangementValue) {
-            if (val.id === filter) {
-              return true;
-            }
-          }
-        }
-      }
-      if (this.peValue.length > 0) {
-        const dciArrangements: Standard[] = ngss.dciArrangements ?? [];
-        for (let arrangement of dciArrangements) {
-          for (let val of arrangement.children) {
-            for (let filter of this.peValue) {
-              if (val.id === filter) {
-                return true;
-              }
-            }
-          }
-        }
-      }
-      if (this.disciplineValue.length > 0) {
-        const disciplines: Standard[] = ngss.disciplines ?? [];
-        for (let val of disciplines) {
-          for (let filter of this.disciplineValue) {
-            if (val.id === filter) {
-              return true;
-            }
-          }
-        }
-      }
-    }
-    if (this.researchProjectValue.length > 0) {
-      const researchProjects: ResearchProjectTypes[] = project.metadata.researchProjects ?? [];
-      if (
-        researchProjects.some((researchProject) =>
-          this.researchProjectValue.includes(researchProject)
-        )
-      ) {
-        return true;
-      }
-    }
-    return false;
+    return this.matchesNgss(project) || this.matchesResearchProject(project);
+  }
+
+  private matchesNgss(project: LibraryProject): boolean {
+    return (
+      project.metadata.standardsAddressed.ngss != null &&
+      (this.matchesDciArrangement(project) ||
+        this.matchesPE(project) ||
+        this.matchesDiscipline(project))
+    );
+  }
+
+  private matchesDciArrangement(project: LibraryProject): boolean {
+    return (
+      this.dciArrangementValue.length > 0 &&
+      project.metadata.standardsAddressed.ngss.dciArrangements?.some((val) =>
+        this.dciArrangementValue.includes(val.id)
+      )
+    );
+  }
+
+  private matchesPE(project: LibraryProject) {
+    return (
+      this.peValue.length > 0 &&
+      project.metadata.standardsAddressed.ngss.dciArrangements?.some((arrangement) =>
+        arrangement.children.some((val) => this.peValue.includes(val.id))
+      )
+    );
+  }
+
+  private matchesDiscipline(project: LibraryProject): boolean {
+    return (
+      this.disciplineValue.length > 0 &&
+      project.metadata.standardsAddressed.ngss.disciplines?.some((discipline) =>
+        this.disciplineValue.includes(discipline.id)
+      )
+    );
+  }
+
+  private matchesResearchProject(project: LibraryProject): boolean {
+    return (
+      this.researchProjectValue.length > 0 &&
+      project.metadata.researchProjects?.some((researchProject) =>
+        this.researchProjectValue.includes(researchProject)
+      )
+    );
   }
 
   private hasFilters(): boolean {
