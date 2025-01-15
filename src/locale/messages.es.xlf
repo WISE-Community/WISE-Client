@@ -6,7 +6,7 @@
         <source>About Us</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -26,7 +26,7 @@
         <source> WISE is the product of more than 25 years of research on teaching and learning with educational technologies </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">24,27</context>
+          <context context-type="linenumber">15,18</context>
         </context-group>
         <target state="translated"> WISE es producto de más de 25 años de investigación sobre enseñanza y aprendizaje con tecnologías educativas </target>
       </trans-unit>
@@ -34,7 +34,7 @@
         <source>WISE teacher workshop 2018</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="translated">Workshop WISE 2018 para docentes</target>
       </trans-unit>
@@ -42,7 +42,7 @@
         <source>WISE student and teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target state="translated">WISE estudiante y docente</target>
       </trans-unit>
@@ -50,7 +50,7 @@
         <source>WISE teacher workshop design</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <target state="translated">Diseño del taller WISE para docentes</target>
       </trans-unit>
@@ -58,7 +58,7 @@
         <source>Marcia at WISE workshop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target state="translated">Marcia en el taller WISE</target>
       </trans-unit>
@@ -66,7 +66,7 @@
         <source>Based on Research, Refined Through Practice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <target state="translated">Basado en la investigación y refinado a través de la práctica</target>
       </trans-unit>
@@ -74,7 +74,7 @@
         <source> Through our collaborations with teachers, administrators, technology designers, and education researchers, we have refined a set of principles which guide the design of all WISE curriculum materials and tools. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">134,138</context>
+          <context context-type="linenumber">119,123</context>
         </context-group>
         <target state="translated"> A través de nuestras colaboraciones con docentes, administradores, diseñadores de tecnología e investigadores en educación, hemos perfeccionado un conjunto de principios que guían el diseño de todos los materiales y herramientas curriculares de WISE. </target>
       </trans-unit>
@@ -82,7 +82,7 @@
         <source>This means that when implementing WISE units, you can be assured that what you&apos;re using is grown from a solid foundation, advised by real teachers&apos; experiences, and tested in classrooms with real students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">141,143</context>
+          <context context-type="linenumber">126,128</context>
         </context-group>
         <target state="translated">Esto significa que al implementar unidades WISE, se puede estar seguro de que lo que se está utilizando ha sido desarrollado a partir de una base sólida, asesorado por experiencias reales de docentes y probado en aulas con estudiantes reales.</target>
       </trans-unit>
@@ -90,7 +90,7 @@
         <source>Our Research + Team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target state="translated">Nuestro equipo de investigación +</target>
       </trans-unit>
@@ -98,7 +98,7 @@
         <source>Knowledge Integration</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target state="translated">Integración del conocimiento</target>
       </trans-unit>
@@ -106,7 +106,7 @@
         <source> As students grapple with multiple conflicting and confusing ideas, research has shown that instruction is most effective when student views are used as a starting point for scientific investigations. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">168,172</context>
+          <context context-type="linenumber">145,149</context>
         </context-group>
         <target state="translated"> A medida que los estudiantes se enfrentan a múltiples ideas contradictorias y confusas, las investigaciones han demostrado que la instrucción es más efectiva cuando se utilizan las perspectivas de los estudiantes como punto de partida para las investigaciones científicas. </target>
       </trans-unit>
@@ -114,7 +114,7 @@
         <source> The <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Knowledge Integration (KI)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> perspective emphasizes building on and strengthening science understanding by incorporating new ideas and sorting out alternative perspectives using evidence. This framework forms the basis of WISE curriculum design, assessments, and evaluation. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">173,178</context>
+          <context context-type="linenumber">150,155</context>
         </context-group>
         <target state="translated"> La perspectiva de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Integración de conocimientos (KI)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> enfatiza la construcción y el fortalecimiento de la comprensión científica mediante la incorporación de nuevas ideas y la clasificación de perspectivas alternativas utilizando evidencia. Este marco forma la base del diseño, las valoraciones y la evaluación del currículo WISE. </target>
       </trans-unit>
@@ -122,7 +122,7 @@
         <source>The KI Processes:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">160</context>
         </context-group>
         <target state="translated">Los procesos de Integración del Conocimiento (IC):</target>
       </trans-unit>
@@ -130,11 +130,11 @@
         <source>Elicit Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">166</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">169</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
@@ -146,11 +146,11 @@
         <source>Discover Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">175</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">178</context>
         </context-group>
         <target state="translated">Descubrir ideas</target>
       </trans-unit>
@@ -158,11 +158,11 @@
         <source>Distinguish Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">207</context>
+          <context context-type="linenumber">184</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">210</context>
+          <context context-type="linenumber">187</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
@@ -174,11 +174,11 @@
         <source>Connect Ideas and Reflect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">216</context>
+          <context context-type="linenumber">193</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">219</context>
+          <context context-type="linenumber">196</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
@@ -190,7 +190,7 @@
         <source> ~ WISE Goals ~ </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">231,233</context>
+          <context context-type="linenumber">208,210</context>
         </context-group>
         <target state="translated"> ~ Objetivos de WISE ~ </target>
       </trans-unit>
@@ -198,7 +198,7 @@
         <source>Make Science Meaningful</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">249</context>
+          <context context-type="linenumber">214</context>
         </context-group>
         <target state="translated">Hacer que la ciencia sea significativa</target>
       </trans-unit>
@@ -206,7 +206,7 @@
         <source> WISE units introduce students to complex science concepts through personally and socially relevant topics. Each unit uses a classroom-tested pattern of instruction that values the ideas students bring with them, helps them connect new information to their personal experiences, and integrates their ideas into a coherent understanding of science. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">250,256</context>
+          <context context-type="linenumber">215,221</context>
         </context-group>
         <target state="translated"> Las unidades WISE introducen a los y las estudiantes a conceptos científicos complejos a través de temas personal y socialmente relevantes. Cada unidad utiliza un patrón de enseñanza probado en el aula que valora las ideas que los y las estudiantes aportan, les ayuda a conectar nueva información con sus experiencias personales e integra sus ideas en una comprensión coherente de la ciencia. </target>
       </trans-unit>
@@ -214,7 +214,7 @@
         <source>Support Diverse Learners</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">259</context>
+          <context context-type="linenumber">224</context>
         </context-group>
         <target state="translated">Apoyo a la enseñanza diferenciada</target>
       </trans-unit>
@@ -222,7 +222,7 @@
         <source> Individual students differ in their experiences, interests, and abilities. WISE provides a variety of tools, activity patterns, and instructional scaffolds that afford multiple ways for expressing and assessing understanding. That way, no students&apos; abilities go unrecognized, and all have the chance to succeed. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">260,265</context>
+          <context context-type="linenumber">225,230</context>
         </context-group>
         <target state="translated"> Los y las estudiantes, de manera individual, difieren en sus experiencias, intereses y habilidades. WISE proporciona una variedad de herramientas, patrones de actividades y estructuras de enseñanza que ofrecen múltiples formas de expresar y evaluar la comprensión. De esa manera, las habilidades de ningún estudiante pasan desapercibidas y todos tienen la oportunidad de aprender. </target>
       </trans-unit>
@@ -230,7 +230,7 @@
         <source>Increase Participation in Science</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">282</context>
+          <context context-type="linenumber">239</context>
         </context-group>
         <target state="translated">Incrementar la participación en ciencias</target>
       </trans-unit>
@@ -238,7 +238,7 @@
         <source> WISE gives more teachers and students the opportunity to do inquiry-based science. Our units make difficult concepts accessible both for teachers to teach and students to learn. WISE curricula help students see themselves as capable of doing science and realize that, no matter their backgrounds, science can be a potential career. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">283,288</context>
+          <context context-type="linenumber">240,245</context>
         </context-group>
         <target state="translated"> WISE brinda a más docentes y estudiantes la oportunidad de hacer ciencia basada en la investigación. Nuestras unidades hacen que conceptos difíciles sean accesibles tanto para que los docentes enseñen como para que los estudiantes aprendan. Los planes de estudio de WISE ayudan a los estudiantes a verse a sí mismos como capaces de hacer ciencia y a darse cuenta de que, sin importar sus antecedentes, la ciencia puede ser una carrera potencial. </target>
       </trans-unit>
@@ -246,7 +246,7 @@
         <source>Accessible to All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">297</context>
+          <context context-type="linenumber">252</context>
         </context-group>
         <target state="translated">Accesible a todos y todas</target>
       </trans-unit>
@@ -254,7 +254,7 @@
         <source> WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it&apos;s available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">298,304</context>
+          <context context-type="linenumber">253,259</context>
         </context-group>
         <target state="translated"> WISE es <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>gratuito<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> y de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>código abierto<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsiste gracias al generoso apoyo de la National Science Foundation, lo que significa que está disponible para cualquier persona con conexión a Internet. Impulsado por una comunidad activa de desarrolladores, WISE se amplía y mejora continuamente. ¡Llevar la investigación científica al aula, al museo, al entorno extraescolar o al hogar-escuela! </target>
       </trans-unit>
@@ -262,7 +262,7 @@
         <source>WISE on student computer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">328</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <target state="translated">WISE en la computadora de cada estudiante</target>
       </trans-unit>
@@ -270,7 +270,7 @@
         <source>WISE researcher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">349</context>
+          <context context-type="linenumber">304</context>
         </context-group>
         <target state="translated">Investigador/a WISE</target>
       </trans-unit>
@@ -278,7 +278,7 @@
         <source>WISE teachers and researcher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">325</context>
         </context-group>
         <target state="translated">Docentes e investigadores WISE</target>
       </trans-unit>
@@ -286,7 +286,7 @@
         <source>WISE developers and teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
-          <context context-type="linenumber">391</context>
+          <context context-type="linenumber">346</context>
         </context-group>
         <target state="translated">Desarrolladores y docentes WISE</target>
       </trans-unit>
@@ -1646,15 +1646,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.html</context>
@@ -1666,11 +1666,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-password/unlink-google-account-password.component.html</context>
@@ -1950,7 +1950,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">101</context>
         </context-group>
         <target state="translated">Tiene nuevo(s) alerta(s)</target>
       </trans-unit>
@@ -1974,7 +1974,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <target state="translated">El Paso tiene rúbricas/tips para la enseñanza</target>
       </trans-unit>
@@ -2054,15 +2054,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.html</context>
@@ -2074,15 +2074,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target state="translated">Contactar a WISE</target>
       </trans-unit>
@@ -2126,7 +2126,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
@@ -2150,7 +2150,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
@@ -2178,7 +2178,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/forgot-home/forgot-home.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
@@ -2282,31 +2282,19 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated"> Este sitio está protegido por reCAPTCHA y las <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://policies.google.com/privacy&quot;&gt;"/>Polítivcas de Privacidad de Google<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> y los <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://policies.google.com/terms&quot;&gt;"/>Términos del servicio<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> que aplican. </target>
       </trans-unit>
-      <trans-unit id="810358a0509fe5b1c4fa9d6b91d69aba1577d4df" datatype="html">
-        <source>Recaptcha failed. Please reload the page and try again!</source>
+      <trans-unit id="5782c160974ac1d70e22cc2f47335d3e250c3419" datatype="html">
+        <source> Recaptcha failed. Please reload the page and try again! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">117,119</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">155</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">178</context>
-        </context-group>
-        <target state="translated">Falló el recaptcha. Por favor recargue la página y pruebe nuevamente!</target>
+        <target state="needs-translation"> Recaptcha failed. Please reload the page and try again! </target>
       </trans-unit>
       <trans-unit id="8af130692c59ce32c501fdbb8b80a9dd6be2f056" datatype="html">
         <source> Sorry, there was a problem submitting the form. Please try again. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">122,124</context>
         </context-group>
         <target state="translated"> Perdón, ha habido un error en el envío del formulario. Por favor intentar nuevamente. </target>
       </trans-unit>
@@ -2598,7 +2586,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE Features</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <target state="translated">Características de WISE</target>
       </trans-unit>
@@ -2606,7 +2594,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> A powerful online platform for designing, developing, and implementing science inquiry units </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">24,27</context>
+          <context context-type="linenumber">15,18</context>
         </context-group>
         <target state="translated"> Una poderosa plataforma en línea para el diseño, desarrollo e implementación de unidades para ciencias naturales basadas en la enseñanza por indagación </target>
       </trans-unit>
@@ -2614,7 +2602,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> Since 1997, WISE has served a growing community of more than 20,000 teachers, researchers, and curriculum designers, as well as over 200,000 K-12 students around the world. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">28,31</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
         <target state="translated"> Desde 1997, WISE ha prestado servicios a una comunidad en crecimiento de más de 20.000 docentes, investigadores y diseñadores de materiales de enseñanza, así como a más de 200.000 estudiantes desde Nivel Inicial hasta el final de la escuela secundaria en todo el mundo. </target>
       </trans-unit>
@@ -2622,7 +2610,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target state="translated">Estudiantes WISE</target>
       </trans-unit>
@@ -2630,7 +2618,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE students collaborate to:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target state="translated">Estudiantes WISE colaboran entre sí para:</target>
       </trans-unit>
@@ -2638,7 +2626,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Explore issues of social importance</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target state="translated">Explorar temas de relevancia social</target>
       </trans-unit>
@@ -2646,7 +2634,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Pose relevant questions and make predictions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <target state="translated">Formular preguntas relevantes y hacer predicciones</target>
       </trans-unit>
@@ -2654,7 +2642,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Experiment with computational models</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="translated">Experimentar con modelos computacionales</target>
       </trans-unit>
@@ -2662,7 +2650,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Evaluate and distinguish discrepant information</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target state="translated">Evaluar y distinguir información discrepante</target>
       </trans-unit>
@@ -2670,7 +2658,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Construct explanations through reflection and discussion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="translated">Construir explicaciones a través de la reflexión y el debate</target>
       </trans-unit>
@@ -2678,7 +2666,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Design and build evidence-based solutions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <target state="translated">Diseñar y construir soluciones basadas en evidencias</target>
       </trans-unit>
@@ -2686,7 +2674,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Inquiry-Based Learning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <target state="translated">Aprendizaje basado en indagación</target>
       </trans-unit>
@@ -2694,7 +2682,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> WISE engages students in the methods of real scientists and engineers. We take a multidisciplinary approach so that students learn inquiry through activities that emphasize essential skills in reading, writing, and multimedia literacy. Many of our units are also project-based and feature hands-on design challenges. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">102,107</context>
+          <context context-type="linenumber">84,89</context>
         </context-group>
         <target state="translated"> WISE involucra a los estudiantes en los métodos reales de la ciencia y la ingeniería. Adoptamos un enfoque multidisciplinario para que los estudiantes aprendan a indagar a través de actividades que enfatizan las habilidades esenciales en lectura, escritura y alfabetización multimedia. Muchas de nuestras unidades también se basan en proyectos y presentan desafíos de diseño "hands-on". </target>
       </trans-unit>
@@ -2702,7 +2690,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> With WISE inquiry units, students not only learn skills that prepare them to be successful in STEM. They also learn skills necessary to be responsible, critical thinking citizens. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">108,111</context>
+          <context context-type="linenumber">90,93</context>
         </context-group>
         <target state="translated"> Con las unidades de investigación de WISE, los estudiantes no solo aprenden habilidades que los preparan para desempeñarse en disciplinas STEM sino que también aprenden las habilidades necesarias para ser ciudadanos responsables con pensamiento crítico. </target>
       </trans-unit>
@@ -2710,7 +2698,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Standards-Aligned Curricula</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">98</context>
         </context-group>
         <target state="translated">Diseño curricular alineado con los estándares</target>
       </trans-unit>
@@ -2718,7 +2706,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> WISE offers a growing collection of curriculum units that address key conceptual difficulties students encounter in science. Units are carefully crafted to supplement teachers&apos; core curricular scope and sequence and are iteratively refined through classroom-based research. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">125,130</context>
+          <context context-type="linenumber">99,104</context>
         </context-group>
         <target state="translated"> WISE ofrece una colección cada vez mayor de unidades curriculares que abordan las dificultades conceptuales clave que encuentran los estudiantes en ciencias. Las unidades están cuidadosamente diseñadas para complementar el alcance y la secuencia de la currícula general y se refinan de forma iterativa a través de investigaciones en el aula. </target>
       </trans-unit>
@@ -2726,7 +2714,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE units support the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org&quot; target=&quot;_blank&quot;               &gt;"/>Next Generation Science Standards (NGSS)<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, encourage <x id="START_LINK_1" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org/three-dimensions&quot; target=&quot;_blank&quot;               &gt;"/>3-dimensional learning<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, and can be adapted to address local standards.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">133,139</context>
+          <context context-type="linenumber">107,113</context>
         </context-group>
         <target state="translated">Las unidades de WISE apoyan los <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org&quot; target=&quot;_blank&quot;               &gt;"/>Next Generation Science Standards (NGSS)<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, fomentan <x id="START_LINK_1" equiv-text="&lt;a href=&quot;http://www.nextgenscience.org/three-dimensions&quot; target=&quot;_blank&quot;               &gt;"/>el aprendizaje en 3 dimensiones<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a             &gt;"/>, aunque también son fácilmente adaptables a los estándares y diseños curriculares locales.</target>
       </trans-unit>
@@ -2734,7 +2722,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Design Process &amp; Goals</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <target state="translated">Proceso de diseño &amp; Objetivos</target>
       </trans-unit>
@@ -2742,7 +2730,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE solar ovens unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <target state="translated">Unidad WISE sobre hornos solares</target>
       </trans-unit>
@@ -2750,7 +2738,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE students building solar oven</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <target state="translated">Estudiantes de WISE construyendo un horno solar</target>
       </trans-unit>
@@ -2758,7 +2746,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>MyModel diagram with guidance</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">176</context>
         </context-group>
         <target state="translated">Diagrama de MyModel guiado</target>
       </trans-unit>
@@ -2766,7 +2754,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE cellular respiration model</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">232</context>
+          <context context-type="linenumber">197</context>
         </context-group>
         <target state="translated">Modelo de respiración celular WISE</target>
       </trans-unit>
@@ -2774,7 +2762,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE design report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">242</context>
+          <context context-type="linenumber">207</context>
         </context-group>
         <target state="translated">Informe de diseño WISE</target>
       </trans-unit>
@@ -2782,7 +2770,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE thermodynamics insulator model</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">263</context>
+          <context context-type="linenumber">228</context>
         </context-group>
         <target state="translated">Modelo de aislamiento termodinámico WISE</target>
       </trans-unit>
@@ -2790,7 +2778,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Powerful Learning Technologies</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">269</context>
+          <context context-type="linenumber">234</context>
         </context-group>
         <target state="translated">Tecnologías de aprendizaje potentes</target>
       </trans-unit>
@@ -2798,7 +2786,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> WISE provides a simple user interface, cognitive hints, embedded assessments, and online discussions, as well as tools for drawing, annotation, concept mapping, diagramming, and graphing. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">270,274</context>
+          <context context-type="linenumber">235,239</context>
         </context-group>
         <target state="translated"> WISE proporciona una interfaz de usuario sencilla, sugerencias cognitivas, evaluaciones integradas y debates en línea, así como herramientas para dibujar, realizar anotaciones, mapas conceptuales, diagramas y gráficos. </target>
       </trans-unit>
@@ -2806,7 +2794,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> Students conduct investigations using interactive simulations and models. A notebook tool helps students collect ideas and organize evidence into research and design reports. WISE units promote self-monitoring through collaborative reflection activities as well as automated, personalized guidance and adaptive instruction. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">275,280</context>
+          <context context-type="linenumber">240,245</context>
         </context-group>
         <target state="translated"> Los estudiantes realizan investigaciones utilizando simulaciones y modelos interactivos. Una herramienta de cuaderno ("notebook") ayuda a los estudiantes a recopilar ideas y organizar evidencia en informes de investigación y diseño. Las unidades WISE promueven el autocontrol a través de actividades de reflexión colaborativa, así como orientación automatizada y personalizada y enseñanza adaptativa. </target>
       </trans-unit>
@@ -2814,7 +2802,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Comprehensive Instructional Supports</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">293</context>
+          <context context-type="linenumber">253</context>
         </context-group>
         <target state="translated">Ayuda comprensiva para la instrucción</target>
       </trans-unit>
@@ -2822,7 +2810,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> WISE offers an extensive suite of integrated tools that help teachers plan, monitor progress, gain insights, provide feedback, and grade more efficiently. These tools are continually refined through collaborations with practicing teachers who understand the real challenges of managing modern classrooms. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">294,299</context>
+          <context context-type="linenumber">254,259</context>
         </context-group>
         <target state="translated"> WISE ofrece un amplio conjunto de herramientas integradas que ayudan a docentes a planificar, monitorear el progreso, obtener información, brindar comentarios y evaluar de manera más eficiente. Estas herramientas se perfeccionan continuamente a través de colaboraciones con docentes en ejercicio que comprenden los desafíos reales de la gestión de las aulas modernas. </target>
       </trans-unit>
@@ -2830,7 +2818,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> By facilitating these necessary but time-consuming tasks, teachers are free to focus on what makes them indispensable: providing quality instruction to individual students. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">300,303</context>
+          <context context-type="linenumber">260,263</context>
         </context-group>
         <target state="translated"> Al facilitar estas tareas necesarias pero que requieren mucho tiempo, los docentes tienen libertad para centrarse en lo que los hace indispensables: ofrecer una enseñanza de calidad a cada estudiante. </target>
       </trans-unit>
@@ -2838,7 +2826,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE teacher progress</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">323</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <target state="translated">Avance del docente WISE</target>
       </trans-unit>
@@ -2846,7 +2834,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE teacher grading</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">344</context>
+          <context context-type="linenumber">304</context>
         </context-group>
         <target state="translated">Calificación de docente WISE</target>
       </trans-unit>
@@ -2854,7 +2842,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Featured Teacher Tools:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">352</context>
+          <context context-type="linenumber">312</context>
         </context-group>
         <target state="translated">Herramientas destacadas para docentes:</target>
       </trans-unit>
@@ -2862,7 +2850,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Real-time progress monitor</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">356</context>
+          <context context-type="linenumber">316</context>
         </context-group>
         <target state="translated">Monitor de progreso en tiempo real</target>
       </trans-unit>
@@ -2870,7 +2858,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Grade and give feedback + sample scoring rubrics</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">360</context>
+          <context context-type="linenumber">320</context>
         </context-group>
         <target state="translated">Calificar y dar retroalimentación + rúbricas de ejemplo para evaluación</target>
       </trans-unit>
@@ -2878,7 +2866,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Automatically scored assessment items</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">364</context>
+          <context context-type="linenumber">324</context>
         </context-group>
         <target state="translated">Items de evaluación calificados automáticamente</target>
       </trans-unit>
@@ -2886,7 +2874,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Pause student screens</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">368</context>
+          <context context-type="linenumber">328</context>
         </context-group>
         <target state="translated">Pausar la pantalla de estudiantes</target>
       </trans-unit>
@@ -2894,7 +2882,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Share and collaborate with colleagues</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">332</context>
         </context-group>
         <target state="translated">Compartir y colaborar con colegas</target>
       </trans-unit>
@@ -2902,7 +2890,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Authoring environment that supports customization and creation of new units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">377</context>
+          <context context-type="linenumber">337</context>
         </context-group>
         <target state="translated">Entorno de creación de unidades que permite modificar unidades existentes y crear nuevas</target>
       </trans-unit>
@@ -2910,7 +2898,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> In development: Automated insights into student NGSS understanding + suggested classroom interventions! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">382,385</context>
+          <context context-type="linenumber">342,345</context>
         </context-group>
         <target state="translated"> En desarrollo: información automatizada sobre la comprensión de los estándares NGSS de los estudiantes + intervenciones sugeridas en el aula. </target>
       </trans-unit>
@@ -2918,7 +2906,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Explore what WISE has to offer!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">396</context>
+          <context context-type="linenumber">349</context>
         </context-group>
         <target state="translated">Explorar lo que ofrece WISE</target>
       </trans-unit>
@@ -2926,7 +2914,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Join for free</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/features.component.html</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">350</context>
         </context-group>
         <target state="translated">Unirse gratis</target>
       </trans-unit>
@@ -2942,7 +2930,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/forgot-home/forgot-home.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
@@ -2954,7 +2942,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Look up username or reset password for a student account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/forgot-home/forgot-home.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <target state="translated">Buscar nombre de usuario o restablecer la contraseña de una cuenta de estudiante</target>
       </trans-unit>
@@ -2962,7 +2950,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Look up username or reset password for a teacher account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/forgot-home/forgot-home.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="translated">Buscar nombre de usuario o restablecer la contraseña de una cuenta de docente</target>
       </trans-unit>
@@ -2994,7 +2982,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
@@ -3026,15 +3014,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Create New Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.html</context>
@@ -3046,15 +3034,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target state="translated">Crear nueva cuenta</target>
       </trans-unit>
@@ -3062,7 +3050,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Answer Security Question</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="translated">Contestar pregunta de seguridad</target>
       </trans-unit>
@@ -3070,7 +3058,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Answer required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">Respuesta requerida</target>
       </trans-unit>
@@ -3078,11 +3066,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> This site is protected by reCAPTCHA and the Google <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://policies.google.com/privacy&quot;&gt;"/>Privacy Policy<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://policies.google.com/terms&quot;&gt;"/>Terms of Service<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> apply. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">30,34</context>
+          <context context-type="linenumber">25,29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
-          <context context-type="linenumber">36,40</context>
+          <context context-type="linenumber">31,35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
@@ -3122,7 +3110,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Forgot Student Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="translated">Contraseña de estudiante olvidada</target>
       </trans-unit>
@@ -3130,11 +3118,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Forgot Student Username</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-username/forgot-student-username.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="translated">Usuario de estudiante olvidado</target>
       </trans-unit>
@@ -3142,19 +3130,19 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Username</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student/forgot-student.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher/forgot-teacher.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
@@ -3182,11 +3170,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Username required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <target state="translated">Nombre de usuario requerido</target>
       </trans-unit>
@@ -3554,11 +3542,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Look up username</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student/forgot-student.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher/forgot-teacher.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <target state="translated">Buscar nombre de usuario</target>
       </trans-unit>
@@ -3566,11 +3554,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student/forgot-student.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher/forgot-teacher.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
@@ -3594,11 +3582,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Reset password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student/forgot-student.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher/forgot-teacher.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <target state="translated">Restablecer contraseña</target>
       </trans-unit>
@@ -3614,7 +3602,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="translated">Docente olvidó su clave</target>
       </trans-unit>
@@ -3626,7 +3614,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <target state="translated">El código de verificación ha caducado. Los códigos de verificación son válidos por 10 minutos. Vuelva a la página de Docente Olvidé Contraseña para generar una nueva.</target>
       </trans-unit>
@@ -3638,7 +3626,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">94</context>
         </context-group>
         <target state="translated">El código de verificación es erróneo. Intenta otra vez.</target>
       </trans-unit>
@@ -3650,7 +3638,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-verify/forgot-teacher-password-verify.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <target state="translated">Ha enviado un código de verificación no válido demasiadas veces. Por razones de seguridad, bloquearemos la posibilidad de cambiar su contraseña durante 10 minutos. Después de 10 minutos, regrese a la página de Docente Olvidó Contraseña para generar un nuevo código de verificación.</target>
       </trans-unit>
@@ -3698,11 +3686,11 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Forgot Teacher Username</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <target state="translated">Nombre de usuario de docente olvidado</target>
       </trans-unit>
@@ -3770,15 +3758,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">407</context>
+          <context context-type="linenumber">398</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <target state="translated">Comenzando</target>
       </trans-unit>
@@ -4042,15 +4030,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Teacher FAQ</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">133</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <target state="translated">Preguntas más frecuentes para docentes</target>
       </trans-unit>
@@ -4058,15 +4046,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Questions from teachers.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <target state="translated">Preguntas de docentes.</target>
       </trans-unit>
@@ -4074,15 +4062,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Student FAQ</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">418</context>
+          <context context-type="linenumber">408</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <target state="translated">Preguntas más frecuentes de estudiantes</target>
       </trans-unit>
@@ -4090,15 +4078,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Questions from students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">420</context>
+          <context context-type="linenumber">410</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target state="translated">Preguntas de estudiantes.</target>
       </trans-unit>
@@ -4498,15 +4486,15 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Information for new users.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">409</context>
+          <context context-type="linenumber">400</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <target state="translated">Información para nuevos usuarios.</target>
       </trans-unit>
@@ -5390,7 +5378,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> Curriculum Offerings </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">98,100</context>
+          <context context-type="linenumber">88,90</context>
         </context-group>
         <target state="translated"> Oferta de currículum </target>
       </trans-unit>
@@ -5398,7 +5386,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Ready to try WISE in the Classroom?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <target state="translated">¿Le interesa probar WISE con sus estudiantes?</target>
       </trans-unit>
@@ -5406,7 +5394,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Sign up for free!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target state="translated">¡Regístrese gratis!</target>
       </trans-unit>
@@ -5414,7 +5402,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Connect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <target state="translated">Conectar</target>
       </trans-unit>
@@ -5422,7 +5410,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE on Facebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5434,7 +5422,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE on Twitter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5446,7 +5434,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>WISE on Github</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5458,7 +5446,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Community</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5478,7 +5466,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Join us! Discuss all things WISE.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <target state="translated">¡Únase! Discutamos los asuntos de WISE.</target>
       </trans-unit>
@@ -5486,7 +5474,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Help + FAQs</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5498,7 +5486,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>View tutorials and common questions.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">159</context>
         </context-group>
         <target state="translated">Ver tutoriales y preguntas comunes.</target>
       </trans-unit>
@@ -5506,7 +5494,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Contact Us</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">167</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5518,7 +5506,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Want to get in touch? Send us a message.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">169</context>
         </context-group>
         <target state="translated">¿Quieres ponerse en contacto? Envíanos un mensaje.</target>
       </trans-unit>
@@ -5626,11 +5614,27 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <target state="translated"> Hubo un error al grabar los datos. Por favor iniciar sesión nuevamente. Quizás necesite rehacer su trabajo reciente. Lamentamos el inconveniente. </target>
       </trans-unit>
+      <trans-unit id="810358a0509fe5b1c4fa9d6b91d69aba1577d4df" datatype="html">
+        <source>Recaptcha failed. Please reload the page and try again!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
+          <context context-type="linenumber">178</context>
+        </context-group>
+        <target state="translated">Falló el recaptcha. Por favor recargue la página y pruebe nuevamente!</target>
+      </trans-unit>
       <trans-unit id="d745a22ae7b825b146ca8185126c482597f1d485" datatype="html">
         <source>Sign in with Google</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
@@ -5650,7 +5654,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Sign in with Microsoft</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-microsoft-user-already-exists/register-microsoft-user-already-exists.component.html</context>
@@ -5670,7 +5674,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Forgot username or password?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <target state="translated">¿Olvidó su usuario o contraseña?</target>
       </trans-unit>
@@ -5678,7 +5682,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">92,93</context>
+          <context context-type="linenumber">91,92</context>
         </context-group>
         <target state="translated">¿No tienes cuenta en WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Unirse ahora<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
@@ -5758,7 +5762,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> Powered by <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise-research.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>TELS Research<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://github.com/WISE-Community&quot; target=&quot;_blank&quot;&gt;"/>WISE Open Source Technology<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. Help us <x id="START_LINK_2" equiv-text="&lt;a href=&quot;https://crowdin.com/project/wise&quot; target=&quot;_blank&quot;&gt;"/>translate<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> WISE! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
-          <context context-type="linenumber">61,66</context>
+          <context context-type="linenumber">52,57</context>
         </context-group>
         <target state="translated"> Hecho por <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://wise-research.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>TELS Research<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://github.com/WISE-Community&quot; target=&quot;_blank&quot;&gt;"/>WISE Open Source Technology<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. Help us <x id="START_LINK_2" equiv-text="&lt;a href=&quot;https://crowdin.com/project/wise&quot; target=&quot;_blank&quot;&gt;"/>translate<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> WISE! </target>
       </trans-unit>
@@ -5766,7 +5770,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source> This material is based upon work supported by the National Science Foundation. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
-          <context context-type="linenumber">67,72</context>
+          <context context-type="linenumber">58,63</context>
         </context-group>
         <target state="translated"> Este material se basa en un trabajo apoyado por la National Science Foundation. Cualquier opinión, hallazgo, conclusión o recomendación expresada en este material pertenece a los autores y no refleja necesariamente los puntos de vista de la National Science Foundation. </target>
       </trans-unit>
@@ -5774,7 +5778,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>National Science Foundation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <target state="translated">Fundación Nacional de Ciencias</target>
       </trans-unit>
@@ -5782,7 +5786,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>UC Berkeley</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">100</context>
         </context-group>
         <target state="translated">UC Berkeley</target>
       </trans-unit>
@@ -5790,7 +5794,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>ETS</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <target state="translated">ETS</target>
       </trans-unit>
@@ -5798,7 +5802,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>Concord Consortium</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <target state="translated">Concord Consortium</target>
       </trans-unit>
@@ -5806,17 +5810,17 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         <source>SAIL (Scalable Architecture for Interactive Learning)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <target state="translated">SAIL (Arquitectura Escalable para el Aprendizaje Interactivo)</target>
       </trans-unit>
-      <trans-unit id="d690a868429d6758dfa5ebf51e3063d82fa06783" datatype="html">
-        <source>©1996-<x id="INTERPOLATION" equiv-text="{{ time | date : &apos;y&apos; }}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</source>
+      <trans-unit id="d9bde45f8109507e7386b73fe7dfc709a391e8f7" datatype="html">
+        <source>©1996-<x id="INTERPOLATION" equiv-text="{{ time | date: &apos;y&apos; }}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
-          <context context-type="linenumber">145,147</context>
+          <context context-type="linenumber">133,135</context>
         </context-group>
-        <target state="translated">©1996-<x id="INTERPOLATION" equiv-text="{{ time | date : 'y' }}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Entorno web de aprendizaje de ciencias basado en indagación</target>
+        <target state="needs-translation">©1996-<x id="INTERPOLATION" equiv-text="{{ time | date: 'y' }}"/>, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.berkeley.edu&quot; target=&quot;_blank&quot;&gt;"/>UC Berkeley<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> | Web-based Inquiry Science Environment</target>
       </trans-unit>
       <trans-unit id="d222f6ff9f7e28fdb4e8b2af47898446cf2eafe4" datatype="html">
         <source>Account Menu</source>
@@ -11736,7 +11740,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student-default/match-student-default.component.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <target state="translated">Opciones</target>
       </trans-unit>
@@ -15706,7 +15710,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <target state="translated"><x id="INTERPOLATION" equiv-text="{{ isPrevStep ? 'Last viewed item' : null }}"/></target>
       </trans-unit>
@@ -15714,7 +15718,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source><x id="PH" equiv-text="this.nodeTitle"/> has been locked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">255</context>
         </context-group>
         <target state="translated"><x id="PH" equiv-text="this.nodeTitle"/> ha sido protegido para <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</target>
       </trans-unit>
@@ -15722,7 +15726,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source><x id="PH" equiv-text="this.nodeTitle"/> has been unlocked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">256</context>
         </context-group>
         <target state="translated"><x id="PH" equiv-text="this.nodeTitle"/> ha sido desprotegido para <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</target>
       </trans-unit>
@@ -15730,7 +15734,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">382</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -15746,7 +15750,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">375</context>
+          <context context-type="linenumber">383</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -15758,7 +15762,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">388</context>
         </context-group>
         <target state="translated">Desproteger para <x id="PH" equiv-text="this.getPeriodLabel()"/></target>
       </trans-unit>
@@ -15766,7 +15770,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">381</context>
+          <context context-type="linenumber">389</context>
         </context-group>
         <target state="translated">Proteger para <x id="PH" equiv-text="this.getPeriodLabel()"/></target>
       </trans-unit>
@@ -21490,7 +21494,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/matchService.ts</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target state="translated">Emparejar</target>
       </trans-unit>
@@ -21840,7 +21844,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <source>Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student-default/match-student-default.component.ts</context>
-          <context context-type="linenumber">487</context>
+          <context context-type="linenumber">431</context>
         </context-group>
         <target state="translated">La zona es correcta pero la posición es incorrecta</target>
       </trans-unit>
@@ -21848,7 +21852,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <source>Correct</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student-default/match-student-default.component.ts</context>
-          <context context-type="linenumber">494</context>
+          <context context-type="linenumber">438</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
@@ -21864,7 +21868,7 @@ Atención: Esto eliminará todas las opciones y zonas existentes en este compone
         <source>Incorrect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-student-default/match-student-default.component.ts</context>
-          <context context-type="linenumber">494</context>
+          <context context-type="linenumber">438</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
