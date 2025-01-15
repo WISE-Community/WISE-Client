@@ -567,16 +567,34 @@ export class MatchStudentDefault extends ComponentStudent {
 
   createMergedComponentState(componentStates: any[]): any[] {
     const mergedBuckets = [];
-    for (const componentState of componentStates) {
-      for (const bucket of componentState.studentData.buckets) {
-        mergeBucket(mergedBuckets, bucket);
+    componentStates.forEach((componentState) => {
+      if (componentState.componentType === 'Match') {
+        for (const bucket of componentState.studentData.buckets) {
+          mergeBucket(mergedBuckets, bucket);
+        }
+      } else if (componentState.componentType === 'DialogGuidance') {
+        this.addIdeasToSourceBucket(componentState.studentData.responses);
       }
-    }
+    });
     const mergedComponentState: any = this.createNewComponentState();
     mergedComponentState.studentData = {
       buckets: mergedBuckets
     };
     return mergedComponentState;
+  }
+
+  private addIdeasToSourceBucket(responses: any[]): void {
+    responses.forEach((response) => {
+      response.ideas
+        ?.filter((idea) => idea.detected)
+        .forEach((idea) => {
+          if (!this.choices.some((c) => c.id === idea.name)) {
+            const choice = new Choice(idea.name, idea.name);
+            this.choices.push(choice);
+            this.getBucketById(this.sourceBucketId).items.push(choice);
+          }
+        });
+    });
   }
 
   protected addChoice(): void {
