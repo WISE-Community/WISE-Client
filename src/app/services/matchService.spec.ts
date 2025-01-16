@@ -1,43 +1,26 @@
 import { MatchService } from '../../assets/wise5/components/match/matchService';
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { AnnotationService } from '../../assets/wise5/services/annotationService';
-import { ConfigService } from '../../assets/wise5/services/configService';
-import { ProjectService } from '../../assets/wise5/services/projectService';
-import { StudentAssetService } from '../../assets/wise5/services/studentAssetService';
-import { TagService } from '../../assets/wise5/services/tagService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let service: MatchService;
 let componentStateBucketWithItem: any;
-
 describe('MatchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
-        AnnotationService,
-        ConfigService,
-        MatchService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        TagService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-});
-    service = TestBed.get(MatchService);
+      providers: [MatchService]
+    });
+    service = TestBed.inject(MatchService);
     componentStateBucketWithItem = createComponentStateBucket('bucket1', 'Bucket 1', [
-      createChoice('choice1', 'Choice 1')
+      {
+        id: 'choice1',
+        value: 'Choice 1',
+        type: 'choice'
+      }
     ]);
   });
   createComponent();
   isCompleted();
   componentStateHasStudentWork();
   componentHasCorrectAnswer();
-  getItemById();
 });
 
 function createMatchComponent(choices: any[], buckets: any[], feedback: any[]) {
@@ -58,25 +41,13 @@ function createComponentState(buckets: any[], isSubmit: boolean = false) {
 }
 
 function createComponentStateBucket(id: string, value: string, items: any[]) {
-  const bucket: any = createBucket(id, value);
-  bucket.items = items;
-  return bucket;
-}
-
-function createChoice(id: string, value: string) {
-  return {
-    id: id,
-    value: value,
-    type: 'choice'
-  };
-}
-
-function createBucket(id: string, value: string) {
-  return {
+  const bucket: any = {
     id: id,
     value: value,
     type: 'bucket'
   };
+  bucket.items = items;
+  return bucket;
 }
 
 function createFeedbackForBucket(bucketId: string, choices: any[]) {
@@ -185,17 +156,5 @@ function componentHasCorrectAnswer() {
   it('should check if there is a correct answer when there is one', () => {
     component.feedback[0].choices[1].isCorrect = true;
     expectHasCorrectAnswer(component, true);
-  });
-}
-
-function getItemById() {
-  const item1 = createChoice('item1', 'Item 1');
-  const item2 = createChoice('item2', 'Item 2');
-  const items: any[] = [item1, item2];
-  it('should get the item by id when the id exists', () => {
-    expect(service.getItemById('item1', items)).toEqual(item1);
-  });
-  it('should return null when the item id does not exist', () => {
-    expect(service.getItemById('item3', items)).toEqual(null);
   });
 }

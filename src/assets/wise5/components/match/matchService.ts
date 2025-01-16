@@ -47,15 +47,6 @@ export class MatchService extends ComponentService {
     return false;
   }
 
-  getItemById(id: string, items: any[]): any {
-    for (const item of items) {
-      if (item.id === id) {
-        return item;
-      }
-    }
-    return null;
-  }
-
   componentHasCorrectAnswer(component: MatchContent): boolean {
     return component.feedback.some((feedback) =>
       feedback.choices.some((choice) => choice.isCorrect)
