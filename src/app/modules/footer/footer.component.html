@@ -1,21 +1,21 @@
 <footer class="footer primary-bg dark-theme mat-caption">
   <div class="content secondary-text">
-    <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutAlign="center center">
-      <div fxLayout="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="center center">
+    <div class="flex flex-col md:flex-row flex-wrap justify-center items-center">
+      <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center">
         <div class="footer__section center">
           <a routerLink="/join" i18n>Create Account</a> |
           <a routerLink="/features" i18n>Features</a> | <a routerLink="/about" i18n>About Us</a> |
           <a href="https://wise-discuss.berkeley.edu/" i18n>Community</a>
         </div>
-        <span fxHide fxShow.gt-xs>/</span>
+        <span class="hidden sm:block">/</span>
         <div class="footer__section center">
           <a routerLink="/help" i18n>Help + FAQs</a> |
           <a routerLink="/privacy" i18n>Privacy + Use</a> |
           <a routerLink="/contact" i18n>Contact Us</a>
         </div>
       </div>
-      <span fxFlex fxHide fxShow.gt-sm></span>
-      <div>
+      <span class="flex-1 hidden md:block"></span>
+      <div class="flex flex-row">
         <a
           href="https://www.facebook.com/wisetels/"
           target="_blank"
@@ -45,18 +45,9 @@
         </a>
       </div>
     </div>
-    <div
-      fxLayout="column"
-      fxLayout.gt-xs="row wrap"
-      fxLayoutAlign="center center"
-      fxLayoutAlign.gt-sm="center start"
-    >
+    <div class="flex flex-col md:flex-row justify-center items-center">
       <div
-        class="footer__section"
-        fxFlex="100%"
-        fxFlex.gt-sm="1 1 0"
-        ngClass="center"
-        [ngClass.gt-sm]="{ center: false }"
+        class="footer__section w-full md:flex-grow md:flex-shrink md:flex-0 place-items-center md:place-items-start"
       >
         <p i18n>
           Powered by
@@ -71,12 +62,9 @@
           Foundation.
         </p>
       </div>
-      <div fxFlex="100%" fxFlex.gt-sm="1 1 0">
+      <div class="w-full md:flex-grow md:flex-shrink md:flex-0">
         <div
-          class="footer__section"
-          fxLayout="row wrap"
-          fxLayoutAlign="center center"
-          fxLayoutAlign.gt-sm="end center"
+          class="footer__section flex flex-row flex-wrap justify-center md:justify-end items-center"
         >
           <a href="https://www.nsf.gov/" target="_blank">
             <picture>
@@ -140,9 +128,9 @@
             />
           </picture>
         </div>
-        <div class="footer__section" fxLayoutAlign="center center" fxLayoutAlign.gt-sm="end center">
-          <span class="center" i18n
-            >©1996-{{ time | date : 'y' }},
+        <div class="footer__section flex justify-center md:justify-end items-center">
+          <span class="text-center md:text-end" i18n
+            >©1996-{{ time | date: 'y' }},
             <a href="https://www.berkeley.edu" target="_blank">UC Berkeley</a> | Web-based Inquiry
             Science Environment</span
           >

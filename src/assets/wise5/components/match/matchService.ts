@@ -1,5 +1,3 @@
-'use strict';
-
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
 import { MatchContent } from './MatchContent';
@@ -47,14 +45,6 @@ export class MatchService extends ComponentService {
       }
     }
     return false;
-  }
-
-  getChoiceById(id: string, choices: any[]): any {
-    return this.getItemById(id, choices);
-  }
-
-  getBucketById(id: string, buckets: any[]): any {
-    return this.getItemById(id, buckets);
   }
 
   getItemById(id: string, items: any[]): any {

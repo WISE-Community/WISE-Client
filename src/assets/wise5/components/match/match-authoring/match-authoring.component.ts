@@ -268,16 +268,16 @@ export class MatchAuthoring extends AbstractComponentAuthoring {
   }
 
   getChoiceTextById(choiceId: string): string {
-    const choice = this.matchService.getChoiceById(choiceId, this.componentContent.choices);
+    const choice = this.componentContent.choices.find((choice) => choice.id === choiceId);
     return choice ? choice.value : null;
   }
 
-  getBucketNameById(bucketId: string): string {
+  protected getBucketNameById(bucketId: string): string {
     if (bucketId === this.defaultSourceBucketId) {
       const choicesLabel = this.componentContent.choicesLabel;
       return choicesLabel ? choicesLabel : $localize`Choices`;
     }
-    const bucket = this.matchService.getBucketById(bucketId, this.componentContent.buckets);
+    const bucket = this.componentContent.buckets.find((bucket) => bucket.id === bucketId);
     return bucket ? bucket.value : null;
   }
 }

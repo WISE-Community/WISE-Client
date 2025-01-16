@@ -17,6 +17,7 @@ import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   templateUrl: './forgot-teacher-password-verify.component.html',
@@ -35,7 +36,8 @@ import { MatCard, MatCardContent } from '@angular/material/card';
     MatError,
     MatButton,
     MatProgressBar,
-    RouterLink
+    RouterLink,
+    MatDividerModule
   ]
 })
 export class ForgotTeacherPasswordVerifyComponent {

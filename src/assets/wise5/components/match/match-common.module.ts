@@ -13,16 +13,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DeleteChoiceButton } from './delete-choice-button/delete-choice-button.component';
 import { MatchChoiceItem } from './match-choice-item/match-choice-item.component';
 import { MatchStatusIconComponent } from './match-status-icon/match-status-icon.component';
-import { MatchFeedbackSection } from './match-student/match-feedback-section/match-feedback-section.component';
+import { MatchFeedbackSectionComponent } from './match-student/match-feedback-section/match-feedback-section.component';
 
 @NgModule({
-  declarations: [DeleteChoiceButton, MatchChoiceItem, MatchFeedbackSection],
+  declarations: [DeleteChoiceButton, MatchChoiceItem],
   imports: [
     CommonModule,
     DragDropModule,
     FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
+    MatchFeedbackSectionComponent,
     MatchStatusIconComponent,
     MatDialogModule,
     MatFormFieldModule,
@@ -40,7 +41,7 @@ import { MatchFeedbackSection } from './match-student/match-feedback-section/mat
     MatCardModule,
     MatDialogModule,
     MatchChoiceItem,
-    MatchFeedbackSection,
+    MatchFeedbackSectionComponent,
     MatchStatusIconComponent,
     MatFormFieldModule,
     MatIconModule,

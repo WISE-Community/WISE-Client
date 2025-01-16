@@ -1,8 +1,6 @@
 // @ts-nocheck
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../../common/Component';
 import { copy } from '../../../../common/object/object';
@@ -48,14 +46,14 @@ let notebookItemImageName: string;
 let notebookItemText: string;
 let starterBucketLabel = 'Starter Choices';
 
-describe('MatchStudentComponent', () => {
+describe('MatchStudentDefaultComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [MatchStudentDefault],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      declarations: [MatchStudentDefault],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    });
     fixture = TestBed.createComponent(MatchStudentDefault);
     component = fixture.componentInstance;
     choice1 = createChoice(choiceId1, choiceValue1);
@@ -103,7 +101,7 @@ describe('MatchStudentComponent', () => {
     });
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
-    spyOn(component, 'registerAutoScroll').and.callFake(() => {});
+    spyOn(component, 'autoScroll').and.callFake(() => {});
     componentStateChoice1 = createChoice(choiceId1, choiceValue1);
     componentStateChoice2 = createChoice(choiceId2, choiceValue2);
     componentStateChoice3 = createChoice(choiceId3, choiceValue3);
@@ -127,26 +125,17 @@ describe('MatchStudentComponent', () => {
     bucket3 = component.buckets[3];
   });
 
-  createSourceBucket();
+  ngOnInit();
   addNotebookItemToSourceBucket();
-  getSourceBucket();
-  clearSourceBucketChoices();
   addChoiceToBucket();
-  getBucketIds();
-  getChoiceIds();
   getChoicesThatChangedSinceLastSubmit();
   setStudentWork();
   getCorrectness();
   checkAnswer();
   checkAnswerAndDisplayFeedback();
-  initializeBuckets();
   createComponentStateObject();
-  clearFeedback();
   isAuthorHasSpecifiedACorrectPosition();
   getFeedbackObject();
-  mergeBucket();
-  mergeChoices();
-  getValueById();
   getCleanedValue();
 });
 
@@ -213,18 +202,6 @@ function createNotebookItem(localNotebookItemId: string, text: string, imageName
   };
 }
 
-function createSourceBucket() {
-  describe('createSourceBucket', () => {
-    it('should create source bucket', () => {
-      const bucket = component.createSourceBucket();
-      expect(bucket.id).toEqual('0');
-      expect(bucket.type).toEqual('bucket');
-      expect(bucket.value).toEqual(starterBucketLabel);
-      expect(bucket.items).toEqual([]);
-    });
-  });
-}
-
 function addNotebookItemToSourceBucket() {
   describe('addNotebookItemToSourceBucket', () => {
     it('should add notebook item to source bucket', () => {
@@ -239,38 +216,15 @@ function addNotebookItemToSourceBucket() {
   });
 }
 
-function getSourceBucket() {
-  describe('getSourceBucket', () => {
-    it('should get the source bucket', () => {
-      const sourceBucket = component.getSourceBucket();
-      expect(sourceBucket.id).toEqual('0');
-      expect(sourceBucket.value).toEqual(component.getSourceBucketLabel());
-    });
-  });
-}
-
-function clearSourceBucketChoices() {
-  describe('clearSourceBucketChoices', () => {
-    it('should clear source bucket choices', () => {
-      const sourceBucket = component.getSourceBucket();
-      expect(sourceBucket.items.length).toEqual(3);
-      component.clearSourceBucketChoices();
-      expect(sourceBucket.items.length).toEqual(0);
-    });
-  });
-}
-
 function addChoiceToBucket() {
   describe('addChoiceToBucket', () => {
     it('should add choice to bucket', () => {
-      component.clearSourceBucketChoices();
       component.addChoiceToBucket(componentStateChoice1, bucket1);
       expect(bucket1.items.length).toEqual(1);
       expect(bucket1.items[0]).toEqual(choice1);
     });
 
     it('should add choice to bucket when the authored choice text has changed', () => {
-      component.clearSourceBucketChoices();
       const newChoice1Value = `New ${choice1.value}`;
       choice1.value = newChoice1Value;
       component.addChoiceToBucket(componentStateChoice1, bucket1);
@@ -280,35 +234,10 @@ function addChoiceToBucket() {
   });
 }
 
-function getBucketIds() {
-  describe('getBucketIds', () => {
-    it('should get bucket ids', () => {
-      const bucketIds = component.getBucketIds();
-      expect(bucketIds.length).toEqual(4);
-      expect(bucketIds[0]).toEqual('0');
-      expect(bucketIds[1]).toEqual(bucket1.id);
-      expect(bucketIds[2]).toEqual(bucket2.id);
-      expect(bucketIds[3]).toEqual(bucket3.id);
-    });
-  });
-}
-
-function getChoiceIds() {
-  describe('getChoiceIds', () => {
-    it('should get choice ids', () => {
-      const choiceIds = component.getChoiceIds();
-      expect(choiceIds.length).toEqual(3);
-      expect(choiceIds[0]).toEqual(choice1.id);
-      expect(choiceIds[1]).toEqual(choice2.id);
-      expect(choiceIds[2]).toEqual(choice3.id);
-    });
-  });
-}
-
 function getChoicesThatChangedSinceLastSubmit() {
   describe('getChoicesThatChangedSinceLastSubmit', () => {
     beforeEach(() => {
-      component.clearSourceBucketChoices();
+      component.buckets[0].items = [];
       componentState = createComponentState(componentStateBuckets, true);
     });
 
@@ -319,7 +248,7 @@ function getChoicesThatChangedSinceLastSubmit() {
       manuallyAddChoiceToBucket(choice1, bucket1);
       manuallyAddChoiceToBucket(choice2, bucket2);
       manuallyAddChoiceToBucket(choice3, bucket3);
-      const choicesChanged = component.getChoicesThatChangedSinceLastSubmit(componentState);
+      const choicesChanged = component.getUpdatedChoicesSinceLastSubmit(componentState);
       expect(choicesChanged.length).toEqual(2);
       expect(choicesChanged[0]).toEqual(choice2.id);
       expect(choicesChanged[1]).toEqual(choice3.id);
@@ -333,7 +262,7 @@ function getChoicesThatChangedSinceLastSubmit() {
       manuallyAddChoiceToBucket(choice2, bucket1);
       manuallyAddChoiceToBucket(choice3, bucket1);
       spyOn(component, 'isAuthorHasSpecifiedACorrectPosition').and.returnValue(true);
-      const choicesChanged = component.getChoicesThatChangedSinceLastSubmit(componentState);
+      const choicesChanged = component.getUpdatedChoicesSinceLastSubmit(componentState);
       expect(choicesChanged.length).toEqual(2);
       expect(choicesChanged[0]).toEqual(choice1.id);
       expect(choicesChanged[1]).toEqual(choice3.id);
@@ -346,7 +275,7 @@ function getChoicesThatChangedSinceLastSubmit() {
       manuallyAddChoiceToBucket(choice1, bucket1);
       manuallyAddChoiceToBucket(choice2, bucket2);
       manuallyAddChoiceToBucket(choice3, bucket3);
-      const choicesChanged = component.getChoicesThatChangedSinceLastSubmit(componentState);
+      const choicesChanged = component.getUpdatedChoicesSinceLastSubmit(componentState);
       expect(choicesChanged.length).toEqual(0);
     });
   });
@@ -481,12 +410,9 @@ function getCorrectness() {
   });
 }
 
-function initializeBuckets() {
-  describe('initializeBuckets', () => {
+function ngOnInit() {
+  describe('ngOnInit()', () => {
     it('should initialize buckets', () => {
-      component.sourceBucket = null;
-      component.buckets = null;
-      component.initializeBuckets();
       expect(component.sourceBucket.value).toEqual(starterBucketLabel);
       expect(component.sourceBucket.items.length).toEqual(3);
       expect(component.buckets.length).toEqual(4);
@@ -519,20 +445,6 @@ function createComponentStateObject() {
   });
 }
 
-function clearFeedback() {
-  describe('clearFeedback', () => {
-    it('should clear feedback', () => {
-      for (const choice of component.choices) {
-        choice.feedback = 'This is feedback';
-      }
-      component.clearFeedback();
-      for (const choice of component.choices) {
-        expect(choice.feedback).toEqual(null);
-      }
-    });
-  });
-}
-
 function isAuthorHasSpecifiedACorrectPosition() {
   describe('isAuthorHasSpecifiedACorrectPosition', () => {
     it(`should check if author has specified the choice has a correct position when it does
@@ -553,59 +465,6 @@ function getFeedbackObject() {
     it('should get feedback object', () => {
       const feedbackObject = component.getFeedbackObject(bucketId1, choiceId1);
       expect(feedbackObject.choiceId).toEqual(choiceId1);
-    });
-  });
-}
-
-function mergeBucket() {
-  describe('mergeBucket', () => {
-    it('should merge bucket when the bucket is not in the existing buckets array', () => {
-      const buckets = [bucket1, bucket2];
-      const mergedBuckets = component.mergeBucket(buckets, bucket3);
-      expect(mergedBuckets.length).toEqual(3);
-      expect(mergedBuckets[0].id).toEqual(bucketId1);
-      expect(mergedBuckets[1].id).toEqual(bucketId2);
-      expect(mergedBuckets[2].id).toEqual(bucketId3);
-    });
-
-    it('should merge bucket when the bucket is in the existing buckets array', () => {
-      manuallyAddChoiceToBucket(choice1, bucket1);
-      manuallyAddChoiceToBucket(choice2, bucket1);
-      const buckets = [bucket1, bucket2];
-      const anotherBucket1 = createBucket(bucketId1, bucketValue1, []);
-      manuallyAddChoiceToBucket(choice2, anotherBucket1);
-      manuallyAddChoiceToBucket(choice3, anotherBucket1);
-      const mergedBuckets = component.mergeBucket(buckets, anotherBucket1);
-      expect(mergedBuckets.length).toEqual(2);
-      expect(mergedBuckets[0].id).toEqual(bucketId1);
-      expect(mergedBuckets[1].id).toEqual(bucketId2);
-      expect(mergedBuckets[0].items.length).toEqual(3);
-      expect(mergedBuckets[0].items[0].id).toEqual(choiceId1);
-      expect(mergedBuckets[0].items[1].id).toEqual(choiceId2);
-      expect(mergedBuckets[0].items[2].id).toEqual(choiceId3);
-    });
-  });
-}
-
-function mergeChoices() {
-  describe('mergeChoices', () => {
-    it('should merge choices', () => {
-      const choices1 = [choice1, choice2];
-      const choices2 = [choice2, choice3];
-      const mergedChoices = component.mergeChoices(choices1, choices2);
-      expect(mergedChoices.length).toEqual(3);
-      expect(mergedChoices[0].id).toEqual(choiceId1);
-      expect(mergedChoices[1].id).toEqual(choiceId2);
-      expect(mergedChoices[2].id).toEqual(choiceId3);
-    });
-  });
-}
-
-function getValueById() {
-  describe('getValueById', () => {
-    it('should get value by id', () => {
-      expect(component.getValueById(component.componentContent, choiceId1)).toEqual(choiceValue1);
-      expect(component.getValueById(component.componentContent, bucketId1)).toEqual(bucketValue1);
     });
   });
 }

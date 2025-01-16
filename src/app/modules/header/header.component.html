@@ -1,6 +1,6 @@
 <header class="header">
   <mat-toolbar class="header__content section--slant">
-    <div class="content" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <div class="content flex flex-row items-center space-x-1">
       <a routerLink="/" class="header__logo">
         <picture>
           <source
@@ -13,21 +13,21 @@
           <img src="assets/img/wise-web-header-img@2x.png" i18n-alt alt="WISE header logo" />
         </picture>
       </a>
-      <span fxFlex="1 1 auto"></span>
-      <app-header-links fxHide fxShow.gt-sm [user]="user" [location]="location" />
+      <span class="flex-1"></span>
+      <app-header-links
+        class="hidden lg:block"
+        [user]="user"
+        [location]="location"
+      ></app-header-links>
       @if (roles.length > 0) {
-        <app-header-account-menu [user]="user" />
+        <app-header-account-menu [user]="user"></app-header-account-menu>
       }
       @if (!location) {
-        <button
-          mat-icon-button
-          fxHide.gt-sm
-          (click)="showMobileMenu()"
-          i18n-aria-label
-          aria-label="Main menu"
-        >
-          <mat-icon>menu</mat-icon>
-        </button>
+        <span class="lg:hidden">
+          <button mat-icon-button (click)="showMobileMenu()" i18n-aria-label aria-label="Main menu">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </span>
       }
     </div>
   </mat-toolbar>

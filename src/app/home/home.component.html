@@ -5,7 +5,7 @@
     [imgDescription]="hero.imgDescription"
   >
     <ng-template #headlineTemplate>
-      <div class="accent-2" fxLayoutGap="8px" fxLayoutGap.gt-xs="16px">
+      <div class="accent-2 flex gap-2 sm:gap-4">
         <mat-icon
           [@jackInTheBox]="{ value: '*', params: { delay: '1s' } }"
           svgIcon="ki-elicit"
@@ -57,19 +57,9 @@
         >
           The WISE Advantage
         </h1>
-        <div
-          fxLayout="row"
-          fxLayout.xs="column"
-          fxLayoutAlign="center stretch"
-          fxLayoutAlign.xs="center center"
-          fxLayoutGap="32px"
-          fxLayoutGap.sm="24px"
-          fxLayoutGap.gt-sm="32px"
-        >
+        <div class="features">
           <app-blurb
             *ngFor="let blurb of blurbs"
-            fxFlex
-            fxFlex.gt-xs="33"
             [imgSrc]="blurb.imgSrc"
             [imgDescription]="blurb.imgDescription"
             [imgSources]="blurb.imgSources"
@@ -101,12 +91,7 @@
         <app-home-page-project-library></app-home-page-project-library>
         <div class="library__links">
           <h2
-            class="accent-1 center"
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutGap="16px"
-            fxLayoutAlign="center center"
-            fxLayoutWrap
+            class="accent-1 flex flex-wrap flex-col sm:flex-row gap-4 place-items-center justify-center"
           >
             <span i18n>Ready to try WISE in the Classroom?</span>
             <a mat-raised-button color="accent" routerLink="/join" i18n>Sign up for free!</a>
@@ -119,11 +104,9 @@
     <div class="section--fullwidth section--slant mat-app-background">
       <div class="content">
         <h1
-          class="accent section__header"
+          class="accent section__header flex gap-6"
           ngClass="mat-headline-4"
           [ngClass.xs]="{ 'mat-headline-4': false }"
-          fxLayoutAlign="start center"
-          fxLayoutGap="24px"
         >
           <span i18n>Connect</span>
           <a
@@ -154,18 +137,8 @@
             <mat-icon svgIcon="github"></mat-icon>
           </a>
         </h1>
-        <div
-          fxLayout="row"
-          fxLayout.xs="column"
-          fxLayoutAlign="center stretch"
-          fxLayoutAlign.xs="center center"
-          fxLayoutGap="32px"
-          fxLayoutGap.sm="24px"
-          fxLayoutGap.gt-sm="32px"
-        >
+        <div class="features">
           <app-call-to-action
-            fxFlex
-            fxFlex.gt-xs="33"
             icon="forum"
             iconColor="accent-1"
             i18n-headline
@@ -178,8 +151,6 @@
           >
           </app-call-to-action>
           <app-call-to-action
-            fxFlex
-            fxFlex.gt-xs="33"
             icon="live_help"
             iconColor="accent-2"
             i18n-headline
@@ -190,8 +161,6 @@
           >
           </app-call-to-action>
           <app-call-to-action
-            fxFlex
-            fxFlex.gt-xs="33"
             icon="contact_mail"
             iconColor="accent"
             i18n-headline
