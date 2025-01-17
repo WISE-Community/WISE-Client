@@ -1,3 +1,4 @@
+import { CRaterRubric } from '../components/common/cRater/CRaterRubric';
 import { QuestionBank } from '../components/peerChat/peer-chat-question-bank/QuestionBank';
 import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
 
@@ -5,6 +6,7 @@ export interface ComponentContent {
   id: string;
   connectedComponents?: any[];
   constraints?: any[];
+  cRaterRubric?: CRaterRubric;
   dynamicPrompt?: DynamicPrompt;
   excludeFromTotalScore?: boolean;
   maxScore?: number;

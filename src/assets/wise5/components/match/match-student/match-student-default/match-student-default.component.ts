@@ -27,6 +27,8 @@ import { Container } from '../container';
 import { Item } from '../item';
 import { hasConnectedComponent } from '../../../../common/ComponentContent';
 import { Bucket, mergeBucket } from '../../bucket';
+import { CRaterService } from '../../../../services/cRaterService';
+import { CRaterRubric } from '../../../common/cRater/CRaterRubric';
 
 @Component({
   templateUrl: 'match-student-default.component.html',
@@ -50,6 +52,7 @@ export class MatchStudentDefault extends ComponentStudent {
     protected assetService: StudentAssetService,
     protected componentService: ComponentService,
     protected configService: ConfigService,
+    private craterService: CRaterService,
     protected dataService: StudentDataService,
     protected dialog: MatDialog,
     protected matchService: MatchService,
@@ -573,7 +576,10 @@ export class MatchStudentDefault extends ComponentStudent {
           mergeBucket(mergedBuckets, bucket);
         }
       } else if (componentState.componentType === 'DialogGuidance') {
-        this.addIdeasToSourceBucket(componentState.studentData.responses);
+        this.addIdeasToSourceBucket(
+          componentState.studentData.responses,
+          this.craterService.getCRaterRubric(componentState.nodeId, componentState.componentId)
+        );
       }
     });
     const mergedComponentState: any = this.createNewComponentState();
@@ -583,13 +589,13 @@ export class MatchStudentDefault extends ComponentStudent {
     return mergedComponentState;
   }
 
-  private addIdeasToSourceBucket(responses: any[]): void {
+  private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
     responses.forEach((response) => {
       response.ideas
         ?.filter((idea) => idea.detected)
         .forEach((idea) => {
           if (!this.choices.some((c) => c.id === idea.name)) {
-            const choice = new Choice(idea.name, idea.name);
+            const choice = new Choice(idea.name, rubric.getStudentTextForIdea(idea.name));
             this.choices.push(choice);
             this.getBucketById(this.sourceBucketId).items.push(choice);
           }
