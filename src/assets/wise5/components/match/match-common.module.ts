@@ -12,11 +12,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DeleteChoiceButton } from './delete-choice-button/delete-choice-button.component';
 import { MatchChoiceItem } from './match-choice-item/match-choice-item.component';
-import { MatchStatusIcon } from './match-status-icon/match-status-icon.component';
+import { MatchStatusIconComponent } from './match-status-icon/match-status-icon.component';
 import { MatchFeedbackSectionComponent } from './match-student/match-feedback-section/match-feedback-section.component';
 
 @NgModule({
-  declarations: [DeleteChoiceButton, MatchChoiceItem, MatchStatusIcon],
+  declarations: [DeleteChoiceButton, MatchChoiceItem],
   imports: [
     CommonModule,
     DragDropModule,
@@ -24,6 +24,7 @@ import { MatchFeedbackSectionComponent } from './match-student/match-feedback-se
     MatButtonModule,
     MatCardModule,
     MatchFeedbackSectionComponent,
+    MatchStatusIconComponent,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
@@ -41,7 +42,7 @@ import { MatchFeedbackSectionComponent } from './match-student/match-feedback-se
     MatDialogModule,
     MatchChoiceItem,
     MatchFeedbackSectionComponent,
-    MatchStatusIcon,
+    MatchStatusIconComponent,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
