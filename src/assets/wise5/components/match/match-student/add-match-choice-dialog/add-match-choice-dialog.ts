@@ -1,22 +1,47 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import { MatError, MatFormField } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'add-match-choice-dialog',
+  imports: [
+    MatButtonModule,
+    MatDialogActions,
+    MatDialogContent,
+    MatError,
+    MatFormField,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
+  standalone: true,
   templateUrl: 'add-match-choice-dialog.html'
 })
-export class AddMatchChoiceDialog {
-  addChoiceFormGroup: FormGroup = this.fb.group({
+export class AddMatchChoiceDialogComponent {
+  protected addChoiceFormGroup: FormGroup = this.fb.group({
     choiceText: new FormControl('', [Validators.required])
   });
 
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AddMatchChoiceDialog>) {}
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<AddMatchChoiceDialogComponent>
+  ) {}
 
   protected save(): void {
     const choiceText: string = this.addChoiceFormGroup.get('choiceText').value;
     if (choiceText) {
-      this.dialogRef.close(choiceText);
+      this.closeDialog(choiceText);
     }
+  }
+
+  protected closeDialog(text?: string): void {
+    this.dialogRef.close(text);
   }
 }

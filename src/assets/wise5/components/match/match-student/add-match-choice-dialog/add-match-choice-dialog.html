@@ -9,13 +9,13 @@
         formControlName="choiceText"
         (keydown.enter)="save()"
       />
-      <mat-error *ngIf="addChoiceFormGroup.controls['choiceText'].hasError('required')" i18n
-        >Item Text required</mat-error
-      >
+      @if (addChoiceFormGroup.controls['choiceText'].hasError('required')) {
+      <mat-error i18n>Item Text required</mat-error>
+      }
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close i18n>Cancel</button>
+    <button mat-button type="button" (click)="closeDialog()" i18n>Cancel</button>
     <button
       mat-flat-button
       color="primary"
