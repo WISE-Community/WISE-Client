@@ -63,4 +63,18 @@ export class ChooseImportUnitComponent {
       }
     );
   }
+
+  protected goBack(): void {
+    this.router.navigate([this.importType === 'component' ? '../..' : '../../choose-template'], {
+      relativeTo: this.route,
+      state: this.target
+    });
+  }
+
+  protected cancel(): void {
+    this.router.navigate([this.importType === 'component' ? '../..' : '../../..'], {
+      relativeTo: this.route,
+      state: this.target
+    });
+  }
 }

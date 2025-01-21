@@ -3,8 +3,7 @@ import { ChooseImportComponentComponent } from './choose-import-component/choose
 import { StudentTeacherCommonModule } from '../../../../app/student-teacher-common.module';
 
 @NgModule({
-  declarations: [ChooseImportComponentComponent],
   exports: [ChooseImportComponentComponent],
-  imports: [StudentTeacherCommonModule]
+  imports: [ChooseImportComponentComponent, StudentTeacherCommonModule]
 })
 export class ImportComponentModule {}
