@@ -55,24 +55,19 @@ export class ChooseImportUnitComponent {
 
   protected chooseProject(project: any): void {
     this.target.importProjectId = project.id;
-    this.router.navigate(
-      [this.importType === 'component' ? '../choose-component' : '../choose-step'],
-      {
-        relativeTo: this.route,
-        state: this.target
-      }
-    );
+    this.navigate('../choose-component', '../choose-step');
   }
 
   protected goBack(): void {
-    this.router.navigate([this.importType === 'component' ? '../..' : '../../choose-template'], {
-      relativeTo: this.route,
-      state: this.target
-    });
+    this.navigate('../..', '../../choose-template');
   }
 
   protected cancel(): void {
-    this.router.navigate([this.importType === 'component' ? '../..' : '../../..'], {
+    this.navigate('../..', '../../..');
+  }
+
+  private navigate(componentUrl: string, stepUrl: string): void {
+    this.router.navigate([this.importType === 'component' ? componentUrl : stepUrl], {
       relativeTo: this.route,
       state: this.target
     });
