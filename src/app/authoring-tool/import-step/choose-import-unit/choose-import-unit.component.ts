@@ -25,7 +25,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   templateUrl: './choose-import-unit.component.html'
 })
 export class ChooseImportUnitComponent {
-  private importType: 'step' | 'component';
+  protected importType: 'step' | 'component';
   protected libraryProjects: any[];
   protected myProjects: any[];
   private subscriptions: Subscription = new Subscription();
