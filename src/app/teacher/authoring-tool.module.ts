@@ -13,7 +13,6 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
 import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
-import { ImportComponentModule } from '../../assets/wise5/authoringTool/importComponent/import-component-module';
 import { NodeAdvancedAuthoringModule } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring.module';
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
 import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
@@ -61,6 +60,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add-component/add-component.component';
 import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
 import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
+import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +93,7 @@ import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu
     AuthoringToolBarComponent,
     ChooseAutomatedAssessmentComponent,
     ChooseCopyNodeLocationComponent,
+    ChooseImportComponentComponent,
     ChooseImportStepComponent,
     ChooseImportUnitComponent,
     ChooseNewNodeTemplateComponent,
@@ -108,7 +109,6 @@ import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu
     MatBadgeModule,
     MatChipsModule,
     MatExpansionModule,
-    ImportComponentModule,
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
     MainMenuComponent,
