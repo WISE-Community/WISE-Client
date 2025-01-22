@@ -1,4 +1,4 @@
-<component-header [component]="component"></component-header>
+<component-header [component]="component" />
 <div class="input-wrapper" fxLayout="row wrap" fxLayoutAlign="start center">
   <button
     *ngIf="isAddNewLabelButtonVisible"
@@ -48,7 +48,7 @@
     class="add-to-notebook-button"
     [isDisabled]="isDisabled"
     (snipImage)="snipImage()"
-  ></add-to-notebook-button>
+  />
   <br />
   <button
     *ngIf="componentContent.enableStudentUploadBackground && backgroundImage == null"
@@ -89,7 +89,7 @@
   </button>
 </div>
 <div id="canvasParent_{{ canvasId }}" class="label-canvas-container">
-  <canvas id="{{ canvasId }}" class="label-canvas" width="800" height="600"> </canvas>
+  <canvas id="{{ canvasId }}" class="label-canvas" width="800" height="600"></canvas>
 </div>
 <component-save-submit-buttons
   *ngIf="isSaveOrSubmitButtonVisible"
@@ -102,13 +102,11 @@
   [isSubmitDirty]="isSubmitDirty"
   (saveButtonClicked)="saveButtonClicked($event)"
   (submitButtonClicked)="submitButtonClicked($event)"
->
-</component-save-submit-buttons>
+/>
 <component-annotations
   *ngIf="mode === 'student'"
   [annotations]="latestAnnotations"
   [maxScore]="componentContent.maxScore"
   [nodeId]="nodeId"
   [componentId]="componentId"
->
-</component-annotations>
+/>

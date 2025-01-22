@@ -4,8 +4,7 @@ import { StudentComponentModule } from '../../../../../app/student/student.compo
 import { LabelStudent } from './label-student.component';
 
 @NgModule({
-  declarations: [LabelStudent],
-  imports: [StudentTeacherCommonModule, StudentComponentModule],
+  imports: [LabelStudent, StudentTeacherCommonModule, StudentComponentModule],
   exports: [LabelStudent]
 })
 export class LabelStudentModule {}

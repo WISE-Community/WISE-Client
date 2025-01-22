@@ -4523,8 +4523,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.ts</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4ad84d4f3bbc9a37b27cd1ff908aea5fa83dccf3" datatype="html">
@@ -19230,7 +19230,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">739</context>
+          <context context-type="linenumber">767</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d0416d769e2f5f38e271f36c0e263f02e2f3b603" datatype="html">
@@ -19244,21 +19244,21 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>A New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">486</context>
+          <context context-type="linenumber">514</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4546757591980718173" datatype="html">
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">845</context>
+          <context context-type="linenumber">873</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4725019513729542053" datatype="html">
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">906</context>
+          <context context-type="linenumber">934</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5508586823060600561" datatype="html">
@@ -19501,8 +19501,8 @@ Warning: This will delete all existing choices and buckets in this component.</s
       <trans-unit id="3db39135c783da4bb320d5826f4de893f62c7e1b" datatype="html">
         <source>Correct</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.ts</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
@@ -19520,8 +19520,8 @@ Warning: This will delete all existing choices and buckets in this component.</s
       <trans-unit id="8b42d54000704393a3c06e5f8b668880014f6986" datatype="html">
         <source>Incorrect</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-status-icon/match-status-icon.component.ts</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-student/match-feedback-section/match-feedback-section.component.html</context>
