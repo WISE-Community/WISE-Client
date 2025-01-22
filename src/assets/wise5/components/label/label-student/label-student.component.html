@@ -1,112 +1,123 @@
 <component-header [component]="component" />
 <div class="input-wrapper" fxLayout="row wrap" fxLayoutAlign="start center">
-  <button
-    *ngIf="isAddNewLabelButtonVisible"
-    mat-raised-button
-    color="primary"
-    class="add-button"
-    (click)="addNewLabel()"
-    [disabled]="isDisabled"
-    matTooltip="Add New Label"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>add</mat-icon>
-  </button>
+  @if (isAddNewLabelButtonVisible) {
+    <button
+      mat-raised-button
+      color="primary"
+      class="add-button"
+      (click)="addNewLabel()"
+      [disabled]="isDisabled"
+      matTooltip="Add New Label"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  }
   <div class="label-text-input-div">
-    <mat-form-field *ngIf="editLabelMode" class="label-text-input">
-      <mat-label i18n>Label Text</mat-label>
-      <input
-        matInput
-        id="editLabelTextInput-{{ componentId }}"
-        #editLabelTextInput
-        type="text"
-        [(ngModel)]="selectedLabel.textString"
-        (ngModelChange)="
-          selectedLabelTextChanged(selectedLabel, selectedLabel.text, selectedLabel.textString)
-        "
-        [disabled]="isDisabled"
-      />
-    </mat-form-field>
+    @if (editLabelMode) {
+      <mat-form-field class="label-text-input">
+        <mat-label i18n>Label Text</mat-label>
+        <input
+          matInput
+          id="editLabelTextInput-{{ componentId }}"
+          #editLabelTextInput
+          type="text"
+          [(ngModel)]="selectedLabel.textString"
+          (ngModelChange)="
+            selectedLabelTextChanged(selectedLabel, selectedLabel.text, selectedLabel.textString)
+          "
+          [disabled]="isDisabled"
+        />
+      </mat-form-field>
+    }
   </div>
-  <button
-    mat-raised-button
-    color="primary"
-    class="delete-button"
-    (click)="deleteLabelButtonClicked()"
-    *ngIf="!isDisabled && selectedLabel != null && selectedLabel.canDelete"
-    [disabled]="isDisabled"
-    matTooltip="Delete"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>delete</mat-icon>
-  </button>
+  @if (!isDisabled && selectedLabel != null && selectedLabel.canDelete) {
+    <button
+      mat-raised-button
+      color="primary"
+      class="delete-button"
+      (click)="deleteLabelButtonClicked()"
+      [disabled]="isDisabled"
+      matTooltip="Delete"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  }
   <span style="flex-grow: 1"></span>
-  <add-to-notebook-button
-    *ngIf="isShowAddToNotebookButton"
-    class="add-to-notebook-button"
-    [isDisabled]="isDisabled"
-    (snipImage)="snipImage()"
-  />
+  @if (isShowAddToNotebookButton) {
+    <add-to-notebook-button
+      class="add-to-notebook-button"
+      [isDisabled]="isDisabled"
+      (snipImage)="snipImage()"
+    />
+  }
   <br />
-  <button
-    *ngIf="componentContent.enableStudentUploadBackground && backgroundImage == null"
-    mat-raised-button
-    color="primary"
-    class="upload-button"
-    (click)="showStudentAssets()"
-    matTooltip="Upload Background Image"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>attach_file</mat-icon>
-  </button>
-  <button
-    *ngIf="componentContent.enableStudentUploadBackground && backgroundImage != null"
-    mat-raised-button
-    color="primary"
-    class="upload-button"
-    (click)="deleteBackgroundImage()"
-    matTooltip="Delete Background Image"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>delete_outline</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    class="reset-button"
-    (click)="resetButtonClicked()"
-    *ngIf="isResetButtonVisible"
-    [disabled]="isDisabled"
-    matTooltip="Reset"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>restore</mat-icon>
-  </button>
+  @if (componentContent.enableStudentUploadBackground) {
+    @if (backgroundImage == null) {
+      <button
+        mat-raised-button
+        color="primary"
+        class="upload-button"
+        (click)="showStudentAssets()"
+        matTooltip="Upload Background Image"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    } @else {
+      <button
+        mat-raised-button
+        color="primary"
+        class="upload-button"
+        (click)="deleteBackgroundImage()"
+        matTooltip="Delete Background Image"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    }
+  }
+  @if (isResetButtonVisible) {
+    <button
+      mat-raised-button
+      color="primary"
+      class="reset-button"
+      (click)="resetButtonClicked()"
+      [disabled]="isDisabled"
+      matTooltip="Reset"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>restore</mat-icon>
+    </button>
+  }
 </div>
 <div id="canvasParent_{{ canvasId }}" class="label-canvas-container">
   <canvas id="{{ canvasId }}" class="label-canvas" width="800" height="600"></canvas>
 </div>
-<component-save-submit-buttons
-  *ngIf="isSaveOrSubmitButtonVisible"
-  [componentState]="latestComponentState"
-  [isDirty]="isDirty"
-  [isDisabled]="isDisabled"
-  [isSaveButtonVisible]="isSaveButtonVisible"
-  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-  [isSubmitButtonVisible]="isSubmitButtonVisible"
-  [isSubmitDirty]="isSubmitDirty"
-  (saveButtonClicked)="saveButtonClicked($event)"
-  (submitButtonClicked)="submitButtonClicked($event)"
-/>
-<component-annotations
-  *ngIf="mode === 'student'"
-  [annotations]="latestAnnotations"
-  [maxScore]="componentContent.maxScore"
-  [nodeId]="nodeId"
-  [componentId]="componentId"
-/>
+@if (isSaveOrSubmitButtonVisible) {
+  <component-save-submit-buttons
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  />
+}
+@if (mode === 'student') {
+  <component-annotations
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  />
+}
