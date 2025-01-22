@@ -74,38 +74,38 @@ export class LabelStudentComponent extends ComponentStudent {
   textZIndex: number = 1;
 
   constructor(
-    protected AnnotationService: AnnotationService,
+    protected annotationService: AnnotationService,
     private changeDetector: ChangeDetectorRef,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    private LabelService: LabelService,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    private labelService: LabelService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     this.enableFabricTextPadding();
-    const domIdEnding = this.LabelService.getDomIdEnding(
+    const domIdEnding = this.labelService.getDomIdEnding(
       this.nodeId,
       this.componentId,
       this.componentState
     );
-    this.canvasId = this.LabelService.getCanvasId(domIdEnding);
+    this.canvasId = this.labelService.getCanvasId(domIdEnding);
     this.initializeComponent(this.componentContent);
   }
 
@@ -150,7 +150,7 @@ export class LabelStudentComponent extends ComponentStudent {
   }
 
   setupCanvas(): void {
-    this.canvas = this.LabelService.initializeCanvas(
+    this.canvas = this.labelService.initializeCanvas(
       this.canvasId,
       this.canvasWidth,
       this.canvasHeight,
@@ -316,14 +316,14 @@ export class LabelStudentComponent extends ComponentStudent {
   initializeStudentWork(componentContent: any, componentState: any): void {
     if (hasConnectedComponent(componentContent, 'showWork')) {
       this.handleConnectedComponents();
-    } else if (this.LabelService.componentStateHasStudentWork(componentState, componentContent)) {
+    } else if (this.labelService.componentStateHasStudentWork(componentState, componentContent)) {
       this.setStudentWork(componentState);
     } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
       if (componentContent.labels != null) {
         this.setStarterLabels(componentContent);
       }
-    } else if (this.LabelService.componentStateIsSameAsStarter(componentState, componentContent)) {
+    } else if (this.labelService.componentStateIsSameAsStarter(componentState, componentContent)) {
       this.setStudentWork(componentState);
     } else if (componentState == null && componentContent.labels != null) {
       this.setStarterLabels(componentContent);
@@ -353,7 +353,7 @@ export class LabelStudentComponent extends ComponentStudent {
   }
 
   addLabelsToCanvas(labels: any[]): void {
-    const fabricLabels = this.LabelService.addLabelsToCanvas(
+    const fabricLabels = this.labelService.addLabelsToCanvas(
       this.canvas,
       labels,
       this.canvasWidth,
@@ -506,7 +506,7 @@ export class LabelStudentComponent extends ComponentStudent {
     const canEdit = true;
     const canDelete = true;
     const isStarterLabel = false;
-    const newLabel = this.LabelService.createLabel(
+    const newLabel = this.labelService.createLabel(
       newLabelLocation.pointX,
       newLabelLocation.pointY,
       newLabelLocation.textX,
@@ -521,10 +521,10 @@ export class LabelStudentComponent extends ComponentStudent {
       this.componentContent.fontSize,
       this.componentContent.labelWidth,
       this.studentDataVersion,
-      this.LabelService.getTimestamp(),
+      this.labelService.getTimestamp(),
       isStarterLabel
     );
-    this.LabelService.addLabelToCanvas(this.canvas, newLabel, this.enableCircles);
+    this.labelService.addLabelToCanvas(this.canvas, newLabel, this.enableCircles);
     this.addListenersToLabel(newLabel);
     this.labels.push(newLabel);
     this.selectLabel(newLabel);
@@ -661,11 +661,11 @@ export class LabelStudentComponent extends ComponentStudent {
   }
 
   makeSureXIsWithinXMinMaxLimits(x: number): number {
-    return this.LabelService.makeSureValueIsWithinLimit(x, this.canvasWidth);
+    return this.labelService.makeSureValueIsWithinLimit(x, this.canvasWidth);
   }
 
   makeSureYIsWithinYMinMaxLimits(y: number): number {
-    return this.LabelService.makeSureValueIsWithinLimit(y, this.canvasHeight);
+    return this.labelService.makeSureValueIsWithinLimit(y, this.canvasHeight);
   }
 
   addListenersToLabels(labels: any[]): void {
@@ -756,7 +756,7 @@ export class LabelStudentComponent extends ComponentStudent {
   }
 
   snipImage(): void {
-    this.NotebookService.addNote(
+    this.notebookService.addNote(
       this.StudentDataService.getCurrentNodeId(),
       convertToPNGFile(this.canvas)
     );
@@ -841,18 +841,20 @@ export class LabelStudentComponent extends ComponentStudent {
         const charactersPerLine = connectedComponent.charactersPerLine;
         const spaceInbetweenLines = connectedComponent.spaceInbetweenLines;
         const fontSize = connectedComponent.fontSize;
-        this.LabelService.createImageFromText(
-          response,
-          null,
-          null,
-          charactersPerLine,
-          null,
-          spaceInbetweenLines,
-          fontSize
-        ).then((image: string) => {
-          this.setBackgroundImage(image);
-          this.studentDataChanged();
-        });
+        this.labelService
+          .createImageFromText(
+            response,
+            null,
+            null,
+            charactersPerLine,
+            null,
+            spaceInbetweenLines,
+            fontSize
+          )
+          .then((image: string) => {
+            this.setBackgroundImage(image);
+            this.studentDataChanged();
+          });
       }
     }
   }
