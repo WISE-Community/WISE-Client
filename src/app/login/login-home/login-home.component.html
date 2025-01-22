@@ -10,7 +10,7 @@
         We apologize for the inconvenience.
       </p>
       <p>
-        <mat-form-field appearance="fill" fxFlex>
+        <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Username</mat-label>
           <input
             matInput
@@ -23,7 +23,7 @@
         </mat-form-field>
       </p>
       <p>
-        <mat-form-field appearance="fill" fxFlex>
+        <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Password</mat-label>
           <input
             matInput
@@ -48,12 +48,11 @@
       </ng-container>
       <p>
         <button
-          fxFlex
           mat-flat-button
           color="primary"
           type="submit"
           [disabled]="processing"
-          class="button--progress"
+          class="button--progress w-full"
         >
           <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
           <span i18n>Sign In</span>

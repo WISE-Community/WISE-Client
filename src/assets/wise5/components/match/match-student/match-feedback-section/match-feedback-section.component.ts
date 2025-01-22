@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { MatchContent } from '../../MatchContent';
 
 @Component({
+  standalone: true,
   selector: 'match-feedback-section',
   templateUrl: 'match-feedback-section.component.html'
 })
-export class MatchFeedbackSection {
+export class MatchFeedbackSectionComponent {
   @Input() componentContent: MatchContent;
   @Input() hasCorrectAnswer: boolean;
   @Input() isCorrect: boolean;

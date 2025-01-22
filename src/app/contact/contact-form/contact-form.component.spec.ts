@@ -15,7 +15,7 @@ import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
-import { getErrorMessage } from '../../common/test-helper';
+import { By } from '@angular/platform-browser';
 
 export class MockStudentService {
   getTeacherList(): Observable<User> {
@@ -154,7 +154,7 @@ function submit_showErrorMessage(): void {
     const httpPostSpy = httpPostSpyAndReturn('error');
     await submitAndDetectChanges();
     expect(httpPostSpy).toHaveBeenCalled();
-    expect(getErrorMessage(fixture)).toContain(
+    expect(fixture.debugElement.query(By.css('.warn')).nativeElement.textContent).toContain(
       'Sorry, there was a problem submitting the form. Please try again.'
     );
   });
@@ -168,7 +168,7 @@ function submit_showRecaptchaErrorMessage(): void {
     const httpPostSpy = httpPostSpyAndReturn('error');
     await submitAndDetectChanges();
     expect(httpPostSpy).toHaveBeenCalled();
-    expect(getErrorMessage(fixture)).toContain(
+    expect(fixture.debugElement.query(By.css('.warn')).nativeElement.textContent).toContain(
       'Recaptcha failed. Please reload the page and try again!'
     );
   });

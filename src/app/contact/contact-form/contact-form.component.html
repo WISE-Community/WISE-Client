@@ -19,11 +19,11 @@
         role="form"
         (submit)="submit()"
         [formGroup]="contactFormGroup"
-        fxLayout="column"
+        class="flex flex-col"
       >
         <h2 class="accent center" i18n>Contact WISE</h2>
         <p>
-          <mat-form-field appearance="fill" fxFlex>
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label i18n>Name</mat-label>
             <input matInput id="name" name="name" formControlName="name" />
             <mat-error *ngIf="contactFormGroup.controls['name'].hasError('required')" i18n
@@ -32,7 +32,7 @@
           </mat-form-field>
         </p>
         <p *ngIf="!isStudent">
-          <mat-form-field appearance="fill" fxFlex>
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label i18n>Email</mat-label>
             <input matInput id="email" name="email" formControlName="email" />
             <mat-error *ngIf="contactFormGroup.controls['email'].hasError('required')" i18n
@@ -44,7 +44,7 @@
           </mat-form-field>
         </p>
         <p *ngIf="isStudent && teachers.length > 0">
-          <mat-form-field appearance="fill" fxFlex>
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label i18n>Teacher</mat-label>
             <mat-select formControlName="teacher">
               <mat-option *ngFor="let teacher of teachers" [value]="teacher.username">
@@ -57,7 +57,7 @@
           </mat-form-field>
         </p>
         <p>
-          <mat-form-field appearance="fill" fxFlex>
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label i18n>Issue Type</mat-label>
             <mat-select formControlName="issueType">
               <mat-option *ngFor="let issueType of issueTypes" [value]="issueType.key">
@@ -70,13 +70,13 @@
           </mat-form-field>
         </p>
         <p *ngIf="projectName">
-          <mat-form-field appearance="fill" fxFlex>
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label i18n>Project Name</mat-label>
             <input matInput name="projectName" [value]="projectName" disabled />
           </mat-form-field>
         </p>
         <p>
-          <mat-form-field appearance="fill" fxFlex>
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label i18n>Summary</mat-label>
             <input matInput id="summary" name="summary" formControlName="summary" />
             <mat-error *ngIf="contactFormGroup.controls['summary'].hasError('required')" i18n
@@ -85,7 +85,7 @@
           </mat-form-field>
         </p>
         <p>
-          <mat-form-field appearance="fill" fxFlex>
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label i18n>Description</mat-label>
             <textarea
               matInput
@@ -110,26 +110,26 @@
           <div>&nbsp;</div>
         </ng-container>
         <ng-template #error>
-          <mat-error
+          <p
             *ngIf="isRecaptchaEnabled && isRecaptchaError; else genericError"
-            class="center"
+            class="center warn"
             i18n
-            >Recaptcha failed. Please reload the page and try again!</mat-error
           >
+            Recaptcha failed. Please reload the page and try again!
+          </p>
         </ng-template>
         <ng-template #genericError>
-          <mat-error class="center" i18n>
+          <p class="center warn" i18n>
             Sorry, there was a problem submitting the form. Please try again.
-          </mat-error>
+          </p>
         </ng-template>
         <p>
           <button
-            fxFlex
             mat-flat-button
             color="primary"
             type="submit"
             [disabled]="!contactFormGroup.valid || isSendingRequest"
-            class="button--progress"
+            class="button--progress w-full"
           >
             <mat-progress-bar *ngIf="isSendingRequest" mode="indeterminate"></mat-progress-bar>
             <ng-container i18n>Submit</ng-container>

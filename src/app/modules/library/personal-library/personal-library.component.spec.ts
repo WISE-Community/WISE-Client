@@ -268,7 +268,8 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
           searchValue: 'world',
           dciArrangementValue: [],
           disciplineValue: [],
-          peValue: []
+          peValue: [],
+          researchProjectValue: []
         });
         expect(await harness.getSelectedProjectIds()).toEqual([]);
       });

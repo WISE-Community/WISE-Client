@@ -73,6 +73,7 @@
 .about__pic {
   width: 50%;
   height: auto;
+  display: inline;
 
   @media (min-width: breakpoint('sm.min')) {
     width: 25%;

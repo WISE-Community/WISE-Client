@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
@@ -10,49 +14,69 @@ import { TeacherWebSocketService } from '../../../../services/teacherWebSocketSe
 import { NodeService } from '../../../../services/nodeService';
 import { generateRandomKey } from '../../../../common/string/string';
 import { Node } from '../../../../common/Node';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AlertStatusCornerComponent } from '../../../../../../app/classroom-monitor/alert-status-corner/alert-status-corner.component';
+import { NavItemProgressComponent } from '../../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
+import { StatusIconComponent } from '../../../../../../app/classroom-monitor/status-icon/status-icon.component';
+import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
+import { NavItemScoreComponent } from '../navItemScore/nav-item-score.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
+  imports: [
+    AlertStatusCornerComponent,
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatTooltipModule,
+    NavItemProgressComponent,
+    NavItemScoreComponent,
+    NodeIconComponent,
+    StatusIconComponent
+  ],
   selector: 'nav-item',
-  templateUrl: './nav-item.component.html',
-  styleUrls: ['./nav-item.component.scss']
+  standalone: true,
+  styleUrl: './nav-item.component.scss',
+  templateUrl: './nav-item.component.html'
 })
 export class NavItemComponent implements OnInit {
-  alertIconClass: string;
-  alertIconLabel: string;
-  alertIconName: string;
-  alertNotifications: any;
-  currentNode: any;
-  currentNodeStatus: any;
-  currentPeriod: any;
-  currentWorkgroup: any;
-  expanded: boolean = false;
-  hasAlert: boolean = false;
-  hasRubrics: boolean;
-  icon: any;
-  isCurrentNode: boolean;
-  isGroup: boolean;
-  item: any;
-  maxScore: number;
-  newAlert: boolean = false;
-  nodeHasWork: boolean;
+  protected alertIconClass: string;
+  protected alertIconLabel: string;
+  protected alertIconName: string;
+  private alertNotifications: any;
+  private currentNode: any;
+  protected currentPeriod: any;
+  private currentWorkgroup: any;
+  protected expanded: boolean = false;
+  protected hasRubrics: boolean;
+  protected icon: any;
+  private isCurrentNode: boolean;
+  protected isGroup: boolean;
+  protected item: any;
+  protected maxScore: number;
+  protected newAlert: boolean = false;
+  protected nodeHasWork: boolean;
   @Input() nodeId: string;
-  nodeTitle: string;
+  protected nodeTitle: string;
   @Output() onExpandedEvent: EventEmitter<any> = new EventEmitter();
-  parentGroupId: string = null;
-  rubricIconClass: string;
-  rubricIconLabel: string;
-  rubricIconName: string;
-  subscriptions: Subscription = new Subscription();
+  protected rubricIconClass: string;
+  protected rubricIconLabel: string;
+  protected rubricIconName: string;
+  private subscriptions: Subscription = new Subscription();
   @Input() type: string;
 
   constructor(
     private annotationService: AnnotationService,
     private classroomStatusService: ClassroomStatusService,
+    private dataService: TeacherDataService,
     private nodeService: NodeService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService,
     private snackBar: MatSnackBar,
-    private dataService: TeacherDataService,
     private webSocketService: TeacherWebSocketService
   ) {}
 
@@ -70,13 +94,8 @@ export class NavItemComponent implements OnInit {
     }
     this.currentPeriod = this.dataService.getCurrentPeriod();
     this.currentWorkgroup = this.dataService.getCurrentWorkgroup();
-    this.setCurrentNodeStatus();
     this.maxScore = this.projectService.getMaxScoreForNode(this.nodeId);
     this.icon = this.projectService.getNode(this.nodeId).getIcon();
-    const parentGroup = this.projectService.getParentGroup(this.nodeId);
-    if (parentGroup != null) {
-      this.parentGroupId = parentGroup.id;
-    }
     this.getAlertNotifications();
     this.hasRubrics = this.projectService.getNode(this.nodeId).getNumRubrics() > 0;
     this.alertIconLabel = $localize`Has new alert(s)`;
@@ -97,7 +116,6 @@ export class NavItemComponent implements OnInit {
   private subscribeStudentStatusReceived(): void {
     this.subscriptions.add(
       this.classroomStatusService.studentStatusReceived$.subscribe(() => {
-        this.setCurrentNodeStatus();
         this.getAlertNotifications();
       })
     );
@@ -346,22 +364,12 @@ export class NavItemComponent implements OnInit {
     }
   }
 
-  private setCurrentNodeStatus(): void {
-    if (this.currentWorkgroup) {
-      const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
-        this.currentWorkgroup.workgroupId
-      );
-      this.currentNodeStatus = studentStatus.nodeStatuses[this.nodeId];
-    }
-  }
-
   private getAlertNotifications(): void {
     this.alertNotifications = this.notificationService.getAlertNotifications({
       nodeId: this.nodeId,
       periodId: this.currentPeriod.periodId,
       toWorkgroupId: this.currentWorkgroup ? this.currentWorkgroup.workgroupId : null
     });
-    this.hasAlert = this.alertNotifications.length > 0;
     this.newAlert = this.hasNewAlert();
   }
 

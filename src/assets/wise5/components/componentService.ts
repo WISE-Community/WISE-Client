@@ -15,8 +15,6 @@ export class ComponentService {
   private notifyConnectedComponentSource = new Subject<any>();
   public notifyConnectedComponentSource$ = this.notifyConnectedComponentSource.asObservable();
 
-  constructor() {}
-
   getDomIdEnding(nodeId: string, componentId: string, componentState: any): string {
     if (componentState == null) {
       return `${nodeId}-${componentId}`;
