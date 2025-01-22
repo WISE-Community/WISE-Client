@@ -1,25 +1,22 @@
 import { fabric } from 'fabric';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { LabelStudent } from './label-student.component';
+import { LabelStudentComponent } from './label-student.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockComponents } from 'ng-mocks';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 
-let component: LabelStudent;
-let fixture: ComponentFixture<LabelStudent>;
-
+let component: LabelStudentComponent;
+let fixture: ComponentFixture<LabelStudentComponent>;
 describe('LabelStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [LabelStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
-    fixture = TestBed.createComponent(LabelStudent);
+      declarations: [MockComponents(ComponentHeaderComponent)],
+      imports: [LabelStudentComponent, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    });
+    fixture = TestBed.createComponent(LabelStudentComponent);
     component = fixture.componentInstance;
     const componentContent = {
       id: 'component1',

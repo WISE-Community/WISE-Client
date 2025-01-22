@@ -47,7 +47,7 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
   styleUrl: 'label-student.component.scss',
   templateUrl: 'label-student.component.html'
 })
-export class LabelStudent extends ComponentStudent {
+export class LabelStudentComponent extends ComponentStudent {
   backgroundImage: string;
   canvas: any;
   canvasHeight: number = 600;
