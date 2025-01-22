@@ -19539,8 +19539,8 @@ Warning: This will delete all existing choices and buckets in this component.</s
       <trans-unit id="0f72a164f5a5d10d1fbdeeb84ac80a63c04b7e1b" datatype="html">
         <source>Add item</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-choice-button/add-choice-button.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-student/add-choice-button/add-choice-button.component.ts</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6123b25814e07de8f9454c45375c93642f5a87fb" datatype="html">
