@@ -1,5 +1,7 @@
+import { CRaterIdea } from './CRaterIdea';
+
 export class CRaterRubric {
-  private ideas: any = [];
+  private ideas: CRaterIdea[] = [];
 
   constructor(rubric: any = { ideas: [] }) {
     this.ideas = rubric.ideas;
