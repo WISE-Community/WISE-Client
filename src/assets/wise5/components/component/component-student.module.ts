@@ -13,7 +13,7 @@ import { DrawStudentModule } from '../draw/draw-student/draw-student-module';
 import { EmbeddedStudentModule } from '../embedded/embedded-student/embedded-student.module';
 import { GraphStudentModule } from '../graph/graph-student/graph-student.module';
 import { HtmlStudentComponent } from '../html/html-student/html-student.component';
-import { LabelStudentModule } from '../label/label-student/label-student.module';
+import { LabelStudentComponent } from '../label/label-student/label-student.component';
 import { MatchStudentModule } from '../match/match-student/match-student.module';
 import { OpenResponseStudentModule } from '../openResponse/open-response-student/open-response-student.module';
 import { OutsideUrlStudentModule } from '../outsideURL/outside-url-student/outside-url-student.module';
@@ -43,7 +43,7 @@ import { MultipleChoiceStudentComponent } from '../multipleChoice/multiple-choic
     HelpIconComponent,
     HighchartsChartModule,
     HtmlStudentComponent,
-    LabelStudentModule,
+    LabelStudentComponent,
     MatchStudentModule,
     MultipleChoiceStudentComponent,
     OpenResponseStudentModule,
