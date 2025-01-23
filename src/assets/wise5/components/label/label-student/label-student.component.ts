@@ -48,6 +48,7 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
   templateUrl: 'label-student.component.html'
 })
 export class LabelStudentComponent extends ComponentStudent {
+  protected addNewLabelButtonVisible: boolean = true;
   backgroundImage: string;
   canvas: any;
   canvasHeight: number = 600;
@@ -58,7 +59,6 @@ export class LabelStudentComponent extends ComponentStudent {
   editLabelMode: boolean = false;
   enableCircles: boolean = true;
   ENTER_KEY_CODE: number = 13;
-  isAddNewLabelButtonVisible: boolean = true;
   isResetButtonVisible: boolean = true;
   labels: any[] = [];
   lineZIndex: number = 0;
@@ -139,12 +139,11 @@ export class LabelStudentComponent extends ComponentStudent {
     this.enableCircles = componentContent.enableCircles;
     this.isSaveButtonVisible = componentContent.showSaveButton;
     this.isSubmitButtonVisible = componentContent.showSubmitButton;
-    this.isAddNewLabelButtonVisible = componentContent.canCreateLabels;
+    this.addNewLabelButtonVisible = componentContent.canCreateLabels && !this.isDisabled;
     if (this.onlyHasShowWorkConnectedComponents()) {
       this.isDisabled = true;
     }
     if (this.isDisabled) {
-      this.isAddNewLabelButtonVisible = false;
       this.isResetButtonVisible = false;
     }
   }
@@ -374,8 +373,31 @@ export class LabelStudentComponent extends ComponentStudent {
     });
   }
 
-  addNewLabel(): void {
-    this.createLabelOnCanvas();
+  protected addNewLabel(): void {
+    const newLabelLocation = this.getNewLabelLocation();
+    const newLabel = this.labelService.createLabel(
+      newLabelLocation.pointX,
+      newLabelLocation.pointY,
+      newLabelLocation.textX,
+      newLabelLocation.textY,
+      $localize`A New Label`,
+      'blue',
+      true,
+      true,
+      this.componentContent.canvasWidth,
+      this.componentContent.canvasHeight,
+      this.componentContent.pointSize,
+      this.componentContent.fontSize,
+      this.componentContent.labelWidth,
+      this.studentDataVersion,
+      this.labelService.getTimestamp(),
+      false
+    );
+    this.labelService.addLabelToCanvas(this.canvas, newLabel, this.enableCircles);
+    this.addListenersToLabel(newLabel);
+    this.labels.push(newLabel);
+    this.selectLabel(newLabel);
+    this.studentDataChanged();
   }
 
   /**
@@ -499,36 +521,6 @@ export class LabelStudentComponent extends ComponentStudent {
       submitCounter: submitCounter,
       version: studentDataVersion
     };
-  }
-
-  createLabelOnCanvas(): void {
-    const newLabelLocation = this.getNewLabelLocation();
-    const canEdit = true;
-    const canDelete = true;
-    const isStarterLabel = false;
-    const newLabel = this.labelService.createLabel(
-      newLabelLocation.pointX,
-      newLabelLocation.pointY,
-      newLabelLocation.textX,
-      newLabelLocation.textY,
-      $localize`A New Label`,
-      'blue',
-      canEdit,
-      canDelete,
-      this.componentContent.canvasWidth,
-      this.componentContent.canvasHeight,
-      this.componentContent.pointSize,
-      this.componentContent.fontSize,
-      this.componentContent.labelWidth,
-      this.studentDataVersion,
-      this.labelService.getTimestamp(),
-      isStarterLabel
-    );
-    this.labelService.addLabelToCanvas(this.canvas, newLabel, this.enableCircles);
-    this.addListenersToLabel(newLabel);
-    this.labels.push(newLabel);
-    this.selectLabel(newLabel);
-    this.studentDataChanged();
   }
 
   getNewLabelLocation(): any {
