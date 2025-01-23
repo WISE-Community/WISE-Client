@@ -20,7 +20,7 @@ import { ComponentStudent } from '../../../component-student.component';
 import { ComponentService } from '../../../componentService';
 import { Choice, createChoiceFromNotebookItem } from '../../choice';
 import { MatchService } from '../../matchService';
-import { AddMatchChoiceDialog } from '../add-match-choice-dialog/add-match-choice-dialog';
+import { AddMatchChoiceDialogComponent } from '../add-match-choice-dialog/add-match-choice-dialog';
 import { copy } from '../../../../common/object/object';
 import { MatchCdkDragDrop } from '../MatchCdkDragDrop';
 import { Container } from '../container';
@@ -605,7 +605,7 @@ export class MatchStudentDefault extends ComponentStudent {
 
   protected addChoice(): void {
     this.dialog
-      .open(AddMatchChoiceDialog, {
+      .open(AddMatchChoiceDialogComponent, {
         panelClass: 'dialog-sm'
       })
       .afterClosed()

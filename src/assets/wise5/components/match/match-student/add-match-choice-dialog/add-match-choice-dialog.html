@@ -2,20 +2,14 @@
   <h2 mat-dialog-title i18n>Enter Item Text</h2>
   <mat-dialog-content>
     <mat-form-field style="width: 100%">
-      <input
-        matInput
-        id="choiceText"
-        name="choiceText"
-        formControlName="choiceText"
-        (keydown.enter)="save()"
-      />
-      <mat-error *ngIf="addChoiceFormGroup.controls['choiceText'].hasError('required')" i18n
-        >Item Text required</mat-error
-      >
+      <input matInput name="choiceText" formControlName="choiceText" (keydown.enter)="save()" />
+      @if (addChoiceFormGroup.controls['choiceText'].hasError('required')) {
+      <mat-error i18n>Item Text required</mat-error>
+      }
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close i18n>Cancel</button>
+    <button mat-button type="button" (click)="closeDialog()" i18n>Cancel</button>
     <button
       mat-flat-button
       color="primary"
