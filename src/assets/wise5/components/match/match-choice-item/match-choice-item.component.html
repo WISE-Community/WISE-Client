@@ -1,29 +1,37 @@
 <mat-card appearance="outlined" class="match-item">
   <div fxLayout="row" fxLayoutGap="4px">
-    <mat-icon *ngIf="!isDisabled" class="text-disabled">drag_indicator</mat-icon>
+    @if (!isDisabled) {
+      <mat-icon class="text-disabled">drag_indicator</mat-icon>
+    }
     <div class="item-content" [innerHTML]="item.value"></div>
-    <span fxFlex *ngIf="item.studentCreated"></span>
-    <delete-choice-button
-      *ngIf="item.studentCreated"
-      [buckets]="buckets"
-      [isDisabled]="isDisabled"
-      [item]="item"
-      (onItemDeleted)="onStudentDataChanged.next()"
-    ></delete-choice-button>
+    @if (item.studentCreated) {
+      <span fxFlex></span>
+    }
+    @if (item.studentCreated) {
+      <delete-choice-button
+        [buckets]="buckets"
+        [isDisabled]="isDisabled"
+        [item]="item"
+        (onItemDeleted)="onStudentDataChanged.next()"
+      />
+    }
   </div>
-  <div
-    *ngIf="item.feedback"
-    class="feedback mat-small text-secondary-bg"
-    fxLayout="row"
-    fxLayoutAlign="start center"
-    fxLayoutGap="4px"
-    [ngClass]="{
-      'success-bg': item.status === 'correct',
-      'info-bg': item.status === 'warn',
-      'warn-bg': item.status === 'incorrect'
-    }"
-  >
-    <match-status-icon *ngIf="item.status" [status]="item.status" />
-    <div [innerHTML]="item.feedback"></div>
-  </div>
+  @if (item.feedback) {
+    <div
+      class="feedback mat-small text-secondary-bg"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="4px"
+      [ngClass]="{
+        'success-bg': item.status === 'correct',
+        'info-bg': item.status === 'warn',
+        'warn-bg': item.status === 'incorrect'
+      }"
+    >
+      @if (item.status) {
+        <match-status-icon [status]="item.status" />
+      }
+      <div [innerHTML]="item.feedback"></div>
+    </div>
+  }
 </mat-card>
