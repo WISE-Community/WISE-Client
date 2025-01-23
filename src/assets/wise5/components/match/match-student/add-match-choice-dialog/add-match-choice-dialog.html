@@ -2,13 +2,7 @@
   <h2 mat-dialog-title i18n>Enter Item Text</h2>
   <mat-dialog-content>
     <mat-form-field style="width: 100%">
-      <input
-        matInput
-        id="choiceText"
-        name="choiceText"
-        formControlName="choiceText"
-        (keydown.enter)="save()"
-      />
+      <input matInput name="choiceText" formControlName="choiceText" (keydown.enter)="save()" />
       @if (addChoiceFormGroup.controls['choiceText'].hasError('required')) {
       <mat-error i18n>Item Text required</mat-error>
       }
