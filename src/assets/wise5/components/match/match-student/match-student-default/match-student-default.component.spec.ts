@@ -134,6 +134,7 @@ describe('MatchStudentDefaultComponent', () => {
   checkAnswer();
   checkAnswerAndDisplayFeedback();
   createComponentStateObject();
+  createMergedComponentState();
   isAuthorHasSpecifiedACorrectPosition();
   getFeedbackObject();
   getCleanedValue();
@@ -441,6 +442,39 @@ function createComponentStateObject() {
       expect(componentState.studentData.buckets[0].items[0].value).toEqual(choiceValue1);
       expect(componentState.studentData.buckets[0].items[1].value).toEqual(choiceValue2);
       expect(componentState.studentData.buckets[0].items[2].value).toEqual(choiceValue3);
+    });
+  });
+}
+
+function createMergedComponentState() {
+  describe('createMergedComponentState()', () => {
+    it('should add detected ideas to source bucket if componentType is DialogGuidance', () => {
+      const componentState = {
+        componentType: 'DialogGuidance',
+        studentData: {
+          responses: [
+            {
+              ideas: [
+                { name: '1', detected: true },
+                { name: '2', detected: false },
+                { name: '3', detected: false }
+              ]
+            },
+            {
+              ideas: [
+                { name: '1', detected: false },
+                { name: '2', detected: false },
+                { name: '3', detected: true }
+              ]
+            }
+          ]
+        }
+      };
+      expect(component.buckets[0].items.length).toEqual(3);
+      component.createMergedComponentState([componentState]);
+      expect(component.buckets[0].items.length).toEqual(5);
+      expect(component.buckets[0].items[3].value).toEqual('1');
+      expect(component.buckets[0].items[4].value).toEqual('3');
     });
   });
 }
