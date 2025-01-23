@@ -7,7 +7,7 @@ import { NgClass } from '@angular/common';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [FlexLayoutModule, MatchStatusIconComponent, MatIconModule, MatCardModule, NgClass],
+  imports: [FlexLayoutModule, MatCardModule, MatchStatusIconComponent, MatIconModule, NgClass],
   selector: 'match-choice-item',
   standalone: true,
   styleUrl: 'match-choice-item.component.scss',
