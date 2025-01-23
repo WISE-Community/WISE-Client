@@ -7,15 +7,14 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatError, MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   imports: [
     MatButtonModule,
-    MatDialogActions,
-    MatDialogContent,
+    MatDialogModule,
     MatError,
     MatFormField,
     MatInputModule,
