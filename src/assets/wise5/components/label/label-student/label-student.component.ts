@@ -431,7 +431,7 @@ export class LabelStudentComponent extends ComponentStudent {
   getTextCoordinate(fabricObject: any): any {
     let textX: number;
     let textY: number;
-    if (this.isStudentDataVersion(1)) {
+    if (this.studentDataVersion == 1) {
       const lineObject = fabricObject.line;
 
       // get the offset of the end of the line (this is where the text object is also located)
@@ -483,7 +483,7 @@ export class LabelStudentComponent extends ComponentStudent {
       this.getLabelData(),
       this.backgroundImage,
       this.submitCounter,
-      this.getStudentDataVersion()
+      this.studentDataVersion
     );
     componentState.studentData = studentData;
     componentState.isSubmit = this.isSubmit;
@@ -517,7 +517,7 @@ export class LabelStudentComponent extends ComponentStudent {
     };
   }
 
-  getNewLabelLocation(): any {
+  private getNewLabelLocation(): any {
     const nextPointLocation = this.getNextPointLocation();
     const pointX = nextPointLocation.pointX;
     const pointY = nextPointLocation.pointY;
@@ -532,7 +532,7 @@ export class LabelStudentComponent extends ComponentStudent {
     };
   }
 
-  getNextPointLocation(): any {
+  private getNextPointLocation(): any {
     return (
       this.getUnoccupiedPointLocation() || {
         pointX: this.NEW_LABEL_X_LOCATION,
@@ -541,12 +541,12 @@ export class LabelStudentComponent extends ComponentStudent {
     );
   }
 
-  getNextTextLocation(pointX: number, pointY: number): any {
+  private getNextTextLocation(pointX: number, pointY: number): any {
     let textX = null;
     let textY = null;
     if (this.enableCircles) {
       // place the text to the bottom right of the circle
-      if (this.isStudentDataVersion(1)) {
+      if (this.studentDataVersion == 1) {
         // text is relatively positioned
         textX = 100;
         textY = 100;
@@ -730,12 +730,7 @@ export class LabelStudentComponent extends ComponentStudent {
     return wrappedText;
   }
 
-  /**
-   * Remove a label from the canvas.
-   * @param canvas The canvas.
-   * @param label A canvas label object that contains a circle object, line object, and text object.
-   */
-  removeLabelFromCanvas(canvas: any, label: any): void {
+  private removeLabelFromCanvas(canvas: any, label: any): void {
     canvas.remove(label.circle);
     canvas.remove(label.line);
     canvas.remove(label.text);
@@ -857,9 +852,10 @@ export class LabelStudentComponent extends ComponentStudent {
     return null;
   }
 
-  resetButtonClicked(): void {
+  protected reset(): void {
     if (confirm($localize`Are you sure you want to reset to the initial state?`)) {
-      this.removeAllLabels();
+      this.labels.forEach((label: any) => this.removeLabelFromCanvas(this.canvas, label));
+      this.labels = [];
       if (this.componentContent.backgroundImage != null) {
         this.setBackgroundImage(this.componentContent.backgroundImage);
       }
@@ -872,23 +868,8 @@ export class LabelStudentComponent extends ComponentStudent {
     }
   }
 
-  removeAllLabels(): void {
-    for (const label of this.labels) {
-      this.removeLabelFromCanvas(this.canvas, label);
-    }
-    this.labels = [];
-  }
-
   setStudentDataVersion(studentDataVersion: number): void {
     this.studentDataVersion = studentDataVersion;
-  }
-
-  getStudentDataVersion(): number {
-    return this.studentDataVersion;
-  }
-
-  isStudentDataVersion(studentDataVersion: number): boolean {
-    return this.getStudentDataVersion() == studentDataVersion;
   }
 
   onlyHasShowWorkConnectedComponents(): boolean {
@@ -918,7 +899,7 @@ export class LabelStudentComponent extends ComponentStudent {
     this.setBackgroundImage(studentAsset.url);
   }
 
-  deleteBackgroundImage(): void {
+  protected deleteBackgroundImage(): void {
     if (confirm($localize`Are you sure you want to delete the background image?`)) {
       this.setBackgroundImage(null);
       this.studentDataChanged();

@@ -379,10 +379,6 @@ export class LabelService extends ComponentService {
     canvas.setHeight(height);
   }
 
-  isStudentDataVersion(componentState: any, studentDataVersion: number): boolean {
-    return componentState.studentData.version === studentDataVersion;
-  }
-
   addLabelsToCanvas(
     canvas: any,
     labels: any[],
