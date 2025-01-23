@@ -357,7 +357,7 @@ export class LabelStudentComponent extends ComponentStudent {
       this.enableCircles,
       this.studentDataVersion
     );
-    this.addListenersToLabels(fabricLabels);
+    fabricLabels.forEach((label: any) => this.addListenersToLabel(label));
     this.addLabelsToLocalArray(fabricLabels);
   }
 
@@ -409,23 +409,6 @@ export class LabelStudentComponent extends ComponentStudent {
 
   private sortByTimestampAscending(labelA: any, labelB: any): number {
     return labelA.timestamp - labelB.timestamp;
-  }
-
-  /**
-   * Get the simple JSON object that represents the label
-   * @param circle a Fabric circle object
-   * @returns a simple JSON object that represents the label
-   */
-  getLabelJSONObjectFromCircle(circle: any): any {
-    const { textX, textY } = this.getTextCoordinate(circle);
-    return {
-      pointX: parseInt(circle.get('left')),
-      pointY: parseInt(circle.get('top')),
-      textX: parseInt(textX),
-      textY: parseInt(textY),
-      text: this.getLabelFromCircle(circle).textString,
-      color: circle.text.backgroundColor
-    };
   }
 
   getTextCoordinate(fabricObject: any): any {
@@ -630,9 +613,7 @@ export class LabelStudentComponent extends ComponentStudent {
    * @return A label object.
    */
   getLabelFromCircle(circle: any): any {
-    return this.labels.find((label: any) => {
-      return label.circle == circle;
-    });
+    return this.labels.find((label: any) => label.circle == circle);
   }
 
   /**
@@ -641,26 +622,10 @@ export class LabelStudentComponent extends ComponentStudent {
    * @return A label object.
    */
   getLabelFromText(text: any): any {
-    return this.labels.find((label: any) => {
-      return label.text == text;
-    });
+    return this.labels.find((label: any) => label.text == text);
   }
 
-  makeSureXIsWithinXMinMaxLimits(x: number): number {
-    return this.labelService.makeSureValueIsWithinLimit(x, this.canvasWidth);
-  }
-
-  makeSureYIsWithinYMinMaxLimits(y: number): number {
-    return this.labelService.makeSureValueIsWithinLimit(y, this.canvasHeight);
-  }
-
-  addListenersToLabels(labels: any[]): void {
-    labels.forEach((label: any) => {
-      this.addListenersToLabel(label);
-    });
-  }
-
-  addListenersToLabel(label: any): void {
+  private addListenersToLabel(label: any): void {
     if (this.enableCircles) {
       label.circle.on('mousedown', () => {
         this.selectLabel(label);
@@ -676,7 +641,7 @@ export class LabelStudentComponent extends ComponentStudent {
    * and the button to delete the label.
    * @param label The label object.
    */
-  selectLabel(label: any): void {
+  private selectLabel(label: any): void {
     this.selectedLabel = label;
     if (label.canEdit) {
       this.selectedLabelText = label.text.text;
@@ -722,7 +687,7 @@ export class LabelStudentComponent extends ComponentStudent {
     this.canvas.renderAll();
   }
 
-  wrapTextIfNecessary(text: string): string {
+  private wrapTextIfNecessary(text: string): string {
     let wrappedText = text;
     if (this.componentContent.labelWidth != null && this.componentContent.labelWidth !== '') {
       wrappedText = wordWrap(text, this.componentContent.labelWidth);
@@ -754,10 +719,6 @@ export class LabelStudentComponent extends ComponentStudent {
 
   deleteLabel(label: any): void {
     this.removeLabelFromCanvas(this.canvas, label);
-    this.removeLabelFromLocalArray(label);
-  }
-
-  removeLabelFromLocalArray(label: any): void {
     this.labels.splice(this.labels.indexOf(label), 1);
   }
 

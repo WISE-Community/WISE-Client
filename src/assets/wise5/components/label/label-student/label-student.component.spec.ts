@@ -45,7 +45,6 @@ describe('LabelStudentComponent', () => {
 
   initializeComponent();
   setStudentWork();
-  getLabelJSONObjectFromCircle();
   getLabelJSONObjectFromText();
   createStudentData();
   getTextCoordinate();
@@ -120,31 +119,6 @@ function setStudentWork() {
     expect(component.studentDataVersion).toEqual(2);
     expect(component.labels.length).toEqual(3);
     expect(component.backgroundImage).toEqual(backgroundImage);
-  });
-}
-
-function getLabelJSONObjectFromCircle() {
-  it('should get label json object from circle', () => {
-    const circleLeft = 100;
-    const circleTop = 200;
-    const circle = new fabric.Circle({ left: circleLeft, top: circleTop });
-    const textLeft = 300;
-    const textTop = 400;
-    const textString = 'Leaf';
-    const textBackgroundColor = 'green';
-    circle.text = {
-      left: textLeft,
-      top: textTop,
-      backgroundColor: textBackgroundColor
-    };
-    spyOn(component, 'getLabelFromCircle').and.returnValue({ textString: textString });
-    const labelJson = component.getLabelJSONObjectFromCircle(circle);
-    expect(labelJson.pointX).toEqual(circleLeft);
-    expect(labelJson.pointY).toEqual(circleTop);
-    expect(labelJson.textX).toEqual(textLeft);
-    expect(labelJson.textY).toEqual(textTop);
-    expect(labelJson.text).toEqual(textString);
-    expect(labelJson.color).toEqual(textBackgroundColor);
   });
 }
 
