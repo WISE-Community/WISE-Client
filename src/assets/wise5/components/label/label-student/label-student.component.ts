@@ -332,14 +332,8 @@ export class LabelStudentComponent extends ComponentStudent {
   private setStarterLabels(componentContent: any): void {
     // Make sure starter labels have isStarterLabel set to true. Starter labels from old Label
     // component content did not have this field.
-    this.setIsStarterLabelTrue(componentContent.labels);
+    componentContent.labels.forEach((label: any) => (label.isStarterLabel = true));
     this.addLabelsToCanvas(componentContent.labels);
-  }
-
-  private setIsStarterLabelTrue(labels: any[]): void {
-    for (const label of labels) {
-      label.isStarterLabel = true;
-    }
   }
 
   setStudentWork(componentState: any): void {
@@ -351,7 +345,7 @@ export class LabelStudentComponent extends ComponentStudent {
     this.processLatestStudentWork();
   }
 
-  addLabelsToCanvas(labels: any[]): void {
+  private addLabelsToCanvas(labels: any[]): void {
     const fabricLabels = this.labelService.addLabelsToCanvas(
       this.canvas,
       labels,
