@@ -40,9 +40,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
-  declarations: [DialogResponseComponent, DialogResponsesComponent],
+  declarations: [DialogResponsesComponent],
   imports: [
     CommonModule,
+    DialogResponseComponent,
     DragDropModule,
     EditNotebookItemDialogModule,
     EditorModule,
