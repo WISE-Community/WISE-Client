@@ -11,23 +11,11 @@
     </ng-container>
     <img #bgRef src="{{ imgSrc }}" alt="{{ imgDescription }}" />
   </picture>
-  <div class="hero-wrap" fxLayoutAlign="center">
-    <div
-      class="hero-content"
-      fxLayout="column"
-      fxLayoutAlign="center center"
-      fxLayout.gt-sm="row"
-      fxLayoutGap="8px"
-      fxLayoutGap.gt-xs="24px"
-    >
+  <div class="hero-wrap flex justify-center">
+    <div class="hero-content flex flex-col items-center sm:flex-row gap-2 sm:gap-6">
       <div
-        class="hero-main-content"
+        class="hero-main-content with-sidecontent flex flex-col items-center sm:items-start justify-center flex-none sm:w-3/5"
         [ngClass]="{ 'with-sidecontent': sideRef }"
-        fxLayout="column"
-        fxLayoutAlign="center center"
-        fxLayoutAlign.gt-sm="{sideRef ? 'start center' : 'center center'}"
-        fxFlex="none"
-        fxFlex.gt-sm="60"
       >
         <ng-template #defaultHeadline>{{ headline }}</ng-template>
         <h1
@@ -52,9 +40,7 @@
       </div>
       <div
         *ngIf="sideRef"
-        fxLayoutAlign="end center"
-        fxFlex="none"
-        fxFlex.gt-sm="40"
+        class="flex items-center justify-center sm:justify-end flex-none w-full sm:w-2/5"
       >
         <ng-container *ngTemplateOutlet="sideRef"></ng-container>
       </div>

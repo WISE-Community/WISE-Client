@@ -13,14 +13,13 @@
   }
 
   &.isSplitScreen {
-    @media (min-width: breakpoint('md.min')) {
-      max-height: 1000px;
+    @screen md {
+      @apply max-h-[1000px];
     }
   }
 
   .notice {
-    margin-top: 0;
-    margin-bottom: 16px;
+    margin: 12px 0;
     max-width: none;
     background-color: transparent;
     padding: 0;
@@ -29,11 +28,4 @@
 
 .library-filter {
   margin: 0;
-
-  @media (max-width: breakpoint('xs.max')) {
-    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-    .mat-form-field-infix {
-      width: auto;
-    }
-  }
 }
