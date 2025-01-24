@@ -1,12 +1,6 @@
-<dialog-response
-  *ngFor="let response of responses"
-  [response]="response"
-  [computerAvatar]="computerAvatar"
->
-</dialog-response>
-<dialog-response
-  *ngIf="isWaitingForComputerResponse"
-  [response]="{ text: '...' }"
-  [computerAvatar]="computerAvatar"
->
-</dialog-response>
+@for (response of responses; track response) {
+  <dialog-response [response]="response" [computerAvatar]="computerAvatar" />
+}
+@if (isWaitingForComputerResponse) {
+  <dialog-response [response]="{ text: '...' }" [computerAvatar]="computerAvatar" />
+}

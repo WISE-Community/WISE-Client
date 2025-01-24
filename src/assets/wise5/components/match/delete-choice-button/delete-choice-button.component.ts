@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [MatIconModule, MatTooltipModule],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
   selector: 'delete-choice-button',
   standalone: true,
   styles: `
     .mat-mdc-icon-button {
-      height: 24px;
-      width: 24px;
-      line-height: 24px;
+      --mdc-icon-button-state-layer-size: 24px;
+      padding: 0;
     }
   `,
   template: `

@@ -6,16 +6,28 @@ import { CRaterIdea } from '../../assets/wise5/components/common/cRater/CRaterId
 import { CRaterScore } from '../../assets/wise5/components/common/cRater/CRaterScore';
 import { RawCRaterResponse } from '../../assets/wise5/components/common/cRater/RawCRaterResponse';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ProjectService } from '../../assets/wise5/services/projectService';
+import { ComponentContent } from '../../assets/wise5/common/ComponentContent';
 let service: CRaterService;
 let configService: ConfigService;
 let http: HttpTestingController;
+class MockProjectService {
+  getComponent(): ComponentContent {
+    return {} as ComponentContent;
+  }
+}
 
 describe('CRaterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [ConfigService, CRaterService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [
+        ConfigService,
+        CRaterService,
+        { provide: ProjectService, useClass: MockProjectService },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(CRaterService);
@@ -23,6 +35,7 @@ describe('CRaterService', () => {
 
   makeCRaterScoringRequest();
   getCRaterItemId();
+  getCRaterRubric();
   isCRaterEnabled();
   isCRaterScoreOnEvent();
   getCRaterFeedbackTextByScore();
@@ -261,6 +274,27 @@ function getDataFromResponse() {
       const cRaterResponse = service.getCRaterResponse(response, 1);
       expect(cRaterResponse.score).toEqual(score);
       expect(cRaterResponse.ideas).toEqual([]);
+    });
+  });
+}
+
+function getCRaterRubric() {
+  describe('getCRaterRubric', () => {
+    let projectService;
+    beforeEach(() => {
+      projectService = TestBed.inject(ProjectService);
+    });
+    it('should get CRater rubric when rubric exists on the component', () => {
+      spyOn(projectService, 'getComponent').and.returnValue({
+        cRaterRubric: { ideas: [{ name: '1', studentText: 'Idea 1' }] }
+      } as unknown as ComponentContent);
+      const cRaterRubric = service.getCRaterRubric('nodeId', 'componentId');
+      expect(cRaterRubric.getStudentTextForIdea('1')).toEqual('Idea 1');
+    });
+    it('should get an empty CRater rubric when rubric does not exists on the component', () => {
+      spyOn(projectService, 'getComponent').and.returnValue({} as unknown as ComponentContent);
+      const cRaterRubric = service.getCRaterRubric('nodeId', 'componentId');
+      expect(cRaterRubric.getStudentTextForIdea('1')).toEqual('1');
     });
   });
 }
