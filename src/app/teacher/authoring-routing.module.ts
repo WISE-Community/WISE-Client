@@ -154,7 +154,16 @@ const routes: Routes = [
               },
               {
                 path: 'import-component',
-                children: [{ path: 'choose-component', component: ChooseImportComponentComponent }]
+                children: [
+                  {
+                    path: 'choose-component',
+                    component: ChooseImportComponentComponent
+                  },
+                  {
+                    path: 'choose-unit',
+                    component: ChooseImportUnitComponent
+                  }
+                ]
               }
             ]
           },
