@@ -1,20 +1,36 @@
-import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
-import { generateRandomKey } from '../../../common/string/string';
+import { Component } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
+import { FormsModule } from '@angular/forms';
+import { generateRandomKey } from '../../../common/string/string';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatchService } from '../matchService';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { Subject } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 @Component({
-  selector: 'match-authoring',
-  templateUrl: 'match-authoring.component.html',
-  styleUrls: ['match-authoring.component.scss']
+  imports: [
+    EditComponentPrompt,
+    FormsModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatTooltipModule,
+    TranslatableAssetChooserComponent,
+    TranslatableInputComponent
+  ],
+  standalone: true,
+  styleUrl: 'match-authoring.component.scss',
+  templateUrl: 'match-authoring.component.html'
 })
-export class MatchAuthoring extends AbstractComponentAuthoring {
+export class MatchAuthoringComponent extends AbstractComponentAuthoring {
   defaultSourceBucketId: string = '0';
   feedbackChange: Subject<string> = new Subject<string>();
 
