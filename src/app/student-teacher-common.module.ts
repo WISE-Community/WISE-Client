@@ -30,7 +30,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
-import { DialogResponseComponent } from '../assets/wise5/components/dialogGuidance/dialog-response/dialog-response.component';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.module';
@@ -40,10 +39,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
-  declarations: [DialogResponsesComponent],
   imports: [
     CommonModule,
-    DialogResponseComponent,
+    DialogResponsesComponent,
     DragDropModule,
     EditNotebookItemDialogModule,
     EditorModule,
@@ -82,7 +80,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   ],
   exports: [
     CommonModule,
-    DialogResponseComponent,
     DialogResponsesComponent,
     DragDropModule,
     EditorModule,

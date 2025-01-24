@@ -1,23 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { DialogResponse } from '../DialogResponse';
+import { DialogResponseComponent } from '../dialog-response/dialog-response.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule, DialogResponseComponent],
   selector: 'dialog-responses',
-  templateUrl: './dialog-responses.component.html',
-  styleUrls: ['./dialog-responses.component.scss']
+  standalone: true,
+  styleUrl: './dialog-responses.component.scss',
+  templateUrl: './dialog-responses.component.html'
 })
-export class DialogResponsesComponent implements OnInit {
-  @Input()
-  computerAvatar: ComputerAvatar;
-
-  @Input()
-  responses: DialogResponse[] = [];
-
-  @Input()
-  isWaitingForComputerResponse: boolean = false;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+export class DialogResponsesComponent {
+  @Input() computerAvatar: ComputerAvatar;
+  @Input() isWaitingForComputerResponse: boolean;
+  @Input() responses: DialogResponse[] = [];
 }
