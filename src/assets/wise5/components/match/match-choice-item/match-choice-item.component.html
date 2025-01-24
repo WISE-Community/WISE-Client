@@ -1,5 +1,5 @@
 <mat-card appearance="outlined" class="match-item">
-  <div fxLayout="row" fxLayoutGap="4px">
+  <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="start center">
     <mat-icon *ngIf="!isDisabled" class="text-disabled">drag_indicator</mat-icon>
     <div class="item-content" [innerHTML]="item.value"></div>
     <span fxFlex *ngIf="item.studentCreated"></span>
@@ -9,7 +9,7 @@
       [isDisabled]="isDisabled"
       [item]="item"
       (onItemDeleted)="onStudentDataChanged.next()"
-    ></delete-choice-button>
+    />
   </div>
   <div
     *ngIf="item.feedback"
