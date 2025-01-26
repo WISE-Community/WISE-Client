@@ -1,18 +1,13 @@
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { Component } from '@angular/core';
-import { ConfigService } from '../../../services/configService';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { FormsModule } from '@angular/forms';
 import { generateRandomKey } from '../../../common/string/string';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatchService } from '../matchService';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { Subject } from 'rxjs';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
@@ -34,14 +29,8 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
   defaultSourceBucketId: string = '0';
   feedbackChange: Subject<string> = new Subject<string>();
 
-  constructor(
-    protected configService: ConfigService,
-    private matchService: MatchService,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, nodeService, projectAssetService, projectService);
+  ngOnInit(): void {
+    super.ngOnInit();
     this.subscriptions.add(
       this.feedbackChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.turnOnSubmitButtonIfFeedbackExists();
