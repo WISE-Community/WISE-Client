@@ -546,14 +546,6 @@ export class LabelStudentComponent extends ComponentStudent {
     return { textX: textX, textY: textY };
   }
 
-  getOccupiedPointLocations(): any {
-    const occupiedPointLocations = [];
-    for (const label of this.getLabelData()) {
-      occupiedPointLocations.push({ pointX: label.pointX, pointY: label.pointY });
-    }
-    return occupiedPointLocations;
-  }
-
   isPointOccupied(occupiedPointLocations: any[], pointX: number, pointY: number): boolean {
     for (const occupiedPointLocation of occupiedPointLocations) {
       if (occupiedPointLocation.pointX == pointX && occupiedPointLocation.pointY == pointY) {
@@ -564,7 +556,10 @@ export class LabelStudentComponent extends ComponentStudent {
   }
 
   getUnoccupiedPointLocation(): any {
-    const occupiedPointLocations = this.getOccupiedPointLocations();
+    const occupiedPointLocations = this.getLabelData().map((label) => ({
+      pointX: label.pointX,
+      pointY: label.pointY
+    }));
     for (let y = this.NEW_LABEL_Y_LOCATION; y < this.canvasHeight; y += this.SPACE_BETWEEN_LABELS) {
       for (
         let x = this.NEW_LABEL_X_LOCATION;

@@ -236,13 +236,12 @@ function limitObjectYPosition() {
 
 function getUnoccupiedPointLocation() {
   it('should get unoccupied point location when there are no occupied points', () => {
-    spyOn(component, 'getOccupiedPointLocations').and.returnValue([]);
     const unoccupiedPointLocation = component.getUnoccupiedPointLocation();
     expect(unoccupiedPointLocation.pointX).toEqual(80);
     expect(unoccupiedPointLocation.pointY).toEqual(80);
   });
   it('should get unoccupied point location when there are occupied points', () => {
-    spyOn(component, 'getOccupiedPointLocations').and.returnValue([
+    spyOn(component, 'getLabelData').and.returnValue([
       { pointX: 80, pointY: 80 },
       { pointX: 280, pointY: 80 }
     ]);
