@@ -1,5 +1,6 @@
 <edit-component-constraints [componentContent]="component.content" />
 <edit-component-json [component]="component"></edit-component-json>
+
 <div class="idea-descriptions notice-bg-bg">
   <h5 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
     <span i18n>Idea Descriptions</span>
@@ -16,14 +17,11 @@
     <span fxFlex></span>
   </h5>
   <ul>
-    <ng-container
-      *ngFor="
-        let idea of ideaDescriptions;
-        let ideaIndex = index;
-        let first = first;
-        let last = last
-      "
-    >
+    @for (
+      idea of ideaDescriptions;
+      track $index;
+      let ideaIndex = $index, first = $first, last = $last
+    ) {
       <li class="idea">
         <mat-card appearance="outlined" class="idea-content" fxLayout="row wrap" fxLayoutGap="8px">
           <div
@@ -37,17 +35,13 @@
           <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="8px" fxFlex>
             <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
               <mat-label i18n>Idea #</mat-label>
-              <input
-                matInput
-                [(ngModel)]="idea.expression"
-                (ngModelChange)="inputChanged.next($event)"
-              />
+              <input matInput [(ngModel)]="idea.name" (ngModelChange)="inputChanged.next($event)" />
             </mat-form-field>
             <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
               <mat-label i18n>Student-Friendly Description</mat-label>
               <textarea
                 matInput
-                [(ngModel)]="idea.feedback"
+                [(ngModel)]="idea.description"
                 (ngModelChange)="inputChanged.next($event)"
                 cdkTextareaAutosize
               >
@@ -67,7 +61,7 @@
           </div>
         </mat-card>
       </li>
-    </ng-container>
+    }
   </ul>
   <div [hidden]="getIdeaIndex() === 0">
     <button

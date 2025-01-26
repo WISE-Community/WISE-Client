@@ -18,8 +18,10 @@ export class DialogGuidanceService extends ComponentService {
     component.itemId = '';
     component.feedbackRules = [];
     component.isComputerAvatarEnabled = false;
-    component.computerAvatarSettings = this.computerAvatarService.getDefaultComputerAvatarSettings();
+    component.computerAvatarSettings =
+      this.computerAvatarService.getDefaultComputerAvatarSettings();
     component.version = 2;
+    component.cRaterRubric = { ideas: [] };
     return component;
   }
 
