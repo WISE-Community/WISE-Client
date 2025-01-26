@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { DeleteChoiceButtonComponent } from '../delete-choice-button/delete-choice-button.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatchStatusIconComponent } from '../match-status-icon/match-status-icon.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,13 +8,20 @@ import { NgClass } from '@angular/common';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [FlexLayoutModule, MatCardModule, MatchStatusIconComponent, MatIconModule, NgClass],
+  imports: [
+    DeleteChoiceButtonComponent,
+    FlexLayoutModule,
+    MatCardModule,
+    MatchStatusIconComponent,
+    MatIconModule,
+    NgClass
+  ],
   selector: 'match-choice-item',
   standalone: true,
   styleUrl: 'match-choice-item.component.scss',
   templateUrl: 'match-choice-item.component.html'
 })
-export class MatchChoiceItem {
+export class MatchChoiceItemComponent {
   @Input() buckets: any;
 
   @Input() hasCorrectAnswer: boolean;
