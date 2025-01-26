@@ -4,17 +4,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatchStatusIconComponent } from '../match-status-icon/match-status-icon.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
+    CommonModule,
     DeleteChoiceButtonComponent,
     FlexLayoutModule,
     MatCardModule,
     MatchStatusIconComponent,
-    MatIconModule,
-    NgClass
+    MatIconModule
   ],
   selector: 'match-choice-item',
   standalone: true,
@@ -23,12 +23,8 @@ import { NgClass } from '@angular/common';
 })
 export class MatchChoiceItemComponent {
   @Input() buckets: any;
-
   @Input() hasCorrectAnswer: boolean;
-
   @Input() isDisabled: boolean;
-
   @Input() item: any;
-
   @Output() onStudentDataChanged = new EventEmitter();
 }
