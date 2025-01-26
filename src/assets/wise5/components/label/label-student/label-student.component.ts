@@ -358,13 +358,7 @@ export class LabelStudentComponent extends ComponentStudent {
       this.studentDataVersion
     );
     fabricLabels.forEach((label: any) => this.addListenersToLabel(label));
-    this.addLabelsToLocalArray(fabricLabels);
-  }
-
-  addLabelsToLocalArray(labels: any[]): void {
-    labels.forEach((label: any) => {
-      this.labels.push(label);
-    });
+    fabricLabels.forEach((label: any) => this.labels.push(label));
   }
 
   protected addNewLabel(): void {
@@ -394,21 +388,12 @@ export class LabelStudentComponent extends ComponentStudent {
     this.studentDataChanged();
   }
 
-  /**
-   * Get the label data from the canvas.
-   * @returns An array of simple JSON objects that contain the label data.
-   */
   getLabelData(): any[] {
-    const labels = [];
-    this.canvas.getObjects('i-text').forEach((object: any) => {
-      labels.push(this.getLabelJSONObjectFromText(object));
-    });
-    labels.sort(this.sortByTimestampAscending);
+    const labels = this.canvas
+      .getObjects('i-text')
+      .map((object: any) => this.getLabelJSONObjectFromText(object));
+    labels.sort((labelA: any, labelB: any) => labelA.timestamp - labelB.timestamp);
     return labels;
-  }
-
-  private sortByTimestampAscending(labelA: any, labelB: any): number {
-    return labelA.timestamp - labelB.timestamp;
   }
 
   getTextCoordinate(fabricObject: any): any {
