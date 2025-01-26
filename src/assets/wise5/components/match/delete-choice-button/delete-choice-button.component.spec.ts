@@ -1,19 +1,16 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DeleteChoiceButton } from './delete-choice-button.component';
+import { DeleteChoiceButtonComponent } from './delete-choice-button.component';
 
-let component: DeleteChoiceButton;
-let fixture: ComponentFixture<DeleteChoiceButton>;
+let component: DeleteChoiceButtonComponent;
+let fixture: ComponentFixture<DeleteChoiceButtonComponent>;
 
 describe('DeleteChoiceButtonComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
-      declarations: [DeleteChoiceButton],
-      providers: [],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [DeleteChoiceButtonComponent],
+      providers: []
     });
-    fixture = TestBed.createComponent(DeleteChoiceButton);
+    fixture = TestBed.createComponent(DeleteChoiceButtonComponent);
     component = fixture.componentInstance;
     component.buckets = [{ items: [{ id: 1 }, { id: 2 }] }, { items: [{ id: 3 }] }];
     component.item = { id: 2 };
