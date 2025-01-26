@@ -12,11 +12,13 @@ import { TranslatableAssetChooserComponent } from '../../../authoringTool/compon
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   imports: [
     CommonModule,
     EditComponentPrompt,
+    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatCheckboxModule,
