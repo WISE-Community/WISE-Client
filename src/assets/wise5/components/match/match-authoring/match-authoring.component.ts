@@ -30,8 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: 'match-authoring.component.html'
 })
 export class MatchAuthoringComponent extends AbstractComponentAuthoring {
-  defaultSourceBucketId: string = '0';
-  feedbackChange: Subject<string> = new Subject<string>();
+  private defaultSourceBucketId: string = '0';
+  protected feedbackChange: Subject<string> = new Subject<string>();
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -43,13 +43,13 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     );
   }
 
-  turnOnSubmitButtonIfFeedbackExists() {
+  private turnOnSubmitButtonIfFeedbackExists() {
     if (this.componentHasFeedback()) {
       this.setShowSubmitButtonValue(true);
     }
   }
 
-  addChoice(): void {
+  protected addChoice(): void {
     const newChoice = {
       id: generateRandomKey(),
       value: ''
@@ -59,7 +59,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  addBucket(): void {
+  protected addBucket(): void {
     const newBucket = {
       id: generateRandomKey(),
       value: '',
@@ -70,7 +70,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  moveChoiceUp(index: number): void {
+  protected moveChoiceUp(index: number): void {
     if (index != 0) {
       this.moveChoiceUpInChoices(index);
       this.moveChoiceUpInAllBucketFeedback(index);
@@ -78,7 +78,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  moveChoiceDown(index: number): void {
+  protected moveChoiceDown(index: number): void {
     if (index < this.componentContent.choices.length - 1) {
       this.moveChoiceDownInChoices(index);
       this.moveChoiceDownInAllBucketFeedback(index);
@@ -86,29 +86,29 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  moveChoiceUpInChoices(index: number) {
+  private moveChoiceUpInChoices(index: number) {
     this.moveChoiceInChoices(index, -1);
   }
 
-  moveChoiceDownInChoices(index: number) {
+  private moveChoiceDownInChoices(index: number) {
     this.moveChoiceInChoices(index, 1);
   }
 
-  moveChoiceInChoices(index: number, amountToShift: number) {
+  private moveChoiceInChoices(index: number, amountToShift: number) {
     const choice = this.componentContent.choices[index];
     this.componentContent.choices.splice(index, 1);
     this.componentContent.choices.splice(index + amountToShift, 0, choice);
   }
 
-  moveChoiceUpInAllBucketFeedback(index: number) {
+  private moveChoiceUpInAllBucketFeedback(index: number) {
     this.moveChoiceInAllBucketFeedback(index, -1);
   }
 
-  moveChoiceDownInAllBucketFeedback(index: number) {
+  private moveChoiceDownInAllBucketFeedback(index: number) {
     this.moveChoiceInAllBucketFeedback(index, 1);
   }
 
-  moveChoiceInAllBucketFeedback(index: number, amountToShift: number) {
+  private moveChoiceInAllBucketFeedback(index: number, amountToShift: number) {
     const feedback = this.componentContent.feedback;
     for (const bucketFeedbackObj of feedback) {
       const bucketFeedbackChoices = bucketFeedbackObj.choices;
@@ -118,7 +118,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  deleteChoice(index: number): void {
+  protected deleteChoice(index: number): void {
     if (confirm($localize`Are you sure you want to delete this choice?`)) {
       const deletedChoice = this.componentContent.choices.splice(index, 1);
       this.removeChoiceFromFeedback(deletedChoice[0].id);
@@ -126,7 +126,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  moveBucketUp(index: number): void {
+  protected moveBucketUp(index: number): void {
     if (index > 0) {
       this.moveBucketUpInBuckets(index);
       this.moveBucketUpInBucketFeedback(index);
@@ -134,7 +134,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  moveBucketDown(index: number): void {
+  protected moveBucketDown(index: number): void {
     if (index < this.componentContent.buckets.length - 1) {
       this.moveBucketDownInBuckets(index);
       this.moveBucketDownInBucketFeedback(index);
@@ -142,29 +142,29 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  moveBucketUpInBuckets(index: number) {
+  private moveBucketUpInBuckets(index: number) {
     this.moveBucketInBuckets(index, -1);
   }
 
-  moveBucketDownInBuckets(index: number) {
+  private moveBucketDownInBuckets(index: number) {
     this.moveBucketInBuckets(index, 1);
   }
 
-  moveBucketInBuckets(index: number, amountToShift: number) {
+  private moveBucketInBuckets(index: number, amountToShift: number) {
     const bucket = this.componentContent.buckets[index];
     this.componentContent.buckets.splice(index, 1);
     this.componentContent.buckets.splice(index + amountToShift, 0, bucket);
   }
 
-  moveBucketUpInBucketFeedback(index: number) {
+  private moveBucketUpInBucketFeedback(index: number) {
     this.moveBucketInBucketFeedback(index, -1);
   }
 
-  moveBucketDownInBucketFeedback(index: number) {
+  private moveBucketDownInBucketFeedback(index: number) {
     this.moveBucketInBucketFeedback(index, 1);
   }
 
-  moveBucketInBucketFeedback(index: number, amountToShift: number) {
+  private moveBucketInBucketFeedback(index: number, amountToShift: number) {
     // the bucket feedback index for authored buckets starts at 1 because the source bucket is at 0
     const bucketFeedbackIndex = index + 1;
     const bucketFeedbackObj = this.componentContent.feedback[bucketFeedbackIndex];
@@ -176,7 +176,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     );
   }
 
-  deleteBucket(index: number): void {
+  protected deleteBucket(index: number): void {
     if (confirm($localize`Are you sure you want to delete this bucket?`)) {
       const deletedBucket = this.componentContent.buckets.splice(index, 1);
       if (deletedBucket != null && deletedBucket.length > 0) {
@@ -186,7 +186,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  addChoiceToFeedback(choiceId: string): void {
+  private addChoiceToFeedback(choiceId: string): void {
     const feedback = this.componentContent.feedback;
     for (const bucketFeedback of feedback) {
       const feedbackText = '';
@@ -195,7 +195,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  addBucketToFeedback(bucketId: string): void {
+  private addBucketToFeedback(bucketId: string): void {
     const feedback = this.componentContent.feedback;
     const bucket = {
       bucketId: bucketId,
@@ -211,7 +211,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     feedback.push(bucket);
   }
 
-  createFeedbackObject(
+  private createFeedbackObject(
     choiceId: string,
     feedback: string,
     isCorrect: boolean,
@@ -227,7 +227,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     };
   }
 
-  removeChoiceFromFeedback(choiceId: string): void {
+  private removeChoiceFromFeedback(choiceId: string): void {
     for (const bucketFeedback of this.componentContent.feedback) {
       bucketFeedback.choices = bucketFeedback.choices.filter((choice) => {
         return choice.choiceId !== choiceId;
@@ -235,7 +235,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  removeBucketFromFeedback(bucketId: string): void {
+  private removeBucketFromFeedback(bucketId: string): void {
     const feedback = this.componentContent.feedback;
     for (let f = 0; f < feedback.length; f++) {
       const bucketFeedback = feedback[f];
@@ -248,7 +248,7 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     }
   }
 
-  componentHasFeedback(): boolean {
+  private componentHasFeedback(): boolean {
     for (const feedback of this.componentContent.feedback) {
       for (const choice of feedback.choices) {
         if (choice.isCorrect || this.isNonEmpty(choice.feedback)) {
@@ -259,11 +259,11 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     return false;
   }
 
-  isNonEmpty(str: string): boolean {
+  private isNonEmpty(str: string): boolean {
     return str != null && str != '';
   }
 
-  isCorrectClicked(feedback: any): void {
+  protected isCorrectClicked(feedback: any): void {
     if (!feedback.isCorrect) {
       delete feedback.position;
       delete feedback.incorrectPositionFeedback;
@@ -272,11 +272,11 @@ export class MatchAuthoringComponent extends AbstractComponentAuthoring {
     this.componentChanged();
   }
 
-  processSelectedAsset(value: string): string {
+  protected processSelectedAsset(value: string): string {
     return `<img src="${value}" alt="${value}" />`;
   }
 
-  getChoiceTextById(choiceId: string): string {
+  protected getChoiceTextById(choiceId: string): string {
     const choice = this.componentContent.choices.find((choice) => choice.id === choiceId);
     return choice ? choice.value : null;
   }
