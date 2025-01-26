@@ -11,7 +11,7 @@ import { GraphAuthoring } from '../../assets/wise5/components/graph/graph-author
 import { EditHTMLAdvancedComponent } from '../../assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component';
 import { HtmlAuthoring } from '../../assets/wise5/components/html/html-authoring/html-authoring.component';
 import { LabelAuthoring } from '../../assets/wise5/components/label/label-authoring/label-authoring.component';
-import { MatchAuthoring } from '../../assets/wise5/components/match/match-authoring/match-authoring.component';
+import { MatchAuthoringComponent } from '../../assets/wise5/components/match/match-authoring/match-authoring.component';
 import { MultipleChoiceAuthoring } from '../../assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component';
 import { OpenResponseAuthoringComponent } from '../../assets/wise5/components/openResponse/open-response-authoring/open-response-authoring.component';
 import { EditOutsideUrlAdvancedComponent } from '../../assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component';
@@ -158,7 +158,6 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     GraphAuthoring,
     HtmlAuthoring,
     LabelAuthoring,
-    MatchAuthoring,
     OutsideUrlAuthoring,
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
@@ -173,6 +172,7 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     EditComponentConstraintsComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
+    MatchAuthoringComponent,
     MultipleChoiceAuthoring,
     OpenResponseAuthoringComponent,
     PeerGroupingAuthoringModule,
@@ -244,7 +244,7 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     GraphAuthoring,
     HtmlAuthoring,
     LabelAuthoring,
-    MatchAuthoring,
+    MatchAuthoringComponent,
     MultipleChoiceAuthoring,
     OpenResponseAuthoringComponent,
     OutsideUrlAuthoring,
