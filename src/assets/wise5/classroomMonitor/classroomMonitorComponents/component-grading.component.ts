@@ -14,7 +14,6 @@ import { AiChatGradingModule } from '../../components/aiChat/ai-chat-grading/ai-
 import { AnimationGradingModule } from '../../components/animation/animation-grading/animation-grading.module';
 import { AudioOscillatorGradingModule } from '../../components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.module';
 import { ConceptMapGradingModule } from '../../components/conceptMap/concept-map-grading/concept-map-grading.module';
-import { DialogGuidanceGradingModule } from '../../components/dialogGuidance/dialog-guidance-grading/dialog-guidance-grading.module';
 import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
 import { DrawGradingModule } from '../../components/draw/draw-grading/draw-grading.module';
 import { EmbeddedGradingModule } from '../../components/embedded/embedded-grading/embedded-grading.module';
@@ -27,6 +26,7 @@ import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-
 import { TableGradingModule } from '../../components/table/table-grading/table-grading.module';
 import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-work-grading/show-my-work-grading.module';
 import { MultipleChoiceGradingComponent } from '../../components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
+import { DialogGuidanceGradingComponent } from '../../components/dialogGuidance/dialog-guidance-grading/dialog-guidance-grading.component';
 
 @Component({
   imports: [
@@ -34,7 +34,7 @@ import { MultipleChoiceGradingComponent } from '../../components/multipleChoice/
     AnimationGradingModule,
     AudioOscillatorGradingModule,
     ConceptMapGradingModule,
-    DialogGuidanceGradingModule,
+    DialogGuidanceGradingComponent,
     DiscussionGradingModule,
     DrawGradingModule,
     EmbeddedGradingModule,
