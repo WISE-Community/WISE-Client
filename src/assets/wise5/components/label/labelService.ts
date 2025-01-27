@@ -16,7 +16,7 @@ export class LabelService extends ComponentService {
   circleZIndex: number = 2;
   defaultTextBackgroundColor: string = 'blue';
 
-  constructor(private StudentAssetService: StudentAssetService) {
+  constructor(private assetService: StudentAssetService) {
     super();
   }
 
@@ -290,30 +290,28 @@ export class LabelService extends ComponentService {
         myCanvas.height = image.height;
         ctx.drawImage(image, 0, 0);
         const pngFile = convertToPNGFile(myCanvas);
-        this.StudentAssetService.uploadAsset(pngFile).then((unreferencedAsset) => {
+        this.assetService.uploadAsset(pngFile).then((unreferencedAsset) => {
           /*
            * make a copy of the unreferenced asset so that we
            * get a referenced asset
            */
-          this.StudentAssetService.copyAssetForReference(unreferencedAsset).then(
-            (referencedAsset) => {
-              if (referencedAsset != null) {
-                /*
-                 * get the asset url
-                 * for example
-                 * /wise/studentuploads/11261/297478/referenced/picture_1494016652542.png
-                 * if we are in preview mode this url will be a base64 string instead
-                 */
-                const referencedAssetUrl = referencedAsset.url;
+          this.assetService.copyAssetForReference(unreferencedAsset).then((referencedAsset) => {
+            if (referencedAsset != null) {
+              /*
+               * get the asset url
+               * for example
+               * /wise/studentuploads/11261/297478/referenced/picture_1494016652542.png
+               * if we are in preview mode this url will be a base64 string instead
+               */
+              const referencedAssetUrl = referencedAsset.url;
 
-                // remove the unreferenced asset
-                this.StudentAssetService.deleteAsset(unreferencedAsset);
+              // remove the unreferenced asset
+              this.assetService.deleteAsset(unreferencedAsset);
 
-                // resolve the promise with the image url
-                resolve(referencedAssetUrl);
-              }
+              // resolve the promise with the image url
+              resolve(referencedAssetUrl);
             }
-          );
+          });
         });
       };
 
@@ -348,7 +346,7 @@ export class LabelService extends ComponentService {
     return new Promise((resolve, reject) => {
       const canvas = this.getCanvas(componentState);
       const pngFile = convertToPNGFile(canvas);
-      this.StudentAssetService.uploadAsset(pngFile).then((asset: any) => {
+      this.assetService.uploadAsset(pngFile).then((asset: any) => {
         resolve(asset);
       });
     });
