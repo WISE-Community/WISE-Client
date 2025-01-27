@@ -11,3 +11,19 @@ export class CRaterRubric {
     return this.ideas.find((idea) => idea.name === ideaId)?.studentText ?? ideaId;
   }
 }
+
+export function getUniqueIdeas(responses: any[], rubric: CRaterRubric): CRaterIdea[] {
+  const uniqueIdeas: CRaterIdea[] = [];
+  responses.forEach((response) =>
+    response.ideas
+      ?.filter(
+        (idea) => idea.detected && !uniqueIdeas.some((uniqueIdea) => uniqueIdea.name === idea.name)
+      )
+      .forEach((idea) => {
+        const cRaterIdea = new CRaterIdea(idea.name, true);
+        cRaterIdea.studentText = rubric.getStudentTextForIdea(idea.name);
+        uniqueIdeas.push(cRaterIdea);
+      })
+  );
+  return uniqueIdeas;
+}
