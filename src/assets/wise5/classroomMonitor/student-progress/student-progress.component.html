@@ -49,7 +49,7 @@
         <tbody>
           @for (student of sortedStudents; track $index) {
             @if (isWorkgroupShown(student)) {
-              <tr class="list-item workgroup-row button" (click)="showStudentGradingView(student)">
+              <tr class="workgroup-row button" (click)="showStudentGradingView(student)">
                 <td class="center">{{ student.workgroupId }}</td>
                 @if (permissions.canViewStudentNames) {
                   <td class="heavy td--max-width">{{ student.firstName }}</td>
