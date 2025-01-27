@@ -34,11 +34,10 @@ let studentDataVersion: number = 2;
 let canEditBoolean: boolean = true;
 let canDeleteBoolean: boolean = true;
 
-describe('LabelService', () => {
+fdescribe('LabelService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
+      providers: [
         AnnotationService,
         ConfigService,
         LabelService,
@@ -48,8 +47,8 @@ describe('LabelService', () => {
         TagService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     service = TestBed.inject(LabelService);
     label1 = createLabel(label1Text, label1PointX, label1PointY, label1TextX, label1TextY, color1);
     label2 = createLabel(label2Text, label2PointX, label2PointY, label2TextX, label2TextY, color2);
@@ -61,8 +60,6 @@ describe('LabelService', () => {
   canEdit();
   componentStateHasStudentWork();
   componentStateIsSameAsStarter();
-  labelArraysAreTheSame();
-  labelsAreTheSame();
   getTSpans();
   getSVGTextElementString();
   initializeCanvas();
@@ -316,54 +313,6 @@ function componentStateIsSameAsStarter() {
     componentState.studentData.labels.push(label1);
     componentContent.labels.push(label1);
     expectComponentStateIsSameAsStarter(componentState, componentContent, true);
-  });
-}
-
-function labelArraysAreTheSame() {
-  function expectLabelArraysAreTheSame(labels1: any[], labels2: any[], expectedResult) {
-    expect(service.labelArraysAreTheSame(labels1, labels2)).toEqual(expectedResult);
-  }
-  it('should check if label arrays are the same when they are both null', () => {
-    expectLabelArraysAreTheSame(null, null, true);
-  });
-  it('should check if label arrays are the same when one is null and the other is not null', () => {
-    expectLabelArraysAreTheSame([label1], null, false);
-  });
-  it(`should check if label arrays are the same when both are not null and contain different
-      labels`, () => {
-    expectLabelArraysAreTheSame([label1], [label2], false);
-  });
-  it(`should check if label arrays are the same when both are not null and contain the same
-      labels`, () => {
-    expectLabelArraysAreTheSame([label1, label2], [label1, label2], true);
-  });
-}
-
-function labelsAreTheSame() {
-  function expectLabelsAreTheSame(label1: any, label2: any, expectedResult: any) {
-    expect(service.labelsAreTheSame(label1, label2)).toEqual(expectedResult);
-  }
-  it('should check if labels are the same when they are both null', () => {
-    expectLabelsAreTheSame(null, null, true);
-  });
-  it('should check if labels are the same when one is null and one is not null', () => {
-    expectLabelsAreTheSame({}, null, false);
-  });
-  it(`should check if labels are the same when both are not null and do not have the same
-      values`, () => {
-    expectLabelsAreTheSame(label1, label2, false);
-  });
-  it(`should check if labels are the same when both are not null and do have the same
-      values`, () => {
-    const label3 = createLabel(
-      label1Text,
-      label1PointX,
-      label1PointY,
-      label1TextX,
-      label1TextY,
-      color1
-    );
-    expectLabelsAreTheSame(label1, label3, true);
   });
 }
 

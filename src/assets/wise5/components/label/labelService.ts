@@ -1,5 +1,3 @@
-'use strict';
-
 import { fabric } from 'fabric';
 import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
@@ -8,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 import { wordWrap } from '../../common/string/string';
 import { hasConnectedComponent } from '../../common/ComponentContent';
+import { labelArraysAreTheSame } from './label';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -91,7 +90,7 @@ export class LabelService extends ComponentService {
       if (this.componentHasStarterLabel(componentContent)) {
         return (
           componentState != null &&
-          !this.labelArraysAreTheSame(componentState.studentData.labels, componentContent.labels)
+          !labelArraysAreTheSame(componentState.studentData.labels, componentContent.labels)
         );
       } else {
         return this.componentStateHasLabel(componentState);
@@ -99,7 +98,7 @@ export class LabelService extends ComponentService {
     }
   }
 
-  componentHasStarterLabel(componentContent: any) {
+  private componentHasStarterLabel(componentContent: any): boolean {
     return componentContent.labels != null && componentContent.labels.length > 0;
   }
 
@@ -114,79 +113,12 @@ export class LabelService extends ComponentService {
   componentStateIsSameAsStarter(componentState: any, componentContent: any) {
     if (componentState != null) {
       if (this.componentHasStarterLabel(componentContent)) {
-        return this.labelArraysAreTheSame(
-          componentState.studentData.labels,
-          componentContent.labels
-        );
+        return labelArraysAreTheSame(componentState.studentData.labels, componentContent.labels);
       } else {
         return !this.componentStateHasLabel(componentState);
       }
     }
     return false;
-  }
-
-  /**
-   * Check if the two arrays of labels contain the same values
-   * @param labels1 an array of label objects
-   * @param labels2 an array of label objects
-   * @return whether the labels contain the same values
-   */
-  labelArraysAreTheSame(labels1: any[], labels2: any[]) {
-    if (this.bothObjectsAreNull(labels1, labels2)) {
-      return true;
-    } else if (this.oneObjIsNullAndOtherIsNotNull(labels1, labels2)) {
-      return false;
-    } else {
-      return this.labelArrayContentsAreTheSame(labels1, labels2);
-    }
-  }
-
-  labelArrayContentsAreTheSame(labels1: any[], labels2: any[]) {
-    if (labels1.length != labels2.length) {
-      return false;
-    } else {
-      for (let l = 0; l < labels1.length; l++) {
-        if (!this.labelsAreTheSame(labels1[l], labels2[l])) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  bothObjectsAreNull(obj1: any, obj2: any) {
-    return obj1 == null && obj2 == null;
-  }
-
-  oneObjIsNullAndOtherIsNotNull(obj1: any, obj2: any) {
-    return (obj1 == null && obj2 != null) || (obj1 != null && obj2 == null);
-  }
-
-  /**
-   * Check if two labels contain the same values
-   * @param label1 a label object
-   * @param label2 a label object
-   * @return whether the labels contain the same values
-   */
-  labelsAreTheSame(label1: any, label2: any) {
-    if (this.bothObjectsAreNull(label1, label2)) {
-      return true;
-    } else if (this.oneObjIsNullAndOtherIsNotNull(label1, label2)) {
-      return false;
-    } else {
-      return this.labelFieldsAreTheSame(label1, label2);
-    }
-  }
-
-  labelFieldsAreTheSame(label1: any, label2: any) {
-    return (
-      label1.text === label2.text &&
-      label1.pointX === label2.pointX &&
-      label1.pointY === label2.pointY &&
-      label1.textX === label2.textX &&
-      label1.textY === label2.textY &&
-      label1.color === label2.color
-    );
   }
 
   /**
