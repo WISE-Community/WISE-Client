@@ -306,7 +306,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
@@ -462,7 +462,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-run-warning-dialog/edit-run-warning-dialog.component.html</context>
@@ -474,7 +474,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component.html</context>
@@ -2102,7 +2102,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
@@ -3354,7 +3354,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component.html</context>
@@ -5874,7 +5874,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">3</context>
         </context-group>
         <target state="translated">Home insegnante</target>
       </trans-unit>
@@ -6006,7 +6006,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> No community designed units found. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library.component.html</context>
-          <context context-type="linenumber">24,26</context>
+          <context context-type="linenumber">22,24</context>
         </context-group>
         <target state="needs-translation"> No community designed units found. </target>
       </trans-unit>
@@ -6082,19 +6082,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation"> Explore suggested WISE curricula for the given grade levels or search for specific units that address your needs. </target>
       </trans-unit>
-      <trans-unit id="1ada756975a68f38f92477600b2ca2864ea89533" datatype="html">
-        <source>Toggle filters</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <target state="needs-translation">Toggle filters</target>
-      </trans-unit>
       <trans-unit id="22a1af123fdd4411d03b64d3646fb5703d597542" datatype="html">
         <source>Filter by <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.nextgenscience.org/&quot; target=&quot;_blank&quot;         &gt;"/>Next Generation Science Standards<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a       &gt;"/> (NGSS).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">28,32</context>
+          <context context-type="linenumber">27,31</context>
         </context-group>
         <target state="needs-translation">Filter by <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://www.nextgenscience.org/&quot; target=&quot;_blank&quot;         &gt;"/>Next Generation Science Standards<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a       &gt;"/> (NGSS).</target>
       </trans-unit>
@@ -6102,7 +6094,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Reset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-student/animation-student.component.html</context>
@@ -6118,7 +6110,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Discipline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target state="needs-translation">Discipline</target>
       </trans-unit>
@@ -6126,7 +6118,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>DCI Arrangement</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <target state="needs-translation">DCI Arrangement</target>
       </trans-unit>
@@ -6134,7 +6126,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Performance Expectation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <target state="needs-translation">Performance Expectation</target>
       </trans-unit>
@@ -6142,7 +6134,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Research Project</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">98</context>
         </context-group>
         <target state="needs-translation">Research Project</target>
       </trans-unit>
@@ -6270,7 +6262,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Use with Class</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">133</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
@@ -6282,7 +6274,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Preview</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
@@ -6526,7 +6518,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>What is WISE Tested?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <target state="translated">Che cos’è Testato con WISE?</target>
       </trans-unit>
@@ -6550,7 +6542,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>What are My Units?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <target state="translated">Cosa sono Le mie unità?</target>
       </trans-unit>
@@ -6558,7 +6550,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>View</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <target state="needs-translation">View</target>
       </trans-unit>
@@ -6566,11 +6558,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Active</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <target state="needs-translation">Active</target>
       </trans-unit>
@@ -6578,11 +6570,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Archived</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <target state="needs-translation">Archived</target>
       </trans-unit>
@@ -6590,7 +6582,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="INTERPOLATION" equiv-text="{{ numSelectedProjects() }}"/> selected </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library.component.html</context>
-          <context context-type="linenumber">24,26</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
         <target state="needs-translation"> <x id="INTERPOLATION" equiv-text="{{ numSelectedProjects() }}"/> selected </target>
       </trans-unit>
@@ -6678,7 +6670,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target state="translated">Cerca un insegnante</target>
       </trans-unit>
@@ -6694,7 +6686,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
@@ -6710,7 +6702,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <target state="needs-translation">Teacher is already on shared list.</target>
       </trans-unit>
@@ -6722,7 +6714,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">78</context>
         </context-group>
         <target state="translated">Revoca</target>
       </trans-unit>
@@ -6734,7 +6726,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">84</context>
         </context-group>
         <target state="translated">Permessi</target>
       </trans-unit>
@@ -6746,7 +6738,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <target state="needs-translation">Owner. Full permissions.</target>
       </trans-unit>
@@ -6766,7 +6758,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <target state="translated">Modifica contenuto unità</target>
       </trans-unit>
@@ -6782,19 +6774,19 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">163</context>
         </context-group>
         <target state="translated">Fatto</target>
       </trans-unit>
@@ -7046,7 +7038,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">106</context>
         </context-group>
         <target state="needs-translation">Show More</target>
       </trans-unit>
@@ -8558,7 +8550,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/animation-authoring/animation-authoring.component.html</context>
@@ -8678,7 +8670,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <target state="needs-translation">Starts <x id="INTERPOLATION" equiv-text="{{ run.startTime | date }}"/></target>
       </trans-unit>
@@ -8722,7 +8714,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <target state="needs-translation">Units found: <x id="INTERPOLATION" equiv-text="{{ filteredRuns.length }}"/></target>
       </trans-unit>
@@ -9046,13 +9038,13 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Add your own periods</target>
       </trans-unit>
-      <trans-unit id="b95c937e63ccdff1ad5d9cd23c1d433d57157eb9" datatype="html">
-        <source>For &quot;Period 9&quot;, just enter the number 9. Separate periods with commas (e.g. &quot;Section 1, Section 2&quot;). Manually named periods should be no more than 16 characters long. </source>
+      <trans-unit id="e5987fbaf9750ef24be30881051d9c41ede7424a" datatype="html">
+        <source> For &quot;Period 9&quot;, just enter the number 9. Separate periods with commas (e.g. &quot;Section 1, Section 2&quot;). Manually named periods should be no more than 16 characters long. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
-        <target state="needs-translation">For "Period 9", just enter the number 9. Separate periods with commas (e.g. "Section 1, Section 2"). Manually named periods should be no more than 16 characters long. </target>
+        <target state="needs-translation"> For "Period 9", just enter the number 9. Separate periods with commas (e.g. "Section 1, Section 2"). Manually named periods should be no more than 16 characters long. </target>
       </trans-unit>
       <trans-unit id="6b0dd0933835c1e0d9e3ed4a19c8eb88a9df417b" datatype="html">
         <source>2. Choose Students Per Team</source>
@@ -9090,11 +9082,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Start date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target state="needs-translation">Start date</target>
       </trans-unit>
@@ -9102,7 +9094,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Start date is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target state="needs-translation">Start date is required</target>
       </trans-unit>
@@ -9110,11 +9102,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>End date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">85</context>
         </context-group>
         <target state="needs-translation">End date</target>
       </trans-unit>
@@ -9122,7 +9114,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Lock After End Date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">72,73</context>
+          <context context-type="linenumber">62,63</context>
         </context-group>
         <target state="needs-translation"> Lock After End Date </target>
       </trans-unit>
@@ -9130,11 +9122,11 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>If the End Date has passed and the unit is locked, students will no longer be able to save new work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <target state="needs-translation">If the End Date has passed and the unit is locked, students will no longer be able to save new work</target>
       </trans-unit>
@@ -9142,7 +9134,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Note: These dates can be changed at any time from your Class Schedule. Just select &quot;Edit Settings&quot; from the unit&apos;s dropdown menu. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">85,88</context>
+          <context context-type="linenumber">75,78</context>
         </context-group>
         <target state="needs-translation"> Note: These dates can be changed at any time from your Class Schedule. Just select "Edit Settings" from the unit's dropdown menu. </target>
       </trans-unit>
@@ -9150,7 +9142,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Create Run</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <target state="needs-translation">Create Run</target>
       </trans-unit>
@@ -9158,7 +9150,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Success! This unit has been added to your Class Schedule.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target state="needs-translation">Success! This unit has been added to your Class Schedule.</target>
       </trans-unit>
@@ -9166,7 +9158,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Access Code: <x id="INTERPOLATION" equiv-text="{{ run.runCode }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">99</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
@@ -9178,7 +9170,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Important: Every classroom unit has a unique Access Code. Students use this code to register for a unit. Give the code to your students when they first sign up for a WISE account. If they already have WISE accounts, have them log in and then select &quot;Add Unit&quot; from the student home page. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">110,115</context>
+          <context context-type="linenumber">100,105</context>
         </context-group>
         <target state="needs-translation"> Important: Every classroom unit has a unique Access Code. Students use this code to register for a unit. Give the code to your students when they first sign up for a WISE account. If they already have WISE accounts, have them log in and then select "Add Unit" from the student home page. </target>
       </trans-unit>
@@ -9186,7 +9178,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> You can always find the Access Code for each classroom unit in your Class Schedule. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">116,118</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
         <target state="needs-translation"> You can always find the Access Code for each classroom unit in your Class Schedule. </target>
       </trans-unit>
@@ -9194,7 +9186,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Share to Google Classroom </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="linenumber">118,120</context>
         </context-group>
         <target state="needs-translation"> Share to Google Classroom </target>
       </trans-unit>
@@ -9238,7 +9230,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target state="needs-translation">(Run ID: <x id="INTERPOLATION" equiv-text="{{ run.id }}"/>)</target>
       </trans-unit>
@@ -9426,7 +9418,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <target state="needs-translation">(Run ID: <x id="INTERPOLATION" equiv-text="{{ data.run.id }}"/>)</target>
       </trans-unit>
@@ -9482,7 +9474,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>The unit has been successfully added to the following Google Classroom classes:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target state="needs-translation">The unit has been successfully added to the following Google Classroom classes:</target>
       </trans-unit>
@@ -9490,7 +9482,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>There was a problem adding the unit to the following Google Classroom classes:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="needs-translation">There was a problem adding the unit to the following Google Classroom classes:</target>
       </trans-unit>
@@ -9658,19 +9650,19 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Add period</target>
       </trans-unit>
-      <trans-unit id="8e4f6fbd6f10462ce24ec7b579764cbb0e7208da" datatype="html">
-        <source>For &quot;Period 9&quot;, just enter the number 9.</source>
+      <trans-unit id="84e4e6328673117a9a2921ae0084fce9bf93810c" datatype="html">
+        <source> For &quot;Period 9&quot;, just enter the number 9. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
-        <target state="needs-translation">For "Period 9", just enter the number 9.</target>
+        <target state="needs-translation"> For "Period 9", just enter the number 9. </target>
       </trans-unit>
       <trans-unit id="9e52801929bc9e355f8de5c5c13ba357055d1bdf" datatype="html">
         <source>Students Per Team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <target state="needs-translation">Students Per Team</target>
       </trans-unit>
@@ -9678,7 +9670,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Only 1 student </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">50,52</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
         <target state="needs-translation"> Only 1 student </target>
       </trans-unit>
@@ -9686,7 +9678,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> 1-3 students </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">53,55</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
         <target state="needs-translation"> 1-3 students </target>
       </trans-unit>
@@ -9694,23 +9686,23 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Schedule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <target state="needs-translation">Schedule</target>
       </trans-unit>
-      <trans-unit id="7d7a8e4a44dccbf51da35f4058e9357db67c7d0b" datatype="html">
-        <source> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date : &apos;short&apos; }}"/>) </source>
+      <trans-unit id="428abb36bbd4e14be8e48afb3479d37fa486115b" datatype="html">
+        <source> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date: &apos;short&apos; }}"/>) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">60,62</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
-        <target state="needs-translation"> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date : 'short' }}"/>) </target>
+        <target state="needs-translation"> (Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date: 'short' }}"/>) </target>
       </trans-unit>
       <trans-unit id="a1c89f5496e99086127a54d08cecba1d0920397e" datatype="html">
         <source>Start date is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">79</context>
         </context-group>
         <target state="needs-translation">Start date is required.</target>
       </trans-unit>
@@ -9718,7 +9710,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Lock After End Date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
-          <context context-type="linenumber">102,103</context>
+          <context context-type="linenumber">104,105</context>
         </context-group>
         <target state="needs-translation"> Lock After End Date </target>
       </trans-unit>
@@ -10030,7 +10022,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Transfer Classroom Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <target state="needs-translation">Transfer Classroom Unit</target>
       </trans-unit>
@@ -10038,7 +10030,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Sharing access allows other WISE teachers to view student work and optionally view student names, grade, manage teams, and edit unit content.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">21,22</context>
+          <context context-type="linenumber">20,21</context>
         </context-group>
         <target state="needs-translation">Sharing access allows other WISE teachers to view student work and optionally view student names, grade, manage teams, and edit unit content.</target>
       </trans-unit>
@@ -10046,7 +10038,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> If you have customized the content in this unit and want to share so other teachers can use with their students, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;&quot; (click)=&quot;copyProject()&quot;&gt;"/>make a copy<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> of the unit. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">24,27</context>
         </context-group>
         <target state="needs-translation"> If you have customized the content in this unit and want to share so other teachers can use with their students, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;&quot; (click)=&quot;copyProject()&quot;&gt;"/>make a copy<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> of the unit. </target>
       </trans-unit>
@@ -10054,7 +10046,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>View Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <target state="needs-translation">View Student Work</target>
       </trans-unit>
@@ -10062,7 +10054,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>View Student Names</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <target state="needs-translation">View Student Names</target>
       </trans-unit>
@@ -10070,7 +10062,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Grade and Manage</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">102</context>
         </context-group>
         <target state="needs-translation">Grade and Manage</target>
       </trans-unit>
@@ -10078,7 +10070,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Are you sure you want to make <x id="INTERPOLATION" equiv-text="{{ teacherSearchControl.value }}"/> the new owner of this unit? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">126,128</context>
+          <context context-type="linenumber">125,127</context>
         </context-group>
         <target state="needs-translation"> Are you sure you want to make <x id="INTERPOLATION" equiv-text="{{ teacherSearchControl.value }}"/> the new owner of this unit? </target>
       </trans-unit>
@@ -10086,7 +10078,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> You will still be able to access the unit but the new owner will have the ability to take away or change your access permissions. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">129,132</context>
+          <context context-type="linenumber">128,131</context>
         </context-group>
         <target state="needs-translation"> You will still be able to access the unit but the new owner will have the ability to take away or change your access permissions. </target>
       </trans-unit>
@@ -10094,7 +10086,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Transfer Ownership </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">143,145</context>
+          <context context-type="linenumber">142,144</context>
         </context-group>
         <target state="needs-translation"> Transfer Ownership </target>
       </trans-unit>
@@ -10102,7 +10094,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Cancel </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">152,154</context>
+          <context context-type="linenumber">151,153</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
@@ -10114,7 +10106,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Proceed </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
-          <context context-type="linenumber">161,163</context>
+          <context context-type="linenumber">160,162</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
@@ -10150,7 +10142,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Teacher home navigation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target state="needs-translation">Teacher home navigation</target>
       </trans-unit>
@@ -10158,7 +10150,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Authoring Tool</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
@@ -10262,7 +10254,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date: &apos;short&apos; }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target state="needs-translation">Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date: 'short' }}"/></target>
       </trans-unit>
@@ -10270,7 +10262,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Teacher Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target state="needs-translation">Teacher Tools</target>
       </trans-unit>
@@ -10286,7 +10278,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Archived classroom units:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <target state="needs-translation">Archived classroom units:</target>
       </trans-unit>
@@ -10294,7 +10286,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Active classroom units:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <target state="needs-translation">Active classroom units:</target>
       </trans-unit>
@@ -10302,7 +10294,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="INTERPOLATION" equiv-text="{{ completedTotal() }}"/> completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ completedTotal() }}"/> completed</target>
       </trans-unit>
@@ -10310,7 +10302,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="INTERPOLATION" equiv-text="{{ activeTotal() }}"/> running</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ activeTotal() }}"/> running</target>
       </trans-unit>
@@ -10318,7 +10310,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source><x id="INTERPOLATION" equiv-text="{{ scheduledTotal() }}"/> scheduled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ scheduledTotal() }}"/> scheduled</target>
       </trans-unit>
@@ -10326,7 +10318,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Clear filters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <target state="needs-translation">Clear filters</target>
       </trans-unit>
@@ -10334,7 +10326,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Hey there! Looks like you don&apos;t have any active classroom units.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <target state="needs-translation">Hey there! Looks like you don't have any active classroom units.</target>
       </trans-unit>
@@ -10342,7 +10334,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Browse the &quot;Unit Library&quot; to find titles to use with your students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <target state="needs-translation">Browse the "Unit Library" to find titles to use with your students.</target>
       </trans-unit>
@@ -10350,7 +10342,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Looks like you don&apos;t have any archived classroom units.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target state="needs-translation">Looks like you don't have any archived classroom units.</target>
       </trans-unit>
