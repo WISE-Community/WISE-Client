@@ -4,8 +4,8 @@
     {{ run.name }} <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
   </p>
   <h3 i18n>Class Periods</h3>
-  <div fxLayoutGap="8px" fxLayout="row wrap">
-    <div *ngFor="let period of run.periods" class="info-block" fxLayoutAlign="center center">
+  <div class="flex flex-wrap gap-2">
+    <div *ngFor="let period of run.periods" class="info-block flex items-center justify-center">
       <span class="mat-subtitle-2">{{ period }}</span>
       <button
         mat-icon-button
@@ -18,8 +18,8 @@
       </button>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-    <mat-form-field appearance="fill" fxFlex="0 0 auto" fxFlex.xs="0 0 100%">
+  <div>
+    <mat-form-field appearance="fill" class="flex-none w-full sm:w-auto">
       <mat-label i18n>Add new period</mat-label>
       <input
         [(ngModel)]="newPeriodName"
@@ -41,12 +41,14 @@
         <mat-icon>add_circle</mat-icon>
       </button>
       <mat-hint *ngIf="addPeriodMessage" class="warn">{{ addPeriodMessage }}</mat-hint>
-      <mat-hint *ngIf="!addPeriodMessage" i18n>For "Period 9", just enter the number 9.</mat-hint>
     </mat-form-field>
+    <p *ngIf="!addPeriodMessage" class="mat-caption" i18n>
+      For "Period 9", just enter the number 9.
+    </p>
   </div>
   <mat-divider></mat-divider>
   <h3 i18n>Students Per Team</h3>
-  <mat-radio-group [(ngModel)]="maxStudentsPerTeam" #rGroup fxLayoutGap="16px">
+  <mat-radio-group [(ngModel)]="maxStudentsPerTeam" #rGroup class="flex gap-4">
     <mat-radio-button value="1" radioGroup="rGroup" (click)="changeMaxStudentsPerTeam(1)" i18n>
       Only 1 student
     </mat-radio-button>
@@ -58,12 +60,12 @@
   <h3>
     <ng-container i18n>Schedule</ng-container>&nbsp;
     <span *ngIf="run.lastRun" class="mat-caption" i18n>
-      (Last student login: {{ run.lastRun | date : 'short' }})
+      (Last student login: {{ run.lastRun | date: 'short' }})
     </span>
   </h3>
-  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap.gt-xs="16px">
+  <div class="flex flex-wrap flex-col sm:flex-row sm:gap-4">
     <div>
-      <mat-form-field appearance="fill" fxFlexAlign="start" fxFlex="0 0 auto" fxFlex.xs="0 0 100%">
+      <mat-form-field appearance="fill" class="flex-none w-full sm:w-auto">
         <mat-label i18n>Start date</mat-label>
         <input
           [(ngModel)]="startDate"
@@ -79,7 +81,7 @@
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field appearance="fill" fxFlexAlign="start" fxFlex="0 0 auto" fxFlex.xs="0 0 100%">
+      <mat-form-field appearance="fill" class="flex-none w-full sm:w-auto">
         <mat-label i18n>End date</mat-label>
         <input
           [(ngModel)]="endDate"
@@ -93,7 +95,7 @@
         <mat-hint *ngIf="endDateMessage" class="warn">{{ endDateMessage }}</mat-hint>
       </mat-form-field>
     </div>
-    <div fxLayoutAlign="center center" style="padding-bottom: 1.34375em">
+    <div class="flex items-center" style="padding-bottom: 1.34375em">
       <mat-checkbox
         [(ngModel)]="isLockedAfterEndDate"
         (change)="updateIsLockedAfterEndDate()"

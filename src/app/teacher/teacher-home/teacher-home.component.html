@@ -1,17 +1,5 @@
-<header
-  class="content__header"
-  fxLayout="row wrap"
-  fxLayoutAlign="start start"
-  fxLayoutAlign.gt-sm="space-between start"
-  fxLayoutGap.gt-sm="16px"
->
-  <h1
-    class="accent"
-    fxLayoutAlign="center center"
-    fxLayoutGap="8px"
-    ngClass="mat-headline-4"
-    [ngClass.xs]="{ 'mat-headline-4': false }"
-  >
+<header class="content__header flex flex-wrap items-start justify-start sm:justify-between gap-4">
+  <h1 class="accent flex items-center gap-2 mat-headline-4">
     <mat-icon>home</mat-icon><span i18n>Teacher Home</span>
   </h1>
   <discourse-recent-activity
@@ -19,9 +7,9 @@
     [baseUrl]="discourseUrl"
     category="latest"
     queryString="order=activity"
-    fxFlex="100%"
-    fxFlex.gt-sm="0 0 auto"
-  />
+    class="w-full sm:w-auto"
+  >
+  </discourse-recent-activity>
 </header>
 <section>
   <nav mat-tab-nav-bar i18n-aria-label aria-label="Teacher home navigation" [tabPanel]="tabPanel">

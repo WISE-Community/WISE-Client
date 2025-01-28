@@ -1,15 +1,14 @@
 <div class="library-filter">
-  <div fxLayout="row" fxLayout.gt-sm="{{ isSplitScreen ? 'column' : 'row' }}" fxLayoutGap="8px">
-    <div fxFlex>
+  <div class="flex flex-row gap-1">
+    <div class="flex-auto max-w-full">
       <app-search-bar [value]="searchValue" (update)="searchUpdated($event)"></app-search-bar>
     </div>
     <button
-      class="input-control--appearance-fill"
       mat-icon-button
-      i18n-aria-label
+      class="input-control--appearance-fill"
+      [ngClass]="{ 'md:!hidden': isSplitScreen }"
       aria-label="Toggle filters"
       (click)="showFilters = !showFilters"
-      fxHide.gt-sm="{{ isSplitScreen ? true : false }}"
     >
       <mat-icon
         matBadge="+"
@@ -32,11 +31,14 @@
       (NGSS).</ng-container
     >&nbsp;<a *ngIf="hasFilters()" href="#" (click)="!!clearFilterValues()" i18n>Reset</a>
   </div>
-  <div fxLayout="column" fxLayout.gt-sm="{{ isSplitScreen ? 'column' : 'row' }}" fxLayoutGap="8px">
+  <div
+    class="flex flex-col gap-2"
+    [ngClass]="{ 'md:flex-col': isSplitScreen, 'md:flex-row': !isSplitScreen }"
+  >
     <div
       *ngIf="disciplineOptions.length > 0"
       class="library-filter"
-      fxFlex.gt-sm="{{ isSplitScreen ? 100 : 33 }}"
+      [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
     >
       <app-select-menu
         id="disciplineSelectMenu"
@@ -53,7 +55,7 @@
     <div
       *ngIf="dciArrangementOptions.length > 0"
       class="library-filter"
-      fxFlex.gt-sm="{{ isSplitScreen ? 100 : 33 }}"
+      [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
     >
       <app-select-menu
         id="dciArrangementSelectMenu"
@@ -70,7 +72,7 @@
     <div
       *ngIf="peOptions.length > 0"
       class="library-filter"
-      fxFlex.gt-sm="{{ isSplitScreen ? 100 : 33 }}"
+      [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
     >
       <app-select-menu
         id="performanceExpectationSelectMenu"
@@ -85,7 +87,10 @@
       />
     </div>
     @if (researchProjectOptions.length > 0) {
-      <div class="library-filter" fxFlex.gt-sm="{{ isSplitScreen ? 100 : 33 }}">
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
         <app-select-menu
           id="researchProjectSelectMenu"
           [options]="researchProjectOptions"
