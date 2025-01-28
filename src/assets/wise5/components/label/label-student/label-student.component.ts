@@ -115,7 +115,7 @@ export class LabelStudentComponent extends ComponentStudent {
     this.changeDetector.detectChanges(); // prevents dev-mode change detection error
   }
 
-  enableFabricTextPadding(): void {
+  private enableFabricTextPadding(): void {
     // modify Fabric so that Text elements can utilize padding
     fabric.Text.prototype.set({
       _getNonTransformedDimensions() {
@@ -148,7 +148,7 @@ export class LabelStudentComponent extends ComponentStudent {
     }
   }
 
-  setupCanvas(): void {
+  private setupCanvas(): void {
     this.canvas = this.labelService.initializeCanvas(
       this.canvasId,
       this.canvasWidth,
@@ -175,7 +175,7 @@ export class LabelStudentComponent extends ComponentStudent {
     this.disableComponentIfNecessary();
   }
 
-  registerMouseDownListener(): void {
+  private registerMouseDownListener(): void {
     this.canvas.on('mouse:down', (options: any) => {
       if (this.canvas.getActiveObject() == null) {
         // no objects in the canvas were clicked
@@ -184,7 +184,7 @@ export class LabelStudentComponent extends ComponentStudent {
     });
   }
 
-  unselectAll(): void {
+  private unselectAll(): void {
     this.selectedLabel = null;
     this.editLabelMode = false;
     this.canvas.discardActiveObject();
@@ -531,13 +531,10 @@ export class LabelStudentComponent extends ComponentStudent {
     return { textX: textX, textY: textY };
   }
 
-  isPointOccupied(occupiedPointLocations: any[], pointX: number, pointY: number): boolean {
-    for (const occupiedPointLocation of occupiedPointLocations) {
-      if (occupiedPointLocation.pointX == pointX && occupiedPointLocation.pointY == pointY) {
-        return true;
-      }
-    }
-    return false;
+  private isPointOccupied(occupiedPointLocations: any[], pointX: number, pointY: number): boolean {
+    return occupiedPointLocations.some(
+      (location) => location.pointX == pointX && location.pointY == pointY
+    );
   }
 
   getUnoccupiedPointLocation(): any {
