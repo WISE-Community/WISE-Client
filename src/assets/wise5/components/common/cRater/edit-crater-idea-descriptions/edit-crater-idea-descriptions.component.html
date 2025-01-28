@@ -1,150 +1,75 @@
-<!-- <h1>Test</h1> -->
-
-<!-- <div class="idea-descriptions notice-bg-bg">
+<div class="idea-descriptions notice-bg-bg">
   <h5 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
     <span i18n>Idea Descriptions</span>
     <button
       mat-icon-button
       color="primary"
-      matTooltip="Add a new rule"
+      matTooltip="Add a new idea description"
       i18n-matTooltip
       matTooltipPosition="after"
-      (click)="createNewDescription()"
+      (click)="addNewIdeaDescription()"
     >
       <mat-icon>add_circle</mat-icon>
     </button>
     <span fxFlex></span>
   </h5>
-  <ul
-    cdkDropList
-    [cdkDropListData]="ideaDescriptions"
-    cdkScrollable
-  >
-   @for (ideaDescription of ideaDescriptions; track $index) {
-      <li class="rule" cdkDrag>
-        <mat-card appearance="outlined" class="rule-content" fxLayout="row wrap" fxLayoutGap="8px">
+  <ul>
+    @for (
+      idea of ideaDescriptions;
+      track $index;
+      let ideaIndex = $index, first = $first, last = $last
+    ) {
+      <li class="idea">
+        <mat-card appearance="outlined" class="idea-content" fxLayout="row wrap" fxLayoutGap="8px">
           <div
             class="text-secondary"
             fxLayout="column"
             fxLayoutAlign="start center"
             fxLayoutGap="22px"
           >
-            <span class="mat-subtitle-1">{{ ruleIndex + 1 }}</span>
-            <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
+            <span class="mat-subtitle-1">{{ ideaIndex + 1 }}</span>
           </div>
           <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="8px" fxFlex>
-            <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
-              <mat-label i18n>Expression</mat-label>
-              <input
-                matInput
-                [(ngModel)]="rule.expression"
-                (ngModelChange)="inputChanged.next($event)"
-              />
+            <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
+              <mat-label i18n>Idea #</mat-label>
+              <input matInput [(ngModel)]="idea.name" (ngModelChange)="inputChanged.next($event)" />
             </mat-form-field>
-            <ng-container [ngSwitch]="version">
-              <ng-container *ngSwitchCase="2">
-                <div
-                  *ngFor="
-                    let feedback of rule.feedback;
-                    let feedbackIndex = index;
-                    let last = last;
-                    trackBy: customTrackBy
-                  "
-                  class="feedback-item"
-                  fxLayout="row"
-                  fxLayoutAlign="start center"
-                  fxLayoutGap="8px"
-                >
-                  <mat-form-field
-                    class="rule-input form-field-no-hint feedback-input"
-                    appearance="fill"
-                  >
-                    <mat-label *ngIf="rule.feedback.length === 1" i18n>Feedback</mat-label>
-                    <mat-label *ngIf="rule.feedback.length > 1" i18n
-                      >Feedback #{{ feedbackIndex + 1 }}</mat-label
-                    >
-                    <textarea
-                      matInput
-                      [(ngModel)]="rule.feedback[feedbackIndex]"
-                      (ngModelChange)="inputChanged.next($event)"
-                      cdkTextareaAutosize
-                    >
-                    </textarea>
-                    <button
-                      mat-icon-button
-                      matSuffix
-                      *ngIf="rule.feedback.length > 1"
-                      matTooltip="Delete feedback"
-                      i18n-matTooltip
-                      matTooltipPosition="before"
-                      (click)="deleteFeedbackInRule(rule, feedbackIndex)"
-                    >
-                      <mat-icon>clear</mat-icon>
-                    </button>
-                  </mat-form-field>
-                  <button
-                    *ngIf="last"
-                    mat-icon-button
-                    matTooltip="Add new feedback"
-                    matTooltipPosition="above"
-                    i18n-matTooltip
-                    (click)="addNewFeedbackToRule(rule)"
-                    i18n
-                  >
-                    <mat-icon>add_circle</mat-icon>
-                  </button>
-                </div>
-              </ng-container>
-              <ng-container *ngSwitchDefault>
-                <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
-                  <mat-label i18n>Feedback</mat-label>
-                  <textarea
-                    matInput
-                    [(ngModel)]="rule.feedback"
-                    (ngModelChange)="inputChanged.next($event)"
-                    cdkTextareaAutosize
-                  >
-                  </textarea>
-                </mat-form-field>
-              </ng-container>
-            </ng-container>
+            <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
+              <mat-label i18n>Student-Friendly Description</mat-label>
+              <textarea
+                matInput
+                [(ngModel)]="idea.description"
+                (ngModelChange)="inputChanged.next($event)"
+                cdkTextareaAutosize
+              >
+              </textarea>
+            </mat-form-field>
           </div>
           <div fxLayout="column" fxLayoutAlign="start center">
             <button
               mat-icon-button
               i18n-matTooltip
-              matTooltip="Delete rule"
+              matTooltip="Delete idea description"
               matTooltipPosition="before"
-              (click)="deleteRule(ruleIndex)"
+              (click)="deleteIdeaDescription(ideaIndex)"
             >
               <mat-icon>clear</mat-icon>
             </button>
-            <button
-              *ngIf="feedbackRules.length > 1"
-              [disabled]="first"
-              mat-icon-button
-              i18n-matTooltip
-              matTooltip="Move up"
-              matTooltipPosition="before"
-              (click)="moveUp(ruleIndex)"
-            >
-              <mat-icon>arrow_upward</mat-icon>
-            </button>
-            </div>
+          </div>
         </mat-card>
-        <div class="add-rule">
-          <button
-            mat-icon-button
-            color="primary"
-            matTooltip="Add a new rule"
-            i18n-matTooltip
-            matTooltipPosition="above"
-            (click)="addNewRule(ruleIndex + 1)"
-          >
-            <mat-icon>add_circle</mat-icon>
-          </button>
-        </div>
       </li>
     }
-  </ul> 
-</div> -->
+  </ul>
+  <div [hidden]="getIdeaIndex() === 0">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Add a new idea description"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="addNewIdeaDescription()"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+</div>
