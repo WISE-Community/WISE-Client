@@ -284,17 +284,17 @@ function getCRaterRubric() {
     beforeEach(() => {
       projectService = TestBed.inject(ProjectService);
     });
-    it('should get CRater rubric when rubric exists on the component', () => {
+    it('should get an idea from the rubric when rubric exists on the component', () => {
       spyOn(projectService, 'getComponent').and.returnValue({
         cRaterRubric: { ideas: [{ name: '1', studentText: 'Idea 1' }] }
       } as unknown as ComponentContent);
       const cRaterRubric = service.getCRaterRubric('nodeId', 'componentId');
-      expect(cRaterRubric.getStudentTextForIdea('1')).toEqual('Idea 1');
+      expect(cRaterRubric.getIdea('1').studentText).toEqual('Idea 1');
     });
-    it('should get an empty CRater rubric when rubric does not exists on the component', () => {
+    it('should get an undefined idea when rubric does not exists on the component', () => {
       spyOn(projectService, 'getComponent').and.returnValue({} as unknown as ComponentContent);
       const cRaterRubric = service.getCRaterRubric('nodeId', 'componentId');
-      expect(cRaterRubric.getStudentTextForIdea('1')).toEqual('1');
+      expect(cRaterRubric.getIdea('1')).toBeUndefined();
     });
   });
 }

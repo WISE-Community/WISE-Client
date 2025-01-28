@@ -7,12 +7,8 @@ export class CRaterRubric {
     this.ideas = rubric.ideas;
   }
 
-  getStudentTextForIdea(ideaId: string): string {
-    return this.ideas.find((idea) => idea.name === ideaId)?.studentText ?? ideaId;
-  }
-
-  getTeacherTextForIdea(ideaId: string): string {
-    return this.ideas.find((idea) => idea.name === ideaId)?.teacherText ?? ideaId;
+  getIdea(ideaId: string): CRaterIdea {
+    return this.ideas.find((idea) => idea.name === ideaId);
   }
 }
 
@@ -25,8 +21,9 @@ export function getUniqueIdeas(responses: any[], rubric: CRaterRubric): CRaterId
       )
       .forEach((idea) => {
         const cRaterIdea = new CRaterIdea(idea.name, true);
-        cRaterIdea.studentText = rubric.getStudentTextForIdea(idea.name);
-        cRaterIdea.teacherText = rubric.getTeacherTextForIdea(idea.name);
+        const cRaterRubricIdea = rubric.getIdea(idea.name);
+        cRaterIdea.studentText = cRaterRubricIdea?.studentText ?? idea.name;
+        cRaterIdea.teacherText = cRaterRubricIdea?.teacherText ?? idea.name;
         uniqueIdeas.push(cRaterIdea);
       })
   );
