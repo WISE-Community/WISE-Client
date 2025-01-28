@@ -139,15 +139,17 @@ function getLabelJSONObjectFromText() {
     };
     const canEdit = true;
     const canDelete = true;
-    spyOn(component, 'getLabelFromText').and.returnValue({
-      textString: textString,
-      canEdit: canEdit,
-      canDelete: canDelete,
-      circle: circle,
-      line: {},
-      text: text
-    });
-    const labelJson = component.getLabelJSONObjectFromText(circle);
+    component.labels = [
+      {
+        textString: textString,
+        canEdit: canEdit,
+        canDelete: canDelete,
+        circle: circle,
+        line: {},
+        text: text
+      }
+    ];
+    const labelJson = component.getLabelJSONObjectFromText(text);
     expect(labelJson.pointX).toEqual(circleLeft);
     expect(labelJson.pointY).toEqual(circleTop);
     expect(labelJson.textX).toEqual(textLeft);

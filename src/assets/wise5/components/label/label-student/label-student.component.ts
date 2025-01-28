@@ -422,7 +422,7 @@ export class LabelStudentComponent extends ComponentStudent {
    * @returns a simple JSON object that represents the label
    */
   getLabelJSONObjectFromText(text: any): any {
-    const label = this.getLabelFromText(text);
+    const label = this.labels.find((label: any) => label.text == text);
     const circleObject = label.circle;
     const { textX, textY } = this.getTextCoordinate(label);
     return {
@@ -591,15 +591,6 @@ export class LabelStudentComponent extends ComponentStudent {
    */
   getLabelFromCircle(circle: any): any {
     return this.labels.find((label: any) => label.circle == circle);
-  }
-
-  /**
-   * Get the label object given the canvas text object.
-   * @param text A canvas text object.
-   * @return A label object.
-   */
-  getLabelFromText(text: any): any {
-    return this.labels.find((label: any) => label.text == text);
   }
 
   private addListenersToLabel(label: any): void {
