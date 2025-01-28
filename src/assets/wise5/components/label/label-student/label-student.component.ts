@@ -25,6 +25,7 @@ import { ComponentHeaderComponent } from '../../../directives/component-header/c
 import { AddToNotebookButtonComponent } from '../../../directives/add-to-notebook-button/add-to-notebook-button.component';
 import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
+import { LabelStudentData } from '../LabelStudentData';
 
 @Component({
   imports: [
@@ -447,13 +448,12 @@ export class LabelStudentComponent extends ComponentStudent {
    */
   createComponentState(action: string): Promise<any> {
     const componentState: any = this.createNewComponentState();
-    const studentData: any = this.createStudentData(
+    componentState.studentData = new LabelStudentData(
       this.getLabelData(),
       this.backgroundImage,
       this.submitCounter,
       this.studentDataVersion
     );
-    componentState.studentData = studentData;
     componentState.isSubmit = this.isSubmit;
     componentState.componentType = 'Label';
     componentState.nodeId = this.nodeId;
@@ -469,20 +469,6 @@ export class LabelStudentComponent extends ComponentStudent {
         action
       );
     });
-  }
-
-  createStudentData(
-    labels: any[] = [],
-    backgroundImage: string = null,
-    submitCounter: number = 0,
-    studentDataVersion: number = 2
-  ): any {
-    return {
-      labels: labels,
-      backgroundImage: backgroundImage,
-      submitCounter: submitCounter,
-      version: studentDataVersion
-    };
   }
 
   private getNewLabelLocation(): any {
@@ -706,7 +692,7 @@ export class LabelStudentComponent extends ComponentStudent {
    */
   createMergedComponentState(componentStates: any[]): any {
     const componentStateTo: any = {
-      studentData: this.createStudentData()
+      studentData: new LabelStudentData()
     };
     for (const componentState of componentStates) {
       switch (componentState.componentType) {

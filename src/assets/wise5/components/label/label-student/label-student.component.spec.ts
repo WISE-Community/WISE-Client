@@ -10,6 +10,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LabelStudentData } from '../LabelStudentData';
 
 let component: LabelStudentComponent;
 let fixture: ComponentFixture<LabelStudentComponent>;
@@ -165,7 +166,7 @@ function createStudentData() {
   it('should create student data', () => {
     const labels = [{ text: 'Leaf' }, { text: 'Stem' }];
     const backgroundImage = 'plant.png';
-    const studentData = component.createStudentData(labels, backgroundImage);
+    const studentData = new LabelStudentData(labels, backgroundImage);
     expect(studentData.version).toEqual(2);
     expect(studentData.labels).toEqual(labels);
     expect(studentData.backgroundImage).toEqual(backgroundImage);
