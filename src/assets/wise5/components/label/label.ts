@@ -61,3 +61,12 @@ function labelFieldsAreTheSame(label1: any, label2: any): boolean {
     label1.color === label2.color
   );
 }
+
+export function makeSureValueIsWithinLimit(value: number, limit: number): number {
+  if (value < 0) {
+    value = 0;
+  } else if (value > limit) {
+    value = limit;
+  }
+  return value;
+}

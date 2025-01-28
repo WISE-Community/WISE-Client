@@ -1,4 +1,4 @@
-import { labelArraysAreTheSame, labelsAreTheSame } from './label';
+import { labelArraysAreTheSame, labelsAreTheSame, makeSureValueIsWithinLimit } from './label';
 let label1Text: any = 'Label 1';
 let label2Text: any = 'Label 2';
 let label1PointX: number = 1;
@@ -50,9 +50,10 @@ function createLabel(
   };
 }
 
-fdescribe('Label', () => {
+describe('Label', () => {
   test_labelsAreTheSame();
   test_labelArraysAreTheSame();
+  test_makeSureValueIsWithinLimit();
 });
 
 function test_labelsAreTheSame() {
@@ -104,4 +105,21 @@ function test_labelArraysAreTheSame() {
 
 function expectLabelsAreTheSame(label1: any, label2: any, expectedResult: any) {
   expect(labelsAreTheSame(label1, label2)).toEqual(expectedResult);
+}
+
+function test_makeSureValueIsWithinLimit() {
+  const limit: number = 100;
+  it('should make sure value is within limit when it is negative', () => {
+    expectMakeSureValueIsWithinLimit(-1, limit, 0);
+  });
+  it('should make sure value is within limit when it is between zero and limit', () => {
+    expectMakeSureValueIsWithinLimit(50, limit, 50);
+  });
+  it('should make sure value is within limit when it is greater than limit', () => {
+    expectMakeSureValueIsWithinLimit(101, limit, 100);
+  });
+}
+
+function expectMakeSureValueIsWithinLimit(x: number, width: number, expectedValue: number) {
+  expect(makeSureValueIsWithinLimit(x, width)).toEqual(expectedValue);
 }

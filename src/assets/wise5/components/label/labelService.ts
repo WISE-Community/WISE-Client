@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 import { wordWrap } from '../../common/string/string';
 import { hasConnectedComponent } from '../../common/ComponentContent';
-import { labelArraysAreTheSame } from './label';
+import { labelArraysAreTheSame, makeSureValueIsWithinLimit } from './label';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -385,10 +385,10 @@ export class LabelService extends ComponentService {
      * are any positions that are outside the bounds, we will change the
      * position to be within the bounds.
      */
-    x1 = this.makeSureValueIsWithinLimit(x1, canvasWidth);
-    y1 = this.makeSureValueIsWithinLimit(y1, canvasHeight);
-    x2 = this.makeSureValueIsWithinLimit(x2, canvasWidth);
-    y2 = this.makeSureValueIsWithinLimit(y2, canvasHeight);
+    x1 = makeSureValueIsWithinLimit(x1, canvasWidth);
+    y1 = makeSureValueIsWithinLimit(y1, canvasHeight);
+    x2 = makeSureValueIsWithinLimit(x2, canvasWidth);
+    y2 = makeSureValueIsWithinLimit(y2, canvasHeight);
 
     const circle: any = new fabric.Circle({
       radius: pointSize,
@@ -470,15 +470,6 @@ export class LabelService extends ComponentService {
       canvas.moveTo(text, this.textZIndex);
     }
     canvas.renderAll();
-  }
-
-  makeSureValueIsWithinLimit(value: number, limit: number): number {
-    if (value < 0) {
-      value = 0;
-    } else if (value > limit) {
-      value = limit;
-    }
-    return value;
   }
 
   setBackgroundImage(canvas: any, backgroundPath: string): void {

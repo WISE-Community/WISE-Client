@@ -34,7 +34,7 @@ let studentDataVersion: number = 2;
 let canEditBoolean: boolean = true;
 let canDeleteBoolean: boolean = true;
 
-fdescribe('LabelService', () => {
+describe('LabelService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -66,7 +66,6 @@ fdescribe('LabelService', () => {
   addLabelsToCanvas();
   addLabelToCanvas();
   createLabelServiceFunction();
-  makeSureValueIsWithinLimit();
 });
 
 function createComponentState(labels: any[], isSubmit: boolean = false) {
@@ -413,21 +412,4 @@ function createLabelServiceFunction() {
     expect(label.canEdit).toEqual(canEditBoolean);
     expect(label.canDelete).toEqual(canDeleteBoolean);
   });
-}
-
-function makeSureValueIsWithinLimit() {
-  const limit: number = 100;
-  it('should make sure value is within limit when it is negative', () => {
-    expectMakeSureValueIsWithinLimit(-1, limit, 0);
-  });
-  it('should make sure value is within limit when it is between zero and limit', () => {
-    expectMakeSureValueIsWithinLimit(50, limit, 50);
-  });
-  it('should make sure value is within limit when it is greater than limit', () => {
-    expectMakeSureValueIsWithinLimit(101, limit, 100);
-  });
-}
-
-function expectMakeSureValueIsWithinLimit(x: number, width: number, expectedValue: number) {
-  expect(service.makeSureValueIsWithinLimit(x, width)).toEqual(expectedValue);
 }
