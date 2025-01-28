@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { DialogGuidanceShowWorkComponent } from '../dialog-guidance-show-work/dialog-guidance-show-work.component';
+import { DetectedIdeasComponent } from '../detected-ideas/detected-ideas.component';
 
 @Component({
-  imports: [DialogGuidanceShowWorkComponent],
+  imports: [DetectedIdeasComponent, DialogGuidanceShowWorkComponent],
   selector: 'dialog-guidance-grading',
   standalone: true,
-  template: `<dialog-guidance-show-work
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-    [componentState]="componentState"
-    [isRevision]="isRevision"
-  />`
+  templateUrl: './dialog-guidance-grading.component.html'
 })
 export class DialogGuidanceGradingComponent extends ComponentShowWorkDirective {}

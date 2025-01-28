@@ -3,6 +3,7 @@ export class CRaterIdea {
   detected: boolean;
   characterOffsets: any[];
   studentText?: string;
+  teacherText?: string;
 
   constructor(name: string, detected: boolean) {
     this.name = name;
