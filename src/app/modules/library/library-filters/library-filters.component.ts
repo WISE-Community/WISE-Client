@@ -7,7 +7,6 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
   selector: 'app-library-filters',
   styleUrl: './library-filters.component.scss',
   templateUrl: './library-filters.component.html'

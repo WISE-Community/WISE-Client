@@ -1,9 +1,9 @@
 <div class="library-project-details" mat-dialog-content>
-  <div fxLayout="row">
-    <div fxLayout="row">
+  <div class="flex flex-row">
+    <div class="flex flex-row">
       <div class="mat-mdc-card-avatar" [style.background-image]="project.thumbStyle"></div>
-      <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
-        <div fxLayout="column">
+      <div class="flex-1 flex flex-row flex-wrap">
+        <div class="flex flex-col">
           <div class="mat-mdc-card-title mat-body-1">{{ project.metadata.title }}</div>
           <div class="mat-mdc-card-subtitle mat-caption">
             <div *ngIf="project.metadata.grades.length || project.metadata.totalTime">
@@ -23,10 +23,10 @@
             </div>
           </div>
         </div>
-        <span fxFlex="1 1 auto" fxHide fxShow.gt-xs></span>
+        <span class="hidden sm:flex-auto"></span>
       </div>
     </div>
-    <span fxFlex></span>
+    <span class="flex-auto"></span>
     <app-library-project-menu
       *ngIf="isTeacher && project.wiseVersion !== 4"
       [project]="project"
@@ -35,7 +35,7 @@
   </div>
   <div class="info-block">
     <div class="details">
-      <p *ngIf="project.wiseVersion === 4" class="warn" fxLayout="row" fxLayoutAlign="start center">
+      <p *ngIf="project.wiseVersion === 4" class="warn flex justify-start items-center">
         <mat-icon color="warn">warning</mat-icon>&nbsp;
         <strong
           class="more-info"
@@ -121,14 +121,7 @@
     </div>
   </div>
 </div>
-<div
-  mat-dialog-actions
-  fxLayout.gt-sm="row"
-  fxLayout="column"
-  fxLayoutAlign="end"
-  fxLayoutGap="8px"
-  fxLayoutGap.gt-sm="16px"
->
+<div mat-dialog-actions class="flex flex-col sm:flex-row gap-2 sm:gap-4 !items-stretch" align="end">
   <button mat-button cdkFocusInitial (click)="onClose()" i18n>Close</button>
   <button
     *ngIf="isTeacher && !isRunProject && project.wiseVersion !== 4"

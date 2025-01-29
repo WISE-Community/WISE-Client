@@ -1,5 +1,3 @@
-'use strict';
-
 import { fabric } from 'fabric';
 import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
@@ -8,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 import { wordWrap } from '../../common/string/string';
 import { hasConnectedComponent } from '../../common/ComponentContent';
+import { labelArraysAreTheSame, makeSureValueIsWithinLimit } from './label';
 
 @Injectable()
 export class LabelService extends ComponentService {
@@ -16,7 +15,7 @@ export class LabelService extends ComponentService {
   circleZIndex: number = 2;
   defaultTextBackgroundColor: string = 'blue';
 
-  constructor(private StudentAssetService: StudentAssetService) {
+  constructor(private assetService: StudentAssetService) {
     super();
   }
 
@@ -91,7 +90,7 @@ export class LabelService extends ComponentService {
       if (this.componentHasStarterLabel(componentContent)) {
         return (
           componentState != null &&
-          !this.labelArraysAreTheSame(componentState.studentData.labels, componentContent.labels)
+          !labelArraysAreTheSame(componentState.studentData.labels, componentContent.labels)
         );
       } else {
         return this.componentStateHasLabel(componentState);
@@ -99,7 +98,7 @@ export class LabelService extends ComponentService {
     }
   }
 
-  componentHasStarterLabel(componentContent: any) {
+  private componentHasStarterLabel(componentContent: any): boolean {
     return componentContent.labels != null && componentContent.labels.length > 0;
   }
 
@@ -114,79 +113,12 @@ export class LabelService extends ComponentService {
   componentStateIsSameAsStarter(componentState: any, componentContent: any) {
     if (componentState != null) {
       if (this.componentHasStarterLabel(componentContent)) {
-        return this.labelArraysAreTheSame(
-          componentState.studentData.labels,
-          componentContent.labels
-        );
+        return labelArraysAreTheSame(componentState.studentData.labels, componentContent.labels);
       } else {
         return !this.componentStateHasLabel(componentState);
       }
     }
     return false;
-  }
-
-  /**
-   * Check if the two arrays of labels contain the same values
-   * @param labels1 an array of label objects
-   * @param labels2 an array of label objects
-   * @return whether the labels contain the same values
-   */
-  labelArraysAreTheSame(labels1: any[], labels2: any[]) {
-    if (this.bothObjectsAreNull(labels1, labels2)) {
-      return true;
-    } else if (this.oneObjIsNullAndOtherIsNotNull(labels1, labels2)) {
-      return false;
-    } else {
-      return this.labelArrayContentsAreTheSame(labels1, labels2);
-    }
-  }
-
-  labelArrayContentsAreTheSame(labels1: any[], labels2: any[]) {
-    if (labels1.length != labels2.length) {
-      return false;
-    } else {
-      for (let l = 0; l < labels1.length; l++) {
-        if (!this.labelsAreTheSame(labels1[l], labels2[l])) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  bothObjectsAreNull(obj1: any, obj2: any) {
-    return obj1 == null && obj2 == null;
-  }
-
-  oneObjIsNullAndOtherIsNotNull(obj1: any, obj2: any) {
-    return (obj1 == null && obj2 != null) || (obj1 != null && obj2 == null);
-  }
-
-  /**
-   * Check if two labels contain the same values
-   * @param label1 a label object
-   * @param label2 a label object
-   * @return whether the labels contain the same values
-   */
-  labelsAreTheSame(label1: any, label2: any) {
-    if (this.bothObjectsAreNull(label1, label2)) {
-      return true;
-    } else if (this.oneObjIsNullAndOtherIsNotNull(label1, label2)) {
-      return false;
-    } else {
-      return this.labelFieldsAreTheSame(label1, label2);
-    }
-  }
-
-  labelFieldsAreTheSame(label1: any, label2: any) {
-    return (
-      label1.text === label2.text &&
-      label1.pointX === label2.pointX &&
-      label1.pointY === label2.pointY &&
-      label1.textX === label2.textX &&
-      label1.textY === label2.textY &&
-      label1.color === label2.color
-    );
   }
 
   /**
@@ -290,30 +222,28 @@ export class LabelService extends ComponentService {
         myCanvas.height = image.height;
         ctx.drawImage(image, 0, 0);
         const pngFile = convertToPNGFile(myCanvas);
-        this.StudentAssetService.uploadAsset(pngFile).then((unreferencedAsset) => {
+        this.assetService.uploadAsset(pngFile).then((unreferencedAsset) => {
           /*
            * make a copy of the unreferenced asset so that we
            * get a referenced asset
            */
-          this.StudentAssetService.copyAssetForReference(unreferencedAsset).then(
-            (referencedAsset) => {
-              if (referencedAsset != null) {
-                /*
-                 * get the asset url
-                 * for example
-                 * /wise/studentuploads/11261/297478/referenced/picture_1494016652542.png
-                 * if we are in preview mode this url will be a base64 string instead
-                 */
-                const referencedAssetUrl = referencedAsset.url;
+          this.assetService.copyAssetForReference(unreferencedAsset).then((referencedAsset) => {
+            if (referencedAsset != null) {
+              /*
+               * get the asset url
+               * for example
+               * /wise/studentuploads/11261/297478/referenced/picture_1494016652542.png
+               * if we are in preview mode this url will be a base64 string instead
+               */
+              const referencedAssetUrl = referencedAsset.url;
 
-                // remove the unreferenced asset
-                this.StudentAssetService.deleteAsset(unreferencedAsset);
+              // remove the unreferenced asset
+              this.assetService.deleteAsset(unreferencedAsset);
 
-                // resolve the promise with the image url
-                resolve(referencedAssetUrl);
-              }
+              // resolve the promise with the image url
+              resolve(referencedAssetUrl);
             }
-          );
+          });
         });
       };
 
@@ -348,7 +278,7 @@ export class LabelService extends ComponentService {
     return new Promise((resolve, reject) => {
       const canvas = this.getCanvas(componentState);
       const pngFile = convertToPNGFile(canvas);
-      this.StudentAssetService.uploadAsset(pngFile).then((asset: any) => {
+      this.assetService.uploadAsset(pngFile).then((asset: any) => {
         resolve(asset);
       });
     });
@@ -377,10 +307,6 @@ export class LabelService extends ComponentService {
   setCanvasDimension(canvas: any, width: number, height: number): void {
     canvas.setWidth(width);
     canvas.setHeight(height);
-  }
-
-  isStudentDataVersion(componentState: any, studentDataVersion: number): boolean {
-    return componentState.studentData.version === studentDataVersion;
   }
 
   addLabelsToCanvas(
@@ -459,10 +385,10 @@ export class LabelService extends ComponentService {
      * are any positions that are outside the bounds, we will change the
      * position to be within the bounds.
      */
-    x1 = this.makeSureValueIsWithinLimit(x1, canvasWidth);
-    y1 = this.makeSureValueIsWithinLimit(y1, canvasHeight);
-    x2 = this.makeSureValueIsWithinLimit(x2, canvasWidth);
-    y2 = this.makeSureValueIsWithinLimit(y2, canvasHeight);
+    x1 = makeSureValueIsWithinLimit(x1, canvasWidth);
+    y1 = makeSureValueIsWithinLimit(y1, canvasHeight);
+    x2 = makeSureValueIsWithinLimit(x2, canvasWidth);
+    y2 = makeSureValueIsWithinLimit(y2, canvasHeight);
 
     const circle: any = new fabric.Circle({
       radius: pointSize,
@@ -544,15 +470,6 @@ export class LabelService extends ComponentService {
       canvas.moveTo(text, this.textZIndex);
     }
     canvas.renderAll();
-  }
-
-  makeSureValueIsWithinLimit(value: number, limit: number): number {
-    if (value < 0) {
-      value = 0;
-    } else if (value > limit) {
-      value = limit;
-    }
-    return value;
   }
 
   setBackgroundImage(canvas: any, backgroundPath: string): void {

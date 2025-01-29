@@ -1,21 +1,17 @@
 <div
-  class="content-block filters dark-theme primary-bg"
-  fxLayout="row"
-  fxLayout.lt-md="column"
-  fxLayoutGap="16px"
-  fxLayoutAlign="start stretch"
+  class="content-block filters dark-theme primary-bg flex flex-col md:flex-row gap-4 items-stretch justify-start"
 >
   <app-search-bar
-    fxFlex="0 0 auto"
+    class="flex-none"
     i18n-placeholderText
     placeholderText="Search"
     [disable]="!recentRunsLoaded"
     [value]="searchValue"
     (update)="searchChanged($event)"
   />
-  <span fxFlex="1 1 auto" fxHide fxShow.gt-sm></span>
-  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
-    <mat-form-field [subscriptSizing]="'dynamic'">
+  <span class="hidden md:inline-flex flex-auto"></span>
+  <div class="flex flex-row items-center justify-center gap-4">
+    <mat-form-field [subscriptSizing]="'dynamic'" class="w-full">
       <mat-label>View</mat-label>
       <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
         <mat-option [value]="false" i18n>Active</mat-option>
@@ -25,12 +21,7 @@
   </div>
 </div>
 <div class="content-block">
-  <div
-    fxLayout="column"
-    fxLayout.gt-xs="row"
-    fxLayoutGap="16px"
-    fxLayoutAlign="space-between center"
-  >
+  <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
     <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)" />
     <div class="notice run-counts">
       <p [ngStyle]="{ visibility: allRunsLoaded ? 'visible' : 'hidden' }">
@@ -75,7 +66,7 @@
     <div class="notice no-runs-message" *ngIf="showArchivedView && getNumArchivedRuns() === 0">
       <p i18n>Looks like you don't have any archived classroom units.</p>
     </div>
-    <div fxLayout="row">
+    <div class="flex flex-row">
       <select-runs-controls
         *ngIf="filteredRuns.length > 0"
         (archiveProjectsEvent)="archiveProjects($event)"

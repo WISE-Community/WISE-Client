@@ -1,13 +1,13 @@
 <component-header [component]="component" />
 <div class="input-wrapper" fxLayout="row wrap" fxLayoutAlign="start center">
-  @if (isAddNewLabelButtonVisible) {
+  @if (addNewLabelButtonVisible) {
     <button
       mat-raised-button
       color="primary"
       class="add-button"
       (click)="addNewLabel()"
       [disabled]="isDisabled"
-      matTooltip="Add New Label"
+      matTooltip="Add new label"
       matTooltipPosition="above"
       i18n-matTooltip
     >
@@ -87,7 +87,7 @@
       mat-raised-button
       color="primary"
       class="reset-button"
-      (click)="resetButtonClicked()"
+      (click)="reset()"
       [disabled]="isDisabled"
       matTooltip="Reset"
       matTooltipPosition="above"
