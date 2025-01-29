@@ -37,8 +37,7 @@ let canDeleteBoolean: boolean = true;
 describe('LabelService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
+      providers: [
         AnnotationService,
         ConfigService,
         LabelService,
@@ -48,8 +47,8 @@ describe('LabelService', () => {
         TagService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     service = TestBed.inject(LabelService);
     label1 = createLabel(label1Text, label1PointX, label1PointY, label1TextX, label1TextY, color1);
     label2 = createLabel(label2Text, label2PointX, label2PointY, label2TextX, label2TextY, color2);
@@ -61,15 +60,12 @@ describe('LabelService', () => {
   canEdit();
   componentStateHasStudentWork();
   componentStateIsSameAsStarter();
-  labelArraysAreTheSame();
-  labelsAreTheSame();
   getTSpans();
   getSVGTextElementString();
   initializeCanvas();
   addLabelsToCanvas();
   addLabelToCanvas();
   createLabelServiceFunction();
-  makeSureValueIsWithinLimit();
 });
 
 function createComponentState(labels: any[], isSubmit: boolean = false) {
@@ -319,54 +315,6 @@ function componentStateIsSameAsStarter() {
   });
 }
 
-function labelArraysAreTheSame() {
-  function expectLabelArraysAreTheSame(labels1: any[], labels2: any[], expectedResult) {
-    expect(service.labelArraysAreTheSame(labels1, labels2)).toEqual(expectedResult);
-  }
-  it('should check if label arrays are the same when they are both null', () => {
-    expectLabelArraysAreTheSame(null, null, true);
-  });
-  it('should check if label arrays are the same when one is null and the other is not null', () => {
-    expectLabelArraysAreTheSame([label1], null, false);
-  });
-  it(`should check if label arrays are the same when both are not null and contain different
-      labels`, () => {
-    expectLabelArraysAreTheSame([label1], [label2], false);
-  });
-  it(`should check if label arrays are the same when both are not null and contain the same
-      labels`, () => {
-    expectLabelArraysAreTheSame([label1, label2], [label1, label2], true);
-  });
-}
-
-function labelsAreTheSame() {
-  function expectLabelsAreTheSame(label1: any, label2: any, expectedResult: any) {
-    expect(service.labelsAreTheSame(label1, label2)).toEqual(expectedResult);
-  }
-  it('should check if labels are the same when they are both null', () => {
-    expectLabelsAreTheSame(null, null, true);
-  });
-  it('should check if labels are the same when one is null and one is not null', () => {
-    expectLabelsAreTheSame({}, null, false);
-  });
-  it(`should check if labels are the same when both are not null and do not have the same
-      values`, () => {
-    expectLabelsAreTheSame(label1, label2, false);
-  });
-  it(`should check if labels are the same when both are not null and do have the same
-      values`, () => {
-    const label3 = createLabel(
-      label1Text,
-      label1PointX,
-      label1PointY,
-      label1TextX,
-      label1TextY,
-      color1
-    );
-    expectLabelsAreTheSame(label1, label3, true);
-  });
-}
-
 function getTSpans() {
   it('should get TSpans for the text', () => {
     const textWrapped = 'The quick brown fox\njumps over\nthe lazy dog.';
@@ -464,21 +412,4 @@ function createLabelServiceFunction() {
     expect(label.canEdit).toEqual(canEditBoolean);
     expect(label.canDelete).toEqual(canDeleteBoolean);
   });
-}
-
-function makeSureValueIsWithinLimit() {
-  const limit: number = 100;
-  it('should make sure value is within limit when it is negative', () => {
-    expectMakeSureValueIsWithinLimit(-1, limit, 0);
-  });
-  it('should make sure value is within limit when it is between zero and limit', () => {
-    expectMakeSureValueIsWithinLimit(50, limit, 50);
-  });
-  it('should make sure value is within limit when it is greater than limit', () => {
-    expectMakeSureValueIsWithinLimit(101, limit, 100);
-  });
-}
-
-function expectMakeSureValueIsWithinLimit(x: number, width: number, expectedValue: number) {
-  expect(service.makeSureValueIsWithinLimit(x, width)).toEqual(expectedValue);
 }
