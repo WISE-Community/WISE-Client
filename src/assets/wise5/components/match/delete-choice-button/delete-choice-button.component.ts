@@ -28,14 +28,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class DeleteChoiceButtonComponent {
   @Input() buckets: any;
-
   @Input() isDisabled: boolean;
-
   @Input() item: any;
-
   @Output() onItemDeleted = new EventEmitter<void>();
 
-  deleteChoice(): void {
+  protected deleteChoice(): void {
     if (confirm($localize`Are you sure you want to delete this item?`)) {
       this.buckets.forEach((bucket) => {
         let i = 0;
