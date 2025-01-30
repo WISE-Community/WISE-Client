@@ -1,6 +1,8 @@
-<p i18n>Ideas found in this dialog:</p>
-<ul>
-  @for (idea of ideas; track idea.name) {
-    <li>{{ idea.teacherText }}</li>
-  }
-</ul>
+@if (ideas.length > 0) {
+  <p i18n>Ideas found:</p>
+  <ul>
+    @for (idea of ideas; track idea.name) {
+      <li>{{ idea.teacherText }}</li>
+    }
+  </ul>
+}

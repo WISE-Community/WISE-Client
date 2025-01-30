@@ -6,6 +6,8 @@ import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { MatCardModule } from '@angular/material/card';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
+import { CRaterRubric } from '../../common/cRater/CRaterRubric';
+import { CRaterService } from '../../../services/cRaterService';
 
 @Component({
   imports: [DialogResponsesComponent, MatCardModule],
@@ -19,6 +21,7 @@ import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.c
     <mat-card appearance="outlined" class="mat-elevation-z2">
       <dialog-responses
         [computerAvatar]="computerAvatar"
+        [cRaterRubric]="cRaterRubric"
         [responses]="componentState.studentData.responses"
       />
     </mat-card>
@@ -26,9 +29,11 @@ import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.c
 })
 export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective {
   protected computerAvatar: ComputerAvatar;
+  protected cRaterRubric: CRaterRubric;
 
   constructor(
     private computerAvatarService: ComputerAvatarService,
+    private cRaterService: CRaterService,
     protected nodeService: NodeService,
     protected projectService: ProjectService
   ) {
@@ -39,5 +44,6 @@ export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective 
     this.computerAvatar = this.computerAvatarService.getAvatar(
       this.componentState.studentData.computerAvatarId
     );
+    this.cRaterRubric = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
   }
 }

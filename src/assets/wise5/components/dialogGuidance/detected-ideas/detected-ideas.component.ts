@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { getUniqueIdeas } from '../../common/cRater/CRaterRubric';
-import { CRaterService } from '../../../services/cRaterService';
+import { CRaterRubric, getUniqueIdeas } from '../../common/cRater/CRaterRubric';
 import { CRaterIdea } from '../../common/cRater/CRaterIdea';
 import { CommonModule } from '@angular/common';
 
@@ -12,18 +11,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './detected-ideas.component.html'
 })
 export class DetectedIdeasComponent {
-  @Input() componentState: any;
+  @Input() cRaterRubric: CRaterRubric;
   protected ideas: CRaterIdea[];
-
-  constructor(private cRaterService: CRaterService) {}
+  @Input() responses: any;
 
   ngOnInit(): void {
-    this.ideas = getUniqueIdeas(
-      this.componentState.studentData.responses,
-      this.cRaterService.getCRaterRubric(
-        this.componentState.nodeId,
-        this.componentState.componentId
-      )
-    );
+    this.ideas = getUniqueIdeas(this.responses, this.cRaterRubric);
   }
 }

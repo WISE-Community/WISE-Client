@@ -1,4 +1,7 @@
-@for (response of responses; track response) {
+@for (response of responses; track response.timestamp) {
+  @if (response.user === 'Computer') {
+    <detected-ideas [cRaterRubric]="cRaterRubric" [responses]="[response]" />
+  }
   <dialog-response [response]="response" [computerAvatar]="computerAvatar" />
 }
 @if (isWaitingForComputerResponse) {

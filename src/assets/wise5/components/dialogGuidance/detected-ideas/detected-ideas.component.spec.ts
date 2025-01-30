@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DetectedIdeasComponent } from './detected-ideas.component';
-import { CRaterService } from '../../../services/cRaterService';
-import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { By } from '@angular/platform-browser';
 
 describe('DetectedIdeasComponent', () => {
@@ -10,16 +8,12 @@ describe('DetectedIdeasComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DetectedIdeasComponent],
-      providers: [{ provide: CRaterService, useValue: { getCRaterRubric() {} } }]
+      imports: [DetectedIdeasComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DetectedIdeasComponent);
     component = fixture.componentInstance;
-    component.componentState = {
-      studentData: { responses: [] }
-    };
-    spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue({} as CRaterRubric);
+    component.responses = [];
     fixture.detectChanges();
   });
 
