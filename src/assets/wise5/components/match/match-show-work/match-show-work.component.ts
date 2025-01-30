@@ -3,26 +3,31 @@ import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { MatchService } from '../matchService';
+import { MatchFeedbackSectionComponent } from '../match-student/match-feedback-section/match-feedback-section.component';
+import { CommonModule } from '@angular/common';
+import { MatchChoiceItemComponent } from '../match-choice-item/match-choice-item.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatchChoiceItemComponent,
+    MatchFeedbackSectionComponent
+  ],
   selector: 'match-show-work',
-  templateUrl: 'match-show-work.component.html',
+  standalone: true,
   styleUrls: [
     '../match-student/match-student-default/match-student-default.component.scss',
     'match-show-work.component.scss'
-  ]
+  ],
+  templateUrl: 'match-show-work.component.html'
 })
 export class MatchShowWorkComponent extends ComponentShowWorkDirective {
-  sourceBucketId = '0';
-  sourceBucket: any;
-  targetBuckets: any[] = [];
-  isHorizontal: boolean;
-  isChoicesAfter: boolean;
-  bucketWidth: number;
-  hasCorrectAnswer: boolean;
-  isCorrect: boolean;
-  submitCounter: number;
-  isLatestComponentStateSubmit: boolean;
+  protected hasCorrectAnswer: boolean;
+  protected sourceBucket: any;
+  private sourceBucketId = '0';
+  protected targetBuckets: any[] = [];
 
   constructor(
     protected matchService: MatchService,
@@ -32,31 +37,24 @@ export class MatchShowWorkComponent extends ComponentShowWorkDirective {
     super(nodeService, projectService);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.hasCorrectAnswer = this.matchService.componentHasCorrectAnswer(this.componentContent);
-    this.isCorrect = this.componentState.studentData.isCorrect;
-    this.isChoicesAfter = this.componentContent.choicesAfter;
-    this.isHorizontal = this.componentContent.horizontal;
-    this.submitCounter = this.componentState.studentData.submitCounter;
-    this.isLatestComponentStateSubmit = this.componentState.isSubmit;
     this.initializeBuckets(this.componentState.studentData.buckets);
   }
 
-  initializeBuckets(buckets: any[]): void {
-    for (const bucket of buckets) {
+  private initializeBuckets(buckets: any[]): void {
+    buckets.forEach((bucket) => {
       this.setItemStatuses(bucket.items);
       if (bucket.id === this.sourceBucketId) {
         this.sourceBucket = bucket;
       } else {
         this.targetBuckets.push(bucket);
       }
-    }
+    });
   }
 
-  setItemStatuses(items: any[]): void {
-    for (const item of items) {
-      this.matchService.setItemStatus(item, this.hasCorrectAnswer);
-    }
+  private setItemStatuses(items: any[]): void {
+    items.forEach((item) => this.matchService.setItemStatus(item, this.hasCorrectAnswer));
   }
 }
