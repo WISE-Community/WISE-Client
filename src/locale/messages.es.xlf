@@ -21164,7 +21164,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/labelService.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target state="translated">Etiqueta</target>
       </trans-unit>
@@ -21370,25 +21370,25 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">767</context>
+          <context context-type="linenumber">667</context>
         </context-group>
         <target state="translated">¿Seguro que quiere borrar esta etiqueta?
 
 <x id="PH" equiv-text="label.text"/></target>
       </trans-unit>
-      <trans-unit id="d0416d769e2f5f38e271f36c0e263f02e2f3b603" datatype="html">
-        <source>Add New Label</source>
+      <trans-unit id="412bfb437f543e109509cf68b11e59f20e3aca1c" datatype="html">
+        <source>Add new label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-        <target state="translated">Agregar Nueva Etiqueta</target>
+        <target state="needs-translation">Add new label</target>
       </trans-unit>
       <trans-unit id="2518624267018648120" datatype="html">
         <source>A New Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">514</context>
+          <context context-type="linenumber">372</context>
         </context-group>
         <target state="translated">Una Nueva Etiqueta</target>
       </trans-unit>
@@ -21396,7 +21396,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to reset to the initial state?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">875</context>
+          <context context-type="linenumber">771</context>
         </context-group>
         <target state="translated">¿Seguro que desea resetear al estado inicial?</target>
       </trans-unit>
@@ -21404,7 +21404,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to delete the background image?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.ts</context>
-          <context context-type="linenumber">936</context>
+          <context context-type="linenumber">818</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar la imagen de fondo?</target>
       </trans-unit>
@@ -21444,7 +21444,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to delete this item?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/delete-choice-button/delete-choice-button.component.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar este item?</target>
       </trans-unit>
