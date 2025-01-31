@@ -2,13 +2,13 @@
   <mat-card-content>
     <h2 class="standalone__title accent" i18n>Create Teacher Account</h2>
     <p>
-      <mat-form-field appearance="fill" fxFlex>
+      <mat-form-field appearance="fill" class="w-full">
         <mat-label i18n>Email</mat-label>
         <input matInput id="email" name="email" [(ngModel)]="email" />
       </mat-form-field>
     </p>
     <p>
-      <button fxFlex mat-flat-button color="primary" (click)="signUp()">
+      <button class="w-full" mat-flat-button color="primary" (click)="signUp()">
         <ng-container i18n>Sign Up</ng-container>
       </button>
     </p>
