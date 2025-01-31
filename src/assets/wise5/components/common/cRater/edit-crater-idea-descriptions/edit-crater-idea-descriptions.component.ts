@@ -43,7 +43,6 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
         this.teacherProjectService.nodeChanged();
       })
     );
-    // this.i;
   }
 
   ngOnDestroy(): void {
@@ -54,6 +53,12 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
     const newIdeaDescription = this.createNewIdea();
     this.ideaDescriptions.splice(this.getIdeaIndex(), 0, newIdeaDescription);
     this.teacherProjectService.nodeChanged();
+    setTimeout(() => {
+      const button = document.getElementById('add-new-idea-description-bottom-button');
+      if (button) {
+        button.scrollIntoView();
+      }
+    }, 0);
   }
 
   private createNewIdea(): CRaterIdea {
