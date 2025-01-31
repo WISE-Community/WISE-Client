@@ -54,7 +54,7 @@
   [ngClass]="{ 'highlighted-bg': run.highlighted }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
 >
-  <mat-card-content fxLayout="row" fxLayoutGap="12px">
+  <mat-card-content class="!flex flex-row gap-3">
     <div>
       <mat-checkbox
         class="run-action"
@@ -71,8 +71,8 @@
       [style.background-image]="run.project.thumbStyle"
       [class.disabled]="isRunCompleted(run)"
     ></div>
-    <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
-      <div fxLayout="column">
+    <div class="flex flex-row flex-auto">
+      <div class="flex flex-col">
         <mat-card-title [ngClass]="{ 'secondary-text': isRunCompleted(run) }" class="mat-body-1">
           {{ run.project.name }}
           <span
@@ -86,11 +86,11 @@
             >(Legacy Unit)</span
           >
         </mat-card-title>
-        <mat-card-subtitle class="mat-caption" fxHide fxShow.gt-xs>
+        <mat-card-subtitle class="mat-caption" class="max-sm:!hidden">
           <ng-container *ngTemplateOutlet="runInfo"></ng-container>
         </mat-card-subtitle>
       </div>
-      <span fxFlex="1 1 auto"></span>
+      <span class="flex-auto"></span>
       <div>
         <app-run-menu
           class="run-action"
@@ -100,17 +100,13 @@
       </div>
     </div>
   </mat-card-content>
-  <mat-card-content fxHide fxShow.xs>
+  <mat-card-content class="sm:!hidden">
     <div class="info-block" [class.secondary-text]="isRunCompleted(run)">
       <ng-container *ngTemplateOutlet="runInfo"></ng-container>
     </div>
   </mat-card-content>
   <mat-card-actions
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutAlign.gt-xs="end center"
-    fxLayoutGap="8px"
+    class="flex flex-col sm:flex-row flex-wrap gap-2 items-center justify-center sm:justify-end"
   >
     <span *ngIf="run.lastRun" class="mat-caption secondary-text center" i18n
       >Last student login: {{ run.lastRun | date: 'short' }}</span
@@ -123,6 +119,7 @@
       mat-flat-button
       (click)="launchGradeAndManageTool()"
       color="primary"
+      class="w-full sm:w-auto"
     >
       <mat-icon>assignment_turned_in</mat-icon>&nbsp;<ng-container i18n>Teacher Tools</ng-container>
     </button>

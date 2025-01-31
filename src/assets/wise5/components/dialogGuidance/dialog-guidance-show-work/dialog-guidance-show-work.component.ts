@@ -4,19 +4,28 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
-import { DialogResponse } from '../DialogResponse';
+import { MatCardModule } from '@angular/material/card';
+import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 
 @Component({
+  imports: [DialogResponsesComponent, MatCardModule],
   selector: 'dialog-guidance-show-work',
-  templateUrl: './dialog-guidance-show-work.component.html',
+  standalone: true,
   styleUrls: [
     '../dialog-guidance-student/dialog-guidance-student.component.scss',
     './dialog-guidance-show-work.component.scss'
-  ]
+  ],
+  template: `
+    <mat-card appearance="outlined" class="mat-elevation-z2">
+      <dialog-responses
+        [computerAvatar]="computerAvatar"
+        [responses]="componentState.studentData.responses"
+      />
+    </mat-card>
+  `
 })
 export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective {
-  computerAvatar: ComputerAvatar;
-  responses: DialogResponse[];
+  protected computerAvatar: ComputerAvatar;
 
   constructor(
     private computerAvatarService: ComputerAvatarService,
@@ -27,7 +36,6 @@ export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective 
   }
 
   ngOnInit(): void {
-    this.responses = this.componentState.studentData.responses;
     this.computerAvatar = this.computerAvatarService.getAvatar(
       this.componentState.studentData.computerAvatarId
     );

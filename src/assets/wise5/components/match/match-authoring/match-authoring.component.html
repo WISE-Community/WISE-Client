@@ -1,7 +1,7 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
+/>
 <p>
   <mat-checkbox
     color="primary"
@@ -10,7 +10,7 @@
     (ngModelChange)="componentChanged()"
     i18n
   >
-    Show Source and Target Buckets Side-by-Side
+    Show source and target buckets side-by-side
   </mat-checkbox>
 </p>
 <p>
@@ -21,7 +21,7 @@
     (ngModelChange)="componentChanged()"
     i18n
   >
-    Show Choices After Target Buckets
+    Show choices after target buckets
   </mat-checkbox>
 </p>
 <p>
@@ -42,180 +42,161 @@
     color="primary"
     class="authoring-button add-button"
     (click)="addChoice()"
-    matTooltip="Add Choice"
+    matTooltip="Add choice"
     matTooltipPosition="above"
     i18n-matTooltip
-    aria-label="Add"
-    i18n-aria-label
   >
     <mat-icon>add</mat-icon>
   </button>
-  <div *ngIf="componentContent.choices.length === 0" i18n>
-    There are no choices. Click the "Add Choice" button to add a choice.
-  </div>
-  <div
-    *ngFor="
-      let choice of componentContent.choices;
-      index as choiceIndex;
-      first as isFirst;
-      last as isLast
-    "
-    fxLayout="row"
-    fxLayoutAlign="start center"
-  >
-    <translatable-input
-      [content]="choice"
-      key="value"
-      label="Choice Name"
-      i18n-label
-      placeholder="Type text or choose an image"
-      i18n-placeholder
-      (defaultLanguageTextChanged)="inputChange.next($event)"
-      class="name"
-    />
-    <translatable-asset-chooser
-      [content]="choice"
-      key="value"
-      [processAsset]="processSelectedAsset"
-      (defaultLanguageTextChanged)="componentChanged()"
-    />
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      [disabled]="isFirst"
-      (click)="moveChoiceUp(choiceIndex)"
-      matTooltip="Move Up"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Up"
-      i18n-aria-label
-    >
-      <mat-icon>arrow_upward</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      [disabled]="isLast"
-      (click)="moveChoiceDown(choiceIndex)"
-      matTooltip="Move Down"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Down"
-      i18n-aria-label
-    >
-      <mat-icon>arrow_downward</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="deleteChoice(choiceIndex)"
-      matTooltip="Delete Choice"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Delete"
-      i18n-aria-label
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
+  @if (componentContent.choices.length === 0) {
+    <div i18n>There are no choices. Click the "Add choice" button to add a choice.</div>
+  }
+  @for (
+    choice of componentContent.choices;
+    track choice.id;
+    let choiceIndex = $index, isFirst = $first, isLast = $last
+  ) {
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <translatable-input
+        [content]="choice"
+        key="value"
+        label="Choice name"
+        i18n-label
+        placeholder="Type text or choose an image"
+        i18n-placeholder
+        (defaultLanguageTextChanged)="inputChange.next($event)"
+        class="name"
+      />
+      <translatable-asset-chooser
+        [content]="choice"
+        key="value"
+        [processAsset]="processSelectedAsset"
+        (defaultLanguageTextChanged)="componentChanged()"
+      />
+      <button
+        mat-raised-button
+        color="primary"
+        class="authoring-button"
+        [disabled]="isFirst"
+        (click)="moveChoiceUp(choiceIndex)"
+        matTooltip="Move up"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="authoring-button"
+        [disabled]="isLast"
+        (click)="moveChoiceDown(choiceIndex)"
+        matTooltip="Move down"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="authoring-button"
+        (click)="deleteChoice(choiceIndex)"
+        matTooltip="Delete choice"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  }
 </div>
 <div class="section">
   <translatable-input
     [content]="componentContent"
     key="choicesLabel"
-    label="Source Bucket Name"
+    label="Source bucket name"
     i18n-label
     (defaultLanguageTextChanged)="inputChange.next($event)"
-    class="name"/>
+    class="name"
+  />
   <br />
-  <span i18n>Target Buckets</span>
+  <span i18n>Target buckets</span>
   <button
     mat-raised-button
     color="primary"
     class="authoring-button add-button"
     (click)="addBucket()"
-    matTooltip="Add Target Bucket"
+    matTooltip="Add target bucket"
     matTooltipPosition="above"
     i18n-matTooltip
-    aria-label="Add"
-    i18n-aria-label
   >
     <mat-icon>add</mat-icon>
   </button>
-  <div *ngIf="componentContent.buckets.length === 0" i18n>
-    There are no target buckets. Click the "Add Target Bucket" button to add a bucket.
-  </div>
-  <div
-    *ngFor="
-      let bucket of componentContent.buckets;
-      index as bucketIndex;
-      first as isFirst;
-      last as isLast
-    "
-    fxLayout="row"
-    fxLayoutAlign="start center"
-  >
-    <translatable-input
-      [content]="bucket"
-      key="value"
-      label="Target Bucket Name"
-      i18n-label
-      placeholder="Type text or choose an image"
-      i18n-placeholder
-      (defaultLanguageTextChanged)="inputChange.next($event)"
-      class="name"
-    />
-    <translatable-asset-chooser
-      [content]="bucket"
-      key="value"
-      [processAsset]="processSelectedAsset"
-      (defaultLanguageTextChanged)="componentChanged()"
-    />
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      [disabled]="isFirst"
-      (click)="moveBucketUp(bucketIndex)"
-      matTooltip="Move Up"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Up"
-      i18n-aria-label
-    >
-      <mat-icon>arrow_upward</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      [disabled]="isLast"
-      (click)="moveBucketDown(bucketIndex)"
-      matTooltip="Move Down"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Down"
-      i18n-aria-label
-    >
-      <mat-icon>arrow_downward</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="deleteBucket(bucketIndex)"
-      matTooltip="Delete Bucket"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Delete"
-      i18n-aria-label
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
+  @if (componentContent.buckets.length === 0) {
+    <div i18n>
+      There are no target buckets. Click the "Add target bucket" button to add a bucket.
+    </div>
+  }
+  @for (
+    bucket of componentContent.buckets;
+    track bucket.id;
+    let bucketIndex = $index, isFirst = $first, isLast = $last
+  ) {
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <translatable-input
+        [content]="bucket"
+        key="value"
+        label="Target bucket name"
+        i18n-label
+        placeholder="Type text or choose an image"
+        i18n-placeholder
+        (defaultLanguageTextChanged)="inputChange.next($event)"
+        class="name"
+      />
+      <translatable-asset-chooser
+        [content]="bucket"
+        key="value"
+        [processAsset]="processSelectedAsset"
+        (defaultLanguageTextChanged)="componentChanged()"
+      />
+      <button
+        mat-raised-button
+        color="primary"
+        class="authoring-button"
+        [disabled]="isFirst"
+        (click)="moveBucketUp(bucketIndex)"
+        matTooltip="Move up"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="authoring-button"
+        [disabled]="isLast"
+        (click)="moveBucketDown(bucketIndex)"
+        matTooltip="Move down"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="authoring-button"
+        (click)="deleteBucket(bucketIndex)"
+        matTooltip="Delete bucket"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  }
 </div>
 <div class="section">
   <div class="choice-ordered-checkbox">
@@ -229,51 +210,54 @@
       Choices need to be ordered within buckets
     </mat-checkbox>
   </div>
-  <div *ngFor="let bucketFeedback of componentContent.feedback" class="section">
-    <p i18n>Bucket Name: {{ getBucketNameById(bucketFeedback.bucketId) }}</p>
-    <div
-      *ngFor="let choiceFeedback of bucketFeedback.choices"
-      class="choice-feedback-container notice-bg-bg"
-    >
-      <span i18n> Choice: {{ getChoiceTextById(choiceFeedback.choiceId) }} </span>
-      <div fxLayout="row">
-        <translatable-input
-          [content]="choiceFeedback"
-          key="feedback"
-          label="Feedback"
-          i18n-label
-          (defaultLanguageTextChanged)="feedbackChange.next($event)"
-          class="feedback"
-        />
-        <mat-checkbox
-          color="primary"
-          [(ngModel)]="choiceFeedback.isCorrect"
-          (ngModelChange)="isCorrectClicked(choiceFeedback)"
-          layout="row"
-          i18n
-        >
-          Is Correct
-        </mat-checkbox>
-      </div>
-      <div *ngIf="componentContent.ordered && choiceFeedback.isCorrect" fxLayout="row" fxLayoutAlign="start start">
-        <mat-form-field class="position">
-          <mat-label i18n>Position</mat-label>
-          <input
-            matInput
-            type="number"
-            [(ngModel)]="choiceFeedback.position"
-            (ngModelChange)="feedbackChange.next($event)"
-          />
-        </mat-form-field>
-        <translatable-input
-          [content]="choiceFeedback"
-          key="incorrectPositionFeedback"
-          label="Incorrect Position Feedback"
-          i18n-label
-          (defaultLanguageTextChanged)="feedbackChange.next($event)"
-          class="incorrect-position-feedback"
-        />
-      </div>
+  @for (bucketFeedback of componentContent.feedback; track $index) {
+    <div class="section">
+      <p i18n>Bucket name: {{ getBucketNameById(bucketFeedback.bucketId) }}</p>
+      @for (choiceFeedback of bucketFeedback.choices; track $index) {
+        <div class="choice-feedback-container notice-bg-bg">
+          <span i18n> Choice: {{ getChoiceTextById(choiceFeedback.choiceId) }} </span>
+          <div fxLayout="row">
+            <translatable-input
+              [content]="choiceFeedback"
+              key="feedback"
+              label="Feedback"
+              i18n-label
+              (defaultLanguageTextChanged)="feedbackChange.next($event)"
+              class="feedback"
+            />
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="choiceFeedback.isCorrect"
+              (ngModelChange)="isCorrectClicked(choiceFeedback)"
+              layout="row"
+              i18n
+            >
+              Is correct
+            </mat-checkbox>
+          </div>
+          @if (componentContent.ordered && choiceFeedback.isCorrect) {
+            <div fxLayout="row" fxLayoutAlign="start start">
+              <mat-form-field class="position">
+                <mat-label i18n>Position</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="choiceFeedback.position"
+                  (ngModelChange)="feedbackChange.next($event)"
+                />
+              </mat-form-field>
+              <translatable-input
+                [content]="choiceFeedback"
+                key="incorrectPositionFeedback"
+                label="Incorrect position feedback"
+                i18n-label
+                (defaultLanguageTextChanged)="feedbackChange.next($event)"
+                class="incorrect-position-feedback"
+              />
+            </div>
+          }
+        </div>
+      }
     </div>
-  </div>
+  }
 </div>

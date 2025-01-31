@@ -2,12 +2,11 @@
 <h2
   *ngIf="isTransfer"
   mat-dialog-title
-  class="mat-dialog-title--icons"
-  fxLayoutAlign="start center"
+  class="mat-dialog-title--icons flex items-center justify-start"
   [class.warn]="transferRunWarning"
 >
   <span i18n>Transfer Classroom Unit</span>
-  <span fxFlex></span>
+  <span class="flex-auto"></span>
   <mat-icon *ngIf="transferRunWarning" color="warn">warning</mat-icon>
 </h2>
 <mat-dialog-content [class.dialog-content-scroll]="!transferRunWarning" *ngIf="run != null">

@@ -1,5 +1,14 @@
 import { fabric } from 'fabric';
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { NodeService } from '../../../services/nodeService';
@@ -9,17 +18,38 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
 import { StudentAssetService } from '../../../services/studentAssetService';
-import { MatDialog } from '@angular/material/dialog';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { wordWrap } from '../../../common/string/string';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { AddToNotebookButtonComponent } from '../../../directives/add-to-notebook-button/add-to-notebook-button.component';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
+import { LabelStudentData } from '../LabelStudentData';
 
 @Component({
+  imports: [
+    AddToNotebookButtonComponent,
+    CommonModule,
+    ComponentAnnotationsComponent,
+    ComponentHeaderComponent,
+    ComponentSaveSubmitButtonsComponent,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule
+  ],
   selector: 'label-student',
-  templateUrl: 'label-student.component.html',
-  styleUrls: ['label-student.component.scss']
+  standalone: true,
+  styleUrl: 'label-student.component.scss',
+  templateUrl: 'label-student.component.html'
 })
-export class LabelStudent extends ComponentStudent {
+export class LabelStudentComponent extends ComponentStudent {
+  protected addNewLabelButtonVisible: boolean = true;
   backgroundImage: string;
   canvas: any;
   canvasHeight: number = 600;
@@ -30,7 +60,6 @@ export class LabelStudent extends ComponentStudent {
   editLabelMode: boolean = false;
   enableCircles: boolean = true;
   ENTER_KEY_CODE: number = 13;
-  isAddNewLabelButtonVisible: boolean = true;
   isResetButtonVisible: boolean = true;
   labels: any[] = [];
   lineZIndex: number = 0;
@@ -46,38 +75,38 @@ export class LabelStudent extends ComponentStudent {
   textZIndex: number = 1;
 
   constructor(
-    protected AnnotationService: AnnotationService,
+    protected annotationService: AnnotationService,
     private changeDetector: ChangeDetectorRef,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    private LabelService: LabelService,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    private labelService: LabelService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     this.enableFabricTextPadding();
-    const domIdEnding = this.LabelService.getDomIdEnding(
+    const domIdEnding = this.labelService.getDomIdEnding(
       this.nodeId,
       this.componentId,
       this.componentState
     );
-    this.canvasId = this.LabelService.getCanvasId(domIdEnding);
+    this.canvasId = this.labelService.getCanvasId(domIdEnding);
     this.initializeComponent(this.componentContent);
   }
 
@@ -87,7 +116,7 @@ export class LabelStudent extends ComponentStudent {
     this.changeDetector.detectChanges(); // prevents dev-mode change detection error
   }
 
-  enableFabricTextPadding(): void {
+  private enableFabricTextPadding(): void {
     // modify Fabric so that Text elements can utilize padding
     fabric.Text.prototype.set({
       _getNonTransformedDimensions() {
@@ -111,18 +140,17 @@ export class LabelStudent extends ComponentStudent {
     this.enableCircles = componentContent.enableCircles;
     this.isSaveButtonVisible = componentContent.showSaveButton;
     this.isSubmitButtonVisible = componentContent.showSubmitButton;
-    this.isAddNewLabelButtonVisible = componentContent.canCreateLabels;
+    this.addNewLabelButtonVisible = componentContent.canCreateLabels && !this.isDisabled;
     if (this.onlyHasShowWorkConnectedComponents()) {
       this.isDisabled = true;
     }
     if (this.isDisabled) {
-      this.isAddNewLabelButtonVisible = false;
       this.isResetButtonVisible = false;
     }
   }
 
-  setupCanvas(): void {
-    this.canvas = this.LabelService.initializeCanvas(
+  private setupCanvas(): void {
+    this.canvas = this.labelService.initializeCanvas(
       this.canvasId,
       this.canvasWidth,
       this.canvasHeight,
@@ -148,7 +176,7 @@ export class LabelStudent extends ComponentStudent {
     this.disableComponentIfNecessary();
   }
 
-  registerMouseDownListener(): void {
+  private registerMouseDownListener(): void {
     this.canvas.on('mouse:down', (options: any) => {
       if (this.canvas.getActiveObject() == null) {
         // no objects in the canvas were clicked
@@ -157,7 +185,7 @@ export class LabelStudent extends ComponentStudent {
     });
   }
 
-  unselectAll(): void {
+  private unselectAll(): void {
     this.selectedLabel = null;
     this.editLabelMode = false;
     this.canvas.discardActiveObject();
@@ -288,14 +316,14 @@ export class LabelStudent extends ComponentStudent {
   initializeStudentWork(componentContent: any, componentState: any): void {
     if (hasConnectedComponent(componentContent, 'showWork')) {
       this.handleConnectedComponents();
-    } else if (this.LabelService.componentStateHasStudentWork(componentState, componentContent)) {
+    } else if (this.labelService.componentStateHasStudentWork(componentState, componentContent)) {
       this.setStudentWork(componentState);
     } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
       if (componentContent.labels != null) {
         this.setStarterLabels(componentContent);
       }
-    } else if (this.LabelService.componentStateIsSameAsStarter(componentState, componentContent)) {
+    } else if (this.labelService.componentStateIsSameAsStarter(componentState, componentContent)) {
       this.setStudentWork(componentState);
     } else if (componentState == null && componentContent.labels != null) {
       this.setStarterLabels(componentContent);
@@ -305,14 +333,8 @@ export class LabelStudent extends ComponentStudent {
   private setStarterLabels(componentContent: any): void {
     // Make sure starter labels have isStarterLabel set to true. Starter labels from old Label
     // component content did not have this field.
-    this.setIsStarterLabelTrue(componentContent.labels);
+    componentContent.labels.forEach((label: any) => (label.isStarterLabel = true));
     this.addLabelsToCanvas(componentContent.labels);
-  }
-
-  private setIsStarterLabelTrue(labels: any[]): void {
-    for (const label of labels) {
-      label.isStarterLabel = true;
-    }
   }
 
   setStudentWork(componentState: any): void {
@@ -324,8 +346,8 @@ export class LabelStudent extends ComponentStudent {
     this.processLatestStudentWork();
   }
 
-  addLabelsToCanvas(labels: any[]): void {
-    const fabricLabels = this.LabelService.addLabelsToCanvas(
+  private addLabelsToCanvas(labels: any[]): void {
+    const fabricLabels = this.labelService.addLabelsToCanvas(
       this.canvas,
       labels,
       this.canvasWidth,
@@ -336,58 +358,49 @@ export class LabelStudent extends ComponentStudent {
       this.enableCircles,
       this.studentDataVersion
     );
-    this.addListenersToLabels(fabricLabels);
-    this.addLabelsToLocalArray(fabricLabels);
+    fabricLabels.forEach((label: any) => this.addListenersToLabel(label));
+    fabricLabels.forEach((label: any) => this.labels.push(label));
   }
 
-  addLabelsToLocalArray(labels: any[]): void {
-    labels.forEach((label: any) => {
-      this.labels.push(label);
-    });
+  protected addNewLabel(): void {
+    const newLabelLocation = this.getNewLabelLocation();
+    const newLabel = this.labelService.createLabel(
+      newLabelLocation.pointX,
+      newLabelLocation.pointY,
+      newLabelLocation.textX,
+      newLabelLocation.textY,
+      $localize`A New Label`,
+      'blue',
+      true,
+      true,
+      this.componentContent.canvasWidth,
+      this.componentContent.canvasHeight,
+      this.componentContent.pointSize,
+      this.componentContent.fontSize,
+      this.componentContent.labelWidth,
+      this.studentDataVersion,
+      this.labelService.getTimestamp(),
+      false
+    );
+    this.labelService.addLabelToCanvas(this.canvas, newLabel, this.enableCircles);
+    this.addListenersToLabel(newLabel);
+    this.labels.push(newLabel);
+    this.selectLabel(newLabel);
+    this.studentDataChanged();
   }
 
-  addNewLabel(): void {
-    this.createLabelOnCanvas();
-  }
-
-  /**
-   * Get the label data from the canvas.
-   * @returns An array of simple JSON objects that contain the label data.
-   */
   getLabelData(): any[] {
-    const labels = [];
-    this.canvas.getObjects('i-text').forEach((object: any) => {
-      labels.push(this.getLabelJSONObjectFromText(object));
-    });
-    labels.sort(this.sortByTimestampAscending);
+    const labels = this.canvas
+      .getObjects('i-text')
+      .map((object: any) => this.getLabelJSONObjectFromText(object));
+    labels.sort((labelA: any, labelB: any) => labelA.timestamp - labelB.timestamp);
     return labels;
-  }
-
-  private sortByTimestampAscending(labelA: any, labelB: any): number {
-    return labelA.timestamp - labelB.timestamp;
-  }
-
-  /**
-   * Get the simple JSON object that represents the label
-   * @param circle a Fabric circle object
-   * @returns a simple JSON object that represents the label
-   */
-  getLabelJSONObjectFromCircle(circle: any): any {
-    const { textX, textY } = this.getTextCoordinate(circle);
-    return {
-      pointX: parseInt(circle.get('left')),
-      pointY: parseInt(circle.get('top')),
-      textX: parseInt(textX),
-      textY: parseInt(textY),
-      text: this.getLabelFromCircle(circle).textString,
-      color: circle.text.backgroundColor
-    };
   }
 
   getTextCoordinate(fabricObject: any): any {
     let textX: number;
     let textY: number;
-    if (this.isStudentDataVersion(1)) {
+    if (this.studentDataVersion == 1) {
       const lineObject = fabricObject.line;
 
       // get the offset of the end of the line (this is where the text object is also located)
@@ -410,7 +423,7 @@ export class LabelStudent extends ComponentStudent {
    * @returns a simple JSON object that represents the label
    */
   getLabelJSONObjectFromText(text: any): any {
-    const label = this.getLabelFromText(text);
+    const label = this.labels.find((label: any) => label.text == text);
     const circleObject = label.circle;
     const { textX, textY } = this.getTextCoordinate(label);
     return {
@@ -435,13 +448,12 @@ export class LabelStudent extends ComponentStudent {
    */
   createComponentState(action: string): Promise<any> {
     const componentState: any = this.createNewComponentState();
-    const studentData: any = this.createStudentData(
+    componentState.studentData = new LabelStudentData(
       this.getLabelData(),
       this.backgroundImage,
       this.submitCounter,
-      this.getStudentDataVersion()
+      this.studentDataVersion
     );
-    componentState.studentData = studentData;
     componentState.isSubmit = this.isSubmit;
     componentState.componentType = 'Label';
     componentState.nodeId = this.nodeId;
@@ -459,51 +471,7 @@ export class LabelStudent extends ComponentStudent {
     });
   }
 
-  createStudentData(
-    labels: any[] = [],
-    backgroundImage: string = null,
-    submitCounter: number = 0,
-    studentDataVersion: number = 2
-  ): any {
-    return {
-      labels: labels,
-      backgroundImage: backgroundImage,
-      submitCounter: submitCounter,
-      version: studentDataVersion
-    };
-  }
-
-  createLabelOnCanvas(): void {
-    const newLabelLocation = this.getNewLabelLocation();
-    const canEdit = true;
-    const canDelete = true;
-    const isStarterLabel = false;
-    const newLabel = this.LabelService.createLabel(
-      newLabelLocation.pointX,
-      newLabelLocation.pointY,
-      newLabelLocation.textX,
-      newLabelLocation.textY,
-      $localize`A New Label`,
-      'blue',
-      canEdit,
-      canDelete,
-      this.componentContent.canvasWidth,
-      this.componentContent.canvasHeight,
-      this.componentContent.pointSize,
-      this.componentContent.fontSize,
-      this.componentContent.labelWidth,
-      this.studentDataVersion,
-      this.LabelService.getTimestamp(),
-      isStarterLabel
-    );
-    this.LabelService.addLabelToCanvas(this.canvas, newLabel, this.enableCircles);
-    this.addListenersToLabel(newLabel);
-    this.labels.push(newLabel);
-    this.selectLabel(newLabel);
-    this.studentDataChanged();
-  }
-
-  getNewLabelLocation(): any {
+  private getNewLabelLocation(): any {
     const nextPointLocation = this.getNextPointLocation();
     const pointX = nextPointLocation.pointX;
     const pointY = nextPointLocation.pointY;
@@ -518,7 +486,7 @@ export class LabelStudent extends ComponentStudent {
     };
   }
 
-  getNextPointLocation(): any {
+  private getNextPointLocation(): any {
     return (
       this.getUnoccupiedPointLocation() || {
         pointX: this.NEW_LABEL_X_LOCATION,
@@ -527,12 +495,12 @@ export class LabelStudent extends ComponentStudent {
     );
   }
 
-  getNextTextLocation(pointX: number, pointY: number): any {
+  private getNextTextLocation(pointX: number, pointY: number): any {
     let textX = null;
     let textY = null;
     if (this.enableCircles) {
       // place the text to the bottom right of the circle
-      if (this.isStudentDataVersion(1)) {
+      if (this.studentDataVersion == 1) {
         // text is relatively positioned
         textX = 100;
         textY = 100;
@@ -549,25 +517,17 @@ export class LabelStudent extends ComponentStudent {
     return { textX: textX, textY: textY };
   }
 
-  getOccupiedPointLocations(): any {
-    const occupiedPointLocations = [];
-    for (const label of this.getLabelData()) {
-      occupiedPointLocations.push({ pointX: label.pointX, pointY: label.pointY });
-    }
-    return occupiedPointLocations;
-  }
-
-  isPointOccupied(occupiedPointLocations: any[], pointX: number, pointY: number): boolean {
-    for (const occupiedPointLocation of occupiedPointLocations) {
-      if (occupiedPointLocation.pointX == pointX && occupiedPointLocation.pointY == pointY) {
-        return true;
-      }
-    }
-    return false;
+  private isPointOccupied(occupiedPointLocations: any[], pointX: number, pointY: number): boolean {
+    return occupiedPointLocations.some(
+      (location) => location.pointX == pointX && location.pointY == pointY
+    );
   }
 
   getUnoccupiedPointLocation(): any {
-    const occupiedPointLocations = this.getOccupiedPointLocations();
+    const occupiedPointLocations = this.getLabelData().map((label) => ({
+      pointX: label.pointX,
+      pointY: label.pointY
+    }));
     for (let y = this.NEW_LABEL_Y_LOCATION; y < this.canvasHeight; y += this.SPACE_BETWEEN_LABELS) {
       for (
         let x = this.NEW_LABEL_X_LOCATION;
@@ -616,37 +576,10 @@ export class LabelStudent extends ComponentStudent {
    * @return A label object.
    */
   getLabelFromCircle(circle: any): any {
-    return this.labels.find((label: any) => {
-      return label.circle == circle;
-    });
+    return this.labels.find((label: any) => label.circle == circle);
   }
 
-  /**
-   * Get the label object given the canvas text object.
-   * @param text A canvas text object.
-   * @return A label object.
-   */
-  getLabelFromText(text: any): any {
-    return this.labels.find((label: any) => {
-      return label.text == text;
-    });
-  }
-
-  makeSureXIsWithinXMinMaxLimits(x: number): number {
-    return this.LabelService.makeSureValueIsWithinLimit(x, this.canvasWidth);
-  }
-
-  makeSureYIsWithinYMinMaxLimits(y: number): number {
-    return this.LabelService.makeSureValueIsWithinLimit(y, this.canvasHeight);
-  }
-
-  addListenersToLabels(labels: any[]): void {
-    labels.forEach((label: any) => {
-      this.addListenersToLabel(label);
-    });
-  }
-
-  addListenersToLabel(label: any): void {
+  private addListenersToLabel(label: any): void {
     if (this.enableCircles) {
       label.circle.on('mousedown', () => {
         this.selectLabel(label);
@@ -662,7 +595,7 @@ export class LabelStudent extends ComponentStudent {
    * and the button to delete the label.
    * @param label The label object.
    */
-  selectLabel(label: any): void {
+  private selectLabel(label: any): void {
     this.selectedLabel = label;
     if (label.canEdit) {
       this.selectedLabelText = label.text.text;
@@ -708,7 +641,7 @@ export class LabelStudent extends ComponentStudent {
     this.canvas.renderAll();
   }
 
-  wrapTextIfNecessary(text: string): string {
+  private wrapTextIfNecessary(text: string): string {
     let wrappedText = text;
     if (this.componentContent.labelWidth != null && this.componentContent.labelWidth !== '') {
       wrappedText = wordWrap(text, this.componentContent.labelWidth);
@@ -716,19 +649,14 @@ export class LabelStudent extends ComponentStudent {
     return wrappedText;
   }
 
-  /**
-   * Remove a label from the canvas.
-   * @param canvas The canvas.
-   * @param label A canvas label object that contains a circle object, line object, and text object.
-   */
-  removeLabelFromCanvas(canvas: any, label: any): void {
+  private removeLabelFromCanvas(canvas: any, label: any): void {
     canvas.remove(label.circle);
     canvas.remove(label.line);
     canvas.remove(label.text);
   }
 
   snipImage(): void {
-    this.NotebookService.addNote(
+    this.notebookService.addNote(
       this.StudentDataService.getCurrentNodeId(),
       convertToPNGFile(this.canvas)
     );
@@ -745,10 +673,6 @@ export class LabelStudent extends ComponentStudent {
 
   deleteLabel(label: any): void {
     this.removeLabelFromCanvas(this.canvas, label);
-    this.removeLabelFromLocalArray(label);
-  }
-
-  removeLabelFromLocalArray(label: any): void {
     this.labels.splice(this.labels.indexOf(label), 1);
   }
 
@@ -768,7 +692,7 @@ export class LabelStudent extends ComponentStudent {
    */
   createMergedComponentState(componentStates: any[]): any {
     const componentStateTo: any = {
-      studentData: this.createStudentData()
+      studentData: new LabelStudentData()
     };
     for (const componentState of componentStates) {
       switch (componentState.componentType) {
@@ -813,18 +737,20 @@ export class LabelStudent extends ComponentStudent {
         const charactersPerLine = connectedComponent.charactersPerLine;
         const spaceInbetweenLines = connectedComponent.spaceInbetweenLines;
         const fontSize = connectedComponent.fontSize;
-        this.LabelService.createImageFromText(
-          response,
-          null,
-          null,
-          charactersPerLine,
-          null,
-          spaceInbetweenLines,
-          fontSize
-        ).then((image: string) => {
-          this.setBackgroundImage(image);
-          this.studentDataChanged();
-        });
+        this.labelService
+          .createImageFromText(
+            response,
+            null,
+            null,
+            charactersPerLine,
+            null,
+            spaceInbetweenLines,
+            fontSize
+          )
+          .then((image: string) => {
+            this.setBackgroundImage(image);
+            this.studentDataChanged();
+          });
       }
     }
   }
@@ -841,9 +767,10 @@ export class LabelStudent extends ComponentStudent {
     return null;
   }
 
-  resetButtonClicked(): void {
+  protected reset(): void {
     if (confirm($localize`Are you sure you want to reset to the initial state?`)) {
-      this.removeAllLabels();
+      this.labels.forEach((label: any) => this.removeLabelFromCanvas(this.canvas, label));
+      this.labels = [];
       if (this.componentContent.backgroundImage != null) {
         this.setBackgroundImage(this.componentContent.backgroundImage);
       }
@@ -856,23 +783,8 @@ export class LabelStudent extends ComponentStudent {
     }
   }
 
-  removeAllLabels(): void {
-    for (const label of this.labels) {
-      this.removeLabelFromCanvas(this.canvas, label);
-    }
-    this.labels = [];
-  }
-
   setStudentDataVersion(studentDataVersion: number): void {
     this.studentDataVersion = studentDataVersion;
-  }
-
-  getStudentDataVersion(): number {
-    return this.studentDataVersion;
-  }
-
-  isStudentDataVersion(studentDataVersion: number): boolean {
-    return this.getStudentDataVersion() == studentDataVersion;
   }
 
   onlyHasShowWorkConnectedComponents(): boolean {
@@ -902,7 +814,7 @@ export class LabelStudent extends ComponentStudent {
     this.setBackgroundImage(studentAsset.url);
   }
 
-  deleteBackgroundImage(): void {
+  protected deleteBackgroundImage(): void {
     if (confirm($localize`Are you sure you want to delete the background image?`)) {
       this.setBackgroundImage(null);
       this.studentDataChanged();

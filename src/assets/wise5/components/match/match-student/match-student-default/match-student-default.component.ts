@@ -20,13 +20,15 @@ import { ComponentStudent } from '../../../component-student.component';
 import { ComponentService } from '../../../componentService';
 import { Choice, createChoiceFromNotebookItem } from '../../choice';
 import { MatchService } from '../../matchService';
-import { AddMatchChoiceDialog } from '../add-match-choice-dialog/add-match-choice-dialog';
+import { AddMatchChoiceDialogComponent } from '../add-match-choice-dialog/add-match-choice-dialog';
 import { copy } from '../../../../common/object/object';
 import { MatchCdkDragDrop } from '../MatchCdkDragDrop';
 import { Container } from '../container';
 import { Item } from '../item';
 import { hasConnectedComponent } from '../../../../common/ComponentContent';
 import { Bucket, mergeBucket } from '../../bucket';
+import { CRaterService } from '../../../../services/cRaterService';
+import { CRaterRubric } from '../../../common/cRater/CRaterRubric';
 
 @Component({
   templateUrl: 'match-student-default.component.html',
@@ -50,6 +52,7 @@ export class MatchStudentDefault extends ComponentStudent {
     protected assetService: StudentAssetService,
     protected componentService: ComponentService,
     protected configService: ConfigService,
+    private craterService: CRaterService,
     protected dataService: StudentDataService,
     protected dialog: MatDialog,
     protected matchService: MatchService,
@@ -567,11 +570,18 @@ export class MatchStudentDefault extends ComponentStudent {
 
   createMergedComponentState(componentStates: any[]): any[] {
     const mergedBuckets = [];
-    for (const componentState of componentStates) {
-      for (const bucket of componentState.studentData.buckets) {
-        mergeBucket(mergedBuckets, bucket);
+    componentStates.forEach((componentState) => {
+      if (componentState.componentType === 'Match') {
+        for (const bucket of componentState.studentData.buckets) {
+          mergeBucket(mergedBuckets, bucket);
+        }
+      } else if (componentState.componentType === 'DialogGuidance') {
+        this.addIdeasToSourceBucket(
+          componentState.studentData.responses,
+          this.craterService.getCRaterRubric(componentState.nodeId, componentState.componentId)
+        );
       }
-    }
+    });
     const mergedComponentState: any = this.createNewComponentState();
     mergedComponentState.studentData = {
       buckets: mergedBuckets
@@ -579,9 +589,23 @@ export class MatchStudentDefault extends ComponentStudent {
     return mergedComponentState;
   }
 
+  private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
+    responses.forEach((response) => {
+      response.ideas
+        ?.filter((idea) => idea.detected)
+        .forEach((idea) => {
+          if (!this.choices.some((c) => c.id === idea.name)) {
+            const choice = new Choice(idea.name, rubric.getStudentTextForIdea(idea.name));
+            this.choices.push(choice);
+            this.getBucketById(this.sourceBucketId).items.push(choice);
+          }
+        });
+    });
+  }
+
   protected addChoice(): void {
     this.dialog
-      .open(AddMatchChoiceDialog, {
+      .open(AddMatchChoiceDialogComponent, {
         panelClass: 'dialog-sm'
       })
       .afterClosed()

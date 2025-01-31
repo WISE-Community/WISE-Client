@@ -29,8 +29,8 @@ import { HtmlAuthoring } from './html/html-authoring/html-authoring.component';
 import { HtmlStudentComponent } from './html/html-student/html-student.component';
 import { LabelAuthoring } from './label/label-authoring/label-authoring.component';
 import { LabelGradingComponent } from './label/label-grading/label-grading.component';
-import { LabelStudent } from './label/label-student/label-student.component';
-import { MatchAuthoring } from './match/match-authoring/match-authoring.component';
+import { LabelStudentComponent } from './label/label-student/label-student.component';
+import { MatchAuthoringComponent } from './match/match-authoring/match-authoring.component';
 import { MatchGradingComponent } from './match/match-grading/match-grading.component';
 import { MatchStudent } from './match/match-student/match-student.component';
 import { MultipleChoiceAuthoring } from './multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component';
@@ -95,8 +95,16 @@ export const components = {
   },
   Graph: { authoring: GraphAuthoring, grading: GraphGradingComponent, student: GraphStudent },
   HTML: { authoring: HtmlAuthoring, student: HtmlStudentComponent },
-  Label: { authoring: LabelAuthoring, grading: LabelGradingComponent, student: LabelStudent },
-  Match: { authoring: MatchAuthoring, grading: MatchGradingComponent, student: MatchStudent },
+  Label: {
+    authoring: LabelAuthoring,
+    grading: LabelGradingComponent,
+    student: LabelStudentComponent
+  },
+  Match: {
+    authoring: MatchAuthoringComponent,
+    grading: MatchGradingComponent,
+    student: MatchStudent
+  },
   MultipleChoice: {
     authoring: MultipleChoiceAuthoring,
     grading: MultipleChoiceGradingComponent,

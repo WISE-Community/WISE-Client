@@ -4,8 +4,6 @@
   }
 
   .item-content {
-    margin-top: 2px;
-
     img {
       max-width: 100%;
       height: auto;
@@ -21,5 +19,9 @@
 
   match-status-icon {
     display: inherit;
+  }
+
+  delete-choice-button {
+    display: inline-flex;
   }
 }
