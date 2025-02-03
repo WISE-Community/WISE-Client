@@ -41,7 +41,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './export-item.component.html'
 })
 export class ExportItemComponent implements OnInit {
-  private allowedComponentTypesForAllRevisions = [
+  private allowedComponentTypesAllRevisions = [
     'DialogGuidance',
     'Discussion',
     'Label',
@@ -49,7 +49,7 @@ export class ExportItemComponent implements OnInit {
     'OpenResponse',
     'PeerChat'
   ];
-  private allowedComponentTypesForLatestRevisions = [
+  private allowedComponentTypesLatestRevisions = [
     'DialogGuidance',
     'Label',
     'Match',
@@ -65,7 +65,7 @@ export class ExportItemComponent implements OnInit {
   protected nodes: any[] = [];
   protected project: any;
   private projectIdToOrder: any;
-  private workSelectionType: string;
+  private workSelectionType: 'exportAllWork' | 'exportLatestWork';
 
   constructor(
     public annotationService: AnnotationService,
@@ -85,11 +85,7 @@ export class ExportItemComponent implements OnInit {
     const nodeOrderOfProject = this.projectService.getNodeOrderOfProject(this.project);
     this.projectIdToOrder = nodeOrderOfProject.idToOrder;
     this.nodes = Object.values(this.projectIdToOrder);
-    this.nodes.sort(this.sortNodesByOrder);
-  }
-
-  private sortNodesByOrder(nodeA: any, nodeB: any): number {
-    return nodeA.order - nodeB.order;
+    this.nodes.sort((nodeA, nodeB) => nodeA.order - nodeB.order);
   }
 
   protected getNodePositionById(nodeId: string): string {
@@ -101,24 +97,15 @@ export class ExportItemComponent implements OnInit {
   }
 
   protected canExportAllRevisionsForComponent(component: any): boolean {
-    return this.canExportForComponent(component, this.allowedComponentTypesForAllRevisions);
+    return this.allowedComponentTypesAllRevisions.includes(component.type);
   }
 
-  protected canExportLatestRevisionsForComponent(component: any): boolean {
-    return this.canExportForComponent(component, this.allowedComponentTypesForLatestRevisions);
+  protected canExportLatestRevisions(component: any): boolean {
+    return this.allowedComponentTypesLatestRevisions.includes(component.type);
   }
 
-  private canExportForComponent(component: any, allowedComponentTypes: string[]): boolean {
-    for (const allowedComponentType of allowedComponentTypes) {
-      if (component.type === allowedComponentType) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  protected exportComponentAllRevisions(nodeId: string, component: any): void {
-    this.setAllWorkSelectionType();
+  protected exportAllRevisions(nodeId: string, component: any): void {
+    this.workSelectionType = 'exportAllWork';
     let strategy: DataExportStrategy;
     if (component.type === 'Match') {
       strategy = new MatchComponentDataExportStrategy(
@@ -164,8 +151,8 @@ export class ExportItemComponent implements OnInit {
     this.export(strategy);
   }
 
-  protected exportComponentLatestRevisions(nodeId: string, component: any): void {
-    this.setLatestWorkSelectionType();
+  protected exportLatestRevisions(nodeId: string, component: any): void {
+    this.workSelectionType = 'exportLatestWork';
     let strategy: DataExportStrategy;
     if (component.type === 'Match') {
       strategy = new MatchComponentDataExportStrategy(
@@ -206,18 +193,6 @@ export class ExportItemComponent implements OnInit {
     this.hideDownloadingExportMessage();
   }
 
-  private setAllWorkSelectionType(): void {
-    this.setWorkSelectionType('exportAllWork');
-  }
-
-  private setLatestWorkSelectionType(): void {
-    this.setWorkSelectionType('exportLatestWork');
-  }
-
-  private setWorkSelectionType(workSelectionType: string): void {
-    this.workSelectionType = workSelectionType;
-  }
-
   private getComponentDataExportParams(): ComponentDataExportParams {
     return {
       canViewStudentNames: this.canViewStudentNames,
@@ -239,16 +214,16 @@ export class ExportItemComponent implements OnInit {
     window.open(`${this.configService.getConfigParam('previewProjectURL')}/${node.id}`);
   }
 
-  protected showDownloadingExportMessage(): void {
+  private showDownloadingExportMessage(): void {
     this.dialog.open(DialogWithSpinnerComponent, {
       data: {
-        title: $localize`Downloading Export`
+        title: $localize`Downloading export`
       },
       disableClose: false
     });
   }
 
-  protected hideDownloadingExportMessage(): void {
+  private hideDownloadingExportMessage(): void {
     this.dialog.closeAll();
   }
 }

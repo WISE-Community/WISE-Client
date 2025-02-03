@@ -78,7 +78,7 @@
                 mat-raised-button
                 color="primary"
                 class="exportComponentDataButton"
-                (click)="exportComponentAllRevisions(node.node.id, componentItem)"
+                (click)="exportAllRevisions(node.node.id, componentItem)"
                 matTooltip="Download all revisions export"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -87,12 +87,12 @@
                 <span i18n>All</span>
               </button>
             }
-            @if (canExportLatestRevisionsForComponent(componentItem)) {
+            @if (canExportLatestRevisions(componentItem)) {
               <button
                 mat-raised-button
                 color="primary"
                 class="exportComponentDataButton"
-                (click)="exportComponentLatestRevisions(node.node.id, componentItem)"
+                (click)="exportLatestRevisions(node.node.id, componentItem)"
                 matTooltip="Download latest revisions export"
                 matTooltipPosition="above"
                 i18n-matTooltip
