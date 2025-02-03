@@ -96,22 +96,23 @@ export class ExportItemComponent implements OnInit {
     return this.projectService.getNodeTitle(nodeId);
   }
 
-  protected canExportAllRevisionsForComponent(component: any): boolean {
-    return this.allowedComponentTypesAllRevisions.includes(component.type);
+  protected canExport(component: any, exportType: 'all' | 'latest'): boolean {
+    return exportType === 'all'
+      ? this.allowedComponentTypesAllRevisions.includes(component.type)
+      : this.allowedComponentTypesLatestRevisions.includes(component.type);
   }
 
-  protected canExportLatestRevisions(component: any): boolean {
-    return this.allowedComponentTypesLatestRevisions.includes(component.type);
-  }
-
-  protected exportAllRevisions(nodeId: string, component: any): void {
-    this.workSelectionType = 'exportAllWork';
-    this.export(this.getExportStrategy(nodeId, component));
-  }
-
-  protected exportLatestRevisions(nodeId: string, component: any): void {
-    this.workSelectionType = 'exportLatestWork';
-    this.export(this.getExportStrategy(nodeId, component));
+  protected export(
+    nodeId: string,
+    component: any,
+    workSelectionType: 'exportAllWork' | 'exportLatestWork'
+  ): void {
+    this.workSelectionType = workSelectionType;
+    const strategy = this.getExportStrategy(nodeId, component);
+    this.showDownloadingExportMessage();
+    strategy.setDataExportContext({ controller: this } as any);
+    strategy.export();
+    this.hideDownloadingExportMessage();
   }
 
   private getExportStrategy(nodeId: string, component: any): AbstractComponentDataExportStrategy {
@@ -130,13 +131,6 @@ export class ExportItemComponent implements OnInit {
     );
     strategy.setAllOrLatest(this.workSelectionType == 'exportAllWork' ? 'all' : 'latest');
     return strategy;
-  }
-
-  private export(strategy: AbstractComponentDataExportStrategy): void {
-    this.showDownloadingExportMessage();
-    strategy.setDataExportContext({ controller: this } as any);
-    strategy.export();
-    this.hideDownloadingExportMessage();
   }
 
   private getComponentDataExportParams(): ComponentDataExportParams {

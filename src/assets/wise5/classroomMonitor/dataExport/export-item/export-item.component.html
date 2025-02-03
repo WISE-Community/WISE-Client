@@ -73,12 +73,12 @@
         <div class="componentHeader">
           <div fxLayoutAlign="start center" fxLayoutGap="20px">
             <span> {{ componentIndex + 1 }}. {{ componentItem.type }} </span>
-            @if (canExportAllRevisionsForComponent(componentItem)) {
+            @if (canExport(componentItem, 'all')) {
               <button
                 mat-raised-button
                 color="primary"
                 class="exportComponentDataButton"
-                (click)="exportAllRevisions(node.node.id, componentItem)"
+                (click)="export(node.node.id, componentItem, 'exportAllWork')"
                 matTooltip="Download all revisions export"
                 matTooltipPosition="above"
                 i18n-matTooltip
@@ -87,12 +87,12 @@
                 <span i18n>All</span>
               </button>
             }
-            @if (canExportLatestRevisions(componentItem)) {
+            @if (canExport(componentItem, 'latest')) {
               <button
                 mat-raised-button
                 color="primary"
                 class="exportComponentDataButton"
-                (click)="exportLatestRevisions(node.node.id, componentItem)"
+                (click)="export(node.node.id, componentItem, 'exportLatestWork')"
                 matTooltip="Download latest revisions export"
                 matTooltipPosition="above"
                 i18n-matTooltip
