@@ -57,7 +57,7 @@ export class ExportItemComponent implements OnInit {
   ];
   protected canViewStudentNames: boolean = false;
   protected componentExportTooltips = {
-    match: $localize`Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position`
+    Match: $localize`Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position`
   };
   protected includeCorrectnessColumns: boolean = true;
   protected includeOnlySubmits: boolean = false;
