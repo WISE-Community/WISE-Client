@@ -2,19 +2,19 @@
   <mat-card-content>
     <h2 class="standalone__title accent" i18n>Create Student Account</h2>
     <p>
-      <mat-form-field appearance="fill" fxFlex>
+      <mat-form-field appearance="fill" class="w-full">
         <mat-label i18n>First Name</mat-label>
         <input matInput id="firstName" name="firstName" [(ngModel)]="firstName" autofocus />
       </mat-form-field>
     </p>
     <p>
-      <mat-form-field appearance="fill" fxFlex>
+      <mat-form-field appearance="fill" class="w-full">
         <mat-label i18n>Last Name</mat-label>
         <input matInput id="lastName" name="lastName" [(ngModel)]="lastName" autofocus />
       </mat-form-field>
     </p>
     <p>
-      <button fxFlex mat-flat-button color="primary" (click)="signUp()">
+      <button class="w-full" mat-flat-button color="primary" (click)="signUp()">
         <ng-container i18n>Sign Up</ng-container>
       </button>
     </p>

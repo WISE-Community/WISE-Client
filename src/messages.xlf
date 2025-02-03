@@ -1989,7 +1989,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher/register-teacher.component.html</context>
@@ -1997,7 +1997,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="234ce1f48e2e7c754873c9728092e878e08cf71d" datatype="html">
@@ -2012,11 +2012,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7a69cf8e716fe0458fffe8b8a67948dfeb2b3eb6" datatype="html">
@@ -2038,7 +2038,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f24b47c26f17b04695929c82f78baeafbbd1f599" datatype="html">
@@ -2714,7 +2714,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9b59fedafe883c50e868d884b7a0faeca8f2ccc9" datatype="html">
@@ -2780,7 +2780,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8017fdbaf670dcefd48842920617824337d762f7" datatype="html">
@@ -2848,11 +2848,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">148,152</context>
+          <context context-type="linenumber">143,147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">171,175</context>
+          <context context-type="linenumber">166,170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="18036423310428495" datatype="html">
@@ -2923,7 +2923,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component.html</context>
@@ -2960,7 +2960,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student/register-student.component.html</context>
@@ -2968,7 +2968,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">7</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
@@ -2976,7 +2976,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dfb446b53f5c04e99f7deed2f454d3e959e1d324" datatype="html">
@@ -2987,11 +2987,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
@@ -2999,7 +2999,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="166b2cc65003221ff5f3ec05d5baca41e6821396" datatype="html">
@@ -3010,7 +3010,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student/register-student.component.html</context>
@@ -3018,7 +3018,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
@@ -3026,7 +3026,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="17de8a2f90413b5c8a6d622d9cfa4c5eda8bb742" datatype="html">
@@ -3037,11 +3037,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
@@ -3049,7 +3049,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4b7e7f2459572a6ee907c22976119464ae2556bf" datatype="html">
@@ -3060,7 +3060,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="53b5f38b420c0d1f9b62a0b34612ed28a20d37d8" datatype="html">
@@ -3071,7 +3071,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e3945fcac2b828a12bd531c748cf8bd08b04498c" datatype="html">
@@ -3082,7 +3082,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c086edf00fc75cb05dc70186d7c2b60ddc8a7cb4" datatype="html">
@@ -3093,7 +3093,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7e892ba15f2c6c17e83510e273b3e10fc32ea016" datatype="html">
@@ -3302,7 +3302,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit/edit.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/team-sign-in-dialog/team-sign-in-dialog.component.html</context>
@@ -3310,7 +3310,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6676f052ab9d1ed83317074f054f2ec6e896f0cc" datatype="html">
@@ -5156,11 +5156,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d745a22ae7b825b146ca8185126c482597f1d485" datatype="html">
@@ -5171,7 +5171,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-complete/register-student-complete.component.html</context>
@@ -5246,7 +5246,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-microsoft-user-already-exists/register-microsoft-user-already-exists.component.html</context>
@@ -5254,11 +5254,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">162</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6cdb1fea93d77c07950c0c76c6e0ad79ebbef084" datatype="html">
@@ -5372,7 +5372,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4c42d0c12ddaebc2efdfc00bbf1d714bf385f278" datatype="html">
@@ -5398,11 +5398,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit/edit.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ea7254c3121598c9cfd72210e1336473441546e3" datatype="html">
@@ -6259,35 +6259,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Current Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9b79b69a1ba8ba29e68a45acd0829da17da704ce" datatype="html">
         <source>Current Password required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0315d84608647a2d4a2b2e7e509d10ad0ec78536" datatype="html">
         <source>Current Password is incorrect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8454739bcb4cf4debfd509a35e466a828ea11363" datatype="html">
-        <source><x id="TAG_IMG" ctype="image" equiv-text="&lt;img class=&quot;google-icon&quot; src=&quot;assets/img/icons/google-logo.svg&quot; i18n-alt alt=&quot;Google logo&quot; /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>This account was created using Google and doesn&apos;t use a WISE password.<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">51,52</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="692e665f8177ee9150169dca0ff15418616cb3cb" datatype="html">
         <source>Google logo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component.html</context>
@@ -6303,7 +6296,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-complete/register-student-complete.component.html</context>
@@ -6315,18 +6308,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d5a4847fca71b32d9a29901631e8c1f7ab8fd83b" datatype="html">
+        <source>This account was created using Google and doesn&apos;t use a WISE password.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="47c3500e23cf10b4e86b3c495687d5045fd2305c" datatype="html">
         <source>Unlink Google Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/edit-password/edit-password.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component.html</context>
@@ -6342,11 +6342,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5272105135738960946" datatype="html">
@@ -6436,7 +6436,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
@@ -6654,14 +6654,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Requirement failed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/password-requirement/password-requirement.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="eb11a7ff5703ae4a1845bea942c055bf53015fc4" datatype="html">
         <source>Requirement passed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password/password-requirement/password-requirement.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1cde0ecb1655843b8b682674d1ed9ff8138073b2" datatype="html">
@@ -7146,7 +7146,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Hi! This Google user already has a WISE account.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="996edb960eaf03d890917648e5e21764fda9d0a0" datatype="html">
@@ -7174,14 +7174,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Students can view and complete WISE lessons offered by teachers.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5d440e046aeae72880c188414cdafa69bf9b4f97" datatype="html">
         <source>Teachers can select, author, and run WISE lessons with their students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9cf37b81962ddd2eb54d8f4e813d0fd1d5a1787b" datatype="html">
@@ -7239,7 +7239,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Create Student Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student/register-student.component.html</context>
@@ -7250,82 +7250,82 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">24,25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">24,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b2dea71caf631b022288b897d6a159a1340f4126" datatype="html">
         <source>Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or end with a space or dash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">46,47</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">46,47</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="003d4f5e4909ccf01b6a204c688fd6dab15c20bd" datatype="html">
         <source>Gender</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5497bf7696a020473be2ec2082c78d6c6c81e29a" datatype="html">
         <source>Gender required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b3e41f03bc6ea2f17a56c29543587f77cd5247c5" datatype="html">
         <source>Security Question</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b22c1c2f78e92d3c683da9b673254fe7f3a40f85" datatype="html">
         <source>Security Question required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="402fdfe22e77d0e0b0e60acbf1c8dfe04ff4e076" datatype="html">
         <source>Security Question Answer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="59dcaff6c089405d4d18e483d6ed730a3f1cef8f" datatype="html">
         <source>Security Question Answer required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="786e5b3d4ffb1fd88fdf00ca97176e18e9ff494c" datatype="html">
         <source> By clicking &quot;Create Account&quot;, you agree to our <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;privacy&quot; target=&quot;_blank&quot;&gt;"/>Privacy Policy &amp; Terms of Use<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">144,147</context>
+          <context context-type="linenumber">139,142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="eff46e15d30eee98b8bb31d835447d6fd4890837" datatype="html">
         <source> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">152</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5667840900782067941" datatype="html">
@@ -7382,7 +7382,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Create Teacher Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher/register-teacher.component.html</context>
@@ -7393,145 +7393,145 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>We’ll never share your email address or personal information with anyone without your consent.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">56,57</context>
+          <context context-type="linenumber">51,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e527ace700a5dfcd97e170b854de7b539afacc0c" datatype="html">
         <source>Please enter a valid email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5c7012b5a926b32d9e45fefdcc8a1a3cb6f023d0" datatype="html">
         <source>City</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="526394b14298e223b7e076e1b0cd15e54b03fe22" datatype="html">
         <source>City required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="873b72903b1858a9cd6c8967521030b4d7d1435b" datatype="html">
         <source>State</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1417d4b0e633084ccb2b0bdb43d119c17ac0cd01" datatype="html">
         <source>State required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">82</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a43f25a9ac40e8e2441ff0be7a36b8e5d15534df" datatype="html">
         <source>Country</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ef20a8366401a5c10bb1b459b34d40d828dba200" datatype="html">
         <source>Country required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">93</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2f3ba3fa63119eb68067c64a34cf1ff37b8e790a" datatype="html">
         <source>School Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">99</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="804ee3edbc2df4841b73e55dfee3f0a2217e09ce" datatype="html">
         <source>School Name required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bb50c6e4315c4b5991486747158cba2db8460886" datatype="html">
         <source>School Level</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">110</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a3f4acdc98e1b9e7af0f27f1c4f420b8298e7f3e" datatype="html">
         <source>School Level required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="da3b0dd33f2cb1c9b2d8a6a9cce5a4b59aaf6451" datatype="html">
         <source>How did you hear about us?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e280bfc2d9b0f0f69031c397e72048eef6def5e1" datatype="html">
         <source>I agree to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;privacy&quot; target=&quot;_blank&quot;&gt;"/>WISE Privacy Policy &amp; Terms of Use<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">159,161</context>
+          <context context-type="linenumber">154,156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="63fa2c4efa44cd8a08579763cdd62f981a8b1aaa" datatype="html">
         <source>You must agree to the Privacy Policy &amp; Terms of Use</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="223846e3b440a5bf278a46411d71586ac79cc6ec" datatype="html">
@@ -7666,7 +7666,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fe46ccaae902ce974e2441abe752399288298619" datatype="html">
@@ -7677,7 +7677,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component.html</context>
@@ -7695,33 +7695,33 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Save Changes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="edb53ba7560c1571d41ff16d93805243e5264d70" datatype="html">
         <source>This profile is linked to a Google account.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a41a1ea741ebed7a4ff655f233fc2d275b9bfa42" datatype="html">
         <source>Account Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit/edit.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="36a606470097ddf0c32a250c8a902441729ca8ca" datatype="html">
@@ -7732,7 +7732,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="190a0caf6ddac8b5347008c55791abc9e26655d8" datatype="html">
@@ -7821,7 +7821,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Add unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="dbe6d72ccb1cef61c338292357b793077b7ed08a" datatype="html">
@@ -7879,7 +7879,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Report Problem</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list-item/student-run-list-item.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
@@ -7890,7 +7890,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Starts <x id="INTERPOLATION" equiv-text="{{ run.startTime | date }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list-item/student-run-list-item.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
@@ -7901,14 +7901,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Launch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list-item/student-run-list-item.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="385a5a4a2c1453ee22b0ab14da5cd4fb83df0ee5" datatype="html">
         <source>Review Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list-item/student-run-list-item.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2278f83021a218f6d93e2cea52ba171c864b7b9d" datatype="html">
@@ -7929,7 +7929,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Units found: <x id="INTERPOLATION" equiv-text="{{ filteredRuns.length }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
@@ -7940,28 +7940,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>My WISE units: <x id="INTERPOLATION" equiv-text="{{ filteredRuns.length }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5a83883d5ab9830c841b4773eef887ac24e9cc7a" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ getRunTotal(&apos;isScheduled&apos;) }}"/> scheduled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="81603b1750f2555f39786b321c2a2e5eb810fdbd" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ getRunTotal(&apos;isActive&apos;) }}"/> active</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="940ac9990f6a15fadf0a162bd4206ce5661592ed" datatype="html">
         <source>Clear search</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="13c602751734f72430891c9781167bf53c612481" datatype="html">
@@ -8134,28 +8134,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Display Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a46da4e5dedf077f8ee26fa4af926df0fc909e0c" datatype="html">
         <source>This is the name your students will see.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8633775b7643de744fc8b916ccef6b1c8700e83e" datatype="html">
         <source>Display Name required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2aa96eeeec83f4277674e6fef712a255b683f7d0" datatype="html">
         <source>If you want to change your email, unlink your Google account.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8ffe74391cb071fa01f610bd64946c9f8232ed2c" datatype="html">
@@ -8164,14 +8164,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           &gt;"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">116,119</context>
+          <context context-type="linenumber">110,113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2b2f9f56dbfbfb71056a8da8c94e8011d837766e" datatype="html">
         <source> Language required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">115,117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4aec117738aef2c652af2cabf15863b130aa2196" datatype="html">
