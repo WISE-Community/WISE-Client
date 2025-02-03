@@ -14506,7 +14506,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">245</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9b7565e0b46708f16f29b8b055bc32b758f30834" datatype="html">
@@ -14747,7 +14747,7 @@ Are you sure you want to proceed?</source>
         <source>Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="747c90fad2b5bfbe12b4c80301cb6bd592fff1d1" datatype="html">

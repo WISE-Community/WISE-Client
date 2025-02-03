@@ -15,11 +15,30 @@ import { MatDialog } from '@angular/material/dialog';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { AnnotationService } from '../../../services/annotationService';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule
+  ],
   selector: 'export-item',
-  templateUrl: './export-item.component.html',
-  styleUrls: ['./export-item.component.scss']
+  standalone: true,
+  styleUrl: './export-item.component.scss',
+  templateUrl: './export-item.component.html'
 })
 export class ExportItemComponent implements OnInit {
   private allowedComponentTypesForAllRevisions = [
