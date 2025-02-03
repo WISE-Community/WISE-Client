@@ -9,7 +9,6 @@ import { DialogGuidanceComponentDataExportStrategy } from '../strategies/DialogG
 import { OpenResponseComponentDataExportStrategy } from '../strategies/OpenResponseComponentExportStrategy';
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
 import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
-import { DataExportStrategy } from '../strategies/DataExportStrategy';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataExportService } from '../../../services/dataExportService';
@@ -23,6 +22,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { AbstractComponentDataExportStrategy } from '../strategies/AbstractComponentDataExportStrategy';
 
 @Component({
   imports: [
@@ -106,87 +106,33 @@ export class ExportItemComponent implements OnInit {
 
   protected exportAllRevisions(nodeId: string, component: any): void {
     this.workSelectionType = 'exportAllWork';
-    let strategy: DataExportStrategy;
-    if (component.type === 'Match') {
-      strategy = new MatchComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'all'
-      );
-    } else if (component.type === 'Discussion') {
-      strategy = new DiscussionComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams()
-      );
-    } else if (component.type === 'DialogGuidance') {
-      strategy = new DialogGuidanceComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'all'
-      );
-    } else if (component.type === 'OpenResponse') {
-      strategy = new OpenResponseComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'all'
-      );
-    } else if (component.type === 'Label') {
-      strategy = new LabelComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'all'
-      );
-    } else if (component.type === 'PeerChat') {
-      strategy = new PeerChatComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams()
-      );
-    }
-    this.export(strategy);
+    this.export(this.getExportStrategy(nodeId, component));
   }
 
   protected exportLatestRevisions(nodeId: string, component: any): void {
     this.workSelectionType = 'exportLatestWork';
-    let strategy: DataExportStrategy;
-    if (component.type === 'Match') {
-      strategy = new MatchComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'latest'
-      );
-    } else if (component.type === 'DialogGuidance') {
-      strategy = new DialogGuidanceComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'latest'
-      );
-    } else if (component.type === 'OpenResponse') {
-      strategy = new OpenResponseComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'latest'
-      );
-    } else if (component.type === 'Label') {
-      strategy = new LabelComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'latest'
-      );
-    }
-    this.export(strategy);
+    this.export(this.getExportStrategy(nodeId, component));
   }
 
-  private export(strategy: DataExportStrategy): void {
+  private getExportStrategy(nodeId: string, component: any): AbstractComponentDataExportStrategy {
+    const strategies = {
+      Match: MatchComponentDataExportStrategy,
+      Discussion: DiscussionComponentDataExportStrategy,
+      DialogGuidance: DialogGuidanceComponentDataExportStrategy,
+      OpenResponse: OpenResponseComponentDataExportStrategy,
+      Label: LabelComponentDataExportStrategy,
+      PeerChat: PeerChatComponentDataExportStrategy
+    };
+    const strategy = new strategies[component.type](
+      nodeId,
+      component,
+      this.getComponentDataExportParams()
+    );
+    strategy.setAllOrLatest(this.workSelectionType == 'exportAllWork' ? 'all' : 'latest');
+    return strategy;
+  }
+
+  private export(strategy: AbstractComponentDataExportStrategy): void {
     this.showDownloadingExportMessage();
     strategy.setDataExportContext({ controller: this } as any);
     strategy.export();
