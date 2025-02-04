@@ -260,7 +260,7 @@ export class CRaterService {
 
   private getIdeas(responses: RawCRaterResponse): CRaterIdea[] {
     const ideas = [];
-    for (const key in responses.feedback.ideas) {
+    for (const key in responses.feedback?.ideas) {
       const value = responses.feedback.ideas[key];
       ideas.push(new CRaterIdea(key, value.detected));
     }
