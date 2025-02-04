@@ -1,13 +1,13 @@
 <div class="idea-descriptions notice-bg-bg">
   <h5 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-    <span i18n>Idea Descriptions</span>
+    <span i18n>Idea descriptions</span>
     <button
       mat-icon-button
       color="primary"
       matTooltip="Add a new idea description"
       i18n-matTooltip
       matTooltipPosition="after"
-      (click)="addNewIdeaDescription()"
+      (click)="addNewIdeaDescription(true)"
     >
       <mat-icon>add_circle</mat-icon>
     </button>
@@ -31,11 +31,11 @@
           </div>
           <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="8px" fxFlex>
             <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
-              <mat-label i18n>Idea #</mat-label>
+              <mat-label i18n>Idea name</mat-label>
               <input matInput [(ngModel)]="idea.name" (ngModelChange)="inputChanged.next($event)" />
             </mat-form-field>
             <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
-              <mat-label i18n>Student-Friendly Description</mat-label>
+              <mat-label i18n>Student-friendly description</mat-label>
               <textarea
                 matInput
                 [(ngModel)]="idea.studentText"
@@ -60,14 +60,14 @@
       </li>
     }
   </ul>
-  <div id="add-new-idea-description-bottom-button" [hidden]="getIdeaIndex() === 0">
+  <div id="add-new-idea-description-bottom-button" [hidden]="getNumIdeaDescriptions() === 0">
     <button
       mat-icon-button
       color="primary"
       matTooltip="Add a new idea description"
       i18n-matTooltip
       matTooltipPosition="above"
-      (click)="addNewIdeaDescription()"
+      (click)="addNewIdeaDescription(false)"
     >
       <mat-icon>add_circle</mat-icon>
     </button>

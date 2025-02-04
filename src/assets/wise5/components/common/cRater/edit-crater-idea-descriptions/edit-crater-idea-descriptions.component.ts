@@ -32,15 +32,15 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 export class EditCRaterIdeaDescriptionsComponent implements OnInit {
   @Input() componentContent: ComponentContent;
   @Input() ideaDescriptions: CRaterIdea[] = [];
-  inputChanged: Subject<string> = new Subject<string>();
-  subscriptions: Subscription = new Subscription();
+  protected inputChanged: Subject<string> = new Subject<string>();
+  private subscriptions: Subscription = new Subscription();
 
-  constructor(protected teacherProjectService: TeacherProjectService) {}
+  constructor(protected projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
       this.inputChanged.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
-        this.teacherProjectService.nodeChanged();
+        this.projectService.nodeChanged();
       })
     );
   }
@@ -49,16 +49,17 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  protected addNewIdeaDescription(): void {
+  protected addNewIdeaDescription(addToTop: boolean): void {
     const newIdeaDescription = this.createNewIdea();
-    this.ideaDescriptions.splice(this.getIdeaIndex(), 0, newIdeaDescription);
-    this.teacherProjectService.nodeChanged();
-    setTimeout(() => {
-      const button = document.getElementById('add-new-idea-description-bottom-button');
-      if (button) {
-        button.scrollIntoView();
-      }
-    }, 0);
+    this.ideaDescriptions.splice(
+      addToTop ? 0 : this.getNumIdeaDescriptions(),
+      0,
+      newIdeaDescription
+    );
+    this.projectService.nodeChanged();
+    if (!addToTop) {
+      this.scrollToBottomOfList();
+    }
   }
 
   private createNewIdea(): CRaterIdea {
@@ -67,14 +68,23 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
     return idea;
   }
 
-  protected getIdeaIndex(): number {
+  protected getNumIdeaDescriptions(): number {
     return this.ideaDescriptions.length;
   }
 
-  deleteIdeaDescription(ideaIndex: number): void {
+  private scrollToBottomOfList(): void {
+    setTimeout(() => {
+      const button = document.getElementById('add-new-idea-description-bottom-button');
+      if (button) {
+        button.scrollIntoView();
+      }
+    }, 0);
+  }
+
+  protected deleteIdeaDescription(ideaIndex: number): void {
     if (confirm($localize`Are you sure you want to delete this idea description?`)) {
       this.ideaDescriptions.splice(ideaIndex, 1);
-      this.teacherProjectService.nodeChanged();
+      this.projectService.nodeChanged();
     }
   }
 }
