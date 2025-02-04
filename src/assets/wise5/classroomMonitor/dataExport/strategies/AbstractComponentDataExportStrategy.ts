@@ -95,6 +95,10 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     }
   }
 
+  setAllOrLatest(allOrLatest: 'all' | 'latest'): void {
+    this.allOrLatest = allOrLatest;
+  }
+
   protected abstract getComponentTypeWithUnderscore(): string;
 
   protected getComponentStates(component: any): ComponentState[] {
