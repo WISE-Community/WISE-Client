@@ -23,6 +23,7 @@ import { Container } from '../container';
 import { copy } from '../../../../common/object/object';
 import { CRaterService } from '../../../../services/cRaterService';
 import { CRaterRubric } from '../../../common/cRater/CRaterRubric';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { filter } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { generateRandomKey } from '../../../../common/string/string';
@@ -49,6 +50,7 @@ import { StudentDataService } from '../../../../services/studentDataService';
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
     ComponentSaveSubmitButtonsComponent,
+    DragDropModule,
     FlexLayoutModule,
     MatchChoiceItemComponent,
     MatchFeedbackSectionComponent
@@ -186,7 +188,7 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
       transferArrayItem(
         event.previousContainer.data.items,
         event.container.data.items,
-        event.previousIndex,
+        event.item.data.position,
         event.currentIndex
       );
     }
