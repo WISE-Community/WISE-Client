@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../../common/Component';
@@ -50,7 +49,6 @@ describe('MatchStudentDefaultComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MatchStudentDefault],
-      schemas: [NO_ERRORS_SCHEMA],
       imports: [StudentTeacherCommonServicesModule],
       providers: [provideHttpClient(withInterceptorsFromDi())]
     });

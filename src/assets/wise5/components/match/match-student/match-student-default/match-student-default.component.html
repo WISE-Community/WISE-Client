@@ -1,4 +1,4 @@
-<component-header [component]="component"></component-header>
+<component-header [component]="component" />
 <div class="match" fxLayout="row wrap" cdkDropListGroup>
   <div
     fxFlex="100"
@@ -12,9 +12,11 @@
     >
       <div class="bucket-title" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
         <h3 class="mat-subtitle-2" [innerHTML]="buckets[0].value"></h3>
-        <div *ngIf="componentContent.canCreateChoices">
-          <add-choice-button [isDisabled]="isDisabled" (onClick)="addChoice()" />
-        </div>
+        @if (componentContent.canCreateChoices) {
+          <div>
+            <add-choice-button [isDisabled]="isDisabled" (onClick)="addChoice()" />
+          </div>
+        }
       </div>
       <ul
         class="items"
@@ -24,24 +26,24 @@
         [cdkDropListData]="{ isSourceBucket: true, items: buckets[0].items }"
         (cdkDropListDropped)="drop($event)"
       >
-        <li
-          class="item"
-          [ngClass]="{ disabled: isDisabled }"
-          cdkDrag
-          [cdkDragDisabled]="isDisabled"
-          (cdkDragEntered)="dragEnter($event)"
-          (cdkDragExited)="dragExit($event)"
-          *ngFor="let item of buckets[0].items; let position = index"
-          [cdkDragData]="{ position: position, item: item }"
-        >
-          <match-choice-item
-            [buckets]="buckets"
-            [item]="item"
-            [hasCorrectAnswer]="hasCorrectAnswer"
-            [isDisabled]="isDisabled"
-            (onStudentDataChanged)="studentDataChanged()"
-          />
-        </li>
+        @for (item of buckets[0].items; track item.id; let position = $index) {
+          <li
+            [ngClass]="{ item: true, disabled: isDisabled }"
+            cdkDrag
+            [cdkDragDisabled]="isDisabled"
+            (cdkDragEntered)="dragEnter($event)"
+            (cdkDragExited)="dragExit($event)"
+            [cdkDragData]="{ position: position, item: item }"
+          >
+            <match-choice-item
+              [buckets]="buckets"
+              [item]="item"
+              [hasCorrectAnswer]="hasCorrectAnswer"
+              [isDisabled]="isDisabled"
+              (onStudentDataChanged)="studentDataChanged()"
+            />
+          </li>
+        }
       </ul>
     </div>
   </div>
@@ -53,49 +55,50 @@
     fxFlex.gt-xs="{{ componentContent.horizontal ? 50 : 100 }}"
     fxFlexOrder="{{ componentContent.choicesAfter ? 1 : 2 }}"
   >
-    <div
-      *ngFor="let bucket of buckets.slice(1)"
-      fxLayout="column"
-      fxFlex="100"
-      fxFlex.gt-xs="{{ componentContent.horizontal ? 100 : 50 }}"
-      fxFlex.gt-md="{{ componentContent.horizontal ? 100 : 33.33 }}"
-    >
-      <div class="bucket target notice-bg-bg" fxLayout="column" fxLayoutAlign="stretch">
-        <div
-          class="bucket-title"
-          fxLayout="row wrap"
-          fxLayoutAlign="start center"
-          fxLayoutGap="8px"
-        >
-          <h3 class="mat-subtitle-2" [innerHTML]="bucket.value"></h3>
-        </div>
-        <ul
-          class="items"
-          cdkDropList
-          [cdkDropListData]="{ isSourceBucket: false, items: bucket.items }"
-          (cdkDropListDropped)="drop($event)"
-        >
-          <li
-            class="item"
-            [ngClass]="{ disabled: isDisabled }"
-            cdkDrag
-            [cdkDragDisabled]="isDisabled"
-            (cdkDragEntered)="dragEnter($event)"
-            (cdkDragExited)="dragExit($event)"
-            *ngFor="let item of bucket.items; let position = index"
-            [cdkDragData]="{ position: position, item: item }"
+    @for (bucket of buckets.slice(1); track bucket.id) {
+      <div
+        fxLayout="column"
+        fxFlex="100"
+        fxFlex.gt-xs="{{ componentContent.horizontal ? 100 : 50 }}"
+        fxFlex.gt-md="{{ componentContent.horizontal ? 100 : 33.33 }}"
+      >
+        <div class="bucket target notice-bg-bg" fxLayout="column" fxLayoutAlign="stretch">
+          <div
+            class="bucket-title"
+            fxLayout="row wrap"
+            fxLayoutAlign="start center"
+            fxLayoutGap="8px"
           >
-            <match-choice-item
-              [buckets]="buckets"
-              [item]="item"
-              [hasCorrectAnswer]="hasCorrectAnswer"
-              [isDisabled]="isDisabled"
-              (onStudentDataChanged)="studentDataChanged()"
-            />
-          </li>
-        </ul>
+            <h3 class="mat-subtitle-2" [innerHTML]="bucket.value"></h3>
+          </div>
+          <ul
+            class="items"
+            cdkDropList
+            [cdkDropListData]="{ isSourceBucket: false, items: bucket.items }"
+            (cdkDropListDropped)="drop($event)"
+          >
+            @for (item of bucket.items; track item.id; let position = $index) {
+              <li
+                [ngClass]="{ item: true, disabled: isDisabled }"
+                cdkDrag
+                [cdkDragDisabled]="isDisabled"
+                (cdkDragEntered)="dragEnter($event)"
+                (cdkDragExited)="dragExit($event)"
+                [cdkDragData]="{ position: position, item: item }"
+              >
+                <match-choice-item
+                  [buckets]="buckets"
+                  [item]="item"
+                  [hasCorrectAnswer]="hasCorrectAnswer"
+                  [isDisabled]="isDisabled"
+                  (onStudentDataChanged)="studentDataChanged()"
+                />
+              </li>
+            }
+          </ul>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </div>
 <match-feedback-section
@@ -105,24 +108,24 @@
   [isLatestComponentStateSubmit]="isLatestComponentStateSubmit"
   [submitCounter]="submitCounter"
 />
-<component-save-submit-buttons
-  *ngIf="isSaveOrSubmitButtonVisible"
-  [componentState]="latestComponentState"
-  [isDirty]="isDirty"
-  [isDisabled]="isDisabled"
-  [isSaveButtonVisible]="isSaveButtonVisible"
-  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-  [isSubmitButtonVisible]="isSubmitButtonVisible"
-  [isSubmitDirty]="isSubmitDirty"
-  (saveButtonClicked)="saveButtonClicked($event)"
-  (submitButtonClicked)="submitButtonClicked($event)"
->
-</component-save-submit-buttons>
-<component-annotations
-  *ngIf="mode === 'student'"
-  [annotations]="latestAnnotations"
-  [maxScore]="componentContent.maxScore"
-  [nodeId]="nodeId"
-  [componentId]="componentId"
->
-</component-annotations>
+@if (isSaveOrSubmitButtonVisible) {
+  <component-save-submit-buttons
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  />
+}
+@if (mode === 'student') {
+  <component-annotations
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  />
+}
