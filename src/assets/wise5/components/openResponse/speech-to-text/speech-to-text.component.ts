@@ -10,20 +10,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  standalone: true,
-  selector: 'speech-to-text',
-  imports: [
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatMenuModule,
-    MatTooltipModule
-  ],
-  templateUrl: './speech-to-text.component.html',
-  styleUrls: ['./speech-to-text.component.scss']
+    selector: 'speech-to-text',
+    imports: [
+        CommonModule,
+        FormsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatMenuModule,
+        MatTooltipModule
+    ],
+    templateUrl: './speech-to-text.component.html',
+    styleUrls: ['./speech-to-text.component.scss']
 })
 export class SpeechToTextComponent {
   protected languages: Language[] = this.transcribeService.languages;

@@ -4,9 +4,10 @@ import { News } from '../domain/news';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-news',
-  templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+    selector: 'app-news',
+    templateUrl: './news.component.html',
+    styleUrls: ['./news.component.scss'],
+    standalone: false
 })
 export class NewsComponent implements OnInit {
   allNewsItems: any = [];

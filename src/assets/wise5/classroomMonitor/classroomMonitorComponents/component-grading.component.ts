@@ -29,28 +29,27 @@ import { MultipleChoiceGradingComponent } from '../../components/multipleChoice/
 import { DialogGuidanceGradingComponent } from '../../components/dialogGuidance/dialog-guidance-grading/dialog-guidance-grading.component';
 
 @Component({
-  imports: [
-    AiChatGradingModule,
-    AnimationGradingModule,
-    AudioOscillatorGradingModule,
-    ConceptMapGradingModule,
-    DialogGuidanceGradingComponent,
-    DiscussionGradingModule,
-    DrawGradingModule,
-    EmbeddedGradingModule,
-    GraphGradingModule,
-    LabelGradingModule,
-    MatchGradingModule,
-    MultipleChoiceGradingComponent,
-    OpenResponseGradingModule,
-    PeerChatGradingModule,
-    ShowGroupWorkGradingModule,
-    ShowMyWorkGradingModule,
-    TableGradingModule
-  ],
-  selector: 'component-grading-component',
-  standalone: true,
-  template: '<div #component></div>'
+    imports: [
+        AiChatGradingModule,
+        AnimationGradingModule,
+        AudioOscillatorGradingModule,
+        ConceptMapGradingModule,
+        DialogGuidanceGradingComponent,
+        DiscussionGradingModule,
+        DrawGradingModule,
+        EmbeddedGradingModule,
+        GraphGradingModule,
+        LabelGradingModule,
+        MatchGradingModule,
+        MultipleChoiceGradingComponent,
+        OpenResponseGradingModule,
+        PeerChatGradingModule,
+        ShowGroupWorkGradingModule,
+        ShowMyWorkGradingModule,
+        TableGradingModule
+    ],
+    selector: 'component-grading-component',
+    template: '<div #component></div>'
 })
 export class ComponentGradingComponent {
   @ViewChild('component') private componentElementRef: ElementRef;

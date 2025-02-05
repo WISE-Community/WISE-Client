@@ -8,8 +8,9 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 import { EmbeddedService } from '../embeddedService';
 
 @Component({
-  selector: 'embedded-show-work',
-  templateUrl: 'embedded-show-work.component.html'
+    selector: 'embedded-show-work',
+    templateUrl: 'embedded-show-work.component.html',
+    standalone: false
 })
 export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
   embeddedApplicationIFrameId: string;

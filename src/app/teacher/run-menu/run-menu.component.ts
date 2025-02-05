@@ -11,9 +11,10 @@ import { Router } from '@angular/router';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 
 @Component({
-  selector: 'app-run-menu',
-  styleUrl: './run-menu.component.scss',
-  templateUrl: './run-menu.component.html'
+    selector: 'app-run-menu',
+    styleUrl: './run-menu.component.scss',
+    templateUrl: './run-menu.component.html',
+    standalone: false
 })
 export class RunMenuComponent implements OnInit {
   private editLink: string = '';

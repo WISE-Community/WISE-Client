@@ -5,9 +5,10 @@ import { Run } from '../../domain/run';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-edit-run-warning-dialog',
-  templateUrl: './edit-run-warning-dialog.component.html',
-  styleUrls: ['./edit-run-warning-dialog.component.scss']
+    selector: 'app-edit-run-warning-dialog',
+    templateUrl: './edit-run-warning-dialog.component.html',
+    styleUrls: ['./edit-run-warning-dialog.component.scss'],
+    standalone: false
 })
 export class EditRunWarningDialogComponent implements OnInit {
   run: Run;

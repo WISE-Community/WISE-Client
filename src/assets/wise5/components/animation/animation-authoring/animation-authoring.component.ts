@@ -11,9 +11,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'animation-authoring',
-  templateUrl: 'animation-authoring.component.html',
-  styleUrls: ['animation-authoring.component.scss']
+    selector: 'animation-authoring',
+    templateUrl: 'animation-authoring.component.html',
+    styleUrls: ['animation-authoring.component.scss'],
+    standalone: false
 })
 export class AnimationAuthoring extends AbstractComponentAuthoring {
   stepNodesDetails: string[];

@@ -9,9 +9,10 @@ import { NewPasswordAndConfirmComponent } from '../../../password/new-password-a
 import { changePasswordError } from '../../../common/password-helper';
 
 @Component({
-  selector: 'app-edit-password',
-  templateUrl: './edit-password.component.html',
-  styleUrls: ['./edit-password.component.scss']
+    selector: 'app-edit-password',
+    templateUrl: './edit-password.component.html',
+    styleUrls: ['./edit-password.component.scss'],
+    standalone: false
 })
 export class EditPasswordComponent implements OnInit {
   @ViewChild('changePasswordForm', { static: false }) changePasswordForm;

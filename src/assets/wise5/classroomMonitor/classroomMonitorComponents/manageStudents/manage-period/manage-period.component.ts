@@ -5,9 +5,10 @@ import { ConfigService } from '../../../../services/configService';
 import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroupService';
 
 @Component({
-  selector: 'manage-period',
-  styleUrls: ['manage-period.component.scss'],
-  templateUrl: 'manage-period.component.html'
+    selector: 'manage-period',
+    styleUrls: ['manage-period.component.scss'],
+    templateUrl: 'manage-period.component.html',
+    standalone: false
 })
 export class ManagePeriodComponent {
   @Input() period: any;

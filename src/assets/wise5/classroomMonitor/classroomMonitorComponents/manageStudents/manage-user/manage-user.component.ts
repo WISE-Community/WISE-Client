@@ -8,10 +8,11 @@ import { ManageShowStudentInfoComponent } from '../manage-show-student-info/mana
 import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/remove-user-confirm-dialog.component';
 
 @Component({
-  selector: 'manage-user',
-  styleUrls: ['manage-user.component.scss'],
-  templateUrl: 'manage-user.component.html',
-  encapsulation: ViewEncapsulation.None
+    selector: 'manage-user',
+    styleUrls: ['manage-user.component.scss'],
+    templateUrl: 'manage-user.component.html',
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ManageUserComponent {
   @Input() user: any;

@@ -12,23 +12,22 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CreateBranchPathsComponent } from '../create-branch-paths/create-branch-paths.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    DisplayBranchPathStepsComponent,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
-    ReactiveFormsModule
-  ],
-  selector: 'edit-branch-paths',
-  standalone: true,
-  styleUrl: '../create-branch-paths/create-branch-paths.component.scss',
-  templateUrl: './edit-branch-paths.component.html'
+    imports: [
+        CommonModule,
+        DisplayBranchPathStepsComponent,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTooltipModule,
+        ReactiveFormsModule
+    ],
+    selector: 'edit-branch-paths',
+    styleUrl: '../create-branch-paths/create-branch-paths.component.scss',
+    templateUrl: './edit-branch-paths.component.html'
 })
 export class EditBranchPathsComponent extends CreateBranchPathsComponent {
   @Input() branchPaths: any[] = [];

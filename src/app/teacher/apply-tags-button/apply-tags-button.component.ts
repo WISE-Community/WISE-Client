@@ -17,22 +17,21 @@ import { ProjectTagService } from '../../../assets/wise5/services/projectTagServ
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    MatTooltipModule,
-    SearchBarComponent,
-    SelectAllItemsCheckboxComponent,
-    TagComponent
-  ],
-  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
-  selector: 'apply-tags-button',
-  standalone: true,
-  styleUrl: './apply-tags-button.component.scss',
-  templateUrl: './apply-tags-button.component.html'
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        MatMenuModule,
+        MatTooltipModule,
+        SearchBarComponent,
+        SelectAllItemsCheckboxComponent,
+        TagComponent
+    ],
+    providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
+    selector: 'apply-tags-button',
+    styleUrl: './apply-tags-button.component.scss',
+    templateUrl: './apply-tags-button.component.html'
 })
 export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {
   @Input() selectedProjects: Project[] = [];

@@ -2,10 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-register-home',
-  templateUrl: './register-home.component.html',
-  styleUrls: ['./register-home.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-register-home',
+    templateUrl: './register-home.component.html',
+    styleUrls: ['./register-home.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class RegisterHomeComponent implements OnInit {
   googleUserNotFoundError: boolean;

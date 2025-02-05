@@ -19,9 +19,10 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 
 @Component({
-  selector: 'ai-chat-student',
-  templateUrl: './ai-chat-student.component.html',
-  styleUrls: ['./ai-chat-student.component.scss']
+    selector: 'ai-chat-student',
+    templateUrl: './ai-chat-student.component.html',
+    styleUrls: ['./ai-chat-student.component.scss'],
+    standalone: false
 })
 export class AiChatStudentComponent extends ComponentStudent {
   component: AiChatComponent;

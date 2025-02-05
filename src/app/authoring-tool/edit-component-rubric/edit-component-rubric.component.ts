@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
-  selector: 'edit-component-rubric',
-  templateUrl: 'edit-component-rubric.component.html',
-  styleUrls: ['edit-component-rubric.component.scss']
+    selector: 'edit-component-rubric',
+    templateUrl: 'edit-component-rubric.component.html',
+    styleUrls: ['edit-component-rubric.component.scss'],
+    standalone: false
 })
 export class EditComponentRubricComponent {
   @Input() componentContent: any;

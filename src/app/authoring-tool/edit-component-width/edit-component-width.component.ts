@@ -5,9 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  imports: [FormsModule, MatFormFieldModule, MatInputModule],
-  selector: 'edit-component-width',
-  standalone: true,
-  templateUrl: 'edit-component-width.component.html'
+    imports: [FormsModule, MatFormFieldModule, MatInputModule],
+    selector: 'edit-component-width',
+    templateUrl: 'edit-component-width.component.html'
 })
 export class EditComponentWidthComponent extends EditComponentFieldComponent {}

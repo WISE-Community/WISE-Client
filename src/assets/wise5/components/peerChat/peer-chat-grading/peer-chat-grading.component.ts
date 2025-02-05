@@ -15,9 +15,10 @@ import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
 
 @Component({
-  selector: 'peer-chat-grading',
-  templateUrl: './peer-chat-grading.component.html',
-  styleUrls: ['./peer-chat-grading.component.scss']
+    selector: 'peer-chat-grading',
+    templateUrl: './peer-chat-grading.component.html',
+    styleUrls: ['./peer-chat-grading.component.scss'],
+    standalone: false
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
   constructor(

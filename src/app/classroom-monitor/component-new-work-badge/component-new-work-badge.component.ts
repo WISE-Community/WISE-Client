@@ -6,10 +6,9 @@ import { Annotation } from '../../../assets/wise5/common/Annotation';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule],
-  selector: 'component-new-work-badge',
-  standalone: true,
-  template: `@if (hasNewWork) {
+    imports: [CommonModule],
+    selector: 'component-new-work-badge',
+    template: `@if (hasNewWork) {
     <span class="badge badge--info" i18n>New</span>
     }`
 })

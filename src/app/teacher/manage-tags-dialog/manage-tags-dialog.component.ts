@@ -20,25 +20,24 @@ import { MatListModule } from '@angular/material/list';
 import { TagComponent } from '../tag/tag.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    EditTagComponent,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatTooltipModule,
-    TagComponent
-  ],
-  selector: 'manage-tags-dialog',
-  standalone: true,
-  styleUrl: './manage-tags-dialog.component.scss',
-  templateUrl: './manage-tags-dialog.component.html'
+    imports: [
+        CommonModule,
+        EditTagComponent,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatTooltipModule,
+        TagComponent
+    ],
+    selector: 'manage-tags-dialog',
+    styleUrl: './manage-tags-dialog.component.scss',
+    templateUrl: './manage-tags-dialog.component.html'
 })
 export class ManageTagsDialogComponent implements OnInit {
   protected idToEditing: { [id: string]: boolean } = {};

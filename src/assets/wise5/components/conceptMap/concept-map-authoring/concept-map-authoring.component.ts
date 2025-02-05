@@ -9,9 +9,10 @@ import { ConceptMapService } from '../conceptMapService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'concept-map-authoring',
-  templateUrl: 'concept-map-authoring.component.html',
-  styleUrls: ['concept-map-authoring.component.scss']
+    selector: 'concept-map-authoring',
+    templateUrl: 'concept-map-authoring.component.html',
+    styleUrls: ['concept-map-authoring.component.scss'],
+    standalone: false
 })
 export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   availableNodes: any[];

@@ -4,9 +4,10 @@ import { PeerGroupWorkgroupsContainerComponent } from '../peer-group-workgroups-
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
-  selector: 'peer-group-grouping',
-  templateUrl: './peer-group-grouping.component.html',
-  styleUrls: ['../peer-group-workgroups-container/peer-group-workgroups-container.component.scss']
+    selector: 'peer-group-grouping',
+    templateUrl: './peer-group-grouping.component.html',
+    styleUrls: ['../peer-group-workgroups-container/peer-group-workgroups-container.component.scss'],
+    standalone: false
 })
 export class PeerGroupGroupingComponent extends PeerGroupWorkgroupsContainerComponent {
   @Input() grouping: any;

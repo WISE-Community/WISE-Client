@@ -6,11 +6,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatDividerModule, MatIconModule],
-  selector: 'discourse-category-activity',
-  standalone: true,
-  styleUrl: 'discourse-category-activity.component.scss',
-  templateUrl: 'discourse-category-activity.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatDividerModule, MatIconModule],
+    selector: 'discourse-category-activity',
+    styleUrl: 'discourse-category-activity.component.scss',
+    templateUrl: 'discourse-category-activity.component.html'
 })
 export class DiscourseCategoryActivityComponent {
   @Input() categoryURL: string = '';

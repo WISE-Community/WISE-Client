@@ -7,9 +7,10 @@ import { copy } from '../../common/object/object';
 import { newProjectTemplate } from '../new-project-template';
 
 @Component({
-  selector: 'notebook-authoring',
-  templateUrl: './notebook-authoring.component.html',
-  styleUrls: ['./notebook-authoring.component.scss']
+    selector: 'notebook-authoring',
+    templateUrl: './notebook-authoring.component.html',
+    styleUrls: ['./notebook-authoring.component.scss'],
+    standalone: false
 })
 export class NotebookAuthoringComponent {
   protected notebookChanged: Subject<void> = new Subject<void>();

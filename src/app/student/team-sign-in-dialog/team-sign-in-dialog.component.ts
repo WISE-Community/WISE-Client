@@ -9,9 +9,10 @@ import { Router } from '@angular/router';
 import { GoogleUser } from '../../modules/google-sign-in/GoogleUser';
 
 @Component({
-  selector: 'app-team-sign-in-dialog',
-  templateUrl: './team-sign-in-dialog.component.html',
-  styleUrls: ['./team-sign-in-dialog.component.scss']
+    selector: 'app-team-sign-in-dialog',
+    templateUrl: './team-sign-in-dialog.component.html',
+    styleUrls: ['./team-sign-in-dialog.component.scss'],
+    standalone: false
 })
 export class TeamSignInDialogComponent implements OnInit {
   user: Student;

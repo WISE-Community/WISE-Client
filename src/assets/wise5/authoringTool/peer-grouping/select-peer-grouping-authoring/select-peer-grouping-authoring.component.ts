@@ -5,9 +5,10 @@ import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuth
 import { SelectPeerGroupingDialogComponent } from '../select-peer-grouping-dialog/select-peer-grouping-dialog.component';
 
 @Component({
-  selector: 'select-peer-grouping-authoring',
-  templateUrl: './select-peer-grouping-authoring.component.html',
-  styleUrls: ['./select-peer-grouping-authoring.component.scss']
+    selector: 'select-peer-grouping-authoring',
+    templateUrl: './select-peer-grouping-authoring.component.html',
+    styleUrls: ['./select-peer-grouping-authoring.component.scss'],
+    standalone: false
 })
 export class SelectPeerGroupingAuthoringComponent implements OnInit {
   peerGrouping: PeerGrouping;

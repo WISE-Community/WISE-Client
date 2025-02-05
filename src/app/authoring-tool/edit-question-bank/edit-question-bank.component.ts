@@ -5,9 +5,10 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
-  selector: 'edit-question-bank',
-  templateUrl: './edit-question-bank.component.html',
-  styleUrls: ['./edit-question-bank.component.scss']
+    selector: 'edit-question-bank',
+    templateUrl: './edit-question-bank.component.html',
+    styleUrls: ['./edit-question-bank.component.scss'],
+    standalone: false
 })
 export class EditQuestionBankComponent implements OnInit {
   protected allowedReferenceComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];

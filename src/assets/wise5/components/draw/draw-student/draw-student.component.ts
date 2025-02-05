@@ -16,10 +16,11 @@ import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
-  selector: 'draw-student',
-  templateUrl: 'draw-student.component.html',
-  styleUrls: ['draw-student.component.scss', '../drawing-tool.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'draw-student',
+    templateUrl: 'draw-student.component.html',
+    styleUrls: ['draw-student.component.scss', '../drawing-tool.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class DrawStudent extends ComponentStudent {
   drawingTool: any;

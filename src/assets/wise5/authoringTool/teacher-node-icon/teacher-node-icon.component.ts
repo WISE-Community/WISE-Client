@@ -11,19 +11,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    NodeIconChooserDialogComponent
-  ],
-  selector: 'teacher-node-icon',
-  standalone: true,
-  styleUrl: '../../vle/node-icon/node-icon.component.scss',
-  templateUrl: '../../vle/node-icon/node-icon.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatBadgeModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        NodeIconChooserDialogComponent
+    ],
+    selector: 'teacher-node-icon',
+    styleUrl: '../../vle/node-icon/node-icon.component.scss',
+    templateUrl: '../../vle/node-icon/node-icon.component.html'
 })
 export class TeacherNodeIconComponent extends NodeIconComponent {
   constructor(

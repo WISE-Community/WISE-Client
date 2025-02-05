@@ -5,10 +5,11 @@ import { Project } from '../../domain/project';
 import { SelectRunsOption } from './select-runs-option';
 
 @Component({
-  selector: 'select-runs-controls',
-  templateUrl: './select-runs-controls.component.html',
-  styleUrls: ['./select-runs-controls.component.scss'],
-  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }]
+    selector: 'select-runs-controls',
+    templateUrl: './select-runs-controls.component.html',
+    styleUrls: ['./select-runs-controls.component.scss'],
+    providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
+    standalone: false
 })
 export class SelectRunsControlsComponent {
   @Output() archiveProjectsEvent = new EventEmitter<boolean>();

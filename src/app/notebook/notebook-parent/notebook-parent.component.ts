@@ -4,8 +4,9 @@ import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 
 @Component({
-  selector: 'notebook-parent',
-  template: ''
+    selector: 'notebook-parent',
+    template: '',
+    standalone: false
 })
 export class NotebookParentComponent {
   @Input() config: any;

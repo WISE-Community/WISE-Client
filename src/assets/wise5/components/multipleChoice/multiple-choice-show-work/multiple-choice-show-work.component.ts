@@ -8,11 +8,10 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 
 @Component({
-  imports: [CommonModule, FormsModule, MatCheckboxModule, MatRadioModule],
-  selector: 'multiple-choice-show-work',
-  standalone: true,
-  styleUrl: 'multiple-choice-show-work.component.scss',
-  templateUrl: 'multiple-choice-show-work.component.html'
+    imports: [CommonModule, FormsModule, MatCheckboxModule, MatRadioModule],
+    selector: 'multiple-choice-show-work',
+    styleUrl: 'multiple-choice-show-work.component.scss',
+    templateUrl: 'multiple-choice-show-work.component.html'
 })
 export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective {
   studentChoiceId: string = '';

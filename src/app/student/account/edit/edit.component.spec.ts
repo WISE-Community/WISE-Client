@@ -3,10 +3,16 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EditComponent } from './edit.component';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 
-@Component({ selector: 'app-edit-password', template: '' })
+@Component({
+    selector: 'app-edit-password', template: '',
+    standalone: false
+})
 class EditPasswordComponent {}
 
-@Component({ selector: 'student-edit-profile', template: '' })
+@Component({
+    selector: 'student-edit-profile', template: '',
+    standalone: false
+})
 class StudentEditProfileComponent {}
 
 describe('EditComponent', () => {

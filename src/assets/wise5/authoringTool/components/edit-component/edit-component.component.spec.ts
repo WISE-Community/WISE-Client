@@ -5,8 +5,9 @@ import { components } from '../../../components/Components';
 import { ComponentContent } from '../../../common/ComponentContent';
 
 @Component({
-  selector: 'mock-authoring',
-  template: '<div>Mock Authoring Component</div>'
+    selector: 'mock-authoring',
+    template: '<div>Mock Authoring Component</div>',
+    standalone: false
 })
 class MockAuthoringComponent {
   componentContent: any;

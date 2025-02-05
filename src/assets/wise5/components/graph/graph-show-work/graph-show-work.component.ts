@@ -6,9 +6,10 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 import { NodeService } from '../../../services/nodeService';
 
 @Component({
-  selector: 'graph-show-work',
-  styleUrls: ['../graph-student/graph-student.component.scss'],
-  templateUrl: 'graph-show-work.component.html'
+    selector: 'graph-show-work',
+    styleUrls: ['../graph-student/graph-student.component.scss'],
+    templateUrl: 'graph-show-work.component.html',
+    standalone: false
 })
 export class GraphShowWorkComponent extends ComponentShowWorkDirective {
   Highcharts: typeof Highcharts = Highcharts;

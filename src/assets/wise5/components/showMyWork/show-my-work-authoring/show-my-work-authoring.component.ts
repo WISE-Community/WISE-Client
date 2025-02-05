@@ -6,9 +6,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'show-my-work-authoring',
-  templateUrl: './show-my-work-authoring.component.html',
-  styleUrls: ['./show-my-work-authoring.component.scss']
+    selector: 'show-my-work-authoring',
+    templateUrl: './show-my-work-authoring.component.html',
+    styleUrls: ['./show-my-work-authoring.component.scss'],
+    standalone: false
 })
 export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {
   allowedShowWorkComponentTypes: string[] = [

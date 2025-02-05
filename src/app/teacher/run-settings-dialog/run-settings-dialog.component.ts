@@ -7,9 +7,10 @@ import { formatDate } from '@angular/common';
 import { TeacherRun } from '../teacher-run';
 
 @Component({
-  selector: 'app-run-settings-dialog',
-  templateUrl: './run-settings-dialog.component.html',
-  styleUrls: ['./run-settings-dialog.component.scss']
+    selector: 'app-run-settings-dialog',
+    templateUrl: './run-settings-dialog.component.html',
+    styleUrls: ['./run-settings-dialog.component.scss'],
+    standalone: false
 })
 export class RunSettingsDialogComponent implements OnInit {
   run: TeacherRun;

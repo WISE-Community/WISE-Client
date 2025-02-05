@@ -14,24 +14,23 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    NgSelectModule,
-    SearchBarComponent,
-    TagComponent
-  ],
-  encapsulation: ViewEncapsulation.None,
-  selector: 'select-tags',
-  standalone: true,
-  styleUrl: './select-tags.component.scss',
-  templateUrl: './select-tags.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        NgSelectModule,
+        SearchBarComponent,
+        TagComponent
+    ],
+    encapsulation: ViewEncapsulation.None,
+    selector: 'select-tags',
+    styleUrl: './select-tags.component.scss',
+    templateUrl: './select-tags.component.html'
 })
 export class SelectTagsComponent extends AbstractTagsMenuComponent {
   @Input() selectedTags: Tag[] = [];

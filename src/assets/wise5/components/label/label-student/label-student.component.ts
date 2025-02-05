@@ -28,25 +28,24 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
 import { LabelStudentData } from '../LabelStudentData';
 
 @Component({
-  imports: [
-    AddToNotebookButtonComponent,
-    CommonModule,
-    ComponentAnnotationsComponent,
-    ComponentHeaderComponent,
-    ComponentSaveSubmitButtonsComponent,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatTooltipModule
-  ],
-  selector: 'label-student',
-  standalone: true,
-  styleUrl: 'label-student.component.scss',
-  templateUrl: 'label-student.component.html'
+    imports: [
+        AddToNotebookButtonComponent,
+        CommonModule,
+        ComponentAnnotationsComponent,
+        ComponentHeaderComponent,
+        ComponentSaveSubmitButtonsComponent,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatTooltipModule
+    ],
+    selector: 'label-student',
+    styleUrl: 'label-student.component.scss',
+    templateUrl: 'label-student.component.html'
 })
 export class LabelStudentComponent extends ComponentStudent {
   protected addNewLabelButtonVisible: boolean = true;

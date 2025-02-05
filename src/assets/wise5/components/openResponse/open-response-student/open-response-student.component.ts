@@ -24,9 +24,10 @@ import { hasConnectedComponent } from '../../../common/ComponentContent';
 import { ConstraintService } from '../../../services/constraintService';
 
 @Component({
-  selector: 'open-response-student',
-  templateUrl: 'open-response-student.component.html',
-  styleUrls: ['open-response-student.component.scss']
+    selector: 'open-response-student',
+    templateUrl: 'open-response-student.component.html',
+    styleUrls: ['open-response-student.component.scss'],
+    standalone: false
 })
 export class OpenResponseStudent extends ComponentStudent {
   audioAttachments: any[] = [];

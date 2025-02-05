@@ -11,17 +11,16 @@ import { GradingEditComponentMaxScoreComponent } from '../grading-edit-component
 import { EditComponentCommentComponent } from '../edit-component-comment/edit-component-comment.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    EditComponentCommentComponent,
-    EditComponentScoreComponent,
-    FlexLayoutModule,
-    GradingEditComponentMaxScoreComponent
-  ],
-  selector: 'edit-component-annotations',
-  standalone: true,
-  styles: ['.disabled-text { color: gray; }'],
-  templateUrl: 'edit-component-annotations.component.html'
+    imports: [
+        CommonModule,
+        EditComponentCommentComponent,
+        EditComponentScoreComponent,
+        FlexLayoutModule,
+        GradingEditComponentMaxScoreComponent
+    ],
+    selector: 'edit-component-annotations',
+    styles: ['.disabled-text { color: gray; }'],
+    templateUrl: 'edit-component-annotations.component.html'
 })
 export class EditComponentAnnotationsComponent {
   @Input() componentId: string;

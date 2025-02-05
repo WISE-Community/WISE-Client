@@ -20,25 +20,24 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  templateUrl: './forgot-teacher-username.component.html',
-  styleUrl: './forgot-teacher-username.component.scss',
-  standalone: true,
-  imports: [
-    MatCard,
-    MatCardContent,
-    FormsModule,
-    FlexModule,
-    ReactiveFormsModule,
-    NgIf,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatError,
-    MatButton,
-    MatProgressBar,
-    MatDivider,
-    RouterLink
-  ]
+    templateUrl: './forgot-teacher-username.component.html',
+    styleUrl: './forgot-teacher-username.component.scss',
+    imports: [
+        MatCard,
+        MatCardContent,
+        FormsModule,
+        FlexModule,
+        ReactiveFormsModule,
+        NgIf,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatError,
+        MatButton,
+        MatProgressBar,
+        MatDivider,
+        RouterLink
+    ]
 })
 export class ForgotTeacherUsernameComponent {
   protected forgotTeacherUsernameFormGroup: FormGroup = this.fb.group({

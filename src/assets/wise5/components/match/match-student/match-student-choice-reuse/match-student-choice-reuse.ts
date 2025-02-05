@@ -7,8 +7,9 @@ import { Item } from '../item';
 import { copy } from '../../../../common/object/object';
 
 @Component({
-  styleUrls: ['../match-student-default/match-student-default.component.scss'],
-  templateUrl: '../match-student-default/match-student-default.component.html'
+    styleUrls: ['../match-student-default/match-student-default.component.scss'],
+    templateUrl: '../match-student-default/match-student-default.component.html',
+    standalone: false
 })
 export class MatchStudentChoiceReuse extends MatchStudentDefault {
   protected drop(event: MatchCdkDragDrop<Container, Item>): void {

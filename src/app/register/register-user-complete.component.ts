@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ConfigService } from '../services/config.service';
 
 @Component({
-  template: ''
+    template: '',
+    standalone: false
 })
 export abstract class RegisterUserCompleteComponent implements OnInit {
   protected googleLogInURL = `${this.configService.getContextPath()}/api/google-login`;

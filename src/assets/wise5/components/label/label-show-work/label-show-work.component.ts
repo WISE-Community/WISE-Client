@@ -6,9 +6,10 @@ import { LabelService } from '../labelService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 
 @Component({
-  selector: 'label-show-work',
-  templateUrl: 'label-show-work.component.html',
-  styleUrls: ['label-show-work.component.scss']
+    selector: 'label-show-work',
+    templateUrl: 'label-show-work.component.html',
+    styleUrls: ['label-show-work.component.scss'],
+    standalone: false
 })
 export class LabelShowWorkComponent extends ComponentShowWorkDirective {
   canvasId: string;

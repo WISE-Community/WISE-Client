@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
-  selector: 'show-student-info',
-  templateUrl: './show-student-info.component.html',
-  styleUrls: ['./show-student-info.component.scss']
+    selector: 'show-student-info',
+    templateUrl: './show-student-info.component.html',
+    styleUrls: ['./show-student-info.component.scss'],
+    standalone: false
 })
 export class ShowStudentInfoComponent implements OnInit {
   @Input() user: any;

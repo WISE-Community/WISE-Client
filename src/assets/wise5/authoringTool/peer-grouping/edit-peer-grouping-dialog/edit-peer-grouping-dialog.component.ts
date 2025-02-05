@@ -13,9 +13,10 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'edit-peer-grouping-dialog',
-  templateUrl: './edit-peer-grouping-dialog.component.html',
-  styleUrls: ['./edit-peer-grouping-dialog.component.scss']
+    selector: 'edit-peer-grouping-dialog',
+    templateUrl: './edit-peer-grouping-dialog.component.html',
+    styleUrls: ['./edit-peer-grouping-dialog.component.scss'],
+    standalone: false
 })
 export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
   stepsUsedIn: string[] = [];

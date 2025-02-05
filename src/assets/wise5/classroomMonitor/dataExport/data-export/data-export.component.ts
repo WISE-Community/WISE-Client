@@ -15,9 +15,10 @@ import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spin
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'data-export',
-  templateUrl: './data-export.component.html',
-  styleUrls: ['./data-export.component.scss']
+    selector: 'data-export',
+    templateUrl: './data-export.component.html',
+    styleUrls: ['./data-export.component.scss'],
+    standalone: false
 })
 export class DataExportComponent {
   constructor(

@@ -15,10 +15,9 @@ class GroupNode {
 }
 
 @Component({
-  imports: [CommonModule, MatTabsModule],
-  selector: 'group-tabs',
-  standalone: true,
-  templateUrl: './group-tabs.component.html'
+    imports: [CommonModule, MatTabsModule],
+    selector: 'group-tabs',
+    templateUrl: './group-tabs.component.html'
 })
 export class GroupTabsComponent implements OnInit {
   protected groupNodes: GroupNode[] = [];

@@ -7,10 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule],
-  selector: 'node-navigation',
-  standalone: true,
-  templateUrl: './node-navigation.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatButtonModule],
+    selector: 'node-navigation',
+    templateUrl: './node-navigation.component.html'
 })
 export class NodeNavigationComponent implements OnInit {
   protected hasNextNode: boolean;

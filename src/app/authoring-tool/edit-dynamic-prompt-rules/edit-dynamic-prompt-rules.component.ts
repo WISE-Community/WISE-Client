@@ -6,9 +6,10 @@ import { FeedbackRule } from '../../../assets/wise5/components/common/feedbackRu
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
-  selector: 'edit-dynamic-prompt-rules',
-  templateUrl: './edit-dynamic-prompt-rules.component.html',
-  styleUrls: ['./edit-dynamic-prompt-rules.component.scss']
+    selector: 'edit-dynamic-prompt-rules',
+    templateUrl: './edit-dynamic-prompt-rules.component.html',
+    styleUrls: ['./edit-dynamic-prompt-rules.component.scss'],
+    standalone: false
 })
 export class EditDynamicPromptRulesComponent extends EditFeedbackRulesComponent {
   constructor(protected dialog: MatDialog, protected projectService: TeacherProjectService) {

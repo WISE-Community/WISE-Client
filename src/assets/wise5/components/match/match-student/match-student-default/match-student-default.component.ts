@@ -31,8 +31,9 @@ import { CRaterService } from '../../../../services/cRaterService';
 import { CRaterRubric, getUniqueIdeas } from '../../../common/cRater/CRaterRubric';
 
 @Component({
-  templateUrl: 'match-student-default.component.html',
-  styleUrl: 'match-student-default.component.scss'
+    templateUrl: 'match-student-default.component.html',
+    styleUrl: 'match-student-default.component.scss',
+    standalone: false
 })
 export class MatchStudentDefault extends ComponentStudent {
   autoScroll: any = require('dom-autoscroller');

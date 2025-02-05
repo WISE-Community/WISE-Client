@@ -3,8 +3,9 @@ import { Teacher } from '../../../domain/teacher';
 import { UserService } from '../../../services/user.service';
 
 @Component({
-  styleUrls: ['unlink-google-account-success.component.scss'],
-  templateUrl: 'unlink-google-account-success.component.html'
+    styleUrls: ['unlink-google-account-success.component.scss'],
+    templateUrl: 'unlink-google-account-success.component.html',
+    standalone: false
 })
 export class UnlinkGoogleAccountSuccessComponent {
   username: string;

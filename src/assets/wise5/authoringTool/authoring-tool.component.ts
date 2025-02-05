@@ -10,8 +10,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 
 @Component({
-  styleUrls: ['./authoring-tool.component.scss'],
-  templateUrl: './authoring-tool.component.html'
+    styleUrls: ['./authoring-tool.component.scss'],
+    templateUrl: './authoring-tool.component.html',
+    standalone: false
 })
 export class AuthoringToolComponent {
   protected isMenuOpen: boolean = false;

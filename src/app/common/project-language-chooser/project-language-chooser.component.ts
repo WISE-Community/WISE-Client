@@ -9,11 +9,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 
 @Component({
-  standalone: true,
-  selector: 'project-language-chooser',
-  styleUrl: './project-language-chooser.component.scss',
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
-  templateUrl: './project-language-chooser.component.html'
+    selector: 'project-language-chooser',
+    styleUrl: './project-language-chooser.component.scss',
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
+    templateUrl: './project-language-chooser.component.html'
 })
 export class ProjectLanguageChooserComponent implements OnChanges {
   protected availableLanguages: Language[];

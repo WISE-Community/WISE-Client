@@ -12,9 +12,10 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 
 @Component({
-  selector: 'node-authoring',
-  templateUrl: './node-authoring.component.html',
-  styleUrls: ['./node-authoring.component.scss']
+    selector: 'node-authoring',
+    templateUrl: './node-authoring.component.html',
+    styleUrls: ['./node-authoring.component.scss'],
+    standalone: false
 })
 export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];

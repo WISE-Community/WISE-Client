@@ -9,10 +9,11 @@ import { OutsideURLService } from '../outsideURLService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'outside-url-authoring',
-  templateUrl: 'outside-url-authoring.component.html',
-  styleUrls: ['outside-url-authoring.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'outside-url-authoring',
+    templateUrl: 'outside-url-authoring.component.html',
+    styleUrls: ['outside-url-authoring.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
   isShowOERs: boolean;

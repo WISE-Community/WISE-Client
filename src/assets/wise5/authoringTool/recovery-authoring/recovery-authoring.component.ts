@@ -6,9 +6,10 @@ import { NodeRecoveryAnalysis } from '../../../../app/domain/nodeRecoveryAnalysi
 import { isValidJSONString } from '../../common/string/string';
 
 @Component({
-  selector: 'recovery-authoring',
-  templateUrl: './recovery-authoring.component.html',
-  styleUrls: ['./recovery-authoring.component.scss']
+    selector: 'recovery-authoring',
+    templateUrl: './recovery-authoring.component.html',
+    styleUrls: ['./recovery-authoring.component.scss'],
+    standalone: false
 })
 export class RecoveryAuthoringComponent implements OnInit {
   badNodes: NodeRecoveryAnalysis[] = [];

@@ -4,9 +4,10 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
-  selector: 'edit-component-tags',
-  templateUrl: 'edit-component-tags.component.html',
-  styleUrls: ['edit-component-tags.component.scss']
+    selector: 'edit-component-tags',
+    templateUrl: 'edit-component-tags.component.html',
+    styleUrls: ['edit-component-tags.component.scss'],
+    standalone: false
 })
 export class EditComponentTagsComponent {
   @Input()

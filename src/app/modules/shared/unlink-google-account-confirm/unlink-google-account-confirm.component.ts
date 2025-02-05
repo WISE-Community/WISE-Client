@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { UnlinkGoogleAccountPasswordComponent } from '../unlink-google-account-password/unlink-google-account-password.component';
 
 @Component({
-  styleUrls: ['./unlink-google-account-confirm.component.scss'],
-  templateUrl: './unlink-google-account-confirm.component.html'
+    styleUrls: ['./unlink-google-account-confirm.component.scss'],
+    templateUrl: './unlink-google-account-confirm.component.html',
+    standalone: false
 })
 export class UnlinkGoogleAccountConfirmComponent {
   constructor(public dialog: MatDialog) {}

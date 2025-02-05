@@ -15,9 +15,10 @@ import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 @Component({
-  selector: 'embedded-student',
-  templateUrl: 'embedded-student.component.html',
-  styleUrls: ['embedded-student.component.scss']
+    selector: 'embedded-student',
+    templateUrl: 'embedded-student.component.html',
+    styleUrls: ['embedded-student.component.scss'],
+    standalone: false
 })
 export class EmbeddedStudent extends ComponentStudent {
   annotationsToSave: any[] = [];

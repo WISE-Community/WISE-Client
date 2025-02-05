@@ -11,9 +11,10 @@ import { SummaryService } from '../summaryService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'summary-authoring',
-  templateUrl: 'summary-authoring.component.html',
-  styleUrls: ['summary-authoring.component.scss']
+    selector: 'summary-authoring',
+    templateUrl: 'summary-authoring.component.html',
+    styleUrls: ['summary-authoring.component.scss'],
+    standalone: false
 })
 export class SummaryAuthoring extends AbstractComponentAuthoring {
   isResponsesOptionAvailable: boolean = false;

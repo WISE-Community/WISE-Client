@@ -13,11 +13,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
-  selector: 'add-component-button',
-  standalone: true,
-  styles: [
-    `
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
+    selector: 'add-component-button',
+    styles: [
+        `
       .rotate-180 {
         transform: rotate(180deg);
       }
@@ -25,8 +24,8 @@ import { CommonModule } from '@angular/common';
         transform: scaleY(-1);
       }
     `
-  ],
-  templateUrl: './add-component-button.component.html'
+    ],
+    templateUrl: './add-component-button.component.html'
 })
 export class AddComponentButtonComponent {
   protected firstComponent = false;

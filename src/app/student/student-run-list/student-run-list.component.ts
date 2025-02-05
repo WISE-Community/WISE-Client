@@ -9,9 +9,10 @@ import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 import { sortByRunStartTimeDesc } from '../../domain/run';
 
 @Component({
-  selector: 'app-student-run-list',
-  templateUrl: './student-run-list.component.html',
-  styleUrls: ['./student-run-list.component.scss']
+    selector: 'app-student-run-list',
+    templateUrl: './student-run-list.component.html',
+    styleUrls: ['./student-run-list.component.scss'],
+    standalone: false
 })
 export class StudentRunListComponent implements OnInit {
   runs: StudentRun[] = [];

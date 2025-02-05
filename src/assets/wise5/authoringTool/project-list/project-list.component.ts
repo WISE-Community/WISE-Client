@@ -13,18 +13,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatTooltipModule,
-    RouterModule
-  ],
-  standalone: true,
-  styleUrl: './project-list.component.scss',
-  templateUrl: './project-list.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatTooltipModule,
+        RouterModule
+    ],
+    styleUrl: './project-list.component.scss',
+    templateUrl: './project-list.component.html'
 })
 export class ProjectListComponent implements OnInit, OnDestroy {
   protected projects: any[] = [];

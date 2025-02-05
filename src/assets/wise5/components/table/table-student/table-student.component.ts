@@ -19,9 +19,10 @@ import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
-  templateUrl: 'table-student.component.html',
-  styleUrl: 'table-student.component.scss',
-  encapsulation: ViewEncapsulation.None
+    templateUrl: 'table-student.component.html',
+    styleUrl: 'table-student.component.scss',
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class TableStudentComponent extends ComponentStudent {
   columnIndexToIsUsed: Map<number, boolean> = new Map();

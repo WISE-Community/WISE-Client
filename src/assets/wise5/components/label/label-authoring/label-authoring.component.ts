@@ -10,9 +10,10 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'label-authoring',
-  templateUrl: 'label-authoring.component.html',
-  styleUrls: ['label-authoring.component.scss']
+    selector: 'label-authoring',
+    templateUrl: 'label-authoring.component.html',
+    styleUrls: ['label-authoring.component.scss'],
+    standalone: false
 })
 export class LabelAuthoring extends AbstractComponentAuthoring {
   numberInputChange: Subject<number> = new Subject<number>();

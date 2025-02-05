@@ -5,8 +5,9 @@ import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
 
 @Component({
-  selector: 'peer-chat-message-input',
-  templateUrl: './peer-chat-message-input.component.html'
+    selector: 'peer-chat-message-input',
+    templateUrl: './peer-chat-message-input.component.html',
+    standalone: false
 })
 export class PeerChatMessageInputComponent implements OnInit {
   @Input() component: PeerChatComponent;

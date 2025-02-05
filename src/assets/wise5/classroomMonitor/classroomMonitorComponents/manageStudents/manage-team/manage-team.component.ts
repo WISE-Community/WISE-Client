@@ -16,9 +16,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
-  selector: 'manage-team',
-  styleUrls: ['manage-team.component.scss'],
-  templateUrl: 'manage-team.component.html'
+    selector: 'manage-team',
+    styleUrls: ['manage-team.component.scss'],
+    templateUrl: 'manage-team.component.html',
+    standalone: false
 })
 export class ManageTeamComponent {
   avatarColor: string;

@@ -11,19 +11,18 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  selector: 'app-header-account-menu',
-  templateUrl: './header-account-menu.component.html',
-  styleUrl: './header-account-menu.component.scss',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatDividerModule,
-    RouterModule
-  ]
+    selector: 'app-header-account-menu',
+    templateUrl: './header-account-menu.component.html',
+    styleUrl: './header-account-menu.component.scss',
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatDividerModule,
+        RouterModule
+    ]
 })
 export class HeaderAccountMenuComponent implements OnInit {
   protected firstName: string = '';

@@ -6,9 +6,10 @@ import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 
 @Component({
-  selector: 'add-team-dialog',
-  templateUrl: './add-team-dialog.component.html',
-  styleUrls: ['./add-team-dialog.component.scss']
+    selector: 'add-team-dialog',
+    templateUrl: './add-team-dialog.component.html',
+    styleUrls: ['./add-team-dialog.component.scss'],
+    standalone: false
 })
 export class AddTeamDialogComponent {
   allUsersInPeriod: any[] = [];

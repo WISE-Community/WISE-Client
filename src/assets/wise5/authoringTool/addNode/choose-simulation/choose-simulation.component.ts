@@ -29,23 +29,22 @@ class SimulationNode {
 }
 
 @Component({
-  imports: [
-    CardSelectorComponent,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatTooltipModule,
-    RouterModule
-  ],
-  standalone: true,
-  templateUrl: './choose-simulation.component.html',
-  styleUrls: ['./choose-simulation.component.scss', '../../add-content.scss']
+    imports: [
+        CardSelectorComponent,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatProgressBarModule,
+        MatSelectModule,
+        MatTooltipModule,
+        RouterModule
+    ],
+    templateUrl: './choose-simulation.component.html',
+    styleUrls: ['./choose-simulation.component.scss', '../../add-content.scss']
 })
 export class ChooseSimulationComponent extends AbstractImportStepComponent {
   private allNodes: SimulationNode[] = [];

@@ -4,10 +4,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [FlexLayoutModule, MatIconModule],
-  selector: 'run-ended-and-locked-message',
-  standalone: true,
-  templateUrl: './run-ended-and-locked-message.component.html'
+    imports: [FlexLayoutModule, MatIconModule],
+    selector: 'run-ended-and-locked-message',
+    templateUrl: './run-ended-and-locked-message.component.html'
 })
 export class RunEndedAndLockedMessageComponent implements OnInit {
   protected message: string;

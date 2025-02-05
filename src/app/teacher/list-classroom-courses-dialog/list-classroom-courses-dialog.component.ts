@@ -14,9 +14,10 @@ import {
 import { Run } from '../../domain/run';
 
 @Component({
-  selector: 'app-list-classroom-courses-dialog',
-  templateUrl: './list-classroom-courses-dialog.component.html',
-  styleUrls: ['./list-classroom-courses-dialog.component.scss']
+    selector: 'app-list-classroom-courses-dialog',
+    templateUrl: './list-classroom-courses-dialog.component.html',
+    styleUrls: ['./list-classroom-courses-dialog.component.scss'],
+    standalone: false
 })
 export class ListClassroomCoursesDialogComponent implements OnInit {
   run: Run;

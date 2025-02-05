@@ -12,12 +12,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatDialogModule, MatIconModule],
-  selector: 'app-announcement',
-  standalone: true,
-  styleUrl: './announcement.component.scss',
-  templateUrl: './announcement.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatDialogModule, MatIconModule],
+    selector: 'app-announcement',
+    styleUrl: './announcement.component.scss',
+    templateUrl: './announcement.component.html'
 })
 export class AnnouncementComponent {
   @Input() announcement: Announcement = new Announcement();
@@ -34,8 +33,9 @@ export class AnnouncementComponent {
 }
 
 @Component({
-  selector: 'announcement-dialog',
-  templateUrl: 'announcement-dialog.component.html'
+    selector: 'announcement-dialog',
+    templateUrl: 'announcement-dialog.component.html',
+    standalone: false
 })
 export class AnnouncementDialogComponent {
   constructor(
