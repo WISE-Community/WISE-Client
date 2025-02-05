@@ -7,13 +7,15 @@ import { ConfigService } from '../../../../services/configService';
   selector: 'show-student-info',
   standalone: true,
   template: `
-    <span class="username">
-      @if (canViewStudentNames) {
-        <strong>{{ user.name }}</strong> ({{ user.username }})
-      } @else {
-        <strong i8n>Student {{ user.id }}</strong>
-      }
-    </span>
+    @if (canViewStudentNames) {
+      <span class="username"
+        ><strong>{{ user.name }}</strong> ({{ user.username }})</span
+      >
+    } @else {
+      <span class="username"
+        ><strong i8n>Student {{ user.id }}</strong></span
+      >
+    }
   `
 })
 export class ShowStudentInfoComponent implements OnInit {
