@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { CRaterService } from '../../../services/cRaterService';
+import { UserService } from '../../../../../app/services/user.service';
 
 @Component({
   imports: [DialogResponsesComponent, MatCardModule],
@@ -23,6 +24,7 @@ import { CRaterService } from '../../../services/cRaterService';
         [computerAvatar]="computerAvatar"
         [cRaterRubric]="cRaterRubric"
         [responses]="componentState.studentData.responses"
+        [showDetectedIdeas]="isTeacher"
       />
     </mat-card>
   `
@@ -30,17 +32,20 @@ import { CRaterService } from '../../../services/cRaterService';
 export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective {
   protected computerAvatar: ComputerAvatar;
   protected cRaterRubric: CRaterRubric;
+  protected isTeacher: boolean = false;
 
   constructor(
     private computerAvatarService: ComputerAvatarService,
     private cRaterService: CRaterService,
     protected nodeService: NodeService,
-    protected projectService: ProjectService
+    protected projectService: ProjectService,
+    protected userService: UserService
   ) {
     super(nodeService, projectService);
   }
 
   ngOnInit(): void {
+    this.isTeacher = this.userService.isTeacher();
     this.computerAvatar = this.computerAvatarService.getAvatar(
       this.componentState.studentData.computerAvatarId
     );

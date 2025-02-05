@@ -17401,11 +17401,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="0c03c92e747349e163b50b24e01387d5c3b88230" datatype="html">
-        <source>Ideas found:</source>
+      <trans-unit id="642af7f7535025499586787c8f0e2e10dd5ef4ed" datatype="html">
+        <source>Ideas detected:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/detected-ideas/detected-ideas.component.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="27e0b1e650bef276e8c29dd8d547e3fc8c4f833f" datatype="html">

@@ -1,5 +1,5 @@
 @for (response of responses; track response.timestamp) {
-  @if (response.user === 'Computer') {
+  @if (response.user === 'Computer' && showDetectedIdeas && cRaterRubric.ideas.length) {
     <detected-ideas [cRaterRubric]="cRaterRubric" [responses]="[response]" />
   }
   <dialog-response [response]="response" [computerAvatar]="computerAvatar" />

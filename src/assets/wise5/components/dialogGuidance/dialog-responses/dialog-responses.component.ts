@@ -18,4 +18,5 @@ export class DialogResponsesComponent {
   @Input() cRaterRubric: CRaterRubric;
   @Input() isWaitingForComputerResponse: boolean;
   @Input() responses: DialogResponse[] = [];
+  @Input() showDetectedIdeas: boolean = false;
 }
