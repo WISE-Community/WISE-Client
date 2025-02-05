@@ -27,29 +27,28 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
   private addDialogGuidanceSpecificHeaderColumns(component: any, headerRow: string[]): void {
     headerRow.push(this.itemIdLabel);
     const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
-    const ideaNames = this.getIdeaNames(componentStates);
-    const scoreNames = this.getScoreNames(componentStates);
+    const ideaNames = this.getIdeaNames(this.getIdeas(componentStates));
+    const scoreNames = this.getScoreNames(this.getScores(componentStates));
     for (let i = 1; i <= this.getMaxNumStudentResponses(componentStates); i++) {
       const responseLabelNumber = `${this.responseLabel} ${i}`;
       headerRow.push(`${this.studentLabel} ${responseLabelNumber}`);
-      this.addIdeaNamesToHeaderRow(headerRow, ideaNames, responseLabelNumber);
+      ideaNames.forEach((ideaName) =>
+        headerRow.push(`${this.ideaLabel} ${ideaName} ${responseLabelNumber}`)
+      );
       this.addScoreNamesToHeaderRow(headerRow, scoreNames, responseLabelNumber);
       headerRow.push(`${this.computerLabel} ${responseLabelNumber}`);
     }
   }
 
-  private getIdeaNames(componentStates: any[]): string[] {
-    for (const componentState of componentStates) {
-      for (const response of componentState.studentData.responses) {
-        if (response.ideas != null && response.ideas.length > 0) {
-          return this.getIdeaNamesFromIdeas(response.ideas);
-        }
-      }
-    }
-    return [];
+  private getIdeas(componentStates: any[]): any[] {
+    return (
+      componentStates
+        .flatMap((componentState) => componentState.studentData.responses)
+        .find((response) => response.ideas?.length > 0)?.ideas ?? []
+    );
   }
 
-  private getIdeaNamesFromIdeas(ideas: any[]): string[] {
+  private getIdeaNames(ideas: any[]): string[] {
     return ideas.map((idea) => idea.name).sort(this.sortIdeaNames);
   }
 
@@ -65,18 +64,15 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
       : a.localeCompare(b); // sort alphabetically
   }
 
-  private getScoreNames(componentStates: any[]): string[] {
-    for (const componentState of componentStates) {
-      for (const response of componentState.studentData.responses) {
-        if (response.scores != null && response.scores.length > 0) {
-          return this.getScoreNamesFromScores(response.scores);
-        }
-      }
-    }
-    return [];
+  private getScores(componentStates: any[]): string[] {
+    return (
+      componentStates
+        .flatMap((componentState) => componentState.studentData.responses)
+        .find((response) => response.scores?.length > 0)?.scores ?? []
+    );
   }
 
-  private getScoreNamesFromScores(scores: any[]): string[] {
+  private getScoreNames(scores: any[]): string[] {
     return scores.map((score) => score.id).sort();
   }
 
@@ -87,16 +83,6 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
           componentState.studentData.responses.filter((response) => response.user === 'Student')
             .length
       )
-    );
-  }
-
-  private addIdeaNamesToHeaderRow(
-    headerRow: string[],
-    ideaNames: string[],
-    responseLabelNumber: string
-  ): void {
-    ideaNames.forEach((ideaName) =>
-      headerRow.push(`${this.ideaLabel} ${ideaName} ${responseLabelNumber}`)
     );
   }
 
