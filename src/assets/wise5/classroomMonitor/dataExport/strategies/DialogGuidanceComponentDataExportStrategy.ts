@@ -27,34 +27,29 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
   private addDialogGuidanceSpecificHeaderColumns(component: any, headerRow: string[]): void {
     headerRow.push(this.itemIdLabel);
     const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
-    const ideaNames = this.getIdeaNames(componentStates);
-    const scoreNames = this.getScoreNames(componentStates);
-    for (let i = 1; i <= this.getMaxNumberOfStudentResponses(componentStates); i++) {
+    const ideaNames = this.getIdeaNames(this.getIdeas(componentStates));
+    const scoreNames = this.getScoreNames(this.getScores(componentStates));
+    for (let i = 1; i <= this.getMaxNumStudentResponses(componentStates); i++) {
       const responseLabelNumber = `${this.responseLabel} ${i}`;
       headerRow.push(`${this.studentLabel} ${responseLabelNumber}`);
-      this.addIdeaNamesToHeaderRow(headerRow, ideaNames, responseLabelNumber);
+      ideaNames.forEach((ideaName) =>
+        headerRow.push(`${this.ideaLabel} ${ideaName} ${responseLabelNumber}`)
+      );
       this.addScoreNamesToHeaderRow(headerRow, scoreNames, responseLabelNumber);
       headerRow.push(`${this.computerLabel} ${responseLabelNumber}`);
     }
   }
 
-  private getIdeaNames(componentStates: any[]): string[] {
-    for (const componentState of componentStates) {
-      for (const response of componentState.studentData.responses) {
-        if (response.ideas != null && response.ideas.length > 0) {
-          return this.getIdeaNamesFromIdeas(response.ideas);
-        }
-      }
-    }
-    return [];
+  private getIdeas(componentStates: any[]): any[] {
+    return (
+      componentStates
+        .flatMap((componentState) => componentState.studentData.responses)
+        .find((response) => response.ideas?.length > 0)?.ideas ?? []
+    );
   }
 
-  private getIdeaNamesFromIdeas(ideas: any[]): string[] {
-    const ideaNames = [];
-    for (const idea of ideas) {
-      ideaNames.push(idea.name);
-    }
-    return ideaNames.sort(this.sortIdeaNames);
+  private getIdeaNames(ideas: any[]): string[] {
+    return ideas.map((idea) => idea.name).sort(this.sortIdeaNames);
   }
 
   private sortIdeaNames(a: any, b: any): number {
@@ -64,63 +59,31 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
     // alphabetically. When a string like "5a" is given to parseInt(), it will return 5. Therefore
     // if we are comparing "5" and "5a", we will sort alphabetically because we want 5 to show up
     // before 5a.
-    if (!isNaN(aInt) && !isNaN(bInt) && aInt !== bInt) {
-      // sort numerically
-      return aInt - bInt;
-    } else {
-      // sort alphabetically
-      return a.localeCompare(b);
-    }
+    return !isNaN(aInt) && !isNaN(bInt) && aInt !== bInt
+      ? aInt - bInt // sort numerically
+      : a.localeCompare(b); // sort alphabetically
   }
 
-  private getScoreNames(componentStates: any[]): string[] {
-    for (const componentState of componentStates) {
-      for (const response of componentState.studentData.responses) {
-        if (response.scores != null && response.scores.length > 0) {
-          return this.getScoreNamesFromScores(response.scores);
-        }
-      }
-    }
-    return [];
+  private getScores(componentStates: any[]): string[] {
+    return (
+      componentStates
+        .flatMap((componentState) => componentState.studentData.responses)
+        .find((response) => response.scores?.length > 0)?.scores ?? []
+    );
   }
 
-  private getScoreNamesFromScores(scores: any[]): string[] {
-    const scoreNames = [];
-    for (const score of scores) {
-      scoreNames.push(score.id);
-    }
-    return scoreNames.sort();
+  private getScoreNames(scores: any[]): string[] {
+    return scores.map((score) => score.id).sort();
   }
 
-  private getMaxNumberOfStudentResponses(componentStates: any[]): number {
-    let maxNumberOfResponses = 0;
-    for (const componentState of componentStates) {
-      const numberOfStudentResponses = this.getNumberOfStudentResponses(componentState);
-      if (numberOfStudentResponses > maxNumberOfResponses) {
-        maxNumberOfResponses = numberOfStudentResponses;
-      }
-    }
-    return maxNumberOfResponses;
-  }
-
-  private getNumberOfStudentResponses(componentState: any): number {
-    let count = 0;
-    for (const response of componentState.studentData.responses) {
-      if (response.user === 'Student') {
-        count++;
-      }
-    }
-    return count;
-  }
-
-  private addIdeaNamesToHeaderRow(
-    headerRow: string[],
-    ideaNames: string[],
-    responseLabelNumber: string
-  ): void {
-    for (const ideaName of ideaNames) {
-      headerRow.push(`${this.ideaLabel} ${ideaName} ${responseLabelNumber}`);
-    }
+  private getMaxNumStudentResponses(componentStates: any[]): number {
+    return Math.max(
+      ...componentStates.map(
+        (componentState) =>
+          componentState.studentData.responses.filter((response) => response.user === 'Student')
+            .length
+      )
+    );
   }
 
   private addScoreNamesToHeaderRow(
@@ -131,9 +94,9 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
     if (scoreNames.length === 0) {
       headerRow.push(`${this.scoreLabel} ${responseLabelNumber}`);
     } else {
-      for (const scoreName of scoreNames) {
-        headerRow.push(`${this.scoreLabel} ${scoreName} ${responseLabelNumber}`);
-      }
+      scoreNames.forEach((scoreName) =>
+        headerRow.push(`${this.scoreLabel} ${scoreName} ${responseLabelNumber}`)
+      );
     }
   }
 
@@ -177,29 +140,20 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
     super.setStudentWork(row, columnNameToNumber, component, componentState);
     let studentResponseCounter = 0;
     let responseLabelNumber = '';
-    for (const response of componentState.studentData.responses) {
+    componentState.studentData.responses.forEach((response) => {
       if (response.user === 'Student') {
         studentResponseCounter++;
         responseLabelNumber = `${this.responseLabel} ${studentResponseCounter}`;
-        this.addStudentResponseToRow(row, columnNameToNumber, responseLabelNumber, response);
+        this.setColumnValue(
+          row,
+          columnNameToNumber,
+          `${this.studentLabel} ${responseLabelNumber}`,
+          response.text
+        );
       } else if (response.user === 'Computer') {
         this.addComputerResponseDataToRow(row, columnNameToNumber, responseLabelNumber, response);
       }
-    }
-  }
-
-  private addStudentResponseToRow(
-    row: any[],
-    columnNameToNumber: any,
-    responseLabelNumber: string,
-    response: any
-  ): void {
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      `${this.studentLabel} ${responseLabelNumber}`,
-      response.text
-    );
+    });
   }
 
   private addComputerResponseDataToRow(
@@ -215,9 +169,19 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
       this.addScoresToRow(row, columnNameToNumber, responseLabelNumber, response.scores);
     }
     if (response.score != null) {
-      this.addScoreToRow(row, columnNameToNumber, responseLabelNumber, response.score);
+      this.setColumnValue(
+        row,
+        columnNameToNumber,
+        `${this.scoreLabel} ${responseLabelNumber}`,
+        response.score
+      );
     }
-    this.addComputerResponseToRow(row, columnNameToNumber, responseLabelNumber, response.text);
+    this.setColumnValue(
+      row,
+      columnNameToNumber,
+      `${this.computerLabel} ${responseLabelNumber}`,
+      response.text
+    );
   }
 
   private addIdeasToRow(
@@ -226,14 +190,14 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
     responseLabelNumber: string,
     ideas: any[]
   ): void {
-    for (const ideaObject of ideas) {
+    ideas.forEach((ideaObject) =>
       this.setColumnValue(
         row,
         columnNameToNumber,
         `${this.ideaLabel} ${ideaObject.name} ${responseLabelNumber}`,
         ideaObject.detected ? 1 : 0
-      );
-    }
+      )
+    );
   }
 
   private addScoresToRow(
@@ -242,41 +206,13 @@ export class DialogGuidanceComponentDataExportStrategy extends AbstractComponent
     responseLabelNumber: string,
     scores: any[]
   ): void {
-    for (const scoreObject of scores) {
+    scores.forEach((scoreObject) =>
       this.setColumnValue(
         row,
         columnNameToNumber,
         `${this.scoreLabel} ${scoreObject.id} ${responseLabelNumber}`,
         scoreObject.score
-      );
-    }
-  }
-
-  private addScoreToRow(
-    row: any[],
-    columnNameToNumber: any,
-    responseLabelNumber: string,
-    score: number
-  ): void {
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      `${this.scoreLabel} ${responseLabelNumber}`,
-      score
-    );
-  }
-
-  private addComputerResponseToRow(
-    row: any[],
-    columnNameToNumber: any,
-    responseLabelNumber: string,
-    text: string
-  ): void {
-    this.setColumnValue(
-      row,
-      columnNameToNumber,
-      `${this.computerLabel} ${responseLabelNumber}`,
-      text
+      )
     );
   }
 

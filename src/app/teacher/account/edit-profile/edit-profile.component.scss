@@ -3,21 +3,10 @@
   'style/abstracts/functions',
   'style/abstracts/mixins';
 
-.form-fields {
-  margin-bottom: 0 !important;
+p {
+  @apply w-full md:w-1/2 px-2;
+}
 
-  @media (min-width: breakpoint('sm.min')) {
-    p {
-      margin-bottom: 0;
-    }
-  }
-
-  // hacks necessary until fxLayoutGap resize bug is fixed: https://github.com/angular/flex-layout/issues/606
-  @media (max-width: breakpoint('xs.max')) {
-    margin: 0 !important;
-
-    p {
-      padding: 0 !important;
-    }
-  }
+mat-form-field {
+  @apply w-full;
 }

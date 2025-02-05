@@ -4,12 +4,8 @@ import { DataExportService } from '../../../services/dataExportService';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { ActivatedRoute } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ExportItemComponent', () => {
@@ -18,22 +14,17 @@ describe('ExportItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ExportItemComponent],
-    imports: [ClassroomMonitorTestingModule,
-        FormsModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatInputModule],
-    providers: [
+      imports: [ClassroomMonitorTestingModule, ExportItemComponent],
+      providers: [
         {
-            provide: ActivatedRoute,
-            useValue: {}
+          provide: ActivatedRoute,
+          useValue: {}
         },
         DataExportService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     spyOn(TestBed.inject(ConfigService), 'getPermissions').and.returnValue({
       canViewStudentNames: true,
       canGradeStudentWork: true,

@@ -9,20 +9,39 @@ import { DialogGuidanceComponentDataExportStrategy } from '../strategies/DialogG
 import { OpenResponseComponentDataExportStrategy } from '../strategies/OpenResponseComponentExportStrategy';
 import { LabelComponentDataExportStrategy } from '../strategies/LabelComponentDataExportStrategy';
 import { PeerChatComponentDataExportStrategy } from '../strategies/PeerChatComponentDataExportStrategy';
-import { DataExportStrategy } from '../strategies/DataExportStrategy';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { AnnotationService } from '../../../services/annotationService';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { AbstractComponentDataExportStrategy } from '../strategies/AbstractComponentDataExportStrategy';
 
 @Component({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule
+  ],
   selector: 'export-item',
-  templateUrl: './export-item.component.html',
-  styleUrls: ['./export-item.component.scss']
+  standalone: true,
+  styleUrl: './export-item.component.scss',
+  templateUrl: './export-item.component.html'
 })
 export class ExportItemComponent implements OnInit {
-  private allowedComponentTypesForAllRevisions = [
+  private allowedComponentTypesAllRevisions = [
     'DialogGuidance',
     'Discussion',
     'Label',
@@ -30,7 +49,7 @@ export class ExportItemComponent implements OnInit {
     'OpenResponse',
     'PeerChat'
   ];
-  private allowedComponentTypesForLatestRevisions = [
+  private allowedComponentTypesLatestRevisions = [
     'DialogGuidance',
     'Label',
     'Match',
@@ -38,7 +57,7 @@ export class ExportItemComponent implements OnInit {
   ];
   protected canViewStudentNames: boolean = false;
   protected componentExportTooltips = {
-    match: $localize`Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position`
+    Match: $localize`Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position`
   };
   protected includeCorrectnessColumns: boolean = true;
   protected includeOnlySubmits: boolean = false;
@@ -46,7 +65,7 @@ export class ExportItemComponent implements OnInit {
   protected nodes: any[] = [];
   protected project: any;
   private projectIdToOrder: any;
-  private workSelectionType: string;
+  private workSelectionType: 'exportAllWork' | 'exportLatestWork';
 
   constructor(
     public annotationService: AnnotationService,
@@ -66,11 +85,7 @@ export class ExportItemComponent implements OnInit {
     const nodeOrderOfProject = this.projectService.getNodeOrderOfProject(this.project);
     this.projectIdToOrder = nodeOrderOfProject.idToOrder;
     this.nodes = Object.values(this.projectIdToOrder);
-    this.nodes.sort(this.sortNodesByOrder);
-  }
-
-  private sortNodesByOrder(nodeA: any, nodeB: any): number {
-    return nodeA.order - nodeB.order;
+    this.nodes.sort((nodeA, nodeB) => nodeA.order - nodeB.order);
   }
 
   protected getNodePositionById(nodeId: string): string {
@@ -81,122 +96,41 @@ export class ExportItemComponent implements OnInit {
     return this.projectService.getNodeTitle(nodeId);
   }
 
-  protected canExportAllRevisionsForComponent(component: any): boolean {
-    return this.canExportForComponent(component, this.allowedComponentTypesForAllRevisions);
+  protected canExport(component: any, exportType: 'all' | 'latest'): boolean {
+    return exportType === 'all'
+      ? this.allowedComponentTypesAllRevisions.includes(component.type)
+      : this.allowedComponentTypesLatestRevisions.includes(component.type);
   }
 
-  protected canExportLatestRevisionsForComponent(component: any): boolean {
-    return this.canExportForComponent(component, this.allowedComponentTypesForLatestRevisions);
-  }
-
-  private canExportForComponent(component: any, allowedComponentTypes: string[]): boolean {
-    for (const allowedComponentType of allowedComponentTypes) {
-      if (component.type === allowedComponentType) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  protected exportComponentAllRevisions(nodeId: string, component: any): void {
-    this.setAllWorkSelectionType();
-    let strategy: DataExportStrategy;
-    if (component.type === 'Match') {
-      strategy = new MatchComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'all'
-      );
-    } else if (component.type === 'Discussion') {
-      strategy = new DiscussionComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams()
-      );
-    } else if (component.type === 'DialogGuidance') {
-      strategy = new DialogGuidanceComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'all'
-      );
-    } else if (component.type === 'OpenResponse') {
-      strategy = new OpenResponseComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'all'
-      );
-    } else if (component.type === 'Label') {
-      strategy = new LabelComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'all'
-      );
-    } else if (component.type === 'PeerChat') {
-      strategy = new PeerChatComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams()
-      );
-    }
-    this.export(strategy);
-  }
-
-  protected exportComponentLatestRevisions(nodeId: string, component: any): void {
-    this.setLatestWorkSelectionType();
-    let strategy: DataExportStrategy;
-    if (component.type === 'Match') {
-      strategy = new MatchComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'latest'
-      );
-    } else if (component.type === 'DialogGuidance') {
-      strategy = new DialogGuidanceComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'latest'
-      );
-    } else if (component.type === 'OpenResponse') {
-      strategy = new OpenResponseComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'latest'
-      );
-    } else if (component.type === 'Label') {
-      strategy = new LabelComponentDataExportStrategy(
-        nodeId,
-        component,
-        this.getComponentDataExportParams(),
-        'latest'
-      );
-    }
-    this.export(strategy);
-  }
-
-  private export(strategy: DataExportStrategy): void {
+  protected export(
+    nodeId: string,
+    component: any,
+    workSelectionType: 'exportAllWork' | 'exportLatestWork'
+  ): void {
+    this.workSelectionType = workSelectionType;
+    const strategy = this.getExportStrategy(nodeId, component);
     this.showDownloadingExportMessage();
     strategy.setDataExportContext({ controller: this } as any);
     strategy.export();
     this.hideDownloadingExportMessage();
   }
 
-  private setAllWorkSelectionType(): void {
-    this.setWorkSelectionType('exportAllWork');
-  }
-
-  private setLatestWorkSelectionType(): void {
-    this.setWorkSelectionType('exportLatestWork');
-  }
-
-  private setWorkSelectionType(workSelectionType: string): void {
-    this.workSelectionType = workSelectionType;
+  private getExportStrategy(nodeId: string, component: any): AbstractComponentDataExportStrategy {
+    const strategies = {
+      Match: MatchComponentDataExportStrategy,
+      Discussion: DiscussionComponentDataExportStrategy,
+      DialogGuidance: DialogGuidanceComponentDataExportStrategy,
+      OpenResponse: OpenResponseComponentDataExportStrategy,
+      Label: LabelComponentDataExportStrategy,
+      PeerChat: PeerChatComponentDataExportStrategy
+    };
+    const strategy = new strategies[component.type](
+      nodeId,
+      component,
+      this.getComponentDataExportParams()
+    );
+    strategy.setAllOrLatest(this.workSelectionType == 'exportAllWork' ? 'all' : 'latest');
+    return strategy;
   }
 
   private getComponentDataExportParams(): ComponentDataExportParams {
@@ -220,16 +154,16 @@ export class ExportItemComponent implements OnInit {
     window.open(`${this.configService.getConfigParam('previewProjectURL')}/${node.id}`);
   }
 
-  protected showDownloadingExportMessage(): void {
+  private showDownloadingExportMessage(): void {
     this.dialog.open(DialogWithSpinnerComponent, {
       data: {
-        title: $localize`Downloading Export`
+        title: $localize`Downloading export`
       },
       disableClose: false
     });
   }
 
-  protected hideDownloadingExportMessage(): void {
+  private hideDownloadingExportMessage(): void {
     this.dialog.closeAll();
   }
 }

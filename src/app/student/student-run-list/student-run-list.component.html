@@ -7,15 +7,9 @@
     </p>
   </div>
   <div class="content-block" *ngIf="runs.length">
-    <div
-      class="content-block__header controls dark-theme primary-bg"
-      fxLayout="row"
-      fxLayout.xs="column"
-      fxLayoutGap.sm="16px"
-    >
+    <div class="content-block__header controls dark-theme primary-bg flex">
       <app-search-bar
-        fxFlex="0 0 100%"
-        fxFlex.gt-sm="0 0 auto"
+        class="w-full sm:w-auto"
         [placeholderText]="'Search'"
         [value]="search"
         (update)="searchUpdated($event)"

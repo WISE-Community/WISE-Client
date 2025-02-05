@@ -2,7 +2,7 @@ export class CRaterIdea {
   name: string;
   detected: boolean;
   characterOffsets: any[];
-  studentText?: string;
+  text?: string;
 
   constructor(name: string, detected: boolean) {
     this.name = name;

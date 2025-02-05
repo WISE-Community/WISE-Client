@@ -11,11 +11,10 @@ import { ExportOneWorkgroupPerRowComponent } from './export-one-workgroup-per-ro
 import { ExportStudentWorkComponent } from './export-student-work/export-student-work.component';
 
 @NgModule({
-  imports: [RouterModule, StudentTeacherCommonModule],
+  imports: [ExportItemComponent, RouterModule, StudentTeacherCommonModule],
   declarations: [
     DataExportComponent,
     ExportEventsComponent,
-    ExportItemComponent,
     ExportOneWorkgroupPerRowComponent,
     ExportRawDataComponent,
     ExportStepVisitsComponent,

@@ -28,7 +28,7 @@ import { Item } from '../item';
 import { hasConnectedComponent } from '../../../../common/ComponentContent';
 import { Bucket, mergeBucket } from '../../bucket';
 import { CRaterService } from '../../../../services/cRaterService';
-import { CRaterRubric } from '../../../common/cRater/CRaterRubric';
+import { CRaterRubric, getUniqueIdeas } from '../../../common/cRater/CRaterRubric';
 
 @Component({
   templateUrl: 'match-student-default.component.html',
@@ -590,16 +590,10 @@ export class MatchStudentDefault extends ComponentStudent {
   }
 
   private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
-    responses.forEach((response) => {
-      response.ideas
-        ?.filter((idea) => idea.detected)
-        .forEach((idea) => {
-          if (!this.choices.some((c) => c.id === idea.name)) {
-            const choice = new Choice(idea.name, rubric.getStudentTextForIdea(idea.name));
-            this.choices.push(choice);
-            this.getBucketById(this.sourceBucketId).items.push(choice);
-          }
-        });
+    getUniqueIdeas(responses, rubric).forEach((idea) => {
+      const choice = new Choice(idea.name, idea.text);
+      this.choices.push(choice);
+      this.getBucketById(this.sourceBucketId).items.push(choice);
     });
   }
 
