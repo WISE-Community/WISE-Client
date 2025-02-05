@@ -5,11 +5,11 @@ import { Component } from '../../../../common/Component';
 import { copy } from '../../../../common/object/object';
 import { ClickToSnipImageService } from '../../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../../services/projectService';
-import { MatchStudentDefault } from './match-student-default.component';
+import { MatchStudentDefaultComponent } from './match-student-default.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-let component: MatchStudentDefault;
-let fixture: ComponentFixture<MatchStudentDefault>;
+let component: MatchStudentDefaultComponent;
+let fixture: ComponentFixture<MatchStudentDefaultComponent>;
 let bucket1: any;
 let bucket2: any;
 let bucket3: any;
@@ -48,11 +48,10 @@ let starterBucketLabel = 'Starter Choices';
 describe('MatchStudentDefaultComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MatchStudentDefault],
-      imports: [StudentTeacherCommonServicesModule],
+      imports: [MatchStudentDefaultComponent, StudentTeacherCommonServicesModule],
       providers: [provideHttpClient(withInterceptorsFromDi())]
     });
-    fixture = TestBed.createComponent(MatchStudentDefault);
+    fixture = TestBed.createComponent(MatchStudentDefaultComponent);
     component = fixture.componentInstance;
     choice1 = createChoice(choiceId1, choiceValue1);
     choice2 = createChoice(choiceId2, choiceValue2);
