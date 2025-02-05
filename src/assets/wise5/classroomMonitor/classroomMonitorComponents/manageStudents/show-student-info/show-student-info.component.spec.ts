@@ -16,7 +16,7 @@ let component: ShowStudentInfoComponent;
 describe('ShowStudentInfoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShowStudentInfoComponent],
+      imports: [ShowStudentInfoComponent],
       providers: [{ provide: ConfigService, useClass: ConfigServiceStub }]
     }).compileComponents();
   });
