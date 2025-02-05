@@ -9,8 +9,8 @@
         @for (idea of ideas; track idea.name) {
           <span class="idea app-bg-bg border border-gray-300">
             <b>{{ idea.name }}.</b>
-            @if (idea.name !== idea.teacherText) {
-              {{ idea.teacherText }}
+            @if (idea.name !== idea.text) {
+              {{ idea.text }}
             }
           </span>
         }

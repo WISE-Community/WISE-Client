@@ -4,6 +4,7 @@ import { DialogGuidanceShowWorkComponent } from './dialog-guidance-show-work.com
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CRaterService } from '../../../services/cRaterService';
 import { CRaterRubric } from '../../common/cRater/CRaterRubric';
+import { UserService } from '../../../../../app/services/user.service';
 
 describe('DialogGuidanceShowWorkComponent', () => {
   let component: DialogGuidanceShowWorkComponent;
@@ -14,6 +15,7 @@ describe('DialogGuidanceShowWorkComponent', () => {
       imports: [DialogGuidanceShowWorkComponent, StudentTeacherCommonServicesModule],
       providers: [
         { provide: CRaterService, useValue: { getCRaterRubric() {} } },
+        { provide: UserService, useValue: { isTeacher() {} } },
         provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();

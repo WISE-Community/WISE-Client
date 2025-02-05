@@ -286,10 +286,10 @@ function getCRaterRubric() {
     });
     it('should get an idea from the rubric when rubric exists on the component', () => {
       spyOn(projectService, 'getComponent').and.returnValue({
-        cRaterRubric: { ideas: [{ name: '1', studentText: 'Idea 1' }] }
+        cRaterRubric: { ideas: [{ name: '1', text: 'Idea 1' }] }
       } as unknown as ComponentContent);
       const cRaterRubric = service.getCRaterRubric('nodeId', 'componentId');
-      expect(cRaterRubric.getIdea('1').studentText).toEqual('Idea 1');
+      expect(cRaterRubric.getIdea('1').text).toEqual('Idea 1');
     });
     it('should get an undefined idea when rubric does not exists on the component', () => {
       spyOn(projectService, 'getComponent').and.returnValue({} as unknown as ComponentContent);

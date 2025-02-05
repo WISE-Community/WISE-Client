@@ -22,8 +22,7 @@ export function getUniqueIdeas(responses: any[], rubric: CRaterRubric): CRaterId
       .forEach((idea) => {
         const cRaterIdea = new CRaterIdea(idea.name, true);
         const cRaterRubricIdea = rubric.getIdea(idea.name);
-        cRaterIdea.studentText = cRaterRubricIdea?.studentText ?? idea.name;
-        cRaterIdea.teacherText = cRaterRubricIdea?.teacherText ?? idea.name;
+        cRaterIdea.text = cRaterRubricIdea?.text ?? idea.name;
         uniqueIdeas.push(cRaterIdea);
       })
   );

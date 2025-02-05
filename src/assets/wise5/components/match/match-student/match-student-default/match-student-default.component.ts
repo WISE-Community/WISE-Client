@@ -591,7 +591,7 @@ export class MatchStudentDefault extends ComponentStudent {
 
   private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
     getUniqueIdeas(responses, rubric).forEach((idea) => {
-      const choice = new Choice(idea.name, idea.studentText);
+      const choice = new Choice(idea.name, idea.text);
       this.choices.push(choice);
       this.getBucketById(this.sourceBucketId).items.push(choice);
     });
