@@ -6,11 +6,6 @@ import { DialogGuidanceShowWorkComponent } from '../dialog-guidance-show-work/di
   imports: [DialogGuidanceShowWorkComponent],
   selector: 'dialog-guidance-grading',
   standalone: true,
-  template: `<dialog-guidance-show-work
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-    [componentState]="componentState"
-    [isRevision]="isRevision"
-  />`
+  templateUrl: './dialog-guidance-grading.component.html'
 })
 export class DialogGuidanceGradingComponent extends ComponentShowWorkDirective {}

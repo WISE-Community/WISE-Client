@@ -46,10 +46,10 @@ const studentResponseScore1: number = 1;
 const studentResponseScore2: number = 2;
 const studentResponseScore3: number = 3;
 const studentResponseScore4: number = 4;
-const studentText1: string = 'Student Text 1';
-const studentText2: string = 'Student Text 2';
-const studentText3: string = 'Student Text 3';
-const studentText4: string = 'Student Text 4';
+const text1: string = 'Text 1';
+const text2: string = 'Text 2';
+const text3: string = 'Text 3';
+const text4: string = 'Text 4';
 
 describe('DialogGuidanceComponentDataExportStrategy', () => {
   beforeEach(() => {
@@ -114,7 +114,7 @@ function exportAllRevisions(): void {
             1,
             1,
             itemId,
-            studentText1,
+            text1,
             studentResponseIdeas1['1'] ? 1 : 0,
             studentResponseIdeas1['2'] ? 1 : 0,
             studentResponseIdeas1['2a'] ? 1 : 0,
@@ -160,7 +160,7 @@ function exportAllRevisions(): void {
             1,
             2,
             itemId,
-            studentText1,
+            text1,
             studentResponseIdeas1['1'] ? 1 : 0,
             studentResponseIdeas1['2'] ? 1 : 0,
             studentResponseIdeas1['2a'] ? 1 : 0,
@@ -168,7 +168,7 @@ function exportAllRevisions(): void {
             studentResponseScore1,
             nonscorableScore,
             computerText1,
-            studentText3,
+            text3,
             studentResponseIdeas3['1'] ? 1 : 0,
             studentResponseIdeas3['2'] ? 1 : 0,
             studentResponseIdeas3['2a'] ? 1 : 0,
@@ -206,7 +206,7 @@ function exportAllRevisions(): void {
             1,
             1,
             itemId,
-            studentText2,
+            text2,
             studentResponseIdeas2['1'] ? 1 : 0,
             studentResponseIdeas2['2'] ? 1 : 0,
             studentResponseIdeas2['2a'] ? 1 : 0,
@@ -252,7 +252,7 @@ function exportAllRevisions(): void {
             1,
             2,
             itemId,
-            studentText2,
+            text2,
             studentResponseIdeas2['1'] ? 1 : 0,
             studentResponseIdeas2['2'] ? 1 : 0,
             studentResponseIdeas2['2a'] ? 1 : 0,
@@ -260,7 +260,7 @@ function exportAllRevisions(): void {
             studentResponseScore2,
             nonscorableScore,
             computerText2,
-            studentText4,
+            text4,
             studentResponseIdeas4['1'] ? 1 : 0,
             studentResponseIdeas4['2'] ? 1 : 0,
             studentResponseIdeas4['2a'] ? 1 : 0,
@@ -328,7 +328,7 @@ function exportLatestRevisions(): void {
             1,
             2,
             itemId,
-            studentText1,
+            text1,
             studentResponseIdeas1['1'] ? 1 : 0,
             studentResponseIdeas1['2'] ? 1 : 0,
             studentResponseIdeas1['2a'] ? 1 : 0,
@@ -336,7 +336,7 @@ function exportLatestRevisions(): void {
             studentResponseScore1,
             nonscorableScore,
             computerText1,
-            studentText3,
+            text3,
             studentResponseIdeas3['1'] ? 1 : 0,
             studentResponseIdeas3['2'] ? 1 : 0,
             studentResponseIdeas3['2a'] ? 1 : 0,
@@ -374,7 +374,7 @@ function exportLatestRevisions(): void {
             1,
             2,
             itemId,
-            studentText2,
+            text2,
             studentResponseIdeas2['1'] ? 1 : 0,
             studentResponseIdeas2['2'] ? 1 : 0,
             studentResponseIdeas2['2a'] ? 1 : 0,
@@ -382,7 +382,7 @@ function exportLatestRevisions(): void {
             studentResponseScore2,
             nonscorableScore,
             computerText2,
-            studentText4,
+            text4,
             studentResponseIdeas4['1'] ? 1 : 0,
             studentResponseIdeas4['2'] ? 1 : 0,
             studentResponseIdeas4['2a'] ? 1 : 0,
@@ -448,7 +448,7 @@ function exportItemWithSingleScore(): void {
             1,
             1,
             itemId,
-            studentText1,
+            text1,
             studentResponseScore1,
             computerText1
           ]
@@ -500,28 +500,28 @@ function generateAdditionalHeaderColumnsForSingleScore(numStudentResponses: numb
 
 function initializeStudentWork(): void {
   const studentResponses1 = [
-    generateStudentResponse(studentText1),
+    generateStudentResponse(text1),
     generateComputerResponse(computerText1, studentResponseIdeas1, {
       ki: studentResponseScore1,
       nonscorable: nonscorableScore
     })
   ];
   const studentResponses2 = [
-    generateStudentResponse(studentText2),
+    generateStudentResponse(text2),
     generateComputerResponse(computerText2, studentResponseIdeas2, {
       ki: studentResponseScore2,
       nonscorable: nonscorableScore
     })
   ];
   const studentResponses3 = [
-    generateStudentResponse(studentText3),
+    generateStudentResponse(text3),
     generateComputerResponse(computerText3, studentResponseIdeas3, {
       ki: studentResponseScore3,
       nonscorable: nonscorableScore
     })
   ];
   const studentResponses4 = [
-    generateStudentResponse(studentText4),
+    generateStudentResponse(text4),
     generateComputerResponse(computerText4, studentResponseIdeas4, {
       ki: studentResponseScore4,
       nonscorable: nonscorableScore
