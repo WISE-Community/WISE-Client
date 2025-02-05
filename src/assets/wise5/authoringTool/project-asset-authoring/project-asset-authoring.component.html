@@ -17,11 +17,11 @@
   </div>
   <div class="storage-usage-message">
     <span i18n>
-      You are using {{ totalFileSize | filesize }} out of
-      {{ projectAssetTotalSizeMax | filesize }} ({{ projectAssetUsagePercentage.toFixed(0) }}%)
+      You are using {{ totalFileSize | fileSize }} out of
+      {{ projectAssetTotalSizeMax | fileSize }} ({{ projectAssetUsagePercentage.toFixed(0) }}%)
     </span>
     <span *ngIf="totalUnusedFilesSize != null && totalUnusedFilesSize !== 0" class="red"
-      >(Unused Files {{ totalUnusedFilesSize | filesize }} ({{
+      >(Unused Files {{ totalUnusedFilesSize | fileSize }} ({{
         unusedFilesPercentage.toFixed(0)
       }}%))
     </span>
@@ -65,7 +65,7 @@
             <button mat-stroked-button *ngIf="isPopup" (click)="chooseAsset(assetItem)" i18n>
               Choose
             </button>
-            <span>{{ assetItem.fileName }} ({{ assetItem.fileSize | filesize }})</span>
+            <span>{{ assetItem.fileName }} ({{ assetItem.fileSize | fileSize }})</span>
             <span *ngIf="!assetItem.used">
               <span class="red" i18n>(Not Used)</span>
             </span>
