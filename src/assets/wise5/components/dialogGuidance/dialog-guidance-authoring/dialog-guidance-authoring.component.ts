@@ -5,6 +5,7 @@ import { ProjectAssetService } from '../../../../../app/services/projectAssetSer
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
+import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 
 @Component({
   selector: 'dialog-guidance-authoring',
@@ -25,7 +26,9 @@ export class DialogGuidanceAuthoringComponent extends AbstractComponentAuthoring
   ngOnInit() {
     super.ngOnInit();
     if (this.componentContent.computerAvatarSettings == null) {
-      this.componentContent.computerAvatarSettings = this.computerAvatarService.getDefaultComputerAvatarSettings();
+      this.componentContent.computerAvatarSettings =
+        this.computerAvatarService.getDefaultComputerAvatarSettings();
     }
+    this.componentContent.cRaterRubric = this.componentContent.cRaterRubric || new CRaterRubric();
   }
 }
