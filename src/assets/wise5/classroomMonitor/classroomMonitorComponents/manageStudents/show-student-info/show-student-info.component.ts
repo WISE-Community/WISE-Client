@@ -13,7 +13,7 @@ import { ConfigService } from '../../../../services/configService';
       >
     } @else {
       <span class="username"
-        ><strong i8n>Student {{ user.id }}</strong></span
+        ><strong i18n>Student {{ user.id }}</strong></span
       >
     }
   `
