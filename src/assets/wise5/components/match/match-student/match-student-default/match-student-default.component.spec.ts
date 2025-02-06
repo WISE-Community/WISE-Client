@@ -91,6 +91,7 @@ describe('MatchStudentDefaultComponent', () => {
     };
     component.component = new Component(componentContent, nodeId);
     spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(copy(componentContent));
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
