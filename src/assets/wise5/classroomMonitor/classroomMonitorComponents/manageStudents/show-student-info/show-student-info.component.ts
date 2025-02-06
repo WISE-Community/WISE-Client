@@ -1,15 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
-    selector: 'show-student-info',
-    templateUrl: './show-student-info.component.html',
-    styleUrls: ['./show-student-info.component.scss'],
-    standalone: false
+  imports: [CommonModule],
+  selector: 'show-student-info',
+  template: `
+    @if (canViewStudentNames) {
+      <span class="username"
+        ><strong>{{ user.name }}</strong> ({{ user.username }})</span
+      >
+    } @else {
+      <span class="username"
+        ><strong i18n>Student {{ user.id }}</strong></span
+      >
+    }
+  `
 })
 export class ShowStudentInfoComponent implements OnInit {
+  protected canViewStudentNames: boolean;
   @Input() user: any;
-  canViewStudentNames: boolean;
 
   constructor(private configService: ConfigService) {}
 
