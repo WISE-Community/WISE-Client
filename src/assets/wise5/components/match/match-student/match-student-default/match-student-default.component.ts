@@ -31,12 +31,11 @@ import { CRaterService } from '../../../../services/cRaterService';
 import { CRaterRubric, getUniqueIdeas } from '../../../common/cRater/CRaterRubric';
 
 @Component({
-    templateUrl: 'match-student-default.component.html',
-    styleUrl: 'match-student-default.component.scss',
-    standalone: false
+  templateUrl: 'match-student-default.component.html',
+  styleUrl: 'match-student-default.component.scss',
+  standalone: false
 })
 export class MatchStudentDefault extends ComponentStudent {
-  autoScroll: any = require('dom-autoscroller');
   buckets: any[] = [];
   bucketStyle: string = '';
   bucketWidth: number = 100;
@@ -114,16 +113,6 @@ export class MatchStudentDefault extends ComponentStudent {
       const bucketCopy = copy(bucket);
       bucketCopy.items = [];
       this.buckets.push(bucketCopy);
-    });
-  }
-
-  ngAfterContentInit(): void {
-    this.autoScroll([document.querySelector('#content')], {
-      margin: 30,
-      scrollWhenOutside: true,
-      autoScroll: function () {
-        return this.down;
-      }
     });
   }
 

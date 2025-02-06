@@ -14,7 +14,6 @@
             "allowedCommonJsDependencies": [
               "angular",
               "fabric",
-              "dom-autoscroller",
               "@wise-community/drawing-tool",
               "jquery",
               "rxjs/internal/BehaviorSubject",
