@@ -64,9 +64,9 @@ function exportAllRevisions(): void {
       ]);
       setUpExportStrategy('all');
       exportStrategyTester.componentExportStrategy.export();
-      const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
-        additionalColumns
-      );
+      const headerRow =
+        exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(additionalColumns);
+
       expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
@@ -241,9 +241,8 @@ function exportLatestRevisions(): void {
       ]);
       setUpExportStrategy('latest');
       exportStrategyTester.componentExportStrategy.export();
-      const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
-        additionalColumns
-      );
+      const headerRow =
+        exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(additionalColumns);
       expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
@@ -339,9 +338,8 @@ function exportMatchComponentWithChoiceReuse(): void {
       exportStrategyTester.setStudentData([componentState1]);
       setUpExportStrategy('all');
       exportStrategyTester.componentExportStrategy.export();
-      const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
-        additionalColumns
-      );
+      const headerRow =
+        exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(additionalColumns);
       expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
@@ -399,9 +397,8 @@ function exportMatchComponentWithCorrectPosition(): void {
       exportStrategyTester.setStudentData([componentState1]);
       setUpExportStrategy('all');
       exportStrategyTester.componentExportStrategy.export();
-      const headerRow = exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(
-        additionalColumns
-      );
+      const headerRow =
+        exportStrategyTester.createHeaderRowAddAdditionalColumnsAtEnd(additionalColumns);
       expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
         [
           headerRow,
