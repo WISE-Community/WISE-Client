@@ -2,7 +2,7 @@
 <mat-dialog-content class="dialog-content-scroll">
   <p class="mat-subtitle-1 accent-1">{{ run.name }}</p>
   <mat-divider></mat-divider>
-  <p class="mat-subtitle-2" fxLayoutAlign="start center" fxLayoutGap="2px">
+  <p class="mat-subtitle-2 flex items-center gap-2">
     <mat-icon class="success" i18n-aria-label aria-label="Signed In">check</mat-icon>
     <span
       >{{ user.firstName }} {{ user.lastName }}
@@ -12,8 +12,8 @@
   <ng-container *ngFor="let teamMember of teamMembers; let i = index">
     <mat-divider></mat-divider>
     <ng-container *ngIf="isExistingStudent(teamMember)">
-      <p fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap.xs="8px">
-        <span fxLayoutAlign="start center" fxLayoutGap="2px">
+      <p class="flex flex-col sm:flex-row flex-wrap gap-2">
+        <span class="flex items-center gap-2">
           <mat-icon
             *ngIf="isSignedIn(teamMember)"
             class="success"
@@ -27,7 +27,7 @@
             <span class="mat-caption">({{ teamMember.username }})</span></span
           >
         </span>
-        <span fxFlex fxShow fxHide.xs></span>
+        <span class="flex-1 hidden sm:block"></span>
         <span *ngIf="isExistingStudent(teamMember) && !isSignedIn(teamMember)">
           <mat-checkbox (change)="toggleAbsent(teamMember, $event.checked)">Absent</mat-checkbox>
         </span>
@@ -40,12 +40,12 @@
         </button>
       </p>
       <ng-container *ngIf="!hiddenMembers[i]">
-        <mat-form-field *ngIf="isShowUsernameField(teamMember)" appearance="fill" fxFlex>
+        <mat-form-field *ngIf="isShowUsernameField(teamMember)" appearance="fill" class="w-full">
           <mat-label i18n>Username</mat-label>
           <input matInput [(ngModel)]="teamMember.username" />
         </mat-form-field>
-        <div *ngIf="isShowPasswordField(teamMember)" fxLayoutAlign="start start" fxLayoutGap="8px">
-          <mat-form-field appearance="fill" fxFlex>
+        <div *ngIf="isShowPasswordField(teamMember)" class="flex items-start gap-2">
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label i18n>Password</mat-label>
             <input matInput type="password" [(ngModel)]="teamMember.password" />
           </mat-form-field>
@@ -65,7 +65,7 @@
           [class.center]="!isExistingStudent(teamMember)"
         >
           <p *ngIf="!isExistingStudent(teamMember)" class="mat-subtitle-2">- OR -</p>
-          <google-sign-in-button (signedIn)="googleSignIn($event, teamMember)"/>
+          <google-sign-in-button (signedIn)="googleSignIn($event, teamMember)" />
         </div>
       </ng-container>
     </ng-container>

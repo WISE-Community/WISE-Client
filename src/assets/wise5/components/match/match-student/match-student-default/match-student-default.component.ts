@@ -22,7 +22,7 @@ import { ConfigService } from '../../../../services/configService';
 import { Container } from '../container';
 import { copy } from '../../../../common/object/object';
 import { CRaterService } from '../../../../services/cRaterService';
-import { CRaterRubric } from '../../../common/cRater/CRaterRubric';
+import { CRaterRubric, getUniqueIdeas } from '../../../common/cRater/CRaterRubric';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { filter } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -639,16 +639,10 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
   }
 
   private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
-    responses.forEach((response) => {
-      response.ideas
-        ?.filter((idea) => idea.detected)
-        .forEach((idea) => {
-          if (!this.choices.some((c) => c.id === idea.name)) {
-            const choice = new Choice(idea.name, rubric.getStudentTextForIdea(idea.name));
-            this.choices.push(choice);
-            this.getBucketById(this.sourceBucketId).items.push(choice);
-          }
-        });
+    getUniqueIdeas(responses, rubric).forEach((idea) => {
+      const choice = new Choice(idea.name, idea.text);
+      this.choices.push(choice);
+      this.getBucketById(this.sourceBucketId).items.push(choice);
     });
   }
 
