@@ -13722,13 +13722,13 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Drop image or file here or click to upload!</target>
       </trans-unit>
-      <trans-unit id="713ee2647d2ff3f42ac8bcebc40da62cae77e4c4" datatype="html">
-        <source> You are using <x id="INTERPOLATION" equiv-text="{{ totalFileSize | filesize }}"/> out of <x id="INTERPOLATION_1" equiv-text="{{ projectAssetTotalSizeMax | filesize }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ projectAssetUsagePercentage.toFixed(0) }}"/>%) </source>
+      <trans-unit id="e7e79cb786b8ac5fe70ac225aca62c672b688a46" datatype="html">
+        <source> You are using <x id="INTERPOLATION" equiv-text="{{ totalFileSize | fileSize }}"/> out of <x id="INTERPOLATION_1" equiv-text="{{ projectAssetTotalSizeMax | fileSize }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ projectAssetUsagePercentage.toFixed(0) }}"/>%) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
           <context context-type="linenumber">19,22</context>
         </context-group>
-        <target state="needs-translation"> You are using <x id="INTERPOLATION" equiv-text="{{ totalFileSize | filesize }}"/> out of <x id="INTERPOLATION_1" equiv-text="{{ projectAssetTotalSizeMax | filesize }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ projectAssetUsagePercentage.toFixed(0) }}"/>%) </target>
+        <target state="needs-translation"> You are using <x id="INTERPOLATION" equiv-text="{{ totalFileSize | fileSize }}"/> out of <x id="INTERPOLATION_1" equiv-text="{{ projectAssetTotalSizeMax | fileSize }}"/> (<x id="INTERPOLATION_2" equiv-text="{{ projectAssetUsagePercentage.toFixed(0) }}"/>%) </target>
       </trans-unit>
       <trans-unit id="0f7dd1cf2540cae6c1f540147ab2765f26d8036e" datatype="html">
         <source>Sort Assets</source>
@@ -14825,6 +14825,10 @@ The branches will be removed but the steps will remain in the unit.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-show-student-info/manage-show-student-info.component.html</context>
           <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/show-student-info/show-student-info.component.ts</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target state="needs-translation">Student <x id="INTERPOLATION" equiv-text="{{ user.id }}"/></target>
       </trans-unit>
@@ -19383,6 +19387,14 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="linenumber">12</context>
         </context-group>
         <target state="needs-translation">Dialog Guidance</target>
+      </trans-unit>
+      <trans-unit id="642af7f7535025499586787c8f0e2e10dd5ef4ed" datatype="html">
+        <source>Ideas detected:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/detected-ideas/detected-ideas.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Ideas detected:</target>
       </trans-unit>
       <trans-unit id="27e0b1e650bef276e8c29dd8d547e3fc8c4f833f" datatype="html">
         <source>Item ID</source>
