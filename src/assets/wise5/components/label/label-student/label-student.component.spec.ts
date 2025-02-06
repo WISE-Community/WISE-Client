@@ -4,13 +4,13 @@ import { LabelStudentComponent } from './label-student.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { MockComponents } from 'ng-mocks';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LabelStudentData } from '../LabelStudentData';
+import { ProjectService } from '../../../services/projectService';
 
 let component: LabelStudentComponent;
 let fixture: ComponentFixture<LabelStudentComponent>;
@@ -18,8 +18,12 @@ let loader: HarnessLoader;
 describe('LabelStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MockComponents(ComponentHeaderComponent)],
-      imports: [BrowserAnimationsModule, LabelStudentComponent, StudentTeacherCommonServicesModule],
+      imports: [
+        BrowserAnimationsModule,
+        LabelStudentComponent,
+        ComponentHeaderComponent,
+        StudentTeacherCommonServicesModule
+      ],
       providers: [provideHttpClient(withInterceptorsFromDi())]
     });
     fixture = TestBed.createComponent(LabelStudentComponent);
@@ -33,6 +37,7 @@ describe('LabelStudentComponent', () => {
       canCreateLabels: true
     };
     component.component = new Component(componentContent, null);
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     spyOn(component, 'giveFocusToLabelTextInput').and.callFake(() => {});
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
