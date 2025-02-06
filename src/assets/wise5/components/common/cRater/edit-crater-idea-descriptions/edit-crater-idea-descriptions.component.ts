@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject, Subscription } from 'rxjs';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   imports: [
@@ -21,6 +22,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
+    MatButtonModule,
     MatIconModule,
     MatTooltipModule
   ],
