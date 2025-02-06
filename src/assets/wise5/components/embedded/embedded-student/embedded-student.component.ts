@@ -1,4 +1,4 @@
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -15,10 +15,10 @@ import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 
 @Component({
-    selector: 'embedded-student',
-    templateUrl: 'embedded-student.component.html',
-    styleUrls: ['embedded-student.component.scss'],
-    standalone: false
+  selector: 'embedded-student',
+  templateUrl: 'embedded-student.component.html',
+  styleUrls: ['embedded-student.component.scss'],
+  standalone: false
 })
 export class EmbeddedStudent extends ComponentStudent {
   annotationsToSave: any[] = [];
@@ -264,9 +264,9 @@ export class EmbeddedStudent extends ComponentStudent {
 
   iframeLoaded(): void {
     if (this.embeddedApplicationIFrameId != null) {
-      (window.document.getElementById(
-        this.embeddedApplicationIFrameId
-      ) as HTMLIFrameElement).contentWindow.addEventListener('message', this.messageEventListener);
+      (
+        window.document.getElementById(this.embeddedApplicationIFrameId) as HTMLIFrameElement
+      ).contentWindow.addEventListener('message', this.messageEventListener);
     }
   }
 
@@ -382,27 +382,28 @@ export class EmbeddedStudent extends ComponentStudent {
 
   tryGetLatestStudentWorkFromThisComponent(params: any, studentWork: any): void {
     if (params.getLatestStudentWorkFromThisComponent) {
-      studentWork.latestStudentWorkFromThisComponent = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        this.nodeId,
-        this.componentId
-      );
+      studentWork.latestStudentWorkFromThisComponent =
+        this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+          this.nodeId,
+          this.componentId
+        );
     }
   }
 
   tryGetAllStudentWorkFromThisComponent(params: any, studentWork: any): void {
     if (params.getAllStudentWorkFromThisComponent) {
-      studentWork.allStudentWorkFromThisComponent = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
-        this.nodeId,
-        this.componentId
-      );
+      studentWork.allStudentWorkFromThisComponent =
+        this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
+          this.nodeId,
+          this.componentId
+        );
     }
   }
 
   tryGetLatestStudentWorkFromThisNode(params: any, studentWork: any): void {
     if (params.getLatestStudentWorkFromThisNode) {
-      studentWork.latestStudentWorkFromThisNode = this.StudentDataService.getLatestComponentStatesByNodeId(
-        this.nodeId
-      );
+      studentWork.latestStudentWorkFromThisNode =
+        this.StudentDataService.getLatestComponentStatesByNodeId(this.nodeId);
     }
   }
 
@@ -416,9 +417,8 @@ export class EmbeddedStudent extends ComponentStudent {
 
   tryGetLatestStudentWorkFromOtherComponents(params: any, studentWork: any): void {
     if (params.getLatestStudentWorkFromOtherComponents) {
-      studentWork.latestStudentWorkFromOtherComponents = this.getLatestStudentWorkFromOtherComponents(
-        params.otherComponents
-      );
+      studentWork.latestStudentWorkFromOtherComponents =
+        this.getLatestStudentWorkFromOtherComponents(params.otherComponents);
     }
   }
 
@@ -433,10 +433,11 @@ export class EmbeddedStudent extends ComponentStudent {
   getLatestStudentWorkFromOtherComponents(otherComponents: any[]): any {
     const latestStudentWorkFromOtherComponents = [];
     for (const otherComponent of otherComponents) {
-      const tempComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        otherComponent.nodeId,
-        otherComponent.componentId
-      );
+      const tempComponentState =
+        this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+          otherComponent.nodeId,
+          otherComponent.componentId
+        );
       if (tempComponentState != null) {
         latestStudentWorkFromOtherComponents.push(tempComponentState);
       }
@@ -510,10 +511,8 @@ export class EmbeddedStudent extends ComponentStudent {
   ): any {
     const nodeId = connectedComponent.nodeId;
     const componentId = connectedComponent.componentId;
-    const connectedComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      nodeId,
-      componentId
-    );
+    const connectedComponentState =
+      this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
     if (connectedComponentState != null) {
       const fields = connectedComponent.fields;
       const when = connectedComponent.when;

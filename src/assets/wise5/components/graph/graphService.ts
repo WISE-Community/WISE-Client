@@ -1,6 +1,6 @@
 'use strict';
 
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import { Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
@@ -302,7 +302,7 @@ export class GraphService extends ComponentService {
   generateImageFromRenderedComponentState(componentState: any) {
     return new Promise((resolve, reject) => {
       const highchartsDiv = this.getHighchartsDiv(componentState.componentId);
-      html2canvas(highchartsDiv).then((canvas) => {
+      html2canvas(highchartsDiv as HTMLElement).then((canvas) => {
         const pngFile = convertToPNGFile(canvas);
         this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
           resolve(asset);
