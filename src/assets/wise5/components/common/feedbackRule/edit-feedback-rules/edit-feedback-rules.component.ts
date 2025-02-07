@@ -19,7 +19,10 @@ export class EditFeedbackRulesComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
   @Input() version: number = 2;
 
-  constructor(protected dialog: MatDialog, protected projectService: TeacherProjectService) {}
+  constructor(
+    protected dialog: MatDialog,
+    protected projectService: TeacherProjectService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(

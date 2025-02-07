@@ -1,0 +1,76 @@
+<div class="idea-descriptions notice-bg-bg">
+  <h5 class="flex flex-row items-center gap-1 !text-xl">
+    <span i18n>Idea Names</span>
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Add a new idea name"
+      i18n-matTooltip
+      matTooltipPosition="after"
+      (click)="addNewIdeaDescription(true)"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+    <span class="flex-1"></span>
+  </h5>
+  <ul>
+    @for (
+      idea of ideaDescriptions;
+      track $index;
+      let ideaIndex = $index, first = $first, last = $last
+    ) {
+      <li class="idea">
+        <mat-card appearance="outlined" class="idea-content">
+          <div class="flex flex-row flex-wrap gap-2">
+            <div class="text-secondary flex flex-col items-center">
+              <span class="mat-subtitle-1">{{ ideaIndex + 1 }}</span>
+            </div>
+            <div class="flex flex-col items-start gap-2 flex-1">
+              <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
+                <mat-label i18n>Idea ID</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="idea.name"
+                  (ngModelChange)="inputChanged.next($event)"
+                />
+              </mat-form-field>
+              <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
+                <mat-label i18n>User-Friendly Name</mat-label>
+                <textarea
+                  matInput
+                  [(ngModel)]="idea.text"
+                  (ngModelChange)="inputChanged.next($event)"
+                  cdkTextareaAutosize
+                >
+                </textarea>
+              </mat-form-field>
+            </div>
+            <div class="flex flex-col items-center">
+              <button
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Delete idea description"
+                matTooltipPosition="before"
+                (click)="deleteIdeaDescription(ideaIndex)"
+              >
+                <mat-icon>clear</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </li>
+    }
+  </ul>
+  <div id="add-new-idea-description-bottom-button" [hidden]="getNumIdeaDescriptions() === 0">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Add a new idea description"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="addNewIdeaDescription(false)"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+</div>
