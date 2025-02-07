@@ -84,7 +84,7 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
   }
 
   protected deleteIdeaDescription(ideaIndex: number): void {
-    if (confirm($localize`Are you sure you want to delete this idea description?`)) {
+    if (confirm($localize`Are you sure you want to delete this idea name?`)) {
       this.ideaDescriptions.splice(ideaIndex, 1);
       this.projectService.nodeChanged();
     }
