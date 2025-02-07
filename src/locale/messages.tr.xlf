@@ -864,7 +864,7 @@
         <source> Close </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-advanced/edit-component-advanced.component.html</context>
-          <context context-type="linenumber">109,111</context>
+          <context context-type="linenumber">110,112</context>
         </context-group>
         <target state="needs-translation"> Close </target>
       </trans-unit>
@@ -18416,6 +18416,62 @@ Are you ready to receive feedback on this answer?</target>
         </context-group>
         <target state="translated">Durdur</target>
       </trans-unit>
+      <trans-unit id="c92bbbb092016ebd6979696276584c747b1e783a" datatype="html">
+        <source>Idea Names</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <target state="needs-translation">Idea Names</target>
+      </trans-unit>
+      <trans-unit id="43212a5b92071b738c8bbb58a3cf4fb72bbeca54" datatype="html">
+        <source>Add a new idea name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <target state="needs-translation">Add a new idea name</target>
+      </trans-unit>
+      <trans-unit id="672eecf8a642d581669798f480109acd8d6d81c7" datatype="html">
+        <source>Idea ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <target state="needs-translation">Idea ID</target>
+      </trans-unit>
+      <trans-unit id="d9fbeb79d29910e52d4c95efc110f2b88790794b" datatype="html">
+        <source>User-Friendly Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <target state="needs-translation">User-Friendly Name</target>
+      </trans-unit>
+      <trans-unit id="026e727ae1397d28d4945cdb3f1ce6f743e222c5" datatype="html">
+        <source>Delete idea description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <target state="needs-translation">Delete idea description</target>
+      </trans-unit>
+      <trans-unit id="402675d4fcc4e288214237ba9744bec97c3262a3" datatype="html">
+        <source>Add a new idea description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+        <target state="needs-translation">Add a new idea description</target>
+      </trans-unit>
+      <trans-unit id="7862038253187581980" datatype="html">
+        <source>Are you sure you want to delete this idea name?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete this idea name?</target>
+      </trans-unit>
       <trans-unit id="5596810972110629301" datatype="html">
         <source>Thanks for submitting your response.</source>
         <context-group purpose="location">
@@ -18468,7 +18524,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Are you sure you want to delete this feedback?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this feedback?</target>
       </trans-unit>
@@ -18476,7 +18532,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Are you sure you want to delete this feedback rule?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this feedback rule?</target>
       </trans-unit>
