@@ -10,7 +10,7 @@ import {
   createComponent
 } from '@angular/core';
 import { MatchStudentChoiceReuse } from './match-student-choice-reuse/match-student-choice-reuse';
-import { MatchStudentDefault } from './match-student-default/match-student-default.component';
+import { MatchStudentDefaultComponent } from './match-student-default/match-student-default.component';
 import { MatchContent } from '../MatchContent';
 
 @Component({
@@ -27,13 +27,16 @@ export class MatchStudent {
   @Output() saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('component') private componentElementRef: ElementRef;
 
-  constructor(private applicationRef: ApplicationRef, private injector: EnvironmentInjector) {}
+  constructor(
+    private applicationRef: ApplicationRef,
+    private injector: EnvironmentInjector
+  ) {}
 
   ngAfterViewInit(): void {
     this.componentRef = createComponent(
       (this.component.content as MatchContent).choiceReuseEnabled
         ? MatchStudentChoiceReuse
-        : MatchStudentDefault,
+        : MatchStudentDefaultComponent,
       {
         hostElement: this.componentElementRef.nativeElement,
         environmentInjector: this.injector
