@@ -8,6 +8,6 @@ import { MatchContent } from '../MatchContent';
   styleUrls: ['edit-match-advanced.component.scss']
 })
 export class EditMatchAdvancedComponent extends EditAdvancedComponentComponent {
-  allowedConnectedComponentTypes = ['Match'];
+  allowedConnectedComponentTypes = ['DialogGuidance', 'Match'];
   componentContent: MatchContent;
 }

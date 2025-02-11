@@ -27,12 +27,24 @@ export class MatchComponentDataExportStrategy extends AbstractComponentDataExpor
     for (const choice of component.choices) {
       headerRow.push(choice.value);
     }
+    headerRow = this.addCRaterChoices(component, headerRow);
     if (this.componentHasCorrectAnswer(component)) {
       for (const choice of component.choices) {
         headerRow.push(`${choice.value} ${this.correctnessLabel}`);
       }
       headerRow.push(this.isCorrectLabel);
     }
+  }
+
+  private addCRaterChoices(component: any, headerRow: string[]): string[] {
+    this.getComponentStates(component, false).forEach((componentState: any) =>
+      componentState.studentData.buckets.forEach((bucket: Bucket) =>
+        bucket.items
+          .filter((item) => !item.studentCreated && !headerRow.includes(item.value))
+          .forEach((item: Choice) => headerRow.push(item.value))
+      )
+    );
+    return headerRow;
   }
 
   private componentHasCorrectAnswer(component: MatchContent): boolean {

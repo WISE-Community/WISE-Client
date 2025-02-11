@@ -6,14 +6,9 @@
     Sorry, your Microsoft User ID was not found in WISE.
   </p>
   <h1 class="standalone__title accent" i18n>Create WISE Account</h1>
-  <div
-    class="standalone__content register"
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxFlexLayoutAlign="center center"
-  >
+  <div class="flex flex-col sm:flex-row items-center justify-center standalone__content register">
     <app-call-to-action
-      fxFlex
+      class="w-full sm:w-auto"
       icon="supervised_user_circle"
       iconColor="accent"
       i18n-headline
@@ -23,7 +18,7 @@
       destination="student"
     ></app-call-to-action>
     <app-call-to-action
-      fxFlex
+      class="w-full sm:w-auto"
       icon="school"
       iconColor="accent"
       i18n-headline

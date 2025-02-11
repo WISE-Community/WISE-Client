@@ -1,8 +1,4 @@
-<div
-  *ngIf="disciplines && disciplines.length"
-  class="library-project-disciplines"
-  fxLayoutGap="4px"
->
+<div *ngIf="disciplines && disciplines.length" class="library-project-disciplines flex gap-1">
   <ng-container *ngFor="let discipline of disciplines">
     <span
       class="library-project-disciplines__icon"

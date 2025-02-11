@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { AddChoiceButtonComponent } from './add-choice-button/add-choice-button.component';
-import { AddMatchChoiceDialog } from './add-match-choice-dialog/add-match-choice-dialog';
+import { AddMatchChoiceDialogComponent } from './add-match-choice-dialog/add-match-choice-dialog';
 import { MatchStudent } from './match-student.component';
 import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { MatchCommonModule } from '../match-common.module';
 import { MatchStudentChoiceReuse } from './match-student-choice-reuse/match-student-choice-reuse';
-import { MatchStudentDefault } from './match-student-default/match-student-default.component';
+import { MatchStudentDefaultComponent } from './match-student-default/match-student-default.component';
 
 @NgModule({
-  declarations: [ 
-    AddMatchChoiceDialog,
-    MatchStudent,
-    MatchStudentDefault,
-    MatchStudentChoiceReuse
-  ],
+  declarations: [MatchStudent, MatchStudentChoiceReuse],
   imports: [
-    AddChoiceButtonComponent, 
-    MatchCommonModule, 
-    StudentComponentModule
+    AddChoiceButtonComponent,
+    MatchCommonModule,
+    MatchStudentDefaultComponent,
+    StudentComponentModule,
+    AddMatchChoiceDialogComponent
   ],
-  exports: [MatchStudent]
+  exports: [MatchStudent, MatchStudentDefaultComponent, AddMatchChoiceDialogComponent]
 })
 export class MatchStudentModule {}

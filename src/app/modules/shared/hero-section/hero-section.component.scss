@@ -30,7 +30,8 @@
   }
 
   .hero-content {
-    max-width: breakpoint('lg.min');
+    width: breakpoint('lg.min');
+    max-width: 100%;
     margin: 0 auto;
     padding: 16px 16px;
 
@@ -43,7 +44,7 @@
     }
 
     @media (min-width: breakpoint('xl.min')) {
-      max-width: breakpoint('xl.min');
+      width: breakpoint('xl.min');
     }
   }
 
@@ -95,6 +96,7 @@
     }
 
     @media (min-width: breakpoint('sm.min')) {
+      text-align: start;
       .mat-icon {
         @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-4'));
       }

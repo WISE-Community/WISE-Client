@@ -6,14 +6,20 @@ import { Component } from '../../../common/Component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MockComponents } from 'ng-mocks';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LabelStudentData } from '../LabelStudentData';
 
 let component: LabelStudentComponent;
 let fixture: ComponentFixture<LabelStudentComponent>;
+let loader: HarnessLoader;
 describe('LabelStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MockComponents(ComponentHeaderComponent)],
-      imports: [LabelStudentComponent, StudentTeacherCommonServicesModule],
+      imports: [BrowserAnimationsModule, LabelStudentComponent, StudentTeacherCommonServicesModule],
       providers: [provideHttpClient(withInterceptorsFromDi())]
     });
     fixture = TestBed.createComponent(LabelStudentComponent);
@@ -23,7 +29,8 @@ describe('LabelStudentComponent', () => {
       type: 'Label',
       prompt: 'Create some labels.',
       width: 800,
-      height: 600
+      height: 600,
+      canCreateLabels: true
     };
     component.component = new Component(componentContent, null);
     spyOn(component, 'giveFocusToLabelTextInput').and.callFake(() => {});
@@ -33,12 +40,12 @@ describe('LabelStudentComponent', () => {
       return true;
     });
     spyOn(component, 'studentDataChanged').and.callFake(() => {});
+    loader = TestbedHarnessEnvironment.loader(fixture);
     fixture.detectChanges();
   });
 
   initializeComponent();
   setStudentWork();
-  getLabelJSONObjectFromCircle();
   getLabelJSONObjectFromText();
   createStudentData();
   getTextCoordinate();
@@ -97,7 +104,6 @@ function initializeComponent() {
     expect(component.enableCircles).toEqual(enableCircles);
     expect(component.isSaveButtonVisible).toEqual(showSaveButton);
     expect(component.isSubmitButtonVisible).toEqual(showSubmitButton);
-    expect(component.isAddNewLabelButtonVisible).toEqual(canCreateLabels);
   });
 }
 
@@ -114,31 +120,6 @@ function setStudentWork() {
     expect(component.studentDataVersion).toEqual(2);
     expect(component.labels.length).toEqual(3);
     expect(component.backgroundImage).toEqual(backgroundImage);
-  });
-}
-
-function getLabelJSONObjectFromCircle() {
-  it('should get label json object from circle', () => {
-    const circleLeft = 100;
-    const circleTop = 200;
-    const circle = new fabric.Circle({ left: circleLeft, top: circleTop });
-    const textLeft = 300;
-    const textTop = 400;
-    const textString = 'Leaf';
-    const textBackgroundColor = 'green';
-    circle.text = {
-      left: textLeft,
-      top: textTop,
-      backgroundColor: textBackgroundColor
-    };
-    spyOn(component, 'getLabelFromCircle').and.returnValue({ textString: textString });
-    const labelJson = component.getLabelJSONObjectFromCircle(circle);
-    expect(labelJson.pointX).toEqual(circleLeft);
-    expect(labelJson.pointY).toEqual(circleTop);
-    expect(labelJson.textX).toEqual(textLeft);
-    expect(labelJson.textY).toEqual(textTop);
-    expect(labelJson.text).toEqual(textString);
-    expect(labelJson.color).toEqual(textBackgroundColor);
   });
 }
 
@@ -159,15 +140,17 @@ function getLabelJSONObjectFromText() {
     };
     const canEdit = true;
     const canDelete = true;
-    spyOn(component, 'getLabelFromText').and.returnValue({
-      textString: textString,
-      canEdit: canEdit,
-      canDelete: canDelete,
-      circle: circle,
-      line: {},
-      text: text
-    });
-    const labelJson = component.getLabelJSONObjectFromText(circle);
+    component.labels = [
+      {
+        textString: textString,
+        canEdit: canEdit,
+        canDelete: canDelete,
+        circle: circle,
+        line: {},
+        text: text
+      }
+    ];
+    const labelJson = component.getLabelJSONObjectFromText(text);
     expect(labelJson.pointX).toEqual(circleLeft);
     expect(labelJson.pointY).toEqual(circleTop);
     expect(labelJson.textX).toEqual(textLeft);
@@ -183,7 +166,7 @@ function createStudentData() {
   it('should create student data', () => {
     const labels = [{ text: 'Leaf' }, { text: 'Stem' }];
     const backgroundImage = 'plant.png';
-    const studentData = component.createStudentData(labels, backgroundImage);
+    const studentData = new LabelStudentData(labels, backgroundImage);
     expect(studentData.version).toEqual(2);
     expect(studentData.labels).toEqual(labels);
     expect(studentData.backgroundImage).toEqual(backgroundImage);
@@ -256,13 +239,12 @@ function limitObjectYPosition() {
 
 function getUnoccupiedPointLocation() {
   it('should get unoccupied point location when there are no occupied points', () => {
-    spyOn(component, 'getOccupiedPointLocations').and.returnValue([]);
     const unoccupiedPointLocation = component.getUnoccupiedPointLocation();
     expect(unoccupiedPointLocation.pointX).toEqual(80);
     expect(unoccupiedPointLocation.pointY).toEqual(80);
   });
   it('should get unoccupied point location when there are occupied points', () => {
-    spyOn(component, 'getOccupiedPointLocations').and.returnValue([
+    spyOn(component, 'getLabelData').and.returnValue([
       { pointX: 80, pointY: 80 },
       { pointX: 280, pointY: 80 }
     ]);
@@ -291,16 +273,19 @@ function getNumShowWorkConnectedComponents() {
 }
 
 function addNewLabel() {
-  it('should add a new label', () => {
-    component.addNewLabel();
-    expect(component.labels.length).toEqual(1);
+  describe('"Add new label" button is clicked', () => {
+    it('should add a new label', async () => {
+      await (
+        await loader.getHarness(MatButtonHarness.with({ selector: '[mattooltip="Add new label"]' }))
+      ).click();
+      expect(component.labels.length).toEqual(1);
+    });
   });
 }
 
 function deleteLabel() {
   it('should delete a label', () => {
-    component.addNewLabel();
-    expect(component.labels.length).toEqual(1);
+    component.labels = [{ text: 'leaf' }];
     component.deleteLabel(component.labels[0]);
     expect(component.labels.length).toEqual(0);
   });

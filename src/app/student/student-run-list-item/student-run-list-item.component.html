@@ -1,10 +1,10 @@
 <ng-template #runInfo>
-  <div fxShow fxHide.xs>
+  <div class="hidden sm:block">
     <ng-container i18n>Teacher:</ng-container> {{ run.owner.displayName }} |
     <ng-container i18n>Period:</ng-container> {{ run.periodName }} |
     <ng-container i18n>Code:</ng-container> {{ run.runCode }}
   </div>
-  <div fxHide fxShow.xs>
+  <div class="block sm:hidden">
     <ng-container i18n>Teacher:</ng-container> {{ run.owner.displayName }}<br />
     <ng-container i18n>Period:</ng-container> {{ run.periodName }}<br />
     <ng-container i18n>Code:</ng-container> {{ run.runCode }}<br />
@@ -22,7 +22,7 @@
   [ngClass]="{ 'highlighted-bg': run.isHighlighted }"
   [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"
 >
-  <mat-card-content fxLayout="row" fxLayoutGap="12px">
+  <mat-card-content class="!flex !flex-row gap-3">
     <div
       mat-card-avatar
       [style.background-image]="thumbStyle"
@@ -31,39 +31,50 @@
       matTooltip="Run ID: {{ run.id }}"
       matTooltipPosition="above"
     ></div>
-    <div fxFlex="1 1 100%" fxLayout="row" fxLayoutWrap>
-      <div fxLayout="column">
+    <div class="flex flex-row flex-1 flex-wrap">
+      <div class="flex flex-col">
         <mat-card-title [class.secondary-text]="isRunCompleted(run)" class="mat-body-1">
           {{ run.project.name }}
         </mat-card-title>
-        <mat-card-subtitle class="mat-caption" fxHide fxShow.gt-xs>
+        <mat-card-subtitle class="mat-caption !hidden sm:!block">
           <ng-container *ngTemplateOutlet="runInfo"></ng-container>
         </mat-card-subtitle>
       </div>
     </div>
   </mat-card-content>
-  <mat-card-content fxHide fxShow.xs>
+  <mat-card-content class="sm:!hidden">
     <div class="info-block" [class.secondary-text]="isRunCompleted(run)">
       <ng-container *ngTemplateOutlet="runInfo"></ng-container>
     </div>
   </mat-card-content>
-  <mat-card-actions
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutAlign.gt-xs="end center"
-    fxLayoutGap="8px"
-  >
-    <a mat-button href="{{ problemLink }}">
+  <mat-card-actions align="end" class="flex flex-col sm:flex-row flex-wrap items-center gap-2">
+    <a mat-button href="{{ problemLink }}" class="w-full sm:w-auto">
       <ng-container i18n>Report Problem</ng-container>
     </a>
-    <button *ngIf="!isRunActive(run) && !isRunCompleted(run)" mat-flat-button disabled>
+    <button
+      *ngIf="!isRunActive(run) && !isRunCompleted(run)"
+      mat-flat-button
+      disabled
+      class="w-full sm:w-auto"
+    >
       <ng-container i18n>Starts {{ run.startTime | date }}</ng-container>
     </button>
-    <button mat-flat-button *ngIf="isRunActive(run)" (click)="launchRun()" color="primary">
+    <button
+      mat-flat-button
+      *ngIf="isRunActive(run)"
+      (click)="launchRun()"
+      color="primary"
+      class="w-full sm:w-auto"
+    >
       <mat-icon>play_circle_filled</mat-icon>&nbsp;<ng-container i18n>Launch</ng-container>
     </button>
-    <button mat-flat-button *ngIf="isRunCompleted(run)" (click)="reviewRun()" color="primary">
+    <button
+      mat-flat-button
+      *ngIf="isRunCompleted(run)"
+      (click)="reviewRun()"
+      color="primary"
+      class="w-full sm:w-auto"
+    >
       <mat-icon>preview</mat-icon>&nbsp;<ng-container i18n>Review Work</ng-container>
     </button>
   </mat-card-actions>

@@ -1,11 +1,10 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { DialogGuidanceShowWorkComponent } from './dialog-guidance-show-work.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { CRaterService } from '../../../services/cRaterService';
+import { CRaterRubric } from '../../common/cRater/CRaterRubric';
+import { UserService } from '../../../../../app/services/user.service';
 
 describe('DialogGuidanceShowWorkComponent', () => {
   let component: DialogGuidanceShowWorkComponent;
@@ -13,16 +12,19 @@ describe('DialogGuidanceShowWorkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [DialogGuidanceShowWorkComponent, DialogResponsesComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [DialogGuidanceShowWorkComponent, StudentTeacherCommonServicesModule],
+      providers: [
+        { provide: CRaterService, useValue: { getCRaterRubric() {} } },
+        { provide: UserService, useValue: { isTeacher() {} } },
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogGuidanceShowWorkComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue({} as CRaterRubric);
     component.componentState = {
       studentData: {}
     };

@@ -8,10 +8,16 @@ import { CRaterIdea } from '../components/common/cRater/CRaterIdea';
 import { CRaterScore } from '../components/common/cRater/CRaterScore';
 import { CRaterResponse } from '../components/common/cRater/CRaterResponse';
 import { RawCRaterResponse } from '../components/common/cRater/RawCRaterResponse';
+import { CRaterRubric } from '../components/common/cRater/CRaterRubric';
+import { ProjectService } from './projectService';
 
 @Injectable()
 export class CRaterService {
-  constructor(protected http: HttpClient, protected configService: ConfigService) {}
+  constructor(
+    protected http: HttpClient,
+    protected configService: ConfigService,
+    private projectService: ProjectService
+  ) {}
 
   /**
    * Make a CRater request to score student response
@@ -254,10 +260,14 @@ export class CRaterService {
 
   private getIdeas(responses: RawCRaterResponse): CRaterIdea[] {
     const ideas = [];
-    for (const key in responses.feedback.ideas) {
+    for (const key in responses.feedback?.ideas) {
       const value = responses.feedback.ideas[key];
       ideas.push(new CRaterIdea(key, value.detected));
     }
     return ideas;
+  }
+
+  getCRaterRubric(nodeId: string, componentId: string): CRaterRubric {
+    return new CRaterRubric(this.projectService.getComponent(nodeId, componentId).cRaterRubric);
   }
 }

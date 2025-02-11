@@ -1,0 +1,21 @@
+@import 'style/abstracts/variables';
+
+.ideas {
+  padding: 8px;
+}
+
+.idea {
+  padding: 0 4px;
+}
+
+.ideas, .idea {
+  border-radius: $card-border-radius;
+}
+
+.avatar {
+  margin: 2px;
+  
+  .mat-icon {
+    margin: 6px
+  }
+}

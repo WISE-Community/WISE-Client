@@ -64,9 +64,10 @@ export class AddComponentButtonComponent {
       .pipe(filter((componentType) => componentType != null))
       .subscribe(({ action, componentType }) => {
         if (action === 'import') {
-          this.router.navigate(['import-component/choose-component'], {
+          this.router.navigate(['import-component/choose-unit'], {
             relativeTo: this.route,
             state: {
+              importType: 'component',
               insertAfterComponentId: afterComponent
             }
           });

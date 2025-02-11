@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { MatchShowWorkModule } from '../match-show-work/match-show-work-module';
 import { MatchGradingComponent } from './match-grading.component';
+import { MatchShowWorkComponent } from '../match-show-work/match-show-work.component';
 
 @NgModule({
   declarations: [MatchGradingComponent],
-  imports: [MatchShowWorkModule],
+  imports: [MatchShowWorkComponent],
   exports: [MatchGradingComponent]
 })
 export class MatchGradingModule {}

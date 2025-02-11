@@ -1,17 +1,10 @@
 <header class="content__header">
   <h1
-    class="accent"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutAlign.xs="start"
-    fxLayoutGap="8px"
-    ngClass="mat-headline-4"
-    [ngClass.xs]="{ 'mat-headline-4': false }"
+    class="accent flex flex-col sm:flex-row items-start sm:items-center place-content-between gap-2 mat-headline-4"
   >
-    <div fxLayoutAlign="start center" fxLayoutGap="8px">
+    <div class="flex items-center gap-2">
       <mat-icon>home</mat-icon><span i18n>Student Home</span>
     </div>
-    <span fxFlex fxHide.xs fxShow></span>
     <button
       mat-raised-button
       (click)="showAddRun()"

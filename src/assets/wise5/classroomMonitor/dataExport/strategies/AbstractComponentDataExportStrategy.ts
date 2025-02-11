@@ -95,12 +95,21 @@ export abstract class AbstractComponentDataExportStrategy extends AbstractDataEx
     }
   }
 
+  setAllOrLatest(allOrLatest: 'all' | 'latest'): void {
+    this.allOrLatest = allOrLatest;
+  }
+
   protected abstract getComponentTypeWithUnderscore(): string;
 
-  protected getComponentStates(component: any): ComponentState[] {
+  protected getComponentStates(
+    component: any,
+    calculateRevisions: boolean = true
+  ): ComponentState[] {
     let componentStates = this.dataService.getComponentStatesByComponentId(component.id);
     this.sortByWorkgroupIdAndTimestamp(componentStates);
-    this.calculateRevisionNumbers(componentStates);
+    if (calculateRevisions) {
+      this.calculateRevisionNumbers(componentStates);
+    }
     if (this.allOrLatest === 'latest') {
       componentStates = this.getLatestRevisions(componentStates);
     }
