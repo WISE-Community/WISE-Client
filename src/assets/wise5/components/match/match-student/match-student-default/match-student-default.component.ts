@@ -436,7 +436,7 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
   ): boolean {
     const feedbackObject = this.getFeedbackObject(bucketId, choice.id);
     choice.feedback = this.getFeedback(feedbackObject, hasCorrectAnswer, position);
-    const isCorrect = this.getCorrectness(feedbackObject, hasCorrectAnswer, position);
+    const isCorrect = hasCorrectAnswer ? this.getCorrectness(feedbackObject, position) : null;
     choice.isCorrect = isCorrect;
     if (this.doesPositionMatter(feedbackObject.position)) {
       choice.isIncorrectPosition = feedbackObject.position !== position;
@@ -486,20 +486,10 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
     return feedbackText;
   }
 
-  private getCorrectness(
-    feedbackObject: any,
-    hasCorrectAnswer: boolean,
-    position: number
-  ): boolean {
-    let isCorrect = null;
-    if (hasCorrectAnswer) {
-      if (this.doesPositionMatter(feedbackObject.position)) {
-        isCorrect = feedbackObject.position === position;
-      } else {
-        isCorrect = feedbackObject.isCorrect;
-      }
-    }
-    return isCorrect;
+  private getCorrectness(feedbackObject: any, position: number): boolean {
+    return this.doesPositionMatter(feedbackObject.position)
+      ? feedbackObject.position === position
+      : feedbackObject.isCorrect;
   }
 
   private getFeedbackObject(bucketId: string, choiceId: string): any {
