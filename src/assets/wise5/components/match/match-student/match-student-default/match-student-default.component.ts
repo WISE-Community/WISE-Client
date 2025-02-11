@@ -3,10 +3,8 @@ import { AddMatchChoiceDialogComponent } from '../add-match-choice-dialog/add-ma
 import { AnnotationService } from '../../../../services/annotationService';
 import { Bucket, mergeBucket } from '../../bucket';
 import {
-  CdkDrag,
   CdkDragEnter,
   CdkDragExit,
-  CdkDropList,
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
@@ -44,8 +42,6 @@ import { StudentDataService } from '../../../../services/studentDataService';
 @Component({
   imports: [
     AddChoiceButtonComponent,
-    CdkDrag,
-    CdkDropList,
     CommonModule,
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
