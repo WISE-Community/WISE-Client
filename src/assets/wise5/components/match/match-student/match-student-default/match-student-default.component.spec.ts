@@ -1,16 +1,15 @@
 // @ts-nocheck
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../../common/Component';
 import { copy } from '../../../../common/object/object';
 import { ClickToSnipImageService } from '../../../../services/clickToSnipImageService';
 import { ProjectService } from '../../../../services/projectService';
-import { MatchStudentDefault } from './match-student-default.component';
+import { MatchStudentDefaultComponent } from './match-student-default.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-let component: MatchStudentDefault;
-let fixture: ComponentFixture<MatchStudentDefault>;
+let component: MatchStudentDefaultComponent;
+let fixture: ComponentFixture<MatchStudentDefaultComponent>;
 let bucket1: any;
 let bucket2: any;
 let bucket3: any;
@@ -49,12 +48,10 @@ let starterBucketLabel = 'Starter Choices';
 describe('MatchStudentDefaultComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MatchStudentDefault],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [StudentTeacherCommonServicesModule],
+      imports: [MatchStudentDefaultComponent, StudentTeacherCommonServicesModule],
       providers: [provideHttpClient(withInterceptorsFromDi())]
     });
-    fixture = TestBed.createComponent(MatchStudentDefault);
+    fixture = TestBed.createComponent(MatchStudentDefaultComponent);
     component = fixture.componentInstance;
     choice1 = createChoice(choiceId1, choiceValue1);
     choice2 = createChoice(choiceId2, choiceValue2);
@@ -94,6 +91,7 @@ describe('MatchStudentDefaultComponent', () => {
     };
     component.component = new Component(componentContent, nodeId);
     spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(copy(componentContent));
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {
@@ -381,32 +379,27 @@ function getCorrectness() {
     it('should get correctness from feedback object when it is true', () => {
       const isCorrect = true;
       const feedbackObject = createFeedback(choiceId1, '', isCorrect);
-      expect(component.getCorrectness(feedbackObject, true, 0)).toEqual(isCorrect);
+      expect(component.getCorrectness(feedbackObject, 0)).toEqual(isCorrect);
     });
 
     it('should get correctness from feedback object when it is false', () => {
       const isCorrect = false;
       const feedbackObject = createFeedback(choiceId1, '', isCorrect);
-      expect(component.getCorrectness(feedbackObject, true, 0)).toEqual(isCorrect);
+      expect(component.getCorrectness(feedbackObject, 0)).toEqual(isCorrect);
     });
 
     it(`should get correctness from feedback object when position matters and it is in the correct
         position`, () => {
       const isCorrect = true;
       const feedbackObject = createFeedback(choiceId1, '', isCorrect, 1);
-      expect(component.getCorrectness(feedbackObject, true, 1)).toEqual(isCorrect);
+      expect(component.getCorrectness(feedbackObject, 1)).toEqual(isCorrect);
     });
 
     it(`should get correctness from feedback object when position matters and it is not in the
         correct position`, () => {
       const isCorrect = false;
       const feedbackObject = createFeedback(choiceId1, '', isCorrect, 1);
-      expect(component.getCorrectness(feedbackObject, true, 2)).toEqual(isCorrect);
-    });
-
-    it('should get correctness from feedback object there is not correct answer', () => {
-      const feedbackObject = createFeedback(choiceId1, '', false, 1);
-      expect(component.getCorrectness(feedbackObject, false, 1)).toEqual(null);
+      expect(component.getCorrectness(feedbackObject, 2)).toEqual(isCorrect);
     });
   });
 }
