@@ -379,32 +379,27 @@ function getCorrectness() {
     it('should get correctness from feedback object when it is true', () => {
       const isCorrect = true;
       const feedbackObject = createFeedback(choiceId1, '', isCorrect);
-      expect(component.getCorrectness(feedbackObject, true, 0)).toEqual(isCorrect);
+      expect(component.getCorrectness(feedbackObject, 0)).toEqual(isCorrect);
     });
 
     it('should get correctness from feedback object when it is false', () => {
       const isCorrect = false;
       const feedbackObject = createFeedback(choiceId1, '', isCorrect);
-      expect(component.getCorrectness(feedbackObject, true, 0)).toEqual(isCorrect);
+      expect(component.getCorrectness(feedbackObject, 0)).toEqual(isCorrect);
     });
 
     it(`should get correctness from feedback object when position matters and it is in the correct
         position`, () => {
       const isCorrect = true;
       const feedbackObject = createFeedback(choiceId1, '', isCorrect, 1);
-      expect(component.getCorrectness(feedbackObject, true, 1)).toEqual(isCorrect);
+      expect(component.getCorrectness(feedbackObject, 1)).toEqual(isCorrect);
     });
 
     it(`should get correctness from feedback object when position matters and it is not in the
         correct position`, () => {
       const isCorrect = false;
       const feedbackObject = createFeedback(choiceId1, '', isCorrect, 1);
-      expect(component.getCorrectness(feedbackObject, true, 2)).toEqual(isCorrect);
-    });
-
-    it('should get correctness from feedback object there is not correct answer', () => {
-      const feedbackObject = createFeedback(choiceId1, '', false, 1);
-      expect(component.getCorrectness(feedbackObject, false, 1)).toEqual(null);
+      expect(component.getCorrectness(feedbackObject, 2)).toEqual(isCorrect);
     });
   });
 }
