@@ -32,20 +32,11 @@ export class ManageUserComponent {
   ) {}
 
   protected viewUserInfo(event: Event): void {
-    event.preventDefault();
-    this.dialog.open(ManageShowStudentInfoComponent, {
-      data: this.user,
-      panelClass: 'dialog-sm'
-    });
+    this.openDialog(event, ManageShowStudentInfoComponent);
   }
 
   protected removeUser(event: Event): void {
-    event.preventDefault();
-    this.dialog
-      .open(RemoveUserConfirmDialogComponent, {
-        data: this.user,
-        panelClass: 'dialog-sm'
-      })
+    this.openDialog(event, RemoveUserConfirmDialogComponent)
       .afterClosed()
       .subscribe((doRemoveUser: boolean) => {
         if (doRemoveUser) {
@@ -77,8 +68,12 @@ export class ManageUserComponent {
   }
 
   protected changePassword(event: Event): void {
+    this.openDialog(event, ChangeStudentPasswordDialogComponent);
+  }
+
+  private openDialog(event: Event, dialogComponent: any): any {
     event.preventDefault();
-    this.dialog.open(ChangeStudentPasswordDialogComponent, {
+    return this.dialog.open(dialogComponent, {
       data: this.user,
       panelClass: 'dialog-sm'
     });
