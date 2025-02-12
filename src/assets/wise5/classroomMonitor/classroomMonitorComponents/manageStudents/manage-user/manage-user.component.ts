@@ -11,10 +11,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/remove-user-confirm-dialog.component';
 import { ShowStudentInfoComponent } from '../show-student-info/show-student-info.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [FlexLayoutModule, MatIconModule, MatTooltipModule, ShowStudentInfoComponent],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatIconModule,
+    MatTooltipModule,
+    ShowStudentInfoComponent
+  ],
   selector: 'manage-user',
   standalone: true,
   styleUrl: 'manage-user.component.scss',
