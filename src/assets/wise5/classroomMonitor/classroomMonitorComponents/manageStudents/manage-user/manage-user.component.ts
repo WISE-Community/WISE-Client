@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClient } from '@angular/common/http';
 import { $localize } from '@angular/localize/init';
 import { ManageShowStudentInfoComponent } from '../manage-show-student-info/manage-show-student-info.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -71,7 +71,7 @@ export class ManageUserComponent {
     this.openDialog(event, ChangeStudentPasswordDialogComponent);
   }
 
-  private openDialog(event: Event, dialogComponent: any): any {
+  private openDialog(event: Event, dialogComponent: any): MatDialogRef<any, any> {
     event.preventDefault();
     return this.dialog.open(dialogComponent, {
       data: this.user,
