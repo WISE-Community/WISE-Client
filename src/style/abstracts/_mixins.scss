@@ -2,8 +2,15 @@
 @use '@angular/material' as mat;
 @use 'style/base/typography';
 
-// Define a custom mixin for common styles
+/* Define a custom mixin for common styles */
 @mixin common-setup() {
+  /* TODO: remove when updating to Angular Material v19 theming */
+  @for $i from 0 through 24 {
+    .mat-elevation-z#{$i} {
+      @include mat.elevation($i);
+    }
+  }
+
   h1, h2, .mat-headline-1, .mat-headline-2, .mat-headline-3, .mat-headline-4 {
     font-family: $heading-font-family
   }
@@ -196,6 +203,10 @@
 
   .app-background {
     background-color: map.get($colors, 'app-bg');
+  }
+
+  .mat-app-background, &.mat-app-background {
+    background-color: map.get($colors, 'mat-app-bg');
   }
 
   .app-bar {
