@@ -4,14 +4,15 @@ import { AddMatchChoiceDialogComponent } from './add-match-choice-dialog/add-mat
 import { MatchStudent } from './match-student.component';
 import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { MatchCommonModule } from '../match-common.module';
-import { MatchStudentChoiceReuse } from './match-student-choice-reuse/match-student-choice-reuse';
+import { MatchStudentChoiceReuseComponent } from './match-student-choice-reuse/match-student-choice-reuse';
 import { MatchStudentDefaultComponent } from './match-student-default/match-student-default.component';
 
 @NgModule({
-  declarations: [MatchStudent, MatchStudentChoiceReuse],
+  declarations: [MatchStudent],
   imports: [
     AddChoiceButtonComponent,
     MatchCommonModule,
+    MatchStudentChoiceReuseComponent,
     MatchStudentDefaultComponent,
     StudentComponentModule,
     AddMatchChoiceDialogComponent
