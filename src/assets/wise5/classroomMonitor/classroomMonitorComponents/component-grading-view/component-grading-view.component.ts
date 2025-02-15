@@ -8,12 +8,13 @@ import { isMatchingPeriods } from '../../../common/period/period';
 import { AnnotationService } from '../../../services/annotationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Node } from '../../../common/Node';
+import { ClassResponsesComponent } from '../class-responses/class-responses.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  imports: [TeacherSummaryDisplayComponent],
+  imports: [ClassResponsesComponent, TeacherSummaryDisplayComponent],
   selector: 'component-grading-view',
   standalone: true,
-  styleUrl: './component-grading-view.component.scss',
   templateUrl: './component-grading-view.component.html'
 })
 export class ComponentGradingViewComponent {
@@ -29,6 +30,7 @@ export class ComponentGradingViewComponent {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private annotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private dataService: TeacherDataService,
@@ -37,6 +39,9 @@ export class ComponentGradingViewComponent {
   ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.parent.params.subscribe((params) => {
+      this.dataService.setCurrentNodeByNodeId(params.nodeId);
+    });
     this.subscriptions.add(
       this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
         this.node = this.projectService.getNode(currentNode.id);

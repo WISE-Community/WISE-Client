@@ -1,0 +1,109 @@
+<mat-list class="user-list">
+  <mat-list-item class="mat-elevation-z1 list-item user-list-controls">
+    <div
+      fxFlex="100"
+      fxLayout="column"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign="center center"
+      fxLayoutGap.lt-md="8px"
+    >
+      <workgroup-select-autocomplete />
+      <span fxFlex fxHide fxShow.gt-sm></span>
+      <button
+        mat-button
+        aria-label="Expand all teams"
+        i18n-aria-label
+        color="primary"
+        (click)="expandAll()"
+        i18n
+      >
+        + Expand all
+      </button>
+      <button
+        mat-button
+        aria-label="Collapse all teams"
+        i18n-aria-label
+        color="primary"
+        (click)="collapseAll()"
+        i18n
+      >
+        - Collapse all
+      </button>
+    </div>
+  </mat-list-item>
+  <mat-list-item class="table--list__thead table--list__thead__th mat-elevation-z1">
+    <div class="table--list__thead__tr dark-theme" fxLayout="row" fxFlex>
+      <button
+        mat-button
+        class="table--list__thead__link"
+        (click)="setSort('team')"
+        aria-label="Sort by team"
+        i18n-aria-label
+      >
+        <span i18n fxLayout="row" fxLayoutAlign="start center">Team</span>
+        <mat-icon
+          *ngIf="sort === 'team' || sort === '-team'"
+          class="table--list__thead__sort"
+          [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-team' }"
+        >
+          arrow_drop_up
+        </mat-icon>
+      </button>
+      <button
+        mat-button
+        class="table--list__thead__link"
+        fxFlex="30"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        (click)="setSort('status')"
+        aria-label="Sorty by completion"
+        i18n-aria-label
+      >
+        <span i18n>Status</span>
+        <mat-icon
+          *ngIf="sort === 'status' || sort === '-status'"
+          class="table--list__thead__sort"
+          [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
+        >
+          arrow_drop_up
+        </mat-icon>
+      </button>
+      <button
+        mat-button
+        class="table--list__thead__link"
+        fxFlex="20"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        (click)="setSort('score')"
+        aria-label="Sort by score"
+        i18n-aria-label
+      >
+        <span i18n>Score</span>
+        <mat-icon
+          *ngIf="sort === 'score' || sort === '-score'"
+          class="table--list__thead__sort"
+          [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
+        >
+          arrow_drop_up
+        </mat-icon>
+      </button>
+    </div>
+  </mat-list-item>
+  <div class="md-whiteframe-1dp" waIntersectionObserver waIntersectionThreshold="0.5">
+    @for (workgroup of sortedWorkgroups; track workgroup.workgroupId) {
+      @if (isWorkgroupShown(workgroup)) {
+        <component-workgroup-item
+          [expanded]="workVisibilityById[workgroup.workgroupId]"
+          [maxScore]="maxScore"
+          [showScore]="true"
+          [nodeId]="node.id"
+          [componentId]="component.id"
+          [workgroupId]="workgroup.workgroupId"
+          [workgroupData]="workgroup"
+          (onUpdateExpand)="onUpdateExpand($event)"
+          (waIntersectionObservee)="onIntersection(workgroup.workgroupId, $event)"
+        />
+      }
+    }
+  </div>
+</mat-list>

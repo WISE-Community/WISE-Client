@@ -1,0 +1,58 @@
+<div
+  class="list-item component-workgroup-item mat-elevation-z1"
+  [ngClass]="{
+    'list-item--warn': statusClass === 'warn',
+    'list-item--info': statusClass === 'info'
+  }"
+>
+  <button
+    mat-button
+    class="list-item__subheader-button team-button"
+    aria-label="Show/hide team's work for this step"
+    i18n-aria-label
+    [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
+    (click)="toggleExpand()"
+    [disabled]="disabled"
+    fxLayoutWrap
+  >
+    <div fxLayout="row" fxFlex="100">
+      <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <workgroup-info
+          [hasAlert]="hasAlert"
+          [hasNewAlert]="hasNewAlert"
+          [usernames]="workgroupData.displayNames"
+          [workgroupId]="workgroupId"
+        />
+      </div>
+      <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+        <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
+      </div>
+      @if (showScore) {
+        <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+          <workgroup-node-score [score]="score" [maxScore]="maxScore" />
+        </div>
+      }
+    </div>
+  </button>
+  @if (expanded && !disabled) {
+    <mat-list-item class="grading__item-container">
+      <div class="grading__item" style="width: 100%">
+        <div
+          id="component_{{ componentId }}_{{ workgroupId }}"
+          class="component component--grading"
+        >
+          <component-new-work-badge
+            [componentId]="componentId"
+            [workgroupId]="workgroupId"
+            [nodeId]="nodeId"
+          />
+          <workgroup-component-grading
+            [componentId]="componentId"
+            [workgroupId]="workgroupId"
+            [nodeId]="nodeId"
+          />
+        </div>
+      </div>
+    </mat-list-item>
+  }
+</div>

@@ -12,9 +12,11 @@ import { StatusIconComponent } from '../classroom-monitor/status-icon/status-ico
 import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
+import { ClassResponsesComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/class-responses/class-responses.component';
 
 @NgModule({
   imports: [
+    ClassResponsesComponent,
     ComponentGradingComponent,
     ComponentStateInfoComponent,
     EditComponentAnnotationsComponent,
@@ -30,6 +32,7 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     WorkgroupSelectAutocompleteComponent
   ],
   exports: [
+    ClassResponsesComponent,
     ComponentGradingComponent,
     ComponentStateInfoComponent,
     EditComponentAnnotationsComponent,
