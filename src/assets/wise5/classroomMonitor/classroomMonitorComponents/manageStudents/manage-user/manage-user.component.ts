@@ -1,18 +1,30 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfigService } from '../../../../services/configService';
 import { ChangeStudentPasswordDialogComponent } from '../change-student-password-dialog/change-student-password-dialog.component';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ConfigService } from '../../../../services/configService';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClient } from '@angular/common/http';
+import { $localize } from '@angular/localize/init';
 import { ManageShowStudentInfoComponent } from '../manage-show-student-info/manage-show-student-info.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/remove-user-confirm-dialog.component';
+import { ShowStudentInfoComponent } from '../show-student-info/show-student-info.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'manage-user',
-    styleUrls: ['manage-user.component.scss'],
-    templateUrl: 'manage-user.component.html',
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatIconModule,
+    MatTooltipModule,
+    ShowStudentInfoComponent
+  ],
+  selector: 'manage-user',
+  styleUrl: 'manage-user.component.scss',
+  templateUrl: 'manage-user.component.html'
 })
 export class ManageUserComponent {
   @Input() user: any;
@@ -25,21 +37,12 @@ export class ManageUserComponent {
     private snackBar: MatSnackBar
   ) {}
 
-  viewUserInfo(event: Event) {
-    event.preventDefault();
-    this.dialog.open(ManageShowStudentInfoComponent, {
-      data: this.user,
-      panelClass: 'dialog-sm'
-    });
+  protected viewUserInfo(event: Event): void {
+    this.openDialog(event, ManageShowStudentInfoComponent);
   }
 
-  removeUser(event: Event) {
-    event.preventDefault();
-    this.dialog
-      .open(RemoveUserConfirmDialogComponent, {
-        data: this.user,
-        panelClass: 'dialog-sm'
-      })
+  protected removeUser(event: Event): void {
+    this.openDialog(event, RemoveUserConfirmDialogComponent)
       .afterClosed()
       .subscribe((doRemoveUser: boolean) => {
         if (doRemoveUser) {
@@ -48,7 +51,7 @@ export class ManageUserComponent {
       });
   }
 
-  performRemoveUser() {
+  performRemoveUser(): void {
     const runId = this.configService.getRunId();
     const studentId = this.user.id;
     this.http.delete(`/api/teacher/run/${runId}/student/${studentId}/remove`).subscribe({
@@ -70,9 +73,13 @@ export class ManageUserComponent {
     });
   }
 
-  changePassword(event: Event) {
+  protected changePassword(event: Event): void {
+    this.openDialog(event, ChangeStudentPasswordDialogComponent);
+  }
+
+  private openDialog(event: Event, dialogComponent: any): MatDialogRef<any, any> {
     event.preventDefault();
-    this.dialog.open(ChangeStudentPasswordDialogComponent, {
+    return this.dialog.open(dialogComponent, {
       data: this.user,
       panelClass: 'dialog-sm'
     });
