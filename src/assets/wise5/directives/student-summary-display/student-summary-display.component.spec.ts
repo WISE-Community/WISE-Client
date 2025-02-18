@@ -673,7 +673,7 @@ function createTableSeriesData() {
         Cats: 3,
         Dogs: 2
       };
-      const data = component.createTableSeriesData({}, summaryData);
+      const data = component.createTableSeriesData(summaryData);
       expect(data).toEqual([
         { name: 'Cats', y: 3 },
         { name: 'Dogs', y: 2 }

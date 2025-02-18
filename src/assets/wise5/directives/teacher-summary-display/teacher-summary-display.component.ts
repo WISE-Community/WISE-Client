@@ -3,7 +3,7 @@ import { AnnotationService } from '../../services/annotationService';
 import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { SummaryService } from '../../components/summary/summaryService';
-import { SummaryDisplay } from '../summary-display/summary-display.component';
+import { SummaryDisplayComponent } from '../summary-display/summary-display.component';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -16,7 +16,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
   styleUrl: '../summary-display/summary-display.component.scss',
   templateUrl: '../summary-display/summary-display.component.html'
 })
-export class TeacherSummaryDisplayComponent extends SummaryDisplay {
+export class TeacherSummaryDisplayComponent extends SummaryDisplayComponent {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
