@@ -50,6 +50,7 @@ export abstract class SummaryDisplayComponent {
   };
   private defaultMaxScore: number = 5;
   hasCorrectness: boolean = false;
+  protected Highcharts: typeof Highcharts = Highcharts;
   maxScore: number = 5;
   numDummySamples: number;
   numResponses: number;
