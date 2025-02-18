@@ -30,23 +30,23 @@ import { DialogGuidanceGradingComponent } from '../../components/dialogGuidance/
 
 @Component({
   imports: [
-    //AiChatGradingModule,
+    AiChatGradingModule,
     AnimationGradingModule,
-    // AudioOscillatorGradingModule,
-    // ConceptMapGradingModule,
-    // DialogGuidanceGradingComponent
-    // DiscussionGradingModule,
-    // DrawGradingModule,
-    // EmbeddedGradingModule,
-    // GraphGradingModule,
-    // LabelGradingModule,
+    AudioOscillatorGradingModule,
+    ConceptMapGradingModule,
+    DialogGuidanceGradingComponent,
+    DiscussionGradingModule,
+    DrawGradingModule,
+    EmbeddedGradingModule,
+    GraphGradingModule,
+    LabelGradingModule,
     MatchGradingModule,
-    MultipleChoiceGradingComponent
-    // OpenResponseGradingModule,
-    // PeerChatGradingModule,
-    // ShowGroupWorkGradingModule,
-    // ShowMyWorkGradingModule,
-    // TableGradingModule
+    MultipleChoiceGradingComponent,
+    OpenResponseGradingModule,
+    PeerChatGradingModule,
+    ShowGroupWorkGradingModule,
+    ShowMyWorkGradingModule,
+    TableGradingModule
   ],
   selector: 'component-grading-component',
   standalone: true,
