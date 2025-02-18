@@ -15,6 +15,7 @@ import { rgbToHex } from '../../common/color/color';
 import { SummaryService } from '../../components/summary/summaryService';
 import { tap } from 'rxjs/operators';
 import { StudentDataService } from '../../services/studentDataService';
+import { DummyAnnotation } from '../../common/DummyAnnotation';
 
 @Component({
   imports: [CommonModule, MatCardModule],
@@ -235,12 +236,14 @@ export abstract class SummaryDisplayComponent {
     this.processScoreAnnotations(annotations);
   }
 
-  private getScoreForSelf(): any {
+  private getScoreForSelf(): Annotation {
+    let score: Annotation;
     if (this.isVLEPreview() || this.isStudentRun()) {
-      return this.getLatestScoreAnnotationForWorkgroup();
+      score = this.getLatestScoreAnnotationForWorkgroup();
     } else if (this.isAuthoringPreview()) {
-      return this.createDummyScoreAnnotation();
+      score = this.createDummyScoreAnnotation();
     }
+    return score;
   }
 
   private getLatestScoreAnnotationForWorkgroup(): Annotation {
@@ -290,8 +293,8 @@ export abstract class SummaryDisplayComponent {
     }
   }
 
-  filterLatestScoreAnnotations(annotations: any[]): any[] {
-    const latestAnnotations = {};
+  filterLatestScoreAnnotations(annotations: Annotation[]): any[] {
+    const latestAnnotations = new Annotation();
     for (const annotation of annotations) {
       if (annotation.type === 'score' || annotation.type === 'autoScore') {
         this.setLatestAnnotationIfNewer(latestAnnotations, annotation);
@@ -300,7 +303,7 @@ export abstract class SummaryDisplayComponent {
     return this.convertObjectToArray(latestAnnotations);
   }
 
-  setLatestAnnotationIfNewer(latestAnnotations: any, annotation: any): void {
+  setLatestAnnotationIfNewer(latestAnnotations: Annotation, annotation: Annotation): void {
     const workgroupId = annotation.toWorkgroupId;
     const latestAnnotation = latestAnnotations[workgroupId];
     if (latestAnnotation == null || annotation.serverSaveTime > latestAnnotation.serverSaveTime) {
@@ -308,7 +311,7 @@ export abstract class SummaryDisplayComponent {
     }
   }
 
-  convertObjectToArray(obj: any): any {
+  convertObjectToArray(obj: any): any[] {
     return Object.keys(obj).map((key) => {
       return obj[key];
     });
@@ -325,7 +328,7 @@ export abstract class SummaryDisplayComponent {
     return of(componentStates);
   }
 
-  private getDummyStudentScoresForVLEPreview(): Observable<any> {
+  private getDummyStudentScoresForVLEPreview(): Observable<Annotation[]> {
     const annotations = this.createDummyScoreAnnotations();
     const annotation = this.getLatestScoreAnnotationForWorkgroup();
     if (annotation != null) {
@@ -338,7 +341,7 @@ export abstract class SummaryDisplayComponent {
     return of(this.createDummyComponentStates());
   }
 
-  private getDummyStudentScoresForAuthoringPreview(): Observable<any> {
+  private getDummyStudentScoresForAuthoringPreview(): Observable<Annotation[]> {
     return of(this.createDummyScoreAnnotations());
   }
 
@@ -414,7 +417,7 @@ export abstract class SummaryDisplayComponent {
     return choices[Math.floor(Math.random() * choices.length)];
   }
 
-  private createDummyScoreAnnotations(): any[] {
+  private createDummyScoreAnnotations(): DummyAnnotation[] {
     const dummyScoreAnnotations = [];
     for (let dummyCounter = 0; dummyCounter < this.numDummySamples; dummyCounter++) {
       dummyScoreAnnotations.push(this.createDummyScoreAnnotation());
@@ -422,13 +425,14 @@ export abstract class SummaryDisplayComponent {
     return dummyScoreAnnotations;
   }
 
-  private createDummyScoreAnnotation(): any {
-    return {
+  private createDummyScoreAnnotation(): DummyAnnotation {
+    const json = {
       data: {
         value: this.getRandomScore()
       },
       type: 'score'
     };
+    return new DummyAnnotation(json);
   }
 
   private getRandomScore(): number {
@@ -514,7 +518,7 @@ export abstract class SummaryDisplayComponent {
     }
   }
 
-  private processScoreAnnotations(annotations: any[]): void {
+  private processScoreAnnotations(annotations: Annotation[]): void {
     this.updateMaxScoreIfNecessary(annotations);
     const summaryData = this.createScoresSummaryData(annotations);
     const { data, total } = this.createScoresSeriesData(summaryData);
@@ -522,11 +526,11 @@ export abstract class SummaryDisplayComponent {
     this.renderGraph(data, total);
   }
 
-  private updateMaxScoreIfNecessary(annotations: any[]): void {
+  private updateMaxScoreIfNecessary(annotations: Annotation[]): void {
     this.maxScore = this.calculateMaxScore(annotations);
   }
 
-  calculateMaxScore(annotations: any[]): number {
+  calculateMaxScore(annotations: Annotation[]): number {
     let maxScoreSoFar = this.maxScore;
     for (const annotation of annotations) {
       const score = this.getScoreFromAnnotation(annotation);
@@ -624,7 +628,7 @@ export abstract class SummaryDisplayComponent {
   }
 
   // Not any
-  createScoresSummaryData(annotations: any[]): any {
+  createScoresSummaryData(annotations: Annotation[]): any {
     const summaryData = {};
     for (let scoreValue = 0; scoreValue <= this.maxScore; scoreValue++) {
       summaryData[scoreValue] = this.createScoreSummaryData(scoreValue);
@@ -643,13 +647,13 @@ export abstract class SummaryDisplayComponent {
   }
 
   // Not any
-  private addAnnotationDataToSummaryData(summaryData: any, annotation: any): void {
+  private addAnnotationDataToSummaryData(summaryData: any, annotation: Annotation): void {
     const score = this.getScoreFromAnnotation(annotation);
     this.incrementSummaryData(summaryData, score);
   }
 
   // Not any
-  private getScoreFromAnnotation(annotation: any): any {
+  private getScoreFromAnnotation(annotation: Annotation): any {
     return annotation.data.value;
   }
 
