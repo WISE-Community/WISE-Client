@@ -9,7 +9,7 @@ import {
   ViewChild,
   createComponent
 } from '@angular/core';
-import { MatchStudentChoiceReuseComponent } from './match-student-choice-reuse/match-student-choice-reuse';
+import { MatchStudentChoiceReuseComponent } from './match-student-choice-reuse/match-student-choice-reuse.component';
 import { MatchStudentDefaultComponent } from './match-student-default/match-student-default.component';
 import { MatchContent } from '../MatchContent';
 

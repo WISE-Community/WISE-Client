@@ -1,6 +1,5 @@
 import { AddChoiceButtonComponent } from '../add-choice-button/add-choice-button.component';
 import { Bucket } from '../../bucket';
-import { CdkDropList } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentAnnotationsComponent } from '../../../../directives/componentAnnotations/component-annotations.component';
@@ -21,7 +20,6 @@ import { moveItem } from '../move-item';
 @Component({
   imports: [
     AddChoiceButtonComponent,
-    CdkDropList,
     CommonModule,
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
