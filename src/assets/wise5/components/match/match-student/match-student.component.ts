@@ -9,7 +9,7 @@ import {
   ViewChild,
   createComponent
 } from '@angular/core';
-import { MatchStudentChoiceReuse } from './match-student-choice-reuse/match-student-choice-reuse';
+import { MatchStudentChoiceReuseComponent } from './match-student-choice-reuse/match-student-choice-reuse.component';
 import { MatchStudentDefaultComponent } from './match-student-default/match-student-default.component';
 import { MatchContent } from '../MatchContent';
 
@@ -34,7 +34,7 @@ export class MatchStudent {
   ngAfterViewInit(): void {
     this.componentRef = createComponent(
       (this.component.content as MatchContent).choiceReuseEnabled
-        ? MatchStudentChoiceReuse
+        ? MatchStudentChoiceReuseComponent
         : MatchStudentDefaultComponent,
       {
         hostElement: this.componentElementRef.nativeElement,

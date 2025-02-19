@@ -7,24 +7,25 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 
 @Component({
   selector: 'label-show-work',
-  templateUrl: 'label-show-work.component.html',
-  styleUrls: ['label-show-work.component.scss']
+  standalone: true,
+  styleUrl: 'label-show-work.component.scss',
+  templateUrl: 'label-show-work.component.html'
 })
 export class LabelShowWorkComponent extends ComponentShowWorkDirective {
-  canvasId: string;
-  canvas: any;
+  protected canvasId: string;
+  private canvas: any;
 
   constructor(
-    private LabelService: LabelService,
+    private labelService: LabelService,
     protected nodeService: NodeService,
-    protected ProjectService: ProjectService
+    protected projectService: ProjectService
   ) {
-    super(nodeService, ProjectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.canvasId = this.getCanvasId();
+    this.canvasId = this.getCanvasIdPrefix() + this.componentState.id;
     this.enableFabricTextPadding();
     // wait for angular to completely render the html before we initialize the canvas
     setTimeout(() => {
@@ -32,19 +33,11 @@ export class LabelShowWorkComponent extends ComponentShowWorkDirective {
     });
   }
 
-  getCanvasId(): string {
-    return this.getCanvasIdPrefix() + this.componentState.id;
+  private getCanvasIdPrefix(): string {
+    return this.isRevision ? 'label-canvas-revision-' : 'label-canvas-';
   }
 
-  getCanvasIdPrefix(): string {
-    if (this.isRevision) {
-      return 'label-canvas-revision-';
-    } else {
-      return 'label-canvas-';
-    }
-  }
-
-  enableFabricTextPadding(): void {
+  private enableFabricTextPadding(): void {
     fabric.Text.prototype.set({
       _getNonTransformedDimensions() {
         return new fabric.Point(this.width, this.height).scalarAdd(this.padding);
@@ -59,9 +52,9 @@ export class LabelShowWorkComponent extends ComponentShowWorkDirective {
     });
   }
 
-  setupCanvas(): void {
+  private setupCanvas(): void {
     const isDisabled: boolean = true;
-    this.canvas = this.LabelService.initializeCanvas(
+    this.canvas = this.labelService.initializeCanvas(
       this.canvasId,
       this.componentContent.width,
       this.componentContent.height,
@@ -70,8 +63,8 @@ export class LabelShowWorkComponent extends ComponentShowWorkDirective {
     this.setStudentWork(this.canvas, this.componentContent, this.componentState);
   }
 
-  setStudentWork(canvas: any, componentContent: any, componentState: any): void {
-    this.LabelService.addLabelsToCanvas(
+  private setStudentWork(canvas: any, componentContent: any, componentState: any): void {
+    this.labelService.addLabelsToCanvas(
       canvas,
       componentState.studentData.labels,
       componentContent.width,
@@ -82,6 +75,6 @@ export class LabelShowWorkComponent extends ComponentShowWorkDirective {
       componentContent.enableCircles,
       componentState.studentData.version
     );
-    this.LabelService.setBackgroundImage(canvas, componentState.studentData.backgroundImage);
+    this.labelService.setBackgroundImage(canvas, componentState.studentData.backgroundImage);
   }
 }

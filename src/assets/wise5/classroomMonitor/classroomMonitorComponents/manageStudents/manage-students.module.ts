@@ -16,7 +16,12 @@ import { ChangeTeamPeriodDialogComponent } from './change-team-period-dialog/cha
 import { PasswordModule } from '../../../../../app/password/password.module';
 
 @NgModule({
-  imports: [PasswordModule, ShowStudentInfoComponent, StudentTeacherCommonModule],
+  imports: [
+    ManageUserComponent,
+    PasswordModule,
+    ShowStudentInfoComponent,
+    StudentTeacherCommonModule
+  ],
   declarations: [
     AddTeamButtonComponent,
     AddTeamDialogComponent,
@@ -27,7 +32,6 @@ import { PasswordModule } from '../../../../../app/password/password.module';
     ManageStudentsComponent,
     ManageTeamComponent,
     ManageTeamsComponent,
-    ManageUserComponent,
     MoveUserConfirmDialogComponent,
     RemoveUserConfirmDialogComponent
   ],

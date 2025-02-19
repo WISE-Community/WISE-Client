@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px" class="manage-user">
-  <show-student-info [user]="user"></show-student-info>
+  <show-student-info [user]="user" />
   <span fxFlex></span>
   <button
     class="userInfoLink"
@@ -11,27 +11,28 @@
   >
     <mat-icon class="text-secondary">info</mat-icon>
   </button>
-  <button
-    *ngIf="user.isGoogleUser"
-    class="googleUserButton"
-    mat-icon-button
-    matTooltip="Student signs in with Google"
-    i18n-matTooltip
-    matTooltipPosition="above"
-  >
-    <mat-icon svgIcon="google"></mat-icon>
-  </button>
-  <button
-    *ngIf="!user.isGoogleUser"
-    class="userInfoLink"
-    mat-icon-button
-    matTooltip="Change student password"
-    i18n-matTooltip
-    matTooltipPosition="above"
-    (click)="changePassword($event)"
-  >
-    <mat-icon class="text-secondary">vpn_key</mat-icon>
-  </button>
+  @if (user.isGoogleUser) {
+    <button
+      class="googleUserButton"
+      mat-icon-button
+      matTooltip="Student signs in with Google"
+      i18n-matTooltip
+      matTooltipPosition="above"
+    >
+      <mat-icon svgIcon="google"></mat-icon>
+    </button>
+  } @else {
+    <button
+      class="userInfoLink"
+      mat-icon-button
+      matTooltip="Change student password"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="changePassword($event)"
+    >
+      <mat-icon class="text-secondary">vpn_key</mat-icon>
+    </button>
+  }
   <button
     class="userInfoLink"
     mat-icon-button
