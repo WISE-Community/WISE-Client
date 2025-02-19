@@ -17,6 +17,7 @@ import { CompletionStatus } from '../shared/CompletionStatus';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentWorkgroupItemComponent } from '../component-workgroup-item/component-workgroup-item.component';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 
 @Component({
   selector: 'class-responses',
@@ -51,6 +52,7 @@ export class ClassResponsesComponent {
   constructor(
     private annotationService: AnnotationService,
     private classroomStatusService: ClassroomStatusService,
+    private componentServiceLookupService: ComponentServiceLookupService,
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private notificationService: NotificationService,
@@ -106,9 +108,9 @@ export class ClassResponsesComponent {
     });
     workgroup.hasAlert = alertNotifications.length > 0;
     workgroup.hasNewAlert = this.workgroupHasNewAlert(alertNotifications);
-    const completionStatus = this.getCompletionStatusByWorkgroupId(workgroupId);
-    workgroup.isVisible = completionStatus.isVisible ? 1 : 0;
-    workgroup.completionStatus = this.getWorkgroupCompletionStatus(completionStatus);
+    const nodeCompletionStatus = this.getCompletionStatusByWorkgroupId(workgroupId);
+    workgroup.isVisible = nodeCompletionStatus.isVisible ? 1 : 0;
+    workgroup.completionStatus = this.getWorkgroupCompletionStatus(nodeCompletionStatus);
     workgroup.score =
       this.annotationService.getLatestScoreAnnotation(this.node.id, this.component.id, workgroupId)
         ?.data.value ?? '-';
@@ -164,15 +166,14 @@ export class ClassResponsesComponent {
       const nodeStatus = studentStatus.nodeStatuses[this.node.id];
       if (nodeStatus) {
         completionStatus.isVisible = nodeStatus.isVisible;
-        // TODO: store this info in the nodeStatus so we don't have to calculate every time?
         completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
         completionStatus.latestAnnotationTime =
           this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
-        if (!this.projectService.nodeHasWork(this.node.id)) {
+        if (!this.projectService.componentHasWork(this.component)) {
           completionStatus.isCompleted = nodeStatus.isVisited;
         }
         if (completionStatus.latestWorkTime) {
-          completionStatus.isCompleted = nodeStatus.isCompleted;
+          completionStatus.isCompleted = this.isCompleted(workgroupId);
         }
       }
     }
@@ -180,7 +181,7 @@ export class ClassResponsesComponent {
   }
 
   private getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
-    const componentStates = this.dataService.getComponentStatesByNodeId(this.node.id);
+    const componentStates = this.dataService.getComponentStatesByComponentId(this.component.id);
     for (const componentState of componentStates.reverse()) {
       if (componentState.workgroupId === workgroupId) {
         return componentState.serverSaveTime;
@@ -192,8 +193,8 @@ export class ClassResponsesComponent {
   private getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
     const annotations = this.dataService.getAnnotationsByNodeId(this.node.id);
     for (const annotation of annotations.reverse()) {
-      // TODO: support checking for annotations from shared teachers
       if (
+        annotation.componentId === this.component.id &&
         annotation.toWorkgroupId === workgroupId &&
         annotation.fromWorkgroupId === this.configService.getWorkgroupId()
       ) {
@@ -201,6 +202,24 @@ export class ClassResponsesComponent {
       }
     }
     return null;
+  }
+
+  private isCompleted(workgroupId: number): boolean {
+    const service = this.componentServiceLookupService.getService(this.component.type);
+    const workgroupComponentStates = this.dataService.getComponentStatesByWorkgroupIdAndComponentId(
+      workgroupId,
+      this.component.id
+    );
+    return ['OpenResponse', 'Discussion'].includes(this.component.type)
+      ? service.isCompletedV2(this.node, this.component, {
+          componentStates: workgroupComponentStates
+        })
+      : service.isCompleted(
+          this.component,
+          workgroupComponentStates,
+          this.dataService.getEventsByNodeId(this.node.id),
+          this.node
+        );
   }
 
   /**

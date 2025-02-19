@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
 import { WorkgroupNodeStatusComponent } from '../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupNodeScoreComponent } from '../shared/workgroupNodeScore/workgroup-node-score.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { copy } from '../../../common/object/object';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
@@ -32,13 +31,13 @@ export class ComponentWorkgroupItemComponent {
   component: any;
   disabled: boolean;
   @Input() expanded: boolean;
-  hasAlert: boolean;
-  hasNewAlert: boolean;
+  @Input() hasAlert: boolean;
+  @Input() hasNewAlert: boolean;
   @Input() maxScore: number;
   @Input() nodeId: string;
   @Output() onUpdateExpand: EventEmitter<any> = new EventEmitter();
   @Input() score: number | '-';
-  status: any;
+  @Input() status: any;
   statusClass: any;
   statusText: string = '';
   subscriptions: Subscription = new Subscription();
@@ -52,13 +51,7 @@ export class ComponentWorkgroupItemComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.workgroupData) {
-      const workgroupData = copy(changes.workgroupData.currentValue);
-      this.hasAlert = workgroupData.hasAlert;
-      this.hasNewAlert = workgroupData.hasNewAlert;
-      this.status = workgroupData.completionStatus;
-      this.score = workgroupData.score;
-    } else if (changes.nodeId || changes.componentId) {
+    if (changes.nodeId || changes.componentId) {
       this.setComponent();
     }
     this.update();

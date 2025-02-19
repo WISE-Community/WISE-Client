@@ -94,10 +94,13 @@
       @if (isWorkgroupShown(workgroup)) {
         <component-workgroup-item
           [expanded]="workVisibilityById[workgroup.workgroupId]"
-          [score]="workgroup.score"
+          [hasAlert]="workgroup.hasAlert"
+          [hasNewAlert]="workgroup.hasNewAlert"
           [maxScore]="maxScore"
           [nodeId]="node.id"
           [componentId]="component.id"
+          [score]="workgroup.score"
+          [status]="workgroup.completionStatus"
           [workgroupId]="workgroup.workgroupId"
           [workgroupData]="workgroup"
           (onUpdateExpand)="onUpdateExpand($event)"
