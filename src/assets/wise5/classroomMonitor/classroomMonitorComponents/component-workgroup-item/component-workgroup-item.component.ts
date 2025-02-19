@@ -52,13 +52,16 @@ export class ComponentWorkgroupItemComponent {
     private projectService: TeacherProjectService
   ) {}
 
+  ngOnInit(): void {
+    this.setComponent();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.workgroupData) {
       const workgroupData = copy(changes.workgroupData.currentValue);
       this.hasAlert = workgroupData.hasAlert;
       this.hasNewAlert = workgroupData.hasNewAlert;
       this.status = workgroupData.completionStatus;
-      this.score = workgroupData.score != null ? workgroupData.score : '-';
     } else if (changes.nodeId || changes.componentId) {
       this.setComponent();
     }
