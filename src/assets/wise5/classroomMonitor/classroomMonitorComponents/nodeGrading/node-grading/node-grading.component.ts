@@ -44,6 +44,11 @@ export class NodeGradingComponent {
         this.node = currentNode;
       })
     );
+    setTimeout(() => {
+      // allow the current change detection cycle to complete before triggering the navigation
+      // to ensure url updates correctly
+      this.setComponent(this.node.components[0]);
+    }, 0);
   }
 
   ngOnChanges(): void {
