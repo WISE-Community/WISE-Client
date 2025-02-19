@@ -10,7 +10,7 @@
     class="list-item__subheader-button team-button"
     aria-label="Show/hide team's work for this step"
     i18n-aria-label
-    [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
+    [ngClass]="{ 'list-item--noclick': disabled }"
     (click)="toggleExpand()"
     [disabled]="disabled"
     fxLayoutWrap
@@ -27,11 +27,9 @@
       <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
         <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
       </div>
-      @if (showScore) {
-        <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-          <workgroup-node-score [score]="score" [maxScore]="maxScore" />
-        </div>
-      }
+      <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+        <workgroup-node-score [score]="score" [maxScore]="maxScore" />
+      </div>
     </div>
   </button>
   @if (expanded && !disabled) {

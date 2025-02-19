@@ -64,11 +64,8 @@ export class ClassResponsesComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.component) {
       this.collapseAll();
+      this.setWorkgroupsById();
     }
-  }
-
-  setupComponent() {
-    throw new Error('Method not implemented.');
   }
 
   protected retrieveStudentData(node: Node = this.node): void {
@@ -112,10 +109,9 @@ export class ClassResponsesComponent {
     const completionStatus = this.getCompletionStatusByWorkgroupId(workgroupId);
     workgroup.isVisible = completionStatus.isVisible ? 1 : 0;
     workgroup.completionStatus = this.getWorkgroupCompletionStatus(completionStatus);
-    workgroup.score = this.annotationService.getTotalNodeScoreForWorkgroup(
-      workgroupId,
-      this.node.id
-    );
+    workgroup.score =
+      this.annotationService.getLatestScoreAnnotation(this.node.id, this.component.id, workgroupId)
+        ?.data.value ?? '-';
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
     workgroup.nodeStatus = studentStatus.nodeStatuses[this.node.id] || {};
   }

@@ -10,7 +10,6 @@ import { WorkgroupNodeScoreComponent } from '../shared/workgroupNodeScore/workgr
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { copy } from '../../../common/object/object';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AnnotationService } from '../../../services/annotationService';
 
 @Component({
   imports: [
@@ -35,11 +34,10 @@ export class ComponentWorkgroupItemComponent {
   @Input() expanded: boolean;
   hasAlert: boolean;
   hasNewAlert: boolean;
-  protected maxScore: number;
+  @Input() maxScore: number;
   @Input() nodeId: string;
   @Output() onUpdateExpand: EventEmitter<any> = new EventEmitter();
-  protected score: number | '-';
-  @Input() showScore: boolean;
+  @Input() score: number | '-';
   status: any;
   statusClass: any;
   statusText: string = '';
@@ -47,10 +45,7 @@ export class ComponentWorkgroupItemComponent {
   @Input() workgroupId: number;
   @Input() workgroupData: any;
 
-  constructor(
-    private annotationService: AnnotationService,
-    private projectService: TeacherProjectService
-  ) {}
+  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.setComponent();
@@ -62,6 +57,7 @@ export class ComponentWorkgroupItemComponent {
       this.hasAlert = workgroupData.hasAlert;
       this.hasNewAlert = workgroupData.hasNewAlert;
       this.status = workgroupData.completionStatus;
+      this.score = workgroupData.score;
     } else if (changes.nodeId || changes.componentId) {
       this.setComponent();
     }
@@ -71,12 +67,6 @@ export class ComponentWorkgroupItemComponent {
   private setComponent(): void {
     this.component = this.projectService.getComponent(this.nodeId, this.componentId);
     this.maxScore = this.projectService.getMaxScoreForComponent(this.nodeId, this.componentId) ?? 0;
-    this.score =
-      this.annotationService.getLatestScoreAnnotation(
-        this.nodeId,
-        this.componentId,
-        this.workgroupId
-      )?.data.value ?? '-';
   }
 
   private update(): void {
@@ -108,8 +98,6 @@ export class ComponentWorkgroupItemComponent {
   }
 
   protected toggleExpand(): void {
-    if (this.showScore) {
-      this.onUpdateExpand.emit({ workgroupId: this.workgroupId, value: !this.expanded });
-    }
+    this.onUpdateExpand.emit({ workgroupId: this.workgroupId, value: !this.expanded });
   }
 }
