@@ -4,22 +4,19 @@ import { AnnotationService } from '../../services/annotationService';
 import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { ComponentContent } from '../../common/ComponentContent';
+import { ComponentState } from '../../../../app/domain/componentState';
 import { ConfigService } from '../../services/configService';
-import { copy } from '../../common/object/object';
 import { DataService } from '../../../../app/services/data.service';
 import { MatCardModule } from '@angular/material/card';
+import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
 import { Observable } from 'rxjs';
-import { of } from 'rxjs';
 import { ProjectService } from '../../services/projectService';
 import { rgbToHex } from '../../common/color/color';
 import { SummaryService } from '../../components/summary/summaryService';
 import { tap } from 'rxjs/operators';
-import { StudentDataService } from '../../services/studentDataService';
-import { DummyAnnotation } from '../../common/DummyAnnotation';
 
 @Component({
   imports: [CommonModule, MatCardModule],
-  selector: 'summary-display',
   standalone: true,
   styleUrl: 'summary-display.component.scss',
   templateUrl: 'summary-display.component.html'
@@ -53,7 +50,7 @@ export abstract class SummaryDisplayComponent {
   hasCorrectness: boolean = false;
   protected Highcharts: typeof Highcharts = Highcharts;
   maxScore: number = 5;
-  numDummySamples: number;
+
   numResponses: number;
   otherComponent: ComponentContent;
   otherComponentType: string;
@@ -81,22 +78,10 @@ export abstract class SummaryDisplayComponent {
   ) {}
 
   ngOnInit(): void {
-    this.setNumDummySamples();
     this.initializeOtherComponent();
     this.initializeCustomLabelColors();
     if (this.doRender) {
       this.renderDisplay();
-    }
-  }
-
-  setNumDummySamples(): void {
-    switch (this.source) {
-      case 'period':
-        this.numDummySamples = 10;
-      case 'allPeriods':
-        this.numDummySamples = 20;
-      default:
-        this.numDummySamples = 1;
     }
   }
 
@@ -147,106 +132,37 @@ export abstract class SummaryDisplayComponent {
     this.renderResponsesOrScores(true);
   }
 
-  private renderResponsesOrScores(isRenderingResponses: boolean): void {
-    if (this.isSourceSelf()) {
-      if (this.isClassroomMonitor()) {
-        this.displaySourceSelfMessageToTeacher();
-      } else {
-        isRenderingResponses ? this.renderSelfResponse() : this.renderSelfScore();
-      }
-    } else {
-      isRenderingResponses ? this.renderClassResponses() : this.renderClassScores();
-    }
+  protected abstract renderResponsesOrScores(isRenderingResponses: boolean): void;
+
+  protected renderClassResponses(): void {
+    this.getLatestWork().subscribe((componentStates = []) => {
+      this.processComponentStates(componentStates);
+    });
   }
 
-  private displaySourceSelfMessageToTeacher(): void {
-    this.doRender = false;
-    this.warningMessage = $localize`The student will see a graph of their individual data here.`;
-    this.hasWarning = true;
-  }
+  protected abstract getLatestScores(): Observable<Annotation[]>;
 
-  private renderSelfResponse(): void {
-    const componentStates = [];
-    const componentState = this.getResponseForSelf();
-    if (componentState != null) {
-      componentStates.push(componentState);
-    }
-    this.processComponentStates(componentStates);
-  }
-
-  // Come back to this...
-  private getResponseForSelf(): any {
-    if (this.isVLEPreview() || this.isStudentRun()) {
-      return (this.dataService as StudentDataService).getLatestComponentStateByNodeIdAndComponentId(
+  protected getLatestStudentScores(): Observable<Annotation[]> {
+    return this.summaryService
+      .getLatestClassmateScores(
+        this.configService.getRunId(),
+        this.periodId,
         this.nodeId,
-        this.componentId
+        this.componentId,
+        this.source
+      )
+      .pipe(
+        tap((scoreAnnotations) => {
+          return this.filterLatestScoreAnnotations(scoreAnnotations);
+        })
       );
-    } else if (this.isAuthoringPreview()) {
-      return this.createDummyComponentState();
-    }
-  }
-
-  private renderClassResponses(): void {
-    this.getLatestStudentWork(this.nodeId, this.componentId, this.source, this.periodId).subscribe(
-      (componentStates = []) => {
-        this.processComponentStates(componentStates);
-      }
-    );
-  }
-
-  // ?????????????????????????
-  private getLatestScores(
-    nodeId: string,
-    componentId: string,
-    source: string,
-    periodId: number
-  ): Observable<any[]> {
-    if (this.isVLEPreview()) {
-      return this.getDummyStudentScoresForVLEPreview();
-    } else if (this.isAuthoringPreview()) {
-      return this.getDummyStudentScoresForAuthoringPreview();
-    } else {
-      return this.summaryService
-        .getLatestClassmateScores(
-          this.configService.getRunId(),
-          periodId,
-          nodeId,
-          componentId,
-          source
-        )
-        .pipe(
-          tap((scoreAnnotations) => {
-            return this.filterLatestScoreAnnotations(scoreAnnotations);
-          })
-        );
-    }
   }
 
   private renderScores(): void {
     this.renderResponsesOrScores(false);
   }
 
-  private renderSelfScore(): void {
-    this.setMaxScore();
-    const annotation = this.getScoreForSelf();
-    const annotations = [];
-    if (annotation != null) {
-      annotations.push(annotation);
-    }
-    this.processScoreAnnotations(annotations);
-  }
-
-  private getScoreForSelf(): Annotation {
-    let score: Annotation;
-    if (this.isVLEPreview() || this.isStudentRun()) {
-      score = this.getLatestScoreAnnotationForWorkgroup();
-    } else if (this.isAuthoringPreview()) {
-      score = this.createDummyScoreAnnotation();
-    }
-    return score;
-  }
-
-  private getLatestScoreAnnotationForWorkgroup(): Annotation {
+  protected getLatestScoreAnnotationForWorkgroup(): Annotation {
     return this.annotationService.getLatestScoreAnnotation(
       this.nodeId,
       this.componentId,
@@ -254,16 +170,14 @@ export abstract class SummaryDisplayComponent {
     );
   }
 
-  private renderClassScores(): void {
+  protected renderClassScores(): void {
     this.setMaxScore();
-    this.getLatestScores(this.nodeId, this.componentId, this.source, this.periodId).subscribe(
-      (annotations) => {
-        this.processScoreAnnotations(annotations);
-      }
-    );
+    this.getLatestScores().subscribe((annotations) => {
+      this.processScoreAnnotations(annotations);
+    });
   }
 
-  private setMaxScore(): void {
+  protected setMaxScore(): void {
     if (this.otherComponent.maxScore != null) {
       this.maxScore = this.otherComponent.maxScore;
     } else {
@@ -272,25 +186,16 @@ export abstract class SummaryDisplayComponent {
     // this.maxScore = this.otherComponent?.maxScore ?? this.defaultMaxScore;
   }
 
-  private getLatestStudentWork(
-    nodeId: string,
-    componentId: string,
-    source: string,
-    periodId: number
-  ): Observable<any> {
-    if (this.isVLEPreview()) {
-      return this.getDummyStudentWorkForVLEPreview(nodeId, componentId);
-    } else if (this.isAuthoringPreview()) {
-      return this.getDummyStudentWorkForAuthoringPreview();
-    } else {
-      return this.summaryService.getLatestClassmateStudentWork(
-        this.configService.getRunId(),
-        periodId,
-        nodeId,
-        componentId,
-        source
-      );
-    }
+  protected abstract getLatestWork(): Observable<ComponentState[]>;
+
+  protected getLatestStudentWork(): Observable<ComponentState[]> {
+    return this.summaryService.getLatestClassmateStudentWork(
+      this.configService.getRunId(),
+      this.periodId,
+      this.nodeId,
+      this.componentId,
+      this.source
+    );
   }
 
   filterLatestScoreAnnotations(annotations: Annotation[]): any[] {
@@ -317,131 +222,15 @@ export abstract class SummaryDisplayComponent {
     });
   }
 
-  private getDummyStudentWorkForVLEPreview(nodeId: string, componentId: string): Observable<any> {
-    const componentStates = this.createDummyComponentStates();
-    const componentState = (
-      this.dataService as StudentDataService
-    ).getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
-    if (componentState != null) {
-      componentStates.push(componentState);
-    }
-    return of(componentStates);
-  }
-
-  private getDummyStudentScoresForVLEPreview(): Observable<Annotation[]> {
-    const annotations = this.createDummyScoreAnnotations();
-    const annotation = this.getLatestScoreAnnotationForWorkgroup();
-    if (annotation != null) {
-      annotations.push(annotation);
-    }
-    return of(annotations);
-  }
-
-  private getDummyStudentWorkForAuthoringPreview(): Observable<any> {
-    return of(this.createDummyComponentStates());
-  }
-
-  private getDummyStudentScoresForAuthoringPreview(): Observable<Annotation[]> {
-    return of(this.createDummyScoreAnnotations());
-  }
-
-  private createDummyComponentStates(): any[] {
-    const dummyComponentStates = [];
-    for (let dummyCounter = 0; dummyCounter < this.numDummySamples; dummyCounter++) {
-      dummyComponentStates.push(this.createDummyComponentState());
-    }
-    return dummyComponentStates;
-  }
-
-  private createDummyComponentState(): any {
+  // MOVE renderGraph() TO renderClass/SelfResponse(s)()
+  // MOVE calculateCountsAndPercentage() TO AFTER IF/ELSE BEFORE RETURN {seriesData, total}
+  protected processComponentStates(componentStates: ComponentState[]): void {
     if (this.otherComponentType === 'MultipleChoice') {
-      return this.createDummyMultipleChoiceComponentState(this.otherComponent);
-    } else if (this.otherComponentType === 'Table') {
-      return this.createDummyTableComponentState();
-    }
-  }
-
-  private createDummyMultipleChoiceComponentState(component: any): any {
-    const choices = component.choices;
-    return {
-      studentData: {
-        studentChoices: [{ id: this.getRandomChoice(choices).id }]
-      }
-    };
-  }
-
-  private createDummyTableComponentState(): any {
-    if (this.isAuthoringPreview()) {
-      return {
-        studentData: {
-          tableData: this.getDummyTableData()
-        }
-      };
-    } else {
-      return {
-        studentData: {
-          tableData: this.getDummyTableDataSimilarToLatestComponentState()
-        }
-      };
-    }
-  }
-
-  private getDummyTableData(): any[] {
-    return [
-      [{ text: 'Trait' }, { text: 'Count' }],
-      [{ text: 'Blue' }, { text: '3' }],
-      [{ text: 'Green' }, { text: '2' }],
-      [{ text: 'Red' }, { text: '1' }]
-    ];
-  }
-
-  private getDummyTableDataSimilarToLatestComponentState(): any[] {
-    let tableData = [];
-    const componentState = (
-      this.dataService as StudentDataService
-    ).getLatestComponentStateByNodeIdAndComponentId(this.nodeId, this.componentId);
-    if (componentState != null) {
-      tableData = copy(componentState.studentData.tableData);
-      for (let r = 1; r < tableData.length; r++) {
-        tableData[r][1].text = this.getRandomSimilarNumber(tableData[r][1].text);
-      }
-    }
-    return tableData;
-  }
-
-  private getRandomSimilarNumber(text: any): number {
-    return Math.ceil(this.convertToNumber(text) * Math.random());
-  }
-
-  private getRandomChoice(choices: any): any {
-    return choices[Math.floor(Math.random() * choices.length)];
-  }
-
-  private createDummyScoreAnnotations(): DummyAnnotation[] {
-    const dummyScoreAnnotations = [];
-    for (let dummyCounter = 0; dummyCounter < this.numDummySamples; dummyCounter++) {
-      dummyScoreAnnotations.push(this.createDummyScoreAnnotation());
-    }
-    return dummyScoreAnnotations;
-  }
-
-  private createDummyScoreAnnotation(): DummyAnnotation {
-    const json = {
-      data: {
-        value: this.getRandomScore()
-      },
-      type: 'score'
-    };
-    return new DummyAnnotation(json);
-  }
-
-  private getRandomScore(): number {
-    return Math.ceil(Math.random() * this.maxScore);
-  }
-
-  private processComponentStates(componentStates: any[]): void {
-    if (this.otherComponentType === 'MultipleChoice') {
-      const summaryData = this.createChoicesSummaryData(this.otherComponent, componentStates);
+      // PUT THIS DATA IN SOMETHING LIKE A MultipleChoiceSummaryData (maybe)
+      const summaryData = this.createChoicesSummaryData(
+        this.otherComponent as MultipleChoiceContent,
+        componentStates
+      );
       const seriesData = this.createChoicesSeriesData(this.otherComponent, summaryData);
       this.calculateCountsAndPercentage(componentStates.length);
       this.renderGraph(seriesData, componentStates.length);
@@ -454,7 +243,7 @@ export abstract class SummaryDisplayComponent {
     }
   }
 
-  createTableSummaryData(componentStates: any[]): any {
+  createTableSummaryData(componentStates: ComponentState[]): any {
     const labelToCount = {};
     for (const componentState of componentStates) {
       const tableData = componentState.studentData.tableData;
@@ -518,7 +307,7 @@ export abstract class SummaryDisplayComponent {
     }
   }
 
-  private processScoreAnnotations(annotations: Annotation[]): void {
+  protected processScoreAnnotations(annotations: Annotation[]): void {
     this.updateMaxScoreIfNecessary(annotations);
     const summaryData = this.createScoresSummaryData(annotations);
     const { data, total } = this.createScoresSeriesData(summaryData);
@@ -540,9 +329,12 @@ export abstract class SummaryDisplayComponent {
   }
 
   // component should not be any, but ComponentContent.choices doesn't exist for some reason
-  private createChoicesSummaryData(component: any, componentStates: any[]): any {
+  private createChoicesSummaryData(
+    componentState: MultipleChoiceContent,
+    componentStates: ComponentState[]
+  ): any {
     const summaryData = {};
-    for (const choice of component.choices) {
+    for (const choice of componentState.choices) {
       summaryData[choice.id] = this.createChoiceSummaryData(
         choice.id,
         choice.text,
@@ -565,7 +357,10 @@ export abstract class SummaryDisplayComponent {
     };
   }
 
-  private addComponentStateDataToSummaryData(summaryData: {}, componentState: any): void {
+  private addComponentStateDataToSummaryData(
+    summaryData: {},
+    componentState: ComponentState
+  ): void {
     for (const choice of componentState.studentData.studentChoices) {
       this.incrementSummaryData(summaryData, choice.id);
     }
@@ -927,7 +722,7 @@ export abstract class SummaryDisplayComponent {
     return summaryData[id].count;
   }
 
-  private isSourceSelf(): boolean {
+  protected isSourceSelf(): boolean {
     return this.source === 'self';
   }
 
