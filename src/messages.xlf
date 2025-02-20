@@ -14063,10 +14063,6 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">12</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
@@ -14087,10 +14083,6 @@ The branches will be removed but the steps will remain in the unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
           <context context-type="linenumber">30</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component.html</context>
-          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2c49c02ee0f76a11b13ce1585b68c7c6ee137ab1" datatype="html">
@@ -14130,6 +14122,20 @@ The branches will be removed but the steps will remain in the unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading-view/node-grading-view.component.html</context>
           <context context-type="linenumber">103,105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8f1c111b119640a8d84c8fde6cf0035d7d121c31" datatype="html">
+        <source>Step Completion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="99d24e8a7ca020160bce8948c7cc4a521a9d8114" datatype="html">
+        <source>Step Mean Score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component.html</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="74be78ca84dd0796fb8ede9354b922c2bc71bd7e" datatype="html">

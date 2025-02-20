@@ -3,7 +3,7 @@
     <div class="accent-1" fxLayout="row" fxLayoutAlign="center center">
       <h2 class="content-head__item" fxLayout.lt-md="column" fxLayoutGap.gt-sm="4px">
         <span>{{ nodeCompletionPercent }}%</span>
-        <span class="content-head-label" i18n>Completion</span>
+        <span class="content-head-label" i18n>Step Completion</span>
       </h2>
       @if (hasWork) {
         <h2 class="content-head__item" fxLayout.lt-md="column" fxLayoutGap.gt-sm="4px">
@@ -12,7 +12,7 @@
           } @else {
             <span i18n>N/A</span>
           }
-          <span class="content-head-label" i18n>Mean Score</span>
+          <span class="content-head-label" i18n>Step Mean Score</span>
         </h2>
       }
     </div>
