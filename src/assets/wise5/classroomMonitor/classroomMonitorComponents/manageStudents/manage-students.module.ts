@@ -4,7 +4,6 @@ import { ManageStudentsComponent } from './manage-students/manage-students.compo
 import { ManageTeamsComponent } from './manage-teams/manage-teams.component';
 import { ManagePeriodComponent } from './manage-period/manage-period.component';
 import { ManageTeamComponent } from './manage-team/manage-team.component';
-import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ShowStudentInfoComponent } from './show-student-info/show-student-info.component';
 import { ManageShowStudentInfoComponent } from './manage-show-student-info/manage-show-student-info.component';
 import { RemoveUserConfirmDialogComponent } from './remove-user-confirm-dialog/remove-user-confirm-dialog.component';
@@ -18,7 +17,6 @@ import { PasswordModule } from '../../../../../app/password/password.module';
 @NgModule({
   imports: [
     ManageTeamComponent,
-    ManageUserComponent,
     PasswordModule,
     ShowStudentInfoComponent,
     StudentTeacherCommonModule
