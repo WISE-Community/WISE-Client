@@ -3,25 +3,23 @@
   [class]="{ 'disabled-text': team.users.length === 0, warn: isUnassigned }"
 >
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-    <mat-icon
-      *ngIf="team.workgroupId"
-      class="mat-24 secondary-text"
-      [ngStyle]="{ color: avatarColor }"
-      >account_circle</mat-icon
-    >
-    <h4 class="mat-subtitle-2 warn" *ngIf="isUnassigned" i18n>Students without a team</h4>
-    <h4 class="mat-subtitle-2" *ngIf="!isUnassigned" i18n>Team {{ team.workgroupId }}</h4>
+    @if (team.workGroupId) {
+      <mat-icon class="mat-24 secondary-text" [ngStyle]="{ color: avatarColor }"
+        >account_circle</mat-icon
+      >
+    }
+    @if (isUnassigned) {
+      <h4 class="mat-subtitle-2 warn" i18n>Students without a team</h4>
+    } @else {
+      <h4 class="mat-subtitle-2" i18n>Team {{ team.workgroupId }}</h4>
+    }
     <span fxFlex></span>
     <span class="mat-small">
-      <a
-        *ngIf="canGradeStudentWork && team.users.length > 0 && !isUnassigned"
-        class="change-period"
-        href="#"
-        (click)="changePeriod($event)"
-        i18n
-        >Change Period</a
-      >
-      <span *ngIf="this.team.users.length === 0" i18n>No students</span>
+      @if (this.team.users.length === 0) {
+        <span i18n>No students</span>
+      } @else if (canGradeStudentWork && !isUnassigned) {
+        <a class="change-period" href="#" (click)="changePeriod($event)" i18n>Change Period</a>
+      }
     </span>
   </div>
   <mat-card-content>
@@ -36,7 +34,7 @@
       [ngStyle.gt-sm]="{ columns: isUnassigned ? 2 : '' }"
       [ngStyle.gt-md]="{ columns: isUnassigned ? 3 : '' }"
     >
-      <ng-container *ngFor="let user of team.users">
+      @for (user of team.users; track $index) {
         <li
           cdkDrag
           [cdkDragData]="{ user: user, workgroupId: team.workgroupId }"
@@ -50,7 +48,7 @@
             (removeUserEvent)="removeUser($event)"
           ></manage-user>
         </li>
-      </ng-container>
+      }
     </ul>
   </mat-card-content>
 </mat-card>

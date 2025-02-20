@@ -17,6 +17,7 @@ import { PasswordModule } from '../../../../../app/password/password.module';
 
 @NgModule({
   imports: [
+    ManageTeamComponent,
     ManageUserComponent,
     PasswordModule,
     ShowStudentInfoComponent,
@@ -30,7 +31,6 @@ import { PasswordModule } from '../../../../../app/password/password.module';
     ManagePeriodComponent,
     ManageShowStudentInfoComponent,
     ManageStudentsComponent,
-    ManageTeamComponent,
     ManageTeamsComponent,
     MoveUserConfirmDialogComponent,
     RemoveUserConfirmDialogComponent
