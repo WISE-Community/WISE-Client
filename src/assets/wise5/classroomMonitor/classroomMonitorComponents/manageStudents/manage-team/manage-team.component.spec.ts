@@ -5,7 +5,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
 import { ConfigService } from '../../../../services/configService';
 import { ManageTeamComponent } from './manage-team.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ManageTeamHarness } from './manage-team.harness';
 import { ManageStudentsModule } from '../manage-students.module';
@@ -28,15 +27,21 @@ const studentUsername = 'aa0101';
 describe('ManageTeamComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-    declarations: [ManageTeamComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      imports: [
+        BrowserAnimationsModule,
         ManageStudentsModule,
+        ManageTeamComponent,
         MatCardModule,
         MatDialogModule,
-        MatSnackBarModule],
-    providers: [ConfigService, UpdateWorkgroupService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        MatSnackBarModule
+      ],
+      providers: [
+        ConfigService,
+        UpdateWorkgroupService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     configService = TestBed.inject(ConfigService);
     dialog = TestBed.inject(MatDialog);
     fixture = TestBed.createComponent(ManageTeamComponent);

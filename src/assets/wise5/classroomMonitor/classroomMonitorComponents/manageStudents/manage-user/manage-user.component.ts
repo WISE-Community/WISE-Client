@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
 import { ConfigService } from '../../../../services/configService';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClient } from '@angular/common/http';
-import { $localize } from '@angular/localize/init';
 import { ManageShowStudentInfoComponent } from '../manage-show-student-info/manage-show-student-info.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
