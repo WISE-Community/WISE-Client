@@ -132,7 +132,7 @@ export class TeacherDataService extends DataService {
       .set('runId', this.configService.getRunId())
       .set('getStudentWork', 'true')
       .set('getAnnotations', 'false')
-      .set('getEvents', 'false');
+      .set('getEvents', 'true');
     const components = node.getAllRelatedComponents();
     if (components.length > 0) {
       params = params.set('components', compressToEncodedURIComponent(JSON.stringify(components)));
