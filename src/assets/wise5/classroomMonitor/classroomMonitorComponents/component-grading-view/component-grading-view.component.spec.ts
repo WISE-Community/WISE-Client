@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { MockComponents } from 'ng-mocks';
 import { ClassResponsesComponent } from '../class-responses/class-responses.component';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
+import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 
 describe('ComponentGradingViewComponent', () => {
   let component: ComponentGradingViewComponent;
@@ -13,7 +14,13 @@ describe('ComponentGradingViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MockComponents(ClassResponsesComponent, MilestoneReportButtonComponent)],
+      declarations: [
+        MockComponents(
+          ClassResponsesComponent,
+          MilestoneReportButtonComponent,
+          PeerGroupButtonComponent
+        )
+      ],
       imports: [ClassroomMonitorTestingModule, ComponentGradingViewComponent],
       providers: [
         { provide: ActivatedRoute, useValue: { parent: { params: of({ nodeId: 'node1' }) } } }

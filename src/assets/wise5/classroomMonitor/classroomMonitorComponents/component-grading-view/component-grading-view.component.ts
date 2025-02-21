@@ -11,11 +11,13 @@ import { Node } from '../../../common/Node';
 import { ClassResponsesComponent } from '../class-responses/class-responses.component';
 import { ActivatedRoute } from '@angular/router';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
+import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 
 @Component({
   imports: [
     ClassResponsesComponent,
     MilestoneReportButtonComponent,
+    PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
   ],
   selector: 'component-grading-view',

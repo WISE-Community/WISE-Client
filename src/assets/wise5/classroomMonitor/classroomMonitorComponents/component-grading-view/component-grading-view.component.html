@@ -1,4 +1,5 @@
 <milestone-report-button [node]="node" [component]="component" [periodId]="periodId" />
+<peer-group-button [node]="node" [component]="component" />
 @if (component?.type === 'MultipleChoice' && hasResponsesSummary) {
   <teacher-summary-display
     [nodeId]="node.id"
