@@ -5,6 +5,8 @@ import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { StudentSummaryDisplay } from './student-summary-display.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { Annotation } from '../../common/Annotation';
+import { ComponentState } from '../../../../app/domain/componentState';
 
 let component: StudentSummaryDisplay;
 let fixture: ComponentFixture<StudentSummaryDisplay>;
@@ -76,13 +78,12 @@ function calculateMaxScore() {
       expect(component.calculateMaxScore(annotations)).toEqual(5);
     });
     it('should calculate max score when there are annotations', () => {
-      const annotations = [
-        {
-          data: {
-            value: 6
-          }
+      const annotation = new Annotation({
+        data: {
+          value: 6
         }
-      ];
+      });
+      const annotations = [annotation];
       component.maxScore = 5;
       expect(component.calculateMaxScore(annotations)).toEqual(6);
     });
@@ -341,11 +342,11 @@ function createScoresSummaryData() {
 }
 
 function createScoreAnnotation(score: number) {
-  return {
+  return new Annotation({
     data: {
       value: score
     }
-  };
+  });
 }
 
 function expectSummaryDataCounts(summaryData: any, counts: number[]) {
@@ -570,12 +571,12 @@ function filterLatestScoreAnnotations() {
 }
 
 function createAnnotation(id: number, toWorkgroupId: number, type: string, serverSaveTime: number) {
-  return {
+  return new Annotation({
     id: id,
     serverSaveTime: serverSaveTime,
     type: type,
     toWorkgroupId: toWorkgroupId
-  };
+  });
 }
 
 function setLatestAnnotationIfNewer() {
@@ -641,11 +642,11 @@ function createTableSummaryData() {
 }
 
 function createTableComponentState(textTableData: any[]) {
-  return {
+  return new ComponentState({
     studentData: {
       tableData: createTableDataFromArray(textTableData)
     }
-  };
+  });
 }
 
 function createTableDataFromArray(textRows: any[]) {

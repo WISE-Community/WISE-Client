@@ -27,7 +27,7 @@ import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleC
 })
 export class StudentSummaryDisplay extends SummaryDisplayComponent {
   private studentWorkSavedToServerSubscription: Subscription;
-  private numDummySamples: number;
+  numDummySamples: number;
 
   constructor(
     protected annotationService: AnnotationService,
@@ -184,11 +184,9 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
     const componentState = (
       this.dataService as StudentDataService
     ).getLatestComponentStateByNodeIdAndComponentId(this.nodeId, this.componentId);
-    if (componentState != null) {
-      tableData = copy(componentState.studentData.tableData);
-      for (let r = 1; r < tableData.length; r++) {
-        tableData[r][1].text = this.getRandomSimilarNumber(tableData[r][1].text);
-      }
+    tableData = copy(componentState.studentData.tableData);
+    for (let r = 1; r < tableData.length; r++) {
+      tableData[r][1].text = this.getRandomSimilarNumber(tableData[r][1].text);
     }
     return tableData;
   }
