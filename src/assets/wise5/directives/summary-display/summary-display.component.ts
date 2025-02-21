@@ -532,7 +532,7 @@ export abstract class SummaryDisplay {
     let maxScoreSoFar = this.maxScore;
     for (const annotation of annotations) {
       const score = this.getScoreFromAnnotation(annotation);
-      maxScoreSoFar = Math.max(this.maxScore, score);
+      maxScoreSoFar = Math.max(maxScoreSoFar, score);
     }
     return maxScoreSoFar;
   }
