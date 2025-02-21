@@ -10,9 +10,14 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Node } from '../../../common/Node';
 import { ClassResponsesComponent } from '../class-responses/class-responses.component';
 import { ActivatedRoute } from '@angular/router';
+import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
 
 @Component({
-  imports: [ClassResponsesComponent, TeacherSummaryDisplayComponent],
+  imports: [
+    ClassResponsesComponent,
+    MilestoneReportButtonComponent,
+    TeacherSummaryDisplayComponent
+  ],
   selector: 'component-grading-view',
   standalone: true,
   templateUrl: './component-grading-view.component.html'
