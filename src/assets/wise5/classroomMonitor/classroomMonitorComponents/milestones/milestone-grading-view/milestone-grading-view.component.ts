@@ -3,7 +3,6 @@ import { copy } from '../../../../common/object/object';
 import { Annotation } from '../../../../common/Annotation';
 import { Node } from '../../../../common/Node';
 import { CompletionStatus } from '../../shared/CompletionStatus';
-import { Notification } from '../../../../../../app/domain/notification';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../../services/annotationService';
@@ -14,10 +13,10 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'milestone-grading-view',
-  templateUrl: './milestone-grading-view.component.html',
-  styleUrls: ['./milestone-grading-view.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrl: './milestone-grading-view.component.scss',
+  templateUrl: './milestone-grading-view.component.html'
 })
 export class MilestoneGradingViewComponent {
   private componentId: string;

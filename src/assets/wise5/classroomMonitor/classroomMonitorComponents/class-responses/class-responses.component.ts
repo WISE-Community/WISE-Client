@@ -12,7 +12,6 @@ import { copy } from '../../../common/object/object';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { AnnotationService } from '../../../services/annotationService';
 import { NotificationService } from '../../../services/notificationService';
-import { Notification } from '../../../../../app/domain/notification';
 import { CompletionStatus } from '../shared/CompletionStatus';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentWorkgroupItemComponent } from '../component-workgroup-item/component-workgroup-item.component';
@@ -20,8 +19,6 @@ import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 
 @Component({
-  selector: 'class-responses',
-  standalone: true,
   imports: [
     CommonModule,
     ComponentWorkgroupItemComponent,
@@ -32,6 +29,8 @@ import { ComponentServiceLookupService } from '../../../services/componentServic
     MatListModule,
     WorkgroupSelectAutocompleteComponent
   ],
+  selector: 'class-responses',
+  standalone: true,
   templateUrl: './class-responses.component.html'
 })
 export class ClassResponsesComponent {
@@ -45,8 +44,8 @@ export class ClassResponsesComponent {
   protected sort: string;
   protected sortedWorkgroups: any[] = [];
   private workgroups: any[] = [];
-  protected workgroupsById: any = {};
   protected workgroupInViewById: any = {}; // whether the workgroup is in view or not
+  protected workgroupsById: any = {};
   protected workVisibilityById: { [key: number]: boolean } = {};
 
   constructor(
@@ -287,19 +286,19 @@ export class ClassResponsesComponent {
     };
   }
 
-  setSort(criteria: string): void {
+  protected setSort(criteria: string): void {
     this.sort = criteria;
   }
 
-  isWorkgroupShown(workgroup: any): boolean {
+  protected isWorkgroupShown(workgroup: any): boolean {
     return true; // implement actual logic
   }
 
-  onUpdateExpand({ workgroupId, value }): void {
+  protected onUpdateExpand({ workgroupId, value }): void {
     this.workVisibilityById[workgroupId] = value;
   }
 
-  onIntersection(
+  protected onIntersection(
     workgroupId: number,
     intersectionObserverEntries: IntersectionObserverEntry[]
   ): void {
@@ -309,10 +308,6 @@ export class ClassResponsesComponent {
         this.workVisibilityById[workgroupId] = true;
       }
     }
-  }
-
-  trackWorkgroup(index: number, workgroup: any): any {
-    return workgroup.workgroupId;
   }
 
   protected expandAll(): void {
