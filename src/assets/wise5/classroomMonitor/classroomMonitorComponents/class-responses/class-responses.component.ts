@@ -107,7 +107,7 @@ export class ClassResponsesComponent {
       toWorkgroupId: workgroupId
     });
     workgroup.hasAlert = alertNotifications.length > 0;
-    workgroup.hasNewAlert = this.workgroupHasNewAlert(alertNotifications);
+    workgroup.hasNewAlert = alertNotifications.some((alert) => !alert.timeDismissed);
     const nodeCompletionStatus = this.getCompletionStatusByWorkgroupId(workgroupId);
     workgroup.isVisible = nodeCompletionStatus.isVisible ? 1 : 0;
     workgroup.completionStatus = this.getWorkgroupCompletionStatus(nodeCompletionStatus);
@@ -143,15 +143,6 @@ export class ClassResponsesComponent {
         this.sortedWorkgroups.sort(this.createSortDescendingFunction('score'));
         break;
     }
-  }
-
-  private workgroupHasNewAlert(alertNotifications: Notification[]): boolean {
-    for (const alert of alertNotifications) {
-      if (!alert.timeDismissed) {
-        return true;
-      }
-    }
-    return false;
   }
 
   private getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {

@@ -105,15 +105,6 @@ export class MilestoneGradingViewComponent {
     }
   }
 
-  private workgroupHasNewAlert(alertNotifications: Notification[]): boolean {
-    for (const alert of alertNotifications) {
-      if (!alert.timeDismissed) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   private getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
     const completionStatus: CompletionStatus = {
       isCompleted: false,
@@ -126,7 +117,6 @@ export class MilestoneGradingViewComponent {
       const nodeStatus = studentStatus.nodeStatuses[this.nodeId];
       if (nodeStatus) {
         completionStatus.isVisible = nodeStatus.isVisible;
-        // TODO: store this info in the nodeStatus so we don't have to calculate every time?
         completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
         completionStatus.latestAnnotationTime =
           this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
@@ -291,7 +281,7 @@ export class MilestoneGradingViewComponent {
       toWorkgroupId: workgroupId
     });
     workgroup.hasAlert = alertNotifications.length > 0;
-    workgroup.hasNewAlert = this.workgroupHasNewAlert(alertNotifications);
+    workgroup.hasNewAlert = alertNotifications.some((alert) => !alert.timeDismissed);
     const completionStatus = this.getCompletionStatusByWorkgroupId(workgroupId);
     workgroup.isVisible = completionStatus.isVisible ? 1 : 0;
     workgroup.completionStatus = this.getWorkgroupCompletionStatus(completionStatus);
