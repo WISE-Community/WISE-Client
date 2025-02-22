@@ -44,17 +44,6 @@ export class MilestoneService {
     return milestoneReport ? this.getProjectMilestoneStatus(milestoneReport.id) : null;
   }
 
-  // to be deleted when NodeGradingViewComponent is removed
-  getMilestoneReportByNodeId(nodeId: string): any {
-    for (const milestoneReport of this.getProjectMilestoneReports()) {
-      const referencedComponent = this.getReferencedComponent(milestoneReport);
-      if (referencedComponent.nodeId === nodeId) {
-        return this.getProjectMilestoneStatus(milestoneReport.id);
-      }
-    }
-    return null;
-  }
-
   private getProjectMilestoneReports(): Milestone[] {
     return this.getProjectMilestones().filter((milestone) => milestone.type === 'milestoneReport');
   }
