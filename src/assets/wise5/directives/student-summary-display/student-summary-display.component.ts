@@ -235,7 +235,8 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
     if (componentState != null) {
       componentStates.push(componentState);
     }
-    this.processComponentStates(componentStates);
+    const [seriesData, count] = this.processComponentStates(componentStates);
+    this.renderGraph(seriesData, count);
   }
 
   // Come back to this...
