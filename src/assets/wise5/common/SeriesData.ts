@@ -1,17 +1,17 @@
-import { DataPoint } from './DataPoint';
+import { SeriesDataPoint } from './SeriesDataPoint';
 
 export class SeriesData {
-  private dataPoints: DataPoint[];
+  private dataPoints: SeriesDataPoint[];
 
-  constructor(dataPoints?: DataPoint[]) {
+  constructor(dataPoints?: SeriesDataPoint[]) {
     this.dataPoints = dataPoints ?? [];
   }
 
-  getDataPoints() {
+  getDataPoints(): SeriesDataPoint[] {
     return this.dataPoints;
   }
 
-  addDataPoint(dataPoint: DataPoint) {
+  addDataPoint(dataPoint: SeriesDataPoint): void {
     this.dataPoints.push(dataPoint);
   }
 }

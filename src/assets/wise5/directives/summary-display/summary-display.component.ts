@@ -1,4 +1,4 @@
-// import * as Highcharts from 'highcharts';
+import * as Highcharts from 'highcharts';
 import { Annotation } from '../../common/Annotation';
 import { AnnotationService } from '../../services/annotationService';
 import { CommonModule } from '@angular/common';
@@ -15,8 +15,7 @@ import { rgbToHex } from '../../common/color/color';
 import { SummaryService } from '../../components/summary/summaryService';
 import { tap } from 'rxjs/operators';
 import { SeriesData } from '../../common/SeriesData';
-import { DataPoint } from '../../common/DataPoint';
-import { Highcharts } from 'highcharts/modules/exporting';
+import { SeriesDataPoint } from '../../common/SeriesDataPoint';
 
 @Component({
   imports: [CommonModule, MatCardModule],
@@ -282,7 +281,7 @@ export abstract class SummaryDisplayComponent {
     const seriesData = new SeriesData();
     for (const key of Object.keys(summaryData)) {
       const count = summaryData[key];
-      const dataPoint = new DataPoint(key, count);
+      const dataPoint = new SeriesDataPoint(key, count);
       seriesData.addDataPoint(dataPoint);
     }
     return seriesData;
@@ -372,16 +371,16 @@ export abstract class SummaryDisplayComponent {
   createChoicesSeriesData(component: MultipleChoiceContent, summaryData: any): SeriesData {
     let seriesData = new SeriesData();
     this.hasCorrectness = this.hasCorrectAnswer(component);
-    for (const choice of component.choices) {
+    component.choices.forEach((choice) => {
       const count = this.getSummaryDataCount(summaryData, choice.id);
       const color = this.getDataPointColor(choice);
       let text = choice.text;
       if (this.highlightCorrectAnswer && this.chartType === 'pie') {
         text = text + ' (' + (choice.isCorrect ? $localize`Correct` : $localize`Incorrect`) + ')';
       }
-      const dataPoint = new DataPoint(text, count, color);
+      const dataPoint = new SeriesDataPoint(text, count, color);
       seriesData.addDataPoint(dataPoint);
-    }
+    });
     return seriesData;
   }
 
@@ -449,7 +448,7 @@ export abstract class SummaryDisplayComponent {
     let total = 0;
     for (let scoreValue = 1; scoreValue <= this.maxScore; scoreValue++) {
       const count = this.getSummaryDataCount(summaryData, scoreValue);
-      const dataPoint = new DataPoint(scoreValue, count);
+      const dataPoint = new SeriesDataPoint(scoreValue, count);
       seriesData.addDataPoint(dataPoint);
       total += count;
     }
@@ -578,7 +577,7 @@ export abstract class SummaryDisplayComponent {
   getIndexByName(series: any[], name: string): any {
     series.forEach((singleSeries) => {
       if (singleSeries.data != null) {
-        singleSeries.data.entries().foreach(([i, dataPoint]) => {
+        singleSeries.data.entries().forEach(([i, dataPoint]) => {
           if (this.cleanLabel(dataPoint.name) === this.cleanLabel(name)) {
             return i;
           }
