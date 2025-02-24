@@ -14,6 +14,8 @@ import { ProjectService } from '../../services/projectService';
 import { rgbToHex } from '../../common/color/color';
 import { SummaryService } from '../../components/summary/summaryService';
 import { tap } from 'rxjs/operators';
+import { SeriesData } from '../../common/SeriesData';
+import { SeriesDataPoint } from '../../common/SeriesDataPoint';
 
 @Component({
   imports: [CommonModule, MatCardModule],
@@ -116,10 +118,6 @@ export abstract class SummaryDisplayComponent {
     return this.configService.isStudentRun();
   }
 
-  private isClassroomMonitor(): boolean {
-    return this.configService.isClassroomMonitor();
-  }
-
   protected renderDisplay(): void {
     if (this.studentDataType === 'responses') {
       this.renderResponses();
@@ -136,7 +134,8 @@ export abstract class SummaryDisplayComponent {
 
   protected renderClassResponses(): void {
     this.getLatestWork().subscribe((componentStates = []) => {
-      this.processComponentStates(componentStates);
+      const [seriesData, count] = this.processComponentStates(componentStates);
+      this.renderGraph(seriesData, count);
     });
   }
 
@@ -223,24 +222,28 @@ export abstract class SummaryDisplayComponent {
   }
 
   // MOVE renderGraph() TO renderClass/SelfResponse(s)()
-  // MOVE calculateCountsAndPercentage() TO AFTER IF/ELSE BEFORE RETURN {seriesData, total}
-  protected processComponentStates(componentStates: ComponentState[]): void {
+  protected processComponentStates(componentStates: ComponentState[]): [SeriesData, number] {
+    let seriesData: SeriesData;
+    let count: number;
     if (this.otherComponentType === 'MultipleChoice') {
       // PUT THIS DATA IN SOMETHING LIKE A MultipleChoiceSummaryData (maybe)
       const summaryData = this.createChoicesSummaryData(
         this.otherComponent as MultipleChoiceContent,
         componentStates
       );
-      const seriesData = this.createChoicesSeriesData(this.otherComponent, summaryData);
-      this.calculateCountsAndPercentage(componentStates.length);
-      this.renderGraph(seriesData, componentStates.length);
+      seriesData = this.createChoicesSeriesData(
+        this.otherComponent as MultipleChoiceContent,
+        summaryData
+      );
+      count = componentStates.length;
     } else if (this.otherComponentType === 'Table') {
       const summaryData = this.createTableSummaryData(componentStates);
-      const seriesData = this.createTableSeriesData(summaryData);
-      const totalCount = this.getTotalTableCount(seriesData);
-      this.calculateCountsAndPercentage(componentStates.length);
-      this.renderGraph(seriesData, totalCount);
+      seriesData = this.createTableSeriesData(summaryData);
+      count = this.getTotalTableCount(seriesData);
     }
+    this.calculateCountsAndPercentage(componentStates.length);
+    // this.renderGraph(seriesData, count); // REMOVE THIS LATER
+    return [seriesData, count];
   }
 
   createTableSummaryData(componentStates: ComponentState[]): any {
@@ -274,21 +277,19 @@ export abstract class SummaryDisplayComponent {
       .join(' ');
   }
 
-  createTableSeriesData(summaryData: any): any[] {
-    const data = [];
+  createTableSeriesData(summaryData: any): SeriesData {
+    const seriesData = new SeriesData();
     for (const key of Object.keys(summaryData)) {
       const count = summaryData[key];
-      const dataPoint = this.createDataPoint(key, count, null);
-      data.push(dataPoint);
+      const dataPoint = new SeriesDataPoint(key, count);
+      seriesData.addDataPoint(dataPoint);
     }
-    return data;
+    return seriesData;
   }
 
-  getTotalTableCount(seriesData: any[]): number {
+  getTotalTableCount(seriesData: SeriesData): number {
     let total = 0;
-    for (const dataPoint of seriesData) {
-      total += dataPoint.y;
-    }
+    seriesData.getDataPoints().forEach((dataPoint) => (total += dataPoint.y));
     return total;
   }
 
@@ -310,9 +311,9 @@ export abstract class SummaryDisplayComponent {
   protected processScoreAnnotations(annotations: Annotation[]): void {
     this.updateMaxScoreIfNecessary(annotations);
     const summaryData = this.createScoresSummaryData(annotations);
-    const { data, total } = this.createScoresSeriesData(summaryData);
+    const [seriesData, total] = this.createScoresSeriesData(summaryData);
     this.calculateCountsAndPercentage(annotations.length);
-    this.renderGraph(data, total);
+    this.renderGraph(seriesData, total);
   }
 
   private updateMaxScoreIfNecessary(annotations: Annotation[]): void {
@@ -367,20 +368,20 @@ export abstract class SummaryDisplayComponent {
   }
 
   // Not any
-  createChoicesSeriesData(component: any, summaryData: any): any[] {
-    const data = [];
+  createChoicesSeriesData(component: MultipleChoiceContent, summaryData: any): SeriesData {
+    let seriesData = new SeriesData();
     this.hasCorrectness = this.hasCorrectAnswer(component);
-    for (const choice of component.choices) {
+    component.choices.forEach((choice) => {
       const count = this.getSummaryDataCount(summaryData, choice.id);
       const color = this.getDataPointColor(choice);
       let text = choice.text;
       if (this.highlightCorrectAnswer && this.chartType === 'pie') {
         text = text + ' (' + (choice.isCorrect ? $localize`Correct` : $localize`Incorrect`) + ')';
       }
-      const dataPoint = this.createDataPoint(text, count, color);
-      data.push(dataPoint);
-    }
-    return data;
+      const dataPoint = new SeriesDataPoint(text, count, color);
+      seriesData.addDataPoint(dataPoint);
+    });
+    return seriesData;
   }
 
   // Not any
@@ -404,22 +405,6 @@ export abstract class SummaryDisplayComponent {
       }
     }
     return color;
-  }
-
-  // Not any
-  createDataPoint(name: any, y: any, color: string = null): any {
-    if (color) {
-      return {
-        name: name,
-        y: y,
-        color: color
-      };
-    } else {
-      return {
-        name: name,
-        y: y
-      };
-    }
   }
 
   // Not any
@@ -458,32 +443,32 @@ export abstract class SummaryDisplayComponent {
   }
 
   // Not any
-  private createScoresSeriesData(summaryData: any): any {
-    const data = [];
+  private createScoresSeriesData(summaryData: any): [SeriesData, number] {
+    const seriesData = new SeriesData();
     let total = 0;
     for (let scoreValue = 1; scoreValue <= this.maxScore; scoreValue++) {
       const count = this.getSummaryDataCount(summaryData, scoreValue);
-      const dataPoint = this.createDataPoint(scoreValue, count, null);
-      data.push(dataPoint);
+      const dataPoint = new SeriesDataPoint(scoreValue, count);
+      seriesData.addDataPoint(dataPoint);
       total += count;
     }
-    return { data: data, total: total };
+    return [seriesData, total];
   }
 
-  private renderGraph(data: any[], total: number): void {
+  protected renderGraph(seriesData: SeriesData, total: number): void {
     const chartType = this.chartType;
     const title = this.getGraphTitle();
     const xAxisType = 'category';
-    const series = this.createSeries(data);
+    const series = this.createSeries(seriesData);
     const colors = this.getChartColors();
     this.setCustomLabelColors(series, colors, this.customLabelColors);
     this.chartConfig = this.createChartConfig(chartType, title, xAxisType, total, series, colors);
   }
 
-  createSeries(data: any[]): any[] {
+  createSeries(seriesData: SeriesData): any[] {
     const series: any[] = [
       {
-        data: data,
+        data: seriesData.getDataPoints(),
         dataLabels: {
           enabled: true
         }
@@ -506,13 +491,18 @@ export abstract class SummaryDisplayComponent {
   }
 
   getGraphTitle(): string {
-    if (this.isSourceSelf()) {
-      return this.getGraphTitleForSelf();
-    } else if (this.isSourcePeriod()) {
-      return this.getGraphTitleForPeriod();
-    } else {
-      return this.getGraphTitleForClass();
+    let graphTitle: string;
+    switch (this.source) {
+      case 'self':
+        graphTitle = this.getGraphTitleForSelf();
+        break;
+      case 'period':
+        graphTitle = this.getGraphTitleForPeriod();
+        break;
+      default:
+        graphTitle = this.getGraphTitleForClass();
     }
+    return graphTitle;
   }
 
   private getGraphTitleForSelf(): string {
@@ -585,15 +575,15 @@ export abstract class SummaryDisplayComponent {
   }
 
   getIndexByName(series: any[], name: string): any {
-    for (const singleSeries of series) {
+    series.forEach((singleSeries) => {
       if (singleSeries.data != null) {
-        for (const [i, dataPoint] of singleSeries.data.entries()) {
+        singleSeries.data.entries().forEach(([i, dataPoint]) => {
           if (this.cleanLabel(dataPoint.name) === this.cleanLabel(name)) {
             return i;
           }
-        }
+        });
       }
-    }
+    });
     return null;
   }
 
@@ -717,16 +707,11 @@ export abstract class SummaryDisplayComponent {
     return Math.floor((100 * numResponses) / totalWorkgroups);
   }
 
-  // Not any
-  getSummaryDataCount(summaryData: any, id: any): any {
+  getSummaryDataCount(summaryData: any, id: any): number {
     return summaryData[id].count;
   }
 
   protected isSourceSelf(): boolean {
     return this.source === 'self';
-  }
-
-  private isSourcePeriod(): boolean {
-    return this.source === 'period';
   }
 }
