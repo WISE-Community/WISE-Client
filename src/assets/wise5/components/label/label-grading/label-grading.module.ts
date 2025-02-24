@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { LabelShowWorkModule } from '../label-show-work/label-show-work.module';
 import { LabelGradingComponent } from './label-grading.component';
+import { LabelShowWorkComponent } from '../label-show-work/label-show-work.component';
 
 @NgModule({
   declarations: [LabelGradingComponent],
-  imports: [LabelShowWorkModule],
+  imports: [LabelShowWorkComponent],
   exports: [LabelGradingComponent]
 })
 export class LabelGradingModule {}
