@@ -287,11 +287,17 @@ export class ClassResponsesComponent {
   }
 
   protected setSort(criteria: string): void {
-    this.sort = criteria;
+    if (this.sort === criteria) {
+      this.sort = `-${criteria}`;
+    } else {
+      this.sort = criteria;
+    }
+    this.dataService.nodeGradingSort = this.sort;
+    this.sortWorkgroups();
   }
 
   protected isWorkgroupShown(workgroup: any): boolean {
-    return true; // implement actual logic
+    return this.dataService.isWorkgroupShown(workgroup);
   }
 
   protected onUpdateExpand({ workgroupId, value }): void {

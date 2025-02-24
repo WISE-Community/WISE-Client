@@ -41,13 +41,14 @@
         i18n-aria-label
       >
         <span i18n fxLayout="row" fxLayoutAlign="start center">Team</span>
-        <mat-icon
-          *ngIf="sort === 'team' || sort === '-team'"
-          class="table--list__thead__sort"
-          [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-team' }"
-        >
-          arrow_drop_up
-        </mat-icon>
+        @if (sort === 'team' || sort === '-team') {
+          <mat-icon
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-team' }"
+          >
+            arrow_drop_up
+          </mat-icon>
+        }
       </button>
       <button
         mat-button
@@ -60,13 +61,14 @@
         i18n-aria-label
       >
         <span i18n>Status</span>
-        <mat-icon
-          *ngIf="sort === 'status' || sort === '-status'"
-          class="table--list__thead__sort"
-          [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
-        >
-          arrow_drop_up
-        </mat-icon>
+        @if (sort === 'status' || sort === '-status') {
+          <mat-icon
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
+          >
+            arrow_drop_up
+          </mat-icon>
+        }
       </button>
       <button
         mat-button
@@ -79,13 +81,14 @@
         i18n-aria-label
       >
         <span i18n>Score</span>
-        <mat-icon
-          *ngIf="sort === 'score' || sort === '-score'"
-          class="table--list__thead__sort"
-          [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
-        >
-          arrow_drop_up
-        </mat-icon>
+        @if (sort === 'score' || sort === '-score') {
+          <mat-icon
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
+          >
+            arrow_drop_up
+          </mat-icon>
+        }
       </button>
     </div>
   </mat-list-item>
