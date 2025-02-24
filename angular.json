@@ -23,7 +23,8 @@
             ],
             "aot": true,
             "outputPath": {
-              "base": "dist"
+              "base": "dist",
+              "browser": ""
             },
             "index": "src/index.html",
             "tsConfig": "src/tsconfig.app.json",
@@ -90,7 +91,8 @@
                 }
               ],
               "outputPath": {
-                "base": "dist"
+                "base": "dist",
+                "browser": ""
               },
               "baseHref": "/"
             },
