@@ -3,9 +3,10 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { EmbeddedContent } from '../EmbeddedContent';
 
 @Component({
-  selector: 'edit-embedded-advanced',
-  templateUrl: 'edit-embedded-advanced.component.html',
-  styleUrls: ['edit-embedded-advanced.component.scss']
+    selector: 'edit-embedded-advanced',
+    templateUrl: 'edit-embedded-advanced.component.html',
+    styleUrls: ['edit-embedded-advanced.component.scss'],
+    standalone: false
 })
 export class EditEmbeddedAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = [

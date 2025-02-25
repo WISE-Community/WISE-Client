@@ -6,9 +6,10 @@ import { AddProjectDialogComponent } from '../add-project-dialog/add-project-dia
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-student-home',
-  templateUrl: './student-home.component.html',
-  styleUrls: ['./student-home.component.scss']
+    selector: 'app-student-home',
+    templateUrl: './student-home.component.html',
+    styleUrls: ['./student-home.component.scss'],
+    standalone: false
 })
 export class StudentHomeComponent implements OnInit {
   user: User = new User();

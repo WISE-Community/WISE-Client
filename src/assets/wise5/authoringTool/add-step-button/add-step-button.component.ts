@@ -9,11 +9,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
-  selector: 'add-step-button',
-  standalone: true,
-  styles: [
-    `
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
+    selector: 'add-step-button',
+    styles: [
+        `
       .rotate-180 {
         transform: rotate(180deg);
       }
@@ -21,8 +20,8 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
         transform: scaleY(-1);
       }
     `
-  ],
-  templateUrl: './add-step-button.component.html'
+    ],
+    templateUrl: './add-step-button.component.html'
 })
 export class AddStepButtonComponent {
   protected canAddAfter: boolean;

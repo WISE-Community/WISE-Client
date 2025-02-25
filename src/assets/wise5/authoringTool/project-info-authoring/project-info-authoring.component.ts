@@ -6,9 +6,10 @@ import { Subject, debounceTime } from 'rxjs';
 import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 
 @Component({
-  selector: 'project-info-authoring',
-  templateUrl: './project-info-authoring.component.html',
-  styleUrls: ['./project-info-authoring.component.scss']
+    selector: 'project-info-authoring',
+    templateUrl: './project-info-authoring.component.html',
+    styleUrls: ['./project-info-authoring.component.scss'],
+    standalone: false
 })
 export class ProjectInfoAuthoringComponent {
   isEditingProjectIcon: boolean = false;

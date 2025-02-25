@@ -11,9 +11,10 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 
 @Component({
-  selector: 'show-my-work-student',
-  templateUrl: './show-my-work-student.component.html',
-  styleUrls: ['./show-my-work-student.component.scss']
+    selector: 'show-my-work-student',
+    templateUrl: './show-my-work-student.component.html',
+    styleUrls: ['./show-my-work-student.component.scss'],
+    standalone: false
 })
 export class ShowMyWorkStudentComponent extends ComponentStudent {
   showWorkComponentContent: any;

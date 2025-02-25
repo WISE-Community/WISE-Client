@@ -4,9 +4,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-  selector: 'branch-criteria-help',
-  standalone: true,
-  imports: [MatButtonModule, MatDialogModule, MatDividerModule],
-  templateUrl: './branch-criteria-help.component.html'
+    selector: 'branch-criteria-help',
+    imports: [MatButtonModule, MatDialogModule, MatDividerModule],
+    templateUrl: './branch-criteria-help.component.html'
 })
 export class BranchCriteriaHelpComponent {}

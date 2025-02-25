@@ -7,9 +7,10 @@ import { LibraryService } from '../../services/library.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-teacher-home',
-  templateUrl: './teacher-home.component.html',
-  styleUrls: ['./teacher-home.component.scss']
+    selector: 'app-teacher-home',
+    templateUrl: './teacher-home.component.html',
+    styleUrls: ['./teacher-home.component.scss'],
+    standalone: false
 })
 export class TeacherHomeComponent implements OnInit {
   @ViewChild('tabs', { static: true }) tabs: MatTabGroup;

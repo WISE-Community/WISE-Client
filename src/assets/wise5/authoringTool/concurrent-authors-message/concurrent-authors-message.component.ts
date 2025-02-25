@@ -7,9 +7,10 @@ import { SessionService } from '../../services/sessionService';
 import { NotifyAuthorService } from '../../services/notifyAuthorService';
 
 @Component({
-  selector: 'concurrent-authors-message',
-  templateUrl: 'concurrent-authors-message.component.html',
-  styles: ['.concurrent-authors { padding: 4px; }']
+    selector: 'concurrent-authors-message',
+    templateUrl: 'concurrent-authors-message.component.html',
+    styles: ['.concurrent-authors { padding: 4px; }'],
+    standalone: false
 })
 export class ConcurrentAuthorsMessageComponent {
   protected message: string = '';

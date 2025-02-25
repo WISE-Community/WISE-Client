@@ -10,9 +10,10 @@ import { TableService } from '../../components/table/tableService';
 import { NodeService } from '../../services/nodeService';
 
 @Component({
-  selector: 'generate-image-dialog',
-  templateUrl: './generate-image-dialog.component.html',
-  styleUrls: ['./generate-image-dialog.component.scss']
+    selector: 'generate-image-dialog',
+    templateUrl: './generate-image-dialog.component.html',
+    styleUrls: ['./generate-image-dialog.component.scss'],
+    standalone: false
 })
 export class GenerateImageDialogComponent implements OnInit {
   componentState: any;

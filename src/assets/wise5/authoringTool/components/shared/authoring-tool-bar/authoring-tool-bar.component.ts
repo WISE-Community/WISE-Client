@@ -11,19 +11,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    SaveIndicatorComponent,
-    StepToolsComponent
-  ],
-  selector: 'authoring-tool-bar',
-  standalone: true,
-  styleUrl: './authoring-tool-bar.component.scss',
-  templateUrl: './authoring-tool-bar.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatToolbarModule,
+        SaveIndicatorComponent,
+        StepToolsComponent
+    ],
+    selector: 'authoring-tool-bar',
+    styleUrl: './authoring-tool-bar.component.scss',
+    templateUrl: './authoring-tool-bar.component.html'
 })
 export class AuthoringToolBarComponent {
   protected globalMessage: any = {};

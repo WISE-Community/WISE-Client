@@ -11,11 +11,10 @@ import { MatCardModule } from '@angular/material/card';
 import { HighchartsChartModule } from 'highcharts-angular';
 
 @Component({
-  imports: [CommonModule, HighchartsChartModule, MatCardModule],
-  selector: 'student-summary-display',
-  standalone: true,
-  styleUrl: '../summary-display/summary-display.component.scss',
-  templateUrl: '../summary-display/summary-display.component.html'
+    imports: [CommonModule, HighchartsChartModule, MatCardModule],
+    selector: 'student-summary-display',
+    styleUrl: '../summary-display/summary-display.component.scss',
+    templateUrl: '../summary-display/summary-display.component.html'
 })
 export class StudentSummaryDisplay extends SummaryDisplay {
   private studentWorkSavedToServerSubscription: Subscription;

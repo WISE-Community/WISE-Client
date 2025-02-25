@@ -8,10 +8,9 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatDivider } from '@angular/material/divider';
 
 @Component({
-  imports: [MatDivider, FlexModule, MatButton, RouterLink, NgIf, MatProgressBar],
-  standalone: true,
-  styleUrls: ['./peer-review-and-revision.component.scss', '../../add-content.scss'],
-  templateUrl: './peer-review-and-revision.component.html'
+    imports: [MatDivider, FlexModule, MatButton, RouterLink, NgIf, MatProgressBar],
+    styleUrls: ['./peer-review-and-revision.component.scss', '../../add-content.scss'],
+    templateUrl: './peer-review-and-revision.component.html'
 })
 export class PeerReviewAndRevisionComponent extends ConfigureStructureComponent {
   protected groupsPath = `peer-review-and-revision/groups.json`;

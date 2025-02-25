@@ -22,10 +22,9 @@ import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon
 import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule, HelpIconComponent],
-  selector: 'component',
-  standalone: true,
-  templateUrl: 'component.component.html'
+    imports: [CommonModule, HelpIconComponent],
+    selector: 'component',
+    templateUrl: 'component.component.html'
 })
 export class ComponentComponent {
   protected component: WISEComponent;

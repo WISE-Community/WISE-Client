@@ -11,9 +11,10 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  selector: 'export-student-work',
-  templateUrl: './export-student-work.component.html',
-  styleUrl: './export-student-work.component.scss'
+    selector: 'export-student-work',
+    templateUrl: './export-student-work.component.html',
+    styleUrl: './export-student-work.component.scss',
+    standalone: false
 })
 export class ExportStudentWorkComponent extends AbstractExportComponent {
   protected canViewStudentNames: boolean = false;

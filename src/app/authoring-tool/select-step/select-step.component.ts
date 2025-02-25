@@ -6,10 +6,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 
 @Component({
-  selector: 'select-step',
-  templateUrl: './select-step.component.html',
-  standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule]
+    selector: 'select-step',
+    templateUrl: './select-step.component.html',
+    imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule]
 })
 export class SelectStepComponent {
   @Input() nodeId: string;

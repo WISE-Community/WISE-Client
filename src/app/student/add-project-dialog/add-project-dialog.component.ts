@@ -5,9 +5,10 @@ import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-add-project-dialog',
-  templateUrl: './add-project-dialog.component.html',
-  styleUrls: ['./add-project-dialog.component.scss']
+    selector: 'app-add-project-dialog',
+    templateUrl: './add-project-dialog.component.html',
+    styleUrls: ['./add-project-dialog.component.scss'],
+    standalone: false
 })
 export class AddProjectDialogComponent implements OnInit {
   validRunCodeSyntaxRegEx: any = /^[a-zA-Z]*\d{3,4}$/;

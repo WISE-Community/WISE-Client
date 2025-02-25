@@ -15,21 +15,20 @@ import { WorkgroupSelectAutocompleteComponent } from '../../../../app/classroom-
 import { ProjectProgressComponent } from '../classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    MatTableModule,
-    ProjectProgressComponent,
-    WorkgroupSelectAutocompleteComponent
-  ],
-  selector: 'student-progress',
-  standalone: true,
-  styleUrl: './student-progress.component.scss',
-  templateUrl: './student-progress.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule,
+        MatTableModule,
+        ProjectProgressComponent,
+        WorkgroupSelectAutocompleteComponent
+    ],
+    selector: 'student-progress',
+    styleUrl: './student-progress.component.scss',
+    templateUrl: './student-progress.component.html'
 })
 export class StudentProgressComponent implements OnInit {
   protected permissions: any;

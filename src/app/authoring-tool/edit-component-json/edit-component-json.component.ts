@@ -6,9 +6,10 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 import { Component as WISEComponent } from '../../../assets/wise5/common/Component';
 
 @Component({
-  selector: 'edit-component-json',
-  templateUrl: 'edit-component-json.component.html',
-  styleUrls: ['edit-component-json.component.scss']
+    selector: 'edit-component-json',
+    templateUrl: 'edit-component-json.component.html',
+    styleUrls: ['edit-component-json.component.scss'],
+    standalone: false
 })
 export class EditComponentJsonComponent {
   validComponentContentJSONString: string;

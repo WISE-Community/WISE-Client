@@ -22,7 +22,6 @@ import { CommonModule } from '@angular/common';
     ShowStudentInfoComponent
   ],
   selector: 'manage-user',
-  standalone: true,
   styleUrl: 'manage-user.component.scss',
   templateUrl: 'manage-user.component.html'
 })

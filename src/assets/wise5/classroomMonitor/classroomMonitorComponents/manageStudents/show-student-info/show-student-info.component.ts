@@ -5,7 +5,6 @@ import { ConfigService } from '../../../../services/configService';
 @Component({
   imports: [CommonModule],
   selector: 'show-student-info',
-  standalone: true,
   template: `
     @if (canViewStudentNames) {
       <span class="username"
@@ -19,8 +18,8 @@ import { ConfigService } from '../../../../services/configService';
   `
 })
 export class ShowStudentInfoComponent implements OnInit {
-  @Input() user: any;
   protected canViewStudentNames: boolean;
+  @Input() user: any;
 
   constructor(private configService: ConfigService) {}
 

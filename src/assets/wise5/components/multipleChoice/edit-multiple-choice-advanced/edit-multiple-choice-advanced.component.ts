@@ -3,9 +3,10 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 @Component({
-  selector: 'edit-multiple-choice-advanced',
-  templateUrl: 'edit-multiple-choice-advanced.component.html',
-  styleUrls: ['edit-multiple-choice-advanced.component.scss']
+    selector: 'edit-multiple-choice-advanced',
+    templateUrl: 'edit-multiple-choice-advanced.component.html',
+    styleUrls: ['edit-multiple-choice-advanced.component.scss'],
+    standalone: false
 })
 export class EditMultipleChoiceAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['MultipleChoice'];

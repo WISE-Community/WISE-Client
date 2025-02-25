@@ -3,11 +3,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
-  imports: [CommonModule, MatChipsModule],
-  selector: 'color-chooser',
-  standalone: true,
-  styleUrl: './color-chooser.component.scss',
-  templateUrl: './color-chooser.component.html'
+    imports: [CommonModule, MatChipsModule],
+    selector: 'color-chooser',
+    styleUrl: './color-chooser.component.scss',
+    templateUrl: './color-chooser.component.html'
 })
 export class ColorChooserComponent {
   @Output() chooseColorEvent: EventEmitter<string> = new EventEmitter();

@@ -5,10 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
-  selector: 'insert-node-after-button',
-  standalone: true,
-  templateUrl: './insert-node-after-button.component.html'
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
+    selector: 'insert-node-after-button',
+    templateUrl: './insert-node-after-button.component.html'
 })
 export class InsertNodeAfterButtonComponent {
   @Input() disabled: boolean;

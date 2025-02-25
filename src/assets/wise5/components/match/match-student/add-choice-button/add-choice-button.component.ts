@@ -4,10 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-  selector: 'add-choice-button',
-  standalone: true,
-  template: `
+    imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+    selector: 'add-choice-button',
+    template: `
     <button
       mat-mini-fab
       color="primary"

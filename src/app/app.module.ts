@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -72,12 +72,10 @@ export function initialize(
     StudentService,
     TeacherService,
     UserService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initialize,
-      deps: [ConfigService, UserService],
-      multi: true
-    },
+    provideAppInitializer(() => {
+        const initializerFn = (initialize)(inject(ConfigService), inject(UserService));
+        return initializerFn();
+      }),
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {

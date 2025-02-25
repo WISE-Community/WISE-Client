@@ -31,7 +31,6 @@ import { UpdateWorkgroupService } from '../../../../../../app/services/updateWor
     MatIconModule
   ],
   selector: 'manage-team',
-  standalone: true,
   styleUrl: 'manage-team.component.scss',
   templateUrl: 'manage-team.component.html'
 })

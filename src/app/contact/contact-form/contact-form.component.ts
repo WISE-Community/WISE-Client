@@ -12,10 +12,11 @@ import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { Subscription, lastValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'app-contact-form',
-  templateUrl: './contact-form.component.html',
-  styleUrls: ['./contact-form.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-contact-form',
+    templateUrl: './contact-form.component.html',
+    styleUrls: ['./contact-form.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ContactFormComponent implements OnInit {
   issueTypes: object[] = [];

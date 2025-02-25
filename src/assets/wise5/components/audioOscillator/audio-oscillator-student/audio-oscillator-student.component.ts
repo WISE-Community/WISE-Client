@@ -13,9 +13,10 @@ import { AudioOscillatorService } from '../audioOscillatorService';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
-  selector: 'audio-oscillator-student',
-  templateUrl: 'audio-oscillator-student.component.html',
-  styleUrls: ['audio-oscillator-student.component.scss']
+    selector: 'audio-oscillator-student',
+    templateUrl: 'audio-oscillator-student.component.html',
+    styleUrls: ['audio-oscillator-student.component.scss'],
+    standalone: false
 })
 export class AudioOscillatorStudent extends ComponentStudent {
   amplitude: number;

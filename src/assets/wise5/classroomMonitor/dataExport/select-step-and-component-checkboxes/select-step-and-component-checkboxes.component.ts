@@ -3,9 +3,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConfigService } from '../../../services/configService';
 
 @Component({
-  selector: 'select-step-and-component-checkboxes',
-  templateUrl: './select-step-and-component-checkboxes.component.html',
-  styleUrls: ['./select-step-and-component-checkboxes.component.scss']
+    selector: 'select-step-and-component-checkboxes',
+    templateUrl: './select-step-and-component-checkboxes.component.html',
+    styleUrls: ['./select-step-and-component-checkboxes.component.scss'],
+    standalone: false
 })
 export class SelectStepAndComponentCheckboxesComponent {
   @Input() exportStepSelectionType: string = 'exportAllSteps';

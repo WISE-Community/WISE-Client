@@ -9,7 +9,6 @@ import { DetectedIdeasComponent } from '../detected-ideas/detected-ideas.compone
 @Component({
   imports: [CommonModule, DetectedIdeasComponent, DialogResponseComponent],
   selector: 'dialog-responses',
-  standalone: true,
   styleUrl: './dialog-responses.component.scss',
   templateUrl: './dialog-responses.component.html'
 })

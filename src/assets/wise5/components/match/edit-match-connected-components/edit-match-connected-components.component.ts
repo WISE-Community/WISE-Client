@@ -4,12 +4,12 @@ import { copy } from '../../../common/object/object';
 import { ProjectService } from '../../../services/projectService';
 
 @Component({
-  selector: 'edit-match-connected-components',
-  templateUrl:
-    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.html',
-  styleUrls: [
-    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss'
-  ]
+    selector: 'edit-match-connected-components',
+    templateUrl: '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.html',
+    styleUrls: [
+        '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss'
+    ],
+    standalone: false
 })
 export class EditMatchConnectedComponentsComponent extends EditConnectedComponentsComponent {
   constructor(protected ProjectService: ProjectService) {

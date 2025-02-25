@@ -12,21 +12,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BranchCriteriaHelpComponent } from './branch-criteria-help/branch-criteria-help.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatTooltipModule
-  ],
-  selector: 'select-branch-criteria',
-  standalone: true,
-  styleUrl: './select-branch-criteria.component.scss',
-  templateUrl: './select-branch-criteria.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatTooltipModule
+    ],
+    selector: 'select-branch-criteria',
+    styleUrl: './select-branch-criteria.component.scss',
+    templateUrl: './select-branch-criteria.component.html'
 })
 export class SelectBranchCriteriaComponent {
   protected readonly BRANCH_CRITERIA: BranchCriteria[] = BRANCH_CRITERIA;

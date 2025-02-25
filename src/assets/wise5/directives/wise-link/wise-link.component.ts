@@ -5,9 +5,10 @@ import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 
 @Component({
-  selector: 'wise-link',
-  templateUrl: './wise-link.component.html',
-  styleUrls: ['./wise-link.component.scss']
+    selector: 'wise-link',
+    templateUrl: './wise-link.component.html',
+    styleUrls: ['./wise-link.component.scss'],
+    standalone: false
 })
 export class WiseLinkComponent implements OnInit {
   @Input() linkClass: string;

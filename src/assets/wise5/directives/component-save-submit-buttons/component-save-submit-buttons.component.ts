@@ -6,11 +6,10 @@ import { ComponentStateInfoComponent } from '../../common/component-state-info/c
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, ComponentStateInfoComponent, MatButtonModule],
-  selector: 'component-save-submit-buttons',
-  standalone: true,
-  styleUrl: 'component-save-submit-buttons.component.scss',
-  templateUrl: 'component-save-submit-buttons.component.html'
+    imports: [CommonModule, FlexLayoutModule, ComponentStateInfoComponent, MatButtonModule],
+    selector: 'component-save-submit-buttons',
+    styleUrl: 'component-save-submit-buttons.component.scss',
+    templateUrl: 'component-save-submit-buttons.component.html'
 })
 export class ComponentSaveSubmitButtonsComponent {
   @Input() componentState: ComponentState;

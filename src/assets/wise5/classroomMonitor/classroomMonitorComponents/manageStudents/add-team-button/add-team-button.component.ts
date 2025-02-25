@@ -3,9 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.component';
 
 @Component({
-  selector: 'add-team-button',
-  templateUrl: './add-team-button.component.html',
-  styleUrls: ['./add-team-button.component.scss']
+    selector: 'add-team-button',
+    templateUrl: './add-team-button.component.html',
+    styleUrls: ['./add-team-button.component.scss'],
+    standalone: false
 })
 export class AddTeamButtonComponent {
   isDisabled: boolean;

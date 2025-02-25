@@ -18,10 +18,11 @@ import { MilestoneDetailsDialogComponent } from '../../milestones/milestone-deta
 import { Annotation } from '../../../../common/Annotation';
 
 @Component({
-  selector: 'node-grading-view',
-  templateUrl: './node-grading-view.component.html',
-  styleUrls: ['./node-grading-view.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'node-grading-view',
+    templateUrl: './node-grading-view.component.html',
+    styleUrls: ['./node-grading-view.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NodeGradingViewComponent implements OnInit {
   canViewStudentNames: boolean;

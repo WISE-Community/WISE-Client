@@ -31,9 +31,10 @@ import { applyMixins } from '../../../common/apply-mixins';
 import { ComputerAvatarInitializer } from '../../../common/computer-avatar/computer-avatar-initializer';
 
 @Component({
-  selector: 'dialog-guidance-student',
-  templateUrl: './dialog-guidance-student.component.html',
-  styleUrls: ['./dialog-guidance-student.component.scss']
+    selector: 'dialog-guidance-student',
+    templateUrl: './dialog-guidance-student.component.html',
+    styleUrls: ['./dialog-guidance-student.component.scss'],
+    standalone: false
 })
 export class DialogGuidanceStudentComponent extends ComponentStudent {
   component: DialogGuidanceComponent;

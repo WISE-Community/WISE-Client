@@ -15,10 +15,11 @@ import { ComponentStateRequest } from '../../ComponentStateRequest';
 import { DiscussionService } from '../discussionService';
 
 @Component({
-  selector: 'discussion-student',
-  templateUrl: 'discussion-student.component.html',
-  styleUrls: ['discussion-student.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'discussion-student',
+    templateUrl: 'discussion-student.component.html',
+    styleUrls: ['discussion-student.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class DiscussionStudent extends ComponentStudent {
   classResponses: any[] = [];

@@ -6,9 +6,10 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 import { NodeService } from '../../../services/nodeService';
 
 @Component({
-  selector: 'concept-map-show-work',
-  templateUrl: 'concept-map-show-work.component.html',
-  styleUrls: ['concept-map-show-work.component.scss']
+    selector: 'concept-map-show-work',
+    templateUrl: 'concept-map-show-work.component.html',
+    styleUrls: ['concept-map-show-work.component.scss'],
+    standalone: false
 })
 export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
   svgId: string;

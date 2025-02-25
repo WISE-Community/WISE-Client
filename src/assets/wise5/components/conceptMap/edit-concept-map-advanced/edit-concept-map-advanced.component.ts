@@ -6,9 +6,10 @@ import { ConceptMapContent } from '../ConceptMapContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'edit-concept-map-advanced',
-  templateUrl: 'edit-concept-map-advanced.component.html',
-  styleUrls: ['edit-concept-map-advanced.component.scss']
+    selector: 'edit-concept-map-advanced',
+    templateUrl: 'edit-concept-map-advanced.component.html',
+    styleUrls: ['edit-concept-map-advanced.component.scss'],
+    standalone: false
 })
 export class EditConceptMapAdvancedComponent extends EditAdvancedComponentComponent {
   componentContent: ConceptMapContent;

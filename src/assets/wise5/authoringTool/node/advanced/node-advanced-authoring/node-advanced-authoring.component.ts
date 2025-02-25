@@ -3,9 +3,10 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'node-advanced-authoring',
-  templateUrl: './node-advanced-authoring.component.html',
-  styleUrls: ['./node-advanced-authoring.component.scss']
+    selector: 'node-advanced-authoring',
+    templateUrl: './node-advanced-authoring.component.html',
+    styleUrls: ['./node-advanced-authoring.component.scss'],
+    standalone: false
 })
 export class NodeAdvancedAuthoringComponent implements OnInit {
   protected isGroupNode: boolean;

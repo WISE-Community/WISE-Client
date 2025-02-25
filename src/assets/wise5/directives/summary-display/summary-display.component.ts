@@ -15,11 +15,10 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  imports: [CommonModule, MatCardModule],
-  selector: 'summary-display',
-  standalone: true,
-  styleUrl: 'summary-display.component.scss',
-  templateUrl: 'summary-display.component.html'
+    imports: [CommonModule, MatCardModule],
+    selector: 'summary-display',
+    styleUrl: 'summary-display.component.scss',
+    templateUrl: 'summary-display.component.html'
 })
 export abstract class SummaryDisplay {
   chartConfig: any;

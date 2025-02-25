@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../app/authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
 
 @Component({
-  selector: 'edit-draw-connected-components',
-  templateUrl: './edit-draw-connected-components.component.html',
-  styleUrls: [
-    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
-    './edit-draw-connected-components.component.scss'
-  ]
+    selector: 'edit-draw-connected-components',
+    templateUrl: './edit-draw-connected-components.component.html',
+    styleUrls: [
+        '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
+        './edit-draw-connected-components.component.scss'
+    ],
+    standalone: false
 })
 export class EditDrawConnectedComponentsComponent extends EditConnectedComponentsWithBackgroundComponent {
   componentTypesThatCanImportWorkAsBackground: string[] = [

@@ -13,20 +13,19 @@ import { EditComponentAnnotationsComponent } from '../edit-component-annotations
 import { Observable } from 'rxjs';
 
 @Component({
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    MatListModule,
-    MatButtonModule,
-    FlexLayoutModule,
-    ComponentGradingComponent,
-    ComponentStateInfoComponent,
-    EditComponentAnnotationsComponent
-  ],
-  selector: 'view-component-revisions',
-  standalone: true,
-  styleUrl: 'view-component-revisions.component.scss',
-  templateUrl: 'view-component-revisions.component.html'
+    imports: [
+        CommonModule,
+        MatDialogModule,
+        MatListModule,
+        MatButtonModule,
+        FlexLayoutModule,
+        ComponentGradingComponent,
+        ComponentStateInfoComponent,
+        EditComponentAnnotationsComponent
+    ],
+    selector: 'view-component-revisions',
+    styleUrl: 'view-component-revisions.component.scss',
+    templateUrl: 'view-component-revisions.component.html'
 })
 export class ViewComponentRevisionsComponent {
   protected componentId: string;

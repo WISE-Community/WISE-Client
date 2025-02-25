@@ -7,10 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-  selector: 'notebook-launcher',
-  standalone: true,
-  templateUrl: 'notebook-launcher.component.html'
+    imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+    selector: 'notebook-launcher',
+    templateUrl: 'notebook-launcher.component.html'
 })
 export class NotebookLauncherComponent {
   protected label: string = '';

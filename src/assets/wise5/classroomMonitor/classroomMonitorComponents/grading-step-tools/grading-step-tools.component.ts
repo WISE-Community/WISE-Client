@@ -16,23 +16,22 @@ import { GradingNodeService } from '../../../services/gradingNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
-    NodeIconComponent
-  ],
-  selector: 'grading-step-tools',
-  standalone: true,
-  templateUrl: '../../../common/stepTools/step-tools.component.html',
-  styleUrl: '../../../common/stepTools/step-tools.component.scss'
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTooltipModule,
+        NodeIconComponent
+    ],
+    selector: 'grading-step-tools',
+    templateUrl: '../../../common/stepTools/step-tools.component.html',
+    styleUrl: '../../../common/stepTools/step-tools.component.scss'
 })
 export class GradingStepToolsComponent extends StepToolsComponent {
   constructor(

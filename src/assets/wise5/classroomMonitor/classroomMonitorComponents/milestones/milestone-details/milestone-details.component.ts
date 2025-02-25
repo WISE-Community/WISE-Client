@@ -10,9 +10,10 @@ import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-mon
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
-  selector: 'milestone-details',
-  styleUrls: ['./milestone-details.component.scss'],
-  templateUrl: './milestone-details.component.html'
+    selector: 'milestone-details',
+    styleUrls: ['./milestone-details.component.scss'],
+    templateUrl: './milestone-details.component.html',
+    standalone: false
 })
 export class MilestoneDetailsComponent implements OnInit {
   currentPeriod: any;

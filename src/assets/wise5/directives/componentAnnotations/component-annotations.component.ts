@@ -11,11 +11,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatCardModule, MatIconModule, SaveTimeMessageComponent],
-  selector: 'component-annotations',
-  standalone: true,
-  styleUrl: 'component-annotations.component.scss',
-  templateUrl: 'component-annotations.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatCardModule, MatIconModule, SaveTimeMessageComponent],
+    selector: 'component-annotations',
+    styleUrl: 'component-annotations.component.scss',
+    templateUrl: 'component-annotations.component.html'
 })
 export class ComponentAnnotationsComponent {
   @Input() annotations: any;

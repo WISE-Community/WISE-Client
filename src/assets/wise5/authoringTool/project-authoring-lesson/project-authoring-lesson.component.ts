@@ -10,10 +10,11 @@ import { DeleteTranslationsService } from '../../services/deleteTranslationsServ
 import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 
 @Component({
-  selector: 'project-authoring-lesson',
-  templateUrl: './project-authoring-lesson.component.html',
-  styleUrls: ['./project-authoring-lesson.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'project-authoring-lesson',
+    templateUrl: './project-authoring-lesson.component.html',
+    styleUrls: ['./project-authoring-lesson.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ProjectAuthoringLessonComponent {
   @Input() expanded: boolean = true;

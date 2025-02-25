@@ -8,9 +8,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'discussion-authoring',
-  templateUrl: 'discussion-authoring.component.html',
-  styleUrls: ['discussion-authoring.component.scss']
+    selector: 'discussion-authoring',
+    templateUrl: 'discussion-authoring.component.html',
+    styleUrls: ['discussion-authoring.component.scss'],
+    standalone: false
 })
 export class DiscussionAuthoring extends AbstractComponentAuthoring {
   constructor(

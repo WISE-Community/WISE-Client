@@ -17,20 +17,19 @@ import { NotificationsMenuComponent } from '../notifications-menu/notifications-
 import { PauseScreensMenuComponent } from '../../pause-screens-menu/pause-screens-menu.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    NotificationsMenuComponent,
-    PauseScreensMenuComponent
-  ],
-  selector: 'top-bar',
-  standalone: true,
-  styleUrl: './top-bar.component.scss',
-  templateUrl: './top-bar.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatToolbarModule,
+        NotificationsMenuComponent,
+        PauseScreensMenuComponent
+    ],
+    selector: 'top-bar',
+    styleUrl: './top-bar.component.scss',
+    templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent implements OnInit {
   protected avatarColor: any;

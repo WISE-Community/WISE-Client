@@ -7,16 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { ComponentTypeButtonComponent } from '../../../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    ComponentTypeButtonComponent,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDialogModule
-  ],
-  standalone: true,
-  styleUrl: './choose-new-component.component.scss',
-  templateUrl: 'choose-new-component.component.html'
+    imports: [
+        CommonModule,
+        ComponentTypeButtonComponent,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDialogModule
+    ],
+    styleUrl: './choose-new-component.component.scss',
+    templateUrl: 'choose-new-component.component.html'
 })
 export class ChooseNewComponent {
   protected componentTypes: any[];

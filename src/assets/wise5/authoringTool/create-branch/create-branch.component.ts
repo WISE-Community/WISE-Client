@@ -21,27 +21,26 @@ import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-  imports: [
-    CreateBranchPathsComponent,
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    RouterModule,
-    SelectBranchCriteriaComponent,
-    SelectComponentComponent,
-    SelectMergeStepComponent,
-    SelectPathCountComponent,
-    SelectStepComponent
-  ],
-  standalone: true,
-  styleUrl: './create-branch.component.scss',
-  templateUrl: './create-branch.component.html'
+    imports: [
+        CreateBranchPathsComponent,
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        RouterModule,
+        SelectBranchCriteriaComponent,
+        SelectComponentComponent,
+        SelectMergeStepComponent,
+        SelectPathCountComponent,
+        SelectStepComponent
+    ],
+    styleUrl: './create-branch.component.scss',
+    templateUrl: './create-branch.component.html'
 })
 export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
   constructor(

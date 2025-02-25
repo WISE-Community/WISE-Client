@@ -17,22 +17,21 @@ import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-  imports: [
-    CommonModule,
-    EditBranchPathsComponent,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatProgressBarModule,
-    ReactiveFormsModule,
-    RouterModule,
-    SelectBranchCriteriaComponent,
-    SelectComponentComponent,
-    SelectStepComponent
-  ],
-  standalone: true,
-  styleUrl: './edit-branch.component.scss',
-  templateUrl: './edit-branch.component.html'
+    imports: [
+        CommonModule,
+        EditBranchPathsComponent,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatProgressBarModule,
+        ReactiveFormsModule,
+        RouterModule,
+        SelectBranchCriteriaComponent,
+        SelectComponentComponent,
+        SelectStepComponent
+    ],
+    styleUrl: './edit-branch.component.scss',
+    templateUrl: './edit-branch.component.html'
 })
 export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   protected branchPaths: any[] = [];

@@ -4,9 +4,10 @@ import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
 
 @Component({
-  selector: 'peer-chat-chat-box',
-  templateUrl: './peer-chat-chat-box.component.html',
-  styleUrls: ['./peer-chat-chat-box.component.scss']
+    selector: 'peer-chat-chat-box',
+    templateUrl: './peer-chat-chat-box.component.html',
+    styleUrls: ['./peer-chat-chat-box.component.scss'],
+    standalone: false
 })
 export class PeerChatChatBoxComponent implements OnInit {
   @Input() component: PeerChatComponent;

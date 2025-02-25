@@ -22,23 +22,22 @@ import { WorkgroupNodeScoreComponent } from '../../shared/workgroupNodeScore/wor
 import { WorkgroupComponentGradingComponent } from '../../workgroup-component-grading/workgroup-component-grading.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    ComponentNewWorkBadgeComponent,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    StepInfoComponent,
-    WorkgroupComponentGradingComponent,
-    WorkgroupNodeStatusComponent,
-    WorkgroupNodeScoreComponent
-  ],
-  selector: 'step-item',
-  standalone: true,
-  templateUrl: './step-item.component.html',
-  styleUrl: './step-item.component.scss',
-  encapsulation: ViewEncapsulation.None
+    imports: [
+        CommonModule,
+        ComponentNewWorkBadgeComponent,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule,
+        StepInfoComponent,
+        WorkgroupComponentGradingComponent,
+        WorkgroupNodeStatusComponent,
+        WorkgroupNodeScoreComponent
+    ],
+    selector: 'step-item',
+    templateUrl: './step-item.component.html',
+    styleUrl: './step-item.component.scss',
+    encapsulation: ViewEncapsulation.None
 })
 export class StepItemComponent {
   protected componentIdToIsVisible: { [componentId: string]: boolean } = {};

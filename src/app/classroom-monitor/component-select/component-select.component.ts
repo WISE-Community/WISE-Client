@@ -15,12 +15,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatSelectModule],
-  selector: 'component-select',
-  standalone: true,
-  styleUrl: 'component-select.component.scss',
-  templateUrl: 'component-select.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatSelectModule],
+    selector: 'component-select',
+    styleUrl: 'component-select.component.scss',
+    templateUrl: 'component-select.component.html'
 })
 export class ComponentSelectComponent {
   protected components: any[];

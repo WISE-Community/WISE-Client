@@ -11,9 +11,10 @@ import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { ConfigService } from '../../services/config.service';
 @Component({
-  selector: 'register-student-form',
-  templateUrl: './register-student-form.component.html',
-  styleUrls: ['./register-student-form.component.scss']
+    selector: 'register-student-form',
+    templateUrl: './register-student-form.component.html',
+    styleUrls: ['./register-student-form.component.scss'],
+    standalone: false
 })
 export class RegisterStudentFormComponent extends RegisterUserFormComponent implements OnInit {
   createStudentAccountFormGroup: FormGroup = this.fb.group({

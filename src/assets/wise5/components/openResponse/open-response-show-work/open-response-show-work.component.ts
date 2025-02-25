@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 
 @Component({
-  selector: 'open-response-show-work',
-  templateUrl: 'open-response-show-work.component.html'
+    selector: 'open-response-show-work',
+    templateUrl: 'open-response-show-work.component.html',
+    standalone: false
 })
 export class OpenResponseShowWorkComponent extends ComponentShowWorkDirective {
   studentResponse: string = '';

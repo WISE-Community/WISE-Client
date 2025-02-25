@@ -20,21 +20,20 @@ import { ColorChooserComponent } from '../color-chooser/color-chooser.component'
 import { TagComponent } from '../tag/tag.component';
 
 @Component({
-  imports: [
-    ColorChooserComponent,
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    TagComponent
-  ],
-  selector: 'edit-tag',
-  standalone: true,
-  styleUrl: './edit-tag.component.scss',
-  templateUrl: './edit-tag.component.html'
+    imports: [
+        ColorChooserComponent,
+        CommonModule,
+        FormsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        TagComponent
+    ],
+    selector: 'edit-tag',
+    styleUrl: './edit-tag.component.scss',
+    templateUrl: './edit-tag.component.html'
 })
 export class EditTagComponent {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();

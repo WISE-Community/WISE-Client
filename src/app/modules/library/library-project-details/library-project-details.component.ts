@@ -8,9 +8,10 @@ import { ParentProject } from '../../../domain/parentProject';
 import { ConfigService } from '../../../services/config.service';
 
 @Component({
-  selector: 'app-library-project-details',
-  templateUrl: './library-project-details.component.html',
-  styleUrls: ['./library-project-details.component.scss']
+    selector: 'app-library-project-details',
+    templateUrl: './library-project-details.component.html',
+    styleUrls: ['./library-project-details.component.scss'],
+    standalone: false
 })
 export class LibraryProjectDetailsComponent implements OnInit {
   isTeacher: boolean = false;

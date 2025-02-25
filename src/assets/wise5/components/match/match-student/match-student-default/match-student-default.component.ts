@@ -51,12 +51,10 @@ import { StudentDataService } from '../../../../services/studentDataService';
     MatchChoiceItemComponent,
     MatchFeedbackSectionComponent
   ],
-  standalone: true,
   styleUrl: 'match-student-default.component.scss',
   templateUrl: 'match-student-default.component.html'
 })
 export class MatchStudentDefaultComponent extends ComponentStudent {
-  private autoScroll: any = require('dom-autoscroller');
   protected buckets: any[] = [];
   protected choices: Choice[] = [];
   protected hasCorrectAnswer: boolean = false;
@@ -133,16 +131,6 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
       const bucketCopy = copy(bucket);
       bucketCopy.items = [];
       this.buckets.push(bucketCopy);
-    });
-  }
-
-  ngAfterContentInit(): void {
-    this.autoScroll([document.querySelector('#content')], {
-      margin: 30,
-      scrollWhenOutside: true,
-      autoScroll: function () {
-        return this.down;
-      }
     });
   }
 

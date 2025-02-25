@@ -5,12 +5,12 @@ import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 @Component({
-  selector: 'edit-multiple-choice-connected-components',
-  templateUrl:
-    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.html',
-  styleUrls: [
-    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss'
-  ]
+    selector: 'edit-multiple-choice-connected-components',
+    templateUrl: '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.html',
+    styleUrls: [
+        '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss'
+    ],
+    standalone: false
 })
 export class EditMultipleChoiceConnectedComponentsComponent extends EditConnectedComponentsComponent {
   constructor(protected ProjectService: ProjectService) {
