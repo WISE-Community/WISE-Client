@@ -6,11 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'select-merge-step',
-  standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
-  templateUrl: './select-merge-step.component.html',
-  styleUrl: './select-merge-step.component.scss'
+    selector: 'select-merge-step',
+    imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
+    templateUrl: './select-merge-step.component.html',
+    styleUrl: './select-merge-step.component.scss'
 })
 export class SelectMergeStepComponent {
   @Input() branchStepId: string;

@@ -6,11 +6,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatCardModule, MatIconModule],
-  selector: 'card-selector',
-  standalone: true,
-  styleUrl: './card-selector.component.scss',
-  templateUrl: './card-selector.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatCardModule, MatIconModule],
+    selector: 'card-selector',
+    styleUrl: './card-selector.component.scss',
+    templateUrl: './card-selector.component.html'
 })
 export class CardSelectorComponent {
   @Input() items: any[] = [];

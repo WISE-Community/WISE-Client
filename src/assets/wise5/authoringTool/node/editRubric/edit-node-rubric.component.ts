@@ -3,8 +3,9 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'edit-node-rubric',
-  templateUrl: 'edit-node-rubric.component.html'
+    selector: 'edit-node-rubric',
+    templateUrl: 'edit-node-rubric.component.html',
+    standalone: false
 })
 export class EditNodeRubricComponent implements OnInit {
   protected node: any;

@@ -6,11 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  standalone: true,
-  selector: 'app-footer',
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule, RouterModule],
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+    selector: 'app-footer',
+    imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule, RouterModule],
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
   protected time: Date;

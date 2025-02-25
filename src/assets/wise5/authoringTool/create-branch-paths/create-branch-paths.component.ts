@@ -23,23 +23,22 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    DisplayBranchPathStepsComponent,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
-    ReactiveFormsModule
-  ],
-  selector: 'create-branch-paths',
-  standalone: true,
-  styleUrl: './create-branch-paths.component.scss',
-  templateUrl: './create-branch-paths.component.html'
+    imports: [
+        CommonModule,
+        DisplayBranchPathStepsComponent,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTooltipModule,
+        ReactiveFormsModule
+    ],
+    selector: 'create-branch-paths',
+    styleUrl: './create-branch-paths.component.scss',
+    templateUrl: './create-branch-paths.component.html'
 })
 export class CreateBranchPathsComponent {
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;

@@ -24,14 +24,15 @@ import { DataExplorerManager } from '../data-explorer-manager';
 import { addPointFromTableIntoData, isMultipleYAxes, isSingleYAxis } from '../util';
 import { GraphConnectedComponentManager } from '../graph-connected-component-manager';
 
-const Draggable = require('highcharts/modules/draggable-points.js');
+import Draggable from 'highcharts/modules/draggable-points.js';
 Draggable(Highcharts);
 HC_exporting(Highcharts);
 
 @Component({
   selector: 'graph-student',
   templateUrl: 'graph-student.component.html',
-  styleUrls: ['graph-student.component.scss']
+  styleUrls: ['graph-student.component.scss'],
+  standalone: false
 })
 export class GraphStudent extends ComponentStudent {
   activeSeries: any = null;

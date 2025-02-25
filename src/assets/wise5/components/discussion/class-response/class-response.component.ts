@@ -10,10 +10,11 @@ import { ConfigService } from '../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 
 @Component({
-  selector: 'class-response',
-  templateUrl: 'class-response.component.html',
-  styleUrls: ['class-response.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'class-response',
+    templateUrl: 'class-response.component.html',
+    styleUrls: ['class-response.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ClassResponse {
   @Input()

@@ -4,9 +4,10 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
-  selector: 'manage-show-student-info',
-  styleUrls: ['./manage-show-student-info.component.scss'],
-  templateUrl: './manage-show-student-info.component.html'
+    selector: 'manage-show-student-info',
+    styleUrls: ['./manage-show-student-info.component.scss'],
+    templateUrl: './manage-show-student-info.component.html',
+    standalone: false
 })
 export class ManageShowStudentInfoComponent {
   canViewStudentNames: boolean;

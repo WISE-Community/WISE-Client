@@ -4,11 +4,10 @@ import { SelectStepComponent } from '../select-step/select-step.component';
 import { SelectComponentComponent } from '../select-component/select-component.component';
 
 @Component({
-  selector: 'select-step-and-component',
-  templateUrl: './select-step-and-component.component.html',
-  styleUrls: ['./select-step-and-component.component.scss'],
-  standalone: true,
-  imports: [SelectComponentComponent, SelectStepComponent]
+    selector: 'select-step-and-component',
+    templateUrl: './select-step-and-component.component.html',
+    styleUrls: ['./select-step-and-component.component.scss'],
+    imports: [SelectComponentComponent, SelectStepComponent]
 })
 export class SelectStepAndComponentComponent {
   @Input() allowedComponentTypes: string[] = [];

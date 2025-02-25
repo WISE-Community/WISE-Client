@@ -22,7 +22,6 @@ import { TableSummaryData } from './TableSummaryData';
 
 @Component({
   imports: [CommonModule, MatCardModule],
-  standalone: true,
   styleUrl: 'summary-display.component.scss',
   templateUrl: 'summary-display.component.html'
 })

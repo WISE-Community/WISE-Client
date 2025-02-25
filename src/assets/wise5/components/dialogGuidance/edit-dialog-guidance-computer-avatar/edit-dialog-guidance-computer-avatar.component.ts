@@ -5,10 +5,11 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComputerAvatarSettings } from '../../../common/computer-avatar/ComputerAvatarSettings';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  selector: 'edit-dialog-guidance-computer-avatar',
-  styleUrls: ['edit-dialog-guidance-computer-avatar.component.scss'],
-  templateUrl: './edit-dialog-guidance-computer-avatar.component.html'
+    encapsulation: ViewEncapsulation.None,
+    selector: 'edit-dialog-guidance-computer-avatar',
+    styleUrls: ['edit-dialog-guidance-computer-avatar.component.scss'],
+    templateUrl: './edit-dialog-guidance-computer-avatar.component.html',
+    standalone: false
 })
 export class EditDialogGuidanceComputerAvatarComponent implements OnInit {
   @Input() computerAvatarSettings: ComputerAvatarSettings;

@@ -18,20 +18,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDividerModule,
-    MatInputModule,
-    MatProgressBarModule,
-    ReactiveFormsModule,
-    RouterModule
-  ],
-  standalone: true,
-  styleUrls: ['./add-lesson-configure.component.scss', '../../add-content.scss'],
-  templateUrl: './add-lesson-configure.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatDividerModule,
+        MatInputModule,
+        MatProgressBarModule,
+        ReactiveFormsModule,
+        RouterModule
+    ],
+    styleUrls: ['./add-lesson-configure.component.scss', '../../add-content.scss'],
+    templateUrl: './add-lesson-configure.component.html'
 })
 export class AddLessonConfigureComponent {
   protected addLessonFormGroup: FormGroup = this.fb.group({

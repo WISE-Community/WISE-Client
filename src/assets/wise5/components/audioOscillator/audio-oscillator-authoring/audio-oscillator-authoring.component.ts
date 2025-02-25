@@ -9,9 +9,10 @@ import { AudioOscillatorService } from '../audioOscillatorService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'audio-oscillator-authoring',
-  templateUrl: 'audio-oscillator-authoring.component.html',
-  styleUrls: ['audio-oscillator-authoring.component.scss']
+    selector: 'audio-oscillator-authoring',
+    templateUrl: 'audio-oscillator-authoring.component.html',
+    styleUrls: ['audio-oscillator-authoring.component.scss'],
+    standalone: false
 })
 export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
   maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;

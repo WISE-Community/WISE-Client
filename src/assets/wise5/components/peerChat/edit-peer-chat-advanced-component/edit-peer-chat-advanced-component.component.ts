@@ -5,9 +5,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'edit-peer-chat-advanced',
-  templateUrl: './edit-peer-chat-advanced-component.component.html',
-  styleUrls: ['./edit-peer-chat-advanced-component.component.scss']
+    selector: 'edit-peer-chat-advanced',
+    templateUrl: './edit-peer-chat-advanced-component.component.html',
+    styleUrls: ['./edit-peer-chat-advanced-component.component.scss'],
+    standalone: false
 })
 export class EditPeerChatAdvancedComponentComponent extends EditAdvancedComponentComponent {
   constructor(

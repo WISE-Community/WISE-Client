@@ -10,9 +10,10 @@ class SelectPeerGroupingDialogData {
 }
 
 @Component({
-  selector: 'select-peer-grouping-dialog',
-  templateUrl: './select-peer-grouping-dialog.component.html',
-  styleUrls: ['./select-peer-grouping-dialog.component.scss']
+    selector: 'select-peer-grouping-dialog',
+    templateUrl: './select-peer-grouping-dialog.component.html',
+    styleUrls: ['./select-peer-grouping-dialog.component.scss'],
+    standalone: false
 })
 export class SelectPeerGroupingDialogComponent implements OnInit {
   peerGroupings: PeerGrouping[] = [];

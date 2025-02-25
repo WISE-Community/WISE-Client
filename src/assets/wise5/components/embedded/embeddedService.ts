@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
@@ -87,7 +87,7 @@ export class EmbeddedService extends ComponentService {
   generateImageFromRenderedComponentState(componentState: any) {
     const modelElement = this.getModelElement(componentState.componentId);
     return new Promise((resolve, reject) => {
-      html2canvas(modelElement).then((canvas) => {
+      html2canvas(modelElement as HTMLElement).then((canvas) => {
         const pngFile = convertToPNGFile(canvas);
         this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
           resolve(asset);

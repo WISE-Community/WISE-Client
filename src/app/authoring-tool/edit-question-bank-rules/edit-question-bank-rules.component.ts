@@ -7,9 +7,10 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 import { Question } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/Question';
 
 @Component({
-  selector: 'edit-question-bank-rules',
-  templateUrl: './edit-question-bank-rules.component.html',
-  styleUrls: ['./edit-question-bank-rules.component.scss']
+    selector: 'edit-question-bank-rules',
+    templateUrl: './edit-question-bank-rules.component.html',
+    styleUrls: ['./edit-question-bank-rules.component.scss'],
+    standalone: false
 })
 export class EditQuestionBankRulesComponent extends EditFeedbackRulesComponent {
   constructor(protected dialog: MatDialog, protected projectService: TeacherProjectService) {

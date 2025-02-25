@@ -9,18 +9,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatIconModule,
-    RouterModule
-  ],
-  standalone: true,
-  styleUrls: ['choose-new-node-template.component.scss', '../../add-content.scss'],
-  templateUrl: 'choose-new-node-template.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDividerModule,
+        MatIconModule,
+        RouterModule
+    ],
+    styleUrls: ['choose-new-node-template.component.scss', '../../add-content.scss'],
+    templateUrl: 'choose-new-node-template.component.html'
 })
 export class ChooseNewNodeTemplateComponent {
   protected templates: NewNodeTemplate[] = [

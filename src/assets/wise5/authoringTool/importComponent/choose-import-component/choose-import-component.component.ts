@@ -16,22 +16,21 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatDividerModule,
-    MatIconModule,
-    MatProgressBarModule,
-    MatTooltipModule,
-    RouterModule
-  ],
-  selector: 'choose-import-component',
-  standalone: true,
-  styleUrl: './choose-import-component.component.scss',
-  templateUrl: './choose-import-component.component.html'
+    imports: [
+        CommonModule,
+        FormsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDividerModule,
+        MatIconModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        RouterModule
+    ],
+    selector: 'choose-import-component',
+    styleUrl: './choose-import-component.component.scss',
+    templateUrl: './choose-import-component.component.html'
 })
 export class ChooseImportComponentComponent implements OnInit {
   protected importProject: any = null;

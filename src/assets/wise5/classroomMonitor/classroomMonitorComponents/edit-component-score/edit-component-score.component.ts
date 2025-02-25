@@ -10,10 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, FormsModule, MatFormFieldModule, MatInputModule],
-  selector: 'edit-component-score',
-  standalone: true,
-  templateUrl: 'edit-component-score.component.html'
+    imports: [CommonModule, FlexLayoutModule, FormsModule, MatFormFieldModule, MatInputModule],
+    selector: 'edit-component-score',
+    templateUrl: 'edit-component-score.component.html'
 })
 export class EditComponentScoreComponent {
   @Input() componentId: string;

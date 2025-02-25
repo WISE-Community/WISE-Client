@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './node-authoring-parent.component.html'
+    templateUrl: './node-authoring-parent.component.html',
+    standalone: false
 })
 export class NodeAuthoringParentComponent {}

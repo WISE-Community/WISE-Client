@@ -6,9 +6,10 @@ import { ShowMyWorkAuthoringComponent } from '../../showMyWork/show-my-work-auth
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'show-group-work-authoring',
-  templateUrl: './show-group-work-authoring.component.html',
-  styleUrls: ['./show-group-work-authoring.component.scss']
+    selector: 'show-group-work-authoring',
+    templateUrl: './show-group-work-authoring.component.html',
+    styleUrls: ['./show-group-work-authoring.component.scss'],
+    standalone: false
 })
 export class ShowGroupWorkAuthoringComponent extends ShowMyWorkAuthoringComponent {
   constructor(

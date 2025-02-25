@@ -6,9 +6,10 @@ import ExportController from '../exportController';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
 
 @Component({
-  selector: 'export-step-visits',
-  templateUrl: './export-step-visits.component.html',
-  styleUrls: ['./export-step-visits.component.scss']
+    selector: 'export-step-visits',
+    templateUrl: './export-step-visits.component.html',
+    styleUrls: ['./export-step-visits.component.scss'],
+    standalone: false
 })
 export class ExportStepVisitsComponent extends ExportController {
   project: any;

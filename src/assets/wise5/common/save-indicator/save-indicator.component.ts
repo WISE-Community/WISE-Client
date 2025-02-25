@@ -6,11 +6,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatProgressSpinnerModule],
-  selector: 'save-indicator',
-  standalone: true,
-  styleUrl: './save-indicator.component.scss',
-  templateUrl: './save-indicator.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatProgressSpinnerModule],
+    selector: 'save-indicator',
+    styleUrl: './save-indicator.component.scss',
+    templateUrl: './save-indicator.component.html'
 })
 export class SaveIndicatorComponent implements OnInit {
   protected globalMessage: any = {};

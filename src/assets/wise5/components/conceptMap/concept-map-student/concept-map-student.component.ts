@@ -18,9 +18,10 @@ import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
-  selector: 'concept-map-student',
-  templateUrl: 'concept-map-student.component.html',
-  styleUrls: ['concept-map-student.component.scss']
+    selector: 'concept-map-student',
+    templateUrl: 'concept-map-student.component.html',
+    styleUrls: ['concept-map-student.component.scss'],
+    standalone: false
 })
 export class ConceptMapStudent extends ComponentStudent {
   activeLink: any;

@@ -8,9 +8,10 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 
 @Component({
-  selector: 'dialog-guidance-authoring',
-  templateUrl: './dialog-guidance-authoring.component.html',
-  styleUrls: ['./dialog-guidance-authoring.component.scss']
+    selector: 'dialog-guidance-authoring',
+    templateUrl: './dialog-guidance-authoring.component.html',
+    styleUrls: ['./dialog-guidance-authoring.component.scss'],
+    standalone: false
 })
 export class DialogGuidanceAuthoringComponent extends AbstractComponentAuthoring {
   constructor(

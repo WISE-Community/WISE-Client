@@ -7,19 +7,18 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    CommonModule,
-    DeleteChoiceButtonComponent,
-    FlexLayoutModule,
-    MatCardModule,
-    MatchStatusIconComponent,
-    MatIconModule
-  ],
-  selector: 'match-choice-item',
-  standalone: true,
-  styleUrl: 'match-choice-item.component.scss',
-  templateUrl: 'match-choice-item.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        DeleteChoiceButtonComponent,
+        FlexLayoutModule,
+        MatCardModule,
+        MatchStatusIconComponent,
+        MatIconModule
+    ],
+    selector: 'match-choice-item',
+    styleUrl: 'match-choice-item.component.scss',
+    templateUrl: 'match-choice-item.component.html'
 })
 export class MatchChoiceItemComponent {
   @Input() buckets: any;

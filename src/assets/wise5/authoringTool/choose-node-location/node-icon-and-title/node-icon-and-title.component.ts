@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, NodeIconComponent],
-  selector: 'node-icon-and-title',
-  standalone: true,
-  styles: ['.step-number,.step-title {color:rgba(0,0,0,.87)}'],
-  templateUrl: './node-icon-and-title.component.html'
+    imports: [CommonModule, FlexLayoutModule, NodeIconComponent],
+    selector: 'node-icon-and-title',
+    styles: ['.step-number,.step-title {color:rgba(0,0,0,.87)}'],
+    templateUrl: './node-icon-and-title.component.html'
 })
 export class NodeIconAndTitleComponent {
   @Input() protected nodeId: string;

@@ -3,9 +3,10 @@ import { ProjectService } from '../../../services/projectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 
 @Component({
-  selector: 'show-my-work-grading',
-  templateUrl: './show-my-work-grading.component.html',
-  styleUrls: ['./show-my-work-grading.component.scss']
+    selector: 'show-my-work-grading',
+    templateUrl: './show-my-work-grading.component.html',
+    styleUrls: ['./show-my-work-grading.component.scss'],
+    standalone: false
 })
 export class ShowMyWorkGradingComponent implements OnInit {
   @Input() componentId: string;

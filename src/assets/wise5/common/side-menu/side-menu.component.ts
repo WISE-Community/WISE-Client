@@ -6,11 +6,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
-  inputs: ['views'],
-  selector: 'side-menu',
-  standalone: true,
-  styleUrl: './side-menu.component.scss',
-  templateUrl: './side-menu.component.html'
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
+    inputs: ['views'],
+    selector: 'side-menu',
+    styleUrl: './side-menu.component.scss',
+    templateUrl: './side-menu.component.html'
 })
 export class SideMenuComponent extends MainMenuComponent {}

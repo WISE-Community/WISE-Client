@@ -3,9 +3,10 @@ import { Component as WISEComponent } from '../../../assets/wise5/common/Compone
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
-  selector: 'edit-common-advanced',
-  templateUrl: './edit-common-advanced.component.html',
-  styleUrls: ['./edit-common-advanced.component.scss']
+    selector: 'edit-common-advanced',
+    templateUrl: './edit-common-advanced.component.html',
+    styleUrls: ['./edit-common-advanced.component.scss'],
+    standalone: false
 })
 export class EditCommonAdvancedComponent implements OnInit {
   @Input() allowedConnectedComponentTypes: string[] = [];

@@ -12,20 +12,19 @@ import { FormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatRadioModule,
-    MatTooltipModule,
-    RouterModule
-  ],
-  standalone: true,
-  styleUrls: ['./choose-automated-assessment.component.scss', '../../add-content.scss'],
-  templateUrl: './choose-automated-assessment.component.html'
+    imports: [
+        CommonModule,
+        FormsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        MatRadioModule,
+        MatTooltipModule,
+        RouterModule
+    ],
+    styleUrls: ['./choose-automated-assessment.component.scss', '../../add-content.scss'],
+    templateUrl: './choose-automated-assessment.component.html'
 })
 export class ChooseAutomatedAssessmentComponent {
   private importProjectId: number;

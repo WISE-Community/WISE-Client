@@ -11,9 +11,10 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  selector: 'export-one-workgroup-per-row',
-  templateUrl: './export-one-workgroup-per-row.component.html',
-  styleUrls: ['./export-one-workgroup-per-row.component.scss']
+    selector: 'export-one-workgroup-per-row',
+    templateUrl: './export-one-workgroup-per-row.component.html',
+    styleUrls: ['./export-one-workgroup-per-row.component.scss'],
+    standalone: false
 })
 export class ExportOneWorkgroupPerRowComponent extends AbstractExportComponent {
   protected includeBranchPathTaken: boolean;

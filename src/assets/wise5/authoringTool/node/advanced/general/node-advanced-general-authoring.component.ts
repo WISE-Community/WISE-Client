@@ -3,8 +3,9 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'node-advanced-general-authoring',
-  templateUrl: './node-advanced-general-authoring.component.html'
+    selector: 'node-advanced-general-authoring',
+    templateUrl: './node-advanced-general-authoring.component.html',
+    standalone: false
 })
 export class NodeAdvancedGeneralAuthoringComponent implements OnInit {
   protected node: any;

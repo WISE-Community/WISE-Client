@@ -5,8 +5,9 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ChooseNodeLocationComponent } from '../choose-node-location.component';
 
 @Component({
-  templateUrl: 'choose-move-node-location.component.html',
-  styleUrls: ['../choose-node-location.component.scss']
+    templateUrl: 'choose-move-node-location.component.html',
+    styleUrls: ['../choose-node-location.component.scss'],
+    standalone: false
 })
 export class ChooseMoveNodeLocationComponent extends ChooseNodeLocationComponent {
   protected moveGroup: boolean;

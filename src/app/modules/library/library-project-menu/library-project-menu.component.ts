@@ -9,9 +9,10 @@ import { EditRunWarningDialogComponent } from '../../../teacher/edit-run-warning
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 
 @Component({
-  selector: 'app-library-project-menu',
-  styleUrl: './library-project-menu.component.scss',
-  templateUrl: './library-project-menu.component.html'
+    selector: 'app-library-project-menu',
+    styleUrl: './library-project-menu.component.scss',
+    templateUrl: './library-project-menu.component.html',
+    standalone: false
 })
 export class LibraryProjectMenuComponent {
   @Input()

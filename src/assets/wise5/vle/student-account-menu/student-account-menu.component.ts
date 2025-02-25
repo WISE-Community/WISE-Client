@@ -8,10 +8,11 @@ import { StudentDataService } from '../../services/studentDataService';
 import { getAvatarColorForWorkgroupId } from '../../common/workgroup/workgroup';
 
 @Component({
-  selector: 'student-account-menu',
-  templateUrl: './student-account-menu.component.html',
-  styleUrls: ['./student-account-menu.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'student-account-menu',
+    templateUrl: './student-account-menu.component.html',
+    styleUrls: ['./student-account-menu.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class StudentAccountMenuComponent implements OnInit, OnDestroy {
   @ViewChild(MatMenu, { static: true })

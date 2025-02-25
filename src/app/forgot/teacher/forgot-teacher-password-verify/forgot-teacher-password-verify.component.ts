@@ -20,25 +20,24 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-  templateUrl: './forgot-teacher-password-verify.component.html',
-  styleUrl: './forgot-teacher-password-verify.component.scss',
-  standalone: true,
-  imports: [
-    MatCard,
-    MatCardContent,
-    FormsModule,
-    FlexModule,
-    ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    NgIf,
-    MatError,
-    MatButton,
-    MatProgressBar,
-    RouterLink,
-    MatDividerModule
-  ]
+    templateUrl: './forgot-teacher-password-verify.component.html',
+    styleUrl: './forgot-teacher-password-verify.component.scss',
+    imports: [
+        MatCard,
+        MatCardContent,
+        FormsModule,
+        FlexModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        NgIf,
+        MatError,
+        MatButton,
+        MatProgressBar,
+        RouterLink,
+        MatDividerModule
+    ]
 })
 export class ForgotTeacherPasswordVerifyComponent {
   @Input() username: string = null;

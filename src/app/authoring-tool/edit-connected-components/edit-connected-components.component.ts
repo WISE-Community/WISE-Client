@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 
 @Component({
-  selector: 'edit-connected-components',
-  templateUrl: './edit-connected-components.component.html',
-  styleUrls: ['./edit-connected-components.component.scss']
+    selector: 'edit-connected-components',
+    templateUrl: './edit-connected-components.component.html',
+    styleUrls: ['./edit-connected-components.component.scss'],
+    standalone: false
 })
 export class EditConnectedComponentsComponent implements OnInit {
   @Input() componentContent: any;

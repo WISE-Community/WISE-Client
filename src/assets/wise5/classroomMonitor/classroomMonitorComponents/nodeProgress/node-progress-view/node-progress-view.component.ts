@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
-  selector: 'node-progress-view',
-  templateUrl: './node-progress-view.component.html',
-  styleUrls: ['./node-progress-view.component.scss']
+    selector: 'node-progress-view',
+    templateUrl: './node-progress-view.component.html',
+    styleUrls: ['./node-progress-view.component.scss'],
+    standalone: false
 })
 export class NodeProgressViewComponent implements OnInit {
   @Input() protected nodeId: string;

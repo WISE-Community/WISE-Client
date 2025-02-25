@@ -11,8 +11,9 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 
 @Component({
-  selector: 'outside-url-student',
-  templateUrl: 'outside-url-student.component.html'
+    selector: 'outside-url-student',
+    templateUrl: 'outside-url-student.component.html',
+    standalone: false
 })
 export class OutsideUrlStudent extends ComponentStudent {
   url: SafeUrl;

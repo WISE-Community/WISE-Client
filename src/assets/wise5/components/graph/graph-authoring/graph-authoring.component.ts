@@ -10,9 +10,10 @@ import { isMultipleYAxes } from '../util';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'graph-authoring',
-  templateUrl: 'graph-authoring.component.html',
-  styleUrls: ['graph-authoring.component.scss']
+    selector: 'graph-authoring',
+    templateUrl: 'graph-authoring.component.html',
+    styleUrls: ['graph-authoring.component.scss'],
+    standalone: false
 })
 export class GraphAuthoring extends AbstractComponentAuthoring {
   availableGraphTypes = [

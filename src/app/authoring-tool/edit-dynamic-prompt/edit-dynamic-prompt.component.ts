@@ -3,9 +3,10 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { DynamicPrompt } from '../../../assets/wise5/directives/dynamic-prompt/DynamicPrompt';
 
 @Component({
-  selector: 'edit-dynamic-prompt',
-  templateUrl: './edit-dynamic-prompt.component.html',
-  styleUrls: ['./edit-dynamic-prompt.component.scss']
+    selector: 'edit-dynamic-prompt',
+    templateUrl: './edit-dynamic-prompt.component.html',
+    styleUrls: ['./edit-dynamic-prompt.component.scss'],
+    standalone: false
 })
 export class EditDynamicPromptComponent implements OnInit {
   protected allowedReferenceComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];

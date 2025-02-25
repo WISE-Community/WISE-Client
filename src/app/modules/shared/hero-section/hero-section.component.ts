@@ -12,12 +12,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, FlexLayoutModule],
-  selector: 'app-hero-section',
-  standalone: true,
-  styleUrl: './hero-section.component.scss',
-  templateUrl: './hero-section.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule, FlexLayoutModule],
+    selector: 'app-hero-section',
+    styleUrl: './hero-section.component.scss',
+    templateUrl: './hero-section.component.html'
 })
 export class HeroSectionComponent {
   @ViewChild('bgRef') bgRef: ElementRef;

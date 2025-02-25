@@ -6,9 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Constraint } from '../../../../../../app/domain/constraint';
 
 @Component({
-  selector: 'node-advanced-constraint-authoring',
-  templateUrl: 'node-advanced-constraint-authoring.component.html',
-  styleUrls: ['node-advanced-constraint-authoring.component.scss']
+    selector: 'node-advanced-constraint-authoring',
+    templateUrl: 'node-advanced-constraint-authoring.component.html',
+    styleUrls: ['node-advanced-constraint-authoring.component.scss'],
+    standalone: false
 })
 export class NodeAdvancedConstraintAuthoringComponent extends ConstraintsAuthoringComponent {
   constructor(protected projectService: TeacherProjectService, private route: ActivatedRoute) {

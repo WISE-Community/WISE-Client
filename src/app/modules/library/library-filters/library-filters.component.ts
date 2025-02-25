@@ -7,9 +7,10 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
 
 @Component({
-  selector: 'app-library-filters',
-  styleUrl: './library-filters.component.scss',
-  templateUrl: './library-filters.component.html'
+    selector: 'app-library-filters',
+    styleUrl: './library-filters.component.scss',
+    templateUrl: './library-filters.component.html',
+    standalone: false
 })
 export class LibraryFiltersComponent implements OnInit {
   @Input()

@@ -6,10 +6,11 @@ import { ConfigService } from '../../../../services/configService';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'change-team-period-dialog',
-  templateUrl: './change-team-period-dialog.component.html',
-  styleUrls: ['./change-team-period-dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'change-team-period-dialog',
+    templateUrl: './change-team-period-dialog.component.html',
+    styleUrls: ['./change-team-period-dialog.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ChangeTeamPeriodDialogComponent {
   canViewStudentNames: boolean;

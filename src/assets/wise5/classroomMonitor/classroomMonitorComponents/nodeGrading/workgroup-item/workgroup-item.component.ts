@@ -13,21 +13,20 @@ import { ComponentNewWorkBadgeComponent } from '../../../../../../app/classroom-
 import { WorkgroupComponentGradingComponent } from '../../workgroup-component-grading/workgroup-component-grading.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatListModule,
-    FlexLayoutModule,
-    WorkgroupInfoComponent,
-    WorkgroupNodeStatusComponent,
-    WorkgroupNodeScoreComponent,
-    ComponentNewWorkBadgeComponent,
-    WorkgroupComponentGradingComponent
-  ],
-  selector: 'workgroup-item',
-  standalone: true,
-  styleUrl: 'workgroup-item.component.scss',
-  templateUrl: 'workgroup-item.component.html'
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatListModule,
+        FlexLayoutModule,
+        WorkgroupInfoComponent,
+        WorkgroupNodeStatusComponent,
+        WorkgroupNodeScoreComponent,
+        ComponentNewWorkBadgeComponent,
+        WorkgroupComponentGradingComponent
+    ],
+    selector: 'workgroup-item',
+    styleUrl: 'workgroup-item.component.scss',
+    templateUrl: 'workgroup-item.component.html'
 })
 export class WorkgroupItemComponent {
   private componentIdToHasWork: { [componentId: string]: boolean } = {};

@@ -3,9 +3,10 @@ import { AiChatMessage } from '../AiChatMessage';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 
 @Component({
-  selector: 'ai-chat-messages',
-  templateUrl: './ai-chat-messages.component.html',
-  styleUrls: ['./ai-chat-messages.component.scss']
+    selector: 'ai-chat-messages',
+    templateUrl: './ai-chat-messages.component.html',
+    styleUrls: ['./ai-chat-messages.component.scss'],
+    standalone: false
 })
 export class AiChatMessagesComponent {
   @Input() computerAvatar: ComputerAvatar;

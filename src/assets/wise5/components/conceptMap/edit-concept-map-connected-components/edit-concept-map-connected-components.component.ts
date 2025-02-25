@@ -4,12 +4,13 @@ import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../a
 import { ConceptMapContent } from '../ConceptMapContent';
 
 @Component({
-  selector: 'app-edit-concept-map-connected-components',
-  templateUrl: './edit-concept-map-connected-components.component.html',
-  styleUrls: [
-    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
-    './edit-concept-map-connected-components.component.scss'
-  ]
+    selector: 'app-edit-concept-map-connected-components',
+    templateUrl: './edit-concept-map-connected-components.component.html',
+    styleUrls: [
+        '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
+        './edit-concept-map-connected-components.component.scss'
+    ],
+    standalone: false
 })
 export class EditConceptMapConnectedComponentsComponent extends EditConnectedComponentsWithBackgroundComponent {
   componentTypesThatCanImportWorkAsBackground: string[] = [

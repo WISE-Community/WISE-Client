@@ -4,10 +4,11 @@ import { LibraryService } from '../../../services/library.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-teacher-project-library',
-  templateUrl: './teacher-project-library.component.html',
-  styleUrls: ['./teacher-project-library.component.scss', '../library/library.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-teacher-project-library',
+    templateUrl: './teacher-project-library.component.html',
+    styleUrls: ['./teacher-project-library.component.scss', '../library/library.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class TeacherProjectLibraryComponent implements OnInit {
   projects: LibraryProject[] = [];

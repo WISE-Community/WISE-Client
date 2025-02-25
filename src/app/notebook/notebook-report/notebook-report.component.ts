@@ -18,20 +18,19 @@ import { SaveTimeMessageComponent } from '../../../assets/wise5/common/save-time
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatTooltipModule,
-    SaveTimeMessageComponent,
-    WiseTinymceEditorComponent
-  ],
-  selector: 'notebook-report',
-  standalone: true,
-  styleUrl: 'notebook-report.component.scss',
-  templateUrl: 'notebook-report.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatTooltipModule,
+        SaveTimeMessageComponent,
+        WiseTinymceEditorComponent
+    ],
+    selector: 'notebook-report',
+    styleUrl: 'notebook-report.component.scss',
+    templateUrl: 'notebook-report.component.html'
 })
 export class NotebookReportComponent extends NotebookParentComponent {
   private autoSaveIntervalMS: number = 30000;

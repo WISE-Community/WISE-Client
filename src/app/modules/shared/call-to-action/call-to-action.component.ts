@@ -6,12 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule, RouterModule],
-  selector: 'app-call-to-action',
-  standalone: true,
-  styleUrl: './call-to-action.component.scss',
-  templateUrl: './call-to-action.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule, RouterModule],
+    selector: 'app-call-to-action',
+    styleUrl: './call-to-action.component.scss',
+    templateUrl: './call-to-action.component.html'
 })
 export class CallToActionComponent {
   @Input() content: string;

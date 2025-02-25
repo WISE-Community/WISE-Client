@@ -2,7 +2,7 @@
   <mat-sidenav #mobileMenu class="primary-bg" [(opened)]="showMobileMenu" position="end">
     <app-mobile-menu></app-mobile-menu>
   </mat-sidenav>
-  <mat-sidenav-content fxLayout="column" track-scroll (yPositionChange)="onYPositionChange($event)">
+  <mat-sidenav-content fxLayout="column" (scroll)="onYPositionChange($event)">
     <app-announcement
       *ngIf="hasAnnouncement && showHeaderAndFooter"
       class="top-content"

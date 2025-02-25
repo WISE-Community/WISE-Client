@@ -25,10 +25,16 @@ workgroupsInPeriod.set(7, {
 describe('ManagePeriodComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ManagePeriodComponent, ManageTeamsComponent],
-    imports: [MatCardModule],
-    providers: [ConfigService, GetWorkgroupService, WorkgroupService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      declarations: [ManagePeriodComponent, ManageTeamsComponent],
+      imports: [MatCardModule],
+      providers: [
+        ConfigService,
+        GetWorkgroupService,
+        WorkgroupService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     configService = TestBed.inject(ConfigService);
     workgroupService = TestBed.inject(WorkgroupService);
     fixture = TestBed.createComponent(ManagePeriodComponent);
@@ -37,7 +43,6 @@ describe('ManagePeriodComponent', () => {
       periodId: 1,
       periodName: '1'
     };
-    spyOn(component, 'registerAutoScroll').and.callFake(() => {});
     fixture.detectChanges();
   });
   initTeams();

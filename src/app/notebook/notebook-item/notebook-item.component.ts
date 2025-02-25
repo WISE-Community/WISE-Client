@@ -13,19 +13,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatIconModule,
-    MatTooltipModule
-  ],
-  selector: 'notebook-item',
-  standalone: true,
-  styleUrl: 'notebook-item.component.scss',
-  templateUrl: 'notebook-item.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDialogModule,
+        MatIconModule,
+        MatTooltipModule
+    ],
+    selector: 'notebook-item',
+    styleUrl: 'notebook-item.component.scss',
+    templateUrl: 'notebook-item.component.html'
 })
 export class NotebookItemComponent {
   protected canDelete: boolean;

@@ -11,9 +11,10 @@ import { filter } from 'rxjs';
 declare let tinymce: any;
 
 @Component({
-  selector: 'wise-authoring-tinymce-editor',
-  styleUrls: ['wise-authoring-tinymce-editor.component.scss'],
-  templateUrl: 'wise-tinymce-editor.component.html'
+    selector: 'wise-authoring-tinymce-editor',
+    styleUrls: ['wise-authoring-tinymce-editor.component.scss'],
+    templateUrl: 'wise-tinymce-editor.component.html',
+    standalone: false
 })
 export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorComponent {
   protected toolbar: string = `undo redo | fontselect | formatselect | fontsizeselect |

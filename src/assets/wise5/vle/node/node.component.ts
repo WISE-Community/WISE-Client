@@ -21,18 +21,17 @@ import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon
 import { StudentNodeService } from '../../services/studentNodeService';
 
 @Component({
-  imports: [
-    CommonModule,
-    ComponentComponent,
-    ComponentStateInfoComponent,
-    FlexLayoutModule,
-    HelpIconComponent,
-    MatButtonModule
-  ],
-  selector: 'node',
-  standalone: true,
-  styleUrl: './node.component.scss',
-  templateUrl: './node.component.html'
+    imports: [
+        CommonModule,
+        ComponentComponent,
+        ComponentStateInfoComponent,
+        FlexLayoutModule,
+        HelpIconComponent,
+        MatButtonModule
+    ],
+    selector: 'node',
+    styleUrl: './node.component.scss',
+    templateUrl: './node.component.html'
 })
 export class NodeComponent implements OnInit {
   private autoSaveInterval: number = 60000; // in milliseconds;

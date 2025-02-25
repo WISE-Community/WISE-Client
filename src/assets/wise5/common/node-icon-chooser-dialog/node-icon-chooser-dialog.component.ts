@@ -18,21 +18,20 @@ interface KIIcon {
 }
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatIconModule,
-    MatTooltipModule,
-    RouterModule
-  ],
-  selector: 'node-icon-chooser-dialog',
-  standalone: true,
-  styleUrl: 'node-icon-chooser-dialog.component.scss',
-  templateUrl: 'node-icon-chooser-dialog.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatChipsModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatIconModule,
+        MatTooltipModule,
+        RouterModule
+    ],
+    selector: 'node-icon-chooser-dialog',
+    styleUrl: 'node-icon-chooser-dialog.component.scss',
+    templateUrl: 'node-icon-chooser-dialog.component.html'
 })
 export class NodeIconChooserDialogComponent {
   protected colors = [

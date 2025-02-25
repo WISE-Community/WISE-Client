@@ -8,11 +8,10 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, MatIconModule],
-  selector: 'node-icon',
-  standalone: true,
-  styleUrl: 'node-icon.component.scss',
-  templateUrl: 'node-icon.component.html'
+    imports: [CommonModule, MatIconModule],
+    selector: 'node-icon',
+    styleUrl: 'node-icon.component.scss',
+    templateUrl: 'node-icon.component.html'
 })
 export class NodeIconComponent {
   @Input() canEdit: boolean;

@@ -9,8 +9,9 @@ class Attachment {
 }
 
 @Component({
-  selector: 'audio-recorder',
-  templateUrl: './audio-recorder.component.html'
+    selector: 'audio-recorder',
+    templateUrl: './audio-recorder.component.html',
+    standalone: false
 })
 export class AudioRecorderComponent implements OnInit {
   @Output() attachAudioRecording: EventEmitter<Attachment> = new EventEmitter<Attachment>();

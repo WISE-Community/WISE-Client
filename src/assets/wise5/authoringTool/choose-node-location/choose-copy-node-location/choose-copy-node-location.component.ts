@@ -13,19 +13,18 @@ import { NodeIconAndTitleComponent } from '../node-icon-and-title/node-icon-and-
 import { NodeWithMoveAfterButtonComponent } from '../node-with-move-after-button/node-with-move-after-button.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    InsertNodeAfterButtonComponent,
-    InsertNodeInsideButtonComponent,
-    MatButtonModule,
-    NodeIconAndTitleComponent,
-    NodeWithMoveAfterButtonComponent,
-    RouterLink
-  ],
-  standalone: true,
-  styleUrl: '../choose-node-location.component.scss',
-  templateUrl: 'choose-copy-node-location.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        InsertNodeAfterButtonComponent,
+        InsertNodeInsideButtonComponent,
+        MatButtonModule,
+        NodeIconAndTitleComponent,
+        NodeWithMoveAfterButtonComponent,
+        RouterLink
+    ],
+    styleUrl: '../choose-node-location.component.scss',
+    templateUrl: 'choose-copy-node-location.component.html'
 })
 export class ChooseCopyNodeLocationComponent extends ChooseNodeLocationComponent {
   constructor(

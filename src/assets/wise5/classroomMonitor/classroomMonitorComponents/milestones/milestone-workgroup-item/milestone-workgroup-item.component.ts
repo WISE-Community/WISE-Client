@@ -15,10 +15,11 @@ import { ComponentTypeService } from '../../../../services/componentTypeService'
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 @Component({
-  selector: 'milestone-workgroup-item',
-  templateUrl: './milestone-workgroup-item.component.html',
-  styleUrls: ['./milestone-workgroup-item.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'milestone-workgroup-item',
+    templateUrl: './milestone-workgroup-item.component.html',
+    styleUrls: ['./milestone-workgroup-item.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class MilestoneWorkgroupItemComponent implements OnInit {
   changeInScore: number | '-';

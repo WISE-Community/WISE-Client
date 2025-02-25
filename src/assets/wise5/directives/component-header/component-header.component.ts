@@ -8,11 +8,10 @@ import { PromptComponent } from '../prompt/prompt.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [FlexLayoutModule, PossibleScoreComponent, PromptComponent],
-  selector: 'component-header',
-  standalone: true,
-  styleUrl: 'component-header.component.scss',
-  templateUrl: 'component-header.component.html'
+    imports: [FlexLayoutModule, PossibleScoreComponent, PromptComponent],
+    selector: 'component-header',
+    styleUrl: 'component-header.component.scss',
+    templateUrl: 'component-header.component.html'
 })
 export class ComponentHeaderComponent {
   @Input() component: WISEComponent;

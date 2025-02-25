@@ -5,15 +5,14 @@ import { InsertNodeAfterButtonComponent } from '../insert-node-after-button/inse
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    InsertNodeAfterButtonComponent,
-    NodeIconAndTitleComponent
-  ],
-  selector: 'node-with-move-after-button',
-  standalone: true,
-  templateUrl: './node-with-move-after-button.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        InsertNodeAfterButtonComponent,
+        NodeIconAndTitleComponent
+    ],
+    selector: 'node-with-move-after-button',
+    templateUrl: './node-with-move-after-button.component.html'
 })
 export class NodeWithMoveAfterButtonComponent {
   @Input() protected disabled: boolean;

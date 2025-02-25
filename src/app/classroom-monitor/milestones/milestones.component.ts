@@ -10,9 +10,10 @@ import { Milestone } from '../../domain/milestone';
 import { Annotation } from '../../../assets/wise5/common/Annotation';
 
 @Component({
-  selector: 'milestones',
-  styleUrls: ['milestones.component.scss'],
-  templateUrl: 'milestones.component.html'
+    selector: 'milestones',
+    styleUrls: ['milestones.component.scss'],
+    templateUrl: 'milestones.component.html',
+    standalone: false
 })
 export class MilestonesComponent {
   milestones: Milestone[];

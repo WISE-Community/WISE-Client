@@ -15,21 +15,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    MatTooltipModule
-  ],
-  selector: 'notifications-menu',
-  standalone: true,
-  styleUrl: './notifications-menu.component.scss',
-  templateUrl: './notifications-menu.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        MatListModule,
+        MatToolbarModule,
+        MatTooltipModule
+    ],
+    selector: 'notifications-menu',
+    styleUrl: './notifications-menu.component.scss',
+    templateUrl: './notifications-menu.component.html'
 })
 export class NotificationsMenuComponent {
   @Input() newNotifications: Notification[] = [];

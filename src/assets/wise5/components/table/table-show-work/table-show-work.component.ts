@@ -6,9 +6,10 @@ import { TabulatorDataService } from '../tabulatorDataService';
 import { TabulatorData } from '../TabulatorData';
 
 @Component({
-  selector: 'table-show-work',
-  templateUrl: 'table-show-work.component.html',
-  styleUrls: ['../table-student/table-student.component.scss', 'table-show-work.component.scss']
+    selector: 'table-show-work',
+    templateUrl: 'table-show-work.component.html',
+    styleUrls: ['../table-student/table-student.component.scss', 'table-show-work.component.scss'],
+    standalone: false
 })
 export class TableShowWorkComponent extends ComponentShowWorkDirective {
   tableData: any[] = [];

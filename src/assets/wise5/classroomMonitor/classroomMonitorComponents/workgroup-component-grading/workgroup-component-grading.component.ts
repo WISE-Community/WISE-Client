@@ -13,17 +13,16 @@ import { ComponentGradingComponent } from '../component-grading.component';
 import { EditComponentAnnotationsComponent } from '../edit-component-annotations/edit-component-annotations.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    ComponentGradingComponent,
-    ComponentStateInfoComponent,
-    EditComponentAnnotationsComponent,
-    FlexLayoutModule,
-    MatDialogModule
-  ],
-  selector: 'workgroup-component-grading',
-  standalone: true,
-  templateUrl: 'workgroup-component-grading.component.html'
+    imports: [
+        CommonModule,
+        ComponentGradingComponent,
+        ComponentStateInfoComponent,
+        EditComponentAnnotationsComponent,
+        FlexLayoutModule,
+        MatDialogModule
+    ],
+    selector: 'workgroup-component-grading',
+    templateUrl: 'workgroup-component-grading.component.html'
 })
 export class WorkgroupComponentGradingComponent {
   protected component: ComponentContent;

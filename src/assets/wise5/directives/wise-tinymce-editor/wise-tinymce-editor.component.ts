@@ -10,11 +10,10 @@ import { Language } from '../../../../app/domain/language';
 declare let tinymce: any;
 
 @Component({
-  selector: 'wise-tinymce-editor',
-  styleUrl: 'wise-tinymce-editor.component.scss',
-  templateUrl: 'wise-tinymce-editor.component.html',
-  standalone: true,
-  imports: [EditorModule]
+    selector: 'wise-tinymce-editor',
+    styleUrl: 'wise-tinymce-editor.component.scss',
+    templateUrl: 'wise-tinymce-editor.component.html',
+    imports: [EditorModule]
 })
 export class WiseTinymceEditorComponent {
   public config: any;

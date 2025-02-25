@@ -7,17 +7,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    RouterModule
-  ],
-  selector: 'app-features',
-  standalone: true,
-  styleUrl: './features.component.scss',
-  templateUrl: './features.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        RouterModule
+    ],
+    selector: 'app-features',
+    styleUrl: './features.component.scss',
+    templateUrl: './features.component.html'
 })
 export class FeaturesComponent {}

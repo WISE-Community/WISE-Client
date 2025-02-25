@@ -8,9 +8,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AssetChooserDialogData } from './asset-chooser-dialog-data';
 
 @Component({
-  selector: 'project-asset-authoring',
-  templateUrl: './project-asset-authoring.component.html',
-  styleUrls: ['./project-asset-authoring.component.scss']
+    selector: 'project-asset-authoring',
+    templateUrl: './project-asset-authoring.component.html',
+    styleUrls: ['./project-asset-authoring.component.scss'],
+    standalone: false
 })
 export class ProjectAssetAuthoringComponent {
   allowedFileTypes: string[] = ['any'];

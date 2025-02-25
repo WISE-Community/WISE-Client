@@ -12,7 +12,8 @@ let fixture: ComponentFixture<ConstraintsAuthoringComponent>;
 const nodeId1 = 'node1';
 
 @Component({
-  selector: 'constraints-authoring-component'
+    selector: 'constraints-authoring-component',
+    standalone: false
 })
 class ConstraintsAuthoringComponentImpl extends ConstraintsAuthoringComponent {}
 

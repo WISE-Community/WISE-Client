@@ -3,9 +3,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { LibraryGroup } from '../libraryGroup';
 
 @Component({
-  selector: 'app-library-group-thumbs',
-  templateUrl: './library-group-thumbs.component.html',
-  styleUrls: ['./library-group-thumbs.component.scss']
+    selector: 'app-library-group-thumbs',
+    templateUrl: './library-group-thumbs.component.html',
+    styleUrls: ['./library-group-thumbs.component.scss'],
+    standalone: false
 })
 export class LibraryGroupThumbsComponent implements OnInit {
   @Input()

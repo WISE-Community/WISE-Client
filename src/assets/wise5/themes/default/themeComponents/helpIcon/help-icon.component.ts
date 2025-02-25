@@ -8,11 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule],
-  selector: 'help-icon',
-  standalone: true,
-  styleUrl: 'help-icon.component.scss',
-  templateUrl: 'help-icon.component.html'
+    imports: [CommonModule, MatButtonModule, MatIconModule],
+    selector: 'help-icon',
+    styleUrl: 'help-icon.component.scss',
+    templateUrl: 'help-icon.component.html'
 })
 export class HelpIconComponent {
   @Input() content: string;
