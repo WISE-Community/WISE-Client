@@ -38,12 +38,8 @@ export class TeacherSummaryDisplayComponent extends SummaryDisplayComponent {
     return this.getLatestStudentWork();
   }
 
-  protected renderResponsesOrScores(isRenderingResponses: boolean): void {
-    if (this.isSourceSelf()) {
-      this.displaySourceSelfMessageToTeacher();
-    } else {
-      isRenderingResponses ? this.renderClassResponses() : this.renderClassScores();
-    }
+  protected renderSelfDisplay(): void {
+    this.displaySourceSelfMessageToTeacher();
   }
 
   private displaySourceSelfMessageToTeacher(): void {

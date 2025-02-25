@@ -16,6 +16,9 @@ import { SummaryService } from '../../components/summary/summaryService';
 import { tap } from 'rxjs/operators';
 import { SeriesData } from '../../common/SeriesData';
 import { SeriesDataPoint } from '../../common/SeriesDataPoint';
+import { MultipleChoiceSummaryData } from './MultipleChoiceSummaryData';
+import { ScoreSummaryData } from './ScoreSummaryData';
+import { TableSummaryData } from './TableSummaryData';
 
 @Component({
   imports: [CommonModule, MatCardModule],
@@ -119,18 +122,25 @@ export abstract class SummaryDisplayComponent {
   }
 
   protected renderDisplay(): void {
-    if (this.studentDataType === 'responses') {
-      this.renderResponses();
-    } else if (this.studentDataType === 'scores') {
-      this.renderScores();
+    // do something like render display > check isSourceSelf() > if so,
+    // abstract method with unique behavior b/w student/teacher | it not,
+    // shared behavior
+    if (this.isSourceSelf()) {
+      this.renderSelfDisplay();
+    } else {
+      switch (this.studentDataType) {
+        case 'responses':
+          this.renderClassResponses();
+          break;
+        case 'scores':
+          this.renderClassScores();
+      }
     }
   }
 
-  private renderResponses(): void {
-    this.renderResponsesOrScores(true);
-  }
+  protected abstract renderSelfDisplay(): void;
 
-  protected abstract renderResponsesOrScores(isRenderingResponses: boolean): void;
+  // protected abstract renderResponsesOrScores(isRenderingResponses: boolean): void;
 
   protected renderClassResponses(): void {
     this.getLatestWork().subscribe((componentStates = []) => {
@@ -155,10 +165,6 @@ export abstract class SummaryDisplayComponent {
           return this.filterLatestScoreAnnotations(scoreAnnotations);
         })
       );
-  }
-
-  private renderScores(): void {
-    this.renderResponsesOrScores(false);
   }
 
   protected getLatestScoreAnnotationForWorkgroup(): Annotation {
@@ -221,13 +227,12 @@ export abstract class SummaryDisplayComponent {
     });
   }
 
-  // MOVE renderGraph() TO renderClass/SelfResponse(s)()
   protected processComponentStates(componentStates: ComponentState[]): [SeriesData, number] {
     let seriesData: SeriesData;
     let count: number;
     if (this.otherComponentType === 'MultipleChoice') {
       // PUT THIS DATA IN SOMETHING LIKE A MultipleChoiceSummaryData (maybe)
-      const summaryData = this.createChoicesSummaryData(
+      const summaryData = new MultipleChoiceSummaryData(
         this.otherComponent as MultipleChoiceContent,
         componentStates
       );
@@ -237,29 +242,13 @@ export abstract class SummaryDisplayComponent {
       );
       count = componentStates.length;
     } else if (this.otherComponentType === 'Table') {
-      const summaryData = this.createTableSummaryData(componentStates);
+      // const summaryData = this.createTableSummaryData(componentStates);
+      const summaryData = new TableSummaryData(componentStates);
       seriesData = this.createTableSeriesData(summaryData);
       count = this.getTotalTableCount(seriesData);
     }
     this.calculateCountsAndPercentage(componentStates.length);
-    // this.renderGraph(seriesData, count); // REMOVE THIS LATER
     return [seriesData, count];
-  }
-
-  createTableSummaryData(componentStates: ComponentState[]): any {
-    const labelToCount = {};
-    for (const componentState of componentStates) {
-      const tableData = componentState.studentData.tableData;
-      for (let r = 1; r < tableData.length; r++) {
-        const row = tableData[r];
-        const key = row[0].text;
-        const value = row[1].text;
-        if (key != '') {
-          this.accumulateLabel(labelToCount, this.cleanLabel(key), value);
-        }
-      }
-    }
-    return labelToCount;
   }
 
   cleanLabel(label: string): string {
@@ -293,13 +282,6 @@ export abstract class SummaryDisplayComponent {
     return total;
   }
 
-  accumulateLabel(labelToCount: {}, key: string, value: any): void {
-    if (labelToCount[key] == null) {
-      labelToCount[key] = 0;
-    }
-    labelToCount[key] += this.convertToNumber(value);
-  }
-
   convertToNumber(value: any): number {
     if (!isNaN(Number(value))) {
       return Number(value);
@@ -310,7 +292,7 @@ export abstract class SummaryDisplayComponent {
 
   protected processScoreAnnotations(annotations: Annotation[]): void {
     this.updateMaxScoreIfNecessary(annotations);
-    const summaryData = this.createScoresSummaryData(annotations);
+    const summaryData = new ScoreSummaryData(annotations, this.maxScore);
     const [seriesData, total] = this.createScoresSeriesData(summaryData);
     this.calculateCountsAndPercentage(annotations.length);
     this.renderGraph(seriesData, total);
@@ -329,45 +311,7 @@ export abstract class SummaryDisplayComponent {
     return maxScoreSoFar;
   }
 
-  // component should not be any, but ComponentContent.choices doesn't exist for some reason
-  private createChoicesSummaryData(
-    componentState: MultipleChoiceContent,
-    componentStates: ComponentState[]
-  ): any {
-    const summaryData = {};
-    for (const choice of componentState.choices) {
-      summaryData[choice.id] = this.createChoiceSummaryData(
-        choice.id,
-        choice.text,
-        choice.isCorrect
-      );
-    }
-    for (const componentState of componentStates) {
-      this.addComponentStateDataToSummaryData(summaryData, componentState);
-    }
-    return summaryData;
-  }
-
-  // These should obviously not be any, but component is any for now...
-  createChoiceSummaryData(id: any, text: any, isCorrect: any): any {
-    return {
-      id: id,
-      text: text,
-      isCorrect: isCorrect,
-      count: 0
-    };
-  }
-
-  private addComponentStateDataToSummaryData(
-    summaryData: {},
-    componentState: ComponentState
-  ): void {
-    for (const choice of componentState.studentData.studentChoices) {
-      this.incrementSummaryData(summaryData, choice.id);
-    }
-  }
-
-  // Not any
+  // this should go to SeriesData.ts
   createChoicesSeriesData(component: MultipleChoiceContent, summaryData: any): SeriesData {
     let seriesData = new SeriesData();
     this.hasCorrectness = this.hasCorrectAnswer(component);
@@ -408,41 +352,11 @@ export abstract class SummaryDisplayComponent {
   }
 
   // Not any
-  createScoresSummaryData(annotations: Annotation[]): any {
-    const summaryData = {};
-    for (let scoreValue = 0; scoreValue <= this.maxScore; scoreValue++) {
-      summaryData[scoreValue] = this.createScoreSummaryData(scoreValue);
-    }
-    for (const annotation of annotations) {
-      this.addAnnotationDataToSummaryData(summaryData, annotation);
-    }
-    return summaryData;
-  }
-
-  createScoreSummaryData(score: number): any {
-    return {
-      score: score,
-      count: 0
-    };
-  }
-
-  // Not any
-  private addAnnotationDataToSummaryData(summaryData: any, annotation: Annotation): void {
-    const score = this.getScoreFromAnnotation(annotation);
-    this.incrementSummaryData(summaryData, score);
-  }
-
-  // Not any
   private getScoreFromAnnotation(annotation: Annotation): any {
     return annotation.data.value;
   }
 
-  // Not any
-  private incrementSummaryData(summaryData: any, id: any): void {
-    summaryData[id].count += 1;
-  }
-
-  // Not any
+  // this should go to SeriesData.ts
   private createScoresSeriesData(summaryData: any): [SeriesData, number] {
     const seriesData = new SeriesData();
     let total = 0;
