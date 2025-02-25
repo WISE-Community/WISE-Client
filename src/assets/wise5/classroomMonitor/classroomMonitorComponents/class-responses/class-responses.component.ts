@@ -34,12 +34,9 @@ import { ComponentServiceLookupService } from '../../../services/componentServic
   templateUrl: './class-responses.component.html'
 })
 export class ClassResponsesComponent {
-  protected canViewStudentNames: boolean;
   @Input() component: any;
   protected isExpandAll: boolean;
-  protected maxScore: number;
   @Input() node: Node;
-  protected numRubrics: number;
   protected sort: string;
   protected sortedWorkgroups: any[] = [];
   private workgroups: any[] = [];
@@ -75,10 +72,8 @@ export class ClassResponsesComponent {
           workgroup.workgroupId != null &&
           this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)
       );
-      this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;
       this.setWorkgroupsById();
       this.sortWorkgroups();
-      this.numRubrics = node.getNumRubrics();
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
   }

@@ -33,7 +33,7 @@ export class ComponentWorkgroupItemComponent {
   @Input() expanded: boolean;
   @Input() hasAlert: boolean;
   @Input() hasNewAlert: boolean;
-  @Input() maxScore: number;
+  protected maxScore: number;
   @Input() nodeId: string;
   @Output() onUpdateExpand: EventEmitter<any> = new EventEmitter();
   @Input() score: number | '-';

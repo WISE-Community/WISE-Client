@@ -4,7 +4,6 @@ import { Annotation } from '../../../../common/Annotation';
 import { Node } from '../../../../common/Node';
 import { CompletionStatus } from '../../shared/CompletionStatus';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../../services/annotationService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { ConfigService } from '../../../../services/configService';
@@ -40,7 +39,6 @@ export class MilestoneGradingViewComponent {
     protected classroomStatusService: ClassroomStatusService,
     protected configService: ConfigService,
     protected dataService: TeacherDataService,
-    protected dialog: MatDialog,
     protected notificationService: NotificationService,
     protected projectService: TeacherProjectService
   ) {}
