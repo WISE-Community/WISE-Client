@@ -111,14 +111,8 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
     return completionStatus;
   }
 
-  private getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
-    const componentStates = this.dataService.getComponentStatesByNodeId(this.node.id);
-    for (const componentState of componentStates.reverse()) {
-      if (componentState.workgroupId === workgroupId) {
-        return componentState.serverSaveTime;
-      }
-    }
-    return null;
+  protected getComponentStates(): any[] {
+    return this.dataService.getComponentStatesByNodeId(this.node.id);
   }
 
   private getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {

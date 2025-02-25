@@ -54,6 +54,18 @@ export abstract class AbstractClassResponsesComponent {
 
   protected abstract updateWorkgroup(workgroupId: number, init: boolean): void;
 
+  protected getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
+    const componentStates = this.getComponentStates();
+    for (const componentState of componentStates.reverse()) {
+      if (componentState.workgroupId === workgroupId) {
+        return componentState.serverSaveTime;
+      }
+    }
+    return null;
+  }
+
+  protected abstract getComponentStates(): any[];
+
   protected sortWorkgroups(): void {
     this.sortedWorkgroups = [];
     for (const workgroup of this.workgroups) {
