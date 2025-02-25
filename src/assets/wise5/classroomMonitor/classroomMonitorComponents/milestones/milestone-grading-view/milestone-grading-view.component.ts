@@ -1,15 +1,9 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { copy } from '../../../../common/object/object';
 import { Annotation } from '../../../../common/Annotation';
-import { Node } from '../../../../common/Node';
 import { CompletionStatus } from '../../shared/CompletionStatus';
 import { Subscription } from 'rxjs';
-import { AnnotationService } from '../../../../services/annotationService';
-import { ClassroomStatusService } from '../../../../services/classroomStatusService';
-import { ConfigService } from '../../../../services/configService';
-import { NotificationService } from '../../../../services/notificationService';
-import { TeacherDataService } from '../../../../services/teacherDataService';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { AbstractClassResponsesComponent } from '../../AbstractClassResponseComponent';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -17,31 +11,15 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
   styleUrl: './milestone-grading-view.component.scss',
   templateUrl: './milestone-grading-view.component.html'
 })
-export class MilestoneGradingViewComponent {
+export class MilestoneGradingViewComponent extends AbstractClassResponsesComponent {
   private componentId: string;
   private firstNodeId: string;
   protected firstNodePosition: string;
-  protected isExpandAll: boolean;
   private lastNodeId: string;
   protected lastNodePosition: string;
   @Input() milestone: any;
   private nodeId: string;
-  protected sort: string;
-  sortedWorkgroups: any[];
   private subscriptions: Subscription = new Subscription();
-  private workgroupInViewById: any = {}; // whether the workgroup is in view or not
-  workgroups: any;
-  private workgroupsById: any = {};
-  private workVisibilityById: any = {}; // whether student work is visible for each workgroup
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected classroomStatusService: ClassroomStatusService,
-    protected configService: ConfigService,
-    protected dataService: TeacherDataService,
-    protected notificationService: NotificationService,
-    protected projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.nodeId = this.milestone.nodeId;
@@ -51,7 +29,10 @@ export class MilestoneGradingViewComponent {
         this.milestone.report.locations[this.milestone.report.locations.length - 1].nodeId;
     }
     this.componentId = this.milestone.componentId;
-    this.retrieveStudentData();
+    this.retrieveStudentData(this.projectService.getNode(this.firstNodeId));
+    if (this.milestone.report.locations.length > 1) {
+      this.retrieveStudentData(this.projectService.getNode(this.lastNodeId));
+    }
     this.subscribeToEvents();
     this.getNodePositions();
   }
@@ -150,57 +131,6 @@ export class MilestoneGradingViewComponent {
       }
     }
     return null;
-  }
-
-  /**
-   * Returns a numerical status value for a given completion status object depending on node
-   * completion
-   * Available status values are: 0 (not visited/no work; default), 1 (partially completed),
-   * 2 (completed)
-   * @param completionStatus Object
-   * @returns Integer status value
-   */
-  private getWorkgroupCompletionStatus(completionStatus: CompletionStatus): number {
-    // TODO: store this info in the nodeStatus so we don't have to calculate every time (and can use
-    // more widely)?
-    let status = 0;
-    if (!completionStatus.isVisible) {
-      status = -1;
-    } else if (completionStatus.isCompleted) {
-      status = 2;
-    } else if (completionStatus.latestWorkTime !== null) {
-      status = 1;
-    }
-    return status;
-  }
-
-  protected retrieveStudentData(): void {
-    this.retrieveStudentDataForNode(this.projectService.getNode(this.firstNodeId));
-    if (this.milestone.report.locations.length > 1) {
-      this.retrieveStudentDataForNode(this.projectService.getNode(this.lastNodeId));
-    }
-  }
-
-  private retrieveStudentDataForNode(node: Node): void {
-    this.dataService.retrieveStudentDataForNode(node).subscribe(() => {
-      this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
-        (workgroup) =>
-          workgroup.workgroupId != null &&
-          this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)
-      );
-      this.setWorkgroupsById();
-      this.sortWorkgroups();
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
-    });
-  }
-
-  private setWorkgroupsById(): void {
-    for (const workgroup of this.workgroups) {
-      const workgroupId = workgroup.workgroupId;
-      this.workgroupsById[workgroupId] = workgroup;
-      this.workVisibilityById[workgroupId] = false;
-      this.updateWorkgroup(workgroupId, true);
-    }
   }
 
   private getNodePositions(): void {
@@ -326,40 +256,9 @@ export class MilestoneGradingViewComponent {
     this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
-  setSort(value: string): void {
-    if (this.sort === value) {
-      this.sort = `-${value}`;
-    } else {
-      this.sort = value;
-    }
-    this.dataService.nodeGradingSort = this.sort;
-    this.sortWorkgroups();
-  }
-
   protected sortWorkgroups(): void {
-    this.sortedWorkgroups = [];
-    for (const workgroup of this.workgroups) {
-      this.sortedWorkgroups.push(workgroup);
-    }
+    super.sortWorkgroups();
     switch (this.sort) {
-      case 'team':
-        this.sortedWorkgroups.sort(this.sortTeamAscending);
-        break;
-      case '-team':
-        this.sortedWorkgroups.sort(this.sortTeamDescending);
-        break;
-      case 'status':
-        this.sortedWorkgroups.sort(this.createSortAscendingFunction('completionStatus'));
-        break;
-      case '-status':
-        this.sortedWorkgroups.sort(this.createSortDescendingFunction('completionStatus'));
-        break;
-      case 'score':
-        this.sortedWorkgroups.sort(this.createSortAscendingFunction('score'));
-        break;
-      case '-score':
-        this.sortedWorkgroups.sort(this.createSortDescendingFunction('score'));
-        break;
       case 'initialScore':
         this.sortedWorkgroups.sort(this.createSortAscendingFunction('initialScore'));
         break;
@@ -372,70 +271,6 @@ export class MilestoneGradingViewComponent {
       case '-changeInScore':
         this.sortedWorkgroups.sort(this.createSortDescendingFunction('changeInScore'));
         break;
-    }
-  }
-
-  private createSortDescendingFunction(fieldName: string): any {
-    return (workgroupA: any, workgroupB: any) => {
-      if (workgroupA.isVisible === workgroupB.isVisible) {
-        if (workgroupA[fieldName] === workgroupB[fieldName]) {
-          return workgroupA.workgroupId - workgroupB.workgroupId;
-        } else {
-          return workgroupB[fieldName] - workgroupA[fieldName];
-        }
-      } else {
-        return workgroupB.isVisible - workgroupA.isVisible;
-      }
-    };
-  }
-
-  private createSortAscendingFunction(fieldName: string): any {
-    return (workgroupA: any, workgroupB: any) => {
-      if (workgroupA.isVisible === workgroupB.isVisible) {
-        if (workgroupA[fieldName] === workgroupB[fieldName]) {
-          return workgroupA.workgroupId - workgroupB.workgroupId;
-        } else {
-          return workgroupA[fieldName] - workgroupB[fieldName];
-        }
-      } else {
-        return workgroupB.isVisible - workgroupA.isVisible;
-      }
-    };
-  }
-
-  /**
-   * Sort using this order hierarchy
-   * isVisible descending, workgroupId ascending
-   */
-  private sortTeamAscending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.isVisible === workgroupB.isVisible) {
-      return workgroupA.workgroupId - workgroupB.workgroupId;
-    } else {
-      return workgroupB.isVisible - workgroupA.isVisible;
-    }
-  }
-
-  /**
-   * Sort using this order hierarchy
-   * isVisible descending, workgroupId descending
-   */
-  private sortTeamDescending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.isVisible === workgroupB.isVisible) {
-      return workgroupB.workgroupId - workgroupA.workgroupId;
-    } else {
-      return workgroupB.isVisible - workgroupA.isVisible;
-    }
-  }
-
-  protected onIntersection(
-    workgroupId: number,
-    intersectionObserverEntries: IntersectionObserverEntry[]
-  ): void {
-    for (const entry of intersectionObserverEntries) {
-      this.workgroupInViewById[workgroupId] = entry.isIntersecting;
-      if (this.isExpandAll && entry.isIntersecting) {
-        this.workVisibilityById[workgroupId] = true;
-      }
     }
   }
 }
