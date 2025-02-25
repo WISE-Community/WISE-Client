@@ -7,9 +7,10 @@ import { LibraryService } from '../../../services/library.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-copy-project-dialog',
-  templateUrl: './copy-project-dialog.component.html',
-  styleUrls: ['./copy-project-dialog.component.scss']
+    selector: 'app-copy-project-dialog',
+    templateUrl: './copy-project-dialog.component.html',
+    styleUrls: ['./copy-project-dialog.component.scss'],
+    standalone: false
 })
 export class CopyProjectDialogComponent {
   isCopying: boolean = false;

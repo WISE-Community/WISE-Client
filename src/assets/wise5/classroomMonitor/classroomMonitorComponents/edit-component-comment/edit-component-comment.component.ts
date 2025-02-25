@@ -10,11 +10,10 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [FormsModule, FlexLayoutModule, MatFormFieldModule, MatInputModule, TextFieldModule],
-  selector: 'edit-component-comment',
-  standalone: true,
-  styles: ['.mat-mdc-form-field { display: initial }', 'textarea { resize: none }'],
-  templateUrl: 'edit-component-comment.component.html'
+    imports: [FormsModule, FlexLayoutModule, MatFormFieldModule, MatInputModule, TextFieldModule],
+    selector: 'edit-component-comment',
+    styles: ['.mat-mdc-form-field { display: initial }', 'textarea { resize: none }'],
+    templateUrl: 'edit-component-comment.component.html'
 })
 export class EditComponentCommentComponent {
   @Input() comment: string;

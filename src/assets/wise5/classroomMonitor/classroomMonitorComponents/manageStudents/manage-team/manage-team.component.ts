@@ -1,29 +1,43 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfigService } from '../../../../services/configService';
-import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
-import { ChangeTeamPeriodDialogComponent } from '../change-team-period-dialog/change-team-period-dialog.component';
 import {
   CdkDrag,
   CdkDragDrop,
   CdkDragEnter,
   CdkDragExit,
   CdkDropList,
+  DragDropModule,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
-import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ChangeTeamPeriodDialogComponent } from '../change-team-period-dialog/change-team-period-dialog.component';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { ConfigService } from '../../../../services/configService';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
+import { ManageUserComponent } from '../manage-user/manage-user.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
+import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
 
 @Component({
+  imports: [
+    CommonModule,
+    DragDropModule,
+    FlexLayoutModule,
+    ManageUserComponent,
+    MatCardModule,
+    MatIconModule
+  ],
   selector: 'manage-team',
-  styleUrls: ['manage-team.component.scss'],
+  styleUrl: 'manage-team.component.scss',
   templateUrl: 'manage-team.component.html'
 })
 export class ManageTeamComponent {
-  avatarColor: string;
-  canGradeStudentWork: boolean;
-  isUnassigned: boolean;
+  protected avatarColor: string;
+  protected canGradeStudentWork: boolean;
+  protected isUnassigned: boolean;
   @Input() team: any;
 
   constructor(
@@ -33,13 +47,13 @@ export class ManageTeamComponent {
     private updateWorkgroupService: UpdateWorkgroupService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.avatarColor = getAvatarColorForWorkgroupId(this.team.workgroupId);
     this.canGradeStudentWork = this.configService.getPermissions().canGradeStudentWork;
     this.isUnassigned = this.team.workgroupId == null;
   }
 
-  changePeriod(event: Event) {
+  protected changePeriod(event: Event): void {
     event.preventDefault();
     this.dialog.open(ChangeTeamPeriodDialogComponent, {
       data: this.team,
@@ -47,15 +61,15 @@ export class ManageTeamComponent {
     });
   }
 
-  dragEnter(event: CdkDragEnter) {
+  protected dragEnter(event: CdkDragEnter): void {
     event.container.element.nativeElement.classList.add('primary-bg');
   }
 
-  dragExit(event: CdkDragExit) {
+  protected dragExit(event: CdkDragExit): void {
     event.container.element.nativeElement.classList.remove('primary-bg');
   }
 
-  canDrop(drag: CdkDrag, drop: CdkDropList): boolean {
+  protected canDrop(drag: CdkDrag, drop: CdkDropList): boolean {
     return !drop.element.nativeElement.classList.contains('unassigned') && drop.data.length < 3;
   }
 

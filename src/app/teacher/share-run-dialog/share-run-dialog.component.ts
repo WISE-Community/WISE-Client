@@ -9,9 +9,10 @@ import { UtilService } from '../../services/util.service';
 import { TeacherRun } from '../teacher-run';
 
 @Component({
-  selector: 'app-share-run-dialog',
-  templateUrl: './share-run-dialog.component.html',
-  styleUrls: ['./share-run-dialog.component.scss']
+    selector: 'app-share-run-dialog',
+    templateUrl: './share-run-dialog.component.html',
+    styleUrls: ['./share-run-dialog.component.scss'],
+    standalone: false
 })
 export class ShareRunDialogComponent extends ShareItemDialogComponent {
   run: TeacherRun;

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 
 @Component({
-  selector: 'app-register-google-user-already-exists',
-  templateUrl: './register-google-user-already-exists.component.html',
-  styleUrls: ['./register-google-user-already-exists.component.scss']
+    selector: 'app-register-google-user-already-exists',
+    templateUrl: './register-google-user-already-exists.component.html',
+    styleUrls: ['./register-google-user-already-exists.component.scss'],
+    standalone: false
 })
 export class RegisterGoogleUserAlreadyExistsComponent implements OnInit {
   constructor(private configService: ConfigService) {}

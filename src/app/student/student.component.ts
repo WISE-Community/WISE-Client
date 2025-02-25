@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss']
+    selector: 'app-student',
+    templateUrl: './student.component.html',
+    styleUrls: ['./student.component.scss'],
+    standalone: false
 })
 export class StudentComponent implements OnInit {
   constructor(private router: Router) {}

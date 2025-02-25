@@ -1,6 +1,6 @@
 'use strict';
 
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { Injectable } from '@angular/core';
@@ -219,7 +219,7 @@ export class TableService extends ComponentService {
       );
       if (tableElement != null) {
         // convert the table element to a canvas element
-        html2canvas(tableElement).then((canvas) => {
+        html2canvas(tableElement as HTMLElement).then((canvas) => {
           const pngFile = convertToPNGFile(canvas);
           this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
             resolve(asset);

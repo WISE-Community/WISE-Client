@@ -13,9 +13,10 @@ import { ConfigService } from '../../services/config.service';
 import { SchoolLevel, schoolLevels } from '../../domain/profile.constants';
 
 @Component({
-  selector: 'register-teacher-form',
-  templateUrl: './register-teacher-form.component.html',
-  styleUrls: ['./register-teacher-form.component.scss']
+    selector: 'register-teacher-form',
+    templateUrl: './register-teacher-form.component.html',
+    styleUrls: ['./register-teacher-form.component.scss'],
+    standalone: false
 })
 export class RegisterTeacherFormComponent extends RegisterUserFormComponent implements OnInit {
   createTeacherAccountFormGroup: FormGroup = this.fb.group(

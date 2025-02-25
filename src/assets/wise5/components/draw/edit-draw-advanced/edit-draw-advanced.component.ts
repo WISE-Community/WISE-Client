@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
 @Component({
-  selector: 'edit-draw-advanced',
-  templateUrl: 'edit-draw-advanced.component.html'
+    selector: 'edit-draw-advanced',
+    templateUrl: 'edit-draw-advanced.component.html',
+    standalone: false
 })
 export class EditDrawAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];

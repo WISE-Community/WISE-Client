@@ -12,22 +12,21 @@ import { AbstractImportStepComponent } from '../../../../assets/wise5/authoringT
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatDividerModule,
-    MatIconModule,
-    MatProgressBarModule,
-    MatTooltipModule,
-    RouterModule
-  ],
-  selector: 'choose-import-step',
-  standalone: true,
-  styleUrls: ['choose-import-step.component.scss', '../../add-content.scss'],
-  templateUrl: 'choose-import-step.component.html'
+    imports: [
+        CommonModule,
+        FormsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDividerModule,
+        MatIconModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        RouterModule
+    ],
+    selector: 'choose-import-step',
+    styleUrls: ['choose-import-step.component.scss', '../../add-content.scss'],
+    templateUrl: 'choose-import-step.component.html'
 })
 export class ChooseImportStepComponent extends AbstractImportStepComponent {
   protected project: any;

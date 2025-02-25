@@ -10,11 +10,12 @@ import { ProjectTagService } from '../../../../assets/wise5/services/projectTagS
 import { Tag } from '../../../domain/tag';
 
 @Component({
-  animations: [flash],
-  encapsulation: ViewEncapsulation.None,
-  selector: 'app-library-project',
-  styleUrl: './library-project.component.scss',
-  templateUrl: './library-project.component.html'
+    animations: [flash],
+    encapsulation: ViewEncapsulation.None,
+    selector: 'app-library-project',
+    styleUrl: './library-project.component.scss',
+    templateUrl: './library-project.component.html',
+    standalone: false
 })
 export class LibraryProjectComponent implements OnInit {
   animateDelay: string = '0s';

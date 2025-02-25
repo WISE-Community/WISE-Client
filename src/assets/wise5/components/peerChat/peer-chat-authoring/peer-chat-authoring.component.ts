@@ -7,9 +7,10 @@ import peerChatLogicOptions from './peer-chat-logic-options';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'peer-chat-authoring',
-  templateUrl: './peer-chat-authoring.component.html',
-  styleUrls: ['./peer-chat-authoring.component.scss']
+    selector: 'peer-chat-authoring',
+    templateUrl: './peer-chat-authoring.component.html',
+    styleUrls: ['./peer-chat-authoring.component.scss'],
+    standalone: false
 })
 export class PeerChatAuthoringComponent extends AbstractComponentAuthoring {
   allowedComponentTypes: string[] = [

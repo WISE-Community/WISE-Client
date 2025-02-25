@@ -13,9 +13,10 @@ import { AnimationService } from '../animationService';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
-  selector: 'animation-student',
-  templateUrl: 'animation-student.component.html',
-  styleUrls: ['animation-student.component.scss']
+    selector: 'animation-student',
+    templateUrl: 'animation-student.component.html',
+    styleUrls: ['animation-student.component.scss'],
+    standalone: false
 })
 export class AnimationStudent extends ComponentStudent {
   animationState: any = 'stopped';

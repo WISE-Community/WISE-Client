@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule],
-  selector: 'display-branch-path-steps',
-  standalone: true,
-  styleUrl: './display-branch-path-steps.component.scss',
-  templateUrl: './display-branch-path-steps.component.html'
+    imports: [CommonModule, FlexLayoutModule],
+    selector: 'display-branch-path-steps',
+    styleUrl: './display-branch-path-steps.component.scss',
+    templateUrl: './display-branch-path-steps.component.html'
 })
 export class DisplayBranchPathStepsComponent {
   protected nodeIdToBackgroundColor: { [key: string]: string } = {};

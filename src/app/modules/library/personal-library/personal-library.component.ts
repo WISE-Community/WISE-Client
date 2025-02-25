@@ -11,9 +11,10 @@ import { Tag } from '../../../domain/tag';
 import { Project } from '../../../domain/project';
 
 @Component({
-  selector: 'app-personal-library',
-  styleUrl: './personal-library.component.scss',
-  templateUrl: './personal-library.component.html'
+    selector: 'app-personal-library',
+    styleUrl: './personal-library.component.scss',
+    templateUrl: './personal-library.component.html',
+    standalone: false
 })
 export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
@@ -181,8 +182,9 @@ export class PersonalLibraryComponent extends LibraryComponent {
 }
 
 @Component({
-  selector: 'personal-library-details',
-  templateUrl: 'personal-library-details.html'
+    selector: 'personal-library-details',
+    templateUrl: 'personal-library-details.html',
+    standalone: false
 })
 export class PersonalLibraryDetailsComponent {
   constructor(

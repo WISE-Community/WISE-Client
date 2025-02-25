@@ -10,10 +10,11 @@ import {
 import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
-  selector: 'new-password-and-confirm',
-  templateUrl: './new-password-and-confirm.component.html',
-  styleUrls: ['./new-password-and-confirm.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'new-password-and-confirm',
+    templateUrl: './new-password-and-confirm.component.html',
+    styleUrls: ['./new-password-and-confirm.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NewPasswordAndConfirmComponent implements OnInit {
   static readonly CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME: string = 'confirmNewPassword';

@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } fro
 import { NotebookService } from '../../../../services/notebookService';
 
 @Component({
-  selector: 'notebook-workgroup-grading',
-  templateUrl: './notebook-workgroup-grading.component.html',
-  styleUrls: ['./notebook-workgroup-grading.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'notebook-workgroup-grading',
+    templateUrl: './notebook-workgroup-grading.component.html',
+    styleUrls: ['./notebook-workgroup-grading.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NotebookWorkgroupGradingComponent implements OnInit {
   @Input() expand: boolean;

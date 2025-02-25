@@ -3,9 +3,10 @@ import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 
 @Component({
-  selector: 'manage-students',
-  styleUrls: ['manage-students.component.scss'],
-  templateUrl: 'manage-students.component.html'
+    selector: 'manage-students',
+    styleUrls: ['manage-students.component.scss'],
+    templateUrl: 'manage-students.component.html',
+    standalone: false
 })
 export class ManageStudentsComponent {
   periods: any[];

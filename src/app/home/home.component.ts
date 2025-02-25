@@ -5,10 +5,11 @@ import { ConfigService } from '../services/config.service';
 import { Config } from '../domain/config';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn]
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn],
+    standalone: false
 })
 export class HomeComponent implements OnInit {
   discourseNewsCategory: string;

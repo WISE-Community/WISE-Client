@@ -16,22 +16,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    NotebookItemComponent
-  ],
-  selector: 'notebook-notes',
-  standalone: true,
-  styleUrl: 'notebook-notes.component.scss',
-  templateUrl: 'notebook-notes.component.html',
-  encapsulation: ViewEncapsulation.None
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        NotebookItemComponent
+    ],
+    selector: 'notebook-notes',
+    styleUrl: 'notebook-notes.component.scss',
+    templateUrl: 'notebook-notes.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class NotebookNotesComponent extends NotebookParentComponent {
   protected groups = [];

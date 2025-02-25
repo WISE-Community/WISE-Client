@@ -11,18 +11,17 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatTabsModule,
-    RouterModule
-  ],
-  selector: 'choose-import-unit',
-  standalone: true,
-  styleUrls: ['./choose-import-unit.component.scss', '../../add-content.scss'],
-  templateUrl: './choose-import-unit.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatTabsModule,
+        RouterModule
+    ],
+    selector: 'choose-import-unit',
+    styleUrls: ['./choose-import-unit.component.scss', '../../add-content.scss'],
+    templateUrl: './choose-import-unit.component.html'
 })
 export class ChooseImportUnitComponent {
   protected importType: 'step' | 'component';

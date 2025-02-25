@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Color from 'colorjs.io/dist/color';
+import Color from 'colorjs.io';
 
 @Injectable()
 export class ColorService {

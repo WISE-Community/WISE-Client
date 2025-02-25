@@ -8,6 +8,7 @@ import { AbstractClassResponsesComponent } from '../../AbstractClassResponseComp
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'milestone-grading-view',
+  standalone: false,
   styleUrl: './milestone-grading-view.component.scss',
   templateUrl: './milestone-grading-view.component.html'
 })

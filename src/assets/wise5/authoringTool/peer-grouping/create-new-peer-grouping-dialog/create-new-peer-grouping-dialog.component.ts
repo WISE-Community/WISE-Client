@@ -8,9 +8,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectService } from '../../../services/projectService';
 
 @Component({
-  selector: 'create-new-peer-grouping-dialog',
-  templateUrl: './create-new-peer-grouping-dialog.component.html',
-  styleUrls: ['./create-new-peer-grouping-dialog.component.scss']
+    selector: 'create-new-peer-grouping-dialog',
+    templateUrl: './create-new-peer-grouping-dialog.component.html',
+    styleUrls: ['./create-new-peer-grouping-dialog.component.scss'],
+    standalone: false
 })
 export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
   constructor(

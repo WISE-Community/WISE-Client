@@ -5,10 +5,11 @@ import { NotebookService } from '../../services/notebookService';
 import { TeacherDataService } from '../../services/teacherDataService';
 
 @Component({
-  selector: 'notebook-grading',
-  templateUrl: './notebook-grading.component.html',
-  styleUrls: ['./notebook-grading.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'notebook-grading',
+    templateUrl: './notebook-grading.component.html',
+    styleUrls: ['./notebook-grading.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NotebookGradingComponent implements OnInit {
   canViewStudentNames: boolean;

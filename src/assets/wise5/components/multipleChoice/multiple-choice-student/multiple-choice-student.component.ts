@@ -21,18 +21,17 @@ import { MultipleChoiceRadioStudentComponent } from '../multiple-choice-radio-st
 import { MultipleChoiceCheckboxStudentComponent } from '../multiple-choice-checkbox-student/multiple-choice-checkbox-student.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    ComponentAnnotationsComponent,
-    ComponentHeaderComponent,
-    ComponentSaveSubmitButtonsComponent,
-    MultipleChoiceRadioStudentComponent,
-    MultipleChoiceCheckboxStudentComponent
-  ],
-  selector: 'multiple-choice-student',
-  standalone: true,
-  styleUrl: 'multiple-choice-student.component.scss',
-  templateUrl: 'multiple-choice-student.component.html'
+    imports: [
+        CommonModule,
+        ComponentAnnotationsComponent,
+        ComponentHeaderComponent,
+        ComponentSaveSubmitButtonsComponent,
+        MultipleChoiceRadioStudentComponent,
+        MultipleChoiceCheckboxStudentComponent
+    ],
+    selector: 'multiple-choice-student',
+    styleUrl: 'multiple-choice-student.component.scss',
+    templateUrl: 'multiple-choice-student.component.html'
 })
 export class MultipleChoiceStudentComponent extends ComponentStudent {
   choices: any[];

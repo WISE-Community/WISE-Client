@@ -7,8 +7,7 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [CommonModule, EditComponentPrompt, FlexLayoutModule, MatIconModule, MatTooltipModule],
-  standalone: true,
-  templateUrl: 'open-response-authoring.component.html'
+    imports: [CommonModule, EditComponentPrompt, FlexLayoutModule, MatIconModule, MatTooltipModule],
+    templateUrl: 'open-response-authoring.component.html'
 })
 export class OpenResponseAuthoringComponent extends AbstractComponentAuthoring {}

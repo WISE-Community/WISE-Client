@@ -8,9 +8,10 @@ import { TeacherService } from '../teacher.service';
 import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 
 @Component({
-  selector: 'app-share-run-code-dialog',
-  templateUrl: './share-run-code-dialog.component.html',
-  styleUrls: ['./share-run-code-dialog.component.scss']
+    selector: 'app-share-run-code-dialog',
+    templateUrl: './share-run-code-dialog.component.html',
+    styleUrls: ['./share-run-code-dialog.component.scss'],
+    standalone: false
 })
 export class ShareRunCodeDialogComponent {
   code: string;

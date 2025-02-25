@@ -13,20 +13,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-  imports: [
-    CommonModule,
-    ComponentTypeSelectorComponent,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatTabsModule,
-    PreviewComponentComponent
-  ],
-  standalone: true,
-  styleUrl: './component-info-dialog.component.scss',
-  templateUrl: './component-info-dialog.component.html'
+    imports: [
+        CommonModule,
+        ComponentTypeSelectorComponent,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatTabsModule,
+        PreviewComponentComponent
+    ],
+    styleUrl: './component-info-dialog.component.scss',
+    templateUrl: './component-info-dialog.component.html'
 })
 export class ComponentInfoDialogComponent {
   protected description: string;

@@ -6,10 +6,9 @@ import { StatusIconComponent } from '../status-icon/status-icon.component';
 import { NodeIconComponent } from '../../../assets/wise5/vle/node-icon/node-icon.component';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, NodeIconComponent, StatusIconComponent],
-  selector: 'step-info',
-  standalone: true,
-  templateUrl: 'step-info.component.html'
+    imports: [CommonModule, FlexLayoutModule, NodeIconComponent, StatusIconComponent],
+    selector: 'step-info',
+    templateUrl: 'step-info.component.html'
 })
 export class StepInfoComponent {
   protected alertIconClass: string;

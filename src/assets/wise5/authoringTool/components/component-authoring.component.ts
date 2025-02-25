@@ -8,11 +8,10 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [PreviewComponentComponent, EditComponentComponent, MatTooltipModule],
-  selector: 'component-authoring',
-  standalone: true,
-  styles: [
-    `
+    imports: [PreviewComponentComponent, EditComponentComponent, MatTooltipModule],
+    selector: 'component-authoring',
+    styles: [
+        `
       preview-component {
         display: block;
         position: relative;
@@ -31,8 +30,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         bottom: 0;
       }
     `
-  ],
-  template: `@if (editing) {
+    ],
+    template: `@if (editing) {
       <edit-component [componentContent]="componentContent" [nodeId]="nodeId" />
     } @else {
       <preview-component

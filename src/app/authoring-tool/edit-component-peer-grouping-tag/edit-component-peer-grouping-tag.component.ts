@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
-  selector: 'edit-component-peer-grouping-tag',
-  templateUrl: './edit-component-peer-grouping-tag.component.html',
-  styleUrls: ['./edit-component-peer-grouping-tag.component.scss']
+    selector: 'edit-component-peer-grouping-tag',
+    templateUrl: './edit-component-peer-grouping-tag.component.html',
+    styleUrls: ['./edit-component-peer-grouping-tag.component.scss'],
+    standalone: false
 })
 export class EditComponentPeerGroupingTagComponent {
   @Input() componentContent: any;

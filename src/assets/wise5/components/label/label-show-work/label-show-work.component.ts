@@ -7,7 +7,6 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 
 @Component({
   selector: 'label-show-work',
-  standalone: true,
   styleUrl: 'label-show-work.component.scss',
   templateUrl: 'label-show-work.component.html'
 })

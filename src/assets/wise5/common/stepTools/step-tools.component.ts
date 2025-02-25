@@ -16,23 +16,22 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
-    NodeIconComponent
-  ],
-  selector: 'step-tools',
-  standalone: true,
-  styleUrl: 'step-tools.component.scss',
-  templateUrl: 'step-tools.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTooltipModule,
+        NodeIconComponent
+    ],
+    selector: 'step-tools',
+    styleUrl: 'step-tools.component.scss',
+    templateUrl: 'step-tools.component.html'
 })
 export class StepToolsComponent {
   protected icons: any;

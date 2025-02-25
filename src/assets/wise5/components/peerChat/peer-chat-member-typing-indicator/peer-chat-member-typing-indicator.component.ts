@@ -7,8 +7,9 @@ import { Subscription } from 'rxjs';
 import { StudentDataService } from '../../../services/studentDataService';
 
 @Component({
-  selector: 'peer-chat-member-typing-indicator',
-  templateUrl: './peer-chat-member-typing-indicator.component.html'
+    selector: 'peer-chat-member-typing-indicator',
+    templateUrl: './peer-chat-member-typing-indicator.component.html',
+    standalone: false
 })
 export class PeerChatMemberTypingIndicatorComponent {
   @Input() component: PeerChatComponent;

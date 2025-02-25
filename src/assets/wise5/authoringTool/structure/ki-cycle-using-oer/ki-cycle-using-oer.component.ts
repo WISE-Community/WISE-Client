@@ -8,10 +8,9 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatDivider } from '@angular/material/divider';
 
 @Component({
-  imports: [MatDivider, FlexModule, MatButton, RouterLink, NgIf, MatProgressBar],
-  standalone: true,
-  styleUrls: ['./ki-cycle-using-oer.component.scss', '../../add-content.scss'],
-  templateUrl: './ki-cycle-using-oer.component.html'
+    imports: [MatDivider, FlexModule, MatButton, RouterLink, NgIf, MatProgressBar],
+    styleUrls: ['./ki-cycle-using-oer.component.scss', '../../add-content.scss'],
+    templateUrl: './ki-cycle-using-oer.component.html'
 })
 export class KiCycleUsingOerComponent extends ConfigureStructureComponent {
   protected groupsPath = `ki-cycle-using-oer/groups.json`;

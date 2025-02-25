@@ -197,7 +197,7 @@ $subhead-font-size-base:   rem(1.600) !default;
 
   @keyframes pulse {
     0% {
-      box-shadow: 0 0 0 0 color('info');
+      box-shadow: 0 0 0 0 #ef6c00;
     }
     50% {
       box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);

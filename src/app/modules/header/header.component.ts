@@ -12,20 +12,19 @@ import { HeaderAccountMenuComponent } from './header-account-menu/header-account
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    HeaderAccountMenuComponent,
-    HeaderLinksComponent,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    RouterModule
-  ],
-  selector: 'app-header',
-  standalone: true,
-  styleUrl: './header.component.scss',
-  templateUrl: './header.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        HeaderAccountMenuComponent,
+        HeaderLinksComponent,
+        MatButtonModule,
+        MatIconModule,
+        MatToolbarModule,
+        RouterModule
+    ],
+    selector: 'app-header',
+    styleUrl: './header.component.scss',
+    templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
   protected location: string = '';

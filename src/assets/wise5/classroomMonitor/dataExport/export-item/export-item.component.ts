@@ -25,20 +25,19 @@ import { FormsModule } from '@angular/forms';
 import { AbstractComponentDataExportStrategy } from '../strategies/AbstractComponentDataExportStrategy';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatInputModule,
-    MatTooltipModule
-  ],
-  selector: 'export-item',
-  standalone: true,
-  styleUrl: './export-item.component.scss',
-  templateUrl: './export-item.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatInputModule,
+        MatTooltipModule
+    ],
+    selector: 'export-item',
+    styleUrl: './export-item.component.scss',
+    templateUrl: './export-item.component.html'
 })
 export class ExportItemComponent implements OnInit {
   private allowedComponentTypesAllRevisions = [

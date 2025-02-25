@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'edit-connected-components-add-button',
-  templateUrl: './edit-connected-components-add-button.component.html',
-  styleUrls: ['./edit-connected-components-add-button.component.scss']
+    selector: 'edit-connected-components-add-button',
+    templateUrl: './edit-connected-components-add-button.component.html',
+    styleUrls: ['./edit-connected-components-add-button.component.scss'],
+    standalone: false
 })
 export class EditConnectedComponentsAddButtonComponent implements OnInit {
   @Output()

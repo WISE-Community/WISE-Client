@@ -16,19 +16,18 @@ class Period {
 }
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatDividerModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    MatToolbarModule
-  ],
-  selector: 'pause-screens-menu',
-  standalone: true,
-  styleUrl: './pause-screens-menu.component.scss',
-  templateUrl: './pause-screens-menu.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatDividerModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        MatToolbarModule
+    ],
+    selector: 'pause-screens-menu',
+    styleUrl: './pause-screens-menu.component.scss',
+    templateUrl: './pause-screens-menu.component.html'
 })
 export class PauseScreensMenuComponent {
   protected allPeriodsPaused: boolean;

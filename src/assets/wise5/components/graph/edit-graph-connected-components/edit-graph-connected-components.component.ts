@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../app/authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
 
 @Component({
-  selector: 'edit-graph-connected-components',
-  templateUrl: './edit-graph-connected-components.component.html',
-  styleUrls: [
-    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
-    './edit-graph-connected-components.component.scss'
-  ]
+    selector: 'edit-graph-connected-components',
+    templateUrl: './edit-graph-connected-components.component.html',
+    styleUrls: [
+        '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
+        './edit-graph-connected-components.component.scss'
+    ],
+    standalone: false
 })
 export class EditGraphConnectedComponentsComponent extends EditConnectedComponentsWithBackgroundComponent {
   componentTypesThatCanImportWorkAsBackground: string[] = ['ConceptMap', 'Draw', 'Label'];

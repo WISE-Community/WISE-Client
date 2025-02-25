@@ -7,11 +7,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatIconModule],
-  selector: 'discourse-latest-news',
-  standalone: true,
-  styleUrl: 'discourse-latest-news.component.scss',
-  templateUrl: 'discourse-latest-news.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatIconModule],
+    selector: 'discourse-latest-news',
+    styleUrl: 'discourse-latest-news.component.scss',
+    templateUrl: 'discourse-latest-news.component.html'
 })
 export class DiscourseLatestNewsComponent extends DiscourseFeedComponent {
   protected smallScreen: boolean;

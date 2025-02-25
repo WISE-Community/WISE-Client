@@ -6,10 +6,9 @@ import { StatusIconComponent } from '../../../../../../app/classroom-monitor/sta
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatIconModule, StatusIconComponent],
-  selector: 'workgroup-info',
-  standalone: true,
-  templateUrl: 'workgroup-info.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatIconModule, StatusIconComponent],
+    selector: 'workgroup-info',
+    templateUrl: 'workgroup-info.component.html'
 })
 export class WorkgroupInfoComponent {
   protected alertIconClass: string;

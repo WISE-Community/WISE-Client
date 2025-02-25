@@ -7,8 +7,9 @@ import { UnlinkGoogleAccountSuccessComponent } from '../unlink-google-account-su
 import { injectPasswordErrors } from '../../../common/password-helper';
 
 @Component({
-  styleUrls: ['./unlink-google-account-password.component.scss'],
-  templateUrl: './unlink-google-account-password.component.html'
+    styleUrls: ['./unlink-google-account-password.component.scss'],
+    templateUrl: './unlink-google-account-password.component.html',
+    standalone: false
 })
 export class UnlinkGoogleAccountPasswordComponent {
   isSaving: boolean = false;

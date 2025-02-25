@@ -5,9 +5,10 @@ import { TeacherProjectService } from '../../../../assets/wise5/services/teacher
 import { moveObjectDown, moveObjectUp } from '../../../../assets/wise5/common/array/array';
 
 @Component({
-  selector: 'edit-component-default-feedback',
-  templateUrl: 'edit-component-default-feedback.component.html',
-  styleUrls: ['edit-component-default-feedback.component.scss']
+    selector: 'edit-component-default-feedback',
+    templateUrl: 'edit-component-default-feedback.component.html',
+    styleUrls: ['edit-component-default-feedback.component.scss'],
+    standalone: false
 })
 export class EditComponentDefaultFeedback {
   @Input() componentContent: any;

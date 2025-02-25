@@ -24,24 +24,23 @@ import { NavItemScoreComponent } from '../navItemScore/nav-item-score.component'
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [
-    AlertStatusCornerComponent,
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatListModule,
-    MatTooltipModule,
-    NavItemProgressComponent,
-    NavItemScoreComponent,
-    NodeIconComponent,
-    StatusIconComponent
-  ],
-  selector: 'nav-item',
-  standalone: true,
-  styleUrl: './nav-item.component.scss',
-  templateUrl: './nav-item.component.html'
+    imports: [
+        AlertStatusCornerComponent,
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatListModule,
+        MatTooltipModule,
+        NavItemProgressComponent,
+        NavItemScoreComponent,
+        NodeIconComponent,
+        StatusIconComponent
+    ],
+    selector: 'nav-item',
+    styleUrl: './nav-item.component.scss',
+    templateUrl: './nav-item.component.html'
 })
 export class NavItemComponent implements OnInit {
   protected alertIconClass: string;

@@ -15,22 +15,21 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  templateUrl: './forgot-student-password-change.component.html',
-  styleUrl: './forgot-student-password-change.component.scss',
-  standalone: true,
-  imports: [
-    MatCard,
-    MatCardContent,
-    FormsModule,
-    FlexModule,
-    ReactiveFormsModule,
-    NgIf,
-    PasswordModule,
-    MatButton,
-    MatProgressBar,
-    MatDivider,
-    RouterLink
-  ]
+    templateUrl: './forgot-student-password-change.component.html',
+    styleUrl: './forgot-student-password-change.component.scss',
+    imports: [
+        MatCard,
+        MatCardContent,
+        FormsModule,
+        FlexModule,
+        ReactiveFormsModule,
+        NgIf,
+        PasswordModule,
+        MatButton,
+        MatProgressBar,
+        MatDivider,
+        RouterLink
+    ]
 })
 export class ForgotStudentPasswordChangeComponent {
   @Input() answer: string;

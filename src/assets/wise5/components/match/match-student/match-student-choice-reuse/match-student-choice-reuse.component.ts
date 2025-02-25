@@ -29,7 +29,6 @@ import { moveItem } from '../move-item';
     MatchChoiceItemComponent,
     MatchFeedbackSectionComponent
   ],
-  standalone: true,
   styleUrl: '../match-student-default/match-student-default.component.scss',
   templateUrl: '../match-student-default/match-student-default.component.html'
 })

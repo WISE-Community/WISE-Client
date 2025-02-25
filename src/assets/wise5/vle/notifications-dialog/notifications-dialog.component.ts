@@ -15,19 +15,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    MatTooltipModule
-  ],
-  standalone: true,
-  styleUrl: './notifications-dialog.component.scss',
-  templateUrl: './notifications-dialog.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatListModule,
+        MatToolbarModule,
+        MatTooltipModule
+    ],
+    styleUrl: './notifications-dialog.component.scss',
+    templateUrl: './notifications-dialog.component.html'
 })
 export class NotificationsDialogComponent implements OnInit {
   newNotifications: any;

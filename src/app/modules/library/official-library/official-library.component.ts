@@ -6,10 +6,11 @@ import { LibraryComponent } from '../library/library.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-official-library',
-  templateUrl: './official-library.component.html',
-  styleUrls: ['./official-library.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-official-library',
+    templateUrl: './official-library.component.html',
+    styleUrls: ['./official-library.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OfficialLibraryComponent extends LibraryComponent {
   @Input() isSplitScreen: boolean = false;
@@ -51,8 +52,9 @@ export class OfficialLibraryComponent extends LibraryComponent {
 }
 
 @Component({
-  selector: 'official-library-details',
-  templateUrl: 'official-library-details.html'
+    selector: 'official-library-details',
+    templateUrl: 'official-library-details.html',
+    standalone: false
 })
 export class OfficialLibraryDetailsComponent {
   constructor(

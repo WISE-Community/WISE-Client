@@ -14,22 +14,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatCardModule,
-    MatIconModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatTooltipModule,
-    NodeIconComponent,
-    NodeStatusIconComponent
-  ],
-  selector: 'nav-item',
-  standalone: true,
-  styleUrl: 'nav-item.component.scss',
-  templateUrl: 'nav-item.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatCardModule,
+        MatIconModule,
+        MatListModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        NodeIconComponent,
+        NodeStatusIconComponent
+    ],
+    selector: 'nav-item',
+    styleUrl: 'nav-item.component.scss',
+    templateUrl: 'nav-item.component.html'
 })
 export class NavItemComponent {
   private currentNode: any;

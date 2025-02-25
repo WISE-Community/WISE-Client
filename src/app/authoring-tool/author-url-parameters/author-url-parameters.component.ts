@@ -11,9 +11,10 @@ export class UrlParameter {
 }
 
 @Component({
-  selector: 'author-url-parameters',
-  templateUrl: './author-url-parameters.component.html',
-  styleUrls: ['./author-url-parameters.component.scss']
+    selector: 'author-url-parameters',
+    templateUrl: './author-url-parameters.component.html',
+    styleUrls: ['./author-url-parameters.component.scss'],
+    standalone: false
 })
 export class AuthorUrlParametersComponent implements OnInit {
   @Input()

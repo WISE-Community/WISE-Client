@@ -9,7 +9,6 @@ import { TeacherPeerGroupService } from '../../../services/teacherPeerGroupServi
 @Component({
   imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule],
   selector: 'peer-group-button',
-  standalone: true,
   templateUrl: './peer-group-button.component.html'
 })
 export class PeerGroupButtonComponent {

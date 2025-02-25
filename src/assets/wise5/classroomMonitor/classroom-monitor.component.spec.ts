@@ -4,23 +4,23 @@ import { ClassroomMonitorComponent } from './classroom-monitor.component';
 import { provideRouter } from '@angular/router';
 import { NotebookService } from '../services/notebookService';
 import { TeacherProjectService } from '../services/teacherProjectService';
-import { MockComponent } from 'ng-mocks';
 import { TopBarComponent } from './classroomMonitorComponents/shared/top-bar/top-bar.component';
 import { MainMenuComponent } from '../common/main-menu/main-menu.component';
 import { WorkgroupService } from '../../../app/services/workgroup.service';
-import { ToolBarComponent } from './classroomMonitorComponents/shared/tool-bar/tool-bar.component';
+import { ConfigService } from '../services/configService';
+import { TeacherDataService } from '../services/teacherDataService';
 
 let component: ClassroomMonitorComponent;
 let fixture: ComponentFixture<ClassroomMonitorComponent>;
 describe('ClassroomMonitorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MockComponent(MainMenuComponent),
-        MockComponent(ToolBarComponent),
-        MockComponent(TopBarComponent)
+      imports: [
+        ClassroomMonitorComponent,
+        ClassroomMonitorTestingModule,
+        MainMenuComponent,
+        TopBarComponent
       ],
-      imports: [ClassroomMonitorComponent, ClassroomMonitorTestingModule],
       providers: [provideRouter([]), WorkgroupService]
     }).compileComponents();
     const notebookService = TestBed.inject(NotebookService);
@@ -28,6 +28,22 @@ describe('ClassroomMonitorComponent', () => {
     spyOn(notebookService, 'getTeacherNotebookConfig').and.returnValue({});
     const projectService = TestBed.inject(TeacherProjectService);
     spyOn(projectService, 'getAchievements').and.returnValue({});
+    const configService = TestBed.inject(ConfigService);
+    spyOn(configService, 'getPermissions').and.returnValue({
+      canViewStudentNames: true,
+      canGradeStudentWork: true,
+      canAuthorProject: true
+    });
+    spyOn(configService, 'getMyUserInfo').and.returnValue({
+      userIds: [1],
+      firstName: 'wise',
+      lastName: 'panda',
+      username: 'wisepanda'
+    });
+    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({
+      periodId: 1
+    });
+    spyOn(TestBed.inject(TeacherDataService), 'getPeriods').and.returnValue([{ periodId: 1 }]);
     fixture = TestBed.createComponent(ClassroomMonitorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

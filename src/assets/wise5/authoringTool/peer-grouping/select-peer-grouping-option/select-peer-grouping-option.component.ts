@@ -12,9 +12,10 @@ import {
 } from '../PeerGroupingLogic';
 
 @Component({
-  selector: 'select-peer-grouping-option',
-  templateUrl: './select-peer-grouping-option.component.html',
-  styleUrls: ['./select-peer-grouping-option.component.scss']
+    selector: 'select-peer-grouping-option',
+    templateUrl: './select-peer-grouping-option.component.html',
+    styleUrls: ['./select-peer-grouping-option.component.scss'],
+    standalone: false
 })
 export class SelectPeerGroupingOptionComponent implements OnInit {
   @Input() peerGrouping: PeerGrouping;

@@ -5,11 +5,10 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { NodeInfoComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/node-info/node-info.component';
 
 @Component({
-  imports: [MatButtonModule, MatDialogModule, NodeInfoComponent],
-  selector: 'show-node-info-dialog',
-  templateUrl: './show-node-info-dialog.component.html',
-  styleUrl: './show-node-info-dialog.component.scss',
-  standalone: true
+    imports: [MatButtonModule, MatDialogModule, NodeInfoComponent],
+    selector: 'show-node-info-dialog',
+    templateUrl: './show-node-info-dialog.component.html',
+    styleUrl: './show-node-info-dialog.component.scss'
 })
 export class ShowNodeInfoDialogComponent implements OnInit {
   @ViewChild('nodeInfoDiv') nodeInfoDiv: ElementRef;

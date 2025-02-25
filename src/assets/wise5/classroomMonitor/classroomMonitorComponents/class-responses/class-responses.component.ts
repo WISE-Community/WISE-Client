@@ -30,7 +30,6 @@ import { AbstractClassResponsesComponent } from '../AbstractClassResponseCompone
     WorkgroupSelectAutocompleteComponent
   ],
   selector: 'class-responses',
-  standalone: true,
   templateUrl: './class-responses.component.html'
 })
 export class ClassResponsesComponent extends AbstractClassResponsesComponent {

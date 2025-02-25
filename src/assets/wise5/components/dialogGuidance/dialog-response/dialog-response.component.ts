@@ -11,11 +11,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatIconModule],
-  selector: 'dialog-response',
-  standalone: true,
-  styleUrl: './dialog-response.component.scss',
-  templateUrl: './dialog-response.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatIconModule],
+    selector: 'dialog-response',
+    styleUrl: './dialog-response.component.scss',
+    templateUrl: './dialog-response.component.html'
 })
 export class DialogResponseComponent implements OnInit {
   protected avatarColor: string;

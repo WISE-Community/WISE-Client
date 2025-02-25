@@ -5,10 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
-  selector: 'insert-node-inside-button',
-  standalone: true,
-  templateUrl: './insert-node-inside-button.component.html'
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
+    selector: 'insert-node-inside-button',
+    templateUrl: './insert-node-inside-button.component.html'
 })
 export class InsertNodeInsideButtonComponent {
   @Output() insertEvent = new EventEmitter();

@@ -21,20 +21,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    ProjectLanguageChooserComponent
-  ],
-  selector: 'at-top-bar',
-  standalone: true,
-  styleUrl: './top-bar.component.scss',
-  templateUrl: './top-bar.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        ProjectLanguageChooserComponent
+    ],
+    selector: 'at-top-bar',
+    styleUrl: './top-bar.component.scss',
+    templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent implements OnInit {
   protected avatarColor: any;

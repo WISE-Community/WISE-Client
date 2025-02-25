@@ -12,18 +12,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  standalone: true,
-  selector: 'translatable-rich-text-editor',
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatTabsModule,
-    WiseTinymceEditorModule
-  ],
-  templateUrl: './translatable-rich-text-editor.component.html',
-  styleUrl: './translatable-rich-text-editor.component.scss'
+    selector: 'translatable-rich-text-editor',
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatTabsModule,
+        WiseTinymceEditorModule
+    ],
+    templateUrl: './translatable-rich-text-editor.component.html',
+    styleUrl: './translatable-rich-text-editor.component.scss'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
   protected html: string = '';
