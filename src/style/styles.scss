@@ -43,4 +43,141 @@ html {
   ));
 
   @include theme-typography.my-typography-hierarchy;
+
+
+
+  /* Buttons */
+
+  @include mat.button-overrides((
+    filled-container-shape: var(--mat-sys-corner-small),
+    outlined-container-shape: var(--mat-sys-corner-small),
+    text-container-shape: var(--mat-sys-corner-small),
+    protected-container-shape: var(--mat-sys-corner-small),
+    filled-horizontal-padding: var(--button-horizontal-padding),
+    outlined-horizontal-padding: var(--outline-button-horizontal-padding),
+    protected-horizontal-padding: var(--button-horizontal-padding),
+    outlined-outline-width: 2px,
+    outlined-outline-color: var(--primary),
+    filled-icon-offset: var(--button-icon-offset),
+    outlined-icon-offset: var(--button-icon-offset),
+    protected-icon-offset: var(--button-icon-offset),
+  ));
+
+  @include mat.fab-overrides((
+    container-shape: var(--mat-sys-corner-full),
+    small-container-shape: var(--mat-sys-corner-full),
+  ));
+
+  /* Form fields */
+
+  @include mat.form-field-overrides((
+    container-shape: var(--mat-sys-corner-small),
+    filled-container-color: var(--mat-sys-surface-container),
+  ));
+
+  .mdc-text-field--filled {
+    border-bottom-right-radius: var(--mat-sys-corner-small);
+    border-bottom-left-radius: var(--mat-sys-corner-small);
+  }
+
+  .mdc-line-ripple::before {
+    border-bottom-width: 0;
+  }
+
+  .mat-mdc-form-field-hint-wrapper, .mat-mdc-form-field-error-wrapper {
+    padding: 0 8px;
+  }
+
+  /* Select */
+
+  @include mat.select-overrides((
+    panel-background-color: var(--mat-sys-surface-container-lowest)
+  ));
+
+  div.mat-mdc-select-panel {
+    border-radius: var(--mat-sys-corner-small);
+  }
+
+  .cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel {
+    border-top-left-radius: var(--mat-sys-corner-small);
+    border-top-right-radius: var(--mat-sys-corner-small);
+  }
+
+  .mat-mdc-option {
+    margin: 4px 8px;
+    padding: 0 8px;
+    border-radius: 6px;
+    min-height: 42px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Fix Tailwind conflict: https://github.com/tailwindlabs/tailwindcss/discussions/9993#discussioncomment-6752435 */
+  .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch {
+    border-right-style: hidden;
+  }
+  .mat-mdc-input-element {
+    box-shadow: none !important;
+  }
+
+  --mdc-outlined-text-field-outline-width: 2px;
+
+  /* Color variants */
+
+  .primary {
+    color: var(--primary)
+  }
+  
+  .secondary {
+    color: var(--secondary);
+
+    @include mat.theme((
+      color: (
+        primary: theme-colors.$secondary-palette,
+      ),
+    ));
+
+    @include mat.button-overrides((
+      outlined-outline-color: var(--secondary),
+    ));
+  }
+
+  .tertiary {
+    color: var(--tertiary);
+
+    @include mat.theme((
+      color: (
+        primary: theme-colors.$tertiary-palette,
+      ),
+    ));
+
+    @include mat.theme-overrides((
+      primary: var(--tertiary),
+      on-primary: var(--on-tertiary),
+    ));
+
+    @include mat.button-overrides((
+      outlined-outline-color: var(--tertiary),
+    ));
+  }
+
+  .error {
+    color: var(--error);
+
+    @include mat.theme((
+      color: (
+        primary: theme-colors.$error-palette,
+      ),
+    ));
+
+    @include mat.button-overrides((
+      outlined-outline-color: var(--error),
+    ));
+  }
 }
