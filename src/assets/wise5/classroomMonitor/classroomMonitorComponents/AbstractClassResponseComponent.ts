@@ -11,7 +11,9 @@ import { CompletionStatus } from './shared/CompletionStatus';
 
 @Directive()
 export abstract class AbstractClassResponsesComponent {
+  protected component: any;
   protected isExpandAll: boolean;
+  protected node: Node;
   protected sort: string;
   sortedWorkgroups: any[] = [];
   workgroups: any[] = [];

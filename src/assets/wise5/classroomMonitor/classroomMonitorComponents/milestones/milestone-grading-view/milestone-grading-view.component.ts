@@ -4,6 +4,7 @@ import { Annotation } from '../../../../common/Annotation';
 import { CompletionStatus } from '../../shared/CompletionStatus';
 import { Subscription } from 'rxjs';
 import { AbstractClassResponsesComponent } from '../../AbstractClassResponseComponent';
+import { Node } from '../../../../common/Node';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -13,23 +14,23 @@ import { AbstractClassResponsesComponent } from '../../AbstractClassResponseComp
   templateUrl: './milestone-grading-view.component.html'
 })
 export class MilestoneGradingViewComponent extends AbstractClassResponsesComponent {
-  private componentId: string;
+  protected component: any;
   private firstNodeId: string;
   protected firstNodePosition: string;
   private lastNodeId: string;
   protected lastNodePosition: string;
   @Input() milestone: any;
-  private nodeId: string;
+  protected node: Node;
   private subscriptions: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.nodeId = this.milestone.nodeId;
+    this.node = this.projectService.getNode(this.milestone.nodeId);
+    this.component = this.node.getComponent(this.milestone.componentId);
     if (this.milestone.report.locations.length > 1) {
       this.firstNodeId = this.milestone.report.locations[0].nodeId;
       this.lastNodeId =
         this.milestone.report.locations[this.milestone.report.locations.length - 1].nodeId;
     }
-    this.componentId = this.milestone.componentId;
     this.retrieveStudentData(this.projectService.getNode(this.firstNodeId));
     if (this.milestone.report.locations.length > 1) {
       this.retrieveStudentData(this.projectService.getNode(this.lastNodeId));
@@ -58,7 +59,7 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
     this.subscriptions.add(
       this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
         const workgroupId = annotation.toWorkgroupId;
-        if (annotation.nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
+        if (annotation.nodeId === this.node.id && this.workgroupsById[workgroupId]) {
           this.updateWorkgroup(workgroupId);
         }
       })
@@ -67,7 +68,7 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
     this.subscriptions.add(
       this.dataService.studentWorkReceived$.subscribe(({ studentWork }) => {
         const workgroupId = studentWork.workgroupId;
-        if (studentWork.nodeId === this.nodeId && this.workgroupsById[workgroupId]) {
+        if (studentWork.nodeId === this.node.id && this.workgroupsById[workgroupId]) {
           this.updateWorkgroup(workgroupId);
         }
       })
@@ -93,13 +94,13 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
     };
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
     if (studentStatus != null) {
-      const nodeStatus = studentStatus.nodeStatuses[this.nodeId];
+      const nodeStatus = studentStatus.nodeStatuses[this.node.id];
       if (nodeStatus) {
         completionStatus.isVisible = nodeStatus.isVisible;
         completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
         completionStatus.latestAnnotationTime =
           this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
-        if (!this.projectService.nodeHasWork(this.nodeId)) {
+        if (!this.projectService.nodeHasWork(this.node.id)) {
           completionStatus.isCompleted = nodeStatus.isVisited;
         }
         if (completionStatus.latestWorkTime) {
@@ -111,7 +112,7 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
   }
 
   private getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
-    const componentStates = this.dataService.getComponentStatesByNodeId(this.nodeId);
+    const componentStates = this.dataService.getComponentStatesByNodeId(this.node.id);
     for (const componentState of componentStates.reverse()) {
       if (componentState.workgroupId === workgroupId) {
         return componentState.serverSaveTime;
@@ -121,7 +122,7 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
   }
 
   private getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
-    const annotations = this.dataService.getAnnotationsByNodeId(this.nodeId);
+    const annotations = this.dataService.getAnnotationsByNodeId(this.node.id);
     for (const annotation of annotations.reverse()) {
       // TODO: support checking for annotations from shared teachers
       if (
@@ -143,8 +144,8 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
 
   private getScoreByWorkgroupId(
     workgroupId: number,
-    nodeId: string = this.nodeId,
-    componentId: string = this.componentId
+    nodeId: string = this.node.id,
+    componentId: string = this.component.id
   ): number {
     let score = null;
     const latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
@@ -196,7 +197,7 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
   protected updateWorkgroup(workgroupId: number, init = false): void {
     const workgroup = this.workgroupsById[workgroupId];
     const alertNotifications = this.notificationService.getAlertNotifications({
-      nodeId: this.nodeId,
+      nodeId: this.node.id,
       toWorkgroupId: workgroupId
     });
     workgroup.hasAlert = alertNotifications.length > 0;
@@ -206,10 +207,10 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
     workgroup.completionStatus = this.getWorkgroupCompletionStatus(completionStatus);
     workgroup.score = this.annotationService.getTotalNodeScoreForWorkgroup(
       workgroupId,
-      this.nodeId
+      this.node.id
     );
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
-    workgroup.nodeStatus = studentStatus.nodeStatuses[this.nodeId] || {};
+    workgroup.nodeStatus = studentStatus.nodeStatuses[this.node.id] || {};
     workgroup.score = this.getScoreByWorkgroupId(workgroupId);
     if (this.milestone.report.locations.length > 1) {
       const firstLocation = this.milestone.report.locations[0];
