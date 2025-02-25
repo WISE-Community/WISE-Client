@@ -44,8 +44,6 @@ html {
 
   @include theme-typography.my-typography-hierarchy;
 
-
-
   /* Buttons */
 
   @include mat.button-overrides((
