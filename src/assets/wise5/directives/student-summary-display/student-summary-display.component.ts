@@ -220,11 +220,14 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
     return Math.ceil(Math.random() * this.maxScore);
   }
 
-  protected renderResponsesOrScores(isRenderingResponses: boolean): void {
-    if (this.isSourceSelf()) {
-      isRenderingResponses ? this.renderSelfResponse() : this.renderSelfScore();
-    } else {
-      isRenderingResponses ? this.renderClassResponses() : this.renderClassScores();
+  protected renderSelfDisplay(): void {
+    switch (this.studentDataType) {
+      case 'responses':
+        this.renderSelfResponse();
+        break;
+      case 'scores':
+        this.renderSelfScore();
+        break;
     }
   }
 
