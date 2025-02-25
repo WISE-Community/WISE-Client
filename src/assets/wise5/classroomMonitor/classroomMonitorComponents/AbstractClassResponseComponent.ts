@@ -81,28 +81,16 @@ export abstract class AbstractClassResponsesComponent {
     }
   }
 
-  /**
-   * Sort using this order hierarchy
-   * isVisible descending, workgroupId ascending
-   */
   private sortTeamAscending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.isVisible === workgroupB.isVisible) {
-      return workgroupA.workgroupId - workgroupB.workgroupId;
-    } else {
-      return workgroupB.isVisible - workgroupA.isVisible;
-    }
+    return workgroupA.isVisible === workgroupB.isVisible
+      ? workgroupA.workgroupId - workgroupB.workgroupId
+      : workgroupB.isVisible - workgroupA.isVisible;
   }
 
-  /**
-   * Sort using this order hierarchy
-   * isVisible descending, workgroupId descending
-   */
   private sortTeamDescending(workgroupA: any, workgroupB: any): number {
-    if (workgroupA.isVisible === workgroupB.isVisible) {
-      return workgroupB.workgroupId - workgroupA.workgroupId;
-    } else {
-      return workgroupB.isVisible - workgroupA.isVisible;
-    }
+    return workgroupA.isVisible === workgroupB.isVisible
+      ? workgroupB.workgroupId - workgroupA.workgroupId
+      : workgroupB.isVisible - workgroupA.isVisible;
   }
 
   protected createSortAscendingFunction(fieldName: string): any {
