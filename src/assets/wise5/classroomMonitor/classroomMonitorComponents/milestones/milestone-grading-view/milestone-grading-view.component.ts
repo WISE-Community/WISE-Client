@@ -85,7 +85,7 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
     }
   }
 
-  private getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
+  protected getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
     const completionStatus: CompletionStatus = {
       isCompleted: false,
       isVisible: false,
@@ -174,36 +174,25 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
    * @param workgroupID a workgroup ID number
    * @param init Boolean whether we're in controller initialization or not
    */
-  protected updateWorkgroup(workgroupId: number, init = false): void {
-    const workgroup = this.workgroupsById[workgroupId];
-    const alertNotifications = this.notificationService.getAlertNotifications({
-      nodeId: this.node.id,
-      toWorkgroupId: workgroupId
-    });
-    workgroup.hasAlert = alertNotifications.length > 0;
-    workgroup.hasNewAlert = alertNotifications.some((alert) => !alert.timeDismissed);
-    const completionStatus = this.getCompletionStatusByWorkgroupId(workgroupId);
-    workgroup.isVisible = completionStatus.isVisible ? 1 : 0;
-    workgroup.completionStatus = this.getWorkgroupCompletionStatus(completionStatus);
-    workgroup.score = this.annotationService.getTotalNodeScoreForWorkgroup(
-      workgroupId,
-      this.node.id
-    );
-    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
-    workgroup.nodeStatus = studentStatus.nodeStatuses[this.node.id] || {};
-    workgroup.score = this.getScoreByWorkgroupId(workgroupId);
+  protected updateWorkgroup(workgroup: any, init = false): void {
+    super.updateWorkgroup(workgroup, init);
+
     if (this.milestone.report.locations.length > 1) {
       const firstLocation = this.milestone.report.locations[0];
       workgroup.initialScore = this.getScoreByWorkgroupId(
-        workgroupId,
+        workgroup.workgroupId,
         firstLocation.nodeId,
         firstLocation.componentId
       );
       workgroup.changeInScore = this.getChangeInScore(workgroup.initialScore, workgroup.score);
     }
     if (!init) {
-      this.workgroupsById[workgroupId] = copy(workgroup);
+      this.workgroupsById[workgroup.workgroupId] = copy(workgroup);
     }
+  }
+
+  protected getWorkgroupScore(workgroupId: number): any {
+    return this.getScoreByWorkgroupId(workgroupId);
   }
 
   private getChangeInScore(initialScore: number, revisedScore: number): number {

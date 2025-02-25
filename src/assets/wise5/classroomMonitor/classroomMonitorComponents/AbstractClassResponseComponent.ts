@@ -48,11 +48,36 @@ export abstract class AbstractClassResponsesComponent {
       const workgroupId = workgroup.workgroupId;
       this.workgroupsById[workgroupId] = workgroup;
       this.workVisibilityById[workgroupId] = false;
-      this.updateWorkgroup(workgroupId, true);
+      this.updateWorkgroup(workgroup, true);
     }
   }
 
-  protected abstract updateWorkgroup(workgroupId: number, init: boolean): void;
+  /**
+   * Update statuses, scores, notifications, etc. for a workgroup object. Also check if we need to
+   * hide student names because logged-in user does not have the right permissions
+   * @param workgroupID a workgroup ID number
+   * @param init Boolean whether we're in controller initialization or not
+   */
+  protected updateWorkgroup(workgroup: any, init = false): void {
+    const alertNotifications = this.notificationService.getAlertNotifications({
+      nodeId: this.node.id,
+      toWorkgroupId: workgroup.workgroupId
+    });
+    workgroup.hasAlert = alertNotifications.length > 0;
+    workgroup.hasNewAlert = alertNotifications.some((alert) => !alert.timeDismissed);
+    const completionStatus = this.getCompletionStatusByWorkgroupId(workgroup.workgroupId);
+    workgroup.isVisible = completionStatus.isVisible ? 1 : 0;
+    workgroup.completionStatus = this.getWorkgroupCompletionStatus(completionStatus);
+    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
+      workgroup.workgroupId
+    );
+    workgroup.nodeStatus = studentStatus.nodeStatuses[this.node.id] || {};
+    workgroup.score = this.getWorkgroupScore(workgroup.workgroupId);
+  }
+
+  protected abstract getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus;
+
+  protected abstract getWorkgroupScore(workgroupId: number): any;
 
   protected getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
     const componentStates = this.getComponentStates();
