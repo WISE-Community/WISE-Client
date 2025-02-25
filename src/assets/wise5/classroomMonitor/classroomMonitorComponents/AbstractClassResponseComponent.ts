@@ -66,6 +66,23 @@ export abstract class AbstractClassResponsesComponent {
 
   protected abstract getComponentStates(): any[];
 
+  protected getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
+    const annotations = this.dataService.getAnnotationsByNodeId(this.node.id);
+    for (const annotation of annotations.reverse()) {
+      if (this.isAnnotationForWorkgroup(annotation, workgroupId)) {
+        return annotation.serverSaveTime;
+      }
+    }
+    return null;
+  }
+
+  protected isAnnotationForWorkgroup(annotation: any, workgroupId: number): boolean {
+    return (
+      annotation.toWorkgroupId === workgroupId &&
+      annotation.fromWorkgroupId === this.configService.getWorkgroupId()
+    );
+  }
+
   protected sortWorkgroups(): void {
     this.sortedWorkgroups = [];
     for (const workgroup of this.workgroups) {

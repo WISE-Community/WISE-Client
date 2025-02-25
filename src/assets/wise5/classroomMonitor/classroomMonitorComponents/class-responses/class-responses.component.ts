@@ -120,18 +120,11 @@ export class ClassResponsesComponent extends AbstractClassResponsesComponent {
     return this.dataService.getComponentStatesByComponentId(this.component.id);
   }
 
-  private getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
-    const annotations = this.dataService.getAnnotationsByNodeId(this.node.id);
-    for (const annotation of annotations.reverse()) {
-      if (
-        annotation.componentId === this.component.id &&
-        annotation.toWorkgroupId === workgroupId &&
-        annotation.fromWorkgroupId === this.configService.getWorkgroupId()
-      ) {
-        return annotation.serverSaveTime;
-      }
-    }
-    return null;
+  protected isAnnotationForWorkgroup(annotation: any, workgroupId: number): boolean {
+    return (
+      super.isAnnotationForWorkgroup(annotation, workgroupId) &&
+      annotation.componentId === this.component.id
+    );
   }
 
   private isCompleted(workgroupId: number): boolean {

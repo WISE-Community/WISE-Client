@@ -115,20 +115,6 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
     return this.dataService.getComponentStatesByNodeId(this.node.id);
   }
 
-  private getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
-    const annotations = this.dataService.getAnnotationsByNodeId(this.node.id);
-    for (const annotation of annotations.reverse()) {
-      // TODO: support checking for annotations from shared teachers
-      if (
-        annotation.toWorkgroupId === workgroupId &&
-        annotation.fromWorkgroupId === this.configService.getWorkgroupId()
-      ) {
-        return annotation.serverSaveTime;
-      }
-    }
-    return null;
-  }
-
   private getNodePositions(): void {
     if (this.milestone.report.locations.length > 1) {
       this.firstNodePosition = this.projectService.getNodePositionById(this.firstNodeId);
