@@ -174,4 +174,29 @@ export abstract class AbstractClassResponsesComponent {
       }
     }
   }
+
+  protected onUpdateExpand({ workgroupId, value }): void {
+    this.workVisibilityById[workgroupId] = value;
+  }
+
+  protected isWorkgroupShown(workgroup: any): boolean {
+    return this.dataService.isWorkgroupShown(workgroup);
+  }
+
+  protected collapseAll(): void {
+    this.workgroups.forEach(
+      (workgroup) => (this.workVisibilityById[workgroup.workgroupId] = false)
+    );
+    this.isExpandAll = false;
+  }
+
+  protected expandAll(): void {
+    this.workgroups.forEach((workgroup) => {
+      const workgroupId = workgroup.workgroupId;
+      if (this.workgroupInViewById[workgroupId]) {
+        this.workVisibilityById[workgroupId] = true;
+      }
+    });
+    this.isExpandAll = true;
+  }
 }

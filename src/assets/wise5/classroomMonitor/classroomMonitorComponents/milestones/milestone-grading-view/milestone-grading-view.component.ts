@@ -159,41 +159,32 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
   }
 
   protected expandAll(): void {
-    for (const workgroup of this.workgroups) {
-      const workgroupId = workgroup.workgroupId;
-      if (this.workgroupInViewById[workgroupId]) {
-        this.workVisibilityById[workgroupId] = true;
-      }
-    }
-    this.isExpandAll = true;
+    super.expandAll();
     this.saveMilestoneStudentWorkExpandCollapseAllEvent('MilestoneStudentWorkExpandAllClicked');
   }
 
   protected collapseAll(): void {
-    for (const workgroup of this.workgroups) {
-      this.workVisibilityById[workgroup.workgroupId] = false;
-    }
-    this.isExpandAll = false;
+    super.collapseAll();
     this.saveMilestoneStudentWorkExpandCollapseAllEvent('MilestoneStudentWorkCollapseAllClicked');
   }
 
   private saveMilestoneStudentWorkExpandCollapseAllEvent(event: any): void {
-    const context = 'ClassroomMonitor',
-      nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      data = { milestoneId: this.milestone.id };
-    this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
-  }
-
-  protected isWorkgroupShown(workgroup: any): boolean {
-    return this.dataService.isWorkgroupShown(workgroup);
+    this.dataService.saveEvent('ClassroomMonitor', null, null, null, 'Navigation', event, {
+      milestoneId: this.milestone.id
+    });
   }
 
   protected onUpdateExpand({ workgroupId, value }): void {
-    this.workVisibilityById[workgroupId] = value;
+    super.onUpdateExpand({ workgroupId, value });
     this.saveMilestoneWorkgroupItemViewedEvent(workgroupId, value);
+  }
+
+  private saveMilestoneWorkgroupItemViewedEvent(workgroupId: number, isExpanded: boolean): void {
+    const event = isExpanded ? 'MilestoneStudentWorkOpened' : 'MilestoneStudentWorkClosed';
+    this.dataService.saveEvent('ClassroomMonitor', null, null, null, 'Navigation', event, {
+      milestoneId: this.milestone.id,
+      workgroupId: workgroupId
+    });
   }
 
   /**
@@ -239,22 +230,6 @@ export class MilestoneGradingViewComponent extends AbstractClassResponsesCompone
       return revisedScore - initialScore;
     }
     return -10000; // this hack ensures that this score appears as the lowest score
-  }
-
-  private saveMilestoneWorkgroupItemViewedEvent(workgroupId: number, isExpanded: boolean): void {
-    let event = '';
-    if (isExpanded) {
-      event = 'MilestoneStudentWorkOpened';
-    } else {
-      event = 'MilestoneStudentWorkClosed';
-    }
-    const context = 'ClassroomMonitor',
-      nodeId = null,
-      componentId = null,
-      componentType = null,
-      category = 'Navigation',
-      data = { milestoneId: this.milestone.id, workgroupId: workgroupId };
-    this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
   protected sortWorkgroups(): void {

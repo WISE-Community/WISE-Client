@@ -157,29 +157,4 @@ export class ClassResponsesComponent extends AbstractClassResponsesComponent {
           this.node
         );
   }
-
-  protected isWorkgroupShown(workgroup: any): boolean {
-    return this.dataService.isWorkgroupShown(workgroup);
-  }
-
-  protected onUpdateExpand({ workgroupId, value }): void {
-    this.workVisibilityById[workgroupId] = value;
-  }
-
-  protected expandAll(): void {
-    this.workgroups.forEach((workgroup) => {
-      const workgroupId = workgroup.workgroupId;
-      if (this.workgroupInViewById[workgroupId]) {
-        this.workVisibilityById[workgroupId] = true;
-      }
-    });
-    this.isExpandAll = true;
-  }
-
-  protected collapseAll(): void {
-    this.workgroups.forEach(
-      (workgroup) => (this.workVisibilityById[workgroup.workgroupId] = false)
-    );
-    this.isExpandAll = false;
-  }
 }
