@@ -37,7 +37,6 @@ export class WorkgroupItemComponent {
   @Input() expanded: boolean;
   protected hasAlert: boolean;
   protected hasNewAlert: boolean;
-  @Input() hiddenComponents: string[] = [];
   @Input() maxScore: number;
   private nodeHasWork: boolean;
   @Input() nodeId: string;
@@ -88,10 +87,6 @@ export class WorkgroupItemComponent {
     if (changes.nodeId) {
       this.updateNode();
     }
-  }
-
-  protected isComponentVisible(componentId: string): boolean {
-    return !this.hiddenComponents.includes(componentId);
   }
 
   protected getComponentTypeLabel(componentType): string {

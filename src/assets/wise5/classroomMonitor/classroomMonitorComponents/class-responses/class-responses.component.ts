@@ -36,7 +36,6 @@ import { ComponentServiceLookupService } from '../../../services/componentServic
 export class ClassResponsesComponent {
   protected canViewStudentNames: boolean;
   @Input() component: any;
-  protected hiddenComponents: any[] = [];
   protected isExpandAll: boolean;
   protected maxScore: number;
   @Input() node: Node;

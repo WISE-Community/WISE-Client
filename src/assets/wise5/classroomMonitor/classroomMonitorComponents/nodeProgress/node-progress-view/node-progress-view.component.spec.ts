@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Observable, Subject } from 'rxjs';
-import { ComponentSelectComponent } from '../../../../../../app/classroom-monitor/component-select/component-select.component';
 import { DialogWithOpenInNewWindowComponent } from '../../../../directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
@@ -100,13 +99,7 @@ describe('NodeProgressViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NodeProgressViewComponent],
-      imports: [
-        ClassroomMonitorTestingModule,
-        ComponentSelectComponent,
-        FlexLayoutModule,
-        MatIconModule,
-        MatListModule
-      ],
+      imports: [ClassroomMonitorTestingModule, FlexLayoutModule, MatIconModule, MatListModule],
       providers: [
         {
           provide: MilestoneService,
