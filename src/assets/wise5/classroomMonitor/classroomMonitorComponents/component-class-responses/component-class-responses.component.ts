@@ -11,7 +11,6 @@ import { ConfigService } from '../../../services/configService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { AnnotationService } from '../../../services/annotationService';
 import { NotificationService } from '../../../services/notificationService';
-import { CompletionStatus } from '../shared/CompletionStatus';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentWorkgroupItemComponent } from '../component-workgroup-item/component-workgroup-item.component';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';

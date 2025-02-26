@@ -66,7 +66,7 @@ export abstract class AbstractClassResponsesComponent {
     workgroup.hasNewAlert = alertNotifications.some((alert) => !alert.timeDismissed);
     const completionStatus = this.getCompletionStatusByWorkgroupId(workgroup.workgroupId);
     workgroup.isVisible = completionStatus.isVisible ? 1 : 0;
-    workgroup.completionStatus = this.getWorkgroupCompletionStatus(completionStatus);
+    workgroup.completionStatus = completionStatus.getStateNumber();
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
       workgroup.workgroupId
     );
@@ -75,26 +75,19 @@ export abstract class AbstractClassResponsesComponent {
   }
 
   private getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
-    const completionStatus: CompletionStatus = {
-      isCompleted: false,
-      isVisible: false,
-      latestWorkTime: null,
-      latestAnnotationTime: null
-    };
+    const completionStatus: CompletionStatus = new CompletionStatus();
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
-    if (studentStatus != null) {
+    if (studentStatus != null && studentStatus.nodeStatuses[this.node.id] != null) {
       const nodeStatus = studentStatus.nodeStatuses[this.node.id];
-      if (nodeStatus) {
-        completionStatus.isVisible = nodeStatus.isVisible;
-        completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
-        completionStatus.latestAnnotationTime =
-          this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
-        if (!this.hasWork()) {
-          completionStatus.isCompleted = nodeStatus.isVisited;
-        }
-        if (completionStatus.latestWorkTime) {
-          completionStatus.isCompleted = this.isCompleted(workgroupId, nodeStatus);
-        }
+      completionStatus.isVisible = nodeStatus.isVisible;
+      completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
+      completionStatus.latestAnnotationTime =
+        this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
+      if (!this.hasWork()) {
+        completionStatus.isCompleted = nodeStatus.isVisited;
+      }
+      if (completionStatus.latestWorkTime) {
+        completionStatus.isCompleted = this.isCompleted(workgroupId, nodeStatus);
       }
     }
     return completionStatus;
@@ -206,28 +199,6 @@ export abstract class AbstractClassResponsesComponent {
     this.sort = this.sort === criteria ? `-${criteria}` : criteria;
     this.dataService.nodeGradingSort = this.sort;
     this.sortWorkgroups();
-  }
-
-  /**
-   * Returns a numerical status value for a given completion status object depending on node
-   * completion
-   * Available status values are: 0 (not visited/no work; default), 1 (partially completed),
-   * 2 (completed)
-   * @param completionStatus Object
-   * @returns Integer status value
-   */
-  protected getWorkgroupCompletionStatus(completionStatus: CompletionStatus): number {
-    // TODO: store this info in the nodeStatus so we don't have to calculate every time (and can use
-    // more widely)?
-    let status = 0;
-    if (!completionStatus.isVisible) {
-      status = -1;
-    } else if (completionStatus.isCompleted) {
-      status = 2;
-    } else if (completionStatus.latestWorkTime !== null) {
-      status = 1;
-    }
-    return status;
   }
 
   protected onIntersection(
