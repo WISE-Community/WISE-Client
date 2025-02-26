@@ -19,10 +19,10 @@ import { Choice } from '../../components/multipleChoice/Choice';
 import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
 
 @Component({
-    imports: [CommonModule, HighchartsChartModule, MatCardModule],
-    selector: 'student-summary-display',
-    styleUrl: '../summary-display/summary-display.component.scss',
-    templateUrl: '../summary-display/summary-display.component.html'
+  imports: [CommonModule, HighchartsChartModule, MatCardModule],
+  selector: 'student-summary-display',
+  styleUrl: '../summary-display/summary-display.component.scss',
+  templateUrl: '../summary-display/summary-display.component.html'
 })
 export class StudentSummaryDisplay extends SummaryDisplayComponent {
   private studentWorkSavedToServerSubscription: Subscription;
@@ -191,7 +191,7 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
   }
 
   private getRandomSimilarNumber(text: string): number {
-    return Math.ceil(this.convertToNumber(text) * Math.random());
+    return Math.ceil(this.summaryService.convertToNumber(text) * Math.random());
   }
 
   private getRandomChoice(choices: Choice[]): any {
