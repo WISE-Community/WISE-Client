@@ -44,12 +44,11 @@ export abstract class AbstractClassResponsesComponent {
   }
 
   protected setWorkgroupsById(): void {
-    for (const workgroup of this.workgroups) {
-      const workgroupId = workgroup.workgroupId;
-      this.workgroupsById[workgroupId] = workgroup;
-      this.workVisibilityById[workgroupId] = false;
+    this.workgroups.forEach((workgroup) => {
+      this.workgroupsById[workgroup.workgroupId] = workgroup;
+      this.workVisibilityById[workgroup.workgroupId] = false;
       this.updateWorkgroup(workgroup, true);
-    }
+    });
   }
 
   /**
@@ -176,11 +175,7 @@ export abstract class AbstractClassResponsesComponent {
   }
 
   setSort(criteria: string): void {
-    if (this.sort === criteria) {
-      this.sort = `-${criteria}`;
-    } else {
-      this.sort = criteria;
-    }
+    this.sort = this.sort === criteria ? `-${criteria}` : criteria;
     this.dataService.nodeGradingSort = this.sort;
     this.sortWorkgroups();
   }
@@ -235,12 +230,9 @@ export abstract class AbstractClassResponsesComponent {
   }
 
   protected expandAll(): void {
-    this.workgroups.forEach((workgroup) => {
-      const workgroupId = workgroup.workgroupId;
-      if (this.workgroupInViewById[workgroupId]) {
-        this.workVisibilityById[workgroupId] = true;
-      }
-    });
+    this.workgroups
+      .filter((workgroup) => this.workgroupInViewById[workgroup.workgroupId])
+      .forEach((workgroup) => (this.workVisibilityById[workgroup.workgroupId] = true));
     this.allWorkgroupsExpanded = true;
   }
 }
