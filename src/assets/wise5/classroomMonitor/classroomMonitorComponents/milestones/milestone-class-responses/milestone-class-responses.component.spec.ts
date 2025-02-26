@@ -8,18 +8,18 @@ import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/clas
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
-import { MilestoneGradingViewComponent } from './milestone-grading-view.component';
+import { MilestoneClassResponsesComponent } from './milestone-class-responses.component';
 import { NodeGradingViewComponentTestHelper } from '../../nodeGrading/node-grading-view/node-grading-view.component.test.helper';
 import { of } from 'rxjs';
 
-let component: MilestoneGradingViewComponent;
-let fixture: ComponentFixture<MilestoneGradingViewComponent>;
+let component: MilestoneClassResponsesComponent;
+let fixture: ComponentFixture<MilestoneClassResponsesComponent>;
 let testHelper: NodeGradingViewComponentTestHelper;
 
-describe('MilestoneGradingViewComponent', () => {
+describe('MilestoneClassResponsesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MilestoneGradingViewComponent],
+      declarations: [MilestoneClassResponsesComponent],
       imports: [
         ClassroomMonitorTestingModule,
         FormsModule,
@@ -34,7 +34,7 @@ describe('MilestoneGradingViewComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MilestoneGradingViewComponent);
+    fixture = TestBed.createComponent(MilestoneClassResponsesComponent);
     component = fixture.componentInstance;
     component.milestone = {
       nodeId: 'node1',
@@ -59,7 +59,7 @@ describe('MilestoneGradingViewComponent', () => {
   setSort();
 });
 
-function initializeWorkgroups(component: MilestoneGradingViewComponent) {
+function initializeWorkgroups(component: MilestoneClassResponsesComponent) {
   component.workgroups = [
     createWorkgroupForTesting(
       3,

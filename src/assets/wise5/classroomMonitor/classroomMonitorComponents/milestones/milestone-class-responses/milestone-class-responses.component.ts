@@ -8,12 +8,12 @@ import { Node } from '../../../../common/Node';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'milestone-grading-view',
+  selector: 'milestone-class-responses',
   standalone: false,
-  styleUrl: './milestone-grading-view.component.scss',
-  templateUrl: './milestone-grading-view.component.html'
+  styleUrl: './milestone-class-responses.component.scss',
+  templateUrl: './milestone-class-responses.component.html'
 })
-export class MilestoneGradingViewComponent extends AbstractClassResponsesComponent {
+export class MilestoneClassResponsesComponent extends AbstractClassResponsesComponent {
   protected component: any;
   private firstNodeId: string;
   protected firstNodePosition: string;
