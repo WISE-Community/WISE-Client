@@ -1,10 +1,10 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { copy } from '../../../../common/object/object';
 import { Annotation } from '../../../../common/Annotation';
-import { CompletionStatus } from '../../shared/CompletionStatus';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { AbstractClassResponsesComponent } from '../../AbstractClassResponseComponent';
 import { Node } from '../../../../common/Node';
+import { Notification } from '../../../../../../app/domain/notification';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -43,46 +43,57 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
     this.subscriptions.unsubscribe();
   }
 
-  protected subscribeToEvents(): void {
-    this.subscriptions.add(
-      this.notificationService.notificationChanged$.subscribe((notification) => {
-        if (notification.type === 'CRaterResult') {
-          // TODO: expand to encompass other notification types that should be shown to teacher
-          const workgroupId = notification.toWorkgroupId;
-          if (this.workgroupsById[workgroupId]) {
-            this.updateWorkgroup(workgroupId);
-          }
-        }
-      })
-    );
-
-    this.subscriptions.add(
-      this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
-        const workgroupId = annotation.toWorkgroupId;
-        if (annotation.nodeId === this.node.id && this.workgroupsById[workgroupId]) {
-          this.updateWorkgroup(workgroupId);
-        }
-      })
-    );
-
-    this.subscriptions.add(
-      this.dataService.studentWorkReceived$.subscribe(({ studentWork }) => {
-        const workgroupId = studentWork.workgroupId;
-        if (studentWork.nodeId === this.node.id && this.workgroupsById[workgroupId]) {
-          this.updateWorkgroup(workgroupId);
-        }
-      })
-    );
+  private subscribeToEvents(): void {
+    this.subscriptions.add(this.subscribeToNotifications());
+    this.subscriptions.add(this.subscribeToAnnotations());
+    this.subscriptions.add(this.subscribeToStudentWork());
     if (this.milestone.report.locations.length > 1) {
-      this.subscriptions.add(
-        this.annotationService.annotationReceived$.subscribe((annotation: Annotation) => {
-          const workgroupId = annotation.toWorkgroupId;
-          if (annotation.nodeId === this.firstNodeId && this.workgroupsById[workgroupId]) {
-            this.updateWorkgroup(workgroupId);
-          }
-        })
-      );
+      this.subscriptions.add(this.subscribeToFirstNodeAnnotations());
     }
+  }
+
+  private subscribeToNotifications(): Subscription {
+    return this.notificationService.notificationChanged$
+      .pipe(
+        filter(
+          (notification: Notification) =>
+            notification.type === 'CRaterResult' && this.workgroupsById[notification.toWorkgroupId]
+        )
+      )
+      .subscribe((notification) => this.updateWorkgroup(notification.toWorkgroupId));
+  }
+
+  private subscribeToAnnotations(): Subscription {
+    return this.annotationService.annotationReceived$
+      .pipe(
+        filter(
+          (annotation: Annotation) =>
+            annotation.nodeId === this.node.id && this.workgroupsById[annotation.toWorkgroupId]
+        )
+      )
+      .subscribe((annotation: Annotation) => this.updateWorkgroup(annotation.toWorkgroupId));
+  }
+
+  private subscribeToStudentWork(): Subscription {
+    return this.dataService.studentWorkReceived$
+      .pipe(
+        filter(
+          ({ studentWork }) =>
+            studentWork.nodeId === this.node.id && this.workgroupsById[studentWork.workgroupId]
+        )
+      )
+      .subscribe(({ studentWork }) => this.updateWorkgroup(studentWork.workgroupId));
+  }
+
+  private subscribeToFirstNodeAnnotations(): Subscription {
+    return this.annotationService.annotationReceived$
+      .pipe(
+        filter(
+          (annotation: Annotation) =>
+            annotation.nodeId === this.firstNodeId && this.workgroupsById[annotation.toWorkgroupId]
+        )
+      )
+      .subscribe((annotation: Annotation) => this.updateWorkgroup(annotation.toWorkgroupId));
   }
 
   protected hasWork(): boolean {
