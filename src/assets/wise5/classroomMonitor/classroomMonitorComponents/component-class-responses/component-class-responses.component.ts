@@ -29,10 +29,10 @@ import { AbstractClassResponsesComponent } from '../AbstractClassResponseCompone
     MatListModule,
     WorkgroupSelectAutocompleteComponent
   ],
-  selector: 'class-responses',
-  templateUrl: './class-responses.component.html'
+  selector: 'component-class-responses',
+  templateUrl: './component-class-responses.component.html'
 })
-export class ClassResponsesComponent extends AbstractClassResponsesComponent {
+export class ComponentClassResponsesComponent extends AbstractClassResponsesComponent {
   @Input() component: any;
   @Input() node: Node;
 

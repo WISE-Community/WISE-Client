@@ -8,14 +8,14 @@ import { isMatchingPeriods } from '../../../common/period/period';
 import { AnnotationService } from '../../../services/annotationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Node } from '../../../common/Node';
-import { ClassResponsesComponent } from '../class-responses/class-responses.component';
+import { ComponentClassResponsesComponent } from '../component-class-responses/component-class-responses.component';
 import { ActivatedRoute } from '@angular/router';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 
 @Component({
   imports: [
-    ClassResponsesComponent,
+    ComponentClassResponsesComponent,
     MilestoneReportButtonComponent,
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
