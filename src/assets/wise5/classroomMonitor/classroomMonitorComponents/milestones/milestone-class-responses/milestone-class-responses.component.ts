@@ -104,23 +104,6 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
     }
   }
 
-  private getScoreByWorkgroupId(
-    workgroupId: number,
-    nodeId: string = this.node.id,
-    componentId: string = this.component.id
-  ): number {
-    let score = null;
-    const latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
-      nodeId,
-      componentId,
-      workgroupId
-    );
-    if (latestScoreAnnotation) {
-      score = this.annotationService.getScoreValueFromScoreAnnotation(latestScoreAnnotation);
-    }
-    return score;
-  }
-
   protected expandAll(): void {
     super.expandAll();
     this.saveEvent('MilestoneStudentWorkExpandAllClicked', {
@@ -155,7 +138,6 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
    */
   protected updateWorkgroup(workgroup: any, init = false): void {
     super.updateWorkgroup(workgroup, init);
-
     if (this.milestone.report.locations.length > 1) {
       const firstLocation = this.milestone.report.locations[0];
       workgroup.initialScore = this.getScoreByWorkgroupId(
@@ -171,7 +153,18 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
   }
 
   protected getWorkgroupScore(workgroupId: number): any {
-    return this.getScoreByWorkgroupId(workgroupId);
+    return this.getScoreByWorkgroupId(workgroupId, this.node.id, this.component.id);
+  }
+
+  private getScoreByWorkgroupId(workgroupId: number, nodeId: string, componentId: string): number {
+    const latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
+      nodeId,
+      componentId,
+      workgroupId
+    );
+    return latestScoreAnnotation
+      ? this.annotationService.getScoreValueFromScoreAnnotation(latestScoreAnnotation)
+      : null;
   }
 
   private getChangeInScore(initialScore: number, revisedScore: number): number {
