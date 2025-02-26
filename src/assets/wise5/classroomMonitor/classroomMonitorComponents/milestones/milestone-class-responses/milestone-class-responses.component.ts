@@ -123,31 +123,28 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
 
   protected expandAll(): void {
     super.expandAll();
-    this.saveMilestoneStudentWorkExpandCollapseAllEvent('MilestoneStudentWorkExpandAllClicked');
+    this.saveEvent('MilestoneStudentWorkExpandAllClicked', {
+      milestoneId: this.milestone.id
+    });
   }
 
   protected collapseAll(): void {
     super.collapseAll();
-    this.saveMilestoneStudentWorkExpandCollapseAllEvent('MilestoneStudentWorkCollapseAllClicked');
-  }
-
-  private saveMilestoneStudentWorkExpandCollapseAllEvent(event: any): void {
-    this.dataService.saveEvent('ClassroomMonitor', null, null, null, 'Navigation', event, {
+    this.saveEvent('MilestoneStudentWorkCollapseAllClicked', {
       milestoneId: this.milestone.id
     });
   }
 
   protected onUpdateExpand({ workgroupId, value }): void {
     super.onUpdateExpand({ workgroupId, value });
-    this.saveMilestoneWorkgroupItemViewedEvent(workgroupId, value);
-  }
-
-  private saveMilestoneWorkgroupItemViewedEvent(workgroupId: number, isExpanded: boolean): void {
-    const event = isExpanded ? 'MilestoneStudentWorkOpened' : 'MilestoneStudentWorkClosed';
-    this.dataService.saveEvent('ClassroomMonitor', null, null, null, 'Navigation', event, {
+    this.saveEvent(value ? 'MilestoneStudentWorkOpened' : 'MilestoneStudentWorkClosed', {
       milestoneId: this.milestone.id,
       workgroupId: workgroupId
     });
+  }
+
+  private saveEvent(event: string, data: any): void {
+    this.dataService.saveEvent('ClassroomMonitor', null, null, null, 'Navigation', event, data);
   }
 
   /**
