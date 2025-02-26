@@ -1,11 +1,13 @@
-import { ComponentState } from '../../../../app/domain/componentState';
-import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
+import { ComponentState } from '../../../../../app/domain/componentState';
+import { MultipleChoiceContent } from '../../../components/multipleChoice/MultipleChoiceContent';
 import { MultipleChoiceSummaryDataPoint } from './MultipleChoiceSummaryDataPoint';
+import { SummaryData } from './SummaryData';
 
-export class MultipleChoiceSummaryData {
-  private summaryDataPoints: MultipleChoiceSummaryDataPoint[];
+export class MultipleChoiceSummaryData extends SummaryData {
+  protected summaryDataPoints: MultipleChoiceSummaryDataPoint[];
 
   constructor(componentState: MultipleChoiceContent, componentStates: ComponentState[]) {
+    super();
     this.summaryDataPoints = [];
     this.createChoicesSummaryData(componentState, componentStates);
   }
@@ -16,7 +18,8 @@ export class MultipleChoiceSummaryData {
   ): void {
     for (const choice of componentState.choices) {
       this.summaryDataPoints.push(
-        new MultipleChoiceSummaryDataPoint(choice.id, choice.text, choice.isCorrect)
+        // new MultipleChoiceSummaryDataPoint(choice.id, choice.text, choice.isCorrect)
+        new MultipleChoiceSummaryDataPoint(choice.id)
       );
     }
     for (const componentState of componentStates) {
@@ -26,15 +29,11 @@ export class MultipleChoiceSummaryData {
 
   private addComponentStateDataToSummaryData(componentState: ComponentState): void {
     for (const choice of componentState.studentData.studentChoices) {
-      this.incrementSummaryData(choice.id);
+      this.incrementSummaryData(choice.id, 1);
     }
   }
 
-  private incrementSummaryData(id: number | string): void {
-    this.summaryDataPoints.forEach((dataPoint) => {
-      if (dataPoint.getId() === id) {
-        dataPoint.incrementCount();
-      }
-    });
+  protected generateNewDataPoint(id: string | number): MultipleChoiceSummaryDataPoint {
+    return new MultipleChoiceSummaryDataPoint(id);
   }
 }

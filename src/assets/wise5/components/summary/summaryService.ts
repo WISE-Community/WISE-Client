@@ -96,4 +96,27 @@ export class SummaryService extends ComponentService {
       return this.http.get(`/api/classmate/summary/scores/${runId}/${nodeId}/${componentId}/class`);
     }
   }
+
+  cleanLabel(label: string): string {
+    return (label + '')
+      .trim()
+      .toLowerCase()
+      .split(' ')
+      .map((word) => {
+        if (word.length > 0) {
+          return word[0].toUpperCase() + word.substr(1);
+        } else {
+          return '';
+        }
+      })
+      .join(' ');
+  }
+
+  convertToNumber(value: any): number {
+    if (!isNaN(Number(value))) {
+      return Number(value);
+    } else {
+      return 0;
+    }
+  }
 }

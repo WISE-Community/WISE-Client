@@ -16,10 +16,11 @@ import { SummaryService } from '../../components/summary/summaryService';
 import { tap } from 'rxjs/operators';
 import { SeriesData } from '../../common/SeriesData';
 import { SeriesDataPoint } from '../../common/SeriesDataPoint';
-import { MultipleChoiceSummaryData } from './MultipleChoiceSummaryData';
-import { ScoreSummaryData } from './ScoreSummaryData';
-import { TableSummaryData } from './TableSummaryData';
-
+import { MultipleChoiceSummaryData } from './summary-data/MultipleChoiceSummaryData';
+import { ScoreSummaryData } from './summary-data/ScoreSummaryData';
+import { TableSummaryData } from './summary-data/TableSummaryData';
+import { Choice } from '../../components/multipleChoice/Choice';
+import { SummaryData } from './summary-data/SummaryData';
 @Component({
   imports: [CommonModule, MatCardModule],
   styleUrl: 'summary-display.component.scss',
@@ -121,9 +122,6 @@ export abstract class SummaryDisplayComponent {
   }
 
   protected renderDisplay(): void {
-    // do something like render display > check isSourceSelf() > if so,
-    // abstract method with unique behavior b/w student/teacher | it not,
-    // shared behavior
     if (this.isSourceSelf()) {
       this.renderSelfDisplay();
     } else {
@@ -138,8 +136,6 @@ export abstract class SummaryDisplayComponent {
   }
 
   protected abstract renderSelfDisplay(): void;
-
-  // protected abstract renderResponsesOrScores(isRenderingResponses: boolean): void;
 
   protected renderClassResponses(): void {
     this.getLatestWork().subscribe((componentStates = []) => {
@@ -230,7 +226,6 @@ export abstract class SummaryDisplayComponent {
     let seriesData: SeriesData;
     let count: number;
     if (this.otherComponentType === 'MultipleChoice') {
-      // PUT THIS DATA IN SOMETHING LIKE A MultipleChoiceSummaryData (maybe)
       const summaryData = new MultipleChoiceSummaryData(
         this.otherComponent as MultipleChoiceContent,
         componentStates
@@ -241,8 +236,7 @@ export abstract class SummaryDisplayComponent {
       );
       count = componentStates.length;
     } else if (this.otherComponentType === 'Table') {
-      // const summaryData = this.createTableSummaryData(componentStates);
-      const summaryData = new TableSummaryData(componentStates);
+      const summaryData = new TableSummaryData(componentStates, this.summaryService);
       seriesData = this.createTableSeriesData(summaryData);
       count = this.getTotalTableCount(seriesData);
     }
@@ -250,27 +244,16 @@ export abstract class SummaryDisplayComponent {
     return [seriesData, count];
   }
 
-  cleanLabel(label: string): string {
-    return (label + '')
-      .trim()
-      .toLowerCase()
-      .split(' ')
-      .map((word) => {
-        if (word.length > 0) {
-          return word[0].toUpperCase() + word.substr(1);
-        } else {
-          return '';
-        }
-      })
-      .join(' ');
-  }
-
-  createTableSeriesData(summaryData: any): SeriesData {
+  // to SeriesData or its own class
+  createTableSeriesData(summaryData: TableSummaryData): SeriesData {
     const seriesData = new SeriesData();
     for (const key of Object.keys(summaryData)) {
-      const count = summaryData[key];
-      const dataPoint = new SeriesDataPoint(key, count);
-      seriesData.addDataPoint(dataPoint);
+      summaryData.getDataPoints().forEach((summaryDataPoint) => {
+        const key = summaryDataPoint.getId();
+        const count = summaryDataPoint.getCount();
+        const seriesDataPoint = new SeriesDataPoint(key, count);
+        seriesData.addDataPoint(seriesDataPoint);
+      });
     }
     return seriesData;
   }
@@ -279,14 +262,6 @@ export abstract class SummaryDisplayComponent {
     let total = 0;
     seriesData.getDataPoints().forEach((dataPoint) => (total += dataPoint.y));
     return total;
-  }
-
-  convertToNumber(value: any): number {
-    if (!isNaN(Number(value))) {
-      return Number(value);
-    } else {
-      return 0;
-    }
   }
 
   protected processScoreAnnotations(annotations: Annotation[]): void {
@@ -311,7 +286,10 @@ export abstract class SummaryDisplayComponent {
   }
 
   // this should go to SeriesData.ts
-  createChoicesSeriesData(component: MultipleChoiceContent, summaryData: any): SeriesData {
+  createChoicesSeriesData(
+    component: MultipleChoiceContent,
+    summaryData: MultipleChoiceSummaryData
+  ): SeriesData {
     let seriesData = new SeriesData();
     this.hasCorrectness = this.hasCorrectAnswer(component);
     component.choices.forEach((choice) => {
@@ -327,18 +305,16 @@ export abstract class SummaryDisplayComponent {
     return seriesData;
   }
 
-  // Not any
-  hasCorrectAnswer(component: any): boolean {
-    for (const choice of component.choices) {
+  hasCorrectAnswer(component: MultipleChoiceContent): boolean {
+    component.choices.forEach((choice) => {
       if (choice.isCorrect) {
         return true;
       }
-    }
+    });
     return false;
   }
 
-  // Not any
-  getDataPointColor(choice: any): string | null {
+  getDataPointColor(choice: Choice): string | null {
     let color = null;
     if (this.highlightCorrectAnswer) {
       if (choice.isCorrect) {
@@ -350,13 +326,12 @@ export abstract class SummaryDisplayComponent {
     return color;
   }
 
-  // Not any
-  private getScoreFromAnnotation(annotation: Annotation): any {
+  private getScoreFromAnnotation(annotation: Annotation): number {
     return annotation.data.value;
   }
 
   // this should go to SeriesData.ts
-  private createScoresSeriesData(summaryData: any): [SeriesData, number] {
+  private createScoresSeriesData(summaryData: ScoreSummaryData): [SeriesData, number] {
     const seriesData = new SeriesData();
     let total = 0;
     for (let scoreValue = 1; scoreValue <= this.maxScore; scoreValue++) {
@@ -491,7 +466,9 @@ export abstract class SummaryDisplayComponent {
     series.forEach((singleSeries) => {
       if (singleSeries.data != null) {
         singleSeries.data.entries().forEach(([i, dataPoint]) => {
-          if (this.cleanLabel(dataPoint.name) === this.cleanLabel(name)) {
+          if (
+            this.summaryService.cleanLabel(dataPoint.name) === this.summaryService.cleanLabel(name)
+          ) {
             return i;
           }
         });
@@ -620,8 +597,8 @@ export abstract class SummaryDisplayComponent {
     return Math.floor((100 * numResponses) / totalWorkgroups);
   }
 
-  getSummaryDataCount(summaryData: any, id: any): number {
-    return summaryData[id].count;
+  getSummaryDataCount(summaryData: SummaryData, id: any): number {
+    return summaryData.getDataPointCountById(id);
   }
 
   protected isSourceSelf(): boolean {
