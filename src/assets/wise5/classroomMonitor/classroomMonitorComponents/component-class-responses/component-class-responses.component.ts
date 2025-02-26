@@ -73,30 +73,8 @@ export class ComponentClassResponsesComponent extends AbstractClassResponsesComp
     );
   }
 
-  protected getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
-    const completionStatus: CompletionStatus = {
-      isCompleted: false,
-      isVisible: false,
-      latestWorkTime: null,
-      latestAnnotationTime: null
-    };
-    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
-    if (studentStatus != null) {
-      const nodeStatus = studentStatus.nodeStatuses[this.node.id];
-      if (nodeStatus) {
-        completionStatus.isVisible = nodeStatus.isVisible;
-        completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
-        completionStatus.latestAnnotationTime =
-          this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
-        if (!this.projectService.componentHasWork(this.component)) {
-          completionStatus.isCompleted = nodeStatus.isVisited;
-        }
-        if (completionStatus.latestWorkTime) {
-          completionStatus.isCompleted = this.isCompleted(workgroupId);
-        }
-      }
-    }
-    return completionStatus;
+  protected hasWork(): boolean {
+    return this.projectService.componentHasWork(this.component);
   }
 
   protected getComponentStates(): any[] {
@@ -110,7 +88,7 @@ export class ComponentClassResponsesComponent extends AbstractClassResponsesComp
     );
   }
 
-  private isCompleted(workgroupId: number): boolean {
+  protected isCompleted(workgroupId: number, nodeStatus: any): boolean {
     const service = this.componentServiceLookupService.getService(this.component.type);
     const workgroupComponentStates = this.dataService.getComponentStatesByWorkgroupIdAndComponentId(
       workgroupId,

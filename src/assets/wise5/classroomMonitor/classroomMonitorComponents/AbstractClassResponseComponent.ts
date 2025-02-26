@@ -74,9 +74,37 @@ export abstract class AbstractClassResponsesComponent {
     workgroup.score = this.getWorkgroupScore(workgroup.workgroupId);
   }
 
-  protected abstract getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus;
+  private getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
+    const completionStatus: CompletionStatus = {
+      isCompleted: false,
+      isVisible: false,
+      latestWorkTime: null,
+      latestAnnotationTime: null
+    };
+    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
+    if (studentStatus != null) {
+      const nodeStatus = studentStatus.nodeStatuses[this.node.id];
+      if (nodeStatus) {
+        completionStatus.isVisible = nodeStatus.isVisible;
+        completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
+        completionStatus.latestAnnotationTime =
+          this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
+        if (!this.hasWork()) {
+          completionStatus.isCompleted = nodeStatus.isVisited;
+        }
+        if (completionStatus.latestWorkTime) {
+          completionStatus.isCompleted = this.isCompleted(workgroupId, nodeStatus);
+        }
+      }
+    }
+    return completionStatus;
+  }
 
   protected abstract getWorkgroupScore(workgroupId: number): any;
+
+  protected abstract hasWork(): boolean;
+
+  protected abstract isCompleted(workgroupId: number, nodeStatus: any): boolean;
 
   protected getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
     const componentStates = this.getComponentStates();

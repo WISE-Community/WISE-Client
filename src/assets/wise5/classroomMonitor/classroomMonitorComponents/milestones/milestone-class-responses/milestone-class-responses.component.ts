@@ -85,30 +85,12 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
     }
   }
 
-  protected getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
-    const completionStatus: CompletionStatus = {
-      isCompleted: false,
-      isVisible: false,
-      latestWorkTime: null,
-      latestAnnotationTime: null
-    };
-    const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
-    if (studentStatus != null) {
-      const nodeStatus = studentStatus.nodeStatuses[this.node.id];
-      if (nodeStatus) {
-        completionStatus.isVisible = nodeStatus.isVisible;
-        completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
-        completionStatus.latestAnnotationTime =
-          this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
-        if (!this.projectService.nodeHasWork(this.node.id)) {
-          completionStatus.isCompleted = nodeStatus.isVisited;
-        }
-        if (completionStatus.latestWorkTime) {
-          completionStatus.isCompleted = nodeStatus.isCompleted;
-        }
-      }
-    }
-    return completionStatus;
+  protected hasWork(): boolean {
+    return this.projectService.nodeHasWork(this.node.id);
+  }
+
+  protected isCompleted(workgroupId: number, nodeStatus: any): boolean {
+    return nodeStatus.isCompleted;
   }
 
   protected getComponentStates(): any[] {
