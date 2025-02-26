@@ -11,8 +11,8 @@ import { CompletionStatus } from './shared/CompletionStatus';
 
 @Directive()
 export abstract class AbstractClassResponsesComponent {
+  protected allWorkgroupsExpanded: boolean;
   protected component: any;
-  protected isExpandAll: boolean;
   protected node: Node;
   protected sort: string;
   sortedWorkgroups: any[] = [];
@@ -213,7 +213,7 @@ export abstract class AbstractClassResponsesComponent {
   ): void {
     for (const entry of intersectionObserverEntries) {
       this.workgroupInViewById[workgroupId] = entry.isIntersecting;
-      if (this.isExpandAll && entry.isIntersecting) {
+      if (this.allWorkgroupsExpanded && entry.isIntersecting) {
         this.workVisibilityById[workgroupId] = true;
       }
     }
@@ -231,7 +231,7 @@ export abstract class AbstractClassResponsesComponent {
     this.workgroups.forEach(
       (workgroup) => (this.workVisibilityById[workgroup.workgroupId] = false)
     );
-    this.isExpandAll = false;
+    this.allWorkgroupsExpanded = false;
   }
 
   protected expandAll(): void {
@@ -241,6 +241,6 @@ export abstract class AbstractClassResponsesComponent {
         this.workVisibilityById[workgroupId] = true;
       }
     });
-    this.isExpandAll = true;
+    this.allWorkgroupsExpanded = true;
   }
 }
