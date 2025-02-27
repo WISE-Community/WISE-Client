@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'edit-connected-component-type-select',
-  templateUrl: './edit-connected-component-type-select.component.html',
-  styleUrls: ['./edit-connected-component-type-select.component.scss']
+    selector: 'edit-connected-component-type-select',
+    templateUrl: './edit-connected-component-type-select.component.html',
+    styleUrls: ['./edit-connected-component-type-select.component.scss'],
+    standalone: false
 })
 export class EditConnectedComponentTypeSelectComponent implements OnInit {
   @Input()

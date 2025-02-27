@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'milestone-report-data',
-  template: `{{ output }}`
+    selector: 'milestone-report-data',
+    template: `{{ output }}`,
+    standalone: false
 })
 export class MilestoneReportDataComponent {
   @Input()

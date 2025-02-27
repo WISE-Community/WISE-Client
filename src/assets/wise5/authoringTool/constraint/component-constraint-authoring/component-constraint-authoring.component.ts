@@ -12,21 +12,20 @@ import { RequiredErrorLabelComponent } from '../../node/advanced/required-error-
 import { EditConstraintRemovalCriteriaComponent } from '../edit-constraint-removal-criteria/edit-constraint-removal-criteria.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    EditConstraintRemovalCriteriaComponent,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    RequiredErrorLabelComponent
-  ],
-  selector: 'component-constraint-authoring',
-  standalone: true,
-  styleUrl: '../constraint-authoring/constraint-authoring.component.scss',
-  templateUrl: '../constraint-authoring/constraint-authoring.component.html'
+    imports: [
+        CommonModule,
+        EditConstraintRemovalCriteriaComponent,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatSelectModule,
+        RequiredErrorLabelComponent
+    ],
+    selector: 'component-constraint-authoring',
+    styleUrl: '../constraint-authoring/constraint-authoring.component.scss',
+    templateUrl: '../constraint-authoring/constraint-authoring.component.html'
 })
 export class ComponentConstraintAuthoringComponent extends ConstraintAuthoringComponent {
   constraintActions = [

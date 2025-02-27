@@ -10,19 +10,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
 
 @Component({
-  imports: [
-    CommonModule,
-    ComponentConstraintAuthoringComponent,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatTooltipModule
-  ],
-  selector: 'edit-component-constraints',
-  standalone: true,
-  styleUrl: './edit-component-constraints.component.scss',
-  templateUrl: './edit-component-constraints.component.html'
+    imports: [
+        CommonModule,
+        ComponentConstraintAuthoringComponent,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatTooltipModule
+    ],
+    selector: 'edit-component-constraints',
+    styleUrl: './edit-component-constraints.component.scss',
+    templateUrl: './edit-component-constraints.component.html'
 })
 export class EditComponentConstraintsComponent extends ConstraintsAuthoringComponent {
   @Input() componentContent: ComponentContent;

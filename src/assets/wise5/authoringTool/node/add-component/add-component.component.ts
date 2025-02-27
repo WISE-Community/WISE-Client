@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  selector: 'add-component',
-  standalone: true,
-  imports: [AddComponentButtonComponent, CommonModule, FlexLayoutModule, MatDividerModule],
-  templateUrl: './add-component.component.html',
-  styleUrl: './add-component.component.scss'
+    selector: 'add-component',
+    imports: [AddComponentButtonComponent, CommonModule, FlexLayoutModule, MatDividerModule],
+    templateUrl: './add-component.component.html',
+    styleUrl: './add-component.component.scss'
 })
 export class AddComponentComponent {
   @Input() afterComponentId: string;

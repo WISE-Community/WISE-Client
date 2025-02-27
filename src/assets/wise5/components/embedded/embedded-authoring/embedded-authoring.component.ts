@@ -9,9 +9,10 @@ import { EmbeddedService } from '../embeddedService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'embedded-authoring',
-  templateUrl: 'embedded-authoring.component.html',
-  styleUrls: ['embedded-authoring.component.scss']
+    selector: 'embedded-authoring',
+    templateUrl: 'embedded-authoring.component.html',
+    styleUrls: ['embedded-authoring.component.scss'],
+    standalone: false
 })
 export class EmbeddedAuthoring extends AbstractComponentAuthoring {
   embeddedApplicationIFrameId: string;

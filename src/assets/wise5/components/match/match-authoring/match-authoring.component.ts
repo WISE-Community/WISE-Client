@@ -15,21 +15,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    EditComponentPrompt,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatTooltipModule,
-    TranslatableAssetChooserComponent,
-    TranslatableInputComponent
-  ],
-  standalone: true,
-  styleUrl: 'match-authoring.component.scss',
-  templateUrl: 'match-authoring.component.html'
+    imports: [
+        CommonModule,
+        EditComponentPrompt,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatTooltipModule,
+        TranslatableAssetChooserComponent,
+        TranslatableInputComponent
+    ],
+    styleUrl: 'match-authoring.component.scss',
+    templateUrl: 'match-authoring.component.html'
 })
 export class MatchAuthoringComponent extends AbstractComponentAuthoring {
   private defaultSourceBucketId: string = '0';

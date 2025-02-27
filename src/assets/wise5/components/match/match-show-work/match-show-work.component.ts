@@ -9,19 +9,18 @@ import { MatchChoiceItemComponent } from '../match-choice-item/match-choice-item
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatchChoiceItemComponent,
-    MatchFeedbackSectionComponent
-  ],
-  selector: 'match-show-work',
-  standalone: true,
-  styleUrls: [
-    '../match-student/match-student-default/match-student-default.component.scss',
-    'match-show-work.component.scss'
-  ],
-  templateUrl: 'match-show-work.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatchChoiceItemComponent,
+        MatchFeedbackSectionComponent
+    ],
+    selector: 'match-show-work',
+    styleUrls: [
+        '../match-student/match-student-default/match-student-default.component.scss',
+        'match-show-work.component.scss'
+    ],
+    templateUrl: 'match-show-work.component.html'
 })
 export class MatchShowWorkComponent extends ComponentShowWorkDirective {
   protected hasCorrectAnswer: boolean;

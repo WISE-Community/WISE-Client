@@ -12,21 +12,20 @@ import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    EditConstraintRemovalCriteriaComponent,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    RequiredErrorLabelComponent
-  ],
-  selector: 'node-constraint-authoring',
-  standalone: true,
-  styleUrl: '../constraint-authoring/constraint-authoring.component.scss',
-  templateUrl: '../constraint-authoring/constraint-authoring.component.html'
+    imports: [
+        CommonModule,
+        EditConstraintRemovalCriteriaComponent,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatSelectModule,
+        RequiredErrorLabelComponent
+    ],
+    selector: 'node-constraint-authoring',
+    styleUrl: '../constraint-authoring/constraint-authoring.component.scss',
+    templateUrl: '../constraint-authoring/constraint-authoring.component.html'
 })
 export class NodeConstraintAuthoringComponent extends ConstraintAuthoringComponent {
   constraintActions = [

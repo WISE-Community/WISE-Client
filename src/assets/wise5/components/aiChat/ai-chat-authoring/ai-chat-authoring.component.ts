@@ -6,8 +6,9 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  templateUrl: './ai-chat-authoring.component.html',
-  styleUrls: ['./ai-chat-authoring.component.scss']
+    templateUrl: './ai-chat-authoring.component.html',
+    styleUrls: ['./ai-chat-authoring.component.scss'],
+    standalone: false
 })
 export class AiChatAuthoringComponent extends AbstractComponentAuthoring {
   protected showSystemPromptHelp = false;

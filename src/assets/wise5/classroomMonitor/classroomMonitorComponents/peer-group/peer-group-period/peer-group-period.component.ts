@@ -4,9 +4,10 @@ import { ConfigService } from '../../../../services/configService';
 import { PeerGroupService } from '../../../../services/peerGroupService';
 
 @Component({
-  selector: 'peer-group-period',
-  templateUrl: './peer-group-period.component.html',
-  styleUrls: ['./peer-group-period.component.scss']
+    selector: 'peer-group-period',
+    templateUrl: './peer-group-period.component.html',
+    styleUrls: ['./peer-group-period.component.scss'],
+    standalone: false
 })
 export class PeerGroupPeriodComponent implements OnInit {
   @Input() peerGroupingTag: string;

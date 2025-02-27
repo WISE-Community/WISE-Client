@@ -118,4 +118,6 @@ $dark-colors: (
   'success-contrast': black,
   'text': mat.m2-get-color-from-palette($foreground, 'text'),
   'warn': mat.m2-get-color-from-palette($dark-theme-warn, 800),
+  /* TODO: remove when updating to Angular Material v19 theming */
+  'mat-app-bg': #333333,
 );

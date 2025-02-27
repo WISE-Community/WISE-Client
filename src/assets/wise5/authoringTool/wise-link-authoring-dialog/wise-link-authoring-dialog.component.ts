@@ -3,9 +3,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
-  selector: 'wise-link-authoring-dialog',
-  templateUrl: './wise-link-authoring-dialog.component.html',
-  styleUrls: ['./wise-link-authoring-dialog.component.scss']
+    selector: 'wise-link-authoring-dialog',
+    templateUrl: './wise-link-authoring-dialog.component.html',
+    styleUrls: ['./wise-link-authoring-dialog.component.scss'],
+    standalone: false
 })
 export class WiseLinkAuthoringDialogComponent {
   protected items: any[];

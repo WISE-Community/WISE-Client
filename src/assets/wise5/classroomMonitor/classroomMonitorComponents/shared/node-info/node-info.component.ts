@@ -17,19 +17,18 @@ import { TeacherSummaryDisplayComponent } from '../../../../directives/teacher-s
 import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatIconModule,
-    MatDividerModule,
-    FlexLayoutModule,
-    PreviewComponentComponent,
-    TeacherSummaryDisplayComponent
-  ],
-  selector: 'node-info',
-  standalone: true,
-  styleUrl: 'node-info.component.scss',
-  templateUrl: 'node-info.component.html'
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatIconModule,
+        MatDividerModule,
+        FlexLayoutModule,
+        PreviewComponentComponent,
+        TeacherSummaryDisplayComponent
+    ],
+    selector: 'node-info',
+    styleUrl: 'node-info.component.scss',
+    templateUrl: 'node-info.component.html'
 })
 export class NodeInfoComponent {
   protected node: Node;

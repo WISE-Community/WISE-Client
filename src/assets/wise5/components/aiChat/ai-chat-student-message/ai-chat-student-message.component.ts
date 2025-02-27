@@ -4,9 +4,10 @@ import { ConfigService } from '../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 
 @Component({
-  selector: 'ai-chat-student-message',
-  templateUrl: './ai-chat-student-message.component.html',
-  styleUrls: ['./ai-chat-student-message.component.scss']
+    selector: 'ai-chat-student-message',
+    templateUrl: './ai-chat-student-message.component.html',
+    styleUrls: ['./ai-chat-student-message.component.scss'],
+    standalone: false
 })
 export class AiChatStudentMessageComponent {
   protected avatarColor: string;

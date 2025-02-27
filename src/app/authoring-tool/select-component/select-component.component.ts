@@ -7,10 +7,9 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
 
 @Component({
-  selector: 'select-component',
-  templateUrl: './select-component.component.html',
-  standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule]
+    selector: 'select-component',
+    templateUrl: './select-component.component.html',
+    imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule]
 })
 export class SelectComponentComponent {
   @Input() allowedComponentTypes: string[] = [];

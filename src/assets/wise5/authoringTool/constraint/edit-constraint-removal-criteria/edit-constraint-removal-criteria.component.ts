@@ -17,22 +17,21 @@ import { RequiredErrorLabelComponent } from '../../node/advanced/required-error-
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  imports: [
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
-    RequiredErrorLabelComponent
-  ],
-  selector: 'edit-constraint-removal-criteria',
-  standalone: true,
-  styleUrl: './edit-constraint-removal-criteria.component.scss',
-  templateUrl: './edit-constraint-removal-criteria.component.html'
+    imports: [
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTooltipModule,
+        RequiredErrorLabelComponent
+    ],
+    selector: 'edit-constraint-removal-criteria',
+    styleUrl: './edit-constraint-removal-criteria.component.scss',
+    templateUrl: './edit-constraint-removal-criteria.component.html'
 })
 export class EditConstraintRemovalCriteriaComponent implements OnInit {
   private allNodeIds: string[];

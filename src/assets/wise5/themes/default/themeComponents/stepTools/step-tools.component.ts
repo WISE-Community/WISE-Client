@@ -16,23 +16,22 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    MatTooltipModule,
-    NodeIconComponent,
-    NodeStatusIconComponent
-  ],
-  selector: 'step-tools',
-  standalone: true,
-  styleUrl: './step-tools.component.scss',
-  templateUrl: './step-tools.component.html'
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatSelectModule,
+        MatTooltipModule,
+        NodeIconComponent,
+        NodeStatusIconComponent
+    ],
+    selector: 'step-tools',
+    styleUrl: './step-tools.component.scss',
+    templateUrl: './step-tools.component.html'
 })
 export class StepToolsComponent implements OnInit {
   protected icons: any;

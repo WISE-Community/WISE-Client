@@ -20,25 +20,24 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  templateUrl: './forgot-student-password.component.html',
-  styleUrl: './forgot-student-password.component.scss',
-  standalone: true,
-  imports: [
-    MatCard,
-    MatCardContent,
-    FormsModule,
-    FlexModule,
-    ReactiveFormsModule,
-    NgIf,
-    RouterLink,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatError,
-    MatButton,
-    MatProgressBar,
-    MatDivider
-  ]
+    templateUrl: './forgot-student-password.component.html',
+    styleUrl: './forgot-student-password.component.scss',
+    imports: [
+        MatCard,
+        MatCardContent,
+        FormsModule,
+        FlexModule,
+        ReactiveFormsModule,
+        NgIf,
+        RouterLink,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatError,
+        MatButton,
+        MatProgressBar,
+        MatDivider
+    ]
 })
 export class ForgotStudentPasswordComponent {
   protected forgotStudentPasswordFormGroup: FormGroup = this.fb.group({

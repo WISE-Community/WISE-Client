@@ -8,9 +8,10 @@ import { ProjectService } from '../../../../services/projectService';
 import { StudentAssetService } from '../../../../services/studentAssetService';
 
 @Component({
-  selector: 'edit-notebook-item-dialog',
-  templateUrl: './edit-notebook-item-dialog.component.html',
-  styleUrls: ['./edit-notebook-item-dialog.component.scss']
+    selector: 'edit-notebook-item-dialog',
+    templateUrl: './edit-notebook-item-dialog.component.html',
+    styleUrls: ['./edit-notebook-item-dialog.component.scss'],
+    standalone: false
 })
 export class EditNotebookItemDialogComponent implements OnInit {
   color: any;

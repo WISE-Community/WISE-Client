@@ -5,10 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatIconModule],
-  selector: 'discourse-recent-activity',
-  standalone: true,
-  styleUrl: 'discourse-recent-activity.component.scss',
-  templateUrl: 'discourse-recent-activity.component.html'
+    imports: [CommonModule, FlexLayoutModule, MatIconModule],
+    selector: 'discourse-recent-activity',
+    styleUrl: 'discourse-recent-activity.component.scss',
+    templateUrl: 'discourse-recent-activity.component.html'
 })
 export class DiscourseRecentActivityComponent extends DiscourseFeedComponent {}

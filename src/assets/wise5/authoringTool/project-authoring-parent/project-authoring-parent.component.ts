@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 import { NotifyAuthorService } from '../../services/notifyAuthorService';
 
 @Component({
-  templateUrl: './project-authoring-parent.component.html',
-  styleUrls: ['./project-authoring-parent.component.scss']
+    templateUrl: './project-authoring-parent.component.html',
+    styleUrls: ['./project-authoring-parent.component.scss'],
+    standalone: false
 })
 export class ProjectAuthoringParentComponent {
   @Input('unitId') protected projectId?: number;

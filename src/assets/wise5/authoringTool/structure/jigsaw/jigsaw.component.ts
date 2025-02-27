@@ -10,20 +10,19 @@ import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { MatDivider } from '@angular/material/divider';
 
 @Component({
-  imports: [
-    MatDivider,
-    MatRadioGroup,
-    FormsModule,
-    MatRadioButton,
-    FlexModule,
-    MatButton,
-    RouterLink,
-    NgIf,
-    MatProgressBar
-  ],
-  standalone: true,
-  styleUrls: ['./jigsaw.component.scss', '../../add-content.scss'],
-  templateUrl: './jigsaw.component.html'
+    imports: [
+        MatDivider,
+        MatRadioGroup,
+        FormsModule,
+        MatRadioButton,
+        FlexModule,
+        MatButton,
+        RouterLink,
+        NgIf,
+        MatProgressBar
+    ],
+    styleUrls: ['./jigsaw.component.scss', '../../add-content.scss'],
+    templateUrl: './jigsaw.component.html'
 })
 export class JigsawComponent extends ConfigureStructureComponent {
   protected numGroups: string = '2';

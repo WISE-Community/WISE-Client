@@ -5,9 +5,10 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 
 @Component({
-  selector: 'peer-group-dialog',
-  templateUrl: './peer-group-dialog.component.html',
-  styleUrl: './peer-group-dialog.component.scss'
+    selector: 'peer-group-dialog',
+    templateUrl: './peer-group-dialog.component.html',
+    styleUrl: './peer-group-dialog.component.scss',
+    standalone: false
 })
 export class PeerGroupDialogComponent implements OnInit {
   private currentPeriodChangedSubscription: Subscription;

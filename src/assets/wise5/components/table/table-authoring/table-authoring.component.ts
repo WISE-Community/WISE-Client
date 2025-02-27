@@ -11,9 +11,10 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'table-authoring',
-  templateUrl: 'table-authoring.component.html',
-  styleUrls: ['table-authoring.component.scss']
+    selector: 'table-authoring',
+    templateUrl: 'table-authoring.component.html',
+    styleUrls: ['table-authoring.component.scss'],
+    standalone: false
 })
 export class TableAuthoring extends AbstractComponentAuthoring {
   protected columnCellSizes: any;

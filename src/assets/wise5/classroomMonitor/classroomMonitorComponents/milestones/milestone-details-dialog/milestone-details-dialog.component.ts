@@ -4,9 +4,10 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'milestone-details-dialog',
-  templateUrl: './milestone-details-dialog.component.html',
-  styleUrls: ['./milestone-details-dialog.component.scss']
+    selector: 'milestone-details-dialog',
+    templateUrl: './milestone-details-dialog.component.html',
+    styleUrls: ['./milestone-details-dialog.component.scss'],
+    standalone: false
 })
 export class MilestoneDetailsDialogComponent implements OnInit {
   constructor(

@@ -13,10 +13,11 @@ import { NodeGradingViewComponent } from '../../nodeGrading/node-grading-view/no
 import { Annotation } from '../../../../common/Annotation';
 
 @Component({
-  selector: 'milestone-grading-view',
-  templateUrl: './milestone-grading-view.component.html',
-  styleUrls: ['./milestone-grading-view.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'milestone-grading-view',
+    templateUrl: './milestone-grading-view.component.html',
+    styleUrls: ['./milestone-grading-view.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class MilestoneGradingViewComponent extends NodeGradingViewComponent {
   componentId: string;

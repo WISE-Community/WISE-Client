@@ -2,9 +2,10 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'rubric-authoring',
-  templateUrl: 'rubric-authoring.component.html',
-  styleUrls: ['./rubric-authoring.component.scss']
+    selector: 'rubric-authoring',
+    templateUrl: 'rubric-authoring.component.html',
+    styleUrls: ['./rubric-authoring.component.scss'],
+    standalone: false
 })
 export class RubricAuthoringComponent {
   protected project: any;

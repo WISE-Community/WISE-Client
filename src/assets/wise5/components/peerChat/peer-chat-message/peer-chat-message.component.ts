@@ -3,9 +3,10 @@ import { ConfigService } from '../../../services/configService';
 import { PeerChatMessage } from '../PeerChatMessage';
 
 @Component({
-  selector: 'peer-chat-message',
-  templateUrl: './peer-chat-message.component.html',
-  styleUrls: ['./peer-chat-message.component.scss']
+    selector: 'peer-chat-message',
+    templateUrl: './peer-chat-message.component.html',
+    styleUrls: ['./peer-chat-message.component.scss'],
+    standalone: false
 })
 export class PeerChatMessageComponent implements OnInit {
   @Input()

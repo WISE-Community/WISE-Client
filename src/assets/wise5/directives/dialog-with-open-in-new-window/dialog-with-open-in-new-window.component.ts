@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
-  selector: 'dialog-with-open-in-new-window',
-  templateUrl: './dialog-with-open-in-new-window.component.html',
-  styleUrls: ['./dialog-with-open-in-new-window.component.scss']
+    selector: 'dialog-with-open-in-new-window',
+    templateUrl: './dialog-with-open-in-new-window.component.html',
+    styleUrls: ['./dialog-with-open-in-new-window.component.scss'],
+    standalone: false
 })
 export class DialogWithOpenInNewWindowComponent extends DialogComponent {
   openInNewWindow(): void {

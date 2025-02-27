@@ -4,9 +4,10 @@ import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ComputerAvatarSettings } from '../../common/computer-avatar/ComputerAvatarSettings';
 
 @Component({
-  selector: 'computer-avatar-selector',
-  templateUrl: './computer-avatar-selector.component.html',
-  styleUrls: ['./computer-avatar-selector.component.scss']
+    selector: 'computer-avatar-selector',
+    templateUrl: './computer-avatar-selector.component.html',
+    styleUrls: ['./computer-avatar-selector.component.scss'],
+    standalone: false
 })
 export class ComputerAvatarSelectorComponent implements OnInit {
   @Input()

@@ -3,8 +3,9 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { AiChatContent } from '../AiChatContent';
 
 @Component({
-  selector: 'edit-ai-chat-advanced',
-  templateUrl: './edit-ai-chat-advanced.component.html'
+    selector: 'edit-ai-chat-advanced',
+    templateUrl: './edit-ai-chat-advanced.component.html',
+    standalone: false
 })
 export class EditAiChatAdvancedComponent extends EditAdvancedComponentComponent {
   componentContent: AiChatContent;

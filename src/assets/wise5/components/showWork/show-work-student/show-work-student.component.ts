@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'show-work-student',
-  templateUrl: './show-work-student.component.html',
-  styleUrls: ['./show-work-student.component.scss']
+    selector: 'show-work-student',
+    templateUrl: './show-work-student.component.html',
+    styleUrls: ['./show-work-student.component.scss'],
+    standalone: false
 })
 export class ShowWorkStudentComponent implements OnInit {
   @Input() componentContent: any;

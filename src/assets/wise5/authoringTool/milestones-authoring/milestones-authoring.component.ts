@@ -4,9 +4,10 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Subject, debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'milestones-authoring',
-  templateUrl: './milestones-authoring.component.html',
-  styleUrls: ['./milestones-authoring.component.scss']
+    selector: 'milestones-authoring',
+    templateUrl: './milestones-authoring.component.html',
+    styleUrls: ['./milestones-authoring.component.scss'],
+    standalone: false
 })
 export class MilestonesAuthoringComponent {
   availableSatisfyCriteria: any[] = [{ value: 'isCompleted', text: 'Is Completed' }];

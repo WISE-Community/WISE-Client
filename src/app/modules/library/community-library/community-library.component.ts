@@ -5,9 +5,10 @@ import { LibraryComponent } from '../library/library.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-community-library',
-  templateUrl: './community-library.component.html',
-  styleUrls: ['./community-library.component.scss']
+    selector: 'app-community-library',
+    templateUrl: './community-library.component.html',
+    styleUrls: ['./community-library.component.scss'],
+    standalone: false
 })
 export class CommunityLibraryComponent extends LibraryComponent {
   projects: LibraryProject[] = [];
@@ -41,8 +42,9 @@ export class CommunityLibraryComponent extends LibraryComponent {
 }
 
 @Component({
-  selector: 'community-library-details',
-  templateUrl: 'community-library-details.html'
+    selector: 'community-library-details',
+    templateUrl: 'community-library-details.html',
+    standalone: false
 })
 export class CommunityLibraryDetailsComponent {
   constructor(

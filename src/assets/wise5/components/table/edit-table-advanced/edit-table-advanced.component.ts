@@ -7,9 +7,10 @@ import { TableContent } from '../TableContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'edit-table-advanced',
-  templateUrl: 'edit-table-advanced.component.html',
-  styleUrls: ['edit-table-advanced.component.scss']
+    selector: 'edit-table-advanced',
+    templateUrl: 'edit-table-advanced.component.html',
+    styleUrls: ['edit-table-advanced.component.scss'],
+    standalone: false
 })
 export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   MAX_ALLOWED_CELLS_IN_IMPORT = 2000;

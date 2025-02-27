@@ -13,9 +13,10 @@ import { AssetChooser } from '../../../authoringTool/project-asset-authoring/ass
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  selector: 'draw-authoring',
-  templateUrl: 'draw-authoring.component.html',
-  styleUrls: ['draw-authoring.component.scss']
+    selector: 'draw-authoring',
+    templateUrl: 'draw-authoring.component.html',
+    styleUrls: ['draw-authoring.component.scss'],
+    standalone: false
 })
 export class DrawAuthoring extends AbstractComponentAuthoring {
   allToolNames: string[] = [

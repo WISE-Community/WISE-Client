@@ -11,9 +11,10 @@ import { CopyTranslationsService } from '../../services/copyTranslationsService'
 import { ConstraintService } from '../../services/constraintService';
 
 @Component({
-  selector: 'project-authoring-step',
-  templateUrl: './project-authoring-step.component.html',
-  styleUrls: ['./project-authoring-step.component.scss']
+    selector: 'project-authoring-step',
+    templateUrl: './project-authoring-step.component.html',
+    styleUrls: ['./project-authoring-step.component.scss'],
+    standalone: false
 })
 export class ProjectAuthoringStepComponent {
   protected nodeTypeSelected: Signal<NodeTypeSelected>;

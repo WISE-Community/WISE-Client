@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'edit-connected-component-default-selects',
-  templateUrl: './edit-connected-component-default-selects.component.html',
-  styleUrls: ['./edit-connected-component-default-selects.component.scss']
+    selector: 'edit-connected-component-default-selects',
+    templateUrl: './edit-connected-component-default-selects.component.html',
+    styleUrls: ['./edit-connected-component-default-selects.component.scss'],
+    standalone: false
 })
 export class EditConnectedComponentDefaultSelectsComponent implements OnInit {
   @Input()

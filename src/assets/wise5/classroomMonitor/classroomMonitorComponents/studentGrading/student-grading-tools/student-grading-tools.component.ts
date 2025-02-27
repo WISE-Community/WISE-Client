@@ -19,17 +19,16 @@ class Workgroup {
 }
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    WorkgroupSelectAutocompleteComponent
-  ],
-  selector: 'student-grading-tools',
-  standalone: true,
-  templateUrl: './student-grading-tools.component.html'
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        WorkgroupSelectAutocompleteComponent
+    ],
+    selector: 'student-grading-tools',
+    templateUrl: './student-grading-tools.component.html'
 })
 export class StudentGradingToolsComponent implements OnInit {
   protected avatarColor: string;

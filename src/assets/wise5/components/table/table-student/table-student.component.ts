@@ -1,4 +1,4 @@
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { Tabulator } from 'tabulator-tables';
 import { AnnotationService } from '../../../services/annotationService';
@@ -21,7 +21,8 @@ import { hasConnectedComponent } from '../../../common/ComponentContent';
 @Component({
   templateUrl: 'table-student.component.html',
   styleUrl: 'table-student.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class TableStudentComponent extends ComponentStudent {
   columnIndexToIsUsed: Map<number, boolean> = new Map();

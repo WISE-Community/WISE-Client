@@ -6,8 +6,9 @@ import { ProjectService } from '../../../services/projectService';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 
 @Component({
-  selector: 'ai-chat-show-work',
-  templateUrl: './ai-chat-show-work.component.html'
+    selector: 'ai-chat-show-work',
+    templateUrl: './ai-chat-show-work.component.html',
+    standalone: false
 })
 export class AiChatShowWorkComponent extends ComponentShowWorkDirective {
   protected computerAvatar: ComputerAvatar;

@@ -25,24 +25,23 @@ import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirs
 import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
 
 @Component({
-  imports: [
-    CommonModule,
-    ComponentTypeButtonComponent,
-    DragDropModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatProgressBarModule,
-    ReactiveFormsModule,
-    RouterModule
-  ],
-  standalone: true,
-  styleUrls: ['add-your-own-node.component.scss', '../../add-content.scss'],
-  templateUrl: 'add-your-own-node.component.html'
+    imports: [
+        CommonModule,
+        ComponentTypeButtonComponent,
+        DragDropModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatProgressBarModule,
+        ReactiveFormsModule,
+        RouterModule
+    ],
+    styleUrls: ['add-your-own-node.component.scss', '../../add-content.scss'],
+    templateUrl: 'add-your-own-node.component.html'
 })
 export class AddYourOwnNodeComponent {
   protected addNodeFormGroup: FormGroup = this.fb.group({

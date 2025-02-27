@@ -9,18 +9,17 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-mobile-menu',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    RouterModule
-  ],
-  templateUrl: './mobile-menu.component.html',
-  styleUrl: './mobile-menu.component.scss'
+    selector: 'app-mobile-menu',
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        RouterModule
+    ],
+    templateUrl: './mobile-menu.component.html',
+    styleUrl: './mobile-menu.component.scss'
 })
 export class MobileMenuComponent implements OnInit {
   protected signedIn: boolean;

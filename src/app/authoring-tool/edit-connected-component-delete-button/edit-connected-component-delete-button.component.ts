@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'edit-connected-component-delete-button',
-  templateUrl: './edit-connected-component-delete-button.component.html',
-  styleUrls: ['./edit-connected-component-delete-button.component.scss']
+    selector: 'edit-connected-component-delete-button',
+    templateUrl: './edit-connected-component-delete-button.component.html',
+    styleUrls: ['./edit-connected-component-delete-button.component.scss'],
+    standalone: false
 })
 export class EditConnectedComponentDeleteButtonComponent implements OnInit {
   @Input()

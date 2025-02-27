@@ -6,8 +6,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'node-advanced-json-authoring',
-  templateUrl: './node-advanced-json-authoring.component.html'
+    selector: 'node-advanced-json-authoring',
+    templateUrl: './node-advanced-json-authoring.component.html',
+    standalone: false
 })
 export class NodeAdvancedJsonAuthoringComponent implements OnInit {
   protected node: any;

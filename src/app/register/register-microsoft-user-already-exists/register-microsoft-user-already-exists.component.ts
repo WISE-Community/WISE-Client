@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './register-microsoft-user-already-exists.component.html'
+    templateUrl: './register-microsoft-user-already-exists.component.html',
+    standalone: false
 })
 export class RegisterMicrosoftUserAlreadyExistsComponent {
   protected login(): void {

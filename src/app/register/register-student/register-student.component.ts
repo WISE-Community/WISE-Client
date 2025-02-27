@@ -3,9 +3,10 @@ import { GoogleUser } from '../../modules/google-sign-in/GoogleUser';
 import { AbstractRegisterUserComponent } from '../abstract-register-user.component';
 
 @Component({
-  selector: 'app-register-student',
-  templateUrl: './register-student.component.html',
-  styleUrls: ['./register-student.component.scss']
+    selector: 'app-register-student',
+    templateUrl: './register-student.component.html',
+    styleUrls: ['./register-student.component.scss'],
+    standalone: false
 })
 export class RegisterStudentComponent extends AbstractRegisterUserComponent {
   protected firstName: string = '';

@@ -11,9 +11,10 @@ import { TeacherRun } from '../teacher-run';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'create-run-dialog',
-  templateUrl: './create-run-dialog.component.html',
-  styleUrls: ['./create-run-dialog.component.scss']
+    selector: 'create-run-dialog',
+    templateUrl: './create-run-dialog.component.html',
+    styleUrls: ['./create-run-dialog.component.scss'],
+    standalone: false
 })
 export class CreateRunDialogComponent {
   form: FormGroup;

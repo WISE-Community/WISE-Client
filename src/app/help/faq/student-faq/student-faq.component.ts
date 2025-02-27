@@ -7,8 +7,7 @@ import { CallToActionComponent } from '../../../modules/shared/call-to-action/ca
 import { RouterModule } from '@angular/router';
 
 @Component({
-  imports: [CallToActionComponent, FlexLayoutModule, MatDividerModule, MatIconModule, RouterModule],
-  standalone: true,
-  templateUrl: './student-faq.component.html'
+    imports: [CallToActionComponent, FlexLayoutModule, MatDividerModule, MatIconModule, RouterModule],
+    templateUrl: './student-faq.component.html'
 })
 export class StudentFaqComponent extends FaqComponent {}

@@ -27,25 +27,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProjectLanguageChooserComponent } from '../../common/project-language-chooser/project-language-chooser.component';
 
 @Component({
-  standalone: true,
-  selector: 'top-bar',
-  imports: [
-    CommonModule,
-    DismissAmbientNotificationDialogModule,
-    FlexLayoutModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    MatToolbarModule,
-    NotificationsDialogComponent,
-    ProjectLanguageChooserComponent,
-    StudentAccountMenuModule
-  ],
-  styleUrls: ['./top-bar.component.scss'],
-  templateUrl: 'top-bar.component.html'
+    selector: 'top-bar',
+    imports: [
+        CommonModule,
+        DismissAmbientNotificationDialogModule,
+        FlexLayoutModule,
+        MatBadgeModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatMenuModule,
+        MatProgressSpinnerModule,
+        MatToolbarModule,
+        NotificationsDialogComponent,
+        ProjectLanguageChooserComponent,
+        StudentAccountMenuModule
+    ],
+    styleUrls: ['./top-bar.component.scss'],
+    templateUrl: 'top-bar.component.html'
 })
 export class TopBarComponent {
   @ViewChild(StudentAccountMenuComponent) accountMenu: StudentAccountMenuComponent;

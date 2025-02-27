@@ -10,9 +10,10 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Annotation } from '../../common/Annotation';
 
 @Component({
-  selector: 'student-grading',
-  templateUrl: './student-grading.component.html',
-  styleUrls: ['./student-grading.component.scss']
+    selector: 'student-grading',
+    templateUrl: './student-grading.component.html',
+    styleUrls: ['./student-grading.component.scss'],
+    standalone: false
 })
 export class StudentGradingComponent implements OnInit {
   isExpandAll: boolean;

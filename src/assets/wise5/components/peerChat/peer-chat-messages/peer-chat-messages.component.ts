@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PeerChatMessage } from '../PeerChatMessage';
 
 @Component({
-  selector: 'peer-chat-messages',
-  templateUrl: './peer-chat-messages.component.html',
-  styleUrls: ['./peer-chat-messages.component.scss']
+    selector: 'peer-chat-messages',
+    templateUrl: './peer-chat-messages.component.html',
+    styleUrls: ['./peer-chat-messages.component.scss'],
+    standalone: false
 })
 export class PeerChatMessagesComponent implements OnInit {
   @Input()

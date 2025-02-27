@@ -19,7 +19,6 @@ import { SeriesDataPoint } from '../../common/SeriesDataPoint';
 
 @Component({
   imports: [CommonModule, MatCardModule],
-  standalone: true,
   styleUrl: 'summary-display.component.scss',
   templateUrl: 'summary-display.component.html'
 })

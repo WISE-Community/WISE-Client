@@ -6,8 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [CallToActionComponent, FlexLayoutModule, MatDividerModule, MatIconModule],
-  standalone: true,
-  templateUrl: './getting-started.component.html'
+    imports: [CallToActionComponent, FlexLayoutModule, MatDividerModule, MatIconModule],
+    templateUrl: './getting-started.component.html'
 })
 export class GettingStartedComponent extends FaqComponent {}

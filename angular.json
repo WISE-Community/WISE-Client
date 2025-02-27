@@ -9,12 +9,11 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "allowedCommonJsDependencies": [
               "angular",
               "fabric",
-              "dom-autoscroller",
               "@wise-community/drawing-tool",
               "jquery",
               "rxjs/internal/BehaviorSubject",
@@ -23,7 +22,10 @@
               "compute-covariance"
             ],
             "aot": true,
-            "outputPath": "dist",
+            "outputPath": {
+              "base": "dist",
+              "browser": ""
+            },
             "index": "src/index.html",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": [
@@ -64,7 +66,7 @@
               ]
             },
             "scripts": [],
-            "main": "src/main.ts"
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -88,7 +90,10 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputPath": "dist",
+              "outputPath": {
+                "base": "dist",
+                "browser": ""
+              },
               "baseHref": "/"
             },
             "development": {

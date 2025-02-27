@@ -11,11 +11,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 @Component({
-  standalone: true,
-  selector: 'translatable-asset-chooser',
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
-  templateUrl: './translatable-asset-chooser.component.html',
-  styleUrl: './translatable-asset-chooser.component.scss'
+    selector: 'translatable-asset-chooser',
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
+    templateUrl: './translatable-asset-chooser.component.html',
+    styleUrl: './translatable-asset-chooser.component.scss'
 })
 export class TranslatableAssetChooserComponent extends AbstractTranslatableFieldComponent {
   @Input() tooltip: String = $localize`Choose image`;

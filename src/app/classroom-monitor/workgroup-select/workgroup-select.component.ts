@@ -3,7 +3,10 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
 
-@Directive({ selector: 'workgroup-select' })
+@Directive({
+    selector: 'workgroup-select',
+    standalone: false
+})
 export class WorkgroupSelectComponent {
   @Input() customClass: string;
   protected canViewStudentNames: boolean;

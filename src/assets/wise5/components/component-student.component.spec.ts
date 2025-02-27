@@ -13,7 +13,8 @@ let fixture: ComponentFixture<ComponentStudent>;
 let performSubmitSpy: jasmine.Spy;
 
 @Component({
-  selector: 'component-student-impl'
+    selector: 'component-student-impl',
+    standalone: false
 })
 class ComponentStudentImpl extends ComponentStudent {}
 

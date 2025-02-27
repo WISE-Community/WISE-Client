@@ -7,9 +7,10 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 import { TeacherDiscussionService } from '../teacherDiscussionService';
 
 @Component({
-  selector: 'discussion-show-work',
-  templateUrl: 'discussion-show-work.component.html',
-  styleUrls: ['discussion-show-work.component.scss']
+    selector: 'discussion-show-work',
+    templateUrl: 'discussion-show-work.component.html',
+    styleUrls: ['discussion-show-work.component.scss'],
+    standalone: false
 })
 export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
   @Input() workgroupId: any;

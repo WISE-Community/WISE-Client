@@ -4,9 +4,10 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { Component as WISEComponent } from '../../../common/Component';
 
 @Component({
-  selector: 'student-assets',
-  templateUrl: './student-assets.component.html',
-  styleUrls: ['./student-assets.component.scss']
+    selector: 'student-assets',
+    templateUrl: './student-assets.component.html',
+    styleUrls: ['./student-assets.component.scss'],
+    standalone: false
 })
 export class StudentAssetsComponent implements OnInit {
   @Input() component: WISEComponent;

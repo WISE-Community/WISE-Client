@@ -8,9 +8,10 @@ import { AbstractImportStepComponent } from '../abstract-import-step/abstract-im
 import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 
 @Component({
-  selector: 'configure-automated-assessment',
-  templateUrl: './configure-automated-assessment.component.html',
-  styleUrls: ['./configure-automated-assessment.component.scss', '../../add-content.scss']
+    selector: 'configure-automated-assessment',
+    templateUrl: './configure-automated-assessment.component.html',
+    styleUrls: ['./configure-automated-assessment.component.scss', '../../add-content.scss'],
+    standalone: false
 })
 export class ConfigureAutomatedAssessmentComponent extends AbstractImportStepComponent {
   protected hasCustomization: boolean;

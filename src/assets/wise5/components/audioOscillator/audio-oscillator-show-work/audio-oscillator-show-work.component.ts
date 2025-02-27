@@ -4,8 +4,9 @@ import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 
 @Component({
-  selector: 'audio-oscillator-show-work',
-  templateUrl: 'audio-oscillator-show-work.component.html'
+    selector: 'audio-oscillator-show-work',
+    templateUrl: 'audio-oscillator-show-work.component.html',
+    standalone: false
 })
 export class AudioOscillatorShowWorkComponent extends ComponentShowWorkDirective {
   amplitudesPlayed: string;

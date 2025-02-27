@@ -7,11 +7,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavItemComponent } from '../../../vle/nav-item/nav-item.component';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, NavItemComponent],
-  selector: 'navigation',
-  standalone: true,
-  styleUrl: './navigation.component.scss',
-  templateUrl: './navigation.component.html'
+    imports: [CommonModule, FlexLayoutModule, NavItemComponent],
+    selector: 'navigation',
+    styleUrl: './navigation.component.scss',
+    templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements OnInit {
   protected navItemIsExpanded: { [nodeId: string]: boolean } = {};

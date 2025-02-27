@@ -14,9 +14,10 @@ import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
 
 @Component({
-  selector: 'project-authoring',
-  templateUrl: './project-authoring.component.html',
-  styleUrls: ['./project-authoring.component.scss']
+    selector: 'project-authoring',
+    templateUrl: './project-authoring.component.html',
+    styleUrls: ['./project-authoring.component.scss'],
+    standalone: false
 })
 export class ProjectAuthoringComponent implements OnInit {
   protected allLessonsCollapsed: Signal<boolean> = computed(() =>
