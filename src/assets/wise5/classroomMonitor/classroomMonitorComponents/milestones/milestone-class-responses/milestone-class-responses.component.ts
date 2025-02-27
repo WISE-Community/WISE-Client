@@ -184,22 +184,4 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
     }
     return -10000; // this hack ensures that this score appears as the lowest score
   }
-
-  protected sortWorkgroups(): void {
-    super.sortWorkgroups();
-    switch (this.sort) {
-      case 'initialScore':
-        this.sortedWorkgroups.sort(this.createSortFunction('initialScore', true));
-        break;
-      case '-initialScore':
-        this.sortedWorkgroups.sort(this.createSortFunction('initialScore', false));
-        break;
-      case 'changeInScore':
-        this.sortedWorkgroups.sort(this.createSortFunction('changeInScore', true));
-        break;
-      case '-changeInScore':
-        this.sortedWorkgroups.sort(this.createSortFunction('changeInScore', false));
-        break;
-    }
-  }
 }

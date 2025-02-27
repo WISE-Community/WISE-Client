@@ -43,15 +43,15 @@
           fxFlex
           fxLayout="row"
           fxLayoutAlign="start center"
-          (click)="setSort('team')"
+          (click)="setSort('workgroupId')"
           aria-label="Sort by team"
           i18n-aria-label
         >
           <span class="column-header-label" i18n>Team</span>
           <mat-icon
-            *ngIf="sort === 'team' || sort === '-team'"
+            *ngIf="sort === 'workgroupId' || sort === '-workgroupId'"
             class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-team' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-workgroupId' }"
           >
             arrow_drop_up
           </mat-icon>
@@ -63,15 +63,15 @@
           fxFlex="30"
           fxLayout="row"
           fxLayoutAlign="center center"
-          (click)="setSort('status')"
+          (click)="setSort('completionStatus')"
           aria-label="Sort by completion"
           i18n-aria-label
         >
           <span class="column-header-label" i18n>Status</span>
           <mat-icon
-            *ngIf="sort === 'status' || sort === '-status'"
+            *ngIf="sort === 'completionStatus' || sort === '-completionStatus'"
             class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-completionStatus' }"
           >
             arrow_drop_up
           </mat-icon>

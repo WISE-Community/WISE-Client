@@ -14,7 +14,7 @@ export abstract class AbstractClassResponsesComponent {
   protected allWorkgroupsExpanded: boolean;
   protected component: any;
   protected node: Node;
-  protected sort: string;
+  protected sort: string = 'workgroupId';
   sortedWorkgroups: any[] = [];
   workgroups: any[] = [];
   protected workgroupInViewById: any = {}; // whether the workgroup is in view or not
@@ -128,36 +128,19 @@ export abstract class AbstractClassResponsesComponent {
     );
   }
 
-  protected sortWorkgroups(): void {
-    this.sortedWorkgroups = [...this.workgroups];
-    switch (this.sort) {
-      case 'team':
-        this.sortedWorkgroups.sort(this.createSortFunction('workgroupId', true));
-        break;
-      case '-team':
-        this.sortedWorkgroups.sort(this.createSortFunction('workgroupId', false));
-        break;
-      case 'status':
-        this.sortedWorkgroups.sort(this.createSortFunction('completionStatus', true));
-        break;
-      case '-status':
-        this.sortedWorkgroups.sort(this.createSortFunction('completionStatus', false));
-        break;
-      case 'score':
-        this.sortedWorkgroups.sort(this.createSortFunction('score', true));
-        break;
-      case '-score':
-        this.sortedWorkgroups.sort(this.createSortFunction('score', false));
-        break;
-    }
+  private sortWorkgroups(): void {
+    this.sortedWorkgroups = [...this.workgroups].sort(this.createSortFunction());
   }
 
-  protected createSortFunction(fieldName: string, ascending: boolean): any {
+  private createSortFunction(): (workgroupA: any, workgroupB: any) => number {
     return (workgroupA: any, workgroupB: any) => {
+      const ascending = this.sort[0] !== '-';
+      const fieldName = this.sort.replace('-', '');
       if (workgroupA.isVisible === workgroupB.isVisible) {
         if (workgroupA[fieldName] === workgroupB[fieldName]) {
           return workgroupA.workgroupId - workgroupB.workgroupId;
         } else {
+          debugger;
           return ascending
             ? workgroupA[fieldName] - workgroupB[fieldName]
             : workgroupB[fieldName] - workgroupA[fieldName];
@@ -170,7 +153,6 @@ export abstract class AbstractClassResponsesComponent {
 
   setSort(criteria: string): void {
     this.sort = this.sort === criteria ? `-${criteria}` : criteria;
-    this.dataService.nodeGradingSort = this.sort;
     this.sortWorkgroups();
   }
 

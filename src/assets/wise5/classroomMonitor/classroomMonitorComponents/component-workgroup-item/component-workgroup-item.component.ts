@@ -59,6 +59,7 @@ export class ComponentWorkgroupItemComponent {
 
   private setComponent(): void {
     this.component = this.projectService.getComponent(this.nodeId, this.componentId);
+    this.score = this.score ?? '-';
     this.maxScore = this.projectService.getMaxScoreForComponent(this.nodeId, this.componentId) ?? 0;
   }
 

@@ -36,15 +36,15 @@
       <button
         mat-button
         class="table--list__thead__link"
-        (click)="setSort('team')"
+        (click)="setSort('workgroupId')"
         aria-label="Sort by team"
         i18n-aria-label
       >
         <span i18n fxLayout="row" fxLayoutAlign="start center">Team</span>
-        @if (sort === 'team' || sort === '-team') {
+        @if (sort === 'workgroupId' || sort === '-workgroupId') {
           <mat-icon
             class="table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-team' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-workgroupId' }"
           >
             arrow_drop_up
           </mat-icon>
@@ -56,15 +56,15 @@
         fxFlex="30"
         fxLayout="row"
         fxLayoutAlign="center center"
-        (click)="setSort('status')"
+        (click)="setSort('completionStatus')"
         aria-label="Sorty by completion"
         i18n-aria-label
       >
         <span i18n>Status</span>
-        @if (sort === 'status' || sort === '-status') {
+        @if (sort === 'completionStatus' || sort === '-completionStatus') {
           <mat-icon
             class="table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-completionStatus' }"
           >
             arrow_drop_up
           </mat-icon>
