@@ -11,6 +11,8 @@ import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testin
 import { MilestoneClassResponsesComponent } from './milestone-class-responses.component';
 import { NodeGradingViewComponentTestHelper } from '../../nodeGrading/node-grading-view/node-grading-view.component.test.helper';
 import { of } from 'rxjs';
+import { By } from '@angular/platform-browser';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 
 let component: MilestoneClassResponsesComponent;
 let fixture: ComponentFixture<MilestoneClassResponsesComponent>;
@@ -47,12 +49,15 @@ describe('MilestoneClassResponsesComponent', () => {
       canGradeStudentWork: true,
       canAuthorProject: true
     });
-    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(1);
-    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
-    spyOn(TestBed.inject(ConfigService), 'getClassmateUserInfos').and.returnValue([]);
-    spyOn(TestBed.inject(TeacherDataService), 'retrieveStudentDataForNode').and.returnValue(of([]));
     testHelper = new NodeGradingViewComponentTestHelper();
     initializeWorkgroups(component);
+    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(1);
+    spyOn(TestBed.inject(ClassroomStatusService), 'hasStudentStatus').and.returnValue(true);
+    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
+    spyOn(TestBed.inject(ConfigService), 'getClassmateUserInfos').and.returnValue(
+      component['workgroups']
+    );
+    spyOn(TestBed.inject(TeacherDataService), 'retrieveStudentDataForNode').and.returnValue(of([]));
     fixture.detectChanges();
   });
 
@@ -60,7 +65,7 @@ describe('MilestoneClassResponsesComponent', () => {
 });
 
 function initializeWorkgroups(component: MilestoneClassResponsesComponent) {
-  component.workgroups = [
+  component['workgroups'] = [
     createWorkgroupForTesting(
       3,
       testHelper.statusCompleted,
@@ -97,7 +102,7 @@ function initializeWorkgroups(component: MilestoneClassResponsesComponent) {
       null,
       testHelper.statusNoWork,
       null,
-      testHelper.notVisible,
+      testHelper.visible,
       null,
       testHelper.workgroupId5
     )
@@ -105,44 +110,24 @@ function initializeWorkgroups(component: MilestoneClassResponsesComponent) {
 }
 
 function setSort() {
-  it('should sort by initial score ascending', () => {
-    component.setSort('initialScore');
-    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+  it('should sort by team', () => {
+    testHelper.expectWorkgroupOrder(component['sortedWorkgroups'], [
       testHelper.workgroupId1,
       testHelper.workgroupId2,
       testHelper.workgroupId4,
       testHelper.workgroupId3,
       testHelper.workgroupId5
     ]);
-  });
-  it('should sort by initial score descending', () => {
-    component.setSort('-initialScore');
-    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+    const sortByTeamButton = fixture.debugElement
+      .queryAll(By.css('button'))
+      .find((element) => element.nativeElement.textContent.trim().includes('Team'));
+    sortByTeamButton.nativeElement.click();
+    testHelper.expectWorkgroupOrder(component['sortedWorkgroups'], [
+      testHelper.workgroupId5,
+      testHelper.workgroupId4,
       testHelper.workgroupId3,
       testHelper.workgroupId2,
-      testHelper.workgroupId4,
-      testHelper.workgroupId1,
-      testHelper.workgroupId5
-    ]);
-  });
-  it('should sort by change in score ascending', () => {
-    component.setSort('changeInScore');
-    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
-      testHelper.workgroupId4,
-      testHelper.workgroupId2,
-      testHelper.workgroupId3,
-      testHelper.workgroupId1,
-      testHelper.workgroupId5
-    ]);
-  });
-  it('should sort by change in score descending', () => {
-    component.setSort('-changeInScore');
-    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
-      testHelper.workgroupId1,
-      testHelper.workgroupId2,
-      testHelper.workgroupId3,
-      testHelper.workgroupId4,
-      testHelper.workgroupId5
+      testHelper.workgroupId1
     ]);
   });
 }

@@ -15,8 +15,8 @@ export abstract class AbstractClassResponsesComponent {
   protected component: any;
   protected node: Node;
   protected sort: string = 'workgroupId';
-  sortedWorkgroups: any[] = [];
-  workgroups: any[] = [];
+  protected sortedWorkgroups: any[] = [];
+  protected workgroups: any[] = [];
   protected workgroupInViewById: any = {}; // whether the workgroup is in view or not
   protected workgroupsById: any = {};
   protected workVisibilityById: { [key: number]: boolean } = {};
