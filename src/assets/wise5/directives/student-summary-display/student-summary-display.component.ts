@@ -76,13 +76,15 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
   }
 
   protected getLatestScores(): Observable<Annotation[]> {
+    let latestScores: Observable<Annotation[]>;
     if (this.isVLEPreview()) {
-      return this.getDummyStudentScoresForVLEPreview();
+      latestScores = this.getDummyStudentScoresForVLEPreview();
     } else if (this.isAuthoringPreview()) {
-      return this.getDummyStudentScoresForAuthoringPreview();
+      latestScores = this.getDummyStudentScoresForAuthoringPreview();
     } else {
-      this.getLatestStudentScores();
+      latestScores = this.getLatestStudentScores();
     }
+    return latestScores;
   }
 
   protected getLatestWork(): Observable<ComponentState[]> {
