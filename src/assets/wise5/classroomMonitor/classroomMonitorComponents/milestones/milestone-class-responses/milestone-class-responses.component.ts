@@ -179,9 +179,7 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
   }
 
   private getChangeInScore(initialScore: number, revisedScore: number): number {
-    if (initialScore != -1 && revisedScore != -1) {
-      return revisedScore - initialScore;
-    }
-    return -10000; // this hack ensures that this score appears as the lowest score
+    // returning -10000 ensures that this score appears as the lowest score
+    return initialScore != -1 && revisedScore != -1 ? revisedScore - initialScore : -10000;
   }
 }
