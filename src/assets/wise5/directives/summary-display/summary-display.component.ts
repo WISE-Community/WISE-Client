@@ -21,6 +21,7 @@ import { ScoreSummaryData } from './summary-data/ScoreSummaryData';
 import { TableSummaryData } from './summary-data/TableSummaryData';
 import { Choice } from '../../components/multipleChoice/Choice';
 import { SummaryData } from './summary-data/SummaryData';
+
 @Component({
   imports: [CommonModule, MatCardModule],
   styleUrl: 'summary-display.component.scss',
