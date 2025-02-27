@@ -47,17 +47,11 @@ export abstract class AbstractClassResponsesComponent {
     this.workgroups.forEach((workgroup) => {
       this.workgroupsById[workgroup.workgroupId] = workgroup;
       this.workVisibilityById[workgroup.workgroupId] = false;
-      this.updateWorkgroup(workgroup, true);
+      this.updateWorkgroup(workgroup);
     });
   }
 
-  /**
-   * Update statuses, scores, notifications, etc. for a workgroup object. Also check if we need to
-   * hide student names because logged-in user does not have the right permissions
-   * @param workgroupID a workgroup ID number
-   * @param init Boolean whether we're in controller initialization or not
-   */
-  protected updateWorkgroup(workgroup: any, init = false): void {
+  protected updateWorkgroup(workgroup: any): void {
     const alertNotifications = this.notificationService.getAlertNotifications({
       nodeId: this.node.id,
       toWorkgroupId: workgroup.workgroupId

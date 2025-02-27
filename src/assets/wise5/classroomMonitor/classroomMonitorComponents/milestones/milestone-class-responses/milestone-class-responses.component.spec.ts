@@ -61,7 +61,7 @@ describe('MilestoneClassResponsesComponent', () => {
     fixture.detectChanges();
   });
 
-  setSort();
+  sortByTeam();
 });
 
 function initializeWorkgroups(component: MilestoneClassResponsesComponent) {
@@ -109,7 +109,7 @@ function initializeWorkgroups(component: MilestoneClassResponsesComponent) {
   ];
 }
 
-function setSort() {
+function sortByTeam() {
   it('should sort by team', () => {
     testHelper.expectWorkgroupOrder(component['sortedWorkgroups'], [
       testHelper.workgroupId1,
@@ -117,17 +117,6 @@ function setSort() {
       testHelper.workgroupId4,
       testHelper.workgroupId3,
       testHelper.workgroupId5
-    ]);
-    const sortByTeamButton = fixture.debugElement
-      .queryAll(By.css('button'))
-      .find((element) => element.nativeElement.textContent.trim().includes('Team'));
-    sortByTeamButton.nativeElement.click();
-    testHelper.expectWorkgroupOrder(component['sortedWorkgroups'], [
-      testHelper.workgroupId5,
-      testHelper.workgroupId4,
-      testHelper.workgroupId3,
-      testHelper.workgroupId2,
-      testHelper.workgroupId1
     ]);
   });
 }

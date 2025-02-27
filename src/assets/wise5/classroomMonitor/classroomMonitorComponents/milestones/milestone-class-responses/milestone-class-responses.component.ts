@@ -60,7 +60,9 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
             notification.type === 'CRaterResult' && this.workgroupsById[notification.toWorkgroupId]
         )
       )
-      .subscribe((notification) => this.updateWorkgroup(notification.toWorkgroupId));
+      .subscribe((notification) =>
+        this.updateWorkgroup(this.getWorkgroup(notification.toWorkgroupId))
+      );
   }
 
   private subscribeToAnnotations(): Subscription {
@@ -71,7 +73,9 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
             annotation.nodeId === this.node.id && this.workgroupsById[annotation.toWorkgroupId]
         )
       )
-      .subscribe((annotation: Annotation) => this.updateWorkgroup(annotation.toWorkgroupId));
+      .subscribe((annotation: Annotation) =>
+        this.updateWorkgroup(this.getWorkgroup(annotation.toWorkgroupId))
+      );
   }
 
   private subscribeToStudentWork(): Subscription {
@@ -82,7 +86,9 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
             studentWork.nodeId === this.node.id && this.workgroupsById[studentWork.workgroupId]
         )
       )
-      .subscribe(({ studentWork }) => this.updateWorkgroup(studentWork.workgroupId));
+      .subscribe(({ studentWork }) =>
+        this.updateWorkgroup(this.getWorkgroup(studentWork.workgroupId))
+      );
   }
 
   private subscribeToFirstNodeAnnotations(): Subscription {
@@ -93,7 +99,13 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
             annotation.nodeId === this.firstNodeId && this.workgroupsById[annotation.toWorkgroupId]
         )
       )
-      .subscribe((annotation: Annotation) => this.updateWorkgroup(annotation.toWorkgroupId));
+      .subscribe((annotation: Annotation) =>
+        this.updateWorkgroup(this.getWorkgroup(annotation.toWorkgroupId))
+      );
+  }
+
+  private getWorkgroup(workgroupId: number): any {
+    return this.workgroupsById[workgroupId];
   }
 
   protected hasWork(): boolean {
@@ -141,14 +153,8 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
     this.dataService.saveEvent('ClassroomMonitor', null, null, null, 'Navigation', event, data);
   }
 
-  /**
-   * Update statuses, scores, notifications, etc. for a workgroup object. Also check if we need to
-   * hide student names because logged-in user does not have the right permissions
-   * @param workgroupID a workgroup ID number
-   * @param init Boolean whether we're in controller initialization or not
-   */
-  protected updateWorkgroup(workgroup: any, init = false): void {
-    super.updateWorkgroup(workgroup, init);
+  protected updateWorkgroup(workgroup: any): void {
+    super.updateWorkgroup(workgroup);
     if (this.milestone.report.locations.length > 1) {
       const firstLocation = this.milestone.report.locations[0];
       workgroup.initialScore = this.getScoreByWorkgroupId(
@@ -158,9 +164,7 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
       );
       workgroup.changeInScore = this.getChangeInScore(workgroup.initialScore, workgroup.score);
     }
-    if (!init) {
-      this.workgroupsById[workgroup.workgroupId] = copy(workgroup);
-    }
+    this.workgroupsById[workgroup.workgroupId] = copy(workgroup);
   }
 
   protected getWorkgroupScore(workgroupId: number): number {
