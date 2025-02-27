@@ -96,7 +96,7 @@
     @for (workgroup of sortedWorkgroups; track workgroup.workgroupId) {
       @if (isWorkgroupShown(workgroup)) {
         <component-workgroup-item
-          [expanded]="workVisibilityById[workgroup.workgroupId]"
+          [expanded]="workgroupExpanded[workgroup.workgroupId]"
           [hasAlert]="workgroup.hasAlert"
           [hasNewAlert]="workgroup.hasNewAlert"
           [nodeId]="node.id"

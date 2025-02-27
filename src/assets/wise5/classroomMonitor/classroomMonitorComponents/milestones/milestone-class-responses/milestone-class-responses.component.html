@@ -173,7 +173,7 @@
       <ng-container *ngFor="let workgroup of sortedWorkgroups">
         <milestone-workgroup-item
           *ngIf="isWorkgroupShown(workgroup)"
-          [expanded]="workVisibilityById[workgroup.workgroupId]"
+          [expanded]="workgroupExpanded[workgroup.workgroupId]"
           [showScore]="true"
           [locations]="milestone.report.locations"
           [workgroupId]="workgroup.workgroupId"

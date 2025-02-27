@@ -17,9 +17,9 @@ export abstract class AbstractClassResponsesComponent {
   protected sortBy: string;
   protected sortedWorkgroups: any[] = [];
   protected workgroups: any[] = [];
-  protected workgroupInViewById: any = {}; // whether the workgroup is in view or not
-  protected workgroupsById: any = {};
-  protected workVisibilityById: { [key: number]: boolean } = {};
+  protected workgroupExpanded: Record<number, boolean> = {}; // workgroup is expanded or not
+  private workgroupInView: Record<number, boolean> = {}; // workgroup is in view or not
+  protected workgroupsById: Record<number, any> = {};
 
   constructor(
     protected annotationService: AnnotationService,
@@ -46,7 +46,7 @@ export abstract class AbstractClassResponsesComponent {
   protected setWorkgroupsById(): void {
     this.workgroups.forEach((workgroup) => {
       this.workgroupsById[workgroup.workgroupId] = workgroup;
-      this.workVisibilityById[workgroup.workgroupId] = false;
+      this.workgroupExpanded[workgroup.workgroupId] = false;
       this.updateWorkgroup(workgroup);
     });
   }
@@ -148,16 +148,16 @@ export abstract class AbstractClassResponsesComponent {
     workgroupId: number,
     intersectionObserverEntries: IntersectionObserverEntry[]
   ): void {
-    for (const entry of intersectionObserverEntries) {
-      this.workgroupInViewById[workgroupId] = entry.isIntersecting;
+    intersectionObserverEntries.forEach((entry) => {
+      this.workgroupInView[workgroupId] = entry.isIntersecting;
       if (this.allWorkgroupsExpanded && entry.isIntersecting) {
-        this.workVisibilityById[workgroupId] = true;
+        this.workgroupExpanded[workgroupId] = true;
       }
-    }
+    });
   }
 
   protected onUpdateExpand({ workgroupId, value: expanded }): void {
-    this.workVisibilityById[workgroupId] = expanded;
+    this.workgroupExpanded[workgroupId] = expanded;
     if (!expanded) {
       this.allWorkgroupsExpanded = false;
     }
@@ -168,16 +168,14 @@ export abstract class AbstractClassResponsesComponent {
   }
 
   protected collapseAll(): void {
-    this.workgroups.forEach(
-      (workgroup) => (this.workVisibilityById[workgroup.workgroupId] = false)
-    );
+    this.workgroups.forEach((workgroup) => (this.workgroupExpanded[workgroup.workgroupId] = false));
     this.allWorkgroupsExpanded = false;
   }
 
   protected expandAll(): void {
     this.workgroups
-      .filter((workgroup) => this.workgroupInViewById[workgroup.workgroupId])
-      .forEach((workgroup) => (this.workVisibilityById[workgroup.workgroupId] = true));
+      .filter((workgroup) => this.workgroupInView[workgroup.workgroupId])
+      .forEach((workgroup) => (this.workgroupExpanded[workgroup.workgroupId] = true));
     this.allWorkgroupsExpanded = true;
   }
 }
