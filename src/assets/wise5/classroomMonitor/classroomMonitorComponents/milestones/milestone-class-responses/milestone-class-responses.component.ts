@@ -189,16 +189,16 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
     super.sortWorkgroups();
     switch (this.sort) {
       case 'initialScore':
-        this.sortedWorkgroups.sort(this.createSortAscendingFunction('initialScore'));
+        this.sortedWorkgroups.sort(this.createSortFunction('initialScore', true));
         break;
       case '-initialScore':
-        this.sortedWorkgroups.sort(this.createSortDescendingFunction('initialScore'));
+        this.sortedWorkgroups.sort(this.createSortFunction('initialScore', false));
         break;
       case 'changeInScore':
-        this.sortedWorkgroups.sort(this.createSortAscendingFunction('changeInScore'));
+        this.sortedWorkgroups.sort(this.createSortFunction('changeInScore', true));
         break;
       case '-changeInScore':
-        this.sortedWorkgroups.sort(this.createSortDescendingFunction('changeInScore'));
+        this.sortedWorkgroups.sort(this.createSortFunction('changeInScore', false));
         break;
     }
   }

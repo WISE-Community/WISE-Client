@@ -129,65 +129,38 @@ export abstract class AbstractClassResponsesComponent {
   }
 
   protected sortWorkgroups(): void {
-    this.sortedWorkgroups = [];
-    for (const workgroup of this.workgroups) {
-      this.sortedWorkgroups.push(workgroup);
-    }
+    this.sortedWorkgroups = [...this.workgroups];
     switch (this.sort) {
       case 'team':
-        this.sortedWorkgroups.sort(this.sortTeamAscending);
+        this.sortedWorkgroups.sort(this.createSortFunction('workgroupId', true));
         break;
       case '-team':
-        this.sortedWorkgroups.sort(this.sortTeamDescending);
+        this.sortedWorkgroups.sort(this.createSortFunction('workgroupId', false));
         break;
       case 'status':
-        this.sortedWorkgroups.sort(this.createSortAscendingFunction('completionStatus'));
+        this.sortedWorkgroups.sort(this.createSortFunction('completionStatus', true));
         break;
       case '-status':
-        this.sortedWorkgroups.sort(this.createSortDescendingFunction('completionStatus'));
+        this.sortedWorkgroups.sort(this.createSortFunction('completionStatus', false));
         break;
       case 'score':
-        this.sortedWorkgroups.sort(this.createSortAscendingFunction('score'));
+        this.sortedWorkgroups.sort(this.createSortFunction('score', true));
         break;
       case '-score':
-        this.sortedWorkgroups.sort(this.createSortDescendingFunction('score'));
+        this.sortedWorkgroups.sort(this.createSortFunction('score', false));
         break;
     }
   }
 
-  private sortTeamAscending(workgroupA: any, workgroupB: any): number {
-    return workgroupA.isVisible === workgroupB.isVisible
-      ? workgroupA.workgroupId - workgroupB.workgroupId
-      : workgroupB.isVisible - workgroupA.isVisible;
-  }
-
-  private sortTeamDescending(workgroupA: any, workgroupB: any): number {
-    return workgroupA.isVisible === workgroupB.isVisible
-      ? workgroupB.workgroupId - workgroupA.workgroupId
-      : workgroupB.isVisible - workgroupA.isVisible;
-  }
-
-  protected createSortAscendingFunction(fieldName: string): any {
+  protected createSortFunction(fieldName: string, ascending: boolean): any {
     return (workgroupA: any, workgroupB: any) => {
       if (workgroupA.isVisible === workgroupB.isVisible) {
         if (workgroupA[fieldName] === workgroupB[fieldName]) {
           return workgroupA.workgroupId - workgroupB.workgroupId;
         } else {
-          return workgroupA[fieldName] - workgroupB[fieldName];
-        }
-      } else {
-        return workgroupB.isVisible - workgroupA.isVisible;
-      }
-    };
-  }
-
-  protected createSortDescendingFunction(fieldName: string): any {
-    return (workgroupA: any, workgroupB: any) => {
-      if (workgroupA.isVisible === workgroupB.isVisible) {
-        if (workgroupA[fieldName] === workgroupB[fieldName]) {
-          return workgroupA.workgroupId - workgroupB.workgroupId;
-        } else {
-          return workgroupB[fieldName] - workgroupA[fieldName];
+          return ascending
+            ? workgroupA[fieldName] - workgroupB[fieldName]
+            : workgroupB[fieldName] - workgroupA[fieldName];
         }
       } else {
         return workgroupB.isVisible - workgroupA.isVisible;
