@@ -14,7 +14,7 @@ export abstract class AbstractClassResponsesComponent {
   protected allWorkgroupsExpanded: boolean;
   protected component: any;
   protected node: Node;
-  protected sort: string = 'workgroupId';
+  protected sortBy: string;
   protected sortedWorkgroups: any[] = [];
   protected workgroups: any[] = [];
   protected workgroupInViewById: any = {}; // whether the workgroup is in view or not
@@ -38,7 +38,7 @@ export abstract class AbstractClassResponsesComponent {
           this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)
       );
       this.setWorkgroupsById();
-      this.sortWorkgroups();
+      this.sortWorkgroups('workgroupId');
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
   }
@@ -127,14 +127,15 @@ export abstract class AbstractClassResponsesComponent {
     );
   }
 
-  private sortWorkgroups(): void {
+  protected sortWorkgroups(sortBy: string): void {
+    this.sortBy = this.sortBy === sortBy ? `-${sortBy}` : sortBy;
     this.sortedWorkgroups = [...this.workgroups].sort(this.createSortFunction());
   }
 
   private createSortFunction(): (workgroupA: any, workgroupB: any) => number {
     return (workgroupA: any, workgroupB: any) => {
-      const ascending = this.sort[0] !== '-';
-      const fieldName = this.sort.replace('-', '');
+      const ascending = this.sortBy[0] !== '-';
+      const fieldName = this.sortBy.replace('-', '');
       if (workgroupA.isVisible === workgroupB.isVisible) {
         if (workgroupA[fieldName] === workgroupB[fieldName]) {
           return workgroupA.workgroupId - workgroupB.workgroupId;
@@ -147,11 +148,6 @@ export abstract class AbstractClassResponsesComponent {
         return workgroupB.isVisible - workgroupA.isVisible;
       }
     };
-  }
-
-  protected setSort(criteria: string): void {
-    this.sort = this.sort === criteria ? `-${criteria}` : criteria;
-    this.sortWorkgroups();
   }
 
   protected onIntersection(

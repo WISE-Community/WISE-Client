@@ -43,15 +43,15 @@
           fxFlex
           fxLayout="row"
           fxLayoutAlign="start center"
-          (click)="setSort('workgroupId')"
+          (click)="sortWorkgroups('workgroupId')"
           aria-label="Sort by team"
           i18n-aria-label
         >
           <span class="column-header-label" i18n>Team</span>
           <mat-icon
-            *ngIf="sort === 'workgroupId' || sort === '-workgroupId'"
+            *ngIf="sortBy === 'workgroupId' || sortBy === '-workgroupId'"
             class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-workgroupId' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-workgroupId' }"
           >
             arrow_drop_up
           </mat-icon>
@@ -63,15 +63,15 @@
           fxFlex="30"
           fxLayout="row"
           fxLayoutAlign="center center"
-          (click)="setSort('completionStatus')"
+          (click)="sortWorkgroups('completionStatus')"
           aria-label="Sort by completion"
           i18n-aria-label
         >
           <span class="column-header-label" i18n>Status</span>
           <mat-icon
-            *ngIf="sort === 'completionStatus' || sort === '-completionStatus'"
+            *ngIf="sortBy === 'completionStatus' || sortBy === '-completionStatus'"
             class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-completionStatus' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-completionStatus' }"
           >
             arrow_drop_up
           </mat-icon>
@@ -83,15 +83,15 @@
           fxFlex="20"
           fxLayout="row"
           fxLayoutAlign="center center"
-          (click)="setSort('score')"
+          (click)="sortWorkgroups('score')"
           aria-label="Sort by score"
           i18n-aria-label
         >
           <span class="column-header-label" i18n>Score</span>
           <mat-icon
-            *ngIf="sort === 'score' || sort === '-score'"
+            *ngIf="sortBy === 'score' || sortBy === '-score'"
             class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-score' }"
           >
             arrow_drop_up
           </mat-icon>
@@ -103,7 +103,7 @@
           fxFlex="10"
           fxLayout="row"
           fxLayoutAlign="center center"
-          (click)="setSort('initialScore')"
+          (click)="sortWorkgroups('initialScore')"
           aria-label="Sort by score on Step {{ firstNodePosition }}"
           i18n-aria-label
           matTooltip="Sort by score on Step {{ firstNodePosition }}"
@@ -112,9 +112,9 @@
         >
           <span class="column-header-label">{{ firstNodePosition }}</span>
           <mat-icon
-            *ngIf="sort === 'initialScore' || sort === '-initialScore'"
+            *ngIf="sortBy === 'initialScore' || sortBy === '-initialScore'"
             class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-initialScore' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-initialScore' }"
           >
             arrow_drop_up
           </mat-icon>
@@ -126,7 +126,7 @@
           fxFlex="10"
           fxLayout="row"
           fxLayoutAlign="center center"
-          (click)="setSort('score')"
+          (click)="sortWorkgroups('score')"
           aria-label="Sort by score on Step {{ lastNodePosition }}"
           i18n-aria-label
           matTooltip="Sort by score on Step {{ lastNodePosition }}"
@@ -135,10 +135,10 @@
         >
           <span class="column-header-label">{{ lastNodePosition }}</span>
           <mat-icon
-            *ngIf="sort === 'score' || sort === '-score'"
+            *ngIf="sortBy === 'score' || sortBy === '-score'"
             class="secondary-text table--list__thead__sort"
             md-theme="default"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-score' }"
           >
             arrow_drop_up
           </mat-icon>
@@ -150,7 +150,7 @@
           fxFlex="10"
           fxLayout="row"
           fxLayoutAlign="center center"
-          (click)="setSort('changeInScore')"
+          (click)="sortWorkgroups('changeInScore')"
           aria-label="Sort by change in score"
           i18n-aria-label
           matTooltip="Sort by change in score"
@@ -159,10 +159,10 @@
         >
           <span class="column-header-label" i18n>+/-</span>
           <mat-icon
-            *ngIf="sort === 'changeInScore' || sort === '-changeInScore'"
+            *ngIf="sortBy === 'changeInScore' || sortBy === '-changeInScore'"
             class="secondary-text table--list__thead__sort"
             md-theme="default"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-changeInScore' }"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-changeInScore' }"
           >
             arrow_drop_up
           </mat-icon>
