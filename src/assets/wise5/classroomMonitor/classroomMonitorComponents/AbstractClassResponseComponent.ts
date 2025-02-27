@@ -166,8 +166,11 @@ export abstract class AbstractClassResponsesComponent {
     }
   }
 
-  protected onUpdateExpand({ workgroupId, value }): void {
-    this.workVisibilityById[workgroupId] = value;
+  protected onUpdateExpand({ workgroupId, value: expanded }): void {
+    this.workVisibilityById[workgroupId] = expanded;
+    if (!expanded) {
+      this.allWorkgroupsExpanded = false;
+    }
   }
 
   protected isWorkgroupShown(workgroup: any): boolean {
