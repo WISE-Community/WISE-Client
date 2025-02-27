@@ -75,20 +75,22 @@ export abstract class AbstractClassResponsesComponent {
   }
 
   private getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
-    const completionStatus: CompletionStatus = new CompletionStatus();
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
-    if (studentStatus != null && studentStatus.nodeStatuses[this.node.id] != null) {
-      const nodeStatus = studentStatus.nodeStatuses[this.node.id];
-      completionStatus.isVisible = nodeStatus.isVisible;
-      completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
-      completionStatus.latestAnnotationTime =
-        this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
-      if (!this.hasWork()) {
-        completionStatus.isCompleted = nodeStatus.isVisited;
-      }
-      if (completionStatus.latestWorkTime) {
-        completionStatus.isCompleted = this.isCompleted(workgroupId, nodeStatus);
-      }
+    return studentStatus != null && studentStatus.nodeStatuses[this.node.id] != null
+      ? this.createCompletionStatus(studentStatus.nodeStatuses[this.node.id], workgroupId)
+      : new CompletionStatus();
+  }
+
+  private createCompletionStatus(nodeStatus: any, workgroupId: number): CompletionStatus {
+    const completionStatus: CompletionStatus = new CompletionStatus();
+    completionStatus.isVisible = nodeStatus.isVisible;
+    completionStatus.latestWorkTime = this.getLatestWorkTimeByWorkgroupId(workgroupId);
+    completionStatus.latestAnnotationTime = this.getLatestAnnotationTimeByWorkgroupId(workgroupId);
+    if (!this.hasWork()) {
+      completionStatus.isCompleted = nodeStatus.isVisited;
+    }
+    if (completionStatus.latestWorkTime) {
+      completionStatus.isCompleted = this.isCompleted(workgroupId, nodeStatus);
     }
     return completionStatus;
   }
