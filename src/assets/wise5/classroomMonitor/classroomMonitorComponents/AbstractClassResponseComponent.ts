@@ -102,25 +102,22 @@ export abstract class AbstractClassResponsesComponent {
   protected abstract isCompleted(workgroupId: number, nodeStatus: any): boolean;
 
   protected getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
-    const componentStates = this.getComponentStates();
-    for (const componentState of componentStates.reverse()) {
-      if (componentState.workgroupId === workgroupId) {
-        return componentState.serverSaveTime;
-      }
-    }
-    return null;
+    return (
+      this.getComponentStates().findLast(
+        (componentState) => componentState.workgroupId === workgroupId
+      )?.serverSaveTime ?? null
+    );
   }
 
   protected abstract getComponentStates(): any[];
 
   protected getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
-    const annotations = this.dataService.getAnnotationsByNodeId(this.node.id);
-    for (const annotation of annotations.reverse()) {
-      if (this.isAnnotationForWorkgroup(annotation, workgroupId)) {
-        return annotation.serverSaveTime;
-      }
-    }
-    return null;
+    return (
+      this.dataService
+        .getAnnotationsByNodeId(this.node.id)
+        .findLast((annotation) => this.isAnnotationForWorkgroup(annotation, workgroupId))
+        ?.serverSaveTime ?? null
+    );
   }
 
   protected isAnnotationForWorkgroup(annotation: any, workgroupId: number): boolean {
@@ -142,7 +139,6 @@ export abstract class AbstractClassResponsesComponent {
         if (workgroupA[fieldName] === workgroupB[fieldName]) {
           return workgroupA.workgroupId - workgroupB.workgroupId;
         } else {
-          debugger;
           return ascending
             ? workgroupA[fieldName] - workgroupB[fieldName]
             : workgroupB[fieldName] - workgroupA[fieldName];
