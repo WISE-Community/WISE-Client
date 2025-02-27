@@ -65,7 +65,7 @@ export class ComponentClassResponsesComponent extends AbstractClassResponsesComp
     }
   }
 
-  protected getWorkgroupScore(workgroupId: number): any {
+  protected getWorkgroupScore(workgroupId: number): number {
     return (
       this.annotationService.getLatestScoreAnnotation(this.node.id, this.component.id, workgroupId)
         ?.data.value ?? null

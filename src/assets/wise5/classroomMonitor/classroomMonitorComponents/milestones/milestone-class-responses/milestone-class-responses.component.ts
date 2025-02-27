@@ -163,7 +163,7 @@ export class MilestoneClassResponsesComponent extends AbstractClassResponsesComp
     }
   }
 
-  protected getWorkgroupScore(workgroupId: number): any {
+  protected getWorkgroupScore(workgroupId: number): number {
     return this.getScoreByWorkgroupId(workgroupId, this.node.id, this.component.id);
   }
 

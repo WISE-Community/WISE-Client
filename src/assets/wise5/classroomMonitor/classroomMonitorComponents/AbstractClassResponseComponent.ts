@@ -64,7 +64,7 @@ export abstract class AbstractClassResponsesComponent {
     });
     workgroup.hasAlert = alertNotifications.length > 0;
     workgroup.hasNewAlert = alertNotifications.some((alert) => !alert.timeDismissed);
-    const completionStatus = this.getCompletionStatusByWorkgroupId(workgroup.workgroupId);
+    const completionStatus = this.getCompletionStatus(workgroup.workgroupId);
     workgroup.isVisible = completionStatus.isVisible ? 1 : 0;
     workgroup.completionStatus = completionStatus.getStateNumber();
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
@@ -74,7 +74,7 @@ export abstract class AbstractClassResponsesComponent {
     workgroup.score = this.getWorkgroupScore(workgroup.workgroupId);
   }
 
-  private getCompletionStatusByWorkgroupId(workgroupId: number): CompletionStatus {
+  private getCompletionStatus(workgroupId: number): CompletionStatus {
     const studentStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(workgroupId);
     return studentStatus != null && studentStatus.nodeStatuses[this.node.id] != null
       ? this.createCompletionStatus(studentStatus.nodeStatuses[this.node.id], workgroupId)
@@ -95,13 +95,13 @@ export abstract class AbstractClassResponsesComponent {
     return completionStatus;
   }
 
-  protected abstract getWorkgroupScore(workgroupId: number): any;
+  protected abstract getWorkgroupScore(workgroupId: number): number;
 
   protected abstract hasWork(): boolean;
 
   protected abstract isCompleted(workgroupId: number, nodeStatus: any): boolean;
 
-  protected getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
+  private getLatestWorkTimeByWorkgroupId(workgroupId: number): string {
     return (
       this.getComponentStates().findLast(
         (componentState) => componentState.workgroupId === workgroupId
@@ -111,7 +111,7 @@ export abstract class AbstractClassResponsesComponent {
 
   protected abstract getComponentStates(): any[];
 
-  protected getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
+  private getLatestAnnotationTimeByWorkgroupId(workgroupId: number): string {
     return (
       this.dataService
         .getAnnotationsByNodeId(this.node.id)
@@ -149,7 +149,7 @@ export abstract class AbstractClassResponsesComponent {
     };
   }
 
-  setSort(criteria: string): void {
+  protected setSort(criteria: string): void {
     this.sort = this.sort === criteria ? `-${criteria}` : criteria;
     this.sortWorkgroups();
   }
