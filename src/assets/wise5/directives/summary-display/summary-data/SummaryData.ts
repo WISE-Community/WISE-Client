@@ -3,13 +3,12 @@ import { SummaryDataPoint } from './SummaryDataPoint';
 export abstract class SummaryData {
   protected summaryDataPoints: SummaryDataPoint[];
 
+  constructor() {
+    this.summaryDataPoints = [];
+  }
+
   protected getDataPointById(id: string | number): SummaryDataPoint {
-    this.summaryDataPoints.forEach((dataPoint) => {
-      if (dataPoint.getId() === id) {
-        return dataPoint;
-      }
-    });
-    return null;
+    return this.summaryDataPoints.find((dataPoint) => dataPoint.getId() === id) ?? null;
   }
 
   protected incrementSummaryData(id: string | number, incrementBy: number): void {
