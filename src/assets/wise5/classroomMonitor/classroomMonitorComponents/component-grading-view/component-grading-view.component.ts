@@ -28,9 +28,9 @@ export class ComponentGradingViewComponent {
   protected component: any;
   @Input() componentId: string;
   protected hasCorrectAnswer: boolean;
-  protected hasResponsesSummary: boolean;
   protected hasScoresSummary: boolean;
   protected hasScoreAnnotation: boolean;
+  protected hasStudentWork: boolean;
   protected node: Node;
   protected periodId: number;
   protected source: 'allPeriods' | 'period';
@@ -58,13 +58,14 @@ export class ComponentGradingViewComponent {
       this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.periodId = currentPeriod.periodId;
         this.setSource();
+        this.setComponent();
       })
     );
   }
 
   ngOnChanges(): void {
     this.node = this.projectService.getNode(this.dataService.getCurrentNode().id);
-    this.setComponent();
+    this.dataService.retrieveStudentDataForNode(this.node).subscribe(() => this.setComponent());
     this.periodId = this.dataService.getCurrentPeriodId();
     this.setSource();
   }
@@ -76,13 +77,14 @@ export class ComponentGradingViewComponent {
   private setComponent(): void {
     this.component = this.node.getComponent(this.componentId);
     this.hasCorrectAnswer = this.componentHasCorrectAnswer(this.component);
-    this.hasResponsesSummary = this.summaryService.isResponsesSummaryAvailableForComponentType(
-      this.component.type
-    );
     this.hasScoresSummary = this.summaryService.isScoresSummaryAvailableForComponentType(
       this.component.type
     );
     this.hasScoreAnnotation = this.componentHasScoreAnnotation(this.component.id, this.periodId);
+    this.hasStudentWork =
+      this.dataService
+        .getComponentStatesByComponentId(this.component.id)
+        .filter((state) => state.periodId === this.periodId).length > 0;
   }
 
   private setSource(): void {
