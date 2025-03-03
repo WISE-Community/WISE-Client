@@ -11,13 +11,11 @@ import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testin
 import { MilestoneClassResponsesComponent } from './milestone-class-responses.component';
 import { NodeGradingViewComponentTestHelper } from '../../nodeGrading/node-grading-view/node-grading-view.component.test.helper';
 import { of } from 'rxjs';
-import { By } from '@angular/platform-browser';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 
 let component: MilestoneClassResponsesComponent;
 let fixture: ComponentFixture<MilestoneClassResponsesComponent>;
 let testHelper: NodeGradingViewComponentTestHelper;
-
 describe('MilestoneClassResponsesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -52,6 +50,7 @@ describe('MilestoneClassResponsesComponent', () => {
     testHelper = new NodeGradingViewComponentTestHelper();
     initializeWorkgroups(component);
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(1);
+    spyOn(TestBed.inject(TeacherDataService), 'isWorkgroupShown').and.returnValue(false);
     spyOn(TestBed.inject(ClassroomStatusService), 'hasStudentStatus').and.returnValue(true);
     spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
     spyOn(TestBed.inject(ConfigService), 'getClassmateUserInfos').and.returnValue(
@@ -114,8 +113,8 @@ function sortByTeam() {
     testHelper.expectWorkgroupOrder(component['sortedWorkgroups'], [
       testHelper.workgroupId1,
       testHelper.workgroupId2,
-      testHelper.workgroupId4,
       testHelper.workgroupId3,
+      testHelper.workgroupId4,
       testHelper.workgroupId5
     ]);
   });

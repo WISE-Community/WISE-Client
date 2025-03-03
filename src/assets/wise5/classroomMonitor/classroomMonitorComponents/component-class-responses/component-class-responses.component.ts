@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -54,14 +54,10 @@ export class ComponentClassResponsesComponent extends AbstractClassResponsesComp
     );
   }
 
-  ngOnInit(): void {
-    this.retrieveStudentData(this.node);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.component) {
+  ngOnChanges(): void {
+    if (this.node && this.component) {
+      this.retrieveStudentData(this.node);
       this.collapseAll();
-      this.setWorkgroupsById();
     }
   }
 

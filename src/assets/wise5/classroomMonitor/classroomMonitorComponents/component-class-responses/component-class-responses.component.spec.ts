@@ -48,6 +48,7 @@ describe('ComponentClassResponsesComponent', () => {
     component['node'] = { id: 'node1' } as Node;
     component['component'] = { id: 'component1' };
     component['getCompletionStatusByWorkgroupId'] = () => new CompletionStatus();
+    component.ngOnChanges();
     fixture.detectChanges();
   });
   ngOnInit();

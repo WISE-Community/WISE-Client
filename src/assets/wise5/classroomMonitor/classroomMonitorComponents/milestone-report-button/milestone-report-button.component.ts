@@ -26,7 +26,9 @@ export class MilestoneReportButtonComponent {
   ) {}
 
   ngOnChanges(): void {
-    this.setMilestoneReport();
+    if (this.node && this.component) {
+      this.setMilestoneReport();
+    }
   }
 
   private setMilestoneReport(): void {

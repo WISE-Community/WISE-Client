@@ -19,7 +19,7 @@ export class PeerGroupButtonComponent {
   constructor(private peerGroupService: TeacherPeerGroupService) {}
 
   ngOnChanges(): void {
-    this.peerGroupingTag = this.component.peerGroupingTag;
+    this.peerGroupingTag = this.component?.peerGroupingTag;
   }
 
   protected showPeerGroup(): void {

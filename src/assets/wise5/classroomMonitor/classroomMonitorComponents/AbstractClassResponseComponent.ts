@@ -38,6 +38,7 @@ export abstract class AbstractClassResponsesComponent {
           this.classroomStatusService.hasStudentStatus(workgroup.workgroupId)
       );
       this.setWorkgroupsById();
+      this.sortBy = '';
       this.sortWorkgroups('workgroupId');
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
@@ -47,7 +48,9 @@ export abstract class AbstractClassResponsesComponent {
     this.workgroups.forEach((workgroup) => {
       this.workgroupsById[workgroup.workgroupId] = workgroup;
       this.workgroupExpanded[workgroup.workgroupId] = false;
-      this.updateWorkgroup(workgroup);
+      if (this.component) {
+        this.updateWorkgroup(workgroup);
+      }
     });
   }
 
