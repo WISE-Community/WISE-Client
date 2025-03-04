@@ -243,7 +243,6 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
     this.renderGraph(seriesData, count);
   }
 
-  // Come back to this...
   private getResponseForSelf(): ComponentState {
     if (this.isVLEPreview() || this.isStudentRun()) {
       return (this.dataService as StudentDataService).getLatestComponentStateByNodeIdAndComponentId(

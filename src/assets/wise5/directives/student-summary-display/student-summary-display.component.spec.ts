@@ -42,7 +42,6 @@ describe('StudentSummaryDisplayComponent', () => {
   getGraphForSelf();
   getGraphTitleForPeriod();
   getGraphTitleForClass();
-  getIndexByName();
   getPercentOfClassRespondedText();
   getPercentResponded();
   getTotalWorkgroups();
@@ -261,24 +260,6 @@ function createScoreSummaryDataPoint() {
       const dataPoint = new ScoreSummaryDataPoint(5);
       expect(dataPoint.getId()).toEqual(score);
       expect(dataPoint.getCount()).toEqual(0);
-    });
-  });
-}
-
-function getIndexByName() {
-  describe('getIndexByName', () => {
-    it('should get index by name', () => {
-      const singleSeries = {
-        data: [
-          createDataPointObject('Vanilla', 1),
-          createDataPointObject('Chocolate', 2),
-          createDataPointObject('Strawberry', 3)
-        ]
-      };
-      const multipleSeries = [singleSeries];
-      expect(component.getIndexByName(multipleSeries, 'Vanilla')).toEqual(0);
-      expect(component.getIndexByName(multipleSeries, 'Chocolate')).toEqual(1);
-      expect(component.getIndexByName(multipleSeries, 'Strawberry')).toEqual(2);
     });
   });
 }

@@ -27,7 +27,7 @@ export class TableSummaryData extends SummaryData {
       dataPoint = new TableSummaryDataPoint(key);
       this.summaryDataPoints.push(dataPoint);
     }
-    dataPoint.incrementCount(summaryService.convertToNumber(value)); // Fix this to match abstract
+    dataPoint.incrementCount(summaryService.convertToNumber(value));
   }
 
   getDataPoints(): TableSummaryDataPoint[] {

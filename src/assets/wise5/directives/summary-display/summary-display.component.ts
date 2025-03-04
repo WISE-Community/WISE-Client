@@ -178,12 +178,7 @@ export abstract class SummaryDisplayComponent {
   }
 
   protected setMaxScore(): void {
-    if (this.otherComponent.maxScore != null) {
-      this.maxScore = this.otherComponent.maxScore;
-    } else {
-      this.maxScore = this.defaultMaxScore;
-    }
-    // this.maxScore = this.otherComponent?.maxScore ?? this.defaultMaxScore;
+    this.maxScore = this.otherComponent?.maxScore ?? this.defaultMaxScore;
   }
 
   protected abstract getLatestWork(): Observable<ComponentState[]>;
@@ -244,7 +239,6 @@ export abstract class SummaryDisplayComponent {
     return [seriesData, count];
   }
 
-  // to SeriesData or its own class
   createTableSeriesData(summaryData: TableSummaryData): SeriesData {
     const seriesData = new SeriesData();
     for (const key of Object.keys(summaryData)) {
@@ -285,7 +279,6 @@ export abstract class SummaryDisplayComponent {
     return maxScoreSoFar;
   }
 
-  // this should go to SeriesData.ts
   createChoicesSeriesData(
     component: MultipleChoiceContent,
     summaryData: MultipleChoiceSummaryData
@@ -330,7 +323,6 @@ export abstract class SummaryDisplayComponent {
     return annotation.data.value;
   }
 
-  // this should go to SeriesData.ts
   private createScoresSeriesData(summaryData: ScoreSummaryData): [SeriesData, number] {
     const seriesData = new SeriesData();
     let total = 0;
@@ -462,19 +454,16 @@ export abstract class SummaryDisplayComponent {
     }
   }
 
-  getIndexByName(series: any[], name: string): any {
+  private getIndexByName(series: any[], name: string): any {
     let index;
-    series.forEach((singleSeries) => {
-      if (singleSeries.data != null) {
-        singleSeries.data.entries().forEach(([i, dataPoint]) => {
-          if (
+    series
+      .filter((singleSeries) => singleSeries.data != null)
+      .forEach((singleSeries) => {
+        index = singleSeries.data.findIndex(
+          (dataPoint) =>
             this.summaryService.cleanLabel(dataPoint.name) === this.summaryService.cleanLabel(name)
-          ) {
-            index = i;
-          }
-        });
-      }
-    });
+        );
+      });
     return index ?? null;
   }
 

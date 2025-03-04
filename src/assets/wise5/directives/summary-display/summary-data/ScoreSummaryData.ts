@@ -21,8 +21,4 @@ export class ScoreSummaryData extends SummaryData {
   protected generateNewDataPoint(id: string | number): ScoreSummaryDataPoint {
     return new ScoreSummaryDataPoint(id);
   }
-
-  //   getSummaryDataCount(score: number): number {
-
-  //   }
 }
