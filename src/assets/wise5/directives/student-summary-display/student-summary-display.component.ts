@@ -19,10 +19,10 @@ import { Choice } from '../../components/multipleChoice/Choice';
 import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
 
 @Component({
-    imports: [CommonModule, HighchartsChartModule, MatCardModule],
-    selector: 'student-summary-display',
-    styleUrl: '../summary-display/summary-display.component.scss',
-    templateUrl: '../summary-display/summary-display.component.html'
+  imports: [CommonModule, HighchartsChartModule, MatCardModule],
+  selector: 'student-summary-display',
+  styleUrl: '../summary-display/summary-display.component.scss',
+  templateUrl: '../summary-display/summary-display.component.html'
 })
 export class StudentSummaryDisplay extends SummaryDisplayComponent {
   private studentWorkSavedToServerSubscription: Subscription;
@@ -76,13 +76,15 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
   }
 
   protected getLatestScores(): Observable<Annotation[]> {
+    let latestScores: Observable<Annotation[]>;
     if (this.isVLEPreview()) {
-      return this.getDummyStudentScoresForVLEPreview();
+      latestScores = this.getDummyStudentScoresForVLEPreview();
     } else if (this.isAuthoringPreview()) {
-      return this.getDummyStudentScoresForAuthoringPreview();
+      latestScores = this.getDummyStudentScoresForAuthoringPreview();
     } else {
-      this.getLatestStudentScores();
+      latestScores = this.getLatestStudentScores();
     }
+    return latestScores;
   }
 
   protected getLatestWork(): Observable<ComponentState[]> {
@@ -191,7 +193,7 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
   }
 
   private getRandomSimilarNumber(text: string): number {
-    return Math.ceil(this.convertToNumber(text) * Math.random());
+    return Math.ceil(this.summaryService.convertToNumber(text) * Math.random());
   }
 
   private getRandomChoice(choices: Choice[]): any {
@@ -220,11 +222,14 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
     return Math.ceil(Math.random() * this.maxScore);
   }
 
-  protected renderResponsesOrScores(isRenderingResponses: boolean): void {
-    if (this.isSourceSelf()) {
-      isRenderingResponses ? this.renderSelfResponse() : this.renderSelfScore();
-    } else {
-      isRenderingResponses ? this.renderClassResponses() : this.renderClassScores();
+  protected renderSelfDisplay(): void {
+    switch (this.studentDataType) {
+      case 'responses':
+        this.renderSelfResponse();
+        break;
+      case 'scores':
+        this.renderSelfScore();
+        break;
     }
   }
 
@@ -238,7 +243,6 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
     this.renderGraph(seriesData, count);
   }
 
-  // Come back to this...
   private getResponseForSelf(): ComponentState {
     if (this.isVLEPreview() || this.isStudentRun()) {
       return (this.dataService as StudentDataService).getLatestComponentStateByNodeIdAndComponentId(
