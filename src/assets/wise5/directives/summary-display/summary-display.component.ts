@@ -463,18 +463,19 @@ export abstract class SummaryDisplayComponent {
   }
 
   getIndexByName(series: any[], name: string): any {
+    let index;
     series.forEach((singleSeries) => {
       if (singleSeries.data != null) {
         singleSeries.data.entries().forEach(([i, dataPoint]) => {
           if (
             this.summaryService.cleanLabel(dataPoint.name) === this.summaryService.cleanLabel(name)
           ) {
-            return i;
+            index = i;
           }
         });
       }
     });
-    return null;
+    return index ?? null;
   }
 
   private isStudentDataTypeResponses(): boolean {

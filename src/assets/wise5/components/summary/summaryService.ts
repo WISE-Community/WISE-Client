@@ -102,21 +102,11 @@ export class SummaryService extends ComponentService {
       .trim()
       .toLowerCase()
       .split(' ')
-      .map((word) => {
-        if (word.length > 0) {
-          return word[0].toUpperCase() + word.substr(1);
-        } else {
-          return '';
-        }
-      })
+      .map((word) => (word.length > 0 ? word[0].toUpperCase() + word.substr(1) : ''))
       .join(' ');
   }
 
   convertToNumber(value: any): number {
-    if (!isNaN(Number(value))) {
-      return Number(value);
-    } else {
-      return 0;
-    }
+    return isNaN(Number(value)) ? 0 : Number(value);
   }
 }

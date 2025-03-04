@@ -6,10 +6,18 @@ import { SummaryData } from './SummaryData';
 export class MultipleChoiceSummaryData extends SummaryData {
   protected summaryDataPoints: MultipleChoiceSummaryDataPoint[];
 
-  constructor(componentState: MultipleChoiceContent, componentStates: ComponentState[]) {
-    super();
-    this.summaryDataPoints = [];
-    this.createChoicesSummaryData(componentState, componentStates);
+  constructor(
+    componentState: MultipleChoiceContent,
+    componentStates: ComponentState[],
+    dataPoints?: MultipleChoiceSummaryDataPoint[]
+  ) {
+    if (dataPoints) {
+      super(dataPoints);
+    } else {
+      super();
+      this.summaryDataPoints = [];
+      this.createChoicesSummaryData(componentState, componentStates);
+    }
   }
 
   private createChoicesSummaryData(
@@ -17,10 +25,7 @@ export class MultipleChoiceSummaryData extends SummaryData {
     componentStates: ComponentState[]
   ): void {
     for (const choice of componentState.choices) {
-      this.summaryDataPoints.push(
-        // new MultipleChoiceSummaryDataPoint(choice.id, choice.text, choice.isCorrect)
-        new MultipleChoiceSummaryDataPoint(choice.id)
-      );
+      this.summaryDataPoints.push(new MultipleChoiceSummaryDataPoint(choice.id));
     }
     for (const componentState of componentStates) {
       this.addComponentStateDataToSummaryData(componentState);

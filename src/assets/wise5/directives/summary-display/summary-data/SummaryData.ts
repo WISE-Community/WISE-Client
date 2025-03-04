@@ -3,12 +3,19 @@ import { SummaryDataPoint } from './SummaryDataPoint';
 export abstract class SummaryData {
   protected summaryDataPoints: SummaryDataPoint[];
 
-  constructor() {
+  constructor(dataPoints?: SummaryDataPoint[]) {
     this.summaryDataPoints = [];
+    if (dataPoints) {
+      dataPoints.forEach((dataPoint) => this.summaryDataPoints.push(dataPoint));
+    }
   }
 
   protected getDataPointById(id: string | number): SummaryDataPoint {
     return this.summaryDataPoints.find((dataPoint) => dataPoint.getId() === id) ?? null;
+  }
+
+  getDataPoints(): SummaryDataPoint[] {
+    return this.summaryDataPoints;
   }
 
   protected incrementSummaryData(id: string | number, incrementBy: number): void {
@@ -23,11 +30,6 @@ export abstract class SummaryData {
   protected abstract generateNewDataPoint(id: string | number): SummaryDataPoint;
 
   getDataPointCountById(id: string | number): number {
-    const dataPoint = this.getDataPointById(id);
-    if (dataPoint) {
-      return dataPoint.getCount();
-    } else {
-      return 0;
-    }
+    return this.getDataPointById(id)?.getCount() ?? 0;
   }
 }

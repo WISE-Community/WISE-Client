@@ -1,12 +1,19 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { ComponentContent } from '../../common/ComponentContent';
-import { ConfigService } from '../../services/configService';
-import { ProjectService } from '../../services/projectService';
-import { StudentSummaryDisplay } from './student-summary-display.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Annotation } from '../../common/Annotation';
-import { ComponentState } from '../../../../app/domain/componentState';
+import { Choice } from '../../components/multipleChoice/Choice';
+import { ComponentContent } from '../../common/ComponentContent';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ConfigService } from '../../services/configService';
+import { MultipleChoiceSummaryData } from '../summary-display/summary-data/MultipleChoiceSummaryData';
+import { MultipleChoiceSummaryDataPoint } from '../summary-display/summary-data/MultipleChoiceSummaryDataPoint';
+import { ProjectService } from '../../services/projectService';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ScoreSummaryData } from '../summary-display/summary-data/ScoreSummaryData';
+import { ScoreSummaryDataPoint } from '../summary-display/summary-data/ScoreSummaryDataPoint';
+import { SeriesData } from '../../common/SeriesData';
+import { SeriesDataPoint } from '../../common/SeriesDataPoint';
+import { StudentSummaryDisplay } from './student-summary-display.component';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { SummaryData } from '../summary-display/summary-data/SummaryData';
 
 let component: StudentSummaryDisplay;
 let fixture: ComponentFixture<StudentSummaryDisplay>;
@@ -22,34 +29,23 @@ describe('StudentSummaryDisplayComponent', () => {
     fixture.detectChanges();
   });
 
-  accumulateLabel();
   calculateCountsAndPercentage();
   calculateMaxScore();
-  cleanLabel();
   convertObjectToArray();
-  convertToNumber();
   createChartConfig();
-  createChoicesSummaryData();
-  createChoicesSeriesData();
-  createDataPoint();
+  createSeriesDataPoint();
   createScoresSummaryData();
-  createScoreSummaryData();
+  createScoreSummaryDataPoint();
   createSeries();
-  createTableSummaryData();
-  createTableSeriesData();
   filterLatestScoreAnnotations();
   getChartColors();
-  getDataPointColor();
   getGraphForSelf();
   getGraphTitleForPeriod();
   getGraphTitleForClass();
   getIndexByName();
   getPercentOfClassRespondedText();
   getPercentResponded();
-  getSummaryDataCount();
-  getTotalTableCount();
   getTotalWorkgroups();
-  hasCorrectAnswer();
   initializeOtherComponent();
   setCustomLabelColors();
   setLatestAnnotationIfNewer();
@@ -72,12 +68,12 @@ function calculateCountsAndPercentage() {
 
 function calculateMaxScore() {
   describe('calculateMaxScore', () => {
-    it('should calculate max score when there are no annotations', () => {
+    it('should not update max score when there are no annotations', () => {
       const annotations = [];
       component.maxScore = 5;
       expect(component.calculateMaxScore(annotations)).toEqual(5);
     });
-    it('should calculate max score when there are annotations', () => {
+    it('should update max score when there are annotations', () => {
       const annotation = new Annotation({
         data: {
           value: 6
@@ -116,14 +112,6 @@ function getTotalWorkgroups() {
   });
 }
 
-function cleanLabel() {
-  describe('cleanLabel', () => {
-    it('should clean the label', () => {
-      expect(component.cleanLabel('hello world')).toEqual('Hello World');
-    });
-  });
-}
-
 function getPercentResponded() {
   describe('getPercentResponded', () => {
     it('should get percent responded', () => {
@@ -142,9 +130,9 @@ function createChartConfig() {
       const series = [
         {
           data: [
-            { name: 'Vanilla', y: 1 },
-            { name: 'Chocolate', y: 2 },
-            { name: 'Strawberry', y: 3 }
+            createDataPointObject('Vanilla', 1),
+            createDataPointObject('Chocolate', 2),
+            createDataPointObject('Strawberry', 3)
           ]
         }
       ];
@@ -161,17 +149,6 @@ function createChartConfig() {
       expect(config.title.text).toEqual(title);
       expect(config.series).toEqual(series);
       expect(config.xAxis.type).toEqual(xAxisType);
-    });
-  });
-}
-
-function createChoicesSummaryData() {
-  describe('createChoiceSummaryData', () => {
-    it('should create choice summary data', () => {
-      const id = 'choice1';
-      const text = 'Vanilla';
-      const data = component.createChoiceSummaryData('choice1', 'Vanilla', null);
-      expect(data).toEqual({ id: id, text: text, isCorrect: null, count: 0 });
     });
   });
 }
@@ -212,117 +189,39 @@ function initializeOtherComponent() {
   });
 }
 
-function createChoicesSeriesData() {
-  describe('createChoicesSeriesData', () => {
-    it('should create choices series data', () => {
-      const choices = [
-        createMultipleChoiceComponentChoice('choice1', 'Vanilla'),
-        createMultipleChoiceComponentChoice('choice2', 'Chocolate'),
-        createMultipleChoiceComponentChoice('choice3', 'Strawberry')
-      ];
-      const multipleChoiceComponent = createMultipleChoiceComponent('component2', choices);
-      const summaryData = {
-        choice1: createMultipleChoiceSummaryDataChoice('choice1', 'Vanilla', false, 1),
-        choice2: createMultipleChoiceSummaryDataChoice('choice2', 'Chocolate', false, 2),
-        choice3: createMultipleChoiceSummaryDataChoice('choice3', 'Strawberry', false, 3)
-      };
-      const data = component.createChoicesSeriesData(multipleChoiceComponent, summaryData);
-      const expectedData = [
-        { name: 'Vanilla', y: 1 },
-        { name: 'Chocolate', y: 2 },
-        { name: 'Strawberry', y: 3 }
-      ];
-      expect(data).toEqual(expectedData);
-    });
-  });
-}
-
-function createMultipleChoiceComponent(id: string, choices: any[]) {
-  return {
-    choices: choices,
-    id: id
-  };
-}
-
 function createMultipleChoiceComponentChoice(
   id: string,
   text: string,
   isCorrect: boolean = false
-): any {
-  return {
-    id: id,
-    isCorrect: isCorrect,
-    text: text
-  };
+): Choice {
+  return new Choice(id, text, isCorrect, '');
 }
 
-function createMultipleChoiceSummaryDataChoice(
+function createMultipleChoiceSummaryDataPoint(
   id: string,
-  text: string,
-  isCorrect: boolean = false,
   count: number
-): any {
-  const choice = createMultipleChoiceComponentChoice(id, text, isCorrect);
-  choice.count = count;
-  return choice;
+): MultipleChoiceSummaryDataPoint {
+  return new MultipleChoiceSummaryDataPoint(id, count);
 }
 
-function hasCorrectAnswer() {
-  describe('hasCorrectAnswer', () => {
-    it('should check if there is a correct answer when there is none', () => {
-      const choices = [
-        createMultipleChoiceComponentChoice('choice1', 'Vanilla'),
-        createMultipleChoiceComponentChoice('choice2', 'Chocolate'),
-        createMultipleChoiceComponentChoice('choice3', 'Strawberry')
-      ];
-      const multipleChoiceComponent = createMultipleChoiceComponent('component2', choices);
-      expect(component.hasCorrectAnswer(multipleChoiceComponent)).toEqual(false);
-    });
-    it('should check if there is a correct answer when there is one', () => {
-      const choices = [
-        createMultipleChoiceComponentChoice('choice1', 'Patrick'),
-        createMultipleChoiceComponentChoice('choice2', 'Spongebob', true),
-        createMultipleChoiceComponentChoice('choice3', 'Squidward')
-      ];
-      const multipleChoiceComponent = createMultipleChoiceComponent('component2', choices);
-      expect(component.hasCorrectAnswer(multipleChoiceComponent)).toEqual(true);
-    });
-  });
-}
-
-function getDataPointColor() {
-  describe('getDataPointColor', () => {
-    it('should get data point color when the choice is correct', () => {
-      component.highlightCorrectAnswer = true;
-      const color = component.getDataPointColor(
-        createMultipleChoiceComponentChoice('choice2', 'Spongebob', true)
-      );
-      expect(color).toEqual('#00C853');
-    });
-    it('should get data point color when the choice is incorrect', () => {
-      component.highlightCorrectAnswer = true;
-      const color = component.getDataPointColor(
-        createMultipleChoiceComponentChoice('choice1', 'Patrick', false)
-      );
-      expect(color).toEqual('#C62828');
-    });
-  });
-}
-
-function createDataPoint() {
+function createSeriesDataPoint() {
   describe('createDataPoint', () => {
     it('should create data point with color', () => {
       const name = 'Strawberry';
       const y = 3;
       const color = 'pink';
-      const dataPoint = component.createDataPoint(name, y, color);
-      expect(dataPoint).toEqual({ name: name, y: y, color: color });
+      const dataPoint = new SeriesDataPoint(name, y, color);
+      expect(dataPoint.name).toEqual(name);
+      expect(dataPoint.y).toEqual(y);
+      expect(color).toEqual(color);
     });
     it('should create data point without color', () => {
       const name = 'Strawberry';
       const y = 3;
-      const dataPoint = component.createDataPoint(name, y);
-      expect(dataPoint).toEqual({ name: name, y: y });
+      const dataPoint = new SeriesDataPoint(name, y);
+      expect(dataPoint.name).toEqual(name);
+      expect(dataPoint.y).toEqual(y);
+      expect(dataPoint.color).toBeUndefined();
     });
   });
 }
@@ -335,13 +234,13 @@ function createScoresSummaryData() {
         createScoreAnnotation(5),
         createScoreAnnotation(1)
       ];
-      const summaryData = component.createScoresSummaryData(annotations);
+      const summaryData = new ScoreSummaryData(annotations, 5);
       expectSummaryDataCounts(summaryData, [0, 2, 0, 0, 0, 1]);
     });
   });
 }
 
-function createScoreAnnotation(score: number) {
+function createScoreAnnotation(score: number): Annotation {
   return new Annotation({
     data: {
       value: score
@@ -349,34 +248,19 @@ function createScoreAnnotation(score: number) {
   });
 }
 
-function expectSummaryDataCounts(summaryData: any, counts: number[]) {
-  for (let score = 0; score < summaryData.length; score++) {
-    expect(summaryData[score].count).toEqual(counts[score]);
+function expectSummaryDataCounts(summaryData: SummaryData, counts: number[]) {
+  for (let score = 0; score < summaryData.getDataPoints().length; score++) {
+    expect(summaryData.getDataPointCountById(score)).toEqual(counts[score]);
   }
 }
 
-function createScoreSummaryData() {
+function createScoreSummaryDataPoint() {
   describe('createScoreSummaryData', () => {
     it('should create score summary data', () => {
       const score = 5;
-      expect(component.createScoreSummaryData(score)).toEqual({ score: score, count: 0 });
-    });
-  });
-}
-
-function getSummaryDataCount() {
-  describe('getSummaryDataCount', () => {
-    it('should get summary data count', () => {
-      const summaryData = {
-        0: {
-          count: 0
-        },
-        1: {
-          count: 2
-        }
-      };
-      expect(component.getSummaryDataCount(summaryData, 0)).toEqual(0);
-      expect(component.getSummaryDataCount(summaryData, 1)).toEqual(2);
+      const dataPoint = new ScoreSummaryDataPoint(5);
+      expect(dataPoint.getId()).toEqual(score);
+      expect(dataPoint.getCount()).toEqual(0);
     });
   });
 }
@@ -399,11 +283,8 @@ function getIndexByName() {
   });
 }
 
-function createDataPointObject(name: string, y: number) {
-  return {
-    name: name,
-    y: y
-  };
+function createDataPointObject(name: string, y: number): SeriesDataPoint {
+  return new SeriesDataPoint(name, y);
 }
 
 function setCustomLabelColors() {
@@ -510,26 +391,26 @@ function setResponseNumbers(component: any) {
 function createSeries() {
   describe('createSeries', () => {
     it('should create series without correct answer', () => {
-      const data = [
+      const data = new SeriesData([
         createDataPointObject('Vanilla', 1),
         createDataPointObject('Chocolate', 2),
         createDataPointObject('Strawberry', 3)
-      ];
+      ]);
       const series = component.createSeries(data);
       expect(series.length).toEqual(1);
-      expect(series[0].data).toEqual(data);
+      expect(series[0].data).toEqual(data.getDataPoints());
     });
     it('should create column series with correct answer', () => {
-      const data = [
+      const data = new SeriesData([
         createDataPointObject('Patrick', 1),
         createDataPointObject('Spongebob', 2),
         createDataPointObject('Squidward', 3)
-      ];
+      ]);
       component.highlightCorrectAnswer = true;
       component.chartType = 'column';
       const series = component.createSeries(data);
       expect(series.length).toEqual(3);
-      expect(series[0].data).toEqual(data);
+      expect(series[0].data).toEqual(data.getDataPoints());
       expect(series[1].name).toEqual('Correct');
       expect(series[2].name).toEqual('Incorrect');
     });
@@ -570,7 +451,12 @@ function filterLatestScoreAnnotations() {
   });
 }
 
-function createAnnotation(id: number, toWorkgroupId: number, type: string, serverSaveTime: number) {
+function createAnnotation(
+  id: number,
+  toWorkgroupId: number,
+  type: string,
+  serverSaveTime: number
+): Annotation {
   return new Annotation({
     id: id,
     serverSaveTime: serverSaveTime,
@@ -602,109 +488,6 @@ function setLatestAnnotationIfNewer() {
         createAnnotation(4, 12, 'score', 4000)
       );
       expect(latestAnnotations[12].id).toEqual(4);
-    });
-  });
-}
-
-function accumulateLabel() {
-  describe('accumulateLabel', () => {
-    it('should accumulate label', () => {
-      const labelToCount = {};
-      component.accumulateLabel(labelToCount, 'Cats', 1);
-      component.accumulateLabel(labelToCount, 'Cats', '1');
-      expect(labelToCount['Cats']).toEqual(2);
-    });
-  });
-}
-
-function createTableSummaryData() {
-  describe('createTableSummaryData', () => {
-    it('should create table summary data', () => {
-      const componentStates = [
-        createTableComponentState([
-          ['Object', 'Count'],
-          ['Cats', '1']
-        ]),
-        createTableComponentState([
-          ['Object', 'Count'],
-          ['Cats', '2']
-        ]),
-        createTableComponentState([
-          ['Object', 'Count'],
-          ['Dogs', '2']
-        ])
-      ];
-      const labelToCount = component.createTableSummaryData(componentStates);
-      expect(labelToCount['Cats']).toEqual(3);
-      expect(labelToCount['Dogs']).toEqual(2);
-    });
-  });
-}
-
-function createTableComponentState(textTableData: any[]) {
-  return new ComponentState({
-    studentData: {
-      tableData: createTableDataFromArray(textTableData)
-    }
-  });
-}
-
-function createTableDataFromArray(textRows: any[]) {
-  const tableData = [];
-  for (const textRow of textRows) {
-    const row = [];
-    for (const textCell of textRow) {
-      row.push(createTableCell(textCell));
-    }
-    tableData.push(row);
-  }
-  return tableData;
-}
-
-function createTableCell(text: string) {
-  return {
-    text: text
-  };
-}
-
-function createTableSeriesData() {
-  describe('createTableSeriesData', () => {
-    it('should create table series data', () => {
-      const summaryData = {
-        Cats: 3,
-        Dogs: 2
-      };
-      const data = component.createTableSeriesData(summaryData);
-      expect(data).toEqual([
-        { name: 'Cats', y: 3 },
-        { name: 'Dogs', y: 2 }
-      ]);
-    });
-  });
-}
-
-function getTotalTableCount() {
-  describe('getTotalTableCount', () => {
-    it('should get total table count', () => {
-      const seriesData = [{ y: 1 }, { y: 2 }, { y: 3 }];
-      expect(component.getTotalTableCount(seriesData)).toEqual(6);
-    });
-  });
-}
-
-function convertToNumber() {
-  describe('convertToNumber', () => {
-    it('should convert to number when value is an empty string', () => {
-      expect(component.convertToNumber('')).toEqual(0);
-    });
-    it('should convert to number when value is not a number', () => {
-      expect(component.convertToNumber('a')).toEqual(0);
-    });
-    it('should convert to number when value is a number string', () => {
-      expect(component.convertToNumber('1')).toEqual(1);
-    });
-    it('should convert to number when value is a number', () => {
-      expect(component.convertToNumber(1)).toEqual(1);
     });
   });
 }

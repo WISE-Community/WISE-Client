@@ -2,9 +2,9 @@ export abstract class SummaryDataPoint {
   protected id: number | string;
   protected count: number;
 
-  constructor(id: number | string) {
+  constructor(id: number | string, count?: number) {
     this.id = id;
-    this.count = 0;
+    this.count = count ?? 0;
   }
 
   getId(): number | string {
