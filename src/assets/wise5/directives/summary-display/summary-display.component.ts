@@ -299,12 +299,7 @@ export abstract class SummaryDisplayComponent {
   }
 
   hasCorrectAnswer(component: MultipleChoiceContent): boolean {
-    component.choices.forEach((choice) => {
-      if (choice.isCorrect) {
-        return true;
-      }
-    });
-    return false;
+    return component.choices.some((choice) => choice.isCorrect);
   }
 
   getDataPointColor(choice: Choice): string | null {
@@ -448,13 +443,13 @@ export abstract class SummaryDisplayComponent {
   setCustomLabelColors(series: any[], colors: string[], customLabelColors: any[]): void {
     for (const customLabelColor of customLabelColors) {
       const index = this.getIndexByName(series, customLabelColor.label);
-      if (index != null) {
+      if (index !== -1) {
         colors[index] = customLabelColor.color;
       }
     }
   }
 
-  private getIndexByName(series: any[], name: string): any {
+  private getIndexByName(series: any[], name: string): number {
     let index;
     series
       .filter((singleSeries) => singleSeries.data != null)
@@ -464,7 +459,7 @@ export abstract class SummaryDisplayComponent {
             this.summaryService.cleanLabel(dataPoint.name) === this.summaryService.cleanLabel(name)
         );
       });
-    return index ?? null;
+    return index;
   }
 
   private isStudentDataTypeResponses(): boolean {
