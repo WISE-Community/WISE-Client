@@ -1,0 +1,11 @@
+name: Generate messages
+on:
+  pull_request:
+    branches:
+      - issue-2103-generate-messages-on-PR
+jobs:
+  generate-messages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate messages
+        run: docker exec -it wise-client npm run extract-i18n
