@@ -7,7 +7,9 @@ jobs:
   generate-messages:
     runs-on: ubuntu-latest
     steps:
-      - name: List containers
-        run: docker ps -a
+      - name: Check working directory
+        run: pwd
+      - name: Docker compose
+        run: docker compose up
       - name: Generate messages
         run: docker exec -it wise-client npm run extract-i18n
