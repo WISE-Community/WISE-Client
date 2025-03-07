@@ -1,54 +1,55 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDividerModule } from '@angular/material/divider';
 import { ComputerAvatar } from '../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ComputerAvatarSettings } from '../../common/computer-avatar/ComputerAvatarSettings';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'computer-avatar-selector',
-    templateUrl: './computer-avatar-selector.component.html',
-    styleUrls: ['./computer-avatar-selector.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatDividerModule
+  ],
+  selector: 'computer-avatar-selector',
+  styleUrl: './computer-avatar-selector.component.scss',
+  templateUrl: './computer-avatar-selector.component.html'
 })
 export class ComputerAvatarSelectorComponent implements OnInit {
-  @Input()
-  computerAvatarSettings: ComputerAvatarSettings;
-
-  @Output()
-  chooseAvatarEvent = new EventEmitter<ComputerAvatar>();
-
-  avatars: ComputerAvatar[];
-  avatarSelected: ComputerAvatar;
-  avatarsPath: string;
-  label: string;
+  protected avatars: ComputerAvatar[];
+  protected avatarsPath: string;
+  @Output() chooseAvatarEvent = new EventEmitter<ComputerAvatar>();
+  @Input() computerAvatarSettings: ComputerAvatarSettings;
+  protected label: string;
+  protected selectedAvatar: ComputerAvatar;
 
   constructor(private computerAvatarService: ComputerAvatarService) {}
 
   ngOnInit(): void {
-    this.avatars = this.filterAvatars(
-      this.computerAvatarService.getAvatars(),
-      this.computerAvatarSettings.ids
-    );
-    this.avatarsPath = this.computerAvatarService.getAvatarsPath();
-    if (this.avatars.length === 1) {
-      this.avatarSelected = this.avatars[0];
-    }
     this.initializeLabel();
-  }
-
-  filterAvatars(allAvatars: ComputerAvatar[], avatarIdsToUse: string[]): ComputerAvatar[] {
-    return allAvatars.filter((avatar) => avatarIdsToUse.includes(avatar.id));
-  }
-
-  initializeLabel(): void {
-    const computerAvatarSettingsLabel = this.computerAvatarSettings.label;
-    if (computerAvatarSettingsLabel == null || computerAvatarSettingsLabel === '') {
-      this.label = this.computerAvatarService.getDefaultComputerAvatarLabel();
-    } else {
-      this.label = computerAvatarSettingsLabel;
+    this.avatarsPath = this.computerAvatarService.getAvatarsPath();
+    this.avatars = this.computerAvatarService
+      .getAvatars()
+      .filter((avatar) => this.computerAvatarSettings.ids.includes(avatar.id));
+    if (this.avatars.length === 1) {
+      this.selectedAvatar = this.avatars[0];
     }
   }
 
-  chooseAvatar(): void {
-    this.chooseAvatarEvent.emit(this.avatarSelected);
+  private initializeLabel(): void {
+    const computerAvatarSettingsLabel = this.computerAvatarSettings.label;
+    this.label =
+      computerAvatarSettingsLabel == null || computerAvatarSettingsLabel === ''
+        ? this.computerAvatarService.getDefaultComputerAvatarLabel()
+        : computerAvatarSettingsLabel;
   }
 }
