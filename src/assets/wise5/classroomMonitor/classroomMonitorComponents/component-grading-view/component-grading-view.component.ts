@@ -12,9 +12,11 @@ import { ComponentClassResponsesComponent } from '../component-class-responses/c
 import { ActivatedRoute } from '@angular/router';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
+import { ComponentAverageScoreComponent } from '../component-average-score/component-average-score.component';
 
 @Component({
   imports: [
+    ComponentAverageScoreComponent,
     ComponentClassResponsesComponent,
     MilestoneReportButtonComponent,
     PeerGroupButtonComponent,
