@@ -1,41 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComputerAvatar } from '../../common/computer-avatar/ComputerAvatar';
-import { DialogGuidanceService } from '../../components/dialogGuidance/dialogGuidanceService';
-import { AnnotationService } from '../../services/annotationService';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
-import { ConfigService } from '../../services/configService';
-import { ProjectService } from '../../services/projectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentDataService } from '../../services/studentDataService';
-import { TagService } from '../../services/tagService';
 import { ComputerAvatarSelectorComponent } from './computer-avatar-selector.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
+const avatars: ComputerAvatar[] = [
+  new ComputerAvatar('robot', 'Robot', 'robot.png'),
+  new ComputerAvatar('monkey', 'Monkey', 'monkey.png')
+];
+let component: ComputerAvatarSelectorComponent;
+let fixture: ComponentFixture<ComputerAvatarSelectorComponent>;
 describe('ComputerAvatarSelectorComponent', () => {
-  const avatars: ComputerAvatar[] = [
-    new ComputerAvatar('robot', 'Robot', 'robot.png'),
-    new ComputerAvatar('monkey', 'Monkey', 'monkey.png')
-  ];
-  let component: ComputerAvatarSelectorComponent;
-  let fixture: ComponentFixture<ComputerAvatarSelectorComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, MatButtonToggleModule, MatCardModule, MatDividerModule],
-      declarations: [ComputerAvatarSelectorComponent],
-      providers: [
-        AnnotationService,
-        ComputerAvatarService,
-        ConfigService,
-        DialogGuidanceService,
-        ProjectService,
-        SessionService,
-        StudentDataService,
-        TagService
-      ]
+      imports: [ComputerAvatarSelectorComponent],
+      providers: [ComputerAvatarService]
     }).compileComponents();
   });
 
@@ -52,11 +31,46 @@ describe('ComputerAvatarSelectorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should choose avatar', () => {
-    const firstAvatar = component.avatars[0];
-    component.avatarSelected = firstAvatar;
-    const confirmSelectionEmitSpy = spyOn(component.chooseAvatarEvent, 'emit');
-    component.chooseAvatar();
-    expect(confirmSelectionEmitSpy).toHaveBeenCalled();
-  });
+  ngOnInit();
+  selectAvatar();
 });
+
+function ngOnInit() {
+  describe('ngOnInit()', () => {
+    it('should show avatars and the continue button should be disabled', () => {
+      expect(fixture.debugElement.queryAll(By.css('mat-button-toggle')).length).toEqual(2);
+      expect(getContinueButton().nativeElement.disabled).toBeTrue();
+    });
+  });
+}
+
+function selectAvatar() {
+  describe('select avatar', () => {
+    beforeEach(() => {
+      fixture.debugElement.queryAll(By.css('mat-button-toggle'))[0].nativeElement.click();
+      fixture.detectChanges();
+    });
+    it('should enable the continue button', () => {
+      expect(getContinueButton().nativeElement.disabled).toBeFalse();
+    });
+
+    clickContinueButton_shouldEmitAvatar();
+  });
+}
+
+function clickContinueButton_shouldEmitAvatar() {
+  describe('click on continue button', () => {
+    it('should emit selected avatar', () => {
+      const spy = spyOn(component.chooseAvatarEvent, 'emit');
+      getContinueButton().nativeElement.click();
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalledWith(avatars[0]);
+    });
+  });
+}
+
+function getContinueButton() {
+  return fixture.debugElement
+    .queryAll(By.css('button'))
+    .find((buttonDebugEl) => buttonDebugEl.nativeElement.textContent.includes('Continue'));
+}

@@ -2,8 +2,7 @@
   *ngIf="computerAvatarSelectorVisible"
   [computerAvatarSettings]="componentContent.computerAvatarSettings"
   (chooseAvatarEvent)="selectComputerAvatar($event)"
->
-</computer-avatar-selector>
+/>
 <mat-card appearance="outlined" *ngIf="!computerAvatarSelectorVisible" class="mat-elevation-z2">
   <component-header [component]="component"></component-header>
   <dialog-responses
