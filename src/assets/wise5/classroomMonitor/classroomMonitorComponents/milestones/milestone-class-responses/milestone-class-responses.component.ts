@@ -2,7 +2,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { copy } from '../../../../common/object/object';
 import { Annotation } from '../../../../common/Annotation';
 import { filter, Subscription } from 'rxjs';
-import { AbstractClassResponsesComponent } from '../../AbstractClassResponseComponent';
+import { AbstractClassResponsesComponent } from '../../AbstractClassResponsesComponent';
 import { Node } from '../../../../common/Node';
 import { Notification } from '../../../../../../app/domain/notification';
 

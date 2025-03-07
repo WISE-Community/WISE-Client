@@ -15,7 +15,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentWorkgroupItemComponent } from '../component-workgroup-item/component-workgroup-item.component';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
-import { AbstractClassResponsesComponent } from '../AbstractClassResponseComponent';
+import { AbstractClassResponsesComponent } from '../AbstractClassResponsesComponent';
 
 @Component({
   imports: [
