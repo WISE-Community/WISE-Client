@@ -33,10 +33,8 @@ export class ComponentAverageScoreComponent {
   private getLatestScoreAnnotations() {
     return this.annotationService
       .getAnnotationsByNodeIdComponentId(this.node.id, this.component.id)
-      .filter(
-        (annotation) =>
-          annotation.periodId === this.periodId && ['score', 'autoScore'].includes(annotation.type)
-      )
+      .filter((annotation) => this.periodId === -1 || annotation.periodId === this.periodId)
+      .filter((annotation) => ['score', 'autoScore'].includes(annotation.type))
       .reduceRight((soFar, currentA) => {
         if (!soFar.some((soFarA) => soFarA.toWorkgroupId === currentA.toWorkgroupId)) {
           soFar.push(currentA);

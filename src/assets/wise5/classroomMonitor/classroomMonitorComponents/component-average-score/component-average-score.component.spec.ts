@@ -65,15 +65,47 @@ function ngChanges_ScoresAvailable_ShowAverage() {
             type: 'autoScore',
             toWorkgroupId: 2,
             periodId: 1,
+            data: { value: 4 }
+          },
+          {
+            nodeId: 'node1',
+            componentId: 'component1',
+            type: 'score',
+            toWorkgroupId: 5,
+            periodId: 2,
+            data: { value: 10 }
+          },
+          {
+            nodeId: 'node1',
+            componentId: 'component1',
+            type: 'score',
+            toWorkgroupId: 2,
+            periodId: 1,
             data: { value: 5 }
           }
         ] as Annotation[]
       );
-      component.ngOnChanges();
-      fixture.detectChanges();
     });
-    it('should show average score', () => {
-      expect(fixture.nativeElement.textContent.trim()).toEqual('4');
+
+    describe('period 1 is chosen', () => {
+      beforeEach(() => {
+        component.ngOnChanges();
+        fixture.detectChanges();
+      });
+      it('should show average score for period 1', () => {
+        expect(fixture.nativeElement.textContent.trim()).toEqual('4');
+      });
+    });
+
+    describe('all periods is chosen', () => {
+      beforeEach(() => {
+        component.periodId = -1;
+        component.ngOnChanges();
+        fixture.detectChanges();
+      });
+      it('should show average score for all periods', () => {
+        expect(fixture.nativeElement.textContent.trim()).toEqual('6');
+      });
     });
   });
 }
