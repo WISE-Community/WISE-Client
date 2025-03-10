@@ -21,6 +21,6 @@ jobs:
         run: npm run extract-i18n
       - name: Commit messages
         run: |
-          git add messages.xlf
+          git add src/messages.xlf
           git commit -m "Updated messages"
           git push
