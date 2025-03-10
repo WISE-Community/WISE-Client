@@ -15,7 +15,9 @@ jobs:
           ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
       - name: Checkout branch
-        run: git checkout ${{ github.head_ref || github.ref_name }}
+        run: |
+          git fetch --all
+          git checkout -B ${{ github.head_ref || github.ref_name }} origin/"${{ github.head_ref || github.ref_name }}"
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
