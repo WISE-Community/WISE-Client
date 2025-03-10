@@ -6,10 +6,14 @@ on:
 jobs:
   generate-messages:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-versions: [20.x]
     steps:
-      - name: Check working directory
-        run: pwd
-      - name: Docker compose
-        run: docker compose up
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/checkout@v4
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Generate messages
-        run: docker exec -it wise-client npm run extract-i18n
+        run: npm run extract-i18n
