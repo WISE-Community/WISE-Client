@@ -16,9 +16,6 @@ jobs:
           ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
       - run: git branch
-      - name: Checkout branch
-        run: git checkout ${{ github.head_ref || github.ref_name }}
-      - run: git branch
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
@@ -28,6 +25,7 @@ jobs:
         run: npm ci
       - name: Generate messages
         run: npm run extract-i18n
+      - run: git branch
       - name: Commit messages
         run: |
           git config --global user.name  'github-actions[bot]'
