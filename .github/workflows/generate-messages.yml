@@ -10,7 +10,7 @@ jobs:
       matrix:
         node-versions: [20.x]
     steps:
-      - run: git branch
+      - run: pwd
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref || github.ref_name }}
