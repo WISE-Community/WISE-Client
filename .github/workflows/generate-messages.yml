@@ -10,9 +10,6 @@ jobs:
       matrix:
         node-versions: [20.x]
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref_name }}
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
@@ -29,3 +26,5 @@ jobs:
           git add src/messages.xlf
           git commit -m "Updated messages"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
