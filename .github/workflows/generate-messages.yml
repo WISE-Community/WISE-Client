@@ -10,14 +10,15 @@ jobs:
       matrix:
         node-versions: [20.x]
     steps:
+      - run: git branch
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
+      - run: git branch
       - name: Checkout branch
-        run: |
-          git fetch --all
-          git checkout -B ${{ github.head_ref || github.ref_name }} origin/"${{ github.head_ref || github.ref_name }}"
+        run: git checkout ${{ github.head_ref || github.ref_name }}
+      - run: git branch
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
