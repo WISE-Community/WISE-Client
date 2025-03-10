@@ -13357,6 +13357,13 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">97,100</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8690279925768872832" datatype="html">
+        <source>Component Completion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading-view/component-grading-view.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6319945351508934188" datatype="html">
         <source>Show/hide team&apos;s work for this step</source>
         <context-group purpose="location">
