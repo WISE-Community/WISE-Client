@@ -14,14 +14,8 @@
       <h4 class="mat-subtitle-2" i18n>Team {{ team.workgroupId }}</h4>
     }
     <span fxFlex></span>
-    <span class="mat-small">
-      @if (this.team.users.length === 0) {
-        <span i18n>No students</span>
-      } @else if (canGradeStudentWork && !isUnassigned) {
-        <a class="change-period" href="#" (click)="changePeriod($event)" i18n>Change Period</a>
-      }
-    </span>
   </div>
+  <h1 i18n>TEST</h1>
   <mat-card-content>
     <ul
       id="team-{{ team.workgroupId }}"
