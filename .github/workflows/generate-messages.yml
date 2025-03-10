@@ -21,6 +21,8 @@ jobs:
         run: npm run extract-i18n
       - name: Commit messages
         run: |
+          git config --global user.name  'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add src/messages.xlf
           git commit -m "Updated messages"
           git push
