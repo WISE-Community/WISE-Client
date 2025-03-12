@@ -13,9 +13,11 @@ import { ActivatedRoute } from '@angular/router';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
+import { ComponentAverageScoreComponent } from '../component-average-score/component-average-score.component';
 
 @Component({
   imports: [
+    ComponentAverageScoreComponent,
     ComponentClassResponsesComponent,
     ComponentCompletionComponent,
     MilestoneReportButtonComponent,
@@ -23,7 +25,6 @@ import { ComponentCompletionComponent } from '../component-completion/component-
     TeacherSummaryDisplayComponent
   ],
   selector: 'component-grading-view',
-  standalone: true,
   templateUrl: './component-grading-view.component.html'
 })
 export class ComponentGradingViewComponent {

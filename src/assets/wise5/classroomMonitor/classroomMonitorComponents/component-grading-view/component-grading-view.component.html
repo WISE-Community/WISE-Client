@@ -2,6 +2,9 @@
 <peer-group-button [node]="node" [component]="component" />
 <component-completion [node]="node" [component]="component" [periodId]="periodId" />
 &nbsp;<span i18n>Component Completion</span>
+<component-average-score [node]="node" [component]="component" [periodId]="periodId" />
+/ {{ component?.maxScore ?? 0 }}
+<span i18n>Mean Score</span>
 @if (component?.type === 'MultipleChoice' && hasStudentWork) {
   <teacher-summary-display
     [nodeId]="node.id"

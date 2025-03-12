@@ -13361,7 +13361,14 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Component Completion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading-view/component-grading-view.component.html</context>
-          <context context-type="linenumber">4,6</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5112680841574435656" datatype="html">
+        <source>Mean Score</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading-view/component-grading-view.component.html</context>
+          <context context-type="linenumber">7,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6319945351508934188" datatype="html">
