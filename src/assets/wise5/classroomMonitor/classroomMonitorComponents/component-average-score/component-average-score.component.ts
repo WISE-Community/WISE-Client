@@ -10,7 +10,7 @@ import { DecimalPipe } from '@angular/common';
     @if (avgScore) {
       {{ avgScore | number: '1.0-1' }}
     } @else {
-      N/A
+      -
     }
   `
 })
