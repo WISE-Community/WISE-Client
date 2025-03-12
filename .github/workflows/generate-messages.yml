@@ -22,9 +22,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm ci
+      - run: git checkout ${{ github.head_ref || github.ref_name }}
       - name: Generate messages
         run: npm run extract-i18n
-      - run: git checkout ${{ github.head_ref || github.ref_name }}
+      # - run: git checkout ${{ github.head_ref || github.ref_name }}
       - run: git branch
       - name: Commit messages
         run: |
