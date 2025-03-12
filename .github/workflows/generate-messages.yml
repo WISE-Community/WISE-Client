@@ -25,7 +25,7 @@ jobs:
       - run: git checkout ${{ github.head_ref || github.ref_name }}
       - name: Generate messages
         run: npm run extract-i18n
-      - run: git branch
+      - run: pwd
       - name: Commit messages
         run: |
           git config --global user.name  'github-actions[bot]'
