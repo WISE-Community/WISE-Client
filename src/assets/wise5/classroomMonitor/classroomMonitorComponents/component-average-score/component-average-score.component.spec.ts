@@ -38,10 +38,10 @@ function ngChanges_NoScoresAvailable_ShowNA() {
         [] as Annotation[]
       )
     );
-    it('should show "N/A"', () => {
+    it('should show "-"', () => {
       component.ngOnChanges();
       fixture.detectChanges();
-      expect(fixture.nativeElement.textContent.trim()).toEqual('N/A');
+      expect(fixture.nativeElement.textContent.trim()).toEqual('-');
     });
   });
 }
