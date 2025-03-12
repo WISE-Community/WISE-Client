@@ -15,7 +15,6 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
-      - run: git branch
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v4
@@ -25,6 +24,7 @@ jobs:
         run: npm ci
       - name: Generate messages
         run: npm run extract-i18n
+      - run: git checkout ${{ github.head_ref || github.ref_name }}
       - run: git branch
       - name: Commit messages
         run: |
@@ -32,6 +32,6 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add src/messages.xlf
           git commit -m "Updated messages"
-          git push origin ${{ github.head_ref || github.ref_name }}
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
