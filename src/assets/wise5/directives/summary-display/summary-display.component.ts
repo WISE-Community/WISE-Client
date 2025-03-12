@@ -1,26 +1,32 @@
 import * as Highcharts from 'highcharts';
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Annotation } from '../../common/Annotation';
 import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
-import { ProjectService } from '../../services/projectService';
-import { SummaryService } from '../../components/summary/summaryService';
-import { of } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { copy } from '../../common/object/object';
-import { rgbToHex } from '../../common/color/color';
-import { DataService } from '../../../../app/services/data.service';
-import { StudentDataService } from '../../services/studentDataService';
 import { CommonModule } from '@angular/common';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { ComponentContent } from '../../common/ComponentContent';
+import { ComponentState } from '../../../../app/domain/componentState';
+import { ConfigService } from '../../services/configService';
+import { DataService } from '../../../../app/services/data.service';
 import { MatCardModule } from '@angular/material/card';
-
+import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
+import { Observable } from 'rxjs';
+import { ProjectService } from '../../services/projectService';
+import { rgbToHex } from '../../common/color/color';
+import { SummaryService } from '../../components/summary/summaryService';
+import { tap } from 'rxjs/operators';
+import { SeriesData } from '../../common/SeriesData';
+import { SeriesDataPoint } from '../../common/SeriesDataPoint';
+import { MultipleChoiceSummaryData } from './summary-data/MultipleChoiceSummaryData';
+import { ScoreSummaryData } from './summary-data/ScoreSummaryData';
+import { TableSummaryData } from './summary-data/TableSummaryData';
+import { Choice } from '../../components/multipleChoice/Choice';
+import { SummaryData } from './summary-data/SummaryData';
 @Component({
-    imports: [CommonModule, MatCardModule],
-    selector: 'summary-display',
-    styleUrl: 'summary-display.component.scss',
-    templateUrl: 'summary-display.component.html'
+  imports: [CommonModule, MatCardModule],
+  styleUrl: 'summary-display.component.scss',
+  templateUrl: 'summary-display.component.html'
 })
-export abstract class SummaryDisplay {
+export abstract class SummaryDisplayComponent {
   chartConfig: any;
   colors = {
     palette: [
@@ -45,13 +51,13 @@ export abstract class SummaryDisplay {
     correct: '#00C853',
     incorrect: '#C62828'
   };
-  defaultMaxScore: number = 5;
+  private defaultMaxScore: number = 5;
   hasCorrectness: boolean = false;
-  Highcharts: typeof Highcharts = Highcharts;
+  protected Highcharts: typeof Highcharts = Highcharts;
   maxScore: number = 5;
-  numDummySamples: number;
+
   numResponses: number;
-  otherComponent: any;
+  otherComponent: ComponentContent;
   otherComponentType: string;
   percentResponded: number;
   totalWorkgroups: number;
@@ -76,8 +82,7 @@ export abstract class SummaryDisplay {
     protected summaryService: SummaryService
   ) {}
 
-  ngOnInit() {
-    this.setNumDummySamples();
+  ngOnInit(): void {
     this.initializeOtherComponent();
     this.initializeCustomLabelColors();
     if (this.doRender) {
@@ -85,159 +90,79 @@ export abstract class SummaryDisplay {
     }
   }
 
-  setNumDummySamples() {
-    if (this.isSourcePeriod()) {
-      this.numDummySamples = 10;
-    } else if (this.isSourceAllPeriods()) {
-      this.numDummySamples = 20;
-    } else {
-      this.numDummySamples = 1;
-    }
-  }
-
-  initializeOtherComponent() {
+  initializeOtherComponent(): void {
     this.otherComponent = this.projectService.getComponent(this.nodeId, this.componentId);
     if (this.otherComponent != null) {
       this.otherComponentType = this.otherComponent.type;
     }
   }
 
-  initializeCustomLabelColors() {
+  private initializeCustomLabelColors(): void {
     if (this.customLabelColors == null) {
       this.customLabelColors = [];
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (!changes.doRender.firstChange) {
       this.renderDisplay();
     }
   }
 
-  isVLEPreview() {
+  isVLEPreview(): boolean {
     return this.configService.isPreview();
   }
 
-  isAuthoringPreview() {
+  isAuthoringPreview(): boolean {
     return this.configService.isAuthoring();
   }
 
-  isStudentRun() {
+  isStudentRun(): boolean {
     return this.configService.isStudentRun();
   }
 
-  isClassroomMonitor() {
-    return this.configService.isClassroomMonitor();
-  }
-
-  renderDisplay() {
-    if (this.studentDataType === 'responses') {
-      this.renderResponses();
-    } else if (this.studentDataType === 'scores') {
-      this.renderScores();
-    }
-  }
-
-  renderResponses() {
-    if (this.isSourceSelf() && this.isClassroomMonitor()) {
-      this.displaySourceSelfMessageToTeacher();
-    } else if (this.isSourceSelf()) {
-      this.renderSelfResponse();
+  protected renderDisplay(): void {
+    if (this.isSourceSelf()) {
+      this.renderSelfDisplay();
     } else {
-      this.renderClassResponses();
-    }
-  }
-
-  displaySourceSelfMessageToTeacher() {
-    this.doRender = false;
-    this.warningMessage = $localize`The student will see a graph of their individual data here.`;
-    this.hasWarning = true;
-  }
-
-  renderSelfResponse() {
-    const componentStates = [];
-    const componentState = this.getResponseForSelf();
-    if (componentState != null) {
-      componentStates.push(componentState);
-    }
-    this.processComponentStates(componentStates);
-  }
-
-  private getResponseForSelf() {
-    if (this.isVLEPreview() || this.isStudentRun()) {
-      return (this.dataService as StudentDataService).getLatestComponentStateByNodeIdAndComponentId(
-        this.nodeId,
-        this.componentId
-      );
-    } else if (this.isAuthoringPreview()) {
-      return this.createDummyComponentState(this.otherComponent);
-    }
-  }
-
-  renderClassResponses() {
-    this.getLatestStudentWork(this.nodeId, this.componentId, this.source, this.periodId).subscribe(
-      (componentStates = []) => {
-        this.processComponentStates(componentStates);
+      switch (this.studentDataType) {
+        case 'responses':
+          this.renderClassResponses();
+          break;
+        case 'scores':
+          this.renderClassScores();
       }
-    );
-  }
-
-  getLatestScores(
-    nodeId: string,
-    componentId: string,
-    source: string,
-    periodId: number
-  ): Observable<any[]> {
-    if (this.isVLEPreview()) {
-      return this.getDummyStudentScoresForVLEPreview();
-    } else if (this.isAuthoringPreview()) {
-      return this.getDummyStudentScoresForAuthoringPreview();
-    } else {
-      return this.summaryService
-        .getLatestClassmateScores(
-          this.configService.getRunId(),
-          periodId,
-          nodeId,
-          componentId,
-          source
-        )
-        .pipe(
-          tap((scoreAnnotations) => {
-            return this.filterLatestScoreAnnotations(scoreAnnotations);
-          })
-        );
     }
   }
 
-  renderScores() {
-    if (this.isSourceSelf() && this.isClassroomMonitor()) {
-      this.displaySourceSelfMessageToTeacher();
-    } else if (this.isSourceSelf()) {
-      this.renderSelfScore();
-    } else {
-      this.renderClassScores();
-    }
+  protected abstract renderSelfDisplay(): void;
+
+  protected renderClassResponses(): void {
+    this.getLatestWork().subscribe((componentStates = []) => {
+      const [seriesData, count] = this.processComponentStates(componentStates);
+      this.renderGraph(seriesData, count);
+    });
   }
 
-  renderSelfScore() {
-    this.setMaxScore(this.otherComponent);
-    const annotation = this.getScoreForSelf();
-    const annotations = [];
-    if (annotation != null) {
-      annotations.push(annotation);
-    }
-    this.processScoreAnnotations(annotations);
+  protected abstract getLatestScores(): Observable<Annotation[]>;
+
+  protected getLatestStudentScores(): Observable<Annotation[]> {
+    return this.summaryService
+      .getLatestClassmateScores(
+        this.configService.getRunId(),
+        this.periodId,
+        this.nodeId,
+        this.componentId,
+        this.source
+      )
+      .pipe(
+        tap((scoreAnnotations) => {
+          return this.filterLatestScoreAnnotations(scoreAnnotations);
+        })
+      );
   }
 
-  getScoreForSelf() {
-    if (this.isVLEPreview() || this.isStudentRun()) {
-      return this.getLatestScoreAnnotationForWorkgroup();
-    } else if (this.isAuthoringPreview()) {
-      return this.createDummyScoreAnnotation();
-    }
-  }
-
-  getLatestScoreAnnotationForWorkgroup() {
+  protected getLatestScoreAnnotationForWorkgroup(): Annotation {
     return this.annotationService.getLatestScoreAnnotation(
       this.nodeId,
       this.componentId,
@@ -245,50 +170,31 @@ export abstract class SummaryDisplay {
     );
   }
 
-  renderClassScores() {
-    this.setMaxScore(this.otherComponent);
-    this.getLatestScores(this.nodeId, this.componentId, this.source, this.periodId).subscribe(
-      (annotations) => {
-        this.processScoreAnnotations(annotations);
-      }
+  protected renderClassScores(): void {
+    this.setMaxScore();
+    this.getLatestScores().subscribe((annotations) => {
+      this.processScoreAnnotations(annotations);
+    });
+  }
+
+  protected setMaxScore(): void {
+    this.maxScore = this.otherComponent?.maxScore ?? this.defaultMaxScore;
+  }
+
+  protected abstract getLatestWork(): Observable<ComponentState[]>;
+
+  protected getLatestStudentWork(): Observable<ComponentState[]> {
+    return this.summaryService.getLatestClassmateStudentWork(
+      this.configService.getRunId(),
+      this.periodId,
+      this.nodeId,
+      this.componentId,
+      this.source
     );
   }
 
-  setMaxScore(component) {
-    if (component.maxScore != null) {
-      this.maxScore = component.maxScore;
-    } else {
-      this.maxScore = this.defaultMaxScore;
-    }
-  }
-
-  getLatestStudentWork(
-    nodeId: string,
-    componentId: string,
-    source: string,
-    periodId: number
-  ): Observable<any> {
-    if (this.isVLEPreview()) {
-      return this.getDummyStudentWorkForVLEPreview(nodeId, componentId);
-    } else if (this.isAuthoringPreview()) {
-      return this.getDummyStudentWorkForAuthoringPreview();
-    } else {
-      return this.summaryService.getLatestClassmateStudentWork(
-        this.configService.getRunId(),
-        periodId,
-        nodeId,
-        componentId,
-        source
-      );
-    }
-  }
-
-  getPeriodIdValue(periodId: number): number {
-    return periodId === -1 ? null : periodId;
-  }
-
-  filterLatestScoreAnnotations(annotations) {
-    const latestAnnotations = {};
+  filterLatestScoreAnnotations(annotations: Annotation[]): any[] {
+    const latestAnnotations = new Annotation();
     for (const annotation of annotations) {
       if (annotation.type === 'score' || annotation.type === 'autoScore') {
         this.setLatestAnnotationIfNewer(latestAnnotations, annotation);
@@ -297,7 +203,7 @@ export abstract class SummaryDisplay {
     return this.convertObjectToArray(latestAnnotations);
   }
 
-  setLatestAnnotationIfNewer(latestAnnotations, annotation) {
+  setLatestAnnotationIfNewer(latestAnnotations: Annotation, annotation: Annotation): void {
     const workgroupId = annotation.toWorkgroupId;
     const latestAnnotation = latestAnnotations[workgroupId];
     if (latestAnnotation == null || annotation.serverSaveTime > latestAnnotation.serverSaveTime) {
@@ -305,225 +211,66 @@ export abstract class SummaryDisplay {
     }
   }
 
-  convertObjectToArray(obj) {
+  convertObjectToArray(obj: any): any[] {
     return Object.keys(obj).map((key) => {
       return obj[key];
     });
   }
 
-  private getDummyStudentWorkForVLEPreview(nodeId: string, componentId: string): Observable<any> {
-    const componentStates = this.createDummyComponentStates();
-    const componentState = (
-      this.dataService as StudentDataService
-    ).getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
-    if (componentState != null) {
-      componentStates.push(componentState);
-    }
-    return of(componentStates);
-  }
-
-  getDummyStudentScoresForVLEPreview(): Observable<any> {
-    const annotations = this.createDummyScoreAnnotations();
-    const annotation = this.getLatestScoreAnnotationForWorkgroup();
-    if (annotation != null) {
-      annotations.push(annotation);
-    }
-    return of(annotations);
-  }
-
-  getDummyStudentWorkForAuthoringPreview(): Observable<any> {
-    return of(this.createDummyComponentStates());
-  }
-
-  getDummyStudentScoresForAuthoringPreview(): Observable<any> {
-    return of(this.createDummyScoreAnnotations());
-  }
-
-  private createDummyComponentStates() {
-    const dummyComponentStates = [];
-    for (let dummyCounter = 0; dummyCounter < this.numDummySamples; dummyCounter++) {
-      dummyComponentStates.push(this.createDummyComponentState(this.otherComponent));
-    }
-    return dummyComponentStates;
-  }
-
-  private createDummyComponentState(component) {
+  protected processComponentStates(componentStates: ComponentState[]): [SeriesData, number] {
+    let seriesData: SeriesData;
+    let count: number;
     if (this.otherComponentType === 'MultipleChoice') {
-      return this.createDummyMultipleChoiceComponentState(component);
+      const summaryData = new MultipleChoiceSummaryData(
+        this.otherComponent as MultipleChoiceContent,
+        componentStates
+      );
+      seriesData = this.createChoicesSeriesData(
+        this.otherComponent as MultipleChoiceContent,
+        summaryData
+      );
+      count = componentStates.length;
     } else if (this.otherComponentType === 'Table') {
-      return this.createDummyTableComponentState(component);
+      const summaryData = new TableSummaryData(componentStates, this.summaryService);
+      seriesData = this.createTableSeriesData(summaryData);
+      count = this.getTotalTableCount(seriesData);
     }
+    this.calculateCountsAndPercentage(componentStates.length);
+    return [seriesData, count];
   }
 
-  createDummyMultipleChoiceComponentState(component) {
-    const choices = component.choices;
-    return {
-      studentData: {
-        studentChoices: [{ id: this.getRandomChoice(choices).id }]
-      }
-    };
-  }
-
-  private createDummyTableComponentState(component) {
-    if (this.isAuthoringPreview()) {
-      return {
-        studentData: {
-          tableData: this.getDummyTableData()
-        }
-      };
-    } else {
-      return {
-        studentData: {
-          tableData: this.getDummyTableDataSimilarToLatestComponentState()
-        }
-      };
-    }
-  }
-
-  getDummyTableData() {
-    return [
-      [{ text: 'Trait' }, { text: 'Count' }],
-      [{ text: 'Blue' }, { text: '3' }],
-      [{ text: 'Green' }, { text: '2' }],
-      [{ text: 'Red' }, { text: '1' }]
-    ];
-  }
-
-  private getDummyTableDataSimilarToLatestComponentState(): any {
-    let tableData = [];
-    const componentState = (
-      this.dataService as StudentDataService
-    ).getLatestComponentStateByNodeIdAndComponentId(this.nodeId, this.componentId);
-    if (componentState != null) {
-      tableData = copy(componentState.studentData.tableData);
-      for (let r = 1; r < tableData.length; r++) {
-        tableData[r][1].text = this.getRandomSimilarNumber(tableData[r][1].text);
-      }
-    }
-    return tableData;
-  }
-
-  private getRandomSimilarNumber(text): number {
-    return Math.ceil(this.convertToNumber(text) * Math.random());
-  }
-
-  private getRandomChoice(choices): any {
-    return choices[Math.floor(Math.random() * choices.length)];
-  }
-
-  private createDummyScoreAnnotations(): any {
-    const dummyScoreAnnotations = [];
-    for (let dummyCounter = 0; dummyCounter < this.numDummySamples; dummyCounter++) {
-      dummyScoreAnnotations.push(this.createDummyScoreAnnotation());
-    }
-    return dummyScoreAnnotations;
-  }
-
-  createDummyScoreAnnotation() {
-    return {
-      data: {
-        value: this.getRandomScore()
-      },
-      type: 'score'
-    };
-  }
-
-  getRandomScore() {
-    return Math.ceil(Math.random() * this.maxScore);
-  }
-
-  processComponentStates(componentStates) {
-    if (this.otherComponentType === 'MultipleChoice') {
-      const summaryData = this.createChoicesSummaryData(this.otherComponent, componentStates);
-      const seriesData = this.createChoicesSeriesData(this.otherComponent, summaryData);
-      this.calculateCountsAndPercentage(componentStates.length);
-      this.renderGraph(seriesData, componentStates.length);
-    } else if (this.otherComponentType === 'Table') {
-      const summaryData = this.createTableSummaryData(componentStates);
-      const seriesData = this.createTableSeriesData(this.otherComponent, summaryData);
-      const totalCount = this.getTotalTableCount(seriesData);
-      this.calculateCountsAndPercentage(componentStates.length);
-      this.renderGraph(seriesData, totalCount);
-    }
-  }
-
-  createTableSummaryData(componentStates) {
-    const labelToCount = {};
-    for (const componentState of componentStates) {
-      const tableData = componentState.studentData.tableData;
-      for (let r = 1; r < tableData.length; r++) {
-        const row = tableData[r];
-        const key = row[0].text;
-        const value = row[1].text;
-        if (key != '') {
-          this.accumulateLabel(labelToCount, this.cleanLabel(key), value);
-        }
-      }
-    }
-    return labelToCount;
-  }
-
-  cleanLabel(label) {
-    return (label + '')
-      .trim()
-      .toLowerCase()
-      .split(' ')
-      .map((word) => {
-        if (word.length > 0) {
-          return word[0].toUpperCase() + word.substr(1);
-        } else {
-          return '';
-        }
-      })
-      .join(' ');
-  }
-
-  createTableSeriesData(component, summaryData) {
-    const data = [];
+  createTableSeriesData(summaryData: TableSummaryData): SeriesData {
+    const seriesData = new SeriesData();
     for (const key of Object.keys(summaryData)) {
-      const count = summaryData[key];
-      const dataPoint = this.createDataPoint(key, count, null);
-      data.push(dataPoint);
+      summaryData.getDataPoints().forEach((summaryDataPoint) => {
+        const key = summaryDataPoint.getId();
+        const count = summaryDataPoint.getCount();
+        const seriesDataPoint = new SeriesDataPoint(key, count);
+        seriesData.addDataPoint(seriesDataPoint);
+      });
     }
-    return data;
+    return seriesData;
   }
 
-  getTotalTableCount(seriesData) {
+  getTotalTableCount(seriesData: SeriesData): number {
     let total = 0;
-    for (const dataPoint of seriesData) {
-      total += dataPoint.y;
-    }
+    seriesData.getDataPoints().forEach((dataPoint) => (total += dataPoint.y));
     return total;
   }
 
-  accumulateLabel(labelToCount, key, value) {
-    if (labelToCount[key] == null) {
-      labelToCount[key] = 0;
-    }
-    labelToCount[key] += this.convertToNumber(value);
-  }
-
-  convertToNumber(value) {
-    if (!isNaN(Number(value))) {
-      return Number(value);
-    } else {
-      return 0;
-    }
-  }
-
-  processScoreAnnotations(annotations) {
+  protected processScoreAnnotations(annotations: Annotation[]): void {
     this.updateMaxScoreIfNecessary(annotations);
-    const summaryData = this.createScoresSummaryData(annotations);
-    const { data, total } = this.createScoresSeriesData(summaryData);
+    const summaryData = new ScoreSummaryData(annotations, this.maxScore);
+    const [seriesData, total] = this.createScoresSeriesData(summaryData);
     this.calculateCountsAndPercentage(annotations.length);
-    this.renderGraph(data, total);
+    this.renderGraph(seriesData, total);
   }
 
-  updateMaxScoreIfNecessary(annotations) {
+  private updateMaxScoreIfNecessary(annotations: Annotation[]): void {
     this.maxScore = this.calculateMaxScore(annotations);
   }
 
-  calculateMaxScore(annotations) {
+  calculateMaxScore(annotations: Annotation[]): number {
     let maxScoreSoFar = this.maxScore;
     for (const annotation of annotations) {
       const score = this.getScoreFromAnnotation(annotation);
@@ -532,62 +279,30 @@ export abstract class SummaryDisplay {
     return maxScoreSoFar;
   }
 
-  createChoicesSummaryData(component, componentStates) {
-    const summaryData = {};
-    for (const choice of component.choices) {
-      summaryData[choice.id] = this.createChoiceSummaryData(
-        choice.id,
-        choice.text,
-        choice.isCorrect
-      );
-    }
-    for (const componentState of componentStates) {
-      this.addComponentStateDataToSummaryData(summaryData, componentState);
-    }
-    return summaryData;
-  }
-
-  createChoiceSummaryData(id, text, isCorrect) {
-    return {
-      id: id,
-      text: text,
-      isCorrect: isCorrect,
-      count: 0
-    };
-  }
-
-  addComponentStateDataToSummaryData(summaryData, componentState) {
-    for (const choice of componentState.studentData.studentChoices) {
-      this.incrementSummaryData(summaryData, choice.id);
-    }
-  }
-
-  createChoicesSeriesData(component, summaryData) {
-    const data = [];
+  createChoicesSeriesData(
+    component: MultipleChoiceContent,
+    summaryData: MultipleChoiceSummaryData
+  ): SeriesData {
+    let seriesData = new SeriesData();
     this.hasCorrectness = this.hasCorrectAnswer(component);
-    for (const choice of component.choices) {
+    component.choices.forEach((choice) => {
       const count = this.getSummaryDataCount(summaryData, choice.id);
       const color = this.getDataPointColor(choice);
       let text = choice.text;
       if (this.highlightCorrectAnswer && this.chartType === 'pie') {
         text = text + ' (' + (choice.isCorrect ? $localize`Correct` : $localize`Incorrect`) + ')';
       }
-      const dataPoint = this.createDataPoint(text, count, color);
-      data.push(dataPoint);
-    }
-    return data;
+      const dataPoint = new SeriesDataPoint(text, count, color);
+      seriesData.addDataPoint(dataPoint);
+    });
+    return seriesData;
   }
 
-  hasCorrectAnswer(component) {
-    for (const choice of component.choices) {
-      if (choice.isCorrect) {
-        return true;
-      }
-    }
-    return false;
+  hasCorrectAnswer(component: MultipleChoiceContent): boolean {
+    return component.choices.some((choice) => choice.isCorrect);
   }
 
-  getDataPointColor(choice) {
+  getDataPointColor(choice: Choice): string | null {
     let color = null;
     if (this.highlightCorrectAnswer) {
       if (choice.isCorrect) {
@@ -599,78 +314,36 @@ export abstract class SummaryDisplay {
     return color;
   }
 
-  createDataPoint(name, y, color = null) {
-    if (color) {
-      return {
-        name: name,
-        y: y,
-        color: color
-      };
-    } else {
-      return {
-        name: name,
-        y: y
-      };
-    }
-  }
-
-  createScoresSummaryData(annotations) {
-    const summaryData = {};
-    for (let scoreValue = 0; scoreValue <= this.maxScore; scoreValue++) {
-      summaryData[scoreValue] = this.createScoreSummaryData(scoreValue);
-    }
-    for (const annotation of annotations) {
-      this.addAnnotationDataToSummaryData(summaryData, annotation);
-    }
-    return summaryData;
-  }
-
-  createScoreSummaryData(score) {
-    return {
-      score: score,
-      count: 0
-    };
-  }
-
-  addAnnotationDataToSummaryData(summaryData, annotation) {
-    const score = this.getScoreFromAnnotation(annotation);
-    this.incrementSummaryData(summaryData, score);
-  }
-
-  getScoreFromAnnotation(annotation) {
+  private getScoreFromAnnotation(annotation: Annotation): number {
     return annotation.data.value;
   }
 
-  incrementSummaryData(summaryData, id) {
-    summaryData[id].count += 1;
-  }
-
-  createScoresSeriesData(summaryData) {
-    const data = [];
+  private createScoresSeriesData(summaryData: ScoreSummaryData): [SeriesData, number] {
+    const seriesData = new SeriesData();
     let total = 0;
     for (let scoreValue = 1; scoreValue <= this.maxScore; scoreValue++) {
       const count = this.getSummaryDataCount(summaryData, scoreValue);
-      const dataPoint = this.createDataPoint(scoreValue, count, null);
-      data.push(dataPoint);
+      const dataPoint = new SeriesDataPoint(scoreValue, count);
+      seriesData.addDataPoint(dataPoint);
       total += count;
     }
-    return { data: data, total: total };
+    return [seriesData, total];
   }
 
-  renderGraph(data, total) {
+  protected renderGraph(seriesData: SeriesData, total: number): void {
     const chartType = this.chartType;
     const title = this.getGraphTitle();
     const xAxisType = 'category';
-    const series = this.createSeries(data);
+    const series = this.createSeries(seriesData);
     const colors = this.getChartColors();
     this.setCustomLabelColors(series, colors, this.customLabelColors);
     this.chartConfig = this.createChartConfig(chartType, title, xAxisType, total, series, colors);
   }
 
-  createSeries(data) {
+  createSeries(seriesData: SeriesData): any[] {
     const series: any[] = [
       {
-        data: data,
+        data: seriesData.getDataPoints(),
         dataLabels: {
           enabled: true
         }
@@ -692,17 +365,22 @@ export abstract class SummaryDisplay {
     return series;
   }
 
-  getGraphTitle() {
-    if (this.isSourceSelf()) {
-      return this.getGraphTitleForSelf();
-    } else if (this.isSourcePeriod()) {
-      return this.getGraphTitleForPeriod();
-    } else {
-      return this.getGraphTitleForClass();
+  getGraphTitle(): string {
+    let graphTitle: string;
+    switch (this.source) {
+      case 'self':
+        graphTitle = this.getGraphTitleForSelf();
+        break;
+      case 'period':
+        graphTitle = this.getGraphTitleForPeriod();
+        break;
+      default:
+        graphTitle = this.getGraphTitleForClass();
     }
+    return graphTitle;
   }
 
-  getGraphTitleForSelf() {
+  private getGraphTitleForSelf(): string {
     if (this.isStudentDataTypeResponses()) {
       return $localize`Your Response`;
     } else if (this.isStudentDataTypeScores()) {
@@ -710,7 +388,7 @@ export abstract class SummaryDisplay {
     }
   }
 
-  getGraphTitleForPeriod() {
+  getGraphTitleForPeriod(): string {
     if (this.isStudentDataTypeResponses()) {
       return this.getGraphTitleWithLabelAndPercent(
         $localize`Period Responses`,
@@ -724,7 +402,7 @@ export abstract class SummaryDisplay {
     }
   }
 
-  getGraphTitleForClass() {
+  getGraphTitleForClass(): string {
     if (this.isStudentDataTypeResponses()) {
       return this.getGraphTitleWithLabelAndPercent(
         $localize`Class Responses`,
@@ -738,7 +416,7 @@ export abstract class SummaryDisplay {
     }
   }
 
-  getGraphTitleWithLabelAndPercent(label: string, percentDisplayText: string): string {
+  private getGraphTitleWithLabelAndPercent(label: string, percentDisplayText: string): string {
     return `${label} | ${percentDisplayText}`;
   }
 
@@ -746,11 +424,11 @@ export abstract class SummaryDisplay {
     return $localize`${this.percentResponded}% Responded (${this.numResponses}/${this.totalWorkgroups})`;
   }
 
-  getChartColors() {
+  getChartColors(): string[] {
     if (this.studentDataType === 'responses') {
       return this.colors.palette;
     } else {
-      let colors = [];
+      let colors: string[] = [];
       const step = (100 / this.maxScore / 100) * 0.9;
       let opacity = 0.1;
       for (let i = 0; i < this.maxScore; i++) {
@@ -762,41 +440,48 @@ export abstract class SummaryDisplay {
     }
   }
 
-  setCustomLabelColors(series, colors, customLabelColors) {
+  setCustomLabelColors(series: any[], colors: string[], customLabelColors: any[]): void {
     for (const customLabelColor of customLabelColors) {
       const index = this.getIndexByName(series, customLabelColor.label);
-      if (index != null) {
+      if (index !== -1) {
         colors[index] = customLabelColor.color;
       }
     }
   }
 
-  getIndexByName(series, name) {
-    for (const singleSeries of series) {
-      if (singleSeries.data != null) {
-        for (const [i, dataPoint] of singleSeries.data.entries()) {
-          if (this.cleanLabel(dataPoint.name) === this.cleanLabel(name)) {
-            return i;
-          }
-        }
-      }
-    }
-    return null;
+  private getIndexByName(series: any[], name: string): number {
+    let index;
+    series
+      .filter((singleSeries) => singleSeries.data != null)
+      .forEach((singleSeries) => {
+        index = singleSeries.data.findIndex(
+          (dataPoint) =>
+            this.summaryService.cleanLabel(dataPoint.name) === this.summaryService.cleanLabel(name)
+        );
+      });
+    return index;
   }
 
-  isStudentDataTypeResponses() {
+  private isStudentDataTypeResponses(): boolean {
     return this.isStudentDataType('responses');
   }
 
-  isStudentDataTypeScores() {
+  private isStudentDataTypeScores(): boolean {
     return this.isStudentDataType('scores');
   }
 
-  isStudentDataType(studentDataType) {
+  private isStudentDataType(studentDataType: string): boolean {
     return this.studentDataType === studentDataType;
   }
 
-  createChartConfig(chartType, title, xAxisType, total, series, colors) {
+  createChartConfig(
+    chartType: string,
+    title: string,
+    xAxisType: string,
+    total: number,
+    series: any[],
+    colors: string[]
+  ): any {
     const thisSummaryDisplay: any = this;
     thisSummaryDisplay.total = total;
     const fontFamily = 'Roboto,Helvetica Neue,sans-serif';
@@ -878,13 +563,13 @@ export abstract class SummaryDisplay {
     return options;
   }
 
-  calculateCountsAndPercentage(dataCount) {
+  calculateCountsAndPercentage(dataCount: number): void {
     this.numResponses = dataCount;
     this.totalWorkgroups = this.getTotalWorkgroups(dataCount);
     this.percentResponded = this.getPercentResponded(dataCount, this.totalWorkgroups);
   }
 
-  getTotalWorkgroups(dataCount) {
+  getTotalWorkgroups(dataCount: number): number {
     if (this.isVLEPreview() || this.isAuthoringPreview()) {
       return dataCount;
     } else {
@@ -893,23 +578,15 @@ export abstract class SummaryDisplay {
     }
   }
 
-  getPercentResponded(numResponses, totalWorkgroups) {
+  getPercentResponded(numResponses: number, totalWorkgroups: number): number {
     return Math.floor((100 * numResponses) / totalWorkgroups);
   }
 
-  getSummaryDataCount(summaryData, id) {
-    return summaryData[id].count;
+  getSummaryDataCount(summaryData: SummaryData, id: any): number {
+    return summaryData.getDataPointCountById(id);
   }
 
-  isSourceSelf() {
+  protected isSourceSelf(): boolean {
     return this.source === 'self';
-  }
-
-  isSourcePeriod() {
-    return this.source === 'period';
-  }
-
-  isSourceAllPeriods() {
-    return this.source === 'allPeriods';
   }
 }
