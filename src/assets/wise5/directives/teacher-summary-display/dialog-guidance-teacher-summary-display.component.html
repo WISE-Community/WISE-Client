@@ -1,0 +1,20 @@
+<mat-card appearance="outlined" class="summary-card">
+  <mat-card-content>
+    @if (hasWarning) {
+      <p class="warn center">{{ warningMessage }}</p>
+    }
+    @if (doRender) {
+      <h2>Most Common Ideas Detected:</h2>
+      @for (idea of seeAllIdeas ? sortedIdeas : topIdeas; let i = $index; track idea.id) {
+        <h3>{{ i + 1 }}. {{ idea.text }} (<mat-icon>person</mat-icon>{{ idea.count }})</h3>
+      }
+      @if (sortedIdeas.length > 5) {
+        @if (seeAllIdeas) {
+          <a (mouseup)="toggleSeeAllIdeas()">See fewer ideas</a>
+        } @else {
+          <a (mouseup)="toggleSeeAllIdeas()">See all ideas</a>
+        }
+      }
+    }
+  </mat-card-content>
+</mat-card>

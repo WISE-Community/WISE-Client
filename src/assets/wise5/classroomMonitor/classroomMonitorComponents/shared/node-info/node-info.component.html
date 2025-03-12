@@ -55,6 +55,17 @@
             [doRender]="true"
           />
         }
+        @if (component.hasResponsesSummary && component.type === 'DialogGuidance') {
+          <dialog-guidance-teacher-summary-display
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [studentDataType]="'responses'"
+            [source]="source"
+            [chartType]="'column'"
+            [doRender]="true"
+          />
+        }
       </div>
     }
   </mat-card-content>
