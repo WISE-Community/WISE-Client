@@ -34,7 +34,7 @@ export class PeerGroupingAuthoringService {
 
   private getDummyObservable(): Observable<any> {
     return new Observable((observer) => {
-      observer.next(true);
+      observer.next({});
     });
   }
 

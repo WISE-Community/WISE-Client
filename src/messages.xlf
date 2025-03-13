@@ -17168,7 +17168,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">863</context>
+          <context context-type="linenumber">672</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3971614543116674506" datatype="html">
@@ -17373,7 +17373,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3140211437491736638" datatype="html">
@@ -17398,7 +17398,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2341527365883865620" datatype="html">
@@ -17423,7 +17423,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1662962831287072630" datatype="html">
@@ -19359,11 +19359,11 @@ Warning: This will delete all existing choices and buckets in this component.</s
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">573</context>
+          <context context-type="linenumber">378</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">683</context>
+          <context context-type="linenumber">480</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2496818939481806999" datatype="html">
@@ -19390,11 +19390,11 @@ Warning: This will delete all existing choices and buckets in this component.</s
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">573</context>
+          <context context-type="linenumber">378</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">687</context>
+          <context context-type="linenumber">484</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2722549756198502062" datatype="html">
@@ -21241,60 +21241,60 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">10,14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="866753876041645935" datatype="html">
-        <source>The student will see a graph of their individual data here.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">153</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="629070935308008546" datatype="html">
         <source>Your Response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">707</context>
+          <context context-type="linenumber">509</context>
         </context-group>
       </trans-unit>
       <trans-unit id="610707389788117365" datatype="html">
         <source>Your Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">709</context>
+          <context context-type="linenumber">511</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1159047178964534522" datatype="html">
         <source>Period Responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">716</context>
+          <context context-type="linenumber">518</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6903542619561738551" datatype="html">
         <source>Period Scores</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">721</context>
+          <context context-type="linenumber">523</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2142002953999044695" datatype="html">
         <source>Class Responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">730</context>
+          <context context-type="linenumber">532</context>
         </context-group>
       </trans-unit>
       <trans-unit id="489297649750722424" datatype="html">
         <source>Class Scores</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">735</context>
+          <context context-type="linenumber">537</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4270887249744454870" datatype="html">
         <source><x id="PH" equiv-text="this.percentResponded"/>% Responded (<x id="PH_1" equiv-text="this.numResponses"/>/<x id="PH_2" equiv-text="this.totalWorkgroups"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
-          <context context-type="linenumber">746</context>
+          <context context-type="linenumber">548</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="866753876041645935" datatype="html">
+        <source>The student will see a graph of their individual data here.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/teacher-summary-display.component.ts</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2342996167134572689" datatype="html">
@@ -21361,7 +21361,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Ermina</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21369,7 +21369,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Alyx</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21377,7 +21377,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Kai</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">11</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21385,7 +21385,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Morgan</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21393,7 +21393,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Parker</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21401,7 +21401,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Milan</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21409,7 +21409,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Emery</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21417,7 +21417,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Yuna</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21425,7 +21425,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Ada</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21433,7 +21433,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Nico</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/computerAvatarService.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <note priority="1" from="description">A name for a computer avatar</note>
       </trans-unit>
@@ -21835,28 +21835,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">7,8</context>
+          <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2670863509967113900" datatype="html">
         <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">8,9</context>
+          <context context-type="linenumber">10,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4626694020452925586" datatype="html">
         <source>Selected avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">13,16</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2917314929120683887" datatype="html">
         <source> Continue </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">38,42</context>
+          <context context-type="linenumber">41,45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1098411996448900439" datatype="html">

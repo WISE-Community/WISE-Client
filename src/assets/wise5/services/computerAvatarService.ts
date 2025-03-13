@@ -1,5 +1,3 @@
-'use strict';
-
 import { Injectable } from '@angular/core';
 import { ComputerAvatar } from '../common/computer-avatar/ComputerAvatar';
 import { copy } from '../common/object/object';
