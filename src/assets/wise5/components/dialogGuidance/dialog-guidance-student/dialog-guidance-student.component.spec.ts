@@ -1,15 +1,7 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
-import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { DialogGuidanceFeedbackService } from '../../../services/dialogGuidanceFeedbackService';
 import { ProjectService } from '../../../services/projectService';
@@ -19,57 +11,24 @@ import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseM
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
 import { CRaterResponse } from '../../common/cRater/CRaterResponse';
 import { CRaterScore } from '../../common/cRater/CRaterScore';
-import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { DialogGuidanceService } from '../dialogGuidanceService';
 import { DialogGuidanceStudentComponent } from './dialog-guidance-student.component';
 import { DialogGuidanceComponent } from '../DialogGuidanceComponent';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: DialogGuidanceStudentComponent;
 let fixture: ComponentFixture<DialogGuidanceStudentComponent>;
 const robotAvatar = new ComputerAvatar('robot', 'Robot', 'robot.png');
-
-function initializeComponent(isComputerAvatarEnabled: boolean): void {
-  fixture = TestBed.createComponent(DialogGuidanceStudentComponent);
-  component = fixture.componentInstance;
-  component.component = createDialogGuidanceComponent(isComputerAvatarEnabled);
-  spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
-  spyOn(component, 'isNotebookEnabled').and.returnValue(false);
-  fixture.detectChanges();
-}
-
-function createDialogGuidanceComponent(isComputerAvatarEnabled: boolean): DialogGuidanceComponent {
-  const componentContent = TestBed.inject(DialogGuidanceService).createComponent();
-  componentContent.isComputerAvatarEnabled = isComputerAvatarEnabled;
-  return new DialogGuidanceComponent(componentContent, null);
-}
-
 describe('DialogGuidanceStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DialogGuidanceStudentComponent],
-      schemas: [NO_ERRORS_SCHEMA],
       imports: [
         BrowserAnimationsModule,
-        ChatInputComponent,
-        ComponentHeaderComponent,
-        DialogResponsesComponent,
-        FormsModule,
-        MatCardModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
+        DialogGuidanceStudentComponent,
         StudentTeacherCommonServicesModule
       ],
-      providers: [
-        DialogGuidanceFeedbackService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
+      providers: [DialogGuidanceFeedbackService, provideHttpClient(withInterceptorsFromDi())]
     }).compileComponents();
   });
 
@@ -101,19 +60,19 @@ describe('DialogGuidanceStudentComponent', () => {
     );
     component.setIsSubmitDirty(true);
     const response = createDummyScoringResponse();
-    expect(component.responses.length).toEqual(0);
+    expect(component['responses'].length).toEqual(0);
     component.cRaterSuccessResponse(response);
     expect(broadcastComponentSubmitTriggeredSpy).toHaveBeenCalled();
-    expect(component.responses.length).toEqual(1);
+    expect(component['responses'].length).toEqual(1);
   });
 
   it('should disable submit button after using all submits', () => {
     component.componentContent.maxSubmitCount = 2;
-    expect(component.studentCanRespond).toEqual(true);
+    expect(component['studentCanRespond']).toEqual(true);
     simulateSubmit(component);
-    expect(component.studentCanRespond).toEqual(true);
+    expect(component['studentCanRespond']).toEqual(true);
     simulateSubmit(component);
-    expect(component.studentCanRespond).toEqual(false);
+    expect(component['studentCanRespond']).toEqual(false);
   });
 
   it('should handle crater error response', () => {
@@ -129,7 +88,7 @@ describe('DialogGuidanceStudentComponent', () => {
   it('should initialize computer avatar to default computer avatar', () => {
     initializeComponent(false);
     expectComputerAvatarSelectorNotToBeShown(component);
-    expect(component.computerAvatar).not.toBeNull();
+    expect(component['computerAvatar']).not.toBeNull();
   });
 
   it(`should initialize computer avatar when the student has not previously chosen a computer
@@ -183,7 +142,7 @@ describe('DialogGuidanceStudentComponent', () => {
 
   it('should select computer avatar', () => {
     component.selectComputerAvatar(robotAvatar);
-    expect(component.computerAvatar).toEqual(robotAvatar);
+    expect(component['computerAvatar']).toEqual(robotAvatar);
     expectComputerAvatarSelectorNotToBeShown(component);
   });
 
@@ -196,18 +155,33 @@ describe('DialogGuidanceStudentComponent', () => {
     const defaultComputerAvatar = computerAvatarService.getDefaultAvatar();
     spyOn(computerAvatarService, 'getAvatar').and.returnValue(defaultComputerAvatar);
     component.initializeComputerAvatar();
-    expect(component.computerAvatar).toEqual(defaultComputerAvatar);
+    expect(component['computerAvatar']).toEqual(defaultComputerAvatar);
   });
 
   it('should select computer avatar when there is a computer avatar initial response', () => {
     const text = 'Hi there, who lives in a pineapple under sea?';
     component.componentContent.computerAvatarSettings.initialResponse = text;
-    expect(component.responses.length).toEqual(0);
+    expect(component['responses'].length).toEqual(0);
     component.selectComputerAvatar(robotAvatar);
-    expect(component.responses.length).toEqual(1);
-    expect(component.responses[0].text).toEqual(text);
+    expect(component['responses'].length).toEqual(1);
+    expect(component['responses'][0].text).toEqual(text);
   });
 });
+
+function initializeComponent(isComputerAvatarEnabled: boolean): void {
+  fixture = TestBed.createComponent(DialogGuidanceStudentComponent);
+  component = fixture.componentInstance;
+  component.component = createDialogGuidanceComponent(isComputerAvatarEnabled);
+  spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
+  spyOn(component, 'isNotebookEnabled').and.returnValue(false);
+  fixture.detectChanges();
+}
+
+function createDialogGuidanceComponent(isComputerAvatarEnabled: boolean): DialogGuidanceComponent {
+  const componentContent = TestBed.inject(DialogGuidanceService).createComponent();
+  componentContent.isComputerAvatarEnabled = isComputerAvatarEnabled;
+  return new DialogGuidanceComponent(componentContent, null);
+}
 
 function simulateSubmit(component: DialogGuidanceStudentComponent): void {
   const response = createDummyScoringResponse();
