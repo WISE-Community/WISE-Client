@@ -4,7 +4,6 @@ import { WorkgroupInfoComponent } from '../nodeGrading/workgroupInfo/workgroup-i
 import { MatListItem } from '@angular/material/list';
 import { ComponentNewWorkBadgeComponent } from '../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { WorkgroupComponentGradingComponent } from '../workgroup-component-grading/workgroup-component-grading.component';
-import { Subscription } from 'rxjs';
 import { WorkgroupNodeStatusComponent } from '../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupNodeScoreComponent } from '../shared/workgroupNodeScore/workgroup-node-score.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -22,14 +21,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     WorkgroupNodeStatusComponent
   ],
   selector: 'component-workgroup-item',
-  standalone: true,
   styleUrl: './component-workgroup-item.component.scss',
   templateUrl: './component-workgroup-item.component.html'
 })
 export class ComponentWorkgroupItemComponent {
   @Input() componentId: string;
-  component: any;
-  disabled: boolean;
+  protected disabled: boolean;
   @Input() expanded: boolean;
   @Input() hasAlert: boolean;
   @Input() hasNewAlert: boolean;
@@ -38,9 +35,8 @@ export class ComponentWorkgroupItemComponent {
   @Output() onUpdateExpand: EventEmitter<any> = new EventEmitter();
   @Input() score: number | '-';
   @Input() status: any;
-  statusClass: any;
-  statusText: string = '';
-  subscriptions: Subscription = new Subscription();
+  protected statusClass: any;
+  protected statusText: string = '';
   @Input() workgroupId: number;
   @Input() workgroupData: any;
 
@@ -58,7 +54,6 @@ export class ComponentWorkgroupItemComponent {
   }
 
   private setComponent(): void {
-    this.component = this.projectService.getComponent(this.nodeId, this.componentId);
     this.score = this.score ?? '-';
     this.maxScore = this.projectService.getMaxScoreForComponent(this.nodeId, this.componentId) ?? 0;
   }
