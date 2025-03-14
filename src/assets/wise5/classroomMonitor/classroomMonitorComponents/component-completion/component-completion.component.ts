@@ -8,7 +8,7 @@ import { DecimalPipe } from '@angular/common';
 @Component({
   imports: [DecimalPipe],
   selector: 'component-completion',
-  template: `{{ completion | number: '1.0-1' }}%`
+  template: `{{ completion | number: '1.0-0' }}%`
 })
 export class ComponentCompletionComponent {
   protected completion: number;
