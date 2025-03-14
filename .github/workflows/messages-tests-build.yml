@@ -1,4 +1,4 @@
-name: Generate messages
+name: Generate messages, Test coverage, Code build
 on:
   pull_request:
     branches:
