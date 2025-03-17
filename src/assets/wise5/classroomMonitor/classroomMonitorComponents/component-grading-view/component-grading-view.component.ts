@@ -9,7 +9,6 @@ import { AnnotationService } from '../../../services/annotationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Node } from '../../../common/Node';
 import { ComponentClassResponsesComponent } from '../component-class-responses/component-class-responses.component';
-import { ActivatedRoute } from '@angular/router';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
@@ -24,7 +23,6 @@ import { ComponentAverageScoreComponent } from '../component-average-score/compo
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
   ],
-  selector: 'component-grading-view',
   templateUrl: './component-grading-view.component.html'
 })
 export class ComponentGradingViewComponent {
@@ -40,23 +38,16 @@ export class ComponentGradingViewComponent {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private annotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private dataService: TeacherDataService,
     private projectService: TeacherProjectService,
     private summaryService: SummaryService
-  ) {}
+  ) {
+    this.node = this.projectService.getNode(this.dataService.getCurrentNode().id);
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.parent.params.subscribe((params) => {
-      this.dataService.setCurrentNodeByNodeId(params.nodeId);
-    });
-    this.subscriptions.add(
-      this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
-        this.node = this.projectService.getNode(currentNode.id);
-      })
-    );
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
         this.periodId = currentPeriod.periodId;
@@ -67,7 +58,6 @@ export class ComponentGradingViewComponent {
   }
 
   ngOnChanges(): void {
-    this.node = this.projectService.getNode(this.dataService.getCurrentNode().id);
     this.dataService.retrieveStudentDataForNode(this.node).subscribe(() => this.setComponent());
     this.periodId = this.dataService.getCurrentPeriodId();
     this.setSource();
