@@ -14,7 +14,6 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   imports: [CommonModule, FlexLayoutModule, MatIconModule, RouterModule, SelectComponentComponent],
-  selector: 'node-grading',
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent {
@@ -38,11 +37,6 @@ export class NodeGradingComponent {
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.dataService.currentNodeChanged$.subscribe(({ currentNode }) => {
-        this.node = currentNode;
-      })
-    );
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(() => this.setPeriod())
     );
