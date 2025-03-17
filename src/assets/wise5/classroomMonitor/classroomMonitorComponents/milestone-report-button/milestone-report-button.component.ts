@@ -11,7 +11,6 @@ import { MilestoneDetailsDialogComponent } from '../milestones/milestone-details
 @Component({
   imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule],
   selector: 'milestone-report-button',
-  standalone: true,
   templateUrl: './milestone-report-button.component.html'
 })
 export class MilestoneReportButtonComponent {

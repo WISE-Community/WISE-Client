@@ -7,7 +7,6 @@ import { MatOptionModule } from '@angular/material/core';
 @Component({
   imports: [CommonModule, FormsModule, MatOptionModule, MatSelectModule],
   selector: 'select-component',
-  standalone: true,
   templateUrl: './select-component.component.html'
 })
 export class SelectComponentComponent {

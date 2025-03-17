@@ -13,10 +13,10 @@ import { Annotation } from '../../common/Annotation';
 import { ComponentState } from '../../../../app/domain/componentState';
 
 @Component({
-    imports: [CommonModule, HighchartsChartModule, MatCardModule],
-    selector: 'teacher-summary-display',
-    styleUrl: '../summary-display/summary-display.component.scss',
-    templateUrl: '../summary-display/summary-display.component.html'
+  imports: [CommonModule, HighchartsChartModule, MatCardModule],
+  selector: 'teacher-summary-display',
+  styleUrl: '../summary-display/summary-display.component.scss',
+  templateUrl: '../summary-display/summary-display.component.html'
 })
 export class TeacherSummaryDisplayComponent extends SummaryDisplayComponent {
   constructor(
