@@ -29,9 +29,9 @@ jobs:
         id: check-changes
         run: git diff ${{ github.head_ref || github.ref_name }}
       - name: TEST
-        run: echo ${{ steps.check-changes.outputs }}
+        run: echo ${{ steps.check-changes.outputs.* }}
       - name: Commit messages
-        if: steps.check-changes.outputs != null
+        if: steps.check-changes.outputs.* != null
         run: |
           git config --global user.name  'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
