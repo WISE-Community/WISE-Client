@@ -27,11 +27,15 @@ jobs:
         run: npm run extract-i18n
       - name: Check for changes
         id: check-changes
-        run: git diff ${{ github.head_ref || github.ref_name }}
-      - name: TEST
-        run: echo ${{ steps.check-changes.outputs.* }}
+        run: |
+          DIFF=$(git diff ${{ github.head_ref || github.ref_name }})
+          if [ -z "$DIFF" ]; then
+            echo "NO_CHANGES=true" >> $GITHUB_ENV
+          else
+            echo "NO_CHANGES=false" >> $GITHUB_ENV
+          fi
       - name: Commit messages
-        if: steps.check-changes.outputs.* != null
+        if: env.NO_CHANGES == 'true'
         run: |
           git config --global user.name  'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
