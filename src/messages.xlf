@@ -13517,7 +13517,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
-          <context context-type="linenumber">21,26</context>
+          <context context-type="linenumber">21,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="208876478116391172" datatype="html">
@@ -13614,13 +13614,6 @@ The branches will be removed but the steps will remain in the unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
           <context context-type="linenumber">19,21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7891814501662841993" datatype="html">
-        <source>TEST</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-team/manage-team.component.html</context>
-          <context context-type="linenumber">23,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="513458985182639179" datatype="html">
