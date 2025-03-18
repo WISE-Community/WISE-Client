@@ -25,7 +25,10 @@ jobs:
         run: git checkout ${{ github.head_ref || github.ref_name }}
       - name: Generate messages
         run: npm run extract-i18n
-      - id: check-changes
+      - name: TEST
+        run: git diff ${{ github.head_ref || github.ref_name }}
+      - name: Check for changes
+        id: check-changes
         run: |
           git diff ${{ github.head_ref || github.ref_name }} --quiet
           echo $?
