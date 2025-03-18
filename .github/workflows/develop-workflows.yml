@@ -39,7 +39,7 @@ jobs:
           echo ${{ env.NO_CHANGES }}
           echo "$DIFF"
       - name: Commit messages
-        if: env.NO_CHANGES == 'true'
+        if: env.NO_CHANGES == 'false'
         run: |
           git config --global user.name  'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
