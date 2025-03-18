@@ -25,16 +25,13 @@ jobs:
         run: git checkout ${{ github.head_ref || github.ref_name }}
       - name: Generate messages
         run: npm run extract-i18n
-      - name: TEST
-        run: git diff ${{ github.head_ref || github.ref_name }}
       - name: Check for changes
         id: check-changes
-        # run: |
-        run:
-          git diff ${{ github.head_ref || github.ref_name }} --quiet
-          # echo $?
+        run: git diff ${{ github.head_ref || github.ref_name }}
+      - name: TEST
+        run: echo ${{ steps.check-changes.outputs }}
       - name: Commit messages
-        if: steps.check-changes.outputs.num == 1
+        if: steps.check-changes.outputs != null
         run: |
           git config --global user.name  'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
