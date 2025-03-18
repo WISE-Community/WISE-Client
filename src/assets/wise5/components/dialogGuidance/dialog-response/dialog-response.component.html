@@ -1,11 +1,10 @@
-<div fxLayoutAlign="{{ isStudent ? 'end' : 'start' }} start" fxLayoutGap="4px">
+<div class="flex gap-1 items-start place-content-start" [ngClass]="{ 'justify-end': isStudent }">
   @if (isStudent) {
     <mat-icon
-      class="mat-36"
+      class="mat-36 order-2"
       [ngStyle]="{ color: avatarColor }"
       aria-label="Student response"
       i18n-aria-label
-      fxFlexOrder="2"
       >account_circle</mat-icon
     >
   } @else {
@@ -26,13 +25,16 @@
       />
     }
   }
-  <div fxFlex fxLayoutAlign="{{ isStudent ? 'end' : 'start' }}">
+  <div
+    class="flex items-stretch place-content-start flex-1"
+    [ngClass]="{ 'justify-end': isStudent }"
+  >
     <div
-      class="response-text"
+      class="response-text flex-col"
       [class]="{ 'notice-bg-bg': !isStudent, 'selected-bg-bg': isStudent }"
     >
       <div class="mat-small secondary-text poster">{{ displayNames }}</div>
-      <div [innerHtml]="text"></div>
+      <div [innerHtml]="text" class="text-wrap"></div>
     </div>
   </div>
 </div>
