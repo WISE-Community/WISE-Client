@@ -29,9 +29,10 @@ jobs:
         run: git diff ${{ github.head_ref || github.ref_name }}
       - name: Check for changes
         id: check-changes
-        run: |
+        # run: |
+        run:
           git diff ${{ github.head_ref || github.ref_name }} --quiet
-          echo $?
+          # echo $?
       - name: Commit messages
         if: steps.check-changes.outputs.num == 1
         run: |
