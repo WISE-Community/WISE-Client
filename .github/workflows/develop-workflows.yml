@@ -34,6 +34,10 @@ jobs:
           else
             echo "NO_CHANGES=false" >> $GITHUB_ENV
           fi
+      - name: TEST
+        run: |
+          echo ${{ env.NO_CHANGES }}
+          echo "$DIFF"
       - name: Commit messages
         if: env.NO_CHANGES == 'true'
         run: |
