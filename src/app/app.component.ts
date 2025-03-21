@@ -23,6 +23,7 @@ export class AppComponent {
   theme: string = '';
   mediaWatcher: Subscription;
   googleAnalyticsId: string = null;
+  googleTagManagerId: string = null;
   hasAnnouncement: boolean = false;
   showDefaultMode: boolean = true;
   showHeaderAndFooter: boolean = true;
@@ -141,6 +142,10 @@ export class AppComponent {
   }
 
   setGTagManager() {
+    this.googleTagManagerId = this.configService.getGoogleTagManagerId();
+    if (this.googleTagManagerId) {
+      this.activateGtm(window, document, 'script', 'dataLayer', this.googleTagManagerId);
+    }
     this.googleAnalyticsId = this.configService.getGoogleAnalyticsId();
     if (this.googleAnalyticsId) {
       const gtagScript = this.document.createElement('script');
@@ -153,6 +158,17 @@ export class AppComponent {
           gtag('config', '${this.googleAnalyticsId}');`;
       this.document.head.appendChild(script);
     }
+  }
+
+  activateGtm(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
   }
 
   fixScrollTop(ev: any) {

@@ -25,12 +25,17 @@ export class MockConfigService {
   getConfig(): Observable<Config> {
     const config: Config = new Config();
     config.googleAnalyticsId = 'UA-XXXXXX-1';
+    config.googleTagManagerId = 'GTM-XXXXXXXX';
     this.config$.next(config);
     return this.config$;
   }
 
   getGoogleAnalyticsId(): string {
     return this.config$.getValue().googleAnalyticsId;
+  }
+
+  getGoogleTagMangaerId(): string {
+    return this.config$.getValue().googleTagManagerId;
   }
 }
 
@@ -98,5 +103,9 @@ describe('AppComponent', () => {
 
   it(`should set Google Analytics tracking code`, () => {
     expect(component.googleAnalyticsId).toEqual('UA-XXXXXX-1');
+  });
+
+  it(`should set Google Tag manager tracking code`, () => {
+    expect(component.googleTagManagerId).toEqual('GTM-XXXXXXXX');
   });
 });
