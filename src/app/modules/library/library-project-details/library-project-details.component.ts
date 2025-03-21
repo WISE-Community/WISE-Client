@@ -1,54 +1,69 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogModule
+} from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { CreateRunDialogComponent } from '../../../teacher/create-run-dialog/create-run-dialog.component';
 import { NGSSStandards } from '../ngssStandards';
 import { Project } from '../../../domain/project';
 import { ParentProject } from '../../../domain/parentProject';
 import { ConfigService } from '../../../services/config.service';
+import { LibraryProjectMenuComponent } from '../library-project-menu/library-project-menu.component';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { UnitTagsComponent } from '../../../teacher/unit-tags/unit-tags.component';
+import { DiscourseCategoryActivityComponent } from '../discourse-category-activity/discourse-category-activity.component';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'app-library-project-details',
-    templateUrl: './library-project-details.component.html',
-    styleUrls: ['./library-project-details.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    DiscourseCategoryActivityComponent,
+    FlexLayoutModule,
+    LibraryProjectMenuComponent,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatTooltipModule,
+    UnitTagsComponent
+  ],
+  selector: 'app-library-project-details',
+  styleUrl: './library-project-details.component.scss',
+  templateUrl: './library-project-details.component.html'
 })
 export class LibraryProjectDetailsComponent implements OnInit {
-  isTeacher: boolean = false;
-  isRunProject: false;
-  ngss: NGSSStandards = new NGSSStandards();
-  ngssWebUrl: string = 'https://www.nextgenscience.org/search-standards?keys=';
-  project: Project;
-  parentProject: ParentProject;
-  licenseUrl = 'http://creativecommons.org/licenses/by-sa/4.0/';
-  licenseInfo = $localize`License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.`;
-  license: string = '';
-  authorsString: string = '';
-  parentAuthorsString: string = '';
-  more: boolean = false;
-  isCopy: boolean = false;
-  discourseURL: string = '';
-  topics: any[] = [];
-  postCount: number = 0;
-  hasMoreTopics: boolean = false;
+  protected authorsString: string = '';
+  protected isCopy: boolean;
+  protected isTeacher: boolean;
+  protected isRunProject: false;
+  protected licenseInfo = $localize`License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.`;
+  protected licenseUrl = 'http://creativecommons.org/licenses/by-sa/4.0/';
+  protected ngss: NGSSStandards = new NGSSStandards();
+  protected ngssWebUrl: string = 'https://www.nextgenscience.org/search-standards?keys=';
+  protected parentAuthorsString: string = '';
+  protected parentProject: ParentProject;
+  protected project: Project;
 
   constructor(
+    private configService: ConfigService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<LibraryProjectDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private configService: ConfigService,
     private userService: UserService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isTeacher = this.userService.isTeacher();
     this.isRunProject = this.data.isRunProject;
     if (this.data.project) {
       this.project = new Project(this.data.project);
-      const numParents = this.data.project.metadata.parentProjects
-        ? this.data.project.metadata.parentProjects.length
-        : null;
-      if (numParents) {
+      const numParents = this.data.project.metadata.parentProjects?.length ?? 0;
+      if (numParents > 0) {
         this.parentProject = new ParentProject(
           this.data.project.metadata.parentProjects[numParents - 1]
         );
@@ -58,11 +73,7 @@ export class LibraryProjectDetailsComponent implements OnInit {
     }
   }
 
-  onClose(): void {
-    this.dialogRef.close();
-  }
-
-  setNGSS(): void {
+  private setNGSS(): void {
     const standards = this.project.metadata.standardsAddressed;
     if (standards) {
       const ngss = standards.ngss;
@@ -86,7 +97,7 @@ export class LibraryProjectDetailsComponent implements OnInit {
     }
   }
 
-  setLicenseInfo(): void {
+  private setLicenseInfo(): void {
     this.authorsString = this.getAuthorsString(this.project.metadata.authors);
     if (this.parentProject) {
       this.parentAuthorsString = this.getAuthorsString(this.parentProject.authors);
@@ -96,18 +107,15 @@ export class LibraryProjectDetailsComponent implements OnInit {
     }
   }
 
-  getAuthorsString(authors: any[]): string {
-    if (!authors) {
-      return '';
-    }
-    return authors
-      .map((author) => {
-        return `${author.firstName} ${author.lastName}`;
-      })
-      .join(', ');
+  private getAuthorsString(authors: any[]): string {
+    return authors?.map((author) => `${author.firstName} ${author.lastName}`).join(', ') ?? '';
   }
 
-  runProject() {
+  protected close(): void {
+    this.dialogRef.close();
+  }
+
+  protected runProject(): void {
     this.dialog.open(CreateRunDialogComponent, {
       data: this.data,
       panelClass: 'dialog-md',
@@ -116,14 +124,12 @@ export class LibraryProjectDetailsComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  previewProject() {
-    if (this.project.wiseVersion === 4) {
-      window.open(
-        `${this.configService.getWISE4Hostname()}` +
-          `/previewproject.html?projectId=${this.project.id}`
-      );
-    } else {
-      window.open(`/preview/unit/${this.project.id}`);
-    }
+  protected previewProject(): void {
+    window.open(
+      this.project.wiseVersion === 4
+        ? `${this.configService.getWISE4Hostname()}` +
+            `/previewproject.html?projectId=${this.project.id}`
+        : `/preview/unit/${this.project.id}`
+    );
   }
 }
