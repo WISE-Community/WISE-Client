@@ -1,38 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LibraryProjectDetailsComponent } from './library-project-details.component';
 import { UserService } from '../../../services/user.service';
 import { Project } from '../../../domain/project';
 import { NGSSStandards } from '../ngssStandards';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../../services/config.service';
 import { ParentProject } from '../../../domain/parentProject';
-
-export class MockMatDialog {}
-
-export class MockUserService {
-  isTeacher(): Observable<boolean> {
-    const isTeacher: boolean = true;
-    return Observable.create((observer) => {
-      observer.next(isTeacher);
-      observer.complete();
-    });
-  }
-}
-
-export class MockConfigService {
-  getContextPath(): string {
-    return '';
-  }
-}
-
-const parentProject = new ParentProject({
-  id: 1000,
-  title: 'Photosynthesis',
-  uri: 'http://localhost:8080/project/1000',
-  authors: [{ id: 6, firstName: 'Susie', lastName: 'Derkins', username: 'SusieDerkins' }]
-});
+import { MockProviders } from 'ng-mocks';
 
 describe('LibraryProjectDetailsComponent', () => {
   let component: LibraryProjectDetailsComponent;
@@ -40,15 +14,11 @@ describe('LibraryProjectDetailsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LibraryProjectDetailsComponent],
+      imports: [LibraryProjectDetailsComponent],
       providers: [
-        { provide: UserService, useClass: MockUserService },
-        { provide: ConfigService, useClass: MockConfigService },
-        { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: [] },
-        { provide: MatDialog, useClass: MockMatDialog }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+        MockProviders(ConfigService, MatDialog, MatDialogRef, UserService),
+        { provide: MAT_DIALOG_DATA, useValue: {} }
+      ]
     });
     fixture = TestBed.createComponent(LibraryProjectDetailsComponent);
     component = fixture.componentInstance;
@@ -93,10 +63,10 @@ describe('LibraryProjectDetailsComponent', () => {
     const ngss: NGSSStandards = new NGSSStandards();
     ngss.disciplines = ngssObject.disciplines;
     ngss.dciArrangements = ngssObject.dciArrangements;
-    component.ngss = ngss;
-    component.project = new Project(project);
-    component.parentProject = new ParentProject();
-    component.setLicenseInfo();
+    component['ngss'] = ngss;
+    component['project'] = new Project(project);
+    component['parentProject'] = new ParentProject();
+    component['setLicenseInfo']();
     fixture.detectChanges();
   });
 
@@ -121,9 +91,14 @@ describe('LibraryProjectDetailsComponent', () => {
   });
 
   it('should show copied project info', () => {
-    component.project.metadata.authors = [];
-    component.parentProject = parentProject;
-    component.setLicenseInfo();
+    component['project'].metadata.authors = [];
+    component['parentProject'] = new ParentProject({
+      id: 1000,
+      title: 'Photosynthesis',
+      uri: 'http://localhost:8080/project/1000',
+      authors: [{ id: 6, firstName: 'Susie', lastName: 'Derkins', username: 'SusieDerkins' }]
+    });
+    component['setLicenseInfo']();
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.textContent).toContain('is a copy of Photosynthesis');
