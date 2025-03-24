@@ -31,12 +31,12 @@ import { TeacherSummaryDisplayComponent } from './teacher-summary-display.compon
   templateUrl: 'dialog-guidance-teacher-summary-display.component.html'
 })
 export class DialogGuidanceTeacherSummaryDisplayComponent extends TeacherSummaryDisplayComponent {
-  protected ideaCountMap: Map<string, Set<number>> = new Map<string, Set<number>>();
-  protected seeAllIdeas: boolean;
   protected allIdeas: { id: string; text: string; count: number }[] = [];
-  protected mostCommonIdeas: { id: string; text: string; count: number }[] = [];
+  protected ideaCountMap: Map<string, Set<number>> = new Map<string, Set<number>>();
   protected leastCommonIdeas: { id: string; text: string; count: number }[] = [];
+  protected mostCommonIdeas: { id: string; text: string; count: number }[] = [];
   private rubric: CRaterRubric;
+  protected seeAllIdeas: boolean;
 
   constructor(
     protected annotationService: AnnotationService,
@@ -53,27 +53,28 @@ export class DialogGuidanceTeacherSummaryDisplayComponent extends TeacherSummary
     this.rubric = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
     this.getLatestWork().subscribe((componentStates) => {
       this.extractIdeas(componentStates);
-      const sortedIdeas = this.sortIdeas();
-      this.mostCommonIdeas = [...sortedIdeas].splice(0, 3);
-      this.leastCommonIdeas = [...sortedIdeas]
-        .splice(sortedIdeas.length - 3, sortedIdeas.length)
-        .reverse();
       this.allIdeas = this.getAllIdeas();
       if (!this.allIdeas.some((idea) => this.ideaCountMap.get(idea.id)?.size > 0)) {
         this.doRender = false;
+      } else {
+        const sortedIdeas = this.sortIdeas();
+        this.mostCommonIdeas = [...sortedIdeas].splice(0, 3);
+        this.leastCommonIdeas = [...sortedIdeas]
+          .splice(sortedIdeas.length - 3, sortedIdeas.length)
+          .reverse();
       }
     });
   }
 
   private getAllIdeas(): { id: string; text: string; count: number }[] {
-    return this.rubric.getAllIdeas().map((idea) => ({
+    return this.rubric.getIdeas().map((idea) => ({
       id: idea.name,
-      text: this.useIdeaTextOrIdea(idea.name, idea.text),
+      text: this.useIdeaTextOrId(idea.name, idea.text),
       count: this.ideaCountMap.get(idea.name)?.size ?? 0
     }));
   }
 
-  private useIdeaTextOrIdea(id: string, text: string): string {
+  private useIdeaTextOrId(id: string, text: string): string {
     return text ?? 'idea ' + id;
   }
 
@@ -99,7 +100,6 @@ export class DialogGuidanceTeacherSummaryDisplayComponent extends TeacherSummary
   }
 
   private sortIdeas(): { id: string; text: string; count: number }[] {
-    const rubric = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
     return [...this.ideaCountMap.entries()]
       .sort((a, b) => b[1].size - a[1].size)
       .map((mapIterator) => ({
@@ -109,8 +109,8 @@ export class DialogGuidanceTeacherSummaryDisplayComponent extends TeacherSummary
       }));
   }
 
-  private getIdeaText(id: string) {
-    return this.useIdeaTextOrIdea(id, this.rubric.getIdea(id).text);
+  private getIdeaText(id: string): string {
+    return this.useIdeaTextOrId(id, this.rubric.getIdea(id).text);
   }
 
   protected toggleSeeAllIdeas(): void {

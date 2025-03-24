@@ -11,7 +11,7 @@ export class CRaterRubric {
     return this.ideas.find((idea) => idea.name === ideaId);
   }
 
-  getAllIdeas(): CRaterIdea[] {
+  getIdeas(): CRaterIdea[] {
     return this.ideas;
   }
 }
