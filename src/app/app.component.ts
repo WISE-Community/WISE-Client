@@ -23,7 +23,6 @@ export class AppComponent {
   theme: string = '';
   mediaWatcher: Subscription;
   googleAnalyticsId: string = null;
-  googleTagManagerId: string = null;
   hasAnnouncement: boolean = false;
   showDefaultMode: boolean = true;
   showHeaderAndFooter: boolean = true;
@@ -141,10 +140,10 @@ export class AppComponent {
     });
   }
 
-  setGTagManager() {
-    this.googleTagManagerId = this.configService.getGoogleTagManagerId();
-    if (this.googleTagManagerId) {
-      this.activateGtm(window, document, 'script', 'dataLayer', this.googleTagManagerId);
+  private setGTagManager(): void {
+    const googleTagManagerId = this.configService.getGoogleTagManagerId();
+    if (googleTagManagerId) {
+      this.activateGTM(window, document, 'script', 'dataLayer', googleTagManagerId);
     }
     this.googleAnalyticsId = this.configService.getGoogleAnalyticsId();
     if (this.googleAnalyticsId) {
@@ -160,7 +159,7 @@ export class AppComponent {
     }
   }
 
-  activateGtm(w, d, s, l, i) {
+  private activateGTM(w, d, s, l, i): void {
     w[l] = w[l] || [];
     w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
     var f = d.getElementsByTagName(s)[0],
