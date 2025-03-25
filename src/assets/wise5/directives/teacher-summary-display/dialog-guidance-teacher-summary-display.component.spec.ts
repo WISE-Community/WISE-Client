@@ -1,22 +1,21 @@
-import { ComponentFixture } from '@angular/core/testing';
-import { DialogGuidanceTeacherSummaryDisplayComponent } from './dialog-guidance-teacher-summary-display.component';
-import { TestBed } from '@angular/core/testing';
-import { MockProviders } from 'ng-mocks';
-import { CRaterService } from '../../services/cRaterService';
-import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';
-import { CRaterIdea } from '../../components/common/cRater/CRaterIdea';
-import { SummaryService } from '../../components/summary/summaryService';
-import { Observable, of } from 'rxjs';
-import { ComponentState } from '../../../../app/domain/componentState';
 import { AnnotationService } from '../../services/annotationService';
+import { ComponentFixture } from '@angular/core/testing';
+import { ComponentState } from '../../../../app/domain/componentState';
 import { ConfigService } from '../../services/configService';
+import { CRaterIdea } from '../../components/common/cRater/CRaterIdea';
+import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';
+import { CRaterService } from '../../services/cRaterService';
+import { DialogGuidanceTeacherSummaryDisplayComponent } from './dialog-guidance-teacher-summary-display.component';
+import { MockProviders } from 'ng-mocks';
+import { Observable, of } from 'rxjs';
+import { SummaryService } from '../../components/summary/summaryService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { Config } from '../../../../app/domain/config';
+import { TestBed } from '@angular/core/testing';
 
 let component: DialogGuidanceTeacherSummaryDisplayComponent;
 let fixture: ComponentFixture<DialogGuidanceTeacherSummaryDisplayComponent>;
-fdescribe('DialogGuidanceTeacherSummaryDisplayComponent', () => {
+describe('DialogGuidanceTeacherSummaryDisplayComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DialogGuidanceTeacherSummaryDisplayComponent],
