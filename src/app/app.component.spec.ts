@@ -34,7 +34,7 @@ export class MockConfigService {
     return this.config$.getValue().googleAnalyticsId;
   }
 
-  getGoogleTagMangaerId(): string {
+  getGoogleTagManagerId(): string {
     return this.config$.getValue().googleTagManagerId;
   }
 }
