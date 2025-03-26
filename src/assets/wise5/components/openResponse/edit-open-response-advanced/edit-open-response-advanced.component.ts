@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentContent } from '../../../common/ComponentContent';
+import { CRaterIdea } from '../../common/cRater/CRaterIdea';
 import { CRaterService } from '../../../services/cRaterService';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { NotebookService } from '../../../services/notebookService';
@@ -24,9 +25,10 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       feedback: [$localize`Default feedback`]
     }
   ];
-  isVerifyingCRaterItemId: boolean = false;
+  isVerifyingCRaterItemId: boolean;
   nodeIds: string[] = [];
-  useCustomCompletionCriteria: boolean = false;
+  useCustomCompletionCriteria: boolean;
+  ideaDescriptions: CRaterIdea[] = [];
 
   constructor(
     protected cRaterService: CRaterService,
@@ -47,14 +49,18 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
 
   enableCRaterClicked(): void {
     if (this.componentContent.enableCRater) {
-      if (this.componentContent.cRater == null) {
-        this.componentContent.cRater = this.createCRaterObject();
-      }
+      this.createCRaterIfNull();
       this.setShowSubmitButtonValue(true);
     } else {
       this.setShowSubmitButtonValue(false);
     }
     this.componentChanged();
+  }
+
+  private createCRaterIfNull() {
+    if (this.componentContent.cRater == null) {
+      this.componentContent.cRater = this.createCRaterObject();
+    }
   }
 
   createCRaterObject() {
@@ -70,7 +76,11 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
         rules: this.initialFeedbackRules
       },
       enableMultipleAttemptScoringRules: false,
-      multipleAttemptScoringRules: []
+      multipleAttemptScoringRules: [],
+      enableIdeaDescriptions: false,
+      rubric: {
+        ideas: []
+      }
     };
   }
 
@@ -259,6 +269,14 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       this.componentContent.completionCriteria.criteria.splice(index, 1);
       this.componentChanged();
     }
+  }
+
+  enableIdeaDescriptionsClicked(): void {
+    this.createCRaterIfNull();
+    if (!this.componentContent.cRater.rubric) {
+      this.componentContent.cRater.rubric = { ideas: [] };
+    }
+    this.componentChanged();
   }
 
   getComponents(nodeId: string): ComponentContent[] {

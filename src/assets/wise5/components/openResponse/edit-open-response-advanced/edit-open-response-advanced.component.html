@@ -580,6 +580,23 @@
       }
     }
   </div>
+  <div class="section-container">
+    <mat-checkbox
+      color="primary"
+      class="checkbox"
+      [(ngModel)]="componentContent.cRater.enableIdeaDescriptions"
+      (click)="enableIdeaDescriptionsClicked($event)"
+      i18n
+    >
+      Enable Student-Friendly Idea Descriptions
+    </mat-checkbox>
+    @if (componentContent.cRater.enableIdeaDescriptions) {
+      <edit-crater-idea-descriptions
+        [ideaDescriptions]="componentContent.cRater.rubric.ideas"
+        [enableAutoscrolling]="false"
+      />
+    }
+  </div>
 }
 @if (isNotebookEnabled) {
   <edit-component-add-to-notebook-button [componentContent]="componentContent">
