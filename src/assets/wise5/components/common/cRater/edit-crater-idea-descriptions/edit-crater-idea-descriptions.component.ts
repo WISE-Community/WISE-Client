@@ -66,7 +66,7 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
   }
 
   private createNewIdea(): CRaterIdea {
-    const idea = new CRaterIdea('', null);
+    const idea = new CRaterIdea('');
     idea.text = '';
     return idea;
   }
