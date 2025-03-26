@@ -7,6 +7,10 @@ import { MockProviders } from 'ng-mocks';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { Node } from '../../../../common/Node';
 import { Observable, Subject } from 'rxjs';
+import { AnnotationService } from '../../../../services/annotationService';
+import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
+import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
+import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 
 let classroomStatusService: ClassroomStatusService;
 let component: NodeGradingComponent;
@@ -37,9 +41,9 @@ class MockDataService {
 describe('NodeGradingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NodeGradingComponent],
+      imports: [NodeGradingComponent, ClassroomMonitorTestingModule],
       providers: [
-        MockProviders(ClassroomStatusService, TeacherProjectService),
+        MockProviders(ClassroomStatusService, TeacherProjectService, WorkgroupService),
         provideRouter([]),
         { provide: TeacherDataService, useClass: MockDataService }
       ]
@@ -70,9 +74,8 @@ describe('NodeGradingComponent', () => {
 function periodChanged_RecalculateNodeCompletion() {
   describe('period changed', () => {
     it('recalculates node completion', () => {
-      expect(nodeCompletionSpy).toHaveBeenCalledTimes(1);
       dataService.setCurrentPeriod({ periodId: 1 });
-      expect(nodeCompletionSpy).toHaveBeenCalledTimes(2);
+      expect(nodeCompletionSpy).toHaveBeenCalledTimes(1);
     });
   });
 }

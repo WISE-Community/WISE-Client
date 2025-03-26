@@ -11,12 +11,23 @@ import { SelectComponentComponent } from '../select-component/select-component.c
 import { Node } from '../../../../common/Node';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
+import { ComponentContent } from '../../../../common/ComponentContent';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatIconModule, RouterModule, SelectComponentComponent],
+  imports: [
+    CommonModule,
+    ComponentGradingViewComponent,
+    FlexLayoutModule,
+    MatIconModule,
+    RouterModule,
+    SelectComponentComponent
+  ],
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent {
+  protected component: ComponentContent;
+  @Input() componentId: string;
   protected components: any[];
   protected hasWork: boolean;
   protected node: Node;
@@ -40,29 +51,26 @@ export class NodeGradingComponent {
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(() => this.setPeriod())
     );
-    setTimeout(() => {
-      // allow the current change detection cycle to complete before triggering the navigation
-      // to ensure url updates correctly
-      this.setComponent(this.node.components[0]);
-    }, 0);
-  }
-
-  ngOnChanges(): void {
-    this.setNode();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  private setNode(): void {
+  ngOnChanges(): void {
+    if (this.nodeId && this.componentId) {
+      this.setFields();
+    }
+  }
+
+  private setFields(): void {
     this.hasWork = this.projectService.nodeHasWork(this.nodeId);
     this.node = this.projectService.getNode(this.nodeId);
     this.components = this.projectService
       .getComponents(this.nodeId)
       .filter((component) => this.projectService.componentHasWork(component));
+    this.component = this.node.getComponent(this.componentId);
     this.numRubrics = this.node.getNumRubrics();
-    this.dataService.setCurrentNodeByNodeId(this.nodeId);
     this.setPeriod();
   }
 
@@ -93,8 +101,8 @@ export class NodeGradingComponent {
     });
   }
 
-  protected setComponent(component: any): void {
-    this.router.navigate(['component', component.id], {
+  protected navigateToComponent(component: ComponentContent): void {
+    this.router.navigate(['..', component.id], {
       relativeTo: this.route
     });
   }

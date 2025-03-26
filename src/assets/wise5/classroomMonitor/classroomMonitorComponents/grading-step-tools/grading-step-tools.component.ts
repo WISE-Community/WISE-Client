@@ -14,47 +14,71 @@ import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { GradingNodeService } from '../../../services/gradingNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ConfigService } from '../../../services/configService';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatTooltipModule,
-        NodeIconComponent
-    ],
-    selector: 'grading-step-tools',
-    templateUrl: '../../../common/stepTools/step-tools.component.html',
-    styleUrl: '../../../common/stepTools/step-tools.component.scss'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    NodeIconComponent
+  ],
+  selector: 'grading-step-tools',
+  templateUrl: '../../../common/stepTools/step-tools.component.html',
+  styleUrl: '../../../common/stepTools/step-tools.component.scss'
 })
 export class GradingStepToolsComponent extends StepToolsComponent {
   constructor(
-    private configService: ConfigService,
     protected dataService: TeacherDataService,
     protected dir: Directionality,
     protected nodeService: GradingNodeService,
     protected projectService: TeacherProjectService,
+    private route: ActivatedRoute,
     private router: Router
   ) {
     super(dataService, dir, nodeService, projectService);
   }
 
-  protected updateModel(): void {
-    super.updateModel();
-    this.router.navigate([
-      '/teacher/manage/unit',
-      this.configService.getRunId(),
-      this.projectService.isApplicationNode(this.nodeId) ? 'node' : 'group',
-      this.nodeId
-    ]);
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.dataService.setCurrentNodeByNodeId(this.getNodeId());
+  }
+
+  protected getNodeId(): string {
+    return this.route.firstChild.snapshot.params['nodeId'];
+  }
+
+  protected nodeChanged(): void {
+    this.navigateToNode(this.nodeId);
+  }
+
+  protected goToPrevNode(): void {
+    super.goToPrevNode();
+    this.navigateToNode(this.nodeId);
+  }
+
+  protected goToNextNode(): Promise<void> {
+    return super.goToNextNode().then(() => {
+      this.navigateToNode(this.nodeId);
+    });
+  }
+
+  private navigateToNode(nodeId: string): void {
+    this.router
+      .navigate(['node', nodeId], {
+        relativeTo: this.route
+      })
+      .then(() => {
+        this.dataService.setCurrentNodeByNodeId(nodeId);
+        this.updateModel();
+      });
   }
 
   protected calculateNodeIds(): void {

@@ -6,13 +6,13 @@ import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { isMatchingPeriods } from '../../../common/period/period';
 import { AnnotationService } from '../../../services/annotationService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { Node } from '../../../common/Node';
 import { ComponentClassResponsesComponent } from '../component-class-responses/component-class-responses.component';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
 import { ComponentAverageScoreComponent } from '../component-average-score/component-average-score.component';
+import { ComponentContent } from '../../../common/ComponentContent';
 
 @Component({
   imports: [
@@ -23,16 +23,16 @@ import { ComponentAverageScoreComponent } from '../component-average-score/compo
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
   ],
+  selector: 'component-grading-view',
   templateUrl: './component-grading-view.component.html'
 })
 export class ComponentGradingViewComponent {
-  protected component: any;
-  @Input() componentId: string;
+  @Input() component: ComponentContent;
   protected hasCorrectAnswer: boolean;
   protected hasScoresSummary: boolean;
   protected hasScoreAnnotation: boolean;
   protected hasStudentWork: boolean;
-  protected node: Node;
+  @Input() node: Node;
   protected periodId: number;
   protected source: 'allPeriods' | 'period';
   private subscriptions: Subscription = new Subscription();
@@ -41,11 +41,8 @@ export class ComponentGradingViewComponent {
     private annotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
     private dataService: TeacherDataService,
-    private projectService: TeacherProjectService,
     private summaryService: SummaryService
-  ) {
-    this.node = this.projectService.getNode(this.dataService.getCurrentNode().id);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -58,9 +55,11 @@ export class ComponentGradingViewComponent {
   }
 
   ngOnChanges(): void {
-    this.dataService.retrieveStudentDataForNode(this.node).subscribe(() => this.setComponent());
-    this.periodId = this.dataService.getCurrentPeriodId();
-    this.setSource();
+    if (this.node && this.component) {
+      this.dataService.retrieveStudentDataForNode(this.node).subscribe(() => this.setComponent());
+      this.periodId = this.dataService.getCurrentPeriodId();
+      this.setSource();
+    }
   }
 
   ngOnDestroy(): void {
@@ -68,7 +67,6 @@ export class ComponentGradingViewComponent {
   }
 
   private setComponent(): void {
-    this.component = this.node.getComponent(this.componentId);
     this.hasCorrectAnswer = this.componentHasCorrectAnswer(this.component);
     this.hasScoresSummary = this.summaryService.isScoresSummaryAvailableForComponentType(
       this.component.type

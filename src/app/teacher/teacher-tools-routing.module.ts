@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
 import { TeacherToolsResolver } from './teacher-tools.resolver';
@@ -17,7 +17,7 @@ import { ExportEventsComponent } from '../../assets/wise5/classroomMonitor/dataE
 import { ExportOneWorkgroupPerRowComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-one-workgroup-per-row/export-one-workgroup-per-row.component';
 import { ExportStudentWorkComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-student-work/export-student-work.component';
 import { NodeGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component';
-import { ComponentGradingViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading-view/component-grading-view.component';
+import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 
 const routes: Routes = [
   {
@@ -38,8 +38,19 @@ const routes: Routes = [
       { path: 'group/:nodeId', component: NodeProgressViewComponent },
       {
         path: 'node/:nodeId',
-        component: NodeGradingComponent,
-        children: [{ path: 'component/:componentId', component: ComponentGradingViewComponent }]
+        pathMatch: 'full',
+        redirectTo: ({ params }) => {
+          const nodeId = params['nodeId'];
+          const projectService = inject(TeacherProjectService);
+          const components = projectService
+            .getComponents(nodeId)
+            .filter((component) => projectService.componentHasWork(component));
+          return `node/${nodeId}/component/${components[0].id}`;
+        }
+      },
+      {
+        path: 'node/:nodeId/component/:componentId',
+        component: NodeGradingComponent
       },
       { path: 'notebook', component: NotebookGradingComponent },
       {

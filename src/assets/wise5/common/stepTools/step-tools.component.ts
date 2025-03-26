@@ -16,22 +16,22 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatTooltipModule,
-        NodeIconComponent
-    ],
-    selector: 'step-tools',
-    styleUrl: 'step-tools.component.scss',
-    templateUrl: 'step-tools.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    NodeIconComponent
+  ],
+  selector: 'step-tools',
+  styleUrl: 'step-tools.component.scss',
+  templateUrl: 'step-tools.component.html'
 })
 export class StepToolsComponent {
   protected icons: any;
@@ -82,7 +82,7 @@ export class StepToolsComponent {
   }
 
   protected updateModel(): void {
-    this.nodeId = this.dataService.getCurrentNodeId();
+    this.nodeId = this.getNodeId();
     if (this.nodeId == null) {
       this.prevId = null;
       this.nextId = null;
@@ -94,6 +94,10 @@ export class StepToolsComponent {
         });
       }
     }
+  }
+
+  protected getNodeId(): string {
+    return this.dataService.getCurrentNodeId();
   }
 
   protected getPrevNodeId(): string {
@@ -117,8 +121,8 @@ export class StepToolsComponent {
     this.nodeId = this.dataService.getCurrentNodeId();
   }
 
-  protected goToNextNode(): void {
-    this.nodeService.goToNextNode().then((nodeId: string) => {
+  protected goToNextNode(): Promise<void> {
+    return this.nodeService.goToNextNode().then((nodeId: string) => {
       this.nodeId = nodeId;
     });
   }

@@ -30,7 +30,11 @@
   </div>
   <div>
     <span i18n>Question: </span>
-    <select-component [components]="components" (componentChangedEvent)="setComponent($event)" />
+    <select-component
+      [components]="components"
+      [selectedComponent]="component"
+      (componentChangedEvent)="navigateToComponent($event)"
+    />
   </div>
-  <router-outlet></router-outlet>
+  <component-grading-view [component]="component" [node]="node" />
 </div>

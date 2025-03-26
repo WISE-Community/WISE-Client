@@ -3,6 +3,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
+import { ComponentContent } from '../../../../common/ComponentContent';
 
 @Component({
   imports: [CommonModule, FormsModule, MatOptionModule, MatSelectModule],
@@ -11,14 +12,10 @@ import { MatOptionModule } from '@angular/material/core';
 })
 export class SelectComponentComponent {
   @Input() components: any[];
-  protected selectedComponent: any;
+  @Input() selectedComponent: ComponentContent;
   @Output() componentChangedEvent: EventEmitter<any> = new EventEmitter();
 
-  ngOnChanges(): void {
-    this.selectComponent(this.components[0]);
-  }
-
-  protected selectComponent(component: any): void {
+  protected selectComponent(component: ComponentContent): void {
     this.selectedComponent = component;
     this.componentChangedEvent.emit(component);
   }
