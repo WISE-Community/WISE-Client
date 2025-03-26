@@ -1,7 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UtilService } from './services/util.service';
@@ -9,12 +8,13 @@ import { Announcement } from './domain/announcement';
 import { ConfigService } from './services/config.service';
 import { Config } from './domain/config';
 import { environment } from '../environments/environment';
+import { provideRouter } from '@angular/router';
 
 export class MockConfigService {
   private config$: BehaviorSubject<Config> = new BehaviorSubject<Config>(null);
 
   getAnnouncement(): Observable<Announcement> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       const announcement: Announcement = new Announcement();
       announcement.visible = true;
       observer.next(announcement);
@@ -25,6 +25,7 @@ export class MockConfigService {
   getConfig(): Observable<Config> {
     const config: Config = new Config();
     config.googleAnalyticsId = 'UA-XXXXXX-1';
+    config.googleTagManagerId = 'GTM-XXXXXXXX';
     this.config$.next(config);
     return this.config$;
   }
@@ -32,13 +33,16 @@ export class MockConfigService {
   getGoogleAnalyticsId(): string {
     return this.config$.getValue().googleAnalyticsId;
   }
+
+  getGoogleTagManagerId(): string {
+    return this.config$.getValue().googleTagManagerId;
+  }
 }
 
 export class MockUtilService {
   getMobileMenuState(): Observable<boolean> {
-    return Observable.create((observer) => {
-      const state: boolean = false;
-      observer.next(state);
+    return new Observable((observer) => {
+      observer.next(false);
       observer.complete();
     });
   }
@@ -50,7 +54,7 @@ export class MockObservableMedia {
   }
 
   asObservable(): Observable<MediaChange> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next(new MediaChange());
       observer.complete();
     });
@@ -64,13 +68,13 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [AppComponent],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
         { provide: UtilService, useClass: MockUtilService },
-        { provide: MediaObserver, useClass: MockObservableMedia }
+        { provide: MediaObserver, useClass: MockObservableMedia },
+        provideRouter([])
       ],
-      declarations: [AppComponent],
-      imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(AppComponent);
@@ -98,5 +102,12 @@ describe('AppComponent', () => {
 
   it(`should set Google Analytics tracking code`, () => {
     expect(component.googleAnalyticsId).toEqual('UA-XXXXXX-1');
+  });
+
+  it(`should set Google Tag manager tracking script`, () => {
+    const scriptElement = document.querySelector(
+      'head > script[src="https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXXX"]'
+    );
+    expect(scriptElement).toBeTruthy();
   });
 });
