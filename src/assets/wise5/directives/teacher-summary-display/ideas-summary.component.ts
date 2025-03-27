@@ -15,7 +15,7 @@ import { TeacherSummaryDisplayComponent } from './teacher-summary-display.compon
 
 @Component({
   imports: [CommonModule, MatCardModule, MatIconModule],
-  selector: 'dialog-guidance-teacher-summary-display',
+  selector: 'ideas-summary',
   styles: `
     h3 {
       margin-bottom: 8px;
@@ -29,9 +29,9 @@ import { TeacherSummaryDisplayComponent } from './teacher-summary-display.compon
       vertical-align: middle;
     }
   `,
-  templateUrl: 'dialog-guidance-teacher-summary-display.component.html'
+  templateUrl: 'ideas-summary.component.html'
 })
-export class DialogGuidanceTeacherSummaryDisplayComponent extends TeacherSummaryDisplayComponent {
+export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   protected allIdeas: { id: string; text: string; count: number }[] = [];
   protected ideaCountMap: Map<string, Set<number>> = new Map<string, Set<number>>();
   protected leastCommonIdeas: { id: string; text: string; count: number }[] = [];

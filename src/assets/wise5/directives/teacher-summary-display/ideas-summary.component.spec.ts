@@ -5,7 +5,7 @@ import { ConfigService } from '../../services/configService';
 import { CRaterIdea } from '../../components/common/cRater/CRaterIdea';
 import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';
 import { CRaterService } from '../../services/cRaterService';
-import { DialogGuidanceTeacherSummaryDisplayComponent } from './dialog-guidance-teacher-summary-display.component';
+import { IdeasSummaryComponent } from './ideas-summary.component';
 import { MockProviders } from 'ng-mocks';
 import { Observable, of } from 'rxjs';
 import { SummaryService } from '../../components/summary/summaryService';
@@ -13,12 +13,12 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TestBed } from '@angular/core/testing';
 
-let component: DialogGuidanceTeacherSummaryDisplayComponent;
-let fixture: ComponentFixture<DialogGuidanceTeacherSummaryDisplayComponent>;
-describe('DialogGuidanceTeacherSummaryDisplayComponent', () => {
+let component: IdeasSummaryComponent;
+let fixture: ComponentFixture<IdeasSummaryComponent>;
+describe('IdeasSummaryDisplayComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogGuidanceTeacherSummaryDisplayComponent],
+      imports: [IdeasSummaryComponent],
       providers: [
         MockProviders(
           AnnotationService,
@@ -31,10 +31,9 @@ describe('DialogGuidanceTeacherSummaryDisplayComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DialogGuidanceTeacherSummaryDisplayComponent);
+    fixture = TestBed.createComponent(IdeasSummaryComponent);
     component = fixture.componentInstance;
     component.doRender = true;
-    // Set up component?
   });
   beforeEach(() => {
     spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(false);
