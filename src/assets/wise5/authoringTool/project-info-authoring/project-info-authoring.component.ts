@@ -6,10 +6,10 @@ import { Subject, debounceTime } from 'rxjs';
 import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 
 @Component({
-    selector: 'project-info-authoring',
-    templateUrl: './project-info-authoring.component.html',
-    styleUrls: ['./project-info-authoring.component.scss'],
-    standalone: false
+  selector: 'project-info-authoring',
+  templateUrl: './project-info-authoring.component.html',
+  styleUrls: ['./project-info-authoring.component.scss'],
+  standalone: false
 })
 export class ProjectInfoAuthoringComponent {
   isEditingProjectIcon: boolean = false;
@@ -30,6 +30,9 @@ export class ProjectInfoAuthoringComponent {
 
   ngOnInit(): void {
     this.metadata = this.projectService.getProjectMetadata();
+    if (this.metadata.resources == null) {
+      this.metadata.resources = [];
+    }
     this.metadataAuthoring = JSON.parse(
       this.configService.getConfigParam('projectMetadataSettings')
     );
