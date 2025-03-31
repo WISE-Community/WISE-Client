@@ -90,6 +90,17 @@
           }
         </p>
       }
+      @if (project.metadata.resources?.length > 0) {
+        <p>
+          <strong i18n>Resources:</strong>&nbsp;
+          @for (resource of project.metadata.resources; track resource.name; let last = $last) {
+            <a href="{{ resource.url }}" target="_blank" matTooltip="{{ resource.name }}">{{
+              resource.name
+            }}</a>
+            {{ last ? '' : ' | ' }}
+          }
+        </p>
+      }
       <unit-tags [tags]="project.tags" />
     </div>
     @if (project.metadata.discourseCategoryURL) {

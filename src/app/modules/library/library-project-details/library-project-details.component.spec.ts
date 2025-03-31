@@ -34,7 +34,8 @@ describe('LibraryProjectDetailsComponent', () => {
       authors: [
         { id: 10, firstName: 'Spaceman', lastName: 'Spiff', username: 'SpacemanSpiff' },
         { id: 12, firstName: 'Captain', lastName: 'Napalm', username: 'CaptainNapalm' }
-      ]
+      ],
+      resources: [{ name: 'Resource 1', uri: 'http://example.com/resource1' }]
     };
     const ngssObject: any = {
       disciplines: [
@@ -88,6 +89,11 @@ describe('LibraryProjectDetailsComponent', () => {
   it('should show project license and authors', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.textContent).toContain('by Spaceman Spiff, Captain Napalm');
+  });
+
+  it('should show project resources', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.textContent).toContain('Resource 1');
   });
 
   it('should show copied project info', () => {
