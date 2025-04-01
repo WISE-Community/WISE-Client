@@ -1,13 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatOptionModule } from '@angular/material/core';
 import { ComponentContent } from '../../../../common/ComponentContent';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-  imports: [CommonModule, FormsModule, MatOptionModule, MatSelectModule],
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
   selector: 'select-component',
+  standalone: true,
+  styleUrls: ['./select-component.component.scss'],
   templateUrl: './select-component.component.html'
 })
 export class SelectComponentComponent {

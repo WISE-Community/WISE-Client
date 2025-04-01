@@ -1,40 +1,37 @@
 <div class="view-content--with-sidemenu">
-  <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex.lt-md="100">
-    <div class="accent-1" fxLayout="row" fxLayoutAlign="center center">
-      <h2 class="content-head__item" fxLayout.lt-md="column" fxLayoutGap.gt-sm="4px">
-        <span>{{ nodeCompletionPercent }}%</span>
-        <span class="content-head-label" i18n>Step Completion</span>
-      </h2>
-      @if (hasWork) {
-        <h2 class="content-head__item" fxLayout.lt-md="column" fxLayoutGap.gt-sm="4px">
-          @if (nodeAverageScore != null) {
-            <span>{{ nodeAverageScore | number: '1.1' }}</span>
-          } @else {
-            <span i18n>N/A</span>
-          }
-          <span class="content-head-label" i18n>Step Mean Score</span>
+  <div class="l-constrained grading node-grading">
+    <div class="content-head flex flex-row flex-wrap items-center justify-center lt-md:flex-100">
+      <div class="accent-1 flex flex-row items-center justify-center">
+        <h2 class="content-head__item">
+          {{ nodeCompletionPercent }}% <span class="content-head-label" i18n>Step Completion</span>
         </h2>
-      }
-    </div>
-    <div fxFlex></div>
-    <button mat-stroked-button (click)="showRubric()" class="info">
-      <div fxLayoutAlign="center center" fxLayoutGap="4px">
-        <mat-icon class="info">info_outline</mat-icon>
-        @if (numRubrics == 0) {
-          <span i18n>Step Info</span>
-        } @else {
-          <span i18n>Info + Tips ({{ numRubrics }})</span>
+        @if (hasWork && nodeAverageScore != null) {
+          <h2 class="content-head__item">
+            {{ nodeAverageScore }}/{{ nodeMaxScore ?? '0' }}
+            <span class="content-head-label" i18n>Mean Step Score</span>
+          </h2>
         }
       </div>
-    </button>
+      <div class="flex-1"></div>
+      <button mat-stroked-button (click)="showRubric()" class="info">
+        <div class="flex items-center justify-center space-x-1">
+          <mat-icon class="info">info_outline</mat-icon>
+          @if (numRubrics == 0) {
+            <span i18n>Step Info</span>
+          } @else {
+            <span i18n>Info + Tips ({{ numRubrics }})</span>
+          }
+        </div>
+      </button>
+    </div>
+    <div class="mat-elevation-z1 list-item component-select">
+      <span i18n>Question: </span>
+      <select-component
+        [components]="components"
+        [selectedComponent]="component"
+        (componentChangedEvent)="navigateToComponent($event)"
+      />
+    </div>
+    <component-grading-view [component]="component" [node]="node" />
   </div>
-  <div>
-    <span i18n>Question: </span>
-    <select-component
-      [components]="components"
-      [selectedComponent]="component"
-      (componentChangedEvent)="navigateToComponent($event)"
-    />
-  </div>
-  <component-grading-view [component]="component" [node]="node" />
 </div>

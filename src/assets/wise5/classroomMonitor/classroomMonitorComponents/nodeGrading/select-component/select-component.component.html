@@ -1,8 +1,10 @@
-<mat-select [(ngModel)]="selectedComponent" (ngModelChange)="selectComponent(selectedComponent)">
-  @for (component of components; track component.id; let i = $index) {
-    <mat-option [value]="component">
-      <span>{{ i + 1 }}. {{ component.type }}</span>
-    </mat-option>
-  }
-</mat-select>
+<mat-form-field class="select-component form-field-no-hint">
+  <mat-select [(ngModel)]="selectedComponent" (ngModelChange)="selectComponent(selectedComponent)">
+    @for (component of components; track component.id; let i = $index) {
+      <mat-option [value]="component">
+        <span>{{ i + 1 }}. {{ component.type }}</span>
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
 <span i18n> of {{ components.length }}</span>

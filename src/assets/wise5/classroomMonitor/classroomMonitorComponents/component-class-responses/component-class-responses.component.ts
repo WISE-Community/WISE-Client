@@ -29,6 +29,22 @@ import { AbstractClassResponsesComponent } from '../AbstractClassResponsesCompon
     WorkgroupSelectAutocompleteComponent
   ],
   selector: 'component-class-responses',
+  styles: [
+    `
+      .user-list {
+        padding-top: 0;
+      }
+
+      .table--list__thead__link {
+        padding: 0;
+      }
+
+      .mdc-list-item.user-list-controls {
+        height: auto;
+        padding: 8px 16px;
+      }
+    `
+  ],
   templateUrl: './component-class-responses.component.html'
 })
 export class ComponentClassResponsesComponent extends AbstractClassResponsesComponent {

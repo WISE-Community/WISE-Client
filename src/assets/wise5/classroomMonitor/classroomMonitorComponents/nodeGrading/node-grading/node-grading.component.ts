@@ -13,15 +13,34 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
 import { ComponentContent } from '../../../../common/ComponentContent';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   imports: [
     CommonModule,
     ComponentGradingViewComponent,
     FlexLayoutModule,
+    MatButtonModule,
     MatIconModule,
     RouterModule,
     SelectComponentComponent
+  ],
+  selector: 'node-grading',
+  standalone: true,
+  styles: [
+    `
+      .content-head-label {
+        font-size: 50%;
+      }
+
+      .component-select {
+        padding: 6px 16px;
+      }
+
+      .list-item {
+        display: block;
+      }
+    `
   ],
   templateUrl: './node-grading.component.html'
 })
@@ -33,6 +52,7 @@ export class NodeGradingComponent {
   protected node: Node;
   protected nodeAverageScore: number;
   protected nodeCompletionPercent: number;
+  protected nodeMaxScore: number;
   @Input() nodeId: string;
   protected numRubrics: number;
   private periodId: number;
@@ -66,6 +86,15 @@ export class NodeGradingComponent {
   private setFields(): void {
     this.hasWork = this.projectService.nodeHasWork(this.nodeId);
     this.node = this.projectService.getNode(this.nodeId);
+    this.nodeAverageScore = this.classroomStatusService.getNodeAverageScore(
+      this.nodeId,
+      this.dataService.getCurrentPeriodId()
+    );
+    this.nodeCompletionPercent = this.classroomStatusService.getNodeCompletion(
+      this.nodeId,
+      this.dataService.getCurrentPeriodId()
+    ).completionPct;
+    this.nodeMaxScore = this.projectService.getMaxScoreForNode(this.nodeId);
     this.components = this.projectService
       .getComponents(this.nodeId)
       .filter((component) => this.projectService.componentHasWork(component));

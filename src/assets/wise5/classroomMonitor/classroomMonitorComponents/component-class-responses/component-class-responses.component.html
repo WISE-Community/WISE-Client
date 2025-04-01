@@ -1,14 +1,8 @@
 <mat-list class="user-list">
   <mat-list-item class="mat-elevation-z1 list-item user-list-controls">
-    <div
-      fxFlex="100"
-      fxLayout="column"
-      fxLayout.gt-sm="row"
-      fxLayoutAlign="center center"
-      fxLayoutGap.lt-md="8px"
-    >
-      <workgroup-select-autocomplete />
-      <span fxFlex fxHide fxShow.gt-sm></span>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-2">
+      <workgroup-select-autocomplete class="w-full" />
+      <span class="flex-1 hidden sm:flex"></span>
       <button
         mat-button
         aria-label="Expand all teams"
@@ -32,15 +26,15 @@
     </div>
   </mat-list-item>
   <mat-list-item class="table--list__thead table--list__thead__th mat-elevation-z1">
-    <div class="table--list__thead__tr dark-theme" fxLayout="row" fxFlex>
+    <div class="table--list__thead__tr dark-theme flex flex-row flex-1">
       <button
         mat-button
-        class="table--list__thead__link"
+        class="table--list__thead__link flex-[50] !justify-start"
         (click)="sortWorkgroups('workgroupId')"
         aria-label="Sort by team"
         i18n-aria-label
       >
-        <span i18n fxLayout="row" fxLayoutAlign="start center">Team</span>
+        <span i18n>Team</span>
         @if (sortBy === 'workgroupId' || sortBy === '-workgroupId') {
           <mat-icon
             class="table--list__thead__sort"
@@ -52,10 +46,7 @@
       </button>
       <button
         mat-button
-        class="table--list__thead__link"
-        fxFlex="30"
-        fxLayout="row"
-        fxLayoutAlign="center center"
+        class="table--list__thead__link flex-[30] flex flex-row items-center justify-center"
         (click)="sortWorkgroups('completionStatus')"
         aria-label="Sorty by completion"
         i18n-aria-label
@@ -72,10 +63,7 @@
       </button>
       <button
         mat-button
-        class="table--list__thead__link"
-        fxFlex="20"
-        fxLayout="row"
-        fxLayoutAlign="center center"
+        class="table--list__thead__link flex-[20] flex flex-row items-center justify-center"
         (click)="sortWorkgroups('score')"
         aria-label="Sort by score"
         i18n-aria-label
