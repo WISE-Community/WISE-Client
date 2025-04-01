@@ -1,6 +1,6 @@
 import { AnnotationService } from '../../services/annotationService';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComponentState } from '../../../../app/domain/componentState';
 import { ConfigService } from '../../services/configService';
 import { CRaterIdea } from '../../components/common/cRater/CRaterIdea';
@@ -38,6 +38,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   protected mostCommonIdeas: { id: string; text: string; count: number }[] = [];
   private rubric: CRaterRubric;
   protected seeAllIdeas: boolean;
+  @Input() componentType: string;
 
   constructor(
     protected annotationService: AnnotationService,
@@ -51,7 +52,11 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   }
 
   ngOnInit(): void {
-    this.rubric = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
+    this.rubric = this.cRaterService.getCRaterRubric(
+      this.nodeId,
+      this.componentId,
+      this.componentType
+    );
     this.getLatestWork().subscribe((componentStates) => {
       this.extractIdeas(componentStates);
       this.allIdeas = this.getAllIdeas();
