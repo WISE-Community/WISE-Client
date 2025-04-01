@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
 
 class UnitResource {
   name: string;
@@ -38,9 +39,23 @@ class UnitResource {
   templateUrl: './edit-unit-resources.component.html'
 })
 export class EditUnitResourcesComponent {
+  protected inputChanged: Subject<string> = new Subject<string>();
   @Input() resources: UnitResource[] = [];
+  private subscriptions: Subscription = new Subscription();
 
   constructor(private projectService: TeacherProjectService) {}
+
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.inputChanged
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe(() => this.projectService.saveProject())
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 
   protected addNewResource(addToTop: boolean): void {
     const location = addToTop ? 0 : this.resources.length;
