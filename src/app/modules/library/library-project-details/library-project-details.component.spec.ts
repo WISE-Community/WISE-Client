@@ -6,14 +6,16 @@ import { Project } from '../../../domain/project';
 import { NGSSStandards } from '../ngssStandards';
 import { ConfigService } from '../../../services/config.service';
 import { ParentProject } from '../../../domain/parentProject';
-import { MockProviders } from 'ng-mocks';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { By } from '@angular/platform-browser';
+import { LibraryProjectMenuComponent } from '../library-project-menu/library-project-menu.component';
 
+let component: LibraryProjectDetailsComponent;
+let fixture: ComponentFixture<LibraryProjectDetailsComponent>;
 describe('LibraryProjectDetailsComponent', () => {
-  let component: LibraryProjectDetailsComponent;
-  let fixture: ComponentFixture<LibraryProjectDetailsComponent>;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [MockComponent(LibraryProjectMenuComponent)],
       imports: [LibraryProjectDetailsComponent],
       providers: [
         MockProviders(ConfigService, MatDialog, MatDialogRef, UserService),
@@ -30,6 +32,7 @@ describe('LibraryProjectDetailsComponent', () => {
       grades: ['7'],
       title: 'Photosynthesis & Cellular Respiration',
       summary: 'A really great unit.',
+      unitType: 'Classroom',
       totalTime: '6-7 hours',
       authors: [
         { id: 10, firstName: 'Spaceman', lastName: 'Spiff', username: 'SpacemanSpiff' },
@@ -109,4 +112,33 @@ describe('LibraryProjectDetailsComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.textContent).toContain('is a copy of Photosynthesis');
   });
+
+  it('should show use with class and preview buttons', () => {
+    component['isTeacher'] = true;
+    fixture.detectChanges();
+    expect(getButtonWithText('Use with Class')).toBeTruthy();
+    expect(getButtonWithText('Preview')).toBeTruthy();
+  });
+
+  isResourceUnitType_HideButtons();
 });
+
+function isResourceUnitType_HideButtons() {
+  describe('is not Resource unit type', () => {
+    beforeEach(() => {
+      component['project'].metadata.unitType = 'Resource';
+      fixture.detectChanges();
+    });
+
+    it('should hide buttons when unit type is Resource', () => {
+      expect(getButtonWithText('Use with Class')).toBeFalsy();
+      expect(getButtonWithText('Preview')).toBeFalsy();
+    });
+  });
+}
+
+function getButtonWithText(text: string) {
+  return fixture.debugElement
+    .queryAll(By.css('button'))
+    .find((el) => el.nativeElement.textContent.includes(text));
+}
