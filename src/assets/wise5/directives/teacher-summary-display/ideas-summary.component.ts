@@ -59,10 +59,10 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     );
     this.getLatestWork().subscribe((componentStates) => {
       this.extractIdeas(componentStates);
-      this.allIdeas = this.getAllIdeas();
-      if (!this.allIdeas.some((idea) => this.ideaCountMap.get(idea.id)?.size > 0)) {
+      if (this.ideaCountMap.size === 0) {
         this.doRender = false;
       } else {
+        this.allIdeas = this.getAllIdeas(componentStates);
         const sortedIdeas = this.sortIdeas();
         this.mostCommonIdeas = [...sortedIdeas].splice(0, 3);
         this.leastCommonIdeas = [...sortedIdeas]
@@ -70,18 +70,6 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
           .reverse();
       }
     });
-  }
-
-  private getAllIdeas(): { id: string; text: string; count: number }[] {
-    return this.rubric.getIdeas().map((idea) => ({
-      id: idea.name,
-      text: this.useIdeaTextOrId(idea.name, idea.text),
-      count: this.ideaCountMap.get(idea.name)?.size ?? 0
-    }));
-  }
-
-  private useIdeaTextOrId(id: string, text: string): string {
-    return text ?? 'idea ' + id;
   }
 
   private extractIdeas(componentStates: ComponentState[]): void {
@@ -94,6 +82,48 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
         }
       })
     );
+  }
+
+  private getAllIdeas(
+    componentStates: ComponentState[]
+  ): { id: string; text: string; count: number }[] {
+    // Any response that has an ideas array with at least one idea will contain all the
+    // ideas that are being considered by CRater.
+    const ideaIds: string[] = componentStates
+      .find((componentState) =>
+        componentState.studentData.responses.some((response) => response.ideas?.length > 0)
+      )
+      ?.studentData.responses.find((response) => response.ideas?.length > 0)
+      .ideas?.map((idea) => idea.name);
+
+    // The idea descriptions may not contain all the ideas considered by CRater.
+    const ideaDescriptions: CRaterIdea[] = this.rubric.getIdeas();
+
+    const allIdeas = ideaDescriptions.map((idea) => ({
+      id: idea.name,
+      text: this.useIdeaTextOrId(idea.name, idea.text),
+      count: this.getIdeaCount(idea.name)
+    }));
+
+    ideaIds.forEach((id) => {
+      if (!allIdeas.some((idea) => idea.id === id)) {
+        allIdeas.push({
+          id: id,
+          text: this.useIdeaTextOrId(id, null),
+          count: this.getIdeaCount(id)
+        });
+      }
+    });
+
+    return allIdeas;
+  }
+
+  private getIdeaCount(ideaId: string) {
+    return this.ideaCountMap.get(ideaId)?.size ?? 0;
+  }
+
+  private useIdeaTextOrId(id: string, text: string): string {
+    return text ?? 'idea ' + id;
   }
 
   private getDetectedIdeas(componentState: ComponentState): CRaterIdea[] {
@@ -116,7 +146,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   }
 
   private getIdeaText(id: string): string {
-    return this.useIdeaTextOrId(id, this.rubric.getIdea(id).text);
+    return this.useIdeaTextOrId(id, this.rubric.getIdea(id)?.text);
   }
 
   protected toggleSeeAllIdeas(event: Event): void {
