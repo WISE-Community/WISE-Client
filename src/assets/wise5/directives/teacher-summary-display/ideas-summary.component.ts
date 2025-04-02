@@ -1,7 +1,6 @@
 import { AnnotationService } from '../../services/annotationService';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ComponentState } from '../../../../app/domain/componentState';
 import { ConfigService } from '../../services/configService';
 import { CRaterIdea } from '../../components/common/cRater/CRaterIdea';
 import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';
@@ -12,9 +11,9 @@ import { SummaryService } from '../../components/summary/summaryService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from './teacher-summary-display.component';
-import { DialogGuidanceSummaryData } from '../summary-display/summary-data/DialogGuidanceSummaryData';
-import { OpenResponseSummaryData } from '../summary-display/summary-data/OpenResponseSummaryData';
-import { IdeasSummaryData } from '../summary-display/summary-data/IdeasSummaryData';
+import { DialogGuidanceSummaryData } from './summary-data/DialogGuidanceSummaryData';
+import { OpenResponseSummaryData } from './summary-data/OpenResponseSummaryData';
+import { IdeasSummaryData } from './summary-data/IdeasSummaryData';
 
 type ideaData = {
   id: string;
