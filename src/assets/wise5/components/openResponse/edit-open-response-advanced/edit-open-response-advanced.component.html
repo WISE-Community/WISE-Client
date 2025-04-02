@@ -581,20 +581,14 @@
     }
   </div>
   <div class="section-container">
-    <mat-checkbox
-      color="primary"
-      class="checkbox"
-      [(ngModel)]="componentContent.cRater.enableIdeaDescriptions"
-      (click)="enableIdeaDescriptionsClicked($event)"
-      i18n
-    >
-      Enable Student-Friendly Idea Descriptions
-    </mat-checkbox>
-    @if (componentContent.cRater.enableIdeaDescriptions) {
+    @if (showIdeaDescriptions) {
       <edit-crater-idea-descriptions
         [ideaDescriptions]="componentContent.cRater.rubric.ideas"
         [enableAutoscrolling]="false"
       />
+      <a (click)="toggleShowIdeaDescriptionsClicked()">Hide</a>
+    } @else {
+      <a (click)="toggleShowIdeaDescriptionsClicked()">Show Idea Descriptions</a>
     }
   </div>
 }

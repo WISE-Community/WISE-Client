@@ -15,20 +15,20 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   standalone: false
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
-  allowedConnectedComponentTypes = ['OpenResponse'];
+  protected allowedConnectedComponentTypes = ['OpenResponse'];
   componentContent: OpenResponseContent;
-  cRaterItemIdIsValid: boolean = null;
-  initialFeedbackRules = [
+  protected cRaterItemIdIsValid: boolean = null;
+  private initialFeedbackRules = [
     {
       id: 'isDefault',
       expression: 'isDefault',
       feedback: [$localize`Default feedback`]
     }
   ];
-  isVerifyingCRaterItemId: boolean;
-  nodeIds: string[] = [];
-  useCustomCompletionCriteria: boolean;
-  ideaDescriptions: CRaterIdea[] = [];
+  protected isVerifyingCRaterItemId: boolean;
+  protected nodeIds: string[] = [];
+  protected useCustomCompletionCriteria: boolean;
+  protected showIdeaDescriptions = true;
 
   constructor(
     protected cRaterService: CRaterService,
@@ -45,22 +45,25 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       this.useCustomCompletionCriteria = true;
     }
     this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
+    this.createCRaterAndRubricIfNull();
+  }
+
+  private createCRaterAndRubricIfNull() {
+    if (this.componentContent.cRater == null) {
+      this.componentContent.cRater = this.createCRaterObject();
+    }
+    if (!this.componentContent.cRater.rubric) {
+      this.componentContent.cRater.rubric = { ideas: [] };
+    }
   }
 
   enableCRaterClicked(): void {
     if (this.componentContent.enableCRater) {
-      this.createCRaterIfNull();
       this.setShowSubmitButtonValue(true);
     } else {
       this.setShowSubmitButtonValue(false);
     }
     this.componentChanged();
-  }
-
-  private createCRaterIfNull() {
-    if (this.componentContent.cRater == null) {
-      this.componentContent.cRater = this.createCRaterObject();
-    }
   }
 
   createCRaterObject() {
@@ -77,7 +80,6 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       },
       enableMultipleAttemptScoringRules: false,
       multipleAttemptScoringRules: [],
-      enableIdeaDescriptions: false,
       rubric: {
         ideas: []
       }
@@ -271,12 +273,8 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   }
 
-  enableIdeaDescriptionsClicked(): void {
-    this.createCRaterIfNull();
-    if (!this.componentContent.cRater.rubric) {
-      this.componentContent.cRater.rubric = { ideas: [] };
-    }
-    this.componentChanged();
+  protected toggleShowIdeaDescriptionsClicked(): void {
+    this.showIdeaDescriptions = !this.showIdeaDescriptions;
   }
 
   getComponents(nodeId: string): ComponentContent[] {
