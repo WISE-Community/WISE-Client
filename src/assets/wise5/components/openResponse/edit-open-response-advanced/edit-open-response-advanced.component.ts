@@ -27,7 +27,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   ];
   protected isVerifyingCRaterItemId: boolean;
   protected nodeIds: string[] = [];
-  protected useCustomCompletionCriteria: boolean;
+  useCustomCompletionCriteria: boolean;
   protected showIdeaDescriptions = true;
 
   constructor(
