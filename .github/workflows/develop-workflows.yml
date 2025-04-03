@@ -8,11 +8,13 @@ jobs:
     uses: WISE-Community/WISE-Client/.github/workflows/generate-messages.yml@issue-2103-generate-messages
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
+
   test-coverage:
     needs: generate-messages
     uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@issue-2103-generate-messages
     secrets:
       test_reporter: ${{secrets.CC_TEST_REPORTER_ID}}
+
   build:
     needs: [generate-messages, test-coverage]
     uses: WISE-Community/WISE-Client/.github/workflows/code-build.yml@issue-2103-generate-messages
