@@ -29,22 +29,36 @@ import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { ConstraintService } from '../../../services/constraintService';
 import { applyMixins } from '../../../common/apply-mixins';
 import { ComputerAvatarInitializer } from '../../../common/computer-avatar/computer-avatar-initializer';
+import { ComputerAvatarSelectorComponent } from '../../../vle/computer-avatar-selector/computer-avatar-selector.component';
+import { MatCardModule } from '@angular/material/card';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
+import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'dialog-guidance-student',
-    templateUrl: './dialog-guidance-student.component.html',
-    styleUrls: ['./dialog-guidance-student.component.scss'],
-    standalone: false
+  imports: [
+    ChatInputComponent,
+    CommonModule,
+    ComponentHeaderComponent,
+    ComputerAvatarSelectorComponent,
+    DialogResponsesComponent,
+    MatCardModule
+  ],
+  providers: [DialogGuidanceFeedbackService],
+  selector: 'dialog-guidance-student',
+  styleUrl: './dialog-guidance-student.component.scss',
+  templateUrl: './dialog-guidance-student.component.html'
 })
 export class DialogGuidanceStudentComponent extends ComponentStudent {
   component: DialogGuidanceComponent;
-  computerAvatar: ComputerAvatar;
+  protected computerAvatar: ComputerAvatar;
   protected computerAvatarSelectorVisible: boolean = false;
-  cRaterTimeout: number = 40000;
-  feedbackRuleEvaluator: FeedbackRuleEvaluator<CRaterResponse[]>;
-  isWaitingForComputerResponse: boolean = false;
-  responses: DialogResponse[] = [];
-  studentCanRespond: boolean = true;
+  private cRaterTimeout: number = 40000;
+  private feedbackRuleEvaluator: FeedbackRuleEvaluator<CRaterResponse[]>;
+  protected isWaitingForComputerResponse: boolean = false;
+  protected responses: DialogResponse[] = [];
+  protected studentCanRespond: boolean = true;
   workgroupId: number;
 
   constructor(
@@ -126,14 +140,14 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     this.cRaterService
       .makeCRaterScoringRequest(this.component.getItemId(), new Date().getTime(), studentResponse)
       .pipe(timeout(this.cRaterTimeout))
-      .subscribe(
-        (response: any) => {
+      .subscribe({
+        next: (response: any) => {
           this.cRaterSuccessResponse(response.responses);
         },
-        () => {
+        error: () => {
           this.cRaterErrorResponse();
         }
-      );
+      });
   }
 
   private showWaitingForComputerResponse(): void {

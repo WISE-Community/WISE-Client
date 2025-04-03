@@ -24,3 +24,7 @@ hsqldb
 hsqldb_test
 .classpath
 tokens/
+scripts/awscliv2.zip
+scripts/aws/install
+scripts/aws/README.md
+scripts/aws/THIRD_PARTY_LICENSES

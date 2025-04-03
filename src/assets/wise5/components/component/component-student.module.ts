@@ -7,7 +7,6 @@ import { StudentAssetsDialogModule } from '../../vle/studentAsset/student-assets
 import { AnimationStudentModule } from '../animation/animation-student/animation-student.module';
 import { AudioOscillatorStudentModule } from '../audioOscillator/audio-oscillator-student/audio-oscillator.module';
 import { ConceptMapStudentModule } from '../conceptMap/concept-map-student/concept-map-student.module';
-import { DialogGuidanceStudentModule } from '../dialogGuidance/dialogGuidanceStudentModule';
 import { DiscussionStudentModule } from '../discussion/discussion-student/discussion-student.module';
 import { DrawStudentModule } from '../draw/draw-student/draw-student-module';
 import { EmbeddedStudentModule } from '../embedded/embedded-student/embedded-student.module';
@@ -26,6 +25,7 @@ import { ComponentComponent } from './component.component';
 import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.module';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 import { MultipleChoiceStudentComponent } from '../multipleChoice/multiple-choice-student/multiple-choice-student.component';
+import { DialogGuidanceStudentComponent } from '../dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
 
 @NgModule({
   imports: [
@@ -35,7 +35,7 @@ import { MultipleChoiceStudentComponent } from '../multipleChoice/multiple-choic
     CommonModule,
     ComponentComponent,
     ConceptMapStudentModule,
-    DialogGuidanceStudentModule,
+    DialogGuidanceStudentComponent,
     DiscussionStudentModule,
     DrawStudentModule,
     EmbeddedStudentModule,
