@@ -7,17 +7,17 @@ jobs:
   generate-messages:
     uses: WISE-Community/WISE-Client/.github/workflows/generate-messages.yml@issue-2103-generate-messages
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      token: ${{ secrets.GITHUB_TOKEN }}
 
   test-coverage:
     needs: generate-messages
     uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@issue-2103-generate-messages
     secrets:
-      CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      test_reporter: ${{secrets.CC_TEST_REPORTER_ID}}
 
   build:
     needs: [generate-messages, test-coverage]
     uses: WISE-Community/WISE-Client/.github/workflows/code-build.yml@issue-2103-generate-messages
     secrets:
-      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      aws_key: ${{secrets.AWS_ACCESS_KEY_ID}}
+      aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}

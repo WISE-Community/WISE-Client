@@ -2,7 +2,7 @@ name: Generate messages
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      token:
         required: true
 jobs:
   generate-messages:
@@ -44,4 +44,4 @@ jobs:
           git commit --amend
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.token }}

@@ -2,7 +2,7 @@ name: Test coverage
 on:
   workflow_call:
     secrets:
-      CC_TEST_REPORTER_ID:
+      test_reporter:
         required: true
 jobs:
   test-coverage:
@@ -20,7 +20,7 @@ jobs:
       - run: npm ci
       - uses: paambaati/codeclimate-action@v2.7.5
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          CC_TEST_REPORTER_ID: ${{secrets.test_reporter}}
         with:
           coverageCommand: npm run test-coverage
           coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
