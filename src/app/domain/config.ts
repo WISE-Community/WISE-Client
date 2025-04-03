@@ -1,6 +1,7 @@
 export class Config {
   contextPath: string;
   googleAnalyticsId?: string;
+  googleTagManagerId?: string;
   googleClientId?: string;
   isGoogleClassroomEnabled?: boolean;
   microsoftClientId?: string;

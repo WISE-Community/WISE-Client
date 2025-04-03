@@ -6,7 +6,6 @@ import { LibraryGroupThumbsComponent } from './library-group-thumbs/library-grou
 import { LibraryProjectComponent } from './library-project/library-project.component';
 import { LibraryProjectDetailsComponent } from './library-project-details/library-project-details.component';
 import { LibraryProjectDisciplinesComponent } from './library-project-disciplines/library-project-disciplines.component';
-import { LibraryProjectMenuComponent } from './library-project-menu/library-project-menu.component';
 import { LibraryService } from '../../services/library.service';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
@@ -47,7 +46,6 @@ import {
 import { ShareProjectDialogComponent } from './share-project-dialog/share-project-dialog.component';
 import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-dialog.component';
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
-import { DiscourseCategoryActivityComponent } from './discourse-category-activity/discourse-category-activity.component';
 import { ArchiveProjectsButtonComponent } from '../../teacher/archive-projects-button/archive-projects-button.component';
 import { SearchBarComponent } from '../shared/search-bar/search-bar.component';
 import { SelectAllItemsCheckboxComponent } from './select-all-items-checkbox/select-all-items-checkbox.component';
@@ -85,9 +83,9 @@ const materialModules = [
     ApplyTagsButtonComponent,
     ArchiveProjectsButtonComponent,
     CommonModule,
-    DiscourseCategoryActivityComponent,
     FlexLayoutModule,
     FormsModule,
+    LibraryProjectDetailsComponent,
     LibraryProjectDisciplinesComponent,
     ReactiveFormsModule,
     RouterModule,
@@ -103,8 +101,6 @@ const materialModules = [
   declarations: [
     LibraryGroupThumbsComponent,
     LibraryProjectComponent,
-    LibraryProjectDetailsComponent,
-    LibraryProjectMenuComponent,
     LibraryFiltersComponent,
     HomePageProjectLibraryComponent,
     TeacherProjectLibraryComponent,

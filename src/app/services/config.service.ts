@@ -19,14 +19,12 @@ export class ConfigService {
 
   retrieveConfig(): Observable<Config> {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    return this.http
-      .get<Config>(this.userConfigUrl, { headers: headers })
-      .pipe(
-        tap((config) => {
-          this.config$.next(config);
-          this.timeDiff = Date.now() - config.currentTime;
-        })
-      );
+    return this.http.get<Config>(this.userConfigUrl, { headers: headers }).pipe(
+      tap((config) => {
+        this.config$.next(config);
+        this.timeDiff = Date.now() - config.currentTime;
+      })
+    );
   }
 
   getContextPath() {
@@ -43,6 +41,10 @@ export class ConfigService {
 
   getGoogleAnalyticsId() {
     return this.config$.getValue().googleAnalyticsId;
+  }
+
+  getGoogleTagManagerId() {
+    return this.config$.getValue().googleTagManagerId;
   }
 
   getGoogleClientId() {

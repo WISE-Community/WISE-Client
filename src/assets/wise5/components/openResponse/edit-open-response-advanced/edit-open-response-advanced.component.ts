@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { CRaterService } from '../../../services/cRaterService';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { NotebookService } from '../../../services/notebookService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'edit-open-response-advanced',
-  templateUrl: 'edit-open-response-advanced.component.html',
-  styleUrls: ['edit-open-response-advanced.component.scss'],
-  standalone: false
+  standalone: false,
+  styleUrl: 'edit-open-response-advanced.component.scss',
+  templateUrl: 'edit-open-response-advanced.component.html'
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['OpenResponse'];
@@ -260,7 +261,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   }
 
-  getComponents(nodeId: string): any[] {
+  getComponents(nodeId: string): ComponentContent[] {
     return this.teacherProjectService.getComponents(nodeId);
   }
 
