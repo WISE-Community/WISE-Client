@@ -1,6 +1,9 @@
 name: Test coverage
 on:
   workflow_call:
+    secrets:
+      CC_TEST_REPORTER_ID:
+        required: true
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
