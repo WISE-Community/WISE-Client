@@ -1,8 +1,11 @@
-name: Build
+name: Code build
 on:
-  pull_request:
-    branches:
-      - develop
+  workflow_call:
+    secrets:
+      aws_key:
+        required: true
+      aws_secret_key:
+        required: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,8 +13,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.aws_key}}
+          aws-secret-access-key: ${{ secrets.aws_secret_key}}
           aws-region: us-west-1
       - name: Run CodeBuild
         id: code-build

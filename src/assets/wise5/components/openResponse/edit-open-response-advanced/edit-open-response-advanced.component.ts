@@ -9,9 +9,9 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'edit-open-response-advanced',
-  templateUrl: 'edit-open-response-advanced.component.html',
-  styleUrls: ['edit-open-response-advanced.component.scss'],
-  standalone: false
+  standalone: false,
+  styleUrl: 'edit-open-response-advanced.component.scss',
+  templateUrl: 'edit-open-response-advanced.component.html'
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['OpenResponse'];
