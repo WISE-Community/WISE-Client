@@ -1232,11 +1232,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">83,86</context>
+          <context context-type="linenumber">84,87</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">170,173</context>
+          <context context-type="linenumber">171,174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2207764482815871800" datatype="html">
@@ -1259,11 +1259,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">94,98</context>
+          <context context-type="linenumber">95,99</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">181,185</context>
+          <context context-type="linenumber">182,186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1502469155879345941" datatype="html">
@@ -10040,11 +10040,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">203,206</context>
+          <context context-type="linenumber">204,207</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">223,225</context>
+          <context context-type="linenumber">224,226</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -10817,7 +10817,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">39,43</context>
+          <context context-type="linenumber">40,44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.ts</context>
@@ -19169,57 +19169,64 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6881420852718919482" datatype="html">
-        <source> Show source and target buckets side-by-side </source>
+      <trans-unit id="7728520692063631671" datatype="html">
+        <source> Show source and target </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
           <context context-type="linenumber">13,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2196336150318476885" datatype="html">
+        <source>TESTING</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
+          <context context-type="linenumber">15,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1579235113609895988" datatype="html">
         <source> Show choices after target buckets </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">24,30</context>
+          <context context-type="linenumber">25,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="700486905218753465" datatype="html">
         <source> Students can put each choice in multiple buckets </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">35,39</context>
+          <context context-type="linenumber">36,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5352661965442576015" datatype="html">
         <source>Add choice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">45,49</context>
+          <context context-type="linenumber">46,50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4030755619952900161" datatype="html">
         <source>There are no choices. Click the &quot;Add choice&quot; button to add a choice.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">52,56</context>
+          <context context-type="linenumber">53,57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8917382371789545955" datatype="html">
         <source>Choice name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">63,66</context>
+          <context context-type="linenumber">64,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1858170604257509336" datatype="html">
         <source>Type text or choose an image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">65,67</context>
+          <context context-type="linenumber">66,68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">152,154</context>
+          <context context-type="linenumber">153,155</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
@@ -19230,91 +19237,91 @@ Warning: This will delete all existing choices and buckets in this component.</s
         <source>Delete choice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">105,109</context>
+          <context context-type="linenumber">106,110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3049957643882977568" datatype="html">
         <source>Source bucket name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">118,120</context>
+          <context context-type="linenumber">119,121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7931779317832064959" datatype="html">
         <source>Target buckets</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">124,128</context>
+          <context context-type="linenumber">125,129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3188730387067630082" datatype="html">
         <source>Add target bucket</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">130,134</context>
+          <context context-type="linenumber">131,135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6685707013772708946" datatype="html">
         <source> There are no target buckets. Click the &quot;Add target bucket&quot; button to add a bucket. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">138,143</context>
+          <context context-type="linenumber">139,144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8229496825782128557" datatype="html">
         <source>Target bucket name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">150,153</context>
+          <context context-type="linenumber">151,154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4227487878022557682" datatype="html">
         <source>Delete bucket</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">192,196</context>
+          <context context-type="linenumber">193,197</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6616474437986595594" datatype="html">
         <source> Choices need to be ordered within buckets </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">210,213</context>
+          <context context-type="linenumber">211,214</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8753216354587491861" datatype="html">
         <source>Bucket name: <x id="INTERPOLATION" equiv-text="{{ getBucketNameById(bucketFeedback.bucketId) }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">215,216</context>
+          <context context-type="linenumber">216,217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9018902662361499352" datatype="html">
         <source> Choice: <x id="INTERPOLATION" equiv-text="{{ getChoiceTextById(choiceFeedback.choiceId) }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">218,219</context>
+          <context context-type="linenumber">219,220</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2662748816973265168" datatype="html">
         <source> Is correct </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">235,238</context>
+          <context context-type="linenumber">236,239</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1172866303261737245" datatype="html">
         <source>Position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">241,244</context>
+          <context context-type="linenumber">242,245</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7854486911665215371" datatype="html">
         <source>Incorrect position feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
-          <context context-type="linenumber">252,254</context>
+          <context context-type="linenumber">253,255</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2258610804716750608" datatype="html">
