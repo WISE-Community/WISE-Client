@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ComponentContent } from '../../../../common/ComponentContent';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ComponentTypeService } from '../../../../services/componentTypeService';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -18,8 +19,14 @@ export class SelectComponentComponent {
   @Input() selectedComponent: ComponentContent;
   @Output() componentChangedEvent: EventEmitter<any> = new EventEmitter();
 
+  constructor(private componentTypeService: ComponentTypeService) {}
+
   protected selectComponent(component: ComponentContent): void {
     this.selectedComponent = component;
     this.componentChangedEvent.emit(component);
+  }
+
+  protected getComponentTypeLabel(componentType: string): string {
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 }

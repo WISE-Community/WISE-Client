@@ -2,7 +2,7 @@
   <mat-select [(ngModel)]="selectedComponent" (ngModelChange)="selectComponent(selectedComponent)">
     @for (component of components; track component.id; let i = $index) {
       <mat-option [value]="component">
-        <span>{{ i + 1 }}. {{ component.type }}</span>
+        <span>{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
       </mat-option>
     }
   </mat-select>
