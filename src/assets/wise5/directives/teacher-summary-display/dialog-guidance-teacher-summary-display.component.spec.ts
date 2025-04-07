@@ -66,7 +66,7 @@ function ngInit_NoIdeasDetected_ShowMessage() {
     it('shows message to teacher', () => {
       component.ngOnInit();
       fixture.detectChanges();
-      expect(fixture.nativeElement.querySelector('h2').textContent).toEqual(
+      expect(fixture.nativeElement.querySelector('.notice').textContent).toContain(
         "Your students' ideas will show up here as they are detected in the dialog."
       );
     });
@@ -87,9 +87,7 @@ function ngInit_IdeasDetected_ShowSummary() {
       component.ngOnInit();
       fixture.detectChanges();
 
-      expect(fixture.nativeElement.querySelector('h2').textContent).toEqual(
-        'Most Common Ideas Detected:'
-      );
+      expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Most Common:');
     });
   });
 }
@@ -107,8 +105,8 @@ function ngInit_ManyIdeasDetected_ShowTopAndBottomThree() {
     it('shows only top and bottom three ideas', () => {
       component.ngOnInit();
       fixture.detectChanges();
-      expect(fixture.nativeElement.querySelectorAll('#most-common-ideas > h3').length).toEqual(3);
-      expect(fixture.nativeElement.querySelectorAll('#least-common-ideas > h3').length).toEqual(3);
+      expect(fixture.nativeElement.querySelectorAll('#most-common-ideas > li').length).toEqual(3);
+      expect(fixture.nativeElement.querySelectorAll('#least-common-ideas > li').length).toEqual(3);
     });
   });
 }

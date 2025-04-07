@@ -1,36 +1,58 @@
-<mat-card appearance="outlined" class="summary-card">
+<mat-card appearance="outlined">
   <mat-card-content>
+    <h2 class="mat-subhead-1" i18n>Student Ideas Detected</h2>
     @if (hasWarning) {
       <p class="warn center">{{ warningMessage }}</p>
     }
     @if (doRender) {
-      <div class="wrapper">
-        <div class="idea-group" id="most-common-ideas">
-          <h2 i18n>Most Common Ideas Detected:</h2>
-          @for (idea of mostCommonIdeas; track idea.id) {
-            <h3>{{ idea.text }} (<mat-icon>person</mat-icon>{{ idea.count }})</h3>
-          }
+      <div class="grid md:grid-cols-2 gap-4 mb-4 max-w-4xl">
+        <div>
+          <h3 i18n>Most Common:</h3>
+          <ul id="most-common-ideas">
+            @for (idea of mostCommonIdeas; track idea.id) {
+              <li>
+                <div class="idea">
+                  <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon
+                  >{{ idea.count }})
+                </div>
+              </li>
+            }
+          </ul>
         </div>
-        <div class="idea-group" id="least-common-ideas">
-          <h2 i18n>Least Common Ideas Detected:</h2>
-          @for (idea of leastCommonIdeas; track idea.id) {
-            <h3>{{ idea.text }} (<mat-icon>person</mat-icon>{{ idea.count }})</h3>
-          }
+        <div>
+          <h3 i18n>Least Common:</h3>
+          <ul id="least-common-ideas">
+            @for (idea of leastCommonIdeas; track idea.id) {
+              <li>
+                <div class="idea">
+                  <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon
+                  >{{ idea.count }})
+                </div>
+              </li>
+            }
+          </ul>
         </div>
       </div>
-      <div class="idea-group" id="all-ideas">
-        @if (seeAllIdeas) {
-          <h2 i18n>All Ideas:</h2>
+      @if (seeAllIdeas) {
+        <h3 i18n>All Ideas:</h3>
+        <ul class="md:columns-2 lg:columns-3 mb-2">
           @for (idea of allIdeas; track idea.id) {
-            <h3>{{ idea.text }} (<mat-icon>person</mat-icon>{{ idea.count }})</h3>
+            <li>
+              <div class="idea">
+                <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon
+                >{{ idea.count }})
+              </div>
+            </li>
           }
-          <a (mouseup)="toggleSeeAllIdeas()" i18n>Hide all ideas</a>
-        } @else {
-          <a (mouseup)="toggleSeeAllIdeas()" i18n>Show all ideas</a>
-        }
-      </div>
+        </ul>
+        <a href="#" (click)="toggleSeeAllIdeas($event)" i18n>Hide all ideas</a>
+      } @else {
+        <a href="#" (click)="toggleSeeAllIdeas($event)" i18n>Show all ideas</a>
+      }
     } @else {
-      <h2 i18n>Your students' ideas will show up here as they are detected in the dialog.</h2>
+      <div class="notice" i18n>
+        Your students' ideas will show up here as they are detected in the dialog.
+      </div>
     }
   </mat-card-content>
 </mat-card>

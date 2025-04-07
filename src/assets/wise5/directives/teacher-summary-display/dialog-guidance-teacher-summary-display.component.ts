@@ -17,15 +17,16 @@ import { TeacherSummaryDisplayComponent } from './teacher-summary-display.compon
   imports: [CommonModule, MatCardModule, MatIconModule],
   selector: 'dialog-guidance-teacher-summary-display',
   styles: `
-    .wrapper {
-      display: grid;
-      grid-template-columns: 400px 400px;
+    h3 {
+      margin-bottom: 8px;
     }
-    .idea-group {
-      padding-left: 20px;
+
+    .idea {
+      @apply px-2 py-1 rounded-md bg-gray-100 my-1 text-sm;
     }
-    #all-ideas {
-      padding-top: 20px;
+
+    .mat-icon {
+      vertical-align: middle;
     }
   `,
   templateUrl: 'dialog-guidance-teacher-summary-display.component.html'
@@ -113,7 +114,8 @@ export class DialogGuidanceTeacherSummaryDisplayComponent extends TeacherSummary
     return this.useIdeaTextOrId(id, this.rubric.getIdea(id).text);
   }
 
-  protected toggleSeeAllIdeas(): void {
+  protected toggleSeeAllIdeas(event: Event): void {
+    event.preventDefault();
     this.seeAllIdeas = !this.seeAllIdeas;
   }
 }
