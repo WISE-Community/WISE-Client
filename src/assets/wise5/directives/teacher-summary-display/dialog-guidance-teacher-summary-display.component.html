@@ -1,3 +1,10 @@
+<ng-template #ideaTemplate let-idea="idea">
+  <div class="idea">
+    <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon
+    >{{ idea.count }})
+  </div>
+</ng-template>
+
 <mat-card appearance="outlined">
   <mat-card-content>
     <h2 class="mat-subhead-1" i18n>Student Ideas Detected</h2>
@@ -11,10 +18,10 @@
           <ul id="most-common-ideas">
             @for (idea of mostCommonIdeas; track idea.id) {
               <li>
-                <div class="idea">
-                  <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon
-                  >{{ idea.count }})
-                </div>
+                <ng-container
+                  [ngTemplateOutlet]="ideaTemplate"
+                  [ngTemplateOutletContext]="{ idea: idea }"
+                />
               </li>
             }
           </ul>
@@ -24,10 +31,10 @@
           <ul id="least-common-ideas">
             @for (idea of leastCommonIdeas; track idea.id) {
               <li>
-                <div class="idea">
-                  <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon
-                  >{{ idea.count }})
-                </div>
+                <ng-container
+                  [ngTemplateOutlet]="ideaTemplate"
+                  [ngTemplateOutletContext]="{ idea: idea }"
+                />
               </li>
             }
           </ul>
@@ -38,10 +45,10 @@
         <ul class="md:columns-2 lg:columns-3 mb-2">
           @for (idea of allIdeas; track idea.id) {
             <li>
-              <div class="idea">
-                <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon
-                >{{ idea.count }})
-              </div>
+              <ng-container
+                [ngTemplateOutlet]="ideaTemplate"
+                [ngTemplateOutletContext]="{ idea: idea }"
+              />
             </li>
           }
         </ul>
