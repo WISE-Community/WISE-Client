@@ -54,10 +54,14 @@
       @if (project.metadata.summary) {
         <div [innerHTML]="project.metadata.summary"></div>
       }
-      @if (ngss.disciplines.length) {
+      @if (project.metadata.disciplines?.length) {
         <p>
           <strong i18n>Discipline:</strong>
-          @for (discipline of ngss.disciplines; track discipline.name; let last = $last) {
+          @for (
+            discipline of project.metadata.disciplines;
+            track discipline.name;
+            let last = $last
+          ) {
             {{ discipline.name }}{{ last ? '' : ' / ' }}
           }
         </p>
