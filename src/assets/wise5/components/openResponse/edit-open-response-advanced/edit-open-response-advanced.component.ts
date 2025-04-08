@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ComponentContent } from '../../../common/ComponentContent';
-import { CRaterIdea } from '../../common/cRater/CRaterIdea';
 import { CRaterService } from '../../../services/cRaterService';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { NotebookService } from '../../../services/notebookService';
@@ -273,7 +272,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   }
 
-  protected toggleShowIdeaDescriptionsClicked(): void {
+  protected toggleShowIdeaDescriptions(): void {
     this.showIdeaDescriptions = !this.showIdeaDescriptions;
   }
 
