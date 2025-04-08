@@ -7,10 +7,10 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
 
 @Component({
-    selector: 'app-library-filters',
-    styleUrl: './library-filters.component.scss',
-    templateUrl: './library-filters.component.html',
-    standalone: false
+  selector: 'app-library-filters',
+  styleUrl: './library-filters.component.scss',
+  templateUrl: './library-filters.component.html',
+  standalone: false
 })
 export class LibraryFiltersComponent implements OnInit {
   @Input()
@@ -75,6 +75,9 @@ export class LibraryFiltersComponent implements OnInit {
   populateFilterOptions(): void {
     this.allProjects = this.getAllProjects();
     for (let project of this.allProjects) {
+      project.metadata.disciplines?.forEach((discipline: any) =>
+        this.disciplineOptions.push(this.createDisciplineStandard(discipline))
+      );
       const standardsAddressed = project.metadata.standardsAddressed;
       if (standardsAddressed && standardsAddressed.ngss) {
         const ngss: NGSSStandards = standardsAddressed.ngss;
@@ -85,13 +88,6 @@ export class LibraryFiltersComponent implements OnInit {
             for (let peStandard of dciStandard.children) {
               this.peOptions.push(this.createPEStandard(peStandard));
             }
-          }
-        }
-
-        const disciplines = ngss.disciplines;
-        if (disciplines) {
-          for (let discipline of disciplines) {
-            this.disciplineOptions.push(this.createDisciplineStandard(discipline));
           }
         }
       }

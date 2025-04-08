@@ -120,15 +120,17 @@ export abstract class LibraryComponent implements OnInit {
   }
 
   private isFilterMatch(project: LibraryProject): boolean {
-    return this.matchesNgss(project) || this.matchesResearchProject(project);
+    return (
+      this.matchesNgss(project) ||
+      this.matchesDiscipline(project) ||
+      this.matchesResearchProject(project)
+    );
   }
 
   private matchesNgss(project: LibraryProject): boolean {
     return (
       project.metadata.standardsAddressed.ngss != null &&
-      (this.matchesDciArrangement(project) ||
-        this.matchesPE(project) ||
-        this.matchesDiscipline(project))
+      (this.matchesDciArrangement(project) || this.matchesPE(project))
     );
   }
 
@@ -153,7 +155,7 @@ export abstract class LibraryComponent implements OnInit {
   private matchesDiscipline(project: LibraryProject): boolean {
     return (
       this.disciplineValue.length > 0 &&
-      project.metadata.standardsAddressed.ngss.disciplines?.some((discipline) =>
+      project.metadata.disciplines?.some((discipline) =>
         this.disciplineValue.includes(discipline.id)
       )
     );
