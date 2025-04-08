@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { NGSSStandards } from '../ngssStandards';
 import { ResearchProject, ResearchProjectTypes, Standard } from '../standard';
+import { Discipline } from '../Discipline';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
 
@@ -24,7 +25,7 @@ export class LibraryFiltersComponent implements OnInit {
   searchValue: string = '';
   dciArrangementOptions: Standard[] = [];
   dciArrangementValue = [];
-  disciplineOptions: Standard[] = [];
+  protected disciplineOptions: Discipline[] = [];
   disciplineValue = [];
   peOptions: Standard[] = [];
   peValue = [];
@@ -76,7 +77,7 @@ export class LibraryFiltersComponent implements OnInit {
     this.allProjects = this.getAllProjects();
     for (let project of this.allProjects) {
       project.metadata.disciplines?.forEach((discipline: any) =>
-        this.disciplineOptions.push(this.createDisciplineStandard(discipline))
+        this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
       );
       const standardsAddressed = project.metadata.standardsAddressed;
       if (standardsAddressed && standardsAddressed.ngss) {
@@ -128,13 +129,6 @@ export class LibraryFiltersComponent implements OnInit {
     peStandard.id = standardIn.id;
     peStandard.name = `${standardIn.id}: ${standardIn.name}`;
     return peStandard;
-  }
-
-  createDisciplineStandard(standardIn: any) {
-    const standard: Standard = new Standard();
-    standard.id = standardIn.id;
-    standard.name = standardIn.name;
-    return standard;
   }
 
   removeDuplicatesAndSortAlphabetically() {
