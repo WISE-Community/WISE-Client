@@ -88,7 +88,9 @@ export class VLEComponent implements AfterViewInit {
 
   @HostListener('window:beforeunload')
   beforeUnload(): void {
-    this.saveNodeExitedEvent();
+    if (this.sessionService.isSessionActive()) {
+      this.saveNodeExitedEvent();
+    }
   }
 
   ngAfterViewInit(): void {
