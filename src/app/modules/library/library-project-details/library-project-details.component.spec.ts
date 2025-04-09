@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { LibraryProjectDetailsComponent } from './library-project-details.component';
 import { UserService } from '../../../services/user.service';
 import { Project } from '../../../domain/project';
-import { NGSSStandards } from '../ngssStandards';
 import { ConfigService } from '../../../services/config.service';
 import { ParentProject } from '../../../domain/parentProject';
 import { MockProviders } from 'ng-mocks';
@@ -36,34 +35,11 @@ describe('LibraryProjectDetailsComponent', () => {
         { id: 12, firstName: 'Captain', lastName: 'Napalm', username: 'CaptainNapalm' }
       ]
     };
-    const ngssObject: any = {
-      disciplines: [
-        {
-          name: 'Life Sciences',
-          id: 'LS'
-        }
-      ],
-      dciArrangements: [
-        {
-          children: [
-            {
-              name: 'Construct a scientific explanation...',
-              id: 'MS-LS1-6'
-            },
-            {
-              name: 'Develop a model...',
-              id: 'MS-LS1-7'
-            }
-          ],
-          name: 'From Molecules to Organisms: Structures and Processes',
-          id: 'MS-LS1'
-        }
-      ]
+    component['standards'] = {
+      ngss: [{ id: 'MS-LS1-6', name: 'MS-LS1-6', url: 'http://ngss.com' }],
+      commonCore: [],
+      learningForJustice: []
     };
-    const ngss: NGSSStandards = new NGSSStandards();
-    ngss.disciplines = ngssObject.disciplines;
-    ngss.dciArrangements = ngssObject.dciArrangements;
-    component['ngss'] = ngss;
     component['project'] = new Project(project);
     component['parentProject'] = new ParentProject();
     component['setLicenseInfo']();
