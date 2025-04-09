@@ -1,16 +1,17 @@
 import { OnInit, QueryList, ViewChildren, Directive } from '@angular/core';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { LibraryService } from '../../../services/library.service';
-import { ResearchProjectTypes, Standard } from '../standard';
+import { Standard } from '../standard';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { ResearchProjectType } from '../ResearchProject';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
-  protected dciArrangementOptions: Standard[] = [];
-  protected dciArrangementValue = [];
+  protected standardOptions: Standard[] = [];
+  protected standardValue = [];
   protected disciplineOptions: Standard[] = [];
   protected disciplineValue = [];
   protected filteredProjects: LibraryProject[] = [];
@@ -21,10 +22,8 @@ export abstract class LibraryComponent implements OnInit {
   protected pageIndex: number = 0;
   protected pageSize: number = 12;
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
-  protected peOptions: Standard[] = [];
-  protected peValue = [];
   protected projects: LibraryProject[] = [];
-  private researchProjectValue: ResearchProjectTypes[] = [];
+  private researchProjectValue: ResearchProjectType[] = [];
   protected searchValue: string = '';
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
@@ -78,9 +77,8 @@ export abstract class LibraryComponent implements OnInit {
     this.filteredProjects = [];
     this.searchValue = this.filterValues.searchValue;
     this.disciplineValue = this.filterValues.disciplineValue;
-    this.dciArrangementValue = this.filterValues.dciArrangementValue;
+    this.standardValue = this.filterValues.standardValue;
     this.researchProjectValue = this.filterValues.researchProjectValue;
-    this.peValue = this.filterValues.peValue;
     this.projects.forEach((project) => {
       project.visible =
         this.isSearchMatch(project, this.searchValue) &&
@@ -121,34 +119,19 @@ export abstract class LibraryComponent implements OnInit {
 
   private isFilterMatch(project: LibraryProject): boolean {
     return (
-      this.matchesNgss(project) ||
+      this.matchesStandard(project) ||
       this.matchesDiscipline(project) ||
       this.matchesResearchProject(project)
     );
   }
 
-  private matchesNgss(project: LibraryProject): boolean {
-    return (
-      project.metadata.standardsAddressed.ngss != null &&
-      (this.matchesDciArrangement(project) || this.matchesPE(project))
-    );
-  }
-
-  private matchesDciArrangement(project: LibraryProject): boolean {
-    return (
-      this.dciArrangementValue.length > 0 &&
-      project.metadata.standardsAddressed.ngss.dciArrangements?.some((val) =>
-        this.dciArrangementValue.includes(val.id)
-      )
-    );
-  }
-
-  private matchesPE(project: LibraryProject) {
-    return (
-      this.peValue.length > 0 &&
-      project.metadata.standardsAddressed.ngss.dciArrangements?.some((arrangement) =>
-        arrangement.children.some((val) => this.peValue.includes(val.id))
-      )
+  private matchesStandard(project: LibraryProject): boolean {
+    const standards = project.metadata.standards;
+    const commonCore = standards?.commonCore ?? [];
+    const ngss = standards?.ngss ?? [];
+    const learningForJustice = standards?.learningForJustice ?? [];
+    return [...commonCore, ...ngss, ...learningForJustice].some((val) =>
+      this.standardValue.includes(val.id)
     );
   }
 
@@ -172,11 +155,7 @@ export abstract class LibraryComponent implements OnInit {
 
   private hasFilters(): boolean {
     return (
-      this.dciArrangementValue.length +
-        this.peValue.length +
-        this.disciplineValue.length +
-        this.researchProjectValue.length >
-      0
+      this.standardValue.length + this.disciplineValue.length + this.researchProjectValue.length > 0
     );
   }
 

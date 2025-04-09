@@ -1,3 +1,4 @@
+import { url } from 'inspector';
 import { LibraryProject } from './libraryProject';
 
 const projects: LibraryProject[] = [];
@@ -11,43 +12,33 @@ project1.metadata = {
       name: 'Life Sciences'
     }
   ],
-  standardsAddressed: {
-    ngss: {
-      dci: [
-        {
-          id: 'LS1.B',
-          name: 'Growth and Development of Organisms'
-        }
-      ],
-      dciArrangements: [
-        {
-          id: 'MS-LS1',
-          name: 'From Molecules to Organisms: Structures and Processes',
-          children: [
-            {
-              id: 'MS-LS1-4',
-              name: 'Use argument based on empirical evidence and scientific reasoning to support an explanation for how characteristic animal behaviors and specialized plant structures affect the probability of successful reproduction of animals and plants respectively.'
-            },
-            {
-              id: 'MS-LS1-5',
-              name: 'Construct a scientific explanation based on evidence for how environmental and genetic factors influence the growth of organisms.'
-            }
-          ]
-        }
-      ],
-      ccc: [
-        {
-          id: 'ce',
-          name: 'Cause and Effect'
-        }
-      ],
-      practices: [
-        {
-          id: 'eae',
-          name: 'Engaging in Argument from Evidence'
-        }
-      ]
-    }
+  standards: {
+    ngss: [
+      {
+        id: 'LS1.B',
+        name: 'Growth and Development of Organisms',
+        url: 'https://www.nextgenscience.org/dci-arrangement/ms-ls1-b-growth-and-development-organisms'
+      },
+      {
+        id: 'MS-LS1',
+        name: 'From Molecules to Organisms: Structures and Processes',
+        url: 'https://www.nextgenscience.org/dci-arrangement/ms-ls1-from-molecules-organisms-structures-and-processes'
+      }
+    ],
+    commonCore: [
+      {
+        id: 'ce',
+        name: 'Cause and Effect',
+        url: 'https://www.nextgenscience.org/ccss/ce'
+      }
+    ],
+    learningForJustice: [
+      {
+        id: 'eae',
+        name: 'Engaging in Argument from Evidence',
+        url: 'https://www.nextgenscience.org/lfj/eae'
+      }
+    ]
   }
 };
 projects.push(project1);

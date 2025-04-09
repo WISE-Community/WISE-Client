@@ -266,9 +266,8 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
         expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
         component.filterUpdated({
           searchValue: 'world',
-          dciArrangementValue: [],
+          standardValue: [],
           disciplineValue: [],
-          peValue: [],
           researchProjectValue: []
         });
         expect(await harness.getSelectedProjectIds()).toEqual([]);

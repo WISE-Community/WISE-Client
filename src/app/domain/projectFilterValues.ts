@@ -1,9 +1,8 @@
-import { ResearchProjectTypes } from '../modules/library/standard';
+import { ResearchProjectType } from '../modules/library/ResearchProject';
 
 export class ProjectFilterValues {
   searchValue: string = '';
   disciplineValue: string[] = [];
-  dciArrangementValue: string[] = [];
-  peValue: string[] = [];
-  researchProjectValue: ResearchProjectTypes[] = [];
+  standardValue: string[] = [];
+  researchProjectValue: ResearchProjectType[] = [];
 }
