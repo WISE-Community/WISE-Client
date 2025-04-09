@@ -15,7 +15,7 @@ import { DialogGuidanceSummaryData } from './summary-data/DialogGuidanceSummaryD
 import { OpenResponseSummaryData } from './summary-data/OpenResponseSummaryData';
 import { IdeasSummaryData } from './summary-data/IdeasSummaryData';
 
-type ideaData = {
+type IdeaData = {
   id: string;
   text: string;
   count: number;
@@ -102,11 +102,11 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
           .splice(sortedIdeas.length - 3, sortedIdeas.length)
           .reverse();
       }
-      this.allIdeas = this.sortIdeasAlphabetically(ideaCountArray);
+      this.allIdeas = this.sortIdeasById(ideaCountArray);
     }
   }
 
-  private ideaCountMapToArray(ideaDescriptions: CRaterIdea[]): ideaData[] {
+  private ideaCountMapToArray(ideaDescriptions: CRaterIdea[]): IdeaData[] {
     const ideaCountArray = [];
     this.ideaCountMap.forEach((count, ideaId, map) => {
       const ideaDescription = ideaDescriptions.find(
@@ -125,16 +125,73 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     return text ?? 'idea ' + id;
   }
 
-  private sortIdeasByCount(ideas: ideaData[]): ideaData[] {
+  private sortIdeasByCount(ideas: IdeaData[]): IdeaData[] {
     return ideas.filter((idea) => idea.count > 0).sort((a, b) => b.count - a.count);
   }
 
-  private sortIdeasAlphabetically(ideas: ideaData[]): ideaData[] {
-    return ideas.sort((a, b) => {
-      const aText = a.text ?? a.id;
-      const bText = b.text ?? b.id;
-      return aText.localeCompare(bText);
+  private sortIdeasById(ideas: IdeaData[]): IdeaData[] {
+    let sorted = ideas
+      .filter((idea) => !this.stringContainsLetters(idea.id))
+      .sort((a, b) => Number(a.id) - Number(b.id));
+
+    const sortedIdeasWithLetters = this.getSortedIdeasWithLetters(ideas);
+
+    return this.insertIdeasWithLetters(sorted, sortedIdeasWithLetters);
+  }
+
+  private stringContainsLetters(str: string): boolean {
+    let hasLetters = false;
+    Array.from(str).forEach((char) => {
+      if (isNaN(Number(char))) {
+        hasLetters = true;
+      }
     });
+    return hasLetters;
+  }
+
+  private getSortedIdeasWithLetters(ideas: IdeaData[]) {
+    return ideas
+      .filter((idea) => this.stringContainsLetters(idea.id))
+      .sort((a, b) => {
+        const prefixDif = this.stringNumericPrefix(a.id) - this.stringNumericPrefix(b.id);
+        if (prefixDif === 0) {
+          return a.id.localeCompare(b.id);
+        } else {
+          return prefixDif;
+        }
+      });
+  }
+
+  private insertIdeasWithLetters(
+    sorted: IdeaData[],
+    sortedIdeasWithLetters: IdeaData[]
+  ): IdeaData[] {
+    for (let i = 0; i < sorted.length; i++) {
+      while (
+        sortedIdeasWithLetters.length > 0 &&
+        Number(sorted.at(i).id) > this.stringNumericPrefix(sortedIdeasWithLetters.at(0).id)
+      ) {
+        const ideaWithLetter = sortedIdeasWithLetters.at(0);
+        sortedIdeasWithLetters = sortedIdeasWithLetters.slice(1, sortedIdeasWithLetters.length);
+        sorted.splice(i, 0, ideaWithLetter);
+        i++;
+      }
+    }
+    return sorted;
+  }
+
+  private stringNumericPrefix(str: string): number {
+    let numericPrefix = '';
+    const strArray = Array.from(str);
+    for (let charIndex = 0; charIndex < strArray.length; charIndex++) {
+      const char = strArray.at(charIndex);
+      if (isNaN(Number(char))) {
+        break;
+      } else {
+        numericPrefix = numericPrefix.concat(char);
+      }
+    }
+    return Number(numericPrefix);
   }
 
   protected toggleSeeAllIdeas(event: Event): void {
