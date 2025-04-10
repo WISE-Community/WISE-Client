@@ -272,7 +272,7 @@ export class CRaterService {
     const componentContent = this.projectService.getComponent(nodeId, componentId);
     let rubricContent;
     if (componentType === 'OpenResponse') {
-      rubricContent = (componentContent as OpenResponseContent).cRater.rubric;
+      rubricContent = (componentContent as OpenResponseContent).cRater?.rubric;
     } else {
       rubricContent = componentContent.cRaterRubric;
     }

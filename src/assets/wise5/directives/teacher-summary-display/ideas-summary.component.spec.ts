@@ -12,10 +12,11 @@ import { SummaryService } from '../../components/summary/summaryService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TestBed } from '@angular/core/testing';
+import { Annotation } from '../../common/Annotation';
 
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;
-describe('IdeasSummaryDisplayComponent', () => {
+fdescribe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IdeasSummaryComponent],
@@ -34,6 +35,7 @@ describe('IdeasSummaryDisplayComponent', () => {
     fixture = TestBed.createComponent(IdeasSummaryComponent);
     component = fixture.componentInstance;
     component.doRender = true;
+    component.componentType = 'DialogGuidance';
   });
   beforeEach(() => {
     spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(false);
@@ -41,94 +43,174 @@ describe('IdeasSummaryDisplayComponent', () => {
     spyOn(TestBed.inject(ConfigService), 'isStudentRun').and.returnValue(false);
     spyOn(TestBed.inject(ConfigService), 'getNumberOfWorkgroupsInPeriod').and.returnValue(1);
   });
-  ngOnInit();
+
+  describe('ngOnChanges()', () => {
+    ngInit_DG_NoIdeasDetected_ShowMessage();
+    ngInit_DG_IdeasDetected_ShowSummary();
+    ngInit_DG_ManyIdeasDetected_ShowTopAndBottomThree();
+  });
 });
 
-function ngOnInit() {
-  describe('ngOnChanges()', () => {
-    ngInit_NoIdeasDetected_ShowMessage();
-    ngInit_IdeasDetected_ShowSummary();
-    ngInit_ManyIdeasDetected_ShowTopAndBottomThree();
-  });
-}
+fdescribe('IdeasSummaryDisplayComponent for Open Response component', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [IdeasSummaryComponent],
+      providers: [
+        MockProviders(
+          AnnotationService,
+          ConfigService,
+          CRaterService,
+          TeacherDataService,
+          TeacherProjectService,
+          SummaryService
+        )
+      ]
+    }).compileComponents();
 
-function ngInit_NoIdeasDetected_ShowMessage() {
+    fixture = TestBed.createComponent(IdeasSummaryComponent);
+    component = fixture.componentInstance;
+    component.doRender = true;
+    component.componentType = 'OpenResponse';
+  });
+  beforeEach(() => {
+    spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(false);
+    spyOn(TestBed.inject(ConfigService), 'isAuthoring').and.returnValue(false);
+    spyOn(TestBed.inject(ConfigService), 'isStudentRun').and.returnValue(false);
+    spyOn(TestBed.inject(ConfigService), 'getNumberOfWorkgroupsInPeriod').and.returnValue(1);
+  });
+
+  describe('ngOnChanges()', () => {
+    ngInit_OR_NoIdeasDetected_ShowMessage();
+    ngInit_OR_IdeasDetected_ShowSummary();
+    ngInit_OR_ManyIdeasDetected_ShowTopAndBottomThree();
+  });
+});
+
+function ngInit_DG_NoIdeasDetected_ShowMessage() {
   describe('no ideas detected', () => {
     beforeEach(() => {
-      spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(
-        generateMockRubric(3, 0)
-      );
-      spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
-        generateMockStudentWork(0)
-      );
+      generateMockRubric(3, 0);
+      generateMockStudentWorkDialogGuidance(0);
     });
-    it('shows message to teacher', () => {
-      component.ngOnInit();
-      fixture.detectChanges();
-      expect(fixture.nativeElement.querySelector('.notice').textContent).toContain(
-        "Your students' ideas will show up here as they are detected in the dialog."
-      );
-    });
+    showMessageToTeacher('DG');
   });
 }
 
-function ngInit_IdeasDetected_ShowSummary() {
+function ngInit_OR_NoIdeasDetected_ShowMessage() {
+  describe('no ideas detected', () => {
+    beforeEach(() => {
+      generateMockRubric(3, 0);
+      generateMockStudentWorkOpenResponse(0);
+    });
+    showMessageToTeacher('OR');
+  });
+}
+
+function showMessageToTeacher(componentType: string) {
+  it('shows message to teacher (' + componentType + ')', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.notice').textContent).toContain(
+      "Your students' ideas will show up here as they are detected in the activity."
+    );
+  });
+}
+
+function ngInit_DG_IdeasDetected_ShowSummary() {
   describe('ideas detected', () => {
     beforeEach(() => {
-      spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(
-        generateMockRubric(3, 1)
-      );
-      spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
-        generateMockStudentWork(1)
-      );
+      generateMockRubric(3, 1);
+      generateMockStudentWorkDialogGuidance(1);
     });
-    it('shows summary display', () => {
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Most Common:');
-    });
+    showsDisplaySummary('DG');
   });
 }
 
-function ngInit_ManyIdeasDetected_ShowTopAndBottomThree() {
+function ngInit_OR_IdeasDetected_ShowSummary() {
+  describe('ideas detected', () => {
+    beforeEach(() => {
+      generateMockRubric(3, 1);
+      generateMockStudentWorkOpenResponse(1);
+    });
+    showsDisplaySummary('OR');
+  });
+}
+
+function showsDisplaySummary(componentType: string) {
+  it('shows summary display (' + componentType + ')', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Most Common:');
+  });
+}
+
+function ngInit_DG_ManyIdeasDetected_ShowTopAndBottomThree() {
   describe('more than 3 ideas detected', () => {
     beforeEach(() => {
-      spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(
-        generateMockRubric(4, 4)
-      );
-      spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
-        generateMockStudentWork(4)
-      );
+      generateMockRubric(4, 4);
+      generateMockStudentWorkDialogGuidance(4);
     });
-    it('shows only top and bottom three ideas', () => {
-      component.ngOnInit();
-      fixture.detectChanges();
-      expect(fixture.nativeElement.querySelectorAll('#most-common-ideas > li').length).toEqual(3);
-      expect(fixture.nativeElement.querySelectorAll('#least-common-ideas > li').length).toEqual(3);
-    });
+    onlyShowThreeIdeas('DG');
   });
 }
 
-function generateMockRubric(numIdeas: number, numDetected: number): CRaterRubric {
+function ngInit_OR_ManyIdeasDetected_ShowTopAndBottomThree() {
+  describe('more than 3 ideas detected', () => {
+    beforeEach(() => {
+      generateMockRubric(4, 4);
+      generateMockStudentWorkOpenResponse(4);
+    });
+    onlyShowThreeIdeas('OR');
+  });
+}
+
+function onlyShowThreeIdeas(componentType: string) {
+  it('shows only top and bottom three ideas (' + componentType + ')', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelectorAll('#most-common-ideas > li').length).toEqual(3);
+    expect(fixture.nativeElement.querySelectorAll('#least-common-ideas > li').length).toEqual(3);
+  });
+}
+
+function generateMockRubric(numIdeas: number, numDetected: number): void {
   const ideas = [];
   for (let i = 0; i < numIdeas; i++) {
     const idea = new CRaterIdea('idea ' + (i + 1), numDetected > 0 ? true : false);
     ideas.push(idea);
     numDetected--;
   }
-  return new CRaterRubric({ ideas: ideas });
+  spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(
+    new CRaterRubric({ ideas: ideas })
+  );
 }
 
-function generateMockStudentWork(numIdeasDetected: number): Observable<ComponentState[]> {
-  const ideas = [];
-  for (let i = 0; i < numIdeasDetected; i++) {
-    ideas.push({ name: 'idea ' + (i + 1), detected: true });
-  }
-  return of([
-    new ComponentState({
+function generateMockStudentWorkDialogGuidance(numIdeasDetected: number): void {
+  const ideas = generateIdeas(numIdeasDetected);
+  spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
+    of([
+      new ComponentState({
+        workgroupId: 1,
+        studentData: { responses: [{ ideas: ideas }] }
+      })
+    ])
+  );
+}
+
+function generateMockStudentWorkOpenResponse(numIdeasDetected: number): void {
+  const ideas = generateIdeas(numIdeasDetected);
+  spyOn(TestBed.inject(AnnotationService), 'getAnnotationsByNodeIdComponentId').and.returnValue([
+    new Annotation({
       workgroupId: 1,
-      studentData: { responses: [{ ideas: ideas }] }
+      data: { ideas: ideas }
     })
   ]);
+}
+
+function generateIdeas(numIdeas: number) {
+  const ideas = [];
+  for (let i = 0; i < numIdeas; i++) {
+    ideas.push({ name: 'idea ' + (i + 1), detected: true });
+  }
+  return ideas;
 }
