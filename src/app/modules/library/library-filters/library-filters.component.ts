@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
-import { Standard } from '../standard';
+import { Standard, StandardType } from '../standard';
 import { Discipline } from '../Discipline';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
@@ -25,6 +25,7 @@ export class LibraryFiltersComponent implements OnInit {
   searchValue: string = '';
   protected disciplineOptions: Discipline[] = [];
   protected standardOptions: Standard[] = [];
+  protected possibleStandardLabels = ['NGSS', 'Common Core', 'Learning For Justice'];
   protected standardValue = [];
   disciplineValue = [];
 
@@ -80,12 +81,17 @@ export class LibraryFiltersComponent implements OnInit {
         this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
       );
       const standards = project.metadata.standards;
-      const ngss = standards?.ngss ?? [];
-      const commonCore = standards?.commonCore ?? [];
-      const learningForJustice = standards?.learningForJustice ?? [];
-      [...ngss, ...commonCore, ...learningForJustice].forEach((standard: any) =>
-        this.standardOptions.push(new Standard(standard.id, standard.name, standard.url))
-      );
+      [
+        ['ngss', 'NGSS'],
+        ['commonCore', 'Common Core'],
+        ['learningForJustice', 'Learning For Justice']
+      ].forEach(([key, name]) => {
+        (standards?.[key] ?? []).forEach((standard: any) =>
+          this.standardOptions.push(
+            new Standard(standard.id, standard.name, name as StandardType, standard.url)
+          )
+        );
+      });
       this.populateResearchProjects(project);
     }
     this.removeDuplicatesAndSortAlphabetically();

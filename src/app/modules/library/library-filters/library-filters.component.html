@@ -57,9 +57,10 @@
       class="library-filter"
       [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
     >
-      <app-select-menu
+      <standards-select-menu
         id="standardSelectMenu"
         [options]="standardOptions"
+        [possibleLabels]="possibleStandardLabels"
         i18n-placeholderText
         placeholderText="Standard "
         [value]="standardValue"
