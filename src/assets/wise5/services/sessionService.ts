@@ -109,9 +109,10 @@ export class SessionService {
     }
   }
 
-  checkForLogout() {
+  checkForLogout(): void {
     if (this.isInactiveLongEnoughToForceLogout()) {
       this.checkIfSessionIsActive().subscribe((isSessionActive) => {
+        this.sessionActive = isSessionActive;
         if (!isSessionActive) {
           this.forceLogOut();
         }
