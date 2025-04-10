@@ -14,15 +14,11 @@ import { TeacherSummaryDisplayComponent } from './teacher-summary-display.compon
 import { DialogGuidanceSummaryData } from './summary-data/DialogGuidanceSummaryData';
 import { OpenResponseSummaryData } from './summary-data/OpenResponseSummaryData';
 import { IdeasSummaryData } from './summary-data/IdeasSummaryData';
-
-type IdeaData = {
-  id: string;
-  text: string;
-  count: number;
-};
+import { IdeaData, IdeasSortingService } from '../../services/ideasSortingService';
 
 @Component({
   imports: [CommonModule, MatCardModule, MatIconModule],
+  providers: [IdeasSortingService],
   selector: 'ideas-summary',
   styles: `
     h3 {
@@ -41,18 +37,19 @@ type IdeaData = {
 })
 export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   protected allIdeas: { id: string; text: string; count: number }[] = [];
+  @Input() componentType: string;
   protected ideaCountMap: Map<string, number>;
+  private ideaDescriptions: CRaterRubric;
   protected leastCommonIdeas: { id: string; text: string; count: number }[] = [];
   protected mostCommonIdeas: { id: string; text: string; count: number }[] = [];
-  private ideaDescriptions: CRaterRubric;
   protected seeAllIdeas: boolean;
-  @Input() componentType: string;
 
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
     private cRaterService: CRaterService,
     protected dataService: TeacherDataService,
+    private ideasSortingService: IdeasSortingService,
     protected projectService: TeacherProjectService,
     protected summaryService: SummaryService
   ) {
@@ -93,7 +90,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       this.doRender = false;
     } else {
       const ideaCountArray = this.ideaCountMapToArray(this.ideaDescriptions.getIdeas());
-      const sortedIdeas = this.sortIdeasByCount(ideaCountArray);
+      const sortedIdeas = this.ideasSortingService.sortIdeasByCount(ideaCountArray);
       this.mostCommonIdeas = [...sortedIdeas].splice(0, 3);
       if (sortedIdeas.length <= 3) {
         this.leastCommonIdeas = [...this.mostCommonIdeas].reverse();
@@ -102,7 +99,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
           .splice(sortedIdeas.length - 3, sortedIdeas.length)
           .reverse();
       }
-      this.allIdeas = this.sortIdeasById(ideaCountArray);
+      this.allIdeas = this.ideasSortingService.sortIdeasById(ideaCountArray);
     }
   }
 
@@ -123,75 +120,6 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
 
   private useIdeaTextOrId(id: string, text: string): string {
     return text ?? 'idea ' + id;
-  }
-
-  private sortIdeasByCount(ideas: IdeaData[]): IdeaData[] {
-    return ideas.filter((idea) => idea.count > 0).sort((a, b) => b.count - a.count);
-  }
-
-  private sortIdeasById(ideas: IdeaData[]): IdeaData[] {
-    let sorted = ideas
-      .filter((idea) => !this.stringContainsLetters(idea.id))
-      .sort((a, b) => Number(a.id) - Number(b.id));
-
-    const sortedIdeasWithLetters = this.getSortedIdeasWithLetters(ideas);
-
-    return this.insertIdeasWithLetters(sorted, sortedIdeasWithLetters);
-  }
-
-  private stringContainsLetters(str: string): boolean {
-    let hasLetters = false;
-    Array.from(str).forEach((char) => {
-      if (isNaN(Number(char))) {
-        hasLetters = true;
-      }
-    });
-    return hasLetters;
-  }
-
-  private getSortedIdeasWithLetters(ideas: IdeaData[]) {
-    return ideas
-      .filter((idea) => this.stringContainsLetters(idea.id))
-      .sort((a, b) => {
-        const prefixDif = this.stringNumericPrefix(a.id) - this.stringNumericPrefix(b.id);
-        if (prefixDif === 0) {
-          return a.id.localeCompare(b.id);
-        } else {
-          return prefixDif;
-        }
-      });
-  }
-
-  private insertIdeasWithLetters(
-    sorted: IdeaData[],
-    sortedIdeasWithLetters: IdeaData[]
-  ): IdeaData[] {
-    for (let i = 0; i < sorted.length; i++) {
-      while (
-        sortedIdeasWithLetters.length > 0 &&
-        Number(sorted.at(i).id) > this.stringNumericPrefix(sortedIdeasWithLetters.at(0).id)
-      ) {
-        const ideaWithLetter = sortedIdeasWithLetters.at(0);
-        sortedIdeasWithLetters = sortedIdeasWithLetters.slice(1, sortedIdeasWithLetters.length);
-        sorted.splice(i, 0, ideaWithLetter);
-        i++;
-      }
-    }
-    return sorted;
-  }
-
-  private stringNumericPrefix(str: string): number {
-    let numericPrefix = '';
-    const strArray = Array.from(str);
-    for (let charIndex = 0; charIndex < strArray.length; charIndex++) {
-      const char = strArray.at(charIndex);
-      if (isNaN(Number(char))) {
-        break;
-      } else {
-        numericPrefix = numericPrefix.concat(char);
-      }
-    }
-    return Number(numericPrefix);
   }
 
   protected toggleSeeAllIdeas(event: Event): void {

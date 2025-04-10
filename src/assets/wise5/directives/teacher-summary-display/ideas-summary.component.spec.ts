@@ -16,7 +16,7 @@ import { Annotation } from '../../common/Annotation';
 
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;
-fdescribe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
+describe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IdeasSummaryComponent],
@@ -51,7 +51,7 @@ fdescribe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
   });
 });
 
-fdescribe('IdeasSummaryDisplayComponent for Open Response component', () => {
+describe('IdeasSummaryDisplayComponent for Open Response component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IdeasSummaryComponent],

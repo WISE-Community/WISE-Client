@@ -1,5 +1,3 @@
-import { ComponentState } from '../../../../../app/domain/componentState';
-
 export abstract class IdeasSummaryDataPoint {
   protected allIdeaIds: Set<string>;
   protected detectedIdeaIds: Set<string>;
