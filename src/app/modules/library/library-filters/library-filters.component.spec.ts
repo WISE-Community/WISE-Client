@@ -44,26 +44,19 @@ describe('LibraryFiltersComponent', () => {
 
   it('should populate the filter options', () => {
     expect(component.libraryProjects.length).toBe(2);
-    expect(component.dciArrangementOptions.length).toBe(1);
-    expect(component.disciplineOptions.length).toBe(2);
-    expect(component.peOptions.length).toBe(3);
+    expect(component['standardOptions'].length).toBe(4);
+    expect(component['disciplineOptions'].length).toBe(2);
   });
 
-  it(
-    'should call LibraryService.setFilterValues when the search value changes',
-    waitForAsync(() => {
-      const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
-      component.searchUpdated('photo');
-      expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
-    })
-  );
+  it('should call LibraryService.setFilterValues when the search value changes', waitForAsync(() => {
+    const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
+    component.searchUpdated('photo');
+    expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
+  }));
 
-  it(
-    'should call LibraryService.setFilterValues when a filter value changes',
-    waitForAsync(() => {
-      const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
-      component.filterUpdated(['Earth Sciences', 'Physical Sciences'], 'discipline');
-      expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
-    })
-  );
+  it('should call LibraryService.setFilterValues when a filter value changes', waitForAsync(() => {
+    const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
+    component.filterUpdated(['Earth Sciences', 'Physical Sciences'], 'discipline');
+    expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
+  }));
 });

@@ -1,16 +1,17 @@
-import { Component, OnInit, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
-import { NGSSStandards } from '../ngssStandards';
-import { ResearchProject, ResearchProjectTypes, Standard } from '../standard';
+import { Standard, StandardType } from '../standard';
+import { Discipline } from '../Discipline';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
+import { ResearchProject, ResearchProjectType } from '../ResearchProject';
 
 @Component({
-    selector: 'app-library-filters',
-    styleUrl: './library-filters.component.scss',
-    templateUrl: './library-filters.component.html',
-    standalone: false
+  selector: 'app-library-filters',
+  styleUrl: './library-filters.component.scss',
+  templateUrl: './library-filters.component.html',
+  standalone: false
 })
 export class LibraryFiltersComponent implements OnInit {
   @Input()
@@ -22,14 +23,14 @@ export class LibraryFiltersComponent implements OnInit {
   sharedProjects: LibraryProject[] = [];
   personalProjects: LibraryProject[] = [];
   searchValue: string = '';
-  dciArrangementOptions: Standard[] = [];
-  dciArrangementValue = [];
-  disciplineOptions: Standard[] = [];
+  protected disciplineOptions: Discipline[] = [];
+  protected standardOptions: Standard[] = [];
+  protected possibleStandardLabels = ['NGSS', 'Common Core', 'Learning For Justice'];
+  protected standardValue = [];
   disciplineValue = [];
-  peOptions: Standard[] = [];
-  peValue = [];
+
   protected researchProjectOptions: ResearchProject[] = [];
-  private researchProjectValue: ResearchProjectTypes[] = [];
+  private researchProjectValue: ResearchProjectType[] = [];
   showFilters: boolean = false;
 
   constructor(
@@ -60,9 +61,8 @@ export class LibraryFiltersComponent implements OnInit {
 
   ngOnInit() {
     const filterOptions: ProjectFilterValues = this.libraryService.getFilterValues();
-    this.dciArrangementValue = filterOptions.dciArrangementValue;
+    this.standardValue = filterOptions.standardValue;
     this.disciplineValue = filterOptions.disciplineValue;
-    this.peValue = filterOptions.peValue;
     this.searchValue = filterOptions.searchValue;
   }
 
@@ -74,41 +74,33 @@ export class LibraryFiltersComponent implements OnInit {
 
   populateFilterOptions(): void {
     this.allProjects = this.getAllProjects();
+    this.standardOptions = [];
+    this.disciplineOptions = [];
     for (let project of this.allProjects) {
-      const standardsAddressed = project.metadata.standardsAddressed;
-      if (standardsAddressed && standardsAddressed.ngss) {
-        const ngss: NGSSStandards = standardsAddressed.ngss;
-        const dciArrangements = ngss.dciArrangements;
-        for (let dciStandard of dciArrangements) {
-          this.dciArrangementOptions.push(this.createDCIStandard(dciStandard));
-          if (dciStandard.children) {
-            for (let peStandard of dciStandard.children) {
-              this.peOptions.push(this.createPEStandard(peStandard));
-            }
-          }
-        }
-
-        const disciplines = ngss.disciplines;
-        if (disciplines) {
-          for (let discipline of disciplines) {
-            this.disciplineOptions.push(this.createDisciplineStandard(discipline));
-          }
-        }
-      }
+      project.metadata.disciplines?.forEach((discipline: any) =>
+        this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
+      );
+      const standards = project.metadata.standards;
+      [
+        ['ngss', 'NGSS'],
+        ['commonCore', 'Common Core'],
+        ['learningForJustice', 'Learning For Justice']
+      ].forEach(([key, name]) => {
+        (standards?.[key] ?? []).forEach((standard: any) =>
+          this.standardOptions.push(
+            new Standard(standard.id, standard.name, name as StandardType, standard.url)
+          )
+        );
+      });
       this.populateResearchProjects(project);
     }
     this.removeDuplicatesAndSortAlphabetically();
   }
 
   private populateResearchProjects(project: LibraryProject): void {
-    project.metadata.researchProjects?.forEach((researchProjectTypes: ResearchProjectTypes) => {
-      const researchProject: ResearchProject = {
-        id: researchProjectTypes,
-        name: researchProjectTypes,
-        children: []
-      };
-      if (!this.researchProjectOptions.map((option) => option.id).includes(researchProject.id)) {
-        this.researchProjectOptions.push(researchProject);
+    project.metadata.researchProjects?.forEach((researchProjectType: ResearchProjectType) => {
+      if (!this.researchProjectOptions.map((option) => option.name).includes(researchProjectType)) {
+        this.researchProjectOptions.push(new ResearchProject(researchProjectType));
       }
     });
   }
@@ -120,48 +112,21 @@ export class LibraryFiltersComponent implements OnInit {
       .concat(this.personalProjects);
   }
 
-  createDCIStandard(standardIn: any) {
-    const dciStandard: Standard = new Standard();
-    dciStandard.id = standardIn.id;
-    dciStandard.name = `${standardIn.id} ${standardIn.name}`;
-    return dciStandard;
-  }
-
-  createPEStandard(standardIn: any) {
-    const peStandard: Standard = new Standard();
-    peStandard.id = standardIn.id;
-    peStandard.name = `${standardIn.id}: ${standardIn.name}`;
-    return peStandard;
-  }
-
-  createDisciplineStandard(standardIn: any) {
-    const standard: Standard = new Standard();
-    standard.id = standardIn.id;
-    standard.name = standardIn.name;
-    return standard;
-  }
-
   removeDuplicatesAndSortAlphabetically() {
-    this.dciArrangementOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
-      this.dciArrangementOptions,
+    this.standardOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.standardOptions,
       'id'
     );
-    this.utilService.sortObjectArrayByProperty(this.dciArrangementOptions, 'id');
+    this.utilService.sortObjectArrayByProperty(this.standardOptions, 'id');
     this.disciplineOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
       this.disciplineOptions,
       'id'
     );
     this.utilService.sortObjectArrayByProperty(this.disciplineOptions, 'name');
-    this.peOptions = this.utilService.removeObjectArrayDuplicatesByProperty(this.peOptions, 'id');
-    this.utilService.sortObjectArrayByProperty(this.peOptions, 'id');
   }
 
   hasFilters(): boolean {
-    return (
-      this.dciArrangementValue.length > 0 ||
-      this.peValue.length > 0 ||
-      this.disciplineValue.length > 0
-    );
+    return this.standardValue.length > 0 || this.disciplineValue.length > 0;
   }
 
   searchUpdated(value: string): void {
@@ -169,19 +134,16 @@ export class LibraryFiltersComponent implements OnInit {
     this.emitFilterValues();
   }
 
-  filterUpdated(value: string[] | ResearchProjectTypes[] = [], context: string = ''): void {
+  filterUpdated(value: string[] | ResearchProjectType[] = [], context: string = ''): void {
     switch (context) {
       case 'discipline':
         this.disciplineValue = value;
         break;
-      case 'dci':
-        this.dciArrangementValue = value;
-        break;
-      case 'pe':
-        this.peValue = value;
+      case 'standard':
+        this.standardValue = value;
         break;
       case 'researchProject':
-        this.researchProjectValue = value as ResearchProjectTypes[];
+        this.researchProjectValue = value as ResearchProjectType[];
         break;
     }
     this.emitFilterValues();
@@ -191,17 +153,15 @@ export class LibraryFiltersComponent implements OnInit {
     const filterOptions: ProjectFilterValues = {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
-      dciArrangementValue: this.dciArrangementValue,
-      peValue: this.peValue,
+      standardValue: this.standardValue,
       researchProjectValue: this.researchProjectValue
     };
     this.libraryService.setFilterValues(filterOptions);
   }
 
   clearFilterValues() {
-    this.dciArrangementValue = [];
+    this.standardValue = [];
     this.disciplineValue = [];
-    this.peValue = [];
     this.emitFilterValues();
   }
 }
