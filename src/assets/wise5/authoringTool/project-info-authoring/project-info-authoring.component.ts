@@ -33,6 +33,9 @@ export class ProjectInfoAuthoringComponent {
     if (this.metadata.resources == null) {
       this.metadata.resources = [];
     }
+    if (this.metadata.unitType == null) {
+      this.metadata.unitType = 'Platform';
+    }
     this.metadataAuthoring = JSON.parse(
       this.configService.getConfigParam('projectMetadataSettings')
     );
