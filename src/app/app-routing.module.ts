@@ -14,6 +14,11 @@ const routes: Routes = [
     loadChildren: () => import('./contact/contact.module').then((m) => m.ContactModule)
   },
   {
+    path: 'curriculum',
+    loadComponent: () =>
+      import('./curriculum/curriculum.component').then((m) => m.CurriculumComponent)
+  },
+  {
     path: 'features',
     loadComponent: () => import('./features/features.component').then((m) => m.FeaturesComponent)
   },
