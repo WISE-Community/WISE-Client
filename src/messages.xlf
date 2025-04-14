@@ -11174,6 +11174,27 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3323880774610969171" datatype="html">
+        <source>Unit Type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-unit-type/edit-unit-type.component.html</context>
+          <context context-type="linenumber">1,2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4377100615192235257" datatype="html">
+        <source>WISE Platform (Uses features on this platform to collect student data)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-unit-type/edit-unit-type.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4625339672754559827" datatype="html">
+        <source>Other Platform (Contains activities and resources for teachers and does not collect student data)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/edit-unit-type/edit-unit-type.component.html</context>
+          <context context-type="linenumber">7,11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3548317051881233027" datatype="html">
         <source>Choose the component(s) that you want to import, then select Submit.</source>
         <context-group purpose="location">

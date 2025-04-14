@@ -6,6 +6,7 @@ import { StudentTeacherCommonServicesModule } from '../../../../app/student-teac
 import { ConfigService } from '../../services/configService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { EditUnitResourcesComponent } from '../edit-unit-resources/edit-unit-resources.component';
+import { EditUnitTypeComponent } from '../edit-unit-type/edit-unit-type.component';
 
 describe('ProjectInfoAuthoringComponent', () => {
   let component: ProjectInfoAuthoringComponent;
@@ -14,7 +15,11 @@ describe('ProjectInfoAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProjectInfoAuthoringComponent],
-      imports: [EditUnitResourcesComponent, StudentTeacherCommonServicesModule],
+      imports: [
+        EditUnitResourcesComponent,
+        EditUnitTypeComponent,
+        StudentTeacherCommonServicesModule
+      ],
       providers: [
         TeacherProjectService,
         provideHttpClient(withInterceptorsFromDi()),
