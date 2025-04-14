@@ -1,34 +1,36 @@
-import { Component, Input } from '@angular/core';
-import { SummaryService } from '../../../../components/summary/summaryService';
 import { AnnotationService } from '../../../../services/annotationService';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { ComponentFactory } from '../../../../common/ComponentFactory';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
+import { DialogGuidanceTeacherSummaryDisplayComponent } from '../../../../directives/teacher-summary-display/dialog-guidance-teacher-summary-display.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { isMatchingPeriods } from '../../../../common/period/period';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { Node } from '../../../../common/Node';
+import { PreviewComponentComponent } from '../../../../authoringTool/components/preview-component/preview-component.component';
+import { SummaryService } from '../../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { ComponentFactory } from '../../../../common/ComponentFactory';
-import { isMatchingPeriods } from '../../../../common/period/period';
-import { Node } from '../../../../common/Node';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { PreviewComponentComponent } from '../../../../authoringTool/components/preview-component/preview-component.component';
 import { TeacherSummaryDisplayComponent } from '../../../../directives/teacher-summary-display/teacher-summary-display.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
-    imports: [
-        CommonModule,
-        MatCardModule,
-        MatIconModule,
-        MatDividerModule,
-        FlexLayoutModule,
-        PreviewComponentComponent,
-        TeacherSummaryDisplayComponent
-    ],
-    selector: 'node-info',
-    styleUrl: 'node-info.component.scss',
-    templateUrl: 'node-info.component.html'
+  imports: [
+    DialogGuidanceTeacherSummaryDisplayComponent,
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    FlexLayoutModule,
+    PreviewComponentComponent,
+    TeacherSummaryDisplayComponent
+  ],
+  selector: 'node-info',
+  styleUrl: 'node-info.component.scss',
+  templateUrl: 'node-info.component.html'
 })
 export class NodeInfoComponent {
   protected node: Node;

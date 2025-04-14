@@ -1,0 +1,23 @@
+name: Develop branch PR workflows
+on:
+  pull_request:
+    branches:
+      - develop
+jobs:
+  generate-messages:
+    uses: WISE-Community/WISE-Client/.github/workflows/generate-messages.yml@develop
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+  test-coverage:
+    needs: generate-messages
+    uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@develop
+    secrets:
+      test_reporter: ${{secrets.CC_TEST_REPORTER_ID}}
+
+  build:
+    needs: [generate-messages, test-coverage]
+    uses: WISE-Community/WISE-Client/.github/workflows/code-build.yml@develop
+    secrets:
+      aws_key: ${{secrets.AWS_ACCESS_KEY_ID}}
+      aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
