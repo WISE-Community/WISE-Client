@@ -580,6 +580,17 @@
       }
     }
   </div>
+  <div class="section-container">
+    @if (showIdeaDescriptions) {
+      <edit-crater-idea-descriptions
+        [ideaDescriptions]="componentContent.cRater.rubric.ideas"
+        [enableAutoscrolling]="false"
+      />
+      <a (click)="toggleShowIdeaDescriptions()" i18n>Hide</a>
+    } @else {
+      <a (click)="toggleShowIdeaDescriptions()" i18n>Show Idea Descriptions</a>
+    }
+  </div>
 }
 @if (isNotebookEnabled) {
   <edit-component-add-to-notebook-button [componentContent]="componentContent" />

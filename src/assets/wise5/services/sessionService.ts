@@ -19,8 +19,12 @@ export class SessionService {
   public showSessionWarning$: Observable<void> = this.showSessionWarningSource.asObservable();
   private logOutSource: Subject<void> = new Subject<void>();
   public logOut$ = this.logOutSource.asObservable();
+  private sessionActive: boolean = true;
 
-  constructor(protected http: HttpClient, protected configService: ConfigService) {}
+  constructor(
+    protected http: HttpClient,
+    protected configService: ConfigService
+  ) {}
 
   calculateIntervals(sessionTimeout: number): any {
     const forceLogoutAfterWarningInterval: number = Math.min(
@@ -52,8 +56,13 @@ export class SessionService {
   logOut() {
     this.broadcastExit();
     this.http.get(this.configService.getSessionLogOutURL()).subscribe(() => {
+      this.sessionActive = false;
       window.location.href = '/';
     });
+  }
+
+  isSessionActive(): boolean {
+    return this.sessionActive;
   }
 
   initializeSession() {
@@ -100,9 +109,10 @@ export class SessionService {
     }
   }
 
-  checkForLogout() {
+  checkForLogout(): void {
     if (this.isInactiveLongEnoughToForceLogout()) {
       this.checkIfSessionIsActive().subscribe((isSessionActive) => {
+        this.sessionActive = isSessionActive;
         if (!isSessionActive) {
           this.forceLogOut();
         }

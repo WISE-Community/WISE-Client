@@ -14,19 +14,20 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   templateUrl: 'edit-open-response-advanced.component.html'
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
-  allowedConnectedComponentTypes = ['OpenResponse'];
+  protected allowedConnectedComponentTypes = ['OpenResponse'];
   componentContent: OpenResponseContent;
-  cRaterItemIdIsValid: boolean = null;
-  initialFeedbackRules = [
+  protected cRaterItemIdIsValid: boolean = null;
+  private initialFeedbackRules = [
     {
       id: 'isDefault',
       expression: 'isDefault',
       feedback: [$localize`Default feedback`]
     }
   ];
-  isVerifyingCRaterItemId: boolean = false;
-  nodeIds: string[] = [];
-  useCustomCompletionCriteria: boolean = false;
+  protected isVerifyingCRaterItemId: boolean;
+  protected nodeIds: string[] = [];
+  useCustomCompletionCriteria: boolean;
+  protected showIdeaDescriptions = true;
 
   constructor(
     protected cRaterService: CRaterService,
@@ -45,11 +46,18 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
   }
 
+  private createCRaterAndRubricIfNull() {
+    if (this.componentContent.cRater == null) {
+      this.componentContent.cRater = this.createCRaterObject();
+    }
+    if (!this.componentContent.cRater.rubric) {
+      this.componentContent.cRater.rubric = { ideas: [] };
+    }
+  }
+
   enableCRaterClicked(): void {
     if (this.componentContent.enableCRater) {
-      if (this.componentContent.cRater == null) {
-        this.componentContent.cRater = this.createCRaterObject();
-      }
+      this.createCRaterAndRubricIfNull();
       this.setShowSubmitButtonValue(true);
     } else {
       this.setShowSubmitButtonValue(false);
@@ -70,7 +78,10 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
         rules: this.initialFeedbackRules
       },
       enableMultipleAttemptScoringRules: false,
-      multipleAttemptScoringRules: []
+      multipleAttemptScoringRules: [],
+      rubric: {
+        ideas: []
+      }
     };
   }
 
@@ -259,6 +270,10 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       this.componentContent.completionCriteria.criteria.splice(index, 1);
       this.componentChanged();
     }
+  }
+
+  protected toggleShowIdeaDescriptions(): void {
+    this.showIdeaDescriptions = !this.showIdeaDescriptions;
   }
 
   getComponents(nodeId: string): ComponentContent[] {

@@ -46,7 +46,9 @@ export const newProjectTemplate = {
     template: 'starmap|leftNav|rightNav'
   },
   metadata: {
-    title: ''
+    title: '',
+    resources: [],
+    unitType: 'Platform'
   },
   notebook: {
     enabled: false,
