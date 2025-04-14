@@ -163,7 +163,7 @@
     isTeacher &&
     !isRunProject &&
     project.wiseVersion !== 4 &&
-    project.metadata.unitType === 'Classroom'
+    project.metadata.unitType === 'Platform'
   ) {
     <button mat-flat-button color="accent" (click)="runProject()">
       <mat-icon>supervised_user_circle</mat-icon>&nbsp;<ng-container i18n
@@ -171,7 +171,7 @@
       >
     </button>
   }
-  @if (project.metadata.unitType === 'Classroom') {
+  @if (project.metadata.unitType === 'Platform') {
     <button mat-flat-button color="primary" (click)="previewProject()">
       <mat-icon>preview</mat-icon>&nbsp;<ng-container i18n>Preview</ng-container>
     </button>

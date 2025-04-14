@@ -32,7 +32,7 @@ describe('LibraryProjectDetailsComponent', () => {
       grades: ['7'],
       title: 'Photosynthesis & Cellular Respiration',
       summary: 'A really great unit.',
-      unitType: 'Classroom',
+      unitType: 'Platform',
       totalTime: '6-7 hours',
       authors: [
         { id: 10, firstName: 'Spaceman', lastName: 'Spiff', username: 'SpacemanSpiff' },
