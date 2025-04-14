@@ -90,6 +90,17 @@
           }
         </p>
       }
+      @if (project.metadata.resources?.length > 0) {
+        <p>
+          <strong i18n>Resources:</strong>&nbsp;
+          @for (resource of project.metadata.resources; track resource.name; let last = $last) {
+            <a href="{{ resource.url }}" target="_blank" matTooltip="{{ resource.name }}">{{
+              resource.name
+            }}</a>
+            {{ last ? '' : ' | ' }}
+          }
+        </p>
+      }
       <unit-tags [tags]="project.tags" />
     </div>
     @if (project.metadata.discourseCategoryURL) {
@@ -148,14 +159,21 @@
 </div>
 <div mat-dialog-actions class="flex flex-col sm:flex-row gap-2 sm:gap-4 !items-stretch" align="end">
   <button mat-button cdkFocusInitial (click)="close()" i18n>Close</button>
-  @if (isTeacher && !isRunProject && project.wiseVersion !== 4) {
+  @if (
+    isTeacher &&
+    !isRunProject &&
+    project.wiseVersion !== 4 &&
+    project.metadata.unitType === 'Platform'
+  ) {
     <button mat-flat-button color="accent" (click)="runProject()">
       <mat-icon>supervised_user_circle</mat-icon>&nbsp;<ng-container i18n
         >Use with Class</ng-container
       >
     </button>
   }
-  <button mat-flat-button color="primary" (click)="previewProject()">
-    <mat-icon>preview</mat-icon>&nbsp;<ng-container i18n>Preview</ng-container>
-  </button>
+  @if (project.metadata.unitType === 'Platform') {
+    <button mat-flat-button color="primary" (click)="previewProject()">
+      <mat-icon>preview</mat-icon>&nbsp;<ng-container i18n>Preview</ng-container>
+    </button>
+  }
 </div>

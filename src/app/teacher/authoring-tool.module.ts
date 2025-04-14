@@ -61,6 +61,8 @@ import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add
 import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
 import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
+import { EditUnitResourcesComponent } from '../../assets/wise5/authoringTool/edit-unit-resources/edit-unit-resources.component';
+import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-unit-type/edit-unit-type.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +108,8 @@ import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool
     CreateBranchComponent,
     EditBranchComponent,
     EditNodeTitleComponent,
+    EditUnitResourcesComponent,
+    EditUnitTypeComponent,
     MatBadgeModule,
     MatChipsModule,
     MatExpansionModule,

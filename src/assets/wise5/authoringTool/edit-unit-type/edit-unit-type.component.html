@@ -1,0 +1,10 @@
+<h5 i18n>Unit Type</h5>
+<mat-radio-group [(ngModel)]="metadata.unitType" (ngModelChange)="saveProject()" name="unitTypes">
+  <mat-radio-button value="Platform" i18n
+    >WISE Platform (Uses features on this platform to collect student data)</mat-radio-button
+  >
+  <mat-radio-button value="Other" i18n
+    >Other Platform (Contains activities and resources for teachers and does not collect student
+    data)</mat-radio-button
+  >
+</mat-radio-group>
