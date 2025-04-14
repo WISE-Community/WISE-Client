@@ -1,0 +1,38 @@
+tr {
+  border-bottom: 1px solid darkgray;
+}
+
+tr:nth-child(odd) {
+  background-color: whitesmoke;
+}
+
+tr > * {
+  border-right: 1px solid darkgray;
+}
+
+button {
+  float: right;
+}
+
+button:hover {
+  background-color: #f6f5f4;
+}
+
+.idea-id {
+  text-align: center;
+}
+
+div {
+  padding: 20px;
+  border: 5px solid black;
+}
+
+#rubric-title {
+  font-size: larger;
+  font-weight: bold;
+}
+
+#rubric-table {
+  width: 100%;
+  border: 3px solid black;
+}

@@ -1,0 +1,21 @@
+<div>
+  <h1 id="rubric-title">
+    Idea detection rubric
+    <button (click)="closeDialog()"><mat-icon>close</mat-icon></button>
+  </h1>
+  @if (data.cRaterRubric.getDescription()) {
+    <p id="rubric-description">{{ data.cRaterRubric.description }}</p>
+  }
+  <table id="rubric-table">
+    <tr>
+      <th>ID</th>
+      <th>Description</th>
+    </tr>
+    @for (idea of ideas; track idea.name) {
+      <tr>
+        <td class="idea-id">{{ idea.name }}</td>
+        <td class="idea-name">{{ idea.text }}</td>
+      </tr>
+    }
+  </table>
+</div>
