@@ -8,5 +8,6 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
   standalone: false
 })
 export class EditDialogGuidanceAdvancedComponent extends EditAdvancedComponentComponent {
+  @Input() description: string = '';
   @Input() ideaDescriptions: CRaterIdea[] = [];
 }

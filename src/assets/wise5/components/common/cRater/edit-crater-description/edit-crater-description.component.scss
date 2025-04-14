@@ -1,0 +1,16 @@
+@import 'style/abstracts/variables';
+
+.description {
+  padding: 16px;
+  margin: 16px 0px;
+  border-radius: $card-border-radius;
+}
+
+.description-content {
+  width: 100%;
+  padding: 8px;
+}
+
+.description-input {
+  width: 100%;
+}
