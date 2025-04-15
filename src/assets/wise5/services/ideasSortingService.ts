@@ -1,10 +1,5 @@
+import { IdeaData } from '../components/common/cRater/IdeaData';
 import { Injectable } from '@angular/core';
-
-export type IdeaData = {
-  id: string;
-  text: string;
-  count: number;
-};
 
 @Injectable()
 export class IdeasSortingService {

@@ -5,16 +5,17 @@ import { ConfigService } from '../../services/configService';
 import { CRaterIdea } from '../../components/common/cRater/CRaterIdea';
 import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';
 import { CRaterService } from '../../services/cRaterService';
+import { DialogGuidanceSummaryData } from './summary-data/DialogGuidanceSummaryData';
+import { IdeaData } from '../../components/common/cRater/IdeaData';
+import { IdeasSortingService } from '../../services/ideasSortingService';
+import { IdeasSummaryData } from './summary-data/IdeasSummaryData';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { OpenResponseSummaryData } from './summary-data/OpenResponseSummaryData';
 import { SummaryService } from '../../components/summary/summaryService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from './teacher-summary-display.component';
-import { DialogGuidanceSummaryData } from './summary-data/DialogGuidanceSummaryData';
-import { OpenResponseSummaryData } from './summary-data/OpenResponseSummaryData';
-import { IdeasSummaryData } from './summary-data/IdeasSummaryData';
-import { IdeaData, IdeasSortingService } from '../../services/ideasSortingService';
 
 @Component({
   imports: [CommonModule, MatCardModule, MatIconModule],

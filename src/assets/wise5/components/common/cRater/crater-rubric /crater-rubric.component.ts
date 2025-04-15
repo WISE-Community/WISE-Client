@@ -1,12 +1,14 @@
 import { Component, Inject } from '@angular/core';
-import { CRaterRubric } from '../CRaterRubric';
 import { CRaterIdea } from '../CRaterIdea';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { cRaterIdeaToIdeaData, ideaDataToCRaterIdea } from '../IdeaData';
+import { CRaterRubric } from '../CRaterRubric';
+import { IdeasSortingService } from '../../../../services/ideasSortingService';
 import { MatIconModule } from '@angular/material/icon';
-// import { IdeasSortingService }
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   imports: [MatIconModule],
+  providers: [IdeasSortingService],
   selector: 'crater-rubric',
   templateUrl: './crater-rubric.component.html',
   styleUrl: './crater-rubric.component.scss'
@@ -16,13 +18,14 @@ export class CRaterRubricComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) protected data: { cRaterRubric: CRaterRubric },
-    private dialogRef: MatDialogRef<CRaterRubricComponent>
+    private dialogRef: MatDialogRef<CRaterRubricComponent>,
+    private ideasSortingService: IdeasSortingService
   ) {}
-  //   constructor(private ideasSortingService: IdeasSortingService) {}
 
   ngOnInit(): void {
-    // this.ideas = this.ideasSortingService.sortById(this.cRaterRubric.getIdeas());
-    this.ideas = this.data.cRaterRubric.getIdeas();
+    this.ideas = this.ideasSortingService
+      .sortById(this.data.cRaterRubric.ideas.map(cRaterIdeaToIdeaData))
+      .map(ideaDataToCRaterIdea);
   }
 
   protected closeDialog(): void {
