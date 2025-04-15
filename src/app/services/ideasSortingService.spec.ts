@@ -25,14 +25,14 @@ describe('IdeasSortingService', () => {
 
 function sortIdeasByCount() {
   it('should sort ideas descending numerically by count', () => {
-    const sortedIdeas = service.sortIdeasByCount(ideas);
+    const sortedIdeas = service.sortByCount(ideas);
     expect(sortedIdeas.map((idea) => idea.id)).toEqual(['11', '2b', '2', '10a', '1']);
   });
 }
 
 function sortIdeasById() {
   it('should sort ideas alphanumerically by ID', () => {
-    const sortedIdeas = service.sortIdeasById(ideas);
+    const sortedIdeas = service.sortById(ideas);
     expect(sortedIdeas.map((ideas) => ideas.id)).toEqual(['1', '2', '2b', '10a', '11']);
   });
 }

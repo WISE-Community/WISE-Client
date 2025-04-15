@@ -90,7 +90,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       this.doRender = false;
     } else {
       const ideaCountArray = this.ideaCountMapToArray(this.ideaDescriptions.getIdeas());
-      const sortedIdeas = this.ideasSortingService.sortIdeasByCount(ideaCountArray);
+      const sortedIdeas = this.ideasSortingService.sortByCount(ideaCountArray);
       this.mostCommonIdeas = [...sortedIdeas].splice(0, 3);
       if (sortedIdeas.length <= 3) {
         this.leastCommonIdeas = [...this.mostCommonIdeas].reverse();
@@ -99,7 +99,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
           .splice(sortedIdeas.length - 3, sortedIdeas.length)
           .reverse();
       }
-      this.allIdeas = this.ideasSortingService.sortIdeasById(ideaCountArray);
+      this.allIdeas = this.ideasSortingService.sortById(ideaCountArray);
     }
   }
 

@@ -8,19 +8,15 @@ export type IdeaData = {
 
 @Injectable()
 export class IdeasSortingService {
-  constructor() {}
-
-  sortIdeasByCount(ideas: IdeaData[]): IdeaData[] {
+  sortByCount(ideas: IdeaData[]): IdeaData[] {
     return ideas.filter((idea) => idea.count > 0).sort((a, b) => b.count - a.count);
   }
 
-  sortIdeasById(ideas: IdeaData[]): IdeaData[] {
+  sortById(ideas: IdeaData[]): IdeaData[] {
     let sorted = ideas
       .filter((idea) => !this.stringContainsLetters(idea.id))
       .sort((a, b) => Number(a.id) - Number(b.id));
-
     const sortedIdeasWithLetters = this.getSortedIdeasWithLetters(ideas);
-
     return this.insertIdeasWithLetters(sorted, sortedIdeasWithLetters);
   }
 
@@ -31,13 +27,7 @@ export class IdeasSortingService {
   }
 
   private stringContainsLetters(str: string): boolean {
-    let hasLetters = false;
-    Array.from(str).forEach((char) => {
-      if (isNaN(Number(char))) {
-        hasLetters = true;
-      }
-    });
-    return hasLetters;
+    return Array.from(str).some((char) => isNaN(Number(char)));
   }
 
   private compareByStringNumericPrefix(idea: IdeaData, otherIdea: IdeaData): number {
