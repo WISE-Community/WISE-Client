@@ -26,7 +26,12 @@ export class SummaryService extends ComponentService {
       'OpenResponse',
       'Table'
     ];
-    this.componentsWithResponsesSummary = ['DialogGuidance', 'MultipleChoice', 'Table'];
+    this.componentsWithResponsesSummary = [
+      'DialogGuidance',
+      'MultipleChoice',
+      'OpenResponse',
+      'Table'
+    ];
   }
 
   getComponentTypeLabel(): string {

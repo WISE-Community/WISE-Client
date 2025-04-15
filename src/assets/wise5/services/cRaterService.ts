@@ -10,6 +10,7 @@ import { CRaterResponse } from '../components/common/cRater/CRaterResponse';
 import { RawCRaterResponse } from '../components/common/cRater/RawCRaterResponse';
 import { CRaterRubric } from '../components/common/cRater/CRaterRubric';
 import { ProjectService } from './projectService';
+import { OpenResponseContent } from '../components/openResponse/OpenResponseContent';
 
 @Injectable()
 export class CRaterService {
@@ -267,7 +268,14 @@ export class CRaterService {
     return ideas;
   }
 
-  getCRaterRubric(nodeId: string, componentId: string): CRaterRubric {
-    return new CRaterRubric(this.projectService.getComponent(nodeId, componentId).cRaterRubric);
+  getCRaterRubric(nodeId: string, componentId: string, componentType?: string): CRaterRubric {
+    const componentContent = this.projectService.getComponent(nodeId, componentId);
+    let rubricContent;
+    if (componentType === 'OpenResponse') {
+      rubricContent = (componentContent as OpenResponseContent).cRater?.rubric;
+    } else {
+      rubricContent = componentContent.cRaterRubric;
+    }
+    return new CRaterRubric(rubricContent);
   }
 }
