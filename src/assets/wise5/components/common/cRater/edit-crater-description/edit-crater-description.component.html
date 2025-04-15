@@ -7,11 +7,10 @@
       <mat-label i18n>User-Friendly Description</mat-label>
       <textarea
         matInput
-        [(ngModel)]="description"
+        [(ngModel)]="cRaterRubric.description"
         (ngModelChange)="inputChanged.next($event)"
         cdkTextareaAutosize
-      >
-      </textarea>
+      ></textarea>
     </mat-form-field>
   </mat-card>
 </div>

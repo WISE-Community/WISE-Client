@@ -68,7 +68,7 @@ export class DialogGuidanceTeacherSummaryDisplayComponent extends TeacherSummary
   }
 
   private getAllIdeas(): { id: string; text: string; count: number }[] {
-    return this.rubric.getIdeas().map((idea) => ({
+    return this.rubric.ideas.map((idea) => ({
       id: idea.name,
       text: this.useIdeaTextOrId(idea.name, idea.text),
       count: this.ideaCountMap.get(idea.name)?.size ?? 0
