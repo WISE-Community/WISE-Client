@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { CRaterRubric } from '../../common/cRater/CRaterRubric';
-import { CRaterRubricComponent } from '../../common/cRater/crater-rubric /crater-rubric.component';
+import { CRaterRubricComponent } from '../../common/cRater/crater-rubric/crater-rubric.component';
 import { DetectedIdeasComponent } from '../detected-ideas/detected-ideas.component';
 import { DialogResponse } from '../DialogResponse';
 import { DialogResponseComponent } from '../dialog-response/dialog-response.component';
