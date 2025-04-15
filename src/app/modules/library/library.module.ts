@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LibraryGroupThumbsComponent } from './library-group-thumbs/library-group-thumbs.component';
 import { LibraryProjectComponent } from './library-project/library-project.component';
 import { LibraryProjectDetailsComponent } from './library-project-details/library-project-details.component';
-import { LibraryProjectDisciplinesComponent } from './library-project-disciplines/library-project-disciplines.component';
 import { LibraryService } from '../../services/library.service';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
@@ -86,8 +85,8 @@ const materialModules = [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    LibraryProjectComponent,
     LibraryProjectDetailsComponent,
-    LibraryProjectDisciplinesComponent,
     ReactiveFormsModule,
     RouterModule,
     materialModules,
@@ -102,7 +101,6 @@ const materialModules = [
   ],
   declarations: [
     LibraryGroupThumbsComponent,
-    LibraryProjectComponent,
     LibraryFiltersComponent,
     HomePageProjectLibraryComponent,
     TeacherProjectLibraryComponent,

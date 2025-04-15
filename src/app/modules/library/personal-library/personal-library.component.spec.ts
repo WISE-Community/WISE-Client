@@ -41,12 +41,13 @@ const projectId5 = 5;
 describe('PersonalLibraryComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [LibraryProjectComponent, PersonalLibraryComponent],
+      declarations: [PersonalLibraryComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         ArchiveProjectsButtonComponent,
         BrowserAnimationsModule,
         FormsModule,
+        LibraryProjectComponent,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
