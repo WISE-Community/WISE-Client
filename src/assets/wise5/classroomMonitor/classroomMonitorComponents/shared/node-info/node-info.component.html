@@ -57,16 +57,18 @@
             [doRender]="true"
           />
         }
-        @if (component.hasResponsesSummary && component.type === 'DialogGuidance') {
-          <dialog-guidance-teacher-summary-display
-            class="summary-display"
+        @if (
+          component.hasResponsesSummary &&
+          ['DialogGuidance', 'OpenResponse'].includes(component.type)
+        ) {
+          <ideas-summary
             [nodeId]="nodeId"
             [componentId]="component.id"
             [periodId]="periodId"
             [studentDataType]="'responses'"
             [source]="source"
-            [chartType]="'column'"
             [doRender]="true"
+            [componentType]="component.type"
           />
         }
       </div>

@@ -162,7 +162,7 @@ function checkIfStudentDataTypeIsAvailableForAComponentWhenTrue() {
     const componentContent = {
       id: 'hxh43zj46j',
       prompt: 'This is hxh43zj46j',
-      type: 'OpenResponse'
+      type: 'Embedded'
     };
     getComponentSpy.and.returnValue(componentContent);
     const isAvailable = component.isStudentDataTypeAvailableForComponent(
@@ -179,7 +179,7 @@ function checkIfStudentDataTypeIsAvailableForAComponentWhenFalse() {
     const componentContent = {
       id: 'hxh43zj46j',
       prompt: 'This is hxh43zj46j',
-      type: 'OpenResponse'
+      type: 'Embedded'
     };
     getComponentSpy.and.returnValue(componentContent);
     const isAvailable = component.isStudentDataTypeAvailableForComponent(
