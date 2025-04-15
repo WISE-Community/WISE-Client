@@ -6,32 +6,44 @@ import { Discipline } from '../Discipline';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
 import { ResearchProject, ResearchProjectType } from '../ResearchProject';
+import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { SelectMenuComponent } from '../../shared/select-menu/select-menu.component';
+import { StandardsSelectMenuComponent } from '../../shared/standards-select-menu/standards-select-menu.component';
 
 @Component({
+  imports: [
+    CommonModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatIconModule,
+    SearchBarComponent,
+    SelectMenuComponent,
+    StandardsSelectMenuComponent
+  ],
   selector: 'app-library-filters',
   styleUrl: './library-filters.component.scss',
-  templateUrl: './library-filters.component.html',
-  standalone: false
+  templateUrl: './library-filters.component.html'
 })
 export class LibraryFiltersComponent implements OnInit {
-  @Input()
-  isSplitScreen: boolean = false;
-
-  allProjects: LibraryProject[] = [];
-  libraryProjects: LibraryProject[] = [];
-  communityProjects: LibraryProject[] = [];
-  sharedProjects: LibraryProject[] = [];
-  personalProjects: LibraryProject[] = [];
-  searchValue: string = '';
+  private allProjects: LibraryProject[] = [];
+  private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
-  protected standardOptions: Standard[] = [];
+  protected disciplineValue = [];
+  @Input() isSplitScreen: boolean = false;
+  private libraryProjects: LibraryProject[] = [];
+  private personalProjects: LibraryProject[] = [];
   protected possibleStandardLabels = ['NGSS', 'Common Core', 'Learning For Justice'];
-  protected standardValue = [];
-  disciplineValue = [];
-
   protected researchProjectOptions: ResearchProject[] = [];
   private researchProjectValue: ResearchProjectType[] = [];
-  showFilters: boolean = false;
+  protected searchValue: string = '';
+  private sharedProjects: LibraryProject[] = [];
+  protected showFilters: boolean = false;
+  protected standardOptions: Standard[] = [];
+  protected standardValue = [];
 
   constructor(
     private libraryService: LibraryService,
@@ -59,20 +71,20 @@ export class LibraryFiltersComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const filterOptions: ProjectFilterValues = this.libraryService.getFilterValues();
     this.standardValue = filterOptions.standardValue;
     this.disciplineValue = filterOptions.disciplineValue;
     this.searchValue = filterOptions.searchValue;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.projects) {
       this.populateFilterOptions();
     }
   }
 
-  populateFilterOptions(): void {
+  private populateFilterOptions(): void {
     this.allProjects = this.getAllProjects();
     this.standardOptions = [];
     this.disciplineOptions = [];
@@ -105,14 +117,14 @@ export class LibraryFiltersComponent implements OnInit {
     });
   }
 
-  getAllProjects() {
+  private getAllProjects(): LibraryProject[] {
     return this.libraryProjects
       .concat(this.communityProjects)
       .concat(this.sharedProjects)
       .concat(this.personalProjects);
   }
 
-  removeDuplicatesAndSortAlphabetically() {
+  private removeDuplicatesAndSortAlphabetically(): void {
     this.standardOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
       this.standardOptions,
       'id'
@@ -125,16 +137,19 @@ export class LibraryFiltersComponent implements OnInit {
     this.utilService.sortObjectArrayByProperty(this.disciplineOptions, 'name');
   }
 
-  hasFilters(): boolean {
+  protected hasFilters(): boolean {
     return this.standardValue.length > 0 || this.disciplineValue.length > 0;
   }
 
-  searchUpdated(value: string): void {
+  protected searchUpdated(value: string): void {
     this.searchValue = value.toLocaleLowerCase();
     this.emitFilterValues();
   }
 
-  filterUpdated(value: string[] | ResearchProjectType[] = [], context: string = ''): void {
+  protected filterUpdated(
+    value: string[] | ResearchProjectType[] = [],
+    context: string = ''
+  ): void {
     switch (context) {
       case 'discipline':
         this.disciplineValue = value;
@@ -149,7 +164,7 @@ export class LibraryFiltersComponent implements OnInit {
     this.emitFilterValues();
   }
 
-  emitFilterValues() {
+  private emitFilterValues(): void {
     const filterOptions: ProjectFilterValues = {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
@@ -159,7 +174,7 @@ export class LibraryFiltersComponent implements OnInit {
     this.libraryService.setFilterValues(filterOptions);
   }
 
-  clearFilterValues() {
+  protected clearFilterValues(): void {
     this.standardValue = [];
     this.disciplineValue = [];
     this.emitFilterValues();

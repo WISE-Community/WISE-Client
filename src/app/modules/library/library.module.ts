@@ -85,6 +85,7 @@ const materialModules = [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    LibraryFiltersComponent,
     LibraryProjectComponent,
     LibraryProjectDetailsComponent,
     ReactiveFormsModule,
@@ -101,7 +102,6 @@ const materialModules = [
   ],
   declarations: [
     LibraryGroupThumbsComponent,
-    LibraryFiltersComponent,
     HomePageProjectLibraryComponent,
     TeacherProjectLibraryComponent,
     OfficialLibraryComponent,

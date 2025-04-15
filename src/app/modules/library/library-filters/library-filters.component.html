@@ -1,7 +1,7 @@
 <div class="library-filter">
   <div class="flex flex-row gap-1">
     <div class="flex-auto max-w-full">
-      <app-search-bar [value]="searchValue" (update)="searchUpdated($event)"></app-search-bar>
+      <app-search-bar [value]="searchValue" (update)="searchUpdated($event)" />
     </div>
     <button
       mat-icon-button
@@ -16,6 +16,7 @@
         matBadgeOverlap="true"
         matBadgeSize="small"
         [matBadgeHidden]="!hasFilters()"
+        aria-hidden="false"
         >filter_list</mat-icon
       >
     </button>
@@ -29,47 +30,52 @@
         >Next Generation Science Standards</a
       >
       (NGSS).</ng-container
-    >&nbsp;<a *ngIf="hasFilters()" href="#" (click)="!!clearFilterValues()" i18n>Reset</a>
+    >&nbsp;
+    @if (hasFilters()) {
+      <a href="#" (click)="!!clearFilterValues()" i18n>Reset</a>
+    }
   </div>
   <div
     class="flex flex-col gap-2"
     [ngClass]="{ 'md:flex-col': isSplitScreen, 'md:flex-row': !isSplitScreen }"
   >
-    <div
-      *ngIf="disciplineOptions.length > 0"
-      class="library-filter"
-      [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
-    >
-      <app-select-menu
-        id="disciplineSelectMenu"
-        [options]="disciplineOptions"
-        i18n-placeholderText
-        placeholderText="Discipline"
-        [value]="disciplineValue"
-        (update)="filterUpdated($event, 'discipline')"
-        [valueProp]="'id'"
-        [viewValueProp]="'name'"
-        [multiple]="true"
-      />
-    </div>
-    <div
-      *ngIf="standardOptions.length > 0"
-      class="library-filter"
-      [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
-    >
-      <standards-select-menu
-        id="standardSelectMenu"
-        [options]="standardOptions"
-        [possibleLabels]="possibleStandardLabels"
-        i18n-placeholderText
-        placeholderText="Standard "
-        [value]="standardValue"
-        (update)="filterUpdated($event, 'standard')"
-        [valueProp]="'id'"
-        [viewValueProp]="'name'"
-        [multiple]="true"
-      />
-    </div>
+    @if (disciplineOptions.length > 0) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <app-select-menu
+          id="disciplineSelectMenu"
+          [options]="disciplineOptions"
+          i18n-placeholderText
+          placeholderText="Discipline"
+          [value]="disciplineValue"
+          (update)="filterUpdated($event, 'discipline')"
+          [valueProp]="'id'"
+          [viewValueProp]="'name'"
+          [multiple]="true"
+        />
+      </div>
+    }
+    @if (standardOptions.length > 0) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <standards-select-menu
+          id="standardSelectMenu"
+          [options]="standardOptions"
+          [possibleLabels]="possibleStandardLabels"
+          i18n-placeholderText
+          placeholderText="Standard "
+          [value]="standardValue"
+          (update)="filterUpdated($event, 'standard')"
+          [valueProp]="'id'"
+          [viewValueProp]="'name'"
+          [multiple]="true"
+        />
+      </div>
+    }
     @if (researchProjectOptions.length > 0) {
       <div
         class="library-filter"
