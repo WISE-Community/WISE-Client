@@ -1,5 +1,4 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-
 import { EditCRaterDescriptionComponent } from './edit-crater-description.component';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 

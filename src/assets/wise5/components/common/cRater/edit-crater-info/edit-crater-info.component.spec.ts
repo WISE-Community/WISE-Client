@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CRaterRubric } from '../CRaterRubric';
 import { EditCRaterInfoComponent } from './edit-crater-info.component';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { CRaterRubric } from '../CRaterRubric';
 
 class MockTeacherProjectService {
   nodeChanged() {}
