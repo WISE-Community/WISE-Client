@@ -44,6 +44,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       this.useCustomCompletionCriteria = true;
     }
     this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
+    this.createCRaterAndRubricIfNull();
   }
 
   private createCRaterAndRubricIfNull() {
