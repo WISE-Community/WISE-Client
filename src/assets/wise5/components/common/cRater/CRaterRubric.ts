@@ -9,10 +9,6 @@ export class CRaterRubric {
     this.ideas = rubric.ideas;
   }
 
-  getDescription(): string {
-    return this.description;
-  }
-
   getIdea(ideaId: string): CRaterIdea {
     return this.ideas.find((idea) => idea.name === ideaId);
   }
