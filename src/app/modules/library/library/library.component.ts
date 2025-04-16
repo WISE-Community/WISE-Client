@@ -7,6 +7,7 @@ import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ResearchProjectType } from '../ResearchProject';
+import { Feature } from '../Feature';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
@@ -14,6 +15,7 @@ export abstract class LibraryComponent implements OnInit {
   protected standardValue = [];
   protected disciplineOptions: Standard[] = [];
   protected disciplineValue = [];
+  protected featureOptions: Feature[] = [];
   protected filteredProjects: LibraryProject[] = [];
   protected filterValues: ProjectFilterValues = new ProjectFilterValues();
   protected highIndex: number = 0;
@@ -123,7 +125,8 @@ export abstract class LibraryComponent implements OnInit {
       this.matchesPublicUnitType(project) ||
       this.matchesStandard(project) ||
       this.matchesDiscipline(project) ||
-      this.matchesResearchProject(project)
+      this.matchesResearchProject(project) ||
+      this.matchesFeature(project)
     );
   }
 
@@ -138,6 +141,15 @@ export abstract class LibraryComponent implements OnInit {
     const learningForJustice = standards?.learningForJustice ?? [];
     return [...commonCore, ...ngss, ...learningForJustice].some((val) =>
       this.standardValue.includes(val.id)
+    );
+  }
+
+  private matchesFeature(project: LibraryProject): boolean {
+    return (
+      this.filterValues.featureValue.length > 0 &&
+      project.metadata.features?.some((feature) =>
+        this.filterValues.featureValue.includes(feature.id)
+      )
     );
   }
 
@@ -164,7 +176,8 @@ export abstract class LibraryComponent implements OnInit {
       this.standardValue.length +
         this.disciplineValue.length +
         this.researchProjectValue.length +
-        this.publicUnitTypeValue.length >
+        this.publicUnitTypeValue.length +
+        this.filterValues.featureValue.length >
       0
     );
   }

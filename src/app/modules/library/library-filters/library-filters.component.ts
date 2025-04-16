@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { SelectMenuComponent } from '../../shared/select-menu/select-menu.component';
 import { StandardsSelectMenuComponent } from '../../shared/standards-select-menu/standards-select-menu.component';
+import { Feature } from '../Feature';
 
 @Component({
   imports: [
@@ -33,6 +34,8 @@ export class LibraryFiltersComponent implements OnInit {
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected disciplineValue = [];
+  protected featureOptions: Feature[] = [];
+  protected featureValue = [];
   @Input() isSplitScreen: boolean = false;
   private libraryProjects: LibraryProject[] = [];
   private personalProjects: LibraryProject[] = [];
@@ -92,6 +95,9 @@ export class LibraryFiltersComponent implements OnInit {
       project.metadata.disciplines?.forEach((discipline: any) =>
         this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
       );
+      project.metadata.features?.forEach((feature: any) =>
+        this.featureOptions.push(new Feature(feature.id, feature.name))
+      );
       const standards = project.metadata.standards;
       [
         ['ngss', 'NGSS'],
@@ -135,6 +141,11 @@ export class LibraryFiltersComponent implements OnInit {
       'id'
     );
     this.utilService.sortObjectArrayByProperty(this.disciplineOptions, 'name');
+    this.featureOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.featureOptions,
+      'id'
+    );
+    this.utilService.sortObjectArrayByProperty(this.featureOptions, 'name');
   }
 
   protected hasFilters(): boolean {
@@ -160,6 +171,9 @@ export class LibraryFiltersComponent implements OnInit {
       case 'researchProject':
         this.researchProjectValue = value as ResearchProjectType[];
         break;
+      case 'feature':
+        this.featureValue = value;
+        break;
     }
     this.emitFilterValues();
   }
@@ -168,6 +182,7 @@ export class LibraryFiltersComponent implements OnInit {
     const filterOptions: ProjectFilterValues = {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
+      featureValue: this.featureValue,
       standardValue: this.standardValue,
       researchProjectValue: this.researchProjectValue
     };

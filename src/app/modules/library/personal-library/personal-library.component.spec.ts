@@ -269,6 +269,7 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
           searchValue: 'world',
           standardValue: [],
           disciplineValue: [],
+          featureValue: [],
           researchProjectValue: []
         });
         expect(await harness.getSelectedProjectIds()).toEqual([]);
