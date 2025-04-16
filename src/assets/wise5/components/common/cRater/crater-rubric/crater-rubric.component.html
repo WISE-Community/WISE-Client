@@ -3,7 +3,7 @@
     Idea detection rubric
     <button (click)="closeDialog()"><mat-icon>close</mat-icon></button>
   </h1>
-  @if (data.cRaterRubric.description) {
+  @if (data.cRaterRubric.description && data.cRaterRubric.description !== '') {
     <p id="rubric-description">{{ data.cRaterRubric.description }}</p>
   }
   <table>
