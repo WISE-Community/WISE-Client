@@ -1,9 +1,11 @@
-<div id="detectable-ideas">
-  <a (click)="openIdeasRubric()">
-    <mat-icon class="ai-logo">auto_awesome</mat-icon>
-    {{ dialog.openDialogs.length === 0 ? 'Show' : 'Hide' }} detectable ideas
-  </a>
-</div>
+@if (showDetectedIdeas) {
+  <div id="detectable-ideas">
+    <a (click)="toggleIdeasRubric()">
+      <mat-icon class="ai-logo">auto_awesome</mat-icon>
+      {{ rubricEventService.isRubricOpen() ? 'Hide' : 'Show' }} detectable ideas
+    </a>
+  </div>
+}
 @for (response of responses; track response.timestamp) {
   @if (response.user === 'Computer' && showDetectedIdeas && cRaterRubric.ideas.length) {
     <detected-ideas [cRaterRubric]="cRaterRubric" [responses]="[response]" />
