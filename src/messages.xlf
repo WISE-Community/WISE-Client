@@ -5646,6 +5646,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library.component.html</context>
           <context context-type="linenumber">3,6</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/unit-library/unit-library.component.html</context>
+          <context context-type="linenumber">3,6</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="7486053402567236946" datatype="html">
         <source> No community designed units found. </source>
@@ -6052,7 +6056,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Unit Details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project/library-project.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1160916388490317189" datatype="html">
@@ -6376,6 +6380,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.html</context>
           <context context-type="linenumber">6,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7324430587474574661" datatype="html">
+        <source>No community designed units found.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/unit-library/unit-library.component.html</context>
+          <context context-type="linenumber">20,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1556270137829928334" datatype="html">

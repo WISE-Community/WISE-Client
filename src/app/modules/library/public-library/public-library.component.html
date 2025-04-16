@@ -1,0 +1,30 @@
+<div class="content-block library-teacher__paginate">
+  <div class="flex flex-col sm:items-center justify-center align-items-stretch sm:flex-row">
+    <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What is Community Built?</a>
+    <span class="flex-1 hidden sm:inline"></span>
+    <mat-paginator
+      [length]="filteredProjects.length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageChange($event)"
+    />
+  </div>
+  <mat-divider />
+  <div class="library__list flex flex-col flex-wrap items-start sm:flex-row">
+    @for (project of filteredProjects; track project.id; let i = $index) {
+      @if (isOnPage(i)) {
+        <app-library-project [project]="project" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4" />
+      }
+    }
+    @if (filteredProjects.length === 0) {
+      <div class="notice" i18n>No community designed units found.</div>
+    }
+  </div>
+  <mat-divider />
+  <mat-paginator
+    [length]="filteredProjects.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChange($event, true)"
+  />
+</div>

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CurriculumComponent } from './curriculum.component';
+import { PublicLibraryComponent } from './public-library.component';
 import { MockProvider } from 'ng-mocks';
-import { LibraryService } from '../services/library.service';
+import { LibraryService } from '../../../services/library.service';
 import { of } from 'rxjs';
-import { ProjectFilterValues } from '../domain/projectFilterValues';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
-describe('CurriculumComponent', () => {
-  let component: CurriculumComponent;
-  let fixture: ComponentFixture<CurriculumComponent>;
+describe('PublicLibraryComponent', () => {
+  let component: PublicLibraryComponent;
+  let fixture: ComponentFixture<PublicLibraryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CurriculumComponent],
+      imports: [PublicLibraryComponent],
       providers: [
         MockProvider(LibraryService, {
           projectFilterValuesSource$: of({} as ProjectFilterValues),
@@ -20,7 +20,7 @@ describe('CurriculumComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CurriculumComponent);
+    fixture = TestBed.createComponent(PublicLibraryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
