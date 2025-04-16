@@ -23,6 +23,7 @@ export abstract class LibraryComponent implements OnInit {
   protected pageSize: number = 12;
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
   protected projects: LibraryProject[] = [];
+  protected publicUnitTypeValue: ('wiseTested' | 'communityBuilt')[] = [];
   private researchProjectValue: ResearchProjectType[] = [];
   protected searchValue: string = '';
   protected showFilters: boolean = false;
@@ -119,10 +120,15 @@ export abstract class LibraryComponent implements OnInit {
 
   private isFilterMatch(project: LibraryProject): boolean {
     return (
+      this.matchesPublicUnitType(project) ||
       this.matchesStandard(project) ||
       this.matchesDiscipline(project) ||
       this.matchesResearchProject(project)
     );
+  }
+
+  private matchesPublicUnitType(project: LibraryProject): boolean {
+    return this.publicUnitTypeValue?.includes(project.metadata.publicUnitType);
   }
 
   private matchesStandard(project: LibraryProject): boolean {
@@ -155,7 +161,11 @@ export abstract class LibraryComponent implements OnInit {
 
   private hasFilters(): boolean {
     return (
-      this.standardValue.length + this.disciplineValue.length + this.researchProjectValue.length > 0
+      this.standardValue.length +
+        this.disciplineValue.length +
+        this.researchProjectValue.length +
+        this.publicUnitTypeValue.length >
+      0
     );
   }
 

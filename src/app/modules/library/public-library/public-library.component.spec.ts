@@ -15,7 +15,8 @@ describe('PublicLibraryComponent', () => {
       providers: [
         MockProvider(LibraryService, {
           projectFilterValuesSource$: of({} as ProjectFilterValues),
-          communityLibraryProjectsSource$: of([])
+          communityLibraryProjectsSource$: of([]),
+          officialLibraryProjectsSource$: of([])
         })
       ]
     }).compileComponents();

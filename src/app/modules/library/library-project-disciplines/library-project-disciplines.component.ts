@@ -1,14 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-library-project-disciplines',
   templateUrl: './library-project-disciplines.component.html',
   styleUrl: './library-project-disciplines.component.scss',
-  imports: [CommonModule, FlexLayoutModule, MatTooltipModule]
+  imports: [CommonModule, MatTooltipModule]
 })
 export class LibraryProjectDisciplinesComponent implements OnInit {
   protected disciplines: any[];

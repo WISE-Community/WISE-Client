@@ -1,6 +1,19 @@
 <div class="content-block library-teacher__paginate">
   <div class="flex flex-col sm:items-center justify-center align-items-stretch sm:flex-row">
-    <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What is Community Built?</a>
+    <!-- <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What is Community Built?</a> -->
+    <div>
+      <div>
+        <mat-checkbox [(ngModel)]="wiseTested" (change)="updatePublicUnitType()" i18n
+          >WISE Tested</mat-checkbox
+        >
+      </div>
+      <div>
+        <mat-checkbox [(ngModel)]="communityBuilt" (change)="updatePublicUnitType()" i18n
+          >Community Built</mat-checkbox
+        >
+      </div>
+    </div>
+
     <span class="flex-1 hidden sm:inline"></span>
     <mat-paginator
       [length]="filteredProjects.length"

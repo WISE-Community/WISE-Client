@@ -1,8 +1,9 @@
 import { ResearchProjectType } from '../modules/library/ResearchProject';
 
 export class ProjectFilterValues {
-  searchValue: string = '';
   disciplineValue: string[] = [];
-  standardValue: string[] = [];
+  publicUnitType?: ('wiseTested' | 'communityBuilt')[] = [];
   researchProjectValue: ResearchProjectType[] = [];
+  searchValue: string = '';
+  standardValue: string[] = [];
 }

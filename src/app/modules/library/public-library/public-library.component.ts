@@ -4,24 +4,40 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  imports: [CommonModule, LibraryProjectComponent, MatDividerModule, MatPaginatorModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    LibraryProjectComponent,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatPaginatorModule
+  ],
   selector: 'public-library',
   templateUrl: './public-library.component.html'
 })
 export class PublicLibraryComponent extends LibraryComponent {
+  protected communityBuilt: boolean = false;
+  protected wiseTested: boolean = false;
+
   ngOnInit() {
     super.ngOnInit();
     this.subscriptions.add(
-      this.libraryService.communityLibraryProjectsSource$.subscribe((communityProjects) => {
-        this.projects.push(...communityProjects);
+      this.libraryService.officialLibraryProjectsSource$.subscribe((libraryProjects) => {
+        libraryProjects.forEach((project) => (project.metadata.publicUnitType = 'wiseTested'));
+        this.projects.push(...libraryProjects);
         this.filterUpdated();
       })
     );
     this.subscriptions.add(
-      this.libraryService.officialLibraryProjectsSource$.subscribe((libraryProjects) => {
-        this.projects.push(...libraryProjects);
+      this.libraryService.communityLibraryProjectsSource$.subscribe((communityProjects) => {
+        communityProjects.forEach(
+          (project) => (project.metadata.publicUnitType = 'communityBuilt')
+        );
+        this.projects.push(...communityProjects);
         this.filterUpdated();
       })
     );
@@ -29,12 +45,23 @@ export class PublicLibraryComponent extends LibraryComponent {
     this.libraryService.getCommunityLibraryProjects();
   }
 
-  emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
+  protected emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
     if (numProjectsVisible) {
       this.libraryService.numberOfCommunityProjectsVisible.next(numProjectsVisible);
     } else {
       this.libraryService.numberOfCommunityProjectsVisible.next(this.filteredProjects.length);
     }
+  }
+
+  protected updatePublicUnitType(): void {
+    this.publicUnitTypeValue = [];
+    if (this.wiseTested) {
+      this.publicUnitTypeValue.push('wiseTested');
+    }
+    if (this.communityBuilt) {
+      this.publicUnitTypeValue.push('communityBuilt');
+    }
+    this.filterUpdated();
   }
 
   protected getDetailsComponent(): any {
