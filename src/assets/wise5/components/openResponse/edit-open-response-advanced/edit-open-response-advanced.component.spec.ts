@@ -37,7 +37,7 @@ const scoringRule3 = createScoringRuleObject(3, 'You got 3 points');
 describe('EditOpenResponseAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         EditComponentAddToNotebookButtonComponent,
         EditCommonAdvancedComponent,
         EditComponentExcludeFromTotalScoreComponent,
@@ -50,18 +50,25 @@ describe('EditOpenResponseAdvancedComponent', () => {
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent,
         EditOpenResponseAdvancedComponent
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -99,10 +106,9 @@ describe('EditOpenResponseAdvancedComponent', () => {
 function enableCRaterClicked() {
   describe('enableCRaterClicked', () => {
     it('should handle enable CRater clicked', () => {
-      expect(component.componentContent.cRater).toBeUndefined();
-      component.componentContent.enableCRater = true;
-      component.enableCRaterClicked();
       expect(component.componentContent.cRater).toEqual(component.createCRaterObject());
+      fixture.nativeElement.querySelectorAll('.checkbox').item(1).click();
+      expect(component.componentContent.enableCRater);
     });
   });
 }
