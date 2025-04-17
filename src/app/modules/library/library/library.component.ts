@@ -20,7 +20,6 @@ export abstract class LibraryComponent implements OnInit {
   protected filteredProjects: LibraryProject[] = [];
   protected filterValues: ProjectFilterValues = new ProjectFilterValues();
   protected gradeLevelOptions: GradeLevel[] = [];
-  protected gradeLevelValue = [];
   protected highIndex: number = 0;
   protected lowIndex: number = 0;
   protected pageSizeOptions: number[] = [12, 24, 48, 96];
@@ -83,7 +82,6 @@ export abstract class LibraryComponent implements OnInit {
     this.filteredProjects = [];
     this.searchValue = this.filterValues.searchValue;
     this.disciplineValue = this.filterValues.disciplineValue;
-    this.gradeLevelValue = this.filterValues.gradeLevelValue;
     this.standardValue = this.filterValues.standardValue;
     this.researchProjectValue = this.filterValues.researchProjectValue;
     this.projects.forEach((project) => {
@@ -176,9 +174,9 @@ export abstract class LibraryComponent implements OnInit {
 
   private matchesGradeLevel(project: LibraryProject): boolean {
     return (
-      this.gradeLevelValue.length > 0 &&
+      this.filterValues.gradeLevelValue.length > 0 &&
       project.metadata.grades?.some((gradeLevel) =>
-        this.gradeLevelValue.includes(Number(gradeLevel))
+        this.filterValues.gradeLevelValue.includes(Number(gradeLevel))
       )
     );
   }
@@ -198,7 +196,7 @@ export abstract class LibraryComponent implements OnInit {
         this.disciplineValue.length +
         this.researchProjectValue.length +
         this.filterValues.unitTypeValue.length +
-        this.gradeLevelValue.length +
+        this.filterValues.gradeLevelValue.length +
         this.filterValues.featureValue.length +
         this.publicUnitTypeValue.length >
       0
