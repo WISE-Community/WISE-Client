@@ -3,6 +3,7 @@ export class ProjectFilterValues {
   featureValue: string[] = [];
   gradeLevelValue: number[] = [];
   publicUnitType?: ('wiseTested' | 'communityBuilt')[] = [];
+  publicUnitTypeValue?: ('wiseTested' | 'communityBuilt')[] = [];
   searchValue: string = '';
   standardValue: string[] = [];
   unitTypeValue: string[] = [];

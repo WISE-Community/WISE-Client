@@ -26,7 +26,6 @@ export abstract class LibraryComponent implements OnInit {
   protected pageSize: number = 12;
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
   protected projects: LibraryProject[] = [];
-  protected publicUnitTypeValue: ('wiseTested' | 'communityBuilt')[] = [];
   protected searchValue: string = '';
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
@@ -137,7 +136,7 @@ export abstract class LibraryComponent implements OnInit {
   }
 
   private matchesPublicUnitType(project: LibraryProject): boolean {
-    return this.publicUnitTypeValue?.includes(project.metadata.publicUnitType);
+    return this.filterValues.publicUnitTypeValue?.includes(project.metadata.publicUnitType);
   }
 
   private matchesStandard(project: LibraryProject): boolean {
@@ -184,7 +183,7 @@ export abstract class LibraryComponent implements OnInit {
         this.filterValues.unitTypeValue.length +
         this.filterValues.gradeLevelValue.length +
         this.filterValues.featureValue.length +
-        this.publicUnitTypeValue.length >
+        (this.filterValues.publicUnitTypeValue?.length ?? 0) >
       0
     );
   }

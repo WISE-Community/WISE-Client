@@ -54,12 +54,12 @@ export class PublicLibraryComponent extends LibraryComponent {
   }
 
   protected updatePublicUnitType(): void {
-    this.publicUnitTypeValue = [];
+    this.filterValues.publicUnitTypeValue = [];
     if (this.wiseTested) {
-      this.publicUnitTypeValue.push('wiseTested');
+      this.filterValues.publicUnitTypeValue.push('wiseTested');
     }
     if (this.communityBuilt) {
-      this.publicUnitTypeValue.push('communityBuilt');
+      this.filterValues.publicUnitTypeValue.push('communityBuilt');
     }
     this.filterUpdated();
   }
