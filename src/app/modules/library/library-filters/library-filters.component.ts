@@ -153,7 +153,7 @@ export class LibraryFiltersComponent implements OnInit {
       this.gradeLevelOptions,
       'grade'
     );
-    this.utilService.sortObjectArrayByProperty(this.gradeLevelOptions, 'grade');
+    this.gradeLevelOptions.sort((a, b) => Number(a.grade) - Number(b.grade));
   }
 
   protected hasFilters(): boolean {
