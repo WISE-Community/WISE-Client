@@ -7,6 +7,5 @@ export class RubricEventService {
 
   emitRubricToggledEvent(): void {
     this.writableIsRubricOpen.update((isOpen) => !isOpen);
-    console.log(this.isRubricOpen());
   }
 }
