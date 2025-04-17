@@ -1062,6 +1062,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">2,5</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
           <context context-type="linenumber">474,476</context>
         </context-group>
@@ -5759,28 +5763,42 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Discipline</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">69,71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8145360837871676566" datatype="html">
         <source>Grade Level</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">69,71</context>
+          <context context-type="linenumber">87,89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3619090494724957216" datatype="html">
         <source>Standard </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7445116165758648758" datatype="html">
         <source>Research Project</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">106,108</context>
+          <context context-type="linenumber">124,126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6394457198241790363" datatype="html">
+        <source>WISE Platform</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8239294784362097209" datatype="html">
+        <source>Other Platform</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.ts</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2247270192251966992" datatype="html">

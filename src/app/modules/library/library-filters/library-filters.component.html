@@ -39,6 +39,24 @@
     class="flex flex-col gap-2"
     [ngClass]="{ 'md:flex-col': isSplitScreen, 'md:flex-row': !isSplitScreen }"
   >
+    @if (unitTypeOptions.length > 0) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <app-select-menu
+          id="unitTypeSelectMenu"
+          [options]="unitTypeOptions"
+          i18n-placeholderText
+          placeholderText="Type"
+          [value]="unitTypeValue"
+          (update)="filterUpdated($event, 'unitType')"
+          [valueProp]="'id'"
+          [viewValueProp]="'name'"
+          [multiple]="true"
+        />
+      </div>
+    }
     @if (disciplineOptions.length > 0) {
       <div
         class="library-filter"

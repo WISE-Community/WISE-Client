@@ -127,9 +127,14 @@ export abstract class LibraryComponent implements OnInit {
       this.matchesPublicUnitType(project) ||
       this.matchesStandard(project) ||
       this.matchesDiscipline(project) ||
+      this.matchesUnitType(project) ||
       this.matchesResearchProject(project) ||
       this.matchesGradeLevel(project)
     );
+  }
+
+  private matchesUnitType(project: LibraryProject): boolean {
+    return this.filterValues.unitTypeValue?.includes(project.metadata.unitType);
   }
 
   private matchesPublicUnitType(project: LibraryProject): boolean {
@@ -178,6 +183,7 @@ export abstract class LibraryComponent implements OnInit {
       this.standardValue.length +
         this.disciplineValue.length +
         this.researchProjectValue.length +
+        this.filterValues.unitTypeValue.length +
         this.gradeLevelValue.length +
         this.publicUnitTypeValue.length >
       0

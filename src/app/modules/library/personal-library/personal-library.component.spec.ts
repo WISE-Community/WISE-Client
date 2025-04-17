@@ -266,11 +266,12 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
         await (await harness.getSelectAllCheckbox()).check();
         expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
         component.filterUpdated({
+          disciplineValue: [],
+          gradeLevelValue: [],
+          researchProjectValue: [],
           searchValue: 'world',
           standardValue: [],
-          disciplineValue: [],
-          researchProjectValue: [],
-          gradeLevelValue: []
+          unitTypeValue: []
         });
         expect(await harness.getSelectedProjectIds()).toEqual([]);
       });
