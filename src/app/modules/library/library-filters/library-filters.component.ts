@@ -44,6 +44,11 @@ export class LibraryFiltersComponent implements OnInit {
   protected showFilters: boolean = false;
   protected standardOptions: Standard[] = [];
   protected standardValue = [];
+  protected unitTypeOptions: { id: string; name: string }[] = [
+    { id: 'Platform', name: 'Platform' },
+    { id: 'Other', name: 'Other' }
+  ];
+  protected unitTypeValue = [];
 
   constructor(
     private libraryService: LibraryService,
@@ -160,6 +165,9 @@ export class LibraryFiltersComponent implements OnInit {
       case 'researchProject':
         this.researchProjectValue = value as ResearchProjectType[];
         break;
+      case 'unitType':
+        this.unitTypeValue = value;
+        break;
     }
     this.emitFilterValues();
   }
@@ -169,7 +177,8 @@ export class LibraryFiltersComponent implements OnInit {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
       standardValue: this.standardValue,
-      researchProjectValue: this.researchProjectValue
+      researchProjectValue: this.researchProjectValue,
+      unitTypeValue: this.unitTypeValue
     };
     this.libraryService.setFilterValues(filterOptions);
   }

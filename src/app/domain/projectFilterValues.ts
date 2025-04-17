@@ -6,4 +6,5 @@ export class ProjectFilterValues {
   researchProjectValue: ResearchProjectType[] = [];
   searchValue: string = '';
   standardValue: string[] = [];
+  unitTypeValue: string[] = [];
 }
