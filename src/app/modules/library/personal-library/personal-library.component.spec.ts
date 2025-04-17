@@ -269,7 +269,8 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
           searchValue: 'world',
           standardValue: [],
           disciplineValue: [],
-          researchProjectValue: []
+          researchProjectValue: [],
+          gradeLevelValue: []
         });
         expect(await harness.getSelectedProjectIds()).toEqual([]);
       });
