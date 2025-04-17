@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { SelectMenuComponent } from '../../shared/select-menu/select-menu.component';
 import { StandardsSelectMenuComponent } from '../../shared/standards-select-menu/standards-select-menu.component';
+import { Grade, GradeLevel } from '../GradeLevel';
 
 @Component({
   imports: [
@@ -33,6 +34,9 @@ export class LibraryFiltersComponent implements OnInit {
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected disciplineValue = [];
+  protected gradeLevelOptions: GradeLevel[] = [];
+  protected gradeLevelValue = [];
+  @Input() showAdvancedFilteringOptions: boolean = true;
   @Input() isSplitScreen: boolean = false;
   private libraryProjects: LibraryProject[] = [];
   private personalProjects: LibraryProject[] = [];
@@ -45,8 +49,8 @@ export class LibraryFiltersComponent implements OnInit {
   protected standardOptions: Standard[] = [];
   protected standardValue = [];
   protected unitTypeOptions: { id: string; name: string }[] = [
-    { id: 'Platform', name: 'Platform' },
-    { id: 'Other', name: 'Other' }
+    { id: 'WISE Platform', name: $localize`WISE Platform` },
+    { id: 'Other Platform', name: $localize`Other Platform` }
   ];
   protected unitTypeValue = [];
 
@@ -93,10 +97,12 @@ export class LibraryFiltersComponent implements OnInit {
     this.allProjects = this.getAllProjects();
     this.standardOptions = [];
     this.disciplineOptions = [];
+    this.gradeLevelOptions = [];
     for (let project of this.allProjects) {
       project.metadata.disciplines?.forEach((discipline: any) =>
         this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
       );
+      this.populateGradeLevels(project);
       const standards = project.metadata.standards;
       [
         ['ngss', 'NGSS'],
@@ -112,6 +118,15 @@ export class LibraryFiltersComponent implements OnInit {
       this.populateResearchProjects(project);
     }
     this.removeDuplicatesAndSortAlphabetically();
+  }
+
+  private populateGradeLevels(project: LibraryProject) {
+    project.metadata.grades
+      ?.map((gradeLevel: string) => Number(gradeLevel))
+      .filter((gradeLevel: number) => Object.values(Grade).includes(gradeLevel))
+      .forEach((gradeLevel: number) => {
+        this.gradeLevelOptions.push(new GradeLevel(gradeLevel));
+      });
   }
 
   private populateResearchProjects(project: LibraryProject): void {
@@ -140,10 +155,19 @@ export class LibraryFiltersComponent implements OnInit {
       'id'
     );
     this.utilService.sortObjectArrayByProperty(this.disciplineOptions, 'name');
+    this.gradeLevelOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.gradeLevelOptions,
+      'grade'
+    );
+    this.gradeLevelOptions.sort((a, b) => a.grade - b.grade);
   }
 
   protected hasFilters(): boolean {
-    return this.standardValue.length > 0 || this.disciplineValue.length > 0;
+    return (
+      this.standardValue.length > 0 ||
+      this.disciplineValue.length > 0 ||
+      this.gradeLevelValue.length > 0
+    );
   }
 
   protected searchUpdated(value: string): void {
@@ -158,6 +182,9 @@ export class LibraryFiltersComponent implements OnInit {
     switch (context) {
       case 'discipline':
         this.disciplineValue = value;
+        break;
+      case 'gradeLevel':
+        this.gradeLevelValue = value;
         break;
       case 'standard':
         this.standardValue = value;
@@ -176,6 +203,7 @@ export class LibraryFiltersComponent implements OnInit {
     const filterOptions: ProjectFilterValues = {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
+      gradeLevelValue: this.gradeLevelValue,
       standardValue: this.standardValue,
       researchProjectValue: this.researchProjectValue,
       unitTypeValue: this.unitTypeValue
@@ -186,6 +214,7 @@ export class LibraryFiltersComponent implements OnInit {
   protected clearFilterValues(): void {
     this.standardValue = [];
     this.disciplineValue = [];
+    this.gradeLevelValue = [];
     this.emitFilterValues();
   }
 }

@@ -75,6 +75,24 @@
         />
       </div>
     }
+    @if (gradeLevelOptions.length > 0 && showAdvancedFilteringOptions) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <app-select-menu
+          id="gradeLevelSelectMenu"
+          [options]="gradeLevelOptions"
+          i18n-placeholderText
+          placeholderText="Grade Level"
+          [value]="gradeLevelValue"
+          (update)="filterUpdated($event, 'gradeLevel')"
+          valueProp="grade"
+          viewValueProp="grade"
+          [multiple]="true"
+        />
+      </div>
+    }
     @if (standardOptions.length > 0) {
       <div
         class="library-filter"

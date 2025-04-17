@@ -287,7 +287,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">180,184</context>
+          <context context-type="linenumber">182,186</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
@@ -5766,18 +5766,39 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">69,71</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8145360837871676566" datatype="html">
+        <source>Grade Level</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
+          <context context-type="linenumber">87,89</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3619090494724957216" datatype="html">
         <source>Standard </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7445116165758648758" datatype="html">
         <source>Research Project</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
-          <context context-type="linenumber">106,108</context>
+          <context context-type="linenumber">124,126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6394457198241790363" datatype="html">
+        <source>WISE Platform</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8239294784362097209" datatype="html">
+        <source>Other Platform</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.ts</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2247270192251966992" datatype="html">
@@ -5787,11 +5808,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2054850261792078221" datatype="html">
-        <source>Grade level:</source>
+      <trans-unit id="1465761986819034423" datatype="html">
+        <source>Grade level<x id="INTERPOLATION" equiv-text="{{ project.metadata.grades.length &gt; 1 ? &apos;s&apos; : &apos;&apos; }}"/>: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5226613065122074953" datatype="html">
@@ -5848,63 +5869,63 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Standards</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">90,92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4849120309760741886" datatype="html">
         <source>Resources:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">114,115</context>
+          <context context-type="linenumber">116,117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8316240444829030702" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">134,136</context>
+          <context context-type="linenumber">136,138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1086545303898503399" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION_1" equiv-text="{{ parentAuthorsString }}"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">140,143</context>
+          <context context-type="linenumber">142,145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3737944794522555155" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">151,152</context>
+          <context context-type="linenumber">153,154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7963479120224965794" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is licensed under <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION" equiv-text="{{ authorsString }}"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">156,159</context>
+          <context context-type="linenumber">158,161</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7138375215763430051" datatype="html">
         <source>View License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">165,169</context>
+          <context context-type="linenumber">167,171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5937251202465808296" datatype="html">
         <source>More</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">173,179</context>
+          <context context-type="linenumber">175,181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5537658691712388681" datatype="html">
         <source>Use with Class</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">189,193</context>
+          <context context-type="linenumber">191,195</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
@@ -5915,7 +5936,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Preview</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
-          <context context-type="linenumber">195,199</context>
+          <context context-type="linenumber">197,201</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
