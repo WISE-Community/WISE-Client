@@ -137,7 +137,9 @@ export abstract class LibraryComponent implements OnInit {
   }
 
   private matchesUnitType(project: LibraryProject): boolean {
-    return this.filterValues.unitTypeValue?.includes(project.metadata.unitType);
+    const unitTypeValue =
+      project.metadata.unitType === 'Platform' ? 'WISE Platform' : 'Other Platform';
+    return this.filterValues.unitTypeValue?.includes(unitTypeValue);
   }
 
   private matchesPublicUnitType(project: LibraryProject): boolean {
