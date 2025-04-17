@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ResearchProjectType } from '../ResearchProject';
 import { Feature } from '../Feature';
+import { GradeLevel } from '../GradeLevel';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
@@ -18,6 +19,8 @@ export abstract class LibraryComponent implements OnInit {
   protected featureOptions: Feature[] = [];
   protected filteredProjects: LibraryProject[] = [];
   protected filterValues: ProjectFilterValues = new ProjectFilterValues();
+  protected gradeLevelOptions: GradeLevel[] = [];
+  protected gradeLevelValue = [];
   protected highIndex: number = 0;
   protected lowIndex: number = 0;
   protected pageSizeOptions: number[] = [12, 24, 48, 96];
@@ -80,6 +83,7 @@ export abstract class LibraryComponent implements OnInit {
     this.filteredProjects = [];
     this.searchValue = this.filterValues.searchValue;
     this.disciplineValue = this.filterValues.disciplineValue;
+    this.gradeLevelValue = this.filterValues.gradeLevelValue;
     this.standardValue = this.filterValues.standardValue;
     this.researchProjectValue = this.filterValues.researchProjectValue;
     this.projects.forEach((project) => {
@@ -125,9 +129,15 @@ export abstract class LibraryComponent implements OnInit {
       this.matchesPublicUnitType(project) ||
       this.matchesStandard(project) ||
       this.matchesDiscipline(project) ||
+      this.matchesUnitType(project) ||
       this.matchesResearchProject(project) ||
-      this.matchesFeature(project)
+      this.matchesFeature(project) ||
+      this.matchesGradeLevel(project)
     );
+  }
+
+  private matchesUnitType(project: LibraryProject): boolean {
+    return this.filterValues.unitTypeValue?.includes(project.metadata.unitType);
   }
 
   private matchesPublicUnitType(project: LibraryProject): boolean {
@@ -162,6 +172,15 @@ export abstract class LibraryComponent implements OnInit {
     );
   }
 
+  private matchesGradeLevel(project: LibraryProject): boolean {
+    return (
+      this.gradeLevelValue.length > 0 &&
+      project.metadata.grades?.some((gradeLevel) =>
+        this.gradeLevelValue.includes(Number(gradeLevel))
+      )
+    );
+  }
+
   private matchesResearchProject(project: LibraryProject): boolean {
     return (
       this.researchProjectValue.length > 0 &&
@@ -176,8 +195,10 @@ export abstract class LibraryComponent implements OnInit {
       this.standardValue.length +
         this.disciplineValue.length +
         this.researchProjectValue.length +
-        this.publicUnitTypeValue.length +
-        this.filterValues.featureValue.length >
+        this.filterValues.unitTypeValue.length +
+        this.gradeLevelValue.length +
+        this.filterValues.featureValue.length +
+        this.publicUnitTypeValue.length >
       0
     );
   }
