@@ -7,6 +7,7 @@ import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ResearchProjectType } from '../ResearchProject';
+import { Feature } from '../Feature';
 import { GradeLevel } from '../GradeLevel';
 
 @Directive()
@@ -15,6 +16,7 @@ export abstract class LibraryComponent implements OnInit {
   protected standardValue = [];
   protected disciplineOptions: Standard[] = [];
   protected disciplineValue = [];
+  protected featureOptions: Feature[] = [];
   protected filteredProjects: LibraryProject[] = [];
   protected filterValues: ProjectFilterValues = new ProjectFilterValues();
   protected gradeLevelOptions: GradeLevel[] = [];
@@ -129,6 +131,7 @@ export abstract class LibraryComponent implements OnInit {
       this.matchesDiscipline(project) ||
       this.matchesUnitType(project) ||
       this.matchesResearchProject(project) ||
+      this.matchesFeature(project) ||
       this.matchesGradeLevel(project)
     );
   }
@@ -148,6 +151,15 @@ export abstract class LibraryComponent implements OnInit {
     const learningForJustice = standards?.learningForJustice ?? [];
     return [...commonCore, ...ngss, ...learningForJustice].some((val) =>
       this.standardValue.includes(val.id)
+    );
+  }
+
+  private matchesFeature(project: LibraryProject): boolean {
+    return (
+      this.filterValues.featureValue.length > 0 &&
+      project.metadata.features?.some((feature) =>
+        this.filterValues.featureValue.includes(feature.id)
+      )
     );
   }
 
@@ -185,6 +197,7 @@ export abstract class LibraryComponent implements OnInit {
         this.researchProjectValue.length +
         this.filterValues.unitTypeValue.length +
         this.gradeLevelValue.length +
+        this.filterValues.featureValue.length +
         this.publicUnitTypeValue.length >
       0
     );

@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { SelectMenuComponent } from '../../shared/select-menu/select-menu.component';
 import { StandardsSelectMenuComponent } from '../../shared/standards-select-menu/standards-select-menu.component';
+import { Feature } from '../Feature';
 import { Grade, GradeLevel } from '../GradeLevel';
 
 @Component({
@@ -34,6 +35,8 @@ export class LibraryFiltersComponent implements OnInit {
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected disciplineValue = [];
+  protected featureOptions: Feature[] = [];
+  protected featureValue = [];
   protected gradeLevelOptions: GradeLevel[] = [];
   protected gradeLevelValue = [];
   @Input() showAdvancedFilteringOptions: boolean = true;
@@ -102,6 +105,9 @@ export class LibraryFiltersComponent implements OnInit {
       project.metadata.disciplines?.forEach((discipline: any) =>
         this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
       );
+      project.metadata.features?.forEach((feature: any) =>
+        this.featureOptions.push(new Feature(feature.id, feature.name))
+      );
       this.populateGradeLevels(project);
       const standards = project.metadata.standards;
       [
@@ -155,6 +161,11 @@ export class LibraryFiltersComponent implements OnInit {
       'id'
     );
     this.utilService.sortObjectArrayByProperty(this.disciplineOptions, 'name');
+    this.featureOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.featureOptions,
+      'id'
+    );
+    this.utilService.sortObjectArrayByProperty(this.featureOptions, 'name');
     this.gradeLevelOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
       this.gradeLevelOptions,
       'grade'
@@ -192,6 +203,9 @@ export class LibraryFiltersComponent implements OnInit {
       case 'researchProject':
         this.researchProjectValue = value as ResearchProjectType[];
         break;
+      case 'feature':
+        this.featureValue = value;
+        break;
       case 'unitType':
         this.unitTypeValue = value;
         break;
@@ -203,6 +217,7 @@ export class LibraryFiltersComponent implements OnInit {
     const filterOptions: ProjectFilterValues = {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
+      featureValue: this.featureValue,
       gradeLevelValue: this.gradeLevelValue,
       standardValue: this.standardValue,
       researchProjectValue: this.researchProjectValue,

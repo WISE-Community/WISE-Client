@@ -112,6 +112,23 @@
         />
       </div>
     }
+    @if (featureOptions.length > 0 && showAdvancedFilteringOptions) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <app-select-menu
+          [options]="featureOptions"
+          i18n-placeholderText
+          placeholderText="Features"
+          [value]="featureValue"
+          (update)="filterUpdated($event, 'feature')"
+          valueProp="id"
+          viewValueProp="name"
+          [multiple]="true"
+        />
+      </div>
+    }
     @if (researchProjectOptions.length > 0) {
       <div
         class="library-filter"
