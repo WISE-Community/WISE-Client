@@ -116,11 +116,12 @@ export class LibraryFiltersComponent implements OnInit {
   }
 
   private populateGradeLevels(project: LibraryProject) {
-    project.metadata.grades?.forEach((gradeLevel: any) => {
-      if (!isNaN(Number(gradeLevel)) && Object.values(Grade).includes(Number(gradeLevel))) {
-        this.gradeLevelOptions.push(new GradeLevel(Number(gradeLevel)));
-      }
-    });
+    project.metadata.grades
+      ?.map((gradeLevel: string) => Number(gradeLevel))
+      .filter((gradeLevel: number) => Object.values(Grade).includes(gradeLevel))
+      .forEach((gradeLevel: number) => {
+        this.gradeLevelOptions.push(new GradeLevel(gradeLevel));
+      });
   }
 
   private populateResearchProjects(project: LibraryProject): void {
@@ -153,7 +154,7 @@ export class LibraryFiltersComponent implements OnInit {
       this.gradeLevelOptions,
       'grade'
     );
-    this.gradeLevelOptions.sort((a, b) => Number(a.grade) - Number(b.grade));
+    this.gradeLevelOptions.sort((a, b) => a.grade - b.grade);
   }
 
   protected hasFilters(): boolean {
