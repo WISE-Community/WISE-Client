@@ -14,7 +14,6 @@ export abstract class LibraryComponent implements OnInit {
   protected standardOptions: Standard[] = [];
   protected standardValue = [];
   protected disciplineOptions: Standard[] = [];
-  protected disciplineValue = [];
   protected featureOptions: Feature[] = [];
   protected filteredProjects: LibraryProject[] = [];
   protected filterValues: ProjectFilterValues = new ProjectFilterValues();
@@ -78,7 +77,6 @@ export abstract class LibraryComponent implements OnInit {
     }
     this.filteredProjects = [];
     this.searchValue = this.filterValues.searchValue;
-    this.disciplineValue = this.filterValues.disciplineValue;
     this.standardValue = this.filterValues.standardValue;
     this.projects.forEach((project) => {
       project.visible =
@@ -160,9 +158,9 @@ export abstract class LibraryComponent implements OnInit {
 
   private matchesDiscipline(project: LibraryProject): boolean {
     return (
-      this.disciplineValue.length > 0 &&
+      this.filterValues.disciplineValue.length > 0 &&
       project.metadata.disciplines?.some((discipline) =>
-        this.disciplineValue.includes(discipline.id)
+        this.filterValues.disciplineValue.includes(discipline.id)
       )
     );
   }
@@ -179,7 +177,7 @@ export abstract class LibraryComponent implements OnInit {
   private hasFilters(): boolean {
     return (
       this.standardValue.length +
-        this.disciplineValue.length +
+        this.filterValues.disciplineValue.length +
         this.filterValues.unitTypeValue.length +
         this.filterValues.gradeLevelValue.length +
         this.filterValues.featureValue.length +
