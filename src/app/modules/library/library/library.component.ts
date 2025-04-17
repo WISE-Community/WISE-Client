@@ -12,7 +12,6 @@ import { GradeLevel } from '../GradeLevel';
 @Directive()
 export abstract class LibraryComponent implements OnInit {
   protected standardOptions: Standard[] = [];
-  protected standardValue = [];
   protected disciplineOptions: Standard[] = [];
   protected featureOptions: Feature[] = [];
   protected filteredProjects: LibraryProject[] = [];
@@ -77,7 +76,6 @@ export abstract class LibraryComponent implements OnInit {
     }
     this.filteredProjects = [];
     this.searchValue = this.filterValues.searchValue;
-    this.standardValue = this.filterValues.standardValue;
     this.projects.forEach((project) => {
       project.visible =
         this.isSearchMatch(project, this.searchValue) &&
@@ -143,7 +141,7 @@ export abstract class LibraryComponent implements OnInit {
     const ngss = standards?.ngss ?? [];
     const learningForJustice = standards?.learningForJustice ?? [];
     return [...commonCore, ...ngss, ...learningForJustice].some((val) =>
-      this.standardValue.includes(val.id)
+      this.filterValues.standardValue.includes(val.id)
     );
   }
 
@@ -176,7 +174,7 @@ export abstract class LibraryComponent implements OnInit {
 
   private hasFilters(): boolean {
     return (
-      this.standardValue.length +
+      this.filterValues.standardValue.length +
         this.filterValues.disciplineValue.length +
         this.filterValues.unitTypeValue.length +
         this.filterValues.gradeLevelValue.length +
