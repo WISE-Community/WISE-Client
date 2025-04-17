@@ -269,7 +269,6 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
           disciplineValue: [],
           featureValue: [],
           gradeLevelValue: [],
-          researchProjectValue: [],
           searchValue: 'world',
           standardValue: [],
           unitTypeValue: []

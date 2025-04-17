@@ -5,7 +5,6 @@ import { Standard, StandardType } from '../standard';
 import { Discipline } from '../Discipline';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
-import { ResearchProject, ResearchProjectType } from '../ResearchProject';
 import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,8 +43,6 @@ export class LibraryFiltersComponent implements OnInit {
   private libraryProjects: LibraryProject[] = [];
   private personalProjects: LibraryProject[] = [];
   protected possibleStandardLabels = ['NGSS', 'Common Core', 'Learning For Justice'];
-  protected researchProjectOptions: ResearchProject[] = [];
-  private researchProjectValue: ResearchProjectType[] = [];
   protected searchValue: string = '';
   private sharedProjects: LibraryProject[] = [];
   protected showFilters: boolean = false;
@@ -121,7 +118,6 @@ export class LibraryFiltersComponent implements OnInit {
           )
         );
       });
-      this.populateResearchProjects(project);
     }
     this.removeDuplicatesAndSortAlphabetically();
   }
@@ -133,14 +129,6 @@ export class LibraryFiltersComponent implements OnInit {
       .forEach((gradeLevel: number) => {
         this.gradeLevelOptions.push(new GradeLevel(gradeLevel));
       });
-  }
-
-  private populateResearchProjects(project: LibraryProject): void {
-    project.metadata.researchProjects?.forEach((researchProjectType: ResearchProjectType) => {
-      if (!this.researchProjectOptions.map((option) => option.name).includes(researchProjectType)) {
-        this.researchProjectOptions.push(new ResearchProject(researchProjectType));
-      }
-    });
   }
 
   private getAllProjects(): LibraryProject[] {
@@ -186,10 +174,7 @@ export class LibraryFiltersComponent implements OnInit {
     this.emitFilterValues();
   }
 
-  protected filterUpdated(
-    value: string[] | ResearchProjectType[] = [],
-    context: string = ''
-  ): void {
+  protected filterUpdated(value: string[], context: string = ''): void {
     switch (context) {
       case 'discipline':
         this.disciplineValue = value;
@@ -199,9 +184,6 @@ export class LibraryFiltersComponent implements OnInit {
         break;
       case 'standard':
         this.standardValue = value;
-        break;
-      case 'researchProject':
-        this.researchProjectValue = value as ResearchProjectType[];
         break;
       case 'feature':
         this.featureValue = value;
@@ -220,7 +202,6 @@ export class LibraryFiltersComponent implements OnInit {
       featureValue: this.featureValue,
       gradeLevelValue: this.gradeLevelValue,
       standardValue: this.standardValue,
-      researchProjectValue: this.researchProjectValue,
       unitTypeValue: this.unitTypeValue
     };
     this.libraryService.setFilterValues(filterOptions);

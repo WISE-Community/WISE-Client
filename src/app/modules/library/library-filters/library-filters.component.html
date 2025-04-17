@@ -129,23 +129,5 @@
         />
       </div>
     }
-    @if (researchProjectOptions.length > 0) {
-      <div
-        class="library-filter"
-        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
-      >
-        <app-select-menu
-          id="researchProjectSelectMenu"
-          [options]="researchProjectOptions"
-          i18n-placeholderText
-          placeholderText="Research Project"
-          [value]="researchProjectValue"
-          (update)="filterUpdated($event, 'researchProject')"
-          [valueProp]="'name'"
-          [viewValueProp]="'name'"
-          [multiple]="true"
-        />
-      </div>
-    }
   </div>
 </div>

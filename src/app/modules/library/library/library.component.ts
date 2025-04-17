@@ -6,7 +6,6 @@ import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ResearchProjectType } from '../ResearchProject';
 import { Feature } from '../Feature';
 import { GradeLevel } from '../GradeLevel';
 
@@ -28,7 +27,6 @@ export abstract class LibraryComponent implements OnInit {
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
   protected projects: LibraryProject[] = [];
   protected publicUnitTypeValue: ('wiseTested' | 'communityBuilt')[] = [];
-  private researchProjectValue: ResearchProjectType[] = [];
   protected searchValue: string = '';
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
@@ -83,7 +81,6 @@ export abstract class LibraryComponent implements OnInit {
     this.searchValue = this.filterValues.searchValue;
     this.disciplineValue = this.filterValues.disciplineValue;
     this.standardValue = this.filterValues.standardValue;
-    this.researchProjectValue = this.filterValues.researchProjectValue;
     this.projects.forEach((project) => {
       project.visible =
         this.isSearchMatch(project, this.searchValue) &&
@@ -128,7 +125,6 @@ export abstract class LibraryComponent implements OnInit {
       this.matchesStandard(project) ||
       this.matchesDiscipline(project) ||
       this.matchesUnitType(project) ||
-      this.matchesResearchProject(project) ||
       this.matchesFeature(project) ||
       this.matchesGradeLevel(project)
     );
@@ -181,20 +177,10 @@ export abstract class LibraryComponent implements OnInit {
     );
   }
 
-  private matchesResearchProject(project: LibraryProject): boolean {
-    return (
-      this.researchProjectValue.length > 0 &&
-      project.metadata.researchProjects?.some((researchProject) =>
-        this.researchProjectValue.includes(researchProject)
-      )
-    );
-  }
-
   private hasFilters(): boolean {
     return (
       this.standardValue.length +
         this.disciplineValue.length +
-        this.researchProjectValue.length +
         this.filterValues.unitTypeValue.length +
         this.filterValues.gradeLevelValue.length +
         this.filterValues.featureValue.length +
