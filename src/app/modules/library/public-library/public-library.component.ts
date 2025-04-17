@@ -17,6 +17,17 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatPaginatorModule
   ],
   selector: 'public-library',
+  styles: [
+    `
+      .content-block {
+        padding: 16px;
+      }
+
+      .mat-mdc-paginator {
+        background-color: transparent;
+      }
+    `
+  ],
   templateUrl: './public-library.component.html'
 })
 export class PublicLibraryComponent extends LibraryComponent {

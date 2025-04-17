@@ -138,7 +138,9 @@ export class LibraryFiltersComponent implements OnInit {
   }
 
   protected hasFilters(): boolean {
-    return this.standardValue.length > 0 || this.disciplineValue.length > 0;
+    return (
+      this.standardValue.length > 0 || this.disciplineValue.length > 0 || this.searchValue !== ''
+    );
   }
 
   protected searchUpdated(value: string): void {
