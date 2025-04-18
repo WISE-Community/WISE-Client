@@ -32,7 +32,7 @@ export class CRaterRubricComponent {
 
   protected closeDialog(): void {
     this.dialogRef.close();
-    this.rubricEventService.emitRubricToggledEvent();
+    this.rubricEventService.rubricToggled();
   }
 
   protected highlightButton(): void {}

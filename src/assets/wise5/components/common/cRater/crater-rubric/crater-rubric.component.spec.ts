@@ -4,7 +4,7 @@ import { CRaterRubricComponent } from './crater-rubric.component';
 import { MockProvider } from 'ng-mocks';
 import { CRaterRubric } from '../CRaterRubric';
 
-fdescribe('LibraryProjectDetailsComponent', () => {
+describe('LibraryProjectDetailsComponent', () => {
   let component: CRaterRubricComponent;
   let fixture: ComponentFixture<CRaterRubricComponent>;
   let closeDialogSpy: jasmine.Spy;

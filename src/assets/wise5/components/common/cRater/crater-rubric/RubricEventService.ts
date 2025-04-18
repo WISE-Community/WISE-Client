@@ -2,10 +2,13 @@ import { Injectable, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class RubricEventService {
-  private writableIsRubricOpen = signal(false);
-  readonly isRubricOpen = this.writableIsRubricOpen.asReadonly();
+  private isRubricOpen: boolean;
 
-  emitRubricToggledEvent(): void {
-    this.writableIsRubricOpen.update((isOpen) => !isOpen);
+  getIsRubricOpen(): boolean {
+    return this.isRubricOpen;
+  }
+
+  rubricToggled(): void {
+    this.isRubricOpen = !this.isRubricOpen;
   }
 }
