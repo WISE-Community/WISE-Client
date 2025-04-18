@@ -18,26 +18,25 @@ import { PublicUnitTypeSelectorComponent } from '../library/public-unit-type-sel
   templateUrl: './public-library.component.html'
 })
 export class PublicLibraryComponent extends LibraryComponent {
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.subscriptions.add(
-      this.libraryService.officialLibraryProjectsSource$.subscribe((libraryProjects) => {
-        libraryProjects.forEach((project) => (project.metadata.publicUnitType = 'wiseTested'));
-        this.projects.push(...libraryProjects);
-        this.filterUpdated();
-      })
+      this.libraryService.officialLibraryProjectsSource$.subscribe((projects) =>
+        this.updateProjects(projects)
+      )
     );
     this.subscriptions.add(
-      this.libraryService.communityLibraryProjectsSource$.subscribe((communityProjects) => {
-        communityProjects.forEach(
-          (project) => (project.metadata.publicUnitType = 'communityBuilt')
-        );
-        this.projects.push(...communityProjects);
-        this.filterUpdated();
-      })
+      this.libraryService.communityLibraryProjectsSource$.subscribe((projects) =>
+        this.updateProjects(projects)
+      )
     );
     this.libraryService.getOfficialLibraryProjects();
     this.libraryService.getCommunityLibraryProjects();
+  }
+
+  private updateProjects(projects: any): void {
+    this.projects.push(...projects);
+    this.filterUpdated();
   }
 
   protected emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
