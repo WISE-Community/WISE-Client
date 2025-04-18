@@ -84,6 +84,7 @@ export abstract class LibraryComponent implements OnInit {
         this.filteredProjects.push(project);
       }
     });
+    this.filteredProjects.sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
     this.emitNumberOfProjectsVisible(this.countVisibleProjects(this.filteredProjects));
     this.pageIndex = 0;
     this.setPagination();

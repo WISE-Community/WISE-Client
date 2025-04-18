@@ -124,7 +124,7 @@ function setUpFiveProjects() {
 function setUpTwentyProjects() {
   const libraryProjects = [];
   for (let i = 1; i <= 20; i++) {
-    libraryProjects.push(new LibraryProject({ id: i, metadata: {}, tags: [] }));
+    libraryProjects.push(new LibraryProject({ id: i, metadata: { title: '' }, tags: [] }));
   }
   TestBed.inject(LibraryService).personalLibraryProjectsSource$ =
     fakeAsyncResponse(libraryProjects);
@@ -142,7 +142,7 @@ function showArchivedProjects() {
   describe('archived units view', () => {
     it('only shows archived units', async () => {
       await harness.showArchivedView();
-      expect(await harness.getProjectIdsInView()).toEqual([projectId2, projectId1]);
+      expect(await harness.getProjectIdsInView()).toEqual([projectId1, projectId2]);
     });
   });
 }
