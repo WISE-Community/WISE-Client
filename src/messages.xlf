@@ -286,8 +286,16 @@
           <context context-type="linenumber">17,19</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">180,184</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
@@ -5633,23 +5641,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">1,5</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
+          <context context-type="linenumber">1,5</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-library/public-library.component.html</context>
-          <context context-type="linenumber">12,17</context>
+          <context context-type="linenumber">14,16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5551399238271674842" datatype="html">
-        <source> The &quot;Community Built&quot; library contains units that were designed and contributed by WISE community members. Want to publicly share your custom unit? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/contact&quot; target=&quot;_blank&quot;&gt;"/>Contact Us<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>! </source>
+      <trans-unit id="4008237488978704162" datatype="html">
+        <source> &quot;Community Built&quot; units are designed and contributed by WISE community members. Want to publicly share your custom unit? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/contact&quot; target=&quot;_blank&quot;&gt;"/>Contact Us<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
+          <context context-type="linenumber">5,9</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
           <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7075850926835027428" datatype="html">
-        <source> *Please note: While WISE staff have reviewed the units listed here, we cannot specifically vouch for their effectiveness or quality. Please examine the units carefully before using in your classrooms. Thanks! </source>
+      <trans-unit id="3753369387408426398" datatype="html">
+        <source> *Please note: While WISE staff have reviewed these units, we cannot specifically vouch for their effectiveness or quality. Please examine the units carefully before using in your classrooms. Thanks! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
+          <context context-type="linenumber">10,16</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/community-library/community-library-details.html</context>
           <context context-type="linenumber">10,16</context>
@@ -6102,16 +6122,24 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">1,4</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
+          <context context-type="linenumber">1,4</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-library/public-library.component.html</context>
-          <context context-type="linenumber">7,11</context>
+          <context context-type="linenumber">6,8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4720370465276780073" datatype="html">
-        <source>The &quot;WISE Tested&quot; library contains curricula developed by the WISE team.</source>
+      <trans-unit id="1035386914611906639" datatype="html">
+        <source>&quot;WISE Tested&quot; units are curricula developed by the WISE team.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
           <context context-type="linenumber">4,6</context>
@@ -6123,12 +6151,20 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
           <context context-type="linenumber">6,11</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
+          <context context-type="linenumber">6,11</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="4524881898375768364" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/about&quot; target=&quot;_blank&quot;&gt;"/>Learn more<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a
       &gt;"/> about our design process and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://wise-research.berkeley.edu&quot; target=&quot;_blank&quot;
         &gt;"/>check out our research and publications<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a
       &gt;"/>. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
+          <context context-type="linenumber">11,16</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library-details.html</context>
           <context context-type="linenumber">11,16</context>
@@ -6219,11 +6255,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2394938031369558141" datatype="html">
+        <source>WISE Tested explanation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/public-library/public-library.component.html</context>
+          <context context-type="linenumber">9,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1448032847138528020" datatype="html">
+        <source>Community Built explaantion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/public-library/public-library.component.html</context>
+          <context context-type="linenumber">17,21</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4979447237268999388" datatype="html">
         <source>No units found.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-library/public-library.component.html</context>
-          <context context-type="linenumber">33,38</context>
+          <context context-type="linenumber">37,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6028472408314831177" datatype="html">
