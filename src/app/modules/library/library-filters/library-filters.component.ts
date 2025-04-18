@@ -196,15 +196,16 @@ export class LibraryFiltersComponent implements OnInit {
   }
 
   private emitFilterValues(): void {
-    const filterOptions: ProjectFilterValues = {
+    const filterValues: ProjectFilterValues = new ProjectFilterValues();
+    Object.assign(filterValues, {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
       featureValue: this.featureValue,
       gradeLevelValue: this.gradeLevelValue,
       standardValue: this.standardValue,
       unitTypeValue: this.unitTypeValue
-    };
-    this.libraryService.setFilterValues(filterOptions);
+    });
+    this.libraryService.setFilterValues(filterValues);
   }
 
   protected clearFilterValues(): void {

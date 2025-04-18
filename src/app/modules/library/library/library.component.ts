@@ -78,8 +78,8 @@ export abstract class LibraryComponent implements OnInit {
     this.searchValue = this.filterValues.searchValue;
     this.projects.forEach((project) => {
       project.visible =
-        this.isSearchMatch(project, this.searchValue) &&
-        (!this.hasFilters() || this.isFilterMatch(project));
+        this.isSearchMatch(project, this.filterValues.searchValue) &&
+        (!this.filterValues.hasFilters() || this.filterValues.matches(project));
       if (project.visible) {
         this.filteredProjects.push(project);
       }
@@ -111,76 +111,6 @@ export abstract class LibraryComponent implements OnInit {
             value.toString().toLocaleLowerCase().indexOf(searchValue) !== -1
           );
         })
-    );
-  }
-
-  private isFilterMatch(project: LibraryProject): boolean {
-    return (
-      this.matchesPublicUnitType(project) ||
-      this.matchesStandard(project) ||
-      this.matchesDiscipline(project) ||
-      this.matchesUnitType(project) ||
-      this.matchesFeature(project) ||
-      this.matchesGradeLevel(project)
-    );
-  }
-
-  private matchesUnitType(project: LibraryProject): boolean {
-    const unitTypeValue =
-      project.metadata.unitType === 'Platform' ? 'WISE Platform' : 'Other Platform';
-    return this.filterValues.unitTypeValue?.includes(unitTypeValue);
-  }
-
-  private matchesPublicUnitType(project: LibraryProject): boolean {
-    return this.filterValues.publicUnitTypeValue?.includes(project.metadata.publicUnitType);
-  }
-
-  private matchesStandard(project: LibraryProject): boolean {
-    const standards = project.metadata.standards;
-    const commonCore = standards?.commonCore ?? [];
-    const ngss = standards?.ngss ?? [];
-    const learningForJustice = standards?.learningForJustice ?? [];
-    return [...commonCore, ...ngss, ...learningForJustice].some((val) =>
-      this.filterValues.standardValue.includes(val.id)
-    );
-  }
-
-  private matchesFeature(project: LibraryProject): boolean {
-    return (
-      this.filterValues.featureValue.length > 0 &&
-      project.metadata.features?.some((feature) =>
-        this.filterValues.featureValue.includes(feature.id)
-      )
-    );
-  }
-
-  private matchesDiscipline(project: LibraryProject): boolean {
-    return (
-      this.filterValues.disciplineValue.length > 0 &&
-      project.metadata.disciplines?.some((discipline) =>
-        this.filterValues.disciplineValue.includes(discipline.id)
-      )
-    );
-  }
-
-  private matchesGradeLevel(project: LibraryProject): boolean {
-    return (
-      this.filterValues.gradeLevelValue.length > 0 &&
-      project.metadata.grades?.some((gradeLevel) =>
-        this.filterValues.gradeLevelValue.includes(Number(gradeLevel))
-      )
-    );
-  }
-
-  private hasFilters(): boolean {
-    return (
-      this.filterValues.standardValue.length +
-        this.filterValues.disciplineValue.length +
-        this.filterValues.unitTypeValue.length +
-        this.filterValues.gradeLevelValue.length +
-        this.filterValues.featureValue.length +
-        (this.filterValues.publicUnitTypeValue?.length ?? 0) >
-      0
     );
   }
 

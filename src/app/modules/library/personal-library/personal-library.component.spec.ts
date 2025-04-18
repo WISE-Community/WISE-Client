@@ -20,6 +20,7 @@ import { LibraryProjectComponent } from '../library-project/library-project.comp
 import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
@@ -265,15 +266,17 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
       it('unselects all projects', async () => {
         await (await harness.getSelectAllCheckbox()).check();
         expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
-        component.filterUpdated({
-          disciplineValue: [],
-          featureValue: [],
-          gradeLevelValue: [],
-          publicUnitTypeValue: [],
-          searchValue: 'world',
-          standardValue: [],
-          unitTypeValue: []
-        });
+        component.filterUpdated(
+          Object.assign(new ProjectFilterValues(), {
+            disciplineValue: [],
+            featureValue: [],
+            gradeLevelValue: [],
+            publicUnitTypeValue: [],
+            searchValue: 'world',
+            standardValue: [],
+            unitTypeValue: []
+          })
+        );
         expect(await harness.getSelectedProjectIds()).toEqual([]);
       });
     });
