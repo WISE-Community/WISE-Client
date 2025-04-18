@@ -23,9 +23,10 @@
   </div>
 </div>
 <div class="library-filters" [class.expand]="showFilters" [class.isSplitScreen]="isSplitScreen">
-  <div class="notice">
+  <div class="notice flex justify-between">
+    <h3 class="mat-subtitle-2" i18n>Filters</h3>
     @if (hasFilters()) {
-      <a href="#" (click)="!!clearFilterValues()" i18n>Reset filters</a>
+      <a href="#" (click)="!!clearFilterValues()" i18n>Clear all</a>
     }
   </div>
   <div
@@ -60,7 +61,7 @@
           [options]="standardOptions"
           [possibleLabels]="possibleStandardLabels"
           i18n-placeholderText
-          placeholderText="Standard "
+          placeholderText="Standards Addressed"
           [value]="standardValue"
           (update)="filterUpdated($event, 'standard')"
           [valueProp]="'id'"

@@ -17,14 +17,18 @@
       @apply max-h-[1000px];
     }
   }
+}
 
-  .notice {
-    text-align: end;
-    margin: 12px 0;
-    max-width: none;
-    background-color: transparent;
-    padding: 0 12px;
-  }
+.notice {
+  text-align: start;
+  margin: 12px 0;
+  max-width: none;
+  background-color: transparent;
+  padding: 0 12px;
+}
+
+h3 {
+  margin: 0;
 }
 
 .library-filter {
