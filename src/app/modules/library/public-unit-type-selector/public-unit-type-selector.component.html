@@ -1,0 +1,24 @@
+<div class="flex flex-col items-center lg:justify-between lg:flex-row gap-2">
+  <div class="flex flex-wrap gap-2">
+    <div class="flex items-center gap-1">
+      <mat-checkbox [(ngModel)]="wiseTested" (change)="updatePublicUnitType()" i18n
+        >WISE Tested</mat-checkbox
+      >
+      <a tabindex="0" (click)="showOfficialLibraryInfo()" (keyup.enter)="showOfficialLibraryInfo()">
+        <mat-icon aria-label="WISE Tested explanation" i18n-aria-label>info</mat-icon>
+      </a>
+    </div>
+    <div class="flex items-center gap-1">
+      <mat-checkbox [(ngModel)]="communityBuilt" (change)="updatePublicUnitType()" i18n
+        >Community Built</mat-checkbox
+      >
+      <a
+        tabindex="0"
+        (click)="showCommunityLibraryInfo()"
+        (keyup.enter)="showCommunityLibraryInfo()"
+      >
+        <mat-icon aria-label="Community Built explanation!" i18n-aria-label>info</mat-icon>
+      </a>
+    </div>
+  </div>
+</div>

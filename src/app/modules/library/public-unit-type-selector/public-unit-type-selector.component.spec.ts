@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PublicUnitTypeSelectorComponent } from './public-unit-type-selector.component';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { ProjectFilterValues } from '../../../../domain/projectFilterValues';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 
 describe('PublicUnitTypeSelectorComponent', () => {

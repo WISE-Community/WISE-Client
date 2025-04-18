@@ -4,7 +4,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
-import { PublicUnitTypeSelectorComponent } from '../library/public-unit-type-selector/public-unit-type-selector.component';
+import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/public-unit-type-selector.component';
 
 @Component({
   imports: [
@@ -15,6 +15,25 @@ import { PublicUnitTypeSelectorComponent } from '../library/public-unit-type-sel
     PublicUnitTypeSelectorComponent
   ],
   selector: 'public-library',
+  styles: [
+    `
+      .content-block {
+        padding: 16px;
+      }
+
+      .mat-mdc-paginator {
+        background-color: transparent;
+      }
+
+      .mat-divider {
+        margin: 0;
+      }
+
+      .library__list {
+        padding: 8px 0;
+      }
+    `
+  ],
   templateUrl: './public-library.component.html'
 })
 export class PublicLibraryComponent extends LibraryComponent {
