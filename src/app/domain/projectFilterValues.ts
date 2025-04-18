@@ -10,7 +10,44 @@ export class ProjectFilterValues {
   standardValue: string[] = [];
   unitTypeValue: string[] = [];
 
-  hasFilters(): boolean {
+  matches(project: LibraryProject): boolean {
+    return this.matchesSearch(project) && (!this.hasFilters() || this.matchesFilter(project));
+  }
+
+  private matchesSearch(project: LibraryProject): boolean {
+    project.metadata.id = project.id;
+    return (
+      !this.searchValue ||
+      Object.keys(project.metadata)
+        .filter((prop) =>
+          // only check for match in specific metadata fields
+          ['title', 'summary', 'keywords', 'features', 'standards', 'id'].includes(prop)
+        )
+        .some((prop) => {
+          let value = project.metadata[prop];
+          if (prop === 'standards') {
+            value = JSON.stringify(value);
+          }
+          return (
+            typeof value !== 'undefined' &&
+            value != null &&
+            value.toString().toLocaleLowerCase().indexOf(this.searchValue) !== -1
+          );
+        })
+    );
+  }
+  private matchesFilter(project: LibraryProject): boolean {
+    return (
+      this.matchesPublicUnitType(project) ||
+      this.matchesStandard(project) ||
+      this.matchesDiscipline(project) ||
+      this.matchesUnitType(project) ||
+      this.matchesFeature(project) ||
+      this.matchesGradeLevel(project)
+    );
+  }
+
+  private hasFilters(): boolean {
     return (
       this.standardValue.length +
         this.disciplineValue.length +
@@ -19,17 +56,6 @@ export class ProjectFilterValues {
         this.featureValue.length +
         (this.publicUnitTypeValue?.length ?? 0) >
       0
-    );
-  }
-
-  matches(project: LibraryProject): boolean {
-    return (
-      this.matchesPublicUnitType(project) ||
-      this.matchesStandard(project) ||
-      this.matchesDiscipline(project) ||
-      this.matchesUnitType(project) ||
-      this.matchesFeature(project) ||
-      this.matchesGradeLevel(project)
     );
   }
 

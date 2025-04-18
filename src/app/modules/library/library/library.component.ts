@@ -24,7 +24,6 @@ export abstract class LibraryComponent implements OnInit {
   protected pageSize: number = 12;
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
   protected projects: LibraryProject[] = [];
-  protected searchValue: string = '';
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
 
@@ -75,11 +74,8 @@ export abstract class LibraryComponent implements OnInit {
       this.filterValues = filterValues;
     }
     this.filteredProjects = [];
-    this.searchValue = this.filterValues.searchValue;
     this.projects.forEach((project) => {
-      project.visible =
-        this.isSearchMatch(project, this.filterValues.searchValue) &&
-        (!this.filterValues.hasFilters() || this.filterValues.matches(project));
+      project.visible = this.filterValues.matches(project);
       if (project.visible) {
         this.filteredProjects.push(project);
       }
@@ -91,29 +87,6 @@ export abstract class LibraryComponent implements OnInit {
   }
 
   protected abstract emitNumberOfProjectsVisible(numProjectsVisible: number): void;
-
-  private isSearchMatch(project: LibraryProject, searchValue: string): boolean {
-    project.metadata.id = project.id;
-    return (
-      !searchValue ||
-      Object.keys(project.metadata)
-        .filter((prop) =>
-          // only check for match in specific metadata fields
-          ['title', 'summary', 'keywords', 'features', 'standardsAddressed', 'id'].includes(prop)
-        )
-        .some((prop) => {
-          let value = project.metadata[prop];
-          if (prop === 'standardsAddressed') {
-            value = JSON.stringify(value);
-          }
-          return (
-            typeof value !== 'undefined' &&
-            value != null &&
-            value.toString().toLocaleLowerCase().indexOf(searchValue) !== -1
-          );
-        })
-    );
-  }
 
   protected countVisibleProjects(projects: LibraryProject[]): number {
     return projects.filter((project) => project.visible).length;
