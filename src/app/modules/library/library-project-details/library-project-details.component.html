@@ -22,8 +22,13 @@
                 @if (project.metadata.grades.length) {
                   <span i18n>Grade level:</span>
                 }
-                @for (grade of project.metadata.grades; track grade; let last = $last) {
-                  <span>{{ grade }}{{ last ? '' : ', ' }}</span>
+                @for (
+                  grade of project.metadata.grades;
+                  track grade;
+                  let first = $first;
+                  let last = $last
+                ) {
+                  {{ first ? ' ' : '' }}{{ grade }}{{ last ? '' : ', ' }}
                 }
                 @if (project.metadata.grades.length && project.metadata.totalTime) {
                   &nbsp;|&nbsp;
@@ -73,40 +78,53 @@
             track discipline.name;
             let last = $last
           ) {
-            {{ discipline.name }}{{ last ? '' : ' / ' }}
+            {{ discipline.name }}{{ last ? '' : ', ' }}
           }
         </p>
       }
-      @if (project.metadata.features) {
-        <p><strong i18n>Features:</strong> {{ project.metadata.features }}</p>
+      @if (project.metadata.features?.length) {
+        <p>
+          <strong i18n>Features:</strong>
+          @for (feature of project.metadata.features; track feature.name; let last = $last) {
+            {{ feature.name }}{{ last ? '' : ', ' }}
+          }
+        </p>
       }
       @if (
-        standards.commonCore.length + standards.ngss.length + standards.learningForJustice.length >
+        standards?.commonCore?.length +
+          standards?.ngss?.length +
+          standards?.learningForJustice?.length >
         0
       ) {
         <p>
-          <strong i18n>Standards</strong>
-          <ng-container
-            [ngTemplateOutlet]="standard"
-            [ngTemplateOutletContext]="{
-              standards: standards.commonCore,
-              standardsName: 'Common Core Standards'
-            }"
-          />
-          <ng-container
-            [ngTemplateOutlet]="standard"
-            [ngTemplateOutletContext]="{
-              standards: standards.ngss,
-              standardsName: 'Next Generation Science Standards'
-            }"
-          />
-          <ng-container
-            [ngTemplateOutlet]="standard"
-            [ngTemplateOutletContext]="{
-              standards: standards.learningForJustice,
-              standardsName: 'Learning For Justice Standards'
-            }"
-          />
+          <strong i18n>Standards Addressed:</strong>
+          @if (standards.commonCore) {
+            <ng-container
+              [ngTemplateOutlet]="standard"
+              [ngTemplateOutletContext]="{
+                standards: standards.commonCore,
+                standardsName: 'Common Core'
+              }"
+            />
+          }
+          @if (standards.ngss) {
+            <ng-container
+              [ngTemplateOutlet]="standard"
+              [ngTemplateOutletContext]="{
+                standards: standards.ngss,
+                standardsName: 'NGSS'
+              }"
+            />
+          }
+          @if (standards.learningForJustice) {
+            <ng-container
+              [ngTemplateOutlet]="standard"
+              [ngTemplateOutletContext]="{
+                standards: standards.learningForJustice,
+                standardsName: 'Learning For Justice'
+              }"
+            />
+          }
         </p>
       }
       @if (project.metadata.resources?.length > 0) {
