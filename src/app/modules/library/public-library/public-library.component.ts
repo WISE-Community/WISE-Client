@@ -20,6 +20,7 @@ import { LibraryProject } from '../libraryProject';
     `
       .content-block {
         padding: 16px;
+        background-color: transparent;
       }
 
       .mat-mdc-paginator {

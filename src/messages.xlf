@@ -2331,6 +2331,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="595878003405307359" datatype="html">
+        <source> Explore our curriculum library to find units and resources to use with your classes! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
+          <context context-type="linenumber">9,12</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5115344169131680845" datatype="html">
         <source>Workgroup ID</source>
         <context-group purpose="location">
@@ -5654,7 +5661,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-unit-type-selector/public-unit-type-selector.component.html</context>
-          <context context-type="linenumber">13,17</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
@@ -5763,8 +5770,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">6,8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2916910843954723635" datatype="html">
-        <source> Explore suggested WISE curricula for the given grade levels or search for specific units that address your needs. </source>
+      <trans-unit id="6922289019958966801" datatype="html">
+        <source> Explore suggested curricula for the given grade levels. Check out our <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/curriculum&quot;&gt;"/>full library<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> to explore in more depth. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/home-page-project-library/home-page-project-library.component.html</context>
           <context context-type="linenumber">8,11</context>
@@ -6149,7 +6156,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-unit-type-selector/public-unit-type-selector.component.html</context>
-          <context context-type="linenumber">5,7</context>
+          <context context-type="linenumber">4,6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/teacher-project-library/teacher-project-library.component.ts</context>
@@ -6281,21 +6288,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>No units found.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-library/public-library.component.html</context>
-          <context context-type="linenumber">26,30</context>
+          <context context-type="linenumber">23,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2394938031369558141" datatype="html">
         <source>WISE Tested explanation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-unit-type-selector/public-unit-type-selector.component.html</context>
-          <context context-type="linenumber">8,11</context>
+          <context context-type="linenumber">7,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3255671770039759193" datatype="html">
-        <source>Community Built explanation!</source>
+      <trans-unit id="424447139828429460" datatype="html">
+        <source>Community Built explanation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-unit-type-selector/public-unit-type-selector.component.html</context>
-          <context context-type="linenumber">20,25</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6028472408314831177" datatype="html">
