@@ -20,7 +20,7 @@
       <mat-optgroup [label]="label">
         @for (option of standardOptions[label]; track option.id) {
           <mat-option [value]="option[valueProp]">
-            {{ option[viewValueProp] }}
+            <b>{{ option[valueProp] }}</b> {{ option[viewValueProp] }}
           </mat-option>
         }
       </mat-optgroup>
