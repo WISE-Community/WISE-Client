@@ -92,8 +92,7 @@ describe('CreateRunDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, MatRadioModule, MatCheckboxModule],
-      declarations: [CreateRunDialogComponent],
+      imports: [CreateRunDialogComponent],
       providers: [
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: UserService, useClass: MockUserService },
