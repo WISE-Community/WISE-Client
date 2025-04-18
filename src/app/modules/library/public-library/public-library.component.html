@@ -1,23 +1,12 @@
 <div class="content-block library-teacher__paginate">
-  <div class="flex flex-col items-center lg:justify-between lg:flex-row gap-2">
-    <div class="flex flex-wrap gap-2">
-      <div class="flex items-center gap-1">
-        <mat-checkbox [(ngModel)]="wiseTested" (change)="updatePublicUnitType()" i18n
-          >WISE Tested</mat-checkbox
-        >
-        <a href="#" (click)="showOfficialLibraryInfo($event)">
-          <mat-icon aria-label="WISE Tested explanation" i18n-aria-label>info</mat-icon>
-        </a>
-      </div>
-      <div class="flex items-center gap-1">
-        <mat-checkbox [(ngModel)]="communityBuilt" (change)="updatePublicUnitType()" i18n
-          >Community Built</mat-checkbox
-        >
-        <a href="#" (click)="showCommunityLibraryInfo($event)">
-          <mat-icon aria-label="Community Built explaantion" i18n-aria-label>info</mat-icon>
-        </a>
-      </div>
-    </div>
+  <div class="flex flex-col sm:items-center justify-center align-items-stretch sm:flex-row">
+    <!-- <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What is Community Built?</a> -->
+    <public-unit-type-selector
+      [filterValues]="filterValues"
+      (publicUnitTypeUpdatedEvent)="filterUpdated()"
+    />
+
+    <span class="flex-1 hidden sm:inline"></span>
     <mat-paginator
       class="self-end"
       [hidePageSize]="true"

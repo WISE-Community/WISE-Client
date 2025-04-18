@@ -39,17 +39,21 @@ export class LibraryService {
   public numberOfPersonalProjectsVisible = new BehaviorSubject<number>(0);
   public numberOfPersonalProjectsVisible$ = this.numberOfPersonalProjectsVisible.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {
     this.router = router;
   }
 
-  getOfficialLibraryProjects() {
+  getOfficialLibraryProjects(): void {
     this.http.get<LibraryGroup[]>(this.libraryGroupsUrl).subscribe((libraryGroups) => {
       const projects: LibraryProject[] = [];
       this.libraryGroups = this.convertLibraryGroups(libraryGroups);
       for (let group of this.libraryGroups) {
         this.populateProjects(group, projects);
       }
+      projects.forEach((project) => (project.metadata.publicUnitType = 'wiseTested'));
       this.officialLibraryProjectsSource.next(projects);
       this.libraryGroupsSource.next(this.libraryGroups);
     });
@@ -77,10 +81,11 @@ export class LibraryService {
     }
   }
 
-  getCommunityLibraryProjects() {
+  getCommunityLibraryProjects(): void {
     this.http.get<LibraryProject[]>(this.communityProjectsUrl).subscribe((projects) => {
-      const communityLibraryProjects: LibraryProject[] = this.convertToLibraryProjects(projects);
-      this.communityLibraryProjectsSource.next(communityLibraryProjects);
+      const communityProjects: LibraryProject[] = this.convertToLibraryProjects(projects);
+      communityProjects.forEach((project) => (project.metadata.publicUnitType = 'communityBuilt'));
+      this.communityLibraryProjectsSource.next(communityProjects);
     });
   }
 

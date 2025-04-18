@@ -6,16 +6,17 @@ import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ResearchProjectType } from '../ResearchProject';
+import { Feature } from '../Feature';
+import { GradeLevel } from '../GradeLevel';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
   protected standardOptions: Standard[] = [];
-  protected standardValue = [];
   protected disciplineOptions: Standard[] = [];
-  protected disciplineValue = [];
+  protected featureOptions: Feature[] = [];
   protected filteredProjects: LibraryProject[] = [];
   protected filterValues: ProjectFilterValues = new ProjectFilterValues();
+  protected gradeLevelOptions: GradeLevel[] = [];
   protected highIndex: number = 0;
   protected lowIndex: number = 0;
   protected pageSizeOptions: number[] = [12, 24, 48, 96];
@@ -23,8 +24,6 @@ export abstract class LibraryComponent implements OnInit {
   protected pageSize: number = 12;
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
   protected projects: LibraryProject[] = [];
-  protected publicUnitTypeValue: ('wiseTested' | 'communityBuilt')[] = [];
-  private researchProjectValue: ResearchProjectType[] = [];
   protected searchValue: string = '';
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
@@ -77,17 +76,15 @@ export abstract class LibraryComponent implements OnInit {
     }
     this.filteredProjects = [];
     this.searchValue = this.filterValues.searchValue;
-    this.disciplineValue = this.filterValues.disciplineValue;
-    this.standardValue = this.filterValues.standardValue;
-    this.researchProjectValue = this.filterValues.researchProjectValue;
     this.projects.forEach((project) => {
       project.visible =
-        this.isSearchMatch(project, this.searchValue) &&
-        (!this.hasFilters() || this.isFilterMatch(project));
+        this.isSearchMatch(project, this.filterValues.searchValue) &&
+        (!this.filterValues.hasFilters() || this.filterValues.matches(project));
       if (project.visible) {
         this.filteredProjects.push(project);
       }
     });
+    this.filteredProjects.sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
     this.emitNumberOfProjectsVisible(this.countVisibleProjects(this.filteredProjects));
     this.pageIndex = 0;
     this.setPagination();
@@ -115,57 +112,6 @@ export abstract class LibraryComponent implements OnInit {
             value.toString().toLocaleLowerCase().indexOf(searchValue) !== -1
           );
         })
-    );
-  }
-
-  private isFilterMatch(project: LibraryProject): boolean {
-    return (
-      this.matchesPublicUnitType(project) ||
-      this.matchesStandard(project) ||
-      this.matchesDiscipline(project) ||
-      this.matchesResearchProject(project)
-    );
-  }
-
-  private matchesPublicUnitType(project: LibraryProject): boolean {
-    return this.publicUnitTypeValue?.includes(project.metadata.publicUnitType);
-  }
-
-  private matchesStandard(project: LibraryProject): boolean {
-    const standards = project.metadata.standards;
-    const commonCore = standards?.commonCore ?? [];
-    const ngss = standards?.ngss ?? [];
-    const learningForJustice = standards?.learningForJustice ?? [];
-    return [...commonCore, ...ngss, ...learningForJustice].some((val) =>
-      this.standardValue.includes(val.id)
-    );
-  }
-
-  private matchesDiscipline(project: LibraryProject): boolean {
-    return (
-      this.disciplineValue.length > 0 &&
-      project.metadata.disciplines?.some((discipline) =>
-        this.disciplineValue.includes(discipline.id)
-      )
-    );
-  }
-
-  private matchesResearchProject(project: LibraryProject): boolean {
-    return (
-      this.researchProjectValue.length > 0 &&
-      project.metadata.researchProjects?.some((researchProject) =>
-        this.researchProjectValue.includes(researchProject)
-      )
-    );
-  }
-
-  private hasFilters(): boolean {
-    return (
-      this.standardValue.length +
-        this.disciplineValue.length +
-        this.researchProjectValue.length +
-        this.publicUnitTypeValue.length >
-      0
     );
   }
 

@@ -20,7 +20,7 @@
             @if (project.metadata.grades.length || project.metadata.totalTime) {
               <div>
                 @if (project.metadata.grades.length) {
-                  <span i18n>Grade level:</span>
+                  <span i18n>Grade level{{ project.metadata.grades.length > 1 ? 's' : '' }}: </span>
                 }
                 @for (
                   grade of project.metadata.grades;

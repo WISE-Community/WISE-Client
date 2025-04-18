@@ -20,6 +20,7 @@ import { LibraryProjectComponent } from '../library-project/library-project.comp
 import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { of } from 'rxjs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
@@ -123,7 +124,7 @@ function setUpFiveProjects() {
 function setUpTwentyProjects() {
   const libraryProjects = [];
   for (let i = 1; i <= 20; i++) {
-    libraryProjects.push(new LibraryProject({ id: i, metadata: {}, tags: [] }));
+    libraryProjects.push(new LibraryProject({ id: i, metadata: { title: '' }, tags: [] }));
   }
   TestBed.inject(LibraryService).personalLibraryProjectsSource$ =
     fakeAsyncResponse(libraryProjects);
@@ -141,7 +142,7 @@ function showArchivedProjects() {
   describe('archived units view', () => {
     it('only shows archived units', async () => {
       await harness.showArchivedView();
-      expect(await harness.getProjectIdsInView()).toEqual([projectId2, projectId1]);
+      expect(await harness.getProjectIdsInView()).toEqual([projectId1, projectId2]);
     });
   });
 }
@@ -265,12 +266,17 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
       it('unselects all projects', async () => {
         await (await harness.getSelectAllCheckbox()).check();
         expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
-        component.filterUpdated({
-          searchValue: 'world',
-          standardValue: [],
-          disciplineValue: [],
-          researchProjectValue: []
-        });
+        component.filterUpdated(
+          Object.assign(new ProjectFilterValues(), {
+            disciplineValue: [],
+            featureValue: [],
+            gradeLevelValue: [],
+            publicUnitTypeValue: [],
+            searchValue: 'world',
+            standardValue: [],
+            unitTypeValue: []
+          })
+        );
         expect(await harness.getSelectedProjectIds()).toEqual([]);
       });
     });

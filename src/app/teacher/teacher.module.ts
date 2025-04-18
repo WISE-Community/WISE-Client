@@ -27,7 +27,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { RunMenuComponent } from './run-menu/run-menu.component';
-import { CreateRunDialogComponent } from './create-run-dialog/create-run-dialog.component';
 import { LibraryModule } from '../modules/library/library.module';
 import { ShareRunDialogComponent } from './share-run-dialog/share-run-dialog.component';
 import { TimelineModule } from '../modules/timeline/timeline.module';
@@ -91,7 +90,6 @@ const materialModules = [
     UnitTagsComponent
   ],
   declarations: [
-    CreateRunDialogComponent,
     EditComponent,
     EditRunWarningDialogComponent,
     ListClassroomCoursesDialogComponent,

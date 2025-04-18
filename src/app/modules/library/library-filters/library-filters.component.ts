@@ -5,7 +5,6 @@ import { Standard, StandardType } from '../standard';
 import { Discipline } from '../Discipline';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
-import { ResearchProject, ResearchProjectType } from '../ResearchProject';
 import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { SelectMenuComponent } from '../../shared/select-menu/select-menu.component';
 import { StandardsSelectMenuComponent } from '../../shared/standards-select-menu/standards-select-menu.component';
+import { Feature } from '../Feature';
+import { Grade, GradeLevel } from '../GradeLevel';
 
 @Component({
   imports: [
@@ -33,17 +34,25 @@ export class LibraryFiltersComponent implements OnInit {
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected disciplineValue = [];
+  protected featureOptions: Feature[] = [];
+  protected featureValue = [];
+  protected gradeLevelOptions: GradeLevel[] = [];
+  protected gradeLevelValue = [];
+  @Input() showAdvancedFilteringOptions: boolean = true;
   @Input() isSplitScreen: boolean = false;
   private libraryProjects: LibraryProject[] = [];
   private personalProjects: LibraryProject[] = [];
   protected possibleStandardLabels = ['NGSS', 'Common Core', 'Learning For Justice'];
-  protected researchProjectOptions: ResearchProject[] = [];
-  private researchProjectValue: ResearchProjectType[] = [];
   protected searchValue: string = '';
   private sharedProjects: LibraryProject[] = [];
   protected showFilters: boolean = false;
   protected standardOptions: Standard[] = [];
   protected standardValue = [];
+  protected unitTypeOptions: { id: string; name: string }[] = [
+    { id: 'WISE Platform', name: $localize`WISE Platform` },
+    { id: 'Other Platform', name: $localize`Other Platform` }
+  ];
+  protected unitTypeValue = [];
 
   constructor(
     private libraryService: LibraryService,
@@ -88,10 +97,15 @@ export class LibraryFiltersComponent implements OnInit {
     this.allProjects = this.getAllProjects();
     this.standardOptions = [];
     this.disciplineOptions = [];
+    this.gradeLevelOptions = [];
     for (let project of this.allProjects) {
       project.metadata.disciplines?.forEach((discipline: any) =>
         this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
       );
+      project.metadata.features?.forEach((feature: any) =>
+        this.featureOptions.push(new Feature(feature.id, feature.name))
+      );
+      this.populateGradeLevels(project);
       const standards = project.metadata.standards;
       [
         ['ngss', 'NGSS'],
@@ -104,17 +118,17 @@ export class LibraryFiltersComponent implements OnInit {
           )
         );
       });
-      this.populateResearchProjects(project);
     }
     this.removeDuplicatesAndSortAlphabetically();
   }
 
-  private populateResearchProjects(project: LibraryProject): void {
-    project.metadata.researchProjects?.forEach((researchProjectType: ResearchProjectType) => {
-      if (!this.researchProjectOptions.map((option) => option.name).includes(researchProjectType)) {
-        this.researchProjectOptions.push(new ResearchProject(researchProjectType));
-      }
-    });
+  private populateGradeLevels(project: LibraryProject) {
+    project.metadata.grades
+      ?.map((gradeLevel: string) => Number(gradeLevel))
+      .filter((gradeLevel: number) => Object.values(Grade).includes(gradeLevel))
+      .forEach((gradeLevel: number) => {
+        this.gradeLevelOptions.push(new GradeLevel(gradeLevel));
+      });
   }
 
   private getAllProjects(): LibraryProject[] {
@@ -135,10 +149,24 @@ export class LibraryFiltersComponent implements OnInit {
       'id'
     );
     this.utilService.sortObjectArrayByProperty(this.disciplineOptions, 'name');
+    this.featureOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.featureOptions,
+      'id'
+    );
+    this.utilService.sortObjectArrayByProperty(this.featureOptions, 'name');
+    this.gradeLevelOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.gradeLevelOptions,
+      'grade'
+    );
+    this.gradeLevelOptions.sort((a, b) => a.grade - b.grade);
   }
 
   protected hasFilters(): boolean {
-    return this.standardValue.length > 0 || this.disciplineValue.length > 0;
+    return (
+      this.standardValue.length > 0 ||
+      this.disciplineValue.length > 0 ||
+      this.gradeLevelValue.length > 0
+    );
   }
 
   protected searchUpdated(value: string): void {
@@ -146,37 +174,44 @@ export class LibraryFiltersComponent implements OnInit {
     this.emitFilterValues();
   }
 
-  protected filterUpdated(
-    value: string[] | ResearchProjectType[] = [],
-    context: string = ''
-  ): void {
+  protected filterUpdated(value: string[], context: string = ''): void {
     switch (context) {
       case 'discipline':
         this.disciplineValue = value;
         break;
+      case 'gradeLevel':
+        this.gradeLevelValue = value;
+        break;
       case 'standard':
         this.standardValue = value;
         break;
-      case 'researchProject':
-        this.researchProjectValue = value as ResearchProjectType[];
+      case 'feature':
+        this.featureValue = value;
+        break;
+      case 'unitType':
+        this.unitTypeValue = value;
         break;
     }
     this.emitFilterValues();
   }
 
   private emitFilterValues(): void {
-    const filterOptions: ProjectFilterValues = {
+    const filterValues: ProjectFilterValues = new ProjectFilterValues();
+    Object.assign(filterValues, {
       searchValue: this.searchValue,
       disciplineValue: this.disciplineValue,
+      featureValue: this.featureValue,
+      gradeLevelValue: this.gradeLevelValue,
       standardValue: this.standardValue,
-      researchProjectValue: this.researchProjectValue
-    };
-    this.libraryService.setFilterValues(filterOptions);
+      unitTypeValue: this.unitTypeValue
+    });
+    this.libraryService.setFilterValues(filterValues);
   }
 
   protected clearFilterValues(): void {
     this.standardValue = [];
     this.disciplineValue = [];
+    this.gradeLevelValue = [];
     this.emitFilterValues();
   }
 }
