@@ -5,6 +5,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/public-unit-type-selector.component';
+import { LibraryProject } from '../libraryProject';
 
 @Component({
   imports: [
@@ -53,9 +54,19 @@ export class PublicLibraryComponent extends LibraryComponent {
     this.libraryService.getCommunityLibraryProjects();
   }
 
-  private updateProjects(projects: any): void {
+  private updateProjects(projects: LibraryProject[]): void {
     this.projects.push(...projects);
+    this.projects = this.removeDuplicates(this.projects);
     this.filterUpdated();
+  }
+
+  private removeDuplicates(projects: LibraryProject[]): LibraryProject[] {
+    return projects.reduce((acc, project) => {
+      if (!acc.some((p) => p.id === project.id)) {
+        acc.push(project);
+      }
+      return acc;
+    }, []);
   }
 
   protected emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
