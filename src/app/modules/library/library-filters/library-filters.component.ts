@@ -30,7 +30,6 @@ import { Grade, GradeLevel } from '../GradeLevel';
   templateUrl: './library-filters.component.html'
 })
 export class LibraryFiltersComponent implements OnInit {
-  private allProjects: LibraryProject[] = [];
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected disciplineValue = [];
@@ -58,26 +57,22 @@ export class LibraryFiltersComponent implements OnInit {
     private libraryService: LibraryService,
     private utilService: UtilService
   ) {
-    libraryService.officialLibraryProjectsSource$.subscribe((libraryProjects: LibraryProject[]) => {
-      this.libraryProjects = libraryProjects;
+    libraryService.officialLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+      this.libraryProjects = projects;
       this.populateFilterOptions();
     });
-    libraryService.communityLibraryProjectsSource$.subscribe(
-      (communityProjects: LibraryProject[]) => {
-        this.communityProjects = communityProjects;
-        this.populateFilterOptions();
-      }
-    );
-    libraryService.sharedLibraryProjectsSource$.subscribe((sharedProjects: LibraryProject[]) => {
-      this.sharedProjects = sharedProjects;
+    libraryService.communityLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+      this.communityProjects = projects;
       this.populateFilterOptions();
     });
-    libraryService.personalLibraryProjectsSource$.subscribe(
-      (personalProjects: LibraryProject[]) => {
-        this.personalProjects = personalProjects;
-        this.populateFilterOptions();
-      }
-    );
+    libraryService.sharedLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+      this.sharedProjects = projects;
+      this.populateFilterOptions();
+    });
+    libraryService.personalLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+      this.personalProjects = projects;
+      this.populateFilterOptions();
+    });
   }
 
   ngOnInit(): void {
@@ -94,35 +89,26 @@ export class LibraryFiltersComponent implements OnInit {
   }
 
   private populateFilterOptions(): void {
-    this.allProjects = this.getAllProjects();
-    this.standardOptions = [];
-    this.disciplineOptions = [];
-    this.gradeLevelOptions = [];
-    for (let project of this.allProjects) {
-      project.metadata.disciplines?.forEach((discipline: any) =>
-        this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
-      );
-      project.metadata.features?.forEach((feature: any) =>
-        this.featureOptions.push(new Feature(feature.id, feature.name))
-      );
-      this.populateGradeLevels(project);
-      const standards = project.metadata.standards;
-      [
-        ['ngss', 'NGSS'],
-        ['commonCore', 'Common Core'],
-        ['learningForJustice', 'Learning For Justice']
-      ].forEach(([key, name]) => {
-        (standards?.[key] ?? []).forEach((standard: any) =>
-          this.standardOptions.push(
-            new Standard(standard.id, standard.name, name as StandardType, standard.url)
-          )
-        );
-      });
-    }
+    this.libraryProjects
+      .concat(this.communityProjects)
+      .concat(this.sharedProjects)
+      .concat(this.personalProjects)
+      .forEach((project: LibraryProject) => this.populateFilterOptionsFromProject(project));
     this.removeDuplicatesAndSortAlphabetically();
   }
 
-  private populateGradeLevels(project: LibraryProject) {
+  private populateFilterOptionsFromProject(project: LibraryProject): void {
+    project.metadata.disciplines?.forEach((discipline: any) =>
+      this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
+    );
+    project.metadata.features?.forEach((feature: any) =>
+      this.featureOptions.push(new Feature(feature.id, feature.name))
+    );
+    this.populateGradeLevels(project);
+    this.populateStandards(project);
+  }
+
+  private populateGradeLevels(project: LibraryProject): void {
     project.metadata.grades
       ?.map((gradeLevel: string) => Number(gradeLevel))
       .filter((gradeLevel: number) => Object.values(Grade).includes(gradeLevel))
@@ -131,11 +117,19 @@ export class LibraryFiltersComponent implements OnInit {
       });
   }
 
-  private getAllProjects(): LibraryProject[] {
-    return this.libraryProjects
-      .concat(this.communityProjects)
-      .concat(this.sharedProjects)
-      .concat(this.personalProjects);
+  private populateStandards(project: LibraryProject): void {
+    const standards = project.metadata.standards;
+    [
+      ['ngss', 'NGSS'],
+      ['commonCore', 'Common Core'],
+      ['learningForJustice', 'Learning For Justice']
+    ].forEach(([key, name]) => {
+      (standards?.[key] ?? []).forEach((standard: any) =>
+        this.standardOptions.push(
+          new Standard(standard.id, standard.name, name as StandardType, standard.url)
+        )
+      );
+    });
   }
 
   private removeDuplicatesAndSortAlphabetically(): void {
