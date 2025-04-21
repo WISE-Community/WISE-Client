@@ -42,10 +42,14 @@ export class LibraryProjectDetailsComponent implements OnInit {
   protected isRunProject: false;
   protected licenseInfo = $localize`License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.`;
   protected licenseUrl = 'http://creativecommons.org/licenses/by-sa/4.0/';
-  protected ngssWebUrl: string = 'https://www.nextgenscience.org/search-standards?keys=';
   protected parentAuthorsString: string = '';
   protected parentProject: ParentProject;
   protected project: Project;
+  protected standardLabels: any = {
+    commonCore: $localize`Common Core`,
+    learningForJustice: $localize`Learning For Justice`,
+    ngss: $localize`NGSS`
+  };
   protected standards: any;
 
   constructor(

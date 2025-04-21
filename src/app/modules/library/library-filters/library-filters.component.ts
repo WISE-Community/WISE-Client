@@ -120,9 +120,9 @@ export class LibraryFiltersComponent implements OnInit {
   private populateStandards(project: LibraryProject): void {
     const standards = project.metadata.standards;
     [
-      ['ngss', 'NGSS'],
-      ['commonCore', 'Common Core'],
-      ['learningForJustice', 'Learning For Justice']
+      ['ngss', $localize`NGSS`],
+      ['commonCore', $localize`Common Core`],
+      ['learningForJustice', $localize`Learning For Justice`]
     ].forEach(([key, name]) => {
       (standards?.[key] ?? []).forEach((standard: any) =>
         this.standardOptions.push(
