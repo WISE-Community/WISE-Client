@@ -15,7 +15,7 @@
         matBadgeDescription="Filters applied"
         matBadgeOverlap="true"
         matBadgeSize="small"
-        [matBadgeHidden]="!hasFilters()"
+        [matBadgeHidden]="!filterValues.hasFilters()"
         aria-hidden="false"
         >filter_list</mat-icon
       >
@@ -25,7 +25,7 @@
 <div class="library-filters" [class.expand]="showFilters" [class.isSplitScreen]="isSplitScreen">
   <div class="notice flex justify-between">
     <h3 class="mat-subtitle-2" i18n>Filters</h3>
-    @if (hasFilters()) {
+    @if (filterValues.hasFilters()) {
       <a href="#" (click)="!!clearFilterValues()" i18n>Clear all</a>
     }
   </div>

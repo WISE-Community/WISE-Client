@@ -47,7 +47,7 @@ export class ProjectFilterValues {
     );
   }
 
-  private hasFilters(): boolean {
+  hasFilters(): boolean {
     return (
       this.standardValue.length +
         this.disciplineValue.length +
@@ -57,6 +57,15 @@ export class ProjectFilterValues {
         (this.publicUnitTypeValue?.length ?? 0) >
       0
     );
+  }
+
+  clear(): void {
+    this.standardValue = [];
+    this.disciplineValue = [];
+    this.unitTypeValue = [];
+    this.gradeLevelValue = [];
+    this.featureValue = [];
+    this.publicUnitTypeValue = [];
   }
 
   private matchesUnitType(project: LibraryProject): boolean {

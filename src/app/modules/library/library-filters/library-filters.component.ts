@@ -143,14 +143,6 @@ export class LibraryFiltersComponent {
     this.gradeLevelOptions.sort((a, b) => a.grade - b.grade);
   }
 
-  protected hasFilters(): boolean {
-    return (
-      this.filterValues.standardValue.length > 0 ||
-      this.filterValues.disciplineValue.length > 0 ||
-      this.filterValues.gradeLevelValue.length > 0
-    );
-  }
-
   protected searchUpdated(value: string): void {
     this.filterValues.searchValue = value.toLocaleLowerCase();
     this.emitFilterValues();
@@ -182,9 +174,7 @@ export class LibraryFiltersComponent {
   }
 
   protected clearFilterValues(): void {
-    this.filterValues.standardValue = [];
-    this.filterValues.disciplineValue = [];
-    this.filterValues.gradeLevelValue = [];
+    this.filterValues.clear();
     this.emitFilterValues();
   }
 }
