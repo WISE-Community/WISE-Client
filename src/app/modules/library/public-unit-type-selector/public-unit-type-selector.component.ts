@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Directive, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
@@ -26,10 +26,10 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './public-unit-type-selector.component.html'
 })
 export class PublicUnitTypeSelectorComponent {
-  protected communityBuilt: boolean = false;
+  protected communityBuilt: boolean;
   @Input() filterValues: ProjectFilterValues;
   @Output() publicUnitTypeUpdatedEvent: EventEmitter<void> = new EventEmitter<void>();
-  protected wiseTested: boolean = false;
+  protected wiseTested: boolean;
 
   constructor(private dialog: MatDialog) {}
 
@@ -44,41 +44,30 @@ export class PublicUnitTypeSelectorComponent {
     this.publicUnitTypeUpdatedEvent.emit();
   }
 
-  protected showOfficialLibraryInfo(): void {
-    this.dialog.open(OfficialDetailsComponent, {
-      panelClass: 'dialog-sm'
-    });
-  }
-
-  protected showCommunityLibraryInfo(): void {
-    this.dialog.open(CommunityDetailsComponent, {
+  protected showInfo(type: 'community' | 'official'): void {
+    this.dialog.open(type === 'community' ? CommunityDetailsComponent : OfficialDetailsComponent, {
       panelClass: 'dialog-sm'
     });
   }
 }
 
+@Directive()
+abstract class DetailsComponent {
+  constructor(public dialogRef: MatDialogRef<DetailsComponent>) {}
+
+  protected close(): void {
+    this.dialogRef.close();
+  }
+}
+
 @Component({
   imports: [MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions, RouterLink],
-  selector: 'official-details',
   templateUrl: '../official-library/official-library-details.html'
 })
-export class OfficialDetailsComponent {
-  constructor(public dialogRef: MatDialogRef<OfficialDetailsComponent>) {}
-
-  close(): void {
-    this.dialogRef.close();
-  }
-}
+class OfficialDetailsComponent extends DetailsComponent {}
 
 @Component({
   imports: [MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions, RouterLink],
-  selector: 'community-details',
   templateUrl: '../community-library/community-library-details.html'
 })
-export class CommunityDetailsComponent {
-  constructor(public dialogRef: MatDialogRef<CommunityDetailsComponent>) {}
-
-  close(): void {
-    this.dialogRef.close();
-  }
-}
+class CommunityDetailsComponent extends DetailsComponent {}

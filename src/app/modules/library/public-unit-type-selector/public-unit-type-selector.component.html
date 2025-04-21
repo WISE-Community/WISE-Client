@@ -3,7 +3,7 @@
     <mat-checkbox [(ngModel)]="wiseTested" (change)="updatePublicUnitType()" i18n
       >WISE Tested</mat-checkbox
     >
-    <a tabindex="0" (click)="showOfficialLibraryInfo()" (keyup.enter)="showOfficialLibraryInfo()">
+    <a tabindex="0" (click)="showInfo('official')" (keyup.enter)="showInfo('official')">
       <mat-icon aria-label="WISE Tested explanation" i18n-aria-label>info</mat-icon>
     </a>
   </div>
@@ -11,7 +11,7 @@
     <mat-checkbox [(ngModel)]="communityBuilt" (change)="updatePublicUnitType()" i18n
       >Community Built</mat-checkbox
     >
-    <a tabindex="0" (click)="showCommunityLibraryInfo()" (keyup.enter)="showCommunityLibraryInfo()">
+    <a tabindex="0" (click)="showInfo('community')" (keyup.enter)="showInfo('community')">
       <mat-icon aria-label="Community Built explanation" i18n-aria-label>info</mat-icon>
     </a>
   </div>

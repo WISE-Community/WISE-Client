@@ -4,6 +4,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('PublicUnitTypeSelectorComponent', () => {
   let component: PublicUnitTypeSelectorComponent;
@@ -36,6 +37,13 @@ describe('PublicUnitTypeSelectorComponent', () => {
     const spy = spyOn(component.publicUnitTypeUpdatedEvent, 'emit');
     await checkbox1.check();
     expect(component.filterValues.publicUnitTypeValue).toEqual(['wiseTested']);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should show details when info is clicked', () => {
+    const spy = spyOn(TestBed.inject(MatDialog), 'open');
+    fixture.debugElement.nativeElement.querySelector('a').click();
+    fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
   });
 });
