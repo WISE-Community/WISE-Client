@@ -34,6 +34,7 @@ export abstract class LibraryComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    this.filterValues.clear();
     this.subscriptions.unsubscribe();
   }
 
