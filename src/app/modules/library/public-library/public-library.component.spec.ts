@@ -15,7 +15,7 @@ describe('PublicLibraryComponent', () => {
       imports: [PublicLibraryComponent],
       providers: [
         MockProvider(LibraryService, {
-          projectFilterValuesSource$: of({} as ProjectFilterValues),
+          projectFilterValuesSource$: of(new ProjectFilterValues()),
           communityLibraryProjectsSource$: of([
             { id: 1, name: 'P1' },
             { id: 2, name: 'P2' }
