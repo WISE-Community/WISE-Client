@@ -4,6 +4,7 @@ import { MockProvider } from 'ng-mocks';
 import { LibraryService } from '../../../services/library.service';
 import { of } from 'rxjs';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { LibraryProject } from '../libraryProject';
 
 describe('PublicLibraryComponent', () => {
   let component: PublicLibraryComponent;
@@ -15,8 +16,14 @@ describe('PublicLibraryComponent', () => {
       providers: [
         MockProvider(LibraryService, {
           projectFilterValuesSource$: of({} as ProjectFilterValues),
-          communityLibraryProjectsSource$: of([]),
-          officialLibraryProjectsSource$: of([])
+          communityLibraryProjectsSource$: of([
+            { id: 1, name: 'P1' },
+            { id: 2, name: 'P2' }
+          ] as LibraryProject[]),
+          officialLibraryProjectsSource$: of([
+            { id: 1, name: 'P1' },
+            { id: 3, name: 'P3' }
+          ] as LibraryProject[])
         })
       ]
     }).compileComponents();
@@ -26,7 +33,7 @@ describe('PublicLibraryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should remove duplicate units', () => {
+    expect(component['projects'].length).toBe(3);
   });
 });

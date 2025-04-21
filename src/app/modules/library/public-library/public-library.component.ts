@@ -70,12 +70,8 @@ export class PublicLibraryComponent extends LibraryComponent {
     }, []);
   }
 
-  protected emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
-    if (numProjectsVisible) {
-      this.libraryService.numberOfCommunityProjectsVisible.next(numProjectsVisible);
-    } else {
-      this.libraryService.numberOfCommunityProjectsVisible.next(this.filteredProjects.length);
-    }
+  protected emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {
+    // do nothing. this value is not used in the public library
   }
 
   protected getDetailsComponent(): any {
