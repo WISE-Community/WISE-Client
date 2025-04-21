@@ -45,7 +45,7 @@
           placeholderText="Type"
           [value]="filterValues.unitTypeValue"
           (update)="filterUpdated($event, 'unitType')"
-          [valueProp]="'id'"
+          [valueProp]="'name'"
           [viewValueProp]="'name'"
           [multiple]="true"
         />
@@ -117,7 +117,7 @@
           placeholderText="Features"
           [value]="filterValues.featureValue"
           (update)="filterUpdated($event, 'feature')"
-          valueProp="id"
+          valueProp="name"
           viewValueProp="name"
           [multiple]="true"
         />
