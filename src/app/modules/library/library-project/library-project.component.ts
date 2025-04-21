@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   animations: [flash],
+  encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
     FormsModule,

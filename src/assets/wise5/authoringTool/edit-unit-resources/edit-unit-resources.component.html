@@ -1,0 +1,70 @@
+<ng-template #addButton let-addToTop="addToTop">
+  <button
+    mat-icon-button
+    color="primary"
+    matTooltip="Add a new resource"
+    i18n-matTooltip
+    matTooltipPosition="after"
+    (click)="addNewResource(addToTop)"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</ng-template>
+<div class="resource-descriptions notice-bg-bg">
+  <h5 class="flex flex-row items-center gap-1 !text-xl">
+    <span i18n>Resources</span>
+    <ng-container *ngTemplateOutlet="addButton; context: { addToTop: true }" />
+    <span class="flex-1"></span>
+  </h5>
+  <ul>
+    @for (
+      resource of resources;
+      track $index;
+      let resourceIndex = $index, first = $first, last = $last
+    ) {
+      <li class="resource">
+        <mat-card appearance="outlined" class="resource-content">
+          <div class="flex flex-row flex-wrap gap-2">
+            <div class="text-secondary flex flex-col items-center">
+              <span class="mat-subtitle-1">{{ resourceIndex + 1 }}</span>
+            </div>
+            <div class="flex flex-col items-start gap-2 flex-1">
+              <mat-form-field class="resource-input form-field-no-hint" appearance="fill">
+                <mat-label i18n>Resource Name</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="resource.name"
+                  (ngModelChange)="inputChanged.next($event)"
+                />
+              </mat-form-field>
+              <mat-form-field class="resource-input form-field-no-hint" appearance="fill">
+                <mat-label i18n>Resource URL</mat-label>
+                <textarea
+                  matInput
+                  [(ngModel)]="resource.url"
+                  (ngModelChange)="inputChanged.next($event)"
+                  cdkTextareaAutosize
+                >
+                </textarea>
+              </mat-form-field>
+            </div>
+            <div class="flex flex-col items-center">
+              <button
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Delete resource"
+                matTooltipPosition="before"
+                (click)="deleteResource(resourceIndex)"
+              >
+                <mat-icon>clear</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </li>
+    }
+  </ul>
+  <div id="add-new-resource-bottom-button" [hidden]="resources.length === 0">
+    <ng-container *ngTemplateOutlet="addButton; context: { addToTop: false }" />
+  </div>
+</div>

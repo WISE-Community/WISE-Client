@@ -13,8 +13,7 @@ export class MockLibraryService {
   projectFilterValuesSource$ = fakeAsyncResponse({
     searchValue: '',
     disciplineValue: [],
-    dciArrangementValue: [],
-    peValue: []
+    standardValue: []
   });
   numberOfCommunityProjectsVisible = new BehaviorSubject<number>(0);
 }

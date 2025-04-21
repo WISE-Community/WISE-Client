@@ -7,7 +7,6 @@ import {
 } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { CreateRunDialogComponent } from '../../../teacher/create-run-dialog/create-run-dialog.component';
-import { NGSSStandards } from '../ngssStandards';
 import { Project } from '../../../domain/project';
 import { ParentProject } from '../../../domain/parentProject';
 import { ConfigService } from '../../../services/config.service';
@@ -43,11 +42,15 @@ export class LibraryProjectDetailsComponent implements OnInit {
   protected isRunProject: false;
   protected licenseInfo = $localize`License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.`;
   protected licenseUrl = 'http://creativecommons.org/licenses/by-sa/4.0/';
-  protected ngss: NGSSStandards = new NGSSStandards();
-  protected ngssWebUrl: string = 'https://www.nextgenscience.org/search-standards?keys=';
   protected parentAuthorsString: string = '';
   protected parentProject: ParentProject;
   protected project: Project;
+  protected standardLabels: any = {
+    commonCore: $localize`Common Core`,
+    learningForJustice: $localize`Learning For Justice`,
+    ngss: $localize`NGSS`
+  };
+  protected standards: any;
 
   constructor(
     private configService: ConfigService,
@@ -68,32 +71,8 @@ export class LibraryProjectDetailsComponent implements OnInit {
           this.data.project.metadata.parentProjects[numParents - 1]
         );
       }
-      this.setNGSS();
+      this.standards = this.project.metadata.standards;
       this.setLicenseInfo();
-    }
-  }
-
-  private setNGSS(): void {
-    const standards = this.project.metadata.standardsAddressed;
-    if (standards) {
-      const ngss = standards.ngss;
-      if (ngss) {
-        if (ngss.disciplines) {
-          this.ngss.disciplines = ngss.disciplines;
-        }
-        if (ngss.dci) {
-          this.ngss.dci = ngss.dci;
-        }
-        if (ngss.dciArrangements) {
-          this.ngss.dciArrangements = ngss.dciArrangements;
-        }
-        if (ngss.ccc) {
-          this.ngss.ccc = ngss.ccc;
-        }
-        if (ngss.practices) {
-          this.ngss.practices = ngss.practices;
-        }
-      }
     }
   }
 

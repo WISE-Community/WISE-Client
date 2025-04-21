@@ -1,3 +1,15 @@
+<ng-template #standard let-standards="standards" let-standardsName="standardsName">
+  @if (standards.length > 0) {
+    <div>
+      <span i18n>{{ standardsName }}: </span>
+      @for (standard of standards; track standard.id; let last = $last) {
+        <a href="{{ standard.url }}" target="_blank"
+          ><b>{{ standard.id }}</b> {{ standard.name }}</a
+        >{{ last ? '' : ' • ' }}
+      }
+    </div>
+  }
+</ng-template>
 <div class="library-project-details" mat-dialog-content>
   <div class="flex flex-row">
     <div class="flex flex-row">
@@ -11,8 +23,13 @@
                 @if (project.metadata.grades.length) {
                   <span i18n>Grade level:</span>
                 }
-                @for (grade of project.metadata.grades; track grade; let last = $last) {
-                  <span>{{ grade }}{{ last ? '' : ', ' }}</span>
+                @for (
+                  grade of project.metadata.grades;
+                  track grade;
+                  let first = $first;
+                  let last = $last
+                ) {
+                  {{ first ? ' ' : '' }}{{ grade }}{{ last ? '' : ', ' }}
                 }
                 @if (project.metadata.grades.length && project.metadata.totalTime) {
                   &nbsp;|&nbsp;
@@ -54,43 +71,76 @@
       @if (project.metadata.summary) {
         <div [innerHTML]="project.metadata.summary"></div>
       }
-      @if (ngss.disciplines.length) {
+      @if (project.metadata.disciplines?.length) {
         <p>
           <strong i18n>Discipline:</strong>
-          @for (discipline of ngss.disciplines; track discipline.name; let last = $last) {
-            {{ discipline.name }}{{ last ? '' : ' / ' }}
+          @for (
+            discipline of project.metadata.disciplines;
+            track discipline.name;
+            let last = $last
+          ) {
+            {{ discipline.name }}{{ last ? '' : ' • ' }}
           }
         </p>
       }
-      @if (project.metadata.features) {
-        <p><strong i18n>Features:</strong> {{ project.metadata.features }}</p>
-      }
-      @if (ngss.dciArrangements.length) {
+      @if (project.metadata.features?.length) {
         <p>
-          <strong i18n>NGSS Performance Expectations: </strong>
-          @for (dcia of ngss.dciArrangements; track dcia.id; let last = $last) {
-            <a href="{{ ngssWebUrl }}{{ dcia.id }}" target="_blank"
-              >{{ dcia.id }} {{ dcia.name }}</a
-            >
-            @if (dcia.children.length) {
-              (
-              @for (pe of dcia.children; track pe.id; let lastChild = $last) {
-                <a
-                  class="pe"
-                  href="{{ ngssWebUrl }}{{ pe.id }}"
-                  target="_blank"
-                  matTooltip="{{ pe.name }}"
-                  [matTooltipPosition]="'above'"
-                  >{{ pe.id }}</a
-                >{{ lastChild ? '' : ', ' }}
-              }
-              )
-            }
-            {{ last ? '' : ' / ' }}
+          <strong i18n>Features:</strong>
+          @for (feature of project.metadata.features; track feature.name; let last = $last) {
+            {{ feature.name }}{{ last ? '' : ' • ' }}
           }
         </p>
       }
-      <unit-tags [tags]="project.tags" />
+      @if (
+        standards?.commonCore?.length +
+          standards?.ngss?.length +
+          standards?.learningForJustice?.length >
+        0
+      ) {
+        <p>
+          <strong i18n>Standards Addressed:</strong>
+          @if (standards.commonCore) {
+            <ng-container
+              [ngTemplateOutlet]="standard"
+              [ngTemplateOutletContext]="{
+                standards: standards.commonCore,
+                standardsName: standardLabels.commonCore
+              }"
+            />
+          }
+          @if (standards.ngss) {
+            <ng-container
+              [ngTemplateOutlet]="standard"
+              [ngTemplateOutletContext]="{
+                standards: standards.ngss,
+                standardsName: standardLabels.ngss
+              }"
+            />
+          }
+          @if (standards.learningForJustice) {
+            <ng-container
+              [ngTemplateOutlet]="standard"
+              [ngTemplateOutletContext]="{
+                standards: standards.learningForJustice,
+                standardsName: standardLabels.learningForJustice
+              }"
+            />
+          }
+        </p>
+      }
+      @if (project.metadata.resources?.length > 0) {
+        <p>
+          <strong i18n>Resources:</strong>
+          {{ first ? ' ' : '' }}
+          @for (resource of project.metadata.resources; track resource.name; let last = $last) {
+            <a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a
+            >{{ last ? '' : ' • ' }}
+          }
+        </p>
+      }
+      @if (project.tags) {
+        <unit-tags [tags]="project.tags" />
+      }
     </div>
     @if (project.metadata.discourseCategoryURL) {
       <discourse-category-activity [categoryURL]="project.metadata.discourseCategoryURL" />
@@ -119,18 +169,16 @@
           @if (authorsString.length == 0) {
             <ng-container i18n
               ><a href="{{ project.uri }}" target="_blank">This unit</a> is licensed under
-              <a href="{{ licenseUrl }}" target="_blank">CC BY-SA</a>.</ng-container
-            >
+              <a href="{{ licenseUrl }}" target="_blank">CC BY-SA</a>.
+            </ng-container>
           } @else {
             <ng-container i18n
               ><a href="{{ project.uri }}" target="_blank">This unit</a> is licensed under
-              <a href="{{ licenseUrl }}" target="_blank">CC BY-SA</a> by
-              {{ authorsString }}.</ng-container
-            >
+              <a href="{{ licenseUrl }}" target="_blank">CC BY-SA</a> by {{ authorsString }}.
+            </ng-container>
           }
         </span>
       }
-      /
       @if (project.license) {
         <a href="{{ project.license }}" target="_blank" i18n>View License</a>
       } @else {
@@ -148,14 +196,21 @@
 </div>
 <div mat-dialog-actions class="flex flex-col sm:flex-row gap-2 sm:gap-4 !items-stretch" align="end">
   <button mat-button cdkFocusInitial (click)="close()" i18n>Close</button>
-  @if (isTeacher && !isRunProject && project.wiseVersion !== 4) {
+  @if (
+    isTeacher &&
+    !isRunProject &&
+    project.wiseVersion !== 4 &&
+    project.metadata.unitType === 'Platform'
+  ) {
     <button mat-flat-button color="accent" (click)="runProject()">
       <mat-icon>supervised_user_circle</mat-icon>&nbsp;<ng-container i18n
         >Use with Class</ng-container
       >
     </button>
   }
-  <button mat-flat-button color="primary" (click)="previewProject()">
-    <mat-icon>preview</mat-icon>&nbsp;<ng-container i18n>Preview</ng-container>
-  </button>
+  @if (project.metadata.unitType === 'Platform') {
+    <button mat-flat-button color="primary" (click)="previewProject()">
+      <mat-icon>preview</mat-icon>&nbsp;<ng-container i18n>Preview</ng-container>
+    </button>
+  }
 </div>

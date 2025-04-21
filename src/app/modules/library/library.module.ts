@@ -54,6 +54,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SelectMenuComponent } from '../shared/select-menu/select-menu.component';
 import { UnitTagsComponent } from '../../teacher/unit-tags/unit-tags.component';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { StandardsSelectMenuComponent } from '../shared/standards-select-menu/standards-select-menu.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -84,11 +85,13 @@ const materialModules = [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
+    LibraryFiltersComponent,
     LibraryProjectComponent,
     LibraryProjectDetailsComponent,
     ReactiveFormsModule,
     RouterModule,
     materialModules,
+    StandardsSelectMenuComponent,
     SearchBarComponent,
     SelectAllItemsCheckboxComponent,
     SelectMenuComponent,
@@ -99,7 +102,6 @@ const materialModules = [
   ],
   declarations: [
     LibraryGroupThumbsComponent,
-    LibraryFiltersComponent,
     HomePageProjectLibraryComponent,
     TeacherProjectLibraryComponent,
     OfficialLibraryComponent,

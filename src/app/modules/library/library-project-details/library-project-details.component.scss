@@ -38,8 +38,12 @@
 }
 
 .details {
-  > p, div {
+  > * {
     margin: 0 0 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -48,7 +52,7 @@
 }
 
 .license {
-  margin: 0 -12px -12px;
+  margin: 12px -12px -12px;
   padding: 12px;
 
   img {

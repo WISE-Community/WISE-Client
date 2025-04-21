@@ -1,7 +1,7 @@
 <div class="library-filter">
   <div class="flex flex-row gap-1">
     <div class="flex-auto max-w-full">
-      <app-search-bar [value]="searchValue" (update)="searchUpdated($event)"></app-search-bar>
+      <app-search-bar [value]="filterValues.searchValue" (update)="searchUpdated($event)" />
     </div>
     <button
       mat-icon-button
@@ -16,90 +16,109 @@
         matBadgeOverlap="true"
         matBadgeSize="small"
         [matBadgeHidden]="!hasFilters()"
+        aria-hidden="false"
         >filter_list</mat-icon
       >
     </button>
   </div>
 </div>
 <div class="library-filters" [class.expand]="showFilters" [class.isSplitScreen]="isSplitScreen">
-  <div class="notice">
-    <ng-container i18n
-      >Filter by
-      <a href="https://www.nextgenscience.org/" target="_blank"
-        >Next Generation Science Standards</a
-      >
-      (NGSS).</ng-container
-    >&nbsp;<a *ngIf="hasFilters()" href="#" (click)="!!clearFilterValues()" i18n>Reset</a>
+  <div class="notice flex justify-between">
+    <h3 class="mat-subtitle-2" i18n>Filters</h3>
+    @if (hasFilters()) {
+      <a href="#" (click)="!!clearFilterValues()" i18n>Clear all</a>
+    }
   </div>
   <div
     class="flex flex-col gap-2"
     [ngClass]="{ 'md:flex-col': isSplitScreen, 'md:flex-row': !isSplitScreen }"
   >
-    <div
-      *ngIf="disciplineOptions.length > 0"
-      class="library-filter"
-      [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
-    >
-      <app-select-menu
-        id="disciplineSelectMenu"
-        [options]="disciplineOptions"
-        i18n-placeholderText
-        placeholderText="Discipline"
-        [value]="disciplineValue"
-        (update)="filterUpdated($event, 'discipline')"
-        [valueProp]="'id'"
-        [viewValueProp]="'name'"
-        [multiple]="true"
-      />
-    </div>
-    <div
-      *ngIf="dciArrangementOptions.length > 0"
-      class="library-filter"
-      [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
-    >
-      <app-select-menu
-        id="dciArrangementSelectMenu"
-        [options]="dciArrangementOptions"
-        i18n-placeholderText
-        placeholderText="DCI Arrangement"
-        [value]="dciArrangementValue"
-        (update)="filterUpdated($event, 'dci')"
-        [valueProp]="'id'"
-        [viewValueProp]="'name'"
-        [multiple]="true"
-      />
-    </div>
-    <div
-      *ngIf="peOptions.length > 0"
-      class="library-filter"
-      [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
-    >
-      <app-select-menu
-        id="performanceExpectationSelectMenu"
-        [options]="peOptions"
-        i18n-placeholderText
-        placeholderText="Performance Expectation"
-        [value]="peValue"
-        (update)="filterUpdated($event, 'pe')"
-        [valueProp]="'id'"
-        [viewValueProp]="'name'"
-        [multiple]="true"
-      />
-    </div>
-    @if (researchProjectOptions.length > 0) {
+    @if (unitTypeOptions.length > 0) {
       <div
         class="library-filter"
         [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
       >
         <app-select-menu
-          id="researchProjectSelectMenu"
-          [options]="researchProjectOptions"
+          id="unitTypeSelectMenu"
+          [options]="unitTypeOptions"
           i18n-placeholderText
-          placeholderText="Research Project"
-          [value]="researchProjectValue"
-          (update)="filterUpdated($event, 'researchProject')"
+          placeholderText="Type"
+          [value]="filterValues.unitTypeValue"
+          (update)="filterUpdated($event, 'unitType')"
           [valueProp]="'id'"
           [viewValueProp]="'name'"
+          [multiple]="true"
+        />
+      </div>
+    }
+    @if (disciplineOptions.length > 0) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <app-select-menu
+          id="disciplineSelectMenu"
+          [options]="disciplineOptions"
+          i18n-placeholderText
+          placeholderText="Discipline"
+          [value]="filterValues.disciplineValue"
+          (update)="filterUpdated($event, 'discipline')"
+          [valueProp]="'id'"
+          [viewValueProp]="'name'"
+          [multiple]="true"
+        />
+      </div>
+    }
+    @if (gradeLevelOptions.length > 0 && showAdvancedFilteringOptions) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <app-select-menu
+          id="gradeLevelSelectMenu"
+          [options]="gradeLevelOptions"
+          i18n-placeholderText
+          placeholderText="Grade Level"
+          [value]="filterValues.gradeLevelValue"
+          (update)="filterUpdated($event, 'gradeLevel')"
+          valueProp="grade"
+          viewValueProp="grade"
+          [multiple]="true"
+        />
+      </div>
+    }
+    @if (standardOptions.length > 0) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <standards-select-menu
+          id="standardSelectMenu"
+          [options]="standardOptions"
+          [possibleLabels]="possibleStandardLabels"
+          i18n-placeholderText
+          placeholderText="Standards Addressed"
+          [value]="filterValues.standardValue"
+          (update)="filterUpdated($event, 'standard')"
+          [valueProp]="'id'"
+          [viewValueProp]="'name'"
+          [multiple]="true"
+        />
+      </div>
+    }
+    @if (featureOptions.length > 0) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <app-select-menu
+          [options]="featureOptions"
+          i18n-placeholderText
+          placeholderText="Features"
+          [value]="filterValues.featureValue"
+          (update)="filterUpdated($event, 'feature')"
+          valueProp="id"
+          viewValueProp="name"
           [multiple]="true"
         />
       </div>

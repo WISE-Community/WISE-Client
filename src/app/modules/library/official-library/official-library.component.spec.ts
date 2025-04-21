@@ -14,8 +14,7 @@ export class MockLibraryService {
   projectFilterValuesSource$ = fakeAsyncResponse({
     searchValue: '',
     disciplineValue: [],
-    dciArrangementValue: [],
-    peValue: []
+    standardValue: []
   });
   implementationModelOptions: LibraryGroup[] = [];
   numberOfOfficialProjectsVisible = new BehaviorSubject<number>(0);
