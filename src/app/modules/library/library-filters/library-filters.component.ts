@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { Standard, StandardType } from '../standard';
@@ -29,29 +29,24 @@ import { Grade, GradeLevel } from '../GradeLevel';
   styleUrl: './library-filters.component.scss',
   templateUrl: './library-filters.component.html'
 })
-export class LibraryFiltersComponent implements OnInit {
+export class LibraryFiltersComponent {
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
-  protected disciplineValue = [];
   protected featureOptions: Feature[] = [];
-  protected featureValue = [];
+  protected filterValues: ProjectFilterValues = new ProjectFilterValues();
   protected gradeLevelOptions: GradeLevel[] = [];
-  protected gradeLevelValue = [];
   @Input() showAdvancedFilteringOptions: boolean = true;
   @Input() isSplitScreen: boolean = false;
   private libraryProjects: LibraryProject[] = [];
   private personalProjects: LibraryProject[] = [];
   protected possibleStandardLabels = ['NGSS', 'Common Core', 'Learning For Justice'];
-  protected searchValue: string = '';
   private sharedProjects: LibraryProject[] = [];
   protected showFilters: boolean = false;
   protected standardOptions: Standard[] = [];
-  protected standardValue = [];
   protected unitTypeOptions: { id: string; name: string }[] = [
     { id: 'WISE Platform', name: $localize`WISE Platform` },
     { id: 'Other Platform', name: $localize`Other Platform` }
   ];
-  protected unitTypeValue = [];
 
   constructor(
     private libraryService: LibraryService,
@@ -73,13 +68,6 @@ export class LibraryFiltersComponent implements OnInit {
       this.personalProjects = projects;
       this.populateFilterOptions();
     });
-  }
-
-  ngOnInit(): void {
-    const filterOptions: ProjectFilterValues = this.libraryService.getFilterValues();
-    this.standardValue = filterOptions.standardValue;
-    this.disciplineValue = filterOptions.disciplineValue;
-    this.searchValue = filterOptions.searchValue;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -157,55 +145,46 @@ export class LibraryFiltersComponent implements OnInit {
 
   protected hasFilters(): boolean {
     return (
-      this.standardValue.length > 0 ||
-      this.disciplineValue.length > 0 ||
-      this.gradeLevelValue.length > 0
+      this.filterValues.standardValue.length > 0 ||
+      this.filterValues.disciplineValue.length > 0 ||
+      this.filterValues.gradeLevelValue.length > 0
     );
   }
 
   protected searchUpdated(value: string): void {
-    this.searchValue = value.toLocaleLowerCase();
+    this.filterValues.searchValue = value.toLocaleLowerCase();
     this.emitFilterValues();
   }
 
-  protected filterUpdated(value: string[], context: string = ''): void {
+  protected filterUpdated(value: any[], context: string = ''): void {
     switch (context) {
       case 'discipline':
-        this.disciplineValue = value;
+        this.filterValues.disciplineValue = value;
         break;
       case 'gradeLevel':
-        this.gradeLevelValue = value;
+        this.filterValues.gradeLevelValue = value;
         break;
       case 'standard':
-        this.standardValue = value;
+        this.filterValues.standardValue = value;
         break;
       case 'feature':
-        this.featureValue = value;
+        this.filterValues.featureValue = value;
         break;
       case 'unitType':
-        this.unitTypeValue = value;
+        this.filterValues.unitTypeValue = value;
         break;
     }
     this.emitFilterValues();
   }
 
   private emitFilterValues(): void {
-    const filterValues: ProjectFilterValues = new ProjectFilterValues();
-    Object.assign(filterValues, {
-      searchValue: this.searchValue,
-      disciplineValue: this.disciplineValue,
-      featureValue: this.featureValue,
-      gradeLevelValue: this.gradeLevelValue,
-      standardValue: this.standardValue,
-      unitTypeValue: this.unitTypeValue
-    });
-    this.libraryService.setFilterValues(filterValues);
+    this.libraryService.setFilterValues(this.filterValues);
   }
 
   protected clearFilterValues(): void {
-    this.standardValue = [];
-    this.disciplineValue = [];
-    this.gradeLevelValue = [];
+    this.filterValues.standardValue = [];
+    this.filterValues.disciplineValue = [];
+    this.filterValues.gradeLevelValue = [];
     this.emitFilterValues();
   }
 }

@@ -1,7 +1,7 @@
 <div class="library-filter">
   <div class="flex flex-row gap-1">
     <div class="flex-auto max-w-full">
-      <app-search-bar [value]="searchValue" (update)="searchUpdated($event)" />
+      <app-search-bar [value]="filterValues.searchValue" (update)="searchUpdated($event)" />
     </div>
     <button
       mat-icon-button
@@ -43,7 +43,7 @@
           [options]="unitTypeOptions"
           i18n-placeholderText
           placeholderText="Type"
-          [value]="unitTypeValue"
+          [value]="filterValues.unitTypeValue"
           (update)="filterUpdated($event, 'unitType')"
           [valueProp]="'id'"
           [viewValueProp]="'name'"
@@ -61,7 +61,7 @@
           [options]="disciplineOptions"
           i18n-placeholderText
           placeholderText="Discipline"
-          [value]="disciplineValue"
+          [value]="filterValues.disciplineValue"
           (update)="filterUpdated($event, 'discipline')"
           [valueProp]="'id'"
           [viewValueProp]="'name'"
@@ -79,7 +79,7 @@
           [options]="gradeLevelOptions"
           i18n-placeholderText
           placeholderText="Grade Level"
-          [value]="gradeLevelValue"
+          [value]="filterValues.gradeLevelValue"
           (update)="filterUpdated($event, 'gradeLevel')"
           valueProp="grade"
           viewValueProp="grade"
@@ -98,7 +98,7 @@
           [possibleLabels]="possibleStandardLabels"
           i18n-placeholderText
           placeholderText="Standards Addressed"
-          [value]="standardValue"
+          [value]="filterValues.standardValue"
           (update)="filterUpdated($event, 'standard')"
           [valueProp]="'id'"
           [viewValueProp]="'name'"
@@ -115,7 +115,7 @@
           [options]="featureOptions"
           i18n-placeholderText
           placeholderText="Features"
-          [value]="featureValue"
+          [value]="filterValues.featureValue"
           (update)="filterUpdated($event, 'feature')"
           valueProp="id"
           viewValueProp="name"
