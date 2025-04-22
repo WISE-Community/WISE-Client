@@ -142,7 +142,7 @@ function showArchivedProjects() {
   describe('archived units view', () => {
     it('only shows archived units', async () => {
       await harness.showArchivedView();
-      expect(await harness.getProjectIdsInView()).toEqual([projectId1, projectId2]);
+      expect(await harness.getProjectIdsInView()).toEqual([projectId2, projectId1]);
     });
   });
 }

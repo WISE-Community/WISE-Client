@@ -13,22 +13,17 @@ let component: LibraryProjectDetailsComponent;
 let fixture: ComponentFixture<LibraryProjectDetailsComponent>;
 describe('LibraryProjectDetailsComponent', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [MockComponent(LibraryProjectMenuComponent)],
-      imports: [LibraryProjectDetailsComponent],
-      providers: [
-        MockProviders(ConfigService, MatDialog, MatDialogRef, UserService),
-        { provide: MAT_DIALOG_DATA, useValue: {} }
-      ]
-    });
-    fixture = TestBed.createComponent(LibraryProjectDetailsComponent);
-    component = fixture.componentInstance;
     const project: Project = new Project();
     project.id = 1;
     project.name = 'Photosynthesis & Cellular Respiration';
     project.projectThumb = 'photo.png';
     project.metadata = {
       grades: ['7'],
+      standards: {
+        ngss: [{ id: 'MS-LS1-6', name: 'MS-LS1-6', url: 'http://ngss.com' }],
+        commonCore: [],
+        learningForJustice: []
+      },
       title: 'Photosynthesis & Cellular Respiration',
       summary: 'A really great unit.',
       unitType: 'Platform',
@@ -39,14 +34,18 @@ describe('LibraryProjectDetailsComponent', () => {
       ],
       resources: [{ name: 'Resource 1', uri: 'http://example.com/resource1' }]
     };
-    component['standards'] = {
-      ngss: [{ id: 'MS-LS1-6', name: 'MS-LS1-6', url: 'http://ngss.com' }],
-      commonCore: [],
-      learningForJustice: []
-    };
-    component['project'] = new Project(project);
+    TestBed.configureTestingModule({
+      declarations: [MockComponent(LibraryProjectMenuComponent)],
+      imports: [LibraryProjectDetailsComponent],
+      providers: [
+        MockProviders(ConfigService, MatDialog, MatDialogRef, UserService),
+        { provide: MAT_DIALOG_DATA, useValue: { project: project } }
+      ]
+    });
+
+    fixture = TestBed.createComponent(LibraryProjectDetailsComponent);
+    component = fixture.componentInstance;
     component['parentProject'] = new ParentProject();
-    component['setLicenseInfo']();
     fixture.detectChanges();
   });
 
@@ -106,8 +105,14 @@ function isResourceUnitType_HideButtons() {
       fixture.detectChanges();
     });
 
-    it('should hide buttons when unit type is Resource', () => {
+    it('should hide Use with Class button when unit type is Resource', () => {
       expect(getButtonWithText('Use with Class')).toBeFalsy();
+    });
+
+    it('should hide Preview button when unit type is Resource and it has no resources', () => {
+      expect(getButtonWithText('Use with Class')).toBeFalsy();
+      component['canPreview'] = false;
+      fixture.detectChanges();
       expect(getButtonWithText('Preview')).toBeFalsy();
     });
   });
