@@ -12,11 +12,11 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, FormsModule, MatSelectModule, ReactiveFormsModule],
-    selector: 'app-select-menu',
-    styleUrl: './select-menu.component.scss',
-    templateUrl: './select-menu.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule, FormsModule, MatSelectModule, ReactiveFormsModule],
+  selector: 'app-select-menu',
+  styleUrl: './select-menu.component.scss',
+  templateUrl: './select-menu.component.html'
 })
 export class SelectMenuComponent implements OnInit {
   @Output('update') change: EventEmitter<string> = new EventEmitter<string>();
