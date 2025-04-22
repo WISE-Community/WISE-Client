@@ -37,6 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 })
 export class LibraryProjectDetailsComponent implements OnInit {
   protected authorsString: string = '';
+  protected canPreview: boolean;
   protected isCopy: boolean;
   protected isTeacher: boolean;
   protected isRunProject: false;
@@ -73,6 +74,9 @@ export class LibraryProjectDetailsComponent implements OnInit {
       }
       this.standards = this.project.metadata.standards;
       this.setLicenseInfo();
+      this.canPreview = !(
+        this.project.metadata.unitType === 'Other' && this.project.metadata.resources.length === 0
+      );
     }
   }
 
@@ -104,11 +108,21 @@ export class LibraryProjectDetailsComponent implements OnInit {
   }
 
   protected previewProject(): void {
-    window.open(
-      this.project.wiseVersion === 4
-        ? `${this.configService.getWISE4Hostname()}` +
-            `/previewproject.html?projectId=${this.project.id}`
-        : `/preview/unit/${this.project.id}`
-    );
+    if (this.project.wiseVersion === 4) {
+      window.open(
+        `${this.configService.getWISE4Hostname()}` +
+          `/previewproject.html?projectId=${this.project.id}`
+      );
+    } else {
+      this.previewProjectV5();
+    }
+  }
+
+  private previewProjectV5(): void {
+    if (this.project.metadata.unitType === 'Platform') {
+      window.open(`/preview/unit/${this.project.id}`);
+    } else {
+      window.open(this.project.metadata.resources[0].url);
+    }
   }
 }

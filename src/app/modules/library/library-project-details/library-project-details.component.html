@@ -208,7 +208,7 @@
       >
     </button>
   }
-  @if (project.metadata.unitType === 'Platform') {
+  @if (canPreview) {
     <button mat-flat-button color="primary" (click)="previewProject()">
       <mat-icon>preview</mat-icon>&nbsp;<ng-container i18n>Preview</ng-container>
     </button>
