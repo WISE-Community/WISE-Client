@@ -68,6 +68,16 @@
           >
         </p>
       }
+      @if (project.metadata.resources?.length > 0) {
+        <p>
+          <strong i18n>Resources:</strong>
+          {{ first ? ' ' : '' }}
+          @for (resource of project.metadata.resources; track resource.name; let last = $last) {
+            <a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a
+            >{{ last ? '' : ' • ' }}
+          }
+        </p>
+      }
       @if (project.metadata.summary) {
         <div [innerHTML]="project.metadata.summary"></div>
       }
@@ -125,16 +135,6 @@
                 standardsName: standardLabels.learningForJustice
               }"
             />
-          }
-        </p>
-      }
-      @if (project.metadata.resources?.length > 0) {
-        <p>
-          <strong i18n>Resources:</strong>
-          {{ first ? ' ' : '' }}
-          @for (resource of project.metadata.resources; track resource.name; let last = $last) {
-            <a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a
-            >{{ last ? '' : ' • ' }}
           }
         </p>
       }
