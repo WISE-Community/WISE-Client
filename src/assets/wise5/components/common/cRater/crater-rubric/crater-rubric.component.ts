@@ -30,8 +30,11 @@ export class CRaterRubricComponent {
       .map(ideaDataToCRaterIdea);
   }
 
+  ngOnDestroy(): void {
+    this.rubricEventService.rubricToggled();
+  }
+
   protected closeDialog(): void {
     this.dialogRef.close();
-    this.rubricEventService.rubricToggled();
   }
 }
