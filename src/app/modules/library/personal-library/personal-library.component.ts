@@ -1,20 +1,42 @@
-import { Component, Inject, Signal, WritableSignal, computed, signal } from '@angular/core';
-import { LibraryProject } from '../libraryProject';
-import { LibraryService } from '../../../services/library.service';
-import { LibraryComponent } from '../library/library.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { ApplyTagsButtonComponent } from '../../../teacher/apply-tags-button/apply-tags-button.component';
+import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { PageEvent } from '@angular/material/paginator';
-import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
-import { Tag } from '../../../domain/tag';
+import { CommonModule } from '@angular/common';
+import { Component, Inject, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { LibraryComponent } from '../library/library.component';
+import { LibraryProject } from '../libraryProject';
+import { LibraryProjectComponent } from '../library-project/library-project.component';
+import { LibraryService } from '../../../services/library.service';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { Project } from '../../../domain/project';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
+import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
+import { SelectTagsComponent } from '../../../teacher/select-tags/select-tags.component';
+import { Tag } from '../../../domain/tag';
 
 @Component({
-    selector: 'app-personal-library',
-    styleUrl: './personal-library.component.scss',
-    templateUrl: './personal-library.component.html',
-    standalone: false
+  imports: [
+    ApplyTagsButtonComponent,
+    ArchiveProjectsButtonComponent,
+    CommonModule,
+    FormsModule,
+    LibraryProjectComponent,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    SelectAllItemsCheckboxComponent,
+    SelectTagsComponent
+  ],
+  selector: 'app-personal-library',
+  styleUrl: './personal-library.component.scss',
+  templateUrl: './personal-library.component.html'
 })
 export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
@@ -42,7 +64,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
     super(dialog, libraryService);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.subscriptions.add(
       this.libraryService.personalLibraryProjectsSource$.subscribe(
@@ -80,19 +102,19 @@ export class PersonalLibraryComponent extends LibraryComponent {
     );
   }
 
-  combinePersonalAndSharedProjects() {
+  combinePersonalAndSharedProjects(): void {
     const projects = this.personalProjects.concat(this.sharedProjects);
     projects.sort(this.sortByProjectIdDesc);
     this.projects = projects;
   }
 
-  updateProjects() {
+  updateProjects(): void {
     this.combinePersonalAndSharedProjects();
     this.filterUpdated();
     this.unselectAllProjects();
   }
 
-  sortByProjectIdDesc(a, b) {
+  sortByProjectIdDesc(a, b): number {
     if (a.id < b.id) {
       return 1;
     } else if (a.id > b.id) {
@@ -102,7 +124,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
     }
   }
 
-  emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
+  emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {
     if (numProjectsVisible) {
       this.libraryService.numberOfPersonalProjectsVisible.next(numProjectsVisible);
     } else {
@@ -182,9 +204,9 @@ export class PersonalLibraryComponent extends LibraryComponent {
 }
 
 @Component({
-    selector: 'personal-library-details',
-    templateUrl: 'personal-library-details.html',
-    standalone: false
+  selector: 'personal-library-details',
+  templateUrl: 'personal-library-details.html',
+  standalone: false
 })
 export class PersonalLibraryDetailsComponent {
   constructor(

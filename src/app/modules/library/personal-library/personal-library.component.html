@@ -22,7 +22,7 @@
         [numSelectedItems]="numSelectedProjects()"
         (allSelectedEvent)="selectAllProjects()"
         (noneSelectedEvent)="unselectAllProjects()"
-      ></select-all-items-checkbox>
+      />
       <span *ngIf="numSelectedProjects() > 0" class="secondary-text" i18n>
         {{ numSelectedProjects() }} selected
       </span>
@@ -30,7 +30,7 @@
         *ngIf="selectedProjects().length > 0"
         [showArchive]="!showArchivedView"
         (archiveProjectsEvent)="archiveProjects($event)"
-      ></archive-projects-button>
+      />
       @if (selectedProjects().length > 0) {
         <apply-tags-button [selectedProjects]="selectedProjects()" />
       }

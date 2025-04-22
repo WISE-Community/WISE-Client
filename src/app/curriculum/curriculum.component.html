@@ -15,7 +15,14 @@
           <app-library-filters [isSplitScreen]="true" />
         </div>
         <div class="library__content library-home__content md:w-2/3 lg:w-3/4">
-          <public-library />
+          <mat-tab-group dynamicHeight>
+            <mat-tab label="Public">
+              <public-library />
+            </mat-tab>
+            <mat-tab label="My Units">
+              <app-personal-library />
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
     </section>
