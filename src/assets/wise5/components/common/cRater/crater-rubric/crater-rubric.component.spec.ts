@@ -4,7 +4,7 @@ import { CRaterRubricComponent } from './crater-rubric.component';
 import { MockProvider } from 'ng-mocks';
 import { CRaterRubric } from '../CRaterRubric';
 
-describe('LibraryProjectDetailsComponent', () => {
+fdescribe('LibraryProjectDetailsComponent', () => {
   let component: CRaterRubricComponent;
   let fixture: ComponentFixture<CRaterRubricComponent>;
   let closeDialogSpy: jasmine.Spy;
@@ -17,7 +17,7 @@ describe('LibraryProjectDetailsComponent', () => {
 
     fixture = TestBed.createComponent(CRaterRubricComponent);
     component = fixture.componentInstance;
-    component['data'].cRaterRubric = new CRaterRubric();
+    component['cRaterRubric'] = new CRaterRubric();
     fixture.detectChanges();
   });
 
@@ -33,14 +33,14 @@ describe('LibraryProjectDetailsComponent', () => {
 
   it('should show description if one exists', () => {
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(0);
-    component['data'].cRaterRubric.description = 'Test';
+    component['cRaterRubric'].description = 'Test';
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(1);
   });
 
   it('should not show description if none exists', () => {
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(0);
-    component['data'].cRaterRubric.description = '';
+    component['cRaterRubric'].description = '';
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(0);
   });
