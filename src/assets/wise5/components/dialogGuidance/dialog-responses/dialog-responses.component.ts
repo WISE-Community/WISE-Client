@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, Input, signal } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { CRaterRubricComponent } from '../../common/cRater/crater-rubric/crater-rubric.component';
@@ -7,7 +7,6 @@ import { DetectedIdeasComponent } from '../detected-ideas/detected-ideas.compone
 import { DialogResponse } from '../DialogResponse';
 import { DialogResponseComponent } from '../dialog-response/dialog-response.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { RubricEventService } from '../../common/cRater/crater-rubric/RubricEventService';
 
@@ -17,9 +16,6 @@ import { RubricEventService } from '../../common/cRater/crater-rubric/RubricEven
     CRaterRubricComponent,
     DetectedIdeasComponent,
     DialogResponseComponent,
-    MatDrawer,
-    MatDrawerContainer,
-    MatDrawerContent,
     MatIconModule
   ],
   selector: 'dialog-responses',
@@ -44,9 +40,7 @@ export class DialogResponsesComponent {
         width: '40%',
         position: { right: '0px', bottom: '0px' },
         hasBackdrop: false,
-        data: {
-          cRaterRubric: this.cRaterRubric
-        }
+        data: this.cRaterRubric
       });
       this.rubricEventService.rubricToggled();
     }

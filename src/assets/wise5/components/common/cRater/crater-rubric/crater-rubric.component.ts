@@ -1,4 +1,4 @@
-import { Component, Inject, Injectable, signal } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CRaterIdea } from '../CRaterIdea';
 import { cRaterIdeaToIdeaData, ideaDataToCRaterIdea } from '../IdeaData';
 import { CRaterRubric } from '../CRaterRubric';
@@ -18,7 +18,7 @@ export class CRaterRubricComponent {
   protected ideas: CRaterIdea[];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) protected data: { cRaterRubric: CRaterRubric },
+    @Inject(MAT_DIALOG_DATA) protected cRaterRubric: CRaterRubric,
     private dialogRef: MatDialogRef<CRaterRubricComponent>,
     private ideasSortingService: IdeasSortingService,
     private rubricEventService: RubricEventService
@@ -26,7 +26,7 @@ export class CRaterRubricComponent {
 
   ngOnInit(): void {
     this.ideas = this.ideasSortingService
-      .sortById(this.data.cRaterRubric.ideas.map(cRaterIdeaToIdeaData))
+      .sortById(this.cRaterRubric.ideas.map(cRaterIdeaToIdeaData))
       .map(ideaDataToCRaterIdea);
   }
 
@@ -34,6 +34,4 @@ export class CRaterRubricComponent {
     this.dialogRef.close();
     this.rubricEventService.rubricToggled();
   }
-
-  protected highlightButton(): void {}
 }
