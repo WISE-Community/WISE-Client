@@ -91,7 +91,7 @@ export class ProjectFilterValues {
   private matchesFeature(project: LibraryProject): boolean {
     return (
       this.featureValue.length > 0 &&
-      project.metadata.features?.some((feature) => this.featureValue.includes(feature.id))
+      project.metadata.features?.some((feature) => this.featureValue.includes(feature.name))
     );
   }
 
