@@ -27,6 +27,9 @@ import { OpenResponseContent } from '../OpenResponseContent';
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
+import { MatSelectModule } from '@angular/material/select';
 
 let component: EditOpenResponseAdvancedComponent;
 let fixture: ComponentFixture<EditOpenResponseAdvancedComponent>;
@@ -60,6 +63,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
+        MatSelectModule,
         StudentTeacherCommonServicesModule
       ],
       providers: [
