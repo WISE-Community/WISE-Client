@@ -20,7 +20,9 @@ export class LibraryProjectDisciplinesComponent implements OnInit {
         ESS: '#2E7D32',
         ETS: '#1565C0',
         LS: '#D81B60',
-        PS: '#8E24AA'
+        Math: '#444444',
+        PS: '#8E24AA',
+        SJ: '#F57C00'
       };
       this.disciplines.forEach((discipline) => {
         discipline.color = colors[discipline.id] ?? '#000000';

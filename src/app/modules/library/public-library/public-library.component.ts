@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/public-unit-type-selector.component';
 import { LibraryProject } from '../libraryProject';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 @Component({
   imports: [
@@ -68,6 +69,14 @@ export class PublicLibraryComponent extends LibraryComponent {
       }
       return acc;
     }, []);
+  }
+
+  protected filterUpdated(filterValues: ProjectFilterValues = null): void {
+    if (filterValues) {
+      // this check is required the very first time when filterValues is null
+      filterValues.publicUnitTypeValue = this.filterValues.publicUnitTypeValue;
+    }
+    super.filterUpdated(filterValues);
   }
 
   protected emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {

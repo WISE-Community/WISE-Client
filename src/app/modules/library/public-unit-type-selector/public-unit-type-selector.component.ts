@@ -28,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class PublicUnitTypeSelectorComponent {
   protected communityBuilt: boolean;
   @Input() filterValues: ProjectFilterValues;
-  @Output() publicUnitTypeUpdatedEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() publicUnitTypeUpdatedEvent: EventEmitter<ProjectFilterValues> =
+    new EventEmitter<ProjectFilterValues>();
   protected wiseTested: boolean;
 
   constructor(private dialog: MatDialog) {}
@@ -41,7 +42,7 @@ export class PublicUnitTypeSelectorComponent {
     if (this.communityBuilt) {
       this.filterValues.publicUnitTypeValue.push('communityBuilt');
     }
-    this.publicUnitTypeUpdatedEvent.emit();
+    this.publicUnitTypeUpdatedEvent.emit(this.filterValues);
   }
 
   protected showInfo(type: 'community' | 'official'): void {

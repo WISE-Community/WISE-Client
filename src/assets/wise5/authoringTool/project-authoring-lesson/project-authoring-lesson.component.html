@@ -14,9 +14,8 @@
         [disabled]="nodeTypeSelected() === 'step'"
         aria-label="Select lesson"
         i18n-aria-label
-      >
-        <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition" />
-      </mat-checkbox>
+      />
+      <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition" />
     </mat-panel-title>
     <mat-panel-description class="text" fxLayoutAlign="end center" fxLayoutGap="4px">
       <button
