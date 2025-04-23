@@ -4,16 +4,16 @@ on:
     branches:
       - develop
 jobs:
-  generate-messages:
-    uses: WISE-Community/WISE-Client/.github/workflows/generate-messages.yml@develop
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
-
   test-coverage:
-    needs: generate-messages
     uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@develop
     secrets:
       test_reporter: ${{secrets.CC_TEST_REPORTER_ID}}
+
+  generate-messages:
+    needs: test-coverage
+    uses: WISE-Community/WISE-Client/.github/workflows/generate-messages.yml@develop
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     needs: [generate-messages, test-coverage]
