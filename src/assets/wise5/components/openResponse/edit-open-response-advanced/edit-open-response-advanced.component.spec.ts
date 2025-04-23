@@ -27,6 +27,9 @@ import { OpenResponseContent } from '../OpenResponseContent';
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
+import { MatSelectModule } from '@angular/material/select';
 
 let component: EditOpenResponseAdvancedComponent;
 let fixture: ComponentFixture<EditOpenResponseAdvancedComponent>;
@@ -60,6 +63,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
+        MatSelectModule,
         StudentTeacherCommonServicesModule
       ],
       providers: [
@@ -105,10 +109,13 @@ describe('EditOpenResponseAdvancedComponent', () => {
 
 function enableCRaterClicked() {
   describe('enableCRaterClicked', () => {
-    it('should handle enable CRater clicked', () => {
-      expect(!component.componentContent.enableCRater);
-      fixture.nativeElement.querySelectorAll('.checkbox').item(1).click();
-      expect(component.componentContent.enableCRater);
+    it('should handle enable CRater clicked', async () => {
+      expect(component.componentContent.enableCRater).toBeFalsy();
+      const loader = TestbedHarnessEnvironment.loader(fixture);
+      const checkboxes = await loader.getAllHarnesses(MatCheckboxHarness);
+      await checkboxes[1].check();
+      expect(component.componentContent.enableCRater).toBeTruthy();
+      expect(component.componentContent.cRater).toEqual(component.createCRaterObject());
     });
   });
 }
