@@ -106,6 +106,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
 function enableCRaterClicked() {
   describe('enableCRaterClicked', () => {
     it('should handle enable CRater clicked', () => {
+      // TEST
       fixture.nativeElement.querySelectorAll('.checkbox').item(1).click();
       expect(component.componentContent.enableCRater);
     });
