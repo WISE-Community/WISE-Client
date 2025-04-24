@@ -3,7 +3,7 @@ tbody tr:nth-child(odd) {
 }
 
 th, td {
-  @apply px-2 py-1 text-start;
+  @apply px-2 py-1 text-start align-top;
 }
 
 tr {
