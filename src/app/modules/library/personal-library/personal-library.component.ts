@@ -19,6 +19,7 @@ import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { SelectTagsComponent } from '../../../teacher/select-tags/select-tags.component';
 import { Tag } from '../../../domain/tag';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   imports: [
@@ -27,9 +28,10 @@ import { Tag } from '../../../domain/tag';
     CommonModule,
     FormsModule,
     LibraryProjectComponent,
-    MatFormFieldModule,
     MatDividerModule,
+    MatFormFieldModule,
     MatPaginatorModule,
+    MatRadioModule,
     MatSelectModule,
     SelectAllItemsCheckboxComponent,
     SelectTagsComponent
@@ -115,16 +117,10 @@ export class PersonalLibraryComponent extends LibraryComponent {
   }
 
   sortByProjectIdDesc(a, b): number {
-    if (a.id < b.id) {
-      return 1;
-    } else if (a.id > b.id) {
-      return -1;
-    } else {
-      return 0;
-    }
+    return b.id - a.id;
   }
 
-  emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {
+  protected emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {
     if (numProjectsVisible) {
       this.libraryService.numberOfPersonalProjectsVisible.next(numProjectsVisible);
     } else {

@@ -52,8 +52,6 @@ export class PublicLibraryComponent extends LibraryComponent {
         this.updateProjects(projects)
       )
     );
-    this.libraryService.getOfficialLibraryProjects();
-    this.libraryService.getCommunityLibraryProjects();
   }
 
   private updateProjects(projects: LibraryProject[]): void {
@@ -80,7 +78,11 @@ export class PublicLibraryComponent extends LibraryComponent {
   }
 
   protected emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {
-    // do nothing. this value is not used in the public library
+    //   if (numProjectsVisible) {
+    //     this.libraryService.numberOfOfficialProjectsVisible.next(numProjectsVisible);
+    //   } else {
+    //     this.libraryService.numberOfPersonalProjectsVisible.next(this.filteredProjects.length);
+    //   }
   }
 
   protected getDetailsComponent(): any {

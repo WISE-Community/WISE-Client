@@ -1,6 +1,9 @@
 <div class="main app-background">
   <div class="content">
     <header class="content__header">
+      @if (showMyUnits) {
+        <button id="authoring-tool-button" (click)="openAuthoringTool()">Authoring Tool</button>
+      }
       <h1 class="accent flex items-center gap-2 mat-headline-4">
         <mat-icon>menu_book</mat-icon>
         <span i18n>Unit Library</span>
@@ -15,14 +18,18 @@
           <app-library-filters [isSplitScreen]="true" />
         </div>
         <div class="library__content library-home__content md:w-2/3 lg:w-3/4">
-          <mat-tab-group dynamicHeight>
-            <mat-tab label="Public">
-              <public-library />
-            </mat-tab>
-            <mat-tab label="My Units">
-              <app-personal-library />
-            </mat-tab>
-          </mat-tab-group>
+          @if (showMyUnits) {
+            <mat-tab-group dynamicHeight>
+              <mat-tab [label]="getPublicTabLabel()">
+                <public-library />
+              </mat-tab>
+              <mat-tab [label]="getMyUnitsTabLabel()">
+                <app-personal-library />
+              </mat-tab>
+            </mat-tab-group>
+          } @else {
+            <public-library />
+          }
         </div>
       </div>
     </section>

@@ -80,4 +80,8 @@ export class ConfigService {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
     return this.http.get(this.announcementUrl, { headers: headers }) as Observable<Announcement>;
   }
+
+  getAuthoringToolLink(): string {
+    return this.config$ != null ? `${this.getContextPath()}/teacher/edit/home` : '';
+  }
 }
