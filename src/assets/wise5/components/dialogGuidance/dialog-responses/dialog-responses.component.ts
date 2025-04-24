@@ -37,10 +37,11 @@ export class DialogResponsesComponent {
   protected openIdeasRubric(): void {
     if (!this.rubricEventService.getIsRubricOpen()) {
       this.dialog.open(CRaterRubricComponent, {
-        width: '40%',
-        position: { right: '0px', bottom: '0px' },
+        panelClass: 'dialog-sm',
+        position: { right: '0', bottom: '0' },
         hasBackdrop: false,
-        data: this.cRaterRubric
+        data: this.cRaterRubric,
+        autoFocus: false
       });
       this.rubricEventService.rubricToggled();
     }

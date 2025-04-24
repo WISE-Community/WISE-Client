@@ -4,11 +4,12 @@ import { cRaterIdeaToIdeaData, ideaDataToCRaterIdea } from '../IdeaData';
 import { CRaterRubric } from '../CRaterRubric';
 import { IdeasSortingService } from '../../../../services/ideasSortingService';
 import { MatIconModule } from '@angular/material/icon';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { RubricEventService } from './RubricEventService';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  imports: [MatIconModule],
+  imports: [MatButtonModule, MatDialogModule, MatIconModule],
   providers: [IdeasSortingService],
   selector: 'crater-rubric',
   templateUrl: './crater-rubric.component.html',

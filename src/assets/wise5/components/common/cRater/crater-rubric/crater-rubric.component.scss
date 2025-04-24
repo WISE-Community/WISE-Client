@@ -1,57 +1,11 @@
-h1 {
-  font-size: larger;
-  font-weight: bold;
+tbody tr:nth-child(odd) {
+  @apply bg-neutral-100;
 }
 
-table {
-  width: 100%;
-  border: 3px solid black;
-  table-layout: fixed;
+th, td {
+  @apply px-2 py-1 text-start;
 }
 
 tr {
-  border-bottom: 1px solid darkgray;
-}
-
-tr:nth-child(odd) {
-  background-color: whitesmoke;
-}
-
-tr > * {
-  border-right: 1px solid darkgray;
-}
-
-td {
-  word-wrap: break-word;
-  max-width: 200px;
-}
-
-button:hover {
-  background-color: #f6f5f4;
-}
-
-.wrapper {
-  padding: 20px;
-  border: 5px solid black;
-}
-
-.header {
-  display: grid;
-  grid-template-columns: 9fr 1fr;
-}
-
-.idea-id {
-  text-align: center;
-}
-
-.idea-desc {
-  padding-left: 5px;
-}
-
-.left {
-  width: 7%;
-}
-
-.right {
-  width:93%;
+  @apply border border-neutral-300
 }

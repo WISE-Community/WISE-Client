@@ -1,9 +1,12 @@
 @if (showDetectedIdeas) {
-  <div id="detectable-ideas">
-    <a (click)="openIdeasRubric()">
-      <mat-icon class="ai-logo">auto_awesome</mat-icon>
-      <span i18n>Detectable ideas rubric</span>
-    </a>
+  <div class="flex items-center justify-end">
+    <mat-icon class="mat-18" color="primary">auto_awesome</mat-icon>&nbsp;<a
+      tabindex="0"
+      (click)="openIdeasRubric()"
+      (keyup.enter)="openIdeasRubric()"
+      i18n
+      >Detectable ideas</a
+    >
   </div>
 }
 @for (response of responses; track response.timestamp) {
