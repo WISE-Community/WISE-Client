@@ -32,10 +32,8 @@ export class LibraryService {
   public projectFilterValuesSource$ = this.projectFilterValuesSource.asObservable();
   private newProjectSource = new BehaviorSubject<LibraryProject>(null);
   public newProjectSource$ = this.newProjectSource.asObservable();
-  public numberOfOfficialProjectsVisible = new BehaviorSubject<number>(0);
-  public numberOfOfficialProjectsVisible$ = this.numberOfOfficialProjectsVisible.asObservable();
-  public numberOfCommunityProjectsVisible = new BehaviorSubject<number>(0);
-  public numberOfCommunityProjectsVisible$ = this.numberOfCommunityProjectsVisible.asObservable();
+  public numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
+  public numberOfPublicProjectsVisible$ = this.numberOfPublicProjectsVisible.asObservable();
   public numberOfPersonalProjectsVisible = new BehaviorSubject<number>(0);
   public numberOfPersonalProjectsVisible$ = this.numberOfPersonalProjectsVisible.asObservable();
 
@@ -151,12 +149,8 @@ export class LibraryService {
     return this.http.get<Project>(this.projectInfoUrl + '/' + projectId);
   }
 
-  updateNumberOfOfficialProjectsVisible(count) {
-    this.numberOfOfficialProjectsVisible.next(count);
-  }
-
-  updateNumberOfCommunityProjectsVisible(count) {
-    this.numberOfCommunityProjectsVisible.next(count);
+  updateNumberOfPublicProjectsVisible(count) {
+    this.numberOfPublicProjectsVisible.next(count);
   }
 
   updateNumberOfPersonalProjectsVisible(count) {

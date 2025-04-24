@@ -23,8 +23,7 @@ import { Router } from '@angular/router';
 export class CurriculumComponent {
   protected showMyUnits: boolean;
   private numMyUnitsVisible: number = 0;
-  private numOfficialUnitsVisible: number = 0;
-  private numCommunityUnitsVisible: number = 0;
+  private numPublicUnitsVisible: number = 0;
 
   constructor(
     private configService: ConfigService,
@@ -36,15 +35,13 @@ export class CurriculumComponent {
   ngOnInit(): void {
     this.setShowMyUnits();
     this.getLibraryProjects();
-    this.libraryService.numberOfPersonalProjectsVisible$.subscribe(
-      (num) => (this.numMyUnitsVisible = num)
-    );
-    this.libraryService.numberOfOfficialProjectsVisible$.subscribe(
-      (num) => (this.numOfficialUnitsVisible = num)
-    );
-    this.libraryService.numberOfCommunityProjectsVisible$.subscribe(
-      (num) => (this.numCommunityUnitsVisible = num)
-    );
+    this.subscribeNumUnitsVisible();
+  }
+
+  private setShowMyUnits(): void {
+    this.userService.getUser().subscribe((user) => {
+      this.showMyUnits = user.roles && user.roles.includes('teacher');
+    });
   }
 
   private getLibraryProjects(): void {
@@ -56,10 +53,13 @@ export class CurriculumComponent {
     }
   }
 
-  private setShowMyUnits(): void {
-    this.userService.getUser().subscribe((user) => {
-      this.showMyUnits = user.roles && user.roles.includes('teacher');
-    });
+  private subscribeNumUnitsVisible() {
+    this.libraryService.numberOfPersonalProjectsVisible$.subscribe(
+      (num) => (this.numMyUnitsVisible = num)
+    );
+    this.libraryService.numberOfPublicProjectsVisible$.subscribe(
+      (num) => (this.numPublicUnitsVisible = num)
+    );
   }
 
   protected openAuthoringTool(): void {
@@ -67,7 +67,7 @@ export class CurriculumComponent {
   }
 
   protected getPublicTabLabel(): string {
-    return `Public (${this.numOfficialUnitsVisible + this.numCommunityUnitsVisible})`;
+    return `Public (${this.numPublicUnitsVisible})`;
   }
 
   protected getMyUnitsTabLabel(): string {

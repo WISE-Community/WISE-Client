@@ -17,7 +17,7 @@ export class MockLibraryService {
     standardValue: []
   });
   implementationModelOptions: LibraryGroup[] = [];
-  numberOfOfficialProjectsVisible = new BehaviorSubject<number>(0);
+  numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
   getOfficialLibraryProjects() {}
 }
 

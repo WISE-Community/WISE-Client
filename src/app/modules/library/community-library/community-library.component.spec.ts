@@ -15,7 +15,7 @@ export class MockLibraryService {
     disciplineValue: [],
     standardValue: []
   });
-  numberOfCommunityProjectsVisible = new BehaviorSubject<number>(0);
+  numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
 }
 
 describe('CommunityLibraryComponent', () => {

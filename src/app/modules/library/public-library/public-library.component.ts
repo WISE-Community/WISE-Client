@@ -78,11 +78,11 @@ export class PublicLibraryComponent extends LibraryComponent {
   }
 
   protected emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {
-    //   if (numProjectsVisible) {
-    //     this.libraryService.numberOfOfficialProjectsVisible.next(numProjectsVisible);
-    //   } else {
-    //     this.libraryService.numberOfPersonalProjectsVisible.next(this.filteredProjects.length);
-    //   }
+    if (numProjectsVisible) {
+      this.libraryService.numberOfPublicProjectsVisible.next(numProjectsVisible);
+    } else {
+      this.libraryService.numberOfPublicProjectsVisible.next(this.filteredProjects.length);
+    }
   }
 
   protected getDetailsComponent(): any {

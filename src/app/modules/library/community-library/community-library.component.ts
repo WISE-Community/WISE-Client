@@ -5,16 +5,19 @@ import { LibraryComponent } from '../library/library.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-community-library',
-    templateUrl: './community-library.component.html',
-    styleUrls: ['./community-library.component.scss'],
-    standalone: false
+  selector: 'app-community-library',
+  templateUrl: './community-library.component.html',
+  styleUrls: ['./community-library.component.scss'],
+  standalone: false
 })
 export class CommunityLibraryComponent extends LibraryComponent {
   projects: LibraryProject[] = [];
   filteredProjects: LibraryProject[] = [];
 
-  constructor(protected dialog: MatDialog, protected libraryService: LibraryService) {
+  constructor(
+    protected dialog: MatDialog,
+    protected libraryService: LibraryService
+  ) {
     super(dialog, libraryService);
   }
 
@@ -30,9 +33,9 @@ export class CommunityLibraryComponent extends LibraryComponent {
 
   emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
     if (numProjectsVisible) {
-      this.libraryService.numberOfCommunityProjectsVisible.next(numProjectsVisible);
+      this.libraryService.numberOfPublicProjectsVisible.next(numProjectsVisible);
     } else {
-      this.libraryService.numberOfCommunityProjectsVisible.next(this.filteredProjects.length);
+      this.libraryService.numberOfPublicProjectsVisible.next(this.filteredProjects.length);
     }
   }
 
@@ -42,9 +45,9 @@ export class CommunityLibraryComponent extends LibraryComponent {
 }
 
 @Component({
-    selector: 'community-library-details',
-    templateUrl: 'community-library-details.html',
-    standalone: false
+  selector: 'community-library-details',
+  templateUrl: 'community-library-details.html',
+  standalone: false
 })
 export class CommunityLibraryDetailsComponent {
   constructor(

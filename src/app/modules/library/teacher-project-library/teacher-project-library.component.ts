@@ -4,16 +4,15 @@ import { LibraryService } from '../../../services/library.service';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-teacher-project-library',
-    templateUrl: './teacher-project-library.component.html',
-    styleUrls: ['./teacher-project-library.component.scss', '../library/library.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'app-teacher-project-library',
+  templateUrl: './teacher-project-library.component.html',
+  styleUrls: ['./teacher-project-library.component.scss', '../library/library.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class TeacherProjectLibraryComponent implements OnInit {
   projects: LibraryProject[] = [];
-  numberOfOfficialProjectsVisible: number = 0;
-  numberOfCommunityProjectsVisible: number = 0;
+  numberOfPublicProjectsVisible: number = 0;
   numberOfPersonalProjectsVisible: number = 0;
   route: String;
   tabs: any[] = [
@@ -22,14 +21,14 @@ export class TeacherProjectLibraryComponent implements OnInit {
     { path: 'personal', label: $localize`My Units`, numVisible: 0 }
   ];
 
-  constructor(private libraryService: LibraryService, private router: Router) {}
+  constructor(
+    private libraryService: LibraryService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.libraryService.numberOfOfficialProjectsVisible$.subscribe((num) => {
+    this.libraryService.numberOfPublicProjectsVisible$.subscribe((num) => {
       this.tabs[0].numVisible = num;
-    });
-    this.libraryService.numberOfCommunityProjectsVisible$.subscribe((num) => {
-      this.tabs[1].numVisible = num;
     });
     this.libraryService.numberOfPersonalProjectsVisible$.subscribe((num) => {
       this.tabs[2].numVisible = num;

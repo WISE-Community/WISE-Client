@@ -11,8 +11,7 @@ export function fakeAsyncResponse<T>(data: T) {
 }
 
 export class MockLibraryService {
-  numberOfOfficialProjectsVisible$ = fakeAsyncResponse(0);
-  numberOfCommunityProjectsVisible$ = fakeAsyncResponse(0);
+  numberOfPublicProjectsVisible$ = fakeAsyncResponse(0);
   numberOfPersonalProjectsVisible$ = fakeAsyncResponse(0);
   newProjectSource$ = fakeAsyncResponse(0);
   getOfficialLibraryProjects() {}
@@ -25,16 +24,14 @@ describe('TeacherProjectLibraryComponent', () => {
   let component: TeacherProjectLibraryComponent;
   let fixture: ComponentFixture<TeacherProjectLibraryComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [MatMenuModule, RouterTestingModule],
-        declarations: [TeacherProjectLibraryComponent],
-        providers: [{ provide: LibraryService, useClass: MockLibraryService }],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [MatMenuModule, RouterTestingModule],
+      declarations: [TeacherProjectLibraryComponent],
+      providers: [{ provide: LibraryService, useClass: MockLibraryService }],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeacherProjectLibraryComponent);

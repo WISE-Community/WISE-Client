@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PersonalLibraryComponent } from './personal-library.component';
 import { fakeAsyncResponse } from '../../../student/student-run-list/student-run-list.component.spec';
 import { LibraryService } from '../../../services/library.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
@@ -42,8 +41,6 @@ const projectId5 = 5;
 describe('PersonalLibraryComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PersonalLibraryComponent],
-      schemas: [NO_ERRORS_SCHEMA],
       imports: [
         ArchiveProjectsButtonComponent,
         BrowserAnimationsModule,
@@ -57,6 +54,7 @@ describe('PersonalLibraryComponent', () => {
         MatSelectModule,
         MatSnackBarModule,
         OverlayModule,
+        PersonalLibraryComponent,
         SelectAllItemsCheckboxComponent
       ],
       providers: [
