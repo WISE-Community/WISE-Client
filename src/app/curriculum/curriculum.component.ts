@@ -26,9 +26,8 @@ export class CurriculumComponent {
   private numPublicUnitsVisible: number = 0;
 
   constructor(
-    private configService: ConfigService,
+    protected configService: ConfigService,
     private libraryService: LibraryService,
-    private router: Router,
     private userService: UserService
   ) {}
 
@@ -60,10 +59,6 @@ export class CurriculumComponent {
     this.libraryService.numberOfPublicProjectsVisible$.subscribe(
       (num) => (this.numPublicUnitsVisible = num)
     );
-  }
-
-  protected openAuthoringTool(): void {
-    this.router.navigateByUrl(this.configService.getAuthoringToolLink());
   }
 
   protected getPublicTabLabel(): string {

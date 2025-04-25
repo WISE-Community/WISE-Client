@@ -2,7 +2,9 @@
   <div class="content">
     <header class="content__header">
       @if (showMyUnits) {
-        <button id="authoring-tool-button" (click)="openAuthoringTool()">Authoring Tool</button>
+        <a id="authoring-tool-button" href="{{ configService.getAuthoringToolLink() }}"
+          >Authoring Tool</a
+        >
       }
       <h1 class="accent flex items-center gap-2 mat-headline-4">
         <mat-icon>menu_book</mat-icon>
