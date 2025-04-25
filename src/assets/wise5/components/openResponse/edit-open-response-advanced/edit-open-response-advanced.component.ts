@@ -60,6 +60,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
 
   enableCRaterClicked(): void {
     if (this.componentContent.enableCRater) {
+      this.createCRaterAndRubricIfNull();
       this.setShowSubmitButtonValue(true);
     } else {
       this.setShowSubmitButtonValue(false);
