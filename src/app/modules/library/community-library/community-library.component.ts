@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { Component, Inject } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryProject } from '../libraryProject';
@@ -31,12 +32,8 @@ export class CommunityLibraryComponent extends LibraryComponent {
     );
   }
 
-  emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
-    if (numProjectsVisible) {
-      this.libraryService.numberOfPublicProjectsVisible.next(numProjectsVisible);
-    } else {
-      this.libraryService.numberOfPublicProjectsVisible.next(this.filteredProjects.length);
-    }
+  protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
+    return this.libraryService.numberOfPublicProjectsVisible;
   }
 
   protected getDetailsComponent(): any {

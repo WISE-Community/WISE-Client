@@ -1,6 +1,7 @@
 import { ApplyTagsButtonComponent } from '../../../teacher/apply-tags-button/apply-tags-button.component';
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
+import { BehaviorSubject } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Component, Inject, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -120,12 +121,8 @@ export class PersonalLibraryComponent extends LibraryComponent {
     return b.id - a.id;
   }
 
-  protected emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {
-    if (numProjectsVisible) {
-      this.libraryService.numberOfPersonalProjectsVisible.next(numProjectsVisible);
-    } else {
-      this.libraryService.numberOfPersonalProjectsVisible.next(this.filteredProjects.length);
-    }
+  protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
+    return this.libraryService.numberOfPersonalProjectsVisible;
   }
 
   protected getDetailsComponent(): any {
