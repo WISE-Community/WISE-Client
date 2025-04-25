@@ -12,6 +12,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { Project } from '../../../domain/project';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
@@ -19,7 +20,6 @@ import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { SelectTagsComponent } from '../../../teacher/select-tags/select-tags.component';
 import { Tag } from '../../../domain/tag';
-import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   imports: [
@@ -104,19 +104,19 @@ export class PersonalLibraryComponent extends LibraryComponent {
     );
   }
 
-  combinePersonalAndSharedProjects(): void {
+  private combinePersonalAndSharedProjects(): void {
     const projects = this.personalProjects.concat(this.sharedProjects);
     projects.sort(this.sortByProjectIdDesc);
     this.projects = projects;
   }
 
-  updateProjects(): void {
+  private updateProjects(): void {
     this.combinePersonalAndSharedProjects();
     this.filterUpdated();
     this.unselectAllProjects();
   }
 
-  sortByProjectIdDesc(a, b): number {
+  private sortByProjectIdDesc(a, b): number {
     return b.id - a.id;
   }
 
@@ -151,7 +151,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
     this.unselectAllProjects();
   }
 
-  pageChange(event?: PageEvent, scroll?: boolean): void {
+  protected pageChange(event?: PageEvent, scroll?: boolean): void {
     super.pageChange(event, scroll);
     this.unselectAllProjects();
   }

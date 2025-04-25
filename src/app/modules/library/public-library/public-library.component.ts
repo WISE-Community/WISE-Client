@@ -1,12 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LibraryComponent } from '../library/library.component';
+import { LibraryProject } from '../libraryProject';
+import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CommonModule } from '@angular/common';
-import { LibraryProjectComponent } from '../library-project/library-project.component';
-import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/public-unit-type-selector.component';
-import { LibraryProject } from '../libraryProject';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/public-unit-type-selector.component';
 
 @Component({
   imports: [

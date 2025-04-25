@@ -7,7 +7,6 @@ import { PersonalLibraryComponent } from '../modules/library/personal-library/pe
 import { PublicLibraryComponent } from '../modules/library/public-library/public-library.component';
 import { LibraryService } from '../services/library.service';
 import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   imports: [
@@ -52,7 +51,7 @@ export class CurriculumComponent {
     }
   }
 
-  private subscribeNumUnitsVisible() {
+  private subscribeNumUnitsVisible(): void {
     this.libraryService.numberOfPersonalProjectsVisible$.subscribe(
       (num) => (this.numMyUnitsVisible = num)
     );
