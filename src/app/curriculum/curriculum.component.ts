@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { LibraryFiltersComponent } from '../modules/library/library-filters/library-filters.component';
+import { LibraryService } from '../services/library.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PersonalLibraryComponent } from '../modules/library/personal-library/personal-library.component';
 import { PublicLibraryComponent } from '../modules/library/public-library/public-library.component';
-import { LibraryService } from '../services/library.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class CurriculumComponent {
   }
 
   private setShowMyUnits(): void {
-    this.userService.getUser().subscribe((user) => {
+    this.userService.getUser()?.subscribe((user) => {
       this.showMyUnits = user.roles && user.roles.includes('teacher');
     });
   }

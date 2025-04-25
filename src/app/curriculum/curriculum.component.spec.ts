@@ -5,6 +5,7 @@ import { CurriculumComponent } from './curriculum.component';
 import { LibraryFiltersComponent } from '../modules/library/library-filters/library-filters.component';
 import { LibraryService } from '../services/library.service';
 import { MockComponents, MockProvider, MockProviders } from 'ng-mocks';
+import { PersonalLibraryComponent } from '../modules/library/personal-library/personal-library.component';
 import { ProjectFilterValues } from '../domain/projectFilterValues';
 import { PublicLibraryComponent } from '../modules/library/public-library/public-library.component';
 import { User } from '../domain/user';
@@ -16,7 +17,9 @@ describe('CurriculumComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MockComponents(LibraryFiltersComponent, PublicLibraryComponent)],
+      declarations: [
+        MockComponents(LibraryFiltersComponent, PersonalLibraryComponent, PublicLibraryComponent)
+      ],
       imports: [CurriculumComponent],
       providers: [
         MockProviders(ConfigService, UserService),
@@ -43,31 +46,38 @@ describe('CurriculumComponent', () => {
     spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
       new BehaviorSubject<User>(new User())
     );
-    expect(numAuthoringToolButtonElements).toEqual(0);
-    expect(numPersonalLibraryElements).toEqual(0);
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(numAuthoringToolButtonElements(fixture)).toEqual(0);
+    expect(numTabGroupElements(fixture)).toEqual(0);
   });
 
   it('should hide My Units tab and authoring tool link when logged in as student', () => {
     spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
       new BehaviorSubject<User>(new User({ roles: ['student'] }))
     );
-    expect(numAuthoringToolButtonElements).toEqual(0);
-    expect(numPersonalLibraryElements).toEqual(0);
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(numAuthoringToolButtonElements(fixture)).toEqual(0);
+    expect(numTabGroupElements(fixture)).toEqual(0);
   });
 
   it('should show My Units tab and authoring tool link when logged in as teacher', () => {
     spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
       new BehaviorSubject<User>(new User({ roles: ['teacher'] }))
     );
-    expect(numAuthoringToolButtonElements).toEqual(1);
-    expect(numPersonalLibraryElements).toEqual(1);
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(numAuthoringToolButtonElements(fixture)).toEqual(1);
+    expect(numTabGroupElements(fixture)).toEqual(1);
+    expect(component['showMyUnits']).toBeTruthy();
   });
 });
 
 function numAuthoringToolButtonElements(fixture: ComponentFixture<CurriculumComponent>) {
-  return fixture.nativeElement.querySelectorAll('#authoring-tool-button').length;
+  return fixture.debugElement.nativeElement.querySelectorAll('.authoring-tool-button').length;
 }
 
-function numPersonalLibraryElements(fixture: ComponentFixture<CurriculumComponent>) {
-  return fixture.nativeElement.querySelectorAll('app-personal-library').length;
+function numTabGroupElements(fixture: ComponentFixture<CurriculumComponent>) {
+  return fixture.debugElement.nativeElement.querySelectorAll('mat-tab-group').length;
 }
