@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CurriculumComponent } from './curriculum.component';
-import { MockComponents, MockProvider, MockProviders } from 'ng-mocks';
-import { LibraryService } from '../services/library.service';
 import { BehaviorSubject, of } from 'rxjs';
-import { ProjectFilterValues } from '../domain/projectFilterValues';
-import { LibraryFiltersComponent } from '../modules/library/library-filters/library-filters.component';
-import { PublicLibraryComponent } from '../modules/library/public-library/public-library.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../services/config.service';
-import { UserService } from '../services/user.service';
+import { CurriculumComponent } from './curriculum.component';
+import { LibraryFiltersComponent } from '../modules/library/library-filters/library-filters.component';
+import { LibraryService } from '../services/library.service';
+import { MockComponents, MockProvider, MockProviders } from 'ng-mocks';
+import { ProjectFilterValues } from '../domain/projectFilterValues';
+import { PublicLibraryComponent } from '../modules/library/public-library/public-library.component';
 import { User } from '../domain/user';
+import { UserService } from '../services/user.service';
 
 describe('CurriculumComponent', () => {
   let component: CurriculumComponent;
@@ -29,9 +29,6 @@ describe('CurriculumComponent', () => {
       ]
     }).compileComponents();
     spyOn(TestBed.inject(ConfigService), 'getAuthoringToolLink').and.returnValue('');
-    spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
-      new BehaviorSubject<User>(new User())
-    );
 
     fixture = TestBed.createComponent(CurriculumComponent);
     component = fixture.componentInstance;
@@ -41,4 +38,36 @@ describe('CurriculumComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should hide My Units tab and authoring tool link when not logged in', () => {
+    spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
+      new BehaviorSubject<User>(new User())
+    );
+    expect(numAuthoringToolButtonElements).toEqual(0);
+    expect(numPersonalLibraryElements).toEqual(0);
+  });
+
+  it('should hide My Units tab and authoring tool link when logged in as student', () => {
+    spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
+      new BehaviorSubject<User>(new User({ roles: ['student'] }))
+    );
+    expect(numAuthoringToolButtonElements).toEqual(0);
+    expect(numPersonalLibraryElements).toEqual(0);
+  });
+
+  it('should show My Units tab and authoring tool link when logged in as teacher', () => {
+    spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
+      new BehaviorSubject<User>(new User({ roles: ['teacher'] }))
+    );
+    expect(numAuthoringToolButtonElements).toEqual(1);
+    expect(numPersonalLibraryElements).toEqual(1);
+  });
 });
+
+function numAuthoringToolButtonElements(fixture: ComponentFixture<CurriculumComponent>) {
+  return fixture.nativeElement.querySelectorAll('#authoring-tool-button').length;
+}
+
+function numPersonalLibraryElements(fixture: ComponentFixture<CurriculumComponent>) {
+  return fixture.nativeElement.querySelectorAll('app-personal-library').length;
+}
