@@ -1,5 +1,6 @@
+import { IdeaData } from '../../assets/wise5/components/common/cRater/IdeaData';
+import { IdeasSortingService } from '../../assets/wise5/services/ideasSortingService';
 import { TestBed } from '@angular/core/testing';
-import { IdeaData, IdeasSortingService } from '../../assets/wise5/services/ideasSortingService';
 
 let ideas: IdeaData[];
 let service: IdeasSortingService;
