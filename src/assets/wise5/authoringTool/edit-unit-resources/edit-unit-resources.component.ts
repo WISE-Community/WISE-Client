@@ -1,6 +1,8 @@
+import { CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
 
 class UnitResource {
   name: string;
@@ -24,7 +25,9 @@ class UnitResource {
 @Component({
   imports: [
     CommonModule,
+    CdkDropList,
     CdkTextareaAutosize,
+    DragDropModule,
     FlexLayoutModule,
     FormsModule,
     MatCardModule,
@@ -55,6 +58,23 @@ export class EditUnitResourcesComponent {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  protected drop(event: CdkDragDrop<string[]>): void {
+    this.moveRuleItem(event.previousIndex, event.currentIndex);
+  }
+
+  protected moveUp(ruleIndex: number): void {
+    this.moveRuleItem(ruleIndex, ruleIndex - 1);
+  }
+
+  protected moveDown(ruleIndex: number): void {
+    this.moveRuleItem(ruleIndex, ruleIndex + 1);
+  }
+
+  protected moveRuleItem(previousIndex: number, currentIndex: number): void {
+    moveItemInArray(this.resources, previousIndex, currentIndex);
+    this.projectService.nodeChanged();
   }
 
   protected addNewResource(addToTop: boolean): void {
