@@ -2335,7 +2335,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Authoring Tool</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
-          <context context-type="linenumber">16,22</context>
+          <context context-type="linenumber">16,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
@@ -2358,7 +2358,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Explore our curriculum library to find units and resources to use with your classes! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
-          <context context-type="linenumber">22,25</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1326396148114021147" datatype="html">
