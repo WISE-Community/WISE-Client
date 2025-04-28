@@ -38,24 +38,8 @@ describe('CurriculumComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should hide My Units tab and authoring tool link when not logged in', () => {
-    spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
-      new BehaviorSubject<User>(new User())
-    );
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(numAuthoringToolButtonElements(fixture)).toEqual(0);
-    expect(numTabGroupElements(fixture)).toEqual(0);
-  });
-
-  it('should hide My Units tab and authoring tool link when logged in as student', () => {
-    spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
-      new BehaviorSubject<User>(new User({ roles: ['student'] }))
-    );
+  it('should hide My Units tab and authoring tool link when not logged in as a teacher', () => {
+    spyOn(TestBed.inject(UserService), 'isTeacher').and.returnValue(false);
     component.ngOnInit();
     fixture.detectChanges();
     expect(numAuthoringToolButtonElements(fixture)).toEqual(0);
@@ -63,9 +47,7 @@ describe('CurriculumComponent', () => {
   });
 
   it('should show My Units tab and authoring tool link when logged in as teacher', () => {
-    spyOn(TestBed.inject(UserService), 'getUser').and.returnValue(
-      new BehaviorSubject<User>(new User({ roles: ['teacher'] }))
-    );
+    spyOn(TestBed.inject(UserService), 'isTeacher').and.returnValue(true);
     component.ngOnInit();
     fixture.detectChanges();
     expect(numAuthoringToolButtonElements(fixture)).toEqual(1);
@@ -75,7 +57,7 @@ describe('CurriculumComponent', () => {
 });
 
 function numAuthoringToolButtonElements(fixture: ComponentFixture<CurriculumComponent>) {
-  return fixture.debugElement.nativeElement.querySelectorAll('.authoring-tool-button').length;
+  return fixture.debugElement.nativeElement.querySelectorAll('a').length;
 }
 
 function numTabGroupElements(fixture: ComponentFixture<CurriculumComponent>) {
