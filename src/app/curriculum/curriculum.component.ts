@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { LibraryFiltersComponent } from '../modules/library/library-filters/library-filters.component';
@@ -6,10 +7,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PersonalLibraryComponent } from '../modules/library/personal-library/personal-library.component';
 import { PublicLibraryComponent } from '../modules/library/public-library/public-library.component';
+import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 @Component({
   imports: [
+    CommonModule,
     LibraryFiltersComponent,
     MatIconModule,
     MatTabsModule,
@@ -20,9 +23,10 @@ import { UserService } from '../services/user.service';
   templateUrl: './curriculum.component.html'
 })
 export class CurriculumComponent {
-  protected showMyUnits: boolean;
   private numMyUnitsVisible: number = 0;
   private numPublicUnitsVisible: number = 0;
+  protected showMyUnits: boolean;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     protected configService: ConfigService,
@@ -31,15 +35,13 @@ export class CurriculumComponent {
   ) {}
 
   ngOnInit(): void {
-    this.setShowMyUnits();
+    this.showMyUnits = this.userService.isTeacher();
     this.getLibraryProjects();
     this.subscribeNumUnitsVisible();
   }
 
-  private setShowMyUnits(): void {
-    this.userService.getUser()?.subscribe((user) => {
-      this.showMyUnits = user.roles && user.roles.includes('teacher');
-    });
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private getLibraryProjects(): void {
@@ -52,19 +54,23 @@ export class CurriculumComponent {
   }
 
   private subscribeNumUnitsVisible(): void {
-    this.libraryService.numberOfPersonalProjectsVisible$.subscribe(
-      (num) => (this.numMyUnitsVisible = num)
+    this.subscriptions.add(
+      this.libraryService.numberOfPersonalProjectsVisible$.subscribe(
+        (num) => (this.numMyUnitsVisible = num)
+      )
     );
-    this.libraryService.numberOfPublicProjectsVisible$.subscribe(
-      (num) => (this.numPublicUnitsVisible = num)
+    this.subscriptions.add(
+      this.libraryService.numberOfPublicProjectsVisible$.subscribe(
+        (num) => (this.numPublicUnitsVisible = num)
+      )
     );
   }
 
   protected getPublicTabLabel(): string {
-    return `Public (${this.numPublicUnitsVisible})`;
+    return $localize`Public (${this.numPublicUnitsVisible})`;
   }
 
   protected getMyUnitsTabLabel(): string {
-    return `My Units (${this.numMyUnitsVisible})`;
+    return $localize`My Units (${this.numMyUnitsVisible})`;
   }
 }
