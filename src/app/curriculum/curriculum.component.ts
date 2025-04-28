@@ -9,11 +9,13 @@ import { PersonalLibraryComponent } from '../modules/library/personal-library/pe
 import { PublicLibraryComponent } from '../modules/library/public-library/public-library.component';
 import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   imports: [
     CommonModule,
     LibraryFiltersComponent,
+    MatButtonModule,
     MatIconModule,
     MatTabsModule,
     PersonalLibraryComponent,

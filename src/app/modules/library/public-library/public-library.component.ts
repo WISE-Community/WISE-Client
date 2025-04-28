@@ -22,7 +22,7 @@ import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/pu
     `
       .content-block {
         padding: 16px;
-        background-color: transparent;
+        border-radius: 0;
       }
 
       .mat-mdc-paginator {

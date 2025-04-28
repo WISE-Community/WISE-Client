@@ -1,10 +1,12 @@
-<div class="content-block library-teacher__paginate">
-  <div
-    class="personal-library-header flex flex-col sm:flex-row sm:items-center justify-center align-items-stretch gap-2"
-  >
+<div class="content-block">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-center align-items-stretch gap-2">
     <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)" />
     <span class="flex-1"></span>
-    <mat-radio-group [(ngModel)]="showArchivedView" (ngModelChange)="switchActiveArchivedView()">
+    <mat-radio-group
+      class="px-2 self-center"
+      [(ngModel)]="showArchivedView"
+      (ngModelChange)="switchActiveArchivedView()"
+    >
       <mat-radio-button [value]="false" i18n>Active</mat-radio-button>
       <mat-radio-button [value]="true" i18n>Archived</mat-radio-button>
     </mat-radio-group>
@@ -52,7 +54,7 @@
       }
     }
     @if (filteredProjects.length === 0) {
-      <div class="notice" i18n>No owned or shared units found.</div>
+      <div class="notice" i18n>No units found.</div>
     }
   </div>
   <mat-paginator
