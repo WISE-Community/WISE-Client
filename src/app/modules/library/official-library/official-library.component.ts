@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { Component, Input, ViewEncapsulation, Inject } from '@angular/core';
 import { LibraryGroup } from '../libraryGroup';
 import { LibraryProject } from '../libraryProject';
@@ -6,11 +7,11 @@ import { LibraryComponent } from '../library/library.component';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-official-library',
-    templateUrl: './official-library.component.html',
-    styleUrls: ['./official-library.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'app-official-library',
+  templateUrl: './official-library.component.html',
+  styleUrls: ['./official-library.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class OfficialLibraryComponent extends LibraryComponent {
   @Input() isSplitScreen: boolean = false;
@@ -19,7 +20,10 @@ export class OfficialLibraryComponent extends LibraryComponent {
   libraryGroups: LibraryGroup[] = [];
   expandedGroups: object = {};
 
-  constructor(protected dialog: MatDialog, protected libraryService: LibraryService) {
+  constructor(
+    protected dialog: MatDialog,
+    protected libraryService: LibraryService
+  ) {
     super(dialog, libraryService);
   }
 
@@ -38,12 +42,8 @@ export class OfficialLibraryComponent extends LibraryComponent {
     );
   }
 
-  emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
-    if (numProjectsVisible) {
-      this.libraryService.numberOfOfficialProjectsVisible.next(numProjectsVisible);
-    } else {
-      this.libraryService.numberOfOfficialProjectsVisible.next(this.filteredProjects.length);
-    }
+  protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
+    return this.libraryService.numberOfPublicProjectsVisible;
   }
 
   protected getDetailsComponent(): any {
@@ -52,9 +52,9 @@ export class OfficialLibraryComponent extends LibraryComponent {
 }
 
 @Component({
-    selector: 'official-library-details',
-    templateUrl: 'official-library-details.html',
-    standalone: false
+  selector: 'official-library-details',
+  templateUrl: 'official-library-details.html',
+  standalone: false
 })
 export class OfficialLibraryDetailsComponent {
   constructor(

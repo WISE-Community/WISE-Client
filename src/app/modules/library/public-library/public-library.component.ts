@@ -1,12 +1,13 @@
+import { BehaviorSubject } from 'rxjs';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LibraryComponent } from '../library/library.component';
+import { LibraryProject } from '../libraryProject';
+import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CommonModule } from '@angular/common';
-import { LibraryProjectComponent } from '../library-project/library-project.component';
-import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/public-unit-type-selector.component';
-import { LibraryProject } from '../libraryProject';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/public-unit-type-selector.component';
 
 @Component({
   imports: [
@@ -21,7 +22,7 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
     `
       .content-block {
         padding: 16px;
-        background-color: transparent;
+        border-radius: 0;
       }
 
       .mat-mdc-paginator {
@@ -52,8 +53,6 @@ export class PublicLibraryComponent extends LibraryComponent {
         this.updateProjects(projects)
       )
     );
-    this.libraryService.getOfficialLibraryProjects();
-    this.libraryService.getCommunityLibraryProjects();
   }
 
   private updateProjects(projects: LibraryProject[]): void {
@@ -79,8 +78,8 @@ export class PublicLibraryComponent extends LibraryComponent {
     super.filterUpdated(filterValues);
   }
 
-  protected emitNumberOfProjectsVisible(numProjectsVisible: number = null): void {
-    // do nothing. this value is not used in the public library
+  protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
+    return this.libraryService.numberOfPublicProjectsVisible;
   }
 
   protected getDetailsComponent(): any {

@@ -1,7 +1,6 @@
 @if (project.visible) {
   <mat-card
-    appearance="outlined"
-    class="library-project mat-card--button"
+    class="library-project"
     (click)="showDetails()"
     (keyup.enter)="showDetails()"
     [@flash]="{ value: '*', params: { duration: animateDuration, delay: animateDelay } }"

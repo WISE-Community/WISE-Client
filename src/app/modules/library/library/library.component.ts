@@ -3,7 +3,7 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
 @Directive()
@@ -79,7 +79,15 @@ export abstract class LibraryComponent implements OnInit {
     this.setPagination();
   }
 
-  protected abstract emitNumberOfProjectsVisible(numProjectsVisible: number): void;
+  protected emitNumberOfProjectsVisible(numProjectsVisible: number): void {
+    if (numProjectsVisible) {
+      this.getNumVisiblePersonalOrPublicProjects().next(numProjectsVisible);
+    } else {
+      this.getNumVisiblePersonalOrPublicProjects().next(this.filteredProjects.length);
+    }
+  }
+
+  protected abstract getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number>;
 
   protected countVisibleProjects(projects: LibraryProject[]): number {
     return projects.filter((project) => project.visible).length;

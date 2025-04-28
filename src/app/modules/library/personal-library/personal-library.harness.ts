@@ -1,14 +1,14 @@
 import { ComponentHarness } from '@angular/cdk/testing';
-import { MatSelectHarness } from '@angular/material/select/testing';
 import { LibraryProjectHarness } from '../library-project/library-project.harness';
 import { MatButtonHarness } from '@angular/material/button/testing';
-import { SelectAllItemsCheckboxHarness } from '../select-all-items-checkbox/select-all-items-checkbox.harness';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { MatPaginatorHarness } from '@angular/material/paginator/testing';
+import { MatRadioGroupHarness } from '@angular/material/radio/testing';
+import { SelectAllItemsCheckboxHarness } from '../select-all-items-checkbox/select-all-items-checkbox.harness';
 
 export class PersonalLibraryHarness extends ComponentHarness {
   static hostSelector = 'app-personal-library';
-  protected getViewSelect = this.locatorFor(MatSelectHarness);
+  protected getViewSelect = this.locatorFor(MatRadioGroupHarness);
   getArchiveButton = this.locatorFor(MatButtonHarness.with({ selector: '[matTooltip="Archive"]' }));
   getUnarchiveButton = this.locatorFor(
     MatButtonHarness.with({ selector: '[matTooltip="Restore"]' })
@@ -46,11 +46,11 @@ export class PersonalLibraryHarness extends ComponentHarness {
   }
 
   async showArchivedView(): Promise<void> {
-    return (await this.getViewSelect()).clickOptions({ text: 'Archived' });
+    return (await this.getViewSelect()).checkRadioButton({ label: 'Archived' });
   }
 
   async showActiveView(): Promise<void> {
-    return (await this.getViewSelect()).clickOptions({ text: 'Active' });
+    return (await this.getViewSelect()).checkRadioButton({ label: 'Active' });
   }
 
   async getSelectedProjects(): Promise<LibraryProjectHarness[]> {
