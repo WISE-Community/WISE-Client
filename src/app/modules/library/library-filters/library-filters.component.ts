@@ -33,7 +33,7 @@ export class LibraryFiltersComponent {
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected featureOptions: Feature[] = [];
-  protected filterValues: ProjectFilterValues = new ProjectFilterValues();
+  @Input() filterValues: ProjectFilterValues;
   protected gradeLevelOptions: GradeLevel[] = [];
   @Input() showAdvancedFilteringOptions: boolean = true;
   @Input() isSplitScreen: boolean = false;

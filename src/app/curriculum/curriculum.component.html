@@ -24,20 +24,20 @@
     <section class="library notice-bg-bg rounded-md">
       <div class="flex flex-col md:flex-row">
         <div class="dark-theme content-block primary-bg p-4 md:w-1/3 lg:w-1/4">
-          <app-library-filters [isSplitScreen]="true" />
+          <app-library-filters [filterValues]="filterValues" [isSplitScreen]="true" />
         </div>
         <div class="md:w-2/3 lg:w-3/4">
           @if (showMyUnits) {
             <mat-tab-group dynamicHeight>
               <mat-tab [label]="getPublicTabLabel()">
-                <public-library />
+                <public-library [filterValues]="filterValues" />
               </mat-tab>
               <mat-tab [label]="getMyUnitsTabLabel()">
-                <app-personal-library />
+                <app-personal-library [filterValues]="filterValues" />
               </mat-tab>
             </mat-tab-group>
           } @else {
-            <public-library />
+            <public-library [filterValues]="filterValues" />
           }
         </div>
       </div>

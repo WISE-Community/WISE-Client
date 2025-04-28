@@ -30,6 +30,7 @@ describe('PublicLibraryComponent', () => {
 
     fixture = TestBed.createComponent(PublicLibraryComponent);
     component = fixture.componentInstance;
+    component.filterValues = new ProjectFilterValues();
     fixture.detectChanges();
   });
 

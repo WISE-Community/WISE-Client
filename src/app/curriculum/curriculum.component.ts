@@ -10,6 +10,7 @@ import { PublicLibraryComponent } from '../modules/library/public-library/public
 import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
+import { ProjectFilterValues } from '../domain/projectFilterValues';
 
 @Component({
   imports: [
@@ -25,6 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './curriculum.component.html'
 })
 export class CurriculumComponent {
+  protected filterValues: ProjectFilterValues = new ProjectFilterValues();
   private numMyUnitsVisible: number = 0;
   private numPublicUnitsVisible: number = 0;
   protected showMyUnits: boolean;

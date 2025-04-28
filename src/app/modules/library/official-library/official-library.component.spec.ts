@@ -4,9 +4,10 @@ import { fakeAsyncResponse } from '../../../student/student-run-list/student-run
 import { LibraryService } from '../../../services/library.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryGroup } from '../libraryGroup';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 export class MockLibraryService {
   libraryGroupsSource$ = fakeAsyncResponse({});
@@ -36,6 +37,7 @@ describe('OfficialLibraryComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OfficialLibraryComponent);
     component = fixture.componentInstance;
+    component.filterValues = new ProjectFilterValues();
     component.projects = [];
     fixture.detectChanges();
   });

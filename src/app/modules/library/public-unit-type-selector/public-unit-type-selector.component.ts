@@ -42,7 +42,7 @@ export class PublicUnitTypeSelectorComponent {
     if (this.communityBuilt) {
       this.filterValues.publicUnitTypeValue.push('communityBuilt');
     }
-    this.publicUnitTypeUpdatedEvent.emit(this.filterValues);
+    this.publicUnitTypeUpdatedEvent.emit();
   }
 
   protected showInfo(type: 'community' | 'official'): void {
