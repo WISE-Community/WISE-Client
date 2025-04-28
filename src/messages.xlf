@@ -2179,6 +2179,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">244,247</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/crater-rubric/crater-rubric.component.html</context>
+          <context context-type="linenumber">16,20</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">22,26</context>
         </context-group>
@@ -16679,6 +16683,45 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">285</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="864633004805861509" datatype="html">
+        <source>Idea detection rubric</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/crater-rubric/crater-rubric.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1580566082983040302" datatype="html">
+        <source>Close rubric</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/crater-rubric/crater-rubric.component.html</context>
+          <context context-type="linenumber">4,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8040881171107393560" datatype="html">
+        <source>ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/crater-rubric/crater-rubric.component.html</context>
+          <context context-type="linenumber">16,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1859914769947265531" datatype="html">
+        <source>Model Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-description/edit-crater-description.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5849203454479447363" datatype="html">
+        <source>User-Friendly Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-description/edit-crater-description.component.html</context>
+          <context context-type="linenumber">7,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.html</context>
+          <context context-type="linenumber">38,41</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6050147698447258490" datatype="html">
         <source>Idea Descriptions</source>
         <context-group purpose="location">
@@ -16704,13 +16747,6 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">30,33</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5849203454479447363" datatype="html">
-        <source>User-Friendly Description</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.html</context>
-          <context context-type="linenumber">38,41</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="5022438918494271548" datatype="html">
         <source>Delete idea description</source>
         <context-group purpose="location">
@@ -16722,7 +16758,14 @@ Are you ready to receive feedback on this answer?</source>
         <source>Are you sure you want to delete this idea description?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6899004768129159617" datatype="html">
+        <source>Edit CRater Information</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/common/cRater/edit-crater-info/edit-crater-info.component.html</context>
+          <context context-type="linenumber">3,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5596810972110629301" datatype="html">
@@ -17568,6 +17611,13 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
           <context context-type="linenumber">7,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7920283242192845616" datatype="html">
+        <source>Detectable ideas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component.html</context>
+          <context context-type="linenumber">8,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4100639410288917446" datatype="html">

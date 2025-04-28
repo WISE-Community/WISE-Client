@@ -1,0 +1,28 @@
+<h2 mat-dialog-title class="!flex items-center !py-1 !pe-1">
+  <span i18n>Idea detection rubric</span>
+  <span class="flex-1"></span>
+  <button mat-icon-button (click)="closeDialog()" i18n-aria-label aria-label="Close rubric">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+<mat-dialog-content>
+  @if (cRaterRubric.description && cRaterRubric.description !== '') {
+    <p>{{ cRaterRubric.description }}</p>
+  }
+  <table class="text-sm">
+    <thead>
+      <tr>
+        <th i18n>ID</th>
+        <th i18n>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (idea of ideas; track idea.name) {
+        <tr>
+          <td>{{ idea.name }}</td>
+          <td>{{ idea.text }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</mat-dialog-content>
