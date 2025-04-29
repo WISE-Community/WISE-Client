@@ -45,24 +45,4 @@ export class OfficialLibraryComponent extends LibraryComponent {
   protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
     return this.libraryService.numberOfPublicProjectsVisible;
   }
-
-  protected getDetailsComponent(): any {
-    return OfficialLibraryDetailsComponent;
-  }
-}
-
-@Component({
-  selector: 'official-library-details',
-  templateUrl: 'official-library-details.html',
-  standalone: false
-})
-export class OfficialLibraryDetailsComponent {
-  constructor(
-    public dialogRef: MatDialogRef<OfficialLibraryDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-
-  close(): void {
-    this.dialogRef.close();
-  }
 }

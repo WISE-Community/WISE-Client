@@ -29,15 +29,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TimelineModule } from '../timeline/timeline.module';
 import { LibraryFiltersComponent } from './library-filters/library-filters.component';
 import { HomePageProjectLibraryComponent } from './home-page-project-library/home-page-project-library.component';
-import { TeacherProjectLibraryComponent } from './teacher-project-library/teacher-project-library.component';
-import {
-  OfficialLibraryComponent,
-  OfficialLibraryDetailsComponent
-} from './official-library/official-library.component';
-import {
-  CommunityLibraryComponent,
-  CommunityLibraryDetailsComponent
-} from './community-library/community-library.component';
+import { OfficialLibraryComponent } from './official-library/official-library.component';
 import {
   PersonalLibraryComponent,
   PersonalLibraryDetailsComponent
@@ -107,11 +99,7 @@ const materialModules = [
   declarations: [
     LibraryGroupThumbsComponent,
     HomePageProjectLibraryComponent,
-    TeacherProjectLibraryComponent,
     OfficialLibraryComponent,
-    OfficialLibraryDetailsComponent,
-    CommunityLibraryComponent,
-    CommunityLibraryDetailsComponent,
     PersonalLibraryDetailsComponent,
     ShareProjectDialogComponent,
     CopyProjectDialogComponent
@@ -121,7 +109,6 @@ const materialModules = [
     HomePageProjectLibraryComponent,
     PersonalLibraryComponent,
     ReactiveFormsModule,
-    TeacherProjectLibraryComponent,
     UnitTagsComponent,
     materialModules
   ],

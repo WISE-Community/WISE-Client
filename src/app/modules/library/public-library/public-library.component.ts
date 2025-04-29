@@ -72,8 +72,4 @@ export class PublicLibraryComponent extends LibraryComponent {
   protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
     return this.libraryService.numberOfPublicProjectsVisible;
   }
-
-  protected getDetailsComponent(): any {
-    return null;
-  }
 }

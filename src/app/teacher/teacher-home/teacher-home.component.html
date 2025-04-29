@@ -1,34 +1,27 @@
-<header class="content__header flex flex-wrap items-start justify-start sm:justify-between gap-4">
-  <h1 class="accent flex items-center gap-2 mat-headline-4">
-    <mat-icon>home</mat-icon><span i18n>Teacher Home</span>
-  </h1>
+<header
+  class="content__header flex flex-col md:flex-row flex-wrap items-start justify-start sm:justify-between gap-4"
+>
+  <div class="mb-4">
+    <div class="mb-4">
+      <h1 class="accent flex items-center gap-2 mat-headline-4">
+        <mat-icon>home</mat-icon><span i18n>Teacher Home</span>
+      </h1>
+      <div class="mt-2 px-1" i18n>Welcome {{ user.firstName }}!</div>
+    </div>
+    <div class="flex gap-2">
+      <a mat-raised-button color="primary" routerLink="/curriculum" i18n>Unit Library</a>
+      <a mat-raised-button color="primary" routerLink="/teacher/edit" i18n>Authoring Tool</a>
+    </div>
+  </div>
   <discourse-recent-activity
     *ngIf="discourseUrl"
     [baseUrl]="discourseUrl"
     category="latest"
     queryString="order=activity"
-    class="w-full sm:w-auto"
+    class="w-full md:w-auto -mt-4"
   >
   </discourse-recent-activity>
 </header>
 <section>
-  <nav mat-tab-nav-bar i18n-aria-label aria-label="Teacher home navigation" [tabPanel]="tabPanel">
-    <a
-      mat-tab-link
-      *ngFor="let tab of tabLinks"
-      [routerLink]="[tab.path]"
-      routerLinkActive
-      #rla="routerLinkActive"
-      [active]="rla.isActive"
-    >
-      {{ tab.label }}
-    </a>
-    <a mat-tab-link (click)="openAuthoringTool()">
-      <ng-container i18n>Authoring Tool</ng-container>
-      &nbsp;<mat-icon class="text">open_in_browser</mat-icon>
-    </a>
-  </nav>
-  <mat-tab-nav-panel #tabPanel>
-    <router-outlet></router-outlet>
-  </mat-tab-nav-panel>
+  <app-teacher-run-list></app-teacher-run-list>
 </section>

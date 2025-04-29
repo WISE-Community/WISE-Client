@@ -88,13 +88,4 @@ export abstract class LibraryComponent implements OnInit {
   protected countVisibleProjects(projects: LibraryProject[]): number {
     return projects.filter((project) => project.visible).length;
   }
-
-  protected showInfo(event: Event): void {
-    event.preventDefault();
-    this.dialog.open(this.getDetailsComponent(), {
-      panelClass: 'dialog-sm'
-    });
-  }
-
-  protected abstract getDetailsComponent(): any;
 }

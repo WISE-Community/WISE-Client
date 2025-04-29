@@ -71,12 +71,12 @@ abstract class DetailsComponent {
 
 @Component({
   imports: [MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions, RouterLink],
-  templateUrl: '../official-library/official-library-details.html'
+  templateUrl: './official-library-details.html'
 })
 class OfficialDetailsComponent extends DetailsComponent {}
 
 @Component({
   imports: [MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions, RouterLink],
-  templateUrl: '../community-library/community-library-details.html'
+  templateUrl: './community-library-details.html'
 })
 class CommunityDetailsComponent extends DetailsComponent {}
