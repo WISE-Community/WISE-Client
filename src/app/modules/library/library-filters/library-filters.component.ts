@@ -33,7 +33,7 @@ export class LibraryFiltersComponent {
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected featureOptions: Feature[] = [];
-  protected filterValues: ProjectFilterValues = new ProjectFilterValues();
+  protected filterValues: ProjectFilterValues;
   protected gradeLevelOptions: GradeLevel[] = [];
   @Input() showAdvancedFilteringOptions: boolean = true;
   @Input() isSplitScreen: boolean = false;
@@ -52,6 +52,7 @@ export class LibraryFiltersComponent {
     private libraryService: LibraryService,
     private utilService: UtilService
   ) {
+    this.filterValues = this.libraryService.getFilterValues();
     libraryService.officialLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
       this.libraryProjects = projects;
       this.populateFilterOptions();
@@ -170,7 +171,7 @@ export class LibraryFiltersComponent {
   }
 
   private emitFilterValues(): void {
-    this.libraryService.setFilterValues(this.filterValues);
+    this.libraryService.filterValuesUpdated();
   }
 
   protected clearFilterValues(): void {

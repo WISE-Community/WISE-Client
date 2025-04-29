@@ -16,7 +16,6 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { Project } from '../../../domain/project';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { SelectTagsComponent } from '../../../teacher/select-tags/select-tags.component';
@@ -129,8 +128,8 @@ export class PersonalLibraryComponent extends LibraryComponent {
     return PersonalLibraryDetailsComponent;
   }
 
-  public filterUpdated(filterValues: ProjectFilterValues = null): void {
-    super.filterUpdated(filterValues);
+  public filterUpdated(): void {
+    super.filterUpdated();
     this.filteredProjects = this.filteredProjects.filter(
       (project) => project.hasTagWithText('archived') == this.showArchivedView
     );

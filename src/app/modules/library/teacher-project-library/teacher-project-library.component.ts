@@ -27,6 +27,7 @@ export class TeacherProjectLibraryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.libraryService.initFilterValues();
     this.libraryService.numberOfPublicProjectsVisible$.subscribe((num) => {
       this.tabs[0].numVisible = num;
     });

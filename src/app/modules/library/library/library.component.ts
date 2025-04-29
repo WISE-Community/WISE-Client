@@ -1,4 +1,4 @@
-import { OnInit, QueryList, ViewChildren, Directive } from '@angular/core';
+import { OnInit, QueryList, ViewChildren, Directive, Input } from '@angular/core';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryProject } from '../libraryProject';
@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Directive()
 export abstract class LibraryComponent implements OnInit {
   protected filteredProjects: LibraryProject[] = [];
-  protected filterValues: ProjectFilterValues = new ProjectFilterValues();
+  protected filterValues: ProjectFilterValues;
   protected highIndex: number = 0;
   protected lowIndex: number = 0;
   protected pageSizeOptions: number[] = [12, 24, 48, 96];
@@ -26,10 +26,9 @@ export abstract class LibraryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.filterValues = this.libraryService.getFilterValues();
     this.subscriptions.add(
-      this.libraryService.projectFilterValuesSource$.subscribe((projectFilterValues) =>
-        this.filterUpdated(projectFilterValues)
-      )
+      this.libraryService.filterValuesUpdated$.subscribe(() => this.filterUpdated())
     );
   }
 
@@ -63,10 +62,7 @@ export abstract class LibraryComponent implements OnInit {
     return this.lowIndex <= index && index < this.highIndex;
   }
 
-  protected filterUpdated(filterValues: ProjectFilterValues = null): void {
-    if (filterValues) {
-      this.filterValues = filterValues;
-    }
+  protected filterUpdated(): void {
     this.filteredProjects = this.projects
       .map((project) => {
         project.visible = this.filterValues.matches(project);

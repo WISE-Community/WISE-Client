@@ -1,4 +1,4 @@
-import { BehaviorSubject, of } from 'rxjs';
+import { of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../services/config.service';
 import { CurriculumComponent } from './curriculum.component';
@@ -6,9 +6,7 @@ import { LibraryFiltersComponent } from '../modules/library/library-filters/libr
 import { LibraryService } from '../services/library.service';
 import { MockComponents, MockProvider, MockProviders } from 'ng-mocks';
 import { PersonalLibraryComponent } from '../modules/library/personal-library/personal-library.component';
-import { ProjectFilterValues } from '../domain/projectFilterValues';
 import { PublicLibraryComponent } from '../modules/library/public-library/public-library.component';
-import { User } from '../domain/user';
 import { UserService } from '../services/user.service';
 
 describe('CurriculumComponent', () => {
@@ -24,7 +22,7 @@ describe('CurriculumComponent', () => {
       providers: [
         MockProviders(ConfigService, UserService),
         MockProvider(LibraryService, {
-          projectFilterValuesSource$: of({} as ProjectFilterValues),
+          filterValuesUpdated$: of(),
           communityLibraryProjectsSource$: of([]),
           numberOfPublicProjectsVisible$: of(3),
           numberOfPersonalProjectsVisible$: of(2)

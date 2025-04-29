@@ -6,7 +6,6 @@ import { LibraryProject } from '../libraryProject';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/public-unit-type-selector.component';
 
 @Component({
@@ -68,14 +67,6 @@ export class PublicLibraryComponent extends LibraryComponent {
       }
       return acc;
     }, []);
-  }
-
-  protected filterUpdated(filterValues: ProjectFilterValues = null): void {
-    if (filterValues) {
-      // this check is required the very first time when filterValues is null
-      filterValues.publicUnitTypeValue = this.filterValues.publicUnitTypeValue;
-    }
-    super.filterUpdated(filterValues);
   }
 
   protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {

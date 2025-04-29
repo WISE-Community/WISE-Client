@@ -38,6 +38,7 @@ export class CurriculumComponent {
 
   ngOnInit(): void {
     this.showMyUnits = this.userService.isTeacher();
+    this.libraryService.initFilterValues();
     this.getLibraryProjects();
     this.subscribeNumUnitsVisible();
   }

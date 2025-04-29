@@ -5,6 +5,8 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { MatDialog } from '@angular/material/dialog';
+import { LibraryService } from '../../../services/library.service';
+import { MockProvider } from 'ng-mocks';
 
 describe('PublicUnitTypeSelectorComponent', () => {
   let component: PublicUnitTypeSelectorComponent;
@@ -14,15 +16,16 @@ describe('PublicUnitTypeSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PublicUnitTypeSelectorComponent]
+      imports: [PublicUnitTypeSelectorComponent],
+      providers: [MockProvider(LibraryService)]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PublicUnitTypeSelectorComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
-    component.filterValues = {
+    spyOn(TestBed.inject(LibraryService), 'getFilterValues').and.returnValue({
       publicUnitTypeValue: []
-    } as ProjectFilterValues;
+    } as ProjectFilterValues);
     fixture.detectChanges();
     [checkbox1, checkbox2] = await loader.getAllHarnesses(MatCheckboxHarness);
   });
@@ -36,7 +39,9 @@ describe('PublicUnitTypeSelectorComponent', () => {
   it('should update filterValues and emit event when checkbox is clicked', async () => {
     const spy = spyOn(component.publicUnitTypeUpdatedEvent, 'emit');
     await checkbox1.check();
-    expect(component.filterValues.publicUnitTypeValue).toEqual(['wiseTested']);
+    expect(TestBed.inject(LibraryService).getFilterValues().publicUnitTypeValue).toEqual([
+      'wiseTested'
+    ]);
     expect(spy).toHaveBeenCalled();
   });
 

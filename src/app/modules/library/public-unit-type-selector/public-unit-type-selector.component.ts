@@ -1,4 +1,4 @@
-import { Component, Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Directive, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
@@ -12,6 +12,7 @@ import {
 } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { LibraryService } from '../../../services/library.service';
 
 @Component({
   imports: [FormsModule, MatCheckboxModule, MatIconModule],
@@ -27,12 +28,19 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class PublicUnitTypeSelectorComponent {
   protected communityBuilt: boolean;
-  @Input() filterValues: ProjectFilterValues;
+  protected filterValues: ProjectFilterValues;
   @Output() publicUnitTypeUpdatedEvent: EventEmitter<ProjectFilterValues> =
     new EventEmitter<ProjectFilterValues>();
   protected wiseTested: boolean;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private libraryService: LibraryService
+  ) {}
+
+  ngOnInit(): void {
+    this.filterValues = this.libraryService.getFilterValues();
+  }
 
   protected updatePublicUnitType(): void {
     this.filterValues.publicUnitTypeValue = [];
@@ -42,7 +50,7 @@ export class PublicUnitTypeSelectorComponent {
     if (this.communityBuilt) {
       this.filterValues.publicUnitTypeValue.push('communityBuilt');
     }
-    this.publicUnitTypeUpdatedEvent.emit(this.filterValues);
+    this.publicUnitTypeUpdatedEvent.emit();
   }
 
   protected showInfo(type: 'community' | 'official'): void {

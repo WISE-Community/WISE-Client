@@ -1,30 +1,18 @@
 import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
-import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { fakeAsyncResponse } from '../../../student/student-run-list/student-run-list.component.spec';
-import { FormsModule } from '@angular/forms';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LibraryProject } from '../libraryProject';
-import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { LibraryService } from '../../../services/library.service';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatOptionModule } from '@angular/material/core';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { PersonalLibraryComponent } from './personal-library.component';
 import { PersonalLibraryHarness } from './personal-library.harness';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
@@ -41,22 +29,7 @@ const projectId5 = 5;
 describe('PersonalLibraryComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ArchiveProjectsButtonComponent,
-        BrowserAnimationsModule,
-        FormsModule,
-        LibraryProjectComponent,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatOptionModule,
-        MatPaginatorModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        OverlayModule,
-        PersonalLibraryComponent,
-        SelectAllItemsCheckboxComponent
-      ],
+      imports: [BrowserAnimationsModule, PersonalLibraryComponent],
       providers: [
         ArchiveProjectService,
         LibraryService,
@@ -70,6 +43,9 @@ describe('PersonalLibraryComponent', () => {
   beforeEach(async () => {
     fixture = TestBed.createComponent(PersonalLibraryComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(LibraryService), 'getFilterValues').and.returnValue(
+      new ProjectFilterValues()
+    );
     setUpFiveProjects();
     archiveProjectService = TestBed.inject(ArchiveProjectService);
     http = TestBed.inject(HttpClient);
@@ -264,17 +240,7 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
       it('unselects all projects', async () => {
         await (await harness.getSelectAllCheckbox()).check();
         expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
-        component.filterUpdated(
-          Object.assign(new ProjectFilterValues(), {
-            disciplineValue: [],
-            featureValue: [],
-            gradeLevelValue: [],
-            publicUnitTypeValue: [],
-            searchValue: 'world',
-            standardValue: [],
-            unitTypeValue: []
-          })
-        );
+        component.filterUpdated();
         expect(await harness.getSelectedProjectIds()).toEqual([]);
       });
     });

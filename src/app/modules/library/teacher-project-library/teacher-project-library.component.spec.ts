@@ -5,6 +5,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LibraryService } from '../../../services/library.service';
 import { defer } from 'rxjs';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 export function fakeAsyncResponse<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -18,6 +19,10 @@ export class MockLibraryService {
   getCommunityLibraryProjects() {}
   getPersonalLibraryProjects() {}
   getSharedLibraryProjects() {}
+  getFilterValues() {
+    return new ProjectFilterValues();
+  }
+  initFilterValues() {}
 }
 
 describe('TeacherProjectLibraryComponent', () => {
