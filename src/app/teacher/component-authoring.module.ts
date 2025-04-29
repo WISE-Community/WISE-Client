@@ -3,7 +3,6 @@ import { AnimationAuthoring } from '../../assets/wise5/components/animation/anim
 import { AudioOscillatorAuthoring } from '../../assets/wise5/components/audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component';
 import { ConceptMapAuthoring } from '../../assets/wise5/components/conceptMap/concept-map-authoring/concept-map-authoring.component';
 import { DialogGuidanceAuthoringComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component';
-import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
 import { EditFeedbackRulesComponent } from '../../assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { DiscussionAuthoring } from '../../assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component';
 import { DrawAuthoring } from '../../assets/wise5/components/draw/draw-authoring/draw-authoring.component';
@@ -90,6 +89,7 @@ import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringT
 import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
 import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
+import { EditCRaterInfoComponent } from '../../assets/wise5/components/common/cRater/edit-crater-info/edit-crater-info.component';
 
 @NgModule({
   declarations: [
@@ -173,7 +173,7 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     EditComponentConstraintsComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
-    EditCRaterIdeaDescriptionsComponent,
+    EditCRaterInfoComponent,
     MatchAuthoringComponent,
     MultipleChoiceAuthoring,
     OpenResponseAuthoringComponent,
@@ -221,7 +221,7 @@ import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/no
     EditConnectedComponentsWithBackgroundComponent,
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentTypeSelectComponent,
-    EditCRaterIdeaDescriptionsComponent,
+    EditCRaterInfoComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDiscussionAdvancedComponent,
     EditDiscussionConnectedComponentsComponent,

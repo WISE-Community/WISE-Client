@@ -32,7 +32,6 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
   styleUrl: './edit-crater-idea-descriptions.component.scss'
 })
 export class EditCRaterIdeaDescriptionsComponent implements OnInit {
-  @Input() componentContent: ComponentContent;
   @Input() ideaDescriptions: CRaterIdea[] = [];
   @Input() enableAutoscrolling: boolean = true;
   protected inputChanged: Subject<string> = new Subject<string>();

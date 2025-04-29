@@ -1,18 +1,16 @@
 import { CRaterIdea } from './CRaterIdea';
 
 export class CRaterRubric {
-  private ideas: CRaterIdea[] = [];
+  description: string = '';
+  ideas: CRaterIdea[] = [];
 
-  constructor(rubric: any = { ideas: [] }) {
+  constructor(rubric: any = { description: '', ideas: [] }) {
+    this.description = rubric.description;
     this.ideas = rubric.ideas;
   }
 
   getIdea(ideaId: string): CRaterIdea {
     return this.ideas.find((idea) => idea.name === ideaId);
-  }
-
-  getIdeas(): CRaterIdea[] {
-    return this.ideas;
   }
 }
 

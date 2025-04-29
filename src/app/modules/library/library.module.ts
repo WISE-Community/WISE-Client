@@ -55,6 +55,8 @@ import { SelectMenuComponent } from '../shared/select-menu/select-menu.component
 import { UnitTagsComponent } from '../../teacher/unit-tags/unit-tags.component';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { StandardsSelectMenuComponent } from '../shared/standards-select-menu/standards-select-menu.component';
+import { CurriculumComponent } from '../../curriculum/curriculum.component';
+import { ColorService } from '../../../assets/wise5/services/colorService';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -83,11 +85,13 @@ const materialModules = [
     ApplyTagsButtonComponent,
     ArchiveProjectsButtonComponent,
     CommonModule,
+    CurriculumComponent,
     FlexLayoutModule,
     FormsModule,
     LibraryFiltersComponent,
     LibraryProjectComponent,
     LibraryProjectDetailsComponent,
+    PersonalLibraryComponent,
     ReactiveFormsModule,
     RouterModule,
     materialModules,
@@ -108,19 +112,21 @@ const materialModules = [
     OfficialLibraryDetailsComponent,
     CommunityLibraryComponent,
     CommunityLibraryDetailsComponent,
-    PersonalLibraryComponent,
     PersonalLibraryDetailsComponent,
     ShareProjectDialogComponent,
     CopyProjectDialogComponent
   ],
   exports: [
+    CurriculumComponent,
     HomePageProjectLibraryComponent,
+    PersonalLibraryComponent,
     ReactiveFormsModule,
     TeacherProjectLibraryComponent,
     UnitTagsComponent,
     materialModules
   ],
   providers: [
+    ColorService,
     LibraryService,
     { provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl },
     ProjectTagService

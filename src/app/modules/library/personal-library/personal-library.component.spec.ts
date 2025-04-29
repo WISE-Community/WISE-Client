@@ -1,31 +1,18 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { PersonalLibraryComponent } from './personal-library.component';
-import { fakeAsyncResponse } from '../../../student/student-run-list/student-run-list.component.spec';
-import { LibraryService } from '../../../services/library.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { LibraryProject } from '../libraryProject';
-import { PersonalLibraryHarness } from './personal-library.harness';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatSelectModule } from '@angular/material/select';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatOptionModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { LibraryProjectComponent } from '../library-project/library-project.component';
-import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ArchiveProjectResponse } from '../../../domain/archiveProjectResponse';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
-import { of } from 'rxjs';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
+import { ArchiveProjectService } from '../../../services/archive-project.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { fakeAsyncResponse } from '../../../student/student-run-list/student-run-list.component.spec';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { LibraryProject } from '../libraryProject';
+import { LibraryService } from '../../../services/library.service';
+import { of } from 'rxjs';
+import { PersonalLibraryComponent } from './personal-library.component';
+import { PersonalLibraryHarness } from './personal-library.harness';
 import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
@@ -42,23 +29,7 @@ const projectId5 = 5;
 describe('PersonalLibraryComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PersonalLibraryComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        ArchiveProjectsButtonComponent,
-        BrowserAnimationsModule,
-        FormsModule,
-        LibraryProjectComponent,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatOptionModule,
-        MatPaginatorModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        OverlayModule,
-        SelectAllItemsCheckboxComponent
-      ],
+      imports: [BrowserAnimationsModule, PersonalLibraryComponent],
       providers: [
         ArchiveProjectService,
         LibraryService,
@@ -72,6 +43,9 @@ describe('PersonalLibraryComponent', () => {
   beforeEach(async () => {
     fixture = TestBed.createComponent(PersonalLibraryComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(LibraryService), 'getFilterValues').and.returnValue(
+      new ProjectFilterValues()
+    );
     setUpFiveProjects();
     archiveProjectService = TestBed.inject(ArchiveProjectService);
     http = TestBed.inject(HttpClient);
@@ -266,17 +240,7 @@ function projectsAreSelected_performSearch_allProjectsAreUnselected() {
       it('unselects all projects', async () => {
         await (await harness.getSelectAllCheckbox()).check();
         expect(await harness.getSelectedProjectIds()).toEqual([projectId5, projectId4, projectId3]);
-        component.filterUpdated(
-          Object.assign(new ProjectFilterValues(), {
-            disciplineValue: [],
-            featureValue: [],
-            gradeLevelValue: [],
-            publicUnitTypeValue: [],
-            searchValue: 'world',
-            standardValue: [],
-            unitTypeValue: []
-          })
-        );
+        component.filterUpdated();
         expect(await harness.getSelectedProjectIds()).toEqual([]);
       });
     });

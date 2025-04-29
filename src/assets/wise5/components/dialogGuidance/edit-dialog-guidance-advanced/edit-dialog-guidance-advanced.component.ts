@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CRaterIdea } from '../../common/cRater/CRaterIdea';
+import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 
 @Component({
@@ -8,5 +8,5 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
   standalone: false
 })
 export class EditDialogGuidanceAdvancedComponent extends EditAdvancedComponentComponent {
-  @Input() ideaDescriptions: CRaterIdea[] = [];
+  @Input() cRaterRubric: CRaterRubric;
 }
