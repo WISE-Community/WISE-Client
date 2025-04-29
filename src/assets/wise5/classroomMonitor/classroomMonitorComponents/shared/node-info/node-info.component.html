@@ -71,6 +71,17 @@
             [componentType]="component.type"
           />
         }
+        @if (component.type === 'Match') {
+          <match-summary-display
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [studentDataType]="'responses'"
+            [source]="source"
+            [doRender]="true"
+            [componentType]="component.type"
+          />
+        }
       </div>
     }
   </mat-card-content>

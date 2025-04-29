@@ -8,6 +8,7 @@ import { IdeasSummaryComponent } from '../../../../directives/teacher-summary-di
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { isMatchingPeriods } from '../../../../common/period/period';
 import { MatCardModule } from '@angular/material/card';
+import { MatchSummaryDisplayComponent } from '../../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { Node } from '../../../../common/Node';
@@ -23,6 +24,7 @@ import { TeacherSummaryDisplayComponent } from '../../../../directives/teacher-s
     FlexLayoutModule,
     IdeasSummaryComponent,
     MatCardModule,
+    MatchSummaryDisplayComponent,
     MatIconModule,
     MatDividerModule,
     PreviewComponentComponent,

@@ -1,0 +1,6 @@
+@for (bucket of getBucketData(); track $index) {
+  <h1>{{ bucket.value }}</h1>
+  @for (choice of bucket.choices; track $index) {
+    <h2>{{ choice.getId() }} - {{ choice.getCount() }}</h2>
+  }
+}

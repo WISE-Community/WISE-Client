@@ -28,6 +28,7 @@ export class SummaryService extends ComponentService {
     ];
     this.componentsWithResponsesSummary = [
       'DialogGuidance',
+      'Match',
       'MultipleChoice',
       'OpenResponse',
       'Table'
