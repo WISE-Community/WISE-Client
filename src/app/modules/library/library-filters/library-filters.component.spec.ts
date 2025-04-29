@@ -30,7 +30,6 @@ describe('LibraryFiltersComponent', () => {
     projects = sampleLibraryProjects;
     fixture = TestBed.createComponent(LibraryFiltersComponent);
     component = fixture.componentInstance;
-    component.filterValues = new ProjectFilterValues();
     component['libraryProjects'] = projects;
     component.ngOnChanges({ projects: new SimpleChange(null, projects, true) });
     fixture.detectChanges();

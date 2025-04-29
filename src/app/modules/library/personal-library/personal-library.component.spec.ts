@@ -9,10 +9,10 @@ import { LibraryService } from '../../../services/library.service';
 import { of } from 'rxjs';
 import { PersonalLibraryComponent } from './personal-library.component';
 import { PersonalLibraryHarness } from './personal-library.harness';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
@@ -43,7 +43,9 @@ describe('PersonalLibraryComponent', () => {
   beforeEach(async () => {
     fixture = TestBed.createComponent(PersonalLibraryComponent);
     component = fixture.componentInstance;
-    component.filterValues = new ProjectFilterValues();
+    spyOn(TestBed.inject(LibraryService), 'getFilterValues').and.returnValue(
+      new ProjectFilterValues()
+    );
     setUpFiveProjects();
     archiveProjectService = TestBed.inject(ArchiveProjectService);
     http = TestBed.inject(HttpClient);

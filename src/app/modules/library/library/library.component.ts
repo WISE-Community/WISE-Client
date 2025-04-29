@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Directive()
 export abstract class LibraryComponent implements OnInit {
   protected filteredProjects: LibraryProject[] = [];
-  @Input() filterValues: ProjectFilterValues;
+  protected filterValues: ProjectFilterValues;
   protected highIndex: number = 0;
   protected lowIndex: number = 0;
   protected pageSizeOptions: number[] = [12, 24, 48, 96];
@@ -26,6 +26,7 @@ export abstract class LibraryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.filterValues = this.libraryService.getFilterValues();
     this.subscriptions.add(
       this.libraryService.projectFilterValuesSource$.subscribe(() => this.filterUpdated())
     );

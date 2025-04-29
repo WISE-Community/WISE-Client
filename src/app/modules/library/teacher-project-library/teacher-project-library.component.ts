@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { Router } from '@angular/router';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 @Component({
   selector: 'app-teacher-project-library',
@@ -12,7 +11,6 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
   standalone: false
 })
 export class TeacherProjectLibraryComponent implements OnInit {
-  protected filterValues: ProjectFilterValues = new ProjectFilterValues();
   projects: LibraryProject[] = [];
   numberOfPublicProjectsVisible: number = 0;
   numberOfPersonalProjectsVisible: number = 0;
@@ -29,6 +27,7 @@ export class TeacherProjectLibraryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.libraryService.initFilterValues();
     this.libraryService.numberOfPublicProjectsVisible$.subscribe((num) => {
       this.tabs[0].numVisible = num;
     });

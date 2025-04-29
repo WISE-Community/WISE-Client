@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LibraryService {
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
+  private filterValues: ProjectFilterValues;
   private personalProjectsUrl = '/api/project/personal';
   private sharedProjectsUrl = '/api/project/shared';
   private copyProjectUrl = '/api/project/copy';
@@ -136,10 +137,6 @@ export class LibraryService {
     this.projectFilterValuesSource.next(projectFilterValues);
   }
 
-  getFilterValues(): ProjectFilterValues {
-    return this.projectFilterValuesSource.value;
-  }
-
   addPersonalLibraryProject(project: LibraryProject) {
     this.newProjectSource.next(project);
     this.router.navigate(['/teacher/home/library/personal']);
@@ -164,5 +161,13 @@ export class LibraryService {
     this.personalLibraryProjectsSource.next([]);
     this.sharedLibraryProjectsSource.next([]);
     this.projectFilterValuesSource.next(new ProjectFilterValues());
+  }
+
+  getFilterValues(): ProjectFilterValues {
+    return this.filterValues;
+  }
+
+  initFilterValues(): void {
+    this.filterValues = new ProjectFilterValues();
   }
 }

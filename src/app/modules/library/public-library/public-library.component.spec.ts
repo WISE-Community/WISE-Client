@@ -23,14 +23,14 @@ describe('PublicLibraryComponent', () => {
           officialLibraryProjectsSource$: of([
             { id: 1, name: 'P1' },
             { id: 3, name: 'P3' }
-          ] as LibraryProject[])
+          ] as LibraryProject[]),
+          getFilterValues: () => new ProjectFilterValues()
         })
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PublicLibraryComponent);
     component = fixture.componentInstance;
-    component.filterValues = new ProjectFilterValues();
     fixture.detectChanges();
   });
 

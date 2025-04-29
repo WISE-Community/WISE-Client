@@ -20,6 +20,9 @@ export class MockLibraryService {
   implementationModelOptions: LibraryGroup[] = [];
   numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
   getOfficialLibraryProjects() {}
+  getFilterValues() {
+    return new ProjectFilterValues();
+  }
 }
 
 describe('OfficialLibraryComponent', () => {
@@ -37,7 +40,6 @@ describe('OfficialLibraryComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OfficialLibraryComponent);
     component = fixture.componentInstance;
-    component.filterValues = new ProjectFilterValues();
     component.projects = [];
     fixture.detectChanges();
   });
