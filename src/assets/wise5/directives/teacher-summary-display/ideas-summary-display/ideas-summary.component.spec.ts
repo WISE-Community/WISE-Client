@@ -1,18 +1,18 @@
-import { AnnotationService } from '../../services/annotationService';
+import { AnnotationService } from '../../../services/annotationService';
 import { ComponentFixture } from '@angular/core/testing';
-import { ComponentState } from '../../../../app/domain/componentState';
-import { ConfigService } from '../../services/configService';
-import { CRaterIdea } from '../../components/common/cRater/CRaterIdea';
-import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';
-import { CRaterService } from '../../services/cRaterService';
+import { ComponentState } from '../../../../../app/domain/componentState';
+import { ConfigService } from '../../../services/configService';
+import { CRaterIdea } from '../../../components/common/cRater/CRaterIdea';
+import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
+import { CRaterService } from '../../../services/cRaterService';
 import { IdeasSummaryComponent } from './ideas-summary.component';
 import { MockProviders } from 'ng-mocks';
 import { Observable, of } from 'rxjs';
-import { SummaryService } from '../../components/summary/summaryService';
-import { TeacherDataService } from '../../services/teacherDataService';
-import { TeacherProjectService } from '../../services/teacherProjectService';
+import { SummaryService } from '../../../components/summary/summaryService';
+import { TeacherDataService } from '../../../services/teacherDataService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TestBed } from '@angular/core/testing';
-import { Annotation } from '../../common/Annotation';
+import { Annotation } from '../../../common/Annotation';
 
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;
