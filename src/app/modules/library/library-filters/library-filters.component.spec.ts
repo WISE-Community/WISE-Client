@@ -22,7 +22,7 @@ describe('LibraryFiltersComponent', () => {
           communityLibraryProjectsSource$: of([] as LibraryProject[]),
           sharedLibraryProjectsSource$: of([] as LibraryProject[]),
           personalLibraryProjectsSource$: of([] as LibraryProject[]),
-          projectFilterValuesSource$: of({} as ProjectFilterValues),
+          filterValuesUpdated$: of(),
           getFilterValues: () => new ProjectFilterValues()
         })
       ]
@@ -45,14 +45,14 @@ describe('LibraryFiltersComponent', () => {
     expect(component['disciplineOptions'].length).toBe(2);
   });
 
-  it('should call LibraryService.setFilterValues when the search value changes', waitForAsync(() => {
-    const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
+  it('should call LibraryService.filterValuesUpdated when the search value changes', waitForAsync(() => {
+    const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'filterValuesUpdated');
     component['searchUpdated']('photo');
     expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
   }));
 
-  it('should call LibraryService.setFilterValues when a filter value changes', waitForAsync(() => {
-    const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'setFilterValues');
+  it('should call LibraryService.filterValuesUpdated when a filter value changes', waitForAsync(() => {
+    const libraryServiceFilterValuesSpy = spyOn(TestBed.get(LibraryService), 'filterValuesUpdated');
     component['filterUpdated'](['Earth Sciences', 'Physical Sciences'], 'discipline');
     expect(libraryServiceFilterValuesSpy).toHaveBeenCalled();
   }));

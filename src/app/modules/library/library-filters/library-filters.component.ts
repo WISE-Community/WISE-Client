@@ -171,7 +171,7 @@ export class LibraryFiltersComponent {
   }
 
   private emitFilterValues(): void {
-    this.libraryService.setFilterValues(this.filterValues);
+    this.libraryService.filterValuesUpdated();
   }
 
   protected clearFilterValues(): void {

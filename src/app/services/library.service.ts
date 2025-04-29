@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LibraryGroup } from '../modules/library/libraryGroup';
 import { LibraryProject } from '../modules/library/libraryProject';
@@ -12,6 +12,8 @@ export class LibraryService {
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
   private filterValues: ProjectFilterValues;
+  private filterValuesUpdatedSource = new Subject<void>();
+  public filterValuesUpdated$ = this.filterValuesUpdatedSource.asObservable();
   private personalProjectsUrl = '/api/project/personal';
   private sharedProjectsUrl = '/api/project/shared';
   private copyProjectUrl = '/api/project/copy';
@@ -27,10 +29,6 @@ export class LibraryService {
   public personalLibraryProjectsSource$ = this.personalLibraryProjectsSource.asObservable();
   private sharedLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
   public sharedLibraryProjectsSource$ = this.sharedLibraryProjectsSource.asObservable();
-  private projectFilterValuesSource = new BehaviorSubject<ProjectFilterValues>(
-    new ProjectFilterValues()
-  );
-  public projectFilterValuesSource$ = this.projectFilterValuesSource.asObservable();
   private newProjectSource = new BehaviorSubject<LibraryProject>(null);
   public newProjectSource$ = this.newProjectSource.asObservable();
   public numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
@@ -133,8 +131,8 @@ export class LibraryService {
     return this.http.post(this.copyProjectUrl, body, { headers: headers });
   }
 
-  setFilterValues(projectFilterValues: ProjectFilterValues) {
-    this.projectFilterValuesSource.next(projectFilterValues);
+  filterValuesUpdated(): void {
+    this.filterValuesUpdatedSource.next();
   }
 
   addPersonalLibraryProject(project: LibraryProject) {
@@ -160,7 +158,7 @@ export class LibraryService {
     this.communityLibraryProjectsSource.next([]);
     this.personalLibraryProjectsSource.next([]);
     this.sharedLibraryProjectsSource.next([]);
-    this.projectFilterValuesSource.next(new ProjectFilterValues());
+    this.filterValuesUpdatedSource.next();
   }
 
   getFilterValues(): ProjectFilterValues {

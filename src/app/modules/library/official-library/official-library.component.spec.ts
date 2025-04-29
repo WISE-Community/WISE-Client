@@ -5,18 +5,14 @@ import { LibraryService } from '../../../services/library.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryGroup } from '../libraryGroup';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 export class MockLibraryService {
   libraryGroupsSource$ = fakeAsyncResponse({});
   officialLibraryProjectsSource$ = fakeAsyncResponse([]);
-  projectFilterValuesSource$ = fakeAsyncResponse({
-    searchValue: '',
-    disciplineValue: [],
-    standardValue: []
-  });
+  filterValuesUpdated$ = of();
   implementationModelOptions: LibraryGroup[] = [];
   numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
   getOfficialLibraryProjects() {}

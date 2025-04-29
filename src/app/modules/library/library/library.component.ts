@@ -28,7 +28,7 @@ export abstract class LibraryComponent implements OnInit {
   ngOnInit(): void {
     this.filterValues = this.libraryService.getFilterValues();
     this.subscriptions.add(
-      this.libraryService.projectFilterValuesSource$.subscribe(() => this.filterUpdated())
+      this.libraryService.filterValuesUpdated$.subscribe(() => this.filterUpdated())
     );
   }
 

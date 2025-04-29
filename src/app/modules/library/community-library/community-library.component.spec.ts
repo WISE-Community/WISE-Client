@@ -4,18 +4,14 @@ import { fakeAsyncResponse } from '../../../student/student-run-list/student-run
 import { LibraryService } from '../../../services/library.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 export class MockLibraryService {
   implementationModelOptions = [];
   communityLibraryProjectsSource$ = fakeAsyncResponse([]);
-  projectFilterValuesSource$ = fakeAsyncResponse({
-    searchValue: '',
-    disciplineValue: [],
-    standardValue: []
-  });
+  filterValuesUpdated$ = of();
   numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
   getFilterValues() {
     return new ProjectFilterValues();
