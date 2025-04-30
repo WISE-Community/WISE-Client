@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LibraryService {
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
-  private filterValues: ProjectFilterValues = new ProjectFilterValues();
+  public filterValues: ProjectFilterValues = new ProjectFilterValues();
   private filterValuesUpdatedSource = new Subject<void>();
   public filterValuesUpdated$ = this.filterValuesUpdatedSource.asObservable();
   private personalProjectsUrl = '/api/project/personal';
