@@ -25,9 +25,9 @@ export class LibraryService {
   public officialLibraryProjectsSource$ = this.officialLibraryProjectsSource.asObservable();
   private communityLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
   public communityLibraryProjectsSource$ = this.communityLibraryProjectsSource.asObservable();
-  private personalLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
+  private personalLibraryProjectsSource = new Subject<LibraryProject[]>();
   public personalLibraryProjectsSource$ = this.personalLibraryProjectsSource.asObservable();
-  private sharedLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
+  private sharedLibraryProjectsSource = new Subject<LibraryProject[]>();
   public sharedLibraryProjectsSource$ = this.sharedLibraryProjectsSource.asObservable();
   private newProjectSource = new BehaviorSubject<LibraryProject>(null);
   public newProjectSource$ = this.newProjectSource.asObservable();
