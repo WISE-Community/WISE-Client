@@ -39,9 +39,7 @@ export class LibraryService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {
-    this.router = router;
-  }
+  ) {}
 
   getOfficialLibraryProjects(): void {
     this.http.get<LibraryGroup[]>(this.libraryGroupsUrl).subscribe((libraryGroups) => {
