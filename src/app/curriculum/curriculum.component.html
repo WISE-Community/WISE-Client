@@ -27,16 +27,25 @@
         </div>
         <div class="md:w-2/3 lg:w-3/4">
           @if (showMyUnits) {
-            <mat-tab-group dynamicHeight>
-              <mat-tab [label]="getPublicTabLabel()">
-                <public-library />
-              </mat-tab>
-              <mat-tab [label]="getMyUnitsTabLabel()">
-                <app-personal-library />
-              </mat-tab>
-            </mat-tab-group>
+            <nav
+              mat-tab-nav-bar
+              i18n-aria-label
+              aria-label="Unit library navigation"
+              [tabPanel]="tabPanel"
+            >
+              <a mat-tab-link routerLink="/curriculum/public" [active]="isPublicRoute()">
+                {{ getPublicTabLabel() }}
+              </a>
+              <a mat-tab-link routerLink="/curriculum/personal" [active]="isPersonalRoute()">
+                {{ getMyUnitsTabLabel() }}
+              </a>
+            </nav>
+            <mat-tab-nav-panel #tabPanel>
+              <public-library [hidden]="!isPublicRoute()"></public-library>
+              <app-personal-library [hidden]="!isPersonalRoute()"></app-personal-library>
+            </mat-tab-nav-panel>
           } @else {
-            <public-library />
+            <public-library></public-library>
           }
         </div>
       </div>

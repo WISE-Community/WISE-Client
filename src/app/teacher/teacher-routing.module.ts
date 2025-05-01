@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AuthGuard } from './auth.guard';
 import { TeacherComponent } from './teacher.component';
 import { TeacherHomeComponent } from './teacher-home/teacher-home.component';
@@ -19,10 +18,8 @@ const teacherRoutes: Routes = [
         path: 'home',
         component: TeacherHomeComponent,
         children: [
-          {
-            path: 'library',
-            redirectTo: '/curriculum'
-          },
+          { path: 'library/personal', redirectTo: '/curriculum/personal' },
+          { path: 'library', redirectTo: '/curriculum' },
           { path: 'schedule', redirectTo: '' }
         ]
       },
