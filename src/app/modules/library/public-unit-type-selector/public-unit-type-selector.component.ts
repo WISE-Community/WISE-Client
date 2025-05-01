@@ -39,7 +39,7 @@ export class PublicUnitTypeSelectorComponent {
   ) {}
 
   ngOnInit(): void {
-    this.filterValues = this.libraryService.getFilterValues();
+    this.filterValues = this.libraryService.filterValues;
   }
 
   protected updatePublicUnitType(): void {

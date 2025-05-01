@@ -23,7 +23,7 @@ describe('LibraryFiltersComponent', () => {
           sharedLibraryProjectsSource$: of([] as LibraryProject[]),
           personalLibraryProjectsSource$: of([] as LibraryProject[]),
           filterValuesUpdated$: of(),
-          getFilterValues: () => new ProjectFilterValues()
+          filterValues: new ProjectFilterValues()
         })
       ]
     });

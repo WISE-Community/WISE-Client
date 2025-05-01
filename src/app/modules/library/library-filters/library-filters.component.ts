@@ -33,7 +33,6 @@ export class LibraryFiltersComponent {
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected featureOptions: Feature[] = [];
-  protected filterValues: ProjectFilterValues;
   protected gradeLevelOptions: GradeLevel[] = [];
   @Input() showAdvancedFilteringOptions: boolean = true;
   @Input() isSplitScreen: boolean = false;
@@ -52,7 +51,6 @@ export class LibraryFiltersComponent {
     private libraryService: LibraryService,
     private utilService: UtilService
   ) {
-    this.filterValues = this.libraryService.getFilterValues();
     libraryService.officialLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
       this.libraryProjects = projects;
       this.populateFilterOptions();
@@ -145,29 +143,33 @@ export class LibraryFiltersComponent {
   }
 
   protected searchUpdated(value: string): void {
-    this.filterValues.searchValue = value.toLocaleLowerCase();
+    this.getFilterValues().searchValue = value.toLocaleLowerCase();
     this.emitFilterValues();
   }
 
   protected filterUpdated(value: any[], context: string = ''): void {
     switch (context) {
       case 'discipline':
-        this.filterValues.disciplineValue = value;
+        this.getFilterValues().disciplineValue = value;
         break;
       case 'gradeLevel':
-        this.filterValues.gradeLevelValue = value;
+        this.getFilterValues().gradeLevelValue = value;
         break;
       case 'standard':
-        this.filterValues.standardValue = value;
+        this.getFilterValues().standardValue = value;
         break;
       case 'feature':
-        this.filterValues.featureValue = value;
+        this.getFilterValues().featureValue = value;
         break;
       case 'unitType':
-        this.filterValues.unitTypeValue = value;
+        this.getFilterValues().unitTypeValue = value;
         break;
     }
     this.emitFilterValues();
+  }
+
+  protected getFilterValues(): ProjectFilterValues {
+    return this.libraryService.filterValues;
   }
 
   private emitFilterValues(): void {
@@ -175,7 +177,7 @@ export class LibraryFiltersComponent {
   }
 
   protected clearFilterValues(): void {
-    this.filterValues.clear();
+    this.getFilterValues().clear();
     this.emitFilterValues();
   }
 }
