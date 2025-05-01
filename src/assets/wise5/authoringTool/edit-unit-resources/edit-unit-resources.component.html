@@ -16,17 +16,18 @@
     <ng-container *ngTemplateOutlet="addButton; context: { addToTop: true }" />
     <span class="flex-1"></span>
   </h5>
-  <ul>
+  <ul cdkDropList [cdkDropListData]="resources" (cdkDropListDropped)="drop($event)" cdkScrollable>
     @for (
       resource of resources;
       track $index;
       let resourceIndex = $index, first = $first, last = $last
     ) {
-      <li class="resource">
+      <li class="resource" cdkDrag>
         <mat-card appearance="outlined" class="resource-content">
           <div class="flex flex-row flex-wrap gap-2">
             <div class="text-secondary flex flex-col items-center">
               <span class="mat-subtitle-1">{{ resourceIndex + 1 }}</span>
+              <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
             </div>
             <div class="flex flex-col items-start gap-2 flex-1">
               <mat-form-field class="resource-input form-field-no-hint" appearance="fill">
@@ -58,6 +59,28 @@
               >
                 <mat-icon>clear</mat-icon>
               </button>
+              @if (resources.length > 1) {
+                <button
+                  [disabled]="first"
+                  mat-icon-button
+                  i18n-matTooltip
+                  matTooltip="Move up"
+                  matTooltipPosition="before"
+                  (click)="moveUp(resourceIndex)"
+                >
+                  <mat-icon>arrow_upward</mat-icon>
+                </button>
+                <button
+                  [disabled]="last"
+                  mat-icon-button
+                  i18n-matTooltip
+                  matTooltip="Move down"
+                  matTooltipPosition="before"
+                  (click)="moveDown(resourceIndex)"
+                >
+                  <mat-icon>arrow_downward</mat-icon>
+                </button>
+              }
             </div>
           </div>
         </mat-card>

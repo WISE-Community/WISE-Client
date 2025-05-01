@@ -35,3 +35,13 @@ li {
 .mat-subtitle-1 {
   margin: 0;
 }
+
+.cdk-drag-handle {
+  cursor: move;
+  margin-top: 25px;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
+}
+
