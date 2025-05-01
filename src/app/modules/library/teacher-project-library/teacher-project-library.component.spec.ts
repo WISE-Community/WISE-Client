@@ -19,9 +19,7 @@ export class MockLibraryService {
   getCommunityLibraryProjects() {}
   getPersonalLibraryProjects() {}
   getSharedLibraryProjects() {}
-  getFilterValues() {
-    return new ProjectFilterValues();
-  }
+  filterValues = new ProjectFilterValues();
   initFilterValues() {}
 }
 

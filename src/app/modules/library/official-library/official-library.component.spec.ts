@@ -16,9 +16,7 @@ export class MockLibraryService {
   implementationModelOptions: LibraryGroup[] = [];
   numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
   getOfficialLibraryProjects() {}
-  getFilterValues() {
-    return new ProjectFilterValues();
-  }
+  filterValues = new ProjectFilterValues();
 }
 
 describe('OfficialLibraryComponent', () => {

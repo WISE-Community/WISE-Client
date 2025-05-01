@@ -18,7 +18,7 @@ export class Project {
   run: Run;
   sharedOwners: User[] = [];
   selected: boolean;
-  tags: Tag[];
+  tags: Tag[] = [];
   thumbStyle: any;
   uri: String;
   wiseVersion: number;
@@ -95,11 +95,11 @@ export class Project {
   }
 
   hasTagWithText(tagText: string): boolean {
-    return this.tags?.some((tag: Tag) => tag.text === tagText);
+    return this.tags.some((tag: Tag) => tag.text === tagText);
   }
 
   hasTag(tag: Tag): boolean {
-    return this.tags?.some((projectTag: Tag) => projectTag.id === tag.id);
+    return this.tags.some((projectTag: Tag) => projectTag.id === tag.id);
   }
 
   updateArchivedStatus(archived: boolean, tag: Tag): void {

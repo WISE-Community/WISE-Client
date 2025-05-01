@@ -24,7 +24,7 @@ describe('PublicLibraryComponent', () => {
             { id: 1, name: 'P1' },
             { id: 3, name: 'P3' }
           ] as LibraryProject[]),
-          getFilterValues: () => new ProjectFilterValues()
+          filterValues: new ProjectFilterValues()
         })
       ]
     }).compileComponents();
