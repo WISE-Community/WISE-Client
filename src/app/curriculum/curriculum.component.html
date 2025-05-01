@@ -1,19 +1,20 @@
 <div class="main app-background">
   <div class="content">
     <header class="content__header">
-      <div class="flex flex-col sm:flex-row sm:justify-between mb-4 sm:mb-0">
+      <div class="flex flex-wrap justify-between mb-4 gap-2">
         <h1 class="accent flex items-center gap-2 mat-headline-4">
           <mat-icon>menu_book</mat-icon>
           <span i18n>Unit Library</span>
         </h1>
         @if (showMyUnits) {
-          <a
-            mat-raised-button
-            color="primary"
-            class="self-start"
-            href="{{ configService.getAuthoringToolLink() }}"
-            ><mat-icon>edit_square</mat-icon> <span i18n>Authoring Tool</span></a
-          >
+          <div class="self-start flex gap-2">
+            <a mat-raised-button color="primary" routerLink="/teacher"
+              ><mat-icon>calendar_month</mat-icon> <span i18n>Class Schedule</span></a
+            >
+            <a mat-raised-button color="primary" href="{{ configService.getAuthoringToolLink() }}"
+              ><mat-icon>edit_square</mat-icon> <span i18n>Authoring Tool</span></a
+            >
+          </div>
         }
       </div>
       <p class="pb-4" i18n>
