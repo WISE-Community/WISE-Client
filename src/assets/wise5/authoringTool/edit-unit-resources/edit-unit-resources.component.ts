@@ -74,7 +74,7 @@ export class EditUnitResourcesComponent {
 
   protected moveRuleItem(previousIndex: number, currentIndex: number): void {
     moveItemInArray(this.resources, previousIndex, currentIndex);
-    this.projectService.nodeChanged();
+    this.projectService.saveProject();
   }
 
   protected addNewResource(addToTop: boolean): void {
