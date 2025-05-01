@@ -14,7 +14,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-links/header-links.component.html</context>
-          <context context-type="linenumber">19,24</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
@@ -2328,7 +2328,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Unit Library</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
-          <context context-type="linenumber">7,11</context>
+          <context context-type="linenumber">7,10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
@@ -2337,6 +2337,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.ts</context>
           <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4778985982508820766" datatype="html">
+        <source>Class Schedule</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
+          <context context-type="linenumber">5,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2584586546524894002" datatype="html">
@@ -2366,21 +2381,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Explore our curriculum library to find units and resources to use with your classes! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
-          <context context-type="linenumber">20,23</context>
+          <context context-type="linenumber">21,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6744748111200794404" datatype="html">
+        <source>Unit library navigation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
+          <context context-type="linenumber">34,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1326396148114021147" datatype="html">
         <source>Public (<x id="PH" equiv-text="this.numPublicUnitsVisible"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5646257907586096558" datatype="html">
         <source>My Units (<x id="PH" equiv-text="this.numMyUnitsVisible"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5115344169131680845" datatype="html">
@@ -5213,7 +5235,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-links/header-links.component.html</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">22,23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
@@ -5494,7 +5516,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-links/header-links.component.html</context>
-          <context context-type="linenumber">27,29</context>
+          <context context-type="linenumber">21,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
@@ -5666,7 +5688,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Research</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-links/header-links.component.html</context>
-          <context context-type="linenumber">30,33</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
@@ -9516,17 +9538,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/tag/tag.component.html</context>
           <context context-type="linenumber">9,12</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4778985982508820766" datatype="html">
-        <source>Class Schedule</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.ts</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
-          <context context-type="linenumber">5,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1298234632354863914" datatype="html">
