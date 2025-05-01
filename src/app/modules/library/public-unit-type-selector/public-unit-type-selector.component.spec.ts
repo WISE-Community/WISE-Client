@@ -17,15 +17,16 @@ describe('PublicUnitTypeSelectorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PublicUnitTypeSelectorComponent],
-      providers: [MockProvider(LibraryService)]
+      providers: [
+        MockProvider(LibraryService, {
+          filterValues: new ProjectFilterValues()
+        })
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PublicUnitTypeSelectorComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
-    spyOn(TestBed.inject(LibraryService), 'getFilterValues').and.returnValue({
-      publicUnitTypeValue: []
-    } as ProjectFilterValues);
     fixture.detectChanges();
     [checkbox1, checkbox2] = await loader.getAllHarnesses(MatCheckboxHarness);
   });
@@ -39,9 +40,7 @@ describe('PublicUnitTypeSelectorComponent', () => {
   it('should update filterValues and emit event when checkbox is clicked', async () => {
     const spy = spyOn(component.publicUnitTypeUpdatedEvent, 'emit');
     await checkbox1.check();
-    expect(TestBed.inject(LibraryService).getFilterValues().publicUnitTypeValue).toEqual([
-      'wiseTested'
-    ]);
+    expect(TestBed.inject(LibraryService).filterValues.publicUnitTypeValue).toEqual(['wiseTested']);
     expect(spy).toHaveBeenCalled();
   });
 

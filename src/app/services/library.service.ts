@@ -159,10 +159,6 @@ export class LibraryService {
     this.filterValuesUpdatedSource.next();
   }
 
-  getFilterValues(): ProjectFilterValues {
-    return this.filterValues;
-  }
-
   initFilterValues(): void {
     this.filterValues = new ProjectFilterValues();
   }

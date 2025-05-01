@@ -13,9 +13,7 @@ export class MockLibraryService {
   communityLibraryProjectsSource$ = fakeAsyncResponse([]);
   filterValuesUpdated$ = of();
   numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
-  getFilterValues() {
-    return new ProjectFilterValues();
-  }
+  filterValues = new ProjectFilterValues();
 }
 
 describe('CommunityLibraryComponent', () => {

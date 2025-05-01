@@ -12,7 +12,6 @@ import { PersonalLibraryHarness } from './personal-library.harness';
 import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
@@ -43,9 +42,6 @@ describe('PersonalLibraryComponent', () => {
   beforeEach(async () => {
     fixture = TestBed.createComponent(PersonalLibraryComponent);
     component = fixture.componentInstance;
-    spyOn(TestBed.inject(LibraryService), 'getFilterValues').and.returnValue(
-      new ProjectFilterValues()
-    );
     setUpFiveProjects();
     archiveProjectService = TestBed.inject(ArchiveProjectService);
     http = TestBed.inject(HttpClient);
