@@ -286,10 +286,6 @@
           <context context-type="linenumber">198,202</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library-details.html</context>
-          <context context-type="linenumber">15,17</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-unit-type-selector/community-library-details.html</context>
           <context context-type="linenumber">17,19</context>
         </context-group>
@@ -1698,10 +1694,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component.html</context>
           <context context-type="linenumber">19,22</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library-details.html</context>
-          <context context-type="linenumber">1,5</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
@@ -6194,20 +6186,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/official-library/official-library.component.html</context>
           <context context-type="linenumber">15,18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8175874021137766782" datatype="html">
-        <source> The &quot;My Units&quot; library contains curriculum units that you own or that have been shared with you by other WISE users. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library-details.html</context>
-          <context context-type="linenumber">5,9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5651875336308908727" datatype="html">
-        <source> Units that you create using the WISE Authoring Tool will appear here. Any units that you copy will also be listed here. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/personal-library/personal-library-details.html</context>
-          <context context-type="linenumber">9,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8204176479746810612" datatype="html">
