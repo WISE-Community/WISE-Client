@@ -28,7 +28,7 @@ export class MatchSummaryDisplayDifferentiatorComponent {
   ngOnInit(): void {
     this.setComponentContent();
     this.isOrderedMatch = this.componentContent.feedback.some((bucket) =>
-      bucket.choices.some((choice) => [true, false].includes(choice.position))
+      bucket.choices.some((choice) => choice.position !== null)
     );
   }
 

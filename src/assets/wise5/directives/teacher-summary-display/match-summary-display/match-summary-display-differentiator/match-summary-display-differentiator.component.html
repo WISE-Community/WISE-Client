@@ -1,24 +1,24 @@
 @if (isOrderedMatch) {
   <ordered-match-summary-display
     [nodeId]="nodeId"
-    [componentId]="component.id"
+    [componentId]="componentId"
     [periodId]="periodId"
-    [studentDataType]="'responses'"
+    [studentDataType]="studentDataType"
     [source]="source"
-    [doRender]="true"
-    [componentType]="component.type"
+    [doRender]="doRender"
+    [componentType]="componentType"
     [isOrderedMatch]="true"
+    [componentContent]="componentContent"
   />
 } @else {
   <unordered-match-summary-display
     [nodeId]="nodeId"
-    [componentId]="component.id"
+    [componentId]="componentId"
     [periodId]="periodId"
-    [studentDataType]="'responses'"
+    [studentDataType]="studentDataType"
     [source]="source"
-    [doRender]="true"
-    [componentType]="component.type"
+    [doRender]="doRender"
+    [componentType]="componentType"
     [isOrderedMatch]="false"
-    [componentContent]="componentContent"
   />
 }

@@ -18,7 +18,6 @@ export class MatchSummaryData extends SummaryData {
     componentStates.forEach((componentState) => {
       componentState.studentData.buckets.forEach((bucket) => {
         bucket.items.forEach((item) => {
-          console.log(item);
           this.extractChoiceDataPerBucket(item.value, bucket.value);
           this.checkIsOrderedMatch(item.isIncorrectPosition);
         });

@@ -1,5 +1,5 @@
 import { AnnotationService } from '../../../services/annotationService';
-import { Directive, Input } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
@@ -9,7 +9,10 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 
-@Directive()
+@Component({
+  styleUrl: './match-summary-display.component.scss',
+  templateUrl: './match-summary-display.component.html'
+})
 export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent {
   protected bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
@@ -26,15 +29,7 @@ export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplay
     super(annotationService, configService, dataService, projectService, summaryService);
   }
 
-  ngOnInit(): void {
-    this.getLatestWork().subscribe((componentStates) => {
-      this.matchSummaryData = new MatchSummaryData(componentStates);
-      this.setBucketValues();
-      this.setBucketShowMore();
-    });
-  }
-
-  private setBucketValues(): void {
+  protected setBucketValues(): void {
     this.matchSummaryData
       .getDataPoints()
       .map(this.asMatchSummaryDataPoint)
@@ -54,8 +49,10 @@ export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplay
         choices: this.getBucketDataByValue(bucketValue)
       })
     );
-    return buckets;
+    return buckets.filter((bucket) => this.showBucket(bucket.value));
   }
+
+  protected abstract showBucket(bucketValue: string): boolean;
 
   private getBucketDataByValue(bucketValue: string): MatchSummaryDataPoint[] {
     return this.matchSummaryData
@@ -70,7 +67,7 @@ export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplay
     choiceB: MatchSummaryDataPoint
   ): number;
 
-  private setBucketShowMore(): void {
+  protected setBucketShowMore(): void {
     this.bucketValues.forEach((value) => this.bucketsShowMore.set(value, false));
   }
 
