@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LibraryGroupThumbsComponent } from './library-group-thumbs/library-group-thumbs.component';
 import { LibraryProjectComponent } from './library-project/library-project.component';
 import { LibraryProjectDetailsComponent } from './library-project-details/library-project-details.component';
-import { LibraryService } from '../../services/library.service';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -110,7 +109,6 @@ const materialModules = [
   ],
   providers: [
     ColorService,
-    LibraryService,
     { provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl },
     ProjectTagService
   ]
