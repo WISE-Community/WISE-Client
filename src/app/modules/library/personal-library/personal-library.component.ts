@@ -9,7 +9,7 @@ import { LibraryComponent } from '../library/library.component';
 import { LibraryProject } from '../libraryProject';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { LibraryService } from '../../../services/library.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -31,7 +31,6 @@ import { Tag } from '../../../domain/tag';
     MatDividerModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatRadioModule,
     MatSelectModule,
     SelectAllItemsCheckboxComponent,
     SelectTagsComponent
