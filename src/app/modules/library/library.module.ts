@@ -30,10 +30,7 @@ import { TimelineModule } from '../timeline/timeline.module';
 import { LibraryFiltersComponent } from './library-filters/library-filters.component';
 import { HomePageProjectLibraryComponent } from './home-page-project-library/home-page-project-library.component';
 import { OfficialLibraryComponent } from './official-library/official-library.component';
-import {
-  PersonalLibraryComponent,
-  PersonalLibraryDetailsComponent
-} from './personal-library/personal-library.component';
+import { PersonalLibraryComponent } from './personal-library/personal-library.component';
 import { ShareProjectDialogComponent } from './share-project-dialog/share-project-dialog.component';
 import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-dialog.component';
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
@@ -100,7 +97,6 @@ const materialModules = [
     LibraryGroupThumbsComponent,
     HomePageProjectLibraryComponent,
     OfficialLibraryComponent,
-    PersonalLibraryDetailsComponent,
     ShareProjectDialogComponent,
     CopyProjectDialogComponent
   ],

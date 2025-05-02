@@ -124,10 +124,6 @@ export class PersonalLibraryComponent extends LibraryComponent {
     return this.libraryService.numberOfPersonalProjectsVisible;
   }
 
-  protected getDetailsComponent(): any {
-    return PersonalLibraryDetailsComponent;
-  }
-
   public filterUpdated(): void {
     super.filterUpdated();
     this.filteredProjects = this.filteredProjects.filter(
@@ -192,21 +188,5 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected removeTag(tag: Tag): void {
     this.selectedTags = this.selectedTags.filter((selectedTag: Tag) => selectedTag.id !== tag.id);
     this.filterUpdated();
-  }
-}
-
-@Component({
-  selector: 'personal-library-details',
-  templateUrl: 'personal-library-details.html',
-  standalone: false
-})
-export class PersonalLibraryDetailsComponent {
-  constructor(
-    public dialogRef: MatDialogRef<PersonalLibraryDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-
-  close(): void {
-    this.dialogRef.close();
   }
 }
