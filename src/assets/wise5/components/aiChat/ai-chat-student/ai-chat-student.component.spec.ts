@@ -16,6 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { By } from '@angular/platform-browser';
 
 describe('AiChatStudentComponent', () => {
   let component: AiChatStudentComponent;
@@ -23,8 +26,9 @@ describe('AiChatStudentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [AiChatStudentComponent],
-    imports: [AiChatModule,
+      declarations: [AiChatStudentComponent],
+      imports: [
+        AiChatModule,
         BrowserAnimationsModule,
         ChatInputComponent,
         ComponentHeaderComponent,
@@ -34,9 +38,14 @@ describe('AiChatStudentComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSnackBarModule,
-        StudentTeacherCommonServicesModule],
-    providers: [AiChatService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        AiChatService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     fixture = TestBed.createComponent(AiChatStudentComponent);
     component = fixture.componentInstance;
     component.component = new AiChatComponent({ id: 'component1', type: 'aiChat' }, 'node1');
@@ -45,7 +54,12 @@ describe('AiChatStudentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should not show response from a connected component', async () => {
+    component.processConnectedComponentState({ studentData: { response: 'test response' } });
+    const loader = TestbedHarnessEnvironment.loader(fixture);
+    await (await loader.getHarness(MatButtonHarness)).click();
+    const messages = fixture.debugElement.queryAll(By.css('a-chat-student-message'));
+    expect(messages.length).toBe(0);
     expect(component).toBeTruthy();
   });
 });
