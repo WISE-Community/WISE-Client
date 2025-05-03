@@ -49,10 +49,8 @@ export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplay
         choices: this.getBucketDataByValue(bucketValue)
       })
     );
-    return buckets.filter((bucket) => this.showBucket(bucket.value));
+    return buckets;
   }
-
-  protected abstract showBucket(bucketValue: string): boolean;
 
   private getBucketDataByValue(bucketValue: string): MatchSummaryDataPoint[] {
     return this.matchSummaryData

@@ -1,10 +1,6 @@
 @for (bucket of getBucketData(); track $index) {
   <div class="bucket">
     <h1>{{ bucket.value }}</h1>
-    @if (isOrderedMatch) {
-      <h2>ORDERED MATCH</h2>
-      <h3>{{ getBucketCorrectOrderStats(bucket.value) }}</h3>
-    }
     @for (choice of bucket.choices; track $index) {
       @if ($index < 3 || getBucketShowMore(bucket.value)) {
         <div class="match-item">

@@ -23,8 +23,4 @@ export class UnorderedMatchSummaryDisplayComponent extends MatchSummaryDisplayCo
   protected sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
     return choiceB.getCount() - choiceA.getCount();
   }
-
-  protected showBucket(bucketValue: string): boolean {
-    return true;
-  }
 }
