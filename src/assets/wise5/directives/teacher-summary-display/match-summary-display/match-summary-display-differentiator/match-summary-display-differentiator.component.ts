@@ -1,21 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { OrderedMatchSummaryDisplayComponent } from '../ordered-match-summary-display/ordered-match-summary-display.component';
-import { UnorderedMatchSummaryDisplayComponent } from '../unordered-match-summary-display/unordered-match-summary-display.component';
-import { CommonModule } from '@angular/common';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { UnorderedMatchSummaryDisplayComponent } from '../unordered-match-summary-display/unordered-match-summary-display.component';
 
 @Component({
-  selector: 'match-summary-display-differentiator',
   imports: [
     CommonModule,
     OrderedMatchSummaryDisplayComponent,
     UnorderedMatchSummaryDisplayComponent
   ],
+  selector: 'match-summary-display-differentiator',
   templateUrl: './match-summary-display-differentiator.component.html'
 })
 export class MatchSummaryDisplayDifferentiatorComponent {
-  @Input() componentId: string;
   protected componentContent: any;
+  @Input() componentId: string;
   protected isOrderedMatch: boolean;
   @Input() nodeId: string;
   @Input() periodId: number;
@@ -33,7 +33,7 @@ export class MatchSummaryDisplayDifferentiatorComponent {
       .find((component) => component.id === this.componentId);
   }
 
-  private setIsOrderedMatch() {
+  private setIsOrderedMatch(): void {
     this.isOrderedMatch = this.componentContent.feedback.some((bucket) =>
       bucket.choices.some((choice) => choice.position !== null)
     );

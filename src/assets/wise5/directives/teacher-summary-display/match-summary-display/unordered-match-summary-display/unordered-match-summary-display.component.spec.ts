@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UnorderedMatchSummaryDisplayComponent } from './unordered-match-summary-display.component';
-import { SummaryService } from '../../../../components/summary/summaryService';
-import { of } from 'rxjs';
-import { MockProviders } from 'ng-mocks';
 import { AnnotationService } from '../../../../services/annotationService';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../../../services/configService';
+import { MockProviders } from 'ng-mocks';
+import { of } from 'rxjs';
+import { SummaryService } from '../../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { UnorderedMatchSummaryDisplayComponent } from './unordered-match-summary-display.component';
 
-fdescribe('UnorderedMatchSummaryDisplayComponent', () => {
+describe('UnorderedMatchSummaryDisplayComponent', () => {
   let component: UnorderedMatchSummaryDisplayComponent;
   let fixture: ComponentFixture<UnorderedMatchSummaryDisplayComponent>;
 

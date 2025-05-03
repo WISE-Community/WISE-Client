@@ -1,5 +1,5 @@
 import { AnnotationService } from '../../../services/annotationService';
-import { Component, Directive, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';

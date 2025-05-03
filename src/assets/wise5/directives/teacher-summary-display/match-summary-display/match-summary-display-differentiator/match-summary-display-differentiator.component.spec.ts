@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatchSummaryDisplayDifferentiatorComponent } from './match-summary-display-differentiator.component';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { MockComponents, MockProvider } from 'ng-mocks';
 import { OrderedMatchSummaryDisplayComponent } from '../ordered-match-summary-display/ordered-match-summary-display.component';
+import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { UnorderedMatchSummaryDisplayComponent } from '../unordered-match-summary-display/unordered-match-summary-display.component';
 
 describe('MatchSummaryDisplayDifferentiatorComponent', () => {
