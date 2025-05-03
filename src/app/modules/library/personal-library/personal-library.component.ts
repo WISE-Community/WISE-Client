@@ -70,6 +70,11 @@ export class PersonalLibraryComponent extends LibraryComponent {
     this.subscriptions.add(
       this.libraryService.personalLibraryProjectsSource$.subscribe(
         (personalProjects: LibraryProject[]) => {
+          if (history.state?.newProjectId) {
+            personalProjects.find(
+              (project) => project.id === history.state?.newProjectId
+            ).isHighlighted = true;
+          }
           this.personalProjects = personalProjects;
           this.updateProjects();
         }

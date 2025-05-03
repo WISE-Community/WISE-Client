@@ -135,7 +135,7 @@ export class LibraryService {
 
   addPersonalLibraryProject(project: LibraryProject) {
     this.newProjectSource.next(project);
-    this.router.navigate(['/curriculum/personal']);
+    this.router.navigate(['/curriculum/personal'], { state: { newProjectId: project.id } });
   }
 
   getProjectInfo(projectId): Observable<Project> {
