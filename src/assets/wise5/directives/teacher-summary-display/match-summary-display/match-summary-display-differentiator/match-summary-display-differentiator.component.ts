@@ -14,27 +14,28 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
   templateUrl: './match-summary-display-differentiator.component.html'
 })
 export class MatchSummaryDisplayDifferentiatorComponent {
-  @Input() chartType: string;
   @Input() componentId: string;
   protected componentContent: any;
   protected isOrderedMatch: boolean;
   @Input() nodeId: string;
   @Input() periodId: number;
-  @Input() source: string;
-  @Input() studentDataType: string;
 
   constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.setComponentContent();
-    this.isOrderedMatch = this.componentContent.feedback.some((bucket) =>
-      bucket.choices.some((choice) => choice.position !== null)
-    );
+    this.setIsOrderedMatch();
   }
 
   private setComponentContent(): void {
     this.componentContent = this.projectService
       .getComponentsFromStep(this.nodeId)
       .find((component) => component.id === this.componentId);
+  }
+
+  private setIsOrderedMatch() {
+    this.isOrderedMatch = this.componentContent.feedback.some((bucket) =>
+      bucket.choices.some((choice) => choice.position !== null)
+    );
   }
 }
