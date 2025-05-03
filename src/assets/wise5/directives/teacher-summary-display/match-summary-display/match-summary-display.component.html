@@ -1,20 +1,26 @@
-@for (bucket of getBucketData(); track $index) {
-  <div class="bucket">
-    <h1>{{ bucket.value }}</h1>
-    @for (choice of bucket.choices; track $index) {
-      @if ($index < 3 || getBucketShowMore(bucket.value)) {
-        <div class="match-item">
-          {{ choice.getId() }}
-          <span class="right-align">{{ choice.getCount() }}<mat-icon>person</mat-icon></span>
-        </div>
+@if (getBucketData().length > 0) {
+  @for (bucket of getBucketData(); track $index) {
+    <div class="bucket">
+      <h1>{{ bucket.value }}</h1>
+      @for (choice of bucket.choices; track $index) {
+        @if ($index < 3 || getBucketShowMore(bucket.value)) {
+          <div class="match-item">
+            {{ choice.getId() }}
+            <span class="right-align">{{ choice.getCount() }}<mat-icon>person</mat-icon></span>
+          </div>
+        }
       }
-    }
-    @if (bucket.choices.length > 3) {
-      @if (getBucketShowMore(bucket.value)) {
-        <a (click)="toggleBucketShowMore(bucket.value)">Hide</a>
-      } @else {
-        <a (click)="toggleBucketShowMore(bucket.value)">Show More</a>
+      @if (bucket.choices.length > 3) {
+        @if (getBucketShowMore(bucket.value)) {
+          <a (click)="toggleBucketShowMore(bucket.value)" i18n>Hide</a>
+        } @else {
+          <a (click)="toggleBucketShowMore(bucket.value)" i18n>Show More</a>
+        }
       }
-    }
+    </div>
+  }
+} @else {
+  <div class="notice" i18n>
+    Your students' choices will show up here when they complete the activity.
   </div>
 }

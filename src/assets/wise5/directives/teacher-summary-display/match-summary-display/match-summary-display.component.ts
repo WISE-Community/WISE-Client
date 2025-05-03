@@ -14,6 +14,7 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
   templateUrl: './match-summary-display.component.html'
 })
 export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent {
+  private bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
   protected bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
   @Input() protected isOrderedMatch: boolean;
@@ -38,18 +39,17 @@ export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplay
       });
   }
 
+  protected setBucketData(): void {
+    this.bucketValues.forEach((value) =>
+      this.bucketData.push({ value: value, choices: this.getBucketDataByValue(value) })
+    );
+  }
+
   protected getBucketData(): {
     value: string;
     choices: MatchSummaryDataPoint[];
   }[] {
-    const buckets: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
-    this.bucketValues.forEach((bucketValue) =>
-      buckets.push({
-        value: bucketValue,
-        choices: this.getBucketDataByValue(bucketValue)
-      })
-    );
-    return buckets;
+    return this.bucketData;
   }
 
   private getBucketDataByValue(bucketValue: string): MatchSummaryDataPoint[] {

@@ -16,6 +16,7 @@ export class UnorderedMatchSummaryDisplayComponent extends MatchSummaryDisplayCo
     this.getLatestWork().subscribe((componentStates) => {
       this.matchSummaryData = new MatchSummaryData(componentStates);
       this.setBucketValues();
+      this.setBucketData();
       this.setBucketShowMore();
     });
   }
