@@ -1,9 +1,8 @@
-import { OnInit, QueryList, ViewChildren, Directive, Input } from '@angular/core';
+import { OnInit, QueryList, ViewChildren, Directive } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 @Directive()
@@ -19,10 +18,7 @@ export abstract class LibraryComponent implements OnInit {
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
 
-  constructor(
-    protected dialog: MatDialog,
-    protected libraryService: LibraryService
-  ) {}
+  constructor(protected libraryService: LibraryService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(

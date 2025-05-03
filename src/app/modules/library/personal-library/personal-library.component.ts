@@ -3,17 +3,15 @@ import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-project
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { BehaviorSubject } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { Component, Inject, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { Component, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LibraryComponent } from '../library/library.component';
 import { LibraryProject } from '../libraryProject';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { LibraryService } from '../../../services/library.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { Project } from '../../../domain/project';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
@@ -59,10 +57,9 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
-    protected dialog: MatDialog,
     protected libraryService: LibraryService
   ) {
-    super(dialog, libraryService);
+    super(libraryService);
   }
 
   ngOnInit(): void {
