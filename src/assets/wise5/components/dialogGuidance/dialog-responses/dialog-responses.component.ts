@@ -37,7 +37,7 @@ export class DialogResponsesComponent {
   ) {}
 
   ngOnInit(): void {
-    this.hasRubricData = this.cRaterRubric.hasRubricData();
+    this.hasRubricData = this.cRaterRubric?.hasRubricData() ?? false;
   }
 
   ngOnDestroy(): void {
