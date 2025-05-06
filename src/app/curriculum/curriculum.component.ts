@@ -10,6 +10,7 @@ import { PublicLibraryComponent } from '../modules/library/public-library/public
 import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   imports: [
@@ -19,7 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatTabsModule,
     PersonalLibraryComponent,
-    PublicLibraryComponent
+    PublicLibraryComponent,
+    RouterModule
   ],
   styleUrl: './curriculum.component.scss',
   templateUrl: './curriculum.component.html'
@@ -33,7 +35,8 @@ export class CurriculumComponent {
   constructor(
     protected configService: ConfigService,
     private libraryService: LibraryService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -75,5 +78,13 @@ export class CurriculumComponent {
 
   protected getMyUnitsTabLabel(): string {
     return $localize`My Units (${this.numMyUnitsVisible})`;
+  }
+
+  protected isPublicRoute(): boolean {
+    return this.router.url === '/curriculum/public';
+  }
+
+  protected isPersonalRoute(): boolean {
+    return this.router.url === '/curriculum/personal';
   }
 }

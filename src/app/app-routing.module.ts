@@ -2,6 +2,8 @@ import { HTTP_INTERCEPTORS, HttpRequest, HttpHandler, HttpInterceptor } from '@a
 import { Injectable, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PublicLibraryComponent } from './modules/library/public-library/public-library.component';
+import { PersonalLibraryComponent } from './modules/library/personal-library/personal-library.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
@@ -16,7 +18,13 @@ const routes: Routes = [
   {
     path: 'curriculum',
     loadComponent: () =>
-      import('./curriculum/curriculum.component').then((m) => m.CurriculumComponent)
+      import('./curriculum/curriculum.component').then((m) => m.CurriculumComponent),
+    children: [
+      { path: '', redirectTo: 'public', pathMatch: 'full' },
+      { path: 'public', component: PublicLibraryComponent },
+      { path: 'personal', component: PersonalLibraryComponent },
+      { path: '**', redirectTo: 'public' }
+    ]
   },
   {
     path: 'features',

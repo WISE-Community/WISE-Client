@@ -3,17 +3,15 @@ import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-project
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { BehaviorSubject } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { Component, Inject, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { Component, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LibraryComponent } from '../library/library.component';
 import { LibraryProject } from '../libraryProject';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { LibraryService } from '../../../services/library.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { Project } from '../../../domain/project';
 import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
@@ -31,7 +29,6 @@ import { Tag } from '../../../domain/tag';
     MatDividerModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatRadioModule,
     MatSelectModule,
     SelectAllItemsCheckboxComponent,
     SelectTagsComponent
@@ -60,10 +57,9 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
-    protected dialog: MatDialog,
     protected libraryService: LibraryService
   ) {
-    super(dialog, libraryService);
+    super(libraryService);
   }
 
   ngOnInit(): void {
@@ -71,6 +67,11 @@ export class PersonalLibraryComponent extends LibraryComponent {
     this.subscriptions.add(
       this.libraryService.personalLibraryProjectsSource$.subscribe(
         (personalProjects: LibraryProject[]) => {
+          if (history.state?.newProjectId) {
+            personalProjects.find(
+              (project) => project.id === history.state?.newProjectId
+            ).isHighlighted = true;
+          }
           this.personalProjects = personalProjects;
           this.updateProjects();
         }
@@ -122,10 +123,6 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
     return this.libraryService.numberOfPersonalProjectsVisible;
-  }
-
-  protected getDetailsComponent(): any {
-    return PersonalLibraryDetailsComponent;
   }
 
   public filterUpdated(): void {
@@ -192,21 +189,5 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected removeTag(tag: Tag): void {
     this.selectedTags = this.selectedTags.filter((selectedTag: Tag) => selectedTag.id !== tag.id);
     this.filterUpdated();
-  }
-}
-
-@Component({
-  selector: 'personal-library-details',
-  templateUrl: 'personal-library-details.html',
-  standalone: false
-})
-export class PersonalLibraryDetailsComponent {
-  constructor(
-    public dialogRef: MatDialogRef<PersonalLibraryDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-
-  close(): void {
-    this.dialogRef.close();
   }
 }

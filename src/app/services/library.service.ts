@@ -7,7 +7,7 @@ import { ProjectFilterValues } from '../domain/projectFilterValues';
 import { Project } from '../domain/project';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LibraryService {
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
@@ -135,7 +135,7 @@ export class LibraryService {
 
   addPersonalLibraryProject(project: LibraryProject) {
     this.newProjectSource.next(project);
-    this.router.navigate(['/teacher/home/library/personal']);
+    this.router.navigate(['/curriculum/personal'], { state: { newProjectId: project.id } });
   }
 
   getProjectInfo(projectId): Observable<Project> {
