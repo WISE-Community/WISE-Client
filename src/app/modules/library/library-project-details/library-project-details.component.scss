@@ -1,9 +1,6 @@
 @use '@angular/material' as mat;
 
-@import
-  'style/base/typography',
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/abstracts/functions';
 
 .library-project-details {
 }
@@ -18,7 +15,7 @@
   border-radius: 4px;
   margin-right: 12px;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     height: 64px;
     width: 64px;
   }
@@ -26,9 +23,6 @@
 
 .mat-mdc-card-title {
   margin-bottom: 2px;
-}
-
-.mat-mdc-card-subtitle {
 }
 
 .mat-mdc-dialog-actions {

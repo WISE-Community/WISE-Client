@@ -1,9 +1,6 @@
 @use '@angular/material' as mat;
-@import
-  'style/base/typography',
-  'style/abstracts/variables',
-  'style/abstracts/mixins',
-  'style/abstracts/functions';
+@use 'style/base/typography';
+@use 'style/abstracts/functions';
 
 .timeline-item {
   display: block;
@@ -12,7 +9,7 @@
   padding-left: 24px;
   padding-bottom: 32px;
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     margin-left: 48px;
     margin-right: 36px;
     padding-left: 28px;
@@ -49,5 +46,5 @@
   line-height: 24px;
   display: block;
   margin-bottom: 8px;
-  font-size: mat.m2-font-size($wise-typography, 'body-1');
+  font-size: mat.m2-font-size(typography.$wise-typography, 'body-1');
 }

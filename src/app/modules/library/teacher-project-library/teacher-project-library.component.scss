@@ -1,8 +1,5 @@
 @use '@angular/material' as mat;
-@import
-  'style/abstracts/variables',
-  'style/abstracts/mixins',
-  'style/abstracts/functions';
+@use 'style/abstracts/functions';
 
 .library-teacher {
   margin-top: 24px;
@@ -27,13 +24,13 @@
 .library-teacher__paginate {
   padding-bottom: 0;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     padding-top: 0;
   }
 }
 
 .library-teacher__official {
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     padding-top: 20px;
   }
 }

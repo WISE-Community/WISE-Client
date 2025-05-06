@@ -1,8 +1,6 @@
 @use '@angular/material' as mat;
-
-@import
-  'style/abstracts/mixins',
-  'style/abstracts/variables';
+@use 'style/abstracts/variables';
+@use 'style/abstracts/mixins';
 
 .cta.mat-mdc-raised-button {
   padding: 0;
@@ -13,7 +11,7 @@
   text-transform: none;
   white-space: normal;
   font-weight: 500;
-  border-radius: $feature-border-radius;
+  border-radius: variables.$feature-border-radius;
 
   &:hover, &:focus {
     .cta__headline .mat-icon {
@@ -36,8 +34,8 @@
   margin: -16px -16px 16px;
   padding: 10px 12px;
   border-bottom: 1px solid;
-  border-top-left-radius: $feature-border-radius;
-  border-top-right-radius: $feature-border-radius;
+  border-top-left-radius: variables.$feature-border-radius;
+  border-top-right-radius: variables.$feature-border-radius;
   font-size: 1.1em;
 
   .mat-icon {
@@ -46,7 +44,7 @@
 }
 
 .cta__icon {
-  @include mat-icon-size(48px);
+  @include mixins.mat-icon-size(48px);
   margin: 8px 0 16px;
 }
 

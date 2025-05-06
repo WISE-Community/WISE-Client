@@ -1,14 +1,7 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions',
-  'style/abstracts/mixins';
+@use 'style/abstracts/variables';
 
-.announcement {
-  min-height: $announcement-height;
-}
-
-.announcement__content {
-  min-height: $announcement-height;
+.announcement, .announcement__content {
+  min-height: variables.$announcement-height;
 }
 
 .announcement__dismiss.mat-mdc-icon-button {

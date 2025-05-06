@@ -1,9 +1,9 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .description {
   padding: 16px;
   margin: 16px 0px;
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
 }
 
 .description-content {

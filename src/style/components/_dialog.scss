@@ -1,14 +1,16 @@
 
 @use '@angular/material' as mat;
+@use 'style/abstracts/variables';
+@use 'style/base/typography';
 
 mat-dialog-container.mat-mdc-dialog-container {
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
   max-width: 100%;
 
   .mdc-dialog__title {
     padding: 0 16px 16px;
     margin: 0;
-    font-family: $heading-font-family
+    font-family: variables.$heading-font-family
   }
 
   .mat-dialog-title--icons {
@@ -21,7 +23,7 @@ mat-dialog-container.mat-mdc-dialog-container {
   }
 
   .mat-mdc-dialog-content {
-    font-size: mat.m2-font-size($wise-typography, 'body-1');
+    font-size: mat.m2-font-size(typography.$wise-typography, 'body-1');
     padding: 0 16px;
     color: inherit;
     font-weight: 400;

@@ -1,7 +1,4 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions',
-  'style/abstracts/mixins';
+@use 'style/abstracts/functions';
 
 app-announcement {
   z-index: 3;
@@ -17,7 +14,7 @@ app-header {
   right: 20px;
   z-index: 1;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     bottom: 32px;
     right: 32px;
   }

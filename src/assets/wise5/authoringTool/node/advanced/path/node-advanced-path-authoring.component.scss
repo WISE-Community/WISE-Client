@@ -1,3 +1,5 @@
+@use 'style/abstracts/variables';
+@use 'style/themes/default';
 
 .path-label {
   margin-bottom: 10px;
@@ -19,14 +21,12 @@
   width: 200px;
 }
 
-@import 'style/abstracts/variables', 'style/themes/default';
-
-$notice-bg: map-get($default-colors, notice-bg);
+$notice-bg: map-get(default.$default-colors, default.$notice-bg);
 
 .requirement {
   border: 1px solid #dddddd;
-  background-color: $notice-bg;
-  border-radius: $card-border-radius;
+  background-color: default.$notice-bg;
+  border-radius: variables.$card-border-radius;
   padding: 16px;
 }
 

@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
+@use 'style/base/typography';
 
 // WISE Classroom Monitor theme
 
@@ -99,7 +100,7 @@ $author: mat.m2-define-light-theme((
     accent: $author-theme-accent,
     warn: $author-theme-warn,
   ),
-  typography: $wise-typography,
+  typography: typography.$wise-typography,
 ));
 
 $author-theme-background: (

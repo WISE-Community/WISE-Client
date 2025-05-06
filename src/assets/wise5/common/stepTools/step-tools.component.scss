@@ -1,18 +1,16 @@
 @use '@angular/material' as mat;
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions',
-  'style/base/typography';
+@use 'style/abstracts/functions';
+@use 'style/base/typography';
 
 .step-tools {
   mat-form-field {
     width: 168px;
 
-    @media only screen and (min-width: breakpoint('sm.min')) {
+    @media only screen and (min-width: functions.breakpoint('sm.min')) {
       width: 264px;
     }
 
-    @media only screen and (min-width: breakpoint('md.min')) {
+    @media only screen and (min-width: functions.breakpoint('md.min')) {
       width: 432px;
     }
   }
@@ -34,7 +32,7 @@
   }
 
   .mat-mdc-select-value-text, .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
-    font-size: mat.m2-font-size($wise-typography, 'caption');
+    font-size: mat.m2-font-size(typography.$wise-typography, 'caption');
   }
 
   .mat-mdc-form-field-subscript-wrapper {
