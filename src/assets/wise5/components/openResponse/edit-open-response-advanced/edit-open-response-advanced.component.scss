@@ -1,5 +1,6 @@
 @use 'style/abstracts/variables';
 @use 'style/themes/default';
+@use 'sass:map';
 
 .starter-sentence {
   width: 80%;
@@ -28,7 +29,7 @@
 
 .section-item {
   border: 1px solid #dddddd;
-  background-color: map-get(default.$default-colors, notice-bg);
+  background-color: map.get(default.$default-colors, notice-bg);
   border-radius: variables.$card-border-radius;
   padding: 8px;
   margin-bottom: 8px;

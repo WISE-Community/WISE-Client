@@ -1,5 +1,6 @@
 @use 'style/abstracts/variables';
 @use 'style/themes/default';
+@use 'sass:map';
 
 .wide-drop-down {
   width: 300px;
@@ -32,7 +33,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid #dddddd;
-  background-color: map-get($default-colors, notice-bg);
+  background-color: map.get(default.$default-colors, notice-bg);
   border-radius: variables.$card-border-radius;
   padding-top: 20px;
   padding-left: 20px;

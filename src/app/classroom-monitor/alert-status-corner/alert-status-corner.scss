@@ -1,8 +1,9 @@
 @use 'style/abstracts/variables';
 @use 'style/themes/default';
+@use 'sass:map';
 
-$warn: map-get(default.$default-colors, warn);
-$secondary-text: map-get(default.$default-colors, secondary-text);
+$warn: map.get(default.$default-colors, warn);
+$secondary-text: map.get(default.$default-colors, secondary-text);
 
 .corner {
   border-top-right-radius: variables.$card-border-radius;
@@ -12,9 +13,9 @@ $secondary-text: map-get(default.$default-colors, secondary-text);
 .corner-content {
   width: 0;
   height: 0;
-  border-top-color: map-get(default.$default-colors, secondary-text);;
-  border-bottom-color: map-get(default.$default-colors, secondary-text);;
-  color: map-get(default.$default-colors, secondary-text);;
+  border-top-color: map.get(default.$default-colors, secondary-text);;
+  border-bottom-color: map.get(default.$default-colors, secondary-text);;
+  color: map.get(default.$default-colors, secondary-text);;
 
   border-top: 36px solid;
   border-left: 36px solid transparent;
@@ -30,6 +31,6 @@ $secondary-text: map-get(default.$default-colors, secondary-text);
 }
 
 .corner-warn {
-  border-top-color: map-get(default.$default-colors, warn);
-  border-bottom-color: map-get(default.$default-colors, warn);;
+  border-top-color: map.get(default.$default-colors, warn);
+  border-bottom-color: map.get(default.$default-colors, warn);;
 }

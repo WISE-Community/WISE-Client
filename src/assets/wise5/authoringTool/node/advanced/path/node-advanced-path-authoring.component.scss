@@ -1,5 +1,6 @@
 @use 'style/abstracts/variables';
 @use 'style/themes/default';
+@use 'sass:map';
 
 .path-label {
   margin-bottom: 10px;
@@ -21,7 +22,7 @@
   width: 200px;
 }
 
-$notice-bg: map-get(default.$default-colors, default.$notice-bg);
+$notice-bg: map.get(default.$default-colors, default.$notice-bg);
 
 .requirement {
   border: 1px solid #dddddd;

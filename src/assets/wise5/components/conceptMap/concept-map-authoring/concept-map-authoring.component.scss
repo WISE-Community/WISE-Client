@@ -1,7 +1,8 @@
 @use 'style/abstracts/variables';
 @use 'style/themes/default';
+@use 'sass:map';
 
-$notice-bg: map-get(default.$default-colors, notice-bg);
+$notice-bg: map.get(default.$default-colors, notice-bg);
 
 .background {
   max-width: 100%;
