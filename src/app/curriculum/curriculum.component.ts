@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
+import { ProjectFilterValues } from '../domain/projectFilterValues';
 
 @Component({
   imports: [
@@ -23,6 +24,7 @@ import { Router, RouterModule } from '@angular/router';
     PublicLibraryComponent,
     RouterModule
   ],
+  providers: [ProjectFilterValues],
   styleUrl: './curriculum.component.scss',
   templateUrl: './curriculum.component.html'
 })
@@ -41,7 +43,6 @@ export class CurriculumComponent {
 
   ngOnInit(): void {
     this.showMyUnits = this.userService.isTeacher();
-    this.libraryService.initFilterValues();
     this.getLibraryProjects();
     this.subscribeNumUnitsVisible();
   }
