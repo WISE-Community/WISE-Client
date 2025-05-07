@@ -8,11 +8,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 import { Tag } from '../../domain/tag';
 import { TagComponent } from '../tag/tag.component';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
     FormsModule,
@@ -22,10 +22,8 @@ import { TagComponent } from '../tag/tag.component';
     MatFormFieldModule,
     MatSelectModule,
     NgSelectModule,
-    SearchBarComponent,
     TagComponent
   ],
-  encapsulation: ViewEncapsulation.None,
   selector: 'select-tags',
   styleUrl: './select-tags.component.scss',
   templateUrl: './select-tags.component.html'
