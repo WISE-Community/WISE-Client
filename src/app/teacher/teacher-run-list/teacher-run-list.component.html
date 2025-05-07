@@ -1,15 +1,18 @@
 <div
-  class="content-block filters dark-theme primary-bg flex flex-col md:flex-row gap-4 items-stretch justify-start"
+  class="content-block filters dark-theme primary-bg flex flex-col md:flex-row gap-4 items-center justify-start"
 >
+  <h2 class="flex items-center gap-2">
+    <mat-icon>calendar_month</mat-icon><span i18n>Class Schedule</span>
+  </h2>
+  <span class="hidden md:inline-flex flex-auto"></span>
   <app-search-bar
-    class="flex-none"
+    class="flex-none self-stretch md:self-center"
     i18n-placeholderText
     placeholderText="Search"
     [disable]="!recentRunsLoaded"
     [value]="searchValue"
     (update)="searchChanged($event)"
   />
-  <span class="hidden md:inline-flex flex-auto"></span>
   <div class="flex flex-row items-center justify-center gap-4">
     <mat-form-field [subscriptSizing]="'dynamic'" class="w-full">
       <mat-label>View</mat-label>

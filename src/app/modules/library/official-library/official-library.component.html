@@ -1,50 +1,30 @@
-<ng-template #library>
-  <mat-accordion multi="true">
-    <ng-container *ngFor="let group of libraryGroups; let i = index">
-      <mat-expansion-panel
-        *ngIf="group.type === 'group'"
-        class="library-group"
-        (opened)="expandedGroups[group.id] = true"
-        (closed)="expandedGroups[group.id] = false"
-        [expanded]="expandedGroups[group.id] && countVisibleProjects(group.children) > 0"
-        [disabled]="countVisibleProjects(group.children) < 1"
-      >
-        <mat-expansion-panel-header class="mat-expansion-panel-header--lg">
-          <div class="library-group__title flex flex-col">
-            <div>{{ group.name }}</div>
-            <div class="mat-caption">
-              {{ countVisibleProjects(group.children) }} <ng-container i18n>unit(s)</ng-container>
-            </div>
+<mat-accordion multi="true">
+  <ng-container *ngFor="let group of libraryGroups; let i = index">
+    <mat-expansion-panel
+      *ngIf="group.type === 'group'"
+      class="library-group"
+      (opened)="expandedGroups[group.id] = true"
+      (closed)="expandedGroups[group.id] = false"
+      [expanded]="expandedGroups[group.id] && countVisibleProjects(group.children) > 0"
+      [disabled]="countVisibleProjects(group.children) < 1"
+    >
+      <mat-expansion-panel-header class="mat-expansion-panel-header--lg">
+        <div class="library-group__title flex flex-col">
+          <div>{{ group.name }}</div>
+          <div class="mat-caption">
+            {{ countVisibleProjects(group.children) }} <ng-container i18n>unit(s)</ng-container>
           </div>
-          <app-library-group-thumbs [group]="group" [ngClass]="{ hide: expandedGroups[group.id] }">
-          </app-library-group-thumbs>
-        </mat-expansion-panel-header>
-        <div class="flex flex-col flex-wrap items-start sm:flex-row">
-          <ng-container *ngFor="let project of group.children">
-            <div
-              *ngIf="project.visible"
-              class="w-full sm:w-1/2"
-              [ngClass]="{
-                'md:w-1/2 lg:w-1/3': isSplitScreen,
-                'md:w-1/3 lg:w-1/4': !isSplitScreen
-              }"
-            >
-              <app-library-project [project]="project" />
-            </div>
-          </ng-container>
         </div>
-      </mat-expansion-panel>
-    </ng-container>
-  </mat-accordion>
-</ng-template>
-
-<div *ngIf="!isSplitScreen" class="content-block library-teacher__official">
-  <p ngClass.xs="center">
-    <a class="mat-caption" href="#" (click)="showInfo($event)" i18n>What is WISE Tested?</a>
-  </p>
-  <ng-container *ngTemplateOutlet="library"></ng-container>
-</div>
-
-<div *ngIf="isSplitScreen">
-  <ng-container *ngTemplateOutlet="library"></ng-container>
-</div>
+        <app-library-group-thumbs [group]="group" [ngClass]="{ hide: expandedGroups[group.id] }">
+        </app-library-group-thumbs>
+      </mat-expansion-panel-header>
+      <div class="flex flex-col flex-wrap items-start sm:flex-row">
+        <ng-container *ngFor="let project of group.children">
+          <div *ngIf="project.visible" class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
+            <app-library-project [project]="project" />
+          </div>
+        </ng-container>
+      </div>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-accordion>
