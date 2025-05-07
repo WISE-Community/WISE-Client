@@ -1,7 +1,6 @@
 
-@import
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/abstracts/functions';
+@use 'style/abstracts/variables';
 
 $tab-bar-height: 48px;
 
@@ -18,8 +17,8 @@ step-tools {
   position: fixed;
   left: 0;
   right: 0;
-  top: $toolbar-height;
-  height: $secondary-toolbar-height;
+  top: variables.$toolbar-height;
+  height: variables.$secondary-toolbar-height;
   z-index: 3;
 }
 
@@ -32,11 +31,11 @@ step-tools {
 }
 
 .node-view {
-  top: $toolbar-height + $secondary-toolbar-height;
+  top: variables.$toolbar-height + variables.$secondary-toolbar-height;
 
   &.tabbed {
     position: absolute;
-    top: $toolbar-height;
+    top: variables.$toolbar-height;
     margin: 0;
     bottom: 0;
   }
@@ -64,7 +63,7 @@ group-tabs {
 node, navigation {
   display: block;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     padding: 32px 16px;
   }
 }
@@ -82,7 +81,7 @@ node-navigation {
 }
 
 .nav-view {
-  top: $toolbar-height;
+  top: variables.$toolbar-height;
 }
 
 notebook-launcher {
@@ -93,10 +92,10 @@ notebook-launcher {
 
 notebook-notes {
   display: block;
-  width: $notebook-sidebar-width;
+  width: variables.$notebook-sidebar-width;
 
-  @media (min-width: breakpoint('sm.min')) {
-    width: $notebook-sidebar-width-gt-xs;
+  @media (min-width: functions.breakpoint('sm.min')) {
+    width: variables.$notebook-sidebar-width-gt-xs;
   }
 }
 
@@ -115,7 +114,7 @@ notebook-report {
 run-ended-and-locked-message {
   display: block;
   
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     margin-bottom: -8px;
   }
 }

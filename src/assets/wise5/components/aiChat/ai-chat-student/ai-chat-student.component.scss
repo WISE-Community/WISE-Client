@@ -1,9 +1,9 @@
-@import 'style/abstracts/variables', 'style/abstracts/functions';
+@use 'style/abstracts/functions';
 
 .mat-mdc-card {
   padding: 12px;
   margin-top: 16px;
-  max-width: breakpoint('sm.min');
+  max-width: functions.breakpoint('sm.min');
 }
 
 ai-chat-messages {

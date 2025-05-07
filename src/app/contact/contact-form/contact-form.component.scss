@@ -1,19 +1,16 @@
-@import
-'style/abstracts/variables',
-'style/abstracts/functions',
-'style/abstracts/mixins';
+@use 'style/abstracts/functions';
 
 .form-fields {
   margin-bottom: 0 !important;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     p {
       margin-bottom: 0;
     }
   }
 
   // hacks necessary until fxLayoutGap resize bug is fixed: https://github.com/angular/flex-layout/issues/606
-  @media (max-width: breakpoint('xs.max')) {
+  @media (max-width: functions.breakpoint('xs.max')) {
     margin: 0 !important;
 
     p {

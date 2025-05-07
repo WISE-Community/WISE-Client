@@ -1,6 +1,8 @@
-@import 'style/abstracts/variables', 'style/themes/default';
+@use 'style/abstracts/variables';
+@use 'style/themes/default';
+@use 'sass:map';
 
-$notice-bg: map-get($default-colors, notice-bg);
+$notice-bg: map.get(default.$default-colors, notice-bg);
 
 .background {
   max-width: 100%;
@@ -14,7 +16,7 @@ $notice-bg: map-get($default-colors, notice-bg);
 .add-content {
   padding: 16px;
   border: 2px solid #dddddd;
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
 }
 
 .node-labels {
@@ -25,7 +27,7 @@ $notice-bg: map-get($default-colors, notice-bg);
 .content-item {
   border: 1px solid #dddddd;
   background-color: $notice-bg;
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
   padding: 8px;
   margin-bottom: 8px;
 

@@ -1,15 +1,12 @@
 @use '@angular/material' as mat;
-@import
-  'style/base/typography',
-  'style/abstracts/variables',
-  'style/abstracts/functions';
+@use 'style/abstracts/functions';
 
 .mat-mdc-card-avatar {
   background-size: cover;
   border-radius: 4px;
   margin-bottom: 4px;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     height: 64px;
     width: 64px;
   }

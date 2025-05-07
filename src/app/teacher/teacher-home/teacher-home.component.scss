@@ -1,5 +1,20 @@
+@use 'style/abstracts/functions';
+
 .content-block {
   margin-top: 24px;
+}
+
+discourse-recent-activity {
+  margin-bottom: 16px;
+  margin-top: 8px;
+
+  @media (min-width: functions.breakpoint('sm.min')) {
+    margin-top: -8px;
+  }
+
+  @media (min-width: functions.breakpoint('md.min')) {
+    margin-top: -36px;
+  }
 }
 
 .mat-headline-4, .mat-subtitle-1 {

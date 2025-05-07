@@ -1,10 +1,8 @@
-@import
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/abstracts/functions';
 
 .nav {
   margin: 0 auto 16px;
-  width: breakpoint('md.min');
+  width: functions.breakpoint('md.min');
   max-width: 100%;
 }
 

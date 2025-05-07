@@ -1,8 +1,5 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions',
-  'style/abstracts/mixins';
+@use 'style/abstracts/functions';
 
 .inputs {
-  max-width: breakpoint('sm.min');
+  max-width: functions.breakpoint('sm.min');
 }

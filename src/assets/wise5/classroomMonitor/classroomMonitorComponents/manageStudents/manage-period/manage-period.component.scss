@@ -1,4 +1,4 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 h2, .mat-headline-4 {
   margin-bottom: 8px;
@@ -14,7 +14,7 @@ h3 {
 }
 
 .period-info {
-  font-family: $heading-font-family;
+  font-family: variables.$heading-font-family;
   line-height: 1.85;
 }
 

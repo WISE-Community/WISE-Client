@@ -1,4 +1,4 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .ideas {
   padding: 8px;
@@ -9,7 +9,7 @@
 }
 
 .ideas, .idea {
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
 }
 
 .avatar {

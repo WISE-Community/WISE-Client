@@ -1,7 +1,6 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions',
-  'style/abstracts/mixins';
+@use 'style/abstracts/functions';
+@use 'style/abstracts/mixins';
+@use 'style/abstracts/variables';
 
 .header {
   padding: 0;
@@ -9,7 +8,7 @@
 }
 
 .header__content {
-  min-height: $header-height;
+  min-height: variables.$header-height;
   font-size: 14px;
   padding: 0 16px;
 }
@@ -19,7 +18,7 @@
   max-width: 248px;
   margin-top: 1.5%;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     width: 36%;
   }
 
@@ -27,14 +26,9 @@
     vertical-align: middle;
     max-width: 100%;
     height: auto;
-    //image-rendering: -moz-crisp-edges;         /* Firefox */
-    //image-rendering:   -o-crisp-edges;         /* Opera */
-    //image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
-    //image-rendering: crisp-edges;
-    //-ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
   }
 }
 
 .mat-mdc-icon-button {
-  @include mat-icon-button-size(36px);
+  @include mixins.mat-icon-button-size(36px);
 }

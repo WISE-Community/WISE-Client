@@ -1,11 +1,8 @@
 @use '@angular/material' as mat;
-@import
-  'style/base/typography',
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/base/typography';
 
 .library-project-disciplines__icon {
   padding: 2px 4px;
   color: #ffffff;
-  font-size: mat.m2-font-size($wise-typography, 'caption') + 1px;
+  font-size: mat.m2-font-size(typography.$wise-typography, 'caption') + 1px;
 }
