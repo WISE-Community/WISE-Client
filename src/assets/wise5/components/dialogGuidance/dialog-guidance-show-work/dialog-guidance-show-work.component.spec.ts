@@ -24,7 +24,7 @@ describe('DialogGuidanceShowWorkComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogGuidanceShowWorkComponent);
     component = fixture.componentInstance;
-    spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue({} as CRaterRubric);
+    spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(new CRaterRubric());
     component.componentState = {
       studentData: {}
     };

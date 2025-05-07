@@ -21,10 +21,6 @@ describe('LibraryProjectDetailsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should close dialog when X is clicked', () => {
     closeDialogSpy = spyOn(component['dialogRef'], 'close');
     fixture.nativeElement.querySelector('button').click();
