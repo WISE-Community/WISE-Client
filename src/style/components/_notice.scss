@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 @use 'style/base/typography';
 @use 'style/abstracts/variables';
+@use 'style/abstracts/functions';
 
 .notice {
   text-align: center;
@@ -9,7 +10,7 @@
   border-radius: variables.$card-border-radius;
   font-size: mat.m2-font-size(typography.$wise-typography, 'caption');
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     max-width: 80%;
   }
 

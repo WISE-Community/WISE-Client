@@ -1,8 +1,10 @@
+@use 'style/abstracts/mixins';
+
 h2 {
   margin-bottom: 0;
 
   .mat-icon {
-    @include mat-icon-size(36px);
+    @include mixins.mat-icon-size(36px);
   }
 }
 

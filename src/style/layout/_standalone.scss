@@ -1,3 +1,5 @@
+@use 'style/abstracts/functions';
+
 .standalone {
   height: 100%;
   padding: 0 16px;
@@ -15,7 +17,7 @@
 }
 
 .standalone__content {
-  max-width: breakpoint('sm.min');
+  max-width: functions.breakpoint('sm.min');
   margin: 0 auto 32px;
 }
 
@@ -26,7 +28,7 @@
 .standalone__title {
   text-align: center;
 
-  @media (max-width: breakpoint('xs.max')) {
+  @media (max-width: functions.breakpoint('xs.max')) {
     margin-bottom: 8px;
   }
 }
