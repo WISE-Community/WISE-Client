@@ -11,13 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RubricEventService } from '../../common/cRater/crater-rubric/RubricEventService';
 
 @Component({
-  imports: [
-    CommonModule,
-    CRaterRubricComponent,
-    DetectedIdeasComponent,
-    DialogResponseComponent,
-    MatIconModule
-  ],
+  imports: [CommonModule, DetectedIdeasComponent, DialogResponseComponent, MatIconModule],
   selector: 'dialog-responses',
   styleUrl: './dialog-responses.component.scss',
   templateUrl: './dialog-responses.component.html'
