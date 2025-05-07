@@ -11,20 +11,21 @@ import {
   createComponent
 } from '@angular/core';
 import { ClickToSnipImageService } from '../../services/clickToSnipImageService';
-import { ConfigService } from '../../services/configService';
-import { NotebookService } from '../../services/notebookService';
-import { ProjectService } from '../../services/projectService';
-import { StudentDataService } from '../../services/studentDataService';
+import { CommonModule } from '@angular/common';
 import { Component as WISEComponent } from '../../common/Component';
 import { ComponentFactory } from '../../common/ComponentFactory';
 import { components } from '../Components';
+import { ConfigService } from '../../services/configService';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
-import { CommonModule } from '@angular/common';
+import { NotebookService } from '../../services/notebookService';
+import { PingEndpointService } from '../../services/pingEndpointService';
+import { ProjectService } from '../../services/projectService';
+import { StudentDataService } from '../../services/studentDataService';
 
 @Component({
-    imports: [CommonModule, HelpIconComponent],
-    selector: 'component',
-    templateUrl: 'component.component.html'
+  imports: [CommonModule, HelpIconComponent],
+  selector: 'component',
+  templateUrl: 'component.component.html'
 })
 export class ComponentComponent {
   protected component: WISEComponent;
@@ -32,6 +33,7 @@ export class ComponentComponent {
   @Input() private componentId: string;
   private componentRef: ComponentRef<WISEComponent>;
   @Input() protected componentState: any;
+  private componentType: string;
   @Input() private nodeId: string;
   protected rubric: string;
   @Output() protected saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -45,6 +47,7 @@ export class ComponentComponent {
     private dataService: StudentDataService,
     private injector: EnvironmentInjector,
     private notebookService: NotebookService,
+    private pingEndpointService: PingEndpointService,
     private projectService: ProjectService
   ) {}
 
@@ -63,6 +66,13 @@ export class ComponentComponent {
       this.rubric = this.component.content.rubric;
       this.showRubric = this.rubric != null && this.rubric != '';
     }
+    this.pingEndpoint();
+  }
+
+  private pingEndpoint() {
+    if (['DialogGuidance', 'OpenResponse'].includes(this.componentType)) {
+      this.pingEndpointService.startPinging(this.component, this.componentType);
+    }
   }
 
   private setComponent(): void {
@@ -77,6 +87,7 @@ export class ComponentComponent {
     }
     const factory = new ComponentFactory();
     this.component = factory.getComponent(content, this.nodeId);
+    this.componentType = content.type;
   }
 
   ngAfterViewInit(): void {
@@ -95,6 +106,7 @@ export class ComponentComponent {
   }
 
   ngOnDestroy(): void {
+    this.pingEndpointService.stopPinging();
     this.componentRef.destroy();
   }
 }
