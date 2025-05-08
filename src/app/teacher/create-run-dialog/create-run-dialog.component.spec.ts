@@ -3,14 +3,10 @@ import { TeacherService } from '../teacher.service';
 import { CreateRunDialogComponent } from './create-run-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRadioModule } from '@angular/material/radio';
-import { ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { Project } from '../../domain/project';
 import { Run } from '../../domain/run';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Course } from '../../domain/course';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
@@ -40,7 +36,7 @@ export class MockTeacherService {
     const courses: Course[] = [];
     const course = new Course({ id: '1', name: 'Test' });
     courses.push(course);
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next(courses);
       observer.complete();
     });
@@ -106,24 +102,22 @@ describe('CreateRunDialogComponent', () => {
         {
           provide: MatDialogRef,
           useValue: {
-            afterClosed: () => {
-              return Observable.create((observer) => {
+            afterClosed: () =>
+              new Observable((observer) => {
                 observer.next({});
                 observer.complete();
-              });
-            },
+              }),
             close: () => {}
           }
         },
         { provide: MAT_DIALOG_DATA, useValue: { project: project } },
         { provide: Router, useClass: MockRouter }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     });
     fixture = TestBed.createComponent(CreateRunDialogComponent);
     component = fixture.componentInstance;
     component.project = project;
-    component.dialog = TestBed.get(MatDialog);
+    component.dialog = TestBed.inject(MatDialog);
     spyOn(component.dialog, 'closeAll').and.callThrough();
     fixture.detectChanges();
   });
