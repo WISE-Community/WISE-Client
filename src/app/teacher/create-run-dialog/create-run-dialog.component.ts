@@ -23,7 +23,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -35,6 +34,7 @@ import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-d
 import { TeacherRun } from '../teacher-run';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   imports: [
@@ -51,7 +51,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatRadioModule,
     MatTooltipModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatCardModule
   ],
   providers: [provideNativeDateAdapter()],
