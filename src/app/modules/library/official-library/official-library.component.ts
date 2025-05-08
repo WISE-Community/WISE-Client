@@ -2,7 +2,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { LibraryGroup } from '../libraryGroup';
 import { LibraryProject } from '../libraryProject';
-import { LibraryService } from '../../../services/library.service';
 import { LibraryComponent } from '../library/library.component';
 
 @Component({
@@ -18,10 +17,6 @@ export class OfficialLibraryComponent extends LibraryComponent {
   projects: LibraryProject[] = [];
   libraryGroups: LibraryGroup[] = [];
   expandedGroups: object = {};
-
-  constructor(protected libraryService: LibraryService) {
-    super(libraryService);
-  }
 
   ngOnInit() {
     super.ngOnInit();

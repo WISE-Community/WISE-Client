@@ -1,7 +1,7 @@
 <div class="library-filter">
   <div class="flex flex-row gap-1">
     <div class="flex-auto max-w-full">
-      <app-search-bar [value]="getFilterValues().searchValue" (update)="searchUpdated($event)" />
+      <app-search-bar [value]="filterValues.searchValue" (update)="searchUpdated($event)" />
     </div>
     <button
       mat-icon-button
@@ -15,7 +15,7 @@
         matBadgeDescription="Filters applied"
         matBadgeOverlap="true"
         matBadgeSize="small"
-        [matBadgeHidden]="!getFilterValues().hasFilters()"
+        [matBadgeHidden]="!filterValues.hasFilters()"
         aria-hidden="false"
         >filter_list</mat-icon
       >
@@ -25,7 +25,7 @@
 <div class="library-filters" [class.expand]="showFilters" [class.isSplitScreen]="isSplitScreen">
   <div class="notice flex justify-between">
     <h3 class="mat-subtitle-2" i18n>Filters</h3>
-    @if (getFilterValues().hasFilters()) {
+    @if (filterValues.hasFilters()) {
       <a href="#" (click)="!!clearFilterValues()" i18n>Clear all</a>
     }
   </div>
@@ -43,7 +43,7 @@
           [options]="unitTypeOptions"
           i18n-placeholderText
           placeholderText="Type"
-          [value]="getFilterValues().unitTypeValue"
+          [value]="filterValues.unitTypeValue"
           (update)="filterUpdated($event, 'unitType')"
           [valueProp]="'name'"
           [viewValueProp]="'name'"
@@ -61,7 +61,7 @@
           [options]="disciplineOptions"
           i18n-placeholderText
           placeholderText="Discipline"
-          [value]="getFilterValues().disciplineValue"
+          [value]="filterValues.disciplineValue"
           (update)="filterUpdated($event, 'discipline')"
           [valueProp]="'id'"
           [viewValueProp]="'name'"
@@ -79,7 +79,7 @@
           [options]="gradeLevelOptions"
           i18n-placeholderText
           placeholderText="Grade Level"
-          [value]="getFilterValues().gradeLevelValue"
+          [value]="filterValues.gradeLevelValue"
           (update)="filterUpdated($event, 'gradeLevel')"
           valueProp="grade"
           viewValueProp="grade"
@@ -98,7 +98,7 @@
           [possibleLabels]="possibleStandardLabels"
           i18n-placeholderText
           placeholderText="Standards Addressed"
-          [value]="getFilterValues().standardValue"
+          [value]="filterValues.standardValue"
           (update)="filterUpdated($event, 'standard')"
           [valueProp]="'id'"
           [viewValueProp]="'name'"
@@ -115,7 +115,7 @@
           [options]="featureOptions"
           i18n-placeholderText
           placeholderText="Features"
-          [value]="getFilterValues().featureValue"
+          [value]="filterValues.featureValue"
           (update)="filterUpdated($event, 'feature')"
           valueProp="name"
           viewValueProp="name"

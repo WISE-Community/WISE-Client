@@ -48,6 +48,7 @@ export class LibraryFiltersComponent {
   ];
 
   constructor(
+    protected filterValues: ProjectFilterValues,
     private libraryService: LibraryService,
     private utilService: UtilService
   ) {
@@ -143,33 +144,29 @@ export class LibraryFiltersComponent {
   }
 
   protected searchUpdated(value: string): void {
-    this.getFilterValues().searchValue = value.toLocaleLowerCase();
+    this.filterValues.searchValue = value.toLocaleLowerCase();
     this.emitFilterValues();
   }
 
   protected filterUpdated(value: any[], context: string = ''): void {
     switch (context) {
       case 'discipline':
-        this.getFilterValues().disciplineValue = value;
+        this.filterValues.disciplineValue = value;
         break;
       case 'gradeLevel':
-        this.getFilterValues().gradeLevelValue = value;
+        this.filterValues.gradeLevelValue = value;
         break;
       case 'standard':
-        this.getFilterValues().standardValue = value;
+        this.filterValues.standardValue = value;
         break;
       case 'feature':
-        this.getFilterValues().featureValue = value;
+        this.filterValues.featureValue = value;
         break;
       case 'unitType':
-        this.getFilterValues().unitTypeValue = value;
+        this.filterValues.unitTypeValue = value;
         break;
     }
     this.emitFilterValues();
-  }
-
-  protected getFilterValues(): ProjectFilterValues {
-    return this.libraryService.filterValues;
   }
 
   private emitFilterValues(): void {
@@ -177,7 +174,7 @@ export class LibraryFiltersComponent {
   }
 
   protected clearFilterValues(): void {
-    this.getFilterValues().clear();
+    this.filterValues.clear();
     this.emitFilterValues();
   }
 }

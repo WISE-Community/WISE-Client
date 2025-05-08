@@ -3,7 +3,6 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LibraryGroup } from '../modules/library/libraryGroup';
 import { LibraryProject } from '../modules/library/libraryProject';
-import { ProjectFilterValues } from '../domain/projectFilterValues';
 import { Project } from '../domain/project';
 import { Router } from '@angular/router';
 
@@ -11,7 +10,6 @@ import { Router } from '@angular/router';
 export class LibraryService {
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
-  public filterValues: ProjectFilterValues = new ProjectFilterValues();
   private filterValuesUpdatedSource = new Subject<void>();
   public filterValuesUpdated$ = this.filterValuesUpdatedSource.asObservable();
   private personalProjectsUrl = '/api/project/personal';
@@ -157,9 +155,5 @@ export class LibraryService {
     this.personalLibraryProjectsSource.next([]);
     this.sharedLibraryProjectsSource.next([]);
     this.filterValuesUpdatedSource.next();
-  }
-
-  initFilterValues(): void {
-    this.filterValues = new ProjectFilterValues();
   }
 }

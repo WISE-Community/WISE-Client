@@ -10,6 +10,7 @@ import { of } from 'rxjs';
 import { PersonalLibraryComponent } from './personal-library.component';
 import { PersonalLibraryHarness } from './personal-library.harness';
 import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
@@ -32,6 +33,7 @@ describe('PersonalLibraryComponent', () => {
       providers: [
         ArchiveProjectService,
         LibraryService,
+        ProjectFilterValues,
         ProjectTagService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()

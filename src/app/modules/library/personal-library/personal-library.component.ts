@@ -18,6 +18,7 @@ import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { SelectTagsComponent } from '../../../teacher/select-tags/select-tags.component';
 import { Tag } from '../../../domain/tag';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 @Component({
   imports: [
@@ -57,9 +58,10 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
+    protected filterValues: ProjectFilterValues,
     protected libraryService: LibraryService
   ) {
-    super(libraryService);
+    super(filterValues, libraryService);
   }
 
   ngOnInit(): void {
