@@ -35,7 +35,7 @@ export class MatchSummaryDisplayDifferentiatorComponent {
 
   private setIsOrderedMatch(): void {
     this.isOrderedMatch = this.componentContent.feedback.some((bucket) =>
-      bucket.choices.some((choice) => choice.position !== null)
+      bucket.choices.some((choice) => choice.position)
     );
   }
 }
