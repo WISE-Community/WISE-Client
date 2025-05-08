@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use 'style/base/typography';
+@use 'style/abstracts/variables';
 
 /* Define a custom mixin for common styles */
 @mixin common-setup() {
@@ -12,18 +13,18 @@
   }
 
   h1, h2, .mat-headline-1, .mat-headline-2, .mat-headline-3, .mat-headline-4 {
-    font-family: $heading-font-family
+    font-family: variables.$heading-font-family
   }
 
   h1 {
     .mat-icon {
-      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-5'));
+      @include mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-5'));
     }
   }
 
   h2 {
     .mat-icon {
-      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-6'));
+      @include mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-6'));
     }
   }
 
@@ -31,7 +32,7 @@
     margin-bottom: 36px;
 
     .mat-icon {
-      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-4'));
+      @include mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-4'));
     }
   }
 
@@ -39,7 +40,7 @@
     margin-bottom: 40px;
 
     .mat-icon {
-      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-3'));
+      @include mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-3'));
     }
   }
 
@@ -71,7 +72,7 @@
   }
 
   .mat-mdc-standard-chip .mdc-evolution-chip__text-label {
-    font-size: mat.m2-font-size($wise-typography, 'button');
+    font-size: mat.m2-font-size(typography.$wise-typography, 'button');
   }
 
   .mat-divider-horizontal {
@@ -89,7 +90,7 @@
   }
 
   .mat-mdc-card {
-    border-radius: $card-border-radius;
+    border-radius: variables.$card-border-radius;
   }
 
   .mat-mdc-card-actions {
@@ -99,7 +100,7 @@
   /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
   .mat-card--button {
     cursor: pointer;
-    border-radius: $button-border-radius;
+    border-radius: variables.$button-border-radius;
     @include mat.elevation(3);
 
     &:hover, &:focus {
@@ -120,10 +121,10 @@
     }
 
     &:not(.mat-expanded) {
-      border-radius: $button-border-radius;
+      border-radius: variables.$button-border-radius;
 
       .mat-expansion-panel-header {
-        border-radius: $button-border-radius;
+        border-radius: variables.$button-border-radius;
       }
     }
   }
@@ -138,12 +139,12 @@
   }
 
   .mat-mdc-option, .mat-mdc-optgroup-label {
-    @include mat.m2-typography-level($wise-typography, 'caption');
+    @include mat.m2-typography-level(typography.$wise-typography, 'caption');
   }
 
   .mdc-text-field {
     &.mdc-text-field--filled {
-      border-radius: $card-border-radius;
+      border-radius: variables.$card-border-radius;
     }
   }
   /* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
@@ -152,19 +153,19 @@
   }
 
   .mat-toolbar {
-    @include mat.m2-typography-level($wise-typography, 'subtitle-1');
+    @include mat.m2-typography-level(typography.$wise-typography, 'subtitle-1');
 
     h1, h2, h3, h4, h5 ,h6 {
-      @include mat.m2-typography-level($wise-typography, 'subtitle-1');
+      @include mat.m2-typography-level(typography.$wise-typography, 'subtitle-1');
     }
   }
 
   .mat-toolbar-row, .mat-toolbar-single-row {
-    height: $toolbar-height;
+    height: variables.$toolbar-height;
   }
 
   .mat-toolbar-multiple-rows {
-    min-height: $toolbar-height;
+    min-height: variables.$toolbar-height;
   }
 
   .select-panel-full-height {
@@ -210,7 +211,7 @@
   }
 
   .app-bar {
-    background-color: map.get($background, 'app-bar');
+    background-color: map.get(map.get($theme, 'background'), 'app-bar');
   }
 
   .avatar--icon {
@@ -222,7 +223,7 @@
   }
 
   .content-block__title {
-    border-color: map.get($background, 'focused-button');
+    border-color: map.get(map.get($theme, 'background'), 'focused-button');
   }
 
   .cta__headline {
@@ -230,7 +231,7 @@
   }
 
   .cta__wrap, .blurb {
-    background-color: map.get($background, 'card');
+    background-color: map.get(map.get($theme, 'background'), 'card');
   }
 
   .can-highlight {
@@ -239,7 +240,7 @@
 
   .mat-mdc-unelevated-button, .mat-mdc-raised-button, .mat-mdc-fab, .mat-mdc-mini-fab {
     &.mat-secondary-text {
-      background-color: map.get($foreground, 'secondary-text');
+      background-color: map.get(map.get($theme, 'foreground'), 'secondary-text');
       color: white;
     }
 
@@ -256,12 +257,12 @@
 
   .dialog-content-scroll {
     background-color: map.get($colors, 'notice-bg');
-    border-color: map.get($background, 'background');
+    border-color: map.get(map.get($theme, 'background'), 'background');
   }
 
   .mat-mdc-menu-item {
     &.active {
-      background-color: map.get($background, 'hover');
+      background-color: map.get(map.get($theme, 'background'), 'hover');
 
       .mat-icon {
         color: map.get($colors, 'primary');
@@ -278,12 +279,12 @@
   }
   /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
   .mat-form-field-prefix, .mat-form-field-suffix {
-    color: mat.m2-get-color-from-palette($foreground, 'secondary-text');
+    color: mat.m2-get-color-from-palette(map.get($theme, 'foreground'), 'secondary-text');
   }
 
   figure {
     &.image {
-      border: 1px solid mat.m2-get-color-from-palette($background, 'status-bar');
+      border: 1px solid mat.m2-get-color-from-palette(map.get($theme, 'background'), 'status-bar');
     }
   }
 
@@ -307,7 +308,7 @@
     .ng-select-container {
       padding: 0 12px;
       background-color: rgba(0, 0, 0, 0.04);
-      border-radius: $card-border-radius;
+      border-radius: variables.$card-border-radius;
 
       .ng-value-container {
         padding: .2875em 0;
@@ -329,7 +330,7 @@
         }
 
         &:after {
-          border-radius: $card-border-radius;
+          border-radius: variables.$card-border-radius;
           border: 0 none;
         }
 

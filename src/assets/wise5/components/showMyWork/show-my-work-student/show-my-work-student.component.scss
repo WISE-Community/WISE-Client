@@ -1,4 +1,4 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .mat-mdc-card {
   margin: 4px;
@@ -7,6 +7,6 @@
 
 .mat-mdc-card-content {
   padding: 8px;
-  border-radius: $button-border-radius;
+  border-radius: variables.$button-border-radius;
   overflow: auto;
 }

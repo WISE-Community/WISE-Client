@@ -1,15 +1,13 @@
-import { OnInit, QueryList, ViewChildren, Directive, Input } from '@angular/core';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { OnInit, QueryList, ViewChildren, Directive } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
   protected filteredProjects: LibraryProject[] = [];
-  protected filterValues: ProjectFilterValues;
   protected highIndex: number = 0;
   protected lowIndex: number = 0;
   protected pageSizeOptions: number[] = [12, 24, 48, 96];
@@ -20,20 +18,16 @@ export abstract class LibraryComponent implements OnInit {
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
 
-  constructor(
-    protected dialog: MatDialog,
-    protected libraryService: LibraryService
-  ) {}
+  constructor(protected libraryService: LibraryService) {}
 
   ngOnInit(): void {
-    this.filterValues = this.libraryService.getFilterValues();
     this.subscriptions.add(
       this.libraryService.filterValuesUpdated$.subscribe(() => this.filterUpdated())
     );
   }
 
   ngOnDestroy(): void {
-    this.filterValues.clear();
+    this.getFilterValues().clear();
     this.subscriptions.unsubscribe();
   }
 
@@ -65,7 +59,7 @@ export abstract class LibraryComponent implements OnInit {
   protected filterUpdated(): void {
     this.filteredProjects = this.projects
       .map((project) => {
-        project.visible = this.filterValues.matches(project);
+        project.visible = this.getFilterValues().matches(project);
         return project;
       })
       .filter((project) => project.visible)
@@ -89,12 +83,7 @@ export abstract class LibraryComponent implements OnInit {
     return projects.filter((project) => project.visible).length;
   }
 
-  protected showInfo(event: Event): void {
-    event.preventDefault();
-    this.dialog.open(this.getDetailsComponent(), {
-      panelClass: 'dialog-sm'
-    });
+  private getFilterValues(): ProjectFilterValues {
+    return this.libraryService.filterValues;
   }
-
-  protected abstract getDetailsComponent(): any;
 }

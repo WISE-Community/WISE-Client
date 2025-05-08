@@ -14,14 +14,6 @@ describe('HeaderLinksComponent', () => {
     });
     fixture = TestBed.createComponent(HeaderLinksComponent);
     component = fixture.componentInstance;
-    const user: User = new User();
-    user.id = 1;
-    user.firstName = 'Amanda';
-    user.lastName = 'Panda';
-    user.roles = ['student'];
-    user.username = 'AmandaP0101';
-    component.user = user;
-    component.location = 'student';
     fixture.detectChanges();
   });
 
@@ -29,8 +21,8 @@ describe('HeaderLinksComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show user welcome message', () => {
+  it('should show header sign in if no user is logged in', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.header__links').textContent).toContain('Welcome Amanda!');
+    expect(compiled.querySelectorAll('app-header-signin').length).toBe(1);
   });
 });

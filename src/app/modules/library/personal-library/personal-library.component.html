@@ -2,14 +2,13 @@
   <div class="flex flex-col sm:flex-row sm:items-center justify-center align-items-stretch gap-2">
     <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)" />
     <span class="flex-1"></span>
-    <mat-radio-group
-      class="px-2 self-center"
-      [(ngModel)]="showArchivedView"
-      (ngModelChange)="switchActiveArchivedView()"
-    >
-      <mat-radio-button [value]="false" i18n>Active</mat-radio-button>
-      <mat-radio-button [value]="true" i18n>Archived</mat-radio-button>
-    </mat-radio-group>
+    <mat-form-field class="w-full sm:w-auto" [subscriptSizing]="'dynamic'">
+      <mat-label>View</mat-label>
+      <mat-select [(ngModel)]="showArchivedView" (selectionChange)="switchActiveArchivedView()">
+        <mat-option [value]="false" i18n>Active</mat-option>
+        <mat-option [value]="true" i18n>Archived</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div class="flex flex-col items-center justify-start align-items-stretch gap-2 sm:flex-row">
     <div class="flex w-full sm:w-auto items-center sm:justify-center gap-1 order-1 sm:order-none">

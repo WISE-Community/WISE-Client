@@ -7,11 +7,11 @@ import { ProjectFilterValues } from '../domain/projectFilterValues';
 import { Project } from '../domain/project';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LibraryService {
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
-  private filterValues: ProjectFilterValues = new ProjectFilterValues();
+  public filterValues: ProjectFilterValues = new ProjectFilterValues();
   private filterValuesUpdatedSource = new Subject<void>();
   public filterValuesUpdated$ = this.filterValuesUpdatedSource.asObservable();
   private personalProjectsUrl = '/api/project/personal';
@@ -25,9 +25,9 @@ export class LibraryService {
   public officialLibraryProjectsSource$ = this.officialLibraryProjectsSource.asObservable();
   private communityLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
   public communityLibraryProjectsSource$ = this.communityLibraryProjectsSource.asObservable();
-  private personalLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
+  private personalLibraryProjectsSource = new Subject<LibraryProject[]>();
   public personalLibraryProjectsSource$ = this.personalLibraryProjectsSource.asObservable();
-  private sharedLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
+  private sharedLibraryProjectsSource = new Subject<LibraryProject[]>();
   public sharedLibraryProjectsSource$ = this.sharedLibraryProjectsSource.asObservable();
   private newProjectSource = new BehaviorSubject<LibraryProject>(null);
   public newProjectSource$ = this.newProjectSource.asObservable();
@@ -39,9 +39,7 @@ export class LibraryService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {
-    this.router = router;
-  }
+  ) {}
 
   getOfficialLibraryProjects(): void {
     this.http.get<LibraryGroup[]>(this.libraryGroupsUrl).subscribe((libraryGroups) => {
@@ -137,7 +135,7 @@ export class LibraryService {
 
   addPersonalLibraryProject(project: LibraryProject) {
     this.newProjectSource.next(project);
-    this.router.navigate(['/teacher/home/library/personal']);
+    this.router.navigate(['/curriculum/personal'], { state: { newProjectId: project.id } });
   }
 
   getProjectInfo(projectId): Observable<Project> {
@@ -159,10 +157,6 @@ export class LibraryService {
     this.personalLibraryProjectsSource.next([]);
     this.sharedLibraryProjectsSource.next([]);
     this.filterValuesUpdatedSource.next();
-  }
-
-  getFilterValues(): ProjectFilterValues {
-    return this.filterValues;
   }
 
   initFilterValues(): void {

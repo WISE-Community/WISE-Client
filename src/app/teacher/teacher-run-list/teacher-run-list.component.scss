@@ -1,10 +1,11 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/mixins',
-  'style/abstracts/functions';
+@use 'style/abstracts/mixins';
 
 h2 {
   margin-bottom: 0;
+
+  .mat-icon {
+    @include mixins.mat-icon-size(36px);
+  }
 }
 
 .filters {

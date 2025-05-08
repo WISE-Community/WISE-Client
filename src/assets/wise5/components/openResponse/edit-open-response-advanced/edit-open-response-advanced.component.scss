@@ -1,6 +1,6 @@
-@import 'style/abstracts/variables', 'style/themes/default';
-
-$notice-bg: map-get($default-colors, notice-bg);
+@use 'style/abstracts/variables';
+@use 'style/themes/default';
+@use 'sass:map';
 
 .starter-sentence {
   width: 80%;
@@ -22,15 +22,15 @@ $notice-bg: map-get($default-colors, notice-bg);
 .section-container {
   padding: 16px;
   border: 2px solid #dddddd;
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
 .section-item {
   border: 1px solid #dddddd;
-  background-color: $notice-bg;
-  border-radius: $card-border-radius;
+  background-color: map.get(default.$default-colors, notice-bg);
+  border-radius: variables.$card-border-radius;
   padding: 8px;
   margin-bottom: 8px;
 

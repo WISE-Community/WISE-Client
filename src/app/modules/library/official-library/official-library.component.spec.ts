@@ -4,7 +4,6 @@ import { fakeAsyncResponse } from '../../../student/student-run-list/student-run
 import { LibraryService } from '../../../services/library.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryGroup } from '../libraryGroup';
-import { MatDialogModule } from '@angular/material/dialog';
 import { BehaviorSubject, of } from 'rxjs';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
@@ -16,9 +15,7 @@ export class MockLibraryService {
   implementationModelOptions: LibraryGroup[] = [];
   numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
   getOfficialLibraryProjects() {}
-  getFilterValues() {
-    return new ProjectFilterValues();
-  }
+  filterValues = new ProjectFilterValues();
 }
 
 describe('OfficialLibraryComponent', () => {
@@ -26,7 +23,7 @@ describe('OfficialLibraryComponent', () => {
   let fixture: ComponentFixture<OfficialLibraryComponent>;
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [OverlayModule, MatDialogModule],
+      imports: [OverlayModule],
       declarations: [OfficialLibraryComponent],
       providers: [{ provide: LibraryService, useClass: MockLibraryService }],
       schemas: [NO_ERRORS_SCHEMA]

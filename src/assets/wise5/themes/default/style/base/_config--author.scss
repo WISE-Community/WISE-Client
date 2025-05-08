@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 // Authoring Tool Colors
 $_primary-color: #7e57c2; // should match the default color of your ng-material default theme's 'primary' palette
 $_selected-bg: lighten($_primary-color, 56%);
@@ -29,8 +31,8 @@ $color: (
 );
 
 $body-color: (
-  'body': map-get($color, 'text'),
-  'body-bg': map-get($color, 'gray-lighter')
+  'body': map.get($color, 'text'),
+  'body-bg': map.get($color, 'gray-lighter')
 );
 
 $colors: map-merge($color, $body-color);

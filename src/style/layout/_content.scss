@@ -1,5 +1,8 @@
+@use 'style/abstracts/functions';
+@use 'style/abstracts/mixins';
+
 .content {
-  max-width: breakpoint('lg.min');
+  max-width: functions.breakpoint('lg.min');
   margin: 0 auto;
   flex: 1 1 auto;
   box-sizing: border-box;
@@ -7,11 +10,11 @@
   position: relative;
   padding: 0 8px;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     padding: 0 16px;
   }
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     padding: 0 32px;
   }
 }
@@ -19,15 +22,15 @@
 .content__header {
   margin-bottom: 8px;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     margin-bottom: 0;
 
     h1 .mat-icon {
-      @include mat-icon-size(32px);
+      @include mixins.mat-icon-size(32px);
     }
   }
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     margin-top: 16px;
   }
 }

@@ -25,31 +25,27 @@ import { PeerChatGradingModule } from '../../components/peerChat/peer-chat-gradi
 import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
 import { TableGradingModule } from '../../components/table/table-grading/table-grading.module';
 import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-work-grading/show-my-work-grading.module';
-import { MultipleChoiceGradingComponent } from '../../components/multipleChoice/multiple-choice-grading/multiple-choice-grading.component';
-import { DialogGuidanceGradingComponent } from '../../components/dialogGuidance/dialog-guidance-grading/dialog-guidance-grading.component';
 
 @Component({
-    imports: [
-        AiChatGradingModule,
-        AnimationGradingModule,
-        AudioOscillatorGradingModule,
-        ConceptMapGradingModule,
-        DialogGuidanceGradingComponent,
-        DiscussionGradingModule,
-        DrawGradingModule,
-        EmbeddedGradingModule,
-        GraphGradingModule,
-        LabelGradingModule,
-        MatchGradingModule,
-        MultipleChoiceGradingComponent,
-        OpenResponseGradingModule,
-        PeerChatGradingModule,
-        ShowGroupWorkGradingModule,
-        ShowMyWorkGradingModule,
-        TableGradingModule
-    ],
-    selector: 'component-grading-component',
-    template: '<div #component></div>'
+  imports: [
+    AiChatGradingModule,
+    AnimationGradingModule,
+    AudioOscillatorGradingModule,
+    ConceptMapGradingModule,
+    DiscussionGradingModule,
+    DrawGradingModule,
+    EmbeddedGradingModule,
+    GraphGradingModule,
+    LabelGradingModule,
+    MatchGradingModule,
+    OpenResponseGradingModule,
+    PeerChatGradingModule,
+    ShowGroupWorkGradingModule,
+    ShowMyWorkGradingModule,
+    TableGradingModule
+  ],
+  selector: 'component-grading-component',
+  template: '<div #component></div>'
 })
 export class ComponentGradingComponent {
   @ViewChild('component') private componentElementRef: ElementRef;

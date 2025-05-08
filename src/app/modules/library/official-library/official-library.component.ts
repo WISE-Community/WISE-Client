@@ -1,10 +1,9 @@
 import { BehaviorSubject } from 'rxjs';
-import { Component, Input, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { LibraryGroup } from '../libraryGroup';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryComponent } from '../library/library.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-official-library',
@@ -20,11 +19,8 @@ export class OfficialLibraryComponent extends LibraryComponent {
   libraryGroups: LibraryGroup[] = [];
   expandedGroups: object = {};
 
-  constructor(
-    protected dialog: MatDialog,
-    protected libraryService: LibraryService
-  ) {
-    super(dialog, libraryService);
+  constructor(protected libraryService: LibraryService) {
+    super(libraryService);
   }
 
   ngOnInit() {
@@ -44,25 +40,5 @@ export class OfficialLibraryComponent extends LibraryComponent {
 
   protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
     return this.libraryService.numberOfPublicProjectsVisible;
-  }
-
-  protected getDetailsComponent(): any {
-    return OfficialLibraryDetailsComponent;
-  }
-}
-
-@Component({
-  selector: 'official-library-details',
-  templateUrl: 'official-library-details.html',
-  standalone: false
-})
-export class OfficialLibraryDetailsComponent {
-  constructor(
-    public dialogRef: MatDialogRef<OfficialLibraryDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-
-  close(): void {
-    this.dialogRef.close();
   }
 }

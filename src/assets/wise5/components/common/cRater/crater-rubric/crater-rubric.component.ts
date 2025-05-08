@@ -29,6 +29,7 @@ export class CRaterRubricComponent {
     this.ideas = this.ideasSortingService
       .sortById(this.cRaterRubric.ideas.map(cRaterIdeaToIdeaData))
       .map(ideaDataToCRaterIdea);
+    this.rubricEventService.rubricToggled();
   }
 
   ngOnDestroy(): void {

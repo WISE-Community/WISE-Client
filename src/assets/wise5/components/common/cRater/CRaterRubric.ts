@@ -12,6 +12,10 @@ export class CRaterRubric {
   getIdea(ideaId: string): CRaterIdea {
     return this.ideas.find((idea) => idea.name === ideaId);
   }
+
+  hasRubricData(): boolean {
+    return (this.description ?? '') !== '' || this.ideas.length > 0;
+  }
 }
 
 export function getUniqueIdeas(responses: any[], rubric: CRaterRubric): CRaterIdea[] {

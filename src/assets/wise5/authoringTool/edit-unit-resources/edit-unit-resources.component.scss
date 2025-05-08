@@ -1,8 +1,8 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .resource-descriptions {
   padding: 16px;
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
 }
 
 h5 {
@@ -35,3 +35,13 @@ li {
 .mat-subtitle-1 {
   margin: 0;
 }
+
+.cdk-drag-handle {
+  cursor: move;
+  margin-top: 25px;
+}
+
+.cdk-drag-placeholder {
+  opacity: .4;
+}
+
