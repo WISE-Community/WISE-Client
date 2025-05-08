@@ -4,15 +4,15 @@ import { ComponentContent } from '../../../../common/ComponentContent';
 import { CRaterIdea } from '../CRaterIdea';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject, Subscription } from 'rxjs';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   imports: [
@@ -32,8 +32,8 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './edit-crater-idea-descriptions.component.scss'
 })
 export class EditCRaterIdeaDescriptionsComponent implements OnInit {
-  @Input() componentContent: ComponentContent;
   @Input() ideaDescriptions: CRaterIdea[] = [];
+  @Input() enableAutoscrolling: boolean = true;
   protected inputChanged: Subject<string> = new Subject<string>();
   private subscriptions: Subscription = new Subscription();
 
@@ -59,13 +59,13 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
       newIdeaDescription
     );
     this.projectService.nodeChanged();
-    if (!addToTop) {
+    if (!addToTop && this.enableAutoscrolling) {
       this.scrollToBottomOfList();
     }
   }
 
   private createNewIdea(): CRaterIdea {
-    const idea = new CRaterIdea('', null);
+    const idea = new CRaterIdea('');
     idea.text = '';
     return idea;
   }
@@ -84,7 +84,7 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
   }
 
   protected deleteIdeaDescription(ideaIndex: number): void {
-    if (confirm($localize`Are you sure you want to delete this idea name?`)) {
+    if (confirm($localize`Are you sure you want to delete this idea description?`)) {
       this.ideaDescriptions.splice(ideaIndex, 1);
       this.projectService.nodeChanged();
     }

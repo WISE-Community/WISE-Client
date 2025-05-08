@@ -34,6 +34,7 @@
         }
         @if (component.hasResponsesSummary && component.type === 'MultipleChoice') {
           <teacher-summary-display
+            class="summary-display"
             [nodeId]="nodeId"
             [componentId]="component.id"
             [periodId]="periodId"
@@ -46,6 +47,7 @@
         }
         @if (component.hasScoresSummary && component.hasScoreAnnotation) {
           <teacher-summary-display
+            class="summary-display"
             [nodeId]="nodeId"
             [componentId]="component.id"
             [periodId]="periodId"
@@ -53,6 +55,20 @@
             [source]="source"
             [chartType]="'column'"
             [doRender]="true"
+          />
+        }
+        @if (
+          component.hasResponsesSummary &&
+          ['DialogGuidance', 'OpenResponse'].includes(component.type)
+        ) {
+          <ideas-summary
+            [nodeId]="nodeId"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [studentDataType]="'responses'"
+            [source]="source"
+            [doRender]="true"
+            [componentType]="component.type"
           />
         }
       </div>

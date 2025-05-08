@@ -27,6 +27,9 @@ import { OpenResponseContent } from '../OpenResponseContent';
 import { EditOpenResponseAdvancedComponent } from './edit-open-response-advanced.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
+import { MatSelectModule } from '@angular/material/select';
 
 let component: EditOpenResponseAdvancedComponent;
 let fixture: ComponentFixture<EditOpenResponseAdvancedComponent>;
@@ -37,7 +40,7 @@ const scoringRule3 = createScoringRuleObject(3, 'You got 3 points');
 describe('EditOpenResponseAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         EditComponentAddToNotebookButtonComponent,
         EditCommonAdvancedComponent,
         EditComponentExcludeFromTotalScoreComponent,
@@ -50,18 +53,26 @@ describe('EditOpenResponseAdvancedComponent', () => {
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent,
         EditOpenResponseAdvancedComponent
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        MatSelectModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -98,10 +109,12 @@ describe('EditOpenResponseAdvancedComponent', () => {
 
 function enableCRaterClicked() {
   describe('enableCRaterClicked', () => {
-    it('should handle enable CRater clicked', () => {
-      expect(component.componentContent.cRater).toBeUndefined();
-      component.componentContent.enableCRater = true;
-      component.enableCRaterClicked();
+    it('should handle enable CRater clicked', async () => {
+      expect(component.componentContent.enableCRater).toBeFalsy();
+      const loader = TestbedHarnessEnvironment.loader(fixture);
+      const checkboxes = await loader.getAllHarnesses(MatCheckboxHarness);
+      await checkboxes[1].check();
+      expect(component.componentContent.enableCRater).toBeTruthy();
       expect(component.componentContent.cRater).toEqual(component.createCRaterObject());
     });
   });

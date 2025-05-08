@@ -1,8 +1,11 @@
+@use 'style/abstracts/variables';
+@use 'style/abstracts/functions';
+
 .content-block {
   padding: 16px;
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     padding: 24px;
   }
 }

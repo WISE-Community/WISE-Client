@@ -16,29 +16,27 @@ import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleC
 import { CHOICE_CHOSEN_VALUE, SCORE_VALUE } from '../../../../app/domain/branchCriteria';
 import { ComponentContent } from '../../common/ComponentContent';
 import { MatSelectModule } from '@angular/material/select';
-import { DisplayBranchPathStepsComponent } from '../display-branch-path-steps/display-branch-path-steps.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    imports: [
-        CommonModule,
-        DisplayBranchPathStepsComponent,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatTooltipModule,
-        ReactiveFormsModule
-    ],
-    selector: 'create-branch-paths',
-    styleUrl: './create-branch-paths.component.scss',
-    templateUrl: './create-branch-paths.component.html'
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    ReactiveFormsModule
+  ],
+  selector: 'create-branch-paths',
+  styleUrl: './create-branch-paths.component.scss',
+  templateUrl: './create-branch-paths.component.html'
 })
 export class CreateBranchPathsComponent {
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;

@@ -1,4 +1,4 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .rubric {
   margin-bottom: 16px;
@@ -9,8 +9,8 @@
 
   &:first-of-type {
     .component-header {
-      border-top-left-radius: $button-border-radius;
-      border-top-right-radius: $button-border-radius;
+      border-top-left-radius: variables.$button-border-radius;
+      border-top-right-radius: variables.$button-border-radius;
     }
   }
 }
@@ -25,7 +25,7 @@
 
   .mat-mdc-card-content {
     padding: 8px;
-    border-radius: $button-border-radius;
+    border-radius: variables.$button-border-radius;
     overflow: auto;
   }
 }
@@ -37,4 +37,9 @@
     right: 0;
     width: auto;
   }
+}
+
+.summary-display {
+  display: block;
+  margin: 16px 0;
 }

@@ -1,5 +1,7 @@
 @use 'sass:map';
-// create a custom Angular Material theme
+@use 'sass:string';
+@use 'sass:list';
+@use 'style/abstracts/variables';
 
 /// Map deep get (from https://css-tricks.com/snippets/sass/deep-getset-maps/)
 /// @author Hugo Giraudel, modified by commenter Travis
@@ -10,16 +12,16 @@
   $value: $map;
   $keys: ();
   $separator: '.';
-  $index : str-index($path, $separator);
+  $index : string.index($path, $separator);
 
   @while $index != null {
-    $item: str-slice($path, 1, $index - 1);
-    $keys: append($keys, $item);
-    $path: str-slice($path, $index + 1);
-    $index : str-index($path, $separator);
+    $item: string.slice($path, 1, $index - 1);
+    $keys: list.append($keys, $item);
+    $path: string.slice($path, $index + 1);
+    $index : string.index($path, $separator);
   }
 
-  $keys: append($keys, $path);
+  $keys: list.append($keys, $path);
 
   @each $key in $keys {
     $value: map.get($value, $key);
@@ -31,5 +33,5 @@
 // get breakpoint size or media query
 // @param {String} $path - List of keys separated by periods, e.g. 'md.mediaQuery' or 'md.min'
 @function breakpoint($path) {
-  @return map-deep-get($breakpoints, $path);
+  @return map-deep-get(variables.$breakpoints, $path);
 }

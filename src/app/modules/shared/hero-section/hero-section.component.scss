@@ -1,9 +1,7 @@
 @use '@angular/material' as mat;
-@import
-  'style/base/typography',
-  'style/abstracts/functions',
-  'style/abstracts/variables',
-  'style/abstracts/mixins';
+@use 'style/base/typography';
+@use 'style/abstracts/functions';
+@use 'style/abstracts/mixins';
 
 .hero {
   width: 100%;
@@ -13,11 +11,11 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     padding: 40% 0 0;
   }
 
-  @media (min-width: breakpoint('lg.min')) {
+  @media (min-width: functions.breakpoint('lg.min')) {
     padding: 33% 0 0;
   }
 
@@ -30,21 +28,21 @@
   }
 
   .hero-content {
-    width: breakpoint('lg.min');
+    width: functions.breakpoint('lg.min');
     max-width: 100%;
     margin: 0 auto;
     padding: 16px 16px;
 
-    @media (min-width: breakpoint('sm.min')) {
+    @media (min-width: functions.breakpoint('sm.min')) {
       padding: 16px 48px;
     }
 
-    @media (min-width: breakpoint('lg.min')) {
+    @media (min-width: functions.breakpoint('lg.min')) {
       padding: 32px 64px;
     }
 
-    @media (min-width: breakpoint('xl.min')) {
-      width: breakpoint('xl.min');
+    @media (min-width: functions.breakpoint('xl.min')) {
+      width: functions.breakpoint('xl.min');
     }
   }
 
@@ -53,24 +51,24 @@
     text-align: center;
 
     &.with-sidecontent {
-      @media (min-width: breakpoint('md.min')) {
+      @media (min-width: functions.breakpoint('md.min')) {
         text-align: start;
       }
     }
   }
 
   h1.headline {
-    @media (min-width: breakpoint('sm.min')) {
+    @media (min-width: functions.breakpoint('sm.min')) {
       margin-bottom: 24px;
 
       .mat-icon {
-        @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-3'));
+        @include mixins.mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-3'));
       }
     }
 
-    @media (min-width: breakpoint('md.min')) {
+    @media (min-width: functions.breakpoint('md.min')) {
       .mat-icon {
-        @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-2'));
+        @include mixins.mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-2'));
       }
     }
   }
@@ -78,11 +76,11 @@
   h1.with-tagline {
     margin-bottom: 4px;
 
-    @media (min-width: breakpoint('sm.min')) {
+    @media (min-width: functions.breakpoint('sm.min')) {
       margin-bottom: 8px;
     }
 
-    @media (min-width: breakpoint('md.min')) {
+    @media (min-width: functions.breakpoint('md.min')) {
       margin-bottom: 16px;
     }
   }
@@ -92,18 +90,18 @@
     margin-bottom: 0 !important;
 
     .mat-icon {
-      @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-5'));
+      @include mixins.mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-5'));
     }
 
-    @media (min-width: breakpoint('sm.min')) {
+    @media (min-width: functions.breakpoint('sm.min')) {
       text-align: start;
       .mat-icon {
-        @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-4'));
+        @include mixins.mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-4'));
       }
     }
   }
 
-  @media (max-width: breakpoint('xs.max')) {
+  @media (max-width: functions.breakpoint('xs.max')) {
     h1.headline, h2.tagline {
       line-height: 1.2;
     }

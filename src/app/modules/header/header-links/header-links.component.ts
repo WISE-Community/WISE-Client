@@ -7,10 +7,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-header-links',
-    imports: [CommonModule, FlexLayoutModule, HeaderSigninComponent, MatButtonModule, RouterModule],
-    templateUrl: './header-links.component.html',
-    styleUrl: './header-links.component.scss'
+  selector: 'app-header-links',
+  imports: [CommonModule, FlexLayoutModule, HeaderSigninComponent, MatButtonModule, RouterModule],
+  templateUrl: './header-links.component.html',
+  styleUrl: './header-links.component.scss'
 })
 export class HeaderLinksComponent {
   @Input() location: string;

@@ -1,20 +1,41 @@
-import { Component, Inject, Signal, WritableSignal, computed, signal } from '@angular/core';
-import { LibraryProject } from '../libraryProject';
-import { LibraryService } from '../../../services/library.service';
-import { LibraryComponent } from '../library/library.component';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
+import { ApplyTagsButtonComponent } from '../../../teacher/apply-tags-button/apply-tags-button.component';
+import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { PageEvent } from '@angular/material/paginator';
-import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
-import { Tag } from '../../../domain/tag';
+import { BehaviorSubject } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { Component, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { LibraryComponent } from '../library/library.component';
+import { LibraryProject } from '../libraryProject';
+import { LibraryProjectComponent } from '../library-project/library-project.component';
+import { LibraryService } from '../../../services/library.service';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { Project } from '../../../domain/project';
+import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
+import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
+import { SelectTagsComponent } from '../../../teacher/select-tags/select-tags.component';
+import { Tag } from '../../../domain/tag';
 
 @Component({
-    selector: 'app-personal-library',
-    styleUrl: './personal-library.component.scss',
-    templateUrl: './personal-library.component.html',
-    standalone: false
+  imports: [
+    ApplyTagsButtonComponent,
+    ArchiveProjectsButtonComponent,
+    CommonModule,
+    FormsModule,
+    LibraryProjectComponent,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    SelectAllItemsCheckboxComponent,
+    SelectTagsComponent
+  ],
+  selector: 'app-personal-library',
+  styleUrl: './personal-library.component.scss',
+  templateUrl: './personal-library.component.html'
 })
 export class PersonalLibraryComponent extends LibraryComponent {
   filteredProjects: LibraryProject[] = [];
@@ -36,17 +57,21 @@ export class PersonalLibraryComponent extends LibraryComponent {
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
-    protected dialog: MatDialog,
     protected libraryService: LibraryService
   ) {
-    super(dialog, libraryService);
+    super(libraryService);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.subscriptions.add(
       this.libraryService.personalLibraryProjectsSource$.subscribe(
         (personalProjects: LibraryProject[]) => {
+          if (history.state?.newProjectId) {
+            personalProjects.find(
+              (project) => project.id === history.state?.newProjectId
+            ).isHighlighted = true;
+          }
           this.personalProjects = personalProjects;
           this.updateProjects();
         }
@@ -80,42 +105,28 @@ export class PersonalLibraryComponent extends LibraryComponent {
     );
   }
 
-  combinePersonalAndSharedProjects() {
+  private combinePersonalAndSharedProjects(): void {
     const projects = this.personalProjects.concat(this.sharedProjects);
     projects.sort(this.sortByProjectIdDesc);
     this.projects = projects;
   }
 
-  updateProjects() {
+  private updateProjects(): void {
     this.combinePersonalAndSharedProjects();
     this.filterUpdated();
     this.unselectAllProjects();
   }
 
-  sortByProjectIdDesc(a, b) {
-    if (a.id < b.id) {
-      return 1;
-    } else if (a.id > b.id) {
-      return -1;
-    } else {
-      return 0;
-    }
+  private sortByProjectIdDesc(a, b): number {
+    return b.id - a.id;
   }
 
-  emitNumberOfProjectsVisible(numProjectsVisible: number = null) {
-    if (numProjectsVisible) {
-      this.libraryService.numberOfPersonalProjectsVisible.next(numProjectsVisible);
-    } else {
-      this.libraryService.numberOfPersonalProjectsVisible.next(this.filteredProjects.length);
-    }
+  protected getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number> {
+    return this.libraryService.numberOfPersonalProjectsVisible;
   }
 
-  protected getDetailsComponent(): any {
-    return PersonalLibraryDetailsComponent;
-  }
-
-  public filterUpdated(filterValues: ProjectFilterValues = null): void {
-    super.filterUpdated(filterValues);
+  public filterUpdated(): void {
+    super.filterUpdated();
     this.filteredProjects = this.filteredProjects.filter(
       (project) => project.hasTagWithText('archived') == this.showArchivedView
     );
@@ -133,7 +144,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
     this.unselectAllProjects();
   }
 
-  pageChange(event?: PageEvent, scroll?: boolean): void {
+  protected pageChange(event?: PageEvent, scroll?: boolean): void {
     super.pageChange(event, scroll);
     this.unselectAllProjects();
   }
@@ -178,21 +189,5 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected removeTag(tag: Tag): void {
     this.selectedTags = this.selectedTags.filter((selectedTag: Tag) => selectedTag.id !== tag.id);
     this.filterUpdated();
-  }
-}
-
-@Component({
-    selector: 'personal-library-details',
-    templateUrl: 'personal-library-details.html',
-    standalone: false
-})
-export class PersonalLibraryDetailsComponent {
-  constructor(
-    public dialogRef: MatDialogRef<PersonalLibraryDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-
-  close(): void {
-    this.dialogRef.close();
   }
 }

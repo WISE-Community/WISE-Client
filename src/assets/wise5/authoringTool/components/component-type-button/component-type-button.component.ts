@@ -9,24 +9,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    imports: [
-        ComponentInfoDialogComponent,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCardModule,
-        MatIconModule,
-        MatTooltipModule
-    ],
-    selector: 'component-type-button',
-    styleUrl: './component-type-button.component.scss',
-    templateUrl: './component-type-button.component.html'
+  imports: [FlexLayoutModule, MatButtonModule, MatCardModule, MatIconModule, MatTooltipModule],
+  selector: 'component-type-button',
+  styleUrl: './component-type-button.component.scss',
+  templateUrl: './component-type-button.component.html'
 })
 export class ComponentTypeButtonComponent {
   @Output() componentSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() componentType: string;
   protected label: string;
 
-  constructor(private componentInfoService: ComponentInfoService, private dialog: MatDialog) {}
+  constructor(
+    private componentInfoService: ComponentInfoService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     const componentInfo = this.componentInfoService.getInfo(this.componentType);

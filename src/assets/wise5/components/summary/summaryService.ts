@@ -1,8 +1,8 @@
 'use strict';
 
 import { ComponentService } from '../componentService';
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -26,7 +26,12 @@ export class SummaryService extends ComponentService {
       'OpenResponse',
       'Table'
     ];
-    this.componentsWithResponsesSummary = ['MultipleChoice', 'Table'];
+    this.componentsWithResponsesSummary = [
+      'DialogGuidance',
+      'MultipleChoice',
+      'OpenResponse',
+      'Table'
+    ];
   }
 
   getComponentTypeLabel(): string {

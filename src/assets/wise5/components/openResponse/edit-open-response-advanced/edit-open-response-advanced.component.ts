@@ -1,31 +1,33 @@
 import { Component } from '@angular/core';
-import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { CRaterService } from '../../../services/cRaterService';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { NotebookService } from '../../../services/notebookService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-    selector: 'edit-open-response-advanced',
-    templateUrl: 'edit-open-response-advanced.component.html',
-    styleUrls: ['edit-open-response-advanced.component.scss'],
-    standalone: false
+  selector: 'edit-open-response-advanced',
+  standalone: false,
+  styleUrl: 'edit-open-response-advanced.component.scss',
+  templateUrl: 'edit-open-response-advanced.component.html'
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
-  allowedConnectedComponentTypes = ['OpenResponse'];
+  protected allowedConnectedComponentTypes = ['OpenResponse'];
   componentContent: OpenResponseContent;
-  cRaterItemIdIsValid: boolean = null;
-  initialFeedbackRules = [
+  protected cRaterItemIdIsValid: boolean = null;
+  private initialFeedbackRules = [
     {
       id: 'isDefault',
       expression: 'isDefault',
       feedback: [$localize`Default feedback`]
     }
   ];
-  isVerifyingCRaterItemId: boolean = false;
-  nodeIds: string[] = [];
-  useCustomCompletionCriteria: boolean = false;
+  protected isVerifyingCRaterItemId: boolean;
+  protected nodeIds: string[] = [];
+  useCustomCompletionCriteria: boolean;
+  protected showIdeaDescriptions = true;
 
   constructor(
     protected cRaterService: CRaterService,
@@ -42,13 +44,23 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       this.useCustomCompletionCriteria = true;
     }
     this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
+    if (this.componentContent.enableCRater) {
+      this.createCRaterAndRubricIfNull();
+    }
+  }
+
+  private createCRaterAndRubricIfNull() {
+    if (this.componentContent.cRater == null) {
+      this.componentContent.cRater = this.createCRaterObject();
+    }
+    if (!this.componentContent.cRater.rubric) {
+      this.componentContent.cRater.rubric = { ideas: [] };
+    }
   }
 
   enableCRaterClicked(): void {
     if (this.componentContent.enableCRater) {
-      if (this.componentContent.cRater == null) {
-        this.componentContent.cRater = this.createCRaterObject();
-      }
+      this.createCRaterAndRubricIfNull();
       this.setShowSubmitButtonValue(true);
     } else {
       this.setShowSubmitButtonValue(false);
@@ -69,7 +81,10 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
         rules: this.initialFeedbackRules
       },
       enableMultipleAttemptScoringRules: false,
-      multipleAttemptScoringRules: []
+      multipleAttemptScoringRules: [],
+      rubric: {
+        ideas: []
+      }
     };
   }
 
@@ -129,9 +144,8 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   }
 
   multipleAttemptScoringRuleDeleteClicked(index: number): void {
-    const multipleAttemptScoringRule = this.componentContent.cRater.multipleAttemptScoringRules[
-      index
-    ];
+    const multipleAttemptScoringRule =
+      this.componentContent.cRater.multipleAttemptScoringRules[index];
     const scoreSequence = multipleAttemptScoringRule.scoreSequence;
     let previousScore = '';
     let currentScore = '';
@@ -261,7 +275,11 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   }
 
-  getComponents(nodeId: string): any[] {
+  protected toggleShowIdeaDescriptions(): void {
+    this.showIdeaDescriptions = !this.showIdeaDescriptions;
+  }
+
+  getComponents(nodeId: string): ComponentContent[] {
     return this.teacherProjectService.getComponents(nodeId);
   }
 

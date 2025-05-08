@@ -1,0 +1,55 @@
+<div class="main app-background">
+  <div class="content">
+    <header class="content__header">
+      <div class="flex flex-wrap justify-between mb-4 gap-2">
+        <h1 class="accent flex items-center gap-2 mat-headline-4">
+          <mat-icon>menu_book</mat-icon>
+          <span i18n>Unit Library</span>
+        </h1>
+        @if (showMyUnits) {
+          <div class="self-start flex gap-2">
+            <a mat-raised-button color="primary" routerLink="/teacher"
+              ><mat-icon>calendar_month</mat-icon> <span i18n>Class Schedule</span></a
+            >
+            <a mat-raised-button color="primary" href="{{ configService.getAuthoringToolLink() }}"
+              ><mat-icon>edit_square</mat-icon> <span i18n>Authoring Tool</span></a
+            >
+          </div>
+        }
+      </div>
+      <p class="pb-4" i18n>
+        Explore our curriculum library to find units and resources to use with your classes!
+      </p>
+    </header>
+    <section class="library notice-bg-bg rounded-md">
+      <div class="flex flex-col md:flex-row">
+        <div class="dark-theme content-block primary-bg p-4 md:w-1/3 lg:w-1/4">
+          <app-library-filters [isSplitScreen]="true" />
+        </div>
+        <div class="md:w-2/3 lg:w-3/4">
+          @if (showMyUnits) {
+            <nav
+              mat-tab-nav-bar
+              i18n-aria-label
+              aria-label="Unit library navigation"
+              [tabPanel]="tabPanel"
+            >
+              <a mat-tab-link routerLink="/curriculum/public" [active]="isPublicRoute()">
+                {{ getPublicTabLabel() }}
+              </a>
+              <a mat-tab-link routerLink="/curriculum/personal" [active]="isPersonalRoute()">
+                {{ getMyUnitsTabLabel() }}
+              </a>
+            </nav>
+            <mat-tab-nav-panel #tabPanel>
+              <public-library [hidden]="!isPublicRoute()"></public-library>
+              <app-personal-library [hidden]="!isPersonalRoute()"></app-personal-library>
+            </mat-tab-nav-panel>
+          } @else {
+            <public-library></public-library>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

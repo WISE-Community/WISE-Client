@@ -29,28 +29,26 @@ import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/
 import { RunEndedAndLockedMessageComponent } from './run-ended-and-locked-message/run-ended-and-locked-message.component';
 import { NodeComponent } from './node/node.component';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
-import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        ChooseBranchPathDialogComponent,
-        GroupTabsComponent,
-        MatSidenavModule,
-        NavigationComponent,
-        NodeComponent,
-        NodeNavigationComponent,
-        NotebookLauncherComponent,
-        NotebookNotesComponent,
-        NotebookReportComponent,
-        RunEndedAndLockedMessageComponent,
-        SafeUrl,
-        StepToolsComponent,
-        TopBarComponent
-    ],
-    selector: 'vle',
-    styleUrl: './vle.component.scss',
-    templateUrl: './vle.component.html'
+  imports: [
+    CommonModule,
+    GroupTabsComponent,
+    MatSidenavModule,
+    NavigationComponent,
+    NodeComponent,
+    NodeNavigationComponent,
+    NotebookLauncherComponent,
+    NotebookNotesComponent,
+    NotebookReportComponent,
+    RunEndedAndLockedMessageComponent,
+    SafeUrl,
+    StepToolsComponent,
+    TopBarComponent
+  ],
+  selector: 'vle',
+  styleUrl: './vle.component.scss',
+  templateUrl: './vle.component.html'
 })
 export class VLEComponent implements AfterViewInit {
   protected currentNode: Node;
@@ -88,7 +86,9 @@ export class VLEComponent implements AfterViewInit {
 
   @HostListener('window:beforeunload')
   beforeUnload(): void {
-    this.saveNodeExitedEvent();
+    if (this.sessionService.isSessionActive()) {
+      this.saveNodeExitedEvent();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -301,6 +301,11 @@ export class VLEComponent implements AfterViewInit {
 
   private scrollToTop() {
     document.querySelector('.top').scrollIntoView();
+  }
+
+  @HostListener('document:mousemove')
+  protected renewSession(): void {
+    this.sessionService.mouseMoved();
   }
 
   /**

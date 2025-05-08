@@ -1,21 +1,19 @@
 @use '@angular/material' as mat;
-@import
-  'style/abstracts/functions',
-  'style/abstracts/mixins',
-  'style/abstracts/variables';
+@use 'style/abstracts/functions';
+@use 'style/abstracts/variables';
 
 @mixin feature-styles() {
   width: 100%;
   height: auto;
 }
 
-@mixin feature-styles-img($radius: $feature-border-radius, $elevation: 6) {
+@mixin feature-styles-img($radius: variables.$feature-border-radius, $elevation: 6) {
   border-radius: $radius;
   @include mat.elevation($elevation);
 }
 
 .section {
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     padding-bottom: 72px;
   }
 }
@@ -25,7 +23,7 @@
   @include feature-styles();
   @include feature-styles-img($intro-border-radius, 0);
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     margin-top: -64px;
   }
 }
@@ -98,21 +96,21 @@
 }
 
 .feature--r {
-  @media (min-width: breakpoint('lg.min')) {
+  @media (min-width: functions.breakpoint('lg.min')) {
     margin-right: -8%;
   }
 
-  @media (min-width: breakpoint('xl.min')) {
+  @media (min-width: functions.breakpoint('xl.min')) {
     margin-right: -16%;
   }
 }
 
 .feature--l {
-  @media (min-width: breakpoint('lg.min')) {
+  @media (min-width: functions.breakpoint('lg.min')) {
     margin-left: -8%;
   }
 
-  @media (min-width: breakpoint('xl.min')) {
+  @media (min-width: functions.breakpoint('xl.min')) {
     margin-left: -16%;
   }
 }

@@ -1,8 +1,6 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions';
+@use 'style/abstracts/functions';
 
-@media (min-width: breakpoint('sm.min')) {
+@media (min-width: functions.breakpoint('sm.min')) {
   translatable-input {
     width: 480px;
     display: block;

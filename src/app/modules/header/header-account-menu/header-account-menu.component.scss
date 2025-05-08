@@ -1,10 +1,7 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions',
-  'style/abstracts/mixins';
+@use 'style/abstracts/mixins';
 
 .mat-mdc-icon-button {
-  @include mat-icon-button-size(36px);
+  @include mixins.mat-icon-button-size(36px);
 }
 
 .header-account-menu {
@@ -16,7 +13,7 @@
   font-weight: 500;
 
   mat-icon {
-    @include mat-icon-size(36px);
+    @include mixins.mat-icon-size(36px);
   }
 }
 

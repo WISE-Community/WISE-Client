@@ -1,6 +1,4 @@
-@import
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .monitor {
   height: 100%;
@@ -28,7 +26,7 @@ top-bar {
 
 #content {
   position: fixed;
-  top: $toolbar-height + $secondary-toolbar-height;
+  top: variables.$toolbar-height + variables.$secondary-toolbar-height;
   bottom: 0;
   width: 100%;
   overflow: scroll;

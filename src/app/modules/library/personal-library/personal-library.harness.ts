@@ -1,10 +1,10 @@
 import { ComponentHarness } from '@angular/cdk/testing';
-import { MatSelectHarness } from '@angular/material/select/testing';
 import { LibraryProjectHarness } from '../library-project/library-project.harness';
 import { MatButtonHarness } from '@angular/material/button/testing';
-import { SelectAllItemsCheckboxHarness } from '../select-all-items-checkbox/select-all-items-checkbox.harness';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { MatPaginatorHarness } from '@angular/material/paginator/testing';
+import { SelectAllItemsCheckboxHarness } from '../select-all-items-checkbox/select-all-items-checkbox.harness';
+import { MatSelectHarness } from '@angular/material/select/testing';
 
 export class PersonalLibraryHarness extends ComponentHarness {
   static hostSelector = 'app-personal-library';

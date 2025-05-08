@@ -1,11 +1,9 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Test coverage
 on:
-  push:
-    branches: [develop]
-  pull_request:
+  workflow_call:
+    secrets:
+      test_reporter:
+        required: true
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
@@ -22,7 +20,7 @@ jobs:
       - run: npm ci
       - uses: paambaati/codeclimate-action@v2.7.5
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          CC_TEST_REPORTER_ID: ${{secrets.test_reporter}}
         with:
           coverageCommand: npm run test-coverage
           coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov

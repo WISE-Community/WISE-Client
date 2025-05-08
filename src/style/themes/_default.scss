@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
-@import 'style/base/typography';
+@use 'style/base/typography';
 
 // WISE Default theme
 
@@ -100,7 +100,7 @@ $default: mat.m2-define-light-theme((
     accent: $default-theme-accent,
     warn: $default-theme-warn,
   ),
-  typography: $wise-typography,
+  typography: typography.$wise-typography,
 ));
 
 $default-theme-background: (

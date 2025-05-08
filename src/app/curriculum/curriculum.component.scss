@@ -1,0 +1,11 @@
+.content-block {
+  padding: 16px;
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
+  
+  @apply md:rounded-md md:rounded-se-none md:rounded-ee-none;
+}
+
+.mat-headline-4 {
+  margin-bottom: 0;
+}

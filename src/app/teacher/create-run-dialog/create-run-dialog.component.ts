@@ -1,6 +1,31 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog
+} from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { Project } from '../../domain/project';
 import { TeacherService } from '../teacher.service';
@@ -8,13 +33,31 @@ import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
 import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { TeacherRun } from '../teacher-run';
-import { Router } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
-    selector: 'create-run-dialog',
-    templateUrl: './create-run-dialog.component.html',
-    styleUrls: ['./create-run-dialog.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatRadioModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatCardModule
+  ],
+  providers: [provideNativeDateAdapter()],
+  selector: 'create-run-dialog',
+  styleUrl: './create-run-dialog.component.scss',
+  templateUrl: './create-run-dialog.component.html'
 })
 export class CreateRunDialogComponent {
   form: FormGroup;

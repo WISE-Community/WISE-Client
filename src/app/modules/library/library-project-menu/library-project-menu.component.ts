@@ -7,66 +7,61 @@ import { UserService } from '../../../services/user.service';
 import { ConfigService } from '../../../services/config.service';
 import { EditRunWarningDialogComponent } from '../../../teacher/edit-run-warning-dialog/edit-run-warning-dialog.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
-    selector: 'app-library-project-menu',
-    styleUrl: './library-project-menu.component.scss',
-    templateUrl: './library-project-menu.component.html',
-    standalone: false
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule],
+  selector: 'app-library-project-menu',
+  styleUrl: './library-project-menu.component.scss',
+  templateUrl: './library-project-menu.component.html'
 })
 export class LibraryProjectMenuComponent {
-  @Input()
-  project: Project;
-
-  @Input()
-  isRun: boolean;
-
-  protected archived: boolean = false;
-  editLink: string = '';
-  previewLink: string = '';
-  isCanEdit: boolean = false;
-  isCanShare: boolean = false;
-  isChild: boolean = false;
+  protected archived: boolean;
+  protected canEdit: boolean;
+  protected canShare: boolean;
+  protected isChild: boolean;
+  @Input() isRun: boolean;
+  @Input() project: Project;
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
+    private configService: ConfigService,
     private dialog: MatDialog,
     private teacherService: TeacherService,
-    private userService: UserService,
-    private configService: ConfigService
+    private userService: UserService
   ) {}
 
-  ngOnInit() {
-    this.isCanEdit = this.isOwner() || this.isSharedOwnerWithEditPermission();
-    this.isCanShare = this.isOwner() && !this.isRun;
-    this.editLink = `${this.configService.getContextPath()}/teacher/edit/unit/${this.project.id}`;
+  ngOnInit(): void {
+    this.canEdit = this.isOwner() || this.isSharedOwnerWithEditPermission();
+    this.canShare = this.isOwner() && !this.isRun;
     this.isChild = this.project.isChild();
     this.archived = this.project.hasTagWithText('archived');
   }
 
-  isOwner() {
+  private isOwner(): boolean {
     return this.userService.getUserId() == this.project.owner.id;
   }
 
-  isSharedOwnerWithEditPermission() {
+  private isSharedOwnerWithEditPermission(): boolean {
     const userId = this.userService.getUserId();
-    for (let sharedOwner of this.project.sharedOwners) {
-      if (userId == sharedOwner.id) {
-        return this.hasEditPermission(sharedOwner);
-      }
-    }
-    return false;
+    return this.project.sharedOwners.some(
+      (owner) => owner.id === userId && this.hasEditPermission(owner)
+    );
   }
 
-  hasEditPermission(sharedOwner) {
+  private hasEditPermission(sharedOwner: any): boolean {
     return sharedOwner.permissions.includes(Project.EDIT_PERMISSION);
   }
 
-  copyProject() {
+  protected copyProject(): void {
     this.teacherService.copyProject(this.project, this.dialog);
   }
 
-  editProject() {
+  protected editProject(): void {
     this.teacherService.getProjectLastRun(this.project.id).subscribe((projectRun) => {
       if (projectRun != null) {
         projectRun.project = this.project;
@@ -75,12 +70,12 @@ export class LibraryProjectMenuComponent {
           panelClass: 'dialog-sm'
         });
       } else {
-        window.location.href = this.editLink;
+        window.location.href = `${this.configService.getContextPath()}/teacher/edit/unit/${this.project.id}`;
       }
     });
   }
 
-  shareProject() {
+  protected shareProject(): void {
     this.dialog.open(ShareProjectDialogComponent, {
       data: { project: this.project },
       panelClass: 'dialog-md'

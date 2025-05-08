@@ -3,26 +3,33 @@
 </button>
 <mat-menu #projectMenu="matMenu" xPosition="before">
   <div class="header-account-menu">
-    <ng-container *ngIf="isChild">
+    @if (isChild) {
       <div class="menu-info secondary-text" i18n>Parent ID: {{ project.parentId }}</div>
-      <mat-divider></mat-divider>
-    </ng-container>
+      <mat-divider />
+    }
     <a mat-menu-item (click)="copyProject()">
       <mat-icon>content_copy</mat-icon> <ng-container i18n>Copy</ng-container>
     </a>
-    <a mat-menu-item (click)="editProject()" *ngIf="isCanEdit">
-      <mat-icon>edit</mat-icon> <ng-container i18n>Edit</ng-container>
-    </a>
-    <a mat-menu-item (click)="shareProject()" *ngIf="isCanShare">
-      <mat-icon>share</mat-icon> <ng-container i18n>Share</ng-container>
-    </a>
-    <a mat-menu-item *ngIf="!archived" (click)="archive(true)">
-      <mat-icon>archive</mat-icon>
-      <span i18n>Archive</span>
-    </a>
-    <a mat-menu-item *ngIf="archived" (click)="archive(false)">
-      <mat-icon>unarchive</mat-icon>
-      <span i18n>Restore</span>
-    </a>
+    @if (canEdit) {
+      <a mat-menu-item (click)="editProject()">
+        <mat-icon>edit</mat-icon> <ng-container i18n>Edit</ng-container>
+      </a>
+    }
+    @if (canShare) {
+      <a mat-menu-item (click)="shareProject()">
+        <mat-icon>share</mat-icon> <ng-container i18n>Share</ng-container>
+      </a>
+    }
+    @if (archived) {
+      <a mat-menu-item (click)="archive(false)">
+        <mat-icon>unarchive</mat-icon>
+        <span i18n>Restore</span>
+      </a>
+    } @else {
+      <a mat-menu-item (click)="archive(true)">
+        <mat-icon>archive</mat-icon>
+        <span i18n>Archive</span>
+      </a>
+    }
   </div>
 </mat-menu>

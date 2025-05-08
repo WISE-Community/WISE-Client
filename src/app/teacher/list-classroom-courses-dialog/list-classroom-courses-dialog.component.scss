@@ -1,12 +1,9 @@
 @use '@angular/material' as mat;
-@import
-  'style/base/typography',
-  'style/abstracts/functions',
-  'style/abstracts/variables',
-  'style/abstracts/mixins';
+@use 'style/base/typography';
+@use 'style/abstracts/mixins';
 
 h2 {
   .mat-icon {
-    @include mat-icon-size(mat.m2-font-size($wise-typography, 'headline-4'));
+    @include mixins.mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-4'));
   }
 }

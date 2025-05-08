@@ -4,22 +4,18 @@ import { fakeAsyncResponse } from '../../../student/student-run-list/student-run
 import { LibraryService } from '../../../services/library.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryGroup } from '../libraryGroup';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 export class MockLibraryService {
   libraryGroupsSource$ = fakeAsyncResponse({});
   officialLibraryProjectsSource$ = fakeAsyncResponse([]);
-  projectFilterValuesSource$ = fakeAsyncResponse({
-    searchValue: '',
-    disciplineValue: [],
-    dciArrangementValue: [],
-    peValue: []
-  });
+  filterValuesUpdated$ = of();
   implementationModelOptions: LibraryGroup[] = [];
-  numberOfOfficialProjectsVisible = new BehaviorSubject<number>(0);
+  numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
   getOfficialLibraryProjects() {}
+  filterValues = new ProjectFilterValues();
 }
 
 describe('OfficialLibraryComponent', () => {
@@ -27,7 +23,7 @@ describe('OfficialLibraryComponent', () => {
   let fixture: ComponentFixture<OfficialLibraryComponent>;
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [OverlayModule, MatDialogModule],
+      imports: [OverlayModule],
       declarations: [OfficialLibraryComponent],
       providers: [{ provide: LibraryService, useClass: MockLibraryService }],
       schemas: [NO_ERRORS_SCHEMA]

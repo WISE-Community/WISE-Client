@@ -1,4 +1,4 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .edit-tag {
   width: 100%;
@@ -6,7 +6,7 @@
 }
 
 .tag-name {
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
   padding: 12px;
 }
 
