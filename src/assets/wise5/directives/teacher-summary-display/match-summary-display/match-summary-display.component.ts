@@ -2,6 +2,7 @@ import { AnnotationService } from '../../../services/annotationService';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
+import { MatchContent } from '../../../components/match/MatchContent';
 import { MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +23,7 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   protected bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
   protected matchSummaryData: MatchSummaryData;
+  protected isChoiceReuseMatch: boolean;
 
   constructor(
     protected annotationService: AnnotationService,
@@ -34,12 +36,21 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   }
 
   ngOnInit(): void {
+    this.setIsChoiceReuseMatch();
     this.getLatestWork().subscribe((componentStates) => {
       this.matchSummaryData = new MatchSummaryData(componentStates);
       this.setBucketValues();
       this.setBucketData();
       this.setBucketShowMore();
     });
+  }
+
+  private setIsChoiceReuseMatch(): void {
+    this.isChoiceReuseMatch = (
+      this.projectService
+        .getComponentsFromStep(this.nodeId)
+        .find((component) => component.id === this.componentId) as MatchContent
+    ).choiceReuseEnabled;
   }
 
   protected setBucketValues(): void {

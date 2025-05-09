@@ -1,12 +1,14 @@
 @if (getBucketData().length > 0) {
-  @for (bucket of getBucketData(); track $index) {
+  @for (bucket of getBucketData(); let isFirstBucket = $first; track $index) {
     <div class="bucket">
       <h1>{{ bucket.value }}</h1>
       @for (choice of bucket.choices; track $index) {
         @if ($index < 3 || getBucketShowMore(bucket.value)) {
           <div class="match-item">
             {{ choice.getId() }}
-            <span class="right-align">{{ choice.getCount() }}<mat-icon>person</mat-icon></span>
+            @if (!isChoiceReuseMatch || !isFirstBucket) {
+              <span class="right-align">{{ choice.getCount() }}<mat-icon>person</mat-icon></span>
+            }
           </div>
         }
       }
