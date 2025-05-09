@@ -1,8 +1,10 @@
 import { AnnotationService } from '../../../services/annotationService';
-import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
+import { MatIconModule } from '@angular/material/icon';
 import { SummaryDataPoint } from '../../summary-display/summary-data/SummaryDataPoint';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
@@ -10,14 +12,15 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 
 @Component({
+  imports: [CommonModule, MatIconModule],
+  selector: 'match-summary-display',
   styleUrl: './match-summary-display.component.scss',
   templateUrl: './match-summary-display.component.html'
 })
-export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent {
+export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent implements OnInit {
   private bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
   protected bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
-  @Input() protected isOrderedMatch: boolean;
   protected matchSummaryData: MatchSummaryData;
 
   constructor(
@@ -28,6 +31,15 @@ export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplay
     protected summaryService: SummaryService
   ) {
     super(annotationService, configService, dataService, projectService, summaryService);
+  }
+
+  ngOnInit(): void {
+    this.getLatestWork().subscribe((componentStates) => {
+      this.matchSummaryData = new MatchSummaryData(componentStates);
+      this.setBucketValues();
+      this.setBucketData();
+      this.setBucketShowMore();
+    });
   }
 
   protected setBucketValues(): void {
@@ -60,10 +72,9 @@ export abstract class MatchSummaryDisplayComponent extends TeacherSummaryDisplay
       .sort(this.sortChoices);
   }
 
-  protected abstract sortChoices(
-    choiceA: MatchSummaryDataPoint,
-    choiceB: MatchSummaryDataPoint
-  ): number;
+  protected sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
+    return choiceB.getCount() - choiceA.getCount();
+  }
 
   protected setBucketShowMore(): void {
     this.bucketValues.forEach((value) => this.bucketsShowMore.set(value, false));

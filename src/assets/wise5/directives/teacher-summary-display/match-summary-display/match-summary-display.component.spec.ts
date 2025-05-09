@@ -1,20 +1,20 @@
-import { AnnotationService } from '../../../../services/annotationService';
+import { AnnotationService } from '../../../services/annotationService';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ConfigService } from '../../../../services/configService';
+import { ConfigService } from '../../../services/configService';
+import { MatchSummaryDisplayComponent } from './match-summary-display.component';
 import { MockProviders } from 'ng-mocks';
 import { of } from 'rxjs';
-import { SummaryService } from '../../../../components/summary/summaryService';
-import { TeacherDataService } from '../../../../services/teacherDataService';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { UnorderedMatchSummaryDisplayComponent } from './unordered-match-summary-display.component';
+import { SummaryService } from '../../../components/summary/summaryService';
+import { TeacherDataService } from '../../../services/teacherDataService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 describe('UnorderedMatchSummaryDisplayComponent', () => {
-  let component: UnorderedMatchSummaryDisplayComponent;
-  let fixture: ComponentFixture<UnorderedMatchSummaryDisplayComponent>;
+  let component: MatchSummaryDisplayComponent;
+  let fixture: ComponentFixture<MatchSummaryDisplayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UnorderedMatchSummaryDisplayComponent],
+      imports: [MatchSummaryDisplayComponent],
       providers: [
         MockProviders(
           AnnotationService,
@@ -29,7 +29,7 @@ describe('UnorderedMatchSummaryDisplayComponent', () => {
       of(getComponentStates())
     );
 
-    fixture = TestBed.createComponent(UnorderedMatchSummaryDisplayComponent);
+    fixture = TestBed.createComponent(MatchSummaryDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -81,7 +81,7 @@ describe('UnorderedMatchSummaryDisplayComponent', () => {
 });
 
 function fixtureQueryAll(
-  fixture: ComponentFixture<UnorderedMatchSummaryDisplayComponent>,
+  fixture: ComponentFixture<MatchSummaryDisplayComponent>,
   selector: string
 ): Element[] {
   return fixture.nativeElement.querySelectorAll(selector);

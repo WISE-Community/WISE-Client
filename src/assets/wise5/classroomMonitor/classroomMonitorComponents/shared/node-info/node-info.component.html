@@ -72,10 +72,11 @@
           />
         }
         @if (component.type === 'Match') {
-          <match-summary-display-differentiator
+          <match-summary-display
             [nodeId]="nodeId"
             [componentId]="component.id"
             [periodId]="periodId"
+            [doRender]="true"
           />
         }
       </div>
