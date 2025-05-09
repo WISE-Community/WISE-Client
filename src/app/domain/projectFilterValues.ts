@@ -57,11 +57,13 @@ export class ProjectFilterValues {
   }
 
   clear(): void {
-    this.standardValue = [];
     this.disciplineValue = [];
-    this.unitTypeValue = [];
-    this.gradeLevelValue = [];
     this.featureValue = [];
+    this.gradeLevelValue = [];
+    this.publicUnitTypeValue = [];
+    this.searchValue = '';
+    this.standardValue = [];
+    this.unitTypeValue = [];
   }
 
   private matchesUnitType(project: LibraryProject): boolean {

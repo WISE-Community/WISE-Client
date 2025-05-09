@@ -1,14 +1,11 @@
 @use '@angular/material' as mat;
-@import
-  'style/base/typography',
-  'style/abstracts/functions',
-  'style/abstracts/variables',
-  'style/abstracts/mixins';
+@use 'style/base/typography';
+@use 'style/abstracts/functions';
 
 h1 {
   margin-bottom: 0;
 
-  @media (max-width: breakpoint('xs.max')) {
-    font-size: mat.m2-font-size($wise-typography, 'headline-6');
+  @media (max-width: functions.breakpoint('xs.max')) {
+    font-size: mat.m2-font-size(typography.$wise-typography, 'headline-6');
   }
 }

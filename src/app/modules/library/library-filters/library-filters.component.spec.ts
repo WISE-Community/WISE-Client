@@ -4,9 +4,9 @@ import { LibraryService } from '../../../services/library.service';
 import sampleLibraryProjects from '../sampleLibraryProjects';
 import { SimpleChange } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 describe('LibraryFiltersComponent', () => {
   let component: LibraryFiltersComponent;
@@ -22,9 +22,9 @@ describe('LibraryFiltersComponent', () => {
           communityLibraryProjectsSource$: of([] as LibraryProject[]),
           sharedLibraryProjectsSource$: of([] as LibraryProject[]),
           personalLibraryProjectsSource$: of([] as LibraryProject[]),
-          filterValuesUpdated$: of(),
-          filterValues: new ProjectFilterValues()
-        })
+          filterValuesUpdated$: of()
+        }),
+        ProjectFilterValues
       ]
     });
     projects = sampleLibraryProjects;

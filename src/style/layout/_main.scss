@@ -1,3 +1,5 @@
+@use 'style/abstracts/functions';
+
 $padding-top: 48px;
 $padding-top-gt-xs: 64px;
 $padding-top-gt-md: 72px;
@@ -6,15 +8,15 @@ $padding-top-gt-md: 72px;
   padding: $padding-top 8px 48px;
   flex: 1 0 auto;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     padding: $padding-top-gt-xs 24px 64px;
   }
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     padding: $padding-top-gt-xs 40px 78px;
   }
 
-  @media (min-width: breakpoint('lg.min')) {
+  @media (min-width: functions.breakpoint('lg.min')) {
     padding-top: $padding-top-gt-md;
   }
 }

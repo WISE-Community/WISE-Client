@@ -1,7 +1,7 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .response-text {
   padding: 4px 8px;
   display: inline-block;
-  border-radius: $card-border-radius;
+  border-radius: variables.$card-border-radius;
 }

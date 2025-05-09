@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
+@use 'style/base/typography';
 
 // define Angular Material theme colors
 $dark-primary: (
@@ -79,7 +80,7 @@ $dark: mat.m2-define-dark-theme((
     accent: $dark-theme-accent,
     warn: $dark-theme-warn,
   ),
-  typography: $wise-typography,
+  typography: typography.$wise-typography,
 ));
 
 // custom background and foreground palettes for this theme

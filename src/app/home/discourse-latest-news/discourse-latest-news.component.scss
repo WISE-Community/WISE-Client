@@ -1,4 +1,4 @@
-@import 'style/abstracts/functions', 'style/abstracts/variables', 'style/abstracts/mixins';
+@use 'style/abstracts/functions';
 
 .latest-news {
   padding: 8px;
@@ -11,7 +11,7 @@
     border-width: 0 8px 0 0;
   }
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     padding: 24px;
   }
 
@@ -20,7 +20,7 @@
   }
 
   > * {
-    @media (max-width: breakpoint('sm.max')) {
+    @media (max-width: functions.breakpoint('sm.max')) {
       display: inline;
     }
   }
@@ -33,7 +33,7 @@
 ul {
   padding: 0;
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     padding: 0 0 0 16px;
   }
 }
@@ -43,12 +43,12 @@ li {
     margin-bottom: 4px;
   }
 
-  @media (max-width: breakpoint('sm.max')) {
+  @media (max-width: functions.breakpoint('sm.max')) {
     display: inline;
     list-style-type: none;
   }
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     a {
       max-width: 100%;
       vertical-align: middle;

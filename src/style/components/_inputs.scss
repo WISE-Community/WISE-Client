@@ -1,3 +1,6 @@
+
+@use 'style/abstracts/variables';
+
 .controls {
   padding: 16px 16px 0;
   border-radius: 0;
@@ -47,7 +50,7 @@
 .mat-mdc-form-field.mat-form-field-appearance-fill {
   /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-flex {
-    border-radius: $card-border-radius;
+    border-radius: variables.$card-border-radius;
   }
   /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-underline {
@@ -57,8 +60,8 @@
   }
   /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-form-field-ripple {
-    border-bottom-left-radius: $card-border-radius;
-    border-bottom-right-radius: $card-border-radius;
+    border-bottom-left-radius: variables.$card-border-radius;
+    border-bottom-right-radius: variables.$card-border-radius;
   }
 }
 

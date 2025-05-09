@@ -18,7 +18,10 @@ export abstract class LibraryComponent implements OnInit {
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
 
-  constructor(protected libraryService: LibraryService) {}
+  constructor(
+    protected filterValues: ProjectFilterValues,
+    protected libraryService: LibraryService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -27,7 +30,7 @@ export abstract class LibraryComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.getFilterValues().clear();
+    this.filterValues.clear();
     this.subscriptions.unsubscribe();
   }
 
@@ -59,7 +62,7 @@ export abstract class LibraryComponent implements OnInit {
   protected filterUpdated(): void {
     this.filteredProjects = this.projects
       .map((project) => {
-        project.visible = this.getFilterValues().matches(project);
+        project.visible = this.filterValues.matches(project);
         return project;
       })
       .filter((project) => project.visible)
@@ -81,9 +84,5 @@ export abstract class LibraryComponent implements OnInit {
 
   protected countVisibleProjects(projects: LibraryProject[]): number {
     return projects.filter((project) => project.visible).length;
-  }
-
-  private getFilterValues(): ProjectFilterValues {
-    return this.libraryService.filterValues;
   }
 }

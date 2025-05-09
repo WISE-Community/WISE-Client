@@ -1,7 +1,5 @@
 @use '@angular/material' as mat;
-@import
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 @mixin selected {
   background-color: #000000;
@@ -18,7 +16,7 @@
 
 .icon-choice {
   padding: 6px;
-  border-radius: $button-border-radius;
+  border-radius: variables.$button-border-radius;
 }
 
 .icon-choice, .ki-choice {

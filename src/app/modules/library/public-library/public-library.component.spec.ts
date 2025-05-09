@@ -3,8 +3,8 @@ import { PublicLibraryComponent } from './public-library.component';
 import { MockProvider } from 'ng-mocks';
 import { LibraryService } from '../../../services/library.service';
 import { of } from 'rxjs';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { LibraryProject } from '../libraryProject';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 describe('PublicLibraryComponent', () => {
   let component: PublicLibraryComponent;
@@ -23,9 +23,9 @@ describe('PublicLibraryComponent', () => {
           officialLibraryProjectsSource$: of([
             { id: 1, name: 'P1' },
             { id: 3, name: 'P3' }
-          ] as LibraryProject[]),
-          filterValues: new ProjectFilterValues()
-        })
+          ] as LibraryProject[])
+        }),
+        ProjectFilterValues
       ]
     }).compileComponents();
 
