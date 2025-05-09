@@ -6,11 +6,10 @@ import { User } from '../../domain/user';
 import { Project } from '../../domain/project';
 import { TeacherHomeComponent } from './teacher-home.component';
 import { Run } from '../../domain/run';
-import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { Config } from '../../domain/config';
-import { LibraryService } from '../../services/library.service';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 export function fakeAsyncResponse<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -39,7 +38,7 @@ export class MockTeacherService {
     run2.project = project2;
     runs.push(run1);
     runs.push(run2);
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next(runs);
       observer.complete();
     });
@@ -65,8 +64,8 @@ export class MockUserService {
     user.roles = ['teacher'];
     user.username = 'DemoTeacher';
     user.id = 123456;
-    return Observable.create((observer) => {
-      observer.next(user);
+    return new Observable((observer) => {
+      observer.next([user]);
       observer.complete();
     });
   }
@@ -74,7 +73,7 @@ export class MockUserService {
 
 export class MockConfigService {
   getConfig(): Observable<Config> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       const config: Config = {
         contextPath: '/wise',
         logOutURL: '/logout',
@@ -98,29 +97,22 @@ export class MockConfigService {
   }
 }
 
-export class MockLibraryService {
-  clearAll(): void {}
-}
-
 describe('TeacherHomeComponent', () => {
   let component: TeacherHomeComponent;
   let fixture: ComponentFixture<TeacherHomeComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TeacherHomeComponent],
-        imports: [RouterTestingModule],
-        providers: [
-          { provide: TeacherService, useClass: MockTeacherService },
-          { provide: UserService, useClass: MockUserService },
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: LibraryService, useClass: MockLibraryService }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [TeacherHomeComponent],
+      providers: [
+        { provide: TeacherService, useClass: MockTeacherService },
+        { provide: UserService, useClass: MockUserService },
+        { provide: ConfigService, useClass: MockConfigService },
+        provideRouter([])
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeacherHomeComponent);

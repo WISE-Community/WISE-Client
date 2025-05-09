@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
 export class LibraryService {
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
-  private filterValuesUpdatedSource = new Subject<void>();
-  public filterValuesUpdated$ = this.filterValuesUpdatedSource.asObservable();
   private personalProjectsUrl = '/api/project/personal';
   private sharedProjectsUrl = '/api/project/shared';
   private copyProjectUrl = '/api/project/copy';
@@ -127,10 +125,6 @@ export class LibraryService {
     return this.http.post(this.copyProjectUrl, body, { headers: headers });
   }
 
-  filterValuesUpdated(): void {
-    this.filterValuesUpdatedSource.next();
-  }
-
   addPersonalLibraryProject(project: LibraryProject) {
     this.newProjectSource.next(project);
     this.router.navigate(['/curriculum/personal'], { state: { newProjectId: project.id } });
@@ -154,6 +148,5 @@ export class LibraryService {
     this.communityLibraryProjectsSource.next([]);
     this.personalLibraryProjectsSource.next([]);
     this.sharedLibraryProjectsSource.next([]);
-    this.filterValuesUpdatedSource.next();
   }
 }

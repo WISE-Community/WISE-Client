@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { LibraryProject } from '../modules/library/libraryProject';
 
 export class ProjectFilterValues {
@@ -9,6 +10,8 @@ export class ProjectFilterValues {
   searchValue: string = '';
   standardValue: string[] = [];
   unitTypeValue: string[] = [];
+  private updatedSource = new Subject<void>();
+  public updated$ = this.updatedSource.asObservable();
 
   matches(project: LibraryProject): boolean {
     return (
@@ -115,5 +118,9 @@ export class ProjectFilterValues {
         this.gradeLevelValue.includes(Number(gradeLevel))
       )
     );
+  }
+
+  emitUpdated(): void {
+    this.updatedSource.next();
   }
 }
