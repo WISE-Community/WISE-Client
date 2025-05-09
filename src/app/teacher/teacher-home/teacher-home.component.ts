@@ -3,14 +3,13 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../domain/user';
 import { ConfigService } from '../../services/config.service';
 import { MatTabGroup } from '@angular/material/tabs';
-import { LibraryService } from '../../services/library.service';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-teacher-home',
-    templateUrl: './teacher-home.component.html',
-    styleUrls: ['./teacher-home.component.scss'],
-    standalone: false
+  selector: 'app-teacher-home',
+  templateUrl: './teacher-home.component.html',
+  styleUrls: ['./teacher-home.component.scss'],
+  standalone: false
 })
 export class TeacherHomeComponent implements OnInit {
   @ViewChild('tabs', { static: true }) tabs: MatTabGroup;
@@ -26,7 +25,6 @@ export class TeacherHomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private configService: ConfigService,
-    private libraryService: LibraryService,
     private router: Router
   ) {}
 
@@ -38,10 +36,6 @@ export class TeacherHomeComponent implements OnInit {
         this.discourseUrl = this.configService.getDiscourseURL();
       }
     });
-  }
-
-  ngOnDestroy() {
-    this.libraryService.clearAll();
   }
 
   getUser() {

@@ -52,19 +52,19 @@ export class LibraryFiltersComponent {
     private libraryService: LibraryService,
     private utilService: UtilService
   ) {
-    libraryService.officialLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+    this.libraryService.officialLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
       this.libraryProjects = projects;
       this.populateFilterOptions();
     });
-    libraryService.communityLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+    this.libraryService.communityLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
       this.communityProjects = projects;
       this.populateFilterOptions();
     });
-    libraryService.sharedLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+    this.libraryService.sharedLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
       this.sharedProjects = projects;
       this.populateFilterOptions();
     });
-    libraryService.personalLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+    this.libraryService.personalLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
       this.personalProjects = projects;
       this.populateFilterOptions();
     });
@@ -170,7 +170,7 @@ export class LibraryFiltersComponent {
   }
 
   private emitFilterValues(): void {
-    this.libraryService.filterValuesUpdated();
+    this.filterValues.emitUpdated();
   }
 
   protected clearFilterValues(): void {
