@@ -71,7 +71,7 @@ export class ComponentComponent {
 
   private pingEndpoint() {
     if (['DialogGuidance', 'OpenResponse'].includes(this.componentType)) {
-      this.pingEndpointService.startPinging(this.component, this.componentType);
+      this.pingEndpointService.startPinging(this.component);
     }
   }
 

@@ -13,7 +13,8 @@ export class PingEndpointService {
 
   constructor(private http: HttpClient) {}
 
-  startPinging(component: Component, componentType: string): void {
+  startPinging(component: Component): void {
+    const componentType = component.content.type;
     if (!this.isPinging) {
       this.findItemId(component, componentType);
       this.sendPing();
