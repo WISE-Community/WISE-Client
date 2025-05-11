@@ -39,6 +39,7 @@ export class LibraryProjectDetailsComponent implements OnInit {
   protected authorsString: string = '';
   protected canPreview: boolean;
   protected isCopy: boolean;
+  protected isMyUnit: boolean;
   protected isTeacher: boolean;
   protected isRunProject: false;
   protected licenseInfo = $localize`License pertains to original content created by the author(s). Authors are responsible for the usage and attribution of any third-party content linked to or included in this work.`;
@@ -46,6 +47,7 @@ export class LibraryProjectDetailsComponent implements OnInit {
   protected parentAuthorsString: string = '';
   protected parentProject: ParentProject;
   protected project: Project;
+  protected shareUnitUrl: string;
   protected standardLabels: any = {
     commonCore: $localize`Common Core`,
     learningForJustice: $localize`Learning For Justice`,
@@ -78,6 +80,8 @@ export class LibraryProjectDetailsComponent implements OnInit {
         this.project.metadata.unitType === 'Other' && this.project.metadata.resources.length === 0
       );
     }
+    this.isMyUnit = this.project.isOwner(this.userService.getUserId());
+    this.shareUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.project.id}&share=true`;
   }
 
   private setLicenseInfo(): void {

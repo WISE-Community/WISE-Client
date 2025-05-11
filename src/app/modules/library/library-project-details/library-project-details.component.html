@@ -196,6 +196,13 @@
 </div>
 <div mat-dialog-actions class="flex flex-col sm:flex-row gap-2 sm:gap-4 !items-stretch" align="end">
   <button mat-button cdkFocusInitial (click)="close()" i18n>Close</button>
+  @if (isMyUnit) {
+    <a href="{{ shareUnitUrl }}">
+      <button mat-flat-button color="success">
+        <mat-icon>upload</mat-icon>&nbsp;<ng-container i18n>Share with Community</ng-container>
+      </button>
+    </a>
+  }
   @if (
     isTeacher &&
     !isRunProject &&
