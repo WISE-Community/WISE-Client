@@ -21,6 +21,8 @@ import { NotebookService } from '../../services/notebookService';
 import { PingEndpointService } from '../../services/pingEndpointService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
+import { DialogGuidanceContent } from '../dialogGuidance/DialogGuidanceContent';
+import { OpenResponseContent } from '../openResponse/OpenResponseContent';
 
 @Component({
   imports: [CommonModule, HelpIconComponent],
@@ -66,13 +68,18 @@ export class ComponentComponent {
       this.rubric = this.component.content.rubric;
       this.showRubric = this.rubric != null && this.rubric != '';
     }
-    this.pingEndpoint();
+    this.addItemIdToPingListIfNecessary();
   }
 
-  private pingEndpoint() {
-    if (['DialogGuidance', 'OpenResponse'].includes(this.componentType)) {
-      this.pingEndpointService.startPinging(this.component);
+  private addItemIdToPingListIfNecessary(): void {
+    let itemId: string;
+    if (this.componentType === 'DialogGuidance') {
+      itemId = (this.component.content as DialogGuidanceContent).itemId;
+    } else if (this.componentType === 'OpenResponse') {
+      itemId = (this.component.content as OpenResponseContent).cRater?.itemId;
     }
+    if (!itemId) return;
+    this.pingEndpointService.addItemToPingList(itemId);
   }
 
   private setComponent(): void {

@@ -5,11 +5,12 @@ import { AudioRecorderComponent } from '../audio-recorder/audio-recorder.compone
 import { OpenResponseStudent } from './open-response-student.component';
 import { SpeechToTextComponent } from '../speech-to-text/speech-to-text.component';
 import { TranscribeService } from '../../../../wise5/services/transcribeService';
+import { PingEndpointService } from '../../../services/pingEndpointService';
 
 @NgModule({
   declarations: [AudioRecorderComponent, OpenResponseStudent],
   imports: [StudentTeacherCommonModule, StudentComponentModule, SpeechToTextComponent],
-  providers: [TranscribeService],
+  providers: [PingEndpointService, TranscribeService],
   exports: [OpenResponseStudent]
 })
 export class OpenResponseStudentModule {}

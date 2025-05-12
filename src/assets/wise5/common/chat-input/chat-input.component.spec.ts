@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChatInputComponent } from './chat-input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChatInputComponent } from './chat-input.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockProvider } from 'ng-mocks';
+import { PingEndpointService } from '../../services/pingEndpointService';
 
 describe('ChatInputComponent', () => {
   let component: ChatInputComponent;
@@ -8,7 +10,8 @@ describe('ChatInputComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, ChatInputComponent]
+      imports: [BrowserAnimationsModule, ChatInputComponent],
+      providers: [MockProvider(PingEndpointService)]
     });
     fixture = TestBed.createComponent(ChatInputComponent);
     component = fixture.componentInstance;

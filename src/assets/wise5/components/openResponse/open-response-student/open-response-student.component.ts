@@ -22,12 +22,13 @@ import { copy } from '../../../common/object/object';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 import { ConstraintService } from '../../../services/constraintService';
+import { PingEndpointService } from '../../../services/pingEndpointService';
 
 @Component({
-    selector: 'open-response-student',
-    templateUrl: 'open-response-student.component.html',
-    styleUrls: ['open-response-student.component.scss'],
-    standalone: false
+  selector: 'open-response-student',
+  templateUrl: 'open-response-student.component.html',
+  styleUrls: ['open-response-student.component.scss'],
+  standalone: false
 })
 export class OpenResponseStudent extends ComponentStudent {
   audioAttachments: any[] = [];
@@ -49,6 +50,7 @@ export class OpenResponseStudent extends ComponentStudent {
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private NotificationService: NotificationService,
+    private pingEndpointService: PingEndpointService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService
@@ -107,8 +109,17 @@ export class OpenResponseStudent extends ComponentStudent {
     this.broadcastDoneRenderingComponent();
   }
 
+  protected onFocus() {
+    if (this.isCRaterEnabled()) {
+      this.pingEndpointService.startPinging();
+    }
+  }
+
   ngOnDestroy(): void {
     super.ngOnDestroy();
+    if (this.isCRaterEnabled()) {
+      this.pingEndpointService.stopPinging();
+    }
   }
 
   performSubmit(submitTriggeredBy: string): void {
@@ -501,8 +512,8 @@ export class OpenResponseStudent extends ComponentStudent {
 
   snipButtonClicked($event: any): void {
     if (this.isDirty) {
-      const studentWorkSavedToServerSubscription = this.StudentDataService.studentWorkSavedToServer$.subscribe(
-        (componentState: any) => {
+      const studentWorkSavedToServerSubscription =
+        this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
           if (
             componentState &&
             this.nodeId === componentState.nodeId &&
@@ -522,8 +533,7 @@ export class OpenResponseStudent extends ComponentStudent {
             );
             studentWorkSavedToServerSubscription.unsubscribe();
           }
-        }
-      );
+        });
       this.saveButtonClicked(); // trigger a save
     } else {
       const studentWork = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(

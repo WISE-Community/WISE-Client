@@ -31,24 +31,44 @@ describe('PingEndpointService', () => {
     component = new DialogGuidanceComponent(dgContent, 'nodeId');
   });
 
-  it('should send ping to endpoint when startPinging() is called', () => {
-    pingEndpointService.startPinging(component);
-    expect(httpClientMock).toHaveBeenCalled();
+  it('should add to ping list iff item id is unique and for berkeley endpoint', () => {
+    expect(getPingListSize()).toEqual(0);
+    pingEndpointService.addItemToPingList('test');
+    expect(getPingListSize()).toEqual(0);
+    pingEndpointService.addItemToPingList('berkeley_test');
+    expect(getPingListSize()).toEqual(1);
+    pingEndpointService.addItemToPingList('berkeley_test');
+    expect(getPingListSize()).toEqual(1);
+  });
+
+  it('should send pings to endpoint when startPinging() is called', () => {
+    pingEndpointService.addItemToPingList('berkeley_test1');
+    pingEndpointService.addItemToPingList('berkeley_test2');
+    pingEndpointService.startPinging();
+    expect(httpClientMock).toHaveBeenCalledTimes(2);
   });
 
   it('should wait before sending another ping', fakeAsync(() => {
-    pingEndpointService.startPinging(component);
+    pingEndpointService.addItemToPingList('berkeley_test1');
+    pingEndpointService.addItemToPingList('berkeley_test2');
+    pingEndpointService.startPinging();
     tick(294999);
-    expect(httpClientMock).toHaveBeenCalledTimes(1);
-    tick(2);
     expect(httpClientMock).toHaveBeenCalledTimes(2);
+    tick(2);
+    expect(httpClientMock).toHaveBeenCalledTimes(4);
   }));
 
   it('should stop trying to ping when stopPinging()', fakeAsync(() => {
-    pingEndpointService.startPinging(component);
-    expect(httpClientMock).toHaveBeenCalledTimes(1);
+    pingEndpointService.addItemToPingList('berkeley_test1');
+    pingEndpointService.addItemToPingList('berkeley_test2');
+    pingEndpointService.startPinging();
+    expect(httpClientMock).toHaveBeenCalledTimes(2);
     pingEndpointService.stopPinging();
     tick(500000);
-    expect(httpClientMock).toHaveBeenCalledTimes(1);
+    expect(httpClientMock).toHaveBeenCalledTimes(2);
   }));
 });
+
+function getPingListSize(): number {
+  return [...pingEndpointService['pingList']].length;
+}

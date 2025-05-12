@@ -30,6 +30,7 @@
     (ngModelChange)="studentDataChanged()"
     [disabled]="isDisabled"
     cdkTextareaAutosize
+    (focus)="onFocus()"
   >
   </textarea>
   <speech-to-text
