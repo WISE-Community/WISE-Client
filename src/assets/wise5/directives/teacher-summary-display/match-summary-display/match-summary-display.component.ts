@@ -11,15 +11,26 @@ import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatIconModule],
   selector: 'match-summary-display',
-  styleUrl: './match-summary-display.component.scss',
+  styles: `
+    h3 {
+      margin-bottom: 8px;
+    }
+    .choice {
+      @apply flex gap-1 px-2 py-1 rounded-md bg-gray-100 my-1 text-sm;
+    }
+    .mat-icon {
+      vertical-align: middle;
+    }
+  `,
   templateUrl: './match-summary-display.component.html'
 })
 export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent implements OnInit {
-  private bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
+  protected bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
   protected bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
   protected matchSummaryData: MatchSummaryData;
@@ -68,13 +79,6 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     );
   }
 
-  protected getBucketData(): {
-    value: string;
-    choices: MatchSummaryDataPoint[];
-  }[] {
-    return this.bucketData;
-  }
-
   private getBucketDataByValue(bucketValue: string): MatchSummaryDataPoint[] {
     return this.matchSummaryData
       .getDataPoints()
@@ -95,7 +99,8 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     return this.bucketsShowMore.get(bucketValue);
   }
 
-  protected toggleBucketShowMore(bucketValue: string): void {
+  protected toggleBucketShowMore(bucketValue: string, event: Event): void {
+    event.preventDefault();
     this.bucketsShowMore.set(bucketValue, !this.bucketsShowMore.get(bucketValue));
   }
 
