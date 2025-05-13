@@ -82,11 +82,17 @@
               </mat-form-field>
             </p>
           }
-          @if (!isShareIssueType()) {
+          @if (!isShare) {
             <p>
               <mat-form-field appearance="fill" class="w-full">
                 <mat-label i18n>Summary</mat-label>
-                <input matInput id="summary" name="summary" formControlName="summary" />
+                <input
+                  matInput
+                  id="summary"
+                  name="summary"
+                  formControlName="summary"
+                  value="test"
+                />
                 @if (contactFormGroup.controls['summary'].hasError('required')) {
                   <mat-error i18n>Summary required</mat-error>
                 }

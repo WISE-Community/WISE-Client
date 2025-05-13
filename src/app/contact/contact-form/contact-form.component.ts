@@ -59,14 +59,9 @@ export class ContactFormComponent implements OnInit {
     this.isRecaptchaEnabled = this.configService.isRecaptchaEnabled();
     this.populateFieldsIfSignedIn();
     this.populateIssueTypes();
+    this.adjustSummaryRequiredOnIssueTypeChange();
     this.setIsShare();
     this.setIssueTypeIfNecessary();
-  }
-
-  private setIsShare() {
-    this.route.queryParams.subscribe((params) => {
-      this.isShare = params['share'];
-    });
   }
 
   obtainRunIdOrProjectIdIfNecessary() {
@@ -150,6 +145,26 @@ export class ContactFormComponent implements OnInit {
         { key: 'OTHER', value: $localize`Other` }
       ];
     }
+  }
+
+  private adjustSummaryRequiredOnIssueTypeChange() {
+    this.contactFormGroup.get('issueType').valueChanges.subscribe(() => {
+      const summaryControl = this.contactFormGroup.get('summary');
+      if (this.getControlFieldValue('issueType') === 'SHARE') {
+        summaryControl.clearValidators();
+        summaryControl.updateValueAndValidity();
+        this.isShare = true;
+      } else if (this.isShare) {
+        summaryControl.addValidators(Validators.required);
+        this.isShare = false;
+      }
+    });
+  }
+
+  private setIsShare() {
+    this.route.queryParams.subscribe((params) => {
+      this.isShare = params['share'];
+    });
   }
 
   setIssueTypeIfNecessary() {
@@ -279,6 +294,6 @@ export class ContactFormComponent implements OnInit {
   }
 
   protected isShareIssueType(): boolean {
-    return this.contactFormGroup.get('issueType').value === 'SHARE';
+    return this.getControlFieldValue('issueType') === 'SHARE';
   }
 }
