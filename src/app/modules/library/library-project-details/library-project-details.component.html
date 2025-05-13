@@ -68,6 +68,12 @@
           >
         </p>
       }
+      @if (project.metadata.unitType !== 'Platform') {
+        <p class="notice max-w-none" i18n>
+          Note: This unit was created outside of the WISE platform. Teaching resources are linked
+          below.
+        </p>
+      }
       @if (project.metadata.resources?.length > 0) {
         <p>
           <strong i18n>Resources:</strong>
@@ -210,7 +216,12 @@
   }
   @if (canPreview) {
     <button mat-flat-button color="primary" (click)="previewProject()">
-      <mat-icon>preview</mat-icon>&nbsp;<ng-container i18n>Preview</ng-container>
+      <mat-icon>preview</mat-icon>
+      @if (project.metadata.unitType === 'Platform') {
+        <ng-container i18n>Preview</ng-container>
+      } @else {
+        <ng-container i18n>Unit Resources</ng-container>
+      }
     </button>
   }
 </div>
