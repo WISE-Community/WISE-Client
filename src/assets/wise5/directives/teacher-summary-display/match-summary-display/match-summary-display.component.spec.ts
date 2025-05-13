@@ -8,7 +8,7 @@ import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
-describe('MatchSummaryDisplayComponent', () => {
+fdescribe('MatchSummaryDisplayComponent', () => {
   let component: MatchSummaryDisplayComponent;
   let fixture: ComponentFixture<MatchSummaryDisplayComponent>;
 
@@ -25,15 +25,19 @@ describe('MatchSummaryDisplayComponent', () => {
         )
       ]
     }).compileComponents();
+
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponentsFromStep').and.returnValue([
+      { id: 'cId', type: 'Match', choiceReuseEnabled: false }
+    ] as any[]);
+
     spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
       of(getComponentStates())
     );
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponentsFromStep').and.returnValue([
-      { choiceReuseEnabled: false }
-    ] as any[]);
 
     fixture = TestBed.createComponent(MatchSummaryDisplayComponent);
     component = fixture.componentInstance;
+    component.nodeId = 'nId';
+    component.componentId = 'cId';
     fixture.detectChanges();
   });
 
@@ -49,8 +53,8 @@ describe('MatchSummaryDisplayComponent', () => {
     expect(fixtureQueryAll(fixture, '.choice').length).toEqual(6);
   });
 
-  it('should only show Show More button if more than 3 choices in bucket', () => {
-    expect(fixtureQueryAll(fixture, '.bucket > ul > a').length).toEqual(1);
+  it('should only show Show more button if more than 3 choices in bucket', () => {
+    expect(fixtureQueryAll(fixture, 'a').length).toEqual(1);
   });
 
   it('should display choices within bucket sorted by count', () => {
@@ -69,7 +73,7 @@ describe('MatchSummaryDisplayComponent', () => {
     expect(choices[3].textContent.includes('1'));
   });
 
-  it('should change Show More to Hide when clicked', () => {
+  it('should change Show more to Show less when clicked', () => {
     let button = fixture.nativeElement.querySelector('a');
     expect(button.innerText).toEqual('Show more');
     button.click();
