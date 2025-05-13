@@ -2,13 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeGradingComponent } from './node-grading.component';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { provideRouter } from '@angular/router';
 import { MockProviders } from 'ng-mocks';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { Node } from '../../../../common/Node';
 import { Observable, Subject } from 'rxjs';
-import { AnnotationService } from '../../../../services/annotationService';
-import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 
@@ -44,7 +41,6 @@ describe('NodeGradingComponent', () => {
       imports: [NodeGradingComponent, ClassroomMonitorTestingModule],
       providers: [
         MockProviders(ClassroomStatusService, TeacherProjectService, WorkgroupService),
-        provideRouter([]),
         { provide: TeacherDataService, useClass: MockDataService }
       ]
     }).compileComponents();
@@ -65,7 +61,6 @@ describe('NodeGradingComponent', () => {
     component = fixture.componentInstance;
     component.nodeId = 'node1';
     component.ngOnInit();
-    component.ngOnChanges();
   });
 
   periodChanged_RecalculateNodeCompletion();
@@ -74,6 +69,7 @@ describe('NodeGradingComponent', () => {
 function periodChanged_RecalculateNodeCompletion() {
   describe('period changed', () => {
     it('recalculates node completion', () => {
+      nodeCompletionSpy.calls.reset();
       dataService.setCurrentPeriod({ periodId: 1 });
       expect(nodeCompletionSpy).toHaveBeenCalledTimes(1);
     });

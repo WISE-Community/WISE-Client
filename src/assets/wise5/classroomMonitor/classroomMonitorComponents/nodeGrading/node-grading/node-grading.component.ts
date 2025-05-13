@@ -7,12 +7,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
-import { SelectComponentComponent } from '../select-component/select-component.component';
 import { Node } from '../../../../common/Node';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
-import { ComponentContent } from '../../../../common/ComponentContent';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -21,12 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     ComponentGradingViewComponent,
     FlexLayoutModule,
     MatButtonModule,
-    MatIconModule,
-    RouterModule,
-    SelectComponentComponent
+    MatIconModule
   ],
-  selector: 'node-grading',
-  standalone: true,
   styles: [
     `
       .content-head-label {
@@ -45,8 +38,6 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent {
-  protected component: ComponentContent;
-  @Input() componentId: string;
   protected components: any[];
   protected hasWork: boolean;
   protected node: Node;
@@ -62,12 +53,11 @@ export class NodeGradingComponent {
     private classroomStatusService: ClassroomStatusService,
     private dataService: TeacherDataService,
     private dialog: MatDialog,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
+    this.setFields();
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(() => this.setPeriod())
     );
@@ -78,9 +68,7 @@ export class NodeGradingComponent {
   }
 
   ngOnChanges(): void {
-    if (this.nodeId && this.componentId) {
-      this.setFields();
-    }
+    this.setFields();
   }
 
   private setFields(): void {
@@ -98,7 +86,6 @@ export class NodeGradingComponent {
     this.components = this.projectService
       .getComponents(this.nodeId)
       .filter((component) => this.projectService.componentHasWork(component));
-    this.component = this.node.getComponent(this.componentId);
     this.numRubrics = this.node.getNumRubrics();
     this.setPeriod();
   }
@@ -127,12 +114,6 @@ export class NodeGradingComponent {
     this.dialog.open(ShowNodeInfoDialogComponent, {
       data: this.nodeId,
       width: '90%'
-    });
-  }
-
-  protected navigateToComponent(component: ComponentContent): void {
-    this.router.navigate(['..', component.id], {
-      relativeTo: this.route
     });
   }
 }
