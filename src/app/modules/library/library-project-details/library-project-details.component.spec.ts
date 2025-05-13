@@ -42,6 +42,7 @@ describe('LibraryProjectDetailsComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: { project: project } }
       ]
     });
+    spyOn(TestBed.inject(UserService), 'getUserId').and.returnValue(10);
 
     fixture = TestBed.createComponent(LibraryProjectDetailsComponent);
     component = fixture.componentInstance;

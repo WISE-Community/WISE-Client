@@ -80,8 +80,15 @@ export class LibraryProjectDetailsComponent implements OnInit {
         this.project.metadata.unitType === 'Other' && this.project.metadata.resources.length === 0
       );
     }
-    this.isMyUnit = this.project.isOwner(this.userService.getUserId());
+    this.isMyUnit = this.userIsAuthor();
     this.shareUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.project.id}&share=true`;
+  }
+
+  private userIsAuthor(): boolean {
+    return (
+      this.project.metadata.authors.find((author) => author.id === this.userService.getUserId()) !==
+      undefined
+    );
   }
 
   private setLicenseInfo(): void {
