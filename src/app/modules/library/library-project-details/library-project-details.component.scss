@@ -58,6 +58,16 @@
   }
 }
 
+.share-button {
+  background-color: #099A09;
+  color: white;
+}
+
+.share-button > maticon {
+  // background-color: white;
+  color: white;
+}
+
 discourse-category-activity, unit-tags {
   margin-bottom: 12px;
   display: block;
