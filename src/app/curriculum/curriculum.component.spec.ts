@@ -23,7 +23,6 @@ describe('CurriculumComponent', () => {
       providers: [
         MockProviders(ConfigService, UserService),
         MockProvider(LibraryService, {
-          filterValuesUpdated$: of(),
           communityLibraryProjectsSource$: of([]),
           numberOfPublicProjectsVisible$: of(3),
           numberOfPersonalProjectsVisible$: of(2)

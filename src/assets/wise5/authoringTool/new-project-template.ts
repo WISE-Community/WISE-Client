@@ -47,6 +47,7 @@ export const newProjectTemplate = {
   },
   metadata: {
     title: '',
+    features: [],
     resources: [],
     unitType: 'Platform'
   },
