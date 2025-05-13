@@ -8,7 +8,7 @@ import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
-describe('UnorderedMatchSummaryDisplayComponent', () => {
+describe('MatchSummaryDisplayComponent', () => {
   let component: MatchSummaryDisplayComponent;
   let fixture: ComponentFixture<MatchSummaryDisplayComponent>;
 
@@ -28,6 +28,9 @@ describe('UnorderedMatchSummaryDisplayComponent', () => {
     spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
       of(getComponentStates())
     );
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponentsFromStep').and.returnValue([
+      { choiceReuseEnabled: false }
+    ] as any[]);
 
     fixture = TestBed.createComponent(MatchSummaryDisplayComponent);
     component = fixture.componentInstance;
@@ -39,19 +42,19 @@ describe('UnorderedMatchSummaryDisplayComponent', () => {
   });
 
   it('should show the correct number of buckets and choices', () => {
-    expect(fixtureQueryAll(fixture, '.bucket').length).toEqual(2);
-    expect(fixtureQueryAll(fixture, '.match-item').length).toEqual(5);
+    expect(fixtureQueryAll(fixture, '.bucket').length).toEqual(3);
+    expect(fixtureQueryAll(fixture, '.choice').length).toEqual(5);
     fixture.nativeElement.querySelector('a').click();
     fixture.detectChanges();
-    expect(fixtureQueryAll(fixture, '.match-item').length).toEqual(6);
+    expect(fixtureQueryAll(fixture, '.choice').length).toEqual(6);
   });
 
   it('should only show Show More button if more than 3 choices in bucket', () => {
-    expect(fixtureQueryAll(fixture, '.bucket > a').length).toEqual(1);
+    expect(fixtureQueryAll(fixture, '.bucket > ul > a').length).toEqual(1);
   });
 
   it('should display choices within bucket sorted by count', () => {
-    const choices = fixtureQueryAll(fixture, '.match-item');
+    const choices = fixtureQueryAll(fixture, '.choice');
     expect(choices[0].textContent.includes('Choice B'));
     expect(choices[1].textContent.includes('Choice A'));
     expect(choices[2].textContent.includes('Choice C'));
@@ -59,7 +62,7 @@ describe('UnorderedMatchSummaryDisplayComponent', () => {
   });
 
   it('should show the correct count on each choice per bucket', () => {
-    const choices = fixtureQueryAll(fixture, '.match-item');
+    const choices = fixtureQueryAll(fixture, '.choice');
     expect(choices[0].textContent.includes('3'));
     expect(choices[1].textContent.includes('2'));
     expect(choices[2].textContent.includes('2'));
@@ -68,15 +71,15 @@ describe('UnorderedMatchSummaryDisplayComponent', () => {
 
   it('should change Show More to Hide when clicked', () => {
     let button = fixture.nativeElement.querySelector('a');
-    expect(button.innerText).toEqual('Show More');
+    expect(button.innerText).toEqual('Show more');
     button.click();
     fixture.detectChanges();
     button = fixture.nativeElement.querySelector('a');
-    expect(button.innerText).toEqual('Hide');
+    expect(button.innerText).toEqual('Show less');
     button.click();
     fixture.detectChanges();
     button = fixture.nativeElement.querySelector('a');
-    expect(button.innerText).toEqual('Show More');
+    expect(button.innerText).toEqual('Show more');
   });
 });
 

@@ -66,11 +66,8 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
 
   protected setBucketValues(): void {
     this.matchSummaryData
-      .getDataPoints()
-      .map(this.asMatchSummaryDataPoint)
-      .forEach((data) => {
-        this.bucketValues.add(data.getBucketValue());
-      });
+      .getBucketsData()
+      .forEach((bucket) => this.bucketValues.add(bucket.bucketValue));
   }
 
   protected setBucketData(): void {
@@ -81,9 +78,9 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
 
   private getBucketDataByValue(bucketValue: string): MatchSummaryDataPoint[] {
     return this.matchSummaryData
-      .getDataPoints()
-      .map(this.asMatchSummaryDataPoint)
-      .filter((choice) => choice.getBucketValue() === bucketValue)
+      .getBucketsData()
+      .find((bucket) => bucket.bucketValue === bucketValue)
+      .bucketDataPoints.map(this.asMatchSummaryDataPoint)
       .sort(this.sortChoices);
   }
 
