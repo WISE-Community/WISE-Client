@@ -14,6 +14,8 @@ import { SelectMenuComponent } from '../../shared/select-menu/select-menu.compon
 import { StandardsSelectMenuComponent } from '../../shared/standards-select-menu/standards-select-menu.component';
 import { Feature } from '../Feature';
 import { Grade, GradeLevel } from '../GradeLevel';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogWithCloseComponent } from '../../../../assets/wise5/directives/dialog-with-close/dialog-with-close.component';
 
 @Component({
   imports: [
@@ -48,6 +50,7 @@ export class LibraryFiltersComponent {
   ];
 
   constructor(
+    private dialog: MatDialog,
     protected filterValues: ProjectFilterValues,
     private libraryService: LibraryService,
     private utilService: UtilService
@@ -176,5 +179,19 @@ export class LibraryFiltersComponent {
   protected clearFilterValues(): void {
     this.filterValues.clear();
     this.emitFilterValues();
+  }
+
+  protected showTypeInfo(): void {
+    const message = $localize`"Type" indicates the platform on which a unit runs. "WISE Platform" units are created 
+      using the WISE authoring tool. Students use WISE accounts to complete lessons and teachers can review and grade 
+      work on the WISE platform. "Other" units are created using different platforms. Resources for these units 
+      are linked in the unit details.`;
+    this.dialog.open(DialogWithCloseComponent, {
+      data: {
+        content: message,
+        title: $localize`Unit Type`
+      },
+      panelClass: 'dialog-sm'
+    });
   }
 }

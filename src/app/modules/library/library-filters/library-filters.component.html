@@ -35,11 +35,12 @@
   >
     @if (unitTypeOptions.length > 0) {
       <div
-        class="library-filter"
+        class="library-filter flex items-center gap-1"
         [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
       >
         <app-select-menu
           id="unitTypeSelectMenu"
+          class="w-full"
           [options]="unitTypeOptions"
           i18n-placeholderText
           placeholderText="Type"
@@ -49,6 +50,9 @@
           [viewValueProp]="'name'"
           [multiple]="true"
         />
+        <a tabindex="0" (click)="showTypeInfo()" (keyup.enter)="showTypeInfo()">
+          <mat-icon aria-label="Type filter explanation" i18n-aria-label>info</mat-icon>
+        </a>
       </div>
     }
     @if (disciplineOptions.length > 0) {
