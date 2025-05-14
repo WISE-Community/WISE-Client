@@ -7,7 +7,7 @@
       i18n-placeholder
       [(ngModel)]="response"
       (keypress)="keyPressed($event)"
-      (focus)="onFocus()"
+      (focus)="focusEvent.emit()"
     ></textarea>
   </mat-form-field>
   <button

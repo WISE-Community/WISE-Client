@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { PingEndpointService } from '../../services/pingEndpointService';
+// import { PingEndpointService } from '../../services/pingEndpointService';
 
 @Component({
   selector: 'chat-input',
@@ -13,15 +13,10 @@ import { PingEndpointService } from '../../services/pingEndpointService';
   imports: [FormsModule, FlexLayoutModule, MatButtonModule, MatFormFieldModule, MatInputModule]
 })
 export class ChatInputComponent {
+  @Output() focusEvent = new EventEmitter<string>();
   protected response: string = '';
   @Input() submitDisabled: boolean = false;
   @Output() submitEvent: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor(private pingEndpointService: PingEndpointService) {}
-
-  ngOnDestroy(): void {
-    this.pingEndpointService.stopPinging();
-  }
 
   protected keyPressed(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
@@ -35,9 +30,5 @@ export class ChatInputComponent {
   protected submit(): void {
     this.submitEvent.emit(this.response);
     this.response = '';
-  }
-
-  protected onFocus(): void {
-    this.pingEndpointService.startPinging();
   }
 }

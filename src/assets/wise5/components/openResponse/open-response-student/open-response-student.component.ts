@@ -23,6 +23,7 @@ import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 import { ConstraintService } from '../../../services/constraintService';
 import { PingEndpointService } from '../../../services/pingEndpointService';
+import { OpenResponseContent } from '../OpenResponseContent';
 
 @Component({
   selector: 'open-response-student',
@@ -111,15 +112,19 @@ export class OpenResponseStudent extends ComponentStudent {
 
   protected onFocus() {
     if (this.isCRaterEnabled()) {
-      this.pingEndpointService.startPinging();
+      this.pingEndpointService.startPinging(this.getItemId());
     }
   }
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
     if (this.isCRaterEnabled()) {
-      this.pingEndpointService.stopPinging();
+      this.pingEndpointService.stopPinging(this.getItemId());
     }
+  }
+
+  private getItemId(): string {
+    return (this.component.content as OpenResponseContent).cRater.itemId;
   }
 
   performSubmit(submitTriggeredBy: string): void {

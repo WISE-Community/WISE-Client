@@ -35,6 +35,7 @@ import { ComponentHeaderComponent } from '../../../directives/component-header/c
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 import { CommonModule } from '@angular/common';
+import { PingEndpointService } from '../../../services/pingEndpointService';
 
 @Component({
   imports: [
@@ -74,7 +75,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected notebookService: NotebookService,
     protected studentAssetService: StudentAssetService,
     protected dataService: StudentDataService,
-    protected studentStatusService: StudentStatusService
+    protected studentStatusService: StudentStatusService,
+    private pingEndpointService: PingEndpointService
   ) {
     super(
       annotationService,
@@ -108,6 +110,18 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.constraintService
     );
     this.initializeComputerAvatar();
+  }
+
+  protected startPinging(): void {
+    this.pingEndpointService.startPinging(this.getItemId());
+  }
+
+  ngOnDestroy(): void {
+    this.pingEndpointService.stopPinging(this.getItemId());
+  }
+
+  private getItemId(): string {
+    return this.component.content.itemId;
   }
 
   showInitialMessage(): void {

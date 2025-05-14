@@ -18,11 +18,8 @@ import { components } from '../Components';
 import { ConfigService } from '../../services/configService';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 import { NotebookService } from '../../services/notebookService';
-import { PingEndpointService } from '../../services/pingEndpointService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
-import { DialogGuidanceContent } from '../dialogGuidance/DialogGuidanceContent';
-import { OpenResponseContent } from '../openResponse/OpenResponseContent';
 
 @Component({
   imports: [CommonModule, HelpIconComponent],
@@ -35,7 +32,6 @@ export class ComponentComponent {
   @Input() private componentId: string;
   private componentRef: ComponentRef<WISEComponent>;
   @Input() protected componentState: any;
-  private componentType: string;
   @Input() private nodeId: string;
   protected rubric: string;
   @Output() protected saveComponentStateEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -49,7 +45,6 @@ export class ComponentComponent {
     private dataService: StudentDataService,
     private injector: EnvironmentInjector,
     private notebookService: NotebookService,
-    private pingEndpointService: PingEndpointService,
     private projectService: ProjectService
   ) {}
 
@@ -68,18 +63,6 @@ export class ComponentComponent {
       this.rubric = this.component.content.rubric;
       this.showRubric = this.rubric != null && this.rubric != '';
     }
-    this.addItemIdToPingListIfNecessary();
-  }
-
-  private addItemIdToPingListIfNecessary(): void {
-    let itemId: string;
-    if (this.componentType === 'DialogGuidance') {
-      itemId = (this.component.content as DialogGuidanceContent).itemId;
-    } else if (this.componentType === 'OpenResponse') {
-      itemId = (this.component.content as OpenResponseContent).cRater?.itemId;
-    }
-    if (!itemId) return;
-    this.pingEndpointService.addItemToPingList(itemId);
   }
 
   private setComponent(): void {
@@ -94,7 +77,6 @@ export class ComponentComponent {
     }
     const factory = new ComponentFactory();
     this.component = factory.getComponent(content, this.nodeId);
-    this.componentType = content.type;
   }
 
   ngAfterViewInit(): void {
@@ -113,7 +95,6 @@ export class ComponentComponent {
   }
 
   ngOnDestroy(): void {
-    this.pingEndpointService.stopPinging();
     this.componentRef.destroy();
   }
 }

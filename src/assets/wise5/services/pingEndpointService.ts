@@ -3,46 +3,38 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PingEndpointService {
-  private pingUrl = '/api/c-rater/ping-endpoint';
-  private interval: NodeJS.Timeout;
-  private isPinging: boolean;
-  private pingList: Set<string> = new Set<string>();
+  private pingUrl = '/api/c-rater/ping';
+  private intervals: Map<string, NodeJS.Timeout> = new Map<string, NodeJS.Timeout>();
 
   constructor(private http: HttpClient) {}
 
-  addItemToPingList(itemId: string): void {
-    if (this.forBerkeley(itemId)) {
-      this.pingList.add(itemId);
+  startPinging(itemId: string): void {
+    if (!this.intervalsIncludesItem(itemId) && this.forBerkeley(itemId)) {
+      this.sendPing(itemId);
+      // 295000 ms = 4min 55sec
+      this.intervals.set(
+        itemId,
+        setInterval(() => this.sendPing(itemId), 295000)
+      );
     }
+  }
+
+  private intervalsIncludesItem(itemId: string) {
+    return [...this.intervals.keys()].includes(itemId);
   }
 
   private forBerkeley(itemId: string): boolean {
     return itemId.slice(0, 9) === 'berkeley_';
   }
 
-  removeItemFromPingList(itemId: string): void {
-    this.pingList.delete(itemId);
+  private sendPing(itemId): void {
+    this.http.post(this.pingUrl, { itemId: itemId }).subscribe(() => {});
   }
 
-  startPinging(): void {
-    if (!this.isPinging) {
-      this.sendPing();
-      // 295000 ms = 4min 55sec
-      this.interval = setInterval(() => this.sendPing(), 295000);
-      this.isPinging = true;
-    }
-  }
-
-  private sendPing(): void {
-    this.pingList.forEach((itemId) =>
-      this.http.post(this.pingUrl, { itemId: itemId }).subscribe(() => {})
-    );
-  }
-
-  stopPinging(): void {
-    if (this.isPinging) {
-      clearInterval(this.interval);
-      this.isPinging = false;
+  stopPinging(itemId: string): void {
+    if (this.intervalsIncludesItem(itemId)) {
+      clearInterval(this.intervals.get(itemId));
+      this.intervals.delete(itemId);
     }
   }
 }
