@@ -26,8 +26,12 @@
     </div>
     <div class="mat-elevation-z1 list-item component-select">
       <span i18n>Question: </span>
+      <filter-components
+        [components]="components"
+        (componentsChange)="setVisibleComponents($event)"
+      />
     </div>
-    @for (component of components; track component.id) {
+    @for (component of visibleComponents; track component.id) {
       <component-grading-view [component]="component" [node]="node" />
     }
   </div>

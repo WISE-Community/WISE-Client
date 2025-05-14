@@ -11,11 +11,14 @@ import { Node } from '../../../../common/Node';
 import { Subscription } from 'rxjs';
 import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
 import { MatButtonModule } from '@angular/material/button';
+import { FilterComponentsComponent } from '../filter-components/filter-components.component';
+import { ComponentContent } from '../../../../common/ComponentContent';
 
 @Component({
   imports: [
     CommonModule,
     ComponentGradingViewComponent,
+    FilterComponentsComponent,
     FlexLayoutModule,
     MatButtonModule,
     MatIconModule
@@ -38,7 +41,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent {
-  protected components: any[];
+  protected components: ComponentContent[];
   protected hasWork: boolean;
   protected node: Node;
   protected nodeAverageScore: number;
@@ -48,6 +51,7 @@ export class NodeGradingComponent {
   protected numRubrics: number;
   private periodId: number;
   private subscriptions: Subscription = new Subscription();
+  protected visibleComponents: ComponentContent[];
 
   constructor(
     private classroomStatusService: ClassroomStatusService,
@@ -86,6 +90,7 @@ export class NodeGradingComponent {
     this.components = this.projectService
       .getComponents(this.nodeId)
       .filter((component) => this.projectService.componentHasWork(component));
+    this.visibleComponents = this.components;
     this.numRubrics = this.node.getNumRubrics();
     this.setPeriod();
   }
@@ -108,6 +113,10 @@ export class NodeGradingComponent {
       this.nodeId,
       this.periodId
     ).completionPct;
+  }
+
+  protected setVisibleComponents(visibleComponents: ComponentContent[]): void {
+    this.visibleComponents = visibleComponents;
   }
 
   protected showRubric(): void {
