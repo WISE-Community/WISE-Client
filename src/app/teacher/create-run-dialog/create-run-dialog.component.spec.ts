@@ -135,7 +135,7 @@ describe('CreateRunDialogComponent', () => {
     component.periodsGroup.controls[0].get('checkbox').setValue(true);
     component.periodsGroup.controls[2].get('checkbox').setValue(true);
     component.periodsGroup.controls[4].get('checkbox').setValue(true);
-    component.customPeriods.setValue('hello');
+    component['customPeriods'].setValue('hello');
     expect(component.getPeriodsString()).toEqual('1,3,5,hello');
   });
 
@@ -150,7 +150,7 @@ describe('CreateRunDialogComponent', () => {
     fixture.detectChanges();
     expect(component.form.valid).toBeTruthy();
     component.periodsGroup.controls[0].get('checkbox').setValue(false);
-    component.customPeriods.setValue('Section A, Section B');
+    component['customPeriods'].setValue('Section A, Section B');
     fixture.detectChanges();
     expect(component.form.valid).toBeTruthy();
   });

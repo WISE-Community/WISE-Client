@@ -1,5 +1,7 @@
-import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Inject } from '@angular/core';
+import { ConfigService } from '../../services/config.service';
+import { finalize } from 'rxjs/operators';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -9,50 +11,48 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MatDialogModule,
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatDialog
 } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
-import { Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Project } from '../../domain/project';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { TeacherRun } from '../teacher-run';
 import { TeacherService } from '../teacher.service';
 import { UserService } from '../../services/user.service';
-import { ConfigService } from '../../services/config.service';
-import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
-import { TeacherRun } from '../teacher-run';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     MatButtonModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatInputModule,
+    MatCardModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
     MatRadioModule,
     MatTooltipModule,
-    MatFormFieldModule,
-    MatProgressBarModule,
-    MatCardModule
+    ReactiveFormsModule
   ],
   providers: [provideNativeDateAdapter()],
   selector: 'create-run-dialog',
@@ -60,17 +60,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   templateUrl: './create-run-dialog.component.html'
 })
 export class CreateRunDialogComponent {
+  protected customPeriods: FormControl;
+  private endDateControl: FormControl;
   form: FormGroup;
-  project: Project;
+  protected isCreated: boolean = false;
+  protected isCreating: boolean = false;
+  protected maxStartDate: Date;
+  protected minEndDate: Date;
+  private periodOptions: string[] = [];
   periodsGroup: FormArray;
-  customPeriods: FormControl;
-  maxStudentsPerTeam: number;
-  maxStartDate: Date;
-  minEndDate: Date;
-  endDateControl: FormControl;
-  periodOptions: string[] = [];
-  isCreating: boolean = false;
-  isCreated: boolean = false;
+  project: Project;
   run: TeacherRun = null;
 
   constructor(
@@ -84,10 +83,9 @@ export class CreateRunDialogComponent {
     private userService: UserService
   ) {
     this.project = data.project;
-    this.maxStudentsPerTeam = 3;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setPeriodOptions();
     let hiddenControl = new FormControl('', Validators.required);
     this.periodsGroup = new FormArray(
@@ -122,15 +120,15 @@ export class CreateRunDialogComponent {
     this.setDateRange();
   }
 
-  isGoogleUser() {
+  protected isGoogleUser(): boolean {
     return this.userService.isGoogleUser();
   }
 
-  isGoogleClassroomEnabled() {
+  protected isGoogleClassroomEnabled(): boolean {
     return this.configService.isGoogleClassroomEnabled();
   }
 
-  setPeriodOptions() {
+  private setPeriodOptions(): void {
     for (let i = 1; i < 9; i++) {
       this.periodOptions.push(i.toString());
     }
@@ -140,12 +138,12 @@ export class CreateRunDialogComponent {
     return <FormArray>this.form.get('selectedPeriods');
   }
 
-  mapPeriods(items: any[]): string[] {
+  private mapPeriods(items: any[]): string[] {
     const selectedPeriods = items.filter((item) => item.checkbox).map((item) => item.name);
     return selectedPeriods.length ? selectedPeriods : [];
   }
 
-  create() {
+  create(): void {
     this.isCreating = true;
     const combinedPeriods = this.getPeriodsString();
     const startDate = this.form.controls['startDate'].value.getTime();
@@ -195,16 +193,16 @@ export class CreateRunDialogComponent {
     }
   }
 
-  setDateRange() {
+  protected setDateRange(): void {
     this.minEndDate = this.form.controls['startDate'].value;
     this.maxStartDate = this.form.controls['endDate'].value;
   }
 
-  closeAll() {
+  protected closeAll(): void {
     this.dialog.closeAll();
   }
 
-  checkClassroomAuthorization() {
+  protected checkClassroomAuthorization(): void {
     this.teacherService
       .getClassroomAuthorizationUrl(this.userService.getUser().getValue().username)
       .subscribe(({ authorizationUrl }) => {
@@ -222,7 +220,7 @@ export class CreateRunDialogComponent {
       });
   }
 
-  getClassroomCourses() {
+  private getClassroomCourses(): void {
     this.teacherService
       .getClassroomCourses(this.userService.getUser().getValue().username)
       .subscribe((courses) => {
@@ -233,7 +231,7 @@ export class CreateRunDialogComponent {
       });
   }
 
-  updateLockedAfterEndDateCheckbox() {
+  updateLockedAfterEndDateCheckbox(): void {
     if (this.endDateControl.value == null) {
       this.form.controls['isLockedAfterEndDate'].setValue(false);
       this.form.controls['isLockedAfterEndDate'].disable();
