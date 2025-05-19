@@ -3,8 +3,12 @@
     <div>
       <span i18n>{{ standardsName }}: </span>
       @for (standard of standards; track standard.id; let last = $last) {
-        <a href="{{ standard.url }}" target="_blank"
-          ><b>{{ standard.id }}</b> {{ standard.name }}</a
+        <a
+          href="{{ standard.url }}"
+          target="_blank"
+          [matTooltip]="standard.name"
+          matTooltipPosition="above"
+          >{{ standard.id }}</a
         >{{ last ? '' : ' • ' }}
       }
     </div>
