@@ -10,7 +10,7 @@ import { EditUnitTypeComponent } from '../edit-unit-type/edit-unit-type.componen
 import { MockProvider } from 'ng-mocks';
 import { UserService } from '../../../../app/services/user.service';
 
-fdescribe('ProjectInfoAuthoringComponent', () => {
+describe('ProjectInfoAuthoringComponent', () => {
   let component: ProjectInfoAuthoringComponent;
   let fixture: ComponentFixture<ProjectInfoAuthoringComponent>;
 
