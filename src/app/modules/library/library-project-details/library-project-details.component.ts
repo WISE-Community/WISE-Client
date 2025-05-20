@@ -83,9 +83,8 @@ export class LibraryProjectDetailsComponent implements OnInit {
   }
 
   private userIsAuthor(): boolean {
-    return (
-      this.project.metadata.authors.find((author) => author.id === this.userService.getUserId()) !==
-      undefined
+    return this.project.metadata.authors.some(
+      (author) => author.id === this.userService.getUserId()
     );
   }
 
