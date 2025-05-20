@@ -82,6 +82,7 @@ export class TeacherService {
   createRun(
     projectId: number,
     periods: string,
+    isSurvey: boolean,
     maxStudentsPerTeam: number,
     startDate: number,
     endDate: number,
@@ -91,6 +92,7 @@ export class TeacherService {
     let body = new HttpParams();
     body = body.set('projectId', projectId + '');
     body = body.set('periods', periods);
+    body = body.set('isSurvey', isSurvey);
     body = body.set('maxStudentsPerTeam', maxStudentsPerTeam + '');
     body = body.set('startDate', startDate + '');
     if (endDate) {

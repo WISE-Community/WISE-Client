@@ -112,6 +112,7 @@ export class CreateRunDialogComponent {
       selectedPeriods: this.periodsGroup,
       customPeriods: this.customPeriods,
       periods: hiddenControl,
+      runType: new FormControl('default', Validators.required),
       maxStudentsPerTeam: new FormControl('3', Validators.required),
       startDate: new FormControl(new Date(), Validators.required),
       endDate: this.endDateControl,
@@ -146,19 +147,23 @@ export class CreateRunDialogComponent {
   create(): void {
     this.isCreating = true;
     const combinedPeriods = this.getPeriodsString();
-    const startDate = this.form.controls['startDate'].value.getTime();
-    let endDateValue = this.form.controls['endDate'].value;
-    let endDate = null;
+    const startDate: number = this.getFormControlValue('startDate').getTime();
+    let endDateValue: Date = this.getFormControlValue('endDate');
+    let endDate: number = null;
     if (endDateValue) {
       endDateValue.setHours(23, 59, 59);
       endDate = endDateValue.getTime();
     }
-    const isLockedAfterEndDate = this.form.controls['isLockedAfterEndDate'].value;
-    const maxStudentsPerTeam = this.form.controls['maxStudentsPerTeam'].value;
+    const isLockedAfterEndDate: boolean = this.getFormControlValue('isLockedAfterEndDate');
+    const isSurvey: boolean = this.getFormControlValue('runType') === 'survey';
+    const maxStudentsPerTeam: number = isSurvey
+      ? 1
+      : this.getFormControlValue('maxStudentsPerTeam');
     this.teacherService
       .createRun(
         this.project.id,
         combinedPeriods,
+        isSurvey,
         maxStudentsPerTeam,
         startDate,
         endDate,
@@ -194,8 +199,8 @@ export class CreateRunDialogComponent {
   }
 
   protected setDateRange(): void {
-    this.minEndDate = this.form.controls['startDate'].value;
-    this.maxStartDate = this.form.controls['endDate'].value;
+    this.minEndDate = this.getFormControlValue('startDate');
+    this.maxStartDate = this.getFormControlValue('endDate');
   }
 
   protected closeAll(): void {
@@ -238,5 +243,13 @@ export class CreateRunDialogComponent {
     } else {
       this.form.controls['isLockedAfterEndDate'].enable();
     }
+  }
+
+  protected isDefaultRun(): boolean {
+    return this.getFormControlValue('runType') === 'default';
+  }
+
+  private getFormControlValue(control: string): any {
+    return this.form.controls[control].value;
   }
 }
