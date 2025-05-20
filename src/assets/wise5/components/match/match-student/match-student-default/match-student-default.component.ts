@@ -613,11 +613,17 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
   }
 
   private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
-    getUniqueIdeas(responses, rubric).forEach((idea) => {
-      const choice = new Choice(idea.name, idea.text);
-      this.choices.push(choice);
-      this.getBucketById(this.sourceBucketId).items.push(choice);
-    });
+    getUniqueIdeas(responses, rubric)
+      .filter((idea) => !this.isInSourceBucket(idea.name))
+      .forEach((idea) => {
+        const choice = new Choice(idea.name, idea.text);
+        this.choices.push(choice);
+        this.getBucketById(this.sourceBucketId).items.push(choice);
+      });
+  }
+
+  private isInSourceBucket(choiceId: string): boolean {
+    return this.sourceBucket.items.some((item) => item.id === choiceId);
   }
 
   protected addChoice(): void {
