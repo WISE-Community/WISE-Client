@@ -181,7 +181,8 @@ export class ContactFormComponent implements OnInit {
     const email = this.getEmail();
     const teacherUsername = this.getTeacherUsername();
     const issueType = this.getIssueType();
-    const summary = this.getSummary();
+    const summary =
+      this.getControlFieldValue('issueType') === 'SHARE' ? this.projectName : this.getSummary();
     const description = this.getDescription();
     const runId = this.getRunId();
     const projectId = this.getProjectId();
