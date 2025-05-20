@@ -47,7 +47,6 @@ export class LibraryProjectDetailsComponent implements OnInit {
   protected parentAuthorsString: string = '';
   protected parentProject: ParentProject;
   protected project: Project;
-  protected shareUnitUrl: string;
   protected standardLabels: any = {
     commonCore: $localize`Common Core`,
     learningForJustice: $localize`Learning For Justice`,
@@ -81,7 +80,6 @@ export class LibraryProjectDetailsComponent implements OnInit {
       );
     }
     this.isMyUnit = this.userIsAuthor();
-    this.shareUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.project.id}&share=true`;
   }
 
   private userIsAuthor(): boolean {

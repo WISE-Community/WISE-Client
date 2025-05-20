@@ -23,7 +23,7 @@ export class ProjectInfoAuthoringComponent {
   metadataChanged: Subject<void> = new Subject<void>();
   projectIcon: string = '';
   projectIcons: any = [];
-  protected shareUnitUrl;
+  protected publishUnitUrl;
 
   constructor(
     private configService: ConfigService,
@@ -47,7 +47,7 @@ export class ProjectInfoAuthoringComponent {
       (author) => author.id === this.userService.getUserId()
     );
     this.isMyUnit = userAuthor !== undefined;
-    this.shareUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.configService.getRunId()}&share=true`;
+    this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.configService.getRunId()}&publish=true`;
     this.loadProjectIcon();
     this.processMetadata();
     this.metadataChanged.pipe(debounceTime(1000)).subscribe(() => {

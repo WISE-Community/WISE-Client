@@ -30,7 +30,7 @@ export class ContactFormComponent implements OnInit {
   projectId: number;
   projectName: string;
   isError: boolean = false;
-  isShare: boolean = false;
+  private isPublish: boolean = false;
   isStudent: boolean = false;
   isSignedIn: boolean = false;
   isSendingRequest: boolean = false;
@@ -59,8 +59,8 @@ export class ContactFormComponent implements OnInit {
     this.isRecaptchaEnabled = this.configService.isRecaptchaEnabled();
     this.populateFieldsIfSignedIn();
     this.populateIssueTypes();
-    this.adjustSummaryRequiredOnIssueTypeChange();
-    this.setIsShare();
+    this.setDefaultPublishSummary();
+    this.setIsPublish();
     this.setIssueTypeIfNecessary();
   }
 
@@ -140,38 +140,33 @@ export class ContactFormComponent implements OnInit {
         { key: 'PROJECT_PROBLEMS', value: $localize`Problems with a WISE Unit` },
         { key: 'STUDENT_MANAGEMENT', value: $localize`Student Management` },
         { key: 'AUTHORING', value: $localize`Need Help with Authoring` },
-        { key: 'SHARE', value: $localize`Share Unit` },
+        { key: 'PUBLISH', value: $localize`Publish Unit to the WISE Community` },
         { key: 'FEEDBACK', value: $localize`Feedback to WISE` },
         { key: 'OTHER', value: $localize`Other` }
       ];
     }
   }
 
-  private adjustSummaryRequiredOnIssueTypeChange() {
+  private setDefaultPublishSummary() {
     this.contactFormGroup.get('issueType').valueChanges.subscribe(() => {
-      const summaryControl = this.contactFormGroup.get('summary');
-      if (this.getControlFieldValue('issueType') === 'SHARE') {
-        summaryControl.clearValidators();
-        summaryControl.updateValueAndValidity();
-        this.isShare = true;
-      } else if (this.isShare) {
-        summaryControl.addValidators(Validators.required);
-        this.isShare = false;
+      if (this.getControlFieldValue('issueType') === 'PUBLISH') {
+        const summaryControl = this.contactFormGroup.get('summary');
+        summaryControl.setValue($localize`Publish my unit to the WISE Community Built library`);
       }
     });
   }
 
-  private setIsShare() {
+  private setIsPublish() {
     this.route.queryParams.subscribe((params) => {
-      this.isShare = params['share'];
+      this.isPublish = params['publish'];
     });
   }
 
   setIssueTypeIfNecessary() {
     if (this.runId != null) {
       this.setControlFieldValue('issueType', 'PROJECT_PROBLEMS');
-    } else if (this.isShare) {
-      this.setControlFieldValue('issueType', 'SHARE');
+    } else if (this.isPublish) {
+      this.setControlFieldValue('issueType', 'PUBLISH');
     }
   }
 
@@ -181,8 +176,7 @@ export class ContactFormComponent implements OnInit {
     const email = this.getEmail();
     const teacherUsername = this.getTeacherUsername();
     const issueType = this.getIssueType();
-    const summary =
-      this.getControlFieldValue('issueType') === 'SHARE' ? this.projectName : this.getSummary();
+    const summary = this.getSummary();
     const description = this.getDescription();
     const runId = this.getRunId();
     const projectId = this.getProjectId();
@@ -294,7 +288,7 @@ export class ContactFormComponent implements OnInit {
     this.isSendingRequest = value;
   }
 
-  protected isShareIssueType(): boolean {
-    return this.getControlFieldValue('issueType') === 'SHARE';
+  protected isPublishIssueType(): boolean {
+    return this.getControlFieldValue('issueType') === 'PUBLISH';
   }
 }

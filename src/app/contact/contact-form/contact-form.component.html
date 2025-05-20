@@ -82,23 +82,15 @@
               </mat-form-field>
             </p>
           }
-          @if (!isShare) {
-            <p>
-              <mat-form-field appearance="fill" class="w-full">
-                <mat-label i18n>Summary</mat-label>
-                <input
-                  matInput
-                  id="summary"
-                  name="summary"
-                  formControlName="summary"
-                  value="test"
-                />
-                @if (contactFormGroup.controls['summary'].hasError('required')) {
-                  <mat-error i18n>Summary required</mat-error>
-                }
-              </mat-form-field>
-            </p>
-          }
+          <p>
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label i18n>Summary</mat-label>
+              <input matInput id="summary" name="summary" formControlName="summary" value="test" />
+              @if (contactFormGroup.controls['summary'].hasError('required')) {
+                <mat-error i18n>Summary required</mat-error>
+              }
+            </mat-form-field>
+          </p>
           <p>
             <mat-form-field appearance="fill" class="w-full">
               <mat-label i18n>Description</mat-label>
@@ -110,7 +102,7 @@
                 rows="10"
                 cols="10"
                 [placeholder]="
-                  isShareIssueType()
+                  isPublishIssueType()
                     ? 'Why do you want to share this unit with the WISE community?'
                     : ''
                 "
@@ -141,6 +133,14 @@
               </p>
             }
           }
+          @if (isPublishIssueType()) {
+            <p>
+              By submitting, you will be sending your unit to WISE to be reviewed. If approved, your
+              unit will be added to the Community Built library. Make sure you have finished filling
+              out all appropriate fields on your project's Unit Info page before submitting it for
+              review.
+            </p>
+          }
           <p>
             <button
               mat-flat-button
@@ -152,7 +152,11 @@
               @if (isSendingRequest) {
                 <mat-progress-bar mode="indeterminate"></mat-progress-bar>
               }
-              <ng-container i18n>Submit{{ isShareIssueType() ? ' for Review' : '' }}</ng-container>
+              @if (isPublishIssueType()) {
+                <ng-container i18n>Submit for Review</ng-container>
+              } @else {
+                <ng-container i18n>Submit</ng-container>
+              }
             </button>
           </p>
         </form>
