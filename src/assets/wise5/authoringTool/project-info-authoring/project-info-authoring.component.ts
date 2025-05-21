@@ -47,7 +47,7 @@ export class ProjectInfoAuthoringComponent {
       (author) => author.id === this.userService.getUserId()
     );
     this.isMyUnit = userAuthor !== undefined;
-    this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.configService.getRunId()}&publish=true`;
+    this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.configService.getProjectId()}&publish=true`;
     this.loadProjectIcon();
     this.processMetadata();
     this.metadataChanged.pipe(debounceTime(1000)).subscribe(() => {
