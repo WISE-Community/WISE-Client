@@ -1,43 +1,43 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
-import { UserService } from '../../services/user.service';
-import { Teacher } from '../../domain/teacher';
-import { Student } from '../../domain/student';
 import { ConfigService } from '../../services/config.service';
-import { StudentService } from '../../student/student.service';
+import { finalize } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { LibraryService } from '../../services/library.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha-2';
+import { Student } from '../../domain/student';
+import { StudentService } from '../../student/student.service';
 import { Subscription, lastValueFrom } from 'rxjs';
+import { Teacher } from '../../domain/teacher';
+import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-contact-form',
-  templateUrl: './contact-form.component.html',
-  styleUrls: ['./contact-form.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false
+  selector: 'app-contact-form',
+  standalone: false,
+  styleUrls: ['./contact-form.component.scss'],
+  templateUrl: './contact-form.component.html'
 })
 export class ContactFormComponent implements OnInit {
-  issueTypes: object[] = [];
-  contactFormGroup: FormGroup = this.fb.group({
+  protected complete: boolean = false;
+  protected contactFormGroup: FormGroup = this.fb.group({
     name: new FormControl('', [Validators.required]),
     issueType: new FormControl('', [Validators.required]),
     summary: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required])
   });
-  runId: number;
-  projectId: number;
-  projectName: string;
-  isError: boolean = false;
+  protected isError: boolean = false;
+  protected isSendingRequest: boolean = false;
+  private isSignedIn: boolean = false;
+  protected isStudent: boolean = false;
+  protected issueTypes: object[] = [];
   private isPublish: boolean = false;
-  isStudent: boolean = false;
-  isSignedIn: boolean = false;
-  isSendingRequest: boolean = false;
-  isRecaptchaEnabled: boolean = false;
-  isRecaptchaError: boolean = false;
-  teachers: any[] = [];
-  complete: boolean = false;
+  protected isRecaptchaEnabled: boolean = false;
+  protected isRecaptchaError: boolean = false;
+  private projectId: number;
+  protected projectName: string;
+  private runId: number;
+  protected teachers: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -46,11 +46,10 @@ export class ContactFormComponent implements OnInit {
     private studentService: StudentService,
     private libraryService: LibraryService,
     private recaptchaV3Service: ReCaptchaV3Service,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isSignedIn = this.userService.isSignedIn();
     this.isStudent = this.userService.isStudent();
     this.obtainRunIdOrProjectIdIfNecessary();
@@ -64,7 +63,7 @@ export class ContactFormComponent implements OnInit {
     this.setIssueTypeIfNecessary();
   }
 
-  obtainRunIdOrProjectIdIfNecessary() {
+  private obtainRunIdOrProjectIdIfNecessary(): void {
     this.route.queryParams.subscribe((params) => {
       this.runId = params['runId'];
       this.projectId = params['projectId'];
@@ -81,7 +80,7 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
-  obtainTeacherListIfNecessary() {
+  private obtainTeacherListIfNecessary(): void {
     if (this.isStudent && this.runId == null && this.projectId == null) {
       this.studentService.getTeacherList().subscribe((teacherList) => {
         this.teachers = teacherList;
@@ -93,7 +92,7 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
-  studentHasTeacher() {
+  private studentHasTeacher(): boolean {
     return this.teachers.length > 0;
   }
 
@@ -108,7 +107,7 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
-  populateFieldsIfSignedIn() {
+  private populateFieldsIfSignedIn(): void {
     if (this.isSignedIn) {
       if (this.isStudent) {
         const user = <Student>this.userService.getUser().getValue();
@@ -124,7 +123,7 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
-  populateIssueTypes() {
+  private populateIssueTypes(): void {
     if (this.isStudent) {
       this.issueTypes = [
         { key: 'TROUBLE_LOGGING_IN', value: $localize`Trouble Signing In` },
@@ -147,7 +146,7 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
-  private setDefaultPublishSummary() {
+  private setDefaultPublishSummary(): void {
     this.contactFormGroup.get('issueType').valueChanges.subscribe(() => {
       if (this.getControlFieldValue('issueType') === 'PUBLISH') {
         const summaryControl = this.contactFormGroup.get('summary');
@@ -156,13 +155,7 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
-  private setIsPublish() {
-    this.route.queryParams.subscribe((params) => {
-      this.isPublish = params['publish'];
-    });
-  }
-
-  setIssueTypeIfNecessary() {
+  private setIssueTypeIfNecessary(): void {
     if (this.runId != null) {
       this.setControlFieldValue('issueType', 'PROJECT_PROBLEMS');
     } else if (this.isPublish) {
@@ -170,30 +163,27 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
+  private setIsPublish(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.isPublish = params['publish'];
+    });
+  }
+
   async submit(): Promise<Subscription> {
     this.isError = false;
-    const name = this.getName();
-    const email = this.getEmail();
-    const teacherUsername = this.getTeacherUsername();
-    const issueType = this.getIssueType();
-    const summary = this.getSummary();
-    const description = this.getDescription();
-    const runId = this.getRunId();
-    const projectId = this.getProjectId();
-    const userAgent = this.getUserAgent();
     const recaptchaResponse = await this.getRecaptchaResponse();
     this.setIsSendingRequest(true);
     return this.userService
       .sendContactMessage(
-        name,
-        email,
-        teacherUsername,
-        issueType,
-        summary,
-        description,
-        runId,
-        projectId,
-        userAgent,
+        this.getControlFieldValue('name'),
+        this.getControlFieldValueOrNull('email', !this.isStudent),
+        this.getControlFieldValueOrNull('teacher', this.isStudent && this.studentHasTeacher()),
+        this.getControlFieldValue('issueType'),
+        this.getControlFieldValue('summary'),
+        this.getControlFieldValue('description'),
+        this.runId,
+        this.projectId,
+        this.getUserAgent(),
         recaptchaResponse
       )
       .pipe(
@@ -206,7 +196,7 @@ export class ContactFormComponent implements OnInit {
       });
   }
 
-  handleSendContactMessageResponse(response: any) {
+  private handleSendContactMessageResponse(response: any): void {
     if (response.status === 'success') {
       this.complete = true;
     } else if (response.status === 'error') {
@@ -218,64 +208,24 @@ export class ContactFormComponent implements OnInit {
     this.setIsSendingRequest(false);
   }
 
-  setControlFieldValue(name: string, value: string) {
+  setControlFieldValue(name: string, value: string): void {
     this.contactFormGroup.controls[name].setValue(value);
   }
 
-  markControlFieldAsDisabled(name: string) {
+  private markControlFieldAsDisabled(name: string): void {
     this.contactFormGroup.controls[name].disable();
   }
 
-  getControlFieldValue(fieldName) {
+  private getControlFieldValue(fieldName: string): any {
     return this.contactFormGroup.get(fieldName).value;
   }
 
-  getName() {
-    return this.getControlFieldValue('name');
+  private getControlFieldValueOrNull(fieldName: string, condition: boolean): any {
+    return condition ? this.getControlFieldValue(fieldName) : null;
   }
 
-  getEmail() {
-    let email = null;
-    if (!this.isStudent) {
-      email = this.getControlFieldValue('email');
-    }
-    return email;
-  }
-
-  getIssueType() {
-    return this.getControlFieldValue('issueType');
-  }
-
-  getSummary() {
-    return this.getControlFieldValue('summary');
-  }
-
-  getDescription() {
-    return this.getControlFieldValue('description');
-  }
-
-  getRunId() {
-    return this.runId;
-  }
-
-  getProjectId() {
-    return this.projectId;
-  }
-
-  getTeacherUsername() {
-    if (this.isStudent && this.studentHasTeacher()) {
-      return this.getControlFieldValue('teacher');
-    } else {
-      return null;
-    }
-  }
-
-  getUserAgent() {
+  private getUserAgent(): string {
     return navigator.userAgent;
-  }
-
-  routeToContactCompletePage() {
-    this.router.navigate(['contact/complete', {}]);
   }
 
   private async getRecaptchaResponse(): Promise<string> {
@@ -284,7 +234,7 @@ export class ContactFormComponent implements OnInit {
       : '';
   }
 
-  setIsSendingRequest(value: boolean) {
+  private setIsSendingRequest(value: boolean): void {
     this.isSendingRequest = value;
   }
 
