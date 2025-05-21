@@ -38,6 +38,7 @@ import { NotebookService } from '../../../../services/notebookService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentAssetService } from '../../../../services/studentAssetService';
 import { StudentDataService } from '../../../../services/studentDataService';
+import { CRaterIdea } from '../../../common/cRater/CRaterIdea';
 
 @Component({
   imports: [
@@ -614,7 +615,7 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
 
   private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
     getUniqueIdeas(responses, rubric)
-      .filter((idea) => !this.isInSourceBucket(idea.text))
+      .filter((idea) => !this.isInSourceBucket(idea))
       .forEach((idea) => {
         const choice = new Choice(idea.name, idea.text);
         this.choices.push(choice);
@@ -622,8 +623,8 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
       });
   }
 
-  private isInSourceBucket(choiceId: string): boolean {
-    return this.sourceBucket.items.some((item) => item.value === choiceId);
+  private isInSourceBucket(idea: CRaterIdea): boolean {
+    return this.sourceBucket.items.some((item) => item.value === idea.text);
   }
 
   protected addChoice(): void {
