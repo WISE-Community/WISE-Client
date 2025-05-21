@@ -24,6 +24,7 @@ import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng
 import { ArchiveProjectService } from './services/archive-project.service';
 import { FooterComponent } from './modules/footer/footer.component';
 import { HeaderComponent } from './modules/header/header.component';
+import { AuthGuard } from './auth.guard';
 
 export function initialize(
   configService: ConfigService,
@@ -68,14 +69,15 @@ export function initialize(
   ],
   providers: [
     ArchiveProjectService,
+    AuthGuard,
     ConfigService,
     StudentService,
     TeacherService,
     UserService,
     provideAppInitializer(() => {
-        const initializerFn = (initialize)(inject(ConfigService), inject(UserService));
-        return initializerFn();
-      }),
+      const initializerFn = initialize(inject(ConfigService), inject(UserService));
+      return initializerFn();
+    }),
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {
