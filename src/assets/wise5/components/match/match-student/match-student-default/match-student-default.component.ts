@@ -614,7 +614,7 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
 
   private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
     getUniqueIdeas(responses, rubric)
-      .filter((idea) => !this.isInSourceBucket(idea.name))
+      .filter((idea) => !this.isInSourceBucket(idea.text))
       .forEach((idea) => {
         const choice = new Choice(idea.name, idea.text);
         this.choices.push(choice);
@@ -623,7 +623,7 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
   }
 
   private isInSourceBucket(choiceId: string): boolean {
-    return this.sourceBucket.items.some((item) => item.id === choiceId);
+    return this.sourceBucket.items.some((item) => item.value === choiceId);
   }
 
   protected addChoice(): void {
