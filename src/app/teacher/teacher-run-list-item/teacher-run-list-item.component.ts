@@ -10,15 +10,17 @@ import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-
 import { Subscription } from 'rxjs';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { Tag } from '../../domain/tag';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-    animations: [flash],
-    selector: 'app-teacher-run-list-item',
-    styleUrl: './teacher-run-list-item.component.scss',
-    templateUrl: './teacher-run-list-item.component.html',
-    standalone: false
+  animations: [flash],
+  selector: 'app-teacher-run-list-item',
+  styleUrl: './teacher-run-list-item.component.scss',
+  templateUrl: './teacher-run-list-item.component.html',
+  standalone: false
 })
 export class TeacherRunListItemComponent implements OnInit {
+  protected accessLink: string = '';
   protected animateDelay: string = '0s';
   protected animateDuration: string = '0s';
   protected manageStudentsLink: string = '';
@@ -35,7 +37,8 @@ export class TeacherRunListItemComponent implements OnInit {
     private router: Router,
     private elRef: ElementRef,
     private dialog: MatDialog,
-    private projectTagService: ProjectTagService
+    private projectTagService: ProjectTagService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +46,9 @@ export class TeacherRunListItemComponent implements OnInit {
     this.manageStudentsLink = `${this.configService.getContextPath()}/teacher/manage/unit/${
       this.run.id
     }/manage-students`;
+    if (this.run.isSurveyRun()) {
+      this.accessLink = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-${this.run.periods}`;
+    }
     if (this.run.highlighted) {
       this.animateDuration = '2s';
       this.animateDelay = '1s';
@@ -144,5 +150,9 @@ export class TeacherRunListItemComponent implements OnInit {
     this.run.project.selected = false;
     this.runSelectedStatusChangedEvent.emit();
     this.runArchiveStatusChangedEvent.emit();
+  }
+
+  copyMsg() {
+    this.snackBar.open($localize`Copied to clipboard.`);
   }
 }

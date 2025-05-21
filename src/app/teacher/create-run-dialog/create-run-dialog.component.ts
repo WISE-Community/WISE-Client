@@ -35,9 +35,12 @@ import { Router } from '@angular/router';
 import { TeacherRun } from '../teacher-run';
 import { TeacherService } from '../teacher.service';
 import { UserService } from '../../services/user.service';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   imports: [
+    ClipboardModule,
     CommonModule,
     FormsModule,
     MatButtonModule,
@@ -60,6 +63,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './create-run-dialog.component.html'
 })
 export class CreateRunDialogComponent {
+  protected accessLink: string = '';
   protected customPeriods: FormControl;
   private endDateControl: FormControl;
   form: FormGroup;
@@ -79,6 +83,7 @@ export class CreateRunDialogComponent {
     public dialogRef: MatDialogRef<CreateRunDialogComponent>,
     private fb: FormBuilder,
     private router: Router,
+    private snackBar: MatSnackBar,
     private teacherService: TeacherService,
     private userService: UserService
   ) {
@@ -176,6 +181,9 @@ export class CreateRunDialogComponent {
       )
       .subscribe((newRun: TeacherRun) => {
         this.run = new TeacherRun(newRun);
+        if (this.run.isSurveyRun()) {
+          this.accessLink = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-${this.run.periods[0]}`;
+        }
         this.dialogRef.afterClosed().subscribe(() => {
           this.router.navigate(['/teacher/home/schedule'], {
             queryParams: { newRunId: newRun.id }
@@ -251,5 +259,9 @@ export class CreateRunDialogComponent {
 
   private getFormControlValue(control: string): any {
     return this.form.controls[control].value;
+  }
+
+  copyMsg() {
+    this.snackBar.open($localize`Copied to clipboard.`);
   }
 }

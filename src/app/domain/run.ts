@@ -15,7 +15,7 @@ export class Run {
   owner: User;
   sharedOwners: User[] = [];
   project: Project;
-  isSurvey: boolean;
+  private isSurvey: boolean;
 
   static readonly VIEW_STUDENT_WORK_PERMISSION: number = 1;
   static readonly GRADE_AND_MANAGE_PERMISSION: number = 2;
@@ -92,6 +92,10 @@ export class Run {
 
   private hasEndTime(): boolean {
     return this.endTime != null;
+  }
+
+  isSurveyRun(): boolean {
+    return this.isSurvey;
   }
 }
 

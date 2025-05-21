@@ -36,13 +36,32 @@
     </span>
   </div>
   <div>
-    <span i18n>Access Code: {{ run.runCode }}</span> (<a
-      href="#"
-      (click)="shareCode($event)"
-      tabindex="0"
-      i18n
-      >Share with students</a
-    >)
+    @if (!run.isSurveyRun()) {
+      <span i18n>Access Code: {{ run.runCode }}</span> (<a
+        href="#"
+        (click)="shareCode($event)"
+        tabindex="0"
+        i18n
+        >Share with students</a
+      >)
+    } @else {
+      <span i18n
+        >Access Link:
+        <button
+          class="access-link"
+          mat-button
+          color="primary"
+          i18n-matTooltip
+          matTooltip="Copy link"
+          matTooltipPosition="after"
+          [cdkCopyToClipboard]="accessLink"
+          (click)="copyMsg()"
+        >
+          <mat-icon>content_copy</mat-icon>
+          <span>{{ accessLink }}</span>
+        </button>
+      </span>
+    }
   </div>
   <div *ngIf="run.shared" class="info" i18n>
     Shared by {{ run.owner.firstName }} {{ run.owner.lastName }}
