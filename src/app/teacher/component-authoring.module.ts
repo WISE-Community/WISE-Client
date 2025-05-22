@@ -90,6 +90,7 @@ import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/a
 import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
 import { EditCRaterInfoComponent } from '../../assets/wise5/components/common/cRater/edit-crater-info/edit-crater-info.component';
+import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
 
 @NgModule({
   declarations: [
@@ -173,6 +174,7 @@ import { EditCRaterInfoComponent } from '../../assets/wise5/components/common/cR
     EditComponentConstraintsComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
+    EditCRaterIdeaDescriptionsComponent,
     EditCRaterInfoComponent,
     MatchAuthoringComponent,
     MultipleChoiceAuthoring,
@@ -221,6 +223,7 @@ import { EditCRaterInfoComponent } from '../../assets/wise5/components/common/cR
     EditConnectedComponentsWithBackgroundComponent,
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentTypeSelectComponent,
+    EditCRaterIdeaDescriptionsComponent,
     EditCRaterInfoComponent,
     EditDialogGuidanceAdvancedComponent,
     EditDiscussionAdvancedComponent,

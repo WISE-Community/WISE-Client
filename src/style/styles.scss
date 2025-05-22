@@ -46,6 +46,10 @@
 @tailwind components;
 @tailwind utilities;
 
+a {
+  text-decoration: underline;
+}
+
 .app-styles {
   @include apps.apps-setup();
 }
