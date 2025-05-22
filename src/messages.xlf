@@ -1577,7 +1577,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">158,162</context>
+          <context context-type="linenumber">157,161</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
@@ -2225,21 +2225,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Recaptcha failed. Please reload the page and try again! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">128,131</context>
+          <context context-type="linenumber">126,129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2030256990555278300" datatype="html">
         <source> Sorry, there was a problem submitting the form. Please try again. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">132,136</context>
+          <context context-type="linenumber">130,134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7898998821450935640" datatype="html">
+        <source> By submitting, you will be sending your unit to be reviewed. If approved, it will be added to the Community Built library. Make sure you have filled out all appropriate fields in the Unit Info page in the authoring tool. We will be in touch if we require any more information. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
+          <context context-type="linenumber">136,141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3357031660050032232" datatype="html">
+        <source>Thank you!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
+          <context context-type="linenumber">141,145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7330209395505773206" datatype="html">
         <source>Submit for Review</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">156,158</context>
+          <context context-type="linenumber">155,157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6178733511992894634" datatype="html">
@@ -2323,8 +2337,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4331388718968090017" datatype="html">
-        <source>Publish Unit to the WISE Community</source>
+      <trans-unit id="6193846139411583890" datatype="html">
+        <source>Publish Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">142</context>
@@ -6320,8 +6334,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">12,14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6028237129237746121" datatype="html">
-        <source> &quot;Community Built&quot; units are designed and contributed by WISE community members. Want to publicly share your custom unit? Head to the Authoring Tool, select your unit, go to the Unit Info page, and click Publish! </source>
+      <trans-unit id="7175062744029329865" datatype="html">
+        <source> &quot;Community Built&quot; units are designed and contributed by WISE community members. Want to publicly share your custom unit? Select the Publish option in the unit details pop-up. Or open your unit in the Authoring Tool, go to Unit Info, and tap Publish! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/public-unit-type-selector/community-library-details.html</context>
           <context context-type="linenumber">5,10</context>
