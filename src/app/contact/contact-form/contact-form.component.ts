@@ -139,7 +139,7 @@ export class ContactFormComponent implements OnInit {
         { key: 'PROJECT_PROBLEMS', value: $localize`Problems with a WISE Unit` },
         { key: 'STUDENT_MANAGEMENT', value: $localize`Student Management` },
         { key: 'AUTHORING', value: $localize`Need Help with Authoring` },
-        { key: 'PUBLISH', value: $localize`Publish Unit to the WISE Community` },
+        { key: 'PUBLISH', value: $localize`Publish Unit` },
         { key: 'FEEDBACK', value: $localize`Feedback to WISE` },
         { key: 'OTHER', value: $localize`Other` }
       ];

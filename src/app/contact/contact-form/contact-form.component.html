@@ -120,9 +120,7 @@
               <a href="https://policies.google.com/terms">Terms of Service</a> apply.
             </p>
           }
-          @if (!isError) {
-            <div>&nbsp;</div>
-          } @else {
+          @if (isError) {
             @if (isRecaptchaEnabled && isRecaptchaError) {
               <p class="center warn" i18n>
                 Recaptcha failed. Please reload the page and try again!
@@ -134,12 +132,13 @@
             }
           }
           @if (isPublishIssueType()) {
-            <p>
-              By submitting, you will be sending your unit to WISE to be reviewed. If approved, your
-              unit will be added to the Community Built library. Make sure you have finished filling
-              out all appropriate fields on your project's Unit Info page before submitting it for
-              review.
+            <p class="center mat-caption" i18n>
+              By submitting, you will be sending your unit to be reviewed. If approved, it will be
+              added to the Community Built library. Make sure you have filled out all appropriate
+              fields in the Unit Info page in the authoring tool. We will be in touch if we require
+              any more information.
             </p>
+            <p class="center mat-caption" i18n>Thank you!</p>
           }
           <p>
             <button
