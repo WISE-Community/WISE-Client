@@ -2142,7 +2142,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summaryService.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6416297464279464070" datatype="html">
@@ -14680,6 +14680,10 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
           <context context-type="linenumber">53,58</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">29,35</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="4492261521538997006" datatype="html">
         <source> Team has not saved any work </source>
@@ -21544,50 +21548,85 @@ If this problem continues, let your teacher know and move on to the next activit
       <trans-unit id="1563518905064973119" datatype="html">
         <source>Student Ideas Detected</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
           <context context-type="linenumber">10,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1666870263478393442" datatype="html">
         <source>Most Common:</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
           <context context-type="linenumber">17,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3890016893241033743" datatype="html">
         <source>Least Common:</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
           <context context-type="linenumber">30,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8554628971380732275" datatype="html">
         <source>All Ideas:</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
           <context context-type="linenumber">44,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4846422330041825392" datatype="html">
         <source>Hide all ideas</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
           <context context-type="linenumber">55,57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2854301724440724946" datatype="html">
         <source>Show all ideas</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
           <context context-type="linenumber">57,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4350048951016929310" datatype="html">
         <source> Your students&apos; ideas will show up here as they are detected in the activity. </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary.component.html</context>
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
           <context context-type="linenumber">61,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5353710433603859763" datatype="html">
+        <source>Source Bucket</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">6,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3517550046701184661" datatype="html">
+        <source>Show less</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">27,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5731986766999662576" datatype="html">
+        <source>Choice Frequency</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">39,42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="162368930016668080" datatype="html">
+        <source> This summary shows how many students moved each choice item into the different buckets (categories). </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">42,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2004123481203797507" datatype="html">
+        <source> Your students&apos; choices will show up here when they complete the activity. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">67,72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="866753876041645935" datatype="html">
