@@ -24,6 +24,9 @@
         </div>
       </button>
     </div>
+    @for (component of components; track component.id) {
+      <component-grading-view [component]="component" [node]="node" />
+    }
     <div class="mat-elevation-z1 list-item component-select">
       <span i18n>Question: </span>
       <filter-components
@@ -32,7 +35,7 @@
       />
     </div>
     @for (component of visibleComponents; track component.id) {
-      <component-grading-view [component]="component" [node]="node" />
+      <component-class-responses [node]="node" [component]="component" />
     }
   </div>
 </div>

@@ -13,10 +13,12 @@ import { ComponentGradingViewComponent } from '../../component-grading-view/comp
 import { MatButtonModule } from '@angular/material/button';
 import { FilterComponentsComponent } from '../filter-components/filter-components.component';
 import { ComponentContent } from '../../../../common/ComponentContent';
+import { ComponentClassResponsesComponent } from '../../component-class-responses/component-class-responses.component';
 
 @Component({
   imports: [
     CommonModule,
+    ComponentClassResponsesComponent,
     ComponentGradingViewComponent,
     FilterComponentsComponent,
     FlexLayoutModule,

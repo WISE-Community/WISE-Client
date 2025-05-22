@@ -7,7 +7,6 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { isMatchingPeriods } from '../../../common/period/period';
 import { AnnotationService } from '../../../services/annotationService';
 import { Node } from '../../../common/Node';
-import { ComponentClassResponsesComponent } from '../component-class-responses/component-class-responses.component';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
@@ -17,7 +16,6 @@ import { ComponentContent } from '../../../common/ComponentContent';
 @Component({
   imports: [
     ComponentAverageScoreComponent,
-    ComponentClassResponsesComponent,
     ComponentCompletionComponent,
     MilestoneReportButtonComponent,
     PeerGroupButtonComponent,
