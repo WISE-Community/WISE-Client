@@ -43,10 +43,9 @@ export class ProjectInfoAuthoringComponent {
     this.metadataAuthoring = JSON.parse(
       this.configService.getConfigParam('projectMetadataSettings')
     );
-    const userAuthor = this.metadata.authors.find(
+    this.isMyUnit = this.metadata.authors.some(
       (author) => author.id === this.userService.getUserId()
     );
-    this.isMyUnit = userAuthor !== undefined;
     this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.configService.getProjectId()}&publish=true`;
     this.loadProjectIcon();
     this.processMetadata();
