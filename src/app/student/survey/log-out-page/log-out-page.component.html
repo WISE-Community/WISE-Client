@@ -1,0 +1,16 @@
+<div>
+  <mat-card class="card">
+    <mat-card-content>
+      <p>You must be logged out to access this survey.</p>
+      <p>Log out, and try the link again.</p>
+      <mat-card class="log-out">
+        <mat-card-content class="log-out-content">
+          <a (click)="logOut()">
+            <mat-icon color="warn">exit_to_app</mat-icon>
+            <span class="warn" i18n>Log Out</span>
+          </a>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

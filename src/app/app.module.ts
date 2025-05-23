@@ -24,6 +24,7 @@ import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng
 import { ArchiveProjectService } from './services/archive-project.service';
 import { FooterComponent } from './modules/footer/footer.component';
 import { HeaderComponent } from './modules/header/header.component';
+import { LogOutService } from './services/logOutService';
 
 export function initialize(
   configService: ConfigService,
@@ -69,6 +70,7 @@ export function initialize(
   providers: [
     ArchiveProjectService,
     ConfigService,
+    LogOutService,
     StudentService,
     TeacherService,
     UserService,

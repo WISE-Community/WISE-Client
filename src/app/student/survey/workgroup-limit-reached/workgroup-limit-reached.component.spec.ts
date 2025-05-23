@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkgroupLimitReachedComponent } from './workgroup-limit-reached.component';
 
-fdescribe('WorkgroupLimitReachedComponent', () => {
+describe('WorkgroupLimitReachedComponent', () => {
   let component: WorkgroupLimitReachedComponent;
   let fixture: ComponentFixture<WorkgroupLimitReachedComponent>;
 

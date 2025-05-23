@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PublicLibraryComponent } from './modules/library/public-library/public-library.component';
 import { PersonalLibraryComponent } from './modules/library/personal-library/personal-library.component';
-import { WorkgroupLimitReachedComponent } from './student/workgroup-limit-reached/workgroup-limit-reached.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
@@ -59,9 +58,8 @@ const routes: Routes = [
     loadChildren: () => import('./teacher/teacher.module').then((m) => m.TeacherModule)
   },
   {
-    path: 'workgroupLimitReached',
-    component: WorkgroupLimitReachedComponent,
-    pathMatch: 'full'
+    path: 'survey',
+    loadChildren: () => import('./student/survey/survey.module').then((m) => m.SurveyModule)
   }
 ];
 
