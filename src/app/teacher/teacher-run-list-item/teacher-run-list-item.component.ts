@@ -47,7 +47,7 @@ export class TeacherRunListItemComponent implements OnInit {
       this.run.id
     }/manage-students`;
     if (this.run.isSurveyRun()) {
-      this.accessLink = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-${this.run.periods}`;
+      this.accessLink = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-${this.run.periods[0]}`;
     }
     if (this.run.highlighted) {
       this.animateDuration = '2s';

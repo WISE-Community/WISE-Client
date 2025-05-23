@@ -4,14 +4,20 @@ import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthGuard {
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.checkLogin(state.url);
   }
 
   checkLogin(url: string): boolean {
-    if (this.userService.isStudent() || url.includes('/preview/unit')) {
+    if (
+      (this.userService.isStudent() || url.includes('/preview/unit')) &&
+      !(this.userService.isSurveyStudent() && url.includes('/home'))
+    ) {
       return true;
     } else if (this.userService.isAuthenticated) {
       this.router.navigate(['/']);

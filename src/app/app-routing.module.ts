@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PublicLibraryComponent } from './modules/library/public-library/public-library.component';
 import { PersonalLibraryComponent } from './modules/library/personal-library/personal-library.component';
-import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
@@ -52,7 +51,6 @@ const routes: Routes = [
   },
   {
     path: 'student',
-    canActivate: [AuthGuard],
     loadChildren: () => import('./student/student.module').then((m) => m.StudentModule)
   },
   {
