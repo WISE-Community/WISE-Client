@@ -14,10 +14,7 @@ export class AuthGuard {
   }
 
   checkLogin(url: string): boolean {
-    if (
-      (this.userService.isStudent() || url.includes('/preview/unit')) &&
-      !(this.userService.isSurveyStudent() && url.includes('/home'))
-    ) {
+    if (this.canAccess(url)) {
       return true;
     } else if (this.userService.isAuthenticated) {
       this.router.navigate(['/']);
@@ -27,5 +24,14 @@ export class AuthGuard {
       this.router.navigate(['/login']);
       return false;
     }
+  }
+
+  private canAccess(url: string): boolean {
+    return (
+      (this.userService.isStudent() ||
+        url.includes('/preview/unit') ||
+        url.includes('/workgroupLimitReached')) &&
+      !(this.userService.isSurveyStudent() && url.includes('/home'))
+    );
   }
 }
