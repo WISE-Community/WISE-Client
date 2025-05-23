@@ -53,7 +53,7 @@
     </div>
     <span class="flex-auto"></span>
     @if (isTeacher && project.wiseVersion !== 4) {
-      <app-library-project-menu [project]="project" [isRun]="isRunProject" />
+      <app-library-project-menu [project]="project" [isMyUnit]="isMyUnit" [isRun]="isRunProject" />
     }
   </div>
   <div class="info-block">

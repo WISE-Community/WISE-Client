@@ -24,8 +24,10 @@ export class LibraryProjectMenuComponent {
   protected canEdit: boolean;
   protected canShare: boolean;
   protected isChild: boolean;
+  @Input() isMyUnit: boolean;
   @Input() isRun: boolean;
   @Input() project: Project;
+  protected publishUnitUrl: string;
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -40,6 +42,7 @@ export class LibraryProjectMenuComponent {
     this.canShare = this.isOwner() && !this.isRun;
     this.isChild = this.project.isChild();
     this.archived = this.project.hasTagWithText('archived');
+    this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.project.id}&publish=true`;
   }
 
   private isOwner(): boolean {
