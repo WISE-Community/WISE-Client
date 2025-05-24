@@ -9,21 +9,19 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { Node } from '../../../../common/Node';
 import { Subscription } from 'rxjs';
-import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
 import { MatButtonModule } from '@angular/material/button';
 import { FilterComponentsComponent } from '../filter-components/filter-components.component';
 import { ComponentContent } from '../../../../common/ComponentContent';
-import { ComponentClassResponsesComponent } from '../../component-class-responses/component-class-responses.component';
+import { NodeClassResponsesComponent } from '../node-class-responses/node-class-responses.component';
 
 @Component({
   imports: [
     CommonModule,
-    ComponentClassResponsesComponent,
-    ComponentGradingViewComponent,
     FilterComponentsComponent,
     FlexLayoutModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    NodeClassResponsesComponent
   ],
   styles: [
     `

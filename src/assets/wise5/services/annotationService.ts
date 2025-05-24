@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { generateRandomKey } from '../common/string/string';
 import { Annotation } from '../common/Annotation';
+import { Node } from '../common/Node';
+import { ComponentContent } from '../common/ComponentContent';
 
 @Injectable()
 export class AnnotationService {
@@ -249,6 +251,17 @@ export class AnnotationService {
 
   isScoreOrAutoScore(annotation: any): boolean {
     return annotation.type === 'score' || annotation.type === 'autoScore';
+  }
+
+  getTotalNodeScore(workgroupId: number, node: Node, components: ComponentContent[]): number {
+    return this.getTotalScore(
+      this.annotations.filter(
+        (annotation) =>
+          annotation.nodeId === node.id &&
+          annotation.toWorkgroupId === workgroupId &&
+          components.some((component) => component.id === annotation.componentId)
+      )
+    );
   }
 
   getTotalNodeScoreForWorkgroup(workgroupId: number, nodeId: string) {
