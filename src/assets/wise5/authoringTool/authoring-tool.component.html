@@ -3,7 +3,7 @@
 <div id="top" class="app-styles authoring" disable-delete-keypress role="main">
   <mat-drawer-container>
     <mat-drawer #drawer [(opened)]="isMenuOpen" mode="over" class="mat-elevation-z4">
-      <main-menu [title]="title" [views]="views"></main-menu>
+      <main-menu [title]="title" [views]="views" />
     </mat-drawer>
     <mat-drawer-content>
       <at-top-bar
@@ -25,7 +25,7 @@
         role="main"
         cdkScrollable
       >
-        <router-outlet></router-outlet>
+        <router-outlet />
       </content>
       @if (showToolbar) {
         <side-menu [views]="views" />
