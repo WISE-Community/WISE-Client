@@ -31,7 +31,10 @@ describe('NodeWorkgroupItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should show team 1 with status', () => {
     expect(component).toBeTruthy();
+    const textContent = fixture.nativeElement.textContent;
+    expect(textContent).toContain('Team 1');
+    expect(textContent).toContain('Not Visited');
   });
 });

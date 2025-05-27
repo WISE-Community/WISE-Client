@@ -37,8 +37,8 @@ import { AnnotationService } from '../../../../services/annotationService';
     WorkgroupComponentGradingComponent
   ],
   selector: 'node-workgroup-item',
-  templateUrl: './node-workgroup-item.component.html',
-  styleUrl: './node-workgroup-item.component.scss'
+  styleUrl: './node-workgroup-item.component.scss',
+  templateUrl: './node-workgroup-item.component.html'
 })
 export class NodeWorkgroupItemComponent {
   private componentIdToHasWork: { [componentId: string]: boolean } = {};

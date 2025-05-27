@@ -10,10 +10,14 @@ import { NotificationService } from '../../../../services/notificationService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { of } from 'rxjs';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
 describe('NodeClassResponsesComponent', () => {
   let component: NodeClassResponsesComponent;
   let fixture: ComponentFixture<NodeClassResponsesComponent>;
+  let loader: HarnessLoader;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -35,11 +39,18 @@ describe('NodeClassResponsesComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(NodeClassResponsesComponent);
+    loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
+    component['sortedWorkgroups'] = [
+      { workgroupId: 1, name: 'Workgroup 1' },
+      { workgroupId: 2, name: 'Workgroup 2' }
+    ];
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('clicking on the expand all button should expand all teams', async () => {
+    expect(component['allWorkgroupsExpanded']).toBeFalsy();
+    await (await loader.getHarness(MatButtonHarness.with({ text: '+ Expand all' }))).click();
+    expect(component['allWorkgroupsExpanded']).toBeTrue();
   });
 });
