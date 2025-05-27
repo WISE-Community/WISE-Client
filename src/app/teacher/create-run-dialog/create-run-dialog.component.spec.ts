@@ -1,19 +1,19 @@
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TeacherService } from '../teacher.service';
+import { ConfigService } from '../../services/config.service';
+import { Course } from '../../domain/course';
 import { CreateRunDialogComponent } from './create-run-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { Project } from '../../domain/project';
+import { Router } from '@angular/router';
 import { Run } from '../../domain/run';
-import { By } from '@angular/platform-browser';
-import { Course } from '../../domain/course';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { TeacherService } from '../teacher.service';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
-import { ConfigService } from '../../services/config.service';
-import { Router } from '@angular/router';
 
 export class MockTeacherService {
   createRun() {

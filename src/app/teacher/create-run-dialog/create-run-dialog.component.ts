@@ -1,3 +1,4 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
@@ -28,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Project } from '../../domain/project';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -35,8 +37,7 @@ import { Router } from '@angular/router';
 import { TeacherRun } from '../teacher-run';
 import { TeacherService } from '../teacher.service';
 import { UserService } from '../../services/user.service';
-import { ClipboardModule } from '@angular/cdk/clipboard';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { AccessLinkService } from '../../services/accessLinkService';
 
 @Component({
   imports: [
@@ -77,6 +78,7 @@ export class CreateRunDialogComponent {
   run: TeacherRun = null;
 
   constructor(
+    private accessLinkService: AccessLinkService,
     private configService: ConfigService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
@@ -182,9 +184,9 @@ export class CreateRunDialogComponent {
       .subscribe((newRun: TeacherRun) => {
         this.run = new TeacherRun(newRun);
         if (this.run.isSurveyRun()) {
-          const linkBase = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-`;
-          this.run.periods.forEach((period) =>
-            this.accessLinks.push(linkBase + period.replaceAll(' ', '++'))
+          this.accessLinks = this.accessLinkService.getAccessLinks(
+            this.run.runCode,
+            this.run.periods
           );
         }
         this.dialogRef.afterClosed().subscribe(() => {
@@ -264,11 +266,11 @@ export class CreateRunDialogComponent {
     return this.form.controls[control].value;
   }
 
-  copyMsg() {
+  protected copyMsg(): void {
     this.snackBar.open($localize`Copied to clipboard.`);
   }
 
   protected getPeriodFromAccessLink(link: string): string {
-    return link.slice(link.indexOf('-') + 1).replaceAll('++', ' ');
+    return this.accessLinkService.getPeriodFromAccessLink(link);
   }
 }

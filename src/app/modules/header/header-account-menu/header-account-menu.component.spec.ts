@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { HeaderAccountMenuComponent } from './header-account-menu.component';
-import { User } from '../../../domain/user';
-import { MatMenuModule } from '@angular/material/menu';
-import { ConfigService } from '../../../services/config.service';
-import { Observable } from 'rxjs';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { Config } from '../../../domain/config';
-import { provideRouter } from '@angular/router';
+import { ConfigService } from '../../../services/config.service';
+import { HeaderAccountMenuComponent } from './header-account-menu.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { Observable } from 'rxjs';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
+import { User } from '../../../domain/user';
 
 export class MockConfigService {
   getConfig(): Observable<Config> {

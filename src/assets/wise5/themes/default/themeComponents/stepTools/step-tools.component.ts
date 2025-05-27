@@ -1,22 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ConfigService } from '../../../../services/configService';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { LogOutService } from '../../../../../../app/services/logOutService';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
 import { NodeService } from '../../../../services/nodeService';
+import { NodeStatusIconComponent } from '../nodeStatusIcon/node-status-icon.component';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { NodeStatusIconComponent } from '../nodeStatusIcon/node-status-icon.component';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { StudentService } from '../../../../../../app/student/student.service';
-import { ConfigService } from '../../../../services/configService';
-import { LogOutService } from '../../../../../../app/services/logOutService';
+import { Subscription } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,

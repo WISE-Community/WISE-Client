@@ -1,9 +1,9 @@
 import { ConfigService } from './config.service';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { LogOutService } from './logOutService';
 import { MockProviders } from 'ng-mocks';
 import { of } from 'rxjs';
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 let service: LogOutService;
 let httpSpy: jasmine.Spy;

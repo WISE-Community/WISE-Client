@@ -1,15 +1,14 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { ConfigService } from '../../../services/config.service';
-import { User } from '../../../domain/user';
+import { CommonModule } from '@angular/common';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClient } from '@angular/common/http';
+import { LogOutService } from '../../../services/logOutService';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { LogOutService } from '../../../services/logOutService';
+import { User } from '../../../domain/user';
 
 @Component({
   selector: 'app-header-account-menu',
@@ -19,9 +18,9 @@ import { LogOutService } from '../../../services/logOutService';
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatDividerModule,
     MatIconModule,
     MatMenuModule,
-    MatDividerModule,
     RouterModule
   ]
 })

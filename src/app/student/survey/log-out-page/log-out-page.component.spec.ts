@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LogOutPageComponent } from './log-out-page.component';
 
 describe('LogOutPageComponent', () => {
@@ -9,8 +8,7 @@ describe('LogOutPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LogOutPageComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LogOutPageComponent);
     component = fixture.componentInstance;

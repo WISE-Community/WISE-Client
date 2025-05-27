@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
-import { Project } from '../domain/project';
-import { Teacher } from '../domain/teacher';
-import { Run } from '../domain/run';
-import { Course } from '../domain/course';
 import { CopyProjectDialogComponent } from '../modules/library/copy-project-dialog/copy-project-dialog.component';
+import { Course } from '../domain/course';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable, Subject } from 'rxjs';
+import { Project } from '../domain/project';
+import { Run } from '../domain/run';
+import { Teacher } from '../domain/teacher';
 import { TeacherRun } from './teacher-run';
 
 @Injectable()

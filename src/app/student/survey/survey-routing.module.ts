@@ -1,9 +1,9 @@
+import { LogOutPageComponent } from './log-out-page/log-out-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from '../student.component';
-import { WorkgroupLimitReachedComponent } from './workgroup-limit-reached/workgroup-limit-reached.component';
-import { LogOutPageComponent } from './log-out-page/log-out-page.component';
 import { SurveyCompletedComponent } from './survey-completed/survey-completed.component';
+import { WorkgroupLimitReachedComponent } from './workgroup-limit-reached/workgroup-limit-reached.component';
 
 const studentRoutes: Routes = [
   {

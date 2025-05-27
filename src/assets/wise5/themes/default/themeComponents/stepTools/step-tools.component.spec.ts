@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StudentDataService } from '../../../../services/studentDataService';
-import { StepToolsComponent } from './step-tools.component';
-import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { StepToolsComponent } from './step-tools.component';
+import { StudentDataService } from '../../../../services/studentDataService';
+import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { VLEProjectService } from '../../../../vle/vleProjectService';
 
 const nodeId1 = 'node1';

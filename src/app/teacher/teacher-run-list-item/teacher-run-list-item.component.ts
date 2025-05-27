@@ -1,23 +1,24 @@
 import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { SafeStyle } from '@angular/platform-browser';
-import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
+import { DomSanitizer } from '@angular/platform-browser';
 import { flash } from '../../animations';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { Router } from '@angular/router';
+import { SafeStyle } from '@angular/platform-browser';
 import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-code-dialog.component';
 import { Subscription } from 'rxjs';
-import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { Tag } from '../../domain/tag';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { TeacherRun } from '../teacher-run';
+import { AccessLinkService } from '../../services/accessLinkService';
 
 @Component({
   animations: [flash],
   selector: 'app-teacher-run-list-item',
+  standalone: false,
   styleUrl: './teacher-run-list-item.component.scss',
-  templateUrl: './teacher-run-list-item.component.html',
-  standalone: false
+  templateUrl: './teacher-run-list-item.component.html'
 })
 export class TeacherRunListItemComponent implements OnInit {
   protected accessLinks: string[] = [];
@@ -33,12 +34,13 @@ export class TeacherRunListItemComponent implements OnInit {
   protected thumbStyle: SafeStyle;
 
   constructor(
-    private sanitizer: DomSanitizer,
+    private accessLinkService: AccessLinkService,
     private configService: ConfigService,
-    private router: Router,
-    private elRef: ElementRef,
     private dialog: MatDialog,
+    private elRef: ElementRef,
     private projectTagService: ProjectTagService,
+    private router: Router,
+    private sanitizer: DomSanitizer,
     private snackBar: MatSnackBar
   ) {}
 
@@ -48,10 +50,7 @@ export class TeacherRunListItemComponent implements OnInit {
       this.run.id
     }/manage-students`;
     if (this.run.isSurveyRun()) {
-      const linkBase = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-`;
-      this.run.periods.forEach((period) =>
-        this.accessLinks.push(linkBase + period.replaceAll(' ', '++'))
-      );
+      this.accessLinks = this.accessLinkService.getAccessLinks(this.run.runCode, this.run.periods);
     }
     if (this.run.highlighted) {
       this.animateDuration = '2s';
@@ -101,7 +100,7 @@ export class TeacherRunListItemComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  private getThumbStyle() {
+  private getThumbStyle(): SafeStyle {
     const DEFAULT_THUMB = 'assets/img/default-picture.svg';
     const STYLE = `url(${this.run.project.projectThumb}), url(${DEFAULT_THUMB})`;
     return this.sanitizer.bypassSecurityTrustStyle(STYLE);
@@ -142,7 +141,7 @@ export class TeacherRunListItemComponent implements OnInit {
     return run.isCompleted(this.configService.getCurrentServerTime());
   }
 
-  shareCode(event: Event): void {
+  protected shareCode(event: Event): void {
     event.preventDefault();
     this.dialog.open(ShareRunCodeDialogComponent, {
       data: this.run,
@@ -156,12 +155,12 @@ export class TeacherRunListItemComponent implements OnInit {
     this.runArchiveStatusChangedEvent.emit();
   }
 
-  copyMsg() {
+  protected copyMsg(): void {
     this.snackBar.open($localize`Copied to clipboard.`);
   }
 
   protected getPeriodFromAccessLink(link: string): string {
-    return link.slice(link.indexOf('-') + 1).replaceAll('++', ' ');
+    return this.accessLinkService.getPeriodFromAccessLink(link);
   }
 
   protected toggleShowAllLinks(): void {
