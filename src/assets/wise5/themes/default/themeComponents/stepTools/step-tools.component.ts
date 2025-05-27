@@ -134,11 +134,13 @@ export class StepToolsComponent implements OnInit {
   }
 
   private setIsSurvey(): void {
-    this.studentService
-      .getRunInfoById(this.studentDataService.getRunStatus().runId)
-      .subscribe((runInfo) => {
-        this.isSurvey = runInfo.isSurvey !== undefined ? runInfo.isSurvey : false;
-      });
+    if (!this.configService.isPreview()) {
+      this.studentService
+        .getRunInfoById(this.studentDataService.getRunStatus().runId)
+        .subscribe((runInfo) => {
+          this.isSurvey = runInfo.isSurvey !== undefined ? runInfo.isSurvey : false;
+        });
+    }
   }
 
   protected async submitSurvey(): Promise<void> {

@@ -29,6 +29,7 @@ import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/
 import { RunEndedAndLockedMessageComponent } from './run-ended-and-locked-message/run-ended-and-locked-message.component';
 import { NodeComponent } from './node/node.component';
 import { NavigationComponent } from '../themes/default/navigation/navigation.component';
+import { StudentService } from '../../../app/student/student.service';
 
 @Component({
   imports: [
@@ -55,6 +56,7 @@ export class VLEComponent implements AfterViewInit {
   @ViewChild('defaultVLETemplate') private defaultVLETemplate: TemplateRef<any>;
   @ViewChild('drawer') public drawer: any;
   protected initialized: boolean;
+  private isSurvey: boolean;
   protected layoutState: string;
   protected notebookConfig: any;
   protected notesEnabled: boolean = false;
@@ -81,11 +83,15 @@ export class VLEComponent implements AfterViewInit {
     private router: Router,
     private sessionService: SessionService,
     private studentDataService: StudentDataService,
+    private studentService: StudentService,
     private wiseLinkService: WiseLinkService
   ) {}
 
   @HostListener('window:beforeunload')
-  beforeUnload(): void {
+  beforeUnload($event): void {
+    if (this.isSurvey) {
+      $event.preventDefault();
+    }
     if (this.sessionService.isSessionActive()) {
       this.saveNodeExitedEvent();
     }
@@ -140,6 +146,15 @@ export class VLEComponent implements AfterViewInit {
     this.setLayoutState();
     this.initializeSubscriptions();
     this.saveNodeEnteredEvent();
+
+    // Set isSurvey
+    if (!this.configService.isPreview()) {
+      this.studentService
+        .getRunInfoById(this.studentDataService.getRunStatus().runId)
+        .subscribe((runInfo) => {
+          this.isSurvey = runInfo.isSurvey;
+        });
+    }
   }
 
   ngOnDestroy() {
