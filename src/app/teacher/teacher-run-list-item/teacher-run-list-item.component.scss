@@ -32,3 +32,8 @@
 .access-link {
   text-transform: lowercase;
 }
+
+.toggle-show:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

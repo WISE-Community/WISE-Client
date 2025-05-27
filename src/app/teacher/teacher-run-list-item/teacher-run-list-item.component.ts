@@ -20,7 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: false
 })
 export class TeacherRunListItemComponent implements OnInit {
-  protected accessLink: string = '';
+  protected accessLinks: string[] = [];
   protected animateDelay: string = '0s';
   protected animateDuration: string = '0s';
   protected manageStudentsLink: string = '';
@@ -28,6 +28,7 @@ export class TeacherRunListItemComponent implements OnInit {
   @Input() run: TeacherRun = new TeacherRun();
   @Output() runArchiveStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() runSelectedStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
+  protected showAllLinks: boolean = false;
   private subscriptions: Subscription = new Subscription();
   protected thumbStyle: SafeStyle;
 
@@ -47,7 +48,10 @@ export class TeacherRunListItemComponent implements OnInit {
       this.run.id
     }/manage-students`;
     if (this.run.isSurveyRun()) {
-      this.accessLink = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-${this.run.periods[0]}`;
+      const linkBase = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-`;
+      this.run.periods.forEach((period) =>
+        this.accessLinks.push(linkBase + period.replaceAll(' ', '++'))
+      );
     }
     if (this.run.highlighted) {
       this.animateDuration = '2s';
@@ -154,5 +158,13 @@ export class TeacherRunListItemComponent implements OnInit {
 
   copyMsg() {
     this.snackBar.open($localize`Copied to clipboard.`);
+  }
+
+  protected getPeriodFromAccessLink(link: string): string {
+    return link.slice(link.indexOf('-') + 1).replaceAll('++', ' ');
+  }
+
+  protected toggleShowAllLinks(): void {
+    this.showAllLinks = !this.showAllLinks;
   }
 }

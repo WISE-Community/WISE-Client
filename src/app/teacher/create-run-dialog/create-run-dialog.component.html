@@ -132,22 +132,25 @@
           You can always find the Access Code for each classroom unit in your Class Schedule.
         </p>
       } @else {
-        <p class="mat-subtitle-1 accent" i18n>
-          Access Link:
-          <button
-            class="access-link"
-            mat-button
-            color="primary"
-            i18n-matTooltip
-            matTooltip="Copy link"
-            matTooltipPosition="after"
-            [cdkCopyToClipboard]="accessLink"
-            (click)="copyMsg()"
-          >
-            <mat-icon>content_copy</mat-icon>
-            <span>{{ accessLink }}</span>
-          </button>
-        </p>
+        @for (accessLink of accessLinks; track accessLink) {
+          <p class="mat-subtitle-1 accent" i18n>
+            Period {{ getPeriodFromAccessLink(accessLink) }} Access Link:
+            <button
+              class="access-link"
+              mat-button
+              color="primary"
+              i18n-matTooltip
+              matTooltip="Copy link"
+              matTooltipPosition="after"
+              [cdkCopyToClipboard]="accessLink"
+              (click)="copyMsg()"
+            >
+              <mat-icon>content_copy</mat-icon>
+              <span>{{ accessLink }}</span>
+            </button>
+          </p>
+          <br />
+        }
         <p i18n>
           Important: Every survey unit has a unique Access Link. Students can use this link to
           access and complete the survey without needing to create a WISE account.

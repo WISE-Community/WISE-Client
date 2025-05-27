@@ -63,7 +63,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './create-run-dialog.component.html'
 })
 export class CreateRunDialogComponent {
-  protected accessLink: string = '';
+  protected accessLinks: string[] = [];
   protected customPeriods: FormControl;
   private endDateControl: FormControl;
   form: FormGroup;
@@ -182,7 +182,10 @@ export class CreateRunDialogComponent {
       .subscribe((newRun: TeacherRun) => {
         this.run = new TeacherRun(newRun);
         if (this.run.isSurveyRun()) {
-          this.accessLink = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-${this.run.periods[0]}`;
+          const linkBase = `${this.configService.getContextPath()}/api/survey/launch/${this.run.runCode}-`;
+          this.run.periods.forEach((period) =>
+            this.accessLinks.push(linkBase + period.replaceAll(' ', '++'))
+          );
         }
         this.dialogRef.afterClosed().subscribe(() => {
           this.router.navigate(['/teacher/home/schedule'], {
@@ -263,5 +266,9 @@ export class CreateRunDialogComponent {
 
   copyMsg() {
     this.snackBar.open($localize`Copied to clipboard.`);
+  }
+
+  protected getPeriodFromAccessLink(link: string): string {
+    return link.slice(link.indexOf('-') + 1).replaceAll('++', ' ');
   }
 }
