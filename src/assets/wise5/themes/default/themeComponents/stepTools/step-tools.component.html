@@ -12,7 +12,7 @@
       <mat-icon>{{ icons.prev }}</mat-icon>
     </button>
     <div class="node-icon-div">
-      <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon"/>
+      <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon" />
     </div>
     &nbsp;
     <mat-form-field appearance="fill">
@@ -49,7 +49,7 @@
       </mat-select>
     </mat-form-field>
     <div class="node-status-div">
-      <node-status-icon [nodeId]="nodeId"/>
+      <node-status-icon [nodeId]="nodeId" />
     </div>
     <button
       mat-icon-button
@@ -63,6 +63,16 @@
       <mat-icon>{{ icons.next }}</mat-icon>
     </button>
   </div>
+  @if (isSurvey) {
+    <div>
+      <button mat-raised-button (click)="submitSurvey()">
+        <div class="submit-button-content">
+          <mat-icon>task</mat-icon>
+          <span>Submit Survey</span>
+        </div>
+      </button>
+    </div>
+  }
   <div>
     <button
       mat-icon-button

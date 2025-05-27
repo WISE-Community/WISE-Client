@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from '../student.component';
 import { WorkgroupLimitReachedComponent } from './workgroup-limit-reached/workgroup-limit-reached.component';
 import { LogOutPageComponent } from './log-out-page/log-out-page.component';
+import { SurveyCompletedComponent } from './survey-completed/survey-completed.component';
 
 const studentRoutes: Routes = [
   {
@@ -10,12 +11,13 @@ const studentRoutes: Routes = [
     component: StudentComponent,
     children: [
       { path: '', redirectTo: '/', pathMatch: 'full' },
+      { path: 'completed', component: SurveyCompletedComponent, pathMatch: 'full' },
+      { path: 'logout', component: LogOutPageComponent, pathMatch: 'full' },
       {
         path: 'workgroupLimitReached',
         component: WorkgroupLimitReachedComponent,
         pathMatch: 'full'
-      },
-      { path: 'logout', component: LogOutPageComponent, pathMatch: 'full' }
+      }
     ]
   }
 ];

@@ -8,4 +8,5 @@ export class RunInfo {
   error: string;
   name: string;
   wiseVersion: number;
+  isSurvey: boolean;
 }
