@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AiChatBotMessageComponent } from './ai-chat-bot-message.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
+import { AiChatMessage } from '../AiChatMessage';
 
 describe('AiChatBotMessageComponent', () => {
   let component: AiChatBotMessageComponent;
@@ -15,7 +16,7 @@ describe('AiChatBotMessageComponent', () => {
     });
     fixture = TestBed.createComponent(AiChatBotMessageComponent);
     component = fixture.componentInstance;
-    component.message = { content: 'Hello', role: 'assistant' };
+    component.message = new AiChatMessage('assistant', 'Hello');
     component.computerAvatar = {
       id: 'robot1',
       name: 'Robot',

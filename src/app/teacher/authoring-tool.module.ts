@@ -21,7 +21,6 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { StructureAuthoringModule } from '../../assets/wise5/authoringTool/structure/structure-authoring.module';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
-import { TopBarComponent } from '../../assets/wise5/authoringTool/components/top-bar/top-bar.component';
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
@@ -30,7 +29,6 @@ import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/author
 import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
 import { MatBadgeModule } from '@angular/material/badge';
-import { AuthoringToolBarComponent } from '../../assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
@@ -58,8 +56,6 @@ import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branc
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add-component/add-component.component';
-import { SideMenuComponent } from '../../assets/wise5/common/side-menu/side-menu.component';
-import { MainMenuComponent } from '../../assets/wise5/common/main-menu/main-menu.component';
 import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
 import { EditUnitResourcesComponent } from '../../assets/wise5/authoringTool/edit-unit-resources/edit-unit-resources.component';
 import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-unit-type/edit-unit-type.component';
@@ -67,7 +63,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
 @NgModule({
   declarations: [
     AdvancedProjectAuthoringComponent,
-    AuthoringToolComponent,
     ChooseMoveNodeLocationComponent,
     ConcurrentAuthorsMessageComponent,
     ConfigureAutomatedAssessmentComponent,
@@ -92,7 +87,7 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     AddProjectComponent,
     AddStepButtonComponent,
     AddYourOwnNodeComponent,
-    AuthoringToolBarComponent,
+    AuthoringToolComponent,
     ChooseAutomatedAssessmentComponent,
     ChooseCopyNodeLocationComponent,
     ChooseImportComponentComponent,
@@ -115,7 +110,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     MatExpansionModule,
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
-    MainMenuComponent,
     NgSelectModule,
     NodeAdvancedAuthoringModule,
     NodeIconAndTitleComponent,
@@ -123,11 +117,9 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     ProjectAssetAuthoringModule,
     ProjectListComponent,
     RouterModule,
-    SideMenuComponent,
     StructureAuthoringModule,
     StudentTeacherCommonModule,
     TeacherNodeIconComponent,
-    TopBarComponent,
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
     TranslatableTextareaComponent,

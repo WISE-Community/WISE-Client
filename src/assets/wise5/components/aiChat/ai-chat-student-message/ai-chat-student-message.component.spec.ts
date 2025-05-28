@@ -3,6 +3,7 @@ import { AiChatStudentMessageComponent } from './ai-chat-student-message.compone
 import { ConfigService } from '../../../services/configService';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { AiChatMessage } from '../AiChatMessage';
 
 describe('AiChatStudentMessageComponent', () => {
   let component: AiChatStudentMessageComponent;
@@ -10,13 +11,16 @@ describe('AiChatStudentMessageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [AiChatStudentMessageComponent],
-    imports: [],
-    providers: [ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      declarations: [AiChatStudentMessageComponent],
+      providers: [
+        ConfigService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     fixture = TestBed.createComponent(AiChatStudentMessageComponent);
     component = fixture.componentInstance;
-    component.message = { content: 'Hello', role: 'user' };
+    component.message = new AiChatMessage('user', 'Hello');
     fixture.detectChanges();
   });
 
