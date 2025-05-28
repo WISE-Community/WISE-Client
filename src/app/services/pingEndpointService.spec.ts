@@ -8,10 +8,9 @@ let pingEndpointService: PingEndpointService;
 let httpClientMock: jasmine.Spy;
 const testId = 'berkeley_test_id';
 
-fdescribe('PingEndpointService', () => {
+describe('PingEndpointService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
       providers: [MockProvider(HttpClient), PingEndpointService]
     });
     pingEndpointService = TestBed.inject(PingEndpointService);
