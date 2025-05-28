@@ -22,7 +22,7 @@ import { copy } from '../../../common/object/object';
 import { RawCRaterResponse } from '../../common/cRater/RawCRaterResponse';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 import { ConstraintService } from '../../../services/constraintService';
-import { PingEndpointService } from '../../../services/pingEndpointService';
+import { CRaterPingService } from '../../../services/cRaterPingService';
 import { OpenResponseContent } from '../OpenResponseContent';
 
 @Component({
@@ -45,13 +45,13 @@ export class OpenResponseStudent extends ComponentStudent {
     protected ComponentService: ComponentService,
     private constraintService: ConstraintService,
     protected ConfigService: ConfigService,
+    private cRaterPingService: CRaterPingService,
     private CRaterService: CRaterService,
     protected dialog: MatDialog,
     private OpenResponseService: OpenResponseService,
     protected NodeService: NodeService,
     protected NotebookService: NotebookService,
     private NotificationService: NotificationService,
-    private pingEndpointService: PingEndpointService,
     private ProjectService: ProjectService,
     protected StudentAssetService: StudentAssetService,
     protected StudentDataService: StudentDataService
@@ -112,14 +112,14 @@ export class OpenResponseStudent extends ComponentStudent {
 
   protected onFocus() {
     if (this.isCRaterEnabled()) {
-      this.pingEndpointService.startPinging(this.getItemId());
+      this.cRaterPingService.startPinging(this.getItemId());
     }
   }
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
     if (this.isCRaterEnabled()) {
-      this.pingEndpointService.stopPinging(this.getItemId());
+      this.cRaterPingService.stopPinging(this.getItemId());
     }
   }
 

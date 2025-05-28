@@ -21,7 +21,7 @@ import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { PingEndpointService } from '../../../services/pingEndpointService';
+import { CRaterPingService } from '../../../services/cRaterPingService';
 import { MockProvider } from 'ng-mocks';
 
 let component: OpenResponseStudent;
@@ -50,7 +50,7 @@ describe('OpenResponseStudent', () => {
         AudioRecorderService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-        MockProvider(PingEndpointService)
+        MockProvider(CRaterPingService)
       ]
     });
   });

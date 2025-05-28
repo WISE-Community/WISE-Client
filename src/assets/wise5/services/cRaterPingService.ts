@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class PingEndpointService {
+export class CRaterPingService {
   private pingUrl = '/api/c-rater/ping';
   private intervals: Map<string, NodeJS.Timeout> = new Map<string, NodeJS.Timeout>();
 
@@ -28,7 +28,7 @@ export class PingEndpointService {
   }
 
   private sendPing(itemId): void {
-    this.http.post(this.pingUrl, { itemId: itemId }).subscribe(() => {});
+    this.http.post(this.pingUrl, { itemId: itemId }).subscribe();
   }
 
   stopPinging(itemId: string): void {

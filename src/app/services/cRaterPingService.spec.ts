@@ -1,29 +1,29 @@
 import { HttpClient } from '@angular/common/http';
-import { PingEndpointService } from '../../assets/wise5/services/pingEndpointService';
+import { CRaterPingService } from '../../assets/wise5/services/cRaterPingService';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 
-let pingEndpointService: PingEndpointService;
+let cRaterPingService: CRaterPingService;
 let httpClientMock: jasmine.Spy;
 const testId = 'berkeley_test_id';
 
-describe('PingEndpointService', () => {
+describe('CRaterPingService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MockProvider(HttpClient), PingEndpointService]
+      providers: [MockProvider(HttpClient), CRaterPingService]
     });
-    pingEndpointService = TestBed.inject(PingEndpointService);
+    cRaterPingService = TestBed.inject(CRaterPingService);
     httpClientMock = spyOn(TestBed.inject(HttpClient), 'post').and.returnValue(of({}));
   });
 
   it('should send ping to endpoint when startPinging() is called', () => {
-    pingEndpointService.startPinging(testId);
+    cRaterPingService.startPinging(testId);
     expect(httpClientMock).toHaveBeenCalledTimes(1);
   });
 
   it('should wait before sending another ping', fakeAsync(() => {
-    pingEndpointService.startPinging(testId);
+    cRaterPingService.startPinging(testId);
     tick(294999);
     expect(httpClientMock).toHaveBeenCalledTimes(1);
     tick(2);
@@ -31,9 +31,9 @@ describe('PingEndpointService', () => {
   }));
 
   it('should stop trying to ping when stopPinging()', fakeAsync(() => {
-    pingEndpointService.startPinging(testId);
+    cRaterPingService.startPinging(testId);
     expect(httpClientMock).toHaveBeenCalledTimes(1);
-    pingEndpointService.stopPinging(testId);
+    cRaterPingService.stopPinging(testId);
     tick(500000);
     expect(httpClientMock).toHaveBeenCalledTimes(1);
   }));

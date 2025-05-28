@@ -37,7 +37,7 @@ import { OutsideURLService } from '../assets/wise5/components/outsideURL/outside
 import { PathService } from '../assets/wise5/services/pathService';
 import { PeerChatService } from '../assets/wise5/components/peerChat/peerChatService';
 import { PeerGroupService } from '../assets/wise5/services/peerGroupService';
-import { PingEndpointService } from '../assets/wise5/services/pingEndpointService';
+import { CRaterPingService } from '../assets/wise5/services/cRaterPingService';
 import { ProjectLibraryService } from '../assets/wise5/services/projectLibraryService';
 import { ProjectService } from '../assets/wise5/services/projectService';
 import { SessionService } from '../assets/wise5/services/sessionService';
@@ -101,7 +101,7 @@ import { WiseLinkService } from './services/wiseLinkService';
     PathService,
     PeerChatService,
     PeerGroupService,
-    PingEndpointService,
+    CRaterPingService,
     ProjectLibraryService,
     { provide: ProjectService, useExisting: VLEProjectService },
     SessionService,
