@@ -1,6 +1,6 @@
 <ng-container *ngFor="let message of messages">
   <ai-chat-student-message
-    *ngIf="message.role === 'user'"
+    *ngIf="message.role === 'user' && !message.hidden"
     class="ai-chat-message"
     [message]="message"
     [workgroupId]="workgroupId"
