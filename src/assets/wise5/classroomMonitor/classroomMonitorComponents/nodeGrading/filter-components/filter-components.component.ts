@@ -10,6 +10,7 @@ import { ComponentContent } from '../../../../common/ComponentContent';
 @Component({
   imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatSelectModule],
   selector: 'filter-components',
+  styleUrls: ['./filter-components.component.scss'],
   templateUrl: './filter-components.component.html'
 })
 export class FilterComponentsComponent {

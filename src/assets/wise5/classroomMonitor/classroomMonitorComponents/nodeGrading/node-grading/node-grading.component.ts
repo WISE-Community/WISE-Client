@@ -36,6 +36,10 @@ import { NodeClassResponsesComponent } from '../node-class-responses/node-class-
       .list-item {
         display: block;
       }
+
+      .mat-body-1 {
+        margin: 0;
+      }
     `
   ],
   templateUrl: './node-grading.component.html'
