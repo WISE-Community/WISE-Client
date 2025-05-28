@@ -8,7 +8,7 @@ import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
-fdescribe('MatchSummaryDisplayComponent', () => {
+describe('MatchSummaryDisplayComponent', () => {
   let component: MatchSummaryDisplayComponent;
   let fixture: ComponentFixture<MatchSummaryDisplayComponent>;
 
