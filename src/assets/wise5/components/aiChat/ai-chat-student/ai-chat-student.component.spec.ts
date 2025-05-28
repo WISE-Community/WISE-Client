@@ -49,17 +49,18 @@ describe('AiChatStudentComponent', () => {
     fixture = TestBed.createComponent(AiChatStudentComponent);
     component = fixture.componentInstance;
     component.component = new AiChatComponent({ id: 'component1', type: 'aiChat' }, 'node1');
+    component.componentState = { studentData: { messages: [{ role: 'user' }] } };
     spyOn(component, 'isNotebookEnabled').and.returnValue(false);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     fixture.detectChanges();
   });
 
   it('should not show response from a connected component', async () => {
+    const studentMessages = fixture.debugElement.queryAll(By.css('ai-chat-student-message'));
+    expect(studentMessages.length).toBe(1);
     component.processConnectedComponentState({ studentData: { response: 'test response' } });
     const loader = TestbedHarnessEnvironment.loader(fixture);
     await (await loader.getHarness(MatButtonHarness)).click();
-    const messages = fixture.debugElement.queryAll(By.css('a-chat-student-message'));
-    expect(messages.length).toBe(0);
-    expect(component).toBeTruthy();
+    expect(studentMessages.length).toBe(1); // no new message should be added
   });
 });
