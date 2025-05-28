@@ -5,7 +5,7 @@ import { ConfigService } from './config.service';
 export class AccessLinkService {
   constructor(private configService: ConfigService) {}
 
-  getAccessLinks(runCode: string, periods: string[]) {
+  getAccessLinks(runCode: string, periods: string[]): string[] {
     const linkBase = `${this.configService.getContextPath()}/api/survey/launch/${runCode}-`;
     return periods.map((period) => linkBase + period.replaceAll(' ', '++'));
   }

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LogOutPageComponent } from './log-out-page.component';
+import { LogOutService } from '../../../services/logOutService';
 
 describe('LogOutPageComponent', () => {
   let component: LogOutPageComponent;
@@ -7,7 +8,8 @@ describe('LogOutPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LogOutPageComponent]
+      imports: [LogOutPageComponent],
+      providers: [LogOutService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LogOutPageComponent);

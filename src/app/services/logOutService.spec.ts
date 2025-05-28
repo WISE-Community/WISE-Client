@@ -9,7 +9,7 @@ let service: LogOutService;
 let httpSpy: jasmine.Spy;
 export class MockConfigService {}
 
-fdescribe('LogOutService', () => {
+describe('LogOutService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],

@@ -58,7 +58,7 @@ import { AccessLinkService } from '../../services/accessLinkService';
     MatTooltipModule,
     ReactiveFormsModule
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [AccessLinkService, provideNativeDateAdapter()],
   selector: 'create-run-dialog',
   styleUrl: './create-run-dialog.component.scss',
   templateUrl: './create-run-dialog.component.html'
