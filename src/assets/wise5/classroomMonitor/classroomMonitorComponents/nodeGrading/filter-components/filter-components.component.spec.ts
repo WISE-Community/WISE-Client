@@ -36,12 +36,10 @@ function onlyOneComponent() {
         } as ComponentContent
       ];
       fixture.detectChanges();
+      select = await loader.getHarness(MatSelectHarness);
     });
-    it('should show button when there is only 1 component', () => {
-      const button = fixture.nativeElement.querySelector('button');
-      expect(button).toBeTruthy();
-      expect(button.innerText).toBe('1 assessment item');
-      expect(button.disabled).toBe(true);
+    it('should be disabled', async () => {
+      expect(await select.isDisabled()).toBe(true);
     });
   });
 }
@@ -65,9 +63,6 @@ function moreThanOneComponent() {
     });
     it('should show options', async () => {
       await select.open();
-      const optionGroups = await select.getOptionGroups();
-      expect(optionGroups.length).toBe(1);
-      expect(await optionGroups[0].getLabelText()).toBe('Assessment items to show');
       const options = await select.getOptions();
       expect(options.length).toBe(2);
       expect(await options[0].isSelected()).toBe(true);
