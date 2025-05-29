@@ -24,7 +24,7 @@ export class MockConfigService {
   }
 }
 
-fdescribe('HeaderAccountMenuComponent', () => {
+describe('HeaderAccountMenuComponent', () => {
   let component: HeaderAccountMenuComponent;
   let fixture: ComponentFixture<HeaderAccountMenuComponent>;
 
