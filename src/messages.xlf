@@ -433,7 +433,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">81,85</context>
+          <context context-type="linenumber">103,107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-run-warning-dialog/edit-run-warning-dialog.component.html</context>
@@ -1148,7 +1148,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">80,83</context>
+          <context context-type="linenumber">81,85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
@@ -5624,25 +5624,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Account avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">13,16</context>
+          <context context-type="linenumber">14,17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="linenumber">18,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3857160878700496838" datatype="html">
         <source>Switch back to original user</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">22,26</context>
+          <context context-type="linenumber">23,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2924516337199843585" datatype="html">
         <source>Student Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">33,37</context>
+          <context context-type="linenumber">34,38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-home/student-home.component.html</context>
@@ -5653,7 +5653,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Teacher Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">43,47</context>
+          <context context-type="linenumber">44,48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
@@ -5664,11 +5664,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Edit Profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">53,57</context>
+          <context context-type="linenumber">54,58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit/edit.component.html</context>
@@ -5683,21 +5683,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Researcher Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">67,69</context>
+          <context context-type="linenumber">68,70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1559402687984802932" datatype="html">
         <source>Admin Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">71,76</context>
+          <context context-type="linenumber">72,76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="935790816200474922" datatype="html">
         <source>Sign Out</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-account-menu/header-account-menu.component.html</context>
-          <context context-type="linenumber">85,89</context>
+          <context context-type="linenumber">87,91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5722048521308312525" datatype="html">
@@ -5762,7 +5762,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">5,7</context>
+          <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4545323663097993097" datatype="html">
@@ -5962,7 +5962,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">83,86</context>
+          <context context-type="linenumber">114,117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3100152803582528657" datatype="html">
@@ -6543,7 +6543,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">121,124</context>
+          <context context-type="linenumber">168,171</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.html</context>
@@ -8217,7 +8217,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">115,116</context>
+          <context context-type="linenumber">146,147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3693833693528068322" datatype="html">
@@ -8289,6 +8289,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
           <context context-type="linenumber">33,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5113165610004622651" datatype="html">
+        <source>Log Out</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/survey/log-out-page/log-out-page.component.html</context>
+          <context context-type="linenumber">10,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7877427365361954950" datatype="html">
@@ -8545,56 +8552,95 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>1. Choose Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">7,9</context>
+          <context context-type="linenumber">9,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1140981832941308887" datatype="html">
         <source>Add your own periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">16,17</context>
+          <context context-type="linenumber">20,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4527535834878763564" datatype="html">
         <source> For &quot;Period 9&quot;, just enter the number 9. Separate periods with commas (e.g. &quot;Section 1, Section 2&quot;). Manually named periods should be no more than 16 characters long. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">20,24</context>
+          <context context-type="linenumber">24,28</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5841655420766465366" datatype="html">
-        <source>2. Choose Students Per Team</source>
+      <trans-unit id="5932631730311410807" datatype="html">
+        <source>2. Choose Run Type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5607669932062416162" datatype="html">
+        <source>Default</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2147374341604583130" datatype="html">
+        <source>Survey <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon
+            class=&quot;info&quot;
+            tabindex=&quot;0&quot;
+            matTooltip=&quot;Students can access survey units without a WISE account. The URL to access the unit will be generated when the run is created.&quot;
+            matTooltipPosition=&quot;above&quot;
+            i18n-matTooltip
+            &gt;"/>help<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon
+          &gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
+          <context context-type="linenumber">33,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5325700560830605410" datatype="html">
+        <source>Students can access survey units without a WISE account. The URL to access the unit will be generated when the run is created.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
+          <context context-type="linenumber">36,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3007521504895171335" datatype="html">
+        <source>3. Choose Students Per Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
+          <context context-type="linenumber">45,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5897517992108872643" datatype="html">
         <source>Only 1 student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="linenumber">47,48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1324531394601194902" datatype="html">
         <source>1-3 students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">27,29</context>
+          <context context-type="linenumber">48,50</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4145690286416273597" datatype="html">
-        <source>3. Set Schedule</source>
+      <trans-unit id="1555671526294232488" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ isDefaultRun() ? 4 : 3 }}"/>. Set Schedule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">30,32</context>
+          <context context-type="linenumber">52,53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="888341446683346521" datatype="html">
         <source>Start date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">34,37</context>
+          <context context-type="linenumber">56,59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
@@ -8605,14 +8651,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Start date is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">44,48</context>
+          <context context-type="linenumber">66,70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="126074860850048964" datatype="html">
         <source>End date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">49,52</context>
+          <context context-type="linenumber">71,74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
@@ -8623,7 +8669,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Lock After End Date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">63,66</context>
+          <context context-type="linenumber">85,88</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
@@ -8634,7 +8680,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>If the End Date has passed and the unit is locked, students will no longer be able to save new work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">68,71</context>
+          <context context-type="linenumber">90,93</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-settings-dialog/run-settings-dialog.component.html</context>
@@ -8645,53 +8691,113 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Note: These dates can be changed at any time from your Class Schedule. Just select &quot;Edit Settings&quot; from the unit&apos;s dropdown menu. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">76,80</context>
+          <context context-type="linenumber">98,102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4885447847699614190" datatype="html">
         <source>Create Run</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">90,94</context>
+          <context context-type="linenumber">114,118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8743229654109161633" datatype="html">
         <source>Success! This unit has been added to your Class Schedule.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">97,99</context>
+          <context context-type="linenumber">121,123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6328373751938437981" datatype="html">
         <source>Access Code: <x id="INTERPOLATION" equiv-text="{{ run.runCode }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">99,100</context>
+          <context context-type="linenumber">124,125</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">39,40</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1023355529686098818" datatype="html">
         <source> Important: Every classroom unit has a unique Access Code. Students use this code to register for a unit. Give the code to your students when they first sign up for a WISE account. If they already have WISE accounts, have them log in and then select &quot;Add Unit&quot; from the student home page. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">101,107</context>
+          <context context-type="linenumber">126,132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3978477928955225355" datatype="html">
         <source> You can always find the Access Code for each classroom unit in your Class Schedule. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">107,111</context>
+          <context context-type="linenumber">132,135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1924311053226420773" datatype="html">
+        <source> Period <x id="INTERPOLATION" equiv-text="{{ getPeriodFromAccessLink(accessLink) }}"/> Access Link: <x id="START_TAG_BUTTON" ctype="x-button" equiv-text="&lt;button
+              class=&quot;access-link&quot;
+              mat-button
+              color=&quot;primary&quot;
+              i18n-matTooltip
+              matTooltip=&quot;Copy link&quot;
+              matTooltipPosition=&quot;after&quot;
+              [cdkCopyToClipboard]=&quot;accessLink&quot;
+              (click)=&quot;copyMsg()&quot;
+            &gt;"/><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>content_copy<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ accessLink }}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="CLOSE_TAG_BUTTON" ctype="x-button" equiv-text="&lt;/button&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
+          <context context-type="linenumber">137,152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2618101617221155143" datatype="html">
+        <source>Copy link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
+          <context context-type="linenumber">143,145</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
+          <context context-type="linenumber">57,59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="333458045029992592" datatype="html">
+        <source> Important: Every survey unit has a unique Access Link. Students can use this link to access and complete the survey without needing to create a WISE account. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
+          <context context-type="linenumber">155,158</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2392407754078733819" datatype="html">
+        <source>You can always find the Access Link for each survey unit in your Class Schedule.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
+          <context context-type="linenumber">158,162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="959853456932368527" datatype="html">
         <source> Share to Google Classroom </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.html</context>
-          <context context-type="linenumber">119,121</context>
+          <context context-type="linenumber">165,168</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8057745565493131709" datatype="html">
+        <source>Copied to clipboard.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/create-run-dialog/create-run-dialog.component.ts</context>
+          <context context-type="linenumber">270</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.ts</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2772966684888519254" datatype="html">
@@ -9324,7 +9430,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">94,96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2656070162719267015" datatype="html">
@@ -9441,13 +9547,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">7,11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2618101617221155143" datatype="html">
-        <source>Copy link</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
-          <context context-type="linenumber">13,16</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="1500466373420335996" datatype="html">
         <source> Students with WISE accounts can also select <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Add Unit+<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and type the Access Code: </source>
         <context-group purpose="location">
@@ -9467,13 +9566,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.html</context>
           <context context-type="linenumber">43,47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8057745565493131709" datatype="html">
-        <source>Copied to clipboard.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/share-run-code-dialog/share-run-code-dialog.component.ts</context>
-          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4543704023947979672" datatype="html">
@@ -9658,42 +9750,84 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Share with students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">44,48</context>
+          <context context-type="linenumber">45,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7992514494936525811" datatype="html">
+        <source>Period <x id="INTERPOLATION" equiv-text="{{ getPeriodFromAccessLink(accessLink) }}"/> Access Link: <x id="START_TAG_BUTTON" ctype="x-button" equiv-text="&lt;button
+              class=&quot;access-link&quot;
+              mat-button
+              color=&quot;primary&quot;
+              i18n-matTooltip
+              matTooltip=&quot;Copy link&quot;
+              matTooltipPosition=&quot;after&quot;
+              [cdkCopyToClipboard]=&quot;accessLink&quot;
+              (click)=&quot;copyMsg()&quot;
+            &gt;"/><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>content_copy<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ accessLink }}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="CLOSE_TAG_BUTTON" ctype="x-button" equiv-text="&lt;/button&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
+          <context context-type="linenumber">51,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3517550046701184661" datatype="html">
+        <source>Show less</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
+          <context context-type="linenumber">71,73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">27,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7215101881367554791" datatype="html">
+        <source>Show more</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
+          <context context-type="linenumber">73,78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
+          <context context-type="linenumber">53,58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">29,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="625759913793882079" datatype="html">
         <source> Shared by <x id="INTERPOLATION" equiv-text="{{ run.owner.firstName }}"/> <x id="INTERPOLATION_1" equiv-text="{{ run.owner.lastName }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">48,50</context>
+          <context context-type="linenumber">79,81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5747419787914036831" datatype="html">
         <source>(Legacy Unit)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">86,89</context>
+          <context context-type="linenumber">117,120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="968012602780944105" datatype="html">
         <source>Last student login: <x id="INTERPOLATION" equiv-text="{{ run.lastRun | date: &apos;short&apos; }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">112,114</context>
+          <context context-type="linenumber">143,145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7990203103279647002" datatype="html">
         <source>Teacher Tools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.html</context>
-          <context context-type="linenumber">124,128</context>
+          <context context-type="linenumber">155,159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1133960927497534087" datatype="html">
         <source>Class Periods:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/teacher-run-list-item/teacher-run-list-item.component.ts</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="374965871013358850" datatype="html">
@@ -10367,7 +10501,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">195</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="537022937435161177" datatype="html">
@@ -10382,7 +10516,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3407061818321766940" datatype="html">
@@ -14720,17 +14854,6 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">1,2</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7215101881367554791" datatype="html">
-        <source>Show more</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/view-component-revisions/view-component-revisions.component.html</context>
-          <context context-type="linenumber">53,58</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">29,35</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="4492261521538997006" datatype="html">
         <source> Team has not saved any work </source>
         <context-group purpose="location">
@@ -15117,13 +15240,6 @@ Are you sure you want to proceed?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-student-work/export-student-work.component.html</context>
           <context context-type="linenumber">33,38</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5607669932062416162" datatype="html">
-        <source>Default</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">15,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7689081267731130533" datatype="html">
@@ -21647,13 +21763,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">6,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3517550046701184661" datatype="html">
-        <source>Show less</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">27,30</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="5731986766999662576" datatype="html">
         <source>Choice Frequency</source>
         <context-group purpose="location">
@@ -22117,11 +22226,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">70,73</context>
+          <context context-type="linenumber">80,83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">72,75</context>
+          <context context-type="linenumber">82,85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8784868761263923006" datatype="html">
@@ -22214,6 +22323,22 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">58,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2838889983986210629" datatype="html">
+        <source>Are you sure you want to submit?
+
+If you submit, you will not be able to continue working on this unit.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6586351952503398871" datatype="html">
+        <source>You have not completed the following steps: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.ts</context>
+          <context context-type="linenumber">191</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5926207769041293626" datatype="html">
