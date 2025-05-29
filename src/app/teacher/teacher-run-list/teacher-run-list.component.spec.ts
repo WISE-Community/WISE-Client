@@ -33,6 +33,8 @@ import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 import { Tag } from '../../domain/tag';
 import { provideRouter } from '@angular/router';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { MockProvider } from 'ng-mocks';
+import { AccessLinkService } from '../../services/accessLinkService';
 
 class TeacherScheduleStubComponent {}
 
@@ -103,6 +105,7 @@ describe('TeacherRunListComponent', () => {
         SelectRunsControlsModule
       ],
       providers: [
+        MockProvider(AccessLinkService),
         ArchiveProjectService,
         ConfigService,
         ProjectTagService,
