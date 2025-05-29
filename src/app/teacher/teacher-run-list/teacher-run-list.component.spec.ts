@@ -33,7 +33,6 @@ import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 import { Tag } from '../../domain/tag';
 import { provideRouter } from '@angular/router';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
-import { AccessLinkService } from '../../services/accessLinkService';
 
 class TeacherScheduleStubComponent {}
 
@@ -104,7 +103,6 @@ describe('TeacherRunListComponent', () => {
         SelectRunsControlsModule
       ],
       providers: [
-        AccessLinkService,
         ArchiveProjectService,
         ConfigService,
         ProjectTagService,

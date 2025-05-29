@@ -140,18 +140,18 @@ describe('CreateRunDialogComponent', () => {
   });
 
   it('should not show max workgroup size option if survey is checked', () => {
-    let h3ElementsText = fixture.nativeElement
-      .querySelectorAll('h3')
-      .map((element: HTMLElement) => element.innerText);
+    let h3ElementsText = Array.from(fixture.nativeElement.querySelectorAll('h3')).map(
+      (element: HTMLElement) => element.innerText
+    );
     expect(h3ElementsText.length).toEqual(4);
     expect(h3ElementsText.includes('3. Choose Students Per Team')).toBeTrue();
 
     component.form.controls['runType'].setValue('survey');
     fixture.detectChanges();
 
-    h3ElementsText = fixture.nativeElement
-      .querySelectorAll('h3')
-      .map((element: HTMLElement) => element.innerText);
+    h3ElementsText = Array.from(fixture.nativeElement.querySelectorAll('h3')).map(
+      (element: HTMLElement) => element.innerText
+    );
     expect(h3ElementsText.length).toEqual(3);
     expect(h3ElementsText.includes('3. Choose Students Per Team')).toBeFalse();
   });

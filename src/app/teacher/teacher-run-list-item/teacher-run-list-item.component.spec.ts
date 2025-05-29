@@ -22,6 +22,7 @@ import { TeacherService } from '../teacher.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
+import { AccessLinkService } from '../../services/accessLinkService';
 
 export class MockTeacherService {}
 
@@ -52,16 +53,19 @@ let userService: UserService;
 describe('TeacherRunListItemComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-    declarations: [RunMenuComponent, TeacherRunListItemComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      declarations: [RunMenuComponent, TeacherRunListItemComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
         MatCardModule,
         MatDialogModule,
         MatIconModule,
         MatMenuModule,
         MatSnackBarModule,
-        RouterTestingModule],
-    providers: [
+        RouterTestingModule
+      ],
+      providers: [
+        AccessLinkService,
         ArchiveProjectService,
         { provide: ConfigService, useClass: MockConfigService },
         ProjectTagService,
@@ -69,8 +73,8 @@ describe('TeacherRunListItemComponent', () => {
         UserService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     http = TestBed.inject(HttpClient);
     userService = TestBed.inject(UserService);
     spyOn(userService, 'getUserId').and.returnValue(userId);
