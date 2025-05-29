@@ -4,10 +4,11 @@ import { Component, Input } from '@angular/core';
 import { ComponentFactory } from '../../../../common/ComponentFactory';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
-import { IdeasSummaryComponent } from '../../../../directives/teacher-summary-display/ideas-summary.component';
+import { IdeasSummaryComponent } from '../../../../directives/teacher-summary-display/ideas-summary-display/ideas-summary.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { isMatchingPeriods } from '../../../../common/period/period';
 import { MatCardModule } from '@angular/material/card';
+import { MatchSummaryDisplayComponent } from '../../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { Node } from '../../../../common/Node';
@@ -23,6 +24,7 @@ import { TeacherSummaryDisplayComponent } from '../../../../directives/teacher-s
     FlexLayoutModule,
     IdeasSummaryComponent,
     MatCardModule,
+    MatchSummaryDisplayComponent,
     MatIconModule,
     MatDividerModule,
     PreviewComponentComponent,

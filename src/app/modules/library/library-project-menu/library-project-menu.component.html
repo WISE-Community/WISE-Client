@@ -20,6 +20,11 @@
         <mat-icon>share</mat-icon> <ng-container i18n>Share</ng-container>
       </a>
     }
+    @if (isMyUnit) {
+      <a mat-menu-item href="{{ publishUnitUrl }}">
+        <mat-icon>public</mat-icon> <ng-container i18n>Publish</ng-container>
+      </a>
+    }
     @if (archived) {
       <a mat-menu-item (click)="archive(false)">
         <mat-icon>unarchive</mat-icon>

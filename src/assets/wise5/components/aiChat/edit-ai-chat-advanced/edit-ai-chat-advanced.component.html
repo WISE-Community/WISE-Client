@@ -4,4 +4,12 @@
     <mat-option *ngFor="let model of models" [value]="model">{{ model }}</mat-option>
   </mat-select>
 </mat-form-field>
+<edit-connected-components
+  [nodeId]="component.nodeId"
+  [componentId]="component.id"
+  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+  [componentContent]="component.content"
+  [connectedComponents]="component.content.connectedComponents"
+  (connectedComponentsChanged)="connectedComponentsChanged($event)"
+/>
 <edit-component-json [component]="component"></edit-component-json>

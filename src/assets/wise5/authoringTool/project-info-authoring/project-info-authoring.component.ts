@@ -4,6 +4,7 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, debounceTime } from 'rxjs';
 import { AssetChooser } from '../project-asset-authoring/asset-chooser';
+import { UserService } from '../../../../app/services/user.service';
 
 @Component({
   selector: 'project-info-authoring',
@@ -13,6 +14,7 @@ import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 })
 export class ProjectInfoAuthoringComponent {
   isEditingProjectIcon: boolean = false;
+  protected isMyUnit: boolean;
   isShowProjectIcon: boolean = false;
   isShowProjectIconError: boolean = false;
   isShowProjectIconLoading: boolean = false;
@@ -21,11 +23,13 @@ export class ProjectInfoAuthoringComponent {
   metadataChanged: Subject<void> = new Subject<void>();
   projectIcon: string = '';
   projectIcons: any = [];
+  protected publishUnitUrl;
 
   constructor(
     private configService: ConfigService,
     private dialog: MatDialog,
-    private projectService: TeacherProjectService
+    private projectService: TeacherProjectService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +43,10 @@ export class ProjectInfoAuthoringComponent {
     this.metadataAuthoring = JSON.parse(
       this.configService.getConfigParam('projectMetadataSettings')
     );
+    this.isMyUnit = this.metadata.authors.some(
+      (author) => author.id === this.userService.getUserId()
+    );
+    this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.configService.getProjectId()}&publish=true`;
     this.loadProjectIcon();
     this.processMetadata();
     this.metadataChanged.pipe(debounceTime(1000)).subscribe(() => {

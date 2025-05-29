@@ -19,15 +19,16 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 
 @Component({
-    selector: 'ai-chat-student',
-    templateUrl: './ai-chat-student.component.html',
-    styleUrls: ['./ai-chat-student.component.scss'],
-    standalone: false
+  selector: 'ai-chat-student',
+  templateUrl: './ai-chat-student.component.html',
+  styleUrls: ['./ai-chat-student.component.scss'],
+  standalone: false
 })
 export class AiChatStudentComponent extends ComponentStudent {
   component: AiChatComponent;
   protected computerAvatar: ComputerAvatar;
   protected computerAvatarSelectorVisible: boolean = false;
+  private connectedComponentResponse: string;
   protected messages: AiChatMessage[] = [];
   protected studentResponse: string = '';
   protected submitEnabled: boolean = false;
@@ -82,6 +83,10 @@ export class AiChatStudentComponent extends ComponentStudent {
 
   protected async submitStudentResponse(response: string): Promise<void> {
     this.waitingForComputerResponse = true;
+    if (this.connectedComponentResponse != null) {
+      this.messages.push(new AiChatMessage('user', this.connectedComponentResponse, true));
+      this.connectedComponentResponse = null;
+    }
     this.messages.push(new AiChatMessage('user', response));
     try {
       const response = await this.aiChatService.sendChatMessage(
@@ -117,6 +122,10 @@ export class AiChatStudentComponent extends ComponentStudent {
       );
     });
     return promise;
+  }
+
+  processConnectedComponentState(componentState: any): void {
+    this.connectedComponentResponse = componentState.studentData.response;
   }
 
   initializeComputerAvatar: () => void;

@@ -15,13 +15,20 @@ describe('EditAiChatAdvancedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [EditAiChatAdvancedComponent],
-    imports: [BrowserAnimationsModule,
+      declarations: [EditAiChatAdvancedComponent],
+      imports: [
+        BrowserAnimationsModule,
         ComponentAuthoringModule,
         MatDialogModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     fixture = TestBed.createComponent(EditAiChatAdvancedComponent);
     component = fixture.componentInstance;
     component.nodeId = 'node1';
