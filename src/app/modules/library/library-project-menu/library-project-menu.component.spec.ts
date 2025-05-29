@@ -38,6 +38,7 @@ describe('LibraryProjectMenuComponent', () => {
     user.displayName = 'Spongebob Squarepants';
     project.owner = user;
     project.tags = [];
+    project.metadata = { publicUnitType: null };
     component.project = project;
     fixture.detectChanges();
     harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, LibraryProjectMenuHarness);
@@ -45,6 +46,7 @@ describe('LibraryProjectMenuComponent', () => {
 
   showsArchiveButton();
   showsRestoreButton();
+  hideArchiveAndRestoreButtons();
 });
 
 function showsArchiveButton() {
@@ -63,6 +65,19 @@ function showsRestoreButton() {
     });
     it('shows restore button', async () => {
       expect(await harness.hasRestoreMenuButton()).toBe(true);
+    });
+  });
+}
+
+function hideArchiveAndRestoreButtons() {
+  describe('project is public', () => {
+    beforeEach(() => {
+      component.project.metadata.publicUnitType = 'wiseTested';
+      component.ngOnInit();
+    });
+    it('does not show archive or restore buttons', async () => {
+      expect(await harness.hasRestoreMenuButton()).toBe(false);
+      expect(await harness.hasArchiveMenuButton()).toBe(false);
     });
   });
 }
