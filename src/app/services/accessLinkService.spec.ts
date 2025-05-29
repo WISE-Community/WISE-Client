@@ -8,7 +8,7 @@ let service: AccessLinkService;
 export class MockConfigService {}
 
 describe('AccessLinkService', () => {
-  const linkBase = 'wise.berkeley.edu/api/survey/launch/dog1234-';
+  const linkBase = 'wise.berkeley.edu/run-survey/dog1234-';
 
   beforeEach(() => {
     TestBed.configureTestingModule({

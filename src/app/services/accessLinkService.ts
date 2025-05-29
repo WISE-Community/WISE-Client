@@ -6,11 +6,12 @@ export class AccessLinkService {
   constructor(private configService: ConfigService) {}
 
   getAccessLinks(runCode: string, periods: string[]): string[] {
-    const linkBase = `${this.configService.getContextPath()}/api/survey/launch/${runCode}-`;
+    const host = this.configService.getWISEHostname() + this.configService.getContextPath();
+    const linkBase = `${host}/run-survey/${runCode}-`;
     return periods.map((period) => linkBase + period.replaceAll(' ', '++'));
   }
 
   getPeriodFromAccessLink(link: string): string {
-    return link.slice(link.indexOf('-') + 1).replaceAll('++', ' ');
+    return link.slice(link.lastIndexOf('-') + 1).replaceAll('++', ' ');
   }
 }
