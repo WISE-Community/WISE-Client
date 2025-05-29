@@ -202,6 +202,7 @@ describe('CreateRunDialogComponent', () => {
     expect(teacherService.createRun).toHaveBeenCalledWith(
       1,
       '1,',
+      false,
       '3',
       jasmine.any(Number),
       jasmine.any(Number),
@@ -222,6 +223,7 @@ describe('CreateRunDialogComponent', () => {
     expect(teacherService.createRun).toHaveBeenCalledWith(
       1,
       '1,',
+      false,
       '3',
       jasmine.any(Number),
       jasmine.any(Number),

@@ -1,11 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LogOutService } from '../../../../../../app/services/logOutService';
+import { MockProviders } from 'ng-mocks';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { StepToolsComponent } from './step-tools.component';
 import { StudentDataService } from '../../../../services/studentDataService';
+import { StudentService } from '../../../../../../app/student/student.service';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { VLEProjectService } from '../../../../vle/vleProjectService';
+import { of } from 'rxjs';
+import { RunInfo } from '../../../../../../app/student/run-info';
 
 const nodeId1 = 'node1';
 const nodeStatus1 = { icon: '', isCompleted: true };
@@ -18,7 +23,10 @@ describe('StepToolsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, StepToolsComponent, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(withInterceptorsFromDi())]
+      providers: [
+        MockProviders(LogOutService, StudentService),
+        provideHttpClient(withInterceptorsFromDi())
+      ]
     }).compileComponents();
   });
 
@@ -36,6 +44,13 @@ describe('StepToolsComponent', () => {
     const projectService = TestBed.inject(VLEProjectService);
     spyOn(projectService, 'nodeHasWork').and.returnValue(true);
     spyOn(projectService, 'getNodesByToNodeId').and.returnValue([]);
+    spyOn(TestBed.inject(StudentDataService), 'getRunStatus').and.returnValue({
+      runId: '1',
+      periods: []
+    });
+    spyOn(TestBed.inject(StudentService), 'getRunInfoById').and.returnValue(
+      of({ isSurvey: false } as RunInfo)
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
