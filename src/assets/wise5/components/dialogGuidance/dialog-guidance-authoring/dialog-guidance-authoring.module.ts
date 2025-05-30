@@ -7,7 +7,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -28,7 +27,6 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 @NgModule({
   declarations: [
     DialogGuidanceAuthoringComponent,
-    EditComponentMaxSubmitComponent,
     EditFeedbackRulesComponent,
     FeedbackRuleHelpComponent
   ],
@@ -57,11 +55,6 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
     TeacherNodeService,
     TeacherProjectService
   ],
-  exports: [
-    DialogGuidanceAuthoringComponent,
-    EditComponentPrompt,
-    EditComponentMaxSubmitComponent,
-    EditFeedbackRulesComponent
-  ]
+  exports: [DialogGuidanceAuthoringComponent, EditComponentPrompt, EditFeedbackRulesComponent]
 })
 export class DialogGuidanceAuthoringModule {}
