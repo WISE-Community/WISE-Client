@@ -12,11 +12,11 @@ describe('AccessLinkService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
       providers: [AccessLinkService, MockProviders(ConfigService, HttpClient)]
     });
     service = TestBed.inject(AccessLinkService);
-    spyOn(TestBed.inject(ConfigService), 'getContextPath').and.returnValue('wise.berkeley.edu');
+    spyOn(TestBed.inject(ConfigService), 'getWISEHostname').and.returnValue('wise.berkeley.edu');
+    spyOn(TestBed.inject(ConfigService), 'getContextPath').and.returnValue('');
   });
 
   it('should get access links', () => {
