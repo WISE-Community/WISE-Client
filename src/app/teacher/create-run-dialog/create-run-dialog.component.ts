@@ -153,7 +153,10 @@ export class CreateRunDialogComponent {
 
   create(): void {
     this.isCreating = true;
-    const combinedPeriods = this.getPeriodsString();
+    const isSurvey: boolean = this.getFormControlValue('runType') === 'survey';
+    const combinedPeriods = isSurvey
+      ? this.mapPeriods(this.periodsGroup.value).toString()
+      : this.getPeriodsString();
     const startDate: number = this.getFormControlValue('startDate').getTime();
     let endDateValue: Date = this.getFormControlValue('endDate');
     let endDate: number = null;
@@ -162,7 +165,6 @@ export class CreateRunDialogComponent {
       endDate = endDateValue.getTime();
     }
     const isLockedAfterEndDate: boolean = this.getFormControlValue('isLockedAfterEndDate');
-    const isSurvey: boolean = this.getFormControlValue('runType') === 'survey';
     const maxStudentsPerTeam: number = isSurvey
       ? 1
       : this.getFormControlValue('maxStudentsPerTeam');
@@ -272,5 +274,9 @@ export class CreateRunDialogComponent {
 
   protected getPeriodFromAccessLink(link: string): string {
     return this.accessLinkService.getPeriodFromAccessLink(link);
+  }
+
+  protected clearCustomPeriods(): void {
+    this.customPeriods.setValue('');
   }
 }

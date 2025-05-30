@@ -6,29 +6,10 @@
         {{ project.metadata.title }}
         <span class="mat-caption" i18n>(Unit ID: {{ project.id }})</span>
       </p>
-      <h3 i18n>1. Choose Periods</h3>
-      <p formArrayName="selectedPeriods">
-        @for (control of selectedPeriodsControl.controls; track $index) {
-          <span [formGroup]="control">
-            <mat-checkbox formControlName="checkbox" class="period-select">
-              {{ control.controls.name.value }}
-            </mat-checkbox>
-          </span>
-        }
-      </p>
-      <mat-form-field appearance="fill" class="period-input form-field-long-hint">
-        <mat-label i18n>Add your own periods</mat-label>
-        <input matInput id="customPeriods" name="customPeriods" formControlName="customPeriods" />
-      </mat-form-field>
-      <p class="mat-caption" i18n>
-        For "Period 9", just enter the number 9. Separate periods with commas (e.g. "Section 1,
-        Section 2"). Manually named periods should be no more than 16 characters long.
-      </p>
-      <mat-divider></mat-divider>
-      <h3 i18n>2. Choose Run Type</h3>
+      <h3 i18n>1. Choose Run Type</h3>
       <mat-radio-group #runType formControlName="runType" class="flex gap-4">
         <mat-radio-button value="default" radioGroup="runType" i18n>Default</mat-radio-button>
-        <mat-radio-button value="survey" radioGroup="runType" i18n
+        <mat-radio-button (click)="clearCustomPeriods()" value="survey" radioGroup="runType" i18n
           >Survey
           <mat-icon
             class="info"
@@ -40,6 +21,27 @@
           >
         </mat-radio-button>
       </mat-radio-group>
+      <mat-divider></mat-divider>
+      <h3 i18n>2. Choose Periods</h3>
+      <p formArrayName="selectedPeriods">
+        @for (control of selectedPeriodsControl.controls; track $index) {
+          <span [formGroup]="control">
+            <mat-checkbox formControlName="checkbox" class="period-select">
+              {{ control.controls.name.value }}
+            </mat-checkbox>
+          </span>
+        }
+      </p>
+      @if (isDefaultRun()) {
+        <mat-form-field appearance="fill" class="period-input form-field-long-hint">
+          <mat-label i18n>Add your own periods</mat-label>
+          <input matInput id="customPeriods" name="customPeriods" formControlName="customPeriods" />
+        </mat-form-field>
+        <p class="mat-caption" i18n>
+          For "Period 9", just enter the number 9. Separate periods with commas (e.g. "Section 1,
+          Section 2"). Manually named periods should be no more than 16 characters long.
+        </p>
+      }
       <mat-divider></mat-divider>
       @if (isDefaultRun()) {
         <h3 i18n>3. Choose Students Per Team</h3>
