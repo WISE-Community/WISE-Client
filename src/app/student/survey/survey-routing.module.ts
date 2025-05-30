@@ -1,4 +1,3 @@
-import { LogOutPageComponent } from './log-out-page/log-out-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from '../student.component';
@@ -12,7 +11,6 @@ const studentRoutes: Routes = [
     children: [
       { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: 'completed', component: SurveyCompletedComponent, pathMatch: 'full' },
-      { path: 'logout', component: LogOutPageComponent, pathMatch: 'full' },
       {
         path: 'workgroupLimitReached',
         component: WorkgroupLimitReachedComponent,
