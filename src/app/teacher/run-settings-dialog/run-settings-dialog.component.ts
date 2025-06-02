@@ -7,10 +7,10 @@ import { formatDate } from '@angular/common';
 import { TeacherRun } from '../teacher-run';
 
 @Component({
-    selector: 'app-run-settings-dialog',
-    templateUrl: './run-settings-dialog.component.html',
-    styleUrls: ['./run-settings-dialog.component.scss'],
-    standalone: false
+  selector: 'app-run-settings-dialog',
+  templateUrl: './run-settings-dialog.component.html',
+  styleUrls: ['./run-settings-dialog.component.scss'],
+  standalone: false
 })
 export class RunSettingsDialogComponent implements OnInit {
   run: TeacherRun;
@@ -28,6 +28,7 @@ export class RunSettingsDialogComponent implements OnInit {
   startDateMessage: string = '';
   endDateMessage: string = '';
   isLockedAfterEndDateMessage: string = '';
+  protected isDefaultRun: boolean = true;
   maxStartDate: Date;
   minEndDate: Date;
   targetEndDate: Date;
@@ -53,6 +54,7 @@ export class RunSettingsDialogComponent implements OnInit {
       this.isLockedAfterEndDateCheckboxEnabled = true;
     }
     this.initializeMessageCodeToMessage();
+    this.isDefaultRun = !this.run.isSurveyRun();
   }
 
   initializeMessageCodeToMessage() {
