@@ -2248,6 +2248,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">141,145</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/survey/survey-completed/survey-completed.component.html</context>
+          <context context-type="linenumber">19,23</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="7330209395505773206" datatype="html">
         <source>Submit for Review</source>
@@ -5481,6 +5485,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">12,17</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/survey/survey-completed/survey-completed.component.html</context>
+          <context context-type="linenumber">12,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/survey/workgroup-limit-reached/workgroup-limit-reached.component.html</context>
+          <context context-type="linenumber">12,16</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">10,14</context>
         </context-group>
@@ -8289,6 +8301,20 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
           <context context-type="linenumber">33,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1595876273540980534" datatype="html">
+        <source>Your responses have been submitted.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/survey/survey-completed/survey-completed.component.html</context>
+          <context context-type="linenumber">18,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5438760016898248726" datatype="html">
+        <source>Sorry, this unit has reached the maximum number of submissions.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/student/survey/workgroup-limit-reached/workgroup-limit-reached.component.html</context>
+          <context context-type="linenumber">18,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7877427365361954950" datatype="html">
