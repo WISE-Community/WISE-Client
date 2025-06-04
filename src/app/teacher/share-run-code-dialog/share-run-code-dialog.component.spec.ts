@@ -9,6 +9,7 @@ import { TeacherService } from '../teacher.service';
 import { UserService } from '../../services/user.service';
 import { TeacherRun } from '../teacher-run';
 import { Project } from '../../domain/project';
+import { AccessLinkService } from '../../services/accessLinkService';
 
 const runObj = new TeacherRun();
 runObj.id = 1;
@@ -49,6 +50,7 @@ describe('ShareRunCodeDialogComponent', () => {
       declarations: [ShareRunCodeDialogComponent],
       imports: [BrowserAnimationsModule, MatDialogModule, MatSnackBarModule],
       providers: [
+        AccessLinkService,
         { provide: ConfigService, useClass: MockConfigService },
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: UserService, useClass: MockUserService },

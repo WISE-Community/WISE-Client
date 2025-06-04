@@ -139,11 +139,12 @@ describe('CreateRunDialogComponent', () => {
     expect(component.getPeriodsString()).toEqual('1,3,5,hello');
   });
 
-  it('should not show max workgroup size option if survey is checked', () => {
+  it('should not show period or max workgroup size options if survey is checked', () => {
     let h3ElementsText = Array.from(fixture.nativeElement.querySelectorAll('h3')).map(
       (element: HTMLElement) => element.innerText
     );
     expect(h3ElementsText.length).toEqual(4);
+    expect(h3ElementsText.includes('2. Choose Periods')).toBeTrue();
     expect(h3ElementsText.includes('3. Choose Students Per Team')).toBeTrue();
 
     component.form.controls['runType'].setValue('survey');
@@ -152,7 +153,8 @@ describe('CreateRunDialogComponent', () => {
     h3ElementsText = Array.from(fixture.nativeElement.querySelectorAll('h3')).map(
       (element: HTMLElement) => element.innerText
     );
-    expect(h3ElementsText.length).toEqual(3);
+    expect(h3ElementsText.length).toEqual(2);
+    expect(h3ElementsText.includes('2. Choose Periods')).toBeFalse();
     expect(h3ElementsText.includes('3. Choose Students Per Team')).toBeFalse();
   });
 

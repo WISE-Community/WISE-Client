@@ -22,7 +22,6 @@ import { TeacherService } from '../teacher.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
-import { AccessLinkService } from '../../services/accessLinkService';
 
 export class MockTeacherService {}
 
@@ -65,7 +64,6 @@ describe('TeacherRunListItemComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        AccessLinkService,
         ArchiveProjectService,
         { provide: ConfigService, useClass: MockConfigService },
         ProjectTagService,
