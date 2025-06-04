@@ -4,7 +4,6 @@ import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'workgroup-limit-reached',
   imports: [MatCardModule],
-  templateUrl: './workgroup-limit-reached.component.html',
-  styleUrl: './workgroup-limit-reached.component.scss'
+  templateUrl: './workgroup-limit-reached.component.html'
 })
 export class WorkgroupLimitReachedComponent {}

@@ -190,7 +190,8 @@ export class AppComponent {
       !this.router.url.includes('/login') &&
       !this.router.url.includes('/join') &&
       !this.router.url.includes('/contact') &&
-      !this.router.url.includes('/forgot')
+      !this.router.url.includes('/forgot') &&
+      !this.router.url.includes('/survey')
     );
   }
 
