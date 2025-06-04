@@ -36,7 +36,11 @@
     </span>
   </div>
   <div>
-    @if (!run.isSurveyRun()) {
+    @if (run.isSurveyRun()) {
+      <span i18n>Survey Unit</span> (<a href="#" (click)="shareCode($event)" tabindex="0" i18n
+        >Share with participants</a
+      >)
+    } @else {
       <span i18n>Access Code: {{ run.runCode }}</span> (<a
         href="#"
         (click)="shareCode($event)"
@@ -44,35 +48,6 @@
         i18n
         >Share with students</a
       >)
-    } @else {
-      @for (accessLink of accessLinks; track accessLink) {
-        @if ($index < 3 || showAllLinks) {
-          <span i18n class="test"
-            >Period {{ getPeriodFromAccessLink(accessLink) }} Access Link:
-            <button
-              class="access-link"
-              mat-button
-              color="primary"
-              i18n-matTooltip
-              matTooltip="Copy link"
-              matTooltipPosition="after"
-              [cdkCopyToClipboard]="accessLink"
-              (click)="copyMsg()"
-            >
-              <mat-icon>content_copy</mat-icon>
-              <span>{{ accessLink }}</span>
-            </button>
-          </span>
-          <br />
-        }
-      }
-      @if (accessLinks.length > 3) {
-        @if (showAllLinks) {
-          <a class="toggle-show" (click)="toggleShowAllLinks()" i18n>Show less</a>
-        } @else {
-          <a class="toggle-show" (click)="toggleShowAllLinks()" i18n>Show more</a>
-        }
-      }
     }
   </div>
   <div *ngIf="run.shared" class="info" i18n>

@@ -3,7 +3,6 @@ import { ConfigService } from '../../services/config.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { flash } from '../../animations';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { Router } from '@angular/router';
 import { SafeStyle } from '@angular/platform-browser';
@@ -11,7 +10,6 @@ import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-
 import { Subscription } from 'rxjs';
 import { Tag } from '../../domain/tag';
 import { TeacherRun } from '../teacher-run';
-import { AccessLinkService } from '../../services/accessLinkService';
 
 @Component({
   animations: [flash],
@@ -21,7 +19,6 @@ import { AccessLinkService } from '../../services/accessLinkService';
   templateUrl: './teacher-run-list-item.component.html'
 })
 export class TeacherRunListItemComponent implements OnInit {
-  protected accessLinks: string[] = [];
   protected animateDelay: string = '0s';
   protected animateDuration: string = '0s';
   protected manageStudentsLink: string = '';
@@ -29,19 +26,16 @@ export class TeacherRunListItemComponent implements OnInit {
   @Input() run: TeacherRun = new TeacherRun();
   @Output() runArchiveStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() runSelectedStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
-  protected showAllLinks: boolean = false;
   private subscriptions: Subscription = new Subscription();
   protected thumbStyle: SafeStyle;
 
   constructor(
-    private accessLinkService: AccessLinkService,
     private configService: ConfigService,
     private dialog: MatDialog,
     private elRef: ElementRef,
     private projectTagService: ProjectTagService,
     private router: Router,
-    private sanitizer: DomSanitizer,
-    private snackBar: MatSnackBar
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -49,9 +43,6 @@ export class TeacherRunListItemComponent implements OnInit {
     this.manageStudentsLink = `${this.configService.getContextPath()}/teacher/manage/unit/${
       this.run.id
     }/manage-students`;
-    if (this.run.isSurveyRun()) {
-      this.accessLinks = this.accessLinkService.getAccessLinks(this.run.runCode, this.run.periods);
-    }
     if (this.run.highlighted) {
       this.animateDuration = '2s';
       this.animateDelay = '1s';
@@ -153,17 +144,5 @@ export class TeacherRunListItemComponent implements OnInit {
     this.run.project.selected = false;
     this.runSelectedStatusChangedEvent.emit();
     this.runArchiveStatusChangedEvent.emit();
-  }
-
-  protected copyMsg(): void {
-    this.snackBar.open($localize`Copied to clipboard.`);
-  }
-
-  protected getPeriodFromAccessLink(link: string): string {
-    return this.accessLinkService.getPeriodFromAccessLink(link);
-  }
-
-  protected toggleShowAllLinks(): void {
-    this.showAllLinks = !this.showAllLinks;
   }
 }
