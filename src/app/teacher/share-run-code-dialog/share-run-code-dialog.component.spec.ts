@@ -5,22 +5,23 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfigService } from '../../services/config.service';
 import { TeacherService } from '../teacher.service';
-import { UserService } from '../../services/user.service';
 import { TeacherRun } from '../teacher-run';
 import { Project } from '../../domain/project';
 import { AccessLinkService } from '../../services/accessLinkService';
 import { MatIconModule } from '@angular/material/icon';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { MockProvider } from 'ng-mocks';
+import { MockProviders } from 'ng-mocks';
+import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
 
 const runObj = new TeacherRun();
 runObj.id = 1;
 runObj.runCode = 'Dog123';
+runObj.isSurveyRun = () => false;
 const project = new Project();
 project.id = 1;
 project.name = 'Photosynthesis';
 runObj.project = project;
-runObj.isSurveyRun = () => false;
 
 export class MockConfigService {
   getWISEHostname(): string {
@@ -36,14 +37,6 @@ export class MockConfigService {
   }
 }
 
-export class MockTeacherService {}
-
-export class MockUserService {
-  isGoogleUser() {
-    return true;
-  }
-}
-
 let component: ShareRunCodeDialogComponent;
 let fixture: ComponentFixture<ShareRunCodeDialogComponent>;
 describe('ShareRunCodeDialogComponent', () => {
@@ -52,17 +45,15 @@ describe('ShareRunCodeDialogComponent', () => {
       declarations: [ShareRunCodeDialogComponent],
       imports: [
         BrowserAnimationsModule,
+        CommonModule,
         ClipboardModule,
         MatDialogModule,
         MatIconModule,
         MatSnackBarModule
       ],
       providers: [
-        MockProvider(AccessLinkService),
+        MockProviders(AccessLinkService, MatDialogRef, TeacherService, UserService),
         { provide: ConfigService, useClass: MockConfigService },
-        { provide: TeacherService, useClass: MockTeacherService },
-        { provide: UserService, useClass: MockUserService },
-        { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: runObj }
       ]
     }).compileComponents();
@@ -71,6 +62,7 @@ describe('ShareRunCodeDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ShareRunCodeDialogComponent);
     component = fixture.componentInstance;
+    component.run.isSurveyRun = () => false;
     fixture.detectChanges();
   });
 
