@@ -7,32 +7,34 @@
         <span class="mat-caption" i18n>(Unit ID: {{ project.id }})</span>
       </p>
       <h3 i18n>1. Choose Run Type</h3>
-      <mat-radio-group #runType formControlName="runType" class="flex gap-4">
-        <mat-radio-button value="default" radioGroup="runType" i18n>Default</mat-radio-button>
-        <mat-radio-button (click)="clearCustomPeriods()" value="survey" radioGroup="runType" i18n
-          >Survey
-          <mat-icon
-            class="info"
-            tabindex="0"
-            matTooltip="Participants complete survey units anonymously without a WISE account."
-            matTooltipPosition="above"
-            i18n-matTooltip
-            >help</mat-icon
-          >
-        </mat-radio-button>
-      </mat-radio-group>
+      <div class="flex items-center gap-2">
+        <mat-radio-group #runType formControlName="runType" class="flex gap-4">
+          <mat-radio-button value="default" radioGroup="runType" i18n>Default</mat-radio-button>
+          <mat-radio-button (click)="setAsSurveyUnit()" value="survey" radioGroup="runType" i18n
+            >Survey
+          </mat-radio-button>
+        </mat-radio-group>
+        <mat-icon
+          class="info"
+          tabindex="0"
+          matTooltip="Participants complete survey units anonymously without a WISE account."
+          matTooltipPosition="above"
+          i18n-matTooltip
+          >help</mat-icon
+        >
+      </div>
       <mat-divider></mat-divider>
-      <h3 i18n>2. Choose Periods</h3>
-      <p formArrayName="selectedPeriods">
-        @for (control of selectedPeriodsControl.controls; track $index) {
-          <span [formGroup]="control">
-            <mat-checkbox formControlName="checkbox" class="period-select">
-              {{ control.controls.name.value }}
-            </mat-checkbox>
-          </span>
-        }
-      </p>
       @if (isDefaultRun()) {
+        <h3 i18n>2. Choose Periods</h3>
+        <p formArrayName="selectedPeriods">
+          @for (control of selectedPeriodsControl.controls; track $index) {
+            <span [formGroup]="control">
+              <mat-checkbox formControlName="checkbox" class="period-select">
+                {{ control.controls.name.value }}
+              </mat-checkbox>
+            </span>
+          }
+        </p>
         <mat-form-field appearance="fill" class="period-input form-field-long-hint">
           <mat-label i18n>Add your own periods</mat-label>
           <input matInput id="customPeriods" name="customPeriods" formControlName="customPeriods" />
@@ -41,17 +43,18 @@
           For "Period 9", just enter the number 9. Separate periods with commas (e.g. "Section 1,
           Section 2"). Manually named periods should be no more than 16 characters long.
         </p>
-      }
-      <mat-divider></mat-divider>
-      @if (isDefaultRun()) {
+        <mat-divider></mat-divider>
         <h3 i18n>3. Choose Students Per Team</h3>
         <mat-radio-group #rGroup formControlName="maxStudentsPerTeam" class="flex gap-4">
           <mat-radio-button value="1" radioGroup="rGroup" i18n>Only 1 student</mat-radio-button>
           <mat-radio-button value="3" radioGroup="rGroup" i18n>1-3 students</mat-radio-button>
         </mat-radio-group>
         <mat-divider></mat-divider>
+        <h3 i18n>4. Set Schedule</h3>
       }
-      <h3 i18n>{{ isDefaultRun() ? 4 : 3 }}. Set Schedule</h3>
+      @if (!isDefaultRun()) {
+        <h3 i18n>2. Set Schedule</h3>
+      }
       <div class="flex flex-col sm:flex-row flex-wrap sm:gap-4">
         <div>
           <mat-form-field appearance="fill" class="flex-none w-full sm:w-auto">
@@ -82,21 +85,23 @@
             <mat-datepicker #endDatePicker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="flex items-center justify-start" style="padding-bottom: 1.34375em">
-          <mat-checkbox formControlName="isLockedAfterEndDate" i18n>
-            Lock After End Date </mat-checkbox
-          >&nbsp;
-          <mat-icon
-            class="info"
-            tabindex="0"
-            matTooltip="If the End Date has passed and the unit is locked, students will no longer be able to save new work"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            >help</mat-icon
-          >
-        </div>
+        @if (isDefaultRun()) {
+          <div class="flex items-center justify-start" style="padding-bottom: 1.34375em">
+            <mat-checkbox formControlName="isLockedAfterEndDate" i18n>
+              Lock After End Date </mat-checkbox
+            >&nbsp;
+            <mat-icon
+              class="info"
+              tabindex="0"
+              matTooltip="If the End Date has passed and the unit is locked, students will no longer be able to save new work"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              >help</mat-icon
+            >
+          </div>
+        }
       </div>
-      <p class="mat-caption" i18n>
+      <p class="mat-caption !mb-4" i18n>
         Note: These dates can be changed at any time from your Class Schedule. Just select "Edit
         Settings" from the unit's dropdown menu.
       </p>
@@ -134,28 +139,25 @@
           You can always find the Access Code for each classroom unit in your Class Schedule.
         </p>
       } @else {
-        @for (accessLink of accessLinks; track accessLink) {
-          <p class="mat-subtitle-1 accent" i18n>
-            Period {{ getPeriodFromAccessLink(accessLink) }} Access Link:
-            <button
-              class="access-link"
-              mat-button
-              color="primary"
-              i18n-matTooltip
-              matTooltip="Copy link"
-              matTooltipPosition="after"
-              [cdkCopyToClipboard]="accessLink"
-              (click)="copyMsg()"
-            >
-              <mat-icon>content_copy</mat-icon>
-              <span>{{ accessLink }}</span>
-            </button>
-          </p>
-          <br />
-        }
+        <p class="mat-subtitle-1 accent flex items-center gap-2">
+          <span i18n>Access Link:</span>
+          <button
+            class="access-link"
+            mat-button
+            color="primary"
+            i18n-matTooltip
+            matTooltip="Copy link"
+            matTooltipPosition="after"
+            [cdkCopyToClipboard]="accessLink"
+            (click)="copyMsg()"
+          >
+            <mat-icon>content_copy</mat-icon>
+            <span>{{ accessLinks[0] }}</span>
+          </button>
+        </p>
         <p i18n>
-          Important: Every survey unit has a unique Access Link. Students can use this link to
-          access and complete the survey without needing to create a WISE account.
+          Important: Every survey unit has a unique Access Link. Participants can use this link to
+          complete the unit without a WISE account.
         </p>
         <p i18n>You can always find the Access Link for each survey unit in your Class Schedule.</p>
       }

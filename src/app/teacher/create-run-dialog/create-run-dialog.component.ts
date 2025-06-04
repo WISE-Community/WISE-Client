@@ -276,7 +276,12 @@ export class CreateRunDialogComponent {
     return this.accessLinkService.getPeriodFromAccessLink(link);
   }
 
-  protected clearCustomPeriods(): void {
+  protected setAsSurveyUnit(): void {
     this.customPeriods.setValue('');
+    this.periodsGroup.controls.forEach((control, index) => {
+      index === 0
+        ? control.get('checkbox').setValue(true)
+        : control.get('checkbox').setValue(false);
+    });
   }
 }

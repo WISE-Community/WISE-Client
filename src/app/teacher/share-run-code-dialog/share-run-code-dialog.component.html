@@ -13,46 +13,22 @@
         This is a survey unit. Participants complete survey units anonymously and do not need a WISE
         account.
       </p>
-      @if (accessLinks.length === 1) {
-        <p i18n>Copy this link to share with participants:</p>
-        <p class="share">
-          <button
-            class="access-link"
-            mat-button
-            color="primary"
-            i18n-matTooltip
-            matTooltip="Copy link"
-            matTooltipPosition="after"
-            [cdkCopyToClipboard]="accessLinks[0]"
-            (click)="copyMsg()"
-          >
-            <mat-icon>content_copy</mat-icon>
-            <span>{{ accessLinks[0] }}</span>
-          </button>
-        </p>
-      } @else {
-        <p i18n>Copy these links to share with participants:</p>
-        <ul>
-          @for (accessLink of accessLinks; track accessLink) {
-            <li class="flex items-center justify-center gap-1">
-              <span i18n>Period {{ getPeriodFromAccessLink(accessLink) }}:</span>
-              <button
-                class="access-link"
-                mat-button
-                color="primary"
-                i18n-matTooltip
-                matTooltip="Copy link"
-                matTooltipPosition="after"
-                [cdkCopyToClipboard]="accessLink"
-                (click)="copyMsg()"
-              >
-                <mat-icon>content_copy</mat-icon>
-                <span>{{ accessLink }}</span>
-              </button>
-            </li>
-          }
-        </ul>
-      }
+      <p i18n>Copy this link to share with participants:</p>
+      <p class="share">
+        <button
+          class="access-link"
+          mat-button
+          color="primary"
+          i18n-matTooltip
+          matTooltip="Copy link"
+          matTooltipPosition="after"
+          [cdkCopyToClipboard]="accessLinks[0]"
+          (click)="copyMsg()"
+        >
+          <mat-icon>content_copy</mat-icon>
+          <span>{{ accessLinks[0] }}</span>
+        </button>
+      </p>
     } @else {
       <p i18n>Copy this link to share with your students:</p>
       <p class="share">
