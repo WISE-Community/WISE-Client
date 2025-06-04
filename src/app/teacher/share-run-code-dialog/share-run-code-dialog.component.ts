@@ -29,7 +29,7 @@ export class ShareRunCodeDialogComponent {
     private configService: ConfigService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.code = this.run.runCode;
     const host = this.configService.getWISEHostname() + this.configService.getContextPath();
     this.link = `${host}/login?accessCode=${this.code}`;
@@ -38,19 +38,19 @@ export class ShareRunCodeDialogComponent {
     }
   }
 
-  copyMsg() {
+  protected copyMsg(): void {
     this.snackBar.open($localize`Copied to clipboard.`);
   }
 
-  isGoogleUser() {
+  protected isGoogleUser(): boolean {
     return this.userService.isGoogleUser();
   }
 
-  isGoogleClassroomEnabled() {
+  protected isGoogleClassroomEnabled(): boolean {
     return this.configService.isGoogleClassroomEnabled();
   }
 
-  checkClassroomAuthorization() {
+  protected checkClassroomAuthorization(): void {
     this.teacherService
       .getClassroomAuthorizationUrl(this.userService.getUser().getValue().username)
       .subscribe(({ authorizationUrl }) => {
@@ -68,7 +68,7 @@ export class ShareRunCodeDialogComponent {
       });
   }
 
-  getClassroomCourses() {
+  private getClassroomCourses(): void {
     this.teacherService
       .getClassroomCourses(this.userService.getUser().getValue().username)
       .subscribe((courses) => {
