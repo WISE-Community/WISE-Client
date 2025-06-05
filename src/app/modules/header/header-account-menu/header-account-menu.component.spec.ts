@@ -8,7 +8,6 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { User } from '../../../domain/user';
-import { LogOutService } from '../../../services/logOutService';
 
 export class MockConfigService {
   getConfig(): Observable<Config> {
@@ -32,7 +31,6 @@ describe('HeaderAccountMenuComponent', () => {
     TestBed.configureTestingModule({
       imports: [HeaderAccountMenuComponent, MatMenuModule],
       providers: [
-        LogOutService,
         { provide: ConfigService, useClass: MockConfigService },
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),

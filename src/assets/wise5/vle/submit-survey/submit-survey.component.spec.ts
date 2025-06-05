@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubmitSurveyComponent } from './submit-survey.component';
-import { ConfigService } from '../../services/configService';
 import { ProjectService } from '../../services/projectService';
 import { NodeStatusService } from '../../services/nodeStatusService';
-import { LogOutService } from '../../../../app/services/logOutService';
-import { MockProviders } from 'ng-mocks';
+import { MockProvider, MockProviders } from 'ng-mocks';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { ConfigService } from '../../../../app/services/config.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { of } from 'rxjs';
+import { Config } from '../../../../app/domain/config';
 
 let component: SubmitSurveyComponent;
 let fixture: ComponentFixture<SubmitSurveyComponent>;
@@ -18,7 +20,13 @@ describe('SubmitSurveyComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SubmitSurveyComponent],
-      providers: [MockProviders(ConfigService, LogOutService, NodeStatusService, ProjectService)]
+      providers: [
+        MockProvider(ConfigService, {
+          getConfig: () => of({ logOutURL: '/logout' } as Config)
+        }),
+        MockProviders(NodeStatusService, ProjectService),
+        provideHttpClient(withInterceptorsFromDi())
+      ]
     }).compileComponents();
     projectService = TestBed.inject(ProjectService);
     projectService.idToOrder = {

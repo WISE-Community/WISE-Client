@@ -12,7 +12,6 @@ import { HeaderComponent } from './modules/header/header.component';
 import { HomeModule } from './home/home.module';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { LogOutService } from './services/logOutService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -70,7 +69,6 @@ export function initialize(
   providers: [
     ArchiveProjectService,
     ConfigService,
-    LogOutService,
     StudentService,
     TeacherService,
     UserService,

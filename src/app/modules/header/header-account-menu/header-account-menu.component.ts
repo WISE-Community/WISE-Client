@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { ConfigService } from '../../../services/config.service';
+import { User } from '../../../domain/user';
 import { HttpClient } from '@angular/common/http';
-import { LogOutService } from '../../../services/logOutService';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
-import { User } from '../../../domain/user';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-header-account-menu',
@@ -24,18 +24,25 @@ import { User } from '../../../domain/user';
     RouterModule
   ]
 })
-export class HeaderAccountMenuComponent {
+export class HeaderAccountMenuComponent implements OnInit {
   protected firstName: string = '';
   protected isPreviousAdmin: boolean;
   protected lastName: string = '';
+  protected logOutURL: string;
   protected roles: string[] = [];
   private switchToOriginalUserURL = '/api/logout/impersonate';
   @Input() user: User;
 
   constructor(
-    private http: HttpClient,
-    private logOutService: LogOutService
+    private configService: ConfigService,
+    private http: HttpClient
   ) {}
+
+  ngOnInit(): void {
+    this.configService.getConfig().subscribe((config) => {
+      this.logOutURL = config.logOutURL;
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.user) {
@@ -60,6 +67,8 @@ export class HeaderAccountMenuComponent {
   }
 
   protected logOut(): void {
-    this.logOutService.logOut();
+    this.http.get(this.logOutURL).subscribe(() => {
+      window.location.href = '/';
+    });
   }
 }

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LogOutService } from '../../../../../../app/services/logOutService';
-import { MockProviders } from 'ng-mocks';
+import { MockProvider } from 'ng-mocks';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -23,10 +22,7 @@ describe('StepToolsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, StepToolsComponent, StudentTeacherCommonServicesModule],
-      providers: [
-        MockProviders(LogOutService, StudentService),
-        provideHttpClient(withInterceptorsFromDi())
-      ]
+      providers: [MockProvider(StudentService), provideHttpClient(withInterceptorsFromDi())]
     }).compileComponents();
   });
 
