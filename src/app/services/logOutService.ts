@@ -15,9 +15,7 @@ export class LogOutService {
     if (!this.logOutUrl) {
       await this.retrieveLogOutUrl();
     }
-    this.http.get(this.logOutUrl).subscribe(() => {
-      window.location.href = '/';
-    });
+    this.http.get(this.logOutUrl).subscribe();
   }
 
   private async retrieveLogOutUrl(): Promise<void> {

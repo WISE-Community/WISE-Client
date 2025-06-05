@@ -87,10 +87,10 @@ export class VLEComponent implements AfterViewInit {
     private wiseLinkService: WiseLinkService
   ) {}
 
-  @HostListener('window:beforeunload')
-  beforeUnload($event): void {
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnload($event: BeforeUnloadEvent): void {
     if (this.isSurvey) {
-      $event.preventDefault();
+      $event.stopImmediatePropagation();
     }
     if (this.sessionService.isSessionActive()) {
       this.saveNodeExitedEvent();
