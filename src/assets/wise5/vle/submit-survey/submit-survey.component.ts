@@ -7,8 +7,8 @@ import { NodeStatusService } from '../../services/nodeStatusService';
 import { LogOutService } from '../../../../app/services/logOutService';
 
 @Component({
-  selector: 'submit-survey',
   imports: [MatButtonModule, MatIconModule],
+  selector: 'submit-survey',
   templateUrl: './submit-survey.component.html'
 })
 export class SubmitSurveyComponent {
@@ -21,12 +21,12 @@ export class SubmitSurveyComponent {
     private projectService: ProjectService
   ) {}
 
-  protected async submitSurvey(): Promise<void> {
-    const unfinishedNodes: string[] = await this.getUnfinishedNodes();
+  protected submitSurvey(): void {
+    const incompleteNodeIds: string[] = this.getIncompleteNodeIds();
     if (
       confirm(
-        unfinishedNodes.length > 0
-          ? this.getSpecificWarning(unfinishedNodes)
+        incompleteNodeIds.length > 0
+          ? this.getIncompleteUnitSubmitWarning(incompleteNodeIds)
           : this.genericSubmitWarning
       )
     ) {
@@ -35,28 +35,22 @@ export class SubmitSurveyComponent {
     }
   }
 
-  private async getUnfinishedNodes(): Promise<string[]> {
-    const nodeIds = Object.keys(this.projectService.idToOrder);
-    const unfinishedNodes: Set<string> = new Set<string>();
-    nodeIds
-      .filter((nodeId) => this.projectService.getNode(nodeId).type === 'node')
-      .forEach((nodeId) => {
-        const status = this.nodeStatusService.getNodeStatusByNodeId(nodeId);
-        if (!status.isCompleted) {
-          unfinishedNodes.add(nodeId);
-        }
-      });
-    return Array.from(unfinishedNodes);
+  private getIncompleteNodeIds(): string[] {
+    return Object.keys(this.projectService.idToOrder).filter(
+      (nodeId) =>
+        this.projectService.isApplicationNode(nodeId) &&
+        !this.nodeStatusService.getNodeStatusByNodeId(nodeId).isCompleted
+    );
   }
 
-  private getSpecificWarning(unfinishedNodes: string[]): string {
-    const unfinishedStepPositions = unfinishedNodes
+  private getIncompleteUnitSubmitWarning(incompleteNodeIds: string[]): string {
+    const incompleteNodePositions = incompleteNodeIds
       .map((nodeId) => this.projectService.getNodePositionById(nodeId))
       .reduce((acc, nodePos) => `${acc} ${nodePos},`, '')
       .slice(0, -1);
     return (
       $localize`You have not completed the following steps: ` +
-      `${unfinishedStepPositions}\n\n${this.genericSubmitWarning}`
+      `${incompleteNodePositions}\n\n${this.genericSubmitWarning}`
     );
   }
 }
