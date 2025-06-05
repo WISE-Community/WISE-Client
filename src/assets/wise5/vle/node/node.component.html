@@ -63,5 +63,11 @@
         <component-state-info [componentState]="latestComponentState" />
       }
     </div>
+    @if (isSurvey && !isBranchNode && !nextNodeId) {
+      <div class="node-content__actions w-full">
+        <mat-divider class="!mt-2"></mat-divider>
+        <submit-survey></submit-survey>
+      </div>
+    }
   </div>
 </div>
