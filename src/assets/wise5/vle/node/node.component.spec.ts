@@ -6,6 +6,7 @@ import { NodeComponent } from './node.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { Node } from '../../common/Node';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TransitionLogic } from '../../common/TransitionLogic';
 
 let component: NodeComponent;
 let fixture: ComponentFixture<NodeComponent>;
@@ -30,7 +31,9 @@ describe('NodeComponent', () => {
     spyOn(TestBed.inject(VLEProjectService), 'getNodeById').and.returnValue({ components: [] });
     spyOn(TestBed.inject(VLEProjectService), 'getNodeTitle').and.returnValue('');
     component = fixture.componentInstance;
-    component.node = new Node();
+    const node = new Node();
+    node.transitionLogic = { transitions: [] } as TransitionLogic;
+    component.node = node;
     fixture.detectChanges();
   });
 
