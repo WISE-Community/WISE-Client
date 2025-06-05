@@ -22246,11 +22246,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">80,83</context>
+          <context context-type="linenumber">70,73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">82,85</context>
+          <context context-type="linenumber">72,75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8784868761263923006" datatype="html">
@@ -22343,22 +22343,6 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">58,61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2838889983986210629" datatype="html">
-        <source>Are you sure you want to submit?
-
-If you submit, you will not be able to continue working on this unit.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.ts</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6586351952503398871" datatype="html">
-        <source>You have not completed the following steps: </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.ts</context>
-          <context context-type="linenumber">191</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5926207769041293626" datatype="html">
@@ -22550,6 +22534,42 @@ If you submit, you will not be able to continue working on this unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets/student-assets.component.html</context>
           <context context-type="linenumber">27,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3759639299856754388" datatype="html">
+        <source>Thank you for taking the time to provide your responses!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/submit-survey/submit-survey.component.html</context>
+          <context context-type="linenumber">1,2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8641900944027000803" datatype="html">
+        <source>When you have finished answering all the questions, press the button below to exit.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/submit-survey/submit-survey.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8716521513720330707" datatype="html">
+        <source>Complete Unit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/submit-survey/submit-survey.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5863847984511854564" datatype="html">
+        <source>Are you sure you want to submit your final answers?
+If you do, you will not be able to continue working on this unit.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/submit-survey/submit-survey.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6586351952503398871" datatype="html">
+        <source>You have not completed the following steps: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/submit-survey/submit-survey.component.ts</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
     </body>
