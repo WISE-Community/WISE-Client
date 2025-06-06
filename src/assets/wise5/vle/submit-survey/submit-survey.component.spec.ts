@@ -55,7 +55,7 @@ function submitSurvey_UnitIncomplete_ShowIncompleteSubmitWarning() {
       spyOn(window, 'confirm');
       await (await loader.getHarness(MatButtonHarness)).click();
       expect(window.confirm).toHaveBeenCalledWith(
-        'You have not completed the following steps:  1.1\n\nAre you sure you want to submit your final answers?\nIf you do, you will not be able to continue working on this unit.'
+        'You have not completed the following steps:  1.1\n\nAre you sure you want to submit your final responses?'
       );
     });
   });
@@ -74,7 +74,7 @@ function submitSurvey_UnitComplete_ShowGenericSubmitWarning() {
       spyOn(window, 'confirm');
       await (await loader.getHarness(MatButtonHarness)).click();
       expect(window.confirm).toHaveBeenCalledWith(
-        'Are you sure you want to submit your final answers?\nIf you do, you will not be able to continue working on this unit.'
+        'Are you sure you want to submit your final responses?'
       );
     });
   });

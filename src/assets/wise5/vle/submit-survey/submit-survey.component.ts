@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './submit-survey.component.html'
 })
 export class SubmitSurveyComponent {
-  private genericSubmitWarning = $localize`Are you sure you want to submit your final answers?\nIf you do, you will not be able to continue working on this unit.`;
+  private genericSubmitWarning = $localize`Are you sure you want to submit your final responses?`;
   private logOutURL: string;
 
   constructor(
