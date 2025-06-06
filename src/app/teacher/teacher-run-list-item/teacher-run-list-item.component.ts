@@ -1,22 +1,22 @@
 import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { SafeStyle } from '@angular/platform-browser';
-import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
+import { DomSanitizer } from '@angular/platform-browser';
 import { flash } from '../../animations';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { Router } from '@angular/router';
+import { SafeStyle } from '@angular/platform-browser';
 import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-code-dialog.component';
 import { Subscription } from 'rxjs';
-import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { Tag } from '../../domain/tag';
+import { TeacherRun } from '../teacher-run';
 
 @Component({
-    animations: [flash],
-    selector: 'app-teacher-run-list-item',
-    styleUrl: './teacher-run-list-item.component.scss',
-    templateUrl: './teacher-run-list-item.component.html',
-    standalone: false
+  animations: [flash],
+  selector: 'app-teacher-run-list-item',
+  standalone: false,
+  styleUrl: './teacher-run-list-item.component.scss',
+  templateUrl: './teacher-run-list-item.component.html'
 })
 export class TeacherRunListItemComponent implements OnInit {
   protected animateDelay: string = '0s';
@@ -30,12 +30,12 @@ export class TeacherRunListItemComponent implements OnInit {
   protected thumbStyle: SafeStyle;
 
   constructor(
-    private sanitizer: DomSanitizer,
     private configService: ConfigService,
-    private router: Router,
-    private elRef: ElementRef,
     private dialog: MatDialog,
-    private projectTagService: ProjectTagService
+    private elRef: ElementRef,
+    private projectTagService: ProjectTagService,
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +91,7 @@ export class TeacherRunListItemComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  private getThumbStyle() {
+  private getThumbStyle(): SafeStyle {
     const DEFAULT_THUMB = 'assets/img/default-picture.svg';
     const STYLE = `url(${this.run.project.projectThumb}), url(${DEFAULT_THUMB})`;
     return this.sanitizer.bypassSecurityTrustStyle(STYLE);
@@ -132,7 +132,7 @@ export class TeacherRunListItemComponent implements OnInit {
     return run.isCompleted(this.configService.getCurrentServerTime());
   }
 
-  shareCode(event: Event): void {
+  protected shareCode(event: Event): void {
     event.preventDefault();
     this.dialog.open(ShareRunCodeDialogComponent, {
       data: this.run,

@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { concatMap, tap } from 'rxjs/operators';
-import { User } from '../domain/user';
-import { HttpParams } from '@angular/common/http';
 import { ConfigService } from './config.service';
-import { Teacher } from '../domain/teacher';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Student } from '../domain/student';
+import { tap } from 'rxjs/operators';
+import { Teacher } from '../domain/teacher';
+import { User } from '../domain/user';
 
 @Injectable()
 export class UserService {
@@ -23,7 +23,10 @@ export class UserService {
   isAuthenticated = false;
   redirectUrl: string; // redirect here after logging in
 
-  constructor(private http: HttpClient, private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private http: HttpClient
+  ) {}
 
   getUser(): BehaviorSubject<User> {
     return this.user$;
@@ -57,6 +60,10 @@ export class UserService {
     return this.isRole('admin');
   }
 
+  isSurveyStudent(): boolean {
+    return this.isRole('surveyStudent');
+  }
+
   private isRole(role: string): boolean {
     return this.isAuthenticated && this.getRoles().includes(role);
   }
@@ -75,16 +82,14 @@ export class UserService {
 
   retrieveUser(username?: string): Observable<User> {
     const params = new HttpParams().set('username', username);
-    return this.http
-      .get<User>(this.userUrl, { params: params })
-      .pipe(
-        tap((user) => {
-          if (user != null && user.id != null) {
-            this.isAuthenticated = true;
-          }
-          this.user$.next(user);
-        })
-      );
+    return this.http.get<User>(this.userUrl, { params: params }).pipe(
+      tap((user) => {
+        if (user != null && user.id != null) {
+          this.isAuthenticated = true;
+        }
+        this.user$.next(user);
+      })
+    );
   }
 
   checkAuthentication(username, password) {
@@ -146,13 +151,11 @@ export class UserService {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     let body = new HttpParams();
     body = body.set('newPassword', newPassword);
-    return this.http
-      .post<any>(this.unlinkGoogleAccountUrl, body, { headers: headers })
-      .pipe(
-        tap((user) => {
-          this.user$.next(user);
-        })
-      );
+    return this.http.post<any>(this.unlinkGoogleAccountUrl, body, { headers: headers }).pipe(
+      tap((user) => {
+        this.user$.next(user);
+      })
+    );
   }
 
   getUserByGoogleId(googleUserId: string) {

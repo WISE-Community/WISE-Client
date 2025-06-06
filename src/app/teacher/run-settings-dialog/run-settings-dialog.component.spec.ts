@@ -53,10 +53,9 @@ export class MockTeacherService {
   }
 }
 
+let component: RunSettingsDialogComponent;
+let fixture: ComponentFixture<RunSettingsDialogComponent>;
 describe('RunSettingsDialogComponent', () => {
-  let component: RunSettingsDialogComponent;
-  let fixture: ComponentFixture<RunSettingsDialogComponent>;
-
   const getStartDateInput = () => {
     return fixture.debugElement.nativeElement.querySelectorAll('input')[1];
   };
@@ -199,4 +198,20 @@ describe('RunSettingsDialogComponent', () => {
     const message = component.translateMessageCode('periodNameAlreadyExists');
     expect(message).toEqual('There is already a period with that name.');
   });
+
+  surveyRun();
 });
+
+function surveyRun() {
+  describe('Survey Run', () => {
+    beforeEach(() => {
+      component['isDefaultRun'] = false;
+      fixture.detectChanges();
+    });
+
+    it('should hide Student Per Team section', () => {
+      const radioGroup = fixture.debugElement.nativeElement.querySelector('mat-radio-group');
+      expect(radioGroup).toBeNull();
+    });
+  });
+}

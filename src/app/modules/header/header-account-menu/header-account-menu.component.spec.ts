@@ -1,40 +1,33 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { HeaderAccountMenuComponent } from './header-account-menu.component';
-import { User } from '../../../domain/user';
-import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../../services/config.service';
-import { Observable } from 'rxjs';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { Config } from '../../../domain/config';
-import { provideRouter } from '@angular/router';
+import { HeaderAccountMenuComponent } from './header-account-menu.component';
+import { of } from 'rxjs';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-
-export class MockConfigService {
-  getConfig(): Observable<Config> {
-    const config: Config = {
-      contextPath: '/wise',
-      logOutURL: '/logout',
-      currentTime: new Date('2018-10-17T00:00:00.0').getTime()
-    };
-    return Observable.create((observer) => {
-      observer.next(config);
-      observer.complete();
-    });
-  }
-}
+import { provideRouter } from '@angular/router';
+import { User } from '../../../domain/user';
+import { MockProvider } from 'ng-mocks';
 
 describe('HeaderAccountMenuComponent', () => {
   let component: HeaderAccountMenuComponent;
   let fixture: ComponentFixture<HeaderAccountMenuComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-    imports: [HeaderAccountMenuComponent, MatMenuModule],
-    providers: [{ provide: ConfigService, useClass: MockConfigService }, provideRouter([]), provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [HeaderAccountMenuComponent],
+      providers: [
+        MockProvider(ConfigService, {
+          getConfig: () =>
+            of({
+              contextPath: '/wise',
+              logOutURL: '/logout',
+              currentTime: new Date('2018-10-17T00:00:00.0').getTime()
+            })
+        }),
+        provideRouter([]),
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderAccountMenuComponent);

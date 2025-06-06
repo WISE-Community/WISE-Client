@@ -48,6 +48,7 @@ import { SelectTagsComponent } from './select-tags/select-tags.component';
 import { UnitTagsComponent } from './unit-tags/unit-tags.component';
 import { ColorService } from '../../assets/wise5/services/colorService';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AccessLinkService } from '../services/accessLinkService';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -103,7 +104,7 @@ const materialModules = [
     TeacherRunListComponent,
     TeacherRunListItemComponent
   ],
-  providers: [AuthGuard, ColorService, ProjectTagService],
+  providers: [AccessLinkService, AuthGuard, ColorService, ProjectTagService],
   exports: [TeacherComponent, UnitTagsComponent, materialModules]
 })
 export class TeacherModule {}

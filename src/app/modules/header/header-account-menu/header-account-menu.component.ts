@@ -11,18 +11,18 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'app-header-account-menu',
-    templateUrl: './header-account-menu.component.html',
-    styleUrl: './header-account-menu.component.scss',
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatDividerModule,
-        RouterModule
-    ]
+  selector: 'app-header-account-menu',
+  templateUrl: './header-account-menu.component.html',
+  styleUrl: './header-account-menu.component.scss',
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatMenuModule,
+    RouterModule
+  ]
 })
 export class HeaderAccountMenuComponent implements OnInit {
   protected firstName: string = '';
@@ -33,7 +33,10 @@ export class HeaderAccountMenuComponent implements OnInit {
   private switchToOriginalUserURL = '/api/logout/impersonate';
   @Input() user: User;
 
-  constructor(private configService: ConfigService, private http: HttpClient) {}
+  constructor(
+    private configService: ConfigService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {

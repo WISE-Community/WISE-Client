@@ -28,3 +28,12 @@
   margin: -8px;
   display: block;
 }
+
+.access-link {
+  text-transform: lowercase;
+}
+
+.toggle-show:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

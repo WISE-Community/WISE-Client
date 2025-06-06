@@ -1,9 +1,9 @@
+import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpRequest, HttpHandler, HttpInterceptor } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { PublicLibraryComponent } from './modules/library/public-library/public-library.component';
 import { PersonalLibraryComponent } from './modules/library/personal-library/personal-library.component';
+import { PublicLibraryComponent } from './modules/library/public-library/public-library.component';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
@@ -56,6 +56,10 @@ const routes: Routes = [
   {
     path: 'teacher',
     loadChildren: () => import('./teacher/teacher.module').then((m) => m.TeacherModule)
+  },
+  {
+    path: 'survey',
+    loadChildren: () => import('./student/survey/survey.module').then((m) => m.SurveyModule)
   }
 ];
 

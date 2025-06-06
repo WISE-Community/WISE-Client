@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-student',
-    templateUrl: './student.component.html',
-    styleUrls: ['./student.component.scss'],
-    standalone: false
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.scss'],
+  standalone: false
 })
 export class StudentComponent implements OnInit {
   constructor(private router: Router) {}
@@ -13,6 +13,10 @@ export class StudentComponent implements OnInit {
   ngOnInit() {}
 
   isShowingAngularJSApp() {
-    return this.router.url.includes('/student/unit') || this.router.url.includes('/preview/unit');
+    return (
+      this.router.url.includes('/student/unit') ||
+      this.router.url.includes('/preview/unit') ||
+      this.router.url.includes('/survey')
+    );
   }
 }

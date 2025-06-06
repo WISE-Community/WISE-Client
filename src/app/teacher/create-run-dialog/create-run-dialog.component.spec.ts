@@ -1,19 +1,19 @@
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TeacherService } from '../teacher.service';
+import { ConfigService } from '../../services/config.service';
+import { Course } from '../../domain/course';
 import { CreateRunDialogComponent } from './create-run-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { Project } from '../../domain/project';
+import { Router } from '@angular/router';
 import { Run } from '../../domain/run';
-import { By } from '@angular/platform-browser';
-import { Course } from '../../domain/course';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { TeacherService } from '../teacher.service';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
-import { ConfigService } from '../../services/config.service';
-import { Router } from '@angular/router';
 
 export class MockTeacherService {
   createRun() {
@@ -135,8 +135,27 @@ describe('CreateRunDialogComponent', () => {
     component.periodsGroup.controls[0].get('checkbox').setValue(true);
     component.periodsGroup.controls[2].get('checkbox').setValue(true);
     component.periodsGroup.controls[4].get('checkbox').setValue(true);
-    component.customPeriods.setValue('hello');
+    component['customPeriods'].setValue('hello');
     expect(component.getPeriodsString()).toEqual('1,3,5,hello');
+  });
+
+  it('should not show period or max workgroup size options if survey is checked', () => {
+    let h3ElementsText = Array.from(fixture.nativeElement.querySelectorAll('h3')).map(
+      (element: HTMLElement) => element.innerText
+    );
+    expect(h3ElementsText.length).toEqual(4);
+    expect(h3ElementsText.includes('2. Choose Periods')).toBeTrue();
+    expect(h3ElementsText.includes('3. Choose Students Per Team')).toBeTrue();
+
+    component.form.controls['runType'].setValue('survey');
+    fixture.detectChanges();
+
+    h3ElementsText = Array.from(fixture.nativeElement.querySelectorAll('h3')).map(
+      (element: HTMLElement) => element.innerText
+    );
+    expect(h3ElementsText.length).toEqual(2);
+    expect(h3ElementsText.includes('2. Choose Periods')).toBeFalse();
+    expect(h3ElementsText.includes('3. Choose Students Per Team')).toBeFalse();
   });
 
   it('should disable submit button and invalidate form on initial state (when no period is selected)', () => {
@@ -150,7 +169,7 @@ describe('CreateRunDialogComponent', () => {
     fixture.detectChanges();
     expect(component.form.valid).toBeTruthy();
     component.periodsGroup.controls[0].get('checkbox').setValue(false);
-    component.customPeriods.setValue('Section A, Section B');
+    component['customPeriods'].setValue('Section A, Section B');
     fixture.detectChanges();
     expect(component.form.valid).toBeTruthy();
   });
@@ -185,6 +204,7 @@ describe('CreateRunDialogComponent', () => {
     expect(teacherService.createRun).toHaveBeenCalledWith(
       1,
       '1,',
+      false,
       '3',
       jasmine.any(Number),
       jasmine.any(Number),
@@ -205,6 +225,7 @@ describe('CreateRunDialogComponent', () => {
     expect(teacherService.createRun).toHaveBeenCalledWith(
       1,
       '1,',
+      false,
       '3',
       jasmine.any(Number),
       jasmine.any(Number),
