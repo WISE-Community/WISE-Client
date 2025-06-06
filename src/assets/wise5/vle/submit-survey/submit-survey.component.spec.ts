@@ -11,7 +11,6 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { of } from 'rxjs';
 import { Config } from '../../../../app/domain/config';
 
-let component: SubmitSurveyComponent;
 let fixture: ComponentFixture<SubmitSurveyComponent>;
 let loader: HarnessLoader;
 let nodeStatusService: NodeStatusService;
@@ -34,7 +33,6 @@ describe('SubmitSurveyComponent', () => {
     };
     nodeStatusService = TestBed.inject(NodeStatusService);
     fixture = TestBed.createComponent(SubmitSurveyComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
   });

@@ -1,27 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Config } from '../../../domain/config';
 import { ConfigService } from '../../../services/config.service';
 import { HeaderAccountMenuComponent } from './header-account-menu.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { User } from '../../../domain/user';
-
-export class MockConfigService {
-  getConfig(): Observable<Config> {
-    const config: Config = {
-      contextPath: '/wise',
-      logOutURL: '/logout',
-      currentTime: new Date('2018-10-17T00:00:00.0').getTime()
-    };
-    return Observable.create((observer) => {
-      observer.next(config);
-      observer.complete();
-    });
-  }
-}
+import { MockProvider } from 'ng-mocks';
 
 describe('HeaderAccountMenuComponent', () => {
   let component: HeaderAccountMenuComponent;
@@ -29,12 +13,18 @@ describe('HeaderAccountMenuComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HeaderAccountMenuComponent, MatMenuModule],
+      imports: [HeaderAccountMenuComponent],
       providers: [
-        { provide: ConfigService, useClass: MockConfigService },
+        MockProvider(ConfigService, {
+          getConfig: () =>
+            of({
+              contextPath: '/wise',
+              logOutURL: '/logout',
+              currentTime: new Date('2018-10-17T00:00:00.0').getTime()
+            })
+        }),
         provideRouter([]),
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
   }));
