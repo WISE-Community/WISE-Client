@@ -90,6 +90,7 @@ export class VLEComponent implements AfterViewInit {
   @HostListener('window:beforeunload', ['$event'])
   beforeUnload($event: BeforeUnloadEvent): void {
     if (this.isSurvey) {
+      // prevents the browser from showing a confirmation dialog
       $event.stopImmediatePropagation();
     }
     if (this.sessionService.isSessionActive()) {

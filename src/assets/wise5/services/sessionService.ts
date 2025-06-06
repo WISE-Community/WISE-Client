@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
-import { Observable, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class SessionService {
@@ -59,6 +59,13 @@ export class SessionService {
       this.sessionActive = false;
       window.location.href = '/';
     });
+  }
+
+  logOutWithoutHomeRedirect(): Observable<boolean> {
+    this.broadcastExit();
+    return this.http
+      .get(this.configService.getSessionLogOutURL())
+      .pipe(map(() => (this.sessionActive = false)));
   }
 
   isSessionActive(): boolean {

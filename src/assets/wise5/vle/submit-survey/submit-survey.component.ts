@@ -3,8 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectService } from '../../services/projectService';
 import { NodeStatusService } from '../../services/nodeStatusService';
-import { ConfigService } from '../../../../app/services/config.service';
-import { HttpClient } from '@angular/common/http';
+import { SessionService } from '../../services/sessionService';
 
 @Component({
   imports: [MatButtonModule, MatIconModule],
@@ -13,18 +12,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SubmitSurveyComponent {
   private genericSubmitWarning = $localize`Are you sure you want to submit your final responses?`;
-  private logOutURL: string;
 
   constructor(
-    private configService: ConfigService,
-    private http: HttpClient,
     private nodeStatusService: NodeStatusService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private sessionService: SessionService
   ) {}
-
-  ngOnInit(): void {
-    this.configService.getConfig().subscribe((config) => (this.logOutURL = config.logOutURL));
-  }
 
   protected submitSurvey(): void {
     const incompleteNodeIds: string[] = this.getIncompleteNodeIds();
@@ -59,6 +52,8 @@ export class SubmitSurveyComponent {
   }
 
   private logOut(): void {
-    this.http.get(this.logOutURL).subscribe(() => (window.location.href = `/survey/completed`));
+    this.sessionService
+      .logOutWithoutHomeRedirect()
+      .subscribe(() => (window.location.href = `/survey/completed`));
   }
 }
