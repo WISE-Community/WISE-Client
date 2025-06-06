@@ -6,6 +6,7 @@
 <mat-card *ngIf="!computerAvatarSelectorVisible" appearance="outlined" class="mat-elevation-z2">
   <component-header [component]="component"></component-header>
   <ai-chat-messages
+    class="max-h-[500px]"
     [messages]="messages"
     [workgroupId]="workgroupId"
     [waitingForComputerResponse]="waitingForComputerResponse"
