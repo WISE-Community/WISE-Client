@@ -133,7 +133,7 @@ export class AiChatStudentComponent extends ComponentStudent {
 
   initializeComputerAvatar: () => void;
 
-  scrollToBottom(): void {
+  private scrollToBottom(): void {
     setTimeout(() => {
       this.messagesContainer.nativeElement.scroll({
         top: this.messagesContainer.nativeElement.scrollHeight,
