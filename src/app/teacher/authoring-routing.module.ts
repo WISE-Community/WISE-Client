@@ -25,7 +25,6 @@ import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringToo
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
-import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
 
 const routes: Routes = [
   {
@@ -79,7 +78,10 @@ const routes: Routes = [
           { path: 'choose-move-location', component: ChooseMoveNodeLocationComponent },
           {
             path: 'edit-branch',
-            component: EditBranchComponent
+            loadComponent: () =>
+              import('../../assets/wise5/authoringTool/edit-branch/edit-branch.component').then(
+                (m) => m.EditBranchComponent
+              )
           },
           { path: 'info', component: ProjectInfoAuthoringComponent },
           { path: 'milestones', component: MilestonesAuthoringComponent },

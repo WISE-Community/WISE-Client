@@ -40,7 +40,6 @@ import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/com
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
-import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add-component/add-component.component';
@@ -79,7 +78,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     ComponentStudentModule,
     ComponentTypeButtonComponent,
     CopyComponentButtonComponent,
-    EditBranchComponent,
     EditNodeTitleComponent,
     EditUnitResourcesComponent,
     EditUnitTypeComponent,
