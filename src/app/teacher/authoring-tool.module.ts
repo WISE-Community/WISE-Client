@@ -11,7 +11,6 @@ import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
-import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
 import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
 import { NodeAdvancedAuthoringModule } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring.module';
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
@@ -39,7 +38,6 @@ import { NodeWithMoveAfterButtonComponent } from '../../assets/wise5/authoringTo
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
-import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
 import { CopyComponentButtonComponent } from '../../assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component';
@@ -81,8 +79,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
   imports: [
     AddComponentComponent,
     AddLessonButtonComponent,
-    AddLessonChooseTemplateComponent,
-    AddLessonConfigureComponent,
     AddProjectComponent,
     AddStepButtonComponent,
     AddYourOwnNodeComponent,

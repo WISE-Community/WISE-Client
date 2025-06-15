@@ -9,7 +9,6 @@ import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/proj
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
 import { NodeAdvancedAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component';
 import { NodeAdvancedConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component';
-import { AddLessonConfigureComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-configure/add-lesson-configure.component';
 import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AddYourOwnNodeComponent } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
 import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/choose-automated-assessment/choose-automated-assessment.component';
@@ -32,7 +31,6 @@ import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringToo
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
-import { AddLessonChooseTemplateComponent } from '../../assets/wise5/authoringTool/addLesson/add-lesson-choose-template/add-lesson-choose-template.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 import { CreateBranchComponent } from '../../assets/wise5/authoringTool/create-branch/create-branch.component';
 import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
@@ -58,23 +56,10 @@ const routes: Routes = [
           { path: '', component: ProjectAuthoringComponent },
           {
             path: 'add-lesson',
-            children: [
-              {
-                path: '',
-                component: AddLessonChooseTemplateComponent
-              },
-              {
-                path: 'configure',
-                component: AddLessonConfigureComponent
-              },
-              {
-                path: 'structure',
-                loadChildren: () =>
-                  import(
-                    '../../assets/wise5/authoringTool/structure/structure-authoring-routing.module'
-                  ).then((m) => m.StructureAuthoringRoutingModule)
-              }
-            ]
+            loadChildren: () =>
+              import('../../assets/wise5/authoringTool/addLesson/add-lesson-routing.module').then(
+                (m) => m.AddLessonRoutingModule
+              )
           },
           {
             path: 'add-node',
