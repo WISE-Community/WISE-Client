@@ -103,7 +103,10 @@ const routes: Routes = [
           },
           {
             path: 'create-branch',
-            component: CreateBranchComponent
+            loadComponent: () =>
+              import('../../assets/wise5/authoringTool/create-branch/create-branch.component').then(
+                (m) => m.CreateBranchComponent
+              )
           },
           { path: 'advanced', component: AdvancedProjectAuthoringComponent },
           {
