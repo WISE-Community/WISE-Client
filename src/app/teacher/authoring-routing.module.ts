@@ -71,8 +71,8 @@ const routes: Routes = [
                 path: 'structure',
                 loadChildren: () =>
                   import(
-                    '../../assets/wise5/authoringTool/structure/structure-authoring.module'
-                  ).then((m) => m.StructureAuthoringModule)
+                    '../../assets/wise5/authoringTool/structure/structure-authoring-routing.module'
+                  ).then((m) => m.StructureAuthoringRoutingModule)
               }
             ]
           },
