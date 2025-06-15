@@ -16,7 +16,6 @@ import { NodeAdvancedPathAuthoringComponent } from '../../assets/wise5/authoring
 import { NodeAdvancedJsonAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
-import { ProjectAssetAuthoringComponent } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
@@ -71,7 +70,10 @@ const routes: Routes = [
           { path: 'advanced', component: AdvancedProjectAuthoringComponent },
           {
             path: 'asset',
-            component: ProjectAssetAuthoringComponent
+            loadComponent: () =>
+              import(
+                '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component'
+              ).then((m) => m.ProjectAssetAuthoringComponent)
           },
           { path: 'choose-copy-location', component: ChooseCopyNodeLocationComponent },
           { path: 'choose-move-location', component: ChooseMoveNodeLocationComponent },

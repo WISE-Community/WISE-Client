@@ -16,7 +16,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
-import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
@@ -93,7 +92,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     NodeAdvancedAuthoringModule,
     NodeIconAndTitleComponent,
     NodeWithMoveAfterButtonComponent,
-    ProjectAssetAuthoringModule,
     ProjectListComponent,
     RouterModule,
     StudentTeacherCommonModule,
