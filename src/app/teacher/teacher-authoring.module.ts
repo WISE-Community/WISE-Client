@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-
-import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ProjectAssetService } from '../services/projectAssetService';
@@ -30,7 +28,6 @@ import { NodeService } from '../../assets/wise5/services/nodeService';
 import { TeacherNodeService } from '../../assets/wise5/services/teacherNodeService';
 import { MilestoneReportService } from '../../assets/wise5/services/milestoneReportService';
 import { AuthoringRoutingModule } from './authoring-routing.module';
-import { RouterModule } from '@angular/router';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 import { CreateBranchService } from '../../assets/wise5/services/createBranchService';
 import { EditBranchService } from '../../assets/wise5/services/editBranchService';
@@ -45,7 +42,7 @@ import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/
 import { RegisterProjectService } from '../../assets/wise5/services/registerProjectService';
 
 @NgModule({
-  imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
+  imports: [AuthoringToolModule, AuthoringRoutingModule],
   providers: [
     ClassroomStatusService,
     ComponentInfoService,
