@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { AddYourOwnNodeComponent } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
-import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
-import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
 import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
@@ -20,10 +17,7 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ProjectAssetAuthoringModule } from '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.module';
-import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
-import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/choose-automated-assessment/choose-automated-assessment.component';
-import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
 import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -36,7 +30,6 @@ import { InsertNodeInsideButtonComponent } from '../../assets/wise5/authoringToo
 import { NodeIconAndTitleComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-icon-and-title/node-icon-and-title.component';
 import { NodeWithMoveAfterButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-with-move-after-button/node-with-move-after-button.component';
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
-import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { EditNodeTitleComponent } from '../../assets/wise5/authoringTool/node/edit-node-title/edit-node-title.component';
 import { EditProjectLanguageSettingComponent } from '../../assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component';
@@ -61,7 +54,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     AdvancedProjectAuthoringComponent,
     ChooseMoveNodeLocationComponent,
     ConcurrentAuthorsMessageComponent,
-    ConfigureAutomatedAssessmentComponent,
     EditProjectLanguageSettingComponent,
     MilestonesAuthoringComponent,
     NodeAuthoringComponent,
@@ -80,16 +72,10 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     AddLessonButtonComponent,
     AddProjectComponent,
     AddStepButtonComponent,
-    AddYourOwnNodeComponent,
     AuthoringToolComponent,
-    ChooseAutomatedAssessmentComponent,
     ChooseCopyNodeLocationComponent,
     ChooseImportComponentComponent,
-    ChooseImportStepComponent,
-    ChooseImportUnitComponent,
-    ChooseNewNodeTemplateComponent,
     ChooseNewComponent,
-    ChooseSimulationComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,
     ComponentTypeButtonComponent,

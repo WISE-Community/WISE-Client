@@ -9,12 +9,6 @@ import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/proj
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
 import { NodeAdvancedAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component';
 import { NodeAdvancedConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component';
-import { ChooseNewNodeTemplateComponent } from '../../assets/wise5/authoringTool/addNode/choose-new-node-template/choose-new-node-template.component';
-import { AddYourOwnNodeComponent } from '../../assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component';
-import { ChooseAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/choose-automated-assessment/choose-automated-assessment.component';
-import { ConfigureAutomatedAssessmentComponent } from '../../assets/wise5/authoringTool/addNode/configure-automated-assessment/configure-automated-assessment.component';
-import { ChooseSimulationComponent } from '../../assets/wise5/authoringTool/addNode/choose-simulation/choose-simulation.component';
-import { ChooseImportStepComponent } from '../authoring-tool/import-step/choose-import-step/choose-import-step.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { NodeAdvancedGeneralAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/general/node-advanced-general-authoring.component';
 import { EditNodeRubricComponent } from '../../assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component';
@@ -32,7 +26,6 @@ import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringToo
 import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
-import { CreateBranchComponent } from '../../assets/wise5/authoringTool/create-branch/create-branch.component';
 import { EditBranchComponent } from '../../assets/wise5/authoringTool/edit-branch/edit-branch.component';
 
 const routes: Routes = [
@@ -63,43 +56,10 @@ const routes: Routes = [
           },
           {
             path: 'add-node',
-            children: [
-              {
-                path: 'add-your-own',
-                component: AddYourOwnNodeComponent
-              },
-              {
-                path: 'automated-assessment',
-                children: [
-                  {
-                    path: 'choose-item',
-                    component: ChooseAutomatedAssessmentComponent
-                  },
-                  { path: 'configure', component: ConfigureAutomatedAssessmentComponent }
-                ]
-              },
-              {
-                path: 'choose-template',
-                component: ChooseNewNodeTemplateComponent
-              },
-              {
-                path: 'import-step',
-                children: [
-                  {
-                    path: 'choose-step',
-                    component: ChooseImportStepComponent
-                  },
-                  {
-                    path: 'choose-unit',
-                    component: ChooseImportUnitComponent
-                  }
-                ]
-              },
-              {
-                path: 'simulation',
-                children: [{ path: 'choose-item', component: ChooseSimulationComponent }]
-              }
-            ]
+            loadChildren: () =>
+              import('../../assets/wise5/authoringTool/addNode/add-node-routing.module').then(
+                (m) => m.AddNodeRoutingModule
+              )
           },
           {
             path: 'create-branch',
