@@ -56,7 +56,6 @@ describe('ProjectAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         ConcurrentAuthorsMessageComponent,
-        NodeAuthoringComponent,
         ProjectAuthoringComponent,
         ProjectAuthoringLessonComponent,
         ProjectAuthoringStepComponent
@@ -75,6 +74,7 @@ describe('ProjectAuthoringComponent', () => {
         MatInputModule,
         MatMenuModule,
         MatTooltipModule,
+        NodeAuthoringComponent,
         NodeIconAndTitleComponent,
         StudentTeacherCommonServicesModule
       ],
