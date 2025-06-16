@@ -17,7 +17,6 @@ import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tiny
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
-import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
@@ -66,7 +65,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
   imports: [
     AddComponentComponent,
     AddLessonButtonComponent,
-    AddProjectComponent,
     AddStepButtonComponent,
     AuthoringToolComponent,
     ChooseCopyNodeLocationComponent,

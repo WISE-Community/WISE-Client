@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
-import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
 import { NodeAdvancedAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component';
@@ -36,7 +35,13 @@ const routes: Routes = [
             (m) => m.ProjectListComponent
           )
       },
-      { path: 'new-unit', component: AddProjectComponent },
+      {
+        path: 'new-unit',
+        loadComponent: () =>
+          import('../../assets/wise5/authoringTool/add-project/add-project.component').then(
+            (m) => m.AddProjectComponent
+          )
+      },
       {
         path: 'recovery/:unitId',
         component: RecoveryAuthoringComponent,
