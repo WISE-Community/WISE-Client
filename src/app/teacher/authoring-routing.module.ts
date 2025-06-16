@@ -4,7 +4,6 @@ import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authori
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
-import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
@@ -13,7 +12,6 @@ import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/rec
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
 import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
-import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
 const routes: Routes = [
@@ -89,27 +87,10 @@ const routes: Routes = [
           { path: 'milestones', component: MilestonesAuthoringComponent },
           {
             path: 'node/:nodeId',
-            component: NodeAuthoringParentComponent,
-            children: [
-              {
-                path: '',
-                component: NodeAuthoringComponent
-              },
-              {
-                path: 'advanced',
-                loadChildren: () =>
-                  import(
-                    '../../assets/wise5/authoringTool/node/advanced/node-advanced-routing.module'
-                  ).then((m) => m.NodeAdvancedRoutingModule)
-              },
-              {
-                path: 'import-component',
-                loadChildren: () =>
-                  import(
-                    '../../assets/wise5/authoringTool/importComponent/import-component-routing.module'
-                  ).then((m) => m.ImportComponentRoutingModule)
-              }
-            ]
+            loadChildren: () =>
+              import('../../assets/wise5/authoringTool/node/node-authoring-routing.module').then(
+                (m) => m.NodeAuthoringRoutingModule
+              )
           },
           { path: 'notebook', component: NotebookAuthoringComponent }
         ]
