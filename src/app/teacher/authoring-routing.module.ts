@@ -10,7 +10,6 @@ import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
 import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
-import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
 const routes: Routes = [
@@ -43,7 +42,10 @@ const routes: Routes = [
       },
       {
         path: 'unit/:unitId',
-        component: ProjectAuthoringParentComponent,
+        loadComponent: () =>
+          import(
+            '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component'
+          ).then((m) => m.ProjectAuthoringParentComponent),
         resolve: { project: AuthoringProjectResolver },
         children: [
           { path: '', component: ProjectAuthoringComponent },

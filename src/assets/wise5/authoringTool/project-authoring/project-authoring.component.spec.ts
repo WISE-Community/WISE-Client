@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAuthoringComponent } from './project-authoring.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
@@ -10,7 +9,6 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
 import { NodeAuthoringComponent } from '../node/node-authoring/node-authoring.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -55,7 +53,6 @@ describe('ProjectAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ConcurrentAuthorsMessageComponent,
         ProjectAuthoringComponent,
         ProjectAuthoringLessonComponent,
         ProjectAuthoringStepComponent
@@ -91,8 +88,7 @@ describe('ProjectAuthoringComponent', () => {
         TeacherProjectService,
         TeacherProjectTranslationService,
         TeacherWebSocketService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
     projectService = TestBed.inject(TeacherProjectService);
