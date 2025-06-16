@@ -7,7 +7,6 @@ import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-c
 import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
-import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
@@ -50,7 +49,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     ProjectAuthoringParentComponent,
     ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent,
-    RecoveryAuthoringComponent,
     RubricAuthoringComponent
   ],
   imports: [

@@ -8,7 +8,6 @@ import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringT
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
-import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
 import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
@@ -36,7 +35,10 @@ const routes: Routes = [
       },
       {
         path: 'recovery/:unitId',
-        component: RecoveryAuthoringComponent,
+        loadComponent: () =>
+          import(
+            '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component'
+          ).then((m) => m.RecoveryAuthoringComponent),
         resolve: { project: RecoveryAuthoringProjectResolver }
       },
       {

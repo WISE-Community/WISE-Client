@@ -4,12 +4,28 @@ import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { NodeRecoveryAnalysis } from '../../../../app/domain/nodeRecoveryAnalysis';
 import { isValidJSONString } from '../../common/string/string';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    selector: 'recovery-authoring',
-    templateUrl: './recovery-authoring.component.html',
-    styleUrls: ['./recovery-authoring.component.scss'],
-    standalone: false
+  imports: [
+    CdkTextareaAutosize,
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    RouterModule
+  ],
+  styleUrl: './recovery-authoring.component.scss',
+  templateUrl: './recovery-authoring.component.html'
 })
 export class RecoveryAuthoringComponent implements OnInit {
   badNodes: NodeRecoveryAnalysis[] = [];
