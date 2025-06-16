@@ -43,7 +43,6 @@ import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-ste
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AddComponentComponent } from '../../assets/wise5/authoringTool/node/add-component/add-component.component';
-import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
 import { EditUnitResourcesComponent } from '../../assets/wise5/authoringTool/edit-unit-resources/edit-unit-resources.component';
 import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-unit-type/edit-unit-type.component';
 
@@ -72,7 +71,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     AddStepButtonComponent,
     AuthoringToolComponent,
     ChooseCopyNodeLocationComponent,
-    ChooseImportComponentComponent,
     ChooseNewComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,

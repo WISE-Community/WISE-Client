@@ -18,11 +18,9 @@ import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/m
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
-import { ChooseImportComponentComponent } from '../../assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component';
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
 import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
 import { ProjectAuthoringParentComponent } from '../../assets/wise5/authoringTool/project-authoring-parent/project-authoring-parent.component';
-import { ChooseImportUnitComponent } from '../authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 import { NodeAuthoringParentComponent } from '../../assets/wise5/authoringTool/node/node-authoring-parent/node-authoring-parent.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
@@ -106,16 +104,10 @@ const routes: Routes = [
               },
               {
                 path: 'import-component',
-                children: [
-                  {
-                    path: 'choose-component',
-                    component: ChooseImportComponentComponent
-                  },
-                  {
-                    path: 'choose-unit',
-                    component: ChooseImportUnitComponent
-                  }
-                ]
+                loadChildren: () =>
+                  import(
+                    '../../assets/wise5/authoringTool/importComponent/import-component-routing.module'
+                  ).then((m) => m.ImportComponentRoutingModule)
               }
             ]
           },
