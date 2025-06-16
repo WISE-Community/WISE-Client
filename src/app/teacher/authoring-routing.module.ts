@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
-import { ProjectListComponent } from '../../assets/wise5/authoringTool/project-list/project-list.component';
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { AddProjectComponent } from '../../assets/wise5/authoringTool/add-project/add-project.component';
@@ -30,7 +29,13 @@ const routes: Routes = [
     component: AuthoringToolComponent,
     resolve: { config: AuthoringConfigResolver },
     children: [
-      { path: 'home', component: ProjectListComponent },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('../../assets/wise5/authoringTool/project-list/project-list.component').then(
+            (m) => m.ProjectListComponent
+          )
+      },
       { path: 'new-unit', component: AddProjectComponent },
       {
         path: 'recovery/:unitId',
