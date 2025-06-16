@@ -5,13 +5,7 @@ import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
-import { NodeAdvancedAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component';
-import { NodeAdvancedConstraintAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component';
 import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
-import { NodeAdvancedGeneralAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/general/node-advanced-general-authoring.component';
-import { EditNodeRubricComponent } from '../../assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component';
-import { NodeAdvancedPathAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component';
-import { NodeAdvancedJsonAuthoringComponent } from '../../assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
@@ -103,14 +97,10 @@ const routes: Routes = [
               },
               {
                 path: 'advanced',
-                component: NodeAdvancedAuthoringComponent,
-                children: [
-                  { path: 'constraint', component: NodeAdvancedConstraintAuthoringComponent },
-                  { path: 'general', component: NodeAdvancedGeneralAuthoringComponent },
-                  { path: 'json', component: NodeAdvancedJsonAuthoringComponent },
-                  { path: 'path', component: NodeAdvancedPathAuthoringComponent },
-                  { path: 'rubric', component: EditNodeRubricComponent }
-                ]
+                loadChildren: () =>
+                  import(
+                    '../../assets/wise5/authoringTool/node/advanced/node-advanced-routing.module'
+                  ).then((m) => m.NodeAdvancedRoutingModule)
               },
               {
                 path: 'import-component',

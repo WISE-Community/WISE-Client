@@ -9,7 +9,6 @@ import { ComponentStudentModule } from '../../assets/wise5/components/component/
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { RecoveryAuthoringComponent } from '../../assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component';
 import { ConcurrentAuthorsMessageComponent } from '../../assets/wise5/authoringTool/concurrent-authors-message/concurrent-authors-message.component';
-import { NodeAdvancedAuthoringModule } from '../../assets/wise5/authoringTool/node/advanced/node-advanced-authoring.module';
 import { NodeAuthoringComponent } from '../../assets/wise5/authoringTool/node/node-authoring/node-authoring.component';
 import { TeacherNodeIconComponent } from '../../assets/wise5/authoringTool/teacher-node-icon/teacher-node-icon.component';
 import { MatChipsModule } from '@angular/material/chips';
@@ -82,7 +81,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
     NgSelectModule,
-    NodeAdvancedAuthoringModule,
     NodeIconAndTitleComponent,
     NodeWithMoveAfterButtonComponent,
     RouterModule,

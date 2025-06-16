@@ -11,6 +11,7 @@ import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor
 import { RouterModule } from '@angular/router';
 import { TranslatableRichTextEditorComponent } from '../../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { RequiredErrorLabelComponent } from './required-error-label/required-error-label.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { RequiredErrorLabelComponent } from './required-error-label/required-err
     NodeAdvancedPathAuthoringComponent
   ],
   imports: [
+    CommonModule,
     NodeConstraintAuthoringComponent,
     RequiredErrorLabelComponent,
     RouterModule,
