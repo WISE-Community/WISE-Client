@@ -6,7 +6,6 @@ import { ComponentStudentModule } from '../../assets/wise5/components/component/
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
-import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
@@ -31,7 +30,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
   declarations: [
     ChooseMoveNodeLocationComponent,
     MilestonesAuthoringComponent,
-    NotebookAuthoringComponent,
     ProjectAuthoringComponent,
     ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent
