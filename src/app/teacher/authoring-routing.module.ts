@@ -5,7 +5,6 @@ import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
-import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
 import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
@@ -92,7 +91,13 @@ const routes: Routes = [
                 (m) => m.EditBranchComponent
               )
           },
-          { path: 'info', component: ProjectInfoAuthoringComponent },
+          {
+            path: 'info',
+            loadComponent: () =>
+              import(
+                '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component'
+              ).then((m) => m.ProjectInfoAuthoringComponent)
+          },
           { path: 'milestones', component: MilestonesAuthoringComponent },
           {
             path: 'node/:nodeId',
