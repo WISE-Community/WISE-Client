@@ -933,7 +933,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="269492429034038872" datatype="html">
@@ -13356,8 +13356,8 @@ The branches will be removed but the steps will remain in the unit.</source>
       <trans-unit id="6112043941095499782" datatype="html">
         <source>Edit Unit Rubric</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/rubric/rubric-authoring.component.html</context>
-          <context context-type="linenumber">1,5</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/rubric/rubric-authoring.component.ts</context>
+          <context context-type="linenumber">9,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8132057036388056878" datatype="html">

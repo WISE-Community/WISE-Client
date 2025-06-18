@@ -4,7 +4,6 @@ import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authori
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
-import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ProjectInfoAuthoringComponent } from '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component';
 import { NotebookAuthoringComponent } from '../../assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component';
@@ -70,7 +69,13 @@ const routes: Routes = [
                 (m) => m.CreateBranchComponent
               )
           },
-          { path: 'advanced', component: AdvancedProjectAuthoringComponent },
+          {
+            path: 'advanced',
+            loadComponent: () =>
+              import(
+                '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component'
+              ).then((m) => m.AdvancedProjectAuthoringComponent)
+          },
           {
             path: 'asset',
             loadComponent: () =>

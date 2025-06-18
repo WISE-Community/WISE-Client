@@ -6,12 +6,44 @@ import { isValidJSONString } from '../../common/string/string';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 import { filter } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { RubricAuthoringComponent } from '../rubric/rubric-authoring.component';
 
 @Component({
-    selector: 'advanced-project-authoring',
-    templateUrl: 'advanced-project-authoring.component.html',
-    styleUrls: ['./advanced-project-authoring.component.scss'],
-    standalone: false
+  imports: [
+    CdkTextareaAutosize,
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatRadioModule,
+    MatTooltipModule,
+    RubricAuthoringComponent
+  ],
+  styles: [
+    `
+      .rubric-div {
+        margin-bottom: 20px;
+      }
+
+      .mat-icon {
+        margin: 0px;
+      }
+    `
+  ],
+  templateUrl: 'advanced-project-authoring.component.html'
 })
 export class AdvancedProjectAuthoringComponent {
   protected jsonDisplayed: boolean;

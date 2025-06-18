@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { AdvancedProjectAuthoringComponent } from '../../assets/wise5/authoringTool/advanced/advanced-project-authoring.component';
-import { RubricAuthoringComponent } from '../../assets/wise5/authoringTool/rubric/rubric-authoring.component';
 import { ChooseNewComponent } from '../authoring-tool/add-component/choose-new-component/choose-new-component.component';
 import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
@@ -36,7 +34,6 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
 
 @NgModule({
   declarations: [
-    AdvancedProjectAuthoringComponent,
     ChooseMoveNodeLocationComponent,
     EditProjectLanguageSettingComponent,
     MilestonesAuthoringComponent,
@@ -44,8 +41,7 @@ import { EditUnitTypeComponent } from '../../assets/wise5/authoringTool/edit-uni
     ProjectInfoAuthoringComponent,
     ProjectAuthoringComponent,
     ProjectAuthoringLessonComponent,
-    ProjectAuthoringStepComponent,
-    RubricAuthoringComponent
+    ProjectAuthoringStepComponent
   ],
   imports: [
     AddLessonButtonComponent,
