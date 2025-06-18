@@ -15,8 +15,8 @@ import { TranslatableTextareaComponent } from '../components/translatable-textar
 import { TranslatableRichTextEditorComponent } from '../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { MatInputModule } from '@angular/material/input';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { WiseTinymceEditorModule } from '../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { WiseAuthoringTinymceEditorComponent } from '../../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 
 @Component({
   imports: [
@@ -31,7 +31,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
     TranslatableTextareaComponent,
-    WiseTinymceEditorModule
+    WiseAuthoringTinymceEditorComponent
   ],
   styleUrl: './notebook-authoring.component.scss',
   templateUrl: './notebook-authoring.component.html'

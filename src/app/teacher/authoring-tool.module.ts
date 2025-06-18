@@ -5,7 +5,6 @@ import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { MatChipsModule } from '@angular/material/chips';
-import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
@@ -25,6 +24,7 @@ import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authorin
 import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
     TranslatableTextareaComponent,
-    WiseTinymceEditorModule
+    WiseAuthoringTinymceEditorComponent
   ]
 })
 export class AuthoringToolModule {}
