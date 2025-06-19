@@ -9,11 +9,7 @@ import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/m
 import { MatBadgeModule } from '@angular/material/badge';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
-import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
-import { InsertNodeAfterButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/insert-node-after-button/insert-node-after-button.component';
-import { InsertNodeInsideButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/insert-node-inside-button/insert-node-inside-button.component';
 import { NodeIconAndTitleComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-icon-and-title/node-icon-and-title.component';
-import { NodeWithMoveAfterButtonComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-with-move-after-button/node-with-move-after-button.component';
 import { ProjectAuthoringLessonComponent } from '../../assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component';
 import { ProjectAuthoringStepComponent } from '../../assets/wise5/authoringTool/project-authoring-step/project-authoring-step.component';
 import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-lesson-button/add-lesson-button.component';
@@ -27,7 +23,6 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
 
 @NgModule({
   declarations: [
-    ChooseMoveNodeLocationComponent,
     MilestonesAuthoringComponent,
     ProjectAuthoringComponent,
     ProjectAuthoringLessonComponent
@@ -43,10 +38,7 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
     MatBadgeModule,
     MatChipsModule,
     MatExpansionModule,
-    InsertNodeAfterButtonComponent,
-    InsertNodeInsideButtonComponent,
     NodeIconAndTitleComponent,
-    NodeWithMoveAfterButtonComponent,
     ProjectAuthoringStepComponent,
     RouterModule,
     StudentTeacherCommonModule,
