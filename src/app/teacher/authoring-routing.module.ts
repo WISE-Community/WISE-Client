@@ -6,7 +6,6 @@ import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { ChooseMoveNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-move-node-location/choose-move-node-location.component';
-import { ChooseCopyNodeLocationComponent } from '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
 const routes: Routes = [
@@ -81,7 +80,13 @@ const routes: Routes = [
                 '../../assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component'
               ).then((m) => m.ProjectAssetAuthoringComponent)
           },
-          { path: 'choose-copy-location', component: ChooseCopyNodeLocationComponent },
+          {
+            path: 'choose-copy-location',
+            loadComponent: () =>
+              import(
+                '../../assets/wise5/authoringTool/choose-node-location/choose-copy-node-location/choose-copy-node-location.component'
+              ).then((m) => m.ChooseCopyNodeLocationComponent)
+          },
           { path: 'choose-move-location', component: ChooseMoveNodeLocationComponent },
           {
             path: 'edit-branch',
