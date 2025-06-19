@@ -45,7 +45,7 @@ const node2 = { id: nodeId2, title: 'Step 2' };
 describe('ProjectAuthoringLessonComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ProjectAuthoringLessonComponent, ProjectAuthoringStepComponent],
+      declarations: [ProjectAuthoringLessonComponent],
       imports: [
         AddStepButtonComponent,
         BrowserAnimationsModule,
@@ -56,6 +56,7 @@ describe('ProjectAuthoringLessonComponent', () => {
         MatIconModule,
         MatMenuModule,
         NodeIconAndTitleComponent,
+        ProjectAuthoringStepComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [

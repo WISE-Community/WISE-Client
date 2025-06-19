@@ -31,8 +31,7 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
     ChooseMoveNodeLocationComponent,
     MilestonesAuthoringComponent,
     ProjectAuthoringComponent,
-    ProjectAuthoringLessonComponent,
-    ProjectAuthoringStepComponent
+    ProjectAuthoringLessonComponent
   ],
   imports: [
     AddLessonButtonComponent,
@@ -50,6 +49,7 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
     InsertNodeInsideButtonComponent,
     NodeIconAndTitleComponent,
     NodeWithMoveAfterButtonComponent,
+    ProjectAuthoringStepComponent,
     RouterModule,
     StudentTeacherCommonModule,
     TranslatableInputComponent,

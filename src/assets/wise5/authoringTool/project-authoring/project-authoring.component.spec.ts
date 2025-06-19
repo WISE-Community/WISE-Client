@@ -52,11 +52,7 @@ let router: Router;
 describe('ProjectAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ProjectAuthoringComponent,
-        ProjectAuthoringLessonComponent,
-        ProjectAuthoringStepComponent
-      ],
+      declarations: [ProjectAuthoringComponent, ProjectAuthoringLessonComponent],
       imports: [
         AddLessonButtonComponent,
         AddStepButtonComponent,
@@ -73,6 +69,7 @@ describe('ProjectAuthoringComponent', () => {
         MatTooltipModule,
         NodeAuthoringComponent,
         NodeIconAndTitleComponent,
+        ProjectAuthoringStepComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [
