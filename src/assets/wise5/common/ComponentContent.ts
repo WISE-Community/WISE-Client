@@ -17,6 +17,7 @@ export interface ComponentContent {
   showSaveButton?: boolean;
   showSubmitButton?: boolean;
   type: string;
+  timeLimit?: number;
 }
 
 export function hasConnectedComponent(

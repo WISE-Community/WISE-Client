@@ -37,7 +37,11 @@
       <run-ended-and-locked-message class="notice" />
     }
     @if (layoutState === 'node') {
-      <node class="top" [node]="currentNode" />
+      @if (currentNode.timed) {
+        <timed-node class="top" [node]="currentNode" />
+      } @else {
+        <node class="top" [node]="currentNode" />
+      }
     }
     @if (layoutState === 'nav') {
       <navigation class="top" />

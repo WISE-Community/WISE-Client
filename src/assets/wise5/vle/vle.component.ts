@@ -30,6 +30,7 @@ import { Subscription } from 'rxjs';
 import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
 import { VLEProjectService } from './vleProjectService';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
+import { TimedNodeComponent } from './timed-node/timed-node.component';
 
 @Component({
   imports: [
@@ -45,7 +46,8 @@ import { WiseLinkService } from '../../../app/services/wiseLinkService';
     RunEndedAndLockedMessageComponent,
     SafeUrl,
     StepToolsComponent,
-    TopBarComponent
+    TopBarComponent,
+    TimedNodeComponent
   ],
   selector: 'vle',
   styleUrl: './vle.component.scss',

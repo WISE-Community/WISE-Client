@@ -178,6 +178,11 @@ export class ProjectService {
     return node != null && node.type !== 'group';
   }
 
+  isTimedNode(id: string): boolean {
+    const node = this.getNodeById(id);
+    return node != null && node.timed;
+  }
+
   getGroups(): any[] {
     return this.groupNodes;
   }
