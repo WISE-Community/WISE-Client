@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
@@ -8,7 +7,10 @@ import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.r
 const routes: Routes = [
   {
     path: '',
-    component: AuthoringToolComponent,
+    loadComponent: () =>
+      import('../../assets/wise5/authoringTool/authoring-tool.component').then(
+        (m) => m.AuthoringToolComponent
+      ),
     resolve: { config: AuthoringConfigResolver },
     children: [
       {

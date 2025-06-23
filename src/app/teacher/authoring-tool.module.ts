@@ -6,7 +6,6 @@ import { ComponentStudentModule } from '../../assets/wise5/components/component/
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
-import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 import { NodeIconAndTitleComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-icon-and-title/node-icon-and-title.component';
 import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
@@ -17,7 +16,6 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
 
 @NgModule({
   imports: [
-    AuthoringToolComponent,
     ChooseNewComponent,
     ComponentAuthoringModule,
     ComponentStudentModule,
