@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
-import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
 const routes: Routes = [
@@ -112,7 +111,13 @@ const routes: Routes = [
                 '../../assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component'
               ).then((m) => m.ProjectInfoAuthoringComponent)
           },
-          { path: 'milestones', component: MilestonesAuthoringComponent },
+          {
+            path: 'milestones',
+            loadComponent: () =>
+              import(
+                '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component'
+              ).then((m) => m.MilestonesAuthoringComponent)
+          },
           {
             path: 'node/:nodeId',
             loadChildren: () =>

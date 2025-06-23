@@ -5,7 +5,6 @@ import { ComponentAuthoringModule } from './component-authoring.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { MatChipsModule } from '@angular/material/chips';
-import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 import { NodeIconAndTitleComponent } from '../../assets/wise5/authoringTool/choose-node-location/node-icon-and-title/node-icon-and-title.component';
@@ -17,7 +16,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 
 @NgModule({
-  declarations: [MilestonesAuthoringComponent],
   imports: [
     AuthoringToolComponent,
     ChooseNewComponent,
