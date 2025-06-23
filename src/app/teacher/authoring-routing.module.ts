@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthoringToolComponent } from '../../assets/wise5/authoringTool/authoring-tool.component';
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
-import { ProjectAuthoringComponent } from '../../assets/wise5/authoringTool/project-authoring/project-authoring.component';
 import { MilestonesAuthoringComponent } from '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
@@ -43,7 +42,13 @@ const routes: Routes = [
           ).then((m) => m.ProjectAuthoringParentComponent),
         resolve: { project: AuthoringProjectResolver },
         children: [
-          { path: '', component: ProjectAuthoringComponent },
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                '../../assets/wise5/authoringTool/project-authoring/project-authoring.component'
+              ).then((m) => m.ProjectAuthoringComponent)
+          },
           {
             path: 'add-lesson',
             loadChildren: () =>

@@ -13145,7 +13145,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>There are no lessons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">59,61</context>
+          <context context-type="linenumber">59,62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1001733534902851872" datatype="html">
@@ -13166,7 +13166,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Are you sure you want to delete the <x id="PH" equiv-text="selectedNodeIds.length"/> selected item(s)?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5051388252985578877" datatype="html">

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAuthoringComponent } from './project-authoring.component';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { CopyNodesService } from '../../services/copyNodesService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { DeleteNodeService } from '../../services/deleteNodeService';
@@ -8,35 +7,29 @@ import { MoveNodesService } from '../../services/moveNodesService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
-import { MatDialogModule } from '@angular/material/dialog';
-import { NodeAuthoringComponent } from '../node/node-authoring/node-authoring.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import * as demoProjectJSON_import from '../../../../app/services/sampleData/curriculum/Demo.project.json';
 import { copy } from '../../common/object/object';
 import { ProjectAuthoringLessonComponent } from '../project-authoring-lesson/project-authoring-lesson.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
 import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProjectAuthoringHarness } from './project-authoring.harness';
-import { MatButtonModule } from '@angular/material/button';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { ActivatedRoute, Router, provideRouter } from '@angular/router';
-import { MatMenuModule } from '@angular/material/menu';
 import { ConfigService } from '../../services/configService';
 import { of } from 'rxjs/internal/observable/of';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
 import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
 import { RemoveNodeIdFromTransitionsService } from '../../services/removeNodeIdFromTransitionsService';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { BranchService } from '../../services/branchService';
+import { PathService } from '../../services/pathService';
+import { ComponentServiceLookupService } from '../../services/componentServiceLookupService';
+import { MockProviders } from 'ng-mocks';
+import { ConstraintService } from '../../services/constraintService';
+import { ProjectService } from '../../services/projectService';
+import { Node } from '../../common/Node';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
 let configService: ConfigService;
 let component: ProjectAuthoringComponent;
@@ -51,36 +44,30 @@ let router: Router;
 describe('ProjectAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProjectAuthoringComponent],
       imports: [
-        AddLessonButtonComponent,
-        BrowserAnimationsModule,
-        FormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatExpansionModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatMenuModule,
-        MatTooltipModule,
-        NodeAuthoringComponent,
         NodeIconAndTitleComponent,
+        ProjectAuthoringComponent,
         ProjectAuthoringLessonComponent,
-        ProjectAuthoringStepComponent,
-        StudentTeacherCommonServicesModule
+        ProjectAuthoringStepComponent
       ],
       providers: [
+        BranchService,
         ClassroomStatusService,
+        MockProviders(
+          ComponentServiceLookupService,
+          ConstraintService,
+          ProjectService,
+          TeacherDataService
+        ),
+        ConfigService,
         CopyNodesService,
         CopyTranslationsService,
         DeleteNodeService,
         DeleteTranslationsService,
         MoveNodesService,
+        PathService,
         provideRouter([]),
         RemoveNodeIdFromTransitionsService,
-        TeacherDataService,
         TeacherProjectService,
         TeacherProjectTranslationService,
         TeacherWebSocketService,
@@ -105,6 +92,7 @@ describe('ProjectAuthoringComponent', () => {
       username: 'spongebobsquarepants'
     });
     spyOn(http, 'post').and.returnValue(of({ status: 'success' }) as any);
+    spyOn(TestBed.inject(ProjectService), 'getNode').and.returnValue(new Node());
     fixture = TestBed.createComponent(ProjectAuthoringComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

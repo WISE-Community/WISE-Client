@@ -57,7 +57,7 @@
 <div class="all-nodes-div" fxLayout="column" fxLayoutGap="8px">
   <div *ngIf="lessons.length === 0" fxLayout="row" fxLayoutAlign="start center">
     <div i18n>There are no lessons</div>
-    <add-lesson-button [active]="true"></add-lesson-button>
+    <add-lesson-button [active]="true" />
   </div>
   <div *ngFor="let lesson of lessons; let first = first" fxLayout="row" fxLayoutGap="4px">
     <project-authoring-lesson
@@ -69,13 +69,13 @@
       (onExpandedChanged)="onExpandedChanged($event)"
       fxFlex
     />
-    <add-lesson-button [active]="true" [first]="first" [lessonId]="lesson.id"></add-lesson-button>
+    <add-lesson-button [active]="true" [first]="first" [lessonId]="lesson.id" />
   </div>
   <div>
     <h6 class="unused-header" i18n>Unused Lessons</h6>
     <div *ngIf="inactiveGroupNodes.length === 0" fxLayout="row" fxLayoutAlign="start center">
       <div i18n>There are no unused lessons</div>
-      <add-lesson-button></add-lesson-button>
+      <add-lesson-button />
     </div>
     <div fxLayout="column" fxLayoutGap="8px">
       <div
@@ -92,7 +92,7 @@
           (onExpandedChanged)="onExpandedChanged($event)"
           fxFlex
         />
-        <add-lesson-button [first]="first" [lessonId]="inactiveGroupNode.id"></add-lesson-button>
+        <add-lesson-button [first]="first" [lessonId]="inactiveGroupNode.id" />
       </div>
     </div>
     <div>

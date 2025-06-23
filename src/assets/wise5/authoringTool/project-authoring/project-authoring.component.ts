@@ -1,10 +1,18 @@
 import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { ProjectAuthoringLessonComponent } from '../project-authoring-lesson/project-authoring-lesson.component';
+import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
+import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
 import { DeleteNodeService } from '../../services/deleteNodeService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
-import $ from 'jquery';
 import { Subscription } from 'rxjs';
-import { temporarilyHighlightElement } from '../../common/dom/dom';
+import { scrollToElement, temporarilyHighlightElement } from '../../common/dom/dom';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelectNodeEvent } from '../domain/select-node-event';
 import { NodeTypeSelected } from '../domain/node-type-selected';
@@ -14,10 +22,20 @@ import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
 
 @Component({
-    selector: 'project-authoring',
-    templateUrl: './project-authoring.component.html',
-    styleUrls: ['./project-authoring.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
+    FlexLayoutModule,
+    ProjectAuthoringLessonComponent,
+    ProjectAuthoringStepComponent,
+    AddLessonButtonComponent
+  ],
+  selector: 'project-authoring',
+  styleUrl: './project-authoring.component.scss',
+  templateUrl: './project-authoring.component.html'
 })
 export class ProjectAuthoringComponent implements OnInit {
   protected allLessonsCollapsed: Signal<boolean> = computed(() =>
@@ -151,13 +169,7 @@ export class ProjectAuthoringComponent implements OnInit {
     if (newNodes.length > 0) {
       setTimeout(() => {
         newNodes.forEach((newNode) => temporarilyHighlightElement(newNode.id));
-        const firstNodeElementAdded = $('#' + newNodes[0].id);
-        $('#content').animate(
-          {
-            scrollTop: firstNodeElementAdded.prop('offsetTop') - 60
-          },
-          1000
-        );
+        scrollToElement(newNodes[0].id);
       });
     }
   }
