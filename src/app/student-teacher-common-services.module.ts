@@ -60,6 +60,7 @@ import { TeacherNodeService } from '../assets/wise5/services/teacherNodeService'
 import { TeacherWebSocketService } from '../assets/wise5/services/teacherWebSocketService';
 import { VLEProjectService } from '../assets/wise5/vle/vleProjectService';
 import { WiseLinkService } from './services/wiseLinkService';
+import { TimedNodeService } from '../assets/wise5/services/timedNodeService';
 
 @NgModule({
   providers: [
@@ -121,6 +122,7 @@ import { WiseLinkService } from './services/wiseLinkService';
     TeacherDataService,
     TeacherNodeService,
     TeacherWebSocketService,
+    TimedNodeService,
     StudentProjectTranslationService,
     VLEProjectService,
     WiseLinkService

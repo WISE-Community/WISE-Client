@@ -18,9 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { SubmitSurveyComponent } from '../submit-survey/submit-survey.component';
 import { MatCardModule } from '@angular/material/card';
+import { TimedNodeService } from '../../services/timedNodeService';
 
 @Component({
-  selector: 'timed-node',
   imports: [
     CommonModule,
     ComponentComponent,
@@ -32,8 +32,9 @@ import { MatCardModule } from '@angular/material/card';
     MatDividerModule,
     SubmitSurveyComponent
   ],
-  templateUrl: './timed-node.component.html',
-  styleUrl: './timed-node.component.scss'
+  selector: 'timed-node',
+  styleUrl: './timed-node.component.scss',
+  templateUrl: './timed-node.component.html'
 })
 export class TimedNodeComponent extends NodeComponent {
   private componentTimers: number[];
@@ -50,7 +51,8 @@ export class TimedNodeComponent extends NodeComponent {
     protected nodeStatusService: NodeStatusService,
     protected projectService: VLEProjectService,
     protected sessionService: SessionService,
-    protected studentDataService: StudentDataService
+    protected studentDataService: StudentDataService,
+    private timedNodeService: TimedNodeService
   ) {
     super(
       componentService,
@@ -67,9 +69,10 @@ export class TimedNodeComponent extends NodeComponent {
   async ngOnInit(): Promise<void> {
     super.ngOnInit();
     await this.skipComponentsWithWork();
+    this.timedNodeService.broadcastIsNodeCompleted(this.stepCompleted);
     if (!this.stepCompleted) {
       this.componentTimers = this.node.components.map((component: ComponentContent) => {
-        return component.timeLimit ?? -1;
+        return component.timeLimit ?? 0;
       });
       this.components.forEach((component, index) => {
         this.componentToVisible[component.id] = index === this.currentComponentIndex;
@@ -121,6 +124,7 @@ export class TimedNodeComponent extends NodeComponent {
       this.startComponentTimer();
     } else {
       this.stepCompleted = true;
+      this.timedNodeService.broadcastIsNodeCompleted(true);
     }
   }
 

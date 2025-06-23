@@ -454,4 +454,8 @@ export class VLEComponent implements AfterViewInit {
       }
     );
   }
+
+  protected isCurrentNodeTimed(): boolean {
+    return this.currentNode.timed !== null && this.currentNode.timed;
+  }
 }
