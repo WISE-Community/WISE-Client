@@ -569,6 +569,11 @@ export class ProjectService {
     return null;
   }
 
+  getNodeIsTimed(nodeId: string): boolean {
+    const node = this.getNodeById(nodeId);
+    return node.timed;
+  }
+
   getParentGroup(nodeId = ''): any {
     const node = this.getNodeById(nodeId);
     if (node != null) {
