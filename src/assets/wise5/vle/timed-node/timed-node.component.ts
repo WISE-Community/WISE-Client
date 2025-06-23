@@ -1,24 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { NodeComponent } from '../node/node.component';
+import { ComponentComponent } from '../../components/component/component.component';
+import { ComponentContent } from '../../common/ComponentContent';
 import { ComponentService } from '../../components/componentService';
+import { ComponentStateInfoComponent } from '../../common/component-state-info/component-state-info.component';
 import { ConfigService } from '../../services/configService';
 import { ConstraintService } from '../../services/constraintService';
-import { StudentNodeService } from '../../services/studentNodeService';
-import { NodeStatusService } from '../../services/nodeStatusService';
-import { VLEProjectService } from '../vleProjectService';
-import { SessionService } from '../../services/sessionService';
-import { StudentDataService } from '../../services/studentDataService';
-import { ComponentContent } from '../../common/ComponentContent';
-import { CommonModule } from '@angular/common';
-import { ComponentComponent } from '../../components/component/component.component';
-import { ComponentStateInfoComponent } from '../../common/component-state-info/component-state-info.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { SubmitSurveyComponent } from '../submit-survey/submit-survey.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { NodeComponent } from '../node/node.component';
+import { NodeStatusService } from '../../services/nodeStatusService';
+import { SessionService } from '../../services/sessionService';
+import { StudentDataService } from '../../services/studentDataService';
+import { StudentNodeService } from '../../services/studentNodeService';
+import { SubmitSurveyComponent } from '../submit-survey/submit-survey.component';
 import { TimedNodeService } from '../../services/timedNodeService';
+import { VLEProjectService } from '../vleProjectService';
 
 @Component({
   imports: [
@@ -68,7 +68,7 @@ export class TimedNodeComponent extends NodeComponent {
 
   async ngOnInit(): Promise<void> {
     super.ngOnInit();
-    await this.skipComponentsWithWork();
+    await this.skipViewedComponents();
     this.timedNodeService.broadcastIsNodeCompleted(this.stepCompleted);
     if (!this.stepCompleted) {
       this.componentTimers = this.node.components.map((component: ComponentContent) => {
@@ -81,25 +81,31 @@ export class TimedNodeComponent extends NodeComponent {
     }
   }
 
-  private async skipComponentsWithWork() {
+  private async skipViewedComponents(): Promise<void> {
     const studentWork = await this.studentDataService.retrieveStudentDataForSignedInStudent();
-    const componentsWithWork = studentWork.componentStates.map(
-      (componentState) => componentState.componentId
-    );
+    const componentsViewed = studentWork.events
+      .filter((event) => event.event === 'componentViewed')
+      .map((event) => event.componentId);
+    this.advanceCurrentComponentIndex(componentsViewed);
+    this.setStepCompletedIfNecessary();
+  }
+
+  private advanceCurrentComponentIndex(componentsViewed: string[]): void {
     this.node.components.forEach((component, componentIndex) => {
-      if (
-        componentsWithWork.includes(component.id) &&
-        componentIndex >= this.currentComponentIndex
-      ) {
+      if (componentsViewed.includes(component.id) && componentIndex >= this.currentComponentIndex) {
         this.currentComponentIndex = componentIndex + 1;
       }
     });
+  }
+
+  private setStepCompletedIfNecessary() {
     if (this.currentComponentIndex >= this.node.components.length) {
       this.stepCompleted = true;
     }
   }
 
-  private startComponentTimer(): void {
+  private async startComponentTimer(): Promise<void> {
+    this.saveComponentViewedEvent();
     this.timerCountDown = this.componentTimers[this.currentComponentIndex];
 
     this.currentInterval = setInterval(() => {
@@ -108,6 +114,22 @@ export class TimedNodeComponent extends NodeComponent {
         clearInterval(this.currentInterval);
       }
     }, 1000);
+  }
+
+  private saveComponentViewedEvent() {
+    this.studentDataService.saveEvent(
+      'VLE',
+      this.node.id,
+      this.getCurrentComponentId(),
+      null,
+      'Timed',
+      'componentViewed',
+      {}
+    );
+  }
+
+  private getCurrentComponentId(): string {
+    return this.components.at(this.currentComponentIndex).id;
   }
 
   private getComponentSubmitArgs(componentId: string) {
