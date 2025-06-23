@@ -15,7 +15,6 @@ import { ImportComponentService } from '../../assets/wise5/services/importCompon
 import { InsertComponentService } from '../../assets/wise5/services/insertComponentService';
 import { InsertNodesService } from '../../assets/wise5/services/insertNodesService';
 import { MoveNodesService } from '../../assets/wise5/services/moveNodesService';
-import { AuthoringToolModule } from '../teacher/authoring-tool.module';
 import { UpdateWorkgroupService } from '../services/updateWorkgroupService';
 import { GetWorkgroupService } from '../services/getWorkgroupService';
 import { WorkgroupService } from '../services/workgroup.service';
@@ -40,9 +39,10 @@ import { CreateComponentService } from '../../assets/wise5/services/createCompon
 import { NotifyAuthorService } from '../../assets/wise5/services/notifyAuthorService';
 import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 import { RegisterProjectService } from '../../assets/wise5/services/registerProjectService';
+import { ComponentAuthoringModule } from './component-authoring.module';
 
 @NgModule({
-  imports: [AuthoringToolModule, AuthoringRoutingModule],
+  imports: [AuthoringRoutingModule, ComponentAuthoringModule],
   providers: [
     ClassroomStatusService,
     ComponentInfoService,
