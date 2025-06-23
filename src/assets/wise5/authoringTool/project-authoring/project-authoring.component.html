@@ -68,7 +68,7 @@
       [expanded]="lessonIdToExpanded()[lesson.id]"
       (onExpandedChanged)="onExpandedChanged($event)"
       fxFlex
-    ></project-authoring-lesson>
+    />
     <add-lesson-button [active]="true" [first]="first" [lessonId]="lesson.id"></add-lesson-button>
   </div>
   <div>
@@ -91,7 +91,7 @@
           [expanded]="lessonIdToExpanded()[inactiveGroupNode.id]"
           (onExpandedChanged)="onExpandedChanged($event)"
           fxFlex
-        ></project-authoring-lesson>
+        />
         <add-lesson-button [first]="first" [lessonId]="inactiveGroupNode.id"></add-lesson-button>
       </div>
     </div>

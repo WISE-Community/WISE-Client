@@ -7,15 +7,17 @@ import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { provideRouter } from '@angular/router';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
-import { MockComponent, MockProviders } from 'ng-mocks';
+import { MockComponent, MockProvider, MockProviders } from 'ng-mocks';
 import { ConstraintService } from '../../services/constraintService';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
+import { NodeTypeSelected } from '../domain/node-type-selected';
+import { signal } from '@angular/core';
+import { Node } from '../../common/Node';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
 
-// ignoring test for now, failing due to signal nodeTypeSelected not being found.
-xdescribe('ProjectAuthoringStepComponent', () => {
+describe('ProjectAuthoringStepComponent', () => {
   let component: ProjectAuthoringStepComponent;
   let fixture: ComponentFixture<ProjectAuthoringStepComponent>;
 
@@ -30,9 +32,11 @@ xdescribe('ProjectAuthoringStepComponent', () => {
           ConstraintService,
           TeacherDataService,
           DeleteNodeService,
-          DeleteTranslationsService,
-          TeacherProjectService
+          DeleteTranslationsService
         ),
+        MockProvider(TeacherProjectService, {
+          getNodeTypeSelected: () => signal<NodeTypeSelected>(NodeTypeSelected.lesson)
+        }),
         provideRouter([])
       ]
     });
@@ -44,6 +48,7 @@ xdescribe('ProjectAuthoringStepComponent', () => {
     const projectService = TestBed.inject(TeacherProjectService);
     projectService.idToNode = idToNode;
     spyOn(projectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(projectService, 'getNode').and.returnValue(new Node());
     fixture.detectChanges();
   });
 

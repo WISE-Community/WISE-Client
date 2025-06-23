@@ -32,7 +32,6 @@ import { ConfigService } from '../../services/configService';
 import { of } from 'rxjs/internal/observable/of';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AddLessonButtonComponent } from '../add-lesson-button/add-lesson-button.component';
-import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
 import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
@@ -52,10 +51,9 @@ let router: Router;
 describe('ProjectAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProjectAuthoringComponent, ProjectAuthoringLessonComponent],
+      declarations: [ProjectAuthoringComponent],
       imports: [
         AddLessonButtonComponent,
-        AddStepButtonComponent,
         BrowserAnimationsModule,
         FormsModule,
         MatButtonModule,
@@ -69,6 +67,7 @@ describe('ProjectAuthoringComponent', () => {
         MatTooltipModule,
         NodeAuthoringComponent,
         NodeIconAndTitleComponent,
+        ProjectAuthoringLessonComponent,
         ProjectAuthoringStepComponent,
         StudentTeacherCommonServicesModule
       ],

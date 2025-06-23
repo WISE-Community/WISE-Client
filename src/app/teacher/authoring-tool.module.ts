@@ -16,20 +16,14 @@ import { AddLessonButtonComponent } from '../../assets/wise5/authoringTool/add-l
 import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
-import { AddStepButtonComponent } from '../../assets/wise5/authoringTool/add-step-button/add-step-button.component';
 import { ComponentTypeButtonComponent } from '../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 
 @NgModule({
-  declarations: [
-    MilestonesAuthoringComponent,
-    ProjectAuthoringComponent,
-    ProjectAuthoringLessonComponent
-  ],
+  declarations: [MilestonesAuthoringComponent, ProjectAuthoringComponent],
   imports: [
     AddLessonButtonComponent,
-    AddStepButtonComponent,
     AuthoringToolComponent,
     ChooseNewComponent,
     ComponentAuthoringModule,
@@ -39,6 +33,7 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
     MatChipsModule,
     MatExpansionModule,
     NodeIconAndTitleComponent,
+    ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent,
     RouterModule,
     StudentTeacherCommonModule,
