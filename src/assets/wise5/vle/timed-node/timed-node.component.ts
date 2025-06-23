@@ -109,7 +109,7 @@ export class TimedNodeComponent extends NodeComponent {
     this.timerCountDown = this.componentTimers[this.currentComponentIndex];
 
     this.currentInterval = setInterval(() => {
-      if (--this.timerCountDown === 0) {
+      if (--this.timerCountDown <= 0) {
         this.componentCompleted();
         clearInterval(this.currentInterval);
       }
