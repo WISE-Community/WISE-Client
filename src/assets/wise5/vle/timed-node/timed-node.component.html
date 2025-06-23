@@ -1,7 +1,12 @@
 @if (!stepCompleted) {
   <div class="timed-node-tools">
     <h1 class="timer">{{ secondsToTimerDisplay(timerCountDown) }}</h1>
-    <button mat-raised-button class="proceed-button" (click)="proceedButtonClicked()">
+    <button
+      mat-raised-button
+      class="proceed-button"
+      (click)="proceedButtonClicked()"
+      color="primary"
+    >
       Proceed
     </button>
   </div>

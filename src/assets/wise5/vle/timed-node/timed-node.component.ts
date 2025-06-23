@@ -82,12 +82,14 @@ export class TimedNodeComponent extends NodeComponent {
   }
 
   private async skipViewedComponents(): Promise<void> {
-    const studentWork = await this.studentDataService.retrieveStudentDataForSignedInStudent();
-    const componentsViewed = studentWork.events
-      .filter((event) => event.event === 'componentViewed')
-      .map((event) => event.componentId);
-    this.advanceCurrentComponentIndex(componentsViewed);
-    this.setStepCompletedIfNecessary();
+    if (!this.isPreview()) {
+      const studentWork = await this.studentDataService.retrieveStudentDataForSignedInStudent();
+      const componentsViewed = studentWork.events
+        .filter((event) => event.event === 'componentViewed')
+        .map((event) => event.componentId);
+      this.advanceCurrentComponentIndex(componentsViewed);
+      this.setStepCompletedIfNecessary();
+    }
   }
 
   private advanceCurrentComponentIndex(componentsViewed: string[]): void {
@@ -151,11 +153,13 @@ export class TimedNodeComponent extends NodeComponent {
   }
 
   private saveUnsavedWork() {
-    const currentComponentId = this.node.components[this.currentComponentIndex].id;
-    if (this.dirtyComponentIds.includes(currentComponentId)) {
-      this.studentDataService.broadcastComponentSubmitTriggered(
-        this.getComponentSubmitArgs(currentComponentId)
-      );
+    if (!this.isPreview()) {
+      const currentComponentId = this.node.components[this.currentComponentIndex].id;
+      if (this.dirtyComponentIds.includes(currentComponentId)) {
+        this.studentDataService.broadcastComponentSubmitTriggered(
+          this.getComponentSubmitArgs(currentComponentId)
+        );
+      }
     }
   }
 

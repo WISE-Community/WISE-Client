@@ -191,7 +191,7 @@ export class NodeComponent implements OnInit {
       this.latestComponentState = latestComponentState;
     }
 
-    if (this.configService.isPreview()) {
+    if (this.isPreview()) {
       this.showRubric = this.node.rubric != null && this.node.rubric != '';
     }
 
@@ -474,5 +474,9 @@ export class NodeComponent implements OnInit {
     return Promise.all([$event.componentStatePromise]).then(
       this.createComponentStatesResponseHandler(true)
     );
+  }
+
+  protected isPreview(): boolean {
+    return this.configService.isPreview();
   }
 }
