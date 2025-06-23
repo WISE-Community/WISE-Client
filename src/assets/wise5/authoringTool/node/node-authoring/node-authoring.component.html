@@ -80,6 +80,20 @@
             </div>
           </div>
           <mat-divider></mat-divider>
+          @if (isTimed()) {
+            <div class="time-limit">
+              <mat-form-field class="feedback-input" subscriptSizing="dynamic">
+                <mat-label i18n>Time Limit (seconds)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="component.timeLimit"
+                  (ngModelChange)="saveProject()"
+                  [required]="true"
+                />
+              </mat-form-field>
+            </div>
+          }
           <div>
             <component-authoring
               [nodeId]="nodeId"
