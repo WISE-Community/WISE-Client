@@ -9,7 +9,6 @@ import { UserService } from '../../services/user.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { User } from '../../domain/user';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SelectRunsControlsModule } from '../select-runs-controls/select-runs-controls.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { TeacherRunListItemComponent } from '../teacher-run-list-item/teacher-run-list-item.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -35,6 +34,7 @@ import { provideRouter } from '@angular/router';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { MockProvider } from 'ng-mocks';
 import { AccessLinkService } from '../../services/accessLinkService';
+import { SelectRunsControlsComponent } from '../select-runs-controls/select-runs-controls.component';
 
 class TeacherScheduleStubComponent {}
 
@@ -102,7 +102,7 @@ describe('TeacherRunListComponent', () => {
         MatSnackBarModule,
         ReactiveFormsModule,
         SearchBarComponent,
-        SelectRunsControlsModule
+        SelectRunsControlsComponent
       ],
       providers: [
         MockProvider(AccessLinkService),

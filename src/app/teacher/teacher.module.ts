@@ -40,7 +40,6 @@ import { ShareRunCodeDialogComponent } from './share-run-code-dialog/share-run-c
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { SelectRunsControlsModule } from './select-runs-controls/select-runs-controls.module';
 import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.component';
 import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.component';
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
@@ -49,6 +48,7 @@ import { UnitTagsComponent } from './unit-tags/unit-tags.component';
 import { ColorService } from '../../assets/wise5/services/colorService';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AccessLinkService } from '../services/accessLinkService';
+import { SelectRunsControlsComponent } from './select-runs-controls/select-runs-controls.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -82,7 +82,7 @@ const materialModules = [
     materialModules,
     NgSelectModule,
     SearchBarComponent,
-    SelectRunsControlsModule,
+    SelectRunsControlsComponent,
     SelectTagsComponent,
     SharedModule,
     TeacherRoutingModule,
