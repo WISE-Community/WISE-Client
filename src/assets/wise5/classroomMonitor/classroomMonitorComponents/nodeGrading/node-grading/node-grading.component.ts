@@ -7,26 +7,22 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
-import { SelectComponentComponent } from '../select-component/select-component.component';
 import { Node } from '../../../../common/Node';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
-import { ComponentContent } from '../../../../common/ComponentContent';
 import { MatButtonModule } from '@angular/material/button';
+import { FilterComponentsComponent } from '../filter-components/filter-components.component';
+import { ComponentContent } from '../../../../common/ComponentContent';
+import { NodeClassResponsesComponent } from '../node-class-responses/node-class-responses.component';
 
 @Component({
   imports: [
     CommonModule,
-    ComponentGradingViewComponent,
+    FilterComponentsComponent,
     FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
-    RouterModule,
-    SelectComponentComponent
+    NodeClassResponsesComponent
   ],
-  selector: 'node-grading',
-  standalone: true,
   styles: [
     `
       .content-head-label {
@@ -40,14 +36,16 @@ import { MatButtonModule } from '@angular/material/button';
       .list-item {
         display: block;
       }
+
+      .mat-body-1 {
+        margin: 0;
+      }
     `
   ],
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent {
-  protected component: ComponentContent;
-  @Input() componentId: string;
-  protected components: any[];
+  protected components: ComponentContent[];
   protected hasWork: boolean;
   protected node: Node;
   protected nodeAverageScore: number;
@@ -57,17 +55,17 @@ export class NodeGradingComponent {
   protected numRubrics: number;
   private periodId: number;
   private subscriptions: Subscription = new Subscription();
+  protected visibleComponents: ComponentContent[];
 
   constructor(
     private classroomStatusService: ClassroomStatusService,
     private dataService: TeacherDataService,
     private dialog: MatDialog,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
+    private projectService: TeacherProjectService
   ) {}
 
   ngOnInit(): void {
+    this.setFields();
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(() => this.setPeriod())
     );
@@ -78,9 +76,7 @@ export class NodeGradingComponent {
   }
 
   ngOnChanges(): void {
-    if (this.nodeId && this.componentId) {
-      this.setFields();
-    }
+    this.setFields();
   }
 
   private setFields(): void {
@@ -98,7 +94,7 @@ export class NodeGradingComponent {
     this.components = this.projectService
       .getComponents(this.nodeId)
       .filter((component) => this.projectService.componentHasWork(component));
-    this.component = this.node.getComponent(this.componentId);
+    this.visibleComponents = this.components;
     this.numRubrics = this.node.getNumRubrics();
     this.setPeriod();
   }
@@ -123,16 +119,14 @@ export class NodeGradingComponent {
     ).completionPct;
   }
 
+  protected setVisibleComponents(visibleComponents: ComponentContent[]): void {
+    this.visibleComponents = visibleComponents;
+  }
+
   protected showRubric(): void {
     this.dialog.open(ShowNodeInfoDialogComponent, {
       data: this.nodeId,
       width: '90%'
-    });
-  }
-
-  protected navigateToComponent(component: ComponentContent): void {
-    this.router.navigate(['..', component.id], {
-      relativeTo: this.route
     });
   }
 }

@@ -12,7 +12,6 @@ import {
 } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { LibraryService } from '../../../services/library.service';
 
 @Component({
   imports: [FormsModule, MatCheckboxModule, MatIconModule],
@@ -28,19 +27,14 @@ import { LibraryService } from '../../../services/library.service';
 })
 export class PublicUnitTypeSelectorComponent {
   protected communityBuilt: boolean;
-  protected filterValues: ProjectFilterValues;
   @Output() publicUnitTypeUpdatedEvent: EventEmitter<ProjectFilterValues> =
     new EventEmitter<ProjectFilterValues>();
   protected wiseTested: boolean;
 
   constructor(
     private dialog: MatDialog,
-    private libraryService: LibraryService
+    private filterValues: ProjectFilterValues
   ) {}
-
-  ngOnInit(): void {
-    this.filterValues = this.libraryService.filterValues;
-  }
 
   protected updatePublicUnitType(): void {
     this.filterValues.publicUnitTypeValue = [];

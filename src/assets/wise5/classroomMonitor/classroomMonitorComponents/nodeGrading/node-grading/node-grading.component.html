@@ -24,14 +24,13 @@
         </div>
       </button>
     </div>
-    <div class="mat-elevation-z1 list-item component-select">
-      <span i18n>Question: </span>
-      <select-component
+    <div class="flex gap-2 items-center flex-wrap mb-2 mx-2">
+      <h3 class="mat-body-1" i18n>Class Responses</h3>
+      <filter-components
         [components]="components"
-        [selectedComponent]="component"
-        (componentChangedEvent)="navigateToComponent($event)"
+        (componentsChange)="setVisibleComponents($event)"
       />
     </div>
-    <component-grading-view [component]="component" [node]="node" />
+    <node-class-responses [node]="node" [components]="visibleComponents" />
   </div>
 </div>

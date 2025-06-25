@@ -11,11 +11,9 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 export class MockLibraryService {
   libraryGroupsSource$ = fakeAsyncResponse({});
   officialLibraryProjectsSource$ = fakeAsyncResponse([]);
-  filterValuesUpdated$ = of();
   implementationModelOptions: LibraryGroup[] = [];
   numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
   getOfficialLibraryProjects() {}
-  filterValues = new ProjectFilterValues();
 }
 
 describe('OfficialLibraryComponent', () => {
@@ -25,7 +23,7 @@ describe('OfficialLibraryComponent', () => {
     TestBed.configureTestingModule({
       imports: [OverlayModule],
       declarations: [OfficialLibraryComponent],
-      providers: [{ provide: LibraryService, useClass: MockLibraryService }],
+      providers: [{ provide: LibraryService, useClass: MockLibraryService }, ProjectFilterValues],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
