@@ -52,7 +52,7 @@ let userService: UserService;
 describe('TeacherRunListItemComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [RunMenuComponent, TeacherRunListItemComponent],
+      declarations: [TeacherRunListItemComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         BrowserAnimationsModule,
@@ -61,7 +61,8 @@ describe('TeacherRunListItemComponent', () => {
         MatIconModule,
         MatMenuModule,
         MatSnackBarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        RunMenuComponent
       ],
       providers: [
         ArchiveProjectService,

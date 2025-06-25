@@ -85,7 +85,7 @@ class TeacherRunStub extends TeacherRun {
 describe('TeacherRunListComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
+      declarations: [TeacherRunListComponent, TeacherRunListItemComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         ArchiveProjectsButtonComponent,
@@ -101,6 +101,7 @@ describe('TeacherRunListComponent', () => {
         MatSelectModule,
         MatSnackBarModule,
         ReactiveFormsModule,
+        RunMenuComponent,
         SearchBarComponent,
         SelectRunsControlsComponent
       ],

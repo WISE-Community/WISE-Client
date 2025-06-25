@@ -4,7 +4,7 @@
 <mat-menu #runMenu="matMenu" xPosition="before">
   <div>
     <div class="menu-info secondary-text" i18n>Run ID: {{ run.id }}</div>
-    <mat-divider></mat-divider>
+    <mat-divider />
     <a *ngIf="run.project.wiseVersion !== 4" mat-menu-item (click)="showEditRunDetails()">
       <mat-icon>settings</mat-icon>
       <span i18n>Edit Settings</span>
