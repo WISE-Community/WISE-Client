@@ -221,8 +221,8 @@ export class NodeAuthoringComponent implements OnInit {
   }
 
   protected isTimed(): boolean {
-    const isTimed = this.projectService.getNodeIsTimed(this.node.id);
-    return isTimed !== null && isTimed;
+    const node = this.projectService.getNodeById(this.node.id);
+    return node.timed !== null && node.timed;
   }
 
   protected saveProject(): Promise<any> {
