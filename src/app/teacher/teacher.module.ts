@@ -32,7 +32,6 @@ import { ShareRunDialogComponent } from './share-run-dialog/share-run-dialog.com
 import { TimelineModule } from '../modules/timeline/timeline.module';
 import { EditComponent } from './account/edit/edit.component';
 import { TeacherEditProfileComponent } from './account/edit-profile/edit-profile.component';
-import { RunSettingsDialogComponent } from './run-settings-dialog/run-settings-dialog.component';
 import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { DiscourseRecentActivityComponent } from './discourse-recent-activity/discourse-recent-activity.component';
 import { ShareRunCodeDialogComponent } from './share-run-code-dialog/share-run-code-dialog.component';
@@ -93,7 +92,6 @@ const materialModules = [
   declarations: [
     EditComponent,
     ListClassroomCoursesDialogComponent,
-    RunSettingsDialogComponent,
     ShareRunCodeDialogComponent,
     ShareRunDialogComponent,
     TeacherComponent,

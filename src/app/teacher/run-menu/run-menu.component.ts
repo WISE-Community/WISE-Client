@@ -59,10 +59,9 @@ export class RunMenuComponent implements OnInit {
   }
 
   protected showEditRunDetails(): void {
-    const run = this.run;
     this.dialog.open(RunSettingsDialogComponent, {
       ariaLabel: $localize`Run Settings`,
-      data: { run: run },
+      data: this.run,
       panelClass: 'dialog-md',
       autoFocus: true
     });
