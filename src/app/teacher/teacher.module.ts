@@ -34,7 +34,6 @@ import { EditComponent } from './account/edit/edit.component';
 import { TeacherEditProfileComponent } from './account/edit-profile/edit-profile.component';
 import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { DiscourseRecentActivityComponent } from './discourse-recent-activity/discourse-recent-activity.component';
-import { ShareRunCodeDialogComponent } from './share-run-code-dialog/share-run-code-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -92,7 +91,6 @@ const materialModules = [
   declarations: [
     EditComponent,
     ListClassroomCoursesDialogComponent,
-    ShareRunCodeDialogComponent,
     ShareRunDialogComponent,
     TeacherComponent,
     TeacherEditProfileComponent,
