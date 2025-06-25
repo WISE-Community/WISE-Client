@@ -72,7 +72,7 @@ export class RunMenuComponent implements OnInit {
     if (this.run.lastRun) {
       this.dialog.open(EditRunWarningDialogComponent, {
         ariaLabel: $localize`Edit Classroom Unit Warning`,
-        data: { run: this.run },
+        data: this.run,
         panelClass: 'dialog-sm'
       });
     } else {

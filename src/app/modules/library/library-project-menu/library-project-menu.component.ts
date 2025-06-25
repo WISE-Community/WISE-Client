@@ -69,7 +69,7 @@ export class LibraryProjectMenuComponent {
       if (projectRun != null) {
         projectRun.project = this.project;
         this.dialog.open(EditRunWarningDialogComponent, {
-          data: { run: projectRun },
+          data: projectRun,
           panelClass: 'dialog-sm'
         });
       } else {
