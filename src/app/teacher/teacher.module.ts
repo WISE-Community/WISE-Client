@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../modules/shared/shared.module';
 import { TeacherRoutingModule } from './teacher-routing.module';
-import { TeacherComponent } from './teacher.component';
 import { TeacherHomeComponent } from './teacher-home/teacher-home.component';
 import { AuthGuard } from './auth.guard';
 import { TeacherRunListComponent } from './teacher-run-list/teacher-run-list.component';
@@ -92,13 +91,12 @@ const materialModules = [
     EditComponent,
     ListClassroomCoursesDialogComponent,
     ShareRunDialogComponent,
-    TeacherComponent,
     TeacherEditProfileComponent,
     TeacherHomeComponent,
     TeacherRunListComponent,
     TeacherRunListItemComponent
   ],
   providers: [AccessLinkService, AuthGuard, ColorService, ProjectTagService],
-  exports: [TeacherComponent, UnitTagsComponent, materialModules]
+  exports: [UnitTagsComponent, materialModules]
 })
 export class TeacherModule {}

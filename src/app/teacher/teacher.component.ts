@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-teacher',
-    templateUrl: './teacher.component.html',
-    styleUrls: ['./teacher.component.scss'],
-    standalone: false
+  imports: [CommonModule, RouterModule],
+  styles: [
+    `
+      .teacher {
+        height: 100%;
+      }
+    `
+  ],
+  template: `
+    <div [ngClass]="{ 'main app-background content': !isTeacherApp(), teacher: isTeacherApp() }">
+      <router-outlet></router-outlet>
+    </div>
+  `
 })
-export class TeacherComponent implements OnInit {
+export class TeacherComponent {
   constructor(private router: Router) {}
 
-  ngOnInit() {}
-
-  isTeacherApp() {
+  protected isTeacherApp(): boolean {
     return this.router.url.includes('/teacher/edit') || this.router.url.includes('/teacher/manage');
   }
 }
