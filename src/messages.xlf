@@ -5763,7 +5763,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
       </trans-unit>
       <trans-unit id="8641234840771177686" datatype="html">
-        <source>(Unit ID: <x id="INTERPOLATION" equiv-text="{{ data.project.id }}"/>)</source>
+        <source>(Unit ID: <x id="INTERPOLATION" equiv-text="{{ project.id }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
           <context context-type="linenumber">5,7</context>
@@ -5811,7 +5811,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>There was an error trying to copy the project. Please refresh the page and try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5456309177445797304" datatype="html">

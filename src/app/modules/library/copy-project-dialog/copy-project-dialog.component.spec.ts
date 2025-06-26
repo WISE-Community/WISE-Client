@@ -4,16 +4,14 @@ import { LibraryService } from '../../../services/library.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Project } from '../../../domain/project';
 import { Observable, Subject } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export class MockLibraryService {
   newProjectSource = new Subject<LibraryProject>();
   newProjectSource$ = this.newProjectSource.asObservable();
 
   copyProject() {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       const project: Project = new Project();
       observer.next(project);
       observer.complete();
@@ -45,8 +43,7 @@ describe('CopyProjectDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CopyProjectDialogComponent],
-      imports: [MatSnackBarModule],
+      imports: [CopyProjectDialogComponent],
       providers: [
         { provide: LibraryService, useClass: MockLibraryService },
         {
@@ -59,7 +56,7 @@ describe('CopyProjectDialogComponent', () => {
           provide: MatDialogRef,
           useValue: {
             afterClosed: () => {
-              return Observable.create((observer) => {
+              return new Observable((observer) => {
                 observer.next({});
                 observer.complete();
               });
@@ -68,12 +65,11 @@ describe('CopyProjectDialogComponent', () => {
           }
         },
         { provide: MAT_DIALOG_DATA, useValue: { project: projectObj } }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     });
     fixture = TestBed.createComponent(CopyProjectDialogComponent);
     component = fixture.componentInstance;
-    component.dialog = TestBed.get(MatDialog);
+    component.dialog = TestBed.inject(MatDialog);
     spyOn(component.dialog, 'closeAll').and.callThrough();
     fixture.detectChanges();
   });

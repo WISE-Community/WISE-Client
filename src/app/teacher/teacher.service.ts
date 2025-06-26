@@ -41,9 +41,9 @@ export class TeacherService {
 
   constructor(private http: HttpClient) {}
 
-  copyProject(project: Project, dialog: MatDialog) {
+  copyProject(project: Project, dialog: MatDialog): void {
     dialog.open(CopyProjectDialogComponent, {
-      data: { project: project },
+      data: project,
       panelClass: 'dialog-sm'
     });
   }

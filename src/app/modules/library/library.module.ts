@@ -31,7 +31,6 @@ import { HomePageProjectLibraryComponent } from './home-page-project-library/hom
 import { OfficialLibraryComponent } from './official-library/official-library.component';
 import { PersonalLibraryComponent } from './personal-library/personal-library.component';
 import { ShareProjectDialogComponent } from './share-project-dialog/share-project-dialog.component';
-import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-dialog.component';
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
 import { ArchiveProjectsButtonComponent } from '../../teacher/archive-projects-button/archive-projects-button.component';
 import { SearchBarComponent } from '../shared/search-bar/search-bar.component';
@@ -96,8 +95,7 @@ const materialModules = [
     LibraryGroupThumbsComponent,
     HomePageProjectLibraryComponent,
     OfficialLibraryComponent,
-    ShareProjectDialogComponent,
-    CopyProjectDialogComponent
+    ShareProjectDialogComponent
   ],
   exports: [
     CurriculumComponent,
