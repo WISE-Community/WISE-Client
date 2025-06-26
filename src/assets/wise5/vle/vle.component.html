@@ -26,7 +26,7 @@
 
 <ng-template #defaultVLETemplate>
   @if (layoutState === 'node') {
-    <step-tools class="control-bg-bg mat-elevation-z1" />
+    <step-tools class="control-bg-bg mat-elevation-z1" [timedStep]="isCurrentNodeTimed()" />
   }
   <div
     id="content"
@@ -37,7 +37,11 @@
       <run-ended-and-locked-message class="notice" />
     }
     @if (layoutState === 'node') {
-      <node class="top" [node]="currentNode" />
+      @if (currentNode.timed) {
+        <timed-node class="top" [node]="currentNode" />
+      } @else {
+        <node class="top" [node]="currentNode" />
+      }
     }
     @if (layoutState === 'nav') {
       <navigation class="top" />

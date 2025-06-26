@@ -54,4 +54,16 @@ describe('StepToolsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should disable navigation on unfinished timed steps', () => {
+    let sections = fixture.nativeElement.querySelectorAll('.step-tools > div');
+    expect(sections.length).toEqual(2);
+
+    component['timedStep'] = true;
+    component['timedStepCompleted'] = false;
+    fixture.detectChanges();
+
+    sections = fixture.nativeElement.querySelectorAll('.step-tools > div');
+    expect(sections.length).toEqual(1); // isUnfinishedTimedStep() returned true
+  });
 });

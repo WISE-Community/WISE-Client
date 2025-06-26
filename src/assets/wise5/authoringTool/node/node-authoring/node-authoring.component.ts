@@ -12,10 +12,10 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 
 @Component({
-    selector: 'node-authoring',
-    templateUrl: './node-authoring.component.html',
-    styleUrls: ['./node-authoring.component.scss'],
-    standalone: false
+  selector: 'node-authoring',
+  templateUrl: './node-authoring.component.html',
+  styleUrls: ['./node-authoring.component.scss'],
+  standalone: false
 })
 export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];
@@ -119,7 +119,7 @@ export class NodeAuthoringComponent implements OnInit {
     if (parseProject) {
       this.projectService.parseProject();
     }
-    return this.projectService.saveProject();
+    return this.saveProject();
   }
 
   protected deleteComponent(
@@ -139,7 +139,7 @@ export class NodeAuthoringComponent implements OnInit {
 
   private deleteComponentsOnServer(components: ComponentContent[]): void {
     this.checkIfNeedToShowNodeSaveOrNodeSubmitButtons();
-    this.projectService.saveProject().then(() => {
+    this.saveProject().then(() => {
       this.deleteTranslationsService.tryDeleteComponents(components);
     });
   }
@@ -213,10 +213,19 @@ export class NodeAuthoringComponent implements OnInit {
     if (scroll) {
       this.highlightComponents([this.components[currentIndex]]);
     }
-    this.projectService.saveProject();
+    this.saveProject();
   }
 
   protected editComponent(componentId: string): void {
     this.editingComponentId = componentId;
+  }
+
+  protected isTimed(): boolean {
+    const node = this.projectService.getNodeById(this.node.id);
+    return node.timed !== null && node.timed;
+  }
+
+  protected saveProject(): Promise<any> {
+    return this.projectService.saveProject();
   }
 }

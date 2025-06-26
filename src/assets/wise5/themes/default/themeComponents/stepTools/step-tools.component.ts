@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,7 @@ import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
 import { Subscription } from 'rxjs';
+import { TimedNodeService } from '../../../../services/timedNodeService';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -43,6 +44,8 @@ export class StepToolsComponent implements OnInit {
   protected nodeStatus: any;
   protected nodeStatuses: any;
   protected prevId: string;
+  @Input() private timedStep: boolean;
+  protected timedStepCompleted: boolean;
   private subscriptions: Subscription = new Subscription();
   protected toNodeId: string;
 
@@ -50,7 +53,8 @@ export class StepToolsComponent implements OnInit {
     private nodeService: NodeService,
     private nodeStatusService: NodeStatusService,
     private projectService: ProjectService,
-    private studentDataService: StudentDataService
+    private studentDataService: StudentDataService,
+    private timedNodeService: TimedNodeService
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +79,11 @@ export class StepToolsComponent implements OnInit {
       this.studentDataService.nodeStatusesChanged$.subscribe(() => {
         this.updateModel();
       })
+    );
+    this.subscriptions.add(
+      this.timedNodeService.isNodeCompletedBroadcast.subscribe(
+        (isStepCompleted) => (this.timedStepCompleted = isStepCompleted)
+      )
     );
   }
 
@@ -123,5 +132,18 @@ export class StepToolsComponent implements OnInit {
 
   protected closeNode(): void {
     this.nodeService.closeNode();
+  }
+
+  protected isArrowDisabled(direction: 'prev' | 'next'): boolean {
+    const noNode = direction === 'prev' ? !this.prevId : !this.nextId;
+    return noNode || this.isUnfinishedTimedStep();
+  }
+
+  protected isUnfinishedTimedStep(): boolean {
+    if (this.timedStep) {
+      return !this.timedStepCompleted;
+    } else {
+      return false;
+    }
   }
 }

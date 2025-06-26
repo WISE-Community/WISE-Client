@@ -9,4 +9,9 @@
       Show Submit Button
     </mat-checkbox>
   </div>
+  <div>
+    <mat-checkbox color="primary" [(ngModel)]="node.timed" (change)="saveProject()" i18n
+      >Timed Step</mat-checkbox
+    >
+  </div>
 </div>

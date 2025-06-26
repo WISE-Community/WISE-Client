@@ -1,0 +1,92 @@
+@if (!stepCompleted) {
+  <div class="timed-node-tools">
+    <h1 class="timer">{{ secondsToTimerDisplay(timerCountDown) }}</h1>
+    <button
+      mat-raised-button
+      class="proceed-button"
+      (click)="proceedButtonClicked()"
+      color="primary"
+    >
+      Proceed
+    </button>
+  </div>
+  <div class="l-constrained">
+    <div
+      class="node-content mat-elevation-z1"
+      style="border-color: {{ nodeStatus?.icon?.color }}; position: relative;"
+      fxLayout="row wrap"
+    >
+      @if (showRubric) {
+        <div class="node-content__rubric" fxLayout="row" fxLayoutAlign="center center">
+          <help-icon [content]="node.rubric" label="Step Info" i18n-label icon="info" />
+        </div>
+      }
+      @for (component of components; track component) {
+        <div
+          id="component_{{ component.id }}"
+          class="component"
+          fxFlex="100"
+          fxFlex.gt-sm="{{ component.componentWidth ? component.componentWidth : 100 }}"
+        >
+          @if (componentToVisible[component.id]) {
+            <component
+              [nodeId]="node.id"
+              [componentId]="component.id"
+              [componentState]="getComponentStateByComponentId(component.id)"
+              [workgroupId]="workgroupId"
+              (saveComponentStateEvent)="saveComponentState($event)"
+            />
+          }
+        </div>
+      }
+      <div
+        class="node-content__actions"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="12px"
+      >
+        @if (node.showSaveButton) {
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="save()"
+            [disabled]="disabled || !dirtyComponentIds.length"
+            aria-label="Save"
+            i18n-aria-label
+            i18n
+          >
+            Save
+          </button>
+        }
+        @if (node.showSubmitButton) {
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="submit()"
+            [disabled]="disabled || !dirtySubmitComponentIds.length"
+            aria-label="Submit"
+            i18n-aria-label
+            i18n
+          >
+            Submit
+          </button>
+        }
+        @if (latestComponentState && (node.showSaveButton || node.showSubmitButton)) {
+          <component-state-info [componentState]="latestComponentState" />
+        }
+      </div>
+      @if (isSurvey && !isBranchNode && !nextNodeId) {
+        <div class="node-content__actions w-full">
+          <mat-divider class="!mt-2 border-2" />
+          <submit-survey />
+        </div>
+      }
+    </div>
+  </div>
+} @else {
+  <mat-card class="step-completed standalone__content mat-elevation-z4 center">
+    <mat-card-content>
+      <p>You have completed this step.</p>
+    </mat-card-content>
+  </mat-card>
+}

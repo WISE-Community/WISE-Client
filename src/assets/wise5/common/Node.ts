@@ -13,6 +13,7 @@ export class Node {
   showSaveButton: boolean;
   showSubmitButton: boolean;
   title: string;
+  timed?: boolean;
   transitionLogic?: TransitionLogic;
   type: string;
 

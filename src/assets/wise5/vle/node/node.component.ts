@@ -42,8 +42,8 @@ export class NodeComponent implements OnInit {
   private autoSaveIntervalId: any;
   protected components: any[];
   protected componentToVisible = {};
-  protected dirtyComponentIds: any = [];
-  protected dirtySubmitComponentIds: any = [];
+  protected dirtyComponentIds: any[] = [];
+  protected dirtySubmitComponentIds: any[] = [];
   protected disabled: boolean;
   protected isBranchNode: boolean = false;
   protected isLastNode: boolean = false;
@@ -74,14 +74,14 @@ export class NodeComponent implements OnInit {
   protected workgroupId: number;
 
   constructor(
-    private componentService: ComponentService,
-    private configService: ConfigService,
-    private constraintService: ConstraintService,
-    private nodeService: StudentNodeService,
-    private nodeStatusService: NodeStatusService,
-    private projectService: VLEProjectService,
-    private sessionService: SessionService,
-    private studentDataService: StudentDataService
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
+    protected constraintService: ConstraintService,
+    protected nodeService: StudentNodeService,
+    protected nodeStatusService: NodeStatusService,
+    protected projectService: VLEProjectService,
+    protected sessionService: SessionService,
+    protected studentDataService: StudentDataService
   ) {}
 
   ngOnChanges(): void {
@@ -191,7 +191,7 @@ export class NodeComponent implements OnInit {
       this.latestComponentState = latestComponentState;
     }
 
-    if (this.configService.isPreview()) {
+    if (this.isPreview()) {
       this.showRubric = this.node.rubric != null && this.node.rubric != '';
     }
 
@@ -204,7 +204,7 @@ export class NodeComponent implements OnInit {
     }
   }
 
-  private updateComponentVisibility(): void {
+  protected updateComponentVisibility(): void {
     this.components.forEach((component) => {
       const constraintResult = this.constraintService.evaluate(component.constraints);
       this.componentToVisible[component.id] = constraintResult.isVisible;
@@ -474,5 +474,9 @@ export class NodeComponent implements OnInit {
     return Promise.all([$event.componentStatePromise]).then(
       this.createComponentStatesResponseHandler(true)
     );
+  }
+
+  protected isPreview(): boolean {
+    return this.configService.isPreview();
   }
 }
