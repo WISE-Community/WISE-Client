@@ -50,10 +50,10 @@ export class StepToolsComponent implements OnInit {
   protected toNodeId: string;
 
   constructor(
-    protected nodeService: NodeService,
-    protected nodeStatusService: NodeStatusService,
-    protected projectService: ProjectService,
-    protected studentDataService: StudentDataService,
+    private nodeService: NodeService,
+    private nodeStatusService: NodeStatusService,
+    private projectService: ProjectService,
+    private studentDataService: StudentDataService,
     private timedNodeService: TimedNodeService
   ) {}
 
