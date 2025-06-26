@@ -27,7 +27,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { RunMenuComponent } from './run-menu/run-menu.component';
 import { LibraryModule } from '../modules/library/library.module';
-import { ShareRunDialogComponent } from './share-run-dialog/share-run-dialog.component';
 import { TimelineModule } from '../modules/timeline/timeline.module';
 import { EditComponent } from './account/edit/edit.component';
 import { TeacherEditProfileComponent } from './account/edit-profile/edit-profile.component';
@@ -90,7 +89,6 @@ const materialModules = [
   declarations: [
     EditComponent,
     ListClassroomCoursesDialogComponent,
-    ShareRunDialogComponent,
     TeacherEditProfileComponent,
     TeacherHomeComponent,
     TeacherRunListComponent,

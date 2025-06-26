@@ -85,7 +85,7 @@
         <td mat-cell *matCellDef="let sharedOwner">
           <ng-container *ngIf="sharedOwner.isOwner" i18n>Owner. Full permissions.</ng-container>
           <ng-container *ngIf="!sharedOwner.isOwner">
-            <div fxLayout="row wrap" fxLayoutGap="12px">
+            <div class="flex-row flex-wrap gap-3">
               <mat-checkbox [(ngModel)]="sharedOwner.runPermissions[1]" disabled="true">
                 <ng-container i18n>View Student Work</ng-container>
               </mat-checkbox>
