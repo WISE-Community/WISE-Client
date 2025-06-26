@@ -25,7 +25,7 @@ import { ShareItemDialogComponent } from '../../modules/library/share-item-dialo
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
 import { TeacherRun } from '../teacher-run';
-
+import { CopyProjectDialogComponent } from '../../modules/library/copy-project-dialog/copy-project-dialog.component';
 @Component({
   imports: [
     CommonModule,
@@ -232,7 +232,10 @@ export class ShareRunDialogComponent extends ShareItemDialogComponent {
     this.teacherSearchControl.setValue('');
   }
 
-  copyProject() {
-    this.teacherService.copyProject(this.project, this.dialog);
+  protected copyProject(): void {
+    this.dialog.open(CopyProjectDialogComponent, {
+      data: this.project,
+      panelClass: 'dialog-sm'
+    });
   }
 }

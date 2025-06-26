@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
+import { CopyProjectDialogComponent } from '../copy-project-dialog/copy-project-dialog.component';
 
 @Component({
   imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule],
@@ -61,7 +62,10 @@ export class LibraryProjectMenuComponent {
   }
 
   protected copyProject(): void {
-    this.teacherService.copyProject(this.project, this.dialog);
+    this.dialog.open(CopyProjectDialogComponent, {
+      data: this.project,
+      panelClass: 'dialog-sm'
+    });
   }
 
   protected editProject(): void {
