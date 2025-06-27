@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LibraryGroupThumbsComponent } from './library-group-thumbs/library-group-thumbs.component';
 import { LibraryProjectComponent } from './library-project/library-project.component';
 import { LibraryProjectDetailsComponent } from './library-project-details/library-project-details.component';
 import { RouterModule } from '@angular/router';
@@ -75,10 +74,10 @@ const materialModules = [
     CurriculumComponent,
     FlexLayoutModule,
     FormsModule,
-    LibraryGroupThumbsComponent,
     LibraryFiltersComponent,
     LibraryProjectComponent,
     LibraryProjectDetailsComponent,
+    OfficialLibraryComponent,
     PersonalLibraryComponent,
     ReactiveFormsModule,
     RouterModule,
@@ -92,11 +91,7 @@ const materialModules = [
     TimelineModule,
     UnitTagsComponent
   ],
-  declarations: [
-    HomePageProjectLibraryComponent,
-    OfficialLibraryComponent,
-    ShareProjectDialogComponent
-  ],
+  declarations: [HomePageProjectLibraryComponent, ShareProjectDialogComponent],
   exports: [
     CurriculumComponent,
     HomePageProjectLibraryComponent,
