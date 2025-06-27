@@ -75,6 +75,7 @@ const materialModules = [
     CurriculumComponent,
     FlexLayoutModule,
     FormsModule,
+    LibraryGroupThumbsComponent,
     LibraryFiltersComponent,
     LibraryProjectComponent,
     LibraryProjectDetailsComponent,
@@ -92,7 +93,6 @@ const materialModules = [
     UnitTagsComponent
   ],
   declarations: [
-    LibraryGroupThumbsComponent,
     HomePageProjectLibraryComponent,
     OfficialLibraryComponent,
     ShareProjectDialogComponent
