@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AbstractTranslatableFieldComponent } from '../abstract-translatable-field/abstract-translatable-field.component';
-import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
+import { WiseAuthoringTinymceEditorComponent } from '../../../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
@@ -12,17 +12,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'translatable-rich-text-editor',
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatTabsModule,
-        WiseTinymceEditorModule
-    ],
-    templateUrl: './translatable-rich-text-editor.component.html',
-    styleUrl: './translatable-rich-text-editor.component.scss'
+  selector: 'translatable-rich-text-editor',
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatTabsModule,
+    WiseAuthoringTinymceEditorComponent
+  ],
+  templateUrl: './translatable-rich-text-editor.component.html',
+  styleUrl: './translatable-rich-text-editor.component.scss'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
   protected html: string = '';

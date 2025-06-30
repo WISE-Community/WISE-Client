@@ -3,11 +3,14 @@ import { Language } from '../../../../../app/domain/language';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { localeToLanguage } from '../../../../../app/domain/localeToLanguage';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'edit-project-language-setting',
-    templateUrl: './edit-project-language-setting.component.html',
-    standalone: false
+  imports: [CommonModule, FormsModule, NgSelectModule],
+  selector: 'edit-project-language-setting',
+  templateUrl: './edit-project-language-setting.component.html'
 })
 export class EditProjectLanguageSettingComponent {
   protected availableLanguages: Language[];

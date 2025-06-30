@@ -58,9 +58,7 @@
     (defaultLanguageTextChanged)="metadataChanged.next()"
     class="input"
   />
-  <edit-project-language-setting
-    *ngIf="metadataField.name === 'Language'"
-  ></edit-project-language-setting>
+  <edit-project-language-setting *ngIf="metadataField.name === 'Language'" />
   <ng-container *ngIf="metadataField.type === 'radio' && metadataField.name !== 'Language'">
     <label class="bold">{{ metadataField.name }}:</label>
     <mat-radio-group class="radio-group margin-bottom-20" fxLayout="column">

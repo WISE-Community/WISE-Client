@@ -1,4 +1,3 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,27 +20,28 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedPathAuthoringComponent],
-    imports: [MatDialogModule,
+      declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedPathAuthoringComponent],
+      imports: [
+        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
         ClassroomStatusService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
         {
-            provide: ActivatedRoute,
-            useValue: {
-                parent: { parent: { params: of({ nodeId: 'node1' }) } }
-            }
+          provide: ActivatedRoute,
+          useValue: {
+            parent: { parent: { parent: { params: of({ nodeId: 'node1' }) } } }
+          }
         },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

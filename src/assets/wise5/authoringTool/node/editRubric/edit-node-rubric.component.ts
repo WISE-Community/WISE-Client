@@ -3,17 +3,20 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'edit-node-rubric',
-    templateUrl: 'edit-node-rubric.component.html',
-    standalone: false
+  selector: 'edit-node-rubric',
+  templateUrl: 'edit-node-rubric.component.html',
+  standalone: false
 })
 export class EditNodeRubricComponent implements OnInit {
   protected node: any;
 
-  constructor(private projectService: TeacherProjectService, private route: ActivatedRoute) {}
+  constructor(
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.route.parent.parent.params.subscribe((params) => {
+    this.route.parent.parent.parent.params.subscribe((params) => {
       this.node = this.projectService.getNodeById(params.nodeId);
     });
   }

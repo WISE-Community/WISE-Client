@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,27 +21,28 @@ let fixture: ComponentFixture<NodeAdvancedConstraintAuthoringComponent>;
 describe('NodeAdvancedConstraintAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedConstraintAuthoringComponent],
-    imports: [MatDialogModule,
+      declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedConstraintAuthoringComponent],
+      imports: [
+        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
         ClassroomStatusService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
         {
-            provide: ActivatedRoute,
-            useValue: {
-                parent: { parent: { params: of({ nodeId: 'node1' }) } }
-            }
+          provide: ActivatedRoute,
+          useValue: {
+            parent: { parent: { parent: { params: of({ nodeId: 'node1' }) } } }
+          }
         },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

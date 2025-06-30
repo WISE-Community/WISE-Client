@@ -7,10 +7,11 @@ import { NodeAdvancedPathAuthoringComponent } from './path/node-advanced-path-au
 import { StudentTeacherCommonModule } from '../../../../../app/student-teacher-common.module';
 import { NodeConstraintAuthoringComponent } from '../../constraint/node-constraint-authoring/node-constraint-authoring.component';
 import { EditNodeRubricComponent } from '../editRubric/edit-node-rubric.component';
-import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { RouterModule } from '@angular/router';
 import { TranslatableRichTextEditorComponent } from '../../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 import { RequiredErrorLabelComponent } from './required-error-label/required-error-label.component';
+import { CommonModule } from '@angular/common';
+import { WiseAuthoringTinymceEditorComponent } from '../../../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +31,13 @@ import { RequiredErrorLabelComponent } from './required-error-label/required-err
     NodeAdvancedPathAuthoringComponent
   ],
   imports: [
+    CommonModule,
     NodeConstraintAuthoringComponent,
     RequiredErrorLabelComponent,
     RouterModule,
     StudentTeacherCommonModule,
     TranslatableRichTextEditorComponent,
-    WiseTinymceEditorModule
+    WiseAuthoringTinymceEditorComponent
   ]
 })
 export class NodeAdvancedAuthoringModule {}

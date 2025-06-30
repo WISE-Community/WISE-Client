@@ -79,9 +79,7 @@ import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-a
 import { EditComponentConstraintsComponent } from '../authoring-tool/edit-component-constraints/edit-component-constraints.component';
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/components/component-authoring.component';
-import { WiseTinymceEditorModule } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.module';
 import { WiseLinkAuthoringDialogComponent } from '../../assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
-import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authoringTool/components/edit-component-advanced-button/edit-component-advanced-button.component';
 import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
@@ -91,6 +89,7 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
 import { EditCRaterInfoComponent } from '../../assets/wise5/components/common/cRater/edit-crater-info/edit-crater-info.component';
 import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
+import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 
 @NgModule({
   declarations: [
@@ -170,7 +169,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
   ],
   imports: [
     ComponentAuthoringComponent,
-    EditComponentAdvancedButtonComponent,
     EditComponentConstraintsComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
@@ -187,7 +185,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
     TranslatableTextareaComponent,
-    WiseTinymceEditorModule
+    WiseAuthoringTinymceEditorComponent
   ],
   exports: [
     AiChatAuthoringComponent,
@@ -202,7 +200,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
-    EditComponentAdvancedButtonComponent,
     EditComponentConstraintsComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
