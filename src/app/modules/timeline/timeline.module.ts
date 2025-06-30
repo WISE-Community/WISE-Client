@@ -8,8 +8,8 @@ import {
 } from './timeline-item/timeline-item.component';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [TimelineComponent, TimelineItemComponent, TimelineItemContent, TimelineItemLabel],
+  imports: [CommonModule, TimelineComponent],
+  declarations: [TimelineItemComponent, TimelineItemContent, TimelineItemLabel],
   exports: [TimelineComponent, TimelineItemComponent, TimelineItemContent, TimelineItemLabel]
 })
 export class TimelineModule {}
