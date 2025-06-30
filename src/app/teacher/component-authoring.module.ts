@@ -80,7 +80,6 @@ import { EditComponentConstraintsComponent } from '../authoring-tool/edit-compon
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/components/component-authoring.component';
 import { WiseLinkAuthoringDialogComponent } from '../../assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
-import { EditComponentAdvancedButtonComponent } from '../../assets/wise5/authoringTool/components/edit-component-advanced-button/edit-component-advanced-button.component';
 import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
@@ -170,7 +169,6 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
   ],
   imports: [
     ComponentAuthoringComponent,
-    EditComponentAdvancedButtonComponent,
     EditComponentConstraintsComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
@@ -202,7 +200,6 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
-    EditComponentAdvancedButtonComponent,
     EditComponentConstraintsComponent,
     EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,

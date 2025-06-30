@@ -26,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { ComponentAuthoringComponent } from '../../components/component-authoring.component';
 import { RouterModule } from '@angular/router';
+import { EditComponentAdvancedButtonComponent } from '../../components/edit-component-advanced-button/edit-component-advanced-button.component';
 
 @Component({
   imports: [
@@ -34,6 +35,7 @@ import { RouterModule } from '@angular/router';
     ComponentAuthoringComponent,
     CopyComponentButtonComponent,
     DragDropModule,
+    EditComponentAdvancedButtonComponent,
     EditNodeTitleComponent,
     FlexLayoutModule,
     FormsModule,
