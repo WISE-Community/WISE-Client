@@ -2,7 +2,7 @@
   *ngIf="!componentContent.dynamicPrompt?.enabled"
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
+/>
 <edit-dynamic-prompt
   [componentContent]="componentContent"
   (dynamicPromptChangedEvent)="componentChanged()"

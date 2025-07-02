@@ -1,7 +1,7 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
+/>
 <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
   <translatable-input
     [content]="componentContent"
@@ -181,7 +181,12 @@
     </ng-container>
   </div>
 </div>
-<div *ngIf="!enableMultipleYAxes" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+<div
+  *ngIf="!enableMultipleYAxes"
+  fxLayout="row wrap"
+  fxLayoutAlign="start center"
+  fxLayoutGap="8px"
+>
   <span i18n>Y Axis</span>
   <translatable-input
     [content]="componentContent.yAxis.title"
@@ -200,12 +205,12 @@
     />
   </mat-form-field>
   <translatable-input
-      [content]="componentContent.yAxis"
-      key="units"
-      label="Units"
-      i18n-label
-      (defaultLanguageTextChanged)="inputChange.next($event)"
-    />
+    [content]="componentContent.yAxis"
+    key="units"
+    label="Units"
+    i18n-label
+    (defaultLanguageTextChanged)="inputChange.next($event)"
+  />
   <mat-form-field class="minmax">
     <mat-label i18n>Min</mat-label>
     <input
@@ -432,7 +437,10 @@
     >
       <mat-label i18n>Symbol</mat-label>
       <mat-select [(ngModel)]="series.marker.symbol" (ngModelChange)="componentChanged()">
-        <mat-option *ngFor="let availableSymbol of availableSymbols" [value]="availableSymbol.value">
+        <mat-option
+          *ngFor="let availableSymbol of availableSymbols"
+          [value]="availableSymbol.value"
+        >
           {{ availableSymbol.text }}
         </mat-option>
       </mat-select>
@@ -451,7 +459,9 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field
-      *ngIf="series.type === 'line' || (series.type == null && componentContent.graphType === 'line')"
+      *ngIf="
+        series.type === 'line' || (series.type == null && componentContent.graphType === 'line')
+      "
     >
       <mat-label i18n>Line Type</mat-label>
       <mat-select [(ngModel)]="series.dashStyle" (ngModelChange)="componentChanged()">
@@ -521,7 +531,6 @@
         componentContent.xAxis.type === '' ||
         componentContent.xAxis.type == null
       "
-      
     >
       <mat-form-field class="data-point">
         <mat-label i18n>X</mat-label>
@@ -542,7 +551,7 @@
         />
       </mat-form-field>
     </ng-container>
-    <ng-container *ngIf="componentContent.xAxis.type === 'categories'" >
+    <ng-container *ngIf="componentContent.xAxis.type === 'categories'">
       <mat-form-field>
         <mat-label>{{ componentContent.xAxis.categories[dataPointIndex] }}</mat-label>
         <input

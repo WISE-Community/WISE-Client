@@ -1,7 +1,7 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
+/>
 <div fxLayout="row">
   <mat-form-field class="dimension-input">
     <mat-label i18n>Width (Pixels)</mat-label>
@@ -142,7 +142,7 @@
       />
     </div>
     <translatable-input
-      *ngIf="object.type === 'text'" 
+      *ngIf="object.type === 'text'"
       [content]="object"
       key="text"
       label="Text"
