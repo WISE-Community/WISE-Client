@@ -5,7 +5,6 @@ import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherHomeComponent } from './teacher-home/teacher-home.component';
 import { AuthGuard } from './auth.guard';
 import { TeacherRunListComponent } from './teacher-run-list/teacher-run-list.component';
-import { TeacherRunListItemComponent } from './teacher-run-list-item/teacher-run-list-item.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -25,9 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { RunMenuComponent } from './run-menu/run-menu.component';
 import { LibraryModule } from '../modules/library/library.module';
-import { TimelineModule } from '../modules/timeline/timeline.module';
 import { EditComponent } from './account/edit/edit.component';
 import { TeacherEditProfileComponent } from './account/edit-profile/edit-profile.component';
 import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog/list-classroom-courses-dialog.component';
@@ -76,13 +73,12 @@ const materialModules = [
     LibraryModule,
     materialModules,
     NgSelectModule,
-    RunMenuComponent,
     SearchBarComponent,
     SelectRunsControlsComponent,
     SelectTagsComponent,
     SharedModule,
     TeacherRoutingModule,
-    TimelineModule,
+    TeacherRunListComponent,
     ClipboardModule,
     UnitTagsComponent
   ],
@@ -90,9 +86,7 @@ const materialModules = [
     EditComponent,
     ListClassroomCoursesDialogComponent,
     TeacherEditProfileComponent,
-    TeacherHomeComponent,
-    TeacherRunListComponent,
-    TeacherRunListItemComponent
+    TeacherHomeComponent
   ],
   providers: [AccessLinkService, AuthGuard, ColorService, ProjectTagService],
   exports: [UnitTagsComponent, materialModules]

@@ -24,7 +24,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TimelineModule } from '../timeline/timeline.module';
 import { LibraryFiltersComponent } from './library-filters/library-filters.component';
 import { HomePageProjectLibraryComponent } from './home-page-project-library/home-page-project-library.component';
 import { OfficialLibraryComponent } from './official-library/official-library.component';
@@ -88,7 +87,6 @@ const materialModules = [
     SelectMenuComponent,
     SelectTagsComponent,
     SharedModule,
-    TimelineModule,
     UnitTagsComponent
   ],
   declarations: [HomePageProjectLibraryComponent, ShareProjectDialogComponent],

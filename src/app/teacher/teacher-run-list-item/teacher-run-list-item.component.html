@@ -70,7 +70,7 @@
         matTooltipPosition="above"
         [(ngModel)]="run.project.selected"
         (ngModelChange)="runSelectedStatusChangedEvent.emit()"
-      ></mat-checkbox>
+      />
     </div>
     <div
       mat-card-avatar
@@ -102,7 +102,7 @@
           class="run-action"
           [run]="run"
           (runArchiveStatusChangedEvent)="runArchiveStatusChanged()"
-        ></app-run-menu>
+        />
       </div>
     </div>
   </mat-card-content>

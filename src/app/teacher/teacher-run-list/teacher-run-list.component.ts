@@ -1,4 +1,18 @@
 import { Component, EventEmitter, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
+import { SelectTagsComponent } from '../select-tags/select-tags.component';
+import { ApplyTagsButtonComponent } from '../apply-tags-button/apply-tags-button.component';
+import { SelectRunsControlsComponent } from '../select-runs-controls/select-runs-controls.component';
+import { TimelineModule } from '../../modules/timeline/timeline.module';
+import { TeacherRunListItemComponent } from '../teacher-run-list-item/teacher-run-list-item.component';
 import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { ConfigService } from '../../services/config.service';
@@ -17,7 +31,22 @@ import { Tag } from '../../domain/tag';
   selector: 'app-teacher-run-list',
   styleUrl: './teacher-run-list.component.scss',
   templateUrl: './teacher-run-list.component.html',
-  standalone: false
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatButtonModule,
+    SearchBarComponent,
+    SelectTagsComponent,
+    ApplyTagsButtonComponent,
+    SelectRunsControlsComponent,
+    TeacherRunListItemComponent,
+    TimelineModule
+  ]
 })
 export class TeacherRunListComponent implements OnInit {
   private MAX_RECENT_RUNS = 10;
