@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../modules/shared/shared.module';
 import { TeacherRoutingModule } from './teacher-routing.module';
-import { TeacherHomeComponent } from './teacher-home/teacher-home.component';
 import { AuthGuard } from './auth.guard';
-import { TeacherRunListComponent } from './teacher-run-list/teacher-run-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -28,7 +26,6 @@ import { LibraryModule } from '../modules/library/library.module';
 import { EditComponent } from './account/edit/edit.component';
 import { TeacherEditProfileComponent } from './account/edit-profile/edit-profile.component';
 import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog/list-classroom-courses-dialog.component';
-import { DiscourseRecentActivityComponent } from './discourse-recent-activity/discourse-recent-activity.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -40,7 +37,6 @@ import { UnitTagsComponent } from './unit-tags/unit-tags.component';
 import { ColorService } from '../../assets/wise5/services/colorService';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AccessLinkService } from '../services/accessLinkService';
-import { SelectRunsControlsComponent } from './select-runs-controls/select-runs-controls.component';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -67,27 +63,19 @@ const materialModules = [
   imports: [
     ApplyTagsButtonComponent,
     CommonModule,
-    DiscourseRecentActivityComponent,
     FlexLayoutModule,
     FormsModule,
     LibraryModule,
     materialModules,
     NgSelectModule,
     SearchBarComponent,
-    SelectRunsControlsComponent,
     SelectTagsComponent,
     SharedModule,
     TeacherRoutingModule,
-    TeacherRunListComponent,
     ClipboardModule,
     UnitTagsComponent
   ],
-  declarations: [
-    EditComponent,
-    ListClassroomCoursesDialogComponent,
-    TeacherEditProfileComponent,
-    TeacherHomeComponent
-  ],
+  declarations: [EditComponent, ListClassroomCoursesDialogComponent, TeacherEditProfileComponent],
   providers: [AccessLinkService, AuthGuard, ColorService, ProjectTagService],
   exports: [UnitTagsComponent, materialModules]
 })

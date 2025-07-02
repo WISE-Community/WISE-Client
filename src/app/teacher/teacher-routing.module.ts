@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import { TeacherHomeComponent } from './teacher-home/teacher-home.component';
 import { EditComponent } from './account/edit/edit.component';
 
 const teacherRoutes: Routes = [
@@ -15,7 +14,8 @@ const teacherRoutes: Routes = [
       { path: 'profile/edit', component: EditComponent },
       {
         path: 'home',
-        component: TeacherHomeComponent,
+        loadComponent: () =>
+          import('./teacher-home/teacher-home.component').then((m) => m.TeacherHomeComponent),
         children: [
           { path: 'library/personal', redirectTo: '/curriculum/personal' },
           { path: 'library', redirectTo: '/curriculum' },
