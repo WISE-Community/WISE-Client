@@ -25,7 +25,6 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { LibraryModule } from '../modules/library/library.module';
 import { EditComponent } from './account/edit/edit.component';
 import { TeacherEditProfileComponent } from './account/edit-profile/edit-profile.component';
-import { ListClassroomCoursesDialogComponent } from './list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -75,7 +74,7 @@ const materialModules = [
     ClipboardModule,
     UnitTagsComponent
   ],
-  declarations: [EditComponent, ListClassroomCoursesDialogComponent, TeacherEditProfileComponent],
+  declarations: [EditComponent, TeacherEditProfileComponent],
   providers: [AccessLinkService, AuthGuard, ColorService, ProjectTagService],
   exports: [UnitTagsComponent, materialModules]
 })

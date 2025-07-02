@@ -9099,14 +9099,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Hi class! Please complete the &quot;<x id="unitTitle" equiv-text="this.data.run.name"/>&quot; WISE unit. (Access Code: <x id="accessCode" equiv-text="this.data.run.runCode"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2719481583773153034" datatype="html">
         <source>(Section <x id="section" equiv-text="course.section"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/list-classroom-courses-dialog/list-classroom-courses-dialog.component.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8933047112846691847" datatype="html">
