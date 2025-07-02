@@ -79,7 +79,6 @@ import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-a
 import { EditComponentConstraintsComponent } from '../authoring-tool/edit-component-constraints/edit-component-constraints.component';
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/components/component-authoring.component';
-import { WiseLinkAuthoringDialogComponent } from '../../assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
 import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
@@ -164,8 +163,7 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
     SummaryAuthoring,
-    TableAuthoring,
-    WiseLinkAuthoringDialogComponent
+    TableAuthoring
   ],
   imports: [
     ComponentAuthoringComponent,
