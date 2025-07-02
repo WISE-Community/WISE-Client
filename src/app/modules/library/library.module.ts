@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LibraryGroupThumbsComponent } from './library-group-thumbs/library-group-thumbs.component';
 import { LibraryProjectComponent } from './library-project/library-project.component';
 import { LibraryProjectDetailsComponent } from './library-project-details/library-project-details.component';
 import { RouterModule } from '@angular/router';
@@ -25,13 +24,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TimelineModule } from '../timeline/timeline.module';
 import { LibraryFiltersComponent } from './library-filters/library-filters.component';
 import { HomePageProjectLibraryComponent } from './home-page-project-library/home-page-project-library.component';
 import { OfficialLibraryComponent } from './official-library/official-library.component';
 import { PersonalLibraryComponent } from './personal-library/personal-library.component';
 import { ShareProjectDialogComponent } from './share-project-dialog/share-project-dialog.component';
-import { CopyProjectDialogComponent } from './copy-project-dialog/copy-project-dialog.component';
 import { LibraryPaginatorIntl } from './libraryPaginatorIntl';
 import { ArchiveProjectsButtonComponent } from '../../teacher/archive-projects-button/archive-projects-button.component';
 import { SearchBarComponent } from '../shared/search-bar/search-bar.component';
@@ -79,6 +76,7 @@ const materialModules = [
     LibraryFiltersComponent,
     LibraryProjectComponent,
     LibraryProjectDetailsComponent,
+    OfficialLibraryComponent,
     PersonalLibraryComponent,
     ReactiveFormsModule,
     RouterModule,
@@ -89,16 +87,9 @@ const materialModules = [
     SelectMenuComponent,
     SelectTagsComponent,
     SharedModule,
-    TimelineModule,
     UnitTagsComponent
   ],
-  declarations: [
-    LibraryGroupThumbsComponent,
-    HomePageProjectLibraryComponent,
-    OfficialLibraryComponent,
-    ShareProjectDialogComponent,
-    CopyProjectDialogComponent
-  ],
+  declarations: [HomePageProjectLibraryComponent, ShareProjectDialogComponent],
   exports: [
     CurriculumComponent,
     HomePageProjectLibraryComponent,

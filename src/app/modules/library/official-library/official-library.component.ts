@@ -1,22 +1,23 @@
 import { BehaviorSubject } from 'rxjs';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { LibraryGroupThumbsComponent } from '../library-group-thumbs/library-group-thumbs.component';
+import { LibraryProjectComponent } from '../library-project/library-project.component';
 import { LibraryGroup } from '../libraryGroup';
-import { LibraryProject } from '../libraryProject';
 import { LibraryComponent } from '../library/library.component';
 
 @Component({
-  selector: 'app-official-library',
-  templateUrl: './official-library.component.html',
-  styleUrls: ['./official-library.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false
+  imports: [CommonModule, MatExpansionModule, LibraryGroupThumbsComponent, LibraryProjectComponent],
+  selector: 'app-official-library',
+  styleUrl: './official-library.component.scss',
+  templateUrl: './official-library.component.html'
 })
 export class OfficialLibraryComponent extends LibraryComponent {
+  protected expandedGroups: object = {};
   @Input() isSplitScreen: boolean = false;
-
-  projects: LibraryProject[] = [];
-  libraryGroups: LibraryGroup[] = [];
-  expandedGroups: object = {};
+  protected libraryGroups: LibraryGroup[] = [];
 
   ngOnInit() {
     super.ngOnInit();

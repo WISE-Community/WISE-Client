@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LibraryGroupThumbsComponent } from './library-group-thumbs.component';
 import { LibraryGroup } from '../libraryGroup';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('LibraryGroupThumbsComponent', () => {
   let component: LibraryGroupThumbsComponent;
@@ -9,9 +8,7 @@ describe('LibraryGroupThumbsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [],
-      declarations: [LibraryGroupThumbsComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [LibraryGroupThumbsComponent]
     }).compileComponents();
   }));
 

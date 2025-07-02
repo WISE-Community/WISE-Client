@@ -6,28 +6,14 @@ import { TeacherRun } from '../teacher-run';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { User } from '../../domain/user';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SelectRunsControlsModule } from '../select-runs-controls/select-runs-controls.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { TeacherRunListItemComponent } from '../teacher-run-list-item/teacher-run-list-item.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TeacherRunListHarness } from './teacher-run-list.harness';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { RunMenuComponent } from '../run-menu/run-menu.component';
-import { MatMenuModule } from '@angular/material/menu';
 import { ArchiveProjectService } from '../../services/archive-project.service';
-import { MatCardModule } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
-import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
 import { Project } from '../../domain/project';
-import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 import { Tag } from '../../domain/tag';
@@ -85,25 +71,8 @@ class TeacherRunStub extends TeacherRun {
 describe('TeacherRunListComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RunMenuComponent, TeacherRunListComponent, TeacherRunListItemComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        ArchiveProjectsButtonComponent,
-        BrowserAnimationsModule,
-        BrowserModule,
-        FormsModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatMenuModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        ReactiveFormsModule,
-        SearchBarComponent,
-        SelectRunsControlsModule
-      ],
+      imports: [BrowserAnimationsModule, BrowserModule, TeacherRunListComponent],
       providers: [
         MockProvider(AccessLinkService),
         ArchiveProjectService,

@@ -1,5 +1,12 @@
 import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
-import { ConfigService } from '../../services/config.service';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { flash } from '../../animations';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,11 +17,25 @@ import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-
 import { Subscription } from 'rxjs';
 import { Tag } from '../../domain/tag';
 import { TeacherRun } from '../teacher-run';
+import { UnitTagsComponent } from '../unit-tags/unit-tags.component';
+import { RunMenuComponent } from '../run-menu/run-menu.component';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   animations: [flash],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatTooltipModule,
+    RouterModule,
+    RunMenuComponent,
+    UnitTagsComponent
+  ],
   selector: 'app-teacher-run-list-item',
-  standalone: false,
   styleUrl: './teacher-run-list-item.component.scss',
   templateUrl: './teacher-run-list-item.component.html'
 })

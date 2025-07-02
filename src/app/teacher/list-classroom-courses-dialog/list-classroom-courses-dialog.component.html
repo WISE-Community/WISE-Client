@@ -34,7 +34,7 @@
           </mat-checkbox>
         </p>
       </div>
-      <mat-divider></mat-divider>
+      <mat-divider />
       <h3 i18n>2. Add Description</h3>
       <mat-form-field appearance="fill">
         <mat-label i18n>Assignment description</mat-label>
@@ -51,7 +51,7 @@
         [disabled]="form.invalid || isAdding"
         class="button--progress"
       >
-        <mat-progress-bar *ngIf="isAdding" mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar *ngIf="isAdding" mode="indeterminate" />
         <ng-container i18n>Add</ng-container>
       </button>
     </mat-dialog-actions>

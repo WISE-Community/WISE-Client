@@ -1,17 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ShareRunCodeDialogComponent } from './share-run-code-dialog.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../services/config.service';
 import { TeacherService } from '../teacher.service';
 import { TeacherRun } from '../teacher-run';
 import { Project } from '../../domain/project';
 import { AccessLinkService } from '../../services/accessLinkService';
-import { MatIconModule } from '@angular/material/icon';
-import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MockProviders } from 'ng-mocks';
-import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 
 const runObj = new TeacherRun();
@@ -42,15 +37,7 @@ let fixture: ComponentFixture<ShareRunCodeDialogComponent>;
 describe('ShareRunCodeDialogComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ShareRunCodeDialogComponent],
-      imports: [
-        BrowserAnimationsModule,
-        CommonModule,
-        ClipboardModule,
-        MatDialogModule,
-        MatIconModule,
-        MatSnackBarModule
-      ],
+      imports: [ShareRunCodeDialogComponent],
       providers: [
         MockProviders(AccessLinkService, MatDialogRef, TeacherService, UserService),
         { provide: ConfigService, useClass: MockConfigService },
