@@ -5,12 +5,34 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subject, debounceTime } from 'rxjs';
 import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 import { UserService } from '../../../../app/services/user.service';
+import { EditUnitTypeComponent } from '../edit-unit-type/edit-unit-type.component';
+import { EditUnitResourcesComponent } from '../edit-unit-resources/edit-unit-resources.component';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslatableTextareaComponent } from '../components/translatable-textarea/translatable-textarea.component';
+import { TranslatableInputComponent } from '../components/translatable-input/translatable-input.component';
+import { EditProjectLanguageSettingComponent } from '../project-info/edit-project-language-setting/edit-project-language-setting.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  selector: 'project-info-authoring',
-  templateUrl: './project-info-authoring.component.html',
-  styleUrls: ['./project-info-authoring.component.scss'],
-  standalone: false
+  imports: [
+    CommonModule,
+    EditProjectLanguageSettingComponent,
+    EditUnitResourcesComponent,
+    EditUnitTypeComponent,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    TranslatableInputComponent,
+    TranslatableTextareaComponent
+  ],
+  styleUrl: './project-info-authoring.component.scss',
+  templateUrl: './project-info-authoring.component.html'
 })
 export class ProjectInfoAuthoringComponent {
   isEditingProjectIcon: boolean = false;

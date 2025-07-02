@@ -4,10 +4,10 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'node-advanced-path-authoring',
-    templateUrl: 'node-advanced-path-authoring.component.html',
-    styleUrls: ['node-advanced-path-authoring.component.scss'],
-    standalone: false
+  selector: 'node-advanced-path-authoring',
+  templateUrl: 'node-advanced-path-authoring.component.html',
+  styleUrls: ['node-advanced-path-authoring.component.scss'],
+  standalone: false
 })
 export class NodeAdvancedPathAuthoringComponent implements OnInit {
   protected canChangePathOptions = [
@@ -64,7 +64,7 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.parent.parent.params.subscribe((params) => {
+    this.route.parent.parent.parent.params.subscribe((params) => {
       this.node = this.projectService.getNodeById(params.nodeId);
       this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
     });

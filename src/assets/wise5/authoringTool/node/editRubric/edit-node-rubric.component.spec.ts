@@ -3,7 +3,6 @@ import { EditNodeRubricComponent } from './edit-node-rubric.component';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
@@ -23,28 +22,29 @@ const nodeId1: string = 'node1';
 describe('EditNodeRubricComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditNodeRubricComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule,
+      declarations: [EditNodeRubricComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        MatDialogModule,
         MatIconModule,
         RouterTestingModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
         ClassroomStatusService,
         ConfigService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
         {
-            provide: ActivatedRoute,
-            useValue: {
-                parent: { parent: { params: of({ nodeId: 'node1' }) } }
-            }
+          provide: ActivatedRoute,
+          useValue: {
+            parent: { parent: { parent: { params: of({ nodeId: 'node1' }) } } }
+          }
         },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

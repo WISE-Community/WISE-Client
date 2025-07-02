@@ -3,17 +3,20 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'node-advanced-general-authoring',
-    templateUrl: './node-advanced-general-authoring.component.html',
-    standalone: false
+  selector: 'node-advanced-general-authoring',
+  templateUrl: './node-advanced-general-authoring.component.html',
+  standalone: false
 })
 export class NodeAdvancedGeneralAuthoringComponent implements OnInit {
   protected node: any;
 
-  constructor(private projectService: TeacherProjectService, private route: ActivatedRoute) {}
+  constructor(
+    private projectService: TeacherProjectService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.route.parent.parent.params.subscribe((params) => {
+    this.route.parent.parent.parent.params.subscribe((params) => {
       this.node = this.projectService.getNodeById(params.nodeId);
     });
   }
