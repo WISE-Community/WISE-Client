@@ -88,7 +88,6 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
 import { EditCRaterInfoComponent } from '../../assets/wise5/components/common/cRater/edit-crater-info/edit-crater-info.component';
 import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
-import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 
 @NgModule({
   declarations: [
@@ -182,8 +181,7 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
     TranslatableAssetChooserComponent,
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
-    TranslatableTextareaComponent,
-    WiseAuthoringTinymceEditorComponent
+    TranslatableTextareaComponent
   ],
   exports: [
     AiChatAuthoringComponent,

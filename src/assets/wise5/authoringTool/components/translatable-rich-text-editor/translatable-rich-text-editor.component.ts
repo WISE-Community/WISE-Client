@@ -7,22 +7,13 @@ import { ConfigService } from '../../../services/configService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
+  imports: [CommonModule, MatButtonModule, MatTabsModule, WiseAuthoringTinymceEditorComponent],
   selector: 'translatable-rich-text-editor',
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatTabsModule,
-    WiseAuthoringTinymceEditorComponent
-  ],
-  templateUrl: './translatable-rich-text-editor.component.html',
-  styleUrl: './translatable-rich-text-editor.component.scss'
+  styles: ['.translation-tools { padding: 8px 0; }'],
+  templateUrl: './translatable-rich-text-editor.component.html'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
   protected html: string = '';
