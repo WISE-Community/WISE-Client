@@ -9,7 +9,7 @@ import { DrawAuthoring } from '../../assets/wise5/components/draw/draw-authoring
 import { EmbeddedAuthoring } from '../../assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component';
 import { GraphAuthoring } from '../../assets/wise5/components/graph/graph-authoring/graph-authoring.component';
 import { EditHTMLAdvancedComponent } from '../../assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component';
-import { HtmlAuthoring } from '../../assets/wise5/components/html/html-authoring/html-authoring.component';
+import { HtmlAuthoringComponent } from '../../assets/wise5/components/html/html-authoring/html-authoring.component';
 import { LabelAuthoring } from '../../assets/wise5/components/label/label-authoring/label-authoring.component';
 import { MatchAuthoringComponent } from '../../assets/wise5/components/match/match-authoring/match-authoring.component';
 import { MultipleChoiceAuthoring } from '../../assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component';
@@ -155,7 +155,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     EmbeddedAuthoring,
     FeedbackRuleHelpComponent,
     GraphAuthoring,
-    HtmlAuthoring,
     LabelAuthoring,
     OutsideUrlAuthoring,
     PeerChatAuthoringComponent,
@@ -171,6 +170,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     EditComponentWidthComponent,
     EditCRaterIdeaDescriptionsComponent,
     EditCRaterInfoComponent,
+    HtmlAuthoringComponent,
     MatchAuthoringComponent,
     MultipleChoiceAuthoring,
     OpenResponseAuthoringComponent,
@@ -241,7 +241,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     EditTableConnectedComponentsComponent,
     EmbeddedAuthoring,
     GraphAuthoring,
-    HtmlAuthoring,
+    HtmlAuthoringComponent,
     LabelAuthoring,
     MatchAuthoringComponent,
     MultipleChoiceAuthoring,
