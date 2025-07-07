@@ -12164,7 +12164,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Constraint <x id="INTERPOLATION" equiv-text="{{ constraintIndex + 1 }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
-          <context context-type="linenumber">24,26</context>
+          <context context-type="linenumber">24,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3212170478715285657" datatype="html">
