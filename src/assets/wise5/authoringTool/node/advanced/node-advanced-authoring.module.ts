@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    EditNodeRubricComponent,
     NodeAdvancedAuthoringComponent,
     NodeAdvancedConstraintAuthoringComponent,
     NodeAdvancedGeneralAuthoringComponent,
@@ -31,6 +30,7 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     CommonModule,
+    EditNodeRubricComponent,
     NodeConstraintAuthoringComponent,
     RequiredErrorLabelComponent,
     RouterModule,
