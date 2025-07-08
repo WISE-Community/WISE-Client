@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NodeAdvancedGeneralAuthoringComponent } from './general/node-advanced-general-authoring.component';
 import { NodeAdvancedJsonAuthoringComponent } from './json/node-advanced-json-authoring.component';
 import { NodeAdvancedAuthoringComponent } from './node-advanced-authoring/node-advanced-authoring.component';
 import { NodeAdvancedPathAuthoringComponent } from './path/node-advanced-path-authoring.component';
@@ -12,13 +11,11 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     NodeAdvancedAuthoringComponent,
-    NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
     NodeAdvancedPathAuthoringComponent
   ],
   exports: [
     NodeAdvancedAuthoringComponent,
-    NodeAdvancedGeneralAuthoringComponent,
     NodeAdvancedJsonAuthoringComponent,
     NodeAdvancedPathAuthoringComponent
   ],
