@@ -78,7 +78,6 @@ import { EditQuestionBankRulesComponent } from '../authoring-tool/edit-question-
 import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-and-component/select-step-and-component.component';
 import { EditComponentConstraintsComponent } from '../authoring-tool/edit-component-constraints/edit-component-constraints.component';
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
-import { ComponentAuthoringComponent } from '../../assets/wise5/authoringTool/components/component-authoring.component';
 import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
 import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
@@ -164,7 +163,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     TableAuthoring
   ],
   imports: [
-    ComponentAuthoringComponent,
     EditComponentConstraintsComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
@@ -186,7 +184,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
   exports: [
     AiChatAuthoringComponent,
     AudioOscillatorAuthoring,
-    ComponentAuthoringComponent,
     ConceptMapAuthoring,
     DialogGuidanceAuthoringComponent,
     DiscussionAuthoring,
