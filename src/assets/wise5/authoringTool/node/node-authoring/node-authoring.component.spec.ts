@@ -1,8 +1,6 @@
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeAuthoringComponent } from './node-authoring.component';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
@@ -22,6 +20,7 @@ import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NotebookService } from '../../../services/notebookService';
 import { MockProviders } from 'ng-mocks';
 import { ComponentTypeService } from '../../../services/componentTypeService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -64,8 +63,7 @@ describe('NodeAuthoringComponent', () => {
             url: '/teacher/edit/unit/123/node/node4'
           }
         },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
     window.history.pushState(
