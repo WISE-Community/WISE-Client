@@ -28,13 +28,13 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 @NgModule({
   declarations: [
     DialogGuidanceAuthoringComponent,
-    EditComponentMaxSubmitComponent,
     EditFeedbackRulesComponent,
     FeedbackRuleHelpComponent
   ],
   imports: [
     CommonModule,
     ComponentAuthoringModule,
+    EditComponentMaxSubmitComponent,
     EditComponentPrompt,
     DragDropModule,
     FormsModule,

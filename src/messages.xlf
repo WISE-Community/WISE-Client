@@ -948,8 +948,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
       <trans-unit id="5734850930052941582" datatype="html">
         <source>Max Submit</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component.html</context>
-          <context context-type="linenumber">3,8</context>
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component.ts</context>
+          <context context-type="linenumber">12,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="80516320088170434" datatype="html">

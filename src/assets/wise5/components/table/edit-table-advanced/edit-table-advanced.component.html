@@ -252,11 +252,9 @@
     Enable Row Selection
   </mat-checkbox>
 </div>
-<edit-component-max-submit
-  *ngIf="componentContent.showSubmitButton"
-  [componentContent]="componentContent"
->
-</edit-component-max-submit>
+@if (componentContent.showSubmitButton) {
+  <edit-component-max-submit [componentContent]="componentContent" />
+}
 <edit-component-default-feedback [componentContent]="componentContent">
 </edit-component-default-feedback>
 <div fxLayout="column" fxLayoutAlign="start start">
