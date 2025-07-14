@@ -43,7 +43,6 @@ describe('EditOpenResponseAdvancedComponent', () => {
       declarations: [
         EditCommonAdvancedComponent,
         EditComponentRubricComponent,
-        EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
         EditComponentTagsComponent,
         EditConnectedComponentsAddButtonComponent,
@@ -57,6 +56,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
         EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
         EditComponentMaxScoreComponent,
+        EditComponentSaveButtonComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
