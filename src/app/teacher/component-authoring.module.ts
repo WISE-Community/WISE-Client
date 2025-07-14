@@ -105,7 +105,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     EditCommonAdvancedComponent,
     EditComponentAdvancedComponent,
     EditComponentDefaultFeedback,
-    EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
     EditComponentMaxSubmitComponent,
@@ -164,6 +163,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
   imports: [
     EditComponentAddToNotebookButtonComponent,
     EditComponentConstraintsComponent,
+    EditComponentExcludeFromTotalScoreComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
     EditCRaterIdeaDescriptionsComponent,

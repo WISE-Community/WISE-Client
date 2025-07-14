@@ -878,12 +878,11 @@
           <context context-type="linenumber">29,33</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1660421711341896341" datatype="html">
-        <source> Do not count score on this activity towards the total score
-</source>
+      <trans-unit id="2161849927542361453" datatype="html">
+        <source> Do not count score on this activity towards the total score </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component.html</context>
-          <context context-type="linenumber">8,10</context>
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component.ts</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2742664813202759813" datatype="html">

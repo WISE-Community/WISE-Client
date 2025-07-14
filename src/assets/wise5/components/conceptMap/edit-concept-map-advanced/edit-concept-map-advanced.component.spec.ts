@@ -33,9 +33,8 @@ let rule1: any;
 describe('EditConceptMapAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         EditCommonAdvancedComponent,
-        EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
         EditComponentMaxScoreComponent,
         EditComponentRubricComponent,
@@ -45,18 +44,26 @@ describe('EditConceptMapAdvancedComponent', () => {
         EditConceptMapAdvancedComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
+        EditComponentExcludeFromTotalScoreComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

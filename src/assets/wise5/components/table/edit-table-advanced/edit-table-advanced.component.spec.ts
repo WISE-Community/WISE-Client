@@ -37,7 +37,6 @@ describe('EditTableAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         EditCommonAdvancedComponent,
-        EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
         EditComponentMaxScoreComponent,
         EditComponentRubricComponent,
@@ -53,6 +52,7 @@ describe('EditTableAdvancedComponent', () => {
       imports: [
         BrowserAnimationsModule,
         EditComponentAddToNotebookButtonComponent,
+        EditComponentExcludeFromTotalScoreComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,

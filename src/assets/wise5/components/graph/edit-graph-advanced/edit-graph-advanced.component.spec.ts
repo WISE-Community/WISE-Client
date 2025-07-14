@@ -35,7 +35,6 @@ describe('EditGraphAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         EditCommonAdvancedComponent,
-        EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
         EditComponentMaxScoreComponent,
         EditComponentRubricComponent,
@@ -50,6 +49,7 @@ describe('EditGraphAdvancedComponent', () => {
       imports: [
         BrowserAnimationsModule,
         EditComponentAddToNotebookButtonComponent,
+        EditComponentExcludeFromTotalScoreComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,

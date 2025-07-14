@@ -29,9 +29,8 @@ describe('EditCommonAdvancedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         EditCommonAdvancedComponent,
-        EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
         EditComponentMaxScoreComponent,
         EditComponentRubricComponent,
@@ -40,18 +39,25 @@ describe('EditCommonAdvancedComponent', () => {
         EditComponentSubmitButtonComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
+        EditComponentExcludeFromTotalScoreComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
