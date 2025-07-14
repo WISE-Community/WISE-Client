@@ -36,7 +36,6 @@ describe('EditConceptMapAdvancedComponent', () => {
       declarations: [
         EditCommonAdvancedComponent,
         EditComponentRubricComponent,
-        EditComponentSubmitButtonComponent,
         EditComponentTagsComponent,
         EditConceptMapAdvancedComponent,
         EditConnectedComponentsAddButtonComponent,
@@ -49,6 +48,7 @@ describe('EditConceptMapAdvancedComponent', () => {
         EditComponentJsonComponent,
         EditComponentMaxScoreComponent,
         EditComponentSaveButtonComponent,
+        EditComponentSubmitButtonComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,

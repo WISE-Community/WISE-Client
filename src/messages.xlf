@@ -1006,8 +1006,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
       <trans-unit id="4649118186580062581" datatype="html">
         <source>Show Submit Button</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component.html</context>
-          <context context-type="linenumber">7,9</context>
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component.ts</context>
+          <context context-type="linenumber">15,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7886570921510760899" datatype="html">

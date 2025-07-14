@@ -33,7 +33,6 @@ describe('EditCommonAdvancedComponent', () => {
         EditCommonAdvancedComponent,
         EditComponentRubricComponent,
         EditComponentTagsComponent,
-        EditComponentSubmitButtonComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
       ],
@@ -44,6 +43,7 @@ describe('EditCommonAdvancedComponent', () => {
         EditComponentMaxScoreComponent,
         EditComponentJsonComponent,
         EditComponentSaveButtonComponent,
+        EditComponentSubmitButtonComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
