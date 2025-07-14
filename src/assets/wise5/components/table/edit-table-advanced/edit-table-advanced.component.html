@@ -237,8 +237,7 @@
   <div class="import-table-message">{{ importTableMessage }}</div>
 </div>
 <div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [componentContent]="componentContent">
-  </edit-component-add-to-notebook-button>
+  <edit-component-add-to-notebook-button [componentContent]="componentContent" />
 </div>
 <edit-component-save-button [componentContent]="componentContent"> </edit-component-save-button>
 <br />

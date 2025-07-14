@@ -35,8 +35,7 @@ let fixture: ComponentFixture<EditTableAdvancedComponent>;
 describe('EditTableAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
-        EditComponentAddToNotebookButtonComponent,
+      declarations: [
         EditCommonAdvancedComponent,
         EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
@@ -49,9 +48,11 @@ describe('EditTableAdvancedComponent', () => {
         EditConnectedComponentsComponent,
         EditTableAdvancedComponent,
         EditTableConnectedComponentsComponent
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        BrowserAnimationsModule,
+        EditComponentAddToNotebookButtonComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
@@ -59,9 +60,15 @@ describe('EditTableAdvancedComponent', () => {
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

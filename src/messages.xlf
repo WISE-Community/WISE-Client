@@ -805,12 +805,11 @@
           <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2948382341539284292" datatype="html">
-        <source> Show Add to Notebook Button
-</source>
+      <trans-unit id="8754438896542897894" datatype="html">
+        <source> Show Add to Notebook Button </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component.html</context>
-          <context context-type="linenumber">8,10</context>
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component.ts</context>
+          <context context-type="linenumber">17,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8360107325291301836" datatype="html">
@@ -21315,7 +21314,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Enable Row Selection </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">253,257</context>
+          <context context-type="linenumber">252,256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3802284852279199102" datatype="html">

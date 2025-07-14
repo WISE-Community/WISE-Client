@@ -34,7 +34,6 @@ describe('EditGraphAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        EditComponentAddToNotebookButtonComponent,
         EditCommonAdvancedComponent,
         EditComponentExcludeFromTotalScoreComponent,
         EditComponentJsonComponent,
@@ -50,6 +49,7 @@ describe('EditGraphAdvancedComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         BrowserAnimationsModule,
+        EditComponentAddToNotebookButtonComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,

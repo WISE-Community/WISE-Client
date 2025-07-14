@@ -592,7 +592,7 @@
     }
   </div>
 }
-@if (isNotebookEnabled) {
+@if (isNotebookEnabled()) {
   <edit-component-add-to-notebook-button [componentContent]="componentContent" />
   <br />
 }
