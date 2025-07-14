@@ -809,7 +809,7 @@
         <source> Show Add to Notebook Button </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component.ts</context>
-          <context context-type="linenumber">17,20</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8360107325291301836" datatype="html">

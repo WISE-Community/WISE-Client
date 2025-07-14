@@ -6,10 +6,9 @@ import { FormsModule } from '@angular/forms';
 @Component({
   imports: [FormsModule, MatCheckboxModule],
   selector: 'edit-component-add-to-notebook-button',
-  styles: ['.show-add-to-notebook-button-checkbox { margin-top: 4px; margin-bottom: 4px; }'],
+  styles: ['mat-checkbox { margin-top: 4px; margin-bottom: 4px; }'],
   template: `<mat-checkbox
     color="primary"
-    class="show-add-to-notebook-button-checkbox"
     [(ngModel)]="componentContent.showAddToNotebookButton"
     (ngModelChange)="inputChanged.next($event)"
     i18n
