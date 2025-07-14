@@ -32,7 +32,6 @@ describe('EditCommonAdvancedComponent', () => {
       declarations: [
         EditCommonAdvancedComponent,
         EditComponentJsonComponent,
-        EditComponentMaxScoreComponent,
         EditComponentRubricComponent,
         EditComponentTagsComponent,
         EditComponentSaveButtonComponent,
@@ -44,6 +43,7 @@ describe('EditCommonAdvancedComponent', () => {
       imports: [
         BrowserAnimationsModule,
         EditComponentExcludeFromTotalScoreComponent,
+        EditComponentMaxScoreComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,

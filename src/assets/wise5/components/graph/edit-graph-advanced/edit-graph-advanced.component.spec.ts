@@ -36,7 +36,6 @@ describe('EditGraphAdvancedComponent', () => {
       declarations: [
         EditCommonAdvancedComponent,
         EditComponentJsonComponent,
-        EditComponentMaxScoreComponent,
         EditComponentRubricComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
@@ -50,6 +49,7 @@ describe('EditGraphAdvancedComponent', () => {
         BrowserAnimationsModule,
         EditComponentAddToNotebookButtonComponent,
         EditComponentExcludeFromTotalScoreComponent,
+        EditComponentMaxScoreComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,

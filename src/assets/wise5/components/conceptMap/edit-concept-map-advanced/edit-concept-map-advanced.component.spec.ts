@@ -36,7 +36,6 @@ describe('EditConceptMapAdvancedComponent', () => {
       declarations: [
         EditCommonAdvancedComponent,
         EditComponentJsonComponent,
-        EditComponentMaxScoreComponent,
         EditComponentRubricComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
@@ -49,6 +48,7 @@ describe('EditConceptMapAdvancedComponent', () => {
       imports: [
         BrowserAnimationsModule,
         EditComponentExcludeFromTotalScoreComponent,
+        EditComponentMaxScoreComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
