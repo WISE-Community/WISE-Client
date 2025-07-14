@@ -35,7 +35,6 @@ describe('EditConceptMapAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         EditCommonAdvancedComponent,
-        EditComponentJsonComponent,
         EditComponentRubricComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
@@ -48,6 +47,7 @@ describe('EditConceptMapAdvancedComponent', () => {
       imports: [
         BrowserAnimationsModule,
         EditComponentExcludeFromTotalScoreComponent,
+        EditComponentJsonComponent,
         EditComponentMaxScoreComponent,
         FormsModule,
         MatCheckboxModule,
