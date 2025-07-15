@@ -13,13 +13,14 @@ let fixture: ComponentFixture<EditDiscussionConnectedComponentsComponent>;
 describe('EditDiscussionConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [EditDiscussionConnectedComponentsComponent],
+      imports: [
         EditConnectedComponentsAddButtonComponent,
-        EditDiscussionConnectedComponentsComponent
-    ],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        MatIconModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -17,13 +17,14 @@ const nodeId1 = 'nodeId1';
 describe('EditMultipleChoiceConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [EditMultipleChoiceConnectedComponentsComponent],
+      imports: [
         EditConnectedComponentsAddButtonComponent,
-        EditMultipleChoiceConnectedComponentsComponent
-    ],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        MatIconModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

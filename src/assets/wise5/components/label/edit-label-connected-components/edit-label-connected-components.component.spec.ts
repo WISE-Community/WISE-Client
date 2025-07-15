@@ -15,13 +15,14 @@ const componentId1 = 'component1';
 describe('EditLabelConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [EditLabelConnectedComponentsComponent],
+      imports: [
         EditConnectedComponentsAddButtonComponent,
-        EditLabelConnectedComponentsComponent
-    ],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        MatIconModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -10,14 +10,17 @@ let component: EditConnectedComponentsComponent;
 let fixture: ComponentFixture<EditConnectedComponentsComponent>;
 const componentId10 = 'component10';
 const nodeId10 = 'node10';
-
 describe('EditConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditConnectedComponentsAddButtonComponent, EditConnectedComponentsComponent],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [EditConnectedComponentsComponent],
+      imports: [
+        EditConnectedComponentsAddButtonComponent,
+        MatIconModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

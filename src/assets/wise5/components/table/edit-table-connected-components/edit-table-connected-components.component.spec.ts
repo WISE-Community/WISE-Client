@@ -15,13 +15,14 @@ const nodeId1 = 'nodeId1';
 describe('EditTableConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [EditTableConnectedComponentsComponent],
+      imports: [
         EditConnectedComponentsAddButtonComponent,
-        EditTableConnectedComponentsComponent
-    ],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        MatIconModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

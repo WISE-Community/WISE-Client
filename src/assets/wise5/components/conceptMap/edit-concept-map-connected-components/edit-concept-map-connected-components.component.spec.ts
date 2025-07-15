@@ -16,13 +16,14 @@ const nodeId1 = 'nodeId1';
 describe('EditConceptMapConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [EditConceptMapConnectedComponentsComponent],
+      imports: [
         EditConnectedComponentsAddButtonComponent,
-        EditConceptMapConnectedComponentsComponent
-    ],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        MatIconModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

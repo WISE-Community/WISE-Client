@@ -17,8 +17,6 @@ import { EditComponentRubricComponent } from '../../../../../app/authoring-tool/
 import { EditComponentSaveButtonComponent } from '../../../../../app/authoring-tool/edit-component-save-button/edit-component-save-button.component';
 import { EditComponentSubmitButtonComponent } from '../../../../../app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
-import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -33,12 +31,7 @@ let fixture: ComponentFixture<EditGraphAdvancedComponent>;
 describe('EditGraphAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        EditCommonAdvancedComponent,
-        EditConnectedComponentsAddButtonComponent,
-        EditConnectedComponentsComponent,
-        EditGraphAdvancedComponent
-      ],
+      declarations: [EditCommonAdvancedComponent, EditGraphAdvancedComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         BrowserAnimationsModule,

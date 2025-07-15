@@ -16,13 +16,14 @@ const importWorkType = 'importWork';
 describe('EditConnectedComponentsWithBackgroundComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [EditConnectedComponentsWithBackgroundComponent],
+      imports: [
         EditConnectedComponentsAddButtonComponent,
-        EditConnectedComponentsWithBackgroundComponent
-    ],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        MatIconModule,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
   });
 
   beforeEach(() => {
