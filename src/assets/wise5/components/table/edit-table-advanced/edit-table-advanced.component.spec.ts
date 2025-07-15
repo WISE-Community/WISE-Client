@@ -37,7 +37,6 @@ describe('EditTableAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         EditCommonAdvancedComponent,
-        EditComponentTagsComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent,
         EditTableAdvancedComponent,
@@ -53,6 +52,7 @@ describe('EditTableAdvancedComponent', () => {
         EditComponentRubricComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
+        EditComponentTagsComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,

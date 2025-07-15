@@ -35,7 +35,6 @@ describe('EditConceptMapAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         EditCommonAdvancedComponent,
-        EditComponentTagsComponent,
         EditConceptMapAdvancedComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
@@ -49,6 +48,7 @@ describe('EditConceptMapAdvancedComponent', () => {
         EditComponentRubricComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
+        EditComponentTagsComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
