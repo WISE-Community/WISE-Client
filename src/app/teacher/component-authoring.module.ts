@@ -104,7 +104,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,
     EditComponentAdvancedComponent,
-    EditComponentDefaultFeedback,
     EditComponentPeerGroupingTagComponent,
     EditComponentRubricComponent,
     EditComponentTagsComponent,
@@ -158,6 +157,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
   imports: [
     EditComponentAddToNotebookButtonComponent,
     EditComponentConstraintsComponent,
+    EditComponentDefaultFeedback,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
