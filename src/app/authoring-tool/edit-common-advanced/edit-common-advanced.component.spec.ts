@@ -31,7 +31,6 @@ describe('EditCommonAdvancedComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         EditCommonAdvancedComponent,
-        EditComponentRubricComponent,
         EditComponentTagsComponent,
         EditConnectedComponentsAddButtonComponent,
         EditConnectedComponentsComponent
@@ -42,6 +41,7 @@ describe('EditCommonAdvancedComponent', () => {
         EditComponentExcludeFromTotalScoreComponent,
         EditComponentMaxScoreComponent,
         EditComponentJsonComponent,
+        EditComponentRubricComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
         FormsModule,
