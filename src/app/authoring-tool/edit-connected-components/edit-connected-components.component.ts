@@ -1,11 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
+import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
+import { EditConnectedComponentDefaultSelectsComponent } from '../edit-connected-component-default-selects/edit-connected-component-default-selects.component';
+import { EditConnectedComponentDeleteButtonComponent } from '../edit-connected-component-delete-button/edit-connected-component-delete-button.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'edit-connected-components',
-    templateUrl: './edit-connected-components.component.html',
-    styleUrls: ['./edit-connected-components.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    EditConnectedComponentDefaultSelectsComponent,
+    EditConnectedComponentDeleteButtonComponent,
+    EditConnectedComponentsAddButtonComponent
+  ],
+  selector: 'edit-connected-components',
+  styleUrl: './edit-connected-components.component.scss',
+  templateUrl: './edit-connected-components.component.html'
 })
 export class EditConnectedComponentsComponent implements OnInit {
   @Input() componentContent: any;

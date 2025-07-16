@@ -1,11 +1,5 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '../../../assets/wise5/common/Component';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
@@ -19,8 +13,11 @@ import { EditComponentSubmitButtonComponent } from '../edit-component-submit-but
 import { EditComponentTagsComponent } from '../edit-component-tags/edit-component-tags.component';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
 import { EditCommonAdvancedComponent } from './edit-common-advanced.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { EditComponentDefaultFeedback } from '../edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
+import { EditComponentWidthComponent } from '../edit-component-width/edit-component-width.component';
+import { EditComponentConstraintsComponent } from '../edit-component-constraints/edit-component-constraints.component';
+import { EditComponentMaxSubmitComponent } from '../edit-component-max-submit/edit-component-max-submit.component';
 
 describe('EditCommonAdvancedComponent', () => {
   let component: EditCommonAdvancedComponent;
@@ -28,23 +25,21 @@ describe('EditCommonAdvancedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditCommonAdvancedComponent, EditConnectedComponentsComponent],
-      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [EditCommonAdvancedComponent],
       imports: [
         BrowserAnimationsModule,
+        EditComponentConstraintsComponent,
+        EditComponentDefaultFeedback,
         EditComponentExcludeFromTotalScoreComponent,
         EditComponentMaxScoreComponent,
+        EditComponentMaxSubmitComponent,
         EditComponentJsonComponent,
         EditComponentRubricComponent,
         EditComponentSaveButtonComponent,
         EditComponentSubmitButtonComponent,
         EditComponentTagsComponent,
-        FormsModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
+        EditComponentWidthComponent,
+        EditConnectedComponentsComponent,
         StudentTeacherCommonServicesModule
       ],
       providers: [
