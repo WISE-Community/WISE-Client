@@ -1651,7 +1651,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
-          <context context-type="linenumber">24,26</context>
+          <context context-type="linenumber">23,25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
@@ -8976,7 +8976,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">24,27</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
@@ -10885,7 +10885,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">18,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8689144983145717610" datatype="html">
@@ -17678,11 +17678,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source> Import Work As Background </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-connected-components/edit-concept-map-connected-components.component.html</context>
-          <context context-type="linenumber">25,29</context>
+          <context context-type="linenumber">24,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
-          <context context-type="linenumber">35,39</context>
+          <context context-type="linenumber">34,38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-connected-components/edit-graph-connected-components.component.html</context>
@@ -17690,7 +17690,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-connected-components/edit-label-connected-components.component.html</context>
-          <context context-type="linenumber">25,30</context>
+          <context context-type="linenumber">24,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3658261269254024798" datatype="html">
@@ -18281,7 +18281,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Update On</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">18,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="136621085447874306" datatype="html">
@@ -19317,21 +19317,21 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Characters Per Line</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-connected-components/edit-label-connected-components.component.html</context>
-          <context context-type="linenumber">35,38</context>
+          <context context-type="linenumber">34,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="771600745062751502" datatype="html">
         <source>Space Inbetween Lines</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-connected-components/edit-label-connected-components.component.html</context>
-          <context context-type="linenumber">44,47</context>
+          <context context-type="linenumber">43,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7618778783437222241" datatype="html">
         <source>Font Size</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-connected-components/edit-label-connected-components.component.html</context>
-          <context context-type="linenumber">53,56</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-authoring/label-authoring.component.html</context>
@@ -21348,21 +21348,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Merge</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
-          <context context-type="linenumber">24,26</context>
+          <context context-type="linenumber">23,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7771562252675241359" datatype="html">
         <source>Append</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">24,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3291639273487799740" datatype="html">
         <source> Only Show Data At Mouse X Position </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-connected-components/edit-table-connected-components.component.html</context>
-          <context context-type="linenumber">35,39</context>
+          <context context-type="linenumber">34,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="843548054527451651" datatype="html">

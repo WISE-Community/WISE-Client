@@ -13,8 +13,7 @@
         connectedComponentComponentIdChanged(connectedComponent)
       "
       (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
-    >
-    </edit-connected-component-default-selects>
+    />
     <div *ngIf="canConnectedComponentTypeImportWorkAsBackground(connectedComponent)">
       <mat-checkbox
         [(ngModel)]="connectedComponent.importWorkAsBackground"

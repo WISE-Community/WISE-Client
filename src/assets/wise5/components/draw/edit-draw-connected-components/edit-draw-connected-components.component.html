@@ -13,8 +13,7 @@
         connectedComponentComponentIdChanged(connectedComponent)
       "
       (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
-    >
-    </edit-connected-component-default-selects>
+    />
     <mat-form-field *ngIf="connectedComponent.nodeId === nodeId">
       <mat-label i18n>Update On</mat-label>
       <mat-select

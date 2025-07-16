@@ -1,43 +1,41 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SelectStepAndComponentComponent } from '../select-step-and-component/select-step-and-component.component';
+import { EditConnectedComponentTypeSelectComponent } from '../edit-connected-component-type-select/edit-connected-component-type-select.component';
 
 @Component({
-    selector: 'edit-connected-component-default-selects',
-    templateUrl: './edit-connected-component-default-selects.component.html',
-    styleUrls: ['./edit-connected-component-default-selects.component.scss'],
-    standalone: false
+  imports: [EditConnectedComponentTypeSelectComponent, SelectStepAndComponentComponent],
+  selector: 'edit-connected-component-default-selects',
+  template: `<div class="flex flex-row flex-wrap gap-5">
+    <select-step-and-component
+      [referenceComponent]="connectedComponent"
+      [thisComponentId]="componentId"
+      [allowedComponentTypes]="allowedConnectedComponentTypes"
+      (stepChange)="connectedComponentNodeIdChanged()"
+      (componentChange)="connectedComponentComponentIdChanged()"
+    />
+    <edit-connected-component-type-select
+      [connectedComponent]="connectedComponent"
+      (connectedComponentChange)="connectedComponentTypeChanged()"
+    />
+  </div> `
 })
-export class EditConnectedComponentDefaultSelectsComponent implements OnInit {
-  @Input()
-  componentId: string;
+export class EditConnectedComponentDefaultSelectsComponent {
+  @Input() allowedConnectedComponentTypes: string[];
+  @Input() componentId: string;
+  @Input() connectedComponent: any;
+  @Output() connectedComponentComponentIdChange: EventEmitter<any> = new EventEmitter();
+  @Output() connectedComponentNodeIdChange: EventEmitter<any> = new EventEmitter();
+  @Output() connectedComponentTypeChange: EventEmitter<any> = new EventEmitter();
 
-  @Input()
-  connectedComponent: any;
-
-  @Input()
-  allowedConnectedComponentTypes: string[];
-
-  @Output()
-  connectedComponentNodeIdChange: EventEmitter<any> = new EventEmitter();
-
-  @Output()
-  connectedComponentComponentIdChange: EventEmitter<any> = new EventEmitter();
-
-  @Output()
-  connectedComponentTypeChange: EventEmitter<any> = new EventEmitter();
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  connectedComponentNodeIdChanged() {
+  protected connectedComponentNodeIdChanged(): void {
     this.connectedComponentNodeIdChange.emit(this.connectedComponent);
   }
 
-  connectedComponentComponentIdChanged() {
+  protected connectedComponentComponentIdChanged(): void {
     this.connectedComponentComponentIdChange.emit(this.connectedComponent);
   }
 
-  connectedComponentTypeChanged() {
+  protected connectedComponentTypeChanged(): void {
     this.connectedComponentTypeChange.emit(this.connectedComponent);
   }
 }
