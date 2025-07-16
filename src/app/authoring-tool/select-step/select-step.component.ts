@@ -6,9 +6,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 
 @Component({
-    selector: 'select-step',
-    templateUrl: './select-step.component.html',
-    imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule]
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
+  selector: 'select-step',
+  template: `<mat-form-field>
+    <mat-label i18n>Step</mat-label>
+    <mat-select [(ngModel)]="nodeId" (ngModelChange)="stepChangedEvent.emit($event)">
+      @for (nodeId of nodeIds; track nodeId) {
+        <mat-option [value]="nodeId">{{ nodeToPositionAndTitle.get(nodeId) }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>`
 })
 export class SelectStepComponent {
   @Input() nodeId: string;
@@ -20,8 +27,8 @@ export class SelectStepComponent {
 
   ngOnInit(): void {
     this.nodeIds = this.projectService.getStepNodeIds();
-    for (const nodeId of this.nodeIds) {
-      this.nodeToPositionAndTitle.set(nodeId, this.projectService.getNodePositionAndTitle(nodeId));
-    }
+    this.nodeIds.forEach((nodeId) =>
+      this.nodeToPositionAndTitle.set(nodeId, this.projectService.getNodePositionAndTitle(nodeId))
+    );
   }
 }

@@ -1754,8 +1754,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
       <trans-unit id="8980375993935541237" datatype="html">
         <source>Step</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/select-step/select-step.component.html</context>
-          <context context-type="linenumber">2,3</context>
+          <context context-type="sourcefile">src/app/authoring-tool/select-step/select-step.component.ts</context>
+          <context context-type="linenumber">12,13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.ts</context>
