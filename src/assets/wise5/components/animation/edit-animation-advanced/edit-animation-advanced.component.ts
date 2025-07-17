@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 
 @Component({
-    selector: 'edit-animation-advanced',
-    templateUrl: 'edit-animation-advanced.component.html',
-    standalone: false
+  imports: [EditCommonAdvancedComponent],
+  selector: 'edit-animation-advanced',
+  template: `<edit-common-advanced
+    [component]="component"
+    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+  /> `
 })
 export class EditAnimationAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['Animation', 'Graph'];
