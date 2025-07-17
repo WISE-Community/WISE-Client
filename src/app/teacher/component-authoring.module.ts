@@ -102,7 +102,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     EditAiChatAdvancedComponent,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
-    EditCommonAdvancedComponent,
     EditComponentAdvancedComponent,
     EditComponentPeerGroupingTagComponent,
     EditConceptMapAdvancedComponent,
@@ -148,6 +147,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     TableAuthoring
   ],
   imports: [
+    EditCommonAdvancedComponent,
     EditComponentAddToNotebookButtonComponent,
     EditComponentConstraintsComponent,
     EditComponentDefaultFeedback,

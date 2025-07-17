@@ -9,13 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
-import { EditComponentExcludeFromTotalScoreComponent } from '../../../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
-import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
-import { EditComponentMaxScoreComponent } from '../../../../../app/authoring-tool/edit-component-max-score/edit-component-max-score.component';
-import { EditComponentRubricComponent } from '../../../../../app/authoring-tool/edit-component-rubric/edit-component-rubric.component';
-import { EditComponentSaveButtonComponent } from '../../../../../app/authoring-tool/edit-component-save-button/edit-component-save-button.component';
-import { EditComponentSubmitButtonComponent } from '../../../../../app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
-import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -31,17 +24,11 @@ let rule1: any;
 describe('EditConceptMapAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditCommonAdvancedComponent, EditConceptMapAdvancedComponent],
+      declarations: [EditConceptMapAdvancedComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
         BrowserAnimationsModule,
-        EditComponentExcludeFromTotalScoreComponent,
-        EditComponentJsonComponent,
-        EditComponentMaxScoreComponent,
-        EditComponentRubricComponent,
-        EditComponentSaveButtonComponent,
-        EditComponentSubmitButtonComponent,
-        EditComponentTagsComponent,
+        EditCommonAdvancedComponent,
         FormsModule,
         MatCheckboxModule,
         MatDialogModule,
