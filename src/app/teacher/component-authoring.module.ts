@@ -93,7 +93,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     AiChatAuthoringComponent,
     AnimationAuthoring,
     AudioOscillatorAuthoring,
-    AuthorUrlParametersComponent,
     ConceptMapAuthoring,
     CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
@@ -142,6 +141,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     TableAuthoring
   ],
   imports: [
+    AuthorUrlParametersComponent,
     DiscussionAuthoring,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,

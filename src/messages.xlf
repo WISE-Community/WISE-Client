@@ -18343,7 +18343,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Width (px) (optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">29,33</context>
+          <context context-type="linenumber">28,32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
@@ -18354,7 +18354,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Height (px)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">38,42</context>
+          <context context-type="linenumber">37,41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
@@ -18365,25 +18365,25 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Saves Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">53,56</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="625135516172701995" datatype="html">
         <source>Checking this box will enable the Grading Tool to show the student work for the model if the model saves student work. You can also come back later to check this box even after students have saved work for this model. If the model does not save student work, this check box will not do anything.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">56,61</context>
+          <context context-type="linenumber">55,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="767991653769198742" datatype="html">
         <source>Reload Model</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">67,70</context>
+          <context context-type="linenumber">66,69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/embedded-authoring/embedded-authoring.component.html</context>
-          <context context-type="linenumber">70,75</context>
+          <context context-type="linenumber">69,74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7956799829776596403" datatype="html">

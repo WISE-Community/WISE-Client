@@ -24,8 +24,9 @@ import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @NgModule({
-  declarations: [EmbeddedAuthoring, AuthorUrlParametersComponent],
+  declarations: [EmbeddedAuthoring],
   imports: [
+    AuthorUrlParametersComponent,
     CommonModule,
     ComponentAuthoringModule,
     EditComponentPrompt,
