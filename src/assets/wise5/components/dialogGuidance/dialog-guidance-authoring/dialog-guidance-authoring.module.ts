@@ -26,16 +26,13 @@ import { ComponentAuthoringModule } from '../../component-authoring.module';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @NgModule({
-  declarations: [
-    DialogGuidanceAuthoringComponent,
-    EditFeedbackRulesComponent,
-    FeedbackRuleHelpComponent
-  ],
+  declarations: [DialogGuidanceAuthoringComponent, EditFeedbackRulesComponent],
   imports: [
     CommonModule,
     ComponentAuthoringModule,
     EditComponentMaxSubmitComponent,
     EditComponentPrompt,
+    FeedbackRuleHelpComponent,
     DragDropModule,
     FormsModule,
     MatCheckboxModule,
