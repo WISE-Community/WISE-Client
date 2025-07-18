@@ -98,7 +98,6 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     CreateNewPeerGroupingDialogComponent,
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
-    DiscussionAuthoring,
     EditAiChatAdvancedComponent,
     EditComponentAdvancedComponent,
     EditComponentPeerGroupingTagComponent,
@@ -144,6 +143,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     TableAuthoring
   ],
   imports: [
+    DiscussionAuthoring,
     EditAnimationAdvancedComponent,
     EditAudioOscillatorAdvancedComponent,
     EditCommonAdvancedComponent,

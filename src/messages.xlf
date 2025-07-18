@@ -17989,18 +17989,20 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6411292518846655065" datatype="html">
-        <source> Students can upload and use images in their posts </source>
+      <trans-unit id="1890646438581310837" datatype="html">
+        <source> Students can upload and use images in their posts
+</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
-          <context context-type="linenumber">12,16</context>
+          <context context-type="linenumber">11,15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5896283462939371877" datatype="html">
-        <source> Students must create a post before viewing classmates&apos; posts </source>
+      <trans-unit id="4628960328830148839" datatype="html">
+        <source> Students must create a post before viewing classmates&apos; posts
+</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
-          <context context-type="linenumber">22,25</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7695481917775533693" datatype="html">
