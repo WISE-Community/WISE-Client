@@ -21,21 +21,19 @@ import { TranslatableInputComponent } from '../../../authoringTool/components/tr
 import { Choice } from '../Choice';
 
 @Component({
-    imports: [
-        FormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatRadioModule,
-        MatTooltipModule,
-        EditComponentPrompt,
-        TranslatableAssetChooserComponent,
-        TranslatableInputComponent
-    ],
-    selector: 'multiple-choice-authoring',
-    styleUrls: ['multiple-choice-authoring.component.scss'],
-    templateUrl: 'multiple-choice-authoring.component.html'
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatRadioModule,
+    MatTooltipModule,
+    EditComponentPrompt,
+    TranslatableAssetChooserComponent,
+    TranslatableInputComponent
+  ],
+  styleUrl: 'multiple-choice-authoring.component.scss',
+  templateUrl: 'multiple-choice-authoring.component.html'
 })
 export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   allowedConnectedComponentTypes = ['MultipleChoice'];

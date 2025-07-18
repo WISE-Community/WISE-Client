@@ -21,7 +21,6 @@ let teacherProjectService: TeacherProjectService;
 describe('MultipleChoiceAuthoringComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [],
       imports: [
         BrowserAnimationsModule,
         ComponentAuthoringModule,
