@@ -2,8 +2,8 @@
   <edit-component-max-score [componentContent]="componentContent" />
   <edit-component-exclude-from-total-score [componentContent]="componentContent" />
   <edit-component-width [componentContent]="componentContent" />
-  <edit-component-rubric [componentContent]="componentContent"></edit-component-rubric>
-  <edit-component-tags [componentContent]="componentContent"></edit-component-tags>
+  <edit-component-rubric [componentContent]="componentContent" />
+  <edit-component-tags [componentContent]="componentContent" />
 </div>
 <edit-discussion-connected-components
   [nodeId]="nodeId"
@@ -12,7 +12,6 @@
   [componentContent]="componentContent"
   [connectedComponents]="componentContent.connectedComponents"
   (connectedComponentsChanged)="connectedComponentsChanged($event)"
->
-</edit-discussion-connected-components>
+/>
 <edit-component-constraints [componentContent]="component.content" />
 <edit-component-json [component]="component" />

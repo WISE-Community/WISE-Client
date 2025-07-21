@@ -3,7 +3,7 @@
   *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
   class="connected-components-div"
 >
-  <div fxLayout="row wrap" fxLayoutGap="20px">
+  <div class="flex flex-row flex-wrap gap-5">
     <edit-connected-component-default-selects
       [connectedComponent]="connectedComponent"
       [componentId]="componentId"
@@ -34,7 +34,7 @@
         Only Show Data At Mouse X Position
       </mat-checkbox>
     </div>
-    <span fxFlex></span>
+    <span class="flex w-full"></span>
     <edit-connected-component-delete-button
       [connectedComponentIndex]="connectedComponentIndex"
       (connectedComponentChange)="deleteConnectedComponent(index)"

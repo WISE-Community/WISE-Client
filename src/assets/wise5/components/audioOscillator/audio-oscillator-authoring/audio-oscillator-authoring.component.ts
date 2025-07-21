@@ -1,18 +1,21 @@
-'use strict';
-
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AudioOscillatorService } from '../audioOscillatorService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'audio-oscillator-authoring',
-    templateUrl: 'audio-oscillator-authoring.component.html',
-    styleUrls: ['audio-oscillator-authoring.component.scss'],
-    standalone: false
+  templateUrl: 'audio-oscillator-authoring.component.html',
+  styleUrl: 'audio-oscillator-authoring.component.scss',
+  imports: [EditComponentPrompt, NgIf, MatCheckbox, FormsModule, MatFormField, MatLabel, MatInput]
 })
 export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
   maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;
@@ -45,7 +48,8 @@ export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
   }
 
   initializeStartingAmplitude(): void {
-    this.componentContent.startingAmplitude ??= this.AudioOscillatorService.defaultStartingAmplitude;
+    this.componentContent.startingAmplitude ??=
+      this.AudioOscillatorService.defaultStartingAmplitude;
   }
 
   showFrequencyInputChanged(): void {

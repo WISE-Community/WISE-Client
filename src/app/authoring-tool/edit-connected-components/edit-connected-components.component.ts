@@ -25,7 +25,7 @@ export class EditConnectedComponentsComponent implements OnInit {
   @Output() connectedComponentsChanged: EventEmitter<any> = new EventEmitter();
   nodeIds: string[];
 
-  constructor(protected ProjectService: ProjectService) {}
+  constructor(protected projectService: ProjectService) {}
 
   ngOnInit(): void {
     if (this.connectedComponents == null) {
@@ -87,15 +87,15 @@ export class EditConnectedComponentsComponent implements OnInit {
   }
 
   getComponents(nodeId: string): any[] {
-    return this.ProjectService.getComponents(nodeId);
+    return this.projectService.getComponents(nodeId);
   }
 
   getNodePositionAndTitle(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitle(nodeId);
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
   getConnectedComponentType(connectedComponent: any): string {
-    const component: any = this.ProjectService.getComponent(
+    const component: any = this.projectService.getComponent(
       connectedComponent.nodeId,
       connectedComponent.componentId
     );

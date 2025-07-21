@@ -18,11 +18,10 @@ let nodeChangedSpy: jasmine.Spy;
 describe('EditQuestionBankRulesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditQuestionBankRulesComponent],
     imports: [DragDropModule,
         MatDialogModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule],
+        StudentTeacherCommonServicesModule, EditQuestionBankRulesComponent],
     providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 }).compileComponents();
     projectService = TestBed.inject(TeacherProjectService);

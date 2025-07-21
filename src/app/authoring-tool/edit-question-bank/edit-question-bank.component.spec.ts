@@ -12,8 +12,7 @@ let fixture: ComponentFixture<EditQuestionBankComponent>;
 describe('EditQuestionBankComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditQuestionBankComponent],
-    imports: [MatCheckboxModule, StudentTeacherCommonServicesModule],
+    imports: [MatCheckboxModule, StudentTeacherCommonServicesModule, EditQuestionBankComponent],
     providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 }).compileComponents();
   });

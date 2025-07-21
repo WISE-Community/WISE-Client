@@ -1,15 +1,30 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-    selector: 'show-my-work-authoring',
-    templateUrl: './show-my-work-authoring.component.html',
-    styleUrls: ['./show-my-work-authoring.component.scss'],
-    standalone: false
+  selector: 'show-my-work-authoring',
+  templateUrl: './show-my-work-authoring.component.html',
+  imports: [
+    CommonModule,
+    EditComponentPrompt,
+    FlexModule,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    FormsModule,
+    MatOption
+  ]
 })
 export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {
   allowedShowWorkComponentTypes: string[] = [

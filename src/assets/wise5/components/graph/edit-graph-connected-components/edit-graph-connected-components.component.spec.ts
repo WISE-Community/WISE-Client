@@ -1,11 +1,8 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
-import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { EditGraphConnectedComponentsComponent } from './edit-graph-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { EditGraphConnectedComponentsComponent } from './edit-graph-connected-components.component';
 
 let component: EditGraphConnectedComponentsComponent;
 let fixture: ComponentFixture<EditGraphConnectedComponentsComponent>;
@@ -14,13 +11,8 @@ const componentId1 = 'component1';
 describe('EditGraphConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditGraphConnectedComponentsComponent],
-      imports: [
-        EditConnectedComponentsAddButtonComponent,
-        MatIconModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      imports: [EditGraphConnectedComponentsComponent, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
     }).compileComponents();
   });
 

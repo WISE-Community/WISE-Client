@@ -6,13 +6,10 @@ import { PeerGroupingAuthoringService } from '../../services/peerGroupingAuthori
 import { StudentTeacherCommonModule } from '../../../../app/student-teacher-common.module';
 
 @NgModule({
-  imports: [StudentTeacherCommonModule],
-  declarations: [
-    SelectPeerGroupingAuthoringComponent,
-    SelectPeerGroupingOptionComponent,
-    SelectPeerGroupingDialogComponent
-  ],
-  providers: [PeerGroupingAuthoringService],
-  exports: [SelectPeerGroupingAuthoringComponent]
+    imports: [StudentTeacherCommonModule, SelectPeerGroupingAuthoringComponent,
+        SelectPeerGroupingOptionComponent,
+        SelectPeerGroupingDialogComponent],
+    providers: [PeerGroupingAuthoringService],
+    exports: [SelectPeerGroupingAuthoringComponent]
 })
 export class PeerGroupingAuthoringModule {}

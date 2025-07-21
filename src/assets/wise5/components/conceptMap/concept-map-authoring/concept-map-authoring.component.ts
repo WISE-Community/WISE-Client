@@ -1,18 +1,42 @@
-'use strict';
-
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatTooltip } from '@angular/material/tooltip';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapService } from '../conceptMapService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'concept-map-authoring',
-    templateUrl: 'concept-map-authoring.component.html',
-    styleUrls: ['concept-map-authoring.component.scss'],
-    standalone: false
+  selector: 'concept-map-authoring',
+  templateUrl: 'concept-map-authoring.component.html',
+  styleUrl: 'concept-map-authoring.component.scss',
+  imports: [
+    FlexModule,
+    EditComponentPrompt,
+    TranslatableInputComponent,
+    TranslatableAssetChooserComponent,
+    MatCheckbox,
+    FormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    CommonModule
+  ]
 })
 export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   availableNodes: any[];

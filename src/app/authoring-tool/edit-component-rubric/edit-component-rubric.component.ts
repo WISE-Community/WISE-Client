@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatableRichTextEditorComponent } from '../../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';

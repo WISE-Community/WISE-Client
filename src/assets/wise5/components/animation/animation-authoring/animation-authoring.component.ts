@@ -1,20 +1,46 @@
-'use strict';
-
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatOption } from '@angular/material/core';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatSelect } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { generateRandomKey } from '../../../common/string/string';
 import { ConfigService } from '../../../services/configService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-    selector: 'animation-authoring',
-    templateUrl: 'animation-authoring.component.html',
-    styleUrls: ['animation-authoring.component.scss'],
-    standalone: false
+  templateUrl: 'animation-authoring.component.html',
+  styleUrl: 'animation-authoring.component.scss',
+  imports: [
+    EditComponentPrompt,
+    CommonModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    FormsModule,
+    MatRadioGroup,
+    MatRadioButton,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    TranslatableInputComponent,
+    TranslatableAssetChooserComponent,
+    MatSelect,
+    MatOption
+  ]
 })
 export class AnimationAuthoring extends AbstractComponentAuthoring {
   stepNodesDetails: string[];

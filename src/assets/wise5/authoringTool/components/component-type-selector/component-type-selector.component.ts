@@ -8,17 +8,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatSelectModule
-    ],
-    selector: 'component-type-selector',
-    styleUrl: './component-type-selector.component.scss',
-    templateUrl: './component-type-selector.component.html'
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule
+  ],
+  selector: 'component-type-selector',
+  templateUrl: './component-type-selector.component.html'
 })
 export class ComponentTypeSelectorComponent {
   @Input() componentType: string;

@@ -13,10 +13,9 @@ describe('EditCommonAdvancedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MockComponent(EditComponentJsonComponent)],
-      imports: [EditCommonAdvancedComponent],
-      providers: [MockProviders(NotificationService, ProjectService, TeacherProjectService)]
-    }).compileComponents();
+    imports: [EditCommonAdvancedComponent, MockComponent(EditComponentJsonComponent)],
+    providers: [MockProviders(NotificationService, ProjectService, TeacherProjectService)]
+}).compileComponents();
   });
 
   beforeEach(() => {

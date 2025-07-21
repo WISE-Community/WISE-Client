@@ -4,12 +4,40 @@ import { NotebookService } from '../../../services/notebookService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapContent } from '../ConceptMapContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { MatTooltip } from '@angular/material/tooltip';
+import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 
 @Component({
-    selector: 'edit-concept-map-advanced',
-    templateUrl: 'edit-concept-map-advanced.component.html',
-    styleUrls: ['edit-concept-map-advanced.component.scss'],
-    standalone: false
+  selector: 'edit-concept-map-advanced',
+  templateUrl: 'edit-concept-map-advanced.component.html',
+  styleUrl: 'edit-concept-map-advanced.component.scss',
+  imports: [
+    CommonModule,
+    FlexModule,
+    MatCheckbox,
+    FormsModule,
+    MatButton,
+    MatIcon,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatSelect,
+    MatOption,
+    MatTooltip,
+    EditComponentAddToNotebookButtonComponent,
+    EditCommonAdvancedComponent
+  ]
 })
 export class EditConceptMapAdvancedComponent extends EditAdvancedComponentComponent {
   componentContent: ConceptMapContent;

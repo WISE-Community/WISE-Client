@@ -1,19 +1,52 @@
-'use strict';
-
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatOption } from '@angular/material/core';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatSelect } from '@angular/material/select';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatTooltip } from '@angular/material/tooltip';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphService } from '../graphService';
 import { isMultipleYAxes } from '../util';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'graph-authoring',
-    templateUrl: 'graph-authoring.component.html',
-    styleUrls: ['graph-authoring.component.scss'],
-    standalone: false
+  selector: 'graph-authoring',
+  templateUrl: 'graph-authoring.component.html',
+  styleUrl: 'graph-authoring.component.scss',
+  imports: [
+    CommonModule,
+    EditComponentPrompt,
+    FlexModule,
+    TranslatableInputComponent,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    FormsModule,
+    MatOption,
+    MatInput,
+    MatCheckbox,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    MatSlideToggle,
+    MatRadioGroup,
+    MatRadioButton,
+    TranslatableAssetChooserComponent
+  ]
 })
 export class GraphAuthoring extends AbstractComponentAuthoring {
   availableGraphTypes = [

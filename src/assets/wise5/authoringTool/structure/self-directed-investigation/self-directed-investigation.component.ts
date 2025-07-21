@@ -8,9 +8,9 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatDivider } from '@angular/material/divider';
 
 @Component({
-    imports: [MatDivider, FlexModule, MatButton, RouterLink, NgIf, MatProgressBar],
-    styleUrls: ['./self-directed-investigation.component.scss', '../../add-content.scss'],
-    templateUrl: './self-directed-investigation.component.html'
+  imports: [MatDivider, FlexModule, MatButton, RouterLink, NgIf, MatProgressBar],
+  styleUrl: '../../add-content.scss',
+  templateUrl: './self-directed-investigation.component.html'
 })
 export class SelfDirectedInvestigationComponent extends ConfigureStructureComponent {
   protected groupsPath = `self-directed-investigation/groups.json`;

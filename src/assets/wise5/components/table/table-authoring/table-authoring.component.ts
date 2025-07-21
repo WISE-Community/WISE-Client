@@ -1,20 +1,50 @@
-'use strict';
-
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout/flex';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ConfigService } from '../../../services/configService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-    selector: 'table-authoring',
-    templateUrl: 'table-authoring.component.html',
-    styleUrls: ['table-authoring.component.scss'],
-    standalone: false
+  selector: 'table-authoring',
+  templateUrl: 'table-authoring.component.html',
+  styleUrl: 'table-authoring.component.scss',
+  imports: [
+    CommonModule,
+    EditComponentPrompt,
+    FlexModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    TranslatableInputComponent,
+    MatCheckbox
+  ]
 })
 export class TableAuthoring extends AbstractComponentAuthoring {
   protected columnCellSizes: any;

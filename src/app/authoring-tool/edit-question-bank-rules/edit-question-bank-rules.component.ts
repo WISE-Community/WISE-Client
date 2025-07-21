@@ -1,19 +1,54 @@
+import { CdkDrag, CdkDragHandle, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCard } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatTooltip } from '@angular/material/tooltip';
+import { TranslatableTextareaComponent } from '../../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { generateRandomKey } from '../../../assets/wise5/common/string/string';
 import { EditFeedbackRulesComponent } from '../../../assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
+import { Question } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/Question';
 import { QuestionBankRule } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/QuestionBankRule';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { Question } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/Question';
 
 @Component({
-    selector: 'edit-question-bank-rules',
-    templateUrl: './edit-question-bank-rules.component.html',
-    styleUrls: ['./edit-question-bank-rules.component.scss'],
-    standalone: false
+  selector: 'edit-question-bank-rules',
+  templateUrl: './edit-question-bank-rules.component.html',
+  styleUrl: './edit-question-bank-rules.component.scss',
+  imports: [
+    FlexModule,
+    MatIconButton,
+    MatTooltip,
+    MatIcon,
+    MatButton,
+    CdkDropList,
+    CdkScrollable,
+    CommonModule,
+    CdkDrag,
+    MatCard,
+    CdkDragHandle,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    FormsModule,
+    CdkTextareaAutosize,
+    MatSuffix,
+    TranslatableTextareaComponent
+  ]
 })
 export class EditQuestionBankRulesComponent extends EditFeedbackRulesComponent {
-  constructor(protected dialog: MatDialog, protected projectService: TeacherProjectService) {
+  constructor(
+    protected dialog: MatDialog,
+    protected projectService: TeacherProjectService
+  ) {
     super(dialog, projectService);
   }
 

@@ -11,12 +11,9 @@ describe('EditConnectedComponentDefaultSelectsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MockComponents(EditConnectedComponentTypeSelectComponent, SelectStepAndComponentComponent)
-      ],
-      imports: [EditConnectedComponentDefaultSelectsComponent],
-      providers: [MockProvider(ProjectService)]
-    }).compileComponents();
+    imports: [EditConnectedComponentDefaultSelectsComponent, MockComponents(EditConnectedComponentTypeSelectComponent, SelectStepAndComponentComponent)],
+    providers: [MockProvider(ProjectService)]
+}).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,16 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ProjectService } from '../../../services/projectService';
+import { FormsModule } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { EditConnectedComponentDefaultSelectsComponent } from '../../../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
+import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
+import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../app/authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
+import { ProjectService } from '../../../services/projectService';
 import { ConceptMapContent } from '../ConceptMapContent';
 
 @Component({
-    selector: 'app-edit-concept-map-connected-components',
-    templateUrl: './edit-concept-map-connected-components.component.html',
-    styleUrls: [
-        '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
-        './edit-concept-map-connected-components.component.scss'
-    ],
-    standalone: false
+  selector: 'app-edit-concept-map-connected-components',
+  templateUrl: './edit-concept-map-connected-components.component.html',
+  styleUrl:
+    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
+  imports: [
+    CommonModule,
+    EditConnectedComponentsAddButtonComponent,
+    EditConnectedComponentDefaultSelectsComponent,
+    MatCheckbox,
+    FormsModule,
+    EditConnectedComponentDeleteButtonComponent
+  ]
 })
 export class EditConceptMapConnectedComponentsComponent extends EditConnectedComponentsWithBackgroundComponent {
   componentTypesThatCanImportWorkAsBackground: string[] = [
@@ -21,8 +32,8 @@ export class EditConceptMapConnectedComponentsComponent extends EditConnectedCom
     'Table'
   ];
 
-  constructor(protected ProjectService: ProjectService) {
-    super(ProjectService);
+  constructor(protected projectService: ProjectService) {
+    super(projectService);
   }
 
   afterComponentIdChanged(connectedComponent: any): void {
@@ -40,7 +51,7 @@ export class EditConceptMapConnectedComponentsComponent extends EditConnectedCom
           $localize`Warning: This will delete all existing nodes and links in this component.`
       )
     ) {
-      const connectedComponent = this.ProjectService.getComponent(
+      const connectedComponent = this.projectService.getComponent(
         nodeId,
         componentId
       ) as ConceptMapContent;

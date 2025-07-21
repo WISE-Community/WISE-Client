@@ -16,15 +16,13 @@ import { Node } from '../../common/Node';
 
 const nodeId1 = 'nodeId1';
 const node = { id: nodeId1 };
-
 describe('ProjectAuthoringStepComponent', () => {
   let component: ProjectAuthoringStepComponent;
   let fixture: ComponentFixture<ProjectAuthoringStepComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MockComponent(NodeIconAndTitleComponent)],
-      imports: [ProjectAuthoringStepComponent],
+      imports: [ProjectAuthoringStepComponent, MockComponent(NodeIconAndTitleComponent)],
       providers: [
         MockProviders(
           CopyNodesService,

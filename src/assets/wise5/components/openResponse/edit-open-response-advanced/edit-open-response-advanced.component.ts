@@ -6,12 +6,44 @@ import { NotebookService } from '../../../services/notebookService';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TranslatableTextareaComponent } from '../../../authoringTool/components/translatable-textarea/translatable-textarea.component';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { EditCRaterIdeaDescriptionsComponent } from '../../common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
+import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 
 @Component({
   selector: 'edit-open-response-advanced',
-  standalone: false,
   styleUrl: 'edit-open-response-advanced.component.scss',
-  templateUrl: 'edit-open-response-advanced.component.html'
+  templateUrl: 'edit-open-response-advanced.component.html',
+  imports: [
+    TranslatableTextareaComponent,
+    MatCheckbox,
+    FormsModule,
+    FlexModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButton,
+    MatSelect,
+    MatOption,
+    EditFeedbackRulesComponent,
+    MatTooltip,
+    MatIcon,
+    EditCRaterIdeaDescriptionsComponent,
+    EditComponentAddToNotebookButtonComponent,
+    EditCommonAdvancedComponent
+  ]
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   protected allowedConnectedComponentTypes = ['OpenResponse'];

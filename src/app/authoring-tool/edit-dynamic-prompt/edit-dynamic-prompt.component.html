@@ -10,12 +10,7 @@
     </mat-checkbox>
   </div>
   <div *ngIf="componentContent.dynamicPrompt?.enabled">
-    <div
-      class="reference-component-div"
-      fxLayout="row wrap"
-      fxLayoutAlign="start center"
-      fxLayoutGap="20px"
-    >
+    <div class="reference-component-div flex flex-row flex-wrap justify-start items-center gap-5">
       <mat-label class="bold" i18n>Reference Component:</mat-label>
       <select-step-and-component
         [referenceComponent]="componentContent.dynamicPrompt.referenceComponent"
@@ -24,8 +19,7 @@
         (stepChange)="dynamicPromptChangedEvent.next()"
         (componentChange)="dynamicPromptChangedEvent.next()"
       />
-      <edit-component-peer-grouping-tag [componentContent]="componentContent.dynamicPrompt">
-      </edit-component-peer-grouping-tag>
+      <edit-component-peer-grouping-tag [componentContent]="componentContent.dynamicPrompt" />
     </div>
     <translatable-textarea
       [content]="componentContent.dynamicPrompt"
@@ -35,8 +29,7 @@
       (defaultLanguageTextChanged)="dynamicPromptChangedEvent.next()"
     />
     <div class="feedback-rules-div">
-      <edit-dynamic-prompt-rules [feedbackRules]="componentContent.dynamicPrompt.rules">
-      </edit-dynamic-prompt-rules>
+      <edit-dynamic-prompt-rules [feedbackRules]="componentContent.dynamicPrompt.rules" />
     </div>
     <translatable-textarea
       [content]="componentContent.dynamicPrompt"

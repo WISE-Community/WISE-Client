@@ -1,47 +1,23 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapContent } from '../ConceptMapContent';
 import { EditConceptMapAdvancedComponent } from './edit-concept-map-advanced.component';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditConceptMapAdvancedComponent;
 let fixture: ComponentFixture<EditConceptMapAdvancedComponent>;
 let rule1: any;
-
 describe('EditConceptMapAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditConceptMapAdvancedComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        BrowserAnimationsModule,
-        EditCommonAdvancedComponent,
-        FormsModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [EditConceptMapAdvancedComponent, StudentTeacherCommonServicesModule],
       providers: [
         TeacherNodeService,
         TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
   });

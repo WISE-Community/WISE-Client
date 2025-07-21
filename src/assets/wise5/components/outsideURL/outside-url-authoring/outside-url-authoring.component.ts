@@ -1,19 +1,52 @@
+import { CommonModule, NgStyle } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ExtendedModule } from '@angular/flex-layout/extended';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardActions, MatCardTitle } from '@angular/material/card';
+import { MatOption } from '@angular/material/core';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { OutsideURLService } from '../outsideURLService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'outside-url-authoring',
-    templateUrl: 'outside-url-authoring.component.html',
-    styleUrls: ['outside-url-authoring.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'outside-url-authoring',
+  templateUrl: 'outside-url-authoring.component.html',
+  styleUrl: 'outside-url-authoring.component.scss',
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    MatSlideToggle,
+    FormsModule,
+    FlexModule,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    MatInput,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    MatCard,
+    NgStyle,
+    ExtendedModule,
+    MatCardTitle,
+    MatCardActions,
+    TranslatableInputComponent
+  ]
 })
 export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
   isShowOERs: boolean;
