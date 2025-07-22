@@ -87,6 +87,7 @@ import { EditAiChatAdvancedComponent } from '../../assets/wise5/components/aiCha
 import { RequiredErrorLabelComponent } from '../../assets/wise5/authoringTool/node/advanced/required-error-label/required-error-label.component';
 import { EditCRaterInfoComponent } from '../../assets/wise5/components/common/cRater/edit-crater-info/edit-crater-info.component';
 import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/components/common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
+import { PeerChatModule } from '../../assets/wise5/components/peerChat/peer-chat.module';
 
 @NgModule({
   imports: [
@@ -160,6 +161,7 @@ import { EditCRaterIdeaDescriptionsComponent } from '../../assets/wise5/componen
     GraphAuthoring,
     LabelAuthoring,
     OutsideUrlAuthoring,
+    PeerChatModule,
     PeerChatAuthoringComponent,
     ShowGroupWorkAuthoringComponent,
     ShowMyWorkAuthoringComponent,
