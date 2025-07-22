@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatOption } from '@angular/material/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { EditConnectedComponentDefaultSelectsComponent } from '../../../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
@@ -19,11 +18,9 @@ import { EditConnectedComponentsComponent } from '../../../../../app/authoring-t
     CommonModule,
     EditConnectedComponentsAddButtonComponent,
     EditConnectedComponentDefaultSelectsComponent,
-    MatFormField,
-    MatLabel,
-    MatSelect,
+    MatFormFieldModule,
+    MatSelectModule,
     FormsModule,
-    MatOption,
     MatCheckbox,
     EditConnectedComponentDeleteButtonComponent
   ]

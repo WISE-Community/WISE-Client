@@ -1,26 +1,25 @@
 import { Component } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { TranslatableTextareaComponent } from '../../../authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { CRaterService } from '../../../services/cRaterService';
-import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { NotebookService } from '../../../services/notebookService';
-import { OpenResponseContent } from '../OpenResponseContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TranslatableTextareaComponent } from '../../../authoringTool/components/translatable-textarea/translatable-textarea.component';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { FormsModule } from '@angular/forms';
-import { FlexModule } from '@angular/flex-layout/flex';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
-import { MatSelect } from '@angular/material/select';
-import { MatOption } from '@angular/material/core';
-import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
-import { MatTooltip } from '@angular/material/tooltip';
-import { MatIcon } from '@angular/material/icon';
 import { EditCRaterIdeaDescriptionsComponent } from '../../common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
-import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
-import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
+import { OpenResponseContent } from '../OpenResponseContent';
 
 @Component({
   selector: 'edit-open-response-advanced',
@@ -31,12 +30,10 @@ import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/e
     MatCheckbox,
     FormsModule,
     FlexModule,
-    MatFormField,
-    MatLabel,
+    MatFormFieldModule,
     MatInput,
     MatButton,
-    MatSelect,
-    MatOption,
+    MatSelectModule,
     EditFeedbackRulesComponent,
     MatTooltip,
     MatIcon,

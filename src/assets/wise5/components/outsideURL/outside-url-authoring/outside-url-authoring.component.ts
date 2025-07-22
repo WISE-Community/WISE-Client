@@ -5,11 +5,10 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardTitle } from '@angular/material/card';
-import { MatOption } from '@angular/material/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatTooltip } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
@@ -32,10 +31,8 @@ import { OutsideURLService } from '../outsideURLService';
     MatSlideToggle,
     FormsModule,
     FlexModule,
-    MatFormField,
-    MatLabel,
-    MatSelect,
-    MatOption,
+    MatFormFieldModule,
+    MatSelectModule,
     MatInput,
     MatButton,
     MatTooltip,

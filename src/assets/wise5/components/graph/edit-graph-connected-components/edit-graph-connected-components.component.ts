@@ -4,11 +4,10 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatOption } from '@angular/material/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTooltip } from '@angular/material/tooltip';
 import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
@@ -25,11 +24,9 @@ import { SelectStepAndComponentComponent } from '../../../../../app/authoring-to
     EditConnectedComponentsAddButtonComponent,
     FlexModule,
     SelectStepAndComponentComponent,
-    MatFormField,
-    MatLabel,
-    MatSelect,
+    MatFormFieldModule,
+    MatSelectModule,
     FormsModule,
-    MatOption,
     MatCheckbox,
     MatInput,
     MatButton,

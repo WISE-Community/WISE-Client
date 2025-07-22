@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { EditConnectedComponentDefaultSelectsComponent } from '../../../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
@@ -22,8 +22,7 @@ import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../a
     EditConnectedComponentDefaultSelectsComponent,
     MatCheckbox,
     FormsModule,
-    MatFormField,
-    MatLabel,
+    MatFormFieldModule,
     MatInput,
     EditConnectedComponentDeleteButtonComponent
   ]

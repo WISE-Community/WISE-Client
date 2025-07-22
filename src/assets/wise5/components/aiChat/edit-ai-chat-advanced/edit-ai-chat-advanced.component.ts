@@ -1,24 +1,21 @@
-import { Component } from '@angular/core';
-import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { AiChatContent } from '../AiChatContent';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
-import { MatOption } from '@angular/material/core';
-import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
+import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
+import { AiChatContent } from '../AiChatContent';
 
 @Component({
   selector: 'edit-ai-chat-advanced',
   templateUrl: './edit-ai-chat-advanced.component.html',
   imports: [
-    MatFormField,
-    MatLabel,
-    MatSelect,
+    MatFormFieldModule,
+    MatSelectModule,
     FormsModule,
     NgFor,
-    MatOption,
     EditConnectedComponentsComponent,
     EditComponentJsonComponent
   ]

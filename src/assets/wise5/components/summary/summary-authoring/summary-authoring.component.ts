@@ -4,11 +4,10 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatOption } from '@angular/material/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTooltip } from '@angular/material/tooltip';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
@@ -26,11 +25,9 @@ import { SummaryService } from '../summaryService';
     CommonModule,
     EditComponentPrompt,
     FlexModule,
-    MatFormField,
-    MatLabel,
-    MatSelect,
+    MatFormFieldModule,
+    MatSelectModule,
     FormsModule,
-    MatOption,
     MatCheckbox,
     MatButton,
     MatTooltip,

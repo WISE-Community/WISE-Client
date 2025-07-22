@@ -3,7 +3,7 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -26,8 +26,7 @@ import { EmbeddedService } from '../embeddedService';
     TranslatableTextareaComponent,
     TranslatableAssetChooserComponent,
     AuthorUrlParametersComponent,
-    MatFormField,
-    MatLabel,
+    MatFormFieldModule,
     MatInput,
     FormsModule,
     MatCheckbox,

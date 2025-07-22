@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
-import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
-import { ConfigService } from '../../../services/configService';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { ComputerAvatarService } from '../../../services/computerAvatarService';
-import { CRaterRubric } from '../../common/cRater/CRaterRubric';
-import { FlexModule } from '@angular/flex-layout/flex';
-import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
-import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { NgIf } from '@angular/common';
-import { EditDialogGuidanceComputerAvatarComponent } from '../edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
+import { Component } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { ComputerAvatarService } from '../../../services/computerAvatarService';
+import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
+import { EditDialogGuidanceComputerAvatarComponent } from '../edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
 
 @Component({
   selector: 'dialog-guidance-authoring',
@@ -24,8 +24,7 @@ import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedb
   imports: [
     FlexModule,
     EditComponentPrompt,
-    MatFormField,
-    MatLabel,
+    MatFormFieldModule,
     MatInput,
     FormsModule,
     EditComponentMaxSubmitComponent,

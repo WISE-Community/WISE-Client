@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
-import { MatOption } from '@angular/material/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
@@ -19,11 +18,9 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
     CommonModule,
     EditComponentPrompt,
     FlexModule,
-    MatFormField,
-    MatLabel,
-    MatSelect,
-    FormsModule,
-    MatOption
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {

@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -33,8 +33,7 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
     CdkDrag,
     MatCard,
     CdkDragHandle,
-    MatFormField,
-    MatLabel,
+    MatFormFieldModule,
     MatInput,
     FormsModule,
     TranslatableTextareaComponent

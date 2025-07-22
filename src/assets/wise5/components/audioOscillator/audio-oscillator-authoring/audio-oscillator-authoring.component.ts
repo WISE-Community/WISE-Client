@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
@@ -15,7 +15,7 @@ import { AudioOscillatorService } from '../audioOscillatorService';
 @Component({
   templateUrl: 'audio-oscillator-authoring.component.html',
   styleUrl: 'audio-oscillator-authoring.component.scss',
-  imports: [EditComponentPrompt, NgIf, MatCheckbox, FormsModule, MatFormField, MatLabel, MatInput]
+  imports: [EditComponentPrompt, NgIf, MatCheckbox, FormsModule, MatFormFieldModule, MatInput]
 })
 export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
   maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;
