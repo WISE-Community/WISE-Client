@@ -1,4 +1,4 @@
-import { CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
@@ -25,7 +25,6 @@ class UnitResource {
 @Component({
   imports: [
     CommonModule,
-    CdkDropList,
     CdkTextareaAutosize,
     DragDropModule,
     FlexLayoutModule,

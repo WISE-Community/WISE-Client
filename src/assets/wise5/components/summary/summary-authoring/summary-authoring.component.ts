@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -24,7 +23,6 @@ import { SummaryService } from '../summaryService';
   imports: [
     CommonModule,
     EditComponentPrompt,
-    FlexModule,
     MatFormFieldModule,
     MatSelectModule,
     FormsModule,

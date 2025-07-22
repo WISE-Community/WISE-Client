@@ -3,11 +3,9 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
-import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
@@ -17,14 +15,12 @@ import { generateRandomKey } from '../../../assets/wise5/common/string/string';
 import { EditFeedbackRulesComponent } from '../../../assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { Question } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/Question';
 import { QuestionBankRule } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/QuestionBankRule';
-import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
   selector: 'edit-question-bank-rules',
   templateUrl: './edit-question-bank-rules.component.html',
   styleUrl: './edit-question-bank-rules.component.scss',
   imports: [
-    FlexModule,
     MatTooltip,
     MatIcon,
     MatButtonModule,
@@ -40,13 +36,6 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
   ]
 })
 export class EditQuestionBankRulesComponent extends EditFeedbackRulesComponent {
-  constructor(
-    protected dialog: MatDialog,
-    protected projectService: TeacherProjectService
-  ) {
-    super(dialog, projectService);
-  }
-
   ngOnInit(): void {
     super.ngOnInit();
   }

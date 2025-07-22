@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -22,7 +21,6 @@ import { EmbeddedService } from '../embeddedService';
   templateUrl: 'embedded-authoring.component.html',
   styleUrl: 'embedded-authoring.component.scss',
   imports: [
-    FlexModule,
     TranslatableTextareaComponent,
     TranslatableAssetChooserComponent,
     AuthorUrlParametersComponent,

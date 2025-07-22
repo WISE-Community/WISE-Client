@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragHandle, CdkDropList } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -24,12 +24,10 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
     MatTooltip,
     MatIcon,
     MatButtonModule,
-    CdkDropList,
+    DragDropModule,
     CdkScrollable,
     CommonModule,
-    CdkDrag,
     MatCard,
-    CdkDragHandle,
     MatFormFieldModule,
     MatInput,
     FormsModule,

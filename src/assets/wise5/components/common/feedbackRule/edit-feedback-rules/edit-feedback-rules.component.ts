@@ -1,10 +1,4 @@
-import {
-  CdkDrag,
-  CdkDragDrop,
-  CdkDragHandle,
-  CdkDropList,
-  moveItemInArray
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
@@ -35,11 +29,9 @@ import { FeedbackRule } from '../FeedbackRule';
     MatTooltip,
     MatIcon,
     MatButtonModule,
-    CdkDropList,
+    DragDropModule,
     CdkScrollable,
-    CdkDrag,
     MatCard,
-    CdkDragHandle,
     MatFormFieldModule,
     MatInput,
     FormsModule,

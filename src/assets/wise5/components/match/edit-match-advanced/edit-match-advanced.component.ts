@@ -8,7 +8,6 @@ import { EditComponentSaveButtonComponent } from '../../../../../app/authoring-t
 import { EditComponentSubmitButtonComponent } from '../../../../../app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentDefaultFeedback } from '../../../../../app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { EditComponentMaxScoreComponent } from '../../../../../app/authoring-tool/edit-component-max-score/edit-component-max-score.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
@@ -30,7 +29,6 @@ import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/ed
     EditComponentSubmitButtonComponent,
     EditComponentMaxSubmitComponent,
     EditComponentDefaultFeedback,
-    FlexModule,
     EditComponentMaxScoreComponent,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentWidthComponent,

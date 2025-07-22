@@ -1,7 +1,3 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuestionBankRule } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/QuestionBankRule';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
@@ -14,16 +10,12 @@ let component: EditQuestionBankRulesComponent;
 let fixture: ComponentFixture<EditQuestionBankRulesComponent>;
 let projectService: TeacherProjectService;
 let nodeChangedSpy: jasmine.Spy;
-
 describe('EditQuestionBankRulesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [DragDropModule,
-        MatDialogModule,
-        MatIconModule,
-        StudentTeacherCommonServicesModule, EditQuestionBankRulesComponent],
-    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [StudentTeacherCommonServicesModule, EditQuestionBankRulesComponent],
+      providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi())]
+    }).compileComponents();
     projectService = TestBed.inject(TeacherProjectService);
     nodeChangedSpy = spyOn(projectService, 'nodeChanged');
   });

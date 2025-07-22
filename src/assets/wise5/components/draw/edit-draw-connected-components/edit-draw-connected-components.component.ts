@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,7 +17,6 @@ import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../a
   imports: [
     CommonModule,
     EditConnectedComponentsAddButtonComponent,
-    FlexModule,
     EditConnectedComponentDefaultSelectsComponent,
     MatFormFieldModule,
     MatSelectModule,

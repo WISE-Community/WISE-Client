@@ -3,7 +3,7 @@
   (promptChangedEvent)="promptChanged($event)"
 />
 <p i18n>Choose the step and component to show the summary data for:</p>
-<div fxLayout="row wrap">
+<div class="flex flex-row flex-wrap">
   <mat-form-field class="wide-drop-down">
     <mat-label i18n>Step</mat-label>
     <mat-select
@@ -82,7 +82,7 @@
     </mat-select>
   </mat-form-field>
 </div>
-<div fxLayout="row wrap">
+<div class="flex flex-row flex-wrap">
   <div *ngIf="isHighlightCorrectAnswerAvailable" class="checkbox">
     <mat-checkbox
       color="primary"
@@ -104,7 +104,7 @@
     </mat-checkbox>
   </div>
 </div>
-<div fxLayout="row" fxLayoutAlign="start center">
+<div class="flex flex-row justify-start items-center">
   <span i18n class="custom-label-colors-label">Custom Label Colors (Optional)</span>
   <button
     mat-raised-button
@@ -130,9 +130,7 @@
     first as isFirst;
     last as isLast
   "
-  fxLayout="row wrap"
-  fxLayoutAlign="start center"
-  class="custom-label-color-container"
+  class="custom-label-color-container flex flex-row flex-wrap justify-start items-center"
 >
   <translatable-input
     [content]="customLabelColor"

@@ -3,7 +3,6 @@ import { SelfDirectedInvestigationComponent } from './self-directed-investigatio
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideRouter } from '@angular/router';
 
 describe('SelfDirectedInvestigationComponent', () => {
   let component: SelfDirectedInvestigationComponent;
@@ -12,11 +11,7 @@ describe('SelfDirectedInvestigationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [StudentTeacherCommonServicesModule, SelfDirectedInvestigationComponent],
-      providers: [
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideRouter([])
-      ]
+      providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi())]
     }).compileComponents();
     window.history.pushState({}, '', '');
     fixture = TestBed.createComponent(SelfDirectedInvestigationComponent);
