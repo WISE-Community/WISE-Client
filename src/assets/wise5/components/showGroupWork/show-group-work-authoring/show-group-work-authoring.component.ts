@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { EditComponentPeerGroupingTagComponent } from '../../../../../app/authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
@@ -25,8 +25,7 @@ import { ShowMyWorkAuthoringComponent } from '../../showMyWork/show-my-work-auth
     FormsModule,
     EditComponentPeerGroupingTagComponent,
     MatCheckbox,
-    MatRadioGroup,
-    MatRadioButton,
+    MatRadioModule,
     MatIcon
   ],
   selector: 'show-group-work-authoring',

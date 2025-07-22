@@ -1,6 +1,5 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,7 +21,6 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../edit-dialog-guidan
   templateUrl: './dialog-guidance-authoring.component.html',
   styles: ['edit-feedback-rules { margin-bottom: 16px; } '],
   imports: [
-    FlexModule,
     EditComponentPrompt,
     MatFormFieldModule,
     MatInput,

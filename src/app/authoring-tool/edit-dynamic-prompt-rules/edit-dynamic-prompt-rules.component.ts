@@ -2,9 +2,8 @@ import { CdkDrag, CdkDragHandle, CdkDropList } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,11 +21,9 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
   templateUrl: './edit-dynamic-prompt-rules.component.html',
   styleUrl: './edit-dynamic-prompt-rules.component.scss',
   imports: [
-    FlexModule,
-    MatIconButton,
     MatTooltip,
     MatIcon,
-    MatButton,
+    MatButtonModule,
     CdkDropList,
     CdkScrollable,
     CommonModule,

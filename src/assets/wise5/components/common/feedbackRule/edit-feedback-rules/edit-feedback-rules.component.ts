@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,10 +32,9 @@ import { FeedbackRule } from '../FeedbackRule';
   imports: [
     CommonModule,
     FlexModule,
-    MatIconButton,
     MatTooltip,
     MatIcon,
-    MatButton,
+    MatButtonModule,
     CdkDropList,
     CdkScrollable,
     CdkDrag,

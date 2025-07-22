@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -14,14 +13,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 @Component({
   selector: 'show-my-work-authoring',
   templateUrl: './show-my-work-authoring.component.html',
-  imports: [
-    CommonModule,
-    EditComponentPrompt,
-    FlexModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    FormsModule
-  ]
+  imports: [CommonModule, EditComponentPrompt, MatFormFieldModule, MatSelectModule, FormsModule]
 })
 export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {
   allowedShowWorkComponentTypes: string[] = [

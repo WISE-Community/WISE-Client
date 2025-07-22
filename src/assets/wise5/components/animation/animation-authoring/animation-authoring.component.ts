@@ -5,7 +5,7 @@ import { MatButton } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltip } from '@angular/material/tooltip';
 import { Subject, Subscription } from 'rxjs';
@@ -29,8 +29,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
     MatFormFieldModule,
     MatInput,
     FormsModule,
-    MatRadioGroup,
-    MatRadioButton,
+    MatRadioModule,
     MatButton,
     MatTooltip,
     MatIcon,

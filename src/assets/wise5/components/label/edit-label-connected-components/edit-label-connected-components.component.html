@@ -3,7 +3,7 @@
   *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
   class="connected-components-div"
 >
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <div class="flex flex-row flex-wrap justify-start items-center gap-5">
     <edit-connected-component-default-selects
       [connectedComponent]="connectedComponent"
       [componentId]="componentId"
@@ -58,7 +58,7 @@
         />
       </mat-form-field>
     </ng-container>
-    <span fxFlex></span>
+    <span class="w-full"></span>
     <edit-connected-component-delete-button
       [connectedComponentIndex]="connectedComponentIndex"
       (connectedComponentChange)="deleteConnectedComponent(index)"

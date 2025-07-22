@@ -1,9 +1,8 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -21,11 +20,10 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../../dialogGuidance/
   templateUrl: './ai-chat-authoring.component.html',
   styleUrl: './ai-chat-authoring.component.scss',
   imports: [
-    FlexModule,
-    MatIconButton,
+    MatButtonModule,
     MatTooltip,
     MatIcon,
-    NgIf,
+    CommonModule,
     MatFormFieldModule,
     MatInput,
     CdkTextareaAutosize,
