@@ -25,9 +25,6 @@ import { EditComponentSubmitButtonComponent } from '../../../../../app/authoring
 import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { CSVToArray } from '../../../common/array/array';
-import { NotebookService } from '../../../services/notebookService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditTableConnectedComponentsComponent } from '../edit-table-connected-components/edit-table-connected-components.component';
 import { TableContent } from '../TableContent';
 
@@ -76,14 +73,6 @@ export class EditTableAdvancedComponent extends EditAdvancedComponentComponent {
   isImportingTable: boolean = false;
   numColumns: number;
   importTableMessage: string;
-
-  constructor(
-    protected nodeService: TeacherNodeService,
-    protected notebookService: NotebookService,
-    protected teacherProjectService: TeacherProjectService
-  ) {
-    super(nodeService, notebookService, teacherProjectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

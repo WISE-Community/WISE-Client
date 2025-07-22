@@ -17661,7 +17661,7 @@ Are you ready to receive feedback on this answer?</source>
 Rule Name: <x id="PH" equiv-text="ruleName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5561671044584768513" datatype="html">
@@ -17671,7 +17671,7 @@ Rule Name: <x id="PH" equiv-text="ruleName"/>
 Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3914601509969948690" datatype="html">
@@ -21322,28 +21322,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to overwrite the existing table?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">229</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5497998297263821629" datatype="html">
         <source>Importing table...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">242</context>
+          <context context-type="linenumber">231</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4805591784714355993" datatype="html">
         <source>Error: The table contains more than <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> cells</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">250</context>
+          <context context-type="linenumber">239</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8522934403801176161" datatype="html">
         <source>Successfully imported table</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">254</context>
+          <context context-type="linenumber">243</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3206542606001340679" datatype="html">

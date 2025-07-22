@@ -1,22 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { NotebookService } from '../../../services/notebookService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ConceptMapContent } from '../ConceptMapContent';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { FlexModule } from '@angular/flex-layout/flex';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatOption } from '@angular/material/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
-import { MatOption } from '@angular/material/core';
 import { MatTooltip } from '@angular/material/tooltip';
-import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { ConceptMapContent } from '../ConceptMapContent';
 
 @Component({
   selector: 'edit-concept-map-advanced',
@@ -42,14 +39,6 @@ import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/e
 export class EditConceptMapAdvancedComponent extends EditAdvancedComponentComponent {
   componentContent: ConceptMapContent;
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];
-
-  constructor(
-    protected nodeService: TeacherNodeService,
-    protected notebookService: NotebookService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(nodeService, notebookService, projectService);
-  }
 
   ruleTypeChanged(ruleIndex: number): void {
     const rule = this.componentContent.rules[ruleIndex];
