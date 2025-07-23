@@ -18,9 +18,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - uses: paambaati/codeclimate-action@v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: ${{secrets.test_reporter}}
+      - uses: qltysh/qlty-action/coverage@v1
         with:
-          coverageCommand: npm run test-coverage
-          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: ${{github.workspace}}/coverage/lcov.info:lcov
