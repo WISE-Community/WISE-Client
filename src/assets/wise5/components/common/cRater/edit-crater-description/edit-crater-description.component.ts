@@ -2,7 +2,6 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, Input } from '@angular/core';
 import { CRaterRubric } from '../CRaterRubric';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,14 +11,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 
 @Component({
   selector: 'edit-crater-description',
-  imports: [
-    CdkTextareaAutosize,
-    FlexLayoutModule,
-    FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule
-  ],
+  imports: [CdkTextareaAutosize, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule],
   templateUrl: './edit-crater-description.component.html',
   styleUrl: './edit-crater-description.component.scss'
 })

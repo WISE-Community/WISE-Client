@@ -15,32 +15,13 @@ import { OpenResponseAuthoringComponent } from '../../assets/wise5/components/op
 import { OutsideUrlAuthoring } from '../../assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component';
 import { SummaryAuthoring } from '../../assets/wise5/components/summary/summary-authoring/summary-authoring.component';
 import { TableAuthoring } from '../../assets/wise5/components/table/table-authoring/table-authoring.component';
-import { EditComponentDefaultFeedback } from '../authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
-import { EditComponentExcludeFromTotalScoreComponent } from '../authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
-import { EditComponentJsonComponent } from '../authoring-tool/edit-component-json/edit-component-json.component';
-import { EditComponentMaxScoreComponent } from '../authoring-tool/edit-component-max-score/edit-component-max-score.component';
-import { EditComponentSaveButtonComponent } from '../authoring-tool/edit-component-save-button/edit-component-save-button.component';
-import { EditComponentSubmitButtonComponent } from '../authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
-import { EditComponentTagsComponent } from '../authoring-tool/edit-component-tags/edit-component-tags.component';
-import { EditComponentWidthComponent } from '../authoring-tool/edit-component-width/edit-component-width.component';
-import { EditConnectedComponentsComponent } from '../authoring-tool/edit-connected-components/edit-connected-components.component';
-import { EditConnectedComponentsWithBackgroundComponent } from '../authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
-import { EditComponentMaxSubmitComponent } from '../authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
-import { EditComponentAddToNotebookButtonComponent } from '../authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component';
 import { ShowMyWorkAuthoringComponent } from '../../assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component';
 import { ShowGroupWorkAuthoringComponent } from '../../assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component';
-import { EditDialogGuidanceComputerAvatarComponent } from '../../assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
-import { PeerGroupingAuthoringModule } from '../../assets/wise5/authoringTool/peer-grouping/peer-grouping-authoring.module';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
-import { SelectStepAndComponentComponent } from '../authoring-tool/select-step-and-component/select-step-and-component.component';
-import { EditComponentConstraintsComponent } from '../authoring-tool/edit-component-constraints/edit-component-constraints.component';
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
-import { TranslatableInputComponent } from '../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
-import { TranslatableTextareaComponent } from '../../assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component';
-import { TranslatableRichTextEditorComponent } from '../../assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
-import { TranslatableAssetChooserComponent } from '../../assets/wise5/authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
+import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
 
 @NgModule({
   imports: [
@@ -52,20 +33,6 @@ import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/a
     DrawAuthoring,
     DialogGuidanceAuthoringComponent,
     EditComponentAdvancedComponent,
-    EditConnectedComponentsWithBackgroundComponent,
-    EditDialogGuidanceComputerAvatarComponent,
-    EditComponentAddToNotebookButtonComponent,
-    EditComponentConstraintsComponent,
-    EditComponentDefaultFeedback,
-    EditComponentExcludeFromTotalScoreComponent,
-    EditComponentJsonComponent,
-    EditComponentMaxScoreComponent,
-    EditComponentMaxSubmitComponent,
-    EditComponentSaveButtonComponent,
-    EditComponentSubmitButtonComponent,
-    EditComponentTagsComponent,
-    EditComponentWidthComponent,
-    EditConnectedComponentsComponent,
     EmbeddedAuthoring,
     GraphAuthoring,
     LabelAuthoring,
@@ -79,13 +46,8 @@ import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/a
     MatchAuthoringComponent,
     MultipleChoiceAuthoring,
     OpenResponseAuthoringComponent,
-    PeerGroupingAuthoringModule,
-    SelectStepAndComponentComponent,
-    StudentTeacherCommonModule,
-    TranslatableAssetChooserComponent,
-    TranslatableInputComponent,
-    TranslatableRichTextEditorComponent,
-    TranslatableTextareaComponent
-  ]
+    StudentTeacherCommonModule
+  ],
+  providers: [PeerGroupingAuthoringService]
 })
 export class ComponentAuthoringModule {}

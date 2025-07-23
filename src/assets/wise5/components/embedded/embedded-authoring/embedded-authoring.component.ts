@@ -37,18 +37,18 @@ export class EmbeddedAuthoring extends AbstractComponentAuthoring {
   embeddedApplicationIFrameId: string;
 
   constructor(
-    protected ConfigService: ConfigService,
-    private EmbeddedService: EmbeddedService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    private embeddedService: EmbeddedService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.embeddedApplicationIFrameId = this.EmbeddedService.getEmbeddedApplicationIframeId(
+    this.embeddedApplicationIFrameId = this.embeddedService.getEmbeddedApplicationIframeId(
       this.componentId
     );
   }

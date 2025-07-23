@@ -6,7 +6,6 @@ import { EditConnectedComponentDefaultSelectsComponent } from '../../../../../ap
 import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../app/authoring-tool/edit-connected-components-with-background/edit-connected-components-with-background.component';
-import { ProjectService } from '../../../services/projectService';
 import { ConceptMapContent } from '../ConceptMapContent';
 
 @Component({
@@ -31,10 +30,6 @@ export class EditConceptMapConnectedComponentsComponent extends EditConnectedCom
     'Label',
     'Table'
   ];
-
-  constructor(protected projectService: ProjectService) {
-    super(projectService);
-  }
 
   afterComponentIdChanged(connectedComponent: any): void {
     super.afterComponentIdChanged(connectedComponent);

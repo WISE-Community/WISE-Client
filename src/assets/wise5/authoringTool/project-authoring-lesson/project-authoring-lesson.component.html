@@ -17,7 +17,7 @@
       />
       <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition" />
     </mat-panel-title>
-    <mat-panel-description class="text" fxLayoutAlign="end center" fxLayoutGap="4px">
+    <mat-panel-description class="text flex justify-end items-center gap-1">
       <button
         class="enable-in-translation"
         mat-icon-button
@@ -52,13 +52,16 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div>
-    <div *ngFor="let childId of lesson.ids" fxLayout="row wrap" fxLayoutAlign="start center">
+    <div
+      *ngFor="let childId of lesson.ids"
+      class="flex flex-row flex-wrap justify-start items-center"
+    >
       <project-authoring-step
         [step]="idToNode[childId]"
         (selectNodeEvent)="selectNodeEvent.emit($event)"
         [showPosition]="showPosition"
         [projectId]="projectId"
-        fxFlex
+        class="flex grow"
       />
       <add-step-button [nodeId]="childId" />
     </div>

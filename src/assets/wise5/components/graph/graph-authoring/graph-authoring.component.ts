@@ -158,13 +158,13 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
   numYAxes: number = 0;
 
   constructor(
-    protected ConfigService: ConfigService,
-    private GraphService: GraphService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    private graphService: GraphService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit(): void {
@@ -417,7 +417,7 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
   addColorToYAxes(): void {
     for (let index = 0; index < this.componentContent.yAxis.length; index++) {
       const yAxis = this.componentContent.yAxis[index];
-      const color = this.GraphService.getSeriesColor(index);
+      const color = this.graphService.getSeriesColor(index);
       this.addColorToField(yAxis.title.style, color);
       this.addColorToField(yAxis.labels.style, color);
     }

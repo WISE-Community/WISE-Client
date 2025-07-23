@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
@@ -12,6 +12,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { PeerChatAuthoringComponent } from './peer-chat-authoring.component';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 
 const componentContent = {
   id: 'qn3savv52r',
@@ -42,11 +43,12 @@ describe('PeerChatAuthoringComponent', () => {
       providers: [
         ConfigService,
         { provide: TeacherNodeService, useClass: MockNodeService },
+        PeerGroupingAuthoringService,
         ProjectAssetService,
         ProjectService,
         TeacherProjectService,
         TeacherProjectTranslationService,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient()
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

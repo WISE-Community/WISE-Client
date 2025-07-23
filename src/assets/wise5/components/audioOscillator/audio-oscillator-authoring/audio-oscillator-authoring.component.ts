@@ -18,20 +18,20 @@ import { AudioOscillatorService } from '../audioOscillatorService';
   imports: [EditComponentPrompt, NgIf, MatCheckbox, FormsModule, MatFormFieldModule, MatInput]
 })
 export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
-  maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;
+  maxAmplitude: number = this.audioOscillatorService.maxAmplitude;
   sawtoothChecked: boolean;
   sineChecked: boolean;
   squareChecked: boolean;
   triangleChecked: boolean;
 
   constructor(
-    protected AudioOscillatorService: AudioOscillatorService,
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected audioOscillatorService: AudioOscillatorService,
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
 
   initializeStartingAmplitude(): void {
     this.componentContent.startingAmplitude ??=
-      this.AudioOscillatorService.defaultStartingAmplitude;
+      this.audioOscillatorService.defaultStartingAmplitude;
   }
 
   showFrequencyInputChanged(): void {

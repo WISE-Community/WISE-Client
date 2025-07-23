@@ -7,6 +7,7 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { ShowGroupWorkAuthoringComponent } from './show-group-work-authoring.component';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 
 describe('ShowGroupWorkAuthoringComponent', () => {
   let component: ShowGroupWorkAuthoringComponent;
@@ -17,6 +18,7 @@ describe('ShowGroupWorkAuthoringComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ShowGroupWorkAuthoringComponent, StudentTeacherCommonServicesModule],
       providers: [
+        PeerGroupingAuthoringService,
         ProjectAssetService,
         TeacherNodeService,
         TeacherProjectService,

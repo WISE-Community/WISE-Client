@@ -45,14 +45,14 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    private SummaryService: SummaryService
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService,
+    private summaryService: SummaryService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.stepNodesDetails = this.ProjectService.getStepNodesDetailsInOrder();
+    super(configService, nodeService, projectAssetService, projectService);
+    this.stepNodesDetails = this.projectService.getStepNodesDetailsInOrder();
   }
 
   ngOnInit(): void {
@@ -79,7 +79,7 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
   }
 
   isComponentTypeAllowed(componentType: string): boolean {
-    return this.SummaryService.isComponentTypeAllowed(componentType);
+    return this.summaryService.isComponentTypeAllowed(componentType);
   }
 
   summaryComponentIdChanged(): void {
@@ -147,12 +147,12 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
     componentId: string,
     studentDataType: string
   ): boolean {
-    const component = this.ProjectService.getComponent(nodeId, componentId);
+    const component = this.projectService.getComponent(nodeId, componentId);
     if (component != null) {
       if (studentDataType === 'scores') {
-        return this.SummaryService.isScoresSummaryAvailableForComponentType(component.type);
+        return this.summaryService.isScoresSummaryAvailableForComponentType(component.type);
       } else if (studentDataType === 'responses') {
-        return this.SummaryService.isResponsesSummaryAvailableForComponentType(component.type);
+        return this.summaryService.isResponsesSummaryAvailableForComponentType(component.type);
       }
     }
     return false;
@@ -162,7 +162,7 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
     const nodeId = this.componentContent.summaryNodeId;
     const componentId = this.componentContent.summaryComponentId;
     if (nodeId != null && componentId != null) {
-      const component = this.ProjectService.getComponent(nodeId, componentId);
+      const component = this.projectService.getComponent(nodeId, componentId);
       if (component != null) {
         const componentService = this.componentServiceLookupService.getService(component.type);
         return componentService.componentHasCorrectAnswer(component);
@@ -175,7 +175,7 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
     const nodeId = this.componentContent.summaryNodeId;
     const componentId = this.componentContent.summaryComponentId;
     if (nodeId != null && componentId != null) {
-      const component = this.ProjectService.getComponent(nodeId, componentId);
+      const component = this.projectService.getComponent(nodeId, componentId);
       if (component != null) {
         return (component as MultipleChoiceContent).choiceType === 'checkbox';
       }
@@ -200,6 +200,6 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
   }
 
   getComponents(nodeId: string): any[] {
-    return this.ProjectService.getComponents(nodeId);
+    return this.projectService.getComponents(nodeId);
   }
 }

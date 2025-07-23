@@ -70,13 +70,13 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
   stampImageChange: Subject<string> = new Subject<string>();
 
   constructor(
-    protected ConfigService: ConfigService,
+    protected configService: ConfigService,
     private dialog: MatDialog,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
     this.subscriptions.add(
       this.backgroundImageChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.updateStarterDrawDataBackgroundAndSave();
@@ -203,7 +203,7 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
         starterDrawDataJSON.canvas.backgroundImage != null &&
         starterDrawDataJSON.canvas.backgroundImage.src != null
       ) {
-        const projectAssetsDirectoryPath = this.ConfigService.getProjectAssetsDirectoryPath(true);
+        const projectAssetsDirectoryPath = this.configService.getProjectAssetsDirectoryPath(true);
         const background = this.componentContent.background;
         const newSrc = projectAssetsDirectoryPath + '/' + background;
         starterDrawDataJSON.canvas.backgroundImage.src = newSrc;

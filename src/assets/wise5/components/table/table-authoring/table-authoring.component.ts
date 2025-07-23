@@ -18,12 +18,8 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
-import { ConfigService } from '../../../services/configService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'table-authoring',
@@ -53,16 +49,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   private numColumnsFormControl: FormControl;
   private numRowsFormControl: FormControl;
 
-  constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
-  ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.initializeDimensionInputs();
     this.subscriptions.add(

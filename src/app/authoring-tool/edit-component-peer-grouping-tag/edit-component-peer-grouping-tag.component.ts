@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { PeerGroupingAuthoringModule } from '../../../assets/wise5/authoringTool/peer-grouping/peer-grouping-authoring.module';
+import { SelectPeerGroupingAuthoringComponent } from '../../../assets/wise5/authoringTool/peer-grouping/select-peer-grouping-authoring/select-peer-grouping-authoring.component';
 
 @Component({
   selector: 'edit-component-peer-grouping-tag',
@@ -8,7 +8,7 @@ import { PeerGroupingAuthoringModule } from '../../../assets/wise5/authoringTool
     [tag]="componentContent.peerGroupingTag"
     (tagChanged)="peerGroupingTagChanged($event)"
   />`,
-  imports: [PeerGroupingAuthoringModule]
+  imports: [SelectPeerGroupingAuthoringComponent]
 })
 export class EditComponentPeerGroupingTagComponent {
   @Input() componentContent: any;

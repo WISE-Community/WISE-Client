@@ -11,7 +11,7 @@
     >
       <mat-icon>add_circle</mat-icon>
     </button>
-    <span class="w-full"></span>
+    <span class="flex grow"></span>
     <button mat-button (click)="showHelp()" i18n>Help</button>
   </h5>
   <ul
@@ -24,60 +24,62 @@
       *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last"
     >
       <li cdkDrag>
-        <mat-card appearance="outlined" class="rule flex flex-row flex-wrap gap-2">
-          <span class="text-secondary flex flex-col justify-start items-center gap-5">
-            <span class="mat-subtitle-1">{{ ruleIndex + 1 }}</span>
-            <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
-          </span>
-          <span class="flex flex-col justify-center items-start gap-2 w-full">
-            <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
-              <mat-label i18n>Expression</mat-label>
-              <input
-                matInput
-                [(ngModel)]="rule.expression"
-                (ngModelChange)="inputChanged.next($event)"
+        <mat-card appearance="outlined" class="rule">
+          <span class="flex flex-row flex-wrap gap-2">
+            <span class="text-secondary flex flex-col justify-start items-center gap-5">
+              <span class="mat-subtitle-1">{{ ruleIndex + 1 }}</span>
+              <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
+            </span>
+            <span class="flex flex-col justify-center items-start gap-2 grow">
+              <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
+                <mat-label i18n>Expression</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="rule.expression"
+                  (ngModelChange)="inputChanged.next($event)"
+                />
+              </mat-form-field>
+              <translatable-textarea
+                [content]="rule"
+                key="prompt"
+                label="Prompt"
+                i18n-label
+                (defaultLanguageTextChanged)="inputChanged.next($event)"
+                class="rule-input"
               />
-            </mat-form-field>
-            <translatable-textarea
-              [content]="rule"
-              key="prompt"
-              label="Prompt"
-              i18n-label
-              (defaultLanguageTextChanged)="inputChanged.next($event)"
-              class="rule-input"
-            />
-          </span>
-          <span class="flex flex-col justify-start items-center">
-            <button
-              mat-icon-button
-              i18n-matTooltip
-              matTooltip="Delete rule"
-              matTooltipPosition="before"
-              (click)="deleteRule(ruleIndex)"
-            >
-              <mat-icon>clear</mat-icon>
-            </button>
-            <button
-              *ngIf="feedbackRules.length > 1"
-              [disabled]="first"
-              mat-icon-button
-              i18n-matTooltip
-              matTooltip="Move up"
-              matTooltipPosition="before"
-              (click)="moveUp(ruleIndex)"
-            >
-              <mat-icon>arrow_upward</mat-icon>
-            </button>
-            <button
-              [disabled]="last"
-              mat-icon-button
-              i18n-matTooltip
-              matTooltip="Move down"
-              matTooltipPosition="before"
-              (click)="moveDown(ruleIndex)"
-            >
-              <mat-icon>arrow_downward</mat-icon>
-            </button>
+            </span>
+            <span class="flex flex-col justify-start items-center">
+              <button
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Delete rule"
+                matTooltipPosition="before"
+                (click)="deleteRule(ruleIndex)"
+              >
+                <mat-icon>clear</mat-icon>
+              </button>
+              <button
+                *ngIf="feedbackRules.length > 1"
+                [disabled]="first"
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Move up"
+                matTooltipPosition="before"
+                (click)="moveUp(ruleIndex)"
+              >
+                <mat-icon>arrow_upward</mat-icon>
+              </button>
+              <button
+                [disabled]="last"
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Move down"
+                matTooltipPosition="before"
+                (click)="moveDown(ruleIndex)"
+              >
+                <mat-icon>arrow_downward</mat-icon>
+              </button>
+            </span>
           </span>
         </mat-card>
       </li>

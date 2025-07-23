@@ -4,11 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
-import { ConfigService } from '../../../services/configService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'show-my-work-authoring',
@@ -32,15 +28,6 @@ export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {
     'Table'
   ];
   nodeIds: string[];
-
-  constructor(
-    protected configService: ConfigService,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, nodeService, projectAssetService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

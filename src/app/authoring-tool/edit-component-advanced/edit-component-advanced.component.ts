@@ -33,7 +33,6 @@ import { EditTableAdvancedComponent } from '../../../assets/wise5/components/tab
 import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'edit-component-advanced',
   templateUrl: './edit-component-advanced.component.html',
   styles: [
     '.mat-divider { margin: 0 -16px; } .mat-mdc-dialog-content { padding-top: 10px !important; padding-bottom: 10px !important; }'

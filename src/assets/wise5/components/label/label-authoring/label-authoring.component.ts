@@ -11,13 +11,9 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
-import { ConfigService } from '../../../services/configService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'label-authoring',
@@ -42,13 +38,13 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
   numberInputChange: Subject<number> = new Subject<number>();
   textInputChange: Subject<string> = new Subject<string>();
 
-  constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
-  ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+  ngOnInit(): void {
+    super.ngOnInit();
+    if (this.componentContent.enableCircles == null) {
+      // If this component was created before enableCircles was implemented, we will default it to
+      // true in the authoring so that the "Enable Dots" checkbox is checked.
+      this.componentContent.enableCircles = true;
+    }
     this.subscriptions.add(
       this.numberInputChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
@@ -59,15 +55,6 @@ export class LabelAuthoring extends AbstractComponentAuthoring {
         this.componentChanged();
       })
     );
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
-    if (this.componentContent.enableCircles == null) {
-      // If this component was created before enableCircles was implemented, we will default it to
-      // true in the authoring so that the "Enable Dots" checkbox is checked.
-      this.componentContent.enableCircles = true;
-    }
   }
 
   addLabel(): void {

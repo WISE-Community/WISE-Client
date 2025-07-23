@@ -16,12 +16,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   imports: [
     CommonModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,

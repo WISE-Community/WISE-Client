@@ -42,13 +42,13 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   availableLinks: any[];
 
   constructor(
-    private ConceptMapService: ConceptMapService,
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    private conceptMapService: ConceptMapService,
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit() {
@@ -118,11 +118,11 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   }
 
   getNewConceptMapNodeId(): string {
-    return this.ConceptMapService.getNextAvailableId(this.componentContent.nodes, 'node');
+    return this.conceptMapService.getNextAvailableId(this.componentContent.nodes, 'node');
   }
 
   getNewConceptMapLinkId(): string {
-    return this.ConceptMapService.getNextAvailableId(this.componentContent.links, 'link');
+    return this.conceptMapService.getNextAvailableId(this.componentContent.links, 'link');
   }
 
   saveStarterState(starterState: any): void {

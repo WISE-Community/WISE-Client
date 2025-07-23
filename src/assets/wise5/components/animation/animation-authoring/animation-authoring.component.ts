@@ -45,13 +45,13 @@ export class AnimationAuthoring extends AbstractComponentAuthoring {
   inputChangeSubscription: Subscription;
 
   constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.stepNodesDetails = this.ProjectService.getStepNodesDetailsInOrder();
+    super(configService, nodeService, projectAssetService, projectService);
+    this.stepNodesDetails = this.projectService.getStepNodesDetailsInOrder();
     this.inputChangeSubscription = this.inputChange
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(() => {

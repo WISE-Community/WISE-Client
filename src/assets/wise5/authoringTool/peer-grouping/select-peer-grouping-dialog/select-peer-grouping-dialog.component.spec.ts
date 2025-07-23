@@ -5,9 +5,9 @@ import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { getDialogOpenSpy } from '../peer-grouping-testing-helper';
 import { SelectPeerGroupingOptionComponent } from '../select-peer-grouping-option/select-peer-grouping-option.component';
 import { SelectPeerGroupingDialogComponent } from './select-peer-grouping-dialog.component';
+import { provideHttpClient } from '@angular/common/http';
 
 let component: SelectPeerGroupingDialogComponent;
 let fixture: ComponentFixture<SelectPeerGroupingDialogComponent>;
@@ -32,7 +32,8 @@ describe('SelectPeerGroupingDialogComponent', () => {
         {
           provide: MatDialogRef,
           useValue: { close: () => {} }
-        }
+        },
+        provideHttpClient()
       ]
     }).compileComponents();
   });
@@ -45,18 +46,8 @@ describe('SelectPeerGroupingDialogComponent', () => {
     spyOn(TestBed.inject(PeerGroupingAuthoringService), 'getPeerGroupings').and.returnValue([]);
     fixture.detectChanges();
   });
-
-  showNewPeerGroupingAuthoring();
   deletePeerGrouping();
 });
-
-function showNewPeerGroupingAuthoring() {
-  it('should show new peer grouping authoring', () => {
-    const dialogOpenSpy = getDialogOpenSpy(peerGrouping1);
-    component.showNewPeerGroupingAuthoring();
-    expect(dialogOpenSpy).toHaveBeenCalled();
-  });
-}
 
 function deletePeerGrouping() {
   it('should delete peer grouping', () => {

@@ -75,13 +75,13 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
   heightChange: Subject<string> = new Subject<string>();
 
   constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected OutsideURLService: OutsideURLService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected outsideURLService: OutsideURLService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit() {
@@ -90,7 +90,7 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
     this.isShowOERs = this.componentContent.url === '';
     this.searchText = '';
     this.selectedSubjects = [];
-    this.OutsideURLService.getOpenEducationalResources().then((openEducationalResources: any) => {
+    this.outsideURLService.getOpenEducationalResources().then((openEducationalResources: any) => {
       this.allOpenEducationalResources = openEducationalResources.sort((a, b) =>
         a.metadata.title.localeCompare(b.metadata.title)
       );
