@@ -1,6 +1,6 @@
 name: Test coverage
 permissions:
-  id_token: write
+  id-token: write
 on:
   workflow_call:
 jobs:
