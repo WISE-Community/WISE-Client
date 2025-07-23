@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { ProjectAuthoringLessonComponent } from '../project-authoring-lesson/project-authoring-lesson.component';
 import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
@@ -28,12 +27,10 @@ import { copy } from '../../common/object/object';
     MatButtonModule,
     MatTooltipModule,
     MatIconModule,
-    FlexLayoutModule,
     ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent,
     AddLessonButtonComponent
   ],
-  selector: 'project-authoring',
   styleUrl: './project-authoring.component.scss',
   templateUrl: './project-authoring.component.html'
 })
@@ -56,10 +53,10 @@ export class ProjectAuthoringComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
     private deleteTranslationsService: DeleteTranslationsService,
     private projectService: TeacherProjectService,
-    private dataService: TeacherDataService,
     private route: ActivatedRoute,
     private router: Router
   ) {}

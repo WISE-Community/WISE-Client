@@ -10570,7 +10570,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">80,82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1934853361308081722" datatype="html">
@@ -10596,7 +10596,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">99,100</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8605758886613118383" datatype="html">
@@ -13120,7 +13120,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source> - Collapse All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">54,57</context>
+          <context context-type="linenumber">54,58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
@@ -13135,28 +13135,28 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>There are no lessons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">59,62</context>
+          <context context-type="linenumber">60,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1001733534902851872" datatype="html">
         <source>There are no unused lessons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">77,80</context>
+          <context context-type="linenumber">83,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6422560368667700251" datatype="html">
         <source>There are no unused steps</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
-          <context context-type="linenumber">100,101</context>
+          <context context-type="linenumber">107,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5775641662261420108" datatype="html">
         <source>Are you sure you want to delete the <x id="PH" equiv-text="selectedNodeIds.length"/> selected item(s)?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5051388252985578877" datatype="html">
