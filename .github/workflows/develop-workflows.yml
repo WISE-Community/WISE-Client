@@ -5,7 +5,9 @@ on:
       - develop
 jobs:
   test-coverage:
-    uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@code-coverage-migration
+    uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@develop
+    secrets:
+      QLTY_COVERAGE_TOKEN: ${{secrets.QLTY_COVERAGE_TOKEN}}
 
   generate-messages:
     needs: test-coverage
