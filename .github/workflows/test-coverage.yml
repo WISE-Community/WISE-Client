@@ -1,4 +1,6 @@
 name: Test coverage
+permissions:
+  id_token: write
 on:
   workflow_call:
 jobs:
@@ -17,5 +19,5 @@ jobs:
       - run: npm ci
       - uses: qltysh/qlty-action/coverage@v1
         with:
-          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          oidc: true
           files: ${{github.workspace}}/coverage/lcov.info:lcov
