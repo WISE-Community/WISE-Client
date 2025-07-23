@@ -10,6 +10,7 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { EditDynamicPromptComponent } from '../../../../../app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component';
 import { EditQuestionBankComponent } from '../../../../../app/authoring-tool/edit-question-bank/edit-question-bank.component';
 import { EditComponentPeerGroupingTagComponent } from '../../../../../app/authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
+import { PeerChatModule } from '../peer-chat.module';
 
 @Component({
   imports: [
@@ -17,7 +18,8 @@ import { EditComponentPeerGroupingTagComponent } from '../../../../../app/author
     EditComponentPrompt,
     EditDynamicPromptComponent,
     EditQuestionBankComponent,
-    EditComponentPeerGroupingTagComponent
+    EditComponentPeerGroupingTagComponent,
+    PeerChatModule
   ],
   styleUrl: './peer-chat-authoring.component.scss',
   templateUrl: './peer-chat-authoring.component.html'

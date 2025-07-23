@@ -32,7 +32,6 @@ import { MatInputModule } from '@angular/material/input';
     MatTooltipModule,
     SelectStepAndComponentComponent
   ],
-  selector: 'edit-peer-grouping-dialog',
   templateUrl: './edit-peer-grouping-dialog.component.html'
 })
 export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {

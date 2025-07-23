@@ -2,14 +2,12 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle
+  MatDialogModule,
+  MatDialogRef
 } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
@@ -26,16 +24,13 @@ class SelectPeerGroupingDialogData {
   templateUrl: './select-peer-grouping-dialog.component.html',
   styles: ['.peer-grouping { margin-bottom: 8px; }'],
   imports: [
-    MatDialogTitle,
+    MatDialogModule,
     CdkScrollable,
     CommonModule,
-    MatDialogContent,
-    MatCard,
-    MatCardContent,
+    MatCardModule,
     SelectPeerGroupingOptionComponent,
     MatButton,
-    MatIcon,
-    MatDialogActions
+    MatIcon
   ]
 })
 export class SelectPeerGroupingDialogComponent implements OnInit {

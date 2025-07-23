@@ -22,14 +22,10 @@ import { SelectStepAndComponentComponent } from '../select-step-and-component/se
     EditDynamicPromptRulesComponent
   ]
 })
-export class EditDynamicPromptComponent implements OnInit {
+export class EditDynamicPromptComponent {
   protected allowedReferenceComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
   @Input() componentContent: any;
   @Output() dynamicPromptChangedEvent = new EventEmitter<void>();
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   toggleDynamicPrompt(event: MatCheckboxChange): void {
     if (this.componentContent.dynamicPrompt == null) {
