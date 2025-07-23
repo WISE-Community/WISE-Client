@@ -5,9 +5,7 @@ on:
       - develop
 jobs:
   test-coverage:
-    uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@develop
-    secrets:
-      test_reporter: ${{secrets.CC_TEST_REPORTER_ID}}
+    uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@code-coverage-migration
 
   generate-messages:
     needs: test-coverage
