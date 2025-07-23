@@ -1,9 +1,6 @@
 name: Test coverage
 on:
   workflow_call:
-    secrets:
-      test_reporter:
-        required: true
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
