@@ -28,12 +28,11 @@
             }
             @if (filteredRuns.length) {
               <span class="mat-caption">
-                (
-                @if (getRunTotal('isScheduled')) {
+                (@if (getRunTotal('isScheduled')) {
                   <span i18n>{{ getRunTotal('isScheduled') }} scheduled</span>,
                 }
                 <span i18n>{{ getRunTotal('isActive') }} active</span>
-              </span>
+              </span>)
             }
             @if (search) {
               |
