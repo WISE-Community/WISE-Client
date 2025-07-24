@@ -13,7 +13,6 @@ import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
 import { copy } from '../../common/object/object';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ComponentComponent } from '../../components/component/component.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ComponentStateInfoComponent } from '../../common/component-state-info/component-state-info.component';
@@ -27,7 +26,6 @@ import { MatDividerModule } from '@angular/material/divider';
     CommonModule,
     ComponentComponent,
     ComponentStateInfoComponent,
-    FlexLayoutModule,
     HelpIconComponent,
     MatButtonModule,
     MatDividerModule,

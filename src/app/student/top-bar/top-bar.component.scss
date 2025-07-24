@@ -7,8 +7,7 @@
 
 .topbar-content {
   max-height: 100%;
-  margin: 0 -16px;
-  padding: 0 16px;
+  margin: 0 -8px;
 }
 
 .logo {
@@ -21,8 +20,6 @@
 .logo-link {
   min-width: auto;
   display: none;
-  padding: 0 4px;
-  margin-right: 12px;
 
   @media (min-width: functions.breakpoint('sm.min')) {
     display: block;
