@@ -58,7 +58,7 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
 
   showNewPeerGroupingAuthoring(): void {
     this.dialog.open(CreateNewPeerGroupingDialogComponent, {
-      panelClass: 'dialog-md'
+      panelClass: 'dialog-sm'
     });
   }
 

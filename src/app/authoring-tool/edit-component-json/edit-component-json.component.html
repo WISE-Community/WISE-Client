@@ -15,10 +15,9 @@
 @if (showJSONAuthoring) {
   <div class="flex flex-col gap-2">
     <span i18n style="color: red">Close the JSON view to save the changes</span>
-    <mat-form-field class="w-full" appearance="outline">
+    <mat-form-field class="w-full">
       <mat-label i18n>Edit Component JSON</mat-label>
       <textarea
-        class="mat-body-2"
         matInput
         cdkTextareaAutosize
         [(ngModel)]="componentContentJSONString"
