@@ -1,9 +1,8 @@
 name: Test coverage
+permissions:
+  id-token: write
 on:
   workflow_call:
-    secrets:
-      test_reporter:
-        required: true
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
@@ -17,8 +16,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: |
+          npm ci
+          npm run test-coverage
       - uses: qltysh/qlty-action/coverage@v1
         with:
-          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
-          files: ${{github.workspace}}/coverage/lcov.info:lcov
+          oidc: true
+          files: ${{github.workspace}}/coverage/lcov.info

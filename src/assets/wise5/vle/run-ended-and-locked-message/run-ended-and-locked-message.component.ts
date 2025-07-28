@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/configService';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [FlexLayoutModule, MatIconModule],
-    selector: 'run-ended-and-locked-message',
-    templateUrl: './run-ended-and-locked-message.component.html'
+  imports: [MatIconModule],
+  selector: 'run-ended-and-locked-message',
+  templateUrl: './run-ended-and-locked-message.component.html'
 })
 export class RunEndedAndLockedMessageComponent implements OnInit {
   protected message: string;
