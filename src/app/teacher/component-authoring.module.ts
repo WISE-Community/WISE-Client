@@ -112,7 +112,6 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentJsonComponent,
     EditComponentMaxScoreComponent,
-    EditComponentMaxSubmitComponent,
     EditComponentPeerGroupingTagComponent,
     EditComponentRubricComponent,
     EditComponentSaveButtonComponent,
@@ -170,6 +169,7 @@ import { WiseAuthoringTinymceEditorComponent } from '../../assets/wise5/directiv
   imports: [
     ComponentAuthoringComponent,
     EditComponentConstraintsComponent,
+    EditComponentMaxSubmitComponent,
     EditComponentPrompt,
     EditComponentWidthComponent,
     EditCRaterIdeaDescriptionsComponent,

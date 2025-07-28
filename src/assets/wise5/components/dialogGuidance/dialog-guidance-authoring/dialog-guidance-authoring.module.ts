@@ -28,13 +28,13 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
 @NgModule({
   declarations: [
     DialogGuidanceAuthoringComponent,
-    EditComponentMaxSubmitComponent,
     EditFeedbackRulesComponent,
     FeedbackRuleHelpComponent
   ],
   imports: [
     CommonModule,
     ComponentAuthoringModule,
+    EditComponentMaxSubmitComponent,
     EditComponentPrompt,
     DragDropModule,
     FormsModule,
@@ -57,11 +57,6 @@ import { TeacherNodeService } from '../../../services/teacherNodeService';
     TeacherNodeService,
     TeacherProjectService
   ],
-  exports: [
-    DialogGuidanceAuthoringComponent,
-    EditComponentPrompt,
-    EditComponentMaxSubmitComponent,
-    EditFeedbackRulesComponent
-  ]
+  exports: [DialogGuidanceAuthoringComponent, EditComponentPrompt, EditFeedbackRulesComponent]
 })
 export class DialogGuidanceAuthoringModule {}

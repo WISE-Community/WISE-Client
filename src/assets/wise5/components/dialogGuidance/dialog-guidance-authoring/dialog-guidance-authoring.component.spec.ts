@@ -1,4 +1,3 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -31,11 +30,7 @@ describe('DialogGuidanceAuthoringComponent', () => {
         DialogGuidanceAuthoringModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [
-        TeacherNodeService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
+      providers: [TeacherNodeService, provideHttpClient(withInterceptorsFromDi())]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })
