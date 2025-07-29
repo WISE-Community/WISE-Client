@@ -4,13 +4,12 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButton } from '@angular/material/button';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { MatDivider } from '@angular/material/divider';
 
 @Component({
-    imports: [MatDivider, FlexModule, MatButton, RouterLink, NgIf, MatProgressBar],
-    styleUrls: ['./ki-cycle-using-oer.component.scss', '../../add-content.scss'],
-    templateUrl: './ki-cycle-using-oer.component.html'
+  imports: [MatDivider, MatButton, RouterLink, NgIf, MatProgressBar],
+  styleUrl: '../../add-content.scss',
+  templateUrl: './ki-cycle-using-oer.component.html'
 })
 export class KiCycleUsingOerComponent extends ConfigureStructureComponent {
   protected groupsPath = `ki-cycle-using-oer/groups.json`;

@@ -15,6 +15,7 @@ export class Run {
   owner: User;
   sharedOwners: User[] = [];
   project: Project;
+  private isSurvey: boolean;
 
   static readonly VIEW_STUDENT_WORK_PERMISSION: number = 1;
   static readonly GRADE_AND_MANAGE_PERMISSION: number = 2;
@@ -39,32 +40,32 @@ export class Run {
     }
   }
 
-  public canViewStudentWork(userId) {
+  public canViewStudentWork(userId): boolean {
     return (
       this.isOwner(userId) ||
       this.isSharedOwnerWithPermission(userId, Run.VIEW_STUDENT_WORK_PERMISSION)
     );
   }
 
-  public canGradeAndManage(userId) {
+  public canGradeAndManage(userId): boolean {
     return (
       this.isOwner(userId) ||
       this.isSharedOwnerWithPermission(userId, Run.GRADE_AND_MANAGE_PERMISSION)
     );
   }
 
-  public canViewStudentNames(userId) {
+  public canViewStudentNames(userId): boolean {
     return (
       this.isOwner(userId) ||
       this.isSharedOwnerWithPermission(userId, Run.VIEW_STUDENT_NAMES_PERMISSION)
     );
   }
 
-  isOwner(userId) {
+  isOwner(userId): boolean {
     return this.owner.id == userId;
   }
 
-  isSharedOwnerWithPermission(userId, permissionId) {
+  isSharedOwnerWithPermission(userId, permissionId): boolean {
     for (const sharedOwner of this.sharedOwners) {
       if (sharedOwner.id == userId) {
         return this.userHasPermission(sharedOwner, permissionId);
@@ -73,7 +74,7 @@ export class Run {
     return false;
   }
 
-  userHasPermission(user: User, permission: number) {
+  userHasPermission(user: User, permission: number): boolean {
     return user.permissions.includes(permission);
   }
 
@@ -91,6 +92,10 @@ export class Run {
 
   private hasEndTime(): boolean {
     return this.endTime != null;
+  }
+
+  isSurveyRun(): boolean {
+    return this.isSurvey;
   }
 }
 

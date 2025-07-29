@@ -1,16 +1,14 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { Component as WISEComponent } from '../../../common/Component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Component as WISEComponent } from '../../../common/Component';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-  imports: [FlexLayoutModule, MatButtonModule, MatIconModule, MatTooltipModule],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
   selector: 'save-starter-state',
-  standalone: true,
   templateUrl: 'save-starter-state.component.html'
 })
 export class SaveStarterStateComponent {
@@ -18,7 +16,10 @@ export class SaveStarterStateComponent {
   protected dirty: boolean;
   @Input() private starterState: any;
 
-  constructor(private matDialog: MatDialog, private nodeService: TeacherNodeService) {}
+  constructor(
+    private matDialog: MatDialog,
+    private nodeService: TeacherNodeService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dirty = !changes.starterState.isFirstChange();

@@ -1,28 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChooseMoveNodeLocationComponent } from './choose-move-node-location.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { MoveNodesService } from '../../../services/moveNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { RemoveNodeIdFromTransitionsService } from '../../../services/removeNodeIdFromTransitionsService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
+import { Node } from '../../../common/Node';
 
 let component: ChooseMoveNodeLocationComponent;
 let fixture: ComponentFixture<ChooseMoveNodeLocationComponent>;
 describe('ChooseMoveNodeLocationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChooseMoveNodeLocationComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [RouterTestingModule, StudentTeacherCommonServicesModule],
+      imports: [ChooseMoveNodeLocationComponent],
       providers: [
-        MoveNodesService,
-        RemoveNodeIdFromTransitionsService,
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        MockProvider(MoveNodesService),
+        MockProvider(TeacherProjectService, {
+          idToOrder: {}
+        }),
+        provideRouter([])
       ]
     });
     window.history.pushState(
@@ -34,6 +29,10 @@ describe('ChooseMoveNodeLocationComponent', () => {
     );
     fixture = TestBed.createComponent(ChooseMoveNodeLocationComponent);
     component = fixture.componentInstance;
+    const projectService = TestBed.inject(TeacherProjectService);
+    spyOn(projectService, 'getNode').and.returnValue(new Node());
+    spyOn(projectService, 'getInactiveGroupNodes').and.returnValue([]);
+    spyOn(projectService, 'getInactiveStepNodes').and.returnValue([]);
     fixture.detectChanges();
   });
   it('should create', () => {

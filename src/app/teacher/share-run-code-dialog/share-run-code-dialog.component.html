@@ -1,60 +1,87 @@
-<h2 mat-dialog-title i18n>Share with Students</h2>
+@if (run.isSurveyRun()) {
+  <h2 mat-dialog-title i18n>Share with Participants</h2>
+} @else {
+  <h2 mat-dialog-title i18n>Share with Students</h2>
+}
 <mat-dialog-content>
   <div class="info-block">
     <p class="mat-subtitle-1 accent-1">
       {{ run.project.name }} <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
     </p>
-    <p i18n>Copy this link to share with your students:</p>
-    <p class="share">
-      <button
-        mat-button
-        color="primary"
-        i18n-matTooltip
-        matTooltip="Copy link"
-        matTooltipPosition="after"
-        [cdkCopyToClipboard]="link"
-        (click)="copyMsg()"
-      >
-        <mat-icon>content_copy</mat-icon>
-        <span>{{ link }}</span>
-      </button>
-    </p>
-    <p i18n>
-      Students with WISE accounts can also select <strong>Add Unit+</strong> and type the Access
-      Code:
-    </p>
-    <p class="share">
-      <button
-        mat-button
-        color="primary"
-        i18n-matTooltip
-        matTooltip="Copy Access Code"
-        matTooltipPosition="after"
-        [cdkCopyToClipboard]="run.runCode"
-        (click)="copyMsg()"
-      >
-        <mat-icon>content_copy</mat-icon>
-        <span class="mat-body-1">{{ run.runCode }}</span>
-      </button>
-    </p>
-    <ng-container
-      *ngIf="isGoogleUser() && isGoogleClassroomEnabled() && run.project.wiseVersion !== 4"
-    >
-      <p i18n>Add as an assignment in Google Classroom:</p>
+    @if (run.isSurveyRun()) {
+      <p i18n>
+        This is a survey unit. Participants complete survey units anonymously and do not need a WISE
+        account.
+      </p>
+      <p i18n>Copy this link to share with participants:</p>
+      <p class="share">
+        <button
+          class="access-link"
+          mat-button
+          color="primary"
+          i18n-matTooltip
+          matTooltip="Copy link"
+          matTooltipPosition="after"
+          [cdkCopyToClipboard]="accessLinks[0]"
+          (click)="copyMsg()"
+        >
+          <mat-icon>content_copy</mat-icon>
+          <span>{{ accessLinks[0] }}</span>
+        </button>
+      </p>
+    } @else {
+      <p i18n>Copy this link to share with your students:</p>
       <p class="share">
         <button
           mat-button
-          class="share-to-google"
           color="primary"
-          (click)="checkClassroomAuthorization()"
+          i18n-matTooltip
+          matTooltip="Copy link"
+          matTooltipPosition="after"
+          [cdkCopyToClipboard]="link"
+          (click)="copyMsg()"
         >
-          <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-            <img src="assets/img/icons/google-classroom.svg" alt="Google Classroom logo" />
-            <span i18n>Share to Google Classroom</span>
-          </span>
+          <mat-icon>content_copy</mat-icon>
+          <span>{{ link }}</span>
         </button>
       </p>
-    </ng-container>
+      <p i18n>
+        Students with WISE accounts can also select <strong>Add Unit+</strong> and type the Access
+        Code:
+      </p>
+      <p class="share">
+        <button
+          mat-button
+          color="primary"
+          i18n-matTooltip
+          matTooltip="Copy Access Code"
+          matTooltipPosition="after"
+          [cdkCopyToClipboard]="run.runCode"
+          (click)="copyMsg()"
+        >
+          <mat-icon>content_copy</mat-icon>
+          <span class="mat-body-1">{{ run.runCode }}</span>
+        </button>
+      </p>
+      <ng-container
+        *ngIf="isGoogleUser() && isGoogleClassroomEnabled() && run.project.wiseVersion !== 4"
+      >
+        <p i18n>Add as an assignment in Google Classroom:</p>
+        <p class="share">
+          <button
+            mat-button
+            class="share-to-google"
+            color="primary"
+            (click)="checkClassroomAuthorization()"
+          >
+            <span class="flex-row justify-start items-center gap-2">
+              <img src="assets/img/icons/google-classroom.svg" alt="Google Classroom logo" />
+              <span i18n>Share to Google Classroom</span>
+            </span>
+          </button>
+        </p>
+      </ng-container>
+    }
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

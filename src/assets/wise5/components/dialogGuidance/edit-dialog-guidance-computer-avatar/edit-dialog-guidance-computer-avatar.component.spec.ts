@@ -1,23 +1,12 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { copy } from '../../../common/object/object';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditDialogGuidanceComputerAvatarComponent } from './edit-dialog-guidance-computer-avatar.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditDialogGuidanceComputerAvatarComponent', () => {
   let allComputerAvatars: ComputerAvatar[];
@@ -26,20 +15,15 @@ describe('EditDialogGuidanceComputerAvatarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditDialogGuidanceComputerAvatarComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
-        DragDropModule,
-        FormsModule,
-        MatButtonToggleModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        StudentTeacherCommonServicesModule],
-    providers: [ProjectAssetService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [
+        EditDialogGuidanceComputerAvatarComponent,
+        MockComponent(TranslatableInputComponent)
+      ],
+      providers: [
+        MockProviders(ComputerAvatarService, TeacherProjectService),
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

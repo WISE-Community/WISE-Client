@@ -1,17 +1,46 @@
 import { Component } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
+import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { TranslatableTextareaComponent } from '../../../authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { CRaterService } from '../../../services/cRaterService';
-import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { NotebookService } from '../../../services/notebookService';
-import { OpenResponseContent } from '../OpenResponseContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { EditCRaterIdeaDescriptionsComponent } from '../../common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
+import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
+import { OpenResponseContent } from '../OpenResponseContent';
 
 @Component({
   selector: 'edit-open-response-advanced',
-  standalone: false,
   styleUrl: 'edit-open-response-advanced.component.scss',
-  templateUrl: 'edit-open-response-advanced.component.html'
+  templateUrl: 'edit-open-response-advanced.component.html',
+  imports: [
+    TranslatableTextareaComponent,
+    MatCheckbox,
+    FormsModule,
+    FlexModule,
+    MatFormFieldModule,
+    MatInput,
+    MatButton,
+    MatSelectModule,
+    EditFeedbackRulesComponent,
+    MatTooltip,
+    MatIcon,
+    EditCRaterIdeaDescriptionsComponent,
+    EditComponentAddToNotebookButtonComponent,
+    EditCommonAdvancedComponent
+  ]
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   protected allowedConnectedComponentTypes = ['OpenResponse'];

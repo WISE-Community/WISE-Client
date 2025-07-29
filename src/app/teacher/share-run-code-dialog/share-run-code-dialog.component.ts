@@ -1,24 +1,39 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
 import { TeacherRun } from '../teacher-run';
 import { TeacherService } from '../teacher.service';
 import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
+import { AccessLinkService } from '../../services/accessLinkService';
+import { MatIconModule } from '@angular/material/icon';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'app-share-run-code-dialog',
-    templateUrl: './share-run-code-dialog.component.html',
-    styleUrls: ['./share-run-code-dialog.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    ClipboardModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatTooltipModule
+  ],
+  styleUrl: './share-run-code-dialog.component.scss',
+  templateUrl: './share-run-code-dialog.component.html'
 })
 export class ShareRunCodeDialogComponent {
-  code: string;
-  link: string;
+  protected accessLinks: string[] = [];
+  protected code: string;
+  protected link: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public run: TeacherRun,
+    private accessLinkService: AccessLinkService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private teacherService: TeacherService,
@@ -26,25 +41,28 @@ export class ShareRunCodeDialogComponent {
     private configService: ConfigService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.code = this.run.runCode;
     const host = this.configService.getWISEHostname() + this.configService.getContextPath();
     this.link = `${host}/login?accessCode=${this.code}`;
+    if (this.run.isSurveyRun()) {
+      this.accessLinks = this.accessLinkService.getAccessLinks(this.run.runCode, this.run.periods);
+    }
   }
 
-  copyMsg() {
+  protected copyMsg(): void {
     this.snackBar.open($localize`Copied to clipboard.`);
   }
 
-  isGoogleUser() {
+  protected isGoogleUser(): boolean {
     return this.userService.isGoogleUser();
   }
 
-  isGoogleClassroomEnabled() {
+  protected isGoogleClassroomEnabled(): boolean {
     return this.configService.isGoogleClassroomEnabled();
   }
 
-  checkClassroomAuthorization() {
+  protected checkClassroomAuthorization(): void {
     this.teacherService
       .getClassroomAuthorizationUrl(this.userService.getUser().getValue().username)
       .subscribe(({ authorizationUrl }) => {
@@ -62,7 +80,7 @@ export class ShareRunCodeDialogComponent {
       });
   }
 
-  getClassroomCourses() {
+  private getClassroomCourses(): void {
     this.teacherService
       .getClassroomCourses(this.userService.getUser().getValue().username)
       .subscribe((courses) => {
@@ -72,5 +90,9 @@ export class ShareRunCodeDialogComponent {
           panelClass: panelClass
         });
       });
+  }
+
+  protected getPeriodFromAccessLink(link: string): string {
+    return this.accessLinkService.getPeriodFromAccessLink(link);
   }
 }

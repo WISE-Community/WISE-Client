@@ -1,4 +1,4 @@
-<div>
+<div class="flex flex-col">
   <translatable-input
     [content]="componentContent"
     key="parameters"
@@ -7,13 +7,11 @@
     (defaultLanguageTextChanged)="componentChanged()"
     class="model-parameters"
   />
+  @if (isNotebookEnabled()) {
+    <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+  }
+  <edit-common-advanced
+    [component]="component"
+    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+  />
 </div>
-<div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [componentContent]="componentContent">
-  </edit-component-add-to-notebook-button>
-</div>
-<edit-common-advanced
-  [component]="component"
-  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
->
-</edit-common-advanced>

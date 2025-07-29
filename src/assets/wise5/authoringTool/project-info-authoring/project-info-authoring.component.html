@@ -1,3 +1,10 @@
+@if (isMyUnit) {
+  <a href="{{ publishUnitUrl }}" class="share-button">
+    <button mat-flat-button color="primary">
+      <mat-icon>public</mat-icon>&nbsp;<ng-container i18n>Publish</ng-container>
+    </button>
+  </a>
+}
 <div class="project-icon-label" fxLayoutGap="20px">
   <span i18n>Unit Icon</span>
   <button mat-raised-button color="primary" (click)="toggleEditProjectIconMode()" i18n>Edit</button>
@@ -51,9 +58,7 @@
     (defaultLanguageTextChanged)="metadataChanged.next()"
     class="input"
   />
-  <edit-project-language-setting
-    *ngIf="metadataField.name === 'Language'"
-  ></edit-project-language-setting>
+  <edit-project-language-setting *ngIf="metadataField.name === 'Language'" />
   <ng-container *ngIf="metadataField.type === 'radio' && metadataField.name !== 'Language'">
     <label class="bold">{{ metadataField.name }}:</label>
     <mat-radio-group class="radio-group margin-bottom-20" fxLayout="column">

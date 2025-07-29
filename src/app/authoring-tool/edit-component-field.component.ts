@@ -6,20 +6,20 @@ import { TeacherProjectService } from '../../assets/wise5/services/teacherProjec
 @Directive()
 export abstract class EditComponentFieldComponent {
   @Input() componentContent: any;
-  inputChanged: Subject<any> = new Subject<any>();
-  inputChangedSubscription: Subscription;
+  protected inputChanged: Subject<any> = new Subject<any>();
+  protected inputChangedSubscription: Subscription;
 
-  constructor(private ProjectService: TeacherProjectService) {}
+  constructor(private projectService: TeacherProjectService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.inputChangedSubscription = this.inputChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(() => {
-        this.ProjectService.componentChanged();
+        this.projectService.componentChanged();
       });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.inputChangedSubscription.unsubscribe();
   }
 }

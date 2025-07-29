@@ -101,6 +101,7 @@
               "outputHashing": "all",
               "sourceMap": true,
               "namedChunks": true,
+              "verbose": true,
               "aot": true,
               "extractLicenses": false,
               "budgets": []

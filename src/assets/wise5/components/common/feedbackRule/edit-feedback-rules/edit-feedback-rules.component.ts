@@ -1,18 +1,42 @@
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCard } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { FeedbackRule } from '../FeedbackRule';
-import { MatDialog } from '@angular/material/dialog';
-import { FeedbackRuleHelpComponent } from '../feedback-rule-help/feedback-rule-help.component';
 import { generateRandomKey } from '../../../../common/string/string';
+import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { FeedbackRuleHelpComponent } from '../feedback-rule-help/feedback-rule-help.component';
+import { FeedbackRule } from '../FeedbackRule';
 
 @Component({
-    selector: 'edit-feedback-rules',
-    templateUrl: './edit-feedback-rules.component.html',
-    styleUrls: ['./edit-feedback-rules.component.scss'],
-    standalone: false
+  selector: 'edit-feedback-rules',
+  templateUrl: './edit-feedback-rules.component.html',
+  styleUrl: './edit-feedback-rules.component.scss',
+  imports: [
+    CommonModule,
+    FlexModule,
+    MatTooltip,
+    MatIcon,
+    MatButtonModule,
+    DragDropModule,
+    CdkScrollable,
+    MatCard,
+    MatFormFieldModule,
+    MatInput,
+    FormsModule,
+    CdkTextareaAutosize
+  ]
 })
 export class EditFeedbackRulesComponent implements OnInit {
   @Input() feedbackRules: Partial<FeedbackRule>[] = [];

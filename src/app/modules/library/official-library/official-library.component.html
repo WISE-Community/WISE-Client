@@ -15,8 +15,7 @@
             {{ countVisibleProjects(group.children) }} <ng-container i18n>unit(s)</ng-container>
           </div>
         </div>
-        <app-library-group-thumbs [group]="group" [ngClass]="{ hide: expandedGroups[group.id] }">
-        </app-library-group-thumbs>
+        <app-library-group-thumbs [group]="group" [ngClass]="{ hide: expandedGroups[group.id] }" />
       </mat-expansion-panel-header>
       <div class="flex flex-col flex-wrap items-start sm:flex-row">
         <ng-container *ngFor="let project of group.children">

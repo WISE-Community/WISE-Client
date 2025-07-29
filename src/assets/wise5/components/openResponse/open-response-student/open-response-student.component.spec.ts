@@ -21,6 +21,8 @@ import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { CRaterPingService } from '../../../services/cRaterPingService';
+import { MockProvider } from 'ng-mocks';
 
 let component: OpenResponseStudent;
 const componentId = 'component1';
@@ -31,8 +33,9 @@ const response = 'Hello World';
 describe('OpenResponseStudent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [DialogWithoutCloseComponent, OpenResponseStudent],
-    imports: [BrowserAnimationsModule,
+      declarations: [DialogWithoutCloseComponent, OpenResponseStudent],
+      imports: [
+        BrowserAnimationsModule,
         BrowserModule,
         CommonModule,
         ComponentHeaderComponent,
@@ -41,9 +44,15 @@ describe('OpenResponseStudent', () => {
         MatDialogModule,
         MatIconModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [AudioRecorderService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
+        AudioRecorderService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+        MockProvider(CRaterPingService)
+      ]
+    });
   });
 
   beforeEach(() => {
@@ -180,18 +189,15 @@ function expectPopupToBeCalledWith(
 
 function createComponentState() {
   describe('createComponentState', () => {
-    it(
-      'should create component state',
-      waitForAsync(() => {
-        spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
-        component.studentResponse = response;
-        component.createComponentState('save').then((componentState: any) => {
-          expect(componentState.componentId).toEqual(componentId);
-          expect(componentState.nodeId).toEqual(nodeId);
-          expect(componentState.studentData.response).toEqual(response);
-        });
-      })
-    );
+    it('should create component state', waitForAsync(() => {
+      spyOn(TestBed.inject(OpenResponseService), 'isCompletedV2').and.returnValue(true);
+      component.studentResponse = response;
+      component.createComponentState('save').then((componentState: any) => {
+        expect(componentState.componentId).toEqual(componentId);
+        expect(componentState.nodeId).toEqual(nodeId);
+        expect(componentState.studentData.response).toEqual(response);
+      });
+    }));
   });
 }
 

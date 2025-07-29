@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditComponentConstraintsComponent } from './edit-component-constraints.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
+import { MockProvider } from 'ng-mocks';
 
 describe('EditComponentConstraintsComponent', () => {
   let component: EditComponentConstraintsComponent;
@@ -11,8 +10,8 @@ describe('EditComponentConstraintsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditComponentConstraintsComponent, StudentTeacherCommonServicesModule],
-      providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi())]
+      imports: [EditComponentConstraintsComponent],
+      providers: [MockProvider(TeacherProjectService)]
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditComponentConstraintsComponent);

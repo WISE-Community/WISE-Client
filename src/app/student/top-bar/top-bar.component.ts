@@ -21,7 +21,6 @@ import { DismissAmbientNotificationDialogModule } from '../../../assets/wise5/vl
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatBadgeModule } from '@angular/material/badge';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectLanguageChooserComponent } from '../../common/project-language-chooser/project-language-chooser.component';
@@ -30,7 +29,6 @@ import { ProjectLanguageChooserComponent } from '../../common/project-language-c
   imports: [
     CommonModule,
     DismissAmbientNotificationDialogModule,
-    FlexLayoutModule,
     MatBadgeModule,
     MatButtonModule,
     MatDialogModule,

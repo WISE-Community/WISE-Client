@@ -1,5 +1,5 @@
 <mat-toolbar class="mat-elevation-z1 toolbar">
-  <div class="toolbar__tools" fxLayout="row wrap" fxLayoutAlign="start center">
+  <div class="toolbar__tools flex flex-row flex-wrap justify-start items-center">
     <button mat-icon-button aria-label="Authoring Tool Menu" i18n-aria-label (click)="toggleMenu()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -8,15 +8,15 @@
     } @else {
       <span class="toolbar__title">{{ viewName }}</span>
     }
-    <div fxFlex></div>
+    <div class="grow"></div>
     @if (isJSONValid == null) {
     } @else if (isJSONValid) {
-      <span class="success" fxLayoutAlign="start center">
+      <span class="success flex justify-start items-center">
         <mat-icon>done</mat-icon>
         <span>JSON Valid</span>
       </span>
     } @else {
-      <span class="warn" fxLayoutAlign="start center">
+      <span class="warn flex justify-start items-center">
         <mat-icon>clear</mat-icon>
         <span>JSON Invalid</span>
       </span>

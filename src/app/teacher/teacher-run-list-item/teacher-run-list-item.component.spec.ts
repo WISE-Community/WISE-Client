@@ -1,27 +1,19 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TeacherRunListItemComponent } from './teacher-run-list-item.component';
-import { TeacherService } from '../teacher.service';
-import { TeacherRun } from '../teacher-run';
-import { ConfigService } from '../../services/config.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TeacherRunListItemHarness } from './teacher-run-list-item.harness';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatMenuModule } from '@angular/material/menu';
-import { RunMenuComponent } from '../run-menu/run-menu.component';
+import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 import { ArchiveProjectService } from '../../services/archive-project.service';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { UserService } from '../../services/user.service';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { User } from '../../domain/user';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ConfigService } from '../../services/config.service';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { of } from 'rxjs';
-import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { TeacherRun } from '../teacher-run';
+import { TeacherRunListItemComponent } from './teacher-run-list-item.component';
+import { TeacherRunListItemHarness } from './teacher-run-list-item.harness';
+import { TeacherService } from '../teacher.service';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { User } from '../../domain/user';
+import { UserService } from '../../services/user.service';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 
 export class MockTeacherService {}
 
@@ -52,25 +44,18 @@ let userService: UserService;
 describe('TeacherRunListItemComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-    declarations: [RunMenuComponent, TeacherRunListItemComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
-        MatCardModule,
-        MatDialogModule,
-        MatIconModule,
-        MatMenuModule,
-        MatSnackBarModule,
-        RouterTestingModule],
-    providers: [
+      imports: [TeacherRunListItemComponent],
+      providers: [
         ArchiveProjectService,
+        provideAnimations(),
         { provide: ConfigService, useClass: MockConfigService },
         ProjectTagService,
         { provide: TeacherService, useClass: MockTeacherService },
         UserService,
         provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-});
+        provideRouter([])
+      ]
+    });
     http = TestBed.inject(HttpClient);
     userService = TestBed.inject(UserService);
     spyOn(userService, 'getUserId').and.returnValue(userId);

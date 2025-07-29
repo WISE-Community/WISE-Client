@@ -35,6 +35,7 @@ import { ComponentHeaderComponent } from '../../../directives/component-header/c
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 import { CommonModule } from '@angular/common';
+import { CRaterPingService } from '../../../services/cRaterPingService';
 
 @Component({
   imports: [
@@ -74,7 +75,8 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
     protected notebookService: NotebookService,
     protected studentAssetService: StudentAssetService,
     protected dataService: StudentDataService,
-    protected studentStatusService: StudentStatusService
+    protected studentStatusService: StudentStatusService,
+    private cRaterPingService: CRaterPingService
   ) {
     super(
       annotationService,
@@ -108,6 +110,18 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.constraintService
     );
     this.initializeComputerAvatar();
+  }
+
+  protected startPinging(): void {
+    this.cRaterPingService.startPinging(this.getItemId());
+  }
+
+  ngOnDestroy(): void {
+    this.cRaterPingService.stopPinging(this.getItemId());
+  }
+
+  private getItemId(): string {
+    return this.component.content.itemId;
   }
 
   showInitialMessage(): void {

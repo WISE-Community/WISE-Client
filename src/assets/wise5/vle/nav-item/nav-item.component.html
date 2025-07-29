@@ -5,7 +5,7 @@
       (keyup.enter)="itemClicked()"
       role="button"
       matRipple
-      fxLayout="row"
+      class="flex flex-row"
       tabindex="0"
       i18n-aria-label
       aria-label="Expand or collapse lesson content"
@@ -20,8 +20,8 @@
       <mat-card-title class="title" style="color: {{ nodeStatus.icon.color }};">
         <span>{{ nodeTitle }}</span>
       </mat-card-title>
-      <span fxFlex></span>
-      <mat-icon class="collapse" *ngIf="isGroup && expanded"> remove </mat-icon>
+      <span class="flex-grow"></span>
+      <mat-icon class="collapse-icon" *ngIf="isGroup && expanded"> remove </mat-icon>
     </mat-card-header>
     <mat-card-content class="app-bar" *ngIf="isGroup && expanded">
       <mat-action-list class="list mat-elevation-z1">
@@ -35,7 +35,7 @@
         </nav-item>
       </mat-action-list>
     </mat-card-content>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-card-actions class="flex flex-row items-center gap-2">
       <mat-progress-bar
         class="progress"
         tabindex="0"
@@ -49,8 +49,8 @@
       <span *ngIf="isGroup" class="mat-caption secondary-text" i18n>
         {{ nodeStatus.progress.completedItems }}/{{ nodeStatus.progress.totalItems }} items
       </span>
-      <span fxFlex></span>
-      <div fxLayoutAlign="center center" fxLayoutGap="8px">
+      <span class="flex-grow"></span>
+      <div class="flex items-center gap-2">
         <!-- <node-score [nodeId]="nodeId"></node-score> -->
         <node-status-icon [nodeId]="nodeId"></node-status-icon>
         <mat-icon
@@ -75,11 +75,11 @@
       title="Go to {{ nodeTitle }}"
       [ngClass]="{ group: isGroup }"
     >
-      <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <span class="flex flex-row items-center gap-2">
         <node-icon matListAvatar [nodeId]="nodeId" [icon]="nodeStatus.icon" size="24"></node-icon>
         <span class="mat-body-2">{{ nodeTitle }}</span>
-        <span fxFlex></span>
-        <span fxLayoutAlign="center center" fxLayoutGap="8px">
+        <span class="flex-grow"></span>
+        <span class="flex items-center gap-2">
           <node-status-icon [nodeId]="nodeId"></node-status-icon>
           <mat-icon
             *ngIf="!nodeStatus.isVisitable"

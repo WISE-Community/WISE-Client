@@ -1,8 +1,8 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
-<div fxLayout="row">
+/>
+<div class="flex flex-row">
   <mat-form-field class="dimension-input">
     <mat-label i18n>Width (Pixels)</mat-label>
     <input
@@ -24,7 +24,7 @@
     />
   </mat-form-field>
 </div>
-<div fxLayout="row">
+<div class="flex flex-row">
   <mat-form-field class="dimension-input">
     <mat-label i18n>Width (Units)</mat-label>
     <input
@@ -46,7 +46,7 @@
     />
   </mat-form-field>
 </div>
-<div fxLayout="row">
+<div class="flex flex-row">
   <mat-form-field class="data-origin-input">
     <mat-label i18n>Data Origin X (Pixels)</mat-label>
     <input
@@ -72,7 +72,7 @@
   <mat-radio-group
     [(ngModel)]="componentContent.coordinateSystem"
     (ngModelChange)="componentChanged()"
-    fxLayout="column"
+    class="flex flex-col"
   >
     <mat-radio-button color="primary" class="radio-button" value="screen" i18n>
       Screen
@@ -106,12 +106,12 @@
   "
   class="object-container"
 >
-  <div fxLayout="row" fxLayoutAlign="start center">
+  <div class="flex flex-row justify-start items-center">
     <div>
       <mat-radio-group
         [(ngModel)]="object.type"
         (ngModelChange)="authoredObjectTypeChanged(object)"
-        fxLayout="column"
+        class="flex flex-col"
       >
         <mat-radio-button color="primary" class="radio-button" value="image" i18n>
           Image
@@ -123,9 +123,7 @@
     </div>
     <div
       *ngIf="object.type === 'image'"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      class="object-image-input-container"
+      class="object-image-input-container flex flex-row justify-start items-center"
     >
       <translatable-input
         [content]="object"
@@ -142,7 +140,7 @@
       />
     </div>
     <translatable-input
-      *ngIf="object.type === 'text'" 
+      *ngIf="object.type === 'text'"
       [content]="object"
       key="text"
       label="Text"
@@ -150,7 +148,7 @@
       (defaultLanguageTextChanged)="inputChange.next($event)"
       class="object-text-input"
     />
-    <span fxFlex></span>
+    <span class="w-full"></span>
     <button
       mat-raised-button
       color="primary"
@@ -193,7 +191,7 @@
       <mat-icon>delete</mat-icon>
     </button>
   </div>
-  <div fxLayout="row" *ngIf="object.type === 'image'">
+  <div class="flex flex-row" *ngIf="object.type === 'image'">
     <mat-form-field class="image-dimension">
       <mat-label i18n>Image Width (Pixels)</mat-label>
       <input
@@ -215,7 +213,7 @@
       />
     </mat-form-field>
   </div>
-  <div *ngIf="object.type === 'image'" fxLayout="row" fxLayoutAlign="start center">
+  <div *ngIf="object.type === 'image'" class="flex flex-row justify-start items-center">
     <translatable-input
       [content]="object"
       key="imageMovingLeft"
@@ -245,7 +243,7 @@
       class="image-button"
     />
   </div>
-  <div fxLayout="row">
+  <div class="flex flex-row">
     <mat-form-field class="image-location">
       <mat-label i18n>Location X (Pixels)</mat-label>
       <input
@@ -311,9 +309,7 @@
         first as isFirst;
         last as isLast
       "
-      fxLayout="row wrap"
-      fxLayoutAlign="start center"
-      class="data-point-container"
+      class="data-point-container flex flex-row flex-wrap justify-start items-center"
     >
       <mat-form-field class="data-point-input">
         <mat-label i18n>Time</mat-label>
@@ -471,7 +467,7 @@
         *ngIf="
           getComponent(object.dataSource.nodeId, object.dataSource.componentId).type === 'Graph'
         "
-        fxLayout="row wrap"
+        class="flex flex-row flex-wrap"
       >
         <mat-form-field class="index-input">
           <mat-label i18n>Trial Index</mat-label>

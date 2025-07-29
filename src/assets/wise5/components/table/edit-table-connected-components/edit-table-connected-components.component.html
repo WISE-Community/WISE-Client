@@ -1,10 +1,9 @@
-<edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()">
-</edit-connected-components-add-button>
+<edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()" />
 <div
   *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
   class="connected-components-div"
 >
-  <div fxLayout="row wrap" fxLayoutGap="20px">
+  <div class="flex flex-row flex-wrap gap-5">
     <edit-connected-component-default-selects
       [connectedComponent]="connectedComponent"
       [componentId]="componentId"
@@ -14,8 +13,7 @@
         connectedComponentComponentIdChanged(connectedComponent)
       "
       (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
-    >
-    </edit-connected-component-default-selects>
+    />
     <mat-form-field *ngIf="connectedComponent.type === 'importWork'">
       <mat-label i18n>Action</mat-label>
       <mat-select
@@ -36,11 +34,10 @@
         Only Show Data At Mouse X Position
       </mat-checkbox>
     </div>
-    <span fxFlex></span>
+    <span class="flex w-full"></span>
     <edit-connected-component-delete-button
       [connectedComponentIndex]="connectedComponentIndex"
       (connectedComponentChange)="deleteConnectedComponent(index)"
-    >
-    </edit-connected-component-delete-button>
+    />
   </div>
 </div>

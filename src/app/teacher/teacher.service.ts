@@ -1,12 +1,10 @@
+import { Course } from '../domain/course';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
 import { Project } from '../domain/project';
-import { Teacher } from '../domain/teacher';
 import { Run } from '../domain/run';
-import { Course } from '../domain/course';
-import { CopyProjectDialogComponent } from '../modules/library/copy-project-dialog/copy-project-dialog.component';
+import { Teacher } from '../domain/teacher';
 import { TeacherRun } from './teacher-run';
 
 @Injectable()
@@ -40,13 +38,6 @@ export class TeacherService {
   private updateProfileUrl = '/api/teacher/profile/update';
 
   constructor(private http: HttpClient) {}
-
-  copyProject(project: Project, dialog: MatDialog) {
-    dialog.open(CopyProjectDialogComponent, {
-      data: { project: project },
-      panelClass: 'dialog-sm'
-    });
-  }
 
   getRuns(max: number = 0): Observable<TeacherRun[]> {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
@@ -82,6 +73,7 @@ export class TeacherService {
   createRun(
     projectId: number,
     periods: string,
+    isSurvey: boolean,
     maxStudentsPerTeam: number,
     startDate: number,
     endDate: number,
@@ -91,6 +83,7 @@ export class TeacherService {
     let body = new HttpParams();
     body = body.set('projectId', projectId + '');
     body = body.set('periods', periods);
+    body = body.set('isSurvey', isSurvey);
     body = body.set('maxStudentsPerTeam', maxStudentsPerTeam + '');
     body = body.set('startDate', startDate + '');
     if (endDate) {

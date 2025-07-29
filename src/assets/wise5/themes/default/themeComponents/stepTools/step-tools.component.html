@@ -1,5 +1,5 @@
-<div class="step-tools" fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxLayout="row" fxLayoutAlign="center center">
+<div class="step-tools flex flex-row justify-between items-center">
+  <div class="flex flex-row items-center">
     <button
       mat-icon-button
       (click)="goToPrevNode()"
@@ -12,7 +12,7 @@
       <mat-icon>{{ icons.prev }}</mat-icon>
     </button>
     <div class="node-icon-div">
-      <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon"/>
+      <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon" />
     </div>
     &nbsp;
     <mat-form-field appearance="fill">
@@ -32,7 +32,7 @@
         @for (nodeId of nodeIds; track nodeId) {
           @if (nodeStatuses[nodeId].isVisible) {
             <mat-option [value]="nodeId">
-              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+              <div class="flex flex-row items-center gap-2">
                 <node-icon
                   [nodeId]="nodeId"
                   size="18"
@@ -49,7 +49,7 @@
       </mat-select>
     </mat-form-field>
     <div class="node-status-div">
-      <node-status-icon [nodeId]="nodeId"/>
+      <node-status-icon [nodeId]="nodeId" />
     </div>
     <button
       mat-icon-button
@@ -67,9 +67,9 @@
     <button
       mat-icon-button
       (click)="closeNode()"
-      aria-label="Project Plan"
+      aria-label="Unit Plan"
       i18n-aria-label
-      matTooltip="Project Plan"
+      matTooltip="Unit Plan"
       i18n-matTooltip
     >
       <mat-icon class="unit-plan-icon">view_list</mat-icon>

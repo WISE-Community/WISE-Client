@@ -1,28 +1,20 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
-import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsWithBackgroundComponent } from './edit-connected-components-with-background.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditConnectedComponentsWithBackgroundComponent;
 let fixture: ComponentFixture<EditConnectedComponentsWithBackgroundComponent>;
 const componentId1 = 'componentId1';
 const nodeId1 = 'node1';
 const importWorkType = 'importWork';
-
 describe('EditConnectedComponentsWithBackgroundComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
-        EditConnectedComponentsAddButtonComponent,
-        EditConnectedComponentsWithBackgroundComponent
-    ],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [StudentTeacherCommonServicesModule, EditConnectedComponentsWithBackgroundComponent],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -30,7 +22,6 @@ describe('EditConnectedComponentsWithBackgroundComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
   afterComponentIdChanged();
 });
 

@@ -1,9 +1,7 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, Input, OnInit } from '@angular/core';
-import { ComponentContent } from '../../../../common/ComponentContent';
 import { CRaterIdea } from '../CRaterIdea';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -17,7 +15,6 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 @Component({
   imports: [
     CdkTextareaAutosize,
-    FlexLayoutModule,
     FormsModule,
     MatCardModule,
     MatInputModule,
@@ -27,7 +24,6 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
     MatTooltipModule
   ],
   selector: 'edit-crater-idea-descriptions',
-  standalone: true,
   templateUrl: './edit-crater-idea-descriptions.component.html',
   styleUrl: './edit-crater-idea-descriptions.component.scss'
 })

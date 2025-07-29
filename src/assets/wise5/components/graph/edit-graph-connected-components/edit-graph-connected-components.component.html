@@ -1,5 +1,4 @@
-<edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()">
-</edit-connected-components-add-button>
+<edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()" />
 <div
   *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
   class="connected-components-div"
@@ -11,8 +10,7 @@
       [allowedComponentTypes]="allowedConnectedComponentTypes"
       (stepChange)="connectedComponentNodeIdChanged(connectedComponent)"
       (componentChange)="connectedComponentComponentIdChanged(connectedComponent)"
-    >
-    </select-step-and-component>
+    />
     <mat-form-field>
       <mat-label i18n>Type</mat-label>
       <mat-select
@@ -163,7 +161,6 @@
     <edit-connected-component-delete-button
       [connectedComponentIndex]="connectedComponentIndex"
       (connectedComponentChange)="deleteConnectedComponent(index)"
-    >
-    </edit-connected-component-delete-button>
+    />
   </div>
 </div>

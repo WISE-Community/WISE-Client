@@ -20,16 +20,23 @@
         <mat-icon>share</mat-icon> <ng-container i18n>Share</ng-container>
       </a>
     }
-    @if (archived) {
-      <a mat-menu-item (click)="archive(false)">
-        <mat-icon>unarchive</mat-icon>
-        <span i18n>Restore</span>
+    @if (isMyUnit) {
+      <a mat-menu-item href="{{ publishUnitUrl }}">
+        <mat-icon>public</mat-icon> <ng-container i18n>Publish</ng-container>
       </a>
-    } @else {
-      <a mat-menu-item (click)="archive(true)">
-        <mat-icon>archive</mat-icon>
-        <span i18n>Archive</span>
-      </a>
+    }
+    @if (!project.metadata.publicUnitType) {
+      @if (archived) {
+        <a mat-menu-item (click)="archive(false)">
+          <mat-icon>unarchive</mat-icon>
+          <span i18n>Restore</span>
+        </a>
+      } @else {
+        <a mat-menu-item (click)="archive(true)">
+          <mat-icon>archive</mat-icon>
+          <span i18n>Archive</span>
+        </a>
+      }
     }
   </div>
 </mat-menu>

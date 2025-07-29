@@ -6,8 +6,7 @@
   [(ngModel)]="defaultLanguage"
   [clearable]="false"
   (change)="updateDefaultLanguage()"
->
-</ng-select>
+/>
 <span i18n>Additional languages:</span>
 <ng-select
   [items]="availableLanguages"
@@ -16,5 +15,4 @@
   [closeOnSelect]="false"
   [multiple]="true"
   (change)="updateSupportedLanguages()"
->
-</ng-select>
+/>

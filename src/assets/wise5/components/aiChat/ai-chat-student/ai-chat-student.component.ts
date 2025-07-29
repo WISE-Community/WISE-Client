@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentStudent } from '../../component-student.component';
 import { ConfigService } from '../../../services/configService';
 import { AnnotationService } from '../../../services/annotationService';
@@ -19,16 +19,18 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 
 @Component({
-    selector: 'ai-chat-student',
-    templateUrl: './ai-chat-student.component.html',
-    styleUrls: ['./ai-chat-student.component.scss'],
-    standalone: false
+  selector: 'ai-chat-student',
+  templateUrl: './ai-chat-student.component.html',
+  styleUrls: ['./ai-chat-student.component.scss'],
+  standalone: false
 })
 export class AiChatStudentComponent extends ComponentStudent {
   component: AiChatComponent;
   protected computerAvatar: ComputerAvatar;
   protected computerAvatarSelectorVisible: boolean = false;
+  private connectedComponentResponse: string;
   protected messages: AiChatMessage[] = [];
+  @ViewChild('messagesContainer') private messagesContainer: ElementRef;
   protected studentResponse: string = '';
   protected submitEnabled: boolean = false;
   protected waitingForComputerResponse: boolean = false;
@@ -82,7 +84,12 @@ export class AiChatStudentComponent extends ComponentStudent {
 
   protected async submitStudentResponse(response: string): Promise<void> {
     this.waitingForComputerResponse = true;
+    if (this.connectedComponentResponse != null) {
+      this.messages.push(new AiChatMessage('user', this.connectedComponentResponse, true));
+      this.connectedComponentResponse = null;
+    }
     this.messages.push(new AiChatMessage('user', response));
+    this.scrollToBottom();
     try {
       const response = await this.aiChatService.sendChatMessage(
         this.messages,
@@ -90,6 +97,7 @@ export class AiChatStudentComponent extends ComponentStudent {
       );
       this.waitingForComputerResponse = false;
       this.messages.push(new AiChatMessage('assistant', response.choices[0].message.content));
+      this.scrollToBottom();
       this.emitComponentSubmitTriggered();
     } catch (error) {
       this.waitingForComputerResponse = false;
@@ -119,7 +127,20 @@ export class AiChatStudentComponent extends ComponentStudent {
     return promise;
   }
 
+  processConnectedComponentState(componentState: any): void {
+    this.connectedComponentResponse = componentState.studentData.response;
+  }
+
   initializeComputerAvatar: () => void;
+
+  private scrollToBottom(): void {
+    setTimeout(() => {
+      this.messagesContainer.nativeElement.scroll({
+        top: this.messagesContainer.nativeElement.scrollHeight,
+        behavior: 'smooth'
+      });
+    }, 100);
+  }
 }
 
 applyMixins(AiChatStudentComponent, [ComputerAvatarInitializer]);

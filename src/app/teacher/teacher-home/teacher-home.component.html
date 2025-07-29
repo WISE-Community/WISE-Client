@@ -17,15 +17,15 @@
       >
     </div>
   </div>
-  <discourse-recent-activity
-    *ngIf="discourseUrl"
-    [baseUrl]="discourseUrl"
-    category="latest"
-    queryString="order=activity"
-    class="w-full md:w-auto -mt-4"
-  >
-  </discourse-recent-activity>
+  @if (discourseUrl) {
+    <discourse-recent-activity
+      [baseUrl]="discourseUrl"
+      category="latest"
+      queryString="order=activity"
+      class="w-full md:w-auto -mt-4"
+    />
+  }
 </header>
 <section>
-  <app-teacher-run-list></app-teacher-run-list>
+  <app-teacher-run-list />
 </section>

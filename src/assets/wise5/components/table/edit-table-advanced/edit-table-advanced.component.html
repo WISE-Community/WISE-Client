@@ -237,12 +237,11 @@
   <div class="import-table-message">{{ importTableMessage }}</div>
 </div>
 <div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [componentContent]="componentContent">
-  </edit-component-add-to-notebook-button>
+  <edit-component-add-to-notebook-button [componentContent]="componentContent" />
 </div>
-<edit-component-save-button [componentContent]="componentContent"> </edit-component-save-button>
+<edit-component-save-button [componentContent]="componentContent" />
 <br />
-<edit-component-submit-button [componentContent]="componentContent"> </edit-component-submit-button>
+<edit-component-submit-button [componentContent]="componentContent" />
 <div>
   <mat-checkbox
     color="primary"
@@ -253,20 +252,16 @@
     Enable Row Selection
   </mat-checkbox>
 </div>
-<edit-component-max-submit
-  *ngIf="componentContent.showSubmitButton"
-  [componentContent]="componentContent"
->
-</edit-component-max-submit>
-<edit-component-default-feedback [componentContent]="componentContent">
-</edit-component-default-feedback>
+@if (componentContent.showSubmitButton) {
+  <edit-component-max-submit [componentContent]="componentContent" />
+}
+<edit-component-default-feedback [componentContent]="componentContent" />
 <div fxLayout="column" fxLayoutAlign="start start">
-  <edit-component-max-score [componentContent]="componentContent"> </edit-component-max-score>
-  <edit-component-exclude-from-total-score [componentContent]="componentContent">
-  </edit-component-exclude-from-total-score>
+  <edit-component-max-score [componentContent]="componentContent" />
+  <edit-component-exclude-from-total-score [componentContent]="componentContent" />
   <edit-component-width [componentContent]="componentContent" />
-  <edit-component-rubric [componentContent]="componentContent"> </edit-component-rubric>
-  <edit-component-tags [componentContent]="componentContent"> </edit-component-tags>
+  <edit-component-rubric [componentContent]="componentContent" />
+  <edit-component-tags [componentContent]="componentContent" />
 </div>
 <edit-table-connected-components
   [nodeId]="nodeId"
@@ -275,7 +270,6 @@
   [componentContent]="componentContent"
   [connectedComponents]="componentContent.connectedComponents"
   (connectedComponentsChanged)="connectedComponentsChanged($event)"
->
-</edit-table-connected-components>
+/>
 <edit-component-constraints [componentContent]="component.content" />
-<edit-component-json [component]="component"></edit-component-json>
+<edit-component-json [component]="component" />

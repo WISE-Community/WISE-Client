@@ -1,23 +1,18 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
-import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentsComponent } from './edit-connected-components.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
+import { ProjectService } from '../../../assets/wise5/services/projectService';
 
 let component: EditConnectedComponentsComponent;
 let fixture: ComponentFixture<EditConnectedComponentsComponent>;
 const componentId10 = 'component10';
 const nodeId10 = 'node10';
-
 describe('EditConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditConnectedComponentsAddButtonComponent, EditConnectedComponentsComponent],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [EditConnectedComponentsComponent],
+      providers: [MockProvider(ProjectService)]
+    }).compileComponents();
   });
 
   beforeEach(() => {

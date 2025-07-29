@@ -45,7 +45,6 @@
   <mat-chip-listbox aria-label="Select a KI icon" i18n-aria-label>
     @for (kiIcon of kiIcons; track kiIcon.imgSrc) {
       <mat-chip-option
-        class="ki-choice"
         color="null"
         [value]="kiIcon"
         [selected]="newNodeIcon.type === 'img' && kiIcon.imgSrc === newNodeIcon.imgSrc"
@@ -67,14 +66,13 @@
       <mat-chip-listbox aria-label="Select an icon" i18n-aria-label>
         @for (fontName of fontNames; track fontName) {
           <mat-chip-option
-            class="icon-choice"
             color="null"
             [value]="fontName"
             [ariaLabel]="fontName"
             [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
             (selectionChange)="chooseFontName($event)"
           >
-            <mat-icon>{{ fontName }}</mat-icon>
+            <mat-icon class="custom-icon">{{ fontName }}</mat-icon>
           </mat-chip-option>
         }
       </mat-chip-listbox>

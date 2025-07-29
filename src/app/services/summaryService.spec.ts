@@ -110,7 +110,7 @@ function isResponsesSummaryAvailableForComponentType() {
   it('should check if component types can be used with response summary', () => {
     expectFunctionCall(
       'isResponsesSummaryAvailableForComponentType',
-      ['MultipleChoice', 'Table', 'DialogGuidance', 'OpenResponse'],
+      ['MultipleChoice', 'Table', 'DialogGuidance', 'OpenResponse', 'Match'],
       true
     );
     expectFunctionCall(
@@ -125,7 +125,6 @@ function isResponsesSummaryAvailableForComponentType() {
         'Graph',
         'HTML',
         'Label',
-        'Match',
         'OutsideURL',
         'Summary'
       ],

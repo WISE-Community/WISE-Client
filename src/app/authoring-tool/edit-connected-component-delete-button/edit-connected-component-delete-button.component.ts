@@ -1,23 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'edit-connected-component-delete-button',
-    templateUrl: './edit-connected-component-delete-button.component.html',
-    styleUrls: ['./edit-connected-component-delete-button.component.scss'],
-    standalone: false
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  selector: 'edit-connected-component-delete-button',
+  styles: ['.mat-icon { margin: 0px; }'],
+  template: `<button
+    mat-raised-button
+    color="primary"
+    (click)="deleteConnectedComponent()"
+    matTooltip="Delete"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>delete</mat-icon>
+  </button> `
 })
-export class EditConnectedComponentDeleteButtonComponent implements OnInit {
-  @Input()
-  connectedComponentIndex: number;
+export class EditConnectedComponentDeleteButtonComponent {
+  @Input() connectedComponentIndex: number;
+  @Output() connectedComponentChange: EventEmitter<any> = new EventEmitter();
 
-  @Output()
-  connectedComponentChange: EventEmitter<any> = new EventEmitter();
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  deleteConnectedComponent(index: number) {
-    this.connectedComponentChange.emit(index);
+  protected deleteConnectedComponent(): void {
+    this.connectedComponentChange.emit(this.connectedComponentIndex);
   }
 }

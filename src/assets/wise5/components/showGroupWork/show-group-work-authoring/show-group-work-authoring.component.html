@@ -1,7 +1,7 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
+/>
 <div fxLayoutGap="20px">
   <mat-form-field>
     <mat-label i18n>Show Work Step</mat-label>
@@ -37,8 +37,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <edit-component-peer-grouping-tag [componentContent]="componentContent">
-  </edit-component-peer-grouping-tag>
+  <edit-component-peer-grouping-tag [componentContent]="componentContent" />
   <mat-checkbox
     [(ngModel)]="componentContent.isShowMyWork"
     (ngModelChange)="componentChanged()"

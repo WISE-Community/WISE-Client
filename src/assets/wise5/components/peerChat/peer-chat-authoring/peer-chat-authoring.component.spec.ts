@@ -1,27 +1,18 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { PeerChatAuthoringComponent } from './peer-chat-authoring.component';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ComponentAuthoringModule } from '../../component-authoring.module';
-import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 
 const componentContent = {
   id: 'qn3savv52r',
@@ -42,37 +33,24 @@ const componentContent = {
   showWorkNodeId: 'node8',
   showWorkComponentId: 'vau6ihimfk'
 };
-
 describe('PeerChatAuthoringComponent', () => {
   let component: PeerChatAuthoringComponent;
   let fixture: ComponentFixture<PeerChatAuthoringComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PeerChatAuthoringComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        BrowserAnimationsModule,
-        ComponentAuthoringModule,
-        EditComponentPrompt,
-        FormsModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [PeerChatAuthoringComponent, StudentTeacherCommonServicesModule],
       providers: [
         ConfigService,
         { provide: TeacherNodeService, useClass: MockNodeService },
+        PeerGroupingAuthoringService,
         ProjectAssetService,
         ProjectService,
-        SessionService,
         TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
+        TeacherProjectTranslationService,
+        provideHttpClient()
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -92,6 +70,7 @@ describe('PeerChatAuthoringComponent', () => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       copy(componentContent)
     );
+    spyOn(TestBed.inject(TeacherProjectService), 'getPeerGroupings').and.returnValue([]);
     spyOn(component, 'componentChanged').and.callFake(() => {});
     component.componentContent = copy(componentContent);
     fixture.detectChanges();

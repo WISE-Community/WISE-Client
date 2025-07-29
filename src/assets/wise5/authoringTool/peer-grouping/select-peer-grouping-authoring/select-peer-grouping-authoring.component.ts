@@ -3,12 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { SelectPeerGroupingDialogComponent } from '../select-peer-grouping-dialog/select-peer-grouping-dialog.component';
+import { MatLabel } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'select-peer-grouping-authoring',
-    templateUrl: './select-peer-grouping-authoring.component.html',
-    styleUrls: ['./select-peer-grouping-authoring.component.scss'],
-    standalone: false
+  selector: 'select-peer-grouping-authoring',
+  templateUrl: './select-peer-grouping-authoring.component.html',
+  styles: ['.bottom-spacing { margin-bottom: 10px; }'],
+  imports: [MatLabel, NgIf, MatButton, MatTooltip]
 })
 export class SelectPeerGroupingAuthoringComponent implements OnInit {
   peerGrouping: PeerGrouping;

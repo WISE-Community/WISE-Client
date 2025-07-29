@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
+import { CopyProjectDialogComponent } from '../copy-project-dialog/copy-project-dialog.component';
 
 @Component({
   imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule],
@@ -24,8 +25,10 @@ export class LibraryProjectMenuComponent {
   protected canEdit: boolean;
   protected canShare: boolean;
   protected isChild: boolean;
+  @Input() isMyUnit: boolean;
   @Input() isRun: boolean;
   @Input() project: Project;
+  protected publishUnitUrl: string;
 
   constructor(
     private archiveProjectService: ArchiveProjectService,
@@ -40,6 +43,7 @@ export class LibraryProjectMenuComponent {
     this.canShare = this.isOwner() && !this.isRun;
     this.isChild = this.project.isChild();
     this.archived = this.project.hasTagWithText('archived');
+    this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.project.id}&publish=true`;
   }
 
   private isOwner(): boolean {
@@ -58,7 +62,10 @@ export class LibraryProjectMenuComponent {
   }
 
   protected copyProject(): void {
-    this.teacherService.copyProject(this.project, this.dialog);
+    this.dialog.open(CopyProjectDialogComponent, {
+      data: this.project,
+      panelClass: 'dialog-sm'
+    });
   }
 
   protected editProject(): void {
@@ -66,7 +73,7 @@ export class LibraryProjectMenuComponent {
       if (projectRun != null) {
         projectRun.project = this.project;
         this.dialog.open(EditRunWarningDialogComponent, {
-          data: { run: projectRun },
+          data: projectRun,
           panelClass: 'dialog-sm'
         });
       } else {

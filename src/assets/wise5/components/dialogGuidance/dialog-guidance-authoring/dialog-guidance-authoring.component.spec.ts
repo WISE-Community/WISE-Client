@@ -1,14 +1,13 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
-import { DialogGuidanceAuthoringModule } from './dialog-guidance-authoring.module';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
+import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
 
 const componentContent = {
   id: 'i64ex48j1z',
@@ -26,15 +25,13 @@ describe('DialogGuidanceAuthoringComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        DialogGuidanceAuthoringModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [DialogGuidanceAuthoringComponent, StudentTeacherCommonServicesModule],
       providers: [
+        ProjectAssetService,
         TeacherNodeService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        TeacherProjectService,
+        TeacherProjectTranslationService,
+        provideHttpClient(withInterceptorsFromDi())
       ]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
