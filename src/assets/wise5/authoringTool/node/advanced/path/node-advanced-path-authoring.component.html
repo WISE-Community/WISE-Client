@@ -1,4 +1,4 @@
-<div fxLayoutGap="16px">
+<div class="flex gap-4">
   <mat-label i18n>Paths</mat-label>
   <button
     mat-raised-button
@@ -16,11 +16,9 @@
 </div>
 <div
   *ngFor="let transition of node.transitionLogic.transitions; index as transitionIndex"
-  class="transition-div"
-  fxLayout="column"
-  fxLayoutGap="16px"
+  class="transition-div flex flex-col gap-4"
 >
-  <div fxLayoutGap="16px">
+  <div class="flex gap-4">
     <mat-label i18n>Path {{ transitionIndex + 1 }}</mat-label>
     <button
       mat-raised-button
@@ -47,8 +45,8 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div fxLayout="column" fxLayoutGap="16px">
-    <div fxLayoutGap="16px">
+  <div class="flex flex-col gap-4">
+    <div class="flex gap-4">
       <mat-label i18n>Requirements</mat-label>
       <button
         mat-raised-button
@@ -68,7 +66,7 @@
       *ngFor="let transitionCriteria of transition.criteria; index as criteriaIndex"
       class="requirement"
     >
-      <div fxLayoutGap="16px">
+      <div class="flex gap-4">
         <mat-form-field class="common-width">
           <mat-label i18n>The student needs to</mat-label>
           <mat-select
@@ -79,13 +77,13 @@
               *ngFor="let availableTransitionCriteriaName of transitionCriterias"
               [value]="availableTransitionCriteriaName.value"
             >
-              <span fxLayout="row" fxLayoutAlign="start center">
+              <span class="flex flex-row justify-start items-center">
                 <span>{{ availableTransitionCriteriaName.text }}</span>
               </span>
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <div fxFlex></div>
+        <div class="flex grow"></div>
         <div>
           <button
             mat-raised-button
@@ -107,7 +105,7 @@
             (ngModelChange)="transitionCriteriaNodeIdChanged(transitionCriteria)"
           >
             <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId">
-              <span fxLayout="row" fxLayoutAlign="start center">
+              <span class="flex flex-row justify-start items-center">
                 <span
                   >{{ getNodePositionById(nodeId) }}: {{ getNodeTitle(nodeId) }} ({{
                     nodeId
@@ -133,7 +131,7 @@
               "
               [value]="component.id"
             >
-              <span fxLayout="row" fxLayoutAlign="start center">
+              <span class="flex flex-row justify-start items-center">
                 <span>{{ componentIndex + 1 }}. {{ component.type }} ({{ component.id }})</span>
               </span>
             </mat-option>
@@ -224,7 +222,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="node.transitionLogic.transitions.length > 1" fxLayout="column" fxLayoutAlign="16px">
+<div *ngIf="node.transitionLogic.transitions.length > 1" class="flex flex-col gap-4">
   <mat-form-field class="small-width">
     <mat-label i18n>How to choose among available paths</mat-label>
     <mat-select
@@ -236,7 +234,7 @@
         *ngFor="let howToChooseAmongAvailablePathsOption of howToChooseAmongAvailablePathsOptions"
         [value]="howToChooseAmongAvailablePathsOption.value"
       >
-        <span fxLayout="row" fxLayoutAlign="start center">
+        <span class="flex flex-row justify-start items-center">
           <span>{{ howToChooseAmongAvailablePathsOption.text }}</span>
         </span>
       </mat-option>
@@ -253,7 +251,7 @@
         *ngFor="let whenToChoosePathOption of whenToChoosePathOptions"
         [value]="whenToChoosePathOption.value"
       >
-        <span fxLayout="row" fxLayoutAlign="start center">
+        <span class="flex flex-row justify-start items-center">
           <span>{{ whenToChoosePathOption.text }}</span>
         </span>
       </mat-option>
@@ -270,7 +268,7 @@
         *ngFor="let canChangePathOption of canChangePathOptions"
         [value]="canChangePathOption.value"
       >
-        <span fxLayout="row" fxLayoutAlign="start center">
+        <span class="flex flex-row justify-start items-center">
           <span>{{ canChangePathOption.text }}</span>
         </span>
       </mat-option>

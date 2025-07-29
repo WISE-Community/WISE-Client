@@ -1,12 +1,13 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MockProvider } from 'ng-mocks';
 import { of, throwError } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { ReferenceComponent } from '../../../../../app/domain/referenceComponent';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
-import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
 import { CreateNewPeerGroupingDialogComponent } from './create-new-peer-grouping-dialog.component';
 
 const TAG1: string = 'tag1';
@@ -17,12 +18,22 @@ let createNewPeerGroupingSpy: jasmine.Spy;
 let dialogCloseSpy: jasmine.Spy;
 let fixture: ComponentFixture<CreateNewPeerGroupingDialogComponent>;
 let snackBar: MatSnackBar;
-
 describe('CreateNewPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatSnackBarModule, PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
-      declarations: [CreateNewPeerGroupingDialogComponent]
+      imports: [StudentTeacherCommonServicesModule, CreateNewPeerGroupingDialogComponent],
+      providers: [
+        MockProvider(PeerGroupingAuthoringService),
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {}
+        },
+        {
+          provide: MatDialogRef,
+          useValue: { close: () => {} }
+        },
+        provideHttpClient()
+      ]
     }).compileComponents();
     const peerGroupingAuthoringService = TestBed.inject(PeerGroupingAuthoringService);
     createNewPeerGroupingSpy = spyOn(peerGroupingAuthoringService, 'createNewPeerGrouping');

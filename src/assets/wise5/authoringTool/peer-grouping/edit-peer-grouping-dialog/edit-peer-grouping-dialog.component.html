@@ -4,7 +4,7 @@
     <mat-label i18n>Grouping Name</mat-label>
     <input matInput [(ngModel)]="peerGrouping.name" />
   </mat-form-field>
-  <div fxLayoutGap="20px">
+  <div class="flex gap-5">
     <mat-form-field>
       <mat-label i18n>Logic</mat-label>
       <mat-select [(ngModel)]="logicType">
@@ -17,8 +17,7 @@
       <select-step-and-component
         [referenceComponent]="referenceComponent"
         [allowedComponentTypes]="allowedReferenceComponentTypes"
-      >
-      </select-step-and-component>
+      />
     </ng-container>
     <ng-container *ngIf="logicTypesWithModes.includes(logicType)">
       <mat-form-field>
@@ -62,7 +61,7 @@
       Delete
     </span>
   </button>
-  <div fxFlex></div>
+  <div class="flex grow"></div>
   <button mat-button (click)="cancel()" i18n>Cancel</button>
   <button mat-flat-button color="primary" (click)="save()" i18n>Update</button>
 </mat-dialog-actions>

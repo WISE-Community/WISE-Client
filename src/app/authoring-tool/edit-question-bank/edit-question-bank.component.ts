@@ -1,14 +1,32 @@
+import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { TranslatableInputComponent } from '../../../assets/wise5/authoringTool/components/translatable-input/translatable-input.component';
 import { QuestionBank } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/QuestionBank';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { EditComponentPeerGroupingTagComponent } from '../edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
+import { EditQuestionBankRulesComponent } from '../edit-question-bank-rules/edit-question-bank-rules.component';
+import { SelectStepAndComponentComponent } from '../select-step-and-component/select-step-and-component.component';
 
 @Component({
-    selector: 'edit-question-bank',
-    templateUrl: './edit-question-bank.component.html',
-    styleUrls: ['./edit-question-bank.component.scss'],
-    standalone: false
+  selector: 'edit-question-bank',
+  templateUrl: './edit-question-bank.component.html',
+  styleUrl: './edit-question-bank.component.scss',
+  imports: [
+    MatCheckbox,
+    NgIf,
+    TranslatableInputComponent,
+    FormsModule,
+    MatFormFieldModule,
+    MatInput,
+    SelectStepAndComponentComponent,
+    EditComponentPeerGroupingTagComponent,
+    EditQuestionBankRulesComponent
+  ]
 })
 export class EditQuestionBankComponent implements OnInit {
   protected allowedReferenceComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];

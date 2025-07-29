@@ -1,5 +1,3 @@
-'use strict';
-
 import { Component, Input, OnInit } from '@angular/core';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { ConfigService } from '../../../services/configService';
@@ -21,19 +19,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        ProjectLanguageChooserComponent
-    ],
-    selector: 'at-top-bar',
-    styleUrl: './top-bar.component.scss',
-    templateUrl: './top-bar.component.html'
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    ProjectLanguageChooserComponent
+  ],
+  selector: 'at-top-bar',
+  styleUrl: './top-bar.component.scss',
+  templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent implements OnInit {
   protected avatarColor: any;

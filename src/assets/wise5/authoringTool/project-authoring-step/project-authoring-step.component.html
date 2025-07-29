@@ -1,8 +1,6 @@
 <div
   id="{{ step.id }}"
-  fxLayoutAlign="start center"
-  fxLayoutGap="8px"
-  class="step"
+  class="step flex justify-start items-center gap-2 grow"
   [ngClass]="{ 'branch-path-step': isNodeInAnyBranchPath(step.id) }"
   [ngStyle]="{ 'background-color': getStepBackgroundColor(step.id) }"
   (click)="setCurrentNode(step.id)"
@@ -23,7 +21,7 @@
   <strong>
     <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition" />
   </strong>
-  <div fxLayoutAlign="start center" fxLayoutGap="8px">
+  <div class="flex justify-start items-center gap-2">
     @if (isBranchPoint(step.id)) {
       <button
         mat-icon-button
@@ -59,14 +57,13 @@
     >
   </div>
   <div
-    fxFlex
-    class="tooltip-helper"
+    class="tooltip-helper flex grow"
     matTooltip="Edit step"
     matTooltipPosition="above"
     i18n-matTooltip
   ></div>
   <!-- <div class="dynamic-step-buttons"> -->
-  <div fxLayoutAlign="start center">
+  <div class="flex justify-start items-center">
     <button
       class="step-action"
       mat-icon-button

@@ -1,9 +1,8 @@
-import { CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -25,10 +24,8 @@ class UnitResource {
 @Component({
   imports: [
     CommonModule,
-    CdkDropList,
     CdkTextareaAutosize,
     DragDropModule,
-    FlexLayoutModule,
     FormsModule,
     MatCardModule,
     MatInputModule,

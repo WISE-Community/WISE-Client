@@ -6,7 +6,7 @@
       <input matInput [(ngModel)]="peerGrouping.name" />
     </mat-form-field>
   </div>
-  <div fxLayoutGap="20px">
+  <div class="flex gap-5">
     <mat-form-field>
       <mat-label i18n>Logic</mat-label>
       <mat-select [(ngModel)]="logicType">
@@ -19,8 +19,7 @@
       <select-step-and-component
         [referenceComponent]="referenceComponent"
         [allowedComponentTypes]="allowedReferenceComponentTypes"
-      >
-      </select-step-and-component>
+      />
     </ng-container>
     <ng-container *ngIf="logicTypesWithModes.includes(logicType)">
       <mat-form-field>

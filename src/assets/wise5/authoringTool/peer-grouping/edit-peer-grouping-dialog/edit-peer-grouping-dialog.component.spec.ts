@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MockComponent, MockProvider } from 'ng-mocks';
 import { of, throwError } from 'rxjs';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
-import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
-import { EditPeerGroupingDialogComponent } from './edit-peer-grouping-dialog.component';
+import { SelectStepAndComponentComponent } from '../../../../../app/authoring-tool/select-step-and-component/select-step-and-component.component';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { DIFFERENT_IDEAS_VALUE, DIFFERENT_SCORES_VALUE } from '../PeerGroupingLogic';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { EditPeerGroupingDialogComponent } from './edit-peer-grouping-dialog.component';
+import { provideHttpClient } from '@angular/common/http';
 
 let component: EditPeerGroupingDialogComponent;
 const componentId1 = 'component1';
@@ -23,16 +25,25 @@ let updatePeerGroupingSpy: jasmine.Spy;
 describe('EditPeerGroupingDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatSnackBarModule, PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
-      declarations: [EditPeerGroupingDialogComponent],
+      imports: [
+        StudentTeacherCommonServicesModule,
+        EditPeerGroupingDialogComponent,
+        MockComponent(SelectStepAndComponentComponent)
+      ],
       providers: [
+        MockProvider(PeerGroupingAuthoringService),
         {
           provide: MAT_DIALOG_DATA,
           useValue: {
             settings: {},
             stepsUsedIn: []
           }
-        }
+        },
+        {
+          provide: MatDialogRef,
+          useValue: { close: () => {} }
+        },
+        provideHttpClient()
       ]
     }).compileComponents();
   });
@@ -42,6 +53,7 @@ describe('EditPeerGroupingDialogComponent', () => {
     component = fixture.componentInstance;
     peerGroupingAuthoringService = TestBed.inject(PeerGroupingAuthoringService);
     updatePeerGroupingSpy = spyOn(peerGroupingAuthoringService, 'updatePeerGrouping');
+    spyOn(peerGroupingAuthoringService, 'getStepsUsedIn').and.returnValue([]);
     dialogCloseSpy = spyOn(TestBed.inject(MatDialogRef), 'close');
     snackBar = TestBed.inject(MatSnackBar);
     fixture.detectChanges();

@@ -25,7 +25,7 @@ import { EmbeddedStudent } from './embedded/embedded-student/embedded-student.co
 import { GraphAuthoring } from './graph/graph-authoring/graph-authoring.component';
 import { GraphGradingComponent } from './graph/graph-grading/graph-grading.component';
 import { GraphStudent } from './graph/graph-student/graph-student.component';
-import { HtmlAuthoring } from './html/html-authoring/html-authoring.component';
+import { HtmlAuthoringComponent } from './html/html-authoring/html-authoring.component';
 import { HtmlStudentComponent } from './html/html-student/html-student.component';
 import { LabelAuthoring } from './label/label-authoring/label-authoring.component';
 import { LabelGradingComponent } from './label/label-grading/label-grading.component';
@@ -94,7 +94,7 @@ export const components = {
     student: EmbeddedStudent
   },
   Graph: { authoring: GraphAuthoring, grading: GraphGradingComponent, student: GraphStudent },
-  HTML: { authoring: HtmlAuthoring, student: HtmlStudentComponent },
+  HTML: { authoring: HtmlAuthoringComponent, student: HtmlStudentComponent },
   Label: {
     authoring: LabelAuthoring,
     grading: LabelGradingComponent,

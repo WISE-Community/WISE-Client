@@ -1,22 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PeerGroupingTestingModule } from '../peer-grouping-testing.module';
-import { SelectPeerGroupingOptionComponent } from './select-peer-grouping-option.component';
-import { getDialogOpenSpy } from '../peer-grouping-testing-helper';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { getDialogOpenSpy } from '../peer-grouping-testing-helper';
 import { DIFFERENT_IDEAS_NAME, DIFFERENT_SCORES_NAME } from '../PeerGroupingLogic';
+import { SelectPeerGroupingOptionComponent } from './select-peer-grouping-option.component';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
+import { provideHttpClient } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
 
 let component: SelectPeerGroupingOptionComponent;
 let deleteEventSpy: jasmine.Spy;
 let fixture: ComponentFixture<SelectPeerGroupingOptionComponent>;
 let peerGrouping1: PeerGrouping;
 const tag1: string = 'tag1';
-
 describe('SelectPeerGroupingOptionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PeerGroupingTestingModule, StudentTeacherCommonServicesModule],
-      declarations: [SelectPeerGroupingOptionComponent]
+      imports: [StudentTeacherCommonServicesModule, SelectPeerGroupingOptionComponent],
+      providers: [MockProvider(PeerGroupingAuthoringService), provideHttpClient()]
     }).compileComponents();
   });
 

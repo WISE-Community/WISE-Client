@@ -7,8 +7,14 @@ import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'edit-crater-info',
   imports: [EditCRaterDescriptionComponent, EditCRaterIdeaDescriptionsComponent, MatCardModule],
-  templateUrl: './edit-crater-info.component.html',
-  styleUrl: './edit-crater-info.component.scss'
+  styles: ['.wrapper { padding: 16px; }'],
+  template: `<mat-card appearance="outlined" class="wrapper">
+    <h5 class="gap-1 !text-xl">
+      <span i18n>Edit CRater Information</span>
+    </h5>
+    <edit-crater-description [cRaterRubric]="cRaterRubric" />
+    <edit-crater-idea-descriptions [ideaDescriptions]="cRaterRubric.ideas" />
+  </mat-card>`
 })
 export class EditCRaterInfoComponent {
   @Input() cRaterRubric: CRaterRubric;

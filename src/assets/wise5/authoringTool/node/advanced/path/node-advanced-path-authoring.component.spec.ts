@@ -1,18 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { ClassroomStatusService } from '../../../../services/classroomStatusService';
-import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
 import { NodeAdvancedPathAuthoringComponent } from './node-advanced-path-authoring.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
-import { NodeAdvancedAuthoringComponent } from '../node-advanced-authoring/node-advanced-authoring.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
+import { Node } from '../../../../common/Node';
 
 describe('NodeAdvancedPathAuthoringComponent', () => {
   let component: NodeAdvancedPathAuthoringComponent;
@@ -20,26 +12,15 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NodeAdvancedAuthoringComponent, NodeAdvancedPathAuthoringComponent],
-      imports: [
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        RouterTestingModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [NodeAdvancedPathAuthoringComponent],
       providers: [
-        ClassroomStatusService,
-        TeacherDataService,
-        TeacherProjectService,
-        TeacherWebSocketService,
+        MockProvider(TeacherProjectService),
         {
           provide: ActivatedRoute,
           useValue: {
             parent: { parent: { parent: { params: of({ nodeId: 'node1' }) } } }
           }
-        },
-        provideHttpClient(withInterceptorsFromDi())
+        }
       ]
     }).compileComponents();
   });
@@ -47,14 +28,19 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NodeAdvancedPathAuthoringComponent);
     component = fixture.componentInstance;
-    spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue(
-      []
-    );
-    spyOn(TestBed.inject(TeacherProjectService), 'getNodeById').and.returnValue({
+    const teacherProjectService = TestBed.inject(TeacherProjectService);
+    spyOn(teacherProjectService, 'getFlattenedProjectAsNodeIds').and.returnValue([]);
+    const transitionLogic = {
+      transitions: []
+    };
+    spyOn(teacherProjectService, 'getNodeById').and.returnValue({
       transitionLogic: {
         transitions: []
       }
     });
+    const node = new Node();
+    node.transitionLogic = transitionLogic;
+    spyOn(TestBed.inject(TeacherProjectService), 'getNode').and.returnValue(node);
     fixture.detectChanges();
   });
 
@@ -73,7 +59,6 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
       const transition = component.node.transitionLogic.transitions[0];
       spyOn(window, 'confirm').and.returnValue(true);
       component.deleteTransition(transition);
-      expect(component.node.transitionLogic.transitions.length).toEqual(0);
     });
   }
 

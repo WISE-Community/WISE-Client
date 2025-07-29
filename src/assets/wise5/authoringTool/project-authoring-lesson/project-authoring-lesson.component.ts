@@ -5,7 +5,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
 import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
@@ -30,7 +29,6 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
-    FlexLayoutModule,
     NodeIconAndTitleComponent,
     ProjectAuthoringStepComponent,
     AddStepButtonComponent

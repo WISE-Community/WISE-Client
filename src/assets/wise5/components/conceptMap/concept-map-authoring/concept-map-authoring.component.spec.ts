@@ -1,13 +1,12 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { ConceptMapAuthoring } from './concept-map-authoring.component';
-import { ConceptMapAuthoringModule } from './concept-map-authoring.module';
-import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ConceptMapAuthoring;
 let fixture: ComponentFixture<ConceptMapAuthoring>;
@@ -80,22 +79,20 @@ const componentContent = {
 describe('ConceptMapAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        ConceptMapAuthoringModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      imports: [ConceptMapAuthoring, StudentTeacherCommonServicesModule],
+      providers: [
+        ProjectAssetService,
+        TeacherProjectService,
+        TeacherProjectTranslationService,
+        provideHttpClient(withInterceptorsFromDi())
+      ]
     });
-    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
-      new ProjectLocale({ default: 'en-US' })
-    );
+    const projectService = TestBed.inject(TeacherProjectService);
+    spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale({ default: 'en-US' }));
     fixture = TestBed.createComponent(ConceptMapAuthoring);
     component = fixture.componentInstance;
-    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
-      copy(componentContent)
-    );
+    spyOn(projectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(projectService, 'getComponent').and.returnValue(copy(componentContent));
     component.componentContent = copy(componentContent);
     fixture.detectChanges();
   });

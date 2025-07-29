@@ -15,11 +15,10 @@ let fixture: ComponentFixture<EditDynamicPromptRulesComponent>;
 describe('EditDynamicPromptRulesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditDynamicPromptRulesComponent],
     imports: [DragDropModule,
         MatDialogModule,
         MatIconModule,
-        StudentTeacherCommonServicesModule],
+        StudentTeacherCommonServicesModule, EditDynamicPromptRulesComponent],
     providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 }).compileComponents();
   });

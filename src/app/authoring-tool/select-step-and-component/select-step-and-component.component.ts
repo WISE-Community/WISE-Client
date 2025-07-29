@@ -4,10 +4,20 @@ import { SelectStepComponent } from '../select-step/select-step.component';
 import { SelectComponentComponent } from '../select-component/select-component.component';
 
 @Component({
-    selector: 'select-step-and-component',
-    templateUrl: './select-step-and-component.component.html',
-    styleUrls: ['./select-step-and-component.component.scss'],
-    imports: [SelectComponentComponent, SelectStepComponent]
+  imports: [SelectComponentComponent, SelectStepComponent],
+  selector: 'select-step-and-component',
+  styles: ['select-step { margin-right: 20px; }'],
+  template: `<select-step
+      [nodeId]="referenceComponent.nodeId"
+      (stepChangedEvent)="stepChanged($event)"
+    />
+    <select-component
+      [allowedComponentTypes]="allowedComponentTypes"
+      [nodeId]="referenceComponent.nodeId"
+      [componentId]="referenceComponent.componentId"
+      [thisComponentId]="thisComponentId"
+      (componentChangedEvent)="componentChanged($event)"
+    />`
 })
 export class SelectStepAndComponentComponent {
   @Input() allowedComponentTypes: string[] = [];

@@ -1,30 +1,23 @@
-<edit-component-save-button [componentContent]="component.content"> </edit-component-save-button>
-<br />
-<edit-component-submit-button [componentContent]="component.content">
-</edit-component-submit-button>
-<edit-component-max-submit
-  *ngIf="component.content.showSubmitButton"
-  [componentContent]="component.content"
->
-</edit-component-max-submit>
-<edit-component-default-feedback [componentContent]="component.content">
-</edit-component-default-feedback>
-<div fxLayout="column" fxLayoutAlign="start start">
-  <edit-component-max-score [componentContent]="component.content"> </edit-component-max-score>
-  <edit-component-exclude-from-total-score [componentContent]="component.content">
-  </edit-component-exclude-from-total-score>
+<div class="flex flex-col justify-start items-start">
+  <edit-component-save-button [componentContent]="component.content" />
+  <edit-component-submit-button [componentContent]="component.content" />
+  @if (component.content.showSubmitButton) {
+    <edit-component-max-submit [componentContent]="component.content" />
+  }
+  <edit-component-default-feedback [componentContent]="component.content" />
+  <edit-component-max-score [componentContent]="component.content" />
+  <edit-component-exclude-from-total-score [componentContent]="component.content" />
   <edit-component-width [componentContent]="component.content" />
-  <edit-component-rubric [componentContent]="component.content"> </edit-component-rubric>
-  <edit-component-tags [componentContent]="component.content"> </edit-component-tags>
+  <edit-component-rubric [componentContent]="component.content" />
+  <edit-component-tags [componentContent]="component.content" />
+  <edit-connected-components
+    [nodeId]="component.nodeId"
+    [componentId]="component.id"
+    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+    [componentContent]="component.content"
+    [connectedComponents]="component.content.connectedComponents"
+    (connectedComponentsChanged)="connectedComponentsChanged($event)"
+  />
+  <edit-component-constraints [componentContent]="component.content" />
+  <edit-component-json [component]="component" />
 </div>
-<edit-connected-components
-  [nodeId]="component.nodeId"
-  [componentId]="component.id"
-  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-  [componentContent]="component.content"
-  [connectedComponents]="component.content.connectedComponents"
-  (connectedComponentsChanged)="connectedComponentsChanged($event)"
->
-</edit-connected-components>
-<edit-component-constraints [componentContent]="component.content" />
-<edit-component-json [component]="component"></edit-component-json>

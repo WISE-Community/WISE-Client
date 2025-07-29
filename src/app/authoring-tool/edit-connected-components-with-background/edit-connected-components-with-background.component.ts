@@ -3,19 +3,13 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
 
 @Component({
-    selector: 'edit-connected-components-with-background',
-    templateUrl: './edit-connected-components-with-background.component.html',
-    styleUrls: [
-        '../edit-connected-components/edit-connected-components.component.scss',
-        './edit-connected-components-with-background.component.scss'
-    ],
-    standalone: false
+  template: ''
 })
 export class EditConnectedComponentsWithBackgroundComponent extends EditConnectedComponentsComponent {
   componentTypesThatCanImportWorkAsBackground: string[] = [];
 
-  constructor(protected ProjectService: ProjectService) {
-    super(ProjectService);
+  constructor(protected projectService: ProjectService) {
+    super(projectService);
   }
 
   canConnectedComponentTypeImportWorkAsBackground(connectedComponent: any): boolean {

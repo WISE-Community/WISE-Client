@@ -1,9 +1,4 @@
-<div
-  *ngFor="let parameter of parameters"
-  fxLayout="row"
-  fxLayoutAlign="start center"
-  fxLayoutGap="10px"
->
+<div *ngFor="let parameter of parameters" class="flex flex-row justify-start items-center gap-2">
   <div *ngIf="parameter.type === 'select'">
     <mat-form-field>
       <mat-label>{{ parameter.name }}</mat-label>

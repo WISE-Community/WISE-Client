@@ -182,12 +182,10 @@
     </textarea>
   </div>
   <div *ngIf="isNotebookEnabled()">
-    <edit-component-add-to-notebook-button [componentContent]="componentContent">
-    </edit-component-add-to-notebook-button>
+    <edit-component-add-to-notebook-button [componentContent]="componentContent" />
   </div>
 </div>
 <edit-common-advanced
   [component]="component"
   [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
->
-</edit-common-advanced>
+/>

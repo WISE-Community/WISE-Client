@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+<div class="flex flex-row justify-start items-center gap-2">
   <mat-label class="node__label--vertical-alignment" i18n>Tags</mat-label>
   <button
     mat-raised-button
@@ -14,9 +14,7 @@
 </div>
 <div
   *ngFor="let tag of componentContent.tags; let i = index"
-  fxLayout="row"
-  fxLayoutGap="8px"
-  fxLayoutAlign="start center"
+  class="flex flex-row justify-start items-center gap-2"
   style="margin-top: 16px"
 >
   <mat-form-field>
@@ -30,7 +28,6 @@
   <button
     mat-raised-button
     color="primary"
-    class="moveComponentButton"
     matTooltip="Move Up"
     i18n-matTooltip
     matTooltipPosition="above"
@@ -41,7 +38,6 @@
   <button
     mat-raised-button
     color="primary"
-    class="moveComponentButton"
     matTooltip="Move Down"
     i18n-matTooltip
     matTooltipPosition="above"
@@ -52,7 +48,6 @@
   <button
     mat-raised-button
     color="primary"
-    class="moveComponentButton"
     matTooltip="Delete"
     i18n-matTooltip
     matTooltipPosition="above"

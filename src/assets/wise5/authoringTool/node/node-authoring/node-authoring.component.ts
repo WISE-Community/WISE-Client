@@ -19,7 +19,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TeacherNodeIconComponent } from '../../teacher-node-icon/teacher-node-icon.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -37,7 +36,6 @@ import { EditComponentAdvancedButtonComponent } from '../../components/edit-comp
     DragDropModule,
     EditComponentAdvancedButtonComponent,
     EditNodeTitleComponent,
-    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
@@ -55,9 +53,9 @@ import { EditComponentAdvancedButtonComponent } from '../../components/edit-comp
 export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];
   protected editingComponentId: string;
-  isGroupNode: boolean;
-  node: Node;
-  nodeJson: any;
+  protected isGroupNode: boolean;
+  protected node: Node;
+  private nodeJson: any;
   @Input() nodeId?: string;
   private subscriptions: Subscription = new Subscription();
 
