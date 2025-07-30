@@ -37,7 +37,7 @@ import { MatDividerModule } from '@angular/material/divider';
     SelectPathCountComponent,
     SelectStepComponent
   ],
-  styleUrl: './create-branch.component.scss',
+  styles: ['create-branch-paths, select-merge-step { margin-bottom: 16px; } '],
   templateUrl: './create-branch.component.html'
 })
 export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
