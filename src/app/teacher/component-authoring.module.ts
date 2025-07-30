@@ -18,7 +18,6 @@ import { TableAuthoring } from '../../assets/wise5/components/table/table-author
 import { PeerChatAuthoringComponent } from '../../assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-authoring.component';
 import { ShowMyWorkAuthoringComponent } from '../../assets/wise5/components/showMyWork/show-my-work-authoring/show-my-work-authoring.component';
 import { ShowGroupWorkAuthoringComponent } from '../../assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component';
-import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { AiChatAuthoringComponent } from '../../assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component';
 import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
@@ -45,8 +44,7 @@ import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGr
     HtmlAuthoringComponent,
     MatchAuthoringComponent,
     MultipleChoiceAuthoring,
-    OpenResponseAuthoringComponent,
-    StudentTeacherCommonModule
+    OpenResponseAuthoringComponent
   ],
   providers: [PeerGroupingAuthoringService]
 })
