@@ -1,11 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
+import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { RecoveryAuthoringComponent } from './recovery-authoring.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { MockProvider } from 'ng-mocks';
-import { NotificationService } from '../../services/notificationService';
-import { of } from 'rxjs';
 import { provideRouter } from '@angular/router';
 
 class MockTeacherProjectService {
@@ -38,13 +36,12 @@ const nodeId2 = 'node2';
 describe('RecoveryAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, RecoveryAuthoringComponent],
+      imports: [RecoveryAuthoringComponent],
       providers: [
         MockProvider(NotificationService, {
           setGlobalMessage$: of({})
         }),
         { provide: TeacherProjectService, useClass: MockTeacherProjectService },
-        provideHttpClient(withInterceptorsFromDi()),
         provideRouter([])
       ]
     }).compileComponents();
