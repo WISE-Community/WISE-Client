@@ -13,9 +13,6 @@ import { EditQuestionBankRulesComponent } from '../edit-question-bank-rules/edit
 import { SelectStepAndComponentComponent } from '../select-step-and-component/select-step-and-component.component';
 
 @Component({
-  selector: 'edit-question-bank',
-  templateUrl: './edit-question-bank.component.html',
-  styleUrl: './edit-question-bank.component.scss',
   imports: [
     MatCheckbox,
     NgIf,
@@ -26,7 +23,10 @@ import { SelectStepAndComponentComponent } from '../select-step-and-component/se
     SelectStepAndComponentComponent,
     EditComponentPeerGroupingTagComponent,
     EditQuestionBankRulesComponent
-  ]
+  ],
+  selector: 'edit-question-bank',
+  styleUrl: './edit-question-bank.component.scss',
+  templateUrl: './edit-question-bank.component.html'
 })
 export class EditQuestionBankComponent implements OnInit {
   protected allowedReferenceComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
