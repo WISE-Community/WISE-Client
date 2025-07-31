@@ -1,4 +1,4 @@
-<div fxLayoutGap="16px">
+<div class="flex gap-4 items-center">
   <b i18n>Removal Criteria</b>
   <button
     mat-raised-button
@@ -11,7 +11,7 @@
     <mat-icon>delete</mat-icon>
   </button>
 </div>
-<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+<div class="flex flex-row flex-wrap items-center gap-4">
   <mat-form-field class="common-width">
     <mat-label i18n>Removal Criteria Name</mat-label>
     <mat-select [(ngModel)]="criteria.name" (ngModelChange)="nameChanged(criteria)">
@@ -29,7 +29,7 @@
 @for (param of getParamsByName(criteria.name); track param) {
   <div>
     @if (param.value === 'nodeId') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
           <mat-select
@@ -55,7 +55,7 @@
         }
       </div>
     } @else if (param.value === 'componentId') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
           <mat-select [(ngModel)]="criteria.params.componentId" (ngModelChange)="saveProject()">
@@ -83,7 +83,7 @@
         }
       </div>
     } @else if (param.value === 'fromNodeId') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
           <mat-select [(ngModel)]="criteria.params.fromNodeId" (ngModelChange)="saveProject()">
@@ -104,7 +104,7 @@
         }
       </div>
     } @else if (param.value === 'toNodeId') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
           <mat-select [(ngModel)]="criteria.params.toNodeId" (ngModelChange)="saveProject()">
@@ -127,7 +127,7 @@
         }
       </div>
     } @else if (param.value === 'scores') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field>
           <mat-label>{{ param.text }}</mat-label>
           <input
@@ -144,7 +144,7 @@
         }
       </div>
     } @else if (param.value === 'requiredSubmitCount') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         @if (param.value === 'requiredSubmitCount') {
           <mat-form-field>
             <mat-label>{{ param.text }}</mat-label>
@@ -166,12 +166,12 @@
       param.value === 'choiceIds' &&
       getChoiceType(criteria.params.nodeId, criteria.params.componentId) === 'radio'
     ) {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
           <mat-select [(ngModel)]="criteria.params.choiceIds" (ngModelChange)="saveProject()">
             <mat-option [value]="''">
-              <span fxLayout="row" fxLayoutAlign="start center">
+              <span class="flex flex-row items-center">
                 <span class="red" i18n>Please Select a Choice</span>
               </span>
             </mat-option>
@@ -193,7 +193,7 @@
       param.value === 'choiceIds' &&
       getChoiceType(criteria.params.nodeId, criteria.params.componentId) === 'checkbox'
     ) {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label>{{ param.text }}</mat-label>
           <mat-select
@@ -208,7 +208,7 @@
         }
       </div>
     } @else if (param.value === 'requiredNumberOfWords') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label i18n>{{ param.text }}</mat-label>
           <input
@@ -226,7 +226,7 @@
         }
       </div>
     } @else if (param.value === 'requiredNumberOfNotes') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label i18n>{{ param.text }}</mat-label>
           <input
@@ -244,7 +244,7 @@
         }
       </div>
     } @else if (param.value === 'requiredNumberOfFilledRows') {
-      <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+      <div class="flex flex-row flex-wrap items-center gap-4">
         <mat-form-field class="common-width">
           <mat-label i18n>{{ param.text }}</mat-label>
           <input
