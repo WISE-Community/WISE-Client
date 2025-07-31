@@ -33,10 +33,6 @@ import { FeedbackRule } from '../../../assets/wise5/components/common/feedbackRu
   ]
 })
 export class EditDynamicPromptRulesComponent extends EditFeedbackRulesComponent {
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
-
   protected createNewFeedbackRule(): Partial<FeedbackRule> {
     return { id: generateRandomKey(), expression: '', prompt: '' };
   }
