@@ -17,9 +17,6 @@ import { Question } from '../../../assets/wise5/components/peerChat/peer-chat-qu
 import { QuestionBankRule } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/QuestionBankRule';
 
 @Component({
-  selector: 'edit-question-bank-rules',
-  templateUrl: './edit-question-bank-rules.component.html',
-  styleUrl: './edit-question-bank-rules.component.scss',
   imports: [
     MatTooltip,
     MatIcon,
@@ -33,13 +30,12 @@ import { QuestionBankRule } from '../../../assets/wise5/components/peerChat/peer
     CdkTextareaAutosize,
     MatFormFieldModule,
     TranslatableTextareaComponent
-  ]
+  ],
+  selector: 'edit-question-bank-rules',
+  styleUrl: './edit-question-bank-rules.component.scss',
+  templateUrl: './edit-question-bank-rules.component.html'
 })
 export class EditQuestionBankRulesComponent extends EditFeedbackRulesComponent {
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
-
   protected createNewFeedbackRule(): Partial<QuestionBankRule> {
     if (this.version === 2) {
       return { id: generateRandomKey(), expression: '', questions: [new Question()] };
