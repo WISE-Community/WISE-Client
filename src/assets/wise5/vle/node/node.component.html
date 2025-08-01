@@ -11,7 +11,8 @@
     @for (component of components; track component) {
       <div
         id="component_{{ component.id }}"
-        class="component w-full sm:w-{{ component.componentWidth ? component.componentWidth : 100 }}"
+        class="component max-lg:!w-full"
+        [ngStyle]="{ width: component.componentWidth + '%' }"
       >
         @if (componentToVisible[component.id]) {
           <component
