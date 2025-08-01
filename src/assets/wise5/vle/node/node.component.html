@@ -12,7 +12,7 @@
       <div
         id="component_{{ component.id }}"
         class="component max-lg:!w-full"
-        [ngStyle]="{ width: component.componentWidth + '%' }"
+        [ngStyle]="{ width: component.componentWidth ? component.componentWidth + '%' : '100%' }"
       >
         @if (componentToVisible[component.id]) {
           <component
