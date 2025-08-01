@@ -703,7 +703,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">87,89</context>
+          <context context-type="linenumber">84,86</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring/project-authoring.component.html</context>
@@ -12913,21 +12913,21 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source> Choose </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">63,65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2151875273086947442" datatype="html">
         <source>(Not Used)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">70,73</context>
+          <context context-type="linenumber">67,70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3099741642167775297" datatype="html">
         <source>Download</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.html</context>
-          <context context-type="linenumber">77,80</context>
+          <context context-type="linenumber">74,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2589779545965103394" datatype="html">
@@ -12936,7 +12936,7 @@ The branches will be removed but the steps will remain in the unit.</source>
 <x id="PH" equiv-text="assetItem.fileName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6504564291333755440" datatype="html">
@@ -12944,7 +12944,7 @@ The branches will be removed but the steps will remain in the unit.</source>
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4084608519102819263" datatype="html">
@@ -12952,7 +12952,7 @@ The branches will be removed but the steps will remain in the unit.</source>
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">216</context>
+          <context context-type="linenumber">214</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4584433830649043341" datatype="html">
@@ -12960,21 +12960,21 @@ The branches will be removed but the steps will remain in the unit.</source>
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">216</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4189400927519041055" datatype="html">
         <source>Successfully uploaded:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">247</context>
+          <context context-type="linenumber">245</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3146021810870673369" datatype="html">
         <source>Error uploading: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-asset-authoring/project-asset-authoring.component.ts</context>
-          <context context-type="linenumber">256</context>
+          <context context-type="linenumber">254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4842850431130742610" datatype="html">
