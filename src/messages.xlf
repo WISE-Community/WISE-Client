@@ -1150,7 +1150,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">60,62</context>
+          <context context-type="linenumber">54,56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
@@ -1455,7 +1455,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">44,45</context>
+          <context context-type="linenumber">38,39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -2395,7 +2395,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">28,34</context>
+          <context context-type="linenumber">22,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="595878003405307359" datatype="html">
@@ -5484,7 +5484,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">10,14</context>
+          <context context-type="linenumber">4,7</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -10739,35 +10739,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Project Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">20,23</context>
+          <context context-type="linenumber">14,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2527748077281906010" datatype="html">
         <source>Switch to Grading View</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">36,40</context>
+          <context context-type="linenumber">30,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6591722028175035225" datatype="html">
         <source>Language to translate</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">53,59</context>
+          <context context-type="linenumber">47,53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4349446481980481506" datatype="html">
         <source> Help </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">65,70</context>
+          <context context-type="linenumber">59,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8767912651395089354" datatype="html">
         <source>User Menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">69,72</context>
+          <context context-type="linenumber">63,66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -10778,7 +10778,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Go Home </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">95,98</context>
+          <context context-type="linenumber">87,90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -10789,7 +10789,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Sign Out </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">99,104</context>
+          <context context-type="linenumber">91,96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -10804,14 +10804,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>ID: <x id="PH" equiv-text="this.projectId"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3275557751683993510" datatype="html">
         <source>Run ID: <x id="PH" equiv-text="this.runId"/> | Access Code: <x id="PH_1" equiv-text="this.runCode"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">92</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.ts</context>
