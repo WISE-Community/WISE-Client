@@ -20436,7 +20436,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <source>If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML component above this</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-authoring/open-response-authoring.component.html</context>
-          <context context-type="linenumber">5,8</context>
+          <context context-type="linenumber">4,7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4633085794688959129" datatype="html">
