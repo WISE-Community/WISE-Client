@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotebookAuthoringComponent } from './notebook-authoring.component';
+import { MockProviders } from 'ng-mocks';
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { MockProviders } from 'ng-mocks';
+import { NotebookAuthoringComponent } from './notebook-authoring.component';
 
 describe('NotebookAuthoringComponent', () => {
   let component: NotebookAuthoringComponent;
@@ -12,10 +11,7 @@ describe('NotebookAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NotebookAuthoringComponent],
-      providers: [
-        MockProviders(ConfigService, TeacherProjectService),
-        provideHttpClient(withInterceptorsFromDi())
-      ]
+      providers: [MockProviders(ConfigService, TeacherProjectService)]
     }).compileComponents();
     TestBed.inject(TeacherProjectService).project = {};
     fixture = TestBed.createComponent(NotebookAuthoringComponent);
