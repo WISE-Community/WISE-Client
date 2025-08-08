@@ -2,15 +2,14 @@
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 />
-<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+<div class="flex flex-row flex-wrap items-center gap-2">
   <translatable-input
     [content]="componentContent"
     key="title"
     label="Graph Title"
     i18n-label
     (defaultLanguageTextChanged)="inputChange.next($event)"
-    class="graph-title"
-    fxFlex="auto"
+    class="graph-title flex-auto"
   />
   <mat-form-field>
     <mat-label i18n>Plot Type</mat-label>
@@ -42,7 +41,7 @@
     />
   </mat-form-field>
 </div>
-<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+<div class="flex flex-row flex-wrap items-center gap-2">
   <span i18n>X Axis</span>
   <translatable-input
     [content]="componentContent.xAxis.title"
@@ -50,7 +49,7 @@
     label="Title"
     i18n-label
     (defaultLanguageTextChanged)="inputChange.next($event)"
-    fxFlex="auto"
+    class="flex-auto"
   />
   <mat-form-field>
     <mat-label i18n>Axis Type</mat-label>
@@ -109,7 +108,7 @@
   </ng-container>
 </div>
 <div *ngIf="componentContent.xAxis.type == 'categories'" class="categories">
-  <div class="add-button" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <div class="add-button flex items-center gap-2">
     <span i18n>Categories</span>
     <button
       mat-raised-button
@@ -129,9 +128,7 @@
       let category of [].constructor(componentContent.xAxis.categories.length);
       index as categoryIndex
     "
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="8px"
+    class="flex flex-row flex-wrap items-center gap-2"
   >
     <mat-form-field>
       <mat-label i18n>Category Name</mat-label>
@@ -156,7 +153,7 @@
   </div>
 </div>
 <div>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+  <div class="flex flex-row flex-wrap items-center gap-4 mb-4">
     <mat-slide-toggle
       color="primary"
       class="enable-y-axis-label"
@@ -172,7 +169,7 @@
         (ngModelChange)="numYAxesChanged($event, numYAxes)"
         [(ngModel)]="numYAxes"
       >
-        <div fxLayoutGap="16px">
+        <div class="gap-4 flex">
           <mat-radio-button [value]="2" class="y-axis-count">2</mat-radio-button>
           <mat-radio-button [value]="3" class="y-axis-count">3</mat-radio-button>
           <mat-radio-button [value]="4" class="y-axis-count">4</mat-radio-button>
@@ -181,12 +178,7 @@
     </ng-container>
   </div>
 </div>
-<div
-  *ngIf="!enableMultipleYAxes"
-  fxLayout="row wrap"
-  fxLayoutAlign="start center"
-  fxLayoutGap="8px"
->
+<div *ngIf="!enableMultipleYAxes" class="flex flex-row flex-wrap items-center gap-2">
   <span i18n>Y Axis</span>
   <translatable-input
     [content]="componentContent.yAxis.title"
@@ -194,7 +186,7 @@
     label="Title"
     i18n-label
     (defaultLanguageTextChanged)="inputChange.next($event)"
-    fxFlex="auto"
+    class="flex-auto"
   />
   <mat-form-field>
     <mat-label i18n>Color</mat-label>
@@ -241,9 +233,7 @@
 <ng-container *ngIf="enableMultipleYAxes">
   <div
     *ngFor="let y of [].constructor(componentContent.yAxis.length); index as yAxisIndex"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="8px"
+    class="flex flex-row flex-wrap items-center gap-2"
   >
     <span i18n>Y Axis</span>
     <translatable-input
@@ -252,7 +242,7 @@
       label="Title"
       i18n-label
       (defaultLanguageTextChanged)="inputChange.next($event)"
-      fxFlex="auto"
+      class="flex-auto"
     />
     <mat-form-field>
       <mat-label i18n>Color</mat-label>
@@ -305,7 +295,7 @@
     </mat-slide-toggle>
   </div>
 </ng-container>
-<div fxLayout="row" fxLayoutAlign="start center">
+<div class="flex flex-row items-center">
   <translatable-input
     [content]="componentContent"
     key="backgroundImage"
@@ -397,7 +387,7 @@
   </mat-checkbox>
 </div>
 <br />
-<div class="add-button" fxLayoutAlign="start center" fxLayoutGap="8px">
+<div class="add-button flex items-center gap-2">
   <span i18n>Series</span>
   <button
     mat-raised-button
@@ -420,7 +410,7 @@
   There are no series. Click the "Add Series" button to add a series.
 </div>
 <div *ngFor="let series of componentContent.series; index as seriesIndex" class="series">
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <div class="flex flex-row flex-wrap items-center gap-2">
     <translatable-input
       [content]="series"
       key="name"
@@ -494,7 +484,7 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="add-button" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <div class="add-button flex items-center gap-2">
     <span class="label" i18n>Data Points</span>
     <button
       mat-raised-button
@@ -521,9 +511,7 @@
       last as isLast;
       trackBy: customTrackBy
     "
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="8px"
+    class="flex flex-row flex-wrap items-center gap-2"
   >
     <ng-container
       *ngIf="
@@ -605,7 +593,7 @@
     </button>
   </div>
   <br />
-  <div fxLayout="row" fxLayoutAlign="end center">
+  <div class="flex flex-row justify-end items-center">
     <button
       mat-raised-button
       color="primary"
