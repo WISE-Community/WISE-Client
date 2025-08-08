@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { EditComponentMaxScoreComponent } from '../../../../../app/authoring-tool/edit-component-max-score/edit-component-max-score.component';
 import { EditComponentExcludeFromTotalScoreComponent } from '../../../../../app/authoring-tool/edit-component-exclude-from-total-score/edit-component-exclude-from-total-score.component';
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
@@ -14,7 +13,6 @@ import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/ed
   selector: 'edit-discussion-advanced',
   templateUrl: 'edit-discussion-advanced.component.html',
   imports: [
-    FlexModule,
     EditComponentMaxScoreComponent,
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentWidthComponent,
