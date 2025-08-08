@@ -3,7 +3,6 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
@@ -25,7 +24,6 @@ import { FeedbackRule } from '../FeedbackRule';
   styleUrl: './edit-feedback-rules.component.scss',
   imports: [
     CommonModule,
-    FlexModule,
     MatTooltip,
     MatIcon,
     MatButtonModule,
