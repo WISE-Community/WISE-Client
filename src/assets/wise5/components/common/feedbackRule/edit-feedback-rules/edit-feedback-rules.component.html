@@ -20,9 +20,13 @@
     (cdkDropListDropped)="drop($event)"
     cdkScrollable
   >
-    <ng-container
-      *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last"
-    >
+    @for (
+      rule of feedbackRules;
+      track rule;
+      let ruleIndex = $index;
+      let first = $first;
+      let last = $last
+    ) {
       <li class="rule" cdkDrag>
         <mat-card appearance="outlined" class="rule-content">
           <div class="flex flex-row flex-wrap gap-2">
@@ -39,17 +43,14 @@
                   (ngModelChange)="inputChanged.next($event)"
                 />
               </mat-form-field>
-              <ng-container [ngSwitch]="version">
-                <ng-container *ngSwitchCase="2">
-                  <div
-                    *ngFor="
-                      let feedback of rule.feedback;
-                      let feedbackIndex = index;
-                      let last = last;
-                      trackBy: customTrackBy
-                    "
-                    class="feedback-item flex flex-row items-center gap-2"
-                  >
+              @if (version === 2) {
+                @for (
+                  feedback of rule.feedback;
+                  track customTrackBy;
+                  let feedbackIndex = $index;
+                  let last = $last
+                ) {
+                  <div class="feedback-item flex flex-row items-center gap-2">
                     <mat-form-field
                       class="rule-input form-field-no-hint feedback-input"
                       appearance="fill"
@@ -89,20 +90,19 @@
                       <mat-icon>add_circle</mat-icon>
                     </button>
                   </div>
-                </ng-container>
-                <ng-container *ngSwitchDefault>
-                  <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
-                    <mat-label i18n>Feedback</mat-label>
-                    <textarea
-                      matInput
-                      [(ngModel)]="rule.feedback"
-                      (ngModelChange)="inputChanged.next($event)"
-                      cdkTextareaAutosize
-                    >
-                    </textarea>
-                  </mat-form-field>
-                </ng-container>
-              </ng-container>
+                }
+              } @else {
+                <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
+                  <mat-label i18n>Feedback</mat-label>
+                  <textarea
+                    matInput
+                    [(ngModel)]="rule.feedback"
+                    (ngModelChange)="inputChanged.next($event)"
+                    cdkTextareaAutosize
+                  >
+                  </textarea>
+                </mat-form-field>
+              }
             </div>
             <div class="flex flex-col items-center">
               <button
@@ -114,17 +114,18 @@
               >
                 <mat-icon>clear</mat-icon>
               </button>
-              <button
-                *ngIf="feedbackRules.length > 1"
-                [disabled]="first"
-                mat-icon-button
-                i18n-matTooltip
-                matTooltip="Move up"
-                matTooltipPosition="before"
-                (click)="moveUp(ruleIndex)"
-              >
-                <mat-icon>arrow_upward</mat-icon>
-              </button>
+              @if (feedbackRules.length > 1) {
+                <button
+                  [disabled]="first"
+                  mat-icon-button
+                  i18n-matTooltip
+                  matTooltip="Move up"
+                  matTooltipPosition="before"
+                  (click)="moveUp(ruleIndex)"
+                >
+                  <mat-icon>arrow_upward</mat-icon>
+                </button>
+              }
               <button
                 [disabled]="last"
                 mat-icon-button
@@ -151,6 +152,6 @@
           </button>
         </div>
       </li>
-    </ng-container>
+    }
   </ul>
 </div>
