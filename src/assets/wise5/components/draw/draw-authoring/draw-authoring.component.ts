@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -28,7 +27,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   imports: [
     CommonModule,
     EditComponentPrompt,
-    FlexModule,
     TranslatableInputComponent,
     TranslatableAssetChooserComponent,
     MatCheckbox,
