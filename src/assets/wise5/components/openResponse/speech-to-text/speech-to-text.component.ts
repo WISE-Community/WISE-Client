@@ -7,22 +7,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'speech-to-text',
-    imports: [
-        CommonModule,
-        FormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatMenuModule,
-        MatTooltipModule
-    ],
-    templateUrl: './speech-to-text.component.html',
-    styleUrls: ['./speech-to-text.component.scss']
+  selector: 'speech-to-text',
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTooltipModule
+  ],
+  templateUrl: './speech-to-text.component.html',
+  styleUrls: ['./speech-to-text.component.scss']
 })
 export class SpeechToTextComponent {
   protected languages: Language[] = this.transcribeService.languages;
