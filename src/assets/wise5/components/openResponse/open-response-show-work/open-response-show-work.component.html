@@ -1,9 +1,7 @@
 <div class="component--grading__response__content" [innerHTML]="studentResponse"></div>
 <div
-  class="component__attachment"
+  class="component__attachment flex items-center justify-start"
   *ngFor="let audioAttachment of audioAttachments"
-  fxLayout="row"
-  fxLayoutAlign="start center"
 >
   <audio controls>
     <source [src]="audioAttachment.url" type="audio/webm" />
