@@ -20735,7 +20735,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Chat members:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-members/peer-chat-members.component.html</context>
-          <context context-type="linenumber">7,8</context>
+          <context context-type="linenumber">2,3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4541981683127780346" datatype="html">

@@ -1,16 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'peer-chat-members',
-    templateUrl: './peer-chat-members.component.html',
-    styleUrls: ['./peer-chat-members.component.scss'],
-    standalone: false
+  selector: 'peer-chat-members',
+  templateUrl: './peer-chat-members.component.html',
+  styleUrl: './peer-chat-members.component.scss',
+  standalone: false
 })
-export class PeerChatMembersComponent implements OnInit {
-  @Input()
-  peerChatWorkgroupInfos: any[];
-
-  constructor() {}
-
-  ngOnInit(): void {}
+export class PeerChatMembersComponent {
+  @Input() peerChatWorkgroupInfos: any[];
 }

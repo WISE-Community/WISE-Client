@@ -1,9 +1,4 @@
-<div
-  class="mat-small secondary-text"
-  fxLayout="row wrap"
-  fxLayoutAlign="start center"
-  fxLayoutGap="6px"
->
+<div class="mat-small secondary-text flex flex-wrap justify-start items-center gap-2">
   <span i18n>Chat members:</span>
   <span *ngFor="let peerChatWorkgroupInfo of peerChatWorkgroupInfos">
     <mat-icon class="mat-24" [ngStyle]="{ color: peerChatWorkgroupInfo.avatarColor }">
