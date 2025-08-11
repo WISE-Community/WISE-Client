@@ -16134,7 +16134,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">60,61</context>
+          <context context-type="linenumber">59,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6162693758764653365" datatype="html">
@@ -17991,28 +17991,28 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Share with class...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">37,40</context>
+          <context context-type="linenumber">36,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6281284727431074654" datatype="html">
         <source>Remove file</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">67,70</context>
+          <context context-type="linenumber">66,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6029843669852625022" datatype="html">
         <source>Add picture</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">86,90</context>
+          <context context-type="linenumber">80,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7138371398727152365" datatype="html">
         <source> Post </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">99,103</context>
+          <context context-type="linenumber">93,97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3210146777760299474" datatype="html">
