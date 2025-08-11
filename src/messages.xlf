@@ -21549,7 +21549,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>X Axis Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">61,64</context>
+          <context context-type="linenumber">59,62</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
@@ -21560,7 +21560,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Y Axis Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">80,83</context>
+          <context context-type="linenumber">78,81</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
@@ -21571,7 +21571,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Y Axis <x id="INTERPOLATION" equiv-text="{{ i + 1 }}"/> Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
-          <context context-type="linenumber">105,106</context>
+          <context context-type="linenumber">101,102</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
