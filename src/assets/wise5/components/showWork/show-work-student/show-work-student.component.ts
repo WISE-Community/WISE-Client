@@ -1,16 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'show-work-student',
-    templateUrl: './show-work-student.component.html',
-    styleUrls: ['./show-work-student.component.scss'],
-    standalone: false
+  selector: 'show-work-student',
+  standalone: false,
+  templateUrl: './show-work-student.component.html'
 })
-export class ShowWorkStudentComponent implements OnInit {
+export class ShowWorkStudentComponent {
   @Input() componentContent: any;
   @Input() componentId: string;
   @Input() nodeId: string;
   @Input() studentWork: any;
-
-  ngOnInit(): void {}
 }
