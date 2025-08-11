@@ -2,7 +2,7 @@
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 />
-<div fxLayout="row" fxLayoutAlign="start center">
+<div class="flex flex-row items-center justify-start">
   <translatable-input
     [content]="componentContent"
     key="backgroundImage"
@@ -99,7 +99,7 @@
   </div>
 </div>
 <div>
-  <div layout="row" class="starter-labels-button-container">
+  <div class="flex flex-row starter-labels-button-container">
     <span i18n class="starter-labels-button-label">Starter Labels</span>
     <button
       mat-raised-button
@@ -125,7 +125,7 @@
     *ngFor="let label of componentContent.labels; index as labelIndex"
     class="starter-label-container"
   >
-    <div fxLayout="row wrap" fxLayoutAlign="start start">
+    <div class="flex flex-row flex-wrap items-start justify-start">
       <translatable-input
         [content]="label"
         key="text"
@@ -178,28 +178,30 @@
         </mat-checkbox>
       </div>
     </div>
-    <div *ngIf="componentContent.enableCircles" fxLayout="row wrap" fxLayoutAlign="start center">
-      <span class="coordinate-location-label" i18n>Point Location</span>
-      <mat-form-field class="input coordinate-input">
-        <mat-label i18n>X</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="label.pointX"
-          (ngModelChange)="numberInputChange.next($event)"
-        />
-      </mat-form-field>
-      <mat-form-field class="input coordinate-input">
-        <mat-label i18n>Y</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="label.pointY"
-          (ngModelChange)="numberInputChange.next($event)"
-        />
-      </mat-form-field>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center">
+    @if (componentContent.enableCircles) {
+      <div class="flex flex-row flex-wrap items-center justify-start">
+        <span class="coordinate-location-label" i18n>Point Location</span>
+        <mat-form-field class="input coordinate-input">
+          <mat-label i18n>X</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="label.pointX"
+            (ngModelChange)="numberInputChange.next($event)"
+          />
+        </mat-form-field>
+        <mat-form-field class="input coordinate-input">
+          <mat-label i18n>Y</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="label.pointY"
+            (ngModelChange)="numberInputChange.next($event)"
+          />
+        </mat-form-field>
+      </div>
+    }
+    <div class="flex flex-row flex-wrap items-center justify-start">
       <span class="coordinate-location-label" i18n>Text Location</span>
       <mat-form-field class="input coordinate-input">
         <mat-label i18n>X</mat-label>
@@ -219,7 +221,7 @@
           (ngModelChange)="numberInputChange.next($event)"
         />
       </mat-form-field>
-      <span fxFlex></span>
+      <span class="flex-1"></span>
       <button
         mat-raised-button
         color="primary"
