@@ -12,10 +12,10 @@ import { ComponentService } from '../../componentService';
 import { CompletionService } from '../../../services/completionService';
 
 @Component({
-    selector: 'summary-student',
-    templateUrl: 'summary-student.component.html',
-    styleUrls: ['summary-student.component.scss'],
-    standalone: false
+  selector: 'summary-student',
+  templateUrl: 'summary-student.component.html',
+  styles: ['.prompt { font-weight: 500; padding-bottom: 8px; }'],
+  standalone: false
 })
 export class SummaryStudent extends ComponentStudent {
   chartType: string;
