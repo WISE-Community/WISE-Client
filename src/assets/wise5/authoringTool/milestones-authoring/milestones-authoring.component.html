@@ -11,12 +11,7 @@
     Enable Milestones
   </mat-slide-toggle>
 </div>
-<div
-  *ngIf="project.achievements.isEnabled"
-  class="margin-left-20"
-  fxLayout="column"
-  fxLayoutGap="20px"
->
+<div *ngIf="project.achievements.isEnabled" class="margin-left-20 flex flex-col gap-5">
   <div>
     <button mat-raised-button color="primary" (click)="addMilestone(0)">
       <mat-icon>add</mat-icon>
@@ -25,7 +20,7 @@
   </div>
   <div *ngFor="let item of project.achievements.items; let milestoneIndex = index">
     <div class="border margin-bottom-20">
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <div class="flex justify-start items-center gap-5">
         <button
           class="enable-in-translation"
           *ngIf="idToExpanded[item.id]"
@@ -90,7 +85,7 @@
         </div>
         <div *ngIf="item.isEnabled" class="border">
           <h5 i18n>Satisfy Criteria</h5>
-          <div fxLayout="row wrap" fxLayoutGap="20px">
+          <div class="flex flex-wrap gap-5">
             <mat-form-field class="width-300">
               <mat-label i18n>Satisfy Minimum Percentage</mat-label>
               <input
@@ -130,7 +125,7 @@
           <div
             *ngFor="let satisfyCriteria of item.satisfyCriteria; let satisfyCriteriaIndex = index"
           >
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+            <div class="flex justify-start items-center gap-5">
               <h5 i18n>Milestone Satisfy Criteria</h5>
               <button
                 mat-raised-button
@@ -142,7 +137,7 @@
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
-            <div fxLayoutGap="20px">
+            <div class="flex gap-5">
               <mat-form-field class="width-300">
                 <mat-label i18n>Node ID</mat-label>
                 <mat-select [(ngModel)]="satisfyCriteria.nodeId" (ngModelChange)="save()">
@@ -207,7 +202,7 @@
         </div>
         <div>
           <h5 i18n>Report</h5>
-          <div class="margin-left-20" fxLayout="column" fxLayoutGap="20px">
+          <div class="margin-left-20 flex flex-col gap-5">
             <div>
               <button mat-raised-button color="primary" (click)="addLocation(item.report, 0)">
                 <mat-icon>add</mat-icon>
@@ -215,12 +210,7 @@
               </button>
             </div>
             <div *ngFor="let location of item.report.locations; let locationIndex = index">
-              <div
-                class="border margin-bottom-20"
-                fxLayout="row wrap"
-                fxLayoutAlign="start center"
-                fxLayoutGap="20px"
-              >
+              <div class="border margin-bottom-20 flex flex-wrap justify-start items-center gap-5">
                 <h5 i18n>Location {{ locationIndex + 1 }}</h5>
                 <mat-form-field class="width-300">
                   <mat-label i18n>Node ID</mat-label>
@@ -269,14 +259,11 @@
                 </button>
               </div>
             </div>
-            <div class="border" fxLayout="column" fxLayoutGap="20px">
+            <div class="border flex flex-col gap-5">
               <h5 i18n>Custom Score Values</h5>
               <div
                 *ngFor="let customScoreValue of item.report.customScoreValues | keyvalue"
-                class="margin-left-20"
-                fxLayout="row"
-                fxLayoutAlign="start center"
-                fxLayoutGap="20px"
+                class="margin-left-20 flex justify-start items-center gap-5"
               >
                 <div>{{ customScoreValue.key }}: {{ customScoreValue.value }}</div>
                 <button
@@ -289,7 +276,7 @@
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
-              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+              <div class="flex justify-start items-center gap-5">
                 <mat-form-field class="width-200">
                   <mat-label i18n>Custom Score Key</mat-label>
                   <input matInput [(ngModel)]="customScoreKey" />
@@ -316,11 +303,10 @@
             </div>
             <div
               *ngFor="let template of item.report.templates; let templateIndex = index"
-              fxLayout="column"
-              fxLayoutGap="20px"
+              class="flex flex-col gap-5"
             >
-              <div class="border margin-left-20" fxLayout="column" fxLayoutGap="20px">
-                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+              <div class="border margin-left-20 flex flex-col gap-5">
+                <div class="flex justify-start items-center gap-5">
                   <button
                     class="enable-in-translation"
                     mat-raised-button
@@ -354,12 +340,7 @@
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
-                <div
-                  *ngIf="idToExpanded[template.id]"
-                  class="margin-left-20"
-                  fxLayout="column"
-                  fxLayoutGap="20px"
-                >
+                <div *ngIf="idToExpanded[template.id]" class="margin-left-20 flex flex-col gap-5">
                   <div>
                     <mat-form-field class="width-200">
                       <mat-label i18n>Satisfy Conditional</mat-label>
@@ -388,11 +369,10 @@
                       let satisfyCriteria of template.satisfyCriteria;
                       let satisfyCriteriaIndex = index
                     "
-                    fxLayout="column"
-                    fxLayoutGap="20px"
+                    class="flex flex-col gap-5"
                   >
                     <div class="border">
-                      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                      <div class="flex justify-start items-center gap-5">
                         <h5 i18n>Template Satisfy Criteria {{ satisfyCriteriaIndex + 1 }}</h5>
                         <button
                           mat-raised-button
@@ -404,7 +384,7 @@
                           <mat-icon>delete</mat-icon>
                         </button>
                       </div>
-                      <div fxLayout="row" fxLayoutGap="20px">
+                      <div class="flex gap-5">
                         <mat-form-field class="width-300">
                           <mat-label i18n>Node ID</mat-label>
                           <mat-select [(ngModel)]="satisfyCriteria.nodeId" (ngModelChange)="save()">
@@ -442,7 +422,7 @@
                           </mat-select>
                         </mat-form-field>
                       </div>
-                      <div fxLayout="row" fxLayoutGap="20px">
+                      <div class="flex gap-5">
                         <mat-form-field class="width-300">
                           <mat-label i18n>Function</mat-label>
                           <mat-select
@@ -469,7 +449,7 @@
                           />
                         </mat-form-field>
                       </div>
-                      <div fxLayout="row" fxLayoutGap="20px">
+                      <div class="flex gap-5">
                         <mat-form-field class="width-200">
                           <mat-label i18n>Type</mat-label>
                           <input

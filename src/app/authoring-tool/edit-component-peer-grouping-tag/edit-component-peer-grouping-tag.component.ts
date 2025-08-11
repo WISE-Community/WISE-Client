@@ -3,12 +3,12 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
 import { SelectPeerGroupingAuthoringComponent } from '../../../assets/wise5/authoringTool/peer-grouping/select-peer-grouping-authoring/select-peer-grouping-authoring.component';
 
 @Component({
+  imports: [SelectPeerGroupingAuthoringComponent],
   selector: 'edit-component-peer-grouping-tag',
   template: `<select-peer-grouping-authoring
     [tag]="componentContent.peerGroupingTag"
     (tagChanged)="peerGroupingTagChanged($event)"
-  />`,
-  imports: [SelectPeerGroupingAuthoringComponent]
+  />`
 })
 export class EditComponentPeerGroupingTagComponent {
   @Input() componentContent: any;

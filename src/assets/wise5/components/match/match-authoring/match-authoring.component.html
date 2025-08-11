@@ -56,7 +56,7 @@
     track choice.id;
     let choiceIndex = $index, isFirst = $first, isLast = $last
   ) {
-    <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="flex justify-start items-center">
       <translatable-input
         [content]="choice"
         key="value"
@@ -143,7 +143,7 @@
     track bucket.id;
     let bucketIndex = $index, isFirst = $first, isLast = $last
   ) {
-    <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="flex justify-start items-center">
       <translatable-input
         [content]="bucket"
         key="value"
@@ -216,7 +216,7 @@
       @for (choiceFeedback of bucketFeedback.choices; track $index) {
         <div class="choice-feedback-container notice-bg-bg">
           <span i18n> Choice: {{ getChoiceTextById(choiceFeedback.choiceId) }} </span>
-          <div fxLayout="row">
+          <div class="flex">
             <translatable-input
               [content]="choiceFeedback"
               key="feedback"
@@ -236,7 +236,7 @@
             </mat-checkbox>
           </div>
           @if (componentContent.ordered && choiceFeedback.isCorrect) {
-            <div fxLayout="row" fxLayoutAlign="start start">
+            <div class="flex justify-start items-start">
               <mat-form-field class="position">
                 <mat-label i18n>Position</mat-label>
                 <input

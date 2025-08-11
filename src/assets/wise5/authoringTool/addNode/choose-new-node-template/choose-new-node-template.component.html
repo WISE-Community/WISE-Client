@@ -1,15 +1,21 @@
 <h5 i18n>Start from scratch, import from another unit, or choose a step template:</h5>
-<div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutAlign.gt-sm="start">
+<div class="flex flex-wrap justify-center md:justify-start">
   @for (template of templates; track template.route) {
     <mat-card appearance="outlined">
       <mat-card-title>
         <h6 class="center">{{ template.label }}</h6>
       </mat-card-title>
-      <mat-card-content fxLayoutAlign="center center">
+      <mat-card-content class="center">
         <mat-icon class="mat-48 text">{{ template.icon }}</mat-icon>
       </mat-card-content>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="start center">
-        <button mat-flat-button color="primary" (click)="chooseTemplate(template)" fxFlex i18n>
+      <mat-card-actions>
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="chooseTemplate(template)"
+          class="w-full"
+          i18n
+        >
           Select
         </button>
       </mat-card-actions>

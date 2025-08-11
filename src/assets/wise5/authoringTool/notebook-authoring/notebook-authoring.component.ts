@@ -7,7 +7,6 @@ import { copy } from '../../common/object/object';
 import { newProjectTemplate } from '../new-project-template';
 import { CommonModule } from '@angular/common';
 import { TranslatableInputComponent } from '../components/translatable-input/translatable-input.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { WiseAuthoringTinymceEditorComponent } from '../../directives/wise-tinym
     CdkTextareaAutosize,
     CommonModule,
     FormsModule,
-    FlexLayoutModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,

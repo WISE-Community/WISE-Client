@@ -9,31 +9,29 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { AbstractImportStepComponent } from '../../../../assets/wise5/authoringTool/addNode/abstract-import-step/abstract-import-step.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    imports: [
-        CommonModule,
-        FormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatDividerModule,
-        MatIconModule,
-        MatProgressBarModule,
-        MatTooltipModule,
-        RouterModule
-    ],
-    selector: 'choose-import-step',
-    styleUrls: ['choose-import-step.component.scss', '../../add-content.scss'],
-    templateUrl: 'choose-import-step.component.html'
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    RouterModule
+  ],
+  selector: 'choose-import-step',
+  styleUrls: ['choose-import-step.component.scss', '../../add-content.scss'],
+  templateUrl: 'choose-import-step.component.html'
 })
 export class ChooseImportStepComponent extends AbstractImportStepComponent {
   protected project: any;
   protected projectIdToOrder: any;
   private projectItems: any[] = [];
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.projectService.retrieveProjectById(this.importProjectId).then((projectJSON) => {
       this.project = projectJSON;

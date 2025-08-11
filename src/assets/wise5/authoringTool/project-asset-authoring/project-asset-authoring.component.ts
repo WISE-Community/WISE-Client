@@ -9,7 +9,6 @@ import { AssetChooserDialogData } from './asset-chooser-dialog-data';
 import { CommonModule } from '@angular/common';
 import { DragAndDropModule } from '../../common/drag-and-drop/drag-and-drop.module';
 import { FileSizePipe } from '../file-size/filesize.pipe';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,7 +21,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     CommonModule,
     DragAndDropModule,
     FileSizePipe,
-    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,

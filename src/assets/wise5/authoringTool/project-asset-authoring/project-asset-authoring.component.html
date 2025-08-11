@@ -55,12 +55,9 @@
             *ngIf="
               allowedFileTypes.includes('any') || allowedFileTypes.includes(assetItem.fileType)
             "
-            class="asset-item cursor-pointer"
+            class="asset-item cursor-pointer flex justify-start items-center gap-2"
             (mouseover)="previewAsset(assetItem)"
             [ngStyle]="{ 'background-color': selectedAssetItem === assetItem ? 'yellow' : '' }"
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            fxLayoutGap="10px"
           >
             <button mat-stroked-button *ngIf="isPopup" (click)="chooseAsset(assetItem)" i18n>
               Choose
@@ -69,7 +66,7 @@
             <span *ngIf="!assetItem.used">
               <span class="red" i18n>(Not Used)</span>
             </span>
-            <div fxFlex></div>
+            <div class="flex-grow"></div>
             <button
               class="enable-in-translation"
               mat-icon-button

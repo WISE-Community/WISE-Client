@@ -1,5 +1,5 @@
 <h5 i18n>Start from scratch or choose a Lesson Structure*:</h5>
-<div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutAlign.gt-sm="start">
+<div class="flex flex-row flex-wrap justify-center items-center md:justify-start">
   @for (template of templates; track template.route) {
     <mat-card appearance="outlined">
       <mat-card-title>
@@ -7,11 +7,17 @@
           <strong>{{ template.label }}</strong>
         </h6>
       </mat-card-title>
-      <mat-card-content fxLayoutAlign="center center">
+      <mat-card-content class="center">
         <mat-icon>{{ template.icon }}</mat-icon>
       </mat-card-content>
-      <mat-card-actions fxLayout="column" fxLayoutAlign="start">
-        <button mat-flat-button color="primary" (click)="chooseTemplate(template)" i18n>
+      <mat-card-actions>
+        <button
+          mat-flat-button
+          color="primary"
+          class="w-full"
+          (click)="chooseTemplate(template)"
+          i18n
+        >
           Select
         </button>
       </mat-card-actions>

@@ -1,10 +1,9 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProjectAssetAuthoringComponent } from './project-asset-authoring.component';
-import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ConfigService } from '../../services/configService';
+import { ProjectAssetAuthoringComponent } from './project-asset-authoring.component';
 
 describe('ProjectAssetAuthoringComponent', () => {
   let component: ProjectAssetAuthoringComponent;
@@ -12,12 +11,8 @@ describe('ProjectAssetAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        StudentTeacherCommonServicesModule,
-        ProjectAssetAuthoringComponent
-      ],
-      providers: [ConfigService, ProjectAssetService, provideHttpClient(withInterceptorsFromDi())]
+      imports: [StudentTeacherCommonServicesModule, ProjectAssetAuthoringComponent],
+      providers: [ConfigService, ProjectAssetService, provideHttpClient()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectAssetAuthoringComponent);

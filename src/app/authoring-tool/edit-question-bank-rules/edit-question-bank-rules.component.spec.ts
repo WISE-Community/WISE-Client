@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockProvider } from 'ng-mocks';
+import { Question } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/Question';
 import { QuestionBankRule } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/QuestionBankRule';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditQuestionBankRulesComponent } from './edit-question-bank-rules.component';
-import { Question } from '../../../assets/wise5/components/peerChat/peer-chat-question-bank/Question';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: EditQuestionBankRulesComponent;
 let fixture: ComponentFixture<EditQuestionBankRulesComponent>;
@@ -13,8 +12,8 @@ let nodeChangedSpy: jasmine.Spy;
 describe('EditQuestionBankRulesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StudentTeacherCommonServicesModule, EditQuestionBankRulesComponent],
-      providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi())]
+      imports: [EditQuestionBankRulesComponent],
+      providers: [MockProvider(TeacherProjectService)]
     }).compileComponents();
     projectService = TestBed.inject(TeacherProjectService);
     nodeChangedSpy = spyOn(projectService, 'nodeChanged');

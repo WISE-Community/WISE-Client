@@ -57,7 +57,7 @@ export class EditFeedbackRulesComponent implements OnInit {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 

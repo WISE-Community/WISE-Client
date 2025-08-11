@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectBranchCriteriaComponent } from './select-branch-criteria.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SelectBranchCriteriaComponent', () => {
   let component: SelectBranchCriteriaComponent;
@@ -8,7 +7,7 @@ describe('SelectBranchCriteriaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, SelectBranchCriteriaComponent]
+      imports: [SelectBranchCriteriaComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SelectBranchCriteriaComponent);

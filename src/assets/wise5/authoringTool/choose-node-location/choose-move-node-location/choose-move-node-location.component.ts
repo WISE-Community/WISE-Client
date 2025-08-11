@@ -4,7 +4,6 @@ import { MoveNodesService } from '../../../services/moveNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ChooseNodeLocationComponent } from '../choose-node-location.component';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { InsertNodeInsideButtonComponent } from '../insert-node-inside-button/insert-node-inside-button.component';
 import { NodeIconAndTitleComponent } from '../node-icon-and-title/node-icon-and-title.component';
@@ -14,7 +13,6 @@ import { NodeWithMoveAfterButtonComponent } from '../node-with-move-after-button
 @Component({
   imports: [
     CommonModule,
-    FlexLayoutModule,
     InsertNodeAfterButtonComponent,
     InsertNodeInsideButtonComponent,
     MatButtonModule,

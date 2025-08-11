@@ -1,5 +1,5 @@
 <h5 i18n>Choose the step(s) that you want to import, then select Submit.</h5>
-<p fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+<p class="flex flex-wrap justify-start items-center gap-2">
   <strong i18n>Selected unit: {{ project?.metadata.title }}</strong>
   <button
     mat-raised-button
@@ -23,7 +23,7 @@
       <h6>{{ item.stepNumber }}: {{ item.node.title }}</h6>
     }
     @if (item.order != 0 && item.node.type != 'group') {
-      <div fxLayout="row wrap" fxLayoutGap="8px">
+      <div class="flex flex-wrap gap-2">
         <mat-checkbox name="item" ngDefaultControl [(ngModel)]="item.checked">
           <span class="step-title">{{ item.stepNumber }}: {{ item.node.title }}</span>
         </mat-checkbox>
@@ -46,7 +46,7 @@
 }
 <div class="nav-controls">
   <mat-divider />
-  <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="end center">
+  <div class="flex justify-end items-center gap-4">
     <button
       mat-button
       color="primary"
@@ -58,7 +58,7 @@
     >
       Back
     </button>
-    <span fxFlex></span>
+    <span class="flex grow"></span>
     <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
     <button
       mat-raised-button
