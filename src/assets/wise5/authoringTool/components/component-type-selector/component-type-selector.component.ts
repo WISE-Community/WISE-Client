@@ -5,17 +5,9 @@ import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule
-  ],
+  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatSelectModule],
   selector: 'component-type-selector',
   templateUrl: './component-type-selector.component.html'
 })

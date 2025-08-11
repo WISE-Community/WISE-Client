@@ -1,12 +1,9 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Constraint } from '../../../../../app/domain/constraint';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditConstraintRemovalCriteriaComponent } from './edit-constraint-removal-criteria.component';
-import { ComponentContent } from '../../../common/ComponentContent';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
 
 let component: EditConstraintRemovalCriteriaComponent;
 const componentId1: string = 'component1';
@@ -23,28 +20,21 @@ const nodeId1: string = 'node1';
 const nodeId2: string = 'node2';
 const nodeId3: string = 'node3';
 let removalCriteria: any;
-
 describe('EditConstraintRemovalCriteriaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        EditConstraintRemovalCriteriaComponent,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
+      imports: [EditConstraintRemovalCriteriaComponent],
+      providers: [MockProvider(TeacherProjectService)]
     }).compileComponents();
 
-    spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
+    const projectService = TestBed.inject(TeacherProjectService);
+    spyOn(projectService, 'getComponents').and.returnValue([]);
+    spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue([
       nodeId1,
       nodeId2,
       nodeId3
     ]);
-    TestBed.inject(TeacherProjectService).idToNode = {
+    projectService.idToNode = {
       node1: createNode(nodeId1, [
         createComponent(componentId1, componentTypeMultipleChoice),
         createComponent(componentId2, componentTypeOpenResponse),

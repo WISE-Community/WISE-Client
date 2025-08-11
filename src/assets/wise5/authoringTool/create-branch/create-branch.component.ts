@@ -6,7 +6,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 import { CreateBranchPathsComponent } from '../create-branch-paths/create-branch-paths.component';
@@ -21,26 +20,25 @@ import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-    imports: [
-        CreateBranchPathsComponent,
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        RouterModule,
-        SelectBranchCriteriaComponent,
-        SelectComponentComponent,
-        SelectMergeStepComponent,
-        SelectPathCountComponent,
-        SelectStepComponent
-    ],
-    styleUrl: './create-branch.component.scss',
-    templateUrl: './create-branch.component.html'
+  imports: [
+    CreateBranchPathsComponent,
+    CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    RouterModule,
+    SelectBranchCriteriaComponent,
+    SelectComponentComponent,
+    SelectMergeStepComponent,
+    SelectPathCountComponent,
+    SelectStepComponent
+  ],
+  styles: ['create-branch-paths, select-merge-step { margin-bottom: 16px; } '],
+  templateUrl: './create-branch.component.html'
 })
 export class CreateBranchComponent extends AbstractBranchAuthoringComponent {
   constructor(

@@ -2,8 +2,8 @@
   <ng-container formArrayName="paths">
     @for (path of branchPaths; track path; let index = $index) {
       <div class="path">
-        <div fxLayoutAlign="space-between center" fxLayoutGap="8px">
-          <div fxLayoutAlign="center center" fxLayoutGap="8px">
+        <div class="flex justify-between items-center gap-2">
+          <div class="flex justify-center items-center gap-2">
             <span class="strong" i18n>Path {{ index + 1 }}</span>
             @if (criteria === SCORE_VALUE) {
               <mat-form-field class="form-field-no-hint">

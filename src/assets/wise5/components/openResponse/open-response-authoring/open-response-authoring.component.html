@@ -1,16 +1,14 @@
-<div class="openResponse" flex>
-  @if (!componentContent.showPreviousWork) {
-    <div>
-      <mat-icon
-        matTooltip="If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML component above this"
-        matTooltipPosition="right"
-        i18n-matTooltip
-        >announcement</mat-icon
-      >
-      <edit-component-prompt
-        [componentContent]="componentContent"
-        (promptChangedEvent)="promptChanged($event)"
-      />
-    </div>
-  }
-</div>
+@if (!componentContent.showPreviousWork) {
+  <div>
+    <mat-icon
+      matTooltip="If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML component above this"
+      matTooltipPosition="right"
+      i18n-matTooltip
+      >announcement</mat-icon
+    >
+    <edit-component-prompt
+      [componentContent]="componentContent"
+      (promptChangedEvent)="promptChanged($event)"
+    />
+  </div>
+}

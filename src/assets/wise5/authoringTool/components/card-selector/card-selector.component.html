@@ -1,6 +1,6 @@
-<div fxLayout="row wrap" fxLayout.xs="column" class="item-cards-container gray-lighter-bg">
+<div class="item-cards-container gray-lighter-bg flex flex-wrap">
   @for (item of items; track item.id) {
-    <div fxFlex.sm="50" fxFlex.md="33" fxFlex.gt-md="25">
+    <div>
       <mat-card
         appearance="outlined"
         class="item-card"
@@ -10,12 +10,7 @@
           {{ item.title }}
         </mat-card-title>
         <div class="item-card-image" style="background-image: url('{{ item.thumbnail }}');"></div>
-        <mat-card-actions
-          class="item-card-actions"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          fxLayoutGap="10px"
-        >
+        <mat-card-actions class="item-card-actions flex justify-start items-center gap-2">
           @if (isItemSelected(item)) {
             <mat-icon class="success" aria-label="Selected" i18n-aria-label>
               check_circle
@@ -38,7 +33,7 @@
     </div>
   }
   @if (items.length < 1) {
-    <div fxLayout="row" fxLayoutAlign="center start" class="no-results-message-container">
+    <div class="no-results-message-container flex justify-center items-start">
       <span i18n>No results found</span>
     </div>
   }

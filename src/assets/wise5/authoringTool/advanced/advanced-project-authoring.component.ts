@@ -1,28 +1,26 @@
-import { ConfigService } from '../../services/configService';
-import { TeacherProjectService } from '../../services/teacherProjectService';
-import { NotificationService } from '../../services/notificationService';
-import { Component } from '@angular/core';
-import { isValidJSONString } from '../../common/string/string';
-import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../project-asset-authoring/asset-chooser';
-import { filter } from 'rxjs/operators';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { filter } from 'rxjs/operators';
+import { isValidJSONString } from '../../common/string/string';
+import { ConfigService } from '../../services/configService';
+import { NotificationService } from '../../services/notificationService';
+import { TeacherProjectService } from '../../services/teacherProjectService';
+import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 import { RubricAuthoringComponent } from '../rubric/rubric-authoring.component';
 
 @Component({
   imports: [
     CdkTextareaAutosize,
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -62,7 +60,7 @@ export class AdvancedProjectAuthoringComponent {
     this.projectId = this.configService.getProjectId();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setProjectScriptFilename();
   }
 

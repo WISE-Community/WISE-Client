@@ -9,7 +9,7 @@
     <ng-container formArrayName="paths">
       @for (formControl of pathsFormArray.controls; track formControl; let index = $index) {
         <div class="path">
-          <div fxLayoutAlign="start center" fxLayoutGap="8px">
+          <div class="flex justify-start items-center gap-2">
             <span class="strong" i18n>Path {{ index + 1 }}</span>
             @if (criteria === SCORE_VALUE) {
               <mat-form-field class="form-field-no-hint">

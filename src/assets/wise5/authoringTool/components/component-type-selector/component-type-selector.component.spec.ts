@@ -1,31 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentTypeSelectorComponent } from './component-type-selector.component';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentTypeSelectorHarness } from './component-type-selector.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
+import { provideHttpClient } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserService } from '../../../../../app/services/user.service';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { ConfigService } from '../../../services/configService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ComponentTypeSelectorComponent } from './component-type-selector.component';
+import { ComponentTypeSelectorHarness } from './component-type-selector.harness';
 
 let component: ComponentTypeSelectorComponent;
 let componentTypeSelectorHarness: ComponentTypeSelectorHarness;
 let configService: ConfigService;
 let fixture: ComponentFixture<ComponentTypeSelectorComponent>;
 let userService: UserService;
-
 describe('ComponentTypeSelectorComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserAnimationsModule,
         ComponentTypeSelectorComponent,
         ComponentTypeServiceModule,
         StudentTeacherCommonServicesModule
       ],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(ComponentTypeSelectorComponent);
     configService = TestBed.inject(ConfigService);

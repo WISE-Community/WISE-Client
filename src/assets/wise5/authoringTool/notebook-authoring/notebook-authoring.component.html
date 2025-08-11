@@ -34,7 +34,7 @@
     </mat-slide-toggle>
   </div>
   <div *ngIf="project.notebook.itemTypes.note.enabled" class="notebook-child-div">
-    <div fxLayout="row wrap" fxLayoutGap="20px">
+    <div class="flex flex-wrap gap-5">
       <translatable-input
         [content]="project.notebook.itemTypes.note.label"
         key="singular"
@@ -107,7 +107,7 @@
     Enable Report
   </mat-slide-toggle>
   <div *ngIf="project.notebook.itemTypes.report.enabled" class="notebook-child-div">
-    <div fxLayout="row wrap" fxLayoutGap="20px">
+    <div class="flex flex-wrap gap-5">
       <translatable-input
         [content]="project.notebook.itemTypes.report.label"
         key="singular"
@@ -208,7 +208,7 @@
     Enable Report
   </mat-slide-toggle>
   <div *ngIf="project.teacherNotebook.itemTypes.report.enabled" class="notebook-child-div">
-    <div fxLayoutGap="20px">
+    <div class="flex gap-5">
       <mat-form-field>
         <mat-label i18n>Label (Singular)</mat-label>
         <input
