@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { NotifyAuthorService } from '../../services/notifyAuthorService';
 import { RouterModule } from '@angular/router';
+import { NotifyAuthorService } from '../../services/notifyAuthorService';
 import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [ConcurrentAuthorsMessageComponent, FlexLayoutModule, RouterModule],
+  imports: [ConcurrentAuthorsMessageComponent, RouterModule],
   styleUrl: './project-authoring-parent.component.scss',
   templateUrl: './project-authoring-parent.component.html'
 })

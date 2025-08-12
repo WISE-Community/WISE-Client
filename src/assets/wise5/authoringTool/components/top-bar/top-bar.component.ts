@@ -11,7 +11,6 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { NotifyAuthorService } from '../../../services/notifyAuthorService';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { ProjectLanguageChooserComponent } from '../../../../../app/common/project-language-chooser/project-language-chooser.component';
@@ -21,7 +20,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 @Component({
   imports: [
     CommonModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,

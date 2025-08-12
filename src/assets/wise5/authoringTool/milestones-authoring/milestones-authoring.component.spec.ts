@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MilestonesAuthoringComponent } from './milestones-authoring.component';
-import { TeacherProjectService } from '../../services/teacherProjectService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MockProvider } from 'ng-mocks';
+import { TeacherProjectService } from '../../services/teacherProjectService';
+import { MilestonesAuthoringComponent } from './milestones-authoring.component';
 
 describe('MilestonesAuthoringComponent', () => {
   let component: MilestonesAuthoringComponent;
@@ -11,7 +10,7 @@ describe('MilestonesAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MilestonesAuthoringComponent],
-      providers: [MockProvider(TeacherProjectService), provideHttpClient(withInterceptorsFromDi())]
+      providers: [MockProvider(TeacherProjectService)]
     }).compileComponents();
 
     TestBed.inject(TeacherProjectService).project = {};

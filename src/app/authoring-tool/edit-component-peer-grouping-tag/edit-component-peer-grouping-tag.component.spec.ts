@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
-import { EditComponentPeerGroupingTagComponent } from './edit-component-peer-grouping-tag.component';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { SelectPeerGroupingAuthoringComponent } from '../../../assets/wise5/authoringTool/peer-grouping/select-peer-grouping-authoring/select-peer-grouping-authoring.component';
 import { PeerGroupingAuthoringService } from '../../../assets/wise5/services/peerGroupingAuthoringService';
+import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { PeerGrouping } from '../../domain/peerGrouping';
-import { provideHttpClient } from '@angular/common/http';
-import { MockProvider } from 'ng-mocks';
+import { EditComponentPeerGroupingTagComponent } from './edit-component-peer-grouping-tag.component';
 
 let component: EditComponentPeerGroupingTagComponent;
 let fixture: ComponentFixture<EditComponentPeerGroupingTagComponent>;
@@ -15,12 +14,11 @@ const tag2: string = 'tag2';
 describe('EditComponentPeerGroupingTagComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StudentTeacherCommonServicesModule, EditComponentPeerGroupingTagComponent],
-      providers: [
-        PeerGroupingAuthoringService,
-        MockProvider(TeacherProjectService),
-        provideHttpClient()
-      ]
+      imports: [
+        EditComponentPeerGroupingTagComponent,
+        MockComponent(SelectPeerGroupingAuthoringComponent)
+      ],
+      providers: [MockProviders(PeerGroupingAuthoringService, TeacherProjectService)]
     }).compileComponents();
   });
 

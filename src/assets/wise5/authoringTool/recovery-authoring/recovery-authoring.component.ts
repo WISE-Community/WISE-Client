@@ -7,7 +7,6 @@ import { isValidJSONString } from '../../common/string/string';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
@@ -17,7 +16,6 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     CdkTextareaAutosize,
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,

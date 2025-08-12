@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { MockComponent, MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
+import { NotificationService } from '../../../../services/notificationService';
 import { AuthoringToolBarComponent } from './authoring-tool-bar.component';
-import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { SaveIndicatorComponent } from '../../../../common/save-indicator/save-indicator.component';
 
 describe('AuthoringToolBarComponent', () => {
   let component: AuthoringToolBarComponent;
@@ -9,8 +12,14 @@ describe('AuthoringToolBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthoringToolBarComponent, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(withInterceptorsFromDi())]
+      imports: [AuthoringToolBarComponent, MockComponent(SaveIndicatorComponent)],
+      providers: [
+        MockProvider(NotificationService, {
+          setGlobalMessage$: of({}),
+          setIsJSONValid$: of({})
+        }),
+        provideRouter([])
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthoringToolBarComponent);

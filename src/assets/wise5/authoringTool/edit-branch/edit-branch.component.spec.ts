@@ -1,13 +1,12 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditBranchComponent } from './edit-branch.component';
-import { TeacherProjectService } from '../../services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { provideRouter } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
 import { Branch } from '../../../../app/domain/branch';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeleteBranchService } from '../../services/deleteBranchService';
 import { EditBranchService } from '../../services/editBranchService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TeacherProjectService } from '../../services/teacherProjectService';
+import { EditBranchComponent } from './edit-branch.component';
 
 let projectService: TeacherProjectService;
 describe('EditBranchComponent', () => {
@@ -16,13 +15,15 @@ describe('EditBranchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, EditBranchComponent, StudentTeacherCommonServicesModule],
+      imports: [EditBranchComponent],
       providers: [
         EditBranchService,
         DeleteBranchService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(),
         provideRouter([]),
-        TeacherProjectService
+        MockProvider(TeacherProjectService, {
+          idToOrder: {}
+        })
       ]
     }).compileComponents();
     window.history.pushState({ targetId: 'node1' }, '', '');
