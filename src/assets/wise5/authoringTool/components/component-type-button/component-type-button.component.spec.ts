@@ -3,7 +3,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentTypeButtonComponent } from './component-type-button.component';
 
-fdescribe('ComponentTypeButtonComponent', () => {
+describe('ComponentTypeButtonComponent', () => {
   let component: ComponentTypeButtonComponent;
   let fixture: ComponentFixture<ComponentTypeButtonComponent>;
 

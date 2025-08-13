@@ -7,7 +7,6 @@ import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/au
 import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 
 @Component({
-  selector: 'edit-embedded-advanced',
   templateUrl: 'edit-embedded-advanced.component.html',
   styles: ['.model-parameters { width: 100%; }'],
   imports: [

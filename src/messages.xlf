@@ -816,7 +816,7 @@
         <source>Advanced Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-advanced/edit-component-advanced.component.html</context>
-          <context context-type="linenumber">1,4</context>
+          <context context-type="linenumber">1,5</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
@@ -831,7 +831,7 @@
         <source> Close </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-advanced/edit-component-advanced.component.html</context>
-          <context context-type="linenumber">111,114</context>
+          <context context-type="linenumber">9,12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
@@ -17665,7 +17665,7 @@ Are you ready to receive feedback on this answer?</source>
 Rule Name: <x id="PH" equiv-text="ruleName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5561671044584768513" datatype="html">
@@ -17675,7 +17675,7 @@ Rule Name: <x id="PH" equiv-text="ruleName"/>
 Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6591302615932523578" datatype="html">
@@ -20369,7 +20369,7 @@ Warning: This will delete all existing choices in this component.</source>
         <source>Default feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2839735751687486837" datatype="html">
@@ -20380,7 +20380,7 @@ Score: <x id="PH" equiv-text="score"/>
 Feedback Text: <x id="PH_1" equiv-text="feedbackText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1461861786609911168" datatype="html">
@@ -20393,28 +20393,28 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/>
 Feedback Text: <x id="PH_2" equiv-text="feedbackText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="846244999760672149" datatype="html">
         <source>you got a score of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">214</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7599226289089492371" datatype="html">
         <source>Please talk to your teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">216</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5580639382077453513" datatype="html">
         <source>got a score of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">219</context>
+          <context context-type="linenumber">218</context>
         </context-group>
       </trans-unit>
       <trans-unit id="867656616658826137" datatype="html">
@@ -20425,21 +20425,21 @@ Previous Score: <x id="PH" equiv-text="previousScore"/>
 Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">233</context>
+          <context context-type="linenumber">232</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3689003016353565518" datatype="html">
         <source>Are you sure you want to delete the custom completion criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">267</context>
+          <context context-type="linenumber">266</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2986030604058491184" datatype="html">
         <source>Are you sure you want to delete this completion criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">299</context>
+          <context context-type="linenumber">298</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8648892006027324370" datatype="html">
@@ -21325,28 +21325,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to overwrite the existing table?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">224</context>
+          <context context-type="linenumber">223</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5497998297263821629" datatype="html">
         <source>Importing table...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">225</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4805591784714355993" datatype="html">
         <source>Error: The table contains more than <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> cells</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">233</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8522934403801176161" datatype="html">
         <source>Successfully imported table</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">237</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3206542606001340679" datatype="html">

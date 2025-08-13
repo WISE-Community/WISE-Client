@@ -21,7 +21,6 @@ import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedb
 import { OpenResponseContent } from '../OpenResponseContent';
 
 @Component({
-  selector: 'edit-open-response-advanced',
   styleUrl: 'edit-open-response-advanced.component.scss',
   templateUrl: 'edit-open-response-advanced.component.html',
   imports: [

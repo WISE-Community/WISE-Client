@@ -16,7 +16,6 @@ import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/e
 import { EditDrawConnectedComponentsComponent } from '../edit-draw-connected-components/edit-draw-connected-components.component';
 
 @Component({
-  selector: 'edit-draw-advanced',
   templateUrl: 'edit-draw-advanced.component.html',
   imports: [
     NgIf,
