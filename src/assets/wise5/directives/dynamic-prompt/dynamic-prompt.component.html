@@ -1,11 +1,9 @@
-<div
-  *ngIf="dynamicPrompt.prePrompt !== ''"
-  [innerHTML]="dynamicPrompt.prePrompt"
-  class="prompt"
-></div>
-<div *ngIf="prompt !== ''" [innerHTML]="prompt" class="prompt"></div>
-<div
-  *ngIf="dynamicPrompt.postPrompt !== ''"
-  [innerHTML]="dynamicPrompt.postPrompt"
-  class="prompt"
-></div>
+@if (dynamicPrompt.prePrompt !== '') {
+  <div [innerHTML]="dynamicPrompt.prePrompt" class="prompt"></div>
+}
+@if (prompt !== '') {
+  <div [innerHTML]="prompt" class="prompt"></div>
+}
+@if (dynamicPrompt.postPrompt !== '') {
+  <div [innerHTML]="dynamicPrompt.postPrompt" class="prompt"></div>
+}
