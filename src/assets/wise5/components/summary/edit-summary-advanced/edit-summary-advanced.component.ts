@@ -14,7 +14,6 @@ import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/ed
     EditComponentConstraintsComponent,
     EditComponentJsonComponent
   ],
-  selector: 'edit-summary-advanced',
   template: `
     <div class="flex flex-col">
       <edit-component-width [componentContent]="componentContent" />

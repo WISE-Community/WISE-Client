@@ -18,7 +18,6 @@ import { EditComponentConstraintsComponent } from '../../../../../app/authoring-
 import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
 
 @Component({
-  selector: 'edit-match-advanced',
   templateUrl: 'edit-match-advanced.component.html',
   styles: ['.checkbox { margin-top: 4px; margin-bottom: 4px; }'],
   imports: [

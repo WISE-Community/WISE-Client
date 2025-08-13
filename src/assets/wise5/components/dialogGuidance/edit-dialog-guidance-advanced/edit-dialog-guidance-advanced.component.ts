@@ -7,7 +7,6 @@ import { EditCRaterInfoComponent } from '../../common/cRater/edit-crater-info/ed
 
 @Component({
   imports: [EditComponentConstraintsComponent, EditComponentJsonComponent, EditCRaterInfoComponent],
-  selector: 'edit-dialog-guidance-advanced',
   template: `<edit-component-constraints [componentContent]="component.content" />
     <edit-component-json [component]="component" />
     <edit-crater-info [cRaterRubric]="cRaterRubric" />`

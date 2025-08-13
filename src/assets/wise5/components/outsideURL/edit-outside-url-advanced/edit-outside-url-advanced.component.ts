@@ -12,7 +12,6 @@ import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/ed
     EditComponentConstraintsComponent,
     EditComponentJsonComponent
   ],
-  selector: 'edit-outside-url-advanced',
   template: `<edit-component-width [componentContent]="componentContent" />
     <edit-component-rubric [componentContent]="componentContent" />
     <edit-component-constraints [componentContent]="component.content" />

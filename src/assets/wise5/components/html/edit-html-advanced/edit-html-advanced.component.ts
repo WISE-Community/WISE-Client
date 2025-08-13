@@ -12,7 +12,6 @@ import { EditComponentRubricComponent } from '../../../../../app/authoring-tool/
     EditComponentRubricComponent,
     EditComponentWidthComponent
   ],
-  selector: 'edit-html-advanced',
   template: `<edit-component-width [componentContent]="componentContent" />
     <edit-component-rubric [componentContent]="componentContent" />
     <edit-component-constraints [componentContent]="component.content" />
