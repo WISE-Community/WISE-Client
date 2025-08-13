@@ -28,7 +28,6 @@ import { EditTableConnectedComponentsComponent } from '../edit-table-connected-c
 import { TableContent } from '../TableContent';
 
 @Component({
-  selector: 'edit-table-advanced',
   templateUrl: 'edit-table-advanced.component.html',
   styleUrl: 'edit-table-advanced.component.scss',
   imports: [

@@ -26,7 +26,6 @@ import { EditGraphConnectedComponentsComponent } from '../edit-graph-connected-c
 import { GraphContent } from '../GraphContent';
 
 @Component({
-  selector: 'edit-graph-advanced',
   templateUrl: 'edit-graph-advanced.component.html',
   styleUrl: 'edit-graph-advanced.component.scss',
   imports: [

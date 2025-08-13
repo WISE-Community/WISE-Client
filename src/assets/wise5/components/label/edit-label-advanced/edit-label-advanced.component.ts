@@ -16,7 +16,6 @@ import { EditComponentConstraintsComponent } from '../../../../../app/authoring-
 import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
 
 @Component({
-  selector: 'edit-label-advanced',
   templateUrl: 'edit-label-advanced.component.html',
   imports: [
     NgIf,

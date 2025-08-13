@@ -10,4 +10,4 @@ import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/ed
     <edit-component-json [component]="component" />
   `
 })
-export class EditPeerChatAdvancedComponentComponent extends EditAdvancedComponentComponent {}
+export class EditShowGroupWorkAdvancedComponent extends EditAdvancedComponentComponent {}

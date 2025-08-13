@@ -4,7 +4,6 @@ import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/e
 
 @Component({
   imports: [EditCommonAdvancedComponent],
-  selector: 'edit-animation-advanced',
   template: `<edit-common-advanced
     [component]="component"
     [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"

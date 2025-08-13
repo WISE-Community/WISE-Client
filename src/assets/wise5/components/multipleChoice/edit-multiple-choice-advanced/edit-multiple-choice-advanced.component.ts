@@ -17,7 +17,6 @@ import { EditMultipleChoiceConnectedComponentsComponent } from '../edit-multiple
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
 
 @Component({
-  selector: 'edit-multiple-choice-advanced',
   templateUrl: 'edit-multiple-choice-advanced.component.html',
   styles: ['.show-feedback-checkbox { margin-top: 4px; margin-bottom: 4px; }'],
   imports: [

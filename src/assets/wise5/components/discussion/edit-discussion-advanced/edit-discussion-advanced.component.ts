@@ -11,7 +11,6 @@ import { EditComponentConstraintsComponent } from '../../../../../app/authoring-
 import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
 
 @Component({
-  selector: 'edit-discussion-advanced',
   templateUrl: 'edit-discussion-advanced.component.html',
   imports: [
     FlexModule,

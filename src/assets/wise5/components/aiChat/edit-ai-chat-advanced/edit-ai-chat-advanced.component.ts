@@ -9,7 +9,6 @@ import { EditConnectedComponentsComponent } from '../../../../../app/authoring-t
 import { AiChatContent } from '../AiChatContent';
 
 @Component({
-  selector: 'edit-ai-chat-advanced',
   templateUrl: './edit-ai-chat-advanced.component.html',
   imports: [
     MatFormFieldModule,
