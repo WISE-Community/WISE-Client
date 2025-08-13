@@ -5,10 +5,21 @@ import { CommonModule } from '@angular/common';
 import { DynamicPromptComponent } from '../dynamic-prompt/dynamic-prompt.component';
 
 @Component({
-    imports: [CommonModule, DynamicPromptComponent],
-    selector: 'prompt',
-    styleUrl: './prompt.component.scss',
-    templateUrl: './prompt.component.html'
+  imports: [CommonModule, DynamicPromptComponent],
+  selector: 'prompt',
+  styles: ['.prompt { font-weight: 500; }'],
+  template: `
+    @if (!dynamicPrompt?.enabled) {
+      <div [innerHTML]="prompt" class="prompt"></div>
+    } @else {
+      <dynamic-prompt
+        [nodeId]="nodeId"
+        [componentId]="componentId"
+        [dynamicPrompt]="dynamicPrompt"
+        (dynamicPromptChanged)="onDynamicPromptChanged($event)"
+      />
+    }
+  `
 })
 export class PromptComponent {
   @Input() componentId: string;
