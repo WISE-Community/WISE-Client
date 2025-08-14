@@ -1,4 +1,4 @@
-<component-header [component]="component"></component-header>
+<component-header [component]="component" />
 <div class="interaction-div flex flex-row flex-wrap items-center">
   @if (oscillatorTypes.length > 1) {
     <mat-form-field class="oscillator-type">
@@ -78,8 +78,7 @@
   [isSubmitDirty]="isSubmitDirty"
   (saveButtonClicked)="saveButtonClicked($event)"
   (submitButtonClicked)="submitButtonClicked($event)"
->
-</component-save-submit-buttons>
+/>
 <component-annotations
   *ngIf="mode === 'student'"
   [annotations]="latestAnnotations"

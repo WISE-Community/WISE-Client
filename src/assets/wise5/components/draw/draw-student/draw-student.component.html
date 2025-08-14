@@ -1,4 +1,4 @@
-<component-header [component]="component"></component-header>
+<component-header [component]="component" />
 <div class="component__actions buttons-div flex flex-row flex-wrap">
   @if (showCopyPublicNotebookItemButton) {
     <button
@@ -57,8 +57,7 @@
     [isSubmitDirty]="isSubmitDirty"
     (saveButtonClicked)="saveButtonClicked($event)"
     (submitButtonClicked)="submitButtonClicked($event)"
-  >
-  </component-save-submit-buttons>
+  />
 }
 @if (mode === 'student') {
   <component-annotations

@@ -1,5 +1,5 @@
 <div class="main-div">
-  <component-header [component]="component"></component-header>
+  <component-header [component]="component" />
   <div class="main-concept-map-div">
     <div class="top-buttons flex flex-row">
       <button
@@ -127,8 +127,7 @@
     [isSubmitDirty]="isSubmitDirty"
     (saveButtonClicked)="saveButtonClicked($event)"
     (submitButtonClicked)="submitButtonClicked($event)"
-  >
-  </component-save-submit-buttons>
+  />
   <component-annotations
     *ngIf="mode === 'student'"
     [annotations]="latestAnnotations"
