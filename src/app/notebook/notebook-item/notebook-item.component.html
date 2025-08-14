@@ -22,15 +22,14 @@
     }
   </mat-card-content>
   <mat-card-actions
-    class="dark-theme"
+    class="dark-theme flex justify-start items-center"
     [ngClass]="{ 'has-action': canDelete || canRevive }"
     style="background-color: {{ color }}"
-    fxLayoutAlign="start center"
   >
-    <span class="location" fxLayoutAlign="start center">
+    <span class="location flex justify-start items-center">
       <mat-icon>place</mat-icon><span class="mat-body-2">{{ getItemNodePosition() }}</span>
     </span>
-    <span fxFlex></span>
+    <span class="flex-grow"></span>
     @if (canDelete) {
       <button
         mat-icon-button
