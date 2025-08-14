@@ -1798,7 +1798,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.html</context>
-          <context context-type="linenumber">14,17</context>
+          <context context-type="linenumber">12,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4457022169711512502" datatype="html">
@@ -10351,7 +10351,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5518546617377132298" datatype="html">
@@ -16123,7 +16123,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">60,61</context>
+          <context context-type="linenumber">59,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6162693758764653365" datatype="html">
@@ -17972,28 +17972,28 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Share with class...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">37,40</context>
+          <context context-type="linenumber">36,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6281284727431074654" datatype="html">
         <source>Remove file</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">67,70</context>
+          <context context-type="linenumber">66,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6029843669852625022" datatype="html">
         <source>Add picture</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">86,90</context>
+          <context context-type="linenumber">85,89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7138371398727152365" datatype="html">
         <source> Post </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">99,103</context>
+          <context context-type="linenumber">98,102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3210146777760299474" datatype="html">
@@ -21590,14 +21590,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Score: <x id="INTERPOLATION" equiv-text="{{ annotations.score.data.value }}"/><x id="INTERPOLATION_1" equiv-text="{{ maxScoreDisplay }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4887677208798229337" datatype="html">
         <source>Teacher Feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">187</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3542042671420335679" datatype="html">
