@@ -47,7 +47,6 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
   isShowOERs: boolean;
   allOpenEducationalResources: any[];
   filteredOpenEducationalResources: any[];
-  outsideURLIFrameId: string;
   subjects: any[] = [
     {
       value: 'Earth and Space Sciences',
@@ -84,7 +83,6 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    this.outsideURLIFrameId = 'outsideResource_' + this.componentId;
     this.isShowOERs = this.componentContent.url === '';
     this.searchText = '';
     this.selectedSubjects = [];
@@ -121,12 +119,6 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
 
   isResourceSelected(resourceUrl: string): boolean {
     return resourceUrl === this.componentContent.url;
-  }
-
-  reloadResource(): void {
-    const iframe: any = document.getElementById(this.outsideURLIFrameId);
-    iframe.src = '';
-    iframe.src = this.componentContent.url;
   }
 
   clearFilters(): void {

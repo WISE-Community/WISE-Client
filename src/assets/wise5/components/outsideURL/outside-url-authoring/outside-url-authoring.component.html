@@ -7,7 +7,7 @@
     (defaultLanguageTextChanged)="urlChange.next($event)"
   />
 </div>
-<div class="flex flex-row justify-start items-center gap-4">
+<div class="flex flex-row gap-4">
   <mat-form-field>
     <mat-label i18n>Width (px) (optional)</mat-label>
     <input
@@ -26,18 +26,6 @@
       (ngModelChange)="heightChange.next($event)"
     />
   </mat-form-field>
-  <span class="flex-grow"></span>
-  <button
-    mat-button
-    (click)="reloadResource()"
-    aria-label="Reload resource"
-    i18n-aria-label
-    matTooltip="Reload resource"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>refresh</mat-icon>
-  </button>
 </div>
 <mat-slide-toggle [(ngModel)]="isShowOERs" color="primary" class="show-oer-toggle" i18n>
   Show Open Education Resources
