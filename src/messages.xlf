@@ -533,7 +533,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">21,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component.html</context>
@@ -8866,7 +8866,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">15,19</context>
+          <context context-type="linenumber">17,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component.html</context>
@@ -9700,7 +9700,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">21,24</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
@@ -14024,21 +14024,21 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Move Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">2,4</context>
+          <context context-type="linenumber">2,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3710243714286758832" datatype="html">
         <source> Warning: Removing a student from a team will result in the student losing all the work they completed with that team. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">11,14</context>
+          <context context-type="linenumber">12,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5797597173758343019" datatype="html">
         <source>The student will adopt the work of their new team.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">14,17</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1736192593700313861" datatype="html">
