@@ -1,5 +1,9 @@
-<span class="gray-darker md-body-1 possible-score" *ngIf="maxScore > 0 && !hidePossibleScores">
-  ({{ maxScore }}
-  <span *ngIf="maxScore === 1" i18n>point</span>
-  <span *ngIf="maxScore > 1" i18n>points</span>)
-</span>
+@if (maxScore > 0 && !hidePossibleScores) {
+  <span class="gray-darker md-body-1 possible-score">
+    @if (maxScore === 1) {
+      (<span i18n>{{ maxScore }} point</span>)
+    } @else {
+      (<span i18n>{{ maxScore }} points</span>)
+    }
+  </span>
+}
