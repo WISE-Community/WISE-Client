@@ -1,9 +1,8 @@
 import { CommonModule, NgStyle } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ExtendedModule } from '@angular/flex-layout/extended';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardTitle } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -30,11 +29,10 @@ import { OutsideURLService } from '../outsideURLService';
     CommonModule,
     MatSlideToggle,
     FormsModule,
-    FlexModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInput,
-    MatButton,
     MatTooltip,
     MatIcon,
     MatCard,
