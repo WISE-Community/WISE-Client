@@ -15,6 +15,7 @@
       @if (questionBankContent != null) {
         <div class="flex-1 md:w-2/5 order-1 md:order-2">
           <peer-chat-question-bank
+            class="w-full"
             *ngIf="questionBankContent.questionBank?.enabled"
             [content]="questionBankContent"
             [(displayedQuestionBankRules)]="displayedQuestionBankRules"

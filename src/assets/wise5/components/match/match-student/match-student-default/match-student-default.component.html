@@ -51,11 +51,12 @@
   <div
     [ngClass]="[
       'w-full',
+      'flex',
+      'flex-col',
+      'items-stretch',
       componentContent.horizontal ? 'md:w-1/2' : 'md:w-full',
       componentContent.choicesAfter ? 'order-1' : 'order-2',
-      'flex',
-      componentContent.horizontal ? 'md:flex-col' : 'md:flex-row md:flex-wrap',
-      'items-stretch'
+      componentContent.horizontal ? '' : 'md:flex-row md:flex-wrap'
     ]"
   >
     @for (bucket of buckets.slice(1); track bucket.id) {
