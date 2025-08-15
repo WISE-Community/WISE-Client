@@ -23,6 +23,8 @@ import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CRaterPingService } from '../../../services/cRaterPingService';
 import { MockProvider } from 'ng-mocks';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 let component: OpenResponseStudent;
 const componentId = 'component1';
@@ -42,6 +44,8 @@ describe('OpenResponseStudent', () => {
         ComponentSaveSubmitButtonsComponent,
         FormsModule,
         MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
         MatIconModule,
         ReactiveFormsModule,
         StudentTeacherCommonServicesModule
