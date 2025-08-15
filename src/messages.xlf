@@ -5152,7 +5152,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/news/news.component.html</context>
-          <context context-type="linenumber">11,15</context>
+          <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7892371550594520571" datatype="html">
@@ -6748,7 +6748,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Show More</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/news/news.component.html</context>
-          <context context-type="linenumber">37,43</context>
+          <context context-type="linenumber">31,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
