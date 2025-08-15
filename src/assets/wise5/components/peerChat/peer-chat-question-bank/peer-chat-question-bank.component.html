@@ -1,10 +1,5 @@
 <mat-card appearance="outlined" class="mat-elevation-z0 primary-bg">
-  <div
-    class="dark-theme mat-subtitle-2"
-    fxLayout="row"
-    fxLayoutAlign="start center"
-    fxLayoutGap="4px"
-  >
+  <div class="dark-theme mat-subtitle-2 flex justify-start items-center gap-1">
     <mat-icon class="mat-30">help</mat-icon>
     <ng-container
       *ngIf="
@@ -12,7 +7,7 @@
         then customLabel;
         else defaultLabel
       "
-    ></ng-container>
+    />
     <ng-template #customLabel
       ><span>{{ content.questionBank.label }}</span></ng-template
     >
@@ -21,9 +16,7 @@
   <div class="questions app-bg-bg">
     <ul>
       <li *ngFor="let question of questions">
-        <ng-container
-          *ngIf="content.questionBank.version === 2; then version2; else version1"
-        ></ng-container>
+        <ng-container *ngIf="content.questionBank.version === 2; then version2; else version1" />
         <ng-template #version2>
           <ng-container
             *ngIf="
@@ -31,9 +24,9 @@
               then version2ClickToAdd;
               else version2Default
             "
-          ></ng-container>
+          />
           <ng-template #version2ClickToAdd>
-            <div fxLayoutAlign="start center" fxLayoutGap="8px">
+            <div class="flex justify-start items-center gap-2">
               <button
                 mat-stroked-button
                 class="question-button"

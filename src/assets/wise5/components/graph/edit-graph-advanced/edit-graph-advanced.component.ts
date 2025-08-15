@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -30,7 +29,6 @@ import { GraphContent } from '../GraphContent';
   styleUrl: 'edit-graph-advanced.component.scss',
   imports: [
     CommonModule,
-    FlexModule,
     TranslatableInputComponent,
     MatCheckbox,
     FormsModule,

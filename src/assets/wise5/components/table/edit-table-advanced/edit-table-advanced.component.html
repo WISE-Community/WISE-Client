@@ -1,4 +1,4 @@
-<div class="data-explorer-authoring" fxLayout="column" fxLayoutGap="10px">
+<div class="data-explorer-authoring flex flex-col gap-2">
   <div>
     <mat-checkbox
       color="primary"
@@ -9,8 +9,8 @@
       Enable Data Explorer
     </mat-checkbox>
   </div>
-  <div *ngIf="componentContent.isDataExplorerEnabled" fxLayout="column" fxLayoutGap="10px">
-    <div fxLayout="row wrap" fxLayoutGap="40px">
+  <div *ngIf="componentContent.isDataExplorerEnabled" class="flex flex-col gap-2">
+    <div class="flex flex-wrap gap-5">
       <span i18n>Allowed Graph Types:</span>
       <mat-checkbox
         color="primary"
@@ -71,7 +71,7 @@
         />
       </mat-form-field>
     </div>
-    <div *ngIf="componentContent.numDataExplorerYAxis > 1" fxLayout="column" fxLayoutGap="10px">
+    <div *ngIf="componentContent.numDataExplorerYAxis > 1" class="flex flex-col gap-2">
       <span i18n>Choose the Y Axis for each Series</span>
       <div
         *ngFor="
@@ -108,13 +108,8 @@
         Can Student Edit Axis Labels
       </mat-checkbox>
     </div>
-    <div fxLayoutGap="20px">
-      <div
-        class="fix-data-to-table-column-label"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        fxLayoutGap="10px"
-      >
+    <div class="gap-5">
+      <div class="fix-data-to-table-column-label flex justify-start items-center gap-2">
         <span i18n>Fix Data to Table Column</span>
         <mat-icon
           matTooltip="You can author x or y data to always use a specific table column. The student will not be able to change the table column for that x or y data. If you want the student to be able to choose the table column, you can leave the select option blank for that x or y data."
@@ -175,7 +170,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxLayoutGap="10px">
+    <div class="gap-2">
       <mat-form-field>
         <mat-label i18n>Tooltip Header Column</mat-label>
         <mat-select
@@ -204,12 +199,11 @@
     </div>
   </div>
 </div>
-<div fxLayout fxLayoutAlign="start center">
+<div class="flex justify-start items-center">
   <button
     mat-raised-button
     color="primary"
-    class="import-table-button"
-    fxLayoutAlign="center center"
+    class="import-table-button flex justify-center items-center"
   >
     <span i18n>Import Table</span>
     <input
@@ -256,7 +250,7 @@
   <edit-component-max-submit [componentContent]="componentContent" />
 }
 <edit-component-default-feedback [componentContent]="componentContent" />
-<div fxLayout="column" fxLayoutAlign="start start">
+<div class="flex flex-col justify-start items-start">
   <edit-component-max-score [componentContent]="componentContent" />
   <edit-component-exclude-from-total-score [componentContent]="componentContent" />
   <edit-component-width [componentContent]="componentContent" />

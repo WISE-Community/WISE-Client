@@ -26,11 +26,11 @@ import { copy } from '../../../common/object/object';
 import { TabulatorColumn } from '../TabulatorData';
 
 @Component({
-    selector: 'tabulator-table',
-    templateUrl: './tabulator-table.component.html',
-    styleUrls: ['./tabulator-table.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'tabulator-table',
+  template: `<div #table></div>`,
+  styleUrl: './tabulator-table.component.scss',
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   @Input() editableCells: any;

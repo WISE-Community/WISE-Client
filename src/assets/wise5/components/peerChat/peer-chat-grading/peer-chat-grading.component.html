@@ -1,31 +1,28 @@
-<ng-container *ngIf="isPeerChatWorkgroupsAvailable">
-  <div
-    *ngIf="dynamicPrompt != null"
-    [innerHTML]="dynamicPrompt.prompt"
-    class="dynamic-prompt"
-  ></div>
-  <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign.gt-md="start start" fxLayoutGap="16px">
+@if (isPeerChatWorkgroupsAvailable) {
+  @if (dynamicPrompt != null) {
+    <div [innerHTML]="dynamicPrompt.prompt" class="dynamic-prompt"></div>
+  }
+  <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+    @if (questionBankRules != null) {
+      <div class="flex lg:w-2/5 order-1 lg:order-2">
+        @if (componentContent.questionBank?.enabled) {
+          <peer-chat-question-bank
+            class="w-full"
+            [content]="componentContent"
+            [displayedQuestionBankRules]="questionBankRules"
+            [questionIdsUsed]="questionIdsUsed"
+          />
+        }
+      </div>
+    }
     <div
-      *ngIf="questionBankRules != null"
-      fxFlex
-      fxFlex.gt-md="40"
-      fxFlexOrder="1"
-      fxFlexOrder.gt-md="2"
-    >
-      <peer-chat-question-bank
-        *ngIf="componentContent.questionBank?.enabled"
-        [content]="componentContent"
-        [displayedQuestionBankRules]="questionBankRules"
-        [questionIdsUsed]="questionIdsUsed"
-      ></peer-chat-question-bank>
-    </div>
-    <div
-      fxFlex
-      [fxFlex.gt-md]="componentContent.questionBank.length > 0 ? 60 : 100"
-      fxFlexOrder="2"
-      fxFlexOrder.gt-md="1"
+      class="flex w-full order-2 lg:order-1"
+      [ngClass]="{
+        'lg:w-3/5': componentContent.questionBank?.enabled
+      }"
     >
       <peer-chat-chat-box
+        class="w-full"
         [messages]="peerChatMessages"
         [myWorkgroupId]="workgroupId"
         [workgroupInfos]="peerChatWorkgroupInfos"
@@ -33,12 +30,13 @@
         (onSubmit)="submitTeacherResponse($event)"
         (deleteClickedEvent)="deleteClicked($event)"
         (undeleteClickedEvent)="undeleteClicked($event)"
-      ></peer-chat-chat-box>
+      />
     </div>
   </div>
-</ng-container>
-<div *ngIf="!isPeerChatWorkgroupsAvailable" class="notice mat-subtitle-2" i18n>
-  This Peer Chat activity is not yet available. Please check back later or wait for a notification
-  to return.
-  <!-- TODO: Show different message when student has not completed required previous component(s) -->
-</div>
+} @else {
+  <div class="notice mat-subtitle-2" i18n>
+    This Peer Chat activity is not yet available. Please check back later or wait for a notification
+    to return.
+    <!-- TODO: Show different message when student has not completed required previous component(s) -->
+  </div>
+}

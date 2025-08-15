@@ -19,10 +19,10 @@ import { ConstraintService } from '../../../services/constraintService';
 import { ConfigService } from '../../../services/configService';
 
 @Component({
-    selector: 'peer-chat-question-bank',
-    templateUrl: './peer-chat-question-bank.component.html',
-    styleUrls: ['./peer-chat-question-bank.component.scss'],
-    standalone: false
+  selector: 'peer-chat-question-bank',
+  templateUrl: './peer-chat-question-bank.component.html',
+  styleUrl: './peer-chat-question-bank.component.scss',
+  standalone: false
 })
 export class PeerChatQuestionBankComponent implements OnInit {
   @Input() content: QuestionBankContent;

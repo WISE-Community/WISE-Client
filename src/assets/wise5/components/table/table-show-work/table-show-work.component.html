@@ -9,7 +9,7 @@
     [tabOptions]="tabulatorData.options"
     [tabSorters]="tabulatorSorters"
     (ready)="tabulatorRendered()"
-  ></tabulator-table>
+  />
 </div>
 <ng-container *ngIf="componentContent.isDataExplorerEnabled">
   <br />
@@ -24,7 +24,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+  <div class="flex flex-wrap justify-start items-center gap-4">
     <mat-form-field class="data-explorer-select" appearance="fill">
       <mat-label i18n>X Data</mat-label>
       <mat-select [ngModel]="xColumnIndex != null ? xColumnIndex : -1" [disabled]="true">
@@ -53,9 +53,7 @@
   </div>
   <div
     *ngIf="componentContent.isDataExplorerAxisLabelsEditable"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
+    class="flex flex-wrap justify-start items-center gap-4"
   >
     <mat-form-field class="data-explorer-select" appearance="fill">
       <mat-label i18n>X Axis Label</mat-label>
@@ -93,9 +91,7 @@
     </mat-form-field>
     <div
       *ngIf="componentContent.numDataExplorerYAxis > 1"
-      fxLayout="row wrap"
-      fxLayoutAlign="start center"
-      fxLayoutGap="16px"
+      class="flex flex-wrap justify-start items-center gap-4"
     >
       <mat-form-field
         *ngFor="let yAxisLabel of [].constructor(componentContent.numDataExplorerYAxis); index as i"
