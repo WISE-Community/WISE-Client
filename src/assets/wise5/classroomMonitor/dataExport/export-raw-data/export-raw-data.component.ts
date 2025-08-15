@@ -3,10 +3,10 @@ import { RawDataExportStrategy } from '../strategies/RawDataExportStrategy';
 import { AbstractExportComponent } from '../abstract-export.component';
 
 @Component({
-    selector: 'export-raw-data',
-    templateUrl: './export-raw-data.component.html',
-    styleUrls: ['./export-raw-data.component.scss'],
-    standalone: false
+  selector: 'export-raw-data',
+  standalone: false,
+  styles: ['.parameters-div { margin-bottom: 20px; } .mat-icon { margin: 0px; }'],
+  templateUrl: './export-raw-data.component.html'
 })
 export class ExportRawDataComponent extends AbstractExportComponent {
   protected includeAnnotations = false;
