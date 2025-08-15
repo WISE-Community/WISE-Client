@@ -10,24 +10,22 @@ import { GradingStepToolsComponent } from '../../grading-step-tools/grading-step
 import { SelectPeriodComponent } from '../../select-period/select-period.component';
 import { StudentGradingToolsComponent } from '../../studentGrading/student-grading-tools/student-grading-tools.component';
 import { SaveIndicatorComponent } from '../../../../common/save-indicator/save-indicator.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        GradingStepToolsComponent,
-        MatButtonModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        SaveIndicatorComponent,
-        SelectPeriodComponent,
-        StudentGradingToolsComponent
-    ],
-    selector: 'tool-bar',
-    styleUrl: './tool-bar.component.scss',
-    templateUrl: './tool-bar.component.html'
+  imports: [
+    CommonModule,
+    GradingStepToolsComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    SaveIndicatorComponent,
+    SelectPeriodComponent,
+    StudentGradingToolsComponent
+  ],
+  selector: 'tool-bar',
+  styleUrl: './tool-bar.component.scss',
+  templateUrl: './tool-bar.component.html'
 })
 export class ToolBarComponent implements OnInit {
   @Output() onMenuToggle: EventEmitter<any> = new EventEmitter<any>();
