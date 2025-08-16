@@ -1,36 +1,35 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subscription } from 'rxjs';
-import { FlexLayoutModule, MediaChange, MediaObserver } from '@angular/flex-layout';
-import { ConfigService } from '../../../assets/wise5/services/configService';
-import { NotebookService } from '../../../assets/wise5/services/notebookService';
-import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
+import { SaveTimeMessageComponent } from '../../../assets/wise5/common/save-time-message/save-time-message.component';
 import {
   insertWiseLinks,
   replaceWiseLinks
 } from '../../../assets/wise5/common/wise-link/wise-link';
-import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { WiseTinymceEditorComponent } from '../../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
-import { SaveTimeMessageComponent } from '../../../assets/wise5/common/save-time-message/save-time-message.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { ConfigService } from '../../../assets/wise5/services/configService';
+import { NotebookService } from '../../../assets/wise5/services/notebookService';
+import { ProjectService } from '../../../assets/wise5/services/projectService';
+import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCardModule,
-        MatIconModule,
-        MatTooltipModule,
-        SaveTimeMessageComponent,
-        WiseTinymceEditorComponent
-    ],
-    selector: 'notebook-report',
-    styleUrl: 'notebook-report.component.scss',
-    templateUrl: 'notebook-report.component.html'
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatTooltipModule,
+    SaveTimeMessageComponent,
+    WiseTinymceEditorComponent
+  ],
+  selector: 'notebook-report',
+  styleUrl: 'notebook-report.component.scss',
+  templateUrl: 'notebook-report.component.html'
 })
 export class NotebookReportComponent extends NotebookParentComponent {
   private autoSaveIntervalMS: number = 30000;

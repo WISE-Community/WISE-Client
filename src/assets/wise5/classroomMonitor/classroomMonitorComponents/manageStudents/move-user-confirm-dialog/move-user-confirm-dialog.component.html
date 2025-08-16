@@ -1,16 +1,18 @@
-<h2 mat-dialog-title class="mat-dialog-title--icons" fxLayoutAlign="start center">
+<h2 mat-dialog-title class="mat-dialog-title--icons !flex justify-start items-center">
   <span i18n>Move Student</span>
-  <span fxFlex></span>
-  <mat-icon *ngIf="isMovingFromWorkgroup" color="warn" i18n-aria-label aria-label="Warning"
-    >warning</mat-icon
-  >
+  <span class="flex-grow"></span>
+  @if (isMovingFromWorkgroup) {
+    <mat-icon color="warn" i18n-aria-label aria-label="Warning">warning</mat-icon>
+  }
 </h2>
 <mat-dialog-content>
   <div class="info-block">
-    <p *ngIf="isMovingFromWorkgroup" class="warn" i18n>
-      Warning: Removing a student from a team will result in the student losing all the work they
-      completed with that team.
-    </p>
+    @if (isMovingFromWorkgroup) {
+      <p class="warn" i18n>
+        Warning: Removing a student from a team will result in the student losing all the work they
+        completed with that team.
+      </p>
+    }
     <p i18n>The student will adopt the work of their new team.</p>
     <p i18n>Are you sure you wish to proceed?</p>
   </div>

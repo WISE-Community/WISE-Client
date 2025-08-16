@@ -343,7 +343,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
-          <context context-type="linenumber">21,26</context>
+          <context context-type="linenumber">14,20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
@@ -533,7 +533,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">21,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component.html</context>
@@ -1509,7 +1509,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">50,53</context>
+          <context context-type="linenumber">46,49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
@@ -1643,7 +1643,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/peer-review-and-revision/peer-review-and-revision.component.html</context>
-          <context context-type="linenumber">23,27</context>
+          <context context-type="linenumber">25,29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/structure/self-directed-investigation/self-directed-investigation.component.html</context>
@@ -1798,7 +1798,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.html</context>
-          <context context-type="linenumber">14,17</context>
+          <context context-type="linenumber">12,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4457022169711512502" datatype="html">
@@ -5152,7 +5152,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/news/news.component.html</context>
-          <context context-type="linenumber">11,15</context>
+          <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7892371550594520571" datatype="html">
@@ -5908,9 +5908,9 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
       </trans-unit>
       <trans-unit id="7722179973203037469" datatype="html">
-        <source>&quot;Type&quot; indicates the platform on which a unit runs. &quot;WISE Platform&quot; units are created 
-      using the WISE authoring tool. Students use WISE accounts to complete lessons and teachers can review and grade 
-      work on the WISE platform. &quot;Other&quot; units are created using different platforms. Resources for these units 
+        <source>&quot;Type&quot; indicates the platform on which a unit runs. &quot;WISE Platform&quot; units are created
+      using the WISE authoring tool. Students use WISE accounts to complete lessons and teachers can review and grade
+      work on the WISE platform. &quot;Other&quot; units are created using different platforms. Resources for these units
       are linked in the unit details.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.ts</context>
@@ -6094,11 +6094,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">44,47</context>
+          <context context-type="linenumber">42,45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">71,74</context>
+          <context context-type="linenumber">69,72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="437068572321375732" datatype="html">
@@ -6175,7 +6175,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">51,52</context>
+          <context context-type="linenumber">44,45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.html</context>
@@ -6748,7 +6748,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Show More</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/news/news.component.html</context>
-          <context context-type="linenumber">37,43</context>
+          <context context-type="linenumber">31,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/student-run-list/student-run-list.component.html</context>
@@ -6763,42 +6763,42 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Delete <x id="INTERPOLATION" equiv-text="{{ label.singular }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.html</context>
-          <context context-type="linenumber">38,39</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6895623360843596023" datatype="html">
         <source>Revive <x id="INTERPOLATION" equiv-text="{{ label.singular }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.html</context>
-          <context context-type="linenumber">49,50</context>
+          <context context-type="linenumber">48,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3376099465386156138" datatype="html">
         <source>Are you sure you want to delete this <x id="singular term for note in unit" equiv-text="this.label.singular"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4834867472814496978" datatype="html">
         <source>Delete <x id="singular term for note in unit" equiv-text="this.label.singular"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5523476455115843494" datatype="html">
         <source>Are you sure you want to revive this <x id="singular term for note in unit" equiv-text="this.label.singular"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2421229851977962666" datatype="html">
         <source>Revive <x id="singular term for note in unit" equiv-text="this.label.singular"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-item/notebook-item.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">106</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2753922094858196565" datatype="html">
@@ -6840,21 +6840,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Toggle Full Screen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">26,28</context>
+          <context context-type="linenumber">20,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4929778113156900100" datatype="html">
         <source>Collapse</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">41,43</context>
+          <context context-type="linenumber">34,36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3620188369327429839" datatype="html">
         <source> Save </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">74,77</context>
+          <context context-type="linenumber">67,70</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component.html</context>
@@ -6877,7 +6877,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Team hasn&apos;t worked on <x id="INTERPOLATION" equiv-text="{{ config.itemTypes.report.notes[0].title }}"/> yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">100,102</context>
+          <context context-type="linenumber">93,95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4899307174292942307" datatype="html">
@@ -8866,7 +8866,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">15,19</context>
+          <context context-type="linenumber">17,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/remove-user-confirm-dialog/remove-user-confirm-dialog.component.html</context>
@@ -9125,28 +9125,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Tag deleted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9151762754681070291" datatype="html">
         <source>There is <x id="PH" equiv-text="numProjectsWithTag"/> unit with this tag.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2021640020415028727" datatype="html">
         <source>There are <x id="PH" equiv-text="numProjectsWithTag"/> units with this tag.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1288226131735320264" datatype="html">
         <source>Are you sure you want to delete this tag? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/manage-tags-dialog/manage-tags-dialog.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9008968878373693685" datatype="html">
@@ -9700,7 +9700,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">21,24</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component.html</context>
@@ -10343,7 +10343,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5518546617377132298" datatype="html">
@@ -10470,7 +10470,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1422076554976852397" datatype="html">
@@ -13568,7 +13568,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2629092933625844061" datatype="html">
@@ -13579,7 +13579,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="522592988166207236" datatype="html">
@@ -13590,7 +13590,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6214570507413724176" datatype="html">
@@ -13601,7 +13601,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5889478446673459195" datatype="html">
@@ -13612,7 +13612,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/tool-bar/tool-bar.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4977425233945972011" datatype="html">
@@ -13875,7 +13875,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Period <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-period/manage-period.component.html</context>
-          <context context-type="linenumber">10,11</context>
+          <context context-type="linenumber">5,6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/peer-group/peer-group-period/peer-group-period.component.html</context>
@@ -13886,14 +13886,14 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source> Students: <x id="INTERPOLATION" equiv-text="{{ students.size }}"/> | Teams: <x id="INTERPOLATION_1" equiv-text="{{ teams.size }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-period/manage-period.component.html</context>
-          <context context-type="linenumber">12,14</context>
+          <context context-type="linenumber">7,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3878731658980580792" datatype="html">
         <source>Empty Teams</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-period/manage-period.component.html</context>
-          <context context-type="linenumber">28,30</context>
+          <context context-type="linenumber">20,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3974724489654440199" datatype="html">
@@ -14002,35 +14002,35 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Removed <x id="PH" equiv-text="this.user.name"/> (<x id="PH_1" equiv-text="this.user.username"/>) from unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="213219330219823977" datatype="html">
         <source>Error: Could not remove <x id="PH" equiv-text="this.user.name"/> (<x id="PH_1" equiv-text="this.user.username"/>) from unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-user/manage-user.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1365736893022103189" datatype="html">
         <source>Move Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">2,4</context>
+          <context context-type="linenumber">2,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3710243714286758832" datatype="html">
         <source> Warning: Removing a student from a team will result in the student losing all the work they completed with that team. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">11,14</context>
+          <context context-type="linenumber">12,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5797597173758343019" datatype="html">
         <source>The student will adopt the work of their new team.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/move-user-confirm-dialog/move-user-confirm-dialog.component.html</context>
-          <context context-type="linenumber">14,17</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1736192593700313861" datatype="html">
@@ -14867,7 +14867,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4009582044773611629" datatype="html">
@@ -15104,14 +15104,14 @@ Are you sure you want to proceed?</source>
         <source>Correctness column key: 0 = Incorrect, 1 = Correct, 2 = Correct bucket but wrong position</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="880482534522717689" datatype="html">
         <source>Downloading export</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.ts</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2829288137698896076" datatype="html">
@@ -15129,7 +15129,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">20,23</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3390448399440283292" datatype="html">
@@ -15147,7 +15147,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">25,29</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-student-work/export-student-work.component.html</context>
@@ -15218,7 +15218,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">42,47</context>
+          <context context-type="linenumber">38,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-step-visits/export-step-visits.component.html</context>
@@ -15237,21 +15237,21 @@ Are you sure you want to proceed?</source>
         <source>Everything</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">16,19</context>
+          <context context-type="linenumber">16,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5467372406465577495" datatype="html">
         <source> Include Annotations </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">30,34</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2659694219651336790" datatype="html">
         <source>Include Events</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-raw-data/export-raw-data.component.html</context>
-          <context context-type="linenumber">34,37</context>
+          <context context-type="linenumber">30,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1728582760904198627" datatype="html">
@@ -15315,7 +15315,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">21,27</context>
+          <context context-type="linenumber">19,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1278322698743284344" datatype="html">
@@ -15326,7 +15326,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">31,37</context>
+          <context context-type="linenumber">29,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6085799730091695295" datatype="html">
@@ -15529,21 +15529,21 @@ Are you sure you want to proceed?</source>
         <source> Export All Steps </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">9,11</context>
+          <context context-type="linenumber">7,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6575450292086369614" datatype="html">
         <source> Select Steps To Export </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">12,15</context>
+          <context context-type="linenumber">10,13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="423857259040115513" datatype="html">
         <source> Select All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">25,29</context>
+          <context context-type="linenumber">23,27</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component.html</context>
@@ -15554,14 +15554,14 @@ Are you sure you want to proceed?</source>
         <source> Deselect All </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">35,39</context>
+          <context context-type="linenumber">33,36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8075168556531069883" datatype="html">
         <source>Item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
-          <context context-type="linenumber">62,64</context>
+          <context context-type="linenumber">60,62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8313145553257511938" datatype="html">
@@ -21580,14 +21580,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Score: <x id="INTERPOLATION" equiv-text="{{ annotations.score.data.value }}"/><x id="INTERPOLATION_1" equiv-text="{{ maxScoreDisplay }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4887677208798229337" datatype="html">
         <source>Teacher Feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">187</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3542042671420335679" datatype="html">
@@ -21615,21 +21615,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Importing Work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
-          <context context-type="linenumber">9,13</context>
+          <context context-type="linenumber">6,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4802466172417582505" datatype="html">
         <source>Error: Failed to import work.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">12,13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7745872778453660862" datatype="html">
         <source> Previous step </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">4,9</context>
+          <context context-type="linenumber">4,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6726890478056068381" datatype="html">
