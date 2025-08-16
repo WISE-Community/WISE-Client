@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
@@ -19,7 +18,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   templateUrl: './edit-dialog-guidance-computer-avatar.component.html',
   imports: [
     CommonModule,
-    FlexModule,
     MatCheckbox,
     FormsModule,
     TranslatableInputComponent,

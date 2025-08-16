@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -28,24 +27,23 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
 import { LabelStudentData } from '../LabelStudentData';
 
 @Component({
-    imports: [
-        AddToNotebookButtonComponent,
-        CommonModule,
-        ComponentAnnotationsComponent,
-        ComponentHeaderComponent,
-        ComponentSaveSubmitButtonsComponent,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatTooltipModule
-    ],
-    selector: 'label-student',
-    styleUrl: 'label-student.component.scss',
-    templateUrl: 'label-student.component.html'
+  imports: [
+    AddToNotebookButtonComponent,
+    CommonModule,
+    ComponentAnnotationsComponent,
+    ComponentHeaderComponent,
+    ComponentSaveSubmitButtonsComponent,
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule
+  ],
+  selector: 'label-student',
+  styleUrl: 'label-student.component.scss',
+  templateUrl: 'label-student.component.html'
 })
 export class LabelStudentComponent extends ComponentStudent {
   protected addNewLabelButtonVisible: boolean = true;

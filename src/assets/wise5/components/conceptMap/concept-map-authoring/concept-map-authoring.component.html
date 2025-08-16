@@ -1,9 +1,9 @@
-<div fxLayout="column" fxLayoutGap="8px">
+<div class="flex flex-col gap-2">
   <edit-component-prompt
     [componentContent]="componentContent"
     (promptChangedEvent)="promptChanged($event)"
   />
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <div class="flex flex-row items-center gap-2">
     <translatable-input
       [content]="componentContent"
       key="background"
@@ -38,7 +38,7 @@
       Allow student to upload background image
     </mat-checkbox>
   </div>
-  <div class="canvas-dimension" fxLayout="row wrap" fxLayoutGap="8px">
+  <div class="canvas-dimension flex flex-row flex-wrap gap-2">
     <mat-form-field>
       <mat-label i18n>Canvas Width (Optional)</mat-label>
       <input
@@ -58,8 +58,8 @@
       />
     </mat-form-field>
   </div>
-  <div class="add-content" fxLayout="column" fxLayoutGap="16px">
-    <div fxLayoutAlign="start center" fxLayoutGap="16px">
+  <div class="add-content flex flex-col gap-4">
+    <div class="flex items-center gap-4">
       <span i18n>Nodes</span>
       <button
         mat-raised-button
@@ -85,28 +85,18 @@
           first as isFirst;
           last as isLast
         "
-        class="content-item"
-        fxLayout="row wrap"
-        fxLayoutAlign="start start"
+        class="content-item flex flex-row flex-wrap items-start"
       >
         <translatable-input
-          fxFlex="100"
-          fxFlex.sm="40"
-          fxFlex.gt-sm="30"
+          class="content-item-setting flex-[1_1_100%] sm:flex-[1_1_40%] md:flex-[1_1_30%]"
           [content]="node"
           key="label"
           label="Node Label"
           i18n-label
           (defaultLanguageTextChanged)="inputChange.next($event)"
-          class="content-item-setting"
         />
         <div
-          class="content-item-setting"
-          fxLayoutAlign="start start"
-          fxLayoutGap="8px"
-          fxFlex="100"
-          fxFlex.sm="60"
-          fxFlex.gt-sm="35"
+          class="content-item-setting flex flex-row items-start gap-2 flex-[1_1_100%] sm:flex-[1_1_60%] md:flex-[1_1_35%]"
         >
           <translatable-input
             [content]="node"
@@ -122,7 +112,7 @@
             (defaultLanguageTextChanged)="componentChanged()"
           />
         </div>
-        <div class="content-item-setting" fxLayoutGap="8px">
+        <div class="content-item-setting flex flex-row gap-2">
           <mat-form-field class="node-dimension">
             <mat-label i18n>Width</mat-label>
             <input
@@ -142,8 +132,8 @@
             />
           </mat-form-field>
         </div>
-        <span fxFlex></span>
-        <div class="content-item-setting" fxLayoutGap="8px">
+        <span class="flex-1"></span>
+        <div class="content-item-setting flex flex-row gap-2">
           <button
             mat-raised-button
             color="primary"
@@ -196,7 +186,7 @@
       </mat-checkbox>
     </div>
   </div>
-  <div class="add-content" fxLayout="column" fxLayoutGap="16px">
+  <div class="add-content flex flex-col gap-4">
     <translatable-input
       [content]="componentContent"
       key="linksTitle"
@@ -205,7 +195,7 @@
       (defaultLanguageTextChanged)="inputChange.next($event)"
       class="links-title"
     />
-    <div fxLayoutAlign="start center" fxLayoutGap="16px">
+    <div class="flex items-center gap-4">
       <span i18n>Links</span>
       <button
         mat-raised-button
@@ -231,27 +221,22 @@
           first as isFirst;
           last as isLast
         "
-        class="content-item"
-        fxLayout="row wrap"
-        fxLayoutAlign="start start"
-        fxLayouGap="16px"
+        class="content-item flex flex-row flex-wrap items-start gap-4"
       >
         <translatable-input
-          fxFlex="50"
-          fxFlex.gt-sm="30"
+          class="content-item-setting flex-[1_1_50%] md:flex-[1_1_30%]"
           [content]="link"
           key="label"
           label="Link Label"
           i18n-label
           (defaultLanguageTextChanged)="inputChange.next($event)"
-          class="content-item-setting"
         />
-        <mat-form-field class="content-item-setting" fxFlex="50" fxFlex.gt-sm="30">
+        <mat-form-field class="content-item-setting flex-[1_1_50%] md:flex-[1_1_30%]">
           <mat-label i18n>Color</mat-label>
           <input matInput [(ngModel)]="link.color" (ngModelChange)="inputChange.next($event)" />
         </mat-form-field>
-        <span fxFlex></span>
-        <div class="content-item-setting" fxLayoutGap="8px">
+        <span class="flex-1"></span>
+        <div class="content-item-setting flex flex-row gap-2">
           <button
             mat-raised-button
             color="primary"

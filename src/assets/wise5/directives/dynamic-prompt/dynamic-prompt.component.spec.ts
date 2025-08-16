@@ -1,17 +1,17 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MockProviders } from 'ng-mocks';
 import { of } from 'rxjs';
 import { PeerGroupStudentData } from '../../../../app/domain/peerGroupStudentData';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../common/ComponentContent';
 import { AnnotationService } from '../../services/annotationService';
+import { ConfigService } from '../../services/configService';
+import { ConstraintService } from '../../services/constraintService';
 import { PeerGroupService } from '../../services/peerGroupService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPromptComponent } from './dynamic-prompt.component';
 import { DynamicPrompt } from './DynamicPrompt';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { Component } from '../../common/Component';
 
 let component: DynamicPromptComponent;
 let fixture: ComponentFixture<DynamicPromptComponent>;
@@ -22,21 +22,31 @@ const promptIdea2And3: string = 'This is the prompt when you get idea 2 and idea
 const promptIdea2Or3: string = 'This is the prompt when you get idea 2 or idea 3.';
 const promptScore1: string = 'This is the prompt when you get a score of 1.';
 const promptScore2: string = 'This is the prompt when you get a score of 2.';
-
 describe('DynamicPromptComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [DynamicPromptComponent,
-        MatDialogModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [DynamicPromptComponent],
+      providers: [
+        MockProviders(
+          AnnotationService,
+          ConfigService,
+          ConstraintService,
+          StudentDataService,
+          PeerGroupService,
+          ProjectService
+        )
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
+    const projectService = TestBed.inject(ProjectService);
+    spyOn(projectService, 'getComponent').and.returnValue({
       type: 'OpenResponse'
     } as ComponentContent);
+    spyOn(projectService, 'getReferenceComponent').and.returnValue({
+      content: { type: 'OpenResponse' }
+    } as Component);
     fixture = TestBed.createComponent(DynamicPromptComponent);
     component = fixture.componentInstance;
     component.dynamicPrompt = createDynamicPrompt();

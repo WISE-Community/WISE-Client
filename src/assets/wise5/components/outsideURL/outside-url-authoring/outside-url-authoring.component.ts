@@ -1,9 +1,8 @@
 import { CommonModule, NgStyle } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ExtendedModule } from '@angular/flex-layout/extended';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardTitle } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -30,11 +29,10 @@ import { OutsideURLService } from '../outsideURLService';
     CommonModule,
     MatSlideToggle,
     FormsModule,
-    FlexModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInput,
-    MatButton,
     MatTooltip,
     MatIcon,
     MatCard,
@@ -49,7 +47,6 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
   isShowOERs: boolean;
   allOpenEducationalResources: any[];
   filteredOpenEducationalResources: any[];
-  outsideURLIFrameId: string;
   subjects: any[] = [
     {
       value: 'Earth and Space Sciences',
@@ -86,7 +83,6 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
 
   ngOnInit() {
     super.ngOnInit();
-    this.outsideURLIFrameId = 'outsideResource_' + this.componentId;
     this.isShowOERs = this.componentContent.url === '';
     this.searchText = '';
     this.selectedSubjects = [];
@@ -123,12 +119,6 @@ export class OutsideUrlAuthoring extends AbstractComponentAuthoring {
 
   isResourceSelected(resourceUrl: string): boolean {
     return resourceUrl === this.componentContent.url;
-  }
-
-  reloadResource(): void {
-    const iframe: any = document.getElementById(this.outsideURLIFrameId);
-    iframe.src = '';
-    iframe.src = this.componentContent.url;
   }
 
   clearFilters(): void {

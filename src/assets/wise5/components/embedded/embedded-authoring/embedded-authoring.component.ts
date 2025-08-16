@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -29,8 +28,7 @@ import { EmbeddedService } from '../embeddedService';
     FormsModule,
     MatCheckbox,
     MatIcon,
-    MatTooltip,
-    MatButton
+    MatTooltip
   ]
 })
 export class EmbeddedAuthoring extends AbstractComponentAuthoring {
@@ -51,13 +49,6 @@ export class EmbeddedAuthoring extends AbstractComponentAuthoring {
     this.embeddedApplicationIFrameId = this.embeddedService.getEmbeddedApplicationIframeId(
       this.componentId
     );
-  }
-
-  reloadModel(): void {
-    const iframe: any = document.getElementById(this.embeddedApplicationIFrameId);
-    const src = iframe.src;
-    iframe.src = '';
-    iframe.src = src;
   }
 
   updateUrl(url: string): void {

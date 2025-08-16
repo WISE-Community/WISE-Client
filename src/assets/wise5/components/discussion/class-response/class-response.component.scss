@@ -5,13 +5,14 @@
     padding: 0px;
   }
 
-  .contents,
   .comments-header {
     padding: 16px;
   }
 
   .post {
     margin-top: 16px;
+    padding-left: 4px;
+    padding-right: 4px;
     overflow-wrap: break-word;
   }
 
@@ -26,7 +27,8 @@
   }
 
   .comments {
-    padding: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
     max-height: 400px;
     overflow-y: auto;
   }

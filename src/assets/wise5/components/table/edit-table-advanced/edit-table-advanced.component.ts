@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -28,12 +27,10 @@ import { EditTableConnectedComponentsComponent } from '../edit-table-connected-c
 import { TableContent } from '../TableContent';
 
 @Component({
-  selector: 'edit-table-advanced',
   templateUrl: 'edit-table-advanced.component.html',
   styleUrl: 'edit-table-advanced.component.scss',
   imports: [
     CommonModule,
-    FlexModule,
     MatCheckbox,
     FormsModule,
     MatFormFieldModule,

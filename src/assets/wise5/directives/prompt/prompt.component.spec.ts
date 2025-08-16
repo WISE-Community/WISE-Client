@@ -1,12 +1,15 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { MockProviders } from 'ng-mocks';
 import { ComponentContent } from '../../common/ComponentContent';
+import { AnnotationService } from '../../services/annotationService';
+import { ConfigService } from '../../services/configService';
+import { ConstraintService } from '../../services/constraintService';
+import { PeerGroupService } from '../../services/peerGroupService';
 import { ProjectService } from '../../services/projectService';
+import { StudentDataService } from '../../services/studentDataService';
 import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
 import { PromptComponent } from './prompt.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { Component } from '../../common/Component';
 
 describe('PromptComponent', () => {
   let component: PromptComponent;
@@ -17,11 +20,18 @@ describe('PromptComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [MatDialogModule,
-        PromptComponent,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [PromptComponent],
+      providers: [
+        MockProviders(
+          AnnotationService,
+          ConfigService,
+          ConstraintService,
+          StudentDataService,
+          PeerGroupService,
+          ProjectService
+        )
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -37,9 +47,13 @@ describe('PromptComponent', () => {
         nodeId: 'node1'
       }
     });
-    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
+    const projectService = TestBed.inject(ProjectService);
+    spyOn(projectService, 'getComponent').and.returnValue({
       type: 'OpenResponse'
     } as ComponentContent);
+    spyOn(projectService, 'getReferenceComponent').and.returnValue({
+      content: { type: 'OpenResponse' }
+    } as Component);
     fixture.detectChanges();
   });
 

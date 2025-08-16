@@ -1,7 +1,7 @@
 <div class="main-div">
-  <component-header [component]="component"></component-header>
+  <component-header [component]="component" />
   <div class="main-concept-map-div">
-    <div class="top-buttons" fxLayout="row">
+    <div class="top-buttons flex flex-row">
       <button
         mat-raised-button
         color="primary"
@@ -44,7 +44,7 @@
         </button>
       </div>
     </div>
-    <div id="{{ conceptMapContainerId }}" class="container" fxLayout="row">
+    <div id="{{ conceptMapContainerId }}" class="container flex flex-row">
       <div id="{{ selectNodeBarId }}" class="side-node-bar">
         <div *ngFor="let availableNode of availableNodes" class="side-node-container">
           <img
@@ -90,7 +90,7 @@
           </mat-radio-button>
         </div>
       </mat-radio-group>
-      <div fxLayout="row">
+      <div class="flex flex-row">
         <div>
           <button
             mat-button
@@ -101,7 +101,7 @@
             Cancel
           </button>
         </div>
-        <div fxFlex></div>
+        <div class="flex-1"></div>
         <div>
           <button
             mat-button
@@ -127,8 +127,7 @@
     [isSubmitDirty]="isSubmitDirty"
     (saveButtonClicked)="saveButtonClicked($event)"
     (submitButtonClicked)="submitButtonClicked($event)"
-  >
-  </component-save-submit-buttons>
+  />
   <component-annotations
     *ngIf="mode === 'student'"
     [annotations]="latestAnnotations"

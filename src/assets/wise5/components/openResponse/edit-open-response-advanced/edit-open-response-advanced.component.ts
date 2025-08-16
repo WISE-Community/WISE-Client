@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -22,14 +21,12 @@ import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedb
 import { OpenResponseContent } from '../OpenResponseContent';
 
 @Component({
-  selector: 'edit-open-response-advanced',
   styleUrl: 'edit-open-response-advanced.component.scss',
   templateUrl: 'edit-open-response-advanced.component.html',
   imports: [
     TranslatableTextareaComponent,
     MatCheckbox,
     FormsModule,
-    FlexModule,
     MatFormFieldModule,
     MatInput,
     MatButton,

@@ -12,29 +12,8 @@ label.mat-slide-toggle-label {
   width: 100%;
 }
 
-p.select-oer-instructions {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: .01em;
-  line-height: 24px;
-}
-
-.topic-filter-container {
-  max-width: 250px;
-  margin-right: 20px;
-}
-
-.search-container {
-  max-width: 250px;
-  margin-right: 20px;
-}
-
-.clear-button {
-  margin-right: 15px;
-}
-
 .oer-cards-container {
-  height: 600px;
+  max-height: 600px;
   overflow-y: auto;
   padding: 8px;
   margin-bottom: 16px;
@@ -67,16 +46,6 @@ p.select-oer-instructions {
 
 .oer-info-link {
   margin: 0 16px;
-}
-
-.no-results-message-container {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.dimension-input-container {
-  margin-right: 20px;
-  width: 150px;
 }
 
 .mat-icon {

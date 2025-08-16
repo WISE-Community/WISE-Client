@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -15,12 +14,10 @@ import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/au
 import { ConceptMapContent } from '../ConceptMapContent';
 
 @Component({
-  selector: 'edit-concept-map-advanced',
   templateUrl: 'edit-concept-map-advanced.component.html',
   styleUrl: 'edit-concept-map-advanced.component.scss',
   imports: [
     CommonModule,
-    FlexModule,
     MatCheckbox,
     FormsModule,
     MatButton,

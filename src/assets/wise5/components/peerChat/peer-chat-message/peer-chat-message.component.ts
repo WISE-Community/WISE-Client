@@ -3,35 +3,21 @@ import { ConfigService } from '../../../services/configService';
 import { PeerChatMessage } from '../PeerChatMessage';
 
 @Component({
-    selector: 'peer-chat-message',
-    templateUrl: './peer-chat-message.component.html',
-    styleUrls: ['./peer-chat-message.component.scss'],
-    standalone: false
+  selector: 'peer-chat-message',
+  templateUrl: './peer-chat-message.component.html',
+  styleUrl: './peer-chat-message.component.scss',
+  standalone: false
 })
 export class PeerChatMessageComponent implements OnInit {
-  @Input()
-  avatarColor: string;
-
-  @Input()
-  displayNames: string;
-
-  @Input()
-  isGrading: boolean;
-
-  @Input()
-  myWorkgroupId: number;
-
-  @Input()
-  peerChatMessage: PeerChatMessage;
-
-  @Input()
-  isTeacher: boolean;
-
-  @Output()
-  deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
-
-  @Output()
-  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+  @Input() avatarColor: string;
+  @Input() displayNames: string;
+  @Input() isGrading: boolean;
+  @Input() myWorkgroupId: number;
+  @Input() peerChatMessage: PeerChatMessage;
+  @Input() isTeacher: boolean;
+  @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+  @Output() undeleteClickedEvent: EventEmitter<PeerChatMessage> =
+    new EventEmitter<PeerChatMessage>();
 
   isMyMessage: boolean;
   text: string;

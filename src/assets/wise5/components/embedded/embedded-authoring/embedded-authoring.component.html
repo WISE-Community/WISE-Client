@@ -1,4 +1,4 @@
-<div class="flex flex-row flex-wrap justify-start items-center gap-2">
+<div class="flex flex-row gap-2">
   <translatable-textarea
     [content]="componentContent"
     key="url"
@@ -57,18 +57,4 @@
       >
     </span>
   </mat-checkbox>
-  <span class="w-full"></span>
-  <button
-    mat-raised-button
-    color="primary"
-    class="button"
-    (click)="reloadModel()"
-    matTooltip="Reload Model"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    aria-label="Reload Model"
-    i18n-aria-label
-  >
-    <mat-icon>refresh</mat-icon>
-  </button>
 </div>

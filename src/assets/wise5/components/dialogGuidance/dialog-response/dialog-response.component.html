@@ -1,4 +1,4 @@
-<div class="flex gap-1 items-start place-content-start" [ngClass]="{ 'justify-end': isStudent }">
+<div class="flex flex-row gap-1 justify-{{ isStudent ? 'end' : 'start' }} items-start">
   @if (isStudent) {
     <mat-icon
       class="mat-36 order-2"
@@ -25,10 +25,7 @@
       />
     }
   }
-  <div
-    class="flex items-stretch place-content-start flex-1"
-    [ngClass]="{ 'justify-end': isStudent }"
-  >
+  <div class="flex-1 flex justify-{{ isStudent ? 'end' : 'start' }}">
     <div
       class="response-text flex-col"
       [class]="{ 'notice-bg-bg': !isStudent, 'selected-bg-bg': isStudent }"

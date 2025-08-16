@@ -1,4 +1,4 @@
-<component-header [component]="component"></component-header>
+<component-header [component]="component" />
 <div class="discussion-content">
   <component-annotations
     *ngIf="mode === 'student'"
@@ -7,9 +7,8 @@
     [maxScore]="componentContent.maxScore"
     [nodeId]="nodeId"
     [componentId]="componentId"
-  >
-  </component-annotations>
-  <div fxLayout="row">
+  />
+  <div class="flex">
     <div
       class="discussion-posts"
       [ngClass]="{ 'half-width': false, 'full-width': false }"
@@ -72,12 +71,7 @@
             </button>
           </div>
         </div>
-        <div
-          class="discussion-new__actions"
-          fxLayout="row"
-          fxLayoutAlign="end center"
-          fxLayoutGap="20px"
-        >
+        <div class="discussion-new__actions flex justify-end items-center gap-5">
           <button
             mat-button
             *ngIf="isStudentAttachmentEnabled"
@@ -100,7 +94,7 @@
           </button>
         </div>
       </mat-card>
-      <div fxHide fxShow.sm fxShow.xs>
+      <div class="md:hidden">
         <class-response
           *ngFor="let componentState of topLevelResponses.all"
           [response]="componentState"
@@ -111,10 +105,9 @@
           (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
           [isDisabled]="isDisabled"
           class="post"
-        >
-        </class-response>
+        />
       </div>
-      <div fxHide fxShow.gt-sm>
+      <div class="hidden sm:block">
         <class-response
           *ngFor="let componentState of topLevelResponses.col2"
           [response]="componentState"
@@ -125,11 +118,10 @@
           (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
           [isDisabled]="isDisabled"
           class="post"
-        >
-        </class-response>
+        />
       </div>
     </div>
-    <div class="discussion-posts half-width" fxHide fxShow.gt-sm>
+    <div class="discussion-posts half-width hidden sm:block">
       <class-response
         *ngFor="let componentState of topLevelResponses.col1"
         [response]="componentState"
@@ -141,8 +133,7 @@
         [isDisabled]="isDisabled"
         class="post"
         style="display: block"
-      >
-      </class-response>
+      />
     </div>
   </div>
 </div>

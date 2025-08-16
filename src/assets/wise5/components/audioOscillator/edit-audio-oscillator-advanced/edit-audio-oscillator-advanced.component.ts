@@ -4,7 +4,6 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 
 @Component({
   imports: [EditCommonAdvancedComponent],
-  selector: 'edit-audio-oscillator-advanced',
   template: `<edit-common-advanced
     [component]="component"
     [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"

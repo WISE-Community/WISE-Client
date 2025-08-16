@@ -15,9 +15,9 @@ import { forkJoin, Observable } from 'rxjs';
 import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-helper';
 
 @Component({
-    selector: 'peer-chat-show-work',
-    templateUrl: 'peer-chat-show-work.component.html',
-    standalone: false
+  selector: 'peer-chat-show-work',
+  template: '',
+  standalone: false
 })
 export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   dynamicPrompt: FeedbackRule;

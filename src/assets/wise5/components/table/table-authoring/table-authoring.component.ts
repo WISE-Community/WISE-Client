@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout/flex';
 import {
   FormControl,
   FormGroup,
@@ -28,7 +27,6 @@ import { TranslatableInputComponent } from '../../../authoringTool/components/tr
   imports: [
     CommonModule,
     EditComponentPrompt,
-    FlexModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
