@@ -126,7 +126,7 @@ describe('StudentEditProfileComponent', () => {
     component.editProfileFormGroup.get('language').setValue('Spanish');
     submitForm();
     fixture.detectChanges();
-    const testBedUserService = TestBed.get(UserService);
-    expect(testBedUserService.user.language).toBe('Spanish');
+    const testBedUserService = TestBed.inject(UserService);
+    expect(testBedUserService['user'].language).toBe('Spanish');
   });
 });

@@ -22,7 +22,7 @@ describe('ForgotStudentPasswordComponent', () => {
   let fixture: ComponentFixture<ForgotStudentPasswordComponent>;
 
   const submitAndReceiveResponse = (studentServiceFunctionName, status, messageCode) => {
-    const studentService = TestBed.get(StudentService);
+    const studentService = TestBed.inject(StudentService);
     const observableResponse = createObservableResponse(status, messageCode);
     spyOn(studentService, studentServiceFunctionName).and.returnValue(observableResponse);
     component.submit();
@@ -83,7 +83,7 @@ describe('ForgotStudentPasswordComponent', () => {
   });
 
   it('should navigate to the answer security question page', () => {
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     const username = 'SpongebobS0101';
     const questionKey = 'QUESTION_ONE';

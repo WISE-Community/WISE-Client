@@ -22,7 +22,7 @@ describe('StudentComponent', () => {
     fixture = TestBed.createComponent(StudentComponent);
     component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
-    router = TestBed.get(Router);
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {

@@ -83,7 +83,7 @@ async function changePassword() {
 
     it('should show error when Recaptcha is invalid', waitForAsync(async () => {
       component.isRecaptchaEnabled = true;
-      teacherService = TestBed.get(TeacherService);
+      teacherService = TestBed.inject(TeacherService);
       const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
       spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
       spyOn(teacherService, 'getVerificationCodeEmail').and.returnValue(observableResponse);
@@ -93,7 +93,7 @@ async function changePassword() {
     }));
 
     it('should navigate to the verify code page', () => {
-      const router = TestBed.get(Router);
+      const router = TestBed.inject(Router);
       const navigateSpy = spyOn(router, 'navigate');
       component.verificationCodeEmailSuccess();
       const params = {
@@ -106,7 +106,7 @@ async function changePassword() {
     });
 
     it('should navigate to the verify code page after successfully sending a valid username', waitForAsync(async () => {
-      const router = TestBed.get(Router);
+      const router = TestBed.inject(Router);
       const navigateSpy = spyOn(router, 'navigate');
       component.setControlFieldValue('username', 'SpongebobSquarepants');
       spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
@@ -124,7 +124,7 @@ async function changePassword() {
 }
 
 function submitAndReceiveResponse(teacherServiceFunctionName, status, messageCode) {
-  teacherService = TestBed.get(TeacherService);
+  teacherService = TestBed.inject(TeacherService);
   const observableResponse = createObservableResponse(status, messageCode);
   spyOn(teacherService, teacherServiceFunctionName).and.returnValue(observableResponse);
   component.submit();

@@ -49,8 +49,8 @@ describe('SummaryService', () => {
         provideHttpClientTesting()
       ]
     });
-    service = TestBed.get(SummaryService);
-    http = TestBed.get(HttpTestingController);
+    service = TestBed.inject(SummaryService);
+    http = TestBed.inject(HttpTestingController);
     spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(runId);
     spyOn(TestBed.inject(ConfigService), 'getPeriodId').and.returnValue(periodId);
   });

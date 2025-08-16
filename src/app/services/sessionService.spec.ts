@@ -13,8 +13,8 @@ describe('SessionService', () => {
     imports: [],
     providers: [ConfigService, SessionService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
-    configService = TestBed.get(ConfigService);
-    service = TestBed.get(SessionService);
+    configService = TestBed.inject(ConfigService);
+    service = TestBed.inject(SessionService);
   });
 
   calculateIntervals();

@@ -27,7 +27,7 @@ describe('HTMLService', () => {
         provideHttpClientTesting()
     ]
 });
-    service = TestBed.get(HTMLService);
+    service = TestBed.inject(HTMLService);
   });
   createComponent();
   isCompleted();

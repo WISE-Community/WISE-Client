@@ -198,14 +198,14 @@ describe('CreateRunDialogComponent', () => {
     const endDate = new Date(startDate.getTime() + 86400000);
     component.form.controls['startDate'].setValue(startDate);
     component.form.controls['endDate'].setValue(endDate);
-    const teacherService = TestBed.get(TeacherService);
-    spyOn(teacherService, 'createRun').and.returnValue(of({}));
+    const teacherService = TestBed.inject(TeacherService);
+    spyOn(teacherService, 'createRun').and.returnValue(of({} as Run));
     component.create();
     expect(teacherService.createRun).toHaveBeenCalledWith(
       1,
       '1,',
       false,
-      '3',
+      3,
       jasmine.any(Number),
       jasmine.any(Number),
       false
@@ -219,14 +219,14 @@ describe('CreateRunDialogComponent', () => {
     const endDate = new Date(startDate.getTime() + 86400000);
     component.form.controls['startDate'].setValue(startDate);
     component.form.controls['endDate'].setValue(endDate);
-    const teacherService = TestBed.get(TeacherService);
-    spyOn(teacherService, 'createRun').and.returnValue(of({}));
+    const teacherService = TestBed.inject(TeacherService);
+    spyOn(teacherService, 'createRun').and.returnValue(of({} as Run));
     component.create();
     expect(teacherService.createRun).toHaveBeenCalledWith(
       1,
       '1,',
       false,
-      '3',
+      3,
       jasmine.any(Number),
       jasmine.any(Number),
       true

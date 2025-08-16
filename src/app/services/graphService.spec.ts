@@ -29,7 +29,7 @@ describe('GraphService', () => {
         provideHttpClientTesting()
     ]
 });
-    service = TestBed.get(GraphService);
+    service = TestBed.inject(GraphService);
     http = TestBed.inject(HttpTestingController);
     spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(runId);
   });

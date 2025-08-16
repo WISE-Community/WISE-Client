@@ -27,7 +27,7 @@ describe('TableService', () => {
         provideHttpClientTesting()
     ]
 });
-    service = TestBed.get(TableService);
+    service = TestBed.inject(TableService);
   });
   createComponent();
   isCompleted();
