@@ -27,7 +27,7 @@ describe('AnimationService', () => {
         provideHttpClientTesting()
     ]
 });
-    service = TestBed.get(AnimationService);
+    service = TestBed.inject(AnimationService);
   });
   createComponent();
   isCompleted();

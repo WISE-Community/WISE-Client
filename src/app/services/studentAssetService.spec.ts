@@ -18,9 +18,9 @@ describe('StudentAssetService', () => {
     imports: [],
     providers: [StudentAssetService, ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(StudentAssetService);
-    configService = TestBed.get(ConfigService);
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(StudentAssetService);
+    configService = TestBed.inject(ConfigService);
   });
   initialize();
   retrieveAssets();

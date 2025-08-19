@@ -120,7 +120,7 @@ export class CreateRunDialogComponent {
       customPeriods: this.customPeriods,
       periods: hiddenControl,
       runType: new FormControl('default', Validators.required),
-      maxStudentsPerTeam: new FormControl('3', Validators.required),
+      maxStudentsPerTeam: new FormControl(3, Validators.required),
       startDate: new FormControl(new Date(), Validators.required),
       endDate: this.endDateControl,
       isLockedAfterEndDate: new FormControl({ value: false, disabled: true })
