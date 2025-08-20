@@ -3,7 +3,6 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { MatchContent } from '../MatchContent';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
 import { EditComponentSaveButtonComponent } from '../../../../../app/authoring-tool/edit-component-save-button/edit-component-save-button.component';
 import { EditComponentSubmitButtonComponent } from '../../../../../app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
 import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
@@ -23,7 +22,6 @@ import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/ed
   imports: [
     MatCheckbox,
     FormsModule,
-    NgIf,
     EditComponentSaveButtonComponent,
     EditComponentSubmitButtonComponent,
     EditComponentMaxSubmitComponent,

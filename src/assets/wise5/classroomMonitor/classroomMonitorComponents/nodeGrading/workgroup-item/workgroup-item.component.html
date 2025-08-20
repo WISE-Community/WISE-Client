@@ -27,9 +27,11 @@
       <div fxFlex="{{ showScore ? 30 : 20 }}" fxLayout="row" fxLayoutAlign="center center">
         <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
       </div>
-      <div *ngIf="showScore" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-        <workgroup-node-score [score]="score" [maxScore]="maxScore" />
-      </div>
+      @if (showScore) {
+        <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+          <workgroup-node-score [score]="score" [maxScore]="maxScore" />
+        </div>
+      }
     </div>
   </button>
   @if (expanded && !disabled) {

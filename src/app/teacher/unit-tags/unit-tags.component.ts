@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { TagComponent } from '../tag/tag.component';
 import { Tag } from '../../domain/tag';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule, TagComponent],
+  imports: [TagComponent],
   selector: 'unit-tags',
   styles: ['tag { display: inline-block; margin-top: 8px; }'],
   template: `<div

@@ -1,12 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { SelectMenuComponent } from '../select-menu/select-menu.component';
 import { StandardType } from '../../library/standard';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-  imports: [CommonModule, FormsModule, MatSelectModule, ReactiveFormsModule],
+  imports: [FormsModule, MatSelectModule, ReactiveFormsModule],
   selector: 'standards-select-menu',
   templateUrl: './standards-select-menu.component.html'
 })

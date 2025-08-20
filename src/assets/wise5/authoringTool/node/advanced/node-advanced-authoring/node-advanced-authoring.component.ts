@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +7,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule, RouterModule],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, RouterModule],
   styleUrl: './node-advanced-authoring.component.scss',
   templateUrl: './node-advanced-authoring.component.html'
 })

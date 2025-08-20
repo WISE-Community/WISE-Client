@@ -3,14 +3,13 @@ import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../assets/wise5/services/annotationService';
 import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
 import { Annotation } from '../../../assets/wise5/common/Annotation';
-import { CommonModule } from '@angular/common';
 
 @Component({
-    imports: [CommonModule],
-    selector: 'component-new-work-badge',
-    template: `@if (hasNewWork) {
+  imports: [],
+  selector: 'component-new-work-badge',
+  template: `@if (hasNewWork) {
     <span class="badge badge--info" i18n>New</span>
-    }`
+  }`
 })
 export class ComponentNewWorkBadgeComponent {
   @Input() componentId: string;
@@ -41,11 +40,12 @@ export class ComponentNewWorkBadgeComponent {
 
   private checkHasNewWork(): void {
     this.hasNewWork = false;
-    const componentState = this.dataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
-      this.workgroupId,
-      this.nodeId,
-      this.componentId
-    );
+    const componentState =
+      this.dataService.getLatestComponentStateByWorkgroupIdNodeIdAndComponentId(
+        this.workgroupId,
+        this.nodeId,
+        this.componentId
+      );
     const annotations = this.annotationService.getLatestComponentAnnotations(
       this.nodeId,
       this.componentId,

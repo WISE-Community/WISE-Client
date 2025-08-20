@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -25,7 +24,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   templateUrl: 'draw-authoring.component.html',
   styleUrl: 'draw-authoring.component.scss',
   imports: [
-    CommonModule,
     EditComponentPrompt,
     TranslatableInputComponent,
     TranslatableAssetChooserComponent,

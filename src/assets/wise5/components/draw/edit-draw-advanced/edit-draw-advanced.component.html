@@ -1,6 +1,8 @@
-<div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [componentContent]="componentContent" />
-</div>
+@if (isNotebookEnabled()) {
+  <div>
+    <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+  </div>
+}
 <edit-component-save-button [componentContent]="componentContent" />
 <br />
 <edit-component-submit-button [componentContent]="componentContent" />

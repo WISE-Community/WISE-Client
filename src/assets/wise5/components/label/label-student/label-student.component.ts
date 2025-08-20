@@ -1,6 +1,5 @@
 import { fabric } from 'fabric';
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,7 +28,6 @@ import { LabelStudentData } from '../LabelStudentData';
 @Component({
   imports: [
     AddToNotebookButtonComponent,
-    CommonModule,
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
     ComponentSaveSubmitButtonsComponent,

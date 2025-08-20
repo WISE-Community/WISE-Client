@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,7 +21,6 @@ import { copy } from '../../common/object/object';
 
 @Component({
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatTooltipModule,

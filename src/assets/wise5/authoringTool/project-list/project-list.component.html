@@ -43,7 +43,9 @@
           <span (click)="openProject(project.id)" class="projectButton flex grow">
             <span>{{ project.id }} - {{ project.name }}</span
             >&nbsp;
-            <span *ngIf="project.runId != null" i18n>(Run ID: {{ project.runId }})</span>
+            @if (project.runId != null) {
+              <span i18n>(Run ID: {{ project.runId }})</span>
+            }
           </span>
         </ng-template>
         <div style="width: 750px">

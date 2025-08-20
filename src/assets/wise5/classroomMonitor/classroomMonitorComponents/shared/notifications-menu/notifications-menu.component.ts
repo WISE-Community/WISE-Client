@@ -4,7 +4,6 @@ import { NotificationService } from '../../../../services/notificationService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { DialogWithConfirmComponent } from '../../../../../../assets/wise5/directives/dialog-with-confirm/dialog-with-confirm.component';
 import { Notification } from '../../../../../../app/domain/notification';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -15,20 +14,19 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatIconModule,
-        MatListModule,
-        MatToolbarModule,
-        MatTooltipModule
-    ],
-    selector: 'notifications-menu',
-    styleUrl: './notifications-menu.component.scss',
-    templateUrl: './notifications-menu.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatTooltipModule
+  ],
+  selector: 'notifications-menu',
+  styleUrl: './notifications-menu.component.scss',
+  templateUrl: './notifications-menu.component.html'
 })
 export class NotificationsMenuComponent {
   @Input() newNotifications: Notification[] = [];

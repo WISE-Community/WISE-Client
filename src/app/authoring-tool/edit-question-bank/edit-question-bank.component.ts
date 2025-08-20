@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
@@ -15,7 +14,6 @@ import { SelectStepAndComponentComponent } from '../select-step-and-component/se
 @Component({
   imports: [
     MatCheckbox,
-    NgIf,
     TranslatableInputComponent,
     FormsModule,
     MatFormFieldModule,

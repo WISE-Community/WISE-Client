@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -18,7 +17,6 @@ import { EditProjectLanguageSettingComponent } from '../project-info/edit-projec
 
 @Component({
   imports: [
-    CommonModule,
     EditProjectLanguageSettingComponent,
     EditUnitResourcesComponent,
     EditUnitTypeComponent,

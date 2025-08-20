@@ -19,7 +19,9 @@
     [disabled]="isCopying"
     class="button--progress"
   >
-    <mat-progress-bar *ngIf="isCopying" mode="indeterminate" />
+    @if (isCopying) {
+      <mat-progress-bar mode="indeterminate" />
+    }
     <ng-container i18n>Copy</ng-container>
   </button>
 </mat-dialog-actions>

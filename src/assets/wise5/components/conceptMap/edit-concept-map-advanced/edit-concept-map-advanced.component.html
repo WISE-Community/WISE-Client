@@ -64,9 +64,11 @@
           <mat-select [(ngModel)]="rule.nodeLabel" (ngModelChange)="componentChanged()">
             <mat-option></mat-option>
             <mat-option value="any" i18n>Any</mat-option>
-            <mat-option *ngFor="let node of componentContent.nodes" [value]="node.label">
-              {{ node.label }}
-            </mat-option>
+            @for (node of componentContent.nodes; track node) {
+              <mat-option [value]="node.label">
+                {{ node.label }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field>
@@ -82,9 +84,11 @@
             <mat-select [(ngModel)]="rule.linkLabel" (ngModelChange)="componentChanged()">
               <mat-option></mat-option>
               <mat-option value="any" i18n>Any</mat-option>
-              <mat-option *ngFor="let link of componentContent.links" [value]="link.label">
-                {{ link.label }}
-              </mat-option>
+              @for (link of componentContent.links; track link) {
+                <mat-option [value]="link.label">
+                  {{ link.label }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <span i18n>to</span>
@@ -93,9 +97,11 @@
             <mat-select [(ngModel)]="rule.otherNodeLabel" (ngModelChange)="componentChanged()">
               <mat-option></mat-option>
               <mat-option value="any" i18n>Any</mat-option>
-              <mat-option *ngFor="let node of componentContent.nodes" [value]="node.label">
-                {{ node.label }}
-              </mat-option>
+              @for (node of componentContent.nodes; track node) {
+                <mat-option [value]="node.label">
+                  {{ node.label }}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         }
@@ -179,9 +185,11 @@
       </textarea>
     </mat-form-field>
   </div>
-  <div *ngIf="isNotebookEnabled()">
-    <edit-component-add-to-notebook-button [componentContent]="componentContent" />
-  </div>
+  @if (isNotebookEnabled()) {
+    <div>
+      <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+    </div>
+  }
 </div>
 <edit-common-advanced
   [component]="component"

@@ -9,11 +9,13 @@
         i18n-placeholder
         (ngModelChange)="wiseLinkNodeIdChanged()"
       >
-        <ng-container *ngFor="let item of items">
-          <mat-option *ngIf="item.key !== 'group0'" [value]="item.key">
-            {{ getNodePositionById(item.key) }}: {{ getNodeTitle(item.key) }} ({{ item.key }})
-          </mat-option>
-        </ng-container>
+        @for (item of items; track item) {
+          @if (item.key !== 'group0') {
+            <mat-option [value]="item.key">
+              {{ getNodePositionById(item.key) }}: {{ getNodeTitle(item.key) }} ({{ item.key }})
+            </mat-option>
+          }
+        }
       </mat-select>
     </mat-form-field>
     <mat-form-field class="choose-component">
@@ -23,12 +25,15 @@
         placeholder="Choose a Component"
         i18n-placeholder
       >
-        <mat-option
-          *ngFor="let component of getComponents(wiseLinkNodeId); let componentIndex = index"
-          [value]="component.id"
-        >
-          {{ componentIndex + 1 }}. {{ component.type }}
-        </mat-option>
+        @for (
+          component of getComponents(wiseLinkNodeId);
+          track component;
+          let componentIndex = $index
+        ) {
+          <mat-option [value]="component.id">
+            {{ componentIndex + 1 }}. {{ component.type }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>

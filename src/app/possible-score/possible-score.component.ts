@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule],
   selector: 'possible-score',
   templateUrl: 'possible-score.component.html'
 })

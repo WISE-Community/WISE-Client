@@ -16,13 +16,19 @@
     </a>
   </div>
   <ul>
-    <li *ngFor="let topic of topics">
-      <a class="mat-body-2" href="{{ baseUrl }}/t/{{ topic.slug }}/{{ topic.id }}" target="_blank">
-        {{ topic.title }}
-      </a>
-      <span class="secondary-text mat-caption">
-        ({{ topic.last_posted_at | date: 'MMM dd y' }})
-      </span>
-    </li>
+    @for (topic of topics; track topic) {
+      <li>
+        <a
+          class="mat-body-2"
+          href="{{ baseUrl }}/t/{{ topic.slug }}/{{ topic.id }}"
+          target="_blank"
+        >
+          {{ topic.title }}
+        </a>
+        <span class="secondary-text mat-caption">
+          ({{ topic.last_posted_at | date: 'MMM dd y' }})
+        </span>
+      </li>
+    }
   </ul>
 </div>

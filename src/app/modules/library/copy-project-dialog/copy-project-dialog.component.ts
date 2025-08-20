@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
   MatDialogModule,
   MatDialog,
@@ -15,13 +14,7 @@ import { LibraryService } from '../../../services/library.service';
 import { Project } from '../../../domain/project';
 
 @Component({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatProgressBarModule,
-    MatSnackBarModule
-  ],
+  imports: [MatButtonModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule],
   templateUrl: './copy-project-dialog.component.html'
 })
 export class CopyProjectDialogComponent {

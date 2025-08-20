@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentState } from '../../../../app/domain/componentState';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ComponentStateInfoComponent } from '../../common/component-state-info/component-state-info.component';
 
 @Component({
-  imports: [CommonModule, ComponentStateInfoComponent, MatButtonModule],
+  imports: [ComponentStateInfoComponent, MatButtonModule],
   selector: 'component-save-submit-buttons',
   styles: ['.mat-mdc-button { min-width: 88px; } .save-message { font-style: italic; } '],
   templateUrl: 'component-save-submit-buttons.component.html'

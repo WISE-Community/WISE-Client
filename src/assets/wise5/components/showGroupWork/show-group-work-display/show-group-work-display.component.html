@@ -34,9 +34,9 @@
                 <span class="mat-subtitle-2">{{ workgroupInfos[member.id].displayNames }}</span>
               </div>
               <mat-card-content class="app-bg-bg flex-auto">
-                <span class="text-secondary" *ngIf="workgroupIdToWork.get(member.id) == null" i18n>
-                  (Waiting for response...)
-                </span>
+                @if (workgroupIdToWork.get(member.id) == null) {
+                  <span class="text-secondary" i18n> (Waiting for response...) </span>
+                }
                 @if (workgroupIdToWork.get(member.id) != null) {
                   <show-work-student
                     [studentWork]="workgroupIdToWork.get(member.id)"

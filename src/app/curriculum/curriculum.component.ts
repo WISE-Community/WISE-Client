@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { LibraryFiltersComponent } from '../modules/library/library-filters/library-filters.component';
@@ -15,7 +14,6 @@ import { ProjectFilterValues } from '../domain/projectFilterValues';
 
 @Component({
   imports: [
-    CommonModule,
     LibraryFiltersComponent,
     MatButtonModule,
     MatIconModule,

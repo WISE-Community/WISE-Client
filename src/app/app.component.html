@@ -3,26 +3,29 @@
     <app-mobile-menu></app-mobile-menu>
   </mat-sidenav>
   <mat-sidenav-content fxLayout="column" (scroll)="onYPositionChange($event)">
-    <app-announcement
-      *ngIf="hasAnnouncement && showHeaderAndFooter"
-      class="top-content"
-      [announcement]="announcement"
-      (dismiss)="dismissAnnouncement()"
-    />
-    <app-header *ngIf="showHeaderAndFooter" class="dark-theme top-content" />
+    @if (hasAnnouncement && showHeaderAndFooter) {
+      <app-announcement
+        class="top-content"
+        [announcement]="announcement"
+        (dismiss)="dismissAnnouncement()"
+      />
+    }
+    @if (showHeaderAndFooter) {
+      <app-header class="dark-theme top-content" />
+    }
     <div fxFlex>
       <router-outlet></router-outlet>
     </div>
-    <app-footer *ngIf="showHeaderAndFooter"></app-footer>
-    <div
-      *ngIf="showHeaderAndFooter"
-      class="to-top dark-theme"
-      [ngClass]="{ active: scroll, inactive: !scroll }"
-    >
-      <button mat-raised-button (click)="scrollToTop()">
-        <mat-icon>arrow_upward</mat-icon>
-        &nbsp;<ng-container i18n>Back to Top</ng-container>
-      </button>
-    </div>
+    @if (showHeaderAndFooter) {
+      <app-footer></app-footer>
+    }
+    @if (showHeaderAndFooter) {
+      <div class="to-top dark-theme" [ngClass]="{ active: scroll, inactive: !scroll }">
+        <button mat-raised-button (click)="scrollToTop()">
+          <mat-icon>arrow_upward</mat-icon>
+          &nbsp;<ng-container i18n>Back to Top</ng-container>
+        </button>
+      </div>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

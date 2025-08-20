@@ -6,7 +6,6 @@ import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuth
 import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectService } from '../../../services/projectService';
-import { CommonModule } from '@angular/common';
 import { SelectStepAndComponentComponent } from '../../../../../app/authoring-tool/select-step-and-component/select-step-and-component.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +15,6 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatDialogModule,

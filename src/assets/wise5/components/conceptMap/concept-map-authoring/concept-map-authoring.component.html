@@ -74,106 +74,108 @@
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div *ngIf="componentContent.nodes == null || componentContent.nodes.length == 0">
-      <p i18n>There are no nodes. Click the "Add Node" button to add a node.</p>
-    </div>
+    @if (componentContent.nodes == null || componentContent.nodes.length == 0) {
+      <div>
+        <p i18n>There are no nodes. Click the "Add Node" button to add a node.</p>
+      </div>
+    }
     <div>
-      <div
-        *ngFor="
-          let node of componentContent.nodes;
-          index as nodeIndex;
-          first as isFirst;
-          last as isLast
-        "
-        class="content-item flex flex-row flex-wrap items-start"
-      >
-        <translatable-input
-          class="content-item-setting flex-[1_1_100%] sm:flex-[1_1_40%] md:flex-[1_1_30%]"
-          [content]="node"
-          key="label"
-          label="Node Label"
-          i18n-label
-          (defaultLanguageTextChanged)="inputChange.next($event)"
-        />
-        <div
-          class="content-item-setting flex flex-row items-start gap-2 flex-[1_1_100%] sm:flex-[1_1_60%] md:flex-[1_1_35%]"
-        >
+      @for (
+        node of componentContent.nodes;
+        track node;
+        let nodeIndex = $index;
+        let isFirst = $first;
+        let isLast = $last
+      ) {
+        <div class="content-item flex flex-row flex-wrap items-start">
           <translatable-input
+            class="content-item-setting flex-[1_1_100%] sm:flex-[1_1_40%] md:flex-[1_1_30%]"
             [content]="node"
-            key="fileName"
-            label="Image"
+            key="label"
+            label="Node Label"
             i18n-label
             (defaultLanguageTextChanged)="inputChange.next($event)"
-            class="background"
           />
-          <translatable-asset-chooser
-            [content]="node"
-            key="fileName"
-            (defaultLanguageTextChanged)="componentChanged()"
-          />
-        </div>
-        <div class="content-item-setting flex flex-row gap-2">
-          <mat-form-field class="node-dimension">
-            <mat-label i18n>Width</mat-label>
-            <input
-              matInput
-              [(ngModel)]="node.width"
-              (ngModelChange)="inputChange.next($event)"
-              type="number"
+          <div
+            class="content-item-setting flex flex-row items-start gap-2 flex-[1_1_100%] sm:flex-[1_1_60%] md:flex-[1_1_35%]"
+          >
+            <translatable-input
+              [content]="node"
+              key="fileName"
+              label="Image"
+              i18n-label
+              (defaultLanguageTextChanged)="inputChange.next($event)"
+              class="background"
             />
-          </mat-form-field>
-          <mat-form-field class="node-dimension">
-            <mat-label i18n>Height</mat-label>
-            <input
-              matInput
-              [(ngModel)]="node.height"
-              (ngModelChange)="inputChange.next($event)"
-              type="number"
+            <translatable-asset-chooser
+              [content]="node"
+              key="fileName"
+              (defaultLanguageTextChanged)="componentChanged()"
             />
-          </mat-form-field>
+          </div>
+          <div class="content-item-setting flex flex-row gap-2">
+            <mat-form-field class="node-dimension">
+              <mat-label i18n>Width</mat-label>
+              <input
+                matInput
+                [(ngModel)]="node.width"
+                (ngModelChange)="inputChange.next($event)"
+                type="number"
+              />
+            </mat-form-field>
+            <mat-form-field class="node-dimension">
+              <mat-label i18n>Height</mat-label>
+              <input
+                matInput
+                [(ngModel)]="node.height"
+                (ngModelChange)="inputChange.next($event)"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <span class="flex-1"></span>
+          <div class="content-item-setting flex flex-row gap-2">
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="isFirst"
+              (click)="moveObjectUp(componentContent.nodes, nodeIndex)"
+              matTooltip="Move Up"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Move Up"
+              i18n-aria-label
+            >
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="isLast"
+              (click)="moveObjectDown(componentContent.nodes, nodeIndex)"
+              matTooltip="Move Down"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Move Down"
+              i18n-aria-label
+            >
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="nodeDeleteButtonClicked(nodeIndex)"
+              matTooltip="Delete"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Delete"
+              i18n-aria-label
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
-        <span class="flex-1"></span>
-        <div class="content-item-setting flex flex-row gap-2">
-          <button
-            mat-raised-button
-            color="primary"
-            [disabled]="isFirst"
-            (click)="moveObjectUp(componentContent.nodes, nodeIndex)"
-            matTooltip="Move Up"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Move Up"
-            i18n-aria-label
-          >
-            <mat-icon>arrow_upward</mat-icon>
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            [disabled]="isLast"
-            (click)="moveObjectDown(componentContent.nodes, nodeIndex)"
-            matTooltip="Move Down"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Move Down"
-            i18n-aria-label
-          >
-            <mat-icon>arrow_downward</mat-icon>
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="nodeDeleteButtonClicked(nodeIndex)"
-            matTooltip="Delete"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Delete"
-            i18n-aria-label
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </div>
+      }
     </div>
     <div>
       <mat-checkbox
@@ -210,73 +212,75 @@
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <div *ngIf="componentContent.links == null || componentContent.links.length == 0">
-      <p i18n>There are no links. Click the "Add Link" button to add a link.</p>
-    </div>
-    <div>
-      <div
-        *ngFor="
-          let link of componentContent.links;
-          index as linkIndex;
-          first as isFirst;
-          last as isLast
-        "
-        class="content-item flex flex-row flex-wrap items-start gap-4"
-      >
-        <translatable-input
-          class="content-item-setting flex-[1_1_50%] md:flex-[1_1_30%]"
-          [content]="link"
-          key="label"
-          label="Link Label"
-          i18n-label
-          (defaultLanguageTextChanged)="inputChange.next($event)"
-        />
-        <mat-form-field class="content-item-setting flex-[1_1_50%] md:flex-[1_1_30%]">
-          <mat-label i18n>Color</mat-label>
-          <input matInput [(ngModel)]="link.color" (ngModelChange)="inputChange.next($event)" />
-        </mat-form-field>
-        <span class="flex-1"></span>
-        <div class="content-item-setting flex flex-row gap-2">
-          <button
-            mat-raised-button
-            color="primary"
-            [disabled]="isFirst"
-            (click)="moveObjectUp(componentContent.links, linkIndex)"
-            matTooltip="Move Up"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Move Up"
-            i18n-aria-label
-          >
-            <mat-icon>arrow_upward</mat-icon>
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            [disabled]="isLast"
-            (click)="moveObjectDown(componentContent.links, linkIndex)"
-            matTooltip="Move Down"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Move Down"
-            i18n-aria-label
-          >
-            <mat-icon>arrow_downward</mat-icon>
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="linkDeleteButtonClicked(linkIndex)"
-            matTooltip="Delete"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Delete"
-            i18n-aria-label
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
+    @if (componentContent.links == null || componentContent.links.length == 0) {
+      <div>
+        <p i18n>There are no links. Click the "Add Link" button to add a link.</p>
       </div>
+    }
+    <div>
+      @for (
+        link of componentContent.links;
+        track link;
+        let linkIndex = $index;
+        let isFirst = $first;
+        let isLast = $last
+      ) {
+        <div class="content-item flex flex-row flex-wrap items-start gap-4">
+          <translatable-input
+            class="content-item-setting flex-[1_1_50%] md:flex-[1_1_30%]"
+            [content]="link"
+            key="label"
+            label="Link Label"
+            i18n-label
+            (defaultLanguageTextChanged)="inputChange.next($event)"
+          />
+          <mat-form-field class="content-item-setting flex-[1_1_50%] md:flex-[1_1_30%]">
+            <mat-label i18n>Color</mat-label>
+            <input matInput [(ngModel)]="link.color" (ngModelChange)="inputChange.next($event)" />
+          </mat-form-field>
+          <span class="flex-1"></span>
+          <div class="content-item-setting flex flex-row gap-2">
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="isFirst"
+              (click)="moveObjectUp(componentContent.links, linkIndex)"
+              matTooltip="Move Up"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Move Up"
+              i18n-aria-label
+            >
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="isLast"
+              (click)="moveObjectDown(componentContent.links, linkIndex)"
+              matTooltip="Move Down"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Move Down"
+              i18n-aria-label
+            >
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="linkDeleteButtonClicked(linkIndex)"
+              matTooltip="Delete"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Delete"
+              i18n-aria-label
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
     </div>
   </div>
 </div>

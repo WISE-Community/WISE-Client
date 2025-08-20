@@ -1,5 +1,4 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { finalize } from 'rxjs/operators';
@@ -42,7 +41,6 @@ import { AccessLinkService } from '../../services/accessLinkService';
 @Component({
   imports: [
     ClipboardModule,
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,

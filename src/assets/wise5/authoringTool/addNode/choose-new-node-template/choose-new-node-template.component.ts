@@ -1,21 +1,13 @@
 import { Component } from '@angular/core';
 import { NewNodeTemplate } from '../NewNodeTemplate';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatIconModule,
-    RouterModule
-  ],
+  imports: [MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, RouterModule],
   styleUrls: ['choose-new-node-template.component.scss', '../../add-content.scss'],
   templateUrl: 'choose-new-node-template.component.html'
 })

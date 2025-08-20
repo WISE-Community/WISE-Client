@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MatLabel } from '@angular/material/form-field';
@@ -14,7 +13,6 @@ import { SelectStepAndComponentComponent } from '../select-step-and-component/se
   styleUrl: './edit-dynamic-prompt.component.scss',
   imports: [
     MatCheckbox,
-    NgIf,
     MatLabel,
     SelectStepAndComponentComponent,
     EditComponentPeerGroupingTagComponent,

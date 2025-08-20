@@ -3,16 +3,15 @@ import { Subscription } from 'rxjs';
 import { WorkgroupService } from '../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
-import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, MatFormFieldModule, MatSelectModule],
-    selector: 'select-period',
-    styleUrl: 'select-period.component.scss',
-    templateUrl: 'select-period.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [MatFormFieldModule, MatSelectModule],
+  selector: 'select-period',
+  styleUrl: 'select-period.component.scss',
+  templateUrl: 'select-period.component.html'
 })
 export class SelectPeriodComponent {
   private currentPeriod: any;

@@ -4,7 +4,6 @@ import { NodeStatusService } from '../../services/nodeStatusService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
 import { NodeService } from '../../services/nodeService';
-import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 
 class GroupNode {
@@ -15,9 +14,9 @@ class GroupNode {
 }
 
 @Component({
-    imports: [CommonModule, MatTabsModule],
-    selector: 'group-tabs',
-    templateUrl: './group-tabs.component.html'
+  imports: [MatTabsModule],
+  selector: 'group-tabs',
+  templateUrl: './group-tabs.component.html'
 })
 export class GroupTabsComponent implements OnInit {
   protected groupNodes: GroupNode[] = [];

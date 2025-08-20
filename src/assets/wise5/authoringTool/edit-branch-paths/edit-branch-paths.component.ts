@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +11,6 @@ import { DisplayBranchPathStepsComponent } from '../display-branch-path-steps/di
 
 @Component({
   imports: [
-    CommonModule,
     DisplayBranchPathStepsComponent,
     FormsModule,
     MatButtonModule,

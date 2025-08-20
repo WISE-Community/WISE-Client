@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { NgIf } from '@angular/common';
 import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { EditComponentSaveButtonComponent } from '../../../../../app/authoring-tool/edit-component-save-button/edit-component-save-button.component';
 import { EditComponentSubmitButtonComponent } from '../../../../../app/authoring-tool/edit-component-submit-button/edit-component-submit-button.component';
@@ -18,7 +17,6 @@ import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/ed
 @Component({
   templateUrl: 'edit-label-advanced.component.html',
   imports: [
-    NgIf,
     EditComponentAddToNotebookButtonComponent,
     EditComponentSaveButtonComponent,
     EditComponentSubmitButtonComponent,

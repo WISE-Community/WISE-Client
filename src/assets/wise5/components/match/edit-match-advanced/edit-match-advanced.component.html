@@ -8,15 +8,16 @@
   Student Can Create Choices
 </mat-checkbox>
 <br />
-<mat-checkbox
-  *ngIf="isNotebookEnabled()"
-  color="primary"
-  class="checkbox"
-  [(ngModel)]="componentContent.importPrivateNotes"
-  (ngModelChange)="componentChanged()"
->
-  Show Private Notes As Choices
-</mat-checkbox>
+@if (isNotebookEnabled()) {
+  <mat-checkbox
+    color="primary"
+    class="checkbox"
+    [(ngModel)]="componentContent.importPrivateNotes"
+    (ngModelChange)="componentChanged()"
+  >
+    Show Private Notes As Choices
+  </mat-checkbox>
+}
 <br />
 <edit-component-save-button [componentContent]="componentContent" />
 <br />

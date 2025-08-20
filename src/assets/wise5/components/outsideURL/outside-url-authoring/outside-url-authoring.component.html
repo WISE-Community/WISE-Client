@@ -98,14 +98,11 @@
               style="background-image: url('{{ openEducationalResource.thumbnail }}');"
             ></div>
             <mat-card-actions class="oer-card-actions flex flex-row justify-start items-center">
-              <mat-icon
-                class="success"
-                aria-label="Selected"
-                i18n-aria-label
-                *ngIf="isResourceSelected(openEducationalResource.url)"
-              >
-                check_circle
-              </mat-icon>
+              @if (isResourceSelected(openEducationalResource.url)) {
+                <mat-icon class="success" aria-label="Selected" i18n-aria-label>
+                  check_circle
+                </mat-icon>
+              }
               <span class="oer-card-actions-spacer"></span>
               <a
                 class="oer-info-link"
