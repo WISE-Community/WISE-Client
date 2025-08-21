@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentFactory } from '../../../common/ComponentFactory';
 import { Component as WISEComponent } from '../../../common/Component';
-import { CommonModule } from '@angular/common';
 import { ComponentTypeSelectorComponent } from '../component-type-selector/component-type-selector.component';
 import { PreviewComponentComponent } from '../preview-component/preview-component.component';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +12,6 @@ import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   imports: [
-    CommonModule,
     ComponentTypeSelectorComponent,
     MatButtonModule,
     MatCardModule,

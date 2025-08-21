@@ -8,18 +8,17 @@ import {
 } from '@angular/core';
 import { ComponentTypeService } from '../../../assets/wise5/services/componentTypeService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatSelectModule],
-    selector: 'component-select',
-    styleUrl: 'component-select.component.scss',
-    templateUrl: 'component-select.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [FormsModule, MatButtonModule, MatFormFieldModule, MatSelectModule],
+  selector: 'component-select',
+  styleUrl: 'component-select.component.scss',
+  templateUrl: 'component-select.component.html'
 })
 export class ComponentSelectComponent {
   protected components: any[];

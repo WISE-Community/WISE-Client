@@ -55,10 +55,12 @@
                       class="rule-input form-field-no-hint feedback-input"
                       appearance="fill"
                     >
-                      <mat-label *ngIf="rule.feedback.length === 1" i18n>Feedback</mat-label>
-                      <mat-label *ngIf="rule.feedback.length > 1" i18n
-                        >Feedback #{{ feedbackIndex + 1 }}</mat-label
-                      >
+                      @if (rule.feedback.length === 1) {
+                        <mat-label i18n>Feedback</mat-label>
+                      }
+                      @if (rule.feedback.length > 1) {
+                        <mat-label i18n>Feedback #{{ feedbackIndex + 1 }}</mat-label>
+                      }
                       <textarea
                         matInput
                         [(ngModel)]="rule.feedback[feedbackIndex]"
@@ -66,29 +68,31 @@
                         cdkTextareaAutosize
                       >
                       </textarea>
+                      @if (rule.feedback.length > 1) {
+                        <button
+                          mat-icon-button
+                          matSuffix
+                          matTooltip="Delete feedback"
+                          i18n-matTooltip
+                          matTooltipPosition="before"
+                          (click)="deleteFeedbackInRule(rule, feedbackIndex)"
+                        >
+                          <mat-icon>clear</mat-icon>
+                        </button>
+                      }
+                    </mat-form-field>
+                    @if (last) {
                       <button
                         mat-icon-button
-                        matSuffix
-                        *ngIf="rule.feedback.length > 1"
-                        matTooltip="Delete feedback"
+                        matTooltip="Add new feedback"
+                        matTooltipPosition="above"
                         i18n-matTooltip
-                        matTooltipPosition="before"
-                        (click)="deleteFeedbackInRule(rule, feedbackIndex)"
+                        (click)="addNewFeedbackToRule(rule)"
+                        i18n
                       >
-                        <mat-icon>clear</mat-icon>
+                        <mat-icon>add_circle</mat-icon>
                       </button>
-                    </mat-form-field>
-                    <button
-                      *ngIf="last"
-                      mat-icon-button
-                      matTooltip="Add new feedback"
-                      matTooltipPosition="above"
-                      i18n-matTooltip
-                      (click)="addNewFeedbackToRule(rule)"
-                      i18n
-                    >
-                      <mat-icon>add_circle</mat-icon>
-                    </button>
+                    }
                   </div>
                 }
               } @else {

@@ -3,7 +3,6 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 import { moveObjectDown, moveObjectUp } from '../../../../assets/wise5/common/array/array';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,

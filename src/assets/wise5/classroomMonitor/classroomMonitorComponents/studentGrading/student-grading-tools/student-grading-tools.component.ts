@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -19,16 +18,15 @@ class Workgroup {
 }
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatTooltipModule,
-        WorkgroupSelectAutocompleteComponent
-    ],
-    selector: 'student-grading-tools',
-    templateUrl: './student-grading-tools.component.html'
+  imports: [
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    WorkgroupSelectAutocompleteComponent
+  ],
+  selector: 'student-grading-tools',
+  templateUrl: './student-grading-tools.component.html'
 })
 export class StudentGradingToolsComponent implements OnInit {
   protected avatarColor: string;

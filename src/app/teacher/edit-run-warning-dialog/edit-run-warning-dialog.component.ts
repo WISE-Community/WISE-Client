@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
   MatDialogModule,
   MAT_DIALOG_DATA,
@@ -12,7 +11,7 @@ import { Run } from '../../domain/run';
 import { Router } from '@angular/router';
 
 @Component({
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule],
+  imports: [MatDialogModule, MatButtonModule, MatIconModule],
   templateUrl: './edit-run-warning-dialog.component.html'
 })
 export class EditRunWarningDialogComponent {

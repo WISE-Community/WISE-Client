@@ -9,7 +9,6 @@ import {
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { temporarilyHighlightElement } from '../../../common/dom/dom';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -18,7 +17,6 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   imports: [
-    CommonModule,
     MatButtonModule,
     MatFormFieldModule,
     MatDividerModule,

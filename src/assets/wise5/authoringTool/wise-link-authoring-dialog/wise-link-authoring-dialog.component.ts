@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +11,6 @@ import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatDialogModule,

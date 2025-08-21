@@ -10,14 +10,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   imports: [
-    CommonModule,
     EditComponentPrompt,
     FormsModule,
     MatButtonModule,

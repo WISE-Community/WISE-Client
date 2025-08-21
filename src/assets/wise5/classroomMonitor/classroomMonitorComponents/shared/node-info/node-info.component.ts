@@ -1,5 +1,4 @@
 import { AnnotationService } from '../../../../services/annotationService';
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ComponentFactory } from '../../../../common/ComponentFactory';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
@@ -20,7 +19,6 @@ import { TeacherSummaryDisplayComponent } from '../../../../directives/teacher-s
 
 @Component({
   imports: [
-    CommonModule,
     FlexLayoutModule,
     IdeasSummaryComponent,
     MatCardModule,

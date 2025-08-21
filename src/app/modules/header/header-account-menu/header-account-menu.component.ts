@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
@@ -15,7 +14,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   templateUrl: './header-account-menu.component.html',
   styleUrl: './header-account-menu.component.scss',
   imports: [
-    CommonModule,
     FlexLayoutModule,
     MatButtonModule,
     MatDividerModule,

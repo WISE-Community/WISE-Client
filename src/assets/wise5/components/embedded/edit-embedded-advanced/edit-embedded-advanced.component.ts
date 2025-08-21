@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { EmbeddedContent } from '../EmbeddedContent';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
-import { NgIf } from '@angular/common';
 import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 
@@ -11,7 +10,6 @@ import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/e
   styles: ['.model-parameters { width: 100%; }'],
   imports: [
     TranslatableInputComponent,
-    NgIf,
     EditComponentAddToNotebookButtonComponent,
     EditCommonAdvancedComponent
   ]

@@ -1,9 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
-  imports: [CommonModule],
   selector: 'show-student-info',
   template: `
     @if (canViewStudentNames) {

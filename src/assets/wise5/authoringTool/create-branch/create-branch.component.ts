@@ -4,7 +4,6 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
@@ -22,7 +21,6 @@ import { MatDividerModule } from '@angular/material/divider';
 @Component({
   imports: [
     CreateBranchPathsComponent,
-    CommonModule,
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,

@@ -11,24 +11,26 @@
         cdkTextareaAutosize
       >
       </textarea>
-      <mat-error *ngIf="noteFormGroup.controls['text'].hasError('required')" i18n
-        >{{ textInputLabel }} required</mat-error
-      >
+      @if (noteFormGroup.controls['text'].hasError('required')) {
+        <mat-error i18n>{{ textInputLabel }} required</mat-error>
+      }
     </mat-form-field>
-    <div class="attachment notice-bg-bg" *ngFor="let attachment of item.content.attachments">
-      <img [src]="attachment.iconURL" class="attachment-content" />
-      <button
-        mat-mini-fab
-        color="white"
-        class="attachment-delete flex items-center justify-center"
-        (click)="removeAttachment(attachment)"
-        [disabled]="!isEditMode"
-        title="Remove File"
-        i18n-title
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+    @for (attachment of item.content.attachments; track attachment) {
+      <div class="attachment notice-bg-bg">
+        <img [src]="attachment.iconURL" class="attachment-content" />
+        <button
+          mat-mini-fab
+          color="white"
+          class="attachment-delete flex items-center justify-center"
+          (click)="removeAttachment(attachment)"
+          [disabled]="!isEditMode"
+          title="Remove File"
+          i18n-title
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
     @if (isEditMode && showUpload) {
       <div
         class="drop-box flex items-center justify-center"
@@ -94,17 +96,18 @@
   @if (!isEditMode) {
     <mat-dialog-actions align="end">
       <div>
-        <button
-          class="primary"
-          type="button"
-          *ngIf="canCopyPublicNotebookItem()"
-          (click)="copyPublicNotebookItem($event)"
-          aria-label="Copy"
-          i18n-aria-label
-        >
-          <mat-icon class="primary">content_copy</mat-icon>
-          <span i18n>Copy to My Notes</span>
-        </button>
+        @if (canCopyPublicNotebookItem()) {
+          <button
+            class="primary"
+            type="button"
+            (click)="copyPublicNotebookItem($event)"
+            aria-label="Copy"
+            i18n-aria-label
+          >
+            <mat-icon class="primary">content_copy</mat-icon>
+            <span i18n>Copy to My Notes</span>
+          </button>
+        }
       </div>
       <span class="flex-1"></span>
       <div>

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +14,7 @@ import { Router } from '@angular/router';
 import { ArchiveProjectService } from '../../services/archive-project.service';
 
 @Component({
-  imports: [CommonModule, MatMenuModule, MatIconModule, MatButtonModule, MatDividerModule],
+  imports: [MatMenuModule, MatIconModule, MatButtonModule, MatDividerModule],
   selector: 'app-run-menu',
   styleUrl: './run-menu.component.scss',
   templateUrl: './run-menu.component.html'

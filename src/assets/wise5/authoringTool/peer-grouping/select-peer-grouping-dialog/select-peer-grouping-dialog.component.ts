@@ -1,5 +1,4 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -26,7 +25,6 @@ class SelectPeerGroupingDialogData {
   imports: [
     MatDialogModule,
     CdkScrollable,
-    CommonModule,
     MatCardModule,
     SelectPeerGroupingOptionComponent,
     MatButton,

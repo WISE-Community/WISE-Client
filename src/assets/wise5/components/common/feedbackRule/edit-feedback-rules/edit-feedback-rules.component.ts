@@ -1,7 +1,6 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,7 +22,6 @@ import { FeedbackRule } from '../FeedbackRule';
   templateUrl: './edit-feedback-rules.component.html',
   styleUrl: './edit-feedback-rules.component.scss',
   imports: [
-    CommonModule,
     MatTooltip,
     MatIcon,
     MatButtonModule,

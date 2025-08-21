@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormControl,
@@ -25,7 +24,6 @@ import { TranslatableInputComponent } from '../../../authoringTool/components/tr
   templateUrl: 'table-authoring.component.html',
   styleUrl: 'table-authoring.component.scss',
   imports: [
-    CommonModule,
     EditComponentPrompt,
     FormsModule,
     ReactiveFormsModule,

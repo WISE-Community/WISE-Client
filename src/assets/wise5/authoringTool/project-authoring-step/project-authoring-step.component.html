@@ -35,26 +35,28 @@
         <mat-icon class="rotate-180">call_split</mat-icon>
       </button>
     }
-    <button
-      *ngIf="nodeHasConstraint(step.id)"
-      mat-icon-button
-      (click)="constraintIconClicked(step.id); $event.stopPropagation()"
-      matTooltip="{{ getNumberOfConstraintsOnNode(step.id) }} Constraint(s) {{
-        getConstraintDescriptions(step.id)
-      }}"
-      matTooltipPosition="right"
-      i18n-matTooltip
-    >
-      <mat-icon>block</mat-icon>
-    </button>
-    <mat-icon
-      *ngIf="nodeHasRubric(step.id)"
-      tabindex="0"
-      matTooltip="Has rubric/teaching tips"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      >message</mat-icon
-    >
+    @if (nodeHasConstraint(step.id)) {
+      <button
+        mat-icon-button
+        (click)="constraintIconClicked(step.id); $event.stopPropagation()"
+        matTooltip="{{ getNumberOfConstraintsOnNode(step.id) }} Constraint(s) {{
+          getConstraintDescriptions(step.id)
+        }}"
+        matTooltipPosition="right"
+        i18n-matTooltip
+      >
+        <mat-icon>block</mat-icon>
+      </button>
+    }
+    @if (nodeHasRubric(step.id)) {
+      <mat-icon
+        tabindex="0"
+        matTooltip="Has rubric/teaching tips"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        >message</mat-icon
+      >
+    }
   </div>
   <div
     class="tooltip-helper flex grow"

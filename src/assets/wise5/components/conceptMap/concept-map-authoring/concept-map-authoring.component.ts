@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -31,8 +30,7 @@ import { ConceptMapService } from '../conceptMapService';
     MatInput,
     MatButton,
     MatTooltip,
-    MatIcon,
-    CommonModule
+    MatIcon
   ]
 })
 export class ConceptMapAuthoring extends AbstractComponentAuthoring {

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -15,7 +14,6 @@ import { EditConnectedComponentsWithBackgroundComponent } from '../../../../../a
   styleUrl:
     '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
   imports: [
-    CommonModule,
     EditConnectedComponentsAddButtonComponent,
     EditConnectedComponentDefaultSelectsComponent,
     MatCheckbox,

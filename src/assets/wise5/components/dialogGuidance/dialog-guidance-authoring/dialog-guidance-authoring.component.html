@@ -20,10 +20,11 @@
     i18n
     >Enable Computer Avatar</mat-checkbox
   >
-  <edit-dialog-guidance-computer-avatar
-    *ngIf="componentContent.isComputerAvatarEnabled"
-    [computerAvatarSettings]="componentContent.computerAvatarSettings"
-  />
+  @if (componentContent.isComputerAvatarEnabled) {
+    <edit-dialog-guidance-computer-avatar
+      [computerAvatarSettings]="componentContent.computerAvatarSettings"
+    />
+  }
   <edit-feedback-rules
     [feedbackRules]="componentContent.feedbackRules"
     [version]="componentContent.version"

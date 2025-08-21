@@ -1,5 +1,4 @@
 import { BehaviorSubject } from 'rxjs';
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LibraryComponent } from '../library/library.component';
 import { LibraryProject } from '../libraryProject';
@@ -10,7 +9,6 @@ import { PublicUnitTypeSelectorComponent } from '../public-unit-type-selector/pu
 
 @Component({
   imports: [
-    CommonModule,
     LibraryProjectComponent,
     MatDividerModule,
     MatPaginatorModule,

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -21,17 +20,16 @@ import { MultipleChoiceRadioStudentComponent } from '../multiple-choice-radio-st
 import { MultipleChoiceCheckboxStudentComponent } from '../multiple-choice-checkbox-student/multiple-choice-checkbox-student.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        ComponentAnnotationsComponent,
-        ComponentHeaderComponent,
-        ComponentSaveSubmitButtonsComponent,
-        MultipleChoiceRadioStudentComponent,
-        MultipleChoiceCheckboxStudentComponent
-    ],
-    selector: 'multiple-choice-student',
-    styleUrl: 'multiple-choice-student.component.scss',
-    templateUrl: 'multiple-choice-student.component.html'
+  imports: [
+    ComponentAnnotationsComponent,
+    ComponentHeaderComponent,
+    ComponentSaveSubmitButtonsComponent,
+    MultipleChoiceRadioStudentComponent,
+    MultipleChoiceCheckboxStudentComponent
+  ],
+  selector: 'multiple-choice-student',
+  styleUrl: 'multiple-choice-student.component.scss',
+  templateUrl: 'multiple-choice-student.component.html'
 })
 export class MultipleChoiceStudentComponent extends ComponentStudent {
   choices: any[];

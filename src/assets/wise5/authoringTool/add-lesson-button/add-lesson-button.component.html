@@ -1,4 +1,4 @@
-<ng-container *ngIf="lessonId == null">
+@if (lessonId == null) {
   <button
     mat-icon-button
     color="primary"
@@ -9,9 +9,9 @@
   >
     <mat-icon>add_circle</mat-icon>
   </button>
-</ng-container>
-<ng-container *ngIf="lessonId != null">
-  <ng-container *ngIf="first">
+}
+@if (lessonId != null) {
+  @if (first) {
     <button
       mat-icon-button
       color="primary"
@@ -32,8 +32,8 @@
         <mat-icon>subdirectory_arrow_left</mat-icon><span i18n>Add lesson after</span>
       </button>
     </mat-menu>
-  </ng-container>
-  <ng-container *ngIf="!first">
+  }
+  @if (!first) {
     <button
       mat-icon-button
       color="primary"
@@ -44,5 +44,5 @@
     >
       <mat-icon>add_circle</mat-icon>
     </button>
-  </ng-container>
-</ng-container>
+  }
+}

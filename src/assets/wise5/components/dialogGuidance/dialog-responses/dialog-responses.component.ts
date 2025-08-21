@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { CRaterRubric } from '../../common/cRater/CRaterRubric';
@@ -11,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RubricEventService } from '../../common/cRater/crater-rubric/RubricEventService';
 
 @Component({
-  imports: [CommonModule, DetectedIdeasComponent, DialogResponseComponent, MatIconModule],
+  imports: [DetectedIdeasComponent, DialogResponseComponent, MatIconModule],
   selector: 'dialog-responses',
   styleUrl: './dialog-responses.component.scss',
   templateUrl: './dialog-responses.component.html'

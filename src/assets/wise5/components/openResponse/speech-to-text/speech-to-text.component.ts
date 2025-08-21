@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output, Signal } from '@angular/core';
 import { Language, TranscribeService } from '../../../services/transcribeService';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -11,7 +10,6 @@ import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'speech-to-text',
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,

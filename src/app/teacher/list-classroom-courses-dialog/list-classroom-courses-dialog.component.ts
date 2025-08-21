@@ -12,7 +12,6 @@ import {
   ValidatorFn
 } from '@angular/forms';
 import { Run } from '../../domain/run';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +24,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatCheckboxModule,
