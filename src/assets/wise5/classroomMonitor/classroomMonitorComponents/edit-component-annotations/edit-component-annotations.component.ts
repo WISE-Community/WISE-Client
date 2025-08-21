@@ -4,7 +4,6 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { Annotation } from '../../../common/Annotation';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditComponentScoreComponent } from '../edit-component-score/edit-component-score.component';
 import { GradingEditComponentMaxScoreComponent } from '../grading-edit-component-max-score/grading-edit-component-max-score.component';
 import { EditComponentCommentComponent } from '../edit-component-comment/edit-component-comment.component';
@@ -13,7 +12,6 @@ import { EditComponentCommentComponent } from '../edit-component-comment/edit-co
   imports: [
     EditComponentCommentComponent,
     EditComponentScoreComponent,
-    FlexLayoutModule,
     GradingEditComponentMaxScoreComponent
   ],
   selector: 'edit-component-annotations',
