@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -19,7 +18,6 @@ import { SelectStepAndComponentComponent } from '../../../../../app/authoring-to
   styleUrl:
     '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
   imports: [
-    CommonModule,
     EditConnectedComponentsAddButtonComponent,
     SelectStepAndComponentComponent,
     MatFormFieldModule,

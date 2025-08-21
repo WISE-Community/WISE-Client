@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tag } from '../../domain/tag';
 import { Subject, Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -20,9 +19,7 @@ import { TagComponent } from '../tag/tag.component';
 
 @Component({
   imports: [
-    CommonModule,
     EditTagComponent,
-    FormsModule,
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,

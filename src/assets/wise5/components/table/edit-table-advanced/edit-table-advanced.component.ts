@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -30,7 +29,6 @@ import { TableContent } from '../TableContent';
   templateUrl: 'edit-table-advanced.component.html',
   styleUrl: 'edit-table-advanced.component.scss',
   imports: [
-    CommonModule,
     MatCheckbox,
     FormsModule,
     MatFormFieldModule,

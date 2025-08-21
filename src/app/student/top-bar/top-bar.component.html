@@ -13,25 +13,29 @@
     <h3 class="title flex-grow px-2" [title]="projectName">{{ projectName }}</h3>
     <span class="flex-1"></span>
     <div class="constraints">
-      <button
-        mat-stroked-button
-        id="toggleConstraints"
-        *ngIf="isPreview && !isConstraintsDisabled && hasConstraints()"
-        (click)="disableConstraints()"
-        title="Only Available in Preview Mode"
-        i18n-title
-        i18n
-      >
-        Turn Off Constraints
-      </button>
-      <span *ngIf="isConstraintsDisabled" i18n>Constraints Are Off</span>
+      @if (isPreview && !isConstraintsDisabled && hasConstraints()) {
+        <button
+          mat-stroked-button
+          id="toggleConstraints"
+          (click)="disableConstraints()"
+          title="Only Available in Preview Mode"
+          i18n-title
+          i18n
+        >
+          Turn Off Constraints
+        </button>
+      }
+      @if (isConstraintsDisabled) {
+        <span i18n>Constraints Are Off</span>
+      }
     </div>
     <div class="flex items-center gap-1">
-      <project-language-chooser
-        *ngIf="hasTranslations"
-        [projectLocale]="projectLocale"
-        (languageChangedEvent)="changeLanguage($event)"
-      ></project-language-chooser>
+      @if (hasTranslations) {
+        <project-language-chooser
+          [projectLocale]="projectLocale"
+          (languageChangedEvent)="changeLanguage($event)"
+        ></project-language-chooser>
+      }
       <button
         mat-icon-button
         (click)="viewAlerts($event)"

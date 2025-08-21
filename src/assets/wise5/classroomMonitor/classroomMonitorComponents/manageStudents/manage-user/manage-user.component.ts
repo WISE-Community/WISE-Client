@@ -9,11 +9,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/remove-user-confirm-dialog.component';
 import { ShowStudentInfoComponent } from '../show-student-info/show-student-info.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, MatIconModule, MatTooltipModule, ShowStudentInfoComponent],
+  imports: [MatIconModule, MatTooltipModule, ShowStudentInfoComponent],
   selector: 'manage-user',
   styleUrl: 'manage-user.component.scss',
   templateUrl: 'manage-user.component.html'

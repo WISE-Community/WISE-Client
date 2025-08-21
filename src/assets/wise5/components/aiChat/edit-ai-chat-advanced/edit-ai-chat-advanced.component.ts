@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,7 +13,6 @@ import { AiChatContent } from '../AiChatContent';
     MatFormFieldModule,
     MatSelectModule,
     FormsModule,
-    NgFor,
     EditConnectedComponentsComponent,
     EditComponentJsonComponent
   ]

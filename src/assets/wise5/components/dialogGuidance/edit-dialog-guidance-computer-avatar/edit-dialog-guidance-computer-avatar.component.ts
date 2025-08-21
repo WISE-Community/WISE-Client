@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -17,7 +16,6 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   styleUrl: 'edit-dialog-guidance-computer-avatar.component.scss',
   templateUrl: './edit-dialog-guidance-computer-avatar.component.html',
   imports: [
-    CommonModule,
     MatCheckbox,
     FormsModule,
     TranslatableInputComponent,

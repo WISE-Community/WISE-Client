@@ -79,16 +79,17 @@
         @for (attachment of attachments; track attachment) {
           <div class="component__attachment">
             <img [src]="attachment.iconURL" class="component__attachment__content" />
-            <button
-              *ngIf="!isDisabled"
-              mat-raised-button
-              class="component__attachment__delete"
-              (click)="removeAttachment(attachment)"
-              title="Remove file"
-              [disabled]="isDisabled"
-            >
-              <mat-icon>cancel</mat-icon>
-            </button>
+            @if (!isDisabled) {
+              <button
+                mat-raised-button
+                class="component__attachment__delete"
+                (click)="removeAttachment(attachment)"
+                title="Remove file"
+                [disabled]="isDisabled"
+              >
+                <mat-icon>cancel</mat-icon>
+              </button>
+            }
           </div>
         }
       </div>

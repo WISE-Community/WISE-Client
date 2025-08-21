@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -6,7 +5,7 @@ import { ComponentTypeButtonComponent } from '../../../../assets/wise5/authoring
 import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
 
 @Component({
-  imports: [CommonModule, ComponentTypeButtonComponent, MatButtonModule, MatDialogModule],
+  imports: [ComponentTypeButtonComponent, MatButtonModule, MatDialogModule],
   styles: ['component-type-button { width: 250px; padding: 4px; }'],
   templateUrl: 'choose-new-component.component.html'
 })

@@ -9,13 +9,11 @@ import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-d
 import { AccessLinkService } from '../../services/accessLinkService';
 import { MatIconModule } from '@angular/material/icon';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   imports: [
-    CommonModule,
     ClipboardModule,
     MatButtonModule,
     MatDialogModule,

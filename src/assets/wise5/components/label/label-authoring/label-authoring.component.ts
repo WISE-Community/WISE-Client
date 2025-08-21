@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -19,7 +18,6 @@ import { TranslatableInputComponent } from '../../../authoringTool/components/tr
   templateUrl: 'label-authoring.component.html',
   styleUrl: 'label-authoring.component.scss',
   imports: [
-    CommonModule,
     EditComponentPrompt,
     TranslatableInputComponent,
     TranslatableAssetChooserComponent,

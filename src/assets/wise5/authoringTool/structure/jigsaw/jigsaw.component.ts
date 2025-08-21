@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -9,7 +8,7 @@ import { RouterLink } from '@angular/router';
 import { ConfigureStructureComponent } from '../configure-structure.component';
 
 @Component({
-  imports: [MatDivider, MatRadioModule, FormsModule, MatButton, RouterLink, NgIf, MatProgressBar],
+  imports: [MatDivider, MatRadioModule, FormsModule, MatButton, RouterLink, MatProgressBar],
   styleUrls: ['./jigsaw.component.scss', '../../add-content.scss'],
   templateUrl: './jigsaw.component.html'
 })

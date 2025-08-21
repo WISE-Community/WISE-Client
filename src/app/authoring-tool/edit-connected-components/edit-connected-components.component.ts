@@ -3,11 +3,9 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentDefaultSelectsComponent } from '../edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditConnectedComponentDeleteButtonComponent } from '../edit-connected-component-delete-button/edit-connected-component-delete-button.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   imports: [
-    CommonModule,
     EditConnectedComponentDefaultSelectsComponent,
     EditConnectedComponentDeleteButtonComponent,
     EditConnectedComponentsAddButtonComponent

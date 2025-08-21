@@ -1,10 +1,11 @@
 <div class="modal-overlay flex justify-center items-center">
+  >
   @if (isImportingWork) {
     <div
       class="importing-work-message yellow-background flex-col justify-center items-center gap-5"
     >
       <span i18n>Importing Work...</span>
-      <mat-spinner />
+      <mat-spinner></mat-spinner>
     </div>
   }
   @if (isFailedToImportWork) {

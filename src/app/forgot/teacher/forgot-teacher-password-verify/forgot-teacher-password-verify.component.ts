@@ -12,7 +12,6 @@ import { TeacherService } from '../../../teacher/teacher.service';
 import { finalize } from 'rxjs/operators';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatButton } from '@angular/material/button';
-import { NgIf } from '@angular/common';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { FlexModule } from '@angular/flex-layout/flex';
@@ -20,24 +19,23 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-    templateUrl: './forgot-teacher-password-verify.component.html',
-    styleUrl: './forgot-teacher-password-verify.component.scss',
-    imports: [
-        MatCard,
-        MatCardContent,
-        FormsModule,
-        FlexModule,
-        ReactiveFormsModule,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        NgIf,
-        MatError,
-        MatButton,
-        MatProgressBar,
-        RouterLink,
-        MatDividerModule
-    ]
+  templateUrl: './forgot-teacher-password-verify.component.html',
+  styleUrl: './forgot-teacher-password-verify.component.scss',
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    FlexModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatButton,
+    MatProgressBar,
+    RouterLink,
+    MatDividerModule
+  ]
 })
 export class ForgotTeacherPasswordVerifyComponent {
   @Input() username: string = null;

@@ -1,12 +1,14 @@
-<div *ngIf="disciplines && disciplines.length" class="library-project-disciplines flex gap-1">
-  <ng-container *ngFor="let discipline of disciplines">
-    <span
-      class="library-project-disciplines__icon"
-      [ngStyle]="{ 'background-color': discipline.color }"
-      matTooltip="{{ discipline.name }}"
-      [matTooltipPosition]="'above'"
-    >
-      {{ discipline.id }}
-    </span>
-  </ng-container>
-</div>
+@if (disciplines && disciplines.length) {
+  <div class="library-project-disciplines flex gap-1">
+    @for (discipline of disciplines; track discipline) {
+      <span
+        class="library-project-disciplines__icon"
+        [ngStyle]="{ 'background-color': discipline.color }"
+        matTooltip="{{ discipline.name }}"
+        [matTooltipPosition]="'above'"
+      >
+        {{ discipline.id }}
+      </span>
+    }
+  </div>
+}

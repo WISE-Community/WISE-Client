@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -17,7 +16,6 @@ import { ConceptMapContent } from '../ConceptMapContent';
   templateUrl: 'edit-concept-map-advanced.component.html',
   styleUrl: 'edit-concept-map-advanced.component.scss',
   imports: [
-    CommonModule,
     MatCheckbox,
     FormsModule,
     MatButton,

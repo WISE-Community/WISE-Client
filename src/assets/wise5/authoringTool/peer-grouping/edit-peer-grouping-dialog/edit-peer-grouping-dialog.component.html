@@ -8,29 +8,31 @@
     <mat-form-field>
       <mat-label i18n>Logic</mat-label>
       <mat-select [(ngModel)]="logicType">
-        <mat-option *ngFor="let logic of availableLogic" [value]="logic.value">
-          {{ logic.name }}
-        </mat-option>
+        @for (logic of availableLogic; track logic) {
+          <mat-option [value]="logic.value">
+            {{ logic.name }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
-    <ng-container *ngIf="logicType === 'differentIdeas' || logicType === 'differentKIScores'">
+    @if (logicType === 'differentIdeas' || logicType === 'differentKIScores') {
       <select-step-and-component
         [referenceComponent]="referenceComponent"
         [allowedComponentTypes]="allowedReferenceComponentTypes"
       />
-    </ng-container>
-    <ng-container *ngIf="logicTypesWithModes.includes(logicType)">
+    }
+    @if (logicTypesWithModes.includes(logicType)) {
       <mat-form-field>
         <mat-label i18n>Mode</mat-label>
         <mat-select [(ngModel)]="mode">
-          <ng-container *ngFor="let mode of availableModes">
+          @for (mode of availableModes; track mode) {
             <mat-option [value]="mode.value">
               {{ mode.name }}
             </mat-option>
-          </ng-container>
+          }
         </mat-select>
       </mat-form-field>
-    </ng-container>
+    }
   </div>
   <div>
     <mat-form-field>
@@ -39,13 +41,21 @@
     </mat-form-field>
   </div>
   <div class="mat-small info">
-    <ng-container *ngIf="stepsUsedIn.length > 0">
+    @if (stepsUsedIn.length > 0) {
       <span i18n>Used in </span>
-      <span *ngFor="let stepUsedIn of stepsUsedIn; last as isLast">
-        {{ stepUsedIn }}<span *ngIf="!isLast">, </span> </span
-      >.
-    </ng-container>
-    <span *ngIf="stepsUsedIn.length === 0" i18n>Not used in any steps.</span>
+      @for (stepUsedIn of stepsUsedIn; track stepUsedIn; let isLast = $last) {
+        <span>
+          {{ stepUsedIn }}
+          @if (!isLast) {
+            <span>, </span>
+          }
+        </span>
+      }
+      .
+    }
+    @if (stepsUsedIn.length === 0) {
+      <span i18n>Not used in any steps.</span>
+    }
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

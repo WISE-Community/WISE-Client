@@ -7,13 +7,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
 
 @Component({
   imports: [
     ArchiveProjectsButtonComponent,
-    CommonModule,
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,

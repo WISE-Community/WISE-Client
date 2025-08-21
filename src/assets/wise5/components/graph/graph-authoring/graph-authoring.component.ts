@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -26,7 +25,6 @@ import { isMultipleYAxes } from '../util';
   templateUrl: 'graph-authoring.component.html',
   styleUrl: 'graph-authoring.component.scss',
   imports: [
-    CommonModule,
     EditComponentPrompt,
     TranslatableInputComponent,
     MatFormFieldModule,

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,7 +11,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   imports: [
-    CommonModule,
     FlexLayoutModule,
     FormsModule,
     MatButtonModule,

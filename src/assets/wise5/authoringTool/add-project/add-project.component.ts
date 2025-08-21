@@ -14,7 +14,6 @@ import { Router, RouterModule } from '@angular/router';
 import { copy } from '../../common/object/object';
 import { newProjectTemplate } from '../new-project-template';
 import { catchError, Observable, throwError } from 'rxjs';
-import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
@@ -22,7 +21,6 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatDividerModule,

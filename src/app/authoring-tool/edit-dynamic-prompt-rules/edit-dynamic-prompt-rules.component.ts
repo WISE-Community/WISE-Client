@@ -1,6 +1,5 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +23,6 @@ import { FeedbackRule } from '../../../assets/wise5/components/common/feedbackRu
     MatButtonModule,
     DragDropModule,
     CdkScrollable,
-    CommonModule,
     MatCard,
     MatFormFieldModule,
     MatInput,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import {
   AbstractControl,
@@ -20,20 +19,19 @@ import { ColorChooserComponent } from '../color-chooser/color-chooser.component'
 import { TagComponent } from '../tag/tag.component';
 
 @Component({
-    imports: [
-        ColorChooserComponent,
-        CommonModule,
-        FormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        TagComponent
-    ],
-    selector: 'edit-tag',
-    styleUrl: './edit-tag.component.scss',
-    templateUrl: './edit-tag.component.html'
+  imports: [
+    ColorChooserComponent,
+    FormsModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    TagComponent
+  ],
+  selector: 'edit-tag',
+  styleUrl: './edit-tag.component.scss',
+  templateUrl: './edit-tag.component.html'
 })
 export class EditTagComponent {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
@@ -49,7 +47,10 @@ export class EditTagComponent {
     this.createUniqueTagValidator()
   ]);
 
-  constructor(private projectTagService: ProjectTagService, private snackBar: MatSnackBar) {}
+  constructor(
+    private projectTagService: ProjectTagService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     if (this.tag != null) {

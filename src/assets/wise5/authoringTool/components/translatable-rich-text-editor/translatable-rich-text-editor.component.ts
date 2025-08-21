@@ -6,11 +6,10 @@ import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wis
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatTabsModule, WiseAuthoringTinymceEditorComponent],
+  imports: [MatButtonModule, MatTabsModule, WiseAuthoringTinymceEditorComponent],
   selector: 'translatable-rich-text-editor',
   styles: ['.translation-tools { padding: 8px 0; }'],
   templateUrl: './translatable-rich-text-editor.component.html'

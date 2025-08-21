@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +16,6 @@ import { SelectBranchCriteriaComponent } from '../select-branch-criteria/select-
 
 @Component({
   imports: [
-    CommonModule,
     EditBranchPathsComponent,
     MatButtonModule,
     MatDividerModule,

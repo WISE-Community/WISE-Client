@@ -20,9 +20,13 @@
     (cdkDropListDropped)="drop($event)"
     cdkScrollable
   >
-    <ng-container
-      *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last"
-    >
+    @for (
+      rule of feedbackRules;
+      track rule;
+      let ruleIndex = $index;
+      let first = $first;
+      let last = $last
+    ) {
       <li cdkDrag>
         <mat-card appearance="outlined" class="rule">
           <span class="flex flex-row flex-wrap gap-2">
@@ -58,17 +62,18 @@
               >
                 <mat-icon>clear</mat-icon>
               </button>
-              <button
-                *ngIf="feedbackRules.length > 1"
-                [disabled]="first"
-                mat-icon-button
-                i18n-matTooltip
-                matTooltip="Move up"
-                matTooltipPosition="before"
-                (click)="moveUp(ruleIndex)"
-              >
-                <mat-icon>arrow_upward</mat-icon>
-              </button>
+              @if (feedbackRules.length > 1) {
+                <button
+                  [disabled]="first"
+                  mat-icon-button
+                  i18n-matTooltip
+                  matTooltip="Move up"
+                  matTooltipPosition="before"
+                  (click)="moveUp(ruleIndex)"
+                >
+                  <mat-icon>arrow_upward</mat-icon>
+                </button>
+              }
               <button
                 [disabled]="last"
                 mat-icon-button
@@ -83,17 +88,18 @@
           </span>
         </mat-card>
       </li>
-    </ng-container>
+    }
   </ul>
-  <button
-    *ngIf="feedbackRules.length > 0"
-    mat-icon-button
-    color="primary"
-    matTooltip="Add a new rule at the end"
-    i18n-matTooltip
-    matTooltipPosition="above"
-    (click)="addNewRule(feedbackRules.length)"
-  >
-    <mat-icon>add_circle</mat-icon>
-  </button>
+  @if (feedbackRules.length > 0) {
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Add a new rule at the end"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="addNewRule(feedbackRules.length)"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  }
 </div>

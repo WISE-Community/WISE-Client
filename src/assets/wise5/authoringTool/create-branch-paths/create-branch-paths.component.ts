@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import {
   FormArray,
@@ -22,7 +21,6 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,

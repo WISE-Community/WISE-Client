@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { LibraryGroup } from '../libraryGroup';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule],
   selector: 'app-library-group-thumbs',
   styleUrl: './library-group-thumbs.component.scss',
   templateUrl: './library-group-thumbs.component.html'

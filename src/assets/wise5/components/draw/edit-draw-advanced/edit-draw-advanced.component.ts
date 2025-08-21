@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { EditComponentDefaultFeedback } from '../../../../../app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component';
@@ -18,7 +17,6 @@ import { EditDrawConnectedComponentsComponent } from '../edit-draw-connected-com
 @Component({
   templateUrl: 'edit-draw-advanced.component.html',
   imports: [
-    NgIf,
     EditComponentAddToNotebookButtonComponent,
     EditComponentSaveButtonComponent,
     EditComponentSubmitButtonComponent,

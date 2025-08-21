@@ -63,9 +63,7 @@
           <span class="mat-body-1">{{ run.runCode }}</span>
         </button>
       </p>
-      <ng-container
-        *ngIf="isGoogleUser() && isGoogleClassroomEnabled() && run.project.wiseVersion !== 4"
-      >
+      @if (isGoogleUser() && isGoogleClassroomEnabled() && run.project.wiseVersion !== 4) {
         <p i18n>Add as an assignment in Google Classroom:</p>
         <p class="share">
           <button
@@ -80,7 +78,7 @@
             </span>
           </button>
         </p>
-      </ng-container>
+      }
     }
   </div>
 </mat-dialog-content>

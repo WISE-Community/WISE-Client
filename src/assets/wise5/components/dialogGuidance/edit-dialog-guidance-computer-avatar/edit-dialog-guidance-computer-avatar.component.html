@@ -88,20 +88,14 @@
             />
             <div class="name flex justify-center items-center gap-1">
               <span class="mat-subtitle-2">{{ computerAvatar.name }}</span>
-              <mat-icon
-                *ngIf="computerAvatar.isSelected"
-                class="success"
-                aria-label="Selected"
-                i18n-aria-label
-                >check_circle</mat-icon
-              >
-              <mat-icon
-                color="warn"
-                *ngIf="!computerAvatar.isSelected"
-                aria-label="Not selected"
-                i18n-aria-label
-                >cancel</mat-icon
-              >
+              @if (computerAvatar.isSelected) {
+                <mat-icon class="success" aria-label="Selected" i18n-aria-label
+                  >check_circle</mat-icon
+                >
+              }
+              @if (!computerAvatar.isSelected) {
+                <mat-icon color="warn" aria-label="Not selected" i18n-aria-label>cancel</mat-icon>
+              }
             </div>
           </mat-button-toggle>
         }

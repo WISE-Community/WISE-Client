@@ -4,7 +4,6 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { Component as WISEComponent } from '../../../assets/wise5/common/Component';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,7 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   imports: [
     CdkTextareaAutosize,
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,

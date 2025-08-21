@@ -3,13 +3,11 @@
   (promptChangedEvent)="promptChanged($event)"
 />
 <span i18n>Oscillator Types</span>
-<span
-  *ngIf="componentContent.oscillatorTypes == null || componentContent.oscillatorTypes.length === 0"
-  class="no-oscillator-type-message"
-  i18n
->
-  (There are no oscillator types selected. Please select at least one oscillator type.)
-</span>
+@if (componentContent.oscillatorTypes == null || componentContent.oscillatorTypes.length === 0) {
+  <span class="no-oscillator-type-message" i18n>
+    (There are no oscillator types selected. Please select at least one oscillator type.)
+  </span>
+}
 <div class="oscillator-types-container flex flex-row">
   <mat-checkbox
     color="primary"

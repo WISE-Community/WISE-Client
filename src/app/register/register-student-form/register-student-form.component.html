@@ -13,144 +13,144 @@
             autofocus
             required
           />
-          <mat-error
-            *ngIf="createStudentAccountFormGroup.controls['firstName'].hasError('required')"
-            i18n
-            >First Name required</mat-error
-          >
-          <mat-error
-            *ngIf="createStudentAccountFormGroup.controls['firstName'].hasError('pattern')"
-            i18n
-            >First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start
-            or end with a space or dash</mat-error
-          >
+          @if (createStudentAccountFormGroup.controls['firstName'].hasError('required')) {
+            <mat-error i18n>First Name required</mat-error>
+          }
+          @if (createStudentAccountFormGroup.controls['firstName'].hasError('pattern')) {
+            <mat-error i18n
+              >First Name must only contain characters A-Z, a-z, spaces, or dashes and can not start
+              or end with a space or dash</mat-error
+            >
+          }
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Last Name</mat-label>
           <input matInput id="lastName" name="lastName" formControlName="lastName" required />
-          <mat-error
-            *ngIf="createStudentAccountFormGroup.controls['lastName'].hasError('required')"
-            i18n
-            >Last Name required</mat-error
-          >
-          <mat-error
-            *ngIf="createStudentAccountFormGroup.controls['lastName'].hasError('pattern')"
-            i18n
-            >Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start or
-            end with a space or dash</mat-error
-          >
+          @if (createStudentAccountFormGroup.controls['lastName'].hasError('required')) {
+            <mat-error i18n>Last Name required</mat-error>
+          }
+          @if (createStudentAccountFormGroup.controls['lastName'].hasError('pattern')) {
+            <mat-error i18n
+              >Last Name must only contain characters A-Z, a-z, spaces, or dashes and can not start
+              or end with a space or dash</mat-error
+            >
+          }
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Gender</mat-label>
           <mat-select formControlName="gender" required>
-            <mat-option *ngFor="let gender of genders" [value]="gender.code">
-              {{ gender.label }}
-            </mat-option>
+            @for (gender of genders; track gender) {
+              <mat-option [value]="gender.code">
+                {{ gender.label }}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error
-            *ngIf="createStudentAccountFormGroup.controls['gender'].hasError('required')"
-            i18n
-            >Gender required</mat-error
-          >
+          @if (createStudentAccountFormGroup.controls['gender'].hasError('required')) {
+            <mat-error i18n>Gender required</mat-error>
+          }
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Birthday (Month)</mat-label>
           <mat-select formControlName="birthMonth" required>
-            <mat-option *ngFor="let month of months" [value]="month.code">
-              {{ month.label }}
-            </mat-option>
+            @for (month of months; track month) {
+              <mat-option [value]="month.code">
+                {{ month.label }}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error
-            *ngIf="createStudentAccountFormGroup.controls['birthMonth'].hasError('required')"
-            i18n
-            >Month required</mat-error
-          >
+          @if (createStudentAccountFormGroup.controls['birthMonth'].hasError('required')) {
+            <mat-error i18n>Month required</mat-error>
+          }
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Birthday (Day)</mat-label>
           <mat-select formControlName="birthDay" required>
-            <mat-option *ngFor="let day of days" [value]="day">
-              {{ day }}
-            </mat-option>
+            @for (day of days; track day) {
+              <mat-option [value]="day">
+                {{ day }}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error
-            *ngIf="createStudentAccountFormGroup.controls['birthDay'].hasError('required')"
-            i18n
-            >Day required</mat-error
-          >
+          @if (createStudentAccountFormGroup.controls['birthDay'].hasError('required')) {
+            <mat-error i18n>Day required</mat-error>
+          }
         </mat-form-field>
       </p>
-      <div *ngIf="user.googleUserId == null && user.microsoftUserId == null">
-        <p>
-          <mat-form-field appearance="fill" class="w-full">
-            <mat-label i18n>Security Question</mat-label>
-            <mat-select formControlName="securityQuestion" required>
-              <mat-option
-                *ngFor="let securityQuestion of securityQuestions"
-                [value]="securityQuestion.key"
-              >
-                {{ securityQuestion.value }}
-              </mat-option>
-            </mat-select>
-            <mat-error
-              *ngIf="
+      @if (user.googleUserId == null && user.microsoftUserId == null) {
+        <div>
+          <p>
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label i18n>Security Question</mat-label>
+              <mat-select formControlName="securityQuestion" required>
+                @for (securityQuestion of securityQuestions; track securityQuestion) {
+                  <mat-option [value]="securityQuestion.key">
+                    {{ securityQuestion.value }}
+                  </mat-option>
+                }
+              </mat-select>
+              @if (
                 createStudentAccountFormGroup.controls['securityQuestion'].hasError('required')
-              "
-              i18n
-              >Security Question required</mat-error
-            >
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="fill" class="w-full">
-            <mat-label i18n>Security Question Answer</mat-label>
-            <input matInput formControlName="securityQuestionAnswer" required />
-            <mat-error
-              *ngIf="
+              ) {
+                <mat-error i18n>Security Question required</mat-error>
+              }
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label i18n>Security Question Answer</mat-label>
+              <input matInput formControlName="securityQuestionAnswer" required />
+              @if (
                 createStudentAccountFormGroup.controls['securityQuestionAnswer'].hasError(
                   'required'
                 )
-              "
-              i18n
-              >Security Question Answer required</mat-error
-            >
-          </mat-form-field>
-        </p>
-      </div>
-      <div
-        *ngIf="user.googleUserId == null && user.microsoftUserId == null"
-        formGroupName="passwords"
-      >
-        <new-password-and-confirm
-          [formGroup]="passwordsFormGroup"
-          [passwordLabel]="passwordLabel"
-          [confirmPasswordLabel]="confirmPasswordLabel"
-        >
-        </new-password-and-confirm>
-      </div>
+              ) {
+                <mat-error i18n>Security Question Answer required</mat-error>
+              }
+            </mat-form-field>
+          </p>
+        </div>
+      }
+      @if (user.googleUserId == null && user.microsoftUserId == null) {
+        <div formGroupName="passwords">
+          <new-password-and-confirm
+            [formGroup]="passwordsFormGroup"
+            [passwordLabel]="passwordLabel"
+            [confirmPasswordLabel]="confirmPasswordLabel"
+          >
+          </new-password-and-confirm>
+        </div>
+      }
       <p i18n>
         By clicking "Create Account", you agree to our
         <a href="privacy" target="_blank">Privacy Policy & Terms of Use</a>.
       </p>
-      <p *ngIf="isRecaptchaEnabled" i18n>
-        This site is protected by reCAPTCHA and the Google
-        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
-        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-      </p>
-      <ng-container *ngIf="isRecaptchaEnabled" [ngSwitch]="user.isRecaptchaInvalid">
-        <mat-error *ngSwitchCase="true" class="recaptchaError" i18n
-          >Recaptcha failed. Please reload the page and try again!</mat-error
-        >
-        <div *ngSwitchDefault i18n>&nbsp;</div>
-      </ng-container>
+      @if (isRecaptchaEnabled) {
+        <p i18n>
+          This site is protected by reCAPTCHA and the Google
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+        </p>
+      }
+      @if (isRecaptchaEnabled) {
+        @switch (user.isRecaptchaInvalid) {
+          @case (true) {
+            <mat-error class="recaptchaError" i18n
+              >Recaptcha failed. Please reload the page and try again!</mat-error
+            >
+          }
+          @default {
+            <div i18n>&nbsp;</div>
+          }
+        }
+      }
       <button
         mat-flat-button
         color="primary"
@@ -158,7 +158,9 @@
         [disabled]="!createStudentAccountFormGroup.valid || processing"
         class="button--progress w-full"
       >
-        <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
+        @if (processing) {
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        }
         <span i18n>Create Account</span>
       </button>
     </form>

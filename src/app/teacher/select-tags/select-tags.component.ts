@@ -1,5 +1,4 @@
 import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +13,6 @@ import { TagComponent } from '../tag/tag.component';
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatCheckboxModule,

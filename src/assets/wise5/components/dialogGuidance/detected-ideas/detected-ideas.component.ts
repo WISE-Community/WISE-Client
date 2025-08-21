@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { CRaterRubric, getUniqueIdeas } from '../../common/cRater/CRaterRubric';
 import { CRaterIdea } from '../../common/cRater/CRaterIdea';
-import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, MatIconModule],
+  imports: [MatIconModule],
   selector: 'detected-ideas',
   standalone: true,
   styleUrls: ['./detected-ideas.component.scss'],

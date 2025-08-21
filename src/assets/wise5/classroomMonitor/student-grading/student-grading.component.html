@@ -60,13 +60,14 @@
             i18n-aria-label
           >
             <span i18n>Step</span>
-            <mat-icon
-              *ngIf="sort === 'step' || sort === '-step'"
-              class="text-light table--list__thead__sort"
-              [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-step' }"
-            >
-              arrow_drop_up
-            </mat-icon>
+            @if (sort === 'step' || sort === '-step') {
+              <mat-icon
+                class="text-light table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-step' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
           </button>
           <button
             mat-button
@@ -79,13 +80,14 @@
             i18n-aria-label
           >
             <span i18n>Status</span>
-            <mat-icon
-              *ngIf="sort === 'status' || sort === '-status'"
-              class="text-light table--list__thead__sort"
-              [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
-            >
-              arrow_drop_up
-            </mat-icon>
+            @if (sort === 'status' || sort === '-status') {
+              <mat-icon
+                class="text-light table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
           </button>
           <button
             mat-button
@@ -98,30 +100,32 @@
             i18n-aria-label
           >
             <span i18n>Score</span>
-            <mat-icon
-              *ngIf="sort === 'score' || sort === '-score'"
-              class="text-light table--list__thead__sort"
-              [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
-            >
-              arrow_drop_up
-            </mat-icon>
+            @if (sort === 'score' || sort === '-score') {
+              <mat-icon
+                class="text-light table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
           </button>
         </div>
       </mat-list-item>
       <div waIntersectionObserver waIntersectionThreshold="0.5">
-        <ng-container *ngFor="let node of sortedNodes; trackBy: trackNode">
-          <step-item
-            *ngIf="node.show"
-            [expand]="nodeVisibilityById[node.id]"
-            [maxScore]="node.maxScore"
-            [showScore]="node.hasWork"
-            [nodeId]="node.id"
-            [stepData]="node"
-            [workgroupId]="workgroupId"
-            (onUpdateExpand)="onUpdateExpand($event)"
-            (waIntersectionObservee)="onIntersection(node.id, $event)"
-          />
-        </ng-container>
+        @for (node of sortedNodes; track trackNode($index, node)) {
+          @if (node.show) {
+            <step-item
+              [expand]="nodeVisibilityById[node.id]"
+              [maxScore]="node.maxScore"
+              [showScore]="node.hasWork"
+              [nodeId]="node.id"
+              [stepData]="node"
+              [workgroupId]="workgroupId"
+              (onUpdateExpand)="onUpdateExpand($event)"
+              (waIntersectionObservee)="onIntersection(node.id, $event)"
+            />
+          }
+        }
       </div>
     </mat-list>
   </div>

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -27,7 +26,6 @@ import { EditDialogGuidanceComputerAvatarComponent } from '../edit-dialog-guidan
     FormsModule,
     EditComponentMaxSubmitComponent,
     MatCheckbox,
-    NgIf,
     EditDialogGuidanceComputerAvatarComponent,
     EditFeedbackRulesComponent
   ]

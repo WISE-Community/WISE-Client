@@ -20,7 +20,9 @@
       [disabled]="submitting"
       class="button--progress"
     >
-      <mat-progress-bar *ngIf="submitting" mode="indeterminate" />
+      @if (submitting) {
+        <mat-progress-bar mode="indeterminate" />
+      }
       <ng-container i18n>Submit</ng-container>
     </button>
   </div>

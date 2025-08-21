@@ -3,10 +3,9 @@ import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { StudentDataService } from '../../services/studentDataService';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule, MatButtonModule],
+  imports: [MatButtonModule],
   selector: 'node-navigation',
   templateUrl: './node-navigation.component.html'
 })
