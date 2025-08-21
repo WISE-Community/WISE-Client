@@ -6476,7 +6476,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">54,56</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2037653347478926361" datatype="html">
@@ -14731,7 +14731,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Alerts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">10,14</context>
+          <context context-type="linenumber">8,12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -14746,21 +14746,21 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Clear all notifications</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">17,21</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5151854476273244099" datatype="html">
         <source>You have no new alerts at this time.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">27,30</context>
+          <context context-type="linenumber">25,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3598194175804403173" datatype="html">
         <source>Go to <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitle(notification.nodeId) }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
-          <context context-type="linenumber">38,39</context>
+          <context context-type="linenumber">36,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
@@ -14771,14 +14771,14 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Are you sure you want to clear all your alerts?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1540547702951133575" datatype="html">
         <source>Clear all alerts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4314635307270261414" datatype="html">
