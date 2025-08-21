@@ -1,8 +1,10 @@
 @if (node.rubric) {
   <mat-card appearance="outlined" class="rubric">
-    <mat-card-title fxLayoutAlign="start center" fxLayoutGap="8px">
-      <mat-icon class="mat-24 info">info</mat-icon>
-      <span class="mat-subtitle-2" i18n>Step Info</span>
+    <mat-card-title>
+      <span class="flex justify-start items-center gap-2">
+        <mat-icon class="mat-24 info">info</mat-icon>
+        <span class="mat-subtitle-2" i18n>Step Info</span>
+      </span>
     </mat-card-title>
     <mat-card-content [innerHTML]="node.rubric" />
   </mat-card>
@@ -25,9 +27,11 @@
             appearance="outlined"
             class="rubric component-rubric mat-elevation-z0 notice-bg-bg"
           >
-            <mat-card-title class="mat-subtitle-2" fxLayoutAlign="start center" fxLayoutGap="8px">
-              <mat-icon class="mat-24 info">info</mat-icon>
-              <span i18n>Item Info</span>
+            <mat-card-title class="mat-subtitle-2">
+              <span class="flex justify-start items-center gap-2">
+                <mat-icon class="mat-24 info">info</mat-icon>
+                <span i18n>Item Info</span>
+              </span>
             </mat-card-title>
             <mat-card-content class="app-bg-bg" [innerHTML]="component.rubric" />
           </mat-card>
