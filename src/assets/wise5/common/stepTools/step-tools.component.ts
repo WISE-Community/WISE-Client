@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,22 +15,21 @@ import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatTooltipModule,
-        NodeIconComponent
-    ],
-    selector: 'step-tools',
-    styleUrl: 'step-tools.component.scss',
-    templateUrl: 'step-tools.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    NodeIconComponent
+  ],
+  selector: 'step-tools',
+  styleUrl: 'step-tools.component.scss',
+  templateUrl: 'step-tools.component.html'
 })
 export class StepToolsComponent {
   protected icons: any;
