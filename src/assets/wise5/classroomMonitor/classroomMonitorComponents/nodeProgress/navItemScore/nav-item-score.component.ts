@@ -1,12 +1,18 @@
 import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
 import { formatNumber } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [FlexLayoutModule, MatIconModule],
+  imports: [MatIconModule],
   selector: 'nav-item-score',
-  templateUrl: 'nav-item-score.component.html'
+  template: `
+    @if (showScore) {
+      <span class="flex justify-start items-center">
+        <mat-icon class="score"> grade </mat-icon>
+        <span class="md-body-2 text-secondary">{{ averageScoreDisplay }}</span>
+      </span>
+    }
+  `
 })
 export class NavItemScoreComponent {
   @Input() averageScore: number | string;
