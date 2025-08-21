@@ -1,16 +1,14 @@
-<div fxLayout="column" class="account-menu--fixed-height">
+<div class="account-menu--fixed-height flex flex-col">
   <mat-toolbar
     mat-theme="light"
-    class="account-menu__info md-subhead md-whiteframe-1dp"
-    fxLayout="row"
-    fxLayoutAlign="start center"
+    class="account-menu__info md-subhead md-whiteframe-1dp flex justify-start items-center"
   >
-    <div class="accent account-menu__info__title" fxLayout="row" fxLayoutAlign="start center">
+    <div class="accent account-menu__info__title flex justify-start items-center">
       <mat-icon class="accent"> pause_circle_filled </mat-icon>&nbsp;
       <span i18n>Pause Student Screens</span>
     </div>
   </mat-toolbar>
-  <div fxFlex>
+  <div class="flex-grow">
     <mat-slide-toggle
       class="mat-primary account-menu__control"
       aria-label="Pause student screens (Period: All Periods)"

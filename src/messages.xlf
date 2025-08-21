@@ -14587,7 +14587,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Pause Student Screens</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">10,15</context>
+          <context context-type="linenumber">8,12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
@@ -14598,28 +14598,28 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Pause student screens (Period: All Periods)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">16,19</context>
+          <context context-type="linenumber">14,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="315886019232072727" datatype="html">
         <source> All Periods </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">22,25</context>
+          <context context-type="linenumber">20,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4661938435767625559" datatype="html">
         <source>Pause student screens (Period: <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">28,29</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3114660019688654129" datatype="html">
         <source> Period: <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component.html</context>
-          <context context-type="linenumber">34,35</context>
+          <context context-type="linenumber">32,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8078991752331361086" datatype="html">
