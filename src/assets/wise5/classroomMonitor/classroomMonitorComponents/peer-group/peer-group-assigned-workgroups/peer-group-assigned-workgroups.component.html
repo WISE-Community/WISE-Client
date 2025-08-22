@@ -2,8 +2,7 @@
   @for (grouping of groupings; track grouping) {
     <div class="group-container" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
       <mat-card class="group notice-bg-bg">
-        <peer-group-grouping [grouping]="grouping" (moveWorkgroup)="emitMoveWorkgroup($event)">
-        </peer-group-grouping>
+        <peer-group-grouping [grouping]="grouping" (moveWorkgroup)="emitMoveWorkgroup($event)" />
       </mat-card>
     </div>
   }
