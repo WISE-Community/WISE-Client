@@ -14815,7 +14815,7 @@ Are you sure you want to proceed?</source>
         <source>Next Team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/student-grading-tools/student-grading-tools.component.html</context>
-          <context context-type="linenumber">18,22</context>
+          <context context-type="linenumber">20,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8271442138780307370" datatype="html">
