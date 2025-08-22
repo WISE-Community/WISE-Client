@@ -1,9 +1,9 @@
 <div class="milestone-details">
   <section class="milestone-details__section mat-elevation-z1">
-    <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="flex justify-start items-center">
       <select-period />
-      <span fxFlex></span>
-      <div fxLayout="row" fxLayoutAlign="start center">
+      <span class="flex-grow"></span>
+      <div class="flex justify-start items-center">
         <nav-item-progress
           [period]="currentPeriod"
           [nodeCompletion]="milestone.percentageCompleted"
@@ -103,13 +103,13 @@
     <mat-list class="user-list mat-elevation-z1">
       <mat-list-item class="notice-bg-bg mat-subtitle-2">
         <span i18n>Team</span>
-        <span fxFlex></span>
+        <span class="flex-grow"></span>
         <span i18n>Completed</span>
       </mat-list-item>
       @for (workgroup of sortAchievementTimeDescending(milestone.workgroups); track workgroup) {
         <mat-list-item class="list-item">
-          <span fxLayoutGap="8px">
-            <span class="mat-avatar" fxHide.xs>
+          <span class="flex-2">
+            <span class="mat-avatar hidden sm:block">
               <mat-icon
                 class="md-36"
                 style="color: {{ getAvatarColorForWorkgroupId(workgroup.workgroupId) }}"
@@ -121,7 +121,7 @@
               getDisplayNamesByWorkgroupId(workgroup.workgroupId)
             }}</span>
           </span>
-          <span fxFlex></span>
+          <span class="flex-grow"></span>
           <span class="mat-subtitle-2">
             @if (workgroup.achievementTime !== null) {
               <span class="success">
