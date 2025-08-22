@@ -20,10 +20,12 @@ import { StatusIconComponent } from '../../../../../../app/classroom-monitor/sta
 import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
 import { NavItemScoreComponent } from '../navItemScore/nav-item-score.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
 
 @Component({
   imports: [
     AlertStatusCornerComponent,
+    CommonModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
