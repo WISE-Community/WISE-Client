@@ -1,7 +1,6 @@
 import * as Highcharts from 'highcharts';
 import { Annotation } from '../../common/Annotation';
 import { AnnotationService } from '../../services/annotationService';
-import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { ComponentContent } from '../../common/ComponentContent';
 import { ComponentState } from '../../../../app/domain/componentState';
@@ -22,7 +21,7 @@ import { TableSummaryData } from './summary-data/TableSummaryData';
 import { Choice } from '../../components/multipleChoice/Choice';
 import { SummaryData } from './summary-data/SummaryData';
 @Component({
-  imports: [CommonModule, MatCardModule],
+  imports: [MatCardModule],
   styleUrl: 'summary-display.component.scss',
   templateUrl: 'summary-display.component.html'
 })

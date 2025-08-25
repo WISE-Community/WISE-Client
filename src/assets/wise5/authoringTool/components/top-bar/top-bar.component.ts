@@ -9,7 +9,6 @@ import { Language } from '../../../../../app/domain/language';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { NotifyAuthorService } from '../../../services/notifyAuthorService';
-import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +18,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   imports: [
-    CommonModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,

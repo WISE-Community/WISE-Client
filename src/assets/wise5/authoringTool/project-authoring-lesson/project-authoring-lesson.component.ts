@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, Signal, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,7 +21,6 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
-    CommonModule,
     FormsModule,
     MatExpansionModule,
     MatCheckboxModule,

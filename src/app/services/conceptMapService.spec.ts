@@ -56,7 +56,7 @@ describe('ConceptMapService', () => {
         provideHttpClientTesting()
     ]
 });
-    service = TestBed.get(ConceptMapService);
+    service = TestBed.inject(ConceptMapService);
     conceptMapNode1 = createConceptMapNode(
       node1OriginalId,
       node1InstanceId,

@@ -1,5 +1,4 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +13,6 @@ import { AbstractImportStepComponent } from '../abstract-import-step/abstract-im
 @Component({
   imports: [
     CdkTextareaAutosize,
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatCheckboxModule,

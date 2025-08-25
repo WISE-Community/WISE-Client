@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import peerChatLogicOptions from './peer-chat-logic-options';
-import { NgIf } from '@angular/common';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { EditDynamicPromptComponent } from '../../../../../app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component';
 import { EditQuestionBankComponent } from '../../../../../app/authoring-tool/edit-question-bank/edit-question-bank.component';
@@ -10,7 +9,6 @@ import { PeerChatModule } from '../peer-chat.module';
 
 @Component({
   imports: [
-    NgIf,
     EditComponentPrompt,
     EditDynamicPromptComponent,
     EditQuestionBankComponent,

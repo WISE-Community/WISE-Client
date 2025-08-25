@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [MatIconModule],
-    selector: 'match-status-icon',
-    template: `
+  imports: [MatIconModule],
+  selector: 'match-status-icon',
+  template: `
     @switch (status) {
       @case ('correct') {
         <mat-icon class="mat-18" aria-label="Correct" i18n-aria-label>check</mat-icon>

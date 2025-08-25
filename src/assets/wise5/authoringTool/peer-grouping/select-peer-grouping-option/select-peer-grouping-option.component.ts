@@ -12,13 +12,12 @@ import {
 } from '../PeerGroupingLogic';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatButton } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'select-peer-grouping-option',
   templateUrl: './select-peer-grouping-option.component.html',
   styles: ['.field-label { font-weight: 500; } .select-option { margin: 0 0 8px -8px; }'],
-  imports: [MatRadioButton, MatButton, CommonModule]
+  imports: [MatRadioButton, MatButton]
 })
 export class SelectPeerGroupingOptionComponent implements OnInit {
   @Input() peerGrouping: PeerGrouping;

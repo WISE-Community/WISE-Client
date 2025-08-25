@@ -13,20 +13,17 @@
         </span>
       </h2>
       <span fxFlex></span>
-      <add-team-button
-        *ngIf="unassignedTeam.users.length > 0 || teams.size > 0"
-        [period]="period"
-      ></add-team-button>
+      @if (unassignedTeam.users.length > 0 || teams.size > 0) {
+        <add-team-button [period]="period"></add-team-button>
+      }
     </div>
-    <manage-team
-      class="unassigned-team"
-      *ngIf="unassignedTeam.users.length > 0"
-      [team]="unassignedTeam"
-    ></manage-team>
+    @if (unassignedTeam.users.length > 0) {
+      <manage-team class="unassigned-team" [team]="unassignedTeam"></manage-team>
+    }
     <manage-teams [teams]="teams"></manage-teams>
-    <ng-container *ngIf="emptyTeams.size > 0">
+    @if (emptyTeams.size > 0) {
       <h3 class="mat-subtitle-2 secondary-text" i18n>Empty Teams</h3>
       <manage-teams [teams]="emptyTeams"></manage-teams>
-    </ng-container>
+    }
   </mat-card-content>
 </mat-card>

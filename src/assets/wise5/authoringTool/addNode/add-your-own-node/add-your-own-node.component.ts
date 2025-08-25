@@ -12,7 +12,6 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
 import { CreateComponentService } from '../../../services/createComponentService';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { ComponentTypeButtonComponent } from '../../components/component-type-button/component-type-button.component';
@@ -25,7 +24,6 @@ import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
 
 @Component({
   imports: [
-    CommonModule,
     ComponentTypeButtonComponent,
     DragDropModule,
     FormsModule,

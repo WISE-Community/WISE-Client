@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,7 +6,7 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
 
 @Component({
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
+  imports: [FormsModule, MatFormFieldModule, MatSelectModule],
   selector: 'select-component',
   templateUrl: './select-component.component.html'
 })

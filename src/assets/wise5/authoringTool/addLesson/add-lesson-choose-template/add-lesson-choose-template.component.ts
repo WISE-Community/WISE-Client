@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -7,14 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatIconModule,
-    RouterModule
-  ],
+  imports: [MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, RouterModule],
   styleUrls: ['./add-lesson-choose-template.component.scss', '../../add-content.scss'],
   templateUrl: './add-lesson-choose-template.component.html'
 })

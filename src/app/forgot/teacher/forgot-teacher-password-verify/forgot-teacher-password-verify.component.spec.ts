@@ -78,7 +78,7 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
   });
 
   it('should navigate to the change password page', () => {
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     component.goToChangePasswordPage();
     const params = {
@@ -92,7 +92,7 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
   });
 
   it('should navigate to the change password page after successfully submitting the verification code', () => {
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     component.username = 'SpongebobSquarepants';
     component.setControlFieldValue('verificationCode', '123456');

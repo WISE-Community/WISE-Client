@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
-import { CommonModule } from '@angular/common';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 @Component({
-  imports: [CommonModule, NodeIconComponent],
+  imports: [NodeIconComponent],
   selector: 'node-icon-and-title',
   styles: ['.step-number,.step-title {color:rgba(0,0,0,.87)}'],
   templateUrl: './node-icon-and-title.component.html'

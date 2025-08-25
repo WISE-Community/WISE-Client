@@ -52,31 +52,32 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div>
-    <div
-      *ngFor="let childId of lesson.ids"
-      class="flex flex-row flex-wrap justify-start items-center"
-    >
-      <project-authoring-step
-        [step]="idToNode[childId]"
-        (selectNodeEvent)="selectNodeEvent.emit($event)"
-        [showPosition]="showPosition"
-        [projectId]="projectId"
-        class="flex grow"
-      />
-      <add-step-button [nodeId]="childId" />
-    </div>
-    <div *ngIf="lesson.ids.length === 0" class="no-steps-message flex justify-start items-center">
-      <div i18n>This lesson has no steps</div>
-      <button
-        mat-icon-button
-        color="primary"
-        (click)="addStepInside(lesson.id)"
-        matTooltip="Add step"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>add_circle</mat-icon>
-      </button>
-    </div>
+    @for (childId of lesson.ids; track childId) {
+      <div class="flex flex-row flex-wrap justify-start items-center">
+        <project-authoring-step
+          [step]="idToNode[childId]"
+          (selectNodeEvent)="selectNodeEvent.emit($event)"
+          [showPosition]="showPosition"
+          [projectId]="projectId"
+          class="flex grow"
+        />
+        <add-step-button [nodeId]="childId" />
+      </div>
+    }
+    @if (lesson.ids.length === 0) {
+      <div class="no-steps-message flex justify-start items-center">
+        <div i18n>This lesson has no steps</div>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="addStepInside(lesson.id)"
+          matTooltip="Add step"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+    }
   </div>
 </mat-expansion-panel>

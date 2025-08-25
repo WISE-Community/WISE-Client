@@ -74,7 +74,7 @@ describe('ForgotTeacherUsernameComponent', () => {
   });
 
   it('should navigate to the success page', () => {
-    const teacherService = TestBed.get(TeacherService);
+    const teacherService = TestBed.inject(TeacherService);
     const observableResponse = Observable.create((observer) => {
       const response = {
         status: 'success',
@@ -84,7 +84,7 @@ describe('ForgotTeacherUsernameComponent', () => {
       observer.complete();
     });
     spyOn(teacherService, 'sendForgotUsernameEmail').and.returnValue(observableResponse);
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     component.setControlFieldValue('email', 'spongebob@bikinibottom.com');
     component.submit();

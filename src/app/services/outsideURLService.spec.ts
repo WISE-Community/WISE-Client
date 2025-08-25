@@ -26,8 +26,8 @@ describe('OutsideURLService', () => {
         provideHttpClientTesting()
     ]
 });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(OutsideURLService);
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(OutsideURLService);
   });
   createComponent();
   getOpenEducationalResources();

@@ -34,13 +34,11 @@ import { MatCardModule } from '@angular/material/card';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
-import { CommonModule } from '@angular/common';
 import { CRaterPingService } from '../../../services/cRaterPingService';
 
 @Component({
   imports: [
     ChatInputComponent,
-    CommonModule,
     ComponentHeaderComponent,
     ComputerAvatarSelectorComponent,
     DialogResponsesComponent,

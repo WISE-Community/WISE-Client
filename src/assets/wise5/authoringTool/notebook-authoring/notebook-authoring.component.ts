@@ -5,7 +5,6 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Subject, debounceTime } from 'rxjs';
 import { copy } from '../../common/object/object';
 import { newProjectTemplate } from '../new-project-template';
-import { CommonModule } from '@angular/common';
 import { TranslatableInputComponent } from '../components/translatable-input/translatable-input.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,7 +19,6 @@ import { WiseAuthoringTinymceEditorComponent } from '../../directives/wise-tinym
 @Component({
   imports: [
     CdkTextareaAutosize,
-    CommonModule,
     FormsModule,
     MatCheckboxModule,
     MatFormFieldModule,

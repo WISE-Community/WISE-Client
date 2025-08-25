@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -13,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, FormsModule, MatSelectModule, ReactiveFormsModule],
+  imports: [FormsModule, MatSelectModule, ReactiveFormsModule],
   selector: 'app-select-menu',
   styleUrl: './select-menu.component.scss',
   templateUrl: './select-menu.component.html'

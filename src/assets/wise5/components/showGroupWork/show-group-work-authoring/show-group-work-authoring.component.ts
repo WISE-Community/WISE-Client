@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -16,7 +15,6 @@ import { ShowMyWorkAuthoringComponent } from '../../showMyWork/show-my-work-auth
 
 @Component({
   imports: [
-    CommonModule,
     EditComponentPrompt,
     MatFormFieldModule,
     MatSelectModule,

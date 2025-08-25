@@ -2,19 +2,21 @@
   <mat-card-content>
     <form role="form" (submit)="submit()" [formGroup]="forgotStudentUsernameFormGroup">
       <h2 class="standalone__title accent" i18n>Forgot Student Username</h2>
-      <ng-container *ngIf="showSearchResults">
+      @if (showSearchResults) {
         <p [ngClass]="{ warn: isErrorMessage, info: !isErrorMessage }">{{ message }}</p>
-        <p *ngFor="let username of foundUsernames">
-          <button
-            class="username-btn"
-            mat-button
-            color="primary"
-            (click)="loginWithUsername(username)"
-          >
-            {{ username }}
-          </button>
-        </p>
-      </ng-container>
+        @for (username of foundUsernames; track username) {
+          <p>
+            <button
+              class="username-btn"
+              mat-button
+              color="primary"
+              (click)="loginWithUsername(username)"
+            >
+              {{ username }}
+            </button>
+          </p>
+        }
+      }
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>First Name</mat-label>
@@ -26,52 +28,48 @@
             autofocus
             required
           />
-          <mat-error
-            *ngIf="forgotStudentUsernameFormGroup.controls['firstName'].hasError('required')"
-            i18n
-            >First Name required</mat-error
-          >
+          @if (forgotStudentUsernameFormGroup.controls['firstName'].hasError('required')) {
+            <mat-error i18n>First Name required</mat-error>
+          }
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Last Name</mat-label>
           <input matInput id="lastName" name="lastName" formControlName="lastName" required />
-          <mat-error
-            *ngIf="forgotStudentUsernameFormGroup.controls['lastName'].hasError('required')"
-            i18n
-            >Last Name required</mat-error
-          >
+          @if (forgotStudentUsernameFormGroup.controls['lastName'].hasError('required')) {
+            <mat-error i18n>Last Name required</mat-error>
+          }
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Birthday (Month)</mat-label>
           <mat-select formControlName="birthMonth" required>
-            <mat-option *ngFor="let month of months" [value]="month.value">
-              {{ month.text }}
-            </mat-option>
+            @for (month of months; track month) {
+              <mat-option [value]="month.value">
+                {{ month.text }}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error
-            *ngIf="forgotStudentUsernameFormGroup.controls['birthMonth'].hasError('required')"
-            i18n
-            >Month required</mat-error
-          >
+          @if (forgotStudentUsernameFormGroup.controls['birthMonth'].hasError('required')) {
+            <mat-error i18n>Month required</mat-error>
+          }
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Birthday (Day)</mat-label>
           <mat-select formControlName="birthDay" required>
-            <mat-option *ngFor="let day of days" [value]="day">
-              {{ day }}
-            </mat-option>
+            @for (day of days; track day) {
+              <mat-option [value]="day">
+                {{ day }}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error
-            *ngIf="forgotStudentUsernameFormGroup.controls['birthDay'].hasError('required')"
-            i18n
-            >Day required</mat-error
-          >
+          @if (forgotStudentUsernameFormGroup.controls['birthDay'].hasError('required')) {
+            <mat-error i18n>Day required</mat-error>
+          }
         </mat-form-field>
       </p>
       <button
@@ -81,7 +79,9 @@
         type="submit"
         class="button--progress w-full"
       >
-        <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
+        @if (processing) {
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        }
         <span i18n>Search</span>
       </button>
     </form>

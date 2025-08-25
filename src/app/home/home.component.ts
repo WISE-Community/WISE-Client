@@ -5,11 +5,11 @@ import { ConfigService } from '../services/config.service';
 import { Config } from '../domain/config';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn],
-    standalone: false
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn],
+  standalone: false
 })
 export class HomeComponent implements OnInit {
   discourseNewsCategory: string;
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     startTag: '<a href="http://www.nextgenscience.org/three-dimensions" target="_blank">',
     closeTag: '</a>'
   };
-  blurbs: Array<Object> = [
+  blurbs: Array<any> = [
     {
       imgSrc: 'assets/img/wise-students-building@2x.jpg',
       imgDescription: $localize`WISE students building`,
@@ -93,7 +93,10 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  constructor(private configService: ConfigService, private sanitizer: DomSanitizer) {}
+  constructor(
+    private configService: ConfigService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.configService.getConfig().subscribe((config: Config) => {

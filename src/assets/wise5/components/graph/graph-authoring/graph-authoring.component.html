@@ -161,7 +161,7 @@
     >
       Enable Multiple Y Axes
     </mat-slide-toggle>
-    <ng-container *ngIf="enableMultipleYAxes">
+    @if (enableMultipleYAxes) {
       <mat-radio-group
         color="primary"
         (ngModelChange)="numYAxesChanged($event, numYAxes)"
@@ -175,7 +175,7 @@
           }
         </div>
       </mat-radio-group>
-    </ng-container>
+    }
   </div>
 </div>
 @if (enableMultipleYAxes) {
@@ -333,34 +333,36 @@
     Enable Trials
   </mat-checkbox>
   <br />
-  <div *ngIf="componentContent.enableTrials">
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.canCreateNewTrials"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Can Student Create Trials
-    </mat-checkbox>
-    <br />
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.canDeleteTrials"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Can Student Delete Trials
-    </mat-checkbox>
-    <br />
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.hideAllTrialsOnNewTrial"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Hide Existing Trials On New Trial
-    </mat-checkbox>
-  </div>
+  @if (componentContent.enableTrials) {
+    <div>
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="componentContent.canCreateNewTrials"
+        (ngModelChange)="componentChanged()"
+        i18n
+      >
+        Can Student Create Trials
+      </mat-checkbox>
+      <br />
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="componentContent.canDeleteTrials"
+        (ngModelChange)="componentChanged()"
+        i18n
+      >
+        Can Student Delete Trials
+      </mat-checkbox>
+      <br />
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="componentContent.hideAllTrialsOnNewTrial"
+        (ngModelChange)="componentChanged()"
+        i18n
+      >
+        Hide Existing Trials On New Trial
+      </mat-checkbox>
+    </div>
+  }
   <mat-checkbox
     color="primary"
     [(ngModel)]="componentContent.canStudentHideSeriesOnLegendClick"
@@ -469,16 +471,18 @@
       >
         Can Student Edit
       </mat-checkbox>
-      <mat-form-field *ngIf="enableMultipleYAxes">
-        <mat-label i18n>Y Axis</mat-label>
-        <mat-select [(ngModel)]="series.yAxis" (ngModelChange)="seriesYAxisChanged(series)">
-          @for (yAxis of componentContent.yAxis; track yAxis; let yAxisIndex = $index) {
-            <mat-option [value]="yAxisIndex" i18n>
-              Y Axis {{ yAxisIndex + 1 }}: {{ yAxis.title.text }}
-            </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      @if (enableMultipleYAxes) {
+        <mat-form-field>
+          <mat-label i18n>Y Axis</mat-label>
+          <mat-select [(ngModel)]="series.yAxis" (ngModelChange)="seriesYAxisChanged(series)">
+            @for (yAxis of componentContent.yAxis; track yAxis; let yAxisIndex = $index) {
+              <mat-option [value]="yAxisIndex" i18n>
+                Y Axis {{ yAxisIndex + 1 }}: {{ yAxis.title.text }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
     </div>
     <div class="add-button flex items-center gap-2">
       <span class="label" i18n>Data Points</span>

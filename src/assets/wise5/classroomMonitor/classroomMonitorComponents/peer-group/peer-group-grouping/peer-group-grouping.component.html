@@ -9,15 +9,16 @@
     [cdkDropListData]="grouping"
     (cdkDropListDropped)="dropWorkgroup($event)"
   >
-    <li
-      *ngFor="let workgroup of grouping.members"
-      class="peer-group-li"
-      cdkDrag
-      [cdkDragData]="workgroup.id"
-      (cdkDragEntered)="dragEnter($event)"
-      (cdkDragExited)="dragExit($event)"
-    >
-      <peer-group-workgroup [workgroup]="workgroup"></peer-group-workgroup>
-    </li>
+    @for (workgroup of grouping.members; track workgroup) {
+      <li
+        class="peer-group-li"
+        cdkDrag
+        [cdkDragData]="workgroup.id"
+        (cdkDragEntered)="dragEnter($event)"
+        (cdkDragExited)="dragExit($event)"
+      >
+        <peer-group-workgroup [workgroup]="workgroup"></peer-group-workgroup>
+      </li>
+    }
   </ul>
 </mat-card-content>
