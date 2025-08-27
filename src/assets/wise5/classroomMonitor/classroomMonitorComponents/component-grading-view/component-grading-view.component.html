@@ -1,35 +1,47 @@
-<div class="mat-elevation-z1 app-background list-item !block p-3">
-  <div class="flex gap-2">
+<div class="mat-elevation-z1 app-background flex flex-col p-3 gap-3">
+  <div class="notice text-start flex flex-col gap-1">
+    @if (component.prompt) {
+      <div class="mat-body-1" [innerHTML]="component.prompt"></div>
+    }
+    <div class="flex-shrink-0">
+      <span i18n>Responses:</span>&nbsp;<component-completion
+        [node]="node"
+        [component]="component"
+        [periodId]="periodId"
+      />
+    </div>
+  </div>
+  <div class="flex gap-2 -mx-1">
     <milestone-report-button [node]="node" [component]="component" [periodId]="periodId" />
     <peer-group-button [node]="node" [component]="component" />
-    <component-completion [node]="node" [component]="component" [periodId]="periodId" />
-    &nbsp;<span i18n>Component Completion</span>
-    <component-average-score [node]="node" [component]="component" [periodId]="periodId" />
-    / {{ component?.maxScore ?? 0 }} Mean
   </div>
-  <div class="flex flex-col gap-2">
-    @if (component?.type === 'MultipleChoice' && hasStudentWork) {
-      <teacher-summary-display
-        [nodeId]="node.id"
-        [componentId]="component.id"
-        [periodId]="periodId"
-        [studentDataType]="'responses'"
-        [source]="source"
-        [highlightCorrectAnswer]="hasCorrectAnswer"
-        [chartType]="'column'"
-        [doRender]="true"
-      />
-    }
-    @if (hasScoresSummary && hasScoreAnnotation) {
-      <teacher-summary-display
-        [nodeId]="node.id"
-        [componentId]="component.id"
-        [periodId]="periodId"
-        [studentDataType]="'scores'"
-        [source]="source"
-        [chartType]="'column'"
-        [doRender]="true"
-      />
-    }
-  </div>
+  @if (hasSummaryData) {
+    <div class="flex flex-col sm:flex-row gap-3 m-3">
+      @if (component?.type === 'MultipleChoice' && hasStudentWork) {
+        <teacher-summary-display
+          [nodeId]="node.id"
+          [componentId]="component.id"
+          [periodId]="periodId"
+          [studentDataType]="'responses'"
+          [source]="source"
+          [highlightCorrectAnswer]="hasCorrectAnswer"
+          [chartType]="component.choiceType === 'multiple' ? 'columnn' : 'pie'"
+          [doRender]="true"
+          class="w-full sm:w-1/2"
+        />
+      }
+      @if (hasScoresSummary && hasScoreAnnotation) {
+        <teacher-summary-display
+          [nodeId]="node.id"
+          [componentId]="component.id"
+          [periodId]="periodId"
+          [studentDataType]="'scores'"
+          [source]="source"
+          [chartType]="'column'"
+          [doRender]="true"
+          class="w-full sm:w-1/2"
+        />
+      }
+    </div>
+  }
 </div>
