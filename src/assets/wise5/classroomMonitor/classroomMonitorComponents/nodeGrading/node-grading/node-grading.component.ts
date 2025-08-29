@@ -93,7 +93,11 @@ export class NodeGradingComponent {
     this.nodeMaxScore = this.projectService.getMaxScoreForNode(this.nodeId);
     this.components = this.projectService
       .getComponents(this.nodeId)
-      .filter((component) => this.projectService.componentHasWork(component));
+      .filter((component) => this.projectService.componentHasWork(component))
+      .map((component, index) => {
+        component['displayIndex'] = index + 1;
+        return component;
+      });
     this.visibleComponents = this.components;
     this.numRubrics = this.node.getNumRubrics();
     this.setPeriod();

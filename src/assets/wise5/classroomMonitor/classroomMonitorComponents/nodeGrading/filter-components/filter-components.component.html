@@ -13,7 +13,7 @@
       <mat-select-trigger>{{ selectedText }}</mat-select-trigger>
       @for (component of components; track component.id; let i = $index) {
         <mat-option [value]="component" color="primary">
-          {{ i + 1 }}: {{ getComponentTypeLabel(component.type) }}
+          {{ component.displayIndex }}: {{ getComponentTypeLabel(component.type) }}
         </mat-option>
       }
     </mat-select>

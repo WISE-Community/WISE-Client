@@ -43,7 +43,7 @@
             >
               <div>
                 <h3 class="accent-1 gray-lightest-bg component__header">
-                  {{ i + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
+                  {{ component.displayIndex + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
                   <component-new-work-badge
                     [componentId]="component.id"
                     [workgroupId]="workgroup.workgroupId"
