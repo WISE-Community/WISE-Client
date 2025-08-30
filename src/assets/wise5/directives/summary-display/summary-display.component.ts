@@ -20,6 +20,7 @@ import { ScoreSummaryData } from './summary-data/ScoreSummaryData';
 import { TableSummaryData } from './summary-data/TableSummaryData';
 import { Choice } from '../../components/multipleChoice/Choice';
 import { SummaryData } from './summary-data/SummaryData';
+import { distance } from 'colorjs.io/fn';
 @Component({
   imports: [MatCardModule],
   styleUrl: 'summary-display.component.scss',
@@ -54,6 +55,7 @@ export abstract class SummaryDisplayComponent {
   hasCorrectness: boolean = false;
   protected Highcharts: typeof Highcharts = Highcharts;
   maxScore: number = 5;
+  private meanScore: number = 0;
 
   numResponses: number;
   otherComponent: ComponentContent;
@@ -323,13 +325,16 @@ export abstract class SummaryDisplayComponent {
 
   private createScoresSeriesData(summaryData: ScoreSummaryData): [SeriesData, number] {
     const seriesData = new SeriesData();
+    let sum = 0;
     let total = 0;
     for (let scoreValue = 1; scoreValue <= this.maxScore; scoreValue++) {
       const count = this.getSummaryDataCount(summaryData, scoreValue);
       const dataPoint = new SeriesDataPoint(scoreValue, count);
       seriesData.addDataPoint(dataPoint);
+      sum += count * scoreValue;
       total += count;
     }
+    this.meanScore = Math.round((sum / total) * 100) / 100;
     return [seriesData, total];
   }
 
@@ -374,9 +379,6 @@ export abstract class SummaryDisplayComponent {
       case 'self':
         graphTitle = this.getGraphTitleForSelf();
         break;
-      case 'period':
-        graphTitle = this.getGraphTitleForPeriod();
-        break;
       default:
         graphTitle = this.getGraphTitleForClass();
     }
@@ -391,40 +393,14 @@ export abstract class SummaryDisplayComponent {
     }
   }
 
-  getGraphTitleForPeriod(): string {
-    if (this.isStudentDataTypeResponses()) {
-      return this.getGraphTitleWithLabelAndPercent(
-        $localize`Period Responses`,
-        this.getPercentOfClassRespondedText()
-      );
-    } else if (this.isStudentDataTypeScores()) {
-      return this.getGraphTitleWithLabelAndPercent(
-        $localize`Period Scores`,
-        this.getPercentOfClassRespondedText()
-      );
-    }
-  }
-
   getGraphTitleForClass(): string {
     if (this.isStudentDataTypeResponses()) {
-      return this.getGraphTitleWithLabelAndPercent(
-        $localize`Class Responses`,
-        this.getPercentOfClassRespondedText()
-      );
+      return $localize`Responses`;
     } else if (this.isStudentDataTypeScores()) {
-      return this.getGraphTitleWithLabelAndPercent(
-        $localize`Class Scores`,
-        this.getPercentOfClassRespondedText()
+      return (
+        $localize`Scores` + ' (' + $localize`Mean: ` + this.meanScore + '/' + this.maxScore + ')'
       );
     }
-  }
-
-  private getGraphTitleWithLabelAndPercent(label: string, percentDisplayText: string): string {
-    return `${label} | ${percentDisplayText}`;
-  }
-
-  getPercentOfClassRespondedText(): string {
-    return $localize`${this.percentResponded}% Responded (${this.numResponses}/${this.totalWorkgroups})`;
   }
 
   getChartColors(): string[] {
@@ -500,7 +476,9 @@ export abstract class SummaryDisplayComponent {
         enabled: false
       },
       legend: {
-        enabled: false
+        enabled: function () {
+          return chartType === 'pie' ? true : false;
+        }
       },
       plotOptions: {
         series: {
@@ -509,16 +487,26 @@ export abstract class SummaryDisplayComponent {
             formatter: function () {
               if (chartType === 'pie') {
                 const pct = Math.round((this.y / this.total) * 100);
-                return this.key + ': ' + pct + '%';
+                return pct + '%';
               } else {
-                return this.y;
+                const pct = Math.round((this.y / thisSummaryDisplay.total) * 100);
+                return this.y + ' (' + pct + '%)';
               }
             },
-            style: { fontSize: '12px' }
+            style: { fontSize: '12px' },
+            enabled: true
           }
         },
         column: {
           maxPointWidth: 80
+        },
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          showInLegend: true,
+          dataLabels: {
+            distance: -30
+          }
         }
       },
       series: series,
@@ -533,10 +521,11 @@ export abstract class SummaryDisplayComponent {
       tooltip: {
         formatter: function (s, point) {
           if (chartType === 'pie') {
-            return '<b>' + this.key + '</b>: ' + this.y;
+            const pct = Math.round((this.y / this.total) * 100);
+            return this.key + '<br><b>' + this.y + ' (' + pct + '%)</br>';
           } else {
             const pct = Math.round((this.y / thisSummaryDisplay.total) * 100);
-            return '<b>' + this.key + '</b>: ' + pct + '%';
+            return '<b>' + this.key + '</b><br>Count:<b>' + this.y + '</b>';
           }
         }
       },

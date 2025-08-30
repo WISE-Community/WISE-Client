@@ -13,15 +13,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { FilterComponentsComponent } from '../filter-components/filter-components.component';
 import { ComponentContent } from '../../../../common/ComponentContent';
 import { NodeClassResponsesComponent } from '../node-class-responses/node-class-responses.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ComponentTypeService } from '../../../../services/componentTypeService';
+import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
 
 @Component({
   imports: [
     CommonModule,
+    ComponentGradingViewComponent,
     FilterComponentsComponent,
     FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
-    NodeClassResponsesComponent
+    NodeClassResponsesComponent,
+    MatTabsModule
   ],
   styles: [
     `
@@ -30,11 +35,7 @@ import { NodeClassResponsesComponent } from '../node-class-responses/node-class-
       }
 
       .component-select {
-        padding: 6px 16px;
-      }
-
-      .list-item {
-        display: block;
+        padding: 6px 12px;
       }
 
       .mat-body-1 {
@@ -59,6 +60,7 @@ export class NodeGradingComponent {
 
   constructor(
     private classroomStatusService: ClassroomStatusService,
+    private componentTypeService: ComponentTypeService,
     private dataService: TeacherDataService,
     private dialog: MatDialog,
     private projectService: TeacherProjectService
@@ -132,5 +134,9 @@ export class NodeGradingComponent {
       data: this.nodeId,
       width: '90%'
     });
+  }
+
+  protected getComponentTypeLabel(componentType: string): string {
+    return this.componentTypeService.getComponentTypeLabel(componentType);
   }
 }

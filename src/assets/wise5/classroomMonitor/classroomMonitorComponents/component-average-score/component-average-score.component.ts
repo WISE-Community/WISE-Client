@@ -7,15 +7,13 @@ import { DecimalPipe } from '@angular/common';
   imports: [DecimalPipe],
   selector: 'component-average-score',
   template: `
-    @if (avgScore) {
-      {{ avgScore | number: '1.0-1' }}
-    } @else {
-      -
+    @if (avgScore || avgScore === 0) {
+      {{ avgScore }}/{{ component?.maxScore ?? 0 }}
     }
   `
 })
 export class ComponentAverageScoreComponent {
-  protected avgScore: number | 'NA';
+  protected avgScore: number | '-';
   @Input() component: any;
   @Input() node: Node;
   @Input() periodId: number;

@@ -8,13 +8,15 @@ import { DecimalPipe } from '@angular/common';
 @Component({
   imports: [DecimalPipe],
   selector: 'component-completion',
-  template: `{{ completion | number: '1.0-0' }}%`
+  template: `{{ this.numWorkgroupsCompleted }} ({{ completion | number: '1.0-0' }}%)`
 })
 export class ComponentCompletionComponent {
   protected completion: number;
   @Input() component: any;
   @Input() node: Node;
   @Input() periodId: number;
+  protected workgroups: Map<number, any>;
+  protected numWorkgroupsCompleted: number;
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
@@ -24,11 +26,11 @@ export class ComponentCompletionComponent {
 
   ngOnChanges(): void {
     if (this.component && this.node) {
-      const workgroups = this.workgroupService.getWorkgroupsInPeriod(this.periodId);
-      const numWorkgroupsCompleted = Array.from(workgroups.keys()).filter((workgroupId) =>
+      this.workgroups = this.workgroupService.getWorkgroupsInPeriod(this.periodId);
+      this.numWorkgroupsCompleted = Array.from(this.workgroups.keys()).filter((workgroupId) =>
         this.isCompleted(workgroupId)
       ).length;
-      this.completion = (numWorkgroupsCompleted / workgroups.size) * 100;
+      this.completion = (this.numWorkgroupsCompleted / this.workgroups.size) * 100;
     }
   }
 
