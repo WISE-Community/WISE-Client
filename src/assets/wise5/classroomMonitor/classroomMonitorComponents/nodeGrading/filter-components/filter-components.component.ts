@@ -29,7 +29,7 @@ export class FilterComponentsComponent {
   }
 
   private updateSelectedText(): void {
-    this.selectedText = $localize`Showing ${this.selectedComponents.length}/${this.components.length} items`;
+    this.selectedText = $localize`Showing ${this.selectedComponents.length}/${this.components.length} questions`;
   }
 
   protected getComponentTypeLabel(componentType: string): string {

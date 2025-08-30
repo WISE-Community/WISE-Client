@@ -1,15 +1,14 @@
 <div class="mat-elevation-z1 app-background flex flex-col p-3 gap-3">
-  <div class="notice text-start flex flex-col gap-1">
-    @if (component.prompt) {
+  <div class="notice text-start flex justify-between gap-4">
+    <div>
+      <div i18n>Prompt</div>
       <div class="mat-body-1" [innerHTML]="component.prompt"></div>
-    }
-    <div class="flex-shrink-0">
-      <span i18n>Responses:</span>&nbsp;<component-completion
-        [node]="node"
-        [component]="component"
-        [periodId]="periodId"
-      />
     </div>
+    @if (hasStudentWork) {
+      <div class="flex-shrink-0 pt-1.5">
+        <component-completion [node]="node" [component]="component" [periodId]="periodId" />
+      </div>
+    }
   </div>
   <div class="flex gap-2 -mx-1">
     <milestone-report-button [node]="node" [component]="component" [periodId]="periodId" />

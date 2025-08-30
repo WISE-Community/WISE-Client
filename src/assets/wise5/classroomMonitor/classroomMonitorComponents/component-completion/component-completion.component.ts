@@ -3,12 +3,14 @@ import { Node } from '../../../common/Node';
 import { WorkgroupService } from '../../../../../app/services/workgroup.service';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
-import { DecimalPipe } from '@angular/common';
+import { ClassroomStatusService } from '../../../services/classroomStatusService';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [DecimalPipe],
+  imports: [MatProgressBarModule, MatTooltipModule],
   selector: 'component-completion',
-  template: `{{ this.numWorkgroupsCompleted }} ({{ completion | number: '1.0-0' }}%)`
+  templateUrl: 'component-completion.component.html'
 })
 export class ComponentCompletionComponent {
   protected completion: number;
@@ -21,16 +23,24 @@ export class ComponentCompletionComponent {
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
     private dataService: TeacherDataService,
+    private statusService: ClassroomStatusService,
     private workgroupService: WorkgroupService
   ) {}
 
   ngOnChanges(): void {
     if (this.component && this.node) {
-      this.workgroups = this.workgroupService.getWorkgroupsInPeriod(this.periodId);
+      this.workgroups = new Map(
+        Array.from(this.workgroupService.getWorkgroupsInPeriod(this.periodId)).filter(
+          ([workgroupId]) => this.statusService.hasStudentStatus(workgroupId)
+        )
+      );
       this.numWorkgroupsCompleted = Array.from(this.workgroups.keys()).filter((workgroupId) =>
         this.isCompleted(workgroupId)
       ).length;
-      this.completion = (this.numWorkgroupsCompleted / this.workgroups.size) * 100;
+      this.completion =
+        this.workgroups.size > 0
+          ? Math.round((this.numWorkgroupsCompleted / this.workgroups.size) * 100)
+          : 0;
     }
   }
 
@@ -40,7 +50,7 @@ export class ComponentCompletionComponent {
       workgroupId,
       this.component.id
     );
-    return ['OpenResponse', 'Discussion'].includes(this.component.type)
+    const isCompleted = ['OpenResponse', 'Discussion'].includes(this.component.type)
       ? service.isCompletedV2(this.node, this.component, {
           componentStates: componentStates
         })
@@ -50,5 +60,6 @@ export class ComponentCompletionComponent {
           this.dataService.getEventsByNodeId(this.node.id),
           this.node
         );
+    return isCompleted;
   }
 }
