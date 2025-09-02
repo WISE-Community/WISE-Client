@@ -57,7 +57,8 @@ export class ProjectFilterValues {
         this.disciplineValue.length +
         this.unitTypeValue.length +
         this.gradeLevelValue.length +
-        this.featureValue.length >
+        this.featureValue.length +
+        this.locationValue.length >
       0
     );
   }
@@ -70,6 +71,7 @@ export class ProjectFilterValues {
     this.searchValue = '';
     this.standardValue = [];
     this.unitTypeValue = [];
+    this.locationValue = [];
   }
 
   private matchesUnitType(project: LibraryProject): boolean {
