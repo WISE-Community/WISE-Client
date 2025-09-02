@@ -34,7 +34,10 @@ const routes: Routes = [
     path: 'forgot',
     loadChildren: () => import('./forgot/forgot.module').then((m) => m.ForgotModule)
   },
-  { path: 'help', loadChildren: () => import('./help/help.module').then((m) => m.HelpModule) },
+  {
+    path: 'help',
+    loadChildren: () => import('./help/help-routing.module').then((m) => m.HelpRoutingModule)
+  },
   {
     path: 'join',
     loadChildren: () => import('./register/register.module').then((m) => m.RegisterModule)
