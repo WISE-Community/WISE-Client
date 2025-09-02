@@ -7,13 +7,11 @@ export const locationTypeToLabel: { [key in LocationType]: string } = {
 };
 
 export class LocationOption {
-  id: string;
   name: string;
   type: LocationType;
   constructor(type: LocationType, name: string) {
     this.type = type;
     this.name = name;
-    this.id = `${locationTypeToLabel[type]}:${name}`;
   }
 }
 

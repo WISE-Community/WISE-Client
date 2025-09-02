@@ -105,7 +105,7 @@ export class ProjectFilterValues {
         ?.map((location) => Object.assign(new Location(), location))
         .map((location) => location.getLocationOptions())
         .flat()
-        .some((locationOption) => this.locationValue.includes(locationOption.id))
+        .some((locationOption) => this.locationValue.includes(locationOption.name))
     );
   }
 

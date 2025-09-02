@@ -24,7 +24,7 @@ export class LocationSelectMenuComponent extends SelectMenuComponent {
     this.options
       .flatMap((option: Location) => option.getLocationOptions())
       .forEach((option: LocationOption) => {
-        if (!this.locationOptions[option.type].some((opt) => opt.id === option.id)) {
+        if (!this.locationOptions[option.type].some((opt) => opt.name === option.name)) {
           this.locationOptions[option.type].push(option);
         }
       });
