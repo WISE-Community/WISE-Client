@@ -127,5 +127,22 @@
         />
       </div>
     }
+    @if (locationOptions.length > 0) {
+      <div
+        class="library-filter"
+        [ngClass]="{ 'md:w-full': isSplitScreen, 'md:w-1/4': !isSplitScreen }"
+      >
+        <location-select-menu
+          [options]="locationOptions"
+          i18n-placeholderText
+          placeholderText="Locations"
+          [value]="filterValues.locationValue"
+          (update)="filterUpdated($event, 'location')"
+          [valueProp]="'name'"
+          [viewValueProp]="'name'"
+          [multiple]="true"
+        />
+      </div>
+    }
   </div>
 </div>
