@@ -15,17 +15,14 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
   templateUrl: './forgot-teacher-username.component.html',
-  styleUrl: './forgot-teacher-username.component.scss',
   imports: [
     MatCard,
     MatCardContent,
     FormsModule,
-    FlexModule,
     ReactiveFormsModule,
     MatFormField,
     MatLabel,

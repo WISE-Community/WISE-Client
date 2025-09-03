@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 import { provideRouter, Router } from '@angular/router';
 import { ConfigService } from '../../../services/config.service';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha-2';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 let component: ForgotTeacherPasswordComponent;
 let fixture: ComponentFixture<ForgotTeacherPasswordComponent>;
@@ -14,7 +13,7 @@ let teacherService: TeacherService;
 
 export class MockTeacherService {
   getVerificationCodeEmail(username: string): Observable<any> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next({
         status: 'success',
         messageCode: 'emailSent'
@@ -31,7 +30,7 @@ class MockConfigService {
 describe('ForgotTeacherPasswordComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, RecaptchaV3Module, ForgotTeacherPasswordComponent],
+      imports: [RecaptchaV3Module, ForgotTeacherPasswordComponent],
       providers: [
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: ConfigService, useClass: MockConfigService },
