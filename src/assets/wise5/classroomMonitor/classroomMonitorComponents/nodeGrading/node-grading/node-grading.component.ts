@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
@@ -16,6 +16,7 @@ import { NodeClassResponsesComponent } from '../node-class-responses/node-class-
 import { MatTabsModule } from '@angular/material/tabs';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   imports: [
@@ -45,7 +46,7 @@ import { ComponentGradingViewComponent } from '../../component-grading-view/comp
   ],
   templateUrl: './node-grading.component.html'
 })
-export class NodeGradingComponent {
+export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   protected components: ComponentContent[];
   protected hasWork: boolean;
   protected node: Node;
@@ -57,6 +58,7 @@ export class NodeGradingComponent {
   private periodId: number;
   private subscriptions: Subscription = new Subscription();
   protected visibleComponents: ComponentContent[];
+  protected selectedComponent: FormControl = new FormControl();
 
   constructor(
     private classroomStatusService: ClassroomStatusService,
@@ -70,6 +72,9 @@ export class NodeGradingComponent {
     this.setFields();
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(() => this.setPeriod())
+    );
+    this.subscriptions.add(
+      this.dataService.currentNodeChanged$.subscribe(() => this.selectedComponent.setValue(0))
     );
   }
 
