@@ -15,21 +15,23 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotificationsMenuComponent } from '../notifications-menu/notifications-menu.component';
 import { PauseScreensMenuComponent } from '../../pause-screens-menu/pause-screens-menu.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatToolbarModule,
-        NotificationsMenuComponent,
-        PauseScreensMenuComponent
-    ],
-    selector: 'top-bar',
-    styleUrl: './top-bar.component.scss',
-    templateUrl: './top-bar.component.html'
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    NotificationsMenuComponent,
+    PauseScreensMenuComponent
+  ],
+  selector: 'top-bar',
+  styleUrl: './top-bar.component.scss',
+  templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent implements OnInit {
   protected avatarColor: any;
@@ -106,21 +108,28 @@ export class TopBarComponent implements OnInit {
         $localize`Warning! You will be editing the content of a classroom unit. If students have already started working, this may result in lost data or other problems.\n\nAre you sure you want to proceed?`
       )
     ) {
-      if (/unit\/(\d*)\/node\/(\w*)$/.test(this.router.url)) {
-        this.router.navigate([
-          '/teacher/edit/unit',
-          this.projectId,
-          'node',
-          this.router.url.match(/\/node\/(\w+)$/)[1]
-        ]);
-      } else {
-        this.router.navigate(['/teacher/edit/unit', this.projectId]);
+      const urlFragments = ['/teacher/edit/unit', this.projectId];
+      if (this.isViewingNode()) {
+        urlFragments.push('node', this.getCurrentNodeId());
       }
+      this.router.navigate(urlFragments);
     }
   }
 
+  private isViewingNode(): boolean {
+    return /unit\/(\d*)\/node\/(\w*)$/.test(this.router.url);
+  }
+
+  private getCurrentNodeId(): string {
+    return this.router.url.match(/\/node\/(\w+)$/)[1];
+  }
+
   protected previewProject(): void {
-    window.open(`${this.configService.getConfigParam('previewProjectURL')}`);
+    let previewUrl = this.configService.getConfigParam('previewProjectURL');
+    if (this.isViewingNode()) {
+      previewUrl += `/${this.getCurrentNodeId()}`;
+    }
+    window.open(previewUrl);
   }
 
   protected goHome(): void {
