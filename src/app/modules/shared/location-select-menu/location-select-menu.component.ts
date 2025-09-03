@@ -21,6 +21,12 @@ export class LocationSelectMenuComponent extends SelectMenuComponent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.populateLocationOptions();
+    this.alphabetizeOptions();
+    this.keepNonEmptyLabels();
+  }
+
+  private populateLocationOptions(): void {
     this.options
       .flatMap((option: Location) => option.getLocationOptions())
       .forEach((option: LocationOption) => {
@@ -28,6 +34,17 @@ export class LocationSelectMenuComponent extends SelectMenuComponent {
           this.locationOptions[option.type].push(option);
         }
       });
+  }
+
+  private alphabetizeOptions(): void {
+    (Object.keys(this.locationOptions) as LocationType[]).forEach((key: LocationType) =>
+      this.locationOptions[key].sort((a: LocationOption, b: LocationOption) =>
+        a.name.localeCompare(b.name)
+      )
+    );
+  }
+
+  private keepNonEmptyLabels(): void {
     this.labels = Object.keys(this.locationOptions).filter(
       (key: LocationType) => this.locationOptions[key].length > 0
     ) as LocationType[];

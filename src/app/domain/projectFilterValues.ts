@@ -105,8 +105,7 @@ export class ProjectFilterValues {
       this.locationValue.length === 0 ||
       project.metadata.locations
         ?.map((location) => Object.assign(new Location(), location))
-        .map((location) => location.getLocationOptions())
-        .flat()
+        .flatMap((location) => location.getLocationOptions())
         .some((locationOption) => this.locationValue.includes(locationOption.name))
     );
   }
