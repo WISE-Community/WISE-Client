@@ -3,19 +3,20 @@ import { ComponentGradingViewComponent } from './component-grading-view.componen
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { MockComponent } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
+import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
+import { By } from '@angular/platform-browser';
 
-xdescribe('ComponentGradingViewComponent', () => {
-  let component: ComponentGradingViewComponent;
-  let fixture: ComponentFixture<ComponentGradingViewComponent>;
-
+let component: ComponentGradingViewComponent;
+let fixture: ComponentFixture<ComponentGradingViewComponent>;
+describe('ComponentGradingViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         ClassroomMonitorTestingModule,
         ComponentGradingViewComponent,
-        MockComponent(MilestoneReportButtonComponent)
+        MockComponents(ComponentCompletionComponent, MilestoneReportButtonComponent)
       ],
       providers: [
         { provide: ActivatedRoute, useValue: { parent: { params: of({ nodeId: 'node1' }) } } }
@@ -24,10 +25,38 @@ xdescribe('ComponentGradingViewComponent', () => {
 
     fixture = TestBed.createComponent(ComponentGradingViewComponent);
     component = fixture.componentInstance;
+    component.node = { id: 'node1', title: 'Node 1' } as any;
+    component.component = { id: 'abc', prompt: 'hi' } as any;
     fixture.detectChanges();
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  testHasStudentWork();
+  testNoStudentWork();
 });
+
+function testHasStudentWork() {
+  describe('has student work', () => {
+    beforeEach(() => {
+      component['hasStudentWork'] = true;
+      fixture.detectChanges();
+    });
+    it('should show component completion', () => {
+      expect(getComponentCompletion()).toBeTruthy();
+    });
+  });
+}
+
+function testNoStudentWork() {
+  describe('no student work', () => {
+    beforeEach(() => {
+      component['hasStudentWork'] = false;
+      fixture.detectChanges();
+    });
+    it('should not show component completion', () => {
+      expect(getComponentCompletion()).toBeFalsy();
+    });
+  });
+}
+
+function getComponentCompletion() {
+  return fixture.debugElement.query(By.css('component-completion'));
+}
