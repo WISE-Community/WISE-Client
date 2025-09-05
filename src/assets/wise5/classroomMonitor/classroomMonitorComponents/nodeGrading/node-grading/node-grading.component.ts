@@ -3,7 +3,6 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
@@ -23,7 +22,6 @@ import { FormControl } from '@angular/forms';
     CommonModule,
     ComponentGradingViewComponent,
     FilterComponentsComponent,
-    FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
     NodeClassResponsesComponent,
