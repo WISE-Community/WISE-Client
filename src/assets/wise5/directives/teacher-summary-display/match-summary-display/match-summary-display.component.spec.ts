@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { CRaterService } from '../../../services/cRaterService';
 
 describe('MatchSummaryDisplayComponent', () => {
   let component: MatchSummaryDisplayComponent;
@@ -19,6 +20,7 @@ describe('MatchSummaryDisplayComponent', () => {
         MockProviders(
           AnnotationService,
           ConfigService,
+          CRaterService,
           TeacherDataService,
           TeacherProjectService,
           SummaryService

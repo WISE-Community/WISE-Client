@@ -12,6 +12,7 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 import { MatCardModule } from '@angular/material/card';
+import { CRaterService } from '../../../services/cRaterService';
 
 @Component({
   imports: [CommonModule, MatCardModule, MatIconModule],
@@ -39,11 +40,19 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected cRaterService: CRaterService,
     protected dataService: TeacherDataService,
     protected projectService: TeacherProjectService,
     protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, dataService, projectService, summaryService);
+    super(
+      annotationService,
+      configService,
+      cRaterService,
+      dataService,
+      projectService,
+      summaryService
+    );
   }
 
   ngOnInit(): void {

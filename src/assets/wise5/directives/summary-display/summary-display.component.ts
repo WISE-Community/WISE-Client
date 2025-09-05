@@ -20,7 +20,7 @@ import { ScoreSummaryData } from './summary-data/ScoreSummaryData';
 import { TableSummaryData } from './summary-data/TableSummaryData';
 import { Choice } from '../../components/multipleChoice/Choice';
 import { SummaryData } from './summary-data/SummaryData';
-import { distance } from 'colorjs.io/fn';
+import { CRaterService } from '../../services/cRaterService';
 @Component({
   imports: [MatCardModule],
   styleUrl: 'summary-display.component.scss',
@@ -51,10 +51,12 @@ export abstract class SummaryDisplayComponent {
     correct: '#00C853',
     incorrect: '#C62828'
   };
-  private defaultMaxScore: number = 5;
+  private defaultMaxScore: number = 0;
   hasCorrectness: boolean = false;
   protected Highcharts: typeof Highcharts = Highcharts;
-  maxScore: number = 5;
+  maxScore: number = 0;
+  studentMaxScore: number = 0;
+  studentMinScore: number = 1;
   private meanScore: number = 0;
 
   numResponses: number;
@@ -78,6 +80,7 @@ export abstract class SummaryDisplayComponent {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected cRaterService: CRaterService,
     protected dataService: DataService,
     protected projectService: ProjectService,
     protected summaryService: SummaryService
@@ -183,7 +186,10 @@ export abstract class SummaryDisplayComponent {
   }
 
   protected setMaxScore(): void {
-    this.maxScore = this.otherComponent?.maxScore ?? this.defaultMaxScore;
+    const isCRaterEnabled = this.cRaterService.isCRaterEnabled(
+      this.projectService.getComponent(this.nodeId, this.componentId)
+    );
+    this.maxScore = this.otherComponent?.maxScore ?? (isCRaterEnabled ? 5 : this.defaultMaxScore);
   }
 
   protected abstract getLatestWork(): Observable<ComponentState[]>;
@@ -264,24 +270,23 @@ export abstract class SummaryDisplayComponent {
   }
 
   protected processScoreAnnotations(annotations: Annotation[]): void {
-    this.updateMaxScoreIfNecessary(annotations);
-    const summaryData = new ScoreSummaryData(annotations, this.maxScore);
+    this.setMinMaxScore(annotations);
+    const summaryData = new ScoreSummaryData(annotations, this.studentMaxScore);
     const [seriesData, total] = this.createScoresSeriesData(summaryData);
     this.calculateCountsAndPercentage(annotations.length);
     this.renderGraph(seriesData, total);
   }
 
-  private updateMaxScoreIfNecessary(annotations: Annotation[]): void {
-    this.maxScore = this.calculateMaxScore(annotations);
-  }
-
-  calculateMaxScore(annotations: Annotation[]): number {
+  setMinMaxScore(annotations: Annotation[]): void {
     let maxScoreSoFar = this.maxScore;
+    let minScoreSoFar = this.studentMinScore;
     for (const annotation of annotations) {
       const score = this.getScoreFromAnnotation(annotation);
       maxScoreSoFar = Math.max(maxScoreSoFar, score);
+      minScoreSoFar = Math.min(minScoreSoFar, score);
     }
-    return maxScoreSoFar;
+    this.studentMaxScore = maxScoreSoFar;
+    this.studentMinScore = minScoreSoFar;
   }
 
   createChoicesSeriesData(
@@ -327,7 +332,7 @@ export abstract class SummaryDisplayComponent {
     const seriesData = new SeriesData();
     let sum = 0;
     let total = 0;
-    for (let scoreValue = 1; scoreValue <= this.maxScore; scoreValue++) {
+    for (let scoreValue = this.studentMinScore; scoreValue <= this.studentMaxScore; scoreValue++) {
       const count = this.getSummaryDataCount(summaryData, scoreValue);
       const dataPoint = new SeriesDataPoint(scoreValue, count);
       seriesData.addDataPoint(dataPoint);
@@ -397,9 +402,9 @@ export abstract class SummaryDisplayComponent {
     if (this.isStudentDataTypeResponses()) {
       return $localize`Responses`;
     } else if (this.isStudentDataTypeScores()) {
-      return (
-        $localize`Scores` + ' (' + $localize`Mean: ` + this.meanScore + '/' + this.maxScore + ')'
-      );
+      return this.maxScore
+        ? `${$localize`Scores`} (${$localize`Mean: `}${this.meanScore}/${this.maxScore})`
+        : `${$localize`Scores`} (${$localize`Mean: `}${this.meanScore})`;
     }
   }
 
@@ -408,9 +413,10 @@ export abstract class SummaryDisplayComponent {
       return this.colors.palette;
     } else {
       let colors: string[] = [];
-      const step = (100 / this.maxScore / 100) * 0.9;
+      const rangeMax = this.studentMinScore === 0 ? this.studentMaxScore + 1 : this.studentMaxScore;
+      const step = (100 / rangeMax / 100) * 0.9;
       let opacity = 0.1;
-      for (let i = 0; i < this.maxScore; i++) {
+      for (let i = 0; i < rangeMax; i++) {
         opacity = opacity + step;
         const color = rgbToHex(this.colors.singleHue, opacity);
         colors.push(color);

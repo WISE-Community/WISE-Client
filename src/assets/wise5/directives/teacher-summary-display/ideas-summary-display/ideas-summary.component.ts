@@ -48,13 +48,20 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
-    private cRaterService: CRaterService,
+    protected cRaterService: CRaterService,
     protected dataService: TeacherDataService,
     private ideasSortingService: IdeasSortingService,
     protected projectService: TeacherProjectService,
     protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, dataService, projectService, summaryService);
+    super(
+      annotationService,
+      configService,
+      cRaterService,
+      dataService,
+      projectService,
+      summaryService
+    );
   }
 
   ngOnInit(): void {

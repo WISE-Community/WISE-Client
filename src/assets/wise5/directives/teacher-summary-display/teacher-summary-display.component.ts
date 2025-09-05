@@ -11,6 +11,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { Observable } from 'rxjs';
 import { Annotation } from '../../common/Annotation';
 import { ComponentState } from '../../../../app/domain/componentState';
+import { CRaterService } from '../../services/cRaterService';
 
 @Component({
   imports: [CommonModule, HighchartsChartModule, MatCardModule],
@@ -22,11 +23,19 @@ export class TeacherSummaryDisplayComponent extends SummaryDisplayComponent {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected cRaterService: CRaterService,
     protected dataService: TeacherDataService,
     protected projectService: ProjectService,
     protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, dataService, projectService, summaryService);
+    super(
+      annotationService,
+      configService,
+      cRaterService,
+      dataService,
+      projectService,
+      summaryService
+    );
   }
 
   protected getLatestScores(): Observable<Annotation[]> {

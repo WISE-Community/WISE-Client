@@ -62,21 +62,35 @@ function calculateCountsAndPercentage() {
 }
 
 function calculateMaxScore() {
-  describe('calculateMaxScore', () => {
-    it('should not update max score when there are no annotations', () => {
+  describe('setMinMaxScore', () => {
+    it('should not update min and max scores when there are no annotations', () => {
       const annotations = [];
       component.maxScore = 5;
-      expect(component.calculateMaxScore(annotations)).toEqual(5);
+      component.setMinMaxScore(annotations);
+      expect(component.studentMaxScore).toEqual(5);
+      expect(component.studentMinScore).toEqual(1);
     });
-    it('should update max score when there are annotations', () => {
-      const annotation = new Annotation({
+    it('should update min and max scores when there are annotations', () => {
+      const annotation1 = new Annotation({
         data: {
           value: 6
         }
       });
-      const annotations = [annotation];
+      const annotation2 = new Annotation({
+        data: {
+          value: 0
+        }
+      });
+      const annotation3 = new Annotation({
+        data: {
+          value: 2
+        }
+      });
+      const annotations = [annotation1, annotation2, annotation3];
       component.maxScore = 5;
-      expect(component.calculateMaxScore(annotations)).toEqual(6);
+      component.setMinMaxScore(annotations);
+      expect(component.studentMaxScore).toEqual(6);
+      expect(component.studentMinScore).toEqual(0);
     });
   });
 }
@@ -292,6 +306,7 @@ function setCustomLabelColors() {
 function getChartColors() {
   describe('getChartColors', () => {
     it('should get chart colors', () => {
+      component.studentMaxScore = 5;
       const colors = component.getChartColors();
       expect(colors).toEqual(['#e7beda', '#d794c2', '#c86baa', '#b94192', '#a9177a']);
     });
@@ -304,7 +319,7 @@ function getGraphTitleForClass() {
       expectGraphTitleForX('responses', 'Responses');
     });
     it('should get graph title for class when student data type is scores', () => {
-      expectGraphTitleForX('scores', 'Scores (Mean: 0/5)');
+      expectGraphTitleForX('scores', 'Scores (Mean: 0)');
     });
   });
 }
