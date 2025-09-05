@@ -9,6 +9,7 @@ import { Observable, Subject } from 'rxjs';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { FilterComponentsComponent } from '../filter-components/filter-components.component';
+import { ComponentTypeService } from '../../../../services/componentTypeService';
 
 let classroomStatusService: ClassroomStatusService;
 let component: NodeGradingComponent;
@@ -42,7 +43,12 @@ describe('NodeGradingComponent', () => {
       declarations: [MockComponent(FilterComponentsComponent)],
       imports: [NodeGradingComponent, ClassroomMonitorTestingModule],
       providers: [
-        MockProviders(ClassroomStatusService, TeacherProjectService, WorkgroupService),
+        MockProviders(
+          ClassroomStatusService,
+          ComponentTypeService,
+          TeacherProjectService,
+          WorkgroupService
+        ),
         { provide: TeacherDataService, useClass: MockDataService }
       ]
     }).compileComponents();

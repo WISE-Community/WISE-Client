@@ -3,10 +3,9 @@ import { Choice } from '../../components/multipleChoice/Choice';
 import { ComponentContent } from '../../common/ComponentContent';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../services/configService';
-import { MultipleChoiceSummaryData } from '../summary-display/summary-data/MultipleChoiceSummaryData';
 import { MultipleChoiceSummaryDataPoint } from '../summary-display/summary-data/MultipleChoiceSummaryDataPoint';
 import { ProjectService } from '../../services/projectService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ScoreSummaryData } from '../summary-display/summary-data/ScoreSummaryData';
 import { ScoreSummaryDataPoint } from '../summary-display/summary-data/ScoreSummaryDataPoint';
 import { SeriesData } from '../../common/SeriesData';
@@ -17,12 +16,11 @@ import { SummaryData } from '../summary-display/summary-data/SummaryData';
 
 let component: StudentSummaryDisplay;
 let fixture: ComponentFixture<StudentSummaryDisplay>;
-
 describe('StudentSummaryDisplayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StudentSummaryDisplay, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(withInterceptorsFromDi())]
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(StudentSummaryDisplay);
     component = fixture.componentInstance;
@@ -40,9 +38,7 @@ describe('StudentSummaryDisplayComponent', () => {
   filterLatestScoreAnnotations();
   getChartColors();
   getGraphForSelf();
-  getGraphTitleForPeriod();
   getGraphTitleForClass();
-  getPercentOfClassRespondedText();
   getPercentResponded();
   getTotalWorkgroups();
   initializeOtherComponent();
@@ -302,39 +298,21 @@ function getChartColors() {
   });
 }
 
-function getGraphTitleForPeriod() {
-  describe('getGraphTitleForPeriod', () => {
-    it('should get graph title for period when student data type is responses', () => {
-      expectGraphTitleForX('Period', 'responses');
-    });
-    it('should get graph title for period when student data type is scores', () => {
-      expectGraphTitleForX('Period', 'scores');
-    });
-  });
-}
-
 function getGraphTitleForClass() {
   describe('getGraphTitleForClass', () => {
     it('should get graph title for class when student data type is responses', () => {
-      expectGraphTitleForX('Class', 'responses');
+      expectGraphTitleForX('responses', 'Responses');
     });
     it('should get graph title for class when student data type is scores', () => {
-      expectGraphTitleForX('Class', 'scores');
+      expectGraphTitleForX('scores', 'Scores (Mean: 0/5)');
     });
   });
 }
 
-function expectGraphTitleForX(source: string, studentDataType: string) {
+function expectGraphTitleForX(studentDataType: string, expectedTitle: string) {
   setResponseNumbers(component);
   component.studentDataType = studentDataType;
-  let title: string;
-  if (source === 'Period') {
-    title = component.getGraphTitleForPeriod();
-  } else {
-    title = component.getGraphTitleForClass();
-  }
-  const upperCaseStudentDataType = studentDataType[0].toUpperCase() + studentDataType.substring(1);
-  expect(title).toEqual(`${source} ${upperCaseStudentDataType} | 60% Responded (6/10)`);
+  expect(component.getGraphTitleForClass()).toEqual(expectedTitle);
 }
 
 function getGraphForSelf() {
@@ -348,17 +326,6 @@ function getGraphForSelf() {
       component.source = 'self';
       component.studentDataType = 'scores';
       expect(component.getGraphTitle()).toEqual('Your Score');
-    });
-  });
-}
-
-function getPercentOfClassRespondedText() {
-  describe('getPercentOfClassRespondedText', () => {
-    it('should get percent of class responded text', () => {
-      setResponseNumbers(component);
-      component.studentDataType = 'responses';
-      const text = component.getPercentOfClassRespondedText();
-      expect(text).toEqual(`60% Responded (6/10)`);
     });
   });
 }

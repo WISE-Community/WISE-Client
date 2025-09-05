@@ -38,10 +38,10 @@ function ngChanges_NoScoresAvailable_ShowNA() {
         [] as Annotation[]
       )
     );
-    it('should show "-"', () => {
+    it('should show ""', () => {
       component.ngOnChanges();
       fixture.detectChanges();
-      expect(fixture.nativeElement.textContent.trim()).toEqual('-');
+      expect(fixture.nativeElement.textContent.trim()).toEqual('');
     });
   });
 }
@@ -93,7 +93,7 @@ function ngChanges_ScoresAvailable_ShowAverage() {
         fixture.detectChanges();
       });
       it('should show average score for period 1', () => {
-        expect(fixture.nativeElement.textContent.trim()).toEqual('4');
+        expect(fixture.nativeElement.textContent.trim()).toEqual('4/10');
       });
     });
 
@@ -104,7 +104,7 @@ function ngChanges_ScoresAvailable_ShowAverage() {
         fixture.detectChanges();
       });
       it('should show average score for all periods', () => {
-        expect(fixture.nativeElement.textContent.trim()).toEqual('6');
+        expect(fixture.nativeElement.textContent.trim()).toEqual('6/10');
       });
     });
   });
