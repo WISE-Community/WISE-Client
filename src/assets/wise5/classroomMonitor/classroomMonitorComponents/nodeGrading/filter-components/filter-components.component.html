@@ -1,7 +1,6 @@
 <mat-form-field appearance="fill" class="component-select form-field-no-hint">
   @if (components.length == 1) {
-    <mat-select disabled placeholder="1 item ({{ getComponentTypeLabel(components[0].type) }})">
-    </mat-select>
+    <mat-select disabled placeholder="1 item ({{ getComponentTypeLabel(components[0].type) }})" />
   } @else if (components.length > 1) {
     <mat-select
       [(ngModel)]="selectedComponents"
