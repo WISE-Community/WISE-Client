@@ -1,7 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GradingStepToolsComponent } from './grading-step-tools.component';
-import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
-import { ActivatedRoute, provideRouter, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MockComponent, MockProvider, MockProviders } from 'ng-mocks';
+import { TeacherDataService } from '../../../services/teacherDataService';
+import { GradingNodeService } from '../../../services/gradingNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { of } from 'rxjs';
+import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
 
 describe('GradingStepToolsComponent', () => {
   let component: GradingStepToolsComponent;
@@ -9,9 +14,16 @@ describe('GradingStepToolsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GradingStepToolsComponent, ClassroomMonitorTestingModule],
+      imports: [GradingStepToolsComponent, MockComponent(NodeIconComponent)],
       providers: [
-        provideRouter([]),
+        MockProviders(GradingNodeService),
+        MockProvider(TeacherDataService, {
+          currentNodeChanged$: of()
+        }),
+        MockProvider(TeacherProjectService, {
+          idToOrder: {},
+          projectParsed$: of()
+        }),
         {
           provide: ActivatedRoute,
           useValue: { firstChild: { snapshot: { params: { nodeId: 'nodeId' } } } }
