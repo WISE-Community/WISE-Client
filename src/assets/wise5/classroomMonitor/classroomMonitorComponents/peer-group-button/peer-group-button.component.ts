@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Node } from '../../../common/Node';
 import { TeacherPeerGroupService } from '../../../services/teacherPeerGroupService';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
   selector: 'peer-group-button',
   templateUrl: './peer-group-button.component.html'
 })
