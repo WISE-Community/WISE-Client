@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MilestoneService } from '../../../services/milestoneService';
@@ -9,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MilestoneDetailsDialogComponent } from '../milestones/milestone-details-dialog/milestone-details-dialog.component';
 
 @Component({
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
   selector: 'milestone-report-button',
   templateUrl: './milestone-report-button.component.html'
 })

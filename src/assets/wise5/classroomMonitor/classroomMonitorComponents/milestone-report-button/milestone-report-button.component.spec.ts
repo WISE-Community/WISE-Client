@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MilestoneReportButtonComponent } from './milestone-report-button.component';
-import { MockService } from 'ng-mocks';
+import { MockProvider } from 'ng-mocks';
 import { MilestoneService } from '../../../services/milestoneService';
 import { Node } from '../../../common/Node';
 
@@ -11,7 +11,7 @@ describe('MilestoneReportButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MilestoneReportButtonComponent],
-      providers: [{ provide: MilestoneService, useValue: MockService(MilestoneService) }]
+      providers: [MockProvider(MilestoneService)]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MilestoneReportButtonComponent);
