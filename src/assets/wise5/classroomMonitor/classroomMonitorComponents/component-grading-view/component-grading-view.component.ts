@@ -14,6 +14,7 @@ import { ComponentContent } from '../../../common/ComponentContent';
 import { IdeasSummaryComponent } from '../../../directives/teacher-summary-display/ideas-summary-display/ideas-summary.component';
 import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatCardModule } from '@angular/material/card';
+import { CRaterService } from '../../../services/cRaterService';
 
 @Component({
   imports: [
@@ -36,7 +37,7 @@ export class ComponentGradingViewComponent {
   protected hasCorrectAnswer: boolean;
   protected hasScoresSummary: boolean;
   protected hasScoreAnnotation: boolean;
-  protected hasResponsesSummary: boolean;
+  protected hasIdeaRubricData: boolean;
   protected hasStudentWork: boolean;
   protected hasSummaryData: boolean;
   @Input() node: Node;
@@ -47,6 +48,7 @@ export class ComponentGradingViewComponent {
   constructor(
     private annotationService: AnnotationService,
     private componentServiceLookupService: ComponentServiceLookupService,
+    private cRaterService: CRaterService,
     private dataService: TeacherDataService,
     private summaryService: SummaryService
   ) {}
@@ -86,13 +88,14 @@ export class ComponentGradingViewComponent {
       this.dataService
         .getComponentStatesByComponentId(this.component.id)
         .filter((state) => state.periodId === this.periodId).length > 0;
-    this.hasResponsesSummary = this.summaryService.isResponsesSummaryAvailableForComponentType(
-      this.component?.type
-    );
+    this.hasIdeaRubricData = this.cRaterService
+      .getCRaterRubric(this.node.id, this.component.id)
+      .hasRubricData();
     this.hasSummaryData =
       (this.component?.type === 'MultipleChoice' && this.hasStudentWork) ||
       (this.hasScoresSummary && this.hasScoreAnnotation) ||
-      this.hasResponsesSummary;
+      this.hasIdeaRubricData ||
+      this.component?.type === 'Match';
   }
 
   private setSource(): void {

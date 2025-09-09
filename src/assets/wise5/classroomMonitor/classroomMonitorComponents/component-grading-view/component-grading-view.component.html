@@ -45,7 +45,7 @@
           class="w-full md:w-1/2"
         />
       }
-      @if (hasResponsesSummary && ['DialogGuidance', 'OpenResponse'].includes(component?.type)) {
+      @if (hasIdeaRubricData) {
         <mat-card appearance="outlined" class="w-full">
           <mat-card-content>
             <ideas-summary
