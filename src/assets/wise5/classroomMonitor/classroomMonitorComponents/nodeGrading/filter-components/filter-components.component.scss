@@ -7,4 +7,12 @@
       container-height: 40px
     )
   );
+
+  .mat-mdc-form-field-infix {
+    width: auto;
+  }
+
+  .mat-mdc-select-value {
+    @apply me-1;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,7 +11,8 @@ import { ComponentContent } from '../../../../common/ComponentContent';
   imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatSelectModule],
   selector: 'filter-components',
   styleUrl: './filter-components.component.scss',
-  templateUrl: './filter-components.component.html'
+  templateUrl: './filter-components.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class FilterComponentsComponent {
   @Input() components: ComponentContent[];
