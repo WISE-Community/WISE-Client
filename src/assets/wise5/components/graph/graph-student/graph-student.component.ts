@@ -602,7 +602,9 @@ export class GraphStudent extends ComponentStudent {
    */
   drawGraphHelper(resolve) {
     this.turnOffXAxisDecimals();
-    this.turnOffYAxisDecimals();
+    if (!this.isAllowDecimalsForYAxis()) {
+      this.turnOffYAxisDecimals();
+    }
     this.copyXAxisPlotBandsFromComponentContent();
     this.setupXAxisLimitSpacerWidth();
     let series = null;
@@ -653,6 +655,12 @@ export class GraphStudent extends ComponentStudent {
 
   turnOffXAxisDecimals() {
     this.xAxis.allowDecimals = false;
+  }
+
+  private isAllowDecimalsForYAxis(): boolean {
+    return isSingleYAxis(this.yAxis)
+      ? this.yAxis.allowDecimals
+      : this.yAxis.some((yAxis) => yAxis.allowDecimals);
   }
 
   turnOffYAxisDecimals() {
