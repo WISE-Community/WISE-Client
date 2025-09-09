@@ -11,18 +11,22 @@ import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
-import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';
 
 @Component({
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatIconModule],
   selector: 'match-summary-display',
   styles: `
-    h3 {
+    h3,
+    .mat-subtitle-1 {
       margin-bottom: 8px;
+      margin-top: 0;
+    }
+    .bucket {
+      @apply p-2 mb-2 rounded-md;
     }
     .choice {
-      @apply flex gap-1 px-2 py-1 rounded-md bg-gray-100 my-1 text-sm;
+      @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm;
     }
     .mat-icon {
       vertical-align: middle;

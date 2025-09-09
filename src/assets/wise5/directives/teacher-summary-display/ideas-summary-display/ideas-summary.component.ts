@@ -9,7 +9,6 @@ import { DialogGuidanceSummaryData } from '../summary-data/DialogGuidanceSummary
 import { IdeaData } from '../../../components/common/cRater/IdeaData';
 import { IdeasSortingService } from '../../../services/ideasSortingService';
 import { IdeasSummaryData } from '../summary-data/IdeasSummaryData';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { OpenResponseSummaryData } from '../summary-data/OpenResponseSummaryData';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -18,18 +17,15 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 
 @Component({
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatIconModule],
   providers: [IdeasSortingService],
   selector: 'ideas-summary',
   styles: `
-    h3 {
+    h3,
+    .mat-subtitle-1 {
       margin-bottom: 8px;
+      margin-top: 0;
     }
-
-    .idea {
-      @apply px-2 py-1 rounded-md bg-gray-100 my-1 text-sm;
-    }
-
     .mat-icon {
       vertical-align: middle;
     }

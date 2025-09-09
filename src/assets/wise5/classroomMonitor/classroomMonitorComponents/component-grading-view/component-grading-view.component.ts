@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { TeacherSummaryDisplayComponent } from '../../../directives/teacher-summary-display/teacher-summary-display.component';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -11,28 +11,24 @@ import { MilestoneReportButtonComponent } from '../milestone-report-button/miles
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
 import { ComponentContent } from '../../../common/ComponentContent';
+import { IdeasSummaryComponent } from '../../../directives/teacher-summary-display/ideas-summary-display/ideas-summary.component';
+import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   imports: [
     ComponentCompletionComponent,
+    IdeasSummaryComponent,
+    MatCardModule,
+    MatchSummaryDisplayComponent,
     MilestoneReportButtonComponent,
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
   ],
   selector: 'component-grading-view',
-  styles: [
-    `
-      .notice {
-        max-width: none;
-        margin: 0;
-      }
-
-      .mat-body-1 {
-        margin-bottom: 0;
-      }
-    `
-  ],
-  templateUrl: './component-grading-view.component.html'
+  styleUrl: './component-grading-view.component.scss',
+  templateUrl: './component-grading-view.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class ComponentGradingViewComponent {
   protected avgScore: number;
@@ -40,6 +36,7 @@ export class ComponentGradingViewComponent {
   protected hasCorrectAnswer: boolean;
   protected hasScoresSummary: boolean;
   protected hasScoreAnnotation: boolean;
+  protected hasResponsesSummary: boolean;
   protected hasStudentWork: boolean;
   protected hasSummaryData: boolean;
   @Input() node: Node;
@@ -89,9 +86,13 @@ export class ComponentGradingViewComponent {
       this.dataService
         .getComponentStatesByComponentId(this.component.id)
         .filter((state) => state.periodId === this.periodId).length > 0;
+    this.hasResponsesSummary = this.summaryService.isResponsesSummaryAvailableForComponentType(
+      this.component?.type
+    );
     this.hasSummaryData =
       (this.component?.type === 'MultipleChoice' && this.hasStudentWork) ||
-      (this.hasScoresSummary && this.hasScoreAnnotation);
+      (this.hasScoresSummary && this.hasScoreAnnotation) ||
+      this.hasResponsesSummary;
   }
 
   private setSource(): void {
