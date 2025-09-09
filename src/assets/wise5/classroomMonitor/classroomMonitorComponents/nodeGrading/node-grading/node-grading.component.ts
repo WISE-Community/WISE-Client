@@ -58,6 +58,7 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   private subscriptions: Subscription = new Subscription();
   protected visibleComponents: ComponentContent[];
   protected selectedComponent: FormControl = new FormControl();
+  protected summariesVisible: boolean = true;
 
   constructor(
     private annotationService: AnnotationService,
@@ -147,5 +148,10 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
 
   protected getComponentTypeLabel(componentType: string): string {
     return this.componentTypeService.getComponentTypeLabel(componentType);
+  }
+
+  protected toggleSummaries(event: Event): void {
+    event.preventDefault();
+    this.summariesVisible = !this.summariesVisible;
   }
 }
