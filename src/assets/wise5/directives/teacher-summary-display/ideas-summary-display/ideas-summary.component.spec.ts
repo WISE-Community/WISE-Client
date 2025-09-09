@@ -110,7 +110,7 @@ function showMessageToTeacher(componentType: string) {
   it('shows message to teacher (' + componentType + ')', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.notice').textContent).toContain(
+    expect(fixture.nativeElement.textContent).toContain(
       "Your students' ideas will show up here as they are detected in the activity."
     );
   });
