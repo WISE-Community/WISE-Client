@@ -16,6 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
 import { FormControl } from '@angular/forms';
+import { AnnotationService } from '../../../../services/annotationService';
 
 @Component({
   imports: [
@@ -59,6 +60,7 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   protected selectedComponent: FormControl = new FormControl();
 
   constructor(
+    private annotationService: AnnotationService,
     private classroomStatusService: ClassroomStatusService,
     private componentTypeService: ComponentTypeService,
     private dataService: TeacherDataService,
@@ -71,6 +73,10 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(() => this.setPeriod())
     );
+    this.subscriptions.add(
+      this.annotationService.annotationReceived$.subscribe(() => this.setPeriod())
+    );
+    this.subscriptions.add(this.projectService.projectSaved$.subscribe(() => this.setFields()));
     this.subscriptions.add(
       this.dataService.currentNodeChanged$.subscribe(() => this.selectedComponent.setValue(0))
     );

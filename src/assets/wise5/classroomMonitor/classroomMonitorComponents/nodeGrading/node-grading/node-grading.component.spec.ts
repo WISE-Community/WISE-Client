@@ -2,15 +2,17 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeGradingComponent } from './node-grading.component';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { MockComponents, MockProviders } from 'ng-mocks';
+import { MockComponents, MockProvider, MockProviders } from 'ng-mocks';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { Node } from '../../../../common/Node';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { FilterComponentsComponent } from '../filter-components/filter-components.component';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
 import { NodeClassResponsesComponent } from '../node-class-responses/node-class-responses.component';
+import { AnnotationService } from '../../../../services/annotationService';
+import { Annotation } from '../../../../common/Annotation';
 
 let classroomStatusService: ClassroomStatusService;
 let component: NodeGradingComponent;
@@ -50,12 +52,13 @@ describe('NodeGradingComponent', () => {
       ],
       imports: [NodeGradingComponent],
       providers: [
-        MockProviders(
-          ClassroomStatusService,
-          ComponentTypeService,
-          TeacherProjectService,
-          WorkgroupService
-        ),
+        MockProvider(AnnotationService, {
+          annotationReceived$: of({} as Annotation)
+        }),
+        MockProvider(TeacherProjectService, {
+          projectSaved$: new Subject<any>().asObservable()
+        }),
+        MockProviders(ClassroomStatusService, ComponentTypeService, WorkgroupService),
         { provide: TeacherDataService, useClass: MockDataService }
       ]
     }).compileComponents();

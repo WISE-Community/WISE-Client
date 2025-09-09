@@ -180,9 +180,7 @@ export abstract class SummaryDisplayComponent {
 
   protected renderClassScores(): void {
     this.setMaxScore();
-    this.getLatestScores().subscribe((annotations) => {
-      this.processScoreAnnotations(annotations);
-    });
+    this.getLatestScores().subscribe((annotations) => this.processScoreAnnotations(annotations));
   }
 
   protected setMaxScore(): void {
