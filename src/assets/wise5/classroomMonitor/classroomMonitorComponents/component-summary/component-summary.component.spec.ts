@@ -1,12 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentSummaryComponent } from './component-summary.component';
-import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { MockComponents } from 'ng-mocks';
+import { MockComponents, MockProvider, MockProviders } from 'ng-mocks';
 import { MilestoneReportButtonComponent } from '../milestone-report-button/milestone-report-button.component';
 import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
 import { By } from '@angular/platform-browser';
+import { AnnotationService } from '../../../services/annotationService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { CRaterService } from '../../../services/cRaterService';
+import { TeacherDataService } from '../../../services/teacherDataService';
+import { SummaryService } from '../../../components/summary/summaryService';
+import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 
 let component: ComponentSummaryComponent;
 let fixture: ComponentFixture<ComponentSummaryComponent>;
@@ -14,11 +19,23 @@ describe('ComponentSummaryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ClassroomMonitorTestingModule,
         ComponentSummaryComponent,
-        MockComponents(ComponentCompletionComponent, MilestoneReportButtonComponent)
+        MockComponents(
+          ComponentCompletionComponent,
+          MilestoneReportButtonComponent,
+          PeerGroupButtonComponent
+        )
       ],
       providers: [
+        MockProviders(
+          AnnotationService,
+          ComponentServiceLookupService,
+          CRaterService,
+          SummaryService
+        ),
+        MockProvider(TeacherDataService, {
+          currentPeriodChanged$: of({ currentPeriod: { periodId: 1 } })
+        }),
         { provide: ActivatedRoute, useValue: { parent: { params: of({ nodeId: 'node1' }) } } }
       ]
     }).compileComponents();
