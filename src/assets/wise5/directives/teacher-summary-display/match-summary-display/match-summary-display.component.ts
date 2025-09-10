@@ -1,17 +1,11 @@
-import { AnnotationService } from '../../../services/annotationService';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '../../../services/configService';
 import { MatchContent } from '../../../components/match/MatchContent';
 import { MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
 import { MatIconModule } from '@angular/material/icon';
 import { SummaryDataPoint } from '../../summary-display/summary-data/SummaryDataPoint';
-import { SummaryService } from '../../../components/summary/summaryService';
-import { TeacherDataService } from '../../../services/teacherDataService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
-import { CRaterService } from '../../../services/cRaterService';
 
 @Component({
   imports: [CommonModule, MatIconModule],
@@ -40,24 +34,6 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   private bucketValues: Set<string> = new Set<string>();
   protected matchSummaryData: MatchSummaryData;
   protected isChoiceReuseMatch: boolean;
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected configService: ConfigService,
-    protected cRaterService: CRaterService,
-    protected dataService: TeacherDataService,
-    protected projectService: TeacherProjectService,
-    protected summaryService: SummaryService
-  ) {
-    super(
-      annotationService,
-      configService,
-      cRaterService,
-      dataService,
-      projectService,
-      summaryService
-    );
-  }
 
   ngOnInit(): void {
     this.setIsChoiceReuseMatch();
