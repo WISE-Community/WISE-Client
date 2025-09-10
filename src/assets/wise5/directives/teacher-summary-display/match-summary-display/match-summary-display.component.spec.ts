@@ -31,11 +31,9 @@ describe('MatchSummaryDisplayComponent', () => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponentsFromStep').and.returnValue([
       { id: 'cId', type: 'Match', choiceReuseEnabled: false }
     ] as any[]);
-
     spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
       of(getComponentStates())
     );
-
     fixture = TestBed.createComponent(MatchSummaryDisplayComponent);
     component = fixture.componentInstance;
     component.nodeId = 'nId';

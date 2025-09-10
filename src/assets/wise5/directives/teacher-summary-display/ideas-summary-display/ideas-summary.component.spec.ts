@@ -7,7 +7,7 @@ import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
 import { CRaterService } from '../../../services/cRaterService';
 import { IdeasSummaryComponent } from './ideas-summary.component';
 import { MockProviders } from 'ng-mocks';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -38,10 +38,11 @@ describe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
     component.componentType = 'DialogGuidance';
   });
   beforeEach(() => {
-    spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(false);
-    spyOn(TestBed.inject(ConfigService), 'isAuthoring').and.returnValue(false);
-    spyOn(TestBed.inject(ConfigService), 'isStudentRun').and.returnValue(false);
-    spyOn(TestBed.inject(ConfigService), 'getNumberOfWorkgroupsInPeriod').and.returnValue(1);
+    const configService = TestBed.inject(ConfigService);
+    spyOn(configService, 'isPreview').and.returnValue(false);
+    spyOn(configService, 'isAuthoring').and.returnValue(false);
+    spyOn(configService, 'isStudentRun').and.returnValue(false);
+    spyOn(configService, 'getNumberOfWorkgroupsInPeriod').and.returnValue(1);
   });
 
   describe('ngOnChanges()', () => {
@@ -73,10 +74,11 @@ describe('IdeasSummaryDisplayComponent for Open Response component', () => {
     component.componentType = 'OpenResponse';
   });
   beforeEach(() => {
-    spyOn(TestBed.inject(ConfigService), 'isPreview').and.returnValue(false);
-    spyOn(TestBed.inject(ConfigService), 'isAuthoring').and.returnValue(false);
-    spyOn(TestBed.inject(ConfigService), 'isStudentRun').and.returnValue(false);
-    spyOn(TestBed.inject(ConfigService), 'getNumberOfWorkgroupsInPeriod').and.returnValue(1);
+    const configService = TestBed.inject(ConfigService);
+    spyOn(configService, 'isPreview').and.returnValue(false);
+    spyOn(configService, 'isAuthoring').and.returnValue(false);
+    spyOn(configService, 'isStudentRun').and.returnValue(false);
+    spyOn(configService, 'getNumberOfWorkgroupsInPeriod').and.returnValue(1);
   });
 
   describe('ngOnChanges()', () => {
