@@ -32,17 +32,12 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   protected bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
   protected bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
-  protected matchSummaryData: MatchSummaryData;
   protected isChoiceReuseMatch: boolean;
+  private matchSummaryData: MatchSummaryData;
 
   ngOnInit(): void {
     this.setIsChoiceReuseMatch();
-    this.getLatestWork().subscribe((componentStates) => {
-      this.matchSummaryData = new MatchSummaryData(componentStates);
-      this.setBucketValues();
-      this.setBucketData();
-      this.setBucketShowMore();
-    });
+    this.generateSummary();
   }
 
   private setIsChoiceReuseMatch(): void {
@@ -51,6 +46,15 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
         .getComponentsFromStep(this.nodeId)
         .find((component) => component.id === this.componentId) as MatchContent
     ).choiceReuseEnabled;
+  }
+
+  private generateSummary(): void {
+    this.getLatestWork().subscribe((componentStates) => {
+      this.matchSummaryData = new MatchSummaryData(componentStates);
+      this.setBucketValues();
+      this.setBucketData();
+      this.setBucketShowMore();
+    });
   }
 
   protected setBucketValues(): void {
@@ -73,11 +77,11 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
       .sort(this.sortChoices);
   }
 
-  protected sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
+  private sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
     return choiceB.getCount() - choiceA.getCount();
   }
 
-  protected setBucketShowMore(): void {
+  private setBucketShowMore(): void {
     this.bucketValues.forEach((value) => this.bucketsShowMore.set(value, false));
   }
 
@@ -92,5 +96,12 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
 
   private asMatchSummaryDataPoint(dataPoint: SummaryDataPoint): MatchSummaryDataPoint {
     return dataPoint as MatchSummaryDataPoint;
+  }
+
+  protected renderDisplay(): void {
+    super.renderDisplay();
+    this.bucketData = [];
+    this.bucketValues.clear();
+    this.generateSummary();
   }
 }
