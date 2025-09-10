@@ -95,10 +95,6 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
       this.nodeId,
       this.dataService.getCurrentPeriodId()
     );
-    this.nodeCompletionPercent = this.classroomStatusService.getNodeCompletion(
-      this.nodeId,
-      this.dataService.getCurrentPeriodId()
-    ).completionPct;
     this.nodeMaxScore = this.projectService.getMaxScoreForNode(this.nodeId);
     this.components = this.projectService
       .getComponents(this.nodeId)
