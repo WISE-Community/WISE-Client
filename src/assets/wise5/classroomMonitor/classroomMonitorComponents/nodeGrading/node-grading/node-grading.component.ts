@@ -4,7 +4,6 @@ import { ClassroomStatusService } from '../../../../services/classroomStatusServ
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog } from '@angular/material/dialog';
 import { Node } from '../../../../common/Node';
 import { Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,8 +23,8 @@ import { AnnotationService } from '../../../../services/annotationService';
     FilterComponentsComponent,
     MatButtonModule,
     MatIconModule,
-    NodeClassResponsesComponent,
-    MatTabsModule
+    MatTabsModule,
+    NodeClassResponsesComponent
   ],
   styles: [
     `
@@ -54,17 +53,16 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   @Input() nodeId: string;
   protected numRubrics: number;
   private periodId: number;
-  private subscriptions: Subscription = new Subscription();
-  protected visibleComponents: ComponentContent[];
   protected selectedComponent: FormControl = new FormControl();
+  private subscriptions: Subscription = new Subscription();
   protected summariesVisible: boolean = true;
+  protected visibleComponents: ComponentContent[];
 
   constructor(
     private annotationService: AnnotationService,
     private classroomStatusService: ClassroomStatusService,
     private componentTypeService: ComponentTypeService,
     private dataService: TeacherDataService,
-    private dialog: MatDialog,
     private projectService: TeacherProjectService
   ) {}
 
