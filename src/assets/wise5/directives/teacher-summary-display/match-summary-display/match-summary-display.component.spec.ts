@@ -22,9 +22,9 @@ describe('MatchSummaryDisplayComponent', () => {
           AnnotationService,
           ConfigService,
           CRaterService,
+          SummaryService,
           TeacherDataService,
-          TeacherProjectService,
-          SummaryService
+          TeacherProjectService
         )
       ]
     }).compileComponents();

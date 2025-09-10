@@ -47,6 +47,8 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
 
   private generateSummary(): void {
     this.getLatestWork().subscribe((componentStates) => {
+      this.bucketData = [];
+      this.bucketValues.clear();
       this.matchSummaryData = new MatchSummaryData(componentStates);
       this.setBucketValues();
       this.setBucketData();
@@ -92,8 +94,6 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
 
   protected renderDisplay(): void {
     super.renderDisplay();
-    this.bucketData = [];
-    this.bucketValues.clear();
     this.generateSummary();
   }
 }
