@@ -12,14 +12,14 @@ import { ComponentContent } from '../../../../common/ComponentContent';
 import { NodeClassResponsesComponent } from '../node-class-responses/node-class-responses.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
-import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
+import { ComponentSummaryComponent } from '../../component-summary/component-summary.component';
 import { FormControl } from '@angular/forms';
 import { AnnotationService } from '../../../../services/annotationService';
 
 @Component({
   imports: [
     CommonModule,
-    ComponentGradingViewComponent,
+    ComponentSummaryComponent,
     FilterComponentsComponent,
     MatButtonModule,
     MatIconModule,

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentGradingViewComponent } from './component-grading-view.component';
+import { ComponentSummaryComponent } from './component-summary.component';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
@@ -8,14 +8,14 @@ import { MilestoneReportButtonComponent } from '../milestone-report-button/miles
 import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
 import { By } from '@angular/platform-browser';
 
-let component: ComponentGradingViewComponent;
-let fixture: ComponentFixture<ComponentGradingViewComponent>;
-describe('ComponentGradingViewComponent', () => {
+let component: ComponentSummaryComponent;
+let fixture: ComponentFixture<ComponentSummaryComponent>;
+describe('ComponentSummaryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         ClassroomMonitorTestingModule,
-        ComponentGradingViewComponent,
+        ComponentSummaryComponent,
         MockComponents(ComponentCompletionComponent, MilestoneReportButtonComponent)
       ],
       providers: [
@@ -23,7 +23,7 @@ describe('ComponentGradingViewComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ComponentGradingViewComponent);
+    fixture = TestBed.createComponent(ComponentSummaryComponent);
     component = fixture.componentInstance;
     component.node = { id: 'node1', title: 'Node 1' } as any;
     component.component = { id: 'abc', prompt: 'hi' } as any;

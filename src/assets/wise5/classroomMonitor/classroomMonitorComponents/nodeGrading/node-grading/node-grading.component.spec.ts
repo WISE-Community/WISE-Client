@@ -9,7 +9,7 @@ import { Observable, Subject } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { FilterComponentsComponent } from '../filter-components/filter-components.component';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
-import { ComponentGradingViewComponent } from '../../component-grading-view/component-grading-view.component';
+import { ComponentSummaryComponent } from '../../component-summary/component-summary.component';
 import { NodeClassResponsesComponent } from '../node-class-responses/node-class-responses.component';
 import { AnnotationService } from '../../../../services/annotationService';
 import { Annotation } from '../../../../common/Annotation';
@@ -79,7 +79,7 @@ describe('NodeGradingComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         MockComponents(
-          ComponentGradingViewComponent,
+          ComponentSummaryComponent,
           FilterComponentsComponent,
           NodeClassResponsesComponent
         )

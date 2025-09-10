@@ -26,12 +26,12 @@ import { CRaterService } from '../../../services/cRaterService';
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
   ],
-  selector: 'component-grading-view',
-  styleUrl: './component-grading-view.component.scss',
-  templateUrl: './component-grading-view.component.html',
+  selector: 'component-summary',
+  styleUrl: './component-summary.component.scss',
+  templateUrl: './component-summary.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class ComponentGradingViewComponent {
+export class ComponentSummaryComponent {
   protected avgScore: number;
   @Input() component: ComponentContent;
   protected hasCorrectAnswer: boolean;
