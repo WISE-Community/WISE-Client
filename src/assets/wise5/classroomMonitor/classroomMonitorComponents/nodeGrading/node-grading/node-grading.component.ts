@@ -5,7 +5,6 @@ import { TeacherDataService } from '../../../../services/teacherDataService';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { Node } from '../../../../common/Node';
 import { Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
@@ -139,11 +138,8 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
     this.visibleComponents = visibleComponents;
   }
 
-  protected showRubric(): void {
-    this.dialog.open(ShowNodeInfoDialogComponent, {
-      data: this.nodeId,
-      width: '90%'
-    });
+  protected previewProject(): void {
+    window.open(this.dataService.getPreviewUrl());
   }
 
   protected getComponentTypeLabel(componentType: string): string {

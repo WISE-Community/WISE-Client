@@ -15,7 +15,6 @@ import { NotebookGradingComponent } from '../../assets/wise5/classroomMonitor/no
 import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/student-grading/student-grading.component';
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
 import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
-import { ShowNodeInfoDialogComponent } from '../classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
@@ -50,7 +49,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     PreviewComponentComponent,
     RouterModule,
     SelectPeriodComponent,
-    ShowNodeInfoDialogComponent,
     StepItemComponent,
     StudentProgressComponent,
     StudentTeacherCommonModule,

@@ -442,4 +442,13 @@ export class TeacherDataService extends DataService {
   private isCurrentWorkgroup(workgroupId: number): boolean {
     return this.currentWorkgroup.workgroupId === workgroupId;
   }
+
+  getPreviewUrl(): string {
+    let previewUrl = this.configService.getConfigParam('previewProjectURL');
+    const currentNodeId = this.getCurrentNodeId();
+    if (!this.projectService.isGroupNode(currentNodeId)) {
+      previewUrl += `/${currentNodeId}`;
+    }
+    return previewUrl;
+  }
 }

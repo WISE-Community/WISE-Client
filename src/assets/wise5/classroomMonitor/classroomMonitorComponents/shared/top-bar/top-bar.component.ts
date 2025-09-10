@@ -125,11 +125,7 @@ export class TopBarComponent implements OnInit {
   }
 
   protected previewProject(): void {
-    let previewUrl = this.configService.getConfigParam('previewProjectURL');
-    if (this.isViewingNode()) {
-      previewUrl += `/${this.getCurrentNodeId()}`;
-    }
-    window.open(previewUrl);
+    window.open(this.dataService.getPreviewUrl());
   }
 
   protected goHome(): void {
