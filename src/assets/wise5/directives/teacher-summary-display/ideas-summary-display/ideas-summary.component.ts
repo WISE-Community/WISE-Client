@@ -100,6 +100,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
           .reverse();
       }
       this.allIdeas = this.ideasSortingService.sortById(ideaCountArray);
+      this.doRender = true;
     }
   }
 
