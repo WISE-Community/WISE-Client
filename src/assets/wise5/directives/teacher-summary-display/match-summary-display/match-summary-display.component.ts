@@ -4,7 +4,6 @@ import { MatchContent } from '../../../components/match/MatchContent';
 import { MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
 import { MatIconModule } from '@angular/material/icon';
-import { SummaryDataPoint } from '../../summary-display/summary-data/SummaryDataPoint';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 
 @Component({
@@ -30,7 +29,7 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
 })
 export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent implements OnInit {
   protected bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
-  protected bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
+  private bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
   protected isChoiceReuseMatch: boolean;
   private matchSummaryData: MatchSummaryData;
@@ -42,9 +41,7 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
 
   private setIsChoiceReuseMatch(): void {
     this.isChoiceReuseMatch = (
-      this.projectService
-        .getComponentsFromStep(this.nodeId)
-        .find((component) => component.id === this.componentId) as MatchContent
+      this.projectService.getComponent(this.nodeId, this.componentId) as MatchContent
     ).choiceReuseEnabled;
   }
 
@@ -73,8 +70,7 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     return this.matchSummaryData
       .getBucketsData()
       .find((bucket) => bucket.bucketValue === bucketValue)
-      .bucketDataPoints.map(this.asMatchSummaryDataPoint)
-      .sort(this.sortChoices);
+      .bucketDataPoints.sort(this.sortChoices);
   }
 
   private sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
@@ -92,10 +88,6 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   protected toggleBucketShowMore(bucketValue: string, event: Event): void {
     event.preventDefault();
     this.bucketsShowMore.set(bucketValue, !this.bucketsShowMore.get(bucketValue));
-  }
-
-  private asMatchSummaryDataPoint(dataPoint: SummaryDataPoint): MatchSummaryDataPoint {
-    return dataPoint as MatchSummaryDataPoint;
   }
 
   protected renderDisplay(): void {
