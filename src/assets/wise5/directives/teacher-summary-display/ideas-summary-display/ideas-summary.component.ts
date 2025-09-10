@@ -69,22 +69,18 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     this.generateIdeasSummary();
   }
 
-  private generateIdeasSummary(): IdeasSummaryData {
-    let ideasSummaryData: IdeasSummaryData;
+  private generateIdeasSummary(): void {
     if (this.componentType === 'DialogGuidance') {
-      this.getLatestWork().subscribe((componentStates) => {
-        ideasSummaryData = new DialogGuidanceSummaryData(componentStates);
-        this.compileAndSortIdeas(ideasSummaryData);
-      });
-    } else if (this.componentType === 'OpenResponse') {
-      const annotations = this.annotationService.getAnnotationsByNodeIdComponentId(
-        this.nodeId,
-        this.componentId
+      this.getLatestWork().subscribe((componentStates) =>
+        this.compileAndSortIdeas(new DialogGuidanceSummaryData(componentStates))
       );
-      ideasSummaryData = new OpenResponseSummaryData(annotations);
-      this.compileAndSortIdeas(ideasSummaryData);
+    } else if (this.componentType === 'OpenResponse') {
+      this.compileAndSortIdeas(
+        new OpenResponseSummaryData(
+          this.annotationService.getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
+        )
+      );
     }
-    return ideasSummaryData;
   }
 
   private compileAndSortIdeas(ideasSummaryData: IdeasSummaryData) {
@@ -109,7 +105,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
 
   private ideaCountMapToArray(ideaDescriptions: CRaterIdea[]): IdeaData[] {
     const ideaCountArray = [];
-    this.ideaCountMap.forEach((count, ideaId, map) => {
+    this.ideaCountMap.forEach((count, ideaId) => {
       const ideaDescription = ideaDescriptions.find(
         (ideaDescription) => ideaDescription.name === ideaId
       );
@@ -124,6 +120,11 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
 
   private useIdeaTextOrId(id: string, text: string): string {
     return text ?? 'idea ' + id;
+  }
+
+  protected renderDisplay(): void {
+    super.renderDisplay();
+    this.generateIdeasSummary();
   }
 
   protected toggleSeeAllIdeas(event: Event): void {
