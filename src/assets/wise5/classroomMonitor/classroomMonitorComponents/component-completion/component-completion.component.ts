@@ -16,9 +16,9 @@ export class ComponentCompletionComponent {
   protected completion: number;
   @Input() component: any;
   @Input() node: Node;
+  protected numWorkgroupsCompleted: number;
   @Input() periodId: number;
   protected workgroups: Map<number, any>;
-  protected numWorkgroupsCompleted: number;
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
@@ -50,7 +50,7 @@ export class ComponentCompletionComponent {
       workgroupId,
       this.component.id
     );
-    const isCompleted = ['OpenResponse', 'Discussion'].includes(this.component.type)
+    return ['OpenResponse', 'Discussion'].includes(this.component.type)
       ? service.isCompletedV2(this.node, this.component, {
           componentStates: componentStates
         })
@@ -60,6 +60,5 @@ export class ComponentCompletionComponent {
           this.dataService.getEventsByNodeId(this.node.id),
           this.node
         );
-    return isCompleted;
   }
 }
