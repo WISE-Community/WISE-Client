@@ -2,7 +2,6 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { TeacherSummaryDisplayComponent } from '../../../directives/teacher-summary-display/teacher-summary-display.component';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { SummaryService } from '../../../components/summary/summaryService';
-import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { isMatchingPeriods } from '../../../common/period/period';
 import { AnnotationService } from '../../../services/annotationService';
@@ -41,9 +40,8 @@ export class ComponentSummaryComponent {
   protected hasStudentWork: boolean;
   protected hasSummaryData: boolean;
   @Input() node: Node;
-  protected periodId: number;
+  @Input() periodId: number;
   protected source: 'allPeriods' | 'period';
-  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private annotationService: AnnotationService,
@@ -53,29 +51,14 @@ export class ComponentSummaryComponent {
     private summaryService: SummaryService
   ) {}
 
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
-        this.periodId = currentPeriod.periodId;
-        this.setSource();
-        this.setComponent();
-      })
-    );
-  }
-
   ngOnChanges(): void {
     if (this.node && this.component) {
       this.dataService.retrieveStudentDataForNode(this.node).subscribe(() => this.setComponent());
-      this.periodId = this.dataService.getCurrentPeriodId();
       this.setSource();
       const annotations = this.getLatestScoreAnnotations();
       const totalScore = annotations.reduce((sumSoFar, a) => sumSoFar + a.data.value, 0);
       this.avgScore = totalScore / annotations.length;
     }
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 
   private setComponent(): void {

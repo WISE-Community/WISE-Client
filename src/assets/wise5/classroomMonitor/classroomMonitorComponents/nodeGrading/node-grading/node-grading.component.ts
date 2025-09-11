@@ -52,7 +52,7 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   protected nodeMaxScore: number;
   @Input() nodeId: string;
   protected numRubrics: number;
-  private periodId: number;
+  protected periodId: number;
   protected selectedComponent: FormControl = new FormControl();
   private subscriptions: Subscription = new Subscription();
   protected summariesVisible: boolean = true;
