@@ -22,6 +22,8 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
   providers: [IdeasSortingService],
   selector: 'ideas-summary',
   styles: `
+    @reference "tailwindcss";
+
     h3 {
       margin-bottom: 8px;
     }

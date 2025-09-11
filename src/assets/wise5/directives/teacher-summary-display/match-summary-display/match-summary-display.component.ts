@@ -17,6 +17,8 @@ import { MatCardModule } from '@angular/material/card';
   imports: [CommonModule, MatCardModule, MatIconModule],
   selector: 'match-summary-display',
   styles: `
+    @reference "tailwindcss";
+
     h3 {
       margin-bottom: 8px;
     }

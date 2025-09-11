@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 tbody tr:nth-child(odd) {
   @apply bg-neutral-100;
 }
