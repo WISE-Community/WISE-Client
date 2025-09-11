@@ -9,7 +9,6 @@ import { DialogGuidanceSummaryData } from '../summary-data/DialogGuidanceSummary
 import { IdeaData } from '../../../components/common/cRater/IdeaData';
 import { IdeasSortingService } from '../../../services/ideasSortingService';
 import { IdeasSummaryData } from '../summary-data/IdeasSummaryData';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { OpenResponseSummaryData } from '../summary-data/OpenResponseSummaryData';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -18,18 +17,15 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 
 @Component({
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatIconModule],
   providers: [IdeasSortingService],
   selector: 'ideas-summary',
   styles: `
-    h3 {
+    h3,
+    .mat-subtitle-1 {
       margin-bottom: 8px;
+      margin-top: 0;
     }
-
-    .idea {
-      @apply px-2 py-1 rounded-md bg-gray-100 my-1 text-sm;
-    }
-
     .mat-icon {
       vertical-align: middle;
     }
@@ -48,13 +44,20 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
-    private cRaterService: CRaterService,
+    protected cRaterService: CRaterService,
     protected dataService: TeacherDataService,
     private ideasSortingService: IdeasSortingService,
     protected projectService: TeacherProjectService,
     protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, dataService, projectService, summaryService);
+    super(
+      annotationService,
+      configService,
+      cRaterService,
+      dataService,
+      projectService,
+      summaryService
+    );
   }
 
   ngOnInit(): void {
@@ -66,22 +69,18 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     this.generateIdeasSummary();
   }
 
-  private generateIdeasSummary(): IdeasSummaryData {
-    let ideasSummaryData: IdeasSummaryData;
+  private generateIdeasSummary(): void {
     if (this.componentType === 'DialogGuidance') {
-      this.getLatestWork().subscribe((componentStates) => {
-        ideasSummaryData = new DialogGuidanceSummaryData(componentStates);
-        this.compileAndSortIdeas(ideasSummaryData);
-      });
-    } else if (this.componentType === 'OpenResponse') {
-      const annotations = this.annotationService.getAnnotationsByNodeIdComponentId(
-        this.nodeId,
-        this.componentId
+      this.getLatestWork().subscribe((componentStates) =>
+        this.compileAndSortIdeas(new DialogGuidanceSummaryData(componentStates))
       );
-      ideasSummaryData = new OpenResponseSummaryData(annotations);
-      this.compileAndSortIdeas(ideasSummaryData);
+    } else if (this.componentType === 'OpenResponse') {
+      this.compileAndSortIdeas(
+        new OpenResponseSummaryData(
+          this.annotationService.getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
+        )
+      );
     }
-    return ideasSummaryData;
   }
 
   private compileAndSortIdeas(ideasSummaryData: IdeasSummaryData) {
@@ -101,12 +100,13 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
           .reverse();
       }
       this.allIdeas = this.ideasSortingService.sortById(ideaCountArray);
+      this.doRender = true;
     }
   }
 
   private ideaCountMapToArray(ideaDescriptions: CRaterIdea[]): IdeaData[] {
     const ideaCountArray = [];
-    this.ideaCountMap.forEach((count, ideaId, map) => {
+    this.ideaCountMap.forEach((count, ideaId) => {
       const ideaDescription = ideaDescriptions.find(
         (ideaDescription) => ideaDescription.name === ideaId
       );
@@ -121,6 +121,11 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
 
   private useIdeaTextOrId(id: string, text: string): string {
     return text ?? 'idea ' + id;
+  }
+
+  protected renderDisplay(): void {
+    super.renderDisplay();
+    this.generateIdeasSummary();
   }
 
   protected toggleSeeAllIdeas(event: Event): void {

@@ -8,18 +8,18 @@ import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/clas
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
-import { MilestoneGradingViewComponent } from './milestone-grading-view.component';
+import { MilestoneClassResponsesComponent } from './milestone-class-responses.component';
 import { NodeGradingViewComponentTestHelper } from '../../nodeGrading/node-grading-view/node-grading-view.component.test.helper';
 import { of } from 'rxjs';
+import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 
-let component: MilestoneGradingViewComponent;
-let fixture: ComponentFixture<MilestoneGradingViewComponent>;
+let component: MilestoneClassResponsesComponent;
+let fixture: ComponentFixture<MilestoneClassResponsesComponent>;
 let testHelper: NodeGradingViewComponentTestHelper;
-
-describe('MilestoneGradingViewComponent', () => {
+describe('MilestoneClassResponsesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MilestoneGradingViewComponent],
+      declarations: [MilestoneClassResponsesComponent],
       imports: [
         ClassroomMonitorTestingModule,
         FormsModule,
@@ -34,7 +34,7 @@ describe('MilestoneGradingViewComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MilestoneGradingViewComponent);
+    fixture = TestBed.createComponent(MilestoneClassResponsesComponent);
     component = fixture.componentInstance;
     component.milestone = {
       nodeId: 'node1',
@@ -47,20 +47,24 @@ describe('MilestoneGradingViewComponent', () => {
       canGradeStudentWork: true,
       canAuthorProject: true
     });
-    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(1);
-    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
-    spyOn(TestBed.inject(ConfigService), 'getClassmateUserInfos').and.returnValue([]);
-    spyOn(TestBed.inject(TeacherDataService), 'retrieveStudentDataForNode').and.returnValue(of([]));
     testHelper = new NodeGradingViewComponentTestHelper();
     initializeWorkgroups(component);
+    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriodId').and.returnValue(1);
+    spyOn(TestBed.inject(TeacherDataService), 'isWorkgroupShown').and.returnValue(false);
+    spyOn(TestBed.inject(ClassroomStatusService), 'hasStudentStatus').and.returnValue(true);
+    spyOn(TestBed.inject(TeacherDataService), 'getCurrentPeriod').and.returnValue({ periodId: 1 });
+    spyOn(TestBed.inject(ConfigService), 'getClassmateUserInfos').and.returnValue(
+      component['workgroups']
+    );
+    spyOn(TestBed.inject(TeacherDataService), 'retrieveStudentDataForNode').and.returnValue(of([]));
     fixture.detectChanges();
   });
 
-  setSort();
+  sortByTeam();
 });
 
-function initializeWorkgroups(component: MilestoneGradingViewComponent) {
-  component.workgroups = [
+function initializeWorkgroups(component: MilestoneClassResponsesComponent) {
+  component['workgroups'] = [
     createWorkgroupForTesting(
       3,
       testHelper.statusCompleted,
@@ -97,47 +101,16 @@ function initializeWorkgroups(component: MilestoneGradingViewComponent) {
       null,
       testHelper.statusNoWork,
       null,
-      testHelper.notVisible,
+      testHelper.visible,
       null,
       testHelper.workgroupId5
     )
   ];
 }
 
-function setSort() {
-  it('should sort by initial score ascending', () => {
-    component.setSort('initialScore');
-    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
-      testHelper.workgroupId1,
-      testHelper.workgroupId2,
-      testHelper.workgroupId4,
-      testHelper.workgroupId3,
-      testHelper.workgroupId5
-    ]);
-  });
-  it('should sort by initial score descending', () => {
-    component.setSort('-initialScore');
-    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
-      testHelper.workgroupId3,
-      testHelper.workgroupId2,
-      testHelper.workgroupId4,
-      testHelper.workgroupId1,
-      testHelper.workgroupId5
-    ]);
-  });
-  it('should sort by change in score ascending', () => {
-    component.setSort('changeInScore');
-    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
-      testHelper.workgroupId4,
-      testHelper.workgroupId2,
-      testHelper.workgroupId3,
-      testHelper.workgroupId1,
-      testHelper.workgroupId5
-    ]);
-  });
-  it('should sort by change in score descending', () => {
-    component.setSort('-changeInScore');
-    testHelper.expectWorkgroupOrder(component.sortedWorkgroups, [
+function sortByTeam() {
+  it('should sort by team', () => {
+    testHelper.expectWorkgroupOrder(component['sortedWorkgroups'], [
       testHelper.workgroupId1,
       testHelper.workgroupId2,
       testHelper.workgroupId3,

@@ -17,6 +17,7 @@ import { DummyAnnotation } from '../../common/DummyAnnotation';
 import { DummyComponentState } from '../../../../app/domain/dummyComponentState';
 import { Choice } from '../../components/multipleChoice/Choice';
 import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
+import { CRaterService } from '../../services/cRaterService';
 
 @Component({
   imports: [CommonModule, HighchartsChartModule, MatCardModule],
@@ -31,11 +32,19 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
   constructor(
     protected annotationService: AnnotationService,
     protected configService: ConfigService,
+    protected cRaterService: CRaterService,
     protected dataService: StudentDataService,
     protected projectService: ProjectService,
     protected summaryService: SummaryService
   ) {
-    super(annotationService, configService, dataService, projectService, summaryService);
+    super(
+      annotationService,
+      configService,
+      cRaterService,
+      dataService,
+      projectService,
+      summaryService
+    );
   }
 
   ngOnInit(): void {

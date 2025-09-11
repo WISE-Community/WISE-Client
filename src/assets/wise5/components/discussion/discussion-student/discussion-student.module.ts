@@ -1,12 +1,32 @@
 import { NgModule } from '@angular/core';
-import { StudentTeacherCommonModule } from '../../../../../app/student-teacher-common.module';
 import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { DiscussionCommonModule } from '../discussion-common.module';
 import { DiscussionStudent } from './discussion-student.component';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatCardModule } from '@angular/material/card';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [DiscussionStudent],
-  imports: [StudentTeacherCommonModule, DiscussionCommonModule, StudentComponentModule],
+  imports: [
+    CommonModule,
+    ComponentHeaderComponent,
+    DiscussionCommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    StudentComponentModule,
+    TextFieldModule
+  ],
   exports: [DiscussionStudent]
 })
 export class DiscussionStudentModule {}

@@ -16,7 +16,7 @@
   @if (componentContent.dataExplorerGraphTypes.length > 1) {
     <mat-form-field appearance="fill">
       <mat-label i18n>Graph Type</mat-label>
-      <mat-select [ngModel]="dataExplorerGraphType" [disabled]="true">
+      <mat-select [value]="dataExplorerGraphType" [disabled]="true">
         @for (graphType of componentContent.dataExplorerGraphTypes; track graphType) {
           <mat-option [value]="graphType.value">
             {{ graphType.name }}
@@ -28,7 +28,7 @@
   <div class="flex flex-wrap justify-start items-center gap-4">
     <mat-form-field class="data-explorer-select" appearance="fill">
       <mat-label i18n>X Data</mat-label>
-      <mat-select [ngModel]="xColumnIndex != null ? xColumnIndex : -1" [disabled]="true">
+      <mat-select [value]="xColumnIndex != null ? xColumnIndex : -1" [disabled]="true">
         <mat-option [value]="-1">{{ noneText }}</mat-option>
         @for (columnName of columnNames; track columnName; let i = $index) {
           <mat-option [value]="i">
@@ -45,9 +45,7 @@
       <mat-form-field class="data-explorer-select" appearance="fill">
         <mat-label i18n>Y Data {{ dataExplorerSeries.length > 1 ? i + 1 : '' }}</mat-label>
         <mat-select
-          [ngModel]="
-            singleDataExplorerSeries.yColumn != null ? singleDataExplorerSeries.yColumn : -1
-          "
+          [value]="singleDataExplorerSeries.yColumn != null ? singleDataExplorerSeries.yColumn : -1"
           [disabled]="true"
         >
           <mat-option [value]="-1">{{ noneText }}</mat-option>
