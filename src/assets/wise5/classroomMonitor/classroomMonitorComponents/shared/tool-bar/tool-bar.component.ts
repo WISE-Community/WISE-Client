@@ -67,7 +67,7 @@ export class ToolBarComponent implements OnInit {
       }[path] ?? $localize`Grade by Step`;
     this.showPeriodSelect = path != 'export';
     this.showTeamTools = /\/team\/(\d+)$/.test(this.router.url);
-    this.showStepTools = /node\/node(\d+)$/.test(this.router.url);
+    this.showStepTools = /node\/node(\d+)/.test(this.router.url);
   }
 
   protected toggleMenu(): void {

@@ -7,7 +7,14 @@ import { PeerChatMessageInputComponent } from './peer-chat-message-input/peer-ch
 import { PeerChatMessagesComponent } from './peer-chat-messages/peer-chat-messages.component';
 import { PeerChatQuestionBankComponent } from './peer-chat-question-bank/peer-chat-question-bank.component';
 import { QuestionBankService } from './peer-chat-question-bank/questionBank.service';
-import { StudentTeacherCommonModule } from '../../../../app/student-teacher-common.module';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,7 +26,16 @@ import { StudentTeacherCommonModule } from '../../../../app/student-teacher-comm
     PeerChatMessagesComponent,
     PeerChatQuestionBankComponent
   ],
-  imports: [StudentTeacherCommonModule],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule
+  ],
   exports: [
     PeerChatChatBoxComponent,
     PeerChatMembersComponent,

@@ -1,0 +1,13 @@
+<div class="flex flex-col items-stretch gap-1">
+  <div>
+    <mat-progress-bar
+      matTooltip="{{ completion }}% completed"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      class="w-full"
+      mode="determinate"
+      value="{{ completion }}"
+    />
+  </div>
+  <div><span i18n>Responses:</span> {{ numWorkgroupsCompleted }}</div>
+</div>

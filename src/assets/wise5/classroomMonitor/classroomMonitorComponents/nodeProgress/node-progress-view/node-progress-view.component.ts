@@ -58,7 +58,7 @@ export class NodeProgressViewComponent implements OnInit {
         this.router.navigate([
           '/teacher/manage/unit',
           this.configService.getRunId(),
-          'node',
+          this.isApplicationNode(this.nodeId) ? 'node' : 'group',
           this.nodeId
         ]);
       })
