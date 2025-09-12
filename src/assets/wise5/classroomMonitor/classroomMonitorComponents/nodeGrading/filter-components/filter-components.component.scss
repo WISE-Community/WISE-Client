@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@reference "tailwindcss";
 
 .component-select {
   @include mat.form-field-overrides(

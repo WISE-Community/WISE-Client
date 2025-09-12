@@ -10,6 +10,7 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
   imports: [CommonModule, MatIconModule],
   selector: 'match-summary-display',
   styles: `
+    @reference "tailwindcss";
     h3,
     .mat-subtitle-1 {
       margin-bottom: 8px;
