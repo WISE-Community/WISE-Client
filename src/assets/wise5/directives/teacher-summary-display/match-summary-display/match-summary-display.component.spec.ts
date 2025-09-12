@@ -5,10 +5,10 @@ import { MatchSummaryDisplayComponent } from './match-summary-display.component'
 import { MockProviders } from 'ng-mocks';
 import { of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
-import { TeacherDataService } from '../../../services/teacherDataService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CRaterService } from '../../../services/cRaterService';
 import { MatchContent } from '../../../components/match/MatchContent';
+import { DataService } from '../../../../../app/services/data.service';
+import { ProjectService } from '../../../services/projectService';
 
 describe('MatchSummaryDisplayComponent', () => {
   let component: MatchSummaryDisplayComponent;
@@ -22,14 +22,14 @@ describe('MatchSummaryDisplayComponent', () => {
           AnnotationService,
           ConfigService,
           CRaterService,
-          SummaryService,
-          TeacherDataService,
-          TeacherProjectService
+          DataService,
+          ProjectService,
+          SummaryService
         )
       ]
     }).compileComponents();
 
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
       id: 'cId',
       type: 'Match',
       choiceReuseEnabled: false
