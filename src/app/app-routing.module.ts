@@ -32,9 +32,12 @@ const routes: Routes = [
   },
   {
     path: 'forgot',
-    loadChildren: () => import('./forgot/forgot.module').then((m) => m.ForgotModule)
+    loadChildren: () => import('./forgot/forgot-routing.module').then((m) => m.ForgotRoutingModule)
   },
-  { path: 'help', loadChildren: () => import('./help/help.module').then((m) => m.HelpModule) },
+  {
+    path: 'help',
+    loadChildren: () => import('./help/help-routing.module').then((m) => m.HelpRoutingModule)
+  },
   {
     path: 'join',
     loadChildren: () => import('./register/register.module').then((m) => m.RegisterModule)
@@ -59,7 +62,8 @@ const routes: Routes = [
   },
   {
     path: 'survey',
-    loadChildren: () => import('./student/survey/survey.module').then((m) => m.SurveyModule)
+    loadChildren: () =>
+      import('./student/survey/survey-routing.module').then((m) => m.SurveyRoutingModule)
   }
 ];
 
@@ -74,7 +78,7 @@ export class XhrInterceptor implements HttpInterceptor {
 }
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {}), FormsModule],
+  imports: [RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' }), FormsModule],
   exports: [RouterModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }]
 })

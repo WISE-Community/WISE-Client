@@ -64,7 +64,7 @@ export abstract class LibraryComponent implements OnInit {
         return project;
       })
       .filter((project) => project.visible)
-      .sort((a, b) => b.id - a.id);
+      .sort(this.sortUnits);
     this.emitNumberOfProjectsVisible(this.countVisibleProjects(this.filteredProjects));
     this.pageIndex = 0;
     this.setPagination();
@@ -82,5 +82,19 @@ export abstract class LibraryComponent implements OnInit {
 
   protected countVisibleProjects(projects: LibraryProject[]): number {
     return projects.filter((project) => project.visible).length;
+  }
+
+  // Sort units from newest -> oldest in each of these categories
+  // WISE Tested (Platform) -> WISE Tested (Other) -> Community (Platform) -> Community (Other)
+  private sortUnits(a: LibraryProject, b: LibraryProject): number {
+    const unitTypes = [
+      'wiseTestedPlatform',
+      'wiseTestedOther',
+      'communityBuiltPlatform',
+      'communityBuiltOther'
+    ];
+    const unitTypeIndexA = unitTypes.indexOf(a.metadata.publicUnitType + a.metadata.unitType);
+    const unitTypeIndexB = unitTypes.indexOf(b.metadata.publicUnitType + b.metadata.unitType);
+    return unitTypeIndexA === unitTypeIndexB ? b.id - a.id : unitTypeIndexA - unitTypeIndexB;
   }
 }

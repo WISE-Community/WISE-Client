@@ -1,0 +1,24 @@
+.grading__item-container {
+  height: auto;
+}
+
+.node-workgroup-item {
+  .team-button {
+    min-height: 56px;
+    text-transform: none;
+    text-align: initial;
+  }
+
+  .mdc-button__label {
+    text-transform: none;
+    width: 100%;
+  }
+
+  .mdc-list-item.mdc-list-item--with-one-line {
+    height: auto;
+  }
+
+  .mat-headline-5 {
+    margin: 0;
+  }
+}

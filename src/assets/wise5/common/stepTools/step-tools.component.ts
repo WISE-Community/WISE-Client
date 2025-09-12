@@ -79,8 +79,8 @@ export class StepToolsComponent {
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
   }
 
-  private updateModel(): void {
-    this.nodeId = this.dataService.getCurrentNodeId();
+  protected updateModel(): void {
+    this.nodeId = this.getNodeId();
     if (this.nodeId == null) {
       this.prevId = null;
       this.nextId = null;
@@ -92,6 +92,10 @@ export class StepToolsComponent {
         });
       }
     }
+  }
+
+  protected getNodeId(): string {
+    return this.dataService.getCurrentNodeId();
   }
 
   protected getPrevNodeId(): string {
@@ -115,8 +119,8 @@ export class StepToolsComponent {
     this.nodeId = this.dataService.getCurrentNodeId();
   }
 
-  protected goToNextNode(): void {
-    this.nodeService.goToNextNode().then((nodeId: string) => {
+  protected goToNextNode(): Promise<void> {
+    return this.nodeService.goToNextNode().then((nodeId: string) => {
       this.nodeId = nodeId;
     });
   }

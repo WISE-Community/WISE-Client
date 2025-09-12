@@ -27,11 +27,11 @@
   }
   <div class="flex-1 flex justify-{{ isStudent ? 'end' : 'start' }}">
     <div
-      class="response-text"
+      class="response-text flex-col"
       [class]="{ 'notice-bg-bg': !isStudent, 'selected-bg-bg': isStudent }"
     >
       <div class="mat-small secondary-text poster">{{ displayNames }}</div>
-      <div [innerHtml]="text"></div>
+      <div [innerHtml]="text" class="text-wrap"></div>
     </div>
   </div>
 </div>

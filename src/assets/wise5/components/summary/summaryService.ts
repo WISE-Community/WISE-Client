@@ -16,6 +16,7 @@ export class SummaryService extends ComponentService {
       'Animation',
       'AudioOscillator',
       'ConceptMap',
+      'DialogGuidance',
       'Discussion',
       'Draw',
       'Embedded',

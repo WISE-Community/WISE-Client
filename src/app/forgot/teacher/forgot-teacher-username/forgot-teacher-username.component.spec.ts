@@ -1,14 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherUsernameComponent } from './forgot-teacher-username.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { Observable } from 'rxjs';
 import { provideRouter, Router } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MockTeacherService {
   sendForgotUsernameEmail(email: string): Observable<any> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next({
         status: 'success',
         messageCode: 'emailSent'
@@ -31,7 +29,7 @@ describe('ForgotTeacherUsernameComponent', () => {
   };
 
   const createObservableResponse = (status, messageCode) => {
-    const observableResponse = Observable.create((observer) => {
+    const observableResponse = new Observable((observer) => {
       const response = {
         status: status,
         messageCode: messageCode
@@ -49,7 +47,7 @@ describe('ForgotTeacherUsernameComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, ReactiveFormsModule, ForgotTeacherUsernameComponent],
+      imports: [ForgotTeacherUsernameComponent],
       providers: [{ provide: TeacherService, useClass: MockTeacherService }, provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotTeacherUsernameComponent);

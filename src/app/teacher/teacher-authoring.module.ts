@@ -40,9 +40,10 @@ import { NotifyAuthorService } from '../../assets/wise5/services/notifyAuthorSer
 import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 import { RegisterProjectService } from '../../assets/wise5/services/registerProjectService';
 import { ComponentAuthoringModule } from './component-authoring.module';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 @NgModule({
-  imports: [AuthoringRoutingModule, ComponentAuthoringModule],
+  imports: [AuthoringRoutingModule, ComponentAuthoringModule, StudentTeacherCommonServicesModule],
   providers: [
     ClassroomStatusService,
     ComponentInfoService,

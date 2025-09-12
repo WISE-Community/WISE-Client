@@ -20,8 +20,6 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-  templateUrl: './forgot-teacher-password-change.component.html',
-  styleUrl: './forgot-teacher-password-change.component.scss',
   imports: [
     MatCard,
     MatCardContent,
@@ -33,7 +31,8 @@ import { MatCard, MatCardContent } from '@angular/material/card';
     MatProgressBar,
     RouterLink,
     MatDivider
-  ]
+  ],
+  templateUrl: './forgot-teacher-password-change.component.html'
 })
 export class ForgotTeacherPasswordChangeComponent {
   changePasswordFormGroup: FormGroup = this.fb.group({});
