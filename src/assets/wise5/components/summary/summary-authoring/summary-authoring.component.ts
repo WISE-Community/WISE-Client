@@ -1,20 +1,39 @@
-'use strict';
-
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MultipleChoiceContent } from '../../multipleChoice/MultipleChoiceContent';
 import { SummaryService } from '../summaryService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'summary-authoring',
-    templateUrl: 'summary-authoring.component.html',
-    styleUrls: ['summary-authoring.component.scss'],
-    standalone: false
+  imports: [
+    EditComponentPrompt,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    MatCheckbox,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    TranslatableInputComponent,
+    MatInput
+  ],
+  selector: 'summary-authoring',
+  styleUrl: 'summary-authoring.component.scss',
+  templateUrl: 'summary-authoring.component.html'
 })
 export class SummaryAuthoring extends AbstractComponentAuthoring {
   isResponsesOptionAvailable: boolean = false;
@@ -24,14 +43,14 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
 
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService,
-    private SummaryService: SummaryService
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService,
+    private summaryService: SummaryService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-    this.stepNodesDetails = this.ProjectService.getStepNodesDetailsInOrder();
+    super(configService, nodeService, projectAssetService, projectService);
+    this.stepNodesDetails = this.projectService.getStepNodesDetailsInOrder();
   }
 
   ngOnInit(): void {
@@ -58,7 +77,7 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
   }
 
   isComponentTypeAllowed(componentType: string): boolean {
-    return this.SummaryService.isComponentTypeAllowed(componentType);
+    return this.summaryService.isComponentTypeAllowed(componentType);
   }
 
   summaryComponentIdChanged(): void {
@@ -126,12 +145,12 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
     componentId: string,
     studentDataType: string
   ): boolean {
-    const component = this.ProjectService.getComponent(nodeId, componentId);
+    const component = this.projectService.getComponent(nodeId, componentId);
     if (component != null) {
       if (studentDataType === 'scores') {
-        return this.SummaryService.isScoresSummaryAvailableForComponentType(component.type);
+        return this.summaryService.isScoresSummaryAvailableForComponentType(component.type);
       } else if (studentDataType === 'responses') {
-        return this.SummaryService.isResponsesSummaryAvailableForComponentType(component.type);
+        return this.summaryService.isResponsesSummaryAvailableForComponentType(component.type);
       }
     }
     return false;
@@ -141,7 +160,7 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
     const nodeId = this.componentContent.summaryNodeId;
     const componentId = this.componentContent.summaryComponentId;
     if (nodeId != null && componentId != null) {
-      const component = this.ProjectService.getComponent(nodeId, componentId);
+      const component = this.projectService.getComponent(nodeId, componentId);
       if (component != null) {
         const componentService = this.componentServiceLookupService.getService(component.type);
         return componentService.componentHasCorrectAnswer(component);
@@ -154,7 +173,7 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
     const nodeId = this.componentContent.summaryNodeId;
     const componentId = this.componentContent.summaryComponentId;
     if (nodeId != null && componentId != null) {
-      const component = this.ProjectService.getComponent(nodeId, componentId);
+      const component = this.projectService.getComponent(nodeId, componentId);
       if (component != null) {
         return (component as MultipleChoiceContent).choiceType === 'checkbox';
       }
@@ -179,6 +198,6 @@ export class SummaryAuthoring extends AbstractComponentAuthoring {
   }
 
   getComponents(nodeId: string): any[] {
-    return this.ProjectService.getComponents(nodeId);
+    return this.projectService.getComponents(nodeId);
   }
 }

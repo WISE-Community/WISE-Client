@@ -1,10 +1,9 @@
-@import
-  'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .blurb {
   text-align: center;
   overflow: hidden;
-  border-radius: $feature-border-radius;
+  border-radius: variables.$feature-border-radius;
 }
 
 .blurb__image {

@@ -6,14 +6,13 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ConfigService } from '../../../../services/configService';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
-    selector: 'milestone-details',
-    styleUrls: ['./milestone-details.component.scss'],
-    templateUrl: './milestone-details.component.html',
-    standalone: false
+  selector: 'milestone-details',
+  styleUrls: ['./milestone-details.component.scss'],
+  templateUrl: './milestone-details.component.html',
+  standalone: false
 })
 export class MilestoneDetailsComponent implements OnInit {
   currentPeriod: any;
@@ -120,11 +119,10 @@ export class MilestoneDetailsComponent implements OnInit {
     this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
-  protected showMilestoneStepInfo(): void {
-    this.dialog.open(ShowNodeInfoDialogComponent, {
-      data: this.milestone.nodeId,
-      width: '100%'
-    });
+  protected previewProject(): void {
+    window.open(
+      this.configService.getConfigParam('previewProjectURL') + `/${this.milestone.nodeId}`
+    );
   }
 
   sortAchievementTimeDescending(workgroup: any[]): any[] {

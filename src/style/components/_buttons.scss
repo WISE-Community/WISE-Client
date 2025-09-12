@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use 'style/abstracts/variables';
 
 .button--progress.mdc-button {
   .mdc-button__label {
@@ -6,16 +7,16 @@
   }
 
   mat-progress-bar {
-      position: absolute;
+    position: absolute;
     left: 0;
     bottom: 0;
-    border-bottom-left-radius: $card-border-radius;
-    border-bottom-right-radius: $card-border-radius;
+    border-bottom-left-radius: variables.$card-border-radius;
+    border-bottom-right-radius: variables.$card-border-radius;
   }
 
   .mat-mdc-progress-bar {
-    --mdc-linear-progress-active-indicator-height: 4px;
-    --mdc-linear-progress-track-height: 4px;
+    --mat-progress-bar-track-height: 4px;
+    --mat-progress-bar-active-indicator-height: 4px;
   }
 }
 

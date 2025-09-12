@@ -10,8 +10,8 @@ import { StudentRun } from './student-run';
 @Injectable()
 export class StudentService {
   private runsUrl = '/api/student/runs';
-  private runInfoUrl = '/api/student/run/info';
-  private runInfoByIdUrl = '/api/user/run/info-by-id';
+  private runInfoUrl = '/api/run/info';
+  private runInfoByIdUrl = '/api/run/info-by-id';
   private addRunUrl = '/api/student/run/register';
   private launchRunUrl = '/api/student/run/launch';
   private registerUrl = '/api/student/register';

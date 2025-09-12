@@ -1,7 +1,4 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions',
-  'style/abstracts/mixins';
+@reference "tailwindcss";
 
 p {
   @apply w-full md:w-1/2 px-2;

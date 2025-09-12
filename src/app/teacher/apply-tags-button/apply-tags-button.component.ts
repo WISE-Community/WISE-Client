@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { Project } from '../../domain/project';
 import { Tag } from '../../domain/tag';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,21 +16,20 @@ import { ProjectTagService } from '../../../assets/wise5/services/projectTagServ
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatIconModule,
-        MatMenuModule,
-        MatTooltipModule,
-        SearchBarComponent,
-        SelectAllItemsCheckboxComponent,
-        TagComponent
-    ],
-    providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
-    selector: 'apply-tags-button',
-    styleUrl: './apply-tags-button.component.scss',
-    templateUrl: './apply-tags-button.component.html'
+  imports: [
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTooltipModule,
+    SearchBarComponent,
+    SelectAllItemsCheckboxComponent,
+    TagComponent
+  ],
+  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
+  selector: 'apply-tags-button',
+  styleUrl: './apply-tags-button.component.scss',
+  templateUrl: './apply-tags-button.component.html'
 })
 export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {
   @Input() selectedProjects: Project[] = [];

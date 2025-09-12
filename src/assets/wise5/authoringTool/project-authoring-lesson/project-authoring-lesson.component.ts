@@ -1,4 +1,13 @@
 import { Component, EventEmitter, Input, Output, Signal, ViewEncapsulation } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule } from '@angular/forms';
+import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
+import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
+import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { SelectNodeEvent } from '../domain/select-node-event';
@@ -10,11 +19,21 @@ import { DeleteTranslationsService } from '../../services/deleteTranslationsServ
 import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 
 @Component({
-    selector: 'project-authoring-lesson',
-    templateUrl: './project-authoring-lesson.component.html',
-    styleUrls: ['./project-authoring-lesson.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    FormsModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    NodeIconAndTitleComponent,
+    ProjectAuthoringStepComponent,
+    AddStepButtonComponent
+  ],
+  selector: 'project-authoring-lesson',
+  styleUrl: './project-authoring-lesson.component.scss',
+  templateUrl: './project-authoring-lesson.component.html'
 })
 export class ProjectAuthoringLessonComponent {
   @Input() expanded: boolean = true;

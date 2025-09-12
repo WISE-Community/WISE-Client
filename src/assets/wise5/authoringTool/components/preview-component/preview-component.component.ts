@@ -15,7 +15,6 @@ import { components } from '../../../components/Components';
 
 @Component({
   selector: 'preview-component',
-  standalone: true,
   template: '<div #component></div>'
 })
 export class PreviewComponentComponent {

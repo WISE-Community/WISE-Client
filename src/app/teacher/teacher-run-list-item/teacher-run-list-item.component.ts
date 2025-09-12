@@ -1,22 +1,43 @@
 import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SafeStyle } from '@angular/platform-browser';
-import { TeacherRun } from '../teacher-run';
-import { ConfigService } from '../../services/config.service';
 import { flash } from '../../animations';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
+import { Router } from '@angular/router';
+import { SafeStyle } from '@angular/platform-browser';
 import { ShareRunCodeDialogComponent } from '../share-run-code-dialog/share-run-code-dialog.component';
 import { Subscription } from 'rxjs';
-import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { Tag } from '../../domain/tag';
+import { TeacherRun } from '../teacher-run';
+import { UnitTagsComponent } from '../unit-tags/unit-tags.component';
+import { RunMenuComponent } from '../run-menu/run-menu.component';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
-    animations: [flash],
-    selector: 'app-teacher-run-list-item',
-    styleUrl: './teacher-run-list-item.component.scss',
-    templateUrl: './teacher-run-list-item.component.html',
-    standalone: false
+  animations: [flash],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatTooltipModule,
+    RouterModule,
+    RunMenuComponent,
+    UnitTagsComponent
+  ],
+  selector: 'app-teacher-run-list-item',
+  styleUrl: './teacher-run-list-item.component.scss',
+  templateUrl: './teacher-run-list-item.component.html'
 })
 export class TeacherRunListItemComponent implements OnInit {
   protected animateDelay: string = '0s';
@@ -30,12 +51,12 @@ export class TeacherRunListItemComponent implements OnInit {
   protected thumbStyle: SafeStyle;
 
   constructor(
-    private sanitizer: DomSanitizer,
     private configService: ConfigService,
-    private router: Router,
-    private elRef: ElementRef,
     private dialog: MatDialog,
-    private projectTagService: ProjectTagService
+    private elRef: ElementRef,
+    private projectTagService: ProjectTagService,
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +112,7 @@ export class TeacherRunListItemComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  private getThumbStyle() {
+  private getThumbStyle(): SafeStyle {
     const DEFAULT_THUMB = 'assets/img/default-picture.svg';
     const STYLE = `url(${this.run.project.projectThumb}), url(${DEFAULT_THUMB})`;
     return this.sanitizer.bypassSecurityTrustStyle(STYLE);
@@ -132,7 +153,7 @@ export class TeacherRunListItemComponent implements OnInit {
     return run.isCompleted(this.configService.getCurrentServerTime());
   }
 
-  shareCode(event: Event): void {
+  protected shareCode(event: Event): void {
     event.preventDefault();
     this.dialog.open(ShareRunCodeDialogComponent, {
       data: this.run,

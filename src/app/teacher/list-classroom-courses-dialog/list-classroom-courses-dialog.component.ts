@@ -12,12 +12,31 @@ import {
   ValidatorFn
 } from '@angular/forms';
 import { Run } from '../../domain/run';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'app-list-classroom-courses-dialog',
-    templateUrl: './list-classroom-courses-dialog.component.html',
-    styleUrls: ['./list-classroom-courses-dialog.component.scss'],
-    standalone: false
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
+    ReactiveFormsModule
+  ],
+  styleUrl: './list-classroom-courses-dialog.component.scss',
+  templateUrl: './list-classroom-courses-dialog.component.html'
 })
 export class ListClassroomCoursesDialogComponent implements OnInit {
   run: Run;
@@ -68,7 +87,7 @@ export class ListClassroomCoursesDialogComponent implements OnInit {
     );
   }
 
-  isCourseSelected(): ValidatorFn {
+  private isCourseSelected(): ValidatorFn {
     return () => {
       return this.courseIds.length > 0 ? null : { required: true };
     };
@@ -97,7 +116,7 @@ export class ListClassroomCoursesDialogComponent implements OnInit {
       });
   }
 
-  showAddToClassroomResults(courses) {
+  private showAddToClassroomResults(courses) {
     this.isAdded = true;
     this.isAdding = false;
     this.addSuccessCount = 0;
@@ -116,7 +135,7 @@ export class ListClassroomCoursesDialogComponent implements OnInit {
     }
   }
 
-  getCourseNameAndSection(courseId: string): string {
+  private getCourseNameAndSection(courseId: string): string {
     for (const course of this.courses) {
       if (course.id === courseId) {
         let courseNameAndSection = course.name;

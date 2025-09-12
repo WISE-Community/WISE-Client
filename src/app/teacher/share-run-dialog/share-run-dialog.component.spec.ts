@@ -1,15 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ShareRunDialogComponent } from './share-run-dialog.component';
 import { Observable } from 'rxjs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TeacherService } from '../teacher.service';
 import { Run } from '../../domain/run';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { provideRouter } from '@angular/router';
 
 const runObj = {
   id: 1,
@@ -49,13 +45,13 @@ const runObj = {
 export class MockTeacherService {
   retrieveAllTeacherUsernames(): Observable<string[]> {
     let usernames: any[] = ['Spongebob Squarepants', 'Patrick Star'];
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next(usernames);
       observer.complete();
     });
   }
   getRun(runId: string): Observable<Run> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       const run: any = runObj;
       observer.next(run);
       observer.complete();
@@ -75,8 +71,7 @@ describe('ShareRunDialogComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ShareRunDialogComponent],
-      imports: [BrowserAnimationsModule, MatAutocompleteModule, MatSnackBarModule, MatTableModule],
+      imports: [ShareRunDialogComponent],
       providers: [
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: MatDialogRef, useValue: {} },
@@ -87,16 +82,15 @@ describe('ShareRunDialogComponent', () => {
             closeAll: () => {}
           }
         },
-        { provide: UserService, useClass: MockUserService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+        { provide: UserService, useClass: MockUserService },
+        provideRouter([])
+      ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShareRunDialogComponent);
     component = fixture.componentInstance;
-    component.dialog = TestBed.get(MatDialog);
     fixture.detectChanges();
   });
 

@@ -1,6 +1,4 @@
-@import 'style/abstracts/variables',
-        'style/abstracts/mixins',
-        'style/abstracts/functions';
+@reference "tailwindcss";
 
 .features {
   @apply flex flex-col sm:flex-row gap-8 items-center sm:items-stretch place-items-center;

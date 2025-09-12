@@ -1,13 +1,27 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MoveNodesService } from '../../../services/moveNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ChooseNodeLocationComponent } from '../choose-node-location.component';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { InsertNodeInsideButtonComponent } from '../insert-node-inside-button/insert-node-inside-button.component';
+import { NodeIconAndTitleComponent } from '../node-icon-and-title/node-icon-and-title.component';
+import { InsertNodeAfterButtonComponent } from '../insert-node-after-button/insert-node-after-button.component';
+import { NodeWithMoveAfterButtonComponent } from '../node-with-move-after-button/node-with-move-after-button.component';
 
 @Component({
-    templateUrl: 'choose-move-node-location.component.html',
-    styleUrls: ['../choose-node-location.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    InsertNodeAfterButtonComponent,
+    InsertNodeInsideButtonComponent,
+    MatButtonModule,
+    NodeIconAndTitleComponent,
+    NodeWithMoveAfterButtonComponent,
+    RouterModule
+  ],
+  styleUrl: '../choose-node-location.component.scss',
+  templateUrl: 'choose-move-node-location.component.html'
 })
 export class ChooseMoveNodeLocationComponent extends ChooseNodeLocationComponent {
   protected moveGroup: boolean;
@@ -21,7 +35,7 @@ export class ChooseMoveNodeLocationComponent extends ChooseNodeLocationComponent
     super(projectService, route, router);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.moveGroup = this.projectService.getNode(this.selectedNodeIds[0]).isGroup();
     if (this.moveGroup) {

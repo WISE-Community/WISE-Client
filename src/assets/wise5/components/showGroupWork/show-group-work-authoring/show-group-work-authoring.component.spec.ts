@@ -1,23 +1,13 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ShowGroupWorkAuthoringComponent } from './show-group-work-authoring.component';
-import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ComponentAuthoringModule } from '../../component-authoring.module';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
+import { ShowGroupWorkAuthoringComponent } from './show-group-work-authoring.component';
+import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 
 describe('ShowGroupWorkAuthoringComponent', () => {
   let component: ShowGroupWorkAuthoringComponent;
@@ -26,40 +16,25 @@ describe('ShowGroupWorkAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShowGroupWorkAuthoringComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
-        ComponentAuthoringModule,
-        EditComponentPrompt,
-        FormsModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [ShowGroupWorkAuthoringComponent, StudentTeacherCommonServicesModule],
       providers: [
+        PeerGroupingAuthoringService,
         ProjectAssetService,
         TeacherNodeService,
         TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        TeacherProjectTranslationService,
+        provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
-      new ProjectLocale({ default: 'en-US' })
-    );
+    const projectService = TestBed.inject(TeacherProjectService);
+    spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale({ default: 'en-US' }));
     fixture = TestBed.createComponent(ShowGroupWorkAuthoringComponent);
-    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
-    spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
-      nodeId1
-    ]);
+    spyOn(projectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue([nodeId1]);
+    spyOn(projectService, 'getPeerGroupings').and.returnValue([]);
     component = fixture.componentInstance;
     component.componentContent = {};
     fixture.detectChanges();

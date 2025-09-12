@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="start center">
+<div class="flex flex-wrap justify-start items-center gap-2">
   <button
     mat-raised-button
     color="primary"
@@ -35,21 +35,25 @@
   </button>
 </div>
 <br />
-<div *ngIf="rubricDisplayed" class="rubric-div">
-  <rubric-authoring></rubric-authoring>
-</div>
-<div *ngIf="jsonDisplayed">
-  <mat-form-field fxFlex appearance="outline">
-    <mat-label i18n>Edit Unit JSON</mat-label>
-    <textarea
-      class="mat-body-2"
-      matInput
-      cdkTextareaAutosize
-      [(ngModel)]="projectJSONString"
-      (change)="autoSaveProjectJSONString()"
-    ></textarea>
-  </mat-form-field>
-</div>
+@if (rubricDisplayed) {
+  <div class="rubric-div">
+    <rubric-authoring />
+  </div>
+}
+@if (jsonDisplayed) {
+  <div>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label i18n>Edit Unit JSON</mat-label>
+      <textarea
+        class="mat-body-2"
+        matInput
+        cdkTextareaAutosize
+        [(ngModel)]="projectJSONString"
+        (change)="autoSaveProjectJSONString()"
+      ></textarea>
+    </mat-form-field>
+  </div>
+}
 <div>
   <label id="navigation-type-label" i18n>Navigation mode:</label>
   <mat-radio-group
@@ -65,26 +69,7 @@
     </mat-radio-button>
   </mat-radio-group>
 </div>
-<!--
-<div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="start center">
-  <mat-form-field style="width: 400px; max-width: 100%">
-    <mat-label i18n>Script Filename</mat-label>
-    <input matInput [(ngModel)]="projectScriptFilename" (change)="projectScriptFilenameChanged()" />
-  </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    class="topButton"
-    matTooltip="Choose"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    (click)="chooseProjectScriptFile()"
-  >
-    <mat-icon>attach_file</mat-icon>
-  </button>
-</div>
--->
-<div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="start center">
+<div class="flex flex-wrap justify-start items-center gap-2">
   <mat-form-field style="width: 400px; max-width: 100%">
     <mat-label i18n>Unit URL</mat-label>
     <input matInput value="{{ getProjectURL() }}" disabled="true" />

@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
+import { NotificationService } from '../../services/notificationService';
 import { SaveIndicatorComponent } from './save-indicator.component';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SaveIndicatorComponent', () => {
   let component: SaveIndicatorComponent;
@@ -11,11 +10,13 @@ describe('SaveIndicatorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [MatDialogModule,
-        SaveIndicatorComponent,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [SaveIndicatorComponent],
+      providers: [
+        MockProvider(NotificationService, {
+          setGlobalMessage$: of({ globalMessage: { isProgressIndicatorVisible: false } })
+        })
+      ]
+    });
     fixture = TestBed.createComponent(SaveIndicatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,37 +1,33 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { SelectBranchCriteriaComponent } from '../select-branch-criteria/select-branch-criteria.component';
-import { copy } from '../../common/object/object';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
-import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { TeacherProjectService } from '../../services/teacherProjectService';
+import { copy } from '../../common/object/object';
 import { DeleteBranchService } from '../../services/deleteBranchService';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { CommonModule } from '@angular/common';
 import { EditBranchService } from '../../services/editBranchService';
+import { TeacherProjectService } from '../../services/teacherProjectService';
+import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
 import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths.component';
-import { MatDividerModule } from '@angular/material/divider';
+import { SelectBranchCriteriaComponent } from '../select-branch-criteria/select-branch-criteria.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        EditBranchPathsComponent,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatProgressBarModule,
-        ReactiveFormsModule,
-        RouterModule,
-        SelectBranchCriteriaComponent,
-        SelectComponentComponent,
-        SelectStepComponent
-    ],
-    styleUrl: './edit-branch.component.scss',
-    templateUrl: './edit-branch.component.html'
+  imports: [
+    EditBranchPathsComponent,
+    MatButtonModule,
+    MatDividerModule,
+    MatProgressBarModule,
+    ReactiveFormsModule,
+    RouterModule,
+    SelectBranchCriteriaComponent,
+    SelectComponentComponent,
+    SelectStepComponent
+  ],
+  styles: ['.title { display: inline }'],
+  templateUrl: './edit-branch.component.html'
 })
 export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   protected branchPaths: any[] = [];

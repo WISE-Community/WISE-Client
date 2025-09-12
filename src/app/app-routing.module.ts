@@ -1,7 +1,9 @@
+import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpRequest, HttpHandler, HttpInterceptor } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
+import { PersonalLibraryComponent } from './modules/library/personal-library/personal-library.component';
+import { PublicLibraryComponent } from './modules/library/public-library/public-library.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
@@ -14,14 +16,28 @@ const routes: Routes = [
     loadChildren: () => import('./contact/contact.module').then((m) => m.ContactModule)
   },
   {
+    path: 'curriculum',
+    loadComponent: () =>
+      import('./curriculum/curriculum.component').then((m) => m.CurriculumComponent),
+    children: [
+      { path: '', redirectTo: 'public', pathMatch: 'full' },
+      { path: 'public', component: PublicLibraryComponent },
+      { path: 'personal', component: PersonalLibraryComponent },
+      { path: '**', redirectTo: 'public' }
+    ]
+  },
+  {
     path: 'features',
     loadComponent: () => import('./features/features.component').then((m) => m.FeaturesComponent)
   },
   {
     path: 'forgot',
-    loadChildren: () => import('./forgot/forgot.module').then((m) => m.ForgotModule)
+    loadChildren: () => import('./forgot/forgot-routing.module').then((m) => m.ForgotRoutingModule)
   },
-  { path: 'help', loadChildren: () => import('./help/help.module').then((m) => m.HelpModule) },
+  {
+    path: 'help',
+    loadChildren: () => import('./help/help-routing.module').then((m) => m.HelpRoutingModule)
+  },
   {
     path: 'join',
     loadChildren: () => import('./register/register.module').then((m) => m.RegisterModule)
@@ -43,6 +59,11 @@ const routes: Routes = [
   {
     path: 'teacher',
     loadChildren: () => import('./teacher/teacher.module').then((m) => m.TeacherModule)
+  },
+  {
+    path: 'survey',
+    loadChildren: () =>
+      import('./student/survey/survey-routing.module').then((m) => m.SurveyRoutingModule)
   }
 ];
 
@@ -57,7 +78,7 @@ export class XhrInterceptor implements HttpInterceptor {
 }
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {}), FormsModule],
+  imports: [RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' }), FormsModule],
   exports: [RouterModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }]
 })

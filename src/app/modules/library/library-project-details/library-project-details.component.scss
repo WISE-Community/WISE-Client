@@ -1,9 +1,6 @@
 @use '@angular/material' as mat;
 
-@import
-  'style/base/typography',
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/abstracts/functions';
 
 .library-project-details {
 }
@@ -18,7 +15,7 @@
   border-radius: 4px;
   margin-right: 12px;
 
-  @media (min-width: breakpoint('sm.min')) {
+  @media (min-width: functions.breakpoint('sm.min')) {
     height: 64px;
     width: 64px;
   }
@@ -28,9 +25,6 @@
   margin-bottom: 2px;
 }
 
-.mat-mdc-card-subtitle {
-}
-
 .mat-mdc-dialog-actions {
   .mat-mdc-button, .mat-mdc-button-base {
     margin-left: 0;
@@ -38,8 +32,12 @@
 }
 
 .details {
-  > p, div {
+  > * {
     margin: 0 0 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -48,7 +46,7 @@
 }
 
 .license {
-  margin: 0 -12px -12px;
+  margin: 12px -12px -12px;
   padding: 12px;
 
   img {

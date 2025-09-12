@@ -1,14 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherPasswordVerifyComponent } from './forgot-teacher-password-verify.component';
 import { TeacherService } from '../../../teacher/teacher.service';
-import { ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { provideRouter, Router } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class MockTeacherService {
   checkVerificationCode(username: string, verificationCode: string): Observable<any> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next({
         status: 'success',
         messageCode: 'verificationCodeCorrect'
@@ -31,7 +29,7 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
   };
 
   const createObservableResponse = (status, messageCode) => {
-    const observableResponse = Observable.create((observer) => {
+    const observableResponse = new Observable((observer) => {
       const response = {
         status: status,
         messageCode: messageCode
@@ -48,7 +46,7 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, ReactiveFormsModule, ForgotTeacherPasswordVerifyComponent],
+      imports: [ForgotTeacherPasswordVerifyComponent],
       providers: [{ provide: TeacherService, useClass: MockTeacherService }, provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotTeacherPasswordVerifyComponent);
@@ -78,7 +76,7 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
   });
 
   it('should navigate to the change password page', () => {
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     component.goToChangePasswordPage();
     const params = {
@@ -92,7 +90,7 @@ describe('ForgotTeacherPasswordVerifyComponent', () => {
   });
 
   it('should navigate to the change password page after successfully submitting the verification code', () => {
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     component.username = 'SpongebobSquarepants';
     component.setControlFieldValue('verificationCode', '123456');

@@ -1,16 +1,14 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
+/>
 <span i18n>Oscillator Types</span>
-<span
-  *ngIf="componentContent.oscillatorTypes == null || componentContent.oscillatorTypes.length === 0"
-  class="no-oscillator-type-message"
-  i18n
->
-  (There are no oscillator types selected. Please select at least one oscillator type.)
-</span>
-<div class="oscillator-types-container">
+@if (componentContent.oscillatorTypes == null || componentContent.oscillatorTypes.length === 0) {
+  <span class="no-oscillator-type-message" i18n>
+    (There are no oscillator types selected. Please select at least one oscillator type.)
+  </span>
+}
+<div class="oscillator-types-container flex flex-row">
   <mat-checkbox
     color="primary"
     class="oscillator-type"
@@ -52,10 +50,7 @@
   </mat-checkbox>
 </div>
 <div
-  class="frequency-amplitude-container"
-  fxLayout="row wrap"
-  fxLayoutAlign="start center"
-  fxLayoutGap="40px"
+  class="frequency-amplitude-container flex flex-row flex-wrap justify-start items-center gap-x-10"
 >
   <span i18n>Frequency</span>
   <mat-form-field class="number-input-small">
@@ -87,10 +82,7 @@
   </mat-checkbox>
 </div>
 <div
-  class="frequency-amplitude-container"
-  fxLayout="row wrap"
-  fxLayoutAlign="start center"
-  fxLayoutGap="40px"
+  class="frequency-amplitude-container flex flex-row flex-wrap justify-start items-center gap-x-10"
 >
   <span i18n>Amplitude</span>
   <mat-form-field class="number-input-small">
@@ -125,10 +117,7 @@
   </div>
 </div>
 <div
-  class="frequency-amplitude-container"
-  fxLayout="row wrap"
-  fxLayoutAlign="start center"
-  fxLayoutGap="40px"
+  class="frequency-amplitude-container flex flex-row flex-wrap justify-start items-center gap-x-10"
 >
   <span i81n>Grid Dimensions</span>
   <mat-form-field class="number-input-small">

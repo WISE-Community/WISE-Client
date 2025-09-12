@@ -1,4 +1,5 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
+@use 'style/abstracts/functions';
 
 $height: 550px !default;
 $title-width: 240px !default;
@@ -16,12 +17,12 @@ $width-collapsed: 300px !default;
   &.full {
     height: 100%;
     width: 100%;
-    border-bottom-left-radius: $card-border-radius;
-    border-bottom-right-radius: $card-border-radius;
+    border-bottom-left-radius: variables.$card-border-radius;
+    border-bottom-right-radius: variables.$card-border-radius;
 
     .actions {
-      border-bottom-left-radius: $card-border-radius;
-      border-bottom-right-radius: $card-border-radius;
+      border-bottom-left-radius: variables.$card-border-radius;
+      border-bottom-right-radius: variables.$card-border-radius;
     }
   }
 }
@@ -37,8 +38,8 @@ $width-collapsed: 300px !default;
 
 .mat-mdc-card-header {
   cursor: pointer;
-  border-top-left-radius: $card-border-radius;
-  border-top-right-radius: $card-border-radius;
+  border-top-left-radius: variables.$card-border-radius;
+  border-top-right-radius: variables.$card-border-radius;
   padding: 0 0 0 12px;
 }
 
@@ -49,7 +50,7 @@ $width-collapsed: 300px !default;
     max-width: $title-width-collapsed;
   }
 
-  @media (max-width: breakpoint('xs.max') - 1) {
+  @media (max-width: calc(#{functions.breakpoint('xs.max')} - 1)) {
     max-width: $title-width-collapsed;
   }
 }

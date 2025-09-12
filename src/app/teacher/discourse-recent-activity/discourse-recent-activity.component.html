@@ -1,6 +1,6 @@
 <div class="content-block">
-  <div class="content-block__title" fxLayoutAlign="space-between center" fxLayoutGap="16px">
-    <h3 fxLayoutAlign="start start" fxLayoutGap="8px">
+  <div class="content-block__title flex justify-between items-center gap-4">
+    <h3 class="flex justify-start items-start gap-2">
       <mat-icon>groups</mat-icon>
       <span i18n>Latest from the WISE Community</span>
     </h3>
@@ -16,13 +16,19 @@
     </a>
   </div>
   <ul>
-    <li *ngFor="let topic of topics">
-      <a class="mat-body-2" href="{{ baseUrl }}/t/{{ topic.slug }}/{{ topic.id }}" target="_blank">
-        {{ topic.title }}
-      </a>
-      <span class="secondary-text mat-caption">
-        ({{ topic.last_posted_at | date: 'MMM dd y' }})
-      </span>
-    </li>
+    @for (topic of topics; track topic) {
+      <li>
+        <a
+          class="mat-body-2"
+          href="{{ baseUrl }}/t/{{ topic.slug }}/{{ topic.id }}"
+          target="_blank"
+        >
+          {{ topic.title }}
+        </a>
+        <span class="secondary-text mat-caption">
+          ({{ topic.last_posted_at | date: 'MMM dd y' }})
+        </span>
+      </li>
+    }
   </ul>
 </div>

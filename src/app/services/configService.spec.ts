@@ -22,8 +22,8 @@ describe('ConfigService', () => {
     imports: [],
     providers: [ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
-    http = TestBed.get(HttpTestingController);
-    service = TestBed.get(ConfigService);
+    http = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(ConfigService);
     configJSON = {
       startTime: new Date(2020, 4, 10).getTime(),
       endTime: new Date(2020, 4, 20).getTime(),

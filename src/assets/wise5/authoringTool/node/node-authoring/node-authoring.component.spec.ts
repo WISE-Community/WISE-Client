@@ -1,38 +1,26 @@
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeAuthoringComponent } from './node-authoring.component';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { TeacherNodeIconComponent } from '../../teacher-node-icon/teacher-node-icon.component';
-import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { DebugElement } from '@angular/core';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { EditNodeTitleComponent } from '../edit-node-title/edit-node-title.component';
-import { CopyComponentButtonComponent } from '../copy-component-button/copy-component-button.component';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
-import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
 import { DeleteTranslationsService } from '../../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CreateComponentService } from '../../../services/createComponentService';
 import { VLEProjectService } from '../../../vle/vleProjectService';
 import { NotebookService } from '../../../services/notebookService';
-import { MatDividerModule } from '@angular/material/divider';
-import { AddComponentComponent } from '../add-component/add-component.component';
+import { MockProviders } from 'ng-mocks';
+import { ComponentTypeService } from '../../../services/componentTypeService';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: NodeAuthoringComponent;
 let component1: any;
@@ -49,28 +37,12 @@ let saveProjectSpy: jasmine.Spy;
 describe('NodeAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NodeAuthoringComponent],
-      imports: [
-        AddComponentComponent,
-        BrowserAnimationsModule,
-        ComponentAuthoringModule,
-        ComponentTypeServiceModule,
-        CopyComponentButtonComponent,
-        DragDropModule,
-        EditNodeTitleComponent,
-        FormsModule,
-        MatCheckboxModule,
-        MatDividerModule,
-        MatIconModule,
-        MatInputModule,
-        StudentTeacherCommonServicesModule,
-        TeacherNodeIconComponent
-      ],
+      imports: [NodeAuthoringComponent, StudentTeacherCommonServicesModule],
       providers: [
+        MockProviders(ComponentTypeService, DeleteTranslationsService),
         ClassroomStatusService,
         CreateComponentService,
         CopyTranslationsService,
-        DeleteTranslationsService,
         TeacherProjectTranslationService,
         ProjectAssetService,
         TeacherDataService,
@@ -91,8 +63,7 @@ describe('NodeAuthoringComponent', () => {
             url: '/teacher/edit/unit/123/node/node4'
           }
         },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
     window.history.pushState(

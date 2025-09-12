@@ -1,28 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
 import { AbstractTranslatableFieldComponent } from '../abstract-translatable-field/abstract-translatable-field.component';
-import { WiseTinymceEditorModule } from '../../../directives/wise-tinymce-editor/wise-tinymce-editor.module';
+import { WiseAuthoringTinymceEditorComponent } from '../../../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'translatable-rich-text-editor',
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatTabsModule,
-        WiseTinymceEditorModule
-    ],
-    templateUrl: './translatable-rich-text-editor.component.html',
-    styleUrl: './translatable-rich-text-editor.component.scss'
+  imports: [MatButtonModule, MatTabsModule, WiseAuthoringTinymceEditorComponent],
+  selector: 'translatable-rich-text-editor',
+  styles: ['.translation-tools { padding: 8px 0; }'],
+  templateUrl: './translatable-rich-text-editor.component.html'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
   protected html: string = '';

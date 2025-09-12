@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LibraryGroup } from '../modules/library/libraryGroup';
 import { LibraryProject } from '../modules/library/libraryProject';
-import { ProjectFilterValues } from '../domain/projectFilterValues';
 import { Project } from '../domain/project';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LibraryService {
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
@@ -22,34 +21,30 @@ export class LibraryService {
   public officialLibraryProjectsSource$ = this.officialLibraryProjectsSource.asObservable();
   private communityLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
   public communityLibraryProjectsSource$ = this.communityLibraryProjectsSource.asObservable();
-  private personalLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
+  private personalLibraryProjectsSource = new Subject<LibraryProject[]>();
   public personalLibraryProjectsSource$ = this.personalLibraryProjectsSource.asObservable();
-  private sharedLibraryProjectsSource = new BehaviorSubject<LibraryProject[]>([]);
+  private sharedLibraryProjectsSource = new Subject<LibraryProject[]>();
   public sharedLibraryProjectsSource$ = this.sharedLibraryProjectsSource.asObservable();
-  private projectFilterValuesSource = new BehaviorSubject<ProjectFilterValues>(
-    new ProjectFilterValues()
-  );
-  public projectFilterValuesSource$ = this.projectFilterValuesSource.asObservable();
   private newProjectSource = new BehaviorSubject<LibraryProject>(null);
   public newProjectSource$ = this.newProjectSource.asObservable();
-  public numberOfOfficialProjectsVisible = new BehaviorSubject<number>(0);
-  public numberOfOfficialProjectsVisible$ = this.numberOfOfficialProjectsVisible.asObservable();
-  public numberOfCommunityProjectsVisible = new BehaviorSubject<number>(0);
-  public numberOfCommunityProjectsVisible$ = this.numberOfCommunityProjectsVisible.asObservable();
+  public numberOfPublicProjectsVisible = new BehaviorSubject<number>(0);
+  public numberOfPublicProjectsVisible$ = this.numberOfPublicProjectsVisible.asObservable();
   public numberOfPersonalProjectsVisible = new BehaviorSubject<number>(0);
   public numberOfPersonalProjectsVisible$ = this.numberOfPersonalProjectsVisible.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.router = router;
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
-  getOfficialLibraryProjects() {
+  getOfficialLibraryProjects(): void {
     this.http.get<LibraryGroup[]>(this.libraryGroupsUrl).subscribe((libraryGroups) => {
       const projects: LibraryProject[] = [];
       this.libraryGroups = this.convertLibraryGroups(libraryGroups);
       for (let group of this.libraryGroups) {
         this.populateProjects(group, projects);
       }
+      projects.forEach((project) => (project.metadata.publicUnitType = 'wiseTested'));
       this.officialLibraryProjectsSource.next(projects);
       this.libraryGroupsSource.next(this.libraryGroups);
     });
@@ -77,10 +72,11 @@ export class LibraryService {
     }
   }
 
-  getCommunityLibraryProjects() {
+  getCommunityLibraryProjects(): void {
     this.http.get<LibraryProject[]>(this.communityProjectsUrl).subscribe((projects) => {
-      const communityLibraryProjects: LibraryProject[] = this.convertToLibraryProjects(projects);
-      this.communityLibraryProjectsSource.next(communityLibraryProjects);
+      const communityProjects: LibraryProject[] = this.convertToLibraryProjects(projects);
+      communityProjects.forEach((project) => (project.metadata.publicUnitType = 'communityBuilt'));
+      this.communityLibraryProjectsSource.next(communityProjects);
     });
   }
 
@@ -129,29 +125,17 @@ export class LibraryService {
     return this.http.post(this.copyProjectUrl, body, { headers: headers });
   }
 
-  setFilterValues(projectFilterValues: ProjectFilterValues) {
-    this.projectFilterValuesSource.next(projectFilterValues);
-  }
-
-  getFilterValues(): ProjectFilterValues {
-    return this.projectFilterValuesSource.value;
-  }
-
   addPersonalLibraryProject(project: LibraryProject) {
     this.newProjectSource.next(project);
-    this.router.navigate(['/teacher/home/library/personal']);
+    this.router.navigate(['/curriculum/personal'], { state: { newProjectId: project.id } });
   }
 
   getProjectInfo(projectId): Observable<Project> {
     return this.http.get<Project>(this.projectInfoUrl + '/' + projectId);
   }
 
-  updateNumberOfOfficialProjectsVisible(count) {
-    this.numberOfOfficialProjectsVisible.next(count);
-  }
-
-  updateNumberOfCommunityProjectsVisible(count) {
-    this.numberOfCommunityProjectsVisible.next(count);
+  updateNumberOfPublicProjectsVisible(count) {
+    this.numberOfPublicProjectsVisible.next(count);
   }
 
   updateNumberOfPersonalProjectsVisible(count) {
@@ -164,6 +148,5 @@ export class LibraryService {
     this.communityLibraryProjectsSource.next([]);
     this.personalLibraryProjectsSource.next([]);
     this.sharedLibraryProjectsSource.next([]);
-    this.projectFilterValuesSource.next(new ProjectFilterValues());
   }
 }

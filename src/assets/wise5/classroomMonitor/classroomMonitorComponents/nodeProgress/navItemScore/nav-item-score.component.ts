@@ -1,12 +1,12 @@
 import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
-import { CommonModule, formatNumber } from '@angular/common';
+import { formatNumber } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [CommonModule, FlexLayoutModule, MatIconModule],
-    selector: 'nav-item-score',
-    templateUrl: 'nav-item-score.component.html'
+  imports: [FlexLayoutModule, MatIconModule],
+  selector: 'nav-item-score',
+  templateUrl: 'nav-item-score.component.html'
 })
 export class NavItemScoreComponent {
   @Input() averageScore: number | string;

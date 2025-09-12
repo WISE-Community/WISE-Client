@@ -3,8 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentFactory } from '../../../common/ComponentFactory';
 import { Component as WISEComponent } from '../../../common/Component';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ComponentTypeSelectorComponent } from '../component-type-selector/component-type-selector.component';
 import { PreviewComponentComponent } from '../preview-component/preview-component.component';
 import { MatCardModule } from '@angular/material/card';
@@ -13,19 +11,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-    imports: [
-        CommonModule,
-        ComponentTypeSelectorComponent,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCardModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatTabsModule,
-        PreviewComponentComponent
-    ],
-    styleUrl: './component-info-dialog.component.scss',
-    templateUrl: './component-info-dialog.component.html'
+  imports: [
+    ComponentTypeSelectorComponent,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatTabsModule,
+    PreviewComponentComponent
+  ],
+  styleUrl: './component-info-dialog.component.scss',
+  templateUrl: './component-info-dialog.component.html'
 })
 export class ComponentInfoDialogComponent {
   protected description: string;

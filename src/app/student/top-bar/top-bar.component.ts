@@ -21,30 +21,27 @@ import { DismissAmbientNotificationDialogModule } from '../../../assets/wise5/vl
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatBadgeModule } from '@angular/material/badge';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectLanguageChooserComponent } from '../../common/project-language-chooser/project-language-chooser.component';
 
 @Component({
-    selector: 'top-bar',
-    imports: [
-        CommonModule,
-        DismissAmbientNotificationDialogModule,
-        FlexLayoutModule,
-        MatBadgeModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatIconModule,
-        MatMenuModule,
-        MatProgressSpinnerModule,
-        MatToolbarModule,
-        NotificationsDialogComponent,
-        ProjectLanguageChooserComponent,
-        StudentAccountMenuModule
-    ],
-    styleUrls: ['./top-bar.component.scss'],
-    templateUrl: 'top-bar.component.html'
+  imports: [
+    CommonModule,
+    DismissAmbientNotificationDialogModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    ProjectLanguageChooserComponent,
+    StudentAccountMenuModule
+  ],
+  selector: 'top-bar',
+  styleUrls: ['./top-bar.component.scss'],
+  templateUrl: 'top-bar.component.html'
 })
 export class TopBarComponent {
   @ViewChild(StudentAccountMenuComponent) accountMenu: StudentAccountMenuComponent;
@@ -157,7 +154,7 @@ export class TopBarComponent {
     );
   }
 
-  viewAlerts($event: any): void {
+  protected viewAlerts($event: any): void {
     $event.stopPropagation();
     this.dialog.open(NotificationsDialogComponent, {
       panelClass: 'dialog-sm',

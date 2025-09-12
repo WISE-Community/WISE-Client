@@ -1,23 +1,35 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule } from '@angular/material/checkbox';
 import { TeacherRun } from '../teacher-run';
 import { Project } from '../../domain/project';
 import { SelectRunsOption } from './select-runs-option';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ArchiveProjectsButtonComponent } from '../archive-projects-button/archive-projects-button.component';
 
 @Component({
-    selector: 'select-runs-controls',
-    templateUrl: './select-runs-controls.component.html',
-    styleUrls: ['./select-runs-controls.component.scss'],
-    providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
-    standalone: false
+  imports: [
+    ArchiveProjectsButtonComponent,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTooltipModule
+  ],
+  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
+  selector: 'select-runs-controls',
+  styleUrl: './select-runs-controls.component.scss',
+  templateUrl: './select-runs-controls.component.html'
 })
 export class SelectRunsControlsComponent {
   @Output() archiveProjectsEvent = new EventEmitter<boolean>();
   protected numSelectedRuns: number = 0;
-  protected selectedProjects: Project[] = [];
   @Input() runChangedEventEmitter: EventEmitter<void> = new EventEmitter<void>();
   @Input() runs: TeacherRun[] = [];
   protected selectedAllRuns: boolean = false;
+  protected selectedProjects: Project[] = [];
   protected selectedSomeRuns: boolean = false;
   @Output() selectRunsOptionChosenEvent = new EventEmitter<SelectRunsOption>();
   @Input() showArchive: boolean = false;

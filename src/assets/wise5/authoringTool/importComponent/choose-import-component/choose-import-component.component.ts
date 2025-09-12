@@ -1,36 +1,34 @@
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ConfigService } from '../../../services/configService';
-import { TeacherDataService } from '../../../services/teacherDataService';
-import { Component, OnInit } from '@angular/core';
-import { ImportComponentService } from '../../../services/importComponentService';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { ConfigService } from '../../../services/configService';
+import { ImportComponentService } from '../../../services/importComponentService';
+import { TeacherDataService } from '../../../services/teacherDataService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-    imports: [
-        CommonModule,
-        FormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatDividerModule,
-        MatIconModule,
-        MatProgressBarModule,
-        MatTooltipModule,
-        RouterModule
-    ],
-    selector: 'choose-import-component',
-    styleUrl: './choose-import-component.component.scss',
-    templateUrl: './choose-import-component.component.html'
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    RouterModule
+  ],
+  selector: 'choose-import-component',
+  styleUrl: './choose-import-component.component.scss',
+  templateUrl: './choose-import-component.component.html'
 })
 export class ChooseImportComponentComponent implements OnInit {
   protected importProject: any = null;

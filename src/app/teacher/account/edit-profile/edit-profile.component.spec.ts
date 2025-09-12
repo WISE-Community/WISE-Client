@@ -141,15 +141,15 @@ describe('TeacherEditProfileComponent', () => {
     component.editProfileFormGroup.get('language').setValue('Spanish');
     submitForm();
     fixture.detectChanges();
-    const testBedUserService = TestBed.get(UserService);
-    expect(testBedUserService.user.language).toBe('Spanish');
+    const testBedUserService = TestBed.inject(UserService);
+    expect(testBedUserService['user'].language).toBe('Spanish');
   });
 
   it('should disable the email field if user has linked a Google account', async () => {
-    const testBedUserService = TestBed.get(UserService);
+    const testBedUserService = TestBed.inject(UserService);
     const user = component.user;
     user.isGoogleUser = true;
-    spyOn(testBedUserService, 'getUser').and.returnValue(of(user));
+    spyOn(testBedUserService, 'getUser').and.returnValue(new BehaviorSubject(user as User));
     component.getUser();
     fixture.detectChanges();
     expect(component.editProfileFormGroup.get('email').disabled).toBe(true);

@@ -1,7 +1,7 @@
-@import 'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .color-choice {
-  border-radius: $button-border-radius;
+  border-radius: variables.$button-border-radius;
   width: 32px;
 }
 

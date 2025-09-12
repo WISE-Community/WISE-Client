@@ -10,7 +10,7 @@ const walkToSchoolValue = 'Walk_to_school';
 describe('AuthorUrlParametersComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthorUrlParametersComponent]
+      imports: [AuthorUrlParametersComponent]
     });
   });
 
@@ -52,7 +52,7 @@ function initializeDefaultParameterValues() {
   describe('initializeDefaultParameterValues', () => {
     it('should initialize default parameter values when there are no parameters', () => {
       component.initializeDefaultParameterValues();
-      expect(component.parameterValues).toEqual({});
+      expect(component['parameterValues']).toEqual({});
     });
     it('should initialize default parameter values', () => {
       component.parameters = [
@@ -66,7 +66,7 @@ function initializeDefaultParameterValues() {
         createUrlParameterObject('Name of City', 'city', 'Type the name of the city.', 'input')
       ];
       component.initializeDefaultParameterValues();
-      expect(component.parameterValues).toEqual({ city: '', onlyEnableParameter: '' });
+      expect(component['parameterValues']).toEqual({ city: '', onlyEnableParameter: '' });
     });
   });
 }
@@ -75,17 +75,17 @@ function initializeParameterValuesFromUrl() {
     it('should initialize parameter values from url when url is empty', () => {
       component.url = '';
       component.initializeParameterValuesFromUrl();
-      expect(component.parameterValues).toEqual({});
+      expect(component['parameterValues']).toEqual({});
     });
     it('should initialize parameter values from url when there are no parameters', () => {
       component.url = urlWithoutParameters;
       component.initializeParameterValuesFromUrl();
-      expect(component.parameterValues).toEqual({});
+      expect(component['parameterValues']).toEqual({});
     });
     it('should initialize parameter values from url when there are parameters', () => {
       component.url = `${urlWithoutParameters}?onlyEnableParameter=${walkToSchoolValue}&city=${cityValue}`;
       component.initializeParameterValuesFromUrl();
-      expect(component.parameterValues).toEqual({
+      expect(component['parameterValues']).toEqual({
         city: cityValue,
         onlyEnableParameter: walkToSchoolValue
       });
@@ -94,7 +94,7 @@ function initializeParameterValuesFromUrl() {
         value`, () => {
       component.url = `${urlWithoutParameters}?onlyEnableParameter=&city=${cityValue}`;
       component.initializeParameterValuesFromUrl();
-      expect(component.parameterValues).toEqual({
+      expect(component['parameterValues']).toEqual({
         city: cityValue,
         onlyEnableParameter: ''
       });
@@ -104,14 +104,14 @@ function initializeParameterValuesFromUrl() {
 function generateUrlParameters() {
   describe('generateUrlParameters', () => {
     it('should generate url parameters when there are no parameters', () => {
-      component.urlWithoutParameters = urlWithoutParameters;
+      component['urlWithoutParameters'] = urlWithoutParameters;
       const generatedUrlSpy = spyOn(component.generatedUrl, 'emit').and.callFake(() => {});
       component.generateUrlParameters();
       expect(generatedUrlSpy).toHaveBeenCalledWith(`${urlWithoutParameters}`);
     });
     it('should generate url parameters when there are parameters', () => {
-      component.urlWithoutParameters = urlWithoutParameters;
-      component.parameterValues = {
+      component['urlWithoutParameters'] = urlWithoutParameters;
+      component['parameterValues'] = {
         city: cityValue,
         onlyEnableParameter: walkToSchoolValue
       };
@@ -122,8 +122,8 @@ function generateUrlParameters() {
       );
     });
     it('should generate url parameters when there is a parameter without a value', () => {
-      component.urlWithoutParameters = urlWithoutParameters;
-      component.parameterValues = {
+      component['urlWithoutParameters'] = urlWithoutParameters;
+      component['parameterValues'] = {
         city: '',
         onlyEnableParameter: walkToSchoolValue
       };

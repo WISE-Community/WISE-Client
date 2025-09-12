@@ -10,12 +10,14 @@ import {
   DIFFERENT_SCORES_NAME,
   DIFFERENT_SCORES_REGEX
 } from '../PeerGroupingLogic';
+import { MatRadioButton } from '@angular/material/radio';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'select-peer-grouping-option',
-    templateUrl: './select-peer-grouping-option.component.html',
-    styleUrls: ['./select-peer-grouping-option.component.scss'],
-    standalone: false
+  selector: 'select-peer-grouping-option',
+  templateUrl: './select-peer-grouping-option.component.html',
+  styles: ['.field-label { font-weight: 500; } .select-option { margin: 0 0 8px -8px; }'],
+  imports: [MatRadioButton, MatButton]
 })
 export class SelectPeerGroupingOptionComponent implements OnInit {
   @Input() peerGrouping: PeerGrouping;

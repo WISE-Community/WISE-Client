@@ -1,6 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export class UrlParameter {
   name: string;
@@ -11,25 +18,26 @@ export class UrlParameter {
 }
 
 @Component({
-    selector: 'author-url-parameters',
-    templateUrl: './author-url-parameters.component.html',
-    styleUrls: ['./author-url-parameters.component.scss'],
-    standalone: false
+  imports: [
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatIconModule,
+    MatTooltipModule
+  ],
+  selector: 'author-url-parameters',
+  templateUrl: './author-url-parameters.component.html'
 })
 export class AuthorUrlParametersComponent implements OnInit {
-  @Input()
-  url: string = '';
-
-  @Input()
-  parameters: UrlParameter[] = [];
-
-  @Output()
-  generatedUrl: EventEmitter<string> = new EventEmitter();
-
-  inputChanged: Subject<any> = new Subject<any>();
-  inputChangedSubscription: Subscription;
-  parameterValues: any = {};
-  urlWithoutParameters: string;
+  protected inputChanged: Subject<any> = new Subject<any>();
+  private inputChangedSubscription: Subscription;
+  @Output() generatedUrl: EventEmitter<string> = new EventEmitter();
+  @Input() parameters: UrlParameter[] = [];
+  protected parameterValues: any = {};
+  @Input() url: string = '';
+  private urlWithoutParameters: string;
 
   ngOnInit(): void {
     this.initializeInputChangedSubscription();
@@ -41,7 +49,7 @@ export class AuthorUrlParametersComponent implements OnInit {
     this.initializeParameterValuesFromUrl();
   }
 
-  initializeInputChangedSubscription(): void {
+  private initializeInputChangedSubscription(): void {
     this.inputChangedSubscription = this.inputChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(() => {

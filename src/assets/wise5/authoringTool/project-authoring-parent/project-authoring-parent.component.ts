@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { NotifyAuthorService } from '../../services/notifyAuthorService';
+import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
 
 @Component({
-    templateUrl: './project-authoring-parent.component.html',
-    styleUrls: ['./project-authoring-parent.component.scss'],
-    standalone: false
+  imports: [ConcurrentAuthorsMessageComponent, RouterModule],
+  styleUrl: './project-authoring-parent.component.scss',
+  templateUrl: './project-authoring-parent.component.html'
 })
 export class ProjectAuthoringParentComponent {
   @Input('unitId') protected projectId?: number;

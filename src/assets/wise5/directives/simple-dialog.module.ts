@@ -12,10 +12,15 @@ import { DialogWithoutCloseComponent } from './dialog-without-close/dialog-witho
   declarations: [
     DialogWithConfirmComponent,
     DialogWithOpenInNewWindowComponent,
-    DialogWithoutCloseComponent,
-    DialogWithSpinnerComponent
+    DialogWithoutCloseComponent
   ],
-  imports: [DialogWithCloseComponent, StudentTeacherCommonModule, MatButtonModule, MatDialogModule],
+  imports: [
+    DialogWithCloseComponent,
+    DialogWithSpinnerComponent,
+    StudentTeacherCommonModule,
+    MatButtonModule,
+    MatDialogModule
+  ],
   exports: [
     DialogWithConfirmComponent,
     DialogWithOpenInNewWindowComponent,

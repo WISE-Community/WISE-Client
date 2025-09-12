@@ -11,6 +11,7 @@ import { PauseScreenService } from '../services/pauseScreenService';
 import { StudentNotificationService } from '../services/studentNotificationService';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { StudentService } from '../../../app/student/student.service';
 
 let component: VLEComponent;
 let fixture: ComponentFixture<VLEComponent>;
@@ -26,6 +27,7 @@ describe('VLEComponent', () => {
         PauseScreenService,
         provideRouter([]),
         StudentNotificationService,
+        StudentService,
         VLEProjectService,
         provideHttpClient(withInterceptorsFromDi())
       ]

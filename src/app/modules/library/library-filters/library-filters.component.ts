@@ -1,207 +1,216 @@
-import { Component, OnInit, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
-import { NGSSStandards } from '../ngssStandards';
-import { ResearchProject, ResearchProjectTypes, Standard } from '../standard';
+import { Standard, StandardType } from '../standard';
+import { Discipline } from '../Discipline';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { UtilService } from '../../../services/util.service';
+import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { SelectMenuComponent } from '../../shared/select-menu/select-menu.component';
+import { StandardsSelectMenuComponent } from '../../shared/standards-select-menu/standards-select-menu.component';
+import { Feature } from '../Feature';
+import { Grade, GradeLevel } from '../GradeLevel';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogWithCloseComponent } from '../../../../assets/wise5/directives/dialog-with-close/dialog-with-close.component';
+import { Location } from '../Location';
+import { LocationSelectMenuComponent } from '../../shared/location-select-menu/location-select-menu.component';
 
 @Component({
-    selector: 'app-library-filters',
-    styleUrl: './library-filters.component.scss',
-    templateUrl: './library-filters.component.html',
-    standalone: false
+  imports: [
+    CommonModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatIconModule,
+    LocationSelectMenuComponent,
+    SearchBarComponent,
+    SelectMenuComponent,
+    StandardsSelectMenuComponent
+  ],
+  selector: 'app-library-filters',
+  styleUrl: './library-filters.component.scss',
+  templateUrl: './library-filters.component.html'
 })
-export class LibraryFiltersComponent implements OnInit {
-  @Input()
-  isSplitScreen: boolean = false;
-
-  allProjects: LibraryProject[] = [];
-  libraryProjects: LibraryProject[] = [];
-  communityProjects: LibraryProject[] = [];
-  sharedProjects: LibraryProject[] = [];
-  personalProjects: LibraryProject[] = [];
-  searchValue: string = '';
-  dciArrangementOptions: Standard[] = [];
-  dciArrangementValue = [];
-  disciplineOptions: Standard[] = [];
-  disciplineValue = [];
-  peOptions: Standard[] = [];
-  peValue = [];
-  protected researchProjectOptions: ResearchProject[] = [];
-  private researchProjectValue: ResearchProjectTypes[] = [];
-  showFilters: boolean = false;
+export class LibraryFiltersComponent {
+  private communityProjects: LibraryProject[] = [];
+  protected disciplineOptions: Discipline[] = [];
+  protected featureOptions: Feature[] = [];
+  protected gradeLevelOptions: GradeLevel[] = [];
+  @Input() showAdvancedFilteringOptions: boolean = true;
+  @Input() isSplitScreen: boolean = false;
+  private libraryProjects: LibraryProject[] = [];
+  private personalProjects: LibraryProject[] = [];
+  protected possibleStandardLabels = ['NGSS', 'Common Core', 'Learning For Justice'];
+  private sharedProjects: LibraryProject[] = [];
+  protected showFilters: boolean = false;
+  protected standardOptions: Standard[] = [];
+  protected locationOptions: Location[] = [];
+  protected unitTypeOptions: { id: string; name: string }[] = [
+    { id: 'WISE Platform', name: $localize`WISE Platform` },
+    { id: 'Other Platform', name: $localize`Other Platform` }
+  ];
 
   constructor(
+    private dialog: MatDialog,
+    protected filterValues: ProjectFilterValues,
     private libraryService: LibraryService,
     private utilService: UtilService
   ) {
-    libraryService.officialLibraryProjectsSource$.subscribe((libraryProjects: LibraryProject[]) => {
-      this.libraryProjects = libraryProjects;
+    this.libraryService.officialLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+      this.libraryProjects = projects;
       this.populateFilterOptions();
     });
-    libraryService.communityLibraryProjectsSource$.subscribe(
-      (communityProjects: LibraryProject[]) => {
-        this.communityProjects = communityProjects;
-        this.populateFilterOptions();
-      }
-    );
-    libraryService.sharedLibraryProjectsSource$.subscribe((sharedProjects: LibraryProject[]) => {
-      this.sharedProjects = sharedProjects;
+    this.libraryService.communityLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+      this.communityProjects = projects;
       this.populateFilterOptions();
     });
-    libraryService.personalLibraryProjectsSource$.subscribe(
-      (personalProjects: LibraryProject[]) => {
-        this.personalProjects = personalProjects;
-        this.populateFilterOptions();
-      }
-    );
+    this.libraryService.sharedLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+      this.sharedProjects = projects;
+      this.populateFilterOptions();
+    });
+    this.libraryService.personalLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
+      this.personalProjects = projects;
+      this.populateFilterOptions();
+    });
   }
 
-  ngOnInit() {
-    const filterOptions: ProjectFilterValues = this.libraryService.getFilterValues();
-    this.dciArrangementValue = filterOptions.dciArrangementValue;
-    this.disciplineValue = filterOptions.disciplineValue;
-    this.peValue = filterOptions.peValue;
-    this.searchValue = filterOptions.searchValue;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.projects) {
       this.populateFilterOptions();
     }
   }
 
-  populateFilterOptions(): void {
-    this.allProjects = this.getAllProjects();
-    for (let project of this.allProjects) {
-      const standardsAddressed = project.metadata.standardsAddressed;
-      if (standardsAddressed && standardsAddressed.ngss) {
-        const ngss: NGSSStandards = standardsAddressed.ngss;
-        const dciArrangements = ngss.dciArrangements;
-        for (let dciStandard of dciArrangements) {
-          this.dciArrangementOptions.push(this.createDCIStandard(dciStandard));
-          if (dciStandard.children) {
-            for (let peStandard of dciStandard.children) {
-              this.peOptions.push(this.createPEStandard(peStandard));
-            }
-          }
-        }
-
-        const disciplines = ngss.disciplines;
-        if (disciplines) {
-          for (let discipline of disciplines) {
-            this.disciplineOptions.push(this.createDisciplineStandard(discipline));
-          }
-        }
-      }
-      this.populateResearchProjects(project);
-    }
+  private populateFilterOptions(): void {
+    this.libraryProjects
+      .concat(this.communityProjects)
+      .concat(this.sharedProjects)
+      .concat(this.personalProjects)
+      .forEach((project: LibraryProject) => this.populateFilterOptionsFromProject(project));
     this.removeDuplicatesAndSortAlphabetically();
   }
 
-  private populateResearchProjects(project: LibraryProject): void {
-    project.metadata.researchProjects?.forEach((researchProjectTypes: ResearchProjectTypes) => {
-      const researchProject: ResearchProject = {
-        id: researchProjectTypes,
-        name: researchProjectTypes,
-        children: []
-      };
-      if (!this.researchProjectOptions.map((option) => option.id).includes(researchProject.id)) {
-        this.researchProjectOptions.push(researchProject);
-      }
+  private populateFilterOptionsFromProject(project: LibraryProject): void {
+    project.metadata.disciplines?.forEach((discipline: any) =>
+      this.disciplineOptions.push(new Discipline(discipline.id, discipline.name))
+    );
+    project.metadata.features?.forEach((feature: any) =>
+      this.featureOptions.push(new Feature(feature.id, feature.name))
+    );
+    this.populateGradeLevels(project);
+    this.populateStandards(project);
+    this.populateLocations(project);
+  }
+
+  private populateGradeLevels(project: LibraryProject): void {
+    project.metadata.grades
+      ?.map((gradeLevel: string) => Number(gradeLevel))
+      .filter((gradeLevel: number) => Object.values(Grade).includes(gradeLevel))
+      .forEach((gradeLevel: number) => {
+        this.gradeLevelOptions.push(new GradeLevel(gradeLevel));
+      });
+  }
+
+  private populateStandards(project: LibraryProject): void {
+    const standards = project.metadata.standards;
+    [
+      ['ngss', $localize`NGSS`],
+      ['commonCore', $localize`Common Core`],
+      ['learningForJustice', $localize`Learning For Justice`]
+    ].forEach(([key, name]) => {
+      (standards?.[key] ?? []).forEach((standard: any) =>
+        this.standardOptions.push(
+          new Standard(standard.id, standard.name, name as StandardType, standard.url)
+        )
+      );
     });
   }
 
-  getAllProjects() {
-    return this.libraryProjects
-      .concat(this.communityProjects)
-      .concat(this.sharedProjects)
-      .concat(this.personalProjects);
+  private populateLocations(project: LibraryProject): void {
+    project.metadata.locations?.forEach((location: Location) =>
+      this.locationOptions.push(Object.assign(new Location(), location))
+    );
   }
 
-  createDCIStandard(standardIn: any) {
-    const dciStandard: Standard = new Standard();
-    dciStandard.id = standardIn.id;
-    dciStandard.name = `${standardIn.id} ${standardIn.name}`;
-    return dciStandard;
-  }
-
-  createPEStandard(standardIn: any) {
-    const peStandard: Standard = new Standard();
-    peStandard.id = standardIn.id;
-    peStandard.name = `${standardIn.id}: ${standardIn.name}`;
-    return peStandard;
-  }
-
-  createDisciplineStandard(standardIn: any) {
-    const standard: Standard = new Standard();
-    standard.id = standardIn.id;
-    standard.name = standardIn.name;
-    return standard;
-  }
-
-  removeDuplicatesAndSortAlphabetically() {
-    this.dciArrangementOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
-      this.dciArrangementOptions,
+  private removeDuplicatesAndSortAlphabetically(): void {
+    this.standardOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.standardOptions,
       'id'
     );
-    this.utilService.sortObjectArrayByProperty(this.dciArrangementOptions, 'id');
+    this.utilService.sortObjectArrayByProperty(this.standardOptions, 'id');
+    this.locationOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.locationOptions,
+      'id'
+    );
+    this.utilService.sortObjectArrayByProperty(this.locationOptions, 'id');
     this.disciplineOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
       this.disciplineOptions,
       'id'
     );
     this.utilService.sortObjectArrayByProperty(this.disciplineOptions, 'name');
-    this.peOptions = this.utilService.removeObjectArrayDuplicatesByProperty(this.peOptions, 'id');
-    this.utilService.sortObjectArrayByProperty(this.peOptions, 'id');
-  }
-
-  hasFilters(): boolean {
-    return (
-      this.dciArrangementValue.length > 0 ||
-      this.peValue.length > 0 ||
-      this.disciplineValue.length > 0
+    this.featureOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.featureOptions,
+      'id'
     );
+    this.utilService.sortObjectArrayByProperty(this.featureOptions, 'name');
+    this.gradeLevelOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.gradeLevelOptions,
+      'grade'
+    );
+    this.gradeLevelOptions.sort((a, b) => a.grade - b.grade);
   }
 
-  searchUpdated(value: string): void {
-    this.searchValue = value.toLocaleLowerCase();
+  protected searchUpdated(value: string): void {
+    this.filterValues.searchValue = value.toLocaleLowerCase();
     this.emitFilterValues();
   }
 
-  filterUpdated(value: string[] | ResearchProjectTypes[] = [], context: string = ''): void {
+  protected filterUpdated(value: any[], context: string = ''): void {
     switch (context) {
       case 'discipline':
-        this.disciplineValue = value;
+        this.filterValues.disciplineValue = value;
         break;
-      case 'dci':
-        this.dciArrangementValue = value;
+      case 'gradeLevel':
+        this.filterValues.gradeLevelValue = value;
         break;
-      case 'pe':
-        this.peValue = value;
+      case 'standard':
+        this.filterValues.standardValue = value;
         break;
-      case 'researchProject':
-        this.researchProjectValue = value as ResearchProjectTypes[];
+      case 'feature':
+        this.filterValues.featureValue = value;
+        break;
+      case 'unitType':
+        this.filterValues.unitTypeValue = value;
+        break;
+      case 'location':
+        this.filterValues.locationValue = value;
         break;
     }
     this.emitFilterValues();
   }
 
-  emitFilterValues() {
-    const filterOptions: ProjectFilterValues = {
-      searchValue: this.searchValue,
-      disciplineValue: this.disciplineValue,
-      dciArrangementValue: this.dciArrangementValue,
-      peValue: this.peValue,
-      researchProjectValue: this.researchProjectValue
-    };
-    this.libraryService.setFilterValues(filterOptions);
+  private emitFilterValues(): void {
+    this.filterValues.emitUpdated();
   }
 
-  clearFilterValues() {
-    this.dciArrangementValue = [];
-    this.disciplineValue = [];
-    this.peValue = [];
+  protected clearFilterValues(): void {
+    this.filterValues.clear();
     this.emitFilterValues();
+  }
+
+  protected showTypeInfo(): void {
+    const message = $localize`"Type" indicates the platform on which a unit runs. "WISE Platform" units are created
+      using the WISE authoring tool. Students use WISE accounts to complete lessons and teachers can review and grade
+      work on the WISE platform. "Other" units are created using different platforms. Resources for these units
+      are linked in the unit details.`;
+    this.dialog.open(DialogWithCloseComponent, {
+      data: {
+        content: message,
+        title: $localize`Unit Type`
+      },
+      panelClass: 'dialog-sm'
+    });
   }
 }

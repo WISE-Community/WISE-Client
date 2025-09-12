@@ -6,21 +6,15 @@ import { MatchService } from '../matchService';
 import { MatchFeedbackSectionComponent } from '../match-student/match-feedback-section/match-feedback-section.component';
 import { CommonModule } from '@angular/common';
 import { MatchChoiceItemComponent } from '../match-choice-item/match-choice-item.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatchChoiceItemComponent,
-        MatchFeedbackSectionComponent
-    ],
-    selector: 'match-show-work',
-    styleUrls: [
-        '../match-student/match-student-default/match-student-default.component.scss',
-        'match-show-work.component.scss'
-    ],
-    templateUrl: 'match-show-work.component.html'
+  imports: [CommonModule, MatchChoiceItemComponent, MatchFeedbackSectionComponent],
+  selector: 'match-show-work',
+  styleUrls: [
+    '../match-student/match-student-default/match-student-default.component.scss',
+    'match-show-work.component.scss'
+  ],
+  templateUrl: 'match-show-work.component.html'
 })
 export class MatchShowWorkComponent extends ComponentShowWorkDirective {
   protected hasCorrectAnswer: boolean;

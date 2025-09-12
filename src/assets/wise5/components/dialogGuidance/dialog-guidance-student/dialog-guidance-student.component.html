@@ -1,20 +1,24 @@
-<computer-avatar-selector
-  *ngIf="computerAvatarSelectorVisible"
-  [computerAvatarSettings]="componentContent.computerAvatarSettings"
-  (chooseAvatarEvent)="selectComputerAvatar($event)"
->
-</computer-avatar-selector>
-<mat-card appearance="outlined" *ngIf="!computerAvatarSelectorVisible" class="mat-elevation-z2">
-  <component-header [component]="component"></component-header>
-  <dialog-responses
-    [responses]="responses"
-    [isWaitingForComputerResponse]="isWaitingForComputerResponse"
-    [computerAvatar]="computerAvatar"
-  >
-  </dialog-responses>
-  <chat-input
-    *ngIf="studentCanRespond"
-    [submitDisabled]="isWaitingForComputerResponse"
-    (submitEvent)="submitStudentResponse($event)"
-  ></chat-input>
-</mat-card>
+<div class="mb-4">
+  @if (computerAvatarSelectorVisible) {
+    <computer-avatar-selector
+      [computerAvatarSettings]="componentContent.computerAvatarSettings"
+      (chooseAvatarEvent)="selectComputerAvatar($event)"
+    />
+  } @else {
+    <mat-card appearance="outlined" class="mat-elevation-z2">
+      <component-header [component]="component" />
+      <dialog-responses
+        [responses]="responses"
+        [isWaitingForComputerResponse]="isWaitingForComputerResponse"
+        [computerAvatar]="computerAvatar"
+      />
+      @if (studentCanRespond) {
+        <chat-input
+          (focusEvent)="startPinging()"
+          [submitDisabled]="isWaitingForComputerResponse"
+          (submitEvent)="submitStudentResponse($event)"
+        />
+      }
+    </mat-card>
+  }
+</div>

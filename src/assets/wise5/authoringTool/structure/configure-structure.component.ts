@@ -1,5 +1,3 @@
-'use strict';
-
 import { HttpClient } from '@angular/common/http';
 import { Directive } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';

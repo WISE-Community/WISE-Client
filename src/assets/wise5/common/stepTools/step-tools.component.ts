@@ -1,37 +1,37 @@
+import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
-import { Subscription } from 'rxjs';
-import { NodeService } from '../../services/nodeService';
-import { TeacherDataService } from '../../services/teacherDataService';
-import { TeacherProjectService } from '../../services/teacherProjectService';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
+import { NodeService } from '../../services/nodeService';
+import { Subscription } from 'rxjs';
+import { TeacherDataService } from '../../services/teacherDataService';
+import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatTooltipModule,
-        NodeIconComponent
-    ],
-    selector: 'step-tools',
-    styleUrl: 'step-tools.component.scss',
-    templateUrl: 'step-tools.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    NodeIconComponent
+  ],
+  selector: 'step-tools',
+  styleUrl: 'step-tools.component.scss',
+  templateUrl: 'step-tools.component.html'
 })
 export class StepToolsComponent {
   protected icons: any;
@@ -81,8 +81,8 @@ export class StepToolsComponent {
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
   }
 
-  private updateModel(): void {
-    this.nodeId = this.dataService.getCurrentNodeId();
+  protected updateModel(): void {
+    this.nodeId = this.getNodeId();
     if (this.nodeId == null) {
       this.prevId = null;
       this.nextId = null;
@@ -94,6 +94,10 @@ export class StepToolsComponent {
         });
       }
     }
+  }
+
+  protected getNodeId(): string {
+    return this.dataService.getCurrentNodeId();
   }
 
   protected getPrevNodeId(): string {
@@ -117,8 +121,8 @@ export class StepToolsComponent {
     this.nodeId = this.dataService.getCurrentNodeId();
   }
 
-  protected goToNextNode(): void {
-    this.nodeService.goToNextNode().then((nodeId: string) => {
+  protected goToNextNode(): Promise<void> {
+    return this.nodeService.goToNextNode().then((nodeId: string) => {
       this.nodeId = nodeId;
     });
   }

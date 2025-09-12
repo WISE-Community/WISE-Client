@@ -1,31 +1,25 @@
-import { Component, Input, OnInit, Directive, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Directive, ViewEncapsulation } from '@angular/core';
 
 @Directive({
-    selector: 'app-timeline-item-label',
-    host: { class: 'timeline-item__label' },
-    standalone: false
+  selector: 'app-timeline-item-label',
+  host: { class: 'timeline-item__label' }
 })
 export class TimelineItemLabel {}
 
 @Directive({
-    selector: 'app-timeline-item-content',
-    host: { class: 'timeline-item__content' },
-    standalone: false
+  selector: 'app-timeline-item-content',
+  host: { class: 'timeline-item__content' }
 })
 export class TimelineItemContent {}
 
 @Component({
-    selector: 'app-timeline-item',
-    templateUrl: './timeline-item.component.html',
-    styleUrls: ['./timeline-item.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  selector: 'app-timeline-item',
+  styleUrl: './timeline-item.component.scss',
+  template: `<div class="timeline-item" [class.active]="active">
+    <ng-content></ng-content>
+  </div> `
 })
-export class TimelineItemComponent implements OnInit {
-  @Input()
-  active: boolean = false;
-
-  constructor() {}
-
-  ngOnInit() {}
+export class TimelineItemComponent {
+  @Input() active: boolean;
 }

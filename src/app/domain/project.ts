@@ -18,7 +18,7 @@ export class Project {
   run: Run;
   sharedOwners: User[] = [];
   selected: boolean;
-  tags: Tag[];
+  tags: Tag[] = [];
   thumbStyle: any;
   uri: String;
   wiseVersion: number;

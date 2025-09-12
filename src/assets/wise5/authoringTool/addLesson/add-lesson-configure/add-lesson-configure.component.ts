@@ -9,28 +9,24 @@ import {
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { temporarilyHighlightElement } from '../../../common/dom/dom';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatDividerModule,
-        MatInputModule,
-        MatProgressBarModule,
-        ReactiveFormsModule,
-        RouterModule
-    ],
-    styleUrls: ['./add-lesson-configure.component.scss', '../../add-content.scss'],
-    templateUrl: './add-lesson-configure.component.html'
+  imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatInputModule,
+    MatProgressBarModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  styleUrls: ['./add-lesson-configure.component.scss', '../../add-content.scss'],
+  templateUrl: './add-lesson-configure.component.html'
 })
 export class AddLessonConfigureComponent {
   protected addLessonFormGroup: FormGroup = this.fb.group({

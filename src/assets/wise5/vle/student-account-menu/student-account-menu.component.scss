@@ -1,16 +1,14 @@
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions';
+@use 'style/abstracts/functions';
 
 .student-account-menu {
   &.mat-mdc-menu-panel {
     max-width: 480px;
 
-    @media (min-width: breakpoint('sm.min')) {
+    @media (min-width: functions.breakpoint('sm.min')) {
       min-width: 320px;
     }
 
-    @media (min-width: breakpoint('md.min')) {
+    @media (min-width: functions.breakpoint('md.min')) {
       min-width: 380px;
     }
 

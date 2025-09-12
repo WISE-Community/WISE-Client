@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { WorkgroupItemComponent } from './workgroup-item.component';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { ComponentTypeServiceModule } from '../../../../services/componentTypeService.module';
+import { MockProviders } from 'ng-mocks';
+import { ComponentTypeService } from '../../../../services/componentTypeService';
+import { By } from '@angular/platform-browser';
 
 let component: WorkgroupItemComponent;
 let fixture: ComponentFixture<WorkgroupItemComponent>;
@@ -11,8 +12,8 @@ let teacherProjectService: TeacherProjectService;
 describe('WorkgroupItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkgroupItemComponent, ClassroomMonitorTestingModule, ComponentTypeServiceModule],
-      providers: [TeacherProjectService]
+      imports: [WorkgroupItemComponent],
+      providers: [MockProviders(ComponentTypeService, TeacherProjectService)]
     }).compileComponents();
   });
 
@@ -29,7 +30,8 @@ describe('WorkgroupItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('toggle expand button should be enabled', () => {
+    const button = fixture.debugElement.query(By.css('button'));
+    expect(button.nativeElement.disabled).toBe(false);
   });
 });

@@ -1,31 +1,50 @@
-'use strict';
-
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatTooltip } from '@angular/material/tooltip';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConceptMapService } from '../conceptMapService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'concept-map-authoring',
-    templateUrl: 'concept-map-authoring.component.html',
-    styleUrls: ['concept-map-authoring.component.scss'],
-    standalone: false
+  selector: 'concept-map-authoring',
+  templateUrl: 'concept-map-authoring.component.html',
+  styleUrl: 'concept-map-authoring.component.scss',
+  imports: [
+    EditComponentPrompt,
+    TranslatableInputComponent,
+    TranslatableAssetChooserComponent,
+    MatCheckbox,
+    FormsModule,
+    MatFormFieldModule,
+    MatInput,
+    MatButton,
+    MatTooltip,
+    MatIcon
+  ]
 })
 export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   availableNodes: any[];
   availableLinks: any[];
 
   constructor(
-    private ConceptMapService: ConceptMapService,
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    private conceptMapService: ConceptMapService,
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit() {
@@ -95,11 +114,11 @@ export class ConceptMapAuthoring extends AbstractComponentAuthoring {
   }
 
   getNewConceptMapNodeId(): string {
-    return this.ConceptMapService.getNextAvailableId(this.componentContent.nodes, 'node');
+    return this.conceptMapService.getNextAvailableId(this.componentContent.nodes, 'node');
   }
 
   getNewConceptMapLinkId(): string {
-    return this.ConceptMapService.getNextAvailableId(this.componentContent.links, 'link');
+    return this.conceptMapService.getNextAvailableId(this.componentContent.links, 'link');
   }
 
   saveStarterState(starterState: any): void {

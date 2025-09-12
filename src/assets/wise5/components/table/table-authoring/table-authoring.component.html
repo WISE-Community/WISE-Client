@@ -1,8 +1,8 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
-<div fxLayout="row wrap">
+/>
+<div class="flex flex-wrap">
   <form [formGroup]="dimensionsForm">
     <mat-form-field class="size-input">
       <mat-label i18n>Columns</mat-label>
@@ -13,9 +13,9 @@
         formControlName="numColumnsFormControl"
         (keypress)="isNumberChar($event)"
       />
-      <mat-error *ngIf="dimensionsForm.controls['numColumnsFormControl'].hasError('invalid')" i18n
-        >Invalid Value</mat-error
-      >
+      @if (dimensionsForm.controls['numColumnsFormControl'].hasError('invalid')) {
+        <mat-error i18n>Invalid Value</mat-error>
+      }
     </mat-form-field>
     <mat-form-field class="size-input">
       <mat-label i18n>Rows</mat-label>
@@ -26,9 +26,9 @@
         formControlName="numRowsFormControl"
         (keypress)="isNumberChar($event)"
       />
-      <mat-error *ngIf="dimensionsForm.controls['numRowsFormControl'].hasError('invalid')" i18n
-        >Invalid Value</mat-error
-      >
+      @if (dimensionsForm.controls['numRowsFormControl'].hasError('invalid')) {
+        <mat-error i18n>Invalid Value</mat-error>
+      }
     </mat-form-field>
   </form>
   <mat-form-field class="size-input">
@@ -46,35 +46,86 @@
   <table class="table">
     <tr>
       <td></td>
-      <td
-        *ngFor="
-          let x of [].constructor(getNumColumnsInTableData());
-          index as columnIndex;
-          last as isLast
-        "
-        class="outer-cell-container"
-      >
-        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      @for (
+        x of [].constructor(getNumColumnsInTableData());
+        track x;
+        let columnIndex = $index;
+        let isLast = $last
+      ) {
+        <td class="outer-cell-container">
+          <div class="flex flex-wrap justify-between items-center">
+            <button
+              mat-raised-button
+              color="primary"
+              class="column-buttons"
+              (click)="insertColumn(columnIndex)"
+              matTooltip="Insert Column Before"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Insert Column Before"
+              i18n-aria-label
+            >
+              <mat-icon class="rotate90">loupe</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              class="column-buttons"
+              (click)="deleteColumn(columnIndex)"
+              [disabled]="componentContent.numColumns === 1"
+              matTooltip="Delete Column"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Delete"
+              i18n-aria-label
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            @if (isLast) {
+              <button
+                mat-raised-button
+                color="primary"
+                class="column-buttons"
+                (click)="insertColumn(columnIndex + 1)"
+                matTooltip="Insert Column After"
+                matTooltipPosition="above"
+                i18n-matTooltip
+                aria-label="Insert Column After"
+                i18n-aria-label
+              >
+                <mat-icon>loupe</mat-icon>
+              </button>
+            }
+            @if (!isLast) {
+              <div class="spacer"></div>
+            }
+          </div>
+        </td>
+      }
+    </tr>
+    @for (row of componentContent.tableData; track row; let rowIndex = $index; let isLast = $last) {
+      <tr>
+        <td class="outer-cell-container flex flex-col justify-center items-center">
           <button
             mat-raised-button
             color="primary"
-            class="column-buttons"
-            (click)="insertColumn(columnIndex)"
-            matTooltip="Insert Column Before"
+            class="row-buttons"
+            (click)="insertRow(rowIndex)"
+            matTooltip="Insert Row Before"
             matTooltipPosition="above"
             i18n-matTooltip
-            aria-label="Insert Column Before"
+            aria-label="Insert Row Before"
             i18n-aria-label
           >
-            <mat-icon class="rotate90">loupe</mat-icon>
+            <mat-icon class="rotate270">loupe</mat-icon>
           </button>
           <button
             mat-raised-button
             color="primary"
-            class="column-buttons"
-            (click)="deleteColumn(columnIndex)"
-            [disabled]="componentContent.numColumns === 1"
-            matTooltip="Delete Column"
+            class="row-buttons"
+            (click)="deleteRow(rowIndex)"
+            [disabled]="componentContent.numRows === 1"
+            matTooltip="Delete Row"
             matTooltipPosition="above"
             i18n-matTooltip
             aria-label="Delete"
@@ -82,131 +133,89 @@
           >
             <mat-icon>delete</mat-icon>
           </button>
-          <button
-            mat-raised-button
-            color="primary"
-            class="column-buttons"
-            *ngIf="isLast"
-            (click)="insertColumn(columnIndex + 1)"
-            matTooltip="Insert Column After"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            aria-label="Insert Column After"
-            i18n-aria-label
-          >
-            <mat-icon>loupe</mat-icon>
-          </button>
-          <div *ngIf="!isLast" class="spacer"></div>
-        </div>
-      </td>
-    </tr>
-    <tr *ngFor="let row of componentContent.tableData; index as rowIndex; last as isLast">
-      <td class="outer-cell-container" fxLayout="column" fxLayoutAlign="center center">
-        <button
-          mat-raised-button
-          color="primary"
-          class="row-buttons"
-          (click)="insertRow(rowIndex)"
-          matTooltip="Insert Row Before"
-          matTooltipPosition="above"
-          i18n-matTooltip
-          aria-label="Insert Row Before"
-          i18n-aria-label
-        >
-          <mat-icon class="rotate270">loupe</mat-icon>
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          class="row-buttons"
-          (click)="deleteRow(rowIndex)"
-          [disabled]="componentContent.numRows === 1"
-          matTooltip="Delete Row"
-          matTooltipPosition="above"
-          i18n-matTooltip
-          aria-label="Delete"
-          i18n-aria-label
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          class="row-buttons"
-          *ngIf="isLast"
-          (click)="insertRow(rowIndex + 1)"
-          matTooltip="Insert Row After"
-          matTooltipPosition="above"
-          i18n-matTooltip
-          aria-label="Insert Row After"
-          i18n-aria-label
-        >
-          <mat-icon>loupe</mat-icon>
-        </button>
-      </td>
-      <td *ngFor="let cell of row" class="inner-cell-container">
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <translatable-input
-            [content]="cell"
-            key="text"
-            label="Text"
-            i18n-label
-            (defaultLanguageTextChanged)="inputChange.next($event)"
-            class="cell-text"
-          />
-          <mat-checkbox
-            color="primary"
-            [(ngModel)]="cell.editable"
-            (ngModelChange)="componentChanged()"
-            i18n
-          >
-            Editable
-          </mat-checkbox>
-        </div>
-      </td>
-    </tr>
+          @if (isLast) {
+            <button
+              mat-raised-button
+              color="primary"
+              class="row-buttons"
+              (click)="insertRow(rowIndex + 1)"
+              matTooltip="Insert Row After"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              aria-label="Insert Row After"
+              i18n-aria-label
+            >
+              <mat-icon>loupe</mat-icon>
+            </button>
+          }
+        </td>
+        @for (cell of row; track cell) {
+          <td class="inner-cell-container">
+            <div class="flex flex-col justify-center items-center">
+              <translatable-input
+                [content]="cell"
+                key="text"
+                label="Text"
+                i18n-label
+                (defaultLanguageTextChanged)="inputChange.next($event)"
+                class="cell-text"
+              />
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="cell.editable"
+                (ngModelChange)="componentChanged()"
+                i18n
+              >
+                Editable
+              </mat-checkbox>
+            </div>
+          </td>
+        }
+      </tr>
+    }
     <tr>
       <td class="blank-row-cell"></td>
-      <td *ngFor="let x of [].constructor(getNumColumnsInTableData())" class="blank-row-cell"></td>
+      @for (x of [].constructor(getNumColumnsInTableData()); track x) {
+        <td class="blank-row-cell"></td>
+      }
     </tr>
     <tr>
       <td class="outer-cell-container">
-        <div fxLayoutAlign="center center">Optional</div>
+        <div class="justify-center items-center">Optional</div>
       </td>
-      <td
-        *ngFor="let x of [].constructor(getNumColumnsInTableData()); index as cellIndex"
-        class="inner-cell-container"
-      >
-        <div>
-          <mat-form-field>
-            <mat-label i18n>Column Cell Size</mat-label>
-            <input
-              matInput
-              type="number"
-              min="1"
-              [(ngModel)]="columnCellSizes[cellIndex]"
-              (ngModelChange)="columnSizeChanged(cellIndex)"
-            />
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-checkbox
-            color="primary"
-            [(ngModel)]="frozenColumns[cellIndex]"
-            (ngModelChange)="frozenColumnsChanged(cellIndex)"
-            [disabled]="frozenColumnsLimitReached && !frozenColumns[cellIndex]"
-            matTooltip="You can freeze the first column and any next to it to the beginning of the table. Other columns you freeze will be pinned to the end."
-            matTooltipPosition="above"
-            i18n-matTooltip
-          >
-            <span i18n>Freeze</span>
-          </mat-checkbox>
-        </div>
-      </td>
+      @for (x of [].constructor(getNumColumnsInTableData()); track x; let cellIndex = $index) {
+        <td class="inner-cell-container">
+          <div>
+            <mat-form-field>
+              <mat-label i18n>Column Cell Size</mat-label>
+              <input
+                matInput
+                type="number"
+                min="1"
+                [(ngModel)]="columnCellSizes[cellIndex]"
+                (ngModelChange)="columnSizeChanged(cellIndex)"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="frozenColumns[cellIndex]"
+              (ngModelChange)="frozenColumnsChanged(cellIndex)"
+              [disabled]="frozenColumnsLimitReached && !frozenColumns[cellIndex]"
+              matTooltip="You can freeze the first column and any next to it to the beginning of the table. Other columns you freeze will be pinned to the end."
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <span i18n>Freeze</span>
+            </mat-checkbox>
+          </div>
+        </td>
+      }
     </tr>
   </table>
 </div>
-<div fxLayout="row">
+<div class="flex">
   <button
     mat-raised-button
     color="primary"

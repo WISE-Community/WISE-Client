@@ -1,34 +1,36 @@
-'use strict';
-
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AudioOscillatorService } from '../audioOscillatorService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'audio-oscillator-authoring',
-    templateUrl: 'audio-oscillator-authoring.component.html',
-    styleUrls: ['audio-oscillator-authoring.component.scss'],
-    standalone: false
+  templateUrl: 'audio-oscillator-authoring.component.html',
+  styleUrl: 'audio-oscillator-authoring.component.scss',
+  imports: [EditComponentPrompt, MatCheckbox, FormsModule, MatFormFieldModule, MatInput]
 })
 export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
-  maxAmplitude: number = this.AudioOscillatorService.maxAmplitude;
+  maxAmplitude: number = this.audioOscillatorService.maxAmplitude;
   sawtoothChecked: boolean;
   sineChecked: boolean;
   squareChecked: boolean;
   triangleChecked: boolean;
 
   constructor(
-    protected AudioOscillatorService: AudioOscillatorService,
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected audioOscillatorService: AudioOscillatorService,
+    protected configService: ConfigService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit(): void {
@@ -45,7 +47,8 @@ export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
   }
 
   initializeStartingAmplitude(): void {
-    this.componentContent.startingAmplitude ??= this.AudioOscillatorService.defaultStartingAmplitude;
+    this.componentContent.startingAmplitude ??=
+      this.audioOscillatorService.defaultStartingAmplitude;
   }
 
   showFrequencyInputChanged(): void {

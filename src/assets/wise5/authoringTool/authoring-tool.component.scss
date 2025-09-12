@@ -1,6 +1,4 @@
-@import
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 .authoring {
   height: 100%;
@@ -28,7 +26,7 @@ at-top-bar {
 
 #content {
   position: absolute;
-  top: $toolbar-height;
+  top: variables.$toolbar-height;
   bottom: 0;
   width: 100%;
   overflow: scroll;

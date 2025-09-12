@@ -11,20 +11,19 @@ import {
   createComponent
 } from '@angular/core';
 import { ClickToSnipImageService } from '../../services/clickToSnipImageService';
-import { ConfigService } from '../../services/configService';
-import { NotebookService } from '../../services/notebookService';
-import { ProjectService } from '../../services/projectService';
-import { StudentDataService } from '../../services/studentDataService';
 import { Component as WISEComponent } from '../../common/Component';
 import { ComponentFactory } from '../../common/ComponentFactory';
 import { components } from '../Components';
+import { ConfigService } from '../../services/configService';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
-import { CommonModule } from '@angular/common';
+import { NotebookService } from '../../services/notebookService';
+import { ProjectService } from '../../services/projectService';
+import { StudentDataService } from '../../services/studentDataService';
 
 @Component({
-    imports: [CommonModule, HelpIconComponent],
-    selector: 'component',
-    templateUrl: 'component.component.html'
+  imports: [HelpIconComponent],
+  selector: 'component',
+  templateUrl: 'component.component.html'
 })
 export class ComponentComponent {
   protected component: WISEComponent;

@@ -5,24 +5,28 @@
     <p class="center md-title">
       <a (click)="visitNode()">{{ nodePositionAndTitle }}</a>
     </p>
-    <div *ngIf="hasDismissCode">
-      <hr />
-      <div [formGroup]="formGroup">
-        <p class="accent-1 center" i18n>Teacher, enter code to dismiss this alert:</p>
-        <mat-form-field class="notification-dismiss__input">
-          <mat-label i18n>Dismiss Code</mat-label>
-          <input
-            matInput
-            [(ngModel)]="dismissCodeInput"
-            formControlName="dismissCode"
-            type="password"
-            placeholder="Dismiss code"
-            i18n-placeholder
-          />
-          <mat-error *ngIf="formGroup.controls['dismissCode'].errors">{{ errorMessage }}</mat-error>
-        </mat-form-field>
+    @if (hasDismissCode) {
+      <div>
+        <hr />
+        <div [formGroup]="formGroup">
+          <p class="accent-1 center" i18n>Teacher, enter code to dismiss this alert:</p>
+          <mat-form-field class="notification-dismiss__input">
+            <mat-label i18n>Dismiss Code</mat-label>
+            <input
+              matInput
+              [(ngModel)]="dismissCodeInput"
+              formControlName="dismissCode"
+              type="password"
+              placeholder="Dismiss code"
+              i18n-placeholder
+            />
+            @if (formGroup.controls['dismissCode'].errors) {
+              <mat-error>{{ errorMessage }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
       </div>
-    </div>
+    }
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button (click)="closeDialog()" aria-label="Cancel" i18n-aria-label i18n>

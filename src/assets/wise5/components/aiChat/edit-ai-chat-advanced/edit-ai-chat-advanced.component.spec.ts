@@ -1,13 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditAiChatAdvancedComponent } from './edit-ai-chat-advanced.component';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { EditAiChatAdvancedComponent } from './edit-ai-chat-advanced.component';
 
 describe('EditAiChatAdvancedComponent', () => {
   let component: EditAiChatAdvancedComponent;
@@ -15,13 +11,13 @@ describe('EditAiChatAdvancedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [EditAiChatAdvancedComponent],
-    imports: [BrowserAnimationsModule,
-        ComponentAuthoringModule,
-        MatDialogModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherNodeService, TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [EditAiChatAdvancedComponent, StudentTeacherCommonServicesModule],
+      providers: [
+        TeacherNodeService,
+        TeacherProjectService,
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    });
     fixture = TestBed.createComponent(EditAiChatAdvancedComponent);
     component = fixture.componentInstance;
     component.nodeId = 'node1';

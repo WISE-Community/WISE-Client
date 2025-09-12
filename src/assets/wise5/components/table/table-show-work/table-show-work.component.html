@@ -9,113 +9,96 @@
     [tabOptions]="tabulatorData.options"
     [tabSorters]="tabulatorSorters"
     (ready)="tabulatorRendered()"
-  ></tabulator-table>
+  />
 </div>
-<ng-container *ngIf="componentContent.isDataExplorerEnabled">
+@if (componentContent.isDataExplorerEnabled) {
   <br />
-  <mat-form-field *ngIf="componentContent.dataExplorerGraphTypes.length > 1" appearance="fill">
-    <mat-label i18n>Graph Type</mat-label>
-    <mat-select [ngModel]="dataExplorerGraphType" [disabled]="true">
-      <mat-option
-        *ngFor="let graphType of componentContent.dataExplorerGraphTypes"
-        [value]="graphType.value"
-      >
-        {{ graphType.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+  @if (componentContent.dataExplorerGraphTypes.length > 1) {
+    <mat-form-field appearance="fill">
+      <mat-label i18n>Graph Type</mat-label>
+      <mat-select [value]="dataExplorerGraphType" [disabled]="true">
+        @for (graphType of componentContent.dataExplorerGraphTypes; track graphType) {
+          <mat-option [value]="graphType.value">
+            {{ graphType.name }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+  <div class="flex flex-wrap justify-start items-center gap-4">
     <mat-form-field class="data-explorer-select" appearance="fill">
       <mat-label i18n>X Data</mat-label>
-      <mat-select [ngModel]="xColumnIndex != null ? xColumnIndex : -1" [disabled]="true">
+      <mat-select [value]="xColumnIndex != null ? xColumnIndex : -1" [disabled]="true">
         <mat-option [value]="-1">{{ noneText }}</mat-option>
-        <mat-option *ngFor="let columnName of columnNames; index as i" [value]="i">
-          {{ columnName }}
-        </mat-option>
+        @for (columnName of columnNames; track columnName; let i = $index) {
+          <mat-option [value]="i">
+            {{ columnName }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
-    <mat-form-field
-      *ngFor="let singleDataExplorerSeries of dataExplorerSeries; index as i"
-      class="data-explorer-select"
-      appearance="fill"
-    >
-      <mat-label i18n>Y Data {{ dataExplorerSeries.length > 1 ? i + 1 : '' }}</mat-label>
-      <mat-select
-        [ngModel]="singleDataExplorerSeries.yColumn != null ? singleDataExplorerSeries.yColumn : -1"
-        [disabled]="true"
-      >
-        <mat-option [value]="-1">{{ noneText }}</mat-option>
-        <mat-option *ngFor="let columnName of columnNames; index as i" [value]="i">
-          {{ columnName }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div
-    *ngIf="componentContent.isDataExplorerAxisLabelsEditable"
-    fxLayout="row wrap"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-  >
-    <mat-form-field class="data-explorer-select" appearance="fill">
-      <mat-label i18n>X Axis Label</mat-label>
-      <input
-        matInput
-        *ngIf="dataExplorerXAxisLabel == null || dataExplorerXAxisLabel == ''"
-        [ngModel]="noneText"
-        [disabled]="true"
-      />
-      <input
-        matInput
-        *ngIf="dataExplorerXAxisLabel != null && dataExplorerXAxisLabel != ''"
-        [ngModel]="dataExplorerXAxisLabel"
-        [disabled]="true"
-      />
-    </mat-form-field>
-    <mat-form-field
-      *ngIf="componentContent.numDataExplorerYAxis === 1"
-      class="data-explorer-select"
-      appearance="fill"
-    >
-      <mat-label i18n>Y Axis Label</mat-label>
-      <input
-        matInput
-        *ngIf="dataExplorerYAxisLabel == null || dataExplorerYAxisLabel == ''"
-        [ngModel]="noneText"
-        [disabled]="true"
-      />
-      <input
-        matInput
-        *ngIf="dataExplorerYAxisLabel != null && dataExplorerYAxisLabel != ''"
-        [ngModel]="dataExplorerYAxisLabel"
-        [disabled]="true"
-      />
-    </mat-form-field>
-    <div
-      *ngIf="componentContent.numDataExplorerYAxis > 1"
-      fxLayout="row wrap"
-      fxLayoutAlign="start center"
-      fxLayoutGap="16px"
-    >
-      <mat-form-field
-        *ngFor="let yAxisLabel of [].constructor(componentContent.numDataExplorerYAxis); index as i"
-        class="data-explorer-select"
-        appearance="fill"
-      >
-        <mat-label i18n>Y Axis {{ i + 1 }} Label</mat-label>
-        <input
-          matInput
-          *ngIf="dataExplorerYAxisLabels[i] == null || dataExplorerYAxisLabels[i] == ''"
-          [ngModel]="noneText"
+    @for (
+      singleDataExplorerSeries of dataExplorerSeries;
+      track singleDataExplorerSeries;
+      let i = $index
+    ) {
+      <mat-form-field class="data-explorer-select" appearance="fill">
+        <mat-label i18n>Y Data {{ dataExplorerSeries.length > 1 ? i + 1 : '' }}</mat-label>
+        <mat-select
+          [value]="singleDataExplorerSeries.yColumn != null ? singleDataExplorerSeries.yColumn : -1"
           [disabled]="true"
-        />
-        <input
-          matInput
-          *ngIf="dataExplorerYAxisLabels[i] != null && dataExplorerYAxisLabels[i] != ''"
-          [ngModel]="dataExplorerYAxisLabels[i]"
-          [disabled]="true"
-        />
+        >
+          <mat-option [value]="-1">{{ noneText }}</mat-option>
+          @for (columnName of columnNames; track columnName; let i = $index) {
+            <mat-option [value]="i">
+              {{ columnName }}
+            </mat-option>
+          }
+        </mat-select>
       </mat-form-field>
-    </div>
+    }
   </div>
-</ng-container>
+  @if (componentContent.isDataExplorerAxisLabelsEditable) {
+    <div class="flex flex-wrap justify-start items-center gap-4">
+      <mat-form-field class="data-explorer-select" appearance="fill">
+        <mat-label i18n>X Axis Label</mat-label>
+        @if (dataExplorerXAxisLabel == null || dataExplorerXAxisLabel == '') {
+          <input matInput [ngModel]="noneText" [disabled]="true" />
+        }
+        @if (dataExplorerXAxisLabel != null && dataExplorerXAxisLabel != '') {
+          <input matInput [ngModel]="dataExplorerXAxisLabel" [disabled]="true" />
+        }
+      </mat-form-field>
+      @if (componentContent.numDataExplorerYAxis === 1) {
+        <mat-form-field class="data-explorer-select" appearance="fill">
+          <mat-label i18n>Y Axis Label</mat-label>
+          @if (dataExplorerYAxisLabel == null || dataExplorerYAxisLabel == '') {
+            <input matInput [ngModel]="noneText" [disabled]="true" />
+          }
+          @if (dataExplorerYAxisLabel != null && dataExplorerYAxisLabel != '') {
+            <input matInput [ngModel]="dataExplorerYAxisLabel" [disabled]="true" />
+          }
+        </mat-form-field>
+      }
+      @if (componentContent.numDataExplorerYAxis > 1) {
+        <div class="flex flex-wrap justify-start items-center gap-4">
+          @for (
+            yAxisLabel of [].constructor(componentContent.numDataExplorerYAxis);
+            track yAxisLabel;
+            let i = $index
+          ) {
+            <mat-form-field class="data-explorer-select" appearance="fill">
+              <mat-label i18n>Y Axis {{ i + 1 }} Label</mat-label>
+              @if (dataExplorerYAxisLabels[i] == null || dataExplorerYAxisLabels[i] == '') {
+                <input matInput [ngModel]="noneText" [disabled]="true" />
+              }
+              @if (dataExplorerYAxisLabels[i] != null && dataExplorerYAxisLabels[i] != '') {
+                <input matInput [ngModel]="dataExplorerYAxisLabels[i]" [disabled]="true" />
+              }
+            </mat-form-field>
+          }
+        </div>
+      }
+    </div>
+  }
+}

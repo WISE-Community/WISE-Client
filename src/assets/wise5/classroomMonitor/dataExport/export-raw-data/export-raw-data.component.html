@@ -20,11 +20,13 @@
         Include Student Work
       </mat-checkbox>
     </div>
-    <div *ngIf="canViewStudentNames">
-      <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
-        Include Student Names
-      </mat-checkbox>
-    </div>
+    @if (canViewStudentNames) {
+      <div>
+        <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
+          Include Student Names
+        </mat-checkbox>
+      </div>
+    }
     <div>
       <mat-checkbox color="primary" [(ngModel)]="includeAnnotations" i18n>
         Include Annotations

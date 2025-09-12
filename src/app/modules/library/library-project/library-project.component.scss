@@ -1,7 +1,5 @@
 @use '@angular/material' as mat;
-@import
-  'style/abstracts/functions',
-  'style/abstracts/variables';
+@use 'style/abstracts/variables';
 
 // Create a config with the default typography levels.
 $config: mat.m2-define-typography-config();
@@ -20,7 +18,7 @@ $config: mat.m2-define-typography-config();
   padding-top: 75%;
   background-size: cover;
   background-position: center;
-  border-radius: $button-border-radius;
+  border-radius: variables.$button-border-radius;
 
   &:after {
     content: '';
@@ -30,7 +28,7 @@ $config: mat.m2-define-typography-config();
     left: 0;
     right: 0;
     background-color: rgba(0,0,0,0.15);
-    border-radius: $button-border-radius;
+    border-radius: variables.$button-border-radius;
     transition: background-color 280ms cubic-bezier(.4,0,.2,1);
   }
 }
@@ -86,7 +84,7 @@ $config: mat.m2-define-typography-config();
   position: absolute;
   top: 0;
   z-index: 100;
-  border-end-end-radius: $button-border-radius;
+  border-end-end-radius: variables.$button-border-radius;
 }
 
 .tags {

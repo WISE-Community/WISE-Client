@@ -12,9 +12,7 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
 import { CreateComponentService } from '../../../services/createComponentService';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { ComponentTypeButtonComponent } from '../../components/component-type-button/component-type-button.component';
 import { MatDividerModule } from '@angular/material/divider';
@@ -25,23 +23,21 @@ import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirs
 import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
 
 @Component({
-    imports: [
-        CommonModule,
-        ComponentTypeButtonComponent,
-        DragDropModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatProgressBarModule,
-        ReactiveFormsModule,
-        RouterModule
-    ],
-    styleUrls: ['add-your-own-node.component.scss', '../../add-content.scss'],
-    templateUrl: 'add-your-own-node.component.html'
+  imports: [
+    ComponentTypeButtonComponent,
+    DragDropModule,
+    FormsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  styleUrls: ['add-your-own-node.component.scss', '../../add-content.scss'],
+  templateUrl: 'add-your-own-node.component.html'
 })
 export class AddYourOwnNodeComponent {
   protected addNodeFormGroup: FormGroup = this.fb.group({

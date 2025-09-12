@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentTypeButtonComponent } from './component-type-button.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
-import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ComponentTypeButtonComponent } from './component-type-button.component';
 
 describe('ComponentTypeButtonComponent', () => {
   let component: ComponentTypeButtonComponent;
@@ -12,13 +9,8 @@ describe('ComponentTypeButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponentTypeButtonComponent, StudentTeacherCommonServicesModule],
-      providers: [
-        ComponentInfoService,
-        ComponentServiceLookupService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
+      imports: [ComponentTypeButtonComponent, MatDialogModule],
+      providers: [ComponentInfoService]
     }).compileComponents();
     fixture = TestBed.createComponent(ComponentTypeButtonComponent);
     component = fixture.componentInstance;

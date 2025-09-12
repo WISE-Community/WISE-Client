@@ -1,18 +1,58 @@
 import { Component, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatDialogModule,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialog
+} from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatOptionModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { RouterModule } from '@angular/router';
 import { TeacherService } from '../teacher.service';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ShareItemDialogComponent } from '../../modules/library/share-item-dialog/share-item-dialog.component';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
 import { TeacherRun } from '../teacher-run';
-
+import { CopyProjectDialogComponent } from '../../modules/library/copy-project-dialog/copy-project-dialog.component';
 @Component({
-    selector: 'app-share-run-dialog',
-    templateUrl: './share-run-dialog.component.html',
-    styleUrls: ['./share-run-dialog.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatDividerModule,
+    RouterModule
+  ],
+  styles: [
+    `
+      table,
+      .mat-mdc-form-field {
+        width: 100%;
+      }
+    `
+  ],
+  templateUrl: './share-run-dialog.component.html'
 })
 export class ShareRunDialogComponent extends ShareItemDialogComponent {
   run: TeacherRun;
@@ -192,7 +232,10 @@ export class ShareRunDialogComponent extends ShareItemDialogComponent {
     this.teacherSearchControl.setValue('');
   }
 
-  copyProject() {
-    this.teacherService.copyProject(this.project, this.dialog);
+  protected copyProject(): void {
+    this.dialog.open(CopyProjectDialogComponent, {
+      data: this.project,
+      panelClass: 'dialog-sm'
+    });
   }
 }

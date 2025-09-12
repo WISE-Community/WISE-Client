@@ -9,61 +9,57 @@
       Enable Question Bank
     </mat-checkbox>
   </div>
-  <div *ngIf="componentContent.questionBank?.enabled">
-    <div class="custom-label">
-      <translatable-input
-        [content]="componentContent.questionBank"
-        key="label"
-        label="Custom Label"
-        i18n-label
-        (defaultLanguageTextChanged)="inputChanged.next($event)"
-      />
-    </div>
-    <div *ngIf="componentContent.questionBank.version === 2">
-      <mat-checkbox
-        [(ngModel)]="componentContent.questionBank.clickToUseEnabled"
-        (ngModelChange)="saveChanges()"
-        color="primary"
-        i18n
-      >
-        Student can select questions to use in Peer Chat
-      </mat-checkbox>
-    </div>
-    <div class="max-questions">
-      <mat-form-field appearance="fill">
-        <mat-label i18n>Max Number of Questions</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="componentContent.questionBank.maxQuestionsToShow"
-          (ngModelChange)="inputChanged.next($event)"
+  @if (componentContent.questionBank?.enabled) {
+    <div>
+      <div class="custom-label">
+        <translatable-input
+          [content]="componentContent.questionBank"
+          key="label"
+          label="Custom Label"
+          i18n-label
+          (defaultLanguageTextChanged)="inputChanged.next($event)"
         />
-      </mat-form-field>
+      </div>
+      @if (componentContent.questionBank.version === 2) {
+        <div>
+          <mat-checkbox
+            [(ngModel)]="componentContent.questionBank.clickToUseEnabled"
+            (ngModelChange)="saveChanges()"
+            color="primary"
+            i18n
+          >
+            Student can select questions to use in Peer Chat
+          </mat-checkbox>
+        </div>
+      }
+      <div class="max-questions">
+        <mat-form-field appearance="fill">
+          <mat-label i18n>Max Number of Questions</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="componentContent.questionBank.maxQuestionsToShow"
+            (ngModelChange)="inputChanged.next($event)"
+          />
+        </mat-form-field>
+      </div>
+      <div class="reference-component flex flex-row flex-wrap justify-start items-center gap-5">
+        <mat-label class="bold" i18n>Reference Component:</mat-label>
+        <select-step-and-component
+          [referenceComponent]="componentContent.questionBank.referenceComponent"
+          [thisComponentId]="componentId"
+          [allowedComponentTypes]="allowedReferenceComponentTypes"
+          (stepChange)="saveChanges()"
+          (componentChange)="saveChanges()"
+        />
+        <edit-component-peer-grouping-tag [componentContent]="componentContent.questionBank" />
+      </div>
+      <div class="feedback-rules">
+        <edit-question-bank-rules
+          [feedbackRules]="componentContent.questionBank.rules"
+          [version]="componentContent.questionBank.version"
+        />
+      </div>
     </div>
-    <div
-      class="reference-component"
-      fxLayout="row wrap"
-      fxLayoutAlign="start center"
-      fxLayoutGap="20px"
-    >
-      <mat-label class="bold" i18n>Reference Component:</mat-label>
-      <select-step-and-component
-        [referenceComponent]="componentContent.questionBank.referenceComponent"
-        [thisComponentId]="componentId"
-        [allowedComponentTypes]="allowedReferenceComponentTypes"
-        (stepChange)="saveChanges()"
-        (componentChange)="saveChanges()"
-      >
-      </select-step-and-component>
-      <edit-component-peer-grouping-tag [componentContent]="componentContent.questionBank">
-      </edit-component-peer-grouping-tag>
-    </div>
-    <div class="feedback-rules">
-      <edit-question-bank-rules
-        [feedbackRules]="componentContent.questionBank.rules"
-        [version]="componentContent.questionBank.version"
-      >
-      </edit-question-bank-rules>
-    </div>
-  </div>
+  }
 </div>

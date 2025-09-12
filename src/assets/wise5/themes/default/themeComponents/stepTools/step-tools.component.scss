@@ -1,20 +1,18 @@
 @use '@angular/material' as mat;
-@import
-  'style/abstracts/functions',
-  'style/abstracts/variables',
-  'style/base/typography';
+@use 'style/abstracts/functions';
+@use 'style/base/typography';
 
 .step-tools {
   height: 42px;
 
   mat-form-field {
-    width: 168px;
+    width: 180px;
 
-    @media only screen and (min-width: breakpoint('sm.min')) {
-      width: 264px;
+    @media only screen and (min-width: functions.breakpoint('sm.min')) {
+      width: 392px;
     }
 
-    @media only screen and (min-width: breakpoint('md.min')) {
+    @media only screen and (min-width: functions.breakpoint('md.min')) {
       width: 432px;
     }
   }
@@ -36,7 +34,7 @@
   }
 
   .mat-mdc-select-value-text, .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
-    font-size: mat.m2-font-size($wise-typography, 'caption');
+    font-size: mat.m2-font-size(typography.$wise-typography, 'caption');
   }
 
   .mat-mdc-form-field-subscript-wrapper {
@@ -44,21 +42,15 @@
   }
 }
 
-// .toolbar {
-//   padding: 0 16px;
-// }
-
-// .node-icon-div {
-//   width: 34px;
-//   margin: 4px;
-//   text-align: center;
-// }
-
-// .node-status-div {
-//   width: 24px;
-//   margin: 4px;
-// }
-
 .unit-plan-icon {
   color: rgba(0,0,0,.54);
+}
+
+.submit-button-content {
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-left: 7px;
+  }
 }

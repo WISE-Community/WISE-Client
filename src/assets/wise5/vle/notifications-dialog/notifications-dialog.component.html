@@ -1,34 +1,33 @@
-<h2
-  mat-dialog-title
-  class="mat-dialog-title--actions"
-  fxLayout="row"
-  fxLayoutAlign="start center"
-  fxLayoutGap="4px"
->
+<h2 mat-dialog-title class="mat-dialog-title--actions !flex items-center gap-1">
   <mat-icon color="accent">notifications</mat-icon>
   <span i18n>Alerts</span>
-  <span fxFlex></span>
-  <button
-    *ngIf="newNotifications.length > 0"
-    mat-icon-button
-    (click)="dismissAll()"
-    matTooltip="Dismiss all alerts"
-    matTooltipPosition="before"
-    i18n-matTooltip
-  >
-    <mat-icon class="text-secondary">clear_all</mat-icon>
-  </button>
+  <span class="flex-grow"></span>
+  @if (newNotifications.length > 0) {
+    <button
+      mat-icon-button
+      (click)="dismissAll()"
+      matTooltip="Dismiss all alerts"
+      matTooltipPosition="before"
+      i18n-matTooltip
+    >
+      <mat-icon class="text-secondary">clear_all</mat-icon>
+    </button>
+  }
 </h2>
-<mat-dialog-content class="dialog-content-scroll notifications">
+<mat-dialog-content class="dialog-content-scroll notifications !p-0">
   @if (!hasNewNotifications()) {
     <p class="no-notifications-message">
       <span class="mat-body-2" i18n>Hi there! You currently have no alerts.</span>
     </p>
   } @else {
     <mat-list>
-      <ng-container *ngFor="let notificationAggregate of newNotifications; let last = last">
+      @for (
+        notificationAggregate of newNotifications;
+        track notificationAggregate;
+        let last = $last
+      ) {
         <mat-list-item>
-          <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="flex items-center">
             <div class="notification-content">
               <div>
                 <a
@@ -41,15 +40,15 @@
                 </a>
               </div>
               <div class="secondary-text">
-                <ng-container *ngIf="notificationAggregate.nodeId != null">
+                @if (notificationAggregate.nodeId != null) {
                   {{ getNodePositionAndTitle(notificationAggregate.nodeId) }}
-                </ng-container>
-                <ng-container *ngIf="notificationAggregate.notebookItemId != null">
+                }
+                @if (notificationAggregate.notebookItemId != null) {
                   {{ reportItem.title }}
-                </ng-container>
+                }
               </div>
             </div>
-            <span fxFlex></span>
+            <span class="flex-grow"></span>
             <button
               mat-icon-button
               matListIcon
@@ -64,8 +63,10 @@
             </button>
           </div>
         </mat-list-item>
-        <mat-divider *ngIf="!last"></mat-divider>
-      </ng-container>
+        @if (!last) {
+          <mat-divider></mat-divider>
+        }
+      }
     </mat-list>
   }
 </mat-dialog-content>

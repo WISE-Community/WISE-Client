@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
-import { ConfigService } from '../../../services/configService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'show-my-work-authoring',
-    templateUrl: './show-my-work-authoring.component.html',
-    styleUrls: ['./show-my-work-authoring.component.scss'],
-    standalone: false
+  selector: 'show-my-work-authoring',
+  templateUrl: './show-my-work-authoring.component.html',
+  imports: [EditComponentPrompt, MatFormFieldModule, MatSelectModule, FormsModule]
 })
 export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {
   allowedShowWorkComponentTypes: string[] = [
@@ -28,15 +27,6 @@ export class ShowMyWorkAuthoringComponent extends AbstractComponentAuthoring {
     'Table'
   ];
   nodeIds: string[];
-
-  constructor(
-    protected configService: ConfigService,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, nodeService, projectAssetService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

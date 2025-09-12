@@ -1,40 +1,39 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
 import { NodeService } from '../../../../services/nodeService';
+import { NodeStatusIconComponent } from '../nodeStatusIcon/node-status-icon.component';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { NodeStatusIconComponent } from '../nodeStatusIcon/node-status-icon.component';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { Subscription } from 'rxjs';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatSelectModule,
-        MatTooltipModule,
-        NodeIconComponent,
-        NodeStatusIconComponent
-    ],
-    selector: 'step-tools',
-    styleUrl: './step-tools.component.scss',
-    templateUrl: './step-tools.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTooltipModule,
+    NodeIconComponent,
+    NodeStatusIconComponent
+  ],
+  selector: 'step-tools',
+  styleUrl: './step-tools.component.scss',
+  templateUrl: './step-tools.component.html'
 })
 export class StepToolsComponent implements OnInit {
   protected icons: any;
+  protected isSurvey: boolean;
   protected is_rtl: boolean;
   protected nextId: string;
   protected nodeId: string;

@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectInfoAuthoringComponent } from './project-info-authoring.component';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ConfigService } from '../../services/configService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { UserService } from '../../../../app/services/user.service';
+import { MockProviders } from 'ng-mocks';
 
 describe('ProjectInfoAuthoringComponent', () => {
   let component: ProjectInfoAuthoringComponent;
@@ -13,12 +12,17 @@ describe('ProjectInfoAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [ProjectInfoAuthoringComponent],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
-    spyOn(TestBed.inject(TeacherProjectService), 'getProjectMetadata').and.returnValue({});
+      imports: [ProjectInfoAuthoringComponent],
+      providers: [
+        MockProviders(ConfigService, TeacherProjectService, UserService),
+        provideHttpClient(withInterceptorsFromDi())
+      ]
+    }).compileComponents();
+    spyOn(TestBed.inject(TeacherProjectService), 'getProjectMetadata').and.returnValue({
+      authors: []
+    });
     spyOn(TestBed.inject(ConfigService), 'getConfigParam').and.returnValue('{ "fields": [] }');
+    spyOn(TestBed.inject(UserService), 'getUserId').and.returnValue(1);
     fixture = TestBed.createComponent(ProjectInfoAuthoringComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

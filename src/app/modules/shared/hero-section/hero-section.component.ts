@@ -12,11 +12,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, FlexLayoutModule],
-    selector: 'app-hero-section',
-    styleUrl: './hero-section.component.scss',
-    templateUrl: './hero-section.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule, FlexLayoutModule],
+  selector: 'app-hero-section',
+  styleUrl: './hero-section.component.scss',
+  templateUrl: './hero-section.component.html'
 })
 export class HeroSectionComponent {
   @ViewChild('bgRef') bgRef: ElementRef;
@@ -24,7 +24,7 @@ export class HeroSectionComponent {
   @Input() headline: string;
   @ContentChild('headlineTemplate', { static: false }) headlineRef: TemplateRef<any>;
   @Input() imgDescription: string;
-  @Input() imgSources: Object;
+  @Input() imgSources: Object[];
   @Input() imgSrc: string;
   @ContentChild('sideTemplate', { static: false }) sideRef: TemplateRef<any>;
   @Input() tagline: string;

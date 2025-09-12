@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LibraryProject } from '../libraryProject';
 import { LibraryProjectDetailsComponent } from '../library-project-details/library-project-details.component';
 import { flash } from '../../../animations';
@@ -8,23 +8,40 @@ import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 import { Subscription } from 'rxjs';
 import { ProjectTagService } from '../../../../assets/wise5/services/projectTagService';
 import { Tag } from '../../../domain/tag';
+import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { LibraryProjectDisciplinesComponent } from '../library-project-disciplines/library-project-disciplines.component';
+import { MatIconModule } from '@angular/material/icon';
+import { UnitTagsComponent } from '../../../teacher/unit-tags/unit-tags.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-    animations: [flash],
-    encapsulation: ViewEncapsulation.None,
-    selector: 'app-library-project',
-    styleUrl: './library-project.component.scss',
-    templateUrl: './library-project.component.html',
-    standalone: false
+  animations: [flash],
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FormsModule,
+    LibraryProjectDisciplinesComponent,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatTooltipModule,
+    UnitTagsComponent
+  ],
+  selector: 'app-library-project',
+  styleUrl: './library-project.component.scss',
+  templateUrl: './library-project.component.html'
 })
 export class LibraryProjectComponent implements OnInit {
-  animateDelay: string = '0s';
-  animateDuration: string = '0s';
+  protected animateDelay: string = '0s';
+  protected animateDuration: string = '0s';
   @Input() checked: boolean = false;
   @Input() myUnit: boolean = false;
   @Input() project: LibraryProject = new LibraryProject();
-  @Output()
-  projectSelectionEvent: EventEmitter<ProjectSelectionEvent> =
+  @Output() projectSelectionEvent: EventEmitter<ProjectSelectionEvent> =
     new EventEmitter<ProjectSelectionEvent>();
   private subscriptions: Subscription = new Subscription();
 
@@ -34,7 +51,7 @@ export class LibraryProjectComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.project.thumbStyle = this.getThumbStyle(this.project.projectThumb);
     if (this.project.isHighlighted) {
       this.animateDuration = '2s';
@@ -79,17 +96,16 @@ export class LibraryProjectComponent implements OnInit {
    * @param {string} projectThumb
    * @returns {SafeStyle}
    */
-  getThumbStyle(projectThumb: string) {
+  private getThumbStyle(projectThumb: string): SafeStyle {
     const DEFAULT_THUMB = 'assets/img/default-picture-sm.svg';
     const STYLE = `url(${projectThumb}), url(${DEFAULT_THUMB})`;
     return this.sanitizer.bypassSecurityTrustStyle(STYLE);
   }
 
-  showDetails(): void {
-    const project = this.project;
+  protected showDetails(): void {
     this.dialog.open(LibraryProjectDetailsComponent, {
       ariaLabel: $localize`Unit Details`,
-      data: { project: project },
+      data: { project: this.project },
       panelClass: 'dialog-md'
     });
   }

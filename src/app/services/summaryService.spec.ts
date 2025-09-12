@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
-import { SummaryService } from '../../assets/wise5/components/summary/summaryService';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { ConfigService } from '../../assets/wise5/services/configService';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
+import { ConfigService } from '../../assets/wise5/services/configService';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProjectService } from '../../assets/wise5/services/projectService';
-import { TagService } from '../../assets/wise5/services/tagService';
-import { SessionService } from '../../assets/wise5/services/sessionService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { SessionService } from '../../assets/wise5/services/sessionService';
+import { SummaryService } from '../../assets/wise5/components/summary/summaryService';
+import { TagService } from '../../assets/wise5/services/tagService';
+import { TestBed } from '@angular/core/testing';
 
 const ALL_PERIODS = 'allPeriods';
 const componentId = 'component1';
@@ -37,8 +37,8 @@ const scoreSummaryDisallowedComponentTypes = summaryDisallowedComponentTypes;
 describe('SummaryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
+      imports: [],
+      providers: [
         AnnotationService,
         ConfigService,
         ProjectService,
@@ -47,10 +47,10 @@ describe('SummaryService', () => {
         TagService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
-    service = TestBed.get(SummaryService);
-    http = TestBed.get(HttpTestingController);
+      ]
+    });
+    service = TestBed.inject(SummaryService);
+    http = TestBed.inject(HttpTestingController);
     spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(runId);
     spyOn(TestBed.inject(ConfigService), 'getPeriodId').and.returnValue(periodId);
   });
@@ -62,6 +62,8 @@ describe('SummaryService', () => {
   getLatestClassmateStudentWorkInClass();
   getLatestClassmateScoresInPeriod();
   getLatestClassmateScoresInClass();
+  cleanLabel();
+  convertToNumber();
 });
 
 function createComponent() {
@@ -108,7 +110,7 @@ function isResponsesSummaryAvailableForComponentType() {
   it('should check if component types can be used with response summary', () => {
     expectFunctionCall(
       'isResponsesSummaryAvailableForComponentType',
-      ['MultipleChoice', 'Table'],
+      ['MultipleChoice', 'Table', 'DialogGuidance', 'OpenResponse', 'Match'],
       true
     );
     expectFunctionCall(
@@ -123,8 +125,6 @@ function isResponsesSummaryAvailableForComponentType() {
         'Graph',
         'HTML',
         'Label',
-        'Match',
-        'OpenResponse',
         'OutsideURL',
         'Summary'
       ],
@@ -187,4 +187,29 @@ function getLatestClassmateScoresInX(source: string, expectedUrl: string) {
       expect(scores).toEqual(expectedScores);
     });
   http.expectOne(expectedUrl).flush(expectedScores);
+}
+
+function cleanLabel() {
+  describe('cleanLabel', () => {
+    it('should clean the label', () => {
+      expect(service.cleanLabel('hello world')).toEqual('Hello World');
+    });
+  });
+}
+
+function convertToNumber() {
+  describe('convertToNumber', () => {
+    it('should convert to number when value is an empty string', () => {
+      expect(service.convertToNumber('')).toEqual(0);
+    });
+    it('should convert to number when value is not a number', () => {
+      expect(service.convertToNumber('a')).toEqual(0);
+    });
+    it('should convert to number when value is a number string', () => {
+      expect(service.convertToNumber('1')).toEqual(1);
+    });
+    it('should convert to number when value is a number', () => {
+      expect(service.convertToNumber(1)).toEqual(1);
+    });
+  });
 }

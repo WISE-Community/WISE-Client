@@ -10,13 +10,11 @@ import { ConstraintService } from '../../services/constraintService';
 import { DynamicPromptOpenResponseEvaluator } from './DynamicPromptOpenResponseEvaluator';
 import { DynamicPromptMultipleChoiceEvaluator } from './DynamicPromptMultipleChoiceEvaluator';
 import { PeerGroup } from '../../components/peerChat/PeerGroup';
-import { CommonModule } from '@angular/common';
 
 @Component({
-    imports: [CommonModule],
-    selector: 'dynamic-prompt',
-    styleUrl: './dynamic-prompt.component.scss',
-    templateUrl: './dynamic-prompt.component.html'
+  selector: 'dynamic-prompt',
+  styles: ['.prompt { font-weight: 500; }'],
+  templateUrl: './dynamic-prompt.component.html'
 })
 export class DynamicPromptComponent implements OnInit {
   @Input() componentId: string;

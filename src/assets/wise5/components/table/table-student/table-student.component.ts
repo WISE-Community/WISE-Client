@@ -20,7 +20,7 @@ import { hasConnectedComponent } from '../../../common/ComponentContent';
 
 @Component({
   templateUrl: 'table-student.component.html',
-  styleUrl: 'table-student.component.scss',
+  styles: ['.tools { margin-bottom: 8px; }'],
   encapsulation: ViewEncapsulation.None,
   standalone: false
 })

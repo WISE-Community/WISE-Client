@@ -1,21 +1,12 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ShowMyWorkAuthoringComponent } from './show-my-work-authoring.component';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { ComponentAuthoringModule } from '../../component-authoring.module';
-import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 describe('ShowMyWorkAuthoringComponent', () => {
   let component: ShowMyWorkAuthoringComponent;
@@ -35,38 +26,23 @@ describe('ShowMyWorkAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShowMyWorkAuthoringComponent],
-      imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
-        ComponentAuthoringModule,
-        EditComponentPrompt,
-        FormsModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [ShowMyWorkAuthoringComponent, StudentTeacherCommonServicesModule],
       providers: [
         ProjectAssetService,
         TeacherNodeService,
         TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        TeacherProjectTranslationService,
+        provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
-      new ProjectLocale({ default: 'en-US' })
-    );
+    const projectService = TestBed.inject(TeacherProjectService);
+    spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale({ default: 'en-US' }));
     fixture = TestBed.createComponent(ShowMyWorkAuthoringComponent);
-    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
-    spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
-      nodeId1
-    ]);
+    spyOn(projectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue([nodeId1]);
     component1 = createComponent(componentId1, OPEN_RESPONSE_TYPE);
     component2 = createComponent(componentId2, OPEN_RESPONSE_TYPE);
     component3 = createComponent(componentId3, OPEN_RESPONSE_TYPE);

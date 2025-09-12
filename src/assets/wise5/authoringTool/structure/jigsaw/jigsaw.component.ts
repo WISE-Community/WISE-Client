@@ -1,28 +1,16 @@
 import { Component } from '@angular/core';
-import { ConfigureStructureComponent } from '../configure-structure.component';
-import { MatProgressBar } from '@angular/material/progress-bar';
-import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { MatButton } from '@angular/material/button';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { FormsModule } from '@angular/forms';
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { RouterLink } from '@angular/router';
+import { ConfigureStructureComponent } from '../configure-structure.component';
 
 @Component({
-    imports: [
-        MatDivider,
-        MatRadioGroup,
-        FormsModule,
-        MatRadioButton,
-        FlexModule,
-        MatButton,
-        RouterLink,
-        NgIf,
-        MatProgressBar
-    ],
-    styleUrls: ['./jigsaw.component.scss', '../../add-content.scss'],
-    templateUrl: './jigsaw.component.html'
+  imports: [MatDivider, MatRadioModule, FormsModule, MatButton, RouterLink, MatProgressBar],
+  styleUrls: ['./jigsaw.component.scss', '../../add-content.scss'],
+  templateUrl: './jigsaw.component.html'
 })
 export class JigsawComponent extends ConfigureStructureComponent {
   protected numGroups: string = '2';

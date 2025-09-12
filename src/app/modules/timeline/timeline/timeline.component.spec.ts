@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TimelineComponent } from './timeline.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TimelineComponent', () => {
   let component: TimelineComponent;
@@ -8,8 +7,7 @@ describe('TimelineComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TimelineComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [TimelineComponent]
     }).compileComponents();
   }));
 

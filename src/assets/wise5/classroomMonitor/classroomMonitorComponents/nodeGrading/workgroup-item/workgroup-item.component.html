@@ -27,9 +27,11 @@
       <div fxFlex="{{ showScore ? 30 : 20 }}" fxLayout="row" fxLayoutAlign="center center">
         <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
       </div>
-      <div *ngIf="showScore" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
-        <workgroup-node-score [score]="score" [maxScore]="maxScore" />
-      </div>
+      @if (showScore) {
+        <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+          <workgroup-node-score [score]="score" [maxScore]="maxScore" />
+        </div>
+      }
     </div>
   </button>
   @if (expanded && !disabled) {
@@ -41,7 +43,7 @@
               id="component_{{ component.id }}_{{ workgroupId }}"
               class="component component--grading"
             >
-              <div [hidden]="!isComponentVisible(component.id)">
+              <div>
                 <h3 class="accent-1 gray-lightest-bg component__header">
                   {{ i + 1 + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
                   <component-new-work-badge

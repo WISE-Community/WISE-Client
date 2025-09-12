@@ -1,31 +1,59 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { TranslatableTextareaComponent } from '../../../authoringTool/components/translatable-textarea/translatable-textarea.component';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { CRaterService } from '../../../services/cRaterService';
 import { NotebookService } from '../../../services/notebookService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { OpenResponseContent } from '../OpenResponseContent';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { EditCRaterIdeaDescriptionsComponent } from '../../common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
+import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
+import { OpenResponseContent } from '../OpenResponseContent';
 
 @Component({
-    selector: 'edit-open-response-advanced',
-    templateUrl: 'edit-open-response-advanced.component.html',
-    styleUrls: ['edit-open-response-advanced.component.scss'],
-    standalone: false
+  styleUrl: 'edit-open-response-advanced.component.scss',
+  templateUrl: 'edit-open-response-advanced.component.html',
+  imports: [
+    TranslatableTextareaComponent,
+    MatCheckbox,
+    FormsModule,
+    MatFormFieldModule,
+    MatInput,
+    MatButton,
+    MatSelectModule,
+    EditFeedbackRulesComponent,
+    MatTooltip,
+    MatIcon,
+    EditCRaterIdeaDescriptionsComponent,
+    EditComponentAddToNotebookButtonComponent,
+    EditCommonAdvancedComponent
+  ]
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
-  allowedConnectedComponentTypes = ['OpenResponse'];
+  protected allowedConnectedComponentTypes = ['OpenResponse'];
   componentContent: OpenResponseContent;
-  cRaterItemIdIsValid: boolean = null;
-  initialFeedbackRules = [
+  protected cRaterItemIdIsValid: boolean = null;
+  private initialFeedbackRules = [
     {
       id: 'isDefault',
       expression: 'isDefault',
       feedback: [$localize`Default feedback`]
     }
   ];
-  isVerifyingCRaterItemId: boolean = false;
-  nodeIds: string[] = [];
-  useCustomCompletionCriteria: boolean = false;
+  protected isVerifyingCRaterItemId: boolean;
+  protected nodeIds: string[] = [];
+  useCustomCompletionCriteria: boolean;
+  protected showIdeaDescriptions = true;
 
   constructor(
     protected cRaterService: CRaterService,
@@ -42,13 +70,23 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       this.useCustomCompletionCriteria = true;
     }
     this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
+    if (this.componentContent.enableCRater) {
+      this.createCRaterAndRubricIfNull();
+    }
+  }
+
+  private createCRaterAndRubricIfNull() {
+    if (this.componentContent.cRater == null) {
+      this.componentContent.cRater = this.createCRaterObject();
+    }
+    if (!this.componentContent.cRater.rubric) {
+      this.componentContent.cRater.rubric = { ideas: [] };
+    }
   }
 
   enableCRaterClicked(): void {
     if (this.componentContent.enableCRater) {
-      if (this.componentContent.cRater == null) {
-        this.componentContent.cRater = this.createCRaterObject();
-      }
+      this.createCRaterAndRubricIfNull();
       this.setShowSubmitButtonValue(true);
     } else {
       this.setShowSubmitButtonValue(false);
@@ -69,7 +107,10 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
         rules: this.initialFeedbackRules
       },
       enableMultipleAttemptScoringRules: false,
-      multipleAttemptScoringRules: []
+      multipleAttemptScoringRules: [],
+      rubric: {
+        ideas: []
+      }
     };
   }
 
@@ -129,9 +170,8 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
   }
 
   multipleAttemptScoringRuleDeleteClicked(index: number): void {
-    const multipleAttemptScoringRule = this.componentContent.cRater.multipleAttemptScoringRules[
-      index
-    ];
+    const multipleAttemptScoringRule =
+      this.componentContent.cRater.multipleAttemptScoringRules[index];
     const scoreSequence = multipleAttemptScoringRule.scoreSequence;
     let previousScore = '';
     let currentScore = '';
@@ -261,7 +301,11 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   }
 
-  getComponents(nodeId: string): any[] {
+  protected toggleShowIdeaDescriptions(): void {
+    this.showIdeaDescriptions = !this.showIdeaDescriptions;
+  }
+
+  getComponents(nodeId: string): ComponentContent[] {
     return this.teacherProjectService.getComponents(nodeId);
   }
 

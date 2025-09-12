@@ -23,7 +23,6 @@ import { CRaterService } from '../../../../services/cRaterService';
 import { CRaterRubric, getUniqueIdeas } from '../../../common/cRater/CRaterRubric';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { filter } from 'rxjs';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { generateRandomKey } from '../../../../common/string/string';
 import { hasConnectedComponent } from '../../../../common/ComponentContent';
 import { Item } from '../item';
@@ -38,6 +37,7 @@ import { NotebookService } from '../../../../services/notebookService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentAssetService } from '../../../../services/studentAssetService';
 import { StudentDataService } from '../../../../services/studentDataService';
+import { CRaterIdea } from '../../../common/cRater/CRaterIdea';
 
 @Component({
   imports: [
@@ -47,7 +47,6 @@ import { StudentDataService } from '../../../../services/studentDataService';
     ComponentHeaderComponent,
     ComponentSaveSubmitButtonsComponent,
     DragDropModule,
-    FlexLayoutModule,
     MatchChoiceItemComponent,
     MatchFeedbackSectionComponent
   ],
@@ -613,11 +612,17 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
   }
 
   private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
-    getUniqueIdeas(responses, rubric).forEach((idea) => {
-      const choice = new Choice(idea.name, idea.text);
-      this.choices.push(choice);
-      this.getBucketById(this.sourceBucketId).items.push(choice);
-    });
+    getUniqueIdeas(responses, rubric)
+      .filter((idea) => !this.isInSourceBucket(idea))
+      .forEach((idea) => {
+        const choice = new Choice(idea.name, idea.text);
+        this.choices.push(choice);
+        this.getBucketById(this.sourceBucketId).items.push(choice);
+      });
+  }
+
+  private isInSourceBucket(idea: CRaterIdea): boolean {
+    return this.sourceBucket.items.some((item) => item.value === idea.text);
   }
 
   protected addChoice(): void {

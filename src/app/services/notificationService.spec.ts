@@ -36,9 +36,9 @@ const retrieveNotificationsURL = `/notifications/${runId1}`;
 describe('NotificationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(NotificationService);
     configService = TestBed.inject(ConfigService);

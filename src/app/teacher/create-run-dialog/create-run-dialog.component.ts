@@ -1,50 +1,96 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ConfigService } from '../../services/config.service';
 import { finalize } from 'rxjs/operators';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog
+} from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Project } from '../../domain/project';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { TeacherRun } from '../teacher-run';
 import { TeacherService } from '../teacher.service';
 import { UserService } from '../../services/user.service';
-import { ConfigService } from '../../services/config.service';
-import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
-import { TeacherRun } from '../teacher-run';
-import { Router } from '@angular/router';
+import { AccessLinkService } from '../../services/accessLinkService';
 
 @Component({
-    selector: 'create-run-dialog',
-    templateUrl: './create-run-dialog.component.html',
-    styleUrls: ['./create-run-dialog.component.scss'],
-    standalone: false
+  imports: [
+    ClipboardModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
+    MatRadioModule,
+    MatTooltipModule,
+    ReactiveFormsModule
+  ],
+  providers: [AccessLinkService, provideNativeDateAdapter()],
+  selector: 'create-run-dialog',
+  styleUrl: './create-run-dialog.component.scss',
+  templateUrl: './create-run-dialog.component.html'
 })
 export class CreateRunDialogComponent {
+  protected accessLinks: string[] = [];
+  protected customPeriods: FormControl;
+  private endDateControl: FormControl;
   form: FormGroup;
-  project: Project;
+  protected isCreated: boolean = false;
+  protected isCreating: boolean = false;
+  protected maxStartDate: Date;
+  protected minEndDate: Date;
+  private periodOptions: string[] = [];
   periodsGroup: FormArray;
-  customPeriods: FormControl;
-  maxStudentsPerTeam: number;
-  maxStartDate: Date;
-  minEndDate: Date;
-  endDateControl: FormControl;
-  periodOptions: string[] = [];
-  isCreating: boolean = false;
-  isCreated: boolean = false;
+  project: Project;
   run: TeacherRun = null;
 
   constructor(
+    private accessLinkService: AccessLinkService,
     private configService: ConfigService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<CreateRunDialogComponent>,
     private fb: FormBuilder,
     private router: Router,
+    private snackBar: MatSnackBar,
     private teacherService: TeacherService,
     private userService: UserService
   ) {
     this.project = data.project;
-    this.maxStudentsPerTeam = 3;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setPeriodOptions();
     let hiddenControl = new FormControl('', Validators.required);
     this.periodsGroup = new FormArray(
@@ -71,7 +117,8 @@ export class CreateRunDialogComponent {
       selectedPeriods: this.periodsGroup,
       customPeriods: this.customPeriods,
       periods: hiddenControl,
-      maxStudentsPerTeam: new FormControl('3', Validators.required),
+      runType: new FormControl('default', Validators.required),
+      maxStudentsPerTeam: new FormControl(3, Validators.required),
       startDate: new FormControl(new Date(), Validators.required),
       endDate: this.endDateControl,
       isLockedAfterEndDate: new FormControl({ value: false, disabled: true })
@@ -79,15 +126,15 @@ export class CreateRunDialogComponent {
     this.setDateRange();
   }
 
-  isGoogleUser() {
+  protected isGoogleUser(): boolean {
     return this.userService.isGoogleUser();
   }
 
-  isGoogleClassroomEnabled() {
+  protected isGoogleClassroomEnabled(): boolean {
     return this.configService.isGoogleClassroomEnabled();
   }
 
-  setPeriodOptions() {
+  private setPeriodOptions(): void {
     for (let i = 1; i < 9; i++) {
       this.periodOptions.push(i.toString());
     }
@@ -97,27 +144,33 @@ export class CreateRunDialogComponent {
     return <FormArray>this.form.get('selectedPeriods');
   }
 
-  mapPeriods(items: any[]): string[] {
+  private mapPeriods(items: any[]): string[] {
     const selectedPeriods = items.filter((item) => item.checkbox).map((item) => item.name);
     return selectedPeriods.length ? selectedPeriods : [];
   }
 
-  create() {
+  create(): void {
     this.isCreating = true;
-    const combinedPeriods = this.getPeriodsString();
-    const startDate = this.form.controls['startDate'].value.getTime();
-    let endDateValue = this.form.controls['endDate'].value;
-    let endDate = null;
+    const isSurvey: boolean = this.getFormControlValue('runType') === 'survey';
+    const combinedPeriods = isSurvey
+      ? this.mapPeriods(this.periodsGroup.value).toString()
+      : this.getPeriodsString();
+    const startDate: number = this.getFormControlValue('startDate').getTime();
+    let endDateValue: Date = this.getFormControlValue('endDate');
+    let endDate: number = null;
     if (endDateValue) {
       endDateValue.setHours(23, 59, 59);
       endDate = endDateValue.getTime();
     }
-    const isLockedAfterEndDate = this.form.controls['isLockedAfterEndDate'].value;
-    const maxStudentsPerTeam = this.form.controls['maxStudentsPerTeam'].value;
+    const isLockedAfterEndDate: boolean = this.getFormControlValue('isLockedAfterEndDate');
+    const maxStudentsPerTeam: number = isSurvey
+      ? 1
+      : this.getFormControlValue('maxStudentsPerTeam');
     this.teacherService
       .createRun(
         this.project.id,
         combinedPeriods,
+        isSurvey,
         maxStudentsPerTeam,
         startDate,
         endDate,
@@ -130,6 +183,12 @@ export class CreateRunDialogComponent {
       )
       .subscribe((newRun: TeacherRun) => {
         this.run = new TeacherRun(newRun);
+        if (this.run.isSurveyRun()) {
+          this.accessLinks = this.accessLinkService.getAccessLinks(
+            this.run.runCode,
+            this.run.periods
+          );
+        }
         this.dialogRef.afterClosed().subscribe(() => {
           this.router.navigate(['/teacher/home/schedule'], {
             queryParams: { newRunId: newRun.id }
@@ -152,16 +211,16 @@ export class CreateRunDialogComponent {
     }
   }
 
-  setDateRange() {
-    this.minEndDate = this.form.controls['startDate'].value;
-    this.maxStartDate = this.form.controls['endDate'].value;
+  protected setDateRange(): void {
+    this.minEndDate = this.getFormControlValue('startDate');
+    this.maxStartDate = this.getFormControlValue('endDate');
   }
 
-  closeAll() {
+  protected closeAll(): void {
     this.dialog.closeAll();
   }
 
-  checkClassroomAuthorization() {
+  protected checkClassroomAuthorization(): void {
     this.teacherService
       .getClassroomAuthorizationUrl(this.userService.getUser().getValue().username)
       .subscribe(({ authorizationUrl }) => {
@@ -179,7 +238,7 @@ export class CreateRunDialogComponent {
       });
   }
 
-  getClassroomCourses() {
+  private getClassroomCourses(): void {
     this.teacherService
       .getClassroomCourses(this.userService.getUser().getValue().username)
       .subscribe((courses) => {
@@ -190,12 +249,37 @@ export class CreateRunDialogComponent {
       });
   }
 
-  updateLockedAfterEndDateCheckbox() {
+  updateLockedAfterEndDateCheckbox(): void {
     if (this.endDateControl.value == null) {
       this.form.controls['isLockedAfterEndDate'].setValue(false);
       this.form.controls['isLockedAfterEndDate'].disable();
     } else {
       this.form.controls['isLockedAfterEndDate'].enable();
     }
+  }
+
+  protected isDefaultRun(): boolean {
+    return this.getFormControlValue('runType') === 'default';
+  }
+
+  private getFormControlValue(control: string): any {
+    return this.form.controls[control].value;
+  }
+
+  protected copyMsg(): void {
+    this.snackBar.open($localize`Copied to clipboard.`);
+  }
+
+  protected getPeriodFromAccessLink(link: string): string {
+    return this.accessLinkService.getPeriodFromAccessLink(link);
+  }
+
+  protected setAsSurveyUnit(): void {
+    this.customPeriods.setValue('');
+    this.periodsGroup.controls.forEach((control, index) => {
+      index === 0
+        ? control.get('checkbox').setValue(true)
+        : control.get('checkbox').setValue(false);
+    });
   }
 }

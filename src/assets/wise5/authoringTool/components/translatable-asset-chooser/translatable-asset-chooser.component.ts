@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -11,10 +10,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 @Component({
-    selector: 'translatable-asset-chooser',
-    imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
-    templateUrl: './translatable-asset-chooser.component.html',
-    styleUrl: './translatable-asset-chooser.component.scss'
+  selector: 'translatable-asset-chooser',
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  templateUrl: './translatable-asset-chooser.component.html',
+  styleUrl: './translatable-asset-chooser.component.scss'
 })
 export class TranslatableAssetChooserComponent extends AbstractTranslatableFieldComponent {
   @Input() tooltip: String = $localize`Choose image`;

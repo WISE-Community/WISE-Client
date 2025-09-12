@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutGap="8px">
+<div class="flex flex-col gap-2">
   <translatable-input
     [content]="componentContent"
     key="subtitle"
@@ -68,7 +68,7 @@
       Use Custom Legend
     </mat-checkbox>
   </div>
-  <ng-container *ngIf="componentContent.useCustomLegend">
+  @if (componentContent.useCustomLegend) {
     <translatable-input
       [content]="componentContent"
       key="customLegend"
@@ -77,8 +77,8 @@
       (defaultLanguageTextChanged)="componentChanged()"
       class="custom-legend"
     />
-  </ng-container>
-  <div fxLayoutGap="16px">
+  }
+  <div class="flex gap-4">
     <span i18n>X Axis Plot Line</span>
     <button
       mat-raised-button
@@ -91,39 +91,45 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div *ngFor="let plotLine of componentContent.xAxis.plotLines; index as xAxisPlotLineIndex">
-    <div fxLayout="row wrap" fxLayoutGap="16px">
-      <translatable-input
-        [content]="plotLine.label"
-        key="text"
-        label="Text"
-        i18n-label
-        (defaultLanguageTextChanged)="componentChanged()"
-        class="plot-line-text"
-      />
-      <mat-form-field class="plot-line-value">
-        <mat-label i18n>X Value</mat-label>
-        <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
-      </mat-form-field>
-      <mat-form-field class="plot-line-color">
-        <mat-label i18n>Color</mat-label>
-        <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
-      </mat-form-field>
-      <div>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="deleteXAxisPlotLine(xAxisPlotLineIndex)"
-          matTooltip="Delete"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+  @for (
+    plotLine of componentContent.xAxis.plotLines;
+    track plotLine;
+    let xAxisPlotLineIndex = $index
+  ) {
+    <div>
+      <div class="flex flex-row flex-wrap gap-4">
+        <translatable-input
+          [content]="plotLine.label"
+          key="text"
+          label="Text"
+          i18n-label
+          (defaultLanguageTextChanged)="componentChanged()"
+          class="plot-line-text"
+        />
+        <mat-form-field class="plot-line-value">
+          <mat-label i18n>X Value</mat-label>
+          <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
+        </mat-form-field>
+        <mat-form-field class="plot-line-color">
+          <mat-label i18n>Color</mat-label>
+          <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
+        </mat-form-field>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="deleteXAxisPlotLine(xAxisPlotLineIndex)"
+            matTooltip="Delete"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div fxLayoutGap="16px">
+  }
+  <div class="flex gap-4">
     <span i18n>Y Axis Plot Line</span>
     <button
       mat-raised-button
@@ -136,60 +142,64 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div *ngFor="let plotLine of componentContent.yAxis.plotLines; index as yAxisPlotLineIndex">
-    <div fxLayout="row wrap" fxLayoutGap="16px">
-      <translatable-input
-        [content]="plotLine.label"
-        key="text"
-        label="Text"
-        i18n-label
-        (defaultLanguageTextChanged)="componentChanged()"
-        class="plot-line-text"
-      />
-      <mat-form-field class="plot-line-value">
-        <mat-label i18n>Y Value</mat-label>
-        <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
-      </mat-form-field>
-      <mat-form-field class="plot-line-color">
-        <mat-label i18n>Color</mat-label>
-        <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
-      </mat-form-field>
-      <div>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="deleteYAxisPlotLine(yAxisPlotLineIndex)"
-          matTooltip="Delete"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+  @for (
+    plotLine of componentContent.yAxis.plotLines;
+    track plotLine;
+    let yAxisPlotLineIndex = $index
+  ) {
+    <div>
+      <div class="flex flex-row flex-wrap gap-4">
+        <translatable-input
+          [content]="plotLine.label"
+          key="text"
+          label="Text"
+          i18n-label
+          (defaultLanguageTextChanged)="componentChanged()"
+          class="plot-line-text"
+        />
+        <mat-form-field class="plot-line-value">
+          <mat-label i18n>Y Value</mat-label>
+          <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
+        </mat-form-field>
+        <mat-form-field class="plot-line-color">
+          <mat-label i18n>Color</mat-label>
+          <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
+        </mat-form-field>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="deleteYAxisPlotLine(yAxisPlotLineIndex)"
+            matTooltip="Delete"
+            matTooltipPosition="above"
+            i18n-matTooltip
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
+  }
+</div>
+@if (isNotebookEnabled()) {
+  <div>
+    <edit-component-add-to-notebook-button [componentContent]="componentContent" />
   </div>
-</div>
-<div *ngIf="isNotebookEnabled()">
-  <edit-component-add-to-notebook-button [componentContent]="componentContent">
-  </edit-component-add-to-notebook-button>
-</div>
-<edit-component-save-button [componentContent]="componentContent"> </edit-component-save-button>
+}
+<edit-component-save-button [componentContent]="componentContent" />
 <br />
-<edit-component-submit-button [componentContent]="componentContent"> </edit-component-submit-button>
-<edit-component-max-submit
-  *ngIf="componentContent.showSubmitButton"
-  [componentContent]="componentContent"
->
-</edit-component-max-submit>
-<edit-component-default-feedback [componentContent]="componentContent">
-</edit-component-default-feedback>
-<div fxLayout="column" fxLayoutAlign="start start">
-  <edit-component-max-score [componentContent]="componentContent"> </edit-component-max-score>
-  <edit-component-exclude-from-total-score [componentContent]="componentContent">
-  </edit-component-exclude-from-total-score>
+<edit-component-submit-button [componentContent]="componentContent" />
+
+@if (componentContent.showSubmitButton) {
+  <edit-component-max-submit [componentContent]="componentContent" />
+}
+<edit-component-default-feedback class="block my-4" [componentContent]="componentContent" />
+<div class="flex flex-col items-start">
+  <edit-component-max-score [componentContent]="componentContent" />
+  <edit-component-exclude-from-total-score [componentContent]="componentContent" />
   <edit-component-width [componentContent]="componentContent" />
-  <edit-component-rubric [componentContent]="componentContent"> </edit-component-rubric>
-  <edit-component-tags [componentContent]="componentContent"> </edit-component-tags>
+  <edit-component-rubric [componentContent]="componentContent" />
+  <edit-component-tags [componentContent]="componentContent" />
 </div>
 <edit-graph-connected-components
   [nodeId]="nodeId"
@@ -198,7 +208,6 @@
   [componentContent]="componentContent"
   [connectedComponents]="componentContent.connectedComponents"
   (connectedComponentsChanged)="connectedComponentsChanged($event)"
->
-</edit-graph-connected-components>
+/>
 <edit-component-constraints [componentContent]="component.content" />
-<edit-component-json [component]="component"></edit-component-json>
+<edit-component-json [component]="component" />

@@ -3,7 +3,7 @@ import { createCustomElement } from '@angular/elements';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { MilestoneDetailsDialogComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component';
 import { MilestoneDetailsComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component';
-import { MilestoneGradingViewComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-grading-view/milestone-grading-view.component';
+import { MilestoneClassResponsesComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-class-responses/milestone-class-responses.component';
 import { MilestoneWorkgroupItemComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component';
 import { MilestonesComponent } from '../../classroom-monitor/milestones/milestones.component';
 import { StudentTeacherCommonModule } from '../../student-teacher-common.module';
@@ -23,7 +23,7 @@ import { SelectPeriodComponent } from '../../../assets/wise5/classroomMonitor/cl
     MilestonesComponent,
     MilestoneDetailsComponent,
     MilestoneDetailsDialogComponent,
-    MilestoneGradingViewComponent,
+    MilestoneClassResponsesComponent,
     MilestoneReportDataComponent,
     MilestoneReportGraphComponent,
     MilestoneWorkgroupItemComponent

@@ -13,7 +13,6 @@ import { components } from '../../../components/Components';
 
 @Component({
   selector: 'edit-component',
-  standalone: true,
   template: '<div #component tabindex="-1"></div>'
 })
 export class EditComponentComponent {

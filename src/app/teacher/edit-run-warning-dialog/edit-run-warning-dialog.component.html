@@ -1,13 +1,15 @@
-<h2 mat-dialog-title class="mat-dialog-title--icons flex items-center justify-start">
+<h2 mat-dialog-title class="mat-dialog-title--icons !flex items-center">
   <span i18n>Edit Classroom Unit</span>
-  <span fxFlex></span>
+  <span class="flex-1"></span>
   <mat-icon color="warn" i18n-aria-label aria-label="Warning">warning</mat-icon>
 </h2>
 <mat-dialog-content>
   <div class="info-block">
     <p class="mat-subtitle-1 accent-1">
       {{ run.project.metadata.title }}
-      <span *ngIf="run" class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
+      @if (run) {
+        <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
+      }
     </p>
     <p i18n>
       Warning! You will be editing the content of a classroom unit. If students have already started

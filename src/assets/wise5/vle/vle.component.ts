@@ -1,62 +1,62 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, Component, HostListener, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { AnnotationService } from '../services/annotationService';
+import { CommonModule } from '@angular/common';
 import { ConfigService } from '../services/configService';
+import { convertToPNGFile } from '../common/canvas/canvas';
+import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
+import { GroupTabsComponent } from '../directives/group-tabs/group-tabs.component';
 import { InitializeVLEService } from '../services/initializeVLEService';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { NavigationComponent } from '../themes/default/navigation/navigation.component';
+import { Node } from '../common/Node';
+import { NodeComponent } from './node/node.component';
+import { NodeNavigationComponent } from '../directives/node-navigation/node-navigation.component';
+import { NodeStatusService } from '../services/nodeStatusService';
+import { NotebookLauncherComponent } from '../../../app/notebook/notebook-launcher/notebook-launcher.component';
+import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
+import { NotebookReportComponent } from '../../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookService } from '../services/notebookService';
 import { NotificationService } from '../services/notificationService';
-import { SessionService } from '../services/sessionService';
-import { StudentDataService } from '../services/studentDataService';
-import { VLEProjectService } from './vleProjectService';
-import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
-import { AnnotationService } from '../services/annotationService';
-import { ActivatedRoute, Router } from '@angular/router';
-import { WiseLinkService } from '../../../app/services/wiseLinkService';
-import { convertToPNGFile } from '../common/canvas/canvas';
-import { NodeStatusService } from '../services/nodeStatusService';
-import { Node } from '../common/Node';
-import { SafeResourceUrl } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
-import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { SafeUrl } from '../directives/safeUrl/safe-url.pipe';
-import { NodeNavigationComponent } from '../directives/node-navigation/node-navigation.component';
-import { GroupTabsComponent } from '../directives/group-tabs/group-tabs.component';
-import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
-import { NotebookReportComponent } from '../../../app/notebook/notebook-report/notebook-report.component';
-import { NotebookLauncherComponent } from '../../../app/notebook/notebook-launcher/notebook-launcher.component';
-import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/step-tools.component';
 import { RunEndedAndLockedMessageComponent } from './run-ended-and-locked-message/run-ended-and-locked-message.component';
-import { NodeComponent } from './node/node.component';
-import { NavigationComponent } from '../themes/default/navigation/navigation.component';
-import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { SafeUrl } from '../directives/safeUrl/safe-url.pipe';
+import { SessionService } from '../services/sessionService';
+import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/step-tools.component';
+import { StudentDataService } from '../services/studentDataService';
+import { StudentService } from '../../../app/student/student.service';
+import { Subscription } from 'rxjs';
+import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
+import { VLEProjectService } from './vleProjectService';
+import { WiseLinkService } from '../../../app/services/wiseLinkService';
 
 @Component({
-    imports: [
-        CommonModule,
-        ChooseBranchPathDialogComponent,
-        GroupTabsComponent,
-        MatSidenavModule,
-        NavigationComponent,
-        NodeComponent,
-        NodeNavigationComponent,
-        NotebookLauncherComponent,
-        NotebookNotesComponent,
-        NotebookReportComponent,
-        RunEndedAndLockedMessageComponent,
-        SafeUrl,
-        StepToolsComponent,
-        TopBarComponent
-    ],
-    selector: 'vle',
-    styleUrl: './vle.component.scss',
-    templateUrl: './vle.component.html'
+  imports: [
+    CommonModule,
+    GroupTabsComponent,
+    MatSidenavModule,
+    NavigationComponent,
+    NodeComponent,
+    NodeNavigationComponent,
+    NotebookLauncherComponent,
+    NotebookNotesComponent,
+    NotebookReportComponent,
+    RunEndedAndLockedMessageComponent,
+    SafeUrl,
+    StepToolsComponent,
+    TopBarComponent
+  ],
+  selector: 'vle',
+  styleUrl: './vle.component.scss',
+  templateUrl: './vle.component.html'
 })
 export class VLEComponent implements AfterViewInit {
   protected currentNode: Node;
   @ViewChild('defaultVLETemplate') private defaultVLETemplate: TemplateRef<any>;
   @ViewChild('drawer') public drawer: any;
   protected initialized: boolean;
+  private isSurvey: boolean;
   protected layoutState: string;
   protected notebookConfig: any;
   protected notesEnabled: boolean = false;
@@ -83,12 +83,19 @@ export class VLEComponent implements AfterViewInit {
     private router: Router,
     private sessionService: SessionService,
     private studentDataService: StudentDataService,
+    private studentService: StudentService,
     private wiseLinkService: WiseLinkService
   ) {}
 
-  @HostListener('window:beforeunload')
-  beforeUnload(): void {
-    this.saveNodeExitedEvent();
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnload($event: BeforeUnloadEvent): void {
+    if (this.isSurvey) {
+      // prevents the browser from showing a confirmation dialog
+      $event.stopImmediatePropagation();
+    }
+    if (this.sessionService.isSessionActive()) {
+      this.saveNodeExitedEvent();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -140,6 +147,15 @@ export class VLEComponent implements AfterViewInit {
     this.setLayoutState();
     this.initializeSubscriptions();
     this.saveNodeEnteredEvent();
+
+    // Set isSurvey
+    if (!this.configService.isPreview()) {
+      this.studentService
+        .getRunInfoById(this.studentDataService.getRunStatus().runId)
+        .subscribe((runInfo) => {
+          this.isSurvey = runInfo.isSurvey;
+        });
+    }
   }
 
   ngOnDestroy() {
@@ -301,6 +317,11 @@ export class VLEComponent implements AfterViewInit {
 
   private scrollToTop() {
     document.querySelector('.top').scrollIntoView();
+  }
+
+  @HostListener('document:mousemove')
+  protected renewSession(): void {
+    this.sessionService.mouseMoved();
   }
 
   /**

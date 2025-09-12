@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { StepToolsComponent } from './step-tools.component';
+import { StudentNodeService } from '../../services/studentNodeService';
+import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
-import { StepToolsComponent } from './step-tools.component';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { StudentNodeService } from '../../services/studentNodeService';
 
 describe('StepTools', () => {
   let component: StepToolsComponent;

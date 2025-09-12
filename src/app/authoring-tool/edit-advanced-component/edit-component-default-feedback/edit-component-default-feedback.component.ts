@@ -3,26 +3,37 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
 import { moveObjectDown, moveObjectUp } from '../../../../assets/wise5/common/array/array';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-    selector: 'edit-component-default-feedback',
-    templateUrl: 'edit-component-default-feedback.component.html',
-    styleUrls: ['edit-component-default-feedback.component.scss'],
-    standalone: false
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule
+  ],
+  selector: 'edit-component-default-feedback',
+  styleUrl: 'edit-component-default-feedback.component.scss',
+  templateUrl: 'edit-component-default-feedback.component.html'
 })
 export class EditComponentDefaultFeedback {
   @Input() componentContent: any;
-  feedbackChanged: Subject<string> = new Subject<string>();
-  feedbackChangedSubscription: Subscription;
+  protected feedbackChanged: Subject<string> = new Subject<string>();
+  private feedbackChangedSubscription: Subscription;
 
-  constructor(private ProjectService: TeacherProjectService) {}
+  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.feedbackChangedSubscription = this.feedbackChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
-      .subscribe(() => {
-        this.componentChanged();
-      });
+      .subscribe(() => this.componentChanged());
   }
 
   ngOnDestroy(): void {
@@ -59,7 +70,7 @@ export class EditComponentDefaultFeedback {
     return index;
   }
 
-  componentChanged() {
-    this.ProjectService.nodeChanged();
+  componentChanged(): void {
+    this.projectService.nodeChanged();
   }
 }

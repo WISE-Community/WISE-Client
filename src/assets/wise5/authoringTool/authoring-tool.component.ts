@@ -5,14 +5,30 @@ import { NotificationService } from '../services/notificationService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { SessionService } from '../services/sessionService';
 import { TeacherDataService } from '../services/teacherDataService';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
+import { CommonModule } from '@angular/common';
+import { AuthoringToolBarComponent } from './components/shared/authoring-tool-bar/authoring-tool-bar.component';
+import { MainMenuComponent } from '../common/main-menu/main-menu.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { SideMenuComponent } from '../common/side-menu/side-menu.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
-    styleUrls: ['./authoring-tool.component.scss'],
-    templateUrl: './authoring-tool.component.html',
-    standalone: false
+  imports: [
+    AuthoringToolBarComponent,
+    CommonModule,
+    MainMenuComponent,
+    MatSidenavModule,
+    RouterModule,
+    ScrollingModule,
+    SideMenuComponent,
+    TopBarComponent
+  ],
+  styleUrl: './authoring-tool.component.scss',
+  templateUrl: './authoring-tool.component.html'
 })
 export class AuthoringToolComponent {
   protected isMenuOpen: boolean = false;
@@ -233,7 +249,8 @@ export class AuthoringToolComponent {
   }
 
   private getElements(): any[] {
-    const elementsToDisable = 'button,input,textarea,mat-radio-button,mat-checkbox,mat-icon[cdkdraghandle]';
+    const elementsToDisable =
+      'button,input,textarea,mat-radio-button,mat-checkbox,mat-icon[cdkdraghandle]';
     return Array.from(
       this.elem.nativeElement.querySelectorAll(`div.main-content ${elementsToDisable}`)
     ).concat(

@@ -1,36 +1,30 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatDividerModule } from '@angular/material/divider';
-import { Tag } from '../../domain/tag';
 import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
-import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { TagComponent } from '../tag/tag.component';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { Tag } from '../../domain/tag';
+import { TagComponent } from '../tag/tag.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        NgSelectModule,
-        SearchBarComponent,
-        TagComponent
-    ],
-    encapsulation: ViewEncapsulation.None,
-    selector: 'select-tags',
-    styleUrl: './select-tags.component.scss',
-    templateUrl: './select-tags.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgSelectModule,
+    TagComponent
+  ],
+  selector: 'select-tags',
+  styleUrl: './select-tags.component.scss',
+  templateUrl: './select-tags.component.html'
 })
 export class SelectTagsComponent extends AbstractTagsMenuComponent {
   @Input() selectedTags: Tag[] = [];

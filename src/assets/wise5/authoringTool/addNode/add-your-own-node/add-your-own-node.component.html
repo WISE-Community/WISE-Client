@@ -7,24 +7,18 @@
     }
   </mat-form-field>
   <h5 i18n>Select components to add to your new step (optional):</h5>
-  <div fxLayout="column" fxLayout.gt-sm="row">
-    <div class="initial-components notice-bg-bg" fxFlex="100" fxFlex.gt-sm="25">
+  <div class="flex flex-col md:flex-row">
+    <div class="initial-components notice-bg-bg flex items-start md:w-1/3 lg:w-1/4">
       @if (initialComponents.length == 0) {
         <div class="mat-small" i18n>No components added</div>
       }
       @if (initialComponents.length > 0) {
-        <div class="component-list" cdkDropList (cdkDropListDropped)="drop($event)">
+        <div class="component-list w-full" cdkDropList (cdkDropListDropped)="drop($event)">
           @for (component of initialComponents; track component.id) {
-            <div
-              class="component-list-item"
-              cdkDrag
-              fxLayout="row"
-              fxLayoutAlign="start center"
-              fxLayoutGap="8px"
-            >
+            <div class="component-list-item flex justify-start items-center gap-2" cdkDrag>
               <mat-icon class="secondary-text">reorder</mat-icon>
               <span class="mat-small">{{ component.name }}</span>
-              <span fxFlex></span>
+              <span class="flex-grow"></span>
               <button
                 mat-icon-button
                 (click)="deleteComponent(i)"
@@ -38,8 +32,8 @@
         </div>
       }
     </div>
-    <div fxFlex="100" fxFlex.gt-sm="75">
-      <div class="component-types" fxLayout="row wrap" fxLayoutAlign="start start">
+    <div class="flex flex-col md:w-2/3 lg:w-3/4">
+      <div class="flex flex-wrap justify-stretch items-center">
         @for (componentType of componentTypes; track componentType.type) {
           <div class="component-type">
             <component-type-button
@@ -55,12 +49,12 @@
     </div>
   </div>
   <div class="nav-controls">
-    <mat-divider></mat-divider>
-    <div>
+    <mat-divider />
+    <div class="flex">
       <button mat-button class="mat-primary" routerLink="../choose-template" [state]="target" i18n>
         Back
       </button>
-      <span fxFlex></span>
+      <span class="flex-grow"></span>
       <button mat-button class="mat-primary" routerLink="../.." i18n>Cancel</button>
       <button
         mat-raised-button

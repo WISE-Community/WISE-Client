@@ -25,7 +25,7 @@ export abstract class AbstractComponentAuthoring {
     protected projectService: TeacherProjectService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.componentId = this.componentContent.id;
     this.idToOrder = this.projectService.idToOrder;
     this.subscriptions.add(
@@ -62,7 +62,7 @@ export abstract class AbstractComponentAuthoring {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 

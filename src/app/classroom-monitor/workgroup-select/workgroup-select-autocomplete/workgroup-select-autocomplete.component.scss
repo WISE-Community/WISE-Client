@@ -1,15 +1,12 @@
 @use '@angular/material' as mat;
-@import
-  'style/abstracts/variables',
-  'style/abstracts/functions',
-  'style/abstracts/mixins',
-  'style/base/typography';
+@use'style/abstracts/functions';
+@use 'style/base/typography';
 
 .workgroup-select-autocomplete {
   width: 100%;
   max-width: 100%;
 
-  @media (min-width: breakpoint('md.min')) {
+  @media (min-width: functions.breakpoint('md.min')) {
     width: 360px;
   }
 
@@ -30,7 +27,7 @@
   }
 
   .mat-mdc-select-value-text, .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
-    font-size: mat.m2-font-size($wise-typography, 'caption');
+    font-size: mat.m2-font-size(typography.$wise-typography, 'caption');
   }
 
   .mat-mdc-form-field-subscript-wrapper {

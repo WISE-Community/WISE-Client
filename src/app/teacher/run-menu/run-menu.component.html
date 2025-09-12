@@ -4,11 +4,13 @@
 <mat-menu #runMenu="matMenu" xPosition="before">
   <div>
     <div class="menu-info secondary-text" i18n>Run ID: {{ run.id }}</div>
-    <mat-divider></mat-divider>
-    <a *ngIf="run.project.wiseVersion !== 4" mat-menu-item (click)="showEditRunDetails()">
-      <mat-icon>settings</mat-icon>
-      <span i18n>Edit Settings</span>
-    </a>
+    <mat-divider />
+    @if (run.project.wiseVersion !== 4) {
+      <a mat-menu-item (click)="showEditRunDetails()">
+        <mat-icon>settings</mat-icon>
+        <span i18n>Edit Settings</span>
+      </a>
+    }
     <a mat-menu-item href="{{ run.project.uri }}" target="_blank">
       <mat-icon>preview</mat-icon>
       <span i18n>Preview</span>
@@ -17,25 +19,33 @@
       <mat-icon>info</mat-icon>
       <span i18n>Unit Info</span>
     </a>
-    <a mat-menu-item (click)="shareRun()" *ngIf="canShare() && run.project.wiseVersion !== 4">
-      <mat-icon>supervised_user_circle</mat-icon>
-      <span i18n>Share Access</span>
-    </a>
-    <a mat-menu-item (click)="editContent()" *ngIf="canEdit() && run.project.wiseVersion !== 4">
-      <mat-icon>edit</mat-icon>
-      <span i18n>Edit Content</span>
-    </a>
+    @if (canShare() && run.project.wiseVersion !== 4) {
+      <a mat-menu-item (click)="shareRun()">
+        <mat-icon>supervised_user_circle</mat-icon>
+        <span i18n>Share Access</span>
+      </a>
+    }
+    @if (canEdit() && run.project.wiseVersion !== 4) {
+      <a mat-menu-item (click)="editContent()">
+        <mat-icon>edit</mat-icon>
+        <span i18n>Edit Content</span>
+      </a>
+    }
     <a mat-menu-item href="{{ reportProblemLink }}">
       <mat-icon>report_problem</mat-icon>
       <span i18n>Report Problem</span>
     </a>
-    <a mat-menu-item *ngIf="!run.project.archived" (click)="archive(true)">
-      <mat-icon>archive</mat-icon>
-      <span i18n>Archive</span>
-    </a>
-    <a mat-menu-item *ngIf="run.project.archived" (click)="archive(false)">
-      <mat-icon>unarchive</mat-icon>
-      <span i18n>Restore</span>
-    </a>
+    @if (!run.project.archived) {
+      <a mat-menu-item (click)="archive(true)">
+        <mat-icon>archive</mat-icon>
+        <span i18n>Archive</span>
+      </a>
+    }
+    @if (run.project.archived) {
+      <a mat-menu-item (click)="archive(false)">
+        <mat-icon>unarchive</mat-icon>
+        <span i18n>Restore</span>
+      </a>
+    }
   </div>
 </mat-menu>

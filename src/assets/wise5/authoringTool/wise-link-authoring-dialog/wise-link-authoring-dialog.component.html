@@ -1,6 +1,6 @@
 <h1 mat-dialog-title i18n>Create a WISE Link</h1>
 <div mat-dialog-content>
-  <div fxLayout="row wrap" fxLayoutGap="20px">
+  <div class="flex flex-row flex-wrap gap-5">
     <mat-form-field class="choose-step">
       <mat-label i18n>Step</mat-label>
       <mat-select
@@ -9,11 +9,13 @@
         i18n-placeholder
         (ngModelChange)="wiseLinkNodeIdChanged()"
       >
-        <ng-container *ngFor="let item of items">
-          <mat-option *ngIf="item.key !== 'group0'" [value]="item.key">
-            {{ getNodePositionById(item.key) }}: {{ getNodeTitle(item.key) }} ({{ item.key }})
-          </mat-option>
-        </ng-container>
+        @for (item of items; track item) {
+          @if (item.key !== 'group0') {
+            <mat-option [value]="item.key">
+              {{ getNodePositionById(item.key) }}: {{ getNodeTitle(item.key) }} ({{ item.key }})
+            </mat-option>
+          }
+        }
       </mat-select>
     </mat-form-field>
     <mat-form-field class="choose-component">
@@ -23,16 +25,19 @@
         placeholder="Choose a Component"
         i18n-placeholder
       >
-        <mat-option
-          *ngFor="let component of getComponents(wiseLinkNodeId); let componentIndex = index"
-          [value]="component.id"
-        >
-          {{ componentIndex + 1 }}. {{ component.type }}
-        </mat-option>
+        @for (
+          component of getComponents(wiseLinkNodeId);
+          track component;
+          let componentIndex = $index
+        ) {
+          <mat-option [value]="component.id">
+            {{ componentIndex + 1 }}. {{ component.type }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>
-  <div fxLayout="row wrap">
+  <div class="flex-row flex-wrap">
     <mat-form-field class="link-text">
       <mat-label i18n>Link Text</mat-label>
       <input matInput [(ngModel)]="wiseLinkText" />
@@ -45,8 +50,8 @@
     </mat-radio-group>
   </div>
 </div>
-<div mat-dialog-actions fxLayoutGap="20px">
-  <div fxFlex></div>
+<div mat-dialog-actions class="flex gap-5" align="end">
+  <div class="w-full"></div>
   <button mat-stroked-button (click)="cancel()" i18n>Cancel</button>
   <button mat-raised-button color="primary" (click)="create()" i18n>Create</button>
 </div>

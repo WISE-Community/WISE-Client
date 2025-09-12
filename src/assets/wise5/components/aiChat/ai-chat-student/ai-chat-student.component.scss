@@ -1,14 +1,15 @@
-@import 'style/abstracts/variables', 'style/abstracts/functions';
+@use 'style/abstracts/functions';
 
 .mat-mdc-card {
   padding: 12px;
   margin-top: 16px;
-  max-width: breakpoint('sm.min');
+  max-width: functions.breakpoint('sm.min');
 }
 
-ai-chat-messages {
-  display: block;
+.messages {
   margin-bottom: 12px;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .add-response {

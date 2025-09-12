@@ -1,25 +1,30 @@
 import { Component, Inject } from '@angular/core';
-import { LibraryProjectDetailsComponent } from '../library-project-details/library-project-details.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { finalize } from 'rxjs/operators';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Project } from '../../../domain/project';
 
 @Component({
-    selector: 'app-copy-project-dialog',
-    templateUrl: './copy-project-dialog.component.html',
-    styleUrls: ['./copy-project-dialog.component.scss'],
-    standalone: false
+  imports: [MatButtonModule, MatDialogModule, MatProgressBarModule, MatSnackBarModule],
+  templateUrl: './copy-project-dialog.component.html'
 })
 export class CopyProjectDialogComponent {
-  isCopying: boolean = false;
+  protected isCopying: boolean = false;
 
   constructor(
     public dialog: MatDialog,
-    public dialogRef: MatDialogRef<LibraryProjectDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<CopyProjectDialogComponent>,
     private libraryService: LibraryService,
+    @Inject(MAT_DIALOG_DATA) public project: Project,
     private snackBar: MatSnackBar
   ) {
     this.libraryService.newProjectSource$.subscribe(() => {
@@ -27,10 +32,10 @@ export class CopyProjectDialogComponent {
     });
   }
 
-  copy() {
+  protected copy(): void {
     this.isCopying = true;
     this.libraryService
-      .copyProject(this.data.project.id)
+      .copyProject(this.project.id)
       .pipe(
         finalize(() => {
           this.isCopying = false;
@@ -52,7 +57,7 @@ export class CopyProjectDialogComponent {
       );
   }
 
-  showErrorMessage() {
+  private showErrorMessage(): void {
     this.snackBar.open(
       $localize`There was an error trying to copy the project. Please refresh the page and try again.`
     );

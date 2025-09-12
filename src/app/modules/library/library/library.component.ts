@@ -1,48 +1,34 @@
 import { OnInit, QueryList, ViewChildren, Directive } from '@angular/core';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { LibraryService } from '../../../services/library.service';
-import { ResearchProjectTypes, Standard } from '../standard';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
-import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 @Directive()
 export abstract class LibraryComponent implements OnInit {
-  protected dciArrangementOptions: Standard[] = [];
-  protected dciArrangementValue = [];
-  protected disciplineOptions: Standard[] = [];
-  protected disciplineValue = [];
   protected filteredProjects: LibraryProject[] = [];
-  protected filterValues: ProjectFilterValues = new ProjectFilterValues();
   protected highIndex: number = 0;
   protected lowIndex: number = 0;
   protected pageSizeOptions: number[] = [12, 24, 48, 96];
   protected pageIndex: number = 0;
   protected pageSize: number = 12;
   @ViewChildren(MatPaginator) paginators!: QueryList<MatPaginator>;
-  protected peOptions: Standard[] = [];
-  protected peValue = [];
   protected projects: LibraryProject[] = [];
-  private researchProjectValue: ResearchProjectTypes[] = [];
-  protected searchValue: string = '';
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
 
   constructor(
-    protected dialog: MatDialog,
+    protected filterValues: ProjectFilterValues,
     protected libraryService: LibraryService
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.libraryService.projectFilterValuesSource$.subscribe((projectFilterValues) =>
-        this.filterUpdated(projectFilterValues)
-      )
-    );
+    this.subscriptions.add(this.filterValues.updated$.subscribe(() => this.filterUpdated()));
   }
 
   ngOnDestroy(): void {
+    this.filterValues.clear();
     this.subscriptions.unsubscribe();
   }
 
@@ -71,123 +57,44 @@ export abstract class LibraryComponent implements OnInit {
     return this.lowIndex <= index && index < this.highIndex;
   }
 
-  filterUpdated(filterValues: ProjectFilterValues = null): void {
-    if (filterValues) {
-      this.filterValues = filterValues;
-    }
-    this.filteredProjects = [];
-    this.searchValue = this.filterValues.searchValue;
-    this.disciplineValue = this.filterValues.disciplineValue;
-    this.dciArrangementValue = this.filterValues.dciArrangementValue;
-    this.researchProjectValue = this.filterValues.researchProjectValue;
-    this.peValue = this.filterValues.peValue;
-    this.projects.forEach((project) => {
-      project.visible =
-        this.isSearchMatch(project, this.searchValue) &&
-        (!this.hasFilters() || this.isFilterMatch(project));
-      if (project.visible) {
-        this.filteredProjects.push(project);
-      }
-    });
+  protected filterUpdated(): void {
+    this.filteredProjects = this.projects
+      .map((project) => {
+        project.visible = this.filterValues.matches(project);
+        return project;
+      })
+      .filter((project) => project.visible)
+      .sort(this.sortUnits);
     this.emitNumberOfProjectsVisible(this.countVisibleProjects(this.filteredProjects));
     this.pageIndex = 0;
     this.setPagination();
   }
 
-  protected abstract emitNumberOfProjectsVisible(numProjectsVisible: number): void;
-
-  private isSearchMatch(project: LibraryProject, searchValue: string): boolean {
-    project.metadata.id = project.id;
-    return (
-      !searchValue ||
-      Object.keys(project.metadata)
-        .filter((prop) =>
-          // only check for match in specific metadata fields
-          ['title', 'summary', 'keywords', 'features', 'standardsAddressed', 'id'].includes(prop)
-        )
-        .some((prop) => {
-          let value = project.metadata[prop];
-          if (prop === 'standardsAddressed') {
-            value = JSON.stringify(value);
-          }
-          return (
-            typeof value !== 'undefined' &&
-            value != null &&
-            value.toString().toLocaleLowerCase().indexOf(searchValue) !== -1
-          );
-        })
-    );
+  protected emitNumberOfProjectsVisible(numProjectsVisible: number): void {
+    if (numProjectsVisible) {
+      this.getNumVisiblePersonalOrPublicProjects().next(numProjectsVisible);
+    } else {
+      this.getNumVisiblePersonalOrPublicProjects().next(this.filteredProjects.length);
+    }
   }
 
-  private isFilterMatch(project: LibraryProject): boolean {
-    return this.matchesNgss(project) || this.matchesResearchProject(project);
-  }
-
-  private matchesNgss(project: LibraryProject): boolean {
-    return (
-      project.metadata.standardsAddressed.ngss != null &&
-      (this.matchesDciArrangement(project) ||
-        this.matchesPE(project) ||
-        this.matchesDiscipline(project))
-    );
-  }
-
-  private matchesDciArrangement(project: LibraryProject): boolean {
-    return (
-      this.dciArrangementValue.length > 0 &&
-      project.metadata.standardsAddressed.ngss.dciArrangements?.some((val) =>
-        this.dciArrangementValue.includes(val.id)
-      )
-    );
-  }
-
-  private matchesPE(project: LibraryProject) {
-    return (
-      this.peValue.length > 0 &&
-      project.metadata.standardsAddressed.ngss.dciArrangements?.some((arrangement) =>
-        arrangement.children.some((val) => this.peValue.includes(val.id))
-      )
-    );
-  }
-
-  private matchesDiscipline(project: LibraryProject): boolean {
-    return (
-      this.disciplineValue.length > 0 &&
-      project.metadata.standardsAddressed.ngss.disciplines?.some((discipline) =>
-        this.disciplineValue.includes(discipline.id)
-      )
-    );
-  }
-
-  private matchesResearchProject(project: LibraryProject): boolean {
-    return (
-      this.researchProjectValue.length > 0 &&
-      project.metadata.researchProjects?.some((researchProject) =>
-        this.researchProjectValue.includes(researchProject)
-      )
-    );
-  }
-
-  private hasFilters(): boolean {
-    return (
-      this.dciArrangementValue.length +
-        this.peValue.length +
-        this.disciplineValue.length +
-        this.researchProjectValue.length >
-      0
-    );
-  }
+  protected abstract getNumVisiblePersonalOrPublicProjects(): BehaviorSubject<number>;
 
   protected countVisibleProjects(projects: LibraryProject[]): number {
     return projects.filter((project) => project.visible).length;
   }
 
-  protected showInfo(event: Event): void {
-    event.preventDefault();
-    this.dialog.open(this.getDetailsComponent(), {
-      panelClass: 'dialog-sm'
-    });
+  // Sort units from newest -> oldest in each of these categories
+  // WISE Tested (Platform) -> WISE Tested (Other) -> Community (Platform) -> Community (Other)
+  private sortUnits(a: LibraryProject, b: LibraryProject): number {
+    const unitTypes = [
+      'wiseTestedPlatform',
+      'wiseTestedOther',
+      'communityBuiltPlatform',
+      'communityBuiltOther'
+    ];
+    const unitTypeIndexA = unitTypes.indexOf(a.metadata.publicUnitType + a.metadata.unitType);
+    const unitTypeIndexB = unitTypes.indexOf(b.metadata.publicUnitType + b.metadata.unitType);
+    return unitTypeIndexA === unitTypeIndexB ? b.id - a.id : unitTypeIndexA - unitTypeIndexB;
   }
-
-  protected abstract getDetailsComponent(): any;
 }

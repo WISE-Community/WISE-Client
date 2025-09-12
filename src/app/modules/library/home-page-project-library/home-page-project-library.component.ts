@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
+import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 @Component({
-    selector: 'app-home-page-project-library',
-    styleUrls: ['./home-page-project-library.component.scss', '../library/library.component.scss'],
-    templateUrl: './home-page-project-library.component.html',
-    standalone: false
+  providers: [ProjectFilterValues],
+  selector: 'app-home-page-project-library',
+  styleUrls: ['./home-page-project-library.component.scss', '../library/library.component.scss'],
+  templateUrl: './home-page-project-library.component.html',
+  standalone: false
 })
 export class HomePageProjectLibraryComponent {
   constructor(private libraryService: LibraryService) {

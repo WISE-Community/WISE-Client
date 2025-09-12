@@ -1,27 +1,36 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { NotebookService } from '../../../services/notebookService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { ConceptMapContent } from '../ConceptMapContent';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'edit-concept-map-advanced',
-    templateUrl: 'edit-concept-map-advanced.component.html',
-    styleUrls: ['edit-concept-map-advanced.component.scss'],
-    standalone: false
+  templateUrl: 'edit-concept-map-advanced.component.html',
+  styleUrl: 'edit-concept-map-advanced.component.scss',
+  imports: [
+    MatCheckbox,
+    FormsModule,
+    MatButton,
+    MatIcon,
+    MatFormFieldModule,
+    MatInput,
+    MatSelectModule,
+    MatTooltip,
+    EditComponentAddToNotebookButtonComponent,
+    EditCommonAdvancedComponent
+  ]
 })
 export class EditConceptMapAdvancedComponent extends EditAdvancedComponentComponent {
   componentContent: ConceptMapContent;
   allowedConnectedComponentTypes = ['ConceptMap', 'Draw', 'Embedded', 'Graph', 'Label', 'Table'];
-
-  constructor(
-    protected nodeService: TeacherNodeService,
-    protected notebookService: NotebookService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(nodeService, notebookService, projectService);
-  }
 
   ruleTypeChanged(ruleIndex: number): void {
     const rule = this.componentContent.rules[ruleIndex];
