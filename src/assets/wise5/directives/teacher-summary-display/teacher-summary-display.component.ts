@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { SummaryDisplayComponent } from '../summary-display/summary-display.component';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { Observable, Subscription } from 'rxjs';
 import { Annotation } from '../../common/Annotation';
@@ -9,7 +8,7 @@ import { ComponentState } from '../../../../app/domain/componentState';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
-  imports: [CommonModule, HighchartsChartModule, MatCardModule],
+  imports: [CommonModule, HighchartsChartModule],
   selector: 'teacher-summary-display',
   styleUrl: '../summary-display/summary-display.component.scss',
   templateUrl: '../summary-display/summary-display.component.html'

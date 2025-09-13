@@ -20,7 +20,7 @@ import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleC
   templateUrl: '../summary-display/summary-display.component.html'
 })
 export class StudentSummaryDisplay extends SummaryDisplayComponent {
-  private studentWorkSavedToServerSubscription: Subscription;
+  private studentWorkSavedToServerSubscription: Subscription = new Subscription();
   numDummySamples: number;
 
   ngOnInit(): void {
