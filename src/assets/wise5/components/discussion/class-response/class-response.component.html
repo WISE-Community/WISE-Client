@@ -64,7 +64,7 @@
   @if (response.replies.length > 0) {
     <div class="notice-bg-bg">
       @if (mode === 'student' || response.replies.length > 0) {
-        <mat-divider class="comment-divider"></mat-divider>
+        <mat-divider class="comment-divider" />
       }
       <div class="comments-header" matSubheader>
         @if (response.replies.length === 1) {
@@ -155,7 +155,7 @@
       </div>
     </div>
   }
-  <mat-divider class="comment-divider"></mat-divider>
+  <mat-divider class="comment-divider" />
   @if ((mode === 'student' || mode === 'preview') && !isDisabled) {
     <div class="new-reply flex flex-row">
       <textarea
