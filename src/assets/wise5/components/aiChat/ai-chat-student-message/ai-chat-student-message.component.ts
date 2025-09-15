@@ -5,9 +5,9 @@ import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgrou
 
 @Component({
   selector: 'ai-chat-student-message',
-  templateUrl: './ai-chat-student-message.component.html',
+  standalone: false,
   styleUrl: './ai-chat-student-message.component.scss',
-  standalone: false
+  templateUrl: './ai-chat-student-message.component.html'
 })
 export class AiChatStudentMessageComponent {
   protected avatarColor: string;

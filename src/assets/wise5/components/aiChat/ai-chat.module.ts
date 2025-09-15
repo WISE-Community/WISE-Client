@@ -4,11 +4,10 @@ import { AiChatBotMessageComponent } from './ai-chat-bot-message/ai-chat-bot-mes
 import { AiChatStudentMessageComponent } from './ai-chat-student-message/ai-chat-student-message.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [AiChatBotMessageComponent, AiChatStudentMessageComponent, AiChatMessagesComponent],
-  imports: [CommonModule, FlexLayoutModule, MatIconModule],
+  imports: [CommonModule, MatIconModule],
   exports: [AiChatBotMessageComponent, AiChatStudentMessageComponent, AiChatMessagesComponent]
 })
 export class AiChatModule {}

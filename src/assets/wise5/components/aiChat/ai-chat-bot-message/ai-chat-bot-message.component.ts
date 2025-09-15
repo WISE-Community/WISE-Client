@@ -5,9 +5,9 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 
 @Component({
   selector: 'ai-chat-bot-message',
-  templateUrl: './ai-chat-bot-message.component.html',
+  standalone: false,
   styleUrl: './ai-chat-bot-message.component.scss',
-  standalone: false
+  templateUrl: './ai-chat-bot-message.component.html'
 })
 export class AiChatBotMessageComponent {
   @Input() computerAvatar: ComputerAvatar;
