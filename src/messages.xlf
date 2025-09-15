@@ -1583,7 +1583,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">157,161</context>
+          <context context-type="linenumber">144,148</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
@@ -1813,14 +1813,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> <x id="INTERPOLATION" equiv-text="{{ milestone.numberOfStudentsCompleted }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ milestone.numberOfStudentsInRun }}"/> teams completed </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/classroom-monitor/milestones/milestones.component.html</context>
-          <context context-type="linenumber">38,40</context>
+          <context context-type="linenumber">36,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4871510524487319570" datatype="html">
         <source>~ Report Available ~</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/classroom-monitor/milestones/milestones.component.html</context>
-          <context context-type="linenumber">42,46</context>
+          <context context-type="linenumber">40,44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1415233403935415838" datatype="html">
@@ -1925,21 +1925,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Your message has been sent. We will get back to you as soon as possible.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">12,15</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8864930425454064488" datatype="html">
         <source>Return to WISE Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">15,19</context>
+          <context context-type="linenumber">14,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7533853265286649557" datatype="html">
         <source>Contact WISE</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">20,22</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
@@ -1978,7 +1978,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">23,24</context>
+          <context context-type="linenumber">21,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/share-project-dialog/share-project-dialog.component.html</context>
@@ -2001,14 +2001,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Name required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">26,30</context>
+          <context context-type="linenumber">24,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4768749765465246664" datatype="html">
         <source>Email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">33,34</context>
+          <context context-type="linenumber">29,30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
@@ -2031,7 +2031,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Email required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">36,38</context>
+          <context context-type="linenumber">32,34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-username/forgot-teacher-username.component.html</context>
@@ -2050,14 +2050,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Invalid Email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">39,42</context>
+          <context context-type="linenumber">35,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4250948520990652627" datatype="html">
         <source>Teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">42,44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/forgot-home/forgot-home.component.html</context>
@@ -2076,35 +2076,35 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Teacher required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">56,59</context>
+          <context context-type="linenumber">51,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3187063371811307868" datatype="html">
         <source>Issue Type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="305786410811878097" datatype="html">
         <source>Issue Type required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">73,76</context>
+          <context context-type="linenumber">67,70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3476285207374951390" datatype="html">
         <source>Unit Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">80,81</context>
+          <context context-type="linenumber">72,73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4739818603756173797" datatype="html">
         <source>Summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">87,88</context>
+          <context context-type="linenumber">77,78</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/SummaryInfo.ts</context>
@@ -2123,14 +2123,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Summary required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">90,94</context>
+          <context context-type="linenumber">80,83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
         <source>Description</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">96,99</context>
+          <context context-type="linenumber">84,87</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
@@ -2165,14 +2165,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Description required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">112,116</context>
+          <context context-type="linenumber">100,103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1818615214955413398" datatype="html">
         <source> This site is protected by reCAPTCHA and the Google <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://policies.google.com/privacy&quot;&gt;"/>Privacy Policy<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://policies.google.com/terms&quot;&gt;"/>Terms of Service<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> apply. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">118,121</context>
+          <context context-type="linenumber">105,108</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
@@ -2199,28 +2199,28 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Recaptcha failed. Please reload the page and try again! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">126,129</context>
+          <context context-type="linenumber">113,116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2030256990555278300" datatype="html">
         <source> Sorry, there was a problem submitting the form. Please try again. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">130,134</context>
+          <context context-type="linenumber">117,121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7898998821450935640" datatype="html">
         <source> By submitting, you will be sending your unit to be reviewed. If approved, it will be added to the Community Built library. Make sure you have filled out all appropriate fields in the Unit Info page in the authoring tool. We will be in touch if we require any more information. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">136,141</context>
+          <context context-type="linenumber">123,128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3357031660050032232" datatype="html">
         <source>Thank you!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">141,145</context>
+          <context context-type="linenumber">128,132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/survey/survey-completed/survey-completed.component.html</context>
@@ -2231,62 +2231,62 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Submit for Review</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
-          <context context-type="linenumber">155,157</context>
+          <context context-type="linenumber">142,144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6178733511992894634" datatype="html">
         <source>Trouble Signing In</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">133</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6892681827231609313" datatype="html">
         <source>Need Help Using WISE</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2072690839988671006" datatype="html">
         <source>Problems with a WISE Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">131</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">139</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2959002981630304422" datatype="html">
-        <source>Feedback to WISE</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2959002981630304422" datatype="html">
+        <source>Feedback to WISE</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8693603235657020323" datatype="html">
         <source>Other</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/profile.constants.ts</context>
@@ -2297,7 +2297,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Student Management</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
@@ -2312,21 +2312,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Need Help with Authoring</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6193846139411583890" datatype="html">
         <source>Publish Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1936787644032074292" datatype="html">
         <source>Publish my unit to the WISE Community Built library</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">157</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4340256332658641886" datatype="html">
