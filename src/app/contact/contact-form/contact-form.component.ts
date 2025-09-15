@@ -15,7 +15,7 @@ import { UserService } from '../../services/user.service';
   encapsulation: ViewEncapsulation.None,
   selector: 'app-contact-form',
   standalone: false,
-  styleUrls: ['./contact-form.component.scss'],
+  styleUrl: './contact-form.component.scss',
   templateUrl: './contact-form.component.html'
 })
 export class ContactFormComponent implements OnInit {
