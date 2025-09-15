@@ -2964,7 +2964,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Look up username or reset password for a student account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/forgot-home/forgot-home.component.html</context>
-          <context context-type="linenumber">10,13</context>
+          <context context-type="linenumber">10,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7243498058644650823" datatype="html">
@@ -3982,7 +3982,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">21,24</context>
+          <context context-type="linenumber">21,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5327650578137881121" datatype="html">
@@ -4012,7 +4012,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
-          <context context-type="linenumber">31,34</context>
+          <context context-type="linenumber">31,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2206462199601912572" datatype="html">
@@ -5693,7 +5693,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Research</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header-links/header-links.component.html</context>
-          <context context-type="linenumber">23,26</context>
+          <context context-type="linenumber">23,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
@@ -5718,7 +5718,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Main menu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
-          <context context-type="linenumber">27,30</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6780407325174304229" datatype="html">
