@@ -69,6 +69,8 @@ html {
   @include mat.form-field-overrides((
     filled-container-shape: var(--mat-sys-corner-small),
     filled-container-color: var(--mat-sys-surface-container),
+    outlined-container-shape: var(--mat-sys-corner-small),
+    outlined-outline-width: 2px
   ));
 
   .mdc-text-field--filled {
@@ -121,8 +123,6 @@ html {
   .mat-mdc-input-element {
     box-shadow: none !important;
   }
-
-  --mdc-outlined-text-field-outline-width: 2px;
 
   /* Color variants */
 

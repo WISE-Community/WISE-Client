@@ -24,7 +24,7 @@ export const Basic: Story = {
       <div class="flex flex-col items-start gap-2">
         <div>
           <h4>Basic select:</h4>
-          <div class="flex gap-2">
+          <div class="flex flex-wrap gap-2">
             <mat-form-field>
               <mat-label>Favorite food</mat-label>
               <mat-select [(value)]="favoriteFood">
