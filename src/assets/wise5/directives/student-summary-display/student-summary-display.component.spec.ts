@@ -11,16 +11,28 @@ import { ScoreSummaryDataPoint } from '../summary-display/summary-data/ScoreSumm
 import { SeriesData } from '../../common/SeriesData';
 import { SeriesDataPoint } from '../../common/SeriesDataPoint';
 import { StudentSummaryDisplay } from './student-summary-display.component';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { SummaryData } from '../summary-display/summary-data/SummaryData';
+import { MockProvider, MockProviders } from 'ng-mocks';
+import { of } from 'rxjs';
+import { StudentDataService } from '../../services/studentDataService';
+import { DataService } from '../../../../app/services/data.service';
+import { AnnotationService } from '../../services/annotationService';
+import { CRaterService } from '../../services/cRaterService';
+import { SummaryService } from '../../components/summary/summaryService';
 
 let component: StudentSummaryDisplay;
 let fixture: ComponentFixture<StudentSummaryDisplay>;
 describe('StudentSummaryDisplayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [StudentSummaryDisplay, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient()]
+      imports: [StudentSummaryDisplay],
+      providers: [
+        provideHttpClient(),
+        MockProvider(StudentDataService, { studentWorkSavedToServer$: of() }),
+        { provide: DataService, useClass: StudentDataService },
+        MockProviders(AnnotationService, ConfigService, CRaterService, ProjectService),
+        SummaryService
+      ]
     });
     fixture = TestBed.createComponent(StudentSummaryDisplay);
     component = fixture.componentInstance;

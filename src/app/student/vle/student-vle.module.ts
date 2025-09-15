@@ -5,7 +5,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentStudentModule } from '../../../assets/wise5/components/component/component-student.module';
 import { GenerateImageDialogComponent } from '../../../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
 import { SimpleDialogModule } from '../../../assets/wise5/directives/simple-dialog.module';
-import { SummaryDisplayModule } from '../../../assets/wise5/directives/summary-display/summary-display.module';
 import { InitializeVLEService } from '../../../assets/wise5/services/initializeVLEService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
@@ -34,7 +33,6 @@ import { PeerGroupService } from '../../../assets/wise5/services/peerGroupServic
     StudentComponentModule,
     StudentTeacherCommonModule,
     StudentVLERoutingModule,
-    SummaryDisplayModule,
     VLEComponent
   ],
   providers: [
