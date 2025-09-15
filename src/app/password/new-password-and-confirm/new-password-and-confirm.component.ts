@@ -10,11 +10,11 @@ import {
 import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
-    selector: 'new-password-and-confirm',
-    templateUrl: './new-password-and-confirm.component.html',
-    styleUrls: ['./new-password-and-confirm.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  selector: 'new-password-and-confirm',
+  standalone: false,
+  styleUrl: './new-password-and-confirm.component.scss',
+  templateUrl: './new-password-and-confirm.component.html'
 })
 export class NewPasswordAndConfirmComponent implements OnInit {
   static readonly CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME: string = 'confirmNewPassword';
@@ -36,8 +36,6 @@ export class NewPasswordAndConfirmComponent implements OnInit {
     { errorFieldName: 'tooShort', text: $localize`be at least 8 characters long` }
   ];
   protected passwordStrength: number = 0;
-
-  constructor() {}
 
   ngOnInit(): void {
     this.newPasswordFormControl = new FormControl('', [
@@ -71,8 +69,9 @@ export class NewPasswordAndConfirmComponent implements OnInit {
   }
 
   private passwordMatchValidator(formGroup: FormGroup): ValidationErrors {
-    const password = formGroup.get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-      .value;
+    const password = formGroup.get(
+      NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+    ).value;
     const confirmPassword = formGroup.get(
       NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME
     ).value;
