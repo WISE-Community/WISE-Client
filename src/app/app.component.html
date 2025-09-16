@@ -2,32 +2,30 @@
   <mat-sidenav #mobileMenu class="primary-bg" [(opened)]="showMobileMenu" position="end">
     <app-mobile-menu />
   </mat-sidenav>
-  <mat-sidenav-content (scroll)="onYPositionChange($event)">
-    <div class="flex flex-col">
-      @if (hasAnnouncement && showHeaderAndFooter) {
-        <app-announcement
-          class="top-content"
-          [announcement]="announcement"
-          (dismiss)="dismissAnnouncement()"
-        />
-      }
-      @if (showHeaderAndFooter) {
-        <app-header class="dark-theme top-content" />
-      }
-      <div class="w-full">
-        <router-outlet />
-      </div>
-      @if (showHeaderAndFooter) {
-        <app-footer />
-      }
-      @if (showHeaderAndFooter) {
-        <div class="to-top dark-theme" [ngClass]="{ active: scroll, inactive: !scroll }">
-          <button mat-raised-button (click)="scrollToTop()">
-            <mat-icon>arrow_upward</mat-icon>
-            &nbsp;<ng-container i18n>Back to Top</ng-container>
-          </button>
-        </div>
-      }
+  <mat-sidenav-content class="!flex flex-col" (scroll)="onYPositionChange($event)">
+    @if (hasAnnouncement && showHeaderAndFooter) {
+      <app-announcement
+        class="top-content"
+        [announcement]="announcement"
+        (dismiss)="dismissAnnouncement()"
+      />
+    }
+    @if (showHeaderAndFooter) {
+      <app-header class="dark-theme top-content" />
+    }
+    <div class="flex-1">
+      <router-outlet />
     </div>
+    @if (showHeaderAndFooter) {
+      <app-footer />
+    }
+    @if (showHeaderAndFooter) {
+      <div class="to-top dark-theme" [ngClass]="{ active: scroll, inactive: !scroll }">
+        <button mat-raised-button (click)="scrollToTop()">
+          <mat-icon>arrow_upward</mat-icon>
+          &nbsp;<ng-container i18n>Back to Top</ng-container>
+        </button>
+      </div>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>
