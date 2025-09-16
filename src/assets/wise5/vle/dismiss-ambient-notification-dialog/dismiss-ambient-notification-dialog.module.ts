@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,7 +14,6 @@ import { DismissAmbientNotificationDialogComponent } from './dismiss-ambient-not
   declarations: [DismissAmbientNotificationDialogComponent],
   imports: [
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatDialogModule,
