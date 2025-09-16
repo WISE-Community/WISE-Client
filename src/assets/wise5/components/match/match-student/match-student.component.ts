@@ -14,9 +14,8 @@ import { MatchStudentDefaultComponent } from './match-student-default/match-stud
 import { MatchContent } from '../MatchContent';
 
 @Component({
-    selector: 'match-student',
-    template: '<div #component></div>',
-    standalone: false
+  standalone: false,
+  template: '<div #component></div>'
 })
 export class MatchStudent {
   @Input() component: any;
