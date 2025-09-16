@@ -6,14 +6,13 @@ import { NotificationService } from '../../../services/notificationService';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { TextFieldModule } from '@angular/cdk/text-field';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
 
 @Component({
-    imports: [FormsModule, FlexLayoutModule, MatFormFieldModule, MatInputModule, TextFieldModule],
-    selector: 'edit-component-comment',
-    styles: ['.mat-mdc-form-field { display: initial }', 'textarea { resize: none }'],
-    templateUrl: 'edit-component-comment.component.html'
+  imports: [CdkTextareaAutosize, FormsModule, MatFormFieldModule, MatInputModule, TextFieldModule],
+  selector: 'edit-component-comment',
+  styles: ['.mat-mdc-form-field { display: initial }', 'textarea { resize: none }'],
+  templateUrl: 'edit-component-comment.component.html'
 })
 export class EditComponentCommentComponent {
   @Input() comment: string;
