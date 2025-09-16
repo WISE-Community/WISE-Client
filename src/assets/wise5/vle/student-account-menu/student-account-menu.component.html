@@ -8,7 +8,7 @@
       >&nbsp;<span class="mat-small" i18n>(Team {{ workgroupId }})</span>
     </div>
   </div>
-  <mat-divider></mat-divider>
+  <mat-divider />
   @if (rootNodeStatus != null) {
     <div class="menu-section">
       <div class="flex justify-between items-center">
@@ -25,13 +25,13 @@
             value="{{ rootNodeStatus.progress.completionPct }}"
             aria-label-i18n
             aria-label="completion percentage"
-          ></mat-progress-bar>
+          />
           <h3 class="mat-headline-4">{{ rootNodeStatus.progress.completionPct }}%</h3>
         </div>
       </div>
     </div>
   }
-  <mat-divider class="divider"></mat-divider>
+  <mat-divider class="divider" />
   @if (showScore) {
     <div class="menu-section">
       <div class="flex items-center">
@@ -50,7 +50,7 @@
               value="{{ scorePercentage }}"
               aria-label-i18n
               aria-label="total score percentage"
-            ></mat-progress-bar>
+            />
           </div>
           @if (maxScore > 0) {
             <h3 class="mat-headline-4">{{ scorePercentage }}%</h3>
@@ -59,7 +59,7 @@
       </div>
     </div>
   }
-  <mat-divider class="divider"></mat-divider>
+  <mat-divider class="divider" />
   <div class="notice-bg-bg controls flex">
     <button mat-button color="primary" (click)="goHome()" i18n>Go Home</button>
     <span class="flex-grow"></span>
