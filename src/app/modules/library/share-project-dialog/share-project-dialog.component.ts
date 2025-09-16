@@ -8,10 +8,10 @@ import { ShareItemDialogComponent } from '../share-item-dialog/share-item-dialog
 import { Project } from '../../../domain/project';
 
 @Component({
-    selector: 'app-share-project-dialog',
-    templateUrl: './share-project-dialog.component.html',
-    styleUrls: ['./share-project-dialog.component.scss'],
-    standalone: false
+  selector: 'app-share-project-dialog',
+  standalone: false,
+  styleUrl: './share-project-dialog.component.scss',
+  templateUrl: './share-project-dialog.component.html'
 })
 export class ShareProjectDialogComponent extends ShareItemDialogComponent {
   dataSource: MatTableDataSource<any[]> = new MatTableDataSource<any[]>();
