@@ -1,5 +1,3 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
@@ -14,7 +12,7 @@ import { ProjectService } from '../../../services/projectService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
 import { PeerGroupMember } from '../../peerChat/PeerGroupMember';
 import { ShowGroupWorkDisplayComponent } from './show-group-work-display.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 class MockService {}
 
@@ -67,20 +65,18 @@ const workgroupId: number = 1000;
 describe('ShowGroupWorkDisplayComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [ShowGroupWorkDisplayComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [StudentTeacherCommonServicesModule],
-    providers: [
+      declarations: [ShowGroupWorkDisplayComponent],
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [
         AnnotationService,
         { provide: ConfigService, useClass: MockConfigService },
         { provide: MatDialog, useClass: MockService },
         { provide: NodeService, useClass: MockService },
         { provide: NotebookService, useClass: MockNotebookService },
         { provide: PeerGroupService, useClass: PeerGroupService },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        provideHttpClient()
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ShowGroupWorkDisplayComponent);
     componentState1 = createComponentState(1);
