@@ -369,7 +369,7 @@
         <source>Back to Top</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">26,30</context>
+          <context context-type="linenumber">27,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1394735223918464839" datatype="html">
@@ -22526,7 +22526,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>My Files</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component.html</context>
-          <context context-type="linenumber">1,3</context>
+          <context context-type="linenumber">1,4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="425755073092096425" datatype="html">
