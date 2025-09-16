@@ -3511,11 +3511,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Look up username</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student/forgot-student.component.html</context>
-          <context context-type="linenumber">10,13</context>
+          <context context-type="linenumber">10,14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher/forgot-teacher.component.html</context>
-          <context context-type="linenumber">10,13</context>
+          <context context-type="linenumber">10,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
@@ -3974,11 +3974,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Questions from teachers.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">69,72</context>
+          <context context-type="linenumber">69,73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">135,139</context>
+          <context context-type="linenumber">135,140</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
@@ -4004,11 +4004,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Questions from students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
-          <context context-type="linenumber">79,83</context>
+          <context context-type="linenumber">79,84</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">410,414</context>
+          <context context-type="linenumber">410,415</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
@@ -4376,11 +4376,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Information for new users.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
-          <context context-type="linenumber">125,128</context>
+          <context context-type="linenumber">125,129</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
-          <context context-type="linenumber">400,403</context>
+          <context context-type="linenumber">400,404</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
@@ -5279,7 +5279,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Want to get in touch? Send us a message.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">169,172</context>
+          <context context-type="linenumber">169,173</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3220280128711469703" datatype="html">
@@ -7533,7 +7533,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Students can view and complete WISE lessons offered by teachers.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
-          <context context-type="linenumber">19,22</context>
+          <context context-type="linenumber">19,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4136904004598927016" datatype="html">
