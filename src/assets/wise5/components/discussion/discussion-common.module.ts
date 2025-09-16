@@ -9,12 +9,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TextFieldModule } from '@angular/cdk/text-field';
+import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ClassResponse],
   imports: [
+    CdkTextareaAutosize,
     CommonModule,
+    FormsModule,
     MatButtonModule,
     MatCardModule,
     MatDividerModule,
