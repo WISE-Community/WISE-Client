@@ -6,7 +6,6 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotebookItemComponent } from '../notebook-item/notebook-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,21 +15,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatIconModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        NotebookItemComponent
-    ],
-    selector: 'notebook-notes',
-    styleUrl: 'notebook-notes.component.scss',
-    templateUrl: 'notebook-notes.component.html',
-    encapsulation: ViewEncapsulation.None
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    NotebookItemComponent
+  ],
+  selector: 'notebook-notes',
+  styleUrl: 'notebook-notes.component.scss',
+  templateUrl: 'notebook-notes.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class NotebookNotesComponent extends NotebookParentComponent {
   protected groups = [];

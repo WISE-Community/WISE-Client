@@ -1,19 +1,18 @@
 <ng-template #notebookItems let-group="group">
-  <div class="notes" fxLayout="row wrap">
+  <div class="notes flex flex-row flex-wrap">
     @if (!hasPrivateNotes) {
       <p class="empty" i18n>You haven't created any {{ label.plural }} yet.</p>
     }
     @for (note of group.items; track note) {
       @if (note.serverDeleteTime == null) {
         <notebook-item
+          class="w-full sm:w-1/2"
           [config]="config"
           [group]="group.name"
           [itemId]="note.localNotebookItemId"
           [isChooseMode]="insertArgs.insertMode"
           [note]="note"
           (onSelect)="select($event)"
-          fxFlex="100"
-          fxFlex.gt-xs="50"
         />
       }
     }
@@ -50,7 +49,7 @@
       } @else {
         <h4>{{ label.link }}</h4>
       }
-      <span fxFlex></span>
+      <span class="grow"></span>
       <button
         (click)="close()"
         mat-icon-button
@@ -93,20 +92,17 @@
           @if (group.name === 'private' && !hasPrivateNotes) {
             <p class="empty" i18n>Team hasn't created any {{ label.plural }} yet.</p>
           }
-          <div fxLayout="row wrap" fxLayoutAlign="start center">
+          <div class="flex flex-row flex-wrap justify-start items-center">
             @for (note of group.items; track note) {
               @if (note.serverDeleteTime == null && this.workgroupId === note.workgroupId) {
                 <notebook-item
+                  class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
                   [config]="config"
                   [group]="group.name"
                   [itemId]="note.localNotebookItemId"
                   [isChooseMode]="insertArgs.insertMode"
                   [note]="note"
                   (onSelect)="select($event)"
-                  fxFlex="100"
-                  fxFlex.gt-xs="50"
-                  fxFlex.gt-sm="33"
-                  fxFlex.gt-md="25"
                 />
               }
             }
