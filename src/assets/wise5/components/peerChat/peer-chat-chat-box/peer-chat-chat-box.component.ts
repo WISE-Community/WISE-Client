@@ -4,10 +4,10 @@ import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
 
 @Component({
-    selector: 'peer-chat-chat-box',
-    templateUrl: './peer-chat-chat-box.component.html',
-    styleUrls: ['./peer-chat-chat-box.component.scss'],
-    standalone: false
+  selector: 'peer-chat-chat-box',
+  standalone: false,
+  styleUrl: './peer-chat-chat-box.component.scss',
+  templateUrl: './peer-chat-chat-box.component.html'
 })
 export class PeerChatChatBoxComponent implements OnInit {
   @Input() component: PeerChatComponent;
@@ -23,8 +23,8 @@ export class PeerChatChatBoxComponent implements OnInit {
   @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
   @Output() responseChangedEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
-  @Output()
-  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+  @Output() undeleteClickedEvent: EventEmitter<PeerChatMessage> =
+    new EventEmitter<PeerChatMessage>();
 
   ngOnInit(): void {
     this.workgroupInfosWithoutTeachers = this.filterOutTeachers(this.workgroupInfos);

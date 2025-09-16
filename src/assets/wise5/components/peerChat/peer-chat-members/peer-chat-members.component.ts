@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'peer-chat-members',
-  templateUrl: './peer-chat-members.component.html',
+  standalone: false,
   styleUrl: './peer-chat-members.component.scss',
-  standalone: false
+  templateUrl: './peer-chat-members.component.html'
 })
 export class PeerChatMembersComponent {
   @Input() peerChatWorkgroupInfos: any[];
