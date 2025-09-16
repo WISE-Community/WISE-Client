@@ -11,13 +11,13 @@ import { SchoolLevel, schoolLevels } from '../../../domain/profile.constants';
 import { EditProfileComponent } from '../../../common/edit-profile/edit-profile.component';
 
 @Component({
-    selector: 'teacher-edit-profile',
-    templateUrl: './edit-profile.component.html',
-    styleUrls: [
-        '../../../common/edit-profile/edit-profile.component.scss',
-        './edit-profile.component.scss'
-    ],
-    standalone: false
+  selector: 'teacher-edit-profile',
+  standalone: false,
+  styleUrls: [
+    '../../../common/edit-profile/edit-profile.component.scss',
+    './edit-profile.component.scss'
+  ],
+  templateUrl: './edit-profile.component.html'
 })
 export class TeacherEditProfileComponent extends EditProfileComponent {
   user: Teacher;

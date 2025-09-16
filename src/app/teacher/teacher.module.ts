@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../modules/shared/shared.module';
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { AuthGuard } from './auth.guard';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -62,7 +61,6 @@ const materialModules = [
   imports: [
     ApplyTagsButtonComponent,
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     LibraryModule,
     materialModules,
