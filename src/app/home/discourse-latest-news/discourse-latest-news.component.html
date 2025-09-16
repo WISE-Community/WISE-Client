@@ -9,7 +9,7 @@
   <ul>
     @for (topic of topics; track topic; let index = $index) {
       @if (!xsScreen || index === 0) {
-        <li [ngClass]="{ 'mat-small': xsScreen, 'mat-body-1': !xsScreen }">
+        <li [ngClass]="{ 'mat-small': smallScreen, 'mat-body-1': !smallScreen }">
           <a href="{{ baseUrl }}/t/{{ topic.slug }}/{{ topic.id }}">
             {{ topic.title }}
           </a>
@@ -20,7 +20,7 @@
       }
     }
   </ul>
-  <div [ngClass]="{ 'mat-small': xsScreen, 'mat-body-1': !xsScreen }">
+  <div [ngClass]="{ 'mat-small': smallScreen, 'mat-body-1': !smallScreen }">
     <a href="{{ baseUrl }}/{{ category }}" i18n>More news</a>
   </div>
 </div>
