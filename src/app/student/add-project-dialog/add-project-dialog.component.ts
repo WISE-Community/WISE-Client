@@ -5,10 +5,8 @@ import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-add-project-dialog',
-    templateUrl: './add-project-dialog.component.html',
-    styleUrls: ['./add-project-dialog.component.scss'],
-    standalone: false
+  standalone: false,
+  templateUrl: './add-project-dialog.component.html'
 })
 export class AddProjectDialogComponent implements OnInit {
   validRunCodeSyntaxRegEx: any = /^[a-zA-Z]*\d{3,4}$/;
@@ -29,7 +27,7 @@ export class AddProjectDialogComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       if (params['accessCode'] != null) {
         this.accessCode = params['accessCode'];
@@ -39,7 +37,7 @@ export class AddProjectDialogComponent implements OnInit {
     });
   }
 
-  submit() {
+  submit(): void {
     this.isAdding = true;
     this.studentService
       .addRun(this.registerRunRunCode, this.selectedPeriod)
@@ -61,13 +59,13 @@ export class AddProjectDialogComponent implements OnInit {
       });
   }
 
-  clearPeriods() {
+  clearPeriods(): void {
     this.selectedPeriod = '';
     this.registerRunPeriods = [];
     this.addProjectForm.controls['period'].disable();
   }
 
-  checkRunCode() {
+  checkRunCode(): void {
     const runCode = this.addProjectForm.controls['runCode'].value;
     this.registerRunRunCode = runCode;
     if (this.isValidRunCodeSyntax(runCode)) {
@@ -79,7 +77,7 @@ export class AddProjectDialogComponent implements OnInit {
     }
   }
 
-  handleRunCodeResponse(runInfo) {
+  handleRunCodeResponse(runInfo): void {
     if (runInfo.error) {
       this.clearPeriods();
       this.setInvalidRunCode();
@@ -94,11 +92,11 @@ export class AddProjectDialogComponent implements OnInit {
     }
   }
 
-  setInvalidRunCode() {
+  setInvalidRunCode(): void {
     this.addProjectForm.controls['runCode'].setErrors({ invalidRunCode: true });
   }
 
-  isValidRunCodeSyntax(runCode: string) {
+  isValidRunCodeSyntax(runCode: string): any {
     return this.validRunCodeSyntaxRegEx.test(runCode);
   }
 }

@@ -1,7 +1,7 @@
 <h2 mat-dialog-title i18n>Team Sign In</h2>
 <mat-dialog-content class="dialog-content-scroll">
   <p class="mat-subtitle-1 accent-1">{{ run.name }}</p>
-  <mat-divider></mat-divider>
+  <mat-divider />
   <p class="mat-subtitle-2 flex items-center gap-2">
     <mat-icon class="success" i18n-aria-label aria-label="Signed In">check</mat-icon>
     <span
@@ -10,7 +10,7 @@
     >
   </p>
   @for (teamMember of teamMembers; track teamMember; let i = $index) {
-    <mat-divider></mat-divider>
+    <mat-divider />
     @if (isExistingStudent(teamMember)) {
       <p class="flex flex-col sm:flex-row flex-wrap gap-2">
         <span class="flex items-center gap-2">

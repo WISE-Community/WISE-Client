@@ -16,7 +16,7 @@
           [placeholderText]="'Search'"
           [value]="search"
           (update)="searchUpdated($event)"
-        ></app-search-bar>
+        />
       </div>
       @if (loaded) {
         <div id="unitCount" class="notice">
@@ -28,11 +28,13 @@
             }
             @if (filteredRuns.length) {
               <span class="mat-caption">
-                (@if (getRunTotal('isScheduled')) {
-                  <span i18n>{{ getRunTotal('isScheduled') }} scheduled</span>,
+                @if (getRunTotal('isScheduled')) {
+                  (<span i18n>{{ getRunTotal('isScheduled') }} scheduled</span>,
+                  <span i18n>{{ getRunTotal('isActive') }} active</span>)
+                } @else {
+                  (<span i18n>{{ getRunTotal('isActive') }} active</span>)
                 }
-                <span i18n>{{ getRunTotal('isActive') }} active</span>
-              </span>)
+              </span>
             }
             @if (search) {
               |
@@ -54,7 +56,7 @@
                 }
               </app-timeline-item-label>
               <app-timeline-item-content>
-                <app-student-run-list-item [run]="run"></app-student-run-list-item>
+                <app-student-run-list-item [run]="run" />
               </app-timeline-item-content>
             </app-timeline-item>
           }
