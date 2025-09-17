@@ -15,7 +15,7 @@
       (click)="toggleExpand()"
       [disabled]="disabled"
     >
-      <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+      <div class="flex-1 flex justify-start items-center">
         <step-info
           [hasAlert]="hasAlert"
           [hasNewAlert]="hasNewAlert"
@@ -23,11 +23,14 @@
           [nodeId]="nodeId"
         />
       </div>
-      <div fxFlex="{{ showScore ? 30 : 20 }}" fxLayout="row" fxLayoutAlign="center center">
+      <div
+        class="flex justify-center items-center"
+        [ngClass]="{ 'basis-[30%]': showScore, 'basis-1/5': !showScore }"
+      >
         <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
       </div>
       @if (showScore) {
-        <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+        <div class="basis-1/5 flex justify-center items-center">
           <workgroup-node-score [score]="score" [maxScore]="maxScore" />
         </div>
       }
