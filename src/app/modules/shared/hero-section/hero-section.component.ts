@@ -1,3 +1,4 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -8,12 +9,11 @@ import {
   ViewChild,
   ElementRef
 } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, FlexLayoutModule],
+  imports: [CommonModule],
   selector: 'app-hero-section',
   styleUrl: './hero-section.component.scss',
   templateUrl: './hero-section.component.html'
@@ -29,8 +29,16 @@ export class HeroSectionComponent {
   @ContentChild('sideTemplate', { static: false }) sideRef: TemplateRef<any>;
   @Input() tagline: string;
   @ContentChild('taglineTemplate', { static: false }) taglineRef: TemplateRef<any>;
+  protected xsScreen: boolean;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private sanitizer: DomSanitizer
+  ) {
+    this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
+      this.xsScreen = result.matches;
+    });
+  }
 
   ngAfterViewInit(): void {
     this.bgRef.nativeElement.onload = () => {
