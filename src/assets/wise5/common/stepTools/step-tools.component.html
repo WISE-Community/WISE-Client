@@ -27,8 +27,7 @@
       <mat-select-trigger>
         @if (nodeId) {
           {{ getNodePositionAndTitle(nodeId) }}
-        }
-        @if (!nodeId) {
+        } @else {
           <ng-container i18n> Select a Step </ng-container>
         }
       </mat-select-trigger>
