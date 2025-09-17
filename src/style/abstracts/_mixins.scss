@@ -55,7 +55,7 @@
     text-transform: uppercase;
   }
 
-  .mdc-button {
+  .mdc-button, .mat-mdc-button:has(.material-icons, mat-icon, [matButtonIcon]) {
     padding: 0 16px;
   }
 

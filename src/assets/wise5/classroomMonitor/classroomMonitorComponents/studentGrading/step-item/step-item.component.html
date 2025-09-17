@@ -15,25 +15,26 @@
       (click)="toggleExpand()"
       [disabled]="disabled"
     >
-      <div class="flex-1 flex justify-start items-center">
+      <div class="flex w-full items-center">
         <step-info
+          class="flex-1"
           [hasAlert]="hasAlert"
           [hasNewAlert]="hasNewAlert"
           [hasNewWork]="hasNewWork"
           [nodeId]="nodeId"
         />
-      </div>
-      <div
-        class="flex justify-center items-center"
-        [ngClass]="{ 'basis-[30%]': showScore, 'basis-1/5': !showScore }"
-      >
-        <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
-      </div>
-      @if (showScore) {
-        <div class="basis-1/5 flex justify-center items-center">
-          <workgroup-node-score [score]="score" [maxScore]="maxScore" />
+        <div
+          class="flex justify-center items-center"
+          [ngClass]="{ 'basis-[30%]': showScore, 'basis-1/5': !showScore }"
+        >
+          <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
         </div>
-      }
+        @if (showScore) {
+          <div class="basis-1/5 flex justify-center items-center">
+            <workgroup-node-score [score]="score" [maxScore]="maxScore" />
+          </div>
+        }
+      </div>
     </button>
   </div>
   @if (expand && !disabled) {
