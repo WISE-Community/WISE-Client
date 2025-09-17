@@ -5,8 +5,7 @@
       cdkDropList
       [cdkDropListData]="{ id: 0 }"
       (cdkDropListDropped)="dropWorkgroup($event)"
-      [ngStyle.gt-sm]="{ columns: 2 }"
-      [ngStyle.gt-md]="{ columns: 3 }"
+      class="md:columns-2 lg:columns-3"
     >
       @for (workgroup of unassignedWorkgroups; track workgroup) {
         <li
