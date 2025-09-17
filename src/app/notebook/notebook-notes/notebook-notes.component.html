@@ -21,7 +21,7 @@
 
 <ng-template #oneGroup>
   <div class="center">
-    <ng-container *ngTemplateOutlet="notebookItems; context: { group: groups[0] }"></ng-container>
+    <ng-container *ngTemplateOutlet="notebookItems; context: { group: groups[0] }" />
   </div>
 </ng-template>
 
@@ -34,7 +34,7 @@
     @for (group of groups; track group) {
       <mat-tab [disabled]="group.disabled" [label]="group.title">
         <div class="center">
-          <ng-container *ngTemplateOutlet="notebookItems; context: { group: group }"></ng-container>
+          <ng-container *ngTemplateOutlet="notebookItems; context: { group: group }" />
         </div>
       </mat-tab>
     }
@@ -59,10 +59,9 @@
         <mat-icon class="secondary-text">close</mat-icon>
       </button>
     </mat-toolbar>
-    <mat-divider></mat-divider>
+    <mat-divider />
     <div class="notes-wrapper">
-      <ng-container [ngTemplateOutlet]="groups.length > 1 ? multipleGroups : oneGroup">
-      </ng-container>
+      <ng-container [ngTemplateOutlet]="groups.length > 1 ? multipleGroups : oneGroup" />
     </div>
     @if (config.itemTypes.note.enableAddNote) {
       <button
