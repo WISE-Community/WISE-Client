@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,6 +15,7 @@ import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   imports: [
@@ -46,12 +46,18 @@ export class NotebookReportComponent extends NotebookParentComponent {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private breakpointObserver: BreakpointObserver,
     configService: ConfigService,
     notebookService: NotebookService,
-    private projectService: ProjectService,
-    private mediaObserver: MediaObserver
+    private projectService: ProjectService
   ) {
     super(configService, notebookService);
+    this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
+      if (!this.collapsed) {
+        this.collapsed = true;
+        this.fullscreen();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -81,15 +87,6 @@ export class NotebookReportComponent extends NotebookParentComponent {
             500
           );
         }, 500);
-      })
-    );
-
-    this.subscriptions.add(
-      this.mediaObserver.asObservable().subscribe((change: MediaChange[]) => {
-        if (change[0].mqAlias == 'xs' && !this.collapsed) {
-          this.collapsed = true;
-          this.fullscreen();
-        }
       })
     );
 
@@ -129,7 +126,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
   }
 
   protected toggleCollapse(): void {
-    if (this.collapsed && this.mediaObserver.isActive('xs')) {
+    if (this.collapsed && this.breakpointObserver.isMatched('(max-width: 40rem)')) {
       this.fullscreen();
       return;
     }
