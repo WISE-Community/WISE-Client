@@ -12022,11 +12022,11 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">81,83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">97,99</context>
+          <context context-type="linenumber">86,88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1444501656744347415" datatype="html">
@@ -13093,7 +13093,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">24,27</context>
+          <context context-type="linenumber">18,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
@@ -13108,7 +13108,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">35,39</context>
+          <context context-type="linenumber">29,33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-grading/student-grading.component.html</context>
@@ -14097,7 +14097,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">18,21</context>
+          <context context-type="linenumber">12,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8088663872040483564" datatype="html">
@@ -14108,7 +14108,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">29,32</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1073589585556989544" datatype="html">
@@ -14138,7 +14138,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">52,54</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
@@ -15595,39 +15595,39 @@ Are you sure you want to proceed?</source>
         <source>Team ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">40,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5160975695454097992" datatype="html">
         <source>Sort By Team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">48,52</context>
+          <context context-type="linenumber">42,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2128800934734769071" datatype="html">
         <source>Names</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">59,61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">73,75</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7073660311497647441" datatype="html">
         <source>Sort By Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">68,71</context>
+          <context context-type="linenumber">61,63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="245974091415917471" datatype="html">
         <source>Sort by number of notes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/notebook-grading/notebook-grading.component.html</context>
-          <context context-type="linenumber">91,94</context>
+          <context context-type="linenumber">83,86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1134043805497572295" datatype="html">
