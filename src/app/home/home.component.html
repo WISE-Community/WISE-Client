@@ -51,7 +51,13 @@
   <section class="section">
     <div class="section--fullwidth section--slant mat-app-background">
       <div class="content">
-        <h1 class="accent section__header" ngClass="mat-headline-4" i18n>The WISE Advantage</h1>
+        <h1
+          class="accent section__header text-center sm:text-start"
+          [ngClass]="{ 'mat-headline-4': smScreen }"
+          i18n
+        >
+          The WISE Advantage
+        </h1>
         <div class="features">
           @for (blurb of blurbs; track blurb.imgSrc) {
             <app-blurb
@@ -81,9 +87,8 @@
     <div class="section--fullwidth section--slant section--slant--rtl app-background">
       <div class="content">
         <h1
-          class="accent section__header"
-          ngClass="mat-headline-4"
-          [ngClass.xs]="{ 'mat-headline-4': false }"
+          class="accent section__header text-center sm:text-end"
+          [ngClass]="{ 'mat-headline-4': smScreen }"
           i18n
         >
           Curriculum Offerings
@@ -104,9 +109,8 @@
     <div class="section--fullwidth section--slant mat-app-background">
       <div class="content">
         <h1
-          class="accent section__header flex gap-6"
-          ngClass="mat-headline-4"
-          [ngClass.xs]="{ 'mat-headline-4': false }"
+          class="accent section__header flex justify-center sm:justify-start gap-6"
+          [ngClass]="{ 'mat-headline-4': smScreen }"
         >
           <span i18n>Connect</span>
           <a
