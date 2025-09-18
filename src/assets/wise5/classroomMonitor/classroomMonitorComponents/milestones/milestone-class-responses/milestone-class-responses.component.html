@@ -1,16 +1,10 @@
 <div class="l-constrained grading milestone-grading">
   <mat-list class="user-list">
     <mat-list-item class="mat-elevation-z1 list-item user-list-controls">
-      <div
-        fxFlex="100"
-        fxLayout="column"
-        fxLayout.gt-sm="row"
-        fxLayoutAlign="center center"
-        fxLayoutGap.lt-md="8px"
-      >
+      <div class="w-full flex flex-col md:flex-row justify-center items-center max-md:gap-2">
         <workgroup-select-autocomplete />
-        <span fxFlex fxHide.xs fxHide.sm></span>
-        <div class="md-secondary-container" fxFlex.lt-md="100" fxLayoutAlign="center center">
+        <span class="flex-1 hidden md:block"></span>
+        <div class="md-secondary-container max-md:w-full flex justify-center items-center">
           <button
             mat-button
             color="primary"
@@ -36,13 +30,10 @@
       </div>
     </mat-list-item>
     <mat-list-item class="table--list__thead table--list__thead__th mat-elevation-z1">
-      <div class="table--list__thead__tr" fxLayout="row" fxFlex>
+      <div class="table--list__thead__tr flex flex-1">
         <button
           mat-button
-          class="table--list__thead__link"
-          fxFlex
-          fxLayout="row"
-          fxLayoutAlign="start center"
+          class="table--list__thead__link flex-1 flex justify-start items-center"
           (click)="sortWorkgroups('workgroupId')"
           aria-label="Sort by team"
           i18n-aria-label
@@ -59,10 +50,7 @@
         <button
           mat-button
           *ngIf="milestone.report.locations.length == 1"
-          class="table--list__thead__link"
-          fxFlex="30"
-          fxLayout="row"
-          fxLayoutAlign="center center"
+          class="table--list__thead__link flex justify-center items-center basis-[30%]"
           (click)="sortWorkgroups('completionStatus')"
           aria-label="Sort by completion"
           i18n-aria-label
@@ -79,10 +67,7 @@
         <button
           mat-button
           *ngIf="milestone.report.locations.length == 1"
-          class="table--list__thead__link"
-          fxFlex="20"
-          fxLayout="row"
-          fxLayoutAlign="center center"
+          class="table--list__thead__link flex justify-center items-center basis-[20%]"
           (click)="sortWorkgroups('score')"
           aria-label="Sort by score"
           i18n-aria-label
@@ -99,10 +84,7 @@
         <button
           mat-button
           *ngIf="milestone.report.locations.length > 1"
-          class="table--list__thead__link"
-          fxFlex="10"
-          fxLayout="row"
-          fxLayoutAlign="center center"
+          class="table--list__thead__link flex justify-center items-center basis-[10%]"
           (click)="sortWorkgroups('initialScore')"
           aria-label="Sort by score on Step {{ firstNodePosition }}"
           i18n-aria-label
@@ -122,10 +104,7 @@
         <button
           mat-button
           *ngIf="milestone.report.locations.length > 1"
-          class="table--list__thead__link"
-          fxFlex="10"
-          fxLayout="row"
-          fxLayoutAlign="center center"
+          class="table--list__thead__link flex justify-center items-center basis-[10%]"
           (click)="sortWorkgroups('score')"
           aria-label="Sort by score on Step {{ lastNodePosition }}"
           i18n-aria-label
@@ -146,10 +125,7 @@
         <button
           mat-button
           *ngIf="milestone.report.locations.length > 1"
-          class="table--list__thead__link"
-          fxFlex="10"
-          fxLayout="row"
-          fxLayoutAlign="center center"
+          class="table--list__thead__link flex justify-center items-center basis-[10%]"
           (click)="sortWorkgroups('changeInScore')"
           aria-label="Sort by change in score"
           i18n-aria-label

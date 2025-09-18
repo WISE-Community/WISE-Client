@@ -78,7 +78,7 @@
           </mat-tab>
           <mat-tab label="Student Work" i18n-label>
             <div class="milestone-details__section">
-              <milestone-grading-view [milestone]="milestone"></milestone-grading-view>
+              <milestone-class-responses [milestone]="milestone" />
             </div>
           </mat-tab>
         </mat-tab-group>
@@ -87,7 +87,7 @@
     @if (!milestone.generatedRecommendations && milestone.isReportAvailable) {
       <div class="milestone-details__section mat-elevation-z1">
         <div class="milestone-details__header mat-subtitle-2 notice-bg-bg" i18n>Student Work</div>
-        <milestone-grading-view [milestone]="milestone"></milestone-grading-view>
+        <milestone-class-responses [milestone]="milestone" />
       </div>
     }
   </section>
