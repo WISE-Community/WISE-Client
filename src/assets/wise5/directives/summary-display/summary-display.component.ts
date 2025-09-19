@@ -1,12 +1,11 @@
 import * as Highcharts from 'highcharts';
 import { Annotation } from '../../common/Annotation';
 import { AnnotationService } from '../../services/annotationService';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Directive, Input, SimpleChanges } from '@angular/core';
 import { ComponentContent } from '../../common/ComponentContent';
 import { ComponentState } from '../../../../app/domain/componentState';
 import { ConfigService } from '../../services/configService';
 import { DataService } from '../../../../app/services/data.service';
-import { MatCardModule } from '@angular/material/card';
 import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
 import { Observable } from 'rxjs';
 import { ProjectService } from '../../services/projectService';
@@ -21,11 +20,8 @@ import { TableSummaryData } from './summary-data/TableSummaryData';
 import { Choice } from '../../components/multipleChoice/Choice';
 import { SummaryData } from './summary-data/SummaryData';
 import { CRaterService } from '../../services/cRaterService';
-@Component({
-  imports: [MatCardModule],
-  styleUrl: 'summary-display.component.scss',
-  templateUrl: 'summary-display.component.html'
-})
+
+@Directive()
 export abstract class SummaryDisplayComponent {
   chartConfig: any;
   colors = {

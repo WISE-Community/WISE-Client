@@ -6,16 +6,18 @@ import { EditAdvancedComponentComponent } from '../../../../../app/authoring-too
 import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { AiChatContent } from '../AiChatContent';
+import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 
 @Component({
-  templateUrl: './edit-ai-chat-advanced.component.html',
   imports: [
-    MatFormFieldModule,
-    MatSelectModule,
-    FormsModule,
+    EditComponentJsonComponent,
+    EditComponentWidthComponent,
     EditConnectedComponentsComponent,
-    EditComponentJsonComponent
-  ]
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule
+  ],
+  templateUrl: './edit-ai-chat-advanced.component.html'
 })
 export class EditAiChatAdvancedComponent extends EditAdvancedComponentComponent {
   protected allowedConnectedComponentTypes = ['OpenResponse'];
