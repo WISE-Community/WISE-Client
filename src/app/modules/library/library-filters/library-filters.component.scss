@@ -10,7 +10,7 @@
   }
 
   &.isSplitScreen {
-    @screen md {
+    @variant md {
       @apply max-h-[1000px];
     }
   }
