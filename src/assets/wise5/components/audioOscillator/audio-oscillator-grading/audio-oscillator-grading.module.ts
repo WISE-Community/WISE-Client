@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { AudioOscillatorShowWorkModule } from '../audio-oscillator-show-work/audio-oscillator-show-work.module';
 import { AudioOscillatorGradingComponent } from './audio-oscillator-grading.component';
+import { AudioOscillatorShowWorkComponent } from '../audio-oscillator-show-work/audio-oscillator-show-work.component';
 
 @NgModule({
   declarations: [AudioOscillatorGradingComponent],
-  imports: [AudioOscillatorShowWorkModule],
+  imports: [AudioOscillatorShowWorkComponent],
   exports: [AudioOscillatorGradingComponent]
 })
 export class AudioOscillatorGradingModule {}

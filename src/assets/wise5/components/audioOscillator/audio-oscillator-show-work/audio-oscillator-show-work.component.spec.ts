@@ -1,25 +1,23 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { ProjectService } from '../../../services/projectService';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
 import { AudioOscillatorShowWorkComponent } from './audio-oscillator-show-work.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProviders } from 'ng-mocks';
+import { NodeService } from '../../../services/nodeService';
 
 let component: AudioOscillatorShowWorkComponent;
 let fixture: ComponentFixture<AudioOscillatorShowWorkComponent>;
-
 describe('AudioOscillatorShowWorkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [AudioOscillatorShowWorkComponent],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [AudioOscillatorShowWorkComponent],
+      providers: [MockProviders(NodeService, ProjectService)]
+    });
     fixture = TestBed.createComponent(AudioOscillatorShowWorkComponent);
-    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({} as ComponentContent);
+    const projectService = TestBed.inject(ProjectService);
+    spyOn(projectService, 'getComponent').and.returnValue({} as ComponentContent);
+    spyOn(projectService, 'injectAssetPaths').and.callFake((arg) => arg);
     component = fixture.componentInstance;
     const audioOscillatorStudentData = {
       amplitudesPlayed: null,
@@ -73,20 +71,20 @@ function initializeFrequencies() {
       maxFrequencyPlayed: maxFrequencyPlayed,
       submitCounter: 0
     };
-    component.initializeFrequencies(studentData);
-    expect(component.frequenciesPlayed).toEqual(frequenciesPlayed.join(', '));
-    expect(component.frequenciesPlayedSorted).toEqual(frequenciesPlayedSorted.join(', '));
-    expect(component.numberOfFrequenciesPlayed).toEqual(numberOfFrequenciesPlayed);
-    expect(component.numberOfUniqueFrequenciesPlayed).toEqual(numberOfUniqueFrequenciesPlayed);
-    expect(component.minFrequencyPlayed).toEqual(minFrequencyPlayed);
-    expect(component.maxFrequencyPlayed).toEqual(maxFrequencyPlayed);
+    component['initializeFrequencies'](studentData);
+    expect(component['frequenciesPlayed']).toEqual(frequenciesPlayed.join(', '));
+    expect(component['frequenciesPlayedSorted']).toEqual(frequenciesPlayedSorted.join(', '));
+    expect(component['numberOfFrequenciesPlayed']).toEqual(numberOfFrequenciesPlayed);
+    expect(component['numberOfUniqueFrequenciesPlayed']).toEqual(numberOfUniqueFrequenciesPlayed);
+    expect(component['minFrequencyPlayed']).toEqual(minFrequencyPlayed);
+    expect(component['maxFrequencyPlayed']).toEqual(maxFrequencyPlayed);
   });
 }
 
 function initializeAmplitudes() {
   it('should handle when there is no amplitude data in the student data', () => {
     const studentData = {};
-    component.initializeAmplitudes(studentData);
+    component['initializeAmplitudes'](studentData);
     expect(component);
   });
   it('should initialize amplitude data from student data', () => {
@@ -111,12 +109,12 @@ function initializeAmplitudes() {
       maxFrequencyPlayed: null,
       submitCounter: 0
     };
-    component.initializeAmplitudes(studentData);
-    expect(component.amplitudesPlayed).toEqual(amplitudesPlayed.join(', '));
-    expect(component.amplitudesPlayedSorted).toEqual(amplitudesPlayedSorted.join(', '));
-    expect(component.numberOfAmplitudesPlayed).toEqual(numberOfAmplitudesPlayed);
-    expect(component.numberOfUniqueAmplitudesPlayed).toEqual(numberOfUniqueAmplitudesPlayed);
-    expect(component.minAmplitudePlayed).toEqual(minAmplitudePlayed);
-    expect(component.maxAmplitudePlayed).toEqual(maxAmplitudePlayed);
+    component['initializeAmplitudes'](studentData);
+    expect(component['amplitudesPlayed']).toEqual(amplitudesPlayed.join(', '));
+    expect(component['amplitudesPlayedSorted']).toEqual(amplitudesPlayedSorted.join(', '));
+    expect(component['numberOfAmplitudesPlayed']).toEqual(numberOfAmplitudesPlayed);
+    expect(component['numberOfUniqueAmplitudesPlayed']).toEqual(numberOfUniqueAmplitudesPlayed);
+    expect(component['minAmplitudePlayed']).toEqual(minAmplitudePlayed);
+    expect(component['maxAmplitudePlayed']).toEqual(maxAmplitudePlayed);
   });
 }

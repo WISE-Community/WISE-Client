@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { AudioOscillatorShowWorkModule } from '../../assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.module';
 import { ConceptMapShowWorkModule } from '../../assets/wise5/components/conceptMap/concept-map-show-work/concept-map-show-work.module';
 import { DiscussionShowWorkModule } from '../../assets/wise5/components/discussion/discussion-show-work/discussion-show-work.module';
 import { DrawShowWorkModule } from '../../assets/wise5/components/draw/draw-show-work/draw-show-work.module';
@@ -12,11 +11,12 @@ import { DialogGuidanceShowWorkComponent } from '../../assets/wise5/components/d
 import { MatchShowWorkComponent } from '../../assets/wise5/components/match/match-show-work/match-show-work.component';
 import { LabelShowWorkComponent } from '../../assets/wise5/components/label/label-show-work/label-show-work.component';
 import { AnimationShowWorkComponent } from '../../assets/wise5/components/animation/animation-show-work/animation-show-work.component';
+import { AudioOscillatorShowWorkComponent } from '../../assets/wise5/components/audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component';
 
 @NgModule({
   imports: [
     AnimationShowWorkComponent,
-    AudioOscillatorShowWorkModule,
+    AudioOscillatorShowWorkComponent,
     ConceptMapShowWorkModule,
     DialogGuidanceShowWorkComponent,
     DiscussionShowWorkModule,
@@ -30,7 +30,6 @@ import { AnimationShowWorkComponent } from '../../assets/wise5/components/animat
     TableShowWorkModule
   ],
   exports: [
-    AudioOscillatorShowWorkModule,
     ConceptMapShowWorkModule,
     DialogGuidanceShowWorkComponent,
     DiscussionShowWorkModule,

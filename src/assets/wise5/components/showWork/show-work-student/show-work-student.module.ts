@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { AnimationShowWorkComponent } from '../../animation/animation-show-work/animation-show-work.component';
-import { AudioOscillatorShowWorkModule } from '../../audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.module';
 import { ConceptMapShowWorkModule } from '../../conceptMap/concept-map-show-work/concept-map-show-work.module';
 import { DiscussionStudentModule } from '../../discussion/discussion-student/discussion-student.module';
 import { DrawShowWorkModule } from '../../draw/draw-show-work/draw-show-work.module';
@@ -14,13 +13,14 @@ import { DialogGuidanceShowWorkComponent } from '../../dialogGuidance/dialog-gui
 import { MatchShowWorkComponent } from '../../match/match-show-work/match-show-work.component';
 import { CommonModule } from '@angular/common';
 import { LabelShowWorkComponent } from '../../label/label-show-work/label-show-work.component';
+import { AudioOscillatorShowWorkComponent } from '../../audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component';
 
 @NgModule({
   declarations: [ShowWorkStudentComponent],
   imports: [
     CommonModule,
     AnimationShowWorkComponent,
-    AudioOscillatorShowWorkModule,
+    AudioOscillatorShowWorkComponent,
     ConceptMapShowWorkModule,
     DialogGuidanceShowWorkComponent,
     DiscussionStudentModule,
