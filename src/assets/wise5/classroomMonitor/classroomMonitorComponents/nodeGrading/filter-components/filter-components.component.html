@@ -16,5 +16,7 @@
         </mat-option>
       }
     </mat-select>
+  } @else {
+    <mat-select [(ngModel)]="selectedComponents" (selectionChange)="updateSelectedComponents()" />
   }
 </mat-form-field>
