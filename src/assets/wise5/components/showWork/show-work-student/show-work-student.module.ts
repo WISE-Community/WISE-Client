@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AnimationShowWorkComponent } from '../../animation/animation-show-work/animation-show-work.component';
 import { DiscussionStudentModule } from '../../discussion/discussion-student/discussion-student.module';
-import { DrawShowWorkModule } from '../../draw/draw-show-work/draw-show-work.module';
 import { EmbeddedShowWorkModule } from '../../embedded/embedded-show-work/embedded-show-work.module';
 import { GraphShowWorkModule } from '../../graph/graph-show-work/graph-show-work.module';
 import { OpenResponseShowWorkModule } from '../../openResponse/open-response-show-work/open-response-show-work.module';
@@ -14,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { LabelShowWorkComponent } from '../../label/label-show-work/label-show-work.component';
 import { AudioOscillatorShowWorkComponent } from '../../audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component';
 import { ConceptMapShowWorkComponent } from '../../conceptMap/concept-map-show-work/concept-map-show-work.component';
+import { DrawShowWorkComponent } from '../../draw/draw-show-work/draw-show-work.component';
 
 @NgModule({
   declarations: [ShowWorkStudentComponent],
@@ -24,7 +24,7 @@ import { ConceptMapShowWorkComponent } from '../../conceptMap/concept-map-show-w
     ConceptMapShowWorkComponent,
     DialogGuidanceShowWorkComponent,
     DiscussionStudentModule,
-    DrawShowWorkModule,
+    DrawShowWorkComponent,
     EmbeddedShowWorkModule,
     GraphShowWorkModule,
     LabelShowWorkComponent,
