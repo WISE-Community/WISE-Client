@@ -1,13 +1,12 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [FlexLayoutModule, MatProgressBarModule, MatTooltipModule],
-    selector: 'project-progress',
-    templateUrl: './project-progress.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [MatProgressBarModule, MatTooltipModule],
+  selector: 'project-progress',
+  templateUrl: './project-progress.component.html'
 })
 export class ProjectProgressComponent {
   @Input() completed: number;

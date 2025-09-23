@@ -6,10 +6,10 @@ import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login-home.component.html',
-    styleUrls: ['./login-home.component.scss'],
-    standalone: false
+  selector: 'app-login',
+  standalone: false,
+  styleUrl: './login-home.component.scss',
+  templateUrl: './login-home.component.html'
 })
 export class LoginHomeComponent implements OnInit {
   accessCode: string = '';

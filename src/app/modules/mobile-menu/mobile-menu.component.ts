@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [MatButtonModule, MatDividerModule, MatIconModule, RouterModule],
   selector: 'app-mobile-menu',
-  imports: [FlexLayoutModule, MatButtonModule, MatDividerModule, MatIconModule, RouterModule],
-  templateUrl: './mobile-menu.component.html',
-  styleUrl: './mobile-menu.component.scss'
+  styleUrl: './mobile-menu.component.scss',
+  templateUrl: './mobile-menu.component.html'
 })
 export class MobileMenuComponent implements OnInit {
   protected signedIn: boolean;

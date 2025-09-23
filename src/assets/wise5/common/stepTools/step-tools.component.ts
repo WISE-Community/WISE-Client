@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +18,6 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
   encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,

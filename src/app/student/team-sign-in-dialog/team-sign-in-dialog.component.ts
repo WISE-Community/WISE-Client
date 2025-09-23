@@ -9,10 +9,9 @@ import { Router } from '@angular/router';
 import { GoogleUser } from '../../modules/google-sign-in/GoogleUser';
 
 @Component({
-    selector: 'app-team-sign-in-dialog',
-    templateUrl: './team-sign-in-dialog.component.html',
-    styleUrls: ['./team-sign-in-dialog.component.scss'],
-    standalone: false
+  standalone: false,
+  styleUrl: './team-sign-in-dialog.component.scss',
+  templateUrl: './team-sign-in-dialog.component.html'
 })
 export class TeamSignInDialogComponent implements OnInit {
   user: Student;
@@ -331,9 +330,8 @@ export class TeamSignInDialogComponent implements OnInit {
   }
 
   updateTeamMembers(workgroupMembers: any[]) {
-    const existingWorkgroupMembersNotSignedIn = this.getExistingWorkgroupMembersNotSignedIn(
-      workgroupMembers
-    );
+    const existingWorkgroupMembersNotSignedIn =
+      this.getExistingWorkgroupMembersNotSignedIn(workgroupMembers);
     const existingWorkgroupMembersUsernames = workgroupMembers.map((member) => {
       return member.username;
     });

@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
 import { PeerGroupService } from '../../../../services/peerGroupService';
 
 @Component({
-    selector: 'peer-group-period',
-    templateUrl: './peer-group-period.component.html',
-    styleUrls: ['./peer-group-period.component.scss'],
-    standalone: false
+  selector: 'peer-group-period',
+  templateUrl: './peer-group-period.component.html',
+  styleUrl: './peer-group-period.component.scss',
+  standalone: false
 })
-export class PeerGroupPeriodComponent implements OnInit {
+export class PeerGroupPeriodComponent {
   @Input() peerGroupingTag: string;
   @Input() period: any;
 
@@ -20,9 +20,10 @@ export class PeerGroupPeriodComponent implements OnInit {
   unassignedWorkgroups: any[] = [];
   workgroups: any[] = [];
 
-  constructor(private ConfigService: ConfigService, private PeerGroupService: PeerGroupService) {}
-
-  ngOnInit(): void {}
+  constructor(
+    private ConfigService: ConfigService,
+    private PeerGroupService: PeerGroupService
+  ) {}
 
   ngOnChanges(): void {
     this.PeerGroupService.retrievePeerGroupInfo(this.peerGroupingTag).subscribe(

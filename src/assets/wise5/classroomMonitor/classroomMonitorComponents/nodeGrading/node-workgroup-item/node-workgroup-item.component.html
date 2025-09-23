@@ -7,16 +7,15 @@
 >
   <button
     mat-button
-    class="list-item__subheader-button team-button"
+    class="list-item__subheader-button team-button flex flex-wrap"
     i18n-aria-label
     aria-label="Show/hide team's work for this step"
     [ngClass]="{ 'list-item--noclick': disabled }"
     (click)="toggleExpand()"
     [disabled]="disabled"
-    fxLayoutWrap
   >
-    <div fxLayout="row" fxFlex>
-      <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <div class="flex flex-row flex-1">
+      <div class="flex flex-1 flex-row justify-start items-center">
         <workgroup-info
           [hasAlert]="hasAlert"
           [hasNewAlert]="hasNewAlert"
@@ -24,10 +23,10 @@
           [workgroupId]="workgroup.workgroupId"
         />
       </div>
-      <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+      <div class="flex flex-row justify-center items-center basis-3/10">
         <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
       </div>
-      <div fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+      <div class="flex flex-row justify-center items-center basis-1/5">
         <workgroup-node-score [score]="score" [maxScore]="maxScore" />
       </div>
     </div>

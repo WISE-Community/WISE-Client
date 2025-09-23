@@ -4,16 +4,18 @@ import { News } from '../domain/news';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-    selector: 'app-news',
-    templateUrl: './news.component.html',
-    styleUrls: ['./news.component.scss'],
-    standalone: false
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  standalone: false
 })
 export class NewsComponent implements OnInit {
   allNewsItems: any = [];
   showAll: boolean = false;
 
-  constructor(private newsService: NewsService, private sanitizer: DomSanitizer) {}
+  constructor(
+    private newsService: NewsService,
+    protected sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.newsService.getAllNews().subscribe((allNewsItems: News[]) => {

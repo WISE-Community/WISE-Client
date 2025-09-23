@@ -6,7 +6,6 @@ import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ViewComponentRevisionsComponent } from '../view-component-revisions/view-component-revisions.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ComponentStateInfoComponent } from '../../../common/component-state-info/component-state-info.component';
 import { ComponentGradingComponent } from '../component-grading.component';
 import { EditComponentAnnotationsComponent } from '../edit-component-annotations/edit-component-annotations.component';
@@ -16,7 +15,6 @@ import { EditComponentAnnotationsComponent } from '../edit-component-annotations
     ComponentGradingComponent,
     ComponentStateInfoComponent,
     EditComponentAnnotationsComponent,
-    FlexLayoutModule,
     MatDialogModule
   ],
   selector: 'workgroup-component-grading',

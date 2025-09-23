@@ -2,10 +2,9 @@ import { Component, Input } from '@angular/core';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 import { MatIconModule } from '@angular/material/icon';
 import { StatusIconComponent } from '../../../../../../app/classroom-monitor/status-icon/status-icon.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [FlexLayoutModule, MatIconModule, StatusIconComponent],
+  imports: [MatIconModule, StatusIconComponent],
   selector: 'workgroup-info',
   templateUrl: 'workgroup-info.component.html'
 })

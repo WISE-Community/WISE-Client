@@ -4,11 +4,11 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { UtilService } from './services/util.service';
 import { ConfigService } from './services/config.service';
 import { Announcement } from './domain/announcement';
 import { environment } from '../environments/environment';
+import { BreakpointObserver } from '@angular/cdk/layout';
 declare let gtag: Function;
 
 @Component({
@@ -21,7 +21,6 @@ export class AppComponent {
   title = 'app';
   showMobileMenu: boolean = false;
   theme: string = '';
-  mediaWatcher: Subscription;
   googleAnalyticsId: string = null;
   hasAnnouncement: boolean = false;
   showDefaultMode: boolean = true;
@@ -37,13 +36,13 @@ export class AppComponent {
   };
 
   constructor(
-    private router: Router,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer,
-    utilService: UtilService,
-    media: MediaObserver,
+    private breakpointObserver: BreakpointObserver,
     private configService: ConfigService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    iconRegistry: MatIconRegistry,
+    private router: Router,
+    sanitizer: DomSanitizer,
+    utilService: UtilService
   ) {
     iconRegistry.addSvgIcon(
       'ki-elicit',
@@ -96,10 +95,8 @@ export class AppComponent {
     utilService.getMobileMenuState().subscribe((state) => {
       this.showMobileMenu = state;
     });
-    this.mediaWatcher = media.asObservable().subscribe((change: MediaChange[]) => {
-      if (media.isActive('gt-sm')) {
-        utilService.showMobileMenu(false);
-      }
+    this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
+      utilService.showMobileMenu(false);
     });
     router.events.subscribe((event) => {
       utilService.showMobileMenu(false);

@@ -1,5 +1,5 @@
-<div class="component__content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
-  <div fxLayout="column" fxFlex="100" [fxFlex.gt-sm]="isGradable ? 66 : 100">
+<div class="component__content flex flex-col md:flex-row gap-4">
+  <div class="flex flex-col w-full overflow-auto" [class]="isGradable ? 'md:w-2/3' : 'md:w-full'">
     @if (
       latestComponentState != null ||
       component.type === 'ShowGroupWork' ||
@@ -12,7 +12,7 @@
         [workgroupId]="workgroupId"
       />
     }
-    <span fxFlex></span>
+    <span class="flex-grow"></span>
     @if (componentStates.length === 0 && component.type !== 'ShowGroupWork') {
       <div class="component__actions__info component--grading__actions__info md-caption" i18n>
         Team has not saved any work
@@ -20,8 +20,7 @@
     }
     @if (componentStates.length > 0) {
       <div
-        class="component__actions__info component--grading__actions__info md-caption"
-        fxLayout="row"
+        class="component__actions__info component--grading__actions__info md-caption flex flex-row"
       >
         <component-state-info [componentState]="latestComponentState" />
         @if (componentStates.length > 1) {
@@ -33,7 +32,7 @@
     }
   </div>
   @if (isGradable) {
-    <div fxFlex="100" fxFlex.gt-sm="33" class="component--grading__annotations">
+    <div class="w-full md:w-1/3 component--grading__annotations">
       <edit-component-annotations
         [componentId]="component.id"
         [componentStateId]="latestComponentStateId"

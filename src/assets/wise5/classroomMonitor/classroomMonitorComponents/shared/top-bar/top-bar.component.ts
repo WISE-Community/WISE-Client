@@ -12,7 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotificationsMenuComponent } from '../notifications-menu/notifications-menu.component';
 import { PauseScreensMenuComponent } from '../../pause-screens-menu/pause-screens-menu.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -20,7 +19,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   imports: [
     CommonModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,

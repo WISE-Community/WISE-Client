@@ -8,11 +8,11 @@ import { StudentDataService } from '../../services/studentDataService';
 import { getAvatarColorForWorkgroupId } from '../../common/workgroup/workgroup';
 
 @Component({
-    selector: 'student-account-menu',
-    templateUrl: './student-account-menu.component.html',
-    styleUrls: ['./student-account-menu.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  selector: 'student-account-menu',
+  standalone: false,
+  styleUrl: './student-account-menu.component.scss',
+  templateUrl: './student-account-menu.component.html'
 })
 export class StudentAccountMenuComponent implements OnInit, OnDestroy {
   @ViewChild(MatMenu, { static: true })
@@ -54,9 +54,7 @@ export class StudentAccountMenuComponent implements OnInit, OnDestroy {
     if (this.showScore) {
       this.updateScores();
       this.subscriptions.add(
-        this.studentDataService.nodeStatusesChanged$.subscribe(() => {
-          this.updateScores();
-        })
+        this.studentDataService.nodeStatusesChanged$.subscribe(() => this.updateScores())
       );
     }
   }

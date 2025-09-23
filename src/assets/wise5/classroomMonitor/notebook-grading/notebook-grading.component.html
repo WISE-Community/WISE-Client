@@ -1,17 +1,11 @@
 <div class="view-content view-content--with-sidemenu">
-  <div class="l-constrained grading notebook-grading" fxLayout="column">
+  <div class="l-constrained grading notebook-grading flex flex-col">
     <mat-list class="user-list">
       <mat-list-item class="list-item user-list-controls mat-elevation-z1">
-        <div
-          fxFlex="100"
-          fxLayout="column"
-          fxLayout.gt-sm="row"
-          fxLayoutAlign="center center"
-          fxLayoutGap.lt-md="8px"
-        >
+        <div class="w-full flex flex-col md:flex-row justify-center items-center max-md:gap-2">
           <workgroup-select-autocomplete />
-          <span fxFlex fxHide.xs fxHide.sm></span>
-          <div fxFlex.lt-md="100" fxLayout="row" fxLayoutAlign="center center">
+          <span class="flex-1 hidden sm:block"></span>
+          <div class="max-md:w-full flex justify-center items-center">
             <button
               mat-button
               color="primary"
@@ -37,17 +31,16 @@
           </div>
         </div>
       </mat-list-item>
-      <mat-list-item class="table--list__thead table--list__thead__th">
-        <div class="table--list__thead__tr dark-theme" fxLayout="row" fxFlex>
+      <mat-list-item class="table--list__thead table--list__thead__th !px-0">
+        <div class="table--list__thead__tr dark-theme flex w-full">
           <button
             mat-button
-            class="table--list__thead__link"
+            class="table--list__thead__link basis-[15%]"
             aria-label="Team ID"
             i18n-aria-label
             (click)="setSort('team')"
             title="Sort By Team"
             i18n-title
-            fxFlex="15"
           >
             <span i18n>Team</span>
             @if (sort === 'team' || sort === '-team') {
@@ -67,8 +60,7 @@
             (click)="setSort('student')"
             title="Sort By Student"
             i18n-title
-            fxLayout="row"
-            fxLayoutAlign="start center"
+            class="flex !justify-start items-center flex-1"
           >
             <span i18n>Names</span>
             @if (sort === 'student' || sort === '-student') {
@@ -84,15 +76,12 @@
           @if (notesEnabled) {
             <button
               mat-button
-              class="table--list__thead__link"
+              class="table--list__thead__link flex justify-center items-center basis-[15%]"
               aria-label="Notes"
               i18n-aria-label
               (click)="setSort('notes')"
               title="Sort by number of notes"
               i18n-title
-              fxLayout="row"
-              fxLayoutAlign="center center"
-              fxFlex="15"
             >
               <span i18n>Notes</span>
               @if (sort === 'notes' || sort === '-notes') {
@@ -109,13 +98,10 @@
           @if (reportEnabled) {
             <button
               mat-button
-              class="table--list__thead__link"
+              class="table--list__thead__link flex justify-center items-center basis-[25%]"
               [aria-label]="reportTitle"
               (click)="setSort('status')"
               title="Sort by report status"
-              fxLayout="row"
-              fxLayoutAlign="center center"
-              fxFlex="25"
             >
               <span>{{ reportTitle }}</span>
               @if (sort === 'status' || sort === '-status') {

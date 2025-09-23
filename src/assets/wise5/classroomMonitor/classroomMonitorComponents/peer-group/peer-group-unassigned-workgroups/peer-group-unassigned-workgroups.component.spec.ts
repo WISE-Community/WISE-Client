@@ -1,10 +1,11 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-
 import { PeerGroupUnassignedWorkgroupsComponent } from './peer-group-unassigned-workgroups.component';
+import { MockComponent } from 'ng-mocks';
+import { PeerGroupWorkgroupComponent } from '../peer-group-workgroup/peer-group-workgroup.component';
+import { By } from '@angular/platform-browser';
 
 describe('PeerGroupUnassignedWorkgroupsComponent', () => {
   let component: PeerGroupUnassignedWorkgroupsComponent;
@@ -12,18 +13,25 @@ describe('PeerGroupUnassignedWorkgroupsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PeerGroupUnassignedWorkgroupsComponent],
-      imports: [DragDropModule, FlexLayoutModule, MatCardModule, MatDialogModule]
+      declarations: [
+        PeerGroupUnassignedWorkgroupsComponent,
+        MockComponent(PeerGroupWorkgroupComponent)
+      ],
+      imports: [DragDropModule, MatCardModule, MatDialogModule]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PeerGroupUnassignedWorkgroupsComponent);
     component = fixture.componentInstance;
+    component.unassignedWorkgroups = [
+      { id: 1, name: 'Workgroup 1' },
+      { id: 2, name: 'Workgroup 2' }
+    ];
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should display 2 workgroups', () => {
+    expect(fixture.debugElement.queryAll(By.css('li')).length).toEqual(2);
   });
 });

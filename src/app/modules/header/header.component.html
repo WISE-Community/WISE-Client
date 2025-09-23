@@ -14,13 +14,9 @@
         </picture>
       </a>
       <span class="flex-1"></span>
-      <app-header-links
-        class="hidden lg:block"
-        [user]="user"
-        [location]="location"
-      ></app-header-links>
+      <app-header-links class="hidden lg:block" [user]="user" [location]="location" />
       @if (roles.length > 0) {
-        <app-header-account-menu [user]="user"></app-header-account-menu>
+        <app-header-account-menu [user]="user" />
       }
       @if (!location) {
         <span class="lg:hidden">

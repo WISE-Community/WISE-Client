@@ -10,7 +10,7 @@
     <mat-icon>arrow_back</mat-icon>
   </button>
   <h4 i18n>Export Item Data</h4>
-  <div fxLayout="column" fxLayoutGap="10px">
+  <div class="flex flex-col gap-2">
     @if (canViewStudentNames) {
       <div>
         <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
@@ -29,7 +29,7 @@
       </mat-checkbox>
     </div>
   </div>
-  <div fxLayoutAlign="start center">
+  <div class="flex justify-start items-center">
     <h4>{{ project.metadata.title }}</h4>
     <button
       mat-icon-button
@@ -44,7 +44,7 @@
     </button>
   </div>
   @for (node of nodes; track node.node.id) {
-    <div fxLayoutAlign="start center">
+    <div class="flex justify-start items-center">
       @if (node.order !== 0) {
         <h6 [ngClass]="{ stepHeader: node.node.type !== 'group' }">
           {{ getNodePositionById(node.node.id) }}. {{ getNodeTitleByNodeId(node.node.id) }}
@@ -71,7 +71,7 @@
     ) {
       @if (node.order !== 0 && node.node.type !== 'group' && node.node.components.length > 0) {
         <div class="componentHeader">
-          <div fxLayoutAlign="start center" fxLayoutGap="20px">
+          <div class="flex justify-start items-center gap-5">
             <span> {{ componentIndex + 1 }}. {{ componentItem.type }} </span>
             @if (canExport(componentItem, 'all')) {
               <button

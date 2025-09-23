@@ -1,6 +1,4 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { ConfigService } from '../../../services/configService';
 import { NotificationService } from '../../../services/notificationService';
@@ -17,7 +15,7 @@ import { of } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../../common/ComponentContent';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 let component: PeerChatGradingComponent;
 let fixture: ComponentFixture<PeerChatGradingComponent>;
@@ -40,19 +38,18 @@ const peerGroup = new PeerGroup(
 describe('PeerChatGradingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [PeerChatGradingComponent],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [
+      declarations: [PeerChatGradingComponent],
+      imports: [StudentTeacherCommonServicesModule],
+      providers: [
         ClassroomStatusService,
         PeerGroupService,
         TeacherDataService,
         TeacherProjectService,
         TeacherWebSocketService,
         TeacherWorkService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        provideHttpClient()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,5 +1,5 @@
 <div
-  class="content-block filters dark-theme primary-bg flex flex-col md:flex-row gap-4 items-center justify-start"
+  class="content-block filters dark-theme primary-bg flex flex-col md:flex-row gap-2 md:items-center justify-start"
 >
   <h2 class="flex items-center gap-2">
     <mat-icon>calendar_month</mat-icon><span i18n>Class Schedule</span>
@@ -13,15 +13,13 @@
     [value]="searchValue"
     (update)="searchChanged($event)"
   />
-  <div class="flex flex-row items-center justify-center gap-4">
-    <mat-form-field [subscriptSizing]="'dynamic'" class="w-full">
-      <mat-label>View</mat-label>
-      <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
-        <mat-option [value]="false" i18n>Active</mat-option>
-        <mat-option [value]="true" i18n>Archived</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+  <mat-form-field [subscriptSizing]="'dynamic'">
+    <mat-label>View</mat-label>
+    <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
+      <mat-option [value]="false" i18n>Active</mat-option>
+      <mat-option [value]="true" i18n>Archived</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div class="content-block">
   <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">

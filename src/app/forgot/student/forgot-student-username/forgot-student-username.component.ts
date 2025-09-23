@@ -18,9 +18,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
-import { ExtendedModule } from '@angular/flex-layout/extended';
 import { NgClass } from '@angular/common';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
@@ -30,10 +28,8 @@ import { MatCard, MatCardContent } from '@angular/material/card';
     MatCard,
     MatCardContent,
     FormsModule,
-    FlexModule,
     ReactiveFormsModule,
     NgClass,
-    ExtendedModule,
     MatButton,
     MatFormField,
     MatLabel,

@@ -6,7 +6,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
-
 import { PeerGroupGroupingComponent } from './peer-group-grouping.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
@@ -19,13 +18,14 @@ describe('PeerGroupGroupingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [PeerGroupGroupingComponent],
-    imports: [BrowserAnimationsModule,
-        DragDropModule,
-        MatCardModule,
-        MatDialogModule],
-    providers: [ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [PeerGroupGroupingComponent],
+      imports: [BrowserAnimationsModule, DragDropModule, MatCardModule, MatDialogModule],
+      providers: [
+        ConfigService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
