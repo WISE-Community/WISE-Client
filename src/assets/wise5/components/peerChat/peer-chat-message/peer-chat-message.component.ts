@@ -4,9 +4,9 @@ import { PeerChatMessage } from '../PeerChatMessage';
 
 @Component({
   selector: 'peer-chat-message',
-  templateUrl: './peer-chat-message.component.html',
+  standalone: false,
   styleUrl: './peer-chat-message.component.scss',
-  standalone: false
+  templateUrl: './peer-chat-message.component.html'
 })
 export class PeerChatMessageComponent implements OnInit {
   @Input() avatarColor: string;

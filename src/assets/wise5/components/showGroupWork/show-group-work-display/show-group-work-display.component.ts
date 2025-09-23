@@ -6,10 +6,10 @@ import { PeerGroup } from '../../peerChat/PeerGroup';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 
 @Component({
-    selector: 'show-group-work-display',
-    templateUrl: './show-group-work-display.component.html',
-    styleUrls: ['./show-group-work-display.component.scss'],
-    standalone: false
+  selector: 'show-group-work-display',
+  standalone: false,
+  styleUrl: './show-group-work-display.component.scss',
+  templateUrl: './show-group-work-display.component.html'
 })
 export class ShowGroupWorkDisplayComponent implements OnInit {
   @Input() componentContent: any;

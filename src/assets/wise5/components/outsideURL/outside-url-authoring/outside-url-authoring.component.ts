@@ -1,6 +1,5 @@
 import { CommonModule, NgStyle } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ExtendedModule } from '@angular/flex-layout/extended';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardTitle } from '@angular/material/card';
@@ -37,7 +36,6 @@ import { OutsideURLService } from '../outsideURLService';
     MatIcon,
     MatCard,
     NgStyle,
-    ExtendedModule,
     MatCardTitle,
     MatCardActions,
     TranslatableInputComponent

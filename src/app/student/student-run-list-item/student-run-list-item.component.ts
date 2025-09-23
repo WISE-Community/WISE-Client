@@ -11,11 +11,11 @@ import { UserService } from '../../services/user.service';
 import { flash } from '../../animations';
 
 @Component({
-    selector: 'app-student-run-list-item',
-    templateUrl: './student-run-list-item.component.html',
-    styleUrls: ['./student-run-list-item.component.scss'],
-    animations: [flash],
-    standalone: false
+  animations: [flash],
+  standalone: false,
+  selector: 'app-student-run-list-item',
+  styleUrl: './student-run-list-item.component.scss',
+  templateUrl: './student-run-list-item.component.html'
 })
 export class StudentRunListItemComponent implements OnInit {
   @Input() run: StudentRun = new StudentRun();

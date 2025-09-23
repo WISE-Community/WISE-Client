@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherPauseScreenService } from '../../../services/teacherPauseScreenService';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -15,14 +14,7 @@ class Period {
 }
 
 @Component({
-  imports: [
-    FlexLayoutModule,
-    FormsModule,
-    MatDividerModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    MatToolbarModule
-  ],
+  imports: [FormsModule, MatDividerModule, MatIconModule, MatSlideToggleModule, MatToolbarModule],
   selector: 'pause-screens-menu',
   styleUrl: './pause-screens-menu.component.scss',
   templateUrl: './pause-screens-menu.component.html'

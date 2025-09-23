@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   imports: [CommonModule, MatDividerModule, MatIconModule, MatToolbarModule, MatListModule],
   selector: 'main-menu',
-  styleUrl: './main-menu.component.scss',
+  styles: ['.menu-sidenav__divider { margin: 0px; }'],
   templateUrl: './main-menu.component.html'
 })
 export class MainMenuComponent {

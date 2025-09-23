@@ -1,25 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AnnotationService } from '../../../services/annotationService';
 import { EditComponentCommentComponent } from './edit-component-comment.component';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotificationService } from '../../../services/notificationService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MockProviders } from 'ng-mocks';
 
 let annotationService: AnnotationService;
 let component: EditComponentCommentComponent;
 let fixture: ComponentFixture<EditComponentCommentComponent>;
 let notificationService: NotificationService;
-
 describe('EditComponentCommentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        EditComponentCommentComponent,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [provideHttpClient(withInterceptorsFromDi())]
+      imports: [EditComponentCommentComponent],
+      providers: [MockProviders(AnnotationService, NotificationService)]
     });
     annotationService = TestBed.inject(AnnotationService);
     notificationService = TestBed.inject(NotificationService);

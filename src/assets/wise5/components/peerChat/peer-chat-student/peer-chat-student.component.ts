@@ -25,10 +25,9 @@ import { QuestionBankService } from '../peer-chat-question-bank/questionBank.ser
 import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-helper';
 
 @Component({
-    selector: 'peer-chat-student',
-    templateUrl: './peer-chat-student.component.html',
-    styleUrls: ['./peer-chat-student.component.scss'],
-    standalone: false
+  selector: 'peer-chat-student',
+  standalone: false,
+  templateUrl: './peer-chat-student.component.html'
 })
 export class PeerChatStudentComponent extends ComponentStudent {
   component: PeerChatComponent;

@@ -10,12 +10,7 @@
     />
   }
   <div class="flex">
-    <div
-      class="discussion-posts"
-      [ngClass]="{ 'half-width': false, 'full-width': false }"
-      [ngClass.gt-sm]="{ 'half-width': true, 'full-width': false }"
-      [ngClass.lt-md]="{ 'half-width': false, 'full-width': true }"
-    >
+    <div class="discussion-posts w-full md:w-1/2">
       @if (!isDisabled) {
         <mat-card
           appearance="outlined"
@@ -126,7 +121,7 @@
         }
       </div>
     </div>
-    <div class="discussion-posts half-width hidden sm:block">
+    <div class="discussion-posts hidden w-1/2 md:block">
       @for (componentState of topLevelResponses.col1; track componentState) {
         <class-response
           [response]="componentState"

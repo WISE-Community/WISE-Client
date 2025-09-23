@@ -1,4 +1,4 @@
-<span fxLayout="row" fxLayoutAlign="start center">
+<span class="flex justify-start items-center">
   <span class="progress-wrapper" tabindex="0">
     @if (period.periodId === -1) {
       <mat-progress-bar
@@ -20,7 +20,7 @@
       />
     }
   </span>
-  <span class="nav-item__progress-value md-body-2 text-secondary" hide-xs
+  <span class="nav-item__progress-value md-body-2 text-secondary hidden md:block"
     >{{ nodeCompletion }}%</span
   >
 </span>

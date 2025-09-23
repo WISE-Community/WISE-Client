@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [FlexLayoutModule, MatDialogModule, MatProgressSpinnerModule],
-  styleUrl: './dialog-with-spinner.component.scss',
-  templateUrl: './dialog-with-spinner.component.html'
+  imports: [MatDialogModule, MatProgressSpinnerModule],
+  template: `
+    <h2 mat-dialog-title [innerHTML]="dialogData.title"></h2>
+    <div class="flex justify-center items-center">
+      <mat-spinner [diameter]="50" />
+    </div>
+  `
 })
 export class DialogWithSpinnerComponent extends DialogComponent {}

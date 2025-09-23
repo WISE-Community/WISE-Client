@@ -12,7 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { Tag } from '../../domain/tag';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ColorChooserComponent } from '../color-chooser/color-chooser.component';
@@ -22,7 +21,6 @@ import { TagComponent } from '../tag/tag.component';
   imports: [
     ColorChooserComponent,
     FormsModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,

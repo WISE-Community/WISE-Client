@@ -10,21 +10,19 @@ import { TableService } from '../../components/table/tableService';
 import { NodeService } from '../../services/nodeService';
 
 @Component({
-    selector: 'generate-image-dialog',
-    templateUrl: './generate-image-dialog.component.html',
-    styleUrls: ['./generate-image-dialog.component.scss'],
-    standalone: false
+  standalone: false,
+  styleUrl: './generate-image-dialog.component.scss',
+  templateUrl: './generate-image-dialog.component.html'
 })
 export class GenerateImageDialogComponent implements OnInit {
-  componentState: any;
-  destroyDoneRenderingComponentListenerTimeout: any;
-  doneRenderingComponentSubscription: Subscription;
-  isFailedToImportWork: boolean = false;
-  isImportingWork: boolean = true;
+  private destroyDoneRenderingComponentListenerTimeout: any;
+  private doneRenderingComponentSubscription: Subscription;
+  protected isFailedToImportWork: boolean = false;
+  protected isImportingWork: boolean = true;
 
   constructor(
     private conceptMapService: ConceptMapService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public componentState: any,
     private dialogRef: MatDialogRef<GenerateImageDialogComponent>,
     private drawService: DrawService,
     private embeddedService: EmbeddedService,
@@ -35,7 +33,6 @@ export class GenerateImageDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.componentState = this.data;
     this.subscribeToDoneRenderingComponent();
     this.setDestroyTimeout();
   }

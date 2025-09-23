@@ -1,7 +1,5 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 import { MoveUserConfirmDialogComponent } from './move-user-confirm-dialog.component';
 
 describe('MoveUserConfirmDialogComponent', () => {
@@ -10,9 +8,8 @@ describe('MoveUserConfirmDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MoveUserConfirmDialogComponent],
-      providers: [{ provide: MAT_DIALOG_DATA, useValue: true }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [MoveUserConfirmDialogComponent],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: true }]
     }).compileComponents();
   });
 

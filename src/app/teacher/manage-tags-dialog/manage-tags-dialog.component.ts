@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tag } from '../../domain/tag';
 import { Subject, Subscription } from 'rxjs';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -21,8 +20,6 @@ import { TagComponent } from '../tag/tag.component';
 @Component({
   imports: [
     EditTagComponent,
-    FlexLayoutModule,
-    FormsModule,
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,

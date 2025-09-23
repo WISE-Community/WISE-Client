@@ -1,4 +1,4 @@
-<div class="step-tools" fxLayout="row" fxLayoutAlign="center center">
+<div class="step-tools flex justify-center items-center">
   <button
     id="previousNodeButton"
     mat-icon-button
@@ -27,14 +27,13 @@
       <mat-select-trigger>
         @if (nodeId) {
           {{ getNodePositionAndTitle(nodeId) }}
-        }
-        @if (!nodeId) {
+        } @else {
           <ng-container i18n> Select a Step </ng-container>
         }
       </mat-select-trigger>
       @for (nodeId of nodeIds; track nodeId) {
         <mat-option [value]="nodeId" class="node-select-option">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <div class="flex justify-start items-center gap-2">
             <node-icon [nodeId]="nodeId" size="18" />
             <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
               getNodePositionAndTitle(nodeId)

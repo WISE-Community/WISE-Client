@@ -3,10 +3,10 @@ import { ConfigService } from '../../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 
 @Component({
-    selector: 'peer-group-workgroup',
-    templateUrl: './peer-group-workgroup.component.html',
-    styleUrls: ['./peer-group-workgroup.component.scss'],
-    standalone: false
+  selector: 'peer-group-workgroup',
+  templateUrl: './peer-group-workgroup.component.html',
+  styleUrl: './peer-group-workgroup.component.scss',
+  standalone: false
 })
 export class PeerGroupWorkgroupComponent implements OnInit {
   @Input() workgroup: any;

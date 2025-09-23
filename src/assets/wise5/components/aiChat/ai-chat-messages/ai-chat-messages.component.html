@@ -4,14 +4,14 @@
       class="ai-chat-message"
       [message]="message"
       [workgroupId]="workgroupId"
-    ></ai-chat-student-message>
+    />
   }
   @if (message.role === 'assistant') {
     <ai-chat-bot-message
       class="ai-chat-message"
       [message]="message"
       [computerAvatar]="computerAvatar"
-    ></ai-chat-bot-message>
+    />
   }
 }
 @if (waitingForComputerResponse) {
@@ -19,6 +19,5 @@
     class="ai-chat-message"
     [message]="{ content: '...', role: 'assistant' }"
     [computerAvatar]="computerAvatar"
-  >
-  </ai-chat-bot-message>
+  />
 }

@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [FlexLayoutModule, MatDividerModule, MatIconModule],
+  imports: [MatDividerModule, MatIconModule],
   selector: 'discourse-category-activity',
   styleUrl: 'discourse-category-activity.component.scss',
   templateUrl: 'discourse-category-activity.component.html'

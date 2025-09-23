@@ -1,4 +1,3 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -24,15 +23,13 @@ import { TeacherWebSocketService } from '../../../../services/teacherWebSocketSe
 import { SelectPeriodComponent } from '../../select-period/select-period.component';
 import { PeerGroupAssignedWorkgroupsComponent } from '../peer-group-assigned-workgroups/peer-group-assigned-workgroups.component';
 import { PeerGroupUnassignedWorkgroupsComponent } from '../peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { PeerGroupPeriodComponent } from './peer-group-period.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { PeerGroupGroupingComponent } from '../peer-group-grouping/peer-group-grouping.component';
 import { PeerGroupWorkgroupComponent } from '../peer-group-workgroup/peer-group-workgroup.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockComponent } from 'ng-mocks';
 
 describe('PeerGroupPeriodComponent', () => {
   let component: PeerGroupPeriodComponent;
@@ -51,14 +48,12 @@ describe('PeerGroupPeriodComponent', () => {
         PeerGroupAssignedWorkgroupsComponent,
         PeerGroupPeriodComponent,
         PeerGroupGroupingComponent,
-        PeerGroupUnassignedWorkgroupsComponent,
+        MockComponent(PeerGroupUnassignedWorkgroupsComponent),
         PeerGroupWorkgroupComponent
       ],
       imports: [
-        BrowserAnimationsModule,
         CommonModule,
         DragDropModule,
-        FlexLayoutModule,
         FormsModule,
         MatCardModule,
         MatDialogModule,
@@ -84,8 +79,7 @@ describe('PeerGroupPeriodComponent', () => {
         TeacherProjectService,
         TeacherWebSocketService,
         WorkgroupService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient()
       ]
     }).compileComponents();
   });

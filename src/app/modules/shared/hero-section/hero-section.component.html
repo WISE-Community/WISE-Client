@@ -12,18 +12,14 @@
     <img #bgRef src="{{ imgSrc }}" alt="{{ imgDescription }}" />
   </picture>
   <div class="hero-wrap flex justify-center">
-    <div class="hero-content flex flex-col items-center sm:flex-row gap-2 sm:gap-6">
+    <div class="hero-content flex flex-col items-center justify-center sm:flex-row gap-2 sm:gap-6">
       <div
-        class="hero-main-content with-sidecontent flex flex-col items-center sm:items-start justify-center flex-none sm:w-3/5"
+        class="hero-main-content with-sidecontent flex flex-col items-center sm:items-start justify-center flex-none xs:gap-2 sm:w-3/5"
         [ngClass]="{ 'with-sidecontent': sideRef }"
       >
         <ng-template #defaultHeadline>{{ headline }}</ng-template>
         @if (headline || headlineRef) {
-          <h1
-            class="headline"
-            ngClass="mat-headline-3"
-            [ngClass]="{ 'with-tagline': taglineRef, 'mat-headline-3': false, 'mat-title': true }"
-          >
+          <h1 class="headline" [ngClass]="{ 'with-tagline': taglineRef }">
             <ng-container
               *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"
             ></ng-container>
@@ -31,11 +27,7 @@
         }
         <ng-template #defaultTagline>{{ tagline }}</ng-template>
         @if (tagline || taglineRef) {
-          <h2
-            class="tagline"
-            ngClass="mat-headline-4"
-            [ngClass.xs]="{ 'mat-headline-4': false, 'mat-title': true }"
-          >
+          <h2 class="tagline mat-title" [ngClass]="{ 'mat-headline-4': !xsScreen }">
             <ng-container
               *ngTemplateOutlet="taglineRef ? taglineRef : defaultTagline"
             ></ng-container>

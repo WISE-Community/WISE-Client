@@ -7,22 +7,22 @@
       aria-label="Show/hide team's notebook contents"
       i18n-aria-label
     >
-      <div fxLayout="row" fxFlex>
-        <div fxLayout="row" fxLayoutAlign="center center" fxFlex="15">
+      <div class="flex flex-1">
+        <div class="flex justify-center items-center basis-[15%]">
           {{ workgroup.workgroupId }}
         </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+        <div class="flex justify-start items-center flex-1">
           {{ workgroup.displayNames }}
         </div>
         @if (notesEnabled) {
-          <div class="mat-headline-6" fxLayout="row" fxLayoutAlign="center center" fxFlex="15">
+          <div class="mat-headline-6 flex justify-center items-center basis-[15%]">
             <span [ngClass]="{ 'text-secondary': getNumActiveNotes() === 0 }">
               {{ getNumActiveNotes() }}
             </span>
           </div>
         }
         @if (reportEnabled) {
-          <div fxLayout="row" fxLayoutAlign="center center" fxFlex="25">
+          <div class="flex justify-center items-center basis-[25%]">
             @if (reportHasWork) {
               <span class="success center" i18n>
                 Latest Work: {{ workgroup.report.serverSaveTime | date: 'mediumDate' }}
@@ -38,7 +38,7 @@
   </div>
   @if (expand) {
     <mat-list-item class="grading__item-container">
-      <mat-tab-group class="mat-subtitle-2 app-bg-bg" fxFlex>
+      <mat-tab-group class="mat-subtitle-2 app-bg-bg flex-1" mat-stretch-tabs="false">
         @if (notesEnabled) {
           <mat-tab label="Notes" i18n-label>
             <notebook-notes

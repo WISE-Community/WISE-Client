@@ -10,13 +10,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
-    FlexLayoutModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,

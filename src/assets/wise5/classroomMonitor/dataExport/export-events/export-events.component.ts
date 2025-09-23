@@ -3,10 +3,10 @@ import { AbstractExportComponent } from '../abstract-export.component';
 import { EventDataExportStrategy } from '../strategies/EventDataExportStrategy';
 
 @Component({
-    selector: 'export-events',
-    templateUrl: './export-events.component.html',
-    styleUrls: ['./export-events.component.scss'],
-    standalone: false
+  selector: 'export-events',
+  standalone: false,
+  styleUrl: './export-events.component.scss',
+  templateUrl: './export-events.component.html'
 })
 export class ExportEventsComponent extends AbstractExportComponent {
   public includeNames: boolean = false;

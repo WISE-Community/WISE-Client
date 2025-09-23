@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LibraryProjectComponent } from './library-project/library-project.component';
 import { LibraryProjectDetailsComponent } from './library-project-details/library-project-details.component';
@@ -71,7 +70,6 @@ const materialModules = [
     ArchiveProjectsButtonComponent,
     CommonModule,
     CurriculumComponent,
-    FlexLayoutModule,
     FormsModule,
     LibraryFiltersComponent,
     LibraryProjectComponent,

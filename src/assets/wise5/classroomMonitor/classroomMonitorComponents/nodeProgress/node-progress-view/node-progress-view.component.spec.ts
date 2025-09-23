@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -99,7 +98,7 @@ describe('NodeProgressViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NodeProgressViewComponent],
-      imports: [ClassroomMonitorTestingModule, FlexLayoutModule, MatIconModule, MatListModule],
+      imports: [ClassroomMonitorTestingModule, MatIconModule, MatListModule],
       providers: [
         {
           provide: MilestoneService,

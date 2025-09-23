@@ -10,7 +10,6 @@ import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workg
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 class Workgroup {
   periodId: number;
@@ -18,13 +17,7 @@ class Workgroup {
 }
 
 @Component({
-  imports: [
-    FlexLayoutModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    WorkgroupSelectAutocompleteComponent
-  ],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, WorkgroupSelectAutocompleteComponent],
   selector: 'student-grading-tools',
   templateUrl: './student-grading-tools.component.html'
 })

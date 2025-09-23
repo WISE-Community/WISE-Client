@@ -1,7 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UtilService } from './services/util.service';
 import { Announcement } from './domain/announcement';
@@ -48,19 +47,6 @@ export class MockUtilService {
   }
 }
 
-export class MockObservableMedia {
-  isActive(query: string): boolean {
-    return false;
-  }
-
-  asObservable(): Observable<MediaChange> {
-    return new Observable((observer) => {
-      observer.next(new MediaChange());
-      observer.complete();
-    });
-  }
-}
-
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
@@ -72,7 +58,6 @@ describe('AppComponent', () => {
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
         { provide: UtilService, useClass: MockUtilService },
-        { provide: MediaObserver, useClass: MockObservableMedia },
         provideRouter([])
       ],
       schemas: [NO_ERRORS_SCHEMA]

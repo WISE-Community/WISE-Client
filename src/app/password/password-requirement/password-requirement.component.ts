@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'password-requirement',
-    templateUrl: './password-requirement.component.html',
-    styleUrls: ['./password-requirement.component.scss'],
-    standalone: false
+  selector: 'password-requirement',
+  standalone: false,
+  styleUrl: './password-requirement.component.scss',
+  templateUrl: './password-requirement.component.html'
 })
 export class PasswordRequirementComponent {
   public static INVALID_PASSWORD_MISSING_LETTER = '12345678';

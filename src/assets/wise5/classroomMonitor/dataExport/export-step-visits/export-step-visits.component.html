@@ -52,7 +52,7 @@
         </mat-checkbox>
       }
       <h6 i18n>Choose Steps</h6>
-      <div class="select-all-buttons" fxLayoutGap="20px">
+      <div class="select-all-buttons flex gap-5">
         <button mat-raised-button color="primary" (click)="selectAll()" i18n>Select All</button>
         <button mat-raised-button color="primary" (click)="deselectAll()" i18n>Deselect All</button>
         <button mat-raised-button color="primary" (click)="export()" i18n>Export</button>
@@ -84,9 +84,9 @@
           <h6 class="checkbox-label" i18n>Include Deleted Steps (If Any)</h6>
         </mat-checkbox>
       </div>
-      <div>
+      <div class="flex">
         <button mat-raised-button color="primary" (click)="export()" i18n>Export</button>
-        <div fxFlex></div>
+        <div class="flex-grow"></div>
         <button
           mat-raised-button
           color="primary"

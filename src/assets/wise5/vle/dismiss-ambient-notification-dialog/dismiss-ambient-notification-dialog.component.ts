@@ -14,10 +14,9 @@ import { StudentDataService } from '../../services/studentDataService';
 import { NodeService } from '../../services/nodeService';
 
 @Component({
-    selector: 'dismiss-ambient-notification-dialog',
-    templateUrl: './dismiss-ambient-notification-dialog.component.html',
-    styleUrls: ['./dismiss-ambient-notification-dialog.component.scss'],
-    standalone: false
+  standalone: false,
+  styles: ['.notification-dismiss__input { width: 100%; }'],
+  templateUrl: './dismiss-ambient-notification-dialog.component.html'
 })
 export class DismissAmbientNotificationDialogComponent implements OnInit {
   private dismissSource: Subject<any> = new Subject<any>();

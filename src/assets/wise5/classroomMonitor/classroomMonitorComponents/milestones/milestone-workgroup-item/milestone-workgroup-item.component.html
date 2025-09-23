@@ -13,10 +13,9 @@
     [ngClass]="{ 'list-item--noclick': !showScore || disabled }"
     (click)="toggleExpand()"
     [disabled]="disabled"
-    fxLayoutWrap
   >
-    <div fxLayout="row" fxFlex="100">
-      <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <div class="flex flex-wrap w-full">
+      <div class="flex-1 flex justify-start items-center">
         <workgroup-info
           [hasAlert]="hasAlert"
           [hasNewAlert]="hasNewAlert"
@@ -25,26 +24,25 @@
         />
       </div>
       @if (locations.length == 1) {
-        <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+        <div class="flex justify-center items-center basis-[30%]">
           <workgroup-node-status [statusText]="statusText" [statusClass]="statusClass" />
         </div>
       }
       @if (showScore && locations.length > 1) {
-        <div fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
-          <workgroup-node-score [score]="initialScore" [maxScore]="firstComponentMaxScore" />
+        <div class="flex justify-center items-center basis-[10%]">
+          <workgroup-node-score [score]="initialScore" [maxScore]="firstComponentMaxScore || 0" />
         </div>
       }
       @if (showScore) {
         <div
-          fxFlex="{{ locations.length > 1 ? 10 : 20 }}"
-          fxLayout="row"
-          fxLayoutAlign="center center"
+          class="flex justify-center items-center"
+          [ngClass]="locations.length > 1 ? 'basis-[10%]' : 'basis-[20%]'"
         >
-          <workgroup-node-score [score]="score" [maxScore]="lastComponentMaxScore" />
+          <workgroup-node-score [score]="score" [maxScore]="lastComponentMaxScore || 0" />
         </div>
       }
       @if (showScore && locations.length > 1) {
-        <div fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
+        <div class="flex justify-center items-center basis-[10%]">
           <span
             class="mat-headline-5"
             [ngClass]="{ success: changeInScore > 0, warn: changeInScore < 0 }"

@@ -14,7 +14,6 @@ import { ComponentNewWorkBadgeComponent } from '../../../../../../app/classroom-
 import { WorkgroupNodeScoreComponent } from '../../shared/workgroupNodeScore/workgroup-node-score.component';
 import { WorkgroupNodeStatusComponent } from '../../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupInfoComponent } from '../workgroupInfo/workgroup-info.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -29,7 +28,6 @@ import { AnnotationService } from '../../../../services/annotationService';
     CommonModule,
     MatButtonModule,
     MatListModule,
-    FlexLayoutModule,
     WorkgroupInfoComponent,
     WorkgroupNodeStatusComponent,
     WorkgroupNodeScoreComponent,

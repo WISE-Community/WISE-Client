@@ -6,7 +6,7 @@
       >
         <mat-icon class="annotations__icon md-36">{{ icon }}</mat-icon>
       </div>
-      <div class="annotations__title" fxLayout="row" flex>
+      <div class="annotations__title flex w-full">
         <span>{{ label }}</span>
         @if (isNewAnnotation()) {
           <span class="badge annotations__status" i18n>New</span>
@@ -20,13 +20,13 @@
       @if (annotations.comment) {
         <hr />
       }
-      <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="flex justify-start items-center">
         @if (showScore && annotations.score) {
           <span class="annotations__score" i18n
             >Score: {{ annotations.score.data.value }}{{ maxScoreDisplay }}</span
           >
         }
-        <span fxFlex></span>
+        <span class="flex-grow"></span>
         <save-time-message [saveTime]="latestAnnotationTime" [timeOnly]="true" />
       </div>
     </mat-card-content>

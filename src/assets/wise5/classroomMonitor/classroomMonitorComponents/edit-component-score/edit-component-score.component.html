@@ -1,7 +1,7 @@
-<span fxLayout="row" fxLayoutAlign="start center">
+<span class="flex justify-start items-center">
   <label class="input-label md-no-float annotations--grading__score__label">
     @if (isAutoScore) {
-      <span fxLayout fxLayoutGap="4px">
+      <span class="flex gap-1">
         <span i18n>Auto Score</span>
         @if (!disabled) {
           <span>(<a (click)="focusScoreInput()" i18n>Edit</a>)</span>

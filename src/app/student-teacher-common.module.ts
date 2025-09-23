@@ -1,7 +1,6 @@
 import '../assets/wise5/lib/jquery/jquery-global';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,7 +44,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     DragDropModule,
     EditNotebookItemDialogModule,
     EditorModule,
-    FlexLayoutModule,
     FormsModule,
     HighchartsChartModule,
     MatAutocompleteModule,
@@ -83,7 +81,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     DialogResponsesComponent,
     DragDropModule,
     EditorModule,
-    FlexLayoutModule,
     FormsModule,
     MatAutocompleteModule,
     MatButtonModule,

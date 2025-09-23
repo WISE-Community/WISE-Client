@@ -10,7 +10,7 @@
     >
   </p>
   <p i18n>Shared units appear in a teacher's "My Units" library.</p>
-  <mat-divider></mat-divider>
+  <mat-divider />
   <mat-form-field appearance="fill">
     <mat-label i18n>Find a teacher</mat-label>
     <mat-icon matPrefix>search</mat-icon>
@@ -48,8 +48,7 @@
       <td mat-cell *matCellDef="let sharedOwner">
         @if (sharedOwner.isOwner) {
           {{ project.owner.firstName }} {{ project.owner.lastName }}
-        }
-        @if (!sharedOwner.isOwner) {
+        } @else {
           {{ sharedOwner.firstName }} {{ sharedOwner.lastName }} (<a
             [routerLink]=""
             (click)="unshareProject(sharedOwner)"

@@ -12,15 +12,15 @@ import { MatError, MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    imports: [
-        MatButtonModule,
-        MatDialogModule,
-        MatError,
-        MatFormField,
-        MatInputModule,
-        ReactiveFormsModule
-    ],
-    templateUrl: 'add-match-choice-dialog.html'
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+    MatError,
+    MatFormField,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
+  templateUrl: 'add-match-choice-dialog.html'
 })
 export class AddMatchChoiceDialogComponent {
   protected addChoiceFormGroup: FormGroup = this.fb.group({
