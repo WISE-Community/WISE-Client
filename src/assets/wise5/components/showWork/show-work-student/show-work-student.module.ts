@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AnimationShowWorkComponent } from '../../animation/animation-show-work/animation-show-work.component';
 import { DiscussionStudentModule } from '../../discussion/discussion-student/discussion-student.module';
-import { EmbeddedShowWorkModule } from '../../embedded/embedded-show-work/embedded-show-work.module';
+import { EmbeddedShowWorkComponent } from '../../embedded/embedded-show-work/embedded-show-work.component';
 import { GraphShowWorkModule } from '../../graph/graph-show-work/graph-show-work.module';
 import { OpenResponseShowWorkModule } from '../../openResponse/open-response-show-work/open-response-show-work.module';
 import { TableShowWorkModule } from '../../table/table-show-work/table-show-work.module';
@@ -25,7 +25,7 @@ import { DrawShowWorkComponent } from '../../draw/draw-show-work/draw-show-work.
     DialogGuidanceShowWorkComponent,
     DiscussionStudentModule,
     DrawShowWorkComponent,
-    EmbeddedShowWorkModule,
+    EmbeddedShowWorkComponent,
     GraphShowWorkModule,
     LabelShowWorkComponent,
     MatchShowWorkComponent,
