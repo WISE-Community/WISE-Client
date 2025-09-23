@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { DiscussionShowWorkModule } from '../../assets/wise5/components/discussion/discussion-show-work/discussion-show-work.module';
-import { GraphShowWorkModule } from '../../assets/wise5/components/graph/graph-show-work/graph-show-work.module';
 import { OpenResponseShowWorkModule } from '../../assets/wise5/components/openResponse/open-response-show-work/open-response-show-work.module';
 import { TableShowWorkModule } from '../../assets/wise5/components/table/table-show-work/table-show-work.module';
 import { MultipleChoiceShowWorkComponent } from '../../assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component';
@@ -12,6 +11,7 @@ import { AudioOscillatorShowWorkComponent } from '../../assets/wise5/components/
 import { ConceptMapShowWorkComponent } from '../../assets/wise5/components/conceptMap/concept-map-show-work/concept-map-show-work.component';
 import { DrawShowWorkComponent } from '../../assets/wise5/components/draw/draw-show-work/draw-show-work.component';
 import { EmbeddedShowWorkComponent } from '../../assets/wise5/components/embedded/embedded-show-work/embedded-show-work.component';
+import { GraphShowWorkComponent } from '../../assets/wise5/components/graph/graph-show-work/graph-show-work.component';
 
 @NgModule({
   imports: [
@@ -22,7 +22,7 @@ import { EmbeddedShowWorkComponent } from '../../assets/wise5/components/embedde
     DiscussionShowWorkModule,
     DrawShowWorkComponent,
     EmbeddedShowWorkComponent,
-    GraphShowWorkModule,
+    GraphShowWorkComponent,
     LabelShowWorkComponent,
     MatchShowWorkComponent,
     MultipleChoiceShowWorkComponent,
@@ -32,7 +32,6 @@ import { EmbeddedShowWorkComponent } from '../../assets/wise5/components/embedde
   exports: [
     DialogGuidanceShowWorkComponent,
     DiscussionShowWorkModule,
-    GraphShowWorkModule,
     LabelShowWorkComponent,
     MatchShowWorkComponent,
     MultipleChoiceShowWorkComponent,

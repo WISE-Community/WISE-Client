@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { GraphShowWorkModule } from '../graph-show-work/graph-show-work.module';
+import { GraphShowWorkComponent } from '../graph-show-work/graph-show-work.component';
 import { GraphGradingComponent } from './graph-grading.component';
 
 @NgModule({
   declarations: [GraphGradingComponent],
-  imports: [GraphShowWorkModule],
+  imports: [GraphShowWorkComponent],
   exports: [GraphGradingComponent]
 })
 export class GraphGradingModule {}
