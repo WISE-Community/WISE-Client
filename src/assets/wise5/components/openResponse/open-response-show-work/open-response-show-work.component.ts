@@ -1,40 +1,31 @@
 import { Component } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'open-response-show-work',
-    templateUrl: 'open-response-show-work.component.html',
-    standalone: false
+  imports: [CommonModule],
+  selector: 'open-response-show-work',
+  templateUrl: 'open-response-show-work.component.html'
 })
 export class OpenResponseShowWorkComponent extends ComponentShowWorkDirective {
-  studentResponse: string = '';
-  attachments: any[] = [];
-  audioAttachments: any[] = [];
-  otherAttachments: any[] = [];
+  protected audioAttachments: any[] = [];
+  protected otherAttachments: any[] = [];
+  protected studentResponse: string = '';
 
   ngOnInit(): void {
     if (this.componentState != null && this.componentState !== '') {
-      this.studentResponse = this.getStudentResponse(this.componentState);
-      this.attachments = this.getAttachments(this.componentState);
-      this.processAttachments(this.attachments);
+      this.studentResponse = this.componentState.studentData.response;
+      this.processAttachments();
     }
   }
 
-  getStudentResponse(componentState: any): string {
-    return componentState.studentData.response;
-  }
-
-  getAttachments(componentState: any): any[] {
-    return componentState.studentData.attachments;
-  }
-
-  processAttachments(attachments: any[]): void {
-    for (const attachment of attachments) {
+  private processAttachments(): void {
+    this.componentState.studentData.attachments.forEach((attachment: any) => {
       if (attachment.type === 'audio') {
         this.audioAttachments.push(attachment);
       } else {
         this.otherAttachments.push(attachment);
       }
-    }
+    });
   }
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { DiscussionShowWorkModule } from '../../assets/wise5/components/discussion/discussion-show-work/discussion-show-work.module';
-import { OpenResponseShowWorkModule } from '../../assets/wise5/components/openResponse/open-response-show-work/open-response-show-work.module';
 import { MultipleChoiceShowWorkComponent } from '../../assets/wise5/components/multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component';
 import { DialogGuidanceShowWorkComponent } from '../../assets/wise5/components/dialogGuidance/dialog-guidance-show-work/dialog-guidance-show-work.component';
 import { MatchShowWorkComponent } from '../../assets/wise5/components/match/match-show-work/match-show-work.component';
@@ -12,6 +11,7 @@ import { DrawShowWorkComponent } from '../../assets/wise5/components/draw/draw-s
 import { EmbeddedShowWorkComponent } from '../../assets/wise5/components/embedded/embedded-show-work/embedded-show-work.component';
 import { GraphShowWorkComponent } from '../../assets/wise5/components/graph/graph-show-work/graph-show-work.component';
 import { TableShowWorkComponent } from '../../assets/wise5/components/table/table-show-work/table-show-work.component';
+import { OpenResponseShowWorkComponent } from '../../assets/wise5/components/openResponse/open-response-show-work/open-response-show-work.component';
 
 @NgModule({
   imports: [
@@ -26,7 +26,7 @@ import { TableShowWorkComponent } from '../../assets/wise5/components/table/tabl
     LabelShowWorkComponent,
     MatchShowWorkComponent,
     MultipleChoiceShowWorkComponent,
-    OpenResponseShowWorkModule,
+    OpenResponseShowWorkComponent,
     TableShowWorkComponent
   ],
   exports: [
@@ -34,8 +34,7 @@ import { TableShowWorkComponent } from '../../assets/wise5/components/table/tabl
     DiscussionShowWorkModule,
     LabelShowWorkComponent,
     MatchShowWorkComponent,
-    MultipleChoiceShowWorkComponent,
-    OpenResponseShowWorkModule
+    MultipleChoiceShowWorkComponent
   ]
 })
 export class ComponentShowWorkModule {}
