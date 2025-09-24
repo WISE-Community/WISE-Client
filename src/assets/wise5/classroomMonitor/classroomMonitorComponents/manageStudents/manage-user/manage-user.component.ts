@@ -1,7 +1,6 @@
 import { ChangeStudentPasswordDialogComponent } from '../change-student-password-dialog/change-student-password-dialog.component';
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClient } from '@angular/common/http';
 import { ManageShowStudentInfoComponent } from '../manage-show-student-info/manage-show-student-info.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -13,7 +12,7 @@ import { ShowStudentInfoComponent } from '../show-student-info/show-student-info
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [FlexLayoutModule, MatIconModule, MatTooltipModule, ShowStudentInfoComponent],
+  imports: [MatIconModule, MatTooltipModule, ShowStudentInfoComponent],
   selector: 'manage-user',
   styleUrl: 'manage-user.component.scss',
   templateUrl: 'manage-user.component.html'

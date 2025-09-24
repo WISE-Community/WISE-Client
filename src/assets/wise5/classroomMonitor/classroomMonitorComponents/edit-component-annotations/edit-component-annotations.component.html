@@ -9,9 +9,7 @@
       <div class="annotations--grading">
         @if (latestAnnotations.score) {
           <div
-            class="annotations--grading__item annotations--grading__score"
-            fxLayout="row"
-            fxLayoutAlign="start center"
+            class="annotations--grading__item annotations--grading__score flex justify-start items-center"
           >
             <edit-component-score
               [componentId]="componentId"
@@ -56,9 +54,7 @@
       <div class="annotations--grading">
         @if (latestAnnotations.autoScore) {
           <div
-            class="annotations--grading__item annotations--grading__score"
-            fxLayout="row"
-            fxLayoutAlign="start center"
+            class="annotations--grading__item annotations--grading__score flex justify-start items-center"
           >
             <edit-component-score
               [componentId]="componentId"
@@ -81,9 +77,7 @@
         }
         @if (latestAnnotations.autoComment) {
           <div class="annotations--grading__item annotations--grading__auto-comment">
-            <div class="heavy" fxLayout="row" fxLayoutGap="4px">
-              <span class="md-no-float" i18n>Auto Comment</span>:
-            </div>
+            <div class="heavy flex gap-1"><span class="md-no-float" i18n>Auto Comment</span>:</div>
             <div class="annotations--grading__auto-comment__content disabled-text">
               <span [innerHTML]="latestAnnotations.autoComment.data.value"></span>
             </div>
@@ -95,9 +89,7 @@
 } @else {
   <div class="annotations--grading">
     <div
-      class="annotations--grading__score annotations--grading__item"
-      fxLayout="row"
-      fxLayoutAlign="start center"
+      class="annotations--grading__score annotations--grading__item flex justify-start items-center"
     >
       <edit-component-score
         [componentId]="componentId"
@@ -134,7 +126,7 @@
     }
     @if (showAutoComment()) {
       <div class="annotations--grading__item annotations--grading__auto-comment">
-        <div class="heavy" fxLayout="row" fxLayoutGap="4px">
+        <div class="heavy flex gap-1">
           <span class="md-no-float" i18n>Auto Comment</span>
           @if (!isDisabled) {
             <span>(<a (click)="toggleEditComment()" i18n>Edit</a>)</span>:

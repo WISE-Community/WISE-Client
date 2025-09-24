@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -17,17 +16,14 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
 import { NotebookItemComponent } from './notebook-item/notebook-item.component';
 import { NotebookLauncherComponent } from './notebook-launcher/notebook-launcher.component';
 import { NotebookNotesComponent } from './notebook-notes/notebook-notes.component';
-import { NotebookParentComponent } from './notebook-parent/notebook-parent.component';
 import { NotebookReportComponent } from './notebook-report/notebook-report.component';
 import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
 
 @NgModule({
-  declarations: [NotebookParentComponent],
   imports: [
     CommonModule,
     ComponentStateInfoComponent,
     EditorModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -46,7 +42,6 @@ import { WiseTinymceEditorComponent } from '../../assets/wise5/directives/wise-t
     WiseTinymceEditorComponent
   ],
   exports: [
-    NotebookParentComponent,
     NotebookItemComponent,
     NotebookLauncherComponent,
     NotebookNotesComponent,

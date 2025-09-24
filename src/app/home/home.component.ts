@@ -3,6 +3,7 @@ import { bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn } from '../a
 import { DomSanitizer } from '@angular/platform-browser';
 import { ConfigService } from '../services/config.service';
 import { Config } from '../domain/config';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -92,11 +93,17 @@ export class HomeComponent implements OnInit {
       content: $localize`Robust teacher grading and management tools supporting individualized and customized learning`
     }
   ];
+  protected smScreen: boolean;
 
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private configService: ConfigService,
     private sanitizer: DomSanitizer
-  ) {}
+  ) {
+    this.breakpointObserver.observe(['(min-width: 40rem)']).subscribe((result) => {
+      this.smScreen = result.matches;
+    });
+  }
 
   ngOnInit() {
     this.configService.getConfig().subscribe((config: Config) => {

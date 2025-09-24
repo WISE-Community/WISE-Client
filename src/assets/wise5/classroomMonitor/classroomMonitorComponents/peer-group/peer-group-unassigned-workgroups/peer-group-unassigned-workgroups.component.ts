@@ -2,12 +2,11 @@ import { Component, Input } from '@angular/core';
 import { PeerGroupWorkgroupsContainerComponent } from '../peer-group-workgroups-container/peer-group-workgroups-container.component';
 
 @Component({
-    selector: 'peer-group-unassigned-workgroups',
-    templateUrl: './peer-group-unassigned-workgroups.component.html',
-    styleUrls: ['../peer-group-workgroups-container/peer-group-workgroups-container.component.scss'],
-    standalone: false
+  selector: 'peer-group-unassigned-workgroups',
+  standalone: false,
+  styleUrl: '../peer-group-workgroups-container/peer-group-workgroups-container.component.scss',
+  templateUrl: './peer-group-unassigned-workgroups.component.html'
 })
 export class PeerGroupUnassignedWorkgroupsComponent extends PeerGroupWorkgroupsContainerComponent {
-  @Input()
-  unassignedWorkgroups: any[];
+  @Input() unassignedWorkgroups: any[];
 }

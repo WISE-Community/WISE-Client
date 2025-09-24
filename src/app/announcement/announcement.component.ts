@@ -8,11 +8,10 @@ import {
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [FlexLayoutModule, MatButtonModule, MatDialogModule, MatIconModule],
+  imports: [MatButtonModule, MatDialogModule, MatIconModule],
   selector: 'app-announcement',
   styleUrl: './announcement.component.scss',
   templateUrl: './announcement.component.html'

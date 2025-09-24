@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
 import { EditComponentAnnotationsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/edit-component-annotations/edit-component-annotations.component';
-import { WorkgroupItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroup-item/workgroup-item.component';
 import { WorkgroupInfoComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/workgroupInfo/workgroup-info.component';
 import { WorkgroupNodeScoreComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/workgroupNodeScore/workgroup-node-score.component';
 import { WorkgroupComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
@@ -23,7 +22,6 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     StatusIconComponent,
     StudentTeacherCommonModule,
     WorkgroupInfoComponent,
-    WorkgroupItemComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupNodeStatusComponent,
@@ -38,7 +36,6 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     StatusIconComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
-    WorkgroupItemComponent,
     WorkgroupNodeScoreComponent,
     WorkgroupNodeStatusComponent,
     WorkgroupSelectAutocompleteComponent

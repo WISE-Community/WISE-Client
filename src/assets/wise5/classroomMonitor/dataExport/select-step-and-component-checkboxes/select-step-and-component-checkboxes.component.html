@@ -1,9 +1,7 @@
 <mat-radio-group
   [(ngModel)]="exportStepSelectionType"
   (ngModelChange)="exportStepSelectionTypeChange.emit(exportStepSelectionType)"
-  class="select-steps-radio-buttons-container"
-  fxLayout="column"
-  fxLayoutGap="10px"
+  class="select-steps-radio-buttons-container flex flex-col gap-2"
 >
   <mat-radio-button value="exportAllSteps" color="primary" i18n>
     Export All Steps
@@ -13,7 +11,7 @@
   </mat-radio-button>
 </mat-radio-group>
 @if (exportStepSelectionType === 'exportSelectSteps') {
-  <div class="button-div" fxLayoutGap="20px">
+  <div class="button-div flex gap-5">
     <button
       mat-raised-button
       color="primary"
@@ -35,7 +33,7 @@
       Deselect All
     </button>
   </div>
-  <div fxLayoutAlign="start center">
+  <div class="flex justify-start items-center">
     <h4>{{ project.metadata.title }}</h4>
     <button
       (click)="previewProject()"
@@ -48,8 +46,8 @@
     </button>
   </div>
   @for (node of nodes; track node) {
-    <div fxLayout="column">
-      <div fxLayoutAlign="start center" fxLayoutAlign="start center">
+    <div class="flex flex-col">
+      <div class="flex justify-start items-center">
         @if (node.order !== 0) {
           <mat-checkbox
             [(ngModel)]="node.checked"
@@ -77,7 +75,7 @@
           </button>
         }
       </div>
-      <div fxLayout="column" fxLayoutGap="10px">
+      <div class="flex flex-col gap-2">
         @for (
           componentItem of node.node.components;
           track componentItem;

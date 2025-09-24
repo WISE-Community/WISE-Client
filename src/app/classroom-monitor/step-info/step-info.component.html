@@ -1,20 +1,12 @@
-<div fxLayout="row" fxLayoutAlign="start center">
-  <node-icon [nodeId]="nodeId" size="18" fxHide.xs />
-  <span fxHide.xs>&nbsp;&nbsp;</span>
+<div class="flex justify-start items-center">
+  <node-icon [nodeId]="nodeId" size="18" class="hidden sm:block" />
+  <span class="hidden sm:block">&nbsp;&nbsp;</span>
   <span>{{ stepTitle }}</span>
   @if (hasAlert) {
-    <status-icon
-      [class]="alertIconClass"
-      [name]="alertIconName"
-      [tooltip]="alertIconLabel"
-    />
+    <status-icon [class]="alertIconClass" [name]="alertIconName" [tooltip]="alertIconLabel" />
   }
   @if (hasRubrics) {
-    <status-icon
-      class="info"
-      name="info"
-      [tooltip]="rubricIconLabel"
-    />
+    <status-icon class="info" name="info" [tooltip]="rubricIconLabel" />
   }
   @if (hasNewWork) {
     <span class="badge badge--info animate-fade" i18n>New</span>

@@ -9,11 +9,9 @@ import { GradingStepToolsComponent } from '../../grading-step-tools/grading-step
 import { SelectPeriodComponent } from '../../select-period/select-period.component';
 import { StudentGradingToolsComponent } from '../../studentGrading/student-grading-tools/student-grading-tools.component';
 import { SaveIndicatorComponent } from '../../../../common/save-indicator/save-indicator.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   imports: [
-    FlexLayoutModule,
     GradingStepToolsComponent,
     MatButtonModule,
     MatIconModule,

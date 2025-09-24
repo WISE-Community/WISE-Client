@@ -10,7 +10,7 @@ import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workg
 
 @Component({
   selector: 'milestone-details',
-  styleUrls: ['./milestone-details.component.scss'],
+  styleUrl: './milestone-details.component.scss',
   templateUrl: './milestone-details.component.html',
   standalone: false
 })

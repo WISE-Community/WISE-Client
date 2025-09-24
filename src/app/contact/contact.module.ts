@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactRoutingModule } from './contact-routing.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -44,7 +43,6 @@ const materialModules = [
   imports: [
     CommonModule,
     ContactRoutingModule,
-    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,

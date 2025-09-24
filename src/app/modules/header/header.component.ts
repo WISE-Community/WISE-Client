@@ -3,7 +3,6 @@ import { Router, RouterModule } from '@angular/router';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderLinksComponent } from './header-links/header-links.component';
@@ -12,7 +11,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   imports: [
-    FlexLayoutModule,
     HeaderAccountMenuComponent,
     HeaderLinksComponent,
     MatButtonModule,

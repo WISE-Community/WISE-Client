@@ -1,7 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,7 +17,6 @@ import { MatchFeedbackSectionComponent } from './match-student/match-feedback-se
   imports: [
     CommonModule,
     DragDropModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatchChoiceItemComponent,
@@ -34,7 +32,6 @@ import { MatchFeedbackSectionComponent } from './match-student/match-feedback-se
   exports: [
     CommonModule,
     DragDropModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,

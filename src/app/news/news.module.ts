@@ -6,12 +6,10 @@ import { NewsRoutingModule } from './news-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,

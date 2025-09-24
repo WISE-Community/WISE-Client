@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { StudentDataService } from '../../services/studentDataService';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  imports: [FlexLayoutModule, MatButtonModule],
+  imports: [MatButtonModule],
   selector: 'node-navigation',
   templateUrl: './node-navigation.component.html'
 })

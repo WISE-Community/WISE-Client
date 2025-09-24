@@ -8,10 +8,10 @@ import { NewPasswordAndConfirmComponent } from '../../../../../../app/password/n
 import { changePasswordError } from '../../../../../../app/common/password-helper';
 
 @Component({
-    selector: 'app-change-student-password-dialog',
-    templateUrl: './change-student-password-dialog.component.html',
-    styleUrls: ['./change-student-password-dialog.component.scss'],
-    standalone: false
+  selector: 'app-change-student-password-dialog',
+  templateUrl: './change-student-password-dialog.component.html',
+  styles: ['form { margin-top: 16px; }'],
+  standalone: false
 })
 export class ChangeStudentPasswordDialogComponent implements OnInit {
   canViewStudentNames: boolean;

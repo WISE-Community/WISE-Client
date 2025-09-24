@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { StudentComponent } from './student.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideRouter, Router, RouterModule } from '@angular/router';
 
 describe('StudentComponent', () => {
   let component: StudentComponent;
@@ -11,10 +9,9 @@ describe('StudentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      providers: [],
-      declarations: [StudentComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [RouterModule],
+      providers: [provideRouter([])],
+      declarations: [StudentComponent]
     }).compileComponents();
   }));
 

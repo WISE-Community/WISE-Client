@@ -10,37 +10,24 @@ import { ConfigService } from '../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 
 @Component({
-    selector: 'class-response',
-    templateUrl: 'class-response.component.html',
-    styleUrls: ['class-response.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  selector: 'class-response',
+  standalone: false,
+  styleUrl: 'class-response.component.scss',
+  templateUrl: 'class-response.component.html'
 })
 export class ClassResponse {
-  @Input()
-  response: any;
-
-  @Input()
-  numReplies: number;
-
-  @Input()
-  mode: any;
-
-  @Input()
-  isDisabled: boolean;
-
-  @Output()
-  submitButtonClicked: any = new EventEmitter();
-
-  @Output()
-  deleteButtonClicked: any = new EventEmitter();
-
-  @Output()
-  undoDeleteButtonClicked: any = new EventEmitter();
-
-  urlMatcher: any = /((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)/g;
+  @Output() deleteButtonClicked: any = new EventEmitter();
   expanded: boolean = false;
+  @Input() isDisabled: boolean;
+  @Input() mode: any;
+  @Input() numReplies: number;
   repliesToShow: any[] = [];
+  @Input() response: any;
+  @Output() submitButtonClicked: any = new EventEmitter();
+  @Output() undoDeleteButtonClicked: any = new EventEmitter();
+  urlMatcher: any =
+    /((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)/g;
 
   constructor(private configService: ConfigService) {}
 

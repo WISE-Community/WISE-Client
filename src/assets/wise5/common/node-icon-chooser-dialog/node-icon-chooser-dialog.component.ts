@@ -4,7 +4,6 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Node } from '../Node';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
@@ -18,20 +17,19 @@ interface KIIcon {
 }
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatChipsModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatIconModule,
-        MatTooltipModule,
-        RouterModule
-    ],
-    selector: 'node-icon-chooser-dialog',
-    styleUrl: 'node-icon-chooser-dialog.component.scss',
-    templateUrl: 'node-icon-chooser-dialog.component.html'
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTooltipModule,
+    RouterModule
+  ],
+  selector: 'node-icon-chooser-dialog',
+  styleUrl: 'node-icon-chooser-dialog.component.scss',
+  templateUrl: 'node-icon-chooser-dialog.component.html'
 })
 export class NodeIconChooserDialogComponent {
   protected colors = [

@@ -6,11 +6,10 @@ import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
 import { SaveTimeMessageComponent } from '../../common/save-time-message/save-time-message.component';
 import { MatCardModule } from '@angular/material/card';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [FlexLayoutModule, MatCardModule, MatIconModule, SaveTimeMessageComponent],
+  imports: [MatCardModule, MatIconModule, SaveTimeMessageComponent],
   selector: 'component-annotations',
   styleUrl: 'component-annotations.component.scss',
   templateUrl: 'component-annotations.component.html'

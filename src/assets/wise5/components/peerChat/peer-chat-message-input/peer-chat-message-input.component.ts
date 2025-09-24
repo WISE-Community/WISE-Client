@@ -5,9 +5,9 @@ import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
 
 @Component({
-    selector: 'peer-chat-message-input',
-    templateUrl: './peer-chat-message-input.component.html',
-    standalone: false
+  selector: 'peer-chat-message-input',
+  standalone: false,
+  templateUrl: './peer-chat-message-input.component.html'
 })
 export class PeerChatMessageInputComponent implements OnInit {
   @Input() component: PeerChatComponent;
@@ -20,7 +20,10 @@ export class PeerChatMessageInputComponent implements OnInit {
   @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
   private typingDurationBuffer: number = 5000;
 
-  constructor(private configService: ConfigService, private stompService: StompService) {}
+  constructor(
+    private configService: ConfigService,
+    private stompService: StompService
+  ) {}
 
   ngOnInit(): void {
     this.intervalId = setInterval(() => {

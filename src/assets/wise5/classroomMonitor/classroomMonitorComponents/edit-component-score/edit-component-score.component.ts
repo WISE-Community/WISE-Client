@@ -4,12 +4,11 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AnnotationService } from '../../../services/annotationService';
 import { NotificationService } from '../../../services/notificationService';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  imports: [FlexLayoutModule, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule],
   selector: 'edit-component-score',
   templateUrl: 'edit-component-score.component.html'
 })

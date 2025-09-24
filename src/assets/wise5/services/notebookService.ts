@@ -130,7 +130,7 @@ export class NotebookService {
     );
   }
 
-  showEditNoteDialog(
+  private showEditNoteDialog(
     nodeId: string,
     note: any,
     isEditMode: boolean,
@@ -383,9 +383,8 @@ export class NotebookService {
               if (lastRevision != null && lastRevision.serverDeleteTime != null) {
                 // the last revision for this was deleted,
                 // so move the entire note (with all its revisions) to deletedItems
-                notebookByWorkgroup.deletedItems[
-                  notebookItemLocalNotebookItemIdKey
-                ] = allRevisionsForThisLocalNotebookItemId;
+                notebookByWorkgroup.deletedItems[notebookItemLocalNotebookItemIdKey] =
+                  allRevisionsForThisLocalNotebookItemId;
                 delete notebookByWorkgroup.items[notebookItemLocalNotebookItemIdKey];
               }
             }

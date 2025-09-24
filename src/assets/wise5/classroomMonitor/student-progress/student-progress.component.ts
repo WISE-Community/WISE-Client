@@ -10,25 +10,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { ProjectProgressComponent } from '../classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatListModule,
-        MatTableModule,
-        ProjectProgressComponent,
-        WorkgroupSelectAutocompleteComponent
-    ],
-    selector: 'student-progress',
-    styleUrl: './student-progress.component.scss',
-    templateUrl: './student-progress.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatTableModule,
+    ProjectProgressComponent,
+    WorkgroupSelectAutocompleteComponent
+  ],
+  selector: 'student-progress',
+  styleUrl: './student-progress.component.scss',
+  templateUrl: './student-progress.component.html'
 })
 export class StudentProgressComponent implements OnInit {
   protected permissions: any;

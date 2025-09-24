@@ -3,10 +3,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConfigService } from '../../../services/configService';
 
 @Component({
-    selector: 'select-step-and-component-checkboxes',
-    templateUrl: './select-step-and-component-checkboxes.component.html',
-    styleUrls: ['./select-step-and-component-checkboxes.component.scss'],
-    standalone: false
+  selector: 'select-step-and-component-checkboxes',
+  standalone: false,
+  styleUrl: './select-step-and-component-checkboxes.component.scss',
+  templateUrl: './select-step-and-component-checkboxes.component.html'
 })
 export class SelectStepAndComponentCheckboxesComponent {
   @Input() exportStepSelectionType: string = 'exportAllSteps';
@@ -16,7 +16,10 @@ export class SelectStepAndComponentCheckboxesComponent {
   protected project: any;
   @Input() projectIdToOrder: any;
 
-  constructor(public configService: ConfigService, public projectService: TeacherProjectService) {}
+  constructor(
+    public configService: ConfigService,
+    public projectService: TeacherProjectService
+  ) {}
 
   ngOnInit(): void {
     this.project = this.projectService.project;
