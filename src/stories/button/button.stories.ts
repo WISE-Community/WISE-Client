@@ -15,7 +15,7 @@ const meta: Meta<MatButtonStoryType> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['', 'text', 'flat', 'stroked', 'raised']
+      options: ['', 'basic', 'filled', 'outlined', 'elevated', 'tonal']
     },
     color: {
       control: 'select',
@@ -32,53 +32,63 @@ export default meta;
 type Story = StoryObj<MatButtonStoryType>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Basic: Story = {
+export const Default: Story = {
   render: (args) => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-${!args.variant || args.variant === 'text' ? '' : args.variant + '-'}button ${args.color ? 'class="' + args.color + '" ' : ''}>Button</button>
-        <button mat-${!args.variant || args.variant === 'text' ? '' : args.variant + '-'}button ${args.color ? 'class="' + args.color + '" ' : ''}disabled>Disabled</button>
-        <a href="https://wise.berkeley.edu" target="_blank" mat-${!args.variant || args.variant === 'text' ? '' : args.variant + '-'}button ${args.color ? 'class="' + args.color + '" ' : ''}>Link</a>
+        <button matButton${!args.variant || args.variant === 'basic' ? '' : '="' + args.variant + '"'}${!args.color || args.color === 'primary' ? '' : ' class="' + args.color + '" '}>Button</button>
+        <button matButton${!args.variant || args.variant === 'basic' ? '' : '="' + args.variant + '"'}${!args.color || args.color === 'primary' ? '' : ' class="' + args.color + '" '} disabled>Disabled</button>
+        <a href="https://wise.berkeley.edu" target="_blank" matButton${!args.variant || args.variant === 'basic' ? '' : '="' + args.variant + '"'}${!args.color || args.color === 'primary' ? '' : ' class="' + args.color + '" '}>Link</a>
       </div>`
   }),
   tags: ['!autodocs', '!dev']
 };
 
-export const Text: Story = {
+export const Basic: Story = {
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-button>Button</button>
-        <button mat-button disabled>Disabled</button>
-        <a mat-button href="https://wise.berkeley.edu" target="_blank">Link</a>
+        <button matButton>Button</button>
+        <button matButton disabled>Disabled</button>
+        <a matButton href="https://wise.berkeley.edu" target="_blank">Link</a>
       </div>`
   })
 };
 
-export const Flat: Story = {
+export const Filled: Story = {
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-flat-button>Button</button>
-        <button mat-flat-button disabled>Disabled</button>
-        <a mat-flat-button href="https://wise.berkeley.edu" target="_blank">Link</a>
+        <button matButton="filled">Button</button>
+        <button matButton="filled" disabled>Disabled</button>
+        <a matButton="filled" href="https://wise.berkeley.edu" target="_blank">Link</a>
       </div>`
   })
 };
 
-export const Stroked: Story = {
+export const Outlined: Story = {
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-stroked-button>Button</button>
-        <button mat-stroked-button disabled>Disabled</button>
-        <a mat-stroked-button href="https://wise.berkeley.edu" target="_blank">Link</a>
+        <button matButton="outlined">Button</button>
+        <button matButton="outlined" disabled>Disabled</button>
+        <a matButton="outlined" href="https://wise.berkeley.edu" target="_blank">Link</a>
       </div>`
   })
 };
 
-export const Raised: Story = {
+export const Elevated: Story = {
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-raised-button>Button</button>
-        <button mat-raised-button disabled>Disabled</button>
-        <a mat-raised-button href="https://wise.berkeley.edu" target="_blank">Link</a>
+        <button matButton="elevated">Button</button>
+        <button matButton="elevated" disabled>Disabled</button>
+        <a matButton="elevated" href="https://wise.berkeley.edu" target="_blank">Link</a>
+      </div>`
+  })
+};
+
+export const Tonal: Story = {
+  render: () => ({
+    template: `<div class="flex flex-wrap gap-2">
+        <button matButton="tonal">Button</button>
+        <button matButton="tonal" disabled>Disabled</button>
+        <a matButton="tonal" href="https://wise.berkeley.edu" target="_blank">Link</a>
       </div>`
   })
 };
@@ -86,10 +96,10 @@ export const Raised: Story = {
 export const Icon: Story = {
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-icon-button aria-label="Example icon button with a plus icon">
+        <button matIconButton aria-label="Example icon button with a plus icon">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Example icon button with a plus icon" disabled>
+        <button matIconButton aria-label="Example icon button with a plus icon" disabled>
           <mat-icon>add</mat-icon>
         </button>
       </div>`
@@ -100,10 +110,10 @@ export const FAB: Story = {
   name: 'FAB (Floating Action Button)',
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-fab aria-label="Example FAB button with a plus icon">
+        <button matFab aria-label="Example FAB button with a plus icon">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-fab aria-label="Example FAB button with a plus icon" disabled>
+        <button matFab aria-label="Example FAB button with a plus icon" disabled>
           <mat-icon>add</mat-icon>
         </button>
       </div>`
@@ -114,10 +124,10 @@ export const miniFAB: Story = {
   name: 'Mini FAB',
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-mini-fab aria-label="Example mini FAB button with a plus icon">
+        <button matMiniFab aria-label="Example mini FAB button with a plus icon">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-mini-fab aria-label="Example mini FAB button with a plus icon" disabled>
+        <button matMiniFab aria-label="Example mini FAB button with a plus icon" disabled>
           <mat-icon>add</mat-icon>
         </button>
       </div>`
@@ -128,11 +138,11 @@ export const extendedFAB: Story = {
   name: 'Extended FAB',
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-fab extended>
+        <button matFab extended>
           <mat-icon>favorite</mat-icon>
           Favorite
         </button>
-        <button mat-fab extended disabled>
+        <button matFab extended disabled>
           <mat-icon>favorite</mat-icon>
           Disabled
         </button>
@@ -144,40 +154,40 @@ export const Colors: Story = {
   render: () => ({
     template: `<div class="flex flex-col gap-2">
         <div class="flex flex-wrap gap-2">
-          <button mat-button class="primary">Primary</button>
-          <button mat-button class="secondary">Secondary</button>
-          <button mat-button class="tertiary">Tertiary</button>
-          <button mat-button class="error">Error</button>
+          <button matButton>Primary</button>
+          <button matButton class="secondary">Secondary</button>
+          <button matButton class="tertiary">Tertiary</button>
+          <button matButton class="error">Error</button>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button mat-flat-button class="primary">Primary</button>
-          <button mat-flat-button class="secondary">Secondary</button>
-          <button mat-flat-button class="tertiary">Tertiary</button>
-          <button mat-flat-button class="error">Error</button>
+          <button matButton="filled">Primary</button>
+          <button matButton="filled" class="secondary">Secondary</button>
+          <button matButton="filled" class="tertiary">Tertiary</button>
+          <button matButton="filled" class="error">Error</button>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button mat-stroked-button class="primary">Primary</button>
-          <button mat-stroked-button class="secondary">Secondary</button>
-          <button mat-stroked-button class="tertiary">Tertiary</button>
-          <button mat-stroked-button class="error">Error</button>
+          <button matButton="elevated">Primary</button>
+          <button matButton="elevated" class="secondary">Secondary</button>
+          <button matButton="elevated" class="tertiary">Tertiary</button>
+          <button matButton="elevated" class="error">Error</button>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button mat-raised-button class="primary">Primary</button>
-          <button mat-raised-button class="secondary">Secondary</button>
-          <button mat-raised-button class="tertiary">Tertiary</button>
-          <button mat-raised-button class="error">Error</button>
+          <button matButton="outlined">Primary</button>
+          <button matButton="outlined" class="secondary">Secondary</button>
+          <button matButton="outlined" class="tertiary">Tertiary</button>
+          <button matButton="outlined" class="error">Error</button>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button mat-icon-button class="primary" aria-label="Example primary icon button with a warning icon">
+          <button matIconButton aria-label="Example primary icon button with a warning icon">
             <mat-icon>warning</mat-icon>
           </button>
-          <button mat-icon-button class="secondary" aria-label="Example secondary icon button with a warning icon">
+          <button matIconButton class="secondary" aria-label="Example secondary icon button with a warning icon">
             <mat-icon>warning</mat-icon>
           </button>
-          <button mat-icon-button class="tertiary" aria-label="Example tertiary icon button with a warning icon">
+          <button matIconButton class="tertiary" aria-label="Example tertiary icon button with a warning icon">
             <mat-icon>warning</mat-icon>
           </button>
-          <button mat-icon-button class="error" aria-label="Example error icon button with a warning icon">
+          <button matIconButton class="error" aria-label="Example error icon button with a warning icon">
             <mat-icon>warning</mat-icon>
           </button>
         </div>
@@ -189,19 +199,23 @@ export const withIcon: Story = {
   name: 'With Icon',
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button mat-button>
+        <button matButton>
           <mat-icon>home</mat-icon>
           Home
         </button>
-        <button mat-flat-button>
+        <button matButton="filled">
           <mat-icon>home</mat-icon>
           Home
         </button>
-        <button mat-stroked-button>
+        <button matButton="outlined">
           <mat-icon>home</mat-icon>
           Home
         </button>
-        <button mat-raised-button>
+        <button matButton="tonal">
+          <mat-icon>home</mat-icon>
+          Home
+        </button>
+        <button matButton="elevated">
           <mat-icon>home</mat-icon>
           Home
         </button>

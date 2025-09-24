@@ -1,9 +1,8 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use './themes/theme-colors' as theme-colors;
-@use "./themes/theme-typography.scss" as theme-typography;
-
-@use "tailwindcss";
+@use './themes/theme-typography.scss' as theme-typography;
+@use 'tailwindcss';
 
 :root {
   --primary: #00799c;
@@ -48,9 +47,11 @@ html {
     filled-container-shape: var(--mat-sys-corner-small),
     outlined-container-shape: var(--mat-sys-corner-small),
     text-container-shape: var(--mat-sys-corner-small),
+    tonal-container-shape: var(--mat-sys-corner-small),
     protected-container-shape: var(--mat-sys-corner-small),
     filled-horizontal-padding: var(--button-horizontal-padding),
     outlined-horizontal-padding: var(--outline-button-horizontal-padding),
+    tonal-horizontal-padding: var(--outline-button-horizontal-padding),
     protected-horizontal-padding: var(--button-horizontal-padding),
     outlined-outline-width: 2px,
     outlined-outline-color: var(--primary),
