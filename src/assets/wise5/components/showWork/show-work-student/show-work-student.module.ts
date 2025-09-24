@@ -3,7 +3,6 @@ import { AnimationShowWorkComponent } from '../../animation/animation-show-work/
 import { DiscussionStudentModule } from '../../discussion/discussion-student/discussion-student.module';
 import { EmbeddedShowWorkComponent } from '../../embedded/embedded-show-work/embedded-show-work.component';
 import { OpenResponseShowWorkModule } from '../../openResponse/open-response-show-work/open-response-show-work.module';
-import { TableShowWorkModule } from '../../table/table-show-work/table-show-work.module';
 import { ShowWorkStudentComponent } from './show-work-student.component';
 import { MultipleChoiceShowWorkComponent } from '../../multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component';
 import { DialogGuidanceShowWorkComponent } from '../../dialogGuidance/dialog-guidance-show-work/dialog-guidance-show-work.component';
@@ -14,6 +13,7 @@ import { AudioOscillatorShowWorkComponent } from '../../audioOscillator/audio-os
 import { ConceptMapShowWorkComponent } from '../../conceptMap/concept-map-show-work/concept-map-show-work.component';
 import { DrawShowWorkComponent } from '../../draw/draw-show-work/draw-show-work.component';
 import { GraphShowWorkComponent } from '../../graph/graph-show-work/graph-show-work.component';
+import { TableShowWorkComponent } from '../../table/table-show-work/table-show-work.component';
 
 @NgModule({
   declarations: [ShowWorkStudentComponent],
@@ -31,7 +31,7 @@ import { GraphShowWorkComponent } from '../../graph/graph-show-work/graph-show-w
     MatchShowWorkComponent,
     MultipleChoiceShowWorkComponent,
     OpenResponseShowWorkModule,
-    TableShowWorkModule
+    TableShowWorkComponent
   ],
   exports: [ShowWorkStudentComponent]
 })
