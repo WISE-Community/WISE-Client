@@ -4,10 +4,11 @@ import { rgbToHex } from '../../../../assets/wise5/common/color/color';
 import { trimToLength } from '../../../../assets/wise5/common/string/string';
 
 @Component({
-    selector: 'milestone-report-graph',
-    styleUrls: ['./milestone-report-graph.component.scss'],
-    template: '<highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig"></highcharts-chart>',
-    standalone: false
+  selector: 'milestone-report-graph',
+  styleUrls: ['./milestone-report-graph.component.scss'],
+  template:
+    '<highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig" (chartInstance)="onLoad($event)"></highcharts-chart>',
+  standalone: false
 })
 export class MilestoneReportGraphComponent implements OnInit {
   DEFAULT_COLOR = 'rgb(194, 24, 91)';
@@ -135,5 +136,11 @@ export class MilestoneReportGraphComponent implements OnInit {
       seriesData.push(scoreData);
     }
     return seriesData;
+  }
+
+  protected onLoad(chart: Highcharts.Chart): void {
+    setTimeout(() => {
+      chart.reflow();
+    }, 0);
   }
 }
