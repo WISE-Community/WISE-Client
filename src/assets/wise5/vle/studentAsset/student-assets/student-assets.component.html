@@ -1,5 +1,5 @@
 @if (studentAssets.length > 0) {
-  <div class="studentAssets flex">
+  <div class="studentAssets flex flex-wrap">
     @for (studentAsset of studentAssets; track studentAsset) {
       <img
         (click)="attachStudentAssetToComponent($event, studentAsset)"
@@ -11,7 +11,9 @@
     }
   </div>
 }
-@if (mode !== 'preview') {
+@if (mode === 'preview') {
+  <div i18n>The student assets will appear here once you set up a classroom run.</div>
+} @else {
   <div class="drop-box" (fileDropped)="uploadStudentAssets($event)" dragAndDrop>
     <input
       type="file"
@@ -22,7 +24,4 @@
     />
     <div i18n>Drop image or file here or click to upload!</div>
   </div>
-}
-@if (mode === 'preview') {
-  <div i18n>The student assets will appear here once you set up a classroom run.</div>
 }

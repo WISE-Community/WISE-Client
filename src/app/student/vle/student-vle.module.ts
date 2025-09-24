@@ -8,7 +8,6 @@ import { SimpleDialogModule } from '../../../assets/wise5/directives/simple-dial
 import { InitializeVLEService } from '../../../assets/wise5/services/initializeVLEService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
-import { StudentAssetsDialogModule } from '../../../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 import { VLEComponent } from '../../../assets/wise5/vle/vle.component';
 import { VLEProjectService } from '../../../assets/wise5/vle/vleProjectService';
 import { StudentTeacherCommonModule } from '../../student-teacher-common.module';
@@ -21,6 +20,7 @@ import { NotificationService } from '../../../assets/wise5/services/notification
 import { VLEParentComponent } from '../../../assets/wise5/vle/vle-parent/vle-parent.component';
 import { StudentPeerGroupService } from '../../../assets/wise5/services/studentPeerGroupService';
 import { PeerGroupService } from '../../../assets/wise5/services/peerGroupService';
+import { StudentAssetsDialogComponent } from '../../../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
 
 @NgModule({
   declarations: [GenerateImageDialogComponent, VLEParentComponent],
@@ -29,7 +29,7 @@ import { PeerGroupService } from '../../../assets/wise5/services/peerGroupServic
     ComponentStudentModule,
     MatDialogModule,
     SimpleDialogModule,
-    StudentAssetsDialogModule,
+    StudentAssetsDialogComponent,
     StudentComponentModule,
     StudentTeacherCommonModule,
     StudentVLERoutingModule,
