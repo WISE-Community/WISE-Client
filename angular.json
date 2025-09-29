@@ -227,7 +227,8 @@
               "-d",
               "."
             ],
-            "port": 6006
+            "port": 6006,
+            "styles": [ "src/style/styles.scss", "src/stories/docs.scss" ]
           }
         },
         "build-storybook": {

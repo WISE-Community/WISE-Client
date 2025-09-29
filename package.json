@@ -125,6 +125,8 @@
     "postcss": "^8.4.49",
     "prettier": "^3.3.2",
     "protractor": "~7.0.0",
+    "raw-loader": "^4.0.2",
+    "react-tabs": "^6.1.0",
     "sass": "^1.50.1",
     "storybook": "^9.1.5",
     "tailwindcss": "^4.1.13",
