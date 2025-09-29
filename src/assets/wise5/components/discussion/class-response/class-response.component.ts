@@ -8,25 +8,49 @@ import {
 } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
+import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
+import { StudentComponentModule } from '../../../../../app/student/student.component.module';
+import { SaveTimeMessageComponent } from '../../../common/save-time-message/save-time-message.component';
+import { RouterModule } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
+  imports: [
+    CdkTextareaAutosize,
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTooltipModule,
+    RouterModule,
+    SaveTimeMessageComponent,
+    StudentComponentModule,
+    TextFieldModule
+  ],
   selector: 'class-response',
-  standalone: false,
   styleUrl: 'class-response.component.scss',
   templateUrl: 'class-response.component.html'
 })
 export class ClassResponse {
   @Output() deleteButtonClicked: any = new EventEmitter();
-  expanded: boolean = false;
+  protected expanded: boolean = false;
   @Input() isDisabled: boolean;
   @Input() mode: any;
   @Input() numReplies: number;
-  repliesToShow: any[] = [];
+  protected repliesToShow: any[] = [];
   @Input() response: any;
   @Output() submitButtonClicked: any = new EventEmitter();
   @Output() undoDeleteButtonClicked: any = new EventEmitter();
-  urlMatcher: any =
+  private urlMatcher: any =
     /((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)/g;
 
   constructor(private configService: ConfigService) {}
@@ -47,13 +71,13 @@ export class ClassResponse {
     }
   }
 
-  injectLinksIntoResponse(): void {
+  private injectLinksIntoResponse(): void {
     this.response.studentData.responseTextHTML = this.injectLinks(
       this.response.studentData.response
     );
   }
 
-  injectLinksIntoReplies(): void {
+  private injectLinksIntoReplies(): void {
     this.response.replies.forEach((replyComponentState: any): void => {
       replyComponentState.studentData.responseHTML = this.injectLinks(
         replyComponentState.studentData.response
@@ -61,7 +85,7 @@ export class ClassResponse {
     });
   }
 
-  injectLinks(response: string): string {
+  private injectLinks(response: string): string {
     return response.replace(this.urlMatcher, (match) => {
       let matchUrl = match;
       if (!match.startsWith('http')) {
@@ -76,15 +100,15 @@ export class ClassResponse {
     });
   }
 
-  getAvatarColorForWorkgroupId(workgroupId: number): string {
+  protected getAvatarColorForWorkgroupId(workgroupId: number): string {
     return getAvatarColorForWorkgroupId(workgroupId);
   }
 
-  adjustClientSaveTime(time: any): number {
+  protected adjustClientSaveTime(time: any): number {
     return this.configService.convertToClientTimestamp(time);
   }
 
-  replyEntered($event: any): void {
+  protected replyEntered($event: any): void {
     if (this.isEnterKeyEvent($event)) {
       $event.preventDefault();
       this.response.replyText = this.removeLastChar(this.response.replyText);
@@ -93,27 +117,27 @@ export class ClassResponse {
     }
   }
 
-  isEnterKeyEvent(event: any): boolean {
+  protected isEnterKeyEvent(event: any): boolean {
     return event.keyCode == 13 && !event.shiftKey && this.response.replyText;
   }
 
-  removeLastChar(responseText: string): string {
+  private removeLastChar(responseText: string): string {
     return responseText.substring(0, responseText.length - 1);
   }
 
-  delete(componentState: any): void {
+  protected delete(componentState: any): void {
     if (confirm($localize`Are you sure you want to delete this post?`)) {
       this.deleteButtonClicked.emit(componentState);
     }
   }
 
-  undoDelete(componentState: any): void {
+  protected undoDelete(componentState: any): void {
     if (confirm($localize`Are you sure you want to show this post?`)) {
       this.undoDeleteButtonClicked.emit(componentState);
     }
   }
 
-  toggleExpanded(): void {
+  protected toggleExpanded(): void {
     this.expanded = !this.expanded;
     if (this.expanded) {
       this.showAllReplies();
@@ -122,21 +146,21 @@ export class ClassResponse {
     }
   }
 
-  hasAnyReply(): boolean {
+  private hasAnyReply(): boolean {
     return this.response.replies.length > 0;
   }
 
-  showLastReply(): void {
+  private showLastReply(): void {
     if (this.response.replies.length > 0) {
       this.repliesToShow = [this.response.replies[this.response.replies.length - 1]];
     }
   }
 
-  showAllReplies(): void {
+  private showAllReplies(): void {
     this.repliesToShow = this.response.replies;
   }
 
-  expandAndShowAllReplies(): void {
+  private expandAndShowAllReplies(): void {
     this.expanded = true;
     this.showAllReplies();
   }
