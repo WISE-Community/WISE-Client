@@ -20716,14 +20716,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source><x id="PH" equiv-text="classmateNames"/> are typing...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-member-typing-indicator/peer-chat-member-typing-indicator.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4280909109837274275" datatype="html">
         <source><x id="PH" equiv-text="classmateNames"/> is typing...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-member-typing-indicator/peer-chat-member-typing-indicator.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3965594880833653306" datatype="html">
