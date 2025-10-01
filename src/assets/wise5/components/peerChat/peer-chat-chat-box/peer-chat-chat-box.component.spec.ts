@@ -23,13 +23,10 @@ describe('PeerChatChatBoxComponent', () => {
         FormsModule,
         MatCardModule,
         MatFormFieldModule,
-        MatInputModule
-      ],
-      declarations: [
-        PeerChatChatBoxComponent,
-        PeerChatMembersComponent,
+        MatInputModule,
         PeerChatMessageInputComponent
       ],
+      declarations: [PeerChatChatBoxComponent, PeerChatMembersComponent],
       providers: [{ provide: ConfigService, useClass: MockConfigService }, StompService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

@@ -20,7 +20,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     PeerChatChatBoxComponent,
     PeerChatMembersComponent,
     PeerChatMemberTypingIndicatorComponent,
-    PeerChatMessageInputComponent,
     PeerChatQuestionBankComponent
   ],
   imports: [
@@ -32,6 +31,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatInputModule,
     MatTooltipModule,
+    PeerChatMessageInputComponent,
     PeerChatMessagesComponent
   ],
   exports: [
