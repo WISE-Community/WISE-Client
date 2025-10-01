@@ -114,6 +114,36 @@ html {
     padding: 0 8px;
   }
 
+  /* Menus */
+  --menu-item-spacing: 8px;
+
+  @include mat.menu-overrides((
+    container-shape: var(--mat-sys-corner-small),
+    container-color: var(--mat-sys-surface-container-lowest),
+    item-leading-spacing: var(--menu-item-spacing),
+    item-trailing-spacing: var(--menu-item-spacing),
+    item-with-icon-leading-spacing: var(--menu-item-spacing),
+    item-with-icon-trailing-spacing: var(--menu-item-spacing)
+  ));
+
+  .mat-mdc-menu-content {
+    padding-inline-end: 16px;
+  }
+
+  .mat-mdc-menu-item {
+    margin: 4px 8px;
+    border-radius: 6px;
+    min-height: 42px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
   /* Selects */
 
   @include mat.select-overrides((
