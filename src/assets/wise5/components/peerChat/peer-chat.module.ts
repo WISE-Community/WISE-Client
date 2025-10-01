@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [PeerChatChatBoxComponent, PeerChatMembersComponent, PeerChatQuestionBankComponent],
+  declarations: [PeerChatChatBoxComponent, PeerChatQuestionBankComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatInputModule,
     MatTooltipModule,
+    PeerChatMembersComponent,
     PeerChatMemberTypingIndicatorComponent,
     PeerChatMessageInputComponent,
     PeerChatMessagesComponent

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule } from '@angular/material/card';
 import { PeerChatMembersComponent } from './peer-chat-members.component';
 
 describe('PeerChatMembersComponent', () => {
@@ -8,8 +7,7 @@ describe('PeerChatMembersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatCardModule],
-      declarations: [PeerChatMembersComponent]
+      imports: [PeerChatMembersComponent]
     }).compileComponents();
   });
 
