@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PeerChatChatBoxComponent } from './peer-chat-chat-box/peer-chat-chat-box.component';
-import { PeerChatMembersComponent } from './peer-chat-members/peer-chat-members.component';
-import { PeerChatMemberTypingIndicatorComponent } from './peer-chat-member-typing-indicator/peer-chat-member-typing-indicator.component';
-import { PeerChatMessageInputComponent } from './peer-chat-message-input/peer-chat-message-input.component';
-import { PeerChatMessagesComponent } from './peer-chat-messages/peer-chat-messages.component';
 import { PeerChatQuestionBankComponent } from './peer-chat-question-bank/peer-chat-question-bank.component';
 import { QuestionBankService } from './peer-chat-question-bank/questionBank.service';
 import { MatCardModule } from '@angular/material/card';
@@ -16,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [PeerChatChatBoxComponent, PeerChatQuestionBankComponent],
+  declarations: [PeerChatQuestionBankComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,18 +22,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatInputModule,
     MatTooltipModule,
-    PeerChatMembersComponent,
-    PeerChatMemberTypingIndicatorComponent,
-    PeerChatMessageInputComponent,
-    PeerChatMessagesComponent
+    PeerChatChatBoxComponent
   ],
-  exports: [
-    PeerChatChatBoxComponent,
-    PeerChatMembersComponent,
-    PeerChatMessageInputComponent,
-    PeerChatMessagesComponent,
-    PeerChatQuestionBankComponent
-  ],
+  exports: [PeerChatChatBoxComponent, PeerChatQuestionBankComponent],
   providers: [QuestionBankService]
 })
 export class PeerChatModule {}
