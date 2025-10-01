@@ -20,10 +20,10 @@ const teacherWorkgroupId1 = 100;
 describe('PeerChatMessagesComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [PeerChatMessageComponent, PeerChatMessagesComponent],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [PeerChatMessagesComponent],
+      imports: [PeerChatMessageComponent, MatIconModule, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
     fixture = TestBed.createComponent(PeerChatMessagesComponent);
     component = fixture.componentInstance;
     component.peerChatMessages = [
