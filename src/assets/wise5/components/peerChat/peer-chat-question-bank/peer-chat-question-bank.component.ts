@@ -17,10 +17,14 @@ import { Question } from './Question';
 import { QuestionBankService } from './questionBank.service';
 import { ConstraintService } from '../../../services/constraintService';
 import { ConfigService } from '../../../services/configService';
+import { MatCard } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
+  imports: [MatButton, MatCard, MatIcon, MatTooltip],
   selector: 'peer-chat-question-bank',
-  standalone: false,
   styleUrl: './peer-chat-question-bank.component.scss',
   templateUrl: './peer-chat-question-bank.component.html'
 })
@@ -29,7 +33,7 @@ export class PeerChatQuestionBankComponent implements OnInit {
   @Input() displayedQuestionBankRules: QuestionBankRule[];
   @Output() displayedQuestionBankRulesChange = new EventEmitter<QuestionBankRule[]>();
   @Input() questionIdsUsed: string[] = [];
-  questions: (string | Question)[];
+  protected questions: (string | Question)[];
   @Output() useQuestionEvent = new EventEmitter<string>();
 
   constructor(
@@ -58,9 +62,9 @@ export class PeerChatQuestionBankComponent implements OnInit {
   }
 
   private subscribeToQuestionUsed(): void {
-    this.questionBankService.questionUsed$.subscribe((question: Question) => {
-      this.questionIdsUsed.push(question.id);
-    });
+    this.questionBankService.questionUsed$.subscribe((question: Question) =>
+      this.questionIdsUsed.push(question.id)
+    );
   }
 
   private evaluatePeerGroup(referenceComponent: WISEComponent): void {

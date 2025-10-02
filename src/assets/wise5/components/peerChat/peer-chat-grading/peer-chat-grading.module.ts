@@ -5,8 +5,7 @@ import { PeerChatModule } from '../peer-chat.module';
 import { PeerChatGradingComponent } from './peer-chat-grading.component';
 
 @NgModule({
-  declarations: [PeerChatGradingComponent],
-  imports: [CommonModule, PeerChatModule, PeerChatShowWorkModule],
+  imports: [CommonModule, PeerChatModule, PeerChatShowWorkModule, PeerChatGradingComponent],
   exports: [PeerChatGradingComponent]
 })
 export class PeerChatGradingModule {}

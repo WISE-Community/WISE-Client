@@ -14,10 +14,7 @@ import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
 import { forkJoin, Observable } from 'rxjs';
 import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-helper';
 
-@Component({
-  standalone: false,
-  template: ''
-})
+@Component({ template: '' })
 export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
   dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsAvailable: boolean = false;

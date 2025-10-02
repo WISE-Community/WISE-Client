@@ -14,6 +14,7 @@ import { DrawShowWorkComponent } from '../../draw/draw-show-work/draw-show-work.
 import { GraphShowWorkComponent } from '../../graph/graph-show-work/graph-show-work.component';
 import { TableShowWorkComponent } from '../../table/table-show-work/table-show-work.component';
 import { OpenResponseShowWorkComponent } from '../../openResponse/open-response-show-work/open-response-show-work.component';
+import { PeerChatStudentComponent } from '../../peerChat/peer-chat-student/peer-chat-student.component';
 
 @NgModule({
   declarations: [ShowWorkStudentComponent],
@@ -31,6 +32,7 @@ import { OpenResponseShowWorkComponent } from '../../openResponse/open-response-
     MatchShowWorkComponent,
     MultipleChoiceShowWorkComponent,
     OpenResponseShowWorkComponent,
+    PeerChatStudentComponent,
     TableShowWorkComponent
   ],
   exports: [ShowWorkStudentComponent]

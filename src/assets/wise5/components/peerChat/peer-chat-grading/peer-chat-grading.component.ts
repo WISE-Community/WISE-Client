@@ -13,9 +13,12 @@ import { PeerChatShowWorkComponent } from '../peer-chat-show-work/peer-chat-show
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
+import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-chat-question-bank.component';
+import { NgClass } from '@angular/common';
+import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
 
 @Component({
-  standalone: false,
+  imports: [PeerChatQuestionBankComponent, NgClass, PeerChatChatBoxComponent],
   styleUrl: './peer-chat-grading.component.scss',
   templateUrl: './peer-chat-grading.component.html'
 })
