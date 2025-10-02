@@ -17,14 +17,12 @@ const nodeId: string = 'node1';
 let projectService: ProjectService;
 let teacherDataService: TeacherDataService;
 const workgroupId: number = 100;
-
 describe('ShowMyWorkGradingComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ShowMyWorkGradingComponent],
-    imports: [ShowMyWorkGradingModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+      declarations: [ShowMyWorkGradingComponent],
+      imports: [ShowMyWorkGradingModule, StudentTeacherCommonServicesModule],
+      providers: [
         ClassroomStatusService,
         ProjectService,
         TeacherDataService,
@@ -32,8 +30,8 @@ describe('ShowMyWorkGradingComponent', () => {
         TeacherWebSocketService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     projectService = TestBed.inject(ProjectService);
     spyOn(projectService, 'getComponent').and.returnValue({
       id: componentId,
@@ -47,7 +45,9 @@ describe('ShowMyWorkGradingComponent', () => {
       componentId: componentId,
       nodeId: nodeId,
       studentData: {},
-      workgroupId: workgroupId
+      workgroupId: workgroupId,
+      componentType: 'OpenResponse',
+      attachments: []
     });
     fixture = TestBed.createComponent(ShowMyWorkGradingComponent);
     component = fixture.componentInstance;

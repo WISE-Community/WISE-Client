@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ShowWorkStudentComponent } from './show-work-student.component';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { OpenResponseShowWorkComponent } from '../../openResponse/open-response-show-work/open-response-show-work.component';
+import { NodeService } from '../../../services/nodeService';
+import { ProjectService } from '../../../services/projectService';
 
 describe('ShowWorkStudentComponent', () => {
   let component: ShowWorkStudentComponent;
@@ -8,14 +11,15 @@ describe('ShowWorkStudentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [ShowWorkStudentComponent]
-}).compileComponents();
+      imports: [MockComponent(OpenResponseShowWorkComponent), ShowWorkStudentComponent],
+      providers: [MockProviders(NodeService, ProjectService)]
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowWorkStudentComponent);
     component = fixture.componentInstance;
-    component.studentWork = {};
+    component.studentWork = { componentType: 'OpenResponse' };
     fixture.detectChanges();
   });
 
