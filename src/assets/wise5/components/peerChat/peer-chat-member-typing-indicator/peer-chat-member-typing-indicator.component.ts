@@ -8,7 +8,6 @@ import { StudentDataService } from '../../../services/studentDataService';
 
 @Component({
   selector: 'peer-chat-member-typing-indicator',
-  standalone: false,
   template: `{{ message }}`
 })
 export class PeerChatMemberTypingIndicatorComponent {

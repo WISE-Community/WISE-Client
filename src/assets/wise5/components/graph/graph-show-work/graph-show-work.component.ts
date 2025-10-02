@@ -4,12 +4,17 @@ import { ProjectService } from '../../../services/projectService';
 import { GraphService } from '../graphService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { NodeService } from '../../../services/nodeService';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @Component({
-    selector: 'graph-show-work',
-    styleUrls: ['../graph-student/graph-student.component.scss'],
-    templateUrl: 'graph-show-work.component.html',
-    standalone: false
+  imports: [HighchartsChartModule],
+  selector: 'graph-show-work',
+  styleUrl: '../graph-student/graph-student.component.scss',
+  template: `
+    <div class="component--grading__response__content">
+      <highcharts-chart [Highcharts]="Highcharts" [options]="options" />
+    </div>
+  `
 })
 export class GraphShowWorkComponent extends ComponentShowWorkDirective {
   Highcharts: typeof Highcharts = Highcharts;
@@ -26,11 +31,11 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
   yAxis: any;
 
   constructor(
-    private GraphService: GraphService,
+    private graphService: GraphService,
     protected nodeService: NodeService,
-    protected ProjectService: ProjectService
+    protected projectService: ProjectService
   ) {
-    super(nodeService, ProjectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
@@ -50,13 +55,13 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
     this.roundValuesTo = this.componentContent.roundValuesTo;
     this.xAxis = this.getAxis('xAxis', this.componentContent, this.componentState);
     this.yAxis = this.getAxis('yAxis', this.componentContent, this.componentState);
-    this.xAxis.plotBands = this.GraphService.getPlotBandsFromTrials(
+    this.xAxis.plotBands = this.graphService.getPlotBandsFromTrials(
       this.componentState.studentData.trials
     );
     this.drawGraph(this.componentState);
   }
 
-  getAxis(axisName: string, componentContent: any, componentState: any): any {
+  private getAxis(axisName: string, componentContent: any, componentState: any): any {
     if (componentState.studentData[axisName] != null) {
       return componentState.studentData[axisName];
     } else {
@@ -64,8 +69,8 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
     }
   }
 
-  drawGraph(componentState: any): void {
-    const series = this.GraphService.getSeriesFromTrials(componentState.studentData.trials);
+  private drawGraph(componentState: any): void {
+    const series = this.graphService.getSeriesFromTrials(componentState.studentData.trials);
     this.enableMouseTrackingOnAllSeries(series);
     this.options = this.createOptions(
       this.graphType,
@@ -82,13 +87,13 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
     );
   }
 
-  enableMouseTrackingOnAllSeries(series: any[]): void {
+  private enableMouseTrackingOnAllSeries(series: any[]): void {
     for (const singleSeries of series) {
       singleSeries.enableMouseTracking = true;
     }
   }
 
-  createOptions(
+  private createOptions(
     graphType: string,
     width: number,
     height: number,
@@ -121,7 +126,7 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
         useHTML: true
       },
       tooltip: {
-        formatter: this.GraphService.createTooltipFormatter(xAxis, yAxis, roundValuesTo)
+        formatter: this.graphService.createTooltipFormatter(xAxis, yAxis, roundValuesTo)
       },
       xAxis: xAxis,
       yAxis: yAxis,

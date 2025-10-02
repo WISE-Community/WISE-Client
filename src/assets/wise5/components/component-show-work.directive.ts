@@ -11,9 +11,12 @@ export abstract class ComponentShowWorkDirective {
 
   componentContent: any;
 
-  constructor(protected nodeService: NodeService, protected projectService: ProjectService) {}
+  constructor(
+    protected nodeService: NodeService,
+    protected projectService: ProjectService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.componentContent = this.projectService.injectAssetPaths(
       this.projectService.getComponent(this.nodeId, this.componentId)
     );

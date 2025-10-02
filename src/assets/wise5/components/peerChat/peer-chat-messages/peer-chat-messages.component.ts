@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PeerChatMessage } from '../PeerChatMessage';
+import { CommonModule } from '@angular/common';
+import { PeerChatMessageComponent } from '../peer-chat-message/peer-chat-message.component';
 
 @Component({
+  imports: [CommonModule, PeerChatMessageComponent],
   selector: 'peer-chat-messages',
-  standalone: false,
   styleUrl: './peer-chat-messages.component.scss',
   templateUrl: './peer-chat-messages.component.html'
 })

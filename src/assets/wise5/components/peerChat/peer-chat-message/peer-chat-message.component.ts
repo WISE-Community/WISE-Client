@@ -1,36 +1,32 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConfigService } from '../../../services/configService';
 import { PeerChatMessage } from '../PeerChatMessage';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
   selector: 'peer-chat-message',
-  standalone: false,
   styleUrl: './peer-chat-message.component.scss',
   templateUrl: './peer-chat-message.component.html'
 })
 export class PeerChatMessageComponent implements OnInit {
   @Input() avatarColor: string;
+  @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
   @Input() displayNames: string;
   @Input() isGrading: boolean;
+  protected isMyMessage: boolean;
+  @Input() isTeacher: boolean;
   @Input() myWorkgroupId: number;
   @Input() peerChatMessage: PeerChatMessage;
-  @Input() isTeacher: boolean;
-  @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+  protected text: string;
   @Output() undeleteClickedEvent: EventEmitter<PeerChatMessage> =
     new EventEmitter<PeerChatMessage>();
 
-  isMyMessage: boolean;
-  text: string;
-  timestamp: any;
-  workgroupId: number;
-
-  constructor(protected ConfigService: ConfigService) {}
-
   ngOnInit(): void {
     this.text = this.peerChatMessage.text;
-    this.timestamp = new Date(this.peerChatMessage.timestamp);
-    this.workgroupId = this.peerChatMessage.workgroupId;
-    this.isMyMessage = this.myWorkgroupId === this.workgroupId;
+    this.isMyMessage = this.myWorkgroupId === this.peerChatMessage.workgroupId;
   }
 
   protected delete(): void {

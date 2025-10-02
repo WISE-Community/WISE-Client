@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { EmbeddedShowWorkModule } from '../embedded-show-work/embedded-show-work.module';
 import { EmbeddedGradingComponent } from './embedded-grading.component';
+import { EmbeddedShowWorkComponent } from '../embedded-show-work/embedded-show-work.component';
 
 @NgModule({
   declarations: [EmbeddedGradingComponent],
-  imports: [EmbeddedShowWorkModule],
+  imports: [EmbeddedShowWorkComponent],
   exports: [EmbeddedGradingComponent]
 })
 export class EmbeddedGradingModule {}

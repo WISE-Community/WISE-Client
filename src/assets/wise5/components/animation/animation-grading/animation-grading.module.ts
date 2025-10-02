@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { AnimationShowWorkModule } from '../animation-show-work/animation-show-work.module';
 import { AnimationGradingComponent } from './animation-grading.component';
+import { AnimationShowWorkComponent } from '../animation-show-work/animation-show-work.component';
 
 @NgModule({
   declarations: [AnimationGradingComponent],
-  imports: [AnimationShowWorkModule],
+  imports: [AnimationShowWorkComponent],
   exports: [AnimationGradingComponent]
 })
 export class AnimationGradingModule {}

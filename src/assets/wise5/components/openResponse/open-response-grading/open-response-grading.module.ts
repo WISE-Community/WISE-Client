@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { OpenResponseShowWorkModule } from '../open-response-show-work/open-response-show-work.module';
 import { OpenResponseGradingComponent } from './open-response-grading.component';
+import { OpenResponseShowWorkComponent } from '../open-response-show-work/open-response-show-work.component';
 
 @NgModule({
   declarations: [OpenResponseGradingComponent],
-  imports: [OpenResponseShowWorkModule],
+  imports: [OpenResponseShowWorkComponent],
   exports: [OpenResponseGradingComponent]
 })
 export class OpenResponseGradingModule {}
