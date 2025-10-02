@@ -7,8 +7,14 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 
 @Component({
   selector: 'label-show-work',
-  styleUrl: 'label-show-work.component.scss',
-  templateUrl: 'label-show-work.component.html'
+  styles: ['.label-canvas { border: 1px solid black; }'],
+  template: `
+    <div class="component--grading__response__content">
+      <div id="canvasParent_{{ canvasId }}">
+        <canvas id="{{ canvasId }}" width="800" height="600" class="label-canvas"></canvas>
+      </div>
+    </div>
+  `
 })
 export class LabelShowWorkComponent extends ComponentShowWorkDirective {
   protected canvasId: string;
