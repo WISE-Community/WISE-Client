@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { AnimationShowWorkComponent } from '../../animation/animation-show-work/animation-show-work.component';
-import { DiscussionStudentModule } from '../../discussion/discussion-student/discussion-student.module';
 import { EmbeddedShowWorkComponent } from '../../embedded/embedded-show-work/embedded-show-work.component';
 import { ShowWorkStudentComponent } from './show-work-student.component';
 import { MultipleChoiceShowWorkComponent } from '../../multipleChoice/multiple-choice-show-work/multiple-choice-show-work.component';
@@ -15,6 +14,7 @@ import { GraphShowWorkComponent } from '../../graph/graph-show-work/graph-show-w
 import { TableShowWorkComponent } from '../../table/table-show-work/table-show-work.component';
 import { OpenResponseShowWorkComponent } from '../../openResponse/open-response-show-work/open-response-show-work.component';
 import { PeerChatStudentComponent } from '../../peerChat/peer-chat-student/peer-chat-student.component';
+import { DiscussionStudent } from '../../discussion/discussion-student/discussion-student.component';
 
 @NgModule({
   declarations: [ShowWorkStudentComponent],
@@ -24,7 +24,7 @@ import { PeerChatStudentComponent } from '../../peerChat/peer-chat-student/peer-
     AudioOscillatorShowWorkComponent,
     ConceptMapShowWorkComponent,
     DialogGuidanceShowWorkComponent,
-    DiscussionStudentModule,
+    DiscussionStudent,
     DrawShowWorkComponent,
     EmbeddedShowWorkComponent,
     GraphShowWorkComponent,

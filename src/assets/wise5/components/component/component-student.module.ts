@@ -6,7 +6,7 @@ import { PreviewComponentComponent } from '../../authoringTool/components/previe
 import { AnimationStudentModule } from '../animation/animation-student/animation-student.module';
 import { AudioOscillatorStudentModule } from '../audioOscillator/audio-oscillator-student/audio-oscillator.module';
 import { ConceptMapStudentModule } from '../conceptMap/concept-map-student/concept-map-student.module';
-import { DiscussionStudentModule } from '../discussion/discussion-student/discussion-student.module';
+import { DiscussionStudent } from '../discussion/discussion-student/discussion-student.component';
 import { DrawStudentModule } from '../draw/draw-student/draw-student-module';
 import { EmbeddedStudentModule } from '../embedded/embedded-student/embedded-student.module';
 import { GraphStudentModule } from '../graph/graph-student/graph-student.module';
@@ -36,7 +36,7 @@ import { StudentAssetsDialogComponent } from '../../vle/studentAsset/student-ass
     ComponentComponent,
     ConceptMapStudentModule,
     DialogGuidanceStudentComponent,
-    DiscussionStudentModule,
+    DiscussionStudent,
     DrawStudentModule,
     EmbeddedStudentModule,
     GraphStudentModule,

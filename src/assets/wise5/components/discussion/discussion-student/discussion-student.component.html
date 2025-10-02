@@ -20,30 +20,22 @@
           }"
         >
           <mat-form-field class="input--placeholder-only discussion-new__input-container">
-            @if (isDisabled) {
-              <div
-                class="discussion-new__input--textarea input--textarea--disabled"
-                [(ngModel)]="newResponse"
-              ></div>
-            }
-            @if (!isDisabled) {
-              <textarea
-                matInput
-                class="discussion-new__input--textarea"
-                placeholder="Share with class..."
-                i18n-placeholder
-                [(ngModel)]="newResponse"
-                [disabled]="isDisabled"
-                (ngModelChange)="studentDataChanged()"
-                (focus)="focus = true"
-                (blur)="focus = false"
-                cdkTextareaAutosize
-                maxlength="10000"
-              >
-              </textarea>
-            }
+            <textarea
+              matInput
+              class="discussion-new__input--textarea"
+              placeholder="Share with class..."
+              i18n-placeholder
+              [(ngModel)]="newResponse"
+              [disabled]="isDisabled"
+              (ngModelChange)="studentDataChanged()"
+              (focus)="focus = true"
+              (blur)="focus = false"
+              cdkTextareaAutosize
+              maxlength="10000"
+            >
+            </textarea>
           </mat-form-field>
-          @if (!isDisabled && isStudentAttachmentEnabled && attachments.length) {
+          @if (isStudentAttachmentEnabled && attachments.length) {
             <div class="discussion-new__actions">
               @for (attachment of attachments; track attachment) {
                 <div class="component__attachment discussion-new__attachment">
@@ -91,6 +83,11 @@
             </button>
           </div>
         </mat-card>
+      } @else {
+        <div
+          class="discussion-new__input--textarea input--textarea--disabled"
+          [(ngModel)]="newResponse"
+        ></div>
       }
       <div class="md:hidden">
         @for (componentState of topLevelResponses.all; track componentState) {
