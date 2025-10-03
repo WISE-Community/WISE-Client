@@ -7,7 +7,6 @@ import { AnimationShowWorkComponent } from './animation/animation-show-work/anim
 import { AnimationStudent } from './animation/animation-student/animation-student.component';
 import { EditAnimationAdvancedComponent } from './animation/edit-animation-advanced/edit-animation-advanced.component';
 import { AudioOscillatorAuthoring } from './audioOscillator/audio-oscillator-authoring/audio-oscillator-authoring.component';
-import { AudioOscillatorGradingComponent } from './audioOscillator/audio-oscillator-grading/audio-oscillator-grading.component';
 import { AudioOscillatorShowWorkComponent } from './audioOscillator/audio-oscillator-show-work/audio-oscillator-show-work.component';
 import { AudioOscillatorStudent } from './audioOscillator/audio-oscillator-student/audio-oscillator-student.component';
 import { EditAudioOscillatorAdvancedComponent } from './audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component';
@@ -99,7 +98,7 @@ export const components = {
   AudioOscillator: {
     authoring: AudioOscillatorAuthoring,
     authoringAdvanced: EditAudioOscillatorAdvancedComponent,
-    grading: AudioOscillatorGradingComponent,
+    grading: AudioOscillatorShowWorkComponent,
     showWork: AudioOscillatorShowWorkComponent,
     student: AudioOscillatorStudent
   },
