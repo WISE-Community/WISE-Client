@@ -47,7 +47,6 @@ import { LabelShowWorkComponent } from './label/label-show-work/label-show-work.
 import { LabelStudentComponent } from './label/label-student/label-student.component';
 import { EditMatchAdvancedComponent } from './match/edit-match-advanced/edit-match-advanced.component';
 import { MatchAuthoringComponent } from './match/match-authoring/match-authoring.component';
-import { MatchGradingComponent } from './match/match-grading/match-grading.component';
 import { MatchShowWorkComponent } from './match/match-show-work/match-show-work.component';
 import { MatchStudent } from './match/match-student/match-student.component';
 import { EditMultipleChoiceAdvancedComponent } from './multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component';
@@ -161,7 +160,7 @@ export const components = {
   Match: {
     authoring: MatchAuthoringComponent,
     authoringAdvanced: EditMatchAdvancedComponent,
-    grading: MatchGradingComponent,
+    grading: MatchShowWorkComponent,
     showWork: MatchShowWorkComponent,
     student: MatchStudent
   },
