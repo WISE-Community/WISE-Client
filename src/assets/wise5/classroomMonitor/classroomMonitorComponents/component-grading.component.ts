@@ -20,7 +20,6 @@ import { EmbeddedGradingModule } from '../../components/embedded/embedded-gradin
 import { GraphGradingModule } from '../../components/graph/graph-grading/graph-grading.module';
 import { LabelGradingModule } from '../../components/label/label-grading/label-grading.module';
 import { MatchGradingModule } from '../../components/match/match-grading/match-grading.module';
-import { OpenResponseGradingModule } from '../../components/openResponse/open-response-grading/open-response-grading.module';
 import { PeerChatGradingModule } from '../../components/peerChat/peer-chat-grading/peer-chat-grading.module';
 import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
 import { TableGradingModule } from '../../components/table/table-grading/table-grading.module';
@@ -38,7 +37,6 @@ import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-wor
     GraphGradingModule,
     LabelGradingModule,
     MatchGradingModule,
-    OpenResponseGradingModule,
     PeerChatGradingModule,
     ShowGroupWorkGradingModule,
     ShowMyWorkGradingModule,

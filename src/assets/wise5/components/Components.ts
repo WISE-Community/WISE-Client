@@ -61,7 +61,6 @@ import { MultipleChoiceShowWorkComponent } from './multipleChoice/multiple-choic
 import { MultipleChoiceStudentComponent } from './multipleChoice/multiple-choice-student/multiple-choice-student.component';
 import { EditOpenResponseAdvancedComponent } from './openResponse/edit-open-response-advanced/edit-open-response-advanced.component';
 import { OpenResponseAuthoringComponent } from './openResponse/open-response-authoring/open-response-authoring.component';
-import { OpenResponseGradingComponent } from './openResponse/open-response-grading/open-response-grading.component';
 import { OpenResponseShowWorkComponent } from './openResponse/open-response-show-work/open-response-show-work.component';
 import { OpenResponseStudent } from './openResponse/open-response-student/open-response-student.component';
 import { EditOutsideUrlAdvancedComponent } from './outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component';
@@ -180,7 +179,7 @@ export const components = {
   OpenResponse: {
     authoring: OpenResponseAuthoringComponent,
     authoringAdvanced: EditOpenResponseAdvancedComponent,
-    grading: OpenResponseGradingComponent,
+    grading: OpenResponseShowWorkComponent,
     showWork: OpenResponseShowWorkComponent,
     student: OpenResponseStudent
   },
