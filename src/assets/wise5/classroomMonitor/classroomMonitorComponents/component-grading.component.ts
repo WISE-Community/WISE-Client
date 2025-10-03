@@ -15,7 +15,6 @@ import { AnimationGradingModule } from '../../components/animation/animation-gra
 import { AudioOscillatorGradingModule } from '../../components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.module';
 import { ConceptMapGradingModule } from '../../components/conceptMap/concept-map-grading/concept-map-grading.module';
 import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
-import { DrawGradingModule } from '../../components/draw/draw-grading/draw-grading.module';
 import { EmbeddedGradingModule } from '../../components/embedded/embedded-grading/embedded-grading.module';
 import { GraphGradingModule } from '../../components/graph/graph-grading/graph-grading.module';
 import { LabelGradingModule } from '../../components/label/label-grading/label-grading.module';
@@ -32,7 +31,6 @@ import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-wor
     AudioOscillatorGradingModule,
     ConceptMapGradingModule,
     DiscussionGradingModule,
-    DrawGradingModule,
     EmbeddedGradingModule,
     GraphGradingModule,
     LabelGradingModule,

@@ -27,7 +27,6 @@ import { DiscussionGradingComponent } from './discussion/discussion-grading/disc
 import { DiscussionStudent } from './discussion/discussion-student/discussion-student.component';
 import { EditDiscussionAdvancedComponent } from './discussion/edit-discussion-advanced/edit-discussion-advanced.component';
 import { DrawAuthoring } from './draw/draw-authoring/draw-authoring.component';
-import { DrawGradingComponent } from './draw/draw-grading/draw-grading.component';
 import { DrawShowWorkComponent } from './draw/draw-show-work/draw-show-work.component';
 import { DrawStudent } from './draw/draw-student/draw-student.component';
 import { EditDrawAdvancedComponent } from './draw/edit-draw-advanced/edit-draw-advanced.component';
@@ -132,7 +131,7 @@ export const components = {
   Draw: {
     authoring: DrawAuthoring,
     authoringAdvanced: EditDrawAdvancedComponent,
-    grading: DrawGradingComponent,
+    grading: DrawShowWorkComponent,
     showWork: DrawShowWorkComponent,
     student: DrawStudent
   },
