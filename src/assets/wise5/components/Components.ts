@@ -3,7 +3,6 @@ import { AiChatGradingComponent } from './aiChat/ai-chat-grading/ai-chat-grading
 import { AiChatStudentComponent } from './aiChat/ai-chat-student/ai-chat-student.component';
 import { EditAiChatAdvancedComponent } from './aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component';
 import { AnimationAuthoring } from './animation/animation-authoring/animation-authoring.component';
-import { AnimationGradingComponent } from './animation/animation-grading/animation-grading.component';
 import { AnimationShowWorkComponent } from './animation/animation-show-work/animation-show-work.component';
 import { AnimationStudent } from './animation/animation-student/animation-student.component';
 import { EditAnimationAdvancedComponent } from './animation/edit-animation-advanced/edit-animation-advanced.component';
@@ -96,7 +95,7 @@ export const components = {
   Animation: {
     authoring: AnimationAuthoring,
     authoringAdvanced: EditAnimationAdvancedComponent,
-    grading: AnimationGradingComponent,
+    grading: AnimationShowWorkComponent,
     showWork: AnimationShowWorkComponent,
     student: AnimationStudent
   },

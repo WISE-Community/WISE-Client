@@ -11,7 +11,6 @@ import {
 import { components } from '../../components/Components';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { AiChatGradingModule } from '../../components/aiChat/ai-chat-grading/ai-chat-grading.module';
-import { AnimationGradingModule } from '../../components/animation/animation-grading/animation-grading.module';
 import { AudioOscillatorGradingModule } from '../../components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.module';
 import { ConceptMapGradingModule } from '../../components/conceptMap/concept-map-grading/concept-map-grading.module';
 import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
@@ -27,7 +26,6 @@ import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-wor
 @Component({
   imports: [
     AiChatGradingModule,
-    AnimationGradingModule,
     AudioOscillatorGradingModule,
     ConceptMapGradingModule,
     DiscussionGradingModule,
