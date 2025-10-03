@@ -15,7 +15,6 @@ import { AudioOscillatorGradingModule } from '../../components/audioOscillator/a
 import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
 import { EmbeddedGradingModule } from '../../components/embedded/embedded-grading/embedded-grading.module';
 import { GraphGradingModule } from '../../components/graph/graph-grading/graph-grading.module';
-import { LabelGradingModule } from '../../components/label/label-grading/label-grading.module';
 import { MatchGradingModule } from '../../components/match/match-grading/match-grading.module';
 import { PeerChatGradingModule } from '../../components/peerChat/peer-chat-grading/peer-chat-grading.module';
 import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
@@ -29,7 +28,6 @@ import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-wor
     DiscussionGradingModule,
     EmbeddedGradingModule,
     GraphGradingModule,
-    LabelGradingModule,
     MatchGradingModule,
     PeerChatGradingModule,
     ShowGroupWorkGradingModule,

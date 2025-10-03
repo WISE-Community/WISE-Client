@@ -43,7 +43,6 @@ import { HtmlAuthoringComponent } from './html/html-authoring/html-authoring.com
 import { HtmlStudentComponent } from './html/html-student/html-student.component';
 import { EditLabelAdvancedComponent } from './label/edit-label-advanced/edit-label-advanced.component';
 import { LabelAuthoring } from './label/label-authoring/label-authoring.component';
-import { LabelGradingComponent } from './label/label-grading/label-grading.component';
 import { LabelShowWorkComponent } from './label/label-show-work/label-show-work.component';
 import { LabelStudentComponent } from './label/label-student/label-student.component';
 import { EditMatchAdvancedComponent } from './match/edit-match-advanced/edit-match-advanced.component';
@@ -155,7 +154,7 @@ export const components = {
   Label: {
     authoring: LabelAuthoring,
     authoringAdvanced: EditLabelAdvancedComponent,
-    grading: LabelGradingComponent,
+    grading: LabelShowWorkComponent,
     showWork: LabelShowWorkComponent,
     student: LabelStudentComponent
   },
