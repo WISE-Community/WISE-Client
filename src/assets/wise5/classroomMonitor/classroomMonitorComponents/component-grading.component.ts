@@ -12,7 +12,6 @@ import { components } from '../../components/Components';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { AiChatGradingModule } from '../../components/aiChat/ai-chat-grading/ai-chat-grading.module';
 import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
-import { EmbeddedGradingModule } from '../../components/embedded/embedded-grading/embedded-grading.module';
 import { GraphGradingModule } from '../../components/graph/graph-grading/graph-grading.module';
 import { PeerChatGradingModule } from '../../components/peerChat/peer-chat-grading/peer-chat-grading.module';
 import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
@@ -23,7 +22,6 @@ import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-wor
   imports: [
     AiChatGradingModule,
     DiscussionGradingModule,
-    EmbeddedGradingModule,
     GraphGradingModule,
     PeerChatGradingModule,
     ShowGroupWorkGradingModule,

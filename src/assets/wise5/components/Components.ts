@@ -29,7 +29,6 @@ import { DrawStudent } from './draw/draw-student/draw-student.component';
 import { EditDrawAdvancedComponent } from './draw/edit-draw-advanced/edit-draw-advanced.component';
 import { EditEmbeddedAdvancedComponent } from './embedded/edit-embedded-advanced/edit-embedded-advanced.component';
 import { EmbeddedAuthoring } from './embedded/embedded-authoring/embedded-authoring.component';
-import { EmbeddedGradingComponent } from './embedded/embedded-grading/embedded-grading.component';
 import { EmbeddedShowWorkComponent } from './embedded/embedded-show-work/embedded-show-work.component';
 import { EmbeddedStudent } from './embedded/embedded-student/embedded-student.component';
 import { EditGraphAdvancedComponent } from './graph/edit-graph-advanced/edit-graph-advanced.component';
@@ -133,7 +132,7 @@ export const components = {
   Embedded: {
     authoring: EmbeddedAuthoring,
     authoringAdvanced: EditEmbeddedAdvancedComponent,
-    grading: EmbeddedGradingComponent,
+    grading: EmbeddedShowWorkComponent,
     showWork: EmbeddedShowWorkComponent,
     student: EmbeddedStudent
   },
