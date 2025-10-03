@@ -33,7 +33,6 @@ import { EmbeddedShowWorkComponent } from './embedded/embedded-show-work/embedde
 import { EmbeddedStudent } from './embedded/embedded-student/embedded-student.component';
 import { EditGraphAdvancedComponent } from './graph/edit-graph-advanced/edit-graph-advanced.component';
 import { GraphAuthoring } from './graph/graph-authoring/graph-authoring.component';
-import { GraphGradingComponent } from './graph/graph-grading/graph-grading.component';
 import { GraphShowWorkComponent } from './graph/graph-show-work/graph-show-work.component';
 import { GraphStudent } from './graph/graph-student/graph-student.component';
 import { EditHTMLAdvancedComponent } from './html/edit-html-advanced/edit-html-advanced.component';
@@ -138,7 +137,7 @@ export const components = {
   Graph: {
     authoring: GraphAuthoring,
     authoringAdvanced: EditGraphAdvancedComponent,
-    grading: GraphGradingComponent,
+    grading: GraphShowWorkComponent,
     showWork: GraphShowWorkComponent,
     student: GraphStudent
   },
