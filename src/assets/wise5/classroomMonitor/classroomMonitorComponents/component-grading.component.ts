@@ -14,7 +14,6 @@ import { AiChatGradingModule } from '../../components/aiChat/ai-chat-grading/ai-
 import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
 import { GraphGradingModule } from '../../components/graph/graph-grading/graph-grading.module';
 import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
-import { TableGradingModule } from '../../components/table/table-grading/table-grading.module';
 import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-work-grading/show-my-work-grading.module';
 
 @Component({
@@ -23,8 +22,7 @@ import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-wor
     DiscussionGradingModule,
     GraphGradingModule,
     ShowGroupWorkGradingModule,
-    ShowMyWorkGradingModule,
-    TableGradingModule
+    ShowMyWorkGradingModule
   ],
   selector: 'component-grading-component',
   template: '<div #component></div>'

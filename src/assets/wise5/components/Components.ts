@@ -76,7 +76,6 @@ import { SummaryAuthoring } from './summary/summary-authoring/summary-authoring.
 import { SummaryStudent } from './summary/summary-student/summary-student.component';
 import { EditTableAdvancedComponent } from './table/edit-table-advanced/edit-table-advanced.component';
 import { TableAuthoring } from './table/table-authoring/table-authoring.component';
-import { TableGradingComponent } from './table/table-grading/table-grading.component';
 import { TableShowWorkComponent } from './table/table-show-work/table-show-work.component';
 import { TableStudentComponent } from './table/table-student/table-student.component';
 
@@ -208,7 +207,7 @@ export const components = {
   Table: {
     authoring: TableAuthoring,
     authoringAdvanced: EditTableAdvancedComponent,
-    grading: TableGradingComponent,
+    grading: TableShowWorkComponent,
     showWork: TableShowWorkComponent,
     student: TableStudentComponent
   }
