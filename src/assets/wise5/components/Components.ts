@@ -12,7 +12,6 @@ import { AudioOscillatorShowWorkComponent } from './audioOscillator/audio-oscill
 import { AudioOscillatorStudent } from './audioOscillator/audio-oscillator-student/audio-oscillator-student.component';
 import { EditAudioOscillatorAdvancedComponent } from './audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component';
 import { ConceptMapAuthoring } from './conceptMap/concept-map-authoring/concept-map-authoring.component';
-import { ConceptMapGradingComponent } from './conceptMap/concept-map-grading/concept-map-grading.component';
 import { ConceptMapShowWorkComponent } from './conceptMap/concept-map-show-work/concept-map-show-work.component';
 import { ConceptMapStudent } from './conceptMap/concept-map-student/concept-map-student.component';
 import { EditConceptMapAdvancedComponent } from './conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component';
@@ -109,7 +108,7 @@ export const components = {
   ConceptMap: {
     authoring: ConceptMapAuthoring,
     authoringAdvanced: EditConceptMapAdvancedComponent,
-    grading: ConceptMapGradingComponent,
+    grading: ConceptMapShowWorkComponent,
     showWork: ConceptMapShowWorkComponent,
     student: ConceptMapStudent
   },

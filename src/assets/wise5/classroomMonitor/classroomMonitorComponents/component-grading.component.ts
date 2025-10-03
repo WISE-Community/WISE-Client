@@ -12,7 +12,6 @@ import { components } from '../../components/Components';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { AiChatGradingModule } from '../../components/aiChat/ai-chat-grading/ai-chat-grading.module';
 import { AudioOscillatorGradingModule } from '../../components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.module';
-import { ConceptMapGradingModule } from '../../components/conceptMap/concept-map-grading/concept-map-grading.module';
 import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
 import { EmbeddedGradingModule } from '../../components/embedded/embedded-grading/embedded-grading.module';
 import { GraphGradingModule } from '../../components/graph/graph-grading/graph-grading.module';
@@ -27,7 +26,6 @@ import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-wor
   imports: [
     AiChatGradingModule,
     AudioOscillatorGradingModule,
-    ConceptMapGradingModule,
     DiscussionGradingModule,
     EmbeddedGradingModule,
     GraphGradingModule,
