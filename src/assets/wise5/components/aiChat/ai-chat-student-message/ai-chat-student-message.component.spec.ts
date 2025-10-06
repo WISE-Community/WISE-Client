@@ -11,13 +11,13 @@ describe('AiChatStudentMessageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AiChatStudentMessageComponent],
-      providers: [
+    declarations: [AiChatStudentMessageComponent],
+    providers: [
         ConfigService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-      ]
-    });
+    ]
+});
     fixture = TestBed.createComponent(AiChatStudentMessageComponent);
     component = fixture.componentInstance;
     component.message = new AiChatMessage('user', 'Hello');
