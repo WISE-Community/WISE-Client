@@ -108,9 +108,10 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.constraintService
     );
     this.initializeComputerAvatar();
+    this.pingCRaterEndpoint();
   }
 
-  protected startPinging(): void {
+  private pingCRaterEndpoint(): void {
     this.cRaterPingService.startPinging(this.getItemId());
   }
 

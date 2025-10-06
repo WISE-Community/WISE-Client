@@ -14,7 +14,6 @@
       />
       @if (studentCanRespond) {
         <chat-input
-          (focusEvent)="startPinging()"
           [submitDisabled]="isWaitingForComputerResponse"
           (submitEvent)="submitStudentResponse($event)"
         />
