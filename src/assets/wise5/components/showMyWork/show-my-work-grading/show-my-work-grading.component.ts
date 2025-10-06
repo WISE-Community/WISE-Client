@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
+import { ShowWorkStudentComponent } from '../../showWork/show-work-student/show-work-student.component';
 
 @Component({
-  selector: 'show-my-work-grading',
-  standalone: false,
+  imports: [ShowWorkStudentComponent],
   template: `
     @if (componentState != null) {
       <show-work-student

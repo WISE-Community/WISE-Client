@@ -13,15 +13,9 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { AiChatGradingModule } from '../../components/aiChat/ai-chat-grading/ai-chat-grading.module';
 import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
 import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
-import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-work-grading/show-my-work-grading.module';
 
 @Component({
-  imports: [
-    AiChatGradingModule,
-    DiscussionGradingModule,
-    ShowGroupWorkGradingModule,
-    ShowMyWorkGradingModule
-  ],
+  imports: [AiChatGradingModule, DiscussionGradingModule, ShowGroupWorkGradingModule],
   selector: 'component-grading-component',
   template: '<div #component></div>'
 })

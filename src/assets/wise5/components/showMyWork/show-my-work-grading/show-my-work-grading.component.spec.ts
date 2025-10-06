@@ -1,14 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ShowMyWorkGradingComponent } from './show-my-work-grading.component';
-import { ShowMyWorkGradingModule } from './show-my-work-grading.module';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { ProjectService } from '../../../services/projectService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
-import { ClassroomStatusService } from '../../../services/classroomStatusService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { OpenResponseShowWorkComponent } from '../../openResponse/open-response-show-work/open-response-show-work.component';
+import { NodeService } from '../../../services/nodeService';
 
 let component: ShowMyWorkGradingComponent;
 const componentId: string = 'component1';
@@ -20,17 +16,8 @@ const workgroupId: number = 100;
 describe('ShowMyWorkGradingComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ShowMyWorkGradingComponent],
-      imports: [ShowMyWorkGradingModule, StudentTeacherCommonServicesModule],
-      providers: [
-        ClassroomStatusService,
-        ProjectService,
-        TeacherDataService,
-        TeacherProjectService,
-        TeacherWebSocketService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
+      imports: [ShowMyWorkGradingComponent, MockComponent(OpenResponseShowWorkComponent)],
+      providers: [MockProviders(TeacherDataService, ProjectService, NodeService)]
     });
     projectService = TestBed.inject(ProjectService);
     spyOn(projectService, 'getComponent').and.returnValue({
@@ -44,10 +31,11 @@ describe('ShowMyWorkGradingComponent', () => {
     ).and.returnValue({
       componentId: componentId,
       nodeId: nodeId,
-      studentData: {},
+      studentData: {
+        attachments: []
+      },
       workgroupId: workgroupId,
-      componentType: 'OpenResponse',
-      attachments: []
+      componentType: 'OpenResponse'
     });
     fixture = TestBed.createComponent(ShowMyWorkGradingComponent);
     component = fixture.componentInstance;
