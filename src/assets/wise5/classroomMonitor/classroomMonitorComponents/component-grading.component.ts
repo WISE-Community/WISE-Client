@@ -10,11 +10,10 @@ import {
 } from '@angular/core';
 import { components } from '../../components/Components';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { AiChatGradingModule } from '../../components/aiChat/ai-chat-grading/ai-chat-grading.module';
 import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
 
 @Component({
-  imports: [AiChatGradingModule, ShowGroupWorkGradingModule],
+  imports: [ShowGroupWorkGradingModule],
   selector: 'component-grading-component',
   template: '<div #component></div>'
 })

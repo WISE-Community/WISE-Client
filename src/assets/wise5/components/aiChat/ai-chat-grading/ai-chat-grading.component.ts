@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 import { AiChatShowWorkComponent } from '../ai-chat-show-work/ai-chat-show-work.component';
 
 @Component({
-    selector: 'ai-chat-grading',
-    templateUrl: './ai-chat-grading.component.html',
-    standalone: false
+  imports: [AiChatShowWorkComponent],
+  template: ` <ai-chat-show-work
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+    [componentState]="componentState"
+    [isRevision]="isRevision"
+  />`
 })
 export class AiChatGradingComponent extends AiChatShowWorkComponent {}

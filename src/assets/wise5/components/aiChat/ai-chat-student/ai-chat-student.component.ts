@@ -20,12 +20,12 @@ import { StudentStatusService } from '../../../services/studentStatusService';
 import { ComputerAvatarSelectorComponent } from '../../../vle/computer-avatar-selector/computer-avatar-selector.component';
 import { MatCard } from '@angular/material/card';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
-import { AiChatModule } from '../ai-chat.module';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
+import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.component';
 
 @Component({
   imports: [
-    AiChatModule,
+    AiChatMessagesComponent,
     ChatInputComponent,
     ComponentHeaderComponent,
     ComputerAvatarSelectorComponent,
