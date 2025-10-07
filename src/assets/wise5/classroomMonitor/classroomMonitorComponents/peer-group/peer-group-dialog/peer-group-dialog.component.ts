@@ -1,13 +1,32 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { SelectPeriodComponent } from '../../select-period/select-period.component';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { PeerGroupPeriodComponent } from '../peer-group-period/peer-group-period.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  templateUrl: './peer-group-dialog.component.html',
+  imports: [
+    MatDialogTitle,
+    SelectPeriodComponent,
+    CdkScrollable,
+    MatDialogContent,
+    PeerGroupPeriodComponent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose
+  ],
   styleUrl: './peer-group-dialog.component.scss',
-  standalone: false
+  templateUrl: './peer-group-dialog.component.html'
 })
 export class PeerGroupDialogComponent implements OnInit {
   private currentPeriodChangedSubscription: Subscription;

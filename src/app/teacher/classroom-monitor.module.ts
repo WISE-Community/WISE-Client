@@ -25,12 +25,6 @@ import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/class
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
 
 @NgModule({
-  declarations: [
-    NodeProgressViewComponent,
-    NotebookGradingComponent,
-    NotebookWorkgroupGradingComponent,
-    StudentGradingComponent
-  ],
   imports: [
     ClassroomMonitorComponent,
     ComponentGradingComponent,
@@ -50,7 +44,11 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     SelectPeriodComponent,
     StepItemComponent,
     StudentProgressComponent,
-    StudentTeacherCommonModule
+    StudentTeacherCommonModule,
+    NodeProgressViewComponent,
+    NotebookGradingComponent,
+    NotebookWorkgroupGradingComponent,
+    StudentGradingComponent
   ],
   providers: [GradingNodeService]
 })

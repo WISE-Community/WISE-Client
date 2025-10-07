@@ -57,8 +57,10 @@ describe('TeacherHomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MockComponents(DiscourseRecentActivityComponent, TeacherRunListComponent)],
-      imports: [TeacherHomeComponent],
+      imports: [
+        TeacherHomeComponent,
+        MockComponents(DiscourseRecentActivityComponent, TeacherRunListComponent)
+      ],
       providers: [
         { provide: UserService, useClass: MockUserService },
         { provide: ConfigService, useClass: MockConfigService },

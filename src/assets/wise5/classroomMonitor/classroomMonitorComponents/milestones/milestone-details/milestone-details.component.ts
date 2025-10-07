@@ -2,17 +2,34 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatTabChangeEvent, MatTabGroup, MatTab } from '@angular/material/tabs';
 import { ConfigService } from '../../../../services/configService';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
+import { SelectPeriodComponent } from '../../select-period/select-period.component';
+import { NavItemProgressComponent } from '../../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
+import { MilestoneClassResponsesComponent } from '../milestone-class-responses/milestone-class-responses.component';
+import { NgTemplateOutlet, DatePipe } from '@angular/common';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
+  imports: [
+    SelectPeriodComponent,
+    NavItemProgressComponent,
+    MatTabGroup,
+    MatTab,
+    MilestoneClassResponsesComponent,
+    NgTemplateOutlet,
+    MatList,
+    MatListItem,
+    MatIcon,
+    DatePipe
+  ],
   selector: 'milestone-details',
   styleUrl: './milestone-details.component.scss',
-  templateUrl: './milestone-details.component.html',
-  standalone: false
+  templateUrl: './milestone-details.component.html'
 })
 export class MilestoneDetailsComponent implements OnInit {
   currentPeriod: any;

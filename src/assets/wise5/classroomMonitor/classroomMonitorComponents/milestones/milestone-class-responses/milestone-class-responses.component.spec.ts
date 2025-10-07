@@ -1,10 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
@@ -19,17 +13,7 @@ let testHelper: NodeGradingViewComponentTestHelper;
 describe('MilestoneClassResponsesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MilestoneClassResponsesComponent],
-      imports: [
-        ClassroomMonitorTestingModule,
-        FormsModule,
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatListModule,
-        ReactiveFormsModule,
-        WorkgroupSelectAutocompleteComponent
-      ]
+      imports: [ClassroomMonitorTestingModule, MilestoneClassResponsesComponent]
     }).compileComponents();
   });
 

@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatListModule } from '@angular/material/list';
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { ClassroomMonitorTestingModule } from '../classroom-monitor-testing.module';
 import { NotebookWorkgroupGradingComponent } from '../classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
 import { NotebookGradingComponent } from './notebook-grading.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MockComponent } from 'ng-mocks';
+import { WorkgroupSelectAutocompleteComponent } from '../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 
 let component: NotebookGradingComponent;
 let fixture: ComponentFixture<NotebookGradingComponent>;
@@ -14,13 +14,15 @@ const WORKGROUP_ID_1 = 1;
 const WORKGROUP_ID_2 = 2;
 const WORKGROUP_1 = { notes: [], report: null, workgroupId: WORKGROUP_ID_1 };
 const WORKGROUP_2 = { notes: [], report: null, workgroupId: WORKGROUP_ID_2 };
-
 describe('NotebookGradingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotebookGradingComponent, NotebookWorkgroupGradingComponent],
-      imports: [ClassroomMonitorTestingModule, MatListModule],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [
+        NotebookGradingComponent,
+        NotebookWorkgroupGradingComponent,
+        ClassroomMonitorTestingModule,
+        MockComponent(WorkgroupSelectAutocompleteComponent)
+      ]
     }).compileComponents();
   });
 
