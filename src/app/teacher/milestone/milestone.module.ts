@@ -17,9 +17,7 @@ import { SelectPeriodComponent } from '../../../assets/wise5/classroomMonitor/cl
     GradingCommonModule,
     HighchartsChartModule,
     SelectPeriodComponent,
-    StudentTeacherCommonModule
-  ],
-  declarations: [
+    StudentTeacherCommonModule,
     MilestonesComponent,
     MilestoneDetailsComponent,
     MilestoneDetailsDialogComponent,

@@ -4,16 +4,16 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 @Component({
   selector: 'animation-show-work',
   template: `
-    @if (numTimesPlayClicked != null) {
-      <div><span i18n>Number of Times Animation Played</span>: {{ numTimesPlayClicked }}</div>
+    @if (playCount != null) {
+      <div><span i18n>Number of Times Animation Played</span>: {{ playCount }}</div>
     }
   `
 })
 export class AnimationShowWorkComponent extends ComponentShowWorkDirective {
-  protected numTimesPlayClicked: number;
+  protected playCount: number;
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.numTimesPlayClicked = this.componentState.studentData.numTimesPlayClicked;
+    this.playCount = this.componentState.studentData.numTimesPlayClicked;
   }
 }

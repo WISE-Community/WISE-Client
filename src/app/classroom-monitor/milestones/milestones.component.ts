@@ -8,16 +8,20 @@ import { MilestoneService } from '../../../assets/wise5/services/milestoneServic
 import { TeacherDataService } from '../../../assets/wise5/services/teacherDataService';
 import { Milestone } from '../../domain/milestone';
 import { Annotation } from '../../../assets/wise5/common/Annotation';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgClass } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'milestones',
-    styleUrls: ['milestones.component.scss'],
-    templateUrl: 'milestones.component.html',
-    standalone: false
+  imports: [MatCard, MatCardContent, MatProgressSpinner, NgClass, MatIcon],
+  selector: 'milestones',
+  styleUrl: 'milestones.component.scss',
+  templateUrl: 'milestones.component.html'
 })
 export class MilestonesComponent {
-  milestones: Milestone[];
-  subscriptions: Subscription = new Subscription();
+  protected milestones: Milestone[];
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private achievementService: AchievementService,

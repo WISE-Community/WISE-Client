@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { rgbToHex } from '../../../../assets/wise5/common/color/color';
 import { trimToLength } from '../../../../assets/wise5/common/string/string';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @Component({
+  imports: [HighchartsChartModule],
   selector: 'milestone-report-graph',
-  styleUrls: ['./milestone-report-graph.component.scss'],
+  styleUrl: './milestone-report-graph.component.scss',
   template:
-    '<highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig" (chartInstance)="onLoad($event)"></highcharts-chart>',
-  standalone: false
+    '<highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig" (chartInstance)="onLoad($event)"></highcharts-chart>'
 })
 export class MilestoneReportGraphComponent implements OnInit {
   DEFAULT_COLOR = 'rgb(194, 24, 91)';

@@ -30,8 +30,7 @@ const node2ProjectItem = createProjectItem(node2, 3);
 describe('DataExportComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DataExportComponent],
-      imports: [ClassroomMonitorTestingModule],
+      imports: [ClassroomMonitorTestingModule, DataExportComponent],
       providers: [DataExportService, provideRouter([])]
     }).compileComponents();
   });

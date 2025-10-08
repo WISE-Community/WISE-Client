@@ -1,44 +1,21 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSelectModule } from '@angular/material/select';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
-import { SelectPeriodComponent } from '../../select-period/select-period.component';
-import { MilestoneDetailsComponent } from '../milestone-details/milestone-details.component';
 import { MilestoneDetailsDialogComponent } from './milestone-details-dialog.component';
-import { NavItemProgressComponent } from '../../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 const milestoneName: string = 'Checkpoint #1';
-
 describe('MilestoneDetailsDialogComponent', () => {
   let component: MilestoneDetailsDialogComponent;
   let fixture: ComponentFixture<MilestoneDetailsDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MilestoneDetailsComponent, MilestoneDetailsDialogComponent],
-      imports: [
-        ClassroomMonitorTestingModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatListModule,
-        MatProgressBarModule,
-        MatSelectModule,
-        MatTooltipModule,
-        NavItemProgressComponent,
-        SelectPeriodComponent
-      ],
+      imports: [ClassroomMonitorTestingModule, MilestoneDetailsDialogComponent],
       providers: [
         {
           provide: MAT_DIALOG_DATA,
@@ -46,8 +23,7 @@ describe('MilestoneDetailsDialogComponent', () => {
         },
         { provide: MatDialogRef, useValue: {} },
         WorkgroupService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient()
       ]
     }).compileComponents();
 

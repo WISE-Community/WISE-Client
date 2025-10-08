@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'fileSize', standalone: true })
+@Pipe({ name: 'fileSize' })
 export class FileSizePipe implements PipeTransform {
   transform(bytes: number): string {
     if (isNaN(bytes) || bytes === 0) return '0 Bytes';

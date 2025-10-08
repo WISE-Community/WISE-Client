@@ -1,12 +1,27 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NotebookService } from '../../../../services/notebookService';
+import { MatButton } from '@angular/material/button';
+import { NgClass, DatePipe } from '@angular/common';
+import { MatListItem } from '@angular/material/list';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { NotebookNotesComponent } from '../../../../../../app/notebook/notebook-notes/notebook-notes.component';
+import { NotebookReportComponent } from '../../../../../../app/notebook/notebook-report/notebook-report.component';
 
 @Component({
-    selector: 'notebook-workgroup-grading',
-    templateUrl: './notebook-workgroup-grading.component.html',
-    styleUrls: ['./notebook-workgroup-grading.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    MatButton,
+    NgClass,
+    MatListItem,
+    MatTabGroup,
+    MatTab,
+    NotebookNotesComponent,
+    NotebookReportComponent,
+    DatePipe
+  ],
+  selector: 'notebook-workgroup-grading',
+  styleUrl: './notebook-workgroup-grading.component.scss',
+  templateUrl: './notebook-workgroup-grading.component.html'
 })
 export class NotebookWorkgroupGradingComponent implements OnInit {
   @Input() expand: boolean;

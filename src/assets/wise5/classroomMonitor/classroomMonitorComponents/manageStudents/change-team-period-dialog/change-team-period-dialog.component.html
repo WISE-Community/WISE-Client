@@ -10,8 +10,7 @@
         <li>
           @if (canViewStudentNames) {
             {{ user.name }} ({{ user.username }})
-          }
-          @if (!canViewStudentNames) {
+          } @else {
             <ng-container i18n>Student {{ user.id }}</ng-container>
           }
         </li>

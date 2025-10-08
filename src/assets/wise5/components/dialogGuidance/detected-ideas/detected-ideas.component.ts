@@ -6,8 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   imports: [MatIconModule],
   selector: 'detected-ideas',
-  standalone: true,
-  styleUrls: ['./detected-ideas.component.scss'],
+  styleUrl: './detected-ideas.component.scss',
   templateUrl: './detected-ideas.component.html'
 })
 export class DetectedIdeasComponent {

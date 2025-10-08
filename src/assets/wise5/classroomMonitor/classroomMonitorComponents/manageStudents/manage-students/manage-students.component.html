@@ -4,7 +4,7 @@
       <p class="info" i18n>Tip: Drag a student to change teams within current period.</p>
       @for (period of periods; track period) {
         @if (period.periodId !== -1) {
-          <manage-period [period]="period"></manage-period>
+          <manage-period [period]="period" />
         }
       }
     </div>

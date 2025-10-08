@@ -1,16 +1,49 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'change-team-period-dialog',
-    templateUrl: './change-team-period-dialog.component.html',
-    styleUrls: ['./change-team-period-dialog.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
+    MatProgressBar
+  ],
+  selector: 'change-team-period-dialog',
+  styleUrl: './change-team-period-dialog.component.scss',
+  templateUrl: './change-team-period-dialog.component.html'
 })
 export class ChangeTeamPeriodDialogComponent {
   canViewStudentNames: boolean;

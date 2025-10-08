@@ -21,15 +21,15 @@ import { ShowMyWorkStudentModule } from '../showMyWork/show-my-work-student/show
 import { SummaryStudentModule } from '../summary/summary-student/summary-student.module';
 import { TableStudentModule } from '../table/table-student/table-student.module';
 import { ComponentComponent } from './component.component';
-import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.module';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 import { MultipleChoiceStudentComponent } from '../multipleChoice/multiple-choice-student/multiple-choice-student.component';
 import { DialogGuidanceStudentComponent } from '../dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
 import { StudentAssetsDialogComponent } from '../../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
+import { AiChatStudentComponent } from '../aiChat/ai-chat-student/ai-chat-student.component';
 
 @NgModule({
   imports: [
-    AiChatStudentModule,
+    AiChatStudentComponent,
     AnimationStudentModule,
     AudioOscillatorStudentModule,
     CommonModule,

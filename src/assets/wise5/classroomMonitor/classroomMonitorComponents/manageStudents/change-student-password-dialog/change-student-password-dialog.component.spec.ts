@@ -1,13 +1,10 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { ConfigService } from '../../../../services/configService';
 import { ChangeStudentPasswordDialogComponent } from './change-student-password-dialog.component';
-import { PasswordModule } from '../../../../../../app/password/password.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 class ConfigServiceStub {
   getPermissions() {
@@ -34,14 +31,12 @@ let snackBarOpenSpy, dialogCloseAllSpy;
 describe('ChangeStudentPasswordDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChangeStudentPasswordDialogComponent],
-      imports: [BrowserAnimationsModule, MatSnackBarModule, MatDialogModule, PasswordModule],
+      imports: [ChangeStudentPasswordDialogComponent],
       providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: TeacherService, useClass: TeacherServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: user }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents();
   });
 

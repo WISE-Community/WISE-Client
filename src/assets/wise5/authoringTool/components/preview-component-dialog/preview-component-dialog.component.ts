@@ -14,7 +14,6 @@ import { MatButtonModule } from '@angular/material/button';
     PreviewComponentComponent,
     SaveStarterStateComponent
   ],
-  standalone: true,
   styleUrl: 'preview-component-dialog.component.scss',
   templateUrl: 'preview-component-dialog.component.html'
 })

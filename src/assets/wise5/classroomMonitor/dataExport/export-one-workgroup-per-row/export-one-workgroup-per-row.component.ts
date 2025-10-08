@@ -9,12 +9,24 @@ import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { MatButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { SelectStepAndComponentCheckboxesComponent } from '../select-step-and-component-checkboxes/select-step-and-component-checkboxes.component';
 
 @Component({
-    selector: 'export-one-workgroup-per-row',
-    templateUrl: './export-one-workgroup-per-row.component.html',
-    styleUrls: ['./export-one-workgroup-per-row.component.scss'],
-    standalone: false
+  imports: [
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    MatCheckbox,
+    FormsModule,
+    SelectStepAndComponentCheckboxesComponent
+  ],
+  styleUrl: './export-one-workgroup-per-row.component.scss',
+  templateUrl: './export-one-workgroup-per-row.component.html'
 })
 export class ExportOneWorkgroupPerRowComponent extends AbstractExportComponent {
   protected includeBranchPathTaken: boolean;

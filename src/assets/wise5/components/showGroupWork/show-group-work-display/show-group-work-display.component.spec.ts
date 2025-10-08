@@ -61,12 +61,10 @@ const peerGroup = new PeerGroup(
 );
 let studentWork;
 const workgroupId: number = 1000;
-
 describe('ShowGroupWorkDisplayComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShowGroupWorkDisplayComponent],
-      imports: [StudentTeacherCommonServicesModule],
+      imports: [StudentTeacherCommonServicesModule, ShowGroupWorkDisplayComponent],
       providers: [
         AnnotationService,
         { provide: ConfigService, useClass: MockConfigService },
@@ -115,7 +113,7 @@ function createComponentState(workgroupId: number): any {
 function setStudentWorkFromGroupMembers() {
   describe('setStudentWorkFromGroupMembers', () => {
     it('should add entry to workgroupIdToWork for each student work', () => {
-      component.setStudentWorkFromGroupMembers(studentWork);
+      component['setStudentWorkFromGroupMembers'](studentWork);
       expect(component.workgroupIdToWork.size).toEqual(2);
     });
   });
@@ -124,14 +122,14 @@ function setStudentWorkFromGroupMembers() {
 function setLayout() {
   describe('setLayout', () => {
     it('should set row layout for narrow component type', () => {
-      component.setStudentWorkFromGroupMembers(studentWork);
+      component['setStudentWorkFromGroupMembers'](studentWork);
       component.setLayout();
       expect(component.flexLayout).toBe('row wrap');
     });
 
     it('should set column layout', () => {
       component.componentContent.layout = 'column';
-      component.setStudentWorkFromGroupMembers(studentWork);
+      component['setStudentWorkFromGroupMembers'](studentWork);
       component.setLayout();
       expect(component.flexLayout).toBe('column');
     });
@@ -141,7 +139,7 @@ function setLayout() {
 function setWidths() {
   describe('setWidths()', () => {
     it('should set widths for narrow component type including my work', () => {
-      component.setStudentWorkFromGroupMembers(studentWork);
+      component['setStudentWorkFromGroupMembers'](studentWork);
       component.setWidths();
       expect(component.widthMd).toEqual(50);
       expect(component.widthLg).toEqual(33.33);
@@ -150,7 +148,7 @@ function setWidths() {
     it('should set widths for narrow component type not including my work', () => {
       component.componentContent.isShowMyWork = false;
       spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
-      component.setStudentWorkFromGroupMembers(studentWork);
+      component['setStudentWorkFromGroupMembers'](studentWork);
       component.setWidths();
       expect(component.widthMd).toEqual(50);
       expect(component.widthLg).toEqual(33.33);
@@ -159,7 +157,7 @@ function setWidths() {
     it('should set widths for narrow component type and more than 2 group members', () => {
       componentState3 = createComponentState(3);
       studentWork = [componentState1, componentState2, componentState3];
-      component.setStudentWorkFromGroupMembers(studentWork);
+      component['setStudentWorkFromGroupMembers'](studentWork);
       component.setWidths();
       expect(component.widthMd).toEqual(50);
       expect(component.widthLg).toEqual(33.33);

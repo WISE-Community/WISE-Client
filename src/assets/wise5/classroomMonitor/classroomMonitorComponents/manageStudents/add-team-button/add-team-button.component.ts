@@ -1,20 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.component';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'add-team-button',
-    templateUrl: './add-team-button.component.html',
-    styleUrls: ['./add-team-button.component.scss'],
-    standalone: false
+  imports: [MatButton, MatIcon],
+  selector: 'add-team-button',
+  styleUrl: './add-team-button.component.scss',
+  templateUrl: './add-team-button.component.html'
 })
 export class AddTeamButtonComponent {
-  isDisabled: boolean;
   @Input() period: any;
 
   constructor(private dialog: MatDialog) {}
-
-  ngOnInit() {}
 
   protected openAddTeamDialog(): void {
     this.dialog.open(AddTeamDialogComponent, {

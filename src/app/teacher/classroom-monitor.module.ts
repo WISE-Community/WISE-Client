@@ -16,8 +16,7 @@ import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/st
 import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
 import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
-import { ManageStudentsModule } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students.module';
-import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
+import { ManageStudentsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component';
 import { RouterModule } from '@angular/router';
 import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.component';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
@@ -25,21 +24,14 @@ import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/class
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
 
 @NgModule({
-  declarations: [
-    NodeProgressViewComponent,
-    NotebookGradingComponent,
-    NotebookWorkgroupGradingComponent,
-    StudentGradingComponent
-  ],
   imports: [
     ClassroomMonitorComponent,
     ComponentGradingComponent,
     ComponentNewWorkBadgeComponent,
     ComponentStudentModule,
-    DataExportModule,
     GradingCommonModule,
     HighchartsChartModule,
-    ManageStudentsModule,
+    ManageStudentsComponent,
     MilestoneModule,
     NavItemComponent,
     NotificationsMenuComponent,
@@ -50,7 +42,11 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     SelectPeriodComponent,
     StepItemComponent,
     StudentProgressComponent,
-    StudentTeacherCommonModule
+    StudentTeacherCommonModule,
+    NodeProgressViewComponent,
+    NotebookGradingComponent,
+    NotebookWorkgroupGradingComponent,
+    StudentGradingComponent
   ],
   providers: [GradingNodeService]
 })

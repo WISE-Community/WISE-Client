@@ -5,11 +5,31 @@ import { filter, Subscription } from 'rxjs';
 import { AbstractClassResponsesComponent } from '../../AbstractClassResponsesComponent';
 import { Node } from '../../../../common/Node';
 import { Notification } from '../../../../../../app/domain/notification';
+import { MatList, MatListItem } from '@angular/material/list';
+import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
+import { MatButton } from '@angular/material/button';
+import { NgIf, NgClass, NgFor } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { MilestoneWorkgroupItemComponent } from '../milestone-workgroup-item/milestone-workgroup-item.component';
 
 @Component({
+  imports: [
+    MatList,
+    MatListItem,
+    WorkgroupSelectAutocompleteComponent,
+    MatButton,
+    NgIf,
+    MatIcon,
+    NgClass,
+    MatTooltip,
+    IntersectionObserverModule,
+    NgFor,
+    MilestoneWorkgroupItemComponent
+  ],
   encapsulation: ViewEncapsulation.None,
   selector: 'milestone-class-responses',
-  standalone: false,
   styleUrl: './milestone-class-responses.component.scss',
   templateUrl: './milestone-class-responses.component.html'
 })
