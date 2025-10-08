@@ -10,10 +10,8 @@ import {
 } from '@angular/core';
 import { components } from '../../components/Components';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
 
 @Component({
-  imports: [ShowGroupWorkGradingModule],
   selector: 'component-grading-component',
   template: '<div #component></div>'
 })

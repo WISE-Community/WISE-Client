@@ -190,6 +190,7 @@ export const components = {
     authoring: ShowGroupWorkAuthoringComponent,
     authoringAdvanced: EditShowGroupWorkAdvancedComponent,
     grading: ShowGroupWorkGradingComponent,
+    showWork: ShowGroupWorkStudentComponent,
     student: ShowGroupWorkStudentComponent
   },
   ShowMyWork: {
