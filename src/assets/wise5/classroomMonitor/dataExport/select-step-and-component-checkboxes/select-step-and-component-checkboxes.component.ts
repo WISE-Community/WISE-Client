@@ -1,10 +1,27 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ConfigService } from '../../../services/configService';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { NgClass } from '@angular/common';
 
 @Component({
+  imports: [
+    MatRadioGroup,
+    FormsModule,
+    MatRadioButton,
+    MatButton,
+    MatIconButton,
+    MatTooltip,
+    MatIcon,
+    MatCheckbox,
+    NgClass
+  ],
   selector: 'select-step-and-component-checkboxes',
-  standalone: false,
   styleUrl: './select-step-and-component-checkboxes.component.scss',
   templateUrl: './select-step-and-component-checkboxes.component.html'
 })

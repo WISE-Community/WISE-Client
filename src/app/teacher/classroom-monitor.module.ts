@@ -17,7 +17,6 @@ import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/c
 import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component';
-import { DataExportModule } from '../../assets/wise5/classroomMonitor/dataExport/data-export.module';
 import { RouterModule } from '@angular/router';
 import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.component';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
@@ -30,7 +29,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     ComponentGradingComponent,
     ComponentNewWorkBadgeComponent,
     ComponentStudentModule,
-    DataExportModule,
     GradingCommonModule,
     HighchartsChartModule,
     ManageStudentsComponent,

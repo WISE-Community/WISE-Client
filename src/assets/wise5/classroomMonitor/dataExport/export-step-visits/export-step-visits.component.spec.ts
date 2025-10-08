@@ -1,12 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon';
 import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { ExportStepVisitsComponent } from './export-step-visits.component';
+import { provideRouter } from '@angular/router';
 
 let component: ExportStepVisitsComponent;
 let fixture: ComponentFixture<ExportStepVisitsComponent>;
@@ -22,13 +20,11 @@ const group1 = createGroupNode(group1Id, [node1Id, node2Id, node3Id]);
 const node1 = createStepNode(node1Id);
 const node2 = createStepNode(node2Id);
 const node3 = createStepNode(node3Id);
-
 describe('ExportStepVisitsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ExportStepVisitsComponent],
-      imports: [ClassroomMonitorTestingModule, FormsModule, MatCheckboxModule, MatIconModule],
-      providers: [DataExportService]
+      imports: [ClassroomMonitorTestingModule, ExportStepVisitsComponent],
+      providers: [DataExportService, provideRouter([])]
     }).compileComponents();
   });
 

@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ExportStudentWorkComponent } from './export-student-work.component';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
-import { DataExportModule } from '../data-export.module';
 import { DataExportService } from '../../../services/dataExportService';
 import { provideRouter } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -22,8 +21,7 @@ describe('ExportStudentWorkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ExportStudentWorkComponent],
-      imports: [ClassroomMonitorTestingModule, DataExportModule],
+      imports: [ClassroomMonitorTestingModule, ExportStudentWorkComponent],
       providers: [DataExportService, provideRouter([])]
     }).compileComponents();
 
