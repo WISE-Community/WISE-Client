@@ -13,7 +13,6 @@ import { ComponentService } from '../../componentService';
 
 @Component({
   selector: 'html-student',
-  standalone: true,
   styleUrl: 'html-student.component.scss',
   templateUrl: 'html-student.component.html'
 })

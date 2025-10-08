@@ -17,7 +17,6 @@ import { GoogleUser } from '../GoogleUser';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'google-sign-in-button',
-  standalone: true,
   styleUrl: 'google-sign-in-button.component.scss',
   template: '<div #googleButton class="googleButton center"></div>'
 })
@@ -26,7 +25,10 @@ export class GoogleSignInButtonComponent implements AfterViewInit {
   @Output() signedIn = new EventEmitter<GoogleUser>();
   @Input() text: string = 'signin_with';
 
-  constructor(private configService: ConfigService, private ngZone: NgZone) {}
+  constructor(
+    private configService: ConfigService,
+    private ngZone: NgZone
+  ) {}
 
   ngAfterViewInit(): void {
     google.accounts.id.initialize({
