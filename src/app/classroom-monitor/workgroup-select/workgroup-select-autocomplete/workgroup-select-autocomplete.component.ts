@@ -10,17 +10,17 @@ import { filter, map, startWith } from 'rxjs/operators';
 import { copy } from '../../../../assets/wise5/common/object/object';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule
-    ],
-    selector: 'workgroup-select-autocomplete',
-    styleUrl: 'workgroup-select-autocomplete.component.scss',
-    templateUrl: 'workgroup-select-autocomplete.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
+  selector: 'workgroup-select-autocomplete',
+  styleUrl: 'workgroup-select-autocomplete.component.scss',
+  templateUrl: 'workgroup-select-autocomplete.component.html'
 })
 export class WorkgroupSelectAutocompleteComponent extends WorkgroupSelectComponent {
   protected filteredWorkgroups: Observable<any>;
