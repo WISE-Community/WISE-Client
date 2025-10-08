@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../../services/teacherDataService';
+import { ManagePeriodComponent } from '../manage-period/manage-period.component';
 
 @Component({
-    selector: 'manage-students',
-    styleUrls: ['manage-students.component.scss'],
-    templateUrl: 'manage-students.component.html',
-    standalone: false
+  imports: [ManagePeriodComponent],
+  selector: 'manage-students',
+  styleUrl: 'manage-students.component.scss',
+  templateUrl: 'manage-students.component.html'
 })
 export class ManageStudentsComponent {
-  periods: any[];
-  subscriptions: Subscription = new Subscription();
+  protected periods: any[];
+  private subscriptions: Subscription = new Subscription();
 
   constructor(private dataService: TeacherDataService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setVisiblePeriods(this.dataService.getCurrentPeriod());
     this.subscriptions.add(
       this.dataService.currentPeriodChanged$.subscribe(({ currentPeriod }) => {
@@ -27,7 +28,7 @@ export class ManageStudentsComponent {
     this.periods = currentPeriod.periodId === -1 ? this.dataService.getPeriods() : [currentPeriod];
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 }

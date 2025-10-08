@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ShowGroupWorkGradingComponent } from './show-group-work-grading.component';
-import { provideHttpClient } from '@angular/common/http';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { ShowGroupWorkDisplayComponent } from '../show-group-work-display/show-group-work-display.component';
+import { NodeService } from '../../../services/nodeService';
+import { ProjectService } from '../../../services/projectService';
 
 describe('ShowGroupWorkGradingComponent', () => {
   let component: ShowGroupWorkGradingComponent;
@@ -9,8 +11,8 @@ describe('ShowGroupWorkGradingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShowGroupWorkGradingComponent, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient()]
+      imports: [ShowGroupWorkGradingComponent, MockComponent(ShowGroupWorkDisplayComponent)],
+      providers: [MockProviders(NodeService, ProjectService)]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ShowGroupWorkGradingComponent);

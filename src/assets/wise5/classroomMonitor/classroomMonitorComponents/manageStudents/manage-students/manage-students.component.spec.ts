@@ -2,7 +2,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ManageStudentsComponent } from './manage-students.component';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 class TeacherDataServiceStub {
   getCurrentPeriod() {}
@@ -16,14 +16,16 @@ let teacherDataService: TeacherDataService;
 let fixture: ComponentFixture<ManageStudentsComponent>;
 let http: HttpTestingController;
 let component: ManageStudentsComponent;
-
 describe('ManageStudentsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ManageStudentsComponent],
-    imports: [],
-    providers: [{ provide: TeacherDataService, useClass: TeacherDataServiceStub }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [ManageStudentsComponent],
+      providers: [
+        { provide: TeacherDataService, useClass: TeacherDataServiceStub },
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
+    });
     teacherDataService = TestBed.inject(TeacherDataService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageStudentsComponent);
@@ -35,10 +37,10 @@ describe('ManageStudentsComponent', () => {
 function periodsShown() {
   it('should show single period when one period is selected', () => {
     component.setVisiblePeriods({ periodId: 1 });
-    expect(component.periods.length).toEqual(1);
+    expect(component['periods'].length).toEqual(1);
   });
   it('should show each period when All Periods is selected', () => {
     component.setVisiblePeriods({ periodId: -1 });
-    expect(component.periods.length).toEqual(3);
+    expect(component['periods'].length).toEqual(3);
   });
 }
