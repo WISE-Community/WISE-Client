@@ -98,13 +98,19 @@ html {
     @apply w-5xl;
   }
 
+  /* Expansion Panel */
+
+  @include mat.expansion-overrides((
+    container-background-color: var(--mat-sys-surface-container-lowest),
+  ));
+
   /* Form fields */
 
   @include mat.form-field-overrides((
     filled-container-shape: var(--mat-sys-corner-small),
     filled-container-color: var(--mat-sys-surface-container),
     outlined-container-shape: var(--mat-sys-corner-small),
-    outlined-outline-width: 2px
+    outlined-outline-width: 2px,
   ));
 
   .mdc-text-field--filled {
@@ -129,7 +135,7 @@ html {
     item-leading-spacing: var(--menu-item-spacing),
     item-trailing-spacing: var(--menu-item-spacing),
     item-with-icon-leading-spacing: var(--menu-item-spacing),
-    item-with-icon-trailing-spacing: var(--menu-item-spacing)
+    item-with-icon-trailing-spacing: var(--menu-item-spacing),
   ));
 
   .mat-mdc-menu-content {
