@@ -45,38 +45,38 @@ export class DrawStudent extends ComponentStudent {
   width: number = 800;
 
   constructor(
-    protected AnnotationService: AnnotationService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected annotationService: AnnotationService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    private DrawService: DrawService,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    private ProjectService: ProjectService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    private drawService: DrawService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    private projectService: ProjectService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    const domIdEnding = this.DrawService.getDomIdEnding(
+    const domIdEnding = this.drawService.getDomIdEnding(
       this.nodeId,
       this.componentId,
       this.componentState
     );
-    this.drawingToolId = this.DrawService.getDrawingToolId(domIdEnding);
-    this.showCopyPublicNotebookItemButton = this.ProjectService.isSpaceExists('public');
+    this.drawingToolId = this.drawService.getDrawingToolId(domIdEnding);
+    this.showCopyPublicNotebookItemButton = this.projectService.isSpaceExists('public');
     if (this.isDisabled) {
       this.isResetButtonVisible = false;
     }
@@ -94,7 +94,7 @@ export class DrawStudent extends ComponentStudent {
 
   initializeDrawingTool(): void {
     this.setWidthAndHeight();
-    this.drawingTool = this.DrawService.initializeDrawingTool(
+    this.drawingTool = this.drawService.initializeDrawingTool(
       this.drawingToolId,
       this.componentContent.stamps,
       this.width,
@@ -103,7 +103,7 @@ export class DrawStudent extends ComponentStudent {
     this.initializeStudentData();
     this.disableComponentIfNecessary();
     this.setDrawingChangedListener();
-    this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
+    this.drawService.setUpTools(this.drawingToolId, this.componentContent.tools, this.isDisabled);
 
     if (this.hasMaxSubmitCountAndUsedAllSubmits()) {
       this.disableSubmitButton();
@@ -129,14 +129,14 @@ export class DrawStudent extends ComponentStudent {
     if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (
-      this.DrawService.componentStateHasStudentWork(this.componentState, this.componentContent)
+      this.drawService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       this.setStudentWork(this.componentState);
     } else {
       this.loadConnectedComponentOrStarterDrawDataIfAvailable();
     }
     if (
-      !this.DrawService.componentStateHasStudentWork(this.componentState, this.componentContent)
+      !this.drawService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       this.setAuthoredBackgroundIfAvailable(true);
     }
@@ -257,7 +257,7 @@ export class DrawStudent extends ComponentStudent {
 
   handleStudentWorkSavedToServerAdditionalProcessing(componentState: any): void {
     if (this.isComponentStateFromConnectedComponent(componentState)) {
-      const connectedComponent: any = this.ProjectService.getConnectedComponentParams(
+      const connectedComponent: any = this.projectService.getConnectedComponentParams(
         this.componentContent,
         componentState.componentId
       );
@@ -288,7 +288,7 @@ export class DrawStudent extends ComponentStudent {
   }
 
   isComponentStateFromConnectedComponent(componentState: any): boolean {
-    return this.ProjectService.isConnectedComponent(
+    return this.projectService.isConnectedComponent(
       this.nodeId,
       this.componentId,
       componentState.componentId
@@ -338,7 +338,7 @@ export class DrawStudent extends ComponentStudent {
   addToNotebook(): void {
     if (this.isDirty) {
       const studentWorkSavedToServerSubscription =
-        this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
+        this.studentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
           if (this.isForThisComponent(componentState)) {
             this.addNoteWithImage(componentState.id);
             studentWorkSavedToServerSubscription.unsubscribe();
@@ -346,7 +346,7 @@ export class DrawStudent extends ComponentStudent {
         });
       this.saveButtonClicked();
     } else {
-      const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      const componentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
         this.nodeId,
         this.componentId
       );
@@ -356,7 +356,7 @@ export class DrawStudent extends ComponentStudent {
 
   addNoteWithImage(componentStateId: number) {
     const pngFile = convertToPNGFile(this.getCanvas());
-    this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile, null, [
+    this.notebookService.addNote(this.studentDataService.getCurrentNodeId(), pngFile, null, [
       componentStateId
     ]);
   }

@@ -63,33 +63,33 @@ export class OpenResponseStudent extends ComponentStudent {
   studentResponse: string = '';
 
   constructor(
-    protected AnnotationService: AnnotationService,
+    protected annotationService: AnnotationService,
     private changeDetector: ChangeDetectorRef,
-    protected ComponentService: ComponentService,
+    protected componentService: ComponentService,
     private constraintService: ConstraintService,
-    protected ConfigService: ConfigService,
+    protected configService: ConfigService,
     private cRaterPingService: CRaterPingService,
-    private CRaterService: CRaterService,
+    private cRaterService: CRaterService,
     protected dialog: MatDialog,
-    private OpenResponseService: OpenResponseService,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    private NotificationService: NotificationService,
-    private ProjectService: ProjectService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    private openResponseService: OpenResponseService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    private notificationService: NotificationService,
+    private projectService: ProjectService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
-    this.speechToTextEnabled = this.ProjectService.getSpeechToTextSettings()?.enabled;
+    this.speechToTextEnabled = this.projectService.getSpeechToTextSettings()?.enabled;
   }
 
   ngOnInit(): void {
@@ -98,7 +98,7 @@ export class OpenResponseStudent extends ComponentStudent {
       this.handleConnectedComponents();
     } else if (
       this.componentState != null &&
-      this.OpenResponseService.componentStateHasStudentWork(
+      this.openResponseService.componentStateHasStudentWork(
         this.componentState,
         this.componentContent
       )
@@ -118,14 +118,14 @@ export class OpenResponseStudent extends ComponentStudent {
       this.isDisabled = true;
     }
     this.disableComponentIfNecessary();
-    this.isPublicSpaceExist = this.ProjectService.isSpaceExists('public');
+    this.isPublicSpaceExist = this.projectService.isSpaceExists('public');
     this.registerNotebookItemChosenListener();
     this.isStudentAudioRecordingEnabled = this.componentContent.isStudentAudioRecordingEnabled;
 
     // load script for this component, if any
     const script = this.componentContent.script;
     if (script != null) {
-      this.ProjectService.retrieveScript(script).then((script) => {
+      this.projectService.retrieveScript(script).then((script) => {
         new Function(script).call(this);
       });
     }
@@ -259,8 +259,8 @@ export class OpenResponseStudent extends ComponentStudent {
     componentState.componentType = 'OpenResponse';
     componentState.nodeId = this.nodeId;
     componentState.componentId = this.componentId;
-    componentState.isCompleted = this.OpenResponseService.isCompletedV2(
-      this.ProjectService.getNodeById(this.nodeId),
+    componentState.isCompleted = this.openResponseService.isCompletedV2(
+      this.projectService.getNodeById(this.nodeId),
       this.componentContent,
       { componentStates: [componentState], events: [], annotations: [] }
     );
@@ -294,7 +294,7 @@ export class OpenResponseStudent extends ComponentStudent {
     if (this.shouldPerformCRaterScoring(componentState, action)) {
       this.performCRaterScoring(deferred, componentState);
     } else if (
-      this.ProjectService.hasAdditionalProcessingFunctions(this.nodeId, this.componentId)
+      this.projectService.hasAdditionalProcessingFunctions(this.nodeId, this.componentId)
     ) {
       this.processAdditionalFunctions(deferred, componentState, action);
     } else {
@@ -317,7 +317,7 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   private createAdditionalProcessingFunctionPromises(componentState: any, action: any): any {
-    const additionalProcessingFunctions = this.ProjectService.getAdditionalProcessingFunctions(
+    const additionalProcessingFunctions = this.projectService.getAdditionalProcessingFunctions(
       this.nodeId,
       this.componentId
     );
@@ -347,11 +347,12 @@ export class OpenResponseStudent extends ComponentStudent {
       },
       disableClose: true
     });
-    this.CRaterService.makeCRaterScoringRequest(
-      this.CRaterService.getCRaterItemId(this.componentContent),
-      new Date().getTime(),
-      this.studentResponse
-    )
+    this.cRaterService
+      .makeCRaterScoringRequest(
+        this.cRaterService.getCRaterItemId(this.componentContent),
+        new Date().getTime(),
+        this.studentResponse
+      )
       .pipe(timeout(this.cRaterTimeout))
       .subscribe(
         (response: any) => {
@@ -380,7 +381,7 @@ export class OpenResponseStudent extends ComponentStudent {
     deferred: any,
     dialogRef: any
   ): void {
-    const cRaterResponse = this.CRaterService.getCRaterResponse(responses, this.submitCounter);
+    const cRaterResponse = this.cRaterService.getCRaterResponse(responses, this.submitCounter);
     let score = cRaterResponse.score;
     if (cRaterResponse.scores != null) {
       const maxSoFarFunc = (accumulator, currentValue) => {
@@ -403,7 +404,7 @@ export class OpenResponseStudent extends ComponentStudent {
     let previousScore = null;
     const autoScoreAnnotationData: any = {
       value: score,
-      maxAutoScore: this.ProjectService.getMaxScoreForComponent(this.nodeId, this.componentId),
+      maxAutoScore: this.projectService.getMaxScoreForComponent(this.nodeId, this.componentId),
       autoGrader: 'cRater'
     };
     if (response.scores != null) {
@@ -414,7 +415,7 @@ export class OpenResponseStudent extends ComponentStudent {
     }
 
     let autoScoreAnnotation = this.createAutoScoreAnnotation(autoScoreAnnotationData);
-    const latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
+    const latestAnnotations = this.annotationService.getLatestComponentAnnotations(
       this.nodeId,
       this.componentId,
       this.workgroupId
@@ -437,7 +438,7 @@ export class OpenResponseStudent extends ComponentStudent {
     if (this.componentContent.cRater.enableMultipleAttemptScoringRules && submitCounter > 1) {
       // this step has multiple attempt scoring rules and this is a subsequent submit
       // get the feedback based upon the previous score and current score
-      autoComment = this.CRaterService.getMultipleAttemptCRaterFeedbackTextByScore(
+      autoComment = this.cRaterService.getMultipleAttemptCRaterFeedbackTextByScore(
         this.componentContent,
         previousScore,
         score
@@ -450,14 +451,14 @@ export class OpenResponseStudent extends ComponentStudent {
             this.getMaxSubmitCount(),
             this.isMultipleFeedbackTextsForSameRuleAllowed()
           ),
-          this.ConfigService,
+          this.configService,
           this.constraintService
         );
         const rule: FeedbackRule = feedbackRuleEvaluator.getFeedbackRule([response]);
         autoComment = this.getFeedbackText(rule);
         feedbackRuleId = rule.id;
       } else {
-        autoComment = this.CRaterService.getCRaterFeedbackTextByScore(this.componentContent, score);
+        autoComment = this.cRaterService.getCRaterFeedbackTextByScore(this.componentContent, score);
       }
     }
 
@@ -476,7 +477,7 @@ export class OpenResponseStudent extends ComponentStudent {
       this.componentContent.notificationSettings &&
       this.componentContent.notificationSettings.notifications
     ) {
-      const notificationForScore: any = this.ProjectService.getNotificationByScore(
+      const notificationForScore: any = this.projectService.getNotificationByScore(
         this.componentContent,
         previousScore,
         score
@@ -485,18 +486,18 @@ export class OpenResponseStudent extends ComponentStudent {
         notificationForScore.score = score;
         notificationForScore.nodeId = this.nodeId;
         notificationForScore.componentId = this.componentId;
-        this.NotificationService.sendNotificationForScore(notificationForScore);
+        this.notificationService.sendNotificationForScore(notificationForScore);
       }
     }
   }
 
   createAutoScoreAnnotation(data: any): any {
-    const runId = this.ConfigService.getRunId();
-    const periodId = this.ConfigService.getPeriodId();
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
-    const toWorkgroupId = this.ConfigService.getWorkgroupId();
-    const annotation = this.AnnotationService.createAutoScoreAnnotation(
+    const toWorkgroupId = this.configService.getWorkgroupId();
+    const annotation = this.annotationService.createAutoScoreAnnotation(
       runId,
       periodId,
       nodeId,
@@ -508,12 +509,12 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   createAutoCommentAnnotation(data: any): any {
-    const runId = this.ConfigService.getRunId();
-    const periodId = this.ConfigService.getPeriodId();
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
-    const toWorkgroupId = this.ConfigService.getWorkgroupId();
-    const annotation = this.AnnotationService.createAutoCommentAnnotation(
+    const toWorkgroupId = this.configService.getWorkgroupId();
+    const annotation = this.annotationService.createAutoCommentAnnotation(
       runId,
       periodId,
       nodeId,
@@ -532,17 +533,19 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   private getFeedbackText(rule: FeedbackRule): string {
-    const annotationsForFeedbackRule = this.AnnotationService.getAnnotations().filter(
-      (annotation) =>
-        this.isForThisComponent(annotation) && annotation.data.feedbackRuleId === rule.id
-    );
+    const annotationsForFeedbackRule = this.annotationService
+      .getAnnotations()
+      .filter(
+        (annotation) =>
+          this.isForThisComponent(annotation) && annotation.data.feedbackRuleId === rule.id
+      );
     return rule.feedback[annotationsForFeedbackRule.length % rule.feedback.length];
   }
 
   snipButtonClicked($event: any): void {
     if (this.isDirty) {
       const studentWorkSavedToServerSubscription =
-        this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
+        this.studentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
           if (
             componentState &&
             this.nodeId === componentState.nodeId &&
@@ -552,8 +555,8 @@ export class OpenResponseStudent extends ComponentStudent {
             const noteText = componentState.studentData.response;
             const isEditTextEnabled = false;
             const isFileUploadEnabled = false;
-            this.NotebookService.addNote(
-              this.StudentDataService.getCurrentNodeId(),
+            this.notebookService.addNote(
+              this.studentDataService.getCurrentNodeId(),
               imageObject,
               noteText,
               [componentState.id],
@@ -565,7 +568,7 @@ export class OpenResponseStudent extends ComponentStudent {
         });
       this.saveButtonClicked(); // trigger a save
     } else {
-      const studentWork = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      const studentWork = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
         this.nodeId,
         this.componentId
       );
@@ -573,8 +576,8 @@ export class OpenResponseStudent extends ComponentStudent {
       const noteText = studentWork.studentData.response;
       const isEditTextEnabled = false;
       const isFileUploadEnabled = false;
-      this.NotebookService.addNote(
-        this.StudentDataService.getCurrentNodeId(),
+      this.notebookService.addNote(
+        this.studentDataService.getCurrentNodeId(),
         imageObject,
         noteText,
         [studentWork.id],
@@ -585,19 +588,19 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   isCRaterEnabled(): boolean {
-    return this.CRaterService.isCRaterEnabled(this.componentContent);
+    return this.cRaterService.isCRaterEnabled(this.componentContent);
   }
 
   private isCRaterScoreOnSave(): boolean {
-    return this.CRaterService.isCRaterScoreOnEvent(this.componentContent, 'save');
+    return this.cRaterService.isCRaterScoreOnEvent(this.componentContent, 'save');
   }
 
   private isCRaterScoreOnSubmit(): boolean {
-    return this.CRaterService.isCRaterScoreOnEvent(this.componentContent, 'submit');
+    return this.cRaterService.isCRaterScoreOnEvent(this.componentContent, 'submit');
   }
 
   private isCRaterScoreOnChange(): boolean {
-    return this.CRaterService.isCRaterScoreOnEvent(this.componentContent, 'change');
+    return this.cRaterService.isCRaterScoreOnEvent(this.componentContent, 'change');
   }
 
   /**
@@ -646,9 +649,9 @@ export class OpenResponseStudent extends ComponentStudent {
   }
 
   attachAudioRecording(audioFile: any): void {
-    this.StudentAssetService.uploadAsset(audioFile).then((studentAsset) => {
+    this.studentAssetService.uploadAsset(audioFile).then((studentAsset) => {
       this.attachStudentAsset(studentAsset).then(() => {
-        this.StudentAssetService.deleteAsset(studentAsset).then(() => this.studentDataChanged());
+        this.studentAssetService.deleteAsset(studentAsset).then(() => this.studentDataChanged());
       });
     });
   }

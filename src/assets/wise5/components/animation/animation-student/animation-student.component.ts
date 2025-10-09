@@ -434,7 +434,7 @@ export class AnimationStudent extends ComponentStudent {
 
   updateObjectDataFromDataSource(object: any): void {
     const dataSource = object.dataSource;
-    const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+    const componentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       dataSource.nodeId,
       dataSource.componentId
     );
@@ -758,7 +758,7 @@ export class AnimationStudent extends ComponentStudent {
       t: t
     };
 
-    this.StudentDataService.broadcastComponentStudentData({
+    this.studentDataService.broadcastComponentStudentData({
       nodeId: this.nodeId,
       componentId: this.componentId,
       componentState: componentState
@@ -989,12 +989,12 @@ export class AnimationStudent extends ComponentStudent {
    * @returns {object} The auto score annotation.
    */
   createAutoScoreAnnotation(data: any): any {
-    const runId = this.ConfigService.getRunId();
-    const periodId = this.ConfigService.getPeriodId();
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
-    const toWorkgroupId = this.ConfigService.getWorkgroupId();
-    return this.AnnotationService.createAutoScoreAnnotation(
+    const toWorkgroupId = this.configService.getWorkgroupId();
+    return this.annotationService.createAutoScoreAnnotation(
       runId,
       periodId,
       nodeId,
@@ -1009,12 +1009,12 @@ export class AnimationStudent extends ComponentStudent {
    * @returns {object} The auto comment annotation.
    */
   createAutoCommentAnnotation(data: any): any {
-    const runId = this.ConfigService.getRunId();
-    const periodId = this.ConfigService.getPeriodId();
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
-    const toWorkgroupId = this.ConfigService.getWorkgroupId();
-    return this.AnnotationService.createAutoCommentAnnotation(
+    const toWorkgroupId = this.configService.getWorkgroupId();
+    return this.annotationService.createAutoCommentAnnotation(
       runId,
       periodId,
       nodeId,

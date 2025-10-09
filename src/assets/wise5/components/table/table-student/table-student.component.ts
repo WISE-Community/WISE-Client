@@ -76,28 +76,28 @@ export class TableStudentComponent extends ComponentStudent {
   tabulatorSorters: any[] = [];
 
   constructor(
-    protected AnnotationService: AnnotationService,
+    protected annotationService: AnnotationService,
     private changeDetectorRef: ChangeDetectorRef,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    private ProjectService: ProjectService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService,
-    private TableService: TableService,
-    private TabulatorDataService: TabulatorDataService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    private projectService: ProjectService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService,
+    private tableService: TableService,
+    private tabulatorDataService: TabulatorDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
@@ -108,12 +108,12 @@ export class TableStudentComponent extends ComponentStudent {
     this.tableData = null;
 
     // the label for the notebook in thos project
-    this.notebookConfig = this.NotebookService.getNotebookConfig();
+    this.notebookConfig = this.notebookService.getNotebookConfig();
 
     this.latestConnectedComponentState = null;
     this.latestConnectedComponentParams = null;
 
-    this.tableId = this.TableService.getTableId(this.nodeId, this.componentId);
+    this.tableId = this.tableService.getTableId(this.nodeId, this.componentId);
 
     this.isDataExplorerEnabled = this.componentContent.isDataExplorerEnabled;
     if (this.isDataExplorerEnabled) {
@@ -127,7 +127,7 @@ export class TableStudentComponent extends ComponentStudent {
       // we will show work from another component
       this.handleConnectedComponents();
     } else if (
-      this.TableService.componentStateHasStudentWork(this.componentState, this.componentContent)
+      this.tableService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       // the student has work so we will populate the work into this component
       this.setStudentWork(this.componentState);
@@ -166,7 +166,7 @@ export class TableStudentComponent extends ComponentStudent {
       this.isDisabled = true;
     }
 
-    this.resetTableButtonVisible = this.TableService.componentHasEditableCells(
+    this.resetTableButtonVisible = this.tableService.componentHasEditableCells(
       this.componentContent
     );
     this.disableComponentIfNecessary();
@@ -711,12 +711,12 @@ export class TableStudentComponent extends ComponentStudent {
 
   protected snipTable(): void {
     const tableElement = this.getElementById(
-      this.TableService.getTableId(this.nodeId, this.componentId),
+      this.tableService.getTableId(this.nodeId, this.componentId),
       true
     );
     html2canvas(tableElement).then((canvas: any) => {
       const pngFile = convertToPNGFile(canvas);
-      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
+      this.notebookService.addNote(this.studentDataService.getCurrentNodeId(), pngFile);
     });
   }
 
@@ -765,7 +765,7 @@ export class TableStudentComponent extends ComponentStudent {
   getConnectedComponentsAndTheirComponentStates(): any[] {
     const connectedComponentsAndTheirComponentStates = [];
     for (const connectedComponent of this.componentContent.connectedComponents) {
-      const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+      const componentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
         connectedComponent.nodeId,
         connectedComponent.componentId
       );
@@ -923,7 +923,7 @@ export class TableStudentComponent extends ComponentStudent {
       componentState.nodeId,
       componentState.componentId
     );
-    const componentType = this.ProjectService.getComponentType(
+    const componentType = this.projectService.getComponentType(
       connectedComponent.nodeId,
       connectedComponent.componentId
     );
@@ -937,7 +937,7 @@ export class TableStudentComponent extends ComponentStudent {
     } else if (componentType === 'Embedded') {
       this.setStudentWork(componentStateCopy);
       this.isDirty = true;
-      this.StudentDataService.broadcastComponentSaveTriggered({
+      this.studentDataService.broadcastComponentSaveTriggered({
         nodeId: this.nodeId,
         componentId: this.componentId
       });
@@ -953,7 +953,7 @@ export class TableStudentComponent extends ComponentStudent {
   }
 
   private setTabulatorData(): void {
-    this.tabulatorData = this.TabulatorDataService.convertTableDataToTabulator(
+    this.tabulatorData = this.tabulatorDataService.convertTableDataToTabulator(
       this.tableData,
       this.componentContent.globalCellSize
     );
