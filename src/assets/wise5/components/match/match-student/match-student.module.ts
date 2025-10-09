@@ -8,14 +8,14 @@ import { MatchStudentChoiceReuseComponent } from './match-student-choice-reuse/m
 import { MatchStudentDefaultComponent } from './match-student-default/match-student-default.component';
 
 @NgModule({
-  declarations: [MatchStudent],
   imports: [
     AddChoiceButtonComponent,
     MatchCommonModule,
     MatchStudentChoiceReuseComponent,
     MatchStudentDefaultComponent,
     StudentComponentModule,
-    AddMatchChoiceDialogComponent
+    AddMatchChoiceDialogComponent,
+    MatchStudent
   ],
   exports: [MatchStudent, MatchStudentDefaultComponent, AddMatchChoiceDialogComponent]
 })

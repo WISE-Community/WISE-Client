@@ -13,12 +13,19 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
+import { AddToNotebookButtonComponent } from '../../../directives/add-to-notebook-button/add-to-notebook-button.component';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
+  imports: [
+    AddToNotebookButtonComponent,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
   selector: 'embedded-student',
-  templateUrl: 'embedded-student.component.html',
-  styleUrls: ['embedded-student.component.scss'],
-  standalone: false
+  styleUrl: 'embedded-student.component.scss',
+  templateUrl: 'embedded-student.component.html'
 })
 export class EmbeddedStudent extends ComponentStudent {
   annotationsToSave: any[] = [];

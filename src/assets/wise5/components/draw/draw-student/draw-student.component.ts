@@ -14,13 +14,25 @@ import { MatDialog } from '@angular/material/dialog';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { AddToNotebookButtonComponent } from '../../../directives/add-to-notebook-button/add-to-notebook-button.component';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
-    selector: 'draw-student',
-    templateUrl: 'draw-student.component.html',
-    styleUrls: ['draw-student.component.scss', '../drawing-tool.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    ComponentHeaderComponent,
+    MatButton,
+    MatIcon,
+    AddToNotebookButtonComponent,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
+  styleUrls: ['draw-student.component.scss', '../drawing-tool.scss'],
+  templateUrl: 'draw-student.component.html'
 })
 export class DrawStudent extends ComponentStudent {
   drawingTool: any;

@@ -10,12 +10,12 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { CompletionService } from '../../../services/completionService';
+import { StudentSummaryDisplay } from '../../../directives/student-summary-display/student-summary-display.component';
 
 @Component({
-  selector: 'summary-student',
-  templateUrl: 'summary-student.component.html',
+  imports: [StudentSummaryDisplay],
   styles: ['.prompt { font-weight: 500; padding-bottom: 8px; }'],
-  standalone: false
+  templateUrl: 'summary-student.component.html'
 })
 export class SummaryStudent extends ComponentStudent {
   chartType: string;

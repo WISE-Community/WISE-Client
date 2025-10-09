@@ -17,12 +17,36 @@ import { TabulatorDataService } from '../tabulatorDataService';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { TabulatorTableComponent } from '../tabulator-table/tabulator-table.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatInput } from '@angular/material/input';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
-  templateUrl: 'table-student.component.html',
-  styles: ['.tools { margin-bottom: 8px; }'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false
+  imports: [
+    ComponentHeaderComponent,
+    MatButton,
+    MatIcon,
+    TabulatorTableComponent,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    FormsModule,
+    MatOption,
+    MatInput,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
+  styles: ['.tools { margin-bottom: 8px; }'],
+  templateUrl: 'table-student.component.html'
 })
 export class TableStudentComponent extends ComponentStudent {
   columnIndexToIsUsed: Map<number, boolean> = new Map();

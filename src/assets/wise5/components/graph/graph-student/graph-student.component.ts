@@ -23,16 +23,41 @@ import { PlotLineManager } from '../plot-line-manager';
 import { DataExplorerManager } from '../data-explorer-manager';
 import { addPointFromTableIntoData, isMultipleYAxes, isSingleYAxis } from '../util';
 import { GraphConnectedComponentManager } from '../graph-connected-component-manager';
-
 import Draggable from 'highcharts/modules/draggable-points.js';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatSelectTrigger } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 Draggable(Highcharts);
 HC_exporting(Highcharts);
 
 @Component({
+  imports: [
+    ComponentHeaderComponent,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    FormsModule,
+    MatSelectTrigger,
+    MatOption,
+    MatIconButton,
+    MatIcon,
+    MatButton,
+    MatInput,
+    HighchartsChartModule,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
   selector: 'graph-student',
   templateUrl: 'graph-student.component.html',
-  styleUrls: ['graph-student.component.scss'],
-  standalone: false
+  styleUrl: 'graph-student.component.scss'
 })
 export class GraphStudent extends ComponentStudent {
   activeSeries: any = null;

@@ -1,17 +1,11 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Point } from 'highcharts';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { ProjectService } from '../../../services/projectService';
 import { GraphStudent } from './graph-student.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { XPlotLine } from '../domain/xPlotLine';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 let component: GraphStudent;
 const componentId = 'component1';
@@ -22,20 +16,11 @@ const sampleData = [
   [10, 20]
 ];
 let studentDataChangedSpy: jasmine.Spy;
-
 describe('GraphStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GraphStudent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        BrowserModule,
-        HighchartsChartModule,
-        MatDialogModule,
-        NoopAnimationsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      imports: [StudentTeacherCommonServicesModule, GraphStudent],
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(GraphStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);

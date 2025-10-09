@@ -24,12 +24,35 @@ import { hasConnectedComponent } from '../../../common/ComponentContent';
 import { ConstraintService } from '../../../services/constraintService';
 import { CRaterPingService } from '../../../services/cRaterPingService';
 import { OpenResponseContent } from '../OpenResponseContent';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { FormsModule } from '@angular/forms';
+import { SpeechToTextComponent } from '../speech-to-text/speech-to-text.component';
+import { AudioRecorderComponent } from '../audio-recorder/audio-recorder.component';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
+  imports: [
+    ComponentHeaderComponent,
+    MatButton,
+    MatIcon,
+    MatFormField,
+    MatInput,
+    CdkTextareaAutosize,
+    FormsModule,
+    SpeechToTextComponent,
+    AudioRecorderComponent,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
   selector: 'open-response-student',
-  templateUrl: 'open-response-student.component.html',
-  styleUrls: ['open-response-student.component.scss'],
-  standalone: false
+  styleUrl: 'open-response-student.component.scss',
+  templateUrl: 'open-response-student.component.html'
 })
 export class OpenResponseStudent extends ComponentStudent {
   audioAttachments: any[] = [];

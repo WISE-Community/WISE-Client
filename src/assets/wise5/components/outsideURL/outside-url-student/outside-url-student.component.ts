@@ -11,9 +11,8 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 
 @Component({
-    selector: 'outside-url-student',
-    templateUrl: 'outside-url-student.component.html',
-    standalone: false
+  selector: 'outside-url-student',
+  templateUrl: 'outside-url-student.component.html'
 })
 export class OutsideUrlStudent extends ComponentStudent {
   url: SafeUrl;
@@ -23,25 +22,25 @@ export class OutsideUrlStudent extends ComponentStudent {
   height: string;
 
   constructor(
-    protected AnnotationService: AnnotationService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected annotationService: AnnotationService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
     protected sanitizer: DomSanitizer,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 

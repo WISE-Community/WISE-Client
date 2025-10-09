@@ -1,38 +1,35 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentStudent } from './component-student.component';
 import { NotebookService } from '../services/notebookService';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../app/student-teacher-common-services.module';
 import { Component as WISEComponent } from '../common/Component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
 
 let component: ComponentStudent;
-let fixture: ComponentFixture<ComponentStudent>;
+let fixture: ComponentFixture<ComponentStudentImpl>;
 let performSubmitSpy: jasmine.Spy;
 
 @Component({
-    selector: 'component-student-impl',
-    standalone: false
+  imports: [StudentTeacherCommonServicesModule]
 })
 class ComponentStudentImpl extends ComponentStudent {}
 
 describe('ComponentStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ComponentStudentImpl],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule, ComponentStudentImpl],
+      providers: [provideHttpClient(), MockProvider(NotebookService)]
+    }).compileComponents();
+    spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(false);
     fixture = TestBed.createComponent(ComponentStudentImpl);
     component = fixture.componentInstance;
     component.componentContent = {};
     component.component = { content: {} } as WISEComponent;
     component.isSubmitDirty = true;
-    spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(false);
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
+    spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => false);
     performSubmitSpy = spyOn(component, 'performSubmit');
   });
   submit();

@@ -16,12 +16,32 @@ import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatButton } from '@angular/material/button';
+import { AddToNotebookButtonComponent } from '../../../directives/add-to-notebook-button/add-to-notebook-button.component';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
-    selector: 'concept-map-student',
-    templateUrl: 'concept-map-student.component.html',
-    styleUrls: ['concept-map-student.component.scss'],
-    standalone: false
+  imports: [
+    ComponentHeaderComponent,
+    MatButton,
+    AddToNotebookButtonComponent,
+    MatTooltip,
+    MatIcon,
+    MatRadioGroup,
+    FormsModule,
+    MatRadioButton,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
+  selector: 'concept-map-student',
+  styleUrl: 'concept-map-student.component.scss',
+  templateUrl: 'concept-map-student.component.html'
 })
 export class ConceptMapStudent extends ComponentStudent {
   activeLink: any;
