@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AiChatBotMessageComponent } from './ai-chat-bot-message.component';
-import { MatIconModule } from '@angular/material/icon';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { AiChatMessage } from '../AiChatMessage';
 
@@ -10,8 +9,7 @@ describe('AiChatBotMessageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AiChatBotMessageComponent],
-      imports: [MatIconModule],
+      imports: [AiChatBotMessageComponent],
       providers: [ComputerAvatarService]
     });
     fixture = TestBed.createComponent(AiChatBotMessageComponent);

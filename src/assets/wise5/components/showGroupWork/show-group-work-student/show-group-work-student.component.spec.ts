@@ -1,14 +1,13 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { Component } from '../../../common/Component';
 import { of } from 'rxjs';
 import { NotebookService } from '../../../services/notebookService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockComponent } from 'ng-mocks';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 
 let component: ShowGroupWorkStudentComponent;
 let fixture: ComponentFixture<ShowGroupWorkStudentComponent>;
@@ -24,11 +23,13 @@ class MockNotebookService {
 describe('ShowGroupWorkStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [ShowGroupWorkStudentComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [{ provide: NotebookService, useClass: MockNotebookService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [
+        ShowGroupWorkStudentComponent,
+        MockComponent(ComponentHeaderComponent),
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [{ provide: NotebookService, useClass: MockNotebookService }, provideHttpClient()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

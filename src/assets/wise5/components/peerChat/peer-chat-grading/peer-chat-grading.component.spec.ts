@@ -38,9 +38,8 @@ const peerGroup = new PeerGroup(
 describe('PeerChatGradingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PeerChatGradingComponent],
-      imports: [StudentTeacherCommonServicesModule],
-      providers: [
+    imports: [StudentTeacherCommonServicesModule, PeerChatGradingComponent],
+    providers: [
         ClassroomStatusService,
         PeerGroupService,
         TeacherDataService,
@@ -48,8 +47,8 @@ describe('PeerChatGradingComponent', () => {
         TeacherWebSocketService,
         TeacherWorkService,
         provideHttpClient()
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

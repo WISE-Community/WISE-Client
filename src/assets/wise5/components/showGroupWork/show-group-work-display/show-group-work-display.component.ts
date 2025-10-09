@@ -4,10 +4,14 @@ import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
 import { PeerGroup } from '../../peerChat/PeerGroup';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
+import { NgClass, NgStyle } from '@angular/common';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
+import { ShowWorkStudentComponent } from '../../showWork/show-work-student/show-work-student.component';
 
 @Component({
+  imports: [NgClass, MatCard, MatIcon, NgStyle, MatCardContent, ShowWorkStudentComponent],
   selector: 'show-group-work-display',
-  standalone: false,
   styleUrl: './show-group-work-display.component.scss',
   templateUrl: './show-group-work-display.component.html'
 })
@@ -63,7 +67,7 @@ export class ShowGroupWorkDisplayComponent implements OnInit {
       });
   }
 
-  setStudentWorkFromGroupMembers(studentWorkFromGroupMembers: any[]): void {
+  private setStudentWorkFromGroupMembers(studentWorkFromGroupMembers: any[]): void {
     studentWorkFromGroupMembers.forEach((work) => {
       this.workgroupIdToWork.set(work.workgroupId, work);
     });

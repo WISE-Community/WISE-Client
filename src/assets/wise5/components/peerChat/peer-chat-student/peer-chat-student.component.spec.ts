@@ -23,7 +23,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { PeerChatModule } from '../peer-chat.module';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
@@ -113,12 +112,10 @@ const peerGroup = new PeerGroup(
   ],
   new PeerGrouping()
 );
-
 describe('PeerChatStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [PeerChatStudentComponent],
-    imports: [BrowserAnimationsModule,
+      imports: [
         ComponentHeaderComponent,
         FormsModule,
         MatCardModule,
@@ -127,8 +124,10 @@ describe('PeerChatStudentComponent', () => {
         MatIconModule,
         MatInputModule,
         PeerChatModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+        StudentTeacherCommonServicesModule,
+        PeerChatStudentComponent
+      ],
+      providers: [
         AnnotationService,
         ComponentService,
         ConfigService,
@@ -144,8 +143,8 @@ describe('PeerChatStudentComponent', () => {
         TagService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -245,10 +244,9 @@ function createComponentState_WithoutDynamicPrompt_ShouldCreateComponentState() 
 
 function createComponentState_WithDynamicPrompt_ShouldCreateComponentState() {
   it('should create component state when component has dynamic prompt', () => {
-    spyOn(
-      TestBed.inject(StudentWebSocketService),
-      'sendStudentWorkToClassmate'
-    ).and.callFake(() => {});
+    spyOn(TestBed.inject(StudentWebSocketService), 'sendStudentWorkToClassmate').and.callFake(
+      () => {}
+    );
     spyOn(TestBed.inject(NotificationService), 'saveNotificationToServer').and.callFake(() => {
       return Promise.resolve({});
     });

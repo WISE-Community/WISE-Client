@@ -1,12 +1,8 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { PeerChatMessageComponent } from '../peer-chat-message/peer-chat-message.component';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatMessagesComponent } from './peer-chat-messages.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: PeerChatMessagesComponent;
 let fixture: ComponentFixture<PeerChatMessagesComponent>;
@@ -16,14 +12,11 @@ const messageText3 = 'Oops';
 const studentWorkgroupId1 = 101;
 const studentWorkgroupId2 = 102;
 const teacherWorkgroupId1 = 100;
-
 describe('PeerChatMessagesComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [PeerChatMessageComponent, PeerChatMessagesComponent],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [PeerChatMessagesComponent]
+    }).compileComponents();
     fixture = TestBed.createComponent(PeerChatMessagesComponent);
     component = fixture.componentInstance;
     component.peerChatMessages = [

@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
+import { ShowGroupWorkDisplayComponent } from '../show-group-work-display/show-group-work-display.component';
 
 @Component({
+  imports: [ShowGroupWorkDisplayComponent],
   selector: 'show-group-work-grading',
-  standalone: false,
   template: `
     <show-group-work-display
       [componentId]="componentId"

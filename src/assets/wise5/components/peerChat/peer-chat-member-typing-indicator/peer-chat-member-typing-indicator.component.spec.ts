@@ -17,7 +17,7 @@ describe('PeerChatMemberTypingIndicatorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PeerChatMemberTypingIndicatorComponent],
+      imports: [PeerChatMemberTypingIndicatorComponent],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
         StompService,

@@ -3,11 +3,10 @@ import { NgModule } from '@angular/core';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentComponentModule } from '../../../../app/student/student.component.module';
 import { PreviewComponentComponent } from '../../authoringTool/components/preview-component/preview-component.component';
-import { StudentAssetsDialogModule } from '../../vle/studentAsset/student-assets-dialog/student-assets-dialog.module';
 import { AnimationStudentModule } from '../animation/animation-student/animation-student.module';
 import { AudioOscillatorStudentModule } from '../audioOscillator/audio-oscillator-student/audio-oscillator.module';
 import { ConceptMapStudentModule } from '../conceptMap/concept-map-student/concept-map-student.module';
-import { DiscussionStudentModule } from '../discussion/discussion-student/discussion-student.module';
+import { DiscussionStudent } from '../discussion/discussion-student/discussion-student.component';
 import { DrawStudentModule } from '../draw/draw-student/draw-student-module';
 import { EmbeddedStudentModule } from '../embedded/embedded-student/embedded-student.module';
 import { GraphStudentModule } from '../graph/graph-student/graph-student.module';
@@ -22,21 +21,22 @@ import { ShowMyWorkStudentModule } from '../showMyWork/show-my-work-student/show
 import { SummaryStudentModule } from '../summary/summary-student/summary-student.module';
 import { TableStudentModule } from '../table/table-student/table-student.module';
 import { ComponentComponent } from './component.component';
-import { AiChatStudentModule } from '../aiChat/ai-chat-student/ai-chat-student.module';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 import { MultipleChoiceStudentComponent } from '../multipleChoice/multiple-choice-student/multiple-choice-student.component';
 import { DialogGuidanceStudentComponent } from '../dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
+import { StudentAssetsDialogComponent } from '../../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
+import { AiChatStudentComponent } from '../aiChat/ai-chat-student/ai-chat-student.component';
 
 @NgModule({
   imports: [
-    AiChatStudentModule,
+    AiChatStudentComponent,
     AnimationStudentModule,
     AudioOscillatorStudentModule,
     CommonModule,
     ComponentComponent,
     ConceptMapStudentModule,
     DialogGuidanceStudentComponent,
-    DiscussionStudentModule,
+    DiscussionStudent,
     DrawStudentModule,
     EmbeddedStudentModule,
     GraphStudentModule,
@@ -52,7 +52,7 @@ import { DialogGuidanceStudentComponent } from '../dialogGuidance/dialog-guidanc
     PreviewComponentComponent,
     ShowGroupWorkStudentModule,
     ShowMyWorkStudentModule,
-    StudentAssetsDialogModule,
+    StudentAssetsDialogComponent,
     StudentComponentModule,
     SummaryStudentModule,
     TableStudentModule

@@ -18,27 +18,24 @@
       <span [ngClass]="{ 'deleted-text': peerChatMessage.isDeleted }">{{ text }}</span>
     </div>
     @if (isGrading) {
-      @switch (peerChatMessage.isDeleted) {
-        @case (true) {
-          <button
-            mat-icon-button
-            (click)="undelete()"
-            matTooltip="Make this message viewable to students again"
-            i18n-matTooltip
-          >
-            <mat-icon>visibility_off</mat-icon>
-          </button>
-        }
-        @default {
-          <button
-            mat-icon-button
-            (click)="delete()"
-            matTooltip="Delete this message so students won't see it"
-            i18n-matTooltip
-          >
-            <mat-icon>visibility</mat-icon>
-          </button>
-        }
+      @if (peerChatMessage.isDeleted) {
+        <button
+          mat-icon-button
+          (click)="undelete()"
+          matTooltip="Make this message viewable to students again"
+          i18n-matTooltip
+        >
+          <mat-icon>visibility_off</mat-icon>
+        </button>
+      } @else {
+        <button
+          mat-icon-button
+          (click)="delete()"
+          matTooltip="Delete this message so students won't see it"
+          i18n-matTooltip
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
       }
     }
   </div>

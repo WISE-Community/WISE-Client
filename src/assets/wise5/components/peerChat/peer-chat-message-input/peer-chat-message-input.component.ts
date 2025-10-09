@@ -3,10 +3,14 @@ import { StompService } from '../../../services/stompService';
 import { ConfigService } from '../../../services/configService';
 import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
+import { MatFormField, MatInputModule } from '@angular/material/input';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  imports: [CdkTextareaAutosize, FormsModule, MatButtonModule, MatFormField, MatInputModule],
   selector: 'peer-chat-message-input',
-  standalone: false,
   templateUrl: './peer-chat-message-input.component.html'
 })
 export class PeerChatMessageInputComponent implements OnInit {

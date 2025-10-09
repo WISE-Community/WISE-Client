@@ -10,40 +10,8 @@ import {
 } from '@angular/core';
 import { components } from '../../components/Components';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { AiChatGradingModule } from '../../components/aiChat/ai-chat-grading/ai-chat-grading.module';
-import { AnimationGradingModule } from '../../components/animation/animation-grading/animation-grading.module';
-import { AudioOscillatorGradingModule } from '../../components/audioOscillator/audio-oscillator-grading/audio-oscillator-grading.module';
-import { ConceptMapGradingModule } from '../../components/conceptMap/concept-map-grading/concept-map-grading.module';
-import { DiscussionGradingModule } from '../../components/discussion/discussion-grading/discussion-grading.module';
-import { DrawGradingModule } from '../../components/draw/draw-grading/draw-grading.module';
-import { EmbeddedGradingModule } from '../../components/embedded/embedded-grading/embedded-grading.module';
-import { GraphGradingModule } from '../../components/graph/graph-grading/graph-grading.module';
-import { LabelGradingModule } from '../../components/label/label-grading/label-grading.module';
-import { MatchGradingModule } from '../../components/match/match-grading/match-grading.module';
-import { OpenResponseGradingModule } from '../../components/openResponse/open-response-grading/open-response-grading.module';
-import { PeerChatGradingModule } from '../../components/peerChat/peer-chat-grading/peer-chat-grading.module';
-import { ShowGroupWorkGradingModule } from '../../components/showGroupWork/show-group-work-grading/show-group-work-grading.module';
-import { TableGradingModule } from '../../components/table/table-grading/table-grading.module';
-import { ShowMyWorkGradingModule } from '../../components/showMyWork/show-my-work-grading/show-my-work-grading.module';
 
 @Component({
-  imports: [
-    AiChatGradingModule,
-    AnimationGradingModule,
-    AudioOscillatorGradingModule,
-    ConceptMapGradingModule,
-    DiscussionGradingModule,
-    DrawGradingModule,
-    EmbeddedGradingModule,
-    GraphGradingModule,
-    LabelGradingModule,
-    MatchGradingModule,
-    OpenResponseGradingModule,
-    PeerChatGradingModule,
-    ShowGroupWorkGradingModule,
-    ShowMyWorkGradingModule,
-    TableGradingModule
-  ],
   selector: 'component-grading-component',
   template: '<div #component></div>'
 })

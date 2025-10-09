@@ -1,8 +1,7 @@
 <h2 mat-dialog-title>
   @if (canViewStudentNames) {
     <span class="username">{{ user.name }}</span>
-  }
-  @if (!canViewStudentNames) {
+  } @else {
     <span i18n>Student {{ user.id }}</span>
   }
 </h2>

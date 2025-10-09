@@ -2,12 +2,26 @@ import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
 import { PeerGroupService } from '../../../../services/peerGroupService';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { CdkDropListGroup } from '@angular/cdk/drag-drop';
+import { PeerGroupUnassignedWorkgroupsComponent } from '../peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component';
+import { PeerGroupAssignedWorkgroupsComponent } from '../peer-group-assigned-workgroups/peer-group-assigned-workgroups.component';
 
 @Component({
+  imports: [
+    MatCard,
+    MatCardContent,
+    MatButton,
+    MatIcon,
+    CdkDropListGroup,
+    PeerGroupUnassignedWorkgroupsComponent,
+    PeerGroupAssignedWorkgroupsComponent
+  ],
   selector: 'peer-group-period',
-  templateUrl: './peer-group-period.component.html',
   styleUrl: './peer-group-period.component.scss',
-  standalone: false
+  templateUrl: './peer-group-period.component.html'
 })
 export class PeerGroupPeriodComponent {
   @Input() peerGroupingTag: string;

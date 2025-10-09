@@ -10,7 +10,9 @@ import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 
 @NgModule({
-  declarations: [
+  imports: [
+    StudentTeacherCommonModule,
+    SelectPeriodComponent,
     PeerGroupAssignedWorkgroupsComponent,
     PeerGroupDialogComponent,
     PeerGroupGroupingComponent,
@@ -19,7 +21,6 @@ import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/class
     PeerGroupUnassignedWorkgroupsComponent,
     PeerGroupWorkgroupComponent
   ],
-  imports: [StudentTeacherCommonModule, SelectPeriodComponent],
   exports: [
     PeerGroupAssignedWorkgroupsComponent,
     PeerGroupDialogComponent,

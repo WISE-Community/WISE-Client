@@ -13,9 +13,10 @@ import { PeerChatShowWorkComponent } from '../peer-chat-show-work/peer-chat-show
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
+import { PeerChatModule } from '../peer-chat.module';
 
 @Component({
-  standalone: false,
+  imports: [PeerChatModule],
   styleUrl: './peer-chat-grading.component.scss',
   templateUrl: './peer-chat-grading.component.html'
 })

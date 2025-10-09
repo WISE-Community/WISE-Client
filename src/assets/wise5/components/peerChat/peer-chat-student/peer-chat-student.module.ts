@@ -5,8 +5,7 @@ import { PeerChatModule } from '../peer-chat.module';
 import { PeerChatStudentComponent } from './peer-chat-student.component';
 
 @NgModule({
-  declarations: [PeerChatStudentComponent],
-  imports: [CommonModule, PeerChatModule, StudentComponentModule],
+  imports: [CommonModule, PeerChatModule, StudentComponentModule, PeerChatStudentComponent],
   exports: [PeerChatStudentComponent]
 })
 export class PeerChatStudentModule {}

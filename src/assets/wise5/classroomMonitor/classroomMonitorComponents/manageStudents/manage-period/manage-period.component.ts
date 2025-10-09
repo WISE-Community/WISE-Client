@@ -3,12 +3,24 @@ import { Subscription } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../../services/configService';
 import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroupService';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { CdkDropListGroup } from '@angular/cdk/drag-drop';
+import { AddTeamButtonComponent } from '../add-team-button/add-team-button.component';
+import { ManageTeamComponent } from '../manage-team/manage-team.component';
+import { ManageTeamsComponent } from '../manage-teams/manage-teams.component';
 
 @Component({
+  imports: [
+    MatCard,
+    CdkDropListGroup,
+    MatCardContent,
+    AddTeamButtonComponent,
+    ManageTeamComponent,
+    ManageTeamsComponent
+  ],
   selector: 'manage-period',
   styleUrl: 'manage-period.component.scss',
-  templateUrl: 'manage-period.component.html',
-  standalone: false
+  templateUrl: 'manage-period.component.html'
 })
 export class ManagePeriodComponent {
   emptyTeams: Map<number, any> = new Map();

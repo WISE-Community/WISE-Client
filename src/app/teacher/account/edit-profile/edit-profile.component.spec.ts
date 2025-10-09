@@ -2,17 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TeacherEditProfileComponent } from './edit-profile.component';
 import { UserService } from '../../../services/user.service';
 import { Teacher } from '../../../domain/teacher';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { TeacherService } from '../../teacher.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { User } from '../../../domain/user';
-import { MatDialogModule } from '@angular/material/dialog';
 
 export class MockUserService {
   user: User;
@@ -86,20 +79,11 @@ describe('TeacherEditProfileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TeacherEditProfileComponent],
-      imports: [
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatSelectModule,
-        MatSnackBarModule
-      ],
+      imports: [TeacherEditProfileComponent],
       providers: [
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: UserService, useClass: MockUserService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     });
     fixture = TestBed.createComponent(TeacherEditProfileComponent);
     component = fixture.componentInstance;

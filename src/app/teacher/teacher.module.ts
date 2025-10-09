@@ -70,9 +70,10 @@ const materialModules = [
     SharedModule,
     TeacherRoutingModule,
     ClipboardModule,
-    UnitTagsComponent
+    UnitTagsComponent,
+    EditComponent,
+    TeacherEditProfileComponent
   ],
-  declarations: [EditComponent, TeacherEditProfileComponent],
   providers: [AccessLinkService, AuthGuard, ColorService, ProjectTagService],
   exports: [UnitTagsComponent, materialModules]
 })

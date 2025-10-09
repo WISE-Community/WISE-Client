@@ -1,18 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
 import { ConfigService } from '../../../../services/configService';
 import { ManageTeamComponent } from './manage-team.component';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ManageTeamHarness } from './manage-team.harness';
-import { ManageStudentsModule } from '../manage-students.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { RemoveUserConfirmDialogComponent } from '../remove-user-confirm-dialog/remove-user-confirm-dialog.component';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 let component: ManageTeamComponent;
 let configService: ConfigService;
@@ -23,22 +19,14 @@ let http: HttpClient;
 let manageTeamHarness: ManageTeamHarness;
 const studentName = 'a a';
 const studentUsername = 'aa0101';
-
 describe('ManageTeamComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        ManageStudentsModule,
-        ManageTeamComponent,
-        MatCardModule,
-        MatDialogModule,
-        MatSnackBarModule
-      ],
+      imports: [ManageTeamComponent],
       providers: [
         ConfigService,
         UpdateWorkgroupService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(),
         provideHttpClientTesting()
       ]
     });

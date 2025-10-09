@@ -2,10 +2,12 @@ import { Component, Input } from '@angular/core';
 import { AiChatMessage } from '../AiChatMessage';
 import { ConfigService } from '../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
+import { MatIcon } from '@angular/material/icon';
+import { NgStyle } from '@angular/common';
 
 @Component({
+  imports: [MatIcon, NgStyle],
   selector: 'ai-chat-student-message',
-  standalone: false,
   styleUrl: './ai-chat-student-message.component.scss',
   templateUrl: './ai-chat-student-message.component.html'
 })

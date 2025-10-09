@@ -3,11 +3,10 @@ import { PeerGroupAssignedWorkgroupsComponent } from './peer-group-assigned-work
 
 let component: PeerGroupAssignedWorkgroupsComponent;
 let fixture: ComponentFixture<PeerGroupAssignedWorkgroupsComponent>;
-
 describe('PeerGroupAssignedWorkgroupsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PeerGroupAssignedWorkgroupsComponent]
+      imports: [PeerGroupAssignedWorkgroupsComponent]
     }).compileComponents();
     fixture = TestBed.createComponent(PeerGroupAssignedWorkgroupsComponent);
     component = fixture.componentInstance;

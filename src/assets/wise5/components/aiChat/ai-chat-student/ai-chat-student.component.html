@@ -13,11 +13,11 @@
         [workgroupId]="workgroupId"
         [waitingForComputerResponse]="waitingForComputerResponse"
         [computerAvatar]="computerAvatar"
-      ></ai-chat-messages>
+      />
     </div>
     <chat-input
       [submitDisabled]="waitingForComputerResponse"
       (submitEvent)="submitStudentResponse($event)"
-    ></chat-input>
+    />
   </mat-card>
 }
