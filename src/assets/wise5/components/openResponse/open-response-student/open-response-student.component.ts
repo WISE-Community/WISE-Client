@@ -107,10 +107,11 @@ export class OpenResponseStudent extends ComponentStudent {
       });
     }
     this.updateAudioAttachments();
+    this.pingCRaterEndpoint();
     this.broadcastDoneRenderingComponent();
   }
 
-  protected onFocus() {
+  private pingCRaterEndpoint(): void {
     if (this.isCRaterEnabled()) {
       this.cRaterPingService.startPinging(this.getItemId());
     }
