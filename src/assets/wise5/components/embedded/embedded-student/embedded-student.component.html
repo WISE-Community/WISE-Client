@@ -1,7 +1,6 @@
 <div class="main-div">
   @if (isShowAddToNotebookButton) {
-    <add-to-notebook-button [isDisabled]="isDisabled" (snipImage)="snipModel()">
-    </add-to-notebook-button>
+    <add-to-notebook-button [isDisabled]="isDisabled" (snipImage)="snipModel()" />
   }
   <br />
   <div style="width: {{ width }}; height: {{ height }};">
