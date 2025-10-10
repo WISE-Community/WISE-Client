@@ -3,6 +3,7 @@ import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 type MatProgressBarStoryType = MatProgressBar & { value?: number; bufferValue: number };
 
@@ -11,7 +12,7 @@ const meta: Meta<MatProgressBarStoryType> = {
   component: MatProgressBar,
   decorators: [
     moduleMetadata({
-      imports: [MatProgressBarModule, MatRadioModule, FormsModule, MatCardModule]
+      imports: [MatButtonModule, MatProgressBarModule, MatRadioModule, FormsModule, MatCardModule]
     })
   ],
   argTypes: {
@@ -78,5 +79,21 @@ export const Query: Story = {
   render: (args) => ({
     props: args,
     template: `<mat-progress-bar mode="query"></mat-progress-bar>`
+  })
+};
+
+export const ButtonProgress: Story = {
+  render: (args) => ({
+    props: args,
+    template: `<div class="flex gap-2">
+        <button matButton="filled" disabled>
+          Submit
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </button>
+        <button matButton="outlined" disabled>
+          Submit
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </button>
+      </div>`
   })
 };

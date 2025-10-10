@@ -14,7 +14,7 @@
   --error: #{map.get(theme-colors.$error-palette, 40)};
   --on-error: #ffffff;
   --button-horizontal-padding: 12px;
-  --outline-button-horizontal-padding: 10px;
+  --outlined-button-horizontal-padding: 10px;
   --button-icon-offset: -4px;
 }
 
@@ -56,8 +56,8 @@ html {
     tonal-container-shape: var(--mat-sys-corner-small),
     protected-container-shape: var(--mat-sys-corner-small),
     filled-horizontal-padding: var(--button-horizontal-padding),
-    outlined-horizontal-padding: var(--outline-button-horizontal-padding),
-    tonal-horizontal-padding: var(--outline-button-horizontal-padding),
+    outlined-horizontal-padding: var(--outlined-button-horizontal-padding),
+    tonal-horizontal-padding: var(--outlined-button-horizontal-padding),
     protected-horizontal-padding: var(--button-horizontal-padding),
     outlined-outline-width: 2px,
     outlined-outline-color: var(--primary),
@@ -168,6 +168,26 @@ html {
     border-radius: var(--mat-sys-corner-small);
   }
 
+  .mdc-button .mdc-linear-progress {
+    --track-height: 6px;
+    @include mat.progress-bar-overrides((
+      active-indicator-height: var(--track-height),
+      track-height: var(--track-height),
+    ));
+
+    position: absolute;
+    width: auto;
+    left: calc(-1 * var(--button-horizontal-padding));
+    right: calc(-1 * var(--button-horizontal-padding));
+    bottom: calc(-3/2 * var(--track-height));
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .mdc-button.mdc-button--outlined .mdc-linear-progress {
+    left: calc(-1 * var(--outlined-button-horizontal-padding));
+    right: calc(-1 * var(--outlined-button-horizontal-padding));
+  }
 
   /* Select */
 
