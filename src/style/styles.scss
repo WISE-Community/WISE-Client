@@ -47,7 +47,7 @@ html {
 
   @include theme-typography.my-typography-hierarchy;
 
-  /* Buttons */
+  /* Button */
 
   @include mat.button-overrides((
     filled-container-shape: var(--mat-sys-corner-small),
@@ -71,7 +71,7 @@ html {
     small-container-shape: var(--mat-sys-corner-full),
   ));
 
-  /* Dialogs  */
+  /* Dialog  */
 
   @include mat.dialog-overrides((
     actions-padding: 16px,
@@ -104,7 +104,7 @@ html {
     container-background-color: var(--mat-sys-surface-container-lowest),
   ));
 
-  /* Form fields */
+  /* Form field */
 
   @include mat.form-field-overrides((
     filled-container-shape: var(--mat-sys-corner-small),
@@ -126,7 +126,7 @@ html {
     padding: 0 8px;
   }
 
-  /* Menus */
+  /* Menu */
   --menu-item-spacing: 8px;
 
   @include mat.menu-overrides((
@@ -156,7 +156,20 @@ html {
     }
   }
 
-  /* Selects */
+  /* Progress bar */
+
+  @include mat.progress-bar-overrides((
+    active-indicator-height: 10px,
+    track-height: 10px,
+    track-shape: var(--mat-sys-corner-small),
+  ));
+
+  .mdc-linear-progress {
+    border-radius: var(--mat-sys-corner-small);
+  }
+
+
+  /* Select */
 
   @include mat.select-overrides((
     panel-background-color: var(--mat-sys-surface-container-lowest)
