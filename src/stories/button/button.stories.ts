@@ -5,7 +5,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 type MatButtonStoryType = MatButton & { variant?: string; color?: string };
 
 const meta: Meta<MatButtonStoryType> = {
-  title: 'Components/Actions/Button',
+  title: 'Components/Action/Button',
   component: MatButton,
   decorators: [
     moduleMetadata({

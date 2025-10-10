@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 type MatMenuStoryType = MatMenu;
 
 const meta: Meta<MatMenuStoryType> = {
-  title: 'Components/Actions/Menu',
+  title: 'Components/Action/Menu',
   component: MatMenu,
   decorators: [
     moduleMetadata({

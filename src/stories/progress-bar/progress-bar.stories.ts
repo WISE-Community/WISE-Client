@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 type MatProgressBarStoryType = MatProgressBar & { value?: number; bufferValue: number };
 
 const meta: Meta<MatProgressBarStoryType> = {
-  title: 'Components/Display/Progress Bar',
+  title: 'Components/Feedback/Progress Bar',
   component: MatProgressBar,
   decorators: [
     moduleMetadata({

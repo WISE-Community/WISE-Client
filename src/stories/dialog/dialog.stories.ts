@@ -4,7 +4,7 @@ import { DialogOverviewComponent } from './dialog-overview/dialog-overview.compo
 type DialogStoryType = DialogOverviewComponent;
 
 const meta: Meta<DialogStoryType> = {
-  title: 'Components/Actions/Dialog',
+  title: 'Components/Action/Dialog',
   component: DialogOverviewComponent,
   decorators: [
     moduleMetadata({
