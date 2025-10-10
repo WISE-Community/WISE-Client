@@ -23,7 +23,7 @@ import { PeerGroupService } from '../../../assets/wise5/services/peerGroupServic
 import { StudentAssetsDialogComponent } from '../../../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
 
 @NgModule({
-  declarations: [GenerateImageDialogComponent, VLEParentComponent],
+  declarations: [GenerateImageDialogComponent],
   imports: [
     CommonModule,
     ComponentStudentModule,
@@ -33,7 +33,8 @@ import { StudentAssetsDialogComponent } from '../../../assets/wise5/vle/studentA
     StudentComponentModule,
     StudentTeacherCommonModule,
     StudentVLERoutingModule,
-    VLEComponent
+    VLEComponent,
+    VLEParentComponent
   ],
   providers: [
     InitializeVLEService,

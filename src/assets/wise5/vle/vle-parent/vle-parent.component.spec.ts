@@ -1,16 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { provideRouter, Router, RouterModule } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { InitializeVLEService } from '../../services/initializeVLEService';
-import { PauseScreenService } from '../../services/pauseScreenService';
-import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
-import { StudentNotificationService } from '../../services/studentNotificationService';
 import { VLEProjectService } from '../vleProjectService';
 import { VLEParentComponent } from './vle-parent.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockProvider, MockProviders } from 'ng-mocks';
 
 let component: VLEParentComponent;
 let fixture: ComponentFixture<VLEParentComponent>;
@@ -23,15 +19,15 @@ const runId1: string = '1';
 describe('VLEParentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [VLEParentComponent],
-      imports: [MatDialogModule, RouterModule, StudentTeacherCommonServicesModule],
+      imports: [VLEParentComponent],
       providers: [
-        InitializeVLEService,
-        PauseScreenService,
-        ProjectService,
-        StudentNotificationService,
-        VLEProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
+        MockProviders(StudentDataService, VLEProjectService),
+        MockProvider(InitializeVLEService, {
+          initialized$: new BehaviorSubject<boolean>(false).asObservable(),
+          initializePreview: (unitId: string) => Promise.resolve(),
+          initializeStudent: (unitId: string) => Promise.resolve()
+        }),
+        provideHttpClient(),
         provideRouter([])
       ]
     }).compileComponents();
