@@ -14,12 +14,14 @@ import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { EditDialogGuidanceComputerAvatarComponent } from '../edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
 import { CRaterItemSelectComponent } from '../../common/cRater/crater-item-select/crater-item-select.component';
+import { EditCRaterInfoComponent } from '../../common/cRater/edit-crater-info/edit-crater-info.component';
 
 @Component({
   imports: [
     CRaterItemSelectComponent,
     EditComponentMaxSubmitComponent,
     EditComponentPrompt,
+    EditCRaterInfoComponent,
     EditDialogGuidanceComputerAvatarComponent,
     EditFeedbackRulesComponent,
     FormsModule,
