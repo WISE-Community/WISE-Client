@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { EditComponentMaxSubmitComponent } from '../../../../../app/authoring-tool/edit-component-max-submit/edit-component-max-submit.component';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
@@ -14,21 +13,22 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { EditDialogGuidanceComputerAvatarComponent } from '../edit-dialog-guidance-computer-avatar/edit-dialog-guidance-computer-avatar.component';
+import { CRaterItemSelectComponent } from '../../common/cRater/crater-item-select/crater-item-select.component';
 
 @Component({
-  selector: 'dialog-guidance-authoring',
-  templateUrl: './dialog-guidance-authoring.component.html',
-  styles: ['edit-feedback-rules { margin-bottom: 16px; } '],
   imports: [
-    EditComponentPrompt,
-    MatFormFieldModule,
-    MatInput,
-    FormsModule,
+    CRaterItemSelectComponent,
     EditComponentMaxSubmitComponent,
-    MatCheckbox,
+    EditComponentPrompt,
     EditDialogGuidanceComputerAvatarComponent,
-    EditFeedbackRulesComponent
-  ]
+    EditFeedbackRulesComponent,
+    FormsModule,
+    MatCheckbox,
+    MatFormFieldModule
+  ],
+  selector: 'dialog-guidance-authoring',
+  styles: ['edit-feedback-rules { margin-bottom: 16px; } '],
+  templateUrl: './dialog-guidance-authoring.component.html'
 })
 export class DialogGuidanceAuthoringComponent extends AbstractComponentAuthoring {
   constructor(
@@ -41,7 +41,7 @@ export class DialogGuidanceAuthoringComponent extends AbstractComponentAuthoring
     super(configService, nodeService, projectAssetService, projectService);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     if (this.componentContent.computerAvatarSettings == null) {
       this.componentContent.computerAvatarSettings =

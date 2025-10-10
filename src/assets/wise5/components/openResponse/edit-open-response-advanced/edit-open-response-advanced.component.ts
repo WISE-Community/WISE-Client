@@ -12,17 +12,12 @@ import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/e
 import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { TranslatableTextareaComponent } from '../../../authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { ComponentContent } from '../../../common/ComponentContent';
-import { CRaterService } from '../../../services/cRaterService';
-import { NotebookService } from '../../../services/notebookService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { EditCRaterIdeaDescriptionsComponent } from '../../common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
 import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { OpenResponseContent } from '../OpenResponseContent';
+import { CRaterItemSelectComponent } from '../../common/cRater/crater-item-select/crater-item-select.component';
 
 @Component({
-  styleUrl: 'edit-open-response-advanced.component.scss',
-  templateUrl: 'edit-open-response-advanced.component.html',
   imports: [
     TranslatableTextareaComponent,
     MatCheckbox,
@@ -36,13 +31,15 @@ import { OpenResponseContent } from '../OpenResponseContent';
     MatIcon,
     EditCRaterIdeaDescriptionsComponent,
     EditComponentAddToNotebookButtonComponent,
-    EditCommonAdvancedComponent
-  ]
+    EditCommonAdvancedComponent,
+    CRaterItemSelectComponent
+  ],
+  styleUrl: 'edit-open-response-advanced.component.scss',
+  templateUrl: 'edit-open-response-advanced.component.html'
 })
 export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComponent {
   protected allowedConnectedComponentTypes = ['OpenResponse'];
   componentContent: OpenResponseContent;
-  protected cRaterItemIdIsValid: boolean = null;
   private initialFeedbackRules = [
     {
       id: 'isDefault',
@@ -50,19 +47,9 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       feedback: [$localize`Default feedback`]
     }
   ];
-  protected isVerifyingCRaterItemId: boolean;
   protected nodeIds: string[] = [];
   useCustomCompletionCriteria: boolean;
   protected showIdeaDescriptions = true;
-
-  constructor(
-    protected cRaterService: CRaterService,
-    protected nodeService: TeacherNodeService,
-    protected notebookService: NotebookService,
-    protected teacherProjectService: TeacherProjectService
-  ) {
-    super(nodeService, notebookService, teacherProjectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -139,15 +126,6 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       this.componentContent.cRater.scoringRules.splice(index, 1);
       this.componentChanged();
     }
-  }
-
-  verifyCRaterItemId(itemId: string): void {
-    this.cRaterItemIdIsValid = null;
-    this.isVerifyingCRaterItemId = true;
-    this.cRaterService.makeCRaterVerifyRequest(itemId).then((response: any) => {
-      this.isVerifyingCRaterItemId = false;
-      this.cRaterItemIdIsValid = response.available;
-    });
   }
 
   addMultipleAttemptScoringRule(): void {
