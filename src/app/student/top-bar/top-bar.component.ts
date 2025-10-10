@@ -14,7 +14,6 @@ import { getAvatarColorForWorkgroupId } from '../../../assets/wise5/common/workg
 import { Language } from '../../domain/language';
 import { StudentProjectTranslationService } from '../../../assets/wise5/services/studentProjectTranslationService';
 import { ProjectLocale } from '../../domain/projectLocale';
-import { StudentAccountMenuModule } from '../../../assets/wise5/vle/student-account-menu/student-account-menu.module';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { DismissAmbientNotificationDialogModule } from '../../../assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.module';
@@ -37,10 +36,10 @@ import { ProjectLanguageChooserComponent } from '../../common/project-language-c
     MatProgressSpinnerModule,
     MatToolbarModule,
     ProjectLanguageChooserComponent,
-    StudentAccountMenuModule
+    StudentAccountMenuComponent
   ],
   selector: 'top-bar',
-  styleUrls: ['./top-bar.component.scss'],
+  styleUrl: './top-bar.component.scss',
   templateUrl: 'top-bar.component.html'
 })
 export class TopBarComponent {
@@ -70,7 +69,7 @@ export class TopBarComponent {
     private projectTranslationService: StudentProjectTranslationService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.avatarColor = getAvatarColorForWorkgroupId(this.configService.getWorkgroupId());
     this.logoURL = `${this.projectService.getThemePath()}/images/WISE-logo-ffffff.svg`;
     this.isPreview = this.configService.isPreview();
@@ -85,7 +84,7 @@ export class TopBarComponent {
     this.setHomeURL();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
