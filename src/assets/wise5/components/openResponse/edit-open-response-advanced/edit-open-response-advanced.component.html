@@ -538,14 +538,11 @@
     }
   </div>
   <div class="section-container">
-    @if (showIdeaDescriptions) {
-      <edit-crater-idea-descriptions
-        [ideaDescriptions]="componentContent.cRater.rubric.ideas"
-        [enableAutoscrolling]="false"
-      />
-      <a (click)="toggleShowIdeaDescriptions()" i18n>Hide</a>
+    @if (showCRaterInfo) {
+      <a (click)="toggleShowCRaterInfo()" i18n>Hide CRater Information</a>
+      <edit-crater-info [cRaterRubric]="componentContent.cRater.rubric" />
     } @else {
-      <a (click)="toggleShowIdeaDescriptions()" i18n>Show Idea Descriptions</a>
+      <a (click)="toggleShowCRaterInfo()" i18n>Show CRater Information</a>
     }
   </div>
 }

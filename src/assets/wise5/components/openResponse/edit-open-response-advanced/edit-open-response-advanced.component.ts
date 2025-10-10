@@ -12,10 +12,10 @@ import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/e
 import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { TranslatableTextareaComponent } from '../../../authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { ComponentContent } from '../../../common/ComponentContent';
-import { EditCRaterIdeaDescriptionsComponent } from '../../common/cRater/edit-crater-idea-descriptions/edit-crater-idea-descriptions.component';
 import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
 import { OpenResponseContent } from '../OpenResponseContent';
 import { CRaterItemSelectComponent } from '../../common/cRater/crater-item-select/crater-item-select.component';
+import { EditCRaterInfoComponent } from '../../common/cRater/edit-crater-info/edit-crater-info.component';
 
 @Component({
   imports: [
@@ -29,9 +29,9 @@ import { CRaterItemSelectComponent } from '../../common/cRater/crater-item-selec
     EditFeedbackRulesComponent,
     MatTooltip,
     MatIcon,
-    EditCRaterIdeaDescriptionsComponent,
     EditComponentAddToNotebookButtonComponent,
     EditCommonAdvancedComponent,
+    EditCRaterInfoComponent,
     CRaterItemSelectComponent
   ],
   styleUrl: 'edit-open-response-advanced.component.scss',
@@ -48,8 +48,8 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   ];
   protected nodeIds: string[] = [];
+  protected showCRaterInfo: boolean;
   useCustomCompletionCriteria: boolean;
-  protected showIdeaDescriptions = true;
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -59,6 +59,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
     if (this.componentContent.enableCRater) {
       this.createCRaterAndRubricIfNull();
+      this.showCRaterInfo = true;
     }
   }
 
@@ -279,8 +280,8 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   }
 
-  protected toggleShowIdeaDescriptions(): void {
-    this.showIdeaDescriptions = !this.showIdeaDescriptions;
+  protected toggleShowCRaterInfo(): void {
+    this.showCRaterInfo = !this.showCRaterInfo;
   }
 
   getComponents(nodeId: string): ComponentContent[] {
