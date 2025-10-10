@@ -10,7 +10,6 @@ import { HtmlStudentComponent } from '../html/html-student/html-student.componen
 import { LabelStudentComponent } from '../label/label-student/label-student.component';
 import { MatchStudentModule } from '../match/match-student/match-student.module';
 import { OpenResponseStudentModule } from '../openResponse/open-response-student/open-response-student.module';
-import { PeerChatStudentModule } from '../peerChat/peer-chat-student/peer-chat-student.module';
 import { ShowGroupWorkStudentModule } from '../showGroupWork/show-group-work-student/show-group-work-student.module';
 import { ShowMyWorkStudentModule } from '../showMyWork/show-my-work-student/show-my-work-student.module';
 import { SummaryStudentModule } from '../summary/summary-student/summary-student.module';
@@ -26,6 +25,7 @@ import { DrawStudent } from '../draw/draw-student/draw-student.component';
 import { EmbeddedStudent } from '../embedded/embedded-student/embedded-student.component';
 import { GraphStudent } from '../graph/graph-student/graph-student.component';
 import { OutsideUrlStudent } from '../outsideURL/outside-url-student/outside-url-student.component';
+import { PeerChatStudentComponent } from '../peerChat/peer-chat-student/peer-chat-student.component';
 
 @NgModule({
   imports: [
@@ -48,7 +48,7 @@ import { OutsideUrlStudent } from '../outsideURL/outside-url-student/outside-url
     MultipleChoiceStudentComponent,
     OpenResponseStudentModule,
     OutsideUrlStudent,
-    PeerChatStudentModule,
+    PeerChatStudentComponent,
     PreviewComponentComponent,
     ShowGroupWorkStudentModule,
     ShowMyWorkStudentModule,
