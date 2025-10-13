@@ -3,12 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
+import { MatButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'wise-link',
-    templateUrl: './wise-link.component.html',
-    styleUrls: ['./wise-link.component.scss'],
-    standalone: false
+  imports: [MatButton, MatTooltip],
+  selector: 'wise-link',
+  templateUrl: './wise-link.component.html'
 })
 export class WiseLinkComponent implements OnInit {
   @Input() linkClass: string;
@@ -17,10 +18,10 @@ export class WiseLinkComponent implements OnInit {
   @Input() type: string;
 
   constructor(
+    private dataService: StudentDataService,
     private dialog: MatDialog,
     private notebookService: NotebookService,
-    private projectService: ProjectService,
-    private studentDataService: StudentDataService
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -32,9 +33,9 @@ export class WiseLinkComponent implements OnInit {
     }
   }
 
-  goToStep(): void {
+  protected goToStep(): void {
     this.dialog.closeAll();
     this.notebookService.closeNotes();
-    this.studentDataService.setCurrentNodeByNodeId(this.nodeId);
+    this.dataService.setCurrentNodeByNodeId(this.nodeId);
   }
 }

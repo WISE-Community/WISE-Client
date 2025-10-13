@@ -1,11 +1,11 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { MatDialog } from '@angular/material/dialog';
 import { NotebookService } from '../../services/notebookService';
 import { StudentDataService } from '../../services/studentDataService';
 import { WiseLinkComponent } from './wise-link.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockProviders } from 'ng-mocks';
+import { ProjectService } from '../../services/projectService';
 
 describe('WiseLinkComponent', () => {
   let component: WiseLinkComponent;
@@ -14,10 +14,12 @@ describe('WiseLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [WiseLinkComponent],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [WiseLinkComponent],
+      providers: [
+        MockProviders(MatDialog, NotebookService, ProjectService, StudentDataService),
+        provideHttpClient()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -34,7 +36,7 @@ describe('WiseLinkComponent', () => {
       'setCurrentNodeByNodeId'
     );
     component.nodeId = nodeId1;
-    component.goToStep();
+    component['goToStep']();
     expect(closeAllSpy).toHaveBeenCalled();
     expect(closeNotesSpy).toHaveBeenCalled();
     expect(setCurrentNodeByNodeIdSpy).toHaveBeenCalledWith(nodeId1);

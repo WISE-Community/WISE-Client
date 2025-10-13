@@ -9,8 +9,7 @@
   >
     {{ linkText }}
   </a>
-}
-@if (type === 'button') {
+} @else if (type === 'button') {
   <button
     mat-raised-button
     color="primary"

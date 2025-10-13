@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
 import { WiseLinkComponent } from '../../../../directives/wise-link/wise-link.component';
 import { ProjectService } from '../../../../services/projectService';
@@ -19,8 +18,8 @@ describe('EditNotebookItemDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditNotebookItemDialogComponent, WiseLinkComponent],
-    imports: [BrowserAnimationsModule,
+      declarations: [EditNotebookItemDialogComponent],
+      imports: [
         FormsModule,
         MatDialogModule,
         MatFormFieldModule,
@@ -28,34 +27,36 @@ describe('EditNotebookItemDialogComponent', () => {
         MatInputModule,
         MatToolbarModule,
         ReactiveFormsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
+        WiseLinkComponent,
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [
         {
-            provide: MAT_DIALOG_DATA,
-            useValue: {
-                notebookConfig: {
-                    itemTypes: {
-                        note: {
-                            label: {
-                                color: 'white',
-                                plural: 'notes',
-                                singular: 'note'
-                            }
-                        }
-                    }
+          provide: MAT_DIALOG_DATA,
+          useValue: {
+            notebookConfig: {
+              itemTypes: {
+                note: {
+                  label: {
+                    color: 'white',
+                    plural: 'notes',
+                    singular: 'note'
+                  }
                 }
+              }
             }
+          }
         },
         {
-            provide: MatDialogRef,
-            useValue: {
-                close: () => { }
-            }
+          provide: MatDialogRef,
+          useValue: {
+            close: () => {}
+          }
         },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
