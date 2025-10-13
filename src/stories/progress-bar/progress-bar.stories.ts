@@ -19,15 +19,13 @@ const meta: Meta<MatProgressBarStoryType> = {
     mode: {
       control: 'select',
       options: ['determinate', 'indeterminate', 'buffer', 'query'],
-      defaultValue: 'determinate'
+      default: 'determinate'
     },
     value: {
-      control: 'number',
-      defaultValue: 30
+      control: 'number'
     },
     bufferValue: {
-      control: 'number',
-      defaultValue: 60
+      control: 'number'
     }
   }
 };
@@ -40,9 +38,9 @@ export const Basic: Story = {
     props: args,
     template: `
       <mat-progress-bar
-        [mode]="mode"
-        [value]="value"
-        [bufferValue]="bufferValue">
+        mode="${args.mode}"
+        value="${args.value}"
+        bufferValue="${args.bufferValue}">
       </mat-progress-bar>
     `
   }),

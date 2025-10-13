@@ -208,7 +208,7 @@ html {
     margin: 4px 8px;
     padding: 0 8px;
     border-radius: 6px;
-    min-height: 42px;
+    min-height: 44px;
 
     &:first-of-type {
       margin-top: 0;
@@ -216,6 +216,49 @@ html {
 
     &:last-of-type {
       margin-bottom: 0;
+    }
+  }
+
+  /* Tabs */
+
+  @include mat.tabs-overrides((
+    active-indicator-height: 4px,
+    active-indicator-shape: var(--mat-sys-corner-small),
+    container-height: 40px,
+    inactive-hover-label-text-color: var(--mat-sys-on-surface),
+    inactive-label-text-color: var(--mat-sys-outline),
+  ));
+
+  .mat-mdc-tab-ripple.mat-mdc-tab-ripple, .mat-mdc-tab .mdc-tab__ripple::before {
+    border-top-right-radius: var(--mat-sys-corner-small);
+    border-top-left-radius: var(--mat-sys-corner-small);
+  }
+
+  .mat-mdc-tab-group-inverted-header {
+    .mat-mdc-tab-ripple.mat-mdc-tab-ripple, .mat-mdc-tab .mdc-tab__ripple::before {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: var(--mat-sys-corner-small);
+      border-bottom-left-radius: var(--mat-sys-corner-small);
+    }
+  }
+
+  .mat-tab-body-content-can-animate {
+    transition: none;
+  }
+
+  .mat-mdc-tab-body.mat-mdc-tab-body-active {
+    animation: tabFade 500ms;
+  }
+
+
+  @keyframes tabFade {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
     }
   }
 
