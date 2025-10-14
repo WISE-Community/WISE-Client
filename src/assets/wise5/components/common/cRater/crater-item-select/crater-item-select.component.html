@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label i18n>AI Model ID</mat-label>
+  <mat-select [(ngModel)]="selectedItemId" (selectionChange)="getItemRubric()">
+    @for (itemId of itemIds; track itemId) {
+      <mat-option [value]="itemId">{{ itemId }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
