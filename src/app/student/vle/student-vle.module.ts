@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentStudentModule } from '../../../assets/wise5/components/component/component-student.module';
 import { GenerateImageDialogComponent } from '../../../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
-import { SimpleDialogModule } from '../../../assets/wise5/directives/simple-dialog.module';
 import { InitializeVLEService } from '../../../assets/wise5/services/initializeVLEService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
@@ -28,7 +27,6 @@ import { StudentAssetsDialogComponent } from '../../../assets/wise5/vle/studentA
     CommonModule,
     ComponentStudentModule,
     MatDialogModule,
-    SimpleDialogModule,
     StudentAssetsDialogComponent,
     StudentComponentModule,
     StudentTeacherCommonModule,
