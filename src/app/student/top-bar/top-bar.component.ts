@@ -16,7 +16,6 @@ import { StudentProjectTranslationService } from '../../../assets/wise5/services
 import { ProjectLocale } from '../../domain/projectLocale';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { DismissAmbientNotificationDialogModule } from '../../../assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -27,7 +26,6 @@ import { ProjectLanguageChooserComponent } from '../../common/project-language-c
 @Component({
   imports: [
     CommonModule,
-    DismissAmbientNotificationDialogModule,
     MatBadgeModule,
     MatButtonModule,
     MatDialogModule,
