@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { Component as WISEComponent } from '../../../common/Component';
-import { DragAndDropModule } from '../../../common/drag-and-drop/drag-and-drop.module';
 import { CommonModule } from '@angular/common';
+import { DragAndDropDirective } from '../../../common/drag-and-drop/drag-and-drop.directive';
 
 @Component({
-  imports: [CommonModule, DragAndDropModule],
+  imports: [CommonModule, DragAndDropDirective],
   selector: 'student-assets',
   styleUrl: './student-assets.component.scss',
   templateUrl: './student-assets.component.html'
