@@ -29,7 +29,6 @@ import { EditCRaterInfoComponent } from '../../common/cRater/edit-crater-info/ed
     MatFormFieldModule
   ],
   selector: 'dialog-guidance-authoring',
-  styles: ['edit-feedback-rules { margin-bottom: 16px; } '],
   templateUrl: './dialog-guidance-authoring.component.html'
 })
 export class DialogGuidanceAuthoringComponent extends AbstractComponentAuthoring {
