@@ -48,7 +48,6 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     }
   ];
   protected nodeIds: string[] = [];
-  protected showCRaterInfo: boolean;
   useCustomCompletionCriteria: boolean;
 
   ngOnInit(): void {
@@ -59,7 +58,6 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
     this.nodeIds = this.teacherProjectService.getFlattenedProjectAsNodeIds();
     if (this.componentContent.enableCRater) {
       this.createCRaterAndRubricIfNull();
-      this.showCRaterInfo = true;
     }
   }
 
@@ -278,10 +276,6 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       this.componentContent.completionCriteria.criteria.splice(index, 1);
       this.componentChanged();
     }
-  }
-
-  protected toggleShowCRaterInfo(): void {
-    this.showCRaterInfo = !this.showCRaterInfo;
   }
 
   getComponents(nodeId: string): ComponentContent[] {

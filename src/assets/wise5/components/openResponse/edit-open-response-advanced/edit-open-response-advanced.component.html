@@ -24,7 +24,7 @@
     (ngModelChange)="enableCRaterClicked()"
     i18n
   >
-    Enable CRater
+    Enable AI Model
   </mat-checkbox>
 </div>
 @if (componentContent.enableCRater) {
@@ -538,11 +538,8 @@
     }
   </div>
   <div class="section-container">
-    @if (showCRaterInfo) {
-      <a (click)="toggleShowCRaterInfo()" i18n>Hide CRater Information</a>
+    @if (componentContent.enableCRater) {
       <edit-crater-info [cRaterRubric]="componentContent.cRater.rubric" />
-    } @else {
-      <a (click)="toggleShowCRaterInfo()" i18n>Show CRater Information</a>
     }
   </div>
 }
