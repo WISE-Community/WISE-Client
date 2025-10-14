@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
-import { NotebookService } from '../../services/notebookService';
 import { StudentDataService } from '../../services/studentDataService';
 import { WiseLinkComponent } from './wise-link.component';
 import { provideHttpClient } from '@angular/common/http';
@@ -15,10 +14,7 @@ describe('WiseLinkComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [WiseLinkComponent],
-      providers: [
-        MockProviders(MatDialog, NotebookService, ProjectService, StudentDataService),
-        provideHttpClient()
-      ]
+      providers: [MockProviders(MatDialog, ProjectService, StudentDataService), provideHttpClient()]
     }).compileComponents();
   });
 
@@ -30,7 +26,6 @@ describe('WiseLinkComponent', () => {
 
   it('should go to step', () => {
     const closeAllSpy = spyOn(TestBed.inject(MatDialog), 'closeAll');
-    const closeNotesSpy = spyOn(TestBed.inject(NotebookService), 'closeNotes');
     const setCurrentNodeByNodeIdSpy = spyOn(
       TestBed.inject(StudentDataService),
       'setCurrentNodeByNodeId'
@@ -38,7 +33,6 @@ describe('WiseLinkComponent', () => {
     component.nodeId = nodeId1;
     component['goToStep']();
     expect(closeAllSpy).toHaveBeenCalled();
-    expect(closeNotesSpy).toHaveBeenCalled();
     expect(setCurrentNodeByNodeIdSpy).toHaveBeenCalledWith(nodeId1);
   });
 });

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NotebookService } from '../../services/notebookService';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { MatButton } from '@angular/material/button';
@@ -20,7 +19,6 @@ export class WiseLinkComponent implements OnInit {
   constructor(
     private dataService: StudentDataService,
     private dialog: MatDialog,
-    private notebookService: NotebookService,
     private projectService: ProjectService
   ) {}
 
@@ -35,7 +33,6 @@ export class WiseLinkComponent implements OnInit {
 
   protected goToStep(): void {
     this.dialog.closeAll();
-    this.notebookService.closeNotes();
     this.dataService.setCurrentNodeByNodeId(this.nodeId);
   }
 }

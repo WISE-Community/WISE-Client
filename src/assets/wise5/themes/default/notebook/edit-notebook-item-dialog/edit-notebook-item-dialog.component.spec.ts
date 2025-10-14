@@ -1,13 +1,7 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
-import { WiseLinkComponent } from '../../../../directives/wise-link/wise-link.component';
 import { ProjectService } from '../../../../services/projectService';
 import { EditNotebookItemDialogComponent } from './edit-notebook-item-dialog.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -18,18 +12,7 @@ describe('EditNotebookItemDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditNotebookItemDialogComponent],
-      imports: [
-        FormsModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatToolbarModule,
-        ReactiveFormsModule,
-        WiseLinkComponent,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [EditNotebookItemDialogComponent, StudentTeacherCommonServicesModule],
       providers: [
         {
           provide: MAT_DIALOG_DATA,
