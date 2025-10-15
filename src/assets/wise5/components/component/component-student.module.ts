@@ -13,7 +13,6 @@ import { ShowGroupWorkStudentModule } from '../showGroupWork/show-group-work-stu
 import { ShowMyWorkStudentModule } from '../showMyWork/show-my-work-student/show-my-work-student.module';
 import { TableStudentComponent } from '../table/table-student/table-student.component';
 import { ComponentComponent } from './component.component';
-import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
 import { MultipleChoiceStudentComponent } from '../multipleChoice/multiple-choice-student/multiple-choice-student.component';
 import { DialogGuidanceStudentComponent } from '../dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
 import { StudentAssetsDialogComponent } from '../../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
@@ -40,7 +39,6 @@ import { MatchStudent } from '../match/match-student/match-student.component';
     DrawStudent,
     EmbeddedStudent,
     GraphStudent,
-    HelpIconComponent,
     HighchartsChartModule,
     HtmlStudentComponent,
     LabelStudentComponent,
