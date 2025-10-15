@@ -339,7 +339,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
-          <context context-type="linenumber">15,21</context>
+          <context context-type="linenumber">13,19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
@@ -10481,7 +10481,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">220</context>
         </context-group>
       </trans-unit>
       <trans-unit id="537022937435161177" datatype="html">
@@ -10496,7 +10496,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">221</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3407061818321766940" datatype="html">
@@ -21651,14 +21651,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Importing Work...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
-          <context context-type="linenumber">7,11</context>
+          <context context-type="linenumber">6,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4802466172417582505" datatype="html">
         <source>Error: Failed to import work.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/generate-image-dialog/generate-image-dialog.component.html</context>
-          <context context-type="linenumber">13,14</context>
+          <context context-type="linenumber">11,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7745872778453660862" datatype="html">
@@ -22163,28 +22163,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Preview Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1967824796880640028" datatype="html">
         <source>StudentDataService.saveComponentEvent: component, category, event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">243</context>
+          <context context-type="linenumber">247</context>
         </context-group>
       </trans-unit>
       <trans-unit id="944638387659785956" datatype="html">
         <source>StudentDataService.saveComponentEvent: nodeId, componentId, componentType must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">253</context>
+          <context context-type="linenumber">257</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4924640921903672943" datatype="html">
         <source>StudentDataService.saveVLEEvent: category and event args must not be null</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/studentDataService.ts</context>
-          <context context-type="linenumber">262</context>
+          <context context-type="linenumber">266</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3178064088723974543" datatype="html">

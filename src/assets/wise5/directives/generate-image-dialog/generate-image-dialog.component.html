@@ -1,14 +1,12 @@
 <div class="modal-overlay flex justify-center items-center">
-  >
   @if (isImportingWork) {
     <div
       class="importing-work-message yellow-background flex-col justify-center items-center gap-5"
     >
       <span i18n>Importing Work...</span>
-      <mat-spinner></mat-spinner>
+      <mat-spinner />
     </div>
-  }
-  @if (isFailedToImportWork) {
+  } @else if (isFailedToImportWork) {
     <div class="importing-work-message red-background flex-col justify-center items-center gap-5">
       <span i18n>Error: Failed to import work.</span>
       <button mat-stroked-button class="white" (click)="closeDialog()">

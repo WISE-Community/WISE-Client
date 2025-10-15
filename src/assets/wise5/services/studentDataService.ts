@@ -36,6 +36,10 @@ export class StudentDataService extends DataService {
   public componentStudentData$: Observable<any> = this.componentStudentDataSource.asObservable();
   private dataRetrievedSource: Subject<any> = new Subject<any>();
   public dataRetrieved$: Observable<any> = this.dataRetrievedSource.asObservable();
+  private generateImageResponseSource: Subject<any> = new Subject<any>();
+  public generateImageResponse$: Observable<any> = this.generateImageResponseSource.asObservable();
+  private generateImageRequestSource: Subject<any> = new Subject<any>();
+  public generateImageRequest$: Observable<any> = this.generateImageRequestSource.asObservable();
   private studentWorkSavedToServerSource: Subject<any> = new Subject<any>();
   public studentWorkSavedToServer$: Observable<any> =
     this.studentWorkSavedToServerSource.asObservable();
@@ -652,5 +656,11 @@ export class StudentDataService extends DataService {
   }
   setNavItemExpanded(nodeId: string, isExpanded: boolean) {
     this.navItemIsExpandedSource.next({ nodeId: nodeId, isExpanded: isExpanded });
+  }
+  generateImageRequest(componentState: any): void {
+    this.generateImageRequestSource.next(componentState);
+  }
+  generateImageResponse(componentState: any): void {
+    this.generateImageResponseSource.next(componentState);
   }
 }

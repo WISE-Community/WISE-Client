@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { ComponentState } from '../../../app/domain/componentState';
 import { Component } from '../common/Component';
 import { copy } from '../common/object/object';
-import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NodeService } from '../services/nodeService';
@@ -18,6 +17,7 @@ import { ComponentService } from './componentService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
 import { Annotation } from '../common/Annotation';
+import $ from 'jquery';
 
 @Directive()
 export abstract class ComponentStudent {
@@ -613,12 +613,10 @@ export abstract class ComponentStudent {
    * @return A promise that will return an image.
    */
   generateImageFromComponentState(componentState: any): any {
-    const dialogRef = this.dialog.open(GenerateImageDialogComponent, {
-      data: componentState
-    });
+    this.studentDataService.generateImageRequest(componentState);
     return new Promise((resolve, reject) => {
-      dialogRef.afterClosed().subscribe((result) => {
-        resolve(result);
+      this.studentDataService.generateImageResponse$.subscribe((image) => {
+        resolve(image);
       });
     });
   }
