@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ChoiceChosenConstraintStrategy } from './ChoiceChosenConstraintStrategy';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { ComponentServiceLookupServiceModule } from '../../../services/componentServiceLookupServiceModule';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProviders } from 'ng-mocks';
+import { provideHttpClient } from '@angular/common/http';
+import { MultipleChoiceService } from '../../../components/multipleChoice/multipleChoiceService';
 
 const choiceId1 = 'choice1';
 const choiceId2 = 'choice2';
@@ -25,16 +24,17 @@ const criteria = {
     choiceIds: choiceId1
   }
 };
-
 describe('ChoiceChosenConstraintStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [ComponentServiceLookupServiceModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [
+        MockProviders(ComponentServiceLookupService, MultipleChoiceService, StudentDataService),
+        provideHttpClient()
+      ]
+    });
     strategy = new ChoiceChosenConstraintStrategy();
     componentServiceLookupService = TestBed.inject(ComponentServiceLookupService);
+    spyOn(componentServiceLookupService, 'getService').and.returnValue(new MultipleChoiceService());
     strategy.componentServiceLookupService = componentServiceLookupService;
     dataService = TestBed.inject(StudentDataService);
     strategy.dataService = dataService;
