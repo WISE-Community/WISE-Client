@@ -12,7 +12,6 @@ import { MatchStudentModule } from '../match/match-student/match-student.module'
 import { OpenResponseStudentModule } from '../openResponse/open-response-student/open-response-student.module';
 import { ShowGroupWorkStudentModule } from '../showGroupWork/show-group-work-student/show-group-work-student.module';
 import { ShowMyWorkStudentModule } from '../showMyWork/show-my-work-student/show-my-work-student.module';
-import { SummaryStudentModule } from '../summary/summary-student/summary-student.module';
 import { TableStudentComponent } from '../table/table-student/table-student.component';
 import { ComponentComponent } from './component.component';
 import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon/help-icon.component';
@@ -26,6 +25,7 @@ import { EmbeddedStudent } from '../embedded/embedded-student/embedded-student.c
 import { GraphStudent } from '../graph/graph-student/graph-student.component';
 import { OutsideUrlStudent } from '../outsideURL/outside-url-student/outside-url-student.component';
 import { PeerChatStudentComponent } from '../peerChat/peer-chat-student/peer-chat-student.component';
+import { SummaryStudent } from '../summary/summary-student/summary-student.component';
 
 @NgModule({
   imports: [
@@ -54,7 +54,7 @@ import { PeerChatStudentComponent } from '../peerChat/peer-chat-student/peer-cha
     ShowMyWorkStudentModule,
     StudentAssetsDialogComponent,
     StudentComponentModule,
-    SummaryStudentModule,
+    SummaryStudent,
     TableStudentComponent
   ],
   exports: [ComponentComponent, PreviewComponentComponent]
