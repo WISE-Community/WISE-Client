@@ -18,7 +18,6 @@ import { MilestoneModule } from './milestone/milestone.module';
 import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component';
 import { RouterModule } from '@angular/router';
-import { PreviewComponentComponent } from '../../assets/wise5/authoringTool/components/preview-component/preview-component.component';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
@@ -37,7 +36,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     NotificationsMenuComponent,
     PauseScreensMenuComponent,
     PeerGroupGradingModule,
-    PreviewComponentComponent,
     RouterModule,
     SelectPeriodComponent,
     StepItemComponent,

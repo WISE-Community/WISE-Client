@@ -1,8 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentComponentModule } from '../../../../app/student/student.component.module';
-import { PreviewComponentComponent } from '../../authoringTool/components/preview-component/preview-component.component';
 import { AnimationStudent } from '../animation/animation-student/animation-student.component';
 import { ConceptMapStudent } from '../conceptMap/concept-map-student/concept-map-student.component';
 import { DiscussionStudent } from '../discussion/discussion-student/discussion-student.component';
@@ -31,7 +29,6 @@ import { MatchStudent } from '../match/match-student/match-student.component';
     AiChatStudentComponent,
     AnimationStudent,
     AudioOscillatorStudent,
-    CommonModule,
     ComponentComponent,
     ConceptMapStudent,
     DialogGuidanceStudentComponent,
@@ -47,7 +44,6 @@ import { MatchStudent } from '../match/match-student/match-student.component';
     OpenResponseStudentModule,
     OutsideUrlStudent,
     PeerChatStudentComponent,
-    PreviewComponentComponent,
     ShowGroupWorkStudentModule,
     ShowMyWorkStudentModule,
     StudentAssetsDialogComponent,
@@ -55,6 +51,6 @@ import { MatchStudent } from '../match/match-student/match-student.component';
     SummaryStudent,
     TableStudentComponent
   ],
-  exports: [ComponentComponent, PreviewComponentComponent]
+  exports: [ComponentComponent]
 })
 export class ComponentStudentModule {}
