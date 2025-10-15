@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { Notification } from '../../../../../../app/domain/notification';
-import { DialogWithConfirmComponent } from '../../../../directives/dialog-with-confirm/dialog-with-confirm.component';
 import { NotificationService } from '../../../../services/notificationService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { NotificationsMenuComponent } from './notifications-menu.component';
@@ -19,7 +18,6 @@ const notification2 = new Notification({ nodeId: NODE_ID_2 });
 describe('NotificationsMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DialogWithConfirmComponent],
       imports: [ClassroomMonitorTestingModule, NotificationsMenuComponent],
       providers: [
         { provide: MatDialog, useValue: { open: () => {} } },

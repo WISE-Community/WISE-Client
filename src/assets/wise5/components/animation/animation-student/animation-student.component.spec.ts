@@ -1,12 +1,13 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { AnimationService } from '../animationService';
 import { AnimationStudent } from './animation-student.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockComponents } from 'ng-mocks';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 let component: AnimationStudent;
 const componentId = 'component1';
@@ -38,11 +39,17 @@ const object1 = {
 describe('AnimationStudent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [AnimationStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [
+        AnimationStudent,
+        StudentTeacherCommonServicesModule,
+        MockComponents(
+          ComponentHeaderComponent,
+          ComponentSaveSubmitButtonsComponent,
+          ComponentAnnotationsComponent
+        )
+      ],
+      providers: [provideHttpClient()]
+    });
     fixture = TestBed.createComponent(AnimationStudent);
     component = fixture.componentInstance;
     const componentContent = TestBed.inject(AnimationService).createComponent();

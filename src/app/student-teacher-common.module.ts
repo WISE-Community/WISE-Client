@@ -31,7 +31,6 @@ import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { EditNotebookItemDialogModule } from '../assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.module';
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
@@ -42,7 +41,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     CommonModule,
     DialogResponsesComponent,
     DragDropModule,
-    EditNotebookItemDialogModule,
     EditorModule,
     FormsModule,
     HighchartsChartModule,

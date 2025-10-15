@@ -652,7 +652,7 @@ export class LabelStudentComponent extends ComponentStudent {
 
   snipImage(): void {
     this.notebookService.addNote(
-      this.StudentDataService.getCurrentNodeId(),
+      this.studentDataService.getCurrentNodeId(),
       convertToPNGFile(this.canvas)
     );
   }

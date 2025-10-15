@@ -8,9 +8,12 @@ import { GraphService } from '../../components/graph/graphService';
 import { LabelService } from '../../components/label/labelService';
 import { TableService } from '../../components/table/tableService';
 import { NodeService } from '../../services/nodeService';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatButton } from '@angular/material/button';
+import { ComponentComponent } from '../../components/component/component.component';
 
 @Component({
-  standalone: false,
+  imports: [MatProgressSpinner, MatButton, ComponentComponent],
   styleUrl: './generate-image-dialog.component.scss',
   templateUrl: './generate-image-dialog.component.html'
 })

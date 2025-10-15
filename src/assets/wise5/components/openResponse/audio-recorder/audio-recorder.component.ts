@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 
 class Attachment {
   type: string;
@@ -9,9 +12,9 @@ class Attachment {
 }
 
 @Component({
-    selector: 'audio-recorder',
-    templateUrl: './audio-recorder.component.html',
-    standalone: false
+  imports: [MatButton, MatIcon, MatIconButton, MatTooltip],
+  selector: 'audio-recorder',
+  templateUrl: './audio-recorder.component.html'
 })
 export class AudioRecorderComponent implements OnInit {
   @Output() attachAudioRecording: EventEmitter<Attachment> = new EventEmitter<Attachment>();

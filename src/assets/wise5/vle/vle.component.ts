@@ -1,5 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { AfterViewInit, Component, HostListener, TemplateRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  TemplateRef,
+  ViewChild,
+  inject
+} from '@angular/core';
 import { AnnotationService } from '../services/annotationService';
 import { CommonModule } from '@angular/common';
 import { ConfigService } from '../services/configService';
@@ -23,6 +30,7 @@ import { RunEndedAndLockedMessageComponent } from './run-ended-and-locked-messag
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { SafeUrl } from '../directives/safeUrl/safe-url.pipe';
 import { SessionService } from '../services/sessionService';
+import { GenerateImageService } from '../services/generateImageService';
 import { StepToolsComponent } from '../themes/default/themeComponents/stepTools/step-tools.component';
 import { StudentDataService } from '../services/studentDataService';
 import { StudentService } from '../../../app/student/student.service';
@@ -74,6 +82,7 @@ export class VLEComponent implements AfterViewInit {
     private annotationService: AnnotationService,
     private configService: ConfigService,
     private dialog: MatDialog,
+    private generateImageService: GenerateImageService, // need to keep a reference so it gets instantiated
     private initializeVLEService: InitializeVLEService,
     private nodeStatusService: NodeStatusService,
     private notebookService: NotebookService,
