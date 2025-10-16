@@ -15,11 +15,11 @@ import { Component as WISEComponent } from '../../../assets/wise5/common/Compone
 import { components } from '../../../assets/wise5/components/Components';
 
 @Component({
-  templateUrl: './edit-component-advanced.component.html',
+  imports: [MatDivider, MatDialogModule, MatButtonModule],
   styles: [
     '.mat-divider { margin: 0 -16px; } .mat-mdc-dialog-content { padding-top: 10px !important; padding-bottom: 10px !important; }'
   ],
-  imports: [MatDivider, MatDialogModule, MatButtonModule]
+  templateUrl: './edit-component-advanced.component.html'
 })
 export class EditComponentAdvancedComponent {
   @ViewChild('component') private componentElementRef: ElementRef;

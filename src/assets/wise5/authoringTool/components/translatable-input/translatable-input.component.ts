@@ -5,10 +5,10 @@ import { AbstractTranslatableFieldComponent } from '../abstract-translatable-fie
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'translatable-input',
+  encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, MatIconModule, MatInputModule],
+  selector: 'translatable-input',
   styleUrl: '../abstract-translatable-field/abstract-translatable-field.component.scss',
-  templateUrl: './translatable-input.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './translatable-input.component.html'
 })
 export class TranslatableInputComponent extends AbstractTranslatableFieldComponent {}

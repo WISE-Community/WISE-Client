@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-header-signin',
-    imports: [RouterModule],
-    templateUrl: './header-signin.component.html',
-    styleUrls: ['./header-signin.component.scss']
+  imports: [RouterModule],
+  selector: 'app-header-signin',
+  styleUrl: './header-signin.component.scss',
+  templateUrl: './header-signin.component.html'
 })
 export class HeaderSigninComponent {}

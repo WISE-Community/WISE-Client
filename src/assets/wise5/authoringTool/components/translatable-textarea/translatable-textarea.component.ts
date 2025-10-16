@@ -5,10 +5,10 @@ import { AbstractTranslatableFieldComponent } from '../abstract-translatable-fie
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'translatable-textarea',
+  encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, MatIconModule, MatInputModule],
+  selector: 'translatable-textarea',
   styleUrl: '../abstract-translatable-field/abstract-translatable-field.component.scss',
-  templateUrl: './translatable-textarea.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './translatable-textarea.component.html'
 })
 export class TranslatableTextareaComponent extends AbstractTranslatableFieldComponent {}

@@ -5,11 +5,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 type SelectAllItemsStatus = 'none' | 'some' | 'all';
 
 @Component({
-    imports: [MatCheckboxModule, MatTooltipModule],
-    providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
-    selector: 'select-all-items-checkbox',
-    styleUrl: 'select-all-items-checkbox.component.scss',
-    templateUrl: './select-all-items-checkbox.component.html'
+  imports: [MatCheckboxModule, MatTooltipModule],
+  providers: [{ provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } }],
+  selector: 'select-all-items-checkbox',
+  styleUrl: 'select-all-items-checkbox.component.scss',
+  templateUrl: './select-all-items-checkbox.component.html'
 })
 export class SelectAllItemsCheckboxComponent {
   @Output() allSelectedEvent: EventEmitter<void> = new EventEmitter<void>();

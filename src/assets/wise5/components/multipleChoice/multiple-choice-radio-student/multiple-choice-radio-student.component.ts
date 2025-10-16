@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
-    imports: [CommonModule, FormsModule, MatRadioModule],
-    selector: 'multiple-choice-radio-student',
-    templateUrl: './multiple-choice-radio-student.component.html'
+  imports: [CommonModule, FormsModule, MatRadioModule],
+  selector: 'multiple-choice-radio-student',
+  templateUrl: './multiple-choice-radio-student.component.html'
 })
 export class MultipleChoiceRadioStudentComponent {
   @Input() choices: any[];
