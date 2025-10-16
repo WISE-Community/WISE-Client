@@ -6,7 +6,6 @@ import { WorkgroupNodeScoreComponent } from '../../assets/wise5/classroomMonitor
 import { WorkgroupComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
 import { WorkgroupNodeStatusComponent } from '../classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupSelectAutocompleteComponent } from '../classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
-import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
 import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
@@ -19,7 +18,6 @@ import { StudentTeacherCommonServicesModule } from '../student-teacher-common-se
     EditComponentAnnotationsComponent,
     IntersectionObserverModule,
     NavItemProgressComponent,
-    StatusIconComponent,
     StudentTeacherCommonServicesModule,
     WorkgroupInfoComponent,
     WorkgroupComponentGradingComponent,
@@ -33,7 +31,6 @@ import { StudentTeacherCommonServicesModule } from '../student-teacher-common-se
     EditComponentAnnotationsComponent,
     IntersectionObserverModule,
     NavItemProgressComponent,
-    StatusIconComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupInfoComponent,
     WorkgroupNodeScoreComponent,
