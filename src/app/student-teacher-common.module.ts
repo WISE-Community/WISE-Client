@@ -25,7 +25,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
-import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
@@ -61,7 +60,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatSlideToggleModule,
     MatTooltipModule,
     MathModule,
-    NotebookModule,
     ReactiveFormsModule,
     ScrollingModule,
     StudentTeacherCommonServicesModule
@@ -95,7 +93,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatToolbarModule,
     MatTooltipModule,
     MathModule,
-    NotebookModule,
     ReactiveFormsModule
   ]
 })
