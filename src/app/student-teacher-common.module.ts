@@ -28,7 +28,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
-import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
@@ -37,7 +36,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   imports: [
     CommonModule,
-    DialogResponsesComponent,
     DragDropModule,
     EditorModule,
     FormsModule,
@@ -72,7 +70,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   ],
   exports: [
     CommonModule,
-    DialogResponsesComponent,
     DragDropModule,
     EditorModule,
     FormsModule,
