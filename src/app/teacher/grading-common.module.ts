@@ -6,11 +6,11 @@ import { WorkgroupNodeScoreComponent } from '../../assets/wise5/classroomMonitor
 import { WorkgroupComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/workgroup-component-grading/workgroup-component-grading.component';
 import { WorkgroupNodeStatusComponent } from '../classroom-monitor/workgroup-node-status/workgroup-node-status.component';
 import { WorkgroupSelectAutocompleteComponent } from '../classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
-import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { StatusIconComponent } from '../classroom-monitor/status-icon/status-icon.component';
 import { NavItemProgressComponent } from '../classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { ComponentGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/component-grading.component';
 import { ComponentStateInfoComponent } from '../../assets/wise5/common/component-state-info/component-state-info.component';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import { ComponentStateInfoComponent } from '../../assets/wise5/common/component
     IntersectionObserverModule,
     NavItemProgressComponent,
     StatusIconComponent,
-    StudentTeacherCommonModule,
+    StudentTeacherCommonServicesModule,
     WorkgroupInfoComponent,
     WorkgroupComponentGradingComponent,
     WorkgroupNodeScoreComponent,

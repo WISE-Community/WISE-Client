@@ -5,7 +5,6 @@ import { MilestoneDetailsComponent } from '../../../assets/wise5/classroomMonito
 import { MilestoneClassResponsesComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-class-responses/milestone-class-responses.component';
 import { MilestoneWorkgroupItemComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component';
 import { MilestonesComponent } from '../../classroom-monitor/milestones/milestones.component';
-import { StudentTeacherCommonModule } from '../../student-teacher-common.module';
 import { GradingCommonModule } from '../grading-common.module';
 import { MilestoneReportDataComponent } from './milestone-report-data/milestone-report-data.component';
 import { MilestoneReportGraphComponent } from './milestone-report-graph/milestone-report-graph.component';
@@ -15,7 +14,6 @@ import { SelectPeriodComponent } from '../../../assets/wise5/classroomMonitor/cl
   imports: [
     GradingCommonModule,
     SelectPeriodComponent,
-    StudentTeacherCommonModule,
     MilestonesComponent,
     MilestoneDetailsComponent,
     MilestoneDetailsDialogComponent,

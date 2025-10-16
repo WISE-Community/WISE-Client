@@ -8,7 +8,6 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { VLEComponent } from '../../../assets/wise5/vle/vle.component';
 import { VLEProjectService } from '../../../assets/wise5/vle/vleProjectService';
-import { StudentTeacherCommonModule } from '../../student-teacher-common.module';
 import { DataService } from '../../services/data.service';
 import { StudentComponentModule } from '../student.component.module';
 import { StudentVLERoutingModule } from './student-vle-routing.module';
@@ -20,6 +19,7 @@ import { StudentPeerGroupService } from '../../../assets/wise5/services/studentP
 import { PeerGroupService } from '../../../assets/wise5/services/peerGroupService';
 import { StudentAssetsDialogComponent } from '../../../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
 import { GenerateImageService } from '../../../assets/wise5/services/generateImageService';
+import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 
 @NgModule({
   imports: [
@@ -28,7 +28,7 @@ import { GenerateImageService } from '../../../assets/wise5/services/generateIma
     MatDialogModule,
     StudentAssetsDialogComponent,
     StudentComponentModule,
-    StudentTeacherCommonModule,
+    StudentTeacherCommonServicesModule,
     StudentVLERoutingModule,
     VLEComponent,
     VLEParentComponent

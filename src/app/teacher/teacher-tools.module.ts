@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-
-import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ProjectAssetService } from '../services/projectAssetService';
@@ -35,12 +33,7 @@ import { TeacherPauseScreenService } from '../../assets/wise5/services/teacherPa
 import { RunStatusService } from '../../assets/wise5/services/runStatusService';
 
 @NgModule({
-  imports: [
-    StudentTeacherCommonModule,
-    ClassroomMonitorModule,
-    RouterModule,
-    TeacherToolsRoutingModule
-  ],
+  imports: [ClassroomMonitorModule, RouterModule, TeacherToolsRoutingModule],
   providers: [
     ClassroomStatusService,
     CopyNodesService,
