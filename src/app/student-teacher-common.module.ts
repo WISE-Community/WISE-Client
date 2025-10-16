@@ -30,7 +30,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { NotebookModule } from './notebook/notebook.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { DialogResponsesComponent } from '../assets/wise5/components/dialogGuidance/dialog-responses/dialog-responses.component';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonServicesModule } from './student-teacher-common-services.module';
 import { MathModule } from './math/math.module';
 import { MatMenuModule } from '@angular/material/menu';
@@ -43,7 +42,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     DragDropModule,
     EditorModule,
     FormsModule,
-    HighchartsChartModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,

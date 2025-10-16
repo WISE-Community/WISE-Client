@@ -1,6 +1,5 @@
 import { Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { MilestoneDetailsDialogComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component';
 import { MilestoneDetailsComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component';
 import { MilestoneClassResponsesComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-class-responses/milestone-class-responses.component';
@@ -15,7 +14,6 @@ import { SelectPeriodComponent } from '../../../assets/wise5/classroomMonitor/cl
 @NgModule({
   imports: [
     GradingCommonModule,
-    HighchartsChartModule,
     SelectPeriodComponent,
     StudentTeacherCommonModule,
     MilestonesComponent,

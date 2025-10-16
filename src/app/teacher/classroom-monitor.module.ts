@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ComponentNewWorkBadgeComponent } from '../classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { PeerGroupGradingModule } from './peer-group-grading.module';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
@@ -28,7 +27,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     ComponentNewWorkBadgeComponent,
     ComponentStudentModule,
     GradingCommonModule,
-    HighchartsChartModule,
     ManageStudentsComponent,
     MilestoneModule,
     NavItemComponent,
