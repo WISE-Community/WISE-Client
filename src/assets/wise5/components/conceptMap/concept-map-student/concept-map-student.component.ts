@@ -16,12 +16,32 @@ import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatButton } from '@angular/material/button';
+import { AddToNotebookButtonComponent } from '../../../directives/add-to-notebook-button/add-to-notebook-button.component';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
-    selector: 'concept-map-student',
-    templateUrl: 'concept-map-student.component.html',
-    styleUrls: ['concept-map-student.component.scss'],
-    standalone: false
+  imports: [
+    ComponentHeaderComponent,
+    MatButton,
+    AddToNotebookButtonComponent,
+    MatTooltip,
+    MatIcon,
+    MatRadioGroup,
+    FormsModule,
+    MatRadioButton,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
+  selector: 'concept-map-student',
+  styleUrl: 'concept-map-student.component.scss',
+  templateUrl: 'concept-map-student.component.html'
 })
 export class ConceptMapStudent extends ComponentStudent {
   activeLink: any;
@@ -66,27 +86,27 @@ export class ConceptMapStudent extends ComponentStudent {
   width: number = 800;
 
   constructor(
-    protected AnnotationService: AnnotationService,
+    protected annotationService: AnnotationService,
     private changeDetector: ChangeDetectorRef,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
-    private ConceptMapService: ConceptMapService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
+    private conceptMapService: ConceptMapService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    private ProjectService: ProjectService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    private projectService: ProjectService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
@@ -119,15 +139,15 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   setIdsWithNodeIdComponentId(): void {
-    this.domIdEnding = this.ConceptMapService.getDomIdEnding(
+    this.domIdEnding = this.conceptMapService.getDomIdEnding(
       this.nodeId,
       this.componentId,
       this.componentState
     );
-    this.svgId = this.ConceptMapService.getSVGId(this.domIdEnding);
-    this.conceptMapContainerId = this.ConceptMapService.getConceptMapContainerId(this.domIdEnding);
-    this.selectNodeBarId = this.ConceptMapService.getSelectNodeBarId(this.domIdEnding);
-    this.feedbackContainerId = this.ConceptMapService.getFeedbackContainerId(this.domIdEnding);
+    this.svgId = this.conceptMapService.getSVGId(this.domIdEnding);
+    this.conceptMapContainerId = this.conceptMapService.getConceptMapContainerId(this.domIdEnding);
+    this.selectNodeBarId = this.conceptMapService.getSelectNodeBarId(this.domIdEnding);
+    this.feedbackContainerId = this.conceptMapService.getFeedbackContainerId(this.domIdEnding);
   }
 
   initializeWidth(): void {
@@ -159,7 +179,7 @@ export class ConceptMapStudent extends ComponentStudent {
     if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (this.componentStateHasStudentWork(this.componentState, this.componentContent)) {
-      this.componentState = this.ProjectService.injectAssetPaths(this.componentState);
+      this.componentState = this.projectService.injectAssetPaths(this.componentState);
       this.setStudentWork(this.componentState);
     } else if (this.component.hasConnectedComponent()) {
       this.handleConnectedComponents();
@@ -178,7 +198,7 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   componentStateHasStudentWork(componentState: any, componentContent: any): boolean {
-    return this.ConceptMapService.componentStateHasStudentWork(componentState, componentContent);
+    return this.conceptMapService.componentStateHasStudentWork(componentState, componentContent);
   }
 
   componentContentHasStarterConceptMap(): boolean {
@@ -215,7 +235,7 @@ export class ConceptMapStudent extends ComponentStudent {
   populateNodes(conceptMapData: any): void {
     this.nodes = [];
     for (const node of conceptMapData.nodes) {
-      const conceptMapNode = this.ConceptMapService.newConceptMapNode(
+      const conceptMapNode = this.conceptMapService.newConceptMapNode(
         this.draw,
         node.instanceId,
         node.originalId,
@@ -249,7 +269,7 @@ export class ConceptMapStudent extends ComponentStudent {
         destinationNode = this.getNodeById(destinationNodeId);
       }
 
-      const conceptMapLink = this.ConceptMapService.newConceptMapLink(
+      const conceptMapLink = this.conceptMapService.newConceptMapLink(
         this.draw,
         link.instanceId,
         link.originalId,
@@ -345,7 +365,7 @@ export class ConceptMapStudent extends ComponentStudent {
     const customRuleEvaluator = this.componentContent.customRuleEvaluator;
     const componentContent = this.componentContent;
     const conceptMapData = this.getConceptMapData();
-    const thisConceptMapService = this.ConceptMapService;
+    const thisConceptMapService = this.conceptMapService;
     let thisResult: any = {};
 
     /*
@@ -457,11 +477,11 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   addAnnotations(componentState: any): void {
-    const runId = this.ConfigService.getRunId();
-    const periodId = this.ConfigService.getPeriodId();
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
-    const toWorkgroupId = this.ConfigService.getWorkgroupId();
+    const toWorkgroupId = this.configService.getWorkgroupId();
     componentState.annotations = [];
     if (this.hasAutoFeedbackScore()) {
       this.addScoreAnnotation(componentState, runId, periodId, nodeId, componentId, toWorkgroupId);
@@ -493,7 +513,7 @@ export class ConceptMapStudent extends ComponentStudent {
     if (this.hasMaxScore()) {
       data.maxAutoScore = this.getMaxScore();
     }
-    const scoreAnnotation = this.AnnotationService.createAutoScoreAnnotation(
+    const scoreAnnotation = this.annotationService.createAutoScoreAnnotation(
       runId,
       periodId,
       nodeId,
@@ -516,7 +536,7 @@ export class ConceptMapStudent extends ComponentStudent {
       value: this.autoFeedbackResult.feedback,
       autoGrader: 'conceptMap'
     };
-    const commentAnnotation = this.AnnotationService.createAutoCommentAnnotation(
+    const commentAnnotation = this.annotationService.createAutoCommentAnnotation(
       runId,
       periodId,
       nodeId,
@@ -570,23 +590,23 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   createAutoScoreAnnotation(data: any): any {
-    return this.AnnotationService.createAutoScoreAnnotation(
-      this.ConfigService.getRunId(),
-      this.ConfigService.getPeriodId(),
+    return this.annotationService.createAutoScoreAnnotation(
+      this.configService.getRunId(),
+      this.configService.getPeriodId(),
       this.nodeId,
       this.componentId,
-      this.ConfigService.getWorkgroupId(),
+      this.configService.getWorkgroupId(),
       data
     );
   }
 
   createAutoCommentAnnotation(data: any): any {
-    return this.AnnotationService.createAutoCommentAnnotation(
-      this.ConfigService.getRunId(),
-      this.ConfigService.getPeriodId(),
+    return this.annotationService.createAutoCommentAnnotation(
+      this.configService.getRunId(),
+      this.configService.getPeriodId(),
       this.nodeId,
       this.componentId,
-      this.ConfigService.getWorkgroupId(),
+      this.configService.getWorkgroupId(),
       data
     );
   }
@@ -744,7 +764,7 @@ export class ConceptMapStudent extends ComponentStudent {
       const startY = this.activeLinkStartY;
 
       // get the distance from the start to the current position of the mouse
-      const distance = this.ConceptMapService.calculateDistance(startX, startY, x2, y2);
+      const distance = this.conceptMapService.calculateDistance(startX, startY, x2, y2);
 
       // check if we have set the curvature yet and that the mouse is more than 20 pixels away from
       // the start.
@@ -756,7 +776,7 @@ export class ConceptMapStudent extends ComponentStudent {
       // the mouse down, we will create a line that curves down.
       if (!this.linkCurvatureSet && distance > 20) {
         // get the slope of the line from the start to the location of the mouse
-        const slope = Math.abs(this.ConceptMapService.getSlope(startX, startY, x2, y2));
+        const slope = Math.abs(this.conceptMapService.getSlope(startX, startY, x2, y2));
         if (y2 < startY) {
           // the user has moved the mouse above the connector
           this.setActiveLinkCurvature(slope);
@@ -982,7 +1002,7 @@ export class ConceptMapStudent extends ComponentStudent {
     const coordinates = this.getRelativeCoordinatesByEvent(event);
     const x = coordinates.x - this.tempOffsetX;
     const y = coordinates.y - this.tempOffsetY;
-    const conceptMapNode = this.ConceptMapService.newConceptMapNode(
+    const conceptMapNode = this.conceptMapService.newConceptMapNode(
       this.draw,
       this.getNewConceptMapNodeId(),
       selectedNode.id,
@@ -1004,11 +1024,11 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   getNewConceptMapNodeId(): any {
-    return this.ConceptMapService.getNextAvailableId(this.nodes, 'studentNode');
+    return this.conceptMapService.getNextAvailableId(this.nodes, 'studentNode');
   }
 
   getNewConceptMapLinkId(): any {
-    return this.ConceptMapService.getNextAvailableId(this.links, 'studentLink');
+    return this.conceptMapService.getNextAvailableId(this.links, 'studentLink');
   }
 
   setNodeMouseEvents(conceptMapNode: any): void {
@@ -1098,11 +1118,11 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   moveLinkTextToFront(): void {
-    this.ConceptMapService.moveLinkTextToFront(this.links);
+    this.conceptMapService.moveLinkTextToFront(this.links);
   }
 
   moveNodesToFront(): void {
-    this.ConceptMapService.moveNodesToFront(this.nodes);
+    this.conceptMapService.moveNodesToFront(this.nodes);
   }
 
   addNode(node: any): void {
@@ -1256,7 +1276,7 @@ export class ConceptMapStudent extends ComponentStudent {
     const connector = event.target;
     this.disableNodeDragging();
     const node = this.getNodeByConnectorId(connector.id);
-    const link = this.ConceptMapService.newConceptMapLink(
+    const link = this.conceptMapService.newConceptMapLink(
       this.draw,
       this.getNewConceptMapLinkId(),
       null,
@@ -1429,10 +1449,10 @@ export class ConceptMapStudent extends ComponentStudent {
   }
 
   snipImage(): void {
-    const svgElement = this.getElementById(this.ConceptMapService.getSVGId(this.domIdEnding), true);
+    const svgElement = this.getElementById(this.conceptMapService.getSVGId(this.domIdEnding), true);
     const serializer = new XMLSerializer();
     const svgString = serializer.serializeToString(svgElement);
-    this.ConceptMapService.getHrefToBase64ImageReplacements(svgString).then((images) => {
+    this.conceptMapService.getHrefToBase64ImageReplacements(svgString).then((images) => {
       const updatedSvgString = this.replaceImageRefsWithBase64Images(svgString, images);
       this.createNoteFromSvg(updatedSvgString);
     });
@@ -1462,7 +1482,7 @@ export class ConceptMapStudent extends ComponentStudent {
       myCanvas.height = image.height;
       ctx.drawImage(image, 0, 0);
       const pngFile = convertToPNGFile(myCanvas);
-      this.NotebookService.addNote(this.StudentDataService.getCurrentNodeId(), pngFile);
+      this.notebookService.addNote(this.studentDataService.getCurrentNodeId(), pngFile);
     };
     image.src = url;
   }
@@ -1495,7 +1515,7 @@ export class ConceptMapStudent extends ComponentStudent {
       conceptMapData.backgroundPath = this.componentContent.background;
       conceptMapData.stretchBackground = this.componentContent.stretchBackground;
     }
-    componentStateToMergeInto = this.ProjectService.injectAssetPaths(componentStateToMergeInto);
+    componentStateToMergeInto = this.projectService.injectAssetPaths(componentStateToMergeInto);
     return componentStateToMergeInto;
   }
 

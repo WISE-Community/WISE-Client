@@ -7,7 +7,6 @@ import { isImage, isVideo } from '../../common/file/file';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AssetChooserDialogData } from './asset-chooser-dialog-data';
 import { CommonModule } from '@angular/common';
-import { DragAndDropModule } from '../../common/drag-and-drop/drag-and-drop.module';
 import { FileSizePipe } from '../file-size/filesize.pipe';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,11 +14,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DragAndDropDirective } from '../../common/drag-and-drop/drag-and-drop.directive';
 
 @Component({
   imports: [
     CommonModule,
-    DragAndDropModule,
+    DragAndDropDirective,
     FileSizePipe,
     FormsModule,
     MatButtonModule,

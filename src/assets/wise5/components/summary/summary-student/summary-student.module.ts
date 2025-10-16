@@ -5,8 +5,7 @@ import { SummaryStudent } from './summary-student.component';
 import { StudentSummaryDisplay } from '../../../directives/student-summary-display/student-summary-display.component';
 
 @NgModule({
-  declarations: [SummaryStudent],
-  imports: [StudentTeacherCommonModule, StudentComponentModule, StudentSummaryDisplay],
-  exports: [SummaryStudent]
+    imports: [StudentTeacherCommonModule, StudentComponentModule, StudentSummaryDisplay, SummaryStudent],
+    exports: [SummaryStudent]
 })
 export class SummaryStudentModule {}

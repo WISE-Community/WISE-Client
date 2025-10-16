@@ -8,8 +8,13 @@ import { TranscribeService } from '../../../../wise5/services/transcribeService'
 import { CRaterPingService } from '../../../services/cRaterPingService';
 
 @NgModule({
-  declarations: [AudioRecorderComponent, OpenResponseStudent],
-  imports: [StudentTeacherCommonModule, StudentComponentModule, SpeechToTextComponent],
+  imports: [
+    StudentTeacherCommonModule,
+    StudentComponentModule,
+    SpeechToTextComponent,
+    AudioRecorderComponent,
+    OpenResponseStudent
+  ],
   providers: [CRaterPingService, TranscribeService],
   exports: [OpenResponseStudent]
 })

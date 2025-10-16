@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogWithOpenInNewWindowComponent } from './dialog-with-open-in-new-window.component';
 
 const content = 'This is the rubric content';
@@ -11,8 +11,7 @@ describe('DialogWithOpenInNewWindowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DialogWithOpenInNewWindowComponent],
-      imports: [MatDialogModule],
+      imports: [DialogWithOpenInNewWindowComponent],
       providers: [
         {
           provide: MAT_DIALOG_DATA,

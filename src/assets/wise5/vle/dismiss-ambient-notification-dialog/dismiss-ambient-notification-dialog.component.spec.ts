@@ -1,8 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StudentDataService } from '../../services/studentDataService';
 import { DismissAmbientNotificationDialogComponent } from './dismiss-ambient-notification-dialog.component';
 import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
@@ -18,15 +15,7 @@ let saveVLEEventSpy: jasmine.Spy;
 describe('DismissAmbientNotificationDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DismissAmbientNotificationDialogComponent],
-      imports: [
-        FormsModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [StudentTeacherCommonServicesModule, DismissAmbientNotificationDialogComponent],
       providers: [
         {
           provide: MAT_DIALOG_DATA,

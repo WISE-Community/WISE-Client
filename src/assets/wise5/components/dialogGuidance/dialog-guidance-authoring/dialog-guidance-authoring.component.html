@@ -3,15 +3,7 @@
     [componentContent]="componentContent"
     (promptChangedEvent)="promptChanged($event)"
   />
-  <mat-form-field>
-    <mat-label i18n>Item ID</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.itemId"
-      (ngModelChange)="inputChange.next($event)"
-      type="text"
-    />
-  </mat-form-field>
+  <c-rater-item-select [componentContent]="componentContent" />
   <edit-component-max-submit [componentContent]="componentContent" />
   <mat-checkbox
     color="primary"
@@ -29,4 +21,5 @@
     [feedbackRules]="componentContent.feedbackRules"
     [version]="componentContent.version"
   />
+  <edit-crater-info [cRaterRubric]="componentContent.cRaterRubric" />
 </div>

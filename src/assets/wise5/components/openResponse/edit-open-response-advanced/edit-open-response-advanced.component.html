@@ -24,38 +24,11 @@
     (ngModelChange)="enableCRaterClicked()"
     i18n
   >
-    Enable CRater
+    Enable AI Model
   </mat-checkbox>
 </div>
 @if (componentContent.enableCRater) {
-  <div class="flex flex-row items-center justify-start gap-4">
-    <mat-form-field>
-      <mat-label i18n>Item Id</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.cRater.itemId"
-        (ngModelChange)="componentChanged()"
-      />
-    </mat-form-field>
-    <div>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="verifyCRaterItemId(componentContent.cRater.itemId)"
-        i18n
-      >
-        Verify
-      </button>
-    </div>
-    @if (isVerifyingCRaterItemId) {
-      <span i18n>Verifying...</span>
-    }
-    @if (cRaterItemIdIsValid) {
-      <span class="valid" i18n>Valid</span>
-    } @else {
-      <span class="invalid" i18n>Invalid</span>
-    }
-  </div>
+  <c-rater-item-select [componentContent]="componentContent" />
   <div>
     <mat-form-field>
       <mat-label i18n>Score On</mat-label>
@@ -565,14 +538,8 @@
     }
   </div>
   <div class="section-container">
-    @if (showIdeaDescriptions) {
-      <edit-crater-idea-descriptions
-        [ideaDescriptions]="componentContent.cRater.rubric.ideas"
-        [enableAutoscrolling]="false"
-      />
-      <a (click)="toggleShowIdeaDescriptions()" i18n>Hide</a>
-    } @else {
-      <a (click)="toggleShowIdeaDescriptions()" i18n>Show Idea Descriptions</a>
+    @if (componentContent.enableCRater) {
+      <edit-crater-info [cRaterRubric]="componentContent.cRater.rubric" />
     }
   </div>
 }

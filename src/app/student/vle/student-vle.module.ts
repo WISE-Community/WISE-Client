@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentStudentModule } from '../../../assets/wise5/components/component/component-student.module';
-import { GenerateImageDialogComponent } from '../../../assets/wise5/directives/generate-image-dialog/generate-image-dialog.component';
-import { SimpleDialogModule } from '../../../assets/wise5/directives/simple-dialog.module';
 import { InitializeVLEService } from '../../../assets/wise5/services/initializeVLEService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
@@ -21,21 +19,22 @@ import { VLEParentComponent } from '../../../assets/wise5/vle/vle-parent/vle-par
 import { StudentPeerGroupService } from '../../../assets/wise5/services/studentPeerGroupService';
 import { PeerGroupService } from '../../../assets/wise5/services/peerGroupService';
 import { StudentAssetsDialogComponent } from '../../../assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
+import { GenerateImageService } from '../../../assets/wise5/services/generateImageService';
 
 @NgModule({
-  declarations: [GenerateImageDialogComponent, VLEParentComponent],
   imports: [
     CommonModule,
     ComponentStudentModule,
     MatDialogModule,
-    SimpleDialogModule,
     StudentAssetsDialogComponent,
     StudentComponentModule,
     StudentTeacherCommonModule,
     StudentVLERoutingModule,
-    VLEComponent
+    VLEComponent,
+    VLEParentComponent
   ],
   providers: [
+    GenerateImageService,
     InitializeVLEService,
     PauseScreenService,
     { provide: DataService, useExisting: StudentDataService },

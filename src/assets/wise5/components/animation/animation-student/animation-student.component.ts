@@ -11,12 +11,31 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { AnimationService } from '../animationService';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { MatSlider, MatSliderThumb } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import { NgStyle } from '@angular/common';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
-    selector: 'animation-student',
-    templateUrl: 'animation-student.component.html',
-    styleUrls: ['animation-student.component.scss'],
-    standalone: false
+  imports: [
+    ComponentHeaderComponent,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    MatSlider,
+    FormsModule,
+    MatSliderThumb,
+    NgStyle,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
+  styles: ['.mat-icon { margin: 0px; } '],
+  templateUrl: 'animation-student.component.html'
 })
 export class AnimationStudent extends ComponentStudent {
   animationState: any = 'stopped';
@@ -32,7 +51,6 @@ export class AnimationStudent extends ComponentStudent {
   numTimesPlayClicked: number = 0;
   pixelsPerXUnit: number = 1;
   pixelsPerYUnit: number = 1;
-  speedSliderValue: number = 3;
   speedToMillisecondsPerDataTime = {
     1: 10000,
     2: 1000,
@@ -45,42 +63,42 @@ export class AnimationStudent extends ComponentStudent {
   width: number = 800;
 
   constructor(
-    private AnimationService: AnimationService,
-    protected AnnotationService: AnnotationService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    private animationService: AnimationService,
+    protected annotationService: AnnotationService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    const domIdEnding = this.AnimationService.getDomIdEnding(
+    const domIdEnding = this.animationService.getDomIdEnding(
       this.nodeId,
       this.componentId,
       this.componentState
     );
-    this.svgId = this.AnimationService.getSvgId(domIdEnding);
+    this.svgId = this.animationService.getSvgId(domIdEnding);
     this.initializeCoordinates();
 
     if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (
-      this.AnimationService.componentStateHasStudentWork(this.componentState, this.componentContent)
+      this.animationService.componentStateHasStudentWork(this.componentState, this.componentContent)
     ) {
       this.setStudentWork(this.componentState);
     } else if (this.component.hasConnectedComponent()) {
@@ -416,7 +434,7 @@ export class AnimationStudent extends ComponentStudent {
 
   updateObjectDataFromDataSource(object: any): void {
     const dataSource = object.dataSource;
-    const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+    const componentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
       dataSource.nodeId,
       dataSource.componentId
     );
@@ -740,7 +758,7 @@ export class AnimationStudent extends ComponentStudent {
       t: t
     };
 
-    this.StudentDataService.broadcastComponentStudentData({
+    this.studentDataService.broadcastComponentStudentData({
       nodeId: this.nodeId,
       componentId: this.componentId,
       componentState: componentState
@@ -971,12 +989,12 @@ export class AnimationStudent extends ComponentStudent {
    * @returns {object} The auto score annotation.
    */
   createAutoScoreAnnotation(data: any): any {
-    const runId = this.ConfigService.getRunId();
-    const periodId = this.ConfigService.getPeriodId();
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
-    const toWorkgroupId = this.ConfigService.getWorkgroupId();
-    return this.AnnotationService.createAutoScoreAnnotation(
+    const toWorkgroupId = this.configService.getWorkgroupId();
+    return this.annotationService.createAutoScoreAnnotation(
       runId,
       periodId,
       nodeId,
@@ -991,12 +1009,12 @@ export class AnimationStudent extends ComponentStudent {
    * @returns {object} The auto comment annotation.
    */
   createAutoCommentAnnotation(data: any): any {
-    const runId = this.ConfigService.getRunId();
-    const periodId = this.ConfigService.getPeriodId();
+    const runId = this.configService.getRunId();
+    const periodId = this.configService.getPeriodId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
-    const toWorkgroupId = this.ConfigService.getWorkgroupId();
-    return this.AnnotationService.createAutoCommentAnnotation(
+    const toWorkgroupId = this.configService.getWorkgroupId();
+    return this.annotationService.createAutoCommentAnnotation(
       runId,
       periodId,
       nodeId,

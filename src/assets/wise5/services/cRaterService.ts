@@ -208,18 +208,10 @@ export class CRaterService {
    * @param itemId A string.
    * @return A promise that returns whether the item id is valid.
    */
-  makeCRaterVerifyRequest(itemId: string): any {
-    const url = this.configService.getCRaterRequestURL() + '/verify';
-    const params = new HttpParams().set('itemId', itemId);
-    const options = {
-      params: params
-    };
-    return this.http
-      .get(url, options)
-      .toPromise()
-      .then((isAvailable: boolean) => {
-        return isAvailable;
-      });
+  makeCRaterVerifyRequest(itemId: string): Observable<any> {
+    return this.http.get(this.configService.getCRaterRequestURL() + '/verify', {
+      params: new HttpParams().set('itemId', itemId)
+    });
   }
 
   getCRaterResponse(responses: RawCRaterResponse, submitCounter: number): CRaterResponse {

@@ -11,12 +11,35 @@ import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
-    selector: 'audio-oscillator-student',
-    templateUrl: 'audio-oscillator-student.component.html',
-    styleUrls: ['audio-oscillator-student.component.scss'],
-    standalone: false
+  imports: [
+    ComponentHeaderComponent,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    FormsModule,
+    MatOption,
+    MatInput,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
+  styleUrl: 'audio-oscillator-student.component.scss',
+  templateUrl: 'audio-oscillator-student.component.html'
 })
 export class AudioOscillatorStudent extends ComponentStudent {
   amplitude: number;
@@ -47,7 +70,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
   // they should still be able to see and hear 20 dBSPL. If we chose a value much lower, the student
   // could set the amplitude to 0 but still see a curve in the sound wave and also still hear the
   // sound when they should not be able to see or hear anything.
-  maxDBSPL: number = this.AudioOscillatorService.maxAmplitude;
+  maxDBSPL: number = this.audioOscillatorService.maxAmplitude;
   minAmplitude: number;
   minAmplitudePlayed: number;
   minDBSPL: number = 0;
@@ -64,43 +87,43 @@ export class AudioOscillatorStudent extends ComponentStudent {
   stopAfterGoodDraw: boolean = true;
 
   constructor(
-    protected AnnotationService: AnnotationService,
-    private AudioOscillatorService: AudioOscillatorService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected annotationService: AnnotationService,
+    private audioOscillatorService: AudioOscillatorService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    const domIdEnding = this.AudioOscillatorService.getDomIdEnding(
+    const domIdEnding = this.audioOscillatorService.getDomIdEnding(
       this.nodeId,
       this.componentId,
       this.componentState
     );
-    this.oscilloscopeId = this.AudioOscillatorService.getOscilloscopeId(domIdEnding);
+    this.oscilloscopeId = this.audioOscillatorService.getOscilloscopeId(domIdEnding);
     this.setButtonTextToPlay();
     this.setParametersFromComponentContent();
 
     if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (
-      this.AudioOscillatorService.componentStateHasStudentWork(
+      this.audioOscillatorService.componentStateHasStudentWork(
         this.componentState,
         this.componentContent
       )

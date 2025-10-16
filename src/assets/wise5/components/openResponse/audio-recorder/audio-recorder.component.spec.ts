@@ -7,9 +7,9 @@ let fixture: ComponentFixture<AudioRecorderComponent>;
 describe('EditOpenResponseAdvancedComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AudioRecorderComponent],
-      providers: [AudioRecorderService]
-    });
+    imports: [AudioRecorderComponent],
+    providers: [AudioRecorderService]
+});
     fixture = TestBed.createComponent(AudioRecorderComponent);
     component = fixture.componentInstance;
   });
