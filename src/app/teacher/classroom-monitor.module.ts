@@ -5,7 +5,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { NotebookWorkgroupGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
-import { PauseScreensMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/pause-screens-menu/pause-screens-menu.component';
 import { StepItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/studentGrading/step-item/step-item.component';
 import { NotificationsMenuComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component';
 import { NavItemComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component';
@@ -34,7 +33,6 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     MilestoneModule,
     NavItemComponent,
     NotificationsMenuComponent,
-    PauseScreensMenuComponent,
     PeerGroupGradingModule,
     RouterModule,
     SelectPeriodComponent,
