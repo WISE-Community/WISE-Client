@@ -44,7 +44,7 @@ import { CRaterPingService } from '../../../services/cRaterPingService';
     DialogResponsesComponent,
     MatCardModule
   ],
-  providers: [DialogGuidanceFeedbackService],
+  providers: [CRaterPingService, DialogGuidanceFeedbackService],
   selector: 'dialog-guidance-student',
   styleUrl: './dialog-guidance-student.component.scss',
   templateUrl: './dialog-guidance-student.component.html'

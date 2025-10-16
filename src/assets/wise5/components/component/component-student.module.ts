@@ -5,7 +5,6 @@ import { ConceptMapStudent } from '../conceptMap/concept-map-student/concept-map
 import { DiscussionStudent } from '../discussion/discussion-student/discussion-student.component';
 import { HtmlStudentComponent } from '../html/html-student/html-student.component';
 import { LabelStudentComponent } from '../label/label-student/label-student.component';
-import { OpenResponseStudentModule } from '../openResponse/open-response-student/open-response-student.module';
 import { ShowGroupWorkStudentModule } from '../showGroupWork/show-group-work-student/show-group-work-student.module';
 import { ShowMyWorkStudentModule } from '../showMyWork/show-my-work-student/show-my-work-student.module';
 import { TableStudentComponent } from '../table/table-student/table-student.component';
@@ -20,6 +19,7 @@ import { OutsideUrlStudent } from '../outsideURL/outside-url-student/outside-url
 import { PeerChatStudentComponent } from '../peerChat/peer-chat-student/peer-chat-student.component';
 import { SummaryStudent } from '../summary/summary-student/summary-student.component';
 import { MatchStudent } from '../match/match-student/match-student.component';
+import { OpenResponseStudent } from '../openResponse/open-response-student/open-response-student.component';
 
 @NgModule({
   imports: [
@@ -35,7 +35,7 @@ import { MatchStudent } from '../match/match-student/match-student.component';
     LabelStudentComponent,
     MatchStudent,
     MultipleChoiceStudentComponent,
-    OpenResponseStudentModule,
+    OpenResponseStudent,
     OutsideUrlStudent,
     PeerChatStudentComponent,
     ShowGroupWorkStudentModule,
