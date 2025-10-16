@@ -33,8 +33,7 @@ html {
   @include mat.theme-overrides((
     primary: var(--primary),
     on-primary: var(--on-primary),
-    primary-container: var(--primary),
-    on-primary-container: var(--on-primary),
+    on-primary-container: var(--primary),
     tertiary: var(--tertiary),
     on-tertiary: var(--on-tertiary),
   ));
@@ -218,6 +217,13 @@ html {
       margin-bottom: 0;
     }
   }
+
+  /* Slide toggle */
+  @include mat.slide-toggle-overrides(
+    (
+      track-outline-width: 0,
+    )
+  );
 
   /* Tabs */
 
