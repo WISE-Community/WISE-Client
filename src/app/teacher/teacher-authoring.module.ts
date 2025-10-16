@@ -39,11 +39,16 @@ import { CreateComponentService } from '../../assets/wise5/services/createCompon
 import { NotifyAuthorService } from '../../assets/wise5/services/notifyAuthorService';
 import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 import { RegisterProjectService } from '../../assets/wise5/services/registerProjectService';
-import { ComponentAuthoringModule } from './component-authoring.module';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
+import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
 
 @NgModule({
-  imports: [AuthoringRoutingModule, ComponentAuthoringModule, StudentTeacherCommonServicesModule],
+  imports: [
+    AuthoringRoutingModule,
+    EditComponentAdvancedComponent, // TODO: refactor. currently needed for peer grouping authoring dialog to work
+    StudentTeacherCommonServicesModule
+  ],
   providers: [
     ClassroomStatusService,
     ComponentInfoService,
@@ -68,6 +73,7 @@ import { StudentTeacherCommonServicesModule } from '../student-teacher-common-se
     MoveNodesService,
     { provide: NodeService, useExisting: TeacherNodeService },
     NotifyAuthorService,
+    PeerGroupingAuthoringService,
     ProjectAssetService,
     SpaceService,
     DeleteTranslationsService,
