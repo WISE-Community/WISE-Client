@@ -12,18 +12,17 @@ import { StudentGradingComponent } from '../../assets/wise5/classroomMonitor/stu
 import { StudentProgressComponent } from '../../assets/wise5/classroomMonitor/student-progress/student-progress.component';
 import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
 import { MilestoneModule } from './milestone/milestone.module';
-import { GradingCommonModule } from './grading-common.module';
 import { ManageStudentsComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/manageStudents/manage-students/manage-students.component';
 import { RouterModule } from '@angular/router';
 import { SelectPeriodComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component';
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 
 @NgModule({
   imports: [
     ClassroomMonitorComponent,
     ComponentNewWorkBadgeComponent,
     ComponentStudentModule,
-    GradingCommonModule,
     ManageStudentsComponent,
     MilestoneModule,
     NavItemComponent,
@@ -33,6 +32,7 @@ import { GradingNodeService } from '../../assets/wise5/services/gradingNodeServi
     SelectPeriodComponent,
     StepItemComponent,
     StudentProgressComponent,
+    StudentTeacherCommonServicesModule,
     NodeProgressViewComponent,
     NotebookGradingComponent,
     NotebookWorkgroupGradingComponent,
