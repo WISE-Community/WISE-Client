@@ -7,7 +7,14 @@ import { TranslatableInputComponent } from '../../components/translatable-input/
   imports: [TranslatableInputComponent],
   selector: 'edit-node-title',
   styleUrl: './edit-node-title.component.scss',
-  templateUrl: './edit-node-title.component.html'
+  template: `
+    <translatable-input
+      [content]="nodeJson"
+      key="title"
+      [label]="label"
+      (defaultLanguageTextChanged)="save()"
+    />
+  `
 })
 export class EditNodeTitleComponent {
   protected label: string;
