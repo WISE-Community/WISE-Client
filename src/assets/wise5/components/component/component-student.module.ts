@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentComponentModule } from '../../../../app/student/student.component.module';
 import { AnimationStudent } from '../animation/animation-student/animation-student.component';
 import { ConceptMapStudent } from '../conceptMap/concept-map-student/concept-map-student.component';
@@ -10,11 +9,9 @@ import { OpenResponseStudentModule } from '../openResponse/open-response-student
 import { ShowGroupWorkStudentModule } from '../showGroupWork/show-group-work-student/show-group-work-student.module';
 import { ShowMyWorkStudentModule } from '../showMyWork/show-my-work-student/show-my-work-student.module';
 import { TableStudentComponent } from '../table/table-student/table-student.component';
-import { ComponentComponent } from './component.component';
 import { MultipleChoiceStudentComponent } from '../multipleChoice/multiple-choice-student/multiple-choice-student.component';
 import { DialogGuidanceStudentComponent } from '../dialogGuidance/dialog-guidance-student/dialog-guidance-student.component';
 import { StudentAssetsDialogComponent } from '../../vle/studentAsset/student-assets-dialog/student-assets-dialog.component';
-import { AiChatStudentComponent } from '../aiChat/ai-chat-student/ai-chat-student.component';
 import { AudioOscillatorStudent } from '../audioOscillator/audio-oscillator-student/audio-oscillator-student.component';
 import { DrawStudent } from '../draw/draw-student/draw-student.component';
 import { EmbeddedStudent } from '../embedded/embedded-student/embedded-student.component';
@@ -26,17 +23,14 @@ import { MatchStudent } from '../match/match-student/match-student.component';
 
 @NgModule({
   imports: [
-    AiChatStudentComponent,
     AnimationStudent,
     AudioOscillatorStudent,
-    ComponentComponent,
     ConceptMapStudent,
     DialogGuidanceStudentComponent,
     DiscussionStudent,
     DrawStudent,
     EmbeddedStudent,
     GraphStudent,
-    HighchartsChartModule,
     HtmlStudentComponent,
     LabelStudentComponent,
     MatchStudent,
@@ -50,7 +44,6 @@ import { MatchStudent } from '../match/match-student/match-student.component';
     StudentComponentModule,
     SummaryStudent,
     TableStudentComponent
-  ],
-  exports: [ComponentComponent]
+  ]
 })
 export class ComponentStudentModule {}
