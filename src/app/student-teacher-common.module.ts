@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-import { NodeIconComponent } from '../assets/wise5/vle/node-icon/node-icon.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -62,7 +61,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatSlideToggleModule,
     MatTooltipModule,
     MathModule,
-    NodeIconComponent,
     NotebookModule,
     ReactiveFormsModule,
     ScrollingModule,
@@ -97,7 +95,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatToolbarModule,
     MatTooltipModule,
     MathModule,
-    NodeIconComponent,
     NotebookModule,
     ReactiveFormsModule
   ]
