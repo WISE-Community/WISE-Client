@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
-import { NodeStatusIconComponent } from '../assets/wise5/themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -66,7 +65,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatTooltipModule,
     MathModule,
     NodeIconComponent,
-    NodeStatusIconComponent,
     NotebookModule,
     ReactiveFormsModule,
     ScrollingModule,

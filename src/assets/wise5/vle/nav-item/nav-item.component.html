@@ -62,7 +62,7 @@
           <span class="flex-grow"></span>
           <div class="flex items-center gap-2">
             <!-- <node-score [nodeId]="nodeId"></node-score> -->
-            <node-status-icon [nodeId]="nodeId"></node-status-icon>
+            <node-status-icon [nodeId]="nodeId" />
             @if (!nodeStatus.isVisitable) {
               <mat-icon
                 class="secondary-text"
@@ -92,7 +92,7 @@
           <span class="mat-body-2">{{ nodeTitle }}</span>
           <span class="flex-grow"></span>
           <span class="flex items-center gap-2">
-            <node-status-icon [nodeId]="nodeId"></node-status-icon>
+            <node-status-icon [nodeId]="nodeId" />
             @if (!nodeStatus.isVisitable) {
               <mat-icon
                 class="secondary-text"
