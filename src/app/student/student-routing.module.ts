@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { StudentComponent } from './student.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { AuthGuard } from './auth.guard';
@@ -18,7 +17,8 @@ const studentRoutes: Routes = [
       { path: 'profile/edit', component: EditComponent },
       {
         path: 'unit/:unitId',
-        loadChildren: () => import('./vle/student-vle.module').then((m) => m.StudentVLEModule)
+        loadChildren: () =>
+          import('./vle/student-vle-routing.module').then((m) => m.StudentVLERoutingModule)
       }
     ]
   }
