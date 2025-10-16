@@ -9,7 +9,6 @@ import {
 import { ConfigService } from '../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
-import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { SaveTimeMessageComponent } from '../../../common/save-time-message/save-time-message.component';
 import { RouterModule } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
@@ -33,7 +32,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
     RouterModule,
     SaveTimeMessageComponent,
-    StudentComponentModule,
     TextFieldModule
   ],
   selector: 'class-response',

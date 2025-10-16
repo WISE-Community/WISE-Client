@@ -9,7 +9,6 @@ import { StudentDataService } from '../../../assets/wise5/services/studentDataSe
 import { VLEComponent } from '../../../assets/wise5/vle/vle.component';
 import { VLEProjectService } from '../../../assets/wise5/vle/vleProjectService';
 import { DataService } from '../../services/data.service';
-import { StudentComponentModule } from '../student.component.module';
 import { StudentVLERoutingModule } from './student-vle-routing.module';
 import { PauseScreenService } from '../../../assets/wise5/services/pauseScreenService';
 import { StudentNotificationService } from '../../../assets/wise5/services/studentNotificationService';
@@ -27,7 +26,6 @@ import { StudentTeacherCommonServicesModule } from '../../student-teacher-common
     ComponentStudentModule,
     MatDialogModule,
     StudentAssetsDialogComponent,
-    StudentComponentModule,
     StudentTeacherCommonServicesModule,
     StudentVLERoutingModule,
     VLEComponent,

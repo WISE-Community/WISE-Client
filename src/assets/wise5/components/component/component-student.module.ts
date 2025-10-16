@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { StudentComponentModule } from '../../../../app/student/student.component.module';
 import { AnimationStudent } from '../animation/animation-student/animation-student.component';
 import { ConceptMapStudent } from '../conceptMap/concept-map-student/concept-map-student.component';
 import { DiscussionStudent } from '../discussion/discussion-student/discussion-student.component';
@@ -41,7 +40,6 @@ import { OpenResponseStudent } from '../openResponse/open-response-student/open-
     ShowGroupWorkStudentModule,
     ShowMyWorkStudentModule,
     StudentAssetsDialogComponent,
-    StudentComponentModule,
     SummaryStudent,
     TableStudentComponent
   ]
