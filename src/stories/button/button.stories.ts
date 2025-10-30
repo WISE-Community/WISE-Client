@@ -2,7 +2,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
-type MatButtonStoryType = MatButton & { variant?: string; color?: string };
+type MatButtonStoryType = MatButton & { matButton: string; color?: string };
 
 const meta: Meta<MatButtonStoryType> = {
   title: 'Components/Action/Button',
@@ -13,17 +13,17 @@ const meta: Meta<MatButtonStoryType> = {
     })
   ],
   argTypes: {
-    variant: {
+    matButton: {
       control: 'select',
-      options: ['', 'basic', 'filled', 'outlined', 'elevated', 'tonal']
+      options: ['', 'filled', 'outlined', 'elevated', 'tonal']
     },
     color: {
       control: 'select',
-      options: ['', 'primary', 'secondary', 'tertiary', 'error']
+      options: ['', 'secondary', 'tertiary', 'error']
     }
   },
   args: {
-    variant: '',
+    matButton: '',
     color: ''
   }
 };
@@ -31,13 +31,12 @@ const meta: Meta<MatButtonStoryType> = {
 export default meta;
 type Story = StoryObj<MatButtonStoryType>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
   render: (args) => ({
     template: `<div class="flex flex-wrap gap-2">
-        <button matButton${!args.variant || args.variant === 'basic' ? '' : '="' + args.variant + '"'}${!args.color || args.color === 'primary' ? '' : ' class="' + args.color + '" '}>Button</button>
-        <button matButton${!args.variant || args.variant === 'basic' ? '' : '="' + args.variant + '"'}${!args.color || args.color === 'primary' ? '' : ' class="' + args.color + '" '} disabled>Disabled</button>
-        <a href="https://wise.berkeley.edu" target="_blank" matButton${!args.variant || args.variant === 'basic' ? '' : '="' + args.variant + '"'}${!args.color || args.color === 'primary' ? '' : ' class="' + args.color + '" '}>Link</a>
+        <button matButton${args.matButton ? '="' + args.matButton + '"' : ''}${args.color ? ' class="' + args.color + '"' : ''}>Button</button>
+        <button matButton${args.matButton ? '="' + args.matButton + '"' : ''}${args.color ? ' class="' + args.color + '"' : ''} disabled>Disabled</button>
+        <a href="https://wise.berkeley.edu" target="_blank" matButton${args.matButton ? '="' + args.matButton + '"' : ''}${args.color ? ' class="' + args.color + '"' : ''}>Link</a>
       </div>`
   }),
   tags: ['!autodocs', '!dev']

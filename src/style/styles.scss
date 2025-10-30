@@ -46,6 +46,23 @@ html {
 
   @include theme-typography.my-typography-hierarchy;
 
+  /* Badge */
+
+  @include mat.badge-overrides((
+    background-color: var(--tertiary),
+    container-size: 20px,
+    container-padding: 3px 7.5px,
+    text-size: var(--mat-sys-label-medium-size),
+    large-size-container-size: 24px,
+    large-size-container-padding: 6px 10px,
+    large-size-text-size: var(--mat-sys-label-large-size),
+    small-size-container-size: 14px,
+  ));
+
+  .mat-badge-content {
+    border: 2px solid;
+  }
+
   /* Button */
 
   --button-height: 36px;
