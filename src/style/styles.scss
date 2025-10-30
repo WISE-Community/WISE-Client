@@ -48,7 +48,14 @@ html {
 
   /* Button */
 
+  --button-height: 36px;
+
   @include mat.button-overrides((
+    filled-container-height: var(--button-height),
+    outlined-container-height: var(--button-height),
+    text-container-height: var(--button-height),
+    tonal-container-height: var(--button-height),
+    protected-container-height: var(--button-height),
     filled-container-shape: var(--mat-sys-corner-small),
     outlined-container-shape: var(--mat-sys-corner-small),
     text-container-shape: var(--mat-sys-corner-small),
