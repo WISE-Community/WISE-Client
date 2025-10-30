@@ -1,0 +1,35 @@
+<form>
+  <mat-form-field class="w-full" subscriptSizing="dynamic">
+    <mat-label>Favorite Colors</mat-label>
+    <div class="flex flex-wrap gap-2">
+      <mat-chip-grid #chipGrid aria-label="Color selection">
+        @for (color of colors(); track $index) {
+          <mat-chip-row (removed)="remove(color)">
+            {{ color }}
+            <button matChipRemove [attr.aria-label]="'remove ' + color">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        }
+      </mat-chip-grid>
+      <input
+        name="currentColor"
+        placeholder="New Color..."
+        #colorInput
+        [(ngModel)]="currentColor"
+        [matChipInputFor]="chipGrid"
+        [matAutocomplete]="auto"
+        [matChipInputSeparatorKeyCodes]="[]"
+        (matChipInputTokenEnd)="add($event)"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event); colorInput.value = ''"
+      >
+        @for (color of filteredColors(); track color) {
+          <mat-option [value]="color">{{ color }}</mat-option>
+        }
+      </mat-autocomplete>
+    </div>
+  </mat-form-field>
+</form>

@@ -1,25 +1,29 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { AutocompleteFilterComponent } from './autocomplete-filter/autocomplete-filter.component';
+import { ChipsAutocompleteComponent } from './chips-autocomplete/chips-autocomplete.component';
 
-type AutocompleteStoryType = AutocompleteFilterComponent;
-
-const meta: Meta<AutocompleteStoryType> = {
-  title: 'Components/Input/Autocomplete',
-  component: AutocompleteFilterComponent,
+const meta: Meta = {
+  title: 'Components/Input/Autcomplete',
   decorators: [
     moduleMetadata({
-      imports: [AutocompleteFilterComponent]
+      imports: [AutocompleteFilterComponent, ChipsAutocompleteComponent]
     })
-  ],
-  argTypes: {}
+  ]
 };
 
 export default meta;
-type Story = StoryObj<AutocompleteStoryType>;
+type Story = StoryObj;
 
 export const Default: Story = {
+  name: 'Single Selection',
   render: (args) => ({
     template: `<autocomplete-filter />`
-  }),
-  tags: ['!autodocs', '!dev']
+  })
+};
+
+export const ChipsAutocomplete: Story = {
+  name: 'Multiple Selection',
+  render: (args) => ({
+    template: `<chips-autocomplete />`
+  })
 };

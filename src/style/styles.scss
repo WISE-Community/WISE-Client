@@ -70,6 +70,15 @@ html {
     small-container-shape: var(--mat-sys-corner-full),
   ));
 
+  /* Chips */
+
+  @include mat.chips-overrides((
+    // outline-width: 0,
+    elevated-container-color: var(--mat-sys-surface-container-low),
+    elevated-disabled-container-color: var(--mat-sys-surface-container),
+    outline-color: var(--mat-sys-outline-variant),
+  ));
+
   /* Dialog  */
 
   @include mat.dialog-overrides((
@@ -115,6 +124,10 @@ html {
   .mdc-text-field--filled {
     border-bottom-right-radius: var(--mat-sys-corner-small);
     border-bottom-left-radius: var(--mat-sys-corner-small);
+
+    @include mat.chips-overrides((
+      elevated-container-color: var(--mat-sys-surface-container-highest),
+    ));
   }
 
   .mdc-line-ripple::before {
