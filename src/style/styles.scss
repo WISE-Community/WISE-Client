@@ -72,19 +72,20 @@ html {
     protected-icon-offset: var(--button-icon-offset),
   ));
 
+  --fab-size: 52px;
+
+  .mat-mdc-fab:not(.mdc-fab--extended) {
+    height: var(--fab-size);
+    width: var(--fab-size);
+  }
+
   @include mat.fab-overrides((
-    container-color: var(--primary),
-    container-shape: var(--mat-sys-corner-full),
-    foreground-color: var(--on-primary),
-    small-container-color: var(--primary),
-    small-container-shape: var(--mat-sys-corner-full),
-    small-foreground-color: var(--on-primary),
+    extended-container-height: var(--fab-size),
   ));
 
   /* Chips */
 
   @include mat.chips-overrides((
-    // outline-width: 0,
     elevated-container-color: var(--mat-sys-surface-container-low),
     elevated-disabled-container-color: var(--mat-sys-surface-container),
     outline-color: var(--mat-sys-outline-variant),
