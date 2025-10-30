@@ -43,7 +43,7 @@ export const Default: Story = {
   tags: ['!autodocs', '!dev']
 };
 
-export const Basic: Story = {
+export const Text: Story = {
   render: () => ({
     template: `<div class="flex flex-wrap gap-2">
         <button matButton>Button</button>
