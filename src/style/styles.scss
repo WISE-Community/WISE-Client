@@ -73,8 +73,12 @@ html {
   ));
 
   @include mat.fab-overrides((
+    container-color: var(--primary),
     container-shape: var(--mat-sys-corner-full),
+    foreground-color: var(--on-primary),
+    small-container-color: var(--primary),
     small-container-shape: var(--mat-sys-corner-full),
+    small-foreground-color: var(--on-primary),
   ));
 
   /* Chips */
