@@ -4,6 +4,20 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
+.stories-heading {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgb(92, 104, 112);
+  margin-top: 2.5em;
+}
+
+.story-with-code {
+  @apply border border-neutral-200 rounded shadow p-4 mt-4;
+}
+
 /* React Tabs */
 
 .react-tabs {
