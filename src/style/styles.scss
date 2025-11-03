@@ -100,6 +100,28 @@ html {
     extended-container-height: var(--fab-size),
   ));
 
+  /* Card */
+
+  @include mat.card-overrides((
+    title-text-font: Roboto,
+    title-text-weight: 500,
+    title-text-size: 20px,
+    subtitle-text-weight: 400,
+    elevated-container-color: var(--mat-sys-surface-container-lowest),
+    filled-container-color: var(--mat-sys-surface-container-low),
+    outlined-container-color: var(--mat-sys-surface-container-lowest),
+    subtitle-text-color: var(--secondary),
+  ));
+
+  .mat-mdc-card-avatar {
+    margin-bottom: 0;
+  }
+
+  .mat-mdc-card-header {
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
   /* Chips */
 
   @include mat.chips-overrides((
