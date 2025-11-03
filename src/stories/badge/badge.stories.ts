@@ -18,13 +18,20 @@ const meta: Meta<BadgeStoryArgs> = {
   argTypes: {
     matBadge: { control: 'text' },
     matBadgeDescription: { control: 'text' },
-    matBadgeHidden: { control: 'boolean' },
-    matBadgeOverlap: { control: 'boolean' },
+    matBadgeHidden: { control: 'boolean', table: { defaultValue: { summary: 'false' } } },
+    matBadgeOverlap: { control: 'boolean', table: { defaultValue: { summary: 'true' } } },
     matBadgePosition: {
       control: 'select',
-      options: ['above before', 'above after', 'below before', 'below after']
+      options: ['above before', 'above after', 'below before', 'below after'],
+      description: `'above before' | 'above after' | 'below before' | 'below after'`,
+      table: { defaultValue: { summary: 'above after' } }
     },
-    matBadgeSize: { control: 'select', options: ['small', 'medium', 'large'] }
+    matBadgeSize: {
+      control: 'select',
+      options: ['small', 'medium', 'large'],
+      description: `'small' | 'medium' | 'large'`,
+      table: { defaultValue: { summary: 'medium' } }
+    }
   },
   args: {
     matBadge: '4',

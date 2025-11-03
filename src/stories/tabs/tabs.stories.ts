@@ -2,13 +2,13 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatTabsModule, MatTabGroup } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 
-type MatTabGroupStoryType = MatTabGroup & {
-  'mat-align-tabs'?: string;
-  'mat-stretch-tabs'?: string;
-  headerPosition?: string;
+type TabStoryArgs = {
+  'mat-align-tabs'?: 'start' | 'center' | 'end';
+  'mat-stretch-tabs'?: boolean;
+  headerPosition?: 'above' | 'below';
 };
 
-const meta: Meta<MatTabGroupStoryType> = {
+const meta: Meta<TabStoryArgs> = {
   title: 'Components/Action/Tabs',
   component: MatTabGroup,
   decorators: [
@@ -19,24 +19,32 @@ const meta: Meta<MatTabGroupStoryType> = {
   argTypes: {
     'mat-align-tabs': {
       control: 'select',
-      defaultValue: 'start',
-      options: ['start', 'center', 'end']
+      options: ['start', 'center', 'end'],
+      description: `'start' | 'center' | 'end'`,
+      type: 'string',
+      table: { defaultValue: { summary: 'start' } }
     },
     'mat-stretch-tabs': {
-      control: 'select',
-      defaultValue: 'false',
-      options: ['true', 'false']
+      control: 'boolean',
+      table: { defaultValue: { summary: 'false' } }
     },
     headerPosition: {
       control: 'select',
-      defaultValue: 'above',
-      options: ['above', 'below']
+      options: ['above', 'below'],
+      description: `'above' | 'below'`,
+      type: 'string',
+      table: { defaultValue: { summary: 'above' } }
     }
+  },
+  args: {
+    'mat-align-tabs': null,
+    'mat-stretch-tabs': false,
+    headerPosition: null
   }
 };
 
 export default meta;
-type Story = StoryObj<MatTabGroupStoryType>;
+type Story = StoryObj<TabStoryArgs>;
 
 export const Basic: Story = {
   render: (args) => ({

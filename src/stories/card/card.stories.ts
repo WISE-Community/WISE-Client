@@ -19,7 +19,8 @@ const meta: Meta<CardStoryArgs> = {
   argTypes: {
     appearance: {
       control: 'select',
-      options: ['filled', 'outlined', 'raised'],
+      options: ['outlined', 'raised', 'filled'],
+      description: `'outlined' | 'raised' | 'filled'`,
       table: { defaultValue: { summary: 'raised' } }
     },
     title: { control: 'text', table: { disable: true } }

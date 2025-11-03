@@ -15,11 +15,11 @@ const meta: Meta<MatExpansionPanelStoryType> = {
   argTypes: {
     disabled: {
       control: 'boolean',
-      defaultValue: false
+      table: { defaultValue: { summary: 'false' } }
     },
     hideToggle: {
       control: 'boolean',
-      defaultValue: false
+      table: { defaultValue: { summary: 'false' } }
     }
   }
 };

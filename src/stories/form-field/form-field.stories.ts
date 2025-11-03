@@ -6,7 +6,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
-type MatFormFieldStoryType = MatFormField & { appearance?: string };
+type MatFormFieldStoryType = MatFormField & { appearance?: 'fill' | 'outline' };
 
 const meta: Meta<MatFormFieldStoryType> = {
   title: 'Components/Input/Form Field',
@@ -27,7 +27,9 @@ const meta: Meta<MatFormFieldStoryType> = {
     appearance: {
       control: 'select',
       options: ['', 'fill', 'outline'],
-      default: 'fill'
+      description: `'fill' | 'outline'`,
+      type: 'string',
+      table: { defaultValue: { summary: 'fill' } }
     }
   }
 };

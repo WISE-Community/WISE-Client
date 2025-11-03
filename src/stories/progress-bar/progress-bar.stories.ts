@@ -19,7 +19,8 @@ const meta: Meta<MatProgressBarStoryType> = {
     mode: {
       control: 'select',
       options: ['determinate', 'indeterminate', 'buffer', 'query'],
-      default: 'determinate'
+      description: `'determinate' | 'indeterminate' | 'buffer' | 'query'`,
+      table: { defaultValue: { summary: 'determinate' } }
     },
     value: {
       control: 'number'

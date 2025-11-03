@@ -15,21 +15,22 @@ const meta: Meta<MatSlideToggleStoryType> = {
   argTypes: {
     checked: {
       control: 'boolean',
-      defaultValue: false
+      table: { defaultValue: { summary: 'false' } }
     },
     disabled: {
       control: 'boolean',
-      defaultValue: false
+      table: { defaultValue: { summary: 'false' } }
     },
     hideIcon: {
       control: 'boolean',
-      defaultValue: false
+      table: { defaultValue: { summary: 'false' } }
     },
     labelPosition: {
       control: 'select',
       options: ['before', 'after'],
-      defaultValue: 'after',
-      type: 'string'
+      type: 'string',
+      description: `'after' | 'before'`,
+      table: { defaultValue: { summary: 'after' } }
     }
   }
 };
