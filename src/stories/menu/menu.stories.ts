@@ -37,16 +37,20 @@ export const Icons: Story = {
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
+          <mat-icon>content_cut</mat-icon>
+          <span>Cut</span>
         </button>
         <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
+          <mat-icon>content_copy</mat-icon>
+          <span>Copy</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>content_paste</mat-icon>
+          <span>Paste</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>save</mat-icon>
+          <span>Save</span>
         </button>
       </mat-menu>`
   })

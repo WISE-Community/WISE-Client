@@ -16,6 +16,7 @@
   --button-horizontal-padding: 12px;
   --outlined-button-horizontal-padding: 10px;
   --button-icon-offset: -4px;
+  --list-height: 44px;
 }
 
 html {
@@ -190,6 +191,32 @@ html {
     padding: 0 8px;
   }
 
+  /* List */
+
+  @include mat.list-overrides((
+    active-indicator-shape: var(--mat-sys-corner-small),
+    list-item-container-shape: var(--mat-sys-corner-small),
+    list-item-one-line-container-height: var(--list-height),
+    list-item-leading-icon-start-space: 8px,
+    list-item-leading-icon-end-space: 8px,
+    list-item-disabled-state-layer-opacity: 0,
+    list-item-disabled-label-text-opacity: 0.38,
+  ));
+
+  .mat-mdc-action-list, .mat-mdc-nav-list, .mat-mdc-selection-list {
+    .mat-mdc-list-item {
+      margin: 4px 0;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
   /* Menu */
   --menu-item-spacing: 8px;
 
@@ -208,7 +235,7 @@ html {
 
   .mat-mdc-menu-item {
     margin: 4px 8px;
-    border-radius: 6px;
+    border-radius: var(--mat-sys-corner-small);
     min-height: 42px;
 
     &:first-of-type {
@@ -271,8 +298,8 @@ html {
   .mat-mdc-option {
     margin: 4px 8px;
     padding: 0 8px;
-    border-radius: 6px;
-    min-height: 44px;
+    border-radius: var(--mat-sys-corner-small);
+    min-height: var(--list-height);
 
     &:first-of-type {
       margin-top: 0;
