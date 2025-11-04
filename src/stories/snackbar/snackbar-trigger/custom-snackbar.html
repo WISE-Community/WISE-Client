@@ -1,0 +1,9 @@
+<span matSnackBarLabel class="flex items-center gap-2"
+  ><mat-icon>warning</mat-icon>{{ data.message }}</span
+>
+<span matSnackBarActions class="flex gap-2">
+  <button matButton matSnackBarAction (click)="snackBarRef.dismiss()" class="error">Undo</button>
+  <button matButton="filled" matSnackBarAction (click)="snackBarRef.dismiss()" class="error">
+    {{ data.action }}
+  </button>
+</span>

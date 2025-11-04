@@ -10,8 +10,7 @@ const meta: Meta<DialogStoryType> = {
     moduleMetadata({
       imports: [DialogOverviewComponent]
     })
-  ],
-  argTypes: {}
+  ]
 };
 
 export default meta;

@@ -289,6 +289,16 @@ html {
     )
   );
 
+  /* Snackbar */
+
+  @include mat.snack-bar-overrides((
+    container-shape: var(--mat-sys-corner-medium),
+  ));
+
+  .mat-mdc-snackbar-surface {
+    border: 2px solid,
+  }
+
   /* Tabs */
 
   @include mat.tabs-overrides((
