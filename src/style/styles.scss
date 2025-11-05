@@ -132,6 +132,19 @@ html {
     outline-color: var(--mat-sys-outline-variant),
   ));
 
+  /* Datepicker */
+
+  @include mat.datepicker-overrides((
+    calendar-container-elevation-shadow: var(--mat-sys-level1),
+    calendar-container-shape: var(--mat-sys-corner-medium),
+    calendar-container-background-color: var(--mat-sys-surface-container-lowest),
+  ));
+
+  .mat-calendar-body-cell-content {
+    border-width: 2px;
+    border-radius: var(--mat-sys-corner-medium);
+  }
+
   /* Dialog  */
 
   @include mat.dialog-overrides((
