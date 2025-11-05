@@ -296,7 +296,7 @@ html {
   /* Select */
 
   @include mat.select-overrides((
-    panel-background-color: var(--mat-sys-surface-container-lowest)
+    panel-background-color: var(--mat-sys-surface-container-lowest),
   ));
 
   div.mat-mdc-select-panel {
@@ -382,6 +382,13 @@ html {
       opacity: 1;
     }
   }
+
+  /* Timepicker */
+
+  @include mat.timepicker-overrides((
+    container-background-color: var(--mat-sys-surface-container-lowest),
+    container-shape: var(--mat-sys-corner-small),
+  ));
 
   /* Fix Tailwind conflict: https://github.com/tailwindlabs/tailwindcss/discussions/9993#discussioncomment-6752435 */
   .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch {
