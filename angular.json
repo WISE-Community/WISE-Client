@@ -218,6 +218,7 @@
         "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
+            "tsConfig": ".storybook/tsconfig.json",
             "configDir": ".storybook",
             "browserTarget": "wise:build",
             "compodoc": true,
@@ -234,6 +235,7 @@
         "build-storybook": {
           "builder": "@storybook/angular:build-storybook",
           "options": {
+            "tsConfig": ".storybook/tsconfig.json",
             "configDir": ".storybook",
             "browserTarget": "wise:build",
             "compodoc": true,

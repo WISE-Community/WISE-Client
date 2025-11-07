@@ -1,7 +1,10 @@
 {
-  "extends": "../src/tsconfig.app.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "types": ["node"],
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
