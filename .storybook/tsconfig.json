@@ -1,14 +1,14 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../src/tsconfig.app.json",
   "compilerOptions": {
     "types": ["node"],
     "emitDecoratorMetadata": true,
-    "moduleResolution": "nodenext",
-    "module": "nodenext",
+    "moduleResolution": "bundler",
+    "module": "preserve",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
   "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
-  "include": ["../src/**/*.stories.*", "./preview.ts"],
-  "files": ["./typings.d.ts","../src/polyfills.ts"]
+  "include": ["../src/**/*.stories.*", "./*.ts"],
+  "files": ["./typings.d.ts", "../src/polyfills.ts"]
 }
