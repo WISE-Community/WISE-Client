@@ -1,5 +1,5 @@
 import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/blocks';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 <Meta title="Design Tokens/Color" />
 
@@ -11,9 +11,26 @@ Colors are available as CSS custom properties (variables).
 Check out the [Angular Material theming guide](https://material.angular.dev/guide/theming) and [Material 3 color roles](https://m3.material.io/styles/color/roles) for more information.
 
 export const ColorSwatch = ({ name, variable, text, showCode }) => {
+  const [computedColor, setComputedColor] = useState('');
+  const swatchRef = useRef(null);
+
+  const rgbToHex = (rgb) => {
+    if (!rgb || !rgb.startsWith('rgb')) return '';
+    const [r, g, b] = rgb.match(/\d+/g).map(Number);
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+  };
+
+  useEffect(() => {
+    if (swatchRef.current) {
+      const color = getComputedStyle(swatchRef.current).backgroundColor;
+      setComputedColor(rgbToHex(color));
+    }
+  }, [swatchRef]);
+
   const contrastColorVar = variable.includes('on-') ? variable.replace('on-', '') : `--mat-sys-on-${variable.substring(10)}`;
   return (
     <div
+      ref={swatchRef}
       className="color"
       style={{
         backgroundColor: `var(${variable})`,
@@ -21,7 +38,14 @@ export const ColorSwatch = ({ name, variable, text, showCode }) => {
       }}
     >
       <div>{name}</div>
-      {showCode && <code>{variable}</code>}
+      <div>
+        <code>{computedColor}</code>
+      </div>
+      {showCode && (
+        <div>
+          <code>{variable}</code>
+        </div>
+      )}
     </div>
   );
 };
@@ -98,10 +122,10 @@ export const ColorPalettesViewer = () => {
     <Unstyled>
       <div className="flex justify-end">
         <button onClick={() => setShowCode(!showCode)} className="btn-link">
-          {showCode ? 'Hide' : 'Show'} Variable Names
+          {showCode ? 'Hide' : 'Show'} CSS Variables
         </button>
       </div>
-      <div className="colors p-4 flex flex-col gap-2 mt-2 rounded-lg">
+      <div className="colors p-4 flex flex-col gap-2 mt-2 rounded-xl">
         <h3>Color Roles</h3>
         <div className="flex flex-wrap mb-2">
           <ColorSwatchGroup name="primary" showCode={showCode} description="Use for the most prominent and high-emphasis UI elements." />
