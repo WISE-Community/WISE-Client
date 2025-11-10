@@ -15,11 +15,15 @@ const meta: Meta<MatButtonStoryType> = {
   argTypes: {
     matButton: {
       control: 'select',
-      options: ['', 'filled', 'outlined', 'elevated', 'tonal']
+      options: ['text', 'filled', 'outlined', 'elevated', 'tonal'],
+      description: `'text' | 'filled' | 'outlined', | 'elevated' | 'tonal'`,
+      table: { defaultValue: { summary: 'text' } }
     },
     color: {
       control: 'select',
-      options: ['', 'secondary', 'tertiary', 'error']
+      options: ['primary', 'secondary', 'tertiary', 'error'],
+      description: `css class: 'primary' | 'secondary' | 'tertiary' | 'error'`,
+      table: { defaultValue: { summary: 'primary' } }
     }
   },
   args: {

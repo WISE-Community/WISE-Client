@@ -2,17 +2,11 @@
 @use '@angular/material' as mat;
 @use './themes/theme-colors' as theme-colors;
 @use './themes/theme-typography.scss' as theme-typography;
+@use './themes/dark-colors' as dark-colors;
 @use 'tailwindcss';
 
 :root {
-  --primary: #00799c;
-  --on-primary: #ffffff;
-  --tertiary: #E00040;
-  --on-tertiary: #ffffff;
-  --secondary: #{map.get(theme-colors.$secondary-palette, 40)};
-  --on-secondary: #ffffff;
-  --error: #{map.get(theme-colors.$error-palette, 40)};
-  --on-error: #ffffff;
+  --primary: #00799C;
   --button-horizontal-padding: 12px;
   --outlined-button-horizontal-padding: 10px;
   --button-icon-offset: -4px;
@@ -20,6 +14,7 @@
 }
 
 html {
+  color-scheme: light;
   @include mat.theme((
     color: (
       primary: theme-colors.$primary-palette,
@@ -31,13 +26,8 @@ html {
     ),
   ));
 
-  @include mat.theme-overrides((
-    primary: var(--primary),
-    on-primary: var(--on-primary),
-    on-primary-container: var(--primary),
-    tertiary: var(--tertiary),
-    on-tertiary: var(--on-tertiary),
-  ));
+  background: var(--mat-sys-background);
+  color: var(--mat-sys-on-background);
 
   /* Autocomplete */
 
@@ -50,7 +40,7 @@ html {
   /* Badge */
 
   @include mat.badge-overrides((
-    background-color: var(--tertiary),
+    background-color: var(--mat-sys-tertiary),
     container-size: 20px,
     container-padding: 3px 7.5px,
     text-size: var(--mat-sys-label-medium-size),
@@ -84,7 +74,7 @@ html {
     tonal-horizontal-padding: var(--outlined-button-horizontal-padding),
     protected-horizontal-padding: var(--button-horizontal-padding),
     outlined-outline-width: 2px,
-    outlined-outline-color: var(--primary),
+    outlined-outline-color: var(--mat-sys-primary),
     filled-icon-offset: var(--button-icon-offset),
     outlined-icon-offset: var(--button-icon-offset),
     protected-icon-offset: var(--button-icon-offset),
@@ -98,7 +88,16 @@ html {
   }
 
   @include mat.fab-overrides((
+    container-elevation-shadow: var(--mat-sys-level2),
+    hover-container-elevation-shadow: var(--mat-sys-level3),
+    focus-container-elevation-shadow: var(--mat-sys-level3),
+    extended-container-elevation-shadow: var(--mat-sys-level2),
+    extended-hover-container-elevation-shadow: var(--mat-sys-level3),
+    extended-focus-container-elevation-shadow: var(--mat-sys-level3),
     extended-container-height: var(--fab-size),
+    small-container-elevation-shadow: var(--mat-sys-level2),
+    small-hover-container-elevation-shadow: var(--mat-sys-level3),
+    small-focus-container-elevation-shadow: var(--mat-sys-level3),
   ));
 
   /* Card */
@@ -110,9 +109,8 @@ html {
     subtitle-text-weight: 400,
     elevated-container-color: var(--mat-sys-surface-container-lowest),
     filled-container-color: var(--mat-sys-surface-container-low),
-    outlined-container-color: var(--mat-sys-surface-container-lowest),
     outlined-outline-width: 2px,
-    subtitle-text-color: var(--secondary),
+    subtitle-text-color: var(--mat-sys-on-surface-variant),
   ));
 
   .mat-mdc-card-avatar {
@@ -401,11 +399,11 @@ html {
   /* Color variants */
 
   .primary {
-    color: var(--primary)
+    color: var(--mat-sys-primary)
   }
   
   .secondary {
-    color: var(--secondary);
+    color: var(--mat-sys-secondary);
 
     @include mat.theme((
       color: (
@@ -414,12 +412,12 @@ html {
     ));
 
     @include mat.button-overrides((
-      outlined-outline-color: var(--secondary),
+      outlined-outline-color: var(--mat-sys-secondary),
     ));
   }
 
   .tertiary {
-    color: var(--tertiary);
+    color: var(--mat-sys-tertiary);
 
     @include mat.theme((
       color: (
@@ -427,18 +425,13 @@ html {
       ),
     ));
 
-    @include mat.theme-overrides((
-      primary: var(--tertiary),
-      on-primary: var(--on-tertiary),
-    ));
-
     @include mat.button-overrides((
-      outlined-outline-color: var(--tertiary),
+      outlined-outline-color: var(--mat-sys-tertiary),
     ));
   }
 
   .error {
-    color: var(--error);
+    color: var(--mat-sys-error);
 
     @include mat.theme((
       color: (
@@ -447,7 +440,7 @@ html {
     ));
 
     @include mat.button-overrides((
-      outlined-outline-color: var(--error),
+      outlined-outline-color: var(--mat-sys-error),
     ));
   }
 }

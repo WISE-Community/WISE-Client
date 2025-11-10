@@ -87,3 +87,41 @@ html {
 pre.prismjs {
   max-height: 560px;
 }
+
+.btn-link {
+  @apply underline cursor-pointer;
+  color: var(--mat-sys-primary);
+  font: var(--mat-sys-body-medium);
+}
+
+/* Color Page */
+
+.colors {
+  background: var(--mat-sys-surface-container);
+  font: var(--mat-sys-body-medium);
+
+  h3 {
+    font: var(--mat-sys-title-medium);
+    margin-bottom: 0;
+  }
+
+  .color {
+    @apply p-2;
+
+    code {
+      font-size: var(--mat-sys-label-small-size);
+    }
+
+    &:first-of-type {
+      @apply min-h-20;
+    }
+  }
+
+  .color-list {
+    .color {
+      &:first-of-type {
+        @apply min-h-14;
+      }
+    }
+  }
+}
