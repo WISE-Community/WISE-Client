@@ -1,6 +1,6 @@
 // From: https://github.com/angular/components/issues/30055#issuecomment-2526139412
 
-@mixin my-typography-hierarchy {
+@mixin typography-hierarchy {
   // Heading styles
   h1 {
     font: var(--mat-sys-headline-large);
@@ -40,7 +40,7 @@
 
   // Body styles
   body {
-    font: var(--mat-sys-body-large);
+    font: var(--mat-sys-body-medium);
     letter-spacing: var(--mat-sys-body-large-tracking);
 
     p {

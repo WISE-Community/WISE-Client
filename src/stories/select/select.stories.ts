@@ -25,7 +25,7 @@ export const Basic: Story = {
         <div>
           <h4>Basic select:</h4>
           <div class="flex flex-wrap gap-2">
-            <mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
               <mat-label>Favorite food</mat-label>
               <mat-select [(value)]="favoriteFood">
                 <mat-option>-- None --</mat-option>
@@ -34,7 +34,7 @@ export const Basic: Story = {
                 }
               </mat-select>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
               <mat-label>Favorite food</mat-label>
               <mat-select [(value)]="favoriteFood" disabled>
                 <mat-option>-- None --</mat-option>
@@ -44,11 +44,11 @@ export const Basic: Story = {
               </mat-select>
             </mat-form-field>
           </div>
-          <p>You selected: {{favoriteFood}}</p>
+          <p class="pt-2">You selected: {{favoriteFood}}</p>
         </div>
         <div>
           <h4>Native HTML select:</h4>
-          <mat-form-field>
+          <mat-form-field subscriptSizing="dynamic">
             <mat-label>Favorite Food</mat-label>
             <select matNativeControl>
               <option>-- None --</option>
@@ -78,7 +78,7 @@ export const Multiple: Story = {
     'Black',
     'White'
   ];
-      <mat-form-field>
+      <mat-form-field subscriptSizing="dynamic">
         <mat-label>Favorite colors</mat-label>
         <mat-select multiple>
           @for (color of colors; track color) {
@@ -105,7 +105,7 @@ export const CustomLabel: Story = {
     'Black',
     'White'
   ];
-      <mat-form-field>
+      <mat-form-field subscriptSizing="dynamic">
         <mat-label>Favorite colors</mat-label>
         <mat-select [(value)]="colorsSelect" multiple>
           <mat-select-trigger>
@@ -153,7 +153,7 @@ export const OptionGroups: Story = {
       ]
     }
   ];
-      <mat-form-field>
+      <mat-form-field subscriptSizing="dynamic">
         <mat-label>Choose a color</mat-label>
         <mat-select>
           <mat-option>-- None --</mat-option>

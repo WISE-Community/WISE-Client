@@ -18,6 +18,20 @@ html {
   @apply border border-neutral-200 rounded shadow p-4 mt-4;
 }
 
+.btn-link {
+  @apply underline cursor-pointer;
+  color: var(--mat-sys-primary);
+  font: var(--mat-sys-body-small);
+}
+
+thead tr {
+  border-color: var(--mat-sys-outline-variant);
+}
+
+th, td {
+  @apply p-2 align-middle;
+}
+
 /* React Tabs */
 
 .react-tabs {
@@ -88,17 +102,15 @@ pre.prismjs {
   max-height: 560px;
 }
 
-.btn-link {
-  @apply underline cursor-pointer;
-  color: var(--mat-sys-primary);
-  font: var(--mat-sys-body-medium);
+.details {
+  background: var(--mat-sys-surface-container-low);
+  @apply p-4 rounded-xl;
 }
 
 /* Color Page */
 
 .colors {
-  background: var(--mat-sys-surface-container-low);
-  font: var(--mat-sys-body-medium);
+  font: var(--mat-sys-body-small);
 
   h3 {
     font: var(--mat-sys-title-medium);

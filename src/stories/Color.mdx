@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from 'react';
 
 WISE employs a color system based on [Material 3 static color schemes](https://m3.material.io/styles/color/static/baseline).
 Colors are available as CSS custom properties (variables).
+The main color role colors can also be applied to HTML elements using a correspinding CSS classname: <code>.primary</code>, <code>.secondary</code>, <code>.tertiary</code>, <code>.error</code>.
 
 Check out the [Angular Material theming guide](https://material.angular.dev/guide/theming) and [Material 3 color roles](https://m3.material.io/styles/color/roles) for more information.
 
@@ -125,7 +126,7 @@ export const ColorPalettesViewer = () => {
           {showCode ? 'Hide' : 'Show'} CSS Variables
         </button>
       </div>
-      <div className="colors p-4 flex flex-col gap-2 mt-2 rounded-xl">
+      <div className="colors details flex flex-col gap-2 mt-2">
         <h3>Color Roles</h3>
         <div className="flex flex-wrap mb-2">
           <ColorSwatchGroup name="primary" showCode={showCode} description="Use for the most prominent and high-emphasis UI elements." />

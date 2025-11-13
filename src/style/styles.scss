@@ -28,14 +28,35 @@ html {
   ));
 
   color: var(--mat-sys-on-background);
+  line-height: 1.4;
+
+  /* Typography */
+
+  @include theme-typography.typography-hierarchy;
+
+  @include mat.theme-overrides((
+    label-small: 500 0.75rem / 1rem Roboto,
+    label-medium: 500 0.875rem / 1.25rem Roboto,
+    label-large: 500 1rem / 1.5rem Roboto,
+    body-small: 400 0.875rem / 1.25rem Roboto,
+    body-medium: 400 1rem / 1.5rem Roboto,
+    body-large: 400 1.125rem / 1.625rem Roboto,
+    title-small: 500 1rem / 1.5rem Roboto,
+    title-medium: 500 1.125rem / 1.625rem Roboto,
+    title-large: 500 1.25rem / 1.75rem Roboto,
+    headline-small: 600 1.5rem / 2rem Raleway,
+    headline-medium: 600 1.75rem / 2.25rem Raleway,
+    headline-large: 600 2rem / 2.5rem Raleway,
+    display-small: 600 2.5rem / 3rem Raleway,
+    display-medium: 600 2.875rem / 3.25rem Raleway,
+    display-large: 600 3.25rem / 3.75rem Raleway,
+  ));
 
   /* Autocomplete */
 
   @include mat.autocomplete-overrides((
     background-color: var(--mat-sys-surface-container-lowest),
   ));
-
-  @include theme-typography.my-typography-hierarchy;
 
   /* Badge */
 
@@ -281,7 +302,7 @@ html {
     width: auto;
     left: calc(-1 * var(--button-horizontal-padding));
     right: calc(-1 * var(--button-horizontal-padding));
-    bottom: calc(-3/2 * var(--track-height));
+    bottom: calc(-1 * var(--track-height));
     border-top-right-radius: 0;
     border-top-left-radius: 0;
   }
@@ -443,6 +464,8 @@ html {
       outlined-outline-color: var(--mat-sys-error),
     ));
   }
+
+  /* Alternate theme (primary color background) */
 
   .alt-theme {
     background: var(--mat-sys-primary);
