@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HomePageProjectLibraryComponent } from './home-page-project-library.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
+import { MockComponents } from 'ng-mocks';
+import { LibraryFiltersComponent } from '../library-filters/library-filters.component';
+import { provideRouter } from '@angular/router';
+import { OfficialLibraryComponent } from '../official-library/official-library.component';
 
 export class MockLibraryService {
   getOfficialLibraryProjects() {}
@@ -13,10 +16,11 @@ describe('HomePageProjectLibraryComponent', () => {
   let fixture: ComponentFixture<HomePageProjectLibraryComponent>;
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [],
-      declarations: [HomePageProjectLibraryComponent],
-      providers: [{ provide: LibraryService, useClass: MockLibraryService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [
+        HomePageProjectLibraryComponent,
+        MockComponents(OfficialLibraryComponent, LibraryFiltersComponent)
+      ],
+      providers: [{ provide: LibraryService, useClass: MockLibraryService }, provideRouter([])]
     }).compileComponents();
   }));
 

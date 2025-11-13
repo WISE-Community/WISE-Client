@@ -35,8 +35,7 @@ describe('LibraryProjectDetailsComponent', () => {
       resources: [{ name: 'Resource 1', uri: 'http://example.com/resource1' }]
     };
     TestBed.configureTestingModule({
-      declarations: [MockComponent(LibraryProjectMenuComponent)],
-      imports: [LibraryProjectDetailsComponent],
+      imports: [LibraryProjectDetailsComponent, MockComponent(LibraryProjectMenuComponent)],
       providers: [
         MockProviders(ConfigService, MatDialog, MatDialogRef, UserService),
         { provide: MAT_DIALOG_DATA, useValue: { project: project } }
