@@ -4,7 +4,7 @@
 
 .projectItem:hover {
   cursor: pointer;
-  background-color: lightgrey;
+  background-color: #add8e6;
 }
 
 .md-tooltip.projectButtonTooltip {
@@ -22,9 +22,11 @@ html[dir='rtl'] .projectButton {
 }
 
 .main-box {
+  width: 100%;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 40px;
+  margin-right: 40px
 }
 
 html[dir='rtl'] .main-box {

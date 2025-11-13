@@ -10,6 +10,7 @@ import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner
 import { ConfigService } from '../../services/configService';
 import { CopyProjectService } from '../../services/copyProjectService';
 import { SessionService } from '../../services/sessionService';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   imports: [
@@ -17,6 +18,7 @@ import { SessionService } from '../../services/sessionService';
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
+    MatTabsModule,
     MatTooltipModule,
     RouterModule
   ],
