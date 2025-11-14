@@ -2,12 +2,11 @@ import { ApplyTagsButtonComponent } from '../../../teacher/apply-tags-button/app
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { BehaviorSubject } from 'rxjs';
-import { Component, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { Component, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LibraryComponent } from '../library/library.component';
 import { LibraryProject } from '../libraryProject';
 import { LibraryProjectComponent } from '../library-project/library-project.component';
-import { LibraryService } from '../../../services/library.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -17,7 +16,6 @@ import { ProjectSelectionEvent } from '../../../domain/projectSelectionEvent';
 import { SelectAllItemsCheckboxComponent } from '../select-all-items-checkbox/select-all-items-checkbox.component';
 import { SelectTagsComponent } from '../../../teacher/select-tags/select-tags.component';
 import { Tag } from '../../../domain/tag';
-import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 @Component({
   imports: [
@@ -54,13 +52,7 @@ export class PersonalLibraryComponent extends LibraryComponent {
   protected sharedProjects: LibraryProject[] = [];
   protected showArchivedView: boolean = false;
 
-  constructor(
-    private archiveProjectService: ArchiveProjectService,
-    protected filterValues: ProjectFilterValues,
-    protected libraryService: LibraryService
-  ) {
-    super(filterValues, libraryService);
-  }
+  private archiveProjectService = inject(ArchiveProjectService);
 
   ngOnInit(): void {
     super.ngOnInit();

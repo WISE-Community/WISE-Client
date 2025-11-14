@@ -1,4 +1,4 @@
-import { OnInit, QueryList, ViewChildren, Directive } from '@angular/core';
+import { OnInit, QueryList, ViewChildren, Directive, inject } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
 import { LibraryProject } from '../libraryProject';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
@@ -18,10 +18,8 @@ export abstract class LibraryComponent implements OnInit {
   protected showFilters: boolean = false;
   protected subscriptions: Subscription = new Subscription();
 
-  constructor(
-    protected filterValues: ProjectFilterValues,
-    protected libraryService: LibraryService
-  ) {}
+  protected filterValues = inject(ProjectFilterValues);
+  protected libraryService = inject(LibraryService);
 
   ngOnInit(): void {
     this.subscriptions.add(this.filterValues.updated$.subscribe(() => this.filterUpdated()));
