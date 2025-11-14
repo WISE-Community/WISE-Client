@@ -11,13 +11,7 @@
           </button>
         </div>
         <ng-template #projectTemplate let-project="project">
-          <button
-            class="projectItem"
-            mat-list-item
-            (click)="openProject(project.id)"
-            aria-label="Edit unit"
-            i18n-aria-label
-          >
+          <button class="projectItem" mat-list-item (click)="openProject(project.id)">
             <span class="flex items-center justify-between gap-2">
               <span class="whitespace-normal">
                 <span>{{ project.id }} - {{ project.name }}</span>
