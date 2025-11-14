@@ -1,74 +1,80 @@
-<div id="top" class="view-content view-content--with-sidemenu">
-  <div class="l-constrained" class="flex flex-col">
+<div id="top" class="view-content">
+  <div class="l-constrained flex flex-col">
     <div class="node-content md-whiteframe-1dp flex flex-wrap" style="position: relative">
-      <div class="main-box">
-        <div class="flex justify-end gap-1">
-          <a mat-raised-button color="primary" (click)="addNewProject()" class="flex gap-1">
+      <div class="p-8 w-full">
+        <div class="flex flex-wrap justify-end gap-1">
+          <button mat-raised-button color="primary" (click)="addNewProject()" class="flex gap-1">
             <mat-icon>add</mat-icon> <span i18n>Create new unit</span>
-          </a>
-          <a mat-raised-button color="primary" (click)="goHome()" class="flex gap-1">
+          </button>
+          <button mat-raised-button color="primary" (click)="goHome()" class="flex gap-1">
             <mat-icon>calendar_month</mat-icon> <span i18n>Class schedule</span>
-          </a>
+          </button>
         </div>
         <ng-template #projectTemplate let-project="project">
-          <span
+          <button
+            class="projectItem"
+            mat-list-item
             (click)="openProject(project.id)"
-            class="projectButton flex grow"
-            matTooltip="Edit unit"
-            i18n-matTooltip
+            aria-label="Edit unit"
+            i18n-aria-label
           >
-            <span>{{ project.id }} - {{ project.name }}</span
-            >&nbsp;
-            @if (project.runId != null) {
-              <span i18n>(Run ID: {{ project.runId }})</span>
-            }
-          </span>
-          <span
-            (click)="copyProject(project.id)"
-            class="projectButton"
-            matTooltip="Copy"
-            matTooltipPosition="left"
-            i18n-matTooltip
-          >
-            <mat-icon>content_copy</mat-icon>
-          </span>
-          <span
-            (click)="previewProject(project.id)"
-            class="projectButton"
-            matTooltip="Preview"
-            matTooltipPosition="left"
-            i18n-matTooltip
-          >
-            <mat-icon>preview</mat-icon>
-          </span>
+            <span class="flex items-center justify-between gap-2">
+              <span class="whitespace-normal">
+                <span>{{ project.id }} - {{ project.name }}</span>
+                @if (project.runId != null) {
+                  &nbsp;<span i18n>(Run ID: {{ project.runId }})</span>
+                }
+              </span>
+              <span>
+                <button
+                  matIconButton
+                  (click)="copyProject(project.id)"
+                  matTooltip="Copy"
+                  matTooltipPosition="above"
+                  i18n-matTooltip
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+                <button
+                  matIconButton
+                  (click)="previewProject(project.id)"
+                  matTooltip="Preview"
+                  matTooltipPosition="above"
+                  i18n-matTooltip
+                >
+                  <mat-icon>preview</mat-icon>
+                </button>
+              </span>
+            </span>
+          </button>
         </ng-template>
         <mat-tab-group mat-stretch-tabs="false">
           <mat-tab label="My Units" i18n-label>
             @if (projects.length == 0) {
-              <div i18n>You have no units</div>
+              <p i18n>You have no units</p>
             } @else {
-              @for (project of projects; track project.id) {
-                <div id="{{ project.id }}" class="projectItem flex">
+              <mat-action-list>
+                @for (project of projects; track project.id) {
                   <ng-container
                     [ngTemplateOutlet]="projectTemplate"
                     [ngTemplateOutletContext]="{ project: project }"
                   />
-                </div>
-              }
+                }
+              </mat-action-list>
             }
           </mat-tab>
           <mat-tab label="Shared Units" i18n-label>
             @if (sharedProjects.length == 0) {
               <div i18n>You have no shared units</div>
             } @else {
-              @for (project of sharedProjects; track project.id) {
-                <div id="{{ project.id }}" class="projectItem flex">
+              <mat-action-list>
+                @for (project of sharedProjects; track project.id) {
                   <ng-container
                     [ngTemplateOutlet]="projectTemplate"
                     [ngTemplateOutletContext]="{ project: project }"
                   />
-                </div>
-              }
+                }
+              </mat-action-list>
             }
           </mat-tab>
         </mat-tab-group>

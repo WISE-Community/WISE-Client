@@ -11,6 +11,7 @@ import { ConfigService } from '../../services/configService';
 import { CopyProjectService } from '../../services/copyProjectService';
 import { SessionService } from '../../services/sessionService';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   imports: [
@@ -18,11 +19,17 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
+    MatListModule,
     MatTabsModule,
     MatTooltipModule,
     RouterModule
   ],
-  styleUrl: './project-list.component.scss',
+  styles: `
+    .projectItem:hover {
+      cursor: pointer;
+      background-color: #add8e6;
+    }
+  `,
   templateUrl: './project-list.component.html'
 })
 export class ProjectListComponent implements OnInit, OnDestroy {
