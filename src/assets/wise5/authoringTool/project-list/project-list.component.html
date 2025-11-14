@@ -28,7 +28,7 @@
               <span>
                 <button
                   matIconButton
-                  (click)="copyProject(project.id)"
+                  (click)="copyProject(project.id); $event.stopPropagation()"
                   matTooltip="Copy"
                   matTooltipPosition="above"
                   i18n-matTooltip
@@ -37,7 +37,7 @@
                 </button>
                 <button
                   matIconButton
-                  (click)="previewProject(project.id)"
+                  (click)="previewProject(project.id); $event.stopPropagation()"
                   matTooltip="Preview"
                   matTooltipPosition="above"
                   i18n-matTooltip
