@@ -2,12 +2,14 @@
 @use '@angular/material' as mat;
 @use './themes/theme-colors' as theme-colors;
 @use './themes/theme-typography.scss' as theme-typography;
-@use './themes/dark-colors' as dark-colors;
 @use 'tailwindcss';
 
 :root {
-  --primary: #00799C;
-  --tertiary2: #cad266;
+  --mat-sys-success: light-dark(#388E3C, #82db7e);
+  --mat-sys-success-container: light-dark(#9df898, #005312);
+  --mat-sys-on-success: light-dark(#ffffff, #00390a);
+  --mat-sys-on-success-container: light-dark(#005312, #9df898);
+  --mat-sys-tertiary2: #cad266;
   --button-horizontal-padding: 12px;
   --outlined-button-horizontal-padding: 10px;
   --button-icon-offset: -4px;
@@ -20,6 +22,7 @@ html {
     color: (
       primary: theme-colors.$primary-palette,
       tertiary: theme-colors.$tertiary-palette,
+      error: theme-colors.$error-palette,
     ),
     typography: (
       plain-family: Roboto,
@@ -462,6 +465,20 @@ html {
 
     @include mat.button-overrides((
       outlined-outline-color: var(--mat-sys-error),
+    ));
+  }
+
+  .success {
+    color: var(--mat-sys-success);
+
+    @include mat.theme((
+      color: (
+        primary: theme-colors.$success-palette,
+      ),
+    ));
+
+    @include mat.button-overrides((
+      outlined-outline-color: var(--mat-sys-success),
     ));
   }
 

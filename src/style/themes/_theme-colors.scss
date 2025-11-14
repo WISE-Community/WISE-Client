@@ -126,6 +126,26 @@ $_palettes: (
     99: #fffbff,
     100: #ffffff,
   ),
+  // added
+  success: (
+    0: #000000,
+    10: #002204,
+    20: #00390a,
+    25: #00460e,
+    30: #005312,
+    35: #006017,
+    // 40: #106d20,
+    40: #388E3C,
+    50: #318836,
+    60: #4da24e,
+    70: #67be66,
+    80: #82db7e,
+    90: #9df898,
+    95: #c8ffbf,
+    98: #ecffe4,
+    99: #f6fff0,
+    100: #ffffff,
+  ),
 );
 
 $_rest: (
@@ -133,6 +153,7 @@ $_rest: (
   neutral: map.get($_palettes, neutral),
   neutral-variant: map.get($_palettes,  neutral-variant),
   error: map.get($_palettes, error),
+  success: map.get($_palettes, success),
 );
 
 $primary-palette: map.merge(map.get($_palettes, primary), $_rest);
@@ -141,6 +162,7 @@ $tertiary-palette: map.merge(map.get($_palettes, tertiary), $_rest);
 // Manually added
 $secondary-palette: map.merge(map.get($_palettes, secondary), $_rest);
 $error-palette: map.merge(map.get($_palettes, error), $_rest);
+$success-palette: map.merge(map.get($_palettes, success), $_rest);
 
 @function _high-contrast-value($light, $dark, $theme-type) {
   @if ($theme-type == light) {

@@ -21,8 +21,8 @@ const meta: Meta<MatButtonStoryType> = {
     },
     color: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'error'],
-      description: `css class: 'primary' | 'secondary' | 'tertiary' | 'error'`,
+      options: ['primary', 'secondary', 'tertiary', 'error', 'success'],
+      description: `css class: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success'`,
       table: { defaultValue: { summary: 'primary' } }
     }
   },
@@ -161,24 +161,28 @@ export const Colors: Story = {
           <button matButton class="secondary">Secondary</button>
           <button matButton class="tertiary">Tertiary</button>
           <button matButton class="error">Error</button>
+          <button matButton class="success">Success</button>
         </div>
         <div class="flex flex-wrap gap-2">
           <button matButton="filled">Primary</button>
           <button matButton="filled" class="secondary">Secondary</button>
           <button matButton="filled" class="tertiary">Tertiary</button>
           <button matButton="filled" class="error">Error</button>
+          <button matButton="filled" class="success">Success</button>
         </div>
         <div class="flex flex-wrap gap-2">
           <button matButton="elevated">Primary</button>
           <button matButton="elevated" class="secondary">Secondary</button>
           <button matButton="elevated" class="tertiary">Tertiary</button>
           <button matButton="elevated" class="error">Error</button>
+          <button matButton="elevated" class="success">Success</button>
         </div>
         <div class="flex flex-wrap gap-2">
           <button matButton="outlined">Primary</button>
           <button matButton="outlined" class="secondary">Secondary</button>
           <button matButton="outlined" class="tertiary">Tertiary</button>
           <button matButton="outlined" class="error">Error</button>
+          <button matButton="outlined" class="success">Success</button>
         </div>
         <div class="flex flex-wrap gap-2">
           <button matIconButton aria-label="Example primary icon button with a warning icon">
@@ -191,6 +195,9 @@ export const Colors: Story = {
             <mat-icon>warning</mat-icon>
           </button>
           <button matIconButton class="error" aria-label="Example error icon button with a warning icon">
+            <mat-icon>warning</mat-icon>
+          </button>
+          <button matIconButton class="success" aria-label="Example success icon button with a warning icon">
             <mat-icon>warning</mat-icon>
           </button>
         </div>
