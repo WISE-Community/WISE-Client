@@ -6,10 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-    imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule],
-    selector: 'tag',
-    templateUrl: './tag.component.html',
-    styleUrl: './tag.component.scss'
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule],
+  selector: 'tag',
+  styleUrl: './tag.component.scss',
+  templateUrl: './tag.component.html'
 })
 export class TagComponent implements OnChanges {
   @Input() allowRemove: boolean;

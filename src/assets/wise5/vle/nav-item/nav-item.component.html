@@ -18,7 +18,7 @@
             [nodeId]="nodeId"
             size="36"
             [icon]="nodeStatus.icon"
-          ></node-icon>
+          />
           <mat-card-title class="title" style="color: {{ nodeStatus.icon.color }};">
             <span>{{ nodeTitle }}</span>
           </mat-card-title>
@@ -62,7 +62,7 @@
           <span class="flex-grow"></span>
           <div class="flex items-center gap-2">
             <!-- <node-score [nodeId]="nodeId"></node-score> -->
-            <node-status-icon [nodeId]="nodeId"></node-status-icon>
+            <node-status-icon [nodeId]="nodeId" />
             @if (!nodeStatus.isVisitable) {
               <mat-icon
                 class="secondary-text"
@@ -88,11 +88,11 @@
         [ngClass]="{ group: isGroup }"
       >
         <span class="flex flex-row items-center gap-2">
-          <node-icon matListAvatar [nodeId]="nodeId" [icon]="nodeStatus.icon" size="24"></node-icon>
+          <node-icon matListAvatar [nodeId]="nodeId" [icon]="nodeStatus.icon" size="24" />
           <span class="mat-body-2">{{ nodeTitle }}</span>
           <span class="flex-grow"></span>
           <span class="flex items-center gap-2">
-            <node-status-icon [nodeId]="nodeId"></node-status-icon>
+            <node-status-icon [nodeId]="nodeId" />
             @if (!nodeStatus.isVisitable) {
               <mat-icon
                 class="secondary-text"

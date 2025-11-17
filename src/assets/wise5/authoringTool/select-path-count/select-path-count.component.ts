@@ -4,9 +4,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    imports: [FormsModule, MatFormFieldModule, MatInputModule],
-    selector: 'select-path-count',
-    templateUrl: './select-path-count.component.html'
+  imports: [FormsModule, MatFormFieldModule, MatInputModule],
+  selector: 'select-path-count',
+  templateUrl: './select-path-count.component.html'
 })
 export class SelectPathCountComponent {
   @Input() pathCount: number;

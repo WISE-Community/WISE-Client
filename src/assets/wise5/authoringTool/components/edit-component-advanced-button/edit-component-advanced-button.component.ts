@@ -8,9 +8,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-    selector: 'edit-component-advanced-button',
-    templateUrl: 'edit-component-advanced-button.component.html'
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  selector: 'edit-component-advanced-button',
+  templateUrl: 'edit-component-advanced-button.component.html'
 })
 export class EditComponentAdvancedButtonComponent {
   @Input() componentContent: ComponentContent;
