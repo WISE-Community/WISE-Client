@@ -5606,15 +5606,23 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source> Curriculum Offerings </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">94,96</context>
+          <context context-type="linenumber">94,97</context>
         </context-group>
         <target state="needs-translation"> Curriculum Offerings </target>
+      </trans-unit>
+      <trans-unit id="7303979114499756666" datatype="html">
+        <source>Curriculum Offerings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">99,103</context>
+        </context-group>
+        <target state="needs-translation">Curriculum Offerings</target>
       </trans-unit>
       <trans-unit id="8254507243031097369" datatype="html">
         <source>Ready to try WISE in the Classroom?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">101,102</context>
+          <context context-type="linenumber">105,106</context>
         </context-group>
         <target state="needs-translation">Ready to try WISE in the Classroom?</target>
       </trans-unit>
@@ -5622,7 +5630,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Sign up for free!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">102,108</context>
+          <context context-type="linenumber">106,112</context>
         </context-group>
         <target state="needs-translation">Sign up for free!</target>
       </trans-unit>
@@ -5630,7 +5638,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Connect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">115,118</context>
+          <context context-type="linenumber">119,122</context>
         </context-group>
         <target state="needs-translation">Connect</target>
       </trans-unit>
@@ -5638,7 +5646,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>WISE on Facebook</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">121,124</context>
+          <context context-type="linenumber">125,128</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5650,7 +5658,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>WISE on Twitter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">130,133</context>
+          <context context-type="linenumber">134,137</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5662,7 +5670,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>WISE on Github</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">139,142</context>
+          <context context-type="linenumber">143,146</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5674,7 +5682,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Community</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">149,151</context>
+          <context context-type="linenumber">153,155</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5694,7 +5702,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Join us! Discuss all things WISE.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">151,153</context>
+          <context context-type="linenumber">155,157</context>
         </context-group>
         <target state="needs-translation">Join us! Discuss all things WISE.</target>
       </trans-unit>
@@ -5702,7 +5710,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Help + FAQs</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">161,163</context>
+          <context context-type="linenumber">164,166</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5714,7 +5722,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>View tutorials and common questions.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">163,166</context>
+          <context context-type="linenumber">166,169</context>
         </context-group>
         <target state="needs-translation">View tutorials and common questions.</target>
       </trans-unit>
@@ -5722,7 +5730,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Contact Us</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">171,173</context>
+          <context context-type="linenumber">173,175</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/footer/footer.component.html</context>
@@ -5734,7 +5742,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Want to get in touch? Send us a message.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">173,177</context>
+          <context context-type="linenumber">175,179</context>
         </context-group>
         <target state="needs-translation">Want to get in touch? Send us a message.</target>
       </trans-unit>
