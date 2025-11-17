@@ -31,6 +31,7 @@ import { RouterModule } from '@angular/router';
 import { TeacherToolsRoutingModule } from './teacher-tools-routing.module';
 import { TeacherPauseScreenService } from '../../assets/wise5/services/teacherPauseScreenService';
 import { RunStatusService } from '../../assets/wise5/services/runStatusService';
+import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
 
 @NgModule({
   imports: [ClassroomMonitorModule, RouterModule, TeacherToolsRoutingModule],
@@ -41,6 +42,7 @@ import { RunStatusService } from '../../assets/wise5/services/runStatusService';
     DataExportService,
     { provide: DataService, useExisting: TeacherDataService },
     GetWorkgroupService,
+    GradingNodeService,
     DeleteNodeService,
     ImportComponentService,
     InsertComponentService,
