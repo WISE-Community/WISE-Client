@@ -157,7 +157,7 @@
       </div>
     </mat-list-item>
     <div class="mat-elevation-z1" waIntersectionObserver waIntersectionThreshold="0.5">
-      <ng-container *ngFor="let workgroup of sortedWorkgroups">
+      @for (workgroup of sortedWorkgroups; track workgroup.workgroupId) {
         @if (isWorkgroupShown(workgroup)) {
           <milestone-workgroup-item
             [expanded]="workgroupExpanded[workgroup.workgroupId]"
@@ -170,7 +170,7 @@
           >
           </milestone-workgroup-item>
         }
-      </ng-container>
+      }
     </div>
   </mat-list>
 </div>
