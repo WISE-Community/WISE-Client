@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { Constraint } from '../../../../../app/domain/constraint';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
@@ -6,7 +6,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 export class ConstraintsAuthoringComponent {
   content: any;
 
-  constructor(protected projectService: TeacherProjectService) {}
+  protected projectService = inject(TeacherProjectService);
 
   protected addConstraint(): Constraint {
     const newNodeConstraintId = this.getNewNodeConstraintId();
