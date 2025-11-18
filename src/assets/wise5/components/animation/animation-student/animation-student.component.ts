@@ -1,14 +1,6 @@
 import SVG from 'svg.js';
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
+import { Component, inject } from '@angular/core';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { AnimationService } from '../animationService';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
@@ -38,6 +30,7 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
   templateUrl: 'animation-student.component.html'
 })
 export class AnimationStudent extends ComponentStudent {
+  private animationService = inject(AnimationService);
   animationState: any = 'stopped';
   coordinateSystem: string = 'screen';
   draw: any;
@@ -61,29 +54,6 @@ export class AnimationStudent extends ComponentStudent {
   svgId: string;
   timerText: any;
   width: number = 800;
-
-  constructor(
-    private animationService: AnimationService,
-    protected annotationService: AnnotationService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

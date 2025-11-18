@@ -1,16 +1,8 @@
 import SVG from 'svg.js';
 import 'svg.draggable.js';
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { ConceptMapService } from '../conceptMapService';
 import { DialogWithCloseComponent } from '../../../directives/dialog-with-close/dialog-with-close.component';
 import { copy } from '../../../common/object/object';
@@ -56,9 +48,11 @@ export class ConceptMapStudent extends ComponentStudent {
   background: any;
   backgroundSize: string;
   backgroundUrl: string = '';
+  private changeDetector = inject(ChangeDetectorRef);
   componentStateId: number;
   componentTypesCanImportAsBackground: string[] = ['Draw', 'Embedded', 'Graph', 'Label', 'Table'];
   conceptMapContainerId: string;
+  private conceptMapService = inject(ConceptMapService);
   displayLinkTypeChooser: boolean = false;
   domIdEnding: string;
   dragOverListenerFunction: any;
@@ -76,6 +70,7 @@ export class ConceptMapStudent extends ComponentStudent {
   modalWidth: number = 800;
   newlyCreatedLink: any;
   nodes: any[] = [];
+  private projectService = inject(ProjectService);
   selectedLinkType: string;
   selectedNode: any;
   selectNodeBarId: string;
@@ -84,31 +79,6 @@ export class ConceptMapStudent extends ComponentStudent {
   tempOffsetX: number = 0;
   tempOffsetY: number = 0;
   width: number = 800;
-
-  constructor(
-    protected annotationService: AnnotationService,
-    private changeDetector: ChangeDetectorRef,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    private conceptMapService: ConceptMapService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private projectService: ProjectService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

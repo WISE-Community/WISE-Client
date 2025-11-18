@@ -1,16 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { generateRandomKey } from '../../../common/string/string';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { StudentAssetRequest } from '../../../vle/studentAsset/StudentAssetRequest';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { ComponentStateRequest } from '../../ComponentStateRequest';
 import { DiscussionService } from '../discussionService';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
@@ -47,35 +39,13 @@ import { ClassResponse } from '../class-response/class-response.component';
 export class DiscussionStudent extends ComponentStudent {
   classResponses: any[] = [];
   componentStateIdReplyingTo: number;
+  private discussionService = inject(DiscussionService);
   newResponse: string = '';
+  private notificationService = inject(NotificationService);
   responsesMap: any = {};
   retrievedClassmateResponses: boolean = false;
   studentResponse: string = '';
   topLevelResponses: any = {};
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    private discussionService: DiscussionService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private notificationService: NotificationService,
-    protected studentAssetService: StudentAssetService,
-    protected dataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      dataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -85,7 +55,7 @@ export class DiscussionStudent extends ComponentStudent {
       if (this.component.hasConnectedComponent()) {
         for (const connectedComponent of this.componentContent.connectedComponents) {
           componentStates = componentStates.concat(
-            this.dataService.getComponentStatesByNodeIdAndComponentId(
+            this.studentDataService.getComponentStatesByNodeIdAndComponentId(
               connectedComponent.nodeId,
               connectedComponent.componentId
             )
@@ -93,11 +63,14 @@ export class DiscussionStudent extends ComponentStudent {
         }
         if (this.isConnectedComponentImportWorkMode()) {
           componentStates = componentStates.concat(
-            this.dataService.getComponentStatesByNodeIdAndComponentId(this.nodeId, this.componentId)
+            this.studentDataService.getComponentStatesByNodeIdAndComponentId(
+              this.nodeId,
+              this.componentId
+            )
           );
         }
       } else {
-        componentStates = this.dataService.getComponentStatesByNodeIdAndComponentId(
+        componentStates = this.studentDataService.getComponentStatesByNodeIdAndComponentId(
           this.nodeId,
           this.componentId
         );
@@ -181,7 +154,7 @@ export class DiscussionStudent extends ComponentStudent {
       this.studentResponse = this.newResponse;
       this.isSubmit = true;
     }
-    this.dataService.broadcastComponentSubmitTriggered({
+    this.studentDataService.broadcastComponentSubmitTriggered({
       nodeId: this.nodeId,
       componentId: this.componentId
     });
@@ -316,7 +289,7 @@ export class DiscussionStudent extends ComponentStudent {
 
   registerStudentWorkReceivedListener() {
     this.subscriptions.add(
-      this.dataService.studentWorkReceived$.subscribe((componentState) => {
+      this.studentDataService.studentWorkReceived$.subscribe((componentState) => {
         if (
           (this.isWorkFromThisComponent(componentState) ||
             this.isFromConnectedComponent(componentState)) &&
@@ -394,15 +367,15 @@ export class DiscussionStudent extends ComponentStudent {
       componentState.studentData.isSubmit = this.isSubmit;
       this.isSubmit = false;
       if (this.mode === 'authoring') {
-        if (this.dataService.studentData == null) {
-          this.dataService.studentData = {
+        if (this.studentDataService.studentData == null) {
+          this.studentDataService.studentData = {
             componentStates: [],
             events: [],
             annotations: []
           };
         }
-        this.dataService.studentData.componentStates.push(componentState);
-        const componentStates = this.dataService.getComponentStatesByNodeIdAndComponentId(
+        this.studentDataService.studentData.componentStates.push(componentState);
+        const componentStates = this.studentDataService.getComponentStatesByNodeIdAndComponentId(
           this.nodeId,
           this.componentId
         );

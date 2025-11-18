@@ -1,11 +1,4 @@
-import { Component } from '@angular/core';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
-import { ComponentService } from '../../componentService';
+import { Component, inject } from '@angular/core';
 import { DialogResponse } from '../DialogResponse';
 import { StudentDialogResponse } from '../StudentDialogResponse';
 import { CRaterService } from '../../../services/cRaterService';
@@ -16,7 +9,6 @@ import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEvaluator';
 import { ComputerDialogResponseMultipleScores } from '../ComputerDialogResponseMultipleScores';
 import { ComputerDialogResponseSingleScore } from '../ComputerDialogResponseSingleScore';
-import { MatDialog } from '@angular/material/dialog';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
@@ -53,40 +45,18 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   component: DialogGuidanceComponent;
   protected computerAvatar: ComputerAvatar;
   protected computerAvatarSelectorVisible: boolean = false;
+  protected computerAvatarService = inject(ComputerAvatarService);
+  protected constraintService = inject(ConstraintService);
+  private cRaterPingService = inject(CRaterPingService);
+  protected cRaterService = inject(CRaterService);
   private cRaterTimeout: number = 40000;
+  protected dialogGuidanceFeedbackService = inject(DialogGuidanceFeedbackService);
   private feedbackRuleEvaluator: FeedbackRuleEvaluator<CRaterResponse[]>;
   protected isWaitingForComputerResponse: boolean = false;
   protected responses: DialogResponse[] = [];
   protected studentCanRespond: boolean = true;
+  protected studentStatusService = inject(StudentStatusService);
   workgroupId: number;
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected componentService: ComponentService,
-    protected computerAvatarService: ComputerAvatarService,
-    protected configService: ConfigService,
-    private constraintService: ConstraintService,
-    protected cRaterService: CRaterService,
-    protected dialog: MatDialog,
-    protected dialogGuidanceFeedbackService: DialogGuidanceFeedbackService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    protected studentAssetService: StudentAssetService,
-    protected dataService: StudentDataService,
-    protected studentStatusService: StudentStatusService,
-    private cRaterPingService: CRaterPingService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      dataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -212,7 +182,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   private getCRaterResponses(): CRaterResponse[] {
     let submitCounter = 1;
     return (
-      this.dataService
+      this.studentDataService
         .getLatestComponentStateByNodeIdAndComponentId(this.nodeId, this.componentId)
         ?.studentData.responses.filter(
           (response: DialogResponse) =>

@@ -1,21 +1,14 @@
 import { fabric } from 'fabric';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { StudentDataService } from '../../../services/studentDataService';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { LabelService } from '../labelService';
-import { StudentAssetService } from '../../../services/studentAssetService';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { wordWrap } from '../../../common/string/string';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
@@ -69,29 +62,8 @@ export class LabelStudentComponent extends ComponentStudent {
   studentDataVersion: number = 2;
   textZIndex: number = 1;
 
-  constructor(
-    protected annotationService: AnnotationService,
-    private changeDetector: ChangeDetectorRef,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    private labelService: LabelService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
+  private changeDetector = inject(ChangeDetectorRef);
+  private labelService = inject(LabelService);
 
   ngOnInit(): void {
     super.ngOnInit();

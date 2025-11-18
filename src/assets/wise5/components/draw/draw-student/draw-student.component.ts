@@ -1,16 +1,8 @@
 import { fabric } from 'fabric';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { DrawService } from '../drawService';
-import { MatDialog } from '@angular/material/dialog';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
@@ -35,38 +27,16 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
   templateUrl: 'draw-student.component.html'
 })
 export class DrawStudent extends ComponentStudent {
+  private drawService = inject(DrawService);
   drawingTool: any;
   drawingToolId: string;
   height: number = 600;
   latestConnectedComponentState: any;
   parentStudentWorkIds: number[] = null;
+  private projectService = inject(ProjectService);
   isResetButtonVisible: boolean = true;
   showCopyPublicNotebookItemButton: boolean = false;
   width: number = 800;
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    private drawService: DrawService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private projectService: ProjectService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

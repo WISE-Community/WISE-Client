@@ -1,13 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
+import { Component, inject } from '@angular/core';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 import { MultipleChoiceService } from '../multipleChoiceService';
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
@@ -38,32 +30,10 @@ export class MultipleChoiceStudentComponent extends ComponentStudent {
   protected componentHasCorrectAnswer: boolean;
   isCorrect: boolean;
   protected isLatestComponentStateSubmit: boolean;
+  private multipleChoiceService = inject(MultipleChoiceService);
   private originalComponentContent: MultipleChoiceContent;
   protected showFeedback: boolean;
   studentChoices: string | string[];
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dataService: StudentDataService,
-    protected dialog: MatDialog,
-    private multipleChoiceService: MultipleChoiceService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    protected studentAssetService: StudentAssetService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      dataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -103,7 +73,7 @@ export class MultipleChoiceStudentComponent extends ComponentStudent {
 
   handleConnectedComponents(): void {
     for (const connectedComponent of this.componentContent.connectedComponents) {
-      const componentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
+      const componentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
         connectedComponent.nodeId,
         connectedComponent.componentId
       );
@@ -225,7 +195,7 @@ export class MultipleChoiceStudentComponent extends ComponentStudent {
         }
 
         if (submitTriggeredBy == null || submitTriggeredBy === 'componentSubmitButton') {
-          this.dataService.broadcastComponentSubmitTriggered({
+          this.studentDataService.broadcastComponentSubmitTriggered({
             nodeId: this.component.nodeId,
             componentId: this.component.id
           });

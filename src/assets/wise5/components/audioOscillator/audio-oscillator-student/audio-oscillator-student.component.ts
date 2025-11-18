@@ -1,14 +1,6 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, inject } from '@angular/core';
 import { copy } from '../../../common/object/object';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { hasConnectedComponent } from '../../../common/ComponentContent';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
@@ -47,6 +39,7 @@ export class AudioOscillatorStudent extends ComponentStudent {
   amplitudesPlayedSorted: number[] = [];
   analyser: any;
   audioContext: any;
+  private audioOscillatorService = inject(AudioOscillatorService);
   canStudentEditAmplitude: boolean = true;
   canStudentEditFrequency: boolean = true;
   canStudentViewAmplitudeInput: boolean = true;
@@ -85,29 +78,6 @@ export class AudioOscillatorStudent extends ComponentStudent {
   oscilloscopeWidth: number = 800;
   playStopButtonText: string;
   stopAfterGoodDraw: boolean = true;
-
-  constructor(
-    protected annotationService: AnnotationService,
-    private audioOscillatorService: AudioOscillatorService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

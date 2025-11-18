@@ -1,18 +1,10 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { timeout } from 'rxjs/operators';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
 import { ProjectService } from '../../../services/projectService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { CRaterResponse } from '../../common/cRater/CRaterResponse';
 import { FeedbackRuleEvaluator } from '../../common/feedbackRule/FeedbackRuleEvaluator';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
@@ -62,33 +54,16 @@ export class OpenResponseStudent extends ComponentStudent {
   protected speechToTextEnabled: boolean;
   studentResponse: string = '';
 
-  constructor(
-    protected annotationService: AnnotationService,
-    private changeDetector: ChangeDetectorRef,
-    protected componentService: ComponentService,
-    private constraintService: ConstraintService,
-    protected configService: ConfigService,
-    private cRaterPingService: CRaterPingService,
-    private cRaterService: CRaterService,
-    protected dialog: MatDialog,
-    private openResponseService: OpenResponseService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private notificationService: NotificationService,
-    private projectService: ProjectService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
+  private changeDetector = inject(ChangeDetectorRef);
+  private constraintService = inject(ConstraintService);
+  private cRaterPingService = inject(CRaterPingService);
+  private cRaterService = inject(CRaterService);
+  private notificationService = inject(NotificationService);
+  protected openResponseService = inject(OpenResponseService);
+  private projectService = inject(ProjectService);
+
+  constructor() {
+    super();
     this.speechToTextEnabled = this.projectService.getSpeechToTextSettings()?.enabled;
   }
 

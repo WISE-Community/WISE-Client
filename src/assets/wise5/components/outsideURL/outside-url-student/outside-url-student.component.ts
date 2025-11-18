@@ -1,48 +1,18 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, inject } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 
 @Component({
   selector: 'outside-url-student',
   templateUrl: 'outside-url-student.component.html'
 })
 export class OutsideUrlStudent extends ComponentStudent {
-  url: SafeUrl;
-  infoUrl: SafeUrl;
-  infoString: string;
-  width: string;
   height: string;
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    protected sanitizer: DomSanitizer,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
+  infoString: string;
+  infoUrl: SafeUrl;
+  protected sanitizer = inject(DomSanitizer);
+  url: SafeUrl;
+  width: string;
 
   ngOnInit(): void {
     super.ngOnInit();
