@@ -39,125 +39,137 @@
           i18n-aria-label
         >
           <span class="column-header-label" i18n>Team</span>
-          <mat-icon
-            *ngIf="sortBy === 'workgroupId' || sortBy === '-workgroupId'"
-            class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-workgroupId' }"
-          >
-            arrow_drop_up
-          </mat-icon>
+          @if (sortBy === 'workgroupId' || sortBy === '-workgroupId') {
+            <mat-icon
+              class="secondary-text table--list__thead__sort"
+              [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-workgroupId' }"
+            >
+              arrow_drop_up
+            </mat-icon>
+          }
         </button>
-        <button
-          mat-button
-          *ngIf="milestone.report.locations.length == 1"
-          class="table--list__thead__link flex justify-center items-center basis-[30%]"
-          (click)="sortWorkgroups('completionStatus')"
-          aria-label="Sort by completion"
-          i18n-aria-label
-        >
-          <span class="column-header-label" i18n>Status</span>
-          <mat-icon
-            *ngIf="sortBy === 'completionStatus' || sortBy === '-completionStatus'"
-            class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-completionStatus' }"
+        @if (milestone.report.locations.length == 1) {
+          <button
+            mat-button
+            class="table--list__thead__link flex justify-center items-center basis-[30%]"
+            (click)="sortWorkgroups('completionStatus')"
+            aria-label="Sort by completion"
+            i18n-aria-label
           >
-            arrow_drop_up
-          </mat-icon>
-        </button>
-        <button
-          mat-button
-          *ngIf="milestone.report.locations.length == 1"
-          class="table--list__thead__link flex justify-center items-center basis-[20%]"
-          (click)="sortWorkgroups('score')"
-          aria-label="Sort by score"
-          i18n-aria-label
-        >
-          <span class="column-header-label" i18n>Score</span>
-          <mat-icon
-            *ngIf="sortBy === 'score' || sortBy === '-score'"
-            class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-score' }"
+            <span class="column-header-label" i18n>Status</span>
+            @if (sortBy === 'completionStatus' || sortBy === '-completionStatus') {
+              <mat-icon
+                class="secondary-text table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-completionStatus' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
+          </button>
+        }
+        @if (milestone.report.locations.length == 1) {
+          <button
+            mat-button
+            class="table--list__thead__link flex justify-center items-center basis-[20%]"
+            (click)="sortWorkgroups('score')"
+            aria-label="Sort by score"
+            i18n-aria-label
           >
-            arrow_drop_up
-          </mat-icon>
-        </button>
-        <button
-          mat-button
-          *ngIf="milestone.report.locations.length > 1"
-          class="table--list__thead__link flex justify-center items-center basis-[10%]"
-          (click)="sortWorkgroups('initialScore')"
-          aria-label="Sort by score on Step {{ firstNodePosition }}"
-          i18n-aria-label
-          matTooltip="Sort by score on Step {{ firstNodePosition }}"
-          i18n-matTooltip
-          matTooltipPosition="above"
-        >
-          <span class="column-header-label">{{ firstNodePosition }}</span>
-          <mat-icon
-            *ngIf="sortBy === 'initialScore' || sortBy === '-initialScore'"
-            class="secondary-text table--list__thead__sort"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-initialScore' }"
+            <span class="column-header-label" i18n>Score</span>
+            @if (sortBy === 'score' || sortBy === '-score') {
+              <mat-icon
+                class="secondary-text table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-score' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
+          </button>
+        }
+        @if (milestone.report.locations.length > 1) {
+          <button
+            mat-button
+            class="table--list__thead__link flex justify-center items-center basis-[10%]"
+            (click)="sortWorkgroups('initialScore')"
+            aria-label="Sort by score on Step {{ firstNodePosition }}"
+            i18n-aria-label
+            matTooltip="Sort by score on Step {{ firstNodePosition }}"
+            i18n-matTooltip
+            matTooltipPosition="above"
           >
-            arrow_drop_up
-          </mat-icon>
-        </button>
-        <button
-          mat-button
-          *ngIf="milestone.report.locations.length > 1"
-          class="table--list__thead__link flex justify-center items-center basis-[10%]"
-          (click)="sortWorkgroups('score')"
-          aria-label="Sort by score on Step {{ lastNodePosition }}"
-          i18n-aria-label
-          matTooltip="Sort by score on Step {{ lastNodePosition }}"
-          i18n-matTooltip
-          matTooltipPosition="above"
-        >
-          <span class="column-header-label">{{ lastNodePosition }}</span>
-          <mat-icon
-            *ngIf="sortBy === 'score' || sortBy === '-score'"
-            class="secondary-text table--list__thead__sort"
-            md-theme="default"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-score' }"
+            <span class="column-header-label">{{ firstNodePosition }}</span>
+            @if (sortBy === 'initialScore' || sortBy === '-initialScore') {
+              <mat-icon
+                class="secondary-text table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-initialScore' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
+          </button>
+        }
+        @if (milestone.report.locations.length > 1) {
+          <button
+            mat-button
+            class="table--list__thead__link flex justify-center items-center basis-[10%]"
+            (click)="sortWorkgroups('score')"
+            aria-label="Sort by score on Step {{ lastNodePosition }}"
+            i18n-aria-label
+            matTooltip="Sort by score on Step {{ lastNodePosition }}"
+            i18n-matTooltip
+            matTooltipPosition="above"
           >
-            arrow_drop_up
-          </mat-icon>
-        </button>
-        <button
-          mat-button
-          *ngIf="milestone.report.locations.length > 1"
-          class="table--list__thead__link flex justify-center items-center basis-[10%]"
-          (click)="sortWorkgroups('changeInScore')"
-          aria-label="Sort by change in score"
-          i18n-aria-label
-          matTooltip="Sort by change in score"
-          i18n-matTooltip
-          matTooltipPosition="above"
-        >
-          <span class="column-header-label" i18n>+/-</span>
-          <mat-icon
-            *ngIf="sortBy === 'changeInScore' || sortBy === '-changeInScore'"
-            class="secondary-text table--list__thead__sort"
-            md-theme="default"
-            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-changeInScore' }"
+            <span class="column-header-label">{{ lastNodePosition }}</span>
+            @if (sortBy === 'score' || sortBy === '-score') {
+              <mat-icon
+                class="secondary-text table--list__thead__sort"
+                md-theme="default"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-score' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
+          </button>
+        }
+        @if (milestone.report.locations.length > 1) {
+          <button
+            mat-button
+            class="table--list__thead__link flex justify-center items-center basis-[10%]"
+            (click)="sortWorkgroups('changeInScore')"
+            aria-label="Sort by change in score"
+            i18n-aria-label
+            matTooltip="Sort by change in score"
+            i18n-matTooltip
+            matTooltipPosition="above"
           >
-            arrow_drop_up
-          </mat-icon>
-        </button>
+            <span class="column-header-label" i18n>+/-</span>
+            @if (sortBy === 'changeInScore' || sortBy === '-changeInScore') {
+              <mat-icon
+                class="secondary-text table--list__thead__sort"
+                md-theme="default"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-changeInScore' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
+          </button>
+        }
       </div>
     </mat-list-item>
     <div class="mat-elevation-z1" waIntersectionObserver waIntersectionThreshold="0.5">
       <ng-container *ngFor="let workgroup of sortedWorkgroups">
-        <milestone-workgroup-item
-          *ngIf="isWorkgroupShown(workgroup)"
-          [expanded]="workgroupExpanded[workgroup.workgroupId]"
-          [showScore]="true"
-          [locations]="milestone.report.locations"
-          [workgroupId]="workgroup.workgroupId"
-          [workgroupData]="workgroup"
-          (onUpdateExpand)="onUpdateExpand($event)"
-          (waIntersectionObservee)="onIntersection(workgroup.workgroupId, $event)"
-        >
-        </milestone-workgroup-item>
+        @if (isWorkgroupShown(workgroup)) {
+          <milestone-workgroup-item
+            [expanded]="workgroupExpanded[workgroup.workgroupId]"
+            [showScore]="true"
+            [locations]="milestone.report.locations"
+            [workgroupId]="workgroup.workgroupId"
+            [workgroupData]="workgroup"
+            (onUpdateExpand)="onUpdateExpand($event)"
+            (waIntersectionObservee)="onIntersection(workgroup.workgroupId, $event)"
+          >
+          </milestone-workgroup-item>
+        }
       </ng-container>
     </div>
   </mat-list>
