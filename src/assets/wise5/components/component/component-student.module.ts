@@ -37,8 +37,8 @@ import { OpenResponseStudent } from '../openResponse/open-response-student/open-
     OpenResponseStudent,
     OutsideUrlStudent,
     PeerChatStudentComponent,
-    ShowGroupWorkStudentModule,
-    ShowMyWorkStudentModule,
+    ShowGroupWorkStudentModule, // can't be converted to component - circular dependency with ComponentStudent?
+    ShowMyWorkStudentModule, // can't be converted to component - circular dependency with ComponentStudent?
     StudentAssetsDialogComponent,
     SummaryStudent,
     TableStudentComponent
