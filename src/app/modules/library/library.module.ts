@@ -85,9 +85,10 @@ const materialModules = [
     SelectMenuComponent,
     SelectTagsComponent,
     SharedModule,
-    UnitTagsComponent
+    UnitTagsComponent,
+    HomePageProjectLibraryComponent,
+    ShareProjectDialogComponent
   ],
-  declarations: [HomePageProjectLibraryComponent, ShareProjectDialogComponent],
   exports: [
     CurriculumComponent,
     HomePageProjectLibraryComponent,

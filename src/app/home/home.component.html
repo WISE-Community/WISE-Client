@@ -93,7 +93,11 @@
         >
           Curriculum Offerings
         </h1>
-        <app-home-page-project-library></app-home-page-project-library>
+        @defer (on viewport) {
+          <app-home-page-project-library />
+        } @placeholder {
+          <div i18n>Curriculum Offerings</div>
+        }
         <div class="library__links">
           <h2
             class="accent-1 flex flex-wrap flex-col sm:flex-row gap-4 place-items-center justify-center"
@@ -152,8 +156,7 @@
             destination="https://wise-discuss.berkeley.edu"
             linkTarget="_self"
             [isOutsideLink]="true"
-          >
-          </app-call-to-action>
+          />
           <app-call-to-action
             icon="live_help"
             iconColor="accent-2"
@@ -162,8 +165,7 @@
             i18n-content
             content="View tutorials and common questions."
             destination="/help"
-          >
-          </app-call-to-action>
+          />
           <app-call-to-action
             icon="contact_mail"
             iconColor="accent"
