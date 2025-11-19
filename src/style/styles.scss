@@ -16,7 +16,19 @@
   --list-height: 44px;
 }
 
+// Tailwind theme customizations
+
+@theme {
+  --breakpoint-sm: 37.5rem; // 600px, Material 3 'medium' width (600-839px)
+  --breakpoint-md: 52.5rem; // 840px, Material 3 'expanded' width (840-1199px)
+  --breakpoint-lg: 75rem; // 1200px, Material 3 'large' width (1200-1599px)
+  --breakpoint-xl: 100rem; // 1600px, Material 3 'extra-large' width (1600px +)
+  --breakpoint-2xl: initial; // unused
+}
+
 html {
+  /* Angular Material theme */
+
   color-scheme: light;
   @include mat.theme((
     color: (

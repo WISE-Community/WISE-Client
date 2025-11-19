@@ -1,14 +1,16 @@
 import { Meta, Unstyled } from '@storybook/addon-docs/blocks';
 import { useState, useEffect, useRef } from 'react';
 
-<Meta title="Design Tokens/Typography" />
+<Meta title="Design Tokens & Guidelines/Typography" />
 
 # Typography
 
-WISE utilizes five categories of font types (defined by Material Design): label, body, title, headline, and display. Each category has three sizes: small, medium, and large.
+WISE utilizes five categories of font types (defined by Material Design): label, body, title, headline, and display.
+Each category has three sizes: small, medium, and large.
 
 Each font is defined by a CSS custom property (variable) and can also be applied to HTML elements using a CSS classname.
-Each HTML heading element is also mapped by default to specific font type (as noted in the table below). The <code>Body Medium</code> font is applied as the default font type for the <code>body</code> tag.
+Each HTML heading element is also mapped by default to specific font type (as noted in the table below).
+The <code>Body Medium</code> font is applied as the default font type for the <code>body</code> tag.
 
 Learn more about the common uses for these categories by visiting [Material Design's Typography documentation](https://m3.material.io/styles/typography/overview).
 
@@ -35,10 +37,10 @@ export const TypographyRow = ({ name, styleClass, element, variable }) => {
   }, []);
 
   return (
-    <tr class="body-medium">
+    <tr class="body-small">
       <td><span ref={ref} className={styleClass}>{name}</span>{element && (<span> {element}</span>)}</td>
-      <td class="body-small"><code>.{styleClass}</code></td>
-      <td class="body-small"><code>{variable}</code></td>
+      <td><code>.{styleClass}</code></td>
+      <td><code>{variable}</code></td>
       <td>{style.fontFamily}</td>
       <td>{style.fontSize}</td>
       <td>{style.fontWeight}</td>
@@ -70,7 +72,7 @@ export const TypographyTable = () => {
       <div className="my-4 details">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr class="border-b">
+            <tr class="border-b body-medium">
               <th>Style</th>
               <th>Class</th>
               <th>CSS Variable</th>

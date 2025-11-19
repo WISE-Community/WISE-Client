@@ -1,7 +1,7 @@
 import { Meta, ColorPalette, ColorItem, Unstyled } from '@storybook/addon-docs/blocks';
 import { useState, useRef, useEffect } from 'react';
 
-<Meta title="Design Tokens/Color" />
+<Meta title="Design Tokens & Guidelines/Color" />
 
 # Color
 
@@ -128,7 +128,7 @@ export const ColorPalettesViewer = () => {
       </div>
       <div className="colors details flex flex-col gap-2 mt-2">
         <h3>Color Roles</h3>
-        <div className="flex flex-wrap mb-2">
+        <div className="flex flex-wrap">
           <ColorSwatchGroup name="primary" showCode={showCode} description="Use for the most prominent and high-emphasis UI elements." />
           <ColorSwatchGroup name="secondary" showCode={showCode} description="Use for less prominent UI elements." />
           <ColorSwatchGroup name="tertiary" showCode={showCode} description="Use for contrasting accents or to bring heightened attention to UI elements.

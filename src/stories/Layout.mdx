@@ -1,0 +1,115 @@
+import { Meta, Source, Unstyled } from '@storybook/addon-docs/blocks';
+import { useState, useEffect, useRef } from 'react';
+
+<Meta title="Design Tokens & Guidelines/Layout" />
+
+# Layout
+
+WISE utilizes [Tailwind](https://tailwindcss.com), a utility-first CSS framework, for defining layouts and structures.
+Elements can be styled by combining many single-purpose presentational classes (utility classes) directly in the HTML markup.
+Check out [Tailwind's documentation](https://tailwindcss.com/docs) for more information.
+
+## Responsive Design
+
+Tailwind provides [responsive utility variants](https://tailwindcss.com/docs/responsive-design) to build adaptive user interfaces.
+Every utility class in Tailwind can be applied conditionally at different breakpoints.
+WISE uses custom defined breakpoints that match [Material 3's window size classes](https://m3.material.io/foundations/layout/applying-layout/window-size-classes).
+
+export const BreakpointRow = ({ prefix, width, notes }) => {
+  return (
+    <tr className="body-small">
+      <td className="py-2"><code>{prefix}</code></td>
+      <td className="py-2">{width}</td>
+      <td className="py-2">{notes}</td>
+    </tr>
+  );
+};
+
+export const BreakpointTable = () => {
+  const breakpoints = [
+    { prefix: `'sm'`, width: '37.5rem (600px)', notes: `Minimum for Material 3's 'medium' screen size (600-839px)` },
+    { prefix: `'md'`, width: '52.5rem (840px)', notes: `Minimum for Material 3's 'expanded' screen size (840-1199px)` },
+    { prefix: `'lg'`, width: '75rem (1200px)', notes: `Minimum for Material 3's 'large' screen size (1200-1599px)` },
+    { prefix: `'xl'`, width: '100rem (1600px)', notes: `Minimum for Material 3's 'extra-large' screen size (1600px +)` },
+  ];
+
+  return (
+    <Unstyled>
+      <div className="my-4 details">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b body-medium">
+              <th>Breakpoint prefix</th>
+              <th>Minimum width</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {breakpoints.map(breakpoint => (
+              <BreakpointRow key={breakpoint.prefix} prefix={breakpoint.prefix} width={breakpoint.width} notes={breakpoint.notes} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Unstyled>
+  )
+}
+
+### Breakpoints
+
+<BreakpointTable />
+
+To add a utility class but only have it apply at a certain screen width, prefix the utility with the breakpoint name, followed by the `:` character.
+
+Note: Tailwind is a mobile first framework, so styles for Material 3's 'compact' screen size (under 600px) should be defined as the default styles.
+Then use breakpoint prefix modifiers to adjust styles for additional screen sizes, as needed.
+
+For example:
+
+<Source code={
+    `<!-- Full width by default, 1/2 width on small screens, 1/3 width on medium, 1/4 width on large and above -->
+    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">...</div>`
+  } language="html" dark>
+</Source>
+
+### Container Queries
+
+Tailwind also supports container queries, which let you style an element based on the size of a parent element, rather than the entire viewport.
+To do so, use the `@container` class to mark an element as a container.
+You can then prefix any utility class with breakpoint variants like `@sm:` and `@md:` to conditionally style child elements based on the conatiner's width:
+
+<Source code={
+    `<div class="@container">
+      <div class="w-full @sm:w-1/2 @md:w-1/3">...</div>
+    </div>`
+  } language="html" dark>
+</Source>
+
+## Sizing
+
+Tailwind supplies a wide variety utility classes to specify the sizing of elements, including classes to specify CSS values for `width`, `min-width`, `max-width`, `height`, `min-height`, `max-height`, etc.
+Review [Tailwind's documentation](https://tailwindcss.com/docs) for more details.
+
+## Spacing
+
+WISE uses Tailwind's [padding](https://tailwindcss.com/docs/padding) and [margin](https://tailwindcss.com/docs/margin) utlity classes for consistent spacing.
+Tailwind's spacing scale is based on rem units, where each increment represents 0.25rem (4px).
+
+### Common Spacing Values
+
+- `p-4` / `m-4` = 1rem (16px) padding/margin
+- `p-6` / `m-6` = 1.5rem (24px)
+- `p-8` / `m-8` = 2rem (32px)
+- `py-4` / `mx-4` = 1rem padding bottom and top / 1rem margin left and right
+- `pt-4` / `pb-4` / `ms-4` / `me-4` = 1rem padding top / 1rem padding bottom / 1rem margin start / 1rem margin end
+- `gap-4` = 1rem (16px) gap between flex/grid items
+
+### Guidelines
+
+- **Window/viewport margins**: Maintain at least 1rem (16px) from left and right edge of window for compact screens, 1.5rem (24px) for larger screens.
+- **Panel spacing**: For layouts with multiple sections, maintain minimum 1rem (16px) between sections on compact screens, and 1.5rem (24px) on larger screens.
+
+## Flexbox and Grid
+
+Tailwind also supplies utility classes to define all aspects of CSS Flexbox and Grid-based layout structures, which WISE employs.
+Review [Tailwind's documentation](https://tailwindcss.com/docs) for more details.
