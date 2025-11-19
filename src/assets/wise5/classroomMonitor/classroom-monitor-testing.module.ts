@@ -3,11 +3,9 @@ import { ClassroomStatusService } from '../services/classroomStatusService';
 import { TeacherDataService } from '../services/teacherDataService';
 import { TeacherProjectService } from '../services/teacherProjectService';
 import { TeacherWebSocketService } from '../services/teacherWebSocketService';
-import { MatDialogModule } from '@angular/material/dialog';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MilestoneService } from '../services/milestoneService';
 import { TeacherPeerGroupService } from '../services/teacherPeerGroupService';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MilestoneReportService } from '../services/milestoneReportService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TeacherPauseScreenService } from '../services/teacherPauseScreenService';
@@ -32,7 +30,6 @@ import { StudentDataService } from '../services/studentDataService';
 import { NodeStatusService } from '../services/nodeStatusService';
 
 @NgModule({
-  imports: [MatDialogModule, MatSnackBarModule],
   providers: [
     AnnotationService,
     MockProvider(AchievementService),
