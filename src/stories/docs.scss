@@ -4,6 +4,22 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
+.toc-list-item {
+  margin-left: 12px !important;
+
+  &:before {
+    left: 8px !important;
+  }
+
+  .toc-list-item::before {
+    left: -6px !important;
+  }
+}
+
+.toc-wrapper > .toc-list .toc-list {
+  border-color: transparent !important;
+}
+
 .stories-heading {
   font-size: 14px;
   font-weight: 600;

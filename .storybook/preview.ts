@@ -15,12 +15,13 @@ const preview: Preview = {
       }
     },
     docs: {
-      theme: docsTheme
+      theme: docsTheme,
+      toc: { headingSelector: 'h2, h3' }
     },
     options: {
       storySort: {
         method: 'alphabetical',
-        order: ['Design Tokens', 'Components']
+        order: ['Design Tokens & Guidelines', ['Color', 'Typography', 'Layout'], 'Components']
       }
     }
   },
