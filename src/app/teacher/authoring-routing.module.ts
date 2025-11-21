@@ -53,8 +53,8 @@ const routes: Routes = [
           {
             path: 'add-lesson',
             loadChildren: () =>
-              import('../../assets/wise5/authoringTool/addLesson/add-lesson-routing.module').then(
-                (m) => m.AddLessonRoutingModule
+              import('../../assets/wise5/authoringTool/addLesson/add-lesson.routes').then(
+                (m) => m.routes
               )
           },
           {
