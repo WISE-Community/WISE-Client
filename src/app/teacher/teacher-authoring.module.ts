@@ -26,7 +26,7 @@ import { PeerGroupService } from '../../assets/wise5/services/peerGroupService';
 import { NodeService } from '../../assets/wise5/services/nodeService';
 import { TeacherNodeService } from '../../assets/wise5/services/teacherNodeService';
 import { MilestoneReportService } from '../../assets/wise5/services/milestoneReportService';
-import { AuthoringRoutingModule } from './authoring-routing.module';
+import { authoringRoutes } from './authoring.routes';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 import { CreateBranchService } from '../../assets/wise5/services/createBranchService';
 import { EditBranchService } from '../../assets/wise5/services/editBranchService';
@@ -42,10 +42,11 @@ import { RegisterProjectService } from '../../assets/wise5/services/registerProj
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
-    AuthoringRoutingModule,
+    RouterModule.forChild(authoringRoutes),
     EditComponentAdvancedComponent, // TODO: refactor. currently needed for peer grouping authoring dialog to work
     StudentTeacherCommonServicesModule
   ],

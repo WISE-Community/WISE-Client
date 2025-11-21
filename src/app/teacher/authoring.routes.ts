@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
-const routes: Routes = [
+export const authoringRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
@@ -139,9 +138,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class AuthoringRoutingModule {}
