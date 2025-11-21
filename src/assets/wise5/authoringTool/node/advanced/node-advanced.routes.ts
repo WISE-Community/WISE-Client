@@ -1,5 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
 import { NodeAdvancedAuthoringComponent } from './node-advanced-authoring/node-advanced-authoring.component';
 import { NodeAdvancedConstraintAuthoringComponent } from './constraint/node-advanced-constraint-authoring.component';
 import { NodeAdvancedGeneralAuthoringComponent } from './general/node-advanced-general-authoring.component';
@@ -7,7 +6,7 @@ import { NodeAdvancedJsonAuthoringComponent } from './json/node-advanced-json-au
 import { NodeAdvancedPathAuthoringComponent } from './path/node-advanced-path-authoring.component';
 import { EditNodeRubricComponent } from '../editRubric/edit-node-rubric.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: NodeAdvancedAuthoringComponent,
@@ -20,8 +19,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)]
-})
-export class NodeAdvancedRoutingModule {}

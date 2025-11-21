@@ -14,8 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'advanced',
-        loadChildren: () =>
-          import('./advanced/node-advanced-routing.module').then((m) => m.NodeAdvancedRoutingModule)
+        loadChildren: () => import('./advanced/node-advanced.routes').then((m) => m.routes)
       },
       {
         path: 'import-component',
