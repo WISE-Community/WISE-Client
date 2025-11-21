@@ -123,8 +123,8 @@ const routes: Routes = [
           {
             path: 'node/:nodeId',
             loadChildren: () =>
-              import('../../assets/wise5/authoringTool/node/node-authoring-routing.module').then(
-                (m) => m.NodeAuthoringRoutingModule
+              import('../../assets/wise5/authoringTool/node/node-authoring.routes').then(
+                (m) => m.routes
               )
           },
           {

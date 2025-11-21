@@ -1,9 +1,8 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
 import { NodeAuthoringParentComponent } from './node-authoring-parent/node-authoring-parent.component';
 import { NodeAuthoringComponent } from './node-authoring/node-authoring.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: NodeAuthoringParentComponent,
@@ -24,8 +23,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)]
-})
-export class NodeAuthoringRoutingModule {}
