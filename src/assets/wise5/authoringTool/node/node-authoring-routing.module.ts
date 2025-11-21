@@ -20,9 +20,7 @@ const routes: Routes = [
       {
         path: 'import-component',
         loadChildren: () =>
-          import('../importComponent/import-component-routing.module').then(
-            (m) => m.ImportComponentRoutingModule
-          )
+          import('../importComponent/import-component.routes').then((m) => m.routes)
       }
     ]
   }
