@@ -60,8 +60,8 @@ const routes: Routes = [
           {
             path: 'add-node',
             loadChildren: () =>
-              import('../../assets/wise5/authoringTool/addNode/add-node-routing.module').then(
-                (m) => m.AddNodeRoutingModule
+              import('../../assets/wise5/authoringTool/addNode/add-node.routes').then(
+                (m) => m.routes
               )
           },
           {
