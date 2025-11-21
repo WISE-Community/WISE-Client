@@ -26,15 +26,20 @@ import { PeerGroupService } from '../../assets/wise5/services/peerGroupService';
 import { NodeService } from '../../assets/wise5/services/nodeService';
 import { TeacherNodeService } from '../../assets/wise5/services/teacherNodeService';
 import { MilestoneReportService } from '../../assets/wise5/services/milestoneReportService';
-import { TeacherToolsRoutingModule } from './teacher-tools-routing.module';
+import { teacherToolsRoutes } from './teacher-tools.routes';
 import { TeacherPauseScreenService } from '../../assets/wise5/services/teacherPauseScreenService';
 import { RunStatusService } from '../../assets/wise5/services/runStatusService';
 import { GradingNodeService } from '../../assets/wise5/services/gradingNodeService';
 import { ComponentStudentModule } from '../../assets/wise5/components/component/component-student.module';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [ComponentStudentModule, StudentTeacherCommonServicesModule, TeacherToolsRoutingModule],
+  imports: [
+    ComponentStudentModule,
+    StudentTeacherCommonServicesModule,
+    RouterModule.forChild(teacherToolsRoutes)
+  ],
   providers: [
     ClassroomStatusService,
     CopyNodesService,
