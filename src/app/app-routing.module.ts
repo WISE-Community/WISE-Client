@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'forgot',
-    loadChildren: () => import('./forgot/forgot-routing.module').then((m) => m.ForgotRoutingModule)
+    loadChildren: () => import('./forgot/forgot.routes').then((m) => m.routes)
   },
   {
     path: 'help',
