@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'help',
-    loadChildren: () => import('./help/help-routing.module').then((m) => m.HelpRoutingModule)
+    loadChildren: () => import('./help/help.routes').then((m) => m.routes)
   },
   {
     path: 'join',
