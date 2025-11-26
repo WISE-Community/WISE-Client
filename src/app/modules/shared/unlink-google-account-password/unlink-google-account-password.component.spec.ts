@@ -1,9 +1,4 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { of } from 'rxjs';
 import { PasswordModule } from '../../../password/password.module';
 import { UserService } from '../../../services/user.service';
@@ -23,16 +18,8 @@ let userService = new MockUserService();
 describe('UnlinkGoogleAccountPasswordComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        PasswordModule,
-        ReactiveFormsModule,
-        UnlinkGoogleAccountPasswordComponent
-      ],
-      providers: [{ provide: UserService, useValue: userService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [PasswordModule, UnlinkGoogleAccountPasswordComponent],
+      providers: [{ provide: UserService, useValue: userService }]
     });
     fixture = TestBed.createComponent(UnlinkGoogleAccountPasswordComponent);
     component = fixture.componentInstance;

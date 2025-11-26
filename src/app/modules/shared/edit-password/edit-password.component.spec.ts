@@ -2,14 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditPasswordComponent } from './edit-password.component';
 import { UserService } from '../../../services/user.service';
 import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { User } from '../../../domain/user';
-import { MatDialogModule } from '@angular/material/dialog';
 import { PasswordModule } from '../../../password/password.module';
-import { MatIconModule } from '@angular/material/icon';
 import { PasswordErrors } from '../../../domain/password/password-errors';
 import { PasswordRequirementComponent } from '../../../password/password-requirement/password-requirement.component';
 
@@ -51,16 +46,8 @@ const getForm = () => {
 describe('EditPasswordComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        MatDialogModule,
-        MatIconModule,
-        MatSnackBarModule,
-        PasswordModule,
-        ReactiveFormsModule,
-        EditPasswordComponent
-      ],
-      providers: [{ provide: UserService, useValue: new MockUserService() }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [PasswordModule, EditPasswordComponent],
+      providers: [{ provide: UserService, useValue: new MockUserService() }]
     });
     fixture = TestBed.createComponent(EditPasswordComponent);
     component = fixture.componentInstance;

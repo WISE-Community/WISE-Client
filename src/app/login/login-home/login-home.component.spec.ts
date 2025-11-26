@@ -2,14 +2,11 @@ import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angul
 import { LoginHomeComponent } from './login-home.component';
 import { UserService } from '../../services/user.service';
 import { of } from 'rxjs';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ConfigService } from '../../services/config.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
 import { By } from '@angular/platform-browser';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideRouter, Router } from '@angular/router';
 import { getErrorMessage } from '../../common/test-helper';
 
 let component: LoginHomeComponent;
@@ -26,15 +23,14 @@ let userService: UserService;
 describe('LoginHomeComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [RecaptchaV3Module, RouterTestingModule, LoginHomeComponent],
+      imports: [RecaptchaV3Module, LoginHomeComponent],
       providers: [
         ConfigService,
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
         ReCaptchaV3Service,
         UserService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(),
+        provideRouter([])
       ]
     }).compileComponents();
   }));

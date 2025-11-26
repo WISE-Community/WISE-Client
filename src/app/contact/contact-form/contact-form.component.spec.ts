@@ -1,20 +1,15 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ContactFormComponent } from './contact-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { StudentService } from '../../student/student.service';
 import { User } from '../../domain/user';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { LibraryService } from '../../services/library.service';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 
 export class MockStudentService {
   getTeacherList(): Observable<User> {
@@ -36,23 +31,15 @@ let userService: UserService;
 describe('ContactFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        MatInputModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        RecaptchaV3Module,
-        RouterTestingModule,
-        ContactFormComponent
-      ],
+      imports: [RecaptchaV3Module, ContactFormComponent],
       providers: [
         ConfigService,
         { provide: LibraryService, useClass: MockLibraryService },
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
         { provide: StudentService, useClass: MockStudentService },
         UserService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(),
+        provideRouter([])
       ]
     }).compileComponents();
   }));

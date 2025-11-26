@@ -1,15 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormGroup } from '@angular/forms';
 import { NewPasswordAndConfirmComponent } from './new-password-and-confirm.component';
-import { MatIconModule } from '@angular/material/icon';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { NewPasswordAndConfirmHarness } from './new-password-and-confirm.harness';
 import { PasswordModule } from '../password.module';
 import { PasswordErrors } from '../../domain/password/password-errors';
 import { PasswordRequirementComponent } from '../password-requirement/password-requirement.component';
-import { MatMenuModule } from '@angular/material/menu';
 import { HarnessLoader } from '@angular/cdk/testing';
 
 let component: NewPasswordAndConfirmComponent;
@@ -20,15 +16,7 @@ let rootLoader: HarnessLoader;
 describe('NewPasswordAndConfirmComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatMenuModule,
-        PasswordModule,
-        ReactiveFormsModule,
-        NewPasswordAndConfirmComponent
-      ]
+      imports: [PasswordModule, NewPasswordAndConfirmComponent]
     }).compileComponents();
     fixture = TestBed.createComponent(NewPasswordAndConfirmComponent);
     component = fixture.componentInstance;

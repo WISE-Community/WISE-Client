@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterHomeComponent } from './register-home.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 describe('RegisterHomeComponent', () => {
   let component: RegisterHomeComponent;
@@ -9,8 +8,8 @@ describe('RegisterHomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, RegisterHomeComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [RegisterHomeComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
   }));
 

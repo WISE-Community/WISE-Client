@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterGoogleUserAlreadyExistsComponent } from './register-google-user-already-exists.component';
 import { ConfigService } from '../../services/config.service';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('RegisterGoogleUserAlreadyExistsComponent', () => {
@@ -11,9 +9,8 @@ describe('RegisterGoogleUserAlreadyExistsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
       imports: [RegisterGoogleUserAlreadyExistsComponent],
-      providers: [ConfigService, provideHttpClient(), provideHttpClientTesting()]
+      providers: [ConfigService, provideHttpClient()]
     }).compileComponents();
   }));
 

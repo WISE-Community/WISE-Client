@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterMicrosoftUserAlreadyExistsComponent } from './register-microsoft-user-already-exists.component';
-import { MatCardModule } from '@angular/material/card';
 
 describe('RegisterMicrosoftUserAlreadyExistsComponent', () => {
   let component: RegisterMicrosoftUserAlreadyExistsComponent;
@@ -8,7 +7,7 @@ describe('RegisterMicrosoftUserAlreadyExistsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MatCardModule, RegisterMicrosoftUserAlreadyExistsComponent]
+      imports: [RegisterMicrosoftUserAlreadyExistsComponent]
     });
     fixture = TestBed.createComponent(RegisterMicrosoftUserAlreadyExistsComponent);
     component = fixture.componentInstance;

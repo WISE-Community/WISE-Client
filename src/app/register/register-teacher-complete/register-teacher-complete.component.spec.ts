@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterTeacherCompleteComponent } from './register-teacher-complete.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
+import { provideRouter } from '@angular/router';
 
 export class MockConfigService {
   getContextPath(): string {
@@ -16,9 +15,8 @@ describe('RegisterTeacherCompleteComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, RegisterTeacherCompleteComponent],
-      providers: [{ provide: ConfigService, useClass: MockConfigService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [RegisterTeacherCompleteComponent],
+      providers: [{ provide: ConfigService, useClass: MockConfigService }, provideRouter([])]
     }).compileComponents();
   }));
 
