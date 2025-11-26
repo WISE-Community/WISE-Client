@@ -1,15 +1,35 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatDialog,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountSuccessComponent } from '../unlink-google-account-success/unlink-google-account-success.component';
 import { injectPasswordErrors } from '../../../common/password-helper';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    styleUrls: ['./unlink-google-account-password.component.scss'],
-    templateUrl: './unlink-google-account-password.component.html',
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    FormsModule,
+    ReactiveFormsModule,
+    CdkScrollable,
+    MatDialogContent,
+    NewPasswordAndConfirmComponent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
+    MatProgressBar
+  ],
+  styleUrl: './unlink-google-account-password.component.scss',
+  templateUrl: './unlink-google-account-password.component.html'
 })
 export class UnlinkGoogleAccountPasswordComponent {
   isSaving: boolean = false;

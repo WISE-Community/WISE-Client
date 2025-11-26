@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterTeacherFormComponent } from './register-teacher-form.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TeacherService } from '../../teacher/teacher.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from '../../services/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -45,9 +44,7 @@ let snackBar: MatSnackBar;
 describe('RegisterTeacherFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterTeacherFormComponent],
       imports: [
-        BrowserAnimationsModule,
         MatCheckboxModule,
         MatInputModule,
         MatSelectModule,
@@ -55,7 +52,8 @@ describe('RegisterTeacherFormComponent', () => {
         PasswordModule,
         ReactiveFormsModule,
         RecaptchaV3Module,
-        RouterTestingModule
+        RouterTestingModule,
+        RegisterTeacherFormComponent
       ],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },

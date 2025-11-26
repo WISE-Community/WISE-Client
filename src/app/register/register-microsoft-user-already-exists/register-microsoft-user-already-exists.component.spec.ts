@@ -8,8 +8,7 @@ describe('RegisterMicrosoftUserAlreadyExistsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterMicrosoftUserAlreadyExistsComponent],
-      imports: [MatCardModule]
+      imports: [MatCardModule, RegisterMicrosoftUserAlreadyExistsComponent]
     });
     fixture = TestBed.createComponent(RegisterMicrosoftUserAlreadyExistsComponent);
     component = fixture.componentInstance;

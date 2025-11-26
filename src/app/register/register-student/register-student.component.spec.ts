@@ -28,19 +28,16 @@ export class MockConfigService {
 describe('RegisterStudentComponent', () => {
   let component: RegisterStudentComponent;
   let fixture: ComponentFixture<RegisterStudentComponent>;
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [RegisterStudentComponent],
-        imports: [RouterTestingModule],
-        providers: [
-          { provide: UserService, useClass: MockUserService },
-          { provide: ConfigService, useClass: MockConfigService }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, RegisterStudentComponent],
+      providers: [
+        { provide: UserService, useClass: MockUserService },
+        { provide: ConfigService, useClass: MockConfigService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterStudentComponent);

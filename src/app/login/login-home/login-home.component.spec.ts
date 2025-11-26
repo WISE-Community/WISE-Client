@@ -26,9 +26,8 @@ let userService: UserService;
 describe('LoginHomeComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginHomeComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      imports: [RecaptchaV3Module, RouterTestingModule],
+      imports: [RecaptchaV3Module, RouterTestingModule, LoginHomeComponent],
       providers: [
         ConfigService,
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },

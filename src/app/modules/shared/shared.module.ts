@@ -34,14 +34,12 @@ import { PasswordModule } from '../../password/password.module';
     PasswordModule,
     ReactiveFormsModule,
     RouterModule,
-    materialModules
-  ],
-  exports: [EditPasswordComponent, materialModules],
-  declarations: [
+    materialModules,
     EditPasswordComponent,
     UnlinkGoogleAccountConfirmComponent,
     UnlinkGoogleAccountPasswordComponent,
     UnlinkGoogleAccountSuccessComponent
-  ]
+  ],
+  exports: [EditPasswordComponent, materialModules]
 })
 export class SharedModule {}

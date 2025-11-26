@@ -2,14 +2,45 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Student } from '../../domain/student';
 import { StudentRun } from '../student-run';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { ConfigService } from '../../services/config.service';
 import { StudentService } from '../student.service';
 import { Router } from '@angular/router';
 import { GoogleUser } from '../../modules/google-sign-in/GoogleUser';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatDivider } from '@angular/material/divider';
+import { MatIcon } from '@angular/material/icon';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatButton } from '@angular/material/button';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { GoogleSignInButtonComponent } from '../../modules/google-sign-in/google-sign-in-button/google-sign-in-button.component';
 
 @Component({
-  standalone: false,
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDivider,
+    MatIcon,
+    MatCheckbox,
+    MatButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    FormsModule,
+    GoogleSignInButtonComponent,
+    MatDialogActions,
+    MatDialogClose
+  ],
   styleUrl: './team-sign-in-dialog.component.scss',
   templateUrl: './team-sign-in-dialog.component.html'
 })

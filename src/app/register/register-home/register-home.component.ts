@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CallToActionComponent } from '../../modules/shared/call-to-action/call-to-action.component';
 
 @Component({
-    selector: 'app-register-home',
-    templateUrl: './register-home.component.html',
-    styleUrls: ['./register-home.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [CallToActionComponent],
+  selector: 'app-register-home',
+  styleUrl: './register-home.component.scss',
+  templateUrl: './register-home.component.html'
 })
 export class RegisterHomeComponent implements OnInit {
   googleUserNotFoundError: boolean;

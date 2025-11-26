@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { RegisterUserCompleteComponent } from '../register-user-complete.component';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'app-register-teacher-complete',
-    templateUrl: './register-teacher-complete.component.html',
-    styleUrls: ['./register-teacher-complete.component.scss'],
-    standalone: false
+  imports: [MatCard, MatCardContent, MatButton],
+  selector: 'app-register-teacher-complete',
+  styleUrl: './register-teacher-complete.component.scss',
+  templateUrl: './register-teacher-complete.component.html'
 })
 export class RegisterTeacherCompleteComponent extends RegisterUserCompleteComponent {}

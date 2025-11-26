@@ -29,19 +29,16 @@ describe('RegisterTeacherComponent', () => {
   let component: RegisterTeacherComponent;
   let fixture: ComponentFixture<RegisterTeacherComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [RegisterTeacherComponent],
-        imports: [RouterTestingModule],
-        providers: [
-          { provide: UserService, useClass: MockUserService },
-          { provide: ConfigService, useClass: MockConfigService }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, RegisterTeacherComponent],
+      providers: [
+        { provide: UserService, useClass: MockUserService },
+        { provide: ConfigService, useClass: MockConfigService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterTeacherComponent);

@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditPasswordComponent } from './edit-password.component';
 import { UserService } from '../../../services/user.service';
 import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -52,14 +51,13 @@ const getForm = () => {
 describe('EditPasswordComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditPasswordComponent],
       imports: [
-        BrowserAnimationsModule,
         MatDialogModule,
         MatIconModule,
         MatSnackBarModule,
         PasswordModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        EditPasswordComponent
       ],
       providers: [{ provide: UserService, useValue: new MockUserService() }],
       schemas: [NO_ERRORS_SCHEMA]

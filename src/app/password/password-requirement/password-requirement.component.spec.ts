@@ -12,8 +12,7 @@ let passwordRequirementHarness: PasswordRequirementHarness;
 describe('PasswordRequirementComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PasswordRequirementComponent],
-      imports: [MatIconModule]
+      imports: [MatIconModule, PasswordRequirementComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PasswordRequirementComponent);

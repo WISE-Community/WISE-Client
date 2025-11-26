@@ -75,7 +75,7 @@ describe('NewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NewsComponent],
+      imports: [NewsComponent],
       providers: [{ provide: NewsService, useClass: MockNewsService }],
       schemas: [NO_ERRORS_SCHEMA]
     });

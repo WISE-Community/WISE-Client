@@ -4,10 +4,15 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatDialog,
-  MatDialogModule
+  MatDialogModule,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatButton } from '@angular/material/button';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -31,9 +36,16 @@ export class AnnouncementComponent {
 }
 
 @Component({
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose
+  ],
   selector: 'announcement-dialog',
-  templateUrl: 'announcement-dialog.component.html',
-  standalone: false
+  templateUrl: 'announcement-dialog.component.html'
 })
 export class AnnouncementDialogComponent {
   constructor(

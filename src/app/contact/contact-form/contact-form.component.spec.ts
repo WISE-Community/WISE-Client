@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ContactFormComponent } from './contact-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -37,15 +36,14 @@ let userService: UserService;
 describe('ContactFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ContactFormComponent],
       schemas: [NO_ERRORS_SCHEMA],
       imports: [
-        BrowserAnimationsModule,
         MatInputModule,
         MatSelectModule,
         ReactiveFormsModule,
         RecaptchaV3Module,
-        RouterTestingModule
+        RouterTestingModule,
+        ContactFormComponent
       ],
       providers: [
         ConfigService,

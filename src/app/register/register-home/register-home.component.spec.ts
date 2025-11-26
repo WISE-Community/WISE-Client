@@ -7,15 +7,12 @@ describe('RegisterHomeComponent', () => {
   let component: RegisterHomeComponent;
   let fixture: ComponentFixture<RegisterHomeComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [RegisterHomeComponent],
-        imports: [RouterTestingModule],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, RegisterHomeComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterHomeComponent);

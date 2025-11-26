@@ -48,9 +48,9 @@ const materialModules = [
     SharedModule,
     materialModules,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    ContactFormComponent
   ],
-  declarations: [ContactFormComponent],
   exports: [ContactFormComponent, materialModules]
 })
 export class ContactModule {}

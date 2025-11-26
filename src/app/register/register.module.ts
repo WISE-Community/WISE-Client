@@ -46,9 +46,7 @@ const materialModules = [
     PasswordModule,
     RegisterRoutingModule,
     ReactiveFormsModule,
-    materialModules
-  ],
-  declarations: [
+    materialModules,
     RegisterComponent,
     RegisterHomeComponent,
     RegisterTeacherComponent,

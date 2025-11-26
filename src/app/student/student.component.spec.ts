@@ -9,9 +9,8 @@ describe('StudentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterModule],
-      providers: [provideRouter([])],
-      declarations: [StudentComponent]
+      imports: [RouterModule, StudentComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
   }));
 

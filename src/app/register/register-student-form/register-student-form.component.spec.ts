@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterStudentFormComponent } from './register-student-form.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of, throwError } from 'rxjs';
 import { StudentService } from '../../student/student.service';
 import { UserService } from '../../services/user.service';
@@ -50,23 +49,21 @@ class MockConfigService {
 describe('RegisterStudentFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterStudentFormComponent],
       imports: [
-        BrowserAnimationsModule,
         BrowserModule,
         MatInputModule,
         MatSelectModule,
         MatSnackBarModule,
         PasswordModule,
         ReactiveFormsModule,
-        RecaptchaV3Module
+        RecaptchaV3Module,
+        RegisterStudentFormComponent
       ],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
         provideRouter([]),
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' },
         { provide: StudentService, useClass: MockStudentService },
-
         { provide: UserService, useClass: MockUserService }
       ],
       schemas: [NO_ERRORS_SCHEMA]

@@ -14,16 +14,13 @@ describe('RegisterTeacherCompleteComponent', () => {
   let component: RegisterTeacherCompleteComponent;
   let fixture: ComponentFixture<RegisterTeacherCompleteComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [RegisterTeacherCompleteComponent],
-        imports: [RouterTestingModule],
-        providers: [{ provide: ConfigService, useClass: MockConfigService }],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, RegisterTeacherCompleteComponent],
+      providers: [{ provide: ConfigService, useClass: MockConfigService }],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterTeacherCompleteComponent);

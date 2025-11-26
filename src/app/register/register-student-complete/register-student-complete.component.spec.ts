@@ -16,8 +16,7 @@ describe('RegisterStudentCompleteComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterStudentCompleteComponent],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, RegisterStudentCompleteComponent],
       providers: [{ provide: ConfigService, useClass: MockConfigService }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

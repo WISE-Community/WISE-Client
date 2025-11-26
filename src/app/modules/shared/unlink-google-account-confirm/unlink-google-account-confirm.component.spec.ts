@@ -9,9 +9,7 @@ let fixture: ComponentFixture<UnlinkGoogleAccountConfirmComponent>;
 describe('UnlinkGoogleAccountConfirmComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UnlinkGoogleAccountConfirmComponent],
-      imports: [MatDialogModule],
-      providers: [],
+      imports: [MatDialogModule, UnlinkGoogleAccountConfirmComponent],
       schemas: [NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(UnlinkGoogleAccountConfirmComponent);

@@ -9,10 +9,35 @@ import { Student } from '../../domain/student';
 import { StudentService } from '../student.service';
 import { UserService } from '../../services/user.service';
 import { flash } from '../../animations';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardAvatar,
+  MatCardTitle,
+  MatCardSubtitle,
+  MatCardActions
+} from '@angular/material/card';
+import { NgClass, NgTemplateOutlet, DatePipe } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   animations: [flash],
-  standalone: false,
+  imports: [
+    MatCard,
+    NgClass,
+    MatCardContent,
+    MatCardAvatar,
+    MatTooltip,
+    MatCardTitle,
+    MatCardSubtitle,
+    NgTemplateOutlet,
+    MatCardActions,
+    MatButton,
+    MatIcon,
+    DatePipe
+  ],
   selector: 'app-student-run-list-item',
   styleUrl: './student-run-list-item.component.scss',
   templateUrl: './student-run-list-item.component.html'

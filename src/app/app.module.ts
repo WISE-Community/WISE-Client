@@ -43,10 +43,10 @@ export function initialize(
 }
 
 @NgModule({
-  declarations: [AppComponent, AnnouncementDialogComponent, TrackScrollDirective],
   bootstrap: [AppComponent],
   imports: [
     AnnouncementComponent,
+    AppComponent,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
@@ -64,7 +64,9 @@ export function initialize(
       anchorScrolling: 'enabled',
       bindToComponentInputs: true,
       onSameUrlNavigation: 'reload'
-    })
+    }),
+    AnnouncementDialogComponent,
+    TrackScrollDirective
   ],
   providers: [
     ArchiveProjectService,

@@ -10,7 +10,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentService } from '../student.service';
 import { UserService } from '../../services/user.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export class MockConfigService {
   getConfig(): Observable<Config> {
@@ -42,12 +42,12 @@ describe('StudentRunListItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, MatDialogModule],
-      declarations: [StudentRunListItemComponent],
+      imports: [MatDialogModule, StudentRunListItemComponent],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
         { provide: StudentService, useClass: MockStudentService },
-        { provide: UserService, useClass: MockUserService }
+        { provide: UserService, useClass: MockUserService },
+        provideAnimations()
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
