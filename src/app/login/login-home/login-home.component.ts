@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha-2';
+import { RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { lastValueFrom } from 'rxjs';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
@@ -24,9 +24,10 @@ import { MatDivider } from '@angular/material/divider';
     MatButton,
     MatProgressBar,
     MatDivider,
-    RouterLink
+    RouterLink,
+    RecaptchaV3Module
   ],
-  selector: 'app-login',
+  selector: 'app-login-home',
   styleUrl: './login-home.component.scss',
   templateUrl: './login-home.component.html'
 })
