@@ -1,16 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChipsAutocompleteExampleComponent } from './chips-autocomplete.component';
+import { ChipsAutocompleteComponent } from './chips-autocomplete.component';
 
-describe('ChipsAutocompleteExampleComponent', () => {
-  let component: ChipsAutocompleteExampleComponent;
-  let fixture: ComponentFixture<ChipsAutocompleteExampleComponent>;
+describe('ChipsAutocompleteComponent', () => {
+  let component: ChipsAutocompleteComponent;
+  let fixture: ComponentFixture<ChipsAutocompleteComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [ChipsAutocompleteExampleComponent]
-    });
-    fixture = TestBed.createComponent(ChipsAutocompleteExampleComponent);
+    fixture = TestBed.createComponent(ChipsAutocompleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

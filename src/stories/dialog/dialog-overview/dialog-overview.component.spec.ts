@@ -7,9 +7,6 @@ describe('DialogOverviewComponent', () => {
   let fixture: ComponentFixture<DialogOverviewComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [DialogOverviewComponent]
-    });
     fixture = TestBed.createComponent(DialogOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
