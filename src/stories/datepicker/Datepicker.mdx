@@ -1,0 +1,15 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as DatepickerStories from './datepicker.stories';
+
+<Meta of={DatepickerStories} name="Docs" />
+
+# Datepicker
+
+<p>WISE Datepicker allows users to enter a date either through text input, or by choosing a date from the calendar.</p>
+
+<p>WISE uses a customized version of [Datepicker](https://material.angular.io/components/datepicker/overview) from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+
+<Canvas of={DatepickerStories.Basic} />
+<Controls />
+
+<Stories of={DatepickerStories} includePrimary={false} />

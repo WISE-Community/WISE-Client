@@ -1,0 +1,155 @@
+@use 'tailwindcss';
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+.toc-list-item {
+  margin-left: 12px !important;
+
+  &:before {
+    left: 8px !important;
+  }
+
+  .toc-list-item::before {
+    left: -6px !important;
+  }
+}
+
+.toc-wrapper > .toc-list .toc-list {
+  border-color: transparent !important;
+}
+
+.stories-heading {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgb(92, 104, 112);
+  margin-top: 2.5em;
+}
+
+.story-with-code {
+  @apply border border-neutral-200 rounded shadow p-4 mt-4;
+}
+
+.btn-link {
+  @apply underline cursor-pointer;
+  color: var(--mat-sys-primary);
+  font: var(--mat-sys-body-small);
+}
+
+thead tr {
+  border-color: var(--mat-sys-outline-variant);
+}
+
+th, td {
+  @apply p-2 align-middle;
+}
+
+/* React Tabs */
+
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+
+  &__tab-list {
+    border-bottom: 1px solid #aaa;
+    @apply border-neutral-300;
+    margin: 0 0 10px;
+    padding: 0;
+  }
+
+  &__tab {
+    display: inline-block;
+    border: 1px solid transparent;
+    border-bottom: none;
+    bottom: -1px;
+    position: relative;
+    list-style: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.875rem;
+
+    &--selected {
+      background: #fff;
+      border-color: #aaa;
+      @apply border-neutral-300;
+      color: black;
+      border-radius: 5px 5px 0 0;
+    }
+
+    &--disabled {
+      color: GrayText;
+      cursor: default;
+    }
+
+    &:focus {
+      // outline: none;
+
+      &:after {
+        content: "";
+        position: absolute;
+        height: 5px;
+        left: -4px;
+        right: -4px;
+        bottom: -5px;
+        background: #fff;
+      }
+    }
+  }
+
+  &__tab-panel {
+    display: none;
+
+    &--selected {
+      display: block;
+    }
+  }
+
+  .docblock-source {
+    margin: 0;
+  }
+}
+
+/* Source Block */
+
+pre.prismjs {
+  max-height: 560px;
+}
+
+.details {
+  background: var(--mat-sys-surface-container-low);
+  @apply p-4 rounded-xl;
+}
+
+/* Color Page */
+
+.colors {
+  font: var(--mat-sys-body-small);
+
+  h3 {
+    font: var(--mat-sys-title-medium);
+    margin-bottom: 0;
+  }
+
+  .color {
+    @apply p-2;
+
+    code {
+      font-size: var(--mat-sys-label-small-size);
+    }
+
+    &:first-of-type {
+      @apply min-h-20;
+    }
+  }
+
+  .color-list {
+    .color {
+      &:first-of-type {
+        @apply min-h-14;
+      }
+    }
+  }
+}

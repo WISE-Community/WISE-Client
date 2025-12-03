@@ -3,7 +3,6 @@ import { AnnouncementDialogComponent } from './announcement/announcement.compone
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ArchiveProjectService } from './services/archive-project.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ConfigService } from './services/config.service';
 import { FooterComponent } from './modules/footer/footer.component';
@@ -16,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { MobileMenuComponent } from './modules/mobile-menu/mobile-menu.component';
 import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RECAPTCHA_BASE_URL } from 'ng-recaptcha-2';
@@ -48,7 +48,6 @@ export function initialize(
   imports: [
     AnnouncementComponent,
     AppRoutingModule,
-    BrowserAnimationsModule,
     BrowserModule,
     FooterComponent,
     FormsModule,
@@ -76,6 +75,13 @@ export function initialize(
       const initializerFn = initialize(inject(ConfigService), inject(UserService));
       return initializerFn();
     }),
+    {
+      provide: MAT_TABS_CONFIG,
+      useValue: {
+        animationDuration: '400ms',
+        stretchTabs: false
+      }
+    },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {

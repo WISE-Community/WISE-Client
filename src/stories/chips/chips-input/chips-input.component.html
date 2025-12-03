@@ -1,0 +1,28 @@
+<mat-form-field class="w-full" subscriptSizing="dynamic">
+  <mat-label>Favorite colors</mat-label>
+  <mat-chip-grid #chipGrid aria-label="Enter colors">
+    @for (color of colors(); track color) {
+      <mat-chip-row
+        (removed)="remove(color)"
+        [editable]="true"
+        (edited)="edit(color, $event)"
+        [aria-description]="'press enter to edit ' + color.name"
+      >
+        <button matChipEdit [attr.aria-label]="'edit ' + color.name">
+          <mat-icon>edit</mat-icon>
+        </button>
+        {{ color.name }}
+        <button matChipRemove [attr.aria-label]="'remove ' + color.name">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+    <input
+      placeholder="New color..."
+      [matChipInputFor]="chipGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-grid>
+</mat-form-field>

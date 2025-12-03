@@ -72,7 +72,7 @@
     "zone.js": "^0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^20.1.6",
+    "@angular-devkit/build-angular": "^20.3.9",
     "@angular/cli": "^20.1.6",
     "@angular/compiler-cli": "^20.1.7",
     "@angular/language-service": "^20.1.7",
@@ -80,8 +80,13 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
+    "@compodoc/compodoc": "^1.1.30",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/github": "^8.0.4",
+    "@storybook/addon-a11y": "^10.0.5",
+    "@storybook/addon-docs": "^10.0.5",
+    "@storybook/addon-onboarding": "^10.0.5",
+    "@storybook/angular": "^10.0.5",
     "@types/dom-mediacapture-record": "^1.0.11",
     "@types/jasmine": "^4.3.1",
     "@types/jasminewd2": "^2.0.10",
@@ -92,7 +97,8 @@
     "commitizen": "^4.2.4",
     "cssnano": "^5.1.12",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^5.16.0",
+    "eslint": "^9.20.1",
+    "eslint-plugin-storybook": "^10.0.5",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-if": "^2.0.2",
@@ -119,7 +125,10 @@
     "postcss": "^8.4.49",
     "prettier": "^3.3.2",
     "protractor": "~7.0.0",
+    "raw-loader": "^4.0.2",
+    "react-tabs": "^6.1.0",
     "sass": "^1.50.1",
+    "storybook": "^10.0.5",
     "tailwindcss": "^4.1.13",
     "ts-loader": "^6.2.2",
     "ts-node": "~8.2.0",
@@ -138,7 +147,9 @@
     "test-coverage": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng test wise --source-map=false --browsers ChromeHeadlessNoSandbox --watch=false --code-coverage",
     "test-e2e-comment": "test-e2e assumes wise is already running.",
     "test-e2e": "node ./node_modules/protractor/bin/protractor src/assets/wise5/test-e2e/conf.js",
-    "extract-i18n": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng extract-i18n --output-path=src"
+    "extract-i18n": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng extract-i18n --output-path=src",
+    "storybook": "ng run wise:storybook",
+    "build-storybook": "ng run wise:build-storybook"
   },
   "repository": {
     "type": "git",
@@ -215,6 +226,11 @@
           ]
         }
       ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
     ]
   }
 }

@@ -1,0 +1,96 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks';
+import { useState, useEffect, useRef } from 'react';
+
+<Meta title="Design Tokens & Guidelines/Typography" />
+
+# Typography
+
+WISE utilizes five categories of font types (defined by Material Design): label, body, title, headline, and display.
+Each category has three sizes: small, medium, and large.
+
+Each font is defined by a CSS custom property (variable) and can also be applied to HTML elements using a CSS classname.
+Each HTML heading element is also mapped by default to specific font type (as noted in the table below).
+The <code>Body Medium</code> font is applied as the default font type for the <code>body</code> tag.
+
+Learn more about the common uses for these categories by visiting [Material Design's Typography documentation](https://m3.material.io/styles/typography/overview).
+
+## Font Types
+
+export const TypographyRow = ({ name, styleClass, element, variable }) => {
+  const [style, setStyle] = useState({});
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      const computed = getComputedStyle(ref.current);
+      const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const fontSizePx = parseFloat(computed.fontSize);
+      const fontSizeRem = (fontSizePx / rootFontSize);
+
+      setStyle({
+        fontFamily: computed.fontFamily.split(',')[0],
+        fontSize: `${fontSizeRem}rem (${fontSizePx}px)`,
+        fontWeight: computed.fontWeight,
+        letterSpacing: computed.letterSpacing,
+      });
+    }
+  }, []);
+
+  return (
+    <tr class="body-small">
+      <td><span ref={ref} className={styleClass}>{name}</span>{element && (<span> {element}</span>)}</td>
+      <td><code>.{styleClass}</code></td>
+      <td><code>{variable}</code></td>
+      <td>{style.fontFamily}</td>
+      <td>{style.fontSize}</td>
+      <td>{style.fontWeight}</td>
+    </tr>
+  );
+};
+
+export const TypographyTable = () => {
+  const typographyStyles = [
+    { name: 'Display Large', class: 'display-large', element: '', variable: '--mat-sys-display-large' },
+    { name: 'Display Medium', class: 'display-medium', element: '', variable: '--mat-sys-display-medium' },
+    { name: 'Display Small', class: 'display-small', element: '', variable: '--mat-sys-display-small' },
+    { name: 'Headline Large', class: 'headline-large', element: '<h1>', variable: '--mat-sys-headline-large' },
+    { name: 'Headline Medium', class: 'headline-medium', element: '<h2>', variable: '--mat-sys-headline-medium' },
+    { name: 'Headline Small', class: 'headline-small', element: '<h3>', variable: '--mat-sys-headline-small' },
+    { name: 'Title Large', class: 'title-large', element: '<h4>', variable: '--mat-sys-title-large' },
+    { name: 'Title Medium', class: 'title-medium', element: '<h5>', variable: '--mat-sys-title-medium' },
+    { name: 'Title Small', class: 'title-small', element: '<h6>', variable: '--mat-sys-title-small' },
+    { name: 'Body Large', class: 'body-large', element: '', variable: '--mat-sys-body-large' },
+    { name: 'Body Medium', class: 'body-medium', element: '<body>', variable: '--mat-sys-body-medium' },
+    { name: 'Body Small', class: 'body-small', element: '', variable: '--mat-sys-body-small' },
+    { name: 'Label Large', class: 'label-large', element: '', variable: '--mat-sys-label-large' },
+    { name: 'Label Medium', class: 'label-medium', element: '', variable: '--mat-sys-label-medium' },
+    { name: 'Label Small', class: 'label-small', element: '', variable: '--mat-sys-label-small' },
+  ];
+
+  return (
+    <Unstyled>
+      <div className="my-4 details">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b body-medium">
+              <th>Style</th>
+              <th>Class</th>
+              <th>CSS Variable</th>
+              <th>Font Family</th>
+              <th>Size</th>
+              <th>Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            {typographyStyles.map(style => (
+              <TypographyRow key={style.class} name={style.name} styleClass={style.class} element={style.element} variable={style.variable} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Unstyled>
+  );
+};
+
+<TypographyTable />
+

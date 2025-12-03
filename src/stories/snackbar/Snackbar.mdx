@@ -1,0 +1,45 @@
+import { Meta, Canvas, Controls, Source, Story, Unstyled } from '@storybook/addon-docs/blocks';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import * as SnackbarStories from './snackbar.stories';
+import exampleCode from '!!raw-loader!./snackbar-trigger/snackbar-trigger.component.ts';
+import exampleTemplate from '!!raw-loader!./snackbar-trigger/snackbar-trigger.component.html';
+import customSnackbarTemplate from '!!raw-loader!./snackbar-trigger/custom-snackbar.html';
+
+<Meta of={SnackbarStories} name="Docs" />
+
+# Snackbar
+
+<p>The `MatSnackBar` service can be used to display snackbar notifications.</p>
+<p>WISE uses a customized version of the [Dialog](https://material.angular.io/components/snack-bar/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+
+<Unstyled>
+  <h2 class="stories-heading">
+    <span>Stories</span>
+  </h2>
+</Unstyled>
+
+### Snackbar Overview
+
+<Unstyled>
+  <div class="story-with-code">
+    <Story of={SnackbarStories.Default} />
+    <div class="mt-4">
+      <Tabs>
+        <TabList>
+          <Tab>HTML</Tab>
+          <Tab>TS</Tab>
+          <Tab>custom-snackbar.html</Tab>
+        </TabList>
+        <TabPanel>
+          <Source code={exampleTemplate} language="html" dark />
+        </TabPanel>
+        <TabPanel>
+          <Source code={exampleCode} language="typescript" dark />
+        </TabPanel>
+        <TabPanel>
+          <Source code={customSnackbarTemplate} language="html" dark />
+        </TabPanel>
+      </Tabs>
+    </div>
+  </div>
+</Unstyled>

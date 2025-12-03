@@ -1,0 +1,53 @@
+import { Meta, Canvas, Controls, Source, Stories, Story, Unstyled } from '@storybook/addon-docs/blocks';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import * as ChipsStories from './chips.stories';
+import inputCode from '!!raw-loader!./chips-input/chips-input.component.ts';
+import inputTemplate from '!!raw-loader!./chips-input/chips-input.component.html';
+
+
+<Meta of={ChipsStories} name='Docs' />
+
+# Chips
+
+<p>WISE chips are used to display information in a compact form. They can also allow users to make selections, filter content, and enter data.</p>
+<p>Chips are always used inside a container. To create chips, start with a container element (`<mat-chip-set>`, `<mat-chip-grid>`, or `<mat-chip-listbox>`) and nest `<mat-chip>` elements inside.</p>
+<p>WISE uses a customized version of the <a href="https://material.angular.io/components/chips/overview" target="_blank">Chips</a> component from <a href="https://material.angular.io" target="_blank">Angular Material</a>. Check out the Angular Material documentation for more information.</p>
+
+<Canvas of={ChipsStories.Basic} />
+
+<Unstyled>
+  <h2 class="stories-heading">
+    <span>Stories</span>
+  </h2>
+</Unstyled>
+
+### Single Selection
+<Canvas of={ChipsStories.SingleSelection} />
+
+### Multiple Selection
+<Canvas of={ChipsStories.MultipleSelection} />
+
+### Avatars
+<Canvas of={ChipsStories.Avatars} />
+
+### With Input Field
+
+<Unstyled>
+  <div class="story-with-code">
+  <Story of={ChipsStories.WithInputField} />
+    <div class="mt-4">
+      <Tabs>
+        <TabList>
+          <Tab>HTML</Tab>
+          <Tab>TS</Tab>
+        </TabList>
+        <TabPanel style={{ minHeight: "560px" }}>
+          <Source code={inputTemplate} language="html" dark />
+        </TabPanel>
+        <TabPanel style={{ minHeight: "560px" }}>
+          <Source code={inputCode} language="typescript" dark />
+        </TabPanel>
+      </Tabs>
+    </div>
+  </div>
+</Unstyled>

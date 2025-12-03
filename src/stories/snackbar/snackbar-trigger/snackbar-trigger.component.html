@@ -1,0 +1,31 @@
+<div class="flex flex-wrap gap-4 items-center">
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Message</mat-label>
+    <input matInput [(ngModel)]="message" />
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Action Text</mat-label>
+    <input matInput [(ngModel)]="action" />
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Duration (seconds)</mat-label>
+    <input matInput type="number" [(ngModel)]="duration" />
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Horizontal Position</mat-label>
+    <mat-select [(ngModel)]="horizontalPosition">
+      <mat-option value="start">Start</mat-option>
+      <mat-option value="center">Center</mat-option>
+      <mat-option value="end">End</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Vertical Position</mat-label>
+    <mat-select [(ngModel)]="verticalPosition">
+      <mat-option value="top">Top</mat-option>
+      <mat-option value="bottom">Bottom</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="useCustomComponent">Use Custom Component</mat-checkbox>
+  <button matButton="filled" (click)="openSnackBar()">Open Snackbar</button>
+</div>

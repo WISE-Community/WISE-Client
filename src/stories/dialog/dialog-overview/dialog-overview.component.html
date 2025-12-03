@@ -1,0 +1,18 @@
+<div class="flex flex-wrap items-center gap-4">
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>What's your name?</mat-label>
+    <input matInput [(ngModel)]="name" />
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Dialog width</mat-label>
+    <mat-select [(value)]="dialogWidth">
+      @for (width of widths; track width.value) {
+        <mat-option [value]="width.value">{{ width.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <button matButton="filled" (click)="openDialog()">Open Dialog</button>
+</div>
+@if (animal()) {
+  <div class="mt-4">Favorite animal: {{ animal() }}</div>
+}

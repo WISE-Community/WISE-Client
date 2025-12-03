@@ -24,6 +24,7 @@ hsqldb
 hsqldb_test
 .classpath
 tokens/
+*storybook.log
 scripts/awscliv2.zip
 scripts/aws/install
 scripts/aws/README.md

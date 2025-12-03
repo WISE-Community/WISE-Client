@@ -1,0 +1,14 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as SlideToggleStories from './slide-toggle.stories';
+
+<Meta of={SlideToggleStories} name='Docs' />
+
+# Slide Toggle
+
+<p>WISE slide toggles are used to switch between two states, typically on and off.</p>
+<p>WISE uses a customized version of the [Slide Toggle](https://material.angular.io/components/slide-toggle/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+
+<Canvas of={SlideToggleStories.Basic} />
+<Controls />
+
+<Stories of={SlideToggleStories} includePrimary={false} />

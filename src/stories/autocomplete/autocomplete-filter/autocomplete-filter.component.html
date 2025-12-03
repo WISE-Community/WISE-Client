@@ -1,0 +1,23 @@
+<form>
+  <mat-form-field subscriptSizing="dynamic" class="w-48">
+    <mat-label>Color</mat-label>
+    <input
+      type="text"
+      placeholder="Pick a color"
+      aria-label="Color"
+      matInput
+      [formControl]="colorControl"
+      [matAutocomplete]="auto"
+    />
+    @if (colorControl.value) {
+      <button matIconButton matSuffix (click)="clear($event)" aria-label="Clear input">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    }
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (option of filteredOptions | async; track option) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

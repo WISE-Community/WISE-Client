@@ -214,6 +214,39 @@
               "**/node_modules/**"
             ]
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "tsConfig": ".storybook/tsconfig.json",
+            "configDir": ".storybook",
+            "browserTarget": "wise:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "."
+            ],
+            "port": 6006,
+            "styles": [ "src/style/styles.scss", "src/stories/docs.scss" ]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "tsConfig": ".storybook/tsconfig.json",
+            "configDir": ".storybook",
+            "browserTarget": "wise:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "."
+            ],
+            "outputDir": "dist/storybook/wise"
+          }
         }
       },
       "i18n": {

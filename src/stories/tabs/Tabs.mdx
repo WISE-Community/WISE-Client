@@ -1,0 +1,14 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as TabStories from './tabs.stories';
+
+<Meta of={TabStories} name='Docs' />
+
+# Tabs
+
+<p>WISE tabs organize content into separate views where only one view can be visible at a time.</p>
+<p>WISE uses a customized version of the [Tabs](https://material.angular.io/components/tabs/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+
+<Canvas of={TabStories.Basic} />
+<Controls />
+
+<Stories of={TabStories} includePrimary={false} />

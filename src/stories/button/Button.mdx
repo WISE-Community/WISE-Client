@@ -1,0 +1,14 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './button.stories';
+ 
+<Meta of={ButtonStories} name='Docs' />
+ 
+# Button
+
+<p>WISE buttons are native `<button>` or `<a>` elements enhanced with WISE design styles.</p>
+<p>WISE uses a customized version of the [Button](https://material.angular.io/components/button/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+
+<Canvas of={ButtonStories.Default} />
+<Controls />
+
+<Stories of={ButtonStories} includePrimary={false} />

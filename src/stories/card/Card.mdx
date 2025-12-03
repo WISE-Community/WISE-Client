@@ -1,0 +1,14 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as CardStories from './card.stories';
+
+<Meta of={CardStories} name="Docs" />
+
+# Card
+
+<p>WISE cards are content containers for text, images, and actions in the context of a single subject.</p>
+<p>WISE uses a customized version of the [Card](https://material.angular.io/components/card/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+
+<Canvas of={CardStories.Default} />
+<Controls />
+
+<Stories of={CardStories} includePrimary={false} />

@@ -1,0 +1,64 @@
+import { Meta, Canvas, Controls, Source, Story, Unstyled } from '@storybook/addon-docs/blocks';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import * as AutocompleteStories from './autocomplete.stories';
+import exampleCode from '!!raw-loader!./autocomplete-filter/autocomplete-filter.component.ts';
+import exampleTemplate from '!!raw-loader!./autocomplete-filter/autocomplete-filter.component.html';
+import chipsCode from '!!raw-loader!./chips-autocomplete/chips-autocomplete.component.ts';
+import chipsTemplate from '!!raw-loader!./chips-autocomplete/chips-autocomplete.component.html';
+
+<Meta of={AutocompleteStories} name='Docs' />
+
+# Autocomplete
+
+<p>WISE autocompletes are text inputs enhanced by a panel of suggested options.</p>
+<p>WISE uses a customized version of the [Autocomplete](https://material.angular.io/components/autocomplete/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+
+<Unstyled>
+  <h2 class="stories-heading">
+    <span>Stories</span>
+  </h2>
+</Unstyled>
+
+### Automplete with Filtering and Clear Button
+
+<Unstyled>
+  <div class="story-with-code">
+    <Story of={AutocompleteStories.Default} />
+    <div class="mt-4">
+      <Tabs>
+        <TabList>
+          <Tab>HTML</Tab>
+          <Tab>TS</Tab>
+        </TabList>
+        <TabPanel>
+          <Source code={exampleTemplate} language="html" dark />
+        </TabPanel>
+        <TabPanel>
+          <Source code={exampleCode} language="typescript" dark />
+        </TabPanel>
+      </Tabs>
+    </div>
+  </div>
+</Unstyled>
+
+### Autocomplete with [Chips](?path=/docs/components-input-chips--chips) (Multiple Selection)
+
+<Unstyled>
+  <div class="story-with-code">
+  <Story of={AutocompleteStories.ChipsAutocomplete} />
+    <div class="mt-4">
+      <Tabs>
+        <TabList>
+          <Tab>HTML</Tab>
+          <Tab>TS</Tab>
+        </TabList>
+        <TabPanel style={{ minHeight: "560px" }}>
+          <Source code={chipsTemplate} language="html" dark />
+        </TabPanel>
+        <TabPanel style={{ minHeight: "560px" }}>
+          <Source code={chipsCode} language="typescript" dark />
+        </TabPanel>
+      </Tabs>
+    </div>
+  </div>
+</Unstyled>

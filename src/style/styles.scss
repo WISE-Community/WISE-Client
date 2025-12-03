@@ -1,80 +1,537 @@
-@charset 'UTF-8';
+@use 'sass:map';
 @use '@angular/material' as mat;
-@use 'abstracts/variables';
-@use 'abstracts/functions';
-@use 'base/base';
-@use 'base/fonts';
-@use 'base/typography';
-@use 'base/helpers';
-@use 'abstracts/mixins';
-@use 'layout/content';
-@use 'layout/main';
-@use 'layout/section';
-@use 'layout/standalone';
-@use 'components/avatar';
-@use 'components/buttons';
-@use 'components/content-block';
-@use 'components/dialog';
-@use 'components/icons';
-@use 'components/inputs';
-@use 'components/lists';
-@use 'components/expansion-panel';
-@use 'components/info-block';
-@use 'components/menu';
-@use 'components/notice';
-@use 'components/table';
-@use 'components/tooltip';
-@use 'themes/default';
-@use 'themes/dark';
-@use 'themes/author';
-@use 'themes/monitor';
-@use 'themes/apps';
-@use "@ng-select/ng-select/themes/material.theme.css";
+@use './themes/theme-colors' as theme-colors;
+@use './themes/theme-typography.scss' as theme-typography;
+@use 'tailwindcss';
 
-@use "tailwindcss";
-
-// always include only once per project
-@include mat.core();
-
-// material typography
-@include mat.typography-hierarchy(typography.$wise-typography);
-
-// specify common style class eg: <body class="common-styles"> ... </body>
-.common-styles {
-  @include mixins.common-setup();
-}
-a {
-  text-decoration: underline;
+:root {
+  --mat-sys-success: light-dark(#388E3C, #82db7e);
+  --mat-sys-success-container: light-dark(#9df898, #005312);
+  --mat-sys-on-success: light-dark(#ffffff, #00390a);
+  --mat-sys-on-success-container: light-dark(#005312, #9df898);
+  --mat-sys-tertiary2: #cad266;
+  --button-horizontal-padding: 12px;
+  --outlined-button-horizontal-padding: 10px;
+  --button-icon-offset: -4px;
+  --list-height: 44px;
 }
 
-.app-styles {
-  @include apps.apps-setup();
+// Tailwind theme customizations
+
+@theme {
+  --breakpoint-sm: 37.5rem; // 600px, Material 3 'medium' width (600-839px)
+  --breakpoint-md: 52.5rem; // 840px, Material 3 'expanded' width (840-1199px)
+  --breakpoint-lg: 75rem; // 1200px, Material 3 'large' width (1200-1599px)
+  --breakpoint-xl: 100rem; // 1600px, Material 3 'extra-large' width (1600px +)
+  --breakpoint-2xl: initial; // unused
 }
 
-$filled-input-bg: rgba(0, 0, 0, 0.04);
+html {
+  /* Angular Material theme */
 
-// specify custom theme classes eg: <body class="common-styles default-theme"> ... </body>
-@include mat.all-component-themes(default.$default-theme);
-.default-theme {
-  @include mixins.theme-setup(default.$default-theme, default.$default-colors);
-  @include mixins.filled-input-bg();
-}
+  color-scheme: light;
+  @include mat.theme((
+    color: (
+      primary: theme-colors.$primary-palette,
+      tertiary: theme-colors.$tertiary-palette,
+      error: theme-colors.$error-palette,
+    ),
+    typography: (
+      plain-family: Roboto,
+      brand-family: Raleway,
+    ),
+  ));
 
-.author-theme {
-  @include mat.all-component-colors(author.$author-theme);
-  @include mixins.theme-setup(author.$author-theme, author.$author-colors);
-  @include mixins.filled-input-bg();
-}
+  color: var(--mat-sys-on-background);
+  line-height: 1.4;
 
-.monitor-theme {
-  @include mat.all-component-colors(monitor.$monitor-theme);
-  @include mixins.theme-setup(monitor.$monitor-theme, monitor.$monitor-colors);
-  @include mixins.filled-input-bg();
-}
+  /* Typography */
 
-.dark-theme {
-  color: white;
-  @include mat.all-component-colors(dark.$dark-theme);
-  @include mixins.theme-setup(dark.$dark-theme, dark.$dark-colors);
-  @include mixins.filled-input-bg(true);
+  @include theme-typography.typography-hierarchy;
+
+  @include mat.theme-overrides((
+    label-small: 500 0.75rem / 1rem Roboto,
+    label-medium: 500 0.875rem / 1.25rem Roboto,
+    label-large: 500 1rem / 1.5rem Roboto,
+    body-small: 400 0.875rem / 1.25rem Roboto,
+    body-medium: 400 1rem / 1.5rem Roboto,
+    body-large: 400 1.125rem / 1.625rem Roboto,
+    title-small: 500 1rem / 1.5rem Roboto,
+    title-medium: 500 1.125rem / 1.625rem Roboto,
+    title-large: 500 1.25rem / 1.75rem Roboto,
+    headline-small: 600 1.5rem / 2rem Raleway,
+    headline-medium: 600 1.75rem / 2.25rem Raleway,
+    headline-large: 600 2rem / 2.5rem Raleway,
+    display-small: 600 2.5rem / 3rem Raleway,
+    display-medium: 600 2.875rem / 3.25rem Raleway,
+    display-large: 600 3.25rem / 3.75rem Raleway,
+  ));
+
+  /* Autocomplete */
+
+  @include mat.autocomplete-overrides((
+    background-color: var(--mat-sys-surface-container-lowest),
+  ));
+
+  /* Badge */
+
+  @include mat.badge-overrides((
+    background-color: var(--mat-sys-tertiary),
+    container-size: 20px,
+    container-padding: 3px 7.5px,
+    text-size: var(--mat-sys-label-medium-size),
+    large-size-container-size: 24px,
+    large-size-container-padding: 6px 10px,
+    large-size-text-size: var(--mat-sys-label-large-size),
+    small-size-container-size: 14px,
+  ));
+
+  .mat-badge-content {
+    border: 2px solid;
+  }
+
+  /* Button */
+
+  --button-height: 36px;
+
+  @include mat.button-overrides((
+    filled-container-height: var(--button-height),
+    outlined-container-height: var(--button-height),
+    text-container-height: var(--button-height),
+    tonal-container-height: var(--button-height),
+    protected-container-height: var(--button-height),
+    filled-container-shape: var(--mat-sys-corner-small),
+    outlined-container-shape: var(--mat-sys-corner-small),
+    text-container-shape: var(--mat-sys-corner-small),
+    tonal-container-shape: var(--mat-sys-corner-small),
+    protected-container-shape: var(--mat-sys-corner-small),
+    filled-horizontal-padding: var(--button-horizontal-padding),
+    outlined-horizontal-padding: var(--outlined-button-horizontal-padding),
+    tonal-horizontal-padding: var(--outlined-button-horizontal-padding),
+    protected-horizontal-padding: var(--button-horizontal-padding),
+    outlined-outline-width: 2px,
+    outlined-outline-color: var(--mat-sys-primary),
+    filled-icon-offset: var(--button-icon-offset),
+    outlined-icon-offset: var(--button-icon-offset),
+    protected-icon-offset: var(--button-icon-offset),
+  ));
+
+  --fab-size: 52px;
+
+  .mat-mdc-fab:not(.mdc-fab--extended) {
+    height: var(--fab-size);
+    width: var(--fab-size);
+  }
+
+  @include mat.fab-overrides((
+    container-elevation-shadow: var(--mat-sys-level2),
+    hover-container-elevation-shadow: var(--mat-sys-level3),
+    focus-container-elevation-shadow: var(--mat-sys-level3),
+    extended-container-elevation-shadow: var(--mat-sys-level2),
+    extended-hover-container-elevation-shadow: var(--mat-sys-level3),
+    extended-focus-container-elevation-shadow: var(--mat-sys-level3),
+    extended-container-height: var(--fab-size),
+    small-container-elevation-shadow: var(--mat-sys-level2),
+    small-hover-container-elevation-shadow: var(--mat-sys-level3),
+    small-focus-container-elevation-shadow: var(--mat-sys-level3),
+  ));
+
+  /* Card */
+
+  @include mat.card-overrides((
+    title-text-font: Roboto,
+    title-text-weight: 500,
+    title-text-size: 20px,
+    subtitle-text-weight: 400,
+    elevated-container-color: var(--mat-sys-surface-container-lowest),
+    filled-container-color: var(--mat-sys-surface-container-low),
+    outlined-outline-width: 2px,
+    subtitle-text-color: var(--mat-sys-on-surface-variant),
+  ));
+
+  .mat-mdc-card-avatar {
+    margin-bottom: 0;
+  }
+
+  .mat-mdc-card-header {
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  /* Chips */
+
+  @include mat.chips-overrides((
+    elevated-container-color: var(--mat-sys-surface-container-low),
+    elevated-disabled-container-color: var(--mat-sys-surface-container),
+    outline-color: var(--mat-sys-outline-variant),
+  ));
+
+  /* Datepicker */
+
+  @include mat.datepicker-overrides((
+    calendar-container-elevation-shadow: var(--mat-sys-level1),
+    calendar-container-shape: var(--mat-sys-corner-medium),
+    calendar-container-background-color: var(--mat-sys-surface-container-lowest),
+  ));
+
+  .mat-calendar-body-cell-content {
+    border-width: 2px;
+    border-radius: var(--mat-sys-corner-medium);
+  }
+
+  /* Dialog  */
+
+  @include mat.dialog-overrides((
+    actions-padding: 16px,
+    container-elevation-shadow: 0 20px 40px -10px #00000040,
+    container-shape: var(--mat-sys-corner-medium),
+    content-padding: 16px, 
+    headline-padding: 0 16px 16px,
+    container-max-width: 100vw,
+    subhead-size: 20px,
+    subhead-weight: 600,
+    supporting-text-size: 1rem,
+    with-actions-content-padding: 20px 16px 8px,
+  ));
+
+  .dialog-sm {
+    @apply w-xl;
+  }
+
+  .dialog-md {
+    @apply w-3xl;
+  }
+
+  .dialog-lg {
+    @apply w-5xl;
+  }
+
+  /* Expansion Panel */
+
+  @include mat.expansion-overrides((
+    container-background-color: var(--mat-sys-surface-container-lowest),
+  ));
+
+  /* Form field */
+
+  @include mat.form-field-overrides((
+    filled-container-shape: var(--mat-sys-corner-small),
+    filled-container-color: var(--mat-sys-surface-container),
+    outlined-container-shape: var(--mat-sys-corner-small),
+    outlined-outline-width: 2px,
+  ));
+
+  .mdc-text-field--filled {
+    border-bottom-right-radius: var(--mat-sys-corner-small);
+    border-bottom-left-radius: var(--mat-sys-corner-small);
+
+    @include mat.chips-overrides((
+      elevated-container-color: var(--mat-sys-surface-container-highest),
+    ));
+  }
+
+  .mdc-line-ripple::before {
+    border-bottom-width: 0;
+  }
+
+  .mat-mdc-form-field-hint-wrapper, .mat-mdc-form-field-error-wrapper {
+    padding: 0 8px;
+  }
+
+  /* List */
+
+  @include mat.list-overrides((
+    active-indicator-shape: var(--mat-sys-corner-small),
+    list-item-container-shape: var(--mat-sys-corner-small),
+    list-item-one-line-container-height: var(--list-height),
+    list-item-leading-icon-start-space: 8px,
+    list-item-leading-icon-end-space: 8px,
+    list-item-disabled-state-layer-opacity: 0,
+    list-item-disabled-label-text-opacity: 0.38,
+  ));
+
+  .mat-mdc-action-list, .mat-mdc-nav-list, .mat-mdc-selection-list {
+    .mat-mdc-list-item {
+      margin: 4px 0;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  /* Menu */
+  --menu-item-spacing: 8px;
+
+  @include mat.menu-overrides((
+    container-shape: var(--mat-sys-corner-small),
+    container-color: var(--mat-sys-surface-container-lowest),
+    item-leading-spacing: var(--menu-item-spacing),
+    item-trailing-spacing: var(--menu-item-spacing),
+    item-with-icon-leading-spacing: var(--menu-item-spacing),
+    item-with-icon-trailing-spacing: var(--menu-item-spacing),
+  ));
+
+  .mat-mdc-menu-content {
+    padding-inline-end: 16px;
+  }
+
+  .mat-mdc-menu-item {
+    margin: 4px 8px;
+    border-radius: var(--mat-sys-corner-small);
+    min-height: 42px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Progress bar */
+
+  @include mat.progress-bar-overrides((
+    active-indicator-height: 10px,
+    track-height: 10px,
+    track-shape: var(--mat-sys-corner-small),
+  ));
+
+  .mdc-linear-progress {
+    border-radius: var(--mat-sys-corner-small);
+  }
+
+  .mdc-button .mdc-linear-progress {
+    --track-height: 6px;
+    @include mat.progress-bar-overrides((
+      active-indicator-height: var(--track-height),
+      track-height: var(--track-height),
+    ));
+
+    position: absolute;
+    width: auto;
+    left: calc(-1 * var(--button-horizontal-padding));
+    right: calc(-1 * var(--button-horizontal-padding));
+    bottom: calc(-1 * var(--track-height));
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .mdc-button.mdc-button--outlined .mdc-linear-progress {
+    left: calc(-1 * var(--outlined-button-horizontal-padding));
+    right: calc(-1 * var(--outlined-button-horizontal-padding));
+  }
+
+  /* Select */
+
+  @include mat.select-overrides((
+    panel-background-color: var(--mat-sys-surface-container-lowest),
+  ));
+
+  div.mat-mdc-select-panel {
+    border-radius: var(--mat-sys-corner-small);
+  }
+
+  .cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel {
+    border-top-left-radius: var(--mat-sys-corner-small);
+    border-top-right-radius: var(--mat-sys-corner-small);
+  }
+
+  .mat-mdc-option {
+    margin: 4px 8px;
+    padding: 0 8px;
+    border-radius: var(--mat-sys-corner-small);
+    min-height: var(--list-height);
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Slide toggle */
+  @include mat.slide-toggle-overrides(
+    (
+      track-outline-width: 0,
+    )
+  );
+
+  /* Snackbar */
+
+  @include mat.snack-bar-overrides((
+    container-shape: var(--mat-sys-corner-medium),
+  ));
+
+  .mat-mdc-snackbar-surface {
+    border: 2px solid,
+  }
+
+  /* Tabs */
+
+  @include mat.tabs-overrides((
+    active-indicator-height: 4px,
+    active-indicator-shape: var(--mat-sys-corner-small),
+    container-height: 40px,
+    inactive-hover-label-text-color: var(--mat-sys-on-surface),
+    inactive-label-text-color: var(--mat-sys-outline),
+  ));
+
+  .mat-mdc-tab-ripple.mat-mdc-tab-ripple, .mat-mdc-tab .mdc-tab__ripple::before {
+    border-top-right-radius: var(--mat-sys-corner-small);
+    border-top-left-radius: var(--mat-sys-corner-small);
+  }
+
+  .mat-mdc-tab-group-inverted-header {
+    .mat-mdc-tab-ripple.mat-mdc-tab-ripple, .mat-mdc-tab .mdc-tab__ripple::before {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: var(--mat-sys-corner-small);
+      border-bottom-left-radius: var(--mat-sys-corner-small);
+    }
+  }
+
+  .mat-tab-body-content-can-animate {
+    transition: none;
+  }
+
+  .mat-mdc-tab-body.mat-mdc-tab-body-active {
+    animation: tabFade 500ms;
+  }
+
+
+  @keyframes tabFade {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Timepicker */
+
+  @include mat.timepicker-overrides((
+    container-background-color: var(--mat-sys-surface-container-lowest),
+    container-shape: var(--mat-sys-corner-small),
+  ));
+
+  /* Fix Tailwind conflict: https://github.com/tailwindlabs/tailwindcss/discussions/9993#discussioncomment-6752435 */
+  .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch {
+    border-right-style: hidden;
+  }
+  .mat-mdc-input-element {
+    box-shadow: none !important;
+  }
+
+  /* Color variants */
+
+  .primary {
+    color: var(--mat-sys-primary)
+  }
+  
+  .secondary {
+    color: var(--mat-sys-secondary);
+
+    @include mat.theme((
+      color: (
+        primary: theme-colors.$secondary-palette,
+      ),
+    ));
+
+    @include mat.button-overrides((
+      outlined-outline-color: var(--mat-sys-secondary),
+    ));
+  }
+
+  .tertiary {
+    color: var(--mat-sys-tertiary);
+
+    @include mat.theme((
+      color: (
+        primary: theme-colors.$tertiary-palette,
+      ),
+    ));
+
+    @include mat.button-overrides((
+      outlined-outline-color: var(--mat-sys-tertiary),
+    ));
+  }
+
+  .error {
+    color: var(--mat-sys-error);
+
+    @include mat.theme((
+      color: (
+        primary: theme-colors.$error-palette,
+      ),
+    ));
+
+    @include mat.button-overrides((
+      outlined-outline-color: var(--mat-sys-error),
+    ));
+  }
+
+  .success {
+    color: var(--mat-sys-success);
+
+    @include mat.theme((
+      color: (
+        primary: theme-colors.$success-palette,
+      ),
+    ));
+
+    @include mat.button-overrides((
+      outlined-outline-color: var(--mat-sys-success),
+    ));
+  }
+
+  /* Alternate theme (primary color background) */
+
+  .alt-theme {
+    background: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+
+    --disabled-text-color: rgba(255,255,255,0.6);
+
+    @include mat.form-field-overrides((
+      enabled-select-arrow-color: var(--mat-sys-on-primary),
+      filled-active-indicator-color: var(--mat-sys-on-primary),
+      filled-caret-color: var(--mat-sys-on-primary),
+      filled-container-color: rgba(255,255,255,0.056),
+      filled-hover-active-indicator-color: var(--mat-sys-on-primary),
+      filled-hover-label-text-color: var(--mat-sys-on-primary),
+      filled-focus-active-indicator-color: var(--mat-sys-on-primary),
+      filled-focus-label-text-color: var(--mat-sys-on-primary),
+      filled-input-text-color: var(--mat-sys-on-primary),
+      filled-input-text-placeholder-color: var(--mat-sys-on-primary),
+      filled-label-text-color: var(--mat-sys-on-primary),
+      focus-select-arrow-color: var(--mat-sys-on-primary),
+      hover-state-layer-opacity: 0.1,
+      state-layer-color: var(--mat-sys-on-primary),
+      leading-icon-color: var(--mat-sys-on-primary),
+      trailing-icon-color: var(--mat-sys-on-primary),
+      disabled-leading-icon-color: var(--disabled-text-color),
+      disabled-trailing-icon-color: var(--disabled-text-color),
+      filled-disabled-container-color: rgba(255,255,255,0.05),
+      filled-disabled-active-indicator-color: var(--disabled-text-color),
+      filled-disabled-input-text-color: var(--disabled-text-color),
+      filled-disabled-label-text-color: var(--disabled-text-color),
+    ));
+
+    @include mat.select-overrides((
+      disabled-trigger-text-color: var(--disabled-text-color),
+      enabled-arrow-color: var(--mat-sys-on-primary),
+      disabled-arrow-color: var(--disabled-text-color),
+      enabled-trigger-text-color: var(--mat-sys-on-primary),
+    ))
+  }
 }

@@ -1,0 +1,12 @@
+<h2 matDialogTitle>Hello {{ data.name ? data.name : 'World' }}!</h2>
+<mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="animal" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="cancel()">Cancel</button>
+  <button matButton="filled" [matDialogClose]="animal()" cdkFocusInitial>Submit</button>
+</mat-dialog-actions>
