@@ -3,9 +3,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [MatButtonModule, MatIconModule],
-    selector: 'add-to-notebook-button',
-    templateUrl: 'add-to-notebook-button.component.html'
+  imports: [MatButtonModule, MatIconModule],
+  selector: 'add-to-notebook-button',
+  templateUrl: 'add-to-notebook-button.component.html'
 })
 export class AddToNotebookButtonComponent {
   @Input() isDisabled: boolean;

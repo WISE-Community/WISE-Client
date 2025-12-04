@@ -227,6 +227,7 @@ export class StudentGradingComponent implements OnInit {
       node.nodeStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
         this.workgroupId
       )?.nodeStatuses[nodeId];
+      this.sortedNodes = Object.values(this.nodesById);
     }
   }
 

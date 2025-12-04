@@ -49,7 +49,7 @@ export class StepItemComponent {
   @Input() maxScore: number;
   @Input() nodeId: string;
   @Output() onUpdateExpand: any = new EventEmitter();
-  protected score: any;
+  @Input() score: any;
   @Input() showScore: boolean;
   private status: any;
   protected statusClass: string;
@@ -67,12 +67,14 @@ export class StepItemComponent {
       this.maxScore =
         typeof changesObj.maxScore.currentValue === 'number' ? changesObj.maxScore.currentValue : 0;
     }
+    if (changesObj.score) {
+      this.score = changesObj.score.currentValue >= 0 ? changesObj.score.currentValue : '-';
+    }
     if (changesObj.stepData) {
       const stepData = copy(changesObj.stepData.currentValue);
       this.hasAlert = stepData.hasAlert;
       this.hasNewAlert = stepData.hasNewAlert;
       this.status = stepData.completionStatus;
-      this.score = stepData.score >= 0 ? stepData.score : '-';
       this.components = this.projectService.getComponents(this.nodeId);
       this.componentIdToIsVisible = calculateComponentVisibility(
         this.projectService.calculateComponentIdToHasWork(this.components),

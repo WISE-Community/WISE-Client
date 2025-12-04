@@ -9,6 +9,8 @@ import { MainMenuComponent } from '../common/main-menu/main-menu.component';
 import { WorkgroupService } from '../../../app/services/workgroup.service';
 import { ConfigService } from '../services/configService';
 import { TeacherDataService } from '../services/teacherDataService';
+import { NodeService } from '../services/nodeService';
+import { TeacherNodeService } from '../services/teacherNodeService';
 
 let component: ClassroomMonitorComponent;
 let fixture: ComponentFixture<ClassroomMonitorComponent>;
@@ -21,7 +23,11 @@ describe('ClassroomMonitorComponent', () => {
         MainMenuComponent,
         TopBarComponent
       ],
-      providers: [provideRouter([]), WorkgroupService]
+      providers: [
+        provideRouter([]),
+        WorkgroupService,
+        { provide: NodeService, useClass: TeacherNodeService }
+      ]
     }).compileComponents();
     const notebookService = TestBed.inject(NotebookService);
     spyOn(notebookService, 'isNotebookEnabled').and.returnValue(true);

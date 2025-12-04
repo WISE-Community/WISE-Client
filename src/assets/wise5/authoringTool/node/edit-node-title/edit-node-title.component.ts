@@ -4,10 +4,17 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
 
 @Component({
-    imports: [TranslatableInputComponent],
-    selector: 'edit-node-title',
-    styleUrl: './edit-node-title.component.scss',
-    templateUrl: './edit-node-title.component.html'
+  imports: [TranslatableInputComponent],
+  selector: 'edit-node-title',
+  styleUrl: './edit-node-title.component.scss',
+  template: `
+    <translatable-input
+      [content]="nodeJson"
+      key="title"
+      [label]="label"
+      (defaultLanguageTextChanged)="save()"
+    />
+  `
 })
 export class EditNodeTitleComponent {
   protected label: string;

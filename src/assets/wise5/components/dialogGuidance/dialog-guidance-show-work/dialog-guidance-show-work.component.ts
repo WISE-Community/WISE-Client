@@ -11,13 +11,13 @@ import { CRaterService } from '../../../services/cRaterService';
 import { UserService } from '../../../../../app/services/user.service';
 
 @Component({
-    imports: [DialogResponsesComponent, MatCardModule],
-    selector: 'dialog-guidance-show-work',
-    styleUrls: [
-        '../dialog-guidance-student/dialog-guidance-student.component.scss',
-        './dialog-guidance-show-work.component.scss'
-    ],
-    template: `
+  imports: [DialogResponsesComponent, MatCardModule],
+  selector: 'dialog-guidance-show-work',
+  styleUrls: [
+    '../dialog-guidance-student/dialog-guidance-student.component.scss',
+    './dialog-guidance-show-work.component.scss'
+  ],
+  template: `
     <mat-card appearance="outlined" class="mat-elevation-z2">
       <dialog-responses
         [computerAvatar]="computerAvatar"

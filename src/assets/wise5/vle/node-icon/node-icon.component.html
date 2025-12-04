@@ -30,7 +30,6 @@
       <ng-container *ngTemplateOutlet="iconContent" />
     </div>
   </button>
-}
-@if (!canEdit) {
+} @else {
   <ng-container *ngTemplateOutlet="iconContent" />
 }

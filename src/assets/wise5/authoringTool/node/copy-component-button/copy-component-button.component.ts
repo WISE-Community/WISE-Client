@@ -7,9 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-    selector: 'copy-component-button',
-    templateUrl: './copy-component-button.component.html'
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  selector: 'copy-component-button',
+  templateUrl: './copy-component-button.component.html'
 })
 export class CopyComponentButtonComponent {
   @Input() componentId: string;

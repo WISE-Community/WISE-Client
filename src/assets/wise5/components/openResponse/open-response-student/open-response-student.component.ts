@@ -42,6 +42,7 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
     ComponentSaveSubmitButtonsComponent,
     ComponentAnnotationsComponent
   ],
+  providers: [CRaterPingService],
   selector: 'open-response-student',
   styleUrl: 'open-response-student.component.scss',
   templateUrl: 'open-response-student.component.html'
@@ -61,11 +62,6 @@ export class OpenResponseStudent extends ComponentStudent {
   private notificationService = inject(NotificationService);
   protected openResponseService = inject(OpenResponseService);
   private projectService = inject(ProjectService);
-
-  constructor() {
-    super();
-    this.speechToTextEnabled = this.projectService.getSpeechToTextSettings()?.enabled;
-  }
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -96,6 +92,7 @@ export class OpenResponseStudent extends ComponentStudent {
     this.isPublicSpaceExist = this.projectService.isSpaceExists('public');
     this.registerNotebookItemChosenListener();
     this.isStudentAudioRecordingEnabled = this.componentContent.isStudentAudioRecordingEnabled;
+    this.speechToTextEnabled = this.projectService.getSpeechToTextSettings()?.enabled;
 
     // load script for this component, if any
     const script = this.componentContent.script;
