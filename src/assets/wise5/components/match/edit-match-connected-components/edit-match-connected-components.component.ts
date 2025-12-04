@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { copy } from '../../../common/object/object';
-import { ProjectService } from '../../../services/projectService';
 import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentDefaultSelectsComponent } from '../../../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
 import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
@@ -19,9 +18,6 @@ import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/
   ]
 })
 export class EditMatchConnectedComponentsComponent extends EditConnectedComponentsComponent {
-  constructor(protected projectService: ProjectService) {
-    super(projectService);
-  }
 
   afterComponentIdChanged(connectedComponent: any): void {
     if (this.connectedComponentTypeIsSpecificType(connectedComponent, 'Match')) {

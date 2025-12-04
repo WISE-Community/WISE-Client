@@ -17,6 +17,7 @@ import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/
   ]
 })
 export class EditDiscussionConnectedComponentsComponent extends EditConnectedComponentsComponent {
+
   connectedComponentTypeChanged(connectedComponent: any) {
     this.changeAllDiscussionConnectedComponentTypesToMatch(connectedComponent.type);
     super.connectedComponentTypeChanged(connectedComponent);

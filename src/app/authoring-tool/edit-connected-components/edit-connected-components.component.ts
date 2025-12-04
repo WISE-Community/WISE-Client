@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
 import { EditConnectedComponentDefaultSelectsComponent } from '../edit-connected-component-default-selects/edit-connected-component-default-selects.component';
@@ -22,8 +22,7 @@ export class EditConnectedComponentsComponent implements OnInit {
   @Input() connectedComponents: any[] = [];
   @Output() connectedComponentsChanged: EventEmitter<any> = new EventEmitter();
   nodeIds: string[];
-
-  constructor(protected projectService: ProjectService) {}
+  protected projectService: ProjectService = inject(ProjectService);
 
   ngOnInit(): void {
     if (this.connectedComponents == null) {
