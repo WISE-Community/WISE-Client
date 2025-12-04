@@ -1,9 +1,8 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
 import { ChooseImportComponentComponent } from './choose-import-component/choose-import-component.component';
 import { ChooseImportUnitComponent } from '../../../../app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'choose-component',
     component: ChooseImportComponentComponent
@@ -13,8 +12,3 @@ const routes: Routes = [
     component: ChooseImportUnitComponent
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)]
-})
-export class ImportComponentRoutingModule {}

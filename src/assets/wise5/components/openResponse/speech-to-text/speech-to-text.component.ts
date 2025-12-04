@@ -17,8 +17,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
     MatTooltipModule
   ],
-  templateUrl: './speech-to-text.component.html',
-  styleUrls: ['./speech-to-text.component.scss']
+  providers: [TranscribeService],
+  styleUrl: './speech-to-text.component.scss',
+  templateUrl: './speech-to-text.component.html'
 })
 export class SpeechToTextComponent {
   protected languages: Language[] = this.transcribeService.languages;

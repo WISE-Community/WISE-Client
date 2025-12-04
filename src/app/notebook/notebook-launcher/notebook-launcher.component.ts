@@ -7,16 +7,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-    selector: 'notebook-launcher',
-    templateUrl: 'notebook-launcher.component.html'
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  selector: 'notebook-launcher',
+  templateUrl: 'notebook-launcher.component.html'
 })
 export class NotebookLauncherComponent {
   protected label: string = '';
   @Input() notebookConfig: any;
   private subscription: Subscription = new Subscription();
 
-  constructor(private notebookService: NotebookService, private projectService: ProjectService) {}
+  constructor(
+    private notebookService: NotebookService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
     this.setLabel();

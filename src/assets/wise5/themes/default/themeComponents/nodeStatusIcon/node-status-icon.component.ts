@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [CommonModule, MatIconModule],
-    selector: 'node-status-icon',
-    styleUrl: 'node-status-icon.component.scss',
-    templateUrl: 'node-status-icon.component.html'
+  imports: [CommonModule, MatIconModule],
+  selector: 'node-status-icon',
+  styles: ['.mat-icon { vertical-align: middle; }'],
+  templateUrl: 'node-status-icon.component.html'
 })
 export class NodeStatusIconComponent {
   @Input() nodeId: string;

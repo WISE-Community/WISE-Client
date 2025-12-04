@@ -1,5 +1,3 @@
-'use strict';
-
 import { ProjectService } from '../../services/projectService';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,10 +6,10 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [CommonModule, MatIconModule],
-    selector: 'node-icon',
-    styleUrl: 'node-icon.component.scss',
-    templateUrl: 'node-icon.component.html'
+  imports: [CommonModule, MatIconModule],
+  selector: 'node-icon',
+  styleUrl: 'node-icon.component.scss',
+  templateUrl: 'node-icon.component.html'
 })
 export class NodeIconComponent {
   @Input() canEdit: boolean;
@@ -23,7 +21,10 @@ export class NodeIconComponent {
   @Input() size: number;
   protected sizeClass: string;
 
-  constructor(protected dialog: MatDialog, protected projectService: ProjectService) {}
+  constructor(
+    protected dialog: MatDialog,
+    protected projectService: ProjectService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.node = this.projectService.getNode(this.nodeId);

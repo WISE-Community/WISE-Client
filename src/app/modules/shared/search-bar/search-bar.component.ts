@@ -16,18 +16,18 @@ import { MatInputModule } from '@angular/material/input';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        ReactiveFormsModule
-    ],
-    selector: 'app-search-bar',
-    styleUrl: './search-bar.component.scss',
-    templateUrl: './search-bar.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
+  selector: 'app-search-bar',
+  styleUrl: './search-bar.component.scss',
+  templateUrl: './search-bar.component.html'
 })
 export class SearchBarComponent implements OnInit {
   @Output('update') change: EventEmitter<string> = new EventEmitter<string>();
