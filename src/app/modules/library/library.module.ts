@@ -37,7 +37,6 @@ import { SelectTagsComponent } from '../../teacher/select-tags/select-tags.compo
 import { MatChipsModule } from '@angular/material/chips';
 import { SelectMenuComponent } from '../shared/select-menu/select-menu.component';
 import { UnitTagsComponent } from '../../teacher/unit-tags/unit-tags.component';
-import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { StandardsSelectMenuComponent } from '../shared/standards-select-menu/standards-select-menu.component';
 import { CurriculumComponent } from '../../curriculum/curriculum.component';
 import { ColorService } from '../../../assets/wise5/services/colorService';
@@ -97,10 +96,6 @@ const materialModules = [
     UnitTagsComponent,
     materialModules
   ],
-  providers: [
-    ColorService,
-    { provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl },
-    ProjectTagService
-  ]
+  providers: [ColorService, { provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl }]
 })
 export class LibraryModule {}
