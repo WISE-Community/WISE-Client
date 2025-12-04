@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthoringConfigResolver } from './authoring.config.resolver';
 import { AuthoringProjectResolver } from './authoring.project.resolver';
 import { RecoveryAuthoringProjectResolver } from './recovery-authoring-project.resolver';
 
-const routes: Routes = [
+export const authoringRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
@@ -53,15 +52,15 @@ const routes: Routes = [
           {
             path: 'add-lesson',
             loadChildren: () =>
-              import('../../assets/wise5/authoringTool/addLesson/add-lesson-routing.module').then(
-                (m) => m.AddLessonRoutingModule
+              import('../../assets/wise5/authoringTool/addLesson/add-lesson.routes').then(
+                (m) => m.routes
               )
           },
           {
             path: 'add-node',
             loadChildren: () =>
-              import('../../assets/wise5/authoringTool/addNode/add-node-routing.module').then(
-                (m) => m.AddNodeRoutingModule
+              import('../../assets/wise5/authoringTool/addNode/add-node.routes').then(
+                (m) => m.routes
               )
           },
           {
@@ -123,8 +122,8 @@ const routes: Routes = [
           {
             path: 'node/:nodeId',
             loadChildren: () =>
-              import('../../assets/wise5/authoringTool/node/node-authoring-routing.module').then(
-                (m) => m.NodeAuthoringRoutingModule
+              import('../../assets/wise5/authoringTool/node/node-authoring.routes').then(
+                (m) => m.routes
               )
           },
           {
@@ -139,9 +138,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class AuthoringRoutingModule {}

@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 import { ForgotComponent } from './forgot.component';
 import { ForgotHomeComponent } from './forgot-home/forgot-home.component';
 import { ForgotStudentComponent } from './student/forgot-student/forgot-student.component';
@@ -15,7 +14,7 @@ import { ForgotTeacherPasswordVerifyComponent } from './teacher/forgot-teacher-p
 import { ForgotTeacherPasswordChangeComponent } from './teacher/forgot-teacher-password-change/forgot-teacher-password-change.component';
 import { ForgotUserPasswordCompleteComponent } from './forgot-user-password-complete/forgot-user-password-complete.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: ForgotComponent,
@@ -37,9 +36,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class ForgotRoutingModule {}

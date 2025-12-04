@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 
 @Component({
-    imports: [CommonModule],
-    selector: 'app-blurb',
-    styleUrl: './blurb.component.scss',
-    templateUrl: './blurb.component.html'
+  imports: [CommonModule],
+  selector: 'app-blurb',
+  styleUrl: './blurb.component.scss',
+  templateUrl: './blurb.component.html'
 })
 export class BlurbComponent {
   @Input() content: string;

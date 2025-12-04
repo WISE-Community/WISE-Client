@@ -32,11 +32,11 @@ export const appRoutes: Routes = [
   },
   {
     path: 'forgot',
-    loadChildren: () => import('./forgot/forgot-routing.module').then((m) => m.ForgotRoutingModule)
+    loadChildren: () => import('./forgot/forgot.routes').then((m) => m.routes)
   },
   {
     path: 'help',
-    loadChildren: () => import('./help/help-routing.module').then((m) => m.HelpRoutingModule)
+    loadChildren: () => import('./help/help.routes').then((m) => m.routes)
   },
   {
     path: 'join',

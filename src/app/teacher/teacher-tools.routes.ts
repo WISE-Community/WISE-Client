@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { ClassroomMonitorComponent } from '../../assets/wise5/classroomMonitor/classroom-monitor.component';
 import { TeacherToolsResolver } from './teacher-tools.resolver';
 import { NodeProgressViewComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/node-progress-view/node-progress-view.component';
@@ -18,7 +17,7 @@ import { ExportOneWorkgroupPerRowComponent } from '../../assets/wise5/classroomM
 import { ExportStudentWorkComponent } from '../../assets/wise5/classroomMonitor/dataExport/export-student-work/export-student-work.component';
 import { NodeGradingComponent } from '../../assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component';
 
-const routes: Routes = [
+export const teacherToolsRoutes: Routes = [
   {
     path: 'unit/:unitId',
     component: ClassroomMonitorComponent,
@@ -35,15 +34,9 @@ const routes: Routes = [
       { path: 'manage-students', component: ManageStudentsComponent },
       { path: 'milestones', component: MilestonesComponent },
       { path: 'group/:nodeId', component: NodeProgressViewComponent },
-      {
-        path: 'node/:nodeId',
-        component: NodeGradingComponent
-      },
+      { path: 'node/:nodeId', component: NodeGradingComponent },
       { path: 'notebook', component: NotebookGradingComponent },
-      {
-        path: 'team',
-        component: StudentProgressComponent
-      },
+      { path: 'team', component: StudentProgressComponent },
       {
         path: 'team/:workgroupId',
         component: StudentGradingComponent,
@@ -52,9 +45,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class TeacherToolsRoutingModule {}

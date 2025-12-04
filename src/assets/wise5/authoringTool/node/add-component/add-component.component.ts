@@ -5,10 +5,10 @@ import { Node } from '../../../common/Node';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'add-component',
   imports: [AddComponentButtonComponent, CommonModule, MatDividerModule],
-  templateUrl: './add-component.component.html',
-  styleUrl: './add-component.component.scss'
+  selector: 'add-component',
+  styleUrl: './add-component.component.scss',
+  templateUrl: './add-component.component.html'
 })
 export class AddComponentComponent {
   @Input() afterComponentId: string;

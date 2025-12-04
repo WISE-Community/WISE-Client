@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { ShowGroupWorkStudentComponent } from './show-group-work-student.component';
 
 @NgModule({
-  imports: [ShowGroupWorkStudentComponent, StudentComponentModule],
+  imports: [ShowGroupWorkStudentComponent],
   exports: [ShowGroupWorkStudentComponent]
 })
 export class ShowGroupWorkStudentModule {}
