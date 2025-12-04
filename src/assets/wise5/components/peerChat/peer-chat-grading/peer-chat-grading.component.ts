@@ -13,10 +13,13 @@ import { PeerChatShowWorkComponent } from '../peer-chat-show-work/peer-chat-show
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
-import { PeerChatModule } from '../peer-chat.module';
+import { QuestionBankService } from '../peer-chat-question-bank/questionBank.service';
+import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
+import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-chat-question-bank.component';
 
 @Component({
-  imports: [PeerChatModule],
+  imports: [PeerChatChatBoxComponent, PeerChatQuestionBankComponent],
+  providers: [QuestionBankService],
   styleUrl: './peer-chat-grading.component.scss',
   templateUrl: './peer-chat-grading.component.html'
 })

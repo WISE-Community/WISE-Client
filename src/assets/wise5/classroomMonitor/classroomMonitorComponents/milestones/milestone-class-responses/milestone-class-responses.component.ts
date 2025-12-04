@@ -8,7 +8,7 @@ import { Notification } from '../../../../../../app/domain/notification';
 import { MatList, MatListItem } from '@angular/material/list';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { MatButton } from '@angular/material/button';
-import { NgIf, NgClass, NgFor } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
@@ -20,12 +20,10 @@ import { MilestoneWorkgroupItemComponent } from '../milestone-workgroup-item/mil
     MatListItem,
     WorkgroupSelectAutocompleteComponent,
     MatButton,
-    NgIf,
     MatIcon,
     NgClass,
     MatTooltip,
     IntersectionObserverModule,
-    NgFor,
     MilestoneWorkgroupItemComponent
   ],
   encapsulation: ViewEncapsulation.None,

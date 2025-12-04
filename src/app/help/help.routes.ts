@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HelpComponent } from './help.component';
 import { HelpHomeComponent } from './help-home/help-home.component';
 import { GettingStartedComponent } from './faq/getting-started/getting-started.component';
 import { TeacherFaqComponent } from './faq/teacher-faq/teacher-faq.component';
 import { StudentFaqComponent } from './faq/student-faq/student-faq.component';
 
-const helpRoutes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: HelpComponent,
@@ -18,9 +17,3 @@ const helpRoutes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(helpRoutes)],
-  exports: [RouterModule]
-})
-export class HelpRoutingModule {}

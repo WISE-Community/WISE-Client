@@ -1,5 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
 import { AddYourOwnNodeComponent } from './add-your-own-node/add-your-own-node.component';
 import { ChooseAutomatedAssessmentComponent } from './choose-automated-assessment/choose-automated-assessment.component';
 import { ConfigureAutomatedAssessmentComponent } from './configure-automated-assessment/configure-automated-assessment.component';
@@ -8,7 +7,7 @@ import { ChooseSimulationComponent } from './choose-simulation/choose-simulation
 import { ChooseImportStepComponent } from '../../../../app/authoring-tool/import-step/choose-import-step/choose-import-step.component';
 import { ChooseImportUnitComponent } from '../../../../app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'add-your-own',
     component: AddYourOwnNodeComponent
@@ -20,7 +19,10 @@ const routes: Routes = [
         path: 'choose-item',
         component: ChooseAutomatedAssessmentComponent
       },
-      { path: 'configure', component: ConfigureAutomatedAssessmentComponent }
+      {
+        path: 'configure',
+        component: ConfigureAutomatedAssessmentComponent
+      }
     ]
   },
   {
@@ -42,11 +44,11 @@ const routes: Routes = [
   },
   {
     path: 'simulation',
-    children: [{ path: 'choose-item', component: ChooseSimulationComponent }]
+    children: [
+      {
+        path: 'choose-item',
+        component: ChooseSimulationComponent
+      }
+    ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)]
-})
-export class AddNodeRoutingModule {}
