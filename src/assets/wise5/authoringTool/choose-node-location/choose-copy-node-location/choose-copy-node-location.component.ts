@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CopyNodesService } from '../../../services/copyNodesService';
 import { ChooseNodeLocationComponent } from '../choose-node-location.component';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
@@ -25,15 +24,8 @@ import { NodeWithMoveAfterButtonComponent } from '../node-with-move-after-button
   templateUrl: 'choose-copy-node-location.component.html'
 })
 export class ChooseCopyNodeLocationComponent extends ChooseNodeLocationComponent {
-  constructor(
-    private copyNodesService: CopyNodesService,
-    private copyTranslationsService: CopyTranslationsService,
-    protected projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {
-    super(projectService, route, router);
-  }
+  private copyNodesService = inject(CopyNodesService);
+  private copyTranslationsService = inject(CopyTranslationsService);
 
   protected insertAfter(nodeId: string): any[] {
     const newNodes = this.copyNodesService.copyNodesAfter(this.selectedNodeIds, nodeId);

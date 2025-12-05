@@ -1,19 +1,16 @@
+import { Directive, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { Directive } from '@angular/core';
 
 @Directive()
 export abstract class ChooseNodeLocationComponent {
   protected inactiveGroupNodes: any[];
   protected inactiveStepNodes: any[];
   protected nodeIds: string[];
+  protected projectService = inject(TeacherProjectService);
+  protected route = inject(ActivatedRoute);
+  protected router = inject(Router);
   protected selectedNodeIds: string[];
-
-  constructor(
-    protected projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {}
 
   ngOnInit(): void {
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();

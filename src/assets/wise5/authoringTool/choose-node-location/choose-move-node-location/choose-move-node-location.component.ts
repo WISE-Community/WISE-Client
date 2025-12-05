@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { MoveNodesService } from '../../../services/moveNodesService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ChooseNodeLocationComponent } from '../choose-node-location.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,15 +24,7 @@ import { NodeWithMoveAfterButtonComponent } from '../node-with-move-after-button
 })
 export class ChooseMoveNodeLocationComponent extends ChooseNodeLocationComponent {
   protected moveGroup: boolean;
-
-  constructor(
-    private moveNodesService: MoveNodesService,
-    protected projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {
-    super(projectService, route, router);
-  }
+  private moveNodesService = inject(MoveNodesService);
 
   ngOnInit(): void {
     super.ngOnInit();
