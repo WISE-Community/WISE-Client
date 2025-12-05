@@ -1,9 +1,7 @@
 import * as Highcharts from 'highcharts';
-import { Component } from '@angular/core';
-import { ProjectService } from '../../../services/projectService';
+import { Component, inject } from '@angular/core';
 import { GraphService } from '../graphService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
-import { NodeService } from '../../../services/nodeService';
 import { HighchartsChartModule } from 'highcharts-angular';
 
 @Component({
@@ -17,6 +15,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
   `
 })
 export class GraphShowWorkComponent extends ComponentShowWorkDirective {
+  private graphService = inject(GraphService);
   Highcharts: typeof Highcharts = Highcharts;
   options: any;
   graphType: string;
@@ -29,14 +28,6 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
   roundValuesTo: string;
   xAxis: any;
   yAxis: any;
-
-  constructor(
-    private graphService: GraphService,
-    protected nodeService: NodeService,
-    protected projectService: ProjectService
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

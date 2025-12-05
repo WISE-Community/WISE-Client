@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
+import { Component, inject } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { TabulatorData } from '../TabulatorData';
@@ -27,7 +25,6 @@ import { TabulatorTableComponent } from '../tabulator-table/tabulator-table.comp
   templateUrl: 'table-show-work.component.html'
 })
 export class TableShowWorkComponent extends ComponentShowWorkDirective {
-  tableData: any[] = [];
   dataExplorerGraphType: string;
   dataExplorerSeries: any[];
   dataExplorerXAxisLabel: string;
@@ -37,16 +34,10 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
   xColumnIndex: number;
   columnNames: string[] = [];
   noneText: string = $localize`(None)`;
+  tableData: any[] = [];
   tabulatorData: TabulatorData;
+  private tabulatorDataService = inject(TabulatorDataService);
   tabulatorSorters: any[];
-
-  constructor(
-    protected nodeService: NodeService,
-    protected projectService: ProjectService,
-    private tabulatorDataService: TabulatorDataService
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

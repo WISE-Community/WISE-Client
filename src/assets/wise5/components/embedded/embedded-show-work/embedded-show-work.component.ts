@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { EmbeddedService } from '../embeddedService';
 
@@ -18,21 +16,14 @@ import { EmbeddedService } from '../embeddedService';
   ></iframe>`
 })
 export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
+  private annotationService = inject(AnnotationService);
+  private configService = inject(ConfigService);
   protected embeddedApplicationIFrameId: string;
+  private embeddedService = inject(EmbeddedService);
   protected height: string = this.embeddedService.defaultHeight;
   private messageEventListener: any;
+  private sanitizer = inject(DomSanitizer);
   protected url: any;
-
-  constructor(
-    private annotationService: AnnotationService,
-    private configService: ConfigService,
-    private embeddedService: EmbeddedService,
-    protected nodeService: NodeService,
-    protected projectService: ProjectService,
-    private sanitizer: DomSanitizer
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

@@ -1,17 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
 import { NotificationService } from '../../../services/notificationService';
-import { PeerGroupService } from '../../../services/peerGroupService';
-import { ProjectService } from '../../../services/projectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 import { TeacherWorkService } from '../../../services/teacherWorkService';
 import { PeerChatShowWorkComponent } from '../peer-chat-show-work/peer-chat-show-work.component';
 import { PeerChatMessage } from '../PeerChatMessage';
-import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
 import { QuestionBankService } from '../peer-chat-question-bank/questionBank.service';
 import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
@@ -24,20 +19,11 @@ import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-c
   templateUrl: './peer-chat-grading.component.html'
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
-  constructor(
-    protected annotationService: AnnotationService,
-    protected configService: ConfigService,
-    protected dataService: TeacherDataService,
-    protected nodeService: NodeService,
-    protected notificationService: NotificationService,
-    protected peerChatService: PeerChatService,
-    protected peerGroupService: PeerGroupService,
-    protected projectService: ProjectService,
-    protected teacherWebSocketService: TeacherWebSocketService,
-    protected teacherWorkService: TeacherWorkService
-  ) {
-    super(configService, nodeService, peerChatService, peerGroupService, projectService);
-  }
+  protected annotationService = inject(AnnotationService);
+  protected dataService = inject(TeacherDataService);
+  protected notificationService = inject(NotificationService);
+  protected teacherWebSocketService = inject(TeacherWebSocketService);
+  protected teacherWorkService = inject(TeacherWorkService);
 
   submitTeacherResponse(response: string): void {
     this.sendNotificationsToGroupMembers(this.peerGroup);

@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
+import { Component, inject } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { MatchService } from '../matchService';
 import { MatchFeedbackSectionComponent } from '../match-student/match-feedback-section/match-feedback-section.component';
@@ -18,17 +16,10 @@ import { MatchChoiceItemComponent } from '../match-choice-item/match-choice-item
 })
 export class MatchShowWorkComponent extends ComponentShowWorkDirective {
   protected hasCorrectAnswer: boolean;
+  protected matchService = inject(MatchService);
   protected sourceBucket: any;
   private sourceBucketId = '0';
   protected targetBuckets: any[] = [];
-
-  constructor(
-    protected matchService: MatchService,
-    protected nodeService: NodeService,
-    protected projectService: ProjectService
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

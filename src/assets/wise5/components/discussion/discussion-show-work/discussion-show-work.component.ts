@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { TeacherDiscussionService } from '../teacherDiscussionService';
 import { ClassResponse } from '../class-response/class-response.component';
@@ -15,18 +13,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: 'discussion-show-work.component.html'
 })
 export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
+  private annotationService = inject(AnnotationService);
+  private configService = inject(ConfigService);
+  private discussionService = inject(TeacherDiscussionService);
   protected topLevelResponses: any = {};
   @Input() workgroupId: any;
-
-  constructor(
-    private annotationService: AnnotationService,
-    private configService: ConfigService,
-    private discussionService: TeacherDiscussionService,
-    protected nodeService: NodeService,
-    protected projectService: ProjectService
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

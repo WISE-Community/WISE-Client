@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { MatCardModule } from '@angular/material/card';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
@@ -30,18 +28,11 @@ import { UserService } from '../../../../../app/services/user.service';
 })
 export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective {
   protected computerAvatar: ComputerAvatar;
+  private computerAvatarService = inject(ComputerAvatarService);
+  private cRaterService = inject(CRaterService);
   protected cRaterRubric: CRaterRubric;
   protected isTeacher: boolean = false;
-
-  constructor(
-    private computerAvatarService: ComputerAvatarService,
-    private cRaterService: CRaterService,
-    protected nodeService: NodeService,
-    protected projectService: ProjectService,
-    protected userService: UserService
-  ) {
-    super(nodeService, projectService);
-  }
+  protected userService = inject(UserService);
 
   ngOnInit(): void {
     this.isTeacher = this.userService.isTeacher();

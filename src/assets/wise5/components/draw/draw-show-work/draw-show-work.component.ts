@@ -1,6 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { DrawService } from '../drawService';
 
@@ -13,16 +11,9 @@ import { DrawService } from '../drawService';
   </div> `
 })
 export class DrawShowWorkComponent extends ComponentShowWorkDirective {
+  private drawService = inject(DrawService);
   private drawingTool: any;
   protected drawingToolId: string;
-
-  constructor(
-    private drawService: DrawService,
-    protected nodeService: NodeService,
-    protected projectService: ProjectService
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

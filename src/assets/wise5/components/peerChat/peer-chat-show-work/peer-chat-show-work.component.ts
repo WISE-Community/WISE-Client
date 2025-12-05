@@ -1,14 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { timeout } from 'rxjs/operators';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { ConfigService } from '../../../services/configService';
-import { ProjectService } from '../../../services/projectService';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { PeerGroup } from '../PeerGroup';
 import { PeerGroupMember } from '../PeerGroupMember';
-import { NodeService } from '../../../services/nodeService';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
 import { forkJoin, Observable } from 'rxjs';
@@ -16,27 +14,19 @@ import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-hel
 
 @Component({ template: '' })
 export class PeerChatShowWorkComponent extends ComponentShowWorkDirective {
+  protected configService = inject(ConfigService);
   dynamicPrompt: FeedbackRule;
   isPeerChatWorkgroupsAvailable: boolean = false;
   peerChatMessages: PeerChatMessage[] = [];
+  protected peerChatService = inject(PeerChatService);
+  protected peerGroupService = inject(PeerGroupService);
   peerChatWorkgroupIds: Set<number> = new Set<number>();
   peerChatWorkgroupInfos: any = {};
   peerGroup: PeerGroup;
   questionBankRules: QuestionBankRule[];
   questionIdsUsed: string[] = [];
   requestTimeout: number = 10000;
-
   @Input() workgroupId: number;
-
-  constructor(
-    protected configService: ConfigService,
-    protected nodeService: NodeService,
-    protected peerChatService: PeerChatService,
-    protected peerGroupService: PeerGroupService,
-    protected projectService: ProjectService
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();
