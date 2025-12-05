@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { AiChatMessage } from './AiChatMessage';
 import { AiChatMessageReponse } from './AiChatMessageResponse';
@@ -6,9 +6,7 @@ import { ComputerAvatarService } from '../../services/computerAvatarService';
 
 @Injectable()
 export class AiChatService extends ComponentService {
-  constructor(protected computerAvatarService: ComputerAvatarService) {
-    super();
-  }
+  protected computerAvatarService = inject(ComputerAvatarService);
 
   getComponentTypeLabel() {
     return $localize`AI Chat`;

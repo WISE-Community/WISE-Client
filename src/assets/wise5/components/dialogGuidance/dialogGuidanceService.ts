@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ComponentService } from '../componentService';
 
 @Injectable()
 export class DialogGuidanceService extends ComponentService {
-  constructor(protected computerAvatarService: ComputerAvatarService) {
-    super();
-  }
+  protected computerAvatarService = inject(ComputerAvatarService);
 
   getComponentTypeLabel(): string {
     return $localize`Dialog Guidance`;

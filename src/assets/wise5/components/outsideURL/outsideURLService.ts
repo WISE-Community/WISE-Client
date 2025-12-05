@@ -1,14 +1,10 @@
-'use strict';
-
-import { ComponentService } from '../componentService';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ComponentService } from '../componentService';
 
 @Injectable()
 export class OutsideURLService extends ComponentService {
-  constructor(private http: HttpClient) {
-    super();
-  }
+  private http = inject(HttpClient);
 
   getComponentTypeLabel(): string {
     return $localize`Outside Resource`;
