@@ -11,7 +11,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { LibraryService } from '../../services/library.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha-2';
+import { ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
 import { Student } from '../../domain/student';
 import { StudentService } from '../../student/student.service';
 import { Subscription, lastValueFrom } from 'rxjs';
@@ -40,7 +40,8 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     MatError,
     MatSelect,
     MatOption,
-    MatProgressBar
+    MatProgressBar,
+    RecaptchaV3Module
   ],
   selector: 'app-contact-form',
   styles: `

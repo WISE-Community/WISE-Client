@@ -31,17 +31,29 @@ let userService: UserService;
 describe('ContactFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RecaptchaV3Module, ContactFormComponent],
+      imports: [ContactFormComponent],
       providers: [
         ConfigService,
         { provide: LibraryService, useClass: MockLibraryService },
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
+        {
+          provide: ReCaptchaV3Service,
+          useValue: {
+            execute: jasmine.createSpy('execute').and.returnValue(of('mock-token'))
+          }
+        },
         { provide: StudentService, useClass: MockStudentService },
         UserService,
         provideHttpClient(),
         provideRouter([])
       ]
-    }).compileComponents();
+    })
+      .overrideComponent(ContactFormComponent, {
+        remove: {
+          imports: [RecaptchaV3Module]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -149,7 +161,6 @@ function submit_showRecaptchaErrorMessage(): void {
   it('should show recaptcha error message', async () => {
     isRecaptchaEnabledSpy.and.returnValue(true);
     component.ngOnInit();
-    spyOn(recaptchaV3Service, 'execute').and.returnValue(of('generated-token'));
     const httpPostSpy = httpPostSpyAndReturn('error');
     await submitAndDetectChanges();
     expect(httpPostSpy).toHaveBeenCalled();
