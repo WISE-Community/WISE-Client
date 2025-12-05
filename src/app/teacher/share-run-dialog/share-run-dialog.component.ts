@@ -1,10 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatDialogModule,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
   MatDialog
 } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -18,8 +16,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
-import { TeacherService } from '../teacher.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ShareItemDialogComponent } from '../../modules/library/share-item-dialog/share-item-dialog.component';
 import { UserService } from '../../services/user.service';
@@ -57,22 +53,17 @@ import { CopyProjectDialogComponent } from '../../modules/library/copy-project-d
 export class ShareRunDialogComponent extends ShareItemDialogComponent {
   run: TeacherRun;
   dataSource: MatTableDataSource<any[]> = new MatTableDataSource<any[]>();
+  public dialog = inject(MatDialog);
   displayedColumns: string[] = ['name', 'permissions'];
   isDuplicateSharedTeacher: boolean = false;
   isOwner: boolean = false;
   isTransfer: boolean = false;
   transferRunWarning: boolean = false;
+  private userService = inject(UserService);
+  private utilService = inject(UtilService);
 
-  constructor(
-    public dialogRef: MatDialogRef<ShareItemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public teacherService: TeacherService,
-    private userService: UserService,
-    private utilService: UtilService,
-    public snackBar: MatSnackBar,
-    public dialog: MatDialog
-  ) {
-    super(dialogRef, data, teacherService, snackBar);
+  ngOnInit(): void {
+    super.ngOnInit();
     this.teacherService.getRun(this.data.run.id).subscribe((run: TeacherRun) => {
       this.run = new TeacherRun(run);
       this.runId = this.run.id;
@@ -85,10 +76,6 @@ export class ShareRunDialogComponent extends ShareItemDialogComponent {
         this.updateAllOwners();
       });
     });
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
   }
 
   updateAllOwners() {
