@@ -1,14 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
-import { ConfigService } from '../../../services/configService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 
 @Component({
@@ -17,21 +13,14 @@ import { AudioOscillatorService } from '../audioOscillatorService';
   imports: [EditComponentPrompt, MatCheckbox, FormsModule, MatFormFieldModule, MatInput]
 })
 export class AudioOscillatorAuthoring extends AbstractComponentAuthoring {
+  private audioOscillatorService = inject(AudioOscillatorService);
+
   maxAmplitude: number = this.audioOscillatorService.maxAmplitude;
   sawtoothChecked: boolean;
   sineChecked: boolean;
   squareChecked: boolean;
   triangleChecked: boolean;
 
-  constructor(
-    protected audioOscillatorService: AudioOscillatorService,
-    protected configService: ConfigService,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, nodeService, projectAssetService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

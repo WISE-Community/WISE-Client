@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -8,13 +8,9 @@ import { MatInput } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltip } from '@angular/material/tooltip';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
-import { ConfigService } from '../../../services/configService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MultipleChoiceContent } from '../../multipleChoice/MultipleChoiceContent';
 import { SummaryService } from '../summaryService';
 
@@ -36,22 +32,13 @@ import { SummaryService } from '../summaryService';
   templateUrl: 'summary-authoring.component.html'
 })
 export class SummaryAuthoring extends AbstractComponentAuthoring {
+  private componentServiceLookupService = inject(ComponentServiceLookupService);
+  private summaryService = inject(SummaryService);
+
   isResponsesOptionAvailable: boolean = false;
   isHighlightCorrectAnswerAvailable: boolean = false;
   isPieChartAllowed: boolean = true;
-  stepNodesDetails: string[];
-
-  constructor(
-    private componentServiceLookupService: ComponentServiceLookupService,
-    protected configService: ConfigService,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService,
-    private summaryService: SummaryService
-  ) {
-    super(configService, nodeService, projectAssetService, projectService);
-    this.stepNodesDetails = this.projectService.getStepNodesDetailsInOrder();
-  }
+  stepNodesDetails: string[] = this.projectService.getStepNodesDetailsInOrder();
 
   ngOnInit(): void {
     super.ngOnInit();
