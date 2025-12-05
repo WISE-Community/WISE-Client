@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Project } from '../../domain/project';
 import { Tag } from '../../domain/tag';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
@@ -11,8 +11,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AbstractTagsMenuComponent } from '../abstract-tags-menu/abstract-tags-menu.component';
 import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
 import { TagComponent } from '../tag/tag.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -33,14 +31,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ApplyTagsButtonComponent extends AbstractTagsMenuComponent {
   @Input() selectedProjects: Project[] = [];
-
-  constructor(
-    dialog: MatDialog,
-    protected projectTagService: ProjectTagService,
-    private snackBar: MatSnackBar
-  ) {
-    super(dialog, projectTagService);
-  }
+  private snackBar = inject(MatSnackBar);
 
   ngOnChanges(): void {
     this.updateAllTagsCheckedValues();

@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { Tag } from '../../domain/tag';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,15 +7,12 @@ import { ManageTagsDialogComponent } from '../manage-tags-dialog/manage-tags-dia
 
 @Directive()
 export class AbstractTagsMenuComponent {
+  private dialog = inject(MatDialog);
   protected filteredTags: Tag[] = [];
+  protected projectTagService = inject(ProjectTagService);
   protected searchText: string = '';
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
-
-  constructor(
-    private dialog: MatDialog,
-    protected projectTagService: ProjectTagService
-  ) {}
 
   ngOnInit(): void {
     this.retrieveUserTags();
