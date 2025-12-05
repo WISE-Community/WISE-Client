@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AuthorBranchService } from './authorBranchService';
 import { AuthorBranchParams } from '../common/AuthorBranchParams';
-import { TeacherProjectService } from './teacherProjectService';
 import { DeleteBranchService } from './deleteBranchService';
 import {
   CHOICE_CHOSEN_VALUE,
@@ -12,12 +11,7 @@ import {
 
 @Injectable()
 export class EditBranchService extends AuthorBranchService {
-  constructor(
-    private deleteBranchService: DeleteBranchService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(projectService);
-  }
+  private deleteBranchService = inject(DeleteBranchService);
 
   editBranch(node: any, branchPaths: any[], params: AuthorBranchParams): Promise<void> {
     this.projectService.parseProject();
