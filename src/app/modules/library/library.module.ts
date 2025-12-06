@@ -39,7 +39,6 @@ import { SelectMenuComponent } from '../shared/select-menu/select-menu.component
 import { UnitTagsComponent } from '../../teacher/unit-tags/unit-tags.component';
 import { StandardsSelectMenuComponent } from '../shared/standards-select-menu/standards-select-menu.component';
 import { CurriculumComponent } from '../../curriculum/curriculum.component';
-import { ColorService } from '../../../assets/wise5/services/colorService';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -96,6 +95,6 @@ const materialModules = [
     UnitTagsComponent,
     materialModules
   ],
-  providers: [ColorService, { provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl }]
+  providers: [{ provide: MatPaginatorIntl, useClass: LibraryPaginatorIntl }]
 })
 export class LibraryModule {}
