@@ -1,22 +1,17 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
 import { Teacher } from '../../domain/teacher';
 import { TeacherService } from '../../teacher/teacher.service';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { UtilService } from '../../services/util.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
-import { ConfigService } from '../../services/config.service';
 import { SchoolLevel, schoolLevels } from '../../domain/profile.constants';
 
 @Component({
-    selector: 'register-teacher-form',
-    templateUrl: './register-teacher-form.component.html',
-    styleUrls: ['./register-teacher-form.component.scss'],
-    standalone: false
+  selector: 'register-teacher-form',
+  templateUrl: './register-teacher-form.component.html',
+  styleUrls: ['./register-teacher-form.component.scss'],
+  standalone: false
 })
 export class RegisterTeacherFormComponent extends RegisterUserFormComponent implements OnInit {
   createTeacherAccountFormGroup: FormGroup = this.fb.group(
@@ -41,19 +36,7 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   schoolLevels: SchoolLevel[] = schoolLevels;
   user: Teacher = new Teacher();
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private configService: ConfigService,
-    protected fb: FormBuilder,
-    private recaptchaV3Service: ReCaptchaV3Service,
-    private router: Router,
-    private route: ActivatedRoute,
-    protected snackBar: MatSnackBar,
-    private teacherService: TeacherService,
-    private utilService: UtilService
-  ) {
-    super(fb, snackBar);
-  }
+  private teacherService = inject(TeacherService);
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
