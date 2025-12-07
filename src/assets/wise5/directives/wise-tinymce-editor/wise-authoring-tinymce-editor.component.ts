@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigService } from '../../services/configService';
-import { NotebookService } from '../../services/notebookService';
 import 'tinymce';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectAssetAuthoringComponent } from '../../authoringTool/project-asset-authoring/project-asset-authoring.component';
@@ -30,6 +29,8 @@ declare let tinymce: any;
   />`
 })
 export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorComponent {
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
   protected toolbar: string = `undo redo | fontselect | formatselect | fontsizeselect |
     bold italic underline | image media link wiselink | forecolor backcolor | alignment numlist bullist |
     emoticons removeformat fullscreen`;
@@ -41,18 +42,10 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
     }
   };
 
-  constructor(
-    private ConfigService: ConfigService,
-    private dialog: MatDialog,
-    NotebookService: NotebookService
-  ) {
-    super(NotebookService);
-  }
-
   ngOnInit(): void {
+    super.ngOnInit();
     this.addPluginName('wiselink');
     this.initializeInsertWISELinkPlugin();
-    this.initializeTinyMCE();
   }
 
   private initializeInsertWISELinkPlugin(): void {
@@ -113,7 +106,7 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
       .subscribe((result: any) => {
         const fileName = result.assetItem.fileName;
         const fileNameNoExt = fileName.substr(0, fileName.lastIndexOf('.')) || fileName;
-        const fullFilePath = `${this.ConfigService.getProjectAssetsDirectoryPath()}/${fileName}`;
+        const fullFilePath = `${this.configService.getProjectAssetsDirectoryPath()}/${fileName}`;
         callback(fullFilePath, { alt: fileNameNoExt, text: fileNameNoExt });
       });
   }
