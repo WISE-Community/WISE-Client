@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,6 +12,11 @@ import { AuthorBranchParams } from '../../common/AuthorBranchParams';
 
 @Directive()
 export abstract class AbstractBranchAuthoringComponent {
+  protected fb = inject(FormBuilder);
+  protected projectService = inject(TeacherProjectService);
+  protected route = inject(ActivatedRoute);
+  protected router = inject(Router);
+
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly RANDOM_VALUE: string = RANDOM_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
@@ -29,13 +34,6 @@ export abstract class AbstractBranchAuthoringComponent {
     pathFormGroup: this.pathFormGroup,
     mergeStep: new FormControl('')
   });
-
-  constructor(
-    protected fb: FormBuilder,
-    protected projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {}
 
   ngOnInit(): void {
     this.targetId = history.state.targetId;
