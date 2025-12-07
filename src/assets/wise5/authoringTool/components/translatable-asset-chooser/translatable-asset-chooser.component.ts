@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -6,8 +6,6 @@ import { AssetChooser } from '../../project-asset-authoring/asset-chooser';
 import { MatDialog } from '@angular/material/dialog';
 import { filter } from 'rxjs';
 import { AbstractTranslatableFieldComponent } from '../abstract-translatable-field/abstract-translatable-field.component';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 @Component({
   selector: 'translatable-asset-chooser',
@@ -21,13 +19,7 @@ export class TranslatableAssetChooserComponent extends AbstractTranslatableField
     return value;
   };
 
-  constructor(
-    private dialog: MatDialog,
-    protected projectService: TeacherProjectService,
-    protected projectTranslationService: TeacherProjectTranslationService
-  ) {
-    super(projectService, projectTranslationService);
-  }
+  private dialog = inject(MatDialog);
 
   protected chooseAsset(): void {
     new AssetChooser(this.dialog)

@@ -1,11 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { AbstractTranslatableFieldComponent } from '../abstract-translatable-field/abstract-translatable-field.component';
 import { WiseAuthoringTinymceEditorComponent } from '../../../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wise-link';
 import { ConfigService } from '../../../services/configService';
-import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -18,13 +16,7 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
   protected html: string = '';
   @ViewChild(MatTabGroup) private tabs: MatTabGroup;
 
-  constructor(
-    private configService: ConfigService,
-    protected projectService: TeacherProjectService,
-    protected projectTranslationService: TeacherProjectTranslationService
-  ) {
-    super(projectService, projectTranslationService);
-  }
+  private configService = inject(ConfigService);
 
   ngOnChanges(): void {
     super.ngOnChanges();
