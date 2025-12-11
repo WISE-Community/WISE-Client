@@ -4,13 +4,32 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ConfigService } from '../services/config.service';
 import { Config } from '../domain/config';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { HeroSectionComponent } from '../modules/shared/hero-section/hero-section.component';
+import { MatIcon } from '@angular/material/icon';
+import { DiscourseLatestNewsComponent } from './discourse-latest-news/discourse-latest-news.component';
+import { NgClass } from '@angular/common';
+import { BlurbComponent } from '../modules/shared/blurb/blurb.component';
+import { HomePageProjectLibraryComponent } from '../modules/library/home-page-project-library/home-page-project-library.component';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
+import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
   animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn],
-  standalone: false
+  imports: [
+    HeroSectionComponent,
+    MatIcon,
+    DiscourseLatestNewsComponent,
+    NgClass,
+    BlurbComponent,
+    HomePageProjectLibraryComponent,
+    MatButton,
+    RouterLink,
+    CallToActionComponent
+  ],
+  selector: 'app-home',
+  styleUrl: './home.component.scss',
+  templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
   discourseNewsCategory: string;

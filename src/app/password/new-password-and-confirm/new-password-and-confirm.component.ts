@@ -5,14 +5,31 @@ import {
   FormGroup,
   ValidationErrors,
   ValidatorFn,
-  Validators
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
 } from '@angular/forms';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { PasswordStrengthMeterComponent } from '@wise-community/angular-password-strength-meter';
+import { PasswordRequirementComponent } from '../password-requirement/password-requirement.component';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatMenuTrigger,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatMenu,
+    PasswordStrengthMeterComponent,
+    PasswordRequirementComponent
+  ],
   selector: 'new-password-and-confirm',
-  standalone: false,
   styleUrl: './new-password-and-confirm.component.scss',
   templateUrl: './new-password-and-confirm.component.html'
 })

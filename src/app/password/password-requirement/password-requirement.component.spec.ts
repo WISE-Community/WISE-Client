@@ -3,7 +3,6 @@ import { PasswordRequirementComponent } from './password-requirement.component';
 import { FormControl } from '@angular/forms';
 import { PasswordRequirementHarness } from './password-requirement.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatIconModule } from '@angular/material/icon';
 
 let component: PasswordRequirementComponent;
 let fixture: ComponentFixture<PasswordRequirementComponent>;
@@ -12,8 +11,7 @@ let passwordRequirementHarness: PasswordRequirementHarness;
 describe('PasswordRequirementComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PasswordRequirementComponent],
-      imports: [MatIconModule]
+      imports: [PasswordRequirementComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PasswordRequirementComponent);

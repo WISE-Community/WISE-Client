@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewsComponent } from './news.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { News } from '../domain/news';
 import { Observable } from 'rxjs';
@@ -75,9 +74,8 @@ describe('NewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NewsComponent],
-      providers: [{ provide: NewsService, useClass: MockNewsService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [NewsComponent],
+      providers: [{ provide: NewsService, useClass: MockNewsService }]
     });
     fixture = TestBed.createComponent(NewsComponent);
     component = fixture.componentInstance;

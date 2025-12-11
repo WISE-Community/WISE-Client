@@ -2,10 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterStudentComponent } from './register-student.component';
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Config } from '../../domain/config';
 import { ConfigService } from '../../services/config.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 export class MockStudentService {}
 
@@ -28,19 +27,16 @@ export class MockConfigService {
 describe('RegisterStudentComponent', () => {
   let component: RegisterStudentComponent;
   let fixture: ComponentFixture<RegisterStudentComponent>;
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [RegisterStudentComponent],
-        imports: [RouterTestingModule],
-        providers: [
-          { provide: UserService, useClass: MockUserService },
-          { provide: ConfigService, useClass: MockConfigService }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RegisterStudentComponent],
+      providers: [
+        { provide: UserService, useClass: MockUserService },
+        { provide: ConfigService, useClass: MockConfigService },
+        provideRouter([])
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterStudentComponent);
