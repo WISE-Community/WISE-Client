@@ -4,7 +4,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { TeacherService } from '../teacher.service';
-import { ColorService } from '../../../assets/wise5/services/colorService';
 
 describe('ManageTagsDialogComponent', () => {
   let component: ManageTagsDialogComponent;
@@ -17,7 +16,7 @@ describe('ManageTagsDialogComponent', () => {
         ManageTagsDialogComponent,
         StudentTeacherCommonServicesModule
       ],
-      providers: [ColorService, ProjectTagService, TeacherService]
+      providers: [ProjectTagService, TeacherService]
     });
     fixture = TestBed.createComponent(ManageTagsDialogComponent);
     component = fixture.componentInstance;

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
+import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'app-register-google-user-already-exists',
-    templateUrl: './register-google-user-already-exists.component.html',
-    styleUrls: ['./register-google-user-already-exists.component.scss'],
-    standalone: false
+  imports: [MatCard, MatCardContent, MatCardActions, MatButton],
+  selector: 'app-register-google-user-already-exists',
+  templateUrl: './register-google-user-already-exists.component.html',
+  styleUrl: './register-google-user-already-exists.component.scss'
 })
-export class RegisterGoogleUserAlreadyExistsComponent implements OnInit {
+export class RegisterGoogleUserAlreadyExistsComponent {
   constructor(private configService: ConfigService) {}
-
-  ngOnInit() {}
 
   public socialSignIn(socialPlatform: string) {
     window.location.href = `${this.configService.getContextPath()}/api/google-login`;

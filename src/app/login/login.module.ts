@@ -29,9 +29,10 @@ const materialModules = [
     ReactiveFormsModule,
     materialModules,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    LoginComponent,
+    LoginHomeComponent
   ],
-  declarations: [LoginComponent, LoginHomeComponent],
   exports: [LoginComponent]
 })
 export class LoginModule {}

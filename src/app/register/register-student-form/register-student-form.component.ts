@@ -2,16 +2,42 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Student } from '../../domain/student';
 import { StudentService } from '../../student/student.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
-
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
 @Component({
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatSelect,
+    MatOption,
+    NewPasswordAndConfirmComponent,
+    MatButton,
+    MatProgressBar
+  ],
   selector: 'register-student-form',
-  templateUrl: './register-student-form.component.html',
-  styleUrls: ['./register-student-form.component.scss'],
-  standalone: false
+  styleUrl: './register-student-form.component.scss',
+  templateUrl: './register-student-form.component.html'
 })
 export class RegisterStudentFormComponent extends RegisterUserFormComponent implements OnInit {
   createStudentAccountFormGroup: FormGroup = this.fb.group({

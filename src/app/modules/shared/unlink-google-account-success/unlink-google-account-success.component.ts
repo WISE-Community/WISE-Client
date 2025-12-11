@@ -1,11 +1,26 @@
 import { Component } from '@angular/core';
 import { Teacher } from '../../../domain/teacher';
 import { UserService } from '../../../services/user.service';
+import {
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    styleUrls: ['unlink-google-account-success.component.scss'],
-    templateUrl: 'unlink-google-account-success.component.html',
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose
+  ],
+  styleUrl: 'unlink-google-account-success.component.scss',
+  templateUrl: 'unlink-google-account-success.component.html'
 })
 export class UnlinkGoogleAccountSuccessComponent {
   username: string;

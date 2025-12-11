@@ -20,9 +20,9 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
     HomeRoutingModule,
     LibraryModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    HomeComponent
   ],
-  declarations: [HomeComponent],
   exports: [HomeComponent, SharedModule]
 })
 export class HomeModule {}

@@ -1,5 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,12 +14,26 @@ import { UserService } from '../../../services/user.service';
 import { UnlinkGoogleAccountConfirmComponent } from '../unlink-google-account-confirm/unlink-google-account-confirm.component';
 import { NewPasswordAndConfirmComponent } from '../../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { changePasswordError } from '../../../common/password-helper';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'app-edit-password',
-    templateUrl: './edit-password.component.html',
-    styleUrls: ['./edit-password.component.scss'],
-    standalone: false
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    NewPasswordAndConfirmComponent,
+    MatButton,
+    MatProgressBar
+  ],
+  selector: 'app-edit-password',
+  styleUrl: './edit-password.component.scss',
+  templateUrl: './edit-password.component.html'
 })
 export class EditPasswordComponent implements OnInit {
   @ViewChild('changePasswordForm', { static: false }) changePasswordForm;

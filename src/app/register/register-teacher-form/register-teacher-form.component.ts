@@ -1,17 +1,49 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Teacher } from '../../domain/teacher';
 import { TeacherService } from '../../teacher/teacher.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { RecaptchaV3Module } from 'ng-recaptcha-2';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { SchoolLevel, schoolLevels } from '../../domain/profile.constants';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatFormField, MatLabel, MatError, MatHint } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatHint,
+    MatSelect,
+    MatOption,
+    NewPasswordAndConfirmComponent,
+    MatCheckbox,
+    MatButton,
+    MatProgressBar,
+    RecaptchaV3Module
+  ],
   selector: 'register-teacher-form',
-  templateUrl: './register-teacher-form.component.html',
-  styleUrls: ['./register-teacher-form.component.scss'],
-  standalone: false
+  styleUrl: './register-teacher-form.component.scss',
+  templateUrl: './register-teacher-form.component.html'
 })
 export class RegisterTeacherFormComponent extends RegisterUserFormComponent implements OnInit {
   createTeacherAccountFormGroup: FormGroup = this.fb.group(

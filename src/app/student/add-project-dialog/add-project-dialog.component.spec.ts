@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddProjectDialogComponent } from './add-project-dialog.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentService } from '../student.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
@@ -17,8 +16,7 @@ describe('AddProjectDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddProjectDialogComponent],
-      imports: [BrowserAnimationsModule, MatSelectModule, MatInputModule],
+      imports: [MatSelectModule, MatInputModule, AddProjectDialogComponent],
       providers: [
         { provide: StudentService, useClass: MockStudentService },
         {

@@ -48,9 +48,7 @@ import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.comp
     SearchBarComponent,
     SharedModule,
     StudentRoutingModule,
-    TimelineModule
-  ],
-  declarations: [
+    TimelineModule,
     AddProjectDialogComponent,
     StudentComponent,
     StudentHomeComponent,

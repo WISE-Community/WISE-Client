@@ -32,7 +32,6 @@ import { ApplyTagsButtonComponent } from './apply-tags-button/apply-tags-button.
 import { ProjectTagService } from '../../assets/wise5/services/projectTagService';
 import { SelectTagsComponent } from './select-tags/select-tags.component';
 import { UnitTagsComponent } from './unit-tags/unit-tags.component';
-import { ColorService } from '../../assets/wise5/services/colorService';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AccessLinkService } from '../services/accessLinkService';
 
@@ -74,7 +73,7 @@ const materialModules = [
     EditComponent,
     TeacherEditProfileComponent
   ],
-  providers: [AccessLinkService, AuthGuard, ColorService, ProjectTagService],
+  providers: [AccessLinkService, AuthGuard, ProjectTagService],
   exports: [UnitTagsComponent, materialModules]
 })
 export class TeacherModule {}

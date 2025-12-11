@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    templateUrl: './register-microsoft-user-already-exists.component.html',
-    standalone: false
+  imports: [MatCard, MatCardContent, MatCardActions, MatButton],
+  templateUrl: './register-microsoft-user-already-exists.component.html'
 })
 export class RegisterMicrosoftUserAlreadyExistsComponent {
   protected login(): void {

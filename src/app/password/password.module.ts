@@ -19,9 +19,10 @@ import { provideZxvbnServiceForPSM } from '@wise-community/angular-password-stre
     MatInputModule,
     MatMenuModule,
     PasswordStrengthMeterComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NewPasswordAndConfirmComponent,
+    PasswordRequirementComponent
   ],
-  declarations: [NewPasswordAndConfirmComponent, PasswordRequirementComponent],
   providers: [provideZxvbnServiceForPSM()],
   exports: [NewPasswordAndConfirmComponent]
 })

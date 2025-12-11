@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
-  standalone: false,
+  imports: [NgClass, RouterOutlet],
   styles: ['.full-height { height: 100%; }'],
   templateUrl: './student.component.html'
 })

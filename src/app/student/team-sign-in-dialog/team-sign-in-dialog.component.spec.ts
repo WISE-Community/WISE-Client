@@ -77,22 +77,19 @@ describe('TeamSignInDialogComponent', () => {
     ]
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TeamSignInDialogComponent],
-        imports: [RouterTestingModule],
-        providers: [
-          { provide: ConfigService, useClass: MockConfigService },
-          { provide: MAT_DIALOG_DATA, useValue: { run: runObj } },
-          { provide: MatDialogRef, useValue: {} },
-          { provide: UserService, useClass: MockUserService },
-          { provide: StudentService, useClass: MockStudentService }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, TeamSignInDialogComponent],
+      providers: [
+        { provide: ConfigService, useClass: MockConfigService },
+        { provide: MAT_DIALOG_DATA, useValue: { run: runObj } },
+        { provide: MatDialogRef, useValue: {} },
+        { provide: UserService, useClass: MockUserService },
+        { provide: StudentService, useClass: MockStudentService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeamSignInDialogComponent);
