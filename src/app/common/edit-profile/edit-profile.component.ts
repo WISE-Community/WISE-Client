@@ -1,14 +1,12 @@
+import { inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UnlinkGoogleAccountConfirmComponent } from '../../modules/shared/unlink-google-account-confirm/unlink-google-account-confirm.component';
 
 export abstract class EditProfileComponent {
   changed: boolean = false;
-
-  constructor(
-    public dialog: MatDialog,
-    public snackBar: MatSnackBar
-  ) {}
+  dialog = inject(MatDialog);
+  snackBar = inject(MatSnackBar);
 
   handleUpdateProfileResponse(response) {
     if (response.status === 'success') {
