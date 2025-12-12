@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { NodeService } from './nodeService';
-import { Subject, Observable } from 'rxjs';
 import { TeacherDataService } from './teacherDataService';
 import { TeacherProjectService } from './teacherProjectService';
-import { ConfigService } from './configService';
-import { ConstraintService } from './constraintService';
 
 @Injectable()
 export class TeacherNodeService extends NodeService {
+  protected override dataService = inject(TeacherDataService);
+  protected override projectService = inject(TeacherProjectService);
+
   private componentShowSubmitButtonValueChangedSource: Subject<any> = new Subject<any>();
   public componentShowSubmitButtonValueChanged$: Observable<any> =
     this.componentShowSubmitButtonValueChangedSource.asObservable();
@@ -15,15 +16,6 @@ export class TeacherNodeService extends NodeService {
   public deleteStarterState$: Observable<any> = this.deleteStarterStateSource.asObservable();
   private starterStateResponseSource: Subject<any> = new Subject<any>();
   public starterStateResponse$: Observable<any> = this.starterStateResponseSource.asObservable();
-
-  constructor(
-    protected configService: ConfigService,
-    protected constraintService: ConstraintService,
-    protected dataService: TeacherDataService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, constraintService, dataService, projectService);
-  }
 
   broadcastComponentShowSubmitButtonValueChanged(args: any): void {
     this.componentShowSubmitButtonValueChangedSource.next(args);

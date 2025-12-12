@@ -1,31 +1,21 @@
-import { Injectable } from '@angular/core';
-import { NodeService } from './nodeService';
+import { inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfigService } from './configService';
-import { ConstraintService } from './constraintService';
-import { ProjectService } from './projectService';
-import { NodeStatusService } from './nodeStatusService';
-import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
+import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 import { Constraint } from '../../../app/domain/constraint';
 import { TransitionLogic } from '../common/TransitionLogic';
+import { DialogWithCloseComponent } from '../directives/dialog-with-close/dialog-with-close.component';
+import { NodeService } from './nodeService';
+import { NodeStatusService } from './nodeStatusService';
 import { StudentDataService } from './studentDataService';
-import { ChooseBranchPathDialogComponent } from '../../../app/preview/modules/choose-branch-path-dialog/choose-branch-path-dialog.component';
 
 @Injectable()
 export class StudentNodeService extends NodeService {
+  protected override dataService = inject(StudentDataService);
+  private dialog = inject(MatDialog);
+  private nodeStatusService = inject(NodeStatusService);
+
   private chooseTransitionPromises = {};
   private transitionResults = {};
-
-  constructor(
-    protected configService: ConfigService,
-    protected constraintService: ConstraintService,
-    protected dataService: StudentDataService,
-    private dialog: MatDialog,
-    private nodeStatusService: NodeStatusService,
-    protected projectService: ProjectService
-  ) {
-    super(configService, constraintService, dataService, projectService);
-  }
 
   setCurrentNode(nodeId: string): void {
     if (this.nodeStatusService.getNodeStatusByNodeId(nodeId).isVisitable) {
