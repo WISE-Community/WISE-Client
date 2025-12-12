@@ -1,17 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
+import { Translations } from '../../../app/domain/translations';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
-import { Translations } from '../../../app/domain/translations';
 
 @Injectable()
 export class ProjectTranslationService {
-  constructor(
-    protected configService: ConfigService,
-    protected http: HttpClient,
-    protected projectService: ProjectService
-  ) {}
+  protected configService = inject(ConfigService);
+  protected http = inject(HttpClient);
+  protected projectService = inject(ProjectService);
 
   protected fetchTranslations(locale: string): Observable<Translations> {
     return this.http

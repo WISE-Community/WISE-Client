@@ -4,6 +4,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CopyTranslationsService } from '../../../services/copyTranslationsService';
 import { ConfigService } from '../../../services/configService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
 
 class MockTeacherProjectService {}
 describe('CopyComponentButtonComponent', () => {
@@ -15,7 +16,7 @@ describe('CopyComponentButtonComponent', () => {
       imports: [CopyComponentButtonComponent],
       providers: [
         ConfigService,
-        CopyTranslationsService,
+        MockProvider(CopyTranslationsService),
         provideHttpClient(withInterceptorsFromDi()),
         { provide: TeacherProjectService, useClass: MockTeacherProjectService }
       ]

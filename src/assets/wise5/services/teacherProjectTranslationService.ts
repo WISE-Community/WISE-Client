@@ -1,22 +1,19 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
-import { Observable, catchError, lastValueFrom, map, throwError } from 'rxjs';
-import { TeacherProjectService } from './teacherProjectService';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { catchError, lastValueFrom, map, Observable, throwError } from 'rxjs';
 import { Translations } from '../../../app/domain/translations';
 import { ProjectTranslationService } from './projectTranslationService';
-import { HttpClient } from '@angular/common/http';
-import { ConfigService } from './configService';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { TeacherProjectService } from './teacherProjectService';
 
 @Injectable()
 export class TeacherProjectTranslationService extends ProjectTranslationService {
+  protected override projectService = inject(TeacherProjectService);
+
   private currentTranslationsSignal: WritableSignal<Translations> = signal({});
   readonly currentTranslations = this.currentTranslationsSignal.asReadonly();
-  constructor(
-    protected configService: ConfigService,
-    protected http: HttpClient,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, http, projectService);
+
+  constructor() {
+    super();
     toObservable(this.projectService.currentLanguage).subscribe(async (language) => {
       this.currentTranslationsSignal.set(
         this.projectService.isDefaultLocale()

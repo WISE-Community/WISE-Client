@@ -1,25 +1,15 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { lastValueFrom, of, switchMap, tap } from 'rxjs';
-import { copy } from '../common/object/object';
-import { Translations } from '../../../app/domain/translations';
-import { ProjectTranslationService } from './projectTranslationService';
-import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { Language } from '../../../app/domain/language';
-import { HttpClient } from '@angular/common/http';
-import { ConfigService } from './configService';
-import { ProjectService } from './projectService';
+import { Translations } from '../../../app/domain/translations';
+import { copy } from '../common/object/object';
+import { ProjectTranslationService } from './projectTranslationService';
 import { StudentDataService } from './studentDataService';
 
 @Injectable()
 export class StudentProjectTranslationService extends ProjectTranslationService {
-  constructor(
-    protected configService: ConfigService,
-    private dataService: StudentDataService,
-    protected http: HttpClient,
-    protected projectService: ProjectService
-  ) {
-    super(configService, http, projectService);
-  }
+  private dataService = inject(StudentDataService);
 
   currentTranslations = toSignal(
     toObservable(this.projectService.currentLanguage).pipe(
