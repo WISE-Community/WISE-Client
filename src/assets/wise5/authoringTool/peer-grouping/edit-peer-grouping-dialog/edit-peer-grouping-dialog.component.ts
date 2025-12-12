@@ -1,8 +1,14 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { Component, inject, Inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { SelectStepAndComponentComponent } from '../../../../../app/authoring-tool/select-step-and-component/select-step-and-component.component';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
-import { ProjectService } from '../../../services/projectService';
 import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
 import {
   DIFFERENT_IDEAS_REGEX,
@@ -10,14 +16,6 @@ import {
   DIFFERENT_SCORES_REGEX,
   DIFFERENT_SCORES_VALUE
 } from '../PeerGroupingLogic';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { SelectStepAndComponentComponent } from '../../../../../app/authoring-tool/select-step-and-component/select-step-and-component.component';
-import { FormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatInputModule } from '@angular/material/input';
 
 @Component({
   imports: [
@@ -33,17 +31,11 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './edit-peer-grouping-dialog.component.html'
 })
 export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
-  stepsUsedIn: string[] = [];
+  @Inject(MAT_DIALOG_DATA) public peerGrouping = inject(MAT_DIALOG_DATA) as PeerGrouping;
+  protected override dialogRef = inject(MatDialogRef<EditPeerGroupingDialogComponent>);
+  private peerGroupingAuthoringService = inject(PeerGroupingAuthoringService);
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public peerGrouping: PeerGrouping,
-    protected dialogRef: MatDialogRef<EditPeerGroupingDialogComponent>,
-    private peerGroupingAuthoringService: PeerGroupingAuthoringService,
-    protected projectService: ProjectService,
-    protected snackBar: MatSnackBar
-  ) {
-    super(dialogRef, projectService, snackBar);
-  }
+  stepsUsedIn: string[] = [];
 
   ngOnInit(): void {
     this.peerGrouping = new PeerGrouping(this.peerGrouping);
