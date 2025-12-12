@@ -1,16 +1,23 @@
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
+import { Node } from '../../common/Node';
+import { copy } from '../../common/object/object';
 import { AnnotationService } from '../../services/annotationService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { ConfigService } from '../../services/configService';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { Node } from '../../common/Node';
-import { copy } from '../../common/object/object';
 import { CompletionStatus } from './shared/CompletionStatus';
 
 @Directive()
 export abstract class AbstractClassResponsesComponent {
+  protected annotationService = inject(AnnotationService);
+  protected classroomStatusService = inject(ClassroomStatusService);
+  protected configService = inject(ConfigService);
+  protected dataService = inject(TeacherDataService);
+  protected notificationService = inject(NotificationService);
+  protected projectService = inject(TeacherProjectService);
+
   protected allWorkgroupsExpanded: boolean;
   protected component: any;
   protected node: Node;
@@ -20,15 +27,6 @@ export abstract class AbstractClassResponsesComponent {
   protected workgroupExpanded: Record<number, boolean> = {}; // workgroup is expanded or not
   private workgroupInView: Record<number, boolean> = {}; // workgroup is in view or not
   protected workgroupsById: Record<number, any> = {};
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected classroomStatusService: ClassroomStatusService,
-    protected configService: ConfigService,
-    protected dataService: TeacherDataService,
-    protected notificationService: NotificationService,
-    protected projectService: TeacherProjectService
-  ) {}
 
   protected retrieveStudentData(node: Node): void {
     this.dataService.retrieveStudentDataForNode(node).subscribe(() => {
