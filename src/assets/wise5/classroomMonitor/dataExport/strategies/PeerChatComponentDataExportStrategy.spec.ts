@@ -1,5 +1,12 @@
 import { PeerChatComponentDataExportStrategy } from './PeerChatComponentDataExportStrategy';
 import { ExportStrategyTester } from './ExportStrategyTester';
+import { provideHttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { MockProviders } from 'ng-mocks';
+import { BranchService } from '../../../services/branchService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { ConfigService } from '../../../services/configService';
+import { PathService } from '../../../services/pathService';
 
 const componentType = 'PeerChat';
 const dynamicPrompt1 = 'This is the dynamic prompt 1.';
@@ -14,9 +21,17 @@ const questionId1 = 'q1';
 const questionId2 = 'q2';
 
 describe('PeerChatComponentDataExportStrategy', () => {
-  beforeEach(() => {
-    exportStrategyTester = new ExportStrategyTester();
-    exportStrategyTester.setUpServices();
+  beforeEach(async() => {
+     await TestBed.configureTestingModule({
+      providers: [
+        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService),
+        provideHttpClient()
+      ],
+    })
+    await TestBed.runInInjectionContext(async () => {
+      exportStrategyTester = new ExportStrategyTester();
+      exportStrategyTester.setUpServices();
+    });
   });
   exportWithRegularPrompt();
   exportWithDynamicPrompt();

@@ -1,4 +1,11 @@
+import { provideHttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { MockProviders } from 'ng-mocks';
 import { ComponentState } from '../../../../../app/domain/componentState';
+import { BranchService } from '../../../services/branchService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { ConfigService } from '../../../services/configService';
+import { PathService } from '../../../services/pathService';
 import { ExportStrategyTester } from './ExportStrategyTester';
 import { LabelComponentDataExportStrategy } from './LabelComponentDataExportStrategy';
 
@@ -14,9 +21,17 @@ let componentState3: any;
 let componentState4: any;
 
 describe('LabelComponentDataExportStrategy', () => {
-  beforeEach(() => {
-    exportStrategyTester = new ExportStrategyTester();
-    exportStrategyTester.setUpServices();
+  beforeEach(async() => {
+     await TestBed.configureTestingModule({
+      providers: [
+        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService),
+        provideHttpClient()
+      ],
+    })
+    await TestBed.runInInjectionContext(async () => {
+      exportStrategyTester = new ExportStrategyTester();
+      exportStrategyTester.setUpServices();
+    });
     initializeStudentWork();
   });
   exportAllRevisions();

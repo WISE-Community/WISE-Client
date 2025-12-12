@@ -1,28 +1,31 @@
-'use strict';
-
-import { ConfigService } from './configService';
-import { Injectable, WritableSignal, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
-import { Node } from '../common/Node';
+import { Language } from '../../../app/domain/language';
 import { PeerGrouping } from '../../../app/domain/peerGrouping';
-import { ComponentServiceLookupService } from './componentServiceLookupService';
-import { Branch } from '../../../app/domain/branch';
-import { BranchService } from './branchService';
-import { PathService } from './pathService';
-import { ComponentContent } from '../common/ComponentContent';
-import { MultipleChoiceContent } from '../components/multipleChoice/MultipleChoiceContent';
-import { TransitionLogic } from '../common/TransitionLogic';
-import { Transition } from '../common/Transition';
 import { ReferenceComponent } from '../../../app/domain/referenceComponent';
+import { Branch } from '../../../app/domain/branch';
+import { Component } from '../common/Component';
+import { ComponentContent } from '../common/ComponentContent';
+import { Node } from '../common/Node';
+import { ProjectLocale } from '../../../app/domain/projectLocale';
+import { Transition } from '../common/Transition';
+import { MultipleChoiceContent } from '../components/multipleChoice/MultipleChoiceContent';
 import { QuestionBank } from '../components/peerChat/peer-chat-question-bank/QuestionBank';
 import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
-import { Component } from '../common/Component';
-import { ProjectLocale } from '../../../app/domain/projectLocale';
-import { Language } from '../../../app/domain/language';
+import { BranchService } from './branchService';
+import { ComponentServiceLookupService } from './componentServiceLookupService';
+import { ConfigService } from './configService';
+import { PathService } from './pathService';
 
 @Injectable()
 export class ProjectService {
+  protected branchService = inject(BranchService);
+  protected componentServiceLookupService = inject(ComponentServiceLookupService);
+  protected http = inject(HttpClient);
+  protected configService = inject(ConfigService);
+  protected pathService = inject(PathService);
+
   achievements: any = [];
   additionalProcessingFunctionsMap: any = {};
   allPaths: string[][] = [];
@@ -49,14 +52,6 @@ export class ProjectService {
   transitions: Transition[] = [];
   private projectParsedSource: Subject<void> = new Subject<void>();
   public projectParsed$: Observable<void> = this.projectParsedSource.asObservable();
-
-  constructor(
-    protected branchService: BranchService,
-    protected componentServiceLookupService: ComponentServiceLookupService,
-    protected http: HttpClient,
-    protected configService: ConfigService,
-    protected pathService: PathService
-  ) {}
 
   getProject(): any {
     return this.project;

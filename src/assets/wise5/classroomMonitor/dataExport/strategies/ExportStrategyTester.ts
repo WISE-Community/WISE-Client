@@ -105,7 +105,7 @@ export class ExportStrategyTester {
   }
 
   setUpTeacherProjectService(): void {
-    this.teacherProjectService = new TeacherProjectService(null, null, null, null, null);
+    this.teacherProjectService = new TeacherProjectService();
     spyOn(this.teacherProjectService, 'getNodePositionById').and.returnValue(this.stepNumber);
     spyOn(this.teacherProjectService, 'getNodePositionAndTitle').and.returnValue(
       this.nodePositionAndTitle

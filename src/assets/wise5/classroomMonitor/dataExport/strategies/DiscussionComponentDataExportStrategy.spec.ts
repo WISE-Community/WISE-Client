@@ -1,5 +1,12 @@
+import { TestBed } from '@angular/core/testing';
 import { DiscussionComponentDataExportStrategy } from './DiscussionComponentDataExportStrategy';
 import { ExportStrategyTester } from './ExportStrategyTester';
+import { provideHttpClient } from '@angular/common/http';
+import { MockProviders } from 'ng-mocks';
+import { BranchService } from '../../../services/branchService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { ConfigService } from '../../../services/configService';
+import { PathService } from '../../../services/pathService';
 
 const componentType: string = 'Discussion';
 let exportStrategyTester: ExportStrategyTester;
@@ -7,9 +14,17 @@ let studentData1: any;
 let studentData2: any;
 
 describe('DiscussionComponentDataExportStrategy', () => {
-  beforeEach(() => {
-    exportStrategyTester = new ExportStrategyTester();
-    exportStrategyTester.setUpServices();
+  beforeEach(async() => {
+     await TestBed.configureTestingModule({
+      providers: [
+        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService),
+        provideHttpClient()
+      ],
+    })
+    await TestBed.runInInjectionContext(async () => {
+      exportStrategyTester = new ExportStrategyTester();
+      exportStrategyTester.setUpServices();
+    });
     initializeStudentWork();
   });
   exportDiscussion();

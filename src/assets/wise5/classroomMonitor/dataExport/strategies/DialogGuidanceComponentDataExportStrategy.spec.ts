@@ -1,6 +1,13 @@
+import { TestBed } from '@angular/core/testing';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { DialogGuidanceComponentDataExportStrategy } from './DialogGuidanceComponentDataExportStrategy';
 import { ExportStrategyTester } from './ExportStrategyTester';
+import { MockProviders } from 'ng-mocks';
+import { provideHttpClient } from '@angular/common/http';
+import { BranchService } from '../../../services/branchService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { ConfigService } from '../../../services/configService';
+import { PathService } from '../../../services/pathService';
 
 let componentState1: any;
 let componentState2: any;
@@ -52,9 +59,17 @@ const text3: string = 'Text 3';
 const text4: string = 'Text 4';
 
 describe('DialogGuidanceComponentDataExportStrategy', () => {
-  beforeEach(() => {
-    exportStrategyTester = new ExportStrategyTester();
-    exportStrategyTester.setUpServices();
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      providers: [
+        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService),
+        provideHttpClient()
+      ],
+    })
+    await TestBed.runInInjectionContext(async () => {
+      exportStrategyTester = new ExportStrategyTester();
+      exportStrategyTester.setUpServices();
+    });
     initializeStudentWork();
   });
   exportAllRevisions();
