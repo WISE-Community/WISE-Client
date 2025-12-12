@@ -2,11 +2,16 @@ import { PeerChatComponentDataExportStrategy } from './PeerChatComponentDataExpo
 import { ExportStrategyTester } from './ExportStrategyTester';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { MockProviders } from 'ng-mocks';
+import { MockProvider, MockProviders } from 'ng-mocks';
 import { BranchService } from '../../../services/branchService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { ConfigService } from '../../../services/configService';
 import { PathService } from '../../../services/pathService';
+import { of } from 'rxjs';
+import { AnnotationService } from '../../../services/annotationService';
+import { ProjectService } from '../../../services/projectService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
 
 const componentType = 'PeerChat';
 const dynamicPrompt1 = 'This is the dynamic prompt 1.';
@@ -24,8 +29,14 @@ describe('PeerChatComponentDataExportStrategy', () => {
   beforeEach(async() => {
      await TestBed.configureTestingModule({
       providers: [
-        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService),
-        provideHttpClient()
+        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService, ProjectService, TeacherProjectService),
+        MockProvider(AnnotationService, {
+          annotationSavedToServer$: of()
+        }),
+        MockProvider(TeacherWebSocketService, {
+          newAnnotationReceived$: of(),
+          newStudentWorkReceived$: of()
+        }),        provideHttpClient()
       ],
     })
     await TestBed.runInInjectionContext(async () => {

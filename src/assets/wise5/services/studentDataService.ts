@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
-import { ConfigService } from './configService';
-import { AnnotationService } from './annotationService';
-import { ProjectService } from './projectService';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { generateRandomKey } from '../common/string/string';
 import { RunStatus } from '../common/RunStatus';
+import { AnnotationService } from './annotationService';
+import { ConfigService } from './configService';
 
 @Injectable()
 export class StudentDataService extends DataService {
+  private annotationService = inject(AnnotationService);
+  private configService = inject(ConfigService);
+  public http = inject(HttpClient);
+
   dummyStudentWorkId: number = 1;
   nodeStatuses: any = {};
   previousStep = null;
@@ -49,15 +52,6 @@ export class StudentDataService extends DataService {
   public nodeStatusesChanged$: Observable<void> = this.nodeStatusesChangedSource.asObservable();
   private updateNodeStatusesSource: Subject<void> = new Subject<void>();
   public updateNodeStatuses$: Observable<void> = this.updateNodeStatusesSource.asObservable();
-
-  constructor(
-    private annotationService: AnnotationService,
-    private configService: ConfigService,
-    public http: HttpClient,
-    protected projectService: ProjectService
-  ) {
-    super(projectService);
-  }
 
   broadcastComponentStudentData(componentStudentData: any) {
     this.componentStudentDataSource.next(componentStudentData);

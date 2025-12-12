@@ -2,12 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ExportStrategyTester } from './ExportStrategyTester';
 import { MatchComponentDataExportStrategy } from './MatchComponentDataExportStrategy';
-import { MockProviders } from 'ng-mocks';
+import { MockProvider, MockProviders } from 'ng-mocks';
 import { BranchService } from '../../../services/branchService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { provideHttpClient } from '@angular/common/http';
 import { ConfigService } from '../../../services/configService';
 import { PathService } from '../../../services/pathService';
+import { ProjectService } from '../../../services/projectService';
+import { AnnotationService } from '../../../services/annotationService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
+import { of } from 'rxjs';
 
 const additionalColumns = [
   'Choice A',
@@ -51,7 +56,14 @@ describe('MatchComponentDataExportStrategy', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService),
+        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService, ProjectService, TeacherProjectService),
+        MockProvider(AnnotationService, {
+          annotationSavedToServer$: of()
+        }),
+        MockProvider(TeacherWebSocketService, {
+          newAnnotationReceived$: of(),
+          newStudentWorkReceived$: of()
+        }),
         provideHttpClient()
       ],
     })
