@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,6 +32,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './step-tools.component.html'
 })
 export class StepToolsComponent implements OnInit {
+  private dataService = inject(StudentDataService);
+  private nodeService = inject(NodeService);
+  private nodeStatusService = inject(NodeStatusService);
+  private projectService = inject(ProjectService);
+
   protected icons: any;
   protected isSurvey: boolean;
   protected is_rtl: boolean;
@@ -43,13 +48,6 @@ export class StepToolsComponent implements OnInit {
   protected prevId: string;
   private subscriptions: Subscription = new Subscription();
   protected toNodeId: string;
-
-  constructor(
-    private nodeService: NodeService,
-    private nodeStatusService: NodeStatusService,
-    private projectService: ProjectService,
-    private studentDataService: StudentDataService
-  ) {}
 
   ngOnInit(): void {
     this.is_rtl = $('html').attr('dir') == 'rtl';
@@ -65,14 +63,10 @@ export class StepToolsComponent implements OnInit {
 
   private subscribeToChanges(): void {
     this.subscriptions.add(
-      this.studentDataService.currentNodeChanged$.subscribe(() => {
-        this.updateModel();
-      })
+      this.dataService.currentNodeChanged$.subscribe(() => this.updateModel())
     );
     this.subscriptions.add(
-      this.studentDataService.nodeStatusesChanged$.subscribe(() => {
-        this.updateModel();
-      })
+      this.dataService.nodeStatusesChanged$.subscribe(() => this.updateModel())
     );
   }
 
@@ -90,7 +84,7 @@ export class StepToolsComponent implements OnInit {
   }
 
   private updateModel(): void {
-    const nodeId = this.studentDataService.getCurrentNodeId();
+    const nodeId = this.dataService.getCurrentNodeId();
     if (!this.projectService.isGroupNode(nodeId)) {
       this.nodeId = nodeId;
       this.nodeStatus = this.nodeStatuses[this.nodeId];
