@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PeerGroupStudentData } from '../../../app/domain/peerGroupStudentData';
@@ -10,13 +10,11 @@ import { ConfigService } from './configService';
 
 @Injectable()
 export class PeerGroupService {
+  protected configService = inject(ConfigService);
+  protected http = inject(HttpClient);
+  runId: number = this.configService.getRunId();
+
   static readonly PREVIEW_PEER_GROUP_ID = 1;
-
-  runId: number;
-
-  constructor(protected configService: ConfigService, protected http: HttpClient) {
-    this.runId = this.configService.getRunId();
-  }
 
   getPeerGroupingTags(node: Node): Set<string> {
     const tags = new Set<string>();
