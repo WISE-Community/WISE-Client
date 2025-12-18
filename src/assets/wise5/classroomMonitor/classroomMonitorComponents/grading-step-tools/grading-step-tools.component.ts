@@ -1,5 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Directionality } from '@angular/cdk/bidi';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { StepToolsComponent } from '../../../common/stepTools/step-tools.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,9 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
-import { TeacherDataService } from '../../../services/teacherDataService';
 import { GradingNodeService } from '../../../services/gradingNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -33,16 +30,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: '../../../common/stepTools/step-tools.component.html'
 })
 export class GradingStepToolsComponent extends StepToolsComponent {
-  constructor(
-    protected dataService: TeacherDataService,
-    protected dir: Directionality,
-    protected nodeService: GradingNodeService,
-    protected projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    super(dataService, dir, nodeService, projectService);
-  }
+  protected override nodeService = inject(GradingNodeService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   ngOnInit(): void {
     super.ngOnInit();
