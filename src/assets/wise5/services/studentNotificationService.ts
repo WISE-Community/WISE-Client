@@ -1,28 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { inject, Injectable } from '@angular/core';
 import { Message } from '@stomp/stompjs';
-import { AnnotationService } from './annotationService';
-import { ConfigService } from './configService';
 import { Notification } from '../../../app/domain/notification';
 import { NotificationService } from './notificationService';
-import { ProjectService } from './projectService';
 import { StompService } from './stompService';
 import { StudentDataService } from './studentDataService';
 
 @Injectable()
 export class StudentNotificationService extends NotificationService {
-  constructor(
-    protected annotationService: AnnotationService,
-    protected dialog: MatDialog,
-    protected http: HttpClient,
-    protected configService: ConfigService,
-    protected projectService: ProjectService,
-    private stompService: StompService,
-    private studentDataService: StudentDataService
-  ) {
-    super(annotationService, dialog, http, configService, projectService);
-  }
+  private dataService = inject(StudentDataService);
+  private stompService = inject(StompService);
 
   initialize(): void {
     this.subscribeToNotificationMessages();
@@ -43,7 +29,7 @@ export class StudentNotificationService extends NotificationService {
 
   private isDismissImmediately(notification: Notification): boolean {
     return (
-      notification.nodeId === this.studentDataService.getCurrentNodeId() &&
+      notification.nodeId === this.dataService.getCurrentNodeId() &&
       notification.type === 'PeerChatMessage'
     );
   }
