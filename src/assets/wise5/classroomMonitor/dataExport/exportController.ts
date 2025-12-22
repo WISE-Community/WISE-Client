@@ -1,11 +1,7 @@
-'use strict';
-
 import * as FileSaver from 'file-saver';
 
 class ExportController {
   maxExcelCellSize: number = 32767;
-
-  constructor() {}
 
   /**
    * Generate the csv file and have the client download it
