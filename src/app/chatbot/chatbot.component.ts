@@ -11,7 +11,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { ChatbotService, ChatMessage, Chat } from './chatbot.service';
@@ -30,8 +29,7 @@ import { ConfigService } from '../../assets/wise5/services/configService';
     MatTooltipModule,
     MatMenuModule,
     MatListModule,
-    MatDividerModule,
-    MatDialogModule
+    MatDividerModule
   ],
   selector: 'chatbot',
   styleUrl: 'chatbot.component.scss',
@@ -43,7 +41,6 @@ export class ChatbotComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private chatbotService: ChatbotService = inject(ChatbotService);
   private configService: ConfigService = inject(ConfigService);
-  private dialog = inject(MatDialog);
 
   protected collapsed: boolean = true;
   protected full: boolean = false;
@@ -55,23 +52,24 @@ export class ChatbotComponent {
   private subscriptions: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
-      if (!this.collapsed) {
-        this.collapsed = true;
-        this.fullscreen();
-      }
-    });
+    this.subscriptions.add(
+      this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
+        if (!this.collapsed) {
+          this.collapsed = true;
+          this.fullscreen();
+        }
+      })
+    );
 
     // Load existing chats or create a new one
-    const workgroupId = this.configService.getWorkgroupId();
-    const runId = this.configService.getRunId();
-    this.chats = this.chatbotService.getChats(runId, workgroupId);
+    this.chats = this.chatbotService.getChats(
+      this.configService.getRunId(),
+      this.configService.getWorkgroupId()
+    );
 
     if (this.chats.length === 0) {
-      // Create first chat
       this.createNewChat();
     } else {
-      // Load the most recent chat
       this.currentChat = this.chats[this.chats.length - 1];
       this.messages = [...this.currentChat.messages];
     }
@@ -105,7 +103,7 @@ export class ChatbotComponent {
     }
     this.collapsed = !this.collapsed;
     if (!this.collapsed) {
-      setTimeout(() => this.scrollToBottom(), 100);
+      this.scrollToBottom();
     }
   }
 
@@ -116,7 +114,7 @@ export class ChatbotComponent {
     } else {
       this.full = !this.full;
     }
-    setTimeout(() => this.scrollToBottom(), 100);
+    this.scrollToBottom();
   }
 
   protected async sendMessage(): Promise<void> {
@@ -131,7 +129,6 @@ export class ChatbotComponent {
     };
 
     this.messages.push(userMessage);
-    const messageToSend = this.userInput;
     this.userInput = '';
     this.loading = true;
     this.scrollToBottom();
@@ -139,9 +136,8 @@ export class ChatbotComponent {
     try {
       const workgroupId = this.configService.getWorkgroupId();
       const runId = this.configService.getRunId();
-
       const response = await this.chatbotService.sendMessage(
-        messageToSend,
+        userMessage.content,
         this.messages,
         runId,
         workgroupId
@@ -179,7 +175,6 @@ export class ChatbotComponent {
   protected createNewChat(): void {
     const workgroupId = this.configService.getWorkgroupId();
     const runId = this.configService.getRunId();
-
     const newChat = this.chatbotService.createChat(runId, workgroupId);
     this.chats = this.chatbotService.getChats(runId, workgroupId);
     this.switchToChat(newChat);
@@ -188,24 +183,19 @@ export class ChatbotComponent {
   protected switchToChat(chat: Chat): void {
     this.currentChat = chat;
     this.messages = [...chat.messages];
-    setTimeout(() => this.scrollToBottom(), 100);
+    this.scrollToBottom();
   }
 
   protected deleteChat(chat: Chat, event: Event): void {
     event.stopPropagation();
 
-    // Show confirmation dialog
-    const confirmed = confirm(
-      $localize`Are you sure you want to delete "${chat.title}"? This action cannot be undone.`
-    );
-
-    if (!confirmed) {
+    const msg = $localize`Are you sure you want to delete "${chat.title}"? This action cannot be undone.`;
+    if (!confirm(msg)) {
       return;
     }
 
     const workgroupId = this.configService.getWorkgroupId();
     const runId = this.configService.getRunId();
-
     this.chatbotService.deleteChat(runId, workgroupId, chat.id);
     this.chats = this.chatbotService.getChats(runId, workgroupId);
 
@@ -223,7 +213,6 @@ export class ChatbotComponent {
     event.stopPropagation();
 
     const newTitle = prompt($localize`Enter new chat title:`, chat.title);
-
     if (newTitle && newTitle.trim() && newTitle !== chat.title) {
       const workgroupId = this.configService.getWorkgroupId();
       const runId = this.configService.getRunId();
@@ -242,9 +231,7 @@ export class ChatbotComponent {
   private scrollToBottom(): void {
     setTimeout(() => {
       const chatContent = document.querySelector('.chatbot__messages');
-      if (chatContent) {
-        chatContent.scrollTop = chatContent.scrollHeight;
-      }
+      chatContent.scrollTop = chatContent.scrollHeight;
     }, 100);
   }
 

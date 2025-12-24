@@ -62,9 +62,6 @@ export class ChatbotService {
     }
   }
 
-  /**
-   * Get chat history for a specific run and workgroup
-   */
   getChatHistory(runId: number, workgroupId: number): Observable<ChatMessage[]> {
     return this.http.get<ChatHistory>(`${this.apiEndpoint}/history/${runId}/${workgroupId}`).pipe(
       map((history) => history.messages || []),
@@ -72,9 +69,6 @@ export class ChatbotService {
     );
   }
 
-  /**
-   * Save chat history to the server
-   */
   private saveChatHistory(
     runId: number,
     workgroupId: number,
@@ -88,9 +82,6 @@ export class ChatbotService {
     );
   }
 
-  /**
-   * Get all chats for a specific run and workgroup
-   */
   getChats(runId: number, workgroupId: number): Chat[] {
     const key = this.getChatStorageKey(runId, workgroupId);
     const stored = localStorage.getItem(key);
@@ -115,9 +106,6 @@ export class ChatbotService {
     }
   }
 
-  /**
-   * Create a new chat
-   */
   createChat(runId: number, workgroupId: number, title?: string): Chat {
     const chats = this.getChats(runId, workgroupId);
 
@@ -154,9 +142,6 @@ export class ChatbotService {
     return newChat;
   }
 
-  /**
-   * Update an existing chat
-   */
   updateChat(runId: number, workgroupId: number, chat: Chat): void {
     const chats = this.getChats(runId, workgroupId);
     const index = chats.findIndex((c) => c.id === chat.id);
@@ -167,18 +152,12 @@ export class ChatbotService {
     }
   }
 
-  /**
-   * Delete a chat
-   */
   deleteChat(runId: number, workgroupId: number, chatId: string): void {
     const chats = this.getChats(runId, workgroupId);
     const filtered = chats.filter((c) => c.id !== chatId);
     this.saveChats(runId, workgroupId, filtered);
   }
 
-  /**
-   * Get a specific chat by ID
-   */
   getChat(runId: number, workgroupId: number, chatId: string): Chat | undefined {
     return this.getChats(runId, workgroupId).find((c) => c.id === chatId);
   }
