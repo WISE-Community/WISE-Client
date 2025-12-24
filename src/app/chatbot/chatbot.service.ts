@@ -1,13 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-
-export interface ChatMessage {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
-  timestamp?: Date;
-}
 
 export interface Chat {
   id: string;
@@ -17,26 +11,24 @@ export interface Chat {
   lastUpdated: Date;
 }
 
-export interface ChatHistory {
-  runId: number;
-  workgroupId: number;
-  messages: ChatMessage[];
-  lastUpdated: Date;
+export interface ChatMessage {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp?: Date;
 }
 
 @Injectable({ providedIn: 'root' })
 export class ChatbotService {
-  private apiEndpoint = '/api/chat-gpt';
-  private newChatTitlePrefix = $localize`New chat`;
+  private chatGptEndpoint = '/api/chat-gpt';
+  private chatsEndpoint = '/api/chatbot/chats';
   private http = inject(HttpClient);
 
-  async sendMessage(
-    message: string,
-    conversationHistory: ChatMessage[],
-    runId: number,
-    workgroupId: number
-  ): Promise<string> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  /**
+   * Sends a message to the chat-gpt endpoint.
+   * @param conversationHistory The conversation history.
+   * @returns A promise that resolves to the response from the chat-gpt endpoint.
+   */
+  async sendMessage(conversationHistory: ChatMessage[]): Promise<string> {
     const payload = {
       messages: conversationHistory.map((msg) => ({
         role: msg.role,
@@ -44,88 +36,27 @@ export class ChatbotService {
       })),
       model: 'gpt-3.5-turbo'
     };
-
     try {
-      const response$ = this.http.post<any>(`${this.apiEndpoint}`, payload, { headers });
-      const response = await firstValueFrom(response$);
-
-      // this.saveChatHistory(runId, workgroupId, [
-      //   ...conversationHistory,
-      //   { role: 'user', content: message, timestamp: new Date() },
-      //   { role: 'assistant', content: response.response, timestamp: new Date() }
-      // ]).subscribe();
-
+      const response = await firstValueFrom(
+        this.http.post<any>(`${this.chatGptEndpoint}`, payload)
+      );
       return response.choices[0].message.content;
     } catch (error) {
-      console.error('Error calling chatbot API:', error);
+      console.error('Error calling chat-gpt endpoint:', error);
       throw error;
     }
   }
 
-  getChatHistory(runId: number, workgroupId: number): Observable<ChatMessage[]> {
-    return this.http.get<ChatHistory>(`${this.apiEndpoint}/history/${runId}/${workgroupId}`).pipe(
-      map((history) => history.messages || []),
+  getChats(runId: number, workgroupId: number): Observable<Chat[]> {
+    return this.http.get<Chat[]>(`${this.chatsEndpoint}/${runId}/${workgroupId}`).pipe(
+      map((chats) => chats || []),
       catchError(() => of([]))
     );
   }
 
-  private saveChatHistory(
-    runId: number,
-    workgroupId: number,
-    messages: ChatMessage[]
-  ): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(
-      `${this.apiEndpoint}/history`,
-      { runId, workgroupId, messages },
-      { headers }
-    );
-  }
-
-  getChats(runId: number, workgroupId: number): Chat[] {
-    const key = this.getChatStorageKey(runId, workgroupId);
-    const stored = localStorage.getItem(key);
-    if (!stored) {
-      return [];
-    }
-    try {
-      const chats = JSON.parse(stored);
-      // Convert date strings back to Date objects
-      return chats.map((chat: any) => ({
-        ...chat,
-        createdAt: new Date(chat.createdAt),
-        lastUpdated: new Date(chat.lastUpdated),
-        messages: chat.messages.map((msg: any) => ({
-          ...msg,
-          timestamp: msg.timestamp ? new Date(msg.timestamp) : undefined
-        }))
-      }));
-    } catch (error) {
-      console.error('Error parsing chats from localStorage:', error);
-      return [];
-    }
-  }
-
-  createChat(runId: number, workgroupId: number, title?: string): Chat {
-    const chats = this.getChats(runId, workgroupId);
-
-    // Generate incremental title if not provided
-    let chatTitle = title;
-    if (!chatTitle) {
-      // Find the highest chat number
-      const chatNumbers = chats
-        .map((chat) => {
-          const match = chat.title.match(new RegExp(`^${this.newChatTitlePrefix} (\\d+)$`));
-          return match ? parseInt(match[1], 10) : 0;
-        })
-        .filter((num) => num > 0);
-
-      const nextNumber = chatNumbers.length > 0 ? Math.max(...chatNumbers) + 1 : 1;
-      chatTitle = `${this.newChatTitlePrefix} ${nextNumber}`;
-    }
-
+  createChat(runId: number, workgroupId: number, chatTitle: string): Promise<Chat> {
     const newChat: Chat = {
-      id: `chat_${Date.now()}`, // Use timestamp as unique ID
+      id: null, // id will be generated by the server
       title: chatTitle,
       messages: [
         {
@@ -136,30 +67,26 @@ export class ChatbotService {
       createdAt: new Date(),
       lastUpdated: new Date()
     };
-
-    chats.push(newChat);
-    this.saveChats(runId, workgroupId, chats);
-    return newChat;
+    return firstValueFrom(
+      this.http.post<Chat>(`${this.chatsEndpoint}/${runId}/${workgroupId}`, newChat)
+    );
   }
 
-  updateChat(runId: number, workgroupId: number, chat: Chat): void {
-    const chats = this.getChats(runId, workgroupId);
-    const index = chats.findIndex((c) => c.id === chat.id);
-    if (index !== -1) {
-      chat.lastUpdated = new Date();
-      chats[index] = chat;
-      this.saveChats(runId, workgroupId, chats);
-    }
+  updateChat(runId: number, workgroupId: number, chat: Chat): Promise<Chat> {
+    return firstValueFrom(
+      this.http.put<Chat>(`${this.chatsEndpoint}/${runId}/${workgroupId}/${chat.id}`, chat)
+    );
   }
 
   deleteChat(runId: number, workgroupId: number, chatId: string): void {
     const chats = this.getChats(runId, workgroupId);
-    const filtered = chats.filter((c) => c.id !== chatId);
-    this.saveChats(runId, workgroupId, filtered);
+    // const filtered = chats.filter((c) => c.id !== chatId);
+    // this.saveChats(runId, workgroupId, filtered);
   }
 
   getChat(runId: number, workgroupId: number, chatId: string): Chat | undefined {
-    return this.getChats(runId, workgroupId).find((c) => c.id === chatId);
+    return null;
+    // return this.getChats(runId, workgroupId).find((c) => c.id === chatId);
   }
 
   private getChatStorageKey(runId: number, workgroupId: number): string {

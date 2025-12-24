@@ -62,35 +62,26 @@ export class ChatbotComponent {
     );
 
     // Load existing chats or create a new one
-    this.chats = this.chatbotService.getChats(
-      this.configService.getRunId(),
-      this.configService.getWorkgroupId()
-    );
-
-    if (this.chats.length === 0) {
-      this.createNewChat();
-    } else {
-      this.currentChat = this.chats[this.chats.length - 1];
-      this.messages = [...this.currentChat.messages];
-    }
+    this.chatbotService
+      .getChats(this.configService.getRunId(), this.configService.getWorkgroupId())
+      .subscribe({
+        next: (chats) => {
+          this.chats = chats;
+          if (this.chats.length === 0) {
+            this.createNewChat();
+          } else {
+            this.currentChat = this.chats[this.chats.length - 1];
+            this.messages = [...this.currentChat.messages];
+          }
+        },
+        error: (error) => {
+          console.error('Error loading chats:', error);
+        }
+      });
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-  }
-
-  private loadChatHistory(): void {
-    const workgroupId = this.configService.getWorkgroupId();
-    const runId = this.configService.getRunId();
-    this.chatbotService.getChatHistory(runId, workgroupId).subscribe({
-      next: (messages) => {
-        this.messages = messages;
-        this.scrollToBottom();
-      },
-      error: (error) => {
-        console.error('Error loading chat history:', error);
-      }
-    });
   }
 
   protected toggleCollapse(): void {
@@ -121,43 +112,27 @@ export class ChatbotComponent {
     if (!this.userInput.trim() || this.loading || !this.currentChat) {
       return;
     }
-
     const userMessage: ChatMessage = {
       role: 'user',
       content: this.userInput,
       timestamp: new Date()
     };
-
     this.messages.push(userMessage);
     this.userInput = '';
     this.loading = true;
     this.scrollToBottom();
-
     try {
-      const workgroupId = this.configService.getWorkgroupId();
-      const runId = this.configService.getRunId();
-      const response = await this.chatbotService.sendMessage(
-        userMessage.content,
-        this.messages,
-        runId,
-        workgroupId
-      );
-
+      const response = await this.chatbotService.sendMessage(this.messages);
       const assistantMessage: ChatMessage = {
         role: 'assistant',
         content: response,
         timestamp: new Date()
       };
-
       this.messages.push(assistantMessage);
-
-      // Update current chat with new messages
       this.currentChat.messages = [...this.messages];
-      this.chatbotService.updateChat(runId, workgroupId, this.currentChat);
-
-      // Refresh chats list
-      this.chats = this.chatbotService.getChats(runId, workgroupId);
-
+      const runId = this.configService.getRunId();
+      const workgroupId = this.configService.getWorkgroupId();
+      await this.chatbotService.updateChat(runId, workgroupId, this.currentChat);
       this.scrollToBottom();
     } catch (error) {
       console.error('Error sending message:', error);
@@ -172,12 +147,29 @@ export class ChatbotComponent {
     }
   }
 
-  protected createNewChat(): void {
+  protected async createNewChat(): Promise<void> {
     const workgroupId = this.configService.getWorkgroupId();
     const runId = this.configService.getRunId();
-    const newChat = this.chatbotService.createChat(runId, workgroupId);
-    this.chats = this.chatbotService.getChats(runId, workgroupId);
+    const newChat = await this.chatbotService.createChat(runId, workgroupId, this.getChatTitle());
+    this.chatbotService
+      .getChats(this.configService.getRunId(), this.configService.getWorkgroupId())
+      .subscribe((chats) => {
+        this.chats = chats;
+      });
     this.switchToChat(newChat);
+  }
+
+  private getChatTitle(): string {
+    const newChatTitlePrefix = $localize`New chat`;
+    // Find the highest chat number in title
+    const chatsWithNumInTitle = this.chats
+      .map((chat) => {
+        const match = chat.title.match(new RegExp(`^${newChatTitlePrefix} (\\d+)$`));
+        return match ? parseInt(match[1], 10) : 0;
+      })
+      .filter((num) => num > 0);
+    const nextNum = chatsWithNumInTitle.length > 0 ? Math.max(...chatsWithNumInTitle) + 1 : 1;
+    return `${newChatTitlePrefix} ${nextNum}`;
   }
 
   protected switchToChat(chat: Chat): void {
@@ -187,45 +179,39 @@ export class ChatbotComponent {
   }
 
   protected deleteChat(chat: Chat, event: Event): void {
-    event.stopPropagation();
-
-    const msg = $localize`Are you sure you want to delete "${chat.title}"? This action cannot be undone.`;
-    if (!confirm(msg)) {
-      return;
-    }
-
-    const workgroupId = this.configService.getWorkgroupId();
-    const runId = this.configService.getRunId();
-    this.chatbotService.deleteChat(runId, workgroupId, chat.id);
-    this.chats = this.chatbotService.getChats(runId, workgroupId);
-
-    // If we deleted the current chat, switch to another one or create a new one
-    if (this.currentChat?.id === chat.id) {
-      if (this.chats.length > 0) {
-        this.switchToChat(this.chats[this.chats.length - 1]);
-      } else {
-        this.createNewChat();
-      }
-    }
+    // event.stopPropagation();
+    // const msg = $localize`Are you sure you want to delete "${chat.title}"? This action cannot be undone.`;
+    // if (!confirm(msg)) {
+    //   return;
+    // }
+    // const workgroupId = this.configService.getWorkgroupId();
+    // const runId = this.configService.getRunId();
+    // this.chatbotService.deleteChat(runId, workgroupId, chat.id);
+    // this.chats = this.chatbotService.getChats(runId, workgroupId);
+    // // If we deleted the current chat, switch to another one or create a new one
+    // if (this.currentChat?.id === chat.id) {
+    //   if (this.chats.length > 0) {
+    //     this.switchToChat(this.chats[this.chats.length - 1]);
+    //   } else {
+    //     this.createNewChat();
+    //   }
+    // }
   }
 
   protected editChatTitle(chat: Chat, event: Event): void {
-    event.stopPropagation();
-
-    const newTitle = prompt($localize`Enter new chat title:`, chat.title);
-    if (newTitle && newTitle.trim() && newTitle !== chat.title) {
-      const workgroupId = this.configService.getWorkgroupId();
-      const runId = this.configService.getRunId();
-
-      chat.title = newTitle.trim();
-      this.chatbotService.updateChat(runId, workgroupId, chat);
-      this.chats = this.chatbotService.getChats(runId, workgroupId);
-
-      // Update current chat reference if it's the one being edited
-      if (this.currentChat?.id === chat.id) {
-        this.currentChat = chat;
-      }
-    }
+    // event.stopPropagation();
+    // const newTitle = prompt($localize`Enter new chat title:`, chat.title);
+    // if (newTitle && newTitle.trim() && newTitle !== chat.title) {
+    //   const workgroupId = this.configService.getWorkgroupId();
+    //   const runId = this.configService.getRunId();
+    //   chat.title = newTitle.trim();
+    //   this.chatbotService.updateChat(runId, workgroupId, chat);
+    //   this.chats = this.chatbotService.getChats(runId, workgroupId);
+    //   // Update current chat reference if it's the one being edited
+    //   if (this.currentChat?.id === chat.id) {
+    //     this.currentChat = chat;
+    //   }
+    // }
   }
 
   private scrollToBottom(): void {
