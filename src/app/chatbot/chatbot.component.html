@@ -11,6 +11,55 @@
       <span i18n>AI Assistant</span>
     </mat-card-title>
     <span class="flex-grow"></span>
+    @if (!collapsed && currentChat) {
+      <button
+        mat-button
+        [matMenuTriggerFor]="chatMenu"
+        class="chatbot__chat-selector"
+        (click)="$event.stopPropagation()"
+      >
+        <span class="chatbot__chat-title">{{ currentChat.title }}</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #chatMenu="matMenu">
+        <button mat-menu-item (click)="createNewChat()">
+          <mat-icon>add</mat-icon>
+          <span i18n>New Chat</span>
+        </button>
+        <mat-divider></mat-divider>
+        @for (chat of chats; track chat.id) {
+          <button
+            mat-menu-item
+            [class.active]="currentChat?.id === chat.id"
+            (click)="switchToChat(chat)"
+          >
+            <div class="chatbot__chat-item">
+              <span class="chatbot__chat-item-title">{{ chat.title }}</span>
+              <div class="chatbot__chat-actions">
+                <button
+                  mat-icon-button
+                  class="chatbot__edit-chat"
+                  (click)="editChatTitle(chat, $event)"
+                  i18n-matTooltip
+                  matTooltip="Edit title"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  class="chatbot__delete-chat"
+                  (click)="deleteChat(chat, $event)"
+                  i18n-matTooltip
+                  matTooltip="Delete chat"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </button>
+        }
+      </mat-menu>
+    }
     <button
       mat-icon-button
       class="hidden sm:!inline-block"
@@ -110,18 +159,17 @@
           cdkAutosizeMaxRows="4"
         ></textarea>
       </mat-form-field>
-      <div class="chatbot__actions">
-        <button
-          mat-fab
-          color="primary"
-          extended
-          (click)="sendMessage()"
-          [disabled]="!userInput.trim() || loading"
-        >
-          <mat-icon>send</mat-icon>
-          <span i18n>Send</span>
-        </button>
-      </div>
+      <button
+        mat-icon-button
+        color="primary"
+        class="chatbot__send-button"
+        (click)="sendMessage()"
+        [disabled]="!userInput.trim() || loading"
+        i18n-matTooltip
+        matTooltip="Send message"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
     </div>
   </mat-card-actions>
 </mat-card>

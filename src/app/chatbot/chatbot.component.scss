@@ -136,13 +136,14 @@ $width-collapsed: 300px !default;
 
 .chatbot__input-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-end;
   gap: 8px;
   width: 100%;
 }
 
 .chatbot__input-field {
-  width: 100%;
+  flex: 1;
   margin: 0;
 
   textarea {
@@ -150,11 +151,16 @@ $width-collapsed: 300px !default;
   }
 }
 
-.chatbot__actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
+.chatbot__send-button {
+  margin-bottom: 4px;
+  width: 48px;
+  height: 48px;
+  
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
 }
 
 @keyframes fadeIn {
@@ -166,6 +172,63 @@ $width-collapsed: 300px !default;
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.chatbot__chat-selector {
+  max-width: 200px;
+  text-transform: none;
+  font-size: 14px;
+  
+  .chatbot__chat-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 150px;
+    display: inline-block;
+  }
+}
+
+.chatbot__chat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+  
+  .chatbot__chat-item-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .chatbot__chat-actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  .chatbot__edit-chat,
+  .chatbot__delete-chat {
+    width: 32px;
+    height: 32px;
+    
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+  
+  &:hover .chatbot__chat-actions {
+    opacity: 1;
+  }
+}
+
+
+.mat-mdc-menu-item.active {
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 // Adjust positioning when notebook report is visible
@@ -180,3 +243,4 @@ $width-collapsed: 300px !default;
 :host-context(.report-full) .chatbot {
   display: none;
 }
+

@@ -8,9 +8,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
-import { ChatbotService, ChatMessage } from './chatbot.service';
+import { ChatbotService, ChatMessage, Chat } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 
 @Component({
@@ -23,7 +27,11 @@ import { ConfigService } from '../../assets/wise5/services/configService';
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule,
+    MatListModule,
+    MatDividerModule,
+    MatDialogModule
   ],
   selector: 'chatbot',
   styleUrl: 'chatbot.component.scss',
@@ -35,12 +43,15 @@ export class ChatbotComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private chatbotService: ChatbotService = inject(ChatbotService);
   private configService: ConfigService = inject(ConfigService);
+  private dialog = inject(MatDialog);
 
   protected collapsed: boolean = true;
   protected full: boolean = false;
   protected messages: ChatMessage[] = [];
   protected userInput: string = '';
   protected loading: boolean = false;
+  protected chats: Chat[] = [];
+  protected currentChat: Chat | null = null;
   private subscriptions: Subscription = new Subscription();
 
   ngOnInit(): void {
@@ -51,12 +62,19 @@ export class ChatbotComponent {
       }
     });
 
-    this.messages.push({
-      role: 'system',
-      content: 'You are a helpful assistant. Be polite and concise.'
-    });
-    // Load chat history if available
-    //this.loadChatHistory();
+    // Load existing chats or create a new one
+    const workgroupId = this.configService.getWorkgroupId();
+    const runId = this.configService.getRunId();
+    this.chats = this.chatbotService.getChats(runId, workgroupId);
+
+    if (this.chats.length === 0) {
+      // Create first chat
+      this.createNewChat();
+    } else {
+      // Load the most recent chat
+      this.currentChat = this.chats[this.chats.length - 1];
+      this.messages = [...this.currentChat.messages];
+    }
   }
 
   ngOnDestroy(): void {
@@ -102,7 +120,7 @@ export class ChatbotComponent {
   }
 
   protected async sendMessage(): Promise<void> {
-    if (!this.userInput.trim() || this.loading) {
+    if (!this.userInput.trim() || this.loading || !this.currentChat) {
       return;
     }
 
@@ -136,6 +154,14 @@ export class ChatbotComponent {
       };
 
       this.messages.push(assistantMessage);
+
+      // Update current chat with new messages
+      this.currentChat.messages = [...this.messages];
+      this.chatbotService.updateChat(runId, workgroupId, this.currentChat);
+
+      // Refresh chats list
+      this.chats = this.chatbotService.getChats(runId, workgroupId);
+
       this.scrollToBottom();
     } catch (error) {
       console.error('Error sending message:', error);
@@ -147,6 +173,69 @@ export class ChatbotComponent {
       this.messages.push(errorMessage);
     } finally {
       this.loading = false;
+    }
+  }
+
+  protected createNewChat(): void {
+    const workgroupId = this.configService.getWorkgroupId();
+    const runId = this.configService.getRunId();
+
+    const newChat = this.chatbotService.createChat(runId, workgroupId);
+    this.chats = this.chatbotService.getChats(runId, workgroupId);
+    this.switchToChat(newChat);
+  }
+
+  protected switchToChat(chat: Chat): void {
+    this.currentChat = chat;
+    this.messages = [...chat.messages];
+    setTimeout(() => this.scrollToBottom(), 100);
+  }
+
+  protected deleteChat(chat: Chat, event: Event): void {
+    event.stopPropagation();
+
+    // Show confirmation dialog
+    const confirmed = confirm(
+      $localize`Are you sure you want to delete "${chat.title}"? This action cannot be undone.`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    const workgroupId = this.configService.getWorkgroupId();
+    const runId = this.configService.getRunId();
+
+    this.chatbotService.deleteChat(runId, workgroupId, chat.id);
+    this.chats = this.chatbotService.getChats(runId, workgroupId);
+
+    // If we deleted the current chat, switch to another one or create a new one
+    if (this.currentChat?.id === chat.id) {
+      if (this.chats.length > 0) {
+        this.switchToChat(this.chats[this.chats.length - 1]);
+      } else {
+        this.createNewChat();
+      }
+    }
+  }
+
+  protected editChatTitle(chat: Chat, event: Event): void {
+    event.stopPropagation();
+
+    const newTitle = prompt($localize`Enter new chat title:`, chat.title);
+
+    if (newTitle && newTitle.trim() && newTitle !== chat.title) {
+      const workgroupId = this.configService.getWorkgroupId();
+      const runId = this.configService.getRunId();
+
+      chat.title = newTitle.trim();
+      this.chatbotService.updateChat(runId, workgroupId, chat);
+      this.chats = this.chatbotService.getChats(runId, workgroupId);
+
+      // Update current chat reference if it's the one being edited
+      if (this.currentChat?.id === chat.id) {
+        this.currentChat = chat;
+      }
     }
   }
 
