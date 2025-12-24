@@ -38,9 +38,11 @@ import { Subscription } from 'rxjs';
 import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
 import { VLEProjectService } from './vleProjectService';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
+import { ChatbotComponent } from '../../../app/chatbot/chatbot.component';
 
 @Component({
   imports: [
+    ChatbotComponent,
     CommonModule,
     GroupTabsComponent,
     MatSidenavModule,
@@ -60,6 +62,8 @@ import { WiseLinkService } from '../../../app/services/wiseLinkService';
   templateUrl: './vle.component.html'
 })
 export class VLEComponent implements AfterViewInit {
+  protected chatbotEnabled: boolean = false;
+  protected chatbotConfig: any;
   protected currentNode: Node;
   @ViewChild('defaultVLETemplate') private defaultVLETemplate: TemplateRef<any>;
   @ViewChild('drawer') public drawer: any;
@@ -156,6 +160,7 @@ export class VLEComponent implements AfterViewInit {
     this.setLayoutState();
     this.initializeSubscriptions();
     this.saveNodeEnteredEvent();
+    this.initializeChatbot();
 
     // Set isSurvey
     if (!this.configService.isPreview()) {
@@ -434,6 +439,13 @@ export class VLEComponent implements AfterViewInit {
 
   private saveNodeEnteredEvent(): void {
     this.studentDataService.saveEvents([this.createNodeEnteredEvent()]);
+  }
+
+  private initializeChatbot(): void {
+    if (this.project.chatbot?.enabled) {
+      this.chatbotEnabled = true;
+      this.chatbotConfig = this.project.chatbot;
+    }
   }
 
   private saveNodeExitedEvent(): void {

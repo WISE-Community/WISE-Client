@@ -1,0 +1,127 @@
+<mat-card
+  class="chatbot flex flex-col"
+  [ngClass]="{ collapsed: collapsed, full: full && !collapsed }"
+>
+  <mat-card-header
+    class="dark-theme mat-app-background !flex justify-start items-center"
+    (click)="toggleCollapse()"
+  >
+    <mat-card-title class="mat-body-2 overflow--ellipsis !flex justify-start items-center gap-1">
+      <mat-icon>smart_toy</mat-icon>
+      <span i18n>AI Assistant</span>
+    </mat-card-title>
+    <span class="flex-grow"></span>
+    <button
+      mat-icon-button
+      class="hidden sm:!inline-block"
+      i18n-title
+      title="Toggle Full Screen"
+      (click)="$event.stopPropagation(); fullscreen()"
+    >
+      @if (!full || collapsed) {
+        <mat-icon>fullscreen</mat-icon>
+      }
+      @if (full && !collapsed) {
+        <mat-icon>fullscreen_exit</mat-icon>
+      }
+    </button>
+    @if (!collapsed) {
+      <button
+        mat-icon-button
+        i18n-title
+        title="Collapse"
+        (click)="$event.stopPropagation(); toggleCollapse()"
+      >
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    } @else {
+      <button
+        mat-icon-button
+        i18n-title
+        title="Restore"
+        (click)="$event.stopPropagation(); toggleCollapse()"
+      >
+        <mat-icon>arrow_drop_up</mat-icon>
+      </button>
+    }
+  </mat-card-header>
+
+  <mat-card-content [class.hidden]="collapsed" class="flex-grow flex flex-col">
+    <div class="chatbot__messages flex-grow">
+      @if (messages.length === 0) {
+        <div class="chatbot__empty-state">
+          <mat-icon class="chatbot__empty-icon">chat_bubble_outline</mat-icon>
+          <p i18n>Start a conversation with the AI assistant!</p>
+          <p class="text-sm text-gray-500" i18n>
+            Ask questions about your work, get help with concepts, or discuss ideas.
+          </p>
+        </div>
+      }
+      @for (message of messages; track $index) {
+        @if (message.role !== 'system') {
+          <div
+            class="chatbot__message"
+            [ngClass]="{
+              'chatbot__message--user': message.role === 'user',
+              'chatbot__message--assistant': message.role === 'assistant'
+            }"
+          >
+            <div class="chatbot__message-header">
+              <mat-icon class="chatbot__message-icon">
+                {{ message.role === 'user' ? 'person' : 'smart_toy' }}
+              </mat-icon>
+              <span class="chatbot__message-role">
+                {{ message.role === 'user' ? 'You' : 'AI Assistant' }}
+              </span>
+            </div>
+            <div class="chatbot__message-content">
+              {{ message.content }}
+            </div>
+          </div>
+        }
+      }
+      @if (loading) {
+        <div class="chatbot__message chatbot__message--assistant">
+          <div class="chatbot__message-header">
+            <mat-icon class="chatbot__message-icon">smart_toy</mat-icon>
+            <span class="chatbot__message-role" i18n>AI Assistant</span>
+          </div>
+          <div class="chatbot__message-content">
+            <mat-spinner diameter="20"></mat-spinner>
+            <span i18n>Thinking...</span>
+          </div>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions [class.hidden]="collapsed">
+    <div class="chatbot__input-container">
+      <mat-form-field class="chatbot__input-field" appearance="outline">
+        <mat-label i18n>Type your message...</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="userInput"
+          (keypress)="handleKeyPress($event)"
+          [disabled]="loading"
+          rows="2"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="4"
+        ></textarea>
+      </mat-form-field>
+      <div class="chatbot__actions">
+        <button
+          mat-fab
+          color="primary"
+          extended
+          (click)="sendMessage()"
+          [disabled]="!userInput.trim() || loading"
+        >
+          <mat-icon>send</mat-icon>
+          <span i18n>Send</span>
+        </button>
+      </div>
+    </div>
+  </mat-card-actions>
+</mat-card>

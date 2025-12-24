@@ -18,6 +18,12 @@
       @if (notesEnabled && !notesVisible) {
         <notebook-launcher [notebookConfig]="notebookConfig" />
       }
+      @if (chatbotEnabled) {
+        <chatbot
+          [ngClass]="{ 'notes-visible': notesVisible, 'report-full': reportFullscreen }"
+          [config]="chatbotConfig"
+        />
+      }
     </mat-drawer-content>
   </mat-drawer-container>
 }
