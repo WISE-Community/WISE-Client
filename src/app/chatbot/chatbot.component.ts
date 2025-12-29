@@ -150,7 +150,11 @@ export class ChatbotComponent {
   protected async createNewChat(): Promise<void> {
     const workgroupId = this.configService.getWorkgroupId();
     const runId = this.configService.getRunId();
-    const newChat = await this.chatbotService.createChat(runId, workgroupId, this.getChatTitle());
+    const newChat = await this.chatbotService.createChat(
+      runId,
+      workgroupId,
+      this.getNewChatTitle()
+    );
     this.chatbotService
       .getChats(this.configService.getRunId(), this.configService.getWorkgroupId())
       .subscribe((chats) => {
@@ -159,7 +163,7 @@ export class ChatbotComponent {
     this.switchToChat(newChat);
   }
 
-  private getChatTitle(): string {
+  private getNewChatTitle(): string {
     const newChatTitlePrefix = $localize`New chat`;
     // Find the highest chat number in title
     const chatsWithNumInTitle = this.chats
@@ -199,19 +203,18 @@ export class ChatbotComponent {
   }
 
   protected editChatTitle(chat: Chat, event: Event): void {
-    // event.stopPropagation();
-    // const newTitle = prompt($localize`Enter new chat title:`, chat.title);
-    // if (newTitle && newTitle.trim() && newTitle !== chat.title) {
-    //   const workgroupId = this.configService.getWorkgroupId();
-    //   const runId = this.configService.getRunId();
-    //   chat.title = newTitle.trim();
-    //   this.chatbotService.updateChat(runId, workgroupId, chat);
-    //   this.chats = this.chatbotService.getChats(runId, workgroupId);
-    //   // Update current chat reference if it's the one being edited
-    //   if (this.currentChat?.id === chat.id) {
-    //     this.currentChat = chat;
-    //   }
-    // }
+    event.stopPropagation();
+    const newTitle = prompt($localize`Enter new chat title:`, chat.title);
+    if (newTitle && newTitle.trim() && newTitle !== chat.title) {
+      const workgroupId = this.configService.getWorkgroupId();
+      const runId = this.configService.getRunId();
+      chat.title = newTitle.trim();
+      this.chatbotService.updateChat(runId, workgroupId, chat);
+      // Update current chat reference if it's the one being edited
+      if (this.currentChat?.id === chat.id) {
+        this.currentChat = chat;
+      }
+    }
   }
 
   private scrollToBottom(): void {
