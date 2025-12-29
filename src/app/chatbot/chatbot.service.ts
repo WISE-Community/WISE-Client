@@ -9,6 +9,7 @@ export interface Chat {
   messages: ChatMessage[];
   createdAt: Date;
   lastUpdated: Date;
+  deleted: boolean;
 }
 
 export interface ChatMessage {
@@ -49,7 +50,7 @@ export class ChatbotService {
 
   getChats(runId: number, workgroupId: number): Observable<Chat[]> {
     return this.http.get<Chat[]>(`${this.chatsEndpoint}/${runId}/${workgroupId}`).pipe(
-      map((chats) => chats || []),
+      map((chats) => chats.filter((chat) => !chat.deleted) || []),
       catchError(() => of([]))
     );
   }
@@ -65,7 +66,8 @@ export class ChatbotService {
         }
       ],
       createdAt: new Date(),
-      lastUpdated: new Date()
+      lastUpdated: new Date(),
+      deleted: false
     };
     return firstValueFrom(
       this.http.post<Chat>(`${this.chatsEndpoint}/${runId}/${workgroupId}`, newChat)
@@ -78,10 +80,10 @@ export class ChatbotService {
     );
   }
 
-  deleteChat(runId: number, workgroupId: number, chatId: string): void {
-    const chats = this.getChats(runId, workgroupId);
-    // const filtered = chats.filter((c) => c.id !== chatId);
-    // this.saveChats(runId, workgroupId, filtered);
+  deleteChat(runId: number, workgroupId: number, chatId: string): Promise<void> {
+    return firstValueFrom(
+      this.http.delete<void>(`${this.chatsEndpoint}/${runId}/${workgroupId}/${chatId}`)
+    );
   }
 
   getChat(runId: number, workgroupId: number, chatId: string): Chat | undefined {
@@ -91,10 +93,5 @@ export class ChatbotService {
 
   private getChatStorageKey(runId: number, workgroupId: number): string {
     return `chatbot_chats_${runId}_${workgroupId}`;
-  }
-
-  private saveChats(runId: number, workgroupId: number, chats: Chat[]): void {
-    const key = this.getChatStorageKey(runId, workgroupId);
-    localStorage.setItem(key, JSON.stringify(chats));
   }
 }

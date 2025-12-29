@@ -182,24 +182,25 @@ export class ChatbotComponent {
     this.scrollToBottom();
   }
 
-  protected deleteChat(chat: Chat, event: Event): void {
-    // event.stopPropagation();
-    // const msg = $localize`Are you sure you want to delete "${chat.title}"? This action cannot be undone.`;
-    // if (!confirm(msg)) {
-    //   return;
-    // }
-    // const workgroupId = this.configService.getWorkgroupId();
-    // const runId = this.configService.getRunId();
-    // this.chatbotService.deleteChat(runId, workgroupId, chat.id);
-    // this.chats = this.chatbotService.getChats(runId, workgroupId);
-    // // If we deleted the current chat, switch to another one or create a new one
-    // if (this.currentChat?.id === chat.id) {
-    //   if (this.chats.length > 0) {
-    //     this.switchToChat(this.chats[this.chats.length - 1]);
-    //   } else {
-    //     this.createNewChat();
-    //   }
-    // }
+  protected async deleteChat(chat: Chat, event: Event): Promise<void> {
+    event.stopPropagation();
+    const msg = $localize`Are you sure you want to delete "${chat.title}"? This action cannot be undone.`;
+    if (!confirm(msg)) {
+      return;
+    }
+    const workgroupId = this.configService.getWorkgroupId();
+    const runId = this.configService.getRunId();
+    await this.chatbotService.deleteChat(runId, workgroupId, chat.id);
+    const chatIndex = this.chats.findIndex((c) => c.id === chat.id);
+    this.chats.splice(chatIndex, 1);
+    // If we deleted the current chat, switch to another one or create a new one
+    if (this.currentChat?.id === chat.id) {
+      if (this.chats.length > 0) {
+        this.switchToChat(this.chats[chatIndex] || this.chats[this.chats.length - 1]);
+      } else {
+        this.createNewChat();
+      }
+    }
   }
 
   protected editChatTitle(chat: Chat, event: Event): void {
