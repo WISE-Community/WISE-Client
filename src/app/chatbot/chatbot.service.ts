@@ -85,13 +85,4 @@ export class ChatbotService {
       this.http.delete<void>(`${this.chatsEndpoint}/${runId}/${workgroupId}/${chatId}`)
     );
   }
-
-  getChat(runId: number, workgroupId: number, chatId: string): Chat | undefined {
-    return null;
-    // return this.getChats(runId, workgroupId).find((c) => c.id === chatId);
-  }
-
-  private getChatStorageKey(runId: number, workgroupId: number): string {
-    return `chatbot_chats_${runId}_${workgroupId}`;
-  }
 }
