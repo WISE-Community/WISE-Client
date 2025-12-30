@@ -13,10 +13,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
-import { ChatbotService, ChatMessage, Chat } from './chatbot.service';
+import { ChatbotService } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
 import { ChatService } from './chat.service';
+import { Chat, ChatMessage } from './chat';
 
 @Component({
   imports: [

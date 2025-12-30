@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { ChatMessage } from './chatbot.service';
+import { ChatMessage } from './chat';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
