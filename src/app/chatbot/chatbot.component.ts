@@ -114,38 +114,30 @@ export class ChatbotComponent {
     if (!this.userInput.trim() || this.loading || !this.currentChat) {
       return;
     }
-    const userMessage: ChatMessage = {
-      role: 'user',
-      content: this.userInput,
-      nodeId: this.dataService.getCurrentNode().id,
-      timestamp: new Date()
-    };
-    this.messages.push(userMessage);
+    this.messages.push(
+      new ChatMessage('user', this.userInput, this.dataService.getCurrentNode().id)
+    );
     this.userInput = '';
     this.loading = true;
     this.scrollToBottom();
     try {
       const response = await this.chatbotService.sendMessage(this.messages);
-      const assistantMessage: ChatMessage = {
-        role: 'assistant',
-        content: response,
-        nodeId: this.dataService.getCurrentNode().id,
-        timestamp: new Date()
-      };
-      this.messages.push(assistantMessage);
+      this.messages.push(
+        new ChatMessage('assistant', response, this.dataService.getCurrentNode().id)
+      );
       this.currentChat.messages = [...this.messages];
       await this.chatbotService.updateChat(this.runId, this.workgroupId, this.currentChat);
-      this.scrollToBottom();
     } catch (error) {
       console.error('Error sending message:', error);
-      const errorMessage: ChatMessage = {
-        role: 'assistant',
-        content: $localize`Sorry, I encountered an error. Please try again.`,
-        nodeId: this.dataService.getCurrentNode().id,
-        timestamp: new Date()
-      };
-      this.messages.push(errorMessage);
+      this.messages.push(
+        new ChatMessage(
+          'assistant',
+          $localize`Sorry, I encountered an error. Please try again.`,
+          this.dataService.getCurrentNode().id
+        )
+      );
     } finally {
+      this.scrollToBottom();
       this.loading = false;
     }
   }
