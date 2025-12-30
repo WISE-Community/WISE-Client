@@ -51,6 +51,8 @@ export class ChatbotComponent {
   protected loading: boolean = false;
   protected chats: Chat[] = [];
   protected currentChat: Chat | null = null;
+  protected runId: number = this.configService.getRunId();
+  protected workgroupId: number = this.configService.getWorkgroupId();
   private subscriptions: Subscription = new Subscription();
 
   ngOnInit(): void {
@@ -64,22 +66,20 @@ export class ChatbotComponent {
     );
 
     // Load existing chats or create a new one
-    this.chatbotService
-      .getChats(this.configService.getRunId(), this.configService.getWorkgroupId())
-      .subscribe({
-        next: (chats) => {
-          this.chats = chats;
-          if (this.chats.length === 0) {
-            this.createNewChat();
-          } else {
-            this.currentChat = this.chats[this.chats.length - 1];
-            this.messages = [...this.currentChat.messages];
-          }
-        },
-        error: (error) => {
-          console.error('Error loading chats:', error);
+    this.chatbotService.getChats(this.runId, this.workgroupId).subscribe({
+      next: (chats) => {
+        this.chats = chats;
+        if (this.chats.length === 0) {
+          this.createNewChat();
+        } else {
+          this.currentChat = this.chats[this.chats.length - 1];
+          this.messages = [...this.currentChat.messages];
         }
-      });
+      },
+      error: (error) => {
+        console.error('Error loading chats:', error);
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -134,9 +134,7 @@ export class ChatbotComponent {
       };
       this.messages.push(assistantMessage);
       this.currentChat.messages = [...this.messages];
-      const runId = this.configService.getRunId();
-      const workgroupId = this.configService.getWorkgroupId();
-      await this.chatbotService.updateChat(runId, workgroupId, this.currentChat);
+      await this.chatbotService.updateChat(this.runId, this.workgroupId, this.currentChat);
       this.scrollToBottom();
     } catch (error) {
       console.error('Error sending message:', error);
@@ -153,18 +151,14 @@ export class ChatbotComponent {
   }
 
   protected async createNewChat(): Promise<void> {
-    const workgroupId = this.configService.getWorkgroupId();
-    const runId = this.configService.getRunId();
     const newChat = await this.chatbotService.createChat(
-      runId,
-      workgroupId,
+      this.runId,
+      this.workgroupId,
       this.getNewChatTitle()
     );
     this.chatbotService
-      .getChats(this.configService.getRunId(), this.configService.getWorkgroupId())
-      .subscribe((chats) => {
-        this.chats = chats;
-      });
+      .getChats(this.runId, this.workgroupId)
+      .subscribe((chats) => (this.chats = chats));
     this.switchToChat(newChat);
   }
 
@@ -193,9 +187,7 @@ export class ChatbotComponent {
     if (!confirm(msg)) {
       return;
     }
-    const workgroupId = this.configService.getWorkgroupId();
-    const runId = this.configService.getRunId();
-    await this.chatbotService.deleteChat(runId, workgroupId, chat.id);
+    await this.chatbotService.deleteChat(this.runId, this.workgroupId, chat.id);
     const chatIndex = this.chats.findIndex((c) => c.id === chat.id);
     this.chats.splice(chatIndex, 1);
     // If we deleted the current chat, switch to another one or create a new one
@@ -212,10 +204,8 @@ export class ChatbotComponent {
     event.stopPropagation();
     const newTitle = prompt($localize`Enter new chat title:`, chat.title);
     if (newTitle && newTitle.trim() && newTitle !== chat.title) {
-      const workgroupId = this.configService.getWorkgroupId();
-      const runId = this.configService.getRunId();
       chat.title = newTitle.trim();
-      this.chatbotService.updateChat(runId, workgroupId, chat);
+      this.chatbotService.updateChat(this.runId, this.workgroupId, chat);
       // Update current chat reference if it's the one being edited
       if (this.currentChat?.id === chat.id) {
         this.currentChat = chat;
