@@ -15,6 +15,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { ChatbotService, ChatMessage, Chat } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
+import { DataService } from '../services/data.service';
 
 @Component({
   imports: [
@@ -41,6 +42,7 @@ export class ChatbotComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private chatbotService: ChatbotService = inject(ChatbotService);
   private configService: ConfigService = inject(ConfigService);
+  private dataService: DataService = inject(DataService);
 
   protected collapsed: boolean = true;
   protected full: boolean = false;
@@ -115,6 +117,7 @@ export class ChatbotComponent {
     const userMessage: ChatMessage = {
       role: 'user',
       content: this.userInput,
+      nodeId: this.dataService.getCurrentNode().id,
       timestamp: new Date()
     };
     this.messages.push(userMessage);
@@ -126,6 +129,7 @@ export class ChatbotComponent {
       const assistantMessage: ChatMessage = {
         role: 'assistant',
         content: response,
+        nodeId: this.dataService.getCurrentNode().id,
         timestamp: new Date()
       };
       this.messages.push(assistantMessage);
@@ -139,6 +143,7 @@ export class ChatbotComponent {
       const errorMessage: ChatMessage = {
         role: 'assistant',
         content: $localize`Sorry, I encountered an error. Please try again.`,
+        nodeId: this.dataService.getCurrentNode().id,
         timestamp: new Date()
       };
       this.messages.push(errorMessage);

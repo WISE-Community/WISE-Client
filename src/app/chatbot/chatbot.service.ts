@@ -15,6 +15,7 @@ export interface Chat {
 export interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
   content: string;
+  nodeId?: string;
   timestamp?: Date;
 }
 
