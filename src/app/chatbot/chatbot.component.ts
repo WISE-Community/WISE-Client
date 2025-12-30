@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 import { ChatbotService, ChatMessage, Chat } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
+import { ChatService } from './chat.service';
 
 @Component({
   imports: [
@@ -37,13 +38,13 @@ import { DataService } from '../services/data.service';
   templateUrl: 'chatbot.component.html'
 })
 export class ChatbotComponent {
-  @Input() config: any;
-
   private breakpointObserver = inject(BreakpointObserver);
   private chatbotService: ChatbotService = inject(ChatbotService);
+  private chatService: ChatService = inject(ChatService);
   private configService: ConfigService = inject(ConfigService);
   private dataService: DataService = inject(DataService);
 
+  @Input() config: any;
   protected collapsed: boolean = true;
   protected full: boolean = false;
   protected messages: ChatMessage[] = [];
@@ -121,14 +122,13 @@ export class ChatbotComponent {
     this.loading = true;
     this.scrollToBottom();
     try {
-      const response = await this.chatbotService.sendMessage(this.messages);
+      const response = await this.chatService.sendMessage(this.messages);
       this.messages.push(
         new ChatMessage('assistant', response, this.dataService.getCurrentNode().id)
       );
       this.currentChat.messages = [...this.messages];
       await this.chatbotService.updateChat(this.runId, this.workgroupId, this.currentChat);
     } catch (error) {
-      console.error('Error sending message:', error);
       this.messages.push(
         new ChatMessage(
           'assistant',
