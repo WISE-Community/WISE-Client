@@ -23,7 +23,7 @@ export class AwsBedRockService {
     };
     try {
       const response = await firstValueFrom(this.http.post<any>(`${this.chatEndpoint}`, payload));
-      return response.choices[0].message.content.replace(/<reasoning>.*?<\/reasoning>/g, '');
+      return response.choices[0].message.content.replace(/<reasoning>.*?<\/reasoning>/gs, '');
     } catch (error) {
       console.error('Error calling chat endpoint:', error);
       throw error;
