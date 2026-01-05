@@ -10,10 +10,10 @@ export interface Chat {
 export class ChatMessage {
   role: 'user' | 'assistant' | 'system';
   content: string;
-  nodeId?: string;
+  nodeId: string;
   timestamp: Date = new Date();
 
-  constructor(role: 'user' | 'assistant' | 'system', content: string, nodeId?: string) {
+  constructor(role: 'user' | 'assistant' | 'system', content: string, nodeId: string) {
     this.role = role;
     this.content = content;
     this.nodeId = nodeId;

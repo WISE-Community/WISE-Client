@@ -18,6 +18,7 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
 import { Chat, ChatMessage } from './chat';
 import { AwsBedRockService } from './awsBedRock.service';
+import { ProjectService } from '../../assets/wise5/services/projectService';
 
 @Component({
   imports: [
@@ -44,6 +45,7 @@ export class ChatbotComponent {
   private awsBedRockService: AwsBedRockService = inject(AwsBedRockService);
   private configService: ConfigService = inject(ConfigService);
   private dataService: DataService = inject(DataService);
+  private projectService = inject(ProjectService);
 
   @Input() config: any;
   protected collapsed: boolean = true;
@@ -147,6 +149,8 @@ export class ChatbotComponent {
     const newChat = await this.chatbotService.createChat(
       this.runId,
       this.workgroupId,
+      this.dataService.getCurrentNode().id,
+      this.projectService.getProject().chatbot.systemPrompt,
       this.getNewChatTitle()
     );
     this.chatbotService
