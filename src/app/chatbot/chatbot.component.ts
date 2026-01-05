@@ -16,8 +16,8 @@ import { Subscription } from 'rxjs';
 import { ChatbotService } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
-import { ChatService } from './chat.service';
 import { Chat, ChatMessage } from './chat';
+import { AwsBedRockService } from './awsBedRock.service';
 
 @Component({
   imports: [
@@ -41,7 +41,7 @@ import { Chat, ChatMessage } from './chat';
 export class ChatbotComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private chatbotService: ChatbotService = inject(ChatbotService);
-  private chatService: ChatService = inject(ChatService);
+  private awsBedRockService: AwsBedRockService = inject(AwsBedRockService);
   private configService: ConfigService = inject(ConfigService);
   private dataService: DataService = inject(DataService);
 
@@ -123,7 +123,7 @@ export class ChatbotComponent {
     this.loading = true;
     this.scrollToBottom();
     try {
-      const response = await this.chatService.sendMessage(this.messages);
+      const response = await this.awsBedRockService.sendMessage(this.messages);
       this.messages.push(
         new ChatMessage('assistant', response, this.dataService.getCurrentNode().id)
       );
