@@ -1,5 +1,5 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -42,6 +42,11 @@ import { RubricAuthoringComponent } from '../rubric/rubric-authoring.component';
   templateUrl: 'advanced-project-authoring.component.html'
 })
 export class AdvancedProjectAuthoringComponent {
+  private dialog = inject(MatDialog);
+  private configService = inject(ConfigService);
+  private notificationService = inject(NotificationService);
+  private projectService = inject(TeacherProjectService);
+
   protected jsonDisplayed: boolean;
   protected navigationType: string = 'default';
   private projectId: number;
@@ -49,16 +54,8 @@ export class AdvancedProjectAuthoringComponent {
   protected projectScriptFilename: string;
   protected rubricDisplayed: boolean;
 
-  constructor(
-    private dialog: MatDialog,
-    private configService: ConfigService,
-    private notificationService: NotificationService,
-    private projectService: TeacherProjectService
-  ) {
-    this.projectId = this.configService.getProjectId();
-  }
-
   ngOnInit(): void {
+    this.projectId = this.configService.getProjectId();
     this.setProjectScriptFilename();
   }
 

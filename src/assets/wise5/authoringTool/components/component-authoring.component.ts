@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ComponentContent } from '../../common/ComponentContent';
 import { PreviewComponentComponent } from './preview-component/preview-component.component';
 import { EditComponentComponent } from './edit-component/edit-component.component';
@@ -47,13 +47,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     }`
 })
 export class ComponentAuthoringComponent {
+  private projectService = inject(TeacherProjectService);
+
   protected component: WISEComponent;
   @Input() componentContent: ComponentContent;
   @Input() editing: boolean;
   @Output() editComponentEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() nodeId: string;
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnChanges(): void {
     this.component = new ComponentFactory().getComponent(

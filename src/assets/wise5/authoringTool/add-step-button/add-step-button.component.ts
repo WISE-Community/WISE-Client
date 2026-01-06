@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,16 +23,14 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
   templateUrl: './add-step-button.component.html'
 })
 export class AddStepButtonComponent {
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected canAddAfter: boolean;
   protected canAddBefore: boolean;
   protected canBranch: boolean;
   @Input() nodeId: string;
-
-  constructor(
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.canAddBefore = this.projectService.isFirstStepInLesson(this.nodeId);

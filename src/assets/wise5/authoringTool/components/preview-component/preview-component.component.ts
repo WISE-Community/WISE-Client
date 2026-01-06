@@ -8,7 +8,8 @@ import {
   Input,
   Output,
   ViewChild,
-  createComponent
+  createComponent,
+  inject
 } from '@angular/core';
 import { Component as WISEComponent } from '../../../common/Component';
 import { components } from '../../../components/Components';
@@ -18,17 +19,15 @@ import { components } from '../../../components/Components';
   template: '<div #component></div>'
 })
 export class PreviewComponentComponent {
+  private applicationRef = inject(ApplicationRef);
+  private injector = inject(EnvironmentInjector);
+
   @Input() component: WISEComponent;
   @ViewChild('component') private componentElementRef: ElementRef;
   private componentRef: ComponentRef<WISEComponent>;
   @Input() disabled: boolean;
   @Input() periodId: number;
   @Output() starterStateChangedEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  constructor(
-    private applicationRef: ApplicationRef,
-    private injector: EnvironmentInjector
-  ) {}
 
   ngAfterViewInit(): void {
     this.renderComponent();

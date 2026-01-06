@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { RxStomp } from '@stomp/rx-stomp';
 import { Message } from '@stomp/stompjs';
-import { TeacherProjectService } from '../../services/teacherProjectService';
 import { SessionService } from '../../services/sessionService';
 import { NotifyAuthorService } from '../../services/notifyAuthorService';
 
@@ -16,24 +15,20 @@ import { NotifyAuthorService } from '../../services/notifyAuthorService';
   }`
 })
 export class ConcurrentAuthorsMessageComponent {
+  private configService = inject(ConfigService);
+  private notifyAuthorService = inject(NotifyAuthorService);
+  private sessionService = inject(SessionService);
+
   protected message: string = '';
   private myUsername: string;
   @Input() private projectId: number;
   private rxStomp: RxStomp = new RxStomp();
 
-  constructor(
-    private configService: ConfigService,
-    private notifyAuthorService: NotifyAuthorService,
-    private projectService: TeacherProjectService,
-    private sessionService: SessionService
-  ) {
+  ngOnInit(): void {
     this.myUsername = this.configService.getMyUsername();
     this.rxStomp.configure({
       brokerURL: this.configService.getWebSocketURL()
     });
-  }
-
-  ngOnInit() {
     this.rxStomp.activate();
     this.rxStomp.connected$.subscribe(() => {
       this.notifyAuthorService.editBegin(this.projectId);

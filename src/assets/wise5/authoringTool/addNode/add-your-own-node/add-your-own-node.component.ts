@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   FormControl,
@@ -40,6 +40,14 @@ import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
   templateUrl: 'add-your-own-node.component.html'
 })
 export class AddYourOwnNodeComponent {
+  private componentTypeService = inject(ComponentTypeService);
+  private createComponentService = inject(CreateComponentService);
+  private fb = inject(FormBuilder);
+  private insertFirstNodeInBranchPathService = inject(InsertFirstNodeInBranchPathService);
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected addNodeFormGroup: FormGroup = this.fb.group({
     title: new FormControl($localize`New Step`, [Validators.required])
   });
@@ -48,15 +56,7 @@ export class AddYourOwnNodeComponent {
   protected submitting: boolean;
   protected target: AddStepTarget;
 
-  constructor(
-    private componentTypeService: ComponentTypeService,
-    private createComponentService: CreateComponentService,
-    private fb: FormBuilder,
-    private insertFirstNodeInBranchPathService: InsertFirstNodeInBranchPathService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
+  constructor() {
     this.componentTypes = this.componentTypeService.getComponentTypes();
   }
 

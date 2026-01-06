@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -31,6 +31,14 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   templateUrl: './choose-import-component.component.html'
 })
 export class ChooseImportComponentComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private importComponentService = inject(ImportComponentService);
+  private projectAssetService = inject(ProjectAssetService);
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected importProject: any = null;
   private importProjectId: number;
   protected myProjectsList: any = [];
@@ -39,16 +47,6 @@ export class ChooseImportComponentComponent implements OnInit {
   private projectItems: any[] = [];
   protected state: any;
   protected submitting: boolean;
-
-  constructor(
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private importComponentService: ImportComponentService,
-    private projectAssetService: ProjectAssetService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.state = history.state;

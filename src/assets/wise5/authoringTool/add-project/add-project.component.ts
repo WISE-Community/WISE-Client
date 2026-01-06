@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -33,17 +33,15 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './add-project.component.html'
 })
 export class AddProjectComponent {
+  private dialog = inject(MatDialog);
+  private fb = inject(FormBuilder);
+  private registerProjectService = inject(RegisterProjectService);
+  private router = inject(Router);
+
   protected addProjectFormGroup: FormGroup = this.fb.group({
     title: new FormControl('', [Validators.required])
   });
   @ViewChild('titleField') protected titleField: ElementRef;
-
-  constructor(
-    private dialog: MatDialog,
-    private fb: FormBuilder,
-    private registerProjectService: RegisterProjectService,
-    private router: Router
-  ) {}
 
   ngAfterViewInit(): void {
     this.titleField.nativeElement.focus();

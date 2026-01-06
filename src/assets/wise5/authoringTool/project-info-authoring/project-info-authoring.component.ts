@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,6 +31,11 @@ import { EditProjectLanguageSettingComponent } from '../project-info/edit-projec
   templateUrl: './project-info-authoring.component.html'
 })
 export class ProjectInfoAuthoringComponent {
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
+  private projectService = inject(TeacherProjectService);
+  private userService = inject(UserService);
+
   isEditingProjectIcon: boolean = false;
   protected isMyUnit: boolean;
   isShowProjectIcon: boolean = false;
@@ -42,13 +47,6 @@ export class ProjectInfoAuthoringComponent {
   projectIcon: string = '';
   projectIcons: any = [];
   protected publishUnitUrl;
-
-  constructor(
-    private configService: ConfigService,
-    private dialog: MatDialog,
-    private projectService: TeacherProjectService,
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     this.metadata = this.projectService.getProjectMetadata();

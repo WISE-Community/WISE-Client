@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,12 +12,10 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './node-advanced-authoring.component.html'
 })
 export class NodeAdvancedAuthoringComponent implements OnInit {
-  protected isGroupNode: boolean;
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
 
-  constructor(
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute
-  ) {}
+  protected isGroupNode: boolean;
 
   ngOnInit(): void {
     this.route.parent.parent.params.subscribe(

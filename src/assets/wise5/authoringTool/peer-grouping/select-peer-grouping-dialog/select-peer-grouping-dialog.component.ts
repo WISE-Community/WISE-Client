@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {
@@ -32,14 +32,12 @@ class SelectPeerGroupingDialogData {
   ]
 })
 export class SelectPeerGroupingDialogComponent implements OnInit {
-  peerGroupings: PeerGrouping[] = [];
+  private dialog = inject(MatDialog);
+  private dialogRef = inject<MatDialogRef<SelectPeerGroupingDialogComponent>>(MatDialogRef);
+  private dialogData = inject<SelectPeerGroupingDialogData>(MAT_DIALOG_DATA);
+  private peerGroupingAuthoringService = inject(PeerGroupingAuthoringService);
 
-  constructor(
-    private dialog: MatDialog,
-    private dialogRef: MatDialogRef<SelectPeerGroupingDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private dialogData: SelectPeerGroupingDialogData,
-    private peerGroupingAuthoringService: PeerGroupingAuthoringService
-  ) {}
+  peerGroupings: PeerGrouping[] = [];
 
   ngOnInit(): void {
     this.peerGroupings = this.peerGroupingAuthoringService.getPeerGroupings();

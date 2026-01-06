@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,6 +24,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: 'node-advanced-path-authoring.component.html'
 })
 export class NodeAdvancedPathAuthoringComponent implements OnInit {
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+
   protected canChangePathOptions = [
     { value: true, text: $localize`True` },
     { value: false, text: $localize`False` }
@@ -71,11 +74,6 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     { value: 'scoreChanged', text: $localize`Score Changed` },
     { value: 'studentDataChanged', text: $localize`Student Data Changed` }
   ];
-
-  constructor(
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute
-  ) {}
 
   ngOnInit() {
     this.route.parent.parent.parent.params.subscribe((params) => {

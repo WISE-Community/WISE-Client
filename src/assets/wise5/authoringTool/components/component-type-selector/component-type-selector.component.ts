@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ComponentTypeService } from '../../../services/componentTypeService';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,13 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './component-type-selector.component.html'
 })
 export class ComponentTypeSelectorComponent {
+  private componentTypeService = inject(ComponentTypeService);
+
   @Input() componentType: string;
   protected componentTypes: any[];
   @Output() componentTypeSelectedEvent: EventEmitter<string> = new EventEmitter<string>();
   protected firstComponent: boolean;
   protected lastComponent: boolean;
-
-  constructor(private componentTypeService: ComponentTypeService) {}
 
   ngOnInit(): void {
     this.componentTypes = this.componentTypeService.getComponentTypes();

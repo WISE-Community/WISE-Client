@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CreateComponentService } from '../../../services/createComponentService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,19 +27,17 @@ import { MatMenuModule } from '@angular/material/menu';
   templateUrl: './add-component-button.component.html'
 })
 export class AddComponentButtonComponent {
+  private createComponentService = inject(CreateComponentService);
+  private dialog = inject(MatDialog);
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected firstComponent = false;
   @Input() insertAfterComponentId: string = null;
   @Output() newComponentsEvent: EventEmitter<any> = new EventEmitter<any>();
   @Input() node: Node;
   protected tooltipText = $localize`Add component`;
-
-  constructor(
-    private createComponentService: CreateComponentService,
-    private dialog: MatDialog,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.updateUI();

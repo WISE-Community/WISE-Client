@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { ConfigService } from '../../../services/configService';
 import { SessionService } from '../../../services/sessionService';
@@ -30,6 +30,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private notifyAuthorService = inject(NotifyAuthorService);
+  private projectService = inject(TeacherProjectService);
+  private router = inject(Router);
+  private sessionService = inject(SessionService);
+
   protected avatarColor: any;
   protected contextPath: string;
   protected hasTranslations: boolean;
@@ -43,15 +50,6 @@ export class TopBarComponent implements OnInit {
   private subscriptions = new Subscription();
   protected userInfo: any;
   protected workgroupId: number;
-
-  constructor(
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private notifyAuthorService: NotifyAuthorService,
-    private projectService: TeacherProjectService,
-    private router: Router,
-    private sessionService: SessionService
-  ) {}
 
   ngOnInit(): void {
     this.workgroupId = this.configService.getWorkgroupId();

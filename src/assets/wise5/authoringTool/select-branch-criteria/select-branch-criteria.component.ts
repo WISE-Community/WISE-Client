@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,12 +23,12 @@ import { BranchCriteriaHelpComponent } from './branch-criteria-help/branch-crite
   templateUrl: './select-branch-criteria.component.html'
 })
 export class SelectBranchCriteriaComponent {
+  protected dialog = inject(MatDialog);
+
   protected readonly BRANCH_CRITERIA: BranchCriteria[] = BRANCH_CRITERIA;
 
   @Input() criteria: string;
   @Output() criteriaChangedEvent: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor(protected dialog: MatDialog) {}
 
   protected showCriteriaHelp(): void {
     this.dialog.open(BranchCriteriaHelpComponent, {

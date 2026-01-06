@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentFactory } from '../../../common/ComponentFactory';
@@ -24,14 +24,12 @@ import { MatDividerModule } from '@angular/material/divider';
   templateUrl: './component-info-dialog.component.html'
 })
 export class ComponentInfoDialogComponent {
+  private componentInfoService = inject(ComponentInfoService);
+  protected componentType = inject(MAT_DIALOG_DATA);
+
   protected description: string;
   protected previewComponents: WISEComponent[] = [];
   protected previewExamples: any[] = [];
-
-  constructor(
-    private componentInfoService: ComponentInfoService,
-    @Inject(MAT_DIALOG_DATA) protected componentType: string
-  ) {}
 
   ngOnInit(): void {
     this.displayComponent(this.componentType);

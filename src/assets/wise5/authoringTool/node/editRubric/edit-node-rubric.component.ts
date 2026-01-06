@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ActivatedRoute } from '@angular/router';
 import { TranslatableRichTextEditorComponent } from '../../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
@@ -13,12 +13,10 @@ import { TranslatableRichTextEditorComponent } from '../../components/translatab
     />`
 })
 export class EditNodeRubricComponent implements OnInit {
-  protected node: any;
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
 
-  constructor(
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute
-  ) {}
+  protected node: any;
 
   ngOnInit(): void {
     this.route.parent.parent.parent.params.subscribe((params) => {

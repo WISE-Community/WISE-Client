@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -51,6 +51,13 @@ import { EditComponentAdvancedButtonComponent } from '../../components/edit-comp
   templateUrl: './node-authoring.component.html'
 })
 export class NodeAuthoringComponent implements OnInit {
+  private componentServiceLookupService = inject(ComponentServiceLookupService);
+  private componentTypeService = inject(ComponentTypeService);
+  private dataService = inject(TeacherDataService);
+  private deleteTranslationsService = inject(DeleteTranslationsService);
+  private nodeService = inject(TeacherNodeService);
+  private projectService = inject(TeacherProjectService);
+
   components: ComponentContent[] = [];
   protected editingComponentId: string;
   protected isGroupNode: boolean;
@@ -58,15 +65,6 @@ export class NodeAuthoringComponent implements OnInit {
   private nodeJson: any;
   @Input() nodeId?: string;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private componentServiceLookupService: ComponentServiceLookupService,
-    private componentTypeService: ComponentTypeService,
-    private nodeService: TeacherNodeService,
-    private projectService: TeacherProjectService,
-    private dataService: TeacherDataService,
-    private deleteTranslationsService: DeleteTranslationsService
-  ) {}
 
   ngOnInit(): void {
     this.setup(this.nodeId);

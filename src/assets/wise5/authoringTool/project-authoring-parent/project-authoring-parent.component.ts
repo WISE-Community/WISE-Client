@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NotifyAuthorService } from '../../services/notifyAuthorService';
 import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message/concurrent-authors-message.component';
@@ -9,9 +9,9 @@ import { ConcurrentAuthorsMessageComponent } from '../concurrent-authors-message
   templateUrl: './project-authoring-parent.component.html'
 })
 export class ProjectAuthoringParentComponent {
-  @Input('unitId') protected projectId?: number;
+  private notifyAuthorService = inject(NotifyAuthorService);
 
-  constructor(private notifyAuthorService: NotifyAuthorService) {}
+  @Input('unitId') protected projectId?: number;
 
   ngOnInit(): void {
     this.projectId = Number(this.projectId);

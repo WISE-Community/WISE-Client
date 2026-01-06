@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  inject
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
@@ -20,6 +28,9 @@ import { MatButton } from '@angular/material/button';
   imports: [MatRadioButton, MatButton]
 })
 export class SelectPeerGroupingOptionComponent implements OnInit {
+  private dialog = inject(MatDialog);
+  private peerGroupingAuthoringService = inject(PeerGroupingAuthoringService);
+
   @Input() peerGrouping: PeerGrouping;
   @Input() selectedPeerGrouping: PeerGrouping;
   peerGroupingLogicName: string;
@@ -27,11 +38,6 @@ export class SelectPeerGroupingOptionComponent implements OnInit {
 
   @Output() deleteEvent: EventEmitter<PeerGrouping> = new EventEmitter<PeerGrouping>();
   @Output() selectEvent: EventEmitter<PeerGrouping> = new EventEmitter<PeerGrouping>();
-
-  constructor(
-    private dialog: MatDialog,
-    private peerGroupingAuthoringService: PeerGroupingAuthoringService
-  ) {}
 
   ngOnInit(): void {
     this.setPeerGroupingLogicName();

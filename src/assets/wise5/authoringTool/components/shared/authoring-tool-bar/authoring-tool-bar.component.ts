@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { NotificationService } from '../../../../services/notificationService';
 import { NavigationEnd, Router } from '@angular/router';
@@ -21,17 +21,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   templateUrl: './authoring-tool-bar.component.html'
 })
 export class AuthoringToolBarComponent {
+  private notificationService = inject(NotificationService);
+  private router = inject(Router);
+
   protected globalMessage: any = {};
   protected isJSONValid: boolean;
   @Output() private onMenuToggle: EventEmitter<void> = new EventEmitter<void>();
   protected showStepTools: boolean;
   private subscriptions: Subscription = new Subscription();
   protected viewName: string;
-
-  constructor(
-    private notificationService: NotificationService,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.processUI();

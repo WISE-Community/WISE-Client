@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, inject } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 import { ConfigService } from '../services/configService';
 import { NotificationService } from '../services/notificationService';
@@ -31,6 +31,16 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   templateUrl: './authoring-tool.component.html'
 })
 export class AuthoringToolComponent {
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private dialog = inject(MatDialog);
+  private elem = inject(ElementRef);
+  private notificationService = inject(NotificationService);
+  private projectService = inject(TeacherProjectService);
+  private renderer = inject(Renderer2);
+  private sessionService = inject(SessionService);
+  private router = inject(Router);
+
   protected isMenuOpen: boolean = false;
   protected logoPath: string;
   protected projectId: number;
@@ -41,18 +51,6 @@ export class AuthoringToolComponent {
   protected title: string = $localize`Authoring Tool`;
   protected views: any[] = [];
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private dialog: MatDialog,
-    private elem: ElementRef,
-    private notificationService: NotificationService,
-    private projectService: TeacherProjectService,
-    private renderer: Renderer2,
-    private sessionService: SessionService,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.logoPath = this.projectService.getThemePath() + '/images/WISE-logo-ffffff.svg';

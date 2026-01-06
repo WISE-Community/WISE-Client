@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { FormsModule } from '@angular/forms';
@@ -24,16 +24,14 @@ import { MatRadioModule } from '@angular/material/radio';
   templateUrl: './wise-link-authoring-dialog.component.html'
 })
 export class WiseLinkAuthoringDialogComponent {
+  protected dialogRef = inject<MatDialogRef<WiseLinkAuthoringDialogComponent>>(MatDialogRef);
+  private projectService = inject(TeacherProjectService);
+
   protected items: any[];
   protected wiseLinkComponentId: string = '';
   protected wiseLinkNodeId: string = '';
   protected wiseLinkText: string = '';
   protected wiseLinkType: string = 'link';
-
-  constructor(
-    protected dialogRef: MatDialogRef<WiseLinkAuthoringDialogComponent>,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.items = this.projectService.getNodesInOrder();

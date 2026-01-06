@@ -1,4 +1,4 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
 import $ from 'jquery';
@@ -32,6 +32,11 @@ import { DragAndDropDirective } from '../../common/drag-and-drop/drag-and-drop.d
   templateUrl: './project-asset-authoring.component.html'
 })
 export class ProjectAssetAuthoringComponent {
+  private configService = inject(ConfigService);
+  private dialogData = inject<AssetChooserDialogData>(MAT_DIALOG_DATA, { optional: true });
+  protected dialogRef = inject<MatDialogRef<ProjectAssetAuthoringComponent>>(MatDialogRef, { optional: true });
+  private projectAssetService = inject(ProjectAssetService);
+
   allowedFileTypes: string[] = ['any'];
   assetIsImage: boolean;
   assetIsVideo: boolean;
@@ -54,13 +59,6 @@ export class ProjectAssetAuthoringComponent {
   unusedFilesPercentage = 0;
   uploadSuccessMessage = '';
   uploadErrorMessage: any;
-
-  constructor(
-    private configService: ConfigService,
-    @Optional() @Inject(MAT_DIALOG_DATA) private dialogData: AssetChooserDialogData,
-    @Optional() protected dialogRef: MatDialogRef<ProjectAssetAuthoringComponent>,
-    private projectAssetService: ProjectAssetService
-  ) {}
 
   ngOnInit(): void {
     if (this.dialogData != null) {

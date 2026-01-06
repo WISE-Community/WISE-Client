@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges, inject } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -35,6 +35,8 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
   templateUrl: './create-branch-paths.component.html'
 })
 export class CreateBranchPathsComponent {
+  private projectService = inject(TeacherProjectService);
+
   protected readonly CHOICE_CHOSEN_VALUE: string = CHOICE_CHOSEN_VALUE;
   protected readonly SCORE_VALUE: string = SCORE_VALUE;
 
@@ -45,8 +47,6 @@ export class CreateBranchPathsComponent {
   @Input() pathCount: number;
   protected pathsFormArray: FormArray = new FormArray([]);
   @Input() pathFormGroup: FormGroup;
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.pathFormGroup.addControl('paths', this.pathsFormArray);
