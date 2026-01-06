@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
@@ -32,6 +32,12 @@ import { MatDivider } from '@angular/material/divider';
   templateUrl: './login-home.component.html'
 })
 export class LoginHomeComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private recaptchaV3Service = inject(ReCaptchaV3Service);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private userService = inject(UserService);
+
   accessCode: string = '';
   credentials: any = { username: '', password: '', recaptchaResponse: null };
   protected googleAuthenticationEnabled: boolean = false;
@@ -43,14 +49,6 @@ export class LoginHomeComponent implements OnInit {
   processing: boolean = false;
   @ViewChild('recaptchaRef', { static: false }) recaptchaRef: any;
   protected showSocialLogin: boolean;
-
-  constructor(
-    private configService: ConfigService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private recaptchaV3Service: ReCaptchaV3Service,
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {
