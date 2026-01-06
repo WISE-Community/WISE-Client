@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, inject } from '@angular/core';
 import { StudentRun } from '../student-run';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser';
@@ -43,20 +43,18 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './student-run-list-item.component.html'
 })
 export class StudentRunListItemComponent implements OnInit {
+  private configService = inject(ConfigService);
+  dialog = inject(MatDialog);
+  private sanitizer = inject(DomSanitizer);
+  private studentService = inject(StudentService);
+  private userService = inject(UserService);
+
   @Input() run: StudentRun = new StudentRun();
 
   problemLink: string = '';
   thumbStyle: SafeStyle;
   animateDuration: string = '0s';
   animateDelay: string = '0s';
-
-  constructor(
-    private sanitizer: DomSanitizer,
-    private configService: ConfigService,
-    public dialog: MatDialog,
-    private studentService: StudentService,
-    private userService: UserService
-  ) {}
 
   getThumbStyle() {
     const DEFAULT_THUMB = 'assets/img/default-picture.svg';

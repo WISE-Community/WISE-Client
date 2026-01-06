@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, OnInit, inject } from '@angular/core';
 import { StudentRun } from '../student-run';
 import { StudentService } from '../student.service';
 import { ConfigService } from '../../services/config.service';
@@ -35,20 +35,20 @@ import { DatePipe } from '@angular/common';
   templateUrl: './student-run-list.component.html'
 })
 export class StudentRunListComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
+  private localeID = inject(LOCALE_ID);
+  private route = inject(ActivatedRoute);
+  private studentService = inject(StudentService);
+
   runs: StudentRun[] = [];
   filteredRuns: StudentRun[] = [];
   search: string = '';
   loaded: boolean = false;
   showAll: boolean = false;
 
-  constructor(
-    private studentService: StudentService,
-    private configService: ConfigService,
-    private route: ActivatedRoute,
-    private dialog: MatDialog,
-    @Inject(LOCALE_ID) private localeID: string
-  ) {
-    studentService.newRunSource$.subscribe((run) => {
+  constructor() {
+    this.studentService.newRunSource$.subscribe((run) => {
       run.isHighlighted = true;
       this.runs.unshift(new StudentRun(run));
       if (!this.showAll) {

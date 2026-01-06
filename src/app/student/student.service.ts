@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
@@ -9,6 +9,8 @@ import { StudentRun } from './student-run';
 
 @Injectable()
 export class StudentService {
+  private http = inject(HttpClient);
+
   private runsUrl = '/api/student/runs';
   private runInfoUrl = '/api/run/info';
   private runInfoByIdUrl = '/api/run/info-by-id';
@@ -26,8 +28,6 @@ export class StudentService {
 
   private newRunSource = new Subject<StudentRun>();
   newRunSource$ = this.newRunSource.asObservable();
-
-  constructor(private http: HttpClient) {}
 
   getRuns(): Observable<StudentRun[]> {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });

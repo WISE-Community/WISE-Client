@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 
@@ -8,7 +8,8 @@ import { NgClass } from '@angular/common';
   templateUrl: './student.component.html'
 })
 export class StudentComponent {
-  constructor(private router: Router) {}
+  private router = inject(Router);
+
 
   protected isShowingAngularJSApp(): boolean {
     return (
