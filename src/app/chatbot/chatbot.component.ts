@@ -76,7 +76,7 @@ export class ChatbotComponent {
         if (this.chats.length === 0) {
           this.createNewChat();
         } else {
-          this.currentChat = this.chats[this.chats.length - 1];
+          this.currentChat = this.getLastEditedChat();
           this.messages = [...this.currentChat.messages];
         }
       },
@@ -88,6 +88,12 @@ export class ChatbotComponent {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  private getLastEditedChat(): Chat {
+    return this.chats.sort(
+      (a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
+    )[0];
   }
 
   protected toggleCollapse(): void {
