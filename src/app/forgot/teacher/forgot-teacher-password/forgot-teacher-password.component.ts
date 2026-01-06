@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   FormBuilder,
@@ -37,6 +37,12 @@ import { MatCard, MatCardContent } from '@angular/material/card';
   templateUrl: './forgot-teacher-password.component.html'
 })
 export class ForgotTeacherPasswordComponent {
+  private configService = inject(ConfigService);
+  private fb = inject(FormBuilder);
+  private recaptchaV3Service = inject(ReCaptchaV3Service);
+  private router = inject(Router);
+  private teacherService = inject(TeacherService);
+
   protected forgotTeacherPasswordFormGroup: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required])
   });
@@ -44,14 +50,6 @@ export class ForgotTeacherPasswordComponent {
   protected message: string = '';
   protected showForgotUsernameLink: boolean = false;
   protected processing: boolean = false;
-
-  constructor(
-    private configService: ConfigService,
-    private fb: FormBuilder,
-    private recaptchaV3Service: ReCaptchaV3Service,
-    private router: Router,
-    private teacherService: TeacherService
-  ) {}
 
   getControlFieldValue(fieldName) {
     return this.forgotTeacherPasswordFormGroup.get(fieldName).value;

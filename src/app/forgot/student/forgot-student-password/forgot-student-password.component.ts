@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -36,18 +36,16 @@ import { MatCard, MatCardContent } from '@angular/material/card';
   ]
 })
 export class ForgotStudentPasswordComponent {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private studentService = inject(StudentService);
+
   protected forgotStudentPasswordFormGroup: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required])
   });
   protected message: string;
   protected showForgotUsernameLink: boolean = false;
   protected processing: boolean = false;
-
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private studentService: StudentService
-  ) {}
 
   submit(): void {
     this.processing = true;

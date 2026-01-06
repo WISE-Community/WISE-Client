@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { StudentService } from '../../../student/student.service';
@@ -28,19 +28,17 @@ import { MatCard, MatCardContent } from '@angular/material/card';
   ]
 })
 export class ForgotStudentPasswordChangeComponent {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private studentService = inject(StudentService);
+
   @Input() answer: string;
   changePasswordFormGroup: FormGroup = this.fb.group({});
   protected message: string = '';
   protected processing: boolean = false;
   @Input() questionKey: string;
   @Input() username: string;
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private fb: FormBuilder,
-    private router: Router,
-    private studentService: StudentService
-  ) {}
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();

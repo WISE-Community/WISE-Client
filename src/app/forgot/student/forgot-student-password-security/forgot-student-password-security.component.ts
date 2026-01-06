@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   FormBuilder,
@@ -38,6 +38,12 @@ import { MatCard, MatCardContent } from '@angular/material/card';
   ]
 })
 export class ForgotStudentPasswordSecurityComponent {
+  private configService = inject(ConfigService);
+  private fb = inject(FormBuilder);
+  private recaptchaV3Service = inject(ReCaptchaV3Service);
+  private router = inject(Router);
+  private studentService = inject(StudentService);
+
   protected answer: string;
   protected answerSecurityQuestionFormGroup: FormGroup = this.fb.group({
     answer: new FormControl('', [Validators.required])
@@ -48,14 +54,6 @@ export class ForgotStudentPasswordSecurityComponent {
   @Input() question: string;
   @Input() questionKey: string;
   @Input() username: string;
-
-  constructor(
-    private configService: ConfigService,
-    private fb: FormBuilder,
-    private recaptchaV3Service: ReCaptchaV3Service,
-    private router: Router,
-    private studentService: StudentService
-  ) {}
 
   async submit() {
     this.processing = true;
