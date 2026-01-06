@@ -5,8 +5,9 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
-  private chatGptEndpoint = '/api/chat-gpt';
+  protected chatEndpoint = '/api/chat-gpt';
   private http = inject(HttpClient);
+  protected model: string = 'gpt-3.5-turbo';
 
   /**
    * Sends a message to the chat-gpt endpoint.
@@ -19,16 +20,18 @@ export class ChatService {
         role: msg.role,
         content: msg.content
       })),
-      model: 'gpt-3.5-turbo'
+      model: this.model
     };
     try {
-      const response = await firstValueFrom(
-        this.http.post<any>(`${this.chatGptEndpoint}`, payload)
-      );
-      return response.choices[0].message.content;
+      const response = await firstValueFrom(this.http.post<any>(`${this.chatEndpoint}`, payload));
+      return this.processResponse(response.choices[0].message.content);
     } catch (error) {
-      console.error('Error calling chat-gpt endpoint:', error);
+      console.error('Error calling chat endpoint:', error);
       throw error;
     }
+  }
+
+  processResponse(response: string): string {
+    return response;
   }
 }
