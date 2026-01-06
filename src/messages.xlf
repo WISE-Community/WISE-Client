@@ -2392,14 +2392,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Public (<x id="PH" equiv-text="this.numPublicUnitsVisible"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.ts</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5646257907586096558" datatype="html">
         <source>My Units (<x id="PH" equiv-text="this.numMyUnitsVisible"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5115344169131680845" datatype="html">
