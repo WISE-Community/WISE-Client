@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LibraryService } from '../../../services/library.service';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 import { LibraryFiltersComponent } from '../library-filters/library-filters.component';
@@ -13,8 +13,10 @@ import { OfficialLibraryComponent } from '../official-library/official-library.c
   templateUrl: './home-page-project-library.component.html'
 })
 export class HomePageProjectLibraryComponent {
-  constructor(private libraryService: LibraryService) {
-    libraryService.getOfficialLibraryProjects();
+  private libraryService = inject(LibraryService);
+
+  ngOnInit(): void {
+    this.libraryService.getOfficialLibraryProjects();
   }
 
   ngOnDestroy(): void {

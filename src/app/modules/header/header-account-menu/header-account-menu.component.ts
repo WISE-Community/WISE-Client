@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, inject } from '@angular/core';
 import { ConfigService } from '../../../services/config.service';
 import { User } from '../../../domain/user';
 import { HttpClient } from '@angular/common/http';
@@ -15,6 +15,9 @@ import { RouterModule } from '@angular/router';
   templateUrl: './header-account-menu.component.html'
 })
 export class HeaderAccountMenuComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
+
   protected firstName: string = '';
   protected isPreviousAdmin: boolean;
   protected lastName: string = '';
@@ -22,11 +25,6 @@ export class HeaderAccountMenuComponent implements OnInit {
   protected roles: string[] = [];
   private switchToOriginalUserURL = '/api/logout/impersonate';
   @Input() user: User;
-
-  constructor(
-    private configService: ConfigService,
-    private http: HttpClient
-  ) {}
 
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {

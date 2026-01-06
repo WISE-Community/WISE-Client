@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -34,6 +34,12 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './library-project-details.component.html'
 })
 export class LibraryProjectDetailsComponent implements OnInit {
+  private configService = inject(ConfigService);
+  data = inject(MAT_DIALOG_DATA);
+  dialog = inject(MatDialog);
+  dialogRef = inject<MatDialogRef<LibraryProjectDetailsComponent>>(MatDialogRef);
+  private userService = inject(UserService);
+
   protected authorsString: string = '';
   protected canPreview: boolean;
   protected isCopy: boolean;
@@ -51,14 +57,6 @@ export class LibraryProjectDetailsComponent implements OnInit {
     ngss: $localize`NGSS`
   };
   protected standards: any;
-
-  constructor(
-    private configService: ConfigService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialog: MatDialog,
-    public dialogRef: MatDialogRef<LibraryProjectDetailsComponent>,
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     this.isTeacher = this.userService.isTeacher();

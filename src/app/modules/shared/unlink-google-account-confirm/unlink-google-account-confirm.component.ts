@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialog,
   MatDialogTitle,
@@ -25,7 +25,8 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './unlink-google-account-confirm.component.html'
 })
 export class UnlinkGoogleAccountConfirmComponent {
-  constructor(public dialog: MatDialog) {}
+  dialog = inject(MatDialog);
+
 
   continue() {
     this.dialog.closeAll();

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, Output, EventEmitter, inject } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LibraryProject } from '../libraryProject';
@@ -36,6 +36,10 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './library-project.component.html'
 })
 export class LibraryProjectComponent implements OnInit {
+  private dialog = inject(MatDialog);
+  private projectTagService = inject(ProjectTagService);
+  private sanitizer = inject(DomSanitizer);
+
   protected animateDelay: string = '0s';
   protected animateDuration: string = '0s';
   @Input() checked: boolean = false;
@@ -44,12 +48,6 @@ export class LibraryProjectComponent implements OnInit {
   @Output() projectSelectionEvent: EventEmitter<ProjectSelectionEvent> =
     new EventEmitter<ProjectSelectionEvent>();
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private dialog: MatDialog,
-    private projectTagService: ProjectTagService,
-    private sanitizer: DomSanitizer
-  ) {}
 
   ngOnInit(): void {
     this.project.thumbStyle = this.getThumbStyle(this.project.projectThumb);

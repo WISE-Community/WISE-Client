@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatDialog,
@@ -32,15 +32,13 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './unlink-google-account-password.component.html'
 })
 export class UnlinkGoogleAccountPasswordComponent {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+  dialog = inject(MatDialog);
+  private userService = inject(UserService);
+
   isSaving: boolean = false;
   newPasswordFormGroup: FormGroup = this.fb.group({});
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private fb: FormBuilder,
-    public dialog: MatDialog,
-    private userService: UserService
-  ) {}
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();

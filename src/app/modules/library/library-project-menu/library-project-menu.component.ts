@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Project } from '../../../domain/project';
 import { TeacherService } from '../../../teacher/teacher.service';
@@ -20,6 +20,12 @@ import { CopyProjectDialogComponent } from '../copy-project-dialog/copy-project-
   templateUrl: './library-project-menu.component.html'
 })
 export class LibraryProjectMenuComponent {
+  private archiveProjectService = inject(ArchiveProjectService);
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
+  private teacherService = inject(TeacherService);
+  private userService = inject(UserService);
+
   protected archived: boolean;
   protected canEdit: boolean;
   protected canShare: boolean;
@@ -28,14 +34,6 @@ export class LibraryProjectMenuComponent {
   @Input() isRun: boolean;
   @Input() project: Project;
   protected publishUnitUrl: string;
-
-  constructor(
-    private archiveProjectService: ArchiveProjectService,
-    private configService: ConfigService,
-    private dialog: MatDialog,
-    private teacherService: TeacherService,
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     this.canEdit = this.isOwner() || this.isSharedOwnerWithEditPermission();

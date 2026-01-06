@@ -1,4 +1,4 @@
-import { Component, Directive, EventEmitter, Output } from '@angular/core';
+import { Component, Directive, EventEmitter, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
@@ -26,15 +26,13 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './public-unit-type-selector.component.html'
 })
 export class PublicUnitTypeSelectorComponent {
+  private dialog = inject(MatDialog);
+  private filterValues = inject(ProjectFilterValues);
+
   protected communityBuilt: boolean;
   @Output() publicUnitTypeUpdatedEvent: EventEmitter<ProjectFilterValues> =
     new EventEmitter<ProjectFilterValues>();
   protected wiseTested: boolean;
-
-  constructor(
-    private dialog: MatDialog,
-    private filterValues: ProjectFilterValues
-  ) {}
 
   protected updatePublicUnitType(): void {
     this.filterValues.publicUnitTypeValue = [];
