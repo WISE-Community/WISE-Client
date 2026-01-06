@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ import { Router, RouterModule } from '@angular/router';
   `
 })
 export class TeacherComponent {
-  constructor(private router: Router) {}
+  private router = inject(Router);
 
   protected isTeacherApp(): boolean {
     return this.router.url.includes('/teacher/edit') || this.router.url.includes('/teacher/manage');

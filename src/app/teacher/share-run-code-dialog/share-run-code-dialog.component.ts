@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfigService } from '../../services/config.service';
@@ -25,19 +25,17 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './share-run-code-dialog.component.html'
 })
 export class ShareRunCodeDialogComponent {
+  private accessLinkService = inject(AccessLinkService);
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
+  run = inject<TeacherRun>(MAT_DIALOG_DATA);
+  private snackBar = inject(MatSnackBar);
+  private teacherService = inject(TeacherService);
+  private userService = inject(UserService);
+
   protected accessLinks: string[] = [];
   protected code: string;
   protected link: string;
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public run: TeacherRun,
-    private accessLinkService: AccessLinkService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private teacherService: TeacherService,
-    private userService: UserService,
-    private configService: ConfigService
-  ) {}
 
   ngOnInit(): void {
     this.code = this.run.runCode;

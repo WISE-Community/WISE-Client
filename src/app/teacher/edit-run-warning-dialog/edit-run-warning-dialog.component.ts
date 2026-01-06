@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialogModule,
   MAT_DIALOG_DATA,
@@ -15,12 +15,12 @@ import { Router } from '@angular/router';
   templateUrl: './edit-run-warning-dialog.component.html'
 })
 export class EditRunWarningDialogComponent {
-  constructor(
-    public dialog: MatDialog,
-    public dialogRef: MatDialogRef<EditRunWarningDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) protected run: Run,
-    private router: Router
-  ) {
+  dialog = inject(MatDialog);
+  dialogRef = inject<MatDialogRef<EditRunWarningDialogComponent>>(MatDialogRef);
+  protected run = inject<Run>(MAT_DIALOG_DATA);
+  private router = inject(Router);
+
+  constructor() {
     this.dialog.closeAll();
   }
 

@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID } from '@angular/core';
+import { Component, LOCALE_ID, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -45,6 +45,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './run-settings-dialog.component.html'
 })
 export class RunSettingsDialogComponent {
+  dialog = inject(MatDialog);
+  dialogRef = inject<MatDialogRef<LibraryProjectDetailsComponent>>(MatDialogRef);
+  private localeID = inject(LOCALE_ID);
+  run = inject<TeacherRun>(MAT_DIALOG_DATA);
+  snackBar = inject(MatSnackBar);
+  private teacherService = inject(TeacherService);
+
   newPeriodName: string;
   maxStudentsPerTeam: string;
   startDate: Date;
@@ -65,14 +72,7 @@ export class RunSettingsDialogComponent {
   targetEndDate: Date;
   messageCodeToMessage: any;
 
-  constructor(
-    public dialog: MatDialog,
-    public dialogRef: MatDialogRef<LibraryProjectDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public run: TeacherRun,
-    private teacherService: TeacherService,
-    public snackBar: MatSnackBar,
-    @Inject(LOCALE_ID) private localeID: string
-  ) {
+  constructor() {
     this.maxStudentsPerTeam = this.run.maxStudentsPerTeam + '';
     this.startDate = new Date(this.run.startTime);
     this.endDate = this.run.endTime ? new Date(this.run.endTime) : null;

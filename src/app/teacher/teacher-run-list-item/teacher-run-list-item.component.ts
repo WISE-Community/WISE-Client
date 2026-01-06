@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -40,6 +40,13 @@ import { ConfigService } from '../../services/config.service';
   templateUrl: './teacher-run-list-item.component.html'
 })
 export class TeacherRunListItemComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
+  private elRef = inject(ElementRef);
+  private projectTagService = inject(ProjectTagService);
+  private router = inject(Router);
+  private sanitizer = inject(DomSanitizer);
+
   protected animateDelay: string = '0s';
   protected animateDuration: string = '0s';
   protected manageStudentsLink: string = '';
@@ -49,15 +56,6 @@ export class TeacherRunListItemComponent implements OnInit {
   @Output() runSelectedStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
   private subscriptions: Subscription = new Subscription();
   protected thumbStyle: SafeStyle;
-
-  constructor(
-    private configService: ConfigService,
-    private dialog: MatDialog,
-    private elRef: ElementRef,
-    private projectTagService: ProjectTagService,
-    private router: Router,
-    private sanitizer: DomSanitizer
-  ) {}
 
   ngOnInit(): void {
     this.run.project.thumbStyle = this.getThumbStyle();
