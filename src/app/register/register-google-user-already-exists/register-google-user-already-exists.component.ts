@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
@@ -10,7 +10,7 @@ import { MatButton } from '@angular/material/button';
   styleUrl: './register-google-user-already-exists.component.scss'
 })
 export class RegisterGoogleUserAlreadyExistsComponent {
-  constructor(private configService: ConfigService) {}
+  private configService = inject(ConfigService);
 
   public socialSignIn(socialPlatform: string) {
     window.location.href = `${this.configService.getContextPath()}/api/google-login`;
