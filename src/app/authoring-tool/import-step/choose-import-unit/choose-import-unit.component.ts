@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -16,18 +16,16 @@ import { AddStepTarget } from '../../../domain/addStepTarget';
   templateUrl: './choose-import-unit.component.html'
 })
 export class ChooseImportUnitComponent {
+  private configService = inject(ConfigService);
+  private projectLibraryService = inject(ProjectLibraryService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected importType: 'step' | 'component';
   protected libraryProjects: any[];
   protected myProjects: any[];
   private subscriptions: Subscription = new Subscription();
   protected target: AddStepTarget;
-
-  constructor(
-    private configService: ConfigService,
-    private projectLibraryService: ProjectLibraryService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.importType = history.state.importType;

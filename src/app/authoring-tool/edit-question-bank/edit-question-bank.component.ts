@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,12 +27,12 @@ import { SelectStepAndComponentComponent } from '../select-step-and-component/se
   templateUrl: './edit-question-bank.component.html'
 })
 export class EditQuestionBankComponent implements OnInit {
+  private projectService = inject(TeacherProjectService);
+
   protected allowedReferenceComponentTypes: string[] = ['MultipleChoice', 'OpenResponse'];
   @Input() componentContent: any;
   protected inputChanged: Subject<string> = new Subject<string>();
   private subscriptions: Subscription = new Subscription();
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(

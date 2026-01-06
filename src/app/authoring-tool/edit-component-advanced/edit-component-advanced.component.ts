@@ -5,8 +5,8 @@ import {
   createComponent,
   ElementRef,
   EnvironmentInjector,
-  Inject,
-  ViewChild
+  ViewChild,
+  inject
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -22,13 +22,12 @@ import { components } from '../../../assets/wise5/components/Components';
   templateUrl: './edit-component-advanced.component.html'
 })
 export class EditComponentAdvancedComponent {
+  private applicationRef = inject(ApplicationRef);
+  protected component = inject<WISEComponent>(MAT_DIALOG_DATA);
+  private injector = inject(EnvironmentInjector);
+
   @ViewChild('component') private componentElementRef: ElementRef;
   private componentRef: ComponentRef<WISEComponent>;
-  constructor(
-    private applicationRef: ApplicationRef,
-    @Inject(MAT_DIALOG_DATA) protected component: WISEComponent,
-    private injector: EnvironmentInjector
-  ) {}
 
   ngAfterViewInit(): void {
     this.componentRef = createComponent(components[this.component.content.type].authoringAdvanced, {

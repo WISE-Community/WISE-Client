@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ReferenceComponent } from '../../domain/referenceComponent';
 import { SelectStepComponent } from '../select-step/select-step.component';
 import { SelectComponentComponent } from '../select-component/select-component.component';
@@ -20,13 +20,13 @@ import { SelectComponentComponent } from '../select-component/select-component.c
     />`
 })
 export class SelectStepAndComponentComponent {
+  private changeDetector = inject(ChangeDetectorRef);
+
   @Input() allowedComponentTypes: string[] = [];
   @Output() componentChange: EventEmitter<ReferenceComponent> = new EventEmitter();
   @Input() referenceComponent: ReferenceComponent;
   @Output() stepChange: EventEmitter<ReferenceComponent> = new EventEmitter();
   @Input() thisComponentId: string;
-
-  constructor(private changeDetector: ChangeDetectorRef) {}
 
   protected stepChanged(nodeId: string): void {
     this.referenceComponent.nodeId = nodeId;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,6 +11,8 @@ import { ComponentContent } from '../../../assets/wise5/common/ComponentContent'
   templateUrl: './select-component.component.html'
 })
 export class SelectComponentComponent {
+  private projectService = inject(ProjectService);
+
   @Input() allowedComponentTypes: string[] = [];
   @Output() componentChangedEvent: EventEmitter<string> = new EventEmitter<string>();
   @Input() componentId: string;
@@ -18,8 +20,6 @@ export class SelectComponentComponent {
   protected componentToIsAllowed: Map<string, boolean> = new Map<string, boolean>();
   @Input() nodeId: string;
   @Input() thisComponentId: string;
-
-  constructor(private projectService: ProjectService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.nodeId) {
