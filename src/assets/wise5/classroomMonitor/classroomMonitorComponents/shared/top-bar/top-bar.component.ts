@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
@@ -32,6 +32,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private notificationService = inject(NotificationService);
+  private router = inject(Router);
+  private sessionService = inject(SessionService);
+
   protected avatarColor: any;
   protected canAuthorProject: boolean;
   protected contextPath: string;
@@ -46,14 +52,6 @@ export class TopBarComponent implements OnInit {
   protected runInfo: string;
   protected userInfo: any;
   private workgroupId: number;
-
-  constructor(
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private notificationService: NotificationService,
-    private router: Router,
-    private sessionService: SessionService
-  ) {}
 
   ngOnInit(): void {
     this.workgroupId = this.configService.getWorkgroupId();

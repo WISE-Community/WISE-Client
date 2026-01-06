@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,6 +26,8 @@ import { SaveIndicatorComponent } from '../../../../common/save-indicator/save-i
   templateUrl: './tool-bar.component.html'
 })
 export class ToolBarComponent implements OnInit {
+  private router = inject(Router);
+
   @Output() onMenuToggle: EventEmitter<any> = new EventEmitter<any>();
   protected showPeriodSelect: boolean = true;
   protected showStepTools: boolean;
@@ -33,8 +35,6 @@ export class ToolBarComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   protected viewName: string;
   @Input() workgroupId: number;
-
-  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.processUI();
