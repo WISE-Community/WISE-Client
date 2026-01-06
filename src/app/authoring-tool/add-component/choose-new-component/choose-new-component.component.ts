@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ComponentTypeButtonComponent } from '../../../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
@@ -10,12 +10,10 @@ import { ComponentTypeService } from '../../../../assets/wise5/services/componen
   templateUrl: 'choose-new-component.component.html'
 })
 export class ChooseNewComponent {
-  protected componentTypes: any[];
+  private componentTypeService = inject(ComponentTypeService);
+  private dialogRef = inject(MatDialogRef<ChooseNewComponent>);
 
-  constructor(
-    private componentTypeService: ComponentTypeService,
-    private dialogRef: MatDialogRef<ChooseNewComponent>
-  ) {}
+  protected componentTypes: any[];
 
   ngOnInit(): void {
     this.componentTypes = this.componentTypeService.getComponentTypes();

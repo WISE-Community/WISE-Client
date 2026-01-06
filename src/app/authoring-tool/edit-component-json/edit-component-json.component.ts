@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
@@ -27,17 +27,15 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: 'edit-component-json.component.html'
 })
 export class EditComponentJsonComponent {
+  private notificationService = inject(NotificationService);
+  private projectService = inject(TeacherProjectService);
+
   @Input() component: WISEComponent;
   protected componentContentJSONString: string;
   protected jsonChanged: Subject<string> = new Subject<string>();
   protected showJSONAuthoring: boolean = false;
   private subscriptions: Subscription = new Subscription();
   private validComponentContentJSONString: string;
-
-  constructor(
-    private notificationService: NotificationService,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.setComponentContentJsonString();
