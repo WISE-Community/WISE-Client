@@ -1798,7 +1798,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">134,136</context>
+          <context context-type="linenumber">136,138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3811348573063184984" datatype="html">
@@ -1885,49 +1885,49 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Thinking...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">138,143</context>
+          <context context-type="linenumber">140,145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1070556603859709137" datatype="html">
         <source>Type your message...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">148,151</context>
+          <context context-type="linenumber">150,153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8740036082299980043" datatype="html">
         <source>Send message</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">167,172</context>
+          <context context-type="linenumber">169,174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8206940638567425435" datatype="html">
         <source>Sorry, I encountered an error. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7151632936989469818" datatype="html">
         <source>New chat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5741972031757698073" datatype="html">
         <source>Are you sure you want to delete &quot;<x id="PH" equiv-text="chat.title"/>&quot;? This action cannot be undone.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">191</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7563579891417482982" datatype="html">
         <source>Enter new chat title:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
-          <context context-type="linenumber">208</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5280218112746407598" datatype="html">

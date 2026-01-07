@@ -1,4 +1,5 @@
 import { enableProdMode, inject, provideAppInitializer } from '@angular/core';
+import { provideMarkdown } from 'ngx-markdown';
 import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
@@ -47,6 +48,7 @@ bootstrapApplication(AppComponent, {
     StudentService,
     TeacherService,
     UserService,
+    provideMarkdown(),
     provideAppInitializer(() => {
       const initializerFn = initialize(inject(ConfigService), inject(UserService));
       return initializerFn();

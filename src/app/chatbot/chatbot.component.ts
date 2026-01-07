@@ -19,11 +19,13 @@ import { DataService } from '../services/data.service';
 import { Chat, ChatMessage } from './chat';
 import { AwsBedRockService } from './awsBedRock.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   imports: [
     CommonModule,
     FormsModule,
+    MarkdownComponent,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
