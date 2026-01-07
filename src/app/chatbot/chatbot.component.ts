@@ -221,7 +221,9 @@ export class ChatbotComponent {
   private scrollToBottom(): void {
     setTimeout(() => {
       const chatContent = document.querySelector('.chatbot__messages');
-      chatContent.scrollTop = chatContent.scrollHeight;
+      if (chatContent) {
+        chatContent.scrollTop = chatContent.scrollHeight;
+      }
     }, 100);
   }
 
