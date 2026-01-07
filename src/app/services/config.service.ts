@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Config } from '../domain/config';
@@ -6,12 +6,12 @@ import { Announcement } from '../domain/announcement';
 
 @Injectable()
 export class ConfigService {
+  private http = inject(HttpClient);
+
   private userConfigUrl = '/api/user/config';
   private announcementUrl = '/api/announcement';
   private config$: BehaviorSubject<Config> = new BehaviorSubject<Config>(null);
   private timeDiff: number = 0;
-
-  constructor(private http: HttpClient) {}
 
   getConfig(): Observable<Config> {
     return this.config$;
