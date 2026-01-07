@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
@@ -10,5 +10,5 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './choose-branch-path-dialog.component.html'
 })
 export class ChooseBranchPathDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) protected paths: any) {}
+  protected paths = inject(MAT_DIALOG_DATA);
 }
