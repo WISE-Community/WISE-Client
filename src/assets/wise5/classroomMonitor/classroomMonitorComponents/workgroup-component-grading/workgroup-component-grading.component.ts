@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { ComponentFactory } from '../../../common/ComponentFactory';
@@ -21,6 +21,11 @@ import { EditComponentAnnotationsComponent } from '../edit-component-annotations
   templateUrl: 'workgroup-component-grading.component.html'
 })
 export class WorkgroupComponentGradingComponent {
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private dialog = inject(MatDialog);
+  private projectService = inject(TeacherProjectService);
+
   protected component: ComponentContent;
   @Input() componentId: string;
   protected componentStates: any[];
@@ -30,13 +35,6 @@ export class WorkgroupComponentGradingComponent {
   @Input() nodeId: string;
   protected teacherWorkgroupId: number;
   @Input() workgroupId: number;
-
-  constructor(
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private dialog: MatDialog,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.teacherWorkgroupId = this.configService.getWorkgroupId();

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Node } from '../../../common/Node';
 import { WorkgroupService } from '../../../../../app/services/workgroup.service';
 import { TeacherDataService } from '../../../services/teacherDataService';
@@ -13,19 +13,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: 'component-completion.component.html'
 })
 export class ComponentCompletionComponent {
+  private componentServiceLookupService = inject(ComponentServiceLookupService);
+  private dataService = inject(TeacherDataService);
+  private statusService = inject(ClassroomStatusService);
+  private workgroupService = inject(WorkgroupService);
+
   protected completion: number;
   @Input() component: any;
   @Input() node: Node;
   protected numWorkgroupsCompleted: number;
   @Input() periodId: number;
   protected workgroups: Map<number, any>;
-
-  constructor(
-    private componentServiceLookupService: ComponentServiceLookupService,
-    private dataService: TeacherDataService,
-    private statusService: ClassroomStatusService,
-    private workgroupService: WorkgroupService
-  ) {}
 
   ngOnChanges(): void {
     if (this.component && this.node) {

@@ -1,4 +1,4 @@
-import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
+import { Component, Input, LOCALE_ID, inject } from '@angular/core';
 import { formatNumber } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -15,12 +15,12 @@ import { MatIconModule } from '@angular/material/icon';
   `
 })
 export class NavItemScoreComponent {
+  private locale = inject(LOCALE_ID);
+
   @Input() averageScore: number | string;
   protected averageScoreDisplay: string = '';
   @Input() maxScore: number;
   protected showScore: boolean;
-
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
 
   ngOnChanges(): void {
     if (typeof this.maxScore === 'number' || typeof this.averageScore === 'number') {

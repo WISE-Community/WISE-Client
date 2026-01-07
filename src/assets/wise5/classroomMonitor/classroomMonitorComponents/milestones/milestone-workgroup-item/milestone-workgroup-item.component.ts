@@ -7,7 +7,8 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
+  inject
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { copy } from '../../../../common/object/object';
@@ -37,6 +38,9 @@ import { WorkgroupComponentGradingComponent } from '../../workgroup-component-gr
   templateUrl: './milestone-workgroup-item.component.html'
 })
 export class MilestoneWorkgroupItemComponent implements OnInit {
+  protected componentTypeService = inject(ComponentTypeService);
+  protected projectService = inject(TeacherProjectService);
+
   changeInScore: number | '-';
   @Input() componentId: string;
   components: any[] = [];
@@ -63,11 +67,6 @@ export class MilestoneWorkgroupItemComponent implements OnInit {
   subscriptions: Subscription = new Subscription();
   @Input() workgroupId: number;
   @Input() workgroupData: any;
-
-  constructor(
-    protected componentTypeService: ComponentTypeService,
-    protected projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.initLastLocation();

@@ -6,7 +6,8 @@ import {
   EnvironmentInjector,
   Input,
   ViewChild,
-  createComponent
+  createComponent,
+  inject
 } from '@angular/core';
 import { components } from '../../components/Components';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -16,6 +17,10 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
   template: '<div #component></div>'
 })
 export class ComponentGradingComponent {
+  private applicationRef = inject(ApplicationRef);
+  private injector = inject(EnvironmentInjector);
+  private projectService = inject(TeacherProjectService);
+
   @ViewChild('component') private componentElementRef: ElementRef;
   @Input() private componentId: string;
   private componentRef: ComponentRef<any>;
@@ -23,12 +28,6 @@ export class ComponentGradingComponent {
   @Input() private isRevision: boolean;
   @Input() private nodeId: string;
   @Input() private workgroupId: number;
-
-  constructor(
-    private applicationRef: ApplicationRef,
-    private injector: EnvironmentInjector,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngAfterViewInit(): void {
     const componentContent = this.projectService.getComponent(this.nodeId, this.componentId);

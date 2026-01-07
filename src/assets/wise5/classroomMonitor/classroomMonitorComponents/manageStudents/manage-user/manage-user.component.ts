@@ -1,5 +1,5 @@
 import { ChangeStudentPasswordDialogComponent } from '../change-student-password-dialog/change-student-password-dialog.component';
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation, inject } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 import { HttpClient } from '@angular/common/http';
 import { ManageShowStudentInfoComponent } from '../manage-show-student-info/manage-show-student-info.component';
@@ -18,15 +18,13 @@ import { ShowStudentInfoComponent } from '../show-student-info/show-student-info
   templateUrl: 'manage-user.component.html'
 })
 export class ManageUserComponent {
+  private dialog = inject(MatDialog);
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
+  private snackBar = inject(MatSnackBar);
+
   @Input() user: any;
   @Output() removeUserEvent: EventEmitter<any> = new EventEmitter<any>();
-
-  constructor(
-    private dialog: MatDialog,
-    private configService: ConfigService,
-    private http: HttpClient,
-    private snackBar: MatSnackBar
-  ) {}
 
   protected viewUserInfo(event: Event): void {
     this.openDialog(event, ManageShowStudentInfoComponent);

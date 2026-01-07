@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -41,6 +41,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './nav-item.component.html'
 })
 export class NavItemComponent implements OnInit {
+  private annotationService = inject(AnnotationService);
+  private classroomStatusService = inject(ClassroomStatusService);
+  private dataService = inject(TeacherDataService);
+  private nodeService = inject(NodeService);
+  private notificationService = inject(NotificationService);
+  private projectService = inject(TeacherProjectService);
+  private snackBar = inject(MatSnackBar);
+  private webSocketService = inject(TeacherWebSocketService);
+
   protected alertIconClass: string;
   protected alertIconLabel: string;
   protected alertIconName: string;
@@ -65,17 +74,6 @@ export class NavItemComponent implements OnInit {
   protected rubricIconName: string;
   private subscriptions: Subscription = new Subscription();
   @Input() type: string;
-
-  constructor(
-    private annotationService: AnnotationService,
-    private classroomStatusService: ClassroomStatusService,
-    private dataService: TeacherDataService,
-    private nodeService: NodeService,
-    private notificationService: NotificationService,
-    private projectService: TeacherProjectService,
-    private snackBar: MatSnackBar,
-    private webSocketService: TeacherWebSocketService
-  ) {}
 
   ngOnInit(): void {
     this.item = this.projectService.idToNode[this.nodeId];

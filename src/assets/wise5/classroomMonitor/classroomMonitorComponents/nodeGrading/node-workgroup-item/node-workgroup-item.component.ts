@@ -4,7 +4,8 @@ import {
   Input,
   Output,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
+  inject
 } from '@angular/core';
 import { calculateComponentVisibility } from '../../shared/grading-helpers/grading-helpers';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
@@ -39,6 +40,10 @@ import { AnnotationService } from '../../../../services/annotationService';
   templateUrl: './node-workgroup-item.component.html'
 })
 export class NodeWorkgroupItemComponent {
+  private annotationService = inject(AnnotationService);
+  private componentTypeService = inject(ComponentTypeService);
+  private projectService = inject(TeacherProjectService);
+
   private componentIdToHasWork: { [componentId: string]: boolean } = {};
   protected componentIdToIsVisible: { [componentId: string]: boolean } = {};
   @Input() components: ComponentContent[] = [];
@@ -56,12 +61,6 @@ export class NodeWorkgroupItemComponent {
   protected statusText: string = '';
   private subscriptions: Subscription = new Subscription();
   @Input() workgroup: any;
-
-  constructor(
-    private annotationService: AnnotationService,
-    private componentTypeService: ComponentTypeService,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.updateNode();

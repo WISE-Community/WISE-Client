@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation, inject } from '@angular/core';
 import { NotebookService } from '../../../../services/notebookService';
 import { MatButton } from '@angular/material/button';
 import { NgClass, DatePipe } from '@angular/common';
@@ -24,6 +24,8 @@ import { NotebookReportComponent } from '../../../../../../app/notebook/notebook
   templateUrl: './notebook-workgroup-grading.component.html'
 })
 export class NotebookWorkgroupGradingComponent implements OnInit {
+  private notebookService = inject(NotebookService);
+
   @Input() expand: boolean;
   maxScore: number;
   notebook: any;
@@ -34,8 +36,6 @@ export class NotebookWorkgroupGradingComponent implements OnInit {
   reportHasWork: boolean;
   @Input() reportTitle: string;
   @Input() workgroup: any;
-
-  constructor(private notebookService: NotebookService) {}
 
   ngOnInit(): void {
     if (this.reportEnabled) {

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigService } from '../../../../services/configService';
 import {
@@ -34,18 +34,16 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './add-team-dialog.component.html'
 })
 export class AddTeamDialogComponent {
+  protected dialog = inject(MatDialog);
+  private configService = inject(ConfigService);
+  period = inject(MAT_DIALOG_DATA);
+  private snackBar = inject(MatSnackBar);
+  private workgroupService = inject(WorkgroupService);
+
   allUsersInPeriod: any[] = [];
   initialTeamMembers: any[] = [];
   isProcessing: boolean;
   isAnyUnassignedStudent: boolean;
-
-  constructor(
-    protected dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public period: any,
-    private configService: ConfigService,
-    private snackBar: MatSnackBar,
-    private workgroupService: WorkgroupService
-  ) {}
 
   ngOnInit(): void {
     this.allUsersInPeriod = this.configService

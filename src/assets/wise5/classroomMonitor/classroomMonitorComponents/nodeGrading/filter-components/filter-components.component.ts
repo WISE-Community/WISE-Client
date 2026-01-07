@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,14 +15,14 @@ import { ComponentContent } from '../../../../common/ComponentContent';
   encapsulation: ViewEncapsulation.None
 })
 export class FilterComponentsComponent {
+  private componentTypeService = inject(ComponentTypeService);
+
   @Input() components: ComponentContent[];
   @Output() componentsChange: EventEmitter<ComponentContent[]> = new EventEmitter<
     ComponentContent[]
   >();
   protected selectedComponents: ComponentContent[];
   protected selectedText: string;
-
-  constructor(private componentTypeService: ComponentTypeService) {}
 
   ngOnChanges(): void {
     this.selectedComponents = this.components;

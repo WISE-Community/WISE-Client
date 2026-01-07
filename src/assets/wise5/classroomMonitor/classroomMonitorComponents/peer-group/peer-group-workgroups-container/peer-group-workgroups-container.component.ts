@@ -1,14 +1,14 @@
 import { CdkDragDrop, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
-import { Directive, EventEmitter, OnInit, Output } from '@angular/core';
+import { Directive, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PeerGroupMoveWorkgroupConfirmDialogComponent } from '../peer-group-move-workgroup-confirm-dialog/peer-group-move-workgroup-confirm-dialog.component';
 
 @Directive()
 export abstract class PeerGroupWorkgroupsContainerComponent implements OnInit {
+  protected dialog = inject(MatDialog);
+
   @Output()
   moveWorkgroup: EventEmitter<any> = new EventEmitter<any>();
-
-  constructor(protected dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
