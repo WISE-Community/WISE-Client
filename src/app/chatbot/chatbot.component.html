@@ -7,19 +7,20 @@
     (click)="toggleCollapse()"
   >
     <mat-card-title class="mat-body-2 overflow--ellipsis !flex justify-start items-center gap-1">
-      <mat-icon>smart_toy</mat-icon>
+      <mat-icon>auto_awesome</mat-icon>
       <span i18n>AI Assistant</span>
     </mat-card-title>
     <span class="flex-grow"></span>
     @if (!collapsed && currentChat) {
       <button
-        mat-button
+        matIconButton
         [matMenuTriggerFor]="chatMenu"
-        class="chatbot__chat-selector"
         (click)="$event.stopPropagation()"
+        matTooltip="Conversation history"
+        matTooltipPosition="above"
+        i18n-matTooltip
       >
-        <span class="chatbot__chat-title">{{ currentChat.title }}</span>
-        <mat-icon>arrow_drop_down</mat-icon>
+        <mat-icon>history</mat-icon>
       </button>
       <mat-menu #chatMenu="matMenu">
         <button mat-menu-item (click)="createNewChat()">
@@ -37,20 +38,20 @@
               <span class="chatbot__chat-item-title">{{ chat.title }}</span>
               <div class="chatbot__chat-actions">
                 <button
-                  mat-icon-button
-                  class="chatbot__edit-chat"
+                  matIconButton
                   (click)="editChatTitle(chat, $event)"
                   i18n-matTooltip
                   matTooltip="Edit title"
+                  matTooltipPosition="above"
                 >
                   <mat-icon>edit</mat-icon>
                 </button>
                 <button
-                  mat-icon-button
-                  class="chatbot__delete-chat"
+                  matIconButton
                   (click)="deleteChat(chat, $event)"
                   i18n-matTooltip
                   matTooltip="Delete chat"
+                  matTooltipPosition="above"
                 >
                   <mat-icon>delete</mat-icon>
                 </button>
@@ -61,7 +62,7 @@
       </mat-menu>
     }
     <button
-      mat-icon-button
+      matIconButton
       class="hidden sm:!inline-block"
       i18n-title
       title="Toggle Full Screen"
@@ -76,7 +77,7 @@
     </button>
     @if (!collapsed) {
       <button
-        mat-icon-button
+        matIconButton
         i18n-title
         title="Collapse"
         (click)="$event.stopPropagation(); toggleCollapse()"
@@ -85,7 +86,7 @@
       </button>
     } @else {
       <button
-        mat-icon-button
+        matIconButton
         i18n-title
         title="Restore"
         (click)="$event.stopPropagation(); toggleCollapse()"
@@ -96,35 +97,44 @@
   </mat-card-header>
 
   <mat-card-content [class.hidden]="collapsed" class="flex-grow flex flex-col">
-    <div class="chatbot__messages flex-grow">
+    <div class="chatbot__messages">
       @if (messages.length === 0) {
         <div class="chatbot__empty-state">
           <mat-icon class="chatbot__empty-icon">chat_bubble_outline</mat-icon>
           <p i18n>Start a conversation with the AI assistant!</p>
           <p class="text-sm text-gray-500" i18n>
-            Ask questions about your work, get help with concepts, or discuss ideas.
+            Ask questions about your work, get help, or discuss ideas.
           </p>
         </div>
       }
       @for (message of messages; track $index) {
         @if (message.role !== 'system') {
-          <div
-            class="chatbot__message"
-            [ngClass]="{
-              'chatbot__message--user': message.role === 'user',
-              'chatbot__message--assistant': message.role === 'assistant'
-            }"
-          >
-            <div class="chatbot__message-header">
+          <div class="chatbot__message">
+            <div
+              class="chatbot__message-header"
+              [ngClass]="{ 'justify-end': message.role === 'user' }"
+            >
               <mat-icon class="chatbot__message-icon">
-                {{ message.role === 'user' ? 'person' : 'smart_toy' }}
+                {{ message.role === 'user' ? 'person' : 'auto_awesome' }}
               </mat-icon>
               <span class="chatbot__message-role">
-                {{ message.role === 'user' ? 'You' : 'AI Assistant' }}
+                @if (message.role === 'user') {
+                  <span i18n>You</span>
+                } @else {
+                  <span i18n>Assistant</span>
+                }
               </span>
             </div>
-            <div class="chatbot__message-content">
-              <markdown [data]="message.content"></markdown>
+            <div class="flex" [ngClass]="{ 'justify-end': message.role === 'user' }">
+              <div
+                class="chatbot__message-content"
+                [ngClass]="{
+                  'selected-bg-bg': message.role === 'user',
+                  'notice-bg-bg': message.role === 'assistant'
+                }"
+              >
+                <markdown [data]="message.content"></markdown>
+              </div>
             </div>
           </div>
         }
@@ -132,8 +142,8 @@
       @if (loading) {
         <div class="chatbot__message chatbot__message--assistant">
           <div class="chatbot__message-header">
-            <mat-icon class="chatbot__message-icon">smart_toy</mat-icon>
-            <span class="chatbot__message-role" i18n>AI Assistant</span>
+            <mat-icon class="chatbot__message-icon">auto_awesome</mat-icon>
+            <span class="chatbot__message-role" i18n>Assistant</span>
           </div>
           <div class="chatbot__message-content">
             <mat-spinner diameter="20"></mat-spinner>
@@ -146,17 +156,15 @@
 
   <mat-card-actions [class.hidden]="collapsed">
     <div class="chatbot__input-container">
-      <mat-form-field class="chatbot__input-field" appearance="outline">
+      <mat-form-field class="chatbot__input-field" subscriptSizing="dynamic">
         <mat-label i18n>Type your message...</mat-label>
         <textarea
           matInput
           [(ngModel)]="userInput"
           (keypress)="handleKeyPress($event)"
           [disabled]="loading"
-          rows="2"
           cdkTextareaAutosize
-          cdkAutosizeMinRows="1"
-          cdkAutosizeMaxRows="4"
+          cdkAutosizeMaxRows="3"
         ></textarea>
       </mat-form-field>
       <button

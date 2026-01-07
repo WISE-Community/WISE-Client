@@ -42,23 +42,20 @@ $width-collapsed: 300px !default;
 }
 
 .mat-mdc-card-content {
-  padding: 0;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .mat-mdc-card-actions {
   padding: 8px;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  min-height: auto;
 }
 
 .chatbot__messages {
-  overflow-y: auto;
-  padding: 16px;
+  margin: 16px auto;
   min-height: 300px;
-  max-height: calc(#{$height} - 200px);
 
   .full & {
-    max-height: calc(100vh - 200px);
+    max-width: 1200px;
   }
 }
 
@@ -84,20 +81,6 @@ $width-collapsed: 300px !default;
 .chatbot__message {
   margin-bottom: 16px;
   animation: fadeIn 0.3s ease-in;
-
-  &--user {
-    .chatbot__message-content {
-      background-color: #e3f2fd;
-      margin-left: auto;
-      margin-right: 0;
-    }
-  }
-
-  &--assistant {
-    .chatbot__message-content {
-      background-color: #f5f5f5;
-    }
-  }
 }
 
 .chatbot__message-header {
@@ -107,6 +90,10 @@ $width-collapsed: 300px !default;
   margin-bottom: 4px;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.6);
+
+  .chatbot__message--user & {
+    justify-content: flex-end;
+  }
 }
 
 .chatbot__message-icon {
@@ -122,10 +109,6 @@ $width-collapsed: 300px !default;
 .chatbot__message-content {
   padding: 12px;
   border-radius: 8px;
-  max-width: 85%;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  line-height: 1.5;
 
   mat-spinner {
     display: inline-block;
@@ -134,12 +117,44 @@ $width-collapsed: 300px !default;
   }
 }
 
+markdown::ng-deep {
+  p, ul, ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  ul, ol {
+    list-style-type: disc;
+    margin-inline-start: 24px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  ul, ol, table {
+    margin-bottom: 12px;
+  }
+
+  th, td {
+    vertical-align: top;
+    padding: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+}
+
 .chatbot__input-container {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   gap: 8px;
+  margin: 0 auto;
   width: 100%;
+
+  .full & {
+    max-width: 1200px;
+  }
 }
 
 .chatbot__input-field {
@@ -207,18 +222,6 @@ $width-collapsed: 300px !default;
     gap: 4px;
     opacity: 0;
     transition: opacity 0.2s;
-  }
-  
-  .chatbot__edit-chat,
-  .chatbot__delete-chat {
-    width: 32px;
-    height: 32px;
-    
-    mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
-    }
   }
   
   &:hover .chatbot__chat-actions {
