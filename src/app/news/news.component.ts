@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { News } from '../domain/news';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -29,15 +29,13 @@ import { DatePipe } from '@angular/common';
   templateUrl: './news.component.html'
 })
 export class NewsComponent implements OnInit {
+  private newsService = inject(NewsService);
+  protected sanitizer = inject(DomSanitizer);
+
   allNewsItems: any = [];
   showAll: boolean = false;
 
-  constructor(
-    private newsService: NewsService,
-    protected sanitizer: DomSanitizer
-  ) {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.newsService.getAllNews().subscribe((allNewsItems: News[]) => {
       this.allNewsItems = allNewsItems;
     });
