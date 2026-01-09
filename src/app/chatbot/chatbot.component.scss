@@ -189,50 +189,6 @@ markdown::ng-deep {
   }
 }
 
-.chatbot__chat-selector {
-  max-width: 200px;
-  text-transform: none;
-  font-size: 14px;
-  
-  .chatbot__chat-title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 150px;
-    display: inline-block;
-  }
-}
-
-.chatbot__chat-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 8px;
-  
-  .chatbot__chat-item-title {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .chatbot__chat-actions {
-    display: flex;
-    gap: 4px;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  
-  &:hover .chatbot__chat-actions {
-    opacity: 1;
-  }
-}
-
-
-.mat-mdc-menu-item.active {
-  background-color: rgba(0, 0, 0, 0.04);
-}
 
 // Adjust positioning when notebook report is visible
 :host-context(.notes-visible) .chatbot {

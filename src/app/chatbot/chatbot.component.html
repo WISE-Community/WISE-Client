@@ -6,60 +6,34 @@
     class="dark-theme mat-app-background !flex justify-start items-center"
     (click)="toggleCollapse()"
   >
-    <mat-card-title class="mat-body-2 overflow--ellipsis !flex justify-start items-center gap-1">
-      <mat-icon>auto_awesome</mat-icon>
-      <span i18n>AI Assistant</span>
+    <mat-card-title class="mat-body-2 !flex justify-start items-center gap-1 min-w-0">
+      <mat-icon class="flex-shrink-0">auto_awesome</mat-icon>
+      @if (currentChat) {
+        <span class="overflow--ellipsis">{{ currentChat.title }}</span>
+      } @else {
+        <span class="overflow--ellipsis" i18n>AI Assistant</span>
+      }
     </mat-card-title>
     <span class="flex-grow"></span>
     @if (!collapsed && currentChat) {
       <button
         matIconButton
-        [matMenuTriggerFor]="chatMenu"
-        (click)="$event.stopPropagation()"
+        (click)="$event.stopPropagation(); createNewChat()"
+        matTooltip="New chat"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <button
+        matIconButton
+        (click)="$event.stopPropagation(); openChatHistory()"
         matTooltip="Conversation history"
         matTooltipPosition="above"
         i18n-matTooltip
       >
         <mat-icon>history</mat-icon>
       </button>
-      <mat-menu #chatMenu="matMenu">
-        <button mat-menu-item (click)="createNewChat()">
-          <mat-icon>add</mat-icon>
-          <span i18n>New Chat</span>
-        </button>
-        <mat-divider />
-        @for (chat of chats; track chat.id) {
-          <button
-            mat-menu-item
-            [class.active]="currentChat?.id === chat.id"
-            (click)="switchToChat(chat)"
-          >
-            <div class="chatbot__chat-item">
-              <span class="chatbot__chat-item-title">{{ chat.title }}</span>
-              <div class="chatbot__chat-actions">
-                <button
-                  matIconButton
-                  (click)="editChatTitle(chat, $event)"
-                  i18n-matTooltip
-                  matTooltip="Edit title"
-                  matTooltipPosition="above"
-                >
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button
-                  matIconButton
-                  (click)="deleteChat(chat, $event)"
-                  i18n-matTooltip
-                  matTooltip="Delete chat"
-                  matTooltipPosition="above"
-                >
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </div>
-          </button>
-        }
-      </mat-menu>
     }
     <button
       matIconButton

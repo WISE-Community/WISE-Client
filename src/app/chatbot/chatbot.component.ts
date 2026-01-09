@@ -8,9 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatListModule } from '@angular/material/list';
-import { MatDividerModule } from '@angular/material/divider';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { ChatbotService } from './chatbot.service';
@@ -20,6 +18,7 @@ import { Chat, ChatMessage } from './chat';
 import { AwsBedRockService } from './awsBedRock.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { MarkdownComponent } from 'ngx-markdown';
+import { ChatHistoryDialogComponent } from './chat-history-dialog.component';
 
 @Component({
   imports: [
@@ -33,9 +32,7 @@ import { MarkdownComponent } from 'ngx-markdown';
     MatInputModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    MatMenuModule,
-    MatListModule,
-    MatDividerModule
+    MatDialogModule
   ],
   selector: 'chatbot',
   styleUrl: 'chatbot.component.scss',
@@ -48,6 +45,7 @@ export class ChatbotComponent {
   private configService: ConfigService = inject(ConfigService);
   private dataService: DataService = inject(DataService);
   private projectService = inject(ProjectService);
+  private dialog = inject(MatDialog);
 
   @Input() config: any;
   protected collapsed: boolean = true;
@@ -186,36 +184,26 @@ export class ChatbotComponent {
     this.scrollToBottom();
   }
 
-  protected async deleteChat(chat: Chat, event: Event): Promise<void> {
-    event.stopPropagation();
-    const msg = $localize`Are you sure you want to delete "${chat.title}"? This action cannot be undone.`;
-    if (!confirm(msg)) {
-      return;
-    }
-    await this.chatbotService.deleteChat(this.runId, this.workgroupId, chat.id);
-    const chatIndex = this.chats.findIndex((c) => c.id === chat.id);
-    this.chats.splice(chatIndex, 1);
-    // If we deleted the current chat, switch to another one or create a new one
-    if (this.currentChat?.id === chat.id) {
-      if (this.chats.length > 0) {
-        this.switchToChat(this.chats[chatIndex] || this.chats[this.chats.length - 1]);
-      } else {
-        this.createNewChat();
+  protected openChatHistory(): void {
+    const dialogRef = this.dialog.open(ChatHistoryDialogComponent, {
+      disableClose: true,
+      width: '600px',
+      maxWidth: '90vw',
+      data: {
+        chats: this.chats,
+        currentChatId: this.currentChat?.id || null,
+        runId: this.runId,
+        workgroupId: this.workgroupId
       }
-    }
-  }
+    });
 
-  protected editChatTitle(chat: Chat, event: Event): void {
-    event.stopPropagation();
-    const newTitle = prompt($localize`Enter new chat title:`, chat.title);
-    if (newTitle && newTitle.trim() && newTitle !== chat.title) {
-      chat.title = newTitle.trim();
-      this.chatbotService.updateChat(this.runId, this.workgroupId, chat);
-      // Update current chat reference if it's the one being edited
-      if (this.currentChat?.id === chat.id) {
-        this.currentChat = chat;
+    dialogRef.afterClosed().subscribe((chat: Chat | undefined) => {
+      if (!chat) {
+        this.createNewChat();
+      } else {
+        this.switchToChat(chat);
       }
-    }
+    });
   }
 
   private scrollToBottom(): void {
