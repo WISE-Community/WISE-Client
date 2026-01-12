@@ -199,7 +199,11 @@ export class ChatbotComponent {
 
     dialogRef.afterClosed().subscribe((chat: Chat | undefined) => {
       if (!chat) {
-        this.createNewChat();
+        if (this.chats.length === 0) {
+          this.createNewChat();
+        } else {
+          this.switchToChat(this.getLastEditedChat());
+        }
       } else {
         this.switchToChat(chat);
       }
