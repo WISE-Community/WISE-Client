@@ -279,7 +279,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
-          <context context-type="linenumber">89,92</context>
+          <context context-type="linenumber">87,90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
@@ -413,7 +413,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
-          <context context-type="linenumber">37,39</context>
+          <context context-type="linenumber">36,38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
@@ -1802,21 +1802,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Conversation History</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
-          <context context-type="linenumber">3,6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3385369590791558584" datatype="html">
-        <source>No conversations yet</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
-          <context context-type="linenumber">9,13</context>
+          <context context-type="linenumber">1,4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3768927257183755959" datatype="html">
         <source>Save</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
-          <context context-type="linenumber">33,35</context>
+          <context context-type="linenumber">27,29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
@@ -1843,18 +1836,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">36,40</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2634265024545519524" datatype="html">
+        <source>(current)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">48,51</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2154216727411550160" datatype="html">
         <source>message</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
-          <context context-type="linenumber">52,54</context>
+          <context context-type="linenumber">54,57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4101852533995361725" datatype="html">
         <source>messages</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
-          <context context-type="linenumber">54,58</context>
+          <context context-type="linenumber">56,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1133994986091402323" datatype="html">
@@ -1910,14 +1910,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>AI Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">14,17</context>
+          <context context-type="linenumber">11,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7151632936989469818" datatype="html">
         <source>New chat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">22,26</context>
+          <context context-type="linenumber">18,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
@@ -1928,14 +1928,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Conversation history</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">31,35</context>
+          <context context-type="linenumber">28,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1722217323196779055" datatype="html">
         <source>Toggle Full Screen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">42,45</context>
+          <context context-type="linenumber">40,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
@@ -1946,7 +1946,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Collapse</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">56,59</context>
+          <context context-type="linenumber">54,57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
@@ -1957,7 +1957,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Restore</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
@@ -1980,53 +1980,53 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Start a conversation with the AI assistant!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">78,80</context>
+          <context context-type="linenumber">76,78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3676413537605247674" datatype="html">
         <source> Ask questions about your work, get help, or discuss ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">80,84</context>
+          <context context-type="linenumber">78,82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="720557322859638078" datatype="html">
         <source>You</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">96,98</context>
+          <context context-type="linenumber">94,96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4361487192183535591" datatype="html">
         <source>Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">98,102</context>
+          <context context-type="linenumber">96,100</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">120,123</context>
+          <context context-type="linenumber">118,121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8763211465841977542" datatype="html">
         <source>Thinking...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">124,129</context>
+          <context context-type="linenumber">122,127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1070556603859709137" datatype="html">
         <source>Type your message...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">134,137</context>
+          <context context-type="linenumber">132,135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8740036082299980043" datatype="html">
         <source>Send message</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">151,156</context>
+          <context context-type="linenumber">149,154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8206940638567425435" datatype="html">
