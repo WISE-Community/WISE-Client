@@ -1,88 +1,86 @@
-<h2 mat-dialog-title>
-  <mat-icon class="align-middle mr-2">history</mat-icon>
-  <span i18n>Conversation History</span>
-</h2>
-<mat-dialog-content class="chat-history-dialog">
-  @if (data.chats.length === 0) {
-    <div class="empty-state">
-      <mat-icon class="empty-icon">chat_bubble_outline</mat-icon>
-      <p i18n>No conversations yet</p>
-    </div>
-  } @else {
-    <mat-list>
-      @for (chat of data.chats; track chat.id) {
-        <mat-list-item class="chat-item" [class.active]="data.currentChatId === chat.id">
-          @if (editingChatId === chat.id) {
-            <div class="edit-mode">
-              <mat-form-field class="flex-grow" subscriptSizing="dynamic">
-                <input
-                  matInput
-                  [(ngModel)]="editingTitle"
-                  (keypress)="handleEditKeyPress($event, chat)"
-                  [placeholder]="$any('Chat title')"
-                  i18n-placeholder
-                  autofocus
-                />
-              </mat-form-field>
-              <button
-                mat-icon-button
-                color="primary"
-                (click)="saveEdit(chat)"
-                [disabled]="!editingTitle.trim()"
-                matTooltip="Save"
-                i18n-matTooltip
-              >
-                <mat-icon>check</mat-icon>
-              </button>
-              <button mat-icon-button (click)="cancelEdit()" matTooltip="Cancel" i18n-matTooltip>
-                <mat-icon>close</mat-icon>
-              </button>
-            </div>
-          } @else {
-            <div class="chat-item-content" (click)="switchToChat(chat)">
-              <div class="chat-item-title">
-                <mat-icon class="chat-icon">chat</mat-icon>
-                <span>{{ chat.title }}</span>
-              </div>
-              <div class="chat-item-meta">
-                <span class="chat-date">{{ formatDate(chat.lastUpdated) }}</span>
-                <span class="chat-message-count">
-                  {{ getMessageCount(chat) }}
-                  @if (getMessageCount(chat) === 1) {
-                    <span i18n>message</span>
-                  } @else {
-                    <span i18n>messages</span>
-                  }
-                </span>
-              </div>
-            </div>
-            <div class="chat-item-actions">
-              <button
-                mat-icon-button
-                (click)="$event.stopPropagation(); startEdit(chat)"
-                matTooltip="Edit title"
-                i18n-matTooltip
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button
-                mat-icon-button
-                color="warn"
-                (click)="$event.stopPropagation(); deleteChat(chat)"
-                matTooltip="Delete chat"
-                i18n-matTooltip
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          }
-        </mat-list-item>
-        @if (!$last) {
-          <mat-divider />
-        }
+<h2 matDialogTitle i18n>Conversation History</h2>
+<mat-dialog-content class="!p-0">
+  <mat-action-list class="!p-0">
+    <mat-divider />
+    @for (chat of data.chats; track chat.id) {
+      @if (editingChatId === chat.id) {
+        <button mat-list-item>
+          <div matListItemLine class="!flex !flex-grow items-center h-full">
+            <mat-form-field class="flex-grow" subscriptSizing="dynamic">
+              <input
+                matInput
+                [(ngModel)]="editingTitle"
+                (keypress)="handleEditKeyPress($event, chat)"
+                [placeholder]="$any('Chat title')"
+                i18n-placeholder
+                autofocus
+              />
+            </mat-form-field>
+          </div>
+          <span matListItemLine></span>
+          <div matListItemMeta>
+            <button
+              matIconButton
+              (click)="saveEdit(chat)"
+              [disabled]="!editingTitle.trim()"
+              matTooltip="Save"
+              i18n-matTooltip
+              matTooltipPosition="above"
+            >
+              <mat-icon>check</mat-icon>
+            </button>
+            <button
+              matIconButton
+              (click)="cancelEdit()"
+              matTooltip="Cancel"
+              i18n-matTooltip
+              matTooltipPosition="above"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </button>
+      } @else {
+        <button mat-list-item (click)="switchToChat(chat)">
+          <span matListItemTitle
+            >{{ chat.title }}
+            @if (data.currentChatId === chat.id) {
+              <span class="mat-caption" i18n>(current)</span>
+            }
+          </span>
+          <span class="mat-caption"
+            >{{ formatDate(chat.lastUpdated) }}, {{ getMessageCount(chat) }}
+            @if (getMessageCount(chat) === 1) {
+              <span i18n>message</span>
+            } @else {
+              <span i18n>messages</span>
+            }
+          </span>
+          <div matListItemMeta>
+            <button
+              matIconButton
+              (click)="$event.stopPropagation(); startEdit(chat)"
+              matTooltip="Edit title"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              matIconButton
+              (click)="$event.stopPropagation(); deleteChat(chat)"
+              matTooltip="Delete chat"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </button>
       }
-    </mat-list>
-  }
+      <mat-divider />
+    }
+  </mat-action-list>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()">

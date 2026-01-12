@@ -186,15 +186,13 @@ export class ChatbotComponent {
 
   protected openChatHistory(): void {
     const dialogRef = this.dialog.open(ChatHistoryDialogComponent, {
-      disableClose: true,
-      width: '600px',
-      maxWidth: '90vw',
       data: {
         chats: this.chats,
         currentChatId: this.currentChat?.id || null,
         runId: this.runId,
         workgroupId: this.workgroupId
-      }
+      },
+      panelClass: 'dialog-sm'
     });
 
     dialogRef.afterClosed().subscribe((chat: Chat | undefined) => {

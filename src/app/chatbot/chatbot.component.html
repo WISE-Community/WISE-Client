@@ -8,11 +8,7 @@
   >
     <mat-card-title class="mat-body-2 !flex justify-start items-center gap-1 min-w-0">
       <mat-icon class="flex-shrink-0">auto_awesome</mat-icon>
-      @if (currentChat) {
-        <span class="overflow--ellipsis">{{ currentChat.title }}</span>
-      } @else {
-        <span class="overflow--ellipsis" i18n>AI Assistant</span>
-      }
+      <span i18n>AI Assistant</span>
     </mat-card-title>
     <span class="flex-grow"></span>
     @if (!collapsed && currentChat) {
@@ -25,15 +21,17 @@
       >
         <mat-icon>add</mat-icon>
       </button>
-      <button
-        matIconButton
-        (click)="$event.stopPropagation(); openChatHistory()"
-        matTooltip="Conversation history"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>history</mat-icon>
-      </button>
+      @if (this.chats.length > 1) {
+        <button
+          matIconButton
+          (click)="$event.stopPropagation(); openChatHistory()"
+          matTooltip="Conversation history"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>history</mat-icon>
+        </button>
+      }
     }
     <button
       matIconButton
