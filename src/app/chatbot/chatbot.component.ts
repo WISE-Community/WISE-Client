@@ -136,6 +136,9 @@ export class ChatbotComponent {
         new ChatMessage('assistant', response, this.dataService.getCurrentNode().id)
       );
       this.currentChat.messages = [...this.messages];
+      if (this.messages.filter((m) => m.role === 'user').length === 1) {
+        await this.generateAndSetChatTitle(this.messages.find((m) => m.role === 'user'));
+      }
       await this.chatbotService.updateChat(this.runId, this.workgroupId, this.currentChat);
     } catch (error) {
       this.messages.push(
@@ -152,30 +155,33 @@ export class ChatbotComponent {
   }
 
   protected async createNewChat(): Promise<void> {
-    const newChat = await this.chatbotService.createChat(
+    await this.chatbotService.createChat(
       this.runId,
       this.workgroupId,
       this.dataService.getCurrentNode().id,
-      this.projectService.getProject().chatbot.systemPrompt,
-      this.getNewChatTitle()
+      this.projectService.getProject().chatbot.systemPrompt
     );
-    this.chatbotService
-      .getChats(this.runId, this.workgroupId)
-      .subscribe((chats) => (this.chats = chats));
-    this.switchToChat(newChat);
+    this.chatbotService.getChats(this.runId, this.workgroupId).subscribe((chats) => {
+      this.chats = chats;
+      this.switchToChat(this.getLastEditedChat());
+    });
   }
 
-  private getNewChatTitle(): string {
-    const newChatTitlePrefix = $localize`New chat`;
-    // Find the highest chat number in title
-    const chatsWithNumInTitle = this.chats
-      .map((chat) => {
-        const match = chat.title.match(new RegExp(`^${newChatTitlePrefix} (\\d+)$`));
-        return match ? parseInt(match[1], 10) : 0;
-      })
-      .filter((num) => num > 0);
-    const nextNum = chatsWithNumInTitle.length > 0 ? Math.max(...chatsWithNumInTitle) + 1 : 1;
-    return `${newChatTitlePrefix} ${nextNum}`;
+  /**
+   * Generates a title for the current chat based on the first user message
+   * and updates the current chat title.
+   */
+  private async generateAndSetChatTitle(firstUserMessage: ChatMessage): Promise<void> {
+    try {
+      let newTitle = await this.awsBedRockService.generateChatTitle(firstUserMessage.content);
+      // Remove surrounding quotes if any
+      newTitle = newTitle.replace(/^["'](.*)["']$/, '$1').trim();
+      if (newTitle) {
+        this.currentChat.title = newTitle;
+      }
+    } catch (error) {
+      console.error('Error generating chat title:', error);
+    }
   }
 
   protected switchToChat(chat: Chat): void {

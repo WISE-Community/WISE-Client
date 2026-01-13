@@ -25,9 +25,9 @@ describe('ChatbotComponent', () => {
   const nodeId = 'node1';
   const systemPrompt = 'You are a helpful assistant.';
 
-  const createMockChat = (id: string, title: string, messages: ChatMessage[] = []): Chat => ({
+  const createMockChat = (id: string, messages: ChatMessage[] = []): Chat => ({
     id,
-    title,
+    title: '',
     messages,
     createdAt: new Date('2026-01-01'),
     lastUpdated: new Date('2026-01-01'),
@@ -41,7 +41,10 @@ describe('ChatbotComponent', () => {
       'updateChat',
       'deleteChat'
     ]);
-    const awsBedRockServiceSpy = jasmine.createSpyObj('AwsBedRockService', ['sendMessage']);
+    const awsBedRockServiceSpy = jasmine.createSpyObj('AwsBedRockService', [
+      'sendMessage',
+      'generateChatTitle'
+    ]);
     const configServiceSpy = jasmine.createSpyObj('ConfigService', ['getRunId', 'getWorkgroupId']);
     const dataServiceSpy = jasmine.createSpyObj('DataService', ['getCurrentNode']);
     const projectServiceSpy = jasmine.createSpyObj('ProjectService', ['getProject']);
@@ -85,16 +88,16 @@ describe('ChatbotComponent', () => {
 
   it('should create', () => {
     chatbotService.getChats.and.returnValue(of([]));
-    chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1', 'New chat 1')));
+    chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1')));
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   describe('ngOnInit', () => {
     it('should load existing chats and select the last edited one', () => {
-      const chat1 = createMockChat('1', 'Chat 1');
+      const chat1 = createMockChat('1');
       chat1.lastUpdated = new Date('2026-01-01');
-      const chat2 = createMockChat('2', 'Chat 2');
+      const chat2 = createMockChat('2');
       chat2.lastUpdated = new Date('2026-01-02');
       const chats = [chat1, chat2];
 
@@ -105,17 +108,6 @@ describe('ChatbotComponent', () => {
       expect(component['chats']).toEqual(chats);
       expect(component['currentChat']).toEqual(chat2);
       expect(component['messages']).toEqual(chat2.messages);
-    });
-
-    it('should create a new chat if no chats exist', async () => {
-      const newChat = createMockChat('1', 'New chat 1');
-      chatbotService.getChats.and.returnValue(of([]));
-      chatbotService.createChat.and.returnValue(Promise.resolve(newChat));
-
-      fixture.detectChanges();
-      await fixture.whenStable();
-
-      expect(chatbotService.createChat).toHaveBeenCalled();
     });
 
     it('should handle error when loading chats', () => {
@@ -130,7 +122,7 @@ describe('ChatbotComponent', () => {
 
   describe('sendMessage', () => {
     beforeEach(() => {
-      const chat = createMockChat('1', 'Chat 1');
+      const chat = createMockChat('1');
       chatbotService.getChats.and.returnValue(of([chat]));
       chatbotService.updateChat.and.returnValue(Promise.resolve(chat));
       fixture.detectChanges();
@@ -143,7 +135,7 @@ describe('ChatbotComponent', () => {
       component['userInput'] = userMessage;
 
       awsBedRockService.sendMessage.and.returnValue(Promise.resolve(assistantResponse));
-
+      awsBedRockService.generateChatTitle.and.returnValue(Promise.resolve('New Title'));
       await component['sendMessage']();
 
       expect(component['messages'].length).toBe(2);
@@ -153,6 +145,24 @@ describe('ChatbotComponent', () => {
       expect(component['messages'][1].content).toBe(assistantResponse);
       expect(component['userInput']).toBe('');
       expect(component['loading']).toBe(false);
+      expect(chatbotService.updateChat).toHaveBeenCalled();
+    });
+
+    it('should generate a chat title for the first user message', async () => {
+      const userMessage = 'What is WISE?';
+      const assistantResponse = 'WISE is a platform...';
+      const newTitle = 'About WISE';
+      component['userInput'] = userMessage;
+
+      // First user message (only system message exists initially)
+      component['messages'] = [];
+      awsBedRockService.sendMessage.and.returnValue(Promise.resolve(assistantResponse));
+      awsBedRockService.generateChatTitle.and.returnValue(Promise.resolve(newTitle));
+
+      await component['sendMessage']();
+
+      expect(awsBedRockService.generateChatTitle).toHaveBeenCalledWith(userMessage);
+      expect(component['currentChat']?.title).toBe(newTitle);
       expect(chatbotService.updateChat).toHaveBeenCalled();
     });
 
@@ -198,8 +208,8 @@ describe('ChatbotComponent', () => {
 
   describe('createNewChat', () => {
     it('should create a new chat with sequential numbering', async () => {
-      const existingChats = [createMockChat('1', 'New chat 1'), createMockChat('2', 'New chat 2')];
-      const newChat = createMockChat('3', 'New chat 3');
+      const existingChats = [createMockChat('1'), createMockChat('2')];
+      const newChat = createMockChat('3');
 
       chatbotService.getChats.and.returnValue(of(existingChats));
       chatbotService.createChat.and.returnValue(Promise.resolve(newChat));
@@ -212,36 +222,23 @@ describe('ChatbotComponent', () => {
         runId,
         workgroupId,
         nodeId,
-        systemPrompt,
-        'New chat 3'
-      );
-    });
-
-    it('should create first chat with number 1', async () => {
-      const newChat = createMockChat('1', 'New chat 1');
-      chatbotService.getChats.and.returnValue(of([]));
-      chatbotService.createChat.and.returnValue(Promise.resolve(newChat));
-      fixture.detectChanges();
-
-      component['chats'] = [];
-      await component['createNewChat']();
-
-      expect(chatbotService.createChat).toHaveBeenCalledWith(
-        runId,
-        workgroupId,
-        nodeId,
-        systemPrompt,
-        'New chat 1'
+        systemPrompt
       );
     });
 
     it('should switch to the newly created chat', async () => {
-      const newChat = createMockChat('1', 'New chat 1');
+      const newChat = createMockChat('1');
       chatbotService.getChats.and.returnValue(of([newChat]));
       chatbotService.createChat.and.returnValue(Promise.resolve(newChat));
       fixture.detectChanges();
 
       await component['createNewChat']();
+      expect(chatbotService.createChat).toHaveBeenCalledWith(
+        runId,
+        workgroupId,
+        nodeId,
+        systemPrompt
+      );
 
       expect(component['currentChat']).toEqual(newChat);
       expect(component['messages']).toEqual(newChat.messages);
@@ -250,8 +247,8 @@ describe('ChatbotComponent', () => {
 
   describe('switchToChat', () => {
     it('should switch to a different chat', () => {
-      const chat1 = createMockChat('1', 'Chat 1');
-      const chat2 = createMockChat('2', 'Chat 2', [new ChatMessage('user', 'Hello', nodeId)]);
+      const chat1 = createMockChat('1');
+      const chat2 = createMockChat('2', [new ChatMessage('user', 'Hello', nodeId)]);
 
       chatbotService.getChats.and.returnValue(of([chat1, chat2]));
       fixture.detectChanges();
@@ -267,7 +264,7 @@ describe('ChatbotComponent', () => {
   describe('toggleCollapse', () => {
     beforeEach(() => {
       chatbotService.getChats.and.returnValue(of([]));
-      chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1', 'New chat 1')));
+      chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1')));
       fixture.detectChanges();
     });
 
@@ -304,7 +301,7 @@ describe('ChatbotComponent', () => {
   describe('fullscreen', () => {
     beforeEach(() => {
       chatbotService.getChats.and.returnValue(of([]));
-      chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1', 'New chat 1')));
+      chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1')));
       fixture.detectChanges();
     });
 
@@ -330,7 +327,7 @@ describe('ChatbotComponent', () => {
 
   describe('handleKeyPress', () => {
     beforeEach(() => {
-      const chat = createMockChat('1', 'Chat 1');
+      const chat = createMockChat('1');
       chatbotService.getChats.and.returnValue(of([chat]));
       chatbotService.updateChat.and.returnValue(Promise.resolve(chat));
       fixture.detectChanges();
@@ -340,6 +337,7 @@ describe('ChatbotComponent', () => {
     it('should send message on Enter key press', () => {
       component['userInput'] = 'Hello';
       awsBedRockService.sendMessage.and.returnValue(Promise.resolve('Response'));
+      awsBedRockService.generateChatTitle.and.returnValue(Promise.resolve('New Title'));
 
       const event = new KeyboardEvent('keypress', { key: 'Enter' });
       spyOn(event, 'preventDefault');
@@ -365,7 +363,7 @@ describe('ChatbotComponent', () => {
   describe('ngOnDestroy', () => {
     it('should unsubscribe from subscriptions', () => {
       chatbotService.getChats.and.returnValue(of([]));
-      chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1', 'New chat 1')));
+      chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1')));
       fixture.detectChanges();
 
       spyOn(component['subscriptions'], 'unsubscribe');

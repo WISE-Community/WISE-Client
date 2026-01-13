@@ -34,4 +34,22 @@ export class ChatService {
   processResponse(response: string): string {
     return response;
   }
+
+  /**
+   * Generates a short, concise title for a chat based on the first message.
+   * @param message The first user message content.
+   * @returns A promise that resolves to the generated title.
+   */
+  async generateChatTitle(message: string): Promise<string> {
+    const prompt = `Generate a short, concise title (max 5 words) for a chat that starts with this message: "${message}". Respond only with the title, no quotes or extra text. If the language of the message is not English, return the title in that language.`;
+    const messages: ChatMessage[] = [
+      new ChatMessage(
+        'system',
+        'You are a helpful assistant that generates short titles for chat conversations.',
+        ''
+      ),
+      new ChatMessage('user', prompt, '')
+    ];
+    return this.sendMessage(messages);
+  }
 }

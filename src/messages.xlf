@@ -1919,10 +1919,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
           <context context-type="linenumber">18,22</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
-          <context context-type="linenumber">169</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="5211609068551558044" datatype="html">
         <source>Conversation history</source>
@@ -2033,7 +2029,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Sorry, I encountered an error. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5280218112746407598" datatype="html">
