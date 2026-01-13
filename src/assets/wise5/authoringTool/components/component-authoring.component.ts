@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, effect, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentContent } from '../../common/ComponentContent';
 import { PreviewComponentComponent } from './preview-component/preview-component.component';
 import { EditComponentComponent } from './edit-component/edit-component.component';
@@ -6,6 +6,8 @@ import { ComponentFactory } from '../../common/ComponentFactory';
 import { Component as WISEComponent } from '../../common/Component';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
+import { copy } from '../../common/object/object';
 
 @Component({
   imports: [PreviewComponentComponent, EditComponentComponent, MatTooltipModule],
@@ -53,12 +55,22 @@ export class ComponentAuthoringComponent {
   @Output() editComponentEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() nodeId: string;
 
-  constructor(private projectService: TeacherProjectService) {}
-
-  ngOnChanges(): void {
-    this.component = new ComponentFactory().getComponent(
-      this.projectService.injectAssetPaths(this.componentContent),
-      this.nodeId
-    );
+  constructor(
+    private projectService: TeacherProjectService,
+    private projectTranslationService: TeacherProjectTranslationService
+  ) {
+    effect(() => {
+      // apply translations to a copy of the component content so the original component content
+      // is not modified for subsequent use.
+      const componentContent = copy(this.componentContent);
+      this.projectTranslationService.applyTranslations(
+        componentContent,
+        this.projectTranslationService.currentTranslations()
+      );
+      this.component = new ComponentFactory().getComponent(
+        this.projectService.injectAssetPaths(componentContent),
+        this.nodeId
+      );
+    });
   }
 }
