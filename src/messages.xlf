@@ -282,6 +282,10 @@
           <context context-type="linenumber">87,90</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">46,48</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">218,222</context>
         </context-group>
@@ -1910,126 +1914,92 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>AI Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">11,14</context>
+          <context context-type="linenumber">5,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7151632936989469818" datatype="html">
         <source>New chat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">18,22</context>
+          <context context-type="linenumber">12,16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5211609068551558044" datatype="html">
         <source>Conversation history</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">28,31</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1722217323196779055" datatype="html">
         <source>Toggle Full Screen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">40,43</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
           <context context-type="linenumber">21,24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4929778113156900100" datatype="html">
-        <source>Collapse</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">54,57</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">35,37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6770769801335635194" datatype="html">
-        <source>Restore</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">64,66</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
-          <context context-type="linenumber">32,35</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">45,46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.html</context>
-          <context context-type="linenumber">17,20</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
-          <context context-type="linenumber">47,52</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="721564515338664747" datatype="html">
         <source>Start a conversation with the AI assistant!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">76,78</context>
+          <context context-type="linenumber">56,58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3676413537605247674" datatype="html">
         <source> Ask questions about your work, get help, or discuss ideas. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">78,82</context>
+          <context context-type="linenumber">58,62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="720557322859638078" datatype="html">
         <source>You</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">94,96</context>
+          <context context-type="linenumber">74,76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4361487192183535591" datatype="html">
         <source>Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">96,100</context>
+          <context context-type="linenumber">76,80</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">118,121</context>
+          <context context-type="linenumber">98,101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8763211465841977542" datatype="html">
         <source>Thinking...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">122,127</context>
+          <context context-type="linenumber">102,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1070556603859709137" datatype="html">
         <source>Type your message...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">132,135</context>
+          <context context-type="linenumber">112,115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8740036082299980043" datatype="html">
         <source>Send message</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
-          <context context-type="linenumber">149,154</context>
+          <context context-type="linenumber">129,134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8206940638567425435" datatype="html">
         <source>Sorry, I encountered an error. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5280218112746407598" datatype="html">
@@ -6439,6 +6409,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">4,8</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6770769801335635194" datatype="html">
+        <source>Restore</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/library/library-project-menu/library-project-menu.component.html</context>
+          <context context-type="linenumber">32,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.html</context>
+          <context context-type="linenumber">17,20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
+          <context context-type="linenumber">47,52</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1055686627716339120" datatype="html">
         <source>Archive</source>
         <context-group purpose="location">
@@ -7091,6 +7080,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.ts</context>
           <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4929778113156900100" datatype="html">
+        <source>Collapse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
+          <context context-type="linenumber">35,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3620188369327429839" datatype="html">
@@ -10670,7 +10666,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">232</context>
         </context-group>
       </trans-unit>
       <trans-unit id="537022937435161177" datatype="html">
@@ -10685,7 +10681,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">233</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3407061818321766940" datatype="html">
@@ -16050,7 +16046,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">9,13</context>
+          <context context-type="linenumber">7,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="884032441322142017" datatype="html">
@@ -16065,11 +16061,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">21,24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">23,26</context>
+          <context context-type="linenumber">18,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="33473533304469858" datatype="html">
@@ -16095,7 +16087,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">60,63</context>
+          <context context-type="linenumber">53,56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5353912858871423613" datatype="html">
@@ -22373,11 +22365,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">70,73</context>
+          <context context-type="linenumber">61,64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">72,75</context>
+          <context context-type="linenumber">63,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8784868761263923006" datatype="html">
@@ -22456,20 +22448,6 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/nodeStatusIcon/node-status-icon.component.html</context>
           <context context-type="linenumber">13,16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="221084836515422895" datatype="html">
-        <source>Previous Item</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">7,10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7317911740595944448" datatype="html">
-        <source>Next Item</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">58,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5926207769041293626" datatype="html">
