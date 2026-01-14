@@ -6,22 +6,28 @@
     <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
       <notebook-notes [config]="notebookConfig" />
     </mat-drawer>
+    @if (chatbotEnabled) {
+      <mat-drawer
+        #chatbotDrawer
+        [mode]="mdScreen ? 'over' : 'side'"
+        position="end"
+        (keydown.escape)="chatbotVisible = false"
+        [(opened)]="chatbotVisible"
+        class="sidebar"
+      >
+        <chatbot [config]="chatbotConfig" (closeChatbot)="chatbotVisible = false" />
+      </mat-drawer>
+    }
     <mat-drawer-content>
       <top-bar [projectName]="project.metadata.title" />
       <ng-container *ngTemplateOutlet="vleTemplate"></ng-container>
       @if (reportEnabled) {
         <notebook-report
-          [ngClass]="{ 'notes-visible': notesVisible, 'report-full': reportFullscreen }"
+          [ngClass]="{
+            'notes-visible': notesVisible || chatbotVisible,
+            'report-full': reportFullscreen
+          }"
           [config]="notebookConfig"
-        />
-      }
-      @if (notesEnabled && !notesVisible) {
-        <notebook-launcher [notebookConfig]="notebookConfig" />
-      }
-      @if (chatbotEnabled) {
-        <chatbot
-          [ngClass]="{ 'notes-visible': notesVisible, 'report-full': reportFullscreen }"
-          [config]="chatbotConfig"
         />
       }
     </mat-drawer-content>
@@ -32,7 +38,12 @@
 
 <ng-template #defaultVLETemplate>
   @if (layoutState === 'node') {
-    <step-tools class="control-bg-bg mat-elevation-z1" />
+    <step-tools
+      class="control-bg-bg mat-elevation-z1"
+      [notebookConfig]="notebookConfig"
+      [chatbotEnabled]="chatbotEnabled"
+      (toggleChatbot)="chatbotVisible = !chatbotVisible"
+    />
   }
   <div
     id="content"

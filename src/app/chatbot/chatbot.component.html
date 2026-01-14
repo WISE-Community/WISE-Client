@@ -1,22 +1,15 @@
-<mat-card
-  class="chatbot flex flex-col"
-  [ngClass]="{ collapsed: collapsed, full: full && !collapsed }"
->
-  <mat-card-header
-    class="dark-theme mat-app-background !flex justify-start items-center"
-    (click)="toggleCollapse()"
-  >
+<mat-card class="chatbot flex flex-col" [ngClass]="{ full: full }">
+  <mat-card-header class="!flex justify-start items-center notice-bg-bg">
     <mat-card-title class="mat-body-2 !flex justify-start items-center gap-1 min-w-0">
       <mat-icon class="flex-shrink-0">auto_awesome</mat-icon>
       <span i18n>AI Assistant</span>
     </mat-card-title>
     <span class="flex-grow"></span>
-    @if (!collapsed && currentChat) {
+    @if (currentChat) {
       <button
         matIconButton
         (click)="$event.stopPropagation(); createNewChat()"
         matTooltip="New chat"
-        matTooltipPosition="above"
         i18n-matTooltip
       >
         <mat-icon>add</mat-icon>
@@ -26,49 +19,36 @@
           matIconButton
           (click)="$event.stopPropagation(); openChatHistory()"
           matTooltip="Conversation history"
-          matTooltipPosition="above"
           i18n-matTooltip
         >
           <mat-icon>history</mat-icon>
         </button>
       }
     }
-    <button
-      matIconButton
-      class="hidden sm:!inline-block"
-      i18n-title
-      title="Toggle Full Screen"
-      (click)="$event.stopPropagation(); fullscreen()"
-    >
-      @if (!full || collapsed) {
-        <mat-icon>fullscreen</mat-icon>
-      }
-      @if (full && !collapsed) {
-        <mat-icon>fullscreen_exit</mat-icon>
-      }
-    </button>
-    @if (!collapsed) {
+    @if (!smallScreen) {
       <button
         matIconButton
-        i18n-title
-        title="Collapse"
-        (click)="$event.stopPropagation(); toggleCollapse()"
+        i18n-matTooltip
+        matTooltip="Toggle Full Screen"
+        (click)="$event.stopPropagation(); fullscreen()"
       >
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-    } @else {
-      <button
-        matIconButton
-        i18n-title
-        title="Restore"
-        (click)="$event.stopPropagation(); toggleCollapse()"
-      >
-        <mat-icon>arrow_drop_up</mat-icon>
+        @if (full) {
+          <mat-icon>fullscreen_exit</mat-icon>
+        } @else {
+          <mat-icon>fullscreen</mat-icon>
+        }
       </button>
     }
+    <button
+      matIconButton
+      i18n-matTooltip
+      matTooltip="Close"
+      (click)="$event.stopPropagation(); close()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-card-header>
-
-  <mat-card-content [class.hidden]="collapsed" class="flex-grow flex flex-col">
+  <mat-card-content class="flex-grow flex flex-col">
     <div class="chatbot__messages">
       @if (messages.length === 0) {
         <div class="chatbot__empty-state">
@@ -126,7 +106,7 @@
     </div>
   </mat-card-content>
 
-  <mat-card-actions [class.hidden]="collapsed">
+  <mat-card-actions>
     <div class="chatbot__input-container">
       <mat-form-field class="chatbot__input-field" subscriptSizing="dynamic">
         <mat-label i18n>Type your message...</mat-label>

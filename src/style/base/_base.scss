@@ -6,6 +6,12 @@ strong, b, .strong {
   font-weight: 500;
 }
 
+ol, ul {
+  list-style-type: revert;
+  margin-block-start: 1em;
+  padding-inline-start: 1em;
+}
+
 figure {
   &.image {
     display: inline-block;

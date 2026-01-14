@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Subscription } from 'rxjs';
+import { skip, Subscription } from 'rxjs';
 import { ChatbotService } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
@@ -19,6 +19,7 @@ import { AwsBedRockService } from './awsBedRock.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { MarkdownComponent } from 'ngx-markdown';
 import { ChatHistoryDialogComponent } from './chat-history-dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   imports: [
@@ -48,7 +49,7 @@ export class ChatbotComponent {
   private dialog = inject(MatDialog);
 
   @Input() config: any;
-  protected collapsed: boolean = true;
+  @Output() closeChatbot = new EventEmitter<void>();
   protected full: boolean = false;
   protected messages: ChatMessage[] = [];
   protected userInput: string = '';
@@ -56,16 +57,15 @@ export class ChatbotComponent {
   protected chats: Chat[] = [];
   protected currentChat: Chat | null = null;
   protected runId: number = this.configService.getRunId();
+  protected smallScreen: boolean = false;
   protected workgroupId: number = this.configService.getWorkgroupId();
   private subscriptions: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.subscriptions.add(
       this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
-        if (!this.collapsed) {
-          this.collapsed = true;
-          this.fullscreen();
-        }
+        this.smallScreen = result.matches;
+        this.full = result.matches;
       })
     );
 
@@ -96,27 +96,8 @@ export class ChatbotComponent {
     )[0];
   }
 
-  protected toggleCollapse(): void {
-    if (this.collapsed && this.breakpointObserver.isMatched('(max-width: 40rem)')) {
-      this.fullscreen();
-      return;
-    }
-    if (this.full) {
-      this.full = false;
-    }
-    this.collapsed = !this.collapsed;
-    if (!this.collapsed) {
-      this.scrollToBottom();
-    }
-  }
-
   protected fullscreen(): void {
-    if (this.collapsed) {
-      this.full = true;
-      this.collapsed = false;
-    } else {
-      this.full = !this.full;
-    }
+    this.full = !this.full;
     this.scrollToBottom();
   }
 
@@ -228,5 +209,12 @@ export class ChatbotComponent {
       event.preventDefault();
       this.sendMessage();
     }
+  }
+
+  protected close(): void {
+    if (!this.smallScreen) {
+      this.full = false;
+    }
+    this.closeChatbot.emit();
   }
 }

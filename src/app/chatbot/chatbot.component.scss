@@ -1,43 +1,25 @@
 @use 'style/abstracts/variables';
 @use 'style/abstracts/functions';
 
-$height: 550px !default;
-$width: 450px !default;
-$width-collapsed: 300px !default;
+@use '@angular/material' as mat;
 
-.chatbot {
-  height: $height;
-  width: $width;
+$width: 450px !default;
+
+.chatbot {width: $width;
   padding: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  position: fixed;
-  bottom: 0;
-  right: 16px;
   z-index: 100;
+  height: 100%;
+  border-radius: 0;
 
   &.full {
-    height: 100%;
     width: 100%;
-    right: 0;
-    border-bottom-left-radius: variables.$card-border-radius;
-    border-bottom-right-radius: variables.$card-border-radius;
+    position: fixed;
+    left: 0;
+    top: 0;
   }
-
-  &.collapsed {
-    height: auto;
-    width: $width-collapsed;
-  }
-}
-
-.hidden {
-  display: none;
 }
 
 .mat-mdc-card-header {
-  cursor: pointer;
-  border-top-left-radius: variables.$card-border-radius;
-  border-top-right-radius: variables.$card-border-radius;
   padding: 0 0 0 12px;
 }
 
@@ -125,7 +107,7 @@ markdown::ng-deep {
   }
   
   ul, ol {
-    list-style-type: disc;
+    list-style-type: revert;
     margin-inline-start: 24px;
   }
 
@@ -188,18 +170,3 @@ markdown::ng-deep {
     transform: translateY(0);
   }
 }
-
-
-// Adjust positioning when notebook report is visible
-:host-context(.notes-visible) .chatbot {
-  right: calc(450px + 32px);
-
-  &.full {
-    right: 0;
-  }
-}
-
-:host-context(.report-full) .chatbot {
-  display: none;
-}
-
