@@ -48,6 +48,16 @@ describe('StepToolsComponent', () => {
       of({ isSurvey: false } as RunInfo)
     );
     component = fixture.componentInstance;
+    component.notebookConfig = {
+      itemTypes: {
+        note: {
+          enabled: true,
+          label: {
+            link: 'note'
+          }
+        }
+      }
+    };
     fixture.detectChanges();
   });
 

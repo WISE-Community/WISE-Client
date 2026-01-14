@@ -21,7 +21,6 @@ import { Node } from '../common/Node';
 import { NodeComponent } from './node/node.component';
 import { NodeNavigationComponent } from '../directives/node-navigation/node-navigation.component';
 import { NodeStatusService } from '../services/nodeStatusService';
-import { NotebookLauncherComponent } from '../../../app/notebook/notebook-launcher/notebook-launcher.component';
 import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
 import { NotebookReportComponent } from '../../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookService } from '../services/notebookService';
@@ -38,16 +37,18 @@ import { Subscription } from 'rxjs';
 import { TopBarComponent } from '../../../app/student/top-bar/top-bar.component';
 import { VLEProjectService } from './vleProjectService';
 import { WiseLinkService } from '../../../app/services/wiseLinkService';
+import { ChatbotComponent } from '../../../app/chatbot/chatbot.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   imports: [
+    ChatbotComponent,
     CommonModule,
     GroupTabsComponent,
     MatSidenavModule,
     NavigationComponent,
     NodeComponent,
     NodeNavigationComponent,
-    NotebookLauncherComponent,
     NotebookNotesComponent,
     NotebookReportComponent,
     RunEndedAndLockedMessageComponent,
@@ -60,12 +61,17 @@ import { WiseLinkService } from '../../../app/services/wiseLinkService';
   templateUrl: './vle.component.html'
 })
 export class VLEComponent implements AfterViewInit {
+  private breakpointObserver = inject(BreakpointObserver);
+  protected chatbotEnabled: boolean = false;
+  protected chatbotConfig: any;
+  protected chatbotVisible: boolean = false;
   protected currentNode: Node;
   @ViewChild('defaultVLETemplate') private defaultVLETemplate: TemplateRef<any>;
   @ViewChild('drawer') public drawer: any;
   protected initialized: boolean;
   private isSurvey: boolean;
   protected layoutState: string;
+  private mdScreen: boolean;
   protected notebookConfig: any;
   protected notesEnabled: boolean = false;
   protected notesVisible: boolean = false;
@@ -156,6 +162,7 @@ export class VLEComponent implements AfterViewInit {
     this.setLayoutState();
     this.initializeSubscriptions();
     this.saveNodeEnteredEvent();
+    this.initializeChatbot();
 
     // Set isSurvey
     if (!this.configService.isPreview()) {
@@ -209,6 +216,11 @@ export class VLEComponent implements AfterViewInit {
     this.subscribeToReportFullScreen();
     this.subscribeToViewCurrentAmbientNotification();
     this.subscriptions.add(this.projectService.projectParsed$.subscribe(() => this.setProject()));
+    this.subscriptions.add(
+      this.breakpointObserver.observe(['(max-width: 1280px)']).subscribe((result) => {
+        this.mdScreen = result.matches;
+      })
+    );
   }
 
   private subscribeToShowSessionWarning(): void {
@@ -434,6 +446,13 @@ export class VLEComponent implements AfterViewInit {
 
   private saveNodeEnteredEvent(): void {
     this.studentDataService.saveEvents([this.createNodeEnteredEvent()]);
+  }
+
+  private initializeChatbot(): void {
+    if (this.project.chatbot?.enabled) {
+      this.chatbotEnabled = true;
+      this.chatbotConfig = this.project.chatbot;
+    }
   }
 
   private saveNodeExitedEvent(): void {

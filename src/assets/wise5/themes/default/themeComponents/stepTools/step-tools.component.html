@@ -1,25 +1,20 @@
 <div class="step-tools flex flex-row justify-between items-center">
   <div class="flex flex-row items-center">
     <button
-      mat-icon-button
+      matIconButton
       (click)="goToPrevNode()"
       [disabled]="!prevId"
-      aria-label="Previous Item"
-      i18n-aria-label
       matTooltip="Previous Step"
       i18n-matTooltip
     >
       <mat-icon>{{ icons.prev }}</mat-icon>
     </button>
-    <div class="node-icon-div">
+    <div class="node-icon-div me-1 hidden sm:block">
       <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon" />
     </div>
-    &nbsp;
     <mat-form-field appearance="fill">
       <mat-select
         [panelClass]="'select-panel-full-height'"
-        aria-label="Select a Step"
-        i18n-aria-label
         placeholder="Select a Step"
         i18n-placeholder
         [(ngModel)]="toNodeId"
@@ -52,18 +47,14 @@
       <node-status-icon [nodeId]="nodeId" />
     </div>
     <button
-      mat-icon-button
+      matIconButton
       (click)="goToNextNode()"
       [disabled]="!nextId"
-      aria-label="Next Item"
-      i18n-aria-label
       matTooltip="Next Step"
       i18n-matTooltip
     >
       <mat-icon>{{ icons.next }}</mat-icon>
     </button>
-  </div>
-  <div>
     <button
       mat-icon-button
       (click)="closeNode()"
@@ -74,5 +65,15 @@
     >
       <mat-icon class="unit-plan-icon">view_list</mat-icon>
     </button>
+  </div>
+  <div>
+    @if (notebookConfig.itemTypes.note.enabled) {
+      <notebook-launcher [notebookConfig]="notebookConfig" />
+    }
+    @if (chatbotEnabled) {
+      <button matIconButton matTooltip="AI Assistant" (click)="emitToggleChatbot()">
+        <mat-icon>auto_awesome</mat-icon>
+      </button>
+    }
   </div>
 </div>

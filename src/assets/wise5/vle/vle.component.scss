@@ -103,7 +103,7 @@ notebook-report {
   z-index: 10;
   bottom: 0;
   position: fixed;
-  right: 96px;
+  right: 66px;
   transition: right 0.25s;
 }
 
@@ -117,4 +117,8 @@ run-ended-and-locked-message {
   @media (min-width: functions.breakpoint('sm.min')) {
     margin-bottom: -8px;
   }
+}
+
+.sidebar {
+  top: variables.$toolbar-height + variables.$secondary-toolbar-height + 2;
 }
