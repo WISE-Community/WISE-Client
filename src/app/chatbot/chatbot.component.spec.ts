@@ -261,69 +261,69 @@ describe('ChatbotComponent', () => {
     });
   });
 
-  describe('toggleCollapse', () => {
+  xdescribe('toggleCollapse', () => {
     beforeEach(() => {
       chatbotService.getChats.and.returnValue(of([]));
       chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1')));
       fixture.detectChanges();
     });
 
-    // it('should toggle collapsed state', () => {
-    //   component['collapsed'] = true;
-    //   component['full'] = false;
+    it('should toggle collapsed state', () => {
+      component['collapsed'] = true;
+      component['full'] = false;
 
-    //   component['toggleCollapse']();
+      component['toggleCollapse']();
 
-    //   expect(component['collapsed']).toBe(false);
-    // });
+      expect(component['collapsed']).toBe(false);
+    });
 
-    // it('should open fullscreen on small screens when collapsed', () => {
-    //   component['collapsed'] = true;
-    //   breakpointObserver.isMatched.and.returnValue(true);
+    it('should open fullscreen on small screens when collapsed', () => {
+      component['collapsed'] = true;
+      breakpointObserver.isMatched.and.returnValue(true);
 
-    //   component['toggleCollapse']();
+      component['toggleCollapse']();
 
-    //   expect(component['full']).toBe(true);
-    //   expect(component['collapsed']).toBe(false);
-    // });
+      expect(component['full']).toBe(true);
+      expect(component['collapsed']).toBe(false);
+    });
 
-    // it('should exit fullscreen mode when toggling', () => {
-    //   component['collapsed'] = false;
-    //   component['full'] = true;
+    it('should exit fullscreen mode when toggling', () => {
+      component['collapsed'] = false;
+      component['full'] = true;
 
-    //   component['toggleCollapse']();
+      component['toggleCollapse']();
 
-    //   expect(component['full']).toBe(false);
-    //   expect(component['collapsed']).toBe(true);
-    // });
+      expect(component['full']).toBe(false);
+      expect(component['collapsed']).toBe(true);
+    });
   });
 
-  // describe('fullscreen', () => {
-  //   beforeEach(() => {
-  //     chatbotService.getChats.and.returnValue(of([]));
-  //     chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1')));
-  //     fixture.detectChanges();
-  //   });
+  xdescribe('fullscreen', () => {
+    beforeEach(() => {
+      chatbotService.getChats.and.returnValue(of([]));
+      chatbotService.createChat.and.returnValue(Promise.resolve(createMockChat('1')));
+      fixture.detectChanges();
+    });
 
-  //   it('should enter fullscreen mode when collapsed', () => {
-  //     component['collapsed'] = true;
-  //     component['full'] = false;
+    it('should enter fullscreen mode when collapsed', () => {
+      component['collapsed'] = true;
+      component['full'] = false;
 
-  //     component['fullscreen']();
+      component['fullscreen']();
 
-  //     expect(component['full']).toBe(true);
-  //     expect(component['collapsed']).toBe(false);
-  //   });
+      expect(component['full']).toBe(true);
+      expect(component['collapsed']).toBe(false);
+    });
 
-  //   it('should toggle fullscreen mode when not collapsed', () => {
-  //     component['collapsed'] = false;
-  //     component['full'] = false;
+    it('should toggle fullscreen mode when not collapsed', () => {
+      component['collapsed'] = false;
+      component['full'] = false;
 
-  //     component['fullscreen']();
+      component['fullscreen']();
 
-  //     expect(component['full']).toBe(true);
-  //   });
-  // });
+      expect(component['full']).toBe(true);
+    });
+  });
 
   describe('handleKeyPress', () => {
     beforeEach(() => {

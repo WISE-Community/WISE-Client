@@ -50,7 +50,7 @@
   </mat-card-header>
   <mat-card-content class="flex-grow flex flex-col">
     <div class="chatbot__messages">
-      @if (messages.length === 0) {
+      @if (messages.length === 1) {
         <div class="chatbot__empty-state">
           <mat-icon class="chatbot__empty-icon">chat_bubble_outline</mat-icon>
           <p i18n>Start a conversation with the AI assistant!</p>
