@@ -309,6 +309,14 @@
           <context context-type="linenumber">11,13</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">87,90</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">46,48</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">218,222</context>
         </context-group>
@@ -443,6 +451,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component.html</context>
           <context context-type="linenumber">41,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">36,38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/library/copy-project-dialog/copy-project-dialog.component.html</context>
@@ -1909,6 +1921,230 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
           <context context-type="linenumber">8,11</context>
         </context-group>
         <target state="needs-translation">Step</target>
+      </trans-unit>
+      <trans-unit id="552642818921774648" datatype="html">
+        <source>Conversation History</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">1,4</context>
+        </context-group>
+        <target state="needs-translation">Conversation History</target>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">27,29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
+          <context context-type="linenumber">92,94</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
+          <context context-type="linenumber">27,31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">40,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">498,501</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
+          <context context-type="linenumber">36,40</context>
+        </context-group>
+        <target state="needs-translation">Save</target>
+      </trans-unit>
+      <trans-unit id="2634265024545519524" datatype="html">
+        <source>(current)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">48,51</context>
+        </context-group>
+        <target state="needs-translation">(current)</target>
+      </trans-unit>
+      <trans-unit id="2154216727411550160" datatype="html">
+        <source>message</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">54,57</context>
+        </context-group>
+        <target state="needs-translation">message</target>
+      </trans-unit>
+      <trans-unit id="4101852533995361725" datatype="html">
+        <source>messages</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">56,60</context>
+        </context-group>
+        <target state="needs-translation">messages</target>
+      </trans-unit>
+      <trans-unit id="1133994986091402323" datatype="html">
+        <source>Edit title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">63,66</context>
+        </context-group>
+        <target state="needs-translation">Edit title</target>
+      </trans-unit>
+      <trans-unit id="6972864965174955313" datatype="html">
+        <source>Delete chat</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
+          <context context-type="linenumber">72,75</context>
+        </context-group>
+        <target state="needs-translation">Delete chat</target>
+      </trans-unit>
+      <trans-unit id="5741972031757698073" datatype="html">
+        <source>Are you sure you want to delete &quot;<x id="PH" equiv-text="chat.title"/>&quot;? This action cannot be undone.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to delete "<x id="PH" equiv-text="chat.title"/>"? This action cannot be undone.</target>
+      </trans-unit>
+      <trans-unit id="4272436583644511364" datatype="html">
+        <source>Just now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.ts</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+        <target state="needs-translation">Just now</target>
+      </trans-unit>
+      <trans-unit id="904495321169432083" datatype="html">
+        <source><x id="PH" equiv-text="diffMins"/>m ago</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.ts</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+        <target state="needs-translation"><x id="PH" equiv-text="diffMins"/>m ago</target>
+      </trans-unit>
+      <trans-unit id="1937318758717606227" datatype="html">
+        <source><x id="PH" equiv-text="diffHours"/>h ago</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.ts</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+        <target state="needs-translation"><x id="PH" equiv-text="diffHours"/>h ago</target>
+      </trans-unit>
+      <trans-unit id="1398510920250838994" datatype="html">
+        <source><x id="PH" equiv-text="diffDays"/>d ago</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.ts</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+        <target state="needs-translation"><x id="PH" equiv-text="diffDays"/>d ago</target>
+      </trans-unit>
+      <trans-unit id="774353184448576161" datatype="html">
+        <source>AI Assistant</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+        <target state="needs-translation">AI Assistant</target>
+      </trans-unit>
+      <trans-unit id="7151632936989469818" datatype="html">
+        <source>New chat</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">12,16</context>
+        </context-group>
+        <target state="needs-translation">New chat</target>
+      </trans-unit>
+      <trans-unit id="5211609068551558044" datatype="html">
+        <source>Conversation history</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">21,24</context>
+        </context-group>
+        <target state="needs-translation">Conversation history</target>
+      </trans-unit>
+      <trans-unit id="1722217323196779055" datatype="html">
+        <source>Toggle Full Screen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">32,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
+          <context context-type="linenumber">21,24</context>
+        </context-group>
+        <target state="needs-translation">Toggle Full Screen</target>
+      </trans-unit>
+      <trans-unit id="721564515338664747" datatype="html">
+        <source>Start a conversation with the AI assistant!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">56,58</context>
+        </context-group>
+        <target state="needs-translation">Start a conversation with the AI assistant!</target>
+      </trans-unit>
+      <trans-unit id="3676413537605247674" datatype="html">
+        <source> Ask questions about your work, get help, or discuss ideas. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">58,62</context>
+        </context-group>
+        <target state="needs-translation"> Ask questions about your work, get help, or discuss ideas. </target>
+      </trans-unit>
+      <trans-unit id="720557322859638078" datatype="html">
+        <source>You</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">74,76</context>
+        </context-group>
+        <target state="needs-translation">You</target>
+      </trans-unit>
+      <trans-unit id="4361487192183535591" datatype="html">
+        <source>Assistant</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">76,80</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">98,101</context>
+        </context-group>
+        <target state="needs-translation">Assistant</target>
+      </trans-unit>
+      <trans-unit id="8763211465841977542" datatype="html">
+        <source>Thinking...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">102,107</context>
+        </context-group>
+        <target state="needs-translation">Thinking...</target>
+      </trans-unit>
+      <trans-unit id="1070556603859709137" datatype="html">
+        <source>Type your message...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">112,115</context>
+        </context-group>
+        <target state="needs-translation">Type your message...</target>
+      </trans-unit>
+      <trans-unit id="8740036082299980043" datatype="html">
+        <source>Send message</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
+          <context context-type="linenumber">129,134</context>
+        </context-group>
+        <target state="needs-translation">Send message</target>
+      </trans-unit>
+      <trans-unit id="8206940638567425435" datatype="html">
+        <source>Sorry, I encountered an error. Please try again.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/chatbot/chatbot.component.ts</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+        <target state="needs-translation">Sorry, I encountered an error. Please try again.</target>
       </trans-unit>
       <trans-unit id="5280218112746407598" datatype="html">
         <source>New</source>
@@ -7496,14 +7732,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Personal</target>
       </trans-unit>
-      <trans-unit id="1722217323196779055" datatype="html">
-        <source>Toggle Full Screen</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/notebook/notebook-report/notebook-report.component.html</context>
-          <context context-type="linenumber">21,24</context>
-        </context-group>
-        <target state="needs-translation">Toggle Full Screen</target>
-      </trans-unit>
       <trans-unit id="4929778113156900100" datatype="html">
         <source>Collapse</source>
         <context-group purpose="location">
@@ -9864,34 +10092,6 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">Create</target>
       </trans-unit>
-      <trans-unit id="3768927257183755959" datatype="html">
-        <source>Save</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/teacher/edit-tag/edit-tag.component.ts</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.html</context>
-          <context context-type="linenumber">92,94</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-connected-components/edit-draw-connected-components.component.html</context>
-          <context context-type="linenumber">27,31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">40,42</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">498,501</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">36,40</context>
-        </context-group>
-        <target state="needs-translation">Save</target>
-      </trans-unit>
       <trans-unit id="5325249077056620539" datatype="html">
         <source>Tag created</source>
         <context-group purpose="location">
@@ -11532,7 +11732,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">232</context>
         </context-group>
         <target state="needs-translation">You have been inactive for a long time. Do you want to stay logged in?</target>
       </trans-unit>
@@ -11548,7 +11748,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">233</context>
         </context-group>
         <target state="needs-translation">Session Timeout</target>
       </trans-unit>
@@ -17572,7 +17772,7 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">9,13</context>
+          <context context-type="linenumber">7,11</context>
         </context-group>
         <target state="needs-translation">Previous Step</target>
       </trans-unit>
@@ -17588,11 +17788,7 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">21,24</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">23,26</context>
+          <context context-type="linenumber">18,21</context>
         </context-group>
         <target state="needs-translation">Select a Step</target>
       </trans-unit>
@@ -17620,7 +17816,7 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">60,63</context>
+          <context context-type="linenumber">53,56</context>
         </context-group>
         <target state="needs-translation">Next Step</target>
       </trans-unit>
@@ -24738,11 +24934,11 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">70,73</context>
+          <context context-type="linenumber">61,64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">72,75</context>
+          <context context-type="linenumber">63,66</context>
         </context-group>
         <target state="needs-translation">Unit Plan</target>
       </trans-unit>
@@ -24834,22 +25030,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">13,16</context>
         </context-group>
         <target state="needs-translation">Completed with success</target>
-      </trans-unit>
-      <trans-unit id="221084836515422895" datatype="html">
-        <source>Previous Item</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">7,10</context>
-        </context-group>
-        <target state="needs-translation">Previous Item</target>
-      </trans-unit>
-      <trans-unit id="7317911740595944448" datatype="html">
-        <source>Next Item</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">58,61</context>
-        </context-group>
-        <target state="needs-translation">Next Item</target>
       </trans-unit>
       <trans-unit id="5926207769041293626" datatype="html">
         <source>Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
