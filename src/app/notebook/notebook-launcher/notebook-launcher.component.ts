@@ -37,7 +37,7 @@ export class NotebookLauncherComponent {
 
   protected showNotes(): void {
     this.dialog.open(NotebookNotesComponent, {
-      panelClass: 'dialog-md'
+      panelClass: 'dialog-lg'
     });
   }
 }
