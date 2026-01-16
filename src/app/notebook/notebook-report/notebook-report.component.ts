@@ -16,6 +16,8 @@ import { NotebookService } from '../../../assets/wise5/services/notebookService'
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { NotebookNotesComponent } from '../notebook-notes/notebook-notes.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   imports: [
@@ -48,6 +50,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     configService: ConfigService,
+    private dialog: MatDialog,
     notebookService: NotebookService,
     private projectService: ProjectService
   ) {
@@ -148,8 +151,10 @@ export class NotebookReportComponent extends NotebookParentComponent {
   }
 
   protected addNotebookItemContent($event: any): void {
-    this.NotebookService.setInsertMode({ insertMode: true, requester: 'report' });
-    this.NotebookService.setNotesVisible(true);
+    this.dialog.open(NotebookNotesComponent, {
+      data: { insertMode: true, requester: 'report' },
+      panelClass: 'dialog-md'
+    });
   }
 
   protected changed(value: string): void {

@@ -18,6 +18,7 @@ import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
 import { Annotation } from '../common/Annotation';
 import $ from 'jquery';
+import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
 
 @Directive()
 export abstract class ComponentStudent {
@@ -630,14 +631,16 @@ export abstract class ComponentStudent {
   }
 
   copyPublicNotebookItem() {
-    this.notebookService.setInsertMode({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      insertMode: true,
-      requester: this.nodeId + '-' + this.componentId,
-      visibleSpace: 'public'
+    this.dialog.open(NotebookNotesComponent, {
+      data: {
+        nodeId: this.nodeId,
+        componentId: this.componentId,
+        insertMode: true,
+        requester: this.nodeId + '-' + this.componentId,
+        visibleSpace: 'public'
+      },
+      panelClass: 'dialog-md'
     });
-    this.notebookService.setNotesVisible(true);
   }
 
   isNotebookEnabled() {
@@ -745,14 +748,16 @@ export abstract class ComponentStudent {
   }
 
   copyPublicNotebookItemButtonClicked(): void {
-    this.notebookService.setInsertMode({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      insertMode: true,
-      requester: this.nodeId + '-' + this.componentId,
-      visibleSpace: 'public'
+    this.dialog.open(NotebookNotesComponent, {
+      data: {
+        nodeId: this.nodeId,
+        componentId: this.componentId,
+        insertMode: true,
+        requester: this.nodeId + '-' + this.componentId,
+        visibleSpace: 'public'
+      },
+      panelClass: 'dialog-md'
     });
-    this.notebookService.setNotesVisible(true);
   }
 
   getElementById(id: string, getFirstResult: boolean = false): any {

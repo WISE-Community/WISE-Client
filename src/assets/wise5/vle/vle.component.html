@@ -3,12 +3,8 @@
 <link rel="stylesheet" [href]="projectStylePath | safeUrl" />
 @if (initialized) {
   <mat-drawer-container [hasBackdrop]="false">
-    <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
-      <notebook-notes [config]="notebookConfig" />
-    </mat-drawer>
     @if (chatbotEnabled) {
       <mat-drawer
-        #chatbotDrawer
         [mode]="mdScreen ? 'over' : 'side'"
         position="end"
         (keydown.escape)="chatbotVisible = false"
