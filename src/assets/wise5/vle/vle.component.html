@@ -37,14 +37,13 @@
 <div id="wise-link-communicator" class="wise-link-communicator"></div>
 
 <ng-template #defaultVLETemplate>
-  @if (layoutState === 'node') {
-    <step-tools
-      class="control-bg-bg mat-elevation-z1"
-      [notebookConfig]="notebookConfig"
-      [chatbotEnabled]="chatbotEnabled"
-      (toggleChatbot)="chatbotVisible = !chatbotVisible"
-    />
-  }
+  <step-tools
+    class="control-bg-bg mat-elevation-z1"
+    [stepView]="layoutState === 'node'"
+    [notebookConfig]="notebookConfig"
+    [chatbotEnabled]="chatbotEnabled"
+    (toggleChatbot)="chatbotVisible = !chatbotVisible"
+  />
   <div
     id="content"
     class="vle-content"
