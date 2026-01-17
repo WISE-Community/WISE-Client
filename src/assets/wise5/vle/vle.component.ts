@@ -21,7 +21,6 @@ import { Node } from '../common/Node';
 import { NodeComponent } from './node/node.component';
 import { NodeNavigationComponent } from '../directives/node-navigation/node-navigation.component';
 import { NodeStatusService } from '../services/nodeStatusService';
-import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
 import { NotebookReportComponent } from '../../../app/notebook/notebook-report/notebook-report.component';
 import { NotebookService } from '../services/notebookService';
 import { NotificationService } from '../services/notificationService';
@@ -49,7 +48,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
     NavigationComponent,
     NodeComponent,
     NodeNavigationComponent,
-    NotebookNotesComponent,
     NotebookReportComponent,
     RunEndedAndLockedMessageComponent,
     SafeUrl,
@@ -67,11 +65,10 @@ export class VLEComponent implements AfterViewInit {
   protected chatbotVisible: boolean = false;
   protected currentNode: Node;
   @ViewChild('defaultVLETemplate') private defaultVLETemplate: TemplateRef<any>;
-  @ViewChild('drawer') public drawer: any;
   protected initialized: boolean;
   private isSurvey: boolean;
   protected layoutState: string;
-  private mdScreen: boolean;
+  protected mdScreen: boolean;
   protected notebookConfig: any;
   protected notesEnabled: boolean = false;
   protected notesVisible: boolean = false;
@@ -205,14 +202,9 @@ export class VLEComponent implements AfterViewInit {
     return convertToPNGFile(canvas);
   }
 
-  closeNotes(): void {
-    this.notebookService.closeNotes();
-  }
-
   private initializeSubscriptions(): void {
     this.subscribeToShowSessionWarning();
     this.subscribeToCurrentNodeChanged();
-    this.subscribeToNotesVisible();
     this.subscribeToReportFullScreen();
     this.subscribeToViewCurrentAmbientNotification();
     this.subscriptions.add(this.projectService.projectParsed$.subscribe(() => this.setProject()));
@@ -265,19 +257,6 @@ export class VLEComponent implements AfterViewInit {
         }
         this.router.navigate([currentNodeId], { relativeTo: this.route.parent });
         this.setLayoutState();
-      })
-    );
-  }
-
-  private subscribeToNotesVisible(): void {
-    this.subscriptions.add(
-      this.notebookService.notesVisible$.subscribe((notesVisible: boolean) => {
-        this.notesVisible = notesVisible;
-        if (this.notesVisible) {
-          this.drawer.open();
-        } else {
-          this.drawer.close();
-        }
       })
     );
   }
