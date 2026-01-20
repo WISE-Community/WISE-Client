@@ -12,6 +12,10 @@ ol, ul {
   padding-inline-start: 1em;
 }
 
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: revert;
+}
+
 figure {
   &.image {
     display: inline-block;
