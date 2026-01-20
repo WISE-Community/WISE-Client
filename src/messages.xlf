@@ -13800,7 +13800,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">54,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="247091205793546074" datatype="html">
@@ -14981,7 +14981,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">87,88</context>
+          <context context-type="linenumber">86,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6853281750146333865" datatype="html">
@@ -22517,14 +22517,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Expand or collapse lesson content</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">13,17</context>
+          <context context-type="linenumber">14,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3419551734015470626" datatype="html">
         <source> <x id="INTERPOLATION" equiv-text="{{ nodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ nodeStatus.progress.totalItems }}"/> items </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">59,60</context>
+          <context context-type="linenumber">58,59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
@@ -22535,14 +22535,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Lesson is locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">70,73</context>
+          <context context-type="linenumber">69,72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3869393913986306957" datatype="html">
         <source>Item is locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">100,103</context>
+          <context context-type="linenumber">99,102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1692980694443272897" datatype="html">

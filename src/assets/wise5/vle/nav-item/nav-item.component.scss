@@ -71,4 +71,8 @@
   &.expanded, .expanded {
     @include mat.elevation(3);
   }
+
+  .is-previous-node {
+    background-color: lightyellow;
+  }
 }
