@@ -46,6 +46,7 @@ export class StepToolsComponent implements OnInit {
   protected nodeStatuses: any;
   @Input() notebookConfig: any;
   protected prevId: string;
+  @Input() stepView: boolean;
   private subscriptions: Subscription = new Subscription();
   protected toNodeId: string;
 

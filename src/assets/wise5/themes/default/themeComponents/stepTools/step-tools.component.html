@@ -1,72 +1,78 @@
 <div class="step-tools flex flex-row justify-between items-center">
   <div class="flex flex-row items-center">
-    <button
-      matIconButton
-      (click)="goToPrevNode()"
-      [disabled]="!prevId"
-      matTooltip="Previous Step"
-      i18n-matTooltip
-    >
-      <mat-icon>{{ icons.prev }}</mat-icon>
-    </button>
-    <div class="node-icon-div me-1 hidden sm:block">
-      <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon" />
-    </div>
-    <mat-form-field appearance="fill">
-      <mat-select
-        [panelClass]="'select-panel-full-height'"
-        placeholder="Select a Step"
-        i18n-placeholder
-        [(ngModel)]="toNodeId"
-        hideSingleSelectionIndicator="true"
-        (ngModelChange)="toNodeIdChanged()"
+    @if (stepView) {
+      <button
+        matIconButton
+        (click)="goToPrevNode()"
+        [disabled]="!prevId"
+        matTooltip="Previous Step"
+        i18n-matTooltip
       >
-        <mat-select-trigger>
-          {{ getNodePositionAndTitle(nodeId) }}
-        </mat-select-trigger>
-        @for (nodeId of nodeIds; track nodeId) {
-          @if (nodeStatuses[nodeId].isVisible) {
-            <mat-option [value]="nodeId">
-              <div class="flex flex-row items-center gap-2">
-                <node-icon
-                  [nodeId]="nodeId"
-                  size="18"
-                  [icon]="nodeStatuses[nodeId].icon"
-                  custom-class="node-select__icon"
-                />
-                <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
-                  getNodePositionAndTitle(nodeId)
-                }}</span>
-              </div>
-            </mat-option>
+        <mat-icon>{{ icons.prev }}</mat-icon>
+      </button>
+      <div class="node-icon-div me-1 hidden sm:block">
+        <node-icon [nodeId]="nodeId" size="18" [icon]="nodeStatus.icon" />
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-select
+          [panelClass]="'select-panel-full-height'"
+          placeholder="Select a Step"
+          i18n-placeholder
+          [(ngModel)]="toNodeId"
+          hideSingleSelectionIndicator="true"
+          (ngModelChange)="toNodeIdChanged()"
+        >
+          <mat-select-trigger>
+            {{ getNodePositionAndTitle(nodeId) }}
+          </mat-select-trigger>
+          @for (nodeId of nodeIds; track nodeId) {
+            @if (nodeStatuses[nodeId].isVisible) {
+              <mat-option [value]="nodeId">
+                <div class="flex flex-row items-center gap-2">
+                  <node-icon
+                    [nodeId]="nodeId"
+                    size="18"
+                    [icon]="nodeStatuses[nodeId].icon"
+                    custom-class="node-select__icon"
+                  />
+                  <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
+                    getNodePositionAndTitle(nodeId)
+                  }}</span>
+                </div>
+              </mat-option>
+            }
           }
-        }
-      </mat-select>
-    </mat-form-field>
-    <div class="node-status-div">
-      <node-status-icon [nodeId]="nodeId" />
-    </div>
-    <button
-      matIconButton
-      (click)="goToNextNode()"
-      [disabled]="!nextId"
-      matTooltip="Next Step"
-      i18n-matTooltip
-    >
-      <mat-icon>{{ icons.next }}</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      (click)="closeNode()"
-      aria-label="Unit Plan"
-      i18n-aria-label
-      matTooltip="Unit Plan"
-      i18n-matTooltip
-    >
-      <mat-icon class="unit-plan-icon">view_list</mat-icon>
-    </button>
+        </mat-select>
+      </mat-form-field>
+      <div class="node-status-div">
+        <node-status-icon [nodeId]="nodeId" />
+      </div>
+      <button
+        matIconButton
+        (click)="goToNextNode()"
+        [disabled]="!nextId"
+        matTooltip="Next Step"
+        i18n-matTooltip
+      >
+        <mat-icon>{{ icons.next }}</mat-icon>
+      </button>
+    } @else {
+      <span i18n class="px-3">Unit Plan</span>
+    }
   </div>
   <div>
+    @if (stepView) {
+      <button
+        mat-icon-button
+        (click)="closeNode()"
+        aria-label="Unit Plan"
+        i18n-aria-label
+        matTooltip="Unit Plan"
+        i18n-matTooltip
+      >
+        <mat-icon class="unit-plan-icon">view_list</mat-icon>
+      </button>
+    }
     @if (notebookConfig.itemTypes.note.enabled) {
       <notebook-launcher [notebookConfig]="notebookConfig" />
     }

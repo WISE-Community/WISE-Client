@@ -30,9 +30,11 @@ step-tools {
   overflow: auto;
 }
 
-.node-view {
+.node-view, .nav-view {
   top: variables.$toolbar-height + variables.$secondary-toolbar-height;
+}
 
+.node-view {
   &.tabbed {
     position: absolute;
     top: variables.$toolbar-height;
@@ -78,10 +80,6 @@ node-navigation {
 
 .node-nav {
   padding: 0 16px;
-}
-
-.nav-view {
-  top: variables.$toolbar-height;
 }
 
 notebook-launcher {
