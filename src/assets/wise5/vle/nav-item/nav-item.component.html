@@ -84,7 +84,7 @@
         tabindex="0"
         i18n-title
         title="Go to {{ nodeTitle }}"
-        [ngClass]="{ group: isGroup, 'is-previous-node': isPrevStep }"
+        [ngClass]="{ group: isGroup, 'selected-bg-bg': isPrevStep }"
       >
         <span class="flex flex-row items-center gap-2">
           <node-icon matListAvatar [nodeId]="nodeId" [icon]="nodeStatus.icon" size="24" />
