@@ -258,12 +258,12 @@ describe('OpenResponseSummaryDisplayComponent', () => {
   });
 
   describe('template rendering', () => {
-    it('should display "No Student Responses" when hasStudentResponses is false', () => {
+    it('should display "No student responses" when hasStudentResponses is false', () => {
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue([]);
       component.ngOnInit();
       fixture.detectChanges();
       const compiled = fixture.nativeElement;
-      expect(compiled.textContent).toContain('No Student Responses');
+      expect(compiled.textContent).toContain('No student responses');
     });
 
     it('should display generate button when hasStudentResponses is true', () => {
