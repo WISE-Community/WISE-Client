@@ -10,6 +10,7 @@
         (keydown.escape)="chatbotVisible = false"
         [(opened)]="chatbotVisible"
         class="sidebar"
+        [ngClass]="{ 'sidebar-tabbed': projectService.project.theme === 'tab' }"
       >
         <chatbot [config]="chatbotConfig" (closeChatbot)="chatbotVisible = false" />
       </mat-drawer>
@@ -58,12 +59,17 @@
 </ng-template>
 
 <ng-template #tabbedVLETemplate>
+  <group-tabs
+    [notebookConfig]="notebookConfig"
+    [chatbotEnabled]="chatbotEnabled"
+    (toggleChatbot)="chatbotVisible = !chatbotVisible"
+    class="app-bg-bg mat-elevation-z1"
+  />
   <div
     id="content"
     class="vle-content tabbed"
     [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
   >
-    <group-tabs />
     <div class="tab-content">
       @if (runEndedAndLocked) {
         <run-ended-and-locked-message />

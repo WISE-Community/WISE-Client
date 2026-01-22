@@ -14,10 +14,12 @@ import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
 import { Subscription } from 'rxjs';
 import { NotebookLauncherComponent } from '../../../../../../app/notebook/notebook-launcher/notebook-launcher.component';
+import { ChatbotLauncherComponent } from '../../../../../../app/chatbot/chatbot-launcher/chatbot-launcher.component';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
+    ChatbotLauncherComponent,
     CommonModule,
     FormsModule,
     MatButtonModule,
