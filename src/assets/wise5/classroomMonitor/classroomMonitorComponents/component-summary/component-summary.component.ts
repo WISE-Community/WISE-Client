@@ -14,6 +14,8 @@ import { IdeasSummaryComponent } from '../../../directives/teacher-summary-displ
 import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';
+import { OpenResponseSummaryDisplayComponent } from '../../../directives/teacher-summary-display/open-response-summary-display/open-response-summary-display.component';
+import { ProjectService } from '../../../services/projectService';
 
 @Component({
   imports: [
@@ -22,6 +24,7 @@ import { CRaterService } from '../../../services/cRaterService';
     MatCardModule,
     MatchSummaryDisplayComponent,
     MilestoneReportButtonComponent,
+    OpenResponseSummaryDisplayComponent,
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
   ],
@@ -48,6 +51,7 @@ export class ComponentSummaryComponent {
     private componentServiceLookupService: ComponentServiceLookupService,
     private cRaterService: CRaterService,
     private dataService: TeacherDataService,
+    private projectService: ProjectService,
     private summaryService: SummaryService
   ) {}
 
@@ -79,6 +83,9 @@ export class ComponentSummaryComponent {
       (this.hasScoresSummary && this.hasScoreAnnotation) ||
       this.hasIdeaRubricData ||
       this.component?.type === 'Match';
+    if (this.component?.type === 'OpenResponse') {
+      this.hasSummaryData = this.projectService.getProject().ai?.enabled;
+    }
   }
 
   private setSource(): void {

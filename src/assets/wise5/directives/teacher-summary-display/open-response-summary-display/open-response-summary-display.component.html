@@ -1,0 +1,16 @@
+@if (hasStudentResponses) {
+  <button mat-button (click)="generateSummary()" [disabled]="generatingSummary">
+    <span i18n>Generate Student Summary</span><mat-icon>auto_awesome</mat-icon>
+  </button>
+  @if (newSummaryAvailable) {
+    (<span i18n>New Student Summary Available</span>)
+  }
+  @if (generatingSummary) {
+    <mat-spinner />
+  } @else if (summary) {
+    <markdown [data]="summary" />
+    <span i18n>({{ getLatestPeriodComponentStates().length }} responses)</span>
+  }
+} @else {
+  <span i18n>No student responses</span>
+}
