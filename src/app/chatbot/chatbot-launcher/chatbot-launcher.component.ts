@@ -6,13 +6,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'chatbot-launcher',
   imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-  templateUrl: './chatbot-launcher.component.html',
-  styleUrl: './chatbot-launcher.component.scss'
+  templateUrl: './chatbot-launcher.component.html'
 })
 export class ChatbotLauncherComponent {
   @Output() toggleChatbot = new EventEmitter<void>();
 
-  emitToggleChatbot(): void {
+  protected emitToggleChatbot(): void {
     this.toggleChatbot.emit();
   }
 }
