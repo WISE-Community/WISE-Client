@@ -12,7 +12,7 @@ $tab-bar-height: 48px;
   right: 0;
 }
 
-step-tools {
+step-tools, group-tabs {
   display: block;
   position: fixed;
   left: 0;
@@ -34,32 +34,16 @@ step-tools {
   top: variables.$toolbar-height + variables.$secondary-toolbar-height;
 }
 
-.node-view {
-  &.tabbed {
-    position: absolute;
-    top: variables.$toolbar-height;
-    margin: 0;
-    bottom: 0;
-  }
-}
-
 .tabbed {
-  padding: 0;
+  top: variables.$toolbar-height + variables.$secondary-toolbar-height + 8px;
 }
 
 group-tabs {
-  position: absolute;
-  width: 100%;
+  height: auto;
 }
 
 .tab-content {
-  top: $tab-bar-height + 1;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: auto;
-  padding-bottom: 104px;
+  padding-bottom: 64px;
 }
 
 node, navigation {
@@ -119,4 +103,8 @@ run-ended-and-locked-message {
 
 .sidebar {
   top: variables.$toolbar-height + variables.$secondary-toolbar-height + 2;
+
+  &.sidebar-tabbed {
+    top: variables.$toolbar-height + variables.$secondary-toolbar-height + 8px;
+  }
 }

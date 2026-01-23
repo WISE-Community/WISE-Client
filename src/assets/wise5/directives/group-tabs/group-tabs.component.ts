@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NodeStatusService } from '../../services/nodeStatusService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../../vle/vleProjectService';
 import { NodeService } from '../../services/nodeService';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NotebookLauncherComponent } from '../../../../app/notebook/notebook-launcher/notebook-launcher.component';
+import { ChatbotLauncherComponent } from '../../../../app/chatbot/chatbot-launcher/chatbot-launcher.component';
 
 class GroupNode {
   id: string;
@@ -14,12 +16,15 @@ class GroupNode {
 }
 
 @Component({
-  imports: [MatTabsModule],
+  imports: [ChatbotLauncherComponent, MatTabsModule, NotebookLauncherComponent],
   selector: 'group-tabs',
   templateUrl: './group-tabs.component.html'
 })
 export class GroupTabsComponent implements OnInit {
+  @Input() chatbotEnabled: boolean;
+  @Output() toggleChatbot = new EventEmitter<void>();
   protected groupNodes: GroupNode[] = [];
+  @Input() notebookConfig: any;
   protected selectedTabIndex: number;
   private subscriptions: Subscription = new Subscription();
 
@@ -67,5 +72,9 @@ export class GroupTabsComponent implements OnInit {
   protected goToGroupTab(groupTabIndex: number): void {
     const groupStartNodeId = this.groupNodes[groupTabIndex].startId;
     this.nodeService.setCurrentNode(groupStartNodeId);
+  }
+
+  protected emitToggleChatbot(): void {
+    this.toggleChatbot.emit();
   }
 }
