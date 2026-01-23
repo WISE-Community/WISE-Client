@@ -1,15 +1,15 @@
-<div class="flex gap-2">
+<div class="flex justify-between gap-2">
   <mat-tab-group
     [selectedIndex]="selectedTabIndex"
     (focusChange)="goToGroupTab($event.index)"
     animationDuration="0ms"
-    class="flex-grow"
+    class="flex-shrink w-full min-w-0"
   >
     @for (node of groupNodes; track node.id) {
       <mat-tab [label]="node.title" [disabled]="node.disabled" />
     }
   </mat-tab-group>
-  <div>
+  <div class="flex">
     @if (notebookConfig?.itemTypes.note.enabled) {
       <notebook-launcher [notebookConfig]="notebookConfig" />
     }
