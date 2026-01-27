@@ -21930,6 +21930,34 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">58,61</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3646439300244649070" datatype="html">
+        <source>Generate Class Summary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/open-response-summary-display/open-response-summary-display.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2647230157856881985" datatype="html">
+        <source>*New responses since last summary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/open-response-summary-display/open-response-summary-display.component.html</context>
+          <context context-type="linenumber">12,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2777541710949293848" datatype="html">
+        <source> Summary generated <x id="INTERPOLATION" equiv-text="{{ summaryDate | date: &apos;short&apos; }}"/> from <x id="INTERPOLATION_1" equiv-text="{{ getLatestPeriodComponentStates().length }}"/> responses </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/open-response-summary-display/open-response-summary-display.component.html</context>
+          <context context-type="linenumber">18,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3421658563032484911" datatype="html">
+        <source>No student responses</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/open-response-summary-display/open-response-summary-display.component.html</context>
+          <context context-type="linenumber">23,25</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="866753876041645935" datatype="html">
         <source>The student will see a graph of their individual data here.</source>
         <context-group purpose="location">
