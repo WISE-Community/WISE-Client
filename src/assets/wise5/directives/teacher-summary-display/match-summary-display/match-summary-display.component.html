@@ -6,7 +6,7 @@
         (<span i18n>Source Bucket</span>)
       }
     </h3>
-    <ul>
+    <ul class="list-none margin-block-start-0 padding-inline-start-0">
       @for (choice of bucket.choices; track $index) {
         @if ($index < 3 || getBucketShowMore(bucket.value) || first) {
           <li>
