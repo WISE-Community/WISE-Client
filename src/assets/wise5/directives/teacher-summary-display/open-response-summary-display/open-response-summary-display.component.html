@@ -1,9 +1,5 @@
 @if (hasStudentResponses) {
-<<<<<<< HEAD
   <div class="flex gap-2 flex-wrap items-center mat-caption">
-=======
-  <div class="flex gap-2 flex-wrap items-center justify-between mat-caption">
->>>>>>> 53bb0a6a90 (Update styles and layout and show date and time of latest summary)
     <div class="flex items-center gap-2">
       <button mat-button (click)="generateSummary()" [disabled]="generatingSummary" color="primary">
         <span i18n>Generate Class Summary</span><mat-icon>auto_awesome</mat-icon>
@@ -13,11 +9,7 @@
       }
     </div>
     @if (newSummaryAvailable) {
-<<<<<<< HEAD
       <span class="info" i18n>*New responses since last summary</span>
-=======
-      <span class="info" i18n>New responses since last summary</span>
->>>>>>> 53bb0a6a90 (Update styles and layout and show date and time of latest summary)
     }
   </div>
   @if (summary) {
