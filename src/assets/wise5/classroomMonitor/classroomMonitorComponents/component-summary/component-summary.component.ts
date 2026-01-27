@@ -16,10 +16,12 @@ import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';
 import { OpenResponseSummaryDisplayComponent } from '../../../directives/teacher-summary-display/open-response-summary-display/open-response-summary-display.component';
 import { ProjectService } from '../../../services/projectService';
+import { DiscussionSummaryDisplayComponent } from '../../../directives/teacher-summary-display/discussion-summary-display/discussion-summary-display.component';
 
 @Component({
   imports: [
     ComponentCompletionComponent,
+    DiscussionSummaryDisplayComponent,
     IdeasSummaryComponent,
     MatCardModule,
     MatchSummaryDisplayComponent,
@@ -83,7 +85,7 @@ export class ComponentSummaryComponent {
       (this.hasScoresSummary && this.hasScoreAnnotation) ||
       this.hasIdeaRubricData ||
       this.component?.type === 'Match';
-    if (this.component?.type === 'OpenResponse') {
+    if (this.component?.type === 'OpenResponse' || this.component?.type === 'Discussion') {
       this.hasSummaryData = this.projectService.getProject().ai?.enabled;
     }
   }

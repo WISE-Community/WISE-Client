@@ -84,6 +84,18 @@
             />
           </mat-card-content>
         </mat-card>
+      } @else if (component?.type === 'Discussion') {
+        <mat-card appearance="outlined" class="w-full">
+          <mat-card-content>
+            <discussion-summary-display
+              [nodeId]="node.id"
+              [componentId]="component.id"
+              [periodId]="periodId"
+              [source]="source"
+              [doRender]="true"
+            />
+          </mat-card-content>
+        </mat-card>
       }
     </div>
   }
