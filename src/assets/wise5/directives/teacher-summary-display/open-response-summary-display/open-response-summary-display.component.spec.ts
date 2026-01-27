@@ -272,7 +272,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       fixture.detectChanges();
       const button = fixture.nativeElement.querySelector('button');
       expect(button).toBeTruthy();
-      expect(button.textContent).toContain('Generate Student Summary');
+      expect(button.textContent).toContain('Generate Class Summary');
     });
 
     it('should disable generate button when generatingSummary is true', () => {
@@ -284,7 +284,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       expect(button.disabled).toBe(true);
     });
 
-    it('should display "New Student Summary Available" when newSummaryAvailable is true', () => {
+    it('should display "New responses since last summary" when newSummaryAvailable is true', () => {
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(getComponentStates());
       const oldTimestamp = 1000;
       spyOn(localStorageService, 'getItem')
@@ -294,7 +294,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
         .and.returnValue(oldTimestamp);
       component.ngOnInit();
       fixture.detectChanges();
-      expect(fixture.nativeElement.textContent).toContain('New Student Summary Available');
+      expect(fixture.nativeElement.textContent).toContain('New responses since last summary');
     });
 
     it('should display spinner when generatingSummary is true', () => {

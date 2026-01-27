@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 import { MatButton } from '@angular/material/button';
@@ -10,7 +11,7 @@ import { LocalStorageService } from '../../../../../app/services/localStorageSer
 import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
-  imports: [MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
+  imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
   selector: 'open-response-summary',
   templateUrl: './open-response-summary-display.component.html'
 })
@@ -21,6 +22,7 @@ export class OpenResponseSummaryDisplayComponent extends TeacherSummaryDisplayCo
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   protected newSummaryAvailable: boolean = false;
   protected summary: string;
+  protected summaryDate: Date;
   private summaryTimestamp: number;
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class OpenResponseSummaryDisplayComponent extends TeacherSummaryDisplayCo
       this.localStorageService.getItem(
         `openResponseSummary-timestamp-${this.periodId}-${this.nodeId}-${this.componentId}`
       ) || 0;
+    this.summaryDate = new Date(this.summaryTimestamp);
     const lastResponseTime = latestPeriodComponentStates.reduce((max, state) => {
       return Math.max(max, state.serverSaveTime);
     }, 0);

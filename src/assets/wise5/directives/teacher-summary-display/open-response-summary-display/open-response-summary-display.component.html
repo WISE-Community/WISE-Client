@@ -1,16 +1,24 @@
 @if (hasStudentResponses) {
-  <button mat-button (click)="generateSummary()" [disabled]="generatingSummary">
-    <span i18n>Generate Student Summary</span><mat-icon>auto_awesome</mat-icon>
-  </button>
-  @if (newSummaryAvailable) {
-    (<span i18n>New Student Summary Available</span>)
-  }
-  @if (generatingSummary) {
-    <mat-spinner />
-  } @else if (summary) {
+  <div class="flex gap-2 flex-wrap items-center justify-between mat-caption">
+    <div class="flex items-center gap-2">
+      <button mat-button (click)="generateSummary()" [disabled]="generatingSummary" color="primary">
+        <span i18n>Generate Class Summary</span><mat-icon>auto_awesome</mat-icon>
+      </button>
+      @if (generatingSummary) {
+        <mat-spinner diameter="20" />
+      }
+    </div>
+    @if (newSummaryAvailable) {
+      <span class="info" i18n>New responses since last summary</span>
+    }
+  </div>
+  @if (summary) {
     <markdown [data]="summary" />
-    <span i18n>({{ getLatestPeriodComponentStates().length }} responses)</span>
+    <div class="mat-caption text-secondary" i18n>
+      Summary generated {{ summaryDate | date: 'short' }} from
+      {{ getLatestPeriodComponentStates().length }} responses
+    </div>
   }
 } @else {
-  <span i18n>No student responses</span>
+  <div i18n>No student responses</div>
 }
