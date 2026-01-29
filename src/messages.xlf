@@ -2061,7 +2061,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1217086124949795770" datatype="html">
@@ -2083,7 +2083,49 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6743174526740667520" datatype="html">
+        <source>team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2863460046387544768" datatype="html">
+        <source>teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="268563843519645044" datatype="html">
+        <source>step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1427183831879496231" datatype="html">
+        <source>lesson</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6149881256154931691" datatype="html">
+        <source><x id="PH" equiv-text="this.workgroupsOnNode.length"/> <x id="PH_1" equiv-text="teams"/> on this <x id="PH_2" equiv-text="stepOrLesson"/> (All periods)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2626970050936168768" datatype="html">
+        <source><x id="PH" equiv-text="this.workgroupsOnNode.length"/> <x id="PH_1" equiv-text="teams"/> on this <x id="PH_2" equiv-text="stepOrLesson"/> (Period: <x id="PH_3" equiv-text="this.period.periodName"/>)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2129287670138965430" datatype="html">
@@ -14725,21 +14767,21 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source><x id="PH" equiv-text="this.nodeTitle"/> has been locked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7788246130452063015" datatype="html">
         <source><x id="PH" equiv-text="this.nodeTitle"/> has been unlocked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">253</context>
+          <context context-type="linenumber">255</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1775311053456611668" datatype="html">
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">379</context>
+          <context context-type="linenumber">381</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
@@ -14758,7 +14800,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">382</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -14769,14 +14811,14 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">387</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2330813372531032088" datatype="html">
         <source>Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">386</context>
+          <context context-type="linenumber">388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7247050358660476477" datatype="html">

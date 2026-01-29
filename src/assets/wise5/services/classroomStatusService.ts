@@ -358,4 +358,18 @@ export class ClassroomStatusService {
   broadcastStudentStatusReceived(args: any) {
     this.studentStatusReceivedSource.next(args);
   }
+
+  getWorkgroupsOnNode(nodeId: string, periodId: number): any[] {
+    return this.studentStatuses.filter(
+      (status) =>
+        (status.currentNodeId === nodeId ||
+          (this.projectService.isGroupNode(nodeId) &&
+            this.isNodeInGroup(status.currentNodeId, nodeId))) &&
+        this.periodMatches(status, periodId)
+    );
+  }
+
+  private isNodeInGroup(nodeId: string, groupId: string): boolean {
+    return this.projectService.getNodeById(groupId).ids.includes(nodeId);
+  }
 }

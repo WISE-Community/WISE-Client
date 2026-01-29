@@ -46,6 +46,7 @@
         <mat-card-actions class="nav-item__more mat-body-2 flex justify-start items-center gap-2">
           <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod" />
           <span class="flex-grow"></span>
+          <teams-on-node [nodeId]="nodeId" [period]="currentPeriod" />
           <button
             mat-icon-button
             (click)="toggleLockNode()"
@@ -86,6 +87,7 @@
             />
           }
           <span class="flex-grow hidden sm:block"></span>
+          <teams-on-node [nodeId]="nodeId" [period]="currentPeriod" />
           <nav-item-score
             class="nav-item--list__info-item"
             [maxScore]="maxScore"

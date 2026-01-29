@@ -7,6 +7,8 @@ import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testin
 import { NavItemComponent } from './nav-item.component';
 import { NodeService } from '../../../../services/nodeService';
 import { Node } from '../../../../common/Node';
+import { MockComponent } from 'ng-mocks';
+import { TeamsOnNodeComponent } from '../../../../../../app/classroom-monitor/teams-on-node/teams-on-node.component';
 
 class MockNotificationService {
   getAlertNotifications() {
@@ -57,7 +59,11 @@ let node1;
 describe('NavItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClassroomMonitorTestingModule, NavItemComponent],
+      imports: [
+        ClassroomMonitorTestingModule,
+        NavItemComponent,
+        MockComponent(TeamsOnNodeComponent)
+      ],
       providers: [
         { provide: NodeService, useClass: MockNodeService },
         { provide: NotificationService, useClass: MockNotificationService },
