@@ -12,7 +12,7 @@ $tab-bar-height: 48px;
   right: 0;
 }
 
-step-tools {
+step-tools, group-tabs {
   display: block;
   position: fixed;
   left: 0;
@@ -30,34 +30,20 @@ step-tools {
   overflow: auto;
 }
 
-.node-view {
+.node-view, .nav-view {
   top: variables.$toolbar-height + variables.$secondary-toolbar-height;
-
-  &.tabbed {
-    position: absolute;
-    top: variables.$toolbar-height;
-    margin: 0;
-    bottom: 0;
-  }
 }
 
 .tabbed {
-  padding: 0;
+  top: variables.$toolbar-height + variables.$secondary-toolbar-height + 8px;
 }
 
 group-tabs {
-  position: absolute;
-  width: 100%;
+  height: auto;
 }
 
 .tab-content {
-  top: $tab-bar-height + 1;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: auto;
-  padding-bottom: 104px;
+  padding-bottom: 64px;
 }
 
 node, navigation {
@@ -80,10 +66,6 @@ node-navigation {
   padding: 0 16px;
 }
 
-.nav-view {
-  top: variables.$toolbar-height;
-}
-
 notebook-launcher {
   bottom: 24px;
   position: fixed;
@@ -103,7 +85,7 @@ notebook-report {
   z-index: 10;
   bottom: 0;
   position: fixed;
-  right: 96px;
+  right: 66px;
   transition: right 0.25s;
 }
 
@@ -116,5 +98,13 @@ run-ended-and-locked-message {
   
   @media (min-width: functions.breakpoint('sm.min')) {
     margin-bottom: -8px;
+  }
+}
+
+.sidebar {
+  top: variables.$toolbar-height + variables.$secondary-toolbar-height + 2;
+
+  &.sidebar-tabbed {
+    top: variables.$toolbar-height + variables.$secondary-toolbar-height + 8px;
   }
 }

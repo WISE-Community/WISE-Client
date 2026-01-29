@@ -3,20 +3,29 @@
 <link rel="stylesheet" [href]="projectStylePath | safeUrl" />
 @if (initialized) {
   <mat-drawer-container [hasBackdrop]="false">
-    <mat-drawer #drawer mode="over" position="end" (keydown.escape)="closeNotes()">
-      <notebook-notes [config]="notebookConfig" />
-    </mat-drawer>
+    @if (chatbotEnabled) {
+      <mat-drawer
+        [mode]="mdScreen ? 'over' : 'side'"
+        position="end"
+        (keydown.escape)="chatbotVisible = false"
+        [(opened)]="chatbotVisible"
+        class="sidebar"
+        [ngClass]="{ 'sidebar-tabbed': projectService.project.theme === 'tab' }"
+      >
+        <chatbot [config]="chatbotConfig" (closeChatbot)="chatbotVisible = false" />
+      </mat-drawer>
+    }
     <mat-drawer-content>
       <top-bar [projectName]="project.metadata.title" />
       <ng-container *ngTemplateOutlet="vleTemplate"></ng-container>
       @if (reportEnabled) {
         <notebook-report
-          [ngClass]="{ 'notes-visible': notesVisible, 'report-full': reportFullscreen }"
+          [ngClass]="{
+            'notes-visible': notesVisible || chatbotVisible,
+            'report-full': reportFullscreen
+          }"
           [config]="notebookConfig"
         />
-      }
-      @if (notesEnabled && !notesVisible) {
-        <notebook-launcher [notebookConfig]="notebookConfig" />
       }
     </mat-drawer-content>
   </mat-drawer-container>
@@ -25,9 +34,13 @@
 <div id="wise-link-communicator" class="wise-link-communicator"></div>
 
 <ng-template #defaultVLETemplate>
-  @if (layoutState === 'node') {
-    <step-tools class="control-bg-bg mat-elevation-z1" />
-  }
+  <step-tools
+    class="control-bg-bg mat-elevation-z1"
+    [stepView]="layoutState === 'node'"
+    [notebookConfig]="notebookConfig"
+    [chatbotEnabled]="chatbotEnabled"
+    (toggleChatbot)="chatbotVisible = !chatbotVisible"
+  />
   <div
     id="content"
     class="vle-content"
@@ -46,12 +59,17 @@
 </ng-template>
 
 <ng-template #tabbedVLETemplate>
+  <group-tabs
+    [notebookConfig]="notebookConfig"
+    [chatbotEnabled]="chatbotEnabled"
+    (toggleChatbot)="chatbotVisible = !chatbotVisible"
+    class="app-bg-bg mat-elevation-z1"
+  />
   <div
     id="content"
     class="vle-content tabbed"
     [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
   >
-    <group-tabs />
     <div class="tab-content">
       @if (runEndedAndLocked) {
         <run-ended-and-locked-message />

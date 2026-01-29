@@ -1,5 +1,4 @@
 <div class="nav flex flex-col">
-  <div class="mat-subtitle-1 secondary-text nav-header" i18n>Unit Plan</div>
   <div class="flex flex-wrap justify-center items-center">
     @for (id of rootNode.ids; track id) {
       <nav-item
@@ -9,7 +8,7 @@
         [nodeId]="id"
         type="card"
         class="w-full sm:w-{{ navItemIsExpanded[id] ? 'full' : '1/2' }}"
-      ></nav-item>
+      />
     }
   </div>
 </div>

@@ -14,6 +14,8 @@ import { WiseTinymceEditorComponent } from '../../../assets/wise5/directives/wis
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { NotebookNotesComponent } from '../notebook-notes/notebook-notes.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   imports: [
@@ -31,6 +33,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class NotebookReportComponent extends NotebookParentComponent {
   private breakpointObserver = inject(BreakpointObserver);
+  private dialog = inject(MatDialog);
   private projectService = inject(ProjectService);
 
   private autoSaveIntervalMS: number = 30000;
@@ -140,8 +143,10 @@ export class NotebookReportComponent extends NotebookParentComponent {
   }
 
   protected addNotebookItemContent($event: any): void {
-    this.notebookService.setInsertMode({ insertMode: true, requester: 'report' });
-    this.notebookService.setNotesVisible(true);
+    this.dialog.open(NotebookNotesComponent, {
+      data: { insertMode: true, requester: 'report' },
+      panelClass: 'dialog-md'
+    });
   }
 
   protected changed(value: string): void {
@@ -162,23 +167,25 @@ export class NotebookReportComponent extends NotebookParentComponent {
   }
 
   protected saveNotebookReportItem(): void {
-    this.notebookService.saveNotebookItem(
-      this.reportItem.id,
-      this.reportItem.nodeId,
-      this.reportItem.localNotebookItemId,
-      this.reportItem.type,
-      this.reportItem.title,
-      this.reportItem.content,
-      this.reportItem.groups,
-      Date.parse(new Date().toString())
-    ).then((result: any) => {
-      if (result) {
-        this.dirty = false;
-        // set the reportNotebookItemId to the newly-incremented id so that future saves during this
-        // visit will be an update instead of an insert.
-        this.reportItem.id = result.id;
-        this.saveTime = this.configService.convertToClientTimestamp(result.serverSaveTime);
-      }
-    });
+    this.notebookService
+      .saveNotebookItem(
+        this.reportItem.id,
+        this.reportItem.nodeId,
+        this.reportItem.localNotebookItemId,
+        this.reportItem.type,
+        this.reportItem.title,
+        this.reportItem.content,
+        this.reportItem.groups,
+        Date.parse(new Date().toString())
+      )
+      .then((result: any) => {
+        if (result) {
+          this.dirty = false;
+          // set the reportNotebookItemId to the newly-incremented id so that future saves during this
+          // visit will be an update instead of an insert.
+          this.reportItem.id = result.id;
+          this.saveTime = this.configService.convertToClientTimestamp(result.serverSaveTime);
+        }
+      });
   }
 }

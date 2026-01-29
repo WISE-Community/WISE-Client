@@ -1,10 +1,11 @@
-import { Component, Input, inject } from '@angular/core';
-import { NotebookService } from '../../../assets/wise5/services/notebookService';
+import { Component, inject, Input } from '@angular/core';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog } from '@angular/material/dialog';
+import { NotebookNotesComponent } from '../notebook-notes/notebook-notes.component';
 
 @Component({
   imports: [MatButtonModule, MatIconModule, MatTooltipModule],
@@ -12,7 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: 'notebook-launcher.component.html'
 })
 export class NotebookLauncherComponent {
-  private notebookService = inject(NotebookService);
+  private dialog = inject(MatDialog);
   private projectService = inject(ProjectService);
 
   protected label: string = '';
@@ -33,6 +34,8 @@ export class NotebookLauncherComponent {
   }
 
   protected showNotes(): void {
-    this.notebookService.setNotesVisible(true);
+    this.dialog.open(NotebookNotesComponent, {
+      panelClass: 'dialog-lg'
+    });
   }
 }

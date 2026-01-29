@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
+import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   imports: [
@@ -30,20 +31,24 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class NotebookNotesComponent extends NotebookParentComponent {
   private dataService = inject(StudentDataService);
+  public insertArgs: any = inject(MAT_DIALOG_DATA);
   private projectService = inject(ProjectService);
 
   protected groups = [];
   private groupNameToGroup = {};
   protected hasPrivateNotes: boolean = false;
-  protected insertArgs: any = {
-    insertMode: false
-  };
   protected label: any;
   protected selectedTabIndex = 0;
   private subscriptions: Subscription = new Subscription();
   @Input() viewOnly: boolean;
 
   ngOnInit(): void {
+    this.insertArgs = this.insertArgs ?? {
+      insertMode: false
+    };
+    if (this.insertArgs.visibleSpace) {
+      this.selectedTabIndex = this.insertArgs.visibleSpace === 'public' ? 1 : 0;
+    }
     super.ngOnInit();
     this.setLabel();
     this.addPersonalGroupToGroups();
@@ -62,15 +67,6 @@ export class NotebookNotesComponent extends NotebookParentComponent {
           this.updatePublicNotebookNote(notebookItem);
         }
         this.hasPrivateNotes = this.isHasPrivateNotes();
-      })
-    );
-
-    this.subscriptions.add(
-      this.notebookService.insertMode$.subscribe((args) => {
-        this.insertArgs = args;
-        if (args.visibleSpace) {
-          this.selectedTabIndex = args.visibleSpace === 'public' ? 1 : 0;
-        }
       })
     );
 

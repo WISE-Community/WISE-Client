@@ -1,4 +1,5 @@
 import { enableProdMode, inject, provideAppInitializer } from '@angular/core';
+import { MARKED_OPTIONS, provideMarkdown, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
@@ -40,6 +41,20 @@ export function initialize(
   };
 }
 
+export function markedOptionsFactory(): MarkedOptions {
+  const renderer = new MarkedRenderer();
+  // ensure links open in new tab
+  renderer.link = ({ href, title, text }) => {
+    return '<a href="' + href + '" title="' + title + '" target="_blank">' + text + '</a>';
+  };
+  return {
+    renderer: renderer,
+    gfm: true,
+    breaks: false,
+    pedantic: false
+  };
+}
+
 bootstrapApplication(AppComponent, {
   providers: [
     ArchiveProjectService,
@@ -47,6 +62,12 @@ bootstrapApplication(AppComponent, {
     StudentService,
     TeacherService,
     UserService,
+    provideMarkdown({
+      markedOptions: {
+        provide: MARKED_OPTIONS,
+        useFactory: markedOptionsFactory
+      }
+    }),
     provideAppInitializer(() => {
       const initializerFn = initialize(inject(ConfigService), inject(UserService));
       return initializerFn();
