@@ -125,7 +125,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('1 team on this step (Period: Period 1)');
+        expect(component['tooltipText']).toBe('1 team on this step:');
       });
 
       it('should create tooltip text for multiple teams on step in specific period', () => {
@@ -135,7 +135,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('3 teams on this step (Period: Period 1)');
+        expect(component['tooltipText']).toBe('3 teams on this step:');
       });
 
       it('should create tooltip text for single team on step in all periods', () => {
@@ -145,7 +145,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('1 team on this step (All periods)');
+        expect(component['tooltipText']).toBe('1 team on this step:');
       });
 
       it('should create tooltip text for multiple teams on step in all periods', () => {
@@ -155,7 +155,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('2 teams on this step (All periods)');
+        expect(component['tooltipText']).toBe('2 teams on this step:');
       });
     });
 
@@ -173,7 +173,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('1 team on this lesson (Period: Period 1)');
+        expect(component['tooltipText']).toBe('1 team on this lesson:');
       });
 
       it('should create tooltip text for multiple teams on lesson in specific period', () => {
@@ -183,7 +183,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('2 teams on this lesson (Period: Period 1)');
+        expect(component['tooltipText']).toBe('2 teams on this lesson:');
       });
 
       it('should create tooltip text for single team on lesson in all periods', () => {
@@ -193,7 +193,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('1 team on this lesson (All periods)');
+        expect(component['tooltipText']).toBe('1 team on this lesson:');
       });
 
       it('should create tooltip text for multiple teams on lesson in all periods', () => {
@@ -203,7 +203,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('3 teams on this lesson (All periods)');
+        expect(component['tooltipText']).toBe('3 teams on this lesson:');
       });
     });
 
@@ -227,7 +227,7 @@ describe('TeamsOnNodeComponent', () => {
         component.ngOnChanges();
 
         expect(component['tooltipText']).toBe(
-          '2 teams on this step (Period: Period 1)\nAlice, Bob\nCharlie, David\n'
+          '2 teams on this step:\nAlice, Bob\nCharlie, David\n'
         );
       });
 
@@ -238,7 +238,7 @@ describe('TeamsOnNodeComponent', () => {
 
         component.ngOnChanges();
 
-        expect(component['tooltipText']).toBe('2 teams on this step (Period: Period 1)');
+        expect(component['tooltipText']).toBe('2 teams on this step:');
         expect(configService.getDisplayUsernamesByWorkgroupId).not.toHaveBeenCalled();
       });
     });
@@ -256,7 +256,7 @@ describe('TeamsOnNodeComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
 
-      const countElement = fixture.nativeElement.querySelector('.progress-wrapper');
+      const countElement = fixture.nativeElement.querySelector('div');
       expect(countElement).toBeTruthy();
       expect(countElement.textContent.trim()).toContain('3');
     });
@@ -271,7 +271,7 @@ describe('TeamsOnNodeComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
 
-      const countElement = fixture.nativeElement.querySelector('.progress-wrapper');
+      const countElement = fixture.nativeElement.querySelector('div');
       expect(countElement).toBeFalsy();
     });
 
@@ -302,7 +302,7 @@ describe('TeamsOnNodeComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
 
-      expect(component['tooltipText']).toBe('2 teams on this step (Period: Period 1)');
+      expect(component['tooltipText']).toBe('2 teams on this step:');
     });
   });
 });

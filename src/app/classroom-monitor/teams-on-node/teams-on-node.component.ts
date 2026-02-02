@@ -7,10 +7,8 @@ import { ConfigService } from '../../../assets/wise5/services/configService';
 import { Subscription } from 'rxjs';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
   imports: [MatIconModule, MatTooltipModule],
   selector: 'teams-on-node',
-  styleUrl: './teams-on-node.component.scss',
   templateUrl: './teams-on-node.component.html'
 })
 export class TeamsOnNodeComponent {
@@ -45,11 +43,7 @@ export class TeamsOnNodeComponent {
     const stepOrLesson = this.projectService.isApplicationNode(this.nodeId)
       ? $localize`step`
       : $localize`lesson`;
-    if (this.period.periodId === -1) {
-      this.tooltipText = $localize`${this.workgroupsOnNode.length} ${teams} on this ${stepOrLesson} (All periods)`;
-    } else {
-      this.tooltipText = $localize`${this.workgroupsOnNode.length} ${teams} on this ${stepOrLesson} (Period: ${this.period.periodName})`;
-    }
+    this.tooltipText = $localize`${this.workgroupsOnNode.length} ${teams} on this ${stepOrLesson}\:`;
     if (this.configService.getPermissions().canViewStudentNames) {
       this.tooltipText +=
         `\n` +

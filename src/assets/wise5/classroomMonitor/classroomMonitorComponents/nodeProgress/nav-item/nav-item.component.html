@@ -44,9 +44,9 @@
           </mat-card-content>
         }
         <mat-card-actions class="nav-item__more mat-body-2 flex justify-start items-center gap-2">
-          <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod" />
-          <span class="flex-grow"></span>
+          <nav-item-progress [nodeCompletion]="getNodeCompletion()" />
           <teams-on-node [nodeId]="nodeId" [period]="currentPeriod" />
+          <span class="flex-grow"></span>
           <button
             mat-icon-button
             (click)="toggleLockNode()"
@@ -67,10 +67,9 @@
         class="list-item"
         [ngClass]="{ 'nav-item--list--group': isGroup, 'text-secondary': !nodeHasWork }"
       >
-        <span class="flex justify-start items-center">
-          <node-icon [nodeId]="nodeId" class="step-icon" customClass="mat-24" />
-          <span [ngClass]="{ warn: newAlert }">{{ nodeTitle }}</span
-          >&nbsp;
+        <div class="flex justify-start items-center gap-3">
+          <node-icon [nodeId]="nodeId" customClass="mat-24" />
+          <span [ngClass]="{ warn: newAlert }">{{ nodeTitle }}</span>
           <span class="flex-grow sm:hidden"></span>
           @if (newAlert) {
             <status-icon
@@ -87,14 +86,10 @@
             />
           }
           <span class="flex-grow hidden sm:block"></span>
-          <teams-on-node [nodeId]="nodeId" [period]="currentPeriod" />
-          <nav-item-score
-            class="nav-item--list__info-item"
-            [maxScore]="maxScore"
-            [averageScore]="getNodeAverageScore()"
-          />
-          <nav-item-progress [nodeCompletion]="getNodeCompletion()" [period]="currentPeriod" />
-        </span>
+          <nav-item-score [maxScore]="maxScore" [averageScore]="getNodeAverageScore()" />
+          <teams-on-node [nodeId]="nodeId" [period]="currentPeriod" class="contents" />
+          <nav-item-progress [nodeCompletion]="getNodeCompletion()" />
+        </div>
       </mat-list-item>
     }
   }

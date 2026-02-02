@@ -10,5 +10,4 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class NavItemProgressComponent {
   @Input() nodeCompletion: string;
-  @Input() period: any;
 }

@@ -1,13 +1,13 @@
 @if (workgroupsOnNode.length > 0) {
-  <span class="flex justify-start items-center">
-    <span class="progress-wrapper" tabindex="0">
-      <mat-icon
-        matTooltip="{{ tooltipText }}"
-        matTooltipPosition="above"
-        matTooltipClass="multiline-tooltip"
-        >person</mat-icon
-      >
-      {{ workgroupsOnNode.length }}
-    </span>
-  </span>
+  <div
+    class="flex items-center p-1 rounded-md notice-bg-bg"
+    tabindex="0"
+    matTooltip="{{ tooltipText }}"
+    matTooltipPosition="above"
+    matTooltipClass="multiline-tooltip"
+    #tooltip="matTooltip"
+  >
+    <mat-icon>person</mat-icon>
+    {{ workgroupsOnNode.length }}
+  </div>
 }
