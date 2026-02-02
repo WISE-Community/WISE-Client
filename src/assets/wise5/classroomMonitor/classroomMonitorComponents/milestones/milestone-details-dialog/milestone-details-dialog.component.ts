@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   MatDialogRef,
   MAT_DIALOG_DATA,
@@ -26,12 +26,11 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './milestone-details-dialog.component.html'
 })
 export class MilestoneDetailsDialogComponent implements OnInit {
-  constructor(
-    private dataService: TeacherDataService,
-    private dialogRef: MatDialogRef<MilestoneDetailsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public milestone: any,
-    private router: Router
-  ) {}
+  private dataService = inject(TeacherDataService);
+  private dialogRef = inject<MatDialogRef<MilestoneDetailsDialogComponent>>(MatDialogRef);
+  milestone = inject(MAT_DIALOG_DATA);
+  private router = inject(Router);
+
 
   ngOnInit(): void {
     this.saveMilestoneOpenedEvent();

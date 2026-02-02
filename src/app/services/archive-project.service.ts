@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Project } from '../domain/project';
 import { ArchiveProjectResponse } from '../domain/archiveProjectResponse';
@@ -8,10 +8,11 @@ import { Tag } from '../domain/tag';
 
 @Injectable()
 export class ArchiveProjectService {
+  private http = inject(HttpClient);
+  private snackBar = inject(MatSnackBar);
+
   private refreshProjectsEventSource: Subject<void> = new Subject<void>();
   public refreshProjectsEvent$ = this.refreshProjectsEventSource.asObservable();
-
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
   archiveProject(project: Project, archive: boolean): void {
     this[archive ? 'makeArchiveProjectRequest' : 'makeUnarchiveProjectRequest'](project).subscribe({

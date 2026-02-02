@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Teacher } from '../../../domain/teacher';
 import { UserService } from '../../../services/user.service';
 import {
@@ -23,9 +23,9 @@ import { MatButton } from '@angular/material/button';
   templateUrl: 'unlink-google-account-success.component.html'
 })
 export class UnlinkGoogleAccountSuccessComponent {
-  username: string;
+  private userService = inject(UserService);
 
-  constructor(private userService: UserService) {}
+  username: string;
 
   ngOnInit() {
     const user = <Teacher>this.userService.getUser().getValue();

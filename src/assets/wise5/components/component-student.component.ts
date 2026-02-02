@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
@@ -56,16 +56,14 @@ export abstract class ComponentStudent {
   protected studentWorkSavedToServerSubscription: Subscription;
   protected subscriptions: Subscription = new Subscription();
 
-  constructor(
-    protected annotationService: AnnotationService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {}
+  protected annotationService = inject(AnnotationService);
+  protected componentService = inject(ComponentService);
+  protected configService = inject(ConfigService);
+  protected dialog = inject(MatDialog);
+  protected nodeService = inject(NodeService);
+  protected notebookService = inject(NotebookService);
+  protected studentAssetService = inject(StudentAssetService);
+  protected studentDataService = inject(StudentDataService);
 
   ngOnInit(): void {
     this.nodeId = this.component.nodeId;

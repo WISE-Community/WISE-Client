@@ -1,40 +1,34 @@
-'use strict';
-
-import { ComponentService } from '../componentService';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ComponentService } from '../componentService';
 
 @Injectable()
 export class SummaryService extends ComponentService {
-  componentsWithScoresSummary: string[];
-  componentsWithResponsesSummary: string[];
+  private http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {
-    super();
-    this.componentsWithScoresSummary = [
-      'Animation',
-      'AudioOscillator',
-      'ConceptMap',
-      'DialogGuidance',
-      'Discussion',
-      'Draw',
-      'Embedded',
-      'Graph',
-      'Label',
-      'Match',
-      'MultipleChoice',
-      'OpenResponse',
-      'Table'
-    ];
-    this.componentsWithResponsesSummary = [
-      'DialogGuidance',
-      'Match',
-      'MultipleChoice',
-      'OpenResponse',
-      'Table'
-    ];
-  }
+  componentsWithScoresSummary: string[] = [
+    'Animation',
+    'AudioOscillator',
+    'ConceptMap',
+    'DialogGuidance',
+    'Discussion',
+    'Draw',
+    'Embedded',
+    'Graph',
+    'Label',
+    'Match',
+    'MultipleChoice',
+    'OpenResponse',
+    'Table'
+  ];
+  componentsWithResponsesSummary: string[] = [
+    'DialogGuidance',
+    'Match',
+    'MultipleChoice',
+    'OpenResponse',
+    'Table'
+  ];
 
   getComponentTypeLabel(): string {
     return $localize`Summary`;

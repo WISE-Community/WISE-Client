@@ -1,9 +1,7 @@
 import SVG from 'svg.js';
-import { Component } from '@angular/core';
-import { ProjectService } from '../../../services/projectService';
+import { Component, inject } from '@angular/core';
 import { ConceptMapService } from '../conceptMapService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
-import { NodeService } from '../../../services/nodeService';
 
 @Component({
   selector: 'concept-map-show-work',
@@ -11,6 +9,7 @@ import { NodeService } from '../../../services/nodeService';
   templateUrl: 'concept-map-show-work.component.html'
 })
 export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
+  private conceptMapService = inject(ConceptMapService);
   svgId: string;
   draw: any;
   defaultWidth: number = 800;
@@ -20,14 +19,6 @@ export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
   conceptMapNodeIdToNode: any = {};
   nodes: any[] = [];
   links: any[] = [];
-
-  constructor(
-    private conceptMapService: ConceptMapService,
-    protected nodeService: NodeService,
-    protected projectService: ProjectService
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

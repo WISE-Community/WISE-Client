@@ -1,4 +1,4 @@
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, OnInit, SecurityContext, inject } from '@angular/core';
 import { bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn } from '../animations';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ConfigService } from '../services/config.service';
@@ -32,6 +32,10 @@ import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
+  private breakpointObserver = inject(BreakpointObserver);
+  private configService = inject(ConfigService);
+  private sanitizer = inject(DomSanitizer);
+
   discourseNewsCategory: string;
   discourseUrl: string;
   isDiscourseNewsAvailable: boolean = false;
@@ -114,17 +118,10 @@ export class HomeComponent implements OnInit {
   ];
   protected smScreen: boolean;
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private configService: ConfigService,
-    private sanitizer: DomSanitizer
-  ) {
+  ngOnInit(): void {
     this.breakpointObserver.observe(['(min-width: 40rem)']).subscribe((result) => {
       this.smScreen = result.matches;
     });
-  }
-
-  ngOnInit() {
     this.configService.getConfig().subscribe((config: Config) => {
       if (config != null) {
         this.discourseUrl = this.configService.getDiscourseURL();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Language } from '../../../../../app/domain/language';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
@@ -12,12 +12,12 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './edit-project-language-setting.component.html'
 })
 export class EditProjectLanguageSettingComponent {
+  private projectService = inject(TeacherProjectService);
+
   protected availableLanguages: Language[];
   protected defaultLanguage: Language;
   private projectLocale: ProjectLocale;
   protected supportedLanguages: Language[];
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.updateModel();

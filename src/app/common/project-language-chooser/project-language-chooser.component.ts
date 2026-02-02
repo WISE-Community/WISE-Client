@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, inject } from '@angular/core';
 import { Language } from '../../domain/language';
 import { ProjectLocale } from '../../domain/projectLocale';
 import { MatMenuModule } from '@angular/material/menu';
@@ -14,13 +14,13 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
   templateUrl: './project-language-chooser.component.html'
 })
 export class ProjectLanguageChooserComponent implements OnChanges {
+  private projectService = inject(ProjectService);
+
   protected availableLanguages: Language[];
   @Output() languageChangedEvent = new EventEmitter<Language>();
   @Input() projectLocale: ProjectLocale;
   protected selectedLanguage: Language;
   @Input() tooltip: string = $localize`Select language`;
-
-  constructor(private projectService: ProjectService) {}
 
   ngOnChanges(): void {
     this.availableLanguages = this.projectLocale.getAvailableLanguages();

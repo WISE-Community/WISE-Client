@@ -1,18 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { catchError, lastValueFrom, Observable, of, switchMap } from 'rxjs';
+import { Translations } from '../../../app/domain/translations';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
-import { Translations } from '../../../app/domain/translations';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class ProjectTranslationService {
-  constructor(
-    protected configService: ConfigService,
-    protected http: HttpClient,
-    protected projectService: ProjectService
-  ) {}
+  protected configService = inject(ConfigService);
+  protected http = inject(HttpClient);
+  protected projectService = inject(ProjectService);
 
   currentTranslations = toSignal(
     toObservable(this.projectService.currentLanguage).pipe(

@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges, inject } from '@angular/core';
 import { LibraryProject } from '../libraryProject';
 import { LibraryService } from '../../../services/library.service';
 import { Standard, StandardType } from '../standard';
@@ -35,6 +35,11 @@ import { LocationSelectMenuComponent } from '../../shared/location-select-menu/l
   templateUrl: './library-filters.component.html'
 })
 export class LibraryFiltersComponent {
+  private dialog = inject(MatDialog);
+  protected filterValues = inject(ProjectFilterValues);
+  private libraryService = inject(LibraryService);
+  private utilService = inject(UtilService);
+
   private communityProjects: LibraryProject[] = [];
   protected disciplineOptions: Discipline[] = [];
   protected featureOptions: Feature[] = [];
@@ -53,12 +58,7 @@ export class LibraryFiltersComponent {
     { id: 'Other Platform', name: $localize`Other Platform` }
   ];
 
-  constructor(
-    private dialog: MatDialog,
-    protected filterValues: ProjectFilterValues,
-    private libraryService: LibraryService,
-    private utilService: UtilService
-  ) {
+  constructor() {
     this.libraryService.officialLibraryProjectsSource$.subscribe((projects: LibraryProject[]) => {
       this.libraryProjects = projects;
       this.populateFilterOptions();

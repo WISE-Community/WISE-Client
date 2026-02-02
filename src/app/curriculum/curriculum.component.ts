@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { LibraryFiltersComponent } from '../modules/library/library-filters/library-filters.component';
 import { LibraryService } from '../services/library.service';
@@ -27,17 +27,15 @@ import { ProjectFilterValues } from '../domain/projectFilterValues';
   templateUrl: './curriculum.component.html'
 })
 export class CurriculumComponent {
+  protected configService = inject(ConfigService);
+  private libraryService = inject(LibraryService);
+  private router = inject(Router);
+  private userService = inject(UserService);
+
   private numMyUnitsVisible: number = 0;
   private numPublicUnitsVisible: number = 0;
   protected showMyUnits: boolean;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    protected configService: ConfigService,
-    private libraryService: LibraryService,
-    private userService: UserService,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.showMyUnits = this.userService.isTeacher();

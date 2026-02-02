@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -34,6 +34,8 @@ import { TranslatableTextareaComponent } from '../components/translatable-textar
   templateUrl: './milestones-authoring.component.html'
 })
 export class MilestonesAuthoringComponent {
+  private projectService = inject(TeacherProjectService);
+
   availableSatisfyCriteria: any[] = [{ value: 'isCompleted', text: 'Is Completed' }];
   availableSatisfyCriteriaFunctions: any[] = [
     {
@@ -73,8 +75,6 @@ export class MilestonesAuthoringComponent {
   templateSatisfyCriteriaIds: any;
   templateIdPrefix: string = 'template-';
   templateSatisfyCriteriaIdPrefix: string = 'template-satisfy-criteria-';
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.project = this.projectService.project;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentInfoDialogComponent } from '../component-info-dialog/component-info-dialog.component';
@@ -14,14 +14,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: './component-type-button.component.html'
 })
 export class ComponentTypeButtonComponent {
+  private componentInfoService = inject(ComponentInfoService);
+  private dialog = inject(MatDialog);
+
   @Output() componentSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() componentType: string;
   protected label: string;
-
-  constructor(
-    private componentInfoService: ComponentInfoService,
-    private dialog: MatDialog
-  ) {}
 
   ngOnInit(): void {
     this.label = this.componentInfoService.getInfo(this.componentType).getLabel();

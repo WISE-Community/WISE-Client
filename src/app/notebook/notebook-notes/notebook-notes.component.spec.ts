@@ -2,13 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { NotebookNotesComponent } from './notebook-notes.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 let component: NotebookNotesComponent;
 describe('NotebookNotesComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NotebookNotesComponent, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(withInterceptorsFromDi())]
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        { provide: MAT_DIALOG_DATA, useValue: { insertMode: false } }
+      ]
     });
     const fixture = TestBed.createComponent(NotebookNotesComponent);
     component = fixture.componentInstance;

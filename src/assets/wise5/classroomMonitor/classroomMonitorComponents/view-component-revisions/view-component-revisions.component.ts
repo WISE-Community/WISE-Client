@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -26,6 +26,11 @@ import { Observable } from 'rxjs';
   templateUrl: 'view-component-revisions.component.html'
 })
 export class ViewComponentRevisionsComponent {
+  private annotationService = inject(AnnotationService);
+  private configService = inject(ConfigService);
+  data = inject(MAT_DIALOG_DATA);
+  private dataService = inject(TeacherDataService);
+
   protected componentId: string;
   protected fromWorkgroupId: number;
   private increment: number = 5;
@@ -36,13 +41,6 @@ export class ViewComponentRevisionsComponent {
   protected totalRevisions: number;
   protected usernames: string[];
   protected workgroupId: number;
-
-  constructor(
-    private annotationService: AnnotationService,
-    private configService: ConfigService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dataService: TeacherDataService
-  ) {}
 
   ngOnInit() {
     this.componentId = this.data.componentId;

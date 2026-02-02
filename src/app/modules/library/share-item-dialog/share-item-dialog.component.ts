@@ -1,4 +1,4 @@
-import { OnInit, Inject, Directive } from '@angular/core';
+import { OnInit, Directive, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TeacherService } from '../../../teacher/teacher.service';
@@ -10,6 +10,8 @@ import { copy } from '../../../../assets/wise5/common/object/object';
 
 @Directive()
 export abstract class ShareItemDialogComponent implements OnInit {
+  public data = inject(MAT_DIALOG_DATA);
+  public dialogRef = inject(MatDialogRef<ShareItemDialogComponent>);
   project: Project;
   projectId: number;
   runId: number;
@@ -19,19 +21,13 @@ export abstract class ShareItemDialogComponent implements OnInit {
   owner: any;
   sharedOwners: any[] = [];
   private sharedOwners$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(this.sharedOwners);
+  public snackBar = inject(MatSnackBar);
+  public teacherService = inject(TeacherService);
 
-  constructor(
-    public dialogRef: MatDialogRef<ShareItemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public teacherService: TeacherService,
-    public snackBar: MatSnackBar
-  ) {
+  ngOnInit(): void {
     this.teacherService.retrieveAllTeacherUsernames().subscribe((teacherUsernames) => {
       this.allTeacherUsernames = teacherUsernames;
     });
-  }
-
-  ngOnInit() {
     this.filteredTeacherUsernames = this.teacherSearchControl.valueChanges.pipe(
       debounceTime(1000),
       map((value) => this._filter(value))

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { replaceWiseLinks } from '../../assets/wise5/common/wise-link/wise-link';
 import { NodeService } from '../../assets/wise5/services/nodeService';
@@ -7,11 +7,9 @@ import { scrollToElement, temporarilyHighlightElement } from '../../assets/wise5
 
 @Injectable()
 export class WiseLinkService {
-  constructor(
-    private nodeService: NodeService,
-    private sanitizer: DomSanitizer,
-    private studentDataService: StudentDataService
-  ) {}
+  private nodeService = inject(NodeService);
+  private sanitizer = inject(DomSanitizer);
+  private studentDataService = inject(StudentDataService);
 
   wiseLinkClickedEventName: string = 'wiselinkclicked';
   wiseLinkClickedHandler: any;

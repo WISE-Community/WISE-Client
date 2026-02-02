@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -18,6 +18,10 @@ import { MatTooltip } from '@angular/material/tooltip';
   templateUrl: './export-step-visits.component.html'
 })
 export class ExportStepVisitsComponent extends ExportController {
+  private configService = inject(ConfigService);
+  private dataExportService = inject(DataExportService);
+  private projectService = inject(TeacherProjectService);
+
   project: any;
   nodes: any[];
   checkedItems: string[] = [];
@@ -36,14 +40,6 @@ export class ExportStepVisitsComponent extends ExportController {
   columnExplanations: any[];
   includeDeletedSteps: boolean = true;
   deletedSteps: any = {};
-
-  constructor(
-    private configService: ConfigService,
-    private dataExportService: DataExportService,
-    private projectService: TeacherProjectService
-  ) {
-    super();
-  }
 
   ngOnInit(): void {
     this.project = this.projectService.project;

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
@@ -10,13 +10,11 @@ import { TeacherProjectTranslationService } from '../../../services/teacherProje
   templateUrl: './node-icon-and-title.component.html'
 })
 export class NodeIconAndTitleComponent {
+  private projectService = inject(TeacherProjectService);
+  private projectTranslationService = inject(TeacherProjectTranslationService);
+
   @Input() protected nodeId: string;
   @Input() protected showPosition: boolean;
-
-  constructor(
-    private projectService: TeacherProjectService,
-    private projectTranslationService: TeacherProjectTranslationService
-  ) {}
 
   protected getNodePosition(nodeId: string): string {
     return this.projectService.getNodePositionById(nodeId);

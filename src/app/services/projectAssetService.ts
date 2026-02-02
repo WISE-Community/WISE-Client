@@ -1,7 +1,5 @@
-'use strict';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { forkJoin, BehaviorSubject } from 'rxjs';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -10,17 +8,17 @@ import { isAudio, isImage, isVideo } from '../../assets/wise5/common/file/file';
 
 @Injectable()
 export class ProjectAssetService {
+  protected configService = inject(ConfigService);
+  protected http = inject(HttpClient);
+  protected projectService = inject(ProjectService);
+
   totalSizeMax = 0;
   projectAssets: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   totalFileSize: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalUnusedFileSize: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   projectThumbnailFileName = 'project_thumb.png';
 
-  constructor(
-    protected configService: ConfigService,
-    protected http: HttpClient,
-    protected projectService: ProjectService
-  ) {
+  constructor() {
     this.getProjectAssets().subscribe((projectAssets) => {
       if (projectAssets != null) {
         this.calculateAssetUsage(projectAssets);

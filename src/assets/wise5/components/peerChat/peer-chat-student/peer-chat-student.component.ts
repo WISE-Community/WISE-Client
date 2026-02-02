@@ -1,19 +1,11 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { timeout } from 'rxjs/operators';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { QuestionBankContent } from '../peer-chat-question-bank/QuestionBankContent';
 import { QuestionBankRule } from '../peer-chat-question-bank/QuestionBankRule';
 import { PeerChatComponent } from '../PeerChatComponent';
@@ -56,33 +48,12 @@ export class PeerChatStudentComponent extends ComponentStudent {
   requestTimeout: number = 10000;
   response: string = '';
 
-  constructor(
-    protected annotationService: AnnotationService,
-    private changeDetectorRef: ChangeDetectorRef,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private notificationService: NotificationService,
-    private peerChatService: PeerChatService,
-    private peerGroupService: PeerGroupService,
-    private questionBankService: QuestionBankService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService,
-    private studentWebSocketService: StudentWebSocketService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private notificationService = inject(NotificationService);
+  private peerChatService = inject(PeerChatService);
+  private peerGroupService = inject(PeerGroupService);
+  private questionBankService = inject(QuestionBankService);
+  private studentWebSocketService = inject(StudentWebSocketService);
 
   ngOnInit(): void {
     super.ngOnInit();

@@ -1,14 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  ContentChild,
-  Input,
-  TemplateRef,
-  ViewEncapsulation,
-  ViewChild,
-  ElementRef
-} from '@angular/core';
+import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation, ViewChild, ElementRef, inject } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
@@ -19,6 +11,9 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   templateUrl: './hero-section.component.html'
 })
 export class HeroSectionComponent {
+  private breakpointObserver = inject(BreakpointObserver);
+  private sanitizer = inject(DomSanitizer);
+
   @ViewChild('bgRef') bgRef: ElementRef;
   protected bgStyle: SafeStyle;
   @Input() headline: string;
@@ -31,10 +26,7 @@ export class HeroSectionComponent {
   @ContentChild('taglineTemplate', { static: false }) taglineRef: TemplateRef<any>;
   protected xsScreen: boolean;
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private sanitizer: DomSanitizer
-  ) {
+  constructor() {
     this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
       this.xsScreen = result.matches;
     });

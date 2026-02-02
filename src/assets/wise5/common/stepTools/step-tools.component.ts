@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,19 +32,17 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
   templateUrl: 'step-tools.component.html'
 })
 export class StepToolsComponent {
+  protected dataService = inject(TeacherDataService);
+  protected dir = inject(Directionality);
+  protected nodeService = inject(NodeService);
+  protected projectService = inject(TeacherProjectService);
+
   protected icons: any;
   protected nextId: any;
   protected nodeId: string;
   protected nodeIds: string[];
   protected prevId: any;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    protected dataService: TeacherDataService,
-    protected dir: Directionality,
-    protected nodeService: NodeService,
-    protected projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.calculateNodeIds();

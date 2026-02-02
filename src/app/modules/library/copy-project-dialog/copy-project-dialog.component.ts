@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialogModule,
   MatDialog,
@@ -18,15 +18,15 @@ import { Project } from '../../../domain/project';
   templateUrl: './copy-project-dialog.component.html'
 })
 export class CopyProjectDialogComponent {
+  dialog = inject(MatDialog);
+  dialogRef = inject<MatDialogRef<CopyProjectDialogComponent>>(MatDialogRef);
+  private libraryService = inject(LibraryService);
+  project = inject<Project>(MAT_DIALOG_DATA);
+  private snackBar = inject(MatSnackBar);
+
   protected isCopying: boolean = false;
 
-  constructor(
-    public dialog: MatDialog,
-    public dialogRef: MatDialogRef<CopyProjectDialogComponent>,
-    private libraryService: LibraryService,
-    @Inject(MAT_DIALOG_DATA) public project: Project,
-    private snackBar: MatSnackBar
-  ) {
+  constructor() {
     this.libraryService.newProjectSource$.subscribe(() => {
       this.dialog.closeAll();
     });

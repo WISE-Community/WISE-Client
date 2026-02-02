@@ -1,13 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
   MatDialogTitle,
   MatDialogContent,
   MatDialogActions,
   MatDialogClose
 } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MatTableDataSource,
   MatTable,
@@ -21,7 +18,6 @@ import {
   MatRowDef,
   MatRow
 } from '@angular/material/table';
-import { TeacherService } from '../../../teacher/teacher.service';
 import { LibraryService } from '../../../services/library.service';
 import { ShareItemDialogComponent } from '../share-item-dialog/share-item-dialog.component';
 import { Project } from '../../../domain/project';
@@ -88,25 +84,16 @@ export class ShareProjectDialogComponent extends ShareItemDialogComponent {
   dataSource: MatTableDataSource<any[]> = new MatTableDataSource<any[]>();
   displayedColumns: string[] = ['name', 'permissions'];
   duplicate: boolean = false;
+  public libraryService = inject(LibraryService);
 
-  constructor(
-    public dialogRef: MatDialogRef<ShareItemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public libraryService: LibraryService,
-    public teacherService: TeacherService,
-    public snackBar: MatSnackBar
-  ) {
-    super(dialogRef, data, teacherService, snackBar);
-    this.project = data.project;
-    this.projectId = data.project.id;
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.project = this.data.project;
+    this.projectId = this.data.project.id;
     this.libraryService.getProjectInfo(this.projectId).subscribe((project: Project) => {
       this.project = project;
       this.populateSharedOwners(project.sharedOwners);
     });
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
     this.getSharedOwners().subscribe((sharedOwners) => {
       let owners = [...sharedOwners];
       owners.reverse();

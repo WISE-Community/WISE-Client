@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Student } from '../../domain/student';
 import { StudentRun } from '../student-run';
@@ -45,6 +45,13 @@ import { GoogleSignInButtonComponent } from '../../modules/google-sign-in/google
   templateUrl: './team-sign-in-dialog.component.html'
 })
 export class TeamSignInDialogComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private userService = inject(UserService);
+  private studentService = inject(StudentService);
+  private router = inject(Router);
+  dialogRef = inject<MatDialogRef<TeamSignInDialogComponent>>(MatDialogRef);
+  data = inject(MAT_DIALOG_DATA);
+
   user: Student;
   run: StudentRun = new StudentRun();
   teamMembers: any[] = [];
@@ -53,14 +60,7 @@ export class TeamSignInDialogComponent implements OnInit {
   isGoogleAuthenticationEnabled: boolean = false;
   canLaunch: boolean = false;
 
-  constructor(
-    private configService: ConfigService,
-    private userService: UserService,
-    private studentService: StudentService,
-    private router: Router,
-    public dialogRef: MatDialogRef<TeamSignInDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
+  constructor() {
     this.run = this.data.run;
     this.user = <Student>this.getUser().getValue();
     if (this.run.workgroupMembers != null) {

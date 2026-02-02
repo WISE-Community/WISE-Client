@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../../assets/wise5/services/teacherProjectService';
@@ -24,11 +24,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: 'edit-component-default-feedback.component.html'
 })
 export class EditComponentDefaultFeedback {
+  private projectService = inject(TeacherProjectService);
+
   @Input() componentContent: any;
   protected feedbackChanged: Subject<string> = new Subject<string>();
   private feedbackChangedSubscription: Subscription;
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.feedbackChangedSubscription = this.feedbackChanged

@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NotificationService } from '../../../../services/notificationService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
@@ -27,16 +27,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './notifications-menu.component.html'
 })
 export class NotificationsMenuComponent {
+  private dialog = inject(MatDialog);
+  private notificationService = inject(NotificationService);
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   @Input() newNotifications: Notification[] = [];
   @Input() state: any;
-
-  constructor(
-    private dialog: MatDialog,
-    private notificationService: NotificationService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   protected getNodePositionAndTitle(nodeId: string): string {
     return this.projectService.getNodePositionAndTitle(nodeId);

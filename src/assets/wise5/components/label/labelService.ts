@@ -1,8 +1,8 @@
 import { fabric } from 'fabric';
 import SVG from 'svg.js';
+import { inject, Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { Injectable } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 import { wordWrap } from '../../common/string/string';
 import { hasConnectedComponent } from '../../common/ComponentContent';
@@ -10,14 +10,12 @@ import { labelArraysAreTheSame, makeSureValueIsWithinLimit } from './label';
 
 @Injectable()
 export class LabelService extends ComponentService {
+  private assetService = inject(StudentAssetService);
+
   lineZIndex: number = 0;
   textZIndex: number = 1;
   circleZIndex: number = 2;
   defaultTextBackgroundColor: string = 'blue';
-
-  constructor(private assetService: StudentAssetService) {
-    super();
-  }
 
   getComponentTypeLabel(): string {
     return $localize`Label`;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -48,6 +48,13 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './change-student-password-dialog.component.html'
 })
 export class ChangeStudentPasswordDialogComponent implements OnInit {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+  private teacherService = inject(TeacherService);
+  user = inject(MAT_DIALOG_DATA);
+
   canViewStudentNames: boolean;
   changePasswordForm: FormGroup = new FormGroup({
     teacherPassword: new FormControl('')
@@ -56,15 +63,6 @@ export class ChangeStudentPasswordDialogComponent implements OnInit {
   isChangingPassword: boolean;
   isTeacherGoogleUser: boolean;
   passwordLabel: string = $localize`New Student Password`;
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private configService: ConfigService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private teacherService: TeacherService,
-    @Inject(MAT_DIALOG_DATA) public user: any
-  ) {}
 
   ngOnInit(): void {
     this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;

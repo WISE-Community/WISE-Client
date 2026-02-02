@@ -1,14 +1,10 @@
-'use strict';
-
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { OpenResponseCompletionCriteriaService } from './openResponseCompletionCriteriaService';
 
 @Injectable()
 export class OpenResponseService extends ComponentService {
-  constructor(private completionCriteriaService: OpenResponseCompletionCriteriaService) {
-    super();
-  }
+  private completionCriteriaService = inject(OpenResponseCompletionCriteriaService);
 
   getComponentTypeLabel(): string {
     return $localize`Open Response`;

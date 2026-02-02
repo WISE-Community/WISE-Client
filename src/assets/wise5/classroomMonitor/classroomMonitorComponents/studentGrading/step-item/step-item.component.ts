@@ -4,7 +4,8 @@ import {
   Input,
   Output,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
+  inject
 } from '@angular/core';
 import { copy } from '../../../../common/object/object';
 import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
@@ -38,6 +39,9 @@ import { WorkgroupComponentGradingComponent } from '../../workgroup-component-gr
   encapsulation: ViewEncapsulation.None
 })
 export class StepItemComponent {
+  private componentServiceLookupService = inject(ComponentServiceLookupService);
+  private projectService = inject(TeacherProjectService);
+
   protected componentIdToIsVisible: { [componentId: string]: boolean } = {};
   protected components: any[];
   protected disabled: boolean;
@@ -56,11 +60,6 @@ export class StepItemComponent {
   protected statusText: string = '';
   @Input() stepData: any;
   @Input() workgroupId: number;
-
-  constructor(
-    private componentServiceLookupService: ComponentServiceLookupService,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnChanges(changesObj: SimpleChanges): void {
     if (changesObj.maxScore) {

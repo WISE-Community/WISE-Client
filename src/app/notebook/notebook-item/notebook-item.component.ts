@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DialogWithConfirmComponent } from '../../../assets/wise5/directives/dialog-with-confirm/dialog-with-confirm.component';
@@ -25,6 +25,11 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: 'notebook-item.component.html'
 })
 export class NotebookItemComponent {
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
+  private notebookService = inject(NotebookService);
+  private projectService = inject(ProjectService);
+
   protected canDelete: boolean;
   protected canRevive: boolean;
   protected color: string;
@@ -38,13 +43,6 @@ export class NotebookItemComponent {
   private notebookUpdatedSubscription: Subscription;
   @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
   private type: string;
-
-  constructor(
-    private configService: ConfigService,
-    private dialog: MatDialog,
-    private notebookService: NotebookService,
-    private projectService: ProjectService
-  ) {}
 
   ngOnInit(): void {
     this.item = this.note;

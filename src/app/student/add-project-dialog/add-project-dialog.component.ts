@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   MatDialog,
   MatDialogTitle,
@@ -46,6 +46,10 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './add-project-dialog.component.html'
 })
 export class AddProjectDialogComponent implements OnInit {
+  dialog = inject(MatDialog);
+  private route = inject(ActivatedRoute);
+  private studentService = inject(StudentService);
+
   validRunCodeSyntaxRegEx: any = /^[a-zA-Z]*\d{3,4}$/;
   registerRunRunCode: string = '';
   registerRunPeriods: string[] = [];
@@ -57,12 +61,6 @@ export class AddProjectDialogComponent implements OnInit {
     period: new FormControl({ value: '', disabled: true }, Validators.required)
   });
   isAdding = false;
-
-  constructor(
-    public dialog: MatDialog,
-    private studentService: StudentService,
-    private route: ActivatedRoute
-  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {

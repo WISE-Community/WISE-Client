@@ -6,7 +6,8 @@ import {
   EnvironmentInjector,
   Input,
   ViewChild,
-  createComponent
+  createComponent,
+  inject
 } from '@angular/core';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { components } from '../../../components/Components';
@@ -16,15 +17,13 @@ import { components } from '../../../components/Components';
   template: '<div #component tabindex="-1"></div>'
 })
 export class EditComponentComponent {
+  private applicationRef = inject(ApplicationRef);
+  private injector = inject(EnvironmentInjector);
+
   @Input() componentContent: ComponentContent;
   @ViewChild('component') private componentElementRef: ElementRef;
   private componentRef: ComponentRef<any>;
   @Input() nodeId: string;
-
-  constructor(
-    private applicationRef: ApplicationRef,
-    private injector: EnvironmentInjector
-  ) {}
 
   ngAfterViewInit(): void {
     const hostElement = this.componentElementRef.nativeElement;

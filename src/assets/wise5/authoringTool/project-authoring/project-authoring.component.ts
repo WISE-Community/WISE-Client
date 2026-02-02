@@ -1,4 +1,13 @@
-import { Component, Input, OnInit, Signal, WritableSignal, computed, signal } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Signal,
+  WritableSignal,
+  computed,
+  signal,
+  inject
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,6 +42,13 @@ import { copy } from '../../common/object/object';
   templateUrl: './project-authoring.component.html'
 })
 export class ProjectAuthoringComponent implements OnInit {
+  private dataService = inject(TeacherDataService);
+  private deleteNodeService = inject(DeleteNodeService);
+  private deleteTranslationsService = inject(DeleteTranslationsService);
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected allLessonsCollapsed: Signal<boolean> = computed(() =>
     this.isAllLessonsExpandedValue(false)
   );
@@ -49,15 +65,6 @@ export class ProjectAuthoringComponent implements OnInit {
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input('unitId') protected projectId?: number;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private dataService: TeacherDataService,
-    private deleteNodeService: DeleteNodeService,
-    private deleteTranslationsService: DeleteTranslationsService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.projectId = Number(this.projectId);

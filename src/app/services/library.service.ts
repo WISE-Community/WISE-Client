@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LibraryGroup } from '../modules/library/libraryGroup';
@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class LibraryService {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
   private libraryGroupsUrl = '/api/project/library';
   private communityProjectsUrl = '/api/project/community';
   private personalProjectsUrl = '/api/project/personal';
@@ -31,11 +34,6 @@ export class LibraryService {
   public numberOfPublicProjectsVisible$ = this.numberOfPublicProjectsVisible.asObservable();
   public numberOfPersonalProjectsVisible = new BehaviorSubject<number>(0);
   public numberOfPersonalProjectsVisible$ = this.numberOfPersonalProjectsVisible.asObservable();
-
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
 
   getOfficialLibraryProjects(): void {
     this.http.get<LibraryGroup[]>(this.libraryGroupsUrl).subscribe((libraryGroups) => {

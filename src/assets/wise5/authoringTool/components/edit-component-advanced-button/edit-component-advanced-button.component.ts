@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { EditComponentAdvancedComponent } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced.component';
@@ -13,10 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: 'edit-component-advanced-button.component.html'
 })
 export class EditComponentAdvancedButtonComponent {
+  private dialog = inject(MatDialog);
+
   @Input() componentContent: ComponentContent;
   @Input() nodeId: string;
-
-  constructor(private dialog: MatDialog) {}
 
   protected showComponentAdvancedAuthoring(): void {
     this.dialog.open(EditComponentAdvancedComponent, {

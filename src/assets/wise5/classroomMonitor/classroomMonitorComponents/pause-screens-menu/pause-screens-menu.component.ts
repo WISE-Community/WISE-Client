@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherPauseScreenService } from '../../../services/teacherPauseScreenService';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -20,13 +20,13 @@ class Period {
   templateUrl: './pause-screens-menu.component.html'
 })
 export class PauseScreensMenuComponent {
+  private dataService = inject(TeacherDataService);
+  private pauseScreenService = inject(TeacherPauseScreenService);
+
   protected allPeriodsPaused: boolean;
   protected periods: Period[];
 
-  constructor(
-    private dataService: TeacherDataService,
-    private pauseScreenService: TeacherPauseScreenService
-  ) {
+  constructor() {
     this.periods = this.dataService.getPeriods().filter((period) => period.periodId !== -1);
   }
 

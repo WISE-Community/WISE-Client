@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
@@ -41,6 +41,15 @@ import { ProjectLanguageChooserComponent } from '../../common/project-language-c
   templateUrl: 'top-bar.component.html'
 })
 export class TopBarComponent {
+  private dialog = inject(MatDialog);
+  private configService = inject(ConfigService);
+  private constraintService = inject(ConstraintService);
+  private nodeStatusService = inject(NodeStatusService);
+  private notificationService = inject(NotificationService);
+  private projectService = inject(ProjectService);
+  private studentDataService = inject(StudentDataService);
+  private projectTranslationService = inject(StudentProjectTranslationService);
+
   @ViewChild(StudentAccountMenuComponent) accountMenu: StudentAccountMenuComponent;
 
   avatarColor: string;
@@ -55,17 +64,6 @@ export class TopBarComponent {
   protected projectLocale: ProjectLocale;
   @Input() projectName: string;
   subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private dialog: MatDialog,
-    private configService: ConfigService,
-    private constraintService: ConstraintService,
-    private nodeStatusService: NodeStatusService,
-    private notificationService: NotificationService,
-    private projectService: ProjectService,
-    private studentDataService: StudentDataService,
-    private projectTranslationService: StudentProjectTranslationService
-  ) {}
 
   ngOnInit(): void {
     this.avatarColor = getAvatarColorForWorkgroupId(this.configService.getWorkgroupId());

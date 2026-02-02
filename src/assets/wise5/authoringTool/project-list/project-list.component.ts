@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,16 +33,14 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './project-list.component.html'
 })
 export class ProjectListComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
+  private copyProjectService = inject(CopyProjectService);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
+  private sessionService = inject(SessionService);
+
   protected projects: any[] = [];
   protected sharedProjects: any[] = [];
-
-  constructor(
-    private configService: ConfigService,
-    private copyProjectService: CopyProjectService,
-    private dialog: MatDialog,
-    private router: Router,
-    private sessionService: SessionService
-  ) {}
 
   ngOnInit(): void {
     this.projects = this.configService

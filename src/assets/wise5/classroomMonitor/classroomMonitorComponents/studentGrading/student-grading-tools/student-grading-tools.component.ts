@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -22,6 +22,11 @@ class Workgroup {
   templateUrl: './student-grading-tools.component.html'
 })
 export class StudentGradingToolsComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected avatarColor: string;
   protected nextWorkgroup: Workgroup;
   private periodId: number;
@@ -29,13 +34,6 @@ export class StudentGradingToolsComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   private workgroupId: number;
   private workgroups: Workgroup[];
-
-  constructor(
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     if (/unit\/(\d*)\/team\/(\w*)$/.test(this.router.url)) {

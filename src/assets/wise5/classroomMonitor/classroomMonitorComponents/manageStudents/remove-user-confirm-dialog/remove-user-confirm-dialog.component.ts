@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
@@ -22,10 +22,8 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './remove-user-confirm-dialog.component.html'
 })
 export class RemoveUserConfirmDialogComponent implements OnInit {
-  constructor(
-    private configService: ConfigService,
-    @Inject(MAT_DIALOG_DATA) public user: any
-  ) {}
+  private configService = inject(ConfigService);
+  user = inject(MAT_DIALOG_DATA);
 
   protected studentDisplayName: string;
 

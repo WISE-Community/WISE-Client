@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Tag } from '../../domain/tag';
 import { Subject, Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -35,18 +34,16 @@ import { TagComponent } from '../tag/tag.component';
   templateUrl: './manage-tags-dialog.component.html'
 })
 export class ManageTagsDialogComponent implements OnInit {
+  private projectTagService = inject(ProjectTagService);
+  private snackBar = inject(MatSnackBar);
+  private teacherService = inject(TeacherService);
+
   protected idToEditing: { [id: string]: boolean } = {};
   protected inputChanged: Subject<any> = new Subject<any>();
   private projects: Project[];
   protected showCreateTag: boolean;
   private subscriptions: Subscription = new Subscription();
   protected tags: Tag[] = [];
-
-  constructor(
-    private projectTagService: ProjectTagService,
-    private snackBar: MatSnackBar,
-    private teacherService: TeacherService
-  ) {}
 
   ngOnInit(): void {
     this.teacherService.getPersonalAndSharedProjects().subscribe((projects) => {

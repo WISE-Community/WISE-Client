@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, LOCALE_ID, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -49,6 +49,14 @@ import { Tag } from '../../domain/tag';
   ]
 })
 export class TeacherRunListComponent implements OnInit {
+  private archiveProjectService = inject(ArchiveProjectService);
+  private configService = inject(ConfigService);
+  private localeID = inject(LOCALE_ID);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private teacherService = inject(TeacherService);
+  private userService = inject(UserService);
+
   private MAX_RECENT_RUNS = 10;
 
   protected allRunsLoaded: boolean = false;
@@ -64,16 +72,6 @@ export class TeacherRunListComponent implements OnInit {
   protected showAll: boolean = false;
   protected showArchivedView: boolean = false;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private archiveProjectService: ArchiveProjectService,
-    private configService: ConfigService,
-    @Inject(LOCALE_ID) private localeID: string,
-    private route: ActivatedRoute,
-    private router: Router,
-    private teacherService: TeacherService,
-    private userService: UserService
-  ) {}
 
   ngOnInit() {
     this.getRuns();

@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectAssetService } from '../../../../app/services/projectAssetService';
@@ -9,6 +9,11 @@ import { moveObjectDown, moveObjectUp } from '../../common/array/array';
 
 @Directive()
 export abstract class AbstractComponentAuthoring {
+  protected configService = inject(ConfigService);
+  protected nodeService = inject(TeacherNodeService);
+  protected projectAssetService = inject(ProjectAssetService);
+  protected projectService = inject(TeacherProjectService);
+
   allowedConnectedComponentTypes: string[];
   componentContent: any;
   componentId: string;
@@ -17,13 +22,6 @@ export abstract class AbstractComponentAuthoring {
   nodeId: string;
   promptChange: Subject<string> = new Subject<string>();
   subscriptions: Subscription = new Subscription();
-
-  constructor(
-    protected configService: ConfigService,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.componentId = this.componentContent.id;

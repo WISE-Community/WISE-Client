@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { AnnotationService } from '../../../services/annotationService';
@@ -15,6 +15,9 @@ import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
   templateUrl: 'edit-component-comment.component.html'
 })
 export class EditComponentCommentComponent {
+  private annotationService = inject(AnnotationService);
+  private notificationService = inject(NotificationService);
+
   @Input() comment: string;
   @Input() componentId: string;
   @Input() componentStateId: string;
@@ -28,11 +31,6 @@ export class EditComponentCommentComponent {
   protected commentChanged: Subject<string> = new Subject<string>();
   private isDirty: boolean;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private annotationService: AnnotationService,
-    private notificationService: NotificationService
-  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(

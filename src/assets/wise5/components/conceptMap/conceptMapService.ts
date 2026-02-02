@@ -1,22 +1,16 @@
-'use strict';
-
 import SVG from 'svg.js';
+import { inject, Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { ConfigService } from '../../services/configService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import ConceptMapNode from './conceptMapNode';
 import ConceptMapLink from './conceptMapLink';
-import { Injectable } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class ConceptMapService extends ComponentService {
-  constructor(
-    private ConfigService: ConfigService,
-    private StudentAssetService: StudentAssetService
-  ) {
-    super();
-  }
+  private configService = inject(ConfigService);
+  private assetService = inject(StudentAssetService);
 
   getComponentTypeLabel(): string {
     return $localize`Concept Map`;
@@ -808,12 +802,12 @@ export class ConceptMapService extends ComponentService {
             ctx.drawImage(image, 0, 0);
 
             const pngFile = convertToPNGFile(myCanvas);
-            this.StudentAssetService.uploadAsset(pngFile).then((unreferencedAsset) => {
+            this.assetService.uploadAsset(pngFile).then((unreferencedAsset) => {
               /*
                * make a copy of the unreferenced asset so that we
                * get a referenced asset
                */
-              this.StudentAssetService.copyAssetForReference(unreferencedAsset).then(
+              this.assetService.copyAssetForReference(unreferencedAsset).then(
                 (referencedAsset) => {
                   if (referencedAsset != null) {
                     /*
@@ -824,7 +818,7 @@ export class ConceptMapService extends ComponentService {
                     const referencedAssetUrl = referencedAsset.url;
 
                     // remove the unreferenced asset
-                    this.StudentAssetService.deleteAsset(unreferencedAsset);
+                    this.assetService.deleteAsset(unreferencedAsset);
 
                     // resolve the promise with the image url
                     resolve(referencedAssetUrl);
@@ -868,7 +862,7 @@ export class ConceptMapService extends ComponentService {
          */
 
         // prepend the project asset directory path
-        imageHref = this.ConfigService.getProjectAssetsDirectoryPath(true) + '/' + imageHref;
+        imageHref = this.configService.getProjectAssetsDirectoryPath(true) + '/' + imageHref;
       }
 
       // get the Base64 of the image
@@ -1158,7 +1152,7 @@ export class ConceptMapService extends ComponentService {
             ctx.drawImage(image, 0, 0);
 
             const pngFile = convertToPNGFile(myCanvas);
-            this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
+            this.assetService.uploadAsset(pngFile).then((asset) => {
               resolve(asset);
             });
           };

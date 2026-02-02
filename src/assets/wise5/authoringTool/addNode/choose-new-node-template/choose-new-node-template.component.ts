@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NewNodeTemplate } from '../NewNodeTemplate';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: 'choose-new-node-template.component.html'
 })
 export class ChooseNewNodeTemplateComponent {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected templates: NewNodeTemplate[] = [
     {
       label: $localize`Create Your Own`,
@@ -34,11 +37,6 @@ export class ChooseNewNodeTemplateComponent {
       route: 'simulation/choose-item'
     }
   ];
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   protected chooseTemplate(template: NewNodeTemplate) {
     this.router.navigate(['..', ...template.route.split('/')], {

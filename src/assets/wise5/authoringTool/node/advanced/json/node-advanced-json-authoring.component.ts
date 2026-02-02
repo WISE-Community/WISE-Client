@@ -1,6 +1,6 @@
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NotificationService } from '../../../../services/notificationService';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -23,17 +23,15 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
   </mat-form-field>`
 })
 export class NodeAdvancedJsonAuthoringComponent implements OnInit {
+  private notificationService = inject(NotificationService);
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+
   protected node: any;
   protected nodeContentJSONString: string;
   protected nodeContentChanged: Subject<string> = new Subject<string>();
   protected nodeContentChangedSubscription: Subscription;
   protected nodeId: string;
-
-  constructor(
-    private notificationService: NotificationService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute
-  ) {}
 
   ngOnInit(): void {
     this.route.parent.parent.parent.params.subscribe((params) => {

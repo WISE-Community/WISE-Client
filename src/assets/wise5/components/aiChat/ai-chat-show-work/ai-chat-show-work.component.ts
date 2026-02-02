@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.component';
 
@@ -13,16 +11,9 @@ import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.co
 })
 export class AiChatShowWorkComponent extends ComponentShowWorkDirective {
   protected computerAvatar: ComputerAvatar;
+  private computerAvatarService = inject(ComputerAvatarService);
   protected messages: any[] = [];
   protected workgroupId: number;
-
-  constructor(
-    private computerAvatarService: ComputerAvatarService,
-    protected nodeService: NodeService,
-    protected projectService: ProjectService
-  ) {
-    super(nodeService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

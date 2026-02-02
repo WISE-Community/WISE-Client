@@ -1,25 +1,17 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { PeerGroupStudentData } from '../../../app/domain/peerGroupStudentData';
 import { PeerGroup } from '../components/peerChat/PeerGroup';
 import { AnnotationService } from './annotationService';
-import { ConfigService } from './configService';
 import { PeerGroupService } from './peerGroupService';
-import { StudentDataService } from './studentDataService';
 import { ProjectService } from './projectService';
+import { StudentDataService } from './studentDataService';
 
 @Injectable()
 export class StudentPeerGroupService extends PeerGroupService {
-  constructor(
-    private annotationService: AnnotationService,
-    protected configService: ConfigService,
-    protected http: HttpClient,
-    private projectService: ProjectService,
-    private studentDataService: StudentDataService
-  ) {
-    super(configService, http);
-  }
+  private annotationService = inject(AnnotationService);
+  private projectService = inject(ProjectService);
+  private studentDataService = inject(StudentDataService);
 
   retrievePeerGroup(
     peerGroupingTag: string,
@@ -128,10 +120,11 @@ export class StudentPeerGroupService extends PeerGroupService {
     showWorkComponentId: string
   ): Observable<any> {
     if (this.configService.isPreview()) {
-      const latestComponentState = this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
-        showWorkNodeId,
-        showWorkComponentId
-      );
+      const latestComponentState =
+        this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+          showWorkNodeId,
+          showWorkComponentId
+        );
       return latestComponentState != null ? of([latestComponentState]) : of([]);
     }
     return super.retrieveStudentWork(

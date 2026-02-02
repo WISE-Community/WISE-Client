@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -26,6 +26,9 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './recovery-authoring.component.html'
 })
 export class RecoveryAuthoringComponent implements OnInit {
+  private notificationService = inject(NotificationService);
+  private projectService = inject(TeacherProjectService);
+
   badNodes: NodeRecoveryAnalysis[] = [];
   protected globalMessage: any;
   jsonValid: boolean;
@@ -33,11 +36,6 @@ export class RecoveryAuthoringComponent implements OnInit {
   saveButtonEnabled: boolean = false;
   private subscriptions: Subscription = new Subscription();
   @Input() protected unitId?: string;
-
-  constructor(
-    private notificationService: NotificationService,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);

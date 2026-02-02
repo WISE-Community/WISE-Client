@@ -1,4 +1,3 @@
-'use strict';
 import { ProjectService } from '../services/projectService';
 import { Injectable } from '@angular/core';
 

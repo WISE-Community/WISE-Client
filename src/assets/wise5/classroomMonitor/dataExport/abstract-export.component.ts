@@ -6,10 +6,19 @@ import { ConfigService } from '../../services/configService';
 import { DataExportService } from '../../services/dataExportService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 
 @Directive()
 export abstract class AbstractExportComponent {
+  public annotationService = inject(AnnotationService);
+  public configService = inject(ConfigService);
+  public dataExportService = inject(DataExportService);
+  public dataService = inject(TeacherDataService);
+  protected dialog = inject(MatDialog);
+  public projectService = inject(TeacherProjectService);
+  protected route = inject(ActivatedRoute);
+  protected router = inject(Router);
+
   protected canViewStudentNames = false;
   protected exportStepSelectionType: string = 'exportAllSteps';
   protected flattenedProjectAsNodeIds: string[] = [];
@@ -19,17 +28,6 @@ export abstract class AbstractExportComponent {
   protected project: any;
   protected projectIdToOrder: any;
   protected projectItems: any;
-
-  constructor(
-    public annotationService: AnnotationService,
-    public configService: ConfigService,
-    public dataExportService: DataExportService,
-    public dataService: TeacherDataService,
-    protected dialog: MatDialog,
-    public projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {}
 
   ngOnInit(): void {
     this.project = this.projectService.project;

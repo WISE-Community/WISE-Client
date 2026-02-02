@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { Component, inject } from '@angular/core';
 import { scrollToElement, temporarilyHighlightElement } from '../../../../common/dom/dom';
 import { ConstraintsAuthoringComponent } from '../../../constraint/constraints-authoring/constraints-authoring.component';
 import { ActivatedRoute } from '@angular/router';
@@ -26,12 +25,7 @@ import { NodeConstraintAuthoringComponent } from '../../../constraint/node-const
   templateUrl: 'node-advanced-constraint-authoring.component.html'
 })
 export class NodeAdvancedConstraintAuthoringComponent extends ConstraintsAuthoringComponent {
-  constructor(
-    protected projectService: TeacherProjectService,
-    private route: ActivatedRoute
-  ) {
-    super(projectService);
-  }
+  private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.route.parent.parent.parent.params.subscribe((params) => {

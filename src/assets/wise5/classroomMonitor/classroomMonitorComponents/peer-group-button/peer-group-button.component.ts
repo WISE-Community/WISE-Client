@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Node } from '../../../common/Node';
@@ -11,11 +11,11 @@ import { TeacherPeerGroupService } from '../../../services/teacherPeerGroupServi
   templateUrl: './peer-group-button.component.html'
 })
 export class PeerGroupButtonComponent {
+  private peerGroupService = inject(TeacherPeerGroupService);
+
   @Input() component: any;
   @Input() node: Node;
   protected peerGroupingTag: string;
-
-  constructor(private peerGroupService: TeacherPeerGroupService) {}
 
   ngOnChanges(): void {
     this.peerGroupingTag = this.component?.peerGroupingTag;

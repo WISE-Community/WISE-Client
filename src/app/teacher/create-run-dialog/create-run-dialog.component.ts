@@ -1,5 +1,5 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { finalize } from 'rxjs/operators';
 import {
@@ -62,6 +62,17 @@ import { AccessLinkService } from '../../services/accessLinkService';
   templateUrl: './create-run-dialog.component.html'
 })
 export class CreateRunDialogComponent {
+  private accessLinkService = inject(AccessLinkService);
+  private configService = inject(ConfigService);
+  data = inject(MAT_DIALOG_DATA);
+  dialog = inject(MatDialog);
+  dialogRef = inject<MatDialogRef<CreateRunDialogComponent>>(MatDialogRef);
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+  private teacherService = inject(TeacherService);
+  private userService = inject(UserService);
+
   protected accessLinks: string[] = [];
   protected customPeriods: FormControl;
   private endDateControl: FormControl;
@@ -75,22 +86,8 @@ export class CreateRunDialogComponent {
   project: Project;
   run: TeacherRun = null;
 
-  constructor(
-    private accessLinkService: AccessLinkService,
-    private configService: ConfigService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialog: MatDialog,
-    public dialogRef: MatDialogRef<CreateRunDialogComponent>,
-    private fb: FormBuilder,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private teacherService: TeacherService,
-    private userService: UserService
-  ) {
-    this.project = data.project;
-  }
-
   ngOnInit(): void {
+    this.project = this.data.project;
     this.setPeriodOptions();
     let hiddenControl = new FormControl('', Validators.required);
     this.periodsGroup = new FormArray(

@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class UpdateWorkgroupService {
-  constructor(private configService: ConfigService, private http: HttpClient) {}
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
 
   /**
    * Move student to a workgroup

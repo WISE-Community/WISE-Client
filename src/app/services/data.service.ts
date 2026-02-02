@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 
 @Injectable()
 export abstract class DataService {
+  protected projectService = inject(ProjectService);
+
   currentNode = null;
   previousStep = null;
   private currentNodeChangedSource: Subject<any> = new Subject<any>();
   public currentNodeChanged$ = this.currentNodeChangedSource.asObservable();
   private studentWorkReceivedSource: Subject<any> = new Subject<any>();
   public studentWorkReceived$ = this.studentWorkReceivedSource.asObservable();
-
-  constructor(protected projectService: ProjectService) {}
 
   getCurrentNode(): any {
     return this.currentNode;

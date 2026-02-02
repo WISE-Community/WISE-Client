@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,13 +11,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './select-merge-step.component.scss'
 })
 export class SelectMergeStepComponent {
+  private projectService = inject(TeacherProjectService);
+
   @Input() branchStepId: string;
   protected mergeStepId: string = '';
   protected nextStepId: string = '';
   protected nextStepTitle: string = '';
   @Output() selectMergeStepEvent: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     const branchStepParentId = this.projectService.getParentGroupId(this.branchStepId);

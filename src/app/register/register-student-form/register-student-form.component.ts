@@ -1,22 +1,17 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+
+import { Component, inject, OnInit } from '@angular/core';
 import { Student } from '../../domain/student';
 import { StudentService } from '../../student/student.service';
 import {
   FormControl,
   FormGroup,
   Validators,
-  FormBuilder,
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
-import { UtilService } from '../../services/util.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
-import { ConfigService } from '../../services/config.service';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -76,24 +71,12 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   securityQuestions: object;
   user: Student = new Student();
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private configService: ConfigService,
-    protected fb: FormBuilder,
-    private recaptchaV3Service: ReCaptchaV3Service,
-    private router: Router,
-    private route: ActivatedRoute,
-    protected snackBar: MatSnackBar,
-    private studentService: StudentService,
-    private utilService: UtilService
-  ) {
-    super(fb, snackBar);
+  private studentService = inject(StudentService);
+
+  ngOnInit() {
     this.studentService.retrieveSecurityQuestions().subscribe((response) => {
       this.securityQuestions = response;
     });
-  }
-
-  ngOnInit() {
     this.route.params.subscribe((params) => {
       this.user.googleUserId = params['gID'];
       this.user.microsoftUserId = params['mID'];

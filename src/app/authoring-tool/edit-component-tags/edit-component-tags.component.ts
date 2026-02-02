@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
@@ -36,11 +36,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: 'edit-component-tags.component.html'
 })
 export class EditComponentTagsComponent {
+  private projectService = inject(TeacherProjectService);
+
   @Input() componentContent: any;
   protected tagChanged: Subject<any> = new Subject<any>();
   private tagChangedSubscription: Subscription;
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.tagChangedSubscription = this.tagChanged

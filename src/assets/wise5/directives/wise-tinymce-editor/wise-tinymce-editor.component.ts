@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { debounceTime } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { NotebookService } from '../../services/notebookService';
@@ -25,6 +25,7 @@ export class WiseTinymceEditorComponent {
   @Input() language: Language;
   @Input() model: any;
   @Output() modelChange: EventEmitter<string> = new EventEmitter<string>();
+  protected notebookService = inject(NotebookService);
   @Output() openNotebook: EventEmitter<string> = new EventEmitter<string>();
   private previousContent: string;
   private subscriptions: Subscription = new Subscription();
@@ -78,15 +79,12 @@ export class WiseTinymceEditorComponent {
     'wordcount'
   ];
 
-  constructor(private notebookService: NotebookService) {
+  ngOnInit(): void {
     this.subscriptions.add(
       this.debouncer.pipe(debounceTime(1000)).subscribe((value) => {
         this.modelChange.emit(value);
       })
     );
-  }
-
-  ngOnInit(): void {
     if (this.isAddNoteButtonAvailable) {
       this.subscriptions.add(
         this.notebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {

@@ -1,15 +1,14 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { SelectComponentComponent } from '../../../../app/authoring-tool/select-component/select-component.component';
 import { SelectStepComponent } from '../../../../app/authoring-tool/select-step/select-step.component';
 import { copy } from '../../common/object/object';
 import { DeleteBranchService } from '../../services/deleteBranchService';
 import { EditBranchService } from '../../services/editBranchService';
-import { TeacherProjectService } from '../../services/teacherProjectService';
 import { AbstractBranchAuthoringComponent } from '../abstract-branch-authoring/abstract-branch-authoring.component';
 import { EditBranchPathsComponent } from '../edit-branch-paths/edit-branch-paths.component';
 import { SelectBranchCriteriaComponent } from '../select-branch-criteria/select-branch-criteria.component';
@@ -36,17 +35,9 @@ export class EditBranchComponent extends AbstractBranchAuthoringComponent {
   private node: any;
   protected submitting: boolean;
 
-  constructor(
-    private changeDetector: ChangeDetectorRef,
-    private deleteBranchService: DeleteBranchService,
-    private editBranchService: EditBranchService,
-    protected fb: FormBuilder,
-    protected projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {
-    super(fb, projectService, route, router);
-  }
+  private changeDetector = inject(ChangeDetectorRef);
+  private deleteBranchService = inject(DeleteBranchService);
+  private editBranchService = inject(EditBranchService);
 
   ngOnInit(): void {
     super.ngOnInit();

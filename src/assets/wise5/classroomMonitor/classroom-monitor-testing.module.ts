@@ -28,6 +28,8 @@ import { StudentNodeService } from '../services/studentNodeService';
 import { ConstraintService } from '../services/constraintService';
 import { StudentDataService } from '../services/studentDataService';
 import { NodeStatusService } from '../services/nodeStatusService';
+import { TeacherNodeService } from '../services/teacherNodeService';
+import { DataService } from '../../../app/services/data.service';
 
 @NgModule({
   providers: [
@@ -38,6 +40,7 @@ import { NodeStatusService } from '../services/nodeStatusService';
     ConfigService,
     MockProvider(ConstraintService),
     ClassroomStatusService,
+    { provide: DataService, useClass: TeacherDataService },
     GradingNodeService,
     MilestoneService,
     MilestoneReportService,
@@ -52,6 +55,7 @@ import { NodeStatusService } from '../services/nodeStatusService';
     StudentDataService,
     StudentNodeService,
     TeacherDataService,
+    TeacherNodeService,
     TeacherPauseScreenService,
     TeacherPeerGroupService,
     TeacherProjectService,

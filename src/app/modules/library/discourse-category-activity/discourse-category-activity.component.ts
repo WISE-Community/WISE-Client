@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -10,14 +10,14 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: 'discourse-category-activity.component.html'
 })
 export class DiscourseCategoryActivityComponent {
+  private http = inject(HttpClient);
+
   @Input() categoryURL: string = '';
   protected discourseBaseUrl: string = '';
   protected hasMoreTopics: boolean;
   protected postCount: number = 0;
   protected topics: any[] = [];
   protected validCategoryURL: boolean;
-
-  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.retrieveCategory();

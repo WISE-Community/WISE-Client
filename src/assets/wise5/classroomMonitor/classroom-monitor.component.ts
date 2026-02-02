@@ -5,7 +5,6 @@ import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { Notification } from '../../../app/domain/notification';
 import { DialogWithConfirmComponent } from '../directives/dialog-with-confirm/dialog-with-confirm.component';
 import { ConfigService } from '../services/configService';
-import { NodeService } from '../services/nodeService';
 import { NotebookService } from '../services/notebookService';
 import { NotificationService } from '../services/notificationService';
 import { SessionService } from '../services/sessionService';
@@ -20,6 +19,7 @@ import { NotebookReportComponent } from '../../../app/notebook/notebook-report/n
 import { SideMenuComponent } from '../common/side-menu/side-menu.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MainMenuComponent } from '../common/main-menu/main-menu.component';
+import { TeacherNodeService } from '../services/teacherNodeService';
 
 @Component({
   selector: 'classroom-monitor',
@@ -56,7 +56,7 @@ export class ClassroomMonitorComponent implements OnInit {
     private configService: ConfigService,
     private dataService: TeacherDataService,
     private dialog: MatDialog,
-    private nodeService: NodeService,
+    private nodeService: TeacherNodeService,
     private notebookService: NotebookService,
     private notificationService: NotificationService,
     private pauseScreenService: TeacherPauseScreenService,

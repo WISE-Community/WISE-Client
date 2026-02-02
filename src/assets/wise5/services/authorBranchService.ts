@@ -1,3 +1,4 @@
+import { inject, Injectable } from '@angular/core';
 import { AuthorBranchParams } from '../common/AuthorBranchParams';
 import { TeacherProjectService } from './teacherProjectService';
 import {
@@ -8,11 +9,10 @@ import {
 import { Transition } from '../common/Transition';
 import { TransitionCriteria } from '../common/TransitionCriteria';
 import { TransitionCriteriaParams } from '../common/TransitionCriteriaParams';
-import { Injectable } from '@angular/core';
 
 @Injectable()
 export abstract class AuthorBranchService {
-  constructor(protected projectService: TeacherProjectService) {}
+  protected projectService = inject(TeacherProjectService);
 
   protected createPathStep(
     params: AuthorBranchParams,

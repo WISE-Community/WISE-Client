@@ -1,13 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { ComponentStudent } from '../../component-student.component';
-import { ConfigService } from '../../../services/configService';
-import { AnnotationService } from '../../../services/annotationService';
-import { ComponentService } from '../../componentService';
-import { MatDialog } from '@angular/material/dialog';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { AiChatMessage } from '../AiChatMessage';
 import { AiChatService } from '../aiChatService';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,41 +27,19 @@ import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.co
   templateUrl: './ai-chat-student.component.html'
 })
 export class AiChatStudentComponent extends ComponentStudent {
+  private aiChatService = inject(AiChatService);
   component: AiChatComponent;
   protected computerAvatar: ComputerAvatar;
   protected computerAvatarSelectorVisible: boolean = false;
+  protected computerAvatarService = inject(ComputerAvatarService);
   private connectedComponentResponse: string;
   protected messages: AiChatMessage[] = [];
   @ViewChild('messagesContainer') private messagesContainer: ElementRef;
+  private snackBar = inject(MatSnackBar);
   protected studentResponse: string = '';
+  protected studentStatusService = inject(StudentStatusService);
   protected submitEnabled: boolean = false;
   protected waitingForComputerResponse: boolean = false;
-
-  constructor(
-    private aiChatService: AiChatService,
-    protected annotationService: AnnotationService,
-    protected computerAvatarService: ComputerAvatarService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dataService: StudentDataService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private snackBar: MatSnackBar,
-    protected studentAssetService: StudentAssetService,
-    protected studentStatusService: StudentStatusService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      dataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

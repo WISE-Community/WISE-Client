@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Component as WISEComponent } from '../../../assets/wise5/common/Component';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
@@ -33,10 +33,10 @@ import { EditComponentConstraintsComponent } from '../edit-component-constraints
   templateUrl: './edit-common-advanced.component.html'
 })
 export class EditCommonAdvancedComponent {
+  protected projectService = inject(TeacherProjectService);
+
   @Input() allowedConnectedComponentTypes: string[] = [];
   @Input() component: WISEComponent;
-
-  constructor(protected projectService: TeacherProjectService) {}
 
   protected connectedComponentsChanged(connectedComponents: any[]): void {
     this.component.content.connectedComponents = connectedComponents;

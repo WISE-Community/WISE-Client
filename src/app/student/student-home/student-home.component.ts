@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../../services/user.service';
 import { User } from '../../domain/user';
@@ -14,12 +14,10 @@ import { StudentRunListComponent } from '../student-run-list/student-run-list.co
   templateUrl: './student-home.component.html'
 })
 export class StudentHomeComponent implements OnInit {
-  user: User = new User();
+  dialog = inject(MatDialog);
+  private userService = inject(UserService);
 
-  constructor(
-    public dialog: MatDialog,
-    private userService: UserService
-  ) {}
+  user: User = new User();
 
   ngOnInit(): void {
     this.getUser();

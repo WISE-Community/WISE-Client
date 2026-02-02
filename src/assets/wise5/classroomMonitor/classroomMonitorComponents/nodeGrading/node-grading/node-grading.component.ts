@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges, inject } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
@@ -44,6 +44,12 @@ import { AnnotationService } from '../../../../services/annotationService';
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
+  private annotationService = inject(AnnotationService);
+  private classroomStatusService = inject(ClassroomStatusService);
+  private componentTypeService = inject(ComponentTypeService);
+  private dataService = inject(TeacherDataService);
+  private projectService = inject(TeacherProjectService);
+
   protected components: ComponentContent[];
   protected hasWork: boolean;
   protected node: Node;
@@ -57,14 +63,6 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   private subscriptions: Subscription = new Subscription();
   protected summariesVisible: boolean = true;
   protected visibleComponents: ComponentContent[];
-
-  constructor(
-    private annotationService: AnnotationService,
-    private classroomStatusService: ClassroomStatusService,
-    private componentTypeService: ComponentTypeService,
-    private dataService: TeacherDataService,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.setFields();

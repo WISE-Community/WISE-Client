@@ -1,18 +1,17 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  ViewChild
+} from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { GraphService } from '../graphService';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import { Canvg } from 'canvg';
-import { MatDialog } from '@angular/material/dialog';
 import { GraphContent } from '../GraphContent';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
@@ -66,11 +65,13 @@ export class GraphStudent extends ComponentStudent {
   backgroundImage: string = null;
   canCreateNewTrials: boolean = false;
   canDeleteTrials: boolean = false;
+  private changeDetectorRef = inject(ChangeDetectorRef);
   chartCallback: any;
   chartConfig: any;
   chartId: string = 'chart1';
   fileName: string;
   graphConnectedComponentManager: GraphConnectedComponentManager;
+  private graphService = inject(GraphService);
   graphType: string;
   hasCustomLegendBeenSet: boolean = false;
   height: number = null;
@@ -91,6 +92,7 @@ export class GraphStudent extends ComponentStudent {
   plotLineManager: PlotLineManager;
   previousComponentState: any;
   previousTrialIdsToShow: string[];
+  private projectService = inject(ProjectService);
   rectangle: any;
   series: any[] = [];
   seriesMarkers: string[] = ['circle', 'square', 'diamond', 'triangle', 'triangle-down', 'circle'];
@@ -110,31 +112,6 @@ export class GraphStudent extends ComponentStudent {
   xAxisLimitSpacerWidth: number;
   yAxis: any;
   yAxisLocked: boolean;
-
-  constructor(
-    protected annotationService: AnnotationService,
-    private changeDetectorRef: ChangeDetectorRef,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    private graphService: GraphService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private projectService: ProjectService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

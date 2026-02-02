@@ -1,23 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Directive()
 export abstract class ConfigureStructureComponent {
+  private http = inject(HttpClient);
+  private projectService = inject(TeacherProjectService);
+  protected route = inject(ActivatedRoute);
+  protected router = inject(Router);
+
   protected groupsPath: string;
   protected nodesPath: string;
   protected target: string;
   private structure: any = {};
   private structureDir: string = 'assets/wise5/authoringTool/structure';
   protected submitting: boolean;
-
-  constructor(
-    private http: HttpClient,
-    private projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {}
 
   ngOnInit(): void {
     this.target = history.state.target;

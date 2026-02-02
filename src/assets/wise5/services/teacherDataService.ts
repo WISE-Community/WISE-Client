@@ -1,20 +1,32 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable, Subject, tap } from 'rxjs';
+import { compressToEncodedURIComponent } from 'lz-string';
+import { DataService } from '../../../app/services/data.service';
+import { Annotation } from '../common/Annotation';
+import { getIntersectOfArrays } from '../common/array/array';
+import { Node } from '../common/Node';
+import { serverSaveTimeComparator } from '../common/object/object';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
 import { TeacherProjectService } from './teacherProjectService';
 import { TeacherWebSocketService } from './teacherWebSocketService';
-import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
-import { DataService } from '../../../app/services/data.service';
-import { Node } from '../common/Node';
-import { compressToEncodedURIComponent } from 'lz-string';
-import { getIntersectOfArrays } from '../common/array/array';
-import { serverSaveTimeComparator } from '../common/object/object';
-import { Annotation } from '../common/Annotation';
 
 @Injectable()
 export class TeacherDataService extends DataService {
-  studentData: any;
+  private annotationService = inject(AnnotationService);
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
+  protected override projectService = inject(TeacherProjectService);
+  private webSocketService = inject(TeacherWebSocketService);
+
+  studentData: any = {
+    annotationsByNodeId: {},
+    annotationsToWorkgroupId: {},
+    componentStatesByWorkgroupId: {},
+    componentStatesByNodeId: {},
+    componentStatesByComponentId: {}
+  };
   currentPeriod = null;
   currentWorkgroup = null;
   previousStep = null;
@@ -28,21 +40,8 @@ export class TeacherDataService extends DataService {
   public currentWorkgroupChanged$: Observable<any> =
     this.currentWorkgroupChangedSource.asObservable();
 
-  constructor(
-    private annotationService: AnnotationService,
-    private configService: ConfigService,
-    private http: HttpClient,
-    protected projectService: TeacherProjectService,
-    private webSocketService: TeacherWebSocketService
-  ) {
-    super(projectService);
-    this.studentData = {
-      annotationsByNodeId: {},
-      annotationsToWorkgroupId: {},
-      componentStatesByWorkgroupId: {},
-      componentStatesByNodeId: {},
-      componentStatesByComponentId: {}
-    };
+  constructor() {
+    super();
     this.subscribeToEvents();
   }
 

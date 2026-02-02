@@ -1,4 +1,4 @@
-import { Component, effect, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, effect, inject } from '@angular/core';
 import { ComponentContent } from '../../common/ComponentContent';
 import { PreviewComponentComponent } from './preview-component/preview-component.component';
 import { EditComponentComponent } from './edit-component/edit-component.component';
@@ -49,16 +49,16 @@ import { copy } from '../../common/object/object';
     }`
 })
 export class ComponentAuthoringComponent {
+  private projectService = inject(TeacherProjectService);
+  private projectTranslationService = inject(TeacherProjectTranslationService);
+
   protected component: WISEComponent;
   @Input() componentContent: ComponentContent;
   @Input() editing: boolean;
   @Output() editComponentEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() nodeId: string;
 
-  constructor(
-    private projectService: TeacherProjectService,
-    private projectTranslationService: TeacherProjectTranslationService
-  ) {
+  constructor() {
     effect(() => {
       // apply translations to a copy of the component content so the original component content
       // is not modified for subsequent use.

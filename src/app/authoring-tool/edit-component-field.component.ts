@@ -1,15 +1,15 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, inject, Input } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 
 @Directive()
 export abstract class EditComponentFieldComponent {
+  private projectService = inject(TeacherProjectService);
+
   @Input() componentContent: any;
   protected inputChanged: Subject<any> = new Subject<any>();
   protected inputChangedSubscription: Subscription;
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.inputChangedSubscription = this.inputChanged

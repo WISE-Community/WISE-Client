@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -36,6 +36,12 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './edit-password.component.html'
 })
 export class EditPasswordComponent implements OnInit {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  dialog = inject(MatDialog);
+  private fb = inject(FormBuilder);
+  snackBar = inject(MatSnackBar);
+  private userService = inject(UserService);
+
   @ViewChild('changePasswordForm', { static: false }) changePasswordForm;
   isSaving: boolean = false;
   isGoogleUser: boolean = false;
@@ -45,14 +51,6 @@ export class EditPasswordComponent implements OnInit {
     oldPassword: new FormControl('', [Validators.required]),
     newPasswordFormGroup: this.newPasswordFormGroup
   });
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    public dialog: MatDialog,
-    private fb: FormBuilder,
-    public snackBar: MatSnackBar,
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     this.userService.getUser().subscribe((user) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
 import { RouterModule } from '@angular/router';
@@ -13,12 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './mobile-menu.component.html'
 })
 export class MobileMenuComponent implements OnInit {
-  protected signedIn: boolean;
+  private userService = inject(UserService);
+  private utilService = inject(UtilService);
 
-  constructor(
-    private userService: UserService,
-    private utilService: UtilService
-  ) {}
+  protected signedIn: boolean;
 
   ngOnInit(): void {
     this.getUser();

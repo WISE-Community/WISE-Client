@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,8 +11,6 @@ import {
   replaceWiseLinks
 } from '../../../assets/wise5/common/wise-link/wise-link';
 import { WiseTinymceEditorComponent } from '../../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
-import { ConfigService } from '../../../assets/wise5/services/configService';
-import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -34,6 +32,10 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: 'notebook-report.component.html'
 })
 export class NotebookReportComponent extends NotebookParentComponent {
+  private breakpointObserver = inject(BreakpointObserver);
+  private dialog = inject(MatDialog);
+  private projectService = inject(ProjectService);
+
   private autoSaveIntervalMS: number = 30000;
   private autoSaveIntervalId: any;
   protected collapsed: boolean = true;
@@ -47,24 +49,14 @@ export class NotebookReportComponent extends NotebookParentComponent {
   protected saveTime: number = null;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    configService: ConfigService,
-    private dialog: MatDialog,
-    notebookService: NotebookService,
-    private projectService: ProjectService
-  ) {
-    super(configService, notebookService);
+  ngOnInit(): void {
+    super.ngOnInit();
     this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
       if (!this.collapsed) {
         this.collapsed = true;
         this.fullscreen();
       }
     });
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
     this.reportId = this.config.itemTypes.report.notes[0].reportId;
     this.setReportItem();
     if (this.reportItem == null) {
@@ -77,7 +69,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
     this.isAddNoteButtonAvailable = this.config.itemTypes.note.enabled;
 
     this.subscriptions.add(
-      this.NotebookService.showReportAnnotations$.subscribe(() => {
+      this.notebookService.showReportAnnotations$.subscribe(() => {
         if (this.collapsed) {
           this.toggleCollapse();
         }
@@ -108,18 +100,18 @@ export class NotebookReportComponent extends NotebookParentComponent {
   }
 
   private setReportItem(): void {
-    this.reportItem = this.NotebookService.getLatestNotebookReportItemByReportId(
+    this.reportItem = this.notebookService.getLatestNotebookReportItemByReportId(
       this.reportId,
       this.workgroupId
     );
     if (this.reportItem) {
       this.hasReport = true;
-      const clientSaveTime = this.ConfigService.convertToClientTimestamp(
+      const clientSaveTime = this.configService.convertToClientTimestamp(
         this.reportItem.serverSaveTime
       );
       this.saveTime = clientSaveTime;
     } else {
-      this.reportItem = this.NotebookService.getTemplateReportItemByReportId(this.reportId);
+      this.reportItem = this.notebookService.getTemplateReportItemByReportId(this.reportId);
     }
     if (this.reportItem != null) {
       this.reportItemContent = this.projectService.injectAssetPaths(
@@ -135,7 +127,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
     }
     if (this.full) {
       this.full = false;
-      this.NotebookService.setReportFullScreen(false);
+      this.notebookService.setReportFullScreen(false);
     }
     this.collapsed = !this.collapsed;
   }
@@ -147,7 +139,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
     } else {
       this.full = !this.full;
     }
-    this.NotebookService.setReportFullScreen(this.full);
+    this.notebookService.setReportFullScreen(this.full);
   }
 
   protected addNotebookItemContent($event: any): void {
@@ -159,7 +151,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
 
   protected changed(value: string): void {
     this.dirty = true;
-    this.reportItem.content.content = this.ConfigService.removeAbsoluteAssetPaths(
+    this.reportItem.content.content = this.configService.removeAbsoluteAssetPaths(
       insertWiseLinks(value)
     );
     this.saveTime = null;
@@ -175,23 +167,25 @@ export class NotebookReportComponent extends NotebookParentComponent {
   }
 
   protected saveNotebookReportItem(): void {
-    this.NotebookService.saveNotebookItem(
-      this.reportItem.id,
-      this.reportItem.nodeId,
-      this.reportItem.localNotebookItemId,
-      this.reportItem.type,
-      this.reportItem.title,
-      this.reportItem.content,
-      this.reportItem.groups,
-      Date.parse(new Date().toString())
-    ).then((result: any) => {
-      if (result) {
-        this.dirty = false;
-        // set the reportNotebookItemId to the newly-incremented id so that future saves during this
-        // visit will be an update instead of an insert.
-        this.reportItem.id = result.id;
-        this.saveTime = this.ConfigService.convertToClientTimestamp(result.serverSaveTime);
-      }
-    });
+    this.notebookService
+      .saveNotebookItem(
+        this.reportItem.id,
+        this.reportItem.nodeId,
+        this.reportItem.localNotebookItemId,
+        this.reportItem.type,
+        this.reportItem.title,
+        this.reportItem.content,
+        this.reportItem.groups,
+        Date.parse(new Date().toString())
+      )
+      .then((result: any) => {
+        if (result) {
+          this.dirty = false;
+          // set the reportNotebookItemId to the newly-incremented id so that future saves during this
+          // visit will be an update instead of an insert.
+          this.reportItem.id = result.id;
+          this.saveTime = this.configService.convertToClientTimestamp(result.serverSaveTime);
+        }
+      });
   }
 }

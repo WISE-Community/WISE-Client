@@ -1,20 +1,18 @@
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { ConfigService } from '../services/config.service';
-import { Directive, OnInit } from '@angular/core';
+import { Directive, OnInit, inject } from '@angular/core';
 import { GoogleUser } from '../modules/google-sign-in/GoogleUser';
 
 @Directive()
 export abstract class AbstractRegisterUserComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private router = inject(Router);
+  private userService = inject(UserService);
+
   protected googleAuthenticationEnabled: boolean = false;
   protected abstract joinFormPath: string;
   protected microsoftAuthenticationEnabled: boolean = false;
-
-  constructor(
-    private configService: ConfigService,
-    private router: Router,
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     this.configService.getConfig().subscribe((config) => {

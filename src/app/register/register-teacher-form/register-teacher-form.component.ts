@@ -1,22 +1,17 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
 import { Teacher } from '../../domain/teacher';
 import { TeacherService } from '../../teacher/teacher.service';
 import {
   FormControl,
   FormGroup,
   Validators,
-  FormBuilder,
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
-import { UtilService } from '../../services/util.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
+import { RecaptchaV3Module } from 'ng-recaptcha-2';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
-import { ConfigService } from '../../services/config.service';
 import { SchoolLevel, schoolLevels } from '../../domain/profile.constants';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatFormField, MatLabel, MatError, MatHint } from '@angular/material/form-field';
@@ -73,19 +68,7 @@ export class RegisterTeacherFormComponent extends RegisterUserFormComponent impl
   schoolLevels: SchoolLevel[] = schoolLevels;
   user: Teacher = new Teacher();
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private configService: ConfigService,
-    protected fb: FormBuilder,
-    private recaptchaV3Service: ReCaptchaV3Service,
-    private router: Router,
-    private route: ActivatedRoute,
-    protected snackBar: MatSnackBar,
-    private teacherService: TeacherService,
-    private utilService: UtilService
-  ) {
-    super(fb, snackBar);
-  }
+  private teacherService = inject(TeacherService);
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,11 +8,9 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { Teacher } from '../../../domain/teacher';
 import { TeacherService } from '../../teacher.service';
-import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { SchoolLevel, schoolLevels } from '../../../domain/profile.constants';
 import { EditProfileComponent } from '../../../common/edit-profile/edit-profile.component';
@@ -45,6 +43,10 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './edit-profile.component.html'
 })
 export class TeacherEditProfileComponent extends EditProfileComponent {
+  private fb = inject(FormBuilder);
+  private teacherService = inject(TeacherService);
+  private userService = inject(UserService);
+
   user: Teacher;
   schoolLevels: SchoolLevel[] = schoolLevels;
   languages: object[];
@@ -64,16 +66,6 @@ export class TeacherEditProfileComponent extends EditProfileComponent {
     schoolLevel: new FormControl('', [Validators.required]),
     language: new FormControl('', [Validators.required])
   });
-
-  constructor(
-    private fb: FormBuilder,
-    private teacherService: TeacherService,
-    private userService: UserService,
-    public dialog: MatDialog,
-    public snackBar: MatSnackBar
-  ) {
-    super(dialog, snackBar);
-  }
 
   getUser() {
     this.subscriptions.add(

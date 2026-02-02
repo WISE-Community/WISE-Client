@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -34,6 +34,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './edit-constraint-removal-criteria.component.html'
 })
 export class EditConstraintRemovalCriteriaComponent implements OnInit {
+  private projectService = inject(TeacherProjectService);
+
   private allNodeIds: string[];
   protected componentIdToIsSelectable: { [componentId: string]: boolean } = {};
   private componentParam: RemovalCriteriaParam = new RemovalCriteriaParam(
@@ -102,8 +104,6 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
     ]),
     new RemovalCriteria('teacherRemoval', $localize`Teacher Removes Constraint`, [])
   ];
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.allNodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);

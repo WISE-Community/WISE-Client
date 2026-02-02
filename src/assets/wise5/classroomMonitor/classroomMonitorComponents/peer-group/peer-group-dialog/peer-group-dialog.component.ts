@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
@@ -29,15 +29,13 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './peer-group-dialog.component.html'
 })
 export class PeerGroupDialogComponent implements OnInit {
+  private dataService = inject(TeacherDataService);
+  peerGroupingTag = inject(MAT_DIALOG_DATA);
+  private projectService = inject(TeacherProjectService);
+
   private currentPeriodChangedSubscription: Subscription;
   protected peerGroupingName: string;
   protected periods: any[];
-
-  constructor(
-    private dataService: TeacherDataService,
-    @Inject(MAT_DIALOG_DATA) public peerGroupingTag: string,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.setPeriods(this.dataService.getCurrentPeriodId());

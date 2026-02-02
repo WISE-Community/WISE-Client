@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -36,6 +44,11 @@ import { ChatbotLauncherComponent } from '../../../../../../app/chatbot/chatbot-
   templateUrl: './step-tools.component.html'
 })
 export class StepToolsComponent implements OnInit {
+  private dataService = inject(StudentDataService);
+  private nodeService = inject(NodeService);
+  private nodeStatusService = inject(NodeStatusService);
+  private projectService = inject(ProjectService);
+
   @Input() chatbotEnabled: boolean;
   @Output() toggleChatbot = new EventEmitter<void>();
   protected icons: any;
@@ -52,13 +65,6 @@ export class StepToolsComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   protected toNodeId: string;
 
-  constructor(
-    private nodeService: NodeService,
-    private nodeStatusService: NodeStatusService,
-    private projectService: ProjectService,
-    private studentDataService: StudentDataService
-  ) {}
-
   ngOnInit(): void {
     this.is_rtl = $('html').attr('dir') == 'rtl';
     this.icons = { prev: 'chevron_left', next: 'chevron_right' };
@@ -73,14 +79,10 @@ export class StepToolsComponent implements OnInit {
 
   private subscribeToChanges(): void {
     this.subscriptions.add(
-      this.studentDataService.currentNodeChanged$.subscribe(() => {
-        this.updateModel();
-      })
+      this.dataService.currentNodeChanged$.subscribe(() => this.updateModel())
     );
     this.subscriptions.add(
-      this.studentDataService.nodeStatusesChanged$.subscribe(() => {
-        this.updateModel();
-      })
+      this.dataService.nodeStatusesChanged$.subscribe(() => this.updateModel())
     );
   }
 
@@ -98,7 +100,7 @@ export class StepToolsComponent implements OnInit {
   }
 
   private updateModel(): void {
-    const nodeId = this.studentDataService.getCurrentNodeId();
+    const nodeId = this.dataService.getCurrentNodeId();
     if (!this.projectService.isGroupNode(nodeId)) {
       this.nodeId = nodeId;
       this.nodeStatus = this.nodeStatuses[this.nodeId];

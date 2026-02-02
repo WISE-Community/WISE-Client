@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
 import { PeerGroupService } from '../../../../services/peerGroupService';
@@ -24,6 +24,9 @@ import { PeerGroupAssignedWorkgroupsComponent } from '../peer-group-assigned-wor
   templateUrl: './peer-group-period.component.html'
 })
 export class PeerGroupPeriodComponent {
+  private configService = inject(ConfigService);
+  private peerGroupService = inject(PeerGroupService);
+
   @Input() peerGroupingTag: string;
   @Input() period: any;
 
@@ -34,13 +37,8 @@ export class PeerGroupPeriodComponent {
   unassignedWorkgroups: any[] = [];
   workgroups: any[] = [];
 
-  constructor(
-    private ConfigService: ConfigService,
-    private PeerGroupService: PeerGroupService
-  ) {}
-
   ngOnChanges(): void {
-    this.PeerGroupService.retrievePeerGroupInfo(this.peerGroupingTag).subscribe(
+    this.peerGroupService.retrievePeerGroupInfo(this.peerGroupingTag).subscribe(
       ({ peerGroups, workgroupsNotInPeerGroup }) => {
         for (const peerGroup of this.getPeerGroupsInPeriod(peerGroups, this.period.periodId)) {
           this.addGrouping(peerGroup);
@@ -67,7 +65,7 @@ export class PeerGroupPeriodComponent {
 
   getWorkgroupsInPeriod(): any[] {
     const workgroups = [];
-    for (const workgroup of this.ConfigService.getWorkgroupsByPeriod(this.period.periodId)) {
+    for (const workgroup of this.configService.getWorkgroupsByPeriod(this.period.periodId)) {
       workgroups.push({ id: workgroup.workgroupId });
     }
     return workgroups;
@@ -85,17 +83,16 @@ export class PeerGroupPeriodComponent {
   }
 
   createNewGroup(): Subscription {
-    return this.PeerGroupService.createNewGroup(
-      this.period.periodId,
-      this.peerGroupingTag
-    ).subscribe(
-      (group) => {
-        this.addGrouping(group);
-      },
-      () => {
-        // TODO
-      }
-    );
+    return this.peerGroupService
+      .createNewGroup(this.period.periodId, this.peerGroupingTag)
+      .subscribe(
+        (group) => {
+          this.addGrouping(group);
+        },
+        () => {
+          // TODO
+        }
+      );
   }
 
   moveWorkgroup(event: any): Subscription {
@@ -118,7 +115,7 @@ export class PeerGroupPeriodComponent {
     previousGroupId: number,
     newGroupId: number
   ): Subscription {
-    return this.PeerGroupService.removeWorkgroupFromGroup(workgroupId, previousGroupId).subscribe(
+    return this.peerGroupService.removeWorkgroupFromGroup(workgroupId, previousGroupId).subscribe(
       () => {
         this.moveWorkgroupSuccess(workgroupId, previousGroupId, newGroupId);
       },
@@ -133,7 +130,7 @@ export class PeerGroupPeriodComponent {
     previousGroupId: number,
     newGroupId: number
   ): Subscription {
-    return this.PeerGroupService.moveWorkgroupToGroup(workgroupId, newGroupId).subscribe(
+    return this.peerGroupService.moveWorkgroupToGroup(workgroupId, newGroupId).subscribe(
       () => {
         this.moveWorkgroupSuccess(workgroupId, previousGroupId, newGroupId);
       },

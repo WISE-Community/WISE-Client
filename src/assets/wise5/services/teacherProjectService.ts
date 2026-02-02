@@ -1,18 +1,12 @@
-'use strict';
-import { ProjectService } from './projectService';
-import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
+import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { BranchService } from './branchService';
-import { ComponentServiceLookupService } from './componentServiceLookupService';
-import { HttpClient } from '@angular/common/http';
-import { ConfigService } from './configService';
-import { PathService } from './pathService';
+import { NodeTypeSelected } from '../authoringTool/domain/node-type-selected';
+import { ComponentContent } from '../common/ComponentContent';
 import { copy } from '../common/object/object';
 import { generateRandomKey } from '../common/string/string';
 import { branchPathBackgroundColors } from '../common/color/color';
 import { reduceByUniqueId } from '../common/array/array';
-import { NodeTypeSelected } from '../authoringTool/domain/node-type-selected';
-import { ComponentContent } from '../common/ComponentContent';
+import { ProjectService } from './projectService';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -34,16 +28,6 @@ export class TeacherProjectService extends ProjectService {
   public savingProject$: Observable<void> = this.savingProjectSource.asObservable();
   private uiChangedSource: Subject<void> = new Subject<void>();
   public uiChanged$: Observable<void> = this.uiChangedSource.asObservable();
-
-  constructor(
-    protected branchService: BranchService,
-    protected componentServiceLookupService: ComponentServiceLookupService,
-    protected http: HttpClient,
-    protected configService: ConfigService,
-    protected pathService: PathService
-  ) {
-    super(branchService, componentServiceLookupService, http, configService, pathService);
-  }
 
   /**
    * Retrieve the project JSON

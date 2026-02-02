@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AnnotationService } from '../../../services/annotationService';
@@ -13,6 +13,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: 'edit-component-score.component.html'
 })
 export class EditComponentScoreComponent {
+  private annotationService = inject(AnnotationService);
+  private notificationService = inject(NotificationService);
+
   @Input() componentId: string;
   @Input() componentStateId: string;
   @Input() disabled: boolean;
@@ -27,11 +30,6 @@ export class EditComponentScoreComponent {
   @ViewChild('scoreInput') scoreInputElement: ElementRef;
   private subscriptions: Subscription = new Subscription();
   @Input() toWorkgroupId: number;
-
-  constructor(
-    private annotationService: AnnotationService,
-    private notificationService: NotificationService
-  ) {}
 
   ngOnInit(): void {
     this.isAutoScore = this.latestAnnotationScore?.type === 'autoScore';

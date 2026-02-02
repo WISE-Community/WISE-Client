@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -32,6 +32,9 @@ import { TagComponent } from '../tag/tag.component';
   templateUrl: './edit-tag.component.html'
 })
 export class EditTagComponent {
+  private projectTagService = inject(ProjectTagService);
+  private snackBar = inject(MatSnackBar);
+
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
   @ViewChild('nameInput') nameInput: ElementRef;
   protected submitLabel: string = $localize`Create`;
@@ -44,11 +47,6 @@ export class EditTagComponent {
     this.createArchivedTagValidator(),
     this.createUniqueTagValidator()
   ]);
-
-  constructor(
-    private projectTagService: ProjectTagService,
-    private snackBar: MatSnackBar
-  ) {}
 
   ngOnInit(): void {
     if (this.tag != null) {

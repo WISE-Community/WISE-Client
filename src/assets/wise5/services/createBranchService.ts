@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-import { TeacherProjectService } from './teacherProjectService';
 import { AuthorBranchParams } from '../common/AuthorBranchParams';
 import { Transition } from '../common/Transition';
 import { AuthorBranchService } from './authorBranchService';
 
 @Injectable()
 export class CreateBranchService extends AuthorBranchService {
-  constructor(protected projectService: TeacherProjectService) {
-    super(projectService);
-  }
-
   createBranch(params: AuthorBranchParams): Promise<void> {
     const branchNode = this.projectService.getNode(params.branchStepId);
     const nodeIdBranchNodeTransitionsTo =

@@ -2,7 +2,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ConfigService } from './config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Student } from '../domain/student';
 import { tap } from 'rxjs/operators';
 import { Teacher } from '../domain/teacher';
@@ -10,6 +10,9 @@ import { User } from '../domain/user';
 
 @Injectable()
 export class UserService {
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
+
   private userUrl = '/api/user/info';
   private user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private checkGoogleUserExistsUrl = '/api/google-user/check-user-exists';
@@ -21,12 +24,7 @@ export class UserService {
   private contactUrl = '/api/contact';
   private unlinkGoogleAccountUrl = '/api/google-user/unlink-account';
   isAuthenticated = false;
-  redirectUrl: string; // redirect here after logging in
-
-  constructor(
-    private configService: ConfigService,
-    private http: HttpClient
-  ) {}
+  redirectUrl: string;
 
   getUser(): BehaviorSubject<User> {
     return this.user$;

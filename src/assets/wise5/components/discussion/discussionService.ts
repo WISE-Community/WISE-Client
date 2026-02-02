@@ -1,19 +1,15 @@
-import { ComponentService } from '../componentService';
-import { ConfigService } from '../../services/configService';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ComponentService } from '../componentService';
+import { ConfigService } from '../../services/configService';
 import { serverSaveTimeComparator } from '../../common/object/object';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
-  constructor(
-    protected configService: ConfigService,
-    protected http: HttpClient
-  ) {
-    super();
-  }
+  protected configService = inject(ConfigService);
+  protected http = inject(HttpClient);
 
   getComponentTypeLabel(): string {
     return $localize`Discussion`;

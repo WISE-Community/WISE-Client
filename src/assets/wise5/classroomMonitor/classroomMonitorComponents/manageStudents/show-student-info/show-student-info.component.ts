@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 
 @Component({
@@ -16,10 +16,10 @@ import { ConfigService } from '../../../../services/configService';
   `
 })
 export class ShowStudentInfoComponent implements OnInit {
+  private configService = inject(ConfigService);
+
   protected canViewStudentNames: boolean;
   @Input() user: any;
-
-  constructor(private configService: ConfigService) {}
 
   ngOnInit(): void {
     this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;

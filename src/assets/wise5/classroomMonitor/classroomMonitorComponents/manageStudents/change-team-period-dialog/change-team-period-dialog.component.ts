@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -46,6 +46,12 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './change-team-period-dialog.component.html'
 })
 export class ChangeTeamPeriodDialogComponent {
+  protected configService = inject(ConfigService);
+  protected dialog = inject(MatDialog);
+  protected http = inject(HttpClient);
+  private snackBar = inject(MatSnackBar);
+  team = inject(MAT_DIALOG_DATA);
+
   canViewStudentNames: boolean;
   selectPeriodForm: FormGroup = new FormGroup({
     period: new FormControl('', Validators.required)
@@ -53,14 +59,6 @@ export class ChangeTeamPeriodDialogComponent {
   isChangingPeriod: boolean;
   periods: any[];
   selectedPeriod: any;
-
-  constructor(
-    protected dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public team: any,
-    protected http: HttpClient,
-    protected configService: ConfigService,
-    private snackBar: MatSnackBar
-  ) {}
 
   ngOnInit(): void {
     this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;

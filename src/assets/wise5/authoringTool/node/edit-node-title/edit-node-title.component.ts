@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Node } from '../../../common/Node';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TranslatableInputComponent } from '../../components/translatable-input/translatable-input.component';
@@ -17,11 +17,11 @@ import { TranslatableInputComponent } from '../../components/translatable-input/
   `
 })
 export class EditNodeTitleComponent {
+  private projectService = inject(TeacherProjectService);
+
   protected label: string;
   @Input() node: Node;
   protected nodeJson: any;
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnChanges(): void {
     this.nodeJson = this.projectService.getNodeById(this.node.id);

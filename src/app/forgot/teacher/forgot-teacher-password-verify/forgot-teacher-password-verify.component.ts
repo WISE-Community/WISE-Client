@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -35,6 +35,10 @@ import { MatDividerModule } from '@angular/material/divider';
   templateUrl: './forgot-teacher-password-verify.component.html'
 })
 export class ForgotTeacherPasswordVerifyComponent {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private teacherService = inject(TeacherService);
+
   @Input() username: string = null;
   protected verificationCodeFormGroup: FormGroup = this.fb.group({
     verificationCode: new FormControl('', [Validators.required])
@@ -44,12 +48,6 @@ export class ForgotTeacherPasswordVerifyComponent {
   protected isVerificationCodeInputEnabled: boolean = true;
   protected isSubmitButtonEnabled: boolean = true;
   protected showForgotPasswordLink: boolean = false;
-
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private teacherService: TeacherService
-  ) {}
 
   getControlField(fieldName) {
     return this.verificationCodeFormGroup.get(fieldName);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { insertWiseLinks, replaceWiseLinks } from '../../common/wise-link/wise-link';
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -33,14 +33,12 @@ import { WiseAuthoringTinymceEditorComponent } from '../../directives/wise-tinym
   templateUrl: './notebook-authoring.component.html'
 })
 export class NotebookAuthoringComponent {
+  private configService = inject(ConfigService);
+  private projectService = inject(TeacherProjectService);
+
   protected notebookChanged: Subject<void> = new Subject<void>();
   protected project: any;
   protected reportIdToAuthoringNote: any;
-
-  constructor(
-    private configService: ConfigService,
-    private projectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.project = this.projectService.project;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -8,12 +8,10 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Student } from '../../../domain/student';
 import { UserService } from '../../../services/user.service';
 import { StudentService } from '../../student.service';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
 import { EditProfileComponent } from '../../../common/edit-profile/edit-profile.component';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -43,6 +41,10 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './edit-profile.component.html'
 })
 export class StudentEditProfileComponent extends EditProfileComponent {
+  private fb = inject(FormBuilder);
+  private studentService = inject(StudentService);
+  private userService = inject(UserService);
+
   user: Student;
   languages: object[];
   isSaving: boolean = false;
@@ -55,24 +57,6 @@ export class StudentEditProfileComponent extends EditProfileComponent {
     language: new FormControl('', [Validators.required])
   });
 
-  constructor(
-    private fb: FormBuilder,
-    private studentService: StudentService,
-    private userService: UserService,
-    public dialog: MatDialog,
-    public snackBar: MatSnackBar
-  ) {
-    super(dialog, snackBar);
-    this.user = <Student>this.getUser().getValue();
-    this.setControlFieldValue('firstName', this.user.firstName);
-    this.setControlFieldValue('lastName', this.user.lastName);
-    this.setControlFieldValue('username', this.user.username);
-    this.setControlFieldValue('language', this.user.language);
-    this.userService.getLanguages().subscribe((response) => {
-      this.languages = <object[]>response;
-    });
-  }
-
   getUser() {
     return this.userService.getUser();
   }
@@ -82,6 +66,14 @@ export class StudentEditProfileComponent extends EditProfileComponent {
   }
 
   ngOnInit() {
+     this.user = <Student>this.getUser().getValue();
+    this.setControlFieldValue('firstName', this.user.firstName);
+    this.setControlFieldValue('lastName', this.user.lastName);
+    this.setControlFieldValue('username', this.user.username);
+    this.setControlFieldValue('language', this.user.language);
+    this.userService.getLanguages().subscribe((response) => {
+      this.languages = <object[]>response;
+    });
     this.editProfileFormGroup.valueChanges.subscribe(() => {
       this.changed = true;
     });

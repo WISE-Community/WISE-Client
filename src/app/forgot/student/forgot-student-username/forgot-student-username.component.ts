@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -43,6 +43,11 @@ import { MatCard, MatCardContent } from '@angular/material/card';
   ]
 })
 export class ForgotStudentUsernameComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private utilService = inject(UtilService);
+  private studentService = inject(StudentService);
+
   months: any[] = [
     { value: 1, text: $localize`01 (Jan)` },
     { value: 2, text: $localize`02 (Feb)` },
@@ -69,13 +74,6 @@ export class ForgotStudentUsernameComponent implements OnInit {
   isErrorMessage: boolean = false;
   showSearchResults: boolean = false;
   processing: boolean = false;
-
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private utilService: UtilService,
-    private studentService: StudentService
-  ) {}
 
   ngOnInit() {
     this.forgotStudentUsernameFormGroup.controls['birthMonth'].valueChanges.subscribe((value) => {

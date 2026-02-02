@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -29,19 +29,17 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './add-lesson-configure.component.html'
 })
 export class AddLessonConfigureComponent {
+  private fb = inject(FormBuilder);
+  private route = inject(ActivatedRoute);
+  private projectService = inject(TeacherProjectService);
+  private router = inject(Router);
+
   protected addLessonFormGroup: FormGroup = this.fb.group({
     title: new FormControl('', [Validators.required])
   });
   protected submitting: boolean;
   protected target: string;
   @ViewChild('titleField') titleField: ElementRef;
-
-  constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private projectService: TeacherProjectService,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.target = history.state.target;

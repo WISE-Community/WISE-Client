@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation, inject } from '@angular/core';
 import { Announcement } from '../domain/announcement';
 import {
   MatDialogRef,
@@ -22,10 +22,10 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
   templateUrl: './announcement.component.html'
 })
 export class AnnouncementComponent {
+  dialog = inject(MatDialog);
+
   @Input() announcement: Announcement = new Announcement();
   @Output() dismiss: EventEmitter<void> = new EventEmitter<void>();
-
-  constructor(public dialog: MatDialog) {}
 
   protected showAnnouncementDetails(): void {
     this.dialog.open(AnnouncementDialogComponent, {
@@ -48,8 +48,6 @@ export class AnnouncementComponent {
   templateUrl: 'announcement-dialog.component.html'
 })
 export class AnnouncementDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<AnnouncementDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Announcement
-  ) {}
+  dialogRef = inject<MatDialogRef<AnnouncementDialogComponent>>(MatDialogRef);
+  data = inject<Announcement>(MAT_DIALOG_DATA);
 }

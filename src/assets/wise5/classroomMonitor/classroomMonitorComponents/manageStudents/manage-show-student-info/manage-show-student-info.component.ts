@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -27,14 +27,12 @@ import { DatePipe } from '@angular/common';
   templateUrl: './manage-show-student-info.component.html'
 })
 export class ManageShowStudentInfoComponent {
-  protected canViewStudentNames: boolean;
+  protected dialog = inject(MatDialog);
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
+  user = inject(MAT_DIALOG_DATA);
 
-  constructor(
-    protected dialog: MatDialog,
-    private configService: ConfigService,
-    private http: HttpClient,
-    @Inject(MAT_DIALOG_DATA) public user: any
-  ) {}
+  protected canViewStudentNames: boolean;
 
   ngOnInit() {
     this.canViewStudentNames = this.configService.getPermissions().canViewStudentNames;

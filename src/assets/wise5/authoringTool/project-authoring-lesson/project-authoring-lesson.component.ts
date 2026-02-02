@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output, Signal, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Signal,
+  ViewEncapsulation,
+  inject
+} from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,6 +44,13 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
   templateUrl: './project-authoring-lesson.component.html'
 })
 export class ProjectAuthoringLessonComponent {
+  private dataService = inject(TeacherDataService);
+  private deleteNodeService = inject(DeleteNodeService);
+  private deleteTranslationsService = inject(DeleteTranslationsService);
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   @Input() expanded: boolean = true;
   @Output() onExpandedChanged: EventEmitter<ExpandEvent> = new EventEmitter<ExpandEvent>();
   protected idToNode: any = {};
@@ -44,15 +59,6 @@ export class ProjectAuthoringLessonComponent {
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
   @Input() showPosition: boolean;
-
-  constructor(
-    private dataService: TeacherDataService,
-    private deleteNodeService: DeleteNodeService,
-    private deleteTranslationsService: DeleteTranslationsService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.idToNode = this.projectService.idToNode;

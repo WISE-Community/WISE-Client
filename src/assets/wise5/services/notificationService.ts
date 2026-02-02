@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
@@ -11,6 +11,12 @@ import { generateRandomKey } from '../common/string/string';
 
 @Injectable()
 export class NotificationService {
+  protected annotationService = inject(AnnotationService);
+  protected configService = inject(ConfigService);
+  protected dialog = inject(MatDialog);
+  protected http = inject(HttpClient);
+  protected projectService = inject(ProjectService);
+
   notifications: Notification[] = [];
   private notificationChangedSource: Subject<any> = new Subject<any>();
   public notificationChanged$: Observable<any> = this.notificationChangedSource.asObservable();
@@ -21,14 +27,6 @@ export class NotificationService {
   private viewCurrentAmbientNotificationSource: Subject<any> = new Subject<any>();
   public viewCurrentAmbientNotification$: Observable<any> =
     this.viewCurrentAmbientNotificationSource.asObservable();
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected dialog: MatDialog,
-    protected http: HttpClient,
-    protected ConfigService: ConfigService,
-    protected ProjectService: ProjectService
-  ) {}
 
   /**
    * Creates a new notification object
@@ -54,9 +52,9 @@ export class NotificationService {
     data = null,
     groupId = null
   ): Notification {
-    const nodePosition = this.ProjectService.getNodePositionById(nodeId);
-    const nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(nodeId);
-    const component = this.ProjectService.getComponent(nodeId, componentId);
+    const nodePosition = this.projectService.getNodePositionById(nodeId);
+    const nodePositionAndTitle = this.projectService.getNodePositionAndTitle(nodeId);
+    const component = this.projectService.getComponent(nodeId, componentId);
     let componentType = null;
     if (component != null) {
       componentType = component.type;
@@ -82,18 +80,18 @@ export class NotificationService {
   }
 
   retrieveNotifications() {
-    if (this.ConfigService.isPreview()) {
+    if (this.configService.isPreview()) {
       this.notifications = [];
       return;
     }
     const options: any = {};
-    if (this.ConfigService.getMode() === 'studentRun') {
+    if (this.configService.getMode() === 'studentRun') {
       options.params = new HttpParams()
-        .set('periodId', this.ConfigService.getPeriodId())
-        .set('toWorkgroupId', this.ConfigService.getWorkgroupId());
+        .set('periodId', this.configService.getPeriodId())
+        .set('toWorkgroupId', this.configService.getWorkgroupId());
     }
     return this.http
-      .get(this.ConfigService.getNotificationURL(), options)
+      .get(this.configService.getNotificationURL(), options)
       .toPromise()
       .then((notifications: any) => {
         this.notifications = notifications;
@@ -165,8 +163,8 @@ export class NotificationService {
   }
 
   setNotificationNodePositionAndTitle(notification: Notification) {
-    notification.nodePosition = this.ProjectService.getNodePositionById(notification.nodeId);
-    notification.nodePositionAndTitle = this.ProjectService.getNodePositionAndTitle(
+    notification.nodePosition = this.projectService.getNodePositionById(notification.nodeId);
+    notification.nodePositionAndTitle = this.projectService.getNodePositionAndTitle(
       notification.nodeId
     );
   }
@@ -174,9 +172,9 @@ export class NotificationService {
   sendNotificationForScore(notificationForScore) {
     const notificationType = notificationForScore.notificationType;
     if (notificationForScore.isNotifyTeacher || notificationForScore.isNotifyStudent) {
-      const fromWorkgroupId = this.ConfigService.getWorkgroupId();
-      const runId = this.ConfigService.getRunId();
-      const periodId = this.ConfigService.getPeriodId();
+      const fromWorkgroupId = this.configService.getWorkgroupId();
+      const runId = this.configService.getRunId();
+      const periodId = this.configService.getPeriodId();
       const notificationGroupId = runId + '_' + generateRandomKey(); // links student and teacher notifications together
       const notificationData: any = {};
       if (notificationForScore.isAmbient) {
@@ -193,7 +191,7 @@ export class NotificationService {
           runId,
           periodId,
           notificationType,
-          this.ConfigService.getWorkgroupId(),
+          this.configService.getWorkgroupId(),
           notificationData,
           notificationGroupId
         ).then((notification) => {
@@ -208,7 +206,7 @@ export class NotificationService {
           runId,
           periodId,
           notificationType,
-          this.ConfigService.getTeacherWorkgroupId(),
+          this.configService.getTeacherWorkgroupId(),
           notificationData,
           notificationGroupId
         );
@@ -228,7 +226,7 @@ export class NotificationService {
     notificationGroupId: string
   ) {
     const notificationMessage = notificationMessageTemplate
-      .replace('{{username}}', this.ConfigService.getUsernameByWorkgroupId(fromWorkgroupId))
+      .replace('{{username}}', this.configService.getUsernameByWorkgroupId(fromWorkgroupId))
       .replace('{{score}}', notificationForScore.score)
       .replace('{{dismissCode}}', notificationForScore.dismissCode);
     const notification = this.createNewNotification(
@@ -247,11 +245,11 @@ export class NotificationService {
   }
 
   saveNotificationToServer(notification) {
-    if (this.ConfigService.isPreview()) {
+    if (this.configService.isPreview()) {
       return this.pretendServerRequest(notification);
     } else {
       return this.http
-        .post(this.ConfigService.getNotificationURL(), notification)
+        .post(this.configService.getNotificationURL(), notification)
         .toPromise()
         .then((notification: Notification) => {
           return notification;
@@ -260,7 +258,7 @@ export class NotificationService {
   }
 
   dismissNotification(notification: Notification): void {
-    if (this.ConfigService.isPreview()) {
+    if (this.configService.isPreview()) {
       this.pretendServerRequest(notification);
     }
     const notificationsToDismiss = this.getActiveNotificationsWithSameSource(
@@ -285,7 +283,7 @@ export class NotificationService {
     notifications.forEach((notification: any) => {
       notification.timeDismissed = Date.parse(new Date().toString());
       return this.http
-        .post(`${this.ConfigService.getNotificationURL()}/dismiss`, notification)
+        .post(`${this.configService.getNotificationURL()}/dismiss`, notification)
         .subscribe((notification: Notification) => {
           this.addNotification(notification);
         });
@@ -395,8 +393,8 @@ export class NotificationService {
       params.periodId = args.periodId === -1 ? null : args.periodId;
     }
 
-    if (nodeId && this.ProjectService.isGroupNode(nodeId)) {
-      const groupNode = this.ProjectService.getNodeById(nodeId);
+    if (nodeId && this.projectService.isGroupNode(nodeId)) {
+      const groupNode = this.projectService.getNodeById(nodeId);
       const children = groupNode.ids;
       for (let childId of children) {
         params.nodeId = childId;

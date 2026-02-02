@@ -59,6 +59,7 @@ import { TeacherNodeService } from '../assets/wise5/services/teacherNodeService'
 import { TeacherWebSocketService } from '../assets/wise5/services/teacherWebSocketService';
 import { VLEProjectService } from '../assets/wise5/vle/vleProjectService';
 import { WiseLinkService } from './services/wiseLinkService';
+import { DataService } from './services/data.service';
 
 @NgModule({
   providers: [
@@ -80,6 +81,7 @@ import { WiseLinkService } from './services/wiseLinkService';
     ComputerAvatarService,
     ConfigService,
     CRaterService,
+    { provide: DataService, useExisting: StudentDataService }, 
     DialogGuidanceService,
     DiscussionService,
     DrawService,

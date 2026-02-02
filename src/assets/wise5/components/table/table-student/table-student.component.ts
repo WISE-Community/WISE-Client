@@ -1,17 +1,9 @@
 import html2canvas from 'html2canvas';
-import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, ViewEncapsulation } from '@angular/core';
 import { Tabulator } from 'tabulator-tables';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
 import { ProjectService } from '../../../services/projectService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { TableService } from '../tableService';
-import { MatDialog } from '@angular/material/dialog';
 import { TabulatorData } from '../TabulatorData';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { copy } from '../../../common/object/object';
@@ -75,31 +67,10 @@ export class TableStudentComponent extends ComponentStudent {
   tabulatorData: TabulatorData;
   tabulatorSorters: any[] = [];
 
-  constructor(
-    protected annotationService: AnnotationService,
-    private changeDetectorRef: ChangeDetectorRef,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private projectService: ProjectService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService,
-    private tableService: TableService,
-    private tabulatorDataService: TabulatorDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private projectService = inject(ProjectService);
+  private tableService = inject(TableService);
+  private tabulatorDataService = inject(TabulatorDataService);
 
   ngOnInit(): void {
     super.ngOnInit();

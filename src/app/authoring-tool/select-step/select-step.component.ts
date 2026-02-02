@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -17,12 +17,12 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
   </mat-form-field>`
 })
 export class SelectStepComponent {
+  private projectService = inject(ProjectService);
+
   @Input() nodeId: string;
   protected nodeIds: string[] = [];
   protected nodeToPositionAndTitle: Map<string, string> = new Map<string, string>();
   @Output() stepChangedEvent: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
     this.nodeIds = this.projectService.getStepNodeIds();

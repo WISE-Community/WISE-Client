@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WorkgroupService } from '../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../services/configService';
@@ -14,17 +14,15 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: 'select-period.component.html'
 })
 export class SelectPeriodComponent {
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private workgroupService = inject(WorkgroupService);
+
   private currentPeriod: any;
   protected periods: any;
   protected selectedPeriodId: number;
   protected selectedPeriodText: string;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private workgroupService: WorkgroupService
-  ) {}
 
   ngOnInit(): void {
     this.currentPeriod = this.dataService.getCurrentPeriod();

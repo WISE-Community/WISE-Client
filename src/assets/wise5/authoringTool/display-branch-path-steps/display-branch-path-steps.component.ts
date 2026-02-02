@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges, inject } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { CommonModule } from '@angular/common';
 
@@ -9,11 +9,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './display-branch-path-steps.component.html'
 })
 export class DisplayBranchPathStepsComponent {
+  private projectService = inject(TeacherProjectService);
+
   protected nodeIdToBackgroundColor: { [key: string]: string } = {};
   protected nodeIdToStepTitle: { [key: string]: string } = {};
   @Input() nodes: any[] = [];
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.nodes) {

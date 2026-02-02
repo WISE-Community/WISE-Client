@@ -1,6 +1,6 @@
 import { Course } from '../domain/course';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Project } from '../domain/project';
 import { Run } from '../domain/run';
@@ -9,6 +9,8 @@ import { TeacherRun } from './teacher-run';
 
 @Injectable()
 export class TeacherService {
+  private http = inject(HttpClient);
+
   private registerUrl = '/api/teacher/register';
   private runPermissionUrl = '/api/teacher/run/permission';
   private projectPermissionUrl = '/api/teacher/project/permission';
@@ -36,8 +38,6 @@ export class TeacherService {
   private runs = new Subject<Run>();
   public runs$ = this.runs.asObservable();
   private updateProfileUrl = '/api/teacher/profile/update';
-
-  constructor(private http: HttpClient) {}
 
   getRuns(max: number = 0): Observable<TeacherRun[]> {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });

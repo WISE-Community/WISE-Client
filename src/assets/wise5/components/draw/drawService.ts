@@ -1,18 +1,18 @@
-'use strict';
-
 import $ from 'jquery';
 import * as fabric from 'fabric';
 window['fabric'] = fabric.fabric;
 import * as EventEmitter2 from 'eventemitter2';
 window['EventEmitter2'] = EventEmitter2;
 import DrawingTool from '@wise-community/drawing-tool/dist/drawing-tool';
+import { inject, Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { Injectable } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class DrawService extends ComponentService {
+  private assetService = inject(StudentAssetService);
+
   toolFieldToLabel: any = {
     select: 'Select tool',
     line: 'Line tool (click and hold to show available line types)',
@@ -30,10 +30,6 @@ export class DrawService extends ComponentService {
     redo: 'Redo',
     delete: 'Delete selected objects'
   };
-
-  constructor(private StudentAssetService: StudentAssetService) {
-    super();
-  }
 
   getComponentTypeLabel(): string {
     return $localize`Draw`;
@@ -157,7 +153,7 @@ export class DrawService extends ComponentService {
       );
       const canvas = this.getDrawingToolCanvas(this.getDrawingToolId(domIdEnding));
       const pngFile = convertToPNGFile(canvas);
-      this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
+      this.assetService.uploadAsset(pngFile).then((asset) => {
         resolve(asset);
       });
     });

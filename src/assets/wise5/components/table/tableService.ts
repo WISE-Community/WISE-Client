@@ -1,16 +1,12 @@
-'use strict';
-
 import html2canvas from 'html2canvas';
+import { inject, Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { Injectable } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class TableService extends ComponentService {
-  constructor(private StudentAssetService: StudentAssetService) {
-    super();
-  }
+  private assetService = inject(StudentAssetService);
 
   getComponentTypeLabel(): string {
     return $localize`Table`;
@@ -221,7 +217,7 @@ export class TableService extends ComponentService {
         // convert the table element to a canvas element
         html2canvas(tableElement as HTMLElement).then((canvas) => {
           const pngFile = convertToPNGFile(canvas);
-          this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
+          this.assetService.uploadAsset(pngFile).then((asset) => {
             resolve(asset);
           });
         });

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -19,6 +19,10 @@ import { EditComponentCommentComponent } from '../edit-component-comment/edit-co
   templateUrl: 'edit-component-annotations.component.html'
 })
 export class EditComponentAnnotationsComponent {
+  private annotationService = inject(AnnotationService);
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+
   @Input() componentId: string;
   @Input() componentStateId: number;
   @Input() fromWorkgroupId: number;
@@ -36,12 +40,6 @@ export class EditComponentAnnotationsComponent {
   protected periodId: number;
   protected runId: number;
   private subscription: Subscription;
-
-  constructor(
-    private annotationService: AnnotationService,
-    private configService: ConfigService,
-    private dataService: TeacherDataService
-  ) {}
 
   ngOnInit(): void {
     this.runId = this.configService.getRunId();

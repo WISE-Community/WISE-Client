@@ -1,5 +1,5 @@
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslatableRichTextEditorComponent } from '../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 
 @Component({
@@ -14,9 +14,9 @@ import { TranslatableRichTextEditorComponent } from '../components/translatable-
     /> `
 })
 export class RubricAuthoringComponent {
-  protected project: any;
+  private projectService = inject(TeacherProjectService);
 
-  constructor(private projectService: TeacherProjectService) {}
+  protected project: any;
 
   ngOnInit(): void {
     this.project = this.projectService.getProject();

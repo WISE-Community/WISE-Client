@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
@@ -14,14 +14,12 @@ import { MatTooltip } from '@angular/material/tooltip';
   imports: [MatLabel, MatButton, MatTooltip]
 })
 export class SelectPeerGroupingAuthoringComponent implements OnInit {
+  private dialog = inject(MatDialog);
+  private peerGroupingAuthoringService = inject(PeerGroupingAuthoringService);
+
   peerGrouping: PeerGrouping;
   @Input() tag: string;
   @Output() tagChanged: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor(
-    private dialog: MatDialog,
-    private peerGroupingAuthoringService: PeerGroupingAuthoringService
-  ) {}
 
   ngOnInit(): void {
     this.peerGrouping = this.peerGroupingAuthoringService.getPeerGrouping(this.tag);

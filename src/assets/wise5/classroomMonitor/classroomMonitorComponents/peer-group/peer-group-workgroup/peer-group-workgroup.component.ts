@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 import { NgClass, NgStyle } from '@angular/common';
@@ -11,13 +11,13 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './peer-group-workgroup.component.html'
 })
 export class PeerGroupWorkgroupComponent implements OnInit {
+  private configService = inject(ConfigService);
+
   @Input() workgroup: any;
 
   avatarColor: string;
   isEmptyWorkgroup: boolean;
   workgroupUsernames: string;
-
-  constructor(private configService: ConfigService) {}
 
   ngOnInit(): void {
     this.workgroupUsernames = this.configService.getDisplayUsernamesByWorkgroupId(

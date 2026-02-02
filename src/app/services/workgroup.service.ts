@@ -1,19 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConfigService } from '../../assets/wise5/services/configService';
 
 @Injectable()
 export class WorkgroupService {
-  constructor(
-    private ConfigService: ConfigService,
-    private http: HttpClient
-  ) {}
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
+
   getWorkgroupsInPeriod(periodId: number): Map<number, any> {
     const workgroups = new Map();
     for (const workgroup of this.getWorkgroupsSortedById()) {
       if (periodId === -1 || (workgroup.periodId === periodId && workgroup.workgroupId != null)) {
-        workgroup.displayNames = this.ConfigService.getDisplayUsernamesByWorkgroupId(
+        workgroup.displayNames = this.configService.getDisplayUsernamesByWorkgroupId(
           workgroup.workgroupId
         );
         workgroups.set(workgroup.workgroupId, workgroup);
@@ -23,20 +22,20 @@ export class WorkgroupService {
   }
 
   private getWorkgroupsSortedById() {
-    return this.ConfigService.getClassmateUserInfos().sort((a, b) => {
+    return this.configService.getClassmateUserInfos().sort((a, b) => {
       return a.workgroupId - b.workgroupId;
     });
   }
 
   createWorkgroup(periodId: number, memberIds: number[]): Observable<any> {
     return this.http.post(
-      `/api/teacher/run/${this.ConfigService.getRunId()}/workgroup/create/${periodId}`,
+      `/api/teacher/run/${this.configService.getRunId()}/workgroup/create/${periodId}`,
       memberIds
     );
   }
 
   isUserInAnyWorkgroup(user: any): boolean {
-    return this.ConfigService.getClassmateUserInfos().some((userInfo) => {
+    return this.configService.getClassmateUserInfos().some((userInfo) => {
       return userInfo.userIds != null && userInfo.userIds.includes(user.id);
     });
   }

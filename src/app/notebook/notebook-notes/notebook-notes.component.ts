@@ -1,7 +1,5 @@
-import { Component, Inject, Input, Optional, ViewEncapsulation } from '@angular/core';
+import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ConfigService } from '../../../assets/wise5/services/configService';
-import { NotebookService } from '../../../assets/wise5/services/notebookService';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
@@ -32,6 +30,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   encapsulation: ViewEncapsulation.None
 })
 export class NotebookNotesComponent extends NotebookParentComponent {
+  private dataService = inject(StudentDataService);
+  public insertArgs: any = inject(MAT_DIALOG_DATA);
+  private projectService = inject(ProjectService);
+
   protected groups = [];
   private groupNameToGroup = {};
   protected hasPrivateNotes: boolean = false;
@@ -40,23 +42,13 @@ export class NotebookNotesComponent extends NotebookParentComponent {
   private subscriptions: Subscription = new Subscription();
   @Input() viewOnly: boolean;
 
-  constructor(
-    configService: ConfigService,
-    private dataService: StudentDataService,
-    NotebookService: NotebookService,
-    private projectService: ProjectService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public insertArgs: any
-  ) {
-    super(configService, NotebookService);
+  ngOnInit(): void {
     this.insertArgs = this.insertArgs ?? {
       insertMode: false
     };
     if (this.insertArgs.visibleSpace) {
       this.selectedTabIndex = this.insertArgs.visibleSpace === 'public' ? 1 : 0;
     }
-  }
-
-  ngOnInit(): void {
     super.ngOnInit();
     this.setLabel();
     this.addPersonalGroupToGroups();
@@ -64,7 +56,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     this.hasPrivateNotes = this.isHasPrivateNotes();
 
     this.subscriptions.add(
-      this.NotebookService.notebookUpdated$.subscribe(({ notebookItem }) => {
+      this.notebookService.notebookUpdated$.subscribe(({ notebookItem }) => {
         if (
           (notebookItem.groups == null || notebookItem.groups.length === 0) &&
           notebookItem.type === 'note'
@@ -79,10 +71,10 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     );
 
     this.subscriptions.add(
-      this.NotebookService.publicNotebookItemsRetrieved$.subscribe(() => {
+      this.notebookService.publicNotebookItemsRetrieved$.subscribe(() => {
         for (const group of this.groups) {
           if (group.name !== 'private') {
-            group.items = this.NotebookService.publicNotebookItems[group.name];
+            group.items = this.notebookService.publicNotebookItems[group.name];
           }
         }
       })
@@ -95,7 +87,7 @@ export class NotebookNotesComponent extends NotebookParentComponent {
       })
     );
 
-    this.NotebookService.retrievePublicNotebookItems('public');
+    this.notebookService.retrievePublicNotebookItems('public');
   }
 
   ngOnDestroy(): void {
@@ -205,20 +197,20 @@ export class NotebookNotesComponent extends NotebookParentComponent {
   }
 
   protected addNote(): void {
-    this.NotebookService.addNote(this.dataService.getCurrentNodeId());
+    this.notebookService.addNote(this.dataService.getCurrentNodeId());
   }
 
   protected select({ event, note }: any): void {
     if (this.insertArgs.insertMode) {
       this.insertArgs.notebookItem = note;
-      this.NotebookService.broadcastNotebookItemChosen(this.insertArgs);
+      this.notebookService.broadcastNotebookItemChosen(this.insertArgs);
     } else {
       const isEditMode = !this.viewOnly;
-      this.NotebookService.editNote(this.dataService.getCurrentNodeId(), note, isEditMode);
+      this.notebookService.editNote(this.dataService.getCurrentNodeId(), note, isEditMode);
     }
   }
 
   protected close(): void {
-    this.NotebookService.closeNotes();
+    this.notebookService.closeNotes();
   }
 }

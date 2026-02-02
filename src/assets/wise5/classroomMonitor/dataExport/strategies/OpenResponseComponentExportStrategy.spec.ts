@@ -1,6 +1,18 @@
+import { provideHttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { MockProvider, MockProviders } from 'ng-mocks';
 import { ComponentState } from '../../../../../app/domain/componentState';
+import { BranchService } from '../../../services/branchService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { ConfigService } from '../../../services/configService';
+import { PathService } from '../../../services/pathService';
 import { ExportStrategyTester } from './ExportStrategyTester';
 import { OpenResponseComponentDataExportStrategy } from './OpenResponseComponentExportStrategy';
+import { AnnotationService } from '../../../services/annotationService';
+import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
+import { of } from 'rxjs';
+import { ProjectService } from '../../../services/projectService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 const componentType = 'OpenResponse';
 let exportStrategyTester: ExportStrategyTester = new ExportStrategyTester();
@@ -15,9 +27,24 @@ let componentState3: any;
 let componentState4: any;
 
 describe('OpenResponseComponentDataExportStrategy', () => {
-  beforeEach(() => {
-    exportStrategyTester = new ExportStrategyTester();
-    exportStrategyTester.setUpServices();
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      providers: [
+        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService, ProjectService, TeacherProjectService),
+        MockProvider(AnnotationService, {
+          annotationSavedToServer$: of()
+        }),
+        MockProvider(TeacherWebSocketService, {
+          newAnnotationReceived$: of(),
+          newStudentWorkReceived$: of()
+        }),
+        provideHttpClient()
+      ],
+    })
+    await TestBed.runInInjectionContext(async () => {
+      exportStrategyTester = new ExportStrategyTester();
+      exportStrategyTester.setUpServices();
+    });
     initializeStudentWork();
   });
   exportWithSingleAutoScore();

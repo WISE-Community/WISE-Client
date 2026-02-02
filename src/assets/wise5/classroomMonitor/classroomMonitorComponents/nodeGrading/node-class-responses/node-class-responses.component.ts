@@ -1,22 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { MatListModule } from '@angular/material/list';
-import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
+import { CommonModule } from '@angular/common';
+import { Component, inject, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
-import { CommonModule } from '@angular/common';
-import { AbstractClassResponsesComponent } from '../../AbstractClassResponsesComponent';
-import { Node } from '../../../../common/Node';
-import { ComponentContent } from '../../../../common/ComponentContent';
-import { NodeWorkgroupItemComponent } from '../node-workgroup-item/node-workgroup-item.component';
-import { AnnotationService } from '../../../../services/annotationService';
-import { ClassroomStatusService } from '../../../../services/classroomStatusService';
-import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
-import { ConfigService } from '../../../../services/configService';
-import { TeacherDataService } from '../../../../services/teacherDataService';
-import { NotificationService } from '../../../../services/notificationService';
-import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { Subscription } from 'rxjs';
+import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
+import { ComponentContent } from '../../../../common/ComponentContent';
+import { Node } from '../../../../common/Node';
+import { ComponentServiceLookupService } from '../../../../services/componentServiceLookupService';
+import { AbstractClassResponsesComponent } from '../../AbstractClassResponsesComponent';
+import { NodeWorkgroupItemComponent } from '../node-workgroup-item/node-workgroup-item.component';
 
 @Component({
   imports: [
@@ -33,29 +27,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './node-class-responses.component.html'
 })
 export class NodeClassResponsesComponent extends AbstractClassResponsesComponent {
+  private componentServiceLookupService = inject(ComponentServiceLookupService);
+
   @Input() components: ComponentContent[];
   protected maxScore: number;
   @Input() node: Node;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected classroomStatusService: ClassroomStatusService,
-    private componentServiceLookupService: ComponentServiceLookupService,
-    protected configService: ConfigService,
-    protected dataService: TeacherDataService,
-    protected notificationService: NotificationService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(
-      annotationService,
-      classroomStatusService,
-      configService,
-      dataService,
-      notificationService,
-      projectService
-    );
-  }
 
   ngOnInit(): void {
     this.subscriptions.add(this.projectService.projectSaved$.subscribe(() => this.setMaxScore()));

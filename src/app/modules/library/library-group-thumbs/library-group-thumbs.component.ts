@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { LibraryGroup } from '../libraryGroup';
 
@@ -8,10 +8,10 @@ import { LibraryGroup } from '../libraryGroup';
   templateUrl: './library-group-thumbs.component.html'
 })
 export class LibraryGroupThumbsComponent implements OnInit {
+  private sanitizer = inject(DomSanitizer);
+
   protected children: Array<any> = [];
   @Input() group: LibraryGroup = new LibraryGroup();
-
-  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.children = this.group.children;

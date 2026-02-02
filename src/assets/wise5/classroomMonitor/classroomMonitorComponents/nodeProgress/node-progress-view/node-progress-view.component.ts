@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, inject } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { Subscription } from 'rxjs';
@@ -18,20 +18,18 @@ import { NgClass } from '@angular/common';
   templateUrl: './node-progress-view.component.html'
 })
 export class NodeProgressViewComponent implements OnInit {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private dialog = inject(MatDialog);
+  private projectService = inject(TeacherProjectService);
+  private router = inject(Router);
+
   @Input() protected nodeId: string;
   nodeIdToExpanded: any = {};
   protected rootNode: any;
   protected showRubricButton: boolean;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private configService: ConfigService,
-    private dialog: MatDialog,
-    private projectService: TeacherProjectService,
-    private router: Router,
-    private dataService: TeacherDataService
-  ) {}
 
   ngOnInit(): void {
     this.nodeId = this.nodeId || this.projectService.rootNode.id;

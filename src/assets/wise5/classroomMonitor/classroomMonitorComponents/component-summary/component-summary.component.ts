@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { TeacherSummaryDisplayComponent } from '../../../directives/teacher-summary-display/teacher-summary-display.component';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -31,6 +31,12 @@ import { CRaterService } from '../../../services/cRaterService';
   encapsulation: ViewEncapsulation.None
 })
 export class ComponentSummaryComponent {
+  private annotationService = inject(AnnotationService);
+  private componentServiceLookupService = inject(ComponentServiceLookupService);
+  private cRaterService = inject(CRaterService);
+  private dataService = inject(TeacherDataService);
+  private summaryService = inject(SummaryService);
+
   protected avgScore: number;
   @Input() component: ComponentContent;
   protected hasCorrectAnswer: boolean;
@@ -42,14 +48,6 @@ export class ComponentSummaryComponent {
   @Input() node: Node;
   @Input() periodId: number;
   protected source: 'allPeriods' | 'period';
-
-  constructor(
-    private annotationService: AnnotationService,
-    private componentServiceLookupService: ComponentServiceLookupService,
-    private cRaterService: CRaterService,
-    private dataService: TeacherDataService,
-    private summaryService: SummaryService
-  ) {}
 
   ngOnChanges(): void {
     if (this.node && this.component) {

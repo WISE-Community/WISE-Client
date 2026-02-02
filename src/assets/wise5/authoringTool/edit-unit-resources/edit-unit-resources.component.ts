@@ -1,7 +1,7 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,11 +39,11 @@ class UnitResource {
   templateUrl: './edit-unit-resources.component.html'
 })
 export class EditUnitResourcesComponent {
+  private projectService = inject(TeacherProjectService);
+
   protected inputChanged: Subject<string> = new Subject<string>();
   @Input() resources: UnitResource[] = [];
   private subscriptions: Subscription = new Subscription();
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(

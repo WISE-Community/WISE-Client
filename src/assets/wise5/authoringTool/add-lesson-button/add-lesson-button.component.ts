@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, inject } from '@angular/core';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,15 +21,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './add-lesson-button.component.html'
 })
 export class AddLessonButtonComponent {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   @Input() active: boolean;
   @Input() first: boolean;
   @Input() lessonId: string;
   @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   protected addFirstLesson(): void {
     this.goToAddLessonView(this.active ? 'group0' : 'inactiveGroups');

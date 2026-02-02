@@ -1,14 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
+import { Component, inject, Input } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { CompletionService } from '../../../services/completionService';
 import { StudentSummaryDisplay } from '../../../directives/student-summary-display/student-summary-display.component';
 
@@ -19,6 +11,7 @@ import { StudentSummaryDisplay } from '../../../directives/student-summary-displ
 })
 export class SummaryStudent extends ComponentStudent {
   chartType: string;
+  private completionService = inject(CompletionService);
   customLabelColors: any[];
   highlightCorrectAnswer: boolean;
   isShowDisplay: boolean;
@@ -26,36 +19,13 @@ export class SummaryStudent extends ComponentStudent {
   otherPrompt: string;
   otherStepTitle: string;
   @Input() periodId: number;
+  private projectService = inject(ProjectService);
   prompt: string;
   source: string;
   studentDataType: string;
   summaryNodeId: string;
   summaryComponentId: string;
   warningMessage: string = '';
-
-  constructor(
-    protected annotationService: AnnotationService,
-    private completionService: CompletionService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private projectService: ProjectService,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

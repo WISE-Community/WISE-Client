@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
@@ -25,17 +25,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: './choose-automated-assessment.component.html'
 })
 export class ChooseAutomatedAssessmentComponent {
+  private projectService = inject(TeacherProjectService);
+  protected route = inject(ActivatedRoute);
+  protected router = inject(Router);
+
   private importProjectId: number;
   protected node: any;
   protected target: AddStepTarget;
   private project: any;
   protected projectItems: any;
-
-  constructor(
-    private projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {}
 
   ngOnInit(): void {
     this.target = history.state;

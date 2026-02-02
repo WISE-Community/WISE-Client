@@ -1,6 +1,18 @@
+import { TestBed } from '@angular/core/testing';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ExportStrategyTester } from './ExportStrategyTester';
 import { MatchComponentDataExportStrategy } from './MatchComponentDataExportStrategy';
+import { MockProvider, MockProviders } from 'ng-mocks';
+import { BranchService } from '../../../services/branchService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { provideHttpClient } from '@angular/common/http';
+import { ConfigService } from '../../../services/configService';
+import { PathService } from '../../../services/pathService';
+import { ProjectService } from '../../../services/projectService';
+import { AnnotationService } from '../../../services/annotationService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
+import { of } from 'rxjs';
 
 const additionalColumns = [
   'Choice A',
@@ -41,9 +53,24 @@ let studentData3: any;
 let studentData4: any;
 
 describe('MatchComponentDataExportStrategy', () => {
-  beforeEach(() => {
-    exportStrategyTester = new ExportStrategyTester();
-    exportStrategyTester.setUpServices();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      providers: [
+        MockProviders(BranchService, ComponentServiceLookupService, ConfigService, PathService, ProjectService, TeacherProjectService),
+        MockProvider(AnnotationService, {
+          annotationSavedToServer$: of()
+        }),
+        MockProvider(TeacherWebSocketService, {
+          newAnnotationReceived$: of(),
+          newStudentWorkReceived$: of()
+        }),
+        provideHttpClient()
+      ],
+    })
+    await TestBed.runInInjectionContext(async () => {
+      exportStrategyTester = new ExportStrategyTester();
+      exportStrategyTester.setUpServices();
+    });
     initializeStudentWork();
   });
   exportAllRevisions();

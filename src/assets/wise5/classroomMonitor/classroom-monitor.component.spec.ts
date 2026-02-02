@@ -9,8 +9,6 @@ import { MainMenuComponent } from '../common/main-menu/main-menu.component';
 import { WorkgroupService } from '../../../app/services/workgroup.service';
 import { ConfigService } from '../services/configService';
 import { TeacherDataService } from '../services/teacherDataService';
-import { NodeService } from '../services/nodeService';
-import { TeacherNodeService } from '../services/teacherNodeService';
 
 let component: ClassroomMonitorComponent;
 let fixture: ComponentFixture<ClassroomMonitorComponent>;
@@ -25,8 +23,7 @@ describe('ClassroomMonitorComponent', () => {
       ],
       providers: [
         provideRouter([]),
-        WorkgroupService,
-        { provide: NodeService, useClass: TeacherNodeService }
+        WorkgroupService
       ]
     }).compileComponents();
     const notebookService = TestBed.inject(NotebookService);

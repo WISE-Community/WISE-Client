@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { ManagePeriodComponent } from '../manage-period/manage-period.component';
@@ -10,10 +10,10 @@ import { ManagePeriodComponent } from '../manage-period/manage-period.component'
   templateUrl: 'manage-students.component.html'
 })
 export class ManageStudentsComponent {
+  private dataService = inject(TeacherDataService);
+
   protected periods: any[];
   private subscriptions: Subscription = new Subscription();
-
-  constructor(private dataService: TeacherDataService) {}
 
   ngOnInit(): void {
     this.setVisiblePeriods(this.dataService.getCurrentPeriod());

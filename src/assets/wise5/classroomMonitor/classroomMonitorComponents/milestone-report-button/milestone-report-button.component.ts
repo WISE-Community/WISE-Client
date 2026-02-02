@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MilestoneService } from '../../../services/milestoneService';
@@ -13,15 +13,13 @@ import { MilestoneDetailsDialogComponent } from '../milestones/milestone-details
   templateUrl: './milestone-report-button.component.html'
 })
 export class MilestoneReportButtonComponent {
+  private dialog = inject(MatDialog);
+  private milestoneService = inject(MilestoneService);
+
   @Input() component: any;
   @Input() node: Node;
   @Input() periodId: number;
   protected report: any;
-
-  constructor(
-    private dialog: MatDialog,
-    private milestoneService: MilestoneService
-  ) {}
 
   ngOnChanges(): void {
     if (this.node && this.component) {

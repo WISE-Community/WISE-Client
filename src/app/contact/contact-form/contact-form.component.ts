@@ -1,5 +1,5 @@
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { finalize } from 'rxjs/operators';
 import {
@@ -52,6 +52,14 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   templateUrl: './contact-form.component.html'
 })
 export class ContactFormComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private fb = inject(FormBuilder);
+  private libraryService = inject(LibraryService);
+  private recaptchaV3Service = inject(ReCaptchaV3Service);
+  private route = inject(ActivatedRoute);
+  private studentService = inject(StudentService);
+  private userService = inject(UserService);
+
   protected complete: boolean = false;
   protected contactFormGroup: FormGroup = this.fb.group({
     name: new FormControl('', [Validators.required]),
@@ -71,16 +79,6 @@ export class ContactFormComponent implements OnInit {
   protected projectName: string;
   private runId: number;
   protected teachers: any[] = [];
-
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private configService: ConfigService,
-    private studentService: StudentService,
-    private libraryService: LibraryService,
-    private recaptchaV3Service: ReCaptchaV3Service,
-    private route: ActivatedRoute
-  ) {}
 
   ngOnInit(): void {
     this.isSignedIn = this.userService.isSignedIn();

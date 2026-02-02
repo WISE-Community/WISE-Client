@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, inject, Input } from '@angular/core';
 import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
 import { Component } from '../../../assets/wise5/common/Component';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
@@ -8,16 +8,14 @@ import { moveObjectDown, moveObjectUp } from '../../../assets/wise5/common/array
 
 @Directive()
 export abstract class EditAdvancedComponentComponent {
+  protected nodeService = inject(TeacherNodeService);
+  protected notebookService = inject(NotebookService);
+  protected teacherProjectService = inject(TeacherProjectService);
+
   component: Component;
   componentContent: ComponentContent;
   @Input() componentId: string;
   @Input() nodeId: string;
-
-  constructor(
-    protected nodeService: TeacherNodeService,
-    protected notebookService: NotebookService,
-    protected teacherProjectService: TeacherProjectService
-  ) {}
 
   ngOnInit(): void {
     this.componentContent = this.teacherProjectService.getComponent(this.nodeId, this.componentId);

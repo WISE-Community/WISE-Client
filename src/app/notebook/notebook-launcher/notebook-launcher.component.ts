@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,14 +13,12 @@ import { NotebookNotesComponent } from '../notebook-notes/notebook-notes.compone
   templateUrl: 'notebook-launcher.component.html'
 })
 export class NotebookLauncherComponent {
+  private dialog = inject(MatDialog);
+  private projectService = inject(ProjectService);
+
   protected label: string = '';
   @Input() notebookConfig: any;
   private subscription: Subscription = new Subscription();
-
-  constructor(
-    private dialog: MatDialog,
-    private projectService: ProjectService
-  ) {}
 
   ngOnInit(): void {
     this.setLabel();

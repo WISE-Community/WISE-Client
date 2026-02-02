@@ -9,7 +9,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ChangeTeamPeriodDialogComponent } from '../change-team-period-dialog/change-team-period-dialog.component';
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 import { ManageUserComponent } from '../manage-user/manage-user.component';
@@ -28,6 +28,12 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   templateUrl: 'manage-team.component.html'
 })
 export class ManageTeamComponent {
+  private breakpointObserver = inject(BreakpointObserver);
+  private configService = inject(ConfigService);
+  private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+  private updateWorkgroupService = inject(UpdateWorkgroupService);
+
   protected avatarColor: string;
   protected canGradeStudentWork: boolean;
   protected isUnassigned: boolean;
@@ -35,22 +41,13 @@ export class ManageTeamComponent {
   protected mdScreen: boolean;
   @Input() team: any;
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private configService: ConfigService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private updateWorkgroupService: UpdateWorkgroupService
-  ) {
+  ngOnInit(): void {
     this.breakpointObserver.observe(['(min-width: 48rem)']).subscribe((result) => {
       this.mdScreen = result.matches;
     });
     this.breakpointObserver.observe(['(min-width: 64rem)']).subscribe((result) => {
       this.lgScreen = result.matches;
     });
-  }
-
-  ngOnInit(): void {
     this.avatarColor = getAvatarColorForWorkgroupId(this.team.workgroupId);
     this.canGradeStudentWork = this.configService.getPermissions().canGradeStudentWork;
     this.isUnassigned = this.team.workgroupId == null;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -10,14 +10,10 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { AssetChooser } from '../../../authoringTool/project-asset-authoring/asset-chooser';
-import { ConfigService } from '../../../services/configService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   selector: 'draw-authoring',
@@ -37,6 +33,8 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   ]
 })
 export class DrawAuthoring extends AbstractComponentAuthoring {
+  private dialog = inject(MatDialog);
+
   allToolNames: string[] = [
     'select',
     'line',
@@ -65,14 +63,8 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
   canvasHeightChange: Subject<string> = new Subject<string>();
   stampImageChange: Subject<string> = new Subject<string>();
 
-  constructor(
-    protected configService: ConfigService,
-    private dialog: MatDialog,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, nodeService, projectAssetService, projectService);
+  ngOnInit() {
+    super.ngOnInit();
     this.subscriptions.add(
       this.backgroundImageChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.updateStarterDrawDataBackgroundAndSave();
@@ -93,10 +85,6 @@ export class DrawAuthoring extends AbstractComponentAuthoring {
         this.updateAuthoringComponentContentStampsAndSave();
       })
     );
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
     this.stamps = this.convertStampStringsToStampObjects(this.componentContent.stamps.Stamps);
   }
 

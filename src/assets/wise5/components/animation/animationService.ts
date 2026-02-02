@@ -1,5 +1,3 @@
-'use strict';
-
 import { ComponentService } from '../componentService';
 import { Injectable } from '@angular/core';
 

@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { MatTabChangeEvent, MatTabGroup, MatTab } from '@angular/material/tabs';
 import { ConfigService } from '../../../../services/configService';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 import { SelectPeriodComponent } from '../../select-period/select-period.component';
 import { NavItemProgressComponent } from '../../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
@@ -32,6 +31,11 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './milestone-details.component.html'
 })
 export class MilestoneDetailsComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private dataService = inject(TeacherDataService);
+  private projectService = inject(TeacherProjectService);
+  private sanitizer = inject(DomSanitizer);
+
   currentPeriod: any;
   description: SafeHtml;
   @Input() milestone;
@@ -40,14 +44,6 @@ export class MilestoneDetailsComponent implements OnInit {
   report: SafeHtml;
   requiredNodeIds: string[];
   subscriptions: Subscription = new Subscription();
-
-  constructor(
-    private configService: ConfigService,
-    private dataService: TeacherDataService,
-    private dialog: MatDialog,
-    private projectService: TeacherProjectService,
-    private sanitizer: DomSanitizer
-  ) {}
 
   ngOnInit(): void {
     this.currentPeriod = this.dataService.getCurrentPeriod();

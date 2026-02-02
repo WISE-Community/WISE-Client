@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { DiscourseFeedComponent } from '../../discourse-feed/discourse-feed.component';
 import { CommonModule } from '@angular/common';
@@ -12,14 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: 'discourse-latest-news.component.html'
 })
 export class DiscourseLatestNewsComponent extends DiscourseFeedComponent {
+  private breakpointObserver = inject(BreakpointObserver);
+
   protected smallScreen: boolean;
   protected xsScreen: boolean;
 
-  constructor(
-    protected http: HttpClient,
-    private breakpointObserver: BreakpointObserver
-  ) {
-    super(http);
+  ngOnInit(): void {
+    super.ngOnInit();
     this.breakpointObserver
       .observe(['(max-width: 40rem)', '(max-width: 48rem)'])
       .subscribe((result) => {

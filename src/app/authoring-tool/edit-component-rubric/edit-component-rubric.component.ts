@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,10 +21,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: 'edit-component-rubric.component.html'
 })
 export class EditComponentRubricComponent {
+  private projectService = inject(TeacherProjectService);
+
   @Input() componentContent: any;
   protected showRubricAuthoring: boolean;
-
-  constructor(private projectService: TeacherProjectService) {}
 
   protected save(): void {
     this.projectService.componentChanged();

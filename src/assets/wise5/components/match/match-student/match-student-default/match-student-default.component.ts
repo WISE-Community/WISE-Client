@@ -1,6 +1,5 @@
 import { AddChoiceButtonComponent } from '../add-choice-button/add-choice-button.component';
 import { AddMatchChoiceDialogComponent } from '../add-match-choice-dialog/add-match-choice-dialog';
-import { AnnotationService } from '../../../../services/annotationService';
 import { Bucket, mergeBucket } from '../../bucket';
 import {
   CdkDragEnter,
@@ -10,13 +9,11 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Choice, createChoiceFromNotebookItem } from '../../choice';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ComponentAnnotationsComponent } from '../../../../directives/componentAnnotations/component-annotations.component';
 import { ComponentHeaderComponent } from '../../../../directives/component-header/component-header.component';
 import { ComponentSaveSubmitButtonsComponent } from '../../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
-import { ComponentService } from '../../../componentService';
 import { ComponentStudent } from '../../../component-student.component';
-import { ConfigService } from '../../../../services/configService';
 import { Container } from '../container';
 import { copy } from '../../../../common/object/object';
 import { CRaterService } from '../../../../services/cRaterService';
@@ -30,13 +27,8 @@ import { MatchCdkDragDrop } from '../MatchCdkDragDrop';
 import { MatchChoiceItemComponent } from '../../match-choice-item/match-choice-item.component';
 import { MatchFeedbackSectionComponent } from '../match-feedback-section/match-feedback-section.component';
 import { MatchService } from '../../matchService';
-import { MatDialog } from '@angular/material/dialog';
-import { NodeService } from '../../../../services/nodeService';
 import { NotebookItem } from '../../../../common/notebook/notebookItem';
-import { NotebookService } from '../../../../services/notebookService';
 import { ProjectService } from '../../../../services/projectService';
-import { StudentAssetService } from '../../../../services/studentAssetService';
-import { StudentDataService } from '../../../../services/studentDataService';
 import { CRaterIdea } from '../../../common/cRater/CRaterIdea';
 
 @Component({
@@ -56,36 +48,14 @@ import { CRaterIdea } from '../../../common/cRater/CRaterIdea';
 export class MatchStudentDefaultComponent extends ComponentStudent {
   protected buckets: any[] = [];
   protected choices: Choice[] = [];
+  private cRaterService = inject(CRaterService);
   protected hasCorrectAnswer: boolean = false;
   protected isCorrect: boolean = false;
   protected isLatestComponentStateSubmit: boolean = false;
+  protected matchService = inject(MatchService);
+  private projectService = inject(ProjectService);
   private sourceBucket: any;
   protected sourceBucketId: string = '0';
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected assetService: StudentAssetService,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    private craterService: CRaterService,
-    protected dataService: StudentDataService,
-    protected dialog: MatDialog,
-    protected matchService: MatchService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private projectService: ProjectService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      assetService,
-      dataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -228,10 +198,11 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
    * since. This will also determine if submit is dirty.
    */
   private processPreviousStudentWork(): void {
-    const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    const latestComponentState =
+      this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+        this.nodeId,
+        this.componentId
+      );
     if (latestComponentState == null) {
       return;
     }
@@ -240,7 +211,7 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
       this.setGeneralComponentStatus(latestComponentState.isCorrect, false);
       this.checkAnswer();
     } else {
-      const latestSubmitComponentState = this.dataService.getLatestSubmitComponentState(
+      const latestSubmitComponentState = this.studentDataService.getLatestSubmitComponentState(
         this.nodeId,
         this.componentId
       );
@@ -258,17 +229,18 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
   }
 
   private processDirtyStudentWork(): void {
-    const latestSubmitComponentState = this.dataService.getLatestSubmitComponentState(
+    const latestSubmitComponentState = this.studentDataService.getLatestSubmitComponentState(
       this.nodeId,
       this.componentId
     );
     if (latestSubmitComponentState != null) {
       this.showFeedbackOnUnchangedChoices(latestSubmitComponentState);
     } else {
-      const latestComponentState = this.dataService.getLatestComponentStateByNodeIdAndComponentId(
-        this.nodeId,
-        this.componentId
-      );
+      const latestComponentState =
+        this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+          this.nodeId,
+          this.componentId
+        );
       if (latestComponentState != null) {
         this.isCorrect = null;
         this.setIsSubmitDirty(true);
@@ -600,7 +572,7 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
       } else if (componentState.componentType === 'DialogGuidance') {
         this.addIdeasToSourceBucket(
           componentState.studentData.responses,
-          this.craterService.getCRaterRubric(componentState.nodeId, componentState.componentId)
+          this.cRaterService.getCRaterRubric(componentState.nodeId, componentState.componentId)
         );
       }
     });

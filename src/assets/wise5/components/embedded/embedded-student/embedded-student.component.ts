@@ -1,16 +1,8 @@
 import html2canvas from 'html2canvas';
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { AnnotationService } from '../../../services/annotationService';
-import { ConfigService } from '../../../services/configService';
-import { NodeService } from '../../../services/nodeService';
-import { NotebookService } from '../../../services/notebookService';
-import { StudentAssetService } from '../../../services/studentAssetService';
-import { StudentDataService } from '../../../services/studentDataService';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ComponentStudent } from '../../component-student.component';
-import { ComponentService } from '../../componentService';
 import { EmbeddedService } from '../embeddedService';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { MatDialog } from '@angular/material/dialog';
 import { copy } from '../../../common/object/object';
 import { convertToPNGFile } from '../../../common/canvas/canvas';
 import { AddToNotebookButtonComponent } from '../../../directives/add-to-notebook-button/add-to-notebook-button.component';
@@ -29,9 +21,11 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
 })
 export class EmbeddedStudent extends ComponentStudent {
   annotationsToSave: any[] = [];
+  private changeDetectorRef = inject(ChangeDetectorRef);
   componentStateId: number;
   componentType: string;
   embeddedApplicationIFrameId: string;
+  private embeddedService = inject(EmbeddedService);
   height: string = '600px';
   maxWidth: number;
   maxHeight: number;
@@ -72,34 +66,10 @@ export class EmbeddedStudent extends ComponentStudent {
     }
   };
   notebookConfig: any;
+  private sanitizer = inject(DomSanitizer);
   studentData: any;
   url: SafeUrl;
   width: string = '100%';
-
-  constructor(
-    protected annotationService: AnnotationService,
-    private changeDetectorRef: ChangeDetectorRef,
-    protected componentService: ComponentService,
-    protected configService: ConfigService,
-    protected dialog: MatDialog,
-    private embeddedService: EmbeddedService,
-    protected nodeService: NodeService,
-    protected notebookService: NotebookService,
-    private sanitizer: DomSanitizer,
-    protected studentAssetService: StudentAssetService,
-    protected studentDataService: StudentDataService
-  ) {
-    super(
-      annotationService,
-      componentService,
-      configService,
-      dialog,
-      nodeService,
-      notebookService,
-      studentAssetService,
-      studentDataService
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

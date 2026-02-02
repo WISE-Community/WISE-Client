@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
@@ -21,14 +21,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './teacher-home.component.html'
 })
 export class TeacherHomeComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private userService = inject(UserService);
+
   protected discourseUrl: string;
   private subscriptions: Subscription = new Subscription();
   protected user: User;
-
-  constructor(
-    private configService: ConfigService,
-    private userService: UserService
-  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(this.userService.getUser().subscribe((user) => (this.user = user)));

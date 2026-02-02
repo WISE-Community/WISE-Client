@@ -1,4 +1,4 @@
-import { Input, Signal, Output, computed, Directive } from '@angular/core';
+import { Input, Signal, Output, computed, Directive, inject } from '@angular/core';
 import { Subject, Subscription, debounceTime } from 'rxjs';
 import { Language } from '../../../../../app/domain/language';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
@@ -10,6 +10,9 @@ import { copy } from '../../../common/object/object';
 
 @Directive()
 export abstract class AbstractTranslatableFieldComponent {
+  protected projectService = inject(TeacherProjectService);
+  protected projectTranslationService = inject(TeacherProjectTranslationService);
+
   @Input() content: object;
   protected currentLanguage: Signal<Language> = this.projectService.currentLanguage;
   private currentTranslations$ = toObservable(this.projectTranslationService.currentTranslations);
@@ -26,10 +29,6 @@ export abstract class AbstractTranslatableFieldComponent {
   protected subscriptions: Subscription = new Subscription();
   protected translationText: string;
   protected translationTextChanged: Subject<string> = new Subject<string>();
-  constructor(
-    protected projectService: TeacherProjectService,
-    protected projectTranslationService: TeacherProjectTranslationService
-  ) {}
 
   ngOnChanges(): void {
     this.setI18nId();

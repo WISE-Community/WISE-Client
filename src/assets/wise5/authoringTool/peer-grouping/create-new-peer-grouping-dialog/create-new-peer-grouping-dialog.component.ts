@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { Subscription } from 'rxjs';
+import { SelectStepAndComponentComponent } from '../../../../../app/authoring-tool/select-step-and-component/select-step-and-component.component';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProjectService } from '../../../services/projectService';
-import { SelectStepAndComponentComponent } from '../../../../../app/authoring-tool/select-step-and-component/select-step-and-component.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
 
 @Component({
   imports: [
@@ -27,14 +25,8 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './create-new-peer-grouping-dialog.component.html'
 })
 export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
-  constructor(
-    protected dialogRef: MatDialogRef<CreateNewPeerGroupingDialogComponent>,
-    private peerGroupingAuthoringService: PeerGroupingAuthoringService,
-    protected projectService: ProjectService,
-    protected snackBar: MatSnackBar
-  ) {
-    super(dialogRef, projectService, snackBar);
-  }
+  protected override dialogRef = inject(MatDialogRef<CreateNewPeerGroupingDialogComponent>);
+  private peerGroupingAuthoringService = inject(PeerGroupingAuthoringService);
 
   ngOnInit(): void {
     this.peerGrouping = new PeerGrouping({ logic: 'random', maxMembershipCount: 2 });

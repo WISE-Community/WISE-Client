@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../../services/configService';
@@ -23,18 +23,16 @@ import { ManageTeamsComponent } from '../manage-teams/manage-teams.component';
   templateUrl: 'manage-period.component.html'
 })
 export class ManagePeriodComponent {
+  private configService = inject(ConfigService);
+  private getWorkgroupService = inject(GetWorkgroupService);
+  private workgroupService = inject(WorkgroupService);
+
   emptyTeams: Map<number, any> = new Map();
   @Input() period: any;
   students: Set<any> = new Set();
   private subscriptions: Subscription = new Subscription();
   teams: Map<number, any> = new Map();
   unassignedTeam: any = { users: [] };
-
-  constructor(
-    private configService: ConfigService,
-    private getWorkgroupService: GetWorkgroupService,
-    private workgroupService: WorkgroupService
-  ) {}
 
   ngOnChanges(): void {
     this.init();

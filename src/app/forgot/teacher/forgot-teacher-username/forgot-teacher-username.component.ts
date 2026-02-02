@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -35,17 +35,15 @@ import { MatCard, MatCardContent } from '@angular/material/card';
   ]
 })
 export class ForgotTeacherUsernameComponent {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private teacherService = inject(TeacherService);
+
   protected forgotTeacherUsernameFormGroup: FormGroup = this.fb.group({
     email: new FormControl('', [Validators.required, Validators.email])
   });
   protected message: string = '';
   protected processing: boolean = false;
-
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private teacherService: TeacherService
-  ) {}
 
   getControlFieldValue(fieldName) {
     return this.forgotTeacherUsernameFormGroup.get(fieldName).value;

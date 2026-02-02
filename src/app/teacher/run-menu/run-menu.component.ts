@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,16 +20,14 @@ import { ArchiveProjectService } from '../../services/archive-project.service';
   templateUrl: './run-menu.component.html'
 })
 export class RunMenuComponent implements OnInit {
+  private archiveProjectService = inject(ArchiveProjectService);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
+  private userService = inject(UserService);
+
   protected reportProblemLink: string = '';
   @Input() run: TeacherRun;
   @Output() runArchiveStatusChangedEvent: EventEmitter<void> = new EventEmitter<void>();
-
-  constructor(
-    private archiveProjectService: ArchiveProjectService,
-    private dialog: MatDialog,
-    private userService: UserService,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.reportProblemLink = `/contact?runId=${this.run.id}`;

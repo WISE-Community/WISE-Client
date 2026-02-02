@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   AbstractControl,
@@ -33,6 +33,11 @@ import { MatCard, MatCardContent } from '@angular/material/card';
   templateUrl: './forgot-teacher-password-change.component.html'
 })
 export class ForgotTeacherPasswordChangeComponent {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private teacherService = inject(TeacherService);
+
   changePasswordFormGroup: FormGroup = this.fb.group({});
   protected isSubmitButtonEnabled: boolean = true;
   protected message: string = '';
@@ -40,13 +45,6 @@ export class ForgotTeacherPasswordChangeComponent {
   protected showForgotPasswordLink = false;
   @Input() username: string = null;
   @Input() verificationCode: string;
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private fb: FormBuilder,
-    private router: Router,
-    private teacherService: TeacherService
-  ) {}
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();

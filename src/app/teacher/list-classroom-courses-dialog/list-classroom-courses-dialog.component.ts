@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TeacherService } from '../teacher.service';
 import { Course } from '../../domain/course';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -39,6 +39,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   templateUrl: './list-classroom-courses-dialog.component.html'
 })
 export class ListClassroomCoursesDialogComponent implements OnInit {
+  data = inject(MAT_DIALOG_DATA);
+  dialog = inject(MatDialog);
+  dialogRef = inject<MatDialogRef<ListClassroomCoursesDialogComponent>>(MatDialogRef);
+  private fb = inject(FormBuilder);
+  private teacherService = inject(TeacherService);
+  private userService = inject(UserService);
+
   run: Run;
   courses: Course[] = [];
   courseIds: string[] = [];
@@ -52,21 +59,11 @@ export class ListClassroomCoursesDialogComponent implements OnInit {
   coursesSuccessfullyAdded: any[] = [];
   coursesFailedToAdd: any[] = [];
 
-  constructor(
-    public dialog: MatDialog,
-    public dialogRef: MatDialogRef<ListClassroomCoursesDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private teacherService: TeacherService,
-    private userService: UserService,
-    private fb: FormBuilder
-  ) {
-    this.run = data.run;
-    for (const course of data.courses) {
+  ngOnInit(): void {
+    this.run = this.data.run;
+    for (const course of this.data.courses) {
       this.courses.push(new Course(course));
     }
-  }
-
-  ngOnInit() {
     const descriptionText = $localize`Hi class! Please complete the "${this.data.run.name}:unitTitle:" WISE unit. (Access Code: ${this.data.run.runCode}:accessCode:)`;
     const description = new FormControl(descriptionText, Validators.required);
     this.coursesControl = new FormArray(this.courses.map(() => new FormControl(false)));

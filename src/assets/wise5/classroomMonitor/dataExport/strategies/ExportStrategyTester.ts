@@ -105,7 +105,7 @@ export class ExportStrategyTester {
   }
 
   setUpTeacherProjectService(): void {
-    this.teacherProjectService = new TeacherProjectService(null, null, null, null, null);
+    this.teacherProjectService = new TeacherProjectService();
     spyOn(this.teacherProjectService, 'getNodePositionById').and.returnValue(this.stepNumber);
     spyOn(this.teacherProjectService, 'getNodePositionAndTitle').and.returnValue(
       this.nodePositionAndTitle
@@ -116,17 +116,15 @@ export class ExportStrategyTester {
     spyOn(this.teacherProjectService, 'getProjectTitle').and.returnValue(this.projectTitle);
   }
 
-  setUpTeacherDataService(): void {
-    this.dataService = new TeacherDataService(
-      this.annotationService,
-      this.configService,
-      null,
-      this.teacherProjectService,
-      this.teacherWebSocketService
-    );
+  private setUpTeacherDataService(): void {
+    this.dataService = new TeacherDataService();
+    this.dataService['projectService'] = this.teacherProjectService;
+    this.dataService['configService'] = this.configService;
+    this.dataService['annotationService'] = this.annotationService;
+    this.dataService['teacherWebSocketService'] = this.teacherWebSocketService;
   }
 
-  setUpWorkgroups(): void {
+  private setUpWorkgroups(): void {
     this.addWorkgroup(this.workgroupId1, this.workgroupUserInfo1);
     this.addWorkgroup(this.workgroupId2, this.workgroupUserInfo2);
   }

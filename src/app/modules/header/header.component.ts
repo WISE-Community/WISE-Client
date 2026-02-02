@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
@@ -23,15 +23,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  private router = inject(Router);
+  private userService = inject(UserService);
+  private utilService = inject(UtilService);
+
   protected location: string = '';
   protected roles: string[] = [];
   protected user: User;
 
-  constructor(
-    private router: Router,
-    private userService: UserService,
-    private utilService: UtilService
-  ) {
+  constructor() {
     this.router.events.subscribe(() => {
       this.setLocation();
     });

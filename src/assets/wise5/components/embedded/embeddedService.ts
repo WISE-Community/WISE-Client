@@ -1,26 +1,19 @@
-'use strict';
-
 import $ from 'jquery';
 import html2canvas from 'html2canvas';
+import { inject, Injectable } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { Injectable } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { copy } from '../../common/object/object';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class EmbeddedService extends ComponentService {
+  protected assetService = inject(StudentAssetService);
+  protected configService = inject(ConfigService);
   defaultWidth: string = '100%';
   defaultHeight: string = '600px';
   iframePrefix: string = 'embedded-application-iframe-';
-
-  constructor(
-    protected ConfigService: ConfigService,
-    protected StudentAssetService: StudentAssetService
-  ) {
-    super();
-  }
 
   getEmbeddedApplicationIframeId(componentId: string): string {
     return `${this.iframePrefix}-${componentId}`;
@@ -89,7 +82,7 @@ export class EmbeddedService extends ComponentService {
     return new Promise((resolve, reject) => {
       html2canvas(modelElement as HTMLElement).then((canvas) => {
         const pngFile = convertToPNGFile(canvas);
-        this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
+        this.assetService.uploadAsset(pngFile).then((asset) => {
           resolve(asset);
         });
       });
@@ -144,8 +137,8 @@ export class EmbeddedService extends ComponentService {
   createProjectPathMessage(): any {
     return {
       messageType: 'projectPath',
-      projectPath: this.ConfigService.getConfigParam('projectBaseURL'),
-      projectAssetsPath: this.ConfigService.getConfigParam('projectBaseURL') + 'assets'
+      projectPath: this.configService.getConfigParam('projectBaseURL'),
+      projectAssetsPath: this.configService.getConfigParam('projectBaseURL') + 'assets'
     };
   }
 }

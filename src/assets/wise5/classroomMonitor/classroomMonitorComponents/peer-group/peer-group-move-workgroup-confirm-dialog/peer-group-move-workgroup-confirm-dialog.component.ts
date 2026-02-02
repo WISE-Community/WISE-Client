@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
@@ -25,5 +25,5 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './peer-group-move-workgroup-confirm-dialog.component.html'
 })
 export class PeerGroupMoveWorkgroupConfirmDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public isMovingFromPeerGroup: boolean) {}
+  isMovingFromPeerGroup = inject(MAT_DIALOG_DATA);
 }

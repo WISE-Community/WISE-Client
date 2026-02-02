@@ -1,20 +1,16 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, inject } from '@angular/core';
 import { ProjectService } from '../services/projectService';
 import { NodeService } from '../services/nodeService';
 
 @Directive()
 export abstract class ComponentShowWorkDirective {
-  @Input() nodeId: string;
+  componentContent: any;
   @Input() componentId: string;
   @Input() componentState: any;
   @Input() isRevision: boolean = false;
-
-  componentContent: any;
-
-  constructor(
-    protected nodeService: NodeService,
-    protected projectService: ProjectService
-  ) {}
+  @Input() nodeId: string;
+  protected nodeService = inject(NodeService);
+  protected projectService = inject(ProjectService);
 
   ngOnInit(): void {
     this.componentContent = this.projectService.injectAssetPaths(

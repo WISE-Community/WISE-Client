@@ -7,6 +7,7 @@ import { GradingNodeService } from '../../../services/gradingNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { of } from 'rxjs';
 import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
+import { NodeService } from '../../../services/nodeService';
 
 describe('GradingStepToolsComponent', () => {
   let component: GradingStepToolsComponent;
@@ -16,7 +17,7 @@ describe('GradingStepToolsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [GradingStepToolsComponent, MockComponent(NodeIconComponent)],
       providers: [
-        MockProviders(GradingNodeService),
+        MockProviders(NodeService, GradingNodeService),
         MockProvider(TeacherDataService, {
           currentNodeChanged$: of()
         }),

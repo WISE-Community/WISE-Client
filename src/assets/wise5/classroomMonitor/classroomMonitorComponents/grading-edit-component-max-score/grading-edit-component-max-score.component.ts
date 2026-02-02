@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -21,14 +21,14 @@ import { MatInputModule } from '@angular/material/input';
   encapsulation: ViewEncapsulation.None
 })
 export class GradingEditComponentMaxScoreComponent {
+  private projectService = inject(TeacherProjectService);
+
   @Input() componentId: string;
   @Input() disabled: boolean;
   maxScore: number;
   maxScoreChanged: Subject<string> = new Subject<string>();
   @Input() nodeId: string;
   private subscriptions: Subscription = new Subscription();
-
-  constructor(private projectService: TeacherProjectService) {}
 
   ngOnInit(): void {
     this.maxScore = this.projectService.getMaxScoreForComponent(this.nodeId, this.componentId) || 0;

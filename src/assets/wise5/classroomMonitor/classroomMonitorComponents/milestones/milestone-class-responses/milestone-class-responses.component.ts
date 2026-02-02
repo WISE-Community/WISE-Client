@@ -1,17 +1,17 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { copy } from '../../../../common/object/object';
-import { Annotation } from '../../../../common/Annotation';
-import { filter, Subscription } from 'rxjs';
-import { AbstractClassResponsesComponent } from '../../AbstractClassResponsesComponent';
-import { Node } from '../../../../common/Node';
-import { Notification } from '../../../../../../app/domain/notification';
-import { MatList, MatListItem } from '@angular/material/list';
-import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
-import { MatButton } from '@angular/material/button';
 import { NgClass } from '@angular/common';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatList, MatListItem } from '@angular/material/list';
 import { MatTooltip } from '@angular/material/tooltip';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { filter, Subscription } from 'rxjs';
+import { WorkgroupSelectAutocompleteComponent } from '../../../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
+import { Notification } from '../../../../../../app/domain/notification';
+import { Annotation } from '../../../../common/Annotation';
+import { Node } from '../../../../common/Node';
+import { copy } from '../../../../common/object/object';
+import { AbstractClassResponsesComponent } from '../../AbstractClassResponsesComponent';
 import { MilestoneWorkgroupItemComponent } from '../milestone-workgroup-item/milestone-workgroup-item.component';
 
 @Component({

@@ -1,29 +1,25 @@
-import { Directive, OnInit } from '@angular/core';
+import { Directive, inject, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { ReferenceComponent } from '../../../../../app/domain/referenceComponent';
 import { ProjectService } from '../../../services/projectService';
 import { AVAILABLE_LOGIC, AVAILABLE_MODES, PeerGroupingLogic } from '../PeerGroupingLogic';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Directive()
 export abstract class AuthorPeerGroupingDialogComponent implements OnInit {
+  protected dialogRef = inject(MatDialogRef<AuthorPeerGroupingDialogComponent>);
+  protected projectService = inject(ProjectService);
+  protected snackBar = inject(MatSnackBar);
+
   allowedReferenceComponentTypes: string[] = ['OpenResponse'];
-  availableLogic: PeerGroupingLogic[];
+  availableLogic: PeerGroupingLogic[] = AVAILABLE_LOGIC;
   logicType: string;
   logicTypesWithModes: string[] = ['differentIdeas', 'differentKIScores'];
   mode: string;
   availableModes: any[] = AVAILABLE_MODES;
   peerGrouping: PeerGrouping;
   referenceComponent: ReferenceComponent = new ReferenceComponent(null, null);
-
-  constructor(
-    protected dialogRef: MatDialogRef<AuthorPeerGroupingDialogComponent>,
-    protected projectService: ProjectService,
-    protected snackBar: MatSnackBar
-  ) {
-    this.availableLogic = AVAILABLE_LOGIC;
-  }
 
   ngOnInit(): void {}
 

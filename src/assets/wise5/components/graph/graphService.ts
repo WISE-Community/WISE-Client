@@ -1,25 +1,18 @@
-'use strict';
-
 import html2canvas from 'html2canvas';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { ConfigService } from '../../services/configService';
-import { HttpClient } from '@angular/common/http';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 import { hasConnectedComponent } from '../../common/ComponentContent';
 
 @Injectable()
 export class GraphService extends ComponentService {
+  private assetService = inject(StudentAssetService);
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
   seriesColors: string[] = ['blue', 'red', 'green', 'orange', 'purple', 'black'];
-
-  constructor(
-    private configService: ConfigService,
-    private http: HttpClient,
-    private StudentAssetService: StudentAssetService
-  ) {
-    super();
-  }
 
   getComponentTypeLabel(): string {
     return $localize`Graph`;
@@ -304,7 +297,7 @@ export class GraphService extends ComponentService {
       const highchartsDiv = this.getHighchartsDiv(componentState.componentId);
       html2canvas(highchartsDiv as HTMLElement).then((canvas) => {
         const pngFile = convertToPNGFile(canvas);
-        this.StudentAssetService.uploadAsset(pngFile).then((asset) => {
+        this.assetService.uploadAsset(pngFile).then((asset) => {
           resolve(asset);
         });
       });

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -11,6 +11,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
   templateUrl: './add-lesson-choose-template.component.html'
 })
 export class AddLessonChooseTemplateComponent {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected templates = [
     {
       label: $localize`Create Your Own`,
@@ -38,11 +41,6 @@ export class AddLessonChooseTemplateComponent {
       route: 'structure/ki-cycle-using-oer'
     }
   ];
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   protected chooseTemplate(template: any): void {
     this.router.navigate([...template.route.split('/')], {

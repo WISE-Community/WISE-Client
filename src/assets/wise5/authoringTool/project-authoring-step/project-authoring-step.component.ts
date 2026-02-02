@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, Signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Signal, inject } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -32,23 +32,21 @@ import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and
   templateUrl: './project-authoring-step.component.html'
 })
 export class ProjectAuthoringStepComponent {
+  private copyNodesService = inject(CopyNodesService);
+  private copyTranslationsService = inject(CopyTranslationsService);
+  private constraintService = inject(ConstraintService);
+  private dataService = inject(TeacherDataService);
+  private deleteNodeService = inject(DeleteNodeService);
+  private deleteTranslationsService = inject(DeleteTranslationsService);
+  private projectService = inject(TeacherProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
   @Input() showPosition: boolean;
   @Input() step: any;
-
-  constructor(
-    private copyNodesService: CopyNodesService,
-    private copyTranslationsService: CopyTranslationsService,
-    private constraintService: ConstraintService,
-    private dataService: TeacherDataService,
-    private deleteNodeService: DeleteNodeService,
-    private deleteTranslationsService: DeleteTranslationsService,
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
