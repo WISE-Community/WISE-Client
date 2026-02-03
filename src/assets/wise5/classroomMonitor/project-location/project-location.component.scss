@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  height: 40px;
+}
+
+.segment {
+  flex: 1;
+  flex-direction: column;
+}
+
+.segment-bar {
+  height: 15px;
+  border: 1px solid black;
+}
+
+.active {
+  background-color: orange;
+}

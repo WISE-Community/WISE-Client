@@ -1,0 +1,15 @@
+<div class="container" matTooltip="{{ studentProgress.positionAndTitle }}">
+  @for (segment of segments; track segment.id) {
+    @if (segment.id === currentSegment?.id) {
+      <div class="segment">
+        {{ studentProgress.nodePosition }}
+        <mat-icon>place</mat-icon>
+        <div class="segment-bar active"></div>
+      </div>
+    } @else {
+      <div class="segment">
+        <div class="segment-bar"></div>
+      </div>
+    }
+  }
+</div>
