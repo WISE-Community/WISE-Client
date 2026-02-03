@@ -2182,21 +2182,21 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <target state="needs-translation">~ Report Available ~</target>
       </trans-unit>
-      <trans-unit id="1415233403935415838" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ nodeCompletion }}"/>% completed (All periods)</source>
+      <trans-unit id="113596251914902983" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ nodeCompletion }}"/>% completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/classroom-monitor/nav-item-progress/nav-item-progress.component.html</context>
-          <context context-type="linenumber">5,6</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
-        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ nodeCompletion }}"/>% completed (All periods)</target>
-      </trans-unit>
-      <trans-unit id="3794313879242465509" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ nodeCompletion }}"/>% completed (Period: <x id="INTERPOLATION_1" equiv-text="{{ period.periodName }}"/>)</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/classroom-monitor/nav-item-progress/nav-item-progress.component.html</context>
-          <context context-type="linenumber">14,15</context>
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-completion/component-completion.component.html</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
-        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ nodeCompletion }}"/>% completed (Period: <x id="INTERPOLATION_1" equiv-text="{{ period.periodName }}"/>)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ nodeCompletion }}"/>% completed</target>
       </trans-unit>
       <trans-unit id="3662593190562390972" datatype="html">
         <source>Has new alert(s)</source>
@@ -2210,7 +2210,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">100</context>
         </context-group>
         <target state="needs-translation">Has new alert(s)</target>
       </trans-unit>
@@ -2234,9 +2234,49 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <target state="needs-translation">Step has rubrics/teaching tips</target>
+      </trans-unit>
+      <trans-unit id="6743174526740667520" datatype="html">
+        <source>team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <target state="needs-translation">team</target>
+      </trans-unit>
+      <trans-unit id="2863460046387544768" datatype="html">
+        <source>teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <target state="needs-translation">teams</target>
+      </trans-unit>
+      <trans-unit id="268563843519645044" datatype="html">
+        <source>step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <target state="needs-translation">step</target>
+      </trans-unit>
+      <trans-unit id="1427183831879496231" datatype="html">
+        <source>lesson</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <target state="needs-translation">lesson</target>
+      </trans-unit>
+      <trans-unit id="8193319701881840038" datatype="html">
+        <source><x id="PH" equiv-text="this.workgroupsOnNode.length"/><x id="PH_1" equiv-text="teams"/> on this <x id="PH_2" equiv-text="stepOrLesson"/>:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <target state="needs-translation"><x id="PH" equiv-text="this.workgroupsOnNode.length"/> <x id="PH_1" equiv-text="teams"/> on this <x id="PH_2" equiv-text="stepOrLesson"/>:</target>
       </trans-unit>
       <trans-unit id="2129287670138965430" datatype="html">
         <source>Find a student</source>
@@ -7728,7 +7768,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         <source>Personal</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/notebook/notebook-notes/notebook-notes.component.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <target state="needs-translation">Personal</target>
       </trans-unit>
@@ -10644,7 +10684,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">107,109</context>
+          <context context-type="linenumber">104,106</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
@@ -11732,7 +11772,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">232</context>
+          <context context-type="linenumber">224</context>
         </context-group>
         <target state="needs-translation">You have been inactive for a long time. Do you want to stay logged in?</target>
       </trans-unit>
@@ -11748,7 +11788,7 @@ Click "Cancel" to keep the invalid JSON open so you can fix it.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">233</context>
+          <context context-type="linenumber">225</context>
         </context-group>
         <target state="needs-translation">Session Timeout</target>
       </trans-unit>
@@ -15240,18 +15280,6 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Data Export</target>
       </trans-unit>
-      <trans-unit id="113596251914902983" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ completion }}"/>% completed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-completion/component-completion.component.html</context>
-          <context context-type="linenumber">4,5</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">53,54</context>
-        </context-group>
-        <target state="needs-translation"><x id="INTERPOLATION" equiv-text="{{ completion }}"/>% completed</target>
-      </trans-unit>
       <trans-unit id="247091205793546074" datatype="html">
         <source>Responses:</source>
         <context-group purpose="location">
@@ -15836,7 +15864,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">105,107</context>
+          <context context-type="linenumber">102,104</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-class-responses/node-class-responses.component.html</context>
@@ -15948,7 +15976,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Description: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
         <target state="needs-translation">Description: </target>
       </trans-unit>
@@ -15956,7 +15984,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Requirements: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">21,22</context>
+          <context context-type="linenumber">18,19</context>
         </context-group>
         <target state="needs-translation">Requirements: </target>
       </trans-unit>
@@ -15964,7 +15992,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Item Location: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">34,36</context>
+          <context context-type="linenumber">31,33</context>
         </context-group>
         <target state="needs-translation">Item Location: </target>
       </trans-unit>
@@ -15972,7 +16000,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Step Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">36,40</context>
+          <context context-type="linenumber">33,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component.html</context>
@@ -15988,7 +16016,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Class Report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">39,41</context>
         </context-group>
         <target state="needs-translation">Class Report</target>
       </trans-unit>
@@ -15996,7 +16024,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> This milestone includes automated reports that analyze student progress. Reports become available for each period once the following conditions are met: </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">46,49</context>
+          <context context-type="linenumber">43,46</context>
         </context-group>
         <target state="needs-translation"> This milestone includes automated reports that analyze student progress. Reports become available for each period once the following conditions are met: </target>
       </trans-unit>
@@ -16004,7 +16032,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> At least <x id="INTERPOLATION" equiv-text="{{ milestone.satisfyMinNumWorkgroups }}"/> team(s) or <x id="INTERPOLATION_1" equiv-text="{{ milestone.satisfyMinPercentage }}"/>% of the class have completed the milestone </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">51,54</context>
+          <context context-type="linenumber">48,51</context>
         </context-group>
         <target state="needs-translation"> At least <x id="INTERPOLATION" equiv-text="{{ milestone.satisfyMinNumWorkgroups }}"/> team(s) or <x id="INTERPOLATION_1" equiv-text="{{ milestone.satisfyMinPercentage }}"/>% of the class have completed the milestone </target>
       </trans-unit>
@@ -16012,7 +16040,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> At least <x id="INTERPOLATION" equiv-text="{{ milestone.satisfyMinNumWorkgroups }}"/> team(s) and <x id="INTERPOLATION_1" equiv-text="{{ milestone.satisfyMinPercentage }}"/>% of the class have completed the milestone </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">57,60</context>
+          <context context-type="linenumber">54,57</context>
         </context-group>
         <target state="needs-translation"> At least <x id="INTERPOLATION" equiv-text="{{ milestone.satisfyMinNumWorkgroups }}"/> team(s) and <x id="INTERPOLATION_1" equiv-text="{{ milestone.satisfyMinPercentage }}"/>% of the class have completed the milestone </target>
       </trans-unit>
@@ -16020,7 +16048,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Recommendation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">76,77</context>
+          <context context-type="linenumber">73,74</context>
         </context-group>
         <target state="needs-translation">Recommendation</target>
       </trans-unit>
@@ -16028,11 +16056,11 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Student Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">79,81</context>
+          <context context-type="linenumber">76,78</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">86,88</context>
         </context-group>
         <target state="needs-translation">Student Work</target>
       </trans-unit>
@@ -16040,7 +16068,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> Student Completion </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">97,99</context>
+          <context context-type="linenumber">94,96</context>
         </context-group>
         <target state="needs-translation"> Student Completion </target>
       </trans-unit>
@@ -16048,7 +16076,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Not Completed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details/milestone-details.component.html</context>
-          <context context-type="linenumber">132,137</context>
+          <context context-type="linenumber">129,134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-workgroup-item/milestone-workgroup-item.component.ts</context>
@@ -16280,7 +16308,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source><x id="PH" equiv-text="this.nodeTitle"/> has been locked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">254</context>
         </context-group>
         <target state="needs-translation"><x id="PH" equiv-text="this.nodeTitle"/> has been locked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</target>
       </trans-unit>
@@ -16288,7 +16316,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source><x id="PH" equiv-text="this.nodeTitle"/> has been unlocked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">253</context>
+          <context context-type="linenumber">255</context>
         </context-group>
         <target state="needs-translation"><x id="PH" equiv-text="this.nodeTitle"/> has been unlocked for <x id="PH_1" equiv-text="this.getPeriodLabel()"/>.</target>
       </trans-unit>
@@ -16296,7 +16324,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>All Periods</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">379</context>
+          <context context-type="linenumber">381</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.html</context>
@@ -16316,7 +16344,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Period: <x id="PH" equiv-text="this.currentPeriod.periodName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">382</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/select-period/select-period.component.ts</context>
@@ -16328,7 +16356,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">387</context>
         </context-group>
         <target state="needs-translation">Unlock for <x id="PH" equiv-text="this.getPeriodLabel()"/></target>
       </trans-unit>
@@ -16336,7 +16364,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
-          <context context-type="linenumber">386</context>
+          <context context-type="linenumber">388</context>
         </context-group>
         <target state="needs-translation">Lock for <x id="PH" equiv-text="this.getPeriodLabel()"/></target>
       </trans-unit>
@@ -16568,7 +16596,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">87,88</context>
+          <context context-type="linenumber">86,87</context>
         </context-group>
         <target state="needs-translation">Go to <x id="INTERPOLATION" equiv-text="{{ getNodePositionAndTitle(notification.nodeId) }}"/></target>
       </trans-unit>
@@ -16636,7 +16664,7 @@ Are you sure you want to proceed?</target>
         <source>Completed <x id="INTERPOLATION" equiv-text="{{ completed }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ total }}"/> steps with work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/studentProgress/project-progress/project-progress.component.html</context>
-          <context context-type="linenumber">5,6</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
         <target state="needs-translation">Completed <x id="INTERPOLATION" equiv-text="{{ completed }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ total }}"/> steps with work</target>
       </trans-unit>
@@ -17772,7 +17800,7 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">7,11</context>
+          <context context-type="linenumber">8,11</context>
         </context-group>
         <target state="needs-translation">Previous Step</target>
       </trans-unit>
@@ -17788,7 +17816,7 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">18,21</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
         <target state="needs-translation">Select a Step</target>
       </trans-unit>
@@ -17816,7 +17844,7 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">53,56</context>
+          <context context-type="linenumber">54,57</context>
         </context-group>
         <target state="needs-translation">Next Step</target>
       </trans-unit>
@@ -24428,7 +24456,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Number of teams that moved each item (choice) into the different buckets (categories).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">39,42</context>
+          <context context-type="linenumber">39,41</context>
         </context-group>
         <target state="needs-translation">Number of teams that moved each item (choice) into the different buckets (categories).</target>
       </trans-unit>
@@ -24436,7 +24464,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Your students&apos; choices will show up here when they complete the activity. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">58,61</context>
+          <context context-type="linenumber">60,63</context>
         </context-group>
         <target state="needs-translation"> Your students' choices will show up here when they complete the activity. </target>
       </trans-unit>
@@ -24926,22 +24954,6 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Portuguese (Brazilian)</target>
       </trans-unit>
-      <trans-unit id="4299173667761940990" datatype="html">
-        <source>Unit Plan</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/navigation/navigation.component.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">61,64</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">63,66</context>
-        </context-group>
-        <target state="needs-translation">Unit Plan</target>
-      </trans-unit>
       <trans-unit id="8784868761263923006" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ textInputLabel }}"/> required</source>
         <context-group purpose="location">
@@ -25031,6 +25043,22 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Completed with success</target>
       </trans-unit>
+      <trans-unit id="4299173667761940990" datatype="html">
+        <source>Unit Plan</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">60,66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">68,71</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
+          <context context-type="linenumber">70,73</context>
+        </context-group>
+        <target state="needs-translation">Unit Plan</target>
+      </trans-unit>
       <trans-unit id="5926207769041293626" datatype="html">
         <source>Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
@@ -25107,7 +25135,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Expand or collapse lesson content</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">13,17</context>
+          <context context-type="linenumber">14,18</context>
         </context-group>
         <target state="needs-translation">Expand or collapse lesson content</target>
       </trans-unit>
@@ -25115,7 +25143,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source><x id="INTERPOLATION" equiv-text="{{ nodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ nodeStatus.progress.totalItems }}"/> items </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">59,60</context>
+          <context context-type="linenumber">58,59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
@@ -25127,7 +25155,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Lesson is locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">70,73</context>
+          <context context-type="linenumber">69,72</context>
         </context-group>
         <target state="needs-translation">Lesson is locked</target>
       </trans-unit>
@@ -25135,7 +25163,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Item is locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">100,103</context>
+          <context context-type="linenumber">99,102</context>
         </context-group>
         <target state="needs-translation">Item is locked</target>
       </trans-unit>
