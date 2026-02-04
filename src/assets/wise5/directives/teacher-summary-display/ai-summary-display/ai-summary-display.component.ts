@@ -18,6 +18,7 @@ export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayCom
   protected awsBedRockService: AwsBedRockService = inject(AwsBedRockService);
   protected generatingSummary: boolean = false;
   protected hasStudentResponses: boolean = false;
+  protected latestComponentStates: any[] = [];
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   protected newSummaryAvailable: boolean = false;
   protected summary: string;
@@ -29,22 +30,25 @@ export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayCom
 
   protected renderDisplay(): void {
     super.renderDisplay();
-    const latestPeriodComponentStates = this.getLatestPeriodComponentStates();
-    this.hasStudentResponses = latestPeriodComponentStates.length > 0;
+    this.latestComponentStates = this.getLatestComponentStates();
+    this.hasStudentResponses = this.latestComponentStates.length > 0;
     if (!this.hasStudentResponses) {
       return;
     }
     this.summary = this.localStorageService.getItem(this.getSummaryKey()) || '';
-    const summaryTime = this.localStorageService.getItem(this.getSummaryTimestampKey()) || 0;
+    const summaryTime = this.localStorageService.getItem(this.getSummaryTimeKey()) || 0;
     this.summaryDate = new Date(summaryTime);
-    const lastResponseTime = latestPeriodComponentStates.reduce(
+    this.newSummaryAvailable = summaryTime > 0 && this.getLastResponseTime() > summaryTime;
+  }
+
+  private getLastResponseTime(): number {
+    return this.latestComponentStates.reduce(
       (max, state) => Math.max(max, state.serverSaveTime),
       0
     );
-    this.newSummaryAvailable = summaryTime > 0 && lastResponseTime > summaryTime;
   }
 
-  protected getLatestPeriodComponentStates(): any[] {
+  protected getLatestComponentStates(): any[] {
     return (this.dataService as TeacherDataService)
       .getComponentStatesByComponentId(this.componentId)
       .filter((state) => state.periodId === this.periodId || this.periodId === -1)
@@ -60,7 +64,7 @@ export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayCom
     ]);
     this.localStorageService.setItem(this.getSummaryKey(), this.summary);
     const summaryTime = new Date().getTime();
-    this.localStorageService.setItem(this.getSummaryTimestampKey(), summaryTime);
+    this.localStorageService.setItem(this.getSummaryTimeKey(), summaryTime);
     this.summaryDate = new Date(summaryTime);
     this.generatingSummary = false;
     this.newSummaryAvailable = false;
@@ -74,7 +78,7 @@ export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayCom
     return `component-summary-${this.periodId}-${this.nodeId}-${this.componentId}`;
   }
 
-  private getSummaryTimestampKey(): string {
-    return `component-summary-timestamp-${this.periodId}-${this.nodeId}-${this.componentId}`;
+  private getSummaryTimeKey(): string {
+    return `component-summary-time-${this.periodId}-${this.nodeId}-${this.componentId}`;
   }
 }

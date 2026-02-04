@@ -20,12 +20,12 @@ export class OpenResponseSummaryDisplayComponent extends AiSummaryDisplayCompone
   }
 
   protected getStudentResponses(): string {
-    return this.getLatestPeriodComponentStates().reduce(
+    return this.getLatestComponentStates().reduce(
       (soFar, state) => `${soFar}<response>${state.studentData.response}</response>`,
       ''
     );
   }
-  protected getLatestPeriodComponentStates(): any[] {
+  protected getLatestComponentStates(): any[] {
     return (this.dataService as TeacherDataService)
       .getComponentStatesByComponentId(this.componentId)
       .filter((state) => state.periodId === this.periodId || this.periodId === -1)

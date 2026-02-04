@@ -16,7 +16,7 @@
     <markdown [data]="summary" />
     <div class="mat-caption text-secondary" i18n>
       Summary generated {{ summaryDate | date: 'short' }} from
-      {{ getLatestPeriodComponentStates().length }} responses
+      {{ latestComponentStates.length }} responses
     </div>
   }
 } @else {

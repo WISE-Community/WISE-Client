@@ -112,12 +112,12 @@ describe('OpenResponseSummaryDisplayComponent', () => {
     });
   });
 
-  describe('getLatestPeriodComponentStates', () => {
+  describe('getLatestComponentStates', () => {
     it('should filter component states by period ID', () => {
       const componentStates = getComponentStates();
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(componentStates);
       component.periodId = 1;
-      const result = component['getLatestPeriodComponentStates']();
+      const result = component['getLatestComponentStates']();
       expect(result.every((state) => state.periodId === 1)).toBe(true);
     });
 
@@ -137,7 +137,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       ];
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(componentStates);
       component.periodId = -1;
-      const result = component['getLatestPeriodComponentStates']();
+      const result = component['getLatestComponentStates']();
       expect(result.length).toBe(4);
     });
 
@@ -157,7 +157,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       ];
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(componentStates);
       component.periodId = 1;
-      const result = component['getLatestPeriodComponentStates']();
+      const result = component['getLatestComponentStates']();
       const workgroup1States = result.filter((state) => state.workgroupId === 1);
       expect(workgroup1States.length).toBe(1);
       expect(workgroup1States[0].serverSaveTime).toBe(5000);
@@ -209,9 +209,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       const beforeTime = new Date().getTime();
       await component['generateSummary']();
       const afterTime = new Date().getTime();
-      const timestampCall = setItemSpy.calls
-        .all()
-        .find((call) => call.args[0].includes('timestamp'));
+      const timestampCall = setItemSpy.calls.all().find((call) => call.args[0].includes('time'));
       expect(timestampCall).toBeDefined();
       expect(timestampCall.args[1]).toBeGreaterThanOrEqual(beforeTime);
       expect(timestampCall.args[1]).toBeLessThanOrEqual(afterTime);
@@ -290,7 +288,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       spyOn(localStorageService, 'getItem')
         .withArgs('component-summary-1-node1-component1')
         .and.returnValue('Old summary')
-        .withArgs('component-summary-timestamp-1-node1-component1')
+        .withArgs('component-summary-time-1-node1-component1')
         .and.returnValue(oldTimestamp);
       component.ngOnInit();
       fixture.detectChanges();
@@ -312,7 +310,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       spyOn(localStorageService, 'getItem')
         .withArgs('component-summary-1-node1-component1')
         .and.returnValue(savedSummary)
-        .withArgs('component-summary-timestamp-1-node1-component1')
+        .withArgs('component-summary-time-1-node1-component1')
         .and.returnValue(Date.now() + 100000);
       component.ngOnInit();
       fixture.detectChanges();
@@ -326,7 +324,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       spyOn(localStorageService, 'getItem')
         .withArgs('component-summary-1-node1-component1')
         .and.returnValue(savedSummary)
-        .withArgs('component-summary-timestamp-1-node1-component1')
+        .withArgs('component-summary-time-1-node1-component1')
         .and.returnValue(Date.now() + 100000);
       component.ngOnInit();
       fixture.detectChanges();

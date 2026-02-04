@@ -21877,7 +21877,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
       </trans-unit>
       <trans-unit id="2777541710949293848" datatype="html">
-        <source> Summary generated <x id="INTERPOLATION" equiv-text="{{ summaryDate | date: &apos;short&apos; }}"/> from <x id="INTERPOLATION_1" equiv-text="{{ getLatestPeriodComponentStates().length }}"/> responses </source>
+        <source> Summary generated <x id="INTERPOLATION" equiv-text="{{ summaryDate | date: &apos;short&apos; }}"/> from <x id="INTERPOLATION_1" equiv-text="{{ latestComponentStates.length }}"/> responses </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary-display/ai-summary-display.component.html</context>
           <context context-type="linenumber">18,22</context>

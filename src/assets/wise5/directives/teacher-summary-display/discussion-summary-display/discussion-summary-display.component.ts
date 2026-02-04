@@ -33,11 +33,10 @@ export class DiscussionSummaryDisplayComponent extends AiSummaryDisplayComponent
   }
 
   private getDiscussionThreads(): Thread[] {
-    const states = this.getLatestPeriodComponentStates();
-    const threads = states
+    const threads = this.latestComponentStates
       .filter((state) => state.studentData.componentStateIdReplyingTo == null)
       .map((post) => ({ id: post.id, post: post.studentData.response, replies: [] }));
-    states
+    this.latestComponentStates
       .filter((state) => state.studentData.componentStateIdReplyingTo != null)
       .forEach((reply) => {
         threads
