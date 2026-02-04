@@ -198,7 +198,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       const setItemSpy = spyOn(localStorageService, 'setItem');
       await component['generateSummary']();
       expect(setItemSpy).toHaveBeenCalledWith(
-        'openResponseSummary-1-node1-component1',
+        'component-summary-1-node1-component1',
         generatedSummary
       );
     });
@@ -288,9 +288,9 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(getComponentStates());
       const oldTimestamp = 1000;
       spyOn(localStorageService, 'getItem')
-        .withArgs('openResponseSummary-1-node1-component1')
+        .withArgs('component-summary-1-node1-component1')
         .and.returnValue('Old summary')
-        .withArgs('openResponseSummary-timestamp-1-node1-component1')
+        .withArgs('component-summary-timestamp-1-node1-component1')
         .and.returnValue(oldTimestamp);
       component.ngOnInit();
       fixture.detectChanges();
@@ -310,9 +310,9 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(getComponentStates());
       const savedSummary = 'This is a saved summary';
       spyOn(localStorageService, 'getItem')
-        .withArgs('openResponseSummary-1-node1-component1')
+        .withArgs('component-summary-1-node1-component1')
         .and.returnValue(savedSummary)
-        .withArgs('openResponseSummary-timestamp-1-node1-component1')
+        .withArgs('component-summary-timestamp-1-node1-component1')
         .and.returnValue(Date.now() + 100000);
       component.ngOnInit();
       fixture.detectChanges();
@@ -324,9 +324,9 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(getComponentStates());
       const savedSummary = 'This is a saved summary';
       spyOn(localStorageService, 'getItem')
-        .withArgs('openResponseSummary-1-node1-component1')
+        .withArgs('component-summary-1-node1-component1')
         .and.returnValue(savedSummary)
-        .withArgs('openResponseSummary-timestamp-1-node1-component1')
+        .withArgs('component-summary-timestamp-1-node1-component1')
         .and.returnValue(Date.now() + 100000);
       component.ngOnInit();
       fixture.detectChanges();

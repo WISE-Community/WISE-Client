@@ -21,7 +21,7 @@ export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayCom
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   protected newSummaryAvailable: boolean = false;
   protected summary: string;
-  private summaryTimestamp: number;
+  protected summaryDate: Date;
 
   ngOnInit(): void {
     this.renderDisplay();
@@ -35,13 +35,13 @@ export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayCom
       return;
     }
     this.summary = this.localStorageService.getItem(this.getSummaryKey()) || '';
-    this.summaryTimestamp = this.localStorageService.getItem(this.getSummaryTimestampKey()) || 0;
+    const summaryTime = this.localStorageService.getItem(this.getSummaryTimestampKey()) || 0;
+    this.summaryDate = new Date(summaryTime);
     const lastResponseTime = latestPeriodComponentStates.reduce(
       (max, state) => Math.max(max, state.serverSaveTime),
       0
     );
-    this.newSummaryAvailable =
-      this.summaryTimestamp > 0 && lastResponseTime > this.summaryTimestamp;
+    this.newSummaryAvailable = summaryTime > 0 && lastResponseTime > summaryTime;
   }
 
   protected getLatestPeriodComponentStates(): any[] {
@@ -59,7 +59,9 @@ export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayCom
       new ChatMessage('user', this.getStudentResponses(), this.nodeId)
     ]);
     this.localStorageService.setItem(this.getSummaryKey(), this.summary);
-    this.localStorageService.setItem(this.getSummaryTimestampKey(), new Date().getTime());
+    const summaryTime = new Date().getTime();
+    this.localStorageService.setItem(this.getSummaryTimestampKey(), summaryTime);
+    this.summaryDate = new Date(summaryTime);
     this.generatingSummary = false;
     this.newSummaryAvailable = false;
   }
