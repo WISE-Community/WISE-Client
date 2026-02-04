@@ -29,6 +29,11 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
     .mat-icon {
       vertical-align: middle;
     }
+    ul {
+      list-style-type: none;
+      margin-block-start: 0;
+      padding-inline-start: 0;
+    }
   `,
   templateUrl: 'ideas-summary.component.html'
 })

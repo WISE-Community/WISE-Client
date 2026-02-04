@@ -8,7 +8,7 @@
     </h3>
     <ul>
       @for (choice of bucket.choices; track $index) {
-        @if ($index < 3 || getBucketShowMore(bucket.value) || first) {
+        @if ($index < 3 || getBucketShowMore(bucket.value)) {
           <li>
             <div class="choice">
               <div [innerHTML]="choice.getId()"></div>
@@ -21,7 +21,7 @@
           </li>
         }
       }
-      @if (bucket.choices.length > 3 && !first) {
+      @if (bucket.choices.length > 3) {
         <a href="#" class="text-sm px-1" (click)="toggleBucketShowMore(bucket.value, $event)">
           @if (getBucketShowMore(bucket.value)) {
             <span i18n>Show less</span>
@@ -38,10 +38,12 @@
 @if (bucketData.length > 0) {
   <p i18n>Number of teams that moved each item (choice) into the different buckets (categories).</p>
   <div class="columns-3xs gap-2">
-    <ng-container
-      [ngTemplateOutlet]="bucketTemplate"
-      [ngTemplateOutletContext]="{ bucket: bucketData[0], first: true }"
-    />
+    <div class="break-inside-avoid">
+      <ng-container
+        [ngTemplateOutlet]="bucketTemplate"
+        [ngTemplateOutletContext]="{ bucket: bucketData[0], first: true }"
+      />
+    </div>
     @for (bucket of bucketData; track $index) {
       @if ($index > 0) {
         <div class="break-inside-avoid">

@@ -21,6 +21,7 @@ import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component
 import { NavItemScoreComponent } from '../navItemScore/nav-item-score.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
+import { TeamsOnNodeComponent } from '../../../../../../app/classroom-monitor/teams-on-node/teams-on-node.component';
 
 @Component({
   imports: [
@@ -34,7 +35,8 @@ import { CommonModule } from '@angular/common';
     NavItemProgressComponent,
     NavItemScoreComponent,
     NodeIconComponent,
-    StatusIconComponent
+    StatusIconComponent,
+    TeamsOnNodeComponent
   ],
   selector: 'nav-item',
   styleUrl: './nav-item.component.scss',
