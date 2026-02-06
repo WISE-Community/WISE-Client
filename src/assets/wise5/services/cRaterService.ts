@@ -260,10 +260,10 @@ export class CRaterService {
     return ideas;
   }
 
-  getCRaterRubric(nodeId: string, componentId: string, componentType?: string): CRaterRubric {
+  getCRaterRubric(nodeId: string, componentId: string): CRaterRubric {
     const componentContent = this.projectService.getComponent(nodeId, componentId);
     let rubricContent;
-    if (componentType === 'OpenResponse') {
+    if (componentContent.type === 'OpenResponse') {
       rubricContent = (componentContent as OpenResponseContent).cRater?.rubric;
     } else {
       rubricContent = componentContent.cRaterRubric;
