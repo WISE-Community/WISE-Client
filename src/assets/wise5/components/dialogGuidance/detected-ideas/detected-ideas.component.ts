@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './detected-ideas.component.html'
 })
 export class DetectedIdeasComponent {
+  @Input() alignEnd: boolean = false;
   @Input() cRaterRubric: CRaterRubric;
   protected ideas: CRaterIdea[];
   @Input() responses: any;
