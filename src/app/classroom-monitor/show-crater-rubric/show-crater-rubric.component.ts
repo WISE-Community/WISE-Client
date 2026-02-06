@@ -8,7 +8,6 @@ import { RubricEventService } from '../../../assets/wise5/components/common/cRat
 @Component({
   imports: [MatIconModule],
   selector: 'show-crater-rubric',
-  styleUrl: './show-crater-rubric.component.scss',
   templateUrl: './show-crater-rubric.component.html'
 })
 export class ShowCRaterRubricComponent {
