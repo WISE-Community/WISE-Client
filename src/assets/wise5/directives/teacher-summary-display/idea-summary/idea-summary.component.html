@@ -1,0 +1,13 @@
+<div class="px-2 py-1 rounded-md bg-gray-100 mb-1 text-sm" (click)="toggleDetails()">
+  <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon>{{ idea.count }})
+  @if (expanded) {
+    <mat-icon class="mat-18">expand_less</mat-icon>
+    <div>
+      @for (response of responses; track response.timestamp) {
+        <mat-icon class="mat-18">person</mat-icon>{{ response.text }}<br />
+      }
+    </div>
+  } @else {
+    <mat-icon class="mat-18">expand_more</mat-icon>
+  }
+</div>
