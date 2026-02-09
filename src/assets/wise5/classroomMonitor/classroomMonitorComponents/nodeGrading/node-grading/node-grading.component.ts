@@ -144,4 +144,9 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
     event.preventDefault();
     this.summariesVisible = !this.summariesVisible;
   }
+
+  protected selectSummary(componentIndex: number): void {
+    this.selectedComponent.setValue(componentIndex);
+    this.visibleComponents = [this.components[componentIndex]];
+  }
 }
