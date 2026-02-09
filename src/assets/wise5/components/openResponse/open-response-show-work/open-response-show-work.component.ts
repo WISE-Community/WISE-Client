@@ -42,9 +42,7 @@ export class OpenResponseShowWorkComponent extends ComponentShowWorkDirective {
         this.annotations = this.annotationService.getAnnotationsByStudentWorkId(
           this.componentState.id
         );
-        this.cRaterAnnotation = this.annotations.find((annotation) => {
-          return annotation.type === 'autoScore' && annotation.data.ideas;
-        });
+        this.cRaterAnnotation = this.annotations.find((annotation) => annotation.type === 'autoScore' && annotation.data.ideas);
       }
       this.showDetectedIdeas =
         this.userService.isTeacher() &&
