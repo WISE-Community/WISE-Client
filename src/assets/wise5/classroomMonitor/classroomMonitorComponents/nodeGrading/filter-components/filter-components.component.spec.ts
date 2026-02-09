@@ -35,6 +35,8 @@ function onlyOneComponent() {
           type: 'MultipleChoice'
         } as ComponentContent
       ];
+      component.selectedComponents = component.components;
+      component.ngOnChanges();
       fixture.detectChanges();
       select = await loader.getHarness(MatSelectHarness);
     });
@@ -57,6 +59,7 @@ function moreThanOneComponent() {
           type: 'OpenResponse'
         } as ComponentContent
       ];
+      component.selectedComponents = [component.components[0]];
       component.ngOnChanges();
       fixture.detectChanges();
       select = await loader.getHarness(MatSelectHarness);
@@ -66,14 +69,18 @@ function moreThanOneComponent() {
       const options = await select.getOptions();
       expect(options.length).toBe(2);
       expect(await options[0].isSelected()).toBe(true);
-      expect(await options[1].isSelected()).toBe(true);
+      expect(await options[1].isSelected()).toBe(false);
     });
     it('clicking on an option should emit selected components', async () => {
       const spy = spyOn(component.componentsChange, 'emit').and.callThrough();
       await select.open();
       const options = await select.getOptions();
-      await options[0].click();
+      await options[1].click();
       expect(spy).toHaveBeenCalledWith([
+        {
+          id: 'c1',
+          type: 'MultipleChoice'
+        } as ComponentContent,
         {
           id: 'c2',
           type: 'OpenResponse'
