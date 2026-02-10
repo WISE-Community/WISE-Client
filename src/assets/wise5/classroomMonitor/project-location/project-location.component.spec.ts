@@ -186,7 +186,7 @@ describe('ProjectLocationComponent', () => {
       expect(activeSegment.querySelector('mat-icon').textContent).toBe('place');
     });
 
-    it('should apply active class to current segment bar', () => {
+    it('should apply active style to current segment bar', () => {
       component.studentProgress = new StudentProgress({
         currentNodeId: 'node2',
         nodePosition: '2.1',
@@ -196,7 +196,7 @@ describe('ProjectLocationComponent', () => {
       fixture.detectChanges();
       const segments = fixture.nativeElement.querySelectorAll('.segment');
       const activeSegmentBar = segments[1].querySelector('.segment-bar');
-      expect(activeSegmentBar.classList.contains('active')).toBeTrue();
+      expect(activeSegmentBar.classList.contains('primary-bg')).toBeTrue();
     });
 
     it('should not display node position or icon for non-current segments', () => {
@@ -213,7 +213,7 @@ describe('ProjectLocationComponent', () => {
       expect(inactiveSegment.textContent.trim()).not.toContain('2.1');
     });
 
-    it('should not apply active class to non-current segment bars', () => {
+    it('should not apply active style to non-current segment bars', () => {
       component.studentProgress = new StudentProgress({
         currentNodeId: 'node2',
         nodePosition: '2.1',
@@ -223,7 +223,7 @@ describe('ProjectLocationComponent', () => {
       fixture.detectChanges();
       const segments = fixture.nativeElement.querySelectorAll('.segment');
       const inactiveSegmentBar = segments[0].querySelector('.segment-bar');
-      expect(inactiveSegmentBar.classList.contains('active')).toBeFalse();
+      expect(inactiveSegmentBar.classList.contains('primary-bg')).toBeFalse();
     });
   });
 });

@@ -1,15 +1,21 @@
-<div class="container" matTooltip="{{ studentProgress.positionAndTitle }}">
+<div
+  class="flex justify-between w-full"
+  matTooltip="{{ studentProgress.positionAndTitle }}"
+  matTooltipPosition="above"
+>
   @for (segment of segments; track segment.id) {
-    @if (segment.id === currentSegment?.id) {
-      <div class="segment">
-        {{ studentProgress.nodePosition }}
-        <mat-icon>place</mat-icon>
-        <div class="segment-bar active"></div>
-      </div>
-    } @else {
-      <div class="segment">
-        <div class="segment-bar"></div>
-      </div>
-    }
+    <div class="segment flex-1 h-8 relative mx-0.25">
+      @if (segment.id === currentSegment?.id) {
+        <span
+          class="mat-caption absolute top-0 left-1/2 -translate-x-1/2 flex min-w-full items-center justify-center @container"
+        >
+          <mat-icon class="mat-18 @max-[2.5rem]:!hidden">place</mat-icon>
+          <span>{{ studentProgress.nodePosition }}</span>
+        </span>
+        <div class="segment-bar primary-bg"></div>
+      } @else {
+        <div class="segment-bar bg-neutral-200"></div>
+      }
+    </div>
   }
 </div>

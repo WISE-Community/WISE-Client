@@ -1,21 +1,5 @@
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  width: 100%;
-  height: 40px;
-}
-
-.segment {
-  flex: 1;
-  flex-direction: column;
-}
+@import "tailwindcss";
 
 .segment-bar {
-  height: 15px;
-  border: 1px solid black;
-}
-
-.active {
-  background-color: orange;
+  @apply h-3 absolute bottom-0 w-full;
 }
