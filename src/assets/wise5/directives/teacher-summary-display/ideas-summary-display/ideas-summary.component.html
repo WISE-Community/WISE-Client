@@ -37,7 +37,7 @@
       </ul>
     </div>
   </div>
-  @if (seeAllIdeas) {
+  @if (showAllIdeas) {
     <h3 class="mat-body-2" i18n>All Ideas:</h3>
     <ul class="columns-3xs gap-2 mb-2">
       @for (idea of allIdeas; track idea.id) {
@@ -52,9 +52,9 @@
         </li>
       }
     </ul>
-    <a href="#" (click)="toggleSeeAllIdeas($event)" i18n>Hide all ideas</a>
+    <a (click)="toggleAllIdeas()" i18n>Hide all ideas</a>
   } @else {
-    <a href="#" (click)="toggleSeeAllIdeas($event)" i18n>Show all ideas</a>
+    <a (click)="toggleAllIdeas()" i18n>Show all ideas</a>
   }
 } @else {
   <div i18n>Your students' ideas will show up here as they are detected in the activity.</div>

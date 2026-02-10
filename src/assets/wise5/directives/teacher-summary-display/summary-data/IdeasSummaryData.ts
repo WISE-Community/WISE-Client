@@ -1,13 +1,32 @@
+import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
+import { IdeaData } from '../../../components/common/cRater/IdeaData';
 import { IdeasSummaryDataPoint } from './IdeasSummaryDataPoint';
 
 export abstract class IdeasSummaryData {
-  protected dataPoints: IdeasSummaryDataPoint[];
+  protected dataPoints: IdeasSummaryDataPoint[] = [];
+  protected rubric: CRaterRubric;
 
-  constructor() {
-    this.dataPoints = [];
+  constructor(rubric: CRaterRubric) {
+    this.rubric = rubric;
   }
 
-  getIdeaCountMap(): Map<string, number> {
+  hasAnyDetectedIdeas(): boolean {
+    return Array.from(this.getIdeaCountMap().values()).some((value) => value > 0);
+  }
+
+  getIdeaDataArray(): IdeaData[] {
+    const ideaDataArray = [];
+    this.getIdeaCountMap().forEach((count, ideaId) => {
+      ideaDataArray.push({
+        id: ideaId,
+        text: this.getIdeaDescriptionText(ideaId),
+        count: count
+      });
+    });
+    return ideaDataArray;
+  }
+
+  private getIdeaCountMap(): Map<string, number> {
     const ideaCountMap = new Map<string, number>();
     this.dataPoints.forEach((dataPoint) => {
       dataPoint.getDetectedIdeaIds().forEach((ideaId) => {
@@ -24,5 +43,12 @@ export abstract class IdeasSummaryData {
       });
     });
     return ideaCountMap;
+  }
+
+  private getIdeaDescriptionText(ideaId: string): string {
+    return (
+      this.rubric.ideas.find((ideaDescription) => ideaDescription.name === ideaId)?.text ??
+      'idea ' + ideaId
+    );
   }
 }
