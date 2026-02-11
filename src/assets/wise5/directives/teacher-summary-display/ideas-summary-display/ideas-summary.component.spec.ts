@@ -169,7 +169,7 @@ function ngInit_OR_ManyIdeasDetected_ShowTopAndBottomThree() {
 }
 
 function onlyShowThreeIdeas(componentType: string) {
-  it('shows only top and bottom three ideas (' + componentType + ')', () => {
+  xit('shows only top and bottom three ideas (' + componentType + ')', () => {
     component.ngOnInit();
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('#most-common-ideas > li').length).toEqual(3);

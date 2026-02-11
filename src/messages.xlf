@@ -15081,6 +15081,10 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">51,56</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
+          <context context-type="linenumber">56,59</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
           <context context-type="linenumber">29,35</context>
         </context-group>
@@ -21899,25 +21903,11 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">41,43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4846422330041825392" datatype="html">
-        <source>Hide all ideas</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
-          <context context-type="linenumber">55,57</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2854301724440724946" datatype="html">
-        <source>Show all ideas</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
-          <context context-type="linenumber">57,60</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="4191006504398748947" datatype="html">
         <source>Your students&apos; ideas will show up here as they are detected in the activity.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary-display/ideas-summary.component.html</context>
-          <context context-type="linenumber">60,62</context>
+          <context context-type="linenumber">59,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5353710433603859763" datatype="html">

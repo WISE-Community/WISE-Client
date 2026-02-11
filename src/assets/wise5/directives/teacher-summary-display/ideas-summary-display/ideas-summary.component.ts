@@ -36,7 +36,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   @Input() componentType: string;
   protected leastCommonIdeas: { id: string; text: string; count: number }[] = [];
   protected mostCommonIdeas: { id: string; text: string; count: number }[] = [];
-  protected showAllIdeas: boolean;
+  protected showMore: boolean;
 
   constructor(
     protected annotationService: AnnotationService,
@@ -103,9 +103,5 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   protected renderDisplay(): void {
     super.renderDisplay();
     this.generateIdeasSummary();
-  }
-
-  protected toggleAllIdeas(): void {
-    this.showAllIdeas = !this.showAllIdeas;
   }
 }
