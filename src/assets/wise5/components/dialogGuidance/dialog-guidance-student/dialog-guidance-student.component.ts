@@ -116,6 +116,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   ngOnDestroy(): void {
+    super.ngOnDestroy();
     this.cRaterPingService.stopPinging(this.getItemId());
   }
 
