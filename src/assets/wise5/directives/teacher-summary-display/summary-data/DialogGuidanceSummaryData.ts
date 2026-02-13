@@ -9,5 +9,6 @@ export class DialogGuidanceSummaryData extends IdeasSummaryData {
     componentStates.forEach((componentState) =>
       this.dataPoints.push(new DialogGuidanceSummaryDataPoint(componentState))
     );
+    this.setIdeaDataArray();
   }
 }

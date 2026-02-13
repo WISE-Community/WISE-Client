@@ -1,58 +1,40 @@
+<ng-template #ideaGroup let-ideaGroups="ideaGroups">
+  <div class="grid md:grid-cols-2 gap-2 mb-4">
+    @for (ideaGroup of ideaGroups; track ideaGroup.title) {
+      <div>
+        <h3 class="mat-body-2" i18n>{{ ideaGroup.title }}</h3>
+        <ul>
+          @for (idea of ideaGroup.ideas; track idea.id) {
+            <li>
+              <idea-summary
+                [idea]="idea"
+                [nodeId]="nodeId"
+                [componentId]="componentId"
+                [periodId]="periodId"
+                [source]="source"
+              />
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</ng-template>
 <h2 class="mat-subtitle-1" i18n>Student Ideas Detected</h2>
 @if (hasWarning) {
   <p class="warn center">{{ warningMessage }}</p>
 }
 @if (doRender) {
-  <div class="grid md:grid-cols-2 gap-2 mb-4">
-    <div>
-      <h3 class="mat-body-2" i18n>Most Common:</h3>
-      <ul id="most-common-ideas">
-        @for (idea of mostCommonIdeas; track idea.id) {
-          <li>
-            <idea-summary
-              [idea]="idea"
-              [nodeId]="nodeId"
-              [componentId]="componentId"
-              [periodId]="periodId"
-              [source]="source"
-            />
-          </li>
-        }
-      </ul>
-    </div>
-    <div>
-      <h3 class="mat-body-2" i18n>Least Common:</h3>
-      <ul id="least-common-ideas">
-        @for (idea of leastCommonIdeas; track idea.id) {
-          <li>
-            <idea-summary
-              [idea]="idea"
-              [nodeId]="nodeId"
-              [componentId]="componentId"
-              [periodId]="periodId"
-              [source]="source"
-            />
-          </li>
-        }
-      </ul>
-    </div>
-  </div>
+  <ng-container
+    [ngTemplateOutlet]="ideaGroup"
+    [ngTemplateOutletContext]="{ ideaGroups: initialGroups }"
+  />
   @if (showMore) {
-    <h3 class="mat-body-2" i18n>All Ideas:</h3>
-    <ul class="columns-3xs gap-2 mb-2">
-      @for (idea of allIdeas; track idea.id) {
-        <li class="break-inside-avoid">
-          <idea-summary
-            [idea]="idea"
-            [nodeId]="nodeId"
-            [componentId]="componentId"
-            [periodId]="periodId"
-            [source]="source"
-          />
-        </li>
-      }
-    </ul>
-  } @else {
+    <ng-container
+      [ngTemplateOutlet]="ideaGroup"
+      [ngTemplateOutletContext]="{ ideaGroups: additionalGroups }"
+    />
+  } @else if (additionalGroups.length > 0) {
     <a (click)="showMore = true" i18n>Show more</a>
   }
 } @else {

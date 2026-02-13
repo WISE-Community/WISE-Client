@@ -18,7 +18,7 @@ import { MockComponent } from 'ng-mocks';
 
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;
-describe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
+describe('IdeasSummaryComponent for Dialog Guidance component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IdeasSummaryComponent, MockComponent(IdeaSummaryComponent)],
@@ -54,7 +54,7 @@ describe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
   });
 });
 
-describe('IdeasSummaryDisplayComponent for Open Response component', () => {
+describe('IdeasSummaryComponent for Open Response component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IdeasSummaryComponent, MockComponent(IdeaSummaryComponent)],
@@ -144,7 +144,7 @@ function showsDisplaySummary(componentType: string) {
   it('shows summary display (' + componentType + ')', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Most Common:');
+    expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Most Common');
   });
 }
 

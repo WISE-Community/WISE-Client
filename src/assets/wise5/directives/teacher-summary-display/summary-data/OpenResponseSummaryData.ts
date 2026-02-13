@@ -9,5 +9,6 @@ export class OpenResponseSummaryData extends IdeasSummaryData {
     annotations.forEach((annotation) =>
       this.dataPoints.push(new OpenResponseSummaryDataPoint(annotation))
     );
+    this.setIdeaDataArray();
   }
 }

@@ -3,10 +3,12 @@ import { CRaterIdea } from './CRaterIdea';
 export class CRaterRubric {
   description: string = '';
   ideas: CRaterIdea[] = [];
+  ideasSummaryGroups?: any;
 
   constructor(rubric: any = { description: '', ideas: [] }) {
     this.description = rubric.description;
     this.ideas = rubric.ideas;
+    this.ideasSummaryGroups = rubric.ideasSummaryGroups;
   }
 
   getIdea(ideaId: string): CRaterIdea {
@@ -15,6 +17,10 @@ export class CRaterRubric {
 
   hasRubricData(): boolean {
     return (this.description ?? '') !== '' || this.ideas.length > 0;
+  }
+
+  hasIdeasSummaryGroups(): boolean {
+    return this.ideasSummaryGroups != null;
   }
 }
 

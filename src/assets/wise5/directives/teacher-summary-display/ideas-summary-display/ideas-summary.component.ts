@@ -4,7 +4,6 @@ import { Component, Input } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
 import { DialogGuidanceSummaryData } from '../summary-data/DialogGuidanceSummaryData';
-import { IdeasSortingService } from '../../../services/ideasSortingService';
 import { IdeasSummaryData } from '../summary-data/IdeasSummaryData';
 import { OpenResponseSummaryData } from '../summary-data/OpenResponseSummaryData';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -12,10 +11,10 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
+import { IdeaGroup } from '../summary-data/IdeasSummaryData';
 
 @Component({
   imports: [CommonModule, IdeaSummaryComponent],
-  providers: [IdeasSortingService],
   selector: 'ideas-summary',
   styles: `
     h3,
@@ -32,10 +31,10 @@ import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
   templateUrl: 'ideas-summary.component.html'
 })
 export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
-  protected allIdeas: { id: string; text: string; count: number }[] = [];
   @Input() componentType: string;
-  protected leastCommonIdeas: { id: string; text: string; count: number }[] = [];
-  protected mostCommonIdeas: { id: string; text: string; count: number }[] = [];
+
+  protected additionalGroups: IdeaGroup[] = [];
+  protected initialGroups: IdeaGroup[] = [];
   protected showMore: boolean;
 
   constructor(
@@ -43,7 +42,6 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     protected configService: ConfigService,
     protected cRaterService: CRaterService,
     protected dataService: TeacherDataService,
-    private ideasSortingService: IdeasSortingService,
     protected projectService: TeacherProjectService,
     protected summaryService: SummaryService
   ) {
@@ -69,10 +67,10 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     );
     if (this.componentType === 'DialogGuidance') {
       this.getLatestWork().subscribe((componentStates) =>
-        this.compileAndSortIdeas(new DialogGuidanceSummaryData(componentStates, rubric))
+        this.groupIdeas(new DialogGuidanceSummaryData(componentStates, rubric))
       );
     } else if (this.componentType === 'OpenResponse') {
-      this.compileAndSortIdeas(
+      this.groupIdeas(
         new OpenResponseSummaryData(
           this.annotationService.getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId),
           rubric
@@ -81,19 +79,9 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     }
   }
 
-  private compileAndSortIdeas(ideasSummaryData: IdeasSummaryData) {
+  private groupIdeas(ideasSummaryData: IdeasSummaryData) {
     if (ideasSummaryData.hasAnyDetectedIdeas()) {
-      const ideaDataArray = ideasSummaryData.getIdeaDataArray();
-      const sortedIdeas = this.ideasSortingService.sortByCount(ideaDataArray);
-      this.mostCommonIdeas = [...sortedIdeas].splice(0, 3);
-      if (sortedIdeas.length <= 3) {
-        this.leastCommonIdeas = [...this.mostCommonIdeas].reverse();
-      } else {
-        this.leastCommonIdeas = [...sortedIdeas]
-          .splice(sortedIdeas.length - 3, sortedIdeas.length)
-          .reverse();
-      }
-      this.allIdeas = this.ideasSortingService.sortById(ideaDataArray);
+      [this.initialGroups, this.additionalGroups] = ideasSummaryData.getIdeasSummaryGroups();
       this.doRender = true;
     } else {
       this.doRender = false;
