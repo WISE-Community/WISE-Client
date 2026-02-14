@@ -8,6 +8,7 @@ interface IdeaCount {
   id: string;
   text: string;
   count: number;
+  color: string;
 }
 
 interface Response {

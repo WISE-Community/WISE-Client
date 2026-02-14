@@ -4,11 +4,13 @@ export class CRaterRubric {
   description: string = '';
   ideas: CRaterIdea[] = [];
   ideasSummaryGroups?: any;
+  ideaColors?: { tags: string[]; colorValue: string }[];
 
   constructor(rubric: any = { description: '', ideas: [] }) {
     this.description = rubric.description;
     this.ideas = rubric.ideas;
     this.ideasSummaryGroups = rubric.ideasSummaryGroups;
+    this.ideaColors = rubric.ideaColors;
   }
 
   getIdea(ideaId: string): CRaterIdea {

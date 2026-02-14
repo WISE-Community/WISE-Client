@@ -32,7 +32,8 @@ export abstract class IdeasSummaryData {
         id: ideaId,
         text: this.getIdeaDescriptionText(ideaId),
         tags: this.getIdeaTags(ideaId),
-        count: count
+        count: count,
+        color: this.getIdeaColor(ideaId)
       });
     });
   }
@@ -63,6 +64,14 @@ export abstract class IdeasSummaryData {
     return this.rubric.ideas.find((ideaDescription) => ideaDescription.name === ideaId)?.tags ?? [];
   }
 
+  private getIdeaColor(ideaId: string): string {
+    const ideaTags = this.getIdeaTags(ideaId);
+    return (
+      this.rubric.ideaColors?.find((ideaColor) => arrayContainsAll(ideaTags, ideaColor.tags))
+        ?.colorValue ?? ''
+    );
+  }
+
   getIdeasSummaryGroups(): [IdeaGroup[], IdeaGroup[]] {
     return this.rubric.hasIdeasSummaryGroups()
       ? [this.getInitialGroups(), this.getAdditionalGroups()]
@@ -72,15 +81,24 @@ export abstract class IdeasSummaryData {
   private getInitialGroups(): IdeaGroup[] {
     return this.rubric.ideasSummaryGroups.initial.map((group) => ({
       title: group.title,
-      ideas: this.getIdeasWithTags(group.tags)
+      ideas: this.getIdeas(group)
     }));
   }
 
   private getAdditionalGroups(): IdeaGroup[] {
     return this.rubric.ideasSummaryGroups.additional.map((group) => ({
       title: group.title,
-      ideas: this.getIdeasWithTags(group.tags)
+      ideas: this.getIdeas(group)
     }));
+  }
+
+  private getIdeas(group: any): IdeaData[] {
+    let ideas = this.getIdeasWithTags(group.tags);
+    if (!group.showUndetectedIdeas) {
+      ideas = ideas.filter((idea) => idea.count > 0);
+    }
+    sortIdeasByCount(ideas, group.sort.order ?? 'desc');
+    return ideas.slice(0, group.maxIdeas ?? ideas.length);
   }
 
   // get ideas that have at least the tags specified
@@ -89,7 +107,9 @@ export abstract class IdeasSummaryData {
   }
 
   private getDefaultIdeasSummmaryGroups(): [IdeaGroup[], IdeaGroup[]] {
-    const sortedIdeas = sortIdeasByCount(this.ideaDataArray);
+    const sortedIdeas = sortIdeasByCount(this.ideaDataArray, 'desc').filter(
+      (idea) => idea.count > 0
+    );
     const mostCommonIdeas = [...sortedIdeas].splice(0, 3);
     const leastCommonIdeas =
       sortedIdeas.length <= 3

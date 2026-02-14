@@ -1,4 +1,8 @@
-<div class="px-2 py-1 rounded-md bg-gray-100 mb-1 text-sm" (click)="toggleDetails()">
+<div
+  class="px-2 py-1 rounded-md bg-gray-100 mb-1 text-sm"
+  (click)="toggleDetails()"
+  [style.background-color]="idea.color"
+>
   <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon>{{ idea.count }})
   @if (expanded) {
     <mat-icon class="mat-18">expand_less</mat-icon>

@@ -24,8 +24,13 @@ describe('IdeaData', () => {
 
 function test_SortIdeasByCount() {
   it('should sort ideas descending numerically by count', () => {
-    const sortedIdeas = sortIdeasByCount(ideas);
+    const sortedIdeas = sortIdeasByCount(ideas, 'desc');
     expect(sortedIdeas.map((idea) => idea.id)).toEqual(['11', '2b', '2', '10a', '1']);
+  });
+
+  it('should sort ideas ascending numerically by count', () => {
+    const sortedIdeas = sortIdeasByCount(ideas, 'asc');
+    expect(sortedIdeas.map((idea) => idea.id)).toEqual(['1', '10a', '2', '2b', '11']);
   });
 }
 

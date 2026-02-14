@@ -56,7 +56,8 @@ describe('IdeaSummaryComponent', () => {
     component.idea = {
       id: 'idea1',
       text: 'Test Idea',
-      count: 5
+      count: 5,
+      color: 'red'
     };
   });
 

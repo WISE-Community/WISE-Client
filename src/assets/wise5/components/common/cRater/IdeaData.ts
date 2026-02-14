@@ -5,6 +5,7 @@ export type IdeaData = {
   text: string;
   count: number;
   tags?: string[];
+  color?: string;
 };
 
 export function ideaDataToCRaterIdea(ideaData: IdeaData): CRaterIdea {
@@ -15,8 +16,8 @@ export function cRaterIdeaToIdeaData(cRaterIdea: CRaterIdea): IdeaData {
   return { id: cRaterIdea.name, text: cRaterIdea.text, count: 0, tags: cRaterIdea.tags };
 }
 
-export function sortIdeasByCount(ideas: IdeaData[]): IdeaData[] {
-  return ideas.filter((idea) => idea.count > 0).sort((a, b) => b.count - a.count);
+export function sortIdeasByCount(ideas: IdeaData[], sortOrder: 'asc' | 'desc'): IdeaData[] {
+  return ideas.sort((a, b) => (sortOrder === 'asc' ? a.count - b.count : b.count - a.count));
 }
 
 export function sortIdeasById(ideas: IdeaData[]): IdeaData[] {

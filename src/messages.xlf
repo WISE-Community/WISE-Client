@@ -21932,21 +21932,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Most Common</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/summary-data/IdeasSummaryData.ts</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6657718591013170087" datatype="html">
         <source>Least Common</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/summary-data/IdeasSummaryData.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="786337790284911605" datatype="html">
         <source>All Ideas</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/summary-data/IdeasSummaryData.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="866753876041645935" datatype="html">

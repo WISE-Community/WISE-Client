@@ -60,11 +60,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   }
 
   private generateIdeasSummary(): void {
-    const rubric = this.cRaterService.getCRaterRubric(
-      this.nodeId,
-      this.componentId,
-      this.componentType
-    );
+    const rubric = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
     if (this.componentType === 'DialogGuidance') {
       this.getLatestWork().subscribe((componentStates) =>
         this.groupIdeas(new DialogGuidanceSummaryData(componentStates, rubric))
