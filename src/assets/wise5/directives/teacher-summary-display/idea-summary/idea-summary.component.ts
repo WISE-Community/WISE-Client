@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 import { firstValueFrom } from 'rxjs';
 import { ComponentState } from '../../../../../app/domain/componentState';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 interface IdeaCount {
   id: string;
@@ -16,13 +17,10 @@ interface Response {
 }
 
 @Component({
-  imports: [MatIcon],
+  encapsulation: ViewEncapsulation.None,
+  imports: [MatExpansionModule, MatIcon],
   selector: 'idea-summary',
-  styles: `
-    .mat-icon {
-      vertical-align: middle;
-    }
-  `,
+  styleUrl: './idea-summary.component.scss',
   templateUrl: './idea-summary.component.html'
 })
 export class IdeaSummaryComponent extends TeacherSummaryDisplayComponent {
@@ -30,11 +28,9 @@ export class IdeaSummaryComponent extends TeacherSummaryDisplayComponent {
   @Input() idea: IdeaCount;
   @Input() nodeId: string;
 
-  protected expanded: boolean = false;
   protected responses: Response[] = [];
 
   protected async toggleDetails(): Promise<void> {
-    this.expanded = !this.expanded;
     if (this.responses.length === 0) {
       const component = this.projectService.getComponent(this.nodeId, this.componentId);
       const states = await firstValueFrom(this.getLatestWork());

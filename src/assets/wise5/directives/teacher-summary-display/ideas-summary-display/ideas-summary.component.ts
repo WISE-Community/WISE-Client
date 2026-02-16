@@ -31,6 +31,9 @@ import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
       margin-block-start: 0;
       padding-inline-start: 0;
     }
+    li:not(:last-child) {
+      margin-bottom: 4px;
+    }
   `,
   templateUrl: 'ideas-summary.component.html'
 })

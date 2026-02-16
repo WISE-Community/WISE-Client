@@ -1,13 +1,24 @@
-<div class="px-2 py-1 rounded-md bg-gray-100 mb-1 text-sm" (click)="toggleDetails()">
-  <b>{{ idea.id }}.</b> {{ idea.text }} (<mat-icon class="mat-18">person</mat-icon>{{ idea.count }})
-  @if (expanded) {
-    <mat-icon class="mat-18">expand_less</mat-icon>
-    <div>
+<mat-expansion-panel
+  [disabled]="idea.count === 0"
+  [hideToggle]="idea.count === 0"
+  (opened)="toggleDetails()"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span class="font-normal text-sm">{{ idea.id }}. {{ idea.text }}</span>
+    </mat-panel-title>
+    <mat-panel-description>
+      <span class="font-normal text-sm flex items-center">
+        <mat-icon class="mat-18">person</mat-icon>{{ idea.count }}
+      </span>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="text-sm bg-white p-1 rounded">
+    Sample responses:
+    <ul>
       @for (response of responses; track response.timestamp) {
-        <mat-icon class="mat-18">person</mat-icon>{{ response.text }}<br />
+        <li>"{{ response.text }}"</li>
       }
-    </div>
-  } @else {
-    <mat-icon class="mat-18">expand_more</mat-icon>
-  }
-</div>
+    </ul>
+  </div>
+</mat-expansion-panel>

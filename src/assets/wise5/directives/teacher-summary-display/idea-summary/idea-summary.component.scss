@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+idea-summary {
+  --mat-expansion-legacy-header-indicator-display: none;
+  --mat-expansion-header-indicator-display: inline-block;
+  // TODO: convert to expansion-overrides mixin when supported
+  --mat-expansion-header-collapsed-state-height: auto;
+  --mat-expansion-header-expanded-state-height: auto;
+  --mat-expansion-container-elevation-shadow: none;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    @apply mt-1;
+  }
+
+  .mat-expansion-panel {
+    @apply bg-gray-100;
+  }
+
+  .mat-expansion-panel-header {
+    @apply py-1 px-2;
+  }
+
+  .mat-expansion-panel-header-title {
+    flex-grow: 15;
+  }
+
+  .mat-expansion-panel-header-description {
+    align-items: start;
+    flex-grow: 1;
+  }
+
+  .mat-content.mat-content-hide-toggle {
+    margin-inline-end: 0;
+
+    .mat-expansion-panel-header-description {
+      margin-inline-end: 0;
+    }
+  }
+
+  .mat-expansion-indicator {
+    align-self: start;
+  }
+
+  .mat-expansion-panel-body {
+    @apply pb-2 px-2;
+  }
+}
