@@ -4,6 +4,9 @@ import { MockComponent, MockProviders } from 'ng-mocks';
 import { OpenResponseShowWorkComponent } from '../../openResponse/open-response-show-work/open-response-show-work.component';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
+import { AnnotationService } from '../../../services/annotationService';
+import { ConfigService } from '../../../../../app/services/config.service';
+import { UserService } from '../../../../../app/services/user.service';
 
 describe('ShowWorkStudentComponent', () => {
   let component: ShowWorkStudentComponent;
@@ -12,7 +15,9 @@ describe('ShowWorkStudentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MockComponent(OpenResponseShowWorkComponent), ShowWorkStudentComponent],
-      providers: [MockProviders(NodeService, ProjectService)]
+      providers: [
+        MockProviders(AnnotationService, ConfigService, NodeService, ProjectService, UserService)
+      ]
     }).compileComponents();
   });
 

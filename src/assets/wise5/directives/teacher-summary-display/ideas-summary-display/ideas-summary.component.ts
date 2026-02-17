@@ -66,11 +66,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   }
 
   ngOnInit(): void {
-    this.ideaDescriptions = this.cRaterService.getCRaterRubric(
-      this.nodeId,
-      this.componentId,
-      this.componentType
-    );
+    this.ideaDescriptions = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
     this.generateIdeasSummary();
   }
 

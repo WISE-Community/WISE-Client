@@ -1,4 +1,4 @@
-import { StudentProgress } from '../../../student-progress/student-progress.component';
+import { StudentProgress } from '../../../student-progress/StudentProgress';
 
 export class ClassroomMonitorTestHelper {
   workgroupId1: number = 1;
