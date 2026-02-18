@@ -1,0 +1,24 @@
+<mat-expansion-panel
+  [disabled]="idea.count === 0"
+  [hideToggle]="idea.count === 0"
+  (opened)="toggleDetails()"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span class="font-normal text-sm">{{ idea.id }}. {{ idea.text }}</span>
+    </mat-panel-title>
+    <mat-panel-description>
+      <span class="font-normal text-sm flex items-center">
+        <mat-icon class="mat-18">person</mat-icon>{{ idea.count }}
+      </span>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="text-sm bg-white p-1 rounded">
+    Sample responses:
+    <ul>
+      @for (response of responses; track response.timestamp) {
+        <li>"{{ response.text }}"</li>
+      }
+    </ul>
+  </div>
+</mat-expansion-panel>

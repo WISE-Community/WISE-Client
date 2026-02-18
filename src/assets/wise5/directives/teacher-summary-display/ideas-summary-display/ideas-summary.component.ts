@@ -9,15 +9,15 @@ import { DialogGuidanceSummaryData } from '../summary-data/DialogGuidanceSummary
 import { IdeaData } from '../../../components/common/cRater/IdeaData';
 import { IdeasSortingService } from '../../../services/ideasSortingService';
 import { IdeasSummaryData } from '../summary-data/IdeasSummaryData';
-import { MatIconModule } from '@angular/material/icon';
 import { OpenResponseSummaryData } from '../summary-data/OpenResponseSummaryData';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
+import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
 
 @Component({
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, IdeaSummaryComponent],
   providers: [IdeasSortingService],
   selector: 'ideas-summary',
   styles: `
@@ -26,13 +26,13 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
       margin-bottom: 8px;
       margin-top: 0;
     }
-    .mat-icon {
-      vertical-align: middle;
-    }
     ul {
       list-style-type: none;
       margin-block-start: 0;
       padding-inline-start: 0;
+    }
+    li:not(:last-child) {
+      margin-bottom: 4px;
     }
   `,
   templateUrl: 'ideas-summary.component.html'

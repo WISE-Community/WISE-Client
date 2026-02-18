@@ -13,13 +13,15 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TestBed } from '@angular/core/testing';
 import { Annotation } from '../../../common/Annotation';
+import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
+import { MockComponent } from 'ng-mocks';
 
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;
 describe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IdeasSummaryComponent],
+      imports: [IdeasSummaryComponent, MockComponent(IdeaSummaryComponent)],
       providers: [
         MockProviders(
           AnnotationService,
@@ -55,7 +57,7 @@ describe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
 describe('IdeasSummaryDisplayComponent for Open Response component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IdeasSummaryComponent],
+      imports: [IdeasSummaryComponent, MockComponent(IdeaSummaryComponent)],
       providers: [
         MockProviders(
           AnnotationService,
