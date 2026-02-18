@@ -37,7 +37,7 @@
         <div class="mat-elevation-z1 app-background mt-4 mb-2">
           <mat-tab-group
             [selectedIndex]="selectedComponent.value"
-            (selectedIndexChange)="selectedComponent.setValue($event)"
+            (selectedIndexChange)="selectSummary($event)"
             mat-stretch-tabs="false"
             animationDuration="0"
           >
@@ -56,6 +56,7 @@
       <h3 class="mat-body-1" i18n>Class Responses</h3>
       <filter-components
         [components]="components"
+        [selectedComponents]="visibleComponents"
         (componentsChange)="setVisibleComponents($event)"
       />
     </div>
