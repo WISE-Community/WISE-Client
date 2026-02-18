@@ -19,13 +19,12 @@ export class FilterComponentsComponent {
   @Output() componentsChange: EventEmitter<ComponentContent[]> = new EventEmitter<
     ComponentContent[]
   >();
-  protected selectedComponents: ComponentContent[];
+  @Input() selectedComponents: ComponentContent[];
   protected selectedText: string;
 
   constructor(private componentTypeService: ComponentTypeService) {}
 
   ngOnChanges(): void {
-    this.selectedComponents = this.components;
     this.updateSelectedText();
   }
 
