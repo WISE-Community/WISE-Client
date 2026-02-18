@@ -4,7 +4,6 @@ import { ConfigService } from '../../services/configService';
 import { ClassroomStatusService } from '../../services/classroomStatusService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectCompletion } from '../../common/ProjectCompletion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -12,6 +11,8 @@ import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { WorkgroupSelectAutocompleteComponent } from '../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
 import { ProjectProgressComponent } from '../classroomMonitorComponents/studentProgress/project-progress/project-progress.component';
+import { ProjectLocationComponent } from '../project-location/project-location.component';
+import { StudentProgress } from './StudentProgress';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -21,6 +22,7 @@ import { ProjectProgressComponent } from '../classroomMonitorComponents/studentP
     MatIconModule,
     MatListModule,
     MatTableModule,
+    ProjectLocationComponent,
     ProjectProgressComponent,
     WorkgroupSelectAutocompleteComponent
   ],
@@ -129,7 +131,9 @@ export class StudentProgressComponent implements OnInit {
     this.students
       .filter((student) => student.workgroupId === workgroupId)
       .forEach((student) => {
-        student.position = location?.position || '';
+        student.currentNodeId = location?.nodeId || '';
+        student.nodePosition = location?.nodePosition || '';
+        student.positionAndTitle = location?.positionAndTitle || '';
         student.order = location?.order || 0;
         student.completion = completion;
         student.completionPct = completion.completionPct || 0;
@@ -198,27 +202,5 @@ export class StudentProgressComponent implements OnInit {
     this.sort = this.sort === value ? `-${value}` : value;
     this.dataService.studentProgressSort = this.sort;
     this.sortWorkgroups();
-  }
-}
-
-export class StudentProgress {
-  periodId: string;
-  periodName: string;
-  workgroupId: number;
-  username: string;
-  firstName: string;
-  lastName: string;
-  position: string;
-  order: number;
-  completion: ProjectCompletion;
-  completionPct: number;
-  score: number;
-  maxScore: number;
-  scorePct: number;
-
-  constructor(jsonObject: any = {}) {
-    for (const key of Object.keys(jsonObject)) {
-      this[key] = jsonObject[key];
-    }
   }
 }

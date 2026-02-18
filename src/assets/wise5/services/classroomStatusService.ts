@@ -56,7 +56,9 @@ export class ClassroomStatusService {
     if (studentStatus != null) {
       const currentNodeId = studentStatus.currentNodeId;
       return {
-        position: this.projectService.getNodePositionAndTitle(currentNodeId),
+        nodeId: currentNodeId,
+        nodePosition: this.projectService.getNodePositionById(currentNodeId),
+        positionAndTitle: this.projectService.getNodePositionAndTitle(currentNodeId),
         order: this.projectService.getNodeOrderById(currentNodeId)
       };
     }

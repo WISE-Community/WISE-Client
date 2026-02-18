@@ -166,6 +166,12 @@ describe('DialogGuidanceStudentComponent', () => {
     expect(component['responses'].length).toEqual(1);
     expect(component['responses'][0].text).toEqual(text);
   });
+
+  it('should call super.ngOnDestroy() when ngOnDestroy() is called', () => {
+    const spy = spyOn(Object.getPrototypeOf(Object.getPrototypeOf(component)), 'ngOnDestroy');
+    component.ngOnDestroy();
+    expect(spy).toHaveBeenCalled();
+  });
 });
 
 function initializeComponent(isComputerAvatarEnabled: boolean): void {

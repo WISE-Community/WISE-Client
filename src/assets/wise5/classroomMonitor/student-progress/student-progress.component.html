@@ -54,7 +54,9 @@
                 } @else {
                   <td class="heavy td--wrap">{{ student.username }}</td>
                 }
-                <td class="center td--wrap td--max-width">{{ student.position }}</td>
+                <td class="center td--wrap td--max-width">
+                  <project-location [studentProgress]="student" />
+                </td>
                 <td class="flex justify-center items-center">
                   <project-progress
                     [completed]="student.completion.completedItems"
