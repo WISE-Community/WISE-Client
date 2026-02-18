@@ -21879,6 +21879,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">401</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3690771652722848805" datatype="html">
+        <source>Sample responses:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/idea-summary/idea-summary.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1563518905064973119" datatype="html">
         <source>Student Ideas Detected</source>
         <context-group purpose="location">
