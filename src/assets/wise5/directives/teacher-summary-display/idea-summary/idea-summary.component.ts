@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-interface IdeaCount {
+interface IdeaCategory {
   id: string;
   text: string;
   count: number;
@@ -26,7 +26,7 @@ interface Response {
 })
 export class IdeaSummaryComponent extends TeacherSummaryDisplayComponent {
   @Input() componentId: string;
-  @Input() idea: IdeaCount;
+  @Input() idea: IdeaCategory;
   @Input() nodeId: string;
 
   protected expanded: boolean = false;
