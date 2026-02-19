@@ -21,11 +21,11 @@ export class CRaterRubric {
     return (this.description ?? '') !== '' || this.ideas.length > 0;
   }
 
-  getInitialIdeaSummaryGroups(): any[] {
+  getInitialIdeasSummaryGroups(): any[] {
     return this.ideasSummaryGroups.initial;
   }
 
-  getAdditionalIdeaSummaryGroups(): any[] {
+  getAdditionalIdeasSummaryGroups(): any[] {
     return this.ideasSummaryGroups.additional;
   }
 }

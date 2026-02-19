@@ -70,8 +70,8 @@ export abstract class IdeasSummaryData {
 
   getIdeasSummaryGroups(): [IdeaGroup[], IdeaGroup[]] {
     return [
-      this.getIdeaGroups(this.rubric.getInitialIdeaSummaryGroups()),
-      this.getIdeaGroups(this.rubric.getAdditionalIdeaSummaryGroups())
+      this.getIdeaGroups(this.rubric.getInitialIdeasSummaryGroups()),
+      this.getIdeaGroups(this.rubric.getAdditionalIdeasSummaryGroups())
     ];
   }
 

@@ -25,7 +25,7 @@ export class DialogGuidanceService extends ComponentService {
     component.cRaterRubric = {
       ideas: [],
       ideaColors: [],
-      ideaSummaryGroups: DEFAULT_IDEAS_SUMMARY_GROUPS
+      ideasSummaryGroups: DEFAULT_IDEAS_SUMMARY_GROUPS
     };
     return component;
   }
