@@ -48,6 +48,16 @@
   <p class="warn center">{{ warningMessage }}</p>
 }
 @if (doRender) {
+  @if (rubric.ideaColors) {
+    <div class="flex flex-wrap items-center gap-2 mb-4">
+      <span class="text-sm font-medium" i18n>Key:</span>
+      @for (ideaColor of rubric.ideaColors; track ideaColor.colorValue) {
+        <div class="py-0.5 px-1 rounded" [style.background-color]="ideaColor.colorValue">
+          <span class="text-sm">{{ ideaColor.tags.join(', ') }}</span>
+        </div>
+      }
+    </div>
+  }
   <ng-container
     [ngTemplateOutlet]="ideaGroup"
     [ngTemplateOutletContext]="{ ideaGroups: initialGroups }"

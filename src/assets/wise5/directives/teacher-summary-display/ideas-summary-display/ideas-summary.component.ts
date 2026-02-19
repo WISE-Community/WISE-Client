@@ -12,6 +12,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
 import { IdeaGroup } from '../summary-data/IdeasSummaryData';
+import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
 
 @Component({
   imports: [CommonModule, IdeaSummaryComponent],
@@ -40,6 +41,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   protected additionalGroups: IdeaGroup[] = [];
   protected initialGroups: IdeaGroup[] = [];
   protected showMore: boolean;
+  protected rubric: CRaterRubric;
 
   constructor(
     protected annotationService: AnnotationService,
@@ -64,16 +66,16 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   }
 
   private generateIdeasSummary(): void {
-    const rubric = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
+    this.rubric = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
     if (this.componentType === 'DialogGuidance') {
       this.getLatestWork().subscribe((componentStates) =>
-        this.groupIdeas(new DialogGuidanceSummaryData(componentStates, rubric))
+        this.groupIdeas(new DialogGuidanceSummaryData(componentStates, this.rubric))
       );
     } else if (this.componentType === 'OpenResponse') {
       this.groupIdeas(
         new OpenResponseSummaryData(
           this.annotationService.getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId),
-          rubric
+          this.rubric
         )
       );
     }
