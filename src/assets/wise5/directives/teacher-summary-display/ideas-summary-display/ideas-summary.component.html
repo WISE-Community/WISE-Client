@@ -57,8 +57,9 @@
       [ngTemplateOutlet]="ideaGroup"
       [ngTemplateOutletContext]="{ ideaGroups: additionalGroups }"
     />
+    <a tabindex="0" (click)="showMore = false" i18n>Show less</a>
   } @else if (additionalGroups.length > 0) {
-    <a (click)="showMore = true" i18n>Show more</a>
+    <a tabindex="0" (click)="showMore = true" i18n>Show more</a>
   }
 } @else {
   <div i18n>Your students' ideas will show up here as they are detected in the activity.</div>
