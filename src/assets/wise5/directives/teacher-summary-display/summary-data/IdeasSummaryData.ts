@@ -121,14 +121,14 @@ export abstract class IdeasSummaryData {
         ideas: mostCommonIdeas
       },
       {
-        title: $localize`Least Common`,
+        title: $localize`Unique Ideas`,
         ideas: leastCommonIdeas
       }
     ];
     const additionalGroups = [
       {
         title: $localize`All Ideas`,
-        ideas: sortIdeasById(this.ideaDataArray)
+        ideas: sortIdeasByCount(this.ideaDataArray, 'desc')
       }
     ];
     return [initialGroups, additionalGroups];
