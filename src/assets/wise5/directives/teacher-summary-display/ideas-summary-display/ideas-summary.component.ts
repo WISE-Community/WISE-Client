@@ -18,7 +18,8 @@ import { IdeaGroup } from '../summary-data/IdeasSummaryData';
   selector: 'ideas-summary',
   styles: `
     h3,
-    .mat-subtitle-1 {
+    .mat-subtitle-1,
+    .mat-body-1 {
       margin-bottom: 8px;
       margin-top: 0;
     }
