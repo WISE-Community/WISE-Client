@@ -47,7 +47,7 @@ export function getUniqueIdeas(responses: any[], rubric: CRaterRubric): CRaterId
   return uniqueIdeas;
 }
 
-const DEFAULT_IDEAS_SUMMARY_GROUPS = {
+export const DEFAULT_IDEAS_SUMMARY_GROUPS = {
   initial: [
     {
       maxIdeas: 3,

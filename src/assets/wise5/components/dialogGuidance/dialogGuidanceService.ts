@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ComponentService } from '../componentService';
+import { DEFAULT_IDEAS_SUMMARY_GROUPS } from '../common/cRater/CRaterRubric';
 
 @Injectable()
 export class DialogGuidanceService extends ComponentService {
@@ -21,7 +22,11 @@ export class DialogGuidanceService extends ComponentService {
     component.computerAvatarSettings =
       this.computerAvatarService.getDefaultComputerAvatarSettings();
     component.version = 2;
-    component.cRaterRubric = { ideas: [] };
+    component.cRaterRubric = {
+      ideas: [],
+      ideaColors: [],
+      ideaSummaryGroups: DEFAULT_IDEAS_SUMMARY_GROUPS
+    };
     return component;
   }
 
