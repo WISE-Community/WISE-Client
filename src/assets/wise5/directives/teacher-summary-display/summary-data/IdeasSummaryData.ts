@@ -1,10 +1,6 @@
 import { arrayContainsAll } from '../../../common/array/array';
 import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
-import {
-  IdeaData,
-  sortIdeasByCount,
-  sortIdeasById
-} from '../../../components/common/cRater/IdeaData';
+import { IdeaData, sortIdeasByCount } from '../../../components/common/cRater/IdeaData';
 import { IdeasSummaryDataPoint } from './IdeasSummaryDataPoint';
 
 export interface IdeaGroup {
@@ -73,20 +69,14 @@ export abstract class IdeasSummaryData {
   }
 
   getIdeasSummaryGroups(): [IdeaGroup[], IdeaGroup[]] {
-    return this.rubric.hasIdeasSummaryGroups()
-      ? [this.getInitialGroups(), this.getAdditionalGroups()]
-      : this.getDefaultIdeasSummmaryGroups();
+    return [
+      this.getIdeaGroups(this.rubric.getInitialIdeaSummaryGroups()),
+      this.getIdeaGroups(this.rubric.getAdditionalIdeaSummaryGroups())
+    ];
   }
 
-  private getInitialGroups(): IdeaGroup[] {
-    return this.rubric.ideasSummaryGroups.initial.map((group) => ({
-      title: group.title,
-      ideas: this.getIdeas(group)
-    }));
-  }
-
-  private getAdditionalGroups(): IdeaGroup[] {
-    return this.rubric.ideasSummaryGroups.additional.map((group) => ({
+  private getIdeaGroups(groups: any[]): IdeaGroup[] {
+    return groups.map((group) => ({
       title: group.title,
       ideas: this.getIdeas(group)
     }));
@@ -104,33 +94,5 @@ export abstract class IdeasSummaryData {
   // get ideas that have at least the tags specified
   private getIdeasWithTags(tags: string[]): IdeaData[] {
     return this.ideaDataArray.filter((ideaData) => arrayContainsAll(ideaData.tags, tags));
-  }
-
-  private getDefaultIdeasSummmaryGroups(): [IdeaGroup[], IdeaGroup[]] {
-    const sortedIdeas = sortIdeasByCount(this.ideaDataArray, 'desc').filter(
-      (idea) => idea.count > 0
-    );
-    const mostCommonIdeas = [...sortedIdeas].splice(0, 3);
-    const leastCommonIdeas =
-      sortedIdeas.length <= 3
-        ? [...sortedIdeas].splice(0, 3).reverse()
-        : [...sortedIdeas].splice(sortedIdeas.length - 3, sortedIdeas.length).reverse();
-    const initialGroups = [
-      {
-        title: $localize`Most Common`,
-        ideas: mostCommonIdeas
-      },
-      {
-        title: $localize`Unique Ideas`,
-        ideas: leastCommonIdeas
-      }
-    ];
-    const additionalGroups = [
-      {
-        title: $localize`All Ideas`,
-        ideas: sortIdeasByCount(this.ideaDataArray, 'desc')
-      }
-    ];
-    return [initialGroups, additionalGroups];
   }
 }
