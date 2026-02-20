@@ -11,10 +11,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 @Component({
-    selector: 'translatable-asset-chooser',
-    imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
-    templateUrl: './translatable-asset-chooser.component.html',
-    styleUrl: './translatable-asset-chooser.component.scss'
+  selector: 'translatable-asset-chooser',
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
+  templateUrl: './translatable-asset-chooser.component.html',
+  styleUrl: './translatable-asset-chooser.component.scss'
 })
 export class TranslatableAssetChooserComponent extends AbstractTranslatableFieldComponent {
   @Input() tooltip: String = $localize`Choose image`;
@@ -23,11 +23,11 @@ export class TranslatableAssetChooserComponent extends AbstractTranslatableField
   };
 
   constructor(
-    private dialog: MatDialog,
+    protected dialog: MatDialog,
     protected projectService: TeacherProjectService,
     protected projectTranslationService: TeacherProjectTranslationService
   ) {
-    super(projectService, projectTranslationService);
+    super(dialog, projectService, projectTranslationService);
   }
 
   protected chooseAsset(): void {
@@ -44,5 +44,10 @@ export class TranslatableAssetChooserComponent extends AbstractTranslatableField
           this.defaultLanguageTextChanged.next(value);
         }
       });
+  }
+
+  protected getDefaultLanguageTextContent(): string {
+    return this.content['prompt'];
+    //TODO: ...
   }
 }

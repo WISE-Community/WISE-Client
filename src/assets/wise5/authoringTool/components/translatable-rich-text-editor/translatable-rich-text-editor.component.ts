@@ -7,22 +7,22 @@ import { ConfigService } from '../../../services/configService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'translatable-rich-text-editor',
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatTabsModule,
-        WiseTinymceEditorModule
-    ],
-    templateUrl: './translatable-rich-text-editor.component.html',
-    styleUrl: './translatable-rich-text-editor.component.scss'
+  selector: 'translatable-rich-text-editor',
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatTabsModule,
+    WiseTinymceEditorModule
+  ],
+  templateUrl: './translatable-rich-text-editor.component.html',
+  styleUrl: './translatable-rich-text-editor.component.scss'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
   protected html: string = '';
@@ -30,10 +30,11 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
 
   constructor(
     private configService: ConfigService,
+    protected dialog: MatDialog,
     protected projectService: TeacherProjectService,
     protected projectTranslationService: TeacherProjectTranslationService
   ) {
-    super(projectService, projectTranslationService);
+    super(dialog, projectService, projectTranslationService);
   }
 
   ngOnChanges(): void {
@@ -70,5 +71,10 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
 
   protected saveTranslationText(text: string): void {
     super.saveTranslationText(insertWiseLinks(this.configService.removeAbsoluteAssetPaths(text)));
+  }
+
+  protected getDefaultLanguageTextContent(): string {
+    return this.content['prompt'];
+    //TODO: ...
   }
 }

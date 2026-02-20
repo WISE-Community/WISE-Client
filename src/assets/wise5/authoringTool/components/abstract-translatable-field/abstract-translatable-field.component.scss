@@ -18,4 +18,18 @@ mat-form-field {
     padding: 4px 8px;
     margin-top: 4px;
   }
+
+  .translatable-input-hints {
+    display: flex;
+  }
+
+  .translation-suggestions {
+    margin-left: 8px;
+    text-decoration: underline;
+    color: blue;
+  }
+
+  .translation-suggestions:hover {
+    cursor: pointer;
+  }
 }

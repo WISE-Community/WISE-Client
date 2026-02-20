@@ -1,4 +1,5 @@
 import { Input, Signal, Output, computed, Directive } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject, Subscription, debounceTime } from 'rxjs';
 import { Language } from '../../../../../app/domain/language';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
@@ -6,6 +7,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { generateRandomKey } from '../../../common/string/string';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Translations } from '../../../../../app/domain/translations';
+import { TranslationSuggestionsDialogComponent } from '../translation-suggestions-dialog/translation-suggestions-dialog.component';
 import { copy } from '../../../common/object/object';
 
 @Directive()
@@ -27,6 +29,7 @@ export abstract class AbstractTranslatableFieldComponent {
   protected translationText: string;
   protected translationTextChanged: Subject<string> = new Subject<string>();
   constructor(
+    protected dialog: MatDialog,
     protected projectService: TeacherProjectService,
     protected projectTranslationService: TeacherProjectTranslationService
   ) {}
@@ -74,5 +77,50 @@ export abstract class AbstractTranslatableFieldComponent {
     const currentTranslations = copy(this.projectTranslationService.currentTranslations());
     currentTranslations[this.i18nId] = { value: text, modified: new Date().getTime() };
     this.projectTranslationService.saveCurrentTranslations(currentTranslations).subscribe();
+  }
+
+  protected async translateText(): Promise<void> {
+    if (this.translationText) {
+      this.openDialog();
+    } else {
+      this.projectTranslationService
+        .getTranslationSuggestion(
+          this.defaultLanguage.language,
+          this.currentLanguage().language,
+          this.getDefaultLanguageTextContent()
+        )
+        .subscribe((suggestedTranslation: string) => {
+          this.translationText = suggestedTranslation;
+          this.saveTranslation();
+        });
+    }
+  }
+
+  protected abstract getDefaultLanguageTextContent(): string;
+
+  private openDialog(): void {
+    const dialogRef = this.createDialogRef();
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result || result === '') {
+        this.translationText = result;
+        this.saveTranslation();
+      }
+    });
+  }
+
+  private saveTranslation(): void {
+    this.saveTranslationText(this.translationText);
+  }
+
+  private createDialogRef(): MatDialogRef<TranslationSuggestionsDialogComponent> {
+    return this.dialog.open(TranslationSuggestionsDialogComponent, {
+      width: '40%',
+      data: {
+        defaultLanguage: this.defaultLanguage,
+        currentLanguage: this.currentLanguage(),
+        defaultLanguageContent: this.getDefaultLanguageTextContent(),
+        currentLanguageContent: this.translationText
+      }
+    });
   }
 }

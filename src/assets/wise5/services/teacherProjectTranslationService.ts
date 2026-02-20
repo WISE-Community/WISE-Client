@@ -48,4 +48,16 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
         })
       );
   }
+
+  getTranslationSuggestion(
+    defaultLanguage: string,
+    currentLanguage: string,
+    defaultLanguageText: string
+  ): Observable<Object> {
+    return this.http.post(
+      `/api/author/project/translate/translationSuggestions`,
+      { srcLang: defaultLanguage, targetLang: currentLanguage, srcText: defaultLanguageText },
+      { responseType: 'text' }
+    );
+  }
 }

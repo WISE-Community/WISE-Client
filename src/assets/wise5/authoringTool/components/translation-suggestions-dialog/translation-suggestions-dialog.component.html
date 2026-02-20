@@ -1,0 +1,15 @@
+<mat-dialog-content>
+  <p><b>English text</b></p>
+  <p class="text-content">{{ this.data.defaultLanguageContent }}</p>
+  <p><b>Spanish text (current translation)</b></p>
+  <p class="text-content">{{ this.data.currentLanguageContent }}</p>
+  <p><b>Spanish text (AI suggested translation)</b></p>
+  <p class="text-content">{{ this.translation }}</p>
+  <p class="replace-translation">
+    Do you want to replace the current translation with the AI suggested translation?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="start">
+  <button mat-raised-button (click)="onClose(true)">Replace</button>
+  <button mat-raised-button (click)="onClose(false)">Cancel</button>
+</mat-dialog-actions>
