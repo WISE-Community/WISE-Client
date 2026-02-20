@@ -56,7 +56,10 @@ export function getUniqueIdeas(responses: any[], rubric: CRaterRubric): CRaterId
   responses.forEach((response) =>
     response.ideas
       ?.filter(
-        (idea) => idea.detected && !uniqueIdeas.some((uniqueIdea) => uniqueIdea.name === idea.name)
+        (idea) =>
+          idea.detected &&
+          rubric.hasIdeaDescriptionText(idea.name) &&
+          !uniqueIdeas.some((uniqueIdea) => uniqueIdea.name === idea.name)
       )
       .forEach((idea) => {
         const cRaterIdea = new CRaterIdea(idea.name, true);
