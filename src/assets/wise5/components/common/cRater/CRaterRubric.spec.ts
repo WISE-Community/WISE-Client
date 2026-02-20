@@ -1,4 +1,4 @@
-import { CRaterRubric, getUniqueIdeas } from './CRaterRubric';
+import { CRaterRubric } from './CRaterRubric';
 
 const responses = [
   {
@@ -31,7 +31,7 @@ describe('CRaterRubric', () => {
   describe('getUniqueIdeas', () => {
     it('should return unique ideas that are in the rubric', () => {
       // idea 4 is detected but not in the rubric, so should be omitted
-      const ideas = getUniqueIdeas(responses, rubric);
+      const ideas = rubric.getUniqueIdeas(responses);
       expect(ideas.length).toEqual(2);
       expect(ideas.map((idea) => idea.name)).toEqual(['idea1', 'idea2']);
     });

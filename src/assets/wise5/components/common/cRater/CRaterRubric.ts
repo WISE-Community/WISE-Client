@@ -49,26 +49,26 @@ export class CRaterRubric {
   getAdditionalIdeasSummaryGroups(): any[] {
     return this.ideasSummaryGroups.additional;
   }
-}
 
-export function getUniqueIdeas(responses: any[], rubric: CRaterRubric): CRaterIdea[] {
-  const uniqueIdeas: CRaterIdea[] = [];
-  responses.forEach((response) =>
-    response.ideas
-      ?.filter(
-        (idea) =>
-          idea.detected &&
-          rubric.hasIdeaDescriptionText(idea.name) &&
-          !uniqueIdeas.some((uniqueIdea) => uniqueIdea.name === idea.name)
-      )
-      .forEach((idea) => {
-        const cRaterIdea = new CRaterIdea(idea.name, true);
-        const cRaterRubricIdea = rubric.getIdea(idea.name);
-        cRaterIdea.text = cRaterRubricIdea?.text ?? idea.name;
-        uniqueIdeas.push(cRaterIdea);
-      })
-  );
-  return uniqueIdeas;
+  getUniqueIdeas(responses: any[]): CRaterIdea[] {
+    const uniqueIdeas: CRaterIdea[] = [];
+    responses.forEach((response) =>
+      response.ideas
+        ?.filter(
+          (idea) =>
+            idea.detected &&
+            this.hasIdeaDescriptionText(idea.name) &&
+            !uniqueIdeas.some((uniqueIdea) => uniqueIdea.name === idea.name)
+        )
+        .forEach((idea) => {
+          const cRaterIdea = new CRaterIdea(idea.name, true);
+          const cRaterRubricIdea = this.getIdea(idea.name);
+          cRaterIdea.text = cRaterRubricIdea?.text ?? idea.name;
+          uniqueIdeas.push(cRaterIdea);
+        })
+    );
+    return uniqueIdeas;
+  }
 }
 
 export const DEFAULT_IDEAS_SUMMARY_GROUPS = {
