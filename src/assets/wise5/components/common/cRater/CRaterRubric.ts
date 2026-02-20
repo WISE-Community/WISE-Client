@@ -1,3 +1,4 @@
+import { arrayContainsAll } from '../../../common/array/array';
 import { CRaterIdea } from './CRaterIdea';
 
 export class CRaterRubric {
@@ -15,6 +16,22 @@ export class CRaterRubric {
 
   getIdea(ideaId: string): CRaterIdea {
     return this.ideas.find((idea) => idea.name === ideaId);
+  }
+
+  getIdeaTags(ideaId: string): string[] {
+    return this.getIdea(ideaId)?.tags ?? [];
+  }
+
+  getIdeaDescriptionText(ideaId: string): string {
+    return this.getIdea(ideaId)?.text ?? 'idea ' + ideaId;
+  }
+
+  getIdeaColor(ideaId: string): string {
+    const ideaTags = this.getIdeaTags(ideaId);
+    return (
+      this.ideaColors?.find((ideaColor) => arrayContainsAll(ideaTags, ideaColor.tags))
+        ?.colorValue ?? ''
+    );
   }
 
   hasRubricData(): boolean {
