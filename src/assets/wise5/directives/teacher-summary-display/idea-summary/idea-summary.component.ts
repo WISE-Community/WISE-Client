@@ -5,10 +5,11 @@ import { firstValueFrom } from 'rxjs';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-interface IdeaCount {
+interface IdeaCategory {
   id: string;
   text: string;
   count: number;
+  color: string;
 }
 
 interface Response {
@@ -25,12 +26,14 @@ interface Response {
 })
 export class IdeaSummaryComponent extends TeacherSummaryDisplayComponent {
   @Input() componentId: string;
-  @Input() idea: IdeaCount;
+  @Input() idea: IdeaCategory;
   @Input() nodeId: string;
 
+  protected expanded: boolean = false;
   protected responses: Response[] = [];
 
   protected async toggleDetails(): Promise<void> {
+    this.expanded = !this.expanded;
     if (this.responses.length === 0) {
       const component = this.projectService.getComponent(this.nodeId, this.componentId);
       const states = await firstValueFrom(this.getLatestWork());

@@ -56,11 +56,16 @@ describe('IdeaSummaryComponent', () => {
     component.idea = {
       id: 'idea1',
       text: 'Test Idea',
-      count: 5
+      count: 5,
+      color: 'red'
     };
   });
 
   describe('initial state', () => {
+    it('should initialize with expanded as false', () => {
+      expect(component['expanded']).toBe(false);
+    });
+
     it('should initialize with empty responses array', () => {
       expect(component['responses']).toEqual([]);
     });
@@ -68,6 +73,7 @@ describe('IdeaSummaryComponent', () => {
 
   describe('when expanding for the first time', () => {
     beforeEach(() => {
+      component['expanded'] = false;
       component['responses'] = [];
     });
 
