@@ -22,6 +22,10 @@ export class CRaterRubric {
     return this.getIdea(ideaId)?.tags ?? [];
   }
 
+  hasIdeaDescriptionText(ideaId: string): boolean {
+    return this.getIdea(ideaId)?.text != null;
+  }
+
   getIdeaDescriptionText(ideaId: string): string {
     return this.getIdea(ideaId)?.text ?? 'idea ' + ideaId;
   }

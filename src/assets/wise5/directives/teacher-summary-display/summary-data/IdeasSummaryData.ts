@@ -68,6 +68,7 @@ export abstract class IdeasSummaryData {
     if (!group.showUndetectedIdeas) {
       ideas = ideas.filter((idea) => idea.count > 0);
     }
+    ideas = ideas.filter((idea) => this.rubric.hasIdeaDescriptionText(idea.id));
     sortIdeasByCount(ideas, group.sort.order ?? 'desc');
     return ideas.slice(0, group.maxIdeas ?? ideas.length);
   }
