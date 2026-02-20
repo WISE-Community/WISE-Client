@@ -98,7 +98,7 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       rubric: {
         ideas: [],
         ideaColors: [],
-        ideaSummaryGroups: DEFAULT_IDEAS_SUMMARY_GROUPS
+        ideasSummaryGroups: DEFAULT_IDEAS_SUMMARY_GROUPS
       }
     };
   }
