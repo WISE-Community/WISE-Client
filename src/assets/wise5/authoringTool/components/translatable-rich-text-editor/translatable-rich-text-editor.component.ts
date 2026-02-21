@@ -9,6 +9,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
@@ -18,11 +19,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     MatButtonModule,
     MatDialogModule,
+    MatIconModule,
     MatTabsModule,
     WiseTinymceEditorModule
   ],
   templateUrl: './translatable-rich-text-editor.component.html',
-  styleUrl: './translatable-rich-text-editor.component.scss'
+  styleUrl: '../abstract-translatable-field/abstract-translatable-field.component.scss'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
   protected html: string = '';
@@ -71,10 +73,5 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
 
   protected saveTranslationText(text: string): void {
     super.saveTranslationText(insertWiseLinks(this.configService.removeAbsoluteAssetPaths(text)));
-  }
-
-  protected getDefaultLanguageTextContent(): string {
-    return this.content['prompt'];
-    //TODO: ...
   }
 }

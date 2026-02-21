@@ -53,11 +53,30 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
     defaultLanguage: string,
     currentLanguage: string,
     defaultLanguageText: string
-  ): Observable<Object> {
-    return this.http.post(
-      `/api/author/project/translate/translationSuggestions`,
-      { srcLang: defaultLanguage, targetLang: currentLanguage, srcText: defaultLanguageText },
-      { responseType: 'text' }
+  ): Observable<string> {
+    return this.http
+      .post(
+        `/api/author/project/translate/translationSuggestions`,
+        {
+          srcLang: defaultLanguage,
+          targetLang: currentLanguage,
+          srcText: this.addDoNotTranslateTags(defaultLanguageText)
+        },
+        { responseType: 'text' }
+      )
+      .pipe(map(this.removeDoNotTranslateTags));
+  }
+
+  private addDoNotTranslateTags(textToTranslate: string): string {
+    return textToTranslate.replaceAll(
+      /<.*?>/g,
+      (match) => '<span translate="no">' + match + '</span>'
+    );
+  }
+
+  private removeDoNotTranslateTags(translatedText: string): string {
+    return translatedText.replaceAll(/<span translate="no"><.*?><\/span>/g, (match) =>
+      match.slice(21, -7)
     );
   }
 }
