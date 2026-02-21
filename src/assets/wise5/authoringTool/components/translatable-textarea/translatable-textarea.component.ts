@@ -12,8 +12,4 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './translatable-textarea.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class TranslatableTextareaComponent extends AbstractTranslatableFieldComponent {
-  protected getDefaultLanguageTextContent(): string {
-    return this.content['prompt'];
-  }
-}
+export class TranslatableTextareaComponent extends AbstractTranslatableFieldComponent {}

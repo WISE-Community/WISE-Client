@@ -1,9 +1,15 @@
 <mat-dialog-content>
-  <p><b>English text</b></p>
+  <p>
+    <b>{{ this.data.defaultLanguage }} text</b>
+  </p>
   <p class="text-content">{{ this.data.defaultLanguageContent }}</p>
-  <p><b>Spanish text (current translation)</b></p>
+  <p>
+    <b>{{ this.data.currentLanguage }} text (current translation)</b>
+  </p>
   <p class="text-content">{{ this.data.currentLanguageContent }}</p>
-  <p><b>Spanish text (AI suggested translation)</b></p>
+  <p>
+    <b>{{ this.data.currentLanguage }} text (AI suggested translation)</b>
+  </p>
   <p class="text-content">{{ this.translation }}</p>
   <p class="replace-translation">
     Do you want to replace the current translation with the AI suggested translation?

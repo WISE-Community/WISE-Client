@@ -9,13 +9,11 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Language } from '../../../../../app/domain/language';
-import { TranslateClient, TranslateTextCommand } from '@aws-sdk/client-translate';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 interface TranslationSuggestionsDialogData {
-  defaultLanguage: Language;
-  currentLanguage: Language;
+  defaultLanguage: string;
+  currentLanguage: string;
   defaultLanguageContent: string;
   currentLanguageContent?: string;
 }
@@ -45,8 +43,8 @@ export class TranslationSuggestionsDialogComponent {
   private generateTranslationSuggestion(): void {
     this.projectTranslationService
       .getTranslationSuggestion(
-        this.data.defaultLanguage.language,
-        this.data.currentLanguage.language,
+        this.data.defaultLanguage,
+        this.data.currentLanguage,
         this.data.defaultLanguageContent
       )
       .subscribe((suggestedTranslation: string) => {

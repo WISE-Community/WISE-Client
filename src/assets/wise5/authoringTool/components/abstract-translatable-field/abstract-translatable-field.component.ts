@@ -87,7 +87,7 @@ export abstract class AbstractTranslatableFieldComponent {
         .getTranslationSuggestion(
           this.defaultLanguage.language,
           this.currentLanguage().language,
-          this.getDefaultLanguageTextContent()
+          this.content[this.key]
         )
         .subscribe((suggestedTranslation: string) => {
           this.translationText = suggestedTranslation;
@@ -95,8 +95,6 @@ export abstract class AbstractTranslatableFieldComponent {
         });
     }
   }
-
-  protected abstract getDefaultLanguageTextContent(): string;
 
   private openDialog(): void {
     const dialogRef = this.createDialogRef();
@@ -116,9 +114,9 @@ export abstract class AbstractTranslatableFieldComponent {
     return this.dialog.open(TranslationSuggestionsDialogComponent, {
       width: '40%',
       data: {
-        defaultLanguage: this.defaultLanguage,
-        currentLanguage: this.currentLanguage(),
-        defaultLanguageContent: this.getDefaultLanguageTextContent(),
+        defaultLanguage: this.defaultLanguage.language,
+        currentLanguage: this.currentLanguage().language,
+        defaultLanguageContent: this.content[this.key],
         currentLanguageContent: this.translationText
       }
     });

@@ -12,8 +12,4 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './translatable-input.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class TranslatableInputComponent extends AbstractTranslatableFieldComponent {
-  protected getDefaultLanguageTextContent(): string {
-    return this.content['title'];
-  }
-}
+export class TranslatableInputComponent extends AbstractTranslatableFieldComponent {}

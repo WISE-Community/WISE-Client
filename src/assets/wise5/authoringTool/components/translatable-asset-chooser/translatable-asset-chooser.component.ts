@@ -45,9 +45,4 @@ export class TranslatableAssetChooserComponent extends AbstractTranslatableField
         }
       });
   }
-
-  protected getDefaultLanguageTextContent(): string {
-    return this.content['prompt'];
-    //TODO: ...
-  }
 }
