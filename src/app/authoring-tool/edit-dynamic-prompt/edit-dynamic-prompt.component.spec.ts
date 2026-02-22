@@ -11,8 +11,7 @@ let fixture: ComponentFixture<EditDynamicPromptComponent>;
 describe('EditDynamicPromptComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditDynamicPromptComponent],
-    imports: [MatCheckboxModule, StudentTeacherCommonServicesModule],
+    imports: [MatCheckboxModule, StudentTeacherCommonServicesModule, EditDynamicPromptComponent],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 }).compileComponents();
   });

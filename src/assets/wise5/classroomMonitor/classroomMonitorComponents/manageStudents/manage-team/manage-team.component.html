@@ -2,7 +2,7 @@
   class="team notice-bg-bg"
   [class]="{ 'disabled-text': team.users.length === 0, warn: isUnassigned }"
 >
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+  <div class="flex items-center gap-1">
     @if (team.workGroupId) {
       <mat-icon class="mat-24 secondary-text" [ngStyle]="{ color: avatarColor }"
         >account_circle</mat-icon
@@ -13,7 +13,7 @@
     } @else {
       <h4 class="mat-subtitle-2" i18n>Team {{ team.workgroupId }}</h4>
     }
-    <span fxFlex></span>
+    <span class="flex-1"></span>
     <span class="mat-small">
       @if (this.team.users.length === 0) {
         <span i18n>No students</span>
@@ -26,13 +26,15 @@
     <ul
       id="team-{{ team.workgroupId }}"
       class="users"
-      [class]="{ unassigned: isUnassigned }"
+      [class]="{
+        unassigned: isUnassigned,
+        'columns-2': isUnassigned && mdScreen,
+        'columns-3': isUnassigned && lgScreen
+      }"
       cdkDropList
       [cdkDropListData]="team.users"
       [cdkDropListEnterPredicate]="canDrop"
       (cdkDropListDropped)="drop($event)"
-      [ngStyle.gt-sm]="{ columns: isUnassigned ? 2 : '' }"
-      [ngStyle.gt-md]="{ columns: isUnassigned ? 3 : '' }"
     >
       @for (user of team.users; track $index) {
         <li

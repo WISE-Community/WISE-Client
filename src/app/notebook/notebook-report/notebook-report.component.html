@@ -1,31 +1,25 @@
 @if (mode !== 'classroomMonitor') {
   <mat-card
-    class="notebook-report"
-    fxLayout="column"
+    class="notebook-report flex flex-col"
     [ngClass]="{ collapsed: collapsed, full: full && !collapsed }"
   >
     <mat-card-header
-      class="dark-theme mat-app-background"
+      class="dark-theme mat-app-background !flex justify-start items-center"
       (click)="toggleCollapse()"
-      fxLayoutAlign="start center"
     >
-      <mat-card-title
-        class="mat-body-2 overflow--ellipsis"
-        fxLayoutAlign="start center"
-        fxLayoutGap="4px"
-      >
+      <mat-card-title class="mat-body-2 overflow--ellipsis !flex justify-start items-center gap-1">
         <mat-icon> assignment </mat-icon>
         <span>
           {{ reportItem.content.title }}
         </span>
       </mat-card-title>
-      <span fxFlex></span>
+      <span class="flex-grow"></span>
       <button
         mat-icon-button
+        class="hidden sm:!inline-block"
         i18n-title
         title="Toggle Full Screen"
         (click)="$event.stopPropagation(); fullscreen()"
-        fxHide.lt-sm
       >
         @if (!full || collapsed) {
           <mat-icon> fullscreen </mat-icon>
@@ -54,7 +48,7 @@
         </button>
       }
     </mat-card-header>
-    <mat-card-content [class.hidden]="collapsed" fxFlex>
+    <mat-card-content [class.hidden]="collapsed" class="flex-grow">
       <wise-tinymce-editor
         [(model)]="reportItemContent"
         (modelChange)="changed(reportItemContent)"
@@ -63,7 +57,7 @@
       />
     </mat-card-content>
     <mat-card-actions [class.hidden]="collapsed">
-      <div class="actions" fxLayoutGap="8px" fxLayoutAlign="start center">
+      <div class="actions flex justify-start items-center gap-2">
         <button
           mat-flat-button
           color="primary"
@@ -77,7 +71,7 @@
           <save-time-message [saveTime]="saveTime" />
         }
         <div id="{{ reportId }}-toolbar"></div>
-        <span fxFlex></span>
+        <span class="flex-grow"></span>
         @if (reportItem.content.prompt) {
           <mat-icon
             class="info"

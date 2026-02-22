@@ -5,8 +5,10 @@ import { MatchSummaryDisplayComponent } from './match-summary-display.component'
 import { MockProviders } from 'ng-mocks';
 import { of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
-import { TeacherDataService } from '../../../services/teacherDataService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { CRaterService } from '../../../services/cRaterService';
+import { MatchContent } from '../../../components/match/MatchContent';
+import { DataService } from '../../../../../app/services/data.service';
+import { ProjectService } from '../../../services/projectService';
 
 describe('MatchSummaryDisplayComponent', () => {
   let component: MatchSummaryDisplayComponent;
@@ -19,21 +21,22 @@ describe('MatchSummaryDisplayComponent', () => {
         MockProviders(
           AnnotationService,
           ConfigService,
-          TeacherDataService,
-          TeacherProjectService,
+          CRaterService,
+          DataService,
+          ProjectService,
           SummaryService
         )
       ]
     }).compileComponents();
 
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponentsFromStep').and.returnValue([
-      { id: 'cId', type: 'Match', choiceReuseEnabled: false }
-    ] as any[]);
-
+    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue({
+      id: 'cId',
+      type: 'Match',
+      choiceReuseEnabled: false
+    } as MatchContent);
     spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
       of(getComponentStates())
     );
-
     fixture = TestBed.createComponent(MatchSummaryDisplayComponent);
     component = fixture.componentInstance;
     component.nodeId = 'nId';

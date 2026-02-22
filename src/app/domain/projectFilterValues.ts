@@ -1,10 +1,12 @@
 import { Subject } from 'rxjs';
 import { LibraryProject } from '../modules/library/libraryProject';
+import { Location } from '../modules/library/Location';
 
 export class ProjectFilterValues {
   disciplineValue: string[] = [];
   featureValue: string[] = [];
   gradeLevelValue: number[] = [];
+  locationValue: string[] = [];
   publicUnitType?: ('wiseTested' | 'communityBuilt')[] = [];
   publicUnitTypeValue?: ('wiseTested' | 'communityBuilt')[] = [];
   searchValue: string = '';
@@ -21,7 +23,8 @@ export class ProjectFilterValues {
       this.matchesDiscipline(project) &&
       this.matchesUnitType(project) &&
       this.matchesFeature(project) &&
-      this.matchesGradeLevel(project)
+      this.matchesGradeLevel(project) &&
+      this.matchesLocation(project)
     );
   }
 
@@ -54,7 +57,8 @@ export class ProjectFilterValues {
         this.disciplineValue.length +
         this.unitTypeValue.length +
         this.gradeLevelValue.length +
-        this.featureValue.length >
+        this.featureValue.length +
+        this.locationValue.length >
       0
     );
   }
@@ -67,6 +71,7 @@ export class ProjectFilterValues {
     this.searchValue = '';
     this.standardValue = [];
     this.unitTypeValue = [];
+    this.locationValue = [];
   }
 
   private matchesUnitType(project: LibraryProject): boolean {
@@ -92,6 +97,16 @@ export class ProjectFilterValues {
       [...commonCore, ...ngss, ...learningForJustice].some((val) =>
         this.standardValue.includes(val.id)
       )
+    );
+  }
+
+  private matchesLocation(project: LibraryProject): boolean {
+    return (
+      this.locationValue.length === 0 ||
+      project.metadata.locations
+        ?.map((location) => Object.assign(new Location(), location))
+        .flatMap((location) => location.getLocationOptions())
+        .some((locationOption) => this.locationValue.includes(locationOption.name))
     );
   }
 

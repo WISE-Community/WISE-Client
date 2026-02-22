@@ -34,14 +34,14 @@ export class MilestoneService {
     return [];
   }
 
-  getMilestoneReportByNodeId(nodeId: string): any {
-    for (const milestoneReport of this.getProjectMilestoneReports()) {
-      const referencedComponent = this.getReferencedComponent(milestoneReport);
-      if (referencedComponent.nodeId === nodeId) {
-        return this.getProjectMilestoneStatus(milestoneReport.id);
-      }
-    }
-    return null;
+  getMilestoneReport(nodeId: string, componentId: string): any {
+    const milestoneReport = this.getProjectMilestoneReports().find((report) => {
+      const referencedComponent = this.getReferencedComponent(report);
+      return (
+        referencedComponent.nodeId === nodeId && referencedComponent.componentId === componentId
+      );
+    });
+    return milestoneReport ? this.getProjectMilestoneStatus(milestoneReport.id) : null;
   }
 
   private getProjectMilestoneReports(): Milestone[] {

@@ -77,7 +77,7 @@ async function changePassword() {
     }));
 
     it('should navigate to change password page', () => {
-      const router = TestBed.get(Router);
+      const router = TestBed.inject(Router);
       const navigateSpy = spyOn(router, 'navigate');
       const username = 'SpongebobS0101';
       const questionKey = 'QUESTION_ONE';
@@ -99,7 +99,7 @@ async function changePassword() {
 
     it('should show error when Recaptcha is invalid', waitForAsync(async () => {
       component.isRecaptchaEnabled = true;
-      studentService = TestBed.get(StudentService);
+      studentService = TestBed.inject(StudentService);
       const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
       spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
       spyOn(studentService, 'checkSecurityAnswer').and.returnValue(observableResponse);
@@ -111,7 +111,7 @@ async function changePassword() {
 }
 
 async function submitAndReceiveResponse(studentServiceFunctionName, status, messageCode) {
-  studentService = TestBed.get(StudentService);
+  studentService = TestBed.inject(StudentService);
   const observableResponse = createObservableResponse(status, messageCode);
   spyOn(studentService, studentServiceFunctionName).and.returnValue(observableResponse);
   component.submit();

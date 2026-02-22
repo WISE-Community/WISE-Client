@@ -23,7 +23,6 @@ import { CRaterService } from '../../../../services/cRaterService';
 import { CRaterRubric, getUniqueIdeas } from '../../../common/cRater/CRaterRubric';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { filter } from 'rxjs';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { generateRandomKey } from '../../../../common/string/string';
 import { hasConnectedComponent } from '../../../../common/ComponentContent';
 import { Item } from '../item';
@@ -48,7 +47,6 @@ import { CRaterIdea } from '../../../common/cRater/CRaterIdea';
     ComponentHeaderComponent,
     ComponentSaveSubmitButtonsComponent,
     DragDropModule,
-    FlexLayoutModule,
     MatchChoiceItemComponent,
     MatchFeedbackSectionComponent
   ],

@@ -1,22 +1,23 @@
-@if (computerAvatarSelectorVisible) {
-  <computer-avatar-selector
-    [computerAvatarSettings]="componentContent.computerAvatarSettings"
-    (chooseAvatarEvent)="selectComputerAvatar($event)"
-  />
-} @else {
-  <mat-card appearance="outlined" class="mat-elevation-z2">
-    <component-header [component]="component" />
-    <dialog-responses
-      [responses]="responses"
-      [isWaitingForComputerResponse]="isWaitingForComputerResponse"
-      [computerAvatar]="computerAvatar"
+<div class="mb-4">
+  @if (computerAvatarSelectorVisible) {
+    <computer-avatar-selector
+      [computerAvatarSettings]="componentContent.computerAvatarSettings"
+      (chooseAvatarEvent)="selectComputerAvatar($event)"
     />
-    @if (studentCanRespond) {
-      <chat-input
-        (focusEvent)="startPinging()"
-        [submitDisabled]="isWaitingForComputerResponse"
-        (submitEvent)="submitStudentResponse($event)"
+  } @else {
+    <mat-card appearance="outlined" class="mat-elevation-z2">
+      <component-header [component]="component" />
+      <dialog-responses
+        [responses]="responses"
+        [isWaitingForComputerResponse]="isWaitingForComputerResponse"
+        [computerAvatar]="computerAvatar"
       />
-    }
-  </mat-card>
-}
+      @if (studentCanRespond) {
+        <chat-input
+          [submitDisabled]="isWaitingForComputerResponse"
+          (submitEvent)="submitStudentResponse($event)"
+        />
+      }
+    </mat-card>
+  }
+</div>

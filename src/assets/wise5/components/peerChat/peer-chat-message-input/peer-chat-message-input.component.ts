@@ -3,11 +3,15 @@ import { StompService } from '../../../services/stompService';
 import { ConfigService } from '../../../services/configService';
 import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
+import { MatFormField, MatInputModule } from '@angular/material/input';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'peer-chat-message-input',
-    templateUrl: './peer-chat-message-input.component.html',
-    standalone: false
+  imports: [CdkTextareaAutosize, FormsModule, MatButtonModule, MatFormField, MatInputModule],
+  selector: 'peer-chat-message-input',
+  templateUrl: './peer-chat-message-input.component.html'
 })
 export class PeerChatMessageInputComponent implements OnInit {
   @Input() component: PeerChatComponent;
@@ -20,7 +24,10 @@ export class PeerChatMessageInputComponent implements OnInit {
   @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
   private typingDurationBuffer: number = 5000;
 
-  constructor(private configService: ConfigService, private stompService: StompService) {}
+  constructor(
+    private configService: ConfigService,
+    private stompService: StompService
+  ) {}
 
   ngOnInit(): void {
     this.intervalId = setInterval(() => {

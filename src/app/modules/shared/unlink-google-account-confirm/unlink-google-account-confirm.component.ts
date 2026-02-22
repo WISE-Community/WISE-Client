@@ -1,11 +1,28 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { UnlinkGoogleAccountPasswordComponent } from '../unlink-google-account-password/unlink-google-account-password.component';
+import { MatIcon } from '@angular/material/icon';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    styleUrls: ['./unlink-google-account-confirm.component.scss'],
-    templateUrl: './unlink-google-account-confirm.component.html',
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    MatIcon,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose
+  ],
+  styleUrl: './unlink-google-account-confirm.component.scss',
+  templateUrl: './unlink-google-account-confirm.component.html'
 })
 export class UnlinkGoogleAccountConfirmComponent {
   constructor(public dialog: MatDialog) {}

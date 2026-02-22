@@ -19,7 +19,7 @@ describe('TeacherService', () => {
   it('should update run end time when it is null', inject(
     [TeacherService],
     (service: TeacherService) => {
-      const http = TestBed.get(HttpTestingController);
+      const http = TestBed.inject(HttpTestingController);
       service.updateRunEndTime(1, null).subscribe(() => {});
       const req = http.expectOne('/api/teacher/run/update/endtime');
       expect(req.request.method).toEqual('POST');
@@ -31,7 +31,7 @@ describe('TeacherService', () => {
   it('should update run end time when it is not null', inject(
     [TeacherService],
     (service: TeacherService) => {
-      const http = TestBed.get(HttpTestingController);
+      const http = TestBed.inject(HttpTestingController);
       const endTime = new Date().getTime();
       service.updateRunEndTime(1, endTime).subscribe(() => {});
       const req = http.expectOne('/api/teacher/run/update/endtime');
@@ -44,7 +44,7 @@ describe('TeacherService', () => {
   it('should update is locked after end date', inject(
     [TeacherService],
     (service: TeacherService) => {
-      const http = TestBed.get(HttpTestingController);
+      const http = TestBed.inject(HttpTestingController);
       service.updateIsLockedAfterEndDate(1, true).subscribe(() => {});
       const req = http.expectOne('/api/teacher/run/update/islockedafterenddate');
       expect(req.request.method).toEqual('POST');

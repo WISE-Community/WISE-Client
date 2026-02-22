@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Directive, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfigService } from '../services/config.service';
 
-@Component({
-    template: '',
-    standalone: false
-})
+@Directive()
 export abstract class RegisterUserCompleteComponent implements OnInit {
   protected googleLogInURL = `${this.configService.getContextPath()}/api/google-login`;
   protected microsoftLogInURL = `${this.configService.getContextPath()}/api/microsoft-login?redirectUrl=/`;

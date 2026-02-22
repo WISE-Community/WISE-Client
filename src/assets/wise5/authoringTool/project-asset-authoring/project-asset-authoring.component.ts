@@ -6,12 +6,30 @@ import { Subscription } from 'rxjs';
 import { isImage, isVideo } from '../../common/file/file';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AssetChooserDialogData } from './asset-chooser-dialog-data';
+import { CommonModule } from '@angular/common';
+import { FileSizePipe } from '../file-size/filesize.pipe';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DragAndDropDirective } from '../../common/drag-and-drop/drag-and-drop.directive';
 
 @Component({
-    selector: 'project-asset-authoring',
-    templateUrl: './project-asset-authoring.component.html',
-    styleUrls: ['./project-asset-authoring.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    DragAndDropDirective,
+    FileSizePipe,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTooltipModule
+  ],
+  styleUrl: './project-asset-authoring.component.scss',
+  templateUrl: './project-asset-authoring.component.html'
 })
 export class ProjectAssetAuthoringComponent {
   allowedFileTypes: string[] = ['any'];

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
   selector: 'chat-input',
   templateUrl: './chat-input.component.html',
   styleUrls: ['./chat-input.component.scss'],
-  imports: [FormsModule, FlexLayoutModule, MatButtonModule, MatFormFieldModule, MatInputModule]
+  imports: [FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule]
 })
 export class ChatInputComponent {
   @Output() focusEvent = new EventEmitter<string>();

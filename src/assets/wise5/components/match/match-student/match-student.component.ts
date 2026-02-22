@@ -13,11 +13,7 @@ import { MatchStudentChoiceReuseComponent } from './match-student-choice-reuse/m
 import { MatchStudentDefaultComponent } from './match-student-default/match-student-default.component';
 import { MatchContent } from '../MatchContent';
 
-@Component({
-    selector: 'match-student',
-    template: '<div #component></div>',
-    standalone: false
-})
+@Component({ template: '<div #component></div>' })
 export class MatchStudent {
   @Input() component: any;
   componentRef: any;

@@ -1,8 +1,5 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserModule } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
@@ -13,6 +10,10 @@ import { ProjectService } from '../../../services/projectService';
 import { DiscussionService } from '../discussionService';
 import { DiscussionStudent } from './discussion-student.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockComponents } from 'ng-mocks';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { ClassResponse } from '../class-response/class-response.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 let component: DiscussionStudent;
 const componentId = 'component1';
@@ -21,28 +22,25 @@ let componentState2: any;
 let fixture: ComponentFixture<DiscussionStudent>;
 const nodeId = 'node1';
 let saveNotificationToServerSpy;
-
 describe('DiscussionStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [DiscussionStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserModule,
-        MatDialogModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [
+        DiscussionStudent,
+        StudentTeacherCommonServicesModule,
+        MockComponents(ClassResponse, ComponentAnnotationsComponent, ComponentHeaderComponent)
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     fixture = TestBed.createComponent(DiscussionStudent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
     spyOn(TestBed.inject(ConfigService), 'getUserIdsStringByWorkgroupId').and.returnValue('1');
     saveNotificationToServerSpy = spyOn(
       TestBed.inject(NotificationService),
       'saveNotificationToServer'
-    ).and.callFake(
-      (notification: any): Promise<any> => {
-        return Promise.resolve({});
-      }
-    );
+    ).and.callFake((notification: any): Promise<any> => {
+      return Promise.resolve({});
+    });
     component = fixture.componentInstance;
     const componentContent = {
       id: componentId,
@@ -155,18 +153,15 @@ function clearComponentValues() {
 
 function createComponentState() {
   describe('createComponentState', () => {
-    it(
-      'should create component state',
-      waitForAsync(() => {
-        const response = 'Hello';
-        component.studentResponse = response;
-        component.createComponentState('save').then((componentState: any) => {
-          expect(componentState.componentId).toEqual(componentId);
-          expect(componentState.nodeId).toEqual(nodeId);
-          expect(componentState.studentData.response).toEqual(response);
-        });
-      })
-    );
+    it('should create component state', waitForAsync(() => {
+      const response = 'Hello';
+      component.studentResponse = response;
+      component.createComponentState('save').then((componentState: any) => {
+        expect(componentState.componentId).toEqual(componentId);
+        expect(componentState.nodeId).toEqual(nodeId);
+        expect(componentState.studentData.response).toEqual(response);
+      });
+    }));
   });
 }
 
@@ -253,22 +248,19 @@ function disableComponentIfNecessary() {
 
 function getClassmateResponses() {
   describe('getClassmateResponses', () => {
-    it(
-      'should get classmate responses',
-      waitForAsync(() => {
-        spyOn(TestBed.inject(DiscussionService), 'getClassmateResponses').and.callFake(() => {
-          return of({
-            studentWork: [componentState1, componentState2],
-            annotations: []
-          });
+    it('should get classmate responses', waitForAsync(() => {
+      spyOn(TestBed.inject(DiscussionService), 'getClassmateResponses').and.callFake(() => {
+        return of({
+          studentWork: [componentState1, componentState2],
+          annotations: []
         });
-        const setClassResponsesSpy = spyOn(component, 'setClassResponses').and.callThrough();
-        component.getClassmateResponses();
-        fixture.whenStable().then(() => {
-          expect(setClassResponsesSpy).toHaveBeenCalledWith([componentState1, componentState2], []);
-        });
-      })
-    );
+      });
+      const setClassResponsesSpy = spyOn(component, 'setClassResponses').and.callThrough();
+      component.getClassmateResponses();
+      fixture.whenStable().then(() => {
+        expect(setClassResponsesSpy).toHaveBeenCalledWith([componentState1, componentState2], []);
+      });
+    }));
   });
 }
 

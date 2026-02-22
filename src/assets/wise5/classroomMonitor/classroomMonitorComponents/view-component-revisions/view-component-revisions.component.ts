@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../..//services/configService';
 import { TeacherDataService } from '../../..//services/teacherDataService';
@@ -13,19 +12,18 @@ import { EditComponentAnnotationsComponent } from '../edit-component-annotations
 import { Observable } from 'rxjs';
 
 @Component({
-    imports: [
-        CommonModule,
-        MatDialogModule,
-        MatListModule,
-        MatButtonModule,
-        FlexLayoutModule,
-        ComponentGradingComponent,
-        ComponentStateInfoComponent,
-        EditComponentAnnotationsComponent
-    ],
-    selector: 'view-component-revisions',
-    styleUrl: 'view-component-revisions.component.scss',
-    templateUrl: 'view-component-revisions.component.html'
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatListModule,
+    MatButtonModule,
+    ComponentGradingComponent,
+    ComponentStateInfoComponent,
+    EditComponentAnnotationsComponent
+  ],
+  selector: 'view-component-revisions',
+  styleUrl: 'view-component-revisions.component.scss',
+  templateUrl: 'view-component-revisions.component.html'
 })
 export class ViewComponentRevisionsComponent {
   protected componentId: string;

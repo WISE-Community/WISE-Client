@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditComponentMaxSubmitComponent } from './edit-component-max-submit.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
 
 describe('EditComponentMaxSubmitComponent', () => {
   let component: EditComponentMaxSubmitComponent;
@@ -12,11 +9,9 @@ describe('EditComponentMaxSubmitComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditComponentMaxSubmitComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [StudentTeacherCommonServicesModule],
-    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [EditComponentMaxSubmitComponent],
+      providers: [MockProvider(TeacherProjectService)]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,8 +1,18 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButton } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef
+} from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { CreateNewPeerGroupingDialogComponent } from '../create-new-peer-grouping-dialog/create-new-peer-grouping-dialog.component';
+import { SelectPeerGroupingOptionComponent } from '../select-peer-grouping-option/select-peer-grouping-option.component';
 
 class SelectPeerGroupingDialogData {
   peerGrouping: PeerGrouping;
@@ -10,10 +20,16 @@ class SelectPeerGroupingDialogData {
 }
 
 @Component({
-    selector: 'select-peer-grouping-dialog',
-    templateUrl: './select-peer-grouping-dialog.component.html',
-    styleUrls: ['./select-peer-grouping-dialog.component.scss'],
-    standalone: false
+  templateUrl: './select-peer-grouping-dialog.component.html',
+  styles: ['.peer-grouping { margin-bottom: 8px; }'],
+  imports: [
+    MatDialogModule,
+    CdkScrollable,
+    MatCardModule,
+    SelectPeerGroupingOptionComponent,
+    MatButton,
+    MatIcon
+  ]
 })
 export class SelectPeerGroupingDialogComponent implements OnInit {
   peerGroupings: PeerGrouping[] = [];
@@ -40,7 +56,7 @@ export class SelectPeerGroupingDialogComponent implements OnInit {
 
   showNewPeerGroupingAuthoring(): void {
     this.dialog.open(CreateNewPeerGroupingDialogComponent, {
-      panelClass: 'dialog-md'
+      panelClass: 'dialog-sm'
     });
   }
 

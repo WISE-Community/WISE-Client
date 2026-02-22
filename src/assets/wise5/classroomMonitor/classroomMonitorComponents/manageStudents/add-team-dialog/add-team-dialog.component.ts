@@ -1,15 +1,37 @@
 import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigService } from '../../../../services/configService';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { ShowStudentInfoComponent } from '../show-student-info/show-student-info.component';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'add-team-dialog',
-    templateUrl: './add-team-dialog.component.html',
-    styleUrls: ['./add-team-dialog.component.scss'],
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    ShowStudentInfoComponent,
+    MatIconButton,
+    MatIcon,
+    MatButton,
+    MatDialogActions,
+    MatDialogClose,
+    MatProgressBar
+  ],
+  styleUrl: './add-team-dialog.component.scss',
+  templateUrl: './add-team-dialog.component.html'
 })
 export class AddTeamDialogComponent {
   allUsersInPeriod: any[] = [];

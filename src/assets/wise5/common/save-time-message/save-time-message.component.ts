@@ -1,12 +1,12 @@
-import { CommonModule, formatDate } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    imports: [CommonModule, MatTooltipModule],
-    selector: 'save-time-message',
-    styleUrl: 'save-time-message.component.scss',
-    templateUrl: 'save-time-message.component.html'
+  imports: [MatTooltipModule],
+  selector: 'save-time-message',
+  styles: ['.save-message { font-style: italic; font-size: 13px; }'],
+  templateUrl: 'save-time-message.component.html'
 })
 export class SaveTimeMessageComponent {
   @Input() isAutoSave: boolean;

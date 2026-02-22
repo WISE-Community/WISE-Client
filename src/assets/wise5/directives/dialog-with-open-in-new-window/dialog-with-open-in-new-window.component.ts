@@ -1,11 +1,24 @@
 import { Component } from '@angular/core';
 import { DialogComponent } from '../dialog/dialog.component';
+import {
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'dialog-with-open-in-new-window',
-    templateUrl: './dialog-with-open-in-new-window.component.html',
-    styleUrls: ['./dialog-with-open-in-new-window.component.scss'],
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose
+  ],
+  templateUrl: './dialog-with-open-in-new-window.component.html'
 })
 export class DialogWithOpenInNewWindowComponent extends DialogComponent {
   openInNewWindow(): void {

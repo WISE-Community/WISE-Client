@@ -1,18 +1,10 @@
-<div fxLayout="column" fxLayoutGap="16px">
+<div class="flex flex-col gap-4">
   <edit-component-prompt
     [componentContent]="componentContent"
     (promptChangedEvent)="promptChanged($event)"
-  ></edit-component-prompt>
-  <mat-form-field>
-    <mat-label i18n>Item ID</mat-label>
-    <input
-      matInput
-      [(ngModel)]="componentContent.itemId"
-      (ngModelChange)="inputChange.next($event)"
-      type="text"
-    />
-  </mat-form-field>
-  <edit-component-max-submit [componentContent]="componentContent"></edit-component-max-submit>
+  />
+  <c-rater-item-select [componentContent]="componentContent" />
+  <edit-component-max-submit [componentContent]="componentContent" />
   <mat-checkbox
     color="primary"
     [(ngModel)]="componentContent.isComputerAvatarEnabled"
@@ -20,14 +12,14 @@
     i18n
     >Enable Computer Avatar</mat-checkbox
   >
-  <edit-dialog-guidance-computer-avatar
-    *ngIf="componentContent.isComputerAvatarEnabled"
-    [computerAvatarSettings]="componentContent.computerAvatarSettings"
-  >
-  </edit-dialog-guidance-computer-avatar>
+  @if (componentContent.isComputerAvatarEnabled) {
+    <edit-dialog-guidance-computer-avatar
+      [computerAvatarSettings]="componentContent.computerAvatarSettings"
+    />
+  }
   <edit-feedback-rules
     [feedbackRules]="componentContent.feedbackRules"
     [version]="componentContent.version"
-  >
-  </edit-feedback-rules>
+  />
+  <edit-crater-info [cRaterRubric]="componentContent.cRaterRubric" />
 </div>

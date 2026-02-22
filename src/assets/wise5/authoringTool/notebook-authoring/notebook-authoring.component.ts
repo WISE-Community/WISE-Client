@@ -5,12 +5,32 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Subject, debounceTime } from 'rxjs';
 import { copy } from '../../common/object/object';
 import { newProjectTemplate } from '../new-project-template';
+import { TranslatableInputComponent } from '../components/translatable-input/translatable-input.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { TranslatableTextareaComponent } from '../components/translatable-textarea/translatable-textarea.component';
+import { TranslatableRichTextEditorComponent } from '../components/translatable-rich-text-editor/translatable-rich-text-editor.component';
+import { MatInputModule } from '@angular/material/input';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { WiseAuthoringTinymceEditorComponent } from '../../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
 
 @Component({
-    selector: 'notebook-authoring',
-    templateUrl: './notebook-authoring.component.html',
-    styleUrls: ['./notebook-authoring.component.scss'],
-    standalone: false
+  imports: [
+    CdkTextareaAutosize,
+    FormsModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    TranslatableInputComponent,
+    TranslatableRichTextEditorComponent,
+    TranslatableTextareaComponent,
+    WiseAuthoringTinymceEditorComponent
+  ],
+  styleUrl: './notebook-authoring.component.scss',
+  templateUrl: './notebook-authoring.component.html'
 })
 export class NotebookAuthoringComponent {
   protected notebookChanged: Subject<void> = new Subject<void>();

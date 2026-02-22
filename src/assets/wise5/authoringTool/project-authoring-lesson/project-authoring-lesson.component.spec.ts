@@ -1,29 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectAuthoringLessonComponent } from './project-authoring-lesson.component';
 import { TeacherDataService } from '../../services/teacherDataService';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { TeacherWebSocketService } from '../../services/teacherWebSocketService';
-import { ClassroomStatusService } from '../../services/classroomStatusService';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
-import { FormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { ProjectAuthoringStepComponent } from '../project-authoring-step/project-authoring-step.component';
 import { DeleteNodeService } from '../../services/deleteNodeService';
-import { CopyNodesService } from '../../services/copyNodesService';
-import { MatMenuModule } from '@angular/material/menu';
-import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { provideRouter } from '@angular/router';
-import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { MockComponents, MockProvider, MockProviders } from 'ng-mocks';
 import { TeacherProjectTranslationService } from '../../services/teacherProjectTranslationService';
-import { RemoveNodeIdFromTransitionsService } from '../../services/removeNodeIdFromTransitionsService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectService } from '../../services/projectService';
+import { AddStepButtonComponent } from '../add-step-button/add-step-button.component';
+import { signal } from '@angular/core';
+import { NodeTypeSelected } from '../domain/node-type-selected';
+import { CopyNodesService } from '../../services/copyNodesService';
+import { CopyTranslationsService } from '../../services/copyTranslationsService';
+import { ConstraintService } from '../../services/constraintService';
+import { Node } from '../../common/Node';
+import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -45,33 +37,22 @@ const node2 = { id: nodeId2, title: 'Step 2' };
 describe('ProjectAuthoringLessonComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ProjectAuthoringLessonComponent, ProjectAuthoringStepComponent],
-      imports: [
-        AddStepButtonComponent,
-        BrowserAnimationsModule,
-        FormsModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatExpansionModule,
-        MatIconModule,
-        MatMenuModule,
-        NodeIconAndTitleComponent,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [MockComponents(AddStepButtonComponent, NodeIconAndTitleComponent)],
       providers: [
-        ClassroomStatusService,
-        CopyNodesService,
-        CopyTranslationsService,
-        DeleteNodeService,
-        DeleteTranslationsService,
-        provideRouter([]),
-        RemoveNodeIdFromTransitionsService,
-        TeacherDataService,
-        TeacherProjectService,
-        TeacherProjectTranslationService,
-        TeacherWebSocketService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        MockProviders(
+          ConstraintService,
+          CopyNodesService,
+          CopyTranslationsService,
+          DeleteNodeService,
+          DeleteTranslationsService,
+          ProjectService,
+          TeacherDataService,
+          TeacherProjectTranslationService
+        ),
+        MockProvider(TeacherProjectService, {
+          getNodeTypeSelected: () => signal<NodeTypeSelected>(NodeTypeSelected.lesson)
+        }),
+        provideRouter([])
       ]
     });
     teacherProjectService = TestBed.inject(TeacherProjectService);
@@ -82,6 +63,8 @@ describe('ProjectAuthoringLessonComponent', () => {
     };
     teacherProjectService.project = { nodes: [group1, node1, node2], startNodeId: nodeId1 };
     spyOn(teacherProjectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(teacherProjectService, 'getNode').and.returnValue(new Node());
+    spyOn(TestBed.inject(ProjectService), 'getNode').and.returnValue(new Node());
     fixture = TestBed.createComponent(ProjectAuthoringLessonComponent);
     component = fixture.componentInstance;
     component.lesson = group1;

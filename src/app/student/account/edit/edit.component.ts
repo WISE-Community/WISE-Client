@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { StudentEditProfileComponent } from '../edit-profile/edit-profile.component';
+import { EditPasswordComponent } from '../../../modules/shared/edit-password/edit-password.component';
 
 @Component({
-    selector: 'app-edit',
-    templateUrl: './edit.component.html',
-    styleUrls: ['./edit.component.scss'],
-    standalone: false
+  imports: [MatIcon, MatTabGroup, MatTab, StudentEditProfileComponent, EditPasswordComponent],
+  templateUrl: './edit.component.html'
 })
-export class EditComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class EditComponent {}

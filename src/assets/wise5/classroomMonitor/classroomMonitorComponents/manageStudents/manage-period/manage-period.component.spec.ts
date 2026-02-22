@@ -1,14 +1,11 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule } from '@angular/material/card';
 import { of } from 'rxjs';
 import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroupService';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../../services/configService';
 import { ManagePeriodComponent } from './manage-period.component';
 import classmateUserInfos from '../../../../../../app/services/sampleData/sample_classmateUserInfos.json';
-import { ManageTeamsComponent } from '../manage-teams/manage-teams.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 let fixture: ComponentFixture<ManagePeriodComponent>;
 let component: ManagePeriodComponent;
@@ -25,15 +22,8 @@ workgroupsInPeriod.set(7, {
 describe('ManagePeriodComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ManagePeriodComponent, ManageTeamsComponent],
-      imports: [MatCardModule],
-      providers: [
-        ConfigService,
-        GetWorkgroupService,
-        WorkgroupService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
+      imports: [ManagePeriodComponent],
+      providers: [ConfigService, GetWorkgroupService, WorkgroupService, provideHttpClient()]
     });
     configService = TestBed.inject(ConfigService);
     workgroupService = TestBed.inject(WorkgroupService);

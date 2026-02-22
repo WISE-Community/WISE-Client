@@ -1,14 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { StatusIconComponent } from '../status-icon/status-icon.component';
 import { NodeIconComponent } from '../../../assets/wise5/vle/node-icon/node-icon.component';
 
 @Component({
-    imports: [CommonModule, FlexLayoutModule, NodeIconComponent, StatusIconComponent],
-    selector: 'step-info',
-    templateUrl: 'step-info.component.html'
+  imports: [NodeIconComponent, StatusIconComponent],
+  selector: 'step-info',
+  templateUrl: 'step-info.component.html'
 })
 export class StepInfoComponent {
   protected alertIconClass: string;

@@ -14,33 +14,33 @@ import { TeacherWebSocketService } from '../../../../services/teacherWebSocketSe
 import { NodeService } from '../../../../services/nodeService';
 import { generateRandomKey } from '../../../../common/string/string';
 import { Node } from '../../../../common/Node';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AlertStatusCornerComponent } from '../../../../../../app/classroom-monitor/alert-status-corner/alert-status-corner.component';
 import { NavItemProgressComponent } from '../../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
 import { StatusIconComponent } from '../../../../../../app/classroom-monitor/status-icon/status-icon.component';
 import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
 import { NavItemScoreComponent } from '../navItemScore/nav-item-score.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
+import { TeamsOnNodeComponent } from '../../../../../../app/classroom-monitor/teams-on-node/teams-on-node.component';
 
 @Component({
-    imports: [
-        AlertStatusCornerComponent,
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCardModule,
-        MatIconModule,
-        MatListModule,
-        MatTooltipModule,
-        NavItemProgressComponent,
-        NavItemScoreComponent,
-        NodeIconComponent,
-        StatusIconComponent
-    ],
-    selector: 'nav-item',
-    styleUrl: './nav-item.component.scss',
-    templateUrl: './nav-item.component.html'
+  imports: [
+    AlertStatusCornerComponent,
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatTooltipModule,
+    NavItemProgressComponent,
+    NavItemScoreComponent,
+    NodeIconComponent,
+    StatusIconComponent,
+    TeamsOnNodeComponent
+  ],
+  selector: 'nav-item',
+  styleUrl: './nav-item.component.scss',
+  templateUrl: './nav-item.component.html'
 })
 export class NavItemComponent implements OnInit {
   protected alertIconClass: string;

@@ -1,8 +1,8 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
-<div fxLayout="row" fxLayoutAlign="start center">
+/>
+<div class="flex flex-row items-center justify-start">
   <translatable-input
     [content]="componentContent"
     key="backgroundImage"
@@ -99,7 +99,7 @@
   </div>
 </div>
 <div>
-  <div layout="row" class="starter-labels-button-container">
+  <div class="flex flex-row starter-labels-button-container">
     <span i18n class="starter-labels-button-label">Starter Labels</span>
     <button
       mat-raised-button
@@ -114,124 +114,123 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div
-    *ngIf="componentContent.labels == null || componentContent.labels.length === 0"
-    class="info-block"
-    i18n
-  >
-    There are no starter labels. Click the "Add Label" button to add a starter label.
-  </div>
-  <div
-    *ngFor="let label of componentContent.labels; index as labelIndex"
-    class="starter-label-container"
-  >
-    <div fxLayout="row wrap" fxLayoutAlign="start start">
-      <translatable-input
-        [content]="label"
-        key="text"
-        label="Label Text"
-        i18n-label
-        (defaultLanguageTextChanged)="textInputChange.next($event)"
-        class="input label-input"
-      />
-      <mat-form-field class="input color-input">
-        <mat-label i18n>Color</mat-label>
-        <input
-          matInput
-          [(ngModel)]="label.color"
-          (ngModelChange)="textInputChange.next($event)"
-          ng-model-options="{ debounce: 1000 }"
-        />
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="openColorViewer()"
-        matTooltip="View Colors"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Color Palette"
-        i18n-aria-label
-      >
-        <mat-icon>palette</mat-icon>
-      </button>
+  @if (componentContent.labels == null || componentContent.labels.length === 0) {
+    <div class="info-block" i18n>
+      There are no starter labels. Click the "Add Label" button to add a starter label.
     </div>
-    <div>
-      <div class="checkbox">
-        <mat-checkbox
+  }
+  @for (label of componentContent.labels; track label; let labelIndex = $index) {
+    <div class="starter-label-container">
+      <div class="flex flex-row flex-wrap items-start justify-start">
+        <translatable-input
+          [content]="label"
+          key="text"
+          label="Label Text"
+          i18n-label
+          (defaultLanguageTextChanged)="textInputChange.next($event)"
+          class="input label-input"
+        />
+        <mat-form-field class="input color-input">
+          <mat-label i18n>Color</mat-label>
+          <input
+            matInput
+            [(ngModel)]="label.color"
+            (ngModelChange)="textInputChange.next($event)"
+            ng-model-options="{ debounce: 1000 }"
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
           color="primary"
-          [(ngModel)]="label.canEdit"
-          (ngModelChange)="componentChanged()"
-          i18n
+          (click)="openColorViewer()"
+          matTooltip="View Colors"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          aria-label="Color Palette"
+          i18n-aria-label
         >
-          Can Student Edit Label
-        </mat-checkbox>
+          <mat-icon>palette</mat-icon>
+        </button>
       </div>
-      <div class="checkbox">
-        <mat-checkbox
+      <div>
+        <div class="checkbox">
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="label.canEdit"
+            (ngModelChange)="componentChanged()"
+            i18n
+          >
+            Can Student Edit Label
+          </mat-checkbox>
+        </div>
+        <div class="checkbox">
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="label.canDelete"
+            (ngModelChange)="componentChanged()"
+            i18n
+          >
+            Can Student Delete Label
+          </mat-checkbox>
+        </div>
+      </div>
+      @if (componentContent.enableCircles) {
+        <div class="flex flex-row flex-wrap items-center justify-start">
+          <span class="coordinate-location-label" i18n>Point Location</span>
+          <mat-form-field class="input coordinate-input">
+            <mat-label i18n>X</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="label.pointX"
+              (ngModelChange)="numberInputChange.next($event)"
+            />
+          </mat-form-field>
+          <mat-form-field class="input coordinate-input">
+            <mat-label i18n>Y</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="label.pointY"
+              (ngModelChange)="numberInputChange.next($event)"
+            />
+          </mat-form-field>
+        </div>
+      }
+      <div class="flex flex-row flex-wrap items-center justify-start">
+        <span class="coordinate-location-label" i18n>Text Location</span>
+        <mat-form-field class="input coordinate-input">
+          <mat-label i18n>X</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="label.textX"
+            (ngModelChange)="numberInputChange.next($event)"
+          />
+        </mat-form-field>
+        <mat-form-field class="input coordinate-input">
+          <mat-label i18n>Y</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="label.textY"
+            (ngModelChange)="numberInputChange.next($event)"
+          />
+        </mat-form-field>
+        <span class="flex-1"></span>
+        <button
+          mat-raised-button
           color="primary"
-          [(ngModel)]="label.canDelete"
-          (ngModelChange)="componentChanged()"
-          i18n
+          (click)="deleteLabel(labelIndex, label)"
+          matTooltip="Delete Label"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          aria-label="Delete"
+          i18n-aria-label
         >
-          Can Student Delete Label
-        </mat-checkbox>
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
-    <div *ngIf="componentContent.enableCircles" fxLayout="row wrap" fxLayoutAlign="start center">
-      <span class="coordinate-location-label" i18n>Point Location</span>
-      <mat-form-field class="input coordinate-input">
-        <mat-label i18n>X</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="label.pointX"
-          (ngModelChange)="numberInputChange.next($event)"
-        />
-      </mat-form-field>
-      <mat-form-field class="input coordinate-input">
-        <mat-label i18n>Y</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="label.pointY"
-          (ngModelChange)="numberInputChange.next($event)"
-        />
-      </mat-form-field>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center">
-      <span class="coordinate-location-label" i18n>Text Location</span>
-      <mat-form-field class="input coordinate-input">
-        <mat-label i18n>X</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="label.textX"
-          (ngModelChange)="numberInputChange.next($event)"
-        />
-      </mat-form-field>
-      <mat-form-field class="input coordinate-input">
-        <mat-label i18n>Y</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="label.textY"
-          (ngModelChange)="numberInputChange.next($event)"
-        />
-      </mat-form-field>
-      <span fxFlex></span>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="deleteLabel(labelIndex, label)"
-        matTooltip="Delete Label"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        aria-label="Delete"
-        i18n-aria-label
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-  </div>
+  }
 </div>

@@ -1,14 +1,15 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
-import { DialogGuidanceAuthoringModule } from './dialog-guidance-authoring.module';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
+import { DialogGuidanceAuthoringComponent } from './dialog-guidance-authoring.component';
+import { MockComponent } from 'ng-mocks';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 
 const componentContent = {
   id: 'i64ex48j1z',
@@ -19,7 +20,6 @@ const componentContent = {
   showSubmitButton: false,
   isComputerAvatarEnabled: false
 };
-
 describe('DialogGuidanceAuthoringComponent', () => {
   let component: DialogGuidanceAuthoringComponent;
   let fixture: ComponentFixture<DialogGuidanceAuthoringComponent>;
@@ -27,25 +27,24 @@ describe('DialogGuidanceAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserAnimationsModule,
-        DialogGuidanceAuthoringModule,
+        DialogGuidanceAuthoringComponent,
+        MockComponent(EditComponentPrompt),
         StudentTeacherCommonServicesModule
       ],
       providers: [
+        ProjectAssetService,
         TeacherNodeService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        TeacherProjectService,
+        TeacherProjectTranslationService,
+        provideHttpClient()
       ]
     });
-    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
-      new ProjectLocale({ default: 'en-US' })
-    );
     fixture = TestBed.createComponent(DialogGuidanceAuthoringComponent);
     component = fixture.componentInstance;
-    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
-    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
-      copy(componentContent)
-    );
+    const projectService = TestBed.inject(TeacherProjectService);
+    spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale({ default: 'en-US' }));
+    spyOn(projectService, 'isDefaultLocale').and.returnValue(true);
+    spyOn(projectService, 'getComponent').and.returnValue(copy(componentContent));
     component.componentContent = copy(componentContent);
     fixture.detectChanges();
   });

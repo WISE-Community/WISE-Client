@@ -6,7 +6,6 @@ import { NodeService } from '../../services/nodeService';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { NodeIconComponent } from '../node-icon/node-icon.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NodeStatusIconComponent } from '../../themes/default/themeComponents/nodeStatusIcon/node-status-icon.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,21 +13,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatCardModule,
-        MatIconModule,
-        MatListModule,
-        MatProgressBarModule,
-        MatTooltipModule,
-        NodeIconComponent,
-        NodeStatusIconComponent
-    ],
-    selector: 'nav-item',
-    styleUrl: 'nav-item.component.scss',
-    templateUrl: 'nav-item.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    NodeIconComponent,
+    NodeStatusIconComponent
+  ],
+  selector: 'nav-item',
+  styleUrl: 'nav-item.component.scss',
+  templateUrl: 'nav-item.component.html'
 })
 export class NavItemComponent {
   private currentNode: any;
@@ -59,6 +57,10 @@ export class NavItemComponent {
     this.isCurrentNode = this.currentNode.id === this.nodeId;
     if (this.isGroup && this.isCurrentNode) {
       this.setExpanded();
+      this.zoomToElement();
+    }
+    if (this.dataService.previousStep) {
+      this.isPrevStep = this.nodeId === this.dataService.previousStep.id;
     }
     this.subscriptions.add(this.projectService.projectParsed$.subscribe(() => this.setNodeTitle()));
     this.subscriptions.add(
@@ -129,7 +131,9 @@ export class NavItemComponent {
   }
 
   private zoomToElement(): void {
-    // TODO: implement me
+    setTimeout(() => {
+      document.getElementById(`nav-item-${this.nodeId}`).scrollIntoView({ behavior: 'smooth' });
+    }, 500);
   }
 
   protected itemClicked(): void {

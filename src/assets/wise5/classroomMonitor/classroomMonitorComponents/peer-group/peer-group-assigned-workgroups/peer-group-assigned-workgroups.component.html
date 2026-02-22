@@ -1,14 +1,9 @@
-<div fxLayout="row wrap" fxLayoutAlign="start stretch">
-  <div
-    *ngFor="let grouping of groupings"
-    class="group-container"
-    fxFlex="100"
-    fxFlex.gt-sm="50"
-    fxFlex.gt-md="33.33"
-  >
-    <mat-card class="group notice-bg-bg">
-      <peer-group-grouping [grouping]="grouping" (moveWorkgroup)="emitMoveWorkgroup($event)">
-      </peer-group-grouping>
-    </mat-card>
-  </div>
+<div class="flex flex-wrap justify-start items-stretch">
+  @for (grouping of groupings; track grouping) {
+    <div class="group-container w-full md:w-1/2 lg:w-1/3">
+      <mat-card class="group notice-bg-bg">
+        <peer-group-grouping [grouping]="grouping" (moveWorkgroup)="emitMoveWorkgroup($event)" />
+      </mat-card>
+    </div>
+  }
 </div>

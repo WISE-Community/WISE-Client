@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
-import { CommonModule } from '@angular/common';
+
 import { copy } from '../../../common/object/object';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { MultipleChoiceComponent } from '../MultipleChoiceComponent';
 
 @Component({
-    imports: [CommonModule, FormsModule, MatCheckboxModule, MatRadioModule],
-    selector: 'multiple-choice-show-work',
-    styleUrl: 'multiple-choice-show-work.component.scss',
-    templateUrl: 'multiple-choice-show-work.component.html'
+  imports: [FormsModule, MatCheckboxModule, MatRadioModule],
+  selector: 'multiple-choice-show-work',
+  styleUrl: 'multiple-choice-show-work.component.scss',
+  templateUrl: 'multiple-choice-show-work.component.html'
 })
 export class MultipleChoiceShowWorkComponent extends ComponentShowWorkDirective {
   studentChoiceId: string = '';

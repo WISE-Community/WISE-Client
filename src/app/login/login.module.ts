@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { LoginHomeComponent } from './login-home/login-home.component';
 import { LoginRoutingModule } from './login-routing.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha-2';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,15 +24,15 @@ const materialModules = [
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     LoginRoutingModule,
     ReactiveFormsModule,
     materialModules,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    LoginComponent,
+    LoginHomeComponent
   ],
-  declarations: [LoginComponent, LoginHomeComponent, LoginComponent],
   exports: [LoginComponent]
 })
 export class LoginModule {}

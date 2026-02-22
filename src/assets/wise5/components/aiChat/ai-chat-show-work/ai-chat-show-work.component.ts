@@ -4,11 +4,12 @@ import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
+import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.component';
 
 @Component({
-    selector: 'ai-chat-show-work',
-    templateUrl: './ai-chat-show-work.component.html',
-    standalone: false
+  imports: [AiChatMessagesComponent],
+  selector: 'ai-chat-show-work',
+  templateUrl: './ai-chat-show-work.component.html'
 })
 export class AiChatShowWorkComponent extends ComponentShowWorkDirective {
   protected computerAvatar: ComputerAvatar;

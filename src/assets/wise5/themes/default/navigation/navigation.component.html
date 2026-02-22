@@ -1,15 +1,14 @@
-<div class="nav" fxLayout="column">
-  <div class="mat-subtitle-1 secondary-text nav-header" i18n>Project Plan</div>
-  <div fxLayout="row wrap" fxLayoutAlign="center start">
-    <nav-item
-      *ngFor="let id of rootNode.ids"
-      class="lesson"
-      [ngClass]="{ expanded: navItemIsExpanded[id] }"
-      [showPosition]="true"
-      [nodeId]="id"
-      type="card"
-      fxFlex="100"
-      [fxFlex.gt-xs]="navItemIsExpanded[id] ? 100 : 50"
-    ></nav-item>
+<div class="nav flex flex-col">
+  <div class="flex flex-wrap justify-center items-center">
+    @for (id of rootNode.ids; track id) {
+      <nav-item
+        class="lesson"
+        [ngClass]="{ expanded: navItemIsExpanded[id] }"
+        [showPosition]="true"
+        [nodeId]="id"
+        type="card"
+        class="w-full sm:w-{{ navItemIsExpanded[id] ? 'full' : '1/2' }}"
+      />
+    }
   </div>
 </div>

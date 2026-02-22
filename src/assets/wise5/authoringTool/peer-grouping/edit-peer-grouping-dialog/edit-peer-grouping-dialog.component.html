@@ -4,34 +4,35 @@
     <mat-label i18n>Grouping Name</mat-label>
     <input matInput [(ngModel)]="peerGrouping.name" />
   </mat-form-field>
-  <div fxLayoutGap="20px">
+  <div class="flex gap-5">
     <mat-form-field>
       <mat-label i18n>Logic</mat-label>
       <mat-select [(ngModel)]="logicType">
-        <mat-option *ngFor="let logic of availableLogic" [value]="logic.value">
-          {{ logic.name }}
-        </mat-option>
+        @for (logic of availableLogic; track logic) {
+          <mat-option [value]="logic.value">
+            {{ logic.name }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
-    <ng-container *ngIf="logicType === 'differentIdeas' || logicType === 'differentKIScores'">
+    @if (logicType === 'differentIdeas' || logicType === 'differentKIScores') {
       <select-step-and-component
         [referenceComponent]="referenceComponent"
         [allowedComponentTypes]="allowedReferenceComponentTypes"
-      >
-      </select-step-and-component>
-    </ng-container>
-    <ng-container *ngIf="logicTypesWithModes.includes(logicType)">
+      />
+    }
+    @if (logicTypesWithModes.includes(logicType)) {
       <mat-form-field>
         <mat-label i18n>Mode</mat-label>
         <mat-select [(ngModel)]="mode">
-          <ng-container *ngFor="let mode of availableModes">
+          @for (mode of availableModes; track mode) {
             <mat-option [value]="mode.value">
               {{ mode.name }}
             </mat-option>
-          </ng-container>
+          }
         </mat-select>
       </mat-form-field>
-    </ng-container>
+    }
   </div>
   <div>
     <mat-form-field>
@@ -40,13 +41,21 @@
     </mat-form-field>
   </div>
   <div class="mat-small info">
-    <ng-container *ngIf="stepsUsedIn.length > 0">
+    @if (stepsUsedIn.length > 0) {
       <span i18n>Used in </span>
-      <span *ngFor="let stepUsedIn of stepsUsedIn; last as isLast">
-        {{ stepUsedIn }}<span *ngIf="!isLast">, </span> </span
-      >.
-    </ng-container>
-    <span *ngIf="stepsUsedIn.length === 0" i18n>Not used in any steps.</span>
+      @for (stepUsedIn of stepsUsedIn; track stepUsedIn; let isLast = $last) {
+        <span>
+          {{ stepUsedIn }}
+          @if (!isLast) {
+            <span>, </span>
+          }
+        </span>
+      }
+      .
+    }
+    @if (stepsUsedIn.length === 0) {
+      <span i18n>Not used in any steps.</span>
+    }
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
@@ -62,7 +71,7 @@
       Delete
     </span>
   </button>
-  <div fxFlex></div>
+  <div class="flex grow"></div>
   <button mat-button (click)="cancel()" i18n>Cancel</button>
   <button mat-flat-button color="primary" (click)="save()" i18n>Update</button>
 </mat-dialog-actions>

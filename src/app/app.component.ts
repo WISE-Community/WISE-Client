@@ -1,27 +1,44 @@
-import { Component, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, Inject, DOCUMENT } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { Subscription } from 'rxjs';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { UtilService } from './services/util.service';
 import { ConfigService } from './services/config.service';
 import { Announcement } from './domain/announcement';
 import { environment } from '../environments/environment';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
+import { MobileMenuComponent } from './modules/mobile-menu/mobile-menu.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
+import { HeaderComponent } from './modules/header/header.component';
+import { FooterComponent } from './modules/footer/footer.component';
+
 declare let gtag: Function;
 
 @Component({
+  imports: [
+    CommonModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterModule,
+    MobileMenuComponent,
+    AnnouncementComponent,
+    HeaderComponent,
+    FooterComponent
+  ],
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: false
+  styleUrl: './app.component.scss',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'app';
   showMobileMenu: boolean = false;
   theme: string = '';
-  mediaWatcher: Subscription;
   googleAnalyticsId: string = null;
   hasAnnouncement: boolean = false;
   showDefaultMode: boolean = true;
@@ -37,13 +54,13 @@ export class AppComponent {
   };
 
   constructor(
-    private router: Router,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer,
-    utilService: UtilService,
-    media: MediaObserver,
+    private breakpointObserver: BreakpointObserver,
     private configService: ConfigService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    iconRegistry: MatIconRegistry,
+    private router: Router,
+    sanitizer: DomSanitizer,
+    utilService: UtilService
   ) {
     iconRegistry.addSvgIcon(
       'ki-elicit',
@@ -96,10 +113,8 @@ export class AppComponent {
     utilService.getMobileMenuState().subscribe((state) => {
       this.showMobileMenu = state;
     });
-    this.mediaWatcher = media.asObservable().subscribe((change: MediaChange[]) => {
-      if (media.isActive('gt-sm')) {
-        utilService.showMobileMenu(false);
-      }
+    this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
+      utilService.showMobileMenu(false);
     });
     router.events.subscribe((event) => {
       utilService.showMobileMenu(false);

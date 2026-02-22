@@ -1,28 +1,34 @@
-<mat-card
-  appearance="outlined"
-  class="annotations"
-  *ngIf="(showScore && annotations.score) || (showComment && annotations.comment)"
->
-  <mat-card-title class="annotations__header">
-    <div
-      class="annotations__avatar md-avatar avatar--icon avatar--square md-36 avatar accent-bg md-whiteframe-1dp"
-    >
-      <mat-icon class="annotations__icon md-36">{{ icon }}</mat-icon>
-    </div>
-    <div class="annotations__title" fxLayout="row" flex>
-      <span>{{ label }}</span>
-      <span *ngIf="isNewAnnotation()" class="badge annotations__status" i18n>New</span>
-    </div>
-  </mat-card-title>
-  <mat-card-content class="annotations__body mat-body-2">
-    <div *ngIf="showComment" [innerHTML]="comment"></div>
-    <hr *ngIf="annotations.comment" />
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <span *ngIf="showScore && annotations.score" class="annotations__score" i18n
-        >Score: {{ annotations.score.data.value }}{{ maxScoreDisplay }}</span
+@if ((showScore && annotations.score) || (showComment && annotations.comment)) {
+  <mat-card appearance="outlined" class="annotations">
+    <mat-card-title class="annotations__header">
+      <div
+        class="annotations__avatar md-avatar avatar--icon avatar--square md-36 avatar accent-bg md-whiteframe-1dp"
       >
-      <span fxFlex></span>
-      <save-time-message [saveTime]="latestAnnotationTime" [timeOnly]="true"></save-time-message>
-    </div>
-  </mat-card-content>
-</mat-card>
+        <mat-icon class="annotations__icon md-36">{{ icon }}</mat-icon>
+      </div>
+      <div class="annotations__title flex w-full">
+        <span>{{ label }}</span>
+        @if (isNewAnnotation()) {
+          <span class="badge annotations__status" i18n>New</span>
+        }
+      </div>
+    </mat-card-title>
+    <mat-card-content class="annotations__body mat-body-2">
+      @if (showComment) {
+        <div [innerHTML]="comment"></div>
+      }
+      @if (annotations.comment) {
+        <hr />
+      }
+      <div class="flex justify-start items-center">
+        @if (showScore && annotations.score) {
+          <span class="annotations__score" i18n
+            >Score: {{ annotations.score.data.value }}{{ maxScoreDisplay }}</span
+          >
+        }
+        <span class="flex-grow"></span>
+        <save-time-message [saveTime]="latestAnnotationTime" [timeOnly]="true" />
+      </div>
+    </mat-card-content>
+  </mat-card>
+}

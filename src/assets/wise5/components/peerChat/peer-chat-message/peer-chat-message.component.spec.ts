@@ -1,23 +1,16 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
-import { ConfigService } from '../../../services/configService';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatMessageComponent } from './peer-chat-message.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: PeerChatMessageComponent;
 let fixture: ComponentFixture<PeerChatMessageComponent>;
 const messageText = 'hello';
-
 describe('PeerChatMessageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [PeerChatMessageComponent],
-    imports: [MatIconModule],
-    providers: [ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [PeerChatMessageComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

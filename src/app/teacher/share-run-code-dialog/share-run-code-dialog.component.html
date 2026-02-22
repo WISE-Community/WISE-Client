@@ -63,9 +63,7 @@
           <span class="mat-body-1">{{ run.runCode }}</span>
         </button>
       </p>
-      <ng-container
-        *ngIf="isGoogleUser() && isGoogleClassroomEnabled() && run.project.wiseVersion !== 4"
-      >
+      @if (isGoogleUser() && isGoogleClassroomEnabled() && run.project.wiseVersion !== 4) {
         <p i18n>Add as an assignment in Google Classroom:</p>
         <p class="share">
           <button
@@ -74,13 +72,13 @@
             color="primary"
             (click)="checkClassroomAuthorization()"
           >
-            <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <span class="flex-row justify-start items-center gap-2">
               <img src="assets/img/icons/google-classroom.svg" alt="Google Classroom logo" />
               <span i18n>Share to Google Classroom</span>
             </span>
           </button>
         </p>
-      </ng-container>
+      }
     }
   </div>
 </mat-dialog-content>

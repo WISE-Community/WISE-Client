@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .library-filters {
   overflow: hidden;
   max-height: 0;
@@ -8,7 +10,7 @@
   }
 
   &.isSplitScreen {
-    @screen md {
+    @variant md {
       @apply max-h-[1000px];
     }
   }

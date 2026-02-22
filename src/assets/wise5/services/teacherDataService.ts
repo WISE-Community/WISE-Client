@@ -132,7 +132,7 @@ export class TeacherDataService extends DataService {
       .set('runId', this.configService.getRunId())
       .set('getStudentWork', 'true')
       .set('getAnnotations', 'false')
-      .set('getEvents', 'false');
+      .set('getEvents', 'true');
     const components = node.getAllRelatedComponents();
     if (components.length > 0) {
       params = params.set('components', compressToEncodedURIComponent(JSON.stringify(components)));
@@ -441,5 +441,14 @@ export class TeacherDataService extends DataService {
 
   private isCurrentWorkgroup(workgroupId: number): boolean {
     return this.currentWorkgroup.workgroupId === workgroupId;
+  }
+
+  getPreviewUrl(): string {
+    let previewUrl = this.configService.getConfigParam('previewProjectURL');
+    const currentNodeId = this.getCurrentNodeId();
+    if (!this.projectService.isGroupNode(currentNodeId)) {
+      previewUrl += `/${currentNodeId}`;
+    }
+    return previewUrl;
   }
 }

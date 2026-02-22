@@ -3,18 +3,30 @@ import { Subscription } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../../services/configService';
 import { GetWorkgroupService } from '../../../../../../app/services/getWorkgroupService';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { CdkDropListGroup } from '@angular/cdk/drag-drop';
+import { AddTeamButtonComponent } from '../add-team-button/add-team-button.component';
+import { ManageTeamComponent } from '../manage-team/manage-team.component';
+import { ManageTeamsComponent } from '../manage-teams/manage-teams.component';
 
 @Component({
+  imports: [
+    MatCard,
+    CdkDropListGroup,
+    MatCardContent,
+    AddTeamButtonComponent,
+    ManageTeamComponent,
+    ManageTeamsComponent
+  ],
   selector: 'manage-period',
-  styleUrls: ['manage-period.component.scss'],
-  templateUrl: 'manage-period.component.html',
-  standalone: false
+  styleUrl: 'manage-period.component.scss',
+  templateUrl: 'manage-period.component.html'
 })
 export class ManagePeriodComponent {
+  emptyTeams: Map<number, any> = new Map();
   @Input() period: any;
   students: Set<any> = new Set();
-  subscriptions: Subscription = new Subscription();
-  emptyTeams: Map<number, any> = new Map();
+  private subscriptions: Subscription = new Subscription();
   teams: Map<number, any> = new Map();
   unassignedTeam: any = { users: [] };
 
@@ -24,11 +36,11 @@ export class ManagePeriodComponent {
     private workgroupService: WorkgroupService
   ) {}
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.init();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscriptions.add(
       this.configService.configRetrieved$.subscribe(() => {
         this.init();
@@ -36,22 +48,22 @@ export class ManagePeriodComponent {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  init() {
+  init(): void {
     this.initTeams();
     this.initStudents();
   }
 
-  initTeams() {
+  initTeams(): void {
     this.teams = this.workgroupService.getWorkgroupsInPeriod(this.period.periodId);
     this.initEmptyTeams();
     this.initUnassignedTeam();
   }
 
-  private initEmptyTeams() {
+  private initEmptyTeams(): void {
     this.emptyTeams.clear();
     this.getWorkgroupService
       .getAllWorkgroupsInPeriod(this.period.periodId)
@@ -66,13 +78,13 @@ export class ManagePeriodComponent {
       });
   }
 
-  private initUnassignedTeam() {
+  private initUnassignedTeam(): void {
     this.unassignedTeam = {
       users: this.configService.getUsersNotInWorkgroupInPeriod(this.period.periodId)
     };
   }
 
-  initStudents() {
+  initStudents(): void {
     this.students.clear();
     for (const workgroup of this.configService.getClassmateUserInfos()) {
       if (workgroup.periodId === this.period.periodId) {

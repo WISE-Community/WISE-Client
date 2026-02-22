@@ -5,16 +5,33 @@ import {
   FormGroup,
   ValidationErrors,
   ValidatorFn,
-  Validators
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
 } from '@angular/forms';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { PasswordStrengthMeterComponent } from '@wise-community/angular-password-strength-meter';
+import { PasswordRequirementComponent } from '../password-requirement/password-requirement.component';
 
 @Component({
-    selector: 'new-password-and-confirm',
-    templateUrl: './new-password-and-confirm.component.html',
-    styleUrls: ['./new-password-and-confirm.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatMenuTrigger,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatMenu,
+    PasswordStrengthMeterComponent,
+    PasswordRequirementComponent
+  ],
+  selector: 'new-password-and-confirm',
+  styleUrl: './new-password-and-confirm.component.scss',
+  templateUrl: './new-password-and-confirm.component.html'
 })
 export class NewPasswordAndConfirmComponent implements OnInit {
   static readonly CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME: string = 'confirmNewPassword';
@@ -36,8 +53,6 @@ export class NewPasswordAndConfirmComponent implements OnInit {
     { errorFieldName: 'tooShort', text: $localize`be at least 8 characters long` }
   ];
   protected passwordStrength: number = 0;
-
-  constructor() {}
 
   ngOnInit(): void {
     this.newPasswordFormControl = new FormControl('', [
@@ -71,8 +86,9 @@ export class NewPasswordAndConfirmComponent implements OnInit {
   }
 
   private passwordMatchValidator(formGroup: FormGroup): ValidationErrors {
-    const password = formGroup.get(NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME)
-      .value;
+    const password = formGroup.get(
+      NewPasswordAndConfirmComponent.NEW_PASSWORD_FORM_CONTROL_NAME
+    ).value;
     const confirmPassword = formGroup.get(
       NewPasswordAndConfirmComponent.CONFIRM_NEW_PASSWORD_FORM_CONTROL_NAME
     ).value;

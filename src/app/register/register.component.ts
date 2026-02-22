@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss'],
-    standalone: false
+  imports: [RouterLink, RouterOutlet],
+  selector: 'app-register',
+  templateUrl: './register.component.html'
 })
-export class RegisterComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class RegisterComponent {}

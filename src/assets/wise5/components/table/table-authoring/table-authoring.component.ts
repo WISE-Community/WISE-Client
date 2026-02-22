@@ -1,20 +1,40 @@
-'use strict';
-
 import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
-import { ConfigService } from '../../../services/configService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 
 @Component({
-    selector: 'table-authoring',
-    templateUrl: 'table-authoring.component.html',
-    styleUrls: ['table-authoring.component.scss'],
-    standalone: false
+  selector: 'table-authoring',
+  templateUrl: 'table-authoring.component.html',
+  styleUrl: 'table-authoring.component.scss',
+  imports: [
+    EditComponentPrompt,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInput,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    TranslatableInputComponent,
+    MatCheckbox
+  ]
 })
 export class TableAuthoring extends AbstractComponentAuthoring {
   protected columnCellSizes: any;
@@ -25,16 +45,7 @@ export class TableAuthoring extends AbstractComponentAuthoring {
   private numColumnsFormControl: FormControl;
   private numRowsFormControl: FormControl;
 
-  constructor(
-    protected ConfigService: ConfigService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
-  ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.initializeDimensionInputs();
     this.subscriptions.add(

@@ -1,10 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
 import { Observable, Subject } from 'rxjs';
-import { ComponentSelectComponent } from '../../../../../../app/classroom-monitor/component-select/component-select.component';
 import { DialogWithOpenInNewWindowComponent } from '../../../../directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component';
 import { MilestoneService } from '../../../../services/milestoneService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
@@ -12,7 +8,6 @@ import { TeacherPeerGroupService } from '../../../../services/teacherPeerGroupSe
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
 import { NodeProgressViewComponent } from './node-progress-view.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 const rubric = 'This is the unit rubric.';
@@ -99,14 +94,7 @@ describe('NodeProgressViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NodeProgressViewComponent],
-      imports: [
-        ClassroomMonitorTestingModule,
-        ComponentSelectComponent,
-        FlexLayoutModule,
-        MatIconModule,
-        MatListModule
-      ],
+      imports: [ClassroomMonitorTestingModule, NodeProgressViewComponent],
       providers: [
         {
           provide: MilestoneService,
@@ -125,8 +113,7 @@ describe('NodeProgressViewComponent', () => {
           useClass: MockTeacherProjectService
         },
         provideRouter([])
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents();
   });
 

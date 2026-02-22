@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChooseSimulationComponent } from './choose-simulation.component';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CopyNodesService } from '../../../services/copyNodesService';
-import { InsertNodesService } from '../../../services/insertNodesService';
-import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
+import { MockProvider, MockProviders } from 'ng-mocks';
+import { ConfigService } from '../../../services/configService';
+import { CopyNodesService } from '../../../services/copyNodesService';
+import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
+import { InsertNodesService } from '../../../services/insertNodesService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ChooseSimulationComponent } from './choose-simulation.component';
 
 describe('ChooseSimulationComponent', () => {
   let component: ChooseSimulationComponent;
@@ -15,17 +14,15 @@ describe('ChooseSimulationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        ChooseSimulationComponent,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [ChooseSimulationComponent],
       providers: [
-        CopyNodesService,
-        InsertFirstNodeInBranchPathService,
-        InsertNodesService,
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
+        MockProviders(
+          ConfigService,
+          CopyNodesService,
+          InsertFirstNodeInBranchPathService,
+          InsertNodesService
+        ),
+        MockProvider(TeacherProjectService, { retrieveProjectById: () => Promise.resolve({}) }),
         provideRouter([])
       ]
     }).compileComponents();

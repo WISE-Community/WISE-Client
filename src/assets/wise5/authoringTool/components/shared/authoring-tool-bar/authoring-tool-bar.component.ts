@@ -3,26 +3,22 @@ import { Subscription, filter } from 'rxjs';
 import { NotificationService } from '../../../../services/notificationService';
 import { NavigationEnd, Router } from '@angular/router';
 import { SaveIndicatorComponent } from '../../../../common/save-indicator/save-indicator.component';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { StepToolsComponent } from '../../../../common/stepTools/step-tools.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatToolbarModule,
-        SaveIndicatorComponent,
-        StepToolsComponent
-    ],
-    selector: 'authoring-tool-bar',
-    styleUrl: './authoring-tool-bar.component.scss',
-    templateUrl: './authoring-tool-bar.component.html'
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    SaveIndicatorComponent,
+    StepToolsComponent
+  ],
+  selector: 'authoring-tool-bar',
+  styleUrl: './authoring-tool-bar.component.scss',
+  templateUrl: './authoring-tool-bar.component.html'
 })
 export class AuthoringToolBarComponent {
   protected globalMessage: any = {};

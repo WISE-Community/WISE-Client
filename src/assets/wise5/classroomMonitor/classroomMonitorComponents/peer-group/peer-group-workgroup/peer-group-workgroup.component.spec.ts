@@ -1,8 +1,7 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../../../services/configService';
 import { PeerGroupWorkgroupComponent } from './peer-group-workgroup.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('PeerGroupWorkgroupComponent', () => {
   let component: PeerGroupWorkgroupComponent;
@@ -10,10 +9,9 @@ describe('PeerGroupWorkgroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [PeerGroupWorkgroupComponent],
-    imports: [],
-    providers: [ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [PeerGroupWorkgroupComponent],
+      providers: [ConfigService, provideHttpClient()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

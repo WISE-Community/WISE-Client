@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+<div class="flex flex-row gap-2">
   <translatable-textarea
     [content]="componentContent"
     key="url"
@@ -22,9 +22,8 @@
   [url]="componentContent.url"
   [parameters]="componentContent.urlParameters"
   (generatedUrl)="updateUrl($event)"
->
-</author-url-parameters>
-<div fxLayout="row wrap" fxLayoutAlign="start center">
+/>
+<div class="flex flex-row flex-wrap justify-start items-center">
   <mat-form-field class="dimension">
     <mat-label i18n>Width (px) (optional)</mat-label>
     <input
@@ -49,7 +48,7 @@
     (ngModelChange)="inputChange.next($event)"
     color="primary"
   >
-    <span fxLayout="row" fxLayoutAlign="start center">
+    <span class="flex flex-row justify-start items-center">
       <span i18n>Saves Student Work</span> &nbsp;
       <mat-icon
         i18n-matTooltip
@@ -58,18 +57,4 @@
       >
     </span>
   </mat-checkbox>
-  <span fxFlex></span>
-  <button
-    mat-raised-button
-    color="primary"
-    class="button"
-    (click)="reloadModel()"
-    matTooltip="Reload Model"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    aria-label="Reload Model"
-    i18n-aria-label
-  >
-    <mat-icon>refresh</mat-icon>
-  </button>
 </div>

@@ -1,25 +1,15 @@
 import { Component } from '@angular/core';
 import { NewNodeTemplate } from '../NewNodeTemplate';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCardModule,
-        MatDividerModule,
-        MatIconModule,
-        RouterModule
-    ],
-    styleUrls: ['choose-new-node-template.component.scss', '../../add-content.scss'],
-    templateUrl: 'choose-new-node-template.component.html'
+  imports: [MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, RouterModule],
+  styleUrls: ['choose-new-node-template.component.scss', '../../add-content.scss'],
+  templateUrl: 'choose-new-node-template.component.html'
 })
 export class ChooseNewNodeTemplateComponent {
   protected templates: NewNodeTemplate[] = [
@@ -45,7 +35,10 @@ export class ChooseNewNodeTemplateComponent {
     }
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   protected chooseTemplate(template: NewNodeTemplate) {
     this.router.navigate(['..', ...template.route.split('/')], {

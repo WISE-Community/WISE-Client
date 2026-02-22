@@ -1,16 +1,15 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
-    selector: 'add-lesson-button',
-    styles: [
-        `
+  imports: [MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
+  selector: 'add-lesson-button',
+  styles: [
+    `
       .rotate-180 {
         transform: rotate(180deg);
       }
@@ -18,8 +17,8 @@ import { ActivatedRoute, Router } from '@angular/router';
         transform: scaleY(-1);
       }
     `
-    ],
-    templateUrl: './add-lesson-button.component.html'
+  ],
+  templateUrl: './add-lesson-button.component.html'
 })
 export class AddLessonButtonComponent {
   @Input() active: boolean;

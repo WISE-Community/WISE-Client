@@ -4,19 +4,22 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatDialog,
-  MatDialogModule
+  MatDialogModule,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { CommonModule } from '@angular/common';
+import { MatButtonModule, MatButton } from '@angular/material/button';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatDialogModule, MatIconModule],
-    selector: 'app-announcement',
-    styleUrl: './announcement.component.scss',
-    templateUrl: './announcement.component.html'
+  encapsulation: ViewEncapsulation.None,
+  imports: [MatButtonModule, MatDialogModule, MatIconModule],
+  selector: 'app-announcement',
+  styleUrl: './announcement.component.scss',
+  templateUrl: './announcement.component.html'
 })
 export class AnnouncementComponent {
   @Input() announcement: Announcement = new Announcement();
@@ -33,9 +36,16 @@ export class AnnouncementComponent {
 }
 
 @Component({
-    selector: 'announcement-dialog',
-    templateUrl: 'announcement-dialog.component.html',
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose
+  ],
+  selector: 'announcement-dialog',
+  templateUrl: 'announcement-dialog.component.html'
 })
 export class AnnouncementDialogComponent {
   constructor(

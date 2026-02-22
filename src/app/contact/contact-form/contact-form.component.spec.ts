@@ -1,21 +1,15 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ContactFormComponent } from './contact-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { StudentService } from '../../student/student.service';
 import { User } from '../../domain/user';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { LibraryService } from '../../services/library.service';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 
 export class MockStudentService {
   getTeacherList(): Observable<User> {
@@ -37,26 +31,29 @@ let userService: UserService;
 describe('ContactFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ContactFormComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        BrowserAnimationsModule,
-        MatInputModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        RecaptchaV3Module,
-        RouterTestingModule
-      ],
+      imports: [ContactFormComponent],
       providers: [
         ConfigService,
         { provide: LibraryService, useClass: MockLibraryService },
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: recaptchaPrivateKey },
+        {
+          provide: ReCaptchaV3Service,
+          useValue: {
+            execute: jasmine.createSpy('execute').and.returnValue(of('mock-token'))
+          }
+        },
         { provide: StudentService, useClass: MockStudentService },
         UserService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClient(),
+        provideRouter([])
       ]
-    }).compileComponents();
+    })
+      .overrideComponent(ContactFormComponent, {
+        remove: {
+          imports: [RecaptchaV3Module]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -164,7 +161,6 @@ function submit_showRecaptchaErrorMessage(): void {
   it('should show recaptcha error message', async () => {
     isRecaptchaEnabledSpy.and.returnValue(true);
     component.ngOnInit();
-    spyOn(recaptchaV3Service, 'execute').and.returnValue(of('generated-token'));
     const httpPostSpy = httpPostSpyAndReturn('error');
     await submitAndDetectChanges();
     expect(httpPostSpy).toHaveBeenCalled();

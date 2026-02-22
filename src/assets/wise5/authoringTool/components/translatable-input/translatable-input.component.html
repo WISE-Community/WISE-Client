@@ -1,5 +1,5 @@
 @if (showTranslationInput()) {
-  <mat-form-field class="translatable">
+  <mat-form-field class="translatable translatable-form-field">
     <mat-label>{{ label }} ({{ currentLanguage().language }})</mat-label>
     <input
       class="enable-in-translation"
@@ -24,7 +24,7 @@
     </mat-hint>
   </mat-form-field>
 } @else {
-  <mat-form-field>
+  <mat-form-field class="translatable-form-field">
     <mat-label>{{ label }}</mat-label>
     <input
       matInput

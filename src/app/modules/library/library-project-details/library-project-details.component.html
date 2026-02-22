@@ -148,6 +148,16 @@
           }
         </p>
       }
+      @if (project.metadata.locations?.length > 0) {
+        <p>
+          <strong i18n>Locations:</strong>
+          @for (location of project.metadata.locations; track location.id; let last = $last) {
+            {{ location.level3 ? location.level3 + ', ' : ''
+            }}{{ location.level2 ? location.level2 + ', ' : '' }}{{ location.level1 }}
+            {{ last ? '' : ' • ' }}
+          }
+        </p>
+      }
       @if (project.tags) {
         <unit-tags [tags]="project.tags" />
       }

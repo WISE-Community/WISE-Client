@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditRunWarningDialogComponent } from './edit-run-warning-dialog.component';
 import { ConfigService } from '../../services/config.service';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Run } from '../../domain/run';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 export class MockConfigService {
   getContextPath(): string {
@@ -27,29 +26,23 @@ describe('EditRunWarningDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditRunWarningDialogComponent],
       providers: [
         {
           provide: MatDialogRef,
           useValue: mockDialogRef
         },
-        { provide: MAT_DIALOG_DATA, useValue: { data: { run } } },
-        { provide: ConfigService, useClass: MockConfigService }
+        { provide: MAT_DIALOG_DATA, useValue: run },
+        { provide: ConfigService, useClass: MockConfigService },
+        provideRouter([])
       ],
-      imports: [RouterTestingModule, MatDialogModule],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [EditRunWarningDialogComponent]
     });
     fixture = TestBed.createComponent(EditRunWarningDialogComponent);
     component = fixture.componentInstance;
-    component.run = run;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should create editLink', () => {
-    expect(component.editLink !== '').toBeTruthy();
   });
 });

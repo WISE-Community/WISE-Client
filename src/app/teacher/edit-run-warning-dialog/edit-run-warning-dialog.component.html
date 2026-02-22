@@ -7,7 +7,9 @@
   <div class="info-block">
     <p class="mat-subtitle-1 accent-1">
       {{ run.project.metadata.title }}
-      <span *ngIf="run" class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
+      @if (run) {
+        <span class="mat-caption" i18n>(Run ID: {{ run.id }})</span>
+      }
     </p>
     <p i18n>
       Warning! You will be editing the content of a classroom unit. If students have already started

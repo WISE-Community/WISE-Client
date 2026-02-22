@@ -1,33 +1,53 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentTypeSelectorComponent } from './component-type-selector.component';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentTypeSelectorHarness } from './component-type-selector.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { ComponentTypeServiceModule } from '../../../services/componentTypeService.module';
+import { provideHttpClient } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserService } from '../../../../../app/services/user.service';
+import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ConfigService } from '../../../services/configService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ComponentTypeSelectorComponent } from './component-type-selector.component';
+import { ComponentTypeSelectorHarness } from './component-type-selector.harness';
+import { MockProviders } from 'ng-mocks';
+import { ComponentTypeService } from '../../../services/componentTypeService';
 
 let component: ComponentTypeSelectorComponent;
 let componentTypeSelectorHarness: ComponentTypeSelectorHarness;
 let configService: ConfigService;
 let fixture: ComponentFixture<ComponentTypeSelectorComponent>;
 let userService: UserService;
-
 describe('ComponentTypeSelectorComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        ComponentTypeSelectorComponent,
-        ComponentTypeServiceModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      imports: [ComponentTypeSelectorComponent, StudentTeacherCommonServicesModule],
+      providers: [
+        MockProviders(ComponentTypeService, ConfigService, UserService),
+        provideHttpClient()
+      ]
     });
     fixture = TestBed.createComponent(ComponentTypeSelectorComponent);
+    const componentTypeService = TestBed.inject(ComponentTypeService);
+    spyOn(componentTypeService, 'getComponentTypes').and.returnValue([
+      { type: 'AiChat', name: 'AI Chat' },
+      { type: 'Animation', name: 'Animation' },
+      { type: 'AudioOscillator', name: 'Audio Oscillator' },
+      { type: 'ConceptMap', name: 'Concept Map' },
+      { type: 'DialogGuidance', name: 'Dialog Guidance' },
+      { type: 'Discussion', name: 'Discussion' },
+      { type: 'Draw', name: 'Draw' },
+      { type: 'Embedded', name: 'Embedded' },
+      { type: 'Graph', name: 'Graph' },
+      { type: 'Label', name: 'Label' },
+      { type: 'Match', name: 'Match' },
+      { type: 'MultipleChoice', name: 'Multiple Choice' },
+      { type: 'OpenResponse', name: 'Open Response' },
+      { type: 'OutsideURL', name: 'Outside URL' },
+      { type: 'PeerChat', name: 'Peer Chat' },
+      { type: 'HTML', name: 'HTML' },
+      { type: 'ShowGroupWork', name: 'Show Group Work' },
+      { type: 'ShowMyWork', name: 'Show My Work' },
+      { type: 'Summary', name: 'Summary' },
+      { type: 'Table', name: 'Table' }
+    ]);
+
     configService = TestBed.inject(ConfigService);
     spyOn(configService, 'getConfigParam').and.returnValue(true);
     userService = TestBed.inject(UserService);

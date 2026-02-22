@@ -1,18 +1,28 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
 import { TeacherRun } from '../teacher-run';
 import { TeacherService } from '../teacher.service';
 import { ListClassroomCoursesDialogComponent } from '../list-classroom-courses-dialog/list-classroom-courses-dialog.component';
 import { AccessLinkService } from '../../services/accessLinkService';
+import { MatIconModule } from '@angular/material/icon';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-share-run-code-dialog',
-  templateUrl: './share-run-code-dialog.component.html',
-  styleUrls: ['./share-run-code-dialog.component.scss'],
-  standalone: false
+  imports: [
+    ClipboardModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatTooltipModule
+  ],
+  styleUrl: './share-run-code-dialog.component.scss',
+  templateUrl: './share-run-code-dialog.component.html'
 })
 export class ShareRunCodeDialogComponent {
   protected accessLinks: string[] = [];

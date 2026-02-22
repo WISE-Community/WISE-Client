@@ -1,5 +1,5 @@
 <mat-toolbar class="mat-elevation-z1 toolbar">
-  <div class="toolbar__tools" fxLayout="row" fxLayoutAlign="start center">
+  <div class="toolbar__tools flex justify-start items-center">
     <button
       mat-icon-button
       (click)="toggleMenu()"
@@ -16,7 +16,7 @@
     } @else if (showTeamTools) {
       <student-grading-tools [workgroupId]="workgroupId" />
     }
-    <span fxFlex></span>
+    <span class="flex-grow"></span>
     <save-indicator />
     @if (showPeriodSelect) {
       <select-period />

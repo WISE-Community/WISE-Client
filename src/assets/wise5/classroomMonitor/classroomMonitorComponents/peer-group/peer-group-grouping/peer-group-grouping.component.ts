@@ -1,22 +1,21 @@
 import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { PeerGroupWorkgroupsContainerComponent } from '../peer-group-workgroups-container/peer-group-workgroups-container.component';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
+import { MatIcon } from '@angular/material/icon';
+import { NgStyle } from '@angular/common';
+import { MatCardContent } from '@angular/material/card';
+import { CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
+import { PeerGroupWorkgroupComponent } from '../peer-group-workgroup/peer-group-workgroup.component';
 
 @Component({
-    selector: 'peer-group-grouping',
-    templateUrl: './peer-group-grouping.component.html',
-    styleUrls: ['../peer-group-workgroups-container/peer-group-workgroups-container.component.scss'],
-    standalone: false
+  imports: [MatIcon, NgStyle, MatCardContent, CdkDropList, CdkDrag, PeerGroupWorkgroupComponent],
+  selector: 'peer-group-grouping',
+  styleUrl: '../peer-group-workgroups-container/peer-group-workgroups-container.component.scss',
+  templateUrl: './peer-group-grouping.component.html'
 })
 export class PeerGroupGroupingComponent extends PeerGroupWorkgroupsContainerComponent {
+  protected avatarColor: string;
   @Input() grouping: any;
-
-  avatarColor: string;
-
-  constructor(protected dialog: MatDialog) {
-    super(dialog);
-  }
 
   ngOnInit(): void {
     this.avatarColor = getAvatarColorForWorkgroupId(this.grouping.id);

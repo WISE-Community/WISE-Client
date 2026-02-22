@@ -1,159 +1,158 @@
-<component-header [component]="component"></component-header>
-<input
-  type="file"
-  accept=".csv"
-  *ngIf="componentContent.enableFileUpload"
-  (change)="fileUploadChanged($event)"
-  [disabled]="isDisabled"
-/>
-<div class="component__actions" fxLayout="row" fxLayoutGap="20px" *ngIf="showTrialSelect">
-  <mat-form-field *ngIf="componentContent.enableTrials">
-    <mat-label i18n>Select trials to show</mat-label>
-    <mat-select
-      [(ngModel)]="trialIdsToShow"
-      (ngModelChange)="trialIdsToShowChanged()"
-      [disabled]="isDisabled"
-      multiple
-    >
-      <mat-select-trigger>
-        <ng-container *ngFor="let trial of trials">
-          <span *ngIf="trialIdsToShow.includes(trial.id)">
-            {{ trial.name
-            }}<span *ngIf="trialIdsToShow.indexOf(trial.id) !== trialIdsToShow.length - 1">, </span>
-          </span>
-        </ng-container>
-      </mat-select-trigger>
-      <mat-option
-        *ngFor="let trial of trials; let trialIndex = index"
-        [value]="trial.id"
-        (click)="trialCheckboxClicked()"
-      >
-        <span>{{ trial.name }}</span>
-        <span fxFlex></span>
-        <button
-          mat-icon-button
-          (click)="deleteTrial(trialIndex)"
-          *ngIf="componentContent.canDeleteTrials"
-          class="delete-trial-button"
-          aria-label="Delete trial"
-          i18n-aria-label
+<component-header [component]="component" />
+@if (componentContent.enableFileUpload) {
+  <input type="file" accept=".csv" (change)="fileUploadChanged($event)" [disabled]="isDisabled" />
+}
+@if (showTrialSelect) {
+  <div class="component__actions flex flex-row gap-4">
+    @if (componentContent.enableTrials) {
+      <mat-form-field>
+        <mat-label i18n>Select trials to show</mat-label>
+        <mat-select
+          [(ngModel)]="trialIdsToShow"
+          (ngModelChange)="trialIdsToShowChanged()"
+          [disabled]="isDisabled"
+          multiple
+        >
+          <mat-select-trigger>
+            @for (trial of trials; track trial) {
+              @if (trialIdsToShow.includes(trial.id)) {
+                @if (trialIdsToShow.indexOf(trial.id) === trialIdsToShow.length - 1) {
+                  {{ trial.name }}
+                } @else {
+                  {{ trial.name }},
+                }
+              }
+            }
+          </mat-select-trigger>
+          @for (trial of trials; track trial; let trialIndex = $index) {
+            <mat-option [value]="trial.id" (click)="trialCheckboxClicked()">
+              <div class="flex flex-row items-center gap-2">
+                <span>{{ trial.name }}</span>
+                @if (componentContent.canDeleteTrials) {
+                  <button
+                    mat-icon-button
+                    (click)="deleteTrial(trialIndex)"
+                    class="delete-trial-button"
+                    aria-label="Delete trial"
+                    i18n-aria-label
+                    [disabled]="isDisabled"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                }
+              </div>
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+    @if (componentContent.enableTrials && showSelectActiveTrials()) {
+      <mat-form-field>
+        <mat-label i18n>Select trial to edit</mat-label>
+        <mat-select
+          [(ngModel)]="activeTrial"
+          (ngModelChange)="activeTrialChanged()"
+          class="graph-select"
           [disabled]="isDisabled"
         >
-          <mat-icon>delete</mat-icon>
+          @for (trial of trials; track trial) {
+            @if (trial.show && canEditTrial(trial)) {
+              <mat-option [value]="trial">
+                {{ trial.name }}
+              </mat-option>
+            }
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+    @if (isShowSelectSeriesInput()) {
+      <mat-form-field>
+        <mat-label i18n>Select series to edit</mat-label>
+        <mat-select
+          [(ngModel)]="activeSeries"
+          (ngModelChange)="activeSeriesChanged()"
+          class="graph-select"
+          [disabled]="isDisabled"
+        >
+          @for (graphSeries of series; track graphSeries) {
+            <mat-option [value]="graphSeries">
+              {{ graphSeries.name }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+    <div>
+      <button
+        #hiddenButton
+        style="height: 0; width: 0; padding: 0; border: 0 none"
+        aria-role="none"
+        tabindex="-1"
+      ></button>
+      @if (isResetSeriesButtonVisible && activeSeries != null && activeSeries.canEdit) {
+        <button mat-button color="accent" (click)="resetSeries()" [disabled]="isDisabled">
+          <mat-icon>restore</mat-icon>
+          <span i18n>Reset Series</span>
         </button>
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="componentContent.enableTrials && showSelectActiveTrials()">
-    <mat-label i18n>Select trial to edit</mat-label>
-    <mat-select
-      [(ngModel)]="activeTrial"
-      (ngModelChange)="activeTrialChanged()"
-      class="graph-select"
-      [disabled]="isDisabled"
-    >
-      <ng-container *ngFor="let trial of trials">
-        <mat-option *ngIf="trial.show && canEditTrial(trial)" [value]="trial">
-          {{ trial.name }}
-        </mat-option>
-      </ng-container>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="isShowSelectSeriesInput()">
-    <mat-label i18n>Select series to edit</mat-label>
-    <mat-select
-      [(ngModel)]="activeSeries"
-      (ngModelChange)="activeSeriesChanged()"
-      class="graph-select"
-      [disabled]="isDisabled"
-    >
-      <mat-option *ngFor="let series of series" [value]="series">
-        {{ series.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div>
-    <button
-      #hiddenButton
-      style="height: 0; width: 0; padding: 0; border: 0 none"
-      aria-role="none"
-      tabindex="-1"
-    ></button>
-    <button
-      mat-button
-      *ngIf="isResetSeriesButtonVisible && activeSeries != null && activeSeries.canEdit"
-      color="accent"
-      (click)="resetSeries()"
-      [disabled]="isDisabled"
-    >
-      <mat-icon>restore</mat-icon>
-      <span i18n>Reset Series</span>
-    </button>
-  </div>
-  <div *ngIf="showUndoButton">
-    <button mat-button color="accent" (click)="undoClicked()" [disabled]="isDisabled">
-      <mat-icon>undo</mat-icon>
-      <span i18n>Undo</span>
-    </button>
-  </div>
-</div>
-<div class="component__actions">
-  <button
-    mat-button
-    color="accent"
-    (click)="newTrialButtonClicked()"
-    *ngIf="componentContent.canCreateNewTrials"
-    [disabled]="isDisabled"
-  >
-    <mat-icon>add</mat-icon>
-    <span i18n>New Trial</span>
-  </button>
-  <button
-    mat-button
-    color="accent"
-    *ngIf="isAddToNotebookEnabled()"
-    (click)="snipGraph()"
-    [disabled]="isDisabled"
-  >
-    <mat-icon>note_add</mat-icon>
-    <span i18n>Add to Notebook</span>
-  </button>
-  <button
-    mat-button
-    color="accent"
-    *ngIf="isStudentAttachmentEnabled"
-    (click)="showStudentAssets()"
-    [disabled]="isDisabled"
-  >
-    <mat-icon>image</mat-icon>
-    <span i18n>Import Data</span>
-  </button>
-</div>
-<div fxLayout="column">
-  <div fxLayout="row">
-    <div fxLayout="column" class="y-limit-column" *ngIf="!yAxisLocked">
-      <mat-form-field class="limit-input" appearance="fill">
-        <mat-label i18n>Y Max</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="yAxis.max"
-          (ngModelChange)="studentDataChanged()"
-          [disabled]="isDisabled"
-        />
-      </mat-form-field>
-      <span fxFlex></span>
-      <mat-form-field class="limit-input" appearance="fill">
-        <mat-label i18n>Y Min</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="yAxis.min"
-          (ngModelChange)="studentDataChanged()"
-          [disabled]="isDisabled"
-        />
-      </mat-form-field>
+      }
     </div>
+    @if (showUndoButton) {
+      <div>
+        <button mat-button color="accent" (click)="undoClicked()" [disabled]="isDisabled">
+          <mat-icon>undo</mat-icon>
+          <span i18n>Undo</span>
+        </button>
+      </div>
+    }
+  </div>
+}
+<div class="component__actions">
+  @if (componentContent.canCreateNewTrials) {
+    <button mat-button color="accent" (click)="newTrialButtonClicked()" [disabled]="isDisabled">
+      <mat-icon>add</mat-icon>
+      <span i18n>New Trial</span>
+    </button>
+  }
+  @if (isAddToNotebookEnabled()) {
+    <button mat-button color="accent" (click)="snipGraph()" [disabled]="isDisabled">
+      <mat-icon>note_add</mat-icon>
+      <span i18n>Add to Notebook</span>
+    </button>
+  }
+  @if (isStudentAttachmentEnabled) {
+    <button mat-button color="accent" (click)="showStudentAssets()" [disabled]="isDisabled">
+      <mat-icon>image</mat-icon>
+      <span i18n>Import Data</span>
+    </button>
+  }
+</div>
+<div class="flex flex-col">
+  <div class="flex flex-row">
+    @if (!yAxisLocked) {
+      <div class="flex flex-col y-limit-column">
+        <mat-form-field class="limit-input" appearance="fill">
+          <mat-label i18n>Y Max</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="yAxis.max"
+            (ngModelChange)="studentDataChanged()"
+            [disabled]="isDisabled"
+          />
+        </mat-form-field>
+        <span class="flex-1"></span>
+        <mat-form-field class="limit-input" appearance="fill">
+          <mat-label i18n>Y Min</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="yAxis.min"
+            (ngModelChange)="studentDataChanged()"
+            [disabled]="isDisabled"
+          />
+        </mat-form-field>
+      </div>
+    }
     <div class="highcharts-container" [class.invisible]="!isLoaded" (click)="focusOnComponent()">
       <highcharts-chart
         [id]="chartId"
@@ -166,54 +165,56 @@
       </highcharts-chart>
     </div>
   </div>
-  <div fxLayout="row" *ngIf="!componentContent.xAxis.locked">
-    <div fxLayout="row" class="x-limit-row">
-      <div class="limit-input"></div>
-      <mat-form-field class="limit-input" appearance="fill">
-        <mat-label i18n>X Min</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="xAxis.min"
-          (ngModelChange)="studentDataChanged()"
-          [disabled]="isDisabled"
-        />
-      </mat-form-field>
-      <span fxFlex></span>
-      <mat-form-field class="limit-input" appearance="fill">
-        <mat-label i18n>X Max</mat-label>
-        <input
-          matInput
-          type="number"
-          [(ngModel)]="xAxis.max"
-          (ngModelChange)="studentDataChanged()"
-          [disabled]="isDisabled"
-        />
-      </mat-form-field>
+  @if (!componentContent.xAxis.locked) {
+    <div class="flex flex-row">
+      <div class="flex flex-row x-limit-row">
+        <div class="limit-input"></div>
+        <mat-form-field class="limit-input" appearance="fill">
+          <mat-label i18n>X Min</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="xAxis.min"
+            (ngModelChange)="studentDataChanged()"
+            [disabled]="isDisabled"
+          />
+        </mat-form-field>
+        <span class="flex-1"></span>
+        <mat-form-field class="limit-input" appearance="fill">
+          <mat-label i18n>X Max</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="xAxis.max"
+            (ngModelChange)="studentDataChanged()"
+            [disabled]="isDisabled"
+          />
+        </mat-form-field>
+      </div>
     </div>
-  </div>
+  }
 </div>
-<component-save-submit-buttons
-  *ngIf="isSaveOrSubmitButtonVisible"
-  [componentState]="latestComponentState"
-  [isDirty]="isDirty"
-  [isDisabled]="isDisabled"
-  [isSaveButtonVisible]="isSaveButtonVisible"
-  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-  [isSubmitButtonVisible]="isSubmitButtonVisible"
-  [isSubmitDirty]="isSubmitDirty"
-  (saveButtonClicked)="saveButtonClicked($event)"
-  (submitButtonClicked)="submitButtonClicked($event)"
->
-</component-save-submit-buttons>
-<component-annotations
-  *ngIf="mode === 'student'"
-  [annotations]="latestAnnotations"
-  [maxScore]="componentContent.maxScore"
-  [nodeId]="nodeId"
-  [componentId]="componentId"
->
-</component-annotations>
+@if (isSaveOrSubmitButtonVisible) {
+  <component-save-submit-buttons
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  />
+}
+@if (mode === 'student') {
+  <component-annotations
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  />
+}
 <div class="canvas-div">
   <canvas [id]="hiddenCanvasId"></canvas>
 </div>

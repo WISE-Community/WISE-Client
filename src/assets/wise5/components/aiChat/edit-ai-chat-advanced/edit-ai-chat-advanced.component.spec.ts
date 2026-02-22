@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditAiChatAdvancedComponent } from './edit-ai-chat-advanced.component';
 import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ComponentAuthoringModule } from '../../../../../app/teacher/component-authoring.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { EditAiChatAdvancedComponent } from './edit-ai-chat-advanced.component';
+import { MockComponents, MockProviders } from 'ng-mocks';
+import { NotebookService } from '../../../services/notebookService';
+import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
+import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
+import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 
 describe('EditAiChatAdvancedComponent', () => {
   let component: EditAiChatAdvancedComponent;
@@ -15,19 +14,15 @@ describe('EditAiChatAdvancedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditAiChatAdvancedComponent],
       imports: [
-        BrowserAnimationsModule,
-        ComponentAuthoringModule,
-        MatDialogModule,
-        StudentTeacherCommonServicesModule
+        EditAiChatAdvancedComponent,
+        MockComponents(
+          EditComponentJsonComponent,
+          EditComponentWidthComponent,
+          EditConnectedComponentsComponent
+        )
       ],
-      providers: [
-        TeacherNodeService,
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
+      providers: [MockProviders(NotebookService, TeacherNodeService, TeacherProjectService)]
     });
     fixture = TestBed.createComponent(EditAiChatAdvancedComponent);
     component = fixture.componentInstance;

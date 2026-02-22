@@ -2,10 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { OfficialLibraryComponent } from './official-library.component';
 import { fakeAsyncResponse } from '../../../student/student-run-list/student-run-list.component.spec';
 import { LibraryService } from '../../../services/library.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { LibraryGroup } from '../libraryGroup';
 import { BehaviorSubject, of } from 'rxjs';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
 export class MockLibraryService {
@@ -21,17 +19,14 @@ describe('OfficialLibraryComponent', () => {
   let fixture: ComponentFixture<OfficialLibraryComponent>;
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [OverlayModule],
-      declarations: [OfficialLibraryComponent],
-      providers: [{ provide: LibraryService, useClass: MockLibraryService }, ProjectFilterValues],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [OfficialLibraryComponent],
+      providers: [{ provide: LibraryService, useClass: MockLibraryService }, ProjectFilterValues]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OfficialLibraryComponent);
     component = fixture.componentInstance;
-    component.projects = [];
     fixture.detectChanges();
   });
 

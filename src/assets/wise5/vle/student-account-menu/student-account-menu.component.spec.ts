@@ -1,16 +1,12 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
 import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { StudentAccountMenuComponent } from './student-account-menu.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockProvider, MockProviders } from 'ng-mocks';
+import { ConfigService } from '../../services/configService';
+import { of } from 'rxjs';
 
 class MockProjectService {
   rootNode = {};
@@ -44,15 +40,16 @@ describe('StudentAccountMenuComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [StudentAccountMenuComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule,
-        MatDividerModule,
-        MatIconModule,
-        MatMenuModule,
-        StudentTeacherCommonServicesModule],
-    providers: [{ provide: ProjectService, useClass: MockProjectService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentAccountMenuComponent],
+      providers: [
+        { provide: ProjectService, useClass: MockProjectService },
+        MockProviders(ConfigService, SessionService),
+        MockProvider(StudentDataService, {
+          nodeStatusesChanged$: of()
+        }),
+        provideHttpClient()
+      ]
+    });
     const studentDataService = TestBed.inject(StudentDataService);
     studentDataService.nodeStatuses = {
       node1: {
@@ -69,6 +66,11 @@ describe('StudentAccountMenuComponent', () => {
       }
     };
     fixture = TestBed.createComponent(StudentAccountMenuComponent);
+    spyOn(TestBed.inject(ConfigService), 'getWorkgroupId').and.returnValue(1);
+    spyOn(TestBed.inject(ConfigService), 'getUsernamesByWorkgroupId').and.returnValue([
+      { name: 'Spongebob Squarepants' },
+      { name: 'Patrick Star' }
+    ]);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -89,21 +91,17 @@ describe('StudentAccountMenuComponent', () => {
     expect(goHomeSpy).toHaveBeenCalled();
   });
 
-  it(
-    'should log out',
-    waitForAsync(() => {
-      const saveEventSpy = spyOn(
-        TestBed.inject(StudentDataService),
-        'saveVLEEvent'
-      ).and.returnValue(Promise.resolve({}));
-      const logOutSpy = spyOn(TestBed.inject(SessionService), 'logOut');
-      component.logOut();
-      expect(saveEventSpy).toHaveBeenCalled();
-      fixture.whenStable().then(() => {
-        expect(logOutSpy).toHaveBeenCalled();
-      });
-    })
-  );
+  it('should log out', waitForAsync(() => {
+    const saveEventSpy = spyOn(TestBed.inject(StudentDataService), 'saveVLEEvent').and.returnValue(
+      Promise.resolve({})
+    );
+    const logOutSpy = spyOn(TestBed.inject(SessionService), 'logOut');
+    component.logOut();
+    expect(saveEventSpy).toHaveBeenCalled();
+    fixture.whenStable().then(() => {
+      expect(logOutSpy).toHaveBeenCalled();
+    });
+  }));
 
   it('should set the max score', () => {
     expect(component.maxScore).toEqual(6);

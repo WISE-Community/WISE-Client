@@ -5,13 +5,12 @@ import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule'
 import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
 import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
 import { PromptComponent } from '../prompt/prompt.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    imports: [FlexLayoutModule, PossibleScoreComponent, PromptComponent],
-    selector: 'component-header',
-    styleUrl: 'component-header.component.scss',
-    templateUrl: 'component-header.component.html'
+  imports: [PossibleScoreComponent, PromptComponent],
+  selector: 'component-header',
+  styles: ['.component-header { padding-bottom: 8px; } .prompt { font-weight: 500; }'],
+  templateUrl: 'component-header.component.html'
 })
 export class ComponentHeaderComponent {
   @Input() component: WISEComponent;

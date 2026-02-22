@@ -24,38 +24,11 @@
     (ngModelChange)="enableCRaterClicked()"
     i18n
   >
-    Enable CRater
+    Enable AI Model
   </mat-checkbox>
 </div>
 @if (componentContent.enableCRater) {
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <mat-form-field>
-      <mat-label i18n>Item Id</mat-label>
-      <input
-        matInput
-        [(ngModel)]="componentContent.cRater.itemId"
-        (ngModelChange)="componentChanged()"
-      />
-    </mat-form-field>
-    <div>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="verifyCRaterItemId(componentContent.cRater.itemId)"
-        i18n
-      >
-        Verify
-      </button>
-    </div>
-    @if (isVerifyingCRaterItemId) {
-      <span i18n>Verifying...</span>
-    }
-    @if (cRaterItemIdIsValid) {
-      <span class="valid" i18n>Valid</span>
-    } @else {
-      <span class="invalid" i18n>Invalid</span>
-    }
-  </div>
+  <c-rater-item-select [componentContent]="componentContent" />
   <div>
     <mat-form-field>
       <mat-label i18n>Score On</mat-label>
@@ -107,7 +80,7 @@
     !componentContent.cRater.feedback?.enabled && componentContent.cRater.scoringRules.length > 0
   ) {
     <div class="section-container">
-      <div fxLayoutGap="10px" class="section-label">
+      <div class="flex gap-2 section-label">
         <span i18n>Scoring Rule</span>
         <button
           mat-raised-button
@@ -127,12 +100,7 @@
         let isFirst = $first;
         let isLast = $last
       ) {
-        <div
-          fxLayout="row wrap"
-          fxLayoutAlign="start start"
-          fxLayoutGap="20px"
-          class="section-item"
-        >
+        <div class="flex flex-row flex-wrap items-start justify-start gap-4 section-item">
           <mat-form-field class="scoring-rule-score">
             <mat-label i18n>Score</mat-label>
             <input
@@ -151,7 +119,7 @@
             (defaultLanguageTextChanged)="componentChanged()"
             class="scoring-rule-feedback-text"
           />
-          <div fxLayoutGap="10px">
+          <div class="flex gap-2">
             <button
               mat-raised-button
               color="primary"
@@ -189,7 +157,6 @@
       }
     </div>
   }
-
   <div class="section-container">
     <div>
       <mat-checkbox
@@ -203,7 +170,7 @@
       </mat-checkbox>
     </div>
     @if (componentContent.cRater.enableMultipleAttemptScoringRules) {
-      <div fxLayoutGap="10px" class="section-label">
+      <div class="flex gap-2 section-label">
         <span i18n>Multiple Attempt Scoring Rules</span>
         <button
           mat-raised-button
@@ -223,12 +190,7 @@
         let isFirst = $first;
         let isLast = $last
       ) {
-        <div
-          fxLayout="row wrap"
-          fxLayoutAlign="start center"
-          fxLayoutGap="20px"
-          class="section-item"
-        >
+        <div class="flex flex-row flex-wrap items-center justify-start gap-4 section-item">
           <mat-form-field class="previous-score">
             <mat-label i18n>Previous Score</mat-label>
             <input
@@ -255,7 +217,7 @@
             (defaultLanguageTextChanged)="componentChanged()"
             class="multiple-attempt-feedback"
           />
-          <div fxLayoutGap="10px">
+          <div class="flex gap-2">
             <button
               mat-raised-button
               color="primary"
@@ -316,7 +278,7 @@
       </mat-checkbox>
     </div>
     @if (componentContent.enableNotifications) {
-      <div fxLayoutGap="10px" class="section-label">
+      <div class="flex gap-2 section-label">
         <span i18n>Notifications</span>
         <button
           mat-raised-button
@@ -337,7 +299,7 @@
         let isLast = $last
       ) {
         <div class="section-item">
-          <div fxLayoutGap="20px">
+          <div class="flex gap-4">
             <mat-form-field class="notification-score">
               <mat-label i18n>Previous Score</mat-label>
               <input
@@ -358,8 +320,8 @@
                 (ngModelChange)="componentChanged()"
               />
             </mat-form-field>
-            <div fxFlex></div>
-            <div fxLayoutGap="10px">
+            <div class="flex-grow"></div>
+            <div class="flex gap-2">
               <button
                 mat-raised-button
                 color="primary"
@@ -404,7 +366,7 @@
               </button>
             </div>
           </div>
-          <div fxLayoutAlign="start start" fxLayoutGap="20px">
+          <div class="flex items-start justify-start gap-4">
             <mat-checkbox
               color="primary"
               class="checkbox"
@@ -424,7 +386,7 @@
               </mat-form-field>
             }
           </div>
-          <div fxLayoutAlign="start start" fxLayoutGap="20px">
+          <div class="flex items-start justify-start gap-4">
             <mat-checkbox
               color="primary"
               class="checkbox"
@@ -444,7 +406,7 @@
               />
             }
           </div>
-          <div fxLayoutAlign="start start" fxLayoutGap="20px">
+          <div class="flex items-start justify-start gap-4">
             <mat-checkbox
               color="primary"
               class="checkbox"
@@ -479,7 +441,7 @@
       Use Custom Completion Criteria
     </mat-checkbox>
     @if (useCustomCompletionCriteria && componentContent.completionCriteria != null) {
-      <div fxLayoutGap="10px" class="section-label">
+      <div class="flex gap-2 section-label">
         <span i18n>Custom Completion Criteria</span>
         <button
           mat-raised-button
@@ -499,12 +461,7 @@
         let isFirst = $first;
         let isLast = $last
       ) {
-        <div
-          fxLayout="row wrap"
-          fxLayoutAlign="start center"
-          fxLayoutGap="20px"
-          class="section-item"
-        >
+        <div class="flex flex-row flex-wrap items-center justify-start gap-4 section-item">
           <mat-form-field class="custom-completion-criteria-step">
             <mat-label i18n>Step</mat-label>
             <mat-select [(ngModel)]="criteria.nodeId" (ngModelChange)="componentChanged()">
@@ -541,8 +498,8 @@
               <mat-option value="isSaved" i18n>Save</mat-option>
             </mat-select>
           </mat-form-field>
-          <div fxFlex></div>
-          <div fxLayoutGap="10px">
+          <div class="flex-grow"></div>
+          <div class="flex gap-2">
             <button
               mat-raised-button
               color="primary"
@@ -581,23 +538,16 @@
     }
   </div>
   <div class="section-container">
-    @if (showIdeaDescriptions) {
-      <edit-crater-idea-descriptions
-        [ideaDescriptions]="componentContent.cRater.rubric.ideas"
-        [enableAutoscrolling]="false"
-      />
-      <a (click)="toggleShowIdeaDescriptions()" i18n>Hide</a>
-    } @else {
-      <a (click)="toggleShowIdeaDescriptions()" i18n>Show Idea Descriptions</a>
+    @if (componentContent.enableCRater) {
+      <edit-crater-info [cRaterRubric]="componentContent.cRater.rubric" />
     }
   </div>
 }
-@if (isNotebookEnabled) {
+@if (isNotebookEnabled()) {
   <edit-component-add-to-notebook-button [componentContent]="componentContent" />
   <br />
 }
 <edit-common-advanced
   [component]="component"
   [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
->
-</edit-common-advanced>
+/>

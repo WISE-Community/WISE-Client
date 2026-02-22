@@ -1,91 +1,97 @@
-<component-header [component]="component"></component-header>
-<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
-  <button
-    mat-button
-    color="primary"
-    (click)="snipButtonClicked($event)"
-    *ngIf="isAddToNotebookEnabled()"
-    [disabled]="isDisabled"
-    i18n
-  >
-    <mat-icon>note_add</mat-icon>
-    Add to Notebook
-  </button>
-  <button
-    mat-button
-    color="primary"
-    (click)="copyPublicNotebookItemButtonClicked()"
-    *ngIf="isPublicSpaceExist"
-    [disabled]="isDisabled"
-    i18n
-  >
-    <mat-icon>file_download</mat-icon>
-    Import Classmate Work
-  </button>
+<component-header [component]="component" />
+<div class="flex flex-row flex-wrap justify-start items-center gap-4">
+  @if (isAddToNotebookEnabled()) {
+    <button
+      mat-button
+      color="primary"
+      (click)="snipButtonClicked($event)"
+      [disabled]="isDisabled"
+      i18n
+    >
+      <mat-icon>note_add</mat-icon>
+      Add to Notebook
+    </button>
+  }
+  @if (isPublicSpaceExist) {
+    <button
+      mat-button
+      color="primary"
+      (click)="copyPublicNotebookItemButtonClicked()"
+      [disabled]="isDisabled"
+      i18n
+    >
+      <mat-icon>file_download</mat-icon>
+      Import Classmate Work
+    </button>
+  }
 </div>
-<div class="student-response-wrapper">
-  <textarea
-    class="student-response"
-    [(ngModel)]="studentResponse"
-    (ngModelChange)="studentDataChanged()"
-    [disabled]="isDisabled"
-    cdkTextareaAutosize
-    (focus)="onFocus()"
-  >
-  </textarea>
-  <speech-to-text
-    *ngIf="speechToTextEnabled"
-    (newTextEvent)="appendStudentResponse($event)"
-  ></speech-to-text>
+<div class="my-2">
+  <mat-form-field class="w-full form-field-no-hint">
+    <textarea
+      matInput
+      class="student-response"
+      [(ngModel)]="studentResponse"
+      (ngModelChange)="studentDataChanged()"
+      [disabled]="isDisabled"
+      cdkTextareaAutosize
+    >
+    </textarea>
+  </mat-form-field>
+  @if (speechToTextEnabled) {
+    <speech-to-text (newTextEvent)="appendStudentResponse($event)" />
+  }
+  @if (isStudentAudioRecordingEnabled) {
+    <audio-recorder
+      [audioAttachments]="audioAttachments"
+      (attachAudioRecording)="attachAudioRecording($event)"
+      [componentId]="componentId"
+      [nodeId]="nodeId"
+      (removeAttachment)="removeAttachment($event)"
+    />
+  }
 </div>
-<div *ngIf="isStudentAttachmentEnabled" fxLayout="row wrap" fxLayoutAlign="start center">
-  <div>
+@if (isStudentAttachmentEnabled) {
+  <div class="flex flex-row flex-wrap justify-start items-center">
     <button mat-button color="primary" (click)="showStudentAssets()" [disabled]="isDisabled">
       <mat-icon>image</mat-icon>
       <span i18n>Add File</span>
     </button>
+    @for (attachment of attachments; track attachment) {
+      @if (attachment.type !== 'audio') {
+        <div>
+          <img [src]="attachment.iconURL" />
+          <button
+            mat-button
+            color="primary"
+            (click)="removeAttachment(attachment)"
+            title="Remove file"
+            [disabled]="isDisabled"
+          >
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
+      }
+    }
   </div>
-  <div *ngFor="let attachment of attachments">
-    <div *ngIf="attachment.type !== 'audio'">
-      <img [src]="attachment.iconURL" />
-      <button
-        mat-button
-        color="primary"
-        (click)="removeAttachment(attachment)"
-        title="Remove file"
-        [disabled]="isDisabled"
-      >
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </div>
-  </div>
-</div>
-<audio-recorder
-  *ngIf="isStudentAudioRecordingEnabled"
-  [audioAttachments]="audioAttachments"
-  (attachAudioRecording)="attachAudioRecording($event)"
-  [componentId]="componentId"
-  [nodeId]="nodeId"
-  (removeAttachment)="removeAttachment($event)"
-></audio-recorder>
-<component-save-submit-buttons
-  *ngIf="isSaveOrSubmitButtonVisible"
-  [componentState]="latestComponentState"
-  [isDirty]="isDirty"
-  [isDisabled]="isDisabled"
-  [isSaveButtonVisible]="isSaveButtonVisible"
-  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-  [isSubmitButtonVisible]="isSubmitButtonVisible"
-  [isSubmitDirty]="isSubmitDirty"
-  (saveButtonClicked)="saveButtonClicked($event)"
-  (submitButtonClicked)="submitButtonClicked($event)"
->
-</component-save-submit-buttons>
-<component-annotations
-  *ngIf="mode === 'student'"
-  [annotations]="latestAnnotations"
-  [maxScore]="componentContent.maxScore"
-  [nodeId]="nodeId"
-  [componentId]="componentId"
->
-</component-annotations>
+}
+@if (isSaveOrSubmitButtonVisible) {
+  <component-save-submit-buttons
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  />
+}
+@if (mode === 'student') {
+  <component-annotations
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  />
+}

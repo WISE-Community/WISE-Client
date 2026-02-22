@@ -1,29 +1,21 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
-import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
-import { ProjectService } from '../../../services/projectService';
-import { EditMatchConnectedComponentsComponent } from './edit-match-connected-components.component';
 import { createConnectedComponentObject } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.spec';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { ProjectService } from '../../../services/projectService';
 import { MatchContent } from '../MatchContent';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { EditMatchConnectedComponentsComponent } from './edit-match-connected-components.component';
 
 let component: EditMatchConnectedComponentsComponent;
 let fixture: ComponentFixture<EditMatchConnectedComponentsComponent>;
 const componentId1 = 'componentId1';
 const nodeId1 = 'nodeId1';
-
 describe('EditMatchConnectedComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [
-        EditConnectedComponentsAddButtonComponent,
-        EditMatchConnectedComponentsComponent
-    ],
-    imports: [MatIconModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [EditMatchConnectedComponentsComponent, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    }).compileComponents();
   });
 
   beforeEach(() => {

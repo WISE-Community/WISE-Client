@@ -1,10 +1,7 @@
 <div class="main-div">
-  <add-to-notebook-button
-    *ngIf="isShowAddToNotebookButton"
-    [isDisabled]="isDisabled"
-    (snipImage)="snipModel()"
-  >
-  </add-to-notebook-button>
+  @if (isShowAddToNotebookButton) {
+    <add-to-notebook-button [isDisabled]="isDisabled" (snipImage)="snipModel()" />
+  }
   <br />
   <div style="width: {{ width }}; height: {{ height }};">
     <iframe
@@ -16,24 +13,24 @@
     </iframe>
   </div>
 </div>
-<component-save-submit-buttons
-  *ngIf="isSaveOrSubmitButtonVisible"
-  [componentState]="latestComponentState"
-  [isDirty]="isDirty"
-  [isDisabled]="isDisabled"
-  [isSaveButtonVisible]="isSaveButtonVisible"
-  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-  [isSubmitButtonVisible]="isSubmitButtonVisible"
-  [isSubmitDirty]="isSubmitDirty"
-  (saveButtonClicked)="saveButtonClicked($event)"
-  (submitButtonClicked)="submitButtonClicked($event)"
->
-</component-save-submit-buttons>
-<component-annotations
-  *ngIf="mode === 'student'"
-  [annotations]="latestAnnotations"
-  [maxScore]="componentContent.maxScore"
-  [nodeId]="nodeId"
-  [componentId]="componentId"
->
-</component-annotations>
+@if (isSaveOrSubmitButtonVisible) {
+  <component-save-submit-buttons
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  />
+}
+@if (mode === 'student') {
+  <component-annotations
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  />
+}

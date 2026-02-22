@@ -12,7 +12,7 @@
     <mat-button-toggle-group
       [(ngModel)]="selectedAvatar"
       [disabled]="avatars.length === 1"
-      fxLayout="row wrap"
+      class="flex flex-wrap"
       aria-label="Selected avatar"
       i18n-aria-label
     >
@@ -30,7 +30,7 @@
       }
     </mat-button-toggle-group>
   </mat-card-content>
-  <mat-card-actions fxLayoutAlign="end">
+  <mat-card-actions align="end">
     <button
       mat-flat-button
       color="primary"

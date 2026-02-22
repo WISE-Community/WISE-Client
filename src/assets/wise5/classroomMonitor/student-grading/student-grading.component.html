@@ -1,13 +1,10 @@
 <div class="view-content view-content--with-sidemenu">
   <div class="l-constrained grading">
     <div
-      class="content-head"
-      fxLayout="row wrap"
-      fxLayoutAlign="center center"
-      fxLayoutAlign.gt-sm="start center"
+      class="content-head flex flex-row flex-wrap justify-center items-center sm:justify-start sm:items-start"
     >
-      <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex.xs="100" fxFlex.sm="100">
-        <div class="accent-1" fxLayout="row" fxLayoutAlign="center center">
+      <div class="flex flex-row flex-wrap justify-center items-center w-full w-full md:w-auto">
+        <div class="accent-1 flex flex-row justify-center items-center">
           <h2 class="content-head__item">
             {{ projectCompletion.completionPct }}%
             <span class="content-head-label" i18n>Completion</span>
@@ -20,9 +17,8 @@
       </div>
     </div>
     <mat-list class="user-list">
-      <mat-list-item class="mat-elevation-z1 list-item list-item--actions" fxLayout="row wrap">
-        <span fxFlex fxHide.xs fxHide.sm></span>
-        <span fxFlex.xs="100" fxFlex.sm="100" fxLayout="row" fxLayoutAlign="center center">
+      <mat-list-item class="mat-elevation-z1 list-item list-item--actions">
+        <div class="flex justify-center md:justify-end">
           <button
             mat-button
             color="primary"
@@ -45,83 +41,79 @@
           >
             - Collapse All
           </button>
-        </span>
+        </div>
       </mat-list-item>
       <mat-list-item class="table--list__thead table--list__thead__th md-whiteframe-1dp">
-        <div class="mat-list-item-text table--list__thead__tr dark-theme" fxLayout="row" fxFlex>
+        <div class="mat-list-item-text table--list__thead__tr dark-theme flex flex-row flex-1">
           <button
             mat-button
-            class="table--list__thead__link"
-            fxFlex="50"
-            fxLayout="row"
-            fxLayoutAlign="start center"
+            class="table--list__thead__link flex-1 basis-1/2 items-center !justify-start"
             (click)="setSort('step')"
             aria-label="Sort by step"
             i18n-aria-label
           >
             <span i18n>Step</span>
-            <mat-icon
-              *ngIf="sort === 'step' || sort === '-step'"
-              class="text-light table--list__thead__sort"
-              [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-step' }"
-            >
-              arrow_drop_up
-            </mat-icon>
+            @if (sort === 'step' || sort === '-step') {
+              <mat-icon
+                class="text-light table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-step' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
           </button>
           <button
             mat-button
-            class="table--list__thead__link"
-            fxFlex="30"
-            fxLayout="row"
-            fxLayoutAlign="center center"
+            class="table--list__thead__link flex-1 basis-[30%] flex flex-row items-center justify-center"
             (click)="setSort('status')"
             aria-label="Sort by completion"
             i18n-aria-label
           >
             <span i18n>Status</span>
-            <mat-icon
-              *ngIf="sort === 'status' || sort === '-status'"
-              class="text-light table--list__thead__sort"
-              [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
-            >
-              arrow_drop_up
-            </mat-icon>
+            @if (sort === 'status' || sort === '-status') {
+              <mat-icon
+                class="text-light table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-status' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
           </button>
           <button
             mat-button
-            class="table--list__thead__link"
-            fxFlex="20"
-            fxLayout="row"
-            fxLayoutAlign="center center"
+            class="table--list__thead__link flex-1 basis-1/5 flex flex-row items-center justify-center"
             (click)="setSort('score')"
             aria-label="Sort by score"
             i18n-aria-label
           >
             <span i18n>Score</span>
-            <mat-icon
-              *ngIf="sort === 'score' || sort === '-score'"
-              class="text-light table--list__thead__sort"
-              [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
-            >
-              arrow_drop_up
-            </mat-icon>
+            @if (sort === 'score' || sort === '-score') {
+              <mat-icon
+                class="text-light table--list__thead__sort"
+                [ngClass]="{ 'table--list__thead__sort--reverse': sort === '-score' }"
+              >
+                arrow_drop_up
+              </mat-icon>
+            }
           </button>
         </div>
       </mat-list-item>
       <div waIntersectionObserver waIntersectionThreshold="0.5">
-        <ng-container *ngFor="let node of sortedNodes; trackBy: trackNode">
-          <step-item
-            *ngIf="node.show"
-            [expand]="nodeVisibilityById[node.id]"
-            [maxScore]="node.maxScore"
-            [showScore]="node.hasWork"
-            [nodeId]="node.id"
-            [stepData]="node"
-            [workgroupId]="workgroupId"
-            (onUpdateExpand)="onUpdateExpand($event)"
-            (waIntersectionObservee)="onIntersection(node.id, $event)"
-          />
-        </ng-container>
+        @for (node of sortedNodes; track trackNode($index, node)) {
+          @if (node.show) {
+            <step-item
+              [expand]="nodeVisibilityById[node.id]"
+              [maxScore]="node.maxScore"
+              [showScore]="node.hasWork"
+              [nodeId]="node.id"
+              [score]="node.score"
+              [stepData]="node"
+              [workgroupId]="workgroupId"
+              (onUpdateExpand)="onUpdateExpand($event)"
+              (waIntersectionObservee)="onIntersection(node.id, $event)"
+            />
+          }
+        }
       </div>
     </mat-list>
   </div>

@@ -1,21 +1,23 @@
-<ng-container *ngFor="let message of messages">
-  <ai-chat-student-message
-    *ngIf="message.role === 'user' && !message.hidden"
-    class="ai-chat-message"
-    [message]="message"
-    [workgroupId]="workgroupId"
-  ></ai-chat-student-message>
+@for (message of messages; track message) {
+  @if (message.role === 'user' && !message.hidden) {
+    <ai-chat-student-message
+      class="ai-chat-message"
+      [message]="message"
+      [workgroupId]="workgroupId"
+    />
+  }
+  @if (message.role === 'assistant') {
+    <ai-chat-bot-message
+      class="ai-chat-message"
+      [message]="message"
+      [computerAvatar]="computerAvatar"
+    />
+  }
+}
+@if (waitingForComputerResponse) {
   <ai-chat-bot-message
-    *ngIf="message.role === 'assistant'"
     class="ai-chat-message"
-    [message]="message"
+    [message]="{ content: '...', role: 'assistant' }"
     [computerAvatar]="computerAvatar"
-  ></ai-chat-bot-message>
-</ng-container>
-<ai-chat-bot-message
-  *ngIf="waitingForComputerResponse"
-  class="ai-chat-message"
-  [message]="{ content: '...', role: 'assistant' }"
-  [computerAvatar]="computerAvatar"
->
-</ai-chat-bot-message>
+  />
+}

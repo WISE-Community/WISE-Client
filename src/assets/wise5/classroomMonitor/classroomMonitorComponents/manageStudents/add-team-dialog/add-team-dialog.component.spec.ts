@@ -1,21 +1,14 @@
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { AddTeamDialogComponent } from './add-team-dialog.component';
+import { MockComponent } from 'ng-mocks';
+import { ShowStudentInfoComponent } from '../show-student-info/show-student-info.component';
 
 class ConfigServiceStub {
   getRunId() {
@@ -53,20 +46,15 @@ const period = {
 describe('AddTeamDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [AddTeamDialogComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
-        MatDialogModule,
-        MatSnackBarModule],
-    providers: [
+      imports: [AddTeamDialogComponent, MockComponent(ShowStudentInfoComponent)],
+      providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: TeacherDataService, useClass: TeacherDataServiceStub },
         { provide: WorkgroupService, useClass: WorkgroupServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: period },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        provideHttpClient()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

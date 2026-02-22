@@ -19,7 +19,7 @@ export abstract class EditAdvancedComponentComponent {
     protected teacherProjectService: TeacherProjectService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.componentContent = this.teacherProjectService.getComponent(this.nodeId, this.componentId);
     this.component = new Component(this.componentContent, this.nodeId);
     this.teacherProjectService.uiChanged();

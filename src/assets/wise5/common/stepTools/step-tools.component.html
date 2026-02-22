@@ -1,4 +1,4 @@
-<div class="step-tools" fxLayout="row" fxLayoutAlign="center center">
+<div class="step-tools flex justify-center items-center">
   <button
     id="previousNodeButton"
     mat-icon-button
@@ -10,7 +10,10 @@
   >
     <mat-icon>{{ icons.prev }}</mat-icon>
   </button>
-  <node-icon *ngIf="nodeId" [nodeId]="nodeId" size="18" />&nbsp;
+  @if (nodeId) {
+    <node-icon [nodeId]="nodeId" size="18" />
+  }
+  &nbsp;
   <mat-form-field appearance="fill">
     <mat-select
       id="stepSelectMenu"
@@ -22,19 +25,22 @@
       (selectionChange)="nodeChanged()"
     >
       <mat-select-trigger>
-        <ng-container *ngIf="nodeId">
+        @if (nodeId) {
           {{ getNodePositionAndTitle(nodeId) }}
-        </ng-container>
-        <ng-container *ngIf="!nodeId" i18n> Select a Step </ng-container>
+        } @else {
+          <ng-container i18n> Select a Step </ng-container>
+        }
       </mat-select-trigger>
-      <mat-option *ngFor="let nodeId of nodeIds" [value]="nodeId" class="node-select-option">
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-          <node-icon [nodeId]="nodeId" size="18" />
-          <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
-            getNodePositionAndTitle(nodeId)
-          }}</span>
-        </div>
-      </mat-option>
+      @for (nodeId of nodeIds; track nodeId) {
+        <mat-option [value]="nodeId" class="node-select-option">
+          <div class="flex justify-start items-center gap-2">
+            <node-icon [nodeId]="nodeId" size="18" />
+            <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
+              getNodePositionAndTitle(nodeId)
+            }}</span>
+          </div>
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
   <button

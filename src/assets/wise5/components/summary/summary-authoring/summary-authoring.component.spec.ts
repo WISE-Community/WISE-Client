@@ -1,70 +1,38 @@
-import { CommonModule } from '@angular/common';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { MockNodeService } from '../../common/MockNodeService';
 import { SummaryAuthoring } from './summary-authoring.component';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { ComponentAuthoringModule } from '../../component-authoring.module';
-import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-
-export class MockConfigService {}
 
 let component: SummaryAuthoring;
 let fixture: ComponentFixture<SummaryAuthoring>;
 let getComponentSpy;
-
 describe('SummaryAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SummaryAuthoring],
-      imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
-        CommonModule,
-        ComponentAuthoringModule,
-        EditComponentPrompt,
-        FormsModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatRadioModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [SummaryAuthoring, StudentTeacherCommonServicesModule],
       providers: [
         { provide: TeacherNodeService, useClass: MockNodeService },
         ProjectAssetService,
         TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        TeacherProjectTranslationService,
+        provideHttpClient(withInterceptorsFromDi())
       ]
     });
-    spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
-      new ProjectLocale({ default: 'en-US' })
-    );
+    const projectService = TestBed.inject(TeacherProjectService);
+    spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale({ default: 'en-US' }));
     fixture = TestBed.createComponent(SummaryAuthoring);
     component = fixture.componentInstance;
     const componentContent = createComponentContent();
     component.componentContent = copy(componentContent);
-    spyOn(TestBed.inject(TeacherProjectService), 'isDefaultLocale').and.returnValue(true);
-    getComponentSpy = spyOn(TestBed.inject(TeacherProjectService), 'getComponent');
+    spyOn(projectService, 'isDefaultLocale').and.returnValue(true);
+    getComponentSpy = spyOn(projectService, 'getComponent');
     getComponentSpy.and.returnValue(componentContent);
     spyOn(component, 'componentChanged');
     fixture.detectChanges();

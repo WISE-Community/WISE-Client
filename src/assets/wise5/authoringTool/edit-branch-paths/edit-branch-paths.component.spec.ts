@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditBranchPathsComponent } from './edit-branch-paths.component';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { TeacherProjectService } from '../../services/teacherProjectService';
-import { provideHttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { MockProvider } from 'ng-mocks';
+import { TeacherProjectService } from '../../services/teacherProjectService';
+import { EditBranchPathsComponent } from './edit-branch-paths.component';
 
 describe('EditBranchPathsComponent', () => {
   let component: EditBranchPathsComponent;
@@ -11,8 +10,8 @@ describe('EditBranchPathsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditBranchPathsComponent, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(), TeacherProjectService]
+      imports: [EditBranchPathsComponent],
+      providers: [MockProvider(TeacherProjectService)]
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditBranchPathsComponent);

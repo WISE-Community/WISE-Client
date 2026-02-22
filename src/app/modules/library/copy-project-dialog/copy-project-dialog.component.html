@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <div class="info-block">
     <p class="mat-subtitle-1 accent-1">
-      {{ data.project.name }} <span class="mat-caption" i18n>(Unit ID: {{ data.project.id }})</span>
+      {{ project.name }} <span class="mat-caption" i18n>(Unit ID: {{ project.id }})</span>
     </p>
     <p i18n>
       Copying creates a duplicate that will appear in “My Units”. You will be the owner and can edit
@@ -19,7 +19,9 @@
     [disabled]="isCopying"
     class="button--progress"
   >
-    <mat-progress-bar *ngIf="isCopying" mode="indeterminate"></mat-progress-bar>
+    @if (isCopying) {
+      <mat-progress-bar mode="indeterminate" />
+    }
     <ng-container i18n>Copy</ng-container>
   </button>
 </mat-dialog-actions>

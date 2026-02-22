@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, Optional, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
@@ -6,7 +6,6 @@ import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { StudentDataService } from '../../../assets/wise5/services/studentDataService';
 import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotebookItemComponent } from '../notebook-item/notebook-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -14,31 +13,28 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatIconModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        NotebookItemComponent
-    ],
-    selector: 'notebook-notes',
-    styleUrl: 'notebook-notes.component.scss',
-    templateUrl: 'notebook-notes.component.html',
-    encapsulation: ViewEncapsulation.None
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    NotebookItemComponent
+  ],
+  selector: 'notebook-notes',
+  styleUrl: 'notebook-notes.component.scss',
+  templateUrl: 'notebook-notes.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class NotebookNotesComponent extends NotebookParentComponent {
   protected groups = [];
   private groupNameToGroup = {};
   protected hasPrivateNotes: boolean = false;
-  protected insertArgs: any = {
-    insertMode: false
-  };
   protected label: any;
   protected selectedTabIndex = 0;
   private subscriptions: Subscription = new Subscription();
@@ -48,9 +44,16 @@ export class NotebookNotesComponent extends NotebookParentComponent {
     configService: ConfigService,
     private dataService: StudentDataService,
     NotebookService: NotebookService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    @Optional() @Inject(MAT_DIALOG_DATA) public insertArgs: any
   ) {
     super(configService, NotebookService);
+    this.insertArgs = this.insertArgs ?? {
+      insertMode: false
+    };
+    if (this.insertArgs.visibleSpace) {
+      this.selectedTabIndex = this.insertArgs.visibleSpace === 'public' ? 1 : 0;
+    }
   }
 
   ngOnInit(): void {
@@ -72,15 +75,6 @@ export class NotebookNotesComponent extends NotebookParentComponent {
           this.updatePublicNotebookNote(notebookItem);
         }
         this.hasPrivateNotes = this.isHasPrivateNotes();
-      })
-    );
-
-    this.subscriptions.add(
-      this.NotebookService.insertMode$.subscribe((args) => {
-        this.insertArgs = args;
-        if (args.visibleSpace) {
-          this.selectedTabIndex = args.visibleSpace === 'public' ? 1 : 0;
-        }
       })
     );
 

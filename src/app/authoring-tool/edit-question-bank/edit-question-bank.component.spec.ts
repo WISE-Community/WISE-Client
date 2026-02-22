@@ -1,21 +1,17 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
 import { EditQuestionBankComponent } from './edit-question-bank.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
 
 let component: EditQuestionBankComponent;
 let fixture: ComponentFixture<EditQuestionBankComponent>;
-
 describe('EditQuestionBankComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditQuestionBankComponent],
-    imports: [MatCheckboxModule, StudentTeacherCommonServicesModule],
-    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [EditQuestionBankComponent],
+      providers: [MockProvider(TeacherProjectService)]
+    }).compileComponents();
   });
   beforeEach(() => {
     fixture = TestBed.createComponent(EditQuestionBankComponent);

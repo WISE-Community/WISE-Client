@@ -12,6 +12,8 @@ h5 {
 ul {
   margin: 16px 0 0 0;
   padding: 0 0 16px;
+  max-height: 60vh;
+  overflow: auto;
 }
 
 li {

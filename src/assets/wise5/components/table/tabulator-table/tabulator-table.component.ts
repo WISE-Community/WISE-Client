@@ -26,31 +26,30 @@ import { copy } from '../../../common/object/object';
 import { TabulatorColumn } from '../TabulatorData';
 
 @Component({
-    selector: 'tabulator-table',
-    templateUrl: './tabulator-table.component.html',
-    styleUrls: ['./tabulator-table.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  selector: 'tabulator-table',
+  styleUrl: './tabulator-table.component.scss',
+  template: `<div #table></div>`
 })
 export class TabulatorTableComponent implements OnChanges, AfterViewInit {
+  @Output() cellChanged = new EventEmitter<Tabulator.CellComponent>();
+  @Input() disabled: boolean;
   @Input() editableCells: any;
   @Input() enableRowSelection: boolean;
-  @Input() disabled: boolean;
-  @Input() selectedRowIndices: number[] = [];
-  @Input() tabColumns: TabulatorColumn[]; // see http://tabulator.info/docs/5.3/columns
-  @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
-  @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
-  @Input() tabSorters: any; // see https://tabulator.info/docs/5.4/sort#intial
-  @Output() cellChanged = new EventEmitter<Tabulator.CellComponent>();
   @Output() ready = new EventEmitter<void>();
   @Output() rowSelectionChanged = new EventEmitter<Tabulator.RowComponent>();
   @Output() rowSortChanged = new EventEmitter<{ sortOrder: number[]; tabSorters: [] }>();
+  @Input() selectedRowIndices: number[] = [];
+  @Input() tabColumns: TabulatorColumn[]; // see http://tabulator.info/docs/5.3/columns
   @ViewChild('table', { static: false }) tableContainer: ElementRef;
+  @Input() tabData: any[]; // see http://tabulator.info/docs/5.3/data
+  @Input() tabOptions: any; // see http://tabulator.info/docs/5.3/options
+  @Input() tabSorters: any; // see https://tabulator.info/docs/5.4/sort#intial
 
-  table: Tabulator;
-  tableEl = document.createElement('div');
-  subscriptions: Subscription = new Subscription();
-  viewInit$ = new ReplaySubject<void>();
+  private subscriptions: Subscription = new Subscription();
+  private table: Tabulator;
+  private tableEl = document.createElement('div');
+  private viewInit$ = new ReplaySubject<void>();
 
   constructor() {
     Tabulator.registerModule([
@@ -87,11 +86,7 @@ export class TabulatorTableComponent implements OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.subscriptions.add(
-      this.viewInit$.subscribe(() => {
-        this.processChanges(changes);
-      })
-    );
+    this.subscriptions.add(this.viewInit$.subscribe(() => this.processChanges(changes)));
   }
 
   ngOnDestroy(): void {

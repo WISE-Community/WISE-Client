@@ -4,12 +4,27 @@ import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { TabulatorData } from '../TabulatorData';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { TabulatorTableComponent } from '../tabulator-table/tabulator-table.component';
 
 @Component({
-    selector: 'table-show-work',
-    templateUrl: 'table-show-work.component.html',
-    styleUrls: ['../table-student/table-student.component.scss', 'table-show-work.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    TabulatorTableComponent
+  ],
+  selector: 'table-show-work',
+  styles: ['.table-container { margin-top: 0; padding: 0; }'],
+  templateUrl: 'table-show-work.component.html'
 })
 export class TableShowWorkComponent extends ComponentShowWorkDirective {
   tableData: any[] = [];
@@ -27,10 +42,10 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
 
   constructor(
     protected nodeService: NodeService,
-    protected ProjectService: ProjectService,
-    private TabulatorDataService: TabulatorDataService
+    protected projectService: ProjectService,
+    private tabulatorDataService: TabulatorDataService
   ) {
-    super(nodeService, ProjectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
@@ -51,11 +66,11 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
     this.setupTable();
   }
 
-  calculateXColumnIndex(componentState: any): number {
+  private calculateXColumnIndex(componentState: any): number {
     return componentState.studentData.dataExplorerSeries[0].xColumn;
   }
 
-  calculateColumnNames(componentState: any): string[] {
+  private calculateColumnNames(componentState: any): string[] {
     const tableData: any = componentState.studentData.tableData;
     const firstRow: any = tableData[0];
     const columnNames: string[] = [];
@@ -65,14 +80,14 @@ export class TableShowWorkComponent extends ComponentShowWorkDirective {
     return columnNames;
   }
 
-  setupTable(): void {
-    this.tabulatorData = this.TabulatorDataService.convertTableDataToTabulator(
+  private setupTable(): void {
+    this.tabulatorData = this.tabulatorDataService.convertTableDataToTabulator(
       this.tableData,
       this.componentContent.globalCellSize
     );
   }
 
-  tabulatorRendered(): void {
+  protected tabulatorRendered(): void {
     this.nodeService.broadcastDoneRenderingComponent({
       nodeId: this.nodeId,
       componentId: this.componentId

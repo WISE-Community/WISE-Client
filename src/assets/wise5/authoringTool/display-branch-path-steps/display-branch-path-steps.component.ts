@@ -1,13 +1,12 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    imports: [CommonModule, FlexLayoutModule],
-    selector: 'display-branch-path-steps',
-    styleUrl: './display-branch-path-steps.component.scss',
-    templateUrl: './display-branch-path-steps.component.html'
+  imports: [CommonModule],
+  selector: 'display-branch-path-steps',
+  styles: ['.branch-path-step { border-radius: 6px; padding: 8px; }'],
+  templateUrl: './display-branch-path-steps.component.html'
 })
 export class DisplayBranchPathStepsComponent {
   protected nodeIdToBackgroundColor: { [key: string]: string } = {};

@@ -1,11 +1,7 @@
-<ul class="teams" fxLayout="row wrap" fxLayoutAlign="start stretch">
-  <li
-    *ngFor="let team of teams | keyvalue"
-    class="team"
-    fxFlex="100"
-    fxFlex.gt-sm="50"
-    fxFlex.gt-md="33.33"
-  >
-    <manage-team [team]="team.value"></manage-team>
-  </li>
+<ul class="teams flex flex-row flex-wrap justify-start items-stretch">
+  @for (team of teams | keyvalue; track team) {
+    <li class="team w-full md:w-1/2 lg:w-1/3">
+      <manage-team [team]="team.value" />
+    </li>
+  }
 </ul>

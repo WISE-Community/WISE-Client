@@ -1,24 +1,17 @@
-<div
-  class="node-authoring-header"
-  fxLayout="row wrap"
-  fxLayoutAlign="start start"
-  fxLayoutGap="16px"
->
+<div class="node-authoring-header flex flex-row flex-wrap justify-start items-start gap-4">
   <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18" />
   <edit-node-title [node]="node" />
-  <div fxLayoutGap="16px">
-    <button
-      class="enable-in-translation"
-      mat-raised-button
-      color="primary"
-      routerLink="advanced"
-      matTooltip="Advanced"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>build</mat-icon>
-    </button>
-  </div>
+  <button
+    class="enable-in-translation"
+    mat-raised-button
+    color="primary"
+    routerLink="advanced"
+    matTooltip="Advanced"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    <mat-icon>build</mat-icon>
+  </button>
 </div>
 @if (components.length === 0 && !isGroupNode) {
   <p i18n>This step does not have any components.</p>
@@ -30,26 +23,24 @@
   cdkDropListAutoScrollStep="10"
   (cdkDropListDropped)="dropComponent($event)"
   cdkScrollable
-  fxLayout="column"
+  class="flex flex-col"
 >
   @if (components.length > 0) {
     <add-component [node]="node" (newComponentsEvent)="highlightComponents($event)" />
   }
   @for (component of components; track component.id; let i = $index; let last = $last) {
     <div cdkDrag [cdkDragDisabled]="components.length < 2">
-      <div fxLayout="row">
+      <div class="flex flex-row">
         <mat-card
           [id]="component.id"
-          class="component"
+          class="component w-full"
           [ngClass]="{ 'component-editing': component.id === editingComponentId }"
         >
           <div
-            class="component-header"
-            fxLayout="row"
-            fxLayoutAlign="start center"
+            class="component-header flex flex-row justify-start items-center"
             [ngClass]="{ 'selected-bg-bg': component.id === editingComponentId }"
           >
-            <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <div class="flex flex-row justify-start items-center gap-2">
               @if (components.length > 1) {
                 <mat-icon class="drag-handle" cdkDragHandle title="Drag to reorder" i18n-title
                   >drag_indicator</mat-icon
@@ -57,8 +48,8 @@
               }
               <span class="heavy">{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
             </div>
-            <span fxFlex></span>
-            <div class="text" fxLayoutAlign="end center">
+            <span class="flex grow"></span>
+            <div class="text flex justify-end items-center">
               @if (component.id === editingComponentId) {
                 <edit-component-advanced-button [componentContent]="component" [nodeId]="nodeId" />
               }
@@ -79,7 +70,7 @@
               </button>
             </div>
           </div>
-          <mat-divider></mat-divider>
+          <mat-divider />
           <div>
             <component-authoring
               [nodeId]="nodeId"
@@ -89,7 +80,7 @@
             />
           </div>
         </mat-card>
-        <div fxLayout="column">
+        <div class="flex flex-col">
           @if (i > 0) {
             <button
               mat-icon-button

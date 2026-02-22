@@ -1,10 +1,4 @@
-<h2
-  mat-dialog-title
-  class="mat-dialog-title--icons"
-  fxLayout="row"
-  fxLayoutAlign="start center"
-  fxLayoutGap="8px"
->
+<h2 mat-dialog-title class="mat-dialog-title--icons !flex items-center gap-2">
   @if (newNodeIcon.type === 'font') {
     <div
       style="background-color: {{ newNodeIcon.color }}"
@@ -28,7 +22,7 @@
   <span i18n>Choose an Icon</span>
 </h2>
 <mat-dialog-content class="dialog-content-scroll">
-  <h3 fxLayout="row" fxLayoutAlign="start center">
+  <h3 class="flex items-center">
     <span i18n>Use a Knowledge Integration (KI) icon:</span>
     <a
       mat-icon-button
@@ -45,7 +39,6 @@
   <mat-chip-listbox aria-label="Select a KI icon" i18n-aria-label>
     @for (kiIcon of kiIcons; track kiIcon.imgSrc) {
       <mat-chip-option
-        class="ki-choice"
         color="null"
         [value]="kiIcon"
         [selected]="newNodeIcon.type === 'img' && kiIcon.imgSrc === newNodeIcon.imgSrc"
@@ -53,33 +46,31 @@
         (click)="chip.select()"
         style="background-color: {{ color }}"
       >
-        <mat-chip-avatar>
-          <img class="ki-icon" [src]="kiIcon.imgSrc" [alt]="kiIcon.imgAlt" />
-        </mat-chip-avatar>
-        {{ kiIcon.imgLabel }}
+        <img matChipAvatar class="ki-icon" [src]="kiIcon.imgSrc" [alt]="kiIcon.imgAlt" />{{
+          kiIcon.imgLabel
+        }}
       </mat-chip-option>
     }
   </mat-chip-listbox>
   <mat-divider></mat-divider>
-  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+  <div class="flex flex-col gap-4 sm:flex-row">
     <div>
       <h3 i18n>Or choose your own icon:</h3>
       <mat-chip-listbox aria-label="Select an icon" i18n-aria-label>
         @for (fontName of fontNames; track fontName) {
           <mat-chip-option
-            class="icon-choice"
             color="null"
             [value]="fontName"
             [ariaLabel]="fontName"
             [selected]="newNodeIcon.type === 'font' && fontName === newNodeIcon.fontName"
             (selectionChange)="chooseFontName($event)"
           >
-            <mat-icon>{{ fontName }}</mat-icon>
+            <mat-icon class="custom-icon">{{ fontName }}</mat-icon>
           </mat-chip-option>
         }
       </mat-chip-listbox>
     </div>
-    <div fxFlex.gt-sm="18">
+    <div>
       <h3 i18n>Color:</h3>
       <mat-chip-listbox aria-label="Select a color" i18n-aria-label>
         @for (color of colors; track color) {

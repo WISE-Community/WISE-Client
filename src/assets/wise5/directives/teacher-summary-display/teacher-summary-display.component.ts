@@ -1,32 +1,35 @@
 import { Component } from '@angular/core';
-import { AnnotationService } from '../../services/annotationService';
-import { ConfigService } from '../../services/configService';
-import { ProjectService } from '../../services/projectService';
-import { SummaryService } from '../../components/summary/summaryService';
 import { SummaryDisplayComponent } from '../summary-display/summary-display.component';
-import { TeacherDataService } from '../../services/teacherDataService';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Annotation } from '../../common/Annotation';
 import { ComponentState } from '../../../../app/domain/componentState';
+import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
-    imports: [CommonModule, HighchartsChartModule, MatCardModule],
-    selector: 'teacher-summary-display',
-    styleUrl: '../summary-display/summary-display.component.scss',
-    templateUrl: '../summary-display/summary-display.component.html'
+  imports: [CommonModule, HighchartsChartModule],
+  selector: 'teacher-summary-display',
+  styleUrl: '../summary-display/summary-display.component.scss',
+  templateUrl: '../summary-display/summary-display.component.html'
 })
 export class TeacherSummaryDisplayComponent extends SummaryDisplayComponent {
-  constructor(
-    protected annotationService: AnnotationService,
-    protected configService: ConfigService,
-    protected dataService: TeacherDataService,
-    protected projectService: ProjectService,
-    protected summaryService: SummaryService
-  ) {
-    super(annotationService, configService, dataService, projectService, summaryService);
+  private subscriptions = new Subscription();
+
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.subscriptions.add(
+      (this.projectService as TeacherProjectService).projectSaved$.subscribe(() =>
+        this.renderDisplay()
+      )
+    );
+    this.subscriptions.add(
+      this.annotationService.annotationReceived$.subscribe(() => this.renderDisplay())
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   protected getLatestScores(): Observable<Annotation[]> {

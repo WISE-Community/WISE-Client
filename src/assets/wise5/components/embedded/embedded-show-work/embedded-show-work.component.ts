@@ -8,26 +8,30 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 import { EmbeddedService } from '../embeddedService';
 
 @Component({
-    selector: 'embedded-show-work',
-    templateUrl: 'embedded-show-work.component.html',
-    standalone: false
+  selector: 'embedded-show-work',
+  template: `<iframe
+    [id]="embeddedApplicationIFrameId"
+    [src]="url"
+    (load)="iframeLoaded()"
+    class="embedded-content__iframe"
+    style="width: 100%; height: {{ height }};"
+  ></iframe>`
 })
 export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
-  embeddedApplicationIFrameId: string;
-  url: any;
-  width: string = this.EmbeddedService.defaultWidth;
-  height: string = this.EmbeddedService.defaultHeight;
-  messageEventListener: any;
+  protected embeddedApplicationIFrameId: string;
+  protected height: string = this.embeddedService.defaultHeight;
+  private messageEventListener: any;
+  protected url: any;
 
   constructor(
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
-    private EmbeddedService: EmbeddedService,
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
+    private embeddedService: EmbeddedService,
     protected nodeService: NodeService,
-    protected ProjectService: ProjectService,
+    protected projectService: ProjectService,
     private sanitizer: DomSanitizer
   ) {
-    super(nodeService, ProjectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
@@ -38,33 +42,33 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
     this.initializeMessageEventListener();
   }
 
-  getIframeId(): string {
+  private getIframeId(): string {
     return this.getIframeIdPrefix() + this.componentState.id;
   }
 
-  getIframeIdPrefix(): string {
+  private getIframeIdPrefix(): string {
     if (this.isRevision) {
-      return `${this.EmbeddedService.iframePrefix}-revision-${this.componentId}`;
+      return `${this.embeddedService.iframePrefix}-revision-${this.componentId}`;
     } else {
-      return this.EmbeddedService.getEmbeddedApplicationIframeId(this.componentId);
+      return this.embeddedService.getEmbeddedApplicationIframeId(this.componentId);
     }
   }
 
-  setHeight(componentContent: any): void {
+  private setHeight(componentContent: any): void {
     this.height = componentContent.height + 'px';
   }
 
-  iframeLoaded(): void {
-    (window.document.getElementById(
-      this.embeddedApplicationIFrameId
-    ) as HTMLIFrameElement).contentWindow.addEventListener('message', this.messageEventListener);
+  protected iframeLoaded(): void {
+    (
+      window.document.getElementById(this.embeddedApplicationIFrameId) as HTMLIFrameElement
+    ).contentWindow.addEventListener('message', this.messageEventListener);
   }
 
   sendMessageToApplication(message: any): void {
-    this.EmbeddedService.sendMessageToApplication(this.embeddedApplicationIFrameId, message);
+    this.embeddedService.sendMessageToApplication(this.embeddedApplicationIFrameId, message);
   }
 
-  initializeMessageEventListener(): void {
+  private initializeMessageEventListener(): void {
     this.messageEventListener = (messageEvent: any) => {
       const messageEventData = messageEvent.data;
       if (messageEventData.messageType === 'applicationInitialized') {
@@ -94,7 +98,7 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
   }
 
   handleGetParametersMessage(): void {
-    this.EmbeddedService.handleGetParametersMessage(
+    this.embeddedService.handleGetParametersMessage(
       this.embeddedApplicationIFrameId,
       this.nodeId,
       this.componentId,
@@ -104,24 +108,24 @@ export class EmbeddedShowWorkComponent extends ComponentShowWorkDirective {
 
   handleGetLatestStudentWorkMessage(): void {
     this.sendMessageToApplication(
-      this.EmbeddedService.createLatestStudentWorkMessage(this.componentState)
+      this.embeddedService.createLatestStudentWorkMessage(this.componentState)
     );
   }
 
   handleGetProjectPathMessage(): void {
-    this.sendMessageToApplication(this.EmbeddedService.createProjectPathMessage());
+    this.sendMessageToApplication(this.embeddedService.createProjectPathMessage());
   }
 
   handleGetLatestAnnotationsMessage(): void {
-    const workgroupId = this.ConfigService.getWorkgroupId();
+    const workgroupId = this.configService.getWorkgroupId();
     const type = 'any';
-    const latestScoreAnnotation = this.AnnotationService.getLatestScoreAnnotation(
+    const latestScoreAnnotation = this.annotationService.getLatestScoreAnnotation(
       this.nodeId,
       this.componentId,
       workgroupId,
       type
     );
-    const latestCommentAnnotation = this.AnnotationService.getLatestCommentAnnotation(
+    const latestCommentAnnotation = this.annotationService.getLatestCommentAnnotation(
       this.nodeId,
       this.componentId,
       workgroupId,

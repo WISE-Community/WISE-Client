@@ -1,6 +1,6 @@
 <section class="hero section" [style.background-image]="bgStyle">
   <picture style="display: none">
-    <ng-container *ngFor="let source of imgSources">
+    @for (source of imgSources; track source) {
       <source
         media="{{ source.media }}"
         sizes="{{ source.sizes }}"
@@ -8,42 +8,37 @@
         srcset="{{ source.srcset }}"
         type="{{ source.type }}"
       />
-    </ng-container>
+    }
     <img #bgRef src="{{ imgSrc }}" alt="{{ imgDescription }}" />
   </picture>
   <div class="hero-wrap flex justify-center">
-    <div class="hero-content flex flex-col items-center sm:flex-row gap-2 sm:gap-6">
+    <div class="hero-content flex flex-col items-center justify-center sm:flex-row gap-2 sm:gap-6">
       <div
-        class="hero-main-content with-sidecontent flex flex-col items-center sm:items-start justify-center flex-none sm:w-3/5"
+        class="hero-main-content with-sidecontent flex flex-col items-center sm:items-start justify-center flex-none xs:gap-2 sm:w-3/5"
         [ngClass]="{ 'with-sidecontent': sideRef }"
       >
         <ng-template #defaultHeadline>{{ headline }}</ng-template>
-        <h1
-          *ngIf="headline || headlineRef"
-          class="headline"
-          ngClass="mat-headline-3"
-          [ngClass]="{ 'with-tagline': taglineRef, 'mat-headline-3': false, 'mat-title': true }"
-        >
-          <ng-container
-            *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"
-          ></ng-container>
-        </h1>
+        @if (headline || headlineRef) {
+          <h1 class="headline" [ngClass]="{ 'with-tagline': taglineRef }">
+            <ng-container
+              *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"
+            ></ng-container>
+          </h1>
+        }
         <ng-template #defaultTagline>{{ tagline }}</ng-template>
-        <h2
-          *ngIf="tagline || taglineRef"
-          class="tagline"
-          ngClass="mat-headline-4"
-          [ngClass.xs]="{ 'mat-headline-4': false, 'mat-title': true }"
-        >
-          <ng-container *ngTemplateOutlet="taglineRef ? taglineRef : defaultTagline"></ng-container>
-        </h2>
+        @if (tagline || taglineRef) {
+          <h2 class="tagline mat-title" [ngClass]="{ 'mat-headline-4': !xsScreen }">
+            <ng-container
+              *ngTemplateOutlet="taglineRef ? taglineRef : defaultTagline"
+            ></ng-container>
+          </h2>
+        }
       </div>
-      <div
-        *ngIf="sideRef"
-        class="flex items-center justify-center sm:justify-end flex-none w-full sm:w-2/5"
-      >
-        <ng-container *ngTemplateOutlet="sideRef"></ng-container>
-      </div>
+      @if (sideRef) {
+        <div class="flex items-center justify-center sm:justify-end flex-none w-full sm:w-2/5">
+          <ng-container *ngTemplateOutlet="sideRef"></ng-container>
+        </div>
+      }
     </div>
   </div>
 </section>

@@ -5,92 +5,105 @@
     </button>
   </a>
 }
-<div class="project-icon-label" fxLayoutGap="20px">
+<div class="project-icon-label flex gap-5">
   <span i18n>Unit Icon</span>
   <button mat-raised-button color="primary" (click)="toggleEditProjectIconMode()" i18n>Edit</button>
 </div>
 <div class="project-icon-container">
-  <div *ngIf="isShowProjectIcon">
-    <img [src]="projectIcon" class="project-icon" />
-  </div>
-  <div *ngIf="isShowProjectIconError" class="project-icon-error">
-    <p class="red margin-bottom-20" i18n>This unit does not have a unit icon.</p>
-    <p class="red" i18n>Click the edit button to set one.</p>
-  </div>
-  <div *ngIf="isShowProjectIconLoading">
-    <mat-spinner></mat-spinner>
-  </div>
-</div>
-<div *ngIf="isEditingProjectIcon">
-  <div class="choose-project-icon-message" fxLayoutGap="20px">
-    <span i18n
-      >Choose a new Unit Icon by clicking on one below or upload your own custom icon.</span
-    >
-    <button mat-raised-button color="primary" (click)="chooseCustomProjectIcon()" i18n>
-      Upload
-    </button>
-  </div>
-  <div>
-    <img
-      *ngFor="let projectIcon of projectIcons"
-      class="project-icon-to-choose"
-      src="/projectIcons/{{ projectIcon }}"
-      (click)="setFeaturedProjectIcon(projectIcon)"
-    />
-  </div>
-  <br />
-</div>
-<br />
-<div *ngFor="let metadataField of metadataAuthoring.fields">
-  <translatable-textarea
-    *ngIf="metadataField.type === 'textarea'"
-    [content]="metadata"
-    [key]="metadataField.key"
-    [label]="metadataField.name"
-    (defaultLanguageTextChanged)="metadataChanged.next()"
-    class="textarea"
-  />
-  <translatable-input
-    *ngIf="metadataField.type === 'input'"
-    [content]="metadata"
-    [key]="metadataField.key"
-    [label]="metadataField.name"
-    (defaultLanguageTextChanged)="metadataChanged.next()"
-    class="input"
-  />
-  <edit-project-language-setting
-    *ngIf="metadataField.name === 'Language'"
-  ></edit-project-language-setting>
-  <ng-container *ngIf="metadataField.type === 'radio' && metadataField.name !== 'Language'">
-    <label class="bold">{{ metadataField.name }}:</label>
-    <mat-radio-group class="radio-group margin-bottom-20" fxLayout="column">
-      <ng-container *ngFor="let choice of metadataField.choices">
-        <mat-radio-button
-          type="radio"
-          color="primary"
-          [value]="choice"
-          [checked]="metadataChoiceIsChecked(metadataField, choice)"
-          (click)="metadataRadioClicked(metadataField, choice)"
-        >
-          {{ getMetadataChoiceText(choice) }}
-        </mat-radio-button>
-      </ng-container>
-    </mat-radio-group>
-  </ng-container>
-  <ng-container *ngIf="metadataField.type === 'checkbox'">
-    <label class="bold">{{ metadataField.name }}:</label>
-    <div fxLayout="column margin-bottom-20">
-      <ng-container *ngFor="let choice of metadataField.choices">
-        <mat-checkbox
-          color="primary"
-          [(ngModel)]="metadataField.choicesMapping[choice]"
-          (click)="metadataCheckboxClicked(metadataField)"
-        >
-          {{ getMetadataChoiceText(choice) }}
-        </mat-checkbox>
-      </ng-container>
+  @if (isShowProjectIcon) {
+    <div>
+      <img [src]="projectIcon" class="project-icon" />
     </div>
-  </ng-container>
+  }
+  @if (isShowProjectIconError) {
+    <div class="project-icon-error">
+      <p class="red margin-bottom-20" i18n>This unit does not have a unit icon.</p>
+      <p class="red" i18n>Click the edit button to set one.</p>
+    </div>
+  }
+  @if (isShowProjectIconLoading) {
+    <div>
+      <mat-spinner />
+    </div>
+  }
 </div>
+@if (isEditingProjectIcon) {
+  <div>
+    <div class="choose-project-icon-message flex gap-5">
+      <span i18n
+        >Choose a new Unit Icon by clicking on one below or upload your own custom icon.</span
+      >
+      <button mat-raised-button color="primary" (click)="chooseCustomProjectIcon()" i18n>
+        Upload
+      </button>
+    </div>
+    <div class="flex flex-wrap">
+      @for (projectIcon of projectIcons; track projectIcon) {
+        <img
+          class="project-icon-to-choose"
+          src="/projectIcons/{{ projectIcon }}"
+          (click)="setFeaturedProjectIcon(projectIcon)"
+        />
+      }
+    </div>
+    <br />
+  </div>
+}
+<br />
+@for (metadataField of metadataAuthoring.fields; track metadataField) {
+  <div>
+    @if (metadataField.type === 'textarea') {
+      <translatable-textarea
+        [content]="metadata"
+        [key]="metadataField.key"
+        [label]="metadataField.name"
+        (defaultLanguageTextChanged)="metadataChanged.next()"
+        class="textarea"
+      />
+    }
+    @if (metadataField.type === 'input') {
+      <translatable-input
+        [content]="metadata"
+        [key]="metadataField.key"
+        [label]="metadataField.name"
+        (defaultLanguageTextChanged)="metadataChanged.next()"
+        class="input"
+      />
+    }
+    @if (metadataField.name === 'Language') {
+      <edit-project-language-setting />
+    }
+    @if (metadataField.type === 'radio' && metadataField.name !== 'Language') {
+      <label class="bold">{{ metadataField.name }}:</label>
+      <mat-radio-group class="radio-group margin-bottom-20 flex flex-col">
+        @for (choice of metadataField.choices; track choice) {
+          <mat-radio-button
+            type="radio"
+            color="primary"
+            [value]="choice"
+            [checked]="metadataChoiceIsChecked(metadataField, choice)"
+            (click)="metadataRadioClicked(metadataField, choice)"
+          >
+            {{ getMetadataChoiceText(choice) }}
+          </mat-radio-button>
+        }
+      </mat-radio-group>
+    }
+    @if (metadataField.type === 'checkbox') {
+      <label class="bold">{{ metadataField.name }}:</label>
+      <div class="flex flex-col">
+        @for (choice of metadataField.choices; track choice) {
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="metadataField.choicesMapping[choice]"
+            (click)="metadataCheckboxClicked(metadataField)"
+          >
+            {{ getMetadataChoiceText(choice) }}
+          </mat-checkbox>
+        }
+      </div>
+    }
+  </div>
+}
 <edit-unit-type [metadata]="metadata" />
 <edit-unit-resources [resources]="metadata.resources" />

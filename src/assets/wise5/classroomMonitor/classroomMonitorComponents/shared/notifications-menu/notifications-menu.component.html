@@ -1,10 +1,8 @@
-<div fxLayout="column" class="account-menu--fixed-height account-menu--fixed-width">
+<div class="account-menu--fixed-height account-menu--fixed-width flex flex-col">
   <mat-toolbar
-    class="account-menu__info md-subhead md-whiteframe-1dp"
-    fxLayout="row"
-    fxLayoutAlign="space-between center"
+    class="account-menu__info md-subhead md-whiteframe-1dp flex justify-between items-center"
   >
-    <span class="accent account-menu__info__title" fxLayout="row" fxLayoutAlign="start center">
+    <span class="accent account-menu__info__title flex justify-start items-center">
       <mat-icon class="accent">notifications</mat-icon>
       &nbsp;
       <span i18n>Alerts</span>
@@ -22,14 +20,14 @@
       </button>
     }
   </mat-toolbar>
-  <div class="account-menu__actions notifications-content" fxFlex>
+  <div class="account-menu__actions notifications-content flex-grow">
     @if (newNotifications.length === 0) {
       <p class="no-notifications" i18n>You have no new alerts at this time.</p>
     } @else {
       <mat-list>
         @for (notification of newNotifications; track notification.id) {
           <mat-list-item>
-            <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="flex justify-start items-center">
               <div class="notification-content">
                 <div>
                   <a
@@ -45,11 +43,11 @@
                   {{ getNodePositionAndTitle(notification.nodeId) }}
                 </div>
               </div>
-              <span fxFlex></span>
+              <span class="flex-grow"></span>
               <button
                 mat-icon-button
                 (click)="dismissNotification(notification)"
-                fxLayoutAlign="center center"
+                class="flex justify-center items-center"
                 aria-label="Clear"
                 i18n-aria-label
               >

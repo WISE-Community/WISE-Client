@@ -1,4 +1,4 @@
-<div class="edit-dialog-guidance" fxLayout="column" fxLayoutGap="16px">
+<div class="edit-dialog-guidance flex flex-col gap-4">
   <mat-checkbox
     color="primary"
     [(ngModel)]="computerAvatarSettings.useGlobalComputerAvatar"
@@ -44,7 +44,7 @@
   />
   <div class="avatars">
     <div class="mat-subtitle-1">Computer avatars students can choose:</div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+    <div class="flex flex-row flex-wrap items-center gap-4">
       <button
         mat-stroked-button
         color="primary"
@@ -66,14 +66,15 @@
         Select None
       </button>
     </div>
-    <div fxLayout="row wrap">
+    <div class="flex flex-row flex-wrap">
       <mat-button-toggle-group
-        fxLayout="row wrap"
+        class="flex flex-row flex-wrap"
         aria-label="Avatars available to students"
         i18n-aria-label
         multiple
+        [hideMultipleSelectionIndicator]="true"
       >
-        <ng-container *ngFor="let computerAvatar of allComputerAvatars">
+        @for (computerAvatar of allComputerAvatars; track computerAvatar) {
           <mat-button-toggle
             (mousedown)="toggleSelectComputerAvatar(computerAvatar)"
             checked="{{ computerAvatar.isSelected ? true : false }}"
@@ -85,25 +86,19 @@
               alt="{{ computerAvatar.name }}"
               class="avatar-image"
             />
-            <div class="name" fxLayoutAlign="center" fxLayoutGap="4px">
+            <div class="name flex justify-center items-center gap-1">
               <span class="mat-subtitle-2">{{ computerAvatar.name }}</span>
-              <mat-icon
-                *ngIf="computerAvatar.isSelected"
-                class="success"
-                aria-label="Selected"
-                i18n-aria-label
-                >check_circle</mat-icon
-              >
-              <mat-icon
-                color="warn"
-                *ngIf="!computerAvatar.isSelected"
-                aria-label="Not selected"
-                i18n-aria-label
-                >cancel</mat-icon
-              >
+              @if (computerAvatar.isSelected) {
+                <mat-icon class="success" aria-label="Selected" i18n-aria-label
+                  >check_circle</mat-icon
+                >
+              }
+              @if (!computerAvatar.isSelected) {
+                <mat-icon color="warn" aria-label="Not selected" i18n-aria-label>cancel</mat-icon>
+              }
             </div>
           </mat-button-toggle>
-        </ng-container>
+        }
       </mat-button-toggle-group>
     </div>
   </div>

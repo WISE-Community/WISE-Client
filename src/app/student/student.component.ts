@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss'],
-  standalone: false
+  imports: [NgClass, RouterOutlet],
+  styles: ['.full-height { height: 100%; }'],
+  templateUrl: './student.component.html'
 })
-export class StudentComponent implements OnInit {
+export class StudentComponent {
   constructor(private router: Router) {}
 
-  ngOnInit() {}
-
-  isShowingAngularJSApp() {
+  protected isShowingAngularJSApp(): boolean {
     return (
       this.router.url.includes('/student/unit') ||
       this.router.url.includes('/preview/unit') ||

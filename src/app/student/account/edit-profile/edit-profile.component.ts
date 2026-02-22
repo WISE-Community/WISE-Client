@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Student } from '../../../domain/student';
@@ -8,15 +15,32 @@ import { StudentService } from '../../student.service';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfileComponent } from '../../../common/edit-profile/edit-profile.component';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'student-edit-profile',
-    templateUrl: './edit-profile.component.html',
-    styleUrls: [
-        '../../../common/edit-profile/edit-profile.component.scss',
-        './edit-profile.component.scss'
-    ],
-    standalone: false
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatSelect,
+    MatOption,
+    MatButton,
+    MatProgressBar
+  ],
+  selector: 'student-edit-profile',
+  styleUrls: [
+    '../../../common/edit-profile/edit-profile.component.scss',
+    './edit-profile.component.scss'
+  ],
+  templateUrl: './edit-profile.component.html'
 })
 export class StudentEditProfileComponent extends EditProfileComponent {
   user: Student;

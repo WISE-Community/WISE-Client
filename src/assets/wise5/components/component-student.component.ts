@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { ComponentState } from '../../../app/domain/componentState';
 import { Component } from '../common/Component';
 import { copy } from '../common/object/object';
-import { GenerateImageDialogComponent } from '../directives/generate-image-dialog/generate-image-dialog.component';
 import { AnnotationService } from '../services/annotationService';
 import { ConfigService } from '../services/configService';
 import { NodeService } from '../services/nodeService';
@@ -18,6 +17,8 @@ import { ComponentService } from './componentService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
 import { Annotation } from '../common/Annotation';
+import $ from 'jquery';
+import { NotebookNotesComponent } from '../../../app/notebook/notebook-notes/notebook-notes.component';
 
 @Directive()
 export abstract class ComponentStudent {
@@ -49,21 +50,21 @@ export abstract class ComponentStudent {
   parentStudentWorkIds: any[];
   latestComponentState: any;
   showAddToNotebookButton: boolean;
-  requestComponentStateSubscription: Subscription;
-  annotationSavedToServerSubscription: Subscription;
-  nodeSubmitClickedSubscription: Subscription;
-  studentWorkSavedToServerSubscription: Subscription;
-  subscriptions: Subscription = new Subscription();
+  protected requestComponentStateSubscription: Subscription;
+  protected annotationSavedToServerSubscription: Subscription;
+  protected nodeSubmitClickedSubscription: Subscription;
+  protected studentWorkSavedToServerSubscription: Subscription;
+  protected subscriptions: Subscription = new Subscription();
 
   constructor(
-    protected AnnotationService: AnnotationService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected annotationService: AnnotationService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +76,7 @@ export abstract class ComponentStudent {
     this.isSubmitButtonVisible = this.componentContent.showSubmitButton;
     this.isSaveOrSubmitButtonVisible = this.isSaveButtonVisible || this.isSubmitButtonVisible;
     if (!this.isPreviewMode()) {
-      this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
+      this.latestAnnotations = this.annotationService.getLatestComponentAnnotations(
         this.nodeId,
         this.componentId,
         this.workgroupId
@@ -106,7 +107,7 @@ export abstract class ComponentStudent {
     this.subscriptions.unsubscribe();
   }
 
-  isPreviewMode(): boolean {
+  protected isPreviewMode(): boolean {
     return this.mode === 'preview';
   }
 
@@ -122,9 +123,9 @@ export abstract class ComponentStudent {
 
   private subscribeToAnnotationSavedToServer(): void {
     this.subscriptions.add(
-      this.AnnotationService.annotationSavedToServer$.subscribe((annotation: Annotation) => {
+      this.annotationService.annotationSavedToServer$.subscribe((annotation: Annotation) => {
         if (this.isForThisComponent(annotation)) {
-          this.latestAnnotations = this.AnnotationService.getLatestComponentAnnotations(
+          this.latestAnnotations = this.annotationService.getLatestComponentAnnotations(
             this.nodeId,
             this.componentId,
             this.workgroupId
@@ -136,7 +137,7 @@ export abstract class ComponentStudent {
 
   subscribeToNodeSubmitClicked() {
     this.subscriptions.add(
-      this.NodeService.nodeSubmitClicked$.subscribe(({ nodeId }) => {
+      this.nodeService.nodeSubmitClicked$.subscribe(({ nodeId }) => {
         if (this.nodeId === nodeId) {
           this.submit('nodeSubmitButton');
         }
@@ -146,7 +147,7 @@ export abstract class ComponentStudent {
 
   subscribeToNotifyConnectedComponents(): void {
     this.subscriptions.add(
-      this.ComponentService.notifyConnectedComponentSource$.subscribe(
+      this.componentService.notifyConnectedComponentSource$.subscribe(
         ({ nodeId, componentId, componentState }) => {
           if (nodeId === this.nodeId && componentId === this.componentId) {
             this.processConnectedComponentState(componentState);
@@ -158,7 +159,7 @@ export abstract class ComponentStudent {
 
   subscribeToNotebookItemChosen() {
     this.subscriptions.add(
-      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+      this.notebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
         if (requester === `${this.nodeId}-${this.componentId}`) {
           const studentWorkId = notebookItem.content.studentWorkIds[0];
           this.importWorkByStudentWorkId(studentWorkId);
@@ -168,11 +169,11 @@ export abstract class ComponentStudent {
   }
 
   importWorkByStudentWorkId(studentWorkId: number): void {
-    this.StudentDataService.getStudentWorkById(studentWorkId).then((componentState) => {
+    this.studentDataService.getStudentWorkById(studentWorkId).then((componentState) => {
       if (componentState != null) {
         this.setStudentWork(componentState);
         this.setParentStudentWorkIdToCurrentStudentWork(studentWorkId);
-        this.NotebookService.closeNotes();
+        this.notebookService.closeNotes();
       }
     });
   }
@@ -194,12 +195,12 @@ export abstract class ComponentStudent {
   }
 
   isWorkFromClassmate(componentState: any): boolean {
-    return componentState.workgroupId !== this.ConfigService.getWorkgroupId();
+    return componentState.workgroupId !== this.configService.getWorkgroupId();
   }
 
   protected subscribeToAttachStudentAsset(): void {
     this.subscriptions.add(
-      this.StudentAssetService.attachStudentAsset$.subscribe(
+      this.studentAssetService.attachStudentAsset$.subscribe(
         (studentAssetRequest: StudentAssetRequest) => {
           if (this.isSameComponent(studentAssetRequest.component)) {
             this.doAttachStudentAsset(studentAssetRequest);
@@ -216,7 +217,7 @@ export abstract class ComponentStudent {
   generateStarterState() {}
 
   private copyAndAttachStudentAsset(studentAsset: any): void {
-    this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset: any) => {
+    this.studentAssetService.copyAssetForReference(studentAsset).then((copiedAsset: any) => {
       const attachment = {
         studentAssetId: copiedAsset.id,
         iconURL: copiedAsset.iconURL,
@@ -230,7 +231,7 @@ export abstract class ComponentStudent {
   }
 
   attachStudentAsset(studentAsset: any): any {
-    return this.StudentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
+    return this.studentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
       const attachment = {
         studentAssetId: copiedAsset.id,
         iconURL: copiedAsset.iconURL,
@@ -251,7 +252,7 @@ export abstract class ComponentStudent {
 
   subscribeToStudentWorkSavedToServer(): void {
     this.subscriptions.add(
-      this.StudentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
+      this.studentDataService.studentWorkSavedToServer$.subscribe((componentState: any) => {
         this.handleStudentWorkSavedToServer(componentState);
         if (this.isFromConnectedComponent(componentState)) {
           this.connectedComponentStudentDataSaved();
@@ -288,10 +289,10 @@ export abstract class ComponentStudent {
 
   subscribeToRequestComponentState(): void {
     this.subscriptions.add(
-      this.ComponentService.requestComponentStateSource$.subscribe(
+      this.componentService.requestComponentStateSource$.subscribe(
         (request: ComponentStateRequest) => {
           if (this.isForThisComponent(request)) {
-            this.ComponentService.sendComponentState(this.getComponentStateWrapper(request));
+            this.componentService.sendComponentState(this.getComponentStateWrapper(request));
           }
         }
       )
@@ -323,7 +324,7 @@ export abstract class ComponentStudent {
   }
 
   broadcastDoneRenderingComponent(): void {
-    this.NodeService.broadcastDoneRenderingComponent({
+    this.nodeService.broadcastDoneRenderingComponent({
       nodeId: this.nodeId,
       componentId: this.componentId
     });
@@ -331,7 +332,7 @@ export abstract class ComponentStudent {
 
   disableComponentIfNecessary(): void {
     if (this.isLockAfterSubmit()) {
-      const componentStates = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
+      const componentStates = this.studentDataService.getComponentStatesByNodeIdAndComponentId(
         this.nodeId,
         this.componentId
       );
@@ -354,10 +355,11 @@ export abstract class ComponentStudent {
     if (connectedComponents != null) {
       const componentStates = [];
       for (const connectedComponent of connectedComponents) {
-        const componentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-          connectedComponent.nodeId,
-          connectedComponent.componentId
-        );
+        const componentState =
+          this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+            connectedComponent.nodeId,
+            connectedComponent.componentId
+          );
         if (componentState != null) {
           componentStates.push(copy(componentState));
         }
@@ -391,7 +393,7 @@ export abstract class ComponentStudent {
 
   saveButtonClicked(): void {
     this.isSubmit = false;
-    this.StudentDataService.broadcastComponentSaveTriggered({
+    this.studentDataService.broadcastComponentSaveTriggered({
       nodeId: this.nodeId,
       componentId: this.componentId
     });
@@ -402,8 +404,8 @@ export abstract class ComponentStudent {
 
   saveForAuthoringPreviewMode(action: string): void {
     this.createComponentState(action).then((componentState: any) => {
-      this.StudentDataService.setDummyIdIntoLocalId(componentState);
-      this.StudentDataService.setDummyServerSaveTimeIntoLocalServerSaveTime(componentState);
+      this.studentDataService.setDummyIdIntoLocalId(componentState);
+      this.studentDataService.setDummyServerSaveTimeIntoLocalServerSaveTime(componentState);
       this.handleStudentWorkSavedToServer(componentState);
     });
   }
@@ -509,7 +511,7 @@ export abstract class ComponentStudent {
   }
 
   emitComponentSubmitTriggered(): void {
-    this.StudentDataService.broadcastComponentSubmitTriggered({
+    this.studentDataService.broadcastComponentSubmitTriggered({
       nodeId: this.nodeId,
       componentId: this.componentId
     });
@@ -538,14 +540,14 @@ export abstract class ComponentStudent {
   }
 
   emitComponentDirty(isDirty: boolean): void {
-    this.StudentDataService.broadcastComponentDirty({
+    this.studentDataService.broadcastComponentDirty({
       componentId: this.componentId,
       isDirty: isDirty
     });
   }
 
   emitComponentSubmitDirty(isDirty: boolean): void {
-    this.StudentDataService.broadcastComponentSubmitDirty({
+    this.studentDataService.broadcastComponentSubmitDirty({
       componentId: this.componentId,
       isDirty: isDirty
     });
@@ -569,7 +571,7 @@ export abstract class ComponentStudent {
   }
 
   emitComponentStudentDataChanged(componentState: any): void {
-    this.StudentDataService.broadcastComponentStudentData({
+    this.studentDataService.broadcastComponentStudentData({
       nodeId: this.nodeId,
       componentId: this.componentId,
       componentState: componentState
@@ -577,10 +579,11 @@ export abstract class ComponentStudent {
   }
 
   processLatestStudentWork(): void {
-    const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    const latestComponentState =
+      this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+        this.nodeId,
+        this.componentId
+      );
     if (latestComponentState) {
       this.latestComponentState = latestComponentState;
       if (latestComponentState.isSubmit) {
@@ -611,12 +614,10 @@ export abstract class ComponentStudent {
    * @return A promise that will return an image.
    */
   generateImageFromComponentState(componentState: any): any {
-    const dialogRef = this.dialog.open(GenerateImageDialogComponent, {
-      data: componentState
-    });
+    this.studentDataService.generateImageRequest(componentState);
     return new Promise((resolve, reject) => {
-      dialogRef.afterClosed().subscribe((result) => {
-        resolve(result);
+      this.studentDataService.generateImageResponse$.subscribe((image) => {
+        resolve(image);
       });
     });
   }
@@ -630,22 +631,24 @@ export abstract class ComponentStudent {
   }
 
   copyPublicNotebookItem() {
-    this.NotebookService.setInsertMode({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      insertMode: true,
-      requester: this.nodeId + '-' + this.componentId,
-      visibleSpace: 'public'
+    this.dialog.open(NotebookNotesComponent, {
+      data: {
+        nodeId: this.nodeId,
+        componentId: this.componentId,
+        insertMode: true,
+        requester: this.nodeId + '-' + this.componentId,
+        visibleSpace: 'public'
+      },
+      panelClass: 'dialog-md'
     });
-    this.NotebookService.setNotesVisible(true);
   }
 
   isNotebookEnabled() {
-    return this.NotebookService.isNotebookEnabled();
+    return this.notebookService.isNotebookEnabled();
   }
 
   isStudentNoteClippingEnabled() {
-    return this.NotebookService.isStudentNoteClippingEnabled();
+    return this.notebookService.isStudentNoteClippingEnabled();
   }
 
   protected showStudentAssets(): void {
@@ -682,7 +685,7 @@ export abstract class ComponentStudent {
   }
 
   getClientSaveTime(componentState: any): number {
-    return this.ConfigService.convertToClientTimestamp(componentState.serverSaveTime);
+    return this.configService.convertToClientTimestamp(componentState.serverSaveTime);
   }
 
   addDefaultFeedback(componentState: any): void {
@@ -712,30 +715,30 @@ export abstract class ComponentStudent {
   }
 
   createAutoScoreAnnotation(data: any): any {
-    return this.AnnotationService.createAutoScoreAnnotation(
-      this.ConfigService.getRunId(),
-      this.ConfigService.getPeriodId(),
+    return this.annotationService.createAutoScoreAnnotation(
+      this.configService.getRunId(),
+      this.configService.getPeriodId(),
       this.nodeId,
       this.componentId,
-      this.ConfigService.getWorkgroupId(),
+      this.configService.getWorkgroupId(),
       data
     );
   }
 
   createAutoCommentAnnotation(data: any): any {
-    return this.AnnotationService.createAutoCommentAnnotation(
-      this.ConfigService.getRunId(),
-      this.ConfigService.getPeriodId(),
+    return this.annotationService.createAutoCommentAnnotation(
+      this.configService.getRunId(),
+      this.configService.getPeriodId(),
       this.nodeId,
       this.componentId,
-      this.ConfigService.getWorkgroupId(),
+      this.configService.getWorkgroupId(),
       data
     );
   }
 
   registerNotebookItemChosenListener(): void {
     this.subscriptions.add(
-      this.NotebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
+      this.notebookService.notebookItemChosen$.subscribe(({ requester, notebookItem }) => {
         if (requester === `${this.nodeId}-${this.componentId}`) {
           const studentWorkId = notebookItem.content.studentWorkIds[0];
           this.importWorkByStudentWorkId(studentWorkId);
@@ -745,14 +748,16 @@ export abstract class ComponentStudent {
   }
 
   copyPublicNotebookItemButtonClicked(): void {
-    this.NotebookService.setInsertMode({
-      nodeId: this.nodeId,
-      componentId: this.componentId,
-      insertMode: true,
-      requester: this.nodeId + '-' + this.componentId,
-      visibleSpace: 'public'
+    this.dialog.open(NotebookNotesComponent, {
+      data: {
+        nodeId: this.nodeId,
+        componentId: this.componentId,
+        insertMode: true,
+        requester: this.nodeId + '-' + this.componentId,
+        visibleSpace: 'public'
+      },
+      panelClass: 'dialog-md'
     });
-    this.NotebookService.setNotesVisible(true);
   }
 
   getElementById(id: string, getFirstResult: boolean = false): any {
@@ -800,10 +805,11 @@ export abstract class ComponentStudent {
   }
 
   isHandleConnectedComponentAfterConnectedComponentStudentDataSaved() {
-    const latestComponentState = this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
-      this.nodeId,
-      this.componentId
-    );
+    const latestComponentState =
+      this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
+        this.nodeId,
+        this.componentId
+      );
     return latestComponentState == null && !this.isDirty;
   }
 

@@ -5,12 +5,12 @@
   explanation.
 </p>
 <div class="nav-controls">
-  <mat-divider></mat-divider>
-  <div fxLayout="row" fxLayoutGap="8px">
+  <mat-divider />
+  <div class="flex gap-2">
     <button mat-button color="primary" routerLink="../.." [state]="{ target: target }" i18n>
       Back
     </button>
-    <span fxFlex></span>
+    <span class="flex-grow"></span>
     <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
     <button
       mat-raised-button
@@ -19,7 +19,9 @@
       [disabled]="submitting"
       class="button--progress"
     >
-      <mat-progress-bar *ngIf="submitting" mode="indeterminate" />
+      @if (submitting) {
+        <mat-progress-bar mode="indeterminate" />
+      }
       <ng-container i18n>Submit</ng-container>
     </button>
   </div>

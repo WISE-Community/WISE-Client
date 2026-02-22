@@ -1,20 +1,33 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../../services/configService';
-import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
 import { NotebookService } from '../../services/notebookService';
 import 'tinymce';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectAssetAuthoringComponent } from '../../authoringTool/project-asset-authoring/project-asset-authoring.component';
 import { WiseLinkAuthoringDialogComponent } from '../../authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component';
 import { filter } from 'rxjs';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { WiseTinymceEditorComponent } from './wise-tinymce-editor.component';
 
 declare let tinymce: any;
 
 @Component({
-    selector: 'wise-authoring-tinymce-editor',
-    styleUrls: ['wise-authoring-tinymce-editor.component.scss'],
-    templateUrl: 'wise-tinymce-editor.component.html',
-    standalone: false
+  imports: [EditorModule],
+  selector: 'wise-authoring-tinymce-editor',
+  styles: [
+    `
+      editor {
+        height: 600px;
+      }
+    `
+  ],
+  template: `<editor
+    [init]="config"
+    [initialValue]="model"
+    [disabled]="disabled"
+    (onChange)="onChange($event)"
+    (onKeyUp)="onChange($event)"
+  />`
 })
 export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorComponent {
   protected toolbar: string = `undo redo | fontselect | formatselect | fontsizeselect |

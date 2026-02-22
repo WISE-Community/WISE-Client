@@ -14,7 +14,6 @@ describe('StudentGradingToolsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [],
       imports: [ClassroomMonitorTestingModule, StudentGradingToolsComponent],
       providers: [provideRouter([])]
     }).compileComponents();

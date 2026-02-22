@@ -1,5 +1,4 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { finalize } from 'rxjs/operators';
@@ -42,7 +41,6 @@ import { AccessLinkService } from '../../services/accessLinkService';
 @Component({
   imports: [
     ClipboardModule,
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
@@ -120,7 +118,7 @@ export class CreateRunDialogComponent {
       customPeriods: this.customPeriods,
       periods: hiddenControl,
       runType: new FormControl('default', Validators.required),
-      maxStudentsPerTeam: new FormControl('3', Validators.required),
+      maxStudentsPerTeam: new FormControl(3, Validators.required),
       startDate: new FormControl(new Date(), Validators.required),
       endDate: this.endDateControl,
       isLockedAfterEndDate: new FormControl({ value: false, disabled: true })

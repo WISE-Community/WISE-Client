@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
 import { StudentHomeComponent } from './student-home.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MockComponent } from 'ng-mocks';
+import { StudentRunListComponent } from '../student-run-list/student-run-list.component';
 
 export class MockUserService {
   getUser(): Observable<User[]> {
@@ -14,8 +15,8 @@ export class MockUserService {
     user.roles = ['student'];
     user.username = 'DemoUser0101';
     user.id = 123456;
-    return Observable.create((observer) => {
-      observer.next(user);
+    return new Observable((observer) => {
+      observer.next([user]);
       observer.complete();
     });
   }
@@ -25,19 +26,15 @@ describe('StudentHomeComponent', () => {
   let component: StudentHomeComponent;
   let fixture: ComponentFixture<StudentHomeComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [StudentHomeComponent],
-        providers: [
-          { provide: UserService, useClass: MockUserService },
-          { provide: MatDialog, useValue: {} }
-        ],
-        imports: [],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: UserService, useClass: MockUserService },
+        { provide: MatDialog, useValue: {} }
+      ],
+      imports: [StudentHomeComponent, MockComponent(StudentRunListComponent)]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StudentHomeComponent);

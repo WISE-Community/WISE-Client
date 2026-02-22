@@ -1,24 +1,28 @@
 <div class="component--grading__response__content">
-  <div class="match" fxLayout="row wrap">
+  <div class="match flex flex-row flex-wrap">
     <div
-      fxFlex="100"
-      fxFlex.gt-sm="{{ componentContent.horizontal ? 50 : 100 }}"
-      fxFlexOrder="{{ componentContent.choicesAfter ? 2 : 1 }}"
+      [ngClass]="{
+        'w-full': true,
+        'md:w-1/2': componentContent.horizontal,
+        'md:w-full': !componentContent.horizontal,
+        'order-2': componentContent.choicesAfter,
+        'order-1': !componentContent.choicesAfter
+      }"
     >
       <div
-        class="bucket selected-bg-bg"
-        fxLayout="column"
+        class="bucket selected-bg-bg flex flex-col"
         [ngStyle]="{ 'margin-bottom': componentContent.horizontal ? '0' : '8px' }"
       >
-        <div
-          class="bucket-title"
-          fxLayout="row wrap"
-          fxLayoutAlign="start center"
-          fxLayoutGap="8px"
-        >
+        <div class="bucket-title flex flex-row flex-wrap justify-start items-center gap-2">
           <h3 class="mat-subtitle-2" [innerHTML]="sourceBucket.value"></h3>
         </div>
-        <ul class="items" [ngStyle.gt-sm]="{ columns: componentContent.horizontal ? 1 : 2 }">
+        <ul
+          class="items"
+          [ngClass]="{
+            'md:columns-1': componentContent.horizontal,
+            'md:columns-2': !componentContent.horizontal
+          }"
+        >
           @for (item of sourceBucket.items; track item.id) {
             <li class="item" [ngClass]="{ disabled: true }">
               <match-choice-item
@@ -33,26 +37,32 @@
       </div>
     </div>
     <div
-      fxLayout="column"
-      fxLayout.gt-sm="{{ componentContent.horizontal ? 'column' : 'row wrap' }}"
-      fxLayoutAlign="start stretch"
-      fxFlex="100"
-      fxFlex.gt-sm="{{ componentContent.horizontal ? 50 : 100 }}"
-      fxFlexOrder="{{ componentContent.choicesAfter ? 1 : 2 }}"
+      [ngClass]="{
+        'w-full': true,
+        'md:w-1/2': componentContent.horizontal,
+        'md:w-full': !componentContent.horizontal,
+        'order-1': componentContent.choicesAfter,
+        'order-2': !componentContent.choicesAfter,
+        flex: true,
+        'flex-col': true,
+        'md:flex-col': componentContent.horizontal,
+        'md:flex-row': !componentContent.horizontal,
+        'sm:flex-wrap': !componentContent.horizontal,
+        'justify-start': true,
+        'items-stretch': true
+      }"
     >
       @for (bucket of targetBuckets; track bucket.id) {
         <div
-          fxLayout="column"
-          fxFlex="100"
-          fxFlex.gt-sm="{{ componentContent.horizontal ? 100 : 50 }}"
+          class="flex flex-col"
+          [ngClass]="{
+            'w-full': true,
+            'md:w-full': componentContent.horizontal,
+            'md:w-1/2': !componentContent.horizontal
+          }"
         >
-          <div class="bucket target notice-bg-bg" fxLayout="column" fxLayoutAlign="stretch">
-            <div
-              class="bucket-title"
-              fxLayout="row wrap"
-              fxLayoutAlign="start center"
-              fxLayoutGap="8px"
-            >
+          <div class="bucket target notice-bg-bg flex flex-col items-stretch">
+            <div class="bucket-title flex flex-row flex-wrap justify-start items-center gap-2">
               <h3 class="mat-subtitle-2" [innerHTML]="bucket.value"></h3>
             </div>
             <ul class="items">

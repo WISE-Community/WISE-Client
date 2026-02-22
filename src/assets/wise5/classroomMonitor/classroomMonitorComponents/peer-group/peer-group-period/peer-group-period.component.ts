@@ -1,15 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
 import { PeerGroupService } from '../../../../services/peerGroupService';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { CdkDropListGroup } from '@angular/cdk/drag-drop';
+import { PeerGroupUnassignedWorkgroupsComponent } from '../peer-group-unassigned-workgroups/peer-group-unassigned-workgroups.component';
+import { PeerGroupAssignedWorkgroupsComponent } from '../peer-group-assigned-workgroups/peer-group-assigned-workgroups.component';
 
 @Component({
-    selector: 'peer-group-period',
-    templateUrl: './peer-group-period.component.html',
-    styleUrls: ['./peer-group-period.component.scss'],
-    standalone: false
+  imports: [
+    MatCard,
+    MatCardContent,
+    MatButton,
+    MatIcon,
+    CdkDropListGroup,
+    PeerGroupUnassignedWorkgroupsComponent,
+    PeerGroupAssignedWorkgroupsComponent
+  ],
+  selector: 'peer-group-period',
+  styleUrl: './peer-group-period.component.scss',
+  templateUrl: './peer-group-period.component.html'
 })
-export class PeerGroupPeriodComponent implements OnInit {
+export class PeerGroupPeriodComponent {
   @Input() peerGroupingTag: string;
   @Input() period: any;
 
@@ -20,9 +34,10 @@ export class PeerGroupPeriodComponent implements OnInit {
   unassignedWorkgroups: any[] = [];
   workgroups: any[] = [];
 
-  constructor(private ConfigService: ConfigService, private PeerGroupService: PeerGroupService) {}
-
-  ngOnInit(): void {}
+  constructor(
+    private ConfigService: ConfigService,
+    private PeerGroupService: PeerGroupService
+  ) {}
 
   ngOnChanges(): void {
     this.PeerGroupService.retrievePeerGroupInfo(this.peerGroupingTag).subscribe(

@@ -15,7 +15,7 @@
         [runCode]="runCode"
       />
       <tool-bar [workgroupId]="workgroupId" (onMenuToggle)="toggleMenu()" />
-      <main id="content" fxFlex fxLayout="column" class="l-main">
+      <main id="content" class="l-main flex flex-col flex-grow">
         <router-outlet />
       </main>
       <side-menu [views]="views" />

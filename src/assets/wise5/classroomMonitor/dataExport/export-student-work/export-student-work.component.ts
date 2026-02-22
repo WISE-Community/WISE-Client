@@ -9,12 +9,27 @@ import { ConfigService } from '../../../services/configService';
 import { DataExportService } from '../../../services/dataExportService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { MatButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { SelectStepAndComponentCheckboxesComponent } from '../select-step-and-component-checkboxes/select-step-and-component-checkboxes.component';
 
 @Component({
-    selector: 'export-student-work',
-    templateUrl: './export-student-work.component.html',
-    styleUrl: './export-student-work.component.scss',
-    standalone: false
+  imports: [
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    MatCheckbox,
+    FormsModule,
+    SelectStepAndComponentCheckboxesComponent
+  ],
+  styleUrl: './export-student-work.component.scss',
+  templateUrl: './export-student-work.component.html'
 })
 export class ExportStudentWorkComponent extends AbstractExportComponent {
   protected canViewStudentNames: boolean = false;

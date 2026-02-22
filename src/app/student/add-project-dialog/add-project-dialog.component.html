@@ -10,29 +10,27 @@
           value="{{ accessCode }}"
           (keyup)="checkRunCode()"
         />
-        <mat-error
-          *ngIf="
-            runCodeFormControl.hasError('invalidRunCodeSyntax') ||
-            runCodeFormControl.hasError('invalidRunCode')
-          "
-          i18n
-          >Invalid Access Code</mat-error
-        >
-        <mat-error *ngIf="runCodeFormControl.hasError('alreadyAddedRun')" i18n
-          >You have already added this unit.</mat-error
-        >
-        <mat-error *ngIf="runCodeFormControl.hasError('runHasEnded')" i18n
-          >This run has ended. Please talk to your teacher.</mat-error
-        >
+        @if (
+          runCodeFormControl.hasError('invalidRunCodeSyntax') ||
+          runCodeFormControl.hasError('invalidRunCode')
+        ) {
+          <mat-error i18n>Invalid Access Code</mat-error>
+        }
+        @if (runCodeFormControl.hasError('alreadyAddedRun')) {
+          <mat-error i18n>You have already added this unit.</mat-error>
+        }
+        @if (runCodeFormControl.hasError('runHasEnded')) {
+          <mat-error i18n>This run has ended. Please talk to your teacher.</mat-error>
+        }
       </mat-form-field>
     </p>
     <p>
       <mat-form-field appearance="fill">
         <mat-label i18n>Choose Period</mat-label>
         <mat-select formControlName="period" [(value)]="selectedPeriod">
-          <mat-option *ngFor="let period of registerRunPeriods" value="{{ period }}">{{
-            period
-          }}</mat-option>
+          @for (period of registerRunPeriods; track period) {
+            <mat-option value="{{ period }}">{{ period }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </p>
@@ -47,7 +45,9 @@
       [disabled]="addProjectForm.invalid || isAdding"
       class="button--progress"
     >
-      <mat-progress-bar *ngIf="isAdding" mode="indeterminate"></mat-progress-bar>
+      @if (isAdding) {
+        <mat-progress-bar mode="indeterminate" />
+      }
       <ng-container i18n>Add</ng-container>
     </button>
   </mat-dialog-actions>

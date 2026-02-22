@@ -2,13 +2,10 @@
   <th class="table--list__thead__th" sticky>
     <button
       mat-button
-      class="table--list__thead__link"
+      class="table--list__thead__link w-full h-full flex justify-center items-center"
       (click)="setSort(sortBy)"
       title="Sort by {{ sortOptions[sortBy].label }}"
       i18n-title
-      fxFill
-      fxLayout="row"
-      fxLayoutAlign="center center"
     >
       <span>{{ sortOptions[sortBy].label }}</span>
       @if (sort === sortBy || sort === '-' + sortBy) {
@@ -24,10 +21,10 @@
 </ng-template>
 
 <div class="view-content view-content--with-sidemenu">
-  <div class="l-constrained student-progress" fxLayout="column">
+  <div class="l-constrained student-progress flex flex-col">
     <mat-list class="user-list student-select mat-elevation-z1">
-      <mat-list-item class="list-item list-item--actions" fxLayout="row wrap">
-        <div fxFlex.sm="100" fxFlex.xs="100">
+      <mat-list-item class="list-item list-item--actions">
+        <div class="w-full md:w-auto">
           <workgroup-select-autocomplete />
         </div>
       </mat-list-item>
@@ -57,8 +54,10 @@
                 } @else {
                   <td class="heavy td--wrap">{{ student.username }}</td>
                 }
-                <td class="center td--wrap td--max-width">{{ student.position }}</td>
-                <td fxLayout="row" fxLayoutAlign="center center">
+                <td class="center td--wrap td--max-width">
+                  <project-location [studentProgress]="student" />
+                </td>
+                <td class="flex justify-center items-center">
                   <project-progress
                     [completed]="student.completion.completedItems"
                     [total]="student.completion.totalItems"
@@ -67,9 +66,7 @@
                 </td>
                 <td class="center">
                   <div
-                    fxLayout="row"
-                    fxLayoutAlign="center center"
-                    class="layout-align-center-center layout-row"
+                    class="layout-align-center-center layout-row flex justify-center items-center"
                   >
                     <span class="mat-headline-5">{{ student.score }}</span
                     >&nbsp;

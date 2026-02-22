@@ -2,29 +2,41 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
+import { MatCardModule } from '@angular/material/card';
+import { PeerChatMembersComponent } from '../peer-chat-members/peer-chat-members.component';
+import { PeerChatMessagesComponent } from '../peer-chat-messages/peer-chat-messages.component';
+import { PeerChatMessageInputComponent } from '../peer-chat-message-input/peer-chat-message-input.component';
+import { PeerChatMemberTypingIndicatorComponent } from '../peer-chat-member-typing-indicator/peer-chat-member-typing-indicator.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'peer-chat-chat-box',
-    templateUrl: './peer-chat-chat-box.component.html',
-    styleUrls: ['./peer-chat-chat-box.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    MatCardModule,
+    PeerChatMembersComponent,
+    PeerChatMemberTypingIndicatorComponent,
+    PeerChatMessageInputComponent,
+    PeerChatMessagesComponent
+  ],
+  selector: 'peer-chat-chat-box',
+  styleUrl: './peer-chat-chat-box.component.scss',
+  templateUrl: './peer-chat-chat-box.component.html'
 })
 export class PeerChatChatBoxComponent implements OnInit {
   @Input() component: PeerChatComponent;
+  @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
   @Input() isEnabled: boolean = true;
   @Input() isGrading: boolean = false;
   @Input() messages: PeerChatMessage[] = [];
   @Input() myWorkgroupId: number;
   @Input() peerGroup: PeerGroup;
   @Input() response: string = '';
-  @Input() workgroupInfos: any = {};
-  workgroupInfosWithoutTeachers: any[];
-
-  @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
   @Output() responseChangedEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output('onSubmit') submit: EventEmitter<string> = new EventEmitter<string>();
-  @Output()
-  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+  @Output() undeleteClickedEvent: EventEmitter<PeerChatMessage> =
+    new EventEmitter<PeerChatMessage>();
+  @Input() workgroupInfos: any = {};
+  protected workgroupInfosWithoutTeachers: any[];
 
   ngOnInit(): void {
     this.workgroupInfosWithoutTeachers = this.filterOutTeachers(this.workgroupInfos);

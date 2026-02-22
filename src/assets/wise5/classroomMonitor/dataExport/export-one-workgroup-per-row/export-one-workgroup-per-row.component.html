@@ -20,11 +20,13 @@
       Include Student Work IDs
     </mat-checkbox>
   </div>
-  <div *ngIf="canViewStudentNames">
-    <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
-      Include Student Names
-    </mat-checkbox>
-  </div>
+  @if (canViewStudentNames) {
+    <div>
+      <mat-checkbox color="primary" [(ngModel)]="includeStudentNames" i18n>
+        Include Student Names
+      </mat-checkbox>
+    </div>
+  }
   <div>
     <mat-checkbox color="primary" [(ngModel)]="includeStudentWorkTimestamps" i18n>
       Include Student Work Timestamps
@@ -67,7 +69,7 @@
     [(exportStepSelectionType)]="exportStepSelectionType"
     [nodes]="nodes"
     [projectIdToOrder]="projectIdToOrder"
-  ></select-step-and-component-checkboxes>
+  />
   <div>
     <button mat-raised-button color="primary" (click)="export()" i18n>Export</button>
   </div>

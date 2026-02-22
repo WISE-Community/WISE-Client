@@ -1,4 +1,4 @@
-<div class="mat-card-title" fxLayoutAlign="start center">
+<div class="mat-card-title flex justify-start items-center">
   <mat-icon class="mat-24 secondary-text avatar" [ngStyle]="{ color: avatarColor }">group</mat-icon>
   <h4 class="mat-subtitle-2" i18n>Group {{ grouping.id }}</h4>
 </div>
@@ -9,15 +9,16 @@
     [cdkDropListData]="grouping"
     (cdkDropListDropped)="dropWorkgroup($event)"
   >
-    <li
-      *ngFor="let workgroup of grouping.members"
-      class="peer-group-li"
-      cdkDrag
-      [cdkDragData]="workgroup.id"
-      (cdkDragEntered)="dragEnter($event)"
-      (cdkDragExited)="dragExit($event)"
-    >
-      <peer-group-workgroup [workgroup]="workgroup"></peer-group-workgroup>
-    </li>
+    @for (workgroup of grouping.members; track workgroup) {
+      <li
+        class="peer-group-li"
+        cdkDrag
+        [cdkDragData]="workgroup.id"
+        (cdkDragEntered)="dragEnter($event)"
+        (cdkDragExited)="dragExit($event)"
+      >
+        <peer-group-workgroup [workgroup]="workgroup" />
+      </li>
+    }
   </ul>
 </mat-card-content>

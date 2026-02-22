@@ -1,26 +1,28 @@
 <mat-card appearance="outlined" class="chat-box mat-elevation-z2">
-  <peer-chat-members [peerChatWorkgroupInfos]="workgroupInfosWithoutTeachers"></peer-chat-members>
-  <peer-chat-messages
-    *ngIf="messages.length > 0"
-    [peerChatMessages]="messages"
-    [myWorkgroupId]="myWorkgroupId"
-    [workgroupInfos]="workgroupInfos"
-    [isGrading]="isGrading"
-    (deleteClickedEvent)="deleteClicked($event)"
-    (undeleteClickedEvent)="undeleteClicked($event)"
-  ></peer-chat-messages>
-  <peer-chat-message-input
-    *ngIf="isEnabled"
-    [component]="component"
-    [messageText]="response"
-    [peerGroup]="peerGroup"
-    (onSubmit)="submitResponse($event)"
-    (responseChangedEvent)="responseChanged($event)"
-  ></peer-chat-message-input>
+  <peer-chat-members [peerChatWorkgroupInfos]="workgroupInfosWithoutTeachers" />
+  @if (messages.length > 0) {
+    <peer-chat-messages
+      [peerChatMessages]="messages"
+      [myWorkgroupId]="myWorkgroupId"
+      [workgroupInfos]="workgroupInfos"
+      [isGrading]="isGrading"
+      (deleteClickedEvent)="deleteClicked($event)"
+      (undeleteClickedEvent)="undeleteClicked($event)"
+    />
+  }
+  @if (isEnabled) {
+    <peer-chat-message-input
+      [component]="component"
+      [messageText]="response"
+      [peerGroup]="peerGroup"
+      (onSubmit)="submitResponse($event)"
+      (responseChangedEvent)="responseChanged($event)"
+    />
+  }
   <peer-chat-member-typing-indicator
     [component]="component"
     [myWorkgroupId]="myWorkgroupId"
     [peerGroup]="peerGroup"
     class="mat-caption secondary-text"
-  ></peer-chat-member-typing-indicator>
+  />
 </mat-card>

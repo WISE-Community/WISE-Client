@@ -1,15 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-footer',
-    imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatIconModule, RouterModule],
-    templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.scss']
+  imports: [CommonModule, MatButtonModule, MatIconModule, RouterModule],
+  selector: 'app-footer',
+  styleUrl: './footer.component.scss',
+  templateUrl: './footer.component.html'
 })
 export class FooterComponent implements OnInit {
   protected time: Date;

@@ -1,12 +1,10 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { ConceptMapService } from '../conceptMapService';
 import { ConceptMapStudent } from './concept-map-student.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { ProjectService } from '../../../services/projectService';
 
 let background1 = 'background1.png';
 let background2 = 'background2.png';
@@ -26,21 +24,19 @@ let nodeInstance1;
 let nodeInstance2;
 let nodeInstanceId1 = 'studentNode1';
 let nodeInstanceId2 = 'studentNode2';
-
 describe('ConceptMapStudent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ConceptMapStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule, ConceptMapStudent],
+      providers: [provideHttpClient()]
+    });
     fixture = TestBed.createComponent(ConceptMapStudent);
     component = fixture.componentInstance;
     const componentContent = TestBed.inject(ConceptMapService).createComponent();
     componentContent.id = componentId;
     componentContent.prompt = 'Create nodes and links.';
     component.component = new Component(componentContent, nodeId);
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {

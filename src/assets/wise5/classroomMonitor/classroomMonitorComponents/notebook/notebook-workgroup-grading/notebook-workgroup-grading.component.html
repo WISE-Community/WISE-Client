@@ -7,53 +7,59 @@
       aria-label="Show/hide team's notebook contents"
       i18n-aria-label
     >
-      <div fxLayout="row" fxFlex>
-        <div fxLayout="row" fxLayoutAlign="center center" fxFlex="15">
+      <div class="flex flex-1">
+        <div class="flex justify-center items-center basis-[15%]">
           {{ workgroup.workgroupId }}
         </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+        <div class="flex justify-start items-center flex-1">
           {{ workgroup.displayNames }}
         </div>
-        <div
-          *ngIf="notesEnabled"
-          class="mat-headline-6"
-          fxLayout="row"
-          fxLayoutAlign="center center"
-          fxFlex="15"
-        >
-          <span [ngClass]="{ 'text-secondary': getNumActiveNotes() === 0 }">
-            {{ getNumActiveNotes() }}
-          </span>
-        </div>
-        <div *ngIf="reportEnabled" fxLayout="row" fxLayoutAlign="center center" fxFlex="25">
-          <span *ngIf="reportHasWork" class="success center" i18n>
-            Latest Work: {{ workgroup.report.serverSaveTime | date: 'mediumDate' }}
-          </span>
-          <span *ngIf="!reportHasWork" class="text-secondary" i18n> No Work </span>
-        </div>
+        @if (notesEnabled) {
+          <div class="mat-headline-6 flex justify-center items-center basis-[15%]">
+            <span [ngClass]="{ 'text-secondary': getNumActiveNotes() === 0 }">
+              {{ getNumActiveNotes() }}
+            </span>
+          </div>
+        }
+        @if (reportEnabled) {
+          <div class="flex justify-center items-center basis-[25%]">
+            @if (reportHasWork) {
+              <span class="success center" i18n>
+                Latest Work: {{ workgroup.report.serverSaveTime | date: 'mediumDate' }}
+              </span>
+            }
+            @if (!reportHasWork) {
+              <span class="text-secondary" i18n> No Work </span>
+            }
+          </div>
+        }
       </div>
     </button>
   </div>
-  <mat-list-item *ngIf="expand" class="grading__item-container">
-    <mat-tab-group class="mat-subtitle-2 app-bg-bg" fxFlex>
-      <mat-tab *ngIf="notesEnabled" label="Notes" i18n-label>
-        <notebook-notes
-          [mode]="'classroomMonitor'"
-          [config]="notebookConfig"
-          [viewOnly]="true"
-          [workgroupId]="workgroup.workgroupId"
-        />
-      </mat-tab>
-      @if (reportEnabled) {
-        <mat-tab label="{{ reportTitle }}">
-          <notebook-report
-            class="report-grading"
-            [mode]="'classroomMonitor'"
-            [config]="notebookConfig"
-            [workgroupId]="workgroup.workgroupId"
-          />
-        </mat-tab>
-      }
-    </mat-tab-group>
-  </mat-list-item>
+  @if (expand) {
+    <mat-list-item class="grading__item-container">
+      <mat-tab-group class="mat-subtitle-2 app-bg-bg flex-1" mat-stretch-tabs="false">
+        @if (notesEnabled) {
+          <mat-tab label="Notes" i18n-label>
+            <notebook-notes
+              [mode]="'classroomMonitor'"
+              [config]="notebookConfig"
+              [viewOnly]="true"
+              [workgroupId]="workgroup.workgroupId"
+            />
+          </mat-tab>
+        }
+        @if (reportEnabled) {
+          <mat-tab label="{{ reportTitle }}">
+            <notebook-report
+              class="report-grading"
+              [mode]="'classroomMonitor'"
+              [config]="notebookConfig"
+              [workgroupId]="workgroup.workgroupId"
+            />
+          </mat-tab>
+        }
+      </mat-tab-group>
+    </mat-list-item>
+  }
 </div>

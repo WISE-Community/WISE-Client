@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChooseAutomatedAssessmentComponent } from './choose-automated-assessment.component';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ChooseAutomatedAssessmentComponent } from './choose-automated-assessment.component';
 
 describe('ChooseAutomatedAssessmentComponent', () => {
   let component: ChooseAutomatedAssessmentComponent;
@@ -11,10 +10,16 @@ describe('ChooseAutomatedAssessmentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChooseAutomatedAssessmentComponent, StudentTeacherCommonServicesModule],
+      imports: [ChooseAutomatedAssessmentComponent],
       providers: [
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
+        MockProvider(TeacherProjectService, {
+          getAutomatedAssessmentProjectId: () => 1,
+          retrieveProjectById: () =>
+            Promise.resolve({
+              id: 1,
+              title: 'Test Project'
+            })
+        }),
         provideRouter([])
       ]
     }).compileComponents();

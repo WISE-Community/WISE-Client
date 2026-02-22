@@ -1,21 +1,13 @@
 import { Component } from '@angular/core';
-import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ComponentTypeButtonComponent } from '../../../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
+import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
 
 @Component({
-    imports: [
-        CommonModule,
-        ComponentTypeButtonComponent,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDialogModule
-    ],
-    styleUrl: './choose-new-component.component.scss',
-    templateUrl: 'choose-new-component.component.html'
+  imports: [ComponentTypeButtonComponent, MatButtonModule, MatDialogModule],
+  styles: ['component-type-button { width: 250px; padding: 4px; }'],
+  templateUrl: 'choose-new-component.component.html'
 })
 export class ChooseNewComponent {
   protected componentTypes: any[];

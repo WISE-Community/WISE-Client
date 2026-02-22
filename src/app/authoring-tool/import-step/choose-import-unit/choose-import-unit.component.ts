@@ -1,27 +1,19 @@
-import { Component } from '@angular/core';
-import { ConfigService } from '../../../../assets/wise5/services/configService';
-import { ProjectLibraryService } from '../../../../assets/wise5/services/projectLibraryService';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { AddStepTarget } from '../../../domain/addStepTarget';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ConfigService } from '../../../../assets/wise5/services/configService';
+import { ProjectLibraryService } from '../../../../assets/wise5/services/projectLibraryService';
+import { AddStepTarget } from '../../../domain/addStepTarget';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatTabsModule,
-        RouterModule
-    ],
-    selector: 'choose-import-unit',
-    styleUrls: ['./choose-import-unit.component.scss', '../../add-content.scss'],
-    templateUrl: './choose-import-unit.component.html'
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatTabsModule, RouterModule],
+  selector: 'choose-import-unit',
+  styleUrls: ['./choose-import-unit.component.scss', '../../add-content.scss'],
+  templateUrl: './choose-import-unit.component.html'
 })
 export class ChooseImportUnitComponent {
   protected importType: 'step' | 'component';

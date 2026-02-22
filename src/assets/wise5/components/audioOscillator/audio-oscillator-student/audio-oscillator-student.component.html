@@ -1,41 +1,49 @@
-<component-header [component]="component"></component-header>
-<div fxLayout="row wrap" fxLayoutAlign="start center" class="interaction-div">
-  <mat-form-field *ngIf="oscillatorTypes.length > 1" class="oscillator-type">
-    <mat-label i18n>Oscillator Type</mat-label>
-    <mat-select
-      [(ngModel)]="oscillatorType"
-      (ngModelChange)="refreshOscilloscope()"
-      [disabled]="isDisabled"
-    >
-      <mat-option *ngFor="let oscillatorType of oscillatorTypes" [value]="oscillatorType">
-        {{ oscillatorType }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="canStudentViewFrequencyInput" class="frequency">
-    <mat-label i18n>Frequency (Hz)</mat-label>
-    <input
-      matInput
-      type="number"
-      [(ngModel)]="frequency"
-      (ngModelChange)="refreshOscilloscope()"
-      [disabled]="isDisabled || !canStudentEditFrequency"
-    />
-  </mat-form-field>
-  <mat-form-field *ngIf="canStudentViewAmplitudeInput" class="frequency">
-    <mat-label i18n>Ampitude (dB)</mat-label>
-    <input
-      matInput
-      type="number"
-      [max]="maxAmplitude"
-      [min]="minAmplitude"
-      name="amplitude"
-      [(ngModel)]="amplitude"
-      (change)="amplitudeChanged()"
-      (keyup)="amplitudeKeyUp($event)"
-      [disabled]="isDisabled || !canStudentEditAmplitude"
-    />
-  </mat-form-field>
+<component-header [component]="component" />
+<div class="interaction-div flex flex-row flex-wrap items-center">
+  @if (oscillatorTypes.length > 1) {
+    <mat-form-field class="oscillator-type">
+      <mat-label i18n>Oscillator Type</mat-label>
+      <mat-select
+        [(ngModel)]="oscillatorType"
+        (ngModelChange)="refreshOscilloscope()"
+        [disabled]="isDisabled"
+      >
+        @for (oscillatorType of oscillatorTypes; track oscillatorType) {
+          <mat-option [value]="oscillatorType">
+            {{ oscillatorType }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+  @if (canStudentViewFrequencyInput) {
+    <mat-form-field class="frequency">
+      <mat-label i18n>Frequency (Hz)</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="frequency"
+        (ngModelChange)="refreshOscilloscope()"
+        [disabled]="isDisabled || !canStudentEditFrequency"
+      />
+    </mat-form-field>
+  }
+  @if (canStudentViewAmplitudeInput) {
+    <mat-form-field class="frequency">
+      <mat-label i18n>Ampitude (dB)</mat-label>
+      <input
+        matInput
+        type="number"
+        [max]="maxAmplitude"
+        [min]="minAmplitude"
+        name="amplitude"
+        [(ngModel)]="amplitude"
+        (change)="amplitudeChanged()"
+        (keyup)="amplitudeKeyUp($event)"
+        [disabled]="isDisabled || !canStudentEditAmplitude"
+      />
+    </mat-form-field>
+  }
   <button
     mat-raised-button
     color="primary"
@@ -44,8 +52,15 @@
     matTooltip="{{ playStopButtonText }}"
     matTooltipPosition="above"
   >
-    <mat-icon *ngIf="!isPlaying">play_arrow</mat-icon>
-    <mat-icon *ngIf="isPlaying">stop</mat-icon>
+    @if (isPlaying) {
+      @if (isPlaying) {
+        <mat-icon>stop</mat-icon>
+      }
+    } @else {
+      @if (!isPlaying) {
+        <mat-icon>play_arrow</mat-icon>
+      }
+    }
   </button>
 </div>
 <canvas
@@ -55,24 +70,25 @@
   class="oscillator-canvas"
 >
 </canvas>
-<component-save-submit-buttons
-  *ngIf="isSaveOrSubmitButtonVisible"
-  [componentState]="latestComponentState"
-  [isDirty]="isDirty"
-  [isDisabled]="isDisabled"
-  [isSaveButtonVisible]="isSaveButtonVisible"
-  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-  [isSubmitButtonVisible]="isSubmitButtonVisible"
-  [isSubmitDirty]="isSubmitDirty"
-  (saveButtonClicked)="saveButtonClicked($event)"
-  (submitButtonClicked)="submitButtonClicked($event)"
->
-</component-save-submit-buttons>
-<component-annotations
-  *ngIf="mode === 'student'"
-  [annotations]="latestAnnotations"
-  [maxScore]="componentContent.maxScore"
-  [nodeId]="nodeId"
-  [componentId]="componentId"
->
-</component-annotations>
+@if (isSaveOrSubmitButtonVisible) {
+  <component-save-submit-buttons
+    class="mt-3 block"
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  />
+}
+@if (mode === 'student') {
+  <component-annotations
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  />
+}

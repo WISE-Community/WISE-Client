@@ -1,22 +1,17 @@
 <h2
   mat-dialog-title
-  class="mat-dialog-title--icons"
-  fxLayout="row wrap"
-  fxLayoutAlign="start center"
-  fxLayoutGap="8px"
+  class="mat-dialog-title--icons !flex flex-wrap justify-start items-center gap-2"
 >
   <span i18n>Groupings for {{ peerGroupingName }}</span>
-  <span fxFlex fxHide.xs></span>
+  <span class="flex-grow"></span>
   <select-period />
 </h2>
 <mat-dialog-content class="dialog-content-scroll">
   <p class="info" i18n>Tip: Drag students to change groups for this peer grouping.</p>
-  <peer-group-period
-    *ngFor="let period of periods"
-    [peerGroupingTag]="peerGroupingTag"
-    [period]="period"
-  ></peer-group-period>
+  @for (period of periods; track period) {
+    <peer-group-period [peerGroupingTag]="peerGroupingTag" [period]="period" />
+  }
 </mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end center">
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close i18n>Close</button>
 </mat-dialog-actions>

@@ -14,7 +14,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { StepInfoComponent } from '../../../../../../app/classroom-monitor/step-info/step-info.component';
 import { ComponentNewWorkBadgeComponent } from '../../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
 import { WorkgroupNodeStatusComponent } from '../../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
@@ -22,22 +21,21 @@ import { WorkgroupNodeScoreComponent } from '../../shared/workgroupNodeScore/wor
 import { WorkgroupComponentGradingComponent } from '../../workgroup-component-grading/workgroup-component-grading.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        ComponentNewWorkBadgeComponent,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatListModule,
-        StepInfoComponent,
-        WorkgroupComponentGradingComponent,
-        WorkgroupNodeStatusComponent,
-        WorkgroupNodeScoreComponent
-    ],
-    selector: 'step-item',
-    templateUrl: './step-item.component.html',
-    styleUrl: './step-item.component.scss',
-    encapsulation: ViewEncapsulation.None
+  imports: [
+    CommonModule,
+    ComponentNewWorkBadgeComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    StepInfoComponent,
+    WorkgroupComponentGradingComponent,
+    WorkgroupNodeStatusComponent,
+    WorkgroupNodeScoreComponent
+  ],
+  selector: 'step-item',
+  templateUrl: './step-item.component.html',
+  styleUrl: './step-item.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class StepItemComponent {
   protected componentIdToIsVisible: { [componentId: string]: boolean } = {};
@@ -51,7 +49,7 @@ export class StepItemComponent {
   @Input() maxScore: number;
   @Input() nodeId: string;
   @Output() onUpdateExpand: any = new EventEmitter();
-  protected score: any;
+  @Input() score: any;
   @Input() showScore: boolean;
   private status: any;
   protected statusClass: string;
@@ -69,12 +67,14 @@ export class StepItemComponent {
       this.maxScore =
         typeof changesObj.maxScore.currentValue === 'number' ? changesObj.maxScore.currentValue : 0;
     }
+    if (changesObj.score) {
+      this.score = changesObj.score.currentValue >= 0 ? changesObj.score.currentValue : '-';
+    }
     if (changesObj.stepData) {
       const stepData = copy(changesObj.stepData.currentValue);
       this.hasAlert = stepData.hasAlert;
       this.hasNewAlert = stepData.hasNewAlert;
       this.status = stepData.completionStatus;
-      this.score = stepData.score >= 0 ? stepData.score : '-';
       this.components = this.projectService.getComponents(this.nodeId);
       this.componentIdToIsVisible = calculateComponentVisibility(
         this.projectService.calculateComponentIdToHasWork(this.components),

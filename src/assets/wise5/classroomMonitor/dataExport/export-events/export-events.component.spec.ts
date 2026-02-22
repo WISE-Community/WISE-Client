@@ -3,11 +3,8 @@ import { ExportEventsComponent } from './export-events.component';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { DataExportService } from '../../../services/dataExportService';
 import { ActivatedRoute } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { FormsModule } from '@angular/forms';
 
 let configService: ConfigService;
 let teacherProjectService: TeacherProjectService;
@@ -24,8 +21,7 @@ describe('ExportEventsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExportEventsComponent],
-      imports: [ClassroomMonitorTestingModule, FormsModule, MatCheckboxModule, MatIconModule],
+      imports: [ClassroomMonitorTestingModule, ExportEventsComponent],
       providers: [
         {
           provide: ActivatedRoute,

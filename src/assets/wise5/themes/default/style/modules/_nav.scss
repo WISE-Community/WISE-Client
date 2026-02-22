@@ -101,11 +101,6 @@
 //.nav-item--list {
 //}
 
-.nav-item--list__info-item {
-    padding: 0 16px 0 4px;
-    display: inline-block;
-}
-
 .nav-item--list__reorder {
     margin-left: 8px;
     color: color('text-disabled');
@@ -178,9 +173,4 @@
 .nav-item__progress-value {
     margin-left: 8px;
     width: 36px;
-}
-
-.progress-wrapper {
-    padding: 2px 0;
-    cursor: pointer;
 }

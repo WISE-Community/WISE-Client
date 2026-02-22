@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
-export class TimelineItem {}
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector: 'app-timeline',
-    templateUrl: './timeline.component.html',
-    styleUrls: ['./timeline.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    host: { class: 'timeline' },
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  host: { class: 'timeline' },
+  selector: 'app-timeline',
+  styles: [
+    `
+      .timeline {
+        display: block;
+        padding: 16px 0;
+      }
+    `
+  ],
+  template: '<ng-content></ng-content>'
 })
-export class TimelineComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class TimelineComponent {}

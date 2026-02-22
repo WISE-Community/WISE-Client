@@ -5,18 +5,18 @@
       cdkDropList
       [cdkDropListData]="{ id: 0 }"
       (cdkDropListDropped)="dropWorkgroup($event)"
-      [ngStyle.gt-sm]="{ columns: 2 }"
-      [ngStyle.gt-md]="{ columns: 3 }"
+      class="md:columns-2 lg:columns-3"
     >
-      <li
-        *ngFor="let workgroup of unassignedWorkgroups"
-        cdkDrag
-        [cdkDragData]="workgroup.id"
-        (cdkDragEntered)="dragEnter($event)"
-        (cdkDragExited)="dragExit($event)"
-      >
-        <peer-group-workgroup [workgroup]="workgroup"></peer-group-workgroup>
-      </li>
+      @for (workgroup of unassignedWorkgroups; track workgroup) {
+        <li
+          cdkDrag
+          [cdkDragData]="workgroup.id"
+          (cdkDragEntered)="dragEnter($event)"
+          (cdkDragExited)="dragExit($event)"
+        >
+          <peer-group-workgroup [workgroup]="workgroup" />
+        </li>
+      }
     </ul>
   </mat-card-content>
 </mat-card>

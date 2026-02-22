@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-move-user-confirm-dialog',
-    templateUrl: './move-user-confirm-dialog.component.html',
-    standalone: false
+  imports: [CommonModule, MatButtonModule, MatDialogModule, MatIconModule],
+  templateUrl: './move-user-confirm-dialog.component.html'
 })
 export class MoveUserConfirmDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public isMovingFromWorkgroup: boolean) {}

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, Location } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,7 +41,6 @@ import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.comp
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     GoogleSignInButtonComponent,
     ReactiveFormsModule,
@@ -50,9 +48,7 @@ import { SearchBarComponent } from '../modules/shared/search-bar/search-bar.comp
     SearchBarComponent,
     SharedModule,
     StudentRoutingModule,
-    TimelineModule
-  ],
-  declarations: [
+    TimelineModule,
     AddProjectDialogComponent,
     StudentComponent,
     StudentHomeComponent,

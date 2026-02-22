@@ -6,10 +6,9 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 import { NodeService } from '../../../services/nodeService';
 
 @Component({
-    selector: 'concept-map-show-work',
-    templateUrl: 'concept-map-show-work.component.html',
-    styleUrls: ['concept-map-show-work.component.scss'],
-    standalone: false
+  selector: 'concept-map-show-work',
+  styles: ['.concept-map-svg { border: 1px solid black; background-repeat: no-repeat; }'],
+  templateUrl: 'concept-map-show-work.component.html'
 })
 export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
   svgId: string;
@@ -23,11 +22,11 @@ export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
   links: any[] = [];
 
   constructor(
-    private ConceptMapService: ConceptMapService,
+    private conceptMapService: ConceptMapService,
     protected nodeService: NodeService,
-    protected ProjectService: ProjectService
+    protected projectService: ProjectService
   ) {
-    super(nodeService, ProjectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
@@ -114,7 +113,7 @@ export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
 
   populateNodes(conceptMapData: any): void {
     for (const node of conceptMapData.nodes) {
-      const conceptMapNode = this.ConceptMapService.newConceptMapNode(
+      const conceptMapNode = this.conceptMapService.newConceptMapNode(
         this.draw,
         node.instanceId,
         node.originalId,
@@ -135,7 +134,7 @@ export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
     for (const link of conceptMapData.links) {
       const sourceNode = this.getSourceNode(link);
       const destinationNode = this.getDestinationNode(link);
-      const conceptMapLink = this.ConceptMapService.newConceptMapLink(
+      const conceptMapLink = this.conceptMapService.newConceptMapLink(
         this.draw,
         link.instanceId,
         link.originalId,
@@ -172,10 +171,10 @@ export class ConceptMapShowWorkComponent extends ComponentShowWorkDirective {
   }
 
   moveLinkTextToFront(): void {
-    this.ConceptMapService.moveLinkTextToFront(this.links);
+    this.conceptMapService.moveLinkTextToFront(this.links);
   }
 
   moveNodesToFront(): void {
-    this.ConceptMapService.moveNodesToFront(this.nodes);
+    this.conceptMapService.moveNodesToFront(this.nodes);
   }
 }

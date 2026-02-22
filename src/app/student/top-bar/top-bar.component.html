@@ -1,36 +1,41 @@
 <mat-toolbar class="topbar dark-theme" [color]="hasNewAmbientNotifications() ? 'warn' : 'primary'">
   <div
-    class="topbar-content"
+    class="topbar-content flex flex-1 items-center"
+    [ngClass]="{ 'cursor-pointer': hasNewAmbientNotifications() }"
+    [tabIndex]="hasNewAmbientNotifications() ? '0' : '-1'"
     (click)="viewCurrentAmbientNotification($event)"
-    fxFlex
-    fxLayout="row"
-    fxLayoutAlign="start center"
+    aria-label="View ambient notification"
+    i18n-aria-label
   >
     <a [href]="homeURL" target="_self" class="logo-link" (click)="$event.stopPropagation()">
       <img [src]="logoURL" alt="WISE Logo" i18n-alt class="logo" />
     </a>
-    <h3 fxFlex="4 1 0%" class="title" [title]="projectName">{{ projectName }}</h3>
-    <span fxFlex></span>
+    <h3 class="title flex-grow px-2" [title]="projectName">{{ projectName }}</h3>
+    <span class="flex-1"></span>
     <div class="constraints">
-      <button
-        mat-stroked-button
-        id="toggleConstraints"
-        *ngIf="isPreview && !isConstraintsDisabled && hasConstraints()"
-        (click)="disableConstraints()"
-        title="Only Available in Preview Mode"
-        i18n-title
-        i18n
-      >
-        Turn Off Constraints
-      </button>
-      <span *ngIf="isConstraintsDisabled" i18n>Constraints Are Off</span>
+      @if (isPreview && !isConstraintsDisabled && hasConstraints()) {
+        <button
+          mat-stroked-button
+          id="toggleConstraints"
+          (click)="disableConstraints()"
+          title="Only Available in Preview Mode"
+          i18n-title
+          i18n
+        >
+          Turn Off Constraints
+        </button>
+      }
+      @if (isConstraintsDisabled) {
+        <span i18n>Constraints Are Off</span>
+      }
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-      <project-language-chooser
-        *ngIf="hasTranslations"
-        [projectLocale]="projectLocale"
-        (languageChangedEvent)="changeLanguage($event)"
-      ></project-language-chooser>
+    <div class="flex items-center gap-1">
+      @if (hasTranslations) {
+        <project-language-chooser
+          [projectLocale]="projectLocale"
+          (languageChangedEvent)="changeLanguage($event)"
+        ></project-language-chooser>
+      }
       <button
         mat-icon-button
         (click)="viewAlerts($event)"
@@ -57,7 +62,7 @@
           i18n-aria-label
         >
         </mat-progress-spinner>
-        <student-account-menu #accountMenu></student-account-menu>
+        <student-account-menu #accountMenu />
         <button
           mat-icon-button
           [matMenuTriggerFor]="accountMenu?.menu"

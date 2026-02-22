@@ -3,7 +3,6 @@ import { StudentEditProfileComponent } from './edit-profile.component';
 import { User } from '../../../domain/user';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UserService } from '../../../services/user.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -72,14 +71,13 @@ describe('StudentEditProfileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [StudentEditProfileComponent],
       imports: [
-        BrowserAnimationsModule,
         ReactiveFormsModule,
         MatDialogModule,
         MatInputModule,
         MatSelectModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        StudentEditProfileComponent
       ],
       providers: [
         { provide: StudentService, useClass: MockStudentService },
@@ -126,7 +124,7 @@ describe('StudentEditProfileComponent', () => {
     component.editProfileFormGroup.get('language').setValue('Spanish');
     submitForm();
     fixture.detectChanges();
-    const testBedUserService = TestBed.get(UserService);
-    expect(testBedUserService.user.language).toBe('Spanish');
+    const testBedUserService = TestBed.inject(UserService);
+    expect(testBedUserService['user'].language).toBe('Spanish');
   });
 });

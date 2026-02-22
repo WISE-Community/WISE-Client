@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ProjectService } from './projectService';
 import { ConfigService } from './configService';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { generateRandomKey } from '../common/string/string';
 import { Annotation } from '../common/Annotation';
+import { Node } from '../common/Node';
+import { ComponentContent } from '../common/ComponentContent';
 
 @Injectable()
 export class AnnotationService {
@@ -119,15 +121,13 @@ export class AnnotationService {
       let annotation = this.saveToServerSuccess(savedAnnotationDataResponse);
       return Promise.resolve(annotation);
     } else {
-      const params = {
-        runId: this.configService.getRunId(),
-        workgroupId: this.configService.getWorkgroupId(),
-        annotations: JSON.stringify(annotations)
-      };
-      const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+      const body = new HttpParams()
+        .set('runId', this.configService.getRunId())
+        .set('workgroupId', this.configService.getWorkgroupId())
+        .set('annotations', JSON.stringify(annotations));
       return this.http
-        .post(this.configService.getConfigParam('teacherDataURL'), $.param(params), {
-          headers: headers
+        .post(this.configService.getConfigParam('teacherDataURL'), body, {
+          headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
         })
         .toPromise()
         .then((savedAnnotationDataResponse: any) => {
@@ -249,6 +249,17 @@ export class AnnotationService {
 
   isScoreOrAutoScore(annotation: any): boolean {
     return annotation.type === 'score' || annotation.type === 'autoScore';
+  }
+
+  getTotalNodeScore(workgroupId: number, node: Node, components: ComponentContent[]): number {
+    return this.getTotalScore(
+      this.annotations.filter(
+        (annotation) =>
+          annotation.nodeId === node.id &&
+          annotation.toWorkgroupId === workgroupId &&
+          components.some((component) => component.id === annotation.componentId)
+      )
+    );
   }
 
   getTotalNodeScoreForWorkgroup(workgroupId: number, nodeId: string) {

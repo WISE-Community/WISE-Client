@@ -1,4 +1,4 @@
-<div class="select-option" fxLayoutAlign="space-between start">
+<div class="select-option flex space-between items-start">
   <mat-radio-button
     [checked]="selectedPeerGrouping != null && peerGrouping.tag === selectedPeerGrouping.tag"
     (click)="select()"
@@ -6,23 +6,31 @@
   >
     <span class="mat-subtitle-2">{{ peerGrouping.name }}</span>
   </mat-radio-button>
+  <span class="flex grow"></span>
   <button mat-stroked-button (click)="edit()" i18n>Edit</button>
 </div>
-<div fxLayout="row" fxLayoutAlign="space-between end">
+<div class="flex flex-row space-between items-end">
   <div>
     <div>
       <span class="field-label" i18n>Steps Used In: </span>
-      <span *ngFor="let stepUsedIn of stepsUsedIn; last as isLast">
-        {{ stepUsedIn }}<span *ngIf="!isLast">, </span>
-      </span>
-      <span *ngIf="stepsUsedIn.length === 0" i18n>None</span>
+      @for (stepUsedIn of stepsUsedIn; track stepUsedIn; let isLast = $last) {
+        <span>
+          {{ stepUsedIn }}
+          @if (!isLast) {
+            <span>, </span>
+          }
+        </span>
+      }
+      @if (stepsUsedIn.length === 0) {
+        <span i18n>None</span>
+      }
     </div>
     <div>
       <span class="field-label" i18n>Logic: </span><span>{{ peerGroupingLogicName }}</span>
     </div>
     <div>
-      <span class="field-label" i18n>Teams Per Group: </span
-      ><span>{{ peerGrouping.maxMembershipCount }}</span>
+      <span class="field-label" i18n>Teams Per Group: </span>
+      <span>{{ peerGrouping.maxMembershipCount }}</span>
     </div>
   </div>
 </div>

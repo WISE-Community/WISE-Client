@@ -1,29 +1,36 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterModule } from '@angular/router';
 import { scrollToTopOfPage, temporarilyHighlightElement } from '../../common/dom/dom';
+import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { ConfigService } from '../../services/configService';
 import { CopyProjectService } from '../../services/copyProjectService';
-import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { SessionService } from '../../services/sessionService';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatIconModule,
-        MatTooltipModule,
-        RouterModule
-    ],
-    styleUrl: './project-list.component.scss',
-    templateUrl: './project-list.component.html'
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatListModule,
+    MatTabsModule,
+    MatTooltipModule,
+    RouterModule
+  ],
+  styles: `
+    .projectItem:hover {
+      cursor: pointer;
+      background-color: #add8e6;
+    }
+  `,
+  templateUrl: './project-list.component.html'
 })
 export class ProjectListComponent implements OnInit, OnDestroy {
   protected projects: any[] = [];

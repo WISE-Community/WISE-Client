@@ -6,23 +6,19 @@ import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ViewComponentRevisionsComponent } from '../view-component-revisions/view-component-revisions.component';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ComponentStateInfoComponent } from '../../../common/component-state-info/component-state-info.component';
 import { ComponentGradingComponent } from '../component-grading.component';
 import { EditComponentAnnotationsComponent } from '../edit-component-annotations/edit-component-annotations.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        ComponentGradingComponent,
-        ComponentStateInfoComponent,
-        EditComponentAnnotationsComponent,
-        FlexLayoutModule,
-        MatDialogModule
-    ],
-    selector: 'workgroup-component-grading',
-    templateUrl: 'workgroup-component-grading.component.html'
+  imports: [
+    ComponentGradingComponent,
+    ComponentStateInfoComponent,
+    EditComponentAnnotationsComponent,
+    MatDialogModule
+  ],
+  selector: 'workgroup-component-grading',
+  templateUrl: 'workgroup-component-grading.component.html'
 })
 export class WorkgroupComponentGradingComponent {
   protected component: ComponentContent;

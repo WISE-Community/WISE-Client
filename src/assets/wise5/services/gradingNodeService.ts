@@ -12,10 +12,6 @@ export class GradingNodeService extends TeacherNodeService {
     });
   }
 
-  goToPrevNode(): void {
-    this.setCurrentNode(this.getPrevNodeId());
-  }
-
   getPrevNodeId(currentId = null) {
     const prevNodeId = super.getPrevNodeId(currentId);
     if (!prevNodeId) return null;

@@ -17,7 +17,6 @@ describe('EditCRaterDescriptionComponent', () => {
       providers: [{ provide: TeacherProjectService, useClass: MockTeacherProjectService }]
     }).compileComponents();
     nodeChangedSpy = spyOn(TestBed.inject(TeacherProjectService), 'nodeChanged');
-
     fixture = TestBed.createComponent(EditCRaterDescriptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -35,11 +34,12 @@ describe('EditCRaterDescriptionComponent', () => {
     });
   }));
 
-  it('should populate the input field with JSON data', () => {
+  it('should populate the input field with JSON data', fakeAsync(() => {
     component.cRaterRubric.description = 'Test';
     fixture.detectChanges();
-    expect(
-      fixture.nativeElement.querySelector('textarea').getAttribute('ng-reflect-model')
-    ).toEqual('Test');
-  });
+    tick();
+    fixture.whenStable().then(() => {
+      expect(fixture.nativeElement.querySelector('textarea').value).toEqual('Test');
+    });
+  }));
 });

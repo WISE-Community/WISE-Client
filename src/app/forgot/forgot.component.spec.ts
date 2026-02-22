@@ -6,14 +6,12 @@ describe('ForgotComponent', () => {
   let component: ForgotComponent;
   let fixture: ComponentFixture<ForgotComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [ForgotComponent],
-        providers: [provideRouter([])]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [ForgotComponent],
+      providers: [provideRouter([])]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ForgotComponent);

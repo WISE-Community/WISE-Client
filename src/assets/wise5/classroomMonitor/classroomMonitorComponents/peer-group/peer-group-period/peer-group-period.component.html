@@ -1,8 +1,8 @@
 <mat-card>
   <mat-card-content>
-    <div fxLayoutAlign="start center">
+    <div class="flex justify-start items-center">
       <h3 class="mat-headline-4 accent-1" i18n>Period {{ period.periodName }}</h3>
-      <span fxFlex></span>
+      <span class="flex-grow"></span>
       <button
         mat-stroked-button
         color="primary"
@@ -19,13 +19,11 @@
       <peer-group-unassigned-workgroups
         [unassignedWorkgroups]="unassignedWorkgroups"
         (moveWorkgroup)="moveWorkgroup($event)"
-      >
-      </peer-group-unassigned-workgroups>
+      />
       <peer-group-assigned-workgroups
         [groupings]="groupings"
         (moveWorkgroup)="moveWorkgroup($event)"
-      >
-      </peer-group-assigned-workgroups>
+      />
     </div>
   </mat-card-content>
 </mat-card>

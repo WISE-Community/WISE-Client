@@ -1,9 +1,6 @@
 import { Directive, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 
-@Directive({
-    selector: '[track-scroll]',
-    standalone: false
-})
+@Directive({ selector: '[track-scroll]' })
 export class TrackScrollDirective {
   @Output() yPositionChange: EventEmitter<any> = new EventEmitter();
 

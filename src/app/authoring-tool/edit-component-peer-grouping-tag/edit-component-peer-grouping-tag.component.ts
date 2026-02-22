@@ -1,18 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
+import { SelectPeerGroupingAuthoringComponent } from '../../../assets/wise5/authoringTool/peer-grouping/select-peer-grouping-authoring/select-peer-grouping-authoring.component';
 
 @Component({
-    selector: 'edit-component-peer-grouping-tag',
-    templateUrl: './edit-component-peer-grouping-tag.component.html',
-    styleUrls: ['./edit-component-peer-grouping-tag.component.scss'],
-    standalone: false
+  imports: [SelectPeerGroupingAuthoringComponent],
+  selector: 'edit-component-peer-grouping-tag',
+  template: `<select-peer-grouping-authoring
+    [tag]="componentContent.peerGroupingTag"
+    (tagChanged)="peerGroupingTagChanged($event)"
+  />`
 })
 export class EditComponentPeerGroupingTagComponent {
   @Input() componentContent: any;
 
   constructor(private projectService: TeacherProjectService) {}
-
-  ngOnInit(): void {}
 
   peerGroupingTagChanged(tag: string): void {
     this.componentContent.peerGroupingTag = tag;

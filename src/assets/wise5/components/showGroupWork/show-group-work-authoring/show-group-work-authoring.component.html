@@ -1,8 +1,8 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
-<div fxLayoutGap="20px">
+/>
+<div class="flex flex-wrap gap-4 items-center">
   <mat-form-field>
     <mat-label i18n>Show Work Step</mat-label>
     <mat-select
@@ -10,11 +10,13 @@
       (ngModelChange)="showWorkNodeIdChanged()"
     >
       <mat-option [value]="''" i18n>(None)</mat-option>
-      <ng-container *ngFor="let nodeId of nodeIds">
-        <mat-option *ngIf="isApplicationNode(nodeId)" [value]="nodeId">
-          {{ getNodePositionAndTitle(nodeId) }}
-        </mat-option>
-      </ng-container>
+      @for (nodeId of nodeIds; track nodeId) {
+        @if (isApplicationNode(nodeId)) {
+          <mat-option [value]="nodeId">
+            {{ getNodePositionAndTitle(nodeId) }}
+          </mat-option>
+        }
+      }
     </mat-select>
   </mat-form-field>
   <mat-form-field>
@@ -24,21 +26,26 @@
       (ngModelChange)="componentChanged()"
     >
       <mat-option [value]="''" i18n>(None)</mat-option>
-      <mat-option
-        *ngFor="
-          let component of getComponents(componentContent.showWorkNodeId);
-          index as componentIndex
-        "
-        [value]="component.id"
-        [disabled]="!isShowWorkComponentTypeAllowed(component.type) || component.id === componentId"
-      >
-        <span>{{ componentIndex + 1 }}. {{ component.type }} </span>
-        <span *ngIf="component.id === componentId" i18n>(This Component)</span>
-      </mat-option>
+      @for (
+        component of getComponents(componentContent.showWorkNodeId);
+        track component;
+        let componentIndex = $index
+      ) {
+        <mat-option
+          [value]="component.id"
+          [disabled]="
+            !isShowWorkComponentTypeAllowed(component.type) || component.id === componentId
+          "
+        >
+          <span>{{ componentIndex + 1 }}. {{ component.type }} </span>
+          @if (component.id === componentId) {
+            <span i18n>(This Component)</span>
+          }
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
-  <edit-component-peer-grouping-tag [componentContent]="componentContent">
-  </edit-component-peer-grouping-tag>
+  <edit-component-peer-grouping-tag [componentContent]="componentContent" />
   <mat-checkbox
     [(ngModel)]="componentContent.isShowMyWork"
     (ngModelChange)="componentChanged()"
@@ -49,13 +56,7 @@
     Show My Work
   </mat-checkbox>
 </div>
-<div
-  class="layout-select"
-  fxLayout.xs="column"
-  fxLayout.gt-xs="row wrap"
-  fxLayoutAlign.gt-xs="start center"
-  fxLayoutGap="12px"
->
+<div class="layout-select flex flex-col sm:flex-row flex-wrap items-start sm:items-center">
   <label id="layout-select-label" i18n>Layout:</label>
   <mat-radio-group
     [(ngModel)]="componentContent.layout"
@@ -65,15 +66,15 @@
     aria-label-i18n
     aria-label="Select a layout option"
     aria-labelledby="layout-select-label"
-    fxLayoutGap="12px"
+    class="flex flex-col gap-3 sm:flex-row"
   >
     <mat-radio-button value="column">
-      <span fxLayoutAlign="start center">
+      <span class="flex items-center">
         <mat-icon>table_rows</mat-icon>&nbsp;<span i18n>Stacked Vertically</span>
       </span>
     </mat-radio-button>
     <mat-radio-button value="row">
-      <span fxLayoutAlign="start center">
+      <span class="flex items-center">
         <mat-icon>view_columns</mat-icon>&nbsp;<span i18n>Side-by-Side</span>
       </span>
     </mat-radio-button>

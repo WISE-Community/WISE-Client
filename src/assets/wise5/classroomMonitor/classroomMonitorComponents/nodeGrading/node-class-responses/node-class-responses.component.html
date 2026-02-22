@@ -1,0 +1,98 @@
+<mat-list class="user-list">
+  <mat-list-item class="mat-elevation-z1 list-item user-list-controls">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-2">
+      <workgroup-select-autocomplete class="w-full" />
+      <span class="flex-1 hidden sm:flex"></span>
+      <button
+        mat-button
+        aria-label="Expand all teams"
+        i18n-aria-label
+        color="primary"
+        (click)="expandAll()"
+        i18n
+      >
+        + Expand all
+      </button>
+      <button
+        mat-button
+        aria-label="Collapse all teams"
+        i18n-aria-label
+        color="primary"
+        (click)="collapseAll()"
+        i18n
+      >
+        - Collapse all
+      </button>
+    </div>
+  </mat-list-item>
+  <mat-list-item class="table--list__thead table--list__thead__th mat-elevation-z1">
+    <div class="table--list__thead__tr dark-theme flex flex-row flex-1">
+      <button
+        mat-button
+        class="table--list__thead__link flex-[50] !justify-start"
+        (click)="sortWorkgroups('workgroupId')"
+        aria-label="Sort by team"
+        i18n-aria-label
+      >
+        <span i18n>Team</span>
+        @if (sortBy === 'workgroupId' || sortBy === '-workgroupId') {
+          <mat-icon
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-workgroupId' }"
+          >
+            arrow_drop_up
+          </mat-icon>
+        }
+      </button>
+      <button
+        mat-button
+        class="table--list__thead__link flex-[30] flex flex-row items-center justify-center"
+        (click)="sortWorkgroups('completionStatus')"
+        aria-label="Sorty by completion"
+        i18n-aria-label
+      >
+        <span i18n>Status</span>
+        @if (sortBy === 'completionStatus' || sortBy === '-completionStatus') {
+          <mat-icon
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-completionStatus' }"
+          >
+            arrow_drop_up
+          </mat-icon>
+        }
+      </button>
+      <button
+        mat-button
+        class="table--list__thead__link flex-[20] flex flex-row items-center justify-center"
+        (click)="sortWorkgroups('score')"
+        aria-label="Sort by score"
+        i18n-aria-label
+      >
+        <span i18n>Score</span>
+        @if (sortBy === 'score' || sortBy === '-score') {
+          <mat-icon
+            class="table--list__thead__sort"
+            [ngClass]="{ 'table--list__thead__sort--reverse': sortBy === '-score' }"
+          >
+            arrow_drop_up
+          </mat-icon>
+        }
+      </button>
+    </div>
+  </mat-list-item>
+  <div class="md-whiteframe-1dp" waIntersectionObserver waIntersectionThreshold="0.5">
+    @for (workgroup of sortedWorkgroups; track workgroup.workgroupId) {
+      @if (isWorkgroupShown(workgroup)) {
+        <node-workgroup-item
+          [components]="components"
+          [expanded]="workgroupExpanded[workgroup.workgroupId]"
+          [maxScore]="maxScore"
+          [node]="node"
+          [workgroup]="workgroup"
+          (onUpdateExpand)="onUpdateExpand($event)"
+          (waIntersectionObservee)="onIntersection(workgroup.workgroupId, $event)"
+        />
+      }
+    }
+  </div>
+</mat-list>

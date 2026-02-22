@@ -1,16 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    selector: 'peer-chat-members',
-    templateUrl: './peer-chat-members.component.html',
-    styleUrls: ['./peer-chat-members.component.scss'],
-    standalone: false
+  imports: [CommonModule, MatIconModule],
+  selector: 'peer-chat-members',
+  styles: ['.mat-icon { vertical-align: middle; } .names { margin: 0 2px; }'],
+  templateUrl: './peer-chat-members.component.html'
 })
-export class PeerChatMembersComponent implements OnInit {
-  @Input()
-  peerChatWorkgroupInfos: any[];
-
-  constructor() {}
-
-  ngOnInit(): void {}
+export class PeerChatMembersComponent {
+  @Input() peerChatWorkgroupInfos: any[];
 }

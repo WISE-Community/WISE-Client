@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { InitializeVLEService } from '../../services/initializeVLEService';
 import { StudentDataService } from '../../services/studentDataService';
 import { VLEProjectService } from '../vleProjectService';
 
 @Component({
-    templateUrl: './vle-parent.component.html',
-    standalone: false
+  imports: [RouterModule],
+  template: `<router-outlet />`
 })
 export class VLEParentComponent implements OnInit {
   constructor(

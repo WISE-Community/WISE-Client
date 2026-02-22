@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -12,7 +11,7 @@ import { TeacherProjectTranslationService } from '../../../services/teacherProje
 
 @Component({
   selector: 'translatable-asset-chooser',
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
   templateUrl: './translatable-asset-chooser.component.html',
   styleUrl: './translatable-asset-chooser.component.scss'
 })

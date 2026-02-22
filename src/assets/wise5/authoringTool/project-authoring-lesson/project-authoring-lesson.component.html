@@ -1,6 +1,6 @@
 <mat-expansion-panel
   [expanded]="expanded"
-  class="lesson"
+  class="lesson flex grow"
   (opened)="toggleExpanded(true)"
   (closed)="toggleExpanded(false)"
 >
@@ -17,7 +17,7 @@
       />
       <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition" />
     </mat-panel-title>
-    <mat-panel-description class="text" fxLayoutAlign="end center" fxLayoutGap="4px">
+    <mat-panel-description class="text flex justify-end items-center gap-1">
       <button
         class="enable-in-translation"
         mat-icon-button
@@ -52,28 +52,32 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div>
-    <div *ngFor="let childId of lesson.ids" fxLayout="row wrap" fxLayoutAlign="start center">
-      <project-authoring-step
-        [step]="idToNode[childId]"
-        (selectNodeEvent)="selectNodeEvent.emit($event)"
-        [showPosition]="showPosition"
-        [projectId]="projectId"
-        fxFlex
-      ></project-authoring-step>
-      <add-step-button [nodeId]="childId" />
-    </div>
-    <div *ngIf="lesson.ids.length === 0" class="no-steps-message" fxLayoutAlign="start center">
-      <div i18n>This lesson has no steps</div>
-      <button
-        mat-icon-button
-        color="primary"
-        (click)="addStepInside(lesson.id)"
-        matTooltip="Add step"
-        matTooltipPosition="above"
-        i18n-matTooltip
-      >
-        <mat-icon>add_circle</mat-icon>
-      </button>
-    </div>
+    @for (childId of lesson.ids; track childId) {
+      <div class="flex flex-row flex-wrap justify-start items-center">
+        <project-authoring-step
+          [step]="idToNode[childId]"
+          (selectNodeEvent)="selectNodeEvent.emit($event)"
+          [showPosition]="showPosition"
+          [projectId]="projectId"
+          class="flex grow"
+        />
+        <add-step-button [nodeId]="childId" />
+      </div>
+    }
+    @if (lesson.ids.length === 0) {
+      <div class="no-steps-message flex justify-start items-center">
+        <div i18n>This lesson has no steps</div>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="addStepInside(lesson.id)"
+          matTooltip="Add step"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+    }
   </div>
 </mat-expansion-panel>

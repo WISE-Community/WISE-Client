@@ -1,7 +1,7 @@
 <h4 i18n>Create Branching Structure</h4>
 <p class="strong" i18n>Branch Step: {{ targetTitle }}</p>
-<mat-divider></mat-divider>
-<form fxLayout="column" [formGroup]="formGroup">
+<mat-divider />
+<form class="flex flex-col" [formGroup]="formGroup">
   <select-path-count
     [pathCount]="formGroup.controls['pathCount'].value"
     (pathCountChangedEvent)="setPathCount($event)"
@@ -17,7 +17,7 @@
     formGroup.controls['criteria'].value === CHOICE_CHOSEN_VALUE
   ) {
     <p class="strong" i18n>Reference component:</p>
-    <div fxLayout="row wrap" fxLayoutGap="8px">
+    <div class="flex flex-wrap gap-2">
       <select-step
         [nodeId]="formGroup.controls['nodeId'].value"
         (stepChangedEvent)="setNodeId($event)"
@@ -45,8 +45,8 @@
   @if (showSelectMergeStep()) {
     <select-merge-step [branchStepId]="targetId" (selectMergeStepEvent)="setMergeStep($event)" />
   }
-  <mat-divider></mat-divider>
-  <div fxLayoutAlign="end center" fxLayoutGap="12px">
+  <mat-divider />
+  <div class="flex justify-end items-center gap-3">
     <button mat-button routerLink=".." i18n>Cancel</button>
     <button
       mat-raised-button

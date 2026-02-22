@@ -7,22 +7,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
+  imports: [MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, RouterModule],
   selector: 'app-header-account-menu',
-  templateUrl: './header-account-menu.component.html',
   styleUrl: './header-account-menu.component.scss',
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    RouterModule
-  ]
+  templateUrl: './header-account-menu.component.html'
 })
 export class HeaderAccountMenuComponent implements OnInit {
   protected firstName: string = '';

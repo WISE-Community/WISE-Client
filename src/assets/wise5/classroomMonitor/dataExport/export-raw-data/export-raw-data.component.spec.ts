@@ -3,12 +3,7 @@ import { ExportRawDataComponent } from './export-raw-data.component';
 import { ClassroomMonitorTestingModule } from '../../classroom-monitor-testing.module';
 import { DataExportService } from '../../../services/dataExportService';
 import { ActivatedRoute } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SelectStepAndComponentCheckboxesComponent } from '../select-step-and-component-checkboxes/select-step-and-component-checkboxes.component';
-import { MatRadioModule } from '@angular/material/radio';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { FormsModule } from '@angular/forms';
 import { ConfigService } from '../../../services/configService';
 
 let configService: ConfigService;
@@ -26,14 +21,7 @@ describe('ExportRawDataComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExportRawDataComponent, SelectStepAndComponentCheckboxesComponent],
-      imports: [
-        ClassroomMonitorTestingModule,
-        FormsModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatRadioModule
-      ],
+      imports: [ClassroomMonitorTestingModule, ExportRawDataComponent],
       providers: [
         {
           provide: ActivatedRoute,

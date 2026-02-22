@@ -4,8 +4,7 @@ import { MatAnchor } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-    templateUrl: './forgot-teacher-username-complete.component.html',
-    styleUrl: './forgot-teacher-username-complete.component.scss',
-    imports: [MatCard, MatCardContent, MatAnchor, RouterLink]
+  imports: [MatCard, MatCardContent, MatAnchor, RouterLink],
+  templateUrl: './forgot-teacher-username-complete.component.html'
 })
 export class ForgotTeacherUsernameCompleteComponent {}

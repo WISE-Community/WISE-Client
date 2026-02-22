@@ -1,18 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectStepAndComponentCheckboxesComponent } from './select-step-and-component-checkboxes.component';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import * as demoProjectJSON_import from '../../../../../app/services/sampleData/curriculum/Demo.project.json';
 import { copy } from '../../../common/object/object';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { SelectStepAndComponentCheckboxesComponentHarness } from './select-step-and-component-checkboxes.harness';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { MatRadioModule } from '@angular/material/radio';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 let component: SelectStepAndComponentCheckboxesComponent;
 let fixture: ComponentFixture<SelectStepAndComponentCheckboxesComponent>;
@@ -26,15 +20,9 @@ let projectService: TeacherProjectService;
 describe('SelectStepAndComponentCheckboxesComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-    declarations: [SelectStepAndComponentCheckboxesComponent],
-    imports: [FormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatRadioModule,
-        StudentTeacherCommonServicesModule],
-    providers: [TeacherProjectService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule, SelectStepAndComponentCheckboxesComponent],
+      providers: [TeacherProjectService, provideHttpClient()]
+    });
     projectService = TestBed.inject(TeacherProjectService);
     project = copy(demoProjectJSON_import);
     projectService.setProject(project);

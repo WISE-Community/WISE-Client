@@ -25,9 +25,9 @@ const teacherNotebookURL = 'http://localhost:8080/teacher/notebook/run/1';
 describe('NotebookService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     http = TestBed.inject(HttpTestingController);
     configService = TestBed.inject(ConfigService);
     service = TestBed.inject(NotebookService);

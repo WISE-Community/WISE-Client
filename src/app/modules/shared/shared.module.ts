@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,19 +30,16 @@ import { PasswordModule } from '../../password/password.module';
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule,
     FormsModule,
     PasswordModule,
     ReactiveFormsModule,
     RouterModule,
-    materialModules
-  ],
-  exports: [EditPasswordComponent, FlexLayoutModule, materialModules],
-  declarations: [
+    materialModules,
     EditPasswordComponent,
     UnlinkGoogleAccountConfirmComponent,
     UnlinkGoogleAccountPasswordComponent,
     UnlinkGoogleAccountSuccessComponent
-  ]
+  ],
+  exports: [EditPasswordComponent, materialModules]
 })
 export class SharedModule {}

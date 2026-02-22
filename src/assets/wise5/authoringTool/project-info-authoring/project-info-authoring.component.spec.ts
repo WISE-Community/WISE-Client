@@ -1,14 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectInfoAuthoringComponent } from './project-info-authoring.component';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { ConfigService } from '../../services/configService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { EditUnitResourcesComponent } from '../edit-unit-resources/edit-unit-resources.component';
-import { EditUnitTypeComponent } from '../edit-unit-type/edit-unit-type.component';
-import { MockProvider } from 'ng-mocks';
 import { UserService } from '../../../../app/services/user.service';
+import { MockProviders } from 'ng-mocks';
 
 describe('ProjectInfoAuthoringComponent', () => {
   let component: ProjectInfoAuthoringComponent;
@@ -16,17 +12,10 @@ describe('ProjectInfoAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProjectInfoAuthoringComponent],
-      imports: [
-        EditUnitResourcesComponent,
-        EditUnitTypeComponent,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [ProjectInfoAuthoringComponent],
       providers: [
-        MockProvider(UserService),
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        MockProviders(ConfigService, TeacherProjectService, UserService),
+        provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
     spyOn(TestBed.inject(TeacherProjectService), 'getProjectMetadata').and.returnValue({

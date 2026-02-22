@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,18 +7,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ComputerAvatar } from '../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ComputerAvatarSettings } from '../../common/computer-avatar/ComputerAvatarSettings';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatDividerModule
-  ],
+  imports: [FormsModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatDividerModule],
   selector: 'computer-avatar-selector',
   styleUrl: './computer-avatar-selector.component.scss',
   templateUrl: './computer-avatar-selector.component.html'

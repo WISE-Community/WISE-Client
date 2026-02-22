@@ -1,7 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactRoutingModule } from './contact-routing.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,17 +39,13 @@ const materialModules = [
 
 @NgModule({
   imports: [
-    CommonModule,
     ContactRoutingModule,
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
     SharedModule,
     materialModules,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    ContactFormComponent
   ],
-  declarations: [ContactFormComponent],
-  exports: [ContactFormComponent, materialModules]
+  exports: [ContactFormComponent]
 })
 export class ContactModule {}

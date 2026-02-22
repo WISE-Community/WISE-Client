@@ -10,36 +10,31 @@
         <div class="center">
           <p class="mat-subtitle-2" i18n>Thank you for contacting WISE!</p>
           <p i18n>Your message has been sent. We will get back to you as soon as possible.</p>
-          <br />
           <div>
-            <a mat-flat-button color="accent" routerLink="/" i18n>Return to WISE Home</a>
+            <a mat-flat-button color="primary" routerLink="/" i18n>Return to WISE Home</a>
           </div>
         </div>
       } @else {
         <form role="form" (submit)="submit()" [formGroup]="contactFormGroup" class="flex flex-col">
           <h2 class="accent center" i18n>Contact WISE</h2>
-          <p>
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label i18n>Name</mat-label>
+            <input matInput id="name" name="name" formControlName="name" />
+            @if (contactFormGroup.controls['name'].hasError('required')) {
+              <mat-error i18n>Name required</mat-error>
+            }
+          </mat-form-field>
+          @if (!isStudent) {
             <mat-form-field appearance="fill" class="w-full">
-              <mat-label i18n>Name</mat-label>
-              <input matInput id="name" name="name" formControlName="name" />
-              @if (contactFormGroup.controls['name'].hasError('required')) {
-                <mat-error i18n>Name required</mat-error>
+              <mat-label i18n>Email</mat-label>
+              <input matInput id="email" name="email" formControlName="email" />
+              @if (contactFormGroup.controls['email'].hasError('required')) {
+                <mat-error i18n>Email required</mat-error>
+              }
+              @if (contactFormGroup.controls['email'].hasError('email')) {
+                <mat-error i18n>Invalid Email</mat-error>
               }
             </mat-form-field>
-          </p>
-          @if (!isStudent) {
-            <p>
-              <mat-form-field appearance="fill" class="w-full">
-                <mat-label i18n>Email</mat-label>
-                <input matInput id="email" name="email" formControlName="email" />
-                @if (contactFormGroup.controls['email'].hasError('required')) {
-                  <mat-error i18n>Email required</mat-error>
-                }
-                @if (contactFormGroup.controls['email'].hasError('email')) {
-                  <mat-error i18n>Invalid Email</mat-error>
-                }
-              </mat-form-field>
-            </p>
           } @else {
             @if (teachers.length > 0) {
               <p>
@@ -59,60 +54,52 @@
               </p>
             }
           }
-          <p>
-            <mat-form-field appearance="fill" class="w-full">
-              <mat-label i18n>Issue Type</mat-label>
-              <mat-select formControlName="issueType">
-                @for (issueType of issueTypes; track issueType.key) {
-                  <mat-option [value]="issueType.key">
-                    {{ issueType.value }}
-                  </mat-option>
-                }
-              </mat-select>
-              @if (contactFormGroup.controls['issueType'].hasError('required')) {
-                <mat-error i18n>Issue Type required</mat-error>
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label i18n>Issue Type</mat-label>
+            <mat-select formControlName="issueType">
+              @for (issueType of issueTypes; track issueType.key) {
+                <mat-option [value]="issueType.key">
+                  {{ issueType.value }}
+                </mat-option>
               }
-            </mat-form-field>
-          </p>
+            </mat-select>
+            @if (contactFormGroup.controls['issueType'].hasError('required')) {
+              <mat-error i18n>Issue Type required</mat-error>
+            }
+          </mat-form-field>
           @if (projectName) {
-            <p>
-              <mat-form-field appearance="fill" class="w-full">
-                <mat-label i18n>Project Name</mat-label>
-                <input matInput name="projectName" [value]="projectName" disabled />
-              </mat-form-field>
-            </p>
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label i18n>Unit Name</mat-label>
+              <input matInput name="projectName" [value]="projectName" disabled />
+            </mat-form-field>
           }
-          <p>
-            <mat-form-field appearance="fill" class="w-full">
-              <mat-label i18n>Summary</mat-label>
-              <input matInput id="summary" name="summary" formControlName="summary" value="test" />
-              @if (contactFormGroup.controls['summary'].hasError('required')) {
-                <mat-error i18n>Summary required</mat-error>
-              }
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field appearance="fill" class="w-full">
-              <mat-label i18n>Description</mat-label>
-              <textarea
-                matInput
-                id="description"
-                name="description"
-                formControlName="description"
-                rows="10"
-                cols="10"
-                [placeholder]="
-                  isPublishIssueType()
-                    ? 'Why do you want to share this unit with the WISE community?'
-                    : ''
-                "
-              >
-              </textarea>
-              @if (contactFormGroup.controls['description'].hasError('required')) {
-                <mat-error i18n>Description required</mat-error>
-              }
-            </mat-form-field>
-          </p>
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label i18n>Summary</mat-label>
+            <input matInput id="summary" name="summary" formControlName="summary" value="test" />
+            @if (contactFormGroup.controls['summary'].hasError('required')) {
+              <mat-error i18n>Summary required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label i18n>Description</mat-label>
+            <textarea
+              matInput
+              id="description"
+              name="description"
+              formControlName="description"
+              rows="10"
+              cols="10"
+              [placeholder]="
+                isPublishIssueType()
+                  ? 'Why do you want to share this unit with the WISE community?'
+                  : ''
+              "
+            >
+            </textarea>
+            @if (contactFormGroup.controls['description'].hasError('required')) {
+              <mat-error i18n>Description required</mat-error>
+            }
+          </mat-form-field>
           @if (isRecaptchaEnabled) {
             <p i18n>
               This site is protected by reCAPTCHA and the Google
@@ -149,7 +136,7 @@
               class="button--progress w-full"
             >
               @if (isSendingRequest) {
-                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                <mat-progress-bar mode="indeterminate" />
               }
               @if (isPublishIssueType()) {
                 <ng-container i18n>Submit for Review</ng-container>

@@ -1,8 +1,8 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+/>
+<div class="flex flex-row items-center gap-2">
   <translatable-input
     [content]="componentContent"
     key="background"
@@ -73,7 +73,7 @@
 >
   <mat-icon>check_box_outline_blank</mat-icon>
 </button>
-<div fxLayout="row wrap">
+<div class="flex flex-row flex-wrap">
   <div class="tools-div">
     <mat-checkbox
       color="primary"
@@ -214,90 +214,100 @@
     </mat-checkbox>
   </div>
 </div>
-<div *ngIf="componentContent.tools.stamp">
-  <div class="add-stamps-container">
-    <span i18n>Stamps</span>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="addStamp()"
-      matTooltip="Add Stamp"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Add"
-      i18n-aria-label
-    >
-      <mat-icon>add</mat-icon>
-    </button>
+@if (componentContent.tools.stamp) {
+  <div>
+    <div class="add-stamps-container">
+      <span i18n>Stamps</span>
+      <button
+        mat-raised-button
+        color="primary"
+        class="authoring-button"
+        (click)="addStamp()"
+        matTooltip="Add Stamp"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        aria-label="Add"
+        i18n-aria-label
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    @if (componentContent.stamps.Stamps.length == 0) {
+      <div i18n>There are no stamps. Click the "Add Stamp" button to add a stamp.</div>
+    }
+    @for (
+      stamp of stamps;
+      track stamp;
+      let stampIndex = $index;
+      let isFirst = $first;
+      let isLast = $last
+    ) {
+      <div>
+        <mat-form-field class="stamp-image-input-container">
+          <mat-label i18n>Stamp Image</mat-label>
+          <input
+            matInput
+            [(ngModel)]="stamp.image"
+            (ngModelChange)="stampChanged(stamp.image, stampIndex)"
+            placeholder="Choose an Image"
+            i18n-placeholder
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          class="authoring-button"
+          (click)="chooseStampImage(stampIndex)"
+          matTooltip="Choose an Image"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          aria-label="Choose an Image"
+          i18n-aria-label
+        >
+          <mat-icon>insert_photo</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="authoring-button"
+          [disabled]="isFirst"
+          (click)="moveStampUp(stampIndex)"
+          matTooltip="Move Up"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          aria-label="Up"
+          i18n-aria-label
+        >
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="authoring-button"
+          [disabled]="isLast"
+          (click)="moveStampDown(stampIndex)"
+          matTooltip="Move Down"
+          matTooltipPosition="above"
+          i18n-matTooltipPosition
+          aria-label="Down"
+          i18n-aria-label
+        >
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="authoring-button"
+          (click)="deleteStamp(stampIndex)"
+          matTooltip="Delete"
+          matTooltipPosition="above"
+          i18n-matTooltip
+          aria-label="Delete"
+          i18n-aria-label
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
   </div>
-  <div *ngIf="componentContent.stamps.Stamps.length == 0">
-    There are no stamps. Click the "Add Stamp" button to add a stamp.
-  </div>
-  <div *ngFor="let stamp of stamps; index as stampIndex; first as isFirst; last as isLast">
-    <mat-form-field class="stamp-image-input-container">
-      <mat-label i81n>Stamp Image</mat-label>
-      <input
-        matInput
-        [(ngModel)]="stamp.image"
-        (ngModelChange)="stampChanged(stamp.image, stampIndex)"
-        placeholder="Choose an Image"
-        i18n-placeholder
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="chooseStampImage(stampIndex)"
-      matTooltip="Choose an Image"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Choose an Image"
-      i18n-aria-label
-    >
-      <mat-icon>insert_photo</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      [disabled]="isFirst"
-      (click)="moveStampUp(stampIndex)"
-      matTooltip="Move Up"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Up"
-      i18n-aria-label
-    >
-      <mat-icon>arrow_upward</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      [disabled]="isLast"
-      (click)="moveStampDown(stampIndex)"
-      matTooltip="Move Down"
-      matTooltipPosition="above"
-      i18n-matTooltipPosition
-      aria-label="Down"
-      i18n-aria-label
-    >
-      <mat-icon>arrow_downward</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="authoring-button"
-      (click)="deleteStamp(stampIndex)"
-      matTooltip="Delete"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Delete"
-      i18n-aria-label
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
-</div>
+}

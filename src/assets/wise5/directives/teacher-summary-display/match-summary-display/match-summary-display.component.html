@@ -1,6 +1,6 @@
 <ng-template #bucketTemplate let-bucket="bucket" let-first="first">
-  <div class="bucket">
-    <h3>
+  <div class="bucket" [ngClass]="{ 'selected-bg-bg': first, 'notice-bg-bg': !first }">
+    <h3 class="mat-body-2">
       {{ bucket.value }}
       @if (first) {
         (<span i18n>Source Bucket</span>)
@@ -8,7 +8,7 @@
     </h3>
     <ul>
       @for (choice of bucket.choices; track $index) {
-        @if ($index < 3 || getBucketShowMore(bucket.value) || first) {
+        @if ($index < 3 || getBucketShowMore(bucket.value)) {
           <li>
             <div class="choice">
               <div [innerHTML]="choice.getId()"></div>
@@ -21,7 +21,7 @@
           </li>
         }
       }
-      @if (bucket.choices.length > 3 && !first) {
+      @if (bucket.choices.length > 3) {
         <a href="#" class="text-sm px-1" (click)="toggleBucketShowMore(bucket.value, $event)">
           @if (getBucketShowMore(bucket.value)) {
             <span i18n>Show less</span>
@@ -34,38 +34,29 @@
   </div>
 </ng-template>
 
-<mat-card appearance="outlined">
-  <mat-card-content>
-    <h2 class="mat-subhead-1" i18n>Choice Frequency</h2>
-    @if (bucketData.length > 0) {
-      <p i18n>
-        This summary shows how many students moved each choice item into the different buckets
-        (categories).
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <div class="sm:w-1/2 md:w-1/3 lg:w-1/4">
+<h2 class="mat-subtitle-1" i18n>Choice Frequency</h2>
+@if (bucketData.length > 0) {
+  <p i18n>Number of teams that moved each item (choice) into the different buckets (categories).</p>
+  <div class="columns-3xs gap-2">
+    <div class="break-inside-avoid">
+      <ng-container
+        [ngTemplateOutlet]="bucketTemplate"
+        [ngTemplateOutletContext]="{ bucket: bucketData[0], first: true }"
+      />
+    </div>
+    @for (bucket of bucketData; track $index) {
+      @if ($index > 0) {
+        <div class="break-inside-avoid">
           <ng-container
             [ngTemplateOutlet]="bucketTemplate"
-            [ngTemplateOutletContext]="{ bucket: bucketData[0], first: true }"
+            [ngTemplateOutletContext]="{ bucket: bucket, first: false }"
           />
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 sm:w-1/2 md:w-2/3 lg:w-3/4 gap-4">
-          @for (bucket of bucketData; track $index) {
-            @if ($index > 0) {
-              <div class="w-full">
-                <ng-container
-                  [ngTemplateOutlet]="bucketTemplate"
-                  [ngTemplateOutletContext]="{ bucket: bucket, first: false }"
-                />
-              </div>
-            }
-          }
-        </div>
-      </div>
-    } @else {
-      <div class="notice" i18n>
-        Your students' choices will show up here when they complete the activity.
-      </div>
+      }
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+} @else {
+  <div class="notice" i18n>
+    Your students' choices will show up here when they complete the activity.
+  </div>
+}

@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
+import { NgClass, NgStyle } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'peer-group-workgroup',
-    templateUrl: './peer-group-workgroup.component.html',
-    styleUrls: ['./peer-group-workgroup.component.scss'],
-    standalone: false
+  imports: [NgClass, MatIcon, NgStyle],
+  selector: 'peer-group-workgroup',
+  styleUrl: './peer-group-workgroup.component.scss',
+  templateUrl: './peer-group-workgroup.component.html'
 })
 export class PeerGroupWorkgroupComponent implements OnInit {
   @Input() workgroup: any;

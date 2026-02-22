@@ -1,4 +1,3 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
@@ -27,11 +26,13 @@ let projectService: ProjectService;
 describe('SelectStepAndComponentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [BrowserAnimationsModule,
+      imports: [
+        BrowserAnimationsModule,
         SelectStepAndComponentComponent,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+        StudentTeacherCommonServicesModule
+      ],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    }).compileComponents();
     fixture = TestBed.createComponent(SelectStepAndComponentComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;

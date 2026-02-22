@@ -1,5 +1,5 @@
 <h5 i18n>Choose the component(s) that you want to import, then select Submit.</h5>
-<p fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+<p class="flex flex-wrap justify-start items-center gap-2">
   <strong i18n>Selected unit: {{ project?.metadata.title }}</strong>
   <button
     mat-raised-button
@@ -22,7 +22,7 @@
     @if (item.node.type == 'group') {
       <h6>{{ item.stepNumber }}: {{ item.node.title }}</h6>
     } @else {
-      <div fxLayout="row wrap" fxLayoutGap="8px">
+      <div class="flex flex-wrap gap-2">
         <span class="step-title">{{ item.stepNumber }}: {{ item.node.title }}</span>
         <button
           mat-raised-button
@@ -39,7 +39,7 @@
       </div>
       @for (component of item.node.components; track component.id; let i = $index) {
         <div class="componentHeader">
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+          <div class="flex justify-start items-center gap-5">
             <div>
               <mat-checkbox [(ngModel)]="component.checked" color="primary">
                 <span>{{ i + 1 }}. {{ component.type }}</span>
@@ -65,7 +65,7 @@
 }
 <div class="nav-controls">
   <mat-divider />
-  <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="end center">
+  <div class="flex justify-end items-center gap-4">
     <button
       mat-button
       color="primary"
@@ -77,7 +77,7 @@
     >
       Back
     </button>
-    <span fxFlex></span>
+    <span class="flex-grow"></span>
     <button mat-button color="primary" routerLink="../.." i18n>Cancel</button>
     <button
       mat-raised-button

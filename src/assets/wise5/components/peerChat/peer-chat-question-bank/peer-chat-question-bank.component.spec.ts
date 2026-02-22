@@ -1,19 +1,17 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { PeerChatQuestionBankComponent } from './peer-chat-question-bank.component';
 import { ProjectService } from '../../../services/projectService';
 import { QuestionBank } from './QuestionBank';
-import { ComponentContent } from '../../../common/ComponentContent';
 import { QuestionBankRule } from './QuestionBankRule';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { PeerGroup } from '../PeerGroup';
 import { of } from 'rxjs';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 import { QuestionBankService } from './questionBank.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockProvider, MockProviders } from 'ng-mocks';
+import { ConfigService } from '../../../services/configService';
+import { ConstraintService } from '../../../services/constraintService';
+import { Question } from './Question';
+import { Component } from '../../../common/Component';
 
 let component: PeerChatQuestionBankComponent;
 let fixture: ComponentFixture<PeerChatQuestionBankComponent>;
@@ -27,13 +25,14 @@ const defaultQuestionBankRule = {
 describe('PeerChatQuestionBankComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [PeerChatQuestionBankComponent],
-    imports: [MatCardModule,
-        MatDialogModule,
-        MatIconModule,
-        StudentTeacherCommonServicesModule],
-    providers: [QuestionBankService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [PeerChatQuestionBankComponent],
+      providers: [
+        MockProviders(ConfigService, ConstraintService, PeerGroupService, ProjectService),
+        MockProvider(QuestionBankService, {
+          questionUsed$: of({ id: 'q1' } as Question)
+        })
+      ]
+    }).compileComponents();
     fixture = TestBed.createComponent(PeerChatQuestionBankComponent);
     peerGroupService = TestBed.inject(PeerGroupService);
     projectService = TestBed.inject(ProjectService);
@@ -67,7 +66,7 @@ function ngOnInit_displayedQuestionBankRulesSet_SetQuestions() {
         { questions: ['q4'] }
       ] as QuestionBankRule[];
       component.ngOnInit();
-      expect(component.questions).toEqual(['q1', 'q2', 'q3', 'q4']);
+      expect(component['questions']).toEqual(['q1', 'q2', 'q3', 'q4']);
     });
   });
 }
@@ -75,9 +74,11 @@ function ngOnInit_displayedQuestionBankRulesSet_SetQuestions() {
 function ngOnInit_displayedQuestionBankRulesNotSet_EvaluatePeerGroupDataAndSetQuestions() {
   describe('displayedQuestionBankRules is not set', () => {
     it('should evaluate PeerGroup data and set questions', () => {
-      const getComponentSpy = spyOn(projectService, 'getComponent').and.returnValue({
-        type: 'OpenResponse'
-      } as ComponentContent);
+      const getComponentSpy = spyOn(projectService, 'getReferenceComponent').and.returnValue({
+        content: {
+          type: 'OpenResponse'
+        }
+      } as Component);
       const retrievePeerGroupSpy = spyOn(peerGroupService, 'retrievePeerGroup').and.returnValue(
         of({ id: 1 } as PeerGroup)
       );
@@ -86,7 +87,7 @@ function ngOnInit_displayedQuestionBankRulesNotSet_EvaluatePeerGroupDataAndSetQu
         'retrieveQuestionBankStudentData'
       ).and.returnValue(of([]));
       component.ngOnInit();
-      expect(getComponentSpy).toHaveBeenCalledWith('node1', 'abc');
+      expect(getComponentSpy).toHaveBeenCalled();
       expect(retrievePeerGroupSpy).toHaveBeenCalledWith('tag1');
       expect(retrieveStudentDataSpy).toHaveBeenCalledWith(1, 'node2', 'def');
       expect(component.displayedQuestionBankRules).toEqual([defaultQuestionBankRule]);

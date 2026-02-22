@@ -1,13 +1,14 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { copy } from '../../../common/object/object';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { DrawAuthoring } from './draw-authoring.component';
-import { DrawAuthoringModule } from './draw-authoring.module';
-import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 let component: DrawAuthoring;
 let fixture: ComponentFixture<DrawAuthoring>;
@@ -45,8 +46,14 @@ const componentContent = {
 describe('DrawAuthoringComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, DrawAuthoringModule, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      imports: [BrowserAnimationsModule, DrawAuthoring, StudentTeacherCommonServicesModule],
+      providers: [
+        ProjectAssetService,
+        TeacherProjectService,
+        TeacherNodeService,
+        TeacherProjectTranslationService,
+        provideHttpClient(withInterceptorsFromDi())
+      ]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

@@ -27,7 +27,7 @@ describe('EmbeddedService', () => {
         provideHttpClientTesting()
     ]
 });
-    service = TestBed.get(EmbeddedService);
+    service = TestBed.inject(EmbeddedService);
   });
   createComponent();
   isCompleted();

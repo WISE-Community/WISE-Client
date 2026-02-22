@@ -2,18 +2,34 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatTabChangeEvent, MatTabGroup, MatTab } from '@angular/material/tabs';
 import { ConfigService } from '../../../../services/configService';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ShowNodeInfoDialogComponent } from '../../../../../../app/classroom-monitor/show-node-info-dialog/show-node-info-dialog.component';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
+import { SelectPeriodComponent } from '../../select-period/select-period.component';
+import { NavItemProgressComponent } from '../../../../../../app/classroom-monitor/nav-item-progress/nav-item-progress.component';
+import { MilestoneClassResponsesComponent } from '../milestone-class-responses/milestone-class-responses.component';
+import { NgTemplateOutlet, DatePipe } from '@angular/common';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'milestone-details',
-    styleUrls: ['./milestone-details.component.scss'],
-    templateUrl: './milestone-details.component.html',
-    standalone: false
+  imports: [
+    SelectPeriodComponent,
+    NavItemProgressComponent,
+    MatTabGroup,
+    MatTab,
+    MilestoneClassResponsesComponent,
+    NgTemplateOutlet,
+    MatList,
+    MatListItem,
+    MatIcon,
+    DatePipe
+  ],
+  selector: 'milestone-details',
+  styleUrl: './milestone-details.component.scss',
+  templateUrl: './milestone-details.component.html'
 })
 export class MilestoneDetailsComponent implements OnInit {
   currentPeriod: any;
@@ -120,11 +136,10 @@ export class MilestoneDetailsComponent implements OnInit {
     this.dataService.saveEvent(context, nodeId, componentId, componentType, category, event, data);
   }
 
-  protected showMilestoneStepInfo(): void {
-    this.dialog.open(ShowNodeInfoDialogComponent, {
-      data: this.milestone.nodeId,
-      width: '100%'
-    });
+  protected previewProject(): void {
+    window.open(
+      this.configService.getConfigParam('previewProjectURL') + `/${this.milestone.nodeId}`
+    );
   }
 
   sortAchievementTimeDescending(workgroup: any[]): any[] {

@@ -1,0 +1,25 @@
+<mat-form-field class="select-menu" appearance="fill" [subscriptSizing]="'dynamic'">
+  <mat-label>{{ placeholderText }}</mat-label>
+  <mat-select
+    [formControl]="selectField"
+    [placeholder]="placeholderText"
+    [(value)]="value"
+    [multiple]="multiple"
+  >
+    @if (multiple) {
+      <mat-select-trigger>
+        {{ selectField.value ? selectField.value[0] : '' }}
+        @if (selectField.value?.length > 1) {
+          <span>(+{{ selectField.value.length - 1 }} <ng-container i18n>more</ng-container>)</span>
+        }
+      </mat-select-trigger>
+    }
+    @for (label of labels; track label) {
+      <mat-optgroup [label]="locationTypeToLabel[label]">
+        @for (option of locationOptions[label]; track option.id) {
+          <mat-option [value]="option[valueProp]">{{ option[viewValueProp] }}</mat-option>
+        }
+      </mat-optgroup>
+    }
+  </mat-select>
+</mat-form-field>

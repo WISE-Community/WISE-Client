@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'workgroup-node-status',
-  standalone: true,
   template: `<span class="md-body-2 block center {{ statusClass }}">{{ statusText }}</span>`
 })
 export class WorkgroupNodeStatusComponent {

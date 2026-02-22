@@ -4,10 +4,12 @@
     [(ngModel)]="connectedComponent.nodeId"
     (ngModelChange)="connectedComponentNodeIdChanged()"
   >
-    <ng-container *ngFor="let nodeId of nodeIds">
-      <mat-option *ngIf="isApplicationNode(nodeId)" [value]="nodeId">
-        {{ getNodePositionAndTitle(nodeId) }}
-      </mat-option>
-    </ng-container>
+    @for (nodeId of nodeIds; track nodeId) {
+      @if (isApplicationNode(nodeId)) {
+        <mat-option [value]="nodeId">
+          {{ getNodePositionAndTitle(nodeId) }}
+        </mat-option>
+      }
+    }
   </mat-select>
 </mat-form-field>

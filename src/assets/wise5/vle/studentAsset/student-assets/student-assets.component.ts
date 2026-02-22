@@ -2,17 +2,19 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../services/configService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { Component as WISEComponent } from '../../../common/Component';
+import { CommonModule } from '@angular/common';
+import { DragAndDropDirective } from '../../../common/drag-and-drop/drag-and-drop.directive';
 
 @Component({
-    selector: 'student-assets',
-    templateUrl: './student-assets.component.html',
-    styleUrls: ['./student-assets.component.scss'],
-    standalone: false
+  imports: [CommonModule, DragAndDropDirective],
+  selector: 'student-assets',
+  styleUrl: './student-assets.component.scss',
+  templateUrl: './student-assets.component.html'
 })
 export class StudentAssetsComponent implements OnInit {
   @Input() component: WISEComponent;
   protected mode: string;
-  studentAssets: any;
+  protected studentAssets: any = [];
 
   constructor(
     private configService: ConfigService,
@@ -28,12 +30,12 @@ export class StudentAssetsComponent implements OnInit {
   }
 
   private retrieveStudentAssets(): void {
-    this.studentAssetService.retrieveAssets().then((studentAssets) => {
-      this.studentAssets = studentAssets;
-    });
+    this.studentAssetService
+      .retrieveAssets()
+      .then((studentAssets) => (this.studentAssets = studentAssets));
   }
 
-  uploadStudentAssets(files: any[]): void {
+  protected uploadStudentAssets(files: any[]): void {
     for (const file of files) {
       this.studentAssetService.uploadAsset(file).then((studentAsset) => {
         this.attachStudentAsset(studentAsset);
@@ -49,7 +51,7 @@ export class StudentAssetsComponent implements OnInit {
     this.attachStudentAsset(studentAsset);
   }
 
-  attachStudentAsset(studentAsset: any): void {
+  private attachStudentAsset(studentAsset: any): void {
     if (this.component.isAcceptsAssets()) {
       this.studentAssetService.broadcastAttachStudentAsset(this.component, studentAsset);
     }

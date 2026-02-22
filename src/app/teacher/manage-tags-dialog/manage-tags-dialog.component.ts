@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tag } from '../../domain/tag';
 import { Subject, Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -20,24 +18,21 @@ import { MatListModule } from '@angular/material/list';
 import { TagComponent } from '../tag/tag.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        EditTagComponent,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatListModule,
-        MatTooltipModule,
-        TagComponent
-    ],
-    selector: 'manage-tags-dialog',
-    styleUrl: './manage-tags-dialog.component.scss',
-    templateUrl: './manage-tags-dialog.component.html'
+  imports: [
+    EditTagComponent,
+    MatButtonModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatTooltipModule,
+    TagComponent
+  ],
+  selector: 'manage-tags-dialog',
+  styleUrl: './manage-tags-dialog.component.scss',
+  templateUrl: './manage-tags-dialog.component.html'
 })
 export class ManageTagsDialogComponent implements OnInit {
   protected idToEditing: { [id: string]: boolean } = {};

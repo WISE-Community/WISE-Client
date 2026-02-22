@@ -18,27 +18,26 @@
         <ng-container i18n>Sign Up</ng-container>
       </button>
     </p>
-    <ng-container *ngIf="googleAuthenticationEnabled || microsoftAuthenticationEnabled">
+    @if (googleAuthenticationEnabled || microsoftAuthenticationEnabled) {
       <p class="center mat-headline-6">- or -</p>
       <p class="center">
-        <google-sign-in-button
-          *ngIf="googleAuthenticationEnabled"
-          (signedIn)="googleSignIn($event)"
-          text="signup_with"
-        />
+        @if (googleAuthenticationEnabled) {
+          <google-sign-in-button (signedIn)="googleSignIn($event)" text="signup_with" />
+        }
       </p>
       <p class="center">
-        <button
-          *ngIf="microsoftAuthenticationEnabled"
-          class="button--social-login button--microsoft"
-          color="accent"
-          mat-flat-button
-          (click)="microsoftSignIn()"
-        >
-          <img src="assets/img/icons/ms-logo.svg" alt="Microsoft logo" />
-          <ng-container i18n>Sign up with Microsoft</ng-container>
-        </button>
+        @if (microsoftAuthenticationEnabled) {
+          <button
+            class="button--social-login button--microsoft"
+            color="accent"
+            mat-flat-button
+            (click)="microsoftSignIn()"
+          >
+            <img src="assets/img/icons/ms-logo.svg" alt="Microsoft logo" />
+            <ng-container i18n>Sign up with Microsoft</ng-container>
+          </button>
+        }
       </p>
-    </ng-container>
+    }
   </mat-card-content>
 </mat-card>

@@ -1,22 +1,10 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ProjectService } from '../../../services/projectService';
 import { AudioOscillatorStudent } from './audio-oscillator-student.component';
 import { AudioOscillatorStudentData } from '../AudioOscillatorStudentData';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 let component: AudioOscillatorStudent;
 let fixture: ComponentFixture<AudioOscillatorStudent>;
@@ -26,26 +14,12 @@ const amplitudesPlayed = [44, 20];
 const frequenciesPlayed = [440, 880];
 const componentId = 'component1';
 const nodeId = 'node1';
-
 describe('AudioOscillatorStudent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [AudioOscillatorStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
-        BrowserModule,
-        ComponentHeaderComponent,
-        FormsModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatTooltipModule,
-        ReactiveFormsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [StudentTeacherCommonServicesModule, AudioOscillatorStudent],
+      providers: [provideHttpClient()]
+    });
     fixture = TestBed.createComponent(AudioOscillatorStudent);
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     component = fixture.componentInstance;
@@ -288,19 +262,16 @@ function repopulateStudentWork() {
 }
 
 function createComponentState() {
-  it(
-    'should create component state',
-    waitForAsync(() => {
-      component.amplitudesPlayed = amplitudesPlayed;
-      component.frequenciesPlayed = frequenciesPlayed;
-      component.createComponentState('save').then((componentState: any) => {
-        expect(componentState.componentId).toEqual(componentId);
-        expect(componentState.nodeId).toEqual(nodeId);
-        expect(componentState.studentData.frequenciesPlayed).toEqual(frequenciesPlayed);
-        expect(componentState.studentData.amplitudesPlayed).toEqual(amplitudesPlayed);
-      });
-    })
-  );
+  it('should create component state', waitForAsync(() => {
+    component.amplitudesPlayed = amplitudesPlayed;
+    component.frequenciesPlayed = frequenciesPlayed;
+    component.createComponentState('save').then((componentState: any) => {
+      expect(componentState.componentId).toEqual(componentId);
+      expect(componentState.nodeId).toEqual(nodeId);
+      expect(componentState.studentData.frequenciesPlayed).toEqual(frequenciesPlayed);
+      expect(componentState.studentData.amplitudesPlayed).toEqual(amplitudesPlayed);
+    });
+  }));
 }
 
 function addAmplitudeDataToStudentData() {

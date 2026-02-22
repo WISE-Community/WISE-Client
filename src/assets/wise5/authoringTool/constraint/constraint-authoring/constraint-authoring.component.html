@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+<div class="flex justify-start items-center gap-4">
   <mat-form-field class="common-width">
     <mat-label i18n>Action</mat-label>
     <mat-select [(ngModel)]="constraint.action" (ngModelChange)="saveProject()">
@@ -12,7 +12,7 @@
   @if (constraint.action === '') {
     <required-error-label />
   }
-  <div fxFlex></div>
+  <div class="flex-grow"></div>
   <mat-form-field class="removal-conditional-select">
     <mat-label i18n>Removal Conditional</mat-label>
     <mat-select [(ngModel)]="constraint.removalConditional" (ngModelChange)="saveProject()">
@@ -25,7 +25,7 @@
   </mat-form-field>
 </div>
 @for (criteria of constraint.removalCriteria; track criteria; let criteriaIndex = $index) {
-  <div class="criteria-div" fxLayoutGap="16px">
+  <div class="criteria-div gap-4">
     <edit-constraint-removal-criteria
       [constraint]="constraint"
       [criteria]="criteria"
@@ -33,7 +33,7 @@
     />
   </div>
 }
-<div fxLayoutGap="16px">
+<div class="flex gap-4">
   <mat-label i18n>Add Removal Criteria</mat-label>
   <button
     mat-raised-button

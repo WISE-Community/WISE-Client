@@ -22,20 +22,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MainMenuComponent } from '../common/main-menu/main-menu.component';
 
 @Component({
-    selector: 'classroom-monitor',
-    imports: [
-        CommonModule,
-        MainMenuComponent,
-        MatDialogModule,
-        MatSidenavModule,
-        NotebookReportComponent,
-        RouterModule,
-        SideMenuComponent,
-        ToolBarComponent,
-        TopBarComponent
-    ],
-    styleUrl: './classroom-monitor.component.scss',
-    templateUrl: './classroom-monitor.component.html'
+  selector: 'classroom-monitor',
+  imports: [
+    CommonModule,
+    MainMenuComponent,
+    MatDialogModule,
+    MatSidenavModule,
+    NotebookReportComponent,
+    RouterModule,
+    SideMenuComponent,
+    ToolBarComponent,
+    TopBarComponent
+  ],
+  styleUrl: './classroom-monitor.component.scss',
+  templateUrl: './classroom-monitor.component.html'
 })
 export class ClassroomMonitorComponent implements OnInit {
   protected logoPath: string;

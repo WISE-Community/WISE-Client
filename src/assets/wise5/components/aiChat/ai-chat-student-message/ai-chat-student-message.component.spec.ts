@@ -11,7 +11,7 @@ describe('AiChatStudentMessageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AiChatStudentMessageComponent],
+      imports: [AiChatStudentMessageComponent],
       providers: [
         ConfigService,
         provideHttpClient(withInterceptorsFromDi()),

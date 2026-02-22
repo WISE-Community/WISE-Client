@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,33 +13,70 @@ import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { GradingNodeService } from '../../../services/gradingNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatTooltipModule,
-        NodeIconComponent
-    ],
-    selector: 'grading-step-tools',
-    templateUrl: '../../../common/stepTools/step-tools.component.html',
-    styleUrl: '../../../common/stepTools/step-tools.component.scss'
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    NodeIconComponent
+  ],
+  selector: 'grading-step-tools',
+  styleUrl: '../../../common/stepTools/step-tools.component.scss',
+  templateUrl: '../../../common/stepTools/step-tools.component.html'
 })
 export class GradingStepToolsComponent extends StepToolsComponent {
   constructor(
     protected dataService: TeacherDataService,
     protected dir: Directionality,
     protected nodeService: GradingNodeService,
-    protected projectService: TeacherProjectService
+    protected projectService: TeacherProjectService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     super(dataService, dir, nodeService, projectService);
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.dataService.setCurrentNodeByNodeId(this.getNodeId());
+  }
+
+  protected getNodeId(): string {
+    return this.route.firstChild.snapshot.params['nodeId'];
+  }
+
+  protected nodeChanged(): void {
+    this.navigateToNode(this.nodeId);
+  }
+
+  protected goToPrevNode(): void {
+    super.goToPrevNode();
+    this.navigateToNode(this.nodeId);
+  }
+
+  protected goToNextNode(): Promise<void> {
+    return super.goToNextNode().then(() => {
+      this.navigateToNode(this.nodeId);
+    });
+  }
+
+  private navigateToNode(nodeId: string): void {
+    this.router
+      .navigate(['node', nodeId], {
+        relativeTo: this.route
+      })
+      .then(() => {
+        this.dataService.setCurrentNodeByNodeId(nodeId);
+        this.updateModel();
+      });
   }
 
   protected calculateNodeIds(): void {

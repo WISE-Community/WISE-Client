@@ -13,13 +13,28 @@ import { Subscription } from 'rxjs';
 import { copy } from '../../../../common/object/object';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { WorkgroupInfoComponent } from '../../nodeGrading/workgroupInfo/workgroup-info.component';
+import { WorkgroupNodeStatusComponent } from '../../../../../../app/classroom-monitor/workgroup-node-status/workgroup-node-status.component';
+import { WorkgroupNodeScoreComponent } from '../../shared/workgroupNodeScore/workgroup-node-score.component';
+import { MatListItem } from '@angular/material/list';
+import { WorkgroupComponentGradingComponent } from '../../workgroup-component-grading/workgroup-component-grading.component';
 
 @Component({
-    selector: 'milestone-workgroup-item',
-    templateUrl: './milestone-workgroup-item.component.html',
-    styleUrls: ['./milestone-workgroup-item.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    NgClass,
+    MatButton,
+    WorkgroupInfoComponent,
+    WorkgroupNodeStatusComponent,
+    WorkgroupNodeScoreComponent,
+    MatListItem,
+    WorkgroupComponentGradingComponent
+  ],
+  selector: 'milestone-workgroup-item',
+  styleUrl: './milestone-workgroup-item.component.scss',
+  templateUrl: './milestone-workgroup-item.component.html'
 })
 export class MilestoneWorkgroupItemComponent implements OnInit {
   changeInScore: number | '-';

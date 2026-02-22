@@ -8,6 +8,8 @@ import { Run } from '../../domain/run';
 import { ConfigService } from '../../services/config.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MockComponent } from 'ng-mocks';
+import { StudentRunListItemComponent } from '../student-run-list-item/student-run-list-item.component';
 
 export function fakeAsyncResponse<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -63,7 +65,7 @@ describe('StudentRunListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [StudentRunListComponent],
+      imports: [StudentRunListComponent, MockComponent(StudentRunListItemComponent)],
       providers: [
         { provide: StudentService, useClass: MockStudentService },
         { provide: ConfigService, useClass: MockConfigService },

@@ -1,9 +1,13 @@
 <mat-form-field>
   <mat-label i18n>Model</mat-label>
   <mat-select [(ngModel)]="componentContent.model" (ngModelChange)="this.componentChanged()">
-    <mat-option *ngFor="let model of models" [value]="model">{{ model }}</mat-option>
+    @for (model of models; track model) {
+      <mat-option [value]="model">{{ model }}</mat-option>
+    }
   </mat-select>
 </mat-form-field>
+<br />
+<edit-component-width [componentContent]="component.content" />
 <edit-connected-components
   [nodeId]="component.nodeId"
   [componentId]="component.id"
@@ -12,4 +16,4 @@
   [connectedComponents]="component.content.connectedComponents"
   (connectedComponentsChanged)="connectedComponentsChanged($event)"
 />
-<edit-component-json [component]="component"></edit-component-json>
+<edit-component-json [component]="component" />

@@ -1,36 +1,37 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subscription } from 'rxjs';
-import { FlexLayoutModule, MediaChange, MediaObserver } from '@angular/flex-layout';
-import { ConfigService } from '../../../assets/wise5/services/configService';
-import { NotebookService } from '../../../assets/wise5/services/notebookService';
-import { ProjectService } from '../../../assets/wise5/services/projectService';
-import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
+import { SaveTimeMessageComponent } from '../../../assets/wise5/common/save-time-message/save-time-message.component';
 import {
   insertWiseLinks,
   replaceWiseLinks
 } from '../../../assets/wise5/common/wise-link/wise-link';
-import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { WiseTinymceEditorComponent } from '../../../assets/wise5/directives/wise-tinymce-editor/wise-tinymce-editor.component';
-import { SaveTimeMessageComponent } from '../../../assets/wise5/common/save-time-message/save-time-message.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { ConfigService } from '../../../assets/wise5/services/configService';
+import { NotebookService } from '../../../assets/wise5/services/notebookService';
+import { ProjectService } from '../../../assets/wise5/services/projectService';
+import { NotebookParentComponent } from '../notebook-parent/notebook-parent.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { NotebookNotesComponent } from '../notebook-notes/notebook-notes.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCardModule,
-        MatIconModule,
-        MatTooltipModule,
-        SaveTimeMessageComponent,
-        WiseTinymceEditorComponent
-    ],
-    selector: 'notebook-report',
-    styleUrl: 'notebook-report.component.scss',
-    templateUrl: 'notebook-report.component.html'
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatTooltipModule,
+    SaveTimeMessageComponent,
+    WiseTinymceEditorComponent
+  ],
+  selector: 'notebook-report',
+  styleUrl: 'notebook-report.component.scss',
+  templateUrl: 'notebook-report.component.html'
 })
 export class NotebookReportComponent extends NotebookParentComponent {
   private autoSaveIntervalMS: number = 30000;
@@ -47,12 +48,19 @@ export class NotebookReportComponent extends NotebookParentComponent {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private breakpointObserver: BreakpointObserver,
     configService: ConfigService,
+    private dialog: MatDialog,
     notebookService: NotebookService,
-    private projectService: ProjectService,
-    private mediaObserver: MediaObserver
+    private projectService: ProjectService
   ) {
     super(configService, notebookService);
+    this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
+      if (!this.collapsed) {
+        this.collapsed = true;
+        this.fullscreen();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -82,15 +90,6 @@ export class NotebookReportComponent extends NotebookParentComponent {
             500
           );
         }, 500);
-      })
-    );
-
-    this.subscriptions.add(
-      this.mediaObserver.asObservable().subscribe((change: MediaChange[]) => {
-        if (change[0].mqAlias == 'xs' && !this.collapsed) {
-          this.collapsed = true;
-          this.fullscreen();
-        }
       })
     );
 
@@ -130,7 +129,7 @@ export class NotebookReportComponent extends NotebookParentComponent {
   }
 
   protected toggleCollapse(): void {
-    if (this.collapsed && this.mediaObserver.isActive('xs')) {
+    if (this.collapsed && this.breakpointObserver.isMatched('(max-width: 40rem)')) {
       this.fullscreen();
       return;
     }
@@ -152,8 +151,10 @@ export class NotebookReportComponent extends NotebookParentComponent {
   }
 
   protected addNotebookItemContent($event: any): void {
-    this.NotebookService.setInsertMode({ insertMode: true, requester: 'report' });
-    this.NotebookService.setNotesVisible(true);
+    this.dialog.open(NotebookNotesComponent, {
+      data: { insertMode: true, requester: 'report' },
+      panelClass: 'dialog-md'
+    });
   }
 
   protected changed(value: string): void {

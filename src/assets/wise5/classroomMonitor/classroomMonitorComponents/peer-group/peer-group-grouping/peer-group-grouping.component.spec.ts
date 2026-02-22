@@ -1,14 +1,9 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { ConfigService } from '../../../../services/configService';
-
 import { PeerGroupGroupingComponent } from './peer-group-grouping.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('PeerGroupGroupingComponent', () => {
   let component: PeerGroupGroupingComponent;
@@ -19,13 +14,9 @@ describe('PeerGroupGroupingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [PeerGroupGroupingComponent],
-    imports: [BrowserAnimationsModule,
-        DragDropModule,
-        MatCardModule,
-        MatDialogModule],
-    providers: [ConfigService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      imports: [PeerGroupGroupingComponent],
+      providers: [ConfigService, provideHttpClient()]
+    }).compileComponents();
   });
 
   beforeEach(() => {

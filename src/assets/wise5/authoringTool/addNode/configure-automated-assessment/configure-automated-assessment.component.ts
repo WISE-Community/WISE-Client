@@ -1,41 +1,34 @@
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ConfigService } from '../../../services/configService';
-import { CopyNodesService } from '../../../services/copyNodesService';
-import { InsertNodesService } from '../../../services/insertNodesService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RouterModule } from '@angular/router';
 import { AbstractImportStepComponent } from '../abstract-import-step/abstract-import-step.component';
-import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 
 @Component({
-    selector: 'configure-automated-assessment',
-    templateUrl: './configure-automated-assessment.component.html',
-    styleUrls: ['./configure-automated-assessment.component.scss', '../../add-content.scss'],
-    standalone: false
+  imports: [
+    CdkTextareaAutosize,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressBarModule,
+    RouterModule
+  ],
+  selector: 'configure-automated-assessment',
+  templateUrl: './configure-automated-assessment.component.html',
+  styleUrls: ['./configure-automated-assessment.component.scss', '../../add-content.scss']
 })
 export class ConfigureAutomatedAssessmentComponent extends AbstractImportStepComponent {
   protected hasCustomization: boolean;
   protected node: any;
-
-  constructor(
-    protected configService: ConfigService,
-    protected copyNodesService: CopyNodesService,
-    protected insertFirstNodeInBranchPathService: InsertFirstNodeInBranchPathService,
-    protected insertNodesService: InsertNodesService,
-    protected projectService: TeacherProjectService,
-    protected route: ActivatedRoute,
-    protected router: Router
-  ) {
-    super(
-      configService,
-      copyNodesService,
-      insertFirstNodeInBranchPathService,
-      insertNodesService,
-      projectService,
-      route,
-      router
-    );
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

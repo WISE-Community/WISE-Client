@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+<div class="flex flex-row justify-start items-center gap-2">
   <mat-label class="node__label--vertical-alignment" i18n>JSON</mat-label>
   <button
     mat-raised-button
@@ -12,16 +12,17 @@
     <mat-icon>code</mat-icon>
   </button>
 </div>
-<div *ngIf="showJSONAuthoring" fxLayout="column" fxLayoutGap="8px">
-  <span i18n>Close the JSON view to save the changes</span>
-  <mat-form-field fxFlex appearance="outline">
-    <mat-label i18n>Edit Component JSON</mat-label>
-    <textarea
-      class="mat-body-2"
-      matInput
-      cdkTextareaAutosize
-      [(ngModel)]="componentContentJSONString"
-      (ngModelChange)="jsonChanged.next($event)"
-    ></textarea>
-  </mat-form-field>
-</div>
+@if (showJSONAuthoring) {
+  <div class="flex flex-col gap-2">
+    <span i18n style="color: red">Close the JSON view to save the changes</span>
+    <mat-form-field class="w-full">
+      <mat-label i18n>Edit Component JSON</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        [(ngModel)]="componentContentJSONString"
+        (ngModelChange)="jsonChanged.next($event)"
+      ></textarea>
+    </mat-form-field>
+  </div>
+}

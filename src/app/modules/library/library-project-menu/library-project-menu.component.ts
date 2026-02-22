@@ -7,14 +7,14 @@ import { UserService } from '../../../services/user.service';
 import { ConfigService } from '../../../services/config.service';
 import { EditRunWarningDialogComponent } from '../../../teacher/edit-run-warning-dialog/edit-run-warning-dialog.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
-import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
+import { CopyProjectDialogComponent } from '../copy-project-dialog/copy-project-dialog.component';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule],
+  imports: [MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule],
   selector: 'app-library-project-menu',
   styleUrl: './library-project-menu.component.scss',
   templateUrl: './library-project-menu.component.html'
@@ -61,7 +61,10 @@ export class LibraryProjectMenuComponent {
   }
 
   protected copyProject(): void {
-    this.teacherService.copyProject(this.project, this.dialog);
+    this.dialog.open(CopyProjectDialogComponent, {
+      data: this.project,
+      panelClass: 'dialog-sm'
+    });
   }
 
   protected editProject(): void {
@@ -69,7 +72,7 @@ export class LibraryProjectMenuComponent {
       if (projectRun != null) {
         projectRun.project = this.project;
         this.dialog.open(EditRunWarningDialogComponent, {
-          data: { run: projectRun },
+          data: projectRun,
           panelClass: 'dialog-sm'
         });
       } else {

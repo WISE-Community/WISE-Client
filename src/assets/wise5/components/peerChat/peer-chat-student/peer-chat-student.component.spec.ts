@@ -1,37 +1,19 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
-import { NotebookService } from '../../../services/notebookService';
 import { NotificationService } from '../../../services/notificationService';
 import { PeerGroupService } from '../../../services/peerGroupService';
 import { ProjectService } from '../../../services/projectService';
-import { SessionService } from '../../../services/sessionService';
-import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { StudentWebSocketService } from '../../../services/studentWebSocketService';
-import { TagService } from '../../../services/tagService';
-import { ComponentService } from '../../componentService';
-import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
 import { PeerChatStudentComponent } from './peer-chat-student.component';
 import { PeerGroupMember } from '../PeerGroupMember';
 import { of } from 'rxjs';
-import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { PeerChatModule } from '../peer-chat.module';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
-import { PauseScreenService } from '../../../services/pauseScreenService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { FeedbackRule } from '../../common/feedbackRule/FeedbackRule';
 import { PeerChatComponent } from '../PeerChatComponent';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 let component: PeerChatStudentComponent;
 const componentId = 'component1';
@@ -113,39 +95,12 @@ const peerGroup = new PeerGroup(
   ],
   new PeerGrouping()
 );
-
 describe('PeerChatStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [PeerChatStudentComponent],
-    imports: [BrowserAnimationsModule,
-        ComponentHeaderComponent,
-        FormsModule,
-        MatCardModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        PeerChatModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
-        AnnotationService,
-        ComponentService,
-        ConfigService,
-        NotebookService,
-        NotificationService,
-        PauseScreenService,
-        PeerChatService,
-        ProjectService,
-        SessionService,
-        StudentAssetService,
-        StudentDataService,
-        StudentWebSocketService,
-        TagService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+      imports: [StudentTeacherCommonServicesModule, PeerChatStudentComponent],
+      providers: [provideHttpClient()]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -245,10 +200,9 @@ function createComponentState_WithoutDynamicPrompt_ShouldCreateComponentState() 
 
 function createComponentState_WithDynamicPrompt_ShouldCreateComponentState() {
   it('should create component state when component has dynamic prompt', () => {
-    spyOn(
-      TestBed.inject(StudentWebSocketService),
-      'sendStudentWorkToClassmate'
-    ).and.callFake(() => {});
+    spyOn(TestBed.inject(StudentWebSocketService), 'sendStudentWorkToClassmate').and.callFake(
+      () => {}
+    );
     spyOn(TestBed.inject(NotificationService), 'saveNotificationToServer').and.callFake(() => {
       return Promise.resolve({});
     });

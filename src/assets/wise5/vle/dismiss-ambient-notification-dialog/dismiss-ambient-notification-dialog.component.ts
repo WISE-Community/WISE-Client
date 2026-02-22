@@ -4,20 +4,43 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  ValidationErrors
+  ValidationErrors,
+  FormsModule,
+  ReactiveFormsModule
 } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions
+} from '@angular/material/dialog';
 import { Observable, Subject } from 'rxjs';
 import { Notification } from '../../../../app/domain/notification';
 import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 import { NodeService } from '../../services/nodeService';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'dismiss-ambient-notification-dialog',
-    templateUrl: './dismiss-ambient-notification-dialog.component.html',
-    styleUrls: ['./dismiss-ambient-notification-dialog.component.scss'],
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatDialogActions,
+    MatButton
+  ],
+  styles: ['.notification-dismiss__input { width: 100%; }'],
+  templateUrl: './dismiss-ambient-notification-dialog.component.html'
 })
 export class DismissAmbientNotificationDialogComponent implements OnInit {
   private dismissSource: Subject<any> = new Subject<any>();

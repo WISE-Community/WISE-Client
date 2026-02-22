@@ -1,31 +1,26 @@
 import { Component } from '@angular/core';
-import { NodeService } from '../../../services/nodeService';
-import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'audio-oscillator-show-work',
-    templateUrl: 'audio-oscillator-show-work.component.html',
-    standalone: false
+  imports: [CommonModule],
+  selector: 'audio-oscillator-show-work',
+  templateUrl: 'audio-oscillator-show-work.component.html'
 })
 export class AudioOscillatorShowWorkComponent extends ComponentShowWorkDirective {
-  amplitudesPlayed: string;
-  amplitudesPlayedSorted: string;
-  frequenciesPlayed: string;
-  frequenciesPlayedSorted: string;
-  isAmplitudeDataPresent: boolean;
-  maxAmplitudePlayed: number;
-  maxFrequencyPlayed: number;
-  minAmplitudePlayed: number;
-  minFrequencyPlayed: number;
-  numberOfAmplitudesPlayed: number;
-  numberOfFrequenciesPlayed: number;
-  numberOfUniqueAmplitudesPlayed: number;
-  numberOfUniqueFrequenciesPlayed: number;
-
-  constructor(protected nodeService: NodeService, protected ProjectService: ProjectService) {
-    super(nodeService, ProjectService);
-  }
+  protected amplitudesPlayed: string;
+  protected amplitudesPlayedSorted: string;
+  protected frequenciesPlayed: string;
+  protected frequenciesPlayedSorted: string;
+  protected isAmplitudeDataPresent: boolean;
+  protected maxAmplitudePlayed: number;
+  protected maxFrequencyPlayed: number;
+  protected minAmplitudePlayed: number;
+  protected minFrequencyPlayed: number;
+  protected numberOfAmplitudesPlayed: number;
+  protected numberOfFrequenciesPlayed: number;
+  protected numberOfUniqueAmplitudesPlayed: number;
+  protected numberOfUniqueFrequenciesPlayed: number;
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -34,7 +29,7 @@ export class AudioOscillatorShowWorkComponent extends ComponentShowWorkDirective
     this.initializeAmplitudes(studentData);
   }
 
-  initializeFrequencies(studentData: any): void {
+  protected initializeFrequencies(studentData: any): void {
     this.frequenciesPlayed = studentData.frequenciesPlayed.join(', ');
     this.frequenciesPlayedSorted = studentData.frequenciesPlayedSorted.join(', ');
     this.numberOfFrequenciesPlayed = studentData.numberOfFrequenciesPlayed;
@@ -43,7 +38,7 @@ export class AudioOscillatorShowWorkComponent extends ComponentShowWorkDirective
     this.maxFrequencyPlayed = studentData.maxFrequencyPlayed;
   }
 
-  initializeAmplitudes(studentData: any): void {
+  protected initializeAmplitudes(studentData: any): void {
     if (studentData.amplitudesPlayed != null) {
       this.amplitudesPlayed = studentData.amplitudesPlayed.join(', ');
       this.amplitudesPlayedSorted = studentData.amplitudesPlayedSorted.join(', ');

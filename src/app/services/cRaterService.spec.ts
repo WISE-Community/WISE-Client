@@ -5,7 +5,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { CRaterIdea } from '../../assets/wise5/components/common/cRater/CRaterIdea';
 import { CRaterScore } from '../../assets/wise5/components/common/cRater/CRaterScore';
 import { RawCRaterResponse } from '../../assets/wise5/components/common/cRater/RawCRaterResponse';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { ComponentContent } from '../../assets/wise5/common/ComponentContent';
 let service: CRaterService;
@@ -24,7 +24,7 @@ describe('CRaterService', () => {
         ConfigService,
         CRaterService,
         { provide: ProjectService, useClass: MockProjectService },
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(),
         provideHttpClientTesting()
       ]
     });
@@ -182,7 +182,7 @@ function makeCRaterVerifyRequest() {
     it('should make a CRater verify request', () => {
       spyOn(configService, 'getCRaterRequestURL').and.returnValue('/c-rater');
       const itemId = 'ColdBeverage1Sub';
-      service.makeCRaterVerifyRequest(itemId);
+      service.makeCRaterVerifyRequest(itemId).subscribe();
       http.expectOne({
         url: `/c-rater/verify?itemId=${itemId}`,
         method: 'GET'

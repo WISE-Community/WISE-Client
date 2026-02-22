@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EditComponent } from './edit.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MockComponents, MockProvider } from 'ng-mocks';
+import { TeacherEditProfileComponent } from '../edit-profile/edit-profile.component';
+import { UserService } from '../../../services/user.service';
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../../../domain/user';
 
 describe('EditComponent', () => {
   let component: EditComponent;
@@ -8,9 +12,12 @@ describe('EditComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [EditComponent],
-      providers: [],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [EditComponent, MockComponents(TeacherEditProfileComponent)],
+      providers: [
+        MockProvider(UserService, {
+          getUser: () => new BehaviorSubject<User>(null)
+        })
+      ]
     }).compileComponents();
   }));
 

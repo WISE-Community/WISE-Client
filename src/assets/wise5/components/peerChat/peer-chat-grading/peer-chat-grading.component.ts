@@ -13,12 +13,15 @@ import { PeerChatShowWorkComponent } from '../peer-chat-show-work/peer-chat-show
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatService } from '../peerChatService';
 import { PeerGroup } from '../PeerGroup';
+import { QuestionBankService } from '../peer-chat-question-bank/questionBank.service';
+import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
+import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-chat-question-bank.component';
 
 @Component({
-    selector: 'peer-chat-grading',
-    templateUrl: './peer-chat-grading.component.html',
-    styleUrls: ['./peer-chat-grading.component.scss'],
-    standalone: false
+  imports: [PeerChatChatBoxComponent, PeerChatQuestionBankComponent],
+  providers: [QuestionBankService],
+  styleUrl: './peer-chat-grading.component.scss',
+  templateUrl: './peer-chat-grading.component.html'
 })
 export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
   constructor(
@@ -38,9 +41,9 @@ export class PeerChatGradingComponent extends PeerChatShowWorkComponent {
 
   submitTeacherResponse(response: string): void {
     this.sendNotificationsToGroupMembers(this.peerGroup);
-    this.teacherWorkService.saveWork(this.createComponentState(response)).subscribe(() => {
-      this.ngOnInit();
-    });
+    this.teacherWorkService
+      .saveWork(this.createComponentState(response))
+      .subscribe(() => this.ngOnInit());
   }
 
   private sendNotificationsToGroupMembers(peerGroup: PeerGroup): void {

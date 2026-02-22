@@ -1,12 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/projectService';
 import { TeacherDataService } from '../../../services/teacherDataService';
+import { ShowWorkStudentComponent } from '../../showWork/show-work-student/show-work-student.component';
 
 @Component({
-    selector: 'show-my-work-grading',
-    templateUrl: './show-my-work-grading.component.html',
-    styleUrls: ['./show-my-work-grading.component.scss'],
-    standalone: false
+  imports: [ShowWorkStudentComponent],
+  template: `
+    @if (componentState != null) {
+      <show-work-student
+        [studentWork]="componentState"
+        [componentId]="showWorkComponentId"
+        [nodeId]="showWorkNodeId"
+      />
+    }
+  `
 })
 export class ShowMyWorkGradingComponent implements OnInit {
   @Input() componentId: string;
@@ -16,7 +23,10 @@ export class ShowMyWorkGradingComponent implements OnInit {
   protected showWorkNodeId: string;
   @Input() workgroupId: number;
 
-  constructor(private dataService: TeacherDataService, private projectService: ProjectService) {}
+  constructor(
+    private dataService: TeacherDataService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
     const component: any = this.projectService.getComponent(this.nodeId, this.componentId);

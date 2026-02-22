@@ -3,26 +3,36 @@ import { Choice } from '../../components/multipleChoice/Choice';
 import { ComponentContent } from '../../common/ComponentContent';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../services/configService';
-import { MultipleChoiceSummaryData } from '../summary-display/summary-data/MultipleChoiceSummaryData';
 import { MultipleChoiceSummaryDataPoint } from '../summary-display/summary-data/MultipleChoiceSummaryDataPoint';
 import { ProjectService } from '../../services/projectService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ScoreSummaryData } from '../summary-display/summary-data/ScoreSummaryData';
 import { ScoreSummaryDataPoint } from '../summary-display/summary-data/ScoreSummaryDataPoint';
 import { SeriesData } from '../../common/SeriesData';
 import { SeriesDataPoint } from '../../common/SeriesDataPoint';
 import { StudentSummaryDisplay } from './student-summary-display.component';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
 import { SummaryData } from '../summary-display/summary-data/SummaryData';
+import { MockProvider, MockProviders } from 'ng-mocks';
+import { of } from 'rxjs';
+import { StudentDataService } from '../../services/studentDataService';
+import { DataService } from '../../../../app/services/data.service';
+import { AnnotationService } from '../../services/annotationService';
+import { CRaterService } from '../../services/cRaterService';
+import { SummaryService } from '../../components/summary/summaryService';
 
 let component: StudentSummaryDisplay;
 let fixture: ComponentFixture<StudentSummaryDisplay>;
-
 describe('StudentSummaryDisplayComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [StudentSummaryDisplay, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(withInterceptorsFromDi())]
+      imports: [StudentSummaryDisplay],
+      providers: [
+        provideHttpClient(),
+        MockProvider(StudentDataService, { studentWorkSavedToServer$: of() }),
+        { provide: DataService, useClass: StudentDataService },
+        MockProviders(AnnotationService, ConfigService, CRaterService, ProjectService),
+        SummaryService
+      ]
     });
     fixture = TestBed.createComponent(StudentSummaryDisplay);
     component = fixture.componentInstance;
@@ -40,9 +50,7 @@ describe('StudentSummaryDisplayComponent', () => {
   filterLatestScoreAnnotations();
   getChartColors();
   getGraphForSelf();
-  getGraphTitleForPeriod();
   getGraphTitleForClass();
-  getPercentOfClassRespondedText();
   getPercentResponded();
   getTotalWorkgroups();
   initializeOtherComponent();
@@ -66,21 +74,35 @@ function calculateCountsAndPercentage() {
 }
 
 function calculateMaxScore() {
-  describe('calculateMaxScore', () => {
-    it('should not update max score when there are no annotations', () => {
+  describe('setMinMaxScore', () => {
+    it('should not update min and max scores when there are no annotations', () => {
       const annotations = [];
       component.maxScore = 5;
-      expect(component.calculateMaxScore(annotations)).toEqual(5);
+      component.setMinMaxScore(annotations);
+      expect(component.studentMaxScore).toEqual(5);
+      expect(component.studentMinScore).toEqual(1);
     });
-    it('should update max score when there are annotations', () => {
-      const annotation = new Annotation({
+    it('should update min and max scores when there are annotations', () => {
+      const annotation1 = new Annotation({
         data: {
           value: 6
         }
       });
-      const annotations = [annotation];
+      const annotation2 = new Annotation({
+        data: {
+          value: 0
+        }
+      });
+      const annotation3 = new Annotation({
+        data: {
+          value: 2
+        }
+      });
+      const annotations = [annotation1, annotation2, annotation3];
       component.maxScore = 5;
-      expect(component.calculateMaxScore(annotations)).toEqual(6);
+      component.setMinMaxScore(annotations);
+      expect(component.studentMaxScore).toEqual(6);
+      expect(component.studentMinScore).toEqual(0);
     });
   });
 }
@@ -296,19 +318,9 @@ function setCustomLabelColors() {
 function getChartColors() {
   describe('getChartColors', () => {
     it('should get chart colors', () => {
+      component.studentMaxScore = 5;
       const colors = component.getChartColors();
       expect(colors).toEqual(['#e7beda', '#d794c2', '#c86baa', '#b94192', '#a9177a']);
-    });
-  });
-}
-
-function getGraphTitleForPeriod() {
-  describe('getGraphTitleForPeriod', () => {
-    it('should get graph title for period when student data type is responses', () => {
-      expectGraphTitleForX('Period', 'responses');
-    });
-    it('should get graph title for period when student data type is scores', () => {
-      expectGraphTitleForX('Period', 'scores');
     });
   });
 }
@@ -316,25 +328,18 @@ function getGraphTitleForPeriod() {
 function getGraphTitleForClass() {
   describe('getGraphTitleForClass', () => {
     it('should get graph title for class when student data type is responses', () => {
-      expectGraphTitleForX('Class', 'responses');
+      expectGraphTitleForX('responses', 'Responses');
     });
     it('should get graph title for class when student data type is scores', () => {
-      expectGraphTitleForX('Class', 'scores');
+      expectGraphTitleForX('scores', 'Scores (Mean: 0)');
     });
   });
 }
 
-function expectGraphTitleForX(source: string, studentDataType: string) {
+function expectGraphTitleForX(studentDataType: string, expectedTitle: string) {
   setResponseNumbers(component);
   component.studentDataType = studentDataType;
-  let title: string;
-  if (source === 'Period') {
-    title = component.getGraphTitleForPeriod();
-  } else {
-    title = component.getGraphTitleForClass();
-  }
-  const upperCaseStudentDataType = studentDataType[0].toUpperCase() + studentDataType.substring(1);
-  expect(title).toEqual(`${source} ${upperCaseStudentDataType} | 60% Responded (6/10)`);
+  expect(component.getGraphTitleForClass()).toEqual(expectedTitle);
 }
 
 function getGraphForSelf() {
@@ -348,17 +353,6 @@ function getGraphForSelf() {
       component.source = 'self';
       component.studentDataType = 'scores';
       expect(component.getGraphTitle()).toEqual('Your Score');
-    });
-  });
-}
-
-function getPercentOfClassRespondedText() {
-  describe('getPercentOfClassRespondedText', () => {
-    it('should get percent of class responded text', () => {
-      setResponseNumbers(component);
-      component.studentDataType = 'responses';
-      const text = component.getPercentOfClassRespondedText();
-      expect(text).toEqual(`60% Responded (6/10)`);
     });
   });
 }

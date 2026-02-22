@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
-import { ConfigService } from '../../../services/configService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import peerChatLogicOptions from './peer-chat-logic-options';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
+import { EditDynamicPromptComponent } from '../../../../../app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component';
+import { EditQuestionBankComponent } from '../../../../../app/authoring-tool/edit-question-bank/edit-question-bank.component';
+import { EditComponentPeerGroupingTagComponent } from '../../../../../app/authoring-tool/edit-component-peer-grouping-tag/edit-component-peer-grouping-tag.component';
 
 @Component({
-    selector: 'peer-chat-authoring',
-    templateUrl: './peer-chat-authoring.component.html',
-    styleUrls: ['./peer-chat-authoring.component.scss'],
-    standalone: false
+  imports: [
+    EditComponentPrompt,
+    EditDynamicPromptComponent,
+    EditQuestionBankComponent,
+    EditComponentPeerGroupingTagComponent
+  ],
+  styleUrl: './peer-chat-authoring.component.scss',
+  templateUrl: './peer-chat-authoring.component.html'
 })
 export class PeerChatAuthoringComponent extends AbstractComponentAuthoring {
   allowedComponentTypes: string[] = [
@@ -25,15 +29,6 @@ export class PeerChatAuthoringComponent extends AbstractComponentAuthoring {
   ];
   logicOptions = peerChatLogicOptions;
   nodeIds: string[];
-
-  constructor(
-    protected configService: ConfigService,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, nodeService, projectAssetService, projectService);
-  }
 
   ngOnInit(): void {
     super.ngOnInit();

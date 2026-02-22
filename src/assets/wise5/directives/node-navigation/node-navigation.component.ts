@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NodeService } from '../../services/nodeService';
 import { StudentDataService } from '../../services/studentDataService';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 
 @Component({
-    imports: [CommonModule, FlexLayoutModule, MatButtonModule],
-    selector: 'node-navigation',
-    templateUrl: './node-navigation.component.html'
+  imports: [MatButtonModule],
+  selector: 'node-navigation',
+  templateUrl: './node-navigation.component.html'
 })
 export class NodeNavigationComponent implements OnInit {
   protected hasNextNode: boolean;

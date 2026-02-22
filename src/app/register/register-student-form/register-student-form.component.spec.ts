@@ -1,21 +1,16 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterStudentFormComponent } from './register-student-form.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of, throwError } from 'rxjs';
 import { StudentService } from '../../student/student.service';
 import { UserService } from '../../services/user.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router, provideRouter } from '@angular/router';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
 import {
   nameTests,
   validateAndExpect
 } from '../register-user-form/register-user-form-spec-helpers';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha-2';
 import { PasswordModule } from '../../password/password.module';
 import { ConfigService } from '../../services/config.service';
@@ -50,26 +45,14 @@ class MockConfigService {
 describe('RegisterStudentFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterStudentFormComponent],
-      imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
-        MatInputModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        PasswordModule,
-        ReactiveFormsModule,
-        RecaptchaV3Module
-      ],
+      imports: [PasswordModule, RecaptchaV3Module, RegisterStudentFormComponent],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
         provideRouter([]),
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' },
         { provide: StudentService, useClass: MockStudentService },
-
         { provide: UserService, useClass: MockUserService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents();
   }));
 

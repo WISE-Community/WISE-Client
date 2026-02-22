@@ -1,19 +1,50 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, Inject, LOCALE_ID } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  MatDialogModule,
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDividerModule } from '@angular/material/divider';
 import { LibraryProjectDetailsComponent } from '../../modules/library/library-project-details/library-project-details.component';
 import { TeacherService } from '../teacher.service';
 import { formatDate } from '@angular/common';
 import { TeacherRun } from '../teacher-run';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-run-settings-dialog',
-  templateUrl: './run-settings-dialog.component.html',
-  styleUrls: ['./run-settings-dialog.component.scss'],
-  standalone: false
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule,
+    MatDividerModule
+  ],
+  styleUrl: './run-settings-dialog.component.scss',
+  templateUrl: './run-settings-dialog.component.html'
 })
-export class RunSettingsDialogComponent implements OnInit {
-  run: TeacherRun;
+export class RunSettingsDialogComponent {
   newPeriodName: string;
   maxStudentsPerTeam: string;
   startDate: Date;
@@ -37,12 +68,11 @@ export class RunSettingsDialogComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<LibraryProjectDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public run: TeacherRun,
     private teacherService: TeacherService,
     public snackBar: MatSnackBar,
     @Inject(LOCALE_ID) private localeID: string
   ) {
-    this.run = data.run;
     this.maxStudentsPerTeam = this.run.maxStudentsPerTeam + '';
     this.startDate = new Date(this.run.startTime);
     this.endDate = this.run.endTime ? new Date(this.run.endTime) : null;
@@ -71,8 +101,6 @@ export class RunSettingsDialogComponent implements OnInit {
       noPermissionToChangeIsLockedAfterEndDate: $localize`You do not have permission to change whether unit is locked after end date.`
     };
   }
-
-  ngOnInit() {}
 
   newPeriodNameKeyUp(event) {
     if (this.isEnterKeyWithNewPeriodName(event)) {
@@ -313,11 +341,11 @@ export class RunSettingsDialogComponent implements OnInit {
   }
 
   updateDataRun(run) {
-    this.data.run.periods = run.periods;
-    this.data.run.maxStudentsPerTeam = run.maxStudentsPerTeam;
-    this.data.run.startTime = run.startTime;
-    this.data.run.endTime = run.endTime;
-    this.data.run.isLockedAfterEndDate = run.isLockedAfterEndDate;
-    this.data.run.lastRun = run.lastRun;
+    this.run.periods = run.periods;
+    this.run.maxStudentsPerTeam = run.maxStudentsPerTeam;
+    this.run.startTime = run.startTime;
+    this.run.endTime = run.endTime;
+    this.run.isLockedAfterEndDate = run.isLockedAfterEndDate;
+    this.run.lastRun = run.lastRun;
   }
 }

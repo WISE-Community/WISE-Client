@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+<div class="flex justify-start items-center gap-2">
   <h5 i18n>Choose a new location by clicking one of the buttons below</h5>
   <button mat-raised-button color="primary" routerLink=".." aria-label="Cancel" i18n>Cancel</button>
 </div>
@@ -13,7 +13,7 @@
       }"
       [ngStyle]="{ 'background-color': getBackgroundColor(nodeId) }"
     >
-      <div fxLayout="row" fxLayoutGap="8px">
+      <div class="flex gap-2">
         <node-icon-and-title [nodeId]="nodeId" [showPosition]="true" />
         @if (isGroupNode(nodeId)) {
           <insert-node-inside-button (insertEvent)="insert(nodeId, false)" />
@@ -28,14 +28,13 @@
     <div i18n>There are no Unused Lessons</div>
   } @else {
     @for (inactiveNode of inactiveGroupNodes; track inactiveNode.id) {
-      <div fxLayout="row" fxLayoutAlign="start center" class="lesson-header" fxLayoutGap="10px">
+      <div class="lesson-header flex justify-start items-center gap-2">
         <node-icon-and-title [nodeId]="inactiveNode.id" />
         <insert-node-inside-button (insertEvent)="insert(inactiveNode.id, false)" />
       </div>
       @for (inactiveChildId of inactiveNode.ids; track inactiveChildId) {
         <div
-          fxLayout="row"
-          class="step-header"
+          class="step-header flex"
           [ngClass]="{
             'branch-path-step-header': isNodeInAnyBranchPath(inactiveChildId)
           }"
@@ -49,7 +48,7 @@
       }
     }
   }
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <div class="flex justify-start items-center gap-2">
     <h6 class="unused-header" i18n>Unused Steps</h6>
     <insert-node-inside-button (insertEvent)="insert('inactiveNodes', false)" />
   </div>

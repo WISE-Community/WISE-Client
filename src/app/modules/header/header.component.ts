@@ -3,8 +3,6 @@ import { Router, RouterModule } from '@angular/router';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
 import { UtilService } from '../../services/util.service';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderLinksComponent } from './header-links/header-links.component';
@@ -12,19 +10,17 @@ import { HeaderAccountMenuComponent } from './header-account-menu/header-account
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        HeaderAccountMenuComponent,
-        HeaderLinksComponent,
-        MatButtonModule,
-        MatIconModule,
-        MatToolbarModule,
-        RouterModule
-    ],
-    selector: 'app-header',
-    styleUrl: './header.component.scss',
-    templateUrl: './header.component.html'
+  imports: [
+    HeaderAccountMenuComponent,
+    HeaderLinksComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    RouterModule
+  ],
+  selector: 'app-header',
+  styleUrl: './header.component.scss',
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
   protected location: string = '';

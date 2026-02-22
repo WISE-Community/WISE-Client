@@ -1,13 +1,29 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions
+} from '@angular/material/dialog';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { Router } from '@angular/router';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MilestoneDetailsComponent } from '../milestone-details/milestone-details.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'milestone-details-dialog',
-    templateUrl: './milestone-details-dialog.component.html',
-    styleUrls: ['./milestone-details-dialog.component.scss'],
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MilestoneDetailsComponent,
+    MatDialogActions,
+    MatButton
+  ],
+  selector: 'milestone-details-dialog',
+  styleUrl: './milestone-details-dialog.component.scss',
+  templateUrl: './milestone-details-dialog.component.html'
 })
 export class MilestoneDetailsDialogComponent implements OnInit {
   constructor(

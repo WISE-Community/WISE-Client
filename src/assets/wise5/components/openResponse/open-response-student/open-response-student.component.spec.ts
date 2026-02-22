@@ -1,16 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
-import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
-import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
 import { AudioRecorderService } from '../../../services/audioRecorderService';
 import { CRaterService } from '../../../services/cRaterService';
 import { NotebookService } from '../../../services/notebookService';
@@ -20,38 +11,21 @@ import { OpenResponseContent } from '../OpenResponseContent';
 import { OpenResponseService } from '../openResponseService';
 import { OpenResponseStudent } from './open-response-student.component';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { CRaterPingService } from '../../../services/cRaterPingService';
-import { MockProvider } from 'ng-mocks';
+import { MockComponent, MockProvider } from 'ng-mocks';
 
 let component: OpenResponseStudent;
 const componentId = 'component1';
 let fixture: ComponentFixture<OpenResponseStudent>;
 const nodeId = 'node1';
 const response = 'Hello World';
-
 describe('OpenResponseStudent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DialogWithoutCloseComponent, OpenResponseStudent],
-      imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
-        CommonModule,
-        ComponentHeaderComponent,
-        ComponentSaveSubmitButtonsComponent,
-        FormsModule,
-        MatDialogModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [
-        AudioRecorderService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting(),
-        MockProvider(CRaterPingService)
-      ]
+      declarations: [MockComponent(DialogWithoutCloseComponent)],
+      imports: [StudentTeacherCommonServicesModule, OpenResponseStudent],
+      providers: [AudioRecorderService, provideHttpClient(), MockProvider(CRaterPingService)]
     });
   });
 

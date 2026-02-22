@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import {
   AbstractControl,
@@ -13,27 +12,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
 import { Tag } from '../../domain/tag';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ColorChooserComponent } from '../color-chooser/color-chooser.component';
 import { TagComponent } from '../tag/tag.component';
 
 @Component({
-    imports: [
-        ColorChooserComponent,
-        CommonModule,
-        FormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        TagComponent
-    ],
-    selector: 'edit-tag',
-    styleUrl: './edit-tag.component.scss',
-    templateUrl: './edit-tag.component.html'
+  imports: [
+    ColorChooserComponent,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    TagComponent
+  ],
+  selector: 'edit-tag',
+  styleUrl: './edit-tag.component.scss',
+  templateUrl: './edit-tag.component.html'
 })
 export class EditTagComponent {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
@@ -49,7 +45,10 @@ export class EditTagComponent {
     this.createUniqueTagValidator()
   ]);
 
-  constructor(private projectTagService: ProjectTagService, private snackBar: MatSnackBar) {}
+  constructor(
+    private projectTagService: ProjectTagService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     if (this.tag != null) {

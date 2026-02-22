@@ -1,11 +1,11 @@
 <mat-card appearance="outlined" class="match-item">
-  <div fxLayout="row" fxLayoutGap="4px">
+  <div class="flex flex-row gap-1">
     @if (!isDisabled) {
       <mat-icon class="text-disabled">drag_indicator</mat-icon>
     }
     <div class="item-content" [innerHTML]="item.value"></div>
     @if (item.studentCreated) {
-      <span fxFlex></span>
+      <span class="flex-grow"></span>
     }
     @if (item.studentCreated) {
       <delete-choice-button
@@ -18,10 +18,7 @@
   </div>
   @if (item.feedback) {
     <div
-      class="feedback mat-small text-secondary-bg"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      fxLayoutGap="4px"
+      class="feedback mat-small text-secondary-bg flex flex-row justify-start items-center gap-1"
       [ngClass]="{
         'success-bg': item.status === 'correct',
         'info-bg': item.status === 'warn',

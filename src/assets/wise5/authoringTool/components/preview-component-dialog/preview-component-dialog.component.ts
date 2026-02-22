@@ -5,18 +5,15 @@ import { MatDividerModule } from '@angular/material/divider';
 import { SaveStarterStateComponent } from '../save-starter-state/save-starter-state.component';
 import { PreviewComponentComponent } from '../preview-component/preview-component.component';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 
 @Component({
   imports: [
-    CommonModule,
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,
     PreviewComponentComponent,
     SaveStarterStateComponent
   ],
-  standalone: true,
   styleUrl: 'preview-component-dialog.component.scss',
   templateUrl: 'preview-component-dialog.component.html'
 })

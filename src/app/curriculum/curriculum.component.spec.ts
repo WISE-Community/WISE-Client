@@ -16,10 +16,10 @@ describe('CurriculumComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
+      imports: [
+        CurriculumComponent,
         MockComponents(LibraryFiltersComponent, PersonalLibraryComponent, PublicLibraryComponent)
       ],
-      imports: [CurriculumComponent],
       providers: [
         MockProviders(ConfigService, UserService),
         MockProvider(LibraryService, {

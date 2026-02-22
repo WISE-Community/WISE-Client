@@ -10,12 +10,12 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
 import { CompletionService } from '../../../services/completionService';
+import { StudentSummaryDisplay } from '../../../directives/student-summary-display/student-summary-display.component';
 
 @Component({
-    selector: 'summary-student',
-    templateUrl: 'summary-student.component.html',
-    styleUrls: ['summary-student.component.scss'],
-    standalone: false
+  imports: [StudentSummaryDisplay],
+  styles: ['.prompt { font-weight: 500; padding-bottom: 8px; }'],
+  templateUrl: 'summary-student.component.html'
 })
 export class SummaryStudent extends ComponentStudent {
   chartType: string;
@@ -34,26 +34,26 @@ export class SummaryStudent extends ComponentStudent {
   warningMessage: string = '';
 
   constructor(
-    protected AnnotationService: AnnotationService,
+    protected annotationService: AnnotationService,
     private completionService: CompletionService,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    private ProjectService: ProjectService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    private projectService: ProjectService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
@@ -70,7 +70,7 @@ export class SummaryStudent extends ComponentStudent {
     if (this.componentContent.showPromptFromOtherComponent) {
       this.otherPrompt = this.getOtherPrompt(this.summaryNodeId, this.summaryComponentId);
     }
-    this.isStudent = this.ConfigService.isPreview() || this.ConfigService.isStudentRun();
+    this.isStudent = this.configService.isPreview() || this.configService.isStudentRun();
     if (this.isStudent) {
       this.otherStepTitle = this.getOtherStepTitle();
       this.isShowDisplay = this.calculateIsShowDisplay();
@@ -88,7 +88,7 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   getOtherPrompt(nodeId, componentId) {
-    const otherComponent = this.ProjectService.getComponent(nodeId, componentId);
+    const otherComponent = this.projectService.getComponent(nodeId, componentId);
     if (otherComponent != null) {
       return otherComponent.prompt;
     }
@@ -96,7 +96,7 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   isStudentHasWork() {
-    const componentStates = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
+    const componentStates = this.studentDataService.getComponentStatesByNodeIdAndComponentId(
       this.summaryNodeId,
       this.summaryComponentId
     );
@@ -162,7 +162,7 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   studentHasSubmittedWork() {
-    const componentStates = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
+    const componentStates = this.studentDataService.getComponentStatesByNodeIdAndComponentId(
       this.summaryNodeId,
       this.summaryComponentId
     );
@@ -175,7 +175,7 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   studentHasSavedWork() {
-    const componentStates = this.StudentDataService.getComponentStatesByNodeIdAndComponentId(
+    const componentStates = this.studentDataService.getComponentStatesByNodeIdAndComponentId(
       this.summaryNodeId,
       this.summaryComponentId
     );
@@ -187,13 +187,13 @@ export class SummaryStudent extends ComponentStudent {
   }
 
   getOtherStepTitle() {
-    return this.ProjectService.getNodePositionAndTitle(this.summaryNodeId);
+    return this.projectService.getNodePositionAndTitle(this.summaryNodeId);
   }
 
   setPeriodIdIfNecessary() {
-    if (this.ConfigService.isStudentRun()) {
+    if (this.configService.isStudentRun()) {
       if (this.source === 'period' && this.periodId == null) {
-        this.periodId = this.ConfigService.getPeriodId();
+        this.periodId = this.configService.getPeriodId();
       } else if (this.source === 'allPeriods') {
         this.periodId = null;
       }

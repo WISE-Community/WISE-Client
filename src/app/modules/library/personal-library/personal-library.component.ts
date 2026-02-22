@@ -2,7 +2,6 @@ import { ApplyTagsButtonComponent } from '../../../teacher/apply-tags-button/app
 import { ArchiveProjectsButtonComponent } from '../../../teacher/archive-projects-button/archive-projects-button.component';
 import { ArchiveProjectService } from '../../../services/archive-project.service';
 import { BehaviorSubject } from 'rxjs';
-import { CommonModule } from '@angular/common';
 import { Component, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LibraryComponent } from '../library/library.component';
@@ -24,7 +23,6 @@ import { ProjectFilterValues } from '../../../domain/projectFilterValues';
   imports: [
     ApplyTagsButtonComponent,
     ArchiveProjectsButtonComponent,
-    CommonModule,
     FormsModule,
     LibraryProjectComponent,
     MatDividerModule,

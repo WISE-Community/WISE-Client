@@ -27,8 +27,8 @@ let teacherDataService: TeacherDataService;
 describe('MilestoneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [
+      imports: [MatDialogModule, StudentTeacherCommonServicesModule],
+      providers: [
         ClassroomStatusService,
         CopyNodesService,
         MilestoneService,
@@ -38,8 +38,8 @@ describe('MilestoneService', () => {
         TeacherWebSocketService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     service = TestBed.inject(MilestoneService);
     achievementService = TestBed.inject(AchievementService);
     configService = TestBed.inject(ConfigService);
@@ -48,7 +48,6 @@ describe('MilestoneService', () => {
     teacherDataService = TestBed.inject(TeacherDataService);
   });
   getProjectMilestones();
-  getMilestoneReportByNodeId();
   getProjectMilestoneStatus();
   insertMilestoneItems();
   insertMilestoneCompletion();
@@ -81,63 +80,6 @@ function getProjectMilestones() {
       spyOn(projectService, 'getAchievements').and.returnValue(achievements);
       const milestones = service.getProjectMilestones();
       expect(milestones.length).toEqual(2);
-    });
-  });
-}
-
-function getMilestoneReportByNodeId() {
-  describe('getMilestoneReportByNodeId()', () => {
-    it('should get project milestone report by node id when there is none', () => {
-      const achievements = {
-        isEnabled: true,
-        items: [
-          {
-            id: 'milestone1',
-            type: 'milestone',
-            report: {
-              templates: [
-                {
-                  satisfyCriteria: [
-                    {
-                      nodeId: 'node1',
-                      componentId: 'component1'
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      };
-      spyOn(projectService, 'getAchievements').and.returnValue(achievements);
-      const milestoneReport = service.getMilestoneReportByNodeId('node2');
-      expect(milestoneReport).toBeNull();
-    });
-    it('should get project milestone report by node id when there is one', () => {
-      const achievements = {
-        isEnabled: true,
-        items: [
-          {
-            id: 'milestone1',
-            type: 'milestone',
-            report: {
-              templates: [
-                {
-                  satisfyCriteria: [
-                    {
-                      nodeId: 'node1',
-                      componentId: 'component1'
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      };
-      spyOn(projectService, 'getAchievements').and.returnValue(achievements);
-      const milestoneReport = service.getMilestoneReportByNodeId('node1');
-      expect(milestoneReport).toBeDefined();
     });
   });
 }

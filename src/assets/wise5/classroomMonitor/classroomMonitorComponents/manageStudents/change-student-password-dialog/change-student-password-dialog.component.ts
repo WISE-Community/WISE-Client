@@ -1,17 +1,51 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
 import { TeacherService } from '../../../../../../app/teacher/teacher.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NewPasswordAndConfirmComponent } from '../../../../../../app/password/new-password-and-confirm/new-password-and-confirm.component';
 import { changePasswordError } from '../../../../../../app/common/password-helper';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { PasswordModule } from '../../../../../../app/password/password.module';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'app-change-student-password-dialog',
-    templateUrl: './change-student-password-dialog.component.html',
-    styleUrls: ['./change-student-password-dialog.component.scss'],
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    PasswordModule,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
+    MatProgressBar
+  ],
+  selector: 'app-change-student-password-dialog',
+  styles: ['form { margin-top: 16px; }'],
+  templateUrl: './change-student-password-dialog.component.html'
 })
 export class ChangeStudentPasswordDialogComponent implements OnInit {
   canViewStudentNames: boolean;

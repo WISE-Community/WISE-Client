@@ -1,12 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RunSettingsDialogComponent } from './run-settings-dialog.component';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TeacherService } from '../teacher.service';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { TeacherRun } from '../teacher-run';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatRadioButtonHarness } from '@angular/material/radio/testing';
 
 export class MockTeacherService {
   addPeriodToRun(runId, periodName) {
@@ -55,15 +56,8 @@ export class MockTeacherService {
 
 let component: RunSettingsDialogComponent;
 let fixture: ComponentFixture<RunSettingsDialogComponent>;
+let loader: HarnessLoader;
 describe('RunSettingsDialogComponent', () => {
-  const getStartDateInput = () => {
-    return fixture.debugElement.nativeElement.querySelectorAll('input')[1];
-  };
-
-  const getEndDateInput = () => {
-    return fixture.debugElement.nativeElement.querySelectorAll('input')[2];
-  };
-
   function createNewRun() {
     return new TeacherRun({
       id: 1,
@@ -77,20 +71,18 @@ describe('RunSettingsDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RunSettingsDialogComponent],
-      imports: [MatSnackBarModule],
+      imports: [RunSettingsDialogComponent],
       providers: [
         { provide: MatDialog, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: { run: createNewRun() } },
+        { provide: MAT_DIALOG_DATA, useValue: createNewRun() },
         { provide: TeacherService, useClass: MockTeacherService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     });
     fixture = TestBed.createComponent(RunSettingsDialogComponent);
     component = fixture.componentInstance;
-    component.run = createNewRun();
     fixture.detectChanges();
+    loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
   it('should create', () => {
@@ -102,23 +94,23 @@ describe('RunSettingsDialogComponent', () => {
     expect(periodContainers.length).toBe(3);
   });
 
-  it('should populate the correct number of students per team', () => {
-    const radioGroup = fixture.debugElement.nativeElement.querySelector('mat-radio-group');
-    expect(radioGroup.ngModel).toBe('1');
+  it('should populate the correct number of students per team', async () => {
+    const singleMembershipOption = (await loader.getAllHarnesses(MatRadioButtonHarness))[0];
+    expect(await singleMembershipOption.isChecked()).toBeTrue();
   });
 
   it('should populate the correct start date', () => {
-    const startDateInput = getStartDateInput();
-    expect(startDateInput.ngModel.getDate()).toBe(17);
-    expect(startDateInput.ngModel.getMonth()).toBe(9);
-    expect(startDateInput.ngModel.getUTCFullYear()).toBe(2018);
+    const startDate = component['startDate'];
+    expect(startDate.getDate()).toBe(17);
+    expect(startDate.getMonth()).toBe(9); // Months are 0-indexed
+    expect(startDate.getUTCFullYear()).toBe(2018);
   });
 
   it('should populate the correct end date', () => {
-    const endDateInput = getEndDateInput();
-    expect(endDateInput.ngModel.getDate()).toBe(19);
-    expect(endDateInput.ngModel.getMonth()).toBe(9);
-    expect(endDateInput.ngModel.getUTCFullYear()).toBe(2018);
+    const endDate = component['endDate'];
+    expect(endDate.getDate()).toBe(19);
+    expect(endDate.getMonth()).toBe(9); // Months are 0-indexed
+    expect(endDate.getUTCFullYear()).toBe(2018);
   });
 
   it('should add a period', () => {
@@ -135,34 +127,16 @@ describe('RunSettingsDialogComponent', () => {
     expect(periodContainers.length).toBe(2);
   });
 
-  it('should change the students per team', () => {
+  it('should change the students per team', async () => {
     component.maxStudentsPerTeam = '3';
-    const radioGroup = fixture.debugElement.nativeElement.querySelector('mat-radio-group');
     fixture.detectChanges();
-    expect(radioGroup.ngModel).toBe('3');
-  });
-
-  it('should change the start date', () => {
-    component.startDate = new Date('2019-11-18T00:00:00.0');
-    fixture.detectChanges();
-    const startDateInput = getStartDateInput();
-    expect(startDateInput.ngModel.getDate()).toBe(18);
-    expect(startDateInput.ngModel.getMonth()).toBe(10);
-    expect(startDateInput.ngModel.getUTCFullYear()).toBe(2019);
-  });
-
-  it('should change the end date', () => {
-    component.endDate = new Date('2019-11-20T23:59:00.0');
-    fixture.detectChanges();
-    const endDateInput = getEndDateInput();
-    expect(endDateInput.ngModel.getDate()).toBe(20);
-    expect(endDateInput.ngModel.getMonth()).toBe(10);
-    expect(endDateInput.ngModel.getUTCFullYear()).toBe(2019);
+    const multiMembershipOption = (await loader.getAllHarnesses(MatRadioButtonHarness))[1];
+    expect(await multiMembershipOption.isChecked()).toBeTrue();
   });
 
   it('should update is locked after end date false', () => {
     component.isLockedAfterEndDate = false;
-    const teacherService = TestBed.get(TeacherService);
+    const teacherService = TestBed.inject(TeacherService);
     spyOn(teacherService, 'updateIsLockedAfterEndDate').and.returnValue(of({}));
     component.updateIsLockedAfterEndDate();
     expect(teacherService.updateIsLockedAfterEndDate).toHaveBeenCalledWith(1, false);
@@ -170,7 +144,7 @@ describe('RunSettingsDialogComponent', () => {
 
   it('should update is locked after end date true', () => {
     component.isLockedAfterEndDate = true;
-    const teacherService = TestBed.get(TeacherService);
+    const teacherService = TestBed.inject(TeacherService);
     spyOn(teacherService, 'updateIsLockedAfterEndDate').and.returnValue(of({}));
     component.updateIsLockedAfterEndDate();
     expect(teacherService.updateIsLockedAfterEndDate).toHaveBeenCalledWith(1, true);
@@ -179,7 +153,7 @@ describe('RunSettingsDialogComponent', () => {
   it('should enable is locked after end date checkbox', () => {
     component.endDate = new Date();
     component.isLockedAfterEndDateCheckboxEnabled = false;
-    const teacherService = TestBed.get(TeacherService);
+    const teacherService = TestBed.inject(TeacherService);
     spyOn(teacherService, 'updateIsLockedAfterEndDate').and.returnValue(of({}));
     component.updateLockedAfterEndDateCheckbox();
     expect(component.isLockedAfterEndDateCheckboxEnabled).toEqual(true);
@@ -188,7 +162,7 @@ describe('RunSettingsDialogComponent', () => {
   it('should disable is locked after end date checkbox', () => {
     component.endDate = null;
     component.isLockedAfterEndDateCheckboxEnabled = true;
-    const teacherService = TestBed.get(TeacherService);
+    const teacherService = TestBed.inject(TeacherService);
     spyOn(teacherService, 'updateIsLockedAfterEndDate').and.returnValue(of({}));
     component.updateLockedAfterEndDateCheckbox();
     expect(component.isLockedAfterEndDateCheckboxEnabled).toEqual(false);

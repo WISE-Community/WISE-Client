@@ -14,14 +14,12 @@ import { MainMenuComponent } from '../common/main-menu/main-menu.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { SideMenuComponent } from '../common/side-menu/side-menu.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   imports: [
     AuthoringToolBarComponent,
     CommonModule,
-    FlexLayoutModule,
     MainMenuComponent,
     MatSidenavModule,
     RouterModule,

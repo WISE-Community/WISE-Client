@@ -1,17 +1,45 @@
-import { ConfigService } from '../../services/configService';
-import { TeacherProjectService } from '../../services/teacherProjectService';
-import { NotificationService } from '../../services/notificationService';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component } from '@angular/core';
-import { isValidJSONString } from '../../common/string/string';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { AssetChooser } from '../project-asset-authoring/asset-chooser';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { filter } from 'rxjs/operators';
+import { isValidJSONString } from '../../common/string/string';
+import { ConfigService } from '../../services/configService';
+import { NotificationService } from '../../services/notificationService';
+import { TeacherProjectService } from '../../services/teacherProjectService';
+import { AssetChooser } from '../project-asset-authoring/asset-chooser';
+import { RubricAuthoringComponent } from '../rubric/rubric-authoring.component';
 
 @Component({
-    selector: 'advanced-project-authoring',
-    templateUrl: 'advanced-project-authoring.component.html',
-    styleUrls: ['./advanced-project-authoring.component.scss'],
-    standalone: false
+  imports: [
+    CdkTextareaAutosize,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatRadioModule,
+    MatTooltipModule,
+    RubricAuthoringComponent
+  ],
+  styles: [
+    `
+      .rubric-div {
+        margin-bottom: 20px;
+      }
+
+      .mat-icon {
+        margin: 0px;
+      }
+    `
+  ],
+  templateUrl: 'advanced-project-authoring.component.html'
 })
 export class AdvancedProjectAuthoringComponent {
   protected jsonDisplayed: boolean;
@@ -30,7 +58,7 @@ export class AdvancedProjectAuthoringComponent {
     this.projectId = this.configService.getProjectId();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setProjectScriptFilename();
   }
 

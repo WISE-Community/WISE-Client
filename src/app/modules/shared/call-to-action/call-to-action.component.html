@@ -1,42 +1,40 @@
 <ng-template #linkContent>
-  <div
-    *ngIf="headline || headlineRef"
-    class="cta__headline primary flex items-center justify-center"
-  >
-    <span *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"></span>
-    <span class="flex-1"></span>
-    <mat-icon color="primary">add_circle</mat-icon>
-  </div>
+  @if (headline || headlineRef) {
+    <div class="cta__headline primary flex items-center justify-center">
+      <span *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"></span>
+      <span class="flex-1"></span>
+      <mat-icon color="primary">add_circle</mat-icon>
+    </div>
+  }
   <div>
-    <mat-icon
-      *ngIf="isSvgIcon"
-      class="cta__icon"
-      [ngClass]="iconColor"
-      svgIcon="{{ icon }}"
-    ></mat-icon>
-    <mat-icon *ngIf="!isSvgIcon" class="cta__icon" [ngClass]="iconColor">{{ icon }}</mat-icon>
+    @if (isSvgIcon) {
+      <mat-icon class="cta__icon" [ngClass]="iconColor" svgIcon="{{ icon }}"></mat-icon>
+    }
+    @if (!isSvgIcon) {
+      <mat-icon class="cta__icon" [ngClass]="iconColor">{{ icon }}</mat-icon>
+    }
     <ng-template #defaultHeadline>{{ headline }}</ng-template>
     <ng-template #defaultContent>{{ content }}</ng-template>
-    <div *ngIf="content || contentRef" class="cta__tagline mat-subtitle-2">
-      <span *ngTemplateOutlet="contentRef ? contentRef : defaultContent"></span>
-    </div>
+    @if (content || contentRef) {
+      <div class="cta__tagline mat-subtitle-2">
+        <span *ngTemplateOutlet="contentRef ? contentRef : defaultContent"></span>
+      </div>
+    }
   </div>
 </ng-template>
 
-<a
-  *ngIf="isOutsideLink"
-  mat-raised-button
-  class="cta"
-  href="{{ destination }}"
-  target="{{ linkTarget }}"
->
-  <div class="cta__wrap">
-    <span *ngTemplateOutlet="linkContent"></span>
-  </div>
-</a>
+@if (isOutsideLink) {
+  <a mat-raised-button class="cta" href="{{ destination }}" target="{{ linkTarget }}">
+    <div class="cta__wrap">
+      <span *ngTemplateOutlet="linkContent"></span>
+    </div>
+  </a>
+}
 
-<a *ngIf="!isOutsideLink" mat-raised-button class="cta" routerLink="{{ destination }}">
-  <div class="cta__wrap">
-    <span *ngTemplateOutlet="linkContent"></span>
-  </div>
-</a>
+@if (!isOutsideLink) {
+  <a mat-raised-button class="cta" routerLink="{{ destination }}">
+    <div class="cta__wrap">
+      <span *ngTemplateOutlet="linkContent"></span>
+    </div>
+  </a>
+}

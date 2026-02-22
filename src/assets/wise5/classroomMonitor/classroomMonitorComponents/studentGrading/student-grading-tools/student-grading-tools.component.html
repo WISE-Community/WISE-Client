@@ -1,4 +1,4 @@
-<div fxLayoutAlign="center center" fxLayoutGap="4px">
+<div class="flex justify-center items-center gap-1">
   <button
     mat-icon-button
     [disabled]="!prevWorkgroup"
@@ -9,7 +9,9 @@
   >
     <mat-icon>chevron_left</mat-icon>
   </button>
-  <mat-icon class="mat-30" fxHide.xs style="color: {{ avatarColor }};"> account_circle </mat-icon>
+  <mat-icon class="mat-30 hidden sm:block" style="color: {{ avatarColor }};">
+    account_circle
+  </mat-icon>
   <workgroup-select-autocomplete />
   <button
     mat-icon-button

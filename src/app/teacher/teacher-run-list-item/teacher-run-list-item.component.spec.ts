@@ -1,20 +1,10 @@
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
 import { ArchiveProjectService } from '../../services/archive-project.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigService } from '../../services/config.service';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs';
 import { ProjectTagService } from '../../../assets/wise5/services/projectTagService';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { RunMenuComponent } from '../run-menu/run-menu.component';
 import { TeacherRun } from '../teacher-run';
 import { TeacherRunListItemComponent } from './teacher-run-list-item.component';
 import { TeacherRunListItemHarness } from './teacher-run-list-item.harness';
@@ -22,6 +12,8 @@ import { TeacherService } from '../teacher.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { User } from '../../domain/user';
 import { UserService } from '../../services/user.service';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 
 export class MockTeacherService {}
 
@@ -52,25 +44,16 @@ let userService: UserService;
 describe('TeacherRunListItemComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [RunMenuComponent, TeacherRunListItemComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatDialogModule,
-        MatIconModule,
-        MatMenuModule,
-        MatSnackBarModule,
-        RouterTestingModule
-      ],
+      imports: [TeacherRunListItemComponent],
       providers: [
         ArchiveProjectService,
+        provideAnimations(),
         { provide: ConfigService, useClass: MockConfigService },
         ProjectTagService,
         { provide: TeacherService, useClass: MockTeacherService },
         UserService,
         provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideRouter([])
       ]
     });
     http = TestBed.inject(HttpClient);

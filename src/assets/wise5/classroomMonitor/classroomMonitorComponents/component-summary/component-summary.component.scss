@@ -1,0 +1,28 @@
+.component-summary {
+  .notice {
+    max-width: none;
+    margin: 0;
+  }
+
+  .mat-body-1 {
+    margin-bottom: 0;
+  }
+
+  .mat-mdc-card-content:last-child {
+    padding-bottom: 12px;
+  }
+
+  .mat-mdc-card-content:first-child {
+    padding-top: 12px;
+  }
+
+  .mat-mdc-card-content {
+    padding: 0 12px;
+  }
+
+  milestone-report-button > *,
+  peer-group-button > * {
+    margin-top: 12px;
+    margin-inline-end: 8px;
+  }
+}

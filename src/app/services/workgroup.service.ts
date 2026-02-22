@@ -5,11 +5,14 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 
 @Injectable()
 export class WorkgroupService {
-  constructor(private ConfigService: ConfigService, private http: HttpClient) {}
+  constructor(
+    private ConfigService: ConfigService,
+    private http: HttpClient
+  ) {}
   getWorkgroupsInPeriod(periodId: number): Map<number, any> {
     const workgroups = new Map();
     for (const workgroup of this.getWorkgroupsSortedById()) {
-      if (workgroup.periodId === periodId && workgroup.workgroupId != null) {
+      if (periodId === -1 || (workgroup.periodId === periodId && workgroup.workgroupId != null)) {
         workgroup.displayNames = this.ConfigService.getDisplayUsernamesByWorkgroupId(
           workgroup.workgroupId
         );

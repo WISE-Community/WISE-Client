@@ -1,14 +1,25 @@
+@if (showDetectedIdeas) {
+  <div class="flex justify-end mb-4">
+    <show-crater-rubric [cRaterRubric]="cRaterRubric" />
+  </div>
+}
 <div class="component--grading__response__content" [innerHTML]="studentResponse"></div>
-<div
-  class="component__attachment"
-  *ngFor="let audioAttachment of audioAttachments"
-  fxLayout="row"
-  fxLayoutAlign="start center"
->
-  <audio controls>
-    <source [src]="audioAttachment.url" type="audio/webm" />
-  </audio>
-</div>
-<div class="component__attachment" *ngFor="let otherAttachment of otherAttachments">
-  <img [src]="otherAttachment.iconURL" class="component__attachment__content" />
-</div>
+@for (audioAttachment of audioAttachments; track audioAttachment) {
+  <div class="component__attachment flex items-center justify-start">
+    <audio controls>
+      <source [src]="audioAttachment.url" type="audio/webm" />
+    </audio>
+  </div>
+}
+@for (otherAttachment of otherAttachments; track otherAttachment) {
+  <div class="component__attachment">
+    <img [src]="otherAttachment.iconURL" class="component__attachment__content" />
+  </div>
+}
+@if (showDetectedIdeas) {
+  <detected-ideas
+    [cRaterRubric]="cRaterRubric"
+    [responses]="[cRaterAnnotation.data]"
+    class="block mt-4"
+  />
+}

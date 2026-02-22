@@ -1,9 +1,4 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ConfigService } from '../../../services/configService';
 import { ProjectService } from '../../../services/projectService';
@@ -11,25 +6,25 @@ import { StudentDataService } from '../../../services/studentDataService';
 import { SummaryStudent } from './summary-student.component';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { Component } from '../../../common/Component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockComponent } from 'ng-mocks';
+import { StudentSummaryDisplay } from '../../../directives/student-summary-display/student-summary-display.component';
 
 let component: SummaryStudent;
 const componentId = 'component1';
 let fixture: ComponentFixture<SummaryStudent>;
 const nodeId = 'node1';
 const otherStepTitle = 'Choose your favorite ice cream';
-
 describe('SummaryStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [SummaryStudent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserModule,
-        MatDialogModule,
-        NoopAnimationsModule,
-        StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [
+        StudentTeacherCommonServicesModule,
+        MockComponent(StudentSummaryDisplay),
+        SummaryStudent
+      ],
+      providers: [provideHttpClient()]
+    });
     fixture = TestBed.createComponent(SummaryStudent);
     component = fixture.componentInstance;
     const componentContent = {

@@ -1,10 +1,12 @@
 <div class="register-home">
-  <p *ngIf="googleUserNotFoundError" class="mat-subtitle-1 warn center" i18n>
-    Sorry, your Google User ID was not found in WISE.
-  </p>
-  <p *ngIf="microsoftUserNotFoundError" class="mat-subtitle-1 warn center" i18n>
-    Sorry, your Microsoft User ID was not found in WISE.
-  </p>
+  @if (googleUserNotFoundError) {
+    <p class="mat-subtitle-1 warn center" i18n>Sorry, your Google User ID was not found in WISE.</p>
+  }
+  @if (microsoftUserNotFoundError) {
+    <p class="mat-subtitle-1 warn center" i18n>
+      Sorry, your Microsoft User ID was not found in WISE.
+    </p>
+  }
   <h1 class="standalone__title accent" i18n>Create WISE Account</h1>
   <div class="flex flex-col sm:flex-row items-center justify-center standalone__content register">
     <app-call-to-action
@@ -16,7 +18,7 @@
       i18n-content
       content="Students can view and complete WISE lessons offered by teachers."
       destination="student"
-    ></app-call-to-action>
+    />
     <app-call-to-action
       class="w-full sm:w-auto"
       icon="school"
@@ -26,6 +28,6 @@
       i18n-content
       content="Teachers can select, author, and run WISE lessons with their students."
       destination="teacher"
-    ></app-call-to-action>
+    />
   </div>
 </div>

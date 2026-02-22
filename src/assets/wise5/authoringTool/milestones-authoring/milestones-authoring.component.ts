@@ -1,13 +1,37 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Subject, debounceTime } from 'rxjs';
 import { generateRandomKey } from '../../common/string/string';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { Subject, debounceTime } from 'rxjs';
+import { TranslatableInputComponent } from '../components/translatable-input/translatable-input.component';
+import { TranslatableTextareaComponent } from '../components/translatable-textarea/translatable-textarea.component';
 
 @Component({
-    selector: 'milestones-authoring',
-    templateUrl: './milestones-authoring.component.html',
-    styleUrls: ['./milestones-authoring.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatSlideToggleModule,
+    TranslatableInputComponent,
+    TranslatableTextareaComponent
+  ],
+  styleUrl: './milestones-authoring.component.scss',
+  templateUrl: './milestones-authoring.component.html'
 })
 export class MilestonesAuthoringComponent {
   availableSatisfyCriteria: any[] = [{ value: 'isCompleted', text: 'Is Completed' }];

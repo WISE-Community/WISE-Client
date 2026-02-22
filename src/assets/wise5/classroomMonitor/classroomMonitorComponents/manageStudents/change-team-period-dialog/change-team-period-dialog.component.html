@@ -6,21 +6,24 @@
       >:</span
     >
     <ul class="student-names mat-small">
-      <li *ngFor="let user of team.users; last as isLast; first as isFirst">
-        <ng-container *ngIf="canViewStudentNames"
-          >{{ user.name }} ({{ user.username }})</ng-container
-        >
-        <ng-container *ngIf="!canViewStudentNames" i18n>Student {{ user.id }}</ng-container>
-      </li>
+      @for (user of team.users; track user; let isLast = $last; let isFirst = $first) {
+        <li>
+          @if (canViewStudentNames) {
+            {{ user.name }} ({{ user.username }})
+          } @else {
+            <ng-container i18n>Student {{ user.id }}</ng-container>
+          }
+        </li>
+      }
     </ul>
   </div>
   <form [formGroup]="selectPeriodForm">
     <mat-form-field appearance="fill" class="change-team-period-form-field">
       <mat-label i18n>Choose Period</mat-label>
       <mat-select formControlName="period" [(value)]="selectedPeriod">
-        <mat-option *ngFor="let period of periods" [value]="period">{{
-          period.periodName
-        }}</mat-option>
+        @for (period of periods; track period) {
+          <mat-option [value]="period">{{ period.periodName }}</mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </form>
@@ -34,7 +37,9 @@
     [disabled]="selectPeriodForm.invalid || isChangingPeriod"
     class="button--progress"
   >
-    <mat-progress-bar *ngIf="isChangingPeriod" mode="indeterminate"></mat-progress-bar>
+    @if (isChangingPeriod) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
     <ng-container i18n>Confirm</ng-container>
   </button>
 </mat-dialog-actions>

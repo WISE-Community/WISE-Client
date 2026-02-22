@@ -10,26 +10,22 @@ import { MatDivider } from '@angular/material/divider';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatButton } from '@angular/material/button';
 import { PasswordModule } from '../../../password/password.module';
-import { NgIf } from '@angular/common';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-    templateUrl: './forgot-student-password-change.component.html',
-    styleUrl: './forgot-student-password-change.component.scss',
-    imports: [
-        MatCard,
-        MatCardContent,
-        FormsModule,
-        FlexModule,
-        ReactiveFormsModule,
-        NgIf,
-        PasswordModule,
-        MatButton,
-        MatProgressBar,
-        MatDivider,
-        RouterLink
-    ]
+  templateUrl: './forgot-student-password-change.component.html',
+  styleUrl: './forgot-student-password-change.component.scss',
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    ReactiveFormsModule,
+    PasswordModule,
+    MatButton,
+    MatProgressBar,
+    MatDivider,
+    RouterLink
+  ]
 })
 export class ForgotStudentPasswordChangeComponent {
   @Input() answer: string;

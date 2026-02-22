@@ -1,16 +1,34 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { Subject, debounceTime } from 'rxjs';
+import { UserService } from '../../../../app/services/user.service';
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { MatDialog } from '@angular/material/dialog';
-import { Subject, debounceTime } from 'rxjs';
+import { TranslatableInputComponent } from '../components/translatable-input/translatable-input.component';
+import { TranslatableTextareaComponent } from '../components/translatable-textarea/translatable-textarea.component';
+import { EditUnitResourcesComponent } from '../edit-unit-resources/edit-unit-resources.component';
+import { EditUnitTypeComponent } from '../edit-unit-type/edit-unit-type.component';
 import { AssetChooser } from '../project-asset-authoring/asset-chooser';
-import { UserService } from '../../../../app/services/user.service';
+import { EditProjectLanguageSettingComponent } from '../project-info/edit-project-language-setting/edit-project-language-setting.component';
 
 @Component({
-  selector: 'project-info-authoring',
-  templateUrl: './project-info-authoring.component.html',
-  styleUrls: ['./project-info-authoring.component.scss'],
-  standalone: false
+  imports: [
+    EditProjectLanguageSettingComponent,
+    EditUnitResourcesComponent,
+    EditUnitTypeComponent,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    TranslatableInputComponent,
+    TranslatableTextareaComponent
+  ],
+  styleUrl: './project-info-authoring.component.scss',
+  templateUrl: './project-info-authoring.component.html'
 })
 export class ProjectInfoAuthoringComponent {
   isEditingProjectIcon: boolean = false;

@@ -1,35 +1,11 @@
-@use '@angular/material' as mat;
-@use 'style/abstracts/variables';
-
-@mixin selected {
-  background-color: #000000;
-  color: #FFFFFF;
-}
-
 .preview-icon {
   color: #ffffff;
 }
 
-.mat-mdc-chip {
-  cursor: pointer;
-}
-
-.icon-choice {
-  padding: 6px;
-  border-radius: variables.$button-border-radius;
-}
-
-.icon-choice, .ki-choice {
-  /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
-  &.mat-chip-selected {
-    @include selected;
-  }
+.custom-icon {
+  vertical-align: middle;
 }
 
 .color-choice {
   width: 32px;
-  /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
-  &.mat-chip-selected {
-    border: 4px solid #000000;
-  }
 }

@@ -1,36 +1,38 @@
-<edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()">
-</edit-connected-components-add-button>
-<div
-  *ngFor="let connectedComponent of connectedComponents; index as connectedComponentIndex"
-  class="connected-components-div"
->
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <edit-connected-component-default-selects
-      [connectedComponent]="connectedComponent"
-      [componentId]="componentId"
-      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-      (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
-      (connectedComponentComponentIdChange)="
-        connectedComponentComponentIdChanged(connectedComponent)
-      "
-      (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
-    >
-    </edit-connected-component-default-selects>
-    <div *ngIf="canConnectedComponentTypeImportWorkAsBackground(connectedComponent)">
-      <mat-checkbox
-        [(ngModel)]="connectedComponent.importWorkAsBackground"
-        (ngModelChange)="connectedComponentChanged()"
-        [disabled]="true"
-        i18n
-      >
-        Import Work As Background
-      </mat-checkbox>
+<edit-connected-components-add-button (connectedComponentsChanged)="addConnectedComponent()" />
+@for (
+  connectedComponent of connectedComponents;
+  track connectedComponent;
+  let connectedComponentIndex = $index
+) {
+  <div class="connected-components-div">
+    <div class="flex flex-row flex-wrap justify-start items-center gap-5">
+      <edit-connected-component-default-selects
+        [connectedComponent]="connectedComponent"
+        [componentId]="componentId"
+        [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+        (connectedComponentNodeIdChange)="connectedComponentNodeIdChanged(connectedComponent)"
+        (connectedComponentComponentIdChange)="
+          connectedComponentComponentIdChanged(connectedComponent)
+        "
+        (connectedComponentTypeChange)="connectedComponentTypeChanged(connectedComponent)"
+      />
+      @if (canConnectedComponentTypeImportWorkAsBackground(connectedComponent)) {
+        <div>
+          <mat-checkbox
+            [(ngModel)]="connectedComponent.importWorkAsBackground"
+            (ngModelChange)="connectedComponentChanged()"
+            [disabled]="true"
+            i18n
+          >
+            Import Work As Background
+          </mat-checkbox>
+        </div>
+      }
+      <span class="w-full"></span>
+      <edit-connected-component-delete-button
+        [connectedComponentIndex]="connectedComponentIndex"
+        (connectedComponentChange)="deleteConnectedComponent(index)"
+      />
     </div>
-    <span fxFlex></span>
-    <edit-connected-component-delete-button
-      [connectedComponentIndex]="connectedComponentIndex"
-      (connectedComponentChange)="deleteConnectedComponent(index)"
-    >
-    </edit-connected-component-delete-button>
   </div>
-</div>
+}

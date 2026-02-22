@@ -9,7 +9,6 @@ import { ComponentState } from '../../../../../../app/domain/componentState';
 import { Container } from '../container';
 import { copy } from '../../../../common/object/object';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { Item } from '../item';
 import { MatchCdkDragDrop } from '../MatchCdkDragDrop';
 import { MatchChoiceItemComponent } from '../../match-choice-item/match-choice-item.component';
@@ -25,7 +24,6 @@ import { moveItem } from '../move-item';
     ComponentHeaderComponent,
     ComponentSaveSubmitButtonsComponent,
     DragDropModule,
-    FlexLayoutModule,
     MatchChoiceItemComponent,
     MatchFeedbackSectionComponent
   ],

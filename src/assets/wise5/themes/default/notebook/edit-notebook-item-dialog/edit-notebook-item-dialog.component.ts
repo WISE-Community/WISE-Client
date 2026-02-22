@@ -6,12 +6,35 @@ import { generateRandomKey } from '../../../../common/string/string';
 import { ConfigService } from '../../../../services/configService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentAssetService } from '../../../../services/studentAssetService';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { WiseLinkComponent } from '../../../../directives/wise-link/wise-link.component';
+import { CommonModule } from '@angular/common';
+import { DragAndDropDirective } from '../../../../common/drag-and-drop/drag-and-drop.directive';
 
 @Component({
-    selector: 'edit-notebook-item-dialog',
-    templateUrl: './edit-notebook-item-dialog.component.html',
-    styleUrls: ['./edit-notebook-item-dialog.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    DragAndDropDirective,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    WiseLinkComponent
+  ],
+  styleUrl: './edit-notebook-item-dialog.component.scss',
+  templateUrl: './edit-notebook-item-dialog.component.html'
 })
 export class EditNotebookItemDialogComponent implements OnInit {
   color: any;
@@ -34,12 +57,12 @@ export class EditNotebookItemDialogComponent implements OnInit {
   title: string;
 
   constructor(
+    private assetService: StudentAssetService,
     private configService: ConfigService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<EditNotebookItemDialogComponent>,
     private fb: FormBuilder,
-    private projectService: ProjectService,
-    private studentAssetService: StudentAssetService
+    private projectService: ProjectService
   ) {
     this.nodeId = this.data.nodeId;
     this.file = this.data.file;
@@ -120,7 +143,7 @@ export class EditNotebookItemDialogComponent implements OnInit {
     }
   }
 
-  intitializeForm(): void {
+  private intitializeForm(): void {
     this.noteFormGroup = this.fb.group({
       text: new FormControl('')
     });
@@ -133,11 +156,11 @@ export class EditNotebookItemDialogComponent implements OnInit {
     }
   }
 
-  isSharedWithClass(): boolean {
+  protected isSharedWithClass(): boolean {
     return this.item.groups != null && this.item.groups.includes('public');
   }
 
-  toggleMakeNotePublic(): void {
+  protected toggleMakeNotePublic(): void {
     if (this.item.groups == null) {
       this.item.groups = [];
     }
@@ -154,13 +177,13 @@ export class EditNotebookItemDialogComponent implements OnInit {
     this.update();
   }
 
-  copyPublicNotebookItem(ev): void {
+  protected copyPublicNotebookItem(ev): void {
     ev.stopPropagation();
     this.data.copyNotebookItem(this.itemId);
     this.dialogRef.close();
   }
 
-  attachStudentAssetToNote(file: any): void {
+  protected attachStudentAssetToNote(file: any): void {
     const attachment: any = {
       studentAssetId: null,
       iconURL: '',
@@ -180,15 +203,15 @@ export class EditNotebookItemDialogComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  getItemNodeId(): string {
+  protected getItemNodeId(): string {
     return this.item == null ? null : this.item.nodeId;
   }
 
-  getItemNodeLink(): string {
+  protected getItemNodeLink(): string {
     return this.item == null ? '' : this.projectService.getNodePositionAndTitle(this.item.nodeId);
   }
 
-  removeAttachment(attachment: any): void {
+  protected removeAttachment(attachment: any): void {
     if (this.item.content.attachments.indexOf(attachment) != -1) {
       this.item.content.attachments.splice(this.item.content.attachments.indexOf(attachment), 1);
       this.update();
@@ -218,8 +241,8 @@ export class EditNotebookItemDialogComponent implements OnInit {
           // this attachment hasn't been uploaded yet, so we'll do that now.
           let file = attachment.file;
           const promise = new Promise((resolve, reject) => {
-            this.studentAssetService.uploadAsset(file).then((studentAsset) => {
-              this.studentAssetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
+            this.assetService.uploadAsset(file).then((studentAsset) => {
+              this.assetService.copyAssetForReference(studentAsset).then((copiedAsset) => {
                 if (copiedAsset != null) {
                   var newAttachment = {
                     studentAssetId: copiedAsset.id,

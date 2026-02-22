@@ -1,10 +1,9 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
 import { ManageShowStudentInfoComponent } from './manage-show-student-info.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 class ConfigServiceStub {
   getPermissions() {}
@@ -19,15 +18,14 @@ const user: any = {};
 describe('ManageShowStudentInfoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ManageShowStudentInfoComponent],
-    imports: [BrowserAnimationsModule, MatDialogModule],
-    providers: [
+      imports: [ManageShowStudentInfoComponent],
+      providers: [
         { provide: ConfigService, useClass: ConfigServiceStub },
         { provide: MAT_DIALOG_DATA, useValue: user },
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     configService = TestBed.inject(ConfigService);
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(ManageShowStudentInfoComponent);

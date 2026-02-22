@@ -3,13 +3,33 @@ import { bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn } from '../a
 import { DomSanitizer } from '@angular/platform-browser';
 import { ConfigService } from '../services/config.service';
 import { Config } from '../domain/config';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { HeroSectionComponent } from '../modules/shared/hero-section/hero-section.component';
+import { MatIcon } from '@angular/material/icon';
+import { DiscourseLatestNewsComponent } from './discourse-latest-news/discourse-latest-news.component';
+import { NgClass } from '@angular/common';
+import { BlurbComponent } from '../modules/shared/blurb/blurb.component';
+import { HomePageProjectLibraryComponent } from '../modules/library/home-page-project-library/home-page-project-library.component';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
+import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn],
-    standalone: false
+  animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn],
+  imports: [
+    HeroSectionComponent,
+    MatIcon,
+    DiscourseLatestNewsComponent,
+    NgClass,
+    BlurbComponent,
+    HomePageProjectLibraryComponent,
+    MatButton,
+    RouterLink,
+    CallToActionComponent
+  ],
+  selector: 'app-home',
+  styleUrl: './home.component.scss',
+  templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
   discourseNewsCategory: string;
@@ -41,7 +61,7 @@ export class HomeComponent implements OnInit {
     startTag: '<a href="http://www.nextgenscience.org/three-dimensions" target="_blank">',
     closeTag: '</a>'
   };
-  blurbs: Array<Object> = [
+  blurbs: Array<any> = [
     {
       imgSrc: 'assets/img/wise-students-building@2x.jpg',
       imgDescription: $localize`WISE students building`,
@@ -92,8 +112,17 @@ export class HomeComponent implements OnInit {
       content: $localize`Robust teacher grading and management tools supporting individualized and customized learning`
     }
   ];
+  protected smScreen: boolean;
 
-  constructor(private configService: ConfigService, private sanitizer: DomSanitizer) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private configService: ConfigService,
+    private sanitizer: DomSanitizer
+  ) {
+    this.breakpointObserver.observe(['(min-width: 40rem)']).subscribe((result) => {
+      this.smScreen = result.matches;
+    });
+  }
 
   ngOnInit() {
     this.configService.getConfig().subscribe((config: Config) => {

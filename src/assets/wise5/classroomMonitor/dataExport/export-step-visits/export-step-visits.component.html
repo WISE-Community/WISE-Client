@@ -14,59 +14,67 @@
       <h5 i18n>Export Step Visit Events</h5>
       <div class="top-explanations-buttons">
         <button mat-raised-button color="primary" (click)="toggleColumnExplanations()">
-          <ng-container *ngIf="isShowColumnExplanations; else isHidingColumnExplanationsTop" i18n>
-            Hide Column Explanations
-          </ng-container>
-          <ng-template #isHidingColumnExplanationsTop i18n> Show Column Explanations </ng-template>
+          @if (isShowColumnExplanations) {
+            <ng-container i18n> Hide Column Explanations </ng-container>
+          } @else {
+            <ng-container i18n> Show Column Explanations </ng-container>
+          }
         </button>
       </div>
-      <div *ngIf="isShowColumnExplanations">
-        <table>
-          <tr>
-            <th class="explanation-column-name" i18n>Column Name</th>
-            <th i18n>Explanation</th>
-          </tr>
-          <tr *ngFor="let columnExplanation of columnExplanations">
-            <td>{{ columnExplanation.name }}</td>
-            <td>{{ columnExplanation.explanation }}</td>
-          </tr>
-        </table>
-        <div class="bottom-explanations-buttons">
-          <button mat-raised-button color="primary" (click)="toggleColumnExplanations()" i18n>
-            Hide Column Explanations
-          </button>
+      @if (isShowColumnExplanations) {
+        <div>
+          <table>
+            <tr>
+              <th class="explanation-column-name" i18n>Column Name</th>
+              <th i18n>Explanation</th>
+            </tr>
+            @for (columnExplanation of columnExplanations; track columnExplanation) {
+              <tr>
+                <td>{{ columnExplanation.name }}</td>
+                <td>{{ columnExplanation.explanation }}</td>
+              </tr>
+            }
+          </table>
+          <div class="bottom-explanations-buttons">
+            <button mat-raised-button color="primary" (click)="toggleColumnExplanations()" i18n>
+              Hide Column Explanations
+            </button>
+          </div>
         </div>
-      </div>
-      <mat-checkbox
-        *ngIf="canViewStudentNames"
-        color="primary"
-        class="include-student-names"
-        [(ngModel)]="includeStudentNames"
-      >
-        <h6 class="checkbox-label" i18n>Include Student Names</h6>
-      </mat-checkbox>
+      }
+      @if (canViewStudentNames) {
+        <mat-checkbox
+          color="primary"
+          class="include-student-names"
+          [(ngModel)]="includeStudentNames"
+        >
+          <h6 class="checkbox-label" i18n>Include Student Names</h6>
+        </mat-checkbox>
+      }
       <h6 i18n>Choose Steps</h6>
-      <div class="select-all-buttons" fxLayoutGap="20px">
+      <div class="select-all-buttons flex gap-5">
         <button mat-raised-button color="primary" (click)="selectAll()" i18n>Select All</button>
         <button mat-raised-button color="primary" (click)="deselectAll()" i18n>Deselect All</button>
         <button mat-raised-button color="primary" (click)="export()" i18n>Export</button>
       </div>
-      <ng-container *ngFor="let value of nodes; index as index">
-        <div *ngIf="index !== 0">
-          <mat-checkbox
-            color="primary"
-            [ngClass]="{
-              'md-primary': true,
-              'group-header': value.node.type === 'group',
-              'step-header': value.node.type === 'node'
-            }"
-            [(ngModel)]="idToChecked[value.node.id]"
-            (ngModelChange)="nodeChecked(value.node)"
-          >
-            <h6 class="checkbox-label">{{ idToStepNumberAndTitle[value.node.id] }}</h6>
-          </mat-checkbox>
-        </div>
-      </ng-container>
+      @for (value of nodes; track value; let index = $index) {
+        @if (index !== 0) {
+          <div>
+            <mat-checkbox
+              color="primary"
+              [ngClass]="{
+                'md-primary': true,
+                'group-header': value.node.type === 'group',
+                'step-header': value.node.type === 'node'
+              }"
+              [(ngModel)]="idToChecked[value.node.id]"
+              (ngModelChange)="nodeChecked(value.node)"
+            >
+              <h6 class="checkbox-label">{{ idToStepNumberAndTitle[value.node.id] }}</h6>
+            </mat-checkbox>
+          </div>
+        }
+      }
       <div>
         <mat-checkbox
           color="primary"
@@ -76,9 +84,9 @@
           <h6 class="checkbox-label" i18n>Include Deleted Steps (If Any)</h6>
         </mat-checkbox>
       </div>
-      <div>
+      <div class="flex">
         <button mat-raised-button color="primary" (click)="export()" i18n>Export</button>
-        <div fxFlex></div>
+        <div class="flex-grow"></div>
         <button
           mat-raised-button
           color="primary"

@@ -1,20 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { copy } from '../../../assets/wise5/common/object/object';
 import { ConfigService } from '../../../assets/wise5/services/configService';
 import { NotebookService } from '../../../assets/wise5/services/notebookService';
 
-@Component({
-    selector: 'notebook-parent',
-    template: '',
-    standalone: false
-})
+@Directive()
 export class NotebookParentComponent {
   @Input() config: any;
   @Input() mode: string;
   @Input() workgroupId: number;
   notebook: any;
 
-  constructor(public ConfigService: ConfigService, public NotebookService: NotebookService) {}
+  constructor(
+    public ConfigService: ConfigService,
+    public NotebookService: NotebookService
+  ) {}
 
   ngOnInit(): void {
     if (this.workgroupId == null) {

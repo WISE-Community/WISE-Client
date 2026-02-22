@@ -3,17 +3,16 @@ import { AddComponentButtonComponent } from '../add-component-button/add-compone
 import { MatDividerModule } from '@angular/material/divider';
 import { Node } from '../../../common/Node';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'add-component',
-    imports: [AddComponentButtonComponent, CommonModule, FlexLayoutModule, MatDividerModule],
-    templateUrl: './add-component.component.html',
-    styleUrl: './add-component.component.scss'
+  imports: [AddComponentButtonComponent, CommonModule, MatDividerModule],
+  selector: 'add-component',
+  styleUrl: './add-component.component.scss',
+  templateUrl: './add-component.component.html'
 })
 export class AddComponentComponent {
   @Input() afterComponentId: string;
-  @Input() node: Node;
-  @Output() newComponentsEvent: EventEmitter<any> = new EventEmitter<any>();
   protected focus: boolean;
+  @Output() newComponentsEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() node: Node;
 }

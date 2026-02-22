@@ -2,7 +2,7 @@
 <p i18n>
   Select from a curated library of interactive simulations addressing various science topics.
 </p>
-<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+<div class="flex flex-wrap justify-start items-start gap-2">
   <mat-form-field>
     <mat-label i18n>Filter by Topic</mat-label>
     <mat-select [(ngModel)]="selectedSubjects" (ngModelChange)="filter()" multiple>
@@ -36,12 +36,12 @@
   />
 }
 <div class="nav-controls">
-  <mat-divider></mat-divider>
-  <div fxLayout="row" fxLayoutGap="8px">
+  <mat-divider />
+  <div class="flex gap-2">
     <button mat-button color="primary" routerLink="../../choose-template" [state]="target" i18n>
       Back
     </button>
-    <span fxFlex></span>
+    <span class="flex grow"></span>
     <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
     <button
       mat-raised-button

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,10 +8,8 @@ describe('RegisterComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterComponent],
-      providers: [],
-      imports: [],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [RegisterComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
   }));
 

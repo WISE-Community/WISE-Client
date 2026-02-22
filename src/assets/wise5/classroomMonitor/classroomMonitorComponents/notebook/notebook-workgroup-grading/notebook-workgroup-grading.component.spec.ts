@@ -1,17 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClassroomMonitorTestingModule } from '../../../classroom-monitor-testing.module';
-
 import { NotebookWorkgroupGradingComponent } from './notebook-workgroup-grading.component';
 
 let component: NotebookWorkgroupGradingComponent;
 let fixture: ComponentFixture<NotebookWorkgroupGradingComponent>;
 const workgroupId = 100;
-
 describe('NotebookWorkgroupGradingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NotebookWorkgroupGradingComponent],
-      imports: [ClassroomMonitorTestingModule]
+      imports: [NotebookWorkgroupGradingComponent, ClassroomMonitorTestingModule]
     }).compileComponents();
   });
 

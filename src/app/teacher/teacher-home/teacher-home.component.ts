@@ -1,54 +1,47 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
+import { TeacherRunListComponent } from '../teacher-run-list/teacher-run-list.component';
+import { DiscourseRecentActivityComponent } from '../discourse-recent-activity/discourse-recent-activity.component';
 import { UserService } from '../../services/user.service';
 import { User } from '../../domain/user';
 import { ConfigService } from '../../services/config.service';
-import { MatTabGroup } from '@angular/material/tabs';
-import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-teacher-home',
-  templateUrl: './teacher-home.component.html',
-  styleUrls: ['./teacher-home.component.scss'],
-  standalone: false
+  imports: [
+    DiscourseRecentActivityComponent,
+    MatButtonModule,
+    MatIconModule,
+    RouterModule,
+    TeacherRunListComponent
+  ],
+  styleUrl: './teacher-home.component.scss',
+  templateUrl: './teacher-home.component.html'
 })
 export class TeacherHomeComponent implements OnInit {
-  @ViewChild('tabs', { static: true }) tabs: MatTabGroup;
-
-  user: User = new User();
-  authoringToolLink: string = '';
-  discourseUrl: string;
-  tabLinks: any[] = [
-    { path: 'schedule', label: $localize`Class Schedule` },
-    { path: 'library', label: $localize`Unit Library` }
-  ];
+  protected discourseUrl: string;
+  private subscriptions: Subscription = new Subscription();
+  protected user: User;
 
   constructor(
-    private userService: UserService,
     private configService: ConfigService,
-    private router: Router
+    private userService: UserService
   ) {}
 
-  ngOnInit() {
-    this.getUser();
-    this.configService.getConfig().subscribe((config) => {
-      if (config != null) {
-        this.authoringToolLink = `${this.configService.getContextPath()}/teacher/edit/home`;
-        this.discourseUrl = this.configService.getDiscourseURL();
-      }
-    });
+  ngOnInit(): void {
+    this.subscriptions.add(this.userService.getUser().subscribe((user) => (this.user = user)));
+    this.subscriptions.add(
+      this.configService.getConfig().subscribe((config) => {
+        if (config != null) {
+          this.discourseUrl = this.configService.getDiscourseURL();
+        }
+      })
+    );
   }
 
-  getUser() {
-    this.userService.getUser().subscribe((user) => {
-      this.user = user;
-    });
-  }
-
-  openAuthoringTool() {
-    this.router.navigateByUrl(this.authoringToolLink);
-  }
-
-  isRunListRoute(): boolean {
-    return this.router.url === '/teacher/home/schedule';
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

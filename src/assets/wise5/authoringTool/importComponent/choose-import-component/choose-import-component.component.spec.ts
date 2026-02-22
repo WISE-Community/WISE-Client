@@ -1,19 +1,21 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { ChooseImportComponentComponent } from './choose-import-component.component';
-import { ProjectLibraryService } from '../../../services/projectLibraryService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
-import { TeacherDataService } from '../../../services/teacherDataService';
-import { TeacherWebSocketService } from '../../../services/teacherWebSocketService';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ImportComponentService } from '../../../services/importComponentService';
-import { CopyNodesService } from '../../../services/copyNodesService';
-import { InsertComponentService } from '../../../services/insertComponentService';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideRouter } from '@angular/router';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { provideHttpClient } from '@angular/common/http';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { provideRouter } from '@angular/router';
+import { MockProviders } from 'ng-mocks';
+import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
+import { BranchService } from '../../../services/branchService';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
+import { ConfigService } from '../../../services/configService';
+import { CopyNodesService } from '../../../services/copyNodesService';
+import { ImportComponentService } from '../../../services/importComponentService';
+import { InsertComponentService } from '../../../services/insertComponentService';
+import { PathService } from '../../../services/pathService';
+import { ProjectLibraryService } from '../../../services/projectLibraryService';
+import { TeacherDataService } from '../../../services/teacherDataService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ChooseImportComponentComponent } from './choose-import-component.component';
 
 let component: ChooseImportComponentComponent;
 const component1 = { id: 'component1', type: 'OpenResponse' };
@@ -34,25 +36,25 @@ const project: any = {
   inactiveNodes: []
 };
 let projectService: TeacherProjectService;
-
 describe('ChooseImportComponentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        ChooseImportComponentComponent,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [ChooseImportComponentComponent],
       providers: [
+        MockProviders(
+          BranchService,
+          ComponentServiceLookupService,
+          ConfigService,
+          PathService,
+          ProjectAssetService,
+          TeacherDataService
+        ),
         CopyNodesService,
         ImportComponentService,
         InsertComponentService,
-        ProjectAssetService,
         ProjectLibraryService,
-        TeacherDataService,
         TeacherProjectService,
-        TeacherWebSocketService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(),
         provideRouter([])
       ]
     }).compileComponents();

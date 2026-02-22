@@ -1,10 +1,10 @@
-<div fxLayoutAlign="start center" fxLayoutGap="4px">
+<div class="flex justify-start items-center">
   @if (hasPrevNode) {
     <button mat-button class="mat-raised-button mat-primary" (click)="goToPrevNode()" i18n>
       Previous step
     </button>
   }
-  <span fxFlex></span>
+  <span class="flex-grow"></span>
   @if (hasNextNode) {
     <button mat-button class="mat-raised-button mat-primary" (click)="goToNextNode()" i18n>
       Next step

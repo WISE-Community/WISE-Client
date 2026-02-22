@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { MatchContent } from '../../MatchContent';
 
 @Component({
-  standalone: true,
   selector: 'match-feedback-section',
   templateUrl: 'match-feedback-section.component.html'
 })

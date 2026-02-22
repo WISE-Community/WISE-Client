@@ -1,5 +1,5 @@
 <ng-template #addConstraintButton>
-  <div fxLayoutGap="16px">
+  <div class="flex gap-4">
     <mat-label i18n>Add Constraint</mat-label>
     <button
       mat-raised-button
@@ -14,30 +14,28 @@
   </div>
 </ng-template>
 <div class="body-div">
-  <ng-template [ngTemplateOutlet]="addConstraintButton"></ng-template>
-  <div
-    id="{{ constraint.id }}"
-    *ngFor="let constraint of content.constraints; index as constraintIndex"
-    class="constraints-div"
-    fxLayoutGap="16px"
-  >
-    <b i18n>Constraint {{ constraintIndex + 1 }}</b>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="deleteConstraint(constraintIndex)"
-      matTooltip="Delete Constraint"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-    <br />
-    <node-constraint-authoring [constraint]="constraint" />
-  </div>
-  <ng-template
-    *ngIf="content.constraints.length > 0"
-    [ngTemplateOutlet]="addConstraintButton"
-  ></ng-template>
+  <ng-template [ngTemplateOutlet]="addConstraintButton" />
+  @for (constraint of content.constraints; track constraint; let constraintIndex = $index) {
+    <div id="{{ constraint.id }}" class="constraints-div flex flex-col gap-4">
+      <div class="flex flex-row items-center gap-1">
+        <b i18n>Constraint {{ constraintIndex + 1 }}</b>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="deleteConstraint(constraintIndex)"
+          matTooltip="Delete Constraint"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <br />
+      </div>
+      <node-constraint-authoring [constraint]="constraint" />
+    </div>
+  }
+  @if (content.constraints.length > 0) {
+    <ng-template [ngTemplateOutlet]="addConstraintButton" />
+  }
 </div>
 <span id="bottom"></span>

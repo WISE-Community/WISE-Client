@@ -1,4 +1,4 @@
-<div class="main-div" fxLayoutGap="20px">
+<div class="main-div flex gap-5">
   <button
     class="enable-in-translation"
     mat-raised-button
@@ -10,51 +10,55 @@
   >
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <button
-    *ngIf="!isGroupNode"
-    mat-raised-button
-    color="primary"
-    routerLink="general"
-    matTooltip="General Advanced"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>settings</mat-icon>
-  </button>
-  <button
-    *ngIf="!isGroupNode"
-    class="enable-in-translation"
-    mat-raised-button
-    color="primary"
-    routerLink="rubric"
-    matTooltip="Edit Step Rubric"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>message</mat-icon>
-  </button>
-  <button
-    *ngIf="!isGroupNode"
-    mat-raised-button
-    color="primary"
-    routerLink="path"
-    matTooltip="Edit Transitions"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>trending_up</mat-icon>
-  </button>
-  <button
-    *ngIf="!isGroupNode"
-    mat-raised-button
-    color="primary"
-    routerLink="constraint"
-    matTooltip="Edit Constraints"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>block</mat-icon>
-  </button>
+  @if (!isGroupNode) {
+    <button
+      mat-raised-button
+      color="primary"
+      routerLink="general"
+      matTooltip="General Advanced"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
+  }
+  @if (!isGroupNode) {
+    <button
+      class="enable-in-translation"
+      mat-raised-button
+      color="primary"
+      routerLink="rubric"
+      matTooltip="Edit Step Rubric"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>message</mat-icon>
+    </button>
+  }
+  @if (!isGroupNode) {
+    <button
+      mat-raised-button
+      color="primary"
+      routerLink="path"
+      matTooltip="Edit Transitions"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>trending_up</mat-icon>
+    </button>
+  }
+  @if (!isGroupNode) {
+    <button
+      mat-raised-button
+      color="primary"
+      routerLink="constraint"
+      matTooltip="Edit Constraints"
+      matTooltipPosition="above"
+      i18n-matTooltip
+    >
+      <mat-icon>block</mat-icon>
+    </button>
+  }
   <button
     mat-raised-button
     color="primary"

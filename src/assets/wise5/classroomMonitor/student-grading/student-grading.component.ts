@@ -8,12 +8,26 @@ import { NotificationService } from '../../services/notificationService';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { Annotation } from '../../common/Annotation';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
+import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { StepItemComponent } from '../classroomMonitorComponents/studentGrading/step-item/step-item.component';
 
 @Component({
-    selector: 'student-grading',
-    templateUrl: './student-grading.component.html',
-    styleUrls: ['./student-grading.component.scss'],
-    standalone: false
+  imports: [
+    MatList,
+    MatListItem,
+    MatButton,
+    MatIcon,
+    NgClass,
+    IntersectionObserverModule,
+    StepItemComponent
+  ],
+  selector: 'student-grading',
+  styleUrl: './student-grading.component.scss',
+  templateUrl: './student-grading.component.html'
 })
 export class StudentGradingComponent implements OnInit {
   isExpandAll: boolean;
@@ -213,6 +227,7 @@ export class StudentGradingComponent implements OnInit {
       node.nodeStatus = this.classroomStatusService.getStudentStatusForWorkgroupId(
         this.workgroupId
       )?.nodeStatuses[nodeId];
+      this.sortedNodes = Object.values(this.nodesById);
     }
   }
 

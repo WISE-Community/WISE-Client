@@ -9,12 +9,27 @@ import { CopyNodesService } from '../../services/copyNodesService';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { CopyTranslationsService } from '../../services/copyTranslationsService';
 import { ConstraintService } from '../../services/constraintService';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
 
 @Component({
-    selector: 'project-authoring-step',
-    templateUrl: './project-authoring-step.component.html',
-    styleUrls: ['./project-authoring-step.component.scss'],
-    standalone: false
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatTooltipModule,
+    NodeIconAndTitleComponent,
+    RouterModule
+  ],
+  selector: 'project-authoring-step',
+  styleUrl: './project-authoring-step.component.scss',
+  templateUrl: './project-authoring-step.component.html'
 })
 export class ProjectAuthoringStepComponent {
   protected nodeTypeSelected: Signal<NodeTypeSelected>;

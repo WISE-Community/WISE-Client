@@ -33,9 +33,7 @@
   min-height: 200px;
   max-height: 200px;
   border: 3px solid #DDD;
-  overflow:auto;
-  list-style-type: none;
-  padding:0px;
+  overflow: auto;
 }
 
 .studentAsset {
@@ -43,10 +41,9 @@
   height: auto;
   max-width: 100px;
   max-height: 100px;
-  padding: 10px;
-  margin: 5px;
+  margin: 4px;
   border: 1px solid #DDD;
-  overflow:auto;
+  overflow: auto;
 }
 
 .studentAsset:hover {

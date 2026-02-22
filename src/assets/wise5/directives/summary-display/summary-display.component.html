@@ -1,11 +1,6 @@
-<mat-card appearance="outlined">
-  <mat-card-content>
-    @if (hasWarning) {
-      <p class="warn center">{{ warningMessage }}</p>
-    }
-    @if (doRender && chartConfig != null) {
-      <highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig" class="highcharts-chart">
-      </highcharts-chart>
-    }
-  </mat-card-content>
-</mat-card>
+@if (hasWarning) {
+  <p class="warn center">{{ warningMessage }}</p>
+}
+@if (doRender && chartConfig != null) {
+  <highcharts-chart [Highcharts]="Highcharts" [options]="chartConfig" class="highcharts-chart" />
+}

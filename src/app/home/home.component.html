@@ -37,35 +37,48 @@
         Integrated science learning and teaching with technology
       </div>
     </ng-template>
-    <ng-template #sideTemplate *ngIf="isDiscourseNewsAvailable">
-      <discourse-latest-news
-        [@bounceIn]="{ value: '*', params: { duration: '1.25s', delay: '3500ms' } }"
-        [baseUrl]="discourseUrl"
-        [category]="discourseNewsCategory"
-        queryString="order=latest"
-      />
-    </ng-template>
+    @if (isDiscourseNewsAvailable) {
+      <ng-template #sideTemplate>
+        <discourse-latest-news
+          [@bounceIn]="{ value: '*', params: { duration: '1.25s', delay: '3500ms' } }"
+          [baseUrl]="discourseUrl"
+          [category]="discourseNewsCategory"
+          queryString="order=latest"
+        />
+      </ng-template>
+    }
   </app-hero-section>
   <section class="section">
     <div class="section--fullwidth section--slant mat-app-background">
       <div class="content">
-        <h1 class="accent section__header" ngClass="mat-headline-4" i18n>The WISE Advantage</h1>
+        <h1
+          class="accent section__header text-center sm:text-start"
+          [ngClass]="{ 'mat-headline-4': smScreen }"
+          i18n
+        >
+          The WISE Advantage
+        </h1>
         <div class="features">
-          <app-blurb
-            *ngFor="let blurb of blurbs"
-            [imgSrc]="blurb.imgSrc"
-            [imgDescription]="blurb.imgDescription"
-            [imgSources]="blurb.imgSources"
-            [content]="blurb.content"
-            [headline]="blurb.headline"
-          >
-            <ng-template *ngIf="blurb.contentTemplate" #contentTemplate>
-              <span [innerHtml]="blurb.contentTemplate"></span>
-            </ng-template>
-            <ng-template *ngIf="blurb.headlineTemplate" #headlineTemplate>
-              <span [innerHtml]="blurb.headlineTemplate"></span>
-            </ng-template>
-          </app-blurb>
+          @for (blurb of blurbs; track blurb.imgSrc) {
+            <app-blurb
+              [imgSrc]="blurb.imgSrc"
+              [imgDescription]="blurb.imgDescription"
+              [imgSources]="blurb.imgSources"
+              [content]="blurb.content"
+              [headline]="blurb.headline"
+            >
+              @if (blurb.contentTemplate) {
+                <ng-template #contentTemplate>
+                  <span [innerHtml]="blurb.contentTemplate"></span>
+                </ng-template>
+              }
+              @if (blurb.headlineTemplate) {
+                <ng-template #headlineTemplate>
+                  <span [innerHtml]="blurb.headlineTemplate"></span>
+                </ng-template>
+              }
+            </app-blurb>
+          }
         </div>
       </div>
     </div>
@@ -74,14 +87,17 @@
     <div class="section--fullwidth section--slant section--slant--rtl app-background">
       <div class="content">
         <h1
-          class="accent section__header"
-          ngClass="mat-headline-4"
-          [ngClass.xs]="{ 'mat-headline-4': false }"
+          class="accent section__header text-center sm:text-end"
+          [ngClass]="{ 'mat-headline-4': smScreen }"
           i18n
         >
           Curriculum Offerings
         </h1>
-        <app-home-page-project-library></app-home-page-project-library>
+        @defer (on viewport) {
+          <app-home-page-project-library />
+        } @placeholder {
+          <div i18n>Curriculum Offerings</div>
+        }
         <div class="library__links">
           <h2
             class="accent-1 flex flex-wrap flex-col sm:flex-row gap-4 place-items-center justify-center"
@@ -97,9 +113,8 @@
     <div class="section--fullwidth section--slant mat-app-background">
       <div class="content">
         <h1
-          class="accent section__header flex gap-6"
-          ngClass="mat-headline-4"
-          [ngClass.xs]="{ 'mat-headline-4': false }"
+          class="accent section__header flex justify-center sm:justify-start gap-6"
+          [ngClass]="{ 'mat-headline-4': smScreen }"
         >
           <span i18n>Connect</span>
           <a
@@ -141,8 +156,7 @@
             destination="https://wise-discuss.berkeley.edu"
             linkTarget="_self"
             [isOutsideLink]="true"
-          >
-          </app-call-to-action>
+          />
           <app-call-to-action
             icon="live_help"
             iconColor="accent-2"
@@ -151,8 +165,7 @@
             i18n-content
             content="View tutorials and common questions."
             destination="/help"
-          >
-          </app-call-to-action>
+          />
           <app-call-to-action
             icon="contact_mail"
             iconColor="accent"
@@ -161,7 +174,7 @@
             i18n-content
             content="Want to get in touch? Send us a message."
             destination="/contact"
-          ></app-call-to-action>
+          />
         </div>
       </div>
     </div>

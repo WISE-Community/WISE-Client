@@ -1,46 +1,47 @@
 <div class="view-content view-content--with-sidemenu">
   <div class="l-constrained">
-    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="start center">
-      <mat-card
-        appearance="outlined"
-        *ngFor="let milestone of milestones"
-        class="milestone"
-        role="button"
-        tabindex="0"
-        aria-label="Show milestone details"
-        i18-aria-label
-        (click)="showMilestoneDetails(milestone, $event)"
-        (keyup.enter)="showMilestoneDetails(milestone, $event)"
-      >
-        <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-          <div class="milestone__title" md-truncate>{{ milestone.name }}</div>
-          <div class="milestone__progress mat-app-background">
-            <mat-progress-spinner
-              diameter="96"
-              mode="determinate"
-              [value]="milestone.percentageCompleted"
-              [ngClass]="{ success: milestone.percentageCompleted === 100 }"
-            ></mat-progress-spinner>
-            <div
-              class="milestone__progress__percent mat-subtitle-2"
-              fxLayout="row"
-              fxLayoutAlign="center center"
-            >
-              <span *ngIf="milestone.percentageCompleted < 100"
-                >{{ milestone.percentageCompleted }}%</span
+    <div class="flex flex-wrap justify-center sm:justify-center">
+      @for (milestone of milestones; track milestone) {
+        <mat-card
+          appearance="outlined"
+          class="milestone"
+          role="button"
+          tabindex="0"
+          aria-label="Show milestone details"
+          i18-aria-label
+          (click)="showMilestoneDetails(milestone, $event)"
+          (keyup.enter)="showMilestoneDetails(milestone, $event)"
+        >
+          <mat-card-content class="!flex flex-col items-center justify-items-center">
+            <div class="milestone__title center" md-truncate>{{ milestone.name }}</div>
+            <div class="milestone__progress mat-app-background">
+              <mat-progress-spinner
+                diameter="96"
+                mode="determinate"
+                [value]="milestone.percentageCompleted"
+                [ngClass]="{ success: milestone.percentageCompleted === 100 }"
+              ></mat-progress-spinner>
+              <div
+                class="milestone__progress__percent mat-subtitle-2 flex justify-center items-center"
               >
-              <mat-icon *ngIf="milestone.percentageCompleted === 100" class="success md-48">
-                check
-              </mat-icon>
+                @if (milestone.percentageCompleted < 100) {
+                  <span>{{ milestone.percentageCompleted }}%</span>
+                }
+                @if (milestone.percentageCompleted === 100) {
+                  <mat-icon class="success md-48"> check </mat-icon>
+                }
+              </div>
             </div>
-          </div>
-          <p class="text-secondary" i18n>
-            {{ milestone.numberOfStudentsCompleted }}/{{ milestone.numberOfStudentsInRun }} teams
-            completed
-          </p>
-          <p *ngIf="milestone.isReportAvailable" class="info" i18n>~ Report Available ~</p>
-        </mat-card-content>
-      </mat-card>
+            <p class="text-secondary center" i18n>
+              {{ milestone.numberOfStudentsCompleted }}/{{ milestone.numberOfStudentsInRun }} teams
+              completed
+            </p>
+            @if (milestone.isReportAvailable) {
+              <p class="info" i18n>~ Report Available ~</p>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
     </div>
   </div>
 </div>

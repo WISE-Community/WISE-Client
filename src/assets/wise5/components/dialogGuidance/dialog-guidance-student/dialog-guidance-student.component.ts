@@ -34,19 +34,17 @@ import { MatCardModule } from '@angular/material/card';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
-import { CommonModule } from '@angular/common';
 import { CRaterPingService } from '../../../services/cRaterPingService';
 
 @Component({
   imports: [
     ChatInputComponent,
-    CommonModule,
     ComponentHeaderComponent,
     ComputerAvatarSelectorComponent,
     DialogResponsesComponent,
     MatCardModule
   ],
-  providers: [DialogGuidanceFeedbackService],
+  providers: [CRaterPingService, DialogGuidanceFeedbackService],
   selector: 'dialog-guidance-student',
   styleUrl: './dialog-guidance-student.component.scss',
   templateUrl: './dialog-guidance-student.component.html'
@@ -110,13 +108,15 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
       this.constraintService
     );
     this.initializeComputerAvatar();
+    this.pingCRaterEndpoint();
   }
 
-  protected startPinging(): void {
+  private pingCRaterEndpoint(): void {
     this.cRaterPingService.startPinging(this.getItemId());
   }
 
   ngOnDestroy(): void {
+    super.ngOnDestroy();
     this.cRaterPingService.stopPinging(this.getItemId());
   }
 

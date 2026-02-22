@@ -1,17 +1,30 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { AuthorPeerGroupingDialogComponent } from '../author-peer-grouping-dialog/author-peer-grouping-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectService } from '../../../services/projectService';
+import { SelectStepAndComponentComponent } from '../../../../../app/authoring-tool/select-step-and-component/select-step-and-component.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    selector: 'create-new-peer-grouping-dialog',
-    templateUrl: './create-new-peer-grouping-dialog.component.html',
-    styleUrls: ['./create-new-peer-grouping-dialog.component.scss'],
-    standalone: false
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    SelectStepAndComponentComponent
+  ],
+  selector: 'create-new-peer-grouping-dialog',
+  templateUrl: './create-new-peer-grouping-dialog.component.html'
 })
 export class CreateNewPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
   constructor(

@@ -63,10 +63,6 @@ export class NotebookService {
   public publicNotebookItemsRetrieved$ = this.publicNotebookItemsRetrievedSource.asObservable();
   private showReportAnnotationsSource: Subject<void> = new Subject<void>();
   public showReportAnnotations$ = this.showReportAnnotationsSource.asObservable();
-  private notesVisibleSource: Subject<boolean> = new Subject<boolean>();
-  public notesVisible$ = this.notesVisibleSource.asObservable();
-  private insertModeSource: Subject<any> = new Subject<any>();
-  public insertMode$ = this.insertModeSource.asObservable();
   private reportFullScreenSource: Subject<boolean> = new Subject<boolean>();
   public reportFullScreen$ = this.reportFullScreenSource.asObservable();
 
@@ -130,7 +126,7 @@ export class NotebookService {
     );
   }
 
-  showEditNoteDialog(
+  private showEditNoteDialog(
     nodeId: string,
     note: any,
     isEditMode: boolean,
@@ -383,9 +379,8 @@ export class NotebookService {
               if (lastRevision != null && lastRevision.serverDeleteTime != null) {
                 // the last revision for this was deleted,
                 // so move the entire note (with all its revisions) to deletedItems
-                notebookByWorkgroup.deletedItems[
-                  notebookItemLocalNotebookItemIdKey
-                ] = allRevisionsForThisLocalNotebookItemId;
+                notebookByWorkgroup.deletedItems[notebookItemLocalNotebookItemIdKey] =
+                  allRevisionsForThisLocalNotebookItemId;
                 delete notebookByWorkgroup.items[notebookItemLocalNotebookItemIdKey];
               }
             }
@@ -642,16 +637,7 @@ export class NotebookService {
   }
 
   closeNotes(): void {
-    this.setNotesVisible(false);
-    this.setInsertMode({ insertMode: false });
-  }
-
-  setNotesVisible(value: boolean): void {
-    this.notesVisibleSource.next(value);
-  }
-
-  setInsertMode(args: any): void {
-    this.insertModeSource.next(args);
+    this.dialog.closeAll();
   }
 
   setReportFullScreen(value: boolean): void {

@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewsComponent } from './news.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { News } from '../domain/news';
 import { Observable } from 'rxjs';
@@ -38,7 +37,7 @@ const news2Text =
 
 export class MockNewsService {
   getAllNews(): Observable<News[]> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       const allNewsItems: News[] = [];
       const user1 = createUser(100, 'Spongebob', 'Squarepants', 'Spongebob Squarepants');
       const news1 = createNewsItem(1, news1Date, 'public', news1Title, news1Text, user1);
@@ -75,10 +74,8 @@ describe('NewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NewsComponent],
-      imports: [],
-      providers: [{ provide: NewsService, useClass: MockNewsService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [NewsComponent],
+      providers: [{ provide: NewsService, useClass: MockNewsService }]
     });
     fixture = TestBed.createComponent(NewsComponent);
     component = fixture.componentInstance;

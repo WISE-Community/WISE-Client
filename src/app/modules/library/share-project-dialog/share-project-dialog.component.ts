@@ -1,17 +1,88 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatTableDataSource,
+  MatTable,
+  MatColumnDef,
+  MatHeaderCellDef,
+  MatHeaderCell,
+  MatCellDef,
+  MatCell,
+  MatHeaderRowDef,
+  MatHeaderRow,
+  MatRowDef,
+  MatRow
+} from '@angular/material/table';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { LibraryService } from '../../../services/library.service';
 import { ShareItemDialogComponent } from '../share-item-dialog/share-item-dialog.component';
 import { Project } from '../../../domain/project';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatDivider } from '@angular/material/divider';
+import {
+  MatFormField,
+  MatLabel,
+  MatPrefix,
+  MatSuffix,
+  MatHint
+} from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteTrigger, MatAutocomplete, MatOption } from '@angular/material/autocomplete';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
-    selector: 'app-share-project-dialog',
-    templateUrl: './share-project-dialog.component.html',
-    styleUrls: ['./share-project-dialog.component.scss'],
-    standalone: false
+  selector: 'app-share-project-dialog',
+  styleUrl: './share-project-dialog.component.scss',
+  templateUrl: './share-project-dialog.component.html',
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDivider,
+    MatFormField,
+    MatLabel,
+    MatIcon,
+    MatPrefix,
+    MatInput,
+    FormsModule,
+    MatAutocompleteTrigger,
+    ReactiveFormsModule,
+    MatIconButton,
+    MatSuffix,
+    NgClass,
+    MatHint,
+    MatAutocomplete,
+    MatOption,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatCellDef,
+    MatCell,
+    RouterLink,
+    MatCheckbox,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
+    AsyncPipe
+  ]
 })
 export class ShareProjectDialogComponent extends ShareItemDialogComponent {
   dataSource: MatTableDataSource<any[]> = new MatTableDataSource<any[]>();

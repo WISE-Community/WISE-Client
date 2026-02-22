@@ -18,26 +18,24 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { AbstractComponentDataExportStrategy } from '../strategies/AbstractComponentDataExportStrategy';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatInputModule,
-        MatTooltipModule
-    ],
-    selector: 'export-item',
-    styleUrl: './export-item.component.scss',
-    templateUrl: './export-item.component.html'
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule
+  ],
+  selector: 'export-item',
+  styleUrl: './export-item.component.scss',
+  templateUrl: './export-item.component.html'
 })
 export class ExportItemComponent implements OnInit {
   private allowedComponentTypesAllRevisions = [

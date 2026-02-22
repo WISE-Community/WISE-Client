@@ -4,17 +4,17 @@
       <img [src]="logoPath" alt="WISE logo" i18n-alt class="logo" />
     </a>
   </span>
-  <h3 fxLayout="row" fxLayoutAlign="start center" class="title-header">
+  <h3 class="title-header flex items-center">
     <span class="title">{{ projectTitle }}</span
     >&nbsp;
-    <span class="mat-caption" fxHide.lt-lg>({{ runInfo }})</span>
-    <button mat-icon-button fxHide.gt-md matTooltip="Unit Info" i18n-matTooltip>
+    <span class="mat-caption hidden lg:inline">({{ runInfo }})</span>
+    <button mat-icon-button class="lg:!hidden" matTooltip="{{ runInfo }}" i18n-matTooltip>
       <mat-icon>info</mat-icon>
     </button>
     @if (canAuthorProject) {
       <button
         mat-icon-button
-        fxHide.xs
+        class="!hidden sm:!inline-block"
         (click)="switchToAuthoringView()"
         matTooltip="Switch to Authoring View"
         i18n-matTooltip
@@ -25,7 +25,7 @@
 
     <button
       mat-icon-button
-      fxHide.xs
+      class="!hidden sm:!inline-block"
       (click)="previewProject()"
       matTooltip="Preview Unit"
       i18n-matTooltip
@@ -33,7 +33,7 @@
       <mat-icon mat-menu-origin>preview</mat-icon>
     </button>
   </h3>
-  <span fxFlex></span>
+  <span class="flex-grow"></span>
   <button
     mat-icon-button
     aria-label="Alerts"
@@ -76,14 +76,9 @@
     <mat-icon mat-menu-origin>account_box</mat-icon>
   </button>
   <mat-menu #accountMenu class="account-menu account-menu--fixed-width">
-    <div
-      class="account-menu__info"
-      (click)="$event.stopPropagation()"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-    >
+    <div class="account-menu__info flex items-center" (click)="$event.stopPropagation()">
       <div class="account-menu__info__title">
-        <div class="account-menu-avatar" fxLayoutAlign="start center">
+        <div class="account-menu-avatar flex items-center">
           <mat-icon style="color: {{ avatarColor }}" class="mat-36"> account_circle </mat-icon>
         </div>
       </div>
@@ -92,11 +87,11 @@
         <span class="mat-caption">({{ userInfo.username }})</span>
       </div>
     </div>
-    <div class="account-menu__actions" (click)="$event.stopPropagation()" fxLayout="row">
+    <div class="account-menu__actions flex" (click)="$event.stopPropagation()">
       <button mat-button color="primary" class="account-menu-button" (click)="goHome()" i18n>
         Go Home
       </button>
-      <span fxFlex></span>
+      <span class="flex-grow"></span>
       <button mat-button color="primary" class="account-menu-button" (click)="logOut()" i18n>
         Sign Out
       </button>

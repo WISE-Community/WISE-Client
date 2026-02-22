@@ -4,12 +4,18 @@ import { DataExportService } from '../../../services/dataExportService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import ExportController from '../exportController';
 import { millisecondsToDateTime } from '../../../common/datetime/datetime';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'export-step-visits',
-    templateUrl: './export-step-visits.component.html',
-    styleUrls: ['./export-step-visits.component.scss'],
-    standalone: false
+  imports: [MatButton, RouterLink, MatIcon, MatCheckbox, FormsModule, NgClass, MatTooltip],
+  styleUrl: './export-step-visits.component.scss',
+  templateUrl: './export-step-visits.component.html'
 })
 export class ExportStepVisitsComponent extends ExportController {
   project: any;

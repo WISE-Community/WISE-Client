@@ -21,7 +21,7 @@
                 </div>
               } @else {
                 <tag class="mat-small" [color]="tag.color" [text]="tag.text" />
-                <span fxFlex></span>
+                <span class="flex-grow"></span>
                 <button
                   mat-icon-button
                   color="primary"
@@ -53,6 +53,6 @@
     </mat-list>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end">
+<mat-dialog-actions align="end">
   <button mat-button cdkFocusInitial mat-dialog-close i18n>Close</button>
 </mat-dialog-actions>

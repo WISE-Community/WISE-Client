@@ -5,22 +5,23 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
 import { DrawService } from '../drawService';
 
 @Component({
-    selector: 'draw-show-work',
-    templateUrl: 'draw-show-work.component.html',
-    styleUrls: ['draw-show-work.component.scss', '../drawing-tool.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  selector: 'draw-show-work',
+  styleUrls: ['draw-show-work.component.scss', '../drawing-tool.scss'],
+  template: `<div class="component--grading__response__content">
+    <div id="{{ drawingToolId }}" class="drawing-tool"></div>
+  </div> `
 })
 export class DrawShowWorkComponent extends ComponentShowWorkDirective {
-  drawingToolId: string;
-  drawingTool: any;
+  private drawingTool: any;
+  protected drawingToolId: string;
 
   constructor(
-    private DrawService: DrawService,
+    private drawService: DrawService,
     protected nodeService: NodeService,
-    protected ProjectService: ProjectService
+    protected projectService: ProjectService
   ) {
-    super(nodeService, ProjectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
@@ -45,13 +46,13 @@ export class DrawShowWorkComponent extends ComponentShowWorkDirective {
   }
 
   private initializeDrawingTool(): void {
-    this.drawingTool = this.DrawService.initializeDrawingTool(
+    this.drawingTool = this.drawService.initializeDrawingTool(
       this.drawingToolId,
       this.componentContent.stamps,
       this.componentContent.width,
       this.componentContent.height
     );
-    this.DrawService.setUpTools(this.drawingToolId, this.componentContent.tools, false);
+    this.drawService.setUpTools(this.drawingToolId, this.componentContent.tools, false);
     this.drawingTool.canvasOnly();
     this.drawingTool.canvas.removeListeners();
   }

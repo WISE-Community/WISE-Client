@@ -61,7 +61,7 @@ describe('ForgotStudentPasswordChangeComponent', () => {
   });
 
   it('should submit and navigate to the complete page', () => {
-    const router = TestBed.get(Router);
+    const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
     const username = 'SpongebobS0101';
     component.username = username;

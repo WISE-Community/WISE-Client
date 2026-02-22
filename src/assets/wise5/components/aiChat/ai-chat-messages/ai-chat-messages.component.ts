@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { AiChatMessage } from '../AiChatMessage';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
+import { AiChatStudentMessageComponent } from '../ai-chat-student-message/ai-chat-student-message.component';
+import { AiChatBotMessageComponent } from '../ai-chat-bot-message/ai-chat-bot-message.component';
 
 @Component({
-    selector: 'ai-chat-messages',
-    templateUrl: './ai-chat-messages.component.html',
-    styleUrls: ['./ai-chat-messages.component.scss'],
-    standalone: false
+  imports: [AiChatStudentMessageComponent, AiChatBotMessageComponent],
+  selector: 'ai-chat-messages',
+  styleUrl: './ai-chat-messages.component.scss',
+  templateUrl: './ai-chat-messages.component.html'
 })
 export class AiChatMessagesComponent {
   @Input() computerAvatar: ComputerAvatar;

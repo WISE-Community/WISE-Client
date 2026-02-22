@@ -1,5 +1,5 @@
 <ng-template #projects let-projects="projects">
-  <div class="units" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="8px">
+  <div class="units flex flex-col justify-start items-start gap-2">
     @for (project of projects; track project.id) {
       <button mat-stroked-button class="unit" (click)="chooseProject(project)">
         {{ project.id + ' - ' + project.name }}
@@ -35,9 +35,9 @@
 </mat-tab-group>
 <div class="nav-controls">
   <mat-divider />
-  <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="end center">
+  <div class="flex justify-end items-center gap-4">
     <button mat-button color="primary" (click)="goBack()" i18n>Back</button>
-    <span fxFlex></span>
+    <span class="flex grow"></span>
     <button mat-button color="primary" (click)="cancel()" i18n>Cancel</button>
   </div>
 </div>

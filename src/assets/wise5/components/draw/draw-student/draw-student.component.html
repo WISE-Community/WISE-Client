@@ -1,68 +1,68 @@
-<component-header [component]="component"></component-header>
-<div class="component__actions buttons-div" fxLayout="row wrap">
-  <button
-    *ngIf="showCopyPublicNotebookItemButton"
-    mat-raised-button
-    color="primary"
-    class="top-button"
-    (click)="copyPublicNotebookItem()"
-    [disabled]="isDisabled"
-    i18n
-  >
-    <mat-icon>file_download</mat-icon>
-    Import Classmate Work
-  </button>
-  <add-to-notebook-button
-    *ngIf="isShowAddToNotebookButton"
-    class="add-to-notebook-button top-button"
-    [isDisabled]="isDisabled"
-    (snipImage)="addToNotebook()"
-  >
-  </add-to-notebook-button>
-  <button
-    *ngIf="isStudentAttachmentEnabled"
-    mat-raised-button
-    color="primary"
-    class="top-button"
-    (click)="showStudentAssets()"
-    [disabled]="isDisabled"
-    i18n
-  >
-    <mat-icon>image</mat-icon>
-    Upload Background Image
-  </button>
-  <button
-    *ngIf="isResetButtonVisible"
-    mat-raised-button
-    color="primary"
-    class="top-button"
-    (click)="resetDrawing()"
-    [disabled]="isDisabled"
-    i18n
-  >
-    <mat-icon>restore</mat-icon>
-    Reset
-  </button>
+<component-header [component]="component" />
+<div class="component__actions buttons-div flex flex-row flex-wrap">
+  @if (showCopyPublicNotebookItemButton) {
+    <button
+      mat-raised-button
+      color="primary"
+      class="top-button"
+      (click)="copyPublicNotebookItem()"
+      [disabled]="isDisabled"
+    >
+      <mat-icon>file_download</mat-icon>
+      <span i18n>Import Classmate Work</span>
+    </button>
+  }
+  @if (isShowAddToNotebookButton) {
+    <add-to-notebook-button
+      class="add-to-notebook-button top-button"
+      [isDisabled]="isDisabled"
+      (snipImage)="addToNotebook()"
+    />
+  }
+  @if (isStudentAttachmentEnabled) {
+    <button
+      mat-raised-button
+      color="primary"
+      class="top-button"
+      (click)="showStudentAssets()"
+      [disabled]="isDisabled"
+    >
+      <mat-icon>image</mat-icon>
+      <span i18n>Upload Background Image</span>
+    </button>
+  }
+  @if (isResetButtonVisible) {
+    <button
+      mat-raised-button
+      color="primary"
+      class="top-button"
+      (click)="resetDrawing()"
+      [disabled]="isDisabled"
+    >
+      <mat-icon>restore</mat-icon>
+      <span i18n>Reset</span>
+    </button>
+  }
 </div>
 <div id="{{ drawingToolId }}" class="drawing-tool-div"></div>
-<component-save-submit-buttons
-  *ngIf="isSaveOrSubmitButtonVisible"
-  [componentState]="latestComponentState"
-  [isDirty]="isDirty"
-  [isDisabled]="isDisabled"
-  [isSaveButtonVisible]="isSaveButtonVisible"
-  [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-  [isSubmitButtonVisible]="isSubmitButtonVisible"
-  [isSubmitDirty]="isSubmitDirty"
-  (saveButtonClicked)="saveButtonClicked($event)"
-  (submitButtonClicked)="submitButtonClicked($event)"
->
-</component-save-submit-buttons>
-<component-annotations
-  *ngIf="mode === 'student'"
-  [annotations]="latestAnnotations"
-  [maxScore]="componentContent.maxScore"
-  [nodeId]="nodeId"
-  [componentId]="componentId"
->
-</component-annotations>
+@if (isSaveOrSubmitButtonVisible) {
+  <component-save-submit-buttons
+    [componentState]="latestComponentState"
+    [isDirty]="isDirty"
+    [isDisabled]="isDisabled"
+    [isSaveButtonVisible]="isSaveButtonVisible"
+    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+    [isSubmitButtonVisible]="isSubmitButtonVisible"
+    [isSubmitDirty]="isSubmitDirty"
+    (saveButtonClicked)="saveButtonClicked($event)"
+    (submitButtonClicked)="submitButtonClicked($event)"
+  />
+}
+@if (mode === 'student') {
+  <component-annotations
+    [annotations]="latestAnnotations"
+    [maxScore]="componentContent.maxScore"
+    [nodeId]="nodeId"
+    [componentId]="componentId"
+  />
+}

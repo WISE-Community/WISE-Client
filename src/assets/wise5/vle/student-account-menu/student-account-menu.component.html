@@ -1,5 +1,5 @@
 <mat-menu #menu class="student-account-menu" (click)="$event.stopPropagation()">
-  <div class="menu-section" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+  <div class="menu-section flex items-center gap-2">
     <mat-icon class="mat-36" style="color: {{ getAvatarColorForWorkgroupId(workgroupId) }}">
       account_circle
     </mat-icon>
@@ -8,61 +8,62 @@
       >&nbsp;<span class="mat-small" i18n>(Team {{ workgroupId }})</span>
     </div>
   </div>
-  <mat-divider></mat-divider>
-  <div class="menu-section" *ngIf="rootNodeStatus != null">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxLayout="column">
-        <span class="mat-body-2" i18n>Unit Completion</span>
-        <span class="mat-caption text-secondary" i18n>
-          {{ rootNodeStatus.progress.completedItems }}/{{
-            rootNodeStatus.progress.totalItems
-          }}
-          items
-        </span>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-progress-bar
-          mode="determinate"
-          value="{{ rootNodeStatus.progress.completionPct }}"
-          aria-label-i18n
-          aria-label="completion percentage"
-        ></mat-progress-bar>
-        <h3 class="mat-headline-4">{{ rootNodeStatus.progress.completionPct }}%</h3>
-      </div>
-    </div>
-  </div>
-  <mat-divider class="divider"></mat-divider>
-  <div class="menu-section" *ngIf="showScore">
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div fxLayout="column">
-        <span class="mat-body-2" i18n>Total Score</span>
-        <span class="mat-caption text-secondary" i18n>{{ totalScore }}/{{ maxScore }} points</span>
-      </div>
-      <span fxFlex></span>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-        <div class="score-wrap">
-          <mat-progress-bar
-            class="score"
-            mode="determinate"
-            value="{{ scorePercentage }}"
-            aria-label-i18n
-            aria-label="total score percentage"
-          ></mat-progress-bar>
+  <mat-divider />
+  @if (rootNodeStatus != null) {
+    <div class="menu-section">
+      <div class="flex justify-between items-center">
+        <div class="flex flex-col">
+          <span class="mat-body-2" i18n>Unit Completion</span>
+          <span class="mat-caption text-secondary" i18n>
+            {{ rootNodeStatus.progress.completedItems }}/{{ rootNodeStatus.progress.totalItems }}
+            items
+          </span>
         </div>
-        <h3 class="mat-headline-4" *ngIf="maxScore > 0">{{ scorePercentage }}%</h3>
+        <div class="flex items-center">
+          <mat-progress-bar
+            mode="determinate"
+            value="{{ rootNodeStatus.progress.completionPct }}"
+            aria-label-i18n
+            aria-label="completion percentage"
+          />
+          <h3 class="mat-headline-4">{{ rootNodeStatus.progress.completionPct }}%</h3>
+        </div>
       </div>
     </div>
-  </div>
-  <mat-divider class="divider"></mat-divider>
-  <div class="notice-bg-bg controls" fxLayout="row">
+  }
+  <mat-divider class="divider" />
+  @if (showScore) {
+    <div class="menu-section">
+      <div class="flex items-center">
+        <div class="flex flex-col">
+          <span class="mat-body-2" i18n>Total Score</span>
+          <span class="mat-caption text-secondary" i18n
+            >{{ totalScore }}/{{ maxScore }} points</span
+          >
+        </div>
+        <span class="flex-grow"></span>
+        <div class="flex items-center gap-1">
+          <div class="score-wrap">
+            <mat-progress-bar
+              class="score"
+              mode="determinate"
+              value="{{ scorePercentage }}"
+              aria-label-i18n
+              aria-label="total score percentage"
+            />
+          </div>
+          @if (maxScore > 0) {
+            <h3 class="mat-headline-4">{{ scorePercentage }}%</h3>
+          }
+        </div>
+      </div>
+    </div>
+  }
+  <mat-divider class="divider" />
+  <div class="notice-bg-bg controls flex">
     <button mat-button color="primary" (click)="goHome()" i18n>Go Home</button>
-    <span fxFlex></span>
-    <button
-      mat-button
-      color="primary"
-      (click)="logOut('logOutButtonClicked')"
-      i18n
-    >
+    <span class="flex-grow"></span>
+    <button mat-button color="primary" (click)="logOut('logOutButtonClicked')" i18n>
       Sign Out
     </button>
   </div>

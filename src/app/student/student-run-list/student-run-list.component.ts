@@ -2,17 +2,37 @@ import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { StudentRun } from '../student-run';
 import { StudentService } from '../student.service';
 import { ConfigService } from '../../services/config.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectDialogComponent } from '../add-project-dialog/add-project-dialog.component';
 import { runSpansDays } from '../../../assets/wise5/common/datetime/datetime';
 import { sortByRunStartTimeDesc } from '../../domain/run';
+import { SearchBarComponent } from '../../modules/shared/search-bar/search-bar.component';
+import { TimelineComponent } from '../../modules/timeline/timeline/timeline.component';
+import {
+  TimelineItemComponent,
+  TimelineItemLabel,
+  TimelineItemContent
+} from '../../modules/timeline/timeline-item/timeline-item.component';
+import { StudentRunListItemComponent } from '../student-run-list-item/student-run-list-item.component';
+import { MatButton } from '@angular/material/button';
+import { DatePipe } from '@angular/common';
 
 @Component({
-    selector: 'app-student-run-list',
-    templateUrl: './student-run-list.component.html',
-    styleUrls: ['./student-run-list.component.scss'],
-    standalone: false
+  imports: [
+    SearchBarComponent,
+    RouterLink,
+    TimelineComponent,
+    TimelineItemComponent,
+    TimelineItemLabel,
+    TimelineItemContent,
+    StudentRunListItemComponent,
+    MatButton,
+    DatePipe
+  ],
+  selector: 'app-student-run-list',
+  styleUrl: './student-run-list.component.scss',
+  templateUrl: './student-run-list.component.html'
 })
 export class StudentRunListComponent implements OnInit {
   runs: StudentRun[] = [];
@@ -43,11 +63,11 @@ export class StudentRunListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getRuns();
   }
 
-  getRuns() {
+  getRuns(): void {
     this.studentService.getRuns().subscribe((runs) => {
       for (let run of runs) {
         this.runs.push(new StudentRun(run));
@@ -67,7 +87,7 @@ export class StudentRunListComponent implements OnInit {
     return sortByRunStartTimeDesc(a, b);
   }
 
-  getRunIndex(run: StudentRun) {
+  getRunIndex(run: StudentRun): number {
     for (let i = 0; i < this.runs.length; i++) {
       if (this.runs[i].id === run.id) {
         return i;
@@ -76,7 +96,7 @@ export class StudentRunListComponent implements OnInit {
     return null;
   }
 
-  runSpansDays(run: StudentRun) {
+  runSpansDays(run: StudentRun): boolean {
     return runSpansDays(run, this.localeID);
   }
 
@@ -90,7 +110,7 @@ export class StudentRunListComponent implements OnInit {
     this.filteredRuns = this.search ? this.performFilter(this.search) : this.runs;
   }
 
-  performFilter(filterValue: string) {
+  performFilter(filterValue: string): any {
     filterValue = this.search.toLocaleLowerCase();
     // TODO: extract this for global use?
     return this.runs.filter((run: StudentRun) =>
@@ -110,7 +130,7 @@ export class StudentRunListComponent implements OnInit {
     );
   }
 
-  handleClassroomAccessCode(accessCode: string) {
+  handleClassroomAccessCode(accessCode: string): any {
     for (const run of this.runs) {
       if (accessCode.toLowerCase() === run.runCode.toLowerCase()) {
         return setTimeout(() => {
@@ -125,7 +145,7 @@ export class StudentRunListComponent implements OnInit {
     this.searchUpdated('');
   }
 
-  isRunActive(run) {
+  isRunActive(run): boolean {
     return run.isActive(this.configService.getCurrentServerTime());
   }
 }

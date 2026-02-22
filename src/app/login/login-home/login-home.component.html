@@ -2,13 +2,17 @@
   <mat-card-content>
     <form role="form" (submit)="login()">
       <h2 class="standalone__title accent" i18n>Sign in to WISE</h2>
-      <p *ngIf="passwordError" class="warn center standalone__error" i18n>
-        Username and password not recognized. Please try again.
-      </p>
-      <p *ngIf="isReLoginDueToErrorSavingData" class="warn center standalone__error" i18n>
-        There was an error saving data. Please log in again. You may need to re-do your recent work.
-        We apologize for the inconvenience.
-      </p>
+      @if (passwordError) {
+        <p class="warn center standalone__error" i18n>
+          Username and password not recognized. Please try again.
+        </p>
+      }
+      @if (isReLoginDueToErrorSavingData) {
+        <p class="warn center standalone__error" i18n>
+          There was an error saving data. Please log in again. You may need to re-do your recent
+          work. We apologize for the inconvenience.
+        </p>
+      }
       <p>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label i18n>Username</mat-label>
@@ -35,17 +39,23 @@
           />
         </mat-form-field>
       </p>
-      <p *ngIf="isRecaptchaEnabled" class="center" i18n>
-        This site is protected by reCAPTCHA and the Google
-        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
-        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-      </p>
-      <ng-container *ngIf="isRecaptchaEnabled">
-        <div *ngIf="!isRecaptchaVerificationFailed">&nbsp;</div>
-        <mat-error *ngIf="isRecaptchaVerificationFailed" class="center" i18n
-          >Recaptcha failed. Please reload the page and try again!</mat-error
-        >
-      </ng-container>
+      @if (isRecaptchaEnabled) {
+        <p class="center" i18n>
+          This site is protected by reCAPTCHA and the Google
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+        </p>
+      }
+      @if (isRecaptchaEnabled) {
+        @if (!isRecaptchaVerificationFailed) {
+          <div>&nbsp;</div>
+        }
+        @if (isRecaptchaVerificationFailed) {
+          <mat-error class="center" i18n
+            >Recaptcha failed. Please reload the page and try again!</mat-error
+          >
+        }
+      }
       <p>
         <button
           mat-flat-button
@@ -54,38 +64,46 @@
           [disabled]="processing"
           class="button--progress w-full"
         >
-          <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
+          @if (processing) {
+            <mat-progress-bar mode="indeterminate" />
+          }
           <span i18n>Sign In</span>
         </button>
       </p>
     </form>
-    <div *ngIf="showSocialLogin">
-      <p class="center mat-headline-6">- <span i18>or</span> -</p>
-      <p class="center" *ngIf="googleAuthenticationEnabled">
-        <button
-          class="button--social-login button--google"
-          color="accent"
-          mat-flat-button
-          (click)="socialSignIn('google')"
-        >
-          <img src="assets/img/icons/google-logo.svg" alt="Google logo" />
-          <ng-container i18n>Sign in with Google</ng-container>
-        </button>
-      </p>
-      <p class="center" *ngIf="microsoftAuthenticationEnabled">
-        <button
-          class="button--social-login button--microsoft"
-          color="accent"
-          mat-flat-button
-          (click)="socialSignIn('microsoft')"
-        >
-          <img src="assets/img/icons/ms-logo.svg" alt="Microsoft logo" />
-          <ng-container i18n>Sign in with Microsoft</ng-container>
-        </button>
-      </p>
-    </div>
+    @if (showSocialLogin) {
+      <div>
+        <p class="center mat-headline-6">- <span i18>or</span> -</p>
+        @if (googleAuthenticationEnabled) {
+          <p class="center">
+            <button
+              class="button--social-login button--google"
+              color="accent"
+              mat-flat-button
+              (click)="socialSignIn('google')"
+            >
+              <img src="assets/img/icons/google-logo.svg" alt="Google logo" />
+              <ng-container i18n>Sign in with Google</ng-container>
+            </button>
+          </p>
+        }
+        @if (microsoftAuthenticationEnabled) {
+          <p class="center">
+            <button
+              class="button--social-login button--microsoft"
+              color="accent"
+              mat-flat-button
+              (click)="socialSignIn('microsoft')"
+            >
+              <img src="assets/img/icons/ms-logo.svg" alt="Microsoft logo" />
+              <ng-container i18n>Sign in with Microsoft</ng-container>
+            </button>
+          </p>
+        }
+      </div>
+    }
   </mat-card-content>
-  <mat-divider></mat-divider>
+  <mat-divider />
   <mat-card-content class="center">
     <p><a routerLink="/forgot" i18n>Forgot username or password?</a></p>
     <p i18n>New to WISE? <a routerLink="/join">Join for free!</a></p>

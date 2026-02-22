@@ -1,20 +1,23 @@
-<computer-avatar-selector
-  *ngIf="computerAvatarSelectorVisible"
-  [computerAvatarSettings]="componentContent.computerAvatarSettings"
-  (chooseAvatarEvent)="selectComputerAvatar($event)"
-/>
-<mat-card *ngIf="!computerAvatarSelectorVisible" appearance="outlined" class="mat-elevation-z2">
-  <component-header [component]="component"></component-header>
-  <div #messagesContainer class="messages">
-    <ai-chat-messages
-      [messages]="messages"
-      [workgroupId]="workgroupId"
-      [waitingForComputerResponse]="waitingForComputerResponse"
-      [computerAvatar]="computerAvatar"
-    ></ai-chat-messages>
-  </div>
-  <chat-input
-    [submitDisabled]="waitingForComputerResponse"
-    (submitEvent)="submitStudentResponse($event)"
-  ></chat-input>
-</mat-card>
+@if (computerAvatarSelectorVisible) {
+  <computer-avatar-selector
+    [computerAvatarSettings]="componentContent.computerAvatarSettings"
+    (chooseAvatarEvent)="selectComputerAvatar($event)"
+  />
+}
+@if (!computerAvatarSelectorVisible) {
+  <mat-card appearance="outlined" class="mat-elevation-z2">
+    <component-header [component]="component" />
+    <div #messagesContainer class="messages">
+      <ai-chat-messages
+        [messages]="messages"
+        [workgroupId]="workgroupId"
+        [waitingForComputerResponse]="waitingForComputerResponse"
+        [computerAvatar]="computerAvatar"
+      />
+    </div>
+    <chat-input
+      [submitDisabled]="waitingForComputerResponse"
+      (submitEvent)="submitStudentResponse($event)"
+    />
+  </mat-card>
+}

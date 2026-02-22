@@ -6,12 +6,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogWithOpenInNewWindowComponent } from '../../../../directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../../../services/configService';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { NavItemComponent } from '../nav-item/nav-item.component';
+import { NgClass } from '@angular/common';
 
 @Component({
-    selector: 'node-progress-view',
-    templateUrl: './node-progress-view.component.html',
-    styleUrls: ['./node-progress-view.component.scss'],
-    standalone: false
+  imports: [MatButton, MatIcon, NavItemComponent, NgClass],
+  selector: 'node-progress-view',
+  styleUrl: './node-progress-view.component.scss',
+  templateUrl: './node-progress-view.component.html'
 })
 export class NodeProgressViewComponent implements OnInit {
   @Input() protected nodeId: string;
@@ -58,7 +62,7 @@ export class NodeProgressViewComponent implements OnInit {
         this.router.navigate([
           '/teacher/manage/unit',
           this.configService.getRunId(),
-          'node',
+          this.isApplicationNode(this.nodeId) ? 'node' : 'group',
           this.nodeId
         ]);
       })

@@ -1,34 +1,27 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentHeaderComponent } from './component-header.component';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ComponentContent } from '../../common/ComponentContent';
 import { Component } from '../../common/Component';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ComponentContent } from '../../common/ComponentContent';
+import { ComponentHeaderComponent } from './component-header.component';
+import { MockProvider } from 'ng-mocks';
 import { ProjectService } from '../../services/projectService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: ComponentHeaderComponent;
 let fixture: ComponentFixture<ComponentHeaderComponent>;
-
 describe('ComponentHeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [ComponentHeaderComponent,
-        StudentTeacherCommonServicesModule],
-    providers: [
+      imports: [ComponentHeaderComponent],
+      providers: [
         {
-            provide: DomSanitizer,
-            useValue: {
-                bypassSecurityTrustHtml: (val: string) => val
-            }
+          provide: DomSanitizer,
+          useValue: {
+            bypassSecurityTrustHtml: (val: string) => val
+          }
         },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-});
+        MockProvider(ProjectService)
+      ]
+    });
     spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
   });
 

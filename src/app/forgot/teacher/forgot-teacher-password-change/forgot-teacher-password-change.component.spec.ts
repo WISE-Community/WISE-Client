@@ -1,12 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgotTeacherPasswordChangeComponent } from './forgot-teacher-password-change.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherService } from '../../../teacher/teacher.service';
 import { Observable, throwError } from 'rxjs';
 import { provideRouter, Router } from '@angular/router';
-import { PasswordModule } from '../../../password/password.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PasswordRequirementComponent } from '../../../password/password-requirement/password-requirement.component';
 
 export class MockTeacherService {
@@ -16,7 +12,7 @@ export class MockTeacherService {
     password: string,
     confirmPassword: string
   ): Observable<any> {
-    return Observable.create((observer) => {
+    return new Observable((observer) => {
       observer.next({
         status: 'success',
         messageCode: 'verificationCodeCorrect'
@@ -43,12 +39,7 @@ describe('ForgotTeacherPasswordChangeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        PasswordModule,
-        ReactiveFormsModule,
-        ForgotTeacherPasswordChangeComponent
-      ],
+      imports: [ForgotTeacherPasswordChangeComponent],
       providers: [{ provide: TeacherService, useClass: MockTeacherService }, provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotTeacherPasswordChangeComponent);

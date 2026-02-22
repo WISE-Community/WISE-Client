@@ -6,18 +6,20 @@
   @if (isDefaultRun) {
     <h3 i18n>Class Periods</h3>
     <div class="flex flex-wrap gap-2">
-      <div *ngFor="let period of run.periods" class="info-block flex items-center justify-center">
-        <span class="mat-subtitle-2">{{ period }}</span>
-        <button
-          mat-icon-button
-          color="accent"
-          (click)="deletePeriod(period)"
-          i18n-aria-label
-          aria-label="Delete period"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
+      @for (period of run.periods; track period) {
+        <div class="info-block flex items-center justify-center">
+          <span class="mat-subtitle-2">{{ period }}</span>
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="deletePeriod(period)"
+            i18n-aria-label
+            aria-label="Delete period"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      }
     </div>
     <div>
       <mat-form-field appearance="fill" class="flex-none w-full sm:w-auto">
@@ -41,11 +43,13 @@
         >
           <mat-icon>add_circle</mat-icon>
         </button>
-        <mat-hint *ngIf="addPeriodMessage" class="warn">{{ addPeriodMessage }}</mat-hint>
+        @if (addPeriodMessage) {
+          <mat-hint class="warn">{{ addPeriodMessage }}</mat-hint>
+        }
       </mat-form-field>
-      <p *ngIf="!addPeriodMessage" class="mat-caption" i18n>
-        For "Period 9", just enter the number 9.
-      </p>
+      @if (!addPeriodMessage) {
+        <p class="mat-caption" i18n>For "Period 9", just enter the number 9.</p>
+      }
     </div>
     <mat-divider></mat-divider>
     <h3 i18n>Students Per Team</h3>
@@ -62,9 +66,11 @@
   <h3>
     <ng-container i18n>Schedule</ng-container>&nbsp;
     @if (run.lastRun) {
-      <span *ngIf="run.lastRun" class="mat-caption" i18n>
-        (Last student login: {{ run.lastRun | date: 'short' }})
-      </span>
+      @if (run.lastRun) {
+        <span class="mat-caption" i18n>
+          (Last student login: {{ run.lastRun | date: 'short' }})
+        </span>
+      }
     }
   </h3>
   <div class="flex flex-wrap flex-col sm:flex-row sm:gap-4">
@@ -81,7 +87,9 @@
         <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatePicker></mat-datepicker>
         <mat-error i18n>Start date is required.</mat-error>
-        <mat-hint *ngIf="startDateMessage" class="warn">{{ startDateMessage }}</mat-hint>
+        @if (startDateMessage) {
+          <mat-hint class="warn">{{ startDateMessage }}</mat-hint>
+        }
       </mat-form-field>
     </div>
     <div>
@@ -96,7 +104,9 @@
         />
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatePicker [startAt]="targetEndDate"></mat-datepicker>
-        <mat-hint *ngIf="endDateMessage" class="warn">{{ endDateMessage }}</mat-hint>
+        @if (endDateMessage) {
+          <mat-hint class="warn">{{ endDateMessage }}</mat-hint>
+        }
       </mat-form-field>
     </div>
     @if (isDefaultRun) {

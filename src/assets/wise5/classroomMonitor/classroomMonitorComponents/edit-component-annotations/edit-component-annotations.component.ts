@@ -4,23 +4,19 @@ import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { Annotation } from '../../../common/Annotation';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditComponentScoreComponent } from '../edit-component-score/edit-component-score.component';
 import { GradingEditComponentMaxScoreComponent } from '../grading-edit-component-max-score/grading-edit-component-max-score.component';
 import { EditComponentCommentComponent } from '../edit-component-comment/edit-component-comment.component';
 
 @Component({
-    imports: [
-        CommonModule,
-        EditComponentCommentComponent,
-        EditComponentScoreComponent,
-        FlexLayoutModule,
-        GradingEditComponentMaxScoreComponent
-    ],
-    selector: 'edit-component-annotations',
-    styles: ['.disabled-text { color: gray; }'],
-    templateUrl: 'edit-component-annotations.component.html'
+  imports: [
+    EditComponentCommentComponent,
+    EditComponentScoreComponent,
+    GradingEditComponentMaxScoreComponent
+  ],
+  selector: 'edit-component-annotations',
+  styles: ['.disabled-text { color: gray; }'],
+  templateUrl: 'edit-component-annotations.component.html'
 })
 export class EditComponentAnnotationsComponent {
   @Input() componentId: string;

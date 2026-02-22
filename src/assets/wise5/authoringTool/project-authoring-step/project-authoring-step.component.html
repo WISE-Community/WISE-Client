@@ -1,8 +1,6 @@
 <div
   id="{{ step.id }}"
-  fxLayoutAlign="start center"
-  fxLayoutGap="8px"
-  class="step"
+  class="step flex justify-start items-center gap-2 grow"
   [ngClass]="{ 'branch-path-step': isNodeInAnyBranchPath(step.id) }"
   [ngStyle]="{ 'background-color': getStepBackgroundColor(step.id) }"
   (click)="setCurrentNode(step.id)"
@@ -23,7 +21,7 @@
   <strong>
     <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition" />
   </strong>
-  <div fxLayoutAlign="start center" fxLayoutGap="8px">
+  <div class="flex justify-start items-center gap-2">
     @if (isBranchPoint(step.id)) {
       <button
         mat-icon-button
@@ -37,36 +35,37 @@
         <mat-icon class="rotate-180">call_split</mat-icon>
       </button>
     }
-    <button
-      *ngIf="nodeHasConstraint(step.id)"
-      mat-icon-button
-      (click)="constraintIconClicked(step.id); $event.stopPropagation()"
-      matTooltip="{{ getNumberOfConstraintsOnNode(step.id) }} Constraint(s) {{
-        getConstraintDescriptions(step.id)
-      }}"
-      matTooltipPosition="right"
-      i18n-matTooltip
-    >
-      <mat-icon>block</mat-icon>
-    </button>
-    <mat-icon
-      *ngIf="nodeHasRubric(step.id)"
-      tabindex="0"
-      matTooltip="Has rubric/teaching tips"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      >message</mat-icon
-    >
+    @if (nodeHasConstraint(step.id)) {
+      <button
+        mat-icon-button
+        (click)="constraintIconClicked(step.id); $event.stopPropagation()"
+        matTooltip="{{ getNumberOfConstraintsOnNode(step.id) }} Constraint(s) {{
+          getConstraintDescriptions(step.id)
+        }}"
+        matTooltipPosition="right"
+        i18n-matTooltip
+      >
+        <mat-icon>block</mat-icon>
+      </button>
+    }
+    @if (nodeHasRubric(step.id)) {
+      <mat-icon
+        tabindex="0"
+        matTooltip="Has rubric/teaching tips"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        >message</mat-icon
+      >
+    }
   </div>
   <div
-    fxFlex
-    class="tooltip-helper"
+    class="tooltip-helper flex grow"
     matTooltip="Edit step"
     matTooltipPosition="above"
     i18n-matTooltip
   ></div>
   <!-- <div class="dynamic-step-buttons"> -->
-  <div fxLayoutAlign="start center">
+  <div class="flex justify-start items-center">
     <button
       class="step-action"
       mat-icon-button

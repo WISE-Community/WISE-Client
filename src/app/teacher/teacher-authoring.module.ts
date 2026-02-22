@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-
-import { StudentTeacherCommonModule } from '../student-teacher-common.module';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { ProjectAssetService } from '../services/projectAssetService';
@@ -17,7 +15,6 @@ import { ImportComponentService } from '../../assets/wise5/services/importCompon
 import { InsertComponentService } from '../../assets/wise5/services/insertComponentService';
 import { InsertNodesService } from '../../assets/wise5/services/insertNodesService';
 import { MoveNodesService } from '../../assets/wise5/services/moveNodesService';
-import { AuthoringToolModule } from '../teacher/authoring-tool.module';
 import { UpdateWorkgroupService } from '../services/updateWorkgroupService';
 import { GetWorkgroupService } from '../services/getWorkgroupService';
 import { WorkgroupService } from '../services/workgroup.service';
@@ -29,8 +26,7 @@ import { PeerGroupService } from '../../assets/wise5/services/peerGroupService';
 import { NodeService } from '../../assets/wise5/services/nodeService';
 import { TeacherNodeService } from '../../assets/wise5/services/teacherNodeService';
 import { MilestoneReportService } from '../../assets/wise5/services/milestoneReportService';
-import { AuthoringRoutingModule } from './authoring-routing.module';
-import { RouterModule } from '@angular/router';
+import { authoringRoutes } from './authoring.routes';
 import { ComponentInfoService } from '../../assets/wise5/services/componentInfoService';
 import { CreateBranchService } from '../../assets/wise5/services/createBranchService';
 import { EditBranchService } from '../../assets/wise5/services/editBranchService';
@@ -43,9 +39,17 @@ import { CreateComponentService } from '../../assets/wise5/services/createCompon
 import { NotifyAuthorService } from '../../assets/wise5/services/notifyAuthorService';
 import { RemoveNodeIdFromTransitionsService } from '../../assets/wise5/services/removeNodeIdFromTransitionsService';
 import { RegisterProjectService } from '../../assets/wise5/services/registerProjectService';
+import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
+import { EditComponentAdvancedComponent } from '../authoring-tool/edit-component-advanced/edit-component-advanced.component';
+import { PeerGroupingAuthoringService } from '../../assets/wise5/services/peerGroupingAuthoringService';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [StudentTeacherCommonModule, AuthoringToolModule, RouterModule, AuthoringRoutingModule],
+  imports: [
+    RouterModule.forChild(authoringRoutes),
+    EditComponentAdvancedComponent, // TODO: refactor. currently needed for peer grouping authoring dialog to work
+    StudentTeacherCommonServicesModule
+  ],
   providers: [
     ClassroomStatusService,
     ComponentInfoService,
@@ -70,6 +74,7 @@ import { RegisterProjectService } from '../../assets/wise5/services/registerProj
     MoveNodesService,
     { provide: NodeService, useExisting: TeacherNodeService },
     NotifyAuthorService,
+    PeerGroupingAuthoringService,
     ProjectAssetService,
     SpaceService,
     DeleteTranslationsService,

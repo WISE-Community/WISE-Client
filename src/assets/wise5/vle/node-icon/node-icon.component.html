@@ -1,33 +1,35 @@
 <ng-template #iconContent>
-  <img
-    *ngIf="isImage()"
-    class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} {{ sizeClass }} avatar"
-    [src]="icon.imgSrc"
-    [alt]="icon.imgAlt"
-  />
-  <div
-    *ngIf="isFont()"
-    style="background-color: {{ icon.color }}"
-    class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} avatar"
-  >
-    <mat-icon class="{{ sizeClass }} {{ icon.fontSet }}">{{ icon.fontName }}</mat-icon>
-  </div>
+  @if (isImage()) {
+    <img
+      class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} {{ sizeClass }} avatar"
+      [src]="icon.imgSrc"
+      [alt]="icon.imgAlt"
+    />
+  }
+  @if (isFont()) {
+    <div
+      style="background-color: {{ icon.color }}"
+      class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} avatar"
+    >
+      <mat-icon class="{{ sizeClass }} {{ icon.fontSet }}">{{ icon.fontName }}</mat-icon>
+    </div>
+  }
 </ng-template>
 
-<button
-  *ngIf="canEdit"
-  mat-button
-  matTooltip="Choose an icon"
-  matTooltipPosition="above"
-  i18n-matTooltip
-  matBadge="edit"
-  class="mdc-text-field--filled has-icon-badge"
-  (click)="openNodeIconChooserDialog()"
->
-  <div class="mat-form-field-flex" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="4px">
-    <ng-container *ngTemplateOutlet="iconContent" />
-  </div>
-</button>
-<ng-container *ngIf="!canEdit">
+@if (canEdit) {
+  <button
+    mat-button
+    matTooltip="Choose an icon"
+    matTooltipPosition="above"
+    i18n-matTooltip
+    matBadge="edit"
+    class="mdc-text-field--filled has-icon-badge"
+    (click)="openNodeIconChooserDialog()"
+  >
+    <div class="mat-form-field-flex flex items-center gap-1">
+      <ng-container *ngTemplateOutlet="iconContent" />
+    </div>
+  </button>
+} @else {
   <ng-container *ngTemplateOutlet="iconContent" />
-</ng-container>
+}

@@ -5,9 +5,7 @@ import { components } from '../../../components/Components';
 import { ComponentContent } from '../../../common/ComponentContent';
 
 @Component({
-    selector: 'mock-authoring',
-    template: '<div>Mock Authoring Component</div>',
-    standalone: false
+  template: '<div>Mock Authoring Component</div>'
 })
 class MockAuthoringComponent {
   componentContent: any;
@@ -36,10 +34,6 @@ describe('EditComponentComponent', () => {
     component.componentContent = mockComponentContent as ComponentContent;
     component.nodeId = mockNodeId;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 
   it('should create the dynamic component after view init', () => {

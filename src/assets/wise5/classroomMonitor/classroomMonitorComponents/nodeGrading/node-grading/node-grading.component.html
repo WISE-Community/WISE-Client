@@ -1,0 +1,65 @@
+<div class="view-content--with-sidemenu">
+  <div class="l-constrained grading node-grading">
+    <div class="content-head flex flex-row flex-wrap items-center justify-center lt-md:flex-100">
+      <div class="accent-1 flex flex-row items-center justify-center">
+        <h2 class="content-head__item">
+          {{ nodeCompletionPercent }}% <span class="content-head-label" i18n>Step Completion</span>
+        </h2>
+        @if (hasWork && nodeAverageScore != null) {
+          <h2 class="content-head__item">
+            {{ nodeAverageScore }}/{{ nodeMaxScore ?? '0' }}
+            <span class="content-head-label" i18n>Mean Step Score</span>
+          </h2>
+        }
+      </div>
+      <div class="flex-1"></div>
+      <button mat-stroked-button (click)="previewProject()" class="info">
+        <div class="flex items-center justify-center space-x-1">
+          <mat-icon class="info">info_outline</mat-icon>
+          @if (numRubrics == 0) {
+            <span i18n>Step Info</span>
+          } @else {
+            <span i18n>Info + Tips ({{ numRubrics }})</span>
+          }
+        </div>
+      </button>
+    </div>
+    <div>
+      <div class="flex gap-2 items-center flex-wrap mb-2 mx-2 pt-2">
+        <h3 class="mat-body-1" i18n>Question Summaries</h3>
+        @if (summariesVisible) {
+          <a href="#" class="mat-caption" (click)="toggleSummaries($event)" i18n>Hide</a>
+        } @else {
+          <a href="#" class="mat-caption" (click)="toggleSummaries($event)" i18n>Show</a>
+        }
+      </div>
+      @if (summariesVisible) {
+        <div class="mat-elevation-z1 app-background mt-4 mb-2">
+          <mat-tab-group
+            [selectedIndex]="selectedComponent.value"
+            (selectedIndexChange)="selectSummary($event)"
+            mat-stretch-tabs="false"
+            animationDuration="0"
+          >
+            @for (component of components; track component; let i = $index) {
+              <mat-tab label="{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}">
+                <ng-template matTabContent>
+                  <component-summary [component]="component" [node]="node" [periodId]="periodId" />
+                </ng-template>
+              </mat-tab>
+            }
+          </mat-tab-group>
+        </div>
+      }
+    </div>
+    <div class="flex gap-2 items-center flex-wrap mt-4 mb-2 mx-2">
+      <h3 class="mat-body-1" i18n>Class Responses</h3>
+      <filter-components
+        [components]="components"
+        [selectedComponents]="visibleComponents"
+        (componentsChange)="setVisibleComponents($event)"
+      />
+    </div>
+    <node-class-responses [node]="node" [components]="visibleComponents" />
+  </div>
+</div>

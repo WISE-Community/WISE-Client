@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from './dialog-with-spinner.component';
 
 describe('DialogWithSpinnerComponent', () => {
@@ -9,8 +8,7 @@ describe('DialogWithSpinnerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DialogWithSpinnerComponent],
-      imports: [MatDialogModule, MatProgressSpinnerModule],
+      imports: [DialogWithSpinnerComponent],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} }

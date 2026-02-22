@@ -1,5 +1,5 @@
 <div class="question-rules notice-bg-bg">
-  <h5 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+  <h5 class="flex flex-row justify-start items-center gap-1">
     <span i18n>Question Bank Rules</span>
     <button
       mat-icon-button
@@ -11,7 +11,7 @@
     >
       <mat-icon>add_circle</mat-icon>
     </button>
-    <span fxFlex></span>
+    <span class="w-full"></span>
     <button mat-button (click)="showHelp()" i18n>Help</button>
   </h5>
   <ul
@@ -20,151 +20,156 @@
     (cdkDropListDropped)="drop($event)"
     cdkScrollable
   >
-    <ng-container
-      *ngFor="let rule of feedbackRules; let ruleIndex = index; let first = first; let last = last"
-    >
+    @for (
+      rule of feedbackRules;
+      track rule;
+      let ruleIndex = $index;
+      let first = $first;
+      let last = $last
+    ) {
       <li cdkDrag>
-        <mat-card appearance="outlined" class="rule" fxLayout="row wrap" fxLayoutGap="8px">
-          <div
-            class="text-secondary"
-            fxLayout="column"
-            fxLayoutAlign="start center"
-            fxLayoutGap="22px"
-          >
-            <span class="mat-subtitle-1">{{ ruleIndex + 1 }}</span>
-            <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
-          </div>
-          <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="8px" fxFlex>
-            <mat-form-field class="rule-input form-field-no-hint" appearance="fill">
-              <mat-label i18n>Expression</mat-label>
-              <input
-                matInput
-                [(ngModel)]="rule.expression"
-                (ngModelChange)="inputChanged.next($event)"
-              />
-            </mat-form-field>
-            <div
-              *ngFor="
-                let question of rule.questions;
-                let questionIndex = index;
-                let last = last;
-                trackBy: customTrackBy
-              "
-              class="question-item"
-              fxLayout="row"
-              fxLayoutAlign="start center"
-              fxLayoutGap="8px"
-            >
-              <mat-form-field
-                *ngIf="version === 1"
-                class="rule-input form-field-no-hint question-input"
-                appearance="fill"
-              >
-                <mat-label *ngIf="rule.questions.length === 1" i18n>Question</mat-label>
-                <mat-label *ngIf="rule.questions.length > 1" i18n
-                  >Question #{{ questionIndex + 1 }}</mat-label
-                >
-                <textarea
-                  matInput
-                  [(ngModel)]="rule.questions[questionIndex]"
-                  (ngModelChange)="inputChanged.next($event)"
-                  cdkTextareaAutosize
-                >
-                </textarea>
-                <button
-                  mat-icon-button
-                  matSuffix
-                  *ngIf="rule.questions.length > 1"
-                  matTooltip="Delete question"
-                  i18n-matTooltip
-                  matTooltipPosition="before"
-                  (click)="deleteFeedbackInRule(rule, questionIndex)"
-                >
-                  <mat-icon>clear</mat-icon>
-                </button>
-              </mat-form-field>
-              <ng-container *ngIf="version === 2">
-                <translatable-textarea
-                  [content]="rule.questions[questionIndex]"
-                  key="text"
-                  [label]="getQuestionLabel(rule, questionIndex)"
-                  (defaultLanguageTextChanged)="inputChanged.next($event)"
-                  class="rule-input question-input"
-                />
-                <div class="question-button-div" fxLayout="row" fxLayoutAlign="center start">
-                  <button
-                    mat-icon-button
-                    matSuffix
-                    *ngIf="rule.questions.length > 1"
-                    matTooltip="Delete question"
-                    i18n-matTooltip
-                    matTooltipPosition="before"
-                    (click)="deleteFeedbackInRule(rule, questionIndex)"
-                  >
-                    <mat-icon>clear</mat-icon>
-                  </button>
-                </div>
-              </ng-container>
-              <div class="question-button-div" fxLayout="row" fxLayoutAlign="center start">
-                <button
-                  *ngIf="last"
-                  mat-icon-button
-                  matTooltip="Add new question"
-                  matTooltipPosition="above"
-                  i18n-matTooltip
-                  (click)="addNewFeedbackToRule(rule)"
-                  i18n
-                >
-                  <mat-icon>add_circle</mat-icon>
-                </button>
-              </div>
+        <mat-card appearance="outlined" class="rule">
+          <div class="flex flex-row gap-2">
+            <div class="text-secondary flex flex-col justify-start items-center gap-4">
+              <span class="mat-subtitle-1">{{ ruleIndex + 1 }}</span>
+              <mat-icon cdkDragHandle title="Drag to reorder" i18n-title>drag_indicator</mat-icon>
             </div>
-          </div>
-          <div fxLayout="column" fxLayoutAlign="start center">
-            <button
-              mat-icon-button
-              i18n-matTooltip
-              matTooltip="Delete rule"
-              matTooltipPosition="before"
-              (click)="deleteRule(ruleIndex)"
-            >
-              <mat-icon>clear</mat-icon>
-            </button>
-            <button
-              *ngIf="feedbackRules.length > 1"
-              [disabled]="first"
-              mat-icon-button
-              i18n-matTooltip
-              matTooltip="Move up"
-              matTooltipPosition="before"
-              (click)="moveUp(ruleIndex)"
-            >
-              <mat-icon>arrow_upward</mat-icon>
-            </button>
-            <button
-              [disabled]="last"
-              mat-icon-button
-              i18n-matTooltip
-              matTooltip="Move down"
-              matTooltipPosition="before"
-              (click)="moveDown(ruleIndex)"
-            >
-              <mat-icon>arrow_downward</mat-icon>
-            </button>
+            <div class="w-full flex flex-col justify-center items-start">
+              <mat-form-field class="rule-input form-field-no-hint mb-2" appearance="fill">
+                <mat-label i18n>Expression</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="rule.expression"
+                  (ngModelChange)="inputChanged.next($event)"
+                />
+              </mat-form-field>
+              @for (
+                question of rule.questions;
+                track customTrackBy(questionIndex, question);
+                let questionIndex = $index;
+                let last = $last
+              ) {
+                <div class="question-item flex flex-row justify-start items-center">
+                  @if (version === 1) {
+                    <mat-form-field
+                      class="rule-input form-field-no-hint question-input"
+                      appearance="fill"
+                    >
+                      @if (rule.questions.length === 1) {
+                        <mat-label i18n>Question</mat-label>
+                      }
+                      @if (rule.questions.length > 1) {
+                        <mat-label i18n>Question #{{ questionIndex + 1 }}</mat-label>
+                      }
+                      <textarea
+                        matInput
+                        [(ngModel)]="rule.questions[questionIndex]"
+                        (ngModelChange)="inputChanged.next($event)"
+                        cdkTextareaAutosize
+                      >
+                      </textarea>
+                      @if (rule.questions.length > 1) {
+                        <button
+                          mat-icon-button
+                          matSuffix
+                          matTooltip="Delete question"
+                          i18n-matTooltip
+                          matTooltipPosition="before"
+                          (click)="deleteFeedbackInRule(rule, questionIndex)"
+                        >
+                          <mat-icon>clear</mat-icon>
+                        </button>
+                      }
+                    </mat-form-field>
+                  }
+                  @if (version === 2) {
+                    <translatable-textarea
+                      [content]="rule.questions[questionIndex]"
+                      key="text"
+                      [label]="getQuestionLabel(rule, questionIndex)"
+                      (defaultLanguageTextChanged)="inputChanged.next($event)"
+                      class="rule-input question-input"
+                    />
+                    <div class="question-button-div flex flex-row justify-center items-start">
+                      @if (rule.questions.length > 1) {
+                        <button
+                          mat-icon-button
+                          matSuffix
+                          matTooltip="Delete question"
+                          i18n-matTooltip
+                          matTooltipPosition="before"
+                          (click)="deleteFeedbackInRule(rule, questionIndex)"
+                        >
+                          <mat-icon>clear</mat-icon>
+                        </button>
+                      }
+                    </div>
+                  }
+                  <div class="question-button-div flex flex-row justify-center items-start">
+                    @if (last) {
+                      <button
+                        mat-icon-button
+                        matTooltip="Add new question"
+                        matTooltipPosition="above"
+                        i18n-matTooltip
+                        (click)="addNewFeedbackToRule(rule)"
+                        i18n
+                      >
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+            <div class="flex flex-col justify-start items-center">
+              <button
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Delete rule"
+                matTooltipPosition="before"
+                (click)="deleteRule(ruleIndex)"
+              >
+                <mat-icon>clear</mat-icon>
+              </button>
+              @if (feedbackRules.length > 1) {
+                <button
+                  [disabled]="first"
+                  mat-icon-button
+                  i18n-matTooltip
+                  matTooltip="Move up"
+                  matTooltipPosition="before"
+                  (click)="moveUp(ruleIndex)"
+                >
+                  <mat-icon>arrow_upward</mat-icon>
+                </button>
+              }
+              <button
+                [disabled]="last"
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Move down"
+                matTooltipPosition="before"
+                (click)="moveDown(ruleIndex)"
+              >
+                <mat-icon>arrow_downward</mat-icon>
+              </button>
+            </div>
           </div>
         </mat-card>
       </li>
-    </ng-container>
+    }
   </ul>
-  <button
-    *ngIf="feedbackRules.length > 0"
-    mat-icon-button
-    color="primary"
-    matTooltip="Add a new rule at the end"
-    i18n-matTooltip
-    matTooltipPosition="above"
-    (click)="addNewRule(feedbackRules.length)"
-  >
-    <mat-icon>add_circle</mat-icon>
-  </button>
+  @if (feedbackRules.length > 0) {
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Add a new rule at the end"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="addNewRule(feedbackRules.length)"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  }
 </div>

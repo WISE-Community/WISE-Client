@@ -12,7 +12,7 @@ describe('AudioOscillatorService', () => {
     imports: [StudentTeacherCommonServicesModule],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
-    service = TestBed.get(AudioOscillatorService);
+    service = TestBed.inject(AudioOscillatorService);
   });
   createComponent();
   isCompleted();

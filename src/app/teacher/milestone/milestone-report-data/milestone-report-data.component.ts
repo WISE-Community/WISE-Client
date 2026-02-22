@@ -1,28 +1,16 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'milestone-report-data',
-    template: `{{ output }}`,
-    standalone: false
+  selector: 'milestone-report-data',
+  template: `{{ output }}`
 })
 export class MilestoneReportDataComponent {
-  @Input()
-  nodeId: string = '';
-
-  @Input()
-  componentId: string = '';
-
-  @Input()
-  calc: string;
-
-  @Input()
-  scoreId: string;
-
-  @Input()
-  scoreValues: any = [];
-
-  @Input()
-  data: any;
+  @Input() nodeId: string = '';
+  @Input() componentId: string = '';
+  @Input() calc: string;
+  @Input() scoreId: string;
+  @Input() scoreValues: any = [];
+  @Input() data: any;
 
   output: string = '';
 

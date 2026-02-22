@@ -23,16 +23,41 @@ import { PlotLineManager } from '../plot-line-manager';
 import { DataExplorerManager } from '../data-explorer-manager';
 import { addPointFromTableIntoData, isMultipleYAxes, isSingleYAxis } from '../util';
 import { GraphConnectedComponentManager } from '../graph-connected-component-manager';
-
 import Draggable from 'highcharts/modules/draggable-points.js';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatSelectTrigger } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { ComponentSaveSubmitButtonsComponent } from '../../../directives/component-save-submit-buttons/component-save-submit-buttons.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 Draggable(Highcharts);
 HC_exporting(Highcharts);
 
 @Component({
+  imports: [
+    ComponentHeaderComponent,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    FormsModule,
+    MatSelectTrigger,
+    MatOption,
+    MatIconButton,
+    MatIcon,
+    MatButton,
+    MatInput,
+    HighchartsChartModule,
+    ComponentSaveSubmitButtonsComponent,
+    ComponentAnnotationsComponent
+  ],
   selector: 'graph-student',
   templateUrl: 'graph-student.component.html',
-  styleUrls: ['graph-student.component.scss'],
-  standalone: false
+  styleUrl: 'graph-student.component.scss'
 })
 export class GraphStudent extends ComponentStudent {
   activeSeries: any = null;
@@ -62,7 +87,7 @@ export class GraphStudent extends ComponentStudent {
   lastSavedMouseMoveTimestamp: number;
   mouseDown: boolean = false;
   mouseOverPoints: any[] = [];
-  notebookConfig: any = this.NotebookService.getNotebookConfig();
+  notebookConfig: any = this.notebookService.getNotebookConfig();
   plotLineManager: PlotLineManager;
   previousComponentState: any;
   previousTrialIdsToShow: string[];
@@ -87,27 +112,27 @@ export class GraphStudent extends ComponentStudent {
   yAxisLocked: boolean;
 
   constructor(
-    protected AnnotationService: AnnotationService,
+    protected annotationService: AnnotationService,
     private changeDetectorRef: ChangeDetectorRef,
-    protected ComponentService: ComponentService,
-    protected ConfigService: ConfigService,
+    protected componentService: ComponentService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
-    private GraphService: GraphService,
-    protected NodeService: NodeService,
-    protected NotebookService: NotebookService,
-    private ProjectService: ProjectService,
-    protected StudentAssetService: StudentAssetService,
-    protected StudentDataService: StudentDataService
+    private graphService: GraphService,
+    protected nodeService: NodeService,
+    protected notebookService: NotebookService,
+    private projectService: ProjectService,
+    protected studentAssetService: StudentAssetService,
+    protected studentDataService: StudentDataService
   ) {
     super(
-      AnnotationService,
-      ComponentService,
-      ConfigService,
+      annotationService,
+      componentService,
+      configService,
       dialog,
-      NodeService,
-      NotebookService,
-      StudentAssetService,
-      StudentDataService
+      nodeService,
+      notebookService,
+      studentAssetService,
+      studentDataService
     );
   }
 
@@ -121,8 +146,8 @@ export class GraphStudent extends ComponentStudent {
       this.componentContent.showMouseYPlotLine
     );
     this.graphConnectedComponentManager = new GraphConnectedComponentManager(
-      this.GraphService,
-      this.ProjectService
+      this.graphService,
+      this.projectService
     );
     this.initializeComponentContentParams();
     this.initializeStudentMode(this.componentState);
@@ -187,7 +212,7 @@ export class GraphStudent extends ComponentStudent {
     this.isResetSeriesButtonVisible = true;
     this.isSelectSeriesVisible = true;
     this.backgroundImage = this.componentContent.backgroundImage;
-    if (!this.GraphService.componentStateHasStudentWork(componentState, this.componentContent)) {
+    if (!this.graphService.componentStateHasStudentWork(componentState, this.componentContent)) {
       this.newTrial();
     }
     if (
@@ -196,7 +221,7 @@ export class GraphStudent extends ComponentStudent {
     ) {
       this.handleConnectedComponents();
     } else if (
-      this.GraphService.componentStateHasStudentWork(componentState, this.componentContent)
+      this.graphService.componentStateHasStudentWork(componentState, this.componentContent)
     ) {
       this.setStudentWork(componentState);
     } else if (this.component.hasConnectedComponent()) {
@@ -218,7 +243,7 @@ export class GraphStudent extends ComponentStudent {
       componentState.nodeId,
       componentState.componentId
     );
-    const componentType = this.ProjectService.getComponentType(
+    const componentType = this.projectService.getComponentType(
       connectedComponent.nodeId,
       connectedComponent.componentId
     );
@@ -259,7 +284,7 @@ export class GraphStudent extends ComponentStudent {
     reader.scope = this;
     reader.fileName = files[0].name;
     reader.readAsText(files[0]);
-    this.StudentAssetService.uploadAsset(files[0]);
+    this.studentAssetService.uploadAsset(files[0]);
   }
 
   handleTableConnectedComponentStudentDataChanged(connectedComponent, componentState) {
@@ -602,13 +627,15 @@ export class GraphStudent extends ComponentStudent {
    */
   drawGraphHelper(resolve) {
     this.turnOffXAxisDecimals();
-    this.turnOffYAxisDecimals();
+    if (!this.isAllowDecimalsForYAxis()) {
+      this.turnOffYAxisDecimals();
+    }
     this.copyXAxisPlotBandsFromComponentContent();
     this.setupXAxisLimitSpacerWidth();
     let series = null;
     if (this.isTrialsEnabled()) {
-      series = this.GraphService.getSeriesFromTrials(this.trials);
-      this.xAxis.plotBands = this.GraphService.getPlotBandsFromTrials(this.trials);
+      series = this.graphService.getSeriesFromTrials(this.trials);
+      this.xAxis.plotBands = this.graphService.getPlotBandsFromTrials(this.trials);
     } else {
       series = this.getSeries();
     }
@@ -653,6 +680,12 @@ export class GraphStudent extends ComponentStudent {
 
   turnOffXAxisDecimals() {
     this.xAxis.allowDecimals = false;
+  }
+
+  private isAllowDecimalsForYAxis(): boolean {
+    return isSingleYAxis(this.yAxis)
+      ? this.yAxis.allowDecimals
+      : this.yAxis.some((yAxis) => yAxis.allowDecimals);
   }
 
   turnOffYAxisDecimals() {
@@ -744,7 +777,7 @@ export class GraphStudent extends ComponentStudent {
         enabled: this.isLegendEnabled
       },
       tooltip: {
-        formatter: this.GraphService.createTooltipFormatter(
+        formatter: this.graphService.createTooltipFormatter(
           xAxis,
           yAxis,
           this.componentContent.roundValuesTo
@@ -1292,8 +1325,8 @@ export class GraphStudent extends ComponentStudent {
    * e.g. 'submit', 'save', 'change'
    */
   createComponentStateAdditionalProcessing(deferred, componentState, action) {
-    if (this.ProjectService.hasAdditionalProcessingFunctions(this.nodeId, this.componentId)) {
-      const additionalProcessingFunctions = this.ProjectService.getAdditionalProcessingFunctions(
+    if (this.projectService.hasAdditionalProcessingFunctions(this.nodeId, this.componentId)) {
+      const additionalProcessingFunctions = this.projectService.getAdditionalProcessingFunctions(
         this.nodeId,
         this.componentId
       );
@@ -2090,8 +2123,8 @@ export class GraphStudent extends ComponentStudent {
     Canvg.fromString(hiddenCanvas.getContext('2d'), this.getChartById(this.chartId).getSVG())
       .render()
       .then(() => {
-        this.NotebookService.addNote(
-          this.StudentDataService.getCurrentNodeId(),
+        this.notebookService.addNote(
+          this.studentDataService.getCurrentNodeId(),
           convertToPNGFile(hiddenCanvas)
         );
       });
@@ -2120,7 +2153,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   performRounding(number: number): number {
-    return this.GraphService.performRounding(number, this.componentContent.roundValuesTo);
+    return this.graphService.performRounding(number, this.componentContent.roundValuesTo);
   }
 
   /**
@@ -2190,9 +2223,9 @@ export class GraphStudent extends ComponentStudent {
     const componentId = connectedComponent.componentId;
     let connectedComponentBackgroundImage = null;
     this.isDisabled = true;
-    if (this.ConfigService.isPreview()) {
+    if (this.configService.isPreview()) {
       const latestComponentState =
-        this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
+        this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
       if (latestComponentState != null) {
         promises.push(
           this.graphConnectedComponentManager.getTrialsFromComponentState(
@@ -2214,14 +2247,14 @@ export class GraphStudent extends ComponentStudent {
         this.graphConnectedComponentManager.getTrialsFromClassmates(
           this.nodeId,
           this.componentId,
-          this.ConfigService.getPeriodId(),
+          this.configService.getPeriodId(),
           nodeId,
           componentId,
           connectedComponent.showClassmateWorkSource
         )
       );
-      let component = this.ProjectService.getComponent(nodeId, componentId) as GraphContent;
-      component = this.ProjectService.injectAssetPaths(component);
+      let component = this.projectService.getComponent(nodeId, componentId) as GraphContent;
+      component = this.projectService.injectAssetPaths(component);
       connectedComponentBackgroundImage = component.backgroundImage;
     }
     return connectedComponentBackgroundImage;
@@ -2232,7 +2265,7 @@ export class GraphStudent extends ComponentStudent {
     const componentId = connectedComponent.componentId;
     let connectedComponentBackgroundImage = null;
     let latestComponentState =
-      this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
+      this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(nodeId, componentId);
     if (latestComponentState != null) {
       if (
         latestComponentState.componentType === 'ConceptMap' ||
@@ -2267,7 +2300,7 @@ export class GraphStudent extends ComponentStudent {
           connectedComponentBackgroundImage = latestComponentState.studentData.backgroundImage;
         }
         if (connectedComponent.importGraphSettings) {
-          const component = this.ProjectService.getComponent(
+          const component = this.projectService.getComponent(
             connectedComponent.nodeId,
             connectedComponent.componentId
           );
@@ -2380,7 +2413,7 @@ export class GraphStudent extends ComponentStudent {
     if (
       mergedComponentState == null ||
       isReset ||
-      !this.GraphService.componentStateHasStudentWork(mergedComponentState)
+      !this.graphService.componentStateHasStudentWork(mergedComponentState)
     ) {
       mergedComponentState = newComponentState;
     } else {
@@ -2398,7 +2431,7 @@ export class GraphStudent extends ComponentStudent {
         mergedComponentState = newComponentState;
       } else if (type === 'importWork' || type == null) {
         const connectedComponentState =
-          this.StudentDataService.getLatestComponentStateByNodeIdAndComponentId(
+          this.studentDataService.getLatestComponentStateByNodeIdAndComponentId(
             nodeId,
             componentId
           );

@@ -9,12 +9,14 @@ import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
 import { ComponentService } from '../../componentService';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { ShowWorkStudentComponent } from '../../showWork/show-work-student/show-work-student.component';
 
 @Component({
-    selector: 'show-my-work-student',
-    templateUrl: './show-my-work-student.component.html',
-    styleUrls: ['./show-my-work-student.component.scss'],
-    standalone: false
+  imports: [ComponentHeaderComponent, MatCard, MatCardContent, ShowWorkStudentComponent],
+  styleUrl: './show-my-work-student.component.scss',
+  templateUrl: './show-my-work-student.component.html'
 })
 export class ShowMyWorkStudentComponent extends ComponentStudent {
   showWorkComponentContent: any;

@@ -1,16 +1,9 @@
-<div class="description notice-bg-bg">
-  <h5 class="flex flex-row items-center gap-1 !text-xl">
-    <span i18n>Model Description</span>
-  </h5>
-  <mat-card appearance="outlined" class="description-content">
-    <mat-form-field class="description-input form-field-no-hint" appearance="fill">
-      <mat-label i18n>User-Friendly Description</mat-label>
-      <textarea
-        matInput
-        [(ngModel)]="cRaterRubric.description"
-        (ngModelChange)="inputChanged.next($event)"
-        cdkTextareaAutosize
-      ></textarea>
-    </mat-form-field>
-  </mat-card>
-</div>
+<mat-form-field class="description-input" appearance="fill">
+  <mat-label i18n>User-Friendly Description</mat-label>
+  <textarea
+    matInput
+    [(ngModel)]="cRaterRubric.description"
+    (ngModelChange)="inputChanged.next($event)"
+    cdkTextareaAutosize
+  ></textarea>
+</mat-form-field>

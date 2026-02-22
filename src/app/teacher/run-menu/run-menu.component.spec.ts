@@ -3,26 +3,18 @@ import { RunMenuComponent } from './run-menu.component';
 import { TeacherService } from '../teacher.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { MatMenuModule } from '@angular/material/menu';
-import { ConfigService } from '../../services/config.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../domain/user';
 import { TeacherRun } from '../teacher-run';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Course } from '../../domain/course';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArchiveProjectService } from '../../services/archive-project.service';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RunMenuHarness } from './run-menu.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarHarness } from '@angular/material/snack-bar/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ArchiveProjectResponse } from '../../domain/archiveProjectResponse';
+import { provideRouter } from '@angular/router';
 
 export class MockTeacherService {
   checkClassroomAuthorization(): Observable<string> {
@@ -61,12 +53,6 @@ export class MockUserService {
   }
 }
 
-export class MockConfigService {
-  getContextPath(): string {
-    return '/wise';
-  }
-}
-
 const archivedTag = { id: 1, text: 'archived', color: null };
 let archiveProjectService: ArchiveProjectService;
 let component: RunMenuComponent;
@@ -79,29 +65,19 @@ let runMenuHarness: RunMenuHarness;
 let teacherService: TeacherService;
 
 describe('RunMenuComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-    declarations: [RunMenuComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserAnimationsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatSnackBarModule,
-        RouterTestingModule],
-    providers: [
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RunMenuComponent],
+      providers: [
         ArchiveProjectService,
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: UserService, useClass: MockUserService },
-        { provide: ConfigService, useClass: MockConfigService },
         { provide: MatDialog, useValue: {} },
         provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
-    })
-  );
+        provideRouter([])
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(async () => {
     fixture = TestBed.createComponent(RunMenuComponent);

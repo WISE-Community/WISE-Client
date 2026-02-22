@@ -1,13 +1,11 @@
-import { NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
+import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabulatorTableComponent } from './tabulator-table.component';
 import { Tabulator } from 'tabulator-tables';
 import { TabulatorColumn } from '../TabulatorData';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 
 let component: TabulatorTableComponent;
 let fixture: ComponentFixture<TabulatorTableComponent>;
-let element: Element;
 const editableCells = {
   0: ['1', '2'],
   1: ['1', '2'],
@@ -32,9 +30,7 @@ const tabOptions = {
 describe('TabulatorTableComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [StudentTeacherCommonServicesModule],
-      declarations: [TabulatorTableComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [TabulatorTableComponent]
     });
     fixture = TestBed.createComponent(TabulatorTableComponent);
     component = fixture.componentInstance;
@@ -42,7 +38,6 @@ describe('TabulatorTableComponent', () => {
     component.tabData = tabData;
     component.tabOptions = tabOptions;
     component.editableCells = editableCells;
-    element = fixture.nativeElement;
     fixture.detectChanges();
   });
 
@@ -53,10 +48,10 @@ describe('TabulatorTableComponent', () => {
 function afterViewInit() {
   describe('afterViewInit', () => {
     it('should create Tabulator table after view is initialized', async () => {
-      component.table.on('tableBuilt', () => {
-        expect(component.table.getRows().length).toBe(3);
-        expect(component.table.getColumns().length).toBe(3);
-        expect(component.table.getRows()[0].getCell(1).getValue()).toBe('36');
+      component['table'].on('tableBuilt', () => {
+        expect(component['table'].getRows().length).toBe(3);
+        expect(component['table'].getColumns().length).toBe(3);
+        expect(component['table'].getRows()[0].getCell(1).getValue()).toBe('36');
       });
     });
   });
@@ -65,8 +60,8 @@ function afterViewInit() {
 function onChanges() {
   describe('onChanges', () => {
     it('should update Tabulator columns and data on changes', async () => {
-      component.table = new Tabulator(component.tableEl, {});
-      component.table.on('tableBuilt', () => {
+      component['table'] = new Tabulator(component['tableEl'], {});
+      component['table'].on('tableBuilt', () => {
         const newTabColumns = [
           { title: 'Age', field: '0' },
           { title: 'Height', field: '1' }
@@ -79,10 +74,10 @@ function onChanges() {
           tabColumns: new SimpleChange(null, newTabColumns, false),
           tabData: new SimpleChange(null, newTabData, false)
         });
-        component.table.on('dataChanged', function (data) {
-          expect(component.table.getRows().length).toBe(2);
-          expect(component.table.getColumns().length).toBe(2);
-          expect(component.table.getRows()[0].getCell(0).getValue()).toBe('10');
+        component['table'].on('dataChanged', function (data) {
+          expect(component['table'].getRows().length).toBe(2);
+          expect(component['table'].getColumns().length).toBe(2);
+          expect(component['table'].getRows()[0].getCell(0).getValue()).toBe('10');
         });
         fixture.detectChanges();
       });

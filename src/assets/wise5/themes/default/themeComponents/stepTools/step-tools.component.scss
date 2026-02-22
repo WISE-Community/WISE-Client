@@ -6,10 +6,10 @@
   height: 42px;
 
   mat-form-field {
-    width: 168px;
+    width: 180px;
 
     @media only screen and (min-width: functions.breakpoint('sm.min')) {
-      width: 264px;
+      width: 392px;
     }
 
     @media only screen and (min-width: functions.breakpoint('md.min')) {
@@ -39,18 +39,5 @@
 
   .mat-mdc-form-field-subscript-wrapper {
     display: none;
-  }
-}
-
-.unit-plan-icon {
-  color: rgba(0,0,0,.54);
-}
-
-.submit-button-content {
-  display: flex;
-  align-items: center;
-
-  span {
-    margin-left: 7px;
   }
 }

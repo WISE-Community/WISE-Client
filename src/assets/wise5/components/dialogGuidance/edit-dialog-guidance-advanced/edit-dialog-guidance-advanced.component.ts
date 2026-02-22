@@ -1,12 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { CRaterRubric } from '../../common/cRater/CRaterRubric';
+import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { EditComponentConstraintsComponent } from '../../../../../app/authoring-tool/edit-component-constraints/edit-component-constraints.component';
+import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
 
 @Component({
-  selector: 'edit-dialog-guidance-advanced',
-  templateUrl: 'edit-dialog-guidance-advanced.component.html',
-  standalone: false
+  imports: [EditComponentConstraintsComponent, EditComponentJsonComponent],
+  template: `
+    <edit-component-constraints [componentContent]="component.content" />
+    <edit-component-json [component]="component" />
+  `
 })
-export class EditDialogGuidanceAdvancedComponent extends EditAdvancedComponentComponent {
-  @Input() cRaterRubric: CRaterRubric;
-}
+export class EditDialogGuidanceAdvancedComponent extends EditAdvancedComponentComponent {}

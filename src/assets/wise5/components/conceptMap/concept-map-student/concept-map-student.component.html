@@ -1,7 +1,7 @@
 <div class="main-div">
-  <component-header [component]="component"></component-header>
+  <component-header [component]="component" />
   <div class="main-concept-map-div">
-    <div class="top-buttons" fxLayout="row">
+    <div class="top-buttons flex flex-row">
       <button
         mat-raised-button
         color="primary"
@@ -12,51 +12,57 @@
       >
         Reset
       </button>
-      <add-to-notebook-button
-        *ngIf="isShowAddToNotebookButton"
-        class="add-to-notebook-button top-button"
-        [isDisabled]="isDisabled"
-        (snipImage)="snipImage()"
-      >
-      </add-to-notebook-button>
-      <div *ngIf="isStudentAttachmentEnabled">
-        <button
-          *ngIf="background == null"
-          mat-button
-          class="mat-primary mat-raised-button upload-button"
-          (click)="showStudentAssets()"
-          matTooltip="Upload Background Image"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>attach_file</mat-icon>
-        </button>
-        <button
-          *ngIf="background != null"
-          mat-button
-          class="mat-primary mat-raised-button upload-button"
-          (click)="deleteBackgroundImage()"
-          matTooltip="Delete Background Image"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon>delete_outline</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div id="{{ conceptMapContainerId }}" class="container" fxLayout="row">
-      <div id="{{ selectNodeBarId }}" class="side-node-bar">
-        <div *ngFor="let availableNode of availableNodes" class="side-node-container">
-          <img
-            [src]="availableNode.fileName"
-            style="cursor: pointer"
-            (mousedown)="selectNode($event, availableNode)"
-            width="{{ availableNode.width }}"
-            height="{{ availableNode.height }}"
-          />
-          <br />
-          <span>{{ availableNode.name }}</span>
+      @if (isShowAddToNotebookButton) {
+        <add-to-notebook-button
+          class="add-to-notebook-button top-button"
+          [isDisabled]="isDisabled"
+          (snipImage)="snipImage()"
+        />
+      }
+      @if (isStudentAttachmentEnabled) {
+        <div>
+          @if (background == null) {
+            <button
+              mat-button
+              class="mat-primary mat-raised-button upload-button"
+              (click)="showStudentAssets()"
+              matTooltip="Upload Background Image"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>attach_file</mat-icon>
+            </button>
+          }
+          @if (background != null) {
+            <button
+              mat-button
+              class="mat-primary mat-raised-button upload-button"
+              (click)="deleteBackgroundImage()"
+              matTooltip="Delete Background Image"
+              matTooltipPosition="above"
+              i18n-matTooltip
+            >
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          }
         </div>
+      }
+    </div>
+    <div id="{{ conceptMapContainerId }}" class="container flex flex-row">
+      <div id="{{ selectNodeBarId }}" class="side-node-bar">
+        @for (availableNode of availableNodes; track availableNode) {
+          <div class="side-node-container">
+            <img
+              [src]="availableNode.fileName"
+              style="cursor: pointer"
+              (mousedown)="selectNode($event, availableNode)"
+              width="{{ availableNode.width }}"
+              height="{{ availableNode.height }}"
+            />
+            <br />
+            <span>{{ availableNode.name }}</span>
+          </div>
+        }
       </div>
       <div class="concept-map-content">
         <svg
@@ -67,74 +73,78 @@
         ></svg>
       </div>
     </div>
-    <div *ngIf="displayLinkTypeChooser" class="link-type-chooser">
-      <div>
-        <span>{{ linksTitle }}</span>
-      </div>
-      <mat-radio-group
-        [ngModel]="selectedLinkType"
-        (change)="studentDataChanged()"
-        [disabled]="isDisabled"
-      >
-        <div *ngFor="let link of availableLinks">
-          <mat-radio-button
-            class="link-radio-choice"
-            color="primary"
-            aria-label="link.label"
-            [value]="link.id"
-            (click)="linkTypeSelected(link)"
-            [disabled]="isDisabled"
-          >
-            <div class="link-color" style="background-color: {{ link.color }};"></div>
-            <span [innerHTML]="link.label"> </span>
-          </mat-radio-button>
-        </div>
-      </mat-radio-group>
-      <div fxLayout="row">
+    @if (displayLinkTypeChooser) {
+      <div class="link-type-chooser">
         <div>
-          <button
-            mat-button
-            class="mat-primary mat-raised-button"
-            (click)="cancelLinkTypeChooser()"
-            i18n
-          >
-            Cancel
-          </button>
+          <span>{{ linksTitle }}</span>
         </div>
-        <div fxFlex></div>
-        <div>
-          <button
-            mat-button
-            class="mat-primary mat-raised-button"
-            (click)="linkDeleteButtonClicked($event, highlightedElement)"
-            i18n
-          >
-            Delete
-          </button>
+        <mat-radio-group
+          [ngModel]="selectedLinkType"
+          (change)="studentDataChanged()"
+          [disabled]="isDisabled"
+        >
+          @for (link of availableLinks; track link) {
+            <div>
+              <mat-radio-button
+                class="link-radio-choice"
+                color="primary"
+                aria-label="link.label"
+                [value]="link.id"
+                (click)="linkTypeSelected(link)"
+                [disabled]="isDisabled"
+              >
+                <div class="link-color" style="background-color: {{ link.color }};"></div>
+                <span [innerHTML]="link.label"> </span>
+              </mat-radio-button>
+            </div>
+          }
+        </mat-radio-group>
+        <div class="flex flex-row">
+          <div>
+            <button
+              mat-button
+              class="mat-primary mat-raised-button"
+              (click)="cancelLinkTypeChooser()"
+              i18n
+            >
+              Cancel
+            </button>
+          </div>
+          <div class="flex-1"></div>
+          <div>
+            <button
+              mat-button
+              class="mat-primary mat-raised-button"
+              (click)="linkDeleteButtonClicked($event, highlightedElement)"
+              i18n
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    }
     <div id="{{ feedbackContainerId }}"></div>
   </div>
-  <component-save-submit-buttons
-    *ngIf="isSaveOrSubmitButtonVisible"
-    [componentState]="latestComponentState"
-    [isDirty]="isDirty"
-    [isDisabled]="isDisabled"
-    [isSaveButtonVisible]="isSaveButtonVisible"
-    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-    [isSubmitButtonVisible]="isSubmitButtonVisible"
-    [isSubmitDirty]="isSubmitDirty"
-    (saveButtonClicked)="saveButtonClicked($event)"
-    (submitButtonClicked)="submitButtonClicked($event)"
-  >
-  </component-save-submit-buttons>
-  <component-annotations
-    *ngIf="mode === 'student'"
-    [annotations]="latestAnnotations"
-    [maxScore]="componentContent.maxScore"
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-  >
-  </component-annotations>
+  @if (isSaveOrSubmitButtonVisible) {
+    <component-save-submit-buttons
+      [componentState]="latestComponentState"
+      [isDirty]="isDirty"
+      [isDisabled]="isDisabled"
+      [isSaveButtonVisible]="isSaveButtonVisible"
+      [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+      [isSubmitButtonVisible]="isSubmitButtonVisible"
+      [isSubmitDirty]="isSubmitDirty"
+      (saveButtonClicked)="saveButtonClicked($event)"
+      (submitButtonClicked)="submitButtonClicked($event)"
+    />
+  }
+  @if (mode === 'student') {
+    <component-annotations
+      [annotations]="latestAnnotations"
+      [maxScore]="componentContent.maxScore"
+      [nodeId]="nodeId"
+      [componentId]="componentId"
+    />
+  }
 </div>

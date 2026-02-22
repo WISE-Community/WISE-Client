@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Language } from '../../domain/language';
 import { ProjectLocale } from '../../domain/projectLocale';
@@ -9,10 +8,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 
 @Component({
-    selector: 'project-language-chooser',
-    styleUrl: './project-language-chooser.component.scss',
-    imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
-    templateUrl: './project-language-chooser.component.html'
+  selector: 'project-language-chooser',
+  styleUrl: './project-language-chooser.component.scss',
+  imports: [MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
+  templateUrl: './project-language-chooser.component.html'
 })
 export class ProjectLanguageChooserComponent implements OnChanges {
   protected availableLanguages: Language[];

@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,10 +8,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AddStepTarget } from '../../../../app/domain/addStepTarget';
 
 @Component({
-    imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
-    selector: 'add-step-button',
-    styles: [
-        `
+  imports: [MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
+  selector: 'add-step-button',
+  styles: [
+    `
       .rotate-180 {
         transform: rotate(180deg);
       }
@@ -20,8 +19,8 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
         transform: scaleY(-1);
       }
     `
-    ],
-    templateUrl: './add-step-button.component.html'
+  ],
+  templateUrl: './add-step-button.component.html'
 })
 export class AddStepButtonComponent {
   protected canAddAfter: boolean;

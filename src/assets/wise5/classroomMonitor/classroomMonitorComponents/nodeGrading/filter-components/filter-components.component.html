@@ -1,0 +1,22 @@
+<mat-form-field appearance="fill" class="component-select form-field-no-hint">
+  @if (components.length == 1) {
+    <mat-select disabled placeholder="1 item ({{ getComponentTypeLabel(components[0].type) }})" />
+  } @else if (components.length > 1) {
+    <mat-select
+      [(ngModel)]="selectedComponents"
+      (selectionChange)="updateSelectedComponents()"
+      [placeholder]="selectedText"
+      [compareWith]="compareById"
+      multiple
+    >
+      <mat-select-trigger>{{ selectedText }}</mat-select-trigger>
+      @for (component of components; track component.id; let i = $index) {
+        <mat-option [value]="component" color="primary">
+          {{ component.displayIndex }}: {{ getComponentTypeLabel(component.type) }}
+        </mat-option>
+      }
+    </mat-select>
+  } @else {
+    <mat-select [(ngModel)]="selectedComponents" (selectionChange)="updateSelectedComponents()" />
+  }
+</mat-form-field>

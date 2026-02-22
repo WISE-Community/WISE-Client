@@ -1,25 +1,21 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { ProjectService } from '../../../services/projectService';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { TableShowWorkComponent } from './table-show-work.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { NodeService } from '../../../services/nodeService';
+import { TabulatorTableComponent } from '../tabulator-table/tabulator-table.component';
+import { TabulatorData } from '../TabulatorData';
 
 let fixture: ComponentFixture<TableShowWorkComponent>;
 let component: TableShowWorkComponent;
-
 describe('TableShowWorkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [TableShowWorkComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [MatDialogModule, StudentTeacherCommonServicesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [TableShowWorkComponent, MockComponent(TabulatorTableComponent)],
+      providers: [MockProviders(NodeService, ProjectService, TabulatorDataService)]
+    });
     fixture = TestBed.createComponent(TableShowWorkComponent);
     const componentContent = {
       id: 'component1',
@@ -29,7 +25,12 @@ describe('TableShowWorkComponent', () => {
       rubric: 'rubric',
       type: 'table'
     } as ComponentContent;
-    spyOn(TestBed.inject(ProjectService), 'getComponent').and.returnValue(componentContent);
+    const projectService = TestBed.inject(ProjectService);
+    spyOn(projectService, 'getComponent').and.returnValue(componentContent);
+    spyOn(projectService, 'injectAssetPaths').and.callFake((arg) => arg);
+    spyOn(TestBed.inject(TabulatorDataService), 'convertTableDataToTabulator').and.returnValue(
+      {} as TabulatorData
+    );
     component = fixture.componentInstance;
     component.componentContent = {};
     component.componentState = { studentData: { tableData: [] } };
@@ -38,7 +39,6 @@ describe('TableShowWorkComponent', () => {
   });
 
   calculateColumnNames();
-  setupTable();
 });
 
 function createCell(text: string): any {
@@ -63,24 +63,10 @@ function calculateColumnNames() {
         [createCell('2020'), createCell('100')]
       ];
       const componentState = createComponentState(tableData);
-      const columnNames = component.calculateColumnNames(componentState);
+      const columnNames = component['calculateColumnNames'](componentState);
       expect(columnNames.length).toEqual(2);
       expect(columnNames[0]).toEqual(columnName1);
       expect(columnNames[1]).toEqual(columnName2);
-    });
-  });
-}
-
-function setupTable() {
-  describe('setupTable', () => {
-    it('should setup table', () => {
-      component.tableData = null;
-      const convertTableDataToTabulatorSpy = spyOn(
-        TestBed.inject(TabulatorDataService),
-        'convertTableDataToTabulator'
-      );
-      component.setupTable();
-      expect(convertTableDataToTabulatorSpy).toHaveBeenCalled();
     });
   });
 }

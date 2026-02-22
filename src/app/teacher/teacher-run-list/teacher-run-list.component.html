@@ -1,5 +1,5 @@
 <div
-  class="content-block filters dark-theme primary-bg flex flex-col md:flex-row gap-4 items-center justify-start"
+  class="content-block filters dark-theme primary-bg flex flex-col md:flex-row gap-2 md:items-center justify-start"
 >
   <h2 class="flex items-center gap-2">
     <mat-icon>calendar_month</mat-icon><span i18n>Class Schedule</span>
@@ -13,41 +13,47 @@
     [value]="searchValue"
     (update)="searchChanged($event)"
   />
-  <div class="flex flex-row items-center justify-center gap-4">
-    <mat-form-field [subscriptSizing]="'dynamic'" class="w-full">
-      <mat-label>View</mat-label>
-      <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
-        <mat-option [value]="false" i18n>Active</mat-option>
-        <mat-option [value]="true" i18n>Archived</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+  <mat-form-field [subscriptSizing]="'dynamic'">
+    <mat-label>View</mat-label>
+    <mat-select [(ngModel)]="showArchivedView" (selectionChange)="refreshProjects()">
+      <mat-option [value]="false" i18n>Active</mat-option>
+      <mat-option [value]="true" i18n>Archived</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div class="content-block">
   <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
     <select-tags [selectedTags]="selectedTags" (selectTagEvent)="selectTags($event)" />
     <div class="notice run-counts">
       <p [ngStyle]="{ visibility: allRunsLoaded ? 'visible' : 'hidden' }">
-        <ng-container *ngIf="searchValue || filterValue" i18n
-          >Units found: {{ filteredRuns.length }}</ng-container
-        >
-        <ng-container *ngIf="!searchValue && !filterValue">
-          <ng-container *ngIf="showArchivedView" i18n>Archived classroom units:</ng-container>
-          <ng-container *ngIf="!showArchivedView" i18n>Active classroom units:</ng-container>
+        @if (searchValue || filterValue) {
+          <ng-container i18n>Units found: {{ filteredRuns.length }}</ng-container>
+        }
+        @if (!searchValue && !filterValue) {
+          @if (showArchivedView) {
+            <ng-container i18n>Archived classroom units:</ng-container>
+          }
+          @if (!showArchivedView) {
+            <ng-container i18n>Active classroom units:</ng-container>
+          }
           {{ filteredRuns.length }}
-        </ng-container>
-        <span class="mat-caption" *ngIf="!showArchivedView && filteredRuns.length">
-          (<ng-container *ngIf="completedTotal()"
-            ><span i18n>{{ completedTotal() }} completed</span>,
-          </ng-container>
-          <ng-container
-            ><span i18n>{{ activeTotal() }} running</span></ng-container
-          >
-          <ng-container *ngIf="scheduledTotal()"
-            >, <span i18n>{{ scheduledTotal() }} scheduled</span></ng-container
-          >)
-        </span>
-        <ng-container *ngIf="searchValue || filterValue || selectedTags.length > 0">
+        }
+        @if (!showArchivedView && filteredRuns.length) {
+          <span class="mat-caption">
+            (
+            @if (completedTotal()) {
+              <span i18n>{{ completedTotal() }} completed</span>,
+            }
+            <ng-container
+              ><span i18n>{{ activeTotal() }} running</span></ng-container
+            >
+            @if (scheduledTotal()) {
+              , <span i18n>{{ scheduledTotal() }} scheduled</span>
+            }
+            )
+          </span>
+        }
+        @if (searchValue || filterValue || selectedTags.length > 0) {
           |
           <a
             href="#"
@@ -57,56 +63,61 @@
             i18n
             >Clear filters</a
           >
-        </ng-container>
+        }
       </p>
     </div>
   </div>
-  <ng-container *ngIf="recentRunsLoaded">
-    <div class="notice no-runs-message" *ngIf="!showArchivedView && getNumActiveRuns() === 0">
-      <p i18n>Hey there! Looks like you don't have any active classroom units.</p>
-      <p i18n>Browse the "Unit Library" to find titles to use with your students.</p>
-    </div>
-    <div class="notice no-runs-message" *ngIf="showArchivedView && getNumArchivedRuns() === 0">
-      <p i18n>Looks like you don't have any archived classroom units.</p>
-    </div>
+  @if (recentRunsLoaded) {
+    @if (!showArchivedView && getNumActiveRuns() === 0) {
+      <div class="notice no-runs-message">
+        <p i18n>Hey there! Looks like you don't have any active classroom units.</p>
+        <p i18n>Browse the "Unit Library" to find titles to use with your students.</p>
+      </div>
+    }
+    @if (showArchivedView && getNumArchivedRuns() === 0) {
+      <div class="notice no-runs-message">
+        <p i18n>Looks like you don't have any archived classroom units.</p>
+      </div>
+    }
     <div class="flex flex-row">
-      <select-runs-controls
-        *ngIf="filteredRuns.length > 0"
-        (archiveProjectsEvent)="archiveProjects($event)"
-        [runChangedEventEmitter]="runChangedEventEmitter"
-        [runs]="filteredRuns"
-        (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
-        [showArchive]="!showArchivedView"
-      />
+      @if (filteredRuns.length > 0) {
+        <select-runs-controls
+          (archiveProjectsEvent)="archiveProjects($event)"
+          [runChangedEventEmitter]="runChangedEventEmitter"
+          [runs]="filteredRuns"
+          (selectRunsOptionChosenEvent)="selectRunsOptionChosen($event)"
+          [showArchive]="!showArchivedView"
+        />
+      }
       @if (selectedProjects.length > 0) {
         <apply-tags-button [selectedProjects]="selectedProjects" />
       }
     </div>
     <app-timeline>
-      <ng-container *ngFor="let run of filteredRuns.sort(sortByStartTimeDesc); let i = index">
-        <app-timeline-item
-          [active]="isRunActive(run)"
-          *ngIf="i < 10 || showAll"
-          id="run{{ run.id }}"
-        >
-          <app-timeline-item-label>
-            <strong>{{ run.startTime | date: 'mediumDate' }}</strong>
-            <ng-container *ngIf="run.endTime && runSpansDays(run)">
-              - <strong>{{ run.endTime | date: 'mediumDate' }}</strong>
-            </ng-container>
-          </app-timeline-item-label>
-          <app-timeline-item-content>
-            <app-teacher-run-list-item
-              [run]="run"
-              (runArchiveStatusChangedEvent)="runArchiveStatusChanged()"
-              (runSelectedStatusChangedEvent)="runSelectedStatusChanged()"
-            ></app-teacher-run-list-item>
-          </app-timeline-item-content>
-        </app-timeline-item>
-      </ng-container>
+      @for (run of filteredRuns.sort(sortByStartTimeDesc); track run; let i = $index) {
+        @if (i < 10 || showAll) {
+          <app-timeline-item [active]="isRunActive(run)" id="run{{ run.id }}">
+            <app-timeline-item-label>
+              <strong>{{ run.startTime | date: 'mediumDate' }}</strong>
+              @if (run.endTime && runSpansDays(run)) {
+                - <strong>{{ run.endTime | date: 'mediumDate' }}</strong>
+              }
+            </app-timeline-item-label>
+            <app-timeline-item-content>
+              <app-teacher-run-list-item
+                [run]="run"
+                (runArchiveStatusChangedEvent)="runArchiveStatusChanged()"
+                (runSelectedStatusChangedEvent)="runSelectedStatusChanged()"
+              />
+            </app-timeline-item-content>
+          </app-timeline-item>
+        }
+      }
     </app-timeline>
-    <div class="content-block__actions" *ngIf="filteredRuns.length > 10 && !showAll">
-      <button mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</button>
-    </div>
-  </ng-container>
+    @if (filteredRuns.length > 10 && !showAll) {
+      <div class="content-block__actions">
+        <button mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</button>
+      </div>
+    }
+  }
 </div>

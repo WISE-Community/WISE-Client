@@ -1,7 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="bottom-spacing">
+<div class="bottom-spacing flex flex-row justify-start items-center gap-2">
   <mat-label class="bold" i18n>Grouping Logic:</mat-label>
-  <span *ngIf="peerGrouping == null" i18n>(None Selected)</span>
-  <span *ngIf="peerGrouping != null">{{ peerGrouping.name }}</span>
+  @if (peerGrouping == null) {
+    <span i18n>(None Selected)</span>
+  } @else {
+    <span>{{ peerGrouping.name }}</span>
+  }
   <button
     mat-raised-button
     color="primary"

@@ -15,7 +15,7 @@
       @if (item.node.type === 'group') {
         <div>{{ item.node.title }}:</div>
       } @else {
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <div class="flex justify-start items-center gap-5">
           <mat-radio-button [value]="item.node" color="primary">
             <span class="bold">{{ item.node.title }}</span>
           </mat-radio-button>
@@ -36,11 +36,11 @@
 </mat-radio-group>
 <div class="nav-controls">
   <mat-divider />
-  <div fxLayout="row" fxLayoutGap="8px">
+  <div class="flex gap-2">
     <button mat-button color="primary" routerLink="../../choose-template" [state]="target" i18n>
       Back
     </button>
-    <span fxFlex></span>
+    <span class="flex-grow"></span>
     <button mat-button color="primary" routerLink="../../../" aria-label="Cancel">Cancel</button>
     <button
       mat-raised-button

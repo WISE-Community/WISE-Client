@@ -1,9 +1,7 @@
 <mat-radio-group
   [(ngModel)]="exportStepSelectionType"
   (ngModelChange)="exportStepSelectionTypeChange.emit(exportStepSelectionType)"
-  class="select-steps-radio-buttons-container"
-  fxLayout="column"
-  fxLayoutGap="10px"
+  class="select-steps-radio-buttons-container flex flex-col gap-2"
 >
   <mat-radio-button value="exportAllSteps" color="primary" i18n>
     Export All Steps
@@ -12,8 +10,8 @@
     Select Steps To Export
   </mat-radio-button>
 </mat-radio-group>
-<ng-container *ngIf="exportStepSelectionType === 'exportSelectSteps'">
-  <div class="button-div" fxLayoutGap="20px">
+@if (exportStepSelectionType === 'exportSelectSteps') {
+  <div class="button-div flex gap-5">
     <button
       mat-raised-button
       color="primary"
@@ -35,7 +33,7 @@
       Deselect All
     </button>
   </div>
-  <div fxLayoutAlign="start center">
+  <div class="flex justify-start items-center">
     <h4>{{ project.metadata.title }}</h4>
     <button
       (click)="previewProject()"
@@ -47,48 +45,56 @@
       <mat-icon>preview</mat-icon>
     </button>
   </div>
-  <div *ngFor="let node of nodes" fxLayout="column">
-    <div fxLayoutAlign="start center" fxLayoutAlign="start center">
-      <mat-checkbox
-        *ngIf="node.order !== 0"
-        [(ngModel)]="node.checked"
-        (ngModelChange)="nodeItemClicked(node)"
-        [ngClass]="{
-          step: node.node.type !== 'group',
-          'branch-path-step': isNodeInAnyBranchPath(node.node.id) && node.node.type !== 'group'
-        }"
-        color="primary"
-        aria-label="Item"
-        i18n-aria-label
-      >
-        <h6>{{ nodeIdToPositionAndTitle[node.node.id] }}</h6>
-      </mat-checkbox>
-      <button
-        *ngIf="node.node.type !== 'group'"
-        (click)="previewNode(node.node)"
-        mat-icon-button
-        matTooltip="Preview"
-        matTooltipPosition="right"
-        i18n-matTooltip
-      >
-        <mat-icon>preview</mat-icon>
-      </button>
-    </div>
-    <div fxLayout="column" fxLayoutGap="10px">
-      <ng-container *ngFor="let componentItem of node.node.components; index as componentIndex">
-        <div
-          *ngIf="node.order !== 0 && node.node.type !== 'group' && node.node.components.length > 0"
-        >
+  @for (node of nodes; track node) {
+    <div class="flex flex-col">
+      <div class="flex justify-start items-center">
+        @if (node.order !== 0) {
           <mat-checkbox
-            [(ngModel)]="componentItem.checked"
+            [(ngModel)]="node.checked"
+            (ngModelChange)="nodeItemClicked(node)"
+            [ngClass]="{
+              step: node.node.type !== 'group',
+              'branch-path-step': isNodeInAnyBranchPath(node.node.id) && node.node.type !== 'group'
+            }"
             color="primary"
-            class="component"
-            aria-label="{{ componentItem.type }}"
+            aria-label="Item"
+            i18n-aria-label
           >
-            {{ componentIndex + 1 }}. {{ componentItem.type }}
+            <h6>{{ nodeIdToPositionAndTitle[node.node.id] }}</h6>
           </mat-checkbox>
-        </div>
-      </ng-container>
+        }
+        @if (node.node.type !== 'group') {
+          <button
+            (click)="previewNode(node.node)"
+            mat-icon-button
+            matTooltip="Preview"
+            matTooltipPosition="right"
+            i18n-matTooltip
+          >
+            <mat-icon>preview</mat-icon>
+          </button>
+        }
+      </div>
+      <div class="flex flex-col gap-2">
+        @for (
+          componentItem of node.node.components;
+          track componentItem;
+          let componentIndex = $index
+        ) {
+          @if (node.order !== 0 && node.node.type !== 'group' && node.node.components.length > 0) {
+            <div>
+              <mat-checkbox
+                [(ngModel)]="componentItem.checked"
+                color="primary"
+                class="component"
+                aria-label="{{ componentItem.type }}"
+              >
+                {{ componentIndex + 1 }}. {{ componentItem.type }}
+              </mat-checkbox>
+            </div>
+          }
+        }
+      </div>
     </div>
-  </div>
-</ng-container>
+  }
+}

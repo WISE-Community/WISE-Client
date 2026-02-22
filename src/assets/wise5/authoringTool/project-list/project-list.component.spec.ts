@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TeacherProjectService } from '../../services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { provideRouter } from '@angular/router';
+import { MockProviders } from 'ng-mocks';
 import { ConfigService } from '../../services/configService';
-import { ProjectListComponent } from './project-list.component';
 import { CopyProjectService } from '../../services/copyProjectService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { SessionService } from '../../services/sessionService';
+import { ProjectListComponent } from './project-list.component';
 
 describe('ProjectListComponent', () => {
   let component: ProjectListComponent;
   let fixture: ComponentFixture<ProjectListComponent>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProjectListComponent, StudentTeacherCommonServicesModule],
+      imports: [ProjectListComponent, MatDialogModule],
       providers: [
-        { provide: CopyProjectService, useValue: {} },
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi())
+        MockProviders(ConfigService, CopyProjectService, SessionService),
+        provideRouter([])
       ]
     }).compileComponents();
     spyOn(TestBed.inject(ConfigService), 'getConfigParam').and.returnValue([]);

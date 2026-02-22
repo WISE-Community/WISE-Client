@@ -25,10 +25,13 @@
       <button mat-menu-item (click)="selectRunsOptionChosen('SCHEDULED')" i18n>Scheduled</button>
     </mat-menu>
   </div>
-  <div *ngIf="numSelectedRuns > 0" class="secondary-text" i18n>{{ numSelectedRuns }} selected</div>
-  <archive-projects-button
-    *ngIf="numSelectedRuns > 0"
-    [showArchive]="showArchive"
-    (archiveProjectsEvent)="archiveProjectsEvent.emit($event)"
-  ></archive-projects-button>
+  @if (numSelectedRuns > 0) {
+    <div class="secondary-text" i18n>{{ numSelectedRuns }} selected</div>
+  }
+  @if (numSelectedRuns > 0) {
+    <archive-projects-button
+      [showArchive]="showArchive"
+      (archiveProjectsEvent)="archiveProjectsEvent.emit($event)"
+    />
+  }
 </div>

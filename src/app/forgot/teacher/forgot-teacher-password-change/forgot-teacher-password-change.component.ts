@@ -14,28 +14,23 @@ import { injectPasswordErrors } from '../../../common/password-helper';
 import { PasswordErrors } from '../../../domain/password/password-errors';
 import { MatDivider } from '@angular/material/divider';
 import { MatProgressBar } from '@angular/material/progress-bar';
-import { NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { PasswordModule } from '../../../password/password.module';
-import { FlexModule } from '@angular/flex-layout/flex';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-    templateUrl: './forgot-teacher-password-change.component.html',
-    styleUrl: './forgot-teacher-password-change.component.scss',
-    imports: [
-        MatCard,
-        MatCardContent,
-        FormsModule,
-        FlexModule,
-        ReactiveFormsModule,
-        PasswordModule,
-        MatButton,
-        NgIf,
-        MatProgressBar,
-        RouterLink,
-        MatDivider
-    ]
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    ReactiveFormsModule,
+    PasswordModule,
+    MatButton,
+    MatProgressBar,
+    RouterLink,
+    MatDivider
+  ],
+  templateUrl: './forgot-teacher-password-change.component.html'
 })
 export class ForgotTeacherPasswordChangeComponent {
   changePasswordFormGroup: FormGroup = this.fb.group({});

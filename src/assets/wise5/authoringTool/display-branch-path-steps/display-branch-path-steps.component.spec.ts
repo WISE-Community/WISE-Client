@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DisplayBranchPathStepsComponent } from './display-branch-path-steps.component';
+import { MockProvider } from 'ng-mocks';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
-import { provideHttpClient } from '@angular/common/http';
+import { DisplayBranchPathStepsComponent } from './display-branch-path-steps.component';
 
 describe('DisplayBranchPathStepsComponent', () => {
   let component: DisplayBranchPathStepsComponent;
@@ -10,8 +9,8 @@ describe('DisplayBranchPathStepsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DisplayBranchPathStepsComponent, StudentTeacherCommonServicesModule],
-      providers: [provideHttpClient(), TeacherProjectService]
+      imports: [DisplayBranchPathStepsComponent],
+      providers: [MockProvider(TeacherProjectService)]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DisplayBranchPathStepsComponent);

@@ -3,13 +3,29 @@ import { copy } from '../../common/object/object';
 import { ConfigService } from '../../services/configService';
 import { NotebookService } from '../../services/notebookService';
 import { TeacherDataService } from '../../services/teacherDataService';
+import { MatList, MatListItem } from '@angular/material/list';
+import { WorkgroupSelectAutocompleteComponent } from '../../../../app/classroom-monitor/workgroup-select/workgroup-select-autocomplete/workgroup-select-autocomplete.component';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
+import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { NotebookWorkgroupGradingComponent } from '../classroomMonitorComponents/notebook/notebook-workgroup-grading/notebook-workgroup-grading.component';
 
 @Component({
-    selector: 'notebook-grading',
-    templateUrl: './notebook-grading.component.html',
-    styleUrls: ['./notebook-grading.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    MatList,
+    MatListItem,
+    WorkgroupSelectAutocompleteComponent,
+    MatButton,
+    MatIcon,
+    NgClass,
+    IntersectionObserverModule,
+    NotebookWorkgroupGradingComponent
+  ],
+  selector: 'notebook-grading',
+  styleUrl: './notebook-grading.component.scss',
+  templateUrl: './notebook-grading.component.html'
 })
 export class NotebookGradingComponent implements OnInit {
   canViewStudentNames: boolean;

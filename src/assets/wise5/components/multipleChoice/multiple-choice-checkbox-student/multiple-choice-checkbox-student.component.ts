@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-    imports: [CommonModule, FormsModule, MatCheckboxModule],
-    selector: 'multiple-choice-checkbox-student',
-    templateUrl: './multiple-choice-checkbox-student.component.html'
+  imports: [CommonModule, FormsModule, MatCheckboxModule],
+  selector: 'multiple-choice-checkbox-student',
+  templateUrl: './multiple-choice-checkbox-student.component.html'
 })
 export class MultipleChoiceCheckboxStudentComponent {
   @Input() choices: any[];

@@ -11,7 +11,6 @@ import { ChangeTeamPeriodDialogComponent } from '../change-team-period-dialog/ch
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ConfigService } from '../../../../services/configService';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { getAvatarColorForWorkgroupId } from '../../../../common/workgroup/workgroup';
 import { ManageUserComponent } from '../manage-user/manage-user.component';
 import { MatCardModule } from '@angular/material/card';
@@ -20,16 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MoveUserConfirmDialogComponent } from '../move-user-confirm-dialog/move-user-confirm-dialog.component';
 import { UpdateWorkgroupService } from '../../../../../../app/services/updateWorkgroupService';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
-  imports: [
-    CommonModule,
-    DragDropModule,
-    FlexLayoutModule,
-    ManageUserComponent,
-    MatCardModule,
-    MatIconModule
-  ],
+  imports: [CommonModule, DragDropModule, ManageUserComponent, MatCardModule, MatIconModule],
   selector: 'manage-team',
   styleUrl: 'manage-team.component.scss',
   templateUrl: 'manage-team.component.html'
@@ -38,14 +31,24 @@ export class ManageTeamComponent {
   protected avatarColor: string;
   protected canGradeStudentWork: boolean;
   protected isUnassigned: boolean;
+  protected lgScreen: boolean;
+  protected mdScreen: boolean;
   @Input() team: any;
 
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private configService: ConfigService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private updateWorkgroupService: UpdateWorkgroupService
-  ) {}
+  ) {
+    this.breakpointObserver.observe(['(min-width: 48rem)']).subscribe((result) => {
+      this.mdScreen = result.matches;
+    });
+    this.breakpointObserver.observe(['(min-width: 64rem)']).subscribe((result) => {
+      this.lgScreen = result.matches;
+    });
+  }
 
   ngOnInit(): void {
     this.avatarColor = getAvatarColorForWorkgroupId(this.team.workgroupId);

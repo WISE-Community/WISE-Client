@@ -1,50 +1,32 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConfigService } from '../../../services/configService';
 import { PeerChatMessage } from '../PeerChatMessage';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'peer-chat-message',
-    templateUrl: './peer-chat-message.component.html',
-    styleUrls: ['./peer-chat-message.component.scss'],
-    standalone: false
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
+  selector: 'peer-chat-message',
+  styleUrl: './peer-chat-message.component.scss',
+  templateUrl: './peer-chat-message.component.html'
 })
 export class PeerChatMessageComponent implements OnInit {
-  @Input()
-  avatarColor: string;
-
-  @Input()
-  displayNames: string;
-
-  @Input()
-  isGrading: boolean;
-
-  @Input()
-  myWorkgroupId: number;
-
-  @Input()
-  peerChatMessage: PeerChatMessage;
-
-  @Input()
-  isTeacher: boolean;
-
-  @Output()
-  deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
-
-  @Output()
-  undeleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
-
-  isMyMessage: boolean;
-  text: string;
-  timestamp: any;
-  workgroupId: number;
-
-  constructor(protected ConfigService: ConfigService) {}
+  @Input() avatarColor: string;
+  @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
+  @Input() displayNames: string;
+  @Input() isGrading: boolean;
+  protected isMyMessage: boolean;
+  @Input() isTeacher: boolean;
+  @Input() myWorkgroupId: number;
+  @Input() peerChatMessage: PeerChatMessage;
+  protected text: string;
+  @Output() undeleteClickedEvent: EventEmitter<PeerChatMessage> =
+    new EventEmitter<PeerChatMessage>();
 
   ngOnInit(): void {
     this.text = this.peerChatMessage.text;
-    this.timestamp = new Date(this.peerChatMessage.timestamp);
-    this.workgroupId = this.peerChatMessage.workgroupId;
-    this.isMyMessage = this.myWorkgroupId === this.workgroupId;
+    this.isMyMessage = this.myWorkgroupId === this.peerChatMessage.workgroupId;
   }
 
   protected delete(): void {

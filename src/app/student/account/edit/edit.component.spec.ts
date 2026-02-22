@@ -1,33 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { EditComponent } from './edit.component';
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-
-@Component({
-    selector: 'app-edit-password', template: '',
-    standalone: false
-})
-class EditPasswordComponent {}
-
-@Component({
-    selector: 'student-edit-profile', template: '',
-    standalone: false
-})
-class StudentEditProfileComponent {}
+import { MockComponents } from 'ng-mocks';
+import { StudentEditProfileComponent } from '../edit-profile/edit-profile.component';
+import { EditPasswordComponent } from '../../../modules/shared/edit-password/edit-password.component';
 
 describe('EditComponent', () => {
   let component: EditComponent;
   let fixture: ComponentFixture<EditComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [EditComponent],
-        providers: [],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [EditComponent, MockComponents(StudentEditProfileComponent, EditPasswordComponent)]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EditComponent);

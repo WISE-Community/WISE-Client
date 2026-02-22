@@ -1,15 +1,10 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { Component } from '../../../common/Component';
 import { ProjectService } from '../../../services/projectService';
 import { TabulatorDataService } from '../tabulatorDataService';
 import { TableStudentComponent } from './table-student.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 let component: TableStudentComponent;
 const componentId = 'component1';
@@ -21,19 +16,11 @@ const testTableData = createTableData([
   ['10', '100', '10'],
   ['20', '200', '10']
 ]);
-
 describe('TableStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TableStudentComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        BrowserModule,
-        MatDialogModule,
-        NoopAnimationsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      imports: [StudentTeacherCommonServicesModule, TableStudentComponent],
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(TableStudentComponent);
     spyOn(TestBed.inject(ProjectService), 'isSpaceExists').and.returnValue(false);
@@ -68,6 +55,7 @@ describe('TableStudentComponent', () => {
       type: 'Table'
     };
     component.component = new Component(componentContent, nodeId);
+    spyOn(TestBed.inject(ProjectService), 'getThemeSettings').and.returnValue({});
     spyOn(component, 'subscribeToSubscriptions').and.callFake(() => {});
     spyOn(component, 'broadcastDoneRenderingComponent').and.callFake(() => {});
     spyOn(component, 'isAddToNotebookEnabled').and.callFake(() => {

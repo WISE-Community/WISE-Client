@@ -16,7 +16,7 @@ export class MatchSummaryData extends SummaryData {
     this.extractBucketData(componentStates);
   }
 
-  getBucketsData() {
+  getBucketsData(): BucketData[] {
     return this.bucketsData;
   }
 

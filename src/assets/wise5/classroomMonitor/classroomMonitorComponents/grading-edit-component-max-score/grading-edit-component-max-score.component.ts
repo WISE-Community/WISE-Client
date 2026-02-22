@@ -2,24 +2,23 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
-    selector: 'grading-edit-component-max-score',
-    styles: [
-        `
+  imports: [FormsModule, MatFormFieldModule, MatInputModule],
+  selector: 'grading-edit-component-max-score',
+  styles: [
+    `
       /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-infix {
         width: inherit;
       }
     `
-    ],
-    templateUrl: 'grading-edit-component-max-score.component.html',
-    encapsulation: ViewEncapsulation.None
+  ],
+  templateUrl: 'grading-edit-component-max-score.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class GradingEditComponentMaxScoreComponent {
   @Input() componentId: string;

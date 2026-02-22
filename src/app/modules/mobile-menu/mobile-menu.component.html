@@ -39,10 +39,12 @@
     >
     <a mat-button href="https://wise-discuss.berkeley.edu" i18n>Community</a>
     <a mat-button href="https://wise-research.berkeley.edu" i18n>Research</a>
-    <div id="mobileMenuAccountLinks" *ngIf="!signedIn" class="flex flex-col gap-2">
-      <mat-divider></mat-divider>
-      <a mat-button routerLink="/login" i18n>Sign In</a>
-      <a mat-button routerLink="/join" i18n>Create Account</a>
-    </div>
+    @if (!signedIn) {
+      <div id="mobileMenuAccountLinks" class="flex flex-col gap-2">
+        <mat-divider />
+        <a mat-button routerLink="/login" i18n>Sign In</a>
+        <a mat-button routerLink="/join" i18n>Create Account</a>
+      </div>
+    }
   </div>
 </nav>

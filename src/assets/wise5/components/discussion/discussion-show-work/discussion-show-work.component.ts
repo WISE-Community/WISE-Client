@@ -5,30 +5,27 @@ import { NodeService } from '../../../services/nodeService';
 import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { TeacherDiscussionService } from '../teacherDiscussionService';
+import { ClassResponse } from '../class-response/class-response.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'discussion-show-work',
-    templateUrl: 'discussion-show-work.component.html',
-    styleUrls: ['discussion-show-work.component.scss'],
-    standalone: false
+  imports: [ClassResponse, CommonModule],
+  selector: 'discussion-show-work',
+  styles: ['.discussion-content { padding: 16px; }'],
+  templateUrl: 'discussion-show-work.component.html'
 })
 export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
+  protected topLevelResponses: any = {};
   @Input() workgroupId: any;
 
-  topLevelResponses: any = {};
-  classResponses: any[] = [];
-  responsesMap: any = {};
-  retrievedClassmateResponses: boolean = false;
-  studentText: string = $localize`Student`;
-
   constructor(
-    private AnnotationService: AnnotationService,
-    private ConfigService: ConfigService,
+    private annotationService: AnnotationService,
+    private configService: ConfigService,
+    private discussionService: TeacherDiscussionService,
     protected nodeService: NodeService,
-    private TeacherDiscussionService: TeacherDiscussionService,
-    protected ProjectService: ProjectService
+    protected projectService: ProjectService
   ) {
-    super(nodeService, ProjectService);
+    super(nodeService, projectService);
   }
 
   ngOnInit(): void {
@@ -38,12 +35,10 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
   }
 
   private setStudentWork(): void {
-    const componentIds = this.getGradingComponentIds();
-    const componentStates =
-      this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
-        componentIds,
-        this.workgroupId
-      );
+    const componentStates = this.discussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
+      this.getGradingComponentIds(),
+      this.workgroupId
+    );
     const annotations = this.getInappropriateFlagAnnotationsByComponentStates(componentStates);
     this.setClassResponses(componentStates, annotations);
   }
@@ -53,11 +48,11 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
    * @param componentStates an array of component states
    * @return an array of inappropriate flag annotations associated with the component states
    */
-  getInappropriateFlagAnnotationsByComponentStates(componentStates = []) {
+  private getInappropriateFlagAnnotationsByComponentStates(componentStates = []): any[] {
     const annotations = [];
     for (const componentState of componentStates) {
       const latestInappropriateFlagAnnotation =
-        this.AnnotationService.getLatestAnnotationByStudentWorkIdAndType(
+        this.annotationService.getLatestAnnotationByStudentWorkIdAndType(
           componentState.id,
           'inappropriateFlag'
         );
@@ -68,7 +63,7 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
     return annotations;
   }
 
-  getGradingComponentIds(): string[] {
+  private getGradingComponentIds(): string[] {
     const connectedComponentIds = [this.componentId];
     if (this.componentContent.connectedComponents != null) {
       for (const connectedComponent of this.componentContent.connectedComponents) {
@@ -78,30 +73,20 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
     return connectedComponentIds;
   }
 
-  setClassResponses(componentStates: any[], annotations: any[] = []): void {
+  private setClassResponses(componentStates: any[], annotations: any[] = []): void {
     const isStudentMode = false;
-    this.classResponses = this.TeacherDiscussionService.getClassResponses(
+    const classResponses = this.discussionService.getClassResponses(
       componentStates,
       annotations,
       isStudentMode
     );
-    this.responsesMap = this.TeacherDiscussionService.getResponsesMap(this.classResponses);
     const isGradingMode = true;
-    this.topLevelResponses = this.TeacherDiscussionService.getLevel1Responses(
-      this.classResponses,
+    this.topLevelResponses = this.discussionService.getLevel1Responses(
+      classResponses,
       this.componentId,
       this.workgroupId,
       isGradingMode
     );
-    this.retrievedClassmateResponses = true;
-  }
-
-  getUserIdsDisplay(workgroupId: number): string {
-    const userIdsDisplay = [];
-    for (const userId of this.ConfigService.getUserIdsByWorkgroupId(workgroupId)) {
-      userIdsDisplay.push(`${this.studentText} ${userId}`);
-    }
-    return userIdsDisplay.join(', ');
   }
 
   /**
@@ -126,18 +111,18 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
 
   private flagPost(componentState: any, action: 'Delete' | 'Undo Delete'): void {
     const toWorkgroupId = componentState.workgroupId;
-    const userInfo = this.ConfigService.getUserInfoByWorkgroupId(toWorkgroupId);
+    const userInfo = this.configService.getUserInfoByWorkgroupId(toWorkgroupId);
     const periodId = userInfo.periodId;
-    const teacherUserInfo = this.ConfigService.getMyUserInfo();
+    const teacherUserInfo = this.configService.getMyUserInfo();
     const fromWorkgroupId = teacherUserInfo.workgroupId;
-    const runId = this.ConfigService.getRunId();
+    const runId = this.configService.getRunId();
     const nodeId = this.nodeId;
     const componentId = this.componentId;
     const studentWorkId = componentState.id;
     const data = {
       action: action
     };
-    const annotation = this.AnnotationService.createInappropriateFlagAnnotation(
+    const annotation = this.annotationService.createInappropriateFlagAnnotation(
       runId,
       periodId,
       nodeId,
@@ -147,9 +132,9 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
       studentWorkId,
       data
     );
-    this.AnnotationService.saveAnnotation(annotation).then(() => {
+    this.annotationService.saveAnnotation(annotation).then(() => {
       const componentStates =
-        this.TeacherDiscussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
+        this.discussionService.getPostsAssociatedWithComponentIdsAndWorkgroupId(
           this.getGradingComponentIds(),
           this.workgroupId
         );

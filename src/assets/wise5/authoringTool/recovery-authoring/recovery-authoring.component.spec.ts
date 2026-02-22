@@ -1,20 +1,15 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StudentTeacherCommonServicesModule } from '../../../../app/student-teacher-common-services.module';
+import { MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
+import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { RecoveryAuthoringComponent } from './recovery-authoring.component';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 class MockTeacherProjectService {
   project = {
     nodes: []
   };
-
   saveProject() {}
 }
 
@@ -41,20 +36,15 @@ const nodeId2 = 'node2';
 describe('RecoveryAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [RecoveryAuthoringComponent],
-    imports: [BrowserAnimationsModule,
-        FormsModule,
-        MatDialogModule,
-        MatInputModule,
-        RouterModule,
-        StudentTeacherCommonServicesModule],
-    providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => '1' } } } },
+      imports: [RecoveryAuthoringComponent],
+      providers: [
+        MockProvider(NotificationService, {
+          setGlobalMessage$: of({})
+        }),
         { provide: TeacherProjectService, useClass: MockTeacherProjectService },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        provideRouter([])
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

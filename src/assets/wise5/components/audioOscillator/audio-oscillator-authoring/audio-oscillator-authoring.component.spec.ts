@@ -1,46 +1,27 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
+import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { AudioOscillatorService } from '../audioOscillatorService';
 import { AudioOscillatorAuthoring } from './audio-oscillator-authoring.component';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
-import { ComponentAuthoringModule } from '../../component-authoring.module';
-import { ProjectLocale } from '../../../../../app/domain/projectLocale';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 let component: AudioOscillatorAuthoring;
 let fixture: ComponentFixture<AudioOscillatorAuthoring>;
 let getComponentSpy;
-
 describe('AudioOscillatorAuthoring', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        ComponentAuthoringModule,
-        EditComponentPrompt,
-        FormsModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        StudentTeacherCommonServicesModule
-      ],
-      declarations: [AudioOscillatorAuthoring],
+      imports: [AudioOscillatorAuthoring, StudentTeacherCommonServicesModule],
       providers: [
         ProjectAssetService,
         TeacherNodeService,
         TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        TeacherProjectTranslationService,
+        provideHttpClient(withInterceptorsFromDi())
       ]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(

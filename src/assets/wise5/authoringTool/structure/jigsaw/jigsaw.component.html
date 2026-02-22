@@ -4,7 +4,7 @@
   science topic of their choice and engages them in collaboration to learn more. Students share
   their own ideas and reflect on what they learned from their classmates.
 </p>
-<mat-divider></mat-divider>
+<mat-divider />
 <p i18n>Choose number of groups in this Jigsaw activity:</p>
 <mat-radio-group
   class="num-groups-radio-group"
@@ -16,12 +16,12 @@
   <mat-radio-button color="primary" value="4" i18n>Four groups</mat-radio-button>
 </mat-radio-group>
 <div class="nav-controls">
-  <mat-divider></mat-divider>
-  <div fxLayout="row" fxLayoutGap="8px">
+  <mat-divider />
+  <div class="flex flex-row gap-2">
     <button mat-button color="primary" routerLink="../.." [state]="{ target: target }" i18n>
       Back
     </button>
-    <span fxFlex></span>
+    <span class="w-full"></span>
     <button mat-button color="primary" routerLink="../../.." i18n>Cancel</button>
     <button
       mat-raised-button
@@ -30,7 +30,9 @@
       [disabled]="submitting"
       class="button--progress"
     >
-      <mat-progress-bar *ngIf="submitting" mode="indeterminate" />
+      @if (submitting) {
+        <mat-progress-bar mode="indeterminate" />
+      }
       <ng-container i18n>Submit</ng-container>
     </button>
   </div>

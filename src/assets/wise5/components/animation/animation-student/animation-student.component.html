@@ -1,42 +1,45 @@
 <div>
-  <component-header [component]="component"></component-header>
-  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <button
-      mat-raised-button
-      color="primary"
-      *ngIf="animationState === 'stopped'"
-      (click)="playButtonClicked()"
-      [disabled]="isDisabled"
-      matTooltip="Play"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>play_arrow</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      *ngIf="animationState === 'playing'"
-      (click)="pauseButtonClicked()"
-      [disabled]="isDisabled"
-      matTooltip="Pause"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>pause</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      *ngIf="animationState === 'paused'"
-      (click)="resumeButtonClicked()"
-      [disabled]="isDisabled"
-      matTooltip="Resume"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>play_arrow</mat-icon>
-    </button>
+  <component-header [component]="component" />
+  <div class="flex flex-row flex-wrap items-center gap-4">
+    @if (animationState === 'stopped') {
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="playButtonClicked()"
+        [disabled]="isDisabled"
+        matTooltip="Play"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    }
+    @if (animationState === 'playing') {
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="pauseButtonClicked()"
+        [disabled]="isDisabled"
+        matTooltip="Pause"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>pause</mat-icon>
+      </button>
+    }
+    @if (animationState === 'paused') {
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="resumeButtonClicked()"
+        [disabled]="isDisabled"
+        matTooltip="Resume"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    }
     <button
       mat-raised-button
       color="primary"
@@ -48,44 +51,48 @@
     >
       <mat-icon>replay</mat-icon>
     </button>
-    <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <span class="flex flex-row items-center gap-2">
       <span i18n>Slower</span>
       <mat-slider
-        [ngModel]="speedSliderValue"
         [disabled]="isDisabled"
         (ngModelChange)="speedSliderChanged($event)"
         min="1"
         max="5"
-      ><input matSliderThumb />
+        ><input matSliderThumb />
       </mat-slider>
       <span i18n>Faster</span>
     </span>
-    <div *ngIf="isStudentAttachmentEnabled" class="component__actions" fxLayout="row wrap">
-      <div class="component__add-attachment">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="showStudentAssets()"
-          [disabled]="isDisabled"
-        >
-          <mat-icon>image</mat-icon>
-          <span i18n>Add File</span>
-        </button>
+    @if (isStudentAttachmentEnabled) {
+      <div class="component__actions flex flex-row flex-wrap">
+        <div class="component__add-attachment">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="showStudentAssets()"
+            [disabled]="isDisabled"
+          >
+            <mat-icon>image</mat-icon>
+            <span i18n>Add File</span>
+          </button>
+        </div>
+        @for (attachment of attachments; track attachment) {
+          <div class="component__attachment">
+            <img [src]="attachment.iconURL" class="component__attachment__content" />
+            @if (!isDisabled) {
+              <button
+                mat-raised-button
+                class="component__attachment__delete"
+                (click)="removeAttachment(attachment)"
+                title="Remove file"
+                [disabled]="isDisabled"
+              >
+                <mat-icon>cancel</mat-icon>
+              </button>
+            }
+          </div>
+        }
       </div>
-      <div class="component__attachment" *ngFor="let attachment of attachments">
-        <img [src]="attachment.iconURL" class="component__attachment__content" />
-        <button
-          *ngIf="!isDisabled"
-          mat-raised-button
-          class="component__attachment__delete"
-          (click)="removeAttachment(attachment)"
-          title="Remove file"
-          [disabled]="isDisabled"
-        >
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </div>
-    </div>
+    }
   </div>
   <svg
     [id]="svgId"
@@ -103,25 +110,26 @@
       '-o-user-select': 'none'
     }"
   ></svg>
-  <component-save-submit-buttons
-    *ngIf="isSaveOrSubmitButtonVisible"
-    [componentState]="latestComponentState"
-    [isDirty]="isDirty"
-    [isDisabled]="isDisabled"
-    [isSaveButtonVisible]="isSaveButtonVisible"
-    [isSubmitButtonDisabled]="isSubmitButtonDisabled"
-    [isSubmitButtonVisible]="isSubmitButtonVisible"
-    [isSubmitDirty]="isSubmitDirty"
-    (saveButtonClicked)="saveButtonClicked($event)"
-    (submitButtonClicked)="submitButtonClicked($event)"
-  >
-  </component-save-submit-buttons>
-  <component-annotations
-    *ngIf="mode === 'student'"
-    [annotations]="latestAnnotations"
-    [maxScore]="componentContent.maxScore"
-    [nodeId]="nodeId"
-    [componentId]="componentId"
-  >
-  </component-annotations>
+  @if (isSaveOrSubmitButtonVisible) {
+    <component-save-submit-buttons
+      class="mt-3 block"
+      [componentState]="latestComponentState"
+      [isDirty]="isDirty"
+      [isDisabled]="isDisabled"
+      [isSaveButtonVisible]="isSaveButtonVisible"
+      [isSubmitButtonDisabled]="isSubmitButtonDisabled"
+      [isSubmitButtonVisible]="isSubmitButtonVisible"
+      [isSubmitDirty]="isSubmitDirty"
+      (saveButtonClicked)="saveButtonClicked($event)"
+      (submitButtonClicked)="submitButtonClicked($event)"
+    />
+  }
+  @if (mode === 'student') {
+    <component-annotations
+      [annotations]="latestAnnotations"
+      [maxScore]="componentContent.maxScore"
+      [nodeId]="nodeId"
+      [componentId]="componentId"
+    />
+  }
 </div>

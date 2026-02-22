@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'password-requirement',
-    templateUrl: './password-requirement.component.html',
-    styleUrls: ['./password-requirement.component.scss'],
-    standalone: false
+  imports: [NgClass, MatIcon],
+  selector: 'password-requirement',
+  styleUrl: './password-requirement.component.scss',
+  templateUrl: './password-requirement.component.html'
 })
 export class PasswordRequirementComponent {
   public static INVALID_PASSWORD_MISSING_LETTER = '12345678';

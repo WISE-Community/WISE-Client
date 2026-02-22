@@ -1,7 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { UtilService } from './services/util.service';
 import { Announcement } from './domain/announcement';
@@ -9,6 +7,11 @@ import { ConfigService } from './services/config.service';
 import { Config } from './domain/config';
 import { environment } from '../environments/environment';
 import { provideRouter } from '@angular/router';
+import { MockComponents, MockProviders } from 'ng-mocks';
+import { UserService } from './services/user.service';
+import { MobileMenuComponent } from './modules/mobile-menu/mobile-menu.component';
+import { provideHttpClient } from '@angular/common/http';
+import { HeaderComponent } from './modules/header/header.component';
 
 export class MockConfigService {
   private config$: BehaviorSubject<Config> = new BehaviorSubject<Config>(null);
@@ -48,19 +51,6 @@ export class MockUtilService {
   }
 }
 
-export class MockObservableMedia {
-  isActive(query: string): boolean {
-    return false;
-  }
-
-  asObservable(): Observable<MediaChange> {
-    return new Observable((observer) => {
-      observer.next(new MediaChange());
-      observer.complete();
-    });
-  }
-}
-
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
@@ -68,14 +58,14 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      imports: [AppComponent, MockComponents(HeaderComponent, MobileMenuComponent)],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
         { provide: UtilService, useClass: MockUtilService },
-        { provide: MediaObserver, useClass: MockObservableMedia },
+        MockProviders(UserService),
+        provideHttpClient(),
         provideRouter([])
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     });
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;

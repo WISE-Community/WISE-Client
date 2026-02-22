@@ -1,9 +1,9 @@
 <edit-component-prompt
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
-></edit-component-prompt>
+/>
 <p i18n>Choose the step and component to show the summary data for:</p>
-<div fxLayout="row wrap">
+<div class="flex flex-row flex-wrap">
   <mat-form-field class="wide-drop-down">
     <mat-label i18n>Step</mat-label>
     <mat-select
@@ -11,12 +11,11 @@
       [(ngModel)]="componentContent.summaryNodeId"
       (ngModelChange)="summaryNodeIdChanged()"
     >
-      <mat-option
-        *ngFor="let stepNodeDetails of stepNodesDetails"
-        value="{{ stepNodeDetails.nodeId }}"
-      >
-        {{ stepNodeDetails.nodePositionAndTitle }}
-      </mat-option>
+      @for (stepNodeDetails of stepNodesDetails; track stepNodeDetails) {
+        <mat-option value="{{ stepNodeDetails.nodeId }}">
+          {{ stepNodeDetails.nodePositionAndTitle }}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
   <mat-form-field class="wide-drop-down">
@@ -25,20 +24,24 @@
       [(ngModel)]="componentContent.summaryComponentId"
       (ngModelChange)="summaryComponentIdChanged()"
     >
-      <mat-option
-        *ngFor="
-          let component of getComponents(componentContent.summaryNodeId);
-          index as componentIndex
-        "
-        value="{{ component.id }}"
-        [disabled]="
-          !isComponentTypeAllowed(component.type) ||
-          componentContent.summaryComponentId === componentId
-        "
-      >
-        {{ componentIndex + 1 }}. {{ component.type }}
-        <span *ngIf="component.id === componentId" i18n>(This Component)</span>
-      </mat-option>
+      @for (
+        component of getComponents(componentContent.summaryNodeId);
+        track component;
+        let componentIndex = $index
+      ) {
+        <mat-option
+          value="{{ component.id }}"
+          [disabled]="
+            !isComponentTypeAllowed(component.type) ||
+            componentContent.summaryComponentId === componentId
+          "
+        >
+          {{ componentIndex + 1 }}. {{ component.type }}
+          @if (component.id === componentId) {
+            <span i18n>(This Component)</span>
+          }
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
   <mat-form-field class="short-drop-down">
@@ -47,7 +50,9 @@
       [(ngModel)]="componentContent.studentDataType"
       (ngModelChange)="studentDataTypeChanged()"
     >
-      <mat-option value="responses" *ngIf="isResponsesOptionAvailable" i18n> Responses </mat-option>
+      @if (isResponsesOptionAvailable) {
+        <mat-option value="responses" i18n> Responses </mat-option>
+      }
       <mat-option value="scores" i18n> Scores </mat-option>
     </mat-select>
   </mat-form-field>
@@ -67,7 +72,9 @@
     <mat-label i18n>Chart Type</mat-label>
     <mat-select [(ngModel)]="componentContent.chartType" (ngModelChange)="componentChanged()">
       <mat-option value="column" i18n> Bar </mat-option>
-      <mat-option value="pie" *ngIf="isPieChartAllowed" i18n> Pie </mat-option>
+      @if (isPieChartAllowed) {
+        <mat-option value="pie" i18n> Pie </mat-option>
+      }
     </mat-select>
   </mat-form-field>
   <mat-form-field class="short-drop-down">
@@ -82,17 +89,19 @@
     </mat-select>
   </mat-form-field>
 </div>
-<div fxLayout="row wrap">
-  <div *ngIf="isHighlightCorrectAnswerAvailable" class="checkbox">
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.highlightCorrectAnswer"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Highlight Correct Answer
-    </mat-checkbox>
-  </div>
+<div class="flex flex-row flex-wrap">
+  @if (isHighlightCorrectAnswerAvailable) {
+    <div class="checkbox">
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="componentContent.highlightCorrectAnswer"
+        (ngModelChange)="componentChanged()"
+        i18n
+      >
+        Highlight Correct Answer
+      </mat-checkbox>
+    </div>
+  }
   <div class="checkbox">
     <mat-checkbox
       color="primary"
@@ -104,7 +113,7 @@
     </mat-checkbox>
   </div>
 </div>
-<div fxLayout="row" fxLayoutAlign="start center">
+<div class="flex flex-row justify-start items-center">
   <span i18n class="custom-label-colors-label">Custom Label Colors (Optional)</span>
   <button
     mat-raised-button
@@ -119,78 +128,78 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<div *ngIf="componentContent.customLabelColors.length === 0" class="info-block" i18n>
-  There are no custom label colors. Click the "Add Custom Label Color" button to give a label a
-  specific color.
-</div>
-<div
-  *ngFor="
-    let customLabelColor of componentContent.customLabelColors;
-    index as customLabelColorIndex;
-    first as isFirst;
-    last as isLast
-  "
-  fxLayout="row wrap"
-  fxLayoutAlign="start center"
-  class="custom-label-color-container"
->
-  <translatable-input
-    [content]="customLabelColor"
-    key="label"
-    label="Label"
-    i18n-label
-    (defaultLanguageTextChanged)="inputChange.next($event)"
-    class="long-input"
-  />
-  <mat-form-field class="short-input">
-    <mat-label i18n>Color</mat-label>
-    <input
-      matInput
-      [(ngModel)]="customLabelColor.color"
-      (ngModelChange)="inputChange.next($event)"
-    />
-  </mat-form-field>
-  <div>
-    <button
-      mat-raised-button
-      color="primary"
-      class="button"
-      (click)="moveObjectUp(componentContent.customLabelColors, customLabelColorIndex)"
-      [disabled]="isFirst"
-      matTooltip="Move Up"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Up"
-      i18n-aria-label
-    >
-      <mat-icon>arrow_upward</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="button"
-      (click)="moveObjectDown(componentContent.customLabelColors, customLabelColorIndex)"
-      [disabled]="isLast"
-      matTooltip="Move Down"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Down"
-      i18n-aria-label
-    >
-      <mat-icon>arrow_downward</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="button"
-      (click)="deleteCustomLabelColor(customLabelColorIndex)"
-      matTooltip="Delete"
-      matTooltipPosition="above"
-      i18n-matTooltip
-      aria-label="Delete"
-      i18n-aria-label
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
+@if (componentContent.customLabelColors.length === 0) {
+  <div class="info-block" i18n>
+    There are no custom label colors. Click the "Add Custom Label Color" button to give a label a
+    specific color.
   </div>
-</div>
+}
+@for (
+  customLabelColor of componentContent.customLabelColors;
+  track customLabelColor;
+  let customLabelColorIndex = $index;
+  let isFirst = $first;
+  let isLast = $last
+) {
+  <div class="custom-label-color-container flex flex-row flex-wrap justify-start items-center">
+    <translatable-input
+      [content]="customLabelColor"
+      key="label"
+      label="Label"
+      i18n-label
+      (defaultLanguageTextChanged)="inputChange.next($event)"
+      class="long-input"
+    />
+    <mat-form-field class="short-input">
+      <mat-label i18n>Color</mat-label>
+      <input
+        matInput
+        [(ngModel)]="customLabelColor.color"
+        (ngModelChange)="inputChange.next($event)"
+      />
+    </mat-form-field>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        class="button"
+        (click)="moveObjectUp(componentContent.customLabelColors, customLabelColorIndex)"
+        [disabled]="isFirst"
+        matTooltip="Move Up"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        aria-label="Up"
+        i18n-aria-label
+      >
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="button"
+        (click)="moveObjectDown(componentContent.customLabelColors, customLabelColorIndex)"
+        [disabled]="isLast"
+        matTooltip="Move Down"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        aria-label="Down"
+        i18n-aria-label
+      >
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="button"
+        (click)="deleteCustomLabelColor(customLabelColorIndex)"
+        matTooltip="Delete"
+        matTooltipPosition="above"
+        i18n-matTooltip
+        aria-label="Delete"
+        i18n-aria-label
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+}

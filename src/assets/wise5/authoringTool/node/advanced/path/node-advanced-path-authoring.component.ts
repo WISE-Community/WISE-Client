@@ -1,13 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MultipleChoiceContent } from '../../../../components/multipleChoice/MultipleChoiceContent';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'node-advanced-path-authoring',
-    templateUrl: 'node-advanced-path-authoring.component.html',
-    styleUrls: ['node-advanced-path-authoring.component.scss'],
-    standalone: false
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule
+  ],
+  styleUrl: 'node-advanced-path-authoring.component.scss',
+  templateUrl: 'node-advanced-path-authoring.component.html'
 })
 export class NodeAdvancedPathAuthoringComponent implements OnInit {
   protected canChangePathOptions = [
@@ -64,7 +78,7 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.parent.parent.params.subscribe((params) => {
+    this.route.parent.parent.parent.params.subscribe((params) => {
       this.node = this.projectService.getNodeById(params.nodeId);
       this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
     });

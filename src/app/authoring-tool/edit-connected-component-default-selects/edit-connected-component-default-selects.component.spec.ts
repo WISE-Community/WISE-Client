@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditConnectedComponentDefaultSelectsComponent } from './edit-connected-component-default-selects.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MockComponents, MockProvider } from 'ng-mocks';
+import { ProjectService } from '../../../assets/wise5/services/projectService';
+import { SelectStepAndComponentComponent } from '../select-step-and-component/select-step-and-component.component';
+import { EditConnectedComponentTypeSelectComponent } from '../edit-connected-component-type-select/edit-connected-component-type-select.component';
 
 describe('EditConnectedComponentDefaultSelectsComponent', () => {
   let component: EditConnectedComponentDefaultSelectsComponent;
@@ -9,9 +11,9 @@ describe('EditConnectedComponentDefaultSelectsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditConnectedComponentDefaultSelectsComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    imports: [EditConnectedComponentDefaultSelectsComponent, MockComponents(EditConnectedComponentTypeSelectComponent, SelectStepAndComponentComponent)],
+    providers: [MockProvider(ProjectService)]
+}).compileComponents();
   });
 
   beforeEach(() => {

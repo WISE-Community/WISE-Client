@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { PeerGrouping } from '../../../../../app/domain/peerGrouping';
 import { PeerGroupingAuthoringService } from '../../../services/peerGroupingAuthoringService';
 import { ProjectService } from '../../../services/projectService';
@@ -11,12 +11,26 @@ import {
   DIFFERENT_SCORES_VALUE
 } from '../PeerGroupingLogic';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { SelectStepAndComponentComponent } from '../../../../../app/authoring-tool/select-step-and-component/select-step-and-component.component';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    selector: 'edit-peer-grouping-dialog',
-    templateUrl: './edit-peer-grouping-dialog.component.html',
-    styleUrls: ['./edit-peer-grouping-dialog.component.scss'],
-    standalone: false
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    SelectStepAndComponentComponent
+  ],
+  templateUrl: './edit-peer-grouping-dialog.component.html'
 })
 export class EditPeerGroupingDialogComponent extends AuthorPeerGroupingDialogComponent {
   stepsUsedIn: string[] = [];

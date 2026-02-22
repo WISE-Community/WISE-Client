@@ -10,25 +10,25 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    imports: [
-        CommonModule,
-        EditComponentPrompt,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatTooltipModule,
-        TranslatableAssetChooserComponent,
-        TranslatableInputComponent
-    ],
-    styleUrl: 'match-authoring.component.scss',
-    templateUrl: 'match-authoring.component.html'
+  imports: [
+    EditComponentPrompt,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule,
+    TranslatableAssetChooserComponent,
+    TranslatableInputComponent
+  ],
+  styleUrl: 'match-authoring.component.scss',
+  templateUrl: 'match-authoring.component.html'
 })
 export class MatchAuthoringComponent extends AbstractComponentAuthoring {
   private defaultSourceBucketId: string = '0';

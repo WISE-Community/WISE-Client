@@ -1,19 +1,44 @@
-'use strict';
-
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatTooltip } from '@angular/material/tooltip';
+import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
+import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
+import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { ConfigService } from '../../../services/configService';
+import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { GraphService } from '../graphService';
 import { isMultipleYAxes } from '../util';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 
 @Component({
-    selector: 'graph-authoring',
-    templateUrl: 'graph-authoring.component.html',
-    styleUrls: ['graph-authoring.component.scss'],
-    standalone: false
+  selector: 'graph-authoring',
+  templateUrl: 'graph-authoring.component.html',
+  styleUrl: 'graph-authoring.component.scss',
+  imports: [
+    EditComponentPrompt,
+    TranslatableInputComponent,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    MatInput,
+    MatCheckbox,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    MatSlideToggle,
+    MatRadioModule,
+    TranslatableAssetChooserComponent
+  ]
 })
 export class GraphAuthoring extends AbstractComponentAuthoring {
   availableGraphTypes = [
@@ -129,13 +154,13 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
   numYAxes: number = 0;
 
   constructor(
-    protected ConfigService: ConfigService,
-    private GraphService: GraphService,
-    protected NodeService: TeacherNodeService,
-    protected ProjectAssetService: ProjectAssetService,
-    protected ProjectService: TeacherProjectService
+    protected configService: ConfigService,
+    private graphService: GraphService,
+    protected nodeService: TeacherNodeService,
+    protected projectAssetService: ProjectAssetService,
+    protected projectService: TeacherProjectService
   ) {
-    super(ConfigService, NodeService, ProjectAssetService, ProjectService);
+    super(configService, nodeService, projectAssetService, projectService);
   }
 
   ngOnInit(): void {
@@ -388,7 +413,7 @@ export class GraphAuthoring extends AbstractComponentAuthoring {
   addColorToYAxes(): void {
     for (let index = 0; index < this.componentContent.yAxis.length; index++) {
       const yAxis = this.componentContent.yAxis[index];
-      const color = this.GraphService.getSeriesColor(index);
+      const color = this.graphService.getSeriesColor(index);
       this.addColorToField(yAxis.title.style, color);
       this.addColorToField(yAxis.labels.style, color);
     }

@@ -6,8 +6,6 @@ import { NotebookService } from '../../services/notebookService';
 import { NotificationService } from '../../services/notificationService';
 import { ProjectService } from '../../services/projectService';
 import { NodeService } from '../../services/nodeService';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -15,18 +13,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatIconModule,
-        MatListModule,
-        MatToolbarModule,
-        MatTooltipModule
-    ],
-    styleUrl: './notifications-dialog.component.scss',
-    templateUrl: './notifications-dialog.component.html'
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatTooltipModule
+  ],
+  styleUrl: './notifications-dialog.component.scss',
+  templateUrl: './notifications-dialog.component.html'
 })
 export class NotificationsDialogComponent implements OnInit {
   newNotifications: any;

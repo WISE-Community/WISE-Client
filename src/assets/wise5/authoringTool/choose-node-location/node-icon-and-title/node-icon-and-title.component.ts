@@ -1,15 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { NodeIconComponent } from '../../../vle/node-icon/node-icon.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { CommonModule } from '@angular/common';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
 @Component({
-    imports: [CommonModule, FlexLayoutModule, NodeIconComponent],
-    selector: 'node-icon-and-title',
-    styles: ['.step-number,.step-title {color:rgba(0,0,0,.87)}'],
-    templateUrl: './node-icon-and-title.component.html'
+  imports: [NodeIconComponent],
+  selector: 'node-icon-and-title',
+  styles: ['.step-number,.step-title {color:rgba(0,0,0,.87)}'],
+  templateUrl: './node-icon-and-title.component.html'
 })
 export class NodeIconAndTitleComponent {
   @Input() protected nodeId: string;
@@ -32,9 +30,8 @@ export class NodeIconAndTitleComponent {
 
   private translateNodeTitle(nodeId: string): string {
     const node = this.projectService.getNode(nodeId);
-    const translatedTitle = this.projectTranslationService.currentTranslations()[
-      node['title.i18n']?.id
-    ]?.value;
+    const translatedTitle =
+      this.projectTranslationService.currentTranslations()[node['title.i18n']?.id]?.value;
     return translatedTitle ? translatedTitle : node['title'];
   }
 }

@@ -6,13 +6,17 @@ import { ProjectService } from '../../services/projectService';
 import { SessionService } from '../../services/sessionService';
 import { StudentDataService } from '../../services/studentDataService';
 import { getAvatarColorForWorkgroupId } from '../../common/workgroup/workgroup';
+import { MatIcon } from '@angular/material/icon';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'student-account-menu',
-    templateUrl: './student-account-menu.component.html',
-    styleUrls: ['./student-account-menu.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  imports: [MatMenu, MatIcon, MatDivider, MatProgressBar, MatButton],
+  selector: 'student-account-menu',
+  styleUrl: './student-account-menu.component.scss',
+  templateUrl: './student-account-menu.component.html'
 })
 export class StudentAccountMenuComponent implements OnInit, OnDestroy {
   @ViewChild(MatMenu, { static: true })
@@ -36,14 +40,14 @@ export class StudentAccountMenuComponent implements OnInit, OnDestroy {
 
   constructor(
     private configService: ConfigService,
+    private dataService: StudentDataService,
     private projectService: ProjectService,
-    private sessionService: SessionService,
-    private studentDataService: StudentDataService
+    private sessionService: SessionService
   ) {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.sessionService.isAuthenticated();
-    this.nodeStatuses = this.studentDataService.nodeStatuses;
+    this.nodeStatuses = this.dataService.nodeStatuses;
     this.rootNode = this.projectService.getProjectRootNode();
     this.rootNodeStatus = this.nodeStatuses[this.rootNode.id];
     this.workgroupId = this.configService.getWorkgroupId();
@@ -54,19 +58,17 @@ export class StudentAccountMenuComponent implements OnInit, OnDestroy {
     if (this.showScore) {
       this.updateScores();
       this.subscriptions.add(
-        this.studentDataService.nodeStatusesChanged$.subscribe(() => {
-          this.updateScores();
-        })
+        this.dataService.nodeStatusesChanged$.subscribe(() => this.updateScores())
       );
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
   private updateScores(): void {
-    this.totalScoreNum = this.studentDataService.getTotalScore();
+    this.totalScoreNum = this.dataService.getTotalScore();
     this.totalScore = typeof this.totalScoreNum === 'number' ? this.totalScoreNum.toString() : '-';
     this.maxScore = this.getMaxScore();
     this.scorePercentage = Math.ceil((100 * this.totalScoreNum) / this.maxScore);
@@ -119,14 +121,7 @@ export class StudentAccountMenuComponent implements OnInit, OnDestroy {
     const category = 'Navigation';
     const event = 'goHomeButtonClicked';
     const eventData = {};
-    this.studentDataService.saveVLEEvent(
-      nodeId,
-      componentId,
-      componentType,
-      category,
-      event,
-      eventData
-    );
+    this.dataService.saveVLEEvent(nodeId, componentId, componentType, category, event, eventData);
     this.sessionService.goHome();
   }
 
@@ -137,7 +132,7 @@ export class StudentAccountMenuComponent implements OnInit, OnDestroy {
     const category = 'Navigation';
     const event = eventName;
     const eventData = {};
-    this.studentDataService
+    this.dataService
       .saveVLEEvent(nodeId, componentId, componentType, category, event, eventData)
       .then(() => {
         this.sessionService.logOut();

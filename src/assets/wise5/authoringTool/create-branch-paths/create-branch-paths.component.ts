@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import {
   FormArray,
@@ -8,23 +7,20 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { TeacherProjectService } from '../../services/teacherProjectService';
-import { Choice } from '../../components/multipleChoice/Choice';
-import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CHOICE_CHOSEN_VALUE, SCORE_VALUE } from '../../../../app/domain/branchCriteria';
 import { ComponentContent } from '../../common/ComponentContent';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { Choice } from '../../components/multipleChoice/Choice';
+import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
+import { TeacherProjectService } from '../../services/teacherProjectService';
 
 @Component({
   imports: [
-    CommonModule,
-    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,

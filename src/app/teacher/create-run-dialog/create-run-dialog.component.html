@@ -14,15 +14,18 @@
             >Survey
           </mat-radio-button>
         </mat-radio-group>
-        <mat-icon
-          class="info"
-          tabindex="0"
-          matTooltip="Participants complete survey units anonymously without a WISE account."
-          matTooltipPosition="above"
-          i18n-matTooltip
-          >help</mat-icon
-        >
       </div>
+      <p class="mat-caption pt-2">
+        Default units require participants to log in with a WISE student account. Survey units are
+        completed anonymously without a WISE account.
+      </p>
+      <p class="mat-caption" i18n>
+        Note: Surveys are meant for shorter units that can be completed in one session and are best
+        for anonymous data collection. Participants can only submit their responses once and cannot
+        continue working at a later time. Please choose the "Default" run type if you want
+        participants to be able to save their work, reload, and continue working over multiple
+        sessions.
+      </p>
       <mat-divider></mat-divider>
       @if (isDefaultRun()) {
         <h3 i18n>2. Choose Periods</h3>
@@ -46,8 +49,8 @@
         <mat-divider></mat-divider>
         <h3 i18n>3. Choose Students Per Team</h3>
         <mat-radio-group #rGroup formControlName="maxStudentsPerTeam" class="flex gap-4">
-          <mat-radio-button value="1" radioGroup="rGroup" i18n>Only 1 student</mat-radio-button>
-          <mat-radio-button value="3" radioGroup="rGroup" i18n>1-3 students</mat-radio-button>
+          <mat-radio-button [value]="1" radioGroup="rGroup" i18n>Only 1 student</mat-radio-button>
+          <mat-radio-button [value]="3" radioGroup="rGroup" i18n>1-3 students</mat-radio-button>
         </mat-radio-group>
         <mat-divider></mat-divider>
         <h3 i18n>4. Set Schedule</h3>

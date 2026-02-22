@@ -1,16 +1,17 @@
 <component-header [component]="component" />
-<div class="match" fxLayout="row wrap" cdkDropListGroup>
+<div class="match flex flex-row flex-wrap" cdkDropListGroup>
   <div
-    fxFlex="100"
-    fxFlex.gt-xs="{{ componentContent.horizontal ? 50 : 100 }}"
-    fxFlexOrder="{{ componentContent.choicesAfter ? 2 : 1 }}"
+    class="w-full"
+    [ngClass]="[
+      componentContent.horizontal ? 'md:w-1/2' : 'md:w-full',
+      componentContent.choicesAfter ? 'order-2' : 'order-1'
+    ]"
   >
     <div
-      class="bucket selected-bg-bg"
-      fxLayout="column"
+      class="bucket selected-bg-bg flex flex-col"
       [ngStyle]="{ 'margin-bottom': componentContent.horizontal ? '0' : '8px' }"
     >
-      <div class="bucket-title" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px">
+      <div class="bucket-title flex flex-row flex-wrap items-center justify-start gap-2">
         <h3 class="mat-subtitle-2" [innerHTML]="buckets[0].value"></h3>
         @if (componentContent.canCreateChoices) {
           <add-choice-button [isDisabled]="isDisabled" (onClick)="addChoice()" />
@@ -18,15 +19,17 @@
       </div>
       <ul
         class="items"
-        [ngStyle.gt-xs]="{ columns: componentContent.horizontal ? 1 : 2 }"
-        [ngStyle.gt-md]="{ columns: componentContent.horizontal ? 1 : 3 }"
+        [ngClass]="[
+          componentContent.horizontal ? 'md:columns-1' : 'md:columns-2',
+          componentContent.horizontal ? 'lg:columns-1' : 'lg:columns-3'
+        ]"
         cdkDropList
         [cdkDropListData]="{ isSourceBucket: true, items: buckets[0].items }"
         (cdkDropListDropped)="drop($event)"
       >
         @for (item of buckets[0].items; track item.id; let position = $index) {
           <li
-            [ngClass]="{ item: true, disabled: isDisabled }"
+            [ngClass]="['item', isDisabled ? 'disabled' : '']"
             cdkDrag
             [cdkDragDisabled]="isDisabled"
             (cdkDragEntered)="dragEnter($event)"
@@ -46,27 +49,28 @@
     </div>
   </div>
   <div
-    fxLayout="column"
-    fxLayout.gt-xs="{{ componentContent.horizontal ? 'column' : 'row wrap' }}"
-    fxLayoutAlign="start stretch"
-    fxFlex="100"
-    fxFlex.gt-xs="{{ componentContent.horizontal ? 50 : 100 }}"
-    fxFlexOrder="{{ componentContent.choicesAfter ? 1 : 2 }}"
+    [ngClass]="[
+      'w-full',
+      'flex',
+      'flex-col',
+      'items-stretch',
+      componentContent.horizontal ? 'md:w-1/2' : 'md:w-full',
+      componentContent.choicesAfter ? 'order-1' : 'order-2',
+      componentContent.horizontal ? '' : 'md:flex-row md:flex-wrap'
+    ]"
   >
     @for (bucket of buckets.slice(1); track bucket.id) {
       <div
-        fxLayout="column"
-        fxFlex="100"
-        fxFlex.gt-xs="{{ componentContent.horizontal ? 100 : 50 }}"
-        fxFlex.gt-md="{{ componentContent.horizontal ? 100 : 33.33 }}"
+        [ngClass]="[
+          'flex',
+          'flex-col',
+          'w-full',
+          componentContent.horizontal ? 'md:w-full' : 'md:w-1/2',
+          componentContent.horizontal ? 'lg:w-full' : 'lg:w-1/3'
+        ]"
       >
-        <div class="bucket target notice-bg-bg" fxLayout="column" fxLayoutAlign="stretch">
-          <div
-            class="bucket-title"
-            fxLayout="row wrap"
-            fxLayoutAlign="start center"
-            fxLayoutGap="8px"
-          >
+        <div class="bucket target notice-bg-bg flex flex-col items-stretch">
+          <div class="bucket-title flex flex-row flex-wrap items-center justify-start gap-2">
             <h3 class="mat-subtitle-2" [innerHTML]="bucket.value"></h3>
           </div>
           <ul

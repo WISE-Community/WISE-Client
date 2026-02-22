@@ -25,8 +25,7 @@ describe('EditFeedbackRulesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [],
-      declarations: [EditFeedbackRulesComponent],
+      imports: [EditFeedbackRulesComponent],
       providers: [
         { provide: MatDialog, useClass: MockMatDialog },
         { provide: TeacherProjectService, useClass: MockTeacherProjectService }

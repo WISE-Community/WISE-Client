@@ -1,13 +1,14 @@
-'use strict';
-
 import { Input, Component } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    imports: [FlexLayoutModule],
-    selector: 'workgroup-node-score',
-    styleUrl: 'workgroup-node-score.component.scss',
-    templateUrl: 'workgroup-node-score.component.html'
+  selector: 'workgroup-node-score',
+  styles: ['.mat-headline-5 { margin: 0; }'],
+  template: `
+    <div class="flex justify-center items-center">
+      <span class="mat-headline-5">{{ score }}</span
+      >&nbsp;<span class="text-secondary mat-body-2">/{{ maxScore }}</span>
+    </div>
+  `
 })
 export class WorkgroupNodeScoreComponent {
   @Input() maxScore: number;

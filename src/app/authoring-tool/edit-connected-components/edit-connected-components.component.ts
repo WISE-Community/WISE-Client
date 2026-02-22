@@ -1,11 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
+import { EditConnectedComponentsAddButtonComponent } from '../edit-connected-components-add-button/edit-connected-components-add-button.component';
+import { EditConnectedComponentDefaultSelectsComponent } from '../edit-connected-component-default-selects/edit-connected-component-default-selects.component';
+import { EditConnectedComponentDeleteButtonComponent } from '../edit-connected-component-delete-button/edit-connected-component-delete-button.component';
 
 @Component({
-    selector: 'edit-connected-components',
-    templateUrl: './edit-connected-components.component.html',
-    styleUrls: ['./edit-connected-components.component.scss'],
-    standalone: false
+  imports: [
+    EditConnectedComponentDefaultSelectsComponent,
+    EditConnectedComponentDeleteButtonComponent,
+    EditConnectedComponentsAddButtonComponent
+  ],
+  selector: 'edit-connected-components',
+  styleUrl: './edit-connected-components.component.scss',
+  templateUrl: './edit-connected-components.component.html'
 })
 export class EditConnectedComponentsComponent implements OnInit {
   @Input() componentContent: any;
@@ -16,7 +23,7 @@ export class EditConnectedComponentsComponent implements OnInit {
   @Output() connectedComponentsChanged: EventEmitter<any> = new EventEmitter();
   nodeIds: string[];
 
-  constructor(protected ProjectService: ProjectService) {}
+  constructor(protected projectService: ProjectService) {}
 
   ngOnInit(): void {
     if (this.connectedComponents == null) {
@@ -78,15 +85,15 @@ export class EditConnectedComponentsComponent implements OnInit {
   }
 
   getComponents(nodeId: string): any[] {
-    return this.ProjectService.getComponents(nodeId);
+    return this.projectService.getComponents(nodeId);
   }
 
   getNodePositionAndTitle(nodeId: string): string {
-    return this.ProjectService.getNodePositionAndTitle(nodeId);
+    return this.projectService.getNodePositionAndTitle(nodeId);
   }
 
   getConnectedComponentType(connectedComponent: any): string {
-    const component: any = this.ProjectService.getComponent(
+    const component: any = this.projectService.getComponent(
       connectedComponent.nodeId,
       connectedComponent.componentId
     );

@@ -2,14 +2,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentInfoService } from '../../../services/componentInfoService';
 import { ComponentInfoDialogComponent } from '../component-info-dialog/component-info-dialog.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  imports: [FlexLayoutModule, MatButtonModule, MatCardModule, MatIconModule, MatTooltipModule],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, MatTooltipModule],
   selector: 'component-type-button',
   styleUrl: './component-type-button.component.scss',
   templateUrl: './component-type-button.component.html'
@@ -25,8 +24,7 @@ export class ComponentTypeButtonComponent {
   ) {}
 
   ngOnInit(): void {
-    const componentInfo = this.componentInfoService.getInfo(this.componentType);
-    this.label = componentInfo.getLabel();
+    this.label = this.componentInfoService.getInfo(this.componentType).getLabel();
   }
 
   protected preview(): void {

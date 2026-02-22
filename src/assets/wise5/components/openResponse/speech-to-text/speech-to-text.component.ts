@@ -2,27 +2,24 @@ import { Component, EventEmitter, Output, Signal } from '@angular/core';
 import { Language, TranscribeService } from '../../../services/transcribeService';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
-    selector: 'speech-to-text',
-    imports: [
-        CommonModule,
-        FormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatMenuModule,
-        MatTooltipModule
-    ],
-    templateUrl: './speech-to-text.component.html',
-    styleUrls: ['./speech-to-text.component.scss']
+  selector: 'speech-to-text',
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTooltipModule
+  ],
+  providers: [TranscribeService],
+  styleUrl: './speech-to-text.component.scss',
+  templateUrl: './speech-to-text.component.html'
 })
 export class SpeechToTextComponent {
   protected languages: Language[] = this.transcribeService.languages;

@@ -7,48 +7,35 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ProjectAssetService } from '../../../../../app/services/projectAssetService';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { generateRandomKey } from '../../../common/string/string';
-import { ConfigService } from '../../../services/configService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TeacherNodeService } from '../../../services/teacherNodeService';
 import { moveObjectDown, moveObjectUp } from '../../../common/array/array';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-component-prompt/edit-component-prompt.component';
 import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { Choice } from '../Choice';
 
 @Component({
-    imports: [
-        FormsModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatRadioModule,
-        MatTooltipModule,
-        EditComponentPrompt,
-        TranslatableAssetChooserComponent,
-        TranslatableInputComponent
-    ],
-    selector: 'multiple-choice-authoring',
-    styleUrls: ['multiple-choice-authoring.component.scss'],
-    templateUrl: 'multiple-choice-authoring.component.html'
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatRadioModule,
+    MatTooltipModule,
+    EditComponentPrompt,
+    TranslatableAssetChooserComponent,
+    TranslatableInputComponent
+  ],
+  styleUrl: 'multiple-choice-authoring.component.scss',
+  templateUrl: 'multiple-choice-authoring.component.html'
 })
 export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   allowedConnectedComponentTypes = ['MultipleChoice'];
   protected choiceTextChange: Subject<string> = new Subject<string>();
   protected feedbackTextChange: Subject<string> = new Subject<string>();
 
-  constructor(
-    protected configService: ConfigService,
-    protected nodeService: TeacherNodeService,
-    protected projectAssetService: ProjectAssetService,
-    protected projectService: TeacherProjectService
-  ) {
-    super(configService, nodeService, projectAssetService, projectService);
+  ngOnInit(): void {
     this.subscriptions.add(
       this.choiceTextChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();

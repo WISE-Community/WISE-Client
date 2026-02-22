@@ -1,67 +1,65 @@
-import { AnnotationService } from '../../../services/annotationService';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '../../../services/configService';
 import { MatchContent } from '../../../components/match/MatchContent';
 import { MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
 import { MatIconModule } from '@angular/material/icon';
-import { SummaryDataPoint } from '../../summary-display/summary-data/SummaryDataPoint';
-import { SummaryService } from '../../../components/summary/summaryService';
-import { TeacherDataService } from '../../../services/teacherDataService';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
-import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatIconModule],
   selector: 'match-summary-display',
   styles: `
-    h3 {
+    @reference "tailwindcss";
+    h3,
+    .mat-subtitle-1 {
       margin-bottom: 8px;
+      margin-top: 0;
+    }
+    .bucket {
+      @apply p-2 mb-2 rounded-md;
     }
     .choice {
-      @apply flex gap-1 px-2 py-1 rounded-md bg-gray-100 my-1 text-sm;
+      @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm;
     }
     .mat-icon {
       vertical-align: middle;
+    }
+    ul {
+      list-style-type: none;
+      margin-block-start: 0;
+      padding-inline-start: 0;
     }
   `,
   templateUrl: './match-summary-display.component.html'
 })
 export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent implements OnInit {
   protected bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
-  protected bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
+  private bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
-  protected matchSummaryData: MatchSummaryData;
   protected isChoiceReuseMatch: boolean;
-
-  constructor(
-    protected annotationService: AnnotationService,
-    protected configService: ConfigService,
-    protected dataService: TeacherDataService,
-    protected projectService: TeacherProjectService,
-    protected summaryService: SummaryService
-  ) {
-    super(annotationService, configService, dataService, projectService, summaryService);
-  }
+  private matchSummaryData: MatchSummaryData;
 
   ngOnInit(): void {
     this.setIsChoiceReuseMatch();
+    this.generateSummary();
+  }
+
+  private setIsChoiceReuseMatch(): void {
+    this.isChoiceReuseMatch = (
+      this.projectService.getComponent(this.nodeId, this.componentId) as MatchContent
+    ).choiceReuseEnabled;
+  }
+
+  private generateSummary(): void {
     this.getLatestWork().subscribe((componentStates) => {
+      this.bucketData = [];
+      this.bucketValues.clear();
       this.matchSummaryData = new MatchSummaryData(componentStates);
       this.setBucketValues();
       this.setBucketData();
       this.setBucketShowMore();
     });
-  }
-
-  private setIsChoiceReuseMatch(): void {
-    this.isChoiceReuseMatch = (
-      this.projectService
-        .getComponentsFromStep(this.nodeId)
-        .find((component) => component.id === this.componentId) as MatchContent
-    ).choiceReuseEnabled;
   }
 
   protected setBucketValues(): void {
@@ -80,15 +78,14 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     return this.matchSummaryData
       .getBucketsData()
       .find((bucket) => bucket.bucketValue === bucketValue)
-      .bucketDataPoints.map(this.asMatchSummaryDataPoint)
-      .sort(this.sortChoices);
+      .bucketDataPoints.sort(this.sortChoices);
   }
 
-  protected sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
+  private sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
     return choiceB.getCount() - choiceA.getCount();
   }
 
-  protected setBucketShowMore(): void {
+  private setBucketShowMore(): void {
     this.bucketValues.forEach((value) => this.bucketsShowMore.set(value, false));
   }
 
@@ -101,7 +98,8 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     this.bucketsShowMore.set(bucketValue, !this.bucketsShowMore.get(bucketValue));
   }
 
-  private asMatchSummaryDataPoint(dataPoint: SummaryDataPoint): MatchSummaryDataPoint {
-    return dataPoint as MatchSummaryDataPoint;
+  protected renderDisplay(): void {
+    super.renderDisplay();
+    this.generateSummary();
   }
 }

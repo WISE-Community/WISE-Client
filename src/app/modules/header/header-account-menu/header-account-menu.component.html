@@ -1,76 +1,83 @@
 <button mat-icon-button [matMenuTriggerFor]="accountMenu" i18n-aria-label aria-label="Account Menu">
-  <mat-icon *ngIf="roles.includes('student'); else teacher">account_circle</mat-icon>
-  <ng-template #teacher>
+  @if (roles.includes('student')) {
+    <mat-icon>account_circle</mat-icon>
+  } @else {
     <mat-icon>account_box</mat-icon>
-  </ng-template>
+  }
 </button>
 <mat-menu #accountMenu="matMenu" xPosition="before">
   <div class="header-account-menu">
     @if (!roles.includes('surveyStudent')) {
       <div class="user-info flex flex-row items-center space-x-2">
-        <mat-icon
-          *ngIf="roles.includes('student'); else teacherAvatar"
-          i18n-aria-label
-          aria-label="Account avatar"
-          >account_circle</mat-icon
-        >
-        <ng-template #teacherAvatar>
+        @if (roles.includes('student')) {
+          <mat-icon i18n-aria-label aria-label="Account avatar">account_circle</mat-icon>
+        } @else {
           <mat-icon i18n-aria-label aria-label="Account avatar">account_box</mat-icon>
-        </ng-template>
+        }
         <span>{{ firstName }} {{ lastName }}</span>
       </div>
-      <div *ngIf="isPreviousAdmin" class="user-switch">
-        <a (click)="switchToOriginalUser()" i18n>Switch back to original user</a>
-      </div>
-      <mat-divider></mat-divider>
-      <a
-        *ngIf="roles.includes('student')"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        mat-menu-item
-        routerLink="/student"
-      >
-        <mat-icon>home</mat-icon>
-        <span i18n>Student Home</span>
-      </a>
-      <a
-        *ngIf="roles.includes('teacher')"
-        mat-menu-item
-        routerLink="/teacher"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <mat-icon>home</mat-icon>
-        <span i18n>Teacher Home</span>
-      </a>
-      <a
-        *ngIf="roles.includes('student')"
-        mat-menu-item
-        routerLink="/student/profile/edit"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <mat-icon>edit</mat-icon>
-        <span i18n>Edit Profile</span>
-      </a>
-      <a
-        *ngIf="roles.includes('teacher')"
-        mat-menu-item
-        routerLink="/teacher/profile/edit"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <mat-icon>edit</mat-icon>
-        <span i18n>Edit Profile</span>
-      </a>
-      <a *ngIf="roles.includes('researcher')" mat-menu-item (click)="switchToAdmin()">
-        <mat-icon>settings</mat-icon>
-        <span i18n>Researcher Tools</span>
-      </a>
-      <a *ngIf="roles.includes('admin')" mat-menu-item (click)="switchToAdmin()">
-        <mat-icon>settings</mat-icon>
-        <span i18n>Admin Tools</span>
-      </a>
+      @if (isPreviousAdmin) {
+        <div class="user-switch">
+          <a (click)="switchToOriginalUser()" i18n>Switch back to original user</a>
+        </div>
+      }
+      <mat-divider />
+      @if (roles.includes('student')) {
+        <a
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          mat-menu-item
+          routerLink="/student"
+        >
+          <mat-icon>home</mat-icon>
+          <span i18n>Student Home</span>
+        </a>
+      }
+      @if (roles.includes('teacher')) {
+        <a
+          mat-menu-item
+          routerLink="/teacher"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <mat-icon>home</mat-icon>
+          <span i18n>Teacher Home</span>
+        </a>
+      }
+      @if (roles.includes('student')) {
+        <a
+          mat-menu-item
+          routerLink="/student/profile/edit"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <mat-icon>edit</mat-icon>
+          <span i18n>Edit Profile</span>
+        </a>
+      }
+      @if (roles.includes('teacher')) {
+        <a
+          mat-menu-item
+          routerLink="/teacher/profile/edit"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <mat-icon>edit</mat-icon>
+          <span i18n>Edit Profile</span>
+        </a>
+      }
+      @if (roles.includes('researcher')) {
+        <a mat-menu-item (click)="switchToAdmin()">
+          <mat-icon>settings</mat-icon>
+          <span i18n>Researcher Tools</span>
+        </a>
+      }
+      @if (roles.includes('admin')) {
+        <a mat-menu-item (click)="switchToAdmin()">
+          <mat-icon>settings</mat-icon>
+          <span i18n>Admin Tools</span>
+        </a>
+      }
       <a
         mat-menu-item
         routerLink="/help"

@@ -1,15 +1,15 @@
 <div class="discussion-content">
   <div class="discussion-posts" flex>
-    <class-response
-      *ngFor="let componentState of topLevelResponses.all"
-      [response]="componentState"
-      [numReplies]="componentState.replies.length"
-      [mode]="'grading'"
-      (deleteButtonClicked)="hidePost($event)"
-      (undoDeleteButtonClicked)="showPost($event)"
-      [isDisabled]="true"
-      class="post"
-    >
-    </class-response>
+    @for (componentState of topLevelResponses.all; track componentState) {
+      <class-response
+        [response]="componentState"
+        [numReplies]="componentState.replies.length"
+        [mode]="'grading'"
+        (deleteButtonClicked)="hidePost($event)"
+        (undoDeleteButtonClicked)="showPost($event)"
+        [isDisabled]="true"
+        class="post"
+      />
+    }
   </div>
 </div>

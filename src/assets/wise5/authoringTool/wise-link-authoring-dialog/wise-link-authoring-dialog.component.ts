@@ -1,12 +1,27 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TeacherProjectService } from '../../services/teacherProjectService';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
-    selector: 'wise-link-authoring-dialog',
-    templateUrl: './wise-link-authoring-dialog.component.html',
-    styleUrls: ['./wise-link-authoring-dialog.component.scss'],
-    standalone: false
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule
+  ],
+  styleUrl: './wise-link-authoring-dialog.component.scss',
+  templateUrl: './wise-link-authoring-dialog.component.html'
 })
 export class WiseLinkAuthoringDialogComponent {
   protected items: any[];

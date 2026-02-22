@@ -23,12 +23,21 @@ import { PeerGroup } from '../PeerGroup';
 import { Question } from '../peer-chat-question-bank/Question';
 import { QuestionBankService } from '../peer-chat-question-bank/questionBank.service';
 import { getQuestionIdsUsed } from '../peer-chat-question-bank/question-bank-helper';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-chat-question-bank.component';
+import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
+import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 
 @Component({
-    selector: 'peer-chat-student',
-    templateUrl: './peer-chat-student.component.html',
-    styleUrls: ['./peer-chat-student.component.scss'],
-    standalone: false
+  imports: [
+    ComponentAnnotationsComponent,
+    ComponentHeaderComponent,
+    PeerChatChatBoxComponent,
+    PeerChatQuestionBankComponent
+  ],
+  providers: [QuestionBankService],
+  selector: 'peer-chat-student',
+  templateUrl: './peer-chat-student.component.html'
 })
 export class PeerChatStudentComponent extends ComponentStudent {
   component: PeerChatComponent;

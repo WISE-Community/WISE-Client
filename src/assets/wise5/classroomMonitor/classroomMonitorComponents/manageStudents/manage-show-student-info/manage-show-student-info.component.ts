@@ -1,16 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose
+} from '@angular/material/dialog';
 import { ConfigService } from '../../../../services/configService';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButton } from '@angular/material/button';
+import { DatePipe } from '@angular/common';
 
 @Component({
-    selector: 'manage-show-student-info',
-    styleUrls: ['./manage-show-student-info.component.scss'],
-    templateUrl: './manage-show-student-info.component.html',
-    standalone: false
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
+    DatePipe
+  ],
+  styleUrl: './manage-show-student-info.component.scss',
+  templateUrl: './manage-show-student-info.component.html'
 })
 export class ManageShowStudentInfoComponent {
-  canViewStudentNames: boolean;
+  protected canViewStudentNames: boolean;
 
   constructor(
     protected dialog: MatDialog,

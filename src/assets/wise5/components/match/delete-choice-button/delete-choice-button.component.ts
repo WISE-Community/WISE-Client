@@ -4,15 +4,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-    selector: 'delete-choice-button',
-    styles: `
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  selector: 'delete-choice-button',
+  styles: `
     .mat-mdc-icon-button {
       --mdc-icon-button-state-layer-size: 24px;
       padding: 0;
     }
   `,
-    template: `
+  template: `
     <button
       mat-icon-button
       (click)="deleteChoice()"

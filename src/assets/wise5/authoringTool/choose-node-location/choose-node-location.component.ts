@@ -1,11 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { Component } from '@angular/core';
+import { Directive } from '@angular/core';
 
-@Component({
-    template: '',
-    standalone: false
-})
+@Directive()
 export abstract class ChooseNodeLocationComponent {
   protected inactiveGroupNodes: any[];
   protected inactiveStepNodes: any[];
@@ -18,7 +15,7 @@ export abstract class ChooseNodeLocationComponent {
     protected router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.inactiveGroupNodes = this.projectService.getInactiveGroupNodes();
     this.inactiveStepNodes = this.projectService.getInactiveStepNodes();
     this.nodeIds = Object.keys(this.projectService.idToOrder);

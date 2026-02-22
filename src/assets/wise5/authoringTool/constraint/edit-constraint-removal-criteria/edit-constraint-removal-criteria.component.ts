@@ -1,37 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RemovalCriteria } from '../../../../../app/domain/removalCriteria';
 import { RemovalCriteriaParam } from '../../../../../app/domain/removalCriteriaParam';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { MultipleChoiceContent } from '../../../components/multipleChoice/MultipleChoiceContent';
-import { EditConstraintRemovalCriteriaHelper } from './edit-constraint-removal-criteria-helper';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { FormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { RequiredErrorLabelComponent } from '../../node/advanced/required-error-label/required-error-label.component';
-import { MatButtonModule } from '@angular/material/button';
+import { EditConstraintRemovalCriteriaHelper } from './edit-constraint-removal-criteria-helper';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    imports: [
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatTooltipModule,
-        RequiredErrorLabelComponent
-    ],
-    selector: 'edit-constraint-removal-criteria',
-    styleUrl: './edit-constraint-removal-criteria.component.scss',
-    templateUrl: './edit-constraint-removal-criteria.component.html'
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    RequiredErrorLabelComponent
+  ],
+  selector: 'edit-constraint-removal-criteria',
+  styles: ['.common-width { width: 400px; } .red { color: red; } .mat-icon { margin: 0px; }'],
+  templateUrl: './edit-constraint-removal-criteria.component.html'
 })
 export class EditConstraintRemovalCriteriaComponent implements OnInit {
   private allNodeIds: string[];

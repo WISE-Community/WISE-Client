@@ -16,6 +16,8 @@ import { Feature } from '../Feature';
 import { Grade, GradeLevel } from '../GradeLevel';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWithCloseComponent } from '../../../../assets/wise5/directives/dialog-with-close/dialog-with-close.component';
+import { Location } from '../Location';
+import { LocationSelectMenuComponent } from '../../shared/location-select-menu/location-select-menu.component';
 
 @Component({
   imports: [
@@ -23,6 +25,7 @@ import { DialogWithCloseComponent } from '../../../../assets/wise5/directives/di
     MatBadgeModule,
     MatButtonModule,
     MatIconModule,
+    LocationSelectMenuComponent,
     SearchBarComponent,
     SelectMenuComponent,
     StandardsSelectMenuComponent
@@ -44,6 +47,7 @@ export class LibraryFiltersComponent {
   private sharedProjects: LibraryProject[] = [];
   protected showFilters: boolean = false;
   protected standardOptions: Standard[] = [];
+  protected locationOptions: Location[] = [];
   protected unitTypeOptions: { id: string; name: string }[] = [
     { id: 'WISE Platform', name: $localize`WISE Platform` },
     { id: 'Other Platform', name: $localize`Other Platform` }
@@ -97,6 +101,7 @@ export class LibraryFiltersComponent {
     );
     this.populateGradeLevels(project);
     this.populateStandards(project);
+    this.populateLocations(project);
   }
 
   private populateGradeLevels(project: LibraryProject): void {
@@ -123,12 +128,23 @@ export class LibraryFiltersComponent {
     });
   }
 
+  private populateLocations(project: LibraryProject): void {
+    project.metadata.locations?.forEach((location: Location) =>
+      this.locationOptions.push(Object.assign(new Location(), location))
+    );
+  }
+
   private removeDuplicatesAndSortAlphabetically(): void {
     this.standardOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
       this.standardOptions,
       'id'
     );
     this.utilService.sortObjectArrayByProperty(this.standardOptions, 'id');
+    this.locationOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
+      this.locationOptions,
+      'id'
+    );
+    this.utilService.sortObjectArrayByProperty(this.locationOptions, 'id');
     this.disciplineOptions = this.utilService.removeObjectArrayDuplicatesByProperty(
       this.disciplineOptions,
       'id'
@@ -168,6 +184,9 @@ export class LibraryFiltersComponent {
       case 'unitType':
         this.filterValues.unitTypeValue = value;
         break;
+      case 'location':
+        this.filterValues.locationValue = value;
+        break;
     }
     this.emitFilterValues();
   }
@@ -182,9 +201,9 @@ export class LibraryFiltersComponent {
   }
 
   protected showTypeInfo(): void {
-    const message = $localize`"Type" indicates the platform on which a unit runs. "WISE Platform" units are created 
-      using the WISE authoring tool. Students use WISE accounts to complete lessons and teachers can review and grade 
-      work on the WISE platform. "Other" units are created using different platforms. Resources for these units 
+    const message = $localize`"Type" indicates the platform on which a unit runs. "WISE Platform" units are created
+      using the WISE authoring tool. Students use WISE accounts to complete lessons and teachers can review and grade
+      work on the WISE platform. "Other" units are created using different platforms. Resources for these units
       are linked in the unit details.`;
     this.dialog.open(DialogWithCloseComponent, {
       data: {

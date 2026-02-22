@@ -1,19 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSelectModule } from '@angular/material/select';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { WorkgroupService } from '../../../../../../app/services/workgroup.service';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { TeacherWebSocketService } from '../../../../services/teacherWebSocketService';
-import { SelectPeriodComponent } from '../../select-period/select-period.component';
 import { PeerGroupDialogComponent } from './peer-group-dialog.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { PeerGrouping } from '../../../../../../app/domain/peerGrouping';
 import { StudentTeacherCommonServicesModule } from '../../../../../../app/student-teacher-common-services.module';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { MockComponent } from 'ng-mocks';
+import { PeerGroupPeriodComponent } from '../peer-group-period/peer-group-period.component';
 
 describe('PeerGroupDialogComponent', () => {
   let component: PeerGroupDialogComponent;
@@ -21,15 +18,10 @@ describe('PeerGroupDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PeerGroupDialogComponent],
-      schemas: [NO_ERRORS_SCHEMA],
       imports: [
-        BrowserAnimationsModule,
-        CommonModule,
-        MatDialogModule,
-        MatSelectModule,
-        SelectPeriodComponent,
-        StudentTeacherCommonServicesModule
+        PeerGroupDialogComponent,
+        StudentTeacherCommonServicesModule,
+        MockComponent(PeerGroupPeriodComponent)
       ],
       providers: [
         ClassroomStatusService,
@@ -38,7 +30,7 @@ describe('PeerGroupDialogComponent', () => {
         TeacherProjectService,
         TeacherWebSocketService,
         WorkgroupService,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient()
       ]
     }).compileComponents();
   });

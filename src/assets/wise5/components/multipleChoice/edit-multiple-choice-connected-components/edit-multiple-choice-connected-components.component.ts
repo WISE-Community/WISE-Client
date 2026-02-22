@@ -3,18 +3,25 @@ import { EditConnectedComponentsComponent } from '../../../../../app/authoring-t
 import { copy } from '../../../common/object/object';
 import { ProjectService } from '../../../services/projectService';
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
+import { EditConnectedComponentsAddButtonComponent } from '../../../../../app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component';
+import { EditConnectedComponentDefaultSelectsComponent } from '../../../../../app/authoring-tool/edit-connected-component-default-selects/edit-connected-component-default-selects.component';
+import { EditConnectedComponentDeleteButtonComponent } from '../../../../../app/authoring-tool/edit-connected-component-delete-button/edit-connected-component-delete-button.component';
 
 @Component({
-    selector: 'edit-multiple-choice-connected-components',
-    templateUrl: '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.html',
-    styleUrls: [
-        '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss'
-    ],
-    standalone: false
+  selector: 'edit-multiple-choice-connected-components',
+  templateUrl:
+    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.html',
+  styleUrl:
+    '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component.scss',
+  imports: [
+    EditConnectedComponentsAddButtonComponent,
+    EditConnectedComponentDefaultSelectsComponent,
+    EditConnectedComponentDeleteButtonComponent
+  ]
 })
 export class EditMultipleChoiceConnectedComponentsComponent extends EditConnectedComponentsComponent {
-  constructor(protected ProjectService: ProjectService) {
-    super(ProjectService);
+  constructor(protected projectService: ProjectService) {
+    super(projectService);
   }
 
   afterComponentIdChanged(connectedComponent: any): void {
@@ -35,7 +42,7 @@ export class EditMultipleChoiceConnectedComponentsComponent extends EditConnecte
   }
 
   copyChoiceTypeFromComponent(nodeId: string, componentId: string): void {
-    const component = this.ProjectService.getComponent(nodeId, componentId);
+    const component = this.projectService.getComponent(nodeId, componentId);
     this.componentContent.choiceType = (component as MultipleChoiceContent).choiceType;
   }
 
@@ -44,7 +51,7 @@ export class EditMultipleChoiceConnectedComponentsComponent extends EditConnecte
   }
 
   getCopyOfChoicesFromComponent(nodeId: string, componentId: string): void {
-    const component = this.ProjectService.getComponent(nodeId, componentId);
+    const component = this.projectService.getComponent(nodeId, componentId);
     return copy((component as MultipleChoiceContent).choices);
   }
 }

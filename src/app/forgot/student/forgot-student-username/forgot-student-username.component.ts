@@ -18,35 +18,29 @@ import { MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
-import { ExtendedModule } from '@angular/flex-layout/extended';
-import { NgIf, NgClass, NgFor } from '@angular/common';
-import { FlexModule } from '@angular/flex-layout/flex';
+import { NgClass } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-    templateUrl: './forgot-student-username.component.html',
-    styleUrl: './forgot-student-username.component.scss',
-    imports: [
-        MatCard,
-        MatCardContent,
-        FormsModule,
-        FlexModule,
-        ReactiveFormsModule,
-        NgIf,
-        NgClass,
-        ExtendedModule,
-        NgFor,
-        MatButton,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatError,
-        MatSelect,
-        MatOption,
-        MatProgressBar,
-        MatDivider,
-        RouterLink
-    ]
+  templateUrl: './forgot-student-username.component.html',
+  styleUrl: './forgot-student-username.component.scss',
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    ReactiveFormsModule,
+    NgClass,
+    MatButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatSelect,
+    MatOption,
+    MatProgressBar,
+    MatDivider,
+    RouterLink
+  ]
 })
 export class ForgotStudentUsernameComponent implements OnInit {
   months: any[] = [

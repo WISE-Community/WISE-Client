@@ -1,15 +1,11 @@
-<div fxLayoutAlign="start start" fxLayoutGap="4px">
-  <ng-container *ngIf="isTeacher">
+<div class="flex justify-start items-start gap-1">
+  @if (isTeacher) {
     <mat-icon class="mat-36" [ngStyle]="{ color: avatarColor }"> account_box </mat-icon>
-  </ng-container>
-  <ng-container *ngIf="!isTeacher">
+  } @else {
     <mat-icon class="mat-36" [ngStyle]="{ color: avatarColor }"> account_circle </mat-icon>
-  </ng-container>
+  }
   <div
-    fxFlex
-    fxLayout="row"
-    fxLayoutAlign="space-between center"
-    class="response-text"
+    class="response-text flex flex-row justify-between items-center flex-grow"
     [class]="{
       'notice-bg-bg': !isMyMessage,
       'selected-bg-bg': isMyMessage,
@@ -21,25 +17,26 @@
       <div class="mat-small secondary-text">{{ displayNames }}</div>
       <span [ngClass]="{ 'deleted-text': peerChatMessage.isDeleted }">{{ text }}</span>
     </div>
-    <ng-container *ngIf="isGrading" [ngSwitch]="peerChatMessage.isDeleted">
-      <button
-        *ngSwitchCase="true"
-        mat-icon-button
-        (click)="undelete()"
-        matTooltip="Make this message viewable to students again"
-        i18n-matTooltip
-      >
-        <mat-icon>visibility_off</mat-icon>
-      </button>
-      <button
-        *ngSwitchDefault
-        mat-icon-button
-        (click)="delete()"
-        matTooltip="Delete this message so students won't see it"
-        i18n-matTooltip
-      >
-        <mat-icon>visibility</mat-icon>
-      </button>
-    </ng-container>
+    @if (isGrading) {
+      @if (peerChatMessage.isDeleted) {
+        <button
+          mat-icon-button
+          (click)="undelete()"
+          matTooltip="Make this message viewable to students again"
+          i18n-matTooltip
+        >
+          <mat-icon>visibility_off</mat-icon>
+        </button>
+      } @else {
+        <button
+          mat-icon-button
+          (click)="delete()"
+          matTooltip="Delete this message so students won't see it"
+          i18n-matTooltip
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
+      }
+    }
   </div>
 </div>

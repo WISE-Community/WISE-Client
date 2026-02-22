@@ -1,44 +1,49 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditComponentAdvancedComponent } from './edit-component-advanced.component';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ComponentAuthoringModule } from '../../teacher/component-authoring.module';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { StudentTeacherCommonServicesModule } from '../../student-teacher-common-services.module';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
+import { EditShowMyWorkAdvancedComponent } from '../../../assets/wise5/components/showMyWork/edit-show-my-work-advanced/edit-show-my-work-advanced.component';
+import { NotebookService } from '../../../assets/wise5/services/notebookService';
+import { NotificationService } from '../../../assets/wise5/services/notificationService';
+import { TeacherNodeService } from '../../../assets/wise5/services/teacherNodeService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { EditComponentAdvancedComponent } from './edit-component-advanced.component';
 
 let component: EditComponentAdvancedComponent;
 let fixture: ComponentFixture<EditComponentAdvancedComponent>;
-
 describe('EditComponentAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [EditComponentAdvancedComponent],
-    imports: [ComponentAuthoringModule, MatDialogModule],
-    providers: [
+      imports: [MockComponent(EditShowMyWorkAdvancedComponent), EditComponentAdvancedComponent],
+      providers: [
         {
-            provide: MAT_DIALOG_DATA,
-            useValue: {
-                content: { type: 'ShowMyWork' },
-                id: 'component1',
-                nodeId: 'node1'
-            }
+          provide: MAT_DIALOG_DATA,
+          useValue: {
+            content: { type: 'ShowMyWork' },
+            id: 'component1',
+            nodeId: 'node1'
+          }
         },
         {
-            provide: MatDialogRef,
-            useValue: {
-                close: () => { }
-            }
+          provide: MatDialogRef,
+          useValue: {
+            close: () => {}
+          }
         },
-        StudentTeacherCommonServicesModule,
-        TeacherProjectService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-    ]
-}).compileComponents();
+        MockProviders(
+          TeacherNodeService,
+          NotebookService,
+          NotificationService,
+          TeacherProjectService
+        )
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EditComponentAdvancedComponent);
     component = fixture.componentInstance;
+    spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
+      type: 'ShowMyWork'
+    } as ComponentContent);
     fixture.detectChanges();
   });
 

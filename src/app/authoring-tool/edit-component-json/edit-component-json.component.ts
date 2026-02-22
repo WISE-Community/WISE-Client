@@ -4,27 +4,42 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NotificationService } from '../../../assets/wise5/services/notificationService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { Component as WISEComponent } from '../../../assets/wise5/common/Component';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'edit-component-json',
-    templateUrl: 'edit-component-json.component.html',
-    styleUrls: ['edit-component-json.component.scss'],
-    standalone: false
+  imports: [
+    CdkTextareaAutosize,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule
+  ],
+  selector: 'edit-component-json',
+  styles: ['div { margin-top: 10px; margin-bottom: 10px; } .mat-icon { margin: 0px; }'],
+  templateUrl: 'edit-component-json.component.html'
 })
 export class EditComponentJsonComponent {
-  validComponentContentJSONString: string;
-  componentContentJSONString: string;
   @Input() component: WISEComponent;
-  showJSONAuthoring: boolean = false;
-  jsonChanged: Subject<string> = new Subject<string>();
-  subscriptions: Subscription = new Subscription();
+  protected componentContentJSONString: string;
+  protected jsonChanged: Subject<string> = new Subject<string>();
+  protected showJSONAuthoring: boolean = false;
+  private subscriptions: Subscription = new Subscription();
+  private validComponentContentJSONString: string;
 
   constructor(
     private notificationService: NotificationService,
     private projectService: TeacherProjectService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setComponentContentJsonString();
     this.subscriptions.add(
       this.jsonChanged.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
@@ -43,7 +58,7 @@ export class EditComponentJsonComponent {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 

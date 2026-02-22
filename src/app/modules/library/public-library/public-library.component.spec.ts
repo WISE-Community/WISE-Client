@@ -16,12 +16,12 @@ describe('PublicLibraryComponent', () => {
       providers: [
         MockProvider(LibraryService, {
           communityLibraryProjectsSource$: of([
-            { id: 1, name: 'P1' },
-            { id: 2, name: 'P2' }
+            { id: 1, metadata: { publicUnitType: 'wiseTested', unitType: 'Platform' } },
+            { id: 2, metadata: { publicUnitType: 'wiseTested', unitType: 'Platform' } }
           ] as LibraryProject[]),
           officialLibraryProjectsSource$: of([
-            { id: 1, name: 'P1' },
-            { id: 3, name: 'P3' }
+            { id: 1, metadata: { publicUnitType: 'wiseTested', unitType: 'Platform' } },
+            { id: 3, metadata: { publicUnitType: 'communityBuilt', unitType: 'Platform' } }
           ] as LibraryProject[])
         }),
         ProjectFilterValues
@@ -33,7 +33,7 @@ describe('PublicLibraryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should remove duplicate units', () => {
-    expect(component['projects'].length).toBe(3);
+  it('should remove duplicates and order units', () => {
+    expect(component['filteredProjects'].map((p) => p.id)).toEqual([2, 1, 3]);
   });
 });

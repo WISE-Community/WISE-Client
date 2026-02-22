@@ -7,7 +7,7 @@ describe('AiChatMessagesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AiChatMessagesComponent]
+      imports: [AiChatMessagesComponent]
     });
     fixture = TestBed.createComponent(AiChatMessagesComponent);
     component = fixture.componentInstance;

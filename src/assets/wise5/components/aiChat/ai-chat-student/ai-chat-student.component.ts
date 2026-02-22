@@ -17,12 +17,22 @@ import { applyMixins } from '../../../common/apply-mixins';
 import { ComputerAvatarInitializer } from '../../../common/computer-avatar/computer-avatar-initializer';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
+import { ComputerAvatarSelectorComponent } from '../../../vle/computer-avatar-selector/computer-avatar-selector.component';
+import { MatCard } from '@angular/material/card';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
+import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
+import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.component';
 
 @Component({
-  selector: 'ai-chat-student',
-  templateUrl: './ai-chat-student.component.html',
-  styleUrls: ['./ai-chat-student.component.scss'],
-  standalone: false
+  imports: [
+    AiChatMessagesComponent,
+    ChatInputComponent,
+    ComponentHeaderComponent,
+    ComputerAvatarSelectorComponent,
+    MatCard
+  ],
+  styleUrl: './ai-chat-student.component.scss',
+  templateUrl: './ai-chat-student.component.html'
 })
 export class AiChatStudentComponent extends ComponentStudent {
   component: AiChatComponent;

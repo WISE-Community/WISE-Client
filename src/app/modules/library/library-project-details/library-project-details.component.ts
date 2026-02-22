@@ -17,13 +17,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { UnitTagsComponent } from '../../../teacher/unit-tags/unit-tags.component';
 import { DiscourseCategoryActivityComponent } from '../discourse-category-activity/discourse-category-activity.component';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   imports: [
     CommonModule,
     DiscourseCategoryActivityComponent,
-    FlexLayoutModule,
     LibraryProjectMenuComponent,
     MatButtonModule,
     MatDialogModule,

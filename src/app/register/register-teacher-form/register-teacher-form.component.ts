@@ -2,21 +2,53 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Teacher } from '../../domain/teacher';
 import { TeacherService } from '../../teacher/teacher.service';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { UtilService } from '../../services/util.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegisterUserFormComponent } from '../register-user-form/register-user-form.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ReCaptchaV3Service } from 'ng-recaptcha-2';
+import { ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
 import { NewPasswordAndConfirmComponent } from '../../password/new-password-and-confirm/new-password-and-confirm.component';
 import { ConfigService } from '../../services/config.service';
 import { SchoolLevel, schoolLevels } from '../../domain/profile.constants';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatFormField, MatLabel, MatError, MatHint } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'register-teacher-form',
-    templateUrl: './register-teacher-form.component.html',
-    styleUrls: ['./register-teacher-form.component.scss'],
-    standalone: false
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatHint,
+    MatSelect,
+    MatOption,
+    NewPasswordAndConfirmComponent,
+    MatCheckbox,
+    MatButton,
+    MatProgressBar,
+    RecaptchaV3Module
+  ],
+  selector: 'register-teacher-form',
+  styleUrl: './register-teacher-form.component.scss',
+  templateUrl: './register-teacher-form.component.html'
 })
 export class RegisterTeacherFormComponent extends RegisterUserFormComponent implements OnInit {
   createTeacherAccountFormGroup: FormGroup = this.fb.group(

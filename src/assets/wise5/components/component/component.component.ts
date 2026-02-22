@@ -11,7 +11,6 @@ import {
   createComponent
 } from '@angular/core';
 import { ClickToSnipImageService } from '../../services/clickToSnipImageService';
-import { CommonModule } from '@angular/common';
 import { Component as WISEComponent } from '../../common/Component';
 import { ComponentFactory } from '../../common/ComponentFactory';
 import { components } from '../Components';
@@ -22,7 +21,7 @@ import { ProjectService } from '../../services/projectService';
 import { StudentDataService } from '../../services/studentDataService';
 
 @Component({
-  imports: [CommonModule, HelpIconComponent],
+  imports: [HelpIconComponent],
   selector: 'component',
   templateUrl: 'component.component.html'
 })
