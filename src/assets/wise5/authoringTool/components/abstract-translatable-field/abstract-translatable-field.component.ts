@@ -90,8 +90,7 @@ export abstract class AbstractTranslatableFieldComponent {
           this.content[this.key]
         )
         .subscribe((suggestedTranslation: string) => {
-          this.translationText = suggestedTranslation;
-          this.saveTranslation();
+          this.saveTranslationText(suggestedTranslation);
         });
     }
   }
@@ -100,14 +99,9 @@ export abstract class AbstractTranslatableFieldComponent {
     const dialogRef = this.createDialogRef();
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result || result === '') {
-        this.translationText = result;
-        this.saveTranslation();
+        this.saveTranslationText(result);
       }
     });
-  }
-
-  private saveTranslation(): void {
-    this.saveTranslationText(this.translationText);
   }
 
   private createDialogRef(): MatDialogRef<TranslationSuggestionsDialogComponent> {
