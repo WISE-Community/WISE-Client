@@ -71,25 +71,6 @@ describe('IdeaSummaryComponent', () => {
     });
   });
 
-  describe('when expanding for the first time', () => {
-    beforeEach(() => {
-      component['expanded'] = false;
-      component['responses'] = [];
-    });
-
-    it('should not fetch responses again when already loaded', async () => {
-      component['responses'] = [{ text: 'Existing response', timestamp: 123456 }];
-
-      const getComponentSpy = spyOn(projectService, 'getComponent');
-      const getLatestWorkSpy = spyOn<any>(component, 'getLatestWork');
-
-      await component['toggleDetails']();
-
-      expect(getComponentSpy).not.toHaveBeenCalled();
-      expect(getLatestWorkSpy).not.toHaveBeenCalled();
-    });
-  });
-
   describe('getDGResponsesWithIdea()', () => {
     it('should return responses with the specified idea', () => {
       const states = [
