@@ -89,16 +89,14 @@ export abstract class AbstractTranslatableFieldComponent {
           this.currentLanguage().language,
           this.content[this.key]
         )
-        .subscribe((suggestedTranslation: string) => {
-          this.saveTranslationText(suggestedTranslation);
-        });
+        .subscribe((translation) => this.saveTranslationText(translation));
     }
   }
 
   private openDialog(): void {
     const dialogRef = this.createDialogRef();
     dialogRef.afterClosed().subscribe((result: string) => {
-      if (result || result === '') {
+      if (result) {
         this.saveTranslationText(result);
       }
     });
