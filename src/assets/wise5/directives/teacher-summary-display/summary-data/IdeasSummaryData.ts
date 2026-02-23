@@ -26,10 +26,10 @@ export abstract class IdeasSummaryData {
     this.getIdeaCountMap().forEach((count, ideaId) => {
       this.ideaDataArray.push({
         id: ideaId,
-        text: this.getIdeaDescriptionText(ideaId),
-        tags: this.getIdeaTags(ideaId),
         count: count,
-        color: this.getIdeaColor(ideaId)
+        color: this.rubric.getIdeaColor(ideaId),
+        tags: this.rubric.getIdeaTags(ideaId),
+        text: this.rubric.getIdeaDescriptionText(ideaId)
       });
     });
   }
@@ -47,25 +47,6 @@ export abstract class IdeasSummaryData {
       });
     });
     return ideaCountMap;
-  }
-
-  private getIdeaDescriptionText(ideaId: string): string {
-    return (
-      this.rubric.ideas.find((ideaDescription) => ideaDescription.name === ideaId)?.text ??
-      'idea ' + ideaId
-    );
-  }
-
-  private getIdeaTags(ideaId: string): string[] {
-    return this.rubric.ideas.find((ideaDescription) => ideaDescription.name === ideaId)?.tags ?? [];
-  }
-
-  private getIdeaColor(ideaId: string): string {
-    const ideaTags = this.getIdeaTags(ideaId);
-    return (
-      this.rubric.ideaColors?.find((ideaColor) => arrayContainsAll(ideaTags, ideaColor.tags))
-        ?.colorValue ?? ''
-    );
   }
 
   getIdeasSummaryGroups(): [IdeaGroup[], IdeaGroup[]] {
@@ -87,6 +68,7 @@ export abstract class IdeasSummaryData {
     if (!group.showUndetectedIdeas) {
       ideas = ideas.filter((idea) => idea.count > 0);
     }
+    ideas = ideas.filter((idea) => this.rubric.hasIdeaDescriptionText(idea.id));
     sortIdeasByCount(ideas, group.sort.order ?? 'desc');
     return ideas.slice(0, group.maxIdeas ?? ideas.length);
   }

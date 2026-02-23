@@ -1,3 +1,4 @@
+import { arrayContainsAll } from '../../../common/array/array';
 import { CRaterIdea } from './CRaterIdea';
 
 export class CRaterRubric {
@@ -17,6 +18,26 @@ export class CRaterRubric {
     return this.ideas.find((idea) => idea.name === ideaId);
   }
 
+  getIdeaTags(ideaId: string): string[] {
+    return this.getIdea(ideaId)?.tags ?? [];
+  }
+
+  hasIdeaDescriptionText(ideaId: string): boolean {
+    return this.getIdea(ideaId)?.text != null;
+  }
+
+  getIdeaDescriptionText(ideaId: string): string {
+    return this.getIdea(ideaId)?.text ?? 'idea ' + ideaId;
+  }
+
+  getIdeaColor(ideaId: string): string {
+    const ideaTags = this.getIdeaTags(ideaId);
+    return (
+      this.ideaColors?.find((ideaColor) => arrayContainsAll(ideaTags, ideaColor.tags))
+        ?.colorValue ?? ''
+    );
+  }
+
   hasRubricData(): boolean {
     return (this.description ?? '') !== '' || this.ideas.length > 0;
   }
@@ -28,23 +49,26 @@ export class CRaterRubric {
   getAdditionalIdeasSummaryGroups(): any[] {
     return this.ideasSummaryGroups.additional;
   }
-}
 
-export function getUniqueIdeas(responses: any[], rubric: CRaterRubric): CRaterIdea[] {
-  const uniqueIdeas: CRaterIdea[] = [];
-  responses.forEach((response) =>
-    response.ideas
-      ?.filter(
-        (idea) => idea.detected && !uniqueIdeas.some((uniqueIdea) => uniqueIdea.name === idea.name)
-      )
-      .forEach((idea) => {
-        const cRaterIdea = new CRaterIdea(idea.name, true);
-        const cRaterRubricIdea = rubric.getIdea(idea.name);
-        cRaterIdea.text = cRaterRubricIdea?.text ?? idea.name;
-        uniqueIdeas.push(cRaterIdea);
-      })
-  );
-  return uniqueIdeas;
+  getUniqueIdeas(responses: any[]): CRaterIdea[] {
+    const uniqueIdeas: CRaterIdea[] = [];
+    responses.forEach((response) =>
+      response.ideas
+        ?.filter(
+          (idea) =>
+            idea.detected &&
+            this.hasIdeaDescriptionText(idea.name) &&
+            !uniqueIdeas.some((uniqueIdea) => uniqueIdea.name === idea.name)
+        )
+        .forEach((idea) => {
+          const cRaterIdea = new CRaterIdea(idea.name, true);
+          const cRaterRubricIdea = this.getIdea(idea.name);
+          cRaterIdea.text = cRaterRubricIdea?.text ?? idea.name;
+          uniqueIdeas.push(cRaterIdea);
+        })
+    );
+    return uniqueIdeas;
+  }
 }
 
 export const DEFAULT_IDEAS_SUMMARY_GROUPS = {
