@@ -87,6 +87,7 @@ describe('IdeasSummaryComponent for Open Response component', () => {
     ngInit_OR_NoIdeasDetected_ShowMessage();
     ngInit_OR_IdeasDetected_ShowSummary();
     ngInit_OR_ManyIdeasDetected_ShowTopAndBottomThree();
+    ngInit_OR_FilterByPeriod();
   });
 });
 
@@ -217,4 +218,35 @@ function generateIdeas(numIdeas: number) {
     ideas.push({ name: 'idea ' + (i + 1), detected: true });
   }
   return ideas;
+}
+
+function ngInit_OR_FilterByPeriod() {
+  describe('filtering by period', () => {
+    beforeEach(() => {
+      generateMockRubric(1, 1);
+      const ideas = generateIdeas(1);
+      spyOn(TestBed.inject(AnnotationService), 'getAnnotationsByNodeIdComponentId').and.returnValue(
+        [
+          new Annotation({ periodId: 1, data: { ideas: ideas } } as any),
+          new Annotation({ periodId: 2, data: { ideas: ideas } } as any)
+        ]
+      );
+    });
+
+    it('includes all annotations when period is "All Periods" (-1)', () => {
+      component.periodId = -1;
+      spyOn<any>(component, 'groupIdeas');
+      component.ngOnInit();
+      const summaryData = (component as any).groupIdeas.calls.mostRecent().args[0];
+      expect(summaryData.dataPoints.length).toEqual(2);
+    });
+
+    it('includes only annotations for the selected period', () => {
+      component.periodId = 1;
+      spyOn<any>(component, 'groupIdeas');
+      component.ngOnInit();
+      const summaryData = (component as any).groupIdeas.calls.mostRecent().args[0];
+      expect(summaryData.dataPoints.length).toEqual(1);
+    });
+  });
 }

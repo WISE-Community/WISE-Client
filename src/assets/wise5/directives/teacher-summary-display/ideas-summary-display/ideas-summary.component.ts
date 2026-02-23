@@ -72,12 +72,10 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
         this.groupIdeas(new DialogGuidanceSummaryData(componentStates, this.rubric))
       );
     } else if (this.componentType === 'OpenResponse') {
-      this.groupIdeas(
-        new OpenResponseSummaryData(
-          this.annotationService.getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId),
-          this.rubric
-        )
-      );
+      const annotations = this.annotationService
+        .getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
+        .filter((annotation) => this.periodId === -1 || annotation.periodId === this.periodId);
+      this.groupIdeas(new OpenResponseSummaryData(annotations, this.rubric));
     }
   }
 
