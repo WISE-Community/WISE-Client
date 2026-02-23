@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 
-fdescribe('TranslationSuggestionsDialogComponent', () => {
+describe('TranslationSuggestionsDialogComponent', () => {
   let component: TranslationSuggestionsDialogComponent;
   let fixture: ComponentFixture<TranslationSuggestionsDialogComponent>;
 
