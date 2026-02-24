@@ -32,19 +32,28 @@ export class IdeaSummaryComponent extends TeacherSummaryDisplayComponent {
   protected expanded: boolean = false;
   protected responses: Response[] = [];
 
+  protected renderDisplay(): void {
+    super.renderDisplay();
+    this.getResponses();
+  }
+
   protected async toggleDetails(): Promise<void> {
     this.expanded = !this.expanded;
-    if (this.responses.length === 0) {
-      const component = this.projectService.getComponent(this.nodeId, this.componentId);
-      const states = await firstValueFrom(this.getLatestWork());
-      if (component.type === 'DialogGuidance') {
-        this.responses = this.getDGResponsesWithIdea(states, this.idea.id);
-      } else if (component.type === 'OpenResponse') {
-        this.responses = this.getORResponsesWithIdea(states, this.idea.id);
-      }
-      if (this.responses.length > 2) {
-        this.responses = this.responses.slice(0, 2); // only show 2 responses max
-      }
+    if (this.expanded) {
+      await this.getResponses();
+    }
+  }
+
+  private async getResponses(): Promise<void> {
+    const component = this.projectService.getComponent(this.nodeId, this.componentId);
+    const states = await firstValueFrom(this.getLatestWork());
+    if (component.type === 'DialogGuidance') {
+      this.responses = this.getDGResponsesWithIdea(states, this.idea.id);
+    } else if (component.type === 'OpenResponse') {
+      this.responses = this.getORResponsesWithIdea(states, this.idea.id);
+    }
+    if (this.responses.length > 2) {
+      this.responses = this.responses.slice(0, 2); // only show 2 responses max
     }
   }
 
