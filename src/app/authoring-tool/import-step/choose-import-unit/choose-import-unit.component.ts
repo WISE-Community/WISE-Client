@@ -30,7 +30,7 @@ export class ChooseImportUnitComponent {
   ) {}
 
   ngOnInit(): void {
-    this.importType = history.state.importType;
+    this.importType = history.state.importType ?? 'step';
     this.target = history.state;
     this.myProjects = this.configService.getAuthorableProjects();
     this.subscriptions.add(

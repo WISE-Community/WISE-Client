@@ -247,7 +247,7 @@ export class MilestonesAuthoringComponent {
     nodeId: string,
     componentId: string
   ): void {
-    const message = $localize`Are you sure you want to copy the Node ID and Component ID to the rest of this Milestone?`;
+    const message = $localize`Are you sure you want to copy the Node ID and Activity ID to the rest of this Milestone?`;
     if (confirm(message)) {
       this.setNodeIdAndComponentIdToAllSatisfyCriteria(milestone, nodeId, componentId);
       this.setNodeIdAndComponentIdToAllLocations(milestone, nodeId, componentId);

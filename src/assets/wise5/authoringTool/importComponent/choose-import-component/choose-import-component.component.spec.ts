@@ -83,7 +83,7 @@ function ngOnInit() {
       );
       expect(previewStepButton).toBeTruthy();
       const previewComponentButton = await loader.getHarness(
-        MatButtonHarness.with({ selector: '[mattooltip="Preview component"]' })
+        MatButtonHarness.with({ selector: '[mattooltip="Preview activity"]' })
       );
       expect(previewComponentButton).toBeTruthy();
     }));

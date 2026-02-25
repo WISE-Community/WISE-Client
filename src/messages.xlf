@@ -380,15 +380,15 @@
           <context context-type="linenumber">26,30</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1394735223918464839" datatype="html">
-        <source>Add New Component</source>
+      <trans-unit id="39198553669202931" datatype="html">
+        <source>Add New Activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">1,3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2287607018465279951" datatype="html">
-        <source>Select the component type you want to add or</source>
+      <trans-unit id="787242500793495382" datatype="html">
+        <source>Select the activity you want to add or</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">4,5</context>
@@ -930,8 +930,8 @@
           <context context-type="linenumber">17,19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7349014962687453751" datatype="html">
-        <source>Edit Component JSON</source>
+      <trans-unit id="8880132687084463323" datatype="html">
+        <source>Edit Activity JSON</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
           <context context-type="linenumber">19,23</context>
@@ -1009,8 +1009,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3347257943543474753" datatype="html">
-        <source>Edit Component Rubric</source>
+      <trans-unit id="8741193813895692751" datatype="html">
+        <source>Edit activity rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-rubric/edit-component-rubric.component.html</context>
           <context context-type="linenumber">8,12</context>
@@ -1062,8 +1062,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1930747845651698993" datatype="html">
-        <source>Component Width</source>
+      <trans-unit id="2810375050239191789" datatype="html">
+        <source>Activity Width</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-width/edit-component-width.component.ts</context>
           <context context-type="linenumber">11,15</context>
@@ -1114,15 +1114,15 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">23,24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5469582288677140959" datatype="html">
-        <source>Connected Components</source>
+      <trans-unit id="2139297247455088646" datatype="html">
+        <source>Connected Activities</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component.ts</context>
           <context context-type="linenumber">13,17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8885984788303127081" datatype="html">
-        <source>Are you sure you want to delete this connected component?</source>
+      <trans-unit id="2346934958152395597" datatype="html">
+        <source>Are you sure you want to delete this connected activity?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-connected-components/edit-connected-components.component.ts</context>
           <context context-type="linenumber">77</context>
@@ -1321,8 +1321,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">9,12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1717192557803901792" datatype="html">
-        <source>Reference Component:</source>
+      <trans-unit id="514264802422485519" datatype="html">
+        <source>Reference Activity:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-dynamic-prompt/edit-dynamic-prompt.component.html</context>
           <context context-type="linenumber">15,17</context>
@@ -1700,8 +1700,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">14,16</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2601245297771715218" datatype="html">
-        <source>Choose a unit from which to import component(s).</source>
+      <trans-unit id="8094381161211658587" datatype="html">
+        <source>Choose a unit from which to import activities.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component.html</context>
           <context context-type="linenumber">16,19</context>
@@ -1725,8 +1725,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">27,30</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5847302460276630595" datatype="html">
-        <source>Component</source>
+      <trans-unit id="5306473977542913614" datatype="html">
+        <source>Activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/select-component/select-component.component.html</context>
           <context context-type="linenumber">2,3</context>
@@ -1748,8 +1748,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">22,24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3441536572634125088" datatype="html">
-        <source>(This Component)</source>
+      <trans-unit id="5995283214427196521" datatype="html">
+        <source>(This activity)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/select-component/select-component.component.html</context>
           <context context-type="linenumber">11,16</context>
@@ -10363,25 +10363,29 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">6,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1567315535994082287" datatype="html">
-        <source>Select components to add to your new step (optional):</source>
+      <trans-unit id="7691000626720208901" datatype="html">
+        <source>Select activities to add to your new step (optional):</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">9,11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1481803350013682273" datatype="html">
-        <source>No components added</source>
+      <trans-unit id="287136474033183481" datatype="html">
+        <source>No activities added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">13,16</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2995584297025117986" datatype="html">
-        <source>Delete component</source>
+      <trans-unit id="1057829402524211130" datatype="html">
+        <source>Delete activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/addNode/add-your-own-node/add-your-own-node.component.html</context>
           <context context-type="linenumber">26,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4365227337792214829" datatype="html">
@@ -10873,8 +10877,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">46,51</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4602079498884979331" datatype="html">
-        <source>Component Info</source>
+      <trans-unit id="6290720414265350279" datatype="html">
+        <source>Activity Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/component-info-dialog/component-info-dialog.component.html</context>
           <context context-type="linenumber">2,5</context>
@@ -11071,8 +11075,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5542693800123465162" datatype="html">
-        <source>Make This Component Not Visible</source>
+      <trans-unit id="6246530767125926453" datatype="html">
+        <source>Make This Activity Not Visible</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/component-constraint-authoring/component-constraint-authoring.component.ts</context>
           <context context-type="linenumber">31</context>
@@ -11198,8 +11202,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">45,48</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7139551500615655479" datatype="html">
-        <source>Please Choose a Component</source>
+      <trans-unit id="6119789013700511616" datatype="html">
+        <source>Please Choose an Activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/constraint/edit-constraint-removal-criteria/edit-constraint-removal-criteria.component.html</context>
           <context context-type="linenumber">63,66</context>
@@ -11532,8 +11536,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7680383127278188009" datatype="html">
-        <source>Reference component:</source>
+      <trans-unit id="8378432943903351878" datatype="html">
+        <source>Reference activity:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
           <context context-type="linenumber">19,22</context>
@@ -11690,8 +11694,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">7,11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3548317051881233027" datatype="html">
-        <source>Choose the component(s) that you want to import, then select Submit.</source>
+      <trans-unit id="6526204345613381873" datatype="html">
+        <source>Choose the activities that you want to import, then select Submit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component.html</context>
           <context context-type="linenumber">1,3</context>
@@ -11711,8 +11715,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">33,36</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1389439426367341194" datatype="html">
-        <source>Preview component</source>
+      <trans-unit id="4853312017560609228" datatype="html">
+        <source>Preview activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component.html</context>
           <context context-type="linenumber">53,55</context>
@@ -11880,8 +11884,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6666903681821403514" datatype="html">
-        <source>Component ID</source>
+      <trans-unit id="6443328348885175541" datatype="html">
+        <source>Activity ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
           <context context-type="linenumber">161,163</context>
@@ -11903,8 +11907,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4128783014966097137" datatype="html">
-        <source>Copy Node ID and Component ID to Milestone</source>
+      <trans-unit id="5098305517091967664" datatype="html">
+        <source>Copy Node ID and Activity ID to Milestone</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.html</context>
           <context context-type="linenumber">208,211</context>
@@ -12134,8 +12138,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">231,233</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3843742807165983746" datatype="html">
-        <source>Are you sure you want to copy the Node ID and Component ID to the rest of this Milestone?</source>
+      <trans-unit id="550310164494800905" datatype="html">
+        <source>Are you sure you want to copy the Node ID and Activity ID to the rest of this Milestone?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component.ts</context>
           <context context-type="linenumber">250</context>
@@ -12361,15 +12365,15 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3307198501674154798" datatype="html">
-        <source>Add component</source>
+      <trans-unit id="6005640251215534178" datatype="html">
+        <source>Add activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/add-component-button/add-component-button.component.ts</context>
           <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7570310837284973582" datatype="html">
-        <source>Add component after</source>
+      <trans-unit id="4970978330013358284" datatype="html">
+        <source>Add activity after</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/add-component-button/add-component-button.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -12590,8 +12594,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2240347155507306942" datatype="html">
-        <source>Get a specific score on a component</source>
+      <trans-unit id="7152509567296715925" datatype="html">
+        <source>Get a specific score on an activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -12611,8 +12615,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4259244002485463451" datatype="html">
-        <source>Choose a specific choice on a component</source>
+      <trans-unit id="1399601407334255100" datatype="html">
+        <source>Choose a specific choice on an activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
           <context context-type="linenumber">55</context>
@@ -12667,29 +12671,22 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">221</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7088161748012321453" datatype="html">
-        <source>Copy component</source>
+      <trans-unit id="7916798927548288771" datatype="html">
+        <source>Copy activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component.html</context>
           <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7529107736747118202" datatype="html">
-        <source>This step does not have any components.</source>
+      <trans-unit id="6007148783088748338" datatype="html">
+        <source>This step does not have any activities.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
           <context context-type="linenumber">17,18</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6819692194334126635" datatype="html">
-        <source>Delete Component</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">65,67</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3122407218727181695" datatype="html">
-        <source>Are you sure you want to delete this component?
+      <trans-unit id="8750433175440754789" datatype="html">
+        <source>Are you sure you want to delete this activity?
 
 <x id="PH" equiv-text="componentNumber"/>. <x id="PH_1" equiv-text="component.type"/></source>
         <context-group purpose="location">
@@ -13019,8 +13016,8 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">1,3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6672767207836946071" datatype="html">
-        <source>Choose a Peer Grouping to use for this component:</source>
+      <trans-unit id="6080450091840666246" datatype="html">
+        <source>Choose a Peer Grouping to use for this activity:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/select-peer-grouping-dialog/select-peer-grouping-dialog.component.html</context>
           <context context-type="linenumber">3,5</context>
@@ -13728,15 +13725,15 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">8,10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5264909596461534988" datatype="html">
-        <source>Component (Optional)</source>
+      <trans-unit id="8008754613513650645" datatype="html">
+        <source>Activity (optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component.html</context>
           <context context-type="linenumber">22,25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1437565577227375336" datatype="html">
-        <source>Choose a Component</source>
+      <trans-unit id="4737253247919643571" datatype="html">
+        <source>Choose an activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/wise-link-authoring-dialog/wise-link-authoring-dialog.component.html</context>
           <context context-type="linenumber">25,29</context>
@@ -17225,8 +17222,8 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="368815297929378084" datatype="html">
-        <source>Note: this term currently only works in the Dialog Guidance component.</source>
+      <trans-unit id="658186677327876605" datatype="html">
+        <source>Note: this term currently only works in the Dialog Guidance activity.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">2,4</context>
@@ -19810,10 +19807,10 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">8,13</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2145150118792012851" datatype="html">
-        <source>Do you want to copy the choices and buckets from the connected component?
+      <trans-unit id="2424938650602658133" datatype="html">
+        <source>Do you want to copy the choices and buckets from the connected activity?
 
-Warning: This will delete all existing choices and buckets in this component.</source>
+Warning: This will delete all existing choices and buckets in this activity.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-connected-components/edit-match-connected-components.component.ts</context>
           <context context-type="linenumber">35</context>
@@ -20147,10 +20144,10 @@ Warning: This will delete all existing choices and buckets in this component.</s
           <context context-type="linenumber">63,67</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7065715943846466006" datatype="html">
-        <source>Do you want to copy the choices from the connected component?
+      <trans-unit id="3824537844289284943" datatype="html">
+        <source>Do you want to copy the choices from the connected activity?
 
-Warning: This will delete all existing choices in this component.</source>
+Warning: This will delete all existing choices in this activity.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-connected-components/edit-multiple-choice-connected-components.component.ts</context>
           <context context-type="linenumber">36</context>
@@ -20646,8 +20643,8 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
           <context context-type="linenumber">278</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8648892006027324370" datatype="html">
-        <source>If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML component above this</source>
+      <trans-unit id="2481731999593972877" datatype="html">
+        <source>If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML activity above this</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/open-response-authoring/open-response-authoring.component.html</context>
           <context context-type="linenumber">5,8</context>
@@ -21043,8 +21040,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">87,88</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7820322921034051164" datatype="html">
-        <source>Show Work Component</source>
+      <trans-unit id="8641853795765435400" datatype="html">
+        <source>Show Work Activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
           <context context-type="linenumber">23,25</context>
@@ -21135,8 +21132,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3927338573004362816" datatype="html">
-        <source>Choose the step and component to show the summary data for:</source>
+      <trans-unit id="5609998247039115265" datatype="html">
+        <source>Choose the step and activity to show the summary data for:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">5,7</context>
@@ -21219,8 +21216,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">81,83</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4138191398907594032" datatype="html">
-        <source> Complete Component </source>
+      <trans-unit id="4130179133520653126" datatype="html">
+        <source> Complete Activity </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">86,87</context>

@@ -38,7 +38,7 @@ export class EditConstraintRemovalCriteriaComponent implements OnInit {
   protected componentIdToIsSelectable: { [componentId: string]: boolean } = {};
   private componentParam: RemovalCriteriaParam = new RemovalCriteriaParam(
     'componentId',
-    $localize`Component`
+    $localize`Activity`
   );
   @Input() constraint: any;
   @Input() criteria: any;
