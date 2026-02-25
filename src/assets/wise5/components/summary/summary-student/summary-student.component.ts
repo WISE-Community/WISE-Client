@@ -83,10 +83,6 @@ export class SummaryStudent extends ComponentStudent {
     this.setPeriodIdIfNecessary();
   }
 
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
-
   getOtherPrompt(nodeId, componentId) {
     const otherComponent = this.projectService.getComponent(nodeId, componentId);
     if (otherComponent != null) {
