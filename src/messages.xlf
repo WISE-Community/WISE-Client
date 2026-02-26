@@ -916,7 +916,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">66,70</context>
+          <context context-type="linenumber">60,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1918155515588550927" datatype="html">
@@ -12392,36 +12392,32 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">15,19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="992675041241143285" datatype="html">
-        <source>General Advanced</source>
+      <trans-unit id="1347241542439262355" datatype="html">
+        <source>General settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
           <context context-type="linenumber">18,22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6508074424236812738" datatype="html">
-        <source>Edit Step Rubric</source>
+      <trans-unit id="1947385945918466985" datatype="html">
+        <source>Edit step rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">31,35</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component.ts</context>
-          <context context-type="linenumber">8,11</context>
+          <context context-type="linenumber">29,33</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="916255550401432414" datatype="html">
-        <source>Edit Transitions</source>
+      <trans-unit id="5805368808311741368" datatype="html">
+        <source>Edit transitions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">43,47</context>
+          <context context-type="linenumber">39,43</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4983782617392846363" datatype="html">
-        <source>Edit Constraints</source>
+      <trans-unit id="6636875980788220821" datatype="html">
+        <source>Edit constraints</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">55,59</context>
+          <context context-type="linenumber">49,53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3361600127930482405" datatype="html">
@@ -12661,6 +12657,13 @@ The branches will be removed but the steps will remain in the unit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/copy-component-button/copy-component-button.component.html</context>
           <context context-type="linenumber">5,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6508074424236812738" datatype="html">
+        <source>Edit Step Rubric</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component.ts</context>
+          <context context-type="linenumber">8,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7529107736747118202" datatype="html">
