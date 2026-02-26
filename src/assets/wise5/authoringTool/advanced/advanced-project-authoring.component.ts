@@ -2,19 +2,17 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { filter } from 'rxjs/operators';
 import { isValidJSONString } from '../../common/string/string';
 import { ConfigService } from '../../services/configService';
 import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
-import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 import { RubricAuthoringComponent } from '../rubric/rubric-authoring.component';
+import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   imports: [
@@ -25,78 +23,56 @@ import { RubricAuthoringComponent } from '../rubric/rubric-authoring.component';
     MatIconModule,
     MatInputModule,
     MatRadioModule,
+    MatTabsModule,
     MatTooltipModule,
     RubricAuthoringComponent
-  ],
-  styles: [
-    `
-      .rubric-div {
-        margin-bottom: 20px;
-      }
-
-      .mat-icon {
-        margin: 0px;
-      }
-    `
   ],
   templateUrl: 'advanced-project-authoring.component.html'
 })
 export class AdvancedProjectAuthoringComponent {
-  protected jsonDisplayed: boolean;
-  protected navigationType: string = 'default';
-  private projectId: number;
+  protected navigationType: 'default' | 'tab';
   protected projectJSONString: string;
-  protected projectScriptFilename: string;
-  protected rubricDisplayed: boolean;
+  protected projectURL: string;
+  protected selectedTab: number;
 
   constructor(
-    private dialog: MatDialog,
     private configService: ConfigService,
     private notificationService: NotificationService,
     private projectService: TeacherProjectService
-  ) {
-    this.projectId = this.configService.getProjectId();
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.setProjectScriptFilename();
+    this.navigationType = this.projectService.project.theme ?? 'default';
+    this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
+    this.projectURL = window.location.origin + this.configService.getConfigParam('projectURL');
   }
 
-  protected toggleRubric(): void {
-    this.jsonDisplayed = false;
-    this.rubricDisplayed = !this.rubricDisplayed;
-  }
-
-  protected toggleJSON(): void {
-    this.rubricDisplayed = false;
-    if (this.jsonDisplayed) {
-      this.hideJSON();
-    } else {
+  protected tabChanged(event: MatTabChangeEvent): void {
+    if (event.index === 2) {
       this.showJSON();
+    } else {
+      this.hideJSON();
     }
+  }
+
+  private showJSON(): void {
+    this.notificationService.showJSONValidMessage();
   }
 
   private hideJSON(): void {
     if (isValidJSONString(this.projectJSONString)) {
-      this.jsonDisplayed = false;
       this.notificationService.hideJSONValidMessage();
     } else if (
       confirm(
         $localize`The JSON is invalid. Invalid JSON will not be saved.\nClick "OK" to revert back to the last valid JSON.\nClick "Cancel" to keep the invalid JSON open so you can fix it.`
       )
     ) {
-      this.jsonDisplayed = false;
       this.notificationService.hideJSONValidMessage();
+      this.selectedTab = 2; // re-open JSON tab so user can review JSON
     }
   }
 
-  private showJSON(): void {
-    this.jsonDisplayed = true;
-    this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
-    this.notificationService.showJSONValidMessage();
-  }
-
-  protected autoSaveProjectJSONString(): void {
+  protected saveProjectJSONString(): void {
     try {
       this.saveProjectJSON(this.projectJSONString);
       this.notificationService.showJSONValidMessage();
@@ -108,61 +84,27 @@ export class AdvancedProjectAuthoringComponent {
   private saveProjectJSON(projectJSONString: string): void {
     const project = JSON.parse(projectJSONString);
     this.projectService.setProject(project);
-    this.setProjectScriptFilename();
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject();
   }
 
-  private setProjectScriptFilename(): void {
-    this.projectScriptFilename = this.projectService.getProjectScriptFilename();
-  }
-
-  protected chooseProjectScriptFile(): void {
-    new AssetChooser(this.dialog, null, null, this.projectId)
-      .open('scriptFilename')
-      .afterClosed()
-      .pipe(filter((data) => data != null))
-      .subscribe((data: any) => {
-        this.assetSelected(data);
-      });
-  }
-
-  private assetSelected({ assetItem }): void {
-    this.projectScriptFilename = assetItem.fileName;
-    this.projectScriptFilenameChanged();
-  }
-
   protected downloadProject(): void {
-    window.location.href = `${this.configService.getWISEBaseURL()}/api/project/export/${
-      this.projectId
-    }`;
+    window.location.href = `${this.configService.getWISEBaseURL()}/api/project/export/${this.configService.getProjectId()}`;
   }
 
   protected openProjectURLInNewTab(): void {
-    window.open(this.getProjectURL(), '_blank');
+    window.open(this.projectURL, '_blank');
   }
 
   protected copyProjectURL(): void {
     const textArea = document.createElement('textarea');
-    textArea.value = this.getProjectURL();
+    textArea.value = this.projectURL;
     document.body.appendChild(textArea);
     textArea.select();
     document.execCommand('copy');
     document.body.removeChild(textArea);
   }
 
-  protected getProjectURL(): string {
-    return window.location.origin + this.configService.getConfigParam('projectURL');
-  }
-
-  protected projectScriptFilenameChanged(): void {
-    this.projectService.setProjectScriptFilename(this.projectScriptFilename);
-    if (this.showJSON) {
-      this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
-    }
-    this.projectService.saveProject();
-  }
-
-  protected updateNavigationType(): void {
+  protected setNavigationType(): void {
     this.projectService.project.theme = this.navigationType;
     this.projectService.saveProject();
   }
