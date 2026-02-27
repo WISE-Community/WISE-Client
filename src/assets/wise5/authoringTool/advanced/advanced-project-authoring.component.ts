@@ -32,7 +32,6 @@ import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 export class AdvancedProjectAuthoringComponent {
   protected navigationType: 'default' | 'tab';
   protected projectJSONString: string;
-  protected projectURL: string;
   protected selectedTab: number;
 
   constructor(
@@ -44,7 +43,6 @@ export class AdvancedProjectAuthoringComponent {
   ngOnInit(): void {
     this.navigationType = this.projectService.project.theme ?? 'default';
     this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
-    this.projectURL = window.location.origin + this.configService.getConfigParam('projectURL');
   }
 
   protected tabChanged(event: MatTabChangeEvent): void {
@@ -88,20 +86,7 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   protected downloadProject(): void {
-    window.location.href = `${this.configService.getWISEBaseURL()}/api/project/export/${this.configService.getProjectId()}`;
-  }
-
-  protected openProjectURLInNewTab(): void {
-    window.open(this.projectURL, '_blank');
-  }
-
-  protected copyProjectURL(): void {
-    const textArea = document.createElement('textarea');
-    textArea.value = this.projectURL;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
+    window.location.href = `/api/project/export/${this.configService.getProjectId()}`;
   }
 
   protected setNavigationType(): void {

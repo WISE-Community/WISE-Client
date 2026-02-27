@@ -19,25 +19,6 @@
         </mat-radio-button>
       </mat-radio-group>
     </div>
-    <div class="flex flex-wrap justify-start items-center gap-2">
-      <mat-form-field style="width: 400px; max-width: 100%">
-        <mat-label i18n>Unit URL</mat-label>
-        <input matInput value="{{ projectURL }}" disabled="true" />
-      </mat-form-field>
-      <button mat-raised-button color="primary" class="topButton" (click)="copyProjectURL()">
-        <mat-icon>content_paste</mat-icon>
-        <span i18n>Copy unit URL to clipboard</span>
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        class="topButton"
-        (click)="openProjectURLInNewTab()"
-      >
-        <mat-icon>open_in_new</mat-icon>
-        <span i18n>Open unit URL in new tab</span>
-      </button>
-    </div>
     <button mat-raised-button color="primary" class="topButton" (click)="downloadProject()">
       <mat-icon>file_download</mat-icon>
       <span i18n>Download unit</span>
