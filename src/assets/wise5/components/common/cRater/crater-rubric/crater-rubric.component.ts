@@ -17,21 +17,15 @@ export class CRaterRubricComponent {
   protected ideas: CRaterIdea[];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) protected cRaterRubric: CRaterRubric,
+    @Inject(MAT_DIALOG_DATA) protected rubric: CRaterRubric,
     private dialogRef: MatDialogRef<CRaterRubricComponent>,
     private rubricEventService: RubricEventService
   ) {}
 
   ngOnInit(): void {
-    this.ideas = sortIdeasById(this.cRaterRubric.ideas.map(cRaterIdeaToIdeaData)).map(
+    this.ideas = sortIdeasById(this.rubric.ideas.map(cRaterIdeaToIdeaData)).map(
       (idea: IdeaData) =>
-        new CRaterIdea(
-          idea.id,
-          undefined,
-          idea.text,
-          idea.tags,
-          this.cRaterRubric.getIdeaColor(idea.id)
-        )
+        new CRaterIdea(idea.id, undefined, idea.text, idea.tags, this.rubric.getIdeaColor(idea.id))
     );
     this.rubricEventService.toggleRubricDisplayed();
   }
