@@ -9,6 +9,16 @@
   @if (cRaterRubric.description && cRaterRubric.description !== '') {
     <p>{{ cRaterRubric.description }}</p>
   }
+  @if (cRaterRubric.ideaColors) {
+    <div class="flex flex-wrap items-center gap-2 mb-4">
+      <span class="text-sm font-medium" i18n>Key:</span>
+      @for (ideaColor of cRaterRubric.ideaColors; track ideaColor.colorValue) {
+        <div class="py-0.5 px-1 rounded" [style.background-color]="ideaColor.colorValue">
+          <span class="text-sm">{{ ideaColor.tags.join(', ') }}</span>
+        </div>
+      }
+    </div>
+  }
   @if (cRaterRubric.ideas.length > 0) {
     <table class="text-sm">
       <thead>
