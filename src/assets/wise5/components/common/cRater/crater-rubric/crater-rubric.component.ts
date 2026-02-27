@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { CRaterIdea } from '../CRaterIdea';
-import { cRaterIdeaToIdeaData, ideaDataToCRaterIdea, sortIdeasById } from '../IdeaData';
+import { cRaterIdeaToIdeaData, IdeaData, sortIdeasById } from '../IdeaData';
 import { CRaterRubric } from '../CRaterRubric';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -24,13 +24,13 @@ export class CRaterRubricComponent {
 
   ngOnInit(): void {
     this.ideas = sortIdeasById(this.cRaterRubric.ideas.map(cRaterIdeaToIdeaData)).map(
-      ideaDataToCRaterIdea
+      (idea: IdeaData) => new CRaterIdea(idea.id, undefined, idea.text, idea.tags)
     );
-    this.rubricEventService.rubricToggled();
+    this.rubricEventService.toggleRubricDisplayed();
   }
 
   ngOnDestroy(): void {
-    this.rubricEventService.rubricToggled();
+    this.rubricEventService.toggleRubricDisplayed();
   }
 
   protected closeDialog(): void {
