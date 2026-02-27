@@ -25,13 +25,13 @@ export class ShowCRaterRubricComponent {
   }
 
   ngOnDestroy(): void {
-    if (this.rubricEventService.getIsRubricOpen()) {
+    if (this.rubricEventService.isRubricDisplayed()) {
       this.rubricDialog.close();
     }
   }
 
   protected openIdeasRubric(): void {
-    if (!this.rubricEventService.getIsRubricOpen()) {
+    if (!this.rubricEventService.isRubricDisplayed()) {
       this.rubricDialog = this.dialog.open(CRaterRubricComponent, {
         panelClass: 'dialog-sm',
         position: { right: '0', bottom: '0' },

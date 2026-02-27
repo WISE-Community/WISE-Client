@@ -61,10 +61,15 @@ export class CRaterRubric {
             !uniqueIdeas.some((uniqueIdea) => uniqueIdea.name === idea.name)
         )
         .forEach((idea) => {
-          const cRaterIdea = new CRaterIdea(idea.name, true);
-          const cRaterRubricIdea = this.getIdea(idea.name);
-          cRaterIdea.text = cRaterRubricIdea?.text ?? idea.name;
-          uniqueIdeas.push(cRaterIdea);
+          uniqueIdeas.push(
+            new CRaterIdea(
+              idea.name,
+              true,
+              this.getIdeaDescriptionText(idea.name),
+              [],
+              this.getIdeaColor(idea.name)
+            )
+          );
         })
     );
     return uniqueIdeas;
