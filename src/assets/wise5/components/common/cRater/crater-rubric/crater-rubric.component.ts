@@ -24,7 +24,14 @@ export class CRaterRubricComponent {
 
   ngOnInit(): void {
     this.ideas = sortIdeasById(this.cRaterRubric.ideas.map(cRaterIdeaToIdeaData)).map(
-      (idea: IdeaData) => new CRaterIdea(idea.id, undefined, idea.text, idea.tags)
+      (idea: IdeaData) =>
+        new CRaterIdea(
+          idea.id,
+          undefined,
+          idea.text,
+          idea.tags,
+          this.cRaterRubric.getIdeaColor(idea.id)
+        )
     );
     this.rubricEventService.toggleRubricDisplayed();
   }

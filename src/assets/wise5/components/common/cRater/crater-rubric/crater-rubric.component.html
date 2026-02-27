@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         @for (idea of ideas; track idea.name) {
-          <tr>
+          <tr [style.background-color]="idea.color">
             <td>{{ idea.name }}</td>
             <td>{{ idea.text }}</td>
           </tr>
