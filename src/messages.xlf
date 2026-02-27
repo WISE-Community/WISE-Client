@@ -943,7 +943,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="269492429034038872" datatype="html">
@@ -10588,39 +10588,25 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">18,22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5987051960503169529" datatype="html">
-        <source>Unit URL</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">24,25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3498914665080429006" datatype="html">
-        <source>Copy unit URL to clipboard</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">29,33</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6975334436797998183" datatype="html">
-        <source>Open unit URL in new tab</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">38,41</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="1653435262796372065" datatype="html">
         <source>Download unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">43,47</context>
+          <context context-type="linenumber">24,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5117124026123560512" datatype="html">
+        <source> Editing the JSON directly is generally not recommended, as errors in JSON can break the unit. If you need assistance, please contact WISE staff. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
+          <context context-type="linenumber">45,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2475616145493399595" datatype="html">
         <source>Edit Unit JSON</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">62,66</context>
+          <context context-type="linenumber">50,54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component.html</context>
