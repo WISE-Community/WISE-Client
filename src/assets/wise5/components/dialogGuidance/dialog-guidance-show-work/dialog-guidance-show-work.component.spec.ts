@@ -9,6 +9,7 @@ import { UserService } from '../../../../../app/services/user.service';
 describe('DialogGuidanceShowWorkComponent', () => {
   let component: DialogGuidanceShowWorkComponent;
   let fixture: ComponentFixture<DialogGuidanceShowWorkComponent>;
+  let userService: UserService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,14 +25,25 @@ describe('DialogGuidanceShowWorkComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogGuidanceShowWorkComponent);
     component = fixture.componentInstance;
+    userService = TestBed.inject(UserService);
     spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(new CRaterRubric());
     component.componentState = {
       studentData: {}
     };
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('ngOnInit', () => {
+    it('should show detected ideas when user is teacher', () => {
+      spyOn(userService, 'isTeacher').and.returnValue(true);
+      fixture.detectChanges();
+      expect(component['showDetectedIdeas']).toBe(true);
+    });
+
+    it('should show detected ideas when user is not a teacher but there is additional settings', () => {
+      spyOn(userService, 'isTeacher').and.returnValue(false);
+      component.additionalSettings = { showDetectedIdeas: true };
+      fixture.detectChanges();
+      expect(component['showDetectedIdeas']).toBe(true);
+    });
   });
 });

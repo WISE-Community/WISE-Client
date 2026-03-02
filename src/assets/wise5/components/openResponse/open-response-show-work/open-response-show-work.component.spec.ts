@@ -96,11 +96,21 @@ describe('OpenResponseShowWorkComponent', () => {
       expect(component['showDetectedIdeas']).toBe(true);
     });
 
-    it('should not show detected ideas when user is not a teacher', () => {
+    it('should not show detected ideas when user is not a teacher and there is no additional settings', () => {
       spyOn(annotationService, 'getAnnotationsByStudentWorkId').and.returnValue([]);
       spyOn(userService, 'isTeacher').and.returnValue(false);
       fixture.detectChanges();
-      expect(component['showDetectedIdeas']).toBe(false);
+      expect(component['showDetectedIdeas']).toBe(undefined);
+    });
+
+    it('should show detected ideas when user is not a teacher but there is additional settings', () => {
+      spyOn(annotationService, 'getAnnotationsByStudentWorkId').and.returnValue([
+        mockCRaterAnnotation
+      ] as any);
+      spyOn(userService, 'isTeacher').and.returnValue(false);
+      component.additionalSettings = { showDetectedIdeas: true };
+      fixture.detectChanges();
+      expect(component['showDetectedIdeas']).toBe(true);
     });
   });
 });

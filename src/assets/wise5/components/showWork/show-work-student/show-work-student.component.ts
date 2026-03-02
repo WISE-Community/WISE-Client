@@ -16,6 +16,7 @@ import { ComponentShowWorkDirective } from '../../component-show-work.directive'
   template: '<div #component></div>'
 })
 export class ShowWorkStudentComponent {
+  @Input() additionalSettings: any;
   @Input() componentContent: any;
   @Input() componentId: string;
   @ViewChild('component') private componentElementRef: ElementRef;
@@ -49,6 +50,7 @@ export class ShowWorkStudentComponent {
         environmentInjector: this.injector
       });
       Object.assign(this.componentRef.instance, {
+        additionalSettings: this.additionalSettings,
         componentId: this.componentId,
         componentState: this.studentWork,
         isDisabled: true,
