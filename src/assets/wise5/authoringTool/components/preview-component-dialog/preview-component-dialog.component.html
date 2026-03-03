@@ -1,11 +1,7 @@
-<h2 mat-dialog-title i18n>Preview Component</h2>
+<h2 mat-dialog-title i18n>Preview Activity</h2>
 @if (canSaveStarterState) {
   <mat-divider />
-  <save-starter-state
-    class="notice-bg-bg"
-    [component]="component"
-    [starterState]="starterState"
-  />
+  <save-starter-state class="notice-bg-bg" [component]="component" [starterState]="starterState" />
 }
 <mat-divider />
 <mat-dialog-content>

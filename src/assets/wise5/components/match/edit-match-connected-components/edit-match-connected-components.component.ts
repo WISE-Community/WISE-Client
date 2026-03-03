@@ -32,7 +32,7 @@ export class EditMatchConnectedComponentsComponent extends EditConnectedComponen
   askIfWantToCopyChoicesAndBuckets({ nodeId, componentId }): void {
     if (
       confirm(
-        $localize`Do you want to copy the choices and buckets from the connected component?\n\nWarning: This will delete all existing choices and buckets in this component.`
+        $localize`Do you want to copy the choices and buckets from the connected activity?\n\nWarning: This will delete all existing choices and buckets in this activity.`
       )
     ) {
       const connectedComponentContent = copy(this.projectService.getComponent(nodeId, componentId));
