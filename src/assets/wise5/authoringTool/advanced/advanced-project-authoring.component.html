@@ -1,10 +1,9 @@
 <mat-tab-group dynamicHeight (selectedTabChange)="tabChanged($event)" [selectedIndex]="selectedTab">
   <mat-tab>
     <ng-template mat-tab-label>
-      <mat-icon>settings</mat-icon>
-      General settings
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General settings</span>
     </ng-template>
-    <div>
+    <div class="my-4">
       <label id="navigation-type-label" i18n>Navigation mode:</label>
       <mat-radio-group
         aria-labelledby="navigation-type-label"
@@ -26,8 +25,7 @@
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      <mat-icon>message</mat-icon>
-      Rubric
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
     </ng-template>
     <ng-template matTabContent>
       <!-- lazy load needed for tinymce to work -->
@@ -35,26 +33,25 @@
     </ng-template>
   </mat-tab>
   <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon>code</mat-icon>
-      JSON
-    </ng-template>
-    <span class="flex items-center gap-2">
-      <mat-icon color="warn">warning</mat-icon>
-      <span i18n style="color: red">
-        Editing the JSON directly is generally not recommended, as errors in JSON can break the
-        unit. If you need assistance, please contact WISE staff.
-      </span>
-    </span>
-    <mat-form-field class="w-full" appearance="outline" style="margin-top: 10px">
-      <mat-label i18n>Edit Unit JSON</mat-label>
-      <textarea
-        class="mat-body-2"
-        matInput
-        cdkTextareaAutosize
-        [(ngModel)]="projectJSONString"
-        (change)="saveProjectJSONString()"
-      ></textarea>
-    </mat-form-field>
+    <ng-template mat-tab-label><mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <div class="pt-4">
+      <div class="mb-2">
+        <mat-icon color="warn" class="align-bottom">warning</mat-icon>
+        <span i18n class="warn">
+          Editing the JSON directly is generally not recommended, as errors can break the unit. If
+          you need assistance, please contact WISE staff.
+        </span>
+      </div>
+      <mat-form-field class="w-full" appearance="outline" style="margin-top: 10px">
+        <mat-label i18n>Edit Unit JSON</mat-label>
+        <textarea
+          class="mat-body-2"
+          matInput
+          cdkTextareaAutosize
+          [(ngModel)]="projectJSONString"
+          (change)="saveProjectJSONString()"
+        ></textarea>
+      </mat-form-field>
+    </div>
   </mat-tab>
 </mat-tab-group>
