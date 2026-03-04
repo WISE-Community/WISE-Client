@@ -16,9 +16,6 @@ import { MatMenuModule } from '@angular/material/menu';
   selector: 'add-component-button',
   styles: [
     `
-      .rotate-180 {
-        transform: rotate(180deg);
-      }
       .flip-vertical {
         transform: scaleY(-1);
       }

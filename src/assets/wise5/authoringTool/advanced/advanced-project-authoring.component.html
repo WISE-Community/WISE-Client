@@ -1,99 +1,57 @@
-<div class="flex flex-wrap justify-start items-center gap-2">
-  <button
-    mat-raised-button
-    color="primary"
-    class="topButton enable-in-translation"
-    matTooltip="Show Rubric"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    (click)="toggleRubric()"
-  >
-    <mat-icon>message</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    id="showProjectJSONButton"
-    class="topButton"
-    matTooltip="Show JSON"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    (click)="toggleJSON()"
-  >
-    <mat-icon>code</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    class="topButton"
-    matTooltip="Download Unit"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    (click)="downloadProject()"
-  >
-    <mat-icon>file_download</mat-icon>
-  </button>
-</div>
-<br />
-@if (rubricDisplayed) {
-  <div class="rubric-div">
-    <rubric-authoring />
-  </div>
-}
-@if (jsonDisplayed) {
-  <div>
-    <mat-form-field class="w-full" appearance="outline">
-      <mat-label i18n>Edit Unit JSON</mat-label>
-      <textarea
-        class="mat-body-2"
-        matInput
-        cdkTextareaAutosize
-        [(ngModel)]="projectJSONString"
-        (change)="autoSaveProjectJSONString()"
-      ></textarea>
-    </mat-form-field>
-  </div>
-}
-<div>
-  <label id="navigation-type-label" i18n>Navigation mode:</label>
-  <mat-radio-group
-    aria-labelledby="navigation-type-label"
-    [(ngModel)]="navigationType"
-    (ngModelChange)="updateNavigationType()"
-  >
-    <mat-radio-button color="primary" value="default" i18n
-      >Default (lessons appear in drop-down list and unit plan)</mat-radio-button
-    >
-    <mat-radio-button color="primary" value="tab" i18n
-      >Tabbed (lessons appear as tabs)
-    </mat-radio-button>
-  </mat-radio-group>
-</div>
-<div class="flex flex-wrap justify-start items-center gap-2">
-  <mat-form-field style="width: 400px; max-width: 100%">
-    <mat-label i18n>Unit URL</mat-label>
-    <input matInput value="{{ getProjectURL() }}" disabled="true" />
-  </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    class="topButton"
-    matTooltip="Copy Unit URL to Clipboard"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    (click)="copyProjectURL()"
-  >
-    <mat-icon>content_paste</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    class="topButton"
-    matTooltip="Open Unit URL in New Tab"
-    matTooltipPosition="above"
-    i18n-matTooltip
-    (click)="openProjectURLInNewTab()"
-  >
-    <mat-icon>open_in_new</mat-icon>
-  </button>
-</div>
+<mat-tab-group dynamicHeight (selectedTabChange)="tabChanged($event)" [selectedIndex]="selectedTab">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General settings</span>
+    </ng-template>
+    <div class="my-4">
+      <label id="navigation-type-label" i18n>Navigation mode:</label>
+      <mat-radio-group
+        aria-labelledby="navigation-type-label"
+        [(ngModel)]="navigationType"
+        (ngModelChange)="setNavigationType()"
+      >
+        <mat-radio-button color="primary" value="default" i18n
+          >Default (lessons appear in drop-down list and unit plan)</mat-radio-button
+        >
+        <mat-radio-button color="primary" value="tab" i18n
+          >Tabbed (lessons appear as tabs)
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <button mat-raised-button color="primary" class="topButton" (click)="downloadProject()">
+      <mat-icon>file_download</mat-icon>
+      <span i18n>Download unit</span>
+    </button>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <ng-template matTabContent>
+      <!-- lazy load needed for tinymce to work -->
+      <rubric-authoring />
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label><mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <div class="pt-4">
+      <div class="mb-2">
+        <mat-icon color="warn" class="align-bottom">warning</mat-icon>
+        <span i18n class="warn">
+          Editing the JSON directly is generally not recommended, as errors can break the unit. If
+          you need assistance, please contact WISE staff.
+        </span>
+      </div>
+      <mat-form-field class="w-full" appearance="outline" style="margin-top: 10px">
+        <mat-label i18n>Edit Unit JSON</mat-label>
+        <textarea
+          class="mat-body-2"
+          matInput
+          cdkTextareaAutosize
+          [(ngModel)]="projectJSONString"
+          (change)="saveProjectJSONString()"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </mat-tab>
+</mat-tab-group>
