@@ -142,10 +142,6 @@ export class DiscussionStudent extends ComponentStudent {
     this.broadcastDoneRenderingComponent();
   }
 
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
-
   isConnectedComponentShowWorkMode() {
     if (this.component.hasConnectedComponent()) {
       let isShowWorkMode = true;

@@ -42,20 +42,20 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
   protected transitionCriterias = [
     {
       value: 'score',
-      text: $localize`Get a specific score on a component`,
+      text: $localize`Get a specific score on an activity`,
       params: [
         { value: 'nodeId', text: $localize`Node ID` },
-        { value: 'componentId', text: $localize`Component ID` },
+        { value: 'componentId', text: $localize`Activity ID` },
         { value: 'scores', text: $localize`Scores(s)` },
         { value: 'scoreId', text: $localize`Score ID (Optional)` }
       ]
     },
     {
       value: 'choiceChosen',
-      text: $localize`Choose a specific choice on a component`,
+      text: $localize`Choose a specific choice on an activity`,
       params: [
         { value: 'nodeId', text: $localize`Node ID` },
-        { value: 'componentId', text: $localize`Component ID` },
+        { value: 'componentId', text: $localize`Activity ID` },
         { value: 'choiceIds', text: $localize`Choices` }
       ]
     },

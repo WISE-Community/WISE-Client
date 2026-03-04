@@ -4,6 +4,7 @@ import { NodeService } from '../services/nodeService';
 
 @Directive()
 export abstract class ComponentShowWorkDirective {
+  @Input() additionalSettings: any;
   @Input() nodeId: string;
   @Input() componentId: string;
   @Input() componentState: any;

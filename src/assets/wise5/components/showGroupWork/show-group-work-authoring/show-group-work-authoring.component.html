@@ -20,7 +20,7 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-label i18n>Show Work Component</mat-label>
+    <mat-label i18n>Show Work Activity</mat-label>
     <mat-select
       [(ngModel)]="componentContent.showWorkComponentId"
       (ngModelChange)="componentChanged()"
@@ -39,7 +39,7 @@
         >
           <span>{{ componentIndex + 1 }}. {{ component.type }} </span>
           @if (component.id === componentId) {
-            <span i18n>(This Component)</span>
+            <span i18n>(This activity)</span>
           }
         </mat-option>
       }

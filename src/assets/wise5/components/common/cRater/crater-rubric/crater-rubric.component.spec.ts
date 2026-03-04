@@ -17,7 +17,7 @@ describe('LibraryProjectDetailsComponent', () => {
 
     fixture = TestBed.createComponent(CRaterRubricComponent);
     component = fixture.componentInstance;
-    component['cRaterRubric'] = new CRaterRubric();
+    component['rubric'] = new CRaterRubric();
     fixture.detectChanges();
   });
 
@@ -29,14 +29,14 @@ describe('LibraryProjectDetailsComponent', () => {
 
   it('should show description if one exists', () => {
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(0);
-    component['cRaterRubric'].description = 'Test';
+    component['rubric'].description = 'Test';
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(1);
   });
 
   it('should not show description if none exists', () => {
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(0);
-    component['cRaterRubric'].description = '';
+    component['rubric'].description = '';
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(0);
   });

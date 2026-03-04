@@ -10,7 +10,7 @@ import { MilestoneReportButtonComponent } from '../milestone-report-button/miles
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 import { ComponentCompletionComponent } from '../component-completion/component-completion.component';
 import { ComponentContent } from '../../../common/ComponentContent';
-import { IdeasSummaryComponent } from '../../../directives/teacher-summary-display/ideas-summary-display/ideas-summary.component';
+import { IdeasSummaryComponent } from '../../../directives/teacher-summary-display/ideas-summary/ideas-summary.component';
 import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';

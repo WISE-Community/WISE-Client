@@ -178,10 +178,6 @@ export class TableStudentComponent extends ComponentStudent {
     }
   }
 
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
-
   initializeDataExplorer() {
     this.numDataExplorerSeries = this.componentContent.numDataExplorerSeries;
     this.dataExplorerGraphTypes = this.componentContent.dataExplorerGraphTypes;
