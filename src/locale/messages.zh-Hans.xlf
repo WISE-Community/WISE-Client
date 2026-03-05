@@ -960,6 +960,10 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
           <context context-type="linenumber">2,6</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
+          <context context-type="linenumber">36,39</context>
+        </context-group>
         <target state="translated">JSON文件</target>
       </trans-unit>
       <trans-unit id="2543636733220429928" datatype="html">
@@ -969,12 +973,8 @@
           <context context-type="linenumber">8,12</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">18,21</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">66,70</context>
+          <context context-type="linenumber">60,64</context>
         </context-group>
         <target state="translated">显示JSON文件内容</target>
       </trans-unit>
@@ -1004,7 +1004,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="translated">JSON文件内容无效。无效的 JSON文件 将不会被保存。
 点击 "确定" 返回到最后一个有效的JSON文件。
@@ -1067,6 +1067,10 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-rubric/edit-component-rubric.component.html</context>
           <context context-type="linenumber">2,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
+          <context context-type="linenumber">28,31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
@@ -11632,39 +11636,23 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">The step you chose has nothing to customize. Click "Next" to continue.</target>
       </trans-unit>
-      <trans-unit id="8642888195729266040" datatype="html">
-        <source>Show Rubric</source>
+      <trans-unit id="1347241542439262355" datatype="html">
+        <source>General settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">6,9</context>
-        </context-group>
-        <target state="needs-translation">Show Rubric</target>
-      </trans-unit>
-      <trans-unit id="6721544393235875264" datatype="html">
-        <source>Download Unit</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">29,32</context>
-        </context-group>
-        <target state="needs-translation">Download Unit</target>
-      </trans-unit>
-      <trans-unit id="2475616145493399595" datatype="html">
-        <source>Edit Unit JSON</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">46,50</context>
+          <context context-type="linenumber">4,7</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component.html</context>
-          <context context-type="linenumber">65,69</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">18,22</context>
         </context-group>
-        <target state="needs-translation">Edit Unit JSON</target>
+        <target state="needs-translation">General settings</target>
       </trans-unit>
       <trans-unit id="5187521650684561957" datatype="html">
         <source>Navigation mode:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">58,61</context>
+          <context context-type="linenumber">7,9</context>
         </context-group>
         <target state="needs-translation">Navigation mode:</target>
       </trans-unit>
@@ -11672,7 +11660,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Default (lessons appear in drop-down list and unit plan)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">65,67</context>
+          <context context-type="linenumber">14,16</context>
         </context-group>
         <target state="needs-translation">Default (lessons appear in drop-down list and unit plan)</target>
       </trans-unit>
@@ -11680,33 +11668,37 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Tabbed (lessons appear as tabs) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">68,72</context>
+          <context context-type="linenumber">17,21</context>
         </context-group>
         <target state="needs-translation">Tabbed (lessons appear as tabs) </target>
       </trans-unit>
-      <trans-unit id="5987051960503169529" datatype="html">
-        <source>Unit URL</source>
+      <trans-unit id="1653435262796372065" datatype="html">
+        <source>Download unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">74,75</context>
+          <context context-type="linenumber">23,27</context>
         </context-group>
-        <target state="needs-translation">Unit URL</target>
+        <target state="needs-translation">Download unit</target>
       </trans-unit>
-      <trans-unit id="4121399236641206670" datatype="html">
-        <source>Copy Unit URL to Clipboard</source>
+      <trans-unit id="8577046754106915585" datatype="html">
+        <source> Editing the JSON directly is generally not recommended, as errors can break the unit. If you need assistance, please contact WISE staff. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">81,84</context>
+          <context context-type="linenumber">41,45</context>
         </context-group>
-        <target state="needs-translation">Copy Unit URL to Clipboard</target>
+        <target state="needs-translation"> Editing the JSON directly is generally not recommended, as errors can break the unit. If you need assistance, please contact WISE staff. </target>
       </trans-unit>
-      <trans-unit id="1453731195487525003" datatype="html">
-        <source>Open Unit URL in New Tab</source>
+      <trans-unit id="2475616145493399595" datatype="html">
+        <source>Edit Unit JSON</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">92,95</context>
+          <context context-type="linenumber">46,49</context>
         </context-group>
-        <target state="needs-translation">Open Unit URL in New Tab</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/recovery-authoring/recovery-authoring.component.html</context>
+          <context context-type="linenumber">65,69</context>
+        </context-group>
+        <target state="needs-translation">Edit Unit JSON</target>
       </trans-unit>
       <trans-unit id="82388219829106287" datatype="html">
         <source>Unit Home</source>
@@ -13626,7 +13618,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Add activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/add-component-button/add-component-button.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target state="needs-translation">Add activity</target>
       </trans-unit>
@@ -13634,7 +13626,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Add activity after</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/add-component-button/add-component-button.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <target state="needs-translation">Add activity after</target>
       </trans-unit>
@@ -13670,41 +13662,29 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Edit Step JSON</target>
       </trans-unit>
-      <trans-unit id="992675041241143285" datatype="html">
-        <source>General Advanced</source>
+      <trans-unit id="1947385945918466985" datatype="html">
+        <source>Edit step rubric</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">18,22</context>
+          <context context-type="linenumber">29,33</context>
         </context-group>
-        <target state="needs-translation">General Advanced</target>
+        <target state="needs-translation">Edit step rubric</target>
       </trans-unit>
-      <trans-unit id="6508074424236812738" datatype="html">
-        <source>Edit Step Rubric</source>
+      <trans-unit id="5805368808311741368" datatype="html">
+        <source>Edit transitions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">31,35</context>
+          <context context-type="linenumber">39,43</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component.ts</context>
-          <context context-type="linenumber">8,11</context>
-        </context-group>
-        <target state="needs-translation">Edit Step Rubric</target>
+        <target state="needs-translation">Edit transitions</target>
       </trans-unit>
-      <trans-unit id="916255550401432414" datatype="html">
-        <source>Edit Transitions</source>
+      <trans-unit id="6636875980788220821" datatype="html">
+        <source>Edit constraints</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">43,47</context>
+          <context context-type="linenumber">49,53</context>
         </context-group>
-        <target state="needs-translation">Edit Transitions</target>
-      </trans-unit>
-      <trans-unit id="4983782617392846363" datatype="html">
-        <source>Edit Constraints</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">55,59</context>
-        </context-group>
-        <target state="needs-translation">Edit Constraints</target>
+        <target state="needs-translation">Edit constraints</target>
       </trans-unit>
       <trans-unit id="3361600127930482405" datatype="html">
         <source>Paths</source>
@@ -13977,6 +13957,14 @@ The branches will be removed but the steps will remain in the unit.</target>
           <context context-type="linenumber">5,9</context>
         </context-group>
         <target state="needs-translation">Copy activity</target>
+      </trans-unit>
+      <trans-unit id="6508074424236812738" datatype="html">
+        <source>Edit Step Rubric</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component.ts</context>
+          <context context-type="linenumber">8,11</context>
+        </context-group>
+        <target state="needs-translation">Edit Step Rubric</target>
       </trans-unit>
       <trans-unit id="6007148783088748338" datatype="html">
         <source>This step does not have any activities.</source>
