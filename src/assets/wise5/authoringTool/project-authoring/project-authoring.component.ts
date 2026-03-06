@@ -18,13 +18,19 @@ import { ExpandEvent } from '../domain/expand-event';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { CdkDragDrop, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
+import { MoveNodesService } from '../../services/moveNodesService';
 
 @Component({
   imports: [
+    CdkDropListGroup,
+    DragDropModule,
     FormsModule,
     MatButtonModule,
     MatTooltipModule,
     MatIconModule,
+    MatSlideToggle,
     ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent,
     AddLessonButtonComponent
@@ -39,6 +45,7 @@ export class ProjectAuthoringComponent implements OnInit {
   protected allLessonsExpanded: Signal<boolean> = computed(() =>
     this.isAllLessonsExpandedValue(true)
   );
+  protected batchEditMode: boolean = false;
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
@@ -54,6 +61,7 @@ export class ProjectAuthoringComponent implements OnInit {
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
     private deleteTranslationsService: DeleteTranslationsService,
+    private moveNodesService: MoveNodesService,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
@@ -250,5 +258,25 @@ export class ProjectAuthoringComponent implements OnInit {
       }
     });
     this.projectService.setNodeTypeSelected(nodeTypeSelected);
+  }
+
+  protected dropLesson(event: CdkDragDrop<string[]>): void {
+    const { previousIndex, currentIndex, item } = event;
+    console.log(previousIndex, currentIndex, item.data, this.lessons[currentIndex].id);
+    if (previousIndex === currentIndex) {
+      return;
+    }
+    if (currentIndex === 0) {
+      this.moveNodesService.moveNodesInsideGroup([item.data], 'group0');
+    } else {
+      const moveAfterNodeId =
+        previousIndex > currentIndex
+          ? this.lessons[currentIndex - 1].id
+          : this.lessons[currentIndex].id;
+      this.moveNodesService.moveNodesAfter([item.data], moveAfterNodeId);
+    }
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.refreshProject();
+    });
   }
 }

@@ -3,19 +3,32 @@
   class="lesson flex grow"
   (opened)="toggleExpanded(true)"
   (closed)="toggleExpanded(false)"
+  cdkDrag
+  [cdkDragData]="lesson.id"
 >
   <mat-expansion-panel-header aria-label="Expand/collapse lesson" i18n-aria-label>
     <mat-panel-title>
-      <mat-checkbox
-        color="primary"
-        (change)="selectNode($event.checked)"
-        (click)="$event.stopPropagation()"
-        (keydown)="$event.stopPropagation()"
-        [disabled]="nodeTypeSelected() === 'step'"
-        aria-label="Select lesson"
-        i18n-aria-label
-      />
-      <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition" />
+      @if (batchEditMode) {
+        <mat-checkbox
+          color="primary"
+          (change)="selectNode($event.checked)"
+          (click)="$event.stopPropagation()"
+          (keydown)="$event.stopPropagation()"
+          [disabled]="nodeTypeSelected() === 'step'"
+          aria-label="Select lesson"
+          i18n-aria-label
+        />
+      } @else {
+        <mat-icon
+          cdkDragHandle
+          (click)="$event.stopPropagation()"
+          title="Drag to reorder"
+          i18n-title
+          >drag_indicator</mat-icon
+        >
+      }
+      <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition" /> (ID:
+      {{ lesson.id }})
     </mat-panel-title>
     <mat-panel-description class="text flex justify-end items-center gap-1">
       <button
@@ -55,6 +68,7 @@
     @for (childId of lesson.ids; track childId) {
       <div class="flex flex-row flex-wrap justify-start items-center">
         <project-authoring-step
+          [batchEditMode]="batchEditMode"
           [step]="idToNode[childId]"
           (selectNodeEvent)="selectNodeEvent.emit($event)"
           [showPosition]="showPosition"

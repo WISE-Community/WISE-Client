@@ -10,16 +10,23 @@
   aria-label="Edit step"
   i18n-aria-label
 >
-  <mat-checkbox
-    color="primary"
-    (change)="selectNode($event.checked)"
-    (click)="$event.stopPropagation()"
-    [disabled]="nodeTypeSelected() === 'lesson'"
-    aria-label="Select step"
-    i18n-aria-label
-  />
+  @if (batchEditMode) {
+    <mat-checkbox
+      color="primary"
+      (change)="selectNode($event.checked)"
+      (click)="$event.stopPropagation()"
+      [disabled]="nodeTypeSelected() === 'lesson'"
+      aria-label="Select step"
+      i18n-aria-label
+    />
+  } @else {
+    <mat-icon (click)="$event.stopPropagation()" title="Drag to reorder" i18n-title
+      >drag_indicator</mat-icon
+    >
+  }
   <strong>
     <node-icon-and-title [nodeId]="step.id" [showPosition]="showPosition" />
+    (ID: {{ step.id }})
   </strong>
   <div class="flex justify-start items-center gap-2">
     @if (isBranchPoint(step.id)) {

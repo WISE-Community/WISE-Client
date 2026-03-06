@@ -16,10 +16,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   imports: [
     CommonModule,
+    DragDropModule,
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
@@ -32,6 +34,7 @@ import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and
   templateUrl: './project-authoring-step.component.html'
 })
 export class ProjectAuthoringStepComponent {
+  @Input() batchEditMode: boolean;
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, Signal, ViewEncapsulation } from '@angular/core';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,11 +18,13 @@ import { DeleteNodeService } from '../../services/deleteNodeService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { AddStepTarget } from '../../../../app/domain/addStepTarget';
+import { MoveNodesService } from '../../services/moveNodesService';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
     FormsModule,
+    DragDropModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
@@ -36,6 +39,7 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
   templateUrl: './project-authoring-lesson.component.html'
 })
 export class ProjectAuthoringLessonComponent {
+  @Input() batchEditMode: boolean;
   @Input() expanded: boolean = true;
   @Output() onExpandedChanged: EventEmitter<ExpandEvent> = new EventEmitter<ExpandEvent>();
   protected idToNode: any = {};
@@ -49,6 +53,7 @@ export class ProjectAuthoringLessonComponent {
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
     private deleteTranslationsService: DeleteTranslationsService,
+    private moveNodesService: MoveNodesService,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
@@ -99,5 +104,9 @@ export class ProjectAuthoringLessonComponent {
   private saveAndRefreshProject(): void {
     this.projectService.saveProject();
     this.projectService.refreshProject();
+  }
+
+  protected dropStep(event: CdkDragDrop<string[]>): void {
+    this.projectService.saveProject();
   }
 }
