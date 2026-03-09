@@ -1,146 +1,158 @@
-<div class="project-content flex flex-row flex-wrap gap-4">
-  <p>
-    <mat-slide-toggle [(ngModel)]="batchEditMode" i18n>Batch edit mode</mat-slide-toggle>
-  </p>
-  @if (batchEditMode) {
+<div cdkDropListGroup>
+  <div class="project-content flex flex-row flex-wrap gap-4">
+    <p>
+      <mat-slide-toggle [(ngModel)]="batchEditMode" i18n>Batch edit mode</mat-slide-toggle>
+    </p>
+    @if (batchEditMode) {
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="chooseLocation(false)"
+        [disabled]="!hasSelectedNodes()"
+        matTooltip="Move"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>redo</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="chooseLocation(true)"
+        [disabled]="!hasSelectedStepsOnly()"
+        matTooltip="Copy"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>content_copy</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="deleteSelectedNodes()"
+        [disabled]="!hasSelectedNodes()"
+        matTooltip="Delete"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    }
+    <div class="flex grow"></div>
     <button
+      class="enable-in-translation"
+      (click)="expandAllLessons()"
+      [disabled]="allLessonsExpanded()"
       mat-raised-button
       color="primary"
-      (click)="chooseLocation(false)"
-      [disabled]="!hasSelectedNodes()"
-      matTooltip="Move"
-      matTooltipPosition="above"
-      i18n-matTooltip
+      i18n
     >
-      <mat-icon>redo</mat-icon>
+      + Expand All
     </button>
     <button
+      class="enable-in-translation"
+      (click)="collapseAllLessons()"
+      [disabled]="allLessonsCollapsed()"
       mat-raised-button
       color="primary"
-      (click)="chooseLocation(true)"
-      [disabled]="!hasSelectedStepsOnly()"
-      matTooltip="Copy"
-      matTooltipPosition="above"
-      i18n-matTooltip
+      i18n
     >
-      <mat-icon>content_copy</mat-icon>
+      - Collapse All
     </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="deleteSelectedNodes()"
-      [disabled]="!hasSelectedNodes()"
-      matTooltip="Delete"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-  }
-  <div class="flex grow"></div>
-  <button
-    class="enable-in-translation"
-    (click)="expandAllLessons()"
-    [disabled]="allLessonsExpanded()"
-    mat-raised-button
-    color="primary"
-    i18n
-  >
-    + Expand All
-  </button>
-  <button
-    class="enable-in-translation"
-    (click)="collapseAllLessons()"
-    [disabled]="allLessonsCollapsed()"
-    mat-raised-button
-    color="primary"
-    i18n
-  >
-    - Collapse All
-  </button>
-</div>
-<div
-  class="all-nodes-div flex flex-col gap-2"
-  cdkDropList
-  [cdkDropListData]="lessons"
-  cdkDropListLockAxis="y"
-  cdkDropListAutoScrollStep="10"
-  (cdkDropListDropped)="dropLesson($event)"
->
-  @if (lessons.length === 0) {
-    <div class="flex flex-row justify-start items-center">
-      <div i18n>There are no lessons</div>
-      <add-lesson-button [active]="true" />
-    </div>
-  } @else {
-    @for (lesson of lessons; track lesson.id; let first = $first) {
-      <div class="flex flex-row gap-1">
-        <project-authoring-lesson
-          [batchEditMode]="batchEditMode"
-          [lesson]="lesson"
-          (selectNodeEvent)="selectNode($event)"
-          [showPosition]="true"
-          [projectId]="projectId"
-          [expanded]="lessonIdToExpanded()[lesson.id]"
-          (onExpandedChanged)="onExpandedChanged($event)"
-          class="flex grow"
-        />
-        <add-lesson-button [active]="true" [first]="first" [lessonId]="lesson.id" />
+  </div>
+  <div class="all-nodes-div flex flex-col gap-2">
+    @if (lessons.length === 0) {
+      <div class="flex flex-row justify-start items-center">
+        <div i18n>There are no lessons</div>
+        <add-lesson-button [active]="true" />
+      </div>
+    } @else {
+      <div
+        cdkDropList
+        [cdkDropListData]="{ type: 'active', nodes: lessons }"
+        cdkDropListLockAxis="y"
+        cdkDropListAutoScrollStep="10"
+        (cdkDropListDropped)="dropGroup($event)"
+      >
+        @for (lesson of lessons; track lesson.id; let first = $first) {
+          <div class="flex flex-row gap-1">
+            <project-authoring-lesson
+              [batchEditMode]="batchEditMode"
+              [lesson]="lesson"
+              (selectNodeEvent)="selectNode($event)"
+              [showPosition]="true"
+              [projectId]="projectId"
+              [expanded]="lessonIdToExpanded()[lesson.id]"
+              (onExpandedChanged)="onExpandedChanged($event)"
+              class="flex grow"
+            />
+            <add-lesson-button [active]="true" [first]="first" [lessonId]="lesson.id" />
+          </div>
+        }
       </div>
     }
-  }
-  <div>
-    <div
-      style="border: 1px solid red"
-      cdkDropList
-      [cdkDropListData]="inactiveGroupNodes"
-      cdkDropListLockAxis="y"
-      cdkDropListAutoScrollStep="10"
-      (cdkDropListDropped)="dropLesson($event)"
-    >
-      <h6 class="unused-header" i18n>Unused Lessons</h6>
-      @if (inactiveGroupNodes.length === 0) {
-        <div class="flex flex-row justify-start items-center">
-          <div i18n>There are no unused lessons</div>
-          <add-lesson-button />
-        </div>
-      } @else {
-        <div class="flex flex-col gap-2">
-          @for (groupNode of inactiveGroupNodes; track groupNode.id; let first = $first) {
-            <div class="flex flex-row gap-1">
-              <project-authoring-lesson
+    <div>
+      <div
+        style="border: 1px solid red"
+        cdkDropList
+        [cdkDropListData]="{ type: 'inactive', nodes: inactiveGroupNodes }"
+        cdkDropListLockAxis="y"
+        cdkDropListAutoScrollStep="10"
+        (cdkDropListDropped)="dropGroup($event)"
+      >
+        <h6 class="unused-header" i18n>Unused Lessons</h6>
+        @if (inactiveGroupNodes.length === 0) {
+          <div class="flex flex-row justify-start items-center">
+            <div i18n>There are no unused lessons</div>
+            <add-lesson-button />
+          </div>
+        } @else {
+          <div class="flex flex-col gap-2">
+            @for (groupNode of inactiveGroupNodes; track groupNode.id; let first = $first) {
+              <div class="flex flex-row gap-1">
+                <project-authoring-lesson
+                  [batchEditMode]="batchEditMode"
+                  [lesson]="groupNode"
+                  (selectNodeEvent)="selectNode($event)"
+                  [showPosition]="false"
+                  [projectId]="projectId"
+                  [expanded]="lessonIdToExpanded()[groupNode.id]"
+                  (onExpandedChanged)="onExpandedChanged($event)"
+                  class="flex grow"
+                />
+                <add-lesson-button [first]="first" [lessonId]="groupNode.id" />
+              </div>
+            }
+          </div>
+        }
+      </div>
+      <div
+        style="border: 1px solid red"
+        cdkDropList
+        id="unusedNodes"
+        [cdkDropListData]="{ name: 'unusedNodes' }"
+        cdkDropListLockAxis="y"
+        cdkDropListAutoScrollStep="10"
+        [cdkDropListConnectedTo]="allGroupIds"
+        (cdkDropListDropped)="dropInactiveStep($event)"
+      >
+        <h6 class="unused-header" i18n>Unused Steps</h6>
+        @if (inactiveStepNodes.length === 0) {
+          <div i18n>There are no unused steps</div>
+        } @else {
+          @for (inactiveStepNode of inactiveStepNodes; track inactiveStepNode.id) {
+            @if (getParentGroup(inactiveStepNode.id) == null) {
+              <project-authoring-step
                 [batchEditMode]="batchEditMode"
-                [lesson]="groupNode"
+                [step]="inactiveStepNode"
                 (selectNodeEvent)="selectNode($event)"
                 [showPosition]="false"
                 [projectId]="projectId"
-                [expanded]="lessonIdToExpanded()[groupNode.id]"
-                (onExpandedChanged)="onExpandedChanged($event)"
-                class="flex grow"
               />
-              <add-lesson-button [first]="first" [lessonId]="groupNode.id" />
-            </div>
-          }
-        </div>
-      }
-    </div>
-    <div style="border: 1px solid red">
-      <h6 class="unused-header" i18n>Unused Steps</h6>
-      @if (inactiveStepNodes.length === 0) {
-        <div i18n>There are no unused steps</div>
-      } @else {
-        @for (inactiveStepNode of inactiveStepNodes; track inactiveStepNode.id) {
-          @if (getParentGroup(inactiveStepNode.id) == null) {
-            <project-authoring-step
-              [batchEditMode]="batchEditMode"
-              [step]="inactiveStepNode"
-              (selectNodeEvent)="selectNode($event)"
-              [showPosition]="false"
-              [projectId]="projectId"
-            />
+            }
           }
         }
-      }
+      </div>
     </div>
   </div>
 </div>

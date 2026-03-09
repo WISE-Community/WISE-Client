@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, Output, Signal, ViewEncapsulation } from '@angular/core';
-import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem
+} from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,6 +44,7 @@ import { MoveNodesService } from '../../services/moveNodesService';
   templateUrl: './project-authoring-lesson.component.html'
 })
 export class ProjectAuthoringLessonComponent {
+  allGroupIds: string[];
   @Input() batchEditMode: boolean;
   @Input() expanded: boolean = true;
   @Output() onExpandedChanged: EventEmitter<ExpandEvent> = new EventEmitter<ExpandEvent>();
@@ -60,6 +66,11 @@ export class ProjectAuthoringLessonComponent {
   ) {}
 
   ngOnInit(): void {
+    this.allGroupIds = this.projectService
+      .getGroupNodes()
+      .concat(this.projectService.getInactiveGroupNodes())
+      .map((node) => node.id)
+      .concat('unusedNodes');
     this.idToNode = this.projectService.idToNode;
     this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
   }
@@ -106,7 +117,31 @@ export class ProjectAuthoringLessonComponent {
     this.projectService.refreshProject();
   }
 
-  protected dropStep(event: CdkDragDrop<string[]>): void {
-    this.projectService.saveProject();
+  protected dropStep(event: CdkDragDrop<any>): void {
+    console.log('dropStep', event);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data.nodes, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data.nodes,
+        event.container.data.nodes,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+    if (event.currentIndex == 0) {
+      this.moveNodesService.moveNodesInsideGroup(
+        [event.item.data.id],
+        event.container.data.groupId
+      );
+    } else {
+      this.moveNodesService.moveNodesAfter(
+        [event.item.data.id],
+        event.container.data.nodes[event.currentIndex - 1]
+      );
+    }
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.refreshProject();
+    });
   }
 }

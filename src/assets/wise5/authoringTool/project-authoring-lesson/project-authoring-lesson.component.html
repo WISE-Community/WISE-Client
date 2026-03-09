@@ -4,8 +4,10 @@
   (opened)="toggleExpanded(true)"
   (closed)="toggleExpanded(false)"
   cdkDrag
-  [cdkDragData]="lesson.id"
+  [cdkDragData]="{ type: 'group', id: lesson.id }"
+  [id]="lesson.id"
 >
+  <div class="drag-placeholder flex grow" *cdkDragPlaceholder></div>
   <mat-expansion-panel-header aria-label="Expand/collapse lesson" i18n-aria-label>
     <mat-panel-title>
       @if (batchEditMode) {
@@ -64,7 +66,14 @@
       </button>
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <div>
+  <div
+    cdkDropList
+    [id]="lesson.id"
+    [cdkDropListData]="{ groupId: lesson.id, nodes: lesson.ids }"
+    cdkDropListLockAxis="y"
+    [cdkDropListConnectedTo]="allGroupIds"
+    (cdkDropListDropped)="dropStep($event)"
+  >
     @for (childId of lesson.ids; track childId) {
       <div class="flex flex-row flex-wrap justify-start items-center">
         <project-authoring-step

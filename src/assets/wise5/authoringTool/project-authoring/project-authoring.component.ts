@@ -19,12 +19,18 @@ import { DeleteTranslationsService } from '../../services/deleteTranslationsServ
 import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { CdkDragDrop, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem
+} from '@angular/cdk/drag-drop';
 import { MoveNodesService } from '../../services/moveNodesService';
 
 @Component({
   imports: [
-    CdkDropListGroup,
     DragDropModule,
     FormsModule,
     MatButtonModule,
@@ -39,6 +45,7 @@ import { MoveNodesService } from '../../services/moveNodesService';
   templateUrl: './project-authoring.component.html'
 })
 export class ProjectAuthoringComponent implements OnInit {
+  protected allGroupIds: string[];
   protected allLessonsCollapsed: Signal<boolean> = computed(() =>
     this.isAllLessonsExpandedValue(false)
   );
@@ -68,6 +75,11 @@ export class ProjectAuthoringComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.allGroupIds = this.projectService
+      .getGroupNodes()
+      .concat(this.projectService.getInactiveGroupNodes())
+      .map((node) => node.id)
+      .concat('unusedNodes');
     this.projectId = Number(this.projectId);
     this.refreshProject();
     this.dataService.setCurrentNode(null);
@@ -260,23 +272,45 @@ export class ProjectAuthoringComponent implements OnInit {
     this.projectService.setNodeTypeSelected(nodeTypeSelected);
   }
 
-  protected dropLesson(event: CdkDragDrop<string[]>): void {
+  protected dropGroup(event: CdkDragDrop<any>): void {
     const { previousIndex, currentIndex, item } = event;
-    console.log(previousIndex, currentIndex, item.data, this.lessons[currentIndex].id);
-    if (previousIndex === currentIndex) {
-      return;
-    }
-    if (currentIndex === 0) {
-      this.moveNodesService.moveNodesInsideGroup([item.data], 'group0');
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data.nodes, event.previousIndex, event.currentIndex);
     } else {
-      const moveAfterNodeId =
-        previousIndex > currentIndex
-          ? this.lessons[currentIndex - 1].id
-          : this.lessons[currentIndex].id;
-      this.moveNodesService.moveNodesAfter([item.data], moveAfterNodeId);
+      transferArrayItem(
+        event.previousContainer.data.nodes,
+        event.container.data.nodes,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+    if (event.currentIndex == 0) {
+      this.moveNodesService.moveNodesInsideGroup(
+        [event.item.data.id],
+        event.container.data.type === 'active' ? 'group0' : 'inactiveGroups'
+      );
+    } else {
+      this.moveNodesService.moveNodesAfter(
+        [event.item.data.id],
+        event.container.data.nodes[event.currentIndex - 1].id
+      );
     }
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
     });
+  }
+
+  protected dropInactiveGroup(event: CdkDragDrop<string[]>): void {
+    const { previousIndex, currentIndex, item } = event;
+    console.log('dropInactiveGroup');
+    console.log('prevIndex', previousIndex, 'currentIndex', currentIndex, 'item.data', item.data);
+    console.log('event', event);
+  }
+
+  protected dropInactiveStep(event: CdkDragDrop<string[]>): void {
+    const { previousIndex, currentIndex, item } = event;
+    console.log('dropInactiveStep');
+    console.log('prevIndex', previousIndex, 'currentIndex', currentIndex, 'item.data', item.data);
+    console.log('event', event);
   }
 }

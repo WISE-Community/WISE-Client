@@ -7,6 +7,8 @@
   (keyup.enter)="setCurrentNode(step.id)"
   role="button"
   tabindex="0"
+  cdkDrag
+  [cdkDragData]="{ type: 'step', id: step.id }"
   aria-label="Edit step"
   i18n-aria-label
 >
@@ -20,7 +22,8 @@
       i18n-aria-label
     />
   } @else {
-    <mat-icon (click)="$event.stopPropagation()" title="Drag to reorder" i18n-title
+    <div class="drag-placeholder flex grow" *cdkDragPlaceholder></div>
+    <mat-icon cdkDragHandle(click)="$event.stopPropagation()" title="Drag to reorder" i18n-title
       >drag_indicator</mat-icon
     >
   }
