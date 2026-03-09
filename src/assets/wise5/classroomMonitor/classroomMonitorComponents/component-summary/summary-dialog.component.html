@@ -1,0 +1,25 @@
+<mat-dialog-content>
+  <button matIconButton (click)="dialogRef.close()" class="!absolute top-0 end-0">
+    <mat-icon>fullscreen_exit</mat-icon>
+  </button>
+  @if (data.type === 'ideas') {
+    <ideas-summary
+      [nodeId]="data.node.id"
+      [componentId]="data.component.id"
+      [periodId]="data.periodId"
+      [studentDataType]="'responses'"
+      [source]="data.source"
+      [doRender]="true"
+      [componentType]="data.componentType"
+    />
+  }
+  @if (data.type === 'match') {
+    <match-summary-display
+      [nodeId]="data.node.id"
+      [componentId]="data.component.id"
+      [periodId]="data.periodId"
+      [source]="data.source"
+      [doRender]="true"
+    />
+  }
+</mat-dialog-content>

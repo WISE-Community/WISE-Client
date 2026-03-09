@@ -1,4 +1,5 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { TeacherSummaryDisplayComponent } from '../../../directives/teacher-summary-display/teacher-summary-display.component';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -14,21 +15,31 @@ import { IdeasSummaryComponent } from '../../../directives/teacher-summary-displ
 import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogContent,
+  MatDialogRef
+} from '@angular/material/dialog';
 
 @Component({
   imports: [
     ComponentCompletionComponent,
     IdeasSummaryComponent,
+    MatButtonModule,
     MatCardModule,
+    MatIconModule,
     MatchSummaryDisplayComponent,
     MilestoneReportButtonComponent,
+    NgTemplateOutlet,
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
   ],
   selector: 'component-summary',
   styleUrl: './component-summary.component.scss',
-  templateUrl: './component-summary.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './component-summary.component.html'
 })
 export class ComponentSummaryComponent {
   protected avgScore: number;
@@ -48,6 +59,7 @@ export class ComponentSummaryComponent {
     private componentServiceLookupService: ComponentServiceLookupService,
     private cRaterService: CRaterService,
     private dataService: TeacherDataService,
+    private dialog: MatDialog,
     private summaryService: SummaryService
   ) {}
 
@@ -113,4 +125,43 @@ export class ComponentSummaryComponent {
         return soFar;
       }, []);
   }
+
+  protected expandSummary(type: 'ideas' | 'match'): void {
+    this.dialog.open(SummaryDialogComponent, {
+      data: {
+        type: type,
+        node: this.node,
+        component: this.component,
+        periodId: this.periodId,
+        source: this.source,
+        componentType: this.component.type
+      },
+      panelClass: 'summary-dialog'
+    });
+  }
+}
+
+@Component({
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    IdeasSummaryComponent,
+    MatchSummaryDisplayComponent,
+    MatButtonModule,
+    MatDialogContent,
+    MatIconModule
+  ],
+  styles: `
+    @import 'tailwindcss';
+
+    .summary-dialog {
+      @apply w-full h-full !max-w-[120rem];
+    }
+  `,
+  templateUrl: './summary-dialog.component.html'
+})
+class SummaryDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<SummaryDialogComponent>
+  ) {}
 }
