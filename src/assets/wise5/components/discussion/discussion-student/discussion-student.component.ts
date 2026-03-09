@@ -79,7 +79,18 @@ export class DiscussionStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.renderDiscussion();
+    this.subscriptions.add(
+      this.annotationService.annotationReceived$.subscribe((annotation) => {
+        // handle inappropriate flag annotations in real-time by re-rendering the discussion
+        if (this.isForThisComponent(annotation) && annotation.type === 'inappropriateFlag') {
+          this.renderDiscussion();
+        }
+      })
+    );
+  }
 
+  private renderDiscussion(): void {
     if (this.configService.isPreview()) {
       let componentStates = [];
       if (this.component.hasConnectedComponent()) {
