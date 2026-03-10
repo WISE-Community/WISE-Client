@@ -453,7 +453,7 @@ export class DiscussionStudent extends ComponentStudent {
     return this.componentContent.showSubmitButton;
   }
 
-  isClassmateResponsesGated() {
+  protected isClassmateResponsesGated(): boolean {
     return this.componentContent.gateClassmateResponses;
   }
 

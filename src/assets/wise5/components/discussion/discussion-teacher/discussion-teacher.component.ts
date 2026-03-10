@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
 import { MatCard } from '@angular/material/card';
@@ -34,11 +34,25 @@ import { DiscussionStudent } from '../discussion-student/discussion-student.comp
 export class DiscussionTeacherComponent extends DiscussionStudent {
   @Input() periodId: number;
 
-  ngOnChanges(): void {
-    this.renderDiscussion();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.component) {
+      this.componentId = changes.component.currentValue.id;
+    }
+    if (this.componentId) {
+      this.renderDiscussion();
+    }
   }
 
   protected getPeriodId(): number {
     return this.periodId;
+  }
+
+  protected isClassmateResponsesGated(): boolean {
+    // allow teacher to always see all responses, no need to post to see others
+    return false;
+  }
+
+  disableComponentIfNecessary(): void {
+    // no need to disable the component for teacher
   }
 }
