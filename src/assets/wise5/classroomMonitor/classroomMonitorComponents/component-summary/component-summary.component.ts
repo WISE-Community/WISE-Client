@@ -14,10 +14,12 @@ import { IdeasSummaryComponent } from '../../../directives/teacher-summary-displ
 import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';
+import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-display/discussion-summary/discussion-summary.component';
 
 @Component({
   imports: [
     ComponentCompletionComponent,
+    DiscussionSummaryComponent,
     IdeasSummaryComponent,
     MatCardModule,
     MatchSummaryDisplayComponent,
@@ -78,7 +80,7 @@ export class ComponentSummaryComponent {
       (this.component?.type === 'MultipleChoice' && this.hasStudentWork) ||
       (this.hasScoresSummary && this.hasScoreAnnotation) ||
       this.hasIdeaRubricData ||
-      this.component?.type === 'Match';
+      ['Match', 'Discussion'].includes(this.component?.type);
   }
 
   private setSource(): void {
