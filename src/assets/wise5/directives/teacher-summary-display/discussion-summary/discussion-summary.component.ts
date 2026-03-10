@@ -9,7 +9,9 @@ import { DiscussionTeacherComponent } from '../../../components/discussion/discu
   imports: [CommonModule, DiscussionTeacherComponent],
   selector: 'discussion-summary',
   template: `
+    <h2 class="mat-subtitle-1" i18n>Class Discussion</h2>
     <discussion-teacher
+      class="max-h-160 block overflow-y-auto"
       [nodeId]="nodeId"
       [component]="component"
       [periodId]="periodId"
