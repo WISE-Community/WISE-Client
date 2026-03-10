@@ -60,8 +60,6 @@
           [selectedComponents]="visibleComponents"
           (componentsChange)="setVisibleComponents($event)"
         />
-      }
-      @if (classResponsesVisible) {
         <a href="#" class="mat-caption" (click)="toggleClassResponses($event)" i18n>Hide</a>
       } @else {
         <a href="#" class="mat-caption" (click)="toggleClassResponses($event)" i18n>Show</a>
