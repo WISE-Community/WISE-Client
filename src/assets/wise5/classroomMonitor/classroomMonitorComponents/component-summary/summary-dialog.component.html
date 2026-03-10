@@ -12,8 +12,7 @@
       [doRender]="true"
       [componentType]="data.componentType"
     />
-  }
-  @if (data.type === 'match') {
+  } @else if (data.type === 'match') {
     <match-summary-display
       [nodeId]="data.node.id"
       [componentId]="data.component.id"
