@@ -16,6 +16,8 @@ import { CopyTranslationsService } from '../../services/copyTranslationsService'
 import { ConstraintService } from '../../services/constraintService';
 import { Node } from '../../common/Node';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
+import { MoveNodesService } from '../../services/moveNodesService';
+import { of } from 'rxjs';
 
 let component: ProjectAuthoringLessonComponent;
 let fixture: ComponentFixture<ProjectAuthoringLessonComponent>;
@@ -45,12 +47,14 @@ describe('ProjectAuthoringLessonComponent', () => {
           CopyTranslationsService,
           DeleteNodeService,
           DeleteTranslationsService,
+          MoveNodesService,
           ProjectService,
           TeacherDataService,
           TeacherProjectTranslationService
         ),
         MockProvider(TeacherProjectService, {
-          getNodeTypeSelected: () => signal<NodeTypeSelected>(NodeTypeSelected.lesson)
+          getNodeTypeSelected: () => signal<NodeTypeSelected>(NodeTypeSelected.lesson),
+          projectParsed$: of()
         }),
         provideRouter([])
       ]

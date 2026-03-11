@@ -24,7 +24,7 @@
     />
   } @else if (!branchPoint) {
     <div class="drag-placeholder flex grow" *cdkDragPlaceholder></div>
-    <mat-icon cdkDragHandle(click)="$event.stopPropagation()" title="Drag to reorder" i18n-title
+    <mat-icon cdkDragHandle (click)="$event.stopPropagation()" title="Drag to reorder" i18n-title
       >drag_indicator</mat-icon
     >
   }
