@@ -130,7 +130,7 @@
         style="border: 1px solid red"
         cdkDropList
         id="unusedNodes"
-        [cdkDropListData]="{ name: 'unusedNodes' }"
+        [cdkDropListData]="{ type: 'inactiveSteps', nodes: inactiveStepNodes }"
         cdkDropListLockAxis="y"
         cdkDropListAutoScrollStep="10"
         [cdkDropListConnectedTo]="allGroupIds"

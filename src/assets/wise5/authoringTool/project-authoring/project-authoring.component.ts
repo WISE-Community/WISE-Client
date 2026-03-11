@@ -305,10 +305,21 @@ export class ProjectAuthoringComponent implements OnInit {
     console.log('event', event);
   }
 
-  protected dropInactiveStep(event: CdkDragDrop<string[]>): void {
+  protected dropInactiveStep(event: CdkDragDrop<any>): void {
     const { previousIndex, currentIndex, item } = event;
     console.log('dropInactiveStep');
     console.log('prevIndex', previousIndex, 'currentIndex', currentIndex, 'item.data', item.data);
     console.log('event', event);
+    if (event.currentIndex == 0) {
+      this.moveNodesService.moveNodesInsideGroup([event.item.data.id], 'inactiveNodes');
+    } else {
+      this.moveNodesService.moveNodesAfter(
+        [event.item.data.id],
+        event.container.data.nodes[event.currentIndex - 1].id
+      );
+    }
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.refreshProject();
+    });
   }
 }
