@@ -98,6 +98,7 @@
         [cdkDropListData]="{ type: 'inactive', nodes: inactiveGroupNodes }"
         cdkDropListLockAxis="y"
         cdkDropListAutoScrollStep="10"
+        [cdkDropListEnterPredicate]="groupPredicate"
         (cdkDropListDropped)="dropGroup($event)"
       >
         <h6 class="unused-header" i18n>Unused Lessons</h6>
@@ -134,6 +135,7 @@
         cdkDropListLockAxis="y"
         cdkDropListAutoScrollStep="10"
         [cdkDropListConnectedTo]="allGroupIds"
+        [cdkDropListEnterPredicate]="stepPredicate"
         (cdkDropListDropped)="dropInactiveStep($event)"
       >
         <h6 class="unused-header" i18n>Unused Steps</h6>

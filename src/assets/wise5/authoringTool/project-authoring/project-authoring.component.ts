@@ -20,6 +20,7 @@ import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import {
+  CdkDrag,
   CdkDragDrop,
   DragDropModule,
   moveItemInArray,
@@ -321,5 +322,13 @@ export class ProjectAuthoringComponent implements OnInit {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
     });
+  }
+
+  protected groupPredicate(item: CdkDrag<any>): boolean {
+    return item.data.type === 'group';
+  }
+
+  protected stepPredicate(item: CdkDrag<any>): boolean {
+    return item.data.type === 'step';
   }
 }
