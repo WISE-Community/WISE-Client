@@ -23,10 +23,12 @@ import {
   MatDialogContent,
   MatDialogRef
 } from '@angular/material/dialog';
+import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-display/discussion-summary/discussion-summary.component';
 
 @Component({
   imports: [
     ComponentCompletionComponent,
+    DiscussionSummaryComponent,
     IdeasSummaryComponent,
     MatButtonModule,
     MatCardModule,
@@ -90,7 +92,7 @@ export class ComponentSummaryComponent {
       (this.component?.type === 'MultipleChoice' && this.hasStudentWork) ||
       (this.hasScoresSummary && this.hasScoreAnnotation) ||
       this.hasIdeaRubricData ||
-      this.component?.type === 'Match';
+      ['Match', 'Discussion'].includes(this.component?.type);
   }
 
   private setSource(): void {
@@ -126,7 +128,7 @@ export class ComponentSummaryComponent {
       }, []);
   }
 
-  protected expandSummary(type: 'ideas' | 'match'): void {
+  protected expandSummary(type: 'ideas' | 'match' | 'discussion'): void {
     this.dialog.open(SummaryDialogComponent, {
       data: {
         type: type,
@@ -144,6 +146,7 @@ export class ComponentSummaryComponent {
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
+    DiscussionSummaryComponent,
     IdeasSummaryComponent,
     MatchSummaryDisplayComponent,
     MatButtonModule,
