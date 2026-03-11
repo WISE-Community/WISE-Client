@@ -66,11 +66,7 @@ export class ProjectAuthoringLessonComponent {
   ) {}
 
   ngOnInit(): void {
-    this.allGroupIds = this.projectService
-      .getGroupNodes()
-      .concat(this.projectService.getInactiveGroupNodes())
-      .map((node) => node.id)
-      .concat('unusedNodes');
+    this.allGroupIds = this.projectService.getAllGroupIds();
     this.idToNode = this.projectService.idToNode;
     this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
   }

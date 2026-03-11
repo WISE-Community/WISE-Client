@@ -1891,6 +1891,13 @@ export class TeacherProjectService extends ProjectService {
     );
   }
 
+  getAllGroupIds(): string[] {
+    return this.getGroupNodes()
+      .concat(this.getInactiveGroupNodes())
+      .map((node) => node.id)
+      .concat('inactiveSteps');
+  }
+
   uiChanged(): void {
     this.uiChangedSource.next();
   }
