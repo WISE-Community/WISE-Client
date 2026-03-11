@@ -61,19 +61,19 @@
     </button>
   </div>
   <div class="all-nodes-div flex flex-col gap-2">
-    @if (lessons.length === 0) {
-      <div class="flex flex-row justify-start items-center">
-        <div i18n>There are no lessons</div>
-        <add-lesson-button [active]="true" />
-      </div>
-    } @else {
-      <div
-        cdkDropList
-        [cdkDropListData]="{ type: 'active', nodes: lessons }"
-        cdkDropListLockAxis="y"
-        cdkDropListAutoScrollStep="10"
-        (cdkDropListDropped)="dropGroup($event)"
-      >
+    <div
+      cdkDropList
+      [cdkDropListData]="{ type: 'active', nodes: lessons }"
+      cdkDropListLockAxis="y"
+      cdkDropListAutoScrollStep="10"
+      (cdkDropListDropped)="dropGroup($event)"
+    >
+      @if (lessons.length === 0) {
+        <div class="flex flex-row justify-start items-center">
+          <div i18n>There are no lessons</div>
+          <add-lesson-button [active]="true" />
+        </div>
+      } @else {
         @for (lesson of lessons; track lesson.id; let first = $first) {
           <div class="flex flex-row gap-1">
             <project-authoring-lesson
@@ -89,8 +89,8 @@
             <add-lesson-button [active]="true" [first]="first" [lessonId]="lesson.id" />
           </div>
         }
-      </div>
-    }
+      }
+    </div>
     <div>
       <div
         style="border: 1px solid red"
