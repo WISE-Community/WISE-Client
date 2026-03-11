@@ -8,6 +8,7 @@
   role="button"
   tabindex="0"
   cdkDrag
+  [cdkDragDisabled]="isBranchPoint"
   [cdkDragData]="{ type: 'step', id: step.id }"
   aria-label="Edit step"
   i18n-aria-label
@@ -21,7 +22,7 @@
       aria-label="Select step"
       i18n-aria-label
     />
-  } @else {
+  } @else if (!isBranchPoint) {
     <div class="drag-placeholder flex grow" *cdkDragPlaceholder></div>
     <mat-icon cdkDragHandle(click)="$event.stopPropagation()" title="Drag to reorder" i18n-title
       >drag_indicator</mat-icon
@@ -32,7 +33,7 @@
     (ID: {{ step.id }})
   </strong>
   <div class="flex justify-start items-center gap-2">
-    @if (isBranchPoint(step.id)) {
+    @if (isBranchPoint) {
       <button
         mat-icon-button
         (click)="goToEditBranch(step.id); $event.stopPropagation()"
@@ -76,16 +77,18 @@
   ></div>
   <!-- <div class="dynamic-step-buttons"> -->
   <div class="flex justify-start items-center">
-    <button
-      class="step-action"
-      mat-icon-button
-      (click)="move(); $event.stopPropagation()"
-      matTooltip="Move step"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>redo</mat-icon>
-    </button>
+    @if (!isBranchPoint) {
+      <button
+        class="step-action"
+        mat-icon-button
+        (click)="move(); $event.stopPropagation()"
+        matTooltip="Move step"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>redo</mat-icon>
+      </button>
+    }
     <button
       class="step-action"
       mat-icon-button

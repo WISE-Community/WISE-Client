@@ -35,6 +35,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 })
 export class ProjectAuthoringStepComponent {
   @Input() batchEditMode: boolean;
+  protected isBranchPoint: boolean;
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
@@ -54,6 +55,7 @@ export class ProjectAuthoringStepComponent {
   ) {}
 
   ngOnInit(): void {
+    this.isBranchPoint = this.projectService.isBranchPoint(this.step.id);
     this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
   }
 
@@ -108,10 +110,6 @@ export class ProjectAuthoringStepComponent {
 
   protected setCurrentNode(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
-  }
-
-  protected isBranchPoint(nodeId: string): boolean {
-    return this.projectService.isBranchPoint(nodeId);
   }
 
   protected nodeHasConstraint(nodeId: string): boolean {
