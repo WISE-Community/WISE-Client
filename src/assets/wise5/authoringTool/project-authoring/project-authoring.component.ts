@@ -19,13 +19,7 @@ import { DeleteTranslationsService } from '../../services/deleteTranslationsServ
 import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import {
-  CdkDrag,
-  CdkDragDrop,
-  DragDropModule,
-  moveItemInArray,
-  transferArrayItem
-} from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MoveNodesService } from '../../services/moveNodesService';
 
 @Component({
@@ -268,26 +262,21 @@ export class ProjectAuthoringComponent implements OnInit {
   }
 
   protected dropGroup(event: CdkDragDrop<any>): void {
-    const { previousIndex, currentIndex, item } = event;
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data.nodes, event.previousIndex, event.currentIndex);
+    const { container, currentIndex, item, previousContainer, previousIndex } = event;
+    if (previousContainer === container) {
+      moveItemInArray(container.data.nodes, previousIndex, currentIndex);
     } else {
-      transferArrayItem(
-        event.previousContainer.data.nodes,
-        event.container.data.nodes,
-        event.previousIndex,
-        event.currentIndex
-      );
+      // do nothing. the UI will be updated by moveNodesAfter() and refreshProject() calls
     }
-    if (event.currentIndex == 0) {
+    if (currentIndex == 0) {
       this.moveNodesService.moveNodesInsideGroup(
-        [event.item.data.id],
-        event.container.data.type === 'active' ? 'group0' : 'inactiveGroups'
+        [item.data.id],
+        container.data.type === 'active' ? 'group0' : 'inactiveGroups'
       );
     } else {
       this.moveNodesService.moveNodesAfter(
-        [event.item.data.id],
-        event.container.data.nodes[event.currentIndex - 1].id
+        [item.data.id],
+        container.data.nodes[currentIndex - 1].id
       );
     }
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
@@ -295,24 +284,14 @@ export class ProjectAuthoringComponent implements OnInit {
     });
   }
 
-  protected dropInactiveGroup(event: CdkDragDrop<string[]>): void {
-    const { previousIndex, currentIndex, item } = event;
-    console.log('dropInactiveGroup');
-    console.log('prevIndex', previousIndex, 'currentIndex', currentIndex, 'item.data', item.data);
-    console.log('event', event);
-  }
-
-  protected dropInactiveStep(event: CdkDragDrop<any>): void {
-    const { previousIndex, currentIndex, item } = event;
-    console.log('dropInactiveStep');
-    console.log('prevIndex', previousIndex, 'currentIndex', currentIndex, 'item.data', item.data);
-    console.log('event', event);
-    if (event.currentIndex == 0) {
-      this.moveNodesService.moveNodesInsideGroup([event.item.data.id], 'inactiveNodes');
+  protected dropInactiveNode(event: CdkDragDrop<any>): void {
+    const { container, currentIndex, item } = event;
+    if (currentIndex == 0) {
+      this.moveNodesService.moveNodesInsideGroup([item.data.id], 'inactiveNodes');
     } else {
       this.moveNodesService.moveNodesAfter(
-        [event.item.data.id],
-        event.container.data.nodes[event.currentIndex - 1].id
+        [item.data.id],
+        container.data.nodes[currentIndex - 1].id
       );
     }
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {

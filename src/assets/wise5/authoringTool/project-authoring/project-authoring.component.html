@@ -134,7 +134,7 @@
         cdkDropListAutoScrollStep="10"
         [cdkDropListConnectedTo]="allGroupIds"
         [cdkDropListEnterPredicate]="stepPredicate"
-        (cdkDropListDropped)="dropInactiveStep($event)"
+        (cdkDropListDropped)="dropInactiveNode($event)"
       >
         <h6 class="unused-header" i18n>Unused Steps</h6>
         @if (inactiveStepNodes.length === 0) {

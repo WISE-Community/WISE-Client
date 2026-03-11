@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Input, Output, Signal, ViewEncapsulation } from '@angular/core';
-import {
-  CdkDragDrop,
-  DragDropModule,
-  moveItemInArray,
-  transferArrayItem
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -114,28 +109,16 @@ export class ProjectAuthoringLessonComponent {
   }
 
   protected dropNode(event: CdkDragDrop<any>): void {
-    console.log('dropNode', event);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data.nodes, event.previousIndex, event.currentIndex);
+    const { container, currentIndex, item, previousContainer, previousIndex } = event;
+    if (previousContainer === container) {
+      moveItemInArray(container.data.nodes, previousIndex, currentIndex);
     } else {
-      // the UI will be updated by moveNodesAfter() and refreshProject() calls
+      // do nothing. the UI will be updated by moveNodesAfter() and refreshProject() calls
     }
-    if (event.currentIndex == 0) {
-      console.log('moving inside group', event.item.data.id, event.container.data.groupId);
-      this.moveNodesService.moveNodesInsideGroup(
-        [event.item.data.id],
-        event.container.data.groupId
-      );
+    if (currentIndex == 0) {
+      this.moveNodesService.moveNodesInsideGroup([item.data.id], container.data.groupId);
     } else {
-      console.log(
-        'moving after node',
-        event.item.data.id,
-        event.container.data.nodes[event.currentIndex - 1]
-      );
-      this.moveNodesService.moveNodesAfter(
-        [event.item.data.id],
-        event.container.data.nodes[event.currentIndex - 1]
-      );
+      this.moveNodesService.moveNodesAfter([item.data.id], container.data.nodes[currentIndex - 1]);
     }
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
