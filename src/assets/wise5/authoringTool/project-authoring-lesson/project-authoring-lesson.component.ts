@@ -117,24 +117,25 @@ export class ProjectAuthoringLessonComponent {
     this.projectService.refreshProject();
   }
 
-  protected dropStep(event: CdkDragDrop<any>): void {
-    console.log('dropStep', event);
+  protected dropNode(event: CdkDragDrop<any>): void {
+    console.log('dropNode', event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data.nodes, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(
-        event.previousContainer.data.nodes,
-        event.container.data.nodes,
-        event.previousIndex,
-        event.currentIndex
-      );
+      // the UI will be updated by moveNodesAfter() and refreshProject() calls
     }
     if (event.currentIndex == 0) {
+      console.log('moving inside group', event.item.data.id, event.container.data.groupId);
       this.moveNodesService.moveNodesInsideGroup(
         [event.item.data.id],
         event.container.data.groupId
       );
     } else {
+      console.log(
+        'moving after node',
+        event.item.data.id,
+        event.container.data.nodes[event.currentIndex - 1]
+      );
       this.moveNodesService.moveNodesAfter(
         [event.item.data.id],
         event.container.data.nodes[event.currentIndex - 1]

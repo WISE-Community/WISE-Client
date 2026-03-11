@@ -72,7 +72,7 @@
     [cdkDropListData]="{ groupId: lesson.id, nodes: lesson.ids }"
     cdkDropListLockAxis="y"
     [cdkDropListConnectedTo]="allGroupIds"
-    (cdkDropListDropped)="dropStep($event)"
+    (cdkDropListDropped)="dropNode($event)"
   >
     @for (childId of lesson.ids; track childId) {
       <div class="flex flex-row flex-wrap justify-start items-center">

@@ -20,9 +20,7 @@ import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import {
-  CdkDrag,
   CdkDragDrop,
-  CdkDropList,
   DragDropModule,
   moveItemInArray,
   transferArrayItem
