@@ -33,30 +33,35 @@
     </ul>
   </div>
 </ng-template>
-
-<h2 class="mat-subtitle-1" i18n>Choice Frequency</h2>
-@if (bucketData.length > 0) {
-  <p i18n>Number of teams that moved each item (choice) into the different buckets (categories).</p>
-  <div class="columns-3xs gap-2">
-    <div class="break-inside-avoid">
-      <ng-container
-        [ngTemplateOutlet]="bucketTemplate"
-        [ngTemplateOutletContext]="{ bucket: bucketData[0], first: true }"
-      />
-    </div>
-    @for (bucket of bucketData; track $index) {
-      @if ($index > 0) {
+<div [class.expanded]="expanded">
+  <h2 class="mat-subtitle-1" i18n>Choice Frequency</h2>
+  <div class="max-h-160 overflow-y-auto" [class.max-h-none]="expanded">
+    @if (bucketData.length > 0) {
+      <p i18n>
+        Number of teams that moved each item (choice) into the different buckets (categories).
+      </p>
+      <div class="columns-3xs gap-2">
         <div class="break-inside-avoid">
           <ng-container
             [ngTemplateOutlet]="bucketTemplate"
-            [ngTemplateOutletContext]="{ bucket: bucket, first: false }"
+            [ngTemplateOutletContext]="{ bucket: bucketData[0], first: true }"
           />
         </div>
-      }
+        @for (bucket of bucketData; track $index) {
+          @if ($index > 0) {
+            <div class="break-inside-avoid">
+              <ng-container
+                [ngTemplateOutlet]="bucketTemplate"
+                [ngTemplateOutletContext]="{ bucket: bucket, first: false }"
+              />
+            </div>
+          }
+        }
+      </div>
+    } @else {
+      <div class="notice" i18n>
+        Your students' choices will show up here when they complete the activity.
+      </div>
     }
   </div>
-} @else {
-  <div class="notice" i18n>
-    Your students' choices will show up here when they complete the activity.
-  </div>
-}
+</div>
