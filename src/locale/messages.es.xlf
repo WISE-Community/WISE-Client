@@ -1050,7 +1050,7 @@ Hacer clic en "Cancelar" para mantener abierto el JSON no válido y solucionarlo
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-summary/component-summary.component.html</context>
-          <context context-type="linenumber">4,6</context>
+          <context context-type="linenumber">15,17</context>
         </context-group>
         <target state="needs-translation">Prompt</target>
       </trans-unit>
@@ -15286,6 +15286,14 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Responses:</target>
       </trans-unit>
+      <trans-unit id="6063735713364961693" datatype="html">
+        <source>Expand summary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-summary/component-summary.component.html</context>
+          <context context-type="linenumber">5,9</context>
+        </context-group>
+        <target state="needs-translation">Expand summary</target>
+      </trans-unit>
       <trans-unit id="4977425233945972011" datatype="html">
         <source> No feedback given for this version </source>
         <context-group purpose="location">
@@ -16690,7 +16698,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">72,75</context>
+          <context context-type="linenumber">74,77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
@@ -18970,7 +18978,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">55,56</context>
         </context-group>
         <target state="needs-translation">Key:</target>
       </trans-unit>
@@ -24434,7 +24442,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Class Discussion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.ts</context>
-          <context context-type="linenumber">12,14</context>
+          <context context-type="linenumber">14,16</context>
         </context-group>
         <target state="needs-translation">Class Discussion</target>
       </trans-unit>
@@ -24458,7 +24466,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Student Ideas Detected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">47,49</context>
         </context-group>
         <target state="needs-translation">Student Ideas Detected</target>
       </trans-unit>
@@ -24466,7 +24474,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Show less</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">70,72</context>
+          <context context-type="linenumber">72,74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
@@ -24478,7 +24486,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Your students&apos; ideas will show up here as they are detected in the activity.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">75,77</context>
+          <context context-type="linenumber">77,81</context>
         </context-group>
         <target state="needs-translation">Your students' ideas will show up here as they are detected in the activity.</target>
       </trans-unit>
@@ -24494,23 +24502,23 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
         <source>Choice Frequency</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">37,39</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
         <target state="needs-translation">Choice Frequency</target>
       </trans-unit>
-      <trans-unit id="3546606966003983902" datatype="html">
-        <source>Number of teams that moved each item (choice) into the different buckets (categories).</source>
+      <trans-unit id="7051463422291865328" datatype="html">
+        <source> Number of teams that moved each item (choice) into the different buckets (categories). </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">39,41</context>
+          <context context-type="linenumber">41,44</context>
         </context-group>
-        <target state="needs-translation">Number of teams that moved each item (choice) into the different buckets (categories).</target>
+        <target state="needs-translation"> Number of teams that moved each item (choice) into the different buckets (categories). </target>
       </trans-unit>
       <trans-unit id="2004123481203797507" datatype="html">
         <source> Your students&apos; choices will show up here when they complete the activity. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">60,63</context>
+          <context context-type="linenumber">63,68</context>
         </context-group>
         <target state="needs-translation"> Your students' choices will show up here when they complete the activity. </target>
       </trans-unit>
