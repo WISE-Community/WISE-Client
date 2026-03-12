@@ -9,7 +9,7 @@
     <mat-icon>fullscreen</mat-icon>
   </button>
 </ng-template>
-<div class="component-summary notice flex flex-col p-3">
+<div class="component-summary notice flex flex-col">
   <div class="flex justify-between gap-4">
     <div>
       <div i18n>Prompt</div>
@@ -85,6 +85,21 @@
             [ngTemplateOutletContext]="{ type: 'match' }"
           />
           <match-summary-display
+            [nodeId]="node.id"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [source]="source"
+            [doRender]="true"
+            class="summary"
+          />
+        </div>
+      } @else if (component?.type === 'Discussion' && hasStudentWork) {
+        <div class="summary-content">
+          <ng-container
+            [ngTemplateOutlet]="expandSummaryTpl"
+            [ngTemplateOutletContext]="{ type: 'discussion' }"
+          />
+          <discussion-summary
             [nodeId]="node.id"
             [componentId]="component.id"
             [periodId]="periodId"

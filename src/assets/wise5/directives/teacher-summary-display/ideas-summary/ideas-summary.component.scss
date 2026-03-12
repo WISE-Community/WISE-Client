@@ -1,0 +1,16 @@
+h3,
+.mat-subtitle-1,
+.mat-body-1 {
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin-block-start: 0;
+  padding-inline-start: 0;
+}
+
+li:not(:last-child) {
+  margin-bottom: 4px;
+}

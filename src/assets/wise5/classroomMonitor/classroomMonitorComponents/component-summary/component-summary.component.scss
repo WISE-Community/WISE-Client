@@ -1,7 +1,7 @@
 @use "tailwindcss";
 
 .notice {
-  @apply m-3 !max-w-none !text-start;
+  @apply m-0 !p-3 !max-w-none !text-start rounded-none;
 }
 
 .mat-body-1 {
