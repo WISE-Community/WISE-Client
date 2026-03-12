@@ -18,3 +18,11 @@
 >
   Students must create a post before viewing classmates' posts
 </mat-checkbox>
+<mat-checkbox
+  color="primary"
+  [(ngModel)]="componentContent.anonymizeResponses"
+  (ngModelChange)="componentChanged()"
+  i18n
+>
+  Students cannot see classmates' names
+</mat-checkbox>

@@ -457,12 +457,17 @@ export class DiscussionStudent extends ComponentStudent {
     return this.componentContent.gateClassmateResponses;
   }
 
+  protected anonymizeResponses(): boolean {
+    return this.componentContent.anonymizeResponses;
+  }
+
   setClassResponses(componentStates: any[], annotations: any[] = []): void {
     const isStudentMode = true;
     this.classResponses = this.discussionService.getClassResponses(
       componentStates,
       annotations,
-      isStudentMode
+      isStudentMode,
+      this.anonymizeResponses()
     );
     this.responsesMap = this.discussionService.getResponsesMap(this.classResponses);
     this.topLevelResponses = this.discussionService.getLevel1Responses(
@@ -475,7 +480,7 @@ export class DiscussionStudent extends ComponentStudent {
 
   addClassResponse(componentState: any): void {
     if (componentState.studentData.isSubmit) {
-      this.discussionService.setUsernames(componentState);
+      this.discussionService.setUsernames(componentState, this.anonymizeResponses());
       componentState.replies = [];
       this.classResponses.push(componentState);
       this.addResponseToResponsesMap(this.responsesMap, componentState);

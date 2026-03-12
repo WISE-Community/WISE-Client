@@ -55,4 +55,8 @@ export class DiscussionTeacherComponent extends DiscussionStudent {
   disableComponentIfNecessary(): void {
     // no need to disable the component for teacher
   }
+
+  protected anonymizeResponses(): boolean {
+    return false;
+  }
 }

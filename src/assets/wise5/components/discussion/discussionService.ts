@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { serverSaveTimeComparator } from '../../common/object/object';
+import { Anonymizer } from './Anonymizer';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
@@ -25,6 +26,7 @@ export class DiscussionService extends ComponentService {
     component.prompt = '';
     component.isStudentAttachmentEnabled = true;
     component.gateClassmateResponses = true;
+    component.anonymizeResponses = false;
     return component;
   }
 
@@ -211,14 +213,15 @@ export class DiscussionService extends ComponentService {
   getClassResponses(
     componentStates: any[],
     annotations = [],
-    isStudentMode: boolean = false
+    isStudentMode: boolean = false,
+    anonymizeResponses: boolean = false
   ): any[] {
     const classResponses = [];
     componentStates = componentStates.sort(serverSaveTimeComparator);
     for (const componentState of componentStates) {
       if (componentState.studentData.isSubmit) {
         componentState.replies = [];
-        this.setUsernames(componentState);
+        this.setUsernames(componentState, anonymizeResponses);
         const latestInappropriateFlagAnnotation =
           this.getLatestInappropriateFlagAnnotationByStudentWorkId(annotations, componentState.id);
         if (isStudentMode) {
@@ -243,8 +246,17 @@ export class DiscussionService extends ComponentService {
     return annotation.data.action === 'Delete';
   }
 
-  setUsernames(componentState: any): void {
-    const workgroupId = componentState.workgroupId;
+  setUsernames(componentState: any, anonymizeResponses: boolean = false): void {
+    const { workgroupId, periodId } = componentState;
+    if (anonymizeResponses) {
+      const workgroupIds = this.configService
+        .getClassmateUserInfos()
+        .filter((userInfo) => userInfo.periodId === periodId)
+        .map((userInfo) => userInfo.workgroupId)
+        .concat(workgroupId);
+      componentState.usernames = new Anonymizer(workgroupId, workgroupIds).getName();
+      return;
+    }
     const usernames = this.configService.getUsernamesByWorkgroupId(workgroupId);
     if (usernames.length > 0) {
       componentState.usernames = this.configService.getUsernamesStringByWorkgroupId(workgroupId);
