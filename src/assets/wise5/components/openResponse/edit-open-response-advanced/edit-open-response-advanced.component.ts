@@ -16,6 +16,7 @@ import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedb
 import { OpenResponseContent } from '../OpenResponseContent';
 import { CRaterItemSelectComponent } from '../../common/cRater/crater-item-select/crater-item-select.component';
 import { EditCRaterInfoComponent } from '../../common/cRater/edit-crater-info/edit-crater-info.component';
+import { DEFAULT_IDEAS_SUMMARY_GROUPS } from '../../common/cRater/CRaterRubric';
 
 @Component({
   imports: [
@@ -95,7 +96,9 @@ export class EditOpenResponseAdvancedComponent extends EditAdvancedComponentComp
       enableMultipleAttemptScoringRules: false,
       multipleAttemptScoringRules: [],
       rubric: {
-        ideas: []
+        ideas: [],
+        ideaColors: [],
+        ideasSummaryGroups: DEFAULT_IDEAS_SUMMARY_GROUPS
       }
     };
   }

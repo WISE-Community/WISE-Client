@@ -44,6 +44,7 @@ import { AnnotationService } from '../../../../services/annotationService';
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
+  protected classResponsesVisible: boolean = true;
   protected components: ComponentContent[];
   protected hasWork: boolean;
   protected node: Node;
@@ -103,7 +104,7 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
         component['displayIndex'] = index + 1;
         return component;
       });
-    this.visibleComponents = this.components;
+    this.visibleComponents = [this.components[0]];
     this.numRubrics = this.node.getNumRubrics();
     this.setPeriod();
   }
@@ -143,5 +144,15 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   protected toggleSummaries(event: Event): void {
     event.preventDefault();
     this.summariesVisible = !this.summariesVisible;
+  }
+
+  protected selectSummary(componentIndex: number): void {
+    this.selectedComponent.setValue(componentIndex);
+    this.visibleComponents = [this.components[componentIndex]];
+  }
+
+  protected toggleClassResponses(event: Event): void {
+    event.preventDefault();
+    this.classResponsesVisible = !this.classResponsesVisible;
   }
 }

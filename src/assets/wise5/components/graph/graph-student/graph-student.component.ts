@@ -163,10 +163,6 @@ export class GraphStudent extends ComponentStudent {
     });
   }
 
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
-
   initializeComponentContentParams() {
     this.title = this.componentContent.title;
     this.subtitle = this.componentContent.subtitle;

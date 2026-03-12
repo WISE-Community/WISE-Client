@@ -1,15 +1,14 @@
-import { IdeaData } from '../../assets/wise5/components/common/cRater/IdeaData';
-import { IdeasSortingService } from '../../assets/wise5/services/ideasSortingService';
+import {
+  IdeaData,
+  sortIdeasByCount,
+  sortIdeasById
+} from '../../assets/wise5/components/common/cRater/IdeaData';
 import { TestBed } from '@angular/core/testing';
 
 let ideas: IdeaData[];
-let service: IdeasSortingService;
-
-describe('IdeasSortingService', () => {
+describe('IdeaData', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [IdeasSortingService]
-    });
+    TestBed.configureTestingModule({});
     ideas = [
       createIdeaData('2', 'c', 3),
       createIdeaData('1', 'b', 1),
@@ -17,23 +16,27 @@ describe('IdeasSortingService', () => {
       createIdeaData('10a', 'abc', 2),
       createIdeaData('11', 'cba', 5)
     ];
-    service = TestBed.inject(IdeasSortingService);
   });
 
-  sortIdeasByCount();
-  sortIdeasById();
+  test_SortIdeasByCount();
+  test_SortIdeasById();
 });
 
-function sortIdeasByCount() {
+function test_SortIdeasByCount() {
   it('should sort ideas descending numerically by count', () => {
-    const sortedIdeas = service.sortByCount(ideas);
+    const sortedIdeas = sortIdeasByCount(ideas, 'desc');
     expect(sortedIdeas.map((idea) => idea.id)).toEqual(['11', '2b', '2', '10a', '1']);
+  });
+
+  it('should sort ideas ascending numerically by count', () => {
+    const sortedIdeas = sortIdeasByCount(ideas, 'asc');
+    expect(sortedIdeas.map((idea) => idea.id)).toEqual(['1', '10a', '2', '2b', '11']);
   });
 }
 
-function sortIdeasById() {
+function test_SortIdeasById() {
   it('should sort ideas alphanumerically by ID', () => {
-    const sortedIdeas = service.sortById(ideas);
+    const sortedIdeas = sortIdeasById(ideas);
     expect(sortedIdeas.map((ideas) => ideas.id)).toEqual(['1', '2', '2b', '10a', '11']);
   });
 }

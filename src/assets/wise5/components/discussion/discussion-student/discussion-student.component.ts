@@ -79,7 +79,18 @@ export class DiscussionStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.renderDiscussion();
+    this.subscriptions.add(
+      this.annotationService.annotationReceived$.subscribe((annotation) => {
+        // handle inappropriate flag annotations in real-time by re-rendering the discussion
+        if (this.isForThisComponent(annotation) && annotation.type === 'inappropriateFlag') {
+          this.renderDiscussion();
+        }
+      })
+    );
+  }
 
+  protected renderDiscussion(): void {
     if (this.configService.isPreview()) {
       let componentStates = [];
       if (this.component.hasConnectedComponent()) {
@@ -140,10 +151,6 @@ export class DiscussionStudent extends ComponentStudent {
     this.disableComponentIfNecessary();
     this.registerStudentWorkReceivedListener();
     this.broadcastDoneRenderingComponent();
-  }
-
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
   }
 
   isConnectedComponentShowWorkMode() {
@@ -261,7 +268,7 @@ export class DiscussionStudent extends ComponentStudent {
     if (toWorkgroupId != null && toWorkgroupId !== fromWorkgroupId) {
       const notification = this.notificationService.createNewNotification(
         this.configService.getRunId(),
-        this.configService.getPeriodId(),
+        this.getPeriodId(),
         notificationType,
         nodeId,
         componentId,
@@ -295,7 +302,7 @@ export class DiscussionStudent extends ComponentStudent {
         ) {
           const notification = this.notificationService.createNewNotification(
             this.configService.getRunId(),
-            this.configService.getPeriodId(),
+            this.getPeriodId(),
             notificationType,
             nodeId,
             componentId,
@@ -335,7 +342,7 @@ export class DiscussionStudent extends ComponentStudent {
 
   getClassmateResponsesFromComponents(components: any[] = []): void {
     const runId = this.configService.getRunId();
-    const periodId = this.configService.getPeriodId();
+    const periodId = this.getPeriodId();
     this.discussionService
       .getClassmateResponsesFromComponents(runId, periodId, components)
       .subscribe((response: any) =>
@@ -345,7 +352,7 @@ export class DiscussionStudent extends ComponentStudent {
 
   getClassmateResponses(): void {
     const runId = this.configService.getRunId();
-    const periodId = this.configService.getPeriodId();
+    const periodId = this.getPeriodId();
     this.discussionService
       .getClassmateResponses(runId, periodId, this.nodeId, this.componentId)
       .subscribe((response: any) =>
@@ -446,7 +453,7 @@ export class DiscussionStudent extends ComponentStudent {
     return this.componentContent.showSubmitButton;
   }
 
-  isClassmateResponsesGated() {
+  protected isClassmateResponsesGated(): boolean {
     return this.componentContent.gateClassmateResponses;
   }
 
@@ -495,5 +502,9 @@ export class DiscussionStudent extends ComponentStudent {
 
   shouldCreateComponentState(request: ComponentStateRequest): boolean {
     return this.isDirty && request.isSubmit;
+  }
+
+  protected getPeriodId(): number {
+    return this.configService.getPeriodId();
   }
 }

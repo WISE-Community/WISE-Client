@@ -116,10 +116,6 @@ export class AnimationStudent extends ComponentStudent {
     this.setupSVG();
   }
 
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
-
   setAnimationState(state: string): void {
     this.animationState = state;
   }

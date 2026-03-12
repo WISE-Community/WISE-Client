@@ -39,9 +39,9 @@ export class EditConceptMapConnectedComponentsComponent extends EditConnectedCom
   askIfWantToCopyNodesAndLinks({ nodeId, componentId }): void {
     if (
       confirm(
-        $localize`Do you want to copy the nodes and links from the connected component?` +
+        $localize`Do you want to copy the nodes and links from the connected activity?` +
           '\n\n' +
-          $localize`Warning: This will delete all existing nodes and links in this component.`
+          $localize`Warning: This will delete all existing nodes and links in this activity.`
       )
     ) {
       const connectedComponent = this.projectService.getComponent(

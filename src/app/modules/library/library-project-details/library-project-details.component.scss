@@ -1,9 +1,6 @@
 @use '@angular/material' as mat;
-
 @use 'style/abstracts/functions';
-
-.library-project-details {
-}
+@reference "tailwindcss";
 
 .info-block {
   padding: 12px;
@@ -56,6 +53,10 @@
     vertical-align: middle;
     display: inline;
   }
+}
+
+.notice {
+  @apply max-w-none;
 }
 
 discourse-category-activity, unit-tags {

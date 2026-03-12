@@ -1,5 +1,11 @@
+@use "tailwindcss";
+
 .highcharts-chart {
   display: block;
   height: 300px;
   width: 100%;
+}
+
+.expanded {
+  @apply flex flex-col max-h-full;
 }

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DetectedIdeasComponent } from './detected-ideas.component';
 import { By } from '@angular/platform-browser';
+import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 
 describe('DetectedIdeasComponent', () => {
   let component: DetectedIdeasComponent;
@@ -14,6 +15,7 @@ describe('DetectedIdeasComponent', () => {
     fixture = TestBed.createComponent(DetectedIdeasComponent);
     component = fixture.componentInstance;
     component.responses = [];
+    component.cRaterRubric = new CRaterRubric({ ideas: [] });
     fixture.detectChanges();
   });
 

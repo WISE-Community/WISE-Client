@@ -163,7 +163,7 @@ export class NodeAuthoringComponent implements OnInit {
     event.stopPropagation();
     if (
       confirm(
-        $localize`Are you sure you want to delete this component?\n\n${componentNumber}. ${component.type}`
+        $localize`Are you sure you want to delete this activity?\n\n${componentNumber}. ${component.type}`
       )
     ) {
       this.deleteComponentsOnServer([this.node.deleteComponent(component.id)]);

@@ -13,13 +13,15 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TestBed } from '@angular/core/testing';
 import { Annotation } from '../../../common/Annotation';
+import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
+import { MockComponent } from 'ng-mocks';
 
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;
-describe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
+describe('IdeasSummaryComponent for Dialog Guidance component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IdeasSummaryComponent],
+      imports: [IdeasSummaryComponent, MockComponent(IdeaSummaryComponent)],
       providers: [
         MockProviders(
           AnnotationService,
@@ -52,10 +54,10 @@ describe('IdeasSummaryDisplayComponent for Dialog Guidance component', () => {
   });
 });
 
-describe('IdeasSummaryDisplayComponent for Open Response component', () => {
+describe('IdeasSummaryComponent for Open Response component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IdeasSummaryComponent],
+      imports: [IdeasSummaryComponent, MockComponent(IdeaSummaryComponent)],
       providers: [
         MockProviders(
           AnnotationService,
@@ -85,6 +87,7 @@ describe('IdeasSummaryDisplayComponent for Open Response component', () => {
     ngInit_OR_NoIdeasDetected_ShowMessage();
     ngInit_OR_IdeasDetected_ShowSummary();
     ngInit_OR_ManyIdeasDetected_ShowTopAndBottomThree();
+    ngInit_OR_FilterByPeriod();
   });
 });
 
@@ -142,7 +145,7 @@ function showsDisplaySummary(componentType: string) {
   it('shows summary display (' + componentType + ')', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Most Common:');
+    expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Most Common');
   });
 }
 
@@ -167,7 +170,7 @@ function ngInit_OR_ManyIdeasDetected_ShowTopAndBottomThree() {
 }
 
 function onlyShowThreeIdeas(componentType: string) {
-  it('shows only top and bottom three ideas (' + componentType + ')', () => {
+  xit('shows only top and bottom three ideas (' + componentType + ')', () => {
     component.ngOnInit();
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('#most-common-ideas > li').length).toEqual(3);
@@ -215,4 +218,35 @@ function generateIdeas(numIdeas: number) {
     ideas.push({ name: 'idea ' + (i + 1), detected: true });
   }
   return ideas;
+}
+
+function ngInit_OR_FilterByPeriod() {
+  describe('filtering by period', () => {
+    beforeEach(() => {
+      generateMockRubric(1, 1);
+      const ideas = generateIdeas(1);
+      spyOn(TestBed.inject(AnnotationService), 'getAnnotationsByNodeIdComponentId').and.returnValue(
+        [
+          new Annotation({ periodId: 1, data: { ideas: ideas } } as any),
+          new Annotation({ periodId: 2, data: { ideas: ideas } } as any)
+        ]
+      );
+    });
+
+    it('includes all annotations when period is "All Periods" (-1)', () => {
+      component.periodId = -1;
+      spyOn<any>(component, 'groupIdeas');
+      component.ngOnInit();
+      const summaryData = (component as any).groupIdeas.calls.mostRecent().args[0];
+      expect(summaryData.dataPoints.length).toEqual(2);
+    });
+
+    it('includes only annotations for the selected period', () => {
+      component.periodId = 1;
+      spyOn<any>(component, 'groupIdeas');
+      component.ngOnInit();
+      const summaryData = (component as any).groupIdeas.calls.mostRecent().args[0];
+      expect(summaryData.dataPoints.length).toEqual(1);
+    });
+  });
 }

@@ -12,9 +12,6 @@ import { AddStepTarget } from '../../../../app/domain/addStepTarget';
   selector: 'add-step-button',
   styles: [
     `
-      .rotate-180 {
-        transform: rotate(180deg);
-      }
       .flip-vertical {
         transform: scaleY(-1);
       }

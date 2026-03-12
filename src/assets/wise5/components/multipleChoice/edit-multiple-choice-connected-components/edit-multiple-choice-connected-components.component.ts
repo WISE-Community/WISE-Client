@@ -33,7 +33,7 @@ export class EditMultipleChoiceConnectedComponentsComponent extends EditConnecte
   askIfWantToCopyChoices({ nodeId, componentId }): void {
     if (
       confirm(
-        $localize`Do you want to copy the choices from the connected component?\n\nWarning: This will delete all existing choices in this component.`
+        $localize`Do you want to copy the choices from the connected activity?\n\nWarning: This will delete all existing choices in this activity.`
       )
     ) {
       this.copyChoiceTypeFromComponent(nodeId, componentId);
