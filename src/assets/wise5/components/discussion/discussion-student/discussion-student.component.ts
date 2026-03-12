@@ -457,7 +457,7 @@ export class DiscussionStudent extends ComponentStudent {
     return this.componentContent.gateClassmateResponses;
   }
 
-  protected anonymizeResponses(): boolean {
+  protected isAnonymizeResponses(): boolean {
     return this.componentContent.anonymizeResponses;
   }
 
@@ -467,7 +467,7 @@ export class DiscussionStudent extends ComponentStudent {
       componentStates,
       annotations,
       isStudentMode,
-      this.anonymizeResponses()
+      this.isAnonymizeResponses()
     );
     this.responsesMap = this.discussionService.getResponsesMap(this.classResponses);
     this.topLevelResponses = this.discussionService.getLevel1Responses(
@@ -480,7 +480,7 @@ export class DiscussionStudent extends ComponentStudent {
 
   addClassResponse(componentState: any): void {
     if (componentState.studentData.isSubmit) {
-      this.discussionService.setUsernames(componentState, this.anonymizeResponses());
+      this.discussionService.setUsernames(componentState, this.isAnonymizeResponses());
       componentState.replies = [];
       this.classResponses.push(componentState);
       this.addResponseToResponsesMap(this.responsesMap, componentState);

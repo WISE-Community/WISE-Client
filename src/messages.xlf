@@ -22555,7 +22555,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Class Discussion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.ts</context>
-          <context context-type="linenumber">14,16</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="53088066154549456" datatype="html">
+        <source> Anonymize Responses </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.ts</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3690771652722848805" datatype="html">

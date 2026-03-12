@@ -33,6 +33,7 @@ import { DiscussionStudent } from '../discussion-student/discussion-student.comp
 })
 export class DiscussionTeacherComponent extends DiscussionStudent {
   @Input() periodId: number;
+  @Input() anonymizeResponses: boolean;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.component) {
@@ -56,7 +57,7 @@ export class DiscussionTeacherComponent extends DiscussionStudent {
     // no need to disable the component for teacher
   }
 
-  protected anonymizeResponses(): boolean {
-    return false;
+  protected isAnonymizeResponses(): boolean {
+    return this.anonymizeResponses;
   }
 }
