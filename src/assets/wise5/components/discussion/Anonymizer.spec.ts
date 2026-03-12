@@ -6,15 +6,15 @@ describe('Anonymizer', () => {
 
     const anonymizer100 = new Anonymizer(100, ids);
     // Since 100 is at index 0, it should be mapped to the first animal (Tiger)
-    expect(anonymizer100.getName('Student')).toEqual('Student Tiger');
+    expect(anonymizer100.getName()).toEqual('Anonymous Tiger');
 
     const anonymizer200 = new Anonymizer(200, ids);
     // 200 is at index 1 -> Lion
-    expect(anonymizer200.getName('Student')).toEqual('Student Lion');
+    expect(anonymizer200.getName()).toEqual('Anonymous Lion');
 
     const anonymizer300 = new Anonymizer(300, ids);
     // 300 is at index 2 -> Fox
-    expect(anonymizer300.getName('Student')).toEqual('Student Fox');
+    expect(anonymizer300.getName()).toEqual('Anonymous Fox');
   });
 
   it('should append numeric suffixes when the number of ids exceeds the available name options (86)', () => {
@@ -23,15 +23,15 @@ describe('Anonymizer', () => {
 
     // The very first user (index 0) will now be "Tiger 1" instead of "Tiger"
     const firstAnonymizer = new Anonymizer(0, manyIds);
-    expect(firstAnonymizer.getName('Student')).toEqual('Student Tiger 1');
+    expect(firstAnonymizer.getName()).toEqual('Anonymous Tiger 1');
 
     // The 86th user (index 85, the last of the first batch) will be "Yeti 1"
     const endOfFirstBatch = new Anonymizer(85, manyIds);
-    expect(endOfFirstBatch.getName('Student')).toEqual('Student Yeti 1');
+    expect(endOfFirstBatch.getName()).toEqual('Anonymous Yeti 1');
 
     // The 87th user (index 86) overflows into the second batch and becomes "Tiger 2"
     const overflowAnonymizer = new Anonymizer(86, manyIds);
-    expect(overflowAnonymizer.getName('Student')).toEqual('Student Tiger 2');
+    expect(overflowAnonymizer.getName()).toEqual('Anonymous Tiger 2');
   });
 
   it('should append higher numeric suffixes dynamically if ids continue to increase vastly', () => {
@@ -40,11 +40,11 @@ describe('Anonymizer', () => {
 
     // Index 171 is the end of the second batch (Yeti 2)
     const endOfSecondBatch = new Anonymizer(171, massiveIds);
-    expect(endOfSecondBatch.getName('Student')).toEqual('Student Yeti 2');
+    expect(endOfSecondBatch.getName()).toEqual('Anonymous Yeti 2');
 
     // Index 172 starts the third batch (Tiger 3)
     const startOfThirdBatch = new Anonymizer(172, massiveIds);
-    expect(startOfThirdBatch.getName('Student')).toEqual('Student Tiger 3');
+    expect(startOfThirdBatch.getName()).toEqual('Anonymous Tiger 3');
   });
 
   it('should support a custom prefix name', () => {

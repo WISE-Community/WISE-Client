@@ -98,7 +98,7 @@ export class Anonymizer {
     private ids: number[]
   ) {}
 
-  getName(prefix: string = $localize`Student`): string {
+  getName(prefix: string = $localize`Anonymous`): string {
     let names = this.nameOptions;
     if (this.ids.length > this.nameOptions.length) {
       names = this.nameOptions.map((name) => name + ' ' + 1);
