@@ -89,7 +89,7 @@ export class TeacherProjectService extends ProjectService {
    * @param title the title of the node
    * @returns the node object
    */
-  createNode(title: string) {
+  createNode(title: string): any {
     return {
       id: this.getNextAvailableNodeId(),
       title: title,
@@ -97,6 +97,13 @@ export class TeacherProjectService extends ProjectService {
       constraints: [],
       transitionLogic: {
         transitions: []
+      },
+      icon: {
+        color: '#00B0FF',
+        type: 'font',
+        fontSet: 'material-icons',
+        fontName: 'school',
+        imgSrc: ''
       },
       showSaveButton: false,
       showSubmitButton: false,

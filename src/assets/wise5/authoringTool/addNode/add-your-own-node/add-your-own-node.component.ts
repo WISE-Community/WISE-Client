@@ -81,9 +81,11 @@ export class AddYourOwnNodeComponent {
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
     switch (this.target.type) {
       case 'in':
+        newNode.icon.color = this.projectService.getNodeById(this.target.targetId).icon.color;
         this.projectService.createNodeInside(newNode, this.target.targetId);
         break;
       case 'after':
+        newNode.icon.color = this.projectService.getParentGroup(this.target.targetId).icon.color;
         this.projectService.createNodeAfter(newNode, this.target.targetId);
         break;
       case 'firstStepInBranchPath':
@@ -98,10 +100,6 @@ export class AddYourOwnNodeComponent {
     this.save().then(() => {
       this.router.navigate(['../..'], { relativeTo: this.route });
     });
-  }
-
-  protected isGroupNode(nodeId: string): boolean {
-    return this.projectService.isGroupNode(nodeId);
   }
 
   private addInitialComponents(nodeId: string, components: any[]): void {
