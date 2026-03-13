@@ -47,8 +47,9 @@ export class TranslationSuggestionsDialogComponent {
         this.data.currentLanguage,
         this.data.defaultLanguageContent
       )
-      .subscribe((suggestedTranslation: string) => {
-        this.translation = suggestedTranslation;
+      .subscribe({
+        next: (suggestedTranslation) => this.translation = suggestedTranslation,
+        error: () => alert("AWS Translate settings have not been configured")
       });
   }
 

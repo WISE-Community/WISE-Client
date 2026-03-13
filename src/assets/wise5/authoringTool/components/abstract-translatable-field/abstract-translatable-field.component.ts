@@ -89,7 +89,10 @@ export abstract class AbstractTranslatableFieldComponent {
           this.currentLanguage().language,
           this.content[this.key]
         )
-        .subscribe((translation) => this.saveTranslationText(translation));
+        .subscribe({
+          next: (translation) => this.saveTranslationText(translation),
+          error: () => alert("AWS Translate settings have not been configured")
+        });
     }
   }
 
