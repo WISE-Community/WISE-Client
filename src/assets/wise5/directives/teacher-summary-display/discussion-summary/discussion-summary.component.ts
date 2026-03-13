@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Component as WISEComponent } from '../../../common/Component';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 import { ComponentFactory } from '../../../common/ComponentFactory';
@@ -13,16 +13,21 @@ import { FormsModule } from '@angular/forms';
   styleUrl: '../../summary-display/summary-display.component.scss',
   template: `
     <div [class.expanded]="expanded">
-      <span class="flex flex-row items-center">
-        <h2 class="mat-subtitle-1" i18n>Class Discussion</h2>
+      <h2 class="mat-subtitle-1" i18n>Class Discussion</h2>
+      <div class="mb-4 flex flex-wrap gap-4 justify-between items-center">
         <mat-slide-toggle
-          class="mat-primary account-menu__control mat-subtitle-1"
           [(ngModel)]="anonymizeResponses"
+          (change)="anonymizeResponsesChanged()"
           i18n
         >
-          Anonymize Responses
+          Hide student names
         </mat-slide-toggle>
-      </span>
+        @if (component.content.anonymizeResponses) {
+          <span class="mat-caption" i18n
+            >Note: Students do not see each other's names in this activity.</span
+          >
+        }
+      </div>
       <discussion-teacher
         class="max-h-160 block overflow-y-auto"
         [class.max-h-none]="expanded"
@@ -36,13 +41,18 @@ import { FormsModule } from '@angular/forms';
   `
 })
 export class DiscussionSummaryComponent extends TeacherSummaryDisplayComponent implements OnInit {
-  protected anonymizeResponses: boolean;
+  @Input() anonymizeResponses: boolean;
   protected component: WISEComponent;
   @Input() expanded: boolean;
+  @Output() anonymizeResponsesChange = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     let content = this.projectService.getComponent(this.nodeId, this.componentId);
     content = this.projectService.injectAssetPaths(content);
     this.component = new ComponentFactory().getComponent(content, this.nodeId);
+  }
+
+  protected anonymizeResponsesChanged() {
+    this.anonymizeResponsesChange.emit(this.anonymizeResponses);
   }
 }
