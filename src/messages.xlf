@@ -18866,8 +18866,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">19,23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5302064367675209049" datatype="html">
-        <source> Students cannot see classmates&apos; names
+      <trans-unit id="6977775025631506852" datatype="html">
+        <source> Anonymize (students cannot see classmates&apos; names)
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
@@ -22558,14 +22558,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Class Discussion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.ts</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="53088066154549456" datatype="html">
-        <source> Anonymize Responses </source>
+      <trans-unit id="6338860782944918625" datatype="html">
+        <source> Hide student names </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.ts</context>
-          <context context-type="linenumber">23,26</context>
+          <context context-type="linenumber">23,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6793042667929328995" datatype="html">
+        <source>Note: Students do not see each other&apos;s names in this activity.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.ts</context>
+          <context context-type="linenumber">27,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3690771652722848805" datatype="html">
