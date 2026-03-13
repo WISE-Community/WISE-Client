@@ -466,6 +466,7 @@ export class DiscussionStudent extends ComponentStudent {
     this.classResponses = this.discussionService.getClassResponses(
       componentStates,
       annotations,
+      this.workgroupId,
       isStudentMode,
       this.isAnonymizeResponses()
     );
@@ -480,7 +481,11 @@ export class DiscussionStudent extends ComponentStudent {
 
   addClassResponse(componentState: any): void {
     if (componentState.studentData.isSubmit) {
-      this.discussionService.setUsernames(componentState, this.isAnonymizeResponses());
+      this.discussionService.setUsernames(
+        componentState,
+        this.workgroupId,
+        this.isAnonymizeResponses()
+      );
       componentState.replies = [];
       this.classResponses.push(componentState);
       this.addResponseToResponsesMap(this.responsesMap, componentState);

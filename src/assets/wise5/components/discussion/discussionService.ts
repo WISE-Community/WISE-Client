@@ -213,6 +213,7 @@ export class DiscussionService extends ComponentService {
   getClassResponses(
     componentStates: any[],
     annotations = [],
+    myWorkgroupId: number,
     isStudentMode: boolean = false,
     anonymizeResponses: boolean = false
   ): any[] {
@@ -221,7 +222,7 @@ export class DiscussionService extends ComponentService {
     for (const componentState of componentStates) {
       if (componentState.studentData.isSubmit) {
         componentState.replies = [];
-        this.setUsernames(componentState, anonymizeResponses);
+        this.setUsernames(componentState, myWorkgroupId, anonymizeResponses);
         const latestInappropriateFlagAnnotation =
           this.getLatestInappropriateFlagAnnotationByStudentWorkId(annotations, componentState.id);
         if (isStudentMode) {
@@ -246,15 +247,14 @@ export class DiscussionService extends ComponentService {
     return annotation.data.action === 'Delete';
   }
 
-  setUsernames(componentState: any, anonymizeResponses: boolean = false): void {
-    const { workgroupId, periodId } = componentState;
-    if (anonymizeResponses) {
-      const workgroupIds = this.configService
-        .getClassmateUserInfos()
-        .filter((userInfo) => userInfo.periodId === periodId)
-        .map((userInfo) => userInfo.workgroupId)
-        .concat(workgroupId);
-      componentState.usernames = new Anonymizer(workgroupId, workgroupIds).getName();
+  setUsernames(
+    componentState: any,
+    myWorkgroupId: number,
+    anonymizeResponses: boolean = false
+  ): void {
+    const { workgroupId } = componentState;
+    if (anonymizeResponses && workgroupId !== myWorkgroupId) {
+      this.setAnonymousUsername(componentState);
       return;
     }
     const usernames = this.configService.getUsernamesByWorkgroupId(workgroupId);
@@ -269,6 +269,16 @@ export class DiscussionService extends ComponentService {
     } else {
       componentState.usernames = this.configService.getUserIdsStringByWorkgroupId(workgroupId);
     }
+  }
+
+  private setAnonymousUsername(componentState: any): void {
+    const { workgroupId, periodId } = componentState;
+    const workgroupIds = this.configService
+      .getClassmateUserInfos()
+      .filter((userInfo) => userInfo.periodId === periodId)
+      .map((userInfo) => userInfo.workgroupId)
+      .concat(workgroupId);
+    componentState.usernames = new Anonymizer(workgroupId, workgroupIds).getName();
   }
 
   getResponsesMap(componentStates: any[]): any {
