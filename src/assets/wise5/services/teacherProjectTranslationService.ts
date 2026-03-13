@@ -56,7 +56,7 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
   ): Observable<string> {
     return this.http
       .post(
-        `/api/author/project/translate/translationSuggestions`,
+        `/api/author/project/translate/suggest`,
         {
           srcLang: defaultLanguage,
           targetLang: currentLanguage,

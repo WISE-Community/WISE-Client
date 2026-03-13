@@ -53,7 +53,7 @@ describe('TeacherProjectTranslationService', () => {
       service
         .getTranslationSuggestion('srcLang', 'targetLang', '<span>srcText</span> untagged')
         .subscribe();
-      const request = http.expectOne(`/api/author/project/translate/translationSuggestions`);
+      const request = http.expectOne(`/api/author/project/translate/suggest`);
       expect(request.request.method).toEqual('POST');
       expect(request.request.body).toEqual({
         srcLang: 'srcLang',
