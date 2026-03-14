@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ConfigService } from '../../../services/configService';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -22,11 +23,12 @@ export class TranslatableAssetChooserComponent extends AbstractTranslatableField
   };
 
   constructor(
+    protected configService: ConfigService,
     protected dialog: MatDialog,
     protected projectService: TeacherProjectService,
     protected projectTranslationService: TeacherProjectTranslationService
   ) {
-    super(dialog, projectService, projectTranslationService);
+    super(configService, dialog, projectService, projectTranslationService);
   }
 
   protected chooseAsset(): void {

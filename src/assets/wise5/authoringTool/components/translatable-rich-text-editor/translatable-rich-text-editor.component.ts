@@ -27,12 +27,12 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
   @ViewChild(MatTabGroup) private tabs: MatTabGroup;
 
   constructor(
-    private configService: ConfigService,
+    protected configService: ConfigService,
     protected dialog: MatDialog,
     protected projectService: TeacherProjectService,
     protected projectTranslationService: TeacherProjectTranslationService
   ) {
-    super(dialog, projectService, projectTranslationService);
+    super(configService, dialog, projectService, projectTranslationService);
   }
 
   ngOnChanges(): void {

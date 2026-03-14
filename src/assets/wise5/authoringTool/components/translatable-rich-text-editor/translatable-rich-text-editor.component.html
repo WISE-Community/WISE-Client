@@ -41,7 +41,7 @@
       </ng-template>
     </mat-tab>
   </mat-tab-group>
-  @if (content[key]) {
+  @if (content[key] && isTranslationServiceEnabled()) {
     <div class="translatable translatable-input-hints">
       <mat-hint class="source-language selected-bg-bg translation-suggestions">
         <span (click)="translateText()"><mat-icon>auto_awesome</mat-icon> Translate with AI</span>

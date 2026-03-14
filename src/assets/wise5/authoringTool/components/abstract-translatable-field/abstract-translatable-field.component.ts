@@ -1,14 +1,15 @@
+import { ConfigService } from '../../../services/configService';
+import { copy } from '../../../common/object/object';
+import { generateRandomKey } from '../../../common/string/string';
 import { Input, Signal, Output, computed, Directive } from '@angular/core';
+import { Language } from '../../../../../app/domain/language';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject, Subscription, debounceTime } from 'rxjs';
-import { Language } from '../../../../../app/domain/language';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { generateRandomKey } from '../../../common/string/string';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Translations } from '../../../../../app/domain/translations';
 import { TranslationSuggestionsDialogComponent } from '../translation-suggestions-dialog/translation-suggestions-dialog.component';
-import { copy } from '../../../common/object/object';
 
 @Directive()
 export abstract class AbstractTranslatableFieldComponent {
@@ -29,6 +30,7 @@ export abstract class AbstractTranslatableFieldComponent {
   protected translationText: string;
   protected translationTextChanged: Subject<string> = new Subject<string>();
   constructor(
+    protected configService: ConfigService,
     protected dialog: MatDialog,
     protected projectService: TeacherProjectService,
     protected projectTranslationService: TeacherProjectTranslationService
@@ -79,6 +81,10 @@ export abstract class AbstractTranslatableFieldComponent {
     this.projectTranslationService.saveCurrentTranslations(currentTranslations).subscribe();
   }
 
+  protected isTranslationServiceEnabled(): boolean {
+    return this.configService.getConfigParam('translationServiceEnabled');
+  }
+
   protected async translateText(): Promise<void> {
     if (this.translationText) {
       this.openDialog();
@@ -91,7 +97,8 @@ export abstract class AbstractTranslatableFieldComponent {
         )
         .subscribe({
           next: (translation) => this.saveTranslationText(translation),
-          error: () => alert("AWS Translate settings have not been configured")
+          error: () =>
+            alert($localize`There was an error translating the text. Please talk to WISE staff.`)
         });
     }
   }

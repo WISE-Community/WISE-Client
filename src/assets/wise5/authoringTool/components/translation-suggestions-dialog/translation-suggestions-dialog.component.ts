@@ -48,8 +48,9 @@ export class TranslationSuggestionsDialogComponent {
         this.data.defaultLanguageContent
       )
       .subscribe({
-        next: (suggestedTranslation) => this.translation = suggestedTranslation,
-        error: () => alert("AWS Translate settings have not been configured")
+        next: (suggestedTranslation) => (this.translation = suggestedTranslation),
+        error: () =>
+          alert($localize`There was an error translating the text. Please talk to WISE staff.`)
       });
   }
 
