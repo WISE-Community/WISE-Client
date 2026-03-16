@@ -53,7 +53,8 @@ export class CreateBranchService extends AuthorBranchService {
   ): any {
     const mergeStepNode = this.projectService.createNode($localize`Merge Step`);
     mergeStepNode.id = this.projectService.getNextAvailableNodeId(newNodeIds);
-    mergeStepNode.icon.color = this.projectService.getParentGroup(branchNodeId).icon.color;
+    mergeStepNode.icon.color =
+      this.projectService.getParentGroup(branchNodeId).icon?.color || '#00B0FF';
     if (nodeIdBranchNodeTransitionsTo !== '') {
       mergeStepNode.transitionLogic.transitions = [new Transition(nodeIdBranchNodeTransitionsTo)];
     }

@@ -111,13 +111,6 @@ export class TeacherProjectService extends ProjectService {
     };
   }
 
-  getNodesWithNewIds(nodes: any[]): any[] {
-    const oldToNewIds = this.getOldToNewIds(nodes);
-    return nodes.map((node: any) => {
-      return this.replaceOldIds(node, oldToNewIds);
-    });
-  }
-
   getOldToNewIds(nodes: any[]): Map<string, string> {
     const newNodeIds = [];
     const newComponentIds = [];
