@@ -17,28 +17,16 @@ import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
 @Component({
   imports: [CommonModule, IdeaSummaryComponent],
   selector: 'ideas-summary',
-  styles: `
-    h3,
-    .mat-subtitle-1,
-    .mat-body-1 {
-      margin-bottom: 8px;
-      margin-top: 0;
-    }
-    ul {
-      list-style-type: none;
-      margin-block-start: 0;
-      padding-inline-start: 0;
-    }
-    li:not(:last-child) {
-      margin-bottom: 4px;
-    }
-  `,
+  styleUrls: [
+    './ideas-summary.component.scss',
+    '../../summary-display/summary-display.component.scss'
+  ],
   templateUrl: 'ideas-summary.component.html'
 })
 export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
-  @Input() componentType: string;
-
   protected additionalGroups: IdeaGroup[] = [];
+  @Input() componentType: string;
+  @Input() expanded: boolean;
   protected initialGroups: IdeaGroup[] = [];
   protected showMore: boolean;
   protected rubric: CRaterRubric;
@@ -72,12 +60,10 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
         this.groupIdeas(new DialogGuidanceSummaryData(componentStates, this.rubric))
       );
     } else if (this.componentType === 'OpenResponse') {
-      this.groupIdeas(
-        new OpenResponseSummaryData(
-          this.annotationService.getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId),
-          this.rubric
-        )
-      );
+      const annotations = this.annotationService
+        .getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
+        .filter((annotation) => this.periodId === -1 || annotation.periodId === this.periodId);
+      this.groupIdeas(new OpenResponseSummaryData(annotations, this.rubric));
     }
   }
 

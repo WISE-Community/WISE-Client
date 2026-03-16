@@ -8,10 +8,6 @@ export type IdeaData = {
   color?: string;
 };
 
-export function ideaDataToCRaterIdea(ideaData: IdeaData): CRaterIdea {
-  return new CRaterIdea(ideaData.id, undefined, ideaData.text, ideaData.tags);
-}
-
 export function cRaterIdeaToIdeaData(cRaterIdea: CRaterIdea): IdeaData {
   return { id: cRaterIdea.name, text: cRaterIdea.text, count: 0, tags: cRaterIdea.tags };
 }

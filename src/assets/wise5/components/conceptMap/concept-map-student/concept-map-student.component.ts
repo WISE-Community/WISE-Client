@@ -123,8 +123,10 @@ export class ConceptMapStudent extends ComponentStudent {
   ngOnDestroy(): void {
     super.ngOnDestroy();
     const svg = this.getElementById(this.svgId, true);
-    svg.removeEventListener('dragover', this.dragOverListenerFunction);
-    svg.removeEventListener('drop', this.dropListenerFunction);
+    if (svg) {
+      svg.removeEventListener('dragover', this.dragOverListenerFunction);
+      svg.removeEventListener('drop', this.dropListenerFunction);
+    }
   }
 
   initialize(): void {

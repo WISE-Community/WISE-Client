@@ -7,7 +7,7 @@
       <div class="secondary-text mb-2" i18n>Ideas detected:</div>
       <div class="flex flex-row flex-wrap gap-1 items-center">
         @for (idea of ideas; track idea.name) {
-          <span class="idea app-bg-bg border border-gray-300">
+          <span class="idea app-bg-bg border border-gray-300" [style.background-color]="idea.color">
             <b>{{ idea.name }}.</b>
             @if (idea.name !== idea.text) {
               {{ idea.text }}

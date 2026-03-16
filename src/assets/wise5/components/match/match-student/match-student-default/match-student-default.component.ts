@@ -20,7 +20,6 @@ import { ConfigService } from '../../../../services/configService';
 import { Container } from '../container';
 import { copy } from '../../../../common/object/object';
 import { CRaterService } from '../../../../services/cRaterService';
-import { CRaterRubric, getUniqueIdeas } from '../../../common/cRater/CRaterRubric';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { filter } from 'rxjs';
 import { generateRandomKey } from '../../../../common/string/string';
@@ -598,10 +597,7 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
       if (componentState.componentType === 'Match') {
         componentState.studentData.buckets.forEach((bucket) => mergeBucket(mergedBuckets, bucket));
       } else if (componentState.componentType === 'DialogGuidance') {
-        this.addIdeasToSourceBucket(
-          componentState.studentData.responses,
-          this.craterService.getCRaterRubric(componentState.nodeId, componentState.componentId)
-        );
+        this.addIdeasToSourceBucket(componentState);
       }
     });
     const mergedComponentState: any = this.createNewComponentState();
@@ -611,8 +607,10 @@ export class MatchStudentDefaultComponent extends ComponentStudent {
     return mergedComponentState;
   }
 
-  private addIdeasToSourceBucket(responses: any[], rubric: CRaterRubric): void {
-    getUniqueIdeas(responses, rubric)
+  private addIdeasToSourceBucket(componentState: any): void {
+    this.craterService
+      .getCRaterRubric(componentState.nodeId, componentState.componentId)
+      .getUniqueIdeas(componentState.studentData.responses)
       .filter((idea) => !this.isInSourceBucket(idea))
       .forEach((idea) => {
         const choice = new Choice(idea.name, idea.text);

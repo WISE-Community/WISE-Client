@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CRaterRubric, getUniqueIdeas } from '../../common/cRater/CRaterRubric';
+import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { CRaterIdea } from '../../common/cRater/CRaterIdea';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -17,6 +17,6 @@ export class DetectedIdeasComponent {
   @Input() responses: any;
 
   ngOnInit(): void {
-    this.ideas = getUniqueIdeas(this.responses, this.cRaterRubric);
+    this.ideas = this.cRaterRubric.getUniqueIdeas(this.responses);
   }
 }

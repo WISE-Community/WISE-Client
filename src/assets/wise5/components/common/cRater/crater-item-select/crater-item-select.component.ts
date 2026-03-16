@@ -15,6 +15,7 @@ export class CRaterItemSelectComponent {
   protected itemIds = [
     'berkeley_BowlsInAFridge',
     'berkeley_CarOnAColdDay',
+    'berkeley_Chloroplast',
     'berkeley_COAL-II',
     'berkeley_CovidImpacts',
     'berkeley_FoodJustice',
@@ -26,7 +27,8 @@ export class CRaterItemSelectComponent {
     'berkeley_MusicalInstruments-Speed',
     'berkeley_PhotoEnergyStory',
     'berkeley_PlateTectonics_MtHood',
-    'berkeley_SPOON-II'
+    'berkeley_SPOON-II',
+    'berkeley_Tadpole'
   ];
   protected selectedItemId: string;
 

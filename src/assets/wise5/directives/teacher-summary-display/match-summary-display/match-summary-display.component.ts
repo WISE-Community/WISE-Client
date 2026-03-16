@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatchContent } from '../../../components/match/MatchContent';
 import { MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
@@ -9,34 +9,17 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
 @Component({
   imports: [CommonModule, MatIconModule],
   selector: 'match-summary-display',
-  styles: `
-    @reference "tailwindcss";
-    h3,
-    .mat-subtitle-1 {
-      margin-bottom: 8px;
-      margin-top: 0;
-    }
-    .bucket {
-      @apply p-2 mb-2 rounded-md;
-    }
-    .choice {
-      @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm;
-    }
-    .mat-icon {
-      vertical-align: middle;
-    }
-    ul {
-      list-style-type: none;
-      margin-block-start: 0;
-      padding-inline-start: 0;
-    }
-  `,
+  styleUrls: [
+    './match-summary-display.component.scss',
+    '../../summary-display/summary-display.component.scss'
+  ],
   templateUrl: './match-summary-display.component.html'
 })
 export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent implements OnInit {
   protected bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
   private bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
   private bucketValues: Set<string> = new Set<string>();
+  @Input() expanded: boolean;
   protected isChoiceReuseMatch: boolean;
   private matchSummaryData: MatchSummaryData;
 

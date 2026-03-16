@@ -2,7 +2,7 @@
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 />
-<p i18n>Choose the step and component to show the summary data for:</p>
+<p i18n>Choose the step and activity to show the summary data for:</p>
 <div class="flex flex-row flex-wrap">
   <mat-form-field class="wide-drop-down">
     <mat-label i18n>Step</mat-label>
@@ -19,7 +19,7 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field class="wide-drop-down">
-    <mat-label i18n>Component</mat-label>
+    <mat-label i18n>Activity</mat-label>
     <mat-select
       [(ngModel)]="componentContent.summaryComponentId"
       (ngModelChange)="summaryComponentIdChanged()"
@@ -38,7 +38,7 @@
         >
           {{ componentIndex + 1 }}. {{ component.type }}
           @if (component.id === componentId) {
-            <span i18n>(This Component)</span>
+            <span i18n>(This activity)</span>
           }
         </mat-option>
       }
@@ -83,7 +83,7 @@
       [(ngModel)]="componentContent.requirementToSeeSummary"
       (ngModelChange)="componentChanged()"
     >
-      <mat-option value="completeComponent" i18n> Complete Component </mat-option>
+      <mat-option value="completeComponent" i18n> Complete Activity </mat-option>
       <mat-option value="submitWork" i18n> Submit Work </mat-option>
       <mat-option value="none" i18n> None </mat-option>
     </mat-select>

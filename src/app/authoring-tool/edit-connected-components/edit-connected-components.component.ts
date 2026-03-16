@@ -74,7 +74,7 @@ export class EditConnectedComponentsComponent implements OnInit {
   automaticallySetConnectedComponentFieldsIfPossible(connectedComponent: any): void {}
 
   deleteConnectedComponent(index: number): void {
-    if (confirm($localize`Are you sure you want to delete this connected component?`)) {
+    if (confirm($localize`Are you sure you want to delete this connected activity?`)) {
       this.connectedComponents.splice(index, 1);
       this.connectedComponentChanged();
     }

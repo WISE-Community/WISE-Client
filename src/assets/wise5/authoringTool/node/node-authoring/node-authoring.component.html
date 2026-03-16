@@ -14,7 +14,7 @@
   </button>
 </div>
 @if (components.length === 0 && !isGroupNode) {
-  <p i18n>This step does not have any components.</p>
+  <p i18n>This step does not have any activities.</p>
   <add-component [node]="node" (newComponentsEvent)="highlightComponents($event)" />
 }
 <div
@@ -62,7 +62,7 @@
                 mat-icon-button
                 (click)="$event.stopPropagation(); deleteComponent($event, i + 1, component)"
                 (keydown)="$event.stopPropagation()"
-                matTooltip="Delete Component"
+                matTooltip="Delete activity"
                 matTooltipPosition="above"
                 i18n-matTooltip
               >

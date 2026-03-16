@@ -54,12 +54,19 @@
     </div>
     <div class="flex gap-2 items-center flex-wrap mt-4 mb-2 mx-2">
       <h3 class="mat-body-1" i18n>Class Responses</h3>
-      <filter-components
-        [components]="components"
-        [selectedComponents]="visibleComponents"
-        (componentsChange)="setVisibleComponents($event)"
-      />
+      @if (classResponsesVisible) {
+        <filter-components
+          [components]="components"
+          [selectedComponents]="visibleComponents"
+          (componentsChange)="setVisibleComponents($event)"
+        />
+        <a href="#" class="mat-caption" (click)="toggleClassResponses($event)" i18n>Hide</a>
+      } @else {
+        <a href="#" class="mat-caption" (click)="toggleClassResponses($event)" i18n>Show</a>
+      }
     </div>
-    <node-class-responses [node]="node" [components]="visibleComponents" />
+    @if (classResponsesVisible) {
+      <node-class-responses [node]="node" [components]="visibleComponents" />
+    }
   </div>
 </div>

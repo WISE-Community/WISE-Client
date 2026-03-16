@@ -87,10 +87,6 @@ export class ShareRunDialogComponent extends ShareItemDialogComponent {
     });
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
   updateAllOwners() {
     let allOwners = [];
     allOwners.push({

@@ -475,7 +475,7 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field class="custom-completion-criteria-component">
-            <mat-label i18n>Component</mat-label>
+            <mat-label i18n>Activity</mat-label>
             <mat-select [(ngModel)]="criteria.componentId" (ngModelChange)="componentChanged()">
               @for (
                 component of getComponents(criteria.nodeId);
@@ -485,7 +485,7 @@
                 <mat-option [value]="component.id">
                   {{ componentIndex + 1 }}. {{ component.type }}
                   @if (component.id === componentId) {
-                    <span i18n>(This Component)</span>
+                    <span i18n>(This activity)</span>
                   }
                 </mat-option>
               }

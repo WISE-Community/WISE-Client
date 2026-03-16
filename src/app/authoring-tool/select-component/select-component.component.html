@@ -1,5 +1,5 @@
 <mat-form-field>
-  <mat-label i18n>Component</mat-label>
+  <mat-label i18n>Activity</mat-label>
   <mat-select [(ngModel)]="componentId" (ngModelChange)="componentChanged()">
     @for (component of components; track component; let componentIndex = $index) {
       <mat-option
@@ -8,7 +8,7 @@
       >
         <span>{{ componentIndex + 1 }}. {{ component.type }}</span>
         @if (component.id === thisComponentId) {
-          <span i18n>(This Component)</span>
+          <span i18n>(This activity)</span>
         }
       </mat-option>
     }

@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule, MatFormFieldModule, MatInputModule],
   selector: 'edit-component-width',
   template: `<mat-form-field>
-    <mat-label i18n>Component Width</mat-label>
+    <mat-label i18n>Activity Width</mat-label>
     <input
       matInput
       type="number"

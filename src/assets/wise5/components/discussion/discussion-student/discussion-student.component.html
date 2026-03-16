@@ -1,4 +1,6 @@
-<component-header [component]="component" />
+@if (mode !== 'summary') {
+  <component-header [component]="component" />
+}
 <div class="discussion-content">
   @if (mode === 'student') {
     <component-annotations
@@ -11,7 +13,7 @@
   }
   <div class="flex">
     <div class="discussion-posts w-full md:w-1/2">
-      @if (!isDisabled) {
+      @if (mode === 'student' && !isDisabled) {
         <mat-card
           appearance="outlined"
           class="discussion-new discussion-post"

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { CRaterIdea } from '../CRaterIdea';
-import { cRaterIdeaToIdeaData, ideaDataToCRaterIdea, sortIdeasById } from '../IdeaData';
+import { cRaterIdeaToIdeaData, IdeaData, sortIdeasById } from '../IdeaData';
 import { CRaterRubric } from '../CRaterRubric';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -17,20 +17,21 @@ export class CRaterRubricComponent {
   protected ideas: CRaterIdea[];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) protected cRaterRubric: CRaterRubric,
+    @Inject(MAT_DIALOG_DATA) protected rubric: CRaterRubric,
     private dialogRef: MatDialogRef<CRaterRubricComponent>,
     private rubricEventService: RubricEventService
   ) {}
 
   ngOnInit(): void {
-    this.ideas = sortIdeasById(this.cRaterRubric.ideas.map(cRaterIdeaToIdeaData)).map(
-      ideaDataToCRaterIdea
+    this.ideas = sortIdeasById(this.rubric.ideas.map(cRaterIdeaToIdeaData)).map(
+      (idea: IdeaData) =>
+        new CRaterIdea(idea.id, undefined, idea.text, idea.tags, this.rubric.getIdeaColor(idea.id))
     );
-    this.rubricEventService.rubricToggled();
+    this.rubricEventService.toggleRubricDisplayed();
   }
 
   ngOnDestroy(): void {
-    this.rubricEventService.rubricToggled();
+    this.rubricEventService.toggleRubricDisplayed();
   }
 
   protected closeDialog(): void {

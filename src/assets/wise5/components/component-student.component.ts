@@ -191,7 +191,7 @@ export abstract class ComponentStudent {
   }
 
   isForThisComponent(object: any): boolean {
-    return this.nodeId === object.nodeId && this.componentId === object.componentId;
+    return object.nodeId === this.nodeId && object.componentId === this.componentId;
   }
 
   isWorkFromClassmate(componentState: any): boolean {
