@@ -10840,6 +10840,17 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7053786808549278445" datatype="html">
+        <source>There was an error translating the text. Please talk to WISE staff.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/abstract-translatable-field/abstract-translatable-field.component.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="9041444200911417888" datatype="html">
         <source>Selected</source>
         <context-group purpose="location">
@@ -11020,7 +11031,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Choose image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8183679777797552825" datatype="html">
