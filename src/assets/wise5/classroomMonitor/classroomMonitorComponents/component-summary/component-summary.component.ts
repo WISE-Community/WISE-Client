@@ -17,7 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';
 import { OpenResponseSummaryDisplayComponent } from '../../../directives/teacher-summary-display/open-response-summary-display/open-response-summary-display.component';
 import { ProjectService } from '../../../services/projectService';
-import { DiscussionSummaryDisplayComponent } from '../../../directives/teacher-summary-display/discussion-summary-display/discussion-summary-display.component';
+import { DiscussionAiSummaryComponent } from '../../../directives/teacher-summary-display/discussion-ai-summary/discussion-ai-summary.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -31,7 +31,7 @@ import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-
 @Component({
   imports: [
     ComponentCompletionComponent,
-    DiscussionSummaryDisplayComponent,
+    DiscussionAiSummaryComponent,
     DiscussionSummaryComponent,
     IdeasSummaryComponent,
     MatButtonModule,

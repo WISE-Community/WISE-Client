@@ -12,12 +12,15 @@ interface Thread {
   replies: string[];
 }
 
+/**
+ * Uses an LLM to summarize student discussion threads.
+ */
 @Component({
   imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
-  selector: 'discussion-summary-display',
+  selector: 'discussion-ai-summary',
   templateUrl: '../ai-summary-display/ai-summary-display.component.html'
 })
-export class DiscussionSummaryDisplayComponent extends AiSummaryDisplayComponent {
+export class DiscussionAiSummaryComponent extends AiSummaryDisplayComponent {
   protected getSystemPrompt(prompt: string): string {
     return `You are a teacher who is summarizing students' discussion threads, which include posts and replies to the following question: "${prompt}".
       Each thread is in the format: <thread><post>Post</post><replies><reply>Reply 1</reply><reply>Reply 2</reply></replies></thread>.
