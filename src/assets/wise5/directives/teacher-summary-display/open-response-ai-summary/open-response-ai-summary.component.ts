@@ -9,10 +9,10 @@ import { AiSummaryDisplayComponent } from '../ai-summary-display/ai-summary-disp
 
 @Component({
   imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
-  selector: 'open-response-summary',
+  selector: 'open-response-ai-summary',
   templateUrl: '../ai-summary-display/ai-summary-display.component.html'
 })
-export class OpenResponseSummaryDisplayComponent extends AiSummaryDisplayComponent {
+export class OpenResponseAiSummaryComponent extends AiSummaryDisplayComponent {
   protected getSystemPrompt(prompt: string): string {
     return `You are a teacher who is summarizing student responses to the following question: "${prompt}".
       Each student response is in the format: <response>Response</response>.

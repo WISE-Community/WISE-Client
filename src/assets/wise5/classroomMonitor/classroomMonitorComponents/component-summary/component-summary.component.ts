@@ -15,7 +15,7 @@ import { IdeasSummaryComponent } from '../../../directives/teacher-summary-displ
 import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';
-import { OpenResponseSummaryDisplayComponent } from '../../../directives/teacher-summary-display/open-response-summary-display/open-response-summary-display.component';
+import { OpenResponseAiSummaryComponent } from '../../../directives/teacher-summary-display/open-response-ai-summary/open-response-ai-summary.component';
 import { ProjectService } from '../../../services/projectService';
 import { DiscussionAiSummaryComponent } from '../../../directives/teacher-summary-display/discussion-ai-summary/discussion-ai-summary.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,7 +39,7 @@ import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-
     MatIconModule,
     MatchSummaryDisplayComponent,
     MilestoneReportButtonComponent,
-    OpenResponseSummaryDisplayComponent,
+    OpenResponseAiSummaryComponent,
     NgTemplateOutlet,
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OpenResponseSummaryDisplayComponent } from './open-response-summary-display.component';
+import { OpenResponseAiSummaryComponent } from './open-response-ai-summary.component';
 import { MockComponent, MockProviders } from 'ng-mocks';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -14,9 +14,9 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { DataService } from '../../../../../app/services/data.service';
 import { MarkdownComponent, MarkdownService } from 'ngx-markdown';
 
-describe('OpenResponseSummaryDisplayComponent', () => {
-  let component: OpenResponseSummaryDisplayComponent;
-  let fixture: ComponentFixture<OpenResponseSummaryDisplayComponent>;
+describe('OpenResponseAiSummaryComponent', () => {
+  let component: OpenResponseAiSummaryComponent;
+  let fixture: ComponentFixture<OpenResponseAiSummaryComponent>;
   let awsBedRockService: AwsBedRockService;
   let localStorageService: LocalStorageService;
   let dataService: TeacherDataService;
@@ -24,7 +24,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OpenResponseSummaryDisplayComponent, MockComponent(MarkdownComponent)],
+      imports: [OpenResponseAiSummaryComponent, MockComponent(MarkdownComponent)],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -54,7 +54,7 @@ describe('OpenResponseSummaryDisplayComponent', () => {
       prompt: 'What is your opinion on climate change?'
     } as any);
 
-    fixture = TestBed.createComponent(OpenResponseSummaryDisplayComponent);
+    fixture = TestBed.createComponent(OpenResponseAiSummaryComponent);
     component = fixture.componentInstance;
     component.nodeId = 'node1';
     component.componentId = 'component1';
