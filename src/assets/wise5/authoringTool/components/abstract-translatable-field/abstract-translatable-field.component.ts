@@ -76,6 +76,9 @@ export abstract class AbstractTranslatableFieldComponent {
   }
 
   protected saveTranslationText(text: string): void {
+    if (this.i18nId === undefined) {
+      this.createI18NField();
+    }
     const currentTranslations = copy(this.projectTranslationService.currentTranslations());
     currentTranslations[this.i18nId] = { value: text, modified: new Date().getTime() };
     this.projectTranslationService.saveCurrentTranslations(currentTranslations).subscribe();
