@@ -22,6 +22,7 @@ export abstract class AuthorBranchService {
   ): void {
     const newNode = this.projectService.createNode($localize`Path ${pathIndex + 1}`);
     newNode.id = nodeId;
+    newNode.icon.color = this.projectService.getParentGroup(branchNode.id).icon.color;
     this.addTransitionFromBranchNodeToPathNode(params, branchNode, newNode, pathIndex);
     this.projectService.addNode(newNode);
     this.projectService.addApplicationNode(newNode);
