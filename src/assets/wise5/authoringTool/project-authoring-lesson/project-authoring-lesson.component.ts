@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, Signal, ViewEncapsulation } from '@angular/core';
-import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -123,5 +123,16 @@ export class ProjectAuthoringLessonComponent {
     this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
       this.projectService.refreshProject();
     });
+  }
+
+  // allow a step to drop anywhere except the first step in a first path of a branch activity
+  // otherwise, the step will be placed after a node that has multiple transitions, which is not allowed
+  protected notAfterBranchingNode(index: number, item: CdkDrag<any>): boolean {
+    if (index === 0) return true;
+    const nodesExceptItem = item.dropContainer.data.nodes.filter(
+      (nodeId) => nodeId !== item.data.id
+    );
+    const nodeBefore = item.dropContainer.data.idToNode[nodesExceptItem[index - 1]];
+    return nodeBefore.transitionLogic.transitions.length <= 1;
   }
 }

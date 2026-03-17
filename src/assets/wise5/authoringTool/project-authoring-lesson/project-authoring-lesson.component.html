@@ -68,9 +68,10 @@
   <div
     cdkDropList
     [id]="lesson.id"
-    [cdkDropListData]="{ groupId: lesson.id, nodes: lesson.ids }"
+    [cdkDropListData]="{ groupId: lesson.id, nodes: lesson.ids, idToNode: idToNode }"
     cdkDropListLockAxis="y"
     [cdkDropListConnectedTo]="allGroupIds"
+    [cdkDropListSortPredicate]="notAfterBranchingNode"
     (cdkDropListDropped)="dropNode($event)"
   >
     @for (childId of lesson.ids; track childId) {
