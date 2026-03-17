@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
+import { Component, inject, Input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { AwsBedRockService } from '../../../../../app/chatbot/awsBedRock.service';
@@ -9,27 +8,33 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { LocalStorageService } from '../../../../../app/services/localStorageService';
 import { MarkdownComponent } from 'ngx-markdown';
 import { DatePipe } from '@angular/common';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
+/**
+ * Abstract base class for components that use an LLM to summarize student responses.
+ */
 @Component({
   imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
   templateUrl: './ai-summary-display.component.html'
 })
-export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayComponent {
+export abstract class AiSummaryDisplayComponent {
+  @Input() componentId: string;
+  @Input() nodeId: string;
+  @Input() periodId: number;
+
   protected awsBedRockService: AwsBedRockService = inject(AwsBedRockService);
+  protected dataService: TeacherDataService = inject(TeacherDataService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  protected projectService: TeacherProjectService = inject(TeacherProjectService);
+
   protected generatingSummary: boolean = false;
   protected hasStudentResponses: boolean = false;
   protected latestComponentStates: any[] = [];
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
   protected newSummaryAvailable: boolean = false;
   protected summary: string;
   protected summaryDate: Date;
 
   ngOnInit(): void {
-    this.renderDisplay();
-  }
-
-  protected renderDisplay(): void {
-    super.renderDisplay();
     this.latestComponentStates = this.getLatestComponentStates();
     this.hasStudentResponses = this.latestComponentStates.length > 0;
     if (!this.hasStudentResponses) {
@@ -41,18 +46,18 @@ export abstract class AiSummaryDisplayComponent extends TeacherSummaryDisplayCom
     this.newSummaryAvailable = summaryTime > 0 && this.getLastResponseTime() > summaryTime;
   }
 
+  protected getLatestComponentStates(): any[] {
+    return this.dataService
+      .getComponentStatesByComponentId(this.componentId)
+      .filter((state) => state.periodId === this.periodId || this.periodId === -1)
+      .sort((a, b) => a.serverSaveTime - b.serverSaveTime);
+  }
+
   private getLastResponseTime(): number {
     return this.latestComponentStates.reduce(
       (max, state) => Math.max(max, state.serverSaveTime),
       0
     );
-  }
-
-  protected getLatestComponentStates(): any[] {
-    return (this.dataService as TeacherDataService)
-      .getComponentStatesByComponentId(this.componentId)
-      .filter((state) => state.periodId === this.periodId || this.periodId === -1)
-      .sort((a, b) => a.serverSaveTime - b.serverSaveTime);
   }
 
   protected async generateSummary(): Promise<void> {

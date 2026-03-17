@@ -13,6 +13,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { DataService } from '../../../../../app/services/data.service';
 import { MarkdownComponent, MarkdownService } from 'ngx-markdown';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 describe('OpenResponseAiSummaryComponent', () => {
   let component: OpenResponseAiSummaryComponent;
@@ -36,7 +37,7 @@ describe('OpenResponseAiSummaryComponent', () => {
           CRaterService,
           LocalStorageService,
           MarkdownService,
-          ProjectService,
+          TeacherProjectService,
           SummaryService,
           TeacherDataService
         )
@@ -45,8 +46,8 @@ describe('OpenResponseAiSummaryComponent', () => {
 
     awsBedRockService = TestBed.inject(AwsBedRockService);
     localStorageService = TestBed.inject(LocalStorageService);
-    dataService = TestBed.inject(TeacherDataService) as TeacherDataService;
-    projectService = TestBed.inject(ProjectService);
+    dataService = TestBed.inject(TeacherDataService);
+    projectService = TestBed.inject(TeacherProjectService);
 
     spyOn(projectService, 'getComponent').and.returnValue({
       id: 'component1',
@@ -62,14 +63,6 @@ describe('OpenResponseAiSummaryComponent', () => {
   });
 
   describe('ngOnInit', () => {
-    it('should call renderDisplay', () => {
-      spyOn(component as any, 'renderDisplay');
-      component.ngOnInit();
-      expect((component as any).renderDisplay).toHaveBeenCalled();
-    });
-  });
-
-  describe('renderDisplay', () => {
     it('should set hasStudentResponses to false when no component states exist', () => {
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue([]);
       component.ngOnInit();

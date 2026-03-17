@@ -2,11 +2,13 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { TeacherDataService } from '../../../services/teacherDataService';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MarkdownComponent } from 'ngx-markdown';
 import { AiSummaryDisplayComponent } from '../ai-summary-display/ai-summary-display.component';
 
+/**
+ * Uses an LLM to summarize students' responses to open response questions.
+ */
 @Component({
   imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
   selector: 'open-response-ai-summary',
@@ -26,7 +28,7 @@ export class OpenResponseAiSummaryComponent extends AiSummaryDisplayComponent {
     );
   }
   protected getLatestComponentStates(): any[] {
-    return (this.dataService as TeacherDataService)
+    return this.dataService
       .getComponentStatesByComponentId(this.componentId)
       .filter((state) => state.periodId === this.periodId || this.periodId === -1)
       .sort((a, b) => a.serverSaveTime - b.serverSaveTime)
