@@ -1,7 +1,7 @@
 <ng-template #bucketTemplate let-bucket="bucket" let-first="first">
   <div class="bucket" [ngClass]="{ 'selected-bg-bg': first, 'notice-bg-bg': !first }">
     <h3 class="mat-body-2">
-      {{ bucket.value }}
+      <span [innerHTML]="bucket.value"></span>
       @if (first) {
         (<span i18n>Source Bucket</span>)
       }
