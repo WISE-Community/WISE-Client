@@ -37,6 +37,9 @@ describe('MatchSummaryDisplayComponent', () => {
     spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
       of(getComponentStates())
     );
+    spyOn(TestBed.inject(ProjectService), 'injectAssetPaths').and.callFake((componentStates) => {
+      return componentStates;
+    });
     fixture = TestBed.createComponent(MatchSummaryDisplayComponent);
     component = fixture.componentInstance;
     component.nodeId = 'nId';
