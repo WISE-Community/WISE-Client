@@ -4,7 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MarkdownComponent } from 'ngx-markdown';
-import { AiSummaryDisplayComponent } from '../ai-summary-display/ai-summary-display.component';
+import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
 
 /**
  * Uses an LLM to summarize students' responses to open response questions.
@@ -12,9 +12,9 @@ import { AiSummaryDisplayComponent } from '../ai-summary-display/ai-summary-disp
 @Component({
   imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
   selector: 'open-response-ai-summary',
-  templateUrl: '../ai-summary-display/ai-summary-display.component.html'
+  templateUrl: '../ai-summary/ai-summary.component.html'
 })
-export class OpenResponseAiSummaryComponent extends AiSummaryDisplayComponent {
+export class OpenResponseAiSummaryComponent extends AiSummaryComponent {
   protected getSystemPrompt(prompt: string): string {
     return `You are a teacher who is summarizing student responses to the following question: "${prompt}".
       Each student response is in the format: <response>Response</response>.

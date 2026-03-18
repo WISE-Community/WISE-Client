@@ -3,7 +3,7 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MarkdownComponent } from 'ngx-markdown';
-import { AiSummaryDisplayComponent } from '../ai-summary-display/ai-summary-display.component';
+import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
 import { DatePipe } from '@angular/common';
 
 interface Thread {
@@ -18,9 +18,9 @@ interface Thread {
 @Component({
   imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
   selector: 'discussion-ai-summary',
-  templateUrl: '../ai-summary-display/ai-summary-display.component.html'
+  templateUrl: '../ai-summary/ai-summary.component.html'
 })
-export class DiscussionAiSummaryComponent extends AiSummaryDisplayComponent {
+export class DiscussionAiSummaryComponent extends AiSummaryComponent {
   protected getSystemPrompt(prompt: string): string {
     return `You are a teacher who is summarizing students' discussion threads, which include posts and replies to the following question: "${prompt}".
       Each thread is in the format: <thread><post>Post</post><replies><reply>Reply 1</reply><reply>Reply 2</reply></replies></thread>.

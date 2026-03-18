@@ -15,9 +15,9 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
  */
 @Component({
   imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
-  templateUrl: './ai-summary-display.component.html'
+  templateUrl: './ai-summary.component.html'
 })
-export abstract class AiSummaryDisplayComponent {
+export abstract class AiSummaryComponent {
   @Input() componentId: string;
   @Input() nodeId: string;
   @Input() periodId: number;
