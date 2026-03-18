@@ -15,11 +15,11 @@ import { ChatbotService } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
 import { Chat, ChatMessage } from './chat';
-import { AwsBedRockChatService } from '../services/chat/awsBedRockChat.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { MarkdownComponent } from 'ngx-markdown';
 import { ChatHistoryDialogComponent } from './chat-history-dialog.component';
 import { ChatService } from '../services/chat/chat.service';
+import { OpenAiChatService } from '../services/chat/openAiChat.service';
 
 @Component({
   imports: [
@@ -42,7 +42,7 @@ import { ChatService } from '../services/chat/chat.service';
 export class ChatbotComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private chatbotService: ChatbotService = inject(ChatbotService);
-  private chatService: ChatService = inject(AwsBedRockChatService);
+  private chatService: ChatService = inject(OpenAiChatService);
   private configService: ConfigService = inject(ConfigService);
   private dataService: DataService = inject(DataService);
   private projectService = inject(ProjectService);

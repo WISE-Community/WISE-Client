@@ -1,18 +1,18 @@
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { ChatMessage } from '../../chatbot/chat';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable({ providedIn: 'root' })
-export class ChatService {
-  protected chatEndpoint = '/api/chat-gpt';
+export abstract class ChatService {
+  protected abstract chatEndpoint: string;
+  protected abstract model: string;
+
   private http = inject(HttpClient);
-  protected model: string = 'gpt-3.5-turbo';
 
   /**
-   * Sends a message to the chat-gpt endpoint.
+   * Sends a message to the chat endpoint.
    * @param messages The conversation history.
-   * @returns A promise that resolves to the response from the chat-gpt endpoint.
+   * @returns A promise that resolves to the response from the chat endpoint.
    */
   async sendMessage(messages: ChatMessage[]): Promise<string> {
     const payload = {
