@@ -137,7 +137,7 @@ describe('ChatbotComponent', () => {
       component['userInput'] = userMessage;
 
       awsBedRockService.sendMessage.and.returnValue(Promise.resolve(assistantResponse));
-      awsBedRockService.generateChatTitle.and.returnValue(Promise.resolve('New Title'));
+      spyOn(component, 'generateChatTitle').and.returnValue(Promise.resolve('New Title'));
       await component['sendMessage']();
 
       expect(component['messages'].length).toBe(2);
@@ -159,11 +159,11 @@ describe('ChatbotComponent', () => {
       // First user message (only system message exists initially)
       component['messages'] = [];
       awsBedRockService.sendMessage.and.returnValue(Promise.resolve(assistantResponse));
-      awsBedRockService.generateChatTitle.and.returnValue(Promise.resolve(newTitle));
+      spyOn(component, 'generateChatTitle').and.returnValue(Promise.resolve(newTitle));
 
       await component['sendMessage']();
 
-      expect(awsBedRockService.generateChatTitle).toHaveBeenCalledWith(userMessage);
+      expect(component['generateChatTitle']).toHaveBeenCalledWith(userMessage);
       expect(component['currentChat']?.title).toBe(newTitle);
       expect(chatbotService.updateChat).toHaveBeenCalled();
     });
@@ -339,7 +339,7 @@ describe('ChatbotComponent', () => {
     it('should send message on Enter key press', () => {
       component['userInput'] = 'Hello';
       awsBedRockService.sendMessage.and.returnValue(Promise.resolve('Response'));
-      awsBedRockService.generateChatTitle.and.returnValue(Promise.resolve('New Title'));
+      spyOn(component, 'generateChatTitle').and.returnValue(Promise.resolve('New Title'));
 
       const event = new KeyboardEvent('keypress', { key: 'Enter' });
       spyOn(event, 'preventDefault');
