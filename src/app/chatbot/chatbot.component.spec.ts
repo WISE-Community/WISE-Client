@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatbotComponent } from './chatbot.component';
 import { ChatbotService } from './chatbot.service';
-import { AwsBedRockService } from './awsBedRock.service';
+import { AwsBedRockChatService } from '../services/chat/awsBedRockChat.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -14,7 +14,7 @@ describe('ChatbotComponent', () => {
   let component: ChatbotComponent;
   let fixture: ComponentFixture<ChatbotComponent>;
   let chatbotService: jasmine.SpyObj<ChatbotService>;
-  let awsBedRockService: jasmine.SpyObj<AwsBedRockService>;
+  let awsBedRockService: jasmine.SpyObj<AwsBedRockChatService>;
   let configService: jasmine.SpyObj<ConfigService>;
   let dataService: jasmine.SpyObj<DataService>;
   let projectService: jasmine.SpyObj<ProjectService>;
@@ -66,7 +66,7 @@ describe('ChatbotComponent', () => {
       imports: [ChatbotComponent],
       providers: [
         { provide: ChatbotService, useValue: chatbotServiceSpy },
-        { provide: AwsBedRockService, useValue: awsBedRockServiceSpy },
+        { provide: AwsBedRockChatService, useValue: awsBedRockServiceSpy },
         { provide: ConfigService, useValue: configServiceSpy },
         { provide: DataService, useValue: dataServiceSpy },
         { provide: ProjectService, useValue: projectServiceSpy },
@@ -76,7 +76,9 @@ describe('ChatbotComponent', () => {
     }).compileComponents();
 
     chatbotService = TestBed.inject(ChatbotService) as jasmine.SpyObj<ChatbotService>;
-    awsBedRockService = TestBed.inject(AwsBedRockService) as jasmine.SpyObj<AwsBedRockService>;
+    awsBedRockService = TestBed.inject(
+      AwsBedRockChatService
+    ) as jasmine.SpyObj<AwsBedRockChatService>;
     configService = TestBed.inject(ConfigService) as jasmine.SpyObj<ConfigService>;
     dataService = TestBed.inject(DataService) as jasmine.SpyObj<DataService>;
     projectService = TestBed.inject(ProjectService) as jasmine.SpyObj<ProjectService>;

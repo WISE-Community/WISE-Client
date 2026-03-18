@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { AwsBedRockService } from '../../../../../app/chatbot/awsBedRock.service';
+import { AwsBedRockChatService } from '../../../../../app/services/chat/awsBedRockChat.service';
 import { ChatMessage } from '../../../../../app/chatbot/chat';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -9,6 +9,7 @@ import { LocalStorageService } from '../../../../../app/services/localStorageSer
 import { MarkdownComponent } from 'ngx-markdown';
 import { DatePipe } from '@angular/common';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ChatService } from '../../../../../app/services/chat/chat.service';
 
 /**
  * Abstract base class for components that use an LLM to summarize student responses.
@@ -22,7 +23,7 @@ export abstract class AiSummaryComponent {
   @Input() nodeId: string;
   @Input() periodId: number;
 
-  protected awsBedRockService: AwsBedRockService = inject(AwsBedRockService);
+  private chatService: ChatService = inject(AwsBedRockChatService);
   protected dataService: TeacherDataService = inject(TeacherDataService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   protected projectService: TeacherProjectService = inject(TeacherProjectService);
@@ -37,13 +38,12 @@ export abstract class AiSummaryComponent {
   ngOnInit(): void {
     this.latestComponentStates = this.getLatestComponentStates();
     this.hasStudentResponses = this.latestComponentStates.length > 0;
-    if (!this.hasStudentResponses) {
-      return;
+    if (this.hasStudentResponses) {
+      this.summary = this.localStorageService.getItem(this.getSummaryKey()) || '';
+      const summaryTime = this.localStorageService.getItem(this.getSummaryTimeKey()) || 0;
+      this.summaryDate = new Date(summaryTime);
+      this.newSummaryAvailable = summaryTime > 0 && this.getLastResponseTime() > summaryTime;
     }
-    this.summary = this.localStorageService.getItem(this.getSummaryKey()) || '';
-    const summaryTime = this.localStorageService.getItem(this.getSummaryTimeKey()) || 0;
-    this.summaryDate = new Date(summaryTime);
-    this.newSummaryAvailable = summaryTime > 0 && this.getLastResponseTime() > summaryTime;
   }
 
   protected getLatestComponentStates(): any[] {
@@ -63,7 +63,7 @@ export abstract class AiSummaryComponent {
   protected async generateSummary(): Promise<void> {
     this.generatingSummary = true;
     const prompt = this.projectService.getComponent(this.nodeId, this.componentId).prompt;
-    this.summary = await this.awsBedRockService.sendMessage([
+    this.summary = await this.chatService.sendMessage([
       new ChatMessage('system', this.getSystemPrompt(prompt), this.nodeId),
       new ChatMessage('user', this.getStudentResponses(), this.nodeId)
     ]);

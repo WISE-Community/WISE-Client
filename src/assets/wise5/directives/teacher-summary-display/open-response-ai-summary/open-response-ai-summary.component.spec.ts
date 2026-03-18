@@ -6,7 +6,7 @@ import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
 import { ProjectService } from '../../../services/projectService';
 import { SummaryService } from '../../../components/summary/summaryService';
-import { AwsBedRockService } from '../../../../../app/chatbot/awsBedRock.service';
+import { AwsBedRockChatService } from '../../../../../app/services/chat/awsBedRockChat.service';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { LocalStorageService } from '../../../../../app/services/localStorageService';
 import { provideHttpClient } from '@angular/common/http';
@@ -18,7 +18,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 describe('OpenResponseAiSummaryComponent', () => {
   let component: OpenResponseAiSummaryComponent;
   let fixture: ComponentFixture<OpenResponseAiSummaryComponent>;
-  let awsBedRockService: AwsBedRockService;
+  let awsBedRockService: AwsBedRockChatService;
   let localStorageService: LocalStorageService;
   let dataService: TeacherDataService;
   let projectService: ProjectService;
@@ -32,7 +32,7 @@ describe('OpenResponseAiSummaryComponent', () => {
         { provide: DataService, useExisting: TeacherDataService },
         MockProviders(
           AnnotationService,
-          AwsBedRockService,
+          AwsBedRockChatService,
           ConfigService,
           CRaterService,
           LocalStorageService,
@@ -44,7 +44,7 @@ describe('OpenResponseAiSummaryComponent', () => {
       ]
     }).compileComponents();
 
-    awsBedRockService = TestBed.inject(AwsBedRockService);
+    awsBedRockService = TestBed.inject(AwsBedRockChatService);
     localStorageService = TestBed.inject(LocalStorageService);
     dataService = TestBed.inject(TeacherDataService);
     projectService = TestBed.inject(TeacherProjectService);

@@ -15,7 +15,7 @@ import { ChatbotService } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
 import { Chat, ChatMessage } from './chat';
-import { AwsBedRockService } from './awsBedRock.service';
+import { AwsBedRockChatService } from '../services/chat/awsBedRockChat.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { MarkdownComponent } from 'ngx-markdown';
 import { ChatHistoryDialogComponent } from './chat-history-dialog.component';
@@ -42,7 +42,7 @@ import { MatDividerModule } from '@angular/material/divider';
 export class ChatbotComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private chatbotService: ChatbotService = inject(ChatbotService);
-  private awsBedRockService: AwsBedRockService = inject(AwsBedRockService);
+  private awsBedRockService: AwsBedRockChatService = inject(AwsBedRockChatService);
   private configService: ConfigService = inject(ConfigService);
   private dataService: DataService = inject(DataService);
   private projectService = inject(ProjectService);
