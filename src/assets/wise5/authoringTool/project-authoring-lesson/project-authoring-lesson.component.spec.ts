@@ -47,11 +47,13 @@ describe('ProjectAuthoringLessonComponent', () => {
           CopyTranslationsService,
           DeleteNodeService,
           DeleteTranslationsService,
-          MoveNodesService,
           ProjectService,
           TeacherDataService,
           TeacherProjectTranslationService
         ),
+        MockProvider(MoveNodesService, {
+          getIsDragging: () => signal<boolean>(false)
+        }),
         MockProvider(TeacherProjectService, {
           getNodeTypeSelected: () => signal<NodeTypeSelected>(NodeTypeSelected.lesson),
           projectParsed$: of()
