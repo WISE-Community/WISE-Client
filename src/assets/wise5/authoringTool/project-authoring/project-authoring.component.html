@@ -1,5 +1,5 @@
 <div cdkDropListGroup>
-  <div class="project-content flex flex-row flex-wrap gap-4">
+  <div class="sticky top-0 z-2 bg-white p-3 -mx-2 flex flex-row flex-wrap gap-2">
     <p>
       <mat-slide-toggle [(ngModel)]="batchEditMode" i18n>Batch edit mode</mat-slide-toggle>
     </p>
@@ -67,6 +67,7 @@
       cdkDropListLockAxis="y"
       cdkDropListAutoScrollStep="10"
       (cdkDropListDropped)="dropGroup($event)"
+      class="flex flex-col gap-2"
     >
       @if (lessons.length === 0) {
         <div class="flex flex-row justify-start items-center">
@@ -107,32 +108,27 @@
       >
         <h6 class="unused-header" i18n>Unused Lessons</h6>
         @if (inactiveGroupNodes.length === 0) {
-          <div class="flex flex-row justify-start items-center">
-            <div i18n>There are no unused lessons</div>
-            <add-lesson-button />
-          </div>
+          <p i18n>There are no unused lessons</p>
         } @else {
           <div class="flex flex-col gap-2">
             @for (groupNode of inactiveGroupNodes; track groupNode.id; let first = $first) {
-              <div class="flex flex-row gap-1">
-                <project-authoring-lesson
-                  [batchEditMode]="batchEditMode"
-                  [lesson]="groupNode"
-                  (selectNodeEvent)="selectNode($event)"
-                  [showPosition]="false"
-                  [projectId]="projectId"
-                  [expanded]="lessonIdToExpanded()[groupNode.id]"
-                  (onExpandedChanged)="onExpandedChanged($event)"
-                  class="flex grow"
-                />
-                <add-lesson-button [first]="first" [lessonId]="groupNode.id" />
-              </div>
+              <project-authoring-lesson
+                [batchEditMode]="batchEditMode"
+                [lesson]="groupNode"
+                (selectNodeEvent)="selectNode($event)"
+                [showPosition]="false"
+                [projectId]="projectId"
+                [expanded]="lessonIdToExpanded()[groupNode.id]"
+                (onExpandedChanged)="onExpandedChanged($event)"
+                class="flex grow"
+              />
             }
           </div>
         }
       </div>
       <div
         cdkDropList
+        class="flex flex-col gap-1"
         id="inactiveSteps"
         [cdkDropListData]="{ type: 'inactiveSteps', nodes: inactiveStepNodes }"
         cdkDropListLockAxis="y"
@@ -143,7 +139,7 @@
       >
         <h6 class="unused-header" i18n>Unused Steps</h6>
         @if (inactiveStepNodes.length === 0) {
-          <div i18n>There are no unused steps</div>
+          <p i18n>There are no unused steps</p>
         } @else {
           @for (inactiveStepNode of inactiveStepNodes; track inactiveStepNode.id) {
             @if (getParentGroup(inactiveStepNode.id) == null) {

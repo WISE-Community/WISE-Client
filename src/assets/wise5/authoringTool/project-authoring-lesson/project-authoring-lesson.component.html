@@ -9,7 +9,6 @@
   (cdkDragEnded)="drag(false)"
   [id]="lesson.id"
 >
-  <div class="drag-placeholder flex grow" *cdkDragPlaceholder></div>
   <mat-expansion-panel-header aria-label="Expand/collapse lesson" i18n-aria-label>
     <mat-panel-title>
       @if (batchEditMode) {
@@ -25,6 +24,7 @@
       } @else {
         <mat-icon
           cdkDragHandle
+          class="cursor-move me-2"
           (click)="$event.stopPropagation()"
           title="Drag to reorder"
           i18n-title
@@ -68,6 +68,7 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div
+    class="ps-6 flex flex-col gap-1"
     cdkDropList
     [id]="lesson.id"
     [cdkDropListData]="{ groupId: lesson.id, nodes: lesson.ids, idToNode: idToNode }"
@@ -84,14 +85,15 @@
           (selectNodeEvent)="selectNodeEvent.emit($event)"
           [showPosition]="showPosition"
           [projectId]="projectId"
+          class="grow"
           (dragStarted)="drag(true)"
           (dragEnded)="drag(false)"
         />
-        <add-step-button [nodeId]="childId" />
+        <add-step-button [nodeId]="childId" [class.hidden]="isDragging()" />
       </div>
     }
     @if (lesson.ids.length === 0) {
-      <div class="no-steps-message flex justify-start items-center">
+      <div class="px-2 flex justify-start items-center">
         <div i18n>This lesson has no steps</div>
         <button
           mat-icon-button
@@ -106,4 +108,5 @@
       </div>
     }
   </div>
+  <div class="drag-placeholder" *cdkDragPlaceholder></div>
 </mat-expansion-panel>

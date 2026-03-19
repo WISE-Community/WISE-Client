@@ -19,6 +19,9 @@ import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
+  host: {
+    '[class.branch-path-step]': 'isNodeInAnyBranchPath(step.id)'
+  },
   imports: [
     CommonModule,
     DragDropModule,

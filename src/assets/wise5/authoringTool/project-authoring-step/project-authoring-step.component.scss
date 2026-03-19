@@ -1,19 +1,15 @@
 .step {
   height: 50px;
   padding: 4px;
-  margin: 4px 4px 4px 30px;
   border: 2px solid #dddddd;
   border-radius: 6px;
   position: relative;
   cursor: pointer;
+  background-color: white;
 }
 
 .step:hover {
   background-color: #add8e6 !important;
-}
-
-.branch-path-step {
-  margin-left: 55px !important;
 }
 
 .step-action {
@@ -32,11 +28,4 @@
 
 .tooltip-helper {
   height: 100%;
-}
-
-.drag-placeholder {
-  background: #ccc;
-  border: dotted 3px #999;
-  min-height: 60px;
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

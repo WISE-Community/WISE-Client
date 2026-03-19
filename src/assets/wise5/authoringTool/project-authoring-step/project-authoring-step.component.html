@@ -1,7 +1,6 @@
 <div
   id="{{ step.id }}"
   class="step flex justify-start items-center gap-2 grow"
-  [ngClass]="{ 'branch-path-step': isNodeInAnyBranchPath(step.id) }"
   [ngStyle]="{ 'background-color': getStepBackgroundColor(step.id) }"
   (click)="setCurrentNode(step.id)"
   (keyup.enter)="setCurrentNode(step.id)"
@@ -25,8 +24,12 @@
       i18n-aria-label
     />
   } @else if (!branchPoint) {
-    <div class="drag-placeholder flex grow" *cdkDragPlaceholder></div>
-    <mat-icon cdkDragHandle (click)="$event.stopPropagation()" title="Drag to reorder" i18n-title
+    <mat-icon
+      cdkDragHandle
+      class="cursor-move"
+      (click)="$event.stopPropagation()"
+      title="Drag to reorder"
+      i18n-title
       >drag_indicator</mat-icon
     >
   }
@@ -76,7 +79,6 @@
     matTooltipPosition="above"
     i18n-matTooltip
   ></div>
-  <!-- <div class="dynamic-step-buttons"> -->
   <div class="flex justify-start items-center">
     @if (!branchPoint) {
       <button
@@ -111,5 +113,5 @@
       <mat-icon>delete</mat-icon>
     </button>
   </div>
-  <!-- </div> -->
+  <div class="drag-placeholder" *cdkDragPlaceholder></div>
 </div>
