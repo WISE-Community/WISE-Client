@@ -6,7 +6,6 @@ import { ConfigService } from '../../../services/configService';
 import { CRaterService } from '../../../services/cRaterService';
 import { ProjectService } from '../../../services/projectService';
 import { SummaryService } from '../../../components/summary/summaryService';
-import { AwsBedRockChatService } from '../../../../../app/services/chat/awsBedRockChat.service';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { LocalStorageService } from '../../../../../app/services/localStorageService';
 import { provideHttpClient } from '@angular/common/http';
@@ -14,11 +13,13 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { DataService } from '../../../../../app/services/data.service';
 import { MarkdownComponent, MarkdownService } from 'ngx-markdown';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ChatService } from '../../../../../app/services/chat/chat.service';
+import { OpenAiChatService } from '../../../../../app/services/chat/openAiChat.service';
 
 describe('OpenResponseAiSummaryComponent', () => {
   let component: OpenResponseAiSummaryComponent;
   let fixture: ComponentFixture<OpenResponseAiSummaryComponent>;
-  let awsBedRockService: AwsBedRockChatService;
+  let chatService: ChatService;
   let localStorageService: LocalStorageService;
   let dataService: TeacherDataService;
   let projectService: ProjectService;
@@ -32,11 +33,11 @@ describe('OpenResponseAiSummaryComponent', () => {
         { provide: DataService, useExisting: TeacherDataService },
         MockProviders(
           AnnotationService,
-          AwsBedRockChatService,
           ConfigService,
           CRaterService,
           LocalStorageService,
           MarkdownService,
+          OpenAiChatService,
           TeacherProjectService,
           SummaryService,
           TeacherDataService
@@ -44,7 +45,7 @@ describe('OpenResponseAiSummaryComponent', () => {
       ]
     }).compileComponents();
 
-    awsBedRockService = TestBed.inject(AwsBedRockChatService);
+    chatService = TestBed.inject(OpenAiChatService);
     localStorageService = TestBed.inject(LocalStorageService);
     dataService = TestBed.inject(TeacherDataService);
     projectService = TestBed.inject(TeacherProjectService);
@@ -164,8 +165,8 @@ describe('OpenResponseAiSummaryComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should call awsBedRockService with correct system prompt', async () => {
-      const sendMessageSpy = spyOn(awsBedRockService, 'sendMessage').and.returnValue(
+    it('should call chatService with correct system prompt', async () => {
+      const sendMessageSpy = spyOn(chatService, 'sendMessage').and.returnValue(
         Promise.resolve('Generated summary')
       );
       await component['generateSummary']();
@@ -174,8 +175,8 @@ describe('OpenResponseAiSummaryComponent', () => {
       expect(messages[0].content).toContain('What is your opinion on climate change?');
     });
 
-    it('should call awsBedRockService with student responses', async () => {
-      const sendMessageSpy = spyOn(awsBedRockService, 'sendMessage').and.returnValue(
+    it('should call chatService with student responses', async () => {
+      const sendMessageSpy = spyOn(chatService, 'sendMessage').and.returnValue(
         Promise.resolve('Generated summary')
       );
       await component['generateSummary']();
@@ -187,7 +188,7 @@ describe('OpenResponseAiSummaryComponent', () => {
 
     it('should save summary to localStorage', async () => {
       const generatedSummary = 'This is a generated summary';
-      spyOn(awsBedRockService, 'sendMessage').and.returnValue(Promise.resolve(generatedSummary));
+      spyOn(chatService, 'sendMessage').and.returnValue(Promise.resolve(generatedSummary));
       const setItemSpy = spyOn(localStorageService, 'setItem');
       await component['generateSummary']();
       expect(setItemSpy).toHaveBeenCalledWith(
@@ -197,7 +198,7 @@ describe('OpenResponseAiSummaryComponent', () => {
     });
 
     it('should save timestamp to localStorage', async () => {
-      spyOn(awsBedRockService, 'sendMessage').and.returnValue(Promise.resolve('Generated summary'));
+      spyOn(chatService, 'sendMessage').and.returnValue(Promise.resolve('Generated summary'));
       const setItemSpy = spyOn(localStorageService, 'setItem');
       const beforeTime = new Date().getTime();
       await component['generateSummary']();
@@ -209,21 +210,21 @@ describe('OpenResponseAiSummaryComponent', () => {
     });
 
     it('should set generatingSummary to false after completion', async () => {
-      spyOn(awsBedRockService, 'sendMessage').and.returnValue(Promise.resolve('Generated summary'));
+      spyOn(chatService, 'sendMessage').and.returnValue(Promise.resolve('Generated summary'));
       await component['generateSummary']();
       expect(component['generatingSummary']).toBe(false);
     });
 
     it('should set newSummaryAvailable to false after generation', async () => {
       component['newSummaryAvailable'] = true;
-      spyOn(awsBedRockService, 'sendMessage').and.returnValue(Promise.resolve('Generated summary'));
+      spyOn(chatService, 'sendMessage').and.returnValue(Promise.resolve('Generated summary'));
       await component['generateSummary']();
       expect(component['newSummaryAvailable']).toBe(false);
     });
 
     it('should update summary property', async () => {
       const generatedSummary = 'This is a generated summary';
-      spyOn(awsBedRockService, 'sendMessage').and.returnValue(Promise.resolve(generatedSummary));
+      spyOn(chatService, 'sendMessage').and.returnValue(Promise.resolve(generatedSummary));
       await component['generateSummary']();
       expect(component['summary']).toBe(generatedSummary);
     });

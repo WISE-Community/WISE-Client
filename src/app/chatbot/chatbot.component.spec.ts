@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatbotComponent } from './chatbot.component';
 import { ChatbotService } from './chatbot.service';
-import { AwsBedRockChatService } from '../services/chat/awsBedRockChat.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
@@ -9,12 +8,13 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { of, throwError } from 'rxjs';
 import { Chat, ChatMessage } from './chat';
 import { provideHttpClient } from '@angular/common/http';
+import { OpenAiChatService } from '../services/chat/openAiChat.service';
 
 describe('ChatbotComponent', () => {
   let component: ChatbotComponent;
   let fixture: ComponentFixture<ChatbotComponent>;
   let chatbotService: jasmine.SpyObj<ChatbotService>;
-  let awsBedRockService: jasmine.SpyObj<AwsBedRockChatService>;
+  let chatService: jasmine.SpyObj<OpenAiChatService>;
   let configService: jasmine.SpyObj<ConfigService>;
   let dataService: jasmine.SpyObj<DataService>;
   let projectService: jasmine.SpyObj<ProjectService>;
@@ -41,7 +41,7 @@ describe('ChatbotComponent', () => {
       'updateChat',
       'deleteChat'
     ]);
-    const awsBedRockServiceSpy = jasmine.createSpyObj('AwsBedRockService', [
+    const chatServiceSpy = jasmine.createSpyObj('OpenAiChatService', [
       'sendMessage',
       'generateChatTitle'
     ]);
@@ -66,7 +66,7 @@ describe('ChatbotComponent', () => {
       imports: [ChatbotComponent],
       providers: [
         { provide: ChatbotService, useValue: chatbotServiceSpy },
-        { provide: AwsBedRockChatService, useValue: awsBedRockServiceSpy },
+        { provide: OpenAiChatService, useValue: chatServiceSpy },
         { provide: ConfigService, useValue: configServiceSpy },
         { provide: DataService, useValue: dataServiceSpy },
         { provide: ProjectService, useValue: projectServiceSpy },
@@ -76,9 +76,7 @@ describe('ChatbotComponent', () => {
     }).compileComponents();
 
     chatbotService = TestBed.inject(ChatbotService) as jasmine.SpyObj<ChatbotService>;
-    awsBedRockService = TestBed.inject(
-      AwsBedRockChatService
-    ) as jasmine.SpyObj<AwsBedRockChatService>;
+    chatService = TestBed.inject(OpenAiChatService) as jasmine.SpyObj<OpenAiChatService>;
     configService = TestBed.inject(ConfigService) as jasmine.SpyObj<ConfigService>;
     dataService = TestBed.inject(DataService) as jasmine.SpyObj<DataService>;
     projectService = TestBed.inject(ProjectService) as jasmine.SpyObj<ProjectService>;
@@ -136,7 +134,7 @@ describe('ChatbotComponent', () => {
       const assistantResponse = 'Hi there!';
       component['userInput'] = userMessage;
 
-      awsBedRockService.sendMessage.and.returnValue(Promise.resolve(assistantResponse));
+      chatService.sendMessage.and.returnValue(Promise.resolve(assistantResponse));
       spyOn(component, 'generateChatTitle').and.returnValue(Promise.resolve('New Title'));
       await component['sendMessage']();
 
@@ -158,7 +156,7 @@ describe('ChatbotComponent', () => {
 
       // First user message (only system message exists initially)
       component['messages'] = [];
-      awsBedRockService.sendMessage.and.returnValue(Promise.resolve(assistantResponse));
+      chatService.sendMessage.and.returnValue(Promise.resolve(assistantResponse));
       spyOn(component, 'generateChatTitle').and.returnValue(Promise.resolve(newTitle));
 
       await component['sendMessage']();
@@ -173,7 +171,7 @@ describe('ChatbotComponent', () => {
 
       await component['sendMessage']();
 
-      expect(awsBedRockService.sendMessage).not.toHaveBeenCalled();
+      expect(chatService.sendMessage).not.toHaveBeenCalled();
       expect(component['messages'].length).toBe(0);
     });
 
@@ -183,7 +181,7 @@ describe('ChatbotComponent', () => {
 
       await component['sendMessage']();
 
-      expect(awsBedRockService.sendMessage).not.toHaveBeenCalled();
+      expect(chatService.sendMessage).not.toHaveBeenCalled();
     });
 
     it('should not send messages when no current chat', async () => {
@@ -192,12 +190,12 @@ describe('ChatbotComponent', () => {
 
       await component['sendMessage']();
 
-      expect(awsBedRockService.sendMessage).not.toHaveBeenCalled();
+      expect(chatService.sendMessage).not.toHaveBeenCalled();
     });
 
     it('should handle errors when sending messages', async () => {
       component['userInput'] = 'Hello';
-      awsBedRockService.sendMessage.and.returnValue(Promise.reject(new Error('API error')));
+      chatService.sendMessage.and.returnValue(Promise.reject(new Error('API error')));
 
       await component['sendMessage']();
 
@@ -338,7 +336,7 @@ describe('ChatbotComponent', () => {
 
     it('should send message on Enter key press', () => {
       component['userInput'] = 'Hello';
-      awsBedRockService.sendMessage.and.returnValue(Promise.resolve('Response'));
+      chatService.sendMessage.and.returnValue(Promise.resolve('Response'));
       spyOn(component, 'generateChatTitle').and.returnValue(Promise.resolve('New Title'));
 
       const event = new KeyboardEvent('keypress', { key: 'Enter' });
@@ -358,7 +356,7 @@ describe('ChatbotComponent', () => {
       component['handleKeyPress'](event);
 
       expect(event.preventDefault).not.toHaveBeenCalled();
-      expect(awsBedRockService.sendMessage).not.toHaveBeenCalled();
+      expect(chatService.sendMessage).not.toHaveBeenCalled();
     });
   });
 
