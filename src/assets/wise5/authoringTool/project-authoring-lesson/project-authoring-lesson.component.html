@@ -5,6 +5,8 @@
   (closed)="toggleExpanded(false)"
   cdkDrag
   [cdkDragData]="{ type: 'group', id: lesson.id }"
+  (cdkDragStarted)="drag(true)"
+  (cdkDragEnded)="drag(false)"
   [id]="lesson.id"
 >
   <div class="drag-placeholder flex grow" *cdkDragPlaceholder></div>
@@ -82,7 +84,8 @@
           (selectNodeEvent)="selectNodeEvent.emit($event)"
           [showPosition]="showPosition"
           [projectId]="projectId"
-          class="flex grow"
+          (dragStarted)="drag(true)"
+          (dragEnded)="drag(false)"
         />
         <add-step-button [nodeId]="childId" />
       </div>

@@ -10,6 +10,8 @@
   cdkDrag
   [cdkDragDisabled]="branchPoint"
   [cdkDragData]="{ type: 'step', id: step.id }"
+  (cdkDragStarted)="drag(true)"
+  (cdkDragEnded)="drag(false)"
   aria-label="Edit step"
   i18n-aria-label
 >

@@ -71,7 +71,7 @@
       @if (lessons.length === 0) {
         <div class="flex flex-row justify-start items-center">
           <div i18n>There are no lessons</div>
-          <add-lesson-button [active]="true" />
+          <add-lesson-button [active]="true" [class.hidden]="isDragging()" />
         </div>
       } @else {
         @for (lesson of lessons; track lesson.id; let first = $first) {
@@ -86,7 +86,12 @@
               (onExpandedChanged)="onExpandedChanged($event)"
               class="flex grow"
             />
-            <add-lesson-button [active]="true" [first]="first" [lessonId]="lesson.id" />
+            <add-lesson-button
+              [active]="true"
+              [first]="first"
+              [lessonId]="lesson.id"
+              [class.hidden]="isDragging()"
+            />
           </div>
         }
       }
@@ -144,6 +149,8 @@
             @if (getParentGroup(inactiveStepNode.id) == null) {
               <project-authoring-step
                 [batchEditMode]="batchEditMode"
+                (dragStarted)="drag(true)"
+                (dragEnded)="drag(false)"
                 [step]="inactiveStepNode"
                 (selectNodeEvent)="selectNode($event)"
                 [showPosition]="false"

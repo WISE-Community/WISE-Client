@@ -49,6 +49,7 @@ export class ProjectAuthoringComponent implements OnInit {
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
+  protected isDragging: Signal<boolean>;
   protected items: any;
   protected lessons: any[] = [];
   protected lessonIdToExpanded: WritableSignal<{ [key: string]: boolean }> = signal({});
@@ -74,6 +75,7 @@ export class ProjectAuthoringComponent implements OnInit {
     this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
     this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
+    this.isDragging = this.moveNodesService.getIsDragging();
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
@@ -305,5 +307,9 @@ export class ProjectAuthoringComponent implements OnInit {
 
   protected stepPredicate(item: CdkDrag<any>): boolean {
     return item.data.type === 'step';
+  }
+
+  protected drag(isDragging: boolean): void {
+    this.moveNodesService.setIsDragging(isDragging);
   }
 }

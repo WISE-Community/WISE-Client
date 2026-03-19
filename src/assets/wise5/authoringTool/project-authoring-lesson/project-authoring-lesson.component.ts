@@ -44,6 +44,7 @@ export class ProjectAuthoringLessonComponent {
   @Input() expanded: boolean = true;
   @Output() onExpandedChanged: EventEmitter<ExpandEvent> = new EventEmitter<ExpandEvent>();
   protected idToNode: any = {};
+  protected isDragging: Signal<boolean>;
   @Input() lesson: any;
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
@@ -64,6 +65,7 @@ export class ProjectAuthoringLessonComponent {
     this.allGroupIds = this.projectService.getAllGroupIds();
     this.idToNode = this.projectService.idToNode;
     this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
+    this.isDragging = this.moveNodesService.getIsDragging();
   }
 
   protected selectNode(checked: boolean): void {
@@ -134,5 +136,9 @@ export class ProjectAuthoringLessonComponent {
     );
     const nodeBefore = item.dropContainer.data.idToNode[nodesExceptItem[index - 1]];
     return nodeBefore.transitionLogic.transitions.length <= 1;
+  }
+
+  protected drag(isDragging: boolean): void {
+    this.moveNodesService.setIsDragging(isDragging);
   }
 }

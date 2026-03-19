@@ -36,6 +36,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 export class ProjectAuthoringStepComponent {
   @Input() batchEditMode: boolean;
   protected branchPoint: boolean;
+  @Output() dragStarted: EventEmitter<void> = new EventEmitter<void>();
+  @Output() dragEnded: EventEmitter<void> = new EventEmitter<void>();
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
@@ -172,5 +174,13 @@ export class ProjectAuthoringStepComponent {
   private saveAndRefreshProject(): void {
     this.projectService.saveProject();
     this.projectService.refreshProject();
+  }
+
+  protected drag(isDragging: boolean): void {
+    if (isDragging) {
+      this.dragStarted.emit();
+    } else {
+      this.dragEnded.emit();
+    }
   }
 }
