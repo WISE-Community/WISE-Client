@@ -1,7 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { AwsBedRockChatService } from '../../../../../app/services/chat/awsBedRockChat.service';
 import { ChatMessage } from '../../../../../app/chatbot/chat';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -10,6 +9,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { DatePipe } from '@angular/common';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ChatService } from '../../../../../app/services/chat/chat.service';
+import { OpenAiChatService } from '../../../../../app/services/chat/openAiChat.service';
 
 /**
  * Abstract base class for components that use an LLM to summarize student responses.
@@ -23,7 +23,7 @@ export abstract class AiSummaryComponent {
   @Input() nodeId: string;
   @Input() periodId: number;
 
-  private chatService: ChatService = inject(AwsBedRockChatService);
+  private chatService: ChatService = inject(OpenAiChatService);
   protected dataService: TeacherDataService = inject(TeacherDataService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   protected projectService: TeacherProjectService = inject(TeacherProjectService);
