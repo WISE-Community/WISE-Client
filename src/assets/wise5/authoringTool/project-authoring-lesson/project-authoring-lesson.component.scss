@@ -31,3 +31,10 @@
   min-height: 60px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+.cdk-drag-preview {
+  height: auto !important;
+
+  .mat-expansion-panel-content-wrapper {
+    display: none;
+  }
+}
