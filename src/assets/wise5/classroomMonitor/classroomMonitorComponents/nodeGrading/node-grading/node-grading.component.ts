@@ -102,7 +102,7 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
       .filter((component) => this.projectService.componentHasWork(component))
       .map((component, index) => {
         component['displayIndex'] = index + 1;
-        return component;
+        return this.projectService.injectAssetPaths(component);
       });
     this.visibleComponents = [this.components[0]];
     this.numRubrics = this.node.getNumRubrics();

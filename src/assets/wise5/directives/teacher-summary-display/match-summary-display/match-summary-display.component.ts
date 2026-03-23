@@ -38,7 +38,9 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     this.getLatestWork().subscribe((componentStates) => {
       this.bucketData = [];
       this.bucketValues.clear();
-      this.matchSummaryData = new MatchSummaryData(componentStates);
+      this.matchSummaryData = new MatchSummaryData(
+        this.projectService.injectAssetPaths(componentStates)
+      );
       this.setBucketValues();
       this.setBucketData();
       this.setBucketShowMore();

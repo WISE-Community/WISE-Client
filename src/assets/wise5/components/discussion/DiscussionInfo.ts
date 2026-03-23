@@ -15,6 +15,7 @@ export class DiscussionInfo extends ComponentInfo {
         showSubmitButton: false,
         isStudentAttachmentEnabled: true,
         gateClassmateResponses: true,
+        anonymizeResponses: false,
         constraints: []
       }
     }
