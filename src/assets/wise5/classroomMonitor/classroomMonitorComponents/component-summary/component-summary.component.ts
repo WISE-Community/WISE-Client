@@ -49,6 +49,7 @@ import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-
   templateUrl: './component-summary.component.html'
 })
 export class ComponentSummaryComponent {
+  protected aiEnabled: boolean;
   protected avgScore: number;
   @Input() component: ComponentContent;
   protected hasCorrectAnswer: boolean;
@@ -94,13 +95,14 @@ export class ComponentSummaryComponent {
     this.hasIdeaRubricData = this.cRaterService
       .getCRaterRubric(this.node.id, this.component.id)
       .hasRubricData();
+    this.aiEnabled = this.projectService.getProject().ai?.enabled;
     this.hasSummaryData =
       (this.component?.type === 'MultipleChoice' && this.hasStudentWork) ||
       (this.hasScoresSummary && this.hasScoreAnnotation) ||
       this.hasIdeaRubricData ||
       ['Match', 'Discussion'].includes(this.component?.type);
     if (this.component?.type === 'OpenResponse') {
-      this.hasSummaryData = this.projectService.getProject().ai?.enabled;
+      this.hasSummaryData = this.aiEnabled;
     }
   }
 

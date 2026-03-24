@@ -93,35 +93,37 @@
             class="summary"
           />
         </div>
-      } @else if (component?.type === 'OpenResponse' && hasStudentWork) {
-        <mat-card appearance="outlined" class="w-full">
-          <mat-card-content>
-            <open-response-ai-summary
+      } @else if (component?.type === 'OpenResponse' && hasStudentWork && aiEnabled) {
+        <open-response-ai-summary
+          [nodeId]="node.id"
+          [componentId]="component.id"
+          [periodId]="periodId"
+          class="summary"
+        />
+      } @else if (component?.type === 'Discussion' && hasStudentWork) {
+        <div class="summary-content flex flex-col gap-3">
+          @if (aiEnabled) {
+            <discussion-ai-summary
               [nodeId]="node.id"
               [componentId]="component.id"
               [periodId]="periodId"
+              class="summary"
             />
-          </mat-card-content>
-        </mat-card>
-      } @else if (component?.type === 'Discussion' && hasStudentWork) {
-        <div class="summary-content">
-          <ng-container
-            [ngTemplateOutlet]="expandSummaryTpl"
-            [ngTemplateOutletContext]="{ type: 'discussion' }"
-          />
-          <discussion-ai-summary
-            [nodeId]="node.id"
-            [componentId]="component.id"
-            [periodId]="periodId"
-          />
-          <discussion-summary
-            [nodeId]="node.id"
-            [componentId]="component.id"
-            [periodId]="periodId"
-            [source]="source"
-            [doRender]="true"
-            class="summary"
-          />
+          }
+          <div class="relative">
+            <ng-container
+              [ngTemplateOutlet]="expandSummaryTpl"
+              [ngTemplateOutletContext]="{ type: 'discussion' }"
+            />
+            <discussion-summary
+              [nodeId]="node.id"
+              [componentId]="component.id"
+              [periodId]="periodId"
+              [source]="source"
+              [doRender]="true"
+              class="summary"
+            />
+          </div>
         </div>
       }
     </div>
