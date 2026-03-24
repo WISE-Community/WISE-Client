@@ -15,7 +15,8 @@ import { OpenAiChatService } from '../../../../../app/services/chat/openAiChat.s
  * Abstract base class for components that use an LLM to summarize student responses.
  */
 @Component({
-  imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
+  imports: [MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
+  providers: [DatePipe],
   templateUrl: './ai-summary.component.html'
 })
 export abstract class AiSummaryComponent {
@@ -25,6 +26,7 @@ export abstract class AiSummaryComponent {
 
   private chatService: ChatService = inject(OpenAiChatService);
   protected dataService: TeacherDataService = inject(TeacherDataService);
+  protected datePipe: DatePipe = inject(DatePipe);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   protected projectService: TeacherProjectService = inject(TeacherProjectService);
 
@@ -85,5 +87,9 @@ export abstract class AiSummaryComponent {
 
   private getSummaryTimeKey(): string {
     return `component-summary-time-${this.periodId}-${this.nodeId}-${this.componentId}`;
+  }
+
+  protected get summaryCaption(): string {
+    return $localize`Summary generated ${this.datePipe.transform(this.summaryDate, 'short')} from ${this.latestComponentStates.length} responses`;
   }
 }

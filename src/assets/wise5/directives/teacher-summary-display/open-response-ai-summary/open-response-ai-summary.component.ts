@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MarkdownComponent } from 'ngx-markdown';
 import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
 
@@ -10,7 +11,8 @@ import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
  * Uses an LLM to summarize students' responses to open response questions.
  */
 @Component({
-  imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
+  imports: [MarkdownComponent, MatButton, MatIcon, MatProgressSpinner, MatTooltipModule],
+  providers: [DatePipe],
   selector: 'open-response-ai-summary',
   templateUrl: '../ai-summary/ai-summary.component.html'
 })

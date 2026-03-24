@@ -1,10 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MarkdownComponent } from 'ngx-markdown';
 import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
-import { DatePipe } from '@angular/common';
 
 interface Thread {
   id: number;
@@ -16,7 +17,8 @@ interface Thread {
  * Uses an LLM to summarize student discussion threads.
  */
 @Component({
-  imports: [DatePipe, MarkdownComponent, MatButton, MatIcon, MatProgressSpinner],
+  imports: [MarkdownComponent, MatButton, MatIcon, MatProgressSpinner, MatTooltipModule],
+  providers: [DatePipe],
   selector: 'discussion-ai-summary',
   templateUrl: '../ai-summary/ai-summary.component.html'
 })
@@ -47,5 +49,9 @@ export class DiscussionAiSummaryComponent extends AiSummaryComponent {
           ?.replies.push(reply.studentData.response);
       });
     return threads;
+  }
+
+  protected override get summaryCaption(): string {
+    return $localize`Summary generated ${this.datePipe.transform(this.summaryDate, 'short')} from ${this.latestComponentStates.length} posts and comments`;
   }
 }

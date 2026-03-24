@@ -264,7 +264,7 @@ describe('OpenResponseAiSummaryComponent', () => {
       fixture.detectChanges();
       const button = fixture.nativeElement.querySelector('button');
       expect(button).toBeTruthy();
-      expect(button.textContent).toContain('Generate Class Summary');
+      expect(button.textContent).toContain('Generate Summary');
     });
 
     it('should disable generate button when generatingSummary is true', () => {
