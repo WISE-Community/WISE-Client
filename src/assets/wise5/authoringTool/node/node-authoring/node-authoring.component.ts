@@ -26,6 +26,7 @@ import { CommonModule } from '@angular/common';
 import { ComponentAuthoringComponent } from '../../components/component-authoring.component';
 import { RouterModule } from '@angular/router';
 import { EditComponentAdvancedButtonComponent } from '../../components/edit-component-advanced-button/edit-component-advanced-button.component';
+import { ToggleComponentTagComponent } from '../../components/toggle-component-tag/toggle-component-tag.component';
 
 @Component({
   imports: [
@@ -45,7 +46,8 @@ import { EditComponentAdvancedButtonComponent } from '../../components/edit-comp
     MatInputModule,
     MatTooltipModule,
     RouterModule,
-    TeacherNodeIconComponent
+    TeacherNodeIconComponent,
+    ToggleComponentTagComponent
   ],
   styleUrl: './node-authoring.component.scss',
   templateUrl: './node-authoring.component.html'

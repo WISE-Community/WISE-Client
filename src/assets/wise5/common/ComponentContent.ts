@@ -17,6 +17,7 @@ export interface ComponentContent {
   rubric?: string;
   showSaveButton?: boolean;
   showSubmitButton?: boolean;
+  tags?: string[];
   type: string;
 }
 
