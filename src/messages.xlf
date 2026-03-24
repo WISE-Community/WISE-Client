@@ -13844,6 +13844,13 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4464789975450139901" datatype="html">
+        <source>Collapse summary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-summary/summary-dialog.component.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4977425233945972011" datatype="html">
         <source> No feedback given for this version </source>
         <context-group purpose="location">
@@ -22554,64 +22561,78 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">401</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3646439300244649070" datatype="html">
-        <source>Generate Class Summary</source>
+      <trans-unit id="8864080509105680671" datatype="html">
+        <source>Summarize class responses using AI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">5,7</context>
+          <context context-type="linenumber">9,13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">5,7</context>
+          <context context-type="linenumber">9,13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">5,7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2647230157856881985" datatype="html">
-        <source>*New responses since last summary</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">12,16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">12,16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">12,16</context>
+          <context context-type="linenumber">9,13</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2777541710949293848" datatype="html">
-        <source> Summary generated <x id="INTERPOLATION" equiv-text="{{ summaryDate | date: &apos;short&apos; }}"/> from <x id="INTERPOLATION_1" equiv-text="{{ latestComponentStates.length }}"/> responses </source>
+      <trans-unit id="273241930432839392" datatype="html">
+        <source>Generate Summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">18,22</context>
+          <context context-type="linenumber">13,15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">18,22</context>
+          <context context-type="linenumber">13,15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">18,22</context>
+          <context context-type="linenumber">13,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3421658563032484911" datatype="html">
         <source>No student responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">16,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2647230157856881985" datatype="html">
+        <source>*New responses since last summary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
+          <context context-type="linenumber">23,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
+          <context context-type="linenumber">23,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
+          <context context-type="linenumber">23,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3008190125112056008" datatype="html">
+        <source>Summary generated <x id="PH" equiv-text="this.datePipe.transform(this.summaryDate, &apos;short&apos;)"/> from <x id="PH_1" equiv-text="this.latestComponentStates.length"/> responses</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2424618748979671937" datatype="html">
+        <source>Summary generated <x id="PH" equiv-text="this.datePipe.transform(this.summaryDate, &apos;short&apos;)"/> from <x id="PH_1" equiv-text="this.latestComponentStates.length"/> posts and comments</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-ai-summary/discussion-ai-summary.component.ts</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6958186570862992763" datatype="html">
