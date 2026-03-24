@@ -10,7 +10,7 @@ export class HTMLService extends ComponentService {
   createComponent() {
     const component: any = super.createComponent();
     component.type = 'HTML';
-    component.html = $localize`Enter html here`;
+    component.html = $localize`Enter content here`;
     return component;
   }
 

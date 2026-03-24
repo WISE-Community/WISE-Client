@@ -20188,8 +20188,8 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="88232795223704551" datatype="html">
-        <source>Enter html here</source>
+      <trans-unit id="5588251132227750710" datatype="html">
+        <source>Enter content here</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/html/htmlService.ts</context>
           <context context-type="linenumber">13</context>
@@ -20640,7 +20640,7 @@ Warning: This will delete all existing choices and buckets in this activity.</so
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.ts</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6683126302760629027" datatype="html">
