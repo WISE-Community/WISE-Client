@@ -36,6 +36,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   protected feedbackTextChange: Subject<string> = new Subject<string>();
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.subscriptions.add(
       this.choiceTextChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();

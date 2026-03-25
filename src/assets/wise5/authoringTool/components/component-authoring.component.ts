@@ -60,17 +60,25 @@ export class ComponentAuthoringComponent {
     private projectTranslationService: TeacherProjectTranslationService
   ) {
     effect(() => {
-      // apply translations to a copy of the component content so the original component content
-      // is not modified for subsequent use.
-      const componentContent = copy(this.componentContent);
-      this.projectTranslationService.applyTranslations(
-        componentContent,
-        this.projectTranslationService.currentTranslations()
-      );
-      this.component = new ComponentFactory().getComponent(
-        this.projectService.injectAssetPaths(componentContent),
-        this.nodeId
-      );
+      this.setComponent();
     });
+  }
+
+  ngOnChanges(): void {
+    this.setComponent();
+  }
+
+  private setComponent(): void {
+    // when current translations change, apply translations to a copy of the component content
+    // so the original component content is not modified for subsequent use.
+    const componentContent = copy(this.componentContent);
+    this.projectTranslationService.applyTranslations(
+      componentContent,
+      this.projectTranslationService.currentTranslations()
+    );
+    this.component = new ComponentFactory().getComponent(
+      this.projectService.injectAssetPaths(componentContent),
+      this.nodeId
+    );
   }
 }
