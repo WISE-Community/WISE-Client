@@ -1,6 +1,11 @@
 <mat-form-field appearance="fill" class="component-select form-field-no-hint">
   @if (components.length == 1) {
-    <mat-select disabled placeholder="1 item ({{ getComponentTypeLabel(components[0].type) }})" />
+    <mat-label
+      >1 item ({{ getComponentTypeLabel(components[0].type) }})<ng-container
+        [ngTemplateOutlet]="importantTag"
+        [ngTemplateOutletContext]="{ component: components[0] }"
+    /></mat-label>
+    <mat-select disabled></mat-select>
   } @else if (components.length > 1) {
     <mat-select
       [(ngModel)]="selectedComponents"
@@ -13,6 +18,10 @@
       @for (component of components; track component.id; let i = $index) {
         <mat-option [value]="component" color="primary">
           {{ component.displayIndex }}: {{ getComponentTypeLabel(component.type) }}
+          <ng-container
+            [ngTemplateOutlet]="importantTag"
+            [ngTemplateOutletContext]="{ component }"
+          />
         </mat-option>
       }
     </mat-select>
@@ -20,3 +29,15 @@
     <mat-select [(ngModel)]="selectedComponents" (selectionChange)="updateSelectedComponents()" />
   }
 </mat-form-field>
+
+<ng-template #importantTag let-component="component">
+  @if (component.tags?.includes('!important')) {
+    <mat-icon
+      style="color: orange"
+      matTooltip="Important activity"
+      matTooltipPosition="above"
+      i18n-matTooltip
+      >star</mat-icon
+    >
+  }
+</ng-template>
