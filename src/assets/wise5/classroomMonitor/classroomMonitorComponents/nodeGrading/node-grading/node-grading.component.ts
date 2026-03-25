@@ -109,6 +109,7 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
     this.visibleComponents = [this.components[0]];
     this.numRubrics = this.node.getNumRubrics();
     this.setPeriod();
+    this.showImportantComponent();
   }
 
   private setPeriod(): void {
@@ -129,6 +130,15 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
       this.nodeId,
       this.periodId
     ).completionPct;
+  }
+
+  private showImportantComponent(): void {
+    const importantComponent = this.components.find((component) =>
+      component.tags?.includes('!important')
+    );
+    if (importantComponent) {
+      this.selectSummary(this.node.getComponentPosition(importantComponent.id));
+    }
   }
 
   protected setVisibleComponents(visibleComponents: ComponentContent[]): void {
