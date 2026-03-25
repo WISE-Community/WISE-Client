@@ -235,3 +235,18 @@ export class Node {
     return this.components.findIndex((component) => component.id === componentId);
   }
 }
+
+export function ensureDefaultIcon(nodes: Node[]): void {
+  nodes
+    .filter((node: Node) => !node.icon)
+    .forEach(
+      (node: Node) =>
+        (node.icon = {
+          color: '#00B0FF',
+          type: 'font',
+          fontSet: 'material-icons',
+          fontName: node.type === 'node' ? 'school' : 'dashboard',
+          imgSrc: ''
+        })
+    );
+}

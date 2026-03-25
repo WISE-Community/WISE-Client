@@ -21,7 +21,7 @@ export class CreateBranchService extends AuthorBranchService {
     this.createPathSteps(params, branchNode, newNodeIds);
     const mergeStep: any =
       params.mergeStepId === ''
-        ? this.createMergeStep(newNodeIds, nodeIdBranchNodeTransitionsTo)
+        ? this.createMergeStep(newNodeIds, branchNode.id, nodeIdBranchNodeTransitionsTo)
         : this.projectService.getNode(params.mergeStepId);
     this.setPathStepTransitions(newNodeIds, mergeStep.id);
     this.setBranchNodeTransitionLogic(branchNode, params.criteria);
@@ -46,9 +46,15 @@ export class CreateBranchService extends AuthorBranchService {
     }
   }
 
-  private createMergeStep(newNodeIds: string[], nodeIdBranchNodeTransitionsTo: string): any {
+  private createMergeStep(
+    newNodeIds: string[],
+    branchNodeId: string,
+    nodeIdBranchNodeTransitionsTo: string
+  ): any {
     const mergeStepNode = this.projectService.createNode($localize`Merge Step`);
     mergeStepNode.id = this.projectService.getNextAvailableNodeId(newNodeIds);
+    mergeStepNode.icon.color =
+      this.projectService.getParentGroup(branchNodeId).icon?.color || '#00B0FF';
     if (nodeIdBranchNodeTransitionsTo !== '') {
       mergeStepNode.transitionLogic.transitions = [new Transition(nodeIdBranchNodeTransitionsTo)];
     }
