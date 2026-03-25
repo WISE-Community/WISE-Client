@@ -6,6 +6,7 @@ import { InsertNodesService } from '../../../services/insertNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
+import { ensureDefaultIcon } from '../../../common/Node';
 
 @Directive()
 export abstract class AbstractImportStepComponent implements OnInit {
@@ -34,7 +35,7 @@ export abstract class AbstractImportStepComponent implements OnInit {
       .copyNodes(nodesToImport, this.importProjectId, this.configService.getProjectId())
       .subscribe((copiedNodesWithOldIds: any[]) => {
         const copiedNodes = this.replaceNodesWithNewIds(copiedNodesWithOldIds);
-        this.ensureDefaultIcon(copiedNodes);
+        ensureDefaultIcon(copiedNodes);
         if (this.target.type === 'firstStepInBranchPath') {
           this.insertFirstNodeInBranchPathService.insertNodes(
             copiedNodes,
@@ -57,26 +58,11 @@ export abstract class AbstractImportStepComponent implements OnInit {
     return nodes.map((node: any) => this.projectService.replaceOldIds(node, oldToNewIds));
   }
 
-  private ensureDefaultIcon(nodes: any[]): void {
-    nodes
-      .filter((node: any) => !node.icon)
-      .forEach(
-        (node: any) =>
-          (node.icon = {
-            color: '#00B0FF',
-            type: 'font',
-            fontSet: 'material-icons',
-            fontName: node.type === 'node' ? 'school' : 'dashboard',
-            imgSrc: ''
-          })
-      );
-  }
-
   private setColor(nodes: any[], nodeId: string): void {
     const nodeToMatchColor = this.projectService.isGroupNode(nodeId)
       ? this.projectService.getNodeById(nodeId)
       : this.projectService.getParentGroup(nodeId);
-    this.ensureDefaultIcon([nodeToMatchColor]);
+    ensureDefaultIcon([nodeToMatchColor]);
     nodes.forEach((node: any) => (node.icon.color = nodeToMatchColor.icon.color));
   }
 }

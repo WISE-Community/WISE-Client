@@ -21,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from '@angular/material/input';
 import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
+import { ensureDefaultIcon } from '../../../common/Node';
 
 @Component({
   imports: [
@@ -79,13 +80,17 @@ export class AddYourOwnNodeComponent {
   protected submit(): void {
     this.submitting = true;
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
+    const groupNode =
+      this.target.type === 'in'
+        ? this.projectService.getNodeById(this.target.targetId)
+        : this.projectService.getParentGroup(this.target.targetId);
+    ensureDefaultIcon([groupNode]);
+    newNode.icon.color = groupNode.icon.color;
     switch (this.target.type) {
       case 'in':
-        newNode.icon.color = this.projectService.getNodeById(this.target.targetId).icon.color;
         this.projectService.createNodeInside(newNode, this.target.targetId);
         break;
       case 'after':
-        newNode.icon.color = this.projectService.getParentGroup(this.target.targetId).icon.color;
         this.projectService.createNodeAfter(newNode, this.target.targetId);
         break;
       case 'firstStepInBranchPath':
