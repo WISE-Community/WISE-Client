@@ -15,6 +15,7 @@ import { ComponentTypeService } from '../../../../services/componentTypeService'
 import { ComponentSummaryComponent } from '../../component-summary/component-summary.component';
 import { FormControl } from '@angular/forms';
 import { AnnotationService } from '../../../../services/annotationService';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   imports: [
@@ -24,6 +25,7 @@ import { AnnotationService } from '../../../../services/annotationService';
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
+    MatTooltipModule,
     NodeClassResponsesComponent
   ],
   styles: [

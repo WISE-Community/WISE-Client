@@ -42,7 +42,19 @@
             animationDuration="0"
           >
             @for (component of components; track component; let i = $index) {
-              <mat-tab label="{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}">
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  {{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}
+                  @if (component.tags?.includes('!important')) {
+                    <mat-icon
+                      style="color: orange"
+                      matTooltip="Important activity"
+                      matTooltipPosition="above"
+                      i18n-matTooltip
+                      >star</mat-icon
+                    >
+                  }
+                </ng-template>
                 <ng-template matTabContent>
                   <component-summary [component]="component" [node]="node" [periodId]="periodId" />
                 </ng-template>
