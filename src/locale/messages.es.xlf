@@ -22456,13 +22456,13 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="translated">Texto enriquecido (HTML)</target>
       </trans-unit>
-      <trans-unit id="88232795223704551" datatype="html">
-        <source>Enter html here</source>
+      <trans-unit id="5588251132227750710" datatype="html">
+        <source>Enter content here</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/html/htmlService.ts</context>
           <context context-type="linenumber">13</context>
         </context-group>
-        <target state="translated">Escribir HTML acá</target>
+        <target state="needs-translation">Enter content here</target>
       </trans-unit>
       <trans-unit id="6834864406146550455" datatype="html">
         <source>Students add labels to a canvas.</source>
@@ -22970,7 +22970,7 @@ Warning: This will delete all existing choices and buckets in this activity.</ta
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.ts</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target state="translated">¿Seguro que desea eliminar esta opción?</target>
       </trans-unit>
