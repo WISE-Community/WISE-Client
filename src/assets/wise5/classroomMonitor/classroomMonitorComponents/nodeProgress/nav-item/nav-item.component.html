@@ -85,6 +85,15 @@
               [tooltip]="rubricIconLabel"
             />
           }
+          @if (hasImportantComponent) {
+            <mat-icon
+              style="color: orange"
+              matTooltip="Important activity"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              >star</mat-icon
+            >
+          }
           <span class="flex-grow hidden sm:block"></span>
           <nav-item-score [maxScore]="maxScore" [averageScore]="getNodeAverageScore()" />
           <teams-on-node [nodeId]="nodeId" [period]="currentPeriod" class="contents" />
