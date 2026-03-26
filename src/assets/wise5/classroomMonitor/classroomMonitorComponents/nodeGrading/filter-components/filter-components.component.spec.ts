@@ -43,6 +43,23 @@ function onlyOneComponent() {
     it('should be disabled', async () => {
       expect(await select.isDisabled()).toBe(true);
     });
+
+    it('should show star icon if component has !important tag', () => {
+      component.components[0].tags = ['!important'];
+      fixture.detectChanges();
+
+      const icon = fixture.nativeElement.querySelector('mat-icon');
+      expect(icon).toBeTruthy();
+      expect(icon.textContent.trim()).toBe('star');
+    });
+
+    it('should not show star icon if component does not have !important tag', () => {
+      component.components[0].tags = [];
+      fixture.detectChanges();
+
+      const icon = fixture.nativeElement.querySelector('mat-icon');
+      expect(icon).toBeFalsy();
+    });
   });
 }
 
@@ -86,6 +103,19 @@ function moreThanOneComponent() {
           type: 'OpenResponse'
         } as ComponentContent
       ]);
+    });
+
+    it('should show star icon for option with !important tag', async () => {
+      component.components[0].tags = ['!important'];
+      fixture.detectChanges();
+      await select.open();
+
+      const options = await select.getOptions();
+      const option1Text = await options[0].getText();
+      const option2Text = await options[1].getText();
+
+      expect(option1Text).toContain('star');
+      expect(option2Text).not.toContain('star');
     });
   });
 }
