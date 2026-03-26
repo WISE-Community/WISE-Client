@@ -6,6 +6,7 @@ import { InsertNodesService } from '../../../services/insertNodesService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
+import { ensureDefaultIcon } from '../../../common/Node';
 
 @Directive()
 export abstract class AbstractImportStepComponent implements OnInit {
@@ -32,21 +33,36 @@ export abstract class AbstractImportStepComponent implements OnInit {
     this.submitting = true;
     this.copyNodesService
       .copyNodes(nodesToImport, this.importProjectId, this.configService.getProjectId())
-      .subscribe((copiedNodes: any[]) => {
-        const nodesWithNewNodeIds = this.projectService.getNodesWithNewIds(copiedNodes);
+      .subscribe((copiedNodesWithOldIds: any[]) => {
+        const copiedNodes = this.replaceNodesWithNewIds(copiedNodesWithOldIds);
+        ensureDefaultIcon(copiedNodes);
         if (this.target.type === 'firstStepInBranchPath') {
           this.insertFirstNodeInBranchPathService.insertNodes(
-            nodesWithNewNodeIds,
+            copiedNodes,
             this.target.branchNodeId,
             this.target.firstNodeIdInBranchPath
           );
         } else {
-          this.insertNodesService.insertNodes(nodesWithNewNodeIds, this.target.targetId);
+          this.setColor(copiedNodes, this.target.targetId);
+          this.insertNodesService.insertNodes(copiedNodes, this.target.targetId);
         }
         this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
           this.projectService.refreshProject();
           this.router.navigate(['../../..'], { relativeTo: this.route });
         });
       });
+  }
+
+  private replaceNodesWithNewIds(nodes: any[]): any[] {
+    const oldToNewIds = this.projectService.getOldToNewIds(nodes);
+    return nodes.map((node: any) => this.projectService.replaceOldIds(node, oldToNewIds));
+  }
+
+  private setColor(nodes: any[], nodeId: string): void {
+    const nodeToMatchColor = this.projectService.isGroupNode(nodeId)
+      ? this.projectService.getNodeById(nodeId)
+      : this.projectService.getParentGroup(nodeId);
+    ensureDefaultIcon([nodeToMatchColor]);
+    nodes.forEach((node: any) => (node.icon.color = nodeToMatchColor.icon.color));
   }
 }

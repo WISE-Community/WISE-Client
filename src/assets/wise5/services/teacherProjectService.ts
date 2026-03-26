@@ -13,6 +13,7 @@ import { branchPathBackgroundColors } from '../common/color/color';
 import { reduceByUniqueId } from '../common/array/array';
 import { NodeTypeSelected } from '../authoringTool/domain/node-type-selected';
 import { ComponentContent } from '../common/ComponentContent';
+import { getRandomNodeIconColor } from '../vle/node-icon/NodeIconColor';
 
 @Injectable()
 export class TeacherProjectService extends ProjectService {
@@ -72,7 +73,14 @@ export class TeacherProjectService extends ProjectService {
       transitionLogic: {
         transitions: []
       },
-      ids: []
+      ids: [],
+      icon: {
+        color: getRandomNodeIconColor(),
+        type: 'font',
+        fontSet: 'material-icons',
+        fontName: 'dashboard',
+        imgSrc: ''
+      }
     };
   }
 
@@ -81,7 +89,7 @@ export class TeacherProjectService extends ProjectService {
    * @param title the title of the node
    * @returns the node object
    */
-  createNode(title) {
+  createNode(title: string): any {
     return {
       id: this.getNextAvailableNodeId(),
       title: title,
@@ -90,17 +98,17 @@ export class TeacherProjectService extends ProjectService {
       transitionLogic: {
         transitions: []
       },
+      icon: {
+        color: '#00B0FF',
+        type: 'font',
+        fontSet: 'material-icons',
+        fontName: 'school',
+        imgSrc: ''
+      },
       showSaveButton: false,
       showSubmitButton: false,
       components: []
     };
-  }
-
-  getNodesWithNewIds(nodes: any[]): any[] {
-    const oldToNewIds = this.getOldToNewIds(nodes);
-    return nodes.map((node: any) => {
-      return this.replaceOldIds(node, oldToNewIds);
-    });
   }
 
   getOldToNewIds(nodes: any[]): Map<string, string> {

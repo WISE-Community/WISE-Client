@@ -10,16 +10,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { skip, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ChatbotService } from './chatbot.service';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { DataService } from '../services/data.service';
 import { Chat, ChatMessage } from './chat';
-import { AwsBedRockService } from './awsBedRock.service';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { MarkdownComponent } from 'ngx-markdown';
 import { ChatHistoryDialogComponent } from './chat-history-dialog.component';
-import { MatDividerModule } from '@angular/material/divider';
+import { ChatService } from '../services/chat/chat.service';
+import { OpenAiChatService } from '../services/chat/openAiChat.service';
 
 @Component({
   imports: [
@@ -42,7 +42,7 @@ import { MatDividerModule } from '@angular/material/divider';
 export class ChatbotComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private chatbotService: ChatbotService = inject(ChatbotService);
-  private awsBedRockService: AwsBedRockService = inject(AwsBedRockService);
+  private chatService: ChatService = inject(OpenAiChatService);
   private configService: ConfigService = inject(ConfigService);
   private dataService: DataService = inject(DataService);
   private projectService = inject(ProjectService);
@@ -112,7 +112,7 @@ export class ChatbotComponent {
     this.loading = true;
     this.scrollToBottom();
     try {
-      const response = await this.awsBedRockService.sendMessage(this.messages);
+      const response = await this.chatService.sendMessage(this.messages);
       this.messages.push(
         new ChatMessage('assistant', response, this.dataService.getCurrentNode().id)
       );
@@ -154,7 +154,7 @@ export class ChatbotComponent {
    */
   private async generateAndSetChatTitle(firstUserMessage: ChatMessage): Promise<void> {
     try {
-      let newTitle = await this.awsBedRockService.generateChatTitle(firstUserMessage.content);
+      let newTitle = await this.generateChatTitle(firstUserMessage.content);
       // Remove surrounding quotes if any
       newTitle = newTitle.replace(/^["'](.*)["']$/, '$1').trim();
       if (newTitle) {
@@ -163,6 +163,24 @@ export class ChatbotComponent {
     } catch (error) {
       console.error('Error generating chat title:', error);
     }
+  }
+
+  /**
+   * Generates a short, concise title for a chat based on the first message.
+   * @param message The first user message content.
+   * @returns A promise that resolves to the generated title.
+   */
+  async generateChatTitle(message: string): Promise<string> {
+    const prompt = `Generate a short, concise title (max 5 words) for a chat that starts with this message: "${message}". Respond only with the title, no quotes or extra text. If the language of the message is not English, return the title in that language.`;
+    const messages: ChatMessage[] = [
+      new ChatMessage(
+        'system',
+        'You are a helpful assistant that generates short titles for chat conversations.',
+        ''
+      ),
+      new ChatMessage('user', prompt, '')
+    ];
+    return this.chatService.sendMessage(messages);
   }
 
   protected switchToChat(chat: Chat): void {
