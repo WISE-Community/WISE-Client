@@ -53,14 +53,14 @@ export class ComponentSummaryComponent {
   protected avgScore: number;
   @Input() component: ComponentContent;
   protected hasCorrectAnswer: boolean;
-  protected hasScoresSummary: boolean;
-  protected hasScoreAnnotation: boolean;
   protected hasIdeaRubricData: boolean;
   protected hasStudentWork: boolean;
-  protected hasSummaryData: boolean;
   @Input() node: Node;
   @Input() periodId: number;
+  protected showScoreSummary: boolean;
+  protected showSummary: boolean;
   protected source: 'allPeriods' | 'period';
+  private COMPONENTS_WITH_SUMMARY = ['Discussion', 'Match', 'MultipleChoice', 'OpenResponse'];
 
   constructor(
     private annotationService: AnnotationService,
@@ -84,10 +84,9 @@ export class ComponentSummaryComponent {
 
   private setComponent(): void {
     this.hasCorrectAnswer = this.componentHasCorrectAnswer(this.component);
-    this.hasScoresSummary = this.summaryService.isScoresSummaryAvailableForComponentType(
-      this.component.type
-    );
-    this.hasScoreAnnotation = this.componentHasScoreAnnotation(this.component.id, this.periodId);
+    this.showScoreSummary =
+      this.summaryService.isScoresSummaryAvailableForComponentType(this.component.type) &&
+      this.componentHasScoreAnnotation(this.component.id, this.periodId);
     this.hasStudentWork =
       this.dataService
         .getComponentStatesByComponentId(this.component.id)
@@ -96,13 +95,13 @@ export class ComponentSummaryComponent {
       .getCRaterRubric(this.node.id, this.component.id)
       .hasRubricData();
     this.aiEnabled = this.projectService.getProject().ai?.enabled;
-    this.hasSummaryData =
-      (this.component?.type === 'MultipleChoice' && this.hasStudentWork) ||
-      (this.hasScoresSummary && this.hasScoreAnnotation) ||
-      this.hasIdeaRubricData ||
-      ['Match', 'Discussion'].includes(this.component?.type);
-    if (this.component?.type === 'OpenResponse') {
-      this.hasSummaryData = this.aiEnabled;
+    this.showSummary =
+      this.hasStudentWork &&
+      (this.COMPONENTS_WITH_SUMMARY.includes(this.component.type) ||
+        this.showScoreSummary ||
+        this.hasIdeaRubricData);
+    if (this.component.type === 'OpenResponse') {
+      this.showSummary &&= this.aiEnabled;
     }
   }
 
