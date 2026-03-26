@@ -10939,8 +10939,8 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">3,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="754790121585901912" datatype="html">
-        <source>Mark as not important for teachers</source>
+      <trans-unit id="567150993227935308" datatype="html">
+        <source>Unmark as important for teachers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/toggle-component-tag/toggle-component-tag.component.ts</context>
           <context context-type="linenumber">39</context>

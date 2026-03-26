@@ -133,11 +133,9 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private showImportantComponent(): void {
-    const importantComponent = this.components.find((component) =>
-      component.tags?.includes('!important')
-    );
-    if (importantComponent) {
-      this.selectSummary(this.node.getComponentPosition(importantComponent.id));
+    const component = this.components.find((component) => component.tags?.includes('!important'));
+    if (component) {
+      this.selectSummary(this.node.getComponentPosition(component.id));
     }
   }
 

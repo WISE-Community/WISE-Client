@@ -36,7 +36,7 @@ export class ToggleComponentTagComponent {
 
   private updateTooltip(): void {
     if (this.hasTag) {
-      this.tooltip = $localize`Mark as not important for teachers`;
+      this.tooltip = $localize`Unmark as important for teachers`;
     } else {
       this.tooltip = $localize`Mark as important for teachers`;
     }

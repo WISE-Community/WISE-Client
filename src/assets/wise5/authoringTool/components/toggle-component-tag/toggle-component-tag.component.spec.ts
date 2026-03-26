@@ -40,7 +40,7 @@ describe('ToggleComponentTagComponent', () => {
       fixture.detectChanges();
 
       expect(component['hasTag']).toBeTrue();
-      expect(component['tooltip']).toEqual('Mark as not important for teachers');
+      expect(component['tooltip']).toEqual('Unmark as important for teachers');
     });
 
     it('should handle undefined tags array', () => {
@@ -73,7 +73,7 @@ describe('ToggleComponentTagComponent', () => {
 
       expect(component.component.tags).toEqual(['other-tag', '!important']);
       expect(component['hasTag']).toBeTrue();
-      expect(component['tooltip']).toEqual('Mark as not important for teachers');
+      expect(component['tooltip']).toEqual('Unmark as important for teachers');
       expect(mockProjectService.saveProject).toHaveBeenCalled();
     });
 
@@ -85,7 +85,7 @@ describe('ToggleComponentTagComponent', () => {
 
       expect(component.component.tags).toEqual(['!important']);
       expect(component['hasTag']).toBeTrue();
-      expect(component['tooltip']).toEqual('Mark as not important for teachers');
+      expect(component['tooltip']).toEqual('Unmark as important for teachers');
       expect(mockProjectService.saveProject).toHaveBeenCalled();
     });
   });
