@@ -33,13 +33,43 @@ describe('ComputerAvatarSelectorComponent', () => {
 
   ngOnInit();
   selectAvatar();
+  onlyOneAvatar();
 });
+
+function onlyOneAvatar() {
+  describe('only one avatar', () => {
+    beforeEach(() => {
+      component.computerAvatarSettings.ids = ['robot'];
+      component.ngOnInit();
+      fixture.detectChanges();
+    });
+
+    it('should automatically select the avatar and only show the continue button', () => {
+      expect(fixture.debugElement.queryAll(By.css('mat-button-toggle')).length).toEqual(0);
+      expect(fixture.debugElement.query(By.css('.selected-avatar-image'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('.selected-avatar-name')).nativeElement.textContent.trim()).toEqual('Robot');
+
+      const buttons = fixture.debugElement.queryAll(By.css('button'));
+      const continueButton = buttons.find((btn) => btn.nativeElement.textContent.includes('Continue'));
+      const backButton = buttons.find((btn) => btn.nativeElement.textContent.includes('Back'));
+
+      expect(continueButton).toBeTruthy();
+      expect(backButton).toBeUndefined();
+    });
+
+    it('clicking continue should emit selected avatar', () => {
+      const spy = spyOn(component.chooseAvatarEvent, 'emit');
+      getContinueButton().nativeElement.click();
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalledWith(avatars[0]);
+    });
+  });
+}
 
 function ngOnInit() {
   describe('ngOnInit()', () => {
-    it('should show avatars and the continue button should be disabled', () => {
+    it('should show avatars', () => {
       expect(fixture.debugElement.queryAll(By.css('mat-button-toggle')).length).toEqual(2);
-      expect(getContinueButton().nativeElement.disabled).toBeTrue();
     });
   });
 }
