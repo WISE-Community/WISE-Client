@@ -101,13 +101,6 @@ export class AuthoringToolComponent {
         active: true
       },
       {
-        route: ['unit', this.projectId, 'milestones'],
-        name: $localize`Milestones`,
-        icon: 'flag',
-        type: 'primary',
-        active: true
-      },
-      {
         route: ['unit', this.projectId, 'advanced'],
         name: $localize`Advanced Settings`,
         icon: 'build',

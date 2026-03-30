@@ -33,6 +33,14 @@
     </ng-template>
   </mat-tab>
   <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>flag</mat-icon>&nbsp;<span i18n>Milestones</span>
+    </ng-template>
+    <ng-template matTabContent>
+      <edit-milestones />
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
     <ng-template mat-tab-label><mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
     <div class="pt-4">
       <div class="mb-2">

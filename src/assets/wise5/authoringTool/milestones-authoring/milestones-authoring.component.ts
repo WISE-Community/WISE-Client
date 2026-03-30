@@ -30,6 +30,7 @@ import { TranslatableTextareaComponent } from '../components/translatable-textar
     TranslatableInputComponent,
     TranslatableTextareaComponent
   ],
+  selector: 'edit-milestones',
   styleUrl: './milestones-authoring.component.scss',
   templateUrl: './milestones-authoring.component.html'
 })
