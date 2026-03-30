@@ -58,7 +58,7 @@ export class DiscussionStudent extends ComponentStudent {
     protected componentService: ComponentService,
     protected configService: ConfigService,
     protected dialog: MatDialog,
-    private discussionService: DiscussionService,
+    protected discussionService: DiscussionService,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private notificationService: NotificationService,
