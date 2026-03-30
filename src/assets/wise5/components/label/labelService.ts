@@ -300,7 +300,7 @@ export class LabelService extends ComponentService {
     canvas.selection = false;
     canvas.hoverCursor = 'pointer';
     this.setCanvasDimension(canvas, width, height);
-    $('#canvasParent_' + canvasId).css('height', height + 2);
+    document.getElementById('canvasParent_' + canvasId).style.height = height + 2 + 'px';
     return canvas;
   }
 
