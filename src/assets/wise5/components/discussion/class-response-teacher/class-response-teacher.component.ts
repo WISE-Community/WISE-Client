@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  SimpleChanges,
-  ViewEncapsulation
-} from '@angular/core';
-import { ConfigService } from '../../../services/configService';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
 import { SaveTimeMessageComponent } from '../../../common/save-time-message/save-time-message.component';
@@ -40,25 +32,26 @@ import { ClassResponse } from '../class-response/class-response.component';
   templateUrl: './class-response-teacher.component.html'
 })
 export class ClassResponseTeacherComponent extends ClassResponse {
-  @Output() deleteButtonClicked: any = new EventEmitter();
-  protected expanded: boolean = false;
+  @Output() hidePostEvent: any = new EventEmitter();
   @Input() isDisabled: boolean;
   @Input() mode: any;
   @Input() numReplies: number;
-  protected repliesToShow: any[] = [];
   @Input() response: any;
+  @Output() showPostEvent: any = new EventEmitter();
   @Output() submitButtonClicked: any = new EventEmitter();
-  @Output() undoDeleteButtonClicked: any = new EventEmitter();
 
-  protected delete(componentState: any): void {
-    if (confirm($localize`Are you sure you want to delete this post?`)) {
-      this.deleteButtonClicked.emit(componentState);
+  protected expanded: boolean = false;
+  protected repliesToShow: any[] = [];
+
+  protected hidePost(componentState: any): void {
+    if (confirm($localize`Are you sure you want to hide this post?`)) {
+      this.hidePostEvent.emit(componentState);
     }
   }
 
-  protected undoDelete(componentState: any): void {
+  protected showPost(componentState: any): void {
     if (confirm($localize`Are you sure you want to show this post?`)) {
-      this.undoDeleteButtonClicked.emit(componentState);
+      this.showPostEvent.emit(componentState);
     }
   }
 }

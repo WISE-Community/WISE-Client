@@ -32,29 +32,32 @@
         <button
           mat-stroked-button
           color="warn"
-          (click)="delete(response)"
-          matTooltip="Delete this post so students will not see it"
+          (click)="hidePost(response)"
+          matTooltip="Hide this post so students will not see it"
           matTooltipPosition="above"
           i18n-matTooltip
           i18n
         >
-          Delete
+          Hide Post
         </button>
       }
       @if (
         response.latestInappropriateFlagAnnotation != null &&
         response.latestInappropriateFlagAnnotation.data.action === 'Delete'
       ) {
+        <mat-icon color="warn" matTooltip="Post is hidden from students" i18n-matTooltip
+          >visibility_off</mat-icon
+        >
         <button
           mat-stroked-button
           color="warn"
-          (click)="undoDelete(response)"
+          (click)="showPost(response)"
           matTooltip="Make this post viewable to students"
           matTooltipPosition="above"
           i18n-matTooltip
           i18n
         >
-          Undo Delete
+          Show Post
         </button>
       }
     </div>
@@ -106,43 +109,43 @@
                 <button
                   mat-stroked-button
                   color="warn"
-                  (click)="delete(reply)"
+                  (click)="hidePost(reply)"
                   i18n-matTooltip
-                  matTooltip="Delete this post so students will not see it"
+                  matTooltip="Hide this post so students will not see it"
                   matTooltipPosition="above"
                   i18n
                 >
-                  Delete
+                  Hide Post
                 </button>
               }
               @if (
                 response.latestInappropriateFlagAnnotation != null &&
                 response.latestInappropriateFlagAnnotation.data.action === 'Delete'
               ) {
-                <span
+                <mat-icon
                   color="warn"
+                  matTooltip="Parent post is hidden, so this post is also hidden"
                   i18n-matTooltip
-                  matTooltip="Students will not see this post"
-                  matTooltipPosition="above"
-                  i18n
+                  >visibility_off</mat-icon
                 >
-                  Parent Deleted
-                </span>
               }
               @if (
                 reply.latestInappropriateFlagAnnotation != null &&
                 reply.latestInappropriateFlagAnnotation.data.action === 'Delete'
               ) {
+                <mat-icon color="warn" matTooltip="Post is hidden from students" i18n-matTooltip
+                  >visibility_off</mat-icon
+                >
                 <button
                   mat-stroked-button
                   color="warn"
-                  (click)="undoDelete(reply)"
+                  (click)="showPost(reply)"
                   i18n-matTooltip
                   matTooltip="Make this post viewable to students"
                   matTooltipPosition="above"
                   i18n
                 >
-                  Undo Delete
+                  Show Post
                 </button>
               }
             </div>
