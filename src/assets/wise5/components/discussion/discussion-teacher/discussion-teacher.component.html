@@ -3,7 +3,7 @@
     <div class="discussion-posts w-full md:w-1/2">
       <div class="md:hidden">
         @for (componentState of topLevelResponses.all; track componentState) {
-          <class-response
+          <class-response-teacher
             [response]="componentState"
             [numReplies]="componentState.replies.length"
             (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
@@ -17,7 +17,7 @@
       </div>
       <div class="hidden sm:block">
         @for (componentState of topLevelResponses.col2; track componentState) {
-          <class-response
+          <class-response-teacher
             [response]="componentState"
             [numReplies]="componentState.replies.length"
             (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
@@ -32,7 +32,7 @@
     </div>
     <div class="discussion-posts hidden w-1/2 md:block">
       @for (componentState of topLevelResponses.col1; track componentState) {
-        <class-response
+        <class-response-teacher
           [response]="componentState"
           [numReplies]="componentState.replies.length"
           (submitButtonClicked)="handleSubmitButtonClicked(componentState)"

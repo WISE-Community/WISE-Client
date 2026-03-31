@@ -9,15 +9,15 @@ import { MatInput } from '@angular/material/input';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { ClassResponse } from '../class-response/class-response.component';
 import { DiscussionStudent } from '../discussion-student/discussion-student.component';
 import { TeacherDiscussionService } from '../teacherDiscussionService';
+import { ClassResponseTeacherComponent } from '../class-response-teacher/class-response-teacher.component';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
     CdkTextareaAutosize,
-    ClassResponse,
+    ClassResponseTeacherComponent,
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
     FormsModule,
@@ -35,6 +35,7 @@ import { TeacherDiscussionService } from '../teacherDiscussionService';
 export class DiscussionTeacherComponent extends DiscussionStudent {
   @Input() periodId: number;
   @Input() anonymizeResponses: boolean;
+  studentMode: boolean = false;
   private teacherDiscussionService = inject(TeacherDiscussionService);
 
   ngOnChanges(changes: SimpleChanges): void {
