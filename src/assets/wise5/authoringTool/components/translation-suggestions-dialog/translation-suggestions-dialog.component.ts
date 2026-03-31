@@ -1,13 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogRef
-} from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 
@@ -19,17 +14,16 @@ interface TranslationSuggestionsDialogData {
 }
 
 @Component({
+  imports: [MatDividerModule, MatInputModule, FormsModule, MatButtonModule, MatDialogModule],
   selector: 'translation-suggestions-dialog',
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogContent,
-    MatDialogActions
+  styles: [
+    `
+      .mat-divider {
+        margin: 0;
+      }
+    `
   ],
-  templateUrl: './translation-suggestions-dialog.component.html',
-  styleUrl: './translation-suggestions-dialog.component.scss'
+  templateUrl: './translation-suggestions-dialog.component.html'
 })
 export class TranslationSuggestionsDialogComponent {
   readonly dialogRef = inject(MatDialogRef<TranslationSuggestionsDialogComponent>);

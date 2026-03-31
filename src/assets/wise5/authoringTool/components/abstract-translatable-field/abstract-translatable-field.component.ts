@@ -88,7 +88,8 @@ export abstract class AbstractTranslatableFieldComponent {
     return this.configService.getConfigParam('translationServiceEnabled');
   }
 
-  protected async translateText(): Promise<void> {
+  protected async translateText(event: Event): Promise<void> {
+    event.preventDefault();
     if (this.translationText) {
       this.openDialog();
     } else {
@@ -101,7 +102,9 @@ export abstract class AbstractTranslatableFieldComponent {
         .subscribe({
           next: (translation) => this.saveTranslationText(translation),
           error: () =>
-            alert($localize`There was an error translating the text. Please talk to WISE staff.`)
+            alert(
+              $localize`There was an error translating the text. Please contact WISE staff if the error persists.`
+            )
         });
     }
   }
@@ -117,7 +120,7 @@ export abstract class AbstractTranslatableFieldComponent {
 
   private createDialogRef(): MatDialogRef<TranslationSuggestionsDialogComponent> {
     return this.dialog.open(TranslationSuggestionsDialogComponent, {
-      width: '40%',
+      panelClass: 'dialog-md',
       data: {
         defaultLanguage: this.defaultLanguage.language,
         currentLanguage: this.currentLanguage().language,

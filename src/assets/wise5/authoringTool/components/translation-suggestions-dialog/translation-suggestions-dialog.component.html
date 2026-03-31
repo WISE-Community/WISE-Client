@@ -1,21 +1,18 @@
-<mat-dialog-content>
-  <p>
-    <b>{{ this.data.defaultLanguage }} text</b>
-  </p>
-  <p class="text-content">{{ this.data.defaultLanguageContent }}</p>
-  <p>
-    <b>{{ this.data.currentLanguage }} text (current translation)</b>
-  </p>
-  <p class="text-content">{{ this.data.currentLanguageContent }}</p>
-  <p>
-    <b>{{ this.data.currentLanguage }} text (AI suggested translation)</b>
-  </p>
-  <p class="text-content">{{ this.translation }}</p>
-  <p class="replace-translation">
+<h2 mat-dialog-title i18n>Replace Translation</h2>
+<mat-divider />
+<mat-dialog-content class="!my-4">
+  <p class="font-medium" i18n>{{ this.data.defaultLanguage }} text:</p>
+  <p class="text-sm px-2">{{ this.data.defaultLanguageContent }}</p>
+  <p class="font-medium" i18n>{{ this.data.currentLanguage }} text (current translation):</p>
+  <p class="text-sm px-2">{{ this.data.currentLanguageContent }}</p>
+  <p class="font-medium" i18n>{{ this.data.currentLanguage }} text (AI suggested translation):</p>
+  <p class="text-sm px-2">{{ this.translation }}</p>
+  <p class="pt-2 font-medium" i18n>
     Do you want to replace the current translation with the AI suggested translation?
   </p>
 </mat-dialog-content>
-<mat-dialog-actions align="start">
-  <button mat-raised-button (click)="onClose(true)">Replace</button>
-  <button mat-raised-button (click)="onClose(false)">Cancel</button>
+<mat-divider />
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose(false)" i18n>Cancel</button>
+  <button mat-flat-button color="primary" (click)="onClose(true)" i18n>Replace</button>
 </mat-dialog-actions>
