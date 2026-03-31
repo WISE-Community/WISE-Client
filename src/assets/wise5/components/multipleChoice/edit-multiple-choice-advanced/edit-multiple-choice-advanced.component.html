@@ -1,34 +1,62 @@
-<div class="show-feedback-checkbox">
-  <mat-checkbox
-    color="primary"
-    [(ngModel)]="componentContent.showFeedback"
-    (ngModelChange)="componentChanged()"
-    i18n
-  >
-    Show Feedback
-  </mat-checkbox>
-</div>
-<edit-component-save-button [componentContent]="componentContent" />
-<br />
-<edit-component-submit-button [componentContent]="componentContent" />
-@if (componentContent.showSubmitButton) {
-  <edit-component-max-submit [componentContent]="componentContent" />
-}
-<edit-component-default-feedback [componentContent]="componentContent" />
-<div class="flex flex-col justify-start items-start">
-  <edit-component-max-score [componentContent]="componentContent" />
-  <edit-component-exclude-from-total-score [componentContent]="componentContent" />
-  <edit-component-width [componentContent]="componentContent" />
-  <edit-component-rubric [componentContent]="componentContent" />
-  <edit-component-tags [componentContent]="componentContent" />
-</div>
-<edit-multiple-choice-connected-components
-  [nodeId]="nodeId"
-  [componentId]="componentId"
-  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-  [componentContent]="componentContent"
-  [connectedComponents]="componentContent.connectedComponents"
-  (connectedComponentsChanged)="connectedComponentsChanged($event)"
-/>
-<edit-component-constraints [componentContent]="component.content" />
-<edit-component-json [component]="component" />
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+    </ng-template>
+    <div class="show-feedback-checkbox">
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="componentContent.showFeedback"
+        (ngModelChange)="componentChanged()"
+        i18n
+      >
+        Show Feedback
+      </mat-checkbox>
+    </div>
+    <edit-component-save-button [componentContent]="componentContent" />
+    <br />
+    <edit-component-submit-button [componentContent]="componentContent" />
+    @if (componentContent.showSubmitButton) {
+      <edit-component-max-submit [componentContent]="componentContent" />
+    }
+    <edit-component-default-feedback [componentContent]="componentContent" />
+    <div class="flex flex-col justify-start items-start">
+      <edit-component-max-score [componentContent]="componentContent" />
+      <edit-component-exclude-from-total-score [componentContent]="componentContent" />
+      <edit-component-width [componentContent]="componentContent" />
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+    </ng-template>
+    <edit-component-constraints [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>join_inner</mat-icon>&nbsp;<span i18n>Connections</span>
+    </ng-template>
+    <edit-multiple-choice-connected-components
+      [nodeId]="nodeId"
+      [componentId]="componentId"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      [componentContent]="componentContent"
+      [connectedComponents]="componentContent.connectedComponents"
+      (connectedComponentsChanged)="connectedComponentsChanged($event)"
+    />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <edit-component-rubric [componentContent]="componentContent" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
+    <edit-component-tags [componentContent]="componentContent" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <edit-component-json [component]="component" />
+  </mat-tab>
+</mat-tab-group>

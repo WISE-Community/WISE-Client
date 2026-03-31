@@ -15,13 +15,11 @@ import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/ed
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
 import { EditMultipleChoiceConnectedComponentsComponent } from '../edit-multiple-choice-connected-components/edit-multiple-choice-connected-components.component';
 import { MultipleChoiceContent } from '../MultipleChoiceContent';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  templateUrl: 'edit-multiple-choice-advanced.component.html',
-  styles: ['.show-feedback-checkbox { margin-top: 4px; margin-bottom: 4px; }'],
   imports: [
-    MatCheckbox,
-    FormsModule,
     EditComponentSaveButtonComponent,
     EditComponentSubmitButtonComponent,
     EditComponentMaxSubmitComponent,
@@ -33,8 +31,14 @@ import { MultipleChoiceContent } from '../MultipleChoiceContent';
     EditComponentTagsComponent,
     EditMultipleChoiceConnectedComponentsComponent,
     EditComponentConstraintsComponent,
-    EditComponentJsonComponent
-  ]
+    EditComponentJsonComponent,
+    FormsModule,
+    MatCheckbox,
+    MatIconModule,
+    MatTabsModule
+  ],
+  styles: ['.show-feedback-checkbox { margin-top: 4px; margin-bottom: 4px; }'],
+  templateUrl: 'edit-multiple-choice-advanced.component.html'
 })
 export class EditMultipleChoiceAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['MultipleChoice'];
