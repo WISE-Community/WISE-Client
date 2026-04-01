@@ -45,15 +45,17 @@ function onlyOneAvatar() {
     });
 
     it('should automatically select the avatar and only show the continue button', () => {
-      expect(fixture.debugElement.queryAll(By.css('mat-button-toggle')).length).toEqual(0);
+      expect(fixture.debugElement.queryAll(By.css('.avatar-button')).length).toEqual(0);
       expect(fixture.debugElement.query(By.css('.selected-avatar-image'))).toBeTruthy();
-      expect(fixture.debugElement.query(By.css('.selected-avatar-name')).nativeElement.textContent.trim()).toEqual('Robot');
+      expect(
+        fixture.debugElement.query(By.css('.selected-avatar-name')).nativeElement.textContent.trim()
+      ).toEqual('Robot');
 
-      const buttons = fixture.debugElement.queryAll(By.css('button'));
-      const continueButton = buttons.find((btn) => btn.nativeElement.textContent.includes('Continue'));
-      const backButton = buttons.find((btn) => btn.nativeElement.textContent.includes('Back'));
+      const backButton = fixture.debugElement
+        .queryAll(By.css('button'))
+        .find((btn) => btn.nativeElement.textContent.includes('Back'));
 
-      expect(continueButton).toBeTruthy();
+      expect(getContinueButton()).toBeTruthy();
       expect(backButton).toBeUndefined();
     });
 
@@ -69,7 +71,7 @@ function onlyOneAvatar() {
 function ngOnInit() {
   describe('ngOnInit()', () => {
     it('should show avatars', () => {
-      expect(fixture.debugElement.queryAll(By.css('mat-button-toggle')).length).toEqual(2);
+      expect(fixture.debugElement.queryAll(By.css('.avatar-button')).length).toEqual(2);
     });
   });
 }
@@ -77,7 +79,7 @@ function ngOnInit() {
 function selectAvatar() {
   describe('select avatar', () => {
     beforeEach(() => {
-      fixture.debugElement.queryAll(By.css('mat-button-toggle'))[0].nativeElement.click();
+      fixture.debugElement.queryAll(By.css('.avatar-button'))[0].nativeElement.click();
       fixture.detectChanges();
     });
     it('should enable the continue button', () => {
@@ -102,5 +104,5 @@ function clickContinueButton_shouldEmitAvatar() {
 function getContinueButton() {
   return fixture.debugElement
     .queryAll(By.css('button'))
-    .find((buttonDebugEl) => buttonDebugEl.nativeElement.textContent.includes('Continue'));
+    .find((buttonDebugEl) => buttonDebugEl.nativeElement.textContent.includes('Chat with'));
 }

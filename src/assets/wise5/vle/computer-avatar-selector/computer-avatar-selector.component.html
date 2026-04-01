@@ -6,15 +6,11 @@
     }
     @if (selectedAvatar == null) {
       <div class="mat-subtitle-2 accent" i18n>Choose Your {{ label }}:</div>
-      <mat-button-toggle-group
-        [(ngModel)]="selectedAvatar"
-        [disabled]="avatars.length === 1"
-        class="flex flex-wrap"
-        aria-label="Selected avatar"
-        i18n-aria-label
-      >
+      <div class="flex flex-wrap mt-2">
         @for (avatar of avatars; track avatar.id) {
-          <mat-button-toggle
+          <button
+            class="avatar-button"
+            matButton
             [value]="avatar"
             (click)="selectedAvatar = avatar"
             aria-label="{{ avatar.name }}"
@@ -23,12 +19,12 @@
             <div class="name">
               <b>{{ avatar.name }}</b>
             </div>
-          </mat-button-toggle>
+          </button>
         }
-      </mat-button-toggle-group>
+      </div>
     } @else {
       <div class="mat-subtitle-2 accent" i18n>Your {{ label }}:</div>
-      <span style="display: flex; flex-direction: column; align-items: center">
+      <span class="flex flex-col items-center">
         <img
           [src]="avatarsPath + selectedAvatar.image"
           alt="{{ selectedAvatar.name }}"
@@ -40,8 +36,8 @@
       </span>
     }
   </mat-card-content>
-  <mat-card-actions class="flex justify-end">
-    @if (selectedAvatar != null) {
+  @if (selectedAvatar != null) {
+    <mat-card-actions class="flex justify-end">
       @if (avatars.length > 1) {
         <button mat-flat-button (click)="selectedAvatar = null" i18n>Back</button>
         <span class="flex-grow"></span>
@@ -49,11 +45,12 @@
       <button
         mat-flat-button
         color="primary"
+        class="motion-safe:animate-bounce"
         (click)="chooseAvatarEvent.emit(this.selectedAvatar)"
         i18n
       >
-        Continue
+        Chat with {{ selectedAvatar.name }}
       </button>
-    }
-  </mat-card-actions>
+    </mat-card-actions>
+  }
 </mat-card>
