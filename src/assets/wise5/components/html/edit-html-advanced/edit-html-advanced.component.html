@@ -1,0 +1,24 @@
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+    </ng-template>
+    <edit-component-width [componentContent]="componentContent" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+    </ng-template>
+    <edit-component-constraints [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <edit-component-rubric [componentContent]="componentContent" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <edit-component-json [component]="component" />
+  </mat-tab>
+</mat-tab-group>
