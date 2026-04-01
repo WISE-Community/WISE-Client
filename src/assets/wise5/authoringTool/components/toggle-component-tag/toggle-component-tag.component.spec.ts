@@ -32,7 +32,7 @@ describe('ToggleComponentTagComponent', () => {
       fixture.detectChanges();
 
       expect(component['hasTag']).toBeFalse();
-      expect(component['tooltip']).toEqual('Mark as important for teachers');
+      expect(component['tooltip']).toEqual('Bookmark for teachers');
     });
 
     it('should set hasTag to true and update tooltip if tag is present', () => {
@@ -40,7 +40,7 @@ describe('ToggleComponentTagComponent', () => {
       fixture.detectChanges();
 
       expect(component['hasTag']).toBeTrue();
-      expect(component['tooltip']).toEqual('Unmark as important for teachers');
+      expect(component['tooltip']).toEqual('Remove bookmark for teachers');
     });
 
     it('should handle undefined tags array', () => {
@@ -48,7 +48,7 @@ describe('ToggleComponentTagComponent', () => {
       fixture.detectChanges();
 
       expect(component['hasTag']).toBeFalsy();
-      expect(component['tooltip']).toEqual('Mark as important for teachers');
+      expect(component['tooltip']).toEqual('Bookmark for teachers');
     });
   });
 
@@ -61,7 +61,7 @@ describe('ToggleComponentTagComponent', () => {
 
       expect(component.component.tags).toEqual(['other-tag']);
       expect(component['hasTag']).toBeFalse();
-      expect(component['tooltip']).toEqual('Mark as important for teachers');
+      expect(component['tooltip']).toEqual('Bookmark for teachers');
       expect(mockProjectService.saveProject).toHaveBeenCalled();
     });
 
@@ -73,7 +73,7 @@ describe('ToggleComponentTagComponent', () => {
 
       expect(component.component.tags).toEqual(['other-tag', '!important']);
       expect(component['hasTag']).toBeTrue();
-      expect(component['tooltip']).toEqual('Unmark as important for teachers');
+      expect(component['tooltip']).toEqual('Remove bookmark for teachers');
       expect(mockProjectService.saveProject).toHaveBeenCalled();
     });
 
@@ -85,7 +85,7 @@ describe('ToggleComponentTagComponent', () => {
 
       expect(component.component.tags).toEqual(['!important']);
       expect(component['hasTag']).toBeTrue();
-      expect(component['tooltip']).toEqual('Unmark as important for teachers');
+      expect(component['tooltip']).toEqual('Remove bookmark for teachers');
       expect(mockProjectService.saveProject).toHaveBeenCalled();
     });
   });

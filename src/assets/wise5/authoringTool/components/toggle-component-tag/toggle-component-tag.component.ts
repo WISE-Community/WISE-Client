@@ -15,9 +15,9 @@ import { MatButtonModule } from '@angular/material/button';
     matTooltipPosition="above"
   >
     @if (hasTag) {
-      <mat-icon style="color: orange">star</mat-icon>
+      <mat-icon color="primary">bookmark</mat-icon>
     } @else {
-      <mat-icon>star_border</mat-icon>
+      <mat-icon>bookmark_border</mat-icon>
     }
   </button>`
 })
@@ -36,9 +36,9 @@ export class ToggleComponentTagComponent {
 
   private updateTooltip(): void {
     if (this.hasTag) {
-      this.tooltip = $localize`Unmark as important for teachers`;
+      this.tooltip = $localize`Remove bookmark for teachers`;
     } else {
-      this.tooltip = $localize`Mark as important for teachers`;
+      this.tooltip = $localize`Bookmark for teachers`;
     }
   }
 

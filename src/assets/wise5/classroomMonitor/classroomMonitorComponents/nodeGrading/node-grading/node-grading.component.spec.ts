@@ -130,7 +130,7 @@ describe('NodeGradingComponent', () => {
 
 function componentTags_importantTag() {
   describe('component tags', () => {
-    it('shows a star icon in the tab if the component has the !important tag', async () => {
+    it('shows a bookmark icon in the tab if the component has the !important tag', async () => {
       const projectService = TestBed.inject(TeacherProjectService);
       (projectService.getComponents as jasmine.Spy).and.returnValue([
         { id: 'component1', type: 'MultipleChoice', tags: ['!important'] }
@@ -143,16 +143,16 @@ function componentTags_importantTag() {
       fixture.detectChanges();
 
       const icons = Array.from(fixture.nativeElement.querySelectorAll('mat-icon'));
-      let starIcon = icons.find((icon: any) => icon.textContent.trim() === 'star');
+      let starIcon = icons.find((icon: any) => icon.textContent.trim() === 'bookmark');
       if (!starIcon) {
         starIcon = Array.from(document.querySelectorAll('mat-icon')).find(
-          (icon: any) => (icon as Element).textContent.trim() === 'star'
+          (icon: any) => (icon as Element).textContent.trim() === 'bookmark'
         ) as any;
       }
       expect(starIcon).toBeTruthy();
     });
 
-    it('does not show a star icon in the tab if the component does not have the !important tag', async () => {
+    it('does not show a bookmark icon in the tab if the component does not have the !important tag', async () => {
       const projectService = TestBed.inject(TeacherProjectService);
       (projectService.getComponents as jasmine.Spy).and.returnValue([
         { id: 'component1', type: 'MultipleChoice', tags: ['other'] }
@@ -165,10 +165,10 @@ function componentTags_importantTag() {
       fixture.detectChanges();
 
       const icons = Array.from(fixture.nativeElement.querySelectorAll('mat-icon'));
-      let starIcon = icons.find((icon: any) => icon.textContent.trim() === 'star');
+      let starIcon = icons.find((icon: any) => icon.textContent.trim() === 'bookmark');
       if (!starIcon) {
         starIcon = Array.from(document.querySelectorAll('mat-icon')).find(
-          (icon: any) => (icon as Element).textContent.trim() === 'star'
+          (icon: any) => (icon as Element).textContent.trim() === 'bookmark'
         ) as any;
       }
       expect(starIcon).toBeFalsy();

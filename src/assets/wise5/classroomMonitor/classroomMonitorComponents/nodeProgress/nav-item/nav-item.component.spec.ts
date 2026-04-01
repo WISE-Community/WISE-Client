@@ -92,7 +92,7 @@ function importantTag() {
       projectService = TestBed.inject(TeacherProjectService);
     });
 
-    it('shows star icon when node contains a component with !important tag', () => {
+    it('shows bookmark icon when node contains a component with !important tag', () => {
       const node = new Node();
       spyOn(node, 'getComponents').and.returnValue([{ id: 'comp1', tags: ['!important'] }] as any);
       spyOn(projectService, 'getNode').and.returnValue(node);
@@ -103,12 +103,12 @@ function importantTag() {
       fixture.detectChanges();
 
       const icons = Array.from(fixture.nativeElement.querySelectorAll('mat-icon'));
-      const starIcon = icons.find((icon: any) => icon.textContent.trim() === 'star');
+      const starIcon = icons.find((icon: any) => icon.textContent.trim() === 'bookmark');
       expect(starIcon).toBeTruthy();
       expect(component['hasImportantComponent']).toBeTrue();
     });
 
-    it('does not show star icon when node does not contain a component with !important tag', () => {
+    it('does not show bookmark icon when node does not contain a component with !important tag', () => {
       const node = new Node();
       spyOn(node, 'getComponents').and.returnValue([{ id: 'comp1', tags: ['other'] }] as any);
       spyOn(projectService, 'getNode').and.returnValue(node);
@@ -119,7 +119,7 @@ function importantTag() {
       fixture.detectChanges();
 
       const icons = Array.from(fixture.nativeElement.querySelectorAll('mat-icon'));
-      const starIcon = icons.find((icon: any) => icon.textContent.trim() === 'star');
+      const starIcon = icons.find((icon: any) => icon.textContent.trim() === 'bookmark');
       expect(starIcon).toBeFalsy();
       expect(component['hasImportantComponent']).toBeFalse();
     });
