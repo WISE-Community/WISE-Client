@@ -10939,15 +10939,15 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">3,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="567150993227935308" datatype="html">
-        <source>Unmark as important for teachers</source>
+      <trans-unit id="4799268156143379602" datatype="html">
+        <source>Remove bookmark for teachers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/toggle-component-tag/toggle-component-tag.component.ts</context>
           <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1388865824494148873" datatype="html">
-        <source>Mark as important for teachers</source>
+      <trans-unit id="6524950213289783936" datatype="html">
+        <source>Bookmark for teachers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/toggle-component-tag/toggle-component-tag.component.ts</context>
           <context context-type="linenumber">41</context>
@@ -14663,11 +14663,18 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3144706702162001939" datatype="html">
-        <source>Important activity</source>
+      <trans-unit id="5638394815345345619" datatype="html">
+        <source>1 item (<x id="INTERPOLATION" equiv-text="{{ getComponentTypeLabel(components[0].type) }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/filter-components/filter-components.component.html</context>
-          <context context-type="linenumber">37,40</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7308614686692606751" datatype="html">
+        <source>Bookmarked activity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/filter-components/filter-components.component.html</context>
+          <context context-type="linenumber">25,27</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeGrading/node-grading/node-grading.component.html</context>
