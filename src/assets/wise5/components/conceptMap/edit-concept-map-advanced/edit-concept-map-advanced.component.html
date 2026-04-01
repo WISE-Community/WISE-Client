@@ -1,197 +1,244 @@
-<div class="flex flex-col gap-2">
-  <div>
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.showAutoScore"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Show Auto Score
-    </mat-checkbox>
-  </div>
-  <div>
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.showAutoFeedback"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Show Auto Feedback
-    </mat-checkbox>
-  </div>
-  <div class="flex flex-row items-center gap-4">
-    <div i18n>Rules</div>
-    <button mat-raised-button color="primary" (click)="addRule()" i18n>
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
-  @for (rule of componentContent.rules; track rule; let ruleIndex = $index) {
-    <div class="rule-container">
-      <mat-form-field>
-        <mat-label i18n>Rule Name</mat-label>
-        <input matInput [(ngModel)]="rule.name" (ngModelChange)="componentChanged()" />
-      </mat-form-field>
-      <div class="flex flex-row flex-wrap gap-2 items-center">
-        <mat-form-field>
-          <mat-label i18n>Rule Type</mat-label>
-          <mat-select [(ngModel)]="rule.not" (ngModelChange)="componentChanged()">
-            <mat-option [value]="false" i18n>should contain</mat-option>
-            <mat-option [value]="true" i18n>should not contain</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label i18n>Comparison</mat-label>
-          <mat-select [(ngModel)]="rule.comparison" (ngModelChange)="componentChanged()">
-            <mat-option value="exactly" i18n>exactly</mat-option>
-            <mat-option value="more than" i18n>more than</mat-option>
-            <mat-option value="less than" i18n>less than</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label i18n>Count</mat-label>
-          <input
-            matInput
-            type="number"
-            min="0"
-            [(ngModel)]="rule.number"
-            (ngModelChange)="componentChanged()"
-          />
-        </mat-form-field>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+    </ng-template>
+    <div class="flex flex-col gap-2">
+      <div>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="componentContent.showAutoScore"
+          (ngModelChange)="componentChanged()"
+          i18n
+        >
+          Show Auto Score
+        </mat-checkbox>
       </div>
-      <div class="flex flex-row flex-wrap gap-2 items-center">
-        <mat-form-field>
-          <mat-label i18n>Node</mat-label>
-          <mat-select [(ngModel)]="rule.nodeLabel" (ngModelChange)="componentChanged()">
-            <mat-option></mat-option>
-            <mat-option value="any" i18n>Any</mat-option>
-            @for (node of componentContent.nodes; track node) {
-              <mat-option [value]="node.label">
-                {{ node.label }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label i18n>Link Connection</mat-label>
-          <mat-select [(ngModel)]="rule.type" (ngModelChange)="ruleTypeChanged(ruleIndex)">
-            <mat-option value="node" i18n>with any or no link</mat-option>
-            <mat-option value="link" i18n>with specific link</mat-option>
-          </mat-select>
-        </mat-form-field>
-        @if (rule.type === 'link') {
-          <mat-form-field>
-            <mat-label i18n>Link</mat-label>
-            <mat-select [(ngModel)]="rule.linkLabel" (ngModelChange)="componentChanged()">
-              <mat-option></mat-option>
-              <mat-option value="any" i18n>Any</mat-option>
-              @for (link of componentContent.links; track link) {
-                <mat-option [value]="link.label">
-                  {{ link.label }}
-                </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-          <span i18n>to</span>
-          <mat-form-field>
-            <mat-label i18n>Node</mat-label>
-            <mat-select [(ngModel)]="rule.otherNodeLabel" (ngModelChange)="componentChanged()">
-              <mat-option></mat-option>
-              <mat-option value="any" i18n>Any</mat-option>
-              @for (node of componentContent.nodes; track node) {
-                <mat-option [value]="node.label">
-                  {{ node.label }}
-                </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        }
+      <div>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="componentContent.showAutoFeedback"
+          (ngModelChange)="componentChanged()"
+          i18n
+        >
+          Show Auto Feedback
+        </mat-checkbox>
       </div>
-      <div class="flex flex-row flex-wrap items-center gap-4 mb-4">
-        <div>
-          <button mat-raised-button color="primary" (click)="addCategoryToRule(rule)" i18n>
-            Add Category (Optional)
-          </button>
-        </div>
-        @for (category of rule.categories; track customTrackBy; let categoryIndex = $index) {
-          <div class="flex flex-row items-center gap-2">
-            <mat-form-field class="form-field-no-hint">
-              <mat-label i18n>Category Name</mat-label>
+      <div class="flex flex-row items-center gap-4">
+        <div i18n>Rules</div>
+        <button mat-raised-button color="primary" (click)="addRule()" i18n>
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      @for (rule of componentContent.rules; track rule; let ruleIndex = $index) {
+        <div class="rule-container">
+          <mat-form-field>
+            <mat-label i18n>Rule Name</mat-label>
+            <input matInput [(ngModel)]="rule.name" (ngModelChange)="componentChanged()" />
+          </mat-form-field>
+          <div class="flex flex-row flex-wrap gap-2 items-center">
+            <mat-form-field>
+              <mat-label i18n>Rule Type</mat-label>
+              <mat-select [(ngModel)]="rule.not" (ngModelChange)="componentChanged()">
+                <mat-option [value]="false" i18n>should contain</mat-option>
+                <mat-option [value]="true" i18n>should not contain</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label i18n>Comparison</mat-label>
+              <mat-select [(ngModel)]="rule.comparison" (ngModelChange)="componentChanged()">
+                <mat-option value="exactly" i18n>exactly</mat-option>
+                <mat-option value="more than" i18n>more than</mat-option>
+                <mat-option value="less than" i18n>less than</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label i18n>Count</mat-label>
               <input
                 matInput
-                [(ngModel)]="rule.categories[categoryIndex]"
+                type="number"
+                min="0"
+                [(ngModel)]="rule.number"
                 (ngModelChange)="componentChanged()"
               />
             </mat-form-field>
+          </div>
+          <div class="flex flex-row flex-wrap gap-2 items-center">
+            <mat-form-field>
+              <mat-label i18n>Node</mat-label>
+              <mat-select [(ngModel)]="rule.nodeLabel" (ngModelChange)="componentChanged()">
+                <mat-option></mat-option>
+                <mat-option value="any" i18n>Any</mat-option>
+                @for (node of componentContent.nodes; track node) {
+                  <mat-option [value]="node.label">
+                    {{ node.label }}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label i18n>Link Connection</mat-label>
+              <mat-select [(ngModel)]="rule.type" (ngModelChange)="ruleTypeChanged(ruleIndex)">
+                <mat-option value="node" i18n>with any or no link</mat-option>
+                <mat-option value="link" i18n>with specific link</mat-option>
+              </mat-select>
+            </mat-form-field>
+            @if (rule.type === 'link') {
+              <mat-form-field>
+                <mat-label i18n>Link</mat-label>
+                <mat-select [(ngModel)]="rule.linkLabel" (ngModelChange)="componentChanged()">
+                  <mat-option></mat-option>
+                  <mat-option value="any" i18n>Any</mat-option>
+                  @for (link of componentContent.links; track link) {
+                    <mat-option [value]="link.label">
+                      {{ link.label }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <span i18n>to</span>
+              <mat-form-field>
+                <mat-label i18n>Node</mat-label>
+                <mat-select [(ngModel)]="rule.otherNodeLabel" (ngModelChange)="componentChanged()">
+                  <mat-option></mat-option>
+                  <mat-option value="any" i18n>Any</mat-option>
+                  @for (node of componentContent.nodes; track node) {
+                    <mat-option [value]="node.label">
+                      {{ node.label }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            }
+          </div>
+          <div class="flex flex-row flex-wrap items-center gap-4 mb-4">
+            <div>
+              <button mat-raised-button color="primary" (click)="addCategoryToRule(rule)" i18n>
+                Add Category (Optional)
+              </button>
+            </div>
+            @for (category of rule.categories; track customTrackBy; let categoryIndex = $index) {
+              <div class="flex flex-row items-center gap-2">
+                <mat-form-field class="form-field-no-hint">
+                  <mat-label i18n>Category Name</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="rule.categories[categoryIndex]"
+                    (ngModelChange)="componentChanged()"
+                  />
+                </mat-form-field>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="deleteCategoryFromRule(rule, categoryIndex)"
+                  matTooltip="Delete Catagory"
+                  matTooltipPosition="above"
+                  i18n-matTooltip
+                >
+                  <mat-icon>clear</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+          <div class="flex flex-row gap-2 w-full">
             <button
               mat-raised-button
               color="primary"
-              (click)="deleteCategoryFromRule(rule, categoryIndex)"
-              matTooltip="Delete Catagory"
+              (click)="moveObjectUp(componentContent.rules, ruleIndex)"
+              matTooltip="Move Up"
               matTooltipPosition="above"
               i18n-matTooltip
+              i18n
             >
-              <mat-icon>clear</mat-icon>
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="moveObjectDown(componentContent.rules, ruleIndex)"
+              matTooltip="Move Down"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              i18n
+            >
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="ruleDeleteButtonClicked(ruleIndex)"
+              matTooltip="Delete"
+              matTooltipPosition="above"
+              i18n-matTooltip
+              i18n
+            >
+              <mat-icon>delete</mat-icon>
             </button>
           </div>
-        }
+        </div>
+      }
+      <div>
+        <mat-form-field class="mt-4">
+          <mat-label i18n>Custom Rule Evaluator</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="componentContent.customRuleEvaluator"
+            (ngModelChange)="componentChanged()"
+            rows="10"
+            cols="100"
+          >
+          </textarea>
+        </mat-form-field>
       </div>
-      <div class="flex flex-row gap-2 w-full">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="moveObjectUp(componentContent.rules, ruleIndex)"
-          matTooltip="Move Up"
-          matTooltipPosition="above"
-          i18n-matTooltip
-          i18n
-        >
-          <mat-icon>arrow_upward</mat-icon>
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="moveObjectDown(componentContent.rules, ruleIndex)"
-          matTooltip="Move Down"
-          matTooltipPosition="above"
-          i18n-matTooltip
-          i18n
-        >
-          <mat-icon>arrow_downward</mat-icon>
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="ruleDeleteButtonClicked(ruleIndex)"
-          matTooltip="Delete"
-          matTooltipPosition="above"
-          i18n-matTooltip
-          i18n
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
+      @if (isNotebookEnabled()) {
+        <div>
+          <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+        </div>
+      }
     </div>
-  }
-  <div>
-    <mat-form-field class="mt-4">
-      <mat-label i18n>Custom Rule Evaluator</mat-label>
-      <textarea
-        matInput
-        [(ngModel)]="componentContent.customRuleEvaluator"
-        (ngModelChange)="componentChanged()"
-        rows="10"
-        cols="100"
-      >
-      </textarea>
-    </mat-form-field>
-  </div>
-  @if (isNotebookEnabled()) {
-    <div>
-      <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+    <div class="flex flex-col justify-start items-start">
+      <edit-component-save-button [componentContent]="component.content" />
+      <edit-component-submit-button [componentContent]="component.content" />
+      @if (component.content.showSubmitButton) {
+        <edit-component-max-submit [componentContent]="component.content" />
+      }
+      <edit-component-default-feedback [componentContent]="component.content" />
+      <edit-component-max-score [componentContent]="component.content" />
+      <edit-component-exclude-from-total-score [componentContent]="component.content" />
+      <edit-component-width [componentContent]="component.content" />
     </div>
-  }
-</div>
-<edit-common-advanced
-  [component]="component"
-  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-/>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+    </ng-template>
+    <edit-component-constraints [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>join_inner</mat-icon>&nbsp;<span i18n>Connections</span>
+    </ng-template>
+    <edit-connected-components
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      [componentContent]="component.content"
+      [connectedComponents]="component.content.connectedComponents"
+      (connectedComponentsChanged)="connectedComponentsChanged($event)"
+    />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <edit-component-rubric [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
+    <edit-component-tags [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <edit-component-json [component]="component" />
+  </mat-tab>
+</mat-tab-group>
