@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltip } from '@angular/material/tooltip';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
-import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { TranslatableTextareaComponent } from '../../../authoringTool/components/translatable-textarea/translatable-textarea.component';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { EditFeedbackRulesComponent } from '../../common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component';
@@ -17,21 +12,18 @@ import { OpenResponseContent } from '../OpenResponseContent';
 import { CRaterItemSelectComponent } from '../../common/cRater/crater-item-select/crater-item-select.component';
 import { EditCRaterInfoComponent } from '../../common/cRater/edit-crater-info/edit-crater-info.component';
 import { DEFAULT_IDEAS_SUMMARY_GROUPS } from '../../common/cRater/CRaterRubric';
+import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced-shared.module';
 
 @Component({
   imports: [
+    EditComponentAdvancedSharedModule,
     TranslatableTextareaComponent,
-    MatCheckbox,
-    FormsModule,
     MatFormFieldModule,
     MatInput,
     MatButton,
     MatSelectModule,
     EditFeedbackRulesComponent,
     MatTooltip,
-    MatIcon,
-    EditComponentAddToNotebookButtonComponent,
-    EditCommonAdvancedComponent,
     EditCRaterInfoComponent,
     CRaterItemSelectComponent
   ],

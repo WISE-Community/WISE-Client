@@ -14,12 +14,16 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { EditComponentAddToNotebookButtonComponent } from '../edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
+import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
 
 @NgModule({
   imports: [
+    EditComponentAddToNotebookButtonComponent,
     EditComponentSaveButtonComponent,
     EditComponentSubmitButtonComponent,
     EditComponentMaxSubmitComponent,
+    EditConnectedComponentsComponent,
     EditComponentDefaultFeedback,
     EditComponentMaxScoreComponent,
     EditComponentExcludeFromTotalScoreComponent,
@@ -34,9 +38,11 @@ import { FormsModule } from '@angular/forms';
     MatTabsModule
   ],
   exports: [
+    EditComponentAddToNotebookButtonComponent,
     EditComponentSaveButtonComponent,
     EditComponentSubmitButtonComponent,
     EditComponentMaxSubmitComponent,
+    EditConnectedComponentsComponent,
     EditComponentDefaultFeedback,
     EditComponentMaxScoreComponent,
     EditComponentExcludeFromTotalScoreComponent,
