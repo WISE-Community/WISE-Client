@@ -1,6 +1,5 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { NotebookService } from '../../../services/notebookService';
@@ -15,11 +14,7 @@ let fixture: ComponentFixture<EditGraphAdvancedComponent>;
 describe('EditGraphAdvancedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        EditGraphAdvancedComponent,
-        EditCommonAdvancedComponent,
-        StudentTeacherCommonServicesModule
-      ],
+      imports: [EditGraphAdvancedComponent, StudentTeacherCommonServicesModule],
       providers: [
         TeacherNodeService,
         TeacherProjectService,
