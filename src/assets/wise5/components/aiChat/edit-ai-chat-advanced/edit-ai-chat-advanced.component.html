@@ -1,19 +1,50 @@
-<mat-form-field>
-  <mat-label i18n>Model</mat-label>
-  <mat-select [(ngModel)]="componentContent.model" (ngModelChange)="this.componentChanged()">
-    @for (model of models; track model) {
-      <mat-option [value]="model">{{ model }}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>
-<br />
-<edit-component-width [componentContent]="component.content" />
-<edit-connected-components
-  [nodeId]="component.nodeId"
-  [componentId]="component.id"
-  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-  [componentContent]="component.content"
-  [connectedComponents]="component.content.connectedComponents"
-  (connectedComponentsChanged)="connectedComponentsChanged($event)"
-/>
-<edit-component-json [component]="component" />
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+    </ng-template>
+    <mat-form-field>
+      <mat-label i18n>Model</mat-label>
+      <mat-select [(ngModel)]="componentContent.model" (ngModelChange)="this.componentChanged()">
+        @for (model of models; track model) {
+          <mat-option [value]="model">{{ model }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <br />
+    <edit-component-width [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+    </ng-template>
+    <edit-component-constraints [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>join_inner</mat-icon>&nbsp;<span i18n>Connections</span>
+    </ng-template>
+    <edit-connected-components
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      [componentContent]="component.content"
+      [connectedComponents]="component.content.connectedComponents"
+      (connectedComponentsChanged)="connectedComponentsChanged($event)"
+    />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <edit-component-rubric [componentContent]="componentContent" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
+    <edit-component-tags [componentContent]="componentContent" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <edit-component-json [component]="component" />
+  </mat-tab>
+</mat-tab-group>
