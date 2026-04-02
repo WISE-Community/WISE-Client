@@ -57,6 +57,10 @@ export class Node {
     });
   }
 
+  getComponents(): any[] {
+    return this.components;
+  }
+
   getComponent(componentId: string): any {
     return this.components.find((component) => component.id === componentId);
   }

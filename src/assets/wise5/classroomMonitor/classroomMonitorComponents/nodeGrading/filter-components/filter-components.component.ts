@@ -6,9 +6,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { ComponentContent } from '../../../../common/ComponentContent';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTooltipModule
+  ],
   selector: 'filter-components',
   styleUrl: './filter-components.component.scss',
   templateUrl: './filter-components.component.html',

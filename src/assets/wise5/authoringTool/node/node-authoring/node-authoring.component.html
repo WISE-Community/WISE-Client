@@ -48,6 +48,7 @@
               }
               <span class="heavy">{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
             </div>
+            <toggle-component-tag [component]="component" />
             <span class="flex grow"></span>
             <div class="text flex justify-end items-center">
               @if (component.id === editingComponentId) {
