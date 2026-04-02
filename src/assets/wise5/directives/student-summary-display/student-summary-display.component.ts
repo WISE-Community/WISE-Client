@@ -50,7 +50,7 @@ export class StudentSummaryDisplay extends SummaryDisplayComponent {
   private initializeChangeListeners(): void {
     this.studentWorkSavedToServerSubscription = (
       this.dataService as StudentDataService
-    ).studentWorkSavedToServer$.subscribe((componentState) => {
+    ).studentWorkSavedToServer$?.subscribe((componentState) => {
       if (
         this.doRender &&
         componentState.nodeId === this.nodeId &&

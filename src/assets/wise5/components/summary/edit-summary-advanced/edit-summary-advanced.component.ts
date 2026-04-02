@@ -1,27 +1,41 @@
 import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
-import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
-import { EditComponentRubricComponent } from '../../../../../app/authoring-tool/edit-component-rubric/edit-component-rubric.component';
-import { EditComponentTagsComponent } from '../../../../../app/authoring-tool/edit-component-tags/edit-component-tags.component';
-import { EditComponentConstraintsComponent } from '../../../../../app/authoring-tool/edit-component-constraints/edit-component-constraints.component';
-import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
+import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced-shared.module';
 
 @Component({
-  imports: [
-    EditComponentWidthComponent,
-    EditComponentRubricComponent,
-    EditComponentTagsComponent,
-    EditComponentConstraintsComponent,
-    EditComponentJsonComponent
-  ],
+  imports: [EditComponentAdvancedSharedModule],
   template: `
-    <div class="flex flex-col">
-      <edit-component-width [componentContent]="componentContent" />
-      <edit-component-rubric [componentContent]="componentContent" />
-      <edit-component-tags [componentContent]="componentContent" />
-      <edit-component-constraints [componentContent]="component.content" />
-      <edit-component-json [component]="component" />
-    </div>
+    <mat-tab-group>
+      <mat-tab>
+        <div class="flex flex-col">
+          <edit-component-width [componentContent]="componentContent" />
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+        </ng-template>
+        <edit-component-constraints [componentContent]="component.content" />
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+        </ng-template>
+        <edit-component-rubric [componentContent]="component.content" />
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template
+        >
+        <edit-component-tags [componentContent]="component.content" />
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template
+        >
+        <edit-component-json [component]="component" />
+      </mat-tab>
+    </mat-tab-group>
   `
 })
 export class EditSummaryAdvancedComponent extends EditAdvancedComponentComponent {}
