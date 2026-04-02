@@ -17,50 +17,40 @@
           />
         </div>
       </div>
-    </div>
-    <div class="post" [innerHTML]="response.studentData.responseTextHTML"></div>
-    @for (attachment of response.studentData.attachments; track attachment) {
-      <img [src]="attachment.iconURL" i18n-alt alt="Post attachment" class="attachment" />
-    }
-    <div class="flex justify-end items-center">
-      <br />
+      <span class="flex-grow"></span>
       @if (
         response.latestInappropriateFlagAnnotation == null ||
         response.latestInappropriateFlagAnnotation.data == null ||
         response.latestInappropriateFlagAnnotation.data.action != 'Delete'
       ) {
         <button
-          mat-stroked-button
-          color="warn"
+          matIconButton
           (click)="hidePost(response)"
-          matTooltip="Hide this post so students will not see it"
+          matTooltip="Hide from students"
           matTooltipPosition="above"
           i18n-matTooltip
-          i18n
         >
-          Hide Post
+          <mat-icon>visibility_on</mat-icon>
         </button>
-      }
-      @if (
+      } @else if (
         response.latestInappropriateFlagAnnotation != null &&
         response.latestInappropriateFlagAnnotation.data.action === 'Delete'
       ) {
-        <mat-icon color="warn" matTooltip="Post is hidden from students" i18n-matTooltip
-          >visibility_off</mat-icon
-        >
         <button
-          mat-stroked-button
-          color="warn"
+          matIconButton
           (click)="showPost(response)"
-          matTooltip="Make this post viewable to students"
+          matTooltip="Show to students"
           matTooltipPosition="above"
           i18n-matTooltip
-          i18n
         >
-          Show Post
+          <mat-icon color="warn">visibility_off</mat-icon>
         </button>
       }
     </div>
+    <div class="post" [innerHTML]="response.studentData.responseTextHTML"></div>
+    @for (attachment of response.studentData.attachments; track attachment) {
+      <img [src]="attachment.iconURL" i18n-alt alt="Post attachment" class="attachment" />
+    }
   </div>
   @if (response.replies.length > 0) {
     <div class="notice-bg-bg">
@@ -97,9 +87,7 @@
                   tooltipPosition="after"
                 />
               </div>
-            </div>
-            <div class="pt-1" [innerHTML]="reply.studentData.responseHTML"></div>
-            <div class="flex justify-end items-center">
+              <span class="flex-grow"></span>
               @if (
                 (response.latestInappropriateFlagAnnotation == null ||
                   response.latestInappropriateFlagAnnotation.data.action !== 'Delete') &&
@@ -107,48 +95,42 @@
                   reply.latestInappropriateFlagAnnotation.data.action != 'Delete')
               ) {
                 <button
-                  mat-stroked-button
-                  color="warn"
+                  matIconButton
                   (click)="hidePost(reply)"
-                  i18n-matTooltip
-                  matTooltip="Hide this post so students will not see it"
+                  matTooltip="Hide from students"
                   matTooltipPosition="above"
-                  i18n
+                  i18n-matTooltip
                 >
-                  Hide Post
+                  <mat-icon>visibility_on</mat-icon>
                 </button>
-              }
-              @if (
+              } @else if (
                 response.latestInappropriateFlagAnnotation != null &&
                 response.latestInappropriateFlagAnnotation.data.action === 'Delete'
               ) {
                 <mat-icon
+                  tabindex="0"
                   color="warn"
-                  matTooltip="Parent post is hidden, so this post is also hidden"
+                  matTooltip="Parent post is hidden, so this comment is also hidden"
+                  matTooltipPosition="above"
                   i18n-matTooltip
                   >visibility_off</mat-icon
                 >
-              }
-              @if (
+              } @else if (
                 reply.latestInappropriateFlagAnnotation != null &&
                 reply.latestInappropriateFlagAnnotation.data.action === 'Delete'
               ) {
-                <mat-icon color="warn" matTooltip="Post is hidden from students" i18n-matTooltip
-                  >visibility_off</mat-icon
-                >
                 <button
-                  mat-stroked-button
-                  color="warn"
+                  matIconButton
                   (click)="showPost(reply)"
-                  i18n-matTooltip
-                  matTooltip="Make this post viewable to students"
+                  matTooltip="Show to students"
                   matTooltipPosition="above"
-                  i18n
+                  i18n-matTooltip
                 >
-                  Show Post
+                  <mat-icon color="warn">visibility_off</mat-icon>
                 </button>
               }
             </div>
+            <div class="pt-1" [innerHTML]="reply.studentData.responseHTML"></div>
           </div>
         }
       </div>

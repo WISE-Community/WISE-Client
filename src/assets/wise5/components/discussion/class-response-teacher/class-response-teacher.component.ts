@@ -44,13 +44,13 @@ export class ClassResponseTeacherComponent extends ClassResponse {
   protected repliesToShow: any[] = [];
 
   protected hidePost(componentState: any): void {
-    if (confirm($localize`Are you sure you want to hide this post?`)) {
+    if (confirm($localize`Are you sure you want to hide this content?`)) {
       this.hidePostEvent.emit(componentState);
     }
   }
 
   protected showPost(componentState: any): void {
-    if (confirm($localize`Are you sure you want to show this post?`)) {
+    if (confirm($localize`Are you sure you want to show this content?`)) {
       this.showPostEvent.emit(componentState);
     }
   }
