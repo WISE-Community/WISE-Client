@@ -7,6 +7,9 @@ import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-
   template: `
     <mat-tab-group>
       <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+        </ng-template>
         <div class="flex flex-col">
           <edit-component-width [componentContent]="componentContent" />
         </div>
