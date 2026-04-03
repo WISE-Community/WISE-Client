@@ -10,9 +10,10 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NavItemComponent } from '../nav-item/nav-item.component';
 import { NgClass } from '@angular/common';
+import { UnitAiSummaryComponent } from '../../../../directives/teacher-summary-display/unit-ai-summary/unit-ai-summary.component';
 
 @Component({
-  imports: [MatButton, MatIcon, NavItemComponent, NgClass],
+  imports: [MatButton, MatIcon, NavItemComponent, NgClass, UnitAiSummaryComponent],
   selector: 'node-progress-view',
   styleUrl: './node-progress-view.component.scss',
   templateUrl: './node-progress-view.component.html'

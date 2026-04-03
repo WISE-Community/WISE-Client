@@ -24,10 +24,10 @@ export abstract class AiSummaryComponent {
   @Input() nodeId: string;
   @Input() periodId: number;
 
-  private chatService: ChatService = inject(OpenAiChatService);
+  protected chatService: ChatService = inject(OpenAiChatService);
   protected dataService: TeacherDataService = inject(TeacherDataService);
   protected datePipe: DatePipe = inject(DatePipe);
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  protected localStorageService: LocalStorageService = inject(LocalStorageService);
   protected projectService: TeacherProjectService = inject(TeacherProjectService);
 
   protected generatingSummary: boolean = false;
@@ -64,11 +64,7 @@ export abstract class AiSummaryComponent {
 
   protected async generateSummary(): Promise<void> {
     this.generatingSummary = true;
-    const prompt = this.projectService.getComponent(this.nodeId, this.componentId).prompt;
-    this.summary = await this.chatService.sendMessage([
-      new ChatMessage('system', this.getSystemPrompt(prompt), this.nodeId),
-      new ChatMessage('user', this.getStudentResponses(), this.nodeId)
-    ]);
+    this.summary = await this.chatService.sendMessage(this.getChatMessages());
     this.localStorageService.setItem(this.getSummaryKey(), this.summary);
     const summaryTime = new Date().getTime();
     this.localStorageService.setItem(this.getSummaryTimeKey(), summaryTime);
@@ -77,15 +73,23 @@ export abstract class AiSummaryComponent {
     this.newSummaryAvailable = false;
   }
 
+  protected getChatMessages(): ChatMessage[] {
+    const prompt = this.projectService.getComponent(this.nodeId, this.componentId).prompt;
+    return [
+      new ChatMessage('system', this.getSystemPrompt(prompt), this.nodeId),
+      new ChatMessage('user', this.getStudentResponses(), this.nodeId)
+    ];
+  }
+
   protected abstract getStudentResponses(): string;
 
   protected abstract getSystemPrompt(prompt: string): string;
 
-  private getSummaryKey(): string {
+  protected getSummaryKey(): string {
     return `component-summary-${this.periodId}-${this.nodeId}-${this.componentId}`;
   }
 
-  private getSummaryTimeKey(): string {
+  protected getSummaryTimeKey(): string {
     return `component-summary-time-${this.periodId}-${this.nodeId}-${this.componentId}`;
   }
 

@@ -1,6 +1,7 @@
 @if (isGroupNode(nodeId)) {
   <div class="view-content--with-sidemenu">
     <div class="l-constrained l-constrained-md nav">
+      <unit-ai-summary [periodId]="periodId" class="summary" />
       @if (showRubricButton) {
         <div class="rubric">
           <button mat-stroked-button (click)="showRubric()" class="info">
