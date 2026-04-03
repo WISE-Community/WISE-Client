@@ -5,7 +5,7 @@ import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-
 @Component({
   imports: [EditComponentAdvancedSharedModule],
   template: `
-    <mat-tab-group>
+    <mat-tab-group animationDuration="0ms">
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
