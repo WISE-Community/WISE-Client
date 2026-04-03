@@ -1,6 +1,4 @@
-@if (mode !== 'summary') {
-  <component-header [component]="component" />
-}
+<component-header [component]="component" />
 <div class="discussion-content">
   @if (mode === 'student') {
     <component-annotations
@@ -98,8 +96,6 @@
             [numReplies]="componentState.replies.length"
             (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
             [mode]="mode"
-            (deleteButtonClicked)="deleteButtonClicked($event)"
-            (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
             [isDisabled]="isDisabled"
             class="post"
           />
@@ -112,8 +108,6 @@
             [numReplies]="componentState.replies.length"
             (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
             [mode]="mode"
-            (deleteButtonClicked)="deleteButtonClicked($event)"
-            (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
             [isDisabled]="isDisabled"
             class="post"
           />
@@ -127,8 +121,6 @@
           [numReplies]="componentState.replies.length"
           (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
           [mode]="mode"
-          (deleteButtonClicked)="deleteButtonClicked($event)"
-          (undoDeleteButtonClicked)="undoDeleteButtonClicked($event)"
           [isDisabled]="isDisabled"
           class="post"
           style="display: block"

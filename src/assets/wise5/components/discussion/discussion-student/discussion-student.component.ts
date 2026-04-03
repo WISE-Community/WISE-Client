@@ -50,6 +50,7 @@ export class DiscussionStudent extends ComponentStudent {
   newResponse: string = '';
   responsesMap: any = {};
   retrievedClassmateResponses: boolean = false;
+  studentMode: boolean = true;
   studentResponse: string = '';
   topLevelResponses: any = {};
 
@@ -58,7 +59,7 @@ export class DiscussionStudent extends ComponentStudent {
     protected componentService: ComponentService,
     protected configService: ConfigService,
     protected dialog: MatDialog,
-    private discussionService: DiscussionService,
+    protected discussionService: DiscussionService,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private notificationService: NotificationService,
@@ -462,12 +463,11 @@ export class DiscussionStudent extends ComponentStudent {
   }
 
   setClassResponses(componentStates: any[], annotations: any[] = []): void {
-    const isStudentMode = true;
     this.classResponses = this.discussionService.getClassResponses(
       componentStates,
       annotations,
       this.workgroupId,
-      isStudentMode,
+      this.studentMode,
       this.isAnonymizeResponses()
     );
     this.responsesMap = this.discussionService.getResponsesMap(this.classResponses);
