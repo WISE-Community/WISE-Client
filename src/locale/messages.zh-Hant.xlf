@@ -14312,14 +14312,6 @@ The branches will be removed but the steps will remain in the unit.</target>
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/concept-map-student/concept-map-student.component.html</context>
           <context context-type="linenumber">121,125</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">42,46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">118,121</context>
-        </context-group>
         <target state="needs-translation"> Delete </target>
       </trans-unit>
       <trans-unit id="4021752662928002901" datatype="html">
@@ -18210,11 +18202,7 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">47,48</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">47,48</context>
+          <context context-type="linenumber">45,46</context>
         </context-group>
         <target state="needs-translation">Image</target>
       </trans-unit>
@@ -20898,109 +20886,101 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <target state="translated">討論</target>
       </trans-unit>
+      <trans-unit id="6159543550097070213" datatype="html">
+        <source>Hide from students</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">29,32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">100,102</context>
+        </context-group>
+        <target state="needs-translation">Hide from students</target>
+      </trans-unit>
+      <trans-unit id="6724243278406717774" datatype="html">
+        <source>Show to students</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">42,45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">125,127</context>
+        </context-group>
+        <target state="needs-translation">Show to students</target>
+      </trans-unit>
       <trans-unit id="3681514094143393882" datatype="html">
         <source>Post attachment</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">52,55</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">23,25</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
         <target state="needs-translation">Post attachment</target>
-      </trans-unit>
-      <trans-unit id="2299510983898242072" datatype="html">
-        <source>Delete this post so students will not see it</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">37,40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">114,117</context>
-        </context-group>
-        <target state="needs-translation">Delete this post so students will not see it</target>
-      </trans-unit>
-      <trans-unit id="954167942988134729" datatype="html">
-        <source>Make this post viewable to students</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">53,56</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">144,146</context>
-        </context-group>
-        <target state="needs-translation">Make this post viewable to students</target>
-      </trans-unit>
-      <trans-unit id="6290554371742941740" datatype="html">
-        <source> Undo Delete </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">58,64</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">148,151</context>
-        </context-group>
-        <target state="needs-translation"> Undo Delete </target>
       </trans-unit>
       <trans-unit id="6729002202138071313" datatype="html">
         <source> Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>) </source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">62,63</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">71,72</context>
+          <context context-type="linenumber">33,34</context>
         </context-group>
         <target state="needs-translation"> Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>) </target>
       </trans-unit>
       <trans-unit id="8396748173614828322" datatype="html">
         <source>Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>)</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">66,67</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
         <target state="needs-translation">Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>)</target>
       </trans-unit>
-      <trans-unit id="291711318779948043" datatype="html">
-        <source>Students will not see this post</source>
+      <trans-unit id="3587038731559112650" datatype="html">
+        <source>Parent post is hidden, so this comment is also hidden</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">113,115</context>
         </context-group>
-        <target state="needs-translation">Students will not see this post</target>
+        <target state="needs-translation">Parent post is hidden, so this comment is also hidden</target>
       </trans-unit>
-      <trans-unit id="5446248145530170709" datatype="html">
-        <source> Parent Deleted </source>
+      <trans-unit id="1877738603549884080" datatype="html">
+        <source>Are you sure you want to hide this content?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">132,135</context>
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.ts</context>
+          <context context-type="linenumber">47</context>
         </context-group>
-        <target state="needs-translation"> Parent Deleted </target>
+        <target state="needs-translation">Are you sure you want to hide this content?</target>
+      </trans-unit>
+      <trans-unit id="8186667027058635380" datatype="html">
+        <source>Are you sure you want to show this content?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <target state="needs-translation">Are you sure you want to show this content?</target>
       </trans-unit>
       <trans-unit id="189861158609674899" datatype="html">
         <source>Add Comment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">165,168</context>
+          <context context-type="linenumber">75,78</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
-          <context context-type="linenumber">167,170</context>
+          <context context-type="linenumber">77,80</context>
         </context-group>
         <target state="needs-translation">Add Comment</target>
-      </trans-unit>
-      <trans-unit id="6209923492332399608" datatype="html">
-        <source>Are you sure you want to delete this post?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.ts</context>
-          <context context-type="linenumber">127</context>
-        </context-group>
-        <target state="translated">您確定要刪除此貼文嗎?</target>
-      </trans-unit>
-      <trans-unit id="1602604839411386059" datatype="html">
-        <source>Are you sure you want to show this post?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.ts</context>
-          <context context-type="linenumber">133</context>
-        </context-group>
-        <target state="translated">您確定要檢舉此貼文嗎?</target>
       </trans-unit>
       <trans-unit id="1890646438581310837" datatype="html">
         <source> Students can upload and use images in their posts
@@ -21036,11 +21016,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Share with class...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">28,31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">28,31</context>
+          <context context-type="linenumber">26,29</context>
         </context-group>
         <target state="needs-translation">Share with class...</target>
       </trans-unit>
@@ -21048,11 +21024,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Remove file</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">54,56</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">54,56</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
         <target state="needs-translation">Remove file</target>
       </trans-unit>
@@ -21060,11 +21032,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Add picture</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">70,73</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">70,73</context>
+          <context context-type="linenumber">68,71</context>
         </context-group>
         <target state="needs-translation">Add picture</target>
       </trans-unit>
@@ -21072,11 +21040,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source> Post </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">84,88</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.html</context>
-          <context context-type="linenumber">84,88</context>
+          <context context-type="linenumber">82,86</context>
         </context-group>
         <target state="needs-translation"> Post </target>
       </trans-unit>
@@ -21084,7 +21048,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source><x id="PH" equiv-text="usernames"/> replied to a discussion you were in!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-student/discussion-student.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">232</context>
         </context-group>
         <target state="translated"><x id="PH" equiv-text="usernames"/>回覆了你參與的討論!</target>
       </trans-unit>
