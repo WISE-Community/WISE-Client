@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatchContent } from '../../../components/match/MatchContent';
-import { MatchSummaryData } from '../summary-data/MatchSummaryData';
+import { ChoiceData, MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
 import { MatIconModule } from '@angular/material/icon';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
@@ -16,71 +15,45 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
   templateUrl: './match-summary-display.component.html'
 })
 export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent implements OnInit {
-  protected bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
-  private bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
-  private bucketValues: Set<string> = new Set<string>();
+  protected choiceData: ChoiceData[] = [];
   @Input() expanded: boolean;
-  protected isChoiceReuseMatch: boolean;
   private matchSummaryData: MatchSummaryData;
 
   ngOnInit(): void {
-    this.setIsChoiceReuseMatch();
     this.generateSummary();
-  }
-
-  private setIsChoiceReuseMatch(): void {
-    this.isChoiceReuseMatch = (
-      this.projectService.getComponent(this.nodeId, this.componentId) as MatchContent
-    ).choiceReuseEnabled;
   }
 
   private generateSummary(): void {
     this.getLatestWork().subscribe((componentStates) => {
-      this.bucketData = [];
-      this.bucketValues.clear();
+      this.choiceData = [];
       this.matchSummaryData = new MatchSummaryData(
         this.projectService.injectAssetPaths(componentStates)
       );
-      this.setBucketValues();
-      this.setBucketData();
-      this.setBucketShowMore();
+      this.setChoiceData();
     });
   }
 
-  protected setBucketValues(): void {
-    this.matchSummaryData
-      .getBucketsData()
-      .forEach((bucket) => this.bucketValues.add(bucket.bucketValue));
+  protected setChoiceData(): void {
+    this.matchSummaryData.getChoicesData().forEach((choice) => {
+      this.choiceData.push({
+        choiceValue: choice.choiceValue,
+        choiceDataPoints: choice.choiceDataPoints.sort(this.sortBuckets)
+      });
+    });
+    this.choiceData.sort(this.sortChoices);
   }
 
-  protected setBucketData(): void {
-    this.bucketValues.forEach((value) =>
-      this.bucketData.push({ value: value, choices: this.getBucketDataByValue(value) })
-    );
+  private getTotalCount(choice: ChoiceData): number {
+    return choice.choiceDataPoints.reduce((sum, dp) => sum + dp.getCount(), 0);
   }
 
-  private getBucketDataByValue(bucketValue: string): MatchSummaryDataPoint[] {
-    return this.matchSummaryData
-      .getBucketsData()
-      .find((bucket) => bucket.bucketValue === bucketValue)
-      .bucketDataPoints.sort(this.sortChoices);
-  }
+  private sortChoices = (a: ChoiceData, b: ChoiceData): number => {
+    const countDiff = this.getTotalCount(b) - this.getTotalCount(a);
+    return countDiff !== 0 ? countDiff : a.choiceValue.localeCompare(b.choiceValue);
+  };
 
-  private sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
-    return choiceB.getCount() - choiceA.getCount();
-  }
-
-  private setBucketShowMore(): void {
-    this.bucketValues.forEach((value) => this.bucketsShowMore.set(value, false));
-  }
-
-  protected getBucketShowMore(bucketValue: string): boolean {
-    return this.bucketsShowMore.get(bucketValue);
-  }
-
-  protected toggleBucketShowMore(bucketValue: string, event: Event): void {
-    event.preventDefault();
-    this.bucketsShowMore.set(bucketValue, !this.bucketsShowMore.get(bucketValue));
+  private sortBuckets(a: MatchSummaryDataPoint, b: MatchSummaryDataPoint): number {
+    return b.getCount() - a.getCount();
   }
 
   protected renderDisplay(): void {
