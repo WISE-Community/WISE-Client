@@ -15155,10 +15155,6 @@ Are you sure you want to proceed?</source>
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
           <context context-type="linenumber">74,77</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">29,35</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="4492261521538997006" datatype="html">
         <source> Team has not saved any work </source>
@@ -15877,6 +15873,10 @@ Are you sure you want to proceed?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
           <context context-type="linenumber">61,63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8313145553257511938" datatype="html">
@@ -22704,10 +22704,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
           <context context-type="linenumber">72,74</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">27,30</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="4191006504398748947" datatype="html">
         <source>Your students&apos; ideas will show up here as they are detected in the activity.</source>
@@ -22716,32 +22712,46 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">77,81</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5353710433603859763" datatype="html">
-        <source>Source Bucket</source>
+      <trans-unit id="8720332287407681000" datatype="html">
+        <source>Bucket</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">6,10</context>
+          <context context-type="linenumber">12,13</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5731986766999662576" datatype="html">
-        <source>Choice Frequency</source>
+      <trans-unit id="3656239217373666781" datatype="html">
+        <source>Not moved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">37,38</context>
+          <context context-type="linenumber">24,25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7051463422291865328" datatype="html">
-        <source> Number of teams that moved each item (choice) into the different buckets (categories). </source>
+      <trans-unit id="6966354927154117696" datatype="html">
+        <source>Not moved by any students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">41,44</context>
+          <context context-type="linenumber">25,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3730845672011729296" datatype="html">
+        <source>Bucket Frequency</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7095065065333948401" datatype="html">
+        <source> Number of times each item <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>crop_16_9<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> was moved into the different buckets <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>inventory_2<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">36,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2004123481203797507" datatype="html">
         <source> Your students&apos; choices will show up here when they complete the activity. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">63,68</context>
+          <context context-type="linenumber">51,56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="866753876041645935" datatype="html">
