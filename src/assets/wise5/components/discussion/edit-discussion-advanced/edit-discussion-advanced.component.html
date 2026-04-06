@@ -9,6 +9,14 @@
       <edit-component-width [componentContent]="componentContent" />
     </div>
   </mat-tab>
+  @if (aiEnabled) {
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>auto_awesome</mat-icon>&nbsp;<span i18n>AI</span>
+      </ng-template>
+      <edit-component-summarizer-system-prompt [componentContent]="component.content" />
+    </mat-tab>
+  }
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>

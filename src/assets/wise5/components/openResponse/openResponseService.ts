@@ -19,6 +19,9 @@ export class OpenResponseService extends ComponentService {
     component.type = 'OpenResponse';
     component.starterSentence = null;
     component.isStudentAttachmentEnabled = false;
+    component.ai = {
+      teacherSummarySystemPrompt: this.getDefaultTeacherSummarySystemPrompt()
+    };
     return component;
   }
 
@@ -126,5 +129,11 @@ export class OpenResponseService extends ComponentService {
       }
     }
     return false;
+  }
+
+  getDefaultTeacherSummarySystemPrompt(): string {
+    return `You are a teacher who is summarizing student responses to the following question: "$QUESTION$".
+    Each student response is in the format: $RESPONSE_FORMAT$.
+    In the same language as the question, provide a summary of the responses in 100 words or less.`;
   }
 }

@@ -8,6 +8,7 @@ import { NotificationService } from '../../../assets/wise5/services/notification
 import { TeacherNodeService } from '../../../assets/wise5/services/teacherNodeService';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { EditComponentAdvancedComponent } from './edit-component-advanced.component';
+import { ComponentServiceLookupService } from '../../../assets/wise5/services/componentServiceLookupService';
 
 let component: EditComponentAdvancedComponent;
 let fixture: ComponentFixture<EditComponentAdvancedComponent>;
@@ -31,6 +32,7 @@ describe('EditComponentAdvancedComponent', () => {
           }
         },
         MockProviders(
+          ComponentServiceLookupService,
           TeacherNodeService,
           NotebookService,
           NotificationService,
@@ -44,6 +46,8 @@ describe('EditComponentAdvancedComponent', () => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
       type: 'ShowMyWork'
     } as ComponentContent);
+    spyOn(TestBed.inject(TeacherProjectService), 'getProject').and.returnValue({});
+
     fixture.detectChanges();
   });
 

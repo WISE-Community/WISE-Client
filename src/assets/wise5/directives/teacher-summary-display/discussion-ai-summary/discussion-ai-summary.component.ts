@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MarkdownComponent } from 'ngx-markdown';
 import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
+import { DiscussionService } from '../../../components/discussion/discussionService';
 
 interface Thread {
   id: number;
@@ -23,10 +24,14 @@ interface Thread {
   templateUrl: '../ai-summary/ai-summary.component.html'
 })
 export class DiscussionAiSummaryComponent extends AiSummaryComponent {
-  protected getDefaultSystemPrompt(prompt: string): string {
-    return `You are a teacher who is summarizing students' discussion threads, which include posts and replies to the following question: "${prompt}".
-      Each thread is in the format: <thread><post>Post</post><replies><reply>Reply 1</reply><reply>Reply 2</reply></replies></thread>.
-      In the same language as the question, provide a summary of the threads in 100 words or less.`;
+  private discussionService = inject(DiscussionService);
+
+  protected getDefaultSystemPrompt(): string {
+    return this.discussionService.getDefaultTeacherSummarySystemPrompt();
+  }
+
+  protected getResponseFormat(): string {
+    return '<thread><post>Post</post><replies><reply>Reply 1</reply><reply>Reply 2</reply></replies></thread>';
   }
 
   protected getStudentResponses(): string {

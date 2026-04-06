@@ -82,10 +82,16 @@ export abstract class AiSummaryComponent {
   protected abstract getStudentResponses(): string;
 
   protected getSystemPrompt(prompt: string): string {
-    return this.component.ai?.teacherSummarySystemPrompt ?? this.getDefaultSystemPrompt(prompt);
+    const systemPrompt =
+      this.component.ai?.teacherSummarySystemPrompt ?? this.getDefaultSystemPrompt();
+    return systemPrompt
+      .replace('$QUESTION$', prompt)
+      .replace('$RESPONSE_FORMAT$', this.getResponseFormat());
   }
 
-  protected abstract getDefaultSystemPrompt(prompt: string): string;
+  protected abstract getResponseFormat(): string;
+
+  protected abstract getDefaultSystemPrompt(): string;
 
   private getSummaryKey(): string {
     return `component-summary-${this.periodId}-${this.nodeId}-${this.componentId}`;

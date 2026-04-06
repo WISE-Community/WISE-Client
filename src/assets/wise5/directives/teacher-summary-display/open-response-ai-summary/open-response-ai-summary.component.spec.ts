@@ -15,6 +15,7 @@ import { MarkdownComponent, MarkdownService } from 'ngx-markdown';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ChatService } from '../../../../../app/services/chat/chat.service';
 import { OpenAiChatService } from '../../../../../app/services/chat/openAiChat.service';
+import { OpenResponseService } from '../../../components/openResponse/openResponseService';
 
 describe('OpenResponseAiSummaryComponent', () => {
   let component: OpenResponseAiSummaryComponent;
@@ -38,6 +39,7 @@ describe('OpenResponseAiSummaryComponent', () => {
           LocalStorageService,
           MarkdownService,
           OpenAiChatService,
+          OpenResponseService,
           TeacherProjectService,
           SummaryService,
           TeacherDataService
@@ -53,7 +55,10 @@ describe('OpenResponseAiSummaryComponent', () => {
     spyOn(projectService, 'getComponent').and.returnValue({
       id: 'component1',
       type: 'OpenResponse',
-      prompt: 'What is your opinion on climate change?'
+      prompt: 'What is your opinion on climate change?',
+      ai: {
+        teacherSummarySystemPrompt: 'You are a teacher summarizing student responses.'
+      }
     } as any);
 
     fixture = TestBed.createComponent(OpenResponseAiSummaryComponent);
@@ -172,7 +177,7 @@ describe('OpenResponseAiSummaryComponent', () => {
       await component['generateSummary']();
       const messages = sendMessageSpy.calls.mostRecent().args[0];
       expect(messages[0].role).toBe('system');
-      expect(messages[0].content).toContain('What is your opinion on climate change?');
+      expect(messages[0].content).toContain('You are a teacher summarizing student responses.');
     });
 
     it('should call chatService with student responses', async () => {

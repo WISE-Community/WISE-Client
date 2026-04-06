@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MarkdownComponent } from 'ngx-markdown';
 import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
+import { OpenResponseService } from '../../../components/openResponse/openResponseService';
 
 /**
  * Uses an LLM to summarize students' responses to open response questions.
@@ -17,10 +18,14 @@ import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
   templateUrl: '../ai-summary/ai-summary.component.html'
 })
 export class OpenResponseAiSummaryComponent extends AiSummaryComponent {
-  protected getDefaultSystemPrompt(prompt: string): string {
-    return `You are a teacher who is summarizing student responses to the following question: "${prompt}".
-      Each student response is in the format: <response>Response</response>.
-      In the same language as the question, provide a summary of the responses in 100 words or less.`;
+  private openResponseService = inject(OpenResponseService);
+
+  protected getDefaultSystemPrompt(): string {
+    return this.openResponseService.getDefaultTeacherSummarySystemPrompt();
+  }
+
+  protected getResponseFormat(): string {
+    return '<response>Response</response>';
   }
 
   protected getStudentResponses(): string {
