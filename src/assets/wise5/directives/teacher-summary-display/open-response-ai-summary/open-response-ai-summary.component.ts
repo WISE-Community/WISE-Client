@@ -17,7 +17,7 @@ import { AiSummaryComponent } from '../ai-summary/ai-summary.component';
   templateUrl: '../ai-summary/ai-summary.component.html'
 })
 export class OpenResponseAiSummaryComponent extends AiSummaryComponent {
-  protected getSystemPrompt(prompt: string): string {
+  protected getDefaultSystemPrompt(prompt: string): string {
     return `You are a teacher who is summarizing student responses to the following question: "${prompt}".
       Each student response is in the format: <response>Response</response>.
       In the same language as the question, provide a summary of the responses in 100 words or less.`;

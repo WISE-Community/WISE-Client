@@ -23,7 +23,7 @@ interface Thread {
   templateUrl: '../ai-summary/ai-summary.component.html'
 })
 export class DiscussionAiSummaryComponent extends AiSummaryComponent {
-  protected getSystemPrompt(prompt: string): string {
+  protected getDefaultSystemPrompt(prompt: string): string {
     return `You are a teacher who is summarizing students' discussion threads, which include posts and replies to the following question: "${prompt}".
       Each thread is in the format: <thread><post>Post</post><replies><reply>Reply 1</reply><reply>Reply 2</reply></replies></thread>.
       In the same language as the question, provide a summary of the threads in 100 words or less.`;
