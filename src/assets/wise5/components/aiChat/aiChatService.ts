@@ -17,9 +17,10 @@ export class AiChatService extends ComponentService {
   createComponent(): any {
     const component: any = super.createComponent();
     component.type = 'AiChat';
-    component.computerAvatarSettings = this.computerAvatarService.getDefaultComputerAvatarSettings();
+    component.computerAvatarSettings =
+      this.computerAvatarService.getDefaultComputerAvatarSettings();
     component.isComputerAvatarEnabled = false;
-    component.model = 'gpt-4';
+    component.model = 'gpt-5.4-mini';
     component.systemPrompt = '';
     return component;
   }
