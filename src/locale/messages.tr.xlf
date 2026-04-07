@@ -16762,10 +16762,6 @@ Are you sure you want to proceed?</target>
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
           <context context-type="linenumber">74,77</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">29,35</context>
-        </context-group>
         <target state="needs-translation">Show more</target>
       </trans-unit>
       <trans-unit id="4492261521538997006" datatype="html">
@@ -17577,6 +17573,10 @@ Are you sure you want to proceed?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/select-step-and-component-checkboxes/select-step-and-component-checkboxes.component.html</context>
           <context context-type="linenumber">61,63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
         <target state="needs-translation">Item</target>
       </trans-unit>
@@ -25312,10 +25312,6 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
           <context context-type="linenumber">72,74</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">27,30</context>
-        </context-group>
         <target state="needs-translation">Show less</target>
       </trans-unit>
       <trans-unit id="4191006504398748947" datatype="html">
@@ -25326,35 +25322,51 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         </context-group>
         <target state="needs-translation">Your students' ideas will show up here as they are detected in the activity.</target>
       </trans-unit>
-      <trans-unit id="5353710433603859763" datatype="html">
-        <source>Source Bucket</source>
+      <trans-unit id="8720332287407681000" datatype="html">
+        <source>Bucket</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">6,10</context>
+          <context context-type="linenumber">12,15</context>
         </context-group>
-        <target state="needs-translation">Source Bucket</target>
+        <target state="needs-translation">Bucket</target>
       </trans-unit>
-      <trans-unit id="5731986766999662576" datatype="html">
-        <source>Choice Frequency</source>
+      <trans-unit id="3656239217373666781" datatype="html">
+        <source>Not moved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">37,38</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
-        <target state="needs-translation">Choice Frequency</target>
+        <target state="needs-translation">Not moved</target>
       </trans-unit>
-      <trans-unit id="7051463422291865328" datatype="html">
-        <source> Number of teams that moved each item (choice) into the different buckets (categories). </source>
+      <trans-unit id="6966354927154117696" datatype="html">
+        <source>Not moved by any students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">41,44</context>
+          <context context-type="linenumber">27,33</context>
         </context-group>
-        <target state="needs-translation"> Number of teams that moved each item (choice) into the different buckets (categories). </target>
+        <target state="needs-translation">Not moved by any students</target>
+      </trans-unit>
+      <trans-unit id="3730845672011729296" datatype="html">
+        <source>Bucket Frequency</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <target state="needs-translation">Bucket Frequency</target>
+      </trans-unit>
+      <trans-unit id="7095065065333948401" datatype="html">
+        <source> Number of times each item <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>crop_16_9<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> was moved into the different buckets <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>inventory_2<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">38,41</context>
+        </context-group>
+        <target state="needs-translation"> Number of times each item <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>crop_16_9<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> was moved into the different buckets <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>inventory_2<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>. </target>
       </trans-unit>
       <trans-unit id="2004123481203797507" datatype="html">
         <source> Your students&apos; choices will show up here when they complete the activity. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">63,68</context>
+          <context context-type="linenumber">53,58</context>
         </context-group>
         <target state="needs-translation"> Your students' choices will show up here when they complete the activity. </target>
       </trans-unit>
