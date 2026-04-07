@@ -9,11 +9,13 @@
         @for (bucketDataPoint of choice.choiceDataPoints; track $index) {
           <li>
             <div class="bucket">
-              <mat-icon class="mat-18" aria-label="Bucket" i18n-aria-label>inventory_2</mat-icon>
-              <div [innerHTML]="bucketDataPoint.getBucketValue()"></div>
+              <mat-icon class="mat-18 shrink-0 mt-0.25" aria-label="Bucket" i18n-aria-label
+                >inventory_2</mat-icon
+              >
+              <div class="flex-1" [innerHTML]="bucketDataPoint.getBucketValue()"></div>
               <div class="shrink-0">
-                (<mat-icon class="mat-18 align-middle">person</mat-icon
-                >{{ bucketDataPoint.getCount() }})
+                <mat-icon class="mat-18 align-middle">person</mat-icon
+                >{{ bucketDataPoint.getCount() }}
               </div>
             </div>
           </li>

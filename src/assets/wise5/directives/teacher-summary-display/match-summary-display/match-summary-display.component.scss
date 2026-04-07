@@ -11,7 +11,7 @@ h3,
 }
 
 .bucket {
-  @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm items-center;
+  @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm items-start justify-between;
 }
 
 ul {
