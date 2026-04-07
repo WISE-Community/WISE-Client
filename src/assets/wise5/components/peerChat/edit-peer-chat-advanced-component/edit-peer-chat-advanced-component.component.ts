@@ -16,7 +16,10 @@ import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-
         <ng-template mat-tab-label>
           <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
         </ng-template>
-        <edit-component-rubric [componentContent]="component.content" />
+        <ng-template matTabContent>
+          <!-- lazy load needed for tinymce to work -->
+          <edit-component-rubric [componentContent]="component.content" />
+        </ng-template>
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>
