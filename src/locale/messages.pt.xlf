@@ -20,7 +20,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">30,35</context>
         </context-group>
-        <target state="needs-translation">About Us</target>
+        <target state="translated">Quem Somos</target>
       </trans-unit>
       <trans-unit id="8069335626199600154" datatype="html">
         <source> WISE is the product of more than 25 years of research on teaching and learning with educational technologies </source>
@@ -28,7 +28,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">12,16</context>
         </context-group>
-        <target state="needs-translation"> WISE is the product of more than 25 years of research on teaching and learning with educational technologies </target>
+        <target state="translated"> WISE é o produto de mais de 25 anos de pesquisa sobre ensino e aprendizado com tecnologias educacionais </target>
       </trans-unit>
       <trans-unit id="7189721996402569433" datatype="html">
         <source>WISE teacher workshop 2018</source>
@@ -36,7 +36,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">36,41</context>
         </context-group>
-        <target state="needs-translation">WISE teacher workshop 2018</target>
+        <target state="translated">Oficina para professores da WISE 2018</target>
       </trans-unit>
       <trans-unit id="3844849372234285555" datatype="html">
         <source>WISE student and teacher</source>
@@ -44,7 +44,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">66,69</context>
         </context-group>
-        <target state="needs-translation">WISE student and teacher</target>
+        <target state="translated">Estudante e professor da WISE</target>
       </trans-unit>
       <trans-unit id="3976897982668024663" datatype="html">
         <source>WISE teacher workshop design</source>
