@@ -52,7 +52,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">87,90</context>
         </context-group>
-        <target state="needs-translation">WISE teacher workshop design</target>
+        <target state="translated">Elaboração da oficina para professores da WISE</target>
       </trans-unit>
       <trans-unit id="2162435372026264514" datatype="html">
         <source>Marcia at WISE workshop</source>
@@ -60,7 +60,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">108,113</context>
         </context-group>
-        <target state="needs-translation">Marcia at WISE workshop</target>
+        <target state="translated">Marcia na oficina da WISE</target>
       </trans-unit>
       <trans-unit id="7131483491028297689" datatype="html">
         <source>Based on Research, Refined Through Practice</source>
@@ -68,7 +68,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">114,116</context>
         </context-group>
-        <target state="needs-translation">Based on Research, Refined Through Practice</target>
+        <target state="translated">Baseado em Pesquisa, Refinado Através da Prática</target>
       </trans-unit>
       <trans-unit id="6445016384504987854" datatype="html">
         <source> Through our collaborations with teachers, administrators, technology designers, and education researchers, we have refined a set of principles which guide the design of all WISE curriculum materials and tools. </source>
@@ -76,7 +76,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">116,121</context>
         </context-group>
-        <target state="needs-translation"> Through our collaborations with teachers, administrators, technology designers, and education researchers, we have refined a set of principles which guide the design of all WISE curriculum materials and tools. </target>
+        <target state="translated"> Através das nossas colaborações entre professores, administradores, designers de tecnologia e pesquisadores do campo da educação, refinamos um conjunto de princípios que orientam na elaboração de todos os materiais curriculares e ferramentas da WISE. </target>
       </trans-unit>
       <trans-unit id="6714651130668880419" datatype="html">
         <source>This means that when implementing WISE units, you can be assured that what you&apos;re using is grown from a solid foundation, advised by real teachers&apos; experiences, and tested in classrooms with real students.</source>
@@ -84,7 +84,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">122,127</context>
         </context-group>
-        <target state="needs-translation">This means that when implementing WISE units, you can be assured that what you're using is grown from a solid foundation, advised by real teachers' experiences, and tested in classrooms with real students.</target>
+        <target state="translated">Isso significa que, ao implementar as unidades da WISE, você pode ter a certeza de que o que está utilizando, foi desenvolvido sobre uma base sólida, orientada pela experiência de professores reais e testados em sala de aula com alunos reais.</target>
       </trans-unit>
       <trans-unit id="1606492921707463429" datatype="html">
         <source>Our Research + Team</source>
@@ -92,7 +92,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">133,138</context>
         </context-group>
-        <target state="needs-translation">Our Research + Team</target>
+        <target state="translated">Nossa Pesquisa + Equipe</target>
       </trans-unit>
       <trans-unit id="4415732628818464600" datatype="html">
         <source>Knowledge Integration</source>
@@ -100,7 +100,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">140,142</context>
         </context-group>
-        <target state="needs-translation">Knowledge Integration</target>
+        <target state="translated">Integração de Conhecimento</target>
       </trans-unit>
       <trans-unit id="6748274211589978669" datatype="html">
         <source> As students grapple with multiple conflicting and confusing ideas, research has shown that instruction is most effective when student views are used as a starting point for scientific investigations. </source>
@@ -108,7 +108,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">142,147</context>
         </context-group>
-        <target state="needs-translation"> As students grapple with multiple conflicting and confusing ideas, research has shown that instruction is most effective when student views are used as a starting point for scientific investigations. </target>
+        <target state="translated"> Enquanto os alunos lidam com múltiplas ideias conflitantes e confusas, pesquisas mostram que o ensino é mais eficaz quando as visões do aluno são usadas como ponto de partida para investigações científicas. </target>
       </trans-unit>
       <trans-unit id="7362297755600879331" datatype="html">
         <source> The <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Knowledge Integration (KI)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> perspective emphasizes building on and strengthening science understanding by incorporating new ideas and sorting out alternative perspectives using evidence. This framework forms the basis of WISE curriculum design, assessments, and evaluation. </source>
@@ -116,7 +116,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">147,150</context>
         </context-group>
-        <target state="needs-translation"> The <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Knowledge Integration (KI)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> perspective emphasizes building on and strengthening science understanding by incorporating new ideas and sorting out alternative perspectives using evidence. This framework forms the basis of WISE curriculum design, assessments, and evaluation. </target>
+        <target state="translated"> A perspectiva da <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Integração de Conhecimento (IC)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> enfatiza o desenvolvimento e o fortalecimento do entendimento científico por meio da incorporação de novas ideias e organização de perspectivas alternativas utilizando evidências. Essa estrutura constitui a base de avaliações, processos de avaliação e desenvolvimentos curriculares. </target>
       </trans-unit>
       <trans-unit id="1267305847590848546" datatype="html">
         <source>The KI Processes:</source>
@@ -124,7 +124,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">156,158</context>
         </context-group>
-        <target state="needs-translation">The KI Processes:</target>
+        <target state="translated">Os Processos de IC:</target>
       </trans-unit>
       <trans-unit id="9027810240090135692" datatype="html">
         <source>Elicit Ideas</source>
@@ -144,7 +144,7 @@
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">89</context>
         </context-group>
-        <target state="needs-translation">Elicit Ideas</target>
+        <target state="translated">Elicita Ideias</target>
       </trans-unit>
       <trans-unit id="6987978600862806678" datatype="html">
         <source>Discover Ideas</source>
@@ -160,7 +160,7 @@
           <context context-type="sourcefile">src/assets/wise5/common/node-icon-chooser-dialog/node-icon-chooser-dialog.component.ts</context>
           <context context-type="linenumber">94</context>
         </context-group>
-        <target state="needs-translation">Discover Ideas</target>
+        <target state="translated">Construir Ideias</target>
       </trans-unit>
       <trans-unit id="5003353968126431012" datatype="html">
         <source>Distinguish Ideas</source>
@@ -196,7 +196,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">31,35</context>
         </context-group>
-        <target state="needs-translation">Connect Ideas and Reflect</target>
+        <target state="translated">Conectar Ideias e Reflexão</target>
       </trans-unit>
       <trans-unit id="6328346781513160458" datatype="html">
         <source>~ WISE Goals ~</source>
@@ -204,7 +204,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">199,200</context>
         </context-group>
-        <target state="needs-translation">~ WISE Goals ~</target>
+        <target state="translated">~ Objetivos da WISE ~</target>
       </trans-unit>
       <trans-unit id="4565176645195583085" datatype="html">
         <source>Make Science Meaningful</source>
@@ -212,7 +212,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">203,205</context>
         </context-group>
-        <target state="needs-translation">Make Science Meaningful</target>
+        <target state="translated">Dar Sentido à Ciência</target>
       </trans-unit>
       <trans-unit id="4224537864958032546" datatype="html">
         <source> WISE units introduce students to complex science concepts through personally and socially relevant topics. Each unit uses a classroom-tested pattern of instruction that values the ideas students bring with them, helps them connect new information to their personal experiences, and integrates their ideas into a coherent understanding of science. </source>
@@ -220,7 +220,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">205,210</context>
         </context-group>
-        <target state="needs-translation"> WISE units introduce students to complex science concepts through personally and socially relevant topics. Each unit uses a classroom-tested pattern of instruction that values the ideas students bring with them, helps them connect new information to their personal experiences, and integrates their ideas into a coherent understanding of science. </target>
+        <target state="translated"> Unidades da WISE introduzem alunos a conceitos de ciência complexos através tópicos pessoais e socialmente relevantes. Cada unidade utiliza padrões de ensino testados em sala de aula que valoriza as ideias que os alunos trazem consigo, ajuda a conectar novas informações às suas experiências pessoais e integra essas ideias em uma compreensão coerente da ciência. </target>
       </trans-unit>
       <trans-unit id="4211132371951166803" datatype="html">
         <source>Support Diverse Learners</source>
@@ -228,7 +228,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">213,215</context>
         </context-group>
-        <target state="needs-translation">Support Diverse Learners</target>
+        <target state="translated">Apoiar Diversas Categorias de Alunos</target>
       </trans-unit>
       <trans-unit id="2702520137689509242" datatype="html">
         <source> Individual students differ in their experiences, interests, and abilities. WISE provides a variety of tools, activity patterns, and instructional scaffolds that afford multiple ways for expressing and assessing understanding. That way, no students&apos; abilities go unrecognized, and all have the chance to succeed. </source>
@@ -236,7 +236,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">215,220</context>
         </context-group>
-        <target state="needs-translation"> Individual students differ in their experiences, interests, and abilities. WISE provides a variety of tools, activity patterns, and instructional scaffolds that afford multiple ways for expressing and assessing understanding. That way, no students' abilities go unrecognized, and all have the chance to succeed. </target>
+        <target state="translated"> Cada aluno se difere por conta de suas experiências, interesses e habilidades. A WISE provê uma variedade de ferramentas, padrões de atividades e apoio pedagógico que possibilitam múltiplas formas de expressar e avaliar a compreensão. Dessa maneira, nenhuma das habilidades dos alunos passa desapercebida e todos têm a chance de ter sucesso </target>
       </trans-unit>
       <trans-unit id="4325716354146500231" datatype="html">
         <source>Accessible to All</source>
@@ -244,7 +244,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">224,226</context>
         </context-group>
-        <target state="needs-translation">Accessible to All</target>
+        <target state="translated">Acessível a Todos</target>
       </trans-unit>
       <trans-unit id="3760603678378366834" datatype="html">
         <source> WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it&apos;s available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment! </source>
@@ -252,7 +252,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">226,230</context>
         </context-group>
-        <target state="needs-translation"> WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it's available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment! </target>
+        <target state="translated"> A WISE é <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>gratuita<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> e possui <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>código aberto<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! A WISE se mantém através do apoio generoso da National Science Foundation, o que significa que está disponível para qualquer pessoa com acesso à internet. Conduzida por uma comunidade ativa de desenvolvedores, a WISE está constantemente se expandindo e se aprimorando. Traga o questionamento científico para a sala de aula, o museu, atividades extracurriculares, ou ensino domiciliar! </target>
       </trans-unit>
       <trans-unit id="8932447558740074506" datatype="html">
         <source>Increase Participation in Science</source>
@@ -260,7 +260,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">234,236</context>
         </context-group>
-        <target state="needs-translation">Increase Participation in Science</target>
+        <target state="translated">Aumentar a Participação na Ciência</target>
       </trans-unit>
       <trans-unit id="2183605563604000940" datatype="html">
         <source> WISE gives more teachers and students the opportunity to do inquiry-based science. Our units make difficult concepts accessible both for teachers to teach and students to learn. WISE curricula help students see themselves as capable of doing science and realize that, no matter their backgrounds, science can be a potential career. </source>
@@ -268,7 +268,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">236,241</context>
         </context-group>
-        <target state="needs-translation"> WISE gives more teachers and students the opportunity to do inquiry-based science. Our units make difficult concepts accessible both for teachers to teach and students to learn. WISE curricula help students see themselves as capable of doing science and realize that, no matter their backgrounds, science can be a potential career. </target>
+        <target state="translated"> A WISE oferece a mais professores e alunos a oportunidade de realizar o ensino da ciência baseado em questionamentos. Nossas unidades tornam conceitos difíceis mais acessíveis para o ensino dos professores e o aprendizado dos alunos. O currículo da WISE ajuda alunos a se enxergarem capazes de praticar ciência e compreender que, não importa sua origem, ciência pode sim ser uma carreira viável. </target>
       </trans-unit>
       <trans-unit id="7583165813303834016" datatype="html">
         <source>WISE on student computer</source>
@@ -276,7 +276,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">264,268</context>
         </context-group>
-        <target state="needs-translation">WISE on student computer</target>
+        <target state="translated">WISE no computador do aluno</target>
       </trans-unit>
       <trans-unit id="2751898300905842002" datatype="html">
         <source>WISE researcher</source>
@@ -284,7 +284,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">285,289</context>
         </context-group>
-        <target state="needs-translation">WISE researcher</target>
+        <target state="translated">Pesquisador da WISE</target>
       </trans-unit>
       <trans-unit id="6409130474199019565" datatype="html">
         <source>WISE teachers and researcher</source>
@@ -292,7 +292,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">306,310</context>
         </context-group>
-        <target state="needs-translation">WISE teachers and researcher</target>
+        <target state="translated">Professores e pesquisadores da WISE</target>
       </trans-unit>
       <trans-unit id="1718407813321864548" datatype="html">
         <source>WISE developers and teacher</source>
@@ -300,7 +300,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">327,333</context>
         </context-group>
-        <target state="needs-translation">WISE developers and teacher</target>
+        <target state="translated">Desenvolvedores e professores da WISE</target>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
@@ -388,7 +388,7 @@
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component.html</context>
           <context context-type="linenumber">6,8</context>
         </context-group>
-        <target state="needs-translation">Close</target>
+        <target state="translated">Fechar</target>
       </trans-unit>
       <trans-unit id="1536087519743707362" datatype="html">
         <source>Dismiss</source>
@@ -404,7 +404,7 @@
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
           <context context-type="linenumber">60,62</context>
         </context-group>
-        <target state="needs-translation">Dismiss</target>
+        <target state="translated">Ignorar</target>
       </trans-unit>
       <trans-unit id="852504722388981795" datatype="html">
         <source>Back to Top</source>
@@ -412,7 +412,7 @@
           <context context-type="sourcefile">src/app/app.component.html</context>
           <context context-type="linenumber">26,30</context>
         </context-group>
-        <target state="needs-translation">Back to Top</target>
+        <target state="translated">Voltar ao Topo</target>
       </trans-unit>
       <trans-unit id="39198553669202931" datatype="html">
         <source>Add New Activity</source>
@@ -420,7 +420,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">1,3</context>
         </context-group>
-        <target state="needs-translation">Add New Activity</target>
+        <target state="translated">Adicionar Nova Atividade</target>
       </trans-unit>
       <trans-unit id="787242500793495382" datatype="html">
         <source>Select the activity you want to add or</source>
@@ -428,7 +428,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
-        <target state="needs-translation">Select the activity you want to add or</target>
+        <target state="translated">Selecione a atividade que deseja adicionar ou</target>
       </trans-unit>
       <trans-unit id="4621152840989537823" datatype="html">
         <source> import from another unit </source>
@@ -436,7 +436,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">6,9</context>
         </context-group>
-        <target state="needs-translation"> import from another unit </target>
+        <target state="translated"> importar de outra unidade </target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
@@ -608,7 +608,7 @@
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.html</context>
           <context context-type="linenumber">32,36</context>
         </context-group>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">Cancelar</target>
       </trans-unit>
       <trans-unit id="8134694780864251996" datatype="html">
         <source> Default Feedback on Submit </source>
@@ -616,7 +616,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component.html</context>
           <context context-type="linenumber">2,6</context>
         </context-group>
-        <target state="needs-translation"> Default Feedback on Submit </target>
+        <target state="translated"> Padrão de Feedback ao Enviar </target>
       </trans-unit>
       <trans-unit id="2468817386926816515" datatype="html">
         <source>Add Default Feedback on Submit</source>
@@ -624,7 +624,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-advanced-component/edit-component-default-feedback/edit-component-default-feedback.component.html</context>
           <context context-type="linenumber">7,11</context>
         </context-group>
-        <target state="needs-translation">Add Default Feedback on Submit</target>
+        <target state="translated">Adicionar Padrão de Feedback ao Enviar</target>
       </trans-unit>
       <trans-unit id="6801904798934365023" datatype="html">
         <source>Default Feedback on Submit <x id="INTERPOLATION" equiv-text="{{ i + 1 }}"/></source>
