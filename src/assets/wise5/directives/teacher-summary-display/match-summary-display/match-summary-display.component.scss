@@ -1,4 +1,4 @@
-@use "tailwindcss";
+@reference "tailwindcss";
 
 h3,
 .mat-subtitle-1 {
@@ -6,16 +6,12 @@ h3,
   margin-top: 0;
 }
 
-.bucket {
+.choice {
   @apply p-2 mb-2 rounded-md;
 }
 
-.choice {
-  @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm;
-}
-
-.mat-icon {
-  vertical-align: middle;
+.bucket {
+  @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm items-start justify-between;
 }
 
 ul {

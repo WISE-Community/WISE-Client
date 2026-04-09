@@ -2,84 +2,74 @@ import { ComponentState } from '../../../../../app/domain/componentState';
 import { MatchSummaryDataPoint } from './MatchSummaryDataPoint';
 import { SummaryData } from '../../summary-display/summary-data/SummaryData';
 
-type BucketData = { bucketValue: string; bucketDataPoints: MatchSummaryDataPoint[] };
+export type ChoiceData = { choiceValue: string; choiceDataPoints: MatchSummaryDataPoint[] };
 
 /**
- * Summary data for all choices in all buckets
+ * Summary data for all choices, each with a breakdown per bucket
  */
 export class MatchSummaryData extends SummaryData {
-  private isOrderedMatch: boolean;
-  protected bucketsData: BucketData[] = [];
+  protected choicesData: ChoiceData[] = [];
 
   constructor(componentStates: ComponentState[]) {
     super();
-    this.extractBucketData(componentStates);
+    this.extractChoiceData(componentStates);
   }
 
-  getBucketsData(): BucketData[] {
-    return this.bucketsData;
+  getChoicesData(): ChoiceData[] {
+    return this.choicesData;
   }
 
-  private extractBucketData(componentStates: ComponentState[]): void {
+  private extractChoiceData(componentStates: ComponentState[]): void {
     componentStates.forEach((componentState) => {
-      componentState.studentData.buckets.forEach((bucketStudentData) => {
-        const newBucketData = { bucketValue: bucketStudentData.value, bucketDataPoints: [] };
-        bucketStudentData.items.forEach((item) => {
-          this.extractChoiceDataPerBucket(item.value, bucketStudentData.value, newBucketData);
-          this.checkIsOrderedMatch(item.isIncorrectPosition);
-        });
-        this.addNewBucketDataToSummaryData(newBucketData);
+      componentState.studentData.buckets.forEach((bucketStudentData, index) => {
+        if (index === 0) {
+          bucketStudentData.items.forEach((item) => this.registerChoice(item.value));
+        } else {
+          bucketStudentData.items.forEach((item) => {
+            this.extractBucketDataPerChoice(item.value, bucketStudentData.value);
+          });
+        }
       });
     });
   }
 
-  private extractChoiceDataPerBucket(
-    itemValue: string,
-    bucketValue: string,
-    bucketData: BucketData
-  ): void {
-    const summaryDataPoint = this.findSummaryDataPoint(itemValue, bucketValue);
-    if (summaryDataPoint) {
-      summaryDataPoint.incrementCount(1);
+  private registerChoice(choiceValue: string): void {
+    if (!this.findChoiceByValue(choiceValue)) {
+      this.choicesData.push({ choiceValue, choiceDataPoints: [] });
+    }
+  }
+
+  private extractBucketDataPerChoice(choiceValue: string, bucketValue: string): void {
+    const dataPoint = this.findSummaryDataPoint(choiceValue, bucketValue);
+    if (dataPoint) {
+      dataPoint.incrementCount(1);
     } else {
-      const newDataPoint = new MatchSummaryDataPoint(itemValue, 1, bucketValue);
+      const newDataPoint = new MatchSummaryDataPoint(bucketValue, 1, choiceValue);
       this.summaryDataPoints.push(newDataPoint);
-      bucketData.bucketDataPoints.push(newDataPoint);
+      this.addDataPointToChoiceData(choiceValue, newDataPoint);
     }
   }
 
-  private addNewBucketDataToSummaryData(newBucketData: BucketData): void {
-    const bucketMatch = this.findBucketByValue(newBucketData.bucketValue);
-    if (bucketMatch) {
-      bucketMatch.bucketDataPoints = bucketMatch.bucketDataPoints.concat(
-        newBucketData.bucketDataPoints
-      );
+  private addDataPointToChoiceData(choiceValue: string, dataPoint: MatchSummaryDataPoint): void {
+    const choiceMatch = this.findChoiceByValue(choiceValue);
+    if (choiceMatch) {
+      choiceMatch.choiceDataPoints.push(dataPoint);
     } else {
-      this.bucketsData.push(newBucketData);
+      this.choicesData.push({ choiceValue, choiceDataPoints: [dataPoint] });
     }
   }
 
-  private findBucketByValue(bucketValue: string): BucketData {
-    return this.bucketsData.find((bucketData) => bucketData.bucketValue === bucketValue);
+  private findChoiceByValue(choiceValue: string): ChoiceData {
+    return this.choicesData.find((c) => c.choiceValue === choiceValue);
   }
 
-  private findSummaryDataPoint(itemValue: string, bucketValue: string): MatchSummaryDataPoint {
-    return this.bucketsData
-      .find((bucket) => bucket.bucketValue === bucketValue)
-      ?.bucketDataPoints.find((dataPoint) => dataPoint.getId() === itemValue);
-  }
-
-  private checkIsOrderedMatch(isIncorrectPosition: boolean): void {
-    if (!this.isOrderedMatch) {
-      this.isOrderedMatch = [true, false].includes(isIncorrectPosition);
-    }
+  private findSummaryDataPoint(choiceValue: string, bucketValue: string): MatchSummaryDataPoint {
+    return this.choicesData
+      .find((c) => c.choiceValue === choiceValue)
+      ?.choiceDataPoints.find((dp) => dp.getBucketValue() === bucketValue);
   }
 
   protected generateNewDataPoint(id: string | number): MatchSummaryDataPoint {
     return new MatchSummaryDataPoint(id);
-  }
-
-  getIsOrderedMatch(): boolean {
-    return this.isOrderedMatch;
   }
 }

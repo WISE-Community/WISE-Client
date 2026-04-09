@@ -12,5 +12,5 @@ import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-
 export class EditAiChatAdvancedComponent extends EditAdvancedComponentComponent {
   protected allowedConnectedComponentTypes = ['OpenResponse'];
   componentContent: AiChatContent;
-  protected models: string[] = ['gpt-3.5-turbo', 'gpt-4'];
+  protected models: string[] = ['gpt-4o', 'gpt-4o-mini', 'gpt-5.4', 'gpt-5.4-mini', 'gpt-5.4-nano'];
 }
