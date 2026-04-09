@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>
+  <span i18n>Responses for "{{ data.idea.text }}"</span>
+  <span class="font-normal text-sm items-center">
+    <mat-icon class="mat-18">person</mat-icon>{{ data.idea.count }}
+  </span>
+</h2>
+<mat-dialog-content class="dialog-content-scroll">
+  @for (response of data.responses; track response.timestamp) {
+    <p>
+      <span>{{ response.text }}</span>
+      <span class="font-normal text-sm flex items-center">
+        <mat-icon class="mat-18">person</mat-icon>{{ response.usernames }}
+      </span>
+    </p>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
+</mat-dialog-actions>
