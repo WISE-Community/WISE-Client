@@ -27,6 +27,7 @@ import { ComponentAuthoringComponent } from '../../components/component-authorin
 import { RouterModule } from '@angular/router';
 import { EditComponentAdvancedButtonComponent } from '../../components/edit-component-advanced-button/edit-component-advanced-button.component';
 import { ToggleComponentTagComponent } from '../../components/toggle-component-tag/toggle-component-tag.component';
+import { VisibilityConstraintIconComponent } from '../../components/visibility-constraint-icon/visibility-constraint-icon.component';
 
 @Component({
   imports: [
@@ -47,7 +48,8 @@ import { ToggleComponentTagComponent } from '../../components/toggle-component-t
     MatTooltipModule,
     RouterModule,
     TeacherNodeIconComponent,
-    ToggleComponentTagComponent
+    ToggleComponentTagComponent,
+    VisibilityConstraintIconComponent
   ],
   styleUrl: './node-authoring.component.scss',
   templateUrl: './node-authoring.component.html'
@@ -225,6 +227,10 @@ export class NodeAuthoringComponent implements OnInit {
 
   protected getComponentTypeLabel(componentType: string): string {
     return this.componentTypeService.getComponentTypeLabel(componentType);
+  }
+
+  protected hasVisibilityConstraint(component: ComponentContent): boolean {
+    return component.constraints?.length > 0;
   }
 
   private setShowSaveButtonForAllComponents(node: Node, showSaveButton: boolean): void {

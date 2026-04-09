@@ -100,9 +100,6 @@ export class ComponentSummaryComponent {
       (this.COMPONENTS_WITH_SUMMARY.includes(this.component.type) ||
         this.showScoreSummary ||
         this.hasIdeaRubricData);
-    if (this.component.type === 'OpenResponse') {
-      this.showSummary &&= this.aiEnabled;
-    }
   }
 
   private setSource(): void {

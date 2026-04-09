@@ -20,7 +20,7 @@ export class EditComponentAdvancedButtonComponent {
 
   protected showComponentAdvancedAuthoring(): void {
     this.dialog.open(EditComponentAdvancedComponent, {
-      data: new WiseComponent(this.componentContent, this.nodeId),
+      data: { component: new WiseComponent(this.componentContent, this.nodeId), tab: 'general' },
       width: '80%'
     });
   }
