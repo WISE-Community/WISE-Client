@@ -49,6 +49,9 @@
               <span class="heavy">{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
             </div>
             <toggle-component-tag [component]="component" />
+            @if (hasVisibilityConstraint(component)) {
+              <visibility-constraint-icon [componentContent]="component" [nodeId]="nodeId" />
+            }
             <span class="flex grow"></span>
             <div class="text flex justify-end items-center">
               @if (component.id === editingComponentId) {

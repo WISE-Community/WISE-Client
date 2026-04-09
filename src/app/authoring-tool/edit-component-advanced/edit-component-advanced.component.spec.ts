@@ -19,9 +19,12 @@ describe('EditComponentAdvancedComponent', () => {
         {
           provide: MAT_DIALOG_DATA,
           useValue: {
-            content: { type: 'ShowMyWork' },
-            id: 'component1',
-            nodeId: 'node1'
+            component: {
+              content: { type: 'ShowMyWork' },
+              id: 'component1',
+              nodeId: 'node1'
+            },
+            tab: 'general'
           }
         },
         {

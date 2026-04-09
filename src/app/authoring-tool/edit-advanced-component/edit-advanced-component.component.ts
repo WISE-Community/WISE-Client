@@ -10,8 +10,11 @@ import { moveObjectDown, moveObjectUp } from '../../../assets/wise5/common/array
 export abstract class EditAdvancedComponentComponent {
   component: Component;
   componentContent: ComponentContent;
+  protected selectedTabIndex: number = 0;
+
   @Input() componentId: string;
   @Input() nodeId: string;
+  @Input() tab: string = 'general';
 
   constructor(
     protected nodeService: TeacherNodeService,
@@ -23,6 +26,15 @@ export abstract class EditAdvancedComponentComponent {
     this.componentContent = this.teacherProjectService.getComponent(this.nodeId, this.componentId);
     this.component = new Component(this.componentContent, this.nodeId);
     this.teacherProjectService.uiChanged();
+
+    switch (this.tab) {
+      case 'visibility':
+        this.selectedTabIndex = 1;
+        break;
+      default:
+        this.selectedTabIndex = 0;
+        break;
+    }
   }
 
   setShowSubmitButtonValue(show: boolean = false): void {
