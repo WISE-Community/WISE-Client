@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ChatService } from '../../../../../app/services/chat/chat.service';
 import { OpenAiChatService } from '../../../../../app/services/chat/openAiChat.service';
+import { ComponentContent } from '../../../common/ComponentContent';
 
 /**
  * Abstract base class for components that use an LLM to summarize student responses.
@@ -25,6 +26,7 @@ export abstract class AiSummaryComponent {
   @Input() periodId: number;
 
   private chatService: ChatService = inject(OpenAiChatService);
+  private component: ComponentContent;
   protected dataService: TeacherDataService = inject(TeacherDataService);
   protected datePipe: DatePipe = inject(DatePipe);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
@@ -38,6 +40,7 @@ export abstract class AiSummaryComponent {
   protected summaryDate: Date;
 
   ngOnInit(): void {
+    this.component = this.projectService.getComponent(this.nodeId, this.componentId);
     this.latestComponentStates = this.getLatestComponentStates();
     this.hasStudentResponses = this.latestComponentStates.length > 0;
     if (this.hasStudentResponses) {
@@ -64,9 +67,8 @@ export abstract class AiSummaryComponent {
 
   protected async generateSummary(): Promise<void> {
     this.generatingSummary = true;
-    const prompt = this.projectService.getComponent(this.nodeId, this.componentId).prompt;
     this.summary = await this.chatService.sendMessage([
-      new ChatMessage('system', this.getSystemPrompt(prompt), this.nodeId),
+      new ChatMessage('system', this.getSystemPrompt(this.component.prompt), this.nodeId),
       new ChatMessage('user', this.getStudentResponses(), this.nodeId)
     ]);
     this.localStorageService.setItem(this.getSummaryKey(), this.summary);
@@ -79,7 +81,17 @@ export abstract class AiSummaryComponent {
 
   protected abstract getStudentResponses(): string;
 
-  protected abstract getSystemPrompt(prompt: string): string;
+  protected getSystemPrompt(prompt: string): string {
+    const systemPrompt =
+      this.component.ai?.teacherSummarySystemPrompt ?? this.getDefaultSystemPrompt();
+    return systemPrompt
+      .replace('$QUESTION$', prompt)
+      .replace('$RESPONSE_FORMAT$', this.getResponseFormat());
+  }
+
+  protected abstract getResponseFormat(): string;
+
+  protected abstract getDefaultSystemPrompt(): string;
 
   private getSummaryKey(): string {
     return `component-summary-${this.periodId}-${this.nodeId}-${this.componentId}`;

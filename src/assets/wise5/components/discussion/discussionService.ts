@@ -27,6 +27,9 @@ export class DiscussionService extends ComponentService {
     component.isStudentAttachmentEnabled = true;
     component.gateClassmateResponses = true;
     component.anonymizeResponses = false;
+    component.ai = {
+      teacherSummarySystemPrompt: this.getDefaultTeacherSummarySystemPrompt()
+    };
     return component;
   }
 
@@ -334,5 +337,11 @@ export class DiscussionService extends ComponentService {
       col1: oddResponses.reverse(),
       col2: evenResponses.reverse()
     };
+  }
+
+  getDefaultTeacherSummarySystemPrompt(): string {
+    return `You are a teacher who is summarizing students' discussion threads, which include posts and replies to the following question: "$QUESTION$".
+    Each thread is in the format: $RESPONSE_FORMAT$.
+    In the same language as the question, provide a summary of the threads in 100 words or less.`;
   }
 }

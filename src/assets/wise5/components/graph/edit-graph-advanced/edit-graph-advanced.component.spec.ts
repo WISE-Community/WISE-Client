@@ -30,6 +30,7 @@ describe('EditGraphAdvancedComponent', () => {
       xAxis: {},
       yAxis: {}
     } as GraphContent);
+    spyOn(TestBed.inject(TeacherProjectService), 'getProject').and.returnValue({});
     spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale({ default: 'en-US' }));
     spyOn(projectService, 'isDefaultLocale').and.returnValue(true);
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);

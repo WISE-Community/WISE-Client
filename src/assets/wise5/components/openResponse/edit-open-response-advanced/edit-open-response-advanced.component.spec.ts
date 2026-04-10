@@ -31,6 +31,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
   beforeEach(() => {
     const projectService = TestBed.inject(TeacherProjectService);
     spyOn(projectService, 'getComponent').and.returnValue({} as ComponentContent);
+    spyOn(TestBed.inject(TeacherProjectService), 'getProject').and.returnValue({});
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue([
       'node1',

@@ -74,6 +74,10 @@
     <ng-template mat-tab-label>
       <mat-icon>auto_awesome</mat-icon>&nbsp;<span i18n>AI</span>
     </ng-template>
+    @if (aiEnabled) {
+      <!-- currently C-Rater can be used without the global AI being turned on, due to legacy reasons. -->
+      <edit-component-summarizer-system-prompt [componentContent]="component.content" />
+    }
     <div>
       <mat-checkbox
         color="primary"

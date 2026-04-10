@@ -7,6 +7,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { PeerChatContent } from '../PeerChatContent';
 import { EditPeerChatAdvancedComponentComponent } from './edit-peer-chat-advanced-component.component';
 import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 
 describe('EditPeerChatAdvancedComponentComponent', () => {
   let component: EditPeerChatAdvancedComponentComponent;
@@ -16,7 +17,12 @@ describe('EditPeerChatAdvancedComponentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [EditPeerChatAdvancedComponentComponent, MockComponent(EditComponentJsonComponent)],
       providers: [
-        MockProviders(TeacherNodeService, TeacherProjectService, NotebookService),
+        MockProviders(
+          ComponentServiceLookupService,
+          TeacherNodeService,
+          TeacherProjectService,
+          NotebookService
+        ),
         provideHttpClient(withInterceptorsFromDi())
       ]
     }).compileComponents();
@@ -26,6 +32,7 @@ describe('EditPeerChatAdvancedComponentComponent', () => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(
       {} as PeerChatContent
     );
+    spyOn(TestBed.inject(TeacherProjectService), 'getProject').and.returnValue({});
     fixture = TestBed.createComponent(EditPeerChatAdvancedComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

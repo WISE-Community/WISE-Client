@@ -30,6 +30,7 @@ describe('EditTableAdvancedComponent', () => {
 
   beforeEach(() => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue(createComponent());
+    spyOn(TestBed.inject(TeacherProjectService), 'getProject').and.returnValue({});
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     spyOn(TestBed.inject(TeacherProjectService), 'getFlattenedProjectAsNodeIds').and.returnValue([
       'node1',

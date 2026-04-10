@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { EditComponentAddToNotebookButtonComponent } from '../edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
+import { EditComponentSummarizerSystemPromptComponent } from '../edit-component-summarizer-system-prompt/edit-component-summarizer-system-prompt.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { EditConnectedComponentsComponent } from '../edit-connected-components/e
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentWidthComponent,
     EditComponentRubricComponent,
+    EditComponentSummarizerSystemPromptComponent,
     EditComponentTagsComponent,
     EditComponentConstraintsComponent,
     EditComponentJsonComponent,
@@ -48,6 +50,7 @@ import { EditConnectedComponentsComponent } from '../edit-connected-components/e
     EditComponentExcludeFromTotalScoreComponent,
     EditComponentWidthComponent,
     EditComponentRubricComponent,
+    EditComponentSummarizerSystemPromptComponent,
     EditComponentTagsComponent,
     EditComponentConstraintsComponent,
     EditComponentJsonComponent,
