@@ -6,7 +6,8 @@ import {
   ElementRef,
   EnvironmentInjector,
   Inject,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -15,9 +16,28 @@ import { Component as WISEComponent } from '../../../assets/wise5/common/Compone
 import { components } from '../../../assets/wise5/components/Components';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   imports: [MatDivider, MatDialogModule, MatButtonModule],
   styles: [
-    '.mat-divider { margin: 0 -16px; } .mat-mdc-dialog-content { padding-top: 10px !important; padding-bottom: 10px !important; }'
+    `
+      .edit-component-advanced {
+        --mat-tab-divider-color: var(--mat-divider-color);
+        --mat-tab-divider-height: 1px;
+        .mat-divider {
+          margin: 0 -16px;
+        }
+        .mat-mdc-tab-body-content {
+          padding: 16px 0;
+        }
+        .mat-mdc-tab-header {
+          position: sticky;
+          top: 0;
+          z-index: 2;
+          background-color: white;
+          margin: 0 -16px;
+        }
+      }
+    `
   ],
   templateUrl: './edit-component-advanced.component.html'
 })
