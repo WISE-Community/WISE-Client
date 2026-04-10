@@ -68,10 +68,12 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
   }
 
   private addDoNotTranslateTags(textToTranslate: string): string {
-    return textToTranslate.replaceAll(
-      /<.*?>/g,
-      (match) => '<span translate="no">' + match + '</span>'
-    );
+    return textToTranslate
+      .replaceAll(/<.*?>/g, (match) => '<span translate="no">' + match + '</span>')
+      .replaceAll(
+        /link-text='.*?'/g,
+        (match) => match.slice(0, 11) + '</span>' + match.slice(11, -1) + '<span translate="no">\''
+      );
   }
 
   private removeDoNotTranslateTags(translatedText: string): string {
