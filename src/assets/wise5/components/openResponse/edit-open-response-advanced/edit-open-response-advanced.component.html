@@ -59,19 +59,6 @@
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
-    </ng-template>
-    <ng-template matTabContent>
-      <!-- lazy load needed for tinymce to work -->
-      <edit-component-rubric [componentContent]="component.content" />
-    </ng-template>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
-    <edit-component-tags [componentContent]="component.content" />
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
       <mat-icon>auto_awesome</mat-icon>&nbsp;<span i18n>AI</span>
     </ng-template>
     @if (aiEnabled) {
@@ -610,6 +597,19 @@
         }
       </div>
     }
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <ng-template matTabContent>
+      <!-- lazy load needed for tinymce to work -->
+      <edit-component-rubric [componentContent]="component.content" />
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
+    <edit-component-tags [componentContent]="component.content" />
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
