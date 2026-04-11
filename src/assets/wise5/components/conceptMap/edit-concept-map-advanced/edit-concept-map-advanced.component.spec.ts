@@ -26,6 +26,7 @@ describe('EditConceptMapAdvancedComponent', () => {
     spyOn(TestBed.inject(TeacherProjectService), 'getComponent').and.returnValue({
       rules: []
     } as ConceptMapContent);
+    spyOn(TestBed.inject(TeacherProjectService), 'getProject').and.returnValue({});
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     fixture = TestBed.createComponent(EditConceptMapAdvancedComponent);
     component = fixture.componentInstance;

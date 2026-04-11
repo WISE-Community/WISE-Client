@@ -1,213 +1,244 @@
-<div class="flex flex-col gap-2">
-  <translatable-input
-    [content]="componentContent"
-    key="subtitle"
-    label="Subtitle"
-    i18n-label
-    (defaultLanguageTextChanged)="componentChanged()"
-    class="subtitle"
-  />
-  <div>
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.showMouseXPlotLine"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Show Mouse X Plot Line
-    </mat-checkbox>
-  </div>
-  <div class="highlight-x-range-from-zero">
-    <mat-checkbox
-      color="primary"
-      [disabled]="!componentContent.showMouseXPlotLine"
-      [(ngModel)]="componentContent.highlightXRangeFromZero"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Highlight X Range From Zero
-    </mat-checkbox>
-  </div>
-  <div>
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.showMouseYPlotLine"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Show Mouse Y Plot Line
-    </mat-checkbox>
-  </div>
-  <div>
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.saveMouseOverPoints"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Save Mouse Over Points
-    </mat-checkbox>
-  </div>
-  <div>
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.hideTrialSelect"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Hide Trial Select
-    </mat-checkbox>
-  </div>
-  <div>
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.useCustomLegend"
-      (ngModelChange)="componentChanged()"
-      i18n
-    >
-      Use Custom Legend
-    </mat-checkbox>
-  </div>
-  @if (componentContent.useCustomLegend) {
-    <translatable-input
-      [content]="componentContent"
-      key="customLegend"
-      label="Custom Legend"
-      i18n-label
-      (defaultLanguageTextChanged)="componentChanged()"
-      class="custom-legend"
-    />
-  }
-  <div class="flex gap-4">
-    <span i18n>X Axis Plot Line</span>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="addXAxisPlotLine()"
-      matTooltip="Add X Axis Plot Line"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
-  @for (
-    plotLine of componentContent.xAxis.plotLines;
-    track plotLine;
-    let xAxisPlotLineIndex = $index
-  ) {
-    <div>
-      <div class="flex flex-row flex-wrap gap-4">
+<mat-tab-group animationDuration="0ms" [selectedIndex]="selectedTabIndex">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+    </ng-template>
+    <div class="flex flex-col gap-2">
+      <translatable-input
+        [content]="componentContent"
+        key="subtitle"
+        label="Subtitle"
+        i18n-label
+        (defaultLanguageTextChanged)="componentChanged()"
+        class="subtitle"
+      />
+      <div>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="componentContent.showMouseXPlotLine"
+          (ngModelChange)="componentChanged()"
+          i18n
+        >
+          Show Mouse X Plot Line
+        </mat-checkbox>
+      </div>
+      <div class="highlight-x-range-from-zero">
+        <mat-checkbox
+          color="primary"
+          [disabled]="!componentContent.showMouseXPlotLine"
+          [(ngModel)]="componentContent.highlightXRangeFromZero"
+          (ngModelChange)="componentChanged()"
+          i18n
+        >
+          Highlight X Range From Zero
+        </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="componentContent.showMouseYPlotLine"
+          (ngModelChange)="componentChanged()"
+          i18n
+        >
+          Show Mouse Y Plot Line
+        </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="componentContent.saveMouseOverPoints"
+          (ngModelChange)="componentChanged()"
+          i18n
+        >
+          Save Mouse Over Points
+        </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="componentContent.hideTrialSelect"
+          (ngModelChange)="componentChanged()"
+          i18n
+        >
+          Hide Trial Select
+        </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="componentContent.useCustomLegend"
+          (ngModelChange)="componentChanged()"
+          i18n
+        >
+          Use Custom Legend
+        </mat-checkbox>
+      </div>
+      @if (componentContent.useCustomLegend) {
         <translatable-input
-          [content]="plotLine.label"
-          key="text"
-          label="Text"
+          [content]="componentContent"
+          key="customLegend"
+          label="Custom Legend"
           i18n-label
           (defaultLanguageTextChanged)="componentChanged()"
-          class="plot-line-text"
+          class="custom-legend"
         />
-        <mat-form-field class="plot-line-value">
-          <mat-label i18n>X Value</mat-label>
-          <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
-        </mat-form-field>
-        <mat-form-field class="plot-line-color">
-          <mat-label i18n>Color</mat-label>
-          <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
-        </mat-form-field>
-        <div>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="deleteXAxisPlotLine(xAxisPlotLineIndex)"
-            matTooltip="Delete"
-            matTooltipPosition="above"
-            i18n-matTooltip
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
+      }
+      <div class="flex gap-4">
+        <span i18n>X Axis Plot Line</span>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addXAxisPlotLine()"
+          matTooltip="Add X Axis Plot Line"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
-    </div>
-  }
-  <div class="flex gap-4">
-    <span i18n>Y Axis Plot Line</span>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="addYAxisPlotLine()"
-      matTooltip="Add Y Axis Plot Line"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
-  @for (
-    plotLine of componentContent.yAxis.plotLines;
-    track plotLine;
-    let yAxisPlotLineIndex = $index
-  ) {
-    <div>
-      <div class="flex flex-row flex-wrap gap-4">
-        <translatable-input
-          [content]="plotLine.label"
-          key="text"
-          label="Text"
-          i18n-label
-          (defaultLanguageTextChanged)="componentChanged()"
-          class="plot-line-text"
-        />
-        <mat-form-field class="plot-line-value">
-          <mat-label i18n>Y Value</mat-label>
-          <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
-        </mat-form-field>
-        <mat-form-field class="plot-line-color">
-          <mat-label i18n>Color</mat-label>
-          <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
-        </mat-form-field>
+      @for (
+        plotLine of componentContent.xAxis.plotLines;
+        track plotLine;
+        let xAxisPlotLineIndex = $index
+      ) {
         <div>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="deleteYAxisPlotLine(yAxisPlotLineIndex)"
-            matTooltip="Delete"
-            matTooltipPosition="above"
-            i18n-matTooltip
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
+          <div class="flex flex-row flex-wrap gap-4">
+            <translatable-input
+              [content]="plotLine.label"
+              key="text"
+              label="Text"
+              i18n-label
+              (defaultLanguageTextChanged)="componentChanged()"
+              class="plot-line-text"
+            />
+            <mat-form-field class="plot-line-value">
+              <mat-label i18n>X Value</mat-label>
+              <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
+            </mat-form-field>
+            <mat-form-field class="plot-line-color">
+              <mat-label i18n>Color</mat-label>
+              <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
+            </mat-form-field>
+            <div>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="deleteXAxisPlotLine(xAxisPlotLineIndex)"
+                matTooltip="Delete"
+                matTooltipPosition="above"
+                i18n-matTooltip
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
         </div>
+      }
+      <div class="flex gap-4">
+        <span i18n>Y Axis Plot Line</span>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addYAxisPlotLine()"
+          matTooltip="Add Y Axis Plot Line"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
+      @for (
+        plotLine of componentContent.yAxis.plotLines;
+        track plotLine;
+        let yAxisPlotLineIndex = $index
+      ) {
+        <div>
+          <div class="flex flex-row flex-wrap gap-4">
+            <translatable-input
+              [content]="plotLine.label"
+              key="text"
+              label="Text"
+              i18n-label
+              (defaultLanguageTextChanged)="componentChanged()"
+              class="plot-line-text"
+            />
+            <mat-form-field class="plot-line-value">
+              <mat-label i18n>Y Value</mat-label>
+              <input matInput [(ngModel)]="plotLine.value" (ngModelChange)="componentChanged()" />
+            </mat-form-field>
+            <mat-form-field class="plot-line-color">
+              <mat-label i18n>Color</mat-label>
+              <input matInput [(ngModel)]="plotLine.color" (ngModelChange)="componentChanged()" />
+            </mat-form-field>
+            <div>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="deleteYAxisPlotLine(yAxisPlotLineIndex)"
+                matTooltip="Delete"
+                matTooltipPosition="above"
+                i18n-matTooltip
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
     </div>
-  }
-</div>
-@if (isNotebookEnabled()) {
-  <div>
-    <edit-component-add-to-notebook-button [componentContent]="componentContent" />
-  </div>
-}
-<edit-component-save-button [componentContent]="componentContent" />
-<br />
-<edit-component-submit-button [componentContent]="componentContent" />
+    @if (isNotebookEnabled()) {
+      <div>
+        <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+      </div>
+    }
+    <edit-component-save-button [componentContent]="componentContent" />
+    <br />
+    <edit-component-submit-button [componentContent]="componentContent" />
 
-@if (componentContent.showSubmitButton) {
-  <edit-component-max-submit [componentContent]="componentContent" />
-}
-<edit-component-default-feedback class="block my-4" [componentContent]="componentContent" />
-<div class="flex flex-col items-start">
-  <edit-component-max-score [componentContent]="componentContent" />
-  <edit-component-exclude-from-total-score [componentContent]="componentContent" />
-  <edit-component-width [componentContent]="componentContent" />
-  <edit-component-rubric [componentContent]="componentContent" />
-  <edit-component-tags [componentContent]="componentContent" />
-</div>
-<edit-graph-connected-components
-  [nodeId]="nodeId"
-  [componentId]="componentId"
-  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-  [componentContent]="componentContent"
-  [connectedComponents]="componentContent.connectedComponents"
-  (connectedComponentsChanged)="connectedComponentsChanged($event)"
-/>
-<edit-component-constraints [componentContent]="component.content" />
-<edit-component-json [component]="component" />
+    @if (componentContent.showSubmitButton) {
+      <edit-component-max-submit [componentContent]="componentContent" />
+    }
+    <edit-component-default-feedback class="block my-4" [componentContent]="componentContent" />
+    <div class="flex flex-col items-start">
+      <edit-component-max-score [componentContent]="componentContent" />
+      <edit-component-exclude-from-total-score [componentContent]="componentContent" />
+      <edit-component-width [componentContent]="componentContent" />
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+    </ng-template>
+    <edit-component-constraints [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>join_inner</mat-icon>&nbsp;<span i18n>Connections</span>
+    </ng-template>
+    <edit-graph-connected-components
+      [nodeId]="nodeId"
+      [componentId]="componentId"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      [componentContent]="componentContent"
+      [connectedComponents]="componentContent.connectedComponents"
+      (connectedComponentsChanged)="connectedComponentsChanged($event)"
+    />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <ng-template matTabContent>
+      <!-- lazy load needed for tinymce to work -->
+      <edit-component-rubric [componentContent]="component.content" />
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
+    <edit-component-tags [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <edit-component-json [component]="component" />
+  </mat-tab>
+</mat-tab-group>

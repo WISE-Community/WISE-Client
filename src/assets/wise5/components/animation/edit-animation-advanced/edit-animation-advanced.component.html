@@ -3,29 +3,16 @@
     <ng-template mat-tab-label>
       <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
     </ng-template>
-    <div class="flex flex-col">
-      <translatable-input
-        [content]="componentContent"
-        key="parameters"
-        label="Model Parameters"
-        i18n-label
-        (defaultLanguageTextChanged)="componentChanged()"
-        class="model-parameters"
-      />
-      @if (isNotebookEnabled()) {
-        <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+    <div class="flex flex-col justify-start items-start">
+      <edit-component-save-button [componentContent]="component.content" />
+      <edit-component-submit-button [componentContent]="component.content" />
+      @if (component.content.showSubmitButton) {
+        <edit-component-max-submit [componentContent]="component.content" />
       }
-      <div class="flex flex-col justify-start items-start">
-        <edit-component-save-button [componentContent]="component.content" />
-        <edit-component-submit-button [componentContent]="component.content" />
-        @if (component.content.showSubmitButton) {
-          <edit-component-max-submit [componentContent]="component.content" />
-        }
-        <edit-component-default-feedback [componentContent]="component.content" />
-        <edit-component-max-score [componentContent]="component.content" />
-        <edit-component-exclude-from-total-score [componentContent]="component.content" />
-        <edit-component-width [componentContent]="component.content" />
-      </div>
+      <edit-component-default-feedback [componentContent]="component.content" />
+      <edit-component-max-score [componentContent]="component.content" />
+      <edit-component-exclude-from-total-score [componentContent]="component.content" />
+      <edit-component-width [componentContent]="component.content" />
     </div>
   </mat-tab>
   <mat-tab>

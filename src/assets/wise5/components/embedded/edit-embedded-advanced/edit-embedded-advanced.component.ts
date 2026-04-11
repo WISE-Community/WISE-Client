@@ -2,17 +2,12 @@ import { Component } from '@angular/core';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
 import { EmbeddedContent } from '../EmbeddedContent';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
-import { EditComponentAddToNotebookButtonComponent } from '../../../../../app/authoring-tool/edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
-import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
+import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced-shared.module';
 
 @Component({
-  templateUrl: 'edit-embedded-advanced.component.html',
+  imports: [EditComponentAdvancedSharedModule, TranslatableInputComponent],
   styles: ['.model-parameters { width: 100%; }'],
-  imports: [
-    TranslatableInputComponent,
-    EditComponentAddToNotebookButtonComponent,
-    EditCommonAdvancedComponent
-  ]
+  templateUrl: 'edit-embedded-advanced.component.html'
 })
 export class EditEmbeddedAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = [

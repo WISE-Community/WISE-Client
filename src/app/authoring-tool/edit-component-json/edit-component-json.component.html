@@ -1,28 +1,19 @@
-<div class="flex flex-row justify-start items-center gap-2">
-  <mat-label class="node__label--vertical-alignment" i18n>JSON</mat-label>
-  <button
-    mat-raised-button
-    color="primary"
-    class="topButton"
-    (click)="toggleJSONView()"
-    matTooltip="Show JSON"
-    i18n-matTooltip
-    matTooltipPosition="above"
-  >
-    <mat-icon>code</mat-icon>
-  </button>
-</div>
-@if (showJSONAuthoring) {
-  <div class="flex flex-col gap-2">
-    <span i18n style="color: red">Close the JSON view to save the changes</span>
-    <mat-form-field class="w-full">
-      <mat-label i18n>Edit Activity JSON</mat-label>
-      <textarea
-        matInput
-        cdkTextareaAutosize
-        [(ngModel)]="componentContentJSONString"
-        (ngModelChange)="jsonChanged.next($event)"
-      ></textarea>
-    </mat-form-field>
+<div class="pt-4">
+  <div class="mb-2">
+    <mat-icon color="warn" class="align-bottom">warning</mat-icon>
+    <span i18n class="warn">
+      Editing the JSON directly is generally not recommended, as errors can break the unit. If you
+      need assistance, please contact WISE staff.
+    </span>
   </div>
-}
+  <mat-form-field class="w-full" appearance="outline" style="margin-top: 10px">
+    <mat-label i18n>Edit Activity JSON</mat-label>
+    <textarea
+      class="mat-body-2"
+      matInput
+      cdkTextareaAutosize
+      [(ngModel)]="componentContentJSONString"
+      (ngModelChange)="jsonChanged.next($event)"
+    ></textarea>
+  </mat-form-field>
+</div>
