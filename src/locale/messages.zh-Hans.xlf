@@ -666,7 +666,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">144,146</context>
+          <context context-type="linenumber">149,151</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -722,7 +722,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">154,157</context>
+          <context context-type="linenumber">159,162</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -798,7 +798,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">166,168</context>
+          <context context-type="linenumber">171,173</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-authoring/draw-authoring.component.html</context>
@@ -810,11 +810,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">123,125</context>
+          <context context-type="linenumber">128,129</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">174,176</context>
+          <context context-type="linenumber">179,180</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -874,27 +874,19 @@
         </context-group>
         <target state="needs-translation"> Show Add to Notebook Button </target>
       </trans-unit>
-      <trans-unit id="8360107325291301836" datatype="html">
-        <source>Advanced Settings</source>
+      <trans-unit id="5222210534332546893" datatype="html">
+        <source>Advanced Activity Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-advanced/edit-component-advanced.component.html</context>
-          <context context-type="linenumber">1,5</context>
+          <context context-type="linenumber">2,5</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
-          <context context-type="linenumber">71</context>
-        </context-group>
-        <target state="translated">高级设置</target>
+        <target state="needs-translation">Advanced Activity Settings</target>
       </trans-unit>
       <trans-unit id="5547981558491672240" datatype="html">
         <source> Close </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-advanced/edit-component-advanced.component.html</context>
-          <context context-type="linenumber">9,12</context>
+          <context context-type="linenumber">10,14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
@@ -954,61 +946,25 @@
         </context-group>
         <target state="needs-translation"> Do not count score on this activity towards the total score </target>
       </trans-unit>
-      <trans-unit id="2742664813202759813" datatype="html">
-        <source>JSON</source>
+      <trans-unit id="8577046754106915585" datatype="html">
+        <source> Editing the JSON directly is generally not recommended, as errors can break the unit. If you need assistance, please contact WISE staff. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
-          <context context-type="linenumber">2,6</context>
+          <context context-type="linenumber">5,9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">44,47</context>
+          <context context-type="linenumber">49,53</context>
         </context-group>
-        <target state="translated">JSON文件</target>
-      </trans-unit>
-      <trans-unit id="2543636733220429928" datatype="html">
-        <source>Show JSON</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
-          <context context-type="linenumber">8,12</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">60,64</context>
-        </context-group>
-        <target state="translated">显示JSON文件内容</target>
-      </trans-unit>
-      <trans-unit id="1918155515588550927" datatype="html">
-        <source>Close the JSON view to save the changes</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
-          <context context-type="linenumber">17,19</context>
-        </context-group>
-        <target state="needs-translation">Close the JSON view to save the changes</target>
+        <target state="needs-translation"> Editing the JSON directly is generally not recommended, as errors can break the unit. If you need assistance, please contact WISE staff. </target>
       </trans-unit>
       <trans-unit id="8880132687084463323" datatype="html">
         <source>Edit Activity JSON</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
-          <context context-type="linenumber">19,23</context>
+          <context context-type="linenumber">10,14</context>
         </context-group>
         <target state="needs-translation">Edit Activity JSON</target>
-      </trans-unit>
-      <trans-unit id="19198353055300541" datatype="html">
-        <source>The JSON is invalid. Invalid JSON will not be saved.
-Click &quot;OK&quot; to revert back to the last valid JSON.
-Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.ts</context>
-          <context context-type="linenumber">76</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-        <target state="translated">JSON文件内容无效。无效的 JSON文件 将不会被保存。
-点击 "确定" 返回到最后一个有效的JSON文件。
-点击 “取消” 将保留该无效的JSON文件以便您可以修复它。</target>
       </trans-unit>
       <trans-unit id="269492429034038872" datatype="html">
         <source>Max Score</source>
@@ -1062,30 +1018,6 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">在此输入提示</target>
       </trans-unit>
-      <trans-unit id="8129802372590365244" datatype="html">
-        <source>Rubric</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-rubric/edit-component-rubric.component.html</context>
-          <context context-type="linenumber">2,6</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">28,31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-        <target state="translated">量规</target>
-      </trans-unit>
-      <trans-unit id="8741193813895692751" datatype="html">
-        <source>Edit activity rubric</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-rubric/edit-component-rubric.component.html</context>
-          <context context-type="linenumber">8,12</context>
-        </context-group>
-        <target state="needs-translation">Edit activity rubric</target>
-      </trans-unit>
       <trans-unit id="5694406324105859820" datatype="html">
         <source>Show Save Button</source>
         <context-group purpose="location">
@@ -1102,11 +1034,95 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="translated">显示“提交”按钮</target>
       </trans-unit>
+      <trans-unit id="8815129696139137937" datatype="html">
+        <source>Teacher Summary System Prompt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-summarizer-system-prompt/edit-component-summarizer-system-prompt.component.ts</context>
+          <context context-type="linenumber">12,16</context>
+        </context-group>
+        <target state="needs-translation">Teacher Summary System Prompt</target>
+      </trans-unit>
       <trans-unit id="7886570921510760899" datatype="html">
         <source>Tags</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-tags/edit-component-tags.component.html</context>
           <context context-type="linenumber">2,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">240,241</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">237,238</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
+          <context context-type="linenumber">69,70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
+          <context context-type="linenumber">58,59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">611,612</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component.ts</context>
+          <context context-type="linenumber">26,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/edit-show-group-work-advanced/edit-show-group-work-advanced.component.ts</context>
+          <context context-type="linenumber">26,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showMyWork/edit-show-my-work-advanced/edit-show-my-work-advanced.component.ts</context>
+          <context context-type="linenumber">26,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">303,304</context>
         </context-group>
         <target state="translated">标签</target>
       </trans-unit>
@@ -1346,7 +1362,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">90,92</context>
+          <context context-type="linenumber">93,95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -1378,7 +1394,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">101,104</context>
+          <context context-type="linenumber">104,107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -1802,11 +1818,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">39,41</context>
+          <context context-type="linenumber">88,89</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">497,498</context>
+          <context context-type="linenumber">547,548</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
@@ -1874,7 +1890,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">478,479</context>
+          <context context-type="linenumber">528,529</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -1890,7 +1906,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">488,492</context>
+          <context context-type="linenumber">538,541</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
@@ -1930,7 +1946,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">466,467</context>
+          <context context-type="linenumber">516,517</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -1966,11 +1982,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">40,42</context>
+          <context context-type="linenumber">89,90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">498,501</context>
+          <context context-type="linenumber">548,550</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
@@ -2934,7 +2950,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">105,108</context>
+          <context context-type="linenumber">155,158</context>
         </context-group>
         <target state="needs-translation">Score</target>
       </trans-unit>
@@ -3626,7 +3642,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">114</context>
         </context-group>
         <target state="needs-translation">Recaptcha failed. Please reload the page and try again.</target>
       </trans-unit>
@@ -3710,7 +3726,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <target state="translated">我们找不到该用户名。 请确保正确输入并重新尝试。 如果您忘记了用户名，请使用下面的忘记用户名选项。</target>
       </trans-unit>
@@ -4238,7 +4254,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>You have submitted an invalid verification code too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, you can try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">108</context>
         </context-group>
         <target state="translated">您多次重复提交无效的验证码。 出于安全原因，我们将锁定更改密码功能10分钟。 10分钟后，您可以再试一次。</target>
       </trans-unit>
@@ -4246,7 +4262,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>The server has encountered an error and was unable to send you an email. Please try again. If the error continues to occur, please contact us.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <target state="translated">服务器发生错误，无法向您发送电子邮件。 请再试一次。 如果错误继续发生，请与我们联系。</target>
       </trans-unit>
@@ -10108,11 +10124,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">114,115</context>
+          <context context-type="linenumber">119,120</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">165,166</context>
+          <context context-type="linenumber">170,171</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -11434,7 +11450,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">66,68</context>
+          <context context-type="linenumber">69,71</context>
         </context-group>
         <target state="needs-translation">Delete activity</target>
       </trans-unit>
@@ -11692,6 +11708,98 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">Download unit</target>
       </trans-unit>
+      <trans-unit id="8129802372590365244" datatype="html">
+        <source>Rubric</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
+          <context context-type="linenumber">28,31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
+          <context context-type="linenumber">38,41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
+          <context context-type="linenumber">39,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
+          <context context-type="linenumber">39,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">232,235</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
+          <context context-type="linenumber">31,34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
+          <context context-type="linenumber">41,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
+          <context context-type="linenumber">45,48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
+          <context context-type="linenumber">52,55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">229,232</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
+          <context context-type="linenumber">45,48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
+          <context context-type="linenumber">61,64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
+          <context context-type="linenumber">50,53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">603,606</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component.ts</context>
+          <context context-type="linenumber">17,20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/edit-show-group-work-advanced/edit-show-group-work-advanced.component.ts</context>
+          <context context-type="linenumber">17,20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showMyWork/edit-show-my-work-advanced/edit-show-my-work-advanced.component.ts</context>
+          <context context-type="linenumber">17,20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">295,298</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <target state="translated">量规</target>
+      </trans-unit>
       <trans-unit id="1354846446306331186" datatype="html">
         <source>Milestones</source>
         <context-group purpose="location">
@@ -11712,13 +11820,93 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">Milestones</target>
       </trans-unit>
-      <trans-unit id="8577046754106915585" datatype="html">
-        <source> Editing the JSON directly is generally not recommended, as errors can break the unit. If you need assistance, please contact WISE staff. </source>
+      <trans-unit id="2742664813202759813" datatype="html">
+        <source>JSON</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
-          <context context-type="linenumber">49,53</context>
+          <context context-type="linenumber">44,47</context>
         </context-group>
-        <target state="needs-translation"> Editing the JSON directly is generally not recommended, as errors can break the unit. If you need assistance, please contact WISE staff. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
+          <context context-type="linenumber">50,52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">244,246</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
+          <context context-type="linenumber">43,45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
+          <context context-type="linenumber">53,55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
+          <context context-type="linenumber">57,59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
+          <context context-type="linenumber">64,66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">241,243</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component.html</context>
+          <context context-type="linenumber">21,23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
+          <context context-type="linenumber">57,59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
+          <context context-type="linenumber">73,75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
+          <context context-type="linenumber">62,64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">615,617</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
+          <context context-type="linenumber">40,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component.ts</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/edit-show-group-work-advanced/edit-show-group-work-advanced.component.ts</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showMyWork/edit-show-my-work-advanced/edit-show-my-work-advanced.component.ts</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
+          <context context-type="linenumber">40,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">307,309</context>
+        </context-group>
+        <target state="translated">JSON文件</target>
       </trans-unit>
       <trans-unit id="2475616145493399595" datatype="html">
         <source>Edit Unit JSON</source>
@@ -11731,6 +11919,18 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">65,69</context>
         </context-group>
         <target state="needs-translation">Edit Unit JSON</target>
+      </trans-unit>
+      <trans-unit id="19198353055300541" datatype="html">
+        <source>The JSON is invalid. Invalid JSON will not be saved.
+Click &quot;OK&quot; to revert back to the last valid JSON.
+Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <target state="translated">JSON文件内容无效。无效的 JSON文件 将不会被保存。
+点击 "确定" 返回到最后一个有效的JSON文件。
+点击 “取消” 将保留该无效的JSON文件以便您可以修复它。</target>
       </trans-unit>
       <trans-unit id="82388219829106287" datatype="html">
         <source>Unit Home</source>
@@ -11767,6 +11967,18 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">2,7</context>
         </context-group>
         <target state="needs-translation">Notebook Settings</target>
+      </trans-unit>
+      <trans-unit id="8360107325291301836" datatype="html">
+        <source>Advanced Settings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/authoring-tool.component.ts</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <target state="translated">高级设置</target>
       </trans-unit>
       <trans-unit id="1422076554976852397" datatype="html">
         <source>Unit List</source>
@@ -12184,6 +12396,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <target state="needs-translation">Are you sure you want to replace the content in <x id="PH" equiv-text="this.currentLanguage().language"/> with content in <x id="PH_1" equiv-text="this.defaultLanguage.language"/> for this item?</target>
       </trans-unit>
+      <trans-unit id="2170693430286604200" datatype="html">
+        <source>This activity is displayed to the student when certain conditions are met. Click to view and edit the conditions.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/visibility-constraint-icon/visibility-constraint-icon.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <target state="needs-translation">This activity is displayed to the student when certain conditions are met. Click to view and edit the conditions.</target>
+      </trans-unit>
       <trans-unit id="1318680729593701201" datatype="html">
         <source>Also currently editing this unit: <x id="PH" equiv-text="otherAuthors.join(               &apos;, &apos;             )"/>. Be careful not to overwrite each other&apos;s work!</source>
         <context-group purpose="location">
@@ -12280,15 +12500,15 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">66,67</context>
+          <context context-type="linenumber">71,72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">86,87</context>
+          <context context-type="linenumber">91,92</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">99,100</context>
+          <context context-type="linenumber">104,105</context>
         </context-group>
         <target state="needs-translation">Any</target>
       </trans-unit>
@@ -13714,6 +13934,14 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Edit constraints</target>
       </trans-unit>
+      <trans-unit id="2543636733220429928" datatype="html">
+        <source>Show JSON</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">60,64</context>
+        </context-group>
+        <target state="translated">显示JSON文件内容</target>
+      </trans-unit>
       <trans-unit id="3361600127930482405" datatype="html">
         <source>Paths</source>
         <context-group purpose="location">
@@ -14008,7 +14236,7 @@ The branches will be removed but the steps will remain in the unit.</target>
 <x id="PH" equiv-text="componentNumber"/>. <x id="PH_1" equiv-text="component.type"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">170</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this activity?
 
@@ -15212,7 +15440,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">83,84</context>
+          <context context-type="linenumber">88,89</context>
         </context-group>
         <target state="needs-translation">Link</target>
       </trans-unit>
@@ -18064,13 +18292,229 @@ Are you sure you want to proceed?</target>
         </context-group>
         <target state="needs-translation">An error occurred.</target>
       </trans-unit>
+      <trans-unit id="6439365426343089851" datatype="html">
+        <source>General</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
+          <context context-type="linenumber">4,8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
+          <context context-type="linenumber">4,8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
+          <context context-type="linenumber">4,8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+        <target state="needs-translation">General</target>
+      </trans-unit>
       <trans-unit id="1141886420788473147" datatype="html">
         <source>Model</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">2,3</context>
+          <context context-type="linenumber">7,8</context>
         </context-group>
         <target state="needs-translation">Model</target>
+      </trans-unit>
+      <trans-unit id="8271357500216966879" datatype="html">
+        <source>Visibility</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">213,215</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
+          <context context-type="linenumber">26,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
+          <context context-type="linenumber">33,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">210,212</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
+          <context context-type="linenumber">26,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
+          <context context-type="linenumber">42,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
+          <context context-type="linenumber">31,33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">43,45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component.ts</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/edit-show-group-work-advanced/edit-show-group-work-advanced.component.ts</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/showMyWork/edit-show-my-work-advanced/edit-show-my-work-advanced.component.ts</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">276,278</context>
+        </context-group>
+        <target state="needs-translation">Visibility</target>
+      </trans-unit>
+      <trans-unit id="2557623954339695776" datatype="html">
+        <source>Connections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
+          <context context-type="linenumber">26,29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
+          <context context-type="linenumber">26,29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
+          <context context-type="linenumber">219,222</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
+          <context context-type="linenumber">18,21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
+          <context context-type="linenumber">20,23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
+          <context context-type="linenumber">32,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
+          <context context-type="linenumber">39,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
+          <context context-type="linenumber">216,219</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
+          <context context-type="linenumber">32,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
+          <context context-type="linenumber">48,51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
+          <context context-type="linenumber">37,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">49,52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
+          <context context-type="linenumber">282,285</context>
+        </context-group>
+        <target state="needs-translation">Connections</target>
       </trans-unit>
       <trans-unit id="555720515547706264" datatype="html">
         <source>Students watch an animation.</source>
@@ -18216,11 +18660,11 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">105,106</context>
+          <context context-type="linenumber">110,111</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">156,157</context>
+          <context context-type="linenumber">161,162</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-authoring/table-authoring.component.html</context>
@@ -19766,7 +20210,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Show Auto Score </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">9,14</context>
+          <context context-type="linenumber">14,18</context>
         </context-group>
         <target state="needs-translation"> Show Auto Score </target>
       </trans-unit>
@@ -19774,7 +20218,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Show Auto Feedback </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">19,22</context>
+          <context context-type="linenumber">24,27</context>
         </context-group>
         <target state="needs-translation"> Show Auto Feedback </target>
       </trans-unit>
@@ -19782,7 +20226,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Rules</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">23,24</context>
+          <context context-type="linenumber">28,29</context>
         </context-group>
         <target state="needs-translation">Rules</target>
       </trans-unit>
@@ -19790,11 +20234,11 @@ Are you ready to receive feedback on this answer?</target>
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">25,27</context>
+          <context context-type="linenumber">30,32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">291,293</context>
+          <context context-type="linenumber">341,342</context>
         </context-group>
         <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
@@ -19802,7 +20246,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Rule Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">31,32</context>
+          <context context-type="linenumber">36,37</context>
         </context-group>
         <target state="needs-translation">Rule Name</target>
       </trans-unit>
@@ -19810,7 +20254,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Rule Type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">36,37</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
         <target state="needs-translation">Rule Type</target>
       </trans-unit>
@@ -19818,7 +20262,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>should contain</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">38,39</context>
+          <context context-type="linenumber">43,44</context>
         </context-group>
         <target state="needs-translation">should contain</target>
       </trans-unit>
@@ -19826,7 +20270,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>should not contain</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">39,42</context>
+          <context context-type="linenumber">44,47</context>
         </context-group>
         <target state="needs-translation">should not contain</target>
       </trans-unit>
@@ -19834,7 +20278,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Comparison</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">43,44</context>
+          <context context-type="linenumber">48,49</context>
         </context-group>
         <target state="needs-translation">Comparison</target>
       </trans-unit>
@@ -19842,7 +20286,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>exactly</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">45,46</context>
+          <context context-type="linenumber">50,51</context>
         </context-group>
         <target state="needs-translation">exactly</target>
       </trans-unit>
@@ -19850,7 +20294,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>more than</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">46,47</context>
+          <context context-type="linenumber">51,52</context>
         </context-group>
         <target state="needs-translation">more than</target>
       </trans-unit>
@@ -19858,7 +20302,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>less than</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">47,50</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
         <target state="needs-translation">less than</target>
       </trans-unit>
@@ -19866,7 +20310,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Count</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">51,54</context>
+          <context context-type="linenumber">56,59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/summary-display/summary-display.component.ts</context>
@@ -19878,11 +20322,11 @@ Are you ready to receive feedback on this answer?</target>
         <source>Node</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">63,64</context>
+          <context context-type="linenumber">68,69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">96,97</context>
+          <context context-type="linenumber">101,102</context>
         </context-group>
         <target state="needs-translation">Node</target>
       </trans-unit>
@@ -19890,7 +20334,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Link Connection</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">80,81</context>
         </context-group>
         <target state="needs-translation">Link Connection</target>
       </trans-unit>
@@ -19898,7 +20342,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>with any or no link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">77,78</context>
+          <context context-type="linenumber">82,83</context>
         </context-group>
         <target state="needs-translation">with any or no link</target>
       </trans-unit>
@@ -19906,7 +20350,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>with specific link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">78,81</context>
+          <context context-type="linenumber">83,86</context>
         </context-group>
         <target state="needs-translation">with specific link</target>
       </trans-unit>
@@ -19914,7 +20358,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">94,96</context>
+          <context context-type="linenumber">99,101</context>
         </context-group>
         <target state="needs-translation">to</target>
       </trans-unit>
@@ -19922,7 +20366,7 @@ Are you ready to receive feedback on this answer?</target>
         <source> Add Category (Optional) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">112,115</context>
+          <context context-type="linenumber">117,120</context>
         </context-group>
         <target state="needs-translation"> Add Category (Optional) </target>
       </trans-unit>
@@ -19930,7 +20374,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Category Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">118,121</context>
+          <context context-type="linenumber">123,126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -19942,7 +20386,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Delete Catagory</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">129,132</context>
+          <context context-type="linenumber">134,136</context>
         </context-group>
         <target state="needs-translation">Delete Catagory</target>
       </trans-unit>
@@ -19950,7 +20394,7 @@ Are you ready to receive feedback on this answer?</target>
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>arrow_upward<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">148,150</context>
+          <context context-type="linenumber">153,154</context>
         </context-group>
         <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>arrow_upward<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
@@ -19958,7 +20402,7 @@ Are you ready to receive feedback on this answer?</target>
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>arrow_downward<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">159,161</context>
+          <context context-type="linenumber">164,165</context>
         </context-group>
         <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>arrow_downward<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
@@ -19966,7 +20410,7 @@ Are you ready to receive feedback on this answer?</target>
         <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>delete<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">170,172</context>
+          <context context-type="linenumber">175,176</context>
         </context-group>
         <target state="needs-translation"><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon&gt;"/>delete<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
       </trans-unit>
@@ -19974,7 +20418,7 @@ Are you ready to receive feedback on this answer?</target>
         <source>Custom Rule Evaluator</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">177,180</context>
+          <context context-type="linenumber">182,185</context>
         </context-group>
         <target state="needs-translation">Custom Rule Evaluator</target>
       </trans-unit>
@@ -19984,7 +20428,7 @@ Are you ready to receive feedback on this answer?</target>
 Rule Name: <x id="PH" equiv-text="ruleName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="translated">您确定要删除此规则吗？
 
@@ -19997,7 +20441,7 @@ Rule Name: <x id="PH" equiv-text="ruleName"/>
 Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <target state="translated">您确定要从此规则中删除该类别吗？
 
@@ -21062,6 +21506,18 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <target state="needs-translation"><x id="PH" equiv-text="usernames"/> replied to a discussion you were in!</target>
       </trans-unit>
+      <trans-unit id="3484984238852181071" datatype="html">
+        <source>AI</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">62,65</context>
+        </context-group>
+        <target state="needs-translation">AI</target>
+      </trans-unit>
       <trans-unit id="831017338718169987" datatype="html">
         <source>Students draw on a canvas using a variety of tools.</source>
         <context-group purpose="location">
@@ -21386,7 +21842,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Model Parameters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
-          <context context-type="linenumber">5,8</context>
+          <context context-type="linenumber">10,12</context>
         </context-group>
         <target state="needs-translation">Model Parameters</target>
       </trans-unit>
@@ -21482,7 +21938,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Subtitle</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">5,8</context>
+          <context context-type="linenumber">10,12</context>
         </context-group>
         <target state="needs-translation">Subtitle</target>
       </trans-unit>
@@ -21490,7 +21946,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source> Show Mouse X Plot Line </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">17,20</context>
+          <context context-type="linenumber">22,25</context>
         </context-group>
         <target state="needs-translation"> Show Mouse X Plot Line </target>
       </trans-unit>
@@ -21498,7 +21954,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source> Highlight X Range From Zero </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">28,33</context>
+          <context context-type="linenumber">33,37</context>
         </context-group>
         <target state="needs-translation"> Highlight X Range From Zero </target>
       </trans-unit>
@@ -21506,7 +21962,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source> Show Mouse Y Plot Line </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">38,43</context>
+          <context context-type="linenumber">43,47</context>
         </context-group>
         <target state="needs-translation"> Show Mouse Y Plot Line </target>
       </trans-unit>
@@ -21514,7 +21970,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source> Save Mouse Over Points </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">48,53</context>
+          <context context-type="linenumber">53,57</context>
         </context-group>
         <target state="needs-translation"> Save Mouse Over Points </target>
       </trans-unit>
@@ -21522,7 +21978,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source> Hide Trial Select </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">58,63</context>
+          <context context-type="linenumber">63,67</context>
         </context-group>
         <target state="needs-translation"> Hide Trial Select </target>
       </trans-unit>
@@ -21530,7 +21986,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source> Use Custom Legend </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">68,71</context>
+          <context context-type="linenumber">73,76</context>
         </context-group>
         <target state="needs-translation"> Use Custom Legend </target>
       </trans-unit>
@@ -21538,7 +21994,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Custom Legend</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">75,77</context>
+          <context context-type="linenumber">80,82</context>
         </context-group>
         <target state="needs-translation">Custom Legend</target>
       </trans-unit>
@@ -21546,7 +22002,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>X Axis Plot Line</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">82,86</context>
+          <context context-type="linenumber">87,90</context>
         </context-group>
         <target state="needs-translation">X Axis Plot Line</target>
       </trans-unit>
@@ -21554,7 +22010,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Add X Axis Plot Line</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">87,91</context>
+          <context context-type="linenumber">92,95</context>
         </context-group>
         <target state="needs-translation">Add X Axis Plot Line</target>
       </trans-unit>
@@ -21562,7 +22018,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>X Value</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">110,111</context>
+          <context context-type="linenumber">115,116</context>
         </context-group>
         <target state="needs-translation">X Value</target>
       </trans-unit>
@@ -21570,7 +22026,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Y Axis Plot Line</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">133,137</context>
+          <context context-type="linenumber">138,141</context>
         </context-group>
         <target state="needs-translation">Y Axis Plot Line</target>
       </trans-unit>
@@ -21578,7 +22034,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Add Y Axis Plot Line</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">138,142</context>
+          <context context-type="linenumber">143,146</context>
         </context-group>
         <target state="needs-translation">Add Y Axis Plot Line</target>
       </trans-unit>
@@ -21586,7 +22042,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>Y Value</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">161,162</context>
+          <context context-type="linenumber">166,167</context>
         </context-group>
         <target state="needs-translation">Y Value</target>
       </trans-unit>
@@ -21866,7 +22322,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">98,99</context>
+          <context context-type="linenumber">103,104</context>
         </context-group>
         <target state="needs-translation">Y Axis</target>
       </trans-unit>
@@ -21958,7 +22414,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">87,89</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <target state="needs-translation">Series</target>
       </trans-unit>
@@ -22790,15 +23246,13 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this item?</target>
       </trans-unit>
-      <trans-unit id="1333234691426606537" datatype="html">
-        <source> Student Can Create Choices
-</source>
+      <trans-unit id="7986847885560446361" datatype="html">
+        <source> Student Can Create Choices </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
-          <context context-type="linenumber">8,13</context>
+          <context context-type="linenumber">13,17</context>
         </context-group>
-        <target state="needs-translation"> Student Can Create Choices
-</target>
+        <target state="needs-translation"> Student Can Create Choices </target>
       </trans-unit>
       <trans-unit id="2424938650602658133" datatype="html">
         <source>Do you want to copy the choices and buckets from the connected activity?
@@ -23168,11 +23622,11 @@ Warning: This will delete all existing choices and buckets in this activity.</ta
         <source> Show Feedback </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
-          <context context-type="linenumber">8,11</context>
+          <context context-type="linenumber">13,16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">63,67</context>
+          <context context-type="linenumber">112,115</context>
         </context-group>
         <target state="needs-translation"> Show Feedback </target>
       </trans-unit>
@@ -23340,7 +23794,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Starter Sentence</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">4,8</context>
+          <context context-type="linenumber">9,11</context>
         </context-group>
         <target state="needs-translation">Starter Sentence</target>
       </trans-unit>
@@ -23348,7 +23802,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Allow students to record audio response </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">16,22</context>
+          <context context-type="linenumber">21,26</context>
         </context-group>
         <target state="needs-translation"> Allow students to record audio response </target>
       </trans-unit>
@@ -23356,7 +23810,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Enable AI Model </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">27,31</context>
+          <context context-type="linenumber">76,79</context>
         </context-group>
         <target state="needs-translation"> Enable AI Model </target>
       </trans-unit>
@@ -23364,7 +23818,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Score On</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">34,36</context>
+          <context context-type="linenumber">83,85</context>
         </context-group>
         <target state="needs-translation">Score On</target>
       </trans-unit>
@@ -23372,7 +23826,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Change</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">41,46</context>
+          <context context-type="linenumber">90,93</context>
         </context-group>
         <target state="needs-translation">Change</target>
       </trans-unit>
@@ -23380,7 +23834,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Show Score </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">53,58</context>
+          <context context-type="linenumber">102,106</context>
         </context-group>
         <target state="needs-translation"> Show Score </target>
       </trans-unit>
@@ -23388,7 +23842,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Enable Feedback Rules </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">73,75</context>
+          <context context-type="linenumber">122,124</context>
         </context-group>
         <target state="needs-translation"> Enable Feedback Rules </target>
       </trans-unit>
@@ -23396,7 +23850,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Scoring Rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">84,87</context>
+          <context context-type="linenumber">134,137</context>
         </context-group>
         <target state="needs-translation">Scoring Rule</target>
       </trans-unit>
@@ -23404,7 +23858,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Add Scoring Rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">89,92</context>
+          <context context-type="linenumber">139,142</context>
         </context-group>
         <target state="needs-translation">Add Scoring Rule</target>
       </trans-unit>
@@ -23412,7 +23866,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Feedback Text</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">117,119</context>
+          <context context-type="linenumber">167,169</context>
         </context-group>
         <target state="needs-translation">Feedback Text</target>
       </trans-unit>
@@ -23420,7 +23874,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Move Scoring Rule Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">128,131</context>
+          <context context-type="linenumber">178,180</context>
         </context-group>
         <target state="needs-translation">Move Scoring Rule Up</target>
       </trans-unit>
@@ -23428,7 +23882,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Move Scoring Rule Down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">139,142</context>
+          <context context-type="linenumber">189,191</context>
         </context-group>
         <target state="needs-translation">Move Scoring Rule Down</target>
       </trans-unit>
@@ -23436,7 +23890,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Delete Scoring Rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">149,152</context>
+          <context context-type="linenumber">199,201</context>
         </context-group>
         <target state="needs-translation">Delete Scoring Rule</target>
       </trans-unit>
@@ -23444,7 +23898,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Enable Multiple Attempt Feedback </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">169,172</context>
+          <context context-type="linenumber">219,222</context>
         </context-group>
         <target state="needs-translation"> Enable Multiple Attempt Feedback </target>
       </trans-unit>
@@ -23452,7 +23906,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Multiple Attempt Scoring Rules</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">174,177</context>
+          <context context-type="linenumber">224,227</context>
         </context-group>
         <target state="needs-translation">Multiple Attempt Scoring Rules</target>
       </trans-unit>
@@ -23460,7 +23914,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Add Multiple Attempt Scoring Rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">179,182</context>
+          <context context-type="linenumber">229,232</context>
         </context-group>
         <target state="needs-translation">Add Multiple Attempt Scoring Rule</target>
       </trans-unit>
@@ -23468,11 +23922,11 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Previous Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">195,198</context>
+          <context context-type="linenumber">245,248</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">304,307</context>
+          <context context-type="linenumber">354,357</context>
         </context-group>
         <target state="needs-translation">Previous Score</target>
       </trans-unit>
@@ -23480,11 +23934,11 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Current Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">204,207</context>
+          <context context-type="linenumber">254,257</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">314,317</context>
+          <context context-type="linenumber">364,367</context>
         </context-group>
         <target state="needs-translation">Current Score</target>
       </trans-unit>
@@ -23492,11 +23946,11 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Feedback to Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">215,217</context>
+          <context context-type="linenumber">265,267</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">402,404</context>
+          <context context-type="linenumber">452,454</context>
         </context-group>
         <target state="needs-translation">Feedback to Student</target>
       </trans-unit>
@@ -23504,7 +23958,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Move Multiple Attempt Scoring Rule Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">231,234</context>
+          <context context-type="linenumber">281,283</context>
         </context-group>
         <target state="needs-translation">Move Multiple Attempt Scoring Rule Up</target>
       </trans-unit>
@@ -23512,7 +23966,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Move Multiple Attempt Scoring Rule Down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">247,250</context>
+          <context context-type="linenumber">297,299</context>
         </context-group>
         <target state="needs-translation">Move Multiple Attempt Scoring Rule Down</target>
       </trans-unit>
@@ -23520,7 +23974,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Delet Multiple Attempt Scoring</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">257,260</context>
+          <context context-type="linenumber">307,309</context>
         </context-group>
         <target state="needs-translation">Delet Multiple Attempt Scoring</target>
       </trans-unit>
@@ -23528,7 +23982,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Enable Notifications </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">277,280</context>
+          <context context-type="linenumber">327,330</context>
         </context-group>
         <target state="needs-translation"> Enable Notifications </target>
       </trans-unit>
@@ -23536,7 +23990,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Notifications</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">282,285</context>
+          <context context-type="linenumber">332,335</context>
         </context-group>
         <target state="needs-translation">Notifications</target>
       </trans-unit>
@@ -23544,7 +23998,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Move Notification Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">335,337</context>
+          <context context-type="linenumber">385,387</context>
         </context-group>
         <target state="needs-translation">Move Notification Up</target>
       </trans-unit>
@@ -23552,7 +24006,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Move Notification Down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">351,353</context>
+          <context context-type="linenumber">401,403</context>
         </context-group>
         <target state="needs-translation">Move Notification Down</target>
       </trans-unit>
@@ -23560,7 +24014,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Delete Notification</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">361,363</context>
+          <context context-type="linenumber">411,413</context>
         </context-group>
         <target state="needs-translation">Delete Notification</target>
       </trans-unit>
@@ -23568,7 +24022,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Enable Ambient Display Dismiss Mode </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">376,378</context>
+          <context context-type="linenumber">426,428</context>
         </context-group>
         <target state="needs-translation"> Enable Ambient Display Dismiss Mode </target>
       </trans-unit>
@@ -23576,7 +24030,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Dismiss Code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">380,383</context>
+          <context context-type="linenumber">430,433</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.html</context>
@@ -23588,7 +24042,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Notify Student </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">396,398</context>
+          <context context-type="linenumber">446,448</context>
         </context-group>
         <target state="needs-translation"> Notify Student </target>
       </trans-unit>
@@ -23596,7 +24050,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Notify Teacher </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">416,418</context>
+          <context context-type="linenumber">466,468</context>
         </context-group>
         <target state="needs-translation"> Notify Teacher </target>
       </trans-unit>
@@ -23604,7 +24058,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Feedback to Teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">422,424</context>
+          <context context-type="linenumber">472,474</context>
         </context-group>
         <target state="needs-translation">Feedback to Teacher</target>
       </trans-unit>
@@ -23612,7 +24066,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source> Use Custom Completion Criteria </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">441,443</context>
+          <context context-type="linenumber">491,493</context>
         </context-group>
         <target state="needs-translation"> Use Custom Completion Criteria </target>
       </trans-unit>
@@ -23620,7 +24074,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Custom Completion Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">445,448</context>
+          <context context-type="linenumber">495,498</context>
         </context-group>
         <target state="needs-translation">Custom Completion Criteria</target>
       </trans-unit>
@@ -23628,7 +24082,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Add Completion Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">450,453</context>
+          <context context-type="linenumber">500,503</context>
         </context-group>
         <target state="needs-translation">Add Completion Criteria</target>
       </trans-unit>
@@ -23636,7 +24090,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Move Completion Criteria Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">508,511</context>
+          <context context-type="linenumber">560,562</context>
         </context-group>
         <target state="needs-translation">Move Completion Criteria Up</target>
       </trans-unit>
@@ -23644,7 +24098,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Move Completion Criteria Down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">519,522</context>
+          <context context-type="linenumber">573,575</context>
         </context-group>
         <target state="needs-translation">Move Completion Criteria Down</target>
       </trans-unit>
@@ -23652,7 +24106,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Delete Completion Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">529,532</context>
+          <context context-type="linenumber">583,585</context>
         </context-group>
         <target state="needs-translation">Delete Completion Criteria</target>
       </trans-unit>
@@ -23660,7 +24114,7 @@ Warning: This will delete all existing choices in this activity.</target>
         <source>Default feedback</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target state="needs-translation">Default feedback</target>
       </trans-unit>
@@ -23672,7 +24126,7 @@ Score: <x id="PH" equiv-text="score"/>
 Feedback Text: <x id="PH_1" equiv-text="feedbackText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <target state="translated">您确定要删除这条评分规则吗？
 
@@ -23690,7 +24144,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/>
 Feedback Text: <x id="PH_2" equiv-text="feedbackText"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <target state="translated">您确定要删除这个可以进行多次尝试的评分规则吗？
 
@@ -23704,7 +24158,7 @@ Feedback Text: <x id="PH_2" equiv-text="feedbackText"/></source>
         <source>you got a score of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">186</context>
         </context-group>
         <target state="translated">你得到的分数是</target>
       </trans-unit>
@@ -23712,7 +24166,7 @@ Feedback Text: <x id="PH_2" equiv-text="feedbackText"/></source>
         <source>Please talk to your teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">188</context>
         </context-group>
         <target state="translated">请与你的老师交流一下</target>
       </trans-unit>
@@ -23720,7 +24174,7 @@ Feedback Text: <x id="PH_2" equiv-text="feedbackText"/></source>
         <source>got a score of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">190</context>
         </context-group>
         <target state="translated">获得的分数是</target>
       </trans-unit>
@@ -23732,7 +24186,7 @@ Previous Score: <x id="PH" equiv-text="previousScore"/>
 Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">204</context>
         </context-group>
         <target state="translated">您确定要删除此通知吗？
 
@@ -23744,7 +24198,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <source>Are you sure you want to delete the custom completion criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">246</context>
+          <context context-type="linenumber">238</context>
         </context-group>
         <target state="translated">您确定要删除自定义的完成标准吗？</target>
       </trans-unit>
@@ -23752,7 +24206,7 @@ Current Score: <x id="PH_1" equiv-text="currentScore"/></source>
         <source>Are you sure you want to delete this completion criteria?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.ts</context>
-          <context context-type="linenumber">278</context>
+          <context context-type="linenumber">270</context>
         </context-group>
         <target state="translated">您确定要删除此完成标准吗？</target>
       </trans-unit>
@@ -24542,7 +24996,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Enable Data Explorer </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">9,12</context>
+          <context context-type="linenumber">14,17</context>
         </context-group>
         <target state="needs-translation"> Enable Data Explorer </target>
       </trans-unit>
@@ -24550,7 +25004,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Allowed Graph Types:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">15,18</context>
+          <context context-type="linenumber">20,23</context>
         </context-group>
         <target state="needs-translation">Allowed Graph Types:</target>
       </trans-unit>
@@ -24558,7 +25012,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Scatter Plot </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">22,25</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
         <target state="needs-translation"> Scatter Plot </target>
       </trans-unit>
@@ -24566,7 +25020,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Line Graph </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">30,33</context>
+          <context context-type="linenumber">35,38</context>
         </context-group>
         <target state="needs-translation"> Line Graph </target>
       </trans-unit>
@@ -24574,7 +25028,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Bar Graph </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">38,41</context>
+          <context context-type="linenumber">43,46</context>
         </context-group>
         <target state="needs-translation"> Bar Graph </target>
       </trans-unit>
@@ -24582,7 +25036,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Show Scatter Plot Regression Line </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">49,54</context>
+          <context context-type="linenumber">54,57</context>
         </context-group>
         <target state="needs-translation"> Show Scatter Plot Regression Line </target>
       </trans-unit>
@@ -24590,7 +25044,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Number of Series</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">55,58</context>
+          <context context-type="linenumber">60,63</context>
         </context-group>
         <target state="needs-translation">Number of Series</target>
       </trans-unit>
@@ -24598,7 +25052,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Number of Y Axes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">67,70</context>
+          <context context-type="linenumber">72,75</context>
         </context-group>
         <target state="needs-translation">Number of Y Axes</target>
       </trans-unit>
@@ -24606,7 +25060,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Choose the Y Axis for each Series</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">79,81</context>
+          <context context-type="linenumber">84,86</context>
         </context-group>
         <target state="needs-translation">Choose the Y Axis for each Series</target>
       </trans-unit>
@@ -24614,7 +25068,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Can Student Edit Axis Labels </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">114,118</context>
+          <context context-type="linenumber">119,122</context>
         </context-group>
         <target state="needs-translation"> Can Student Edit Axis Labels </target>
       </trans-unit>
@@ -24622,7 +25076,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Fix Data to Table Column</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">119,121</context>
+          <context context-type="linenumber">124,126</context>
         </context-group>
         <target state="needs-translation">Fix Data to Table Column</target>
       </trans-unit>
@@ -24630,7 +25084,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You can author x or y data to always use a specific table column. The student will not be able to change the table column for that x or y data. If you want the student to be able to choose the table column, you can leave the select option blank for that x or y data.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">121,124</context>
+          <context context-type="linenumber">126,128</context>
         </context-group>
         <target state="needs-translation">You can author x or y data to always use a specific table column. The student will not be able to change the table column for that x or y data. If you want the student to be able to choose the table column, you can leave the select option blank for that x or y data.</target>
       </trans-unit>
@@ -24638,7 +25092,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>X Data</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">129,131</context>
+          <context context-type="linenumber">134,136</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
@@ -24654,11 +25108,11 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>(Allow student to select)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">134,135</context>
+          <context context-type="linenumber">139,140</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">167,168</context>
+          <context context-type="linenumber">172,173</context>
         </context-group>
         <target state="needs-translation">(Allow student to select)</target>
       </trans-unit>
@@ -24666,23 +25120,23 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Table Column</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">138,140</context>
+          <context context-type="linenumber">143,145</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">171,173</context>
+          <context context-type="linenumber">176,178</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">193,195</context>
+          <context context-type="linenumber">198,200</context>
         </context-group>
         <target state="needs-translation">Table Column</target>
       </trans-unit>
       <trans-unit id="4008480597051306996" datatype="html">
-        <source>Y Data <x id="INTERPOLATION" equiv-text="{{                 componentContent.numDataExplorerSeries &gt; 1 ? dataExplorerSeriesIndex + 1 : &apos;&apos;               }}"/></source>
+        <source>Y Data <x id="INTERPOLATION" equiv-text="{{                     componentContent.numDataExplorerSeries &gt; 1 ? dataExplorerSeriesIndex + 1 : &apos;&apos;                   }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">155,158</context>
+          <context context-type="linenumber">160,163</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/table-show-work/table-show-work.component.html</context>
@@ -24692,13 +25146,13 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/components/table/table-student/table-student.component.html</context>
           <context context-type="linenumber">78,79</context>
         </context-group>
-        <target state="needs-translation">Y Data <x id="INTERPOLATION" equiv-text="{{                 componentContent.numDataExplorerSeries &gt; 1 ? dataExplorerSeriesIndex + 1 : ''               }}"/></target>
+        <target state="needs-translation">Y Data <x id="INTERPOLATION" equiv-text="{{                     componentContent.numDataExplorerSeries &gt; 1 ? dataExplorerSeriesIndex + 1 : ''                   }}"/></target>
       </trans-unit>
       <trans-unit id="6193601132978554508" datatype="html">
         <source>Tooltip Header Column</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">184,186</context>
+          <context context-type="linenumber">189,191</context>
         </context-group>
         <target state="needs-translation">Tooltip Header Column</target>
       </trans-unit>
@@ -24706,7 +25160,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>(Default)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">189,190</context>
+          <context context-type="linenumber">194,195</context>
         </context-group>
         <target state="needs-translation">(Default)</target>
       </trans-unit>
@@ -24714,7 +25168,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>When the student hovers their mouse over a data point on a scatter plot or line graph, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">203,206</context>
+          <context context-type="linenumber">208,211</context>
         </context-group>
         <target state="needs-translation">When the student hovers their mouse over a data point on a scatter plot or line graph, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal.</target>
       </trans-unit>
@@ -24722,7 +25176,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Import Table</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">219,223</context>
+          <context context-type="linenumber">224,228</context>
         </context-group>
         <target state="needs-translation">Import Table</target>
       </trans-unit>
@@ -24730,7 +25184,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Only .csv (comma separated values) files are allowed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">228,233</context>
+          <context context-type="linenumber">233,237</context>
         </context-group>
         <target state="needs-translation">Only .csv (comma separated values) files are allowed</target>
       </trans-unit>
@@ -24738,7 +25192,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source> Enable Row Selection </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">256,260</context>
+          <context context-type="linenumber">261,264</context>
         </context-group>
         <target state="needs-translation"> Enable Row Selection </target>
       </trans-unit>
@@ -24746,7 +25200,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Are you sure you want to overwrite the existing table?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">193</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to overwrite the existing table?</target>
       </trans-unit>
@@ -24754,7 +25208,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Importing table...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">223</context>
+          <context context-type="linenumber">195</context>
         </context-group>
         <target state="needs-translation">Importing table...</target>
       </trans-unit>
@@ -24762,7 +25216,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Error: The table contains more than <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> cells</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">203</context>
         </context-group>
         <target state="needs-translation">Error: The table contains more than <x id="PH" equiv-text="this.MAX_ALLOWED_CELLS_IN_IMPORT"/> cells</target>
       </trans-unit>
@@ -24770,7 +25224,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Successfully imported table</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.ts</context>
-          <context context-type="linenumber">235</context>
+          <context context-type="linenumber">207</context>
         </context-group>
         <target state="needs-translation">Successfully imported table</target>
       </trans-unit>
@@ -25246,7 +25700,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Summary generated <x id="PH" equiv-text="this.datePipe.transform(this.summaryDate, &apos;short&apos;)"/> from <x id="PH_1" equiv-text="this.latestComponentStates.length"/> responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <target state="needs-translation">Summary generated <x id="PH" equiv-text="this.datePipe.transform(this.summaryDate, 'short')"/> from <x id="PH_1" equiv-text="this.latestComponentStates.length"/> responses</target>
       </trans-unit>
@@ -25254,7 +25708,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Summary generated <x id="PH" equiv-text="this.datePipe.transform(this.summaryDate, &apos;short&apos;)"/> from <x id="PH_1" equiv-text="this.latestComponentStates.length"/> posts and comments</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-ai-summary/discussion-ai-summary.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <target state="needs-translation">Summary generated <x id="PH" equiv-text="this.datePipe.transform(this.summaryDate, 'short')"/> from <x id="PH_1" equiv-text="this.latestComponentStates.length"/> posts and comments</target>
       </trans-unit>
