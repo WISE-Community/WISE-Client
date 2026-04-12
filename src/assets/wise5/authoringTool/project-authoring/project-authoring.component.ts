@@ -18,13 +18,18 @@ import { ExpandEvent } from '../domain/expand-event';
 import { DeleteTranslationsService } from '../../services/deleteTranslationsService';
 import { ComponentContent } from '../../common/ComponentContent';
 import { copy } from '../../common/object/object';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { CdkDrag, CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MoveNodesService } from '../../services/moveNodesService';
 
 @Component({
   imports: [
+    DragDropModule,
     FormsModule,
     MatButtonModule,
     MatTooltipModule,
     MatIconModule,
+    MatSlideToggle,
     ProjectAuthoringLessonComponent,
     ProjectAuthoringStepComponent,
     AddLessonButtonComponent
@@ -33,15 +38,18 @@ import { copy } from '../../common/object/object';
   templateUrl: './project-authoring.component.html'
 })
 export class ProjectAuthoringComponent implements OnInit {
+  protected allGroupIds: string[];
   protected allLessonsCollapsed: Signal<boolean> = computed(() =>
     this.isAllLessonsExpandedValue(false)
   );
   protected allLessonsExpanded: Signal<boolean> = computed(() =>
     this.isAllLessonsExpandedValue(true)
   );
+  protected batchEditMode: boolean = false;
   protected inactiveGroupNodes: any[];
   private inactiveNodes: any[];
   protected inactiveStepNodes: any[];
+  protected isDragging: Signal<boolean>;
   protected items: any;
   protected lessons: any[] = [];
   protected lessonIdToExpanded: WritableSignal<{ [key: string]: boolean }> = signal({});
@@ -54,17 +62,20 @@ export class ProjectAuthoringComponent implements OnInit {
     private dataService: TeacherDataService,
     private deleteNodeService: DeleteNodeService,
     private deleteTranslationsService: DeleteTranslationsService,
+    private moveNodesService: MoveNodesService,
     private projectService: TeacherProjectService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.allGroupIds = this.projectService.getAllGroupIds();
     this.projectId = Number(this.projectId);
     this.refreshProject();
     this.dataService.setCurrentNode(null);
     this.temporarilyHighlightNewNodes(history.state.newNodes);
     this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
+    this.isDragging = this.moveNodesService.getIsDragging();
     this.subscriptions.add(
       this.projectService.refreshProject$.subscribe(() => {
         this.refreshProject();
@@ -250,5 +261,55 @@ export class ProjectAuthoringComponent implements OnInit {
       }
     });
     this.projectService.setNodeTypeSelected(nodeTypeSelected);
+  }
+
+  protected dropGroup(event: CdkDragDrop<any>): void {
+    const { container, currentIndex, item, previousContainer, previousIndex } = event;
+    if (previousContainer === container) {
+      moveItemInArray(container.data.nodes, previousIndex, currentIndex);
+    } else {
+      // do nothing. the UI will be updated by moveNodesAfter() and refreshProject() calls
+    }
+    if (currentIndex == 0) {
+      this.moveNodesService.moveNodesInsideGroup(
+        [item.data.id],
+        container.data.type === 'active' ? 'group0' : 'inactiveGroups'
+      );
+    } else {
+      this.moveNodesService.moveNodesAfter(
+        [item.data.id],
+        container.data.nodes[currentIndex - 1].id
+      );
+    }
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.refreshProject();
+    });
+  }
+
+  protected dropInactiveNode(event: CdkDragDrop<any>): void {
+    const { container, currentIndex, item } = event;
+    if (currentIndex == 0) {
+      this.moveNodesService.moveNodesInsideGroup([item.data.id], 'inactiveNodes');
+    } else {
+      this.moveNodesService.moveNodesAfter(
+        [item.data.id],
+        container.data.nodes[currentIndex - 1].id
+      );
+    }
+    this.projectService.checkPotentialStartNodeIdChangeThenSaveProject().then(() => {
+      this.projectService.refreshProject();
+    });
+  }
+
+  protected groupPredicate(item: CdkDrag<any>): boolean {
+    return item.data.type === 'group';
+  }
+
+  protected stepPredicate(item: CdkDrag<any>): boolean {
+    return item.data.type === 'step';
+  }
+
+  protected drag(isDragging: boolean): void {
+    this.moveNodesService.setIsDragging(isDragging);
   }
 }

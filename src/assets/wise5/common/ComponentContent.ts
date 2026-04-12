@@ -4,6 +4,9 @@ import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
 
 export interface ComponentContent {
   id: string;
+  ai?: {
+    teacherSummarySystemPrompt?: string;
+  };
   anonymizeResponses?: boolean;
   connectedComponents?: any[];
   constraints?: any[];
@@ -17,6 +20,7 @@ export interface ComponentContent {
   rubric?: string;
   showSaveButton?: boolean;
   showSubmitButton?: boolean;
+  tags?: string[];
   type: string;
 }
 

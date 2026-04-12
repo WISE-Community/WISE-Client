@@ -1,13 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { TeacherProjectService } from './teacherProjectService';
 import { RemoveNodeIdFromTransitionsService } from './removeNodeIdFromTransitionsService';
 
 @Injectable()
 export class MoveNodesService {
+  private isDragging: WritableSignal<boolean> = signal(false);
+
   constructor(
     protected projectService: TeacherProjectService,
     private removeNodeIdFromTransitionsService: RemoveNodeIdFromTransitionsService
   ) {}
+
+  getIsDragging(): Signal<boolean> {
+    return this.isDragging;
+  }
+
+  setIsDragging(isDragging: boolean): void {
+    this.isDragging.set(isDragging);
+  }
 
   /**
    * Move nodes inside an active/inactive group node

@@ -82,7 +82,49 @@ describe('NavItemComponent', () => {
 
   itemClicked();
   toggleLockNode();
+  importantTag();
 });
+
+function importantTag() {
+  describe('important tag', () => {
+    let projectService: TeacherProjectService;
+    beforeEach(() => {
+      projectService = TestBed.inject(TeacherProjectService);
+    });
+
+    it('shows bookmark icon when node contains a component with !important tag', () => {
+      const node = new Node();
+      spyOn(node, 'getComponents').and.returnValue([{ id: 'comp1', tags: ['!important'] }] as any);
+      spyOn(projectService, 'getNode').and.returnValue(node);
+      spyOn(projectService, 'nodeHasWork').and.returnValue(true);
+
+      component.type = 'list';
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const icons = Array.from(fixture.nativeElement.querySelectorAll('mat-icon'));
+      const starIcon = icons.find((icon: any) => icon.textContent.trim() === 'bookmark');
+      expect(starIcon).toBeTruthy();
+      expect(component['hasImportantComponent']).toBeTrue();
+    });
+
+    it('does not show bookmark icon when node does not contain a component with !important tag', () => {
+      const node = new Node();
+      spyOn(node, 'getComponents').and.returnValue([{ id: 'comp1', tags: ['other'] }] as any);
+      spyOn(projectService, 'getNode').and.returnValue(node);
+      spyOn(projectService, 'nodeHasWork').and.returnValue(true);
+
+      component.type = 'list';
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const icons = Array.from(fixture.nativeElement.querySelectorAll('mat-icon'));
+      const starIcon = icons.find((icon: any) => icon.textContent.trim() === 'bookmark');
+      expect(starIcon).toBeFalsy();
+      expect(component['hasImportantComponent']).toBeFalse();
+    });
+  });
+}
 
 function itemClicked() {
   describe('itemClicked', () => {

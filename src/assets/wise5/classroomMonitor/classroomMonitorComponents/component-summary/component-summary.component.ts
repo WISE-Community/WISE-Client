@@ -15,6 +15,9 @@ import { IdeasSummaryComponent } from '../../../directives/teacher-summary-displ
 import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
 import { MatCardModule } from '@angular/material/card';
 import { CRaterService } from '../../../services/cRaterService';
+import { OpenResponseAiSummaryComponent } from '../../../directives/teacher-summary-display/open-response-ai-summary/open-response-ai-summary.component';
+import { ProjectService } from '../../../services/projectService';
+import { DiscussionAiSummaryComponent } from '../../../directives/teacher-summary-display/discussion-ai-summary/discussion-ai-summary.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -28,6 +31,7 @@ import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-
 @Component({
   imports: [
     ComponentCompletionComponent,
+    DiscussionAiSummaryComponent,
     DiscussionSummaryComponent,
     IdeasSummaryComponent,
     MatButtonModule,
@@ -35,6 +39,7 @@ import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-
     MatIconModule,
     MatchSummaryDisplayComponent,
     MilestoneReportButtonComponent,
+    OpenResponseAiSummaryComponent,
     NgTemplateOutlet,
     PeerGroupButtonComponent,
     TeacherSummaryDisplayComponent
@@ -44,17 +49,18 @@ import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-
   templateUrl: './component-summary.component.html'
 })
 export class ComponentSummaryComponent {
+  protected aiEnabled: boolean;
   protected avgScore: number;
   @Input() component: ComponentContent;
   protected hasCorrectAnswer: boolean;
-  protected hasScoresSummary: boolean;
-  protected hasScoreAnnotation: boolean;
   protected hasIdeaRubricData: boolean;
   protected hasStudentWork: boolean;
-  protected hasSummaryData: boolean;
   @Input() node: Node;
   @Input() periodId: number;
+  protected showScoreSummary: boolean;
+  protected showSummary: boolean;
   protected source: 'allPeriods' | 'period';
+  private COMPONENTS_WITH_SUMMARY = ['Discussion', 'Match', 'MultipleChoice', 'OpenResponse'];
 
   constructor(
     private annotationService: AnnotationService,
@@ -62,6 +68,7 @@ export class ComponentSummaryComponent {
     private cRaterService: CRaterService,
     private dataService: TeacherDataService,
     private dialog: MatDialog,
+    private projectService: ProjectService,
     private summaryService: SummaryService
   ) {}
 
@@ -77,10 +84,9 @@ export class ComponentSummaryComponent {
 
   private setComponent(): void {
     this.hasCorrectAnswer = this.componentHasCorrectAnswer(this.component);
-    this.hasScoresSummary = this.summaryService.isScoresSummaryAvailableForComponentType(
-      this.component.type
-    );
-    this.hasScoreAnnotation = this.componentHasScoreAnnotation(this.component.id, this.periodId);
+    this.showScoreSummary =
+      this.summaryService.isScoresSummaryAvailableForComponentType(this.component.type) &&
+      this.componentHasScoreAnnotation(this.component.id, this.periodId);
     this.hasStudentWork =
       this.dataService
         .getComponentStatesByComponentId(this.component.id)
@@ -88,11 +94,12 @@ export class ComponentSummaryComponent {
     this.hasIdeaRubricData = this.cRaterService
       .getCRaterRubric(this.node.id, this.component.id)
       .hasRubricData();
-    this.hasSummaryData =
-      (this.component?.type === 'MultipleChoice' && this.hasStudentWork) ||
-      (this.hasScoresSummary && this.hasScoreAnnotation) ||
-      this.hasIdeaRubricData ||
-      ['Match', 'Discussion'].includes(this.component?.type);
+    this.aiEnabled = this.projectService.getProject().ai?.enabled;
+    this.showSummary =
+      this.hasStudentWork &&
+      (this.COMPONENTS_WITH_SUMMARY.includes(this.component.type) ||
+        this.showScoreSummary ||
+        this.hasIdeaRubricData);
   }
 
   private setSource(): void {

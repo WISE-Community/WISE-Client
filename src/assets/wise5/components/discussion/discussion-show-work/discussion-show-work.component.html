@@ -5,8 +5,8 @@
         [response]="componentState"
         [numReplies]="componentState.replies.length"
         [mode]="'grading'"
-        (deleteButtonClicked)="hidePost($event)"
-        (undoDeleteButtonClicked)="showPost($event)"
+        (hidePostEvent)="hidePost($event)"
+        (showPostEvent)="showPost($event)"
         [isDisabled]="true"
         class="post"
       />

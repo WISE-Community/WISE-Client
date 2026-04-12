@@ -16,10 +16,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and-title/node-icon-and-title.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
+  host: {
+    '[class.branch-path-step]': 'isNodeInAnyBranchPath(step.id)'
+  },
   imports: [
     CommonModule,
+    DragDropModule,
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
@@ -32,6 +37,10 @@ import { NodeIconAndTitleComponent } from '../choose-node-location/node-icon-and
   templateUrl: './project-authoring-step.component.html'
 })
 export class ProjectAuthoringStepComponent {
+  @Input() batchEditMode: boolean;
+  protected branchPoint: boolean;
+  @Output() dragStarted: EventEmitter<void> = new EventEmitter<void>();
+  @Output() dragEnded: EventEmitter<void> = new EventEmitter<void>();
   protected nodeTypeSelected: Signal<NodeTypeSelected>;
   @Input() projectId: number;
   @Output() selectNodeEvent: EventEmitter<SelectNodeEvent> = new EventEmitter<SelectNodeEvent>();
@@ -51,6 +60,7 @@ export class ProjectAuthoringStepComponent {
   ) {}
 
   ngOnInit(): void {
+    this.branchPoint = this.projectService.isBranchPoint(this.step.id);
     this.nodeTypeSelected = this.projectService.getNodeTypeSelected();
   }
 
@@ -105,10 +115,6 @@ export class ProjectAuthoringStepComponent {
 
   protected setCurrentNode(nodeId: string): void {
     this.dataService.setCurrentNodeByNodeId(nodeId);
-  }
-
-  protected isBranchPoint(nodeId: string): boolean {
-    return this.projectService.isBranchPoint(nodeId);
   }
 
   protected nodeHasConstraint(nodeId: string): boolean {
@@ -171,5 +177,13 @@ export class ProjectAuthoringStepComponent {
   private saveAndRefreshProject(): void {
     this.projectService.saveProject();
     this.projectService.refreshProject();
+  }
+
+  protected drag(isDragging: boolean): void {
+    if (isDragging) {
+      this.dragStarted.emit();
+    } else {
+      this.dragEnded.emit();
+    }
   }
 }

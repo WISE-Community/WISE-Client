@@ -13,6 +13,7 @@ import { NotificationService } from '../../services/notificationService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
 import { RubricAuthoringComponent } from '../rubric/rubric-authoring.component';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
+import { MilestonesAuthoringComponent } from '../milestones-authoring/milestones-authoring.component';
 
 @Component({
   imports: [
@@ -25,6 +26,7 @@ import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
     MatRadioModule,
     MatTabsModule,
     MatTooltipModule,
+    MilestonesAuthoringComponent,
     RubricAuthoringComponent
   ],
   templateUrl: 'advanced-project-authoring.component.html'

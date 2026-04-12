@@ -12,6 +12,7 @@ import { CRaterService } from '../../../services/cRaterService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
+import { ProjectService } from '../../../services/projectService';
 
 let component: ComponentSummaryComponent;
 let fixture: ComponentFixture<ComponentSummaryComponent>;
@@ -31,6 +32,7 @@ describe('ComponentSummaryComponent', () => {
           AnnotationService,
           ComponentServiceLookupService,
           CRaterService,
+          ProjectService,
           SummaryService
         ),
         MockProvider(TeacherDataService, {

@@ -1,0 +1,49 @@
+<div class="discussion-content">
+  <div class="flex">
+    <div class="discussion-posts w-full md:w-1/2">
+      <div class="md:hidden">
+        @for (componentState of topLevelResponses.all; track componentState) {
+          <class-response-teacher
+            [response]="componentState"
+            [numReplies]="componentState.replies.length"
+            (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
+            [mode]="mode"
+            (hidePostEvent)="hidePost($event)"
+            (showPostEvent)="showPost($event)"
+            [isDisabled]="isDisabled"
+            class="post"
+          />
+        }
+      </div>
+      <div class="hidden sm:block">
+        @for (componentState of topLevelResponses.col2; track componentState) {
+          <class-response-teacher
+            [response]="componentState"
+            [numReplies]="componentState.replies.length"
+            (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
+            [mode]="mode"
+            (hidePostEvent)="hidePost($event)"
+            (showPostEvent)="showPost($event)"
+            [isDisabled]="isDisabled"
+            class="post"
+          />
+        }
+      </div>
+    </div>
+    <div class="discussion-posts hidden w-1/2 md:block">
+      @for (componentState of topLevelResponses.col1; track componentState) {
+        <class-response-teacher
+          [response]="componentState"
+          [numReplies]="componentState.replies.length"
+          (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
+          [mode]="mode"
+          (hidePostEvent)="hidePost($event)"
+          (showPostEvent)="showPost($event)"
+          [isDisabled]="isDisabled"
+          class="post"
+          style="display: block"
+        />
+      }
+    </div>
+  </div>
+</div>

@@ -58,6 +58,13 @@ function editBranch() {
         id: 'node2',
         title: 'Branch point',
         type: 'node',
+        icon: {
+          color: '#00B0FF',
+          type: 'font',
+          fontSet: 'material-icons',
+          fontName: 'school',
+          imgSrc: ''
+        },
         transitionLogic: {
           transitions: [
             {

@@ -87,5 +87,18 @@ function moreThanOneComponent() {
         } as ComponentContent
       ]);
     });
+
+    it('should show bookmark icon for option with !important tag', async () => {
+      component.components[0].tags = ['!important'];
+      fixture.detectChanges();
+      await select.open();
+
+      const options = await select.getOptions();
+      const option1Text = await options[0].getText();
+      const option2Text = await options[1].getText();
+
+      expect(option1Text).toContain('bookmark');
+      expect(option2Text).not.toContain('bookmark');
+    });
   });
 }

@@ -113,13 +113,6 @@ export const authoringRoutes: Routes = [
               ).then((m) => m.ProjectInfoAuthoringComponent)
           },
           {
-            path: 'milestones',
-            loadComponent: () =>
-              import(
-                '../../assets/wise5/authoringTool/milestones-authoring/milestones-authoring.component'
-              ).then((m) => m.MilestonesAuthoringComponent)
-          },
-          {
             path: 'node/:nodeId',
             loadChildren: () =>
               import('../../assets/wise5/authoringTool/node/node-authoring.routes').then(

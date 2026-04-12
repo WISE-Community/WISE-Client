@@ -1,45 +1,76 @@
-<mat-checkbox
-  color="primary"
-  class="checkbox"
-  [(ngModel)]="componentContent.canCreateChoices"
-  (ngModelChange)="componentChanged()"
-  i18n
->
-  Student Can Create Choices
-</mat-checkbox>
-<br />
-@if (isNotebookEnabled()) {
-  <mat-checkbox
-    color="primary"
-    class="checkbox"
-    [(ngModel)]="componentContent.importPrivateNotes"
-    (ngModelChange)="componentChanged()"
-  >
-    Show Private Notes As Choices
-  </mat-checkbox>
-}
-<br />
-<edit-component-save-button [componentContent]="componentContent" />
-<br />
-<edit-component-submit-button [componentContent]="componentContent" />
-@if (componentContent.showSubmitButton) {
-  <edit-component-max-submit [componentContent]="componentContent" />
-}
-<edit-component-default-feedback [componentContent]="componentContent" />
-<div class="flex flex-col justify-start items-start">
-  <edit-component-max-score [componentContent]="componentContent" />
-  <edit-component-exclude-from-total-score [componentContent]="componentContent" />
-  <edit-component-width [componentContent]="componentContent" />
-  <edit-component-rubric [componentContent]="componentContent" />
-  <edit-component-tags [componentContent]="componentContent" />
-</div>
-<edit-match-connected-components
-  [nodeId]="nodeId"
-  [componentId]="componentId"
-  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-  [componentContent]="componentContent"
-  [connectedComponents]="componentContent.connectedComponents"
-  (connectedComponentsChanged)="connectedComponentsChanged($event)"
-/>
-<edit-component-constraints [componentContent]="component.content" />
-<edit-component-json [component]="component" />
+<mat-tab-group animationDuration="0ms" [selectedIndex]="selectedTabIndex">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+    </ng-template>
+    <mat-checkbox
+      color="primary"
+      class="checkbox"
+      [(ngModel)]="componentContent.canCreateChoices"
+      (ngModelChange)="componentChanged()"
+      i18n
+    >
+      Student Can Create Choices
+    </mat-checkbox>
+    <br />
+    @if (isNotebookEnabled()) {
+      <mat-checkbox
+        color="primary"
+        class="checkbox"
+        [(ngModel)]="componentContent.importPrivateNotes"
+        (ngModelChange)="componentChanged()"
+      >
+        Show Private Notes As Choices
+      </mat-checkbox>
+      <br />
+    }
+    <edit-component-save-button [componentContent]="componentContent" />
+    <br />
+    <edit-component-submit-button [componentContent]="componentContent" />
+    @if (componentContent.showSubmitButton) {
+      <edit-component-max-submit [componentContent]="componentContent" />
+    }
+    <edit-component-default-feedback [componentContent]="componentContent" />
+    <div class="flex flex-col justify-start items-start">
+      <edit-component-max-score [componentContent]="componentContent" />
+      <edit-component-exclude-from-total-score [componentContent]="componentContent" />
+      <edit-component-width [componentContent]="componentContent" />
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+    </ng-template>
+    <edit-component-constraints [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>join_inner</mat-icon>&nbsp;<span i18n>Connections</span>
+    </ng-template>
+    <edit-match-connected-components
+      [nodeId]="nodeId"
+      [componentId]="componentId"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      [componentContent]="componentContent"
+      [connectedComponents]="componentContent.connectedComponents"
+      (connectedComponentsChanged)="connectedComponentsChanged($event)"
+    />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <ng-template matTabContent>
+      <!-- lazy load needed for tinymce to work -->
+      <edit-component-rubric [componentContent]="component.content" />
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
+    <edit-component-tags [componentContent]="componentContent" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <edit-component-json [component]="component" />
+  </mat-tab>
+</mat-tab-group>

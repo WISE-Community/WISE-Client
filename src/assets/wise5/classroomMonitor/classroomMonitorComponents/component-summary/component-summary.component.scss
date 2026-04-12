@@ -27,7 +27,7 @@ peer-group-button > * {
 }
 
 .summary {
-  @apply rounded-md p-3 overflow-hidden bg-white block;
+  @apply rounded-md p-3 overflow-hidden bg-white flex flex-col grow;
 }
 
 .summary-graph {
