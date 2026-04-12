@@ -48,4 +48,19 @@ describe('TeacherProjectTranslationService', () => {
       expect(request.request.body).toEqual({});
     });
   });
+  describe('getTranslationSuggestion()', () => {
+    it('makes a POST request to backend with do not translate tags', () => {
+      service
+        .getTranslationSuggestion('srcLang', 'targetLang', '<span>srcText</span> untagged')
+        .subscribe();
+      const request = http.expectOne(`/api/author/project/translate/suggest`);
+      expect(request.request.method).toEqual('POST');
+      expect(request.request.body).toEqual({
+        srcLang: 'srcLang',
+        targetLang: 'targetLang',
+        srcText:
+          '<span translate="no"><span></span>srcText<span translate="no"></span></span> untagged'
+      });
+    });
+  });
 });

@@ -32,7 +32,7 @@
 }
 @for (choice of componentContent.choices; track choice.id; let last = $last; let first = $first) {
   <div class="choice-container">
-    <div class="flex flex-row flex-wrap justify-start items-center gap-2">
+    <div class="flex flex-row flex-wrap justify-start gap-2">
       <translatable-input
         [content]="choice"
         key="text"
@@ -62,7 +62,7 @@
         </mat-checkbox>
       </div>
     </div>
-    <div class="flex flex-row flex-wrap justify-start items-center">
+    <div class="flex flex-row flex-wrap justify-start">
       <translatable-input
         [content]="choice"
         key="feedback"

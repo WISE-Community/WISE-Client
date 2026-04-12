@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ConfigService } from '../../../services/configService';
 import { TranslatableAssetChooserComponent } from './translatable-asset-chooser.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +22,7 @@ describe('TranslatableAssetChooserComponent', () => {
         StudentTeacherCommonServicesModule,
         TranslatableAssetChooserComponent
       ],
-      providers: [TeacherProjectService, TeacherProjectTranslationService]
+      providers: [ConfigService, TeacherProjectService, TeacherProjectTranslationService]
     });
     spyOn(TestBed.inject(TeacherProjectService), 'getLocale').and.returnValue(
       new ProjectLocale({ default: 'en-US' })

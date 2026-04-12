@@ -6,12 +6,20 @@ import { insertWiseLinks, replaceWiseLinks } from '../../../common/wise-link/wis
 import { ConfigService } from '../../../services/configService';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [MatButtonModule, MatTabsModule, WiseAuthoringTinymceEditorComponent],
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatTabsModule,
+    WiseAuthoringTinymceEditorComponent
+  ],
   selector: 'translatable-rich-text-editor',
-  styles: ['.translation-tools { padding: 8px 0; }'],
+  styleUrl: '../abstract-translatable-field/abstract-translatable-field.component.scss',
   templateUrl: './translatable-rich-text-editor.component.html'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
@@ -19,11 +27,12 @@ export class TranslatableRichTextEditorComponent extends AbstractTranslatableFie
   @ViewChild(MatTabGroup) private tabs: MatTabGroup;
 
   constructor(
-    private configService: ConfigService,
+    protected configService: ConfigService,
+    protected dialog: MatDialog,
     protected projectService: TeacherProjectService,
     protected projectTranslationService: TeacherProjectTranslationService
   ) {
-    super(projectService, projectTranslationService);
+    super(configService, dialog, projectService, projectTranslationService);
   }
 
   ngOnChanges(): void {

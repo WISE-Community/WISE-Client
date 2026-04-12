@@ -492,6 +492,10 @@
           <context context-type="linenumber">3,6</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/create-branch/create-branch.component.html</context>
           <context context-type="linenumber">50,54</context>
         </context-group>
@@ -11063,6 +11067,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3243437861876933284" datatype="html">
+        <source>There was an error translating the text. Please contact WISE staff if the error persists.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/abstract-translatable-field/abstract-translatable-field.component.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="9041444200911417888" datatype="html">
         <source>Selected</source>
         <context-group purpose="location">
@@ -11257,7 +11268,22 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Choose image</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2416604626558510435" datatype="html">
+        <source>Translate with AI</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-input/translatable-input.component.html</context>
+          <context context-type="linenumber">22,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
+          <context context-type="linenumber">18,22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component.html</context>
+          <context context-type="linenumber">23,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8183679777797552825" datatype="html">
@@ -11271,21 +11297,70 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Note: Editing is disabled. Please switch back to <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> if you want to edit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">27,28</context>
+          <context context-type="linenumber">33,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2602981828256525663" datatype="html">
         <source> Copy content to <x id="INTERPOLATION" equiv-text="{{ currentLanguage().language }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">37,38</context>
+          <context context-type="linenumber">43,44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5046317553228226783" datatype="html">
         <source>Are you sure you want to replace the content in <x id="PH" equiv-text="this.currentLanguage().language"/> with content in <x id="PH_1" equiv-text="this.defaultLanguage.language"/> for this item?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.ts</context>
-          <context context-type="linenumber">50,52</context>
+          <context context-type="linenumber">59,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3634855983456779633" datatype="html">
+        <source>Replace Translation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.html</context>
+          <context context-type="linenumber">1,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8429306013866107963" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ this.data.defaultLanguage }}"/> text:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6003394533689080903" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ this.data.currentLanguage }}"/> text (current translation):</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6589804180513143194" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ this.data.currentLanguage }}"/> text (AI suggested translation):</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4577949766167811649" datatype="html">
+        <source> Do you want to replace the current translation with the AI suggested translation? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.html</context>
+          <context context-type="linenumber">11,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6254459922754143568" datatype="html">
+        <source>Replace</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7053786808549278445" datatype="html">
+        <source>There was an error translating the text. Please talk to WISE staff.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.ts</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2170693430286604200" datatype="html">
@@ -20067,7 +20142,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
-          <context context-type="linenumber">297,301</context>
+          <context context-type="linenumber">297,302</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1902100407096396858" datatype="html">
