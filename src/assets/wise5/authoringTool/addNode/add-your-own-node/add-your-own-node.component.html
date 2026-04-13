@@ -34,12 +34,17 @@
     </div>
     <div class="flex flex-col md:w-2/3 lg:w-3/4">
       <div class="flex flex-wrap justify-stretch items-center">
-        @for (componentType of componentTypes; track componentType.type) {
-          <div class="component-type">
-            <component-type-button
-              [componentType]="componentType.type"
-              (componentSelectedEvent)="addComponent(componentType)"
-            />
+        @for (componentGroup of componentGroups; track componentGroup.name) {
+          <div class="flex flex-col" style="border: 2px dotted">
+            <h3 class="mat-subheading-1">{{ componentGroup.name }}</h3>
+            @for (componentType of componentGroup.types; track componentType.type) {
+              <div class="component-type">
+                <component-type-button
+                  [componentType]="componentType.type"
+                  (componentSelectedEvent)="addComponent(componentType)"
+                />
+              </div>
+            }
           </div>
         }
       </div>

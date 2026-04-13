@@ -10,7 +10,7 @@ import { ComponentTypeService } from '../../../../assets/wise5/services/componen
   templateUrl: 'choose-new-component.component.html'
 })
 export class ChooseNewComponent {
-  protected componentTypes: any[];
+  protected componentGroups: any[];
 
   constructor(
     private componentTypeService: ComponentTypeService,
@@ -18,7 +18,7 @@ export class ChooseNewComponent {
   ) {}
 
   ngOnInit(): void {
-    this.componentTypes = this.componentTypeService.getComponentTypes();
+    this.componentGroups = this.componentTypeService.getComponentGroups();
   }
 
   protected goToImportComponent(): void {

@@ -44,7 +44,7 @@ export class AddYourOwnNodeComponent {
   protected addNodeFormGroup: FormGroup = this.fb.group({
     title: new FormControl($localize`New Step`, [Validators.required])
   });
-  protected componentTypes: any[];
+  protected componentGroups: any[];
   protected initialComponents: string[] = [];
   protected submitting: boolean;
   protected target: AddStepTarget;
@@ -58,7 +58,7 @@ export class AddYourOwnNodeComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.componentTypes = this.componentTypeService.getComponentTypes();
+    this.componentGroups = this.componentTypeService.getComponentGroups();
   }
 
   ngOnInit(): void {
