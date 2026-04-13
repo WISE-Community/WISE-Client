@@ -4,7 +4,8 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { ConfigService } from '../../services/configService';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { UserService } from '../../../../app/services/user.service';
-import { MockProviders } from 'ng-mocks';
+import { MockComponent, MockProviders } from 'ng-mocks';
+import { EditProjectLanguageSettingComponent } from '../project-info/edit-project-language-setting/edit-project-language-setting.component';
 
 describe('ProjectInfoAuthoringComponent', () => {
   let component: ProjectInfoAuthoringComponent;
@@ -12,7 +13,7 @@ describe('ProjectInfoAuthoringComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProjectInfoAuthoringComponent],
+      imports: [ProjectInfoAuthoringComponent, MockComponent(EditProjectLanguageSettingComponent)],
       providers: [
         MockProviders(ConfigService, TeacherProjectService, UserService),
         provideHttpClient(withInterceptorsFromDi())

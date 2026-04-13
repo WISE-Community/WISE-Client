@@ -14,10 +14,13 @@ import { TeacherProjectService } from '../../services/teacherProjectService';
 import { RubricAuthoringComponent } from '../rubric/rubric-authoring.component';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { MilestonesAuthoringComponent } from '../milestones-authoring/milestones-authoring.component';
+import { EditUnitTypeComponent } from '../edit-unit-type/edit-unit-type.component';
+import { UserService } from '../../../../app/services/user.service';
 
 @Component({
   imports: [
     CdkTextareaAutosize,
+    EditUnitTypeComponent,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -32,19 +35,31 @@ import { MilestonesAuthoringComponent } from '../milestones-authoring/milestones
   templateUrl: 'advanced-project-authoring.component.html'
 })
 export class AdvancedProjectAuthoringComponent {
+  protected isMyUnit: boolean;
+  protected metadata: any;
   protected navigationType: 'default' | 'tab';
   protected projectJSONString: string;
+  protected publishUnitUrl;
   protected selectedTab: number;
 
   constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private projectService: TeacherProjectService
+    private projectService: TeacherProjectService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.metadata = this.projectService.getProjectMetadata();
+    if (this.metadata.unitType == null) {
+      this.metadata.unitType = 'Platform';
+    }
     this.navigationType = this.projectService.project.theme ?? 'default';
     this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
+    this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.configService.getProjectId()}&publish=true`;
+    this.isMyUnit = this.metadata.authors.some(
+      (author) => author.id === this.userService.getUserId()
+    );
   }
 
   protected tabChanged(event: MatTabChangeEvent): void {
