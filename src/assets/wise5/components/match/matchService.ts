@@ -5,7 +5,7 @@ import { MatchContent } from './MatchContent';
 @Injectable()
 export class MatchService extends ComponentService {
   getComponentTypeLabel(): string {
-    return $localize`Match`;
+    return $localize`Sort`;
   }
 
   createComponent() {

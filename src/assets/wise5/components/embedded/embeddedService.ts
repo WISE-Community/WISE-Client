@@ -27,7 +27,7 @@ export class EmbeddedService extends ComponentService {
   }
 
   getComponentTypeLabel(): string {
-    return $localize`Embedded (Custom)`;
+    return $localize`Custom`;
   }
 
   createComponent() {

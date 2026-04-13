@@ -10,7 +10,7 @@ export class DialogGuidanceService extends ComponentService {
   }
 
   getComponentTypeLabel(): string {
-    return $localize`Dialog Guidance`;
+    return $localize`Dialog`;
   }
 
   createComponent() {

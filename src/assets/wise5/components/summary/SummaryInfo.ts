@@ -2,10 +2,10 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class SummaryInfo extends ComponentInfo {
   protected description: string = $localize`Students are shown an aggregate graph summarizing data from the class.`;
-  protected label: string = $localize`Summary`;
+  protected label: string = $localize`Graph Summary`;
   protected previewExamples: any[] = [
     {
-      lable: $localize`Summary`,
+      lable: $localize`Graph Summary`,
       content: {
         id: 'abcde12345',
         type: 'Summary',

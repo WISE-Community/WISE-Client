@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class HTMLService extends ComponentService {
   getComponentTypeLabel(): string {
-    return $localize`Rich Text (HTML)`;
+    return $localize`Display Content`;
   }
 
   createComponent() {
