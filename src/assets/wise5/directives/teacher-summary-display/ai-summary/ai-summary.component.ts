@@ -33,7 +33,6 @@ export abstract class AiSummaryComponent {
   protected projectService: TeacherProjectService = inject(TeacherProjectService);
 
   protected generatingSummary: boolean = false;
-  protected hasStudentResponses: boolean = false;
   protected latestComponentStates: any[] = [];
   protected newSummaryAvailable: boolean = false;
   protected summary: string;
@@ -42,13 +41,10 @@ export abstract class AiSummaryComponent {
   ngOnInit(): void {
     this.component = this.projectService.getComponent(this.nodeId, this.componentId);
     this.latestComponentStates = this.getLatestComponentStates();
-    this.hasStudentResponses = this.latestComponentStates.length > 0;
-    if (this.hasStudentResponses) {
-      this.summary = this.localStorageService.getItem(this.getSummaryKey()) || '';
-      const summaryTime = this.localStorageService.getItem(this.getSummaryTimeKey()) || 0;
-      this.summaryDate = new Date(summaryTime);
-      this.newSummaryAvailable = summaryTime > 0 && this.getLastResponseTime() > summaryTime;
-    }
+    this.summary = this.localStorageService.getItem(this.getSummaryKey()) || '';
+    const summaryTime = this.localStorageService.getItem(this.getSummaryTimeKey()) || 0;
+    this.summaryDate = new Date(summaryTime);
+    this.newSummaryAvailable = summaryTime > 0 && this.getLastResponseTime() > summaryTime;
   }
 
   protected getLatestComponentStates(): any[] {

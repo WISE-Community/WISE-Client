@@ -3,7 +3,7 @@
     class="gap-2"
     mat-stroked-button
     (click)="generateSummary()"
-    [disabled]="generatingSummary || !hasStudentResponses"
+    [disabled]="generatingSummary"
     color="primary"
   >
     <span i18n>Generate Summary</span><mat-icon>auto_awesome</mat-icon>
@@ -20,9 +20,7 @@
     <mat-spinner diameter="20" />
   }
 </div>
-@if (!hasStudentResponses) {
-  <p i18n>No student responses</p>
-} @else if (newSummaryAvailable) {
+@if (newSummaryAvailable) {
   <p class="info" i18n>*New responses since last summary</p>
 }
 @if (summary) {
