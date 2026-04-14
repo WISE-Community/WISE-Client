@@ -62,7 +62,16 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     } else if (this.componentType === 'OpenResponse') {
       const annotations = this.annotationService
         .getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
-        .filter((annotation) => this.periodId === -1 || annotation.periodId === this.periodId);
+        .filter((annotation) => this.periodId === -1 || annotation.periodId === this.periodId)
+        .reduceRight(
+          (latestAnnotations, annotation) =>
+            latestAnnotations.some(
+              (latestAnnotation) => latestAnnotation.toWorkgroupId === annotation.toWorkgroupId
+            )
+              ? latestAnnotations
+              : latestAnnotations.concat(annotation),
+          []
+        );
       this.groupIdeas(new OpenResponseSummaryData(annotations, this.rubric));
     }
   }

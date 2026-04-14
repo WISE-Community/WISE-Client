@@ -227,13 +227,14 @@ function ngInit_OR_FilterByPeriod() {
       const ideas = generateIdeas(1);
       spyOn(TestBed.inject(AnnotationService), 'getAnnotationsByNodeIdComponentId').and.returnValue(
         [
-          new Annotation({ periodId: 1, data: { ideas: ideas } } as any),
-          new Annotation({ periodId: 2, data: { ideas: ideas } } as any)
+          new Annotation({ periodId: 1, data: { ideas: ideas }, toWorkgroupId: 1 } as any),
+          new Annotation({ periodId: 1, data: { ideas: ideas }, toWorkgroupId: 1 } as any),
+          new Annotation({ periodId: 2, data: { ideas: ideas }, toWorkgroupId: 2 } as any)
         ]
       );
     });
 
-    it('includes all annotations when period is "All Periods" (-1)', () => {
+    it('includes all latest annotations for workgroups when period is "All Periods" (-1)', () => {
       component.periodId = -1;
       spyOn<any>(component, 'groupIdeas');
       component.ngOnInit();
