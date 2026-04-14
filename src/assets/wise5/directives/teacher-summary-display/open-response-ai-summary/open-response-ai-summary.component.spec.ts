@@ -69,20 +69,6 @@ describe('OpenResponseAiSummaryComponent', () => {
   });
 
   describe('ngOnInit', () => {
-    it('should set hasStudentResponses to false when no component states exist', () => {
-      spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue([]);
-      component.ngOnInit();
-      fixture.detectChanges();
-      expect(component['hasStudentResponses']).toBe(false);
-    });
-
-    it('should set hasStudentResponses to true when component states exist', () => {
-      spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(getComponentStates());
-      component.ngOnInit();
-      fixture.detectChanges();
-      expect(component['hasStudentResponses']).toBe(true);
-    });
-
     it('should load summary from localStorage if it exists', () => {
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(getComponentStates());
       const savedSummary = 'This is a saved summary';
@@ -255,14 +241,6 @@ describe('OpenResponseAiSummaryComponent', () => {
   });
 
   describe('template rendering', () => {
-    it('should display "No student responses" when hasStudentResponses is false', () => {
-      spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue([]);
-      component.ngOnInit();
-      fixture.detectChanges();
-      const compiled = fixture.nativeElement;
-      expect(compiled.textContent).toContain('No student responses');
-    });
-
     it('should display generate button when hasStudentResponses is true', () => {
       spyOn(dataService, 'getComponentStatesByComponentId').and.returnValue(getComponentStates());
       component.ngOnInit();

@@ -1,28 +1,28 @@
-<div class="flex gap-2 flex-wrap items-center mat-caption">
-  <div class="flex items-center gap-2">
-    <button
-      class="gap-2"
-      mat-button
-      (click)="generateSummary()"
-      [disabled]="generatingSummary || !hasStudentResponses"
-      color="primary"
-      matTooltip="Summarize class responses using AI"
-      matTooltipPosition="after"
-      i18n-matTooltip
-    >
-      <span i18n>Generate Summary</span><mat-icon>auto_awesome</mat-icon>
-    </button>
-    @if (!hasStudentResponses) {
-      <span i18n>No student responses</span>
-    }
-    @if (generatingSummary) {
-      <mat-spinner diameter="20" />
-    }
-  </div>
-  @if (newSummaryAvailable) {
-    <span class="info" i18n>*New responses since last summary</span>
+<div class="flex gap-2 items-center">
+  <button
+    class="gap-2"
+    mat-stroked-button
+    (click)="generateSummary()"
+    [disabled]="generatingSummary"
+    color="primary"
+  >
+    <span i18n>Generate Summary</span><mat-icon>auto_awesome</mat-icon>
+  </button>
+  <mat-icon
+    tabindex="0"
+    matTooltip="Summarize class responses using AI"
+    matTooltipPosition="above"
+    i18n-matTooltip
+  >
+    info
+  </mat-icon>
+  @if (generatingSummary) {
+    <mat-spinner diameter="20" />
   }
 </div>
+@if (newSummaryAvailable) {
+  <p class="info" i18n>*New responses since last summary</p>
+}
 @if (summary) {
   <markdown [data]="summary" />
   <div class="mat-caption text-secondary mt-1">{{ summaryCaption }}</div>
