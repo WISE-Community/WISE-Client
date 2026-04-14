@@ -1,116 +1,182 @@
 <div class="view-content view-content--with-sidemenu">
   <div class="l-constrained flex flex-col">
-    <div class="flex flex-col gap-2">
-      <div>
-        <button
-          mat-raised-button
-          (click)="goToExportOneWorkgroupPerRowPage()"
-          aria-label="Export One Workgroup Per Row"
-          i18n-aria-label
-          i18n
+    <div class="flex flex-row flex-wrap justify-center md:justify-start gap-2">
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>One Workgroup Per Row</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n
+          >Each workgroup gets their own row with all their work</mat-card-content
         >
-          Export One Workgroup Per Row
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="goToExportStudentWorkPage()"
-          aria-label="Export Student Work"
-          i18n-aria-label
-          i18n
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="goToExportOneWorkgroupPerRowPage()"
+            i18n
+          >
+            Select
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>Student Work</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n>All student work and annotations</mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="goToExportStudentWorkPage()"
+            i18n
+          >
+            Select
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>Events</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n
+          >All events that were logged during the classroom
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="goToExportEventsPage()"
+            i18n
+          >
+            Select
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>Item Data</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n>Custom data for certain activities</mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="goToExportItemPage()"
+            i18n
+          >
+            Select
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>Raw Data</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n>All data logged by activities</mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="goToExportRawDataPage()"
+            i18n
+          >
+            Select
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>Step Visits</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n>Time spent on each step in the unit</mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="exportVisitsClicked()"
+            i18n
+          >
+            Select
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>Latest Notebook Items</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n>Latest notebook items and reports</mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="export('latestNotebookItems')"
+            i18n
+          >
+            Download
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>All Notebook Items</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n>All notebook items and reports</mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="export('allNotebookItems')"
+            i18n
+          >
+            Download
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>Notifications</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n
+          >Notifications sent to student and teachers</mat-card-content
         >
-          Export Student Work
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="goToExportEventsPage()"
-          aria-label="Export Events"
-          i18n-aria-label
-          i18n
-        >
-          Export Events
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="export('latestNotebookItems')"
-          aria-label="Export Latest Notebook Items"
-          i18n-aria-label
-          i18n
-        >
-          Export Latest Notebook Items
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="export('allNotebookItems')"
-          aria-label="Export All Notebook Items"
-          i18n-aria-label
-          i18n
-        >
-          Export All Notebook Items
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="export('notifications')"
-          aria-label="Export Notifications"
-          i18n-aria-label
-          i18n
-        >
-          Export Notifications
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="export('studentAssets')"
-          aria-label="Export Student Assets"
-          i18n-aria-label
-          i18n
-        >
-          Export Student Assets
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="goToExportItemPage()"
-          aria-label="Export Item Data"
-          i18n-aria-label
-          i18n
-        >
-          Export Item Data
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="goToExportRawDataPage()"
-          aria-label="Export Raw Data"
-          i18n-aria-label
-          i18n
-        >
-          Export Raw Data
-        </button>
-      </div>
-      <div>
-        <button
-          mat-raised-button
-          (click)="exportVisitsClicked()"
-          aria-label="Export Step Visits"
-          i18n-aria-label
-          i18n
-        >
-          Export Step Visits
-        </button>
-      </div>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="export('notifications')"
+            i18n
+          >
+            Download
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card appearance="outlined">
+        <mat-card-title>
+          <h6 class="center"><strong>Student Assets</strong></h6>
+        </mat-card-title>
+        <mat-card-content class="center" i18n>Student uploaded files</mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-flat-button
+            color="primary"
+            class="w-full"
+            (click)="export('studentAssets')"
+            i18n
+          >
+            Download
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>

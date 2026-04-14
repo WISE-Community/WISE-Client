@@ -14,9 +14,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogWithSpinnerComponent } from '../../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButton } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  imports: [MatButton],
+  imports: [MatButton, MatCardModule],
   styles: ['.button-div { margin-top: 10px; margin-bottom: 10px; }'],
   templateUrl: './data-export.component.html'
 })
