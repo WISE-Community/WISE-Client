@@ -1010,7 +1010,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-summary/component-summary.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">47,49</context>
         </context-group>
         <target state="needs-translation">Prompt</target>
       </trans-unit>
@@ -2664,7 +2664,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">151,155</context>
         </context-group>
-        <target state="needs-translation"> This site is protected by reCAPTCHA and the Google <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://policies.google.com/privacy&quot;&gt;"/>Privacy Policy<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://policies.google.com/terms&quot;&gt;"/>Terms of Service<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> apply. </target>
+        <target state="translated"> Este site é protegido por reCAPTCHA e o Google <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;https://policies.google.com/privacy&quot;&gt;"/>Políticas de Privacidade<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> e <x id="START_LINK_1" equiv-text="&lt;a href=&quot;https://policies.google.com/terms&quot;&gt;"/>Termos de Serviço<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> aplicar </target>
       </trans-unit>
       <trans-unit id="305579598350200830" datatype="html">
         <source> Recaptcha failed. Please reload the page and try again! </source>
@@ -2672,7 +2672,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">113,116</context>
         </context-group>
-        <target state="needs-translation"> Recaptcha failed. Please reload the page and try again! </target>
+        <target state="translated"> O Recaptcha falhou. Por favor, recarregue a página e tente novamente! </target>
       </trans-unit>
       <trans-unit id="2030256990555278300" datatype="html">
         <source> Sorry, there was a problem submitting the form. Please try again. </source>
@@ -2680,7 +2680,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">117,121</context>
         </context-group>
-        <target state="needs-translation"> Sorry, there was a problem submitting the form. Please try again. </target>
+        <target state="translated"> Desculpe, houve um problema ao enviar o formulário. Por favor, tente novamente. </target>
       </trans-unit>
       <trans-unit id="7898998821450935640" datatype="html">
         <source> By submitting, you will be sending your unit to be reviewed. If approved, it will be added to the Community Built library. Make sure you have filled out all appropriate fields in the Unit Info page in the authoring tool. We will be in touch if we require any more information. </source>
@@ -2688,7 +2688,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">123,128</context>
         </context-group>
-        <target state="needs-translation"> By submitting, you will be sending your unit to be reviewed. If approved, it will be added to the Community Built library. Make sure you have filled out all appropriate fields in the Unit Info page in the authoring tool. We will be in touch if we require any more information. </target>
+        <target state="translated"> Ao enviar, sua unidade será encaminhada para revisão. Se for aprovada, ela será adicionada à biblioteca comunitária. Certifique-se de que preencheu todos os campos da página Informações da Unidade na ferramenta de autoria. Entraremos em contato caso precisemos de mais informações. </target>
       </trans-unit>
       <trans-unit id="3357031660050032232" datatype="html">
         <source>Thank you!</source>
@@ -2700,7 +2700,7 @@
           <context context-type="sourcefile">src/app/student/survey/survey-completed/survey-completed.component.html</context>
           <context context-type="linenumber">19,23</context>
         </context-group>
-        <target state="needs-translation">Thank you!</target>
+        <target state="translated">Obrigado!</target>
       </trans-unit>
       <trans-unit id="7330209395505773206" datatype="html">
         <source>Submit for Review</source>
@@ -2708,7 +2708,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">142,144</context>
         </context-group>
-        <target state="needs-translation">Submit for Review</target>
+        <target state="translated">Enviar para Revisão</target>
       </trans-unit>
       <trans-unit id="6178733511992894634" datatype="html">
         <source>Trouble Signing In</source>
@@ -2720,7 +2720,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">170</context>
         </context-group>
-        <target state="needs-translation">Trouble Signing In</target>
+        <target state="translated">Problemas Para Entrar</target>
       </trans-unit>
       <trans-unit id="6892681827231609313" datatype="html">
         <source>Need Help Using WISE</source>
@@ -2732,7 +2732,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">171</context>
         </context-group>
-        <target state="needs-translation">Need Help Using WISE</target>
+        <target state="translated">Preciso de Ajuda Usando a WISE</target>
       </trans-unit>
       <trans-unit id="2072690839988671006" datatype="html">
         <source>Problems with a WISE Unit</source>
@@ -2744,7 +2744,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">172</context>
         </context-group>
-        <target state="needs-translation">Problems with a WISE Unit</target>
+        <target state="translated">Problemas com uma unidade da WISE</target>
       </trans-unit>
       <trans-unit id="2959002981630304422" datatype="html">
         <source>Feedback to WISE</source>
@@ -2756,7 +2756,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">176</context>
         </context-group>
-        <target state="needs-translation">Feedback to WISE</target>
+        <target state="translated">Feedback para a WISE</target>
       </trans-unit>
       <trans-unit id="8693603235657020323" datatype="html">
         <source>Other</source>
@@ -2772,7 +2772,7 @@
           <context context-type="sourcefile">src/app/domain/profile.constants.ts</context>
           <context context-type="linenumber">6</context>
         </context-group>
-        <target state="needs-translation">Other</target>
+        <target state="translated">Outro</target>
       </trans-unit>
       <trans-unit id="862335120638232941" datatype="html">
         <source>Student Management</source>
@@ -2788,7 +2788,7 @@
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">64,65</context>
         </context-group>
-        <target state="needs-translation">Student Management</target>
+        <target state="translated">Gerenciamento de Alunos</target>
       </trans-unit>
       <trans-unit id="7735613040574061081" datatype="html">
         <source>Need Help with Authoring</source>
@@ -2796,7 +2796,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">174</context>
         </context-group>
-        <target state="needs-translation">Need Help with Authoring</target>
+        <target state="translated">Preciso de Ajuda com Autoria</target>
       </trans-unit>
       <trans-unit id="6193846139411583890" datatype="html">
         <source>Publish Unit</source>
@@ -2804,7 +2804,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">175</context>
         </context-group>
-        <target state="needs-translation">Publish Unit</target>
+        <target state="translated">Publicar Unidade</target>
       </trans-unit>
       <trans-unit id="1936787644032074292" datatype="html">
         <source>Publish my unit to the WISE Community Built library</source>
@@ -2812,7 +2812,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">186</context>
         </context-group>
-        <target state="needs-translation">Publish my unit to the WISE Community Built library</target>
+        <target state="translated">Publicar minha unidade para a biblioteca comunitária da WISE</target>
       </trans-unit>
       <trans-unit id="4340256332658641886" datatype="html">
         <source>Unit Library</source>
@@ -2824,7 +2824,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-home/teacher-home.component.html</context>
           <context context-type="linenumber">13,15</context>
         </context-group>
-        <target state="needs-translation">Unit Library</target>
+        <target state="translated">Biblioteca de Unidades</target>
       </trans-unit>
       <trans-unit id="4778985982508820766" datatype="html">
         <source>Class Schedule</source>
@@ -2836,7 +2836,7 @@
           <context context-type="sourcefile">src/app/teacher/teacher-run-list/teacher-run-list.component.html</context>
           <context context-type="linenumber">5,8</context>
         </context-group>
-        <target state="needs-translation">Class Schedule</target>
+        <target state="translated">Horário das Aulas</target>
       </trans-unit>
       <trans-unit id="2584586546524894002" datatype="html">
         <source>Authoring Tool</source>
@@ -2860,7 +2860,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">22,28</context>
         </context-group>
-        <target state="needs-translation">Authoring Tool</target>
+        <target state="translated">Ferramenta de Autoria</target>
       </trans-unit>
       <trans-unit id="595878003405307359" datatype="html">
         <source> Explore our curriculum library to find units and resources to use with your classes! </source>
@@ -2868,7 +2868,7 @@
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
           <context context-type="linenumber">21,24</context>
         </context-group>
-        <target state="needs-translation"> Explore our curriculum library to find units and resources to use with your classes! </target>
+        <target state="translated"> Explore nossa biblioteca de currículos para encontrar unidades e recursos para usar em suas aulas! </target>
       </trans-unit>
       <trans-unit id="6744748111200794404" datatype="html">
         <source>Unit library navigation</source>
@@ -2876,7 +2876,7 @@
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.html</context>
           <context context-type="linenumber">34,37</context>
         </context-group>
-        <target state="needs-translation">Unit library navigation</target>
+        <target state="translated">Navegação da biblioteca de unidades</target>
       </trans-unit>
       <trans-unit id="1326396148114021147" datatype="html">
         <source>Public (<x id="PH" equiv-text="this.numPublicUnitsVisible"/>)</source>
@@ -2884,7 +2884,7 @@
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.ts</context>
           <context context-type="linenumber">75</context>
         </context-group>
-        <target state="needs-translation">Public (<x id="PH" equiv-text="this.numPublicUnitsVisible"/>)</target>
+        <target state="translated">Público (<x id="PH" equiv-text="this.numPublicUnitsVisible"/>)</target>
       </trans-unit>
       <trans-unit id="5646257907586096558" datatype="html">
         <source>My Units (<x id="PH" equiv-text="this.numMyUnitsVisible"/>)</source>
@@ -2892,7 +2892,7 @@
           <context context-type="sourcefile">src/app/curriculum/curriculum.component.ts</context>
           <context context-type="linenumber">79</context>
         </context-group>
-        <target state="needs-translation">My Units (<x id="PH" equiv-text="this.numMyUnitsVisible"/>)</target>
+        <target state="translated">Minhas Unidades (<x id="PH" equiv-text="this.numMyUnitsVisible"/>)</target>
       </trans-unit>
       <trans-unit id="5115344169131680845" datatype="html">
         <source>Workgroup ID</source>
@@ -2908,7 +2908,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
           <context context-type="linenumber">3,5</context>
         </context-group>
-        <target state="needs-translation">Workgroup ID</target>
+        <target state="translated">ID do Grupo de Trabalho</target>
       </trans-unit>
       <trans-unit id="7123653594948067002" datatype="html">
         <source>Score</source>
@@ -2956,7 +2956,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">155,158</context>
         </context-group>
-        <target state="needs-translation">Score</target>
+        <target state="translated">Pontuação</target>
       </trans-unit>
       <trans-unit id="8352660755693654653" datatype="html">
         <source>Choice Chosen</source>
@@ -2980,7 +2980,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
           <context context-type="linenumber">36,38</context>
         </context-group>
-        <target state="needs-translation">Choice Chosen</target>
+        <target state="translated">Opção Selecionada</target>
       </trans-unit>
       <trans-unit id="1102665189929883417" datatype="html">
         <source>Random</source>
@@ -3004,7 +3004,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-logic-options.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Random</target>
+        <target state="translated">Aleatório</target>
       </trans-unit>
       <trans-unit id="511208907501917679" datatype="html">
         <source>Chinese (Simplified)</source>
@@ -3016,7 +3016,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">30</context>
         </context-group>
-        <target state="needs-translation">Chinese (Simplified)</target>
+        <target state="translated">Chinês (Simplificado)</target>
       </trans-unit>
       <trans-unit id="4303868626158306518" datatype="html">
         <source>Chinese (Traditional)</source>
@@ -3024,7 +3024,7 @@
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Chinese (Traditional)</target>
+        <target state="translated">Chinês (Tradicional)</target>
       </trans-unit>
       <trans-unit id="3071065188816255493" datatype="html">
         <source>Dutch</source>
@@ -3032,7 +3032,7 @@
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Dutch</target>
+        <target state="translated">Holandês</target>
       </trans-unit>
       <trans-unit id="5866254605255506989" datatype="html">
         <source>English</source>
@@ -3044,7 +3044,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">31</context>
         </context-group>
-        <target state="needs-translation">English</target>
+        <target state="translated">Inglês</target>
       </trans-unit>
       <trans-unit id="1858110241312746425" datatype="html">
         <source>German</source>
@@ -3056,7 +3056,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">33</context>
         </context-group>
-        <target state="needs-translation">German</target>
+        <target state="translated">Alemão</target>
       </trans-unit>
       <trans-unit id="2935232983274991580" datatype="html">
         <source>Italian</source>
@@ -3068,7 +3068,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">34</context>
         </context-group>
-        <target state="needs-translation">Italian</target>
+        <target state="translated">Italiano</target>
       </trans-unit>
       <trans-unit id="6924606686202701860" datatype="html">
         <source>Japanese</source>
@@ -3080,7 +3080,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">Japanese</target>
+        <target state="translated">Japonês</target>
       </trans-unit>
       <trans-unit id="6145439649200570157" datatype="html">
         <source>Korean</source>
@@ -3092,7 +3092,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">Korean</target>
+        <target state="translated">Coreano</target>
       </trans-unit>
       <trans-unit id="5190825892106392539" datatype="html">
         <source>Spanish</source>
@@ -3104,7 +3104,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Spanish</target>
+        <target state="translated">Espanhol</target>
       </trans-unit>
       <trans-unit id="3611216939636790848" datatype="html">
         <source>Vietnamese</source>
@@ -3112,7 +3112,7 @@
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Vietnamese</target>
+        <target state="translated">Vietnamita</target>
       </trans-unit>
       <trans-unit id="8954371642157143595" datatype="html">
         <source>Elementary School</source>
@@ -3120,7 +3120,7 @@
           <context context-type="sourcefile">src/app/domain/profile.constants.ts</context>
           <context context-type="linenumber">2</context>
         </context-group>
-        <target state="needs-translation">Elementary School</target>
+        <target state="translated">Ensino Fundamental</target>
       </trans-unit>
       <trans-unit id="4661798863210162530" datatype="html">
         <source>Middle School</source>
@@ -3128,7 +3128,7 @@
           <context context-type="sourcefile">src/app/domain/profile.constants.ts</context>
           <context context-type="linenumber">3</context>
         </context-group>
-        <target state="needs-translation">Middle School</target>
+        <target state="translated">Ensino Fundamental II</target>
       </trans-unit>
       <trans-unit id="5560057304612443507" datatype="html">
         <source>High School</source>
@@ -3136,7 +3136,7 @@
           <context context-type="sourcefile">src/app/domain/profile.constants.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">High School</target>
+        <target state="translated">Ensino Médio</target>
       </trans-unit>
       <trans-unit id="1400655560633958921" datatype="html">
         <source>College</source>
@@ -3144,7 +3144,7 @@
           <context context-type="sourcefile">src/app/domain/profile.constants.ts</context>
           <context context-type="linenumber">5</context>
         </context-group>
-        <target state="needs-translation">College</target>
+        <target state="translated">Faculdade</target>
       </trans-unit>
       <trans-unit id="8347669775629259774" datatype="html">
         <source>WISE Features</source>
@@ -3152,7 +3152,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">6,9</context>
         </context-group>
-        <target state="needs-translation">WISE Features</target>
+        <target state="translated">Funcionalidades da WISE</target>
       </trans-unit>
       <trans-unit id="8188392167317719559" datatype="html">
         <source> A powerful online platform for designing, developing, and implementing science inquiry units </source>
@@ -3160,7 +3160,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">12,16</context>
         </context-group>
-        <target state="needs-translation"> A powerful online platform for designing, developing, and implementing science inquiry units </target>
+        <target state="translated"> Uma poderosa plataforma online para criar, desenvolver e implementar unidades de investigação científica </target>
       </trans-unit>
       <trans-unit id="961501499148321201" datatype="html">
         <source> Since 1997, WISE has served a growing community of more than 20,000 teachers, researchers, and curriculum designers, as well as over 200,000 K-12 students around the world. </source>
@@ -3168,7 +3168,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">16,20</context>
         </context-group>
-        <target state="needs-translation"> Since 1997, WISE has served a growing community of more than 20,000 teachers, researchers, and curriculum designers, as well as over 200,000 K-12 students around the world. </target>
+        <target state="translated"> Desde 1997, a WISE atende a uma crescente comunidade de mais de 20,000 professores, pesquisadores, e criadores de currículos, bem como 200,000 alunos com ensino fundamental e médio completo ao redor do mundo </target>
       </trans-unit>
       <trans-unit id="3028341585224916156" datatype="html">
         <source>WISE students</source>
@@ -3176,7 +3176,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">40,45</context>
         </context-group>
-        <target state="needs-translation">WISE students</target>
+        <target state="translated">Alunos da WISE</target>
       </trans-unit>
       <trans-unit id="7305133440180618711" datatype="html">
         <source>WISE students collaborate to:</source>
@@ -3184,7 +3184,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">49,51</context>
         </context-group>
-        <target state="needs-translation">WISE students collaborate to:</target>
+        <target state="translated">Alunos da WISE colaboram para:</target>
       </trans-unit>
       <trans-unit id="6153451533427116993" datatype="html">
         <source>Explore issues of social importance</source>
@@ -3192,7 +3192,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">53,56</context>
         </context-group>
-        <target state="needs-translation">Explore issues of social importance</target>
+        <target state="translated">Explorar questões de importância social</target>
       </trans-unit>
       <trans-unit id="4183035519493183435" datatype="html">
         <source>Pose relevant questions and make predictions</source>
@@ -3200,7 +3200,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">57,60</context>
         </context-group>
-        <target state="needs-translation">Pose relevant questions and make predictions</target>
+        <target state="translated">Levantar questões relevantes e fazer previsões</target>
       </trans-unit>
       <trans-unit id="9092211898764276761" datatype="html">
         <source>Experiment with computational models</source>
@@ -3208,7 +3208,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">61,64</context>
         </context-group>
-        <target state="needs-translation">Experiment with computational models</target>
+        <target state="translated">Experimentar com modelos computacionais</target>
       </trans-unit>
       <trans-unit id="8813580654514915881" datatype="html">
         <source>Evaluate and distinguish discrepant information</source>
@@ -3216,7 +3216,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">65,68</context>
         </context-group>
-        <target state="needs-translation">Evaluate and distinguish discrepant information</target>
+        <target state="translated">Avaliar e distinguir informações discrepantes</target>
       </trans-unit>
       <trans-unit id="6253234488202122750" datatype="html">
         <source>Construct explanations through reflection and discussion</source>
@@ -25716,67 +25716,51 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Mean: </target>
       </trans-unit>
-      <trans-unit id="8864080509105680671" datatype="html">
-        <source>Summarize class responses using AI</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">9,13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">9,13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">9,13</context>
-        </context-group>
-        <target state="needs-translation">Summarize class responses using AI</target>
-      </trans-unit>
       <trans-unit id="273241930432839392" datatype="html">
         <source>Generate Summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">13,15</context>
+          <context context-type="linenumber">9,12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">13,15</context>
+          <context context-type="linenumber">9,12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">13,15</context>
+          <context context-type="linenumber">9,12</context>
         </context-group>
         <target state="needs-translation">Generate Summary</target>
       </trans-unit>
-      <trans-unit id="3421658563032484911" datatype="html">
-        <source>No student responses</source>
+      <trans-unit id="8864080509105680671" datatype="html">
+        <source>Summarize class responses using AI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">16,19</context>
+          <context context-type="linenumber">13,18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">16,19</context>
+          <context context-type="linenumber">13,18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">16,19</context>
+          <context context-type="linenumber">13,18</context>
         </context-group>
-        <target state="needs-translation">No student responses</target>
+        <target state="needs-translation">Summarize class responses using AI</target>
       </trans-unit>
       <trans-unit id="2647230157856881985" datatype="html">
         <source>*New responses since last summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">23,28</context>
+          <context context-type="linenumber">24,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">23,28</context>
+          <context context-type="linenumber">24,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.html</context>
-          <context context-type="linenumber">23,28</context>
+          <context context-type="linenumber">24,28</context>
         </context-group>
         <target state="needs-translation">*New responses since last summary</target>
       </trans-unit>
@@ -25784,7 +25768,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Summary generated <x id="PH" equiv-text="this.datePipe.transform(this.summaryDate, &apos;short&apos;)"/> from <x id="PH_1" equiv-text="this.latestComponentStates.length"/> responses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ai-summary/ai-summary.component.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">101</context>
         </context-group>
         <target state="needs-translation">Summary generated <x id="PH" equiv-text="this.datePipe.transform(this.summaryDate, 'short')"/> from <x id="PH_1" equiv-text="this.latestComponentStates.length"/> responses</target>
       </trans-unit>
