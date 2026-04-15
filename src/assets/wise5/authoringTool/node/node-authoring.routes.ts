@@ -12,10 +12,6 @@ export const routes: Routes = [
         component: NodeAuthoringComponent
       },
       {
-        path: 'advanced',
-        loadChildren: () => import('./advanced/node-advanced.routes').then((m) => m.routes)
-      },
-      {
         path: 'import-component',
         loadChildren: () =>
           import('../importComponent/import-component.routes').then((m) => m.routes)

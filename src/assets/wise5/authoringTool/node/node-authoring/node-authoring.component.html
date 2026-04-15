@@ -1,17 +1,7 @@
 <div class="node-authoring-header flex flex-row flex-wrap justify-start items-start gap-4">
   <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18" />
   <edit-node-title [node]="node" />
-  <button
-    class="enable-in-translation"
-    mat-raised-button
-    color="primary"
-    routerLink="advanced"
-    matTooltip="Advanced"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>build</mat-icon>
-  </button>
+  <edit-node-advanced-button [nodeId]="nodeId" />
 </div>
 @if (components.length === 0 && !isGroupNode) {
   <p i18n>This step does not have any activities.</p>
