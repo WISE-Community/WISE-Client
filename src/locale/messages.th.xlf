@@ -381,6 +381,10 @@
           <context context-type="linenumber">13,19</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/idea-summary-dialog/idea-summary-dialog.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
           <context context-type="linenumber">74,76</context>
         </context-group>
@@ -16172,7 +16176,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/configService.ts</context>
-          <context context-type="linenumber">563</context>
+          <context context-type="linenumber">560</context>
         </context-group>
         <target state="needs-translation">Student <x id="PH" equiv-text="this.user.id"/></target>
       </trans-unit>
@@ -25804,21 +25808,29 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <target state="needs-translation">Note: Students do not see each other's names in this activity.</target>
       </trans-unit>
+      <trans-unit id="7967732284579375900" datatype="html">
+        <source>Responses for &quot;<x id="INTERPOLATION" equiv-text="{{ data.idea.text }}"/>&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/idea-summary-dialog/idea-summary-dialog.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <target state="needs-translation">Responses for "<x id="INTERPOLATION" equiv-text="{{ data.idea.text }}"/>"</target>
+      </trans-unit>
       <trans-unit id="3690771652722848805" datatype="html">
         <source>Sample responses:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/idea-summary/idea-summary.component.html</context>
-          <context context-type="linenumber">18,20</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
         <target state="needs-translation">Sample responses:</target>
       </trans-unit>
-      <trans-unit id="4302009595680225393" datatype="html">
-        <source>&quot;<x id="INTERPOLATION" equiv-text="{{ response.text }}"/>&quot;</source>
+      <trans-unit id="2734780694152757859" datatype="html">
+        <source>View all</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/idea-summary/idea-summary.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">20,23</context>
         </context-group>
-        <target state="needs-translation">"<x id="INTERPOLATION" equiv-text="{{ response.text }}"/>"</target>
+        <target state="needs-translation">View all</target>
       </trans-unit>
       <trans-unit id="1563518905064973119" datatype="html">
         <source>Student Ideas Detected</source>
