@@ -6,6 +6,7 @@ import { ComponentState } from '../../../../../app/domain/componentState';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialog } from '@angular/material/dialog';
 import { IdeaSummaryDialogComponent } from '../idea-summary-dialog/idea-summary-dialog.component';
+import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 
 interface IdeaCategory {
   id: string;
@@ -78,6 +79,7 @@ export class IdeaSummaryComponent extends TeacherSummaryDisplayComponent {
           // which is before the computer response
           const studentResponse = responses[index - 1];
           studentResponse.usernames = this.getDisplayNames(state.workgroupId);
+          studentResponse.avatarColor = getAvatarColorForWorkgroupId(state.workgroupId);
           responsesWithIdea.push(studentResponse);
           workgroupsProcessed.push(state.workgroupId);
         }
@@ -97,7 +99,8 @@ export class IdeaSummaryComponent extends TeacherSummaryDisplayComponent {
       .map((state) => ({
         text: state.studentData.response,
         timestamp: state.clientSaveTime,
-        usernames: this.getDisplayNames(state.workgroupId)
+        usernames: this.getDisplayNames(state.workgroupId),
+        avatarColor: getAvatarColorForWorkgroupId(state.workgroupId)
       }));
   }
 
