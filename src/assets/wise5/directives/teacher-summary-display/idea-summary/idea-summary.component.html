@@ -15,10 +15,13 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div class="text-sm bg-white p-1 rounded">
-    <span i18n>Sample responses:</span>
+    <div class="flex flex-wrap justify-between gap-2">
+      <span i18n>Sample responses:</span>
+      <a (click)="showAllResponses()" i18n>View all</a>
+    </div>
     <ul>
-      @for (response of responses; track response.timestamp) {
-        <li i18n>"{{ response.text }}"</li>
+      @for (response of sampleResponses; track response.timestamp) {
+        <li>"{{ response.text }}"</li>
       }
     </ul>
   </div>

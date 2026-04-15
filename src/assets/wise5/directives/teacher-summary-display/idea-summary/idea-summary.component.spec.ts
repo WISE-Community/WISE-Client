@@ -59,6 +59,10 @@ describe('IdeaSummaryComponent', () => {
       count: 5,
       color: 'red'
     };
+    component['workgroups'] = [
+      { workgroupId: 1, displayNames: 'student1' },
+      { workgroupId: 2, displayNames: 'student2' }
+    ];
   });
 
   describe('initial state', () => {
