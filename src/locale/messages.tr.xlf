@@ -897,6 +897,10 @@
           <context context-type="linenumber">10,14</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">46,50</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
           <context context-type="linenumber">114,119</context>
         </context-group>
@@ -915,14 +919,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-constraints/edit-component-constraints.component.html</context>
           <context context-type="linenumber">9,13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
-          <context context-type="linenumber">3,7</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
-          <context context-type="linenumber">8,12</context>
         </context-group>
         <target state="needs-translation">Add Constraint</target>
       </trans-unit>
@@ -963,6 +959,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
           <context context-type="linenumber">49,53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component.ts</context>
+          <context context-type="linenumber">18,22</context>
         </context-group>
         <target state="needs-translation"> Editing the JSON directly is generally not recommended, as errors can break the unit. If you need assistance, please contact WISE staff. </target>
       </trans-unit>
@@ -1306,7 +1306,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">45,47</context>
+          <context context-type="linenumber">35,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-authoring-lesson/project-authoring-lesson.component.html</context>
@@ -1370,7 +1370,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">93,95</context>
+          <context context-type="linenumber">83,85</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -1402,7 +1402,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">104,107</context>
+          <context context-type="linenumber">94,97</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
@@ -1647,10 +1647,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/importComponent/choose-import-component/choose-import-component.component.html</context>
           <context context-type="linenumber">75,80</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">8,11</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-events/export-events.component.html</context>
@@ -2906,7 +2902,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/select-branch-criteria/branch-criteria-help/branch-criteria-help.component.html</context>
@@ -2994,7 +2990,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/peer-grouping/PeerGroupingLogic.ts</context>
@@ -11458,7 +11454,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">69,71</context>
+          <context context-type="linenumber">59,61</context>
         </context-group>
         <target state="needs-translation">Delete activity</target>
       </trans-unit>
@@ -11678,10 +11674,6 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
           <context context-type="linenumber">4,7</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">18,22</context>
-        </context-group>
         <target state="needs-translation">General settings</target>
       </trans-unit>
       <trans-unit id="5187521650684561957" datatype="html">
@@ -11721,6 +11713,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
           <context context-type="linenumber">28,31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
@@ -11833,6 +11829,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.html</context>
           <context context-type="linenumber">44,47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
@@ -12251,8 +12251,8 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
           <context context-type="linenumber">6,10</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">9,13</context>
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-node-advanced-button/edit-node-advanced-button.component.ts</context>
+          <context context-type="linenumber">17,21</context>
         </context-group>
         <target state="needs-translation">Advanced</target>
       </trans-unit>
@@ -12786,7 +12786,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
@@ -13406,11 +13406,11 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <target state="needs-translation">Node ID</target>
       </trans-unit>
@@ -13430,11 +13430,11 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <target state="needs-translation">Activity ID</target>
       </trans-unit>
@@ -13966,6 +13966,26 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Add activity after</target>
       </trans-unit>
+      <trans-unit id="4320655829987450978" datatype="html">
+        <source>Constraints</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
+          <context context-type="linenumber">3,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">15,17</context>
+        </context-group>
+        <target state="needs-translation">Constraints</target>
+      </trans-unit>
+      <trans-unit id="3525309960667562707" datatype="html">
+        <source>Add constraint</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
+          <context context-type="linenumber">8,12</context>
+        </context-group>
+        <target state="needs-translation">Add constraint</target>
+      </trans-unit>
       <trans-unit id="3846212980408240732" datatype="html">
         <source>Constraint <x id="INTERPOLATION" equiv-text="{{ constraintIndex + 1 }}"/></source>
         <context-group purpose="location">
@@ -13994,41 +14014,33 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Edit Step JSON</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/json/node-advanced-json-authoring.component.ts</context>
-          <context context-type="linenumber">15,19</context>
+          <context context-type="linenumber">23,27</context>
         </context-group>
         <target state="needs-translation">Edit Step JSON</target>
       </trans-unit>
-      <trans-unit id="1947385945918466985" datatype="html">
-        <source>Edit step rubric</source>
+      <trans-unit id="344297533533825114" datatype="html">
+        <source>Advanced Step Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">29,33</context>
+          <context context-type="linenumber">2,5</context>
         </context-group>
-        <target state="needs-translation">Edit step rubric</target>
+        <target state="needs-translation">Advanced Step Settings</target>
       </trans-unit>
-      <trans-unit id="5805368808311741368" datatype="html">
-        <source>Edit transitions</source>
+      <trans-unit id="432834967329800065" datatype="html">
+        <source>General Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">39,43</context>
+          <context context-type="linenumber">9,11</context>
         </context-group>
-        <target state="needs-translation">Edit transitions</target>
+        <target state="needs-translation">General Settings</target>
       </trans-unit>
-      <trans-unit id="6636875980788220821" datatype="html">
-        <source>Edit constraints</source>
+      <trans-unit id="1095914565762651391" datatype="html">
+        <source>Transitions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">49,53</context>
+          <context context-type="linenumber">21,23</context>
         </context-group>
-        <target state="needs-translation">Edit constraints</target>
-      </trans-unit>
-      <trans-unit id="2543636733220429928" datatype="html">
-        <source>Show JSON</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">60,64</context>
-        </context-group>
-        <target state="needs-translation">Show JSON</target>
+        <target state="needs-translation">Transitions</target>
       </trans-unit>
       <trans-unit id="3361600127930482405" datatype="html">
         <source>Paths</source>
@@ -14038,13 +14050,13 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Paths</target>
       </trans-unit>
-      <trans-unit id="311818765514598020" datatype="html">
-        <source>Add a path</source>
+      <trans-unit id="7016775560899225284" datatype="html">
+        <source>Add path</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.html</context>
           <context context-type="linenumber">7,11</context>
         </context-group>
-        <target state="needs-translation">Add a path</target>
+        <target state="needs-translation">Add path</target>
       </trans-unit>
       <trans-unit id="7361101274103078985" datatype="html">
         <source>There are no paths out of this step</source>
@@ -14134,11 +14146,11 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <target state="needs-translation">Tag</target>
       </trans-unit>
@@ -14178,7 +14190,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>True</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <target state="translated">Doğru</target>
       </trans-unit>
@@ -14186,7 +14198,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>False</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target state="translated">Yanlış</target>
       </trans-unit>
@@ -14194,7 +14206,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>First Available</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <target state="needs-translation">First Available</target>
       </trans-unit>
@@ -14202,7 +14214,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Last Available</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <target state="needs-translation">Last Available</target>
       </trans-unit>
@@ -14210,7 +14222,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Get a specific score on an activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <target state="needs-translation">Get a specific score on an activity</target>
       </trans-unit>
@@ -14218,7 +14230,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Scores(s)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <target state="needs-translation">Scores(s)</target>
       </trans-unit>
@@ -14226,7 +14238,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Score ID (Optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <target state="needs-translation">Score ID (Optional)</target>
       </trans-unit>
@@ -14234,7 +14246,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Choose a specific choice on an activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <target state="needs-translation">Choose a specific choice on an activity</target>
       </trans-unit>
@@ -14242,7 +14254,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Have Tag Assigned To Workgroup</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <target state="needs-translation">Have Tag Assigned To Workgroup</target>
       </trans-unit>
@@ -14250,7 +14262,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Enter Node</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target state="needs-translation">Enter Node</target>
       </trans-unit>
@@ -14258,7 +14270,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Exit Node</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target state="needs-translation">Exit Node</target>
       </trans-unit>
@@ -14266,7 +14278,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Score Changed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <target state="needs-translation">Score Changed</target>
       </trans-unit>
@@ -14274,7 +14286,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Student Data Changed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target state="needs-translation">Student Data Changed</target>
       </trans-unit>
@@ -14282,7 +14294,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Are you sure you want to delete this requirement?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this requirement?</target>
       </trans-unit>
@@ -14290,7 +14302,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Are you sure you want to delete this path to &quot;<x id="PH" equiv-text="stepTitle"/>&quot;?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/path/node-advanced-path-authoring.component.ts</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">216</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to delete this path to "<x id="PH" equiv-text="stepTitle"/>"?</target>
       </trans-unit>
@@ -14302,19 +14314,11 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <target state="needs-translation">Copy activity</target>
       </trans-unit>
-      <trans-unit id="6508074424236812738" datatype="html">
-        <source>Edit Step Rubric</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/editRubric/edit-node-rubric.component.ts</context>
-          <context context-type="linenumber">8,11</context>
-        </context-group>
-        <target state="needs-translation">Edit Step Rubric</target>
-      </trans-unit>
       <trans-unit id="6007148783088748338" datatype="html">
         <source>This step does not have any activities.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/node-authoring/node-authoring.component.html</context>
-          <context context-type="linenumber">17,18</context>
+          <context context-type="linenumber">7,8</context>
         </context-group>
         <target state="needs-translation">This step does not have any activities.</target>
       </trans-unit>
