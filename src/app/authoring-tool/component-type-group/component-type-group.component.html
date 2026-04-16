@@ -1,0 +1,17 @@
+<mat-card appearance="filled">
+  <mat-card-header>
+    <mat-card-title class="pb-2">{{ componentGroup.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="@container">
+      <div class="grid @sm:grid-cols-2 gap-2">
+        @for (componentType of componentGroup.types; track componentType.type) {
+          <component-type-button
+            [componentType]="componentType.type"
+            (componentSelectedEvent)="componentSelectedEvent.emit(componentType)"
+          />
+        }
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

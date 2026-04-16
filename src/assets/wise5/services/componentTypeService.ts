@@ -17,8 +17,8 @@ export class ComponentTypeService {
         name: $localize`View Information`,
         types: [
           { type: 'HTML', name: this.getComponentTypeLabel('HTML') },
-          { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
-          { type: 'ShowMyWork', name: this.getComponentTypeLabel('ShowMyWork') }
+          { type: 'ShowMyWork', name: this.getComponentTypeLabel('ShowMyWork') },
+          { type: 'Summary', name: this.getComponentTypeLabel('Summary') }
         ]
       },
       {
@@ -33,16 +33,7 @@ export class ComponentTypeService {
         ]
       },
       {
-        name: $localize`Collaborate`,
-        types: [
-          { type: 'DialogGuidance', name: this.getComponentTypeLabel('DialogGuidance') },
-          { type: 'Discussion', name: this.getComponentTypeLabel('Discussion') },
-          { type: 'PeerChat', name: this.getComponentTypeLabel('PeerChat') },
-          { type: 'ShowGroupWork', name: this.getComponentTypeLabel('ShowGroupWork') }
-        ]
-      },
-      {
-        name: $localize`Experiment, Discover and Distinguish`,
+        name: $localize`Experiment, Discover, Distinguish`,
         types: [
           { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
           { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
@@ -50,6 +41,15 @@ export class ComponentTypeService {
           { type: 'Graph', name: this.getComponentTypeLabel('Graph') },
           { type: 'OutsideURL', name: this.getComponentTypeLabel('OutsideURL') },
           { type: 'Table', name: this.getComponentTypeLabel('Table') }
+        ]
+      },
+      {
+        name: $localize`Collaborate`,
+        types: [
+          { type: 'DialogGuidance', name: this.getComponentTypeLabel('DialogGuidance') },
+          { type: 'Discussion', name: this.getComponentTypeLabel('Discussion') },
+          { type: 'PeerChat', name: this.getComponentTypeLabel('PeerChat') },
+          { type: 'ShowGroupWork', name: this.getComponentTypeLabel('ShowGroupWork') }
         ]
       }
     ];

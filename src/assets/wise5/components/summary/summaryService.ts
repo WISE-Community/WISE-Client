@@ -37,7 +37,7 @@ export class SummaryService extends ComponentService {
   }
 
   getComponentTypeLabel(): string {
-    return $localize`Graph Summary`;
+    return $localize`Summary Graph`;
   }
 
   createComponent() {
