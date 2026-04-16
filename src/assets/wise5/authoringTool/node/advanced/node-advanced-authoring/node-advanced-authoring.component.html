@@ -1,67 +1,49 @@
-<div class="main-div flex gap-5">
-  <button
-    class="enable-in-translation"
-    mat-raised-button
-    color="primary"
-    routerLink=".."
-    matTooltip="Back"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  @if (!isGroupNode) {
-    <button
-      mat-raised-button
-      color="primary"
-      routerLink="general"
-      matTooltip="General settings"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>settings</mat-icon>
+<div class="edit-node-advanced">
+  <h2 mat-dialog-title i18n>Advanced Step Settings</h2>
+  <mat-divider />
+  <div mat-dialog-content>
+    <mat-tab-group animationDuration="0ms">
+      @if (isStepNode) {
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>settings</mat-icon>&nbsp;<span i18n>General Settings</span>
+          </ng-template>
+          <node-advanced-general-authoring [node]="node" />
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>block</mat-icon>&nbsp;<span i18n>Constraints</span>
+          </ng-template>
+          <node-advanced-constraint-authoring [node]="node" />
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>trending_up</mat-icon>&nbsp;<span i18n>Transitions</span>
+          </ng-template>
+          <node-advanced-path-authoring [node]="node" />
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+          </ng-template>
+          <ng-template matTabContent>
+            <!-- lazy load needed for tinymce to work -->
+            <edit-node-rubric [node]="node" />
+          </ng-template>
+        </mat-tab>
+      }
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span>
+        </ng-template>
+        <node-advanced-json-authoring [node]="node" />
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <mat-divider />
+  <mat-dialog-actions align="end">
+    <button class="enable-in-translation" mat-button mat-dialog-close cdkFocusRegionstart i18n>
+      Close
     </button>
-    <button
-      class="enable-in-translation"
-      mat-raised-button
-      color="primary"
-      routerLink="rubric"
-      matTooltip="Edit step rubric"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>message</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      routerLink="path"
-      matTooltip="Edit transitions"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>trending_up</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      routerLink="constraint"
-      matTooltip="Edit constraints"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>block</mat-icon>
-    </button>
-  }
-  <button
-    mat-raised-button
-    color="primary"
-    routerLink="json"
-    matTooltip="Show JSON"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>code</mat-icon>
-  </button>
+  </mat-dialog-actions>
 </div>
-<router-outlet></router-outlet>

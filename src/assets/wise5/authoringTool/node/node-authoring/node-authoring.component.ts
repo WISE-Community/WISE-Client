@@ -24,10 +24,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { ComponentAuthoringComponent } from '../../components/component-authoring.component';
-import { RouterModule } from '@angular/router';
 import { EditComponentAdvancedButtonComponent } from '../../components/edit-component-advanced-button/edit-component-advanced-button.component';
 import { ToggleComponentTagComponent } from '../../components/toggle-component-tag/toggle-component-tag.component';
 import { VisibilityConstraintIconComponent } from '../../components/visibility-constraint-icon/visibility-constraint-icon.component';
+import { EditNodeAdvancedButtonComponent } from '../../components/edit-node-advanced-button/edit-node-advanced-button.component';
 
 @Component({
   imports: [
@@ -37,6 +37,7 @@ import { VisibilityConstraintIconComponent } from '../../components/visibility-c
     CopyComponentButtonComponent,
     DragDropModule,
     EditComponentAdvancedButtonComponent,
+    EditNodeAdvancedButtonComponent,
     EditNodeTitleComponent,
     FormsModule,
     MatButtonModule,
@@ -46,7 +47,6 @@ import { VisibilityConstraintIconComponent } from '../../components/visibility-c
     MatIconModule,
     MatInputModule,
     MatTooltipModule,
-    RouterModule,
     TeacherNodeIconComponent,
     ToggleComponentTagComponent,
     VisibilityConstraintIconComponent
