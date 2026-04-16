@@ -1,4 +1,4 @@
-<form role="form" [formGroup]="addNodeFormGroup">
+<form role="form" [formGroup]="addNodeFormGroup" class="@container">
   <mat-form-field appearance="fill" class="title-field">
     <mat-label i18n>Step Title</mat-label>
     <input matInput type="text" id="title" name="title" formControlName="title" required />
@@ -7,8 +7,11 @@
     }
   </mat-form-field>
   <h5 i18n>Select activities to add to your new step (optional):</h5>
-  <div class="flex flex-col md:flex-row">
-    <div class="initial-components notice-bg-bg flex items-start md:w-1/3 lg:w-1/4">
+  <p class="info mat-small" i18n>
+    *Note: You can always add or remove content later by editing the step.
+  </p>
+  <div class="grid @lg:grid-cols-2 @2xl:grid-cols-3 gap-3">
+    <div class="initial-components flex items-start p-3">
       @if (initialComponents.length == 0) {
         <div class="mat-small" i18n>No activities added</div>
       }
@@ -32,20 +35,16 @@
         </div>
       }
     </div>
-    <div class="flex flex-col md:w-2/3 lg:w-3/4">
-      <div class="flex flex-wrap justify-stretch items-center">
-        @for (componentType of componentTypes; track componentType.type) {
-          <div class="component-type">
-            <component-type-button
-              [componentType]="componentType.type"
-              (componentSelectedEvent)="addComponent(componentType)"
-            />
-          </div>
+    <div class="flex flex-col @2xl:col-span-2 @container">
+      <div class="@2xl:columns-2 gap-2">
+        @for (componentGroup of componentGroups; track componentGroup.name) {
+          <component-type-group
+            class="mb-2 block break-inside-avoid-column"
+            [componentGroup]="componentGroup"
+            (componentSelectedEvent)="addComponent($event)"
+          />
         }
       </div>
-      <p class="info mat-small" i18n>
-        *Note: You can always add or remove content later by editing the step.
-      </p>
     </div>
   </div>
   <div class="nav-controls">

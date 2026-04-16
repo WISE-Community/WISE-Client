@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ComponentTypeButtonComponent } from '../../../../assets/wise5/authoringTool/components/component-type-button/component-type-button.component';
+import { ComponentTypeGroupComponent } from '../../component-type-group/component-type-group.component';
 import { ComponentTypeService } from '../../../../assets/wise5/services/componentTypeService';
 
 @Component({
-  imports: [ComponentTypeButtonComponent, MatButtonModule, MatDialogModule],
+  imports: [ComponentTypeGroupComponent, MatButtonModule, MatDialogModule],
   styles: ['component-type-button { width: 250px; padding: 4px; }'],
   templateUrl: 'choose-new-component.component.html'
 })
 export class ChooseNewComponent {
-  protected componentTypes: any[];
+  protected componentGroups: any[];
 
   constructor(
     private componentTypeService: ComponentTypeService,
@@ -18,7 +18,7 @@ export class ChooseNewComponent {
   ) {}
 
   ngOnInit(): void {
-    this.componentTypes = this.componentTypeService.getComponentTypes();
+    this.componentGroups = this.componentTypeService.getComponentGroups();
   }
 
   protected goToImportComponent(): void {

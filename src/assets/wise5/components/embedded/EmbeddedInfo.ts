@@ -2,10 +2,10 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class EmbeddedInfo extends ComponentInfo {
   protected description: string = $localize`Students interact with a custom applicatio, such as a model or simulation.`;
-  protected label: string = $localize`Embedded (Custom)`;
+  protected label: string = $localize`Custom`;
   protected previewExamples: any[] = [
     {
-      label: $localize`Embedded`,
+      label: $localize`Custom`,
       content: {
         id: 'abcde12345',
         type: 'Embedded',
@@ -13,8 +13,7 @@ export class EmbeddedInfo extends ComponentInfo {
         showSaveButton: false,
         showSubmitButton: false,
         showAddToNotebookButton: false,
-        url:
-          'https://wise.berkeley.edu/curriculum/shared/plate-tectonics-convection-explorer/v1/index.html?maxWidth=900',
+        url: 'https://wise.berkeley.edu/curriculum/shared/plate-tectonics-convection-explorer/v1/index.html?maxWidth=900',
         height: 600,
         constraints: []
       }
