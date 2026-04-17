@@ -3,25 +3,39 @@
     <ng-template mat-tab-label>
       <mat-icon>settings</mat-icon>&nbsp;<span i18n>General settings</span>
     </ng-template>
-    <div class="my-4">
-      <label id="navigation-type-label" i18n>Navigation mode:</label>
-      <mat-radio-group
-        aria-labelledby="navigation-type-label"
-        [(ngModel)]="navigationType"
-        (ngModelChange)="setNavigationType()"
-      >
-        <mat-radio-button color="primary" value="default" i18n
-          >Default (lessons appear in drop-down list and unit plan)</mat-radio-button
+    <div class="flex flex-col gap-5">
+      <div class="my-4">
+        <label id="navigation-type-label" i18n>Navigation mode:</label>
+        <mat-radio-group
+          aria-labelledby="navigation-type-label"
+          [(ngModel)]="navigationType"
+          (ngModelChange)="setNavigationType()"
         >
-        <mat-radio-button color="primary" value="tab" i18n
-          >Tabbed (lessons appear as tabs)
-        </mat-radio-button>
-      </mat-radio-group>
+          <mat-radio-button color="primary" value="default" i18n
+            >Default (lessons appear in drop-down list and unit plan)</mat-radio-button
+          >
+          <mat-radio-button color="primary" value="tab" i18n
+            >Tabbed (lessons appear as tabs)
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <edit-unit-type [metadata]="metadata" />
+      <div class="flex gap-2">
+        <button mat-raised-button color="primary" class="topButton" (click)="downloadProject()">
+          <mat-icon>file_download</mat-icon>
+          <span i18n>Download unit</span>
+        </button>
+        @if (isMyUnit) {
+          <a href="{{ publishUnitUrl }}" class="share-button">
+            <button mat-flat-button color="primary">
+              <mat-icon>public</mat-icon>&nbsp;<ng-container i18n
+                >Submit to Public Unit Library</ng-container
+              >
+            </button>
+          </a>
+        }
+      </div>
     </div>
-    <button mat-raised-button color="primary" class="topButton" (click)="downloadProject()">
-      <mat-icon>file_download</mat-icon>
-      <span i18n>Download unit</span>
-    </button>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>

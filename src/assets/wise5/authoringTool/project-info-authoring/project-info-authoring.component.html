@@ -1,109 +1,96 @@
-@if (isMyUnit) {
-  <a href="{{ publishUnitUrl }}" class="share-button">
-    <button mat-flat-button color="primary">
-      <mat-icon>public</mat-icon>&nbsp;<ng-container i18n>Publish</ng-container>
-    </button>
-  </a>
-}
-<div class="project-icon-label flex gap-5">
-  <span i18n>Unit Icon</span>
-  <button mat-raised-button color="primary" (click)="toggleEditProjectIconMode()" i18n>Edit</button>
-</div>
-<div class="project-icon-container">
-  @if (isShowProjectIcon) {
-    <div>
-      <img [src]="projectIcon" class="project-icon" />
-    </div>
-  }
-  @if (isShowProjectIconError) {
-    <div class="project-icon-error">
-      <p class="red margin-bottom-20" i18n>This unit does not have a unit icon.</p>
-      <p class="red" i18n>Click the edit button to set one.</p>
-    </div>
-  }
-  @if (isShowProjectIconLoading) {
-    <div>
-      <mat-spinner />
-    </div>
-  }
-</div>
-@if (isEditingProjectIcon) {
-  <div>
-    <div class="choose-project-icon-message flex gap-5">
-      <span i18n
-        >Choose a new Unit Icon by clicking on one below or upload your own custom icon.</span
-      >
-      <button mat-raised-button color="primary" (click)="chooseCustomProjectIcon()" i18n>
-        Upload
-      </button>
-    </div>
-    <div class="flex flex-wrap">
-      @for (projectIcon of projectIcons; track projectIcon) {
-        <img
-          class="project-icon-to-choose"
-          src="/projectIcons/{{ projectIcon }}"
-          (click)="setFeaturedProjectIcon(projectIcon)"
-        />
-      }
-    </div>
-    <br />
-  </div>
-}
-<br />
-@for (metadataField of metadataAuthoring.fields; track metadataField) {
-  <div>
-    @if (metadataField.type === 'textarea') {
-      <translatable-textarea
-        [content]="metadata"
-        [key]="metadataField.key"
-        [label]="metadataField.name"
-        (defaultLanguageTextChanged)="metadataChanged.next()"
-        class="textarea"
-      />
-    }
-    @if (metadataField.type === 'input') {
-      <translatable-input
-        [content]="metadata"
-        [key]="metadataField.key"
-        [label]="metadataField.name"
-        (defaultLanguageTextChanged)="metadataChanged.next()"
-        class="input"
-      />
-    }
-    @if (metadataField.name === 'Language') {
-      <edit-project-language-setting />
-    }
-    @if (metadataField.type === 'radio' && metadataField.name !== 'Language') {
-      <label class="bold">{{ metadataField.name }}:</label>
-      <mat-radio-group class="radio-group margin-bottom-20 flex flex-col">
-        @for (choice of metadataField.choices; track choice) {
-          <mat-radio-button
-            type="radio"
-            color="primary"
-            [value]="choice"
-            [checked]="metadataChoiceIsChecked(metadataField, choice)"
-            (click)="metadataRadioClicked(metadataField, choice)"
-          >
-            {{ getMetadataChoiceText(choice) }}
-          </mat-radio-button>
-        }
-      </mat-radio-group>
-    }
-    @if (metadataField.type === 'checkbox') {
-      <label class="bold">{{ metadataField.name }}:</label>
-      <div class="flex flex-col">
-        @for (choice of metadataField.choices; track choice) {
-          <mat-checkbox
-            color="primary"
-            [(ngModel)]="metadataField.choicesMapping[choice]"
-            (click)="metadataCheckboxClicked(metadataField)"
-          >
-            {{ getMetadataChoiceText(choice) }}
-          </mat-checkbox>
-        }
+<div class="project-info-authoring">
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+      </ng-template>
+      <div class="flex flex-col gap-5 mt-4">
+        <div>
+          @for (metadataField of metadataAuthoring.fields; track metadataField) {
+            @if (metadataField.key === 'title') {
+              <translatable-input
+                [content]="metadata"
+                [key]="metadataField.key"
+                [label]="metadataField.name"
+                (defaultLanguageTextChanged)="metadataChanged.next()"
+              />
+            }
+            @if (metadataField.key === 'summary') {
+              <translatable-textarea
+                [content]="metadata"
+                [key]="metadataField.key"
+                [label]="metadataField.name"
+                (defaultLanguageTextChanged)="metadataChanged.next()"
+              />
+            }
+          }
+        </div>
+        <div class="flex flex-col gap-4 p-3">
+          <div class="project-icon-label flex flex-row items-center gap-4">
+            <span i18n>Unit Icon</span>
+            <button mat-raised-button color="primary" (click)="toggleEditProjectIconMode()" i18n>
+              Edit
+            </button>
+          </div>
+          @if (isShowProjectIcon) {
+            <div>
+              <img [src]="projectIcon" class="project-icon" />
+            </div>
+          } @else if (isShowProjectIconError) {
+            <div class="project-icon-error">
+              <p class="red mb-4" i18n>This unit does not have a unit icon.</p>
+              <p class="red" i18n>Click the edit button to set one.</p>
+            </div>
+          } @else if (isShowProjectIconLoading) {
+            <div>
+              <mat-spinner />
+            </div>
+          }
+          @if (isEditingProjectIcon) {
+            <div>
+              <div class="flex items-center gap-4 mb-4">
+                <span i18n
+                  >Choose a new Unit Icon by clicking on one below or upload your own custom
+                  icon.</span
+                >
+                <button mat-raised-button color="primary" (click)="chooseCustomProjectIcon()" i18n>
+                  Upload
+                </button>
+              </div>
+              <div class="flex flex-wrap">
+                @for (projectIcon of projectIcons; track projectIcon) {
+                  <img
+                    role="button"
+                    tabindex="0"
+                    class="project-icon-to-choose"
+                    src="/projectIcons/{{ projectIcon }}"
+                    (click)="setFeaturedProjectIcon(projectIcon)"
+                    (keydown.enter)="setFeaturedProjectIcon(projectIcon)"
+                    aria-label="Choose this project icon"
+                    i18n-aria-label
+                  />
+                }
+              </div>
+              <br />
+            </div>
+          }
+        </div>
       </div>
-    }
-  </div>
-}
-<edit-unit-type [metadata]="metadata" />
-<edit-unit-resources [resources]="metadata.resources" />
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>translate</mat-icon>&nbsp;<span i18n>Language</span>
+      </ng-template>
+      <div class="mt-4" style="min-height: 800px">
+        <!-- min-height is set to 800px to show all language options without outer scrollbar -->
+        <edit-project-language-setting />
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>folder</mat-icon>&nbsp;<span i18n>Resources</span>
+      </ng-template>
+      <edit-unit-resources [resources]="metadata.resources" class="block mt-4" />
+    </mat-tab>
+  </mat-tab-group>
+</div>
