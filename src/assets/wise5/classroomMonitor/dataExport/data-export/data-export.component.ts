@@ -18,7 +18,15 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   imports: [MatButton, MatCardModule],
-  styles: ['.button-div { margin-top: 10px; margin-bottom: 10px; }'],
+  styles: `
+    .button-div {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    mat-card {
+      justify-content: space-between;
+    }
+  `,
   templateUrl: './data-export.component.html'
 })
 export class DataExportComponent {
