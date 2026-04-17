@@ -10308,15 +10308,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">72,75</context>
+          <context context-type="linenumber">74,77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">89,92</context>
+          <context context-type="linenumber">91,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">106,109</context>
+          <context context-type="linenumber">108,111</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-authoring/outside-url-authoring.component.html</context>
@@ -15504,11 +15504,11 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6364952943066153285" datatype="html">
-        <source>Each workgroup gets their own row with all their work</source>
+      <trans-unit id="4748233234614035480" datatype="html">
+        <source>Each workgroup gets one row with all their work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">9,13</context>
@@ -15521,79 +15521,79 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">27,30</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2640124895962658475" datatype="html">
-        <source>All events that were logged during the classroom </source>
+      <trans-unit id="4412122591105803180" datatype="html">
+        <source>All events that were logged during the unit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
           <context context-type="linenumber">45,49</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7552541928494851698" datatype="html">
-        <source>Custom data for certain activities</source>
+      <trans-unit id="1568593262681697846" datatype="html">
+        <source>Custom data for certain activity types</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">63,66</context>
+          <context context-type="linenumber">64,68</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8242202711576251313" datatype="html">
-        <source>All data logged by activities</source>
+      <trans-unit id="7422054710486820948" datatype="html">
+        <source>All data logged during the unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">80,83</context>
+          <context context-type="linenumber">82,85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3253707906330253061" datatype="html">
         <source>Time spent on each step in the unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">97,100</context>
+          <context context-type="linenumber">99,102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5690683917392408412" datatype="html">
         <source>Latest notebook items and reports</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">114,117</context>
+          <context context-type="linenumber">116,119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2256581797902573217" datatype="html">
         <source> Download </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">123,126</context>
+          <context context-type="linenumber">125,128</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">140,143</context>
+          <context context-type="linenumber">142,145</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">159,162</context>
+          <context context-type="linenumber">161,164</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">176,179</context>
+          <context context-type="linenumber">178,181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4094569276452991996" datatype="html">
         <source>All notebook items and reports</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">131,134</context>
+          <context context-type="linenumber">133,136</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="460956048109139675" datatype="html">
-        <source>Notifications sent to student and teachers</source>
+      <trans-unit id="214289689725549211" datatype="html">
+        <source>Notifications sent to students and teachers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">149,152</context>
+          <context context-type="linenumber">151,154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8059351239761064349" datatype="html">
         <source>Student uploaded files</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/data-export/data-export.component.html</context>
-          <context context-type="linenumber">167,170</context>
+          <context context-type="linenumber">169,172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1943268732247200427" datatype="html">
