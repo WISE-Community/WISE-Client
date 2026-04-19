@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ForgotStudentPasswordSecurityComponent } from './forgot-student-password-security.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { StudentService } from '../../../student/student.service';
 import { ConfigService } from '../../../services/config.service';
-import { RecaptchaV3Module, ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha-2';
+import { ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha-2';
 
 let component: ForgotStudentPasswordSecurityComponent;
 let fixture: ComponentFixture<ForgotStudentPasswordSecurityComponent>;
@@ -31,14 +30,26 @@ class MockConfigService {
 describe('ForgotStudentPasswordSecurityComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, RecaptchaV3Module, ForgotStudentPasswordSecurityComponent],
+      imports: [ForgotStudentPasswordSecurityComponent],
       providers: [
         { provide: StudentService, useClass: MockStudentService },
         { provide: ConfigService, useClass: MockConfigService },
         { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' },
+        {
+          provide: ReCaptchaV3Service,
+          useValue: {
+            execute: jasmine.createSpy('execute').and.returnValue(of('mock-token'))
+          }
+        },
         provideRouter([])
       ]
-    });
+    })
+      .overrideComponent(ForgotStudentPasswordSecurityComponent, {
+        remove: {
+          imports: [RecaptchaV3Module]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -101,7 +112,6 @@ async function changePassword() {
       component.isRecaptchaEnabled = true;
       studentService = TestBed.inject(StudentService);
       const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
-      spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
       spyOn(studentService, 'checkSecurityAnswer').and.returnValue(observableResponse);
       await component.submit();
       fixture.detectChanges();
