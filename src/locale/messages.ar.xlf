@@ -3622,7 +3622,7 @@
         <source>Incorrect answer, please try again. If you can&apos;t remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">100</context>
         </context-group>
         <target state="needs-translation">Incorrect answer, please try again. If you can't remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.</target>
       </trans-unit>
@@ -3630,7 +3630,7 @@
         <source>Recaptcha failed. Please reload the page and try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.ts</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
@@ -3714,7 +3714,7 @@
         <source>We could not find that username. Please make sure you are typing it correctly and try again. If you have forgotten your username, please use the forgot username option below.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.ts</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
@@ -9080,7 +9080,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">69,71</context>
+          <context context-type="linenumber">82,84</context>
         </context-group>
         <target state="needs-translation">Language</target>
       </trans-unit>
@@ -13166,7 +13166,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">78,80</context>
+          <context context-type="linenumber">91,93</context>
         </context-group>
         <target state="needs-translation">Resources</target>
       </trans-unit>
@@ -15120,7 +15120,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>General</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">4,6</context>
+          <context context-type="linenumber">5,8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
@@ -15196,7 +15196,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Unit Icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">22,23</context>
+          <context context-type="linenumber">30,31</context>
         </context-group>
         <target state="needs-translation">Unit Icon</target>
       </trans-unit>
@@ -15204,7 +15204,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> Edit </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">24,27</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
         <target state="needs-translation"> Edit </target>
       </trans-unit>
@@ -15212,7 +15212,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>This unit does not have a unit icon.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">33,34</context>
+          <context context-type="linenumber">41,42</context>
         </context-group>
         <target state="needs-translation">This unit does not have a unit icon.</target>
       </trans-unit>
@@ -15220,7 +15220,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Click the edit button to set one.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">34,37</context>
+          <context context-type="linenumber">42,45</context>
         </context-group>
         <target state="needs-translation">Click the edit button to set one.</target>
       </trans-unit>
@@ -15228,7 +15228,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source>Choose a new Unit Icon by clicking on one below or upload your own custom icon.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">45,48</context>
+          <context context-type="linenumber">53,56</context>
         </context-group>
         <target state="needs-translation">Choose a new Unit Icon by clicking on one below or upload your own custom icon.</target>
       </trans-unit>
@@ -15236,18 +15236,26 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> Upload </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">49,52</context>
+          <context context-type="linenumber">57,60</context>
         </context-group>
         <target state="needs-translation"> Upload </target>
       </trans-unit>
-      <trans-unit id="4814068849928280629" datatype="html">
-        <source> WISE units support multiple languages. After you&apos;ve added additional languages, use the language toggle as you&apos;re authoring to translate content for additional supported languages.
+      <trans-unit id="6858185877388566421" datatype="html">
+        <source>Choose this project icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
+          <context context-type="linenumber">69,72</context>
+        </context-group>
+        <target state="needs-translation">Choose this project icon</target>
+      </trans-unit>
+      <trans-unit id="509652731863088977" datatype="html">
+        <source> WISE units support multiple languages. After you&apos;ve added additional languages, use the language toggle as you&apos;re authoring to translate content for other languages.
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info/edit-project-language-setting/edit-project-language-setting.component.html</context>
           <context context-type="linenumber">2,7</context>
         </context-group>
-        <target state="needs-translation"> WISE units support multiple languages. After you've added additional languages, use the language toggle as you're authoring to translate content for additional supported languages.
+        <target state="needs-translation"> WISE units support multiple languages. After you've added additional languages, use the language toggle as you're authoring to translate content for other languages.
 </target>
       </trans-unit>
       <trans-unit id="955279821105592607" datatype="html">
