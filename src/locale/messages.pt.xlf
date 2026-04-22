@@ -3212,7 +3212,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">69,72</context>
         </context-group>
-        <target state="needs-translation">Construct explanations through reflection and discussion</target>
+        <target state="translated">Construir explicações através de reflexão e discussão</target>
       </trans-unit>
       <trans-unit id="3273329944359332945" datatype="html">
         <source>Design and build evidence-based solutions</source>
