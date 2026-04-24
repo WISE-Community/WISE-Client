@@ -51,40 +51,66 @@ describe('MatchSummaryDisplayComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display one card per unique choice', () => {
-    expect(fixtureQueryAll(fixture, '.choice').length).toEqual(5);
+  describe('Choice view', () => {
+    it('should display one card per unique choice', () => {
+      expect(fixtureQueryAll(fixture, '.choice-card').length).toEqual(5);
+    });
+
+    it('should order choices by total count descending then alphabetically', () => {
+      const cards = fixtureQueryAll(fixture, '.choice-card');
+      const labels = Array.from(cards).map((el) => el.querySelector('h3')?.textContent?.trim());
+      expect(labels[0]).toContain('Choice B');
+      expect(labels[1]).toContain('Choice D');
+      expect(labels[2]).toContain('Choice C');
+      expect(labels[3]).toContain('Choice E');
+      expect(labels[4]).toContain('Choice A');
+    });
+
+    it('should show bucket rows sorted by count within each choice', () => {
+      const cards = fixtureQueryAll(fixture, '.choice-card');
+      const choiceDCard = cards[1];
+      const bucketRows = choiceDCard.querySelectorAll('.bucket-row');
+      expect(bucketRows.length).toEqual(2);
+      expect(bucketRows[0].textContent).toContain('Bucket 2');
+      expect(bucketRows[0].textContent).toContain('2');
+    });
+
+    it('should show the correct count for Choice B in Bucket 1', () => {
+      const cards = fixtureQueryAll(fixture, '.choice-card');
+      const choiceBCard = cards[0];
+      expect(choiceBCard.textContent).toContain('3');
+    });
+
+    it('should show "Not moved by any students" for choices left in the source bucket', () => {
+      const cards = fixtureQueryAll(fixture, '.choice-card');
+      const choiceACard = cards[4];
+      expect(choiceACard.textContent).toContain('Not moved by any students');
+      expect(choiceACard.querySelectorAll('.bucket-row').length).toEqual(1);
+    });
   });
 
-  it('should order choices by total count descending then alphabetically', () => {
-    const cards = fixtureQueryAll(fixture, '.choice');
-    const labels = Array.from(cards).map((el) => el.querySelector('h3')?.textContent?.trim());
-    expect(labels[0]).toContain('Choice B');
-    expect(labels[1]).toContain('Choice D');
-    expect(labels[2]).toContain('Choice C');
-    expect(labels[3]).toContain('Choice E');
-    expect(labels[4]).toContain('Choice A');
-  });
+  describe('Bucket view', () => {
+    beforeEach(() => {
+      component.viewMode = 'bucket';
+      fixture.detectChanges();
+    });
 
-  it('should show bucket rows sorted by count within each choice', () => {
-    const cards = fixtureQueryAll(fixture, '.choice');
-    const choiceDCard = cards[1];
-    const bucketRows = choiceDCard.querySelectorAll('.bucket');
-    expect(bucketRows.length).toEqual(2);
-    expect(bucketRows[0].textContent).toContain('Bucket 2');
-    expect(bucketRows[0].textContent).toContain('2');
-  });
+    it('should display one card per unique non-source bucket', () => {
+      expect(fixtureQueryAll(fixture, '.bucket-card').length).toBe(2);
+    });
 
-  it('should show the correct count for Choice B in Bucket 1', () => {
-    const cards = fixtureQueryAll(fixture, '.choice');
-    const choiceBCard = cards[0];
-    expect(choiceBCard.textContent).toContain('3');
-  });
-
-  it('should show "Not moved by any students" for choices left in the source bucket', () => {
-    const cards = fixtureQueryAll(fixture, '.choice');
-    const choiceACard = cards[4];
-    expect(choiceACard.textContent).toContain('Not moved by any students');
-    expect(choiceACard.querySelectorAll('.bucket').length).toEqual(1);
+    it('should show choices sorted by count within each bucket', () => {
+      const cards = fixtureQueryAll(fixture, '.bucket-card');
+      const bucket1Card = cards[0];
+      const choiceRows = bucket1Card.querySelectorAll('.choice-row');
+      expect(choiceRows.length).toBe(3);
+      expect(choiceRows[0].textContent).toContain('Choice B');
+      expect(choiceRows[0].textContent).toContain('3');
+      expect(choiceRows[1].textContent).toContain('Choice C');
+      expect(choiceRows[1].textContent).toContain('2');
+      expect(choiceRows[2].textContent).toContain('Choice D');
+      expect(choiceRows[2].textContent).toContain('1');
+    });
   });
 });
 

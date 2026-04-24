@@ -1,12 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ChoiceData, MatchSummaryData } from '../summary-data/MatchSummaryData';
+import { MatchContent } from '../../../components/match/MatchContent';
+import { BucketData, ChoiceData, MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 
+export type SummaryViewMode = 'choice' | 'bucket';
+
 @Component({
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatButtonToggleModule, MatIconModule],
   selector: 'match-summary-display',
   styleUrls: [
     './match-summary-display.component.scss',
@@ -15,21 +19,33 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
   templateUrl: './match-summary-display.component.html'
 })
 export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent implements OnInit {
+  protected bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
   protected choiceData: ChoiceData[] = [];
   @Input() expanded: boolean;
+  protected isChoiceReuseMatch: boolean;
   private matchSummaryData: MatchSummaryData;
+  viewMode: SummaryViewMode = 'choice';
 
   ngOnInit(): void {
+    this.setIsChoiceReuseMatch();
     this.generateSummary();
+  }
+
+  private setIsChoiceReuseMatch(): void {
+    this.isChoiceReuseMatch = (
+      this.projectService.getComponent(this.nodeId, this.componentId) as MatchContent
+    ).choiceReuseEnabled;
   }
 
   private generateSummary(): void {
     this.getLatestWork().subscribe((componentStates) => {
+      this.bucketData = [];
       this.choiceData = [];
       this.matchSummaryData = new MatchSummaryData(
         this.projectService.injectAssetPaths(componentStates)
       );
       this.setChoiceData();
+      this.setBucketData();
     });
   }
 
@@ -37,7 +53,7 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     this.matchSummaryData.getChoicesData().forEach((choice) => {
       this.choiceData.push({
         choiceValue: choice.choiceValue,
-        choiceDataPoints: choice.choiceDataPoints.sort(this.sortBuckets)
+        choiceDataPoints: choice.choiceDataPoints.sort(this.sortByCount)
       });
     });
     this.choiceData.sort(this.sortChoices);
@@ -52,7 +68,16 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     return countDiff !== 0 ? countDiff : a.choiceValue.localeCompare(b.choiceValue);
   };
 
-  private sortBuckets(a: MatchSummaryDataPoint, b: MatchSummaryDataPoint): number {
+  protected setBucketData(): void {
+    this.matchSummaryData.getBucketsData().forEach((bucket: BucketData) => {
+      this.bucketData.push({
+        value: bucket.bucketValue,
+        choices: bucket.bucketDataPoints.sort(this.sortByCount)
+      });
+    });
+  }
+
+  private sortByCount(a: MatchSummaryDataPoint, b: MatchSummaryDataPoint): number {
     return b.getCount() - a.getCount();
   }
 

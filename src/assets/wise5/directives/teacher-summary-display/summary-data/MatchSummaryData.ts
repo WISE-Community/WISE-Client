@@ -3,6 +3,7 @@ import { MatchSummaryDataPoint } from './MatchSummaryDataPoint';
 import { SummaryData } from '../../summary-display/summary-data/SummaryData';
 
 export type ChoiceData = { choiceValue: string; choiceDataPoints: MatchSummaryDataPoint[] };
+export type BucketData = { bucketValue: string; bucketDataPoints: MatchSummaryDataPoint[] };
 
 /**
  * Summary data for all choices, each with a breakdown per bucket
@@ -19,14 +20,34 @@ export class MatchSummaryData extends SummaryData {
     return this.choicesData;
   }
 
+  getBucketsData(): BucketData[] {
+    const bucketsMap = new Map<string, BucketData>();
+    this.choicesData.forEach((choice) => {
+      choice.choiceDataPoints.forEach((point) => {
+        const bucketValue = point.getBucketValue();
+        if (!bucketsMap.has(bucketValue)) {
+          bucketsMap.set(bucketValue, { bucketValue, bucketDataPoints: [] });
+        }
+        bucketsMap.get(bucketValue).bucketDataPoints.push(point);
+      });
+    });
+    return Array.from(bucketsMap.values()).sort(
+      (a, b) => this.getTotalCount(b) - this.getTotalCount(a)
+    );
+  }
+
+  private getTotalCount(bucket: BucketData): number {
+    return bucket.bucketDataPoints.reduce((sum, point) => sum + point.getCount(), 0);
+  }
+
   private extractChoiceData(componentStates: ComponentState[]): void {
     componentStates.forEach((componentState) => {
       componentState.studentData.buckets.forEach((bucketStudentData, index) => {
         if (index === 0) {
-          bucketStudentData.items.forEach((item) => this.registerChoice(item.value));
+          bucketStudentData.items.forEach((choice) => this.registerChoice(choice.value));
         } else {
-          bucketStudentData.items.forEach((item) => {
-            this.extractBucketDataPerChoice(item.value, bucketStudentData.value);
+          bucketStudentData.items.forEach((choice) => {
+            this.extractBucketDataPerChoice(choice.value, bucketStudentData.value);
           });
         }
       });
