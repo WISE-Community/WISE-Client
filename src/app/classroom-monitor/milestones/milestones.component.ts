@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { MilestoneDetailsDialogComponent } from '../../../assets/wise5/classroomMonitor/classroomMonitorComponents/milestones/milestone-details-dialog/milestone-details-dialog.component';
@@ -12,6 +13,8 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { MilestoneReportDataComponent } from '../../teacher/milestone/milestone-report-data/milestone-report-data.component';
+import { MilestoneReportGraphComponent } from '../../teacher/milestone/milestone-report-graph/milestone-report-graph.component';
 
 @Component({
   imports: [MatCard, MatCardContent, MatProgressSpinner, NgClass, MatIcon],
@@ -27,9 +30,23 @@ export class MilestonesComponent {
     private achievementService: AchievementService,
     private annotationService: AnnotationService,
     private milestoneService: MilestoneService,
+    private injector: Injector,
     private dialog: MatDialog,
     private dataService: TeacherDataService
-  ) {}
+  ) {
+    if (!customElements.get('milestone-report-data')) {
+      customElements.define(
+        'milestone-report-data',
+        createCustomElement(MilestoneReportDataComponent, { injector: this.injector })
+      );
+    }
+    if (!customElements.get('milestone-report-graph')) {
+      customElements.define(
+        'milestone-report-graph',
+        createCustomElement(MilestoneReportGraphComponent, { injector: this.injector })
+      );
+    }
+  }
 
   ngOnInit() {
     this.loadProjectMilestones();

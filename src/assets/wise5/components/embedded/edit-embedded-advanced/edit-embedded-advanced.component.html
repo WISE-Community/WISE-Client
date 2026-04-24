@@ -1,17 +1,67 @@
-<div class="flex flex-col">
-  <translatable-input
-    [content]="componentContent"
-    key="parameters"
-    label="Model Parameters"
-    i18n-label
-    (defaultLanguageTextChanged)="componentChanged()"
-    class="model-parameters"
-  />
-  @if (isNotebookEnabled()) {
-    <edit-component-add-to-notebook-button [componentContent]="componentContent" />
-  }
-  <edit-common-advanced
-    [component]="component"
-    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-  />
-</div>
+<mat-tab-group animationDuration="0ms" [selectedIndex]="selectedTabIndex">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+    </ng-template>
+    <div class="flex flex-col">
+      <translatable-input
+        [content]="componentContent"
+        key="parameters"
+        label="Model Parameters"
+        i18n-label
+        (defaultLanguageTextChanged)="componentChanged()"
+        class="model-parameters"
+      />
+      @if (isNotebookEnabled()) {
+        <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+      }
+      <div class="flex flex-col justify-start items-start">
+        <edit-component-save-button [componentContent]="component.content" />
+        <edit-component-submit-button [componentContent]="component.content" />
+        @if (component.content.showSubmitButton) {
+          <edit-component-max-submit [componentContent]="component.content" />
+        }
+        <edit-component-default-feedback [componentContent]="component.content" />
+        <edit-component-max-score [componentContent]="component.content" />
+        <edit-component-exclude-from-total-score [componentContent]="component.content" />
+        <edit-component-width [componentContent]="component.content" />
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+    </ng-template>
+    <edit-component-constraints [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>join_inner</mat-icon>&nbsp;<span i18n>Connections</span>
+    </ng-template>
+    <edit-connected-components
+      [nodeId]="component.nodeId"
+      [componentId]="component.id"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      [componentContent]="component.content"
+      [connectedComponents]="component.content.connectedComponents"
+      (connectedComponentsChanged)="connectedComponentsChanged($event)"
+    />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <ng-template matTabContent>
+      <!-- lazy load needed for tinymce to work -->
+      <edit-component-rubric [componentContent]="component.content" />
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
+    <edit-component-tags [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <edit-component-json [component]="component" />
+  </mat-tab>
+</mat-tab-group>

@@ -5,7 +5,7 @@ import { PersonalLibraryComponent } from './modules/library/personal-library/per
 import { PublicLibraryComponent } from './modules/library/public-library/public-library.component';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
+export const appRoutes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
   {
     path: 'about',
@@ -32,11 +32,11 @@ const routes: Routes = [
   },
   {
     path: 'forgot',
-    loadChildren: () => import('./forgot/forgot-routing.module').then((m) => m.ForgotRoutingModule)
+    loadChildren: () => import('./forgot/forgot.routes').then((m) => m.routes)
   },
   {
     path: 'help',
-    loadChildren: () => import('./help/help-routing.module').then((m) => m.HelpRoutingModule)
+    loadChildren: () => import('./help/help.routes').then((m) => m.routes)
   },
   {
     path: 'join',
@@ -78,7 +78,7 @@ export class XhrInterceptor implements HttpInterceptor {
 }
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' }), FormsModule],
+  imports: [RouterModule.forRoot(appRoutes, { paramsInheritanceStrategy: 'always' }), FormsModule],
   exports: [RouterModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }]
 })

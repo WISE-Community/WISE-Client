@@ -57,6 +57,10 @@ export class NavItemComponent {
     this.isCurrentNode = this.currentNode.id === this.nodeId;
     if (this.isGroup && this.isCurrentNode) {
       this.setExpanded();
+      this.zoomToElement();
+    }
+    if (this.dataService.previousStep) {
+      this.isPrevStep = this.nodeId === this.dataService.previousStep.id;
     }
     this.subscriptions.add(this.projectService.projectParsed$.subscribe(() => this.setNodeTitle()));
     this.subscriptions.add(
@@ -127,7 +131,9 @@ export class NavItemComponent {
   }
 
   private zoomToElement(): void {
-    // TODO: implement me
+    setTimeout(() => {
+      document.getElementById(`nav-item-${this.nodeId}`).scrollIntoView({ behavior: 'smooth' });
+    }, 500);
   }
 
   protected itemClicked(): void {

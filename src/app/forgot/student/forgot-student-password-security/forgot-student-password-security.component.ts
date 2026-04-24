@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { StudentService } from '../../../student/student.service';
 import { finalize } from 'rxjs/operators';
-import { ReCaptchaV3Service } from 'ng-recaptcha-2';
+import { RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { ConfigService } from '../../../services/config.service';
 import { MatDivider } from '@angular/material/divider';
 import { MatProgressBar } from '@angular/material/progress-bar';
@@ -34,7 +34,8 @@ import { MatCard, MatCardContent } from '@angular/material/card';
     MatButton,
     MatProgressBar,
     MatDivider,
-    RouterLink
+    RouterLink,
+    RecaptchaV3Module
   ]
 })
 export class ForgotStudentPasswordSecurityComponent {

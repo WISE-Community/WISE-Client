@@ -18,6 +18,7 @@ import { ComponentServiceLookupService } from '../../../../services/componentSer
 import { provideHttpClient } from '@angular/common/http';
 import { ConfigService } from '../../../../services/configService';
 import { PathService } from '../../../../services/pathService';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 let classroomStatusService: ClassroomStatusService;
 let component: NodeGradingComponent;
@@ -84,7 +85,7 @@ describe('NodeGradingComponent', () => {
           NodeClassResponsesComponent
         )
       ],
-      imports: [NodeGradingComponent],
+      imports: [NodeGradingComponent, NoopAnimationsModule],
       providers: [
         { provide: AnnotationService, useClass: MockAnnotationService },
         { provide: TeacherProjectService, MockProjectService },
@@ -124,7 +125,56 @@ describe('NodeGradingComponent', () => {
   annotationReceived_RecalculateNodeCompletion();
   periodChanged_RecalculateNodeCompletion();
   projectSaved_RecalculateNodeCompletion();
+  componentTags_importantTag();
 });
+
+function componentTags_importantTag() {
+  describe('component tags', () => {
+    it('shows a bookmark icon in the tab if the component has the !important tag', async () => {
+      const projectService = TestBed.inject(TeacherProjectService);
+      (projectService.getComponents as jasmine.Spy).and.returnValue([
+        { id: 'component1', type: 'MultipleChoice', tags: ['!important'] }
+      ]);
+
+      component['setFields']();
+      component['summariesVisible'] = true;
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const icons = Array.from(fixture.nativeElement.querySelectorAll('mat-icon'));
+      let starIcon = icons.find((icon: any) => icon.textContent.trim() === 'bookmark');
+      if (!starIcon) {
+        starIcon = Array.from(document.querySelectorAll('mat-icon')).find(
+          (icon: any) => (icon as Element).textContent.trim() === 'bookmark'
+        ) as any;
+      }
+      expect(starIcon).toBeTruthy();
+    });
+
+    it('does not show a bookmark icon in the tab if the component does not have the !important tag', async () => {
+      const projectService = TestBed.inject(TeacherProjectService);
+      (projectService.getComponents as jasmine.Spy).and.returnValue([
+        { id: 'component1', type: 'MultipleChoice', tags: ['other'] }
+      ]);
+
+      component['setFields']();
+      component['summariesVisible'] = true;
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const icons = Array.from(fixture.nativeElement.querySelectorAll('mat-icon'));
+      let starIcon = icons.find((icon: any) => icon.textContent.trim() === 'bookmark');
+      if (!starIcon) {
+        starIcon = Array.from(document.querySelectorAll('mat-icon')).find(
+          (icon: any) => (icon as Element).textContent.trim() === 'bookmark'
+        ) as any;
+      }
+      expect(starIcon).toBeFalsy();
+    });
+  });
+}
 
 function periodChanged_RecalculateNodeCompletion() {
   describe('period changed', () => {

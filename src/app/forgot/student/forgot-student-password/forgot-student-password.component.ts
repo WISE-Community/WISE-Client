@@ -16,6 +16,7 @@ import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatCard, MatCardContent } from '@angular/material/card';
+import { RecaptchaV3Module } from 'ng-recaptcha-2';
 
 @Component({
   templateUrl: './forgot-student-password.component.html',
@@ -32,7 +33,8 @@ import { MatCard, MatCardContent } from '@angular/material/card';
     MatError,
     MatButton,
     MatProgressBar,
-    MatDivider
+    MatDivider,
+    RecaptchaV3Module
   ]
 })
 export class ForgotStudentPasswordComponent {

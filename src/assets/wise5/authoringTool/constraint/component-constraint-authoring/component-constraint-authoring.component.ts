@@ -28,6 +28,6 @@ import { EditConstraintRemovalCriteriaComponent } from '../edit-constraint-remov
 export class ComponentConstraintAuthoringComponent extends ConstraintAuthoringComponent {
   constraintActions = [
     new ConstraintAction('', $localize`Please Choose an Action`),
-    new ConstraintAction('makeThisComponentNotVisible', $localize`Make This Component Not Visible`)
+    new ConstraintAction('makeThisComponentNotVisible', $localize`Make This Activity Not Visible`)
   ];
 }

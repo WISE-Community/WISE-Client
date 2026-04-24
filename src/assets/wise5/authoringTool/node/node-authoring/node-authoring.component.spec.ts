@@ -138,7 +138,7 @@ function deleteComponent() {
       confirmSpy.and.returnValue(true);
       clickComponentDeleteButton(component2.id);
       expect(confirmSpy).toHaveBeenCalledWith(
-        `Are you sure you want to delete this component?\n\n2. MultipleChoice`
+        `Are you sure you want to delete this activity?\n\n2. MultipleChoice`
       );
       expect(saveProjectSpy).toHaveBeenCalled();
       expect(teacherProjectService.idToNode[nodeId1].components).toEqual([component1, component3]);

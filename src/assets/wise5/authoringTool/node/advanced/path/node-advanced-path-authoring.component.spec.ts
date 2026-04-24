@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NodeAdvancedPathAuthoringComponent } from './node-advanced-path-authoring.component';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 import { MockProvider } from 'ng-mocks';
 import { Node } from '../../../../common/Node';
 
@@ -13,15 +11,7 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NodeAdvancedPathAuthoringComponent],
-      providers: [
-        MockProvider(TeacherProjectService),
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            parent: { parent: { parent: { params: of({ nodeId: 'node1' }) } } }
-          }
-        }
-      ]
+      providers: [MockProvider(TeacherProjectService)]
     }).compileComponents();
   });
 
@@ -33,14 +23,12 @@ describe('NodeAdvancedPathAuthoringComponent', () => {
     const transitionLogic = {
       transitions: []
     };
-    spyOn(teacherProjectService, 'getNodeById').and.returnValue({
-      transitionLogic: {
-        transitions: []
-      }
-    });
+    component['node'] = {
+      transitionLogic: transitionLogic
+    };
     const node = new Node();
     node.transitionLogic = transitionLogic;
-    spyOn(TestBed.inject(TeacherProjectService), 'getNode').and.returnValue(node);
+    spyOn(teacherProjectService, 'getNode').and.returnValue(node);
     fixture.detectChanges();
   });
 

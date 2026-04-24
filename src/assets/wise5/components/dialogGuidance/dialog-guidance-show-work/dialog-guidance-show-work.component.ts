@@ -11,19 +11,19 @@ import { CRaterService } from '../../../services/cRaterService';
 import { UserService } from '../../../../../app/services/user.service';
 
 @Component({
-    imports: [DialogResponsesComponent, MatCardModule],
-    selector: 'dialog-guidance-show-work',
-    styleUrls: [
-        '../dialog-guidance-student/dialog-guidance-student.component.scss',
-        './dialog-guidance-show-work.component.scss'
-    ],
-    template: `
+  imports: [DialogResponsesComponent, MatCardModule],
+  selector: 'dialog-guidance-show-work',
+  styleUrls: [
+    '../dialog-guidance-student/dialog-guidance-student.component.scss',
+    './dialog-guidance-show-work.component.scss'
+  ],
+  template: `
     <mat-card appearance="outlined" class="mat-elevation-z2">
       <dialog-responses
         [computerAvatar]="computerAvatar"
         [cRaterRubric]="cRaterRubric"
         [responses]="componentState.studentData.responses"
-        [showDetectedIdeas]="isTeacher"
+        [showDetectedIdeas]="showDetectedIdeas"
       />
     </mat-card>
   `
@@ -31,7 +31,7 @@ import { UserService } from '../../../../../app/services/user.service';
 export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective {
   protected computerAvatar: ComputerAvatar;
   protected cRaterRubric: CRaterRubric;
-  protected isTeacher: boolean = false;
+  protected showDetectedIdeas: boolean = false;
 
   constructor(
     private computerAvatarService: ComputerAvatarService,
@@ -44,7 +44,8 @@ export class DialogGuidanceShowWorkComponent extends ComponentShowWorkDirective 
   }
 
   ngOnInit(): void {
-    this.isTeacher = this.userService.isTeacher();
+    this.showDetectedIdeas =
+      this.userService.isTeacher() || this.additionalSettings?.showDetectedIdeas;
     this.computerAvatar = this.computerAvatarService.getAvatar(
       this.componentState.studentData.computerAvatarId
     );

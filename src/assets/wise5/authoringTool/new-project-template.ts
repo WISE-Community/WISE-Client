@@ -23,6 +23,13 @@ export const newProjectTemplate = {
       },
       transitionLogic: {
         transitions: []
+      },
+      icon: {
+        color: '#00B0FF',
+        type: 'font',
+        fontSet: 'material-icons',
+        fontName: 'dashboard',
+        imgSrc: ''
       }
     },
     {
@@ -35,6 +42,13 @@ export const newProjectTemplate = {
       showSubmitButton: false,
       transitionLogic: {
         transitions: []
+      },
+      icon: {
+        color: '#00B0FF',
+        type: 'font',
+        fontSet: 'material-icons',
+        fontName: 'school',
+        imgSrc: ''
       }
     }
   ],

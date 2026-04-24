@@ -1,20 +1,49 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { finalize } from 'rxjs/operators';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { LibraryService } from '../../services/library.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha-2';
+import { ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha-2';
 import { Student } from '../../domain/student';
 import { StudentService } from '../../student/student.service';
 import { Subscription, lastValueFrom } from 'rxjs';
 import { Teacher } from '../../domain/teacher';
 import { UserService } from '../../services/user.service';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
+  imports: [
+    RouterLink,
+    MatCard,
+    MatCardContent,
+    MatButton,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatSelect,
+    MatOption,
+    MatProgressBar,
+    RecaptchaV3Module
+  ],
   selector: 'app-contact-form',
-  standalone: false,
   styles: `
     .contact__form {
       width: 800px;

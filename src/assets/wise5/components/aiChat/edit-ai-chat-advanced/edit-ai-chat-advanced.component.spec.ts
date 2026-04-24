@@ -7,6 +7,7 @@ import { NotebookService } from '../../../services/notebookService';
 import { EditConnectedComponentsComponent } from '../../../../../app/authoring-tool/edit-connected-components/edit-connected-components.component';
 import { EditComponentJsonComponent } from '../../../../../app/authoring-tool/edit-component-json/edit-component-json.component';
 import { EditComponentWidthComponent } from '../../../../../app/authoring-tool/edit-component-width/edit-component-width.component';
+import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 
 describe('EditAiChatAdvancedComponent', () => {
   let component: EditAiChatAdvancedComponent;
@@ -22,7 +23,14 @@ describe('EditAiChatAdvancedComponent', () => {
           EditConnectedComponentsComponent
         )
       ],
-      providers: [MockProviders(NotebookService, TeacherNodeService, TeacherProjectService)]
+      providers: [
+        MockProviders(
+          ComponentServiceLookupService,
+          NotebookService,
+          TeacherNodeService,
+          TeacherProjectService
+        )
+      ]
     });
     fixture = TestBed.createComponent(EditAiChatAdvancedComponent);
     component = fixture.componentInstance;
@@ -31,6 +39,7 @@ describe('EditAiChatAdvancedComponent', () => {
       id: 'component1',
       type: 'aiChat'
     });
+    spyOn(TestBed.inject(TeacherProjectService), 'getProject').and.returnValue({});
     fixture.detectChanges();
   });
 

@@ -2,8 +2,18 @@ body {
   margin: 0;
 }
 
-strong, b, .strong {
-  font-weight: 500;
+.strong {
+  font-weight: bolder;
+}
+
+ol, ul {
+  list-style-type: revert;
+  margin-block-start: 1em;
+  padding-inline-start: 1em;
+}
+
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: revert;
 }
 
 figure {

@@ -54,10 +54,12 @@
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
     "lz-string": "^1.4.4",
+    "marked": "^16.4.2",
     "mathjax": "^3.2.2",
     "microphone-stream": "^6.0.1",
     "ng-file-upload": "^12.2.13",
     "ng-recaptcha-2": "^16.0.1",
+    "ngx-markdown": "^20.1.0",
     "process": "^0.11.10",
     "rxjs": "^7.5.6",
     "sockjs-client": "^1.6.0",
@@ -72,7 +74,7 @@
     "zone.js": "^0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^20.3.9",
+    "@angular-devkit/build-angular": "^20.1.6",
     "@angular/cli": "^20.1.6",
     "@angular/compiler-cli": "^20.1.7",
     "@angular/language-service": "^20.1.7",

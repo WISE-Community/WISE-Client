@@ -1,3 +1,8 @@
+@if (showDetectedIdeas) {
+  <div class="flex justify-end mb-4">
+    <show-crater-rubric [cRaterRubric]="cRaterRubric" />
+  </div>
+}
 <div class="component--grading__response__content" [innerHTML]="studentResponse"></div>
 @for (audioAttachment of audioAttachments; track audioAttachment) {
   <div class="component__attachment flex items-center justify-start">
@@ -10,4 +15,11 @@
   <div class="component__attachment">
     <img [src]="otherAttachment.iconURL" class="component__attachment__content" />
   </div>
+}
+@if (showDetectedIdeas) {
+  <detected-ideas
+    [cRaterRubric]="cRaterRubric"
+    [responses]="[cRaterAnnotation.data]"
+    class="block mt-4"
+  />
 }

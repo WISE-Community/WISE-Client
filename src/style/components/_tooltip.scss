@@ -1,3 +1,8 @@
-.mat-mdc-tooltip {
-  font-size: 12px !important;
+.multiline-tooltip {
+  white-space: pre-line;
+
+  .mat-mdc-tooltip-surface {
+    overflow-y: auto;
+    text-align: start;
+  }
 }

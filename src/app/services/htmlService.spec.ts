@@ -14,8 +14,8 @@ let service: HTMLService;
 describe('HTMLService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
+      imports: [],
+      providers: [
         AnnotationService,
         ConfigService,
         ProjectService,
@@ -25,8 +25,8 @@ describe('HTMLService', () => {
         TagService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     service = TestBed.inject(HTMLService);
   });
   createComponent();
@@ -37,7 +37,7 @@ function createComponent() {
   it('should create an html component', () => {
     const component = service.createComponent();
     expect(component.type).toEqual('HTML');
-    expect(component.html).toEqual('Enter html here');
+    expect(component.html).toEqual('Enter content here');
   });
 }
 

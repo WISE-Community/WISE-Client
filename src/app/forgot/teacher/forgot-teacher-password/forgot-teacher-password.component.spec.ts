@@ -30,14 +30,26 @@ class MockConfigService {
 describe('ForgotTeacherPasswordComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RecaptchaV3Module, ForgotTeacherPasswordComponent],
+      imports: [ForgotTeacherPasswordComponent],
       providers: [
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: ConfigService, useClass: MockConfigService },
-        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' },
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '123' },
+        {
+          provide: ReCaptchaV3Service,
+          useValue: {
+            execute: jasmine.createSpy('execute').and.returnValue(of('mock-token'))
+          }
+        },
         provideRouter([])
       ]
-    });
+    })
+      .overrideComponent(ForgotTeacherPasswordComponent, {
+        remove: {
+          imports: [RecaptchaV3Module]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -84,7 +96,6 @@ async function changePassword() {
       component.isRecaptchaEnabled = true;
       teacherService = TestBed.inject(TeacherService);
       const observableResponse = createObservableResponse('failed', 'recaptchaResponseInvalid');
-      spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
       spyOn(teacherService, 'getVerificationCodeEmail').and.returnValue(observableResponse);
       await component.submit();
       fixture.detectChanges();
@@ -108,7 +119,6 @@ async function changePassword() {
       const router = TestBed.inject(Router);
       const navigateSpy = spyOn(router, 'navigate');
       component.setControlFieldValue('username', 'SpongebobSquarepants');
-      spyOn(recaptchaV3Service, 'execute').and.returnValue(of('token'));
       await component.submit();
       fixture.detectChanges();
       const params = {

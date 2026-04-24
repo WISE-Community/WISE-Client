@@ -9,7 +9,6 @@ import {
 import { ConfigService } from '../../../services/configService';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
-import { StudentComponentModule } from '../../../../../app/student/student.component.module';
 import { SaveTimeMessageComponent } from '../../../common/save-time-message/save-time-message.component';
 import { RouterModule } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
@@ -33,7 +32,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
     RouterModule,
     SaveTimeMessageComponent,
-    StudentComponentModule,
     TextFieldModule
   ],
   selector: 'class-response',
@@ -41,7 +39,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: 'class-response.component.html'
 })
 export class ClassResponse {
-  @Output() deleteButtonClicked: any = new EventEmitter();
   protected expanded: boolean = false;
   @Input() isDisabled: boolean;
   @Input() mode: any;
@@ -49,7 +46,6 @@ export class ClassResponse {
   protected repliesToShow: any[] = [];
   @Input() response: any;
   @Output() submitButtonClicked: any = new EventEmitter();
-  @Output() undoDeleteButtonClicked: any = new EventEmitter();
   private urlMatcher: any =
     /((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)/g;
 
@@ -123,18 +119,6 @@ export class ClassResponse {
 
   private removeLastChar(responseText: string): string {
     return responseText.substring(0, responseText.length - 1);
-  }
-
-  protected delete(componentState: any): void {
-    if (confirm($localize`Are you sure you want to delete this post?`)) {
-      this.deleteButtonClicked.emit(componentState);
-    }
-  }
-
-  protected undoDelete(componentState: any): void {
-    if (confirm($localize`Are you sure you want to show this post?`)) {
-      this.undoDeleteButtonClicked.emit(componentState);
-    }
   }
 
   protected toggleExpanded(): void {

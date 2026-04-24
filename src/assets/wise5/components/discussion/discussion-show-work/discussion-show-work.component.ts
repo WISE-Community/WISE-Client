@@ -78,6 +78,7 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
     const classResponses = this.discussionService.getClassResponses(
       componentStates,
       annotations,
+      this.workgroupId,
       isStudentMode
     );
     const isGradingMode = true;

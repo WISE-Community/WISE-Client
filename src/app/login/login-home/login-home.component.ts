@@ -1,13 +1,33 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha-2';
+import { RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha-2';
 import { lastValueFrom } from 'rxjs';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
-  selector: 'app-login',
-  standalone: false,
+  imports: [
+    MatCard,
+    MatCardContent,
+    FormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatButton,
+    MatProgressBar,
+    MatDivider,
+    RouterLink,
+    RecaptchaV3Module
+  ],
+  selector: 'app-login-home',
   styleUrl: './login-home.component.scss',
   templateUrl: './login-home.component.html'
 })

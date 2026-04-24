@@ -22,44 +22,6 @@
     @for (attachment of response.studentData.attachments; track attachment) {
       <img [src]="attachment.iconURL" i18n-alt alt="Post attachment" class="attachment" />
     }
-    @if (mode === 'grading' || mode === 'gradingRevision') {
-      <div class="flex justify-end items-center">
-        <br />
-        @if (
-          response.latestInappropriateFlagAnnotation == null ||
-          response.latestInappropriateFlagAnnotation.data == null ||
-          response.latestInappropriateFlagAnnotation.data.action != 'Delete'
-        ) {
-          <button
-            mat-stroked-button
-            color="warn"
-            (click)="delete(response)"
-            matTooltip="Delete this post so students will not see it"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            i18n
-          >
-            Delete
-          </button>
-        }
-        @if (
-          response.latestInappropriateFlagAnnotation != null &&
-          response.latestInappropriateFlagAnnotation.data.action === 'Delete'
-        ) {
-          <button
-            mat-stroked-button
-            color="warn"
-            (click)="undoDelete(response)"
-            matTooltip="Make this post viewable to students"
-            matTooltipPosition="above"
-            i18n-matTooltip
-            i18n
-          >
-            Undo Delete
-          </button>
-        }
-      </div>
-    }
   </div>
   @if (response.replies.length > 0) {
     <div class="notice-bg-bg">
@@ -98,58 +60,6 @@
               </div>
             </div>
             <div class="pt-1" [innerHTML]="reply.studentData.responseHTML"></div>
-            @if (mode === 'grading' || mode === 'gradingRevision') {
-              <div class="flex justify-end items-center">
-                @if (
-                  (response.latestInappropriateFlagAnnotation == null ||
-                    response.latestInappropriateFlagAnnotation.data.action !== 'Delete') &&
-                  (reply.latestInappropriateFlagAnnotation == null ||
-                    reply.latestInappropriateFlagAnnotation.data.action != 'Delete')
-                ) {
-                  <button
-                    mat-stroked-button
-                    color="warn"
-                    (click)="delete(reply)"
-                    i18n-matTooltip
-                    matTooltip="Delete this post so students will not see it"
-                    matTooltipPosition="above"
-                    i18n
-                  >
-                    Delete
-                  </button>
-                }
-                @if (
-                  response.latestInappropriateFlagAnnotation != null &&
-                  response.latestInappropriateFlagAnnotation.data.action === 'Delete'
-                ) {
-                  <span
-                    color="warn"
-                    i18n-matTooltip
-                    matTooltip="Students will not see this post"
-                    matTooltipPosition="above"
-                    i18n
-                  >
-                    Parent Deleted
-                  </span>
-                }
-                @if (
-                  reply.latestInappropriateFlagAnnotation != null &&
-                  reply.latestInappropriateFlagAnnotation.data.action === 'Delete'
-                ) {
-                  <button
-                    mat-stroked-button
-                    color="warn"
-                    (click)="undoDelete(reply)"
-                    i18n-matTooltip
-                    matTooltip="Make this post viewable to students"
-                    matTooltipPosition="above"
-                    i18n
-                  >
-                    Undo Delete
-                  </button>
-                }
-              </div>
-            }
           </div>
         }
       </div>

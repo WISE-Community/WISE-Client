@@ -1,6 +1,10 @@
 <mat-form-field appearance="fill" class="component-select form-field-no-hint">
   @if (components.length == 1) {
-    <mat-select disabled placeholder="1 item ({{ getComponentTypeLabel(components[0].type) }})" />
+    <mat-select
+      disabled
+      placeholder="1 item ({{ getComponentTypeLabel(components[0].type) }})"
+      i18n-placeholder
+    />
   } @else if (components.length > 1) {
     <mat-select
       [(ngModel)]="selectedComponents"
@@ -12,7 +16,19 @@
       <mat-select-trigger>{{ selectedText }}</mat-select-trigger>
       @for (component of components; track component.id; let i = $index) {
         <mat-option [value]="component" color="primary">
-          {{ component.displayIndex }}: {{ getComponentTypeLabel(component.type) }}
+          <span class="flex items-center gap-1">
+            {{ component.displayIndex }}: {{ getComponentTypeLabel(component.type) }}
+            @if (component.tags?.includes('!important')) {
+              <mat-icon
+                class="!m-0"
+                color="primary"
+                matTooltip="Bookmarked activity"
+                matTooltipPosition="above"
+                i18n-matTooltip
+                >bookmark</mat-icon
+              >
+            }
+          </span>
         </mat-option>
       }
     </mat-select>

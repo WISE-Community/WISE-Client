@@ -27,16 +27,15 @@ import { ComponentHeaderComponent } from '../../../directives/component-header/c
 import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-chat-question-bank.component';
 import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
 import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
-import { PeerChatModule } from '../peer-chat.module';
 
 @Component({
   imports: [
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
     PeerChatChatBoxComponent,
-    PeerChatQuestionBankComponent,
-    PeerChatModule
+    PeerChatQuestionBankComponent
   ],
+  providers: [QuestionBankService],
   selector: 'peer-chat-student',
   templateUrl: './peer-chat-student.component.html'
 })

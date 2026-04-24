@@ -44,7 +44,7 @@ import { CRaterPingService } from '../../../services/cRaterPingService';
     DialogResponsesComponent,
     MatCardModule
   ],
-  providers: [DialogGuidanceFeedbackService],
+  providers: [CRaterPingService, DialogGuidanceFeedbackService],
   selector: 'dialog-guidance-student',
   styleUrl: './dialog-guidance-student.component.scss',
   templateUrl: './dialog-guidance-student.component.html'
@@ -116,6 +116,7 @@ export class DialogGuidanceStudentComponent extends ComponentStudent {
   }
 
   ngOnDestroy(): void {
+    super.ngOnDestroy();
     this.cRaterPingService.stopPinging(this.getItemId());
   }
 

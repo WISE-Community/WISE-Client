@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
+  imports: [NgClass, MatIcon],
   selector: 'password-requirement',
-  standalone: false,
   styleUrl: './password-requirement.component.scss',
   templateUrl: './password-requirement.component.html'
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MultipleChoiceContent } from '../../../../components/multipleChoice/MultipleChoiceContent';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   imports: [
@@ -20,10 +19,13 @@ import { ActivatedRoute } from '@angular/router';
     MatSelectModule,
     MatTooltipModule
   ],
+  selector: 'node-advanced-path-authoring',
   styleUrl: 'node-advanced-path-authoring.component.scss',
   templateUrl: 'node-advanced-path-authoring.component.html'
 })
 export class NodeAdvancedPathAuthoringComponent implements OnInit {
+  @Input() node: any;
+
   protected canChangePathOptions = [
     { value: true, text: $localize`True` },
     { value: false, text: $localize`False` }
@@ -36,26 +38,25 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     { value: 'tag', text: $localize`Tag` }
   ];
   protected items: any[];
-  node: any;
   protected nodeId: string;
   protected nodeIds: string[];
   protected transitionCriterias = [
     {
       value: 'score',
-      text: $localize`Get a specific score on a component`,
+      text: $localize`Get a specific score on an activity`,
       params: [
         { value: 'nodeId', text: $localize`Node ID` },
-        { value: 'componentId', text: $localize`Component ID` },
+        { value: 'componentId', text: $localize`Activity ID` },
         { value: 'scores', text: $localize`Scores(s)` },
         { value: 'scoreId', text: $localize`Score ID (Optional)` }
       ]
     },
     {
       value: 'choiceChosen',
-      text: $localize`Choose a specific choice on a component`,
+      text: $localize`Choose a specific choice on an activity`,
       params: [
         { value: 'nodeId', text: $localize`Node ID` },
-        { value: 'componentId', text: $localize`Component ID` },
+        { value: 'componentId', text: $localize`Activity ID` },
         { value: 'choiceIds', text: $localize`Choices` }
       ]
     },
@@ -72,16 +73,10 @@ export class NodeAdvancedPathAuthoringComponent implements OnInit {
     { value: 'studentDataChanged', text: $localize`Student Data Changed` }
   ];
 
-  constructor(
-    private projectService: TeacherProjectService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private projectService: TeacherProjectService) {}
 
-  ngOnInit() {
-    this.route.parent.parent.parent.params.subscribe((params) => {
-      this.node = this.projectService.getNodeById(params.nodeId);
-      this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
-    });
+  ngOnInit(): void {
+    this.nodeIds = this.projectService.getFlattenedProjectAsNodeIds(true);
   }
 
   addNewTransition(): void {

@@ -1,60 +1,57 @@
-<ng-template #bucketTemplate let-bucket="bucket" let-first="first">
-  <div class="bucket" [ngClass]="{ 'selected-bg-bg': first, 'notice-bg-bg': !first }">
+<ng-template #choiceTemplate let-choice="choice">
+  <div class="choice notice-bg-bg" [class.secondary-text]="choice.choiceDataPoints.length === 0">
     <h3 class="mat-body-2">
-      {{ bucket.value }}
-      @if (first) {
-        (<span i18n>Source Bucket</span>)
-      }
+      <mat-icon class="mat-18 align-sub" aria-label="Item" i18n-aria-label>crop_16_9</mat-icon
+      >&nbsp;<span [innerHTML]="choice.choiceValue"></span>
     </h3>
-    <ul>
-      @for (choice of bucket.choices; track $index) {
-        @if ($index < 3 || getBucketShowMore(bucket.value) || first) {
+    @if (choice.choiceDataPoints.length > 0) {
+      <ul>
+        @for (bucketDataPoint of choice.choiceDataPoints; track $index) {
           <li>
-            <div class="choice">
-              <div [innerHTML]="choice.getId()"></div>
-              @if (!isChoiceReuseMatch || !first) {
-                <div class="shrink-0">
-                  (<mat-icon class="mat-18">person</mat-icon>{{ choice.getCount() }})
-                </div>
-              }
+            <div class="bucket">
+              <mat-icon class="mat-18 shrink-0 mt-0.25" aria-label="Bucket" i18n-aria-label
+                >inventory_2</mat-icon
+              >
+              <div class="flex-1" [innerHTML]="bucketDataPoint.getBucketValue()"></div>
+              <div class="shrink-0">
+                <mat-icon class="mat-18 align-middle">person</mat-icon
+                >{{ bucketDataPoint.getCount() }}
+              </div>
             </div>
           </li>
         }
-      }
-      @if (bucket.choices.length > 3 && !first) {
-        <a href="#" class="text-sm px-1" (click)="toggleBucketShowMore(bucket.value, $event)">
-          @if (getBucketShowMore(bucket.value)) {
-            <span i18n>Show less</span>
-          } @else {
-            <span i18n>Show more</span>
-          }
-        </a>
-      }
-    </ul>
+      </ul>
+    } @else {
+      <div class="bucket">
+        <mat-icon class="mat-18" aria-label="Not moved" i18n-aria-label>do_not_disturb</mat-icon>
+        <div i18n>Not moved by any students</div>
+      </div>
+    }
   </div>
 </ng-template>
 
-<h2 class="mat-subtitle-1" i18n>Choice Frequency</h2>
-@if (bucketData.length > 0) {
-  <p i18n>Number of teams that moved each item (choice) into the different buckets (categories).</p>
-  <div class="columns-3xs gap-2">
-    <ng-container
-      [ngTemplateOutlet]="bucketTemplate"
-      [ngTemplateOutletContext]="{ bucket: bucketData[0], first: true }"
-    />
-    @for (bucket of bucketData; track $index) {
-      @if ($index > 0) {
-        <div class="break-inside-avoid">
-          <ng-container
-            [ngTemplateOutlet]="bucketTemplate"
-            [ngTemplateOutletContext]="{ bucket: bucket, first: false }"
-          />
-        </div>
-      }
+<div [class.expanded]="expanded">
+  <h2 class="mat-subtitle-1" i18n>Bucket Frequency</h2>
+  <div class="max-h-160 overflow-y-auto @container" [class.max-h-none]="expanded">
+    @if (choiceData.length > 0) {
+      <p class="!mt-0" i18n>
+        Number of times each item <mat-icon class="mat-18 align-sub">crop_16_9</mat-icon> was moved
+        into the different buckets <mat-icon class="mat-18 align-sub">inventory_2</mat-icon>.
+      </p>
+      <div class="columns-1 @xl:columns-2 @4xl:columns-3 gap-2 mt-2">
+        @for (choice of choiceData; track $index) {
+          <div class="break-inside-avoid">
+            <ng-container
+              [ngTemplateOutlet]="choiceTemplate"
+              [ngTemplateOutletContext]="{ choice: choice }"
+            />
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="notice" i18n>
+        Your students' choices will show up here when they complete the activity.
+      </div>
     }
   </div>
-} @else {
-  <div class="notice" i18n>
-    Your students' choices will show up here when they complete the activity.
-  </div>
-}
+</div>

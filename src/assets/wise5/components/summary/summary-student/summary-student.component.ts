@@ -72,19 +72,15 @@ export class SummaryStudent extends ComponentStudent {
     }
     this.isStudent = this.configService.isPreview() || this.configService.isStudentRun();
     if (this.isStudent) {
-      this.otherStepTitle = this.getOtherStepTitle();
       this.isShowDisplay = this.calculateIsShowDisplay();
     } else {
-      this.isShowDisplay = true;
+      this.isShowDisplay = !this.configService.isAuthoring();
     }
+    this.otherStepTitle = this.getOtherStepTitle();
     if (!this.isShowDisplay) {
       this.warningMessage = this.getWarningMessage();
     }
     this.setPeriodIdIfNecessary();
-  }
-
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
   }
 
   getOtherPrompt(nodeId, componentId) {

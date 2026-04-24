@@ -5,6 +5,8 @@ import { ClassroomMonitorTestingModule } from '../classroom-monitor-testing.modu
 import { ClassroomMonitorTestHelper } from '../classroomMonitorComponents/shared/testing/ClassroomMonitorTestHelper';
 import { StudentProgressComponent } from './student-progress.component';
 import { provideRouter } from '@angular/router';
+import { MockComponent } from 'ng-mocks';
+import { ProjectLocationComponent } from '../project-location/project-location.component';
 
 class SortTestParams {
   constructor(
@@ -22,7 +24,11 @@ const { workgroupId1, workgroupId2, workgroupId3, workgroupId4, workgroupId5 } =
 describe('StudentProgressComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClassroomMonitorTestingModule, StudentProgressComponent],
+      imports: [
+        ClassroomMonitorTestingModule,
+        MockComponent(ProjectLocationComponent),
+        StudentProgressComponent
+      ],
       providers: [provideRouter([])]
     }).compileComponents();
   });

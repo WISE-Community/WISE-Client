@@ -1,17 +1,11 @@
-@if (showDetectedIdeas && hasRubricData) {
-  <div class="flex items-center justify-end">
-    <mat-icon class="mat-18" color="primary">auto_awesome</mat-icon>&nbsp;<a
-      tabindex="0"
-      (click)="openIdeasRubric()"
-      (keyup.enter)="openIdeasRubric()"
-      i18n
-      >Detectable ideas</a
-    >
+@if (showDetectedIdeas) {
+  <div class="flex justify-end">
+    <show-crater-rubric [cRaterRubric]="cRaterRubric" />
   </div>
 }
 @for (response of responses; track response.timestamp) {
   @if (response.user === 'Computer' && showDetectedIdeas && cRaterRubric.ideas.length) {
-    <detected-ideas [cRaterRubric]="cRaterRubric" [responses]="[response]" />
+    <detected-ideas [cRaterRubric]="cRaterRubric" [responses]="[response]" [alignEnd]="true" />
   }
   <dialog-response [response]="response" [computerAvatar]="computerAvatar" />
 }

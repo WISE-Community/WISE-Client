@@ -1,20 +1,10 @@
 <div class="node-authoring-header flex flex-row flex-wrap justify-start items-start gap-4">
   <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18" />
   <edit-node-title [node]="node" />
-  <button
-    class="enable-in-translation"
-    mat-raised-button
-    color="primary"
-    routerLink="advanced"
-    matTooltip="Advanced"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>build</mat-icon>
-  </button>
+  <edit-node-advanced-button [nodeId]="nodeId" />
 </div>
 @if (components.length === 0 && !isGroupNode) {
-  <p i18n>This step does not have any components.</p>
+  <p i18n>This step does not have any activities.</p>
   <add-component [node]="node" (newComponentsEvent)="highlightComponents($event)" />
 }
 <div
@@ -48,6 +38,10 @@
               }
               <span class="heavy">{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
             </div>
+            <toggle-component-tag [component]="component" />
+            @if (hasVisibilityConstraint(component)) {
+              <visibility-constraint-icon [componentContent]="component" [nodeId]="nodeId" />
+            }
             <span class="flex grow"></span>
             <div class="text flex justify-end items-center">
               @if (component.id === editingComponentId) {
@@ -62,7 +56,7 @@
                 mat-icon-button
                 (click)="$event.stopPropagation(); deleteComponent($event, i + 1, component)"
                 (keydown)="$event.stopPropagation()"
-                matTooltip="Delete Component"
+                matTooltip="Delete activity"
                 matTooltipPosition="above"
                 i18n-matTooltip
               >
@@ -70,7 +64,7 @@
               </button>
             </div>
           </div>
-          <mat-divider></mat-divider>
+          <mat-divider />
           <div>
             <component-authoring
               [nodeId]="nodeId"

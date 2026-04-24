@@ -1,279 +1,310 @@
-<div class="data-explorer-authoring flex flex-col gap-2">
-  <div>
-    <mat-checkbox
-      color="primary"
-      [(ngModel)]="componentContent.isDataExplorerEnabled"
-      (ngModelChange)="toggleDataExplorer()"
-      i18n
-    >
-      Enable Data Explorer
-    </mat-checkbox>
-  </div>
-  @if (componentContent.isDataExplorerEnabled) {
-    <div class="flex flex-col gap-2">
-      <div class="flex flex-wrap gap-5">
-        <span i18n>Allowed Graph Types:</span>
-        <mat-checkbox
-          color="primary"
-          [(ngModel)]="isDataExplorerScatterPlotEnabled"
-          (ngModelChange)="dataExplorerToggleScatterPlot()"
-          i18n
-        >
-          Scatter Plot
-        </mat-checkbox>
-        <mat-checkbox
-          color="primary"
-          [(ngModel)]="isDataExplorerLineGraphEnabled"
-          (ngModelChange)="dataExplorerToggleLineGraph()"
-          i18n
-        >
-          Line Graph
-        </mat-checkbox>
-        <mat-checkbox
-          color="primary"
-          [(ngModel)]="isDataExplorerBarGraphEnabled"
-          (ngModelChange)="dataExplorerToggleBarGraph()"
-          i18n
-        >
-          Bar Graph
-        </mat-checkbox>
-      </div>
-      @if (isDataExplorerScatterPlotEnabled) {
-        <div>
-          <mat-checkbox
-            color="primary"
-            [(ngModel)]="componentContent.isDataExplorerScatterPlotRegressionLineEnabled"
-            (ngModelChange)="componentChanged()"
-            i18n
-          >
-            Show Scatter Plot Regression Line
-          </mat-checkbox>
-        </div>
-      }
+<mat-tab-group animationDuration="0ms" [selectedIndex]="selectedTabIndex">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
+    </ng-template>
+    <div class="data-explorer-authoring flex flex-col gap-2">
       <div>
-        <mat-form-field class="number-input">
-          <mat-label i18n>Number of Series</mat-label>
-          <input
-            matInput
-            type="number"
-            min="1"
-            [(ngModel)]="componentContent.numDataExplorerSeries"
-            (ngModelChange)="numDataExplorerSeriesChanged()"
-          />
-        </mat-form-field>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="componentContent.isDataExplorerEnabled"
+          (ngModelChange)="toggleDataExplorer()"
+          i18n
+        >
+          Enable Data Explorer
+        </mat-checkbox>
       </div>
-      <div>
-        <mat-form-field class="number-input">
-          <mat-label i18n>Number of Y Axes</mat-label>
-          <input
-            matInput
-            type="number"
-            min="1"
-            [(ngModel)]="componentContent.numDataExplorerYAxis"
-            (ngModelChange)="numDataExplorerYAxisChanged()"
-          />
-        </mat-form-field>
-      </div>
-      @if (componentContent.numDataExplorerYAxis > 1) {
+      @if (componentContent.isDataExplorerEnabled) {
         <div class="flex flex-col gap-2">
-          <span i18n>Choose the Y Axis for each Series</span>
-          @for (
-            s of [].constructor(componentContent.numDataExplorerSeries);
-            track s;
-            let seriesIndex = $index
-          ) {
+          <div class="flex flex-wrap gap-5">
+            <span i18n>Allowed Graph Types:</span>
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="isDataExplorerScatterPlotEnabled"
+              (ngModelChange)="dataExplorerToggleScatterPlot()"
+              i18n
+            >
+              Scatter Plot
+            </mat-checkbox>
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="isDataExplorerLineGraphEnabled"
+              (ngModelChange)="dataExplorerToggleLineGraph()"
+              i18n
+            >
+              Line Graph
+            </mat-checkbox>
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="isDataExplorerBarGraphEnabled"
+              (ngModelChange)="dataExplorerToggleBarGraph()"
+              i18n
+            >
+              Bar Graph
+            </mat-checkbox>
+          </div>
+          @if (isDataExplorerScatterPlotEnabled) {
             <div>
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="componentContent.isDataExplorerScatterPlotRegressionLineEnabled"
+                (ngModelChange)="componentChanged()"
+                i18n
+              >
+                Show Scatter Plot Regression Line
+              </mat-checkbox>
+            </div>
+          }
+          <div>
+            <mat-form-field class="number-input">
+              <mat-label i18n>Number of Series</mat-label>
+              <input
+                matInput
+                type="number"
+                min="1"
+                [(ngModel)]="componentContent.numDataExplorerSeries"
+                (ngModelChange)="numDataExplorerSeriesChanged()"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="number-input">
+              <mat-label i18n>Number of Y Axes</mat-label>
+              <input
+                matInput
+                type="number"
+                min="1"
+                [(ngModel)]="componentContent.numDataExplorerYAxis"
+                (ngModelChange)="numDataExplorerYAxisChanged()"
+              />
+            </mat-form-field>
+          </div>
+          @if (componentContent.numDataExplorerYAxis > 1) {
+            <div class="flex flex-col gap-2">
+              <span i18n>Choose the Y Axis for each Series</span>
+              @for (
+                s of [].constructor(componentContent.numDataExplorerSeries);
+                track s;
+                let seriesIndex = $index
+              ) {
+                <div>
+                  <mat-form-field>
+                    <mat-label><span i18n>Series</span> {{ seriesIndex + 1 }}</mat-label>
+                    <mat-select
+                      [(ngModel)]="componentContent.dataExplorerSeriesParams[seriesIndex].yAxis"
+                      (ngModelChange)="componentChanged()"
+                    >
+                      @for (
+                        y of [].constructor(componentContent.numDataExplorerYAxis);
+                        track y;
+                        let yAxisIndex = $index
+                      ) {
+                        <mat-option [value]="yAxisIndex">
+                          <span i18n>Y Axis</span><span> {{ yAxisIndex + 1 }}</span>
+                        </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              }
+            </div>
+          }
+          <div>
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="componentContent.isDataExplorerAxisLabelsEditable"
+              (ngModelChange)="componentChanged()"
+              i18n
+            >
+              Can Student Edit Axis Labels
+            </mat-checkbox>
+          </div>
+          <div class="gap-5">
+            <div class="fix-data-to-table-column-label flex justify-start items-center gap-2">
+              <span i18n>Fix Data to Table Column</span>
+              <mat-icon
+                matTooltip="You can author x or y data to always use a specific table column. The student will not be able to change the table column for that x or y data. If you want the student to be able to choose the table column, you can leave the select option blank for that x or y data."
+                matTooltipPosition="right"
+                i18n-matTooltip
+              >
+                help
+              </mat-icon>
+            </div>
+            <mat-form-field>
+              <mat-label i18n>X Data</mat-label>
+              <mat-select
+                [(ngModel)]="componentContent.dataExplorerDataToColumn['x']"
+                (ngModelChange)="componentChanged()"
+              >
+                <mat-option [value]="" i18n>(Allow student to select)</mat-option>
+                @for (columnName of columnNames; track columnName; let columnIndex = $index) {
+                  <mat-option [value]="columnIndex">
+                    @if (columnName === '') {
+                      (<span i18n>Table Column</span> {{ columnIndex + 1 }})
+                    }
+                    @if (columnName !== '') {
+                      {{ columnName }}
+                    }
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            @for (
+              y of [].constructor(componentContent.numDataExplorerSeries);
+              track y;
+              let dataExplorerSeriesIndex = $index
+            ) {
               <mat-form-field>
-                <mat-label><span i18n>Series</span> {{ seriesIndex + 1 }}</mat-label>
+                <mat-label i18n
+                  >Y Data
+                  {{
+                    componentContent.numDataExplorerSeries > 1 ? dataExplorerSeriesIndex + 1 : ''
+                  }}</mat-label
+                >
                 <mat-select
-                  [(ngModel)]="componentContent.dataExplorerSeriesParams[seriesIndex].yAxis"
+                  [(ngModel)]="
+                    componentContent.dataExplorerDataToColumn[
+                      'y' + (dataExplorerSeriesIndex > 0 ? dataExplorerSeriesIndex + 1 : '')
+                    ]
+                  "
                   (ngModelChange)="componentChanged()"
                 >
-                  @for (
-                    y of [].constructor(componentContent.numDataExplorerYAxis);
-                    track y;
-                    let yAxisIndex = $index
-                  ) {
-                    <mat-option [value]="yAxisIndex">
-                      <span i18n>Y Axis</span><span> {{ yAxisIndex + 1 }}</span>
+                  <mat-option [value]="" i18n>(Allow student to select)</mat-option>
+                  @for (columnName of columnNames; track columnName; let columnIndex = $index) {
+                    <mat-option [value]="columnIndex">
+                      @if (columnName === '') {
+                        (<span i18n>Table Column</span> {{ columnIndex + 1 }})
+                      }
+                      @if (columnName !== '') {
+                        {{ columnName }}
+                      }
                     </mat-option>
                   }
                 </mat-select>
               </mat-form-field>
-            </div>
-          }
+            }
+          </div>
+          <div class="gap-2">
+            <mat-form-field>
+              <mat-label i18n>Tooltip Header Column</mat-label>
+              <mat-select
+                [(ngModel)]="componentContent.dataExplorerTooltipHeaderColumn"
+                (ngModelChange)="componentChanged()"
+              >
+                <mat-option [value]="" i18n>(Default)</mat-option>
+                @for (columnName of columnNames; track columnName; let columnIndex = $index) {
+                  <mat-option [value]="columnIndex">
+                    @if (columnName === '') {
+                      (<span i18n>Table Column</span> {{ columnIndex + 1 }})
+                    }
+                    @if (columnName !== '') {
+                      {{ columnName }}
+                    }
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-icon
+              matTooltip="When the student hovers their mouse over a data point on a scatter plot or line graph, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal."
+              matTooltipPosition="right"
+              i18n-matTooltip
+            >
+              help
+            </mat-icon>
+          </div>
         </div>
       }
-      <div>
-        <mat-checkbox
-          color="primary"
-          [(ngModel)]="componentContent.isDataExplorerAxisLabelsEditable"
-          (ngModelChange)="componentChanged()"
-          i18n
-        >
-          Can Student Edit Axis Labels
-        </mat-checkbox>
-      </div>
-      <div class="gap-5">
-        <div class="fix-data-to-table-column-label flex justify-start items-center gap-2">
-          <span i18n>Fix Data to Table Column</span>
-          <mat-icon
-            matTooltip="You can author x or y data to always use a specific table column. The student will not be able to change the table column for that x or y data. If you want the student to be able to choose the table column, you can leave the select option blank for that x or y data."
-            matTooltipPosition="right"
-            i18n-matTooltip
-          >
-            help
-          </mat-icon>
-        </div>
-        <mat-form-field>
-          <mat-label i18n>X Data</mat-label>
-          <mat-select
-            [(ngModel)]="componentContent.dataExplorerDataToColumn['x']"
-            (ngModelChange)="componentChanged()"
-          >
-            <mat-option [value]="" i18n>(Allow student to select)</mat-option>
-            @for (columnName of columnNames; track columnName; let columnIndex = $index) {
-              <mat-option [value]="columnIndex">
-                @if (columnName === '') {
-                  (<span i18n>Table Column</span> {{ columnIndex + 1 }})
-                }
-                @if (columnName !== '') {
-                  {{ columnName }}
-                }
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-        @for (
-          y of [].constructor(componentContent.numDataExplorerSeries);
-          track y;
-          let dataExplorerSeriesIndex = $index
-        ) {
-          <mat-form-field>
-            <mat-label i18n
-              >Y Data
-              {{
-                componentContent.numDataExplorerSeries > 1 ? dataExplorerSeriesIndex + 1 : ''
-              }}</mat-label
-            >
-            <mat-select
-              [(ngModel)]="
-                componentContent.dataExplorerDataToColumn[
-                  'y' + (dataExplorerSeriesIndex > 0 ? dataExplorerSeriesIndex + 1 : '')
-                ]
-              "
-              (ngModelChange)="componentChanged()"
-            >
-              <mat-option [value]="" i18n>(Allow student to select)</mat-option>
-              @for (columnName of columnNames; track columnName; let columnIndex = $index) {
-                <mat-option [value]="columnIndex">
-                  @if (columnName === '') {
-                    (<span i18n>Table Column</span> {{ columnIndex + 1 }})
-                  }
-                  @if (columnName !== '') {
-                    {{ columnName }}
-                  }
-                </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        }
-      </div>
-      <div class="gap-2">
-        <mat-form-field>
-          <mat-label i18n>Tooltip Header Column</mat-label>
-          <mat-select
-            [(ngModel)]="componentContent.dataExplorerTooltipHeaderColumn"
-            (ngModelChange)="componentChanged()"
-          >
-            <mat-option [value]="" i18n>(Default)</mat-option>
-            @for (columnName of columnNames; track columnName; let columnIndex = $index) {
-              <mat-option [value]="columnIndex">
-                @if (columnName === '') {
-                  (<span i18n>Table Column</span> {{ columnIndex + 1 }})
-                }
-                @if (columnName !== '') {
-                  {{ columnName }}
-                }
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-        <mat-icon
-          matTooltip="When the student hovers their mouse over a data point on a scatter plot or line graph, the tooltip will display the value from this column along with the x and y values. This can be left blank and the tooltip will still show the x and y values like normal."
-          matTooltipPosition="right"
-          i18n-matTooltip
-        >
-          help
-        </mat-icon>
-      </div>
     </div>
-  }
-</div>
-<div class="flex justify-start items-center">
-  <button
-    mat-raised-button
-    color="primary"
-    class="import-table-button flex justify-center items-center"
-  >
-    <span i18n>Import Table</span>
-    <input
-      type="file"
-      accept=".csv"
-      class="import-table-input"
-      (change)="importTableFile($event)"
+    <div class="flex justify-start items-center">
+      <button
+        mat-raised-button
+        color="primary"
+        class="import-table-button flex justify-center items-center"
+      >
+        <span i18n>Import Table</span>
+        <input
+          type="file"
+          accept=".csv"
+          class="import-table-input"
+          (change)="importTableFile($event)"
+        />
+      </button>
+      <mat-icon
+        matTooltip="Only .csv (comma separated values) files are allowed"
+        i18n-matTooltip
+        tabindex="0"
+        aria-role="button"
+      >
+        help
+      </mat-icon>
+      @if (isImportingTable) {
+        <mat-progress-spinner class="import-table-spinner" mode="indeterminate" [diameter]="20">
+        </mat-progress-spinner>
+      }
+      <div class="import-table-message">{{ importTableMessage }}</div>
+    </div>
+    @if (isNotebookEnabled()) {
+      <div>
+        <edit-component-add-to-notebook-button [componentContent]="componentContent" />
+      </div>
+    }
+    <edit-component-save-button [componentContent]="componentContent" />
+    <br />
+    <edit-component-submit-button [componentContent]="componentContent" />
+    <div>
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="componentContent.enableRowSelection"
+        (ngModelChange)="componentChanged()"
+        i18n
+      >
+        Enable Row Selection
+      </mat-checkbox>
+    </div>
+    @if (componentContent.showSubmitButton) {
+      <edit-component-max-submit [componentContent]="componentContent" />
+    }
+    <edit-component-default-feedback [componentContent]="componentContent" />
+    <div class="flex flex-col justify-start items-start">
+      <edit-component-max-score [componentContent]="componentContent" />
+      <edit-component-exclude-from-total-score [componentContent]="componentContent" />
+      <edit-component-width [componentContent]="componentContent" />
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>visibility</mat-icon>&nbsp;<span i18n>Visibility</span>
+    </ng-template>
+    <edit-component-constraints [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>join_inner</mat-icon>&nbsp;<span i18n>Connections</span>
+    </ng-template>
+    <edit-table-connected-components
+      [nodeId]="nodeId"
+      [componentId]="componentId"
+      [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
+      [componentContent]="componentContent"
+      [connectedComponents]="componentContent.connectedComponents"
+      (connectedComponentsChanged)="connectedComponentsChanged($event)"
     />
-  </button>
-  <mat-icon
-    matTooltip="Only .csv (comma separated values) files are allowed"
-    i18n-matTooltip
-    tabindex="0"
-    aria-role="button"
-  >
-    help
-  </mat-icon>
-  @if (isImportingTable) {
-    <mat-progress-spinner class="import-table-spinner" mode="indeterminate" [diameter]="20">
-    </mat-progress-spinner>
-  }
-  <div class="import-table-message">{{ importTableMessage }}</div>
-</div>
-@if (isNotebookEnabled()) {
-  <div>
-    <edit-component-add-to-notebook-button [componentContent]="componentContent" />
-  </div>
-}
-<edit-component-save-button [componentContent]="componentContent" />
-<br />
-<edit-component-submit-button [componentContent]="componentContent" />
-<div>
-  <mat-checkbox
-    color="primary"
-    [(ngModel)]="componentContent.enableRowSelection"
-    (ngModelChange)="componentChanged()"
-    i18n
-  >
-    Enable Row Selection
-  </mat-checkbox>
-</div>
-@if (componentContent.showSubmitButton) {
-  <edit-component-max-submit [componentContent]="componentContent" />
-}
-<edit-component-default-feedback [componentContent]="componentContent" />
-<div class="flex flex-col justify-start items-start">
-  <edit-component-max-score [componentContent]="componentContent" />
-  <edit-component-exclude-from-total-score [componentContent]="componentContent" />
-  <edit-component-width [componentContent]="componentContent" />
-  <edit-component-rubric [componentContent]="componentContent" />
-  <edit-component-tags [componentContent]="componentContent" />
-</div>
-<edit-table-connected-components
-  [nodeId]="nodeId"
-  [componentId]="componentId"
-  [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-  [componentContent]="componentContent"
-  [connectedComponents]="componentContent.connectedComponents"
-  (connectedComponentsChanged)="connectedComponentsChanged($event)"
-/>
-<edit-component-constraints [componentContent]="component.content" />
-<edit-component-json [component]="component" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>message</mat-icon>&nbsp;<span i18n>Rubric</span>
+    </ng-template>
+    <ng-template matTabContent>
+      <!-- lazy load needed for tinymce to work -->
+      <edit-component-rubric [componentContent]="component.content" />
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>sell</mat-icon>&nbsp;<span i18n>Tags</span></ng-template>
+    <edit-component-tags [componentContent]="component.content" />
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>code</mat-icon>&nbsp;<span i18n>JSON</span></ng-template>
+    <edit-component-json [component]="component" />
+  </mat-tab>
+</mat-tab-group>

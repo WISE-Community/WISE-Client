@@ -1,21 +1,39 @@
 import { Component, Inject, DOCUMENT } from '@angular/core';
-
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { Subscription } from 'rxjs';
 import { UtilService } from './services/util.service';
 import { ConfigService } from './services/config.service';
 import { Announcement } from './domain/announcement';
 import { environment } from '../environments/environment';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
+import { MobileMenuComponent } from './modules/mobile-menu/mobile-menu.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
+import { HeaderComponent } from './modules/header/header.component';
+import { FooterComponent } from './modules/footer/footer.component';
+
 declare let gtag: Function;
 
 @Component({
+  imports: [
+    CommonModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterModule,
+    MobileMenuComponent,
+    AnnouncementComponent,
+    HeaderComponent,
+    FooterComponent
+  ],
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: false
+  styleUrl: './app.component.scss',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'app';

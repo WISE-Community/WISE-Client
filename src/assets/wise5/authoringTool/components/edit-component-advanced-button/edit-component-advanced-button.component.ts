@@ -8,9 +8,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-    selector: 'edit-component-advanced-button',
-    templateUrl: 'edit-component-advanced-button.component.html'
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  selector: 'edit-component-advanced-button',
+  templateUrl: 'edit-component-advanced-button.component.html'
 })
 export class EditComponentAdvancedButtonComponent {
   @Input() componentContent: ComponentContent;
@@ -20,7 +20,7 @@ export class EditComponentAdvancedButtonComponent {
 
   protected showComponentAdvancedAuthoring(): void {
     this.dialog.open(EditComponentAdvancedComponent, {
-      data: new WiseComponent(this.componentContent, this.nodeId),
+      data: { component: new WiseComponent(this.componentContent, this.nodeId), tab: 'general' },
       width: '80%'
     });
   }

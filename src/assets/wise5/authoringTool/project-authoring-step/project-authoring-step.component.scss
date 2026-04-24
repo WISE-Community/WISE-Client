@@ -1,19 +1,15 @@
 .step {
   height: 50px;
   padding: 4px;
-  margin: 4px 4px 4px 30px;
   border: 2px solid #dddddd;
   border-radius: 6px;
   position: relative;
   cursor: pointer;
+  background-color: white;
 }
 
 .step:hover {
   background-color: #add8e6 !important;
-}
-
-.branch-path-step {
-  margin-left: 55px !important;
 }
 
 .step-action {
@@ -26,8 +22,8 @@
   }
 }                       
 
-.rotate-180 {
-  transform: rotate(180deg);
+.flip-vertical {
+  transform: scaleY(-1);
 }
 
 .tooltip-helper {

@@ -1,14 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class RubricEventService {
-  private isRubricOpen: boolean;
+  private rubricDisplayed: boolean;
 
-  getIsRubricOpen(): boolean {
-    return this.isRubricOpen;
+  isRubricDisplayed(): boolean {
+    return this.rubricDisplayed;
   }
 
-  rubricToggled(): void {
-    this.isRubricOpen = !this.isRubricOpen;
+  toggleRubricDisplayed(): void {
+    this.rubricDisplayed = !this.rubricDisplayed;
   }
 }

@@ -5,7 +5,7 @@ import { Project } from '../../../app/domain/project';
 import { Tag } from '../../../app/domain/tag';
 import { ProjectAndTagsResponse } from '../../../app/domain/projectAndTagsResponse';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProjectTagService {
   private newTagSource: Subject<Tag> = new Subject<Tag>();
   public newTag$: Observable<Tag> = this.newTagSource.asObservable();

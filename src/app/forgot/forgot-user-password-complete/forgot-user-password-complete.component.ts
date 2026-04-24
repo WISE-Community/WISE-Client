@@ -4,8 +4,8 @@ import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
 @Component({
-    templateUrl: './forgot-user-password-complete.component.html',
-    imports: [MatCard, MatCardContent, MatButton]
+  imports: [MatCard, MatCardContent, MatButton],
+  templateUrl: './forgot-user-password-complete.component.html'
 })
 export class ForgotUserPasswordCompleteComponent {
   @Input() username: string;

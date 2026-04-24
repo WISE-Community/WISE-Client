@@ -1,17 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RegisterTeacherFormComponent } from './register-teacher-form.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { TeacherService } from '../../teacher/teacher.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from '../../services/user.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import * as helpers from '../register-user-form/register-user-form-spec-helpers';
 import {
   nameTests,
@@ -45,25 +38,14 @@ let snackBar: MatSnackBar;
 describe('RegisterTeacherFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterTeacherFormComponent],
-      imports: [
-        BrowserAnimationsModule,
-        MatCheckboxModule,
-        MatInputModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        PasswordModule,
-        ReactiveFormsModule,
-        RecaptchaV3Module,
-        RouterTestingModule
-      ],
+      imports: [PasswordModule, RecaptchaV3Module, RegisterTeacherFormComponent],
       providers: [
         { provide: ConfigService, useClass: MockConfigService },
         { provide: TeacherService, useClass: MockTeacherService },
         { provide: UserService, useClass: MockUserService },
-        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: '' },
+        provideRouter([])
+      ]
     }).compileComponents();
   }));
 

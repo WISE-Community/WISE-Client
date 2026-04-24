@@ -1,0 +1,28 @@
+<mat-expansion-panel
+  [disabled]="idea.count === 0"
+  [hideToggle]="idea.count === 0"
+  [style.background-color]="idea.color"
+  (opened)="toggleDetails()"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span class="text-sm">{{ idea.id }}. {{ idea.text }}</span>
+    </mat-panel-title>
+    <mat-panel-description>
+      <span class="font-normal text-sm flex items-center">
+        <mat-icon class="mat-18">person</mat-icon>{{ idea.count }}
+      </span>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="text-sm bg-white p-1 rounded">
+    <div class="flex flex-wrap justify-between gap-2">
+      <span i18n>Sample responses:</span>
+      <a (click)="showAllResponses()" i18n>View all</a>
+    </div>
+    <ul>
+      @for (response of sampleResponses; track response.timestamp) {
+        <li>"{{ response.text }}"</li>
+      }
+    </ul>
+  </div>
+</mat-expansion-panel>

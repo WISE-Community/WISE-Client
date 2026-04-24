@@ -15,6 +15,7 @@ import { ComponentTypeService } from '../../../../services/componentTypeService'
 import { ComponentSummaryComponent } from '../../component-summary/component-summary.component';
 import { FormControl } from '@angular/forms';
 import { AnnotationService } from '../../../../services/annotationService';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   imports: [
@@ -24,6 +25,7 @@ import { AnnotationService } from '../../../../services/annotationService';
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
+    MatTooltipModule,
     NodeClassResponsesComponent
   ],
   styles: [
@@ -44,6 +46,7 @@ import { AnnotationService } from '../../../../services/annotationService';
   templateUrl: './node-grading.component.html'
 })
 export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
+  protected classResponsesVisible: boolean = true;
   protected components: ComponentContent[];
   protected hasWork: boolean;
   protected node: Node;
@@ -101,11 +104,12 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
       .filter((component) => this.projectService.componentHasWork(component))
       .map((component, index) => {
         component['displayIndex'] = index + 1;
-        return component;
+        return this.projectService.injectAssetPaths(component);
       });
-    this.visibleComponents = this.components;
+    this.visibleComponents = [this.components[0]];
     this.numRubrics = this.node.getNumRubrics();
     this.setPeriod();
+    this.showImportantComponent();
   }
 
   private setPeriod(): void {
@@ -128,6 +132,13 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
     ).completionPct;
   }
 
+  private showImportantComponent(): void {
+    const component = this.components.find((component) => component.tags?.includes('!important'));
+    if (component) {
+      this.selectSummary(this.components.findIndex((c) => c.id === component.id));
+    }
+  }
+
   protected setVisibleComponents(visibleComponents: ComponentContent[]): void {
     this.visibleComponents = visibleComponents;
   }
@@ -143,5 +154,15 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
   protected toggleSummaries(event: Event): void {
     event.preventDefault();
     this.summariesVisible = !this.summariesVisible;
+  }
+
+  protected selectSummary(componentIndex: number): void {
+    this.selectedComponent.setValue(componentIndex);
+    this.visibleComponents = [this.components[componentIndex]];
+  }
+
+  protected toggleClassResponses(event: Event): void {
+    event.preventDefault();
+    this.classResponsesVisible = !this.classResponsesVisible;
   }
 }

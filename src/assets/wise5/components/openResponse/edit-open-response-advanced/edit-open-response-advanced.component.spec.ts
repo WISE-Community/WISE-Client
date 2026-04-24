@@ -1,7 +1,5 @@
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
 import { ComponentContent } from '../../../common/ComponentContent';
@@ -33,6 +31,7 @@ describe('EditOpenResponseAdvancedComponent', () => {
   beforeEach(() => {
     const projectService = TestBed.inject(TeacherProjectService);
     spyOn(projectService, 'getComponent').and.returnValue({} as ComponentContent);
+    spyOn(TestBed.inject(TeacherProjectService), 'getProject').and.returnValue({});
     spyOn(TestBed.inject(NotebookService), 'isNotebookEnabled').and.returnValue(true);
     spyOn(projectService, 'getFlattenedProjectAsNodeIds').and.returnValue([
       'node1',
@@ -48,7 +47,6 @@ describe('EditOpenResponseAdvancedComponent', () => {
     fixture.detectChanges();
   });
 
-  enableCRaterClicked();
   addScoringRule();
   scoringRuleDeleteClicked();
   addMultipleAttemptScoringRule();
@@ -62,19 +60,6 @@ describe('EditOpenResponseAdvancedComponent', () => {
   deleteCompletionCriteria();
   setFeedbackEnabled();
 });
-
-function enableCRaterClicked() {
-  describe('enableCRaterClicked', () => {
-    it('should handle enable CRater clicked', async () => {
-      expect(component.componentContent.enableCRater).toBeFalsy();
-      const loader = TestbedHarnessEnvironment.loader(fixture);
-      const checkboxes = await loader.getAllHarnesses(MatCheckboxHarness);
-      await checkboxes[1].check();
-      expect(component.componentContent.enableCRater).toBeTruthy();
-      expect(component.componentContent.cRater).toEqual(component.createCRaterObject());
-    });
-  });
-}
 
 function addScoringRule() {
   describe('addScoringRule', () => {

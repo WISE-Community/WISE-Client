@@ -14,17 +14,18 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { ComponentTypeButtonComponent } from '../../components/component-type-button/component-type-button.component';
+import { ComponentTypeGroupComponent } from '../../../../../app/authoring-tool/component-type-group/component-type-group.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from '@angular/material/input';
 import { InsertFirstNodeInBranchPathService } from '../../../services/insertFirstNodeInBranchPathService';
 import { AddStepTarget } from '../../../../../app/domain/addStepTarget';
+import { ensureDefaultIcon } from '../../../common/Node';
 
 @Component({
   imports: [
-    ComponentTypeButtonComponent,
+    ComponentTypeGroupComponent,
     DragDropModule,
     FormsModule,
     MatButtonModule,
@@ -43,7 +44,7 @@ export class AddYourOwnNodeComponent {
   protected addNodeFormGroup: FormGroup = this.fb.group({
     title: new FormControl($localize`New Step`, [Validators.required])
   });
-  protected componentTypes: any[];
+  protected componentGroups: any[];
   protected initialComponents: string[] = [];
   protected submitting: boolean;
   protected target: AddStepTarget;
@@ -57,7 +58,7 @@ export class AddYourOwnNodeComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.componentTypes = this.componentTypeService.getComponentTypes();
+    this.componentGroups = this.componentTypeService.getComponentGroups();
   }
 
   ngOnInit(): void {
@@ -79,6 +80,12 @@ export class AddYourOwnNodeComponent {
   protected submit(): void {
     this.submitting = true;
     const newNode = this.projectService.createNode(this.addNodeFormGroup.controls['title'].value);
+    const groupNode =
+      this.target.type === 'in'
+        ? this.projectService.getNodeById(this.target.targetId)
+        : this.projectService.getParentGroup(this.target.targetId);
+    ensureDefaultIcon([groupNode]);
+    newNode.icon.color = groupNode.icon.color;
     switch (this.target.type) {
       case 'in':
         this.projectService.createNodeInside(newNode, this.target.targetId);
@@ -98,10 +105,6 @@ export class AddYourOwnNodeComponent {
     this.save().then(() => {
       this.router.navigate(['../..'], { relativeTo: this.route });
     });
-  }
-
-  protected isGroupNode(nodeId: string): boolean {
-    return this.projectService.isGroupNode(nodeId);
   }
 
   private addInitialComponents(nodeId: string, components: any[]): void {

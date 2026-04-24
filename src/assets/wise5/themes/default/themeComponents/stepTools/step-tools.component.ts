@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,10 +13,13 @@ import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { ProjectService } from '../../../../services/projectService';
 import { StudentDataService } from '../../../../services/studentDataService';
 import { Subscription } from 'rxjs';
+import { NotebookLauncherComponent } from '../../../../../../app/notebook/notebook-launcher/notebook-launcher.component';
+import { ChatbotLauncherComponent } from '../../../../../../app/chatbot/chatbot-launcher/chatbot-launcher.component';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
+    ChatbotLauncherComponent,
     CommonModule,
     FormsModule,
     MatButtonModule,
@@ -25,13 +28,16 @@ import { Subscription } from 'rxjs';
     MatSelectModule,
     MatTooltipModule,
     NodeIconComponent,
-    NodeStatusIconComponent
+    NodeStatusIconComponent,
+    NotebookLauncherComponent
   ],
   selector: 'step-tools',
   styleUrl: './step-tools.component.scss',
   templateUrl: './step-tools.component.html'
 })
 export class StepToolsComponent implements OnInit {
+  @Input() chatbotEnabled: boolean;
+  @Output() toggleChatbot = new EventEmitter<void>();
   protected icons: any;
   protected isSurvey: boolean;
   protected is_rtl: boolean;
@@ -40,7 +46,9 @@ export class StepToolsComponent implements OnInit {
   protected nodeIds: string[];
   protected nodeStatus: any;
   protected nodeStatuses: any;
+  @Input() notebookConfig: any;
   protected prevId: string;
+  @Input() stepView: boolean;
   private subscriptions: Subscription = new Subscription();
   protected toNodeId: string;
 
@@ -121,5 +129,9 @@ export class StepToolsComponent implements OnInit {
 
   protected closeNode(): void {
     this.nodeService.closeNode();
+  }
+
+  protected emitToggleChatbot(): void {
+    this.toggleChatbot.emit();
   }
 }
