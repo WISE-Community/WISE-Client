@@ -136,6 +136,12 @@ html {
     small-focus-container-elevation-shadow: var(--mat-sys-level3),
   ));
 
+  /* Button Toggle */
+    @include mat.button-toggle-overrides((
+      divider-color: var(--mat-sys-outline-variant),
+      shape: var(--mat-sys-corner-small),
+    ));
+
   /* Card */
 
   @include mat.card-overrides((

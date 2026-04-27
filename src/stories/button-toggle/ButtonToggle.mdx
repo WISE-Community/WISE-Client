@@ -1,0 +1,27 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as ButtonToggleStories from './button-toggle.stories';
+
+<Meta of={ButtonToggleStories} name="Docs" />
+
+# Button Toggle
+
+<p>
+  WISE button toggles are used to group related options and allow users to select one or more of
+  them.
+</p>
+<p>
+  Button toggles can be configured to allow single or multiple selection. When used in
+  single-selection mode, they behave like radio buttons; in multiple-selection mode, they behave
+  like checkboxes.
+</p>
+<p>
+  WISE uses a customized version of the [Button
+  Toggle](https://material.angular.dev/components/button-toggle/overview) component from [Angular
+  Material](https://material.angular.dev). Check out the Angular Material documentation for more
+  information.
+</p>
+
+<Canvas of={ButtonToggleStories.Default} />
+<Controls of={ButtonToggleStories.Default} />
+
+<Stories of={ButtonToggleStories} includePrimary={false} />
