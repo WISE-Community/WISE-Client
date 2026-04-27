@@ -37,7 +37,7 @@ html {
       error: theme-colors.$error-palette,
     ),
     typography: (
-      plain-family: Roboto,
+      plain-family: "Noto Sans",
       brand-family: Raleway,
     ),
   ));
@@ -50,15 +50,15 @@ html {
   @include theme-typography.typography-hierarchy;
 
   @include mat.theme-overrides((
-    label-small: 500 0.75rem / 1rem Roboto,
-    label-medium: 500 0.875rem / 1.25rem Roboto,
-    label-large: 500 1rem / 1.5rem Roboto,
-    body-small: 400 0.875rem / 1.25rem Roboto,
-    body-medium: 400 1rem / 1.5rem Roboto,
-    body-large: 400 1.125rem / 1.625rem Roboto,
-    title-small: 500 1rem / 1.5rem Roboto,
-    title-medium: 500 1.125rem / 1.625rem Roboto,
-    title-large: 500 1.25rem / 1.75rem Roboto,
+    label-small: 500 0.75rem / 1rem Noto Sans,
+    label-medium: 500 0.875rem / 1.25rem Noto Sans,
+    label-large: 500 1rem / 1.5rem Noto Sans,
+    body-small: 400 0.875rem / 1.25rem Noto Sans,
+    body-medium: 400 1rem / 1.5rem Noto Sans,
+    body-large: 400 1.125rem / 1.625rem Noto Sans,
+    title-small: 500 1rem / 1.5rem Noto Sans,
+    title-medium: 500 1.125rem / 1.625rem Noto Sans,
+    title-large: 500 1.25rem / 1.75rem Noto Sans,
     headline-small: 600 1.5rem / 2rem Raleway,
     headline-medium: 600 1.75rem / 2.25rem Raleway,
     headline-large: 600 2rem / 2.5rem Raleway,
@@ -139,7 +139,7 @@ html {
   /* Card */
 
   @include mat.card-overrides((
-    title-text-font: Roboto,
+    title-text-font: "Noto Sans",
     title-text-weight: 500,
     title-text-size: 20px,
     subtitle-text-weight: 400,

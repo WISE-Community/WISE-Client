@@ -42,7 +42,7 @@ export class MilestoneReportGraphComponent implements OnInit {
         type: 'column',
         height: 248,
         style: {
-          fontFamily: 'Roboto,Helvetica Neue,sans-serif'
+          fontFamily: '"Noto Sans",sans-serif'
         }
       },
       title: {

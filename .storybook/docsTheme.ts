@@ -2,7 +2,7 @@ import { create } from 'storybook/theming';
 
 export default create({
   base: 'light',
-  fontBase: '"Roboto", sans-serif',
+  fontBase: '"Noto Sans", sans-serif',
   brandTitle: 'WISE',
   brandUrl: 'https://wise.berkeley.edu',
   brandTarget: '_self',
