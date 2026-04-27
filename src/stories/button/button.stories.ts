@@ -43,7 +43,7 @@ export const Default: Story = {
         <a href="https://wise.berkeley.edu" target="_blank" matButton${args.matButton ? '="' + args.matButton + '"' : ''}${args.color ? ' class="' + args.color + '"' : ''}>Link</a>
       </div>`
   }),
-  tags: ['!autodocs', '!dev']
+  tags: ['!dev']
 };
 
 export const Text: Story = {

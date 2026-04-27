@@ -1,14 +1,19 @@
 import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
 import * as ExpansionPanelStories from './expansion-panel.stories';
 
-<Meta of={ExpansionPanelStories} name='Docs' />
+<Meta of={ExpansionPanelStories} name="Docs" />
 
 # Expansion Panel
 
 <p>WISE expansion panels are used to create collapsible sections of content.</p>
-<p>WISE uses a customized version of the [Expansion Panel](https://material.angular.io/components/expansion/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+<p>
+  WISE uses a customized version of the [Expansion
+  Panel](https://material.angular.dev/components/expansion/overview) component from [Angular
+  Material](https://material.angular.dev). Check out the Angular Material documentation for more
+  information.
+</p>
 
 <Canvas of={ExpansionPanelStories.Basic} />
-<Controls />
+<Controls of={ExpansionPanelStories.Basic} />
 
 <Stories of={ExpansionPanelStories} includePrimary={false} />

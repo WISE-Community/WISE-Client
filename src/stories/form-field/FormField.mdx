@@ -1,14 +1,14 @@
 import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
 import * as FormFieldStories from './form-field.stories';
 
-<Meta of={FormFieldStories} name='Docs' />
+<Meta of={FormFieldStories} name="Docs" />
 
 # Form Field
 
 <p>WISE form fields are used to wrap different input types (`<input>`, `<select>`, `<textarea>`) to provide common text field styles and features.</p>
-<p>WISE uses a customized version of the [Form Field](https://material.angular.io/components/form-field/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+<p>WISE uses a customized version of the [Form Field](https://material.angular.dev/components/form-field/overview) component from [Angular Material](https://material.angular.dev). Check out the Angular Material documentation for more information.</p>
 
 <Canvas of={FormFieldStories.Basic} />
-<Controls />
+<Controls of={FormFieldStories.Basic} />
 
 <Stories of={FormFieldStories} includePrimary={false} />

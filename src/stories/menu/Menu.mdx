@@ -1,14 +1,18 @@
 import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
 import * as MenuStories from './menu.stories';
 
-<Meta of={MenuStories} name='Docs' />
+<Meta of={MenuStories} name="Docs" />
 
 # Menu
 
 <p>WISE menus are floating panels containing lists of options.</p>
-<p>WISE uses a customized version of the [Menu](https://material.angular.io/components/menu/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+<p>
+  WISE uses a customized version of the
+  [Menu](https://material.angular.dev/components/menu/overview) component from [Angular
+  Material](https://material.angular.dev). Check out the Angular Material documentation for more
+  information.
+</p>
 
 <Canvas of={MenuStories.Basic} />
-<Controls />
 
 <Stories of={MenuStories} includePrimary={false} />

@@ -7,9 +7,13 @@ import * as ListStories from './list.stories';
 
 <p>WISE Lists are container components that wrap and format list items.</p>
 
-<p>WISE uses a customized version of [List](https://material.angular.io/components/list/overview) from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+<p>
+  WISE uses a customized version of [List](https://material.angular.dev/components/list/overview)
+  from [Angular Material](https://material.angular.dev). Check out the Angular Material
+  documentation for more information.
+</p>
 
 <Canvas of={ListStories.Basic} />
-<Controls />
+<Controls of={ListStories.Basic} />
 
 <Stories of={ListStories} includePrimary={false} />

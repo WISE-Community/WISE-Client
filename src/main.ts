@@ -19,6 +19,7 @@ import {
   withRouterConfig
 } from '@angular/router';
 import { appRoutes } from './app/app-routing.module';
+import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 
 if (environment.production) {
   enableProdMode();
@@ -78,6 +79,13 @@ bootstrapApplication(AppComponent, {
         duration: 10000,
         verticalPosition: 'bottom',
         horizontalPosition: 'start'
+      }
+    },
+    {
+      provide: MAT_TABS_CONFIG,
+      useValue: {
+        animationDuration: '250ms',
+        stretchTabs: false
       }
     },
     {

@@ -1,14 +1,19 @@
 import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
 import * as ProgressBarStories from './progress-bar.stories';
 
-<Meta of={ProgressBarStories} name='Docs' />
+<Meta of={ProgressBarStories} name="Docs" />
 
 # Progress Bar
 
 <p>WISE progress bars are used to give users feedback on the progress of a workflow or action.</p>
-<p>WISE uses a customized version of the [Progress Bar](https://material.angular.io/components/progress-bar/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+<p>
+  WISE uses a customized version of the [Progress
+  Bar](https://material.angular.dev/components/progress-bar/overview) component from [Angular
+  Material](https://material.angular.dev). Check out the Angular Material documentation for more
+  information.
+</p>
 
 <Canvas of={ProgressBarStories.Basic} />
-<Controls />
+<Controls of={ProgressBarStories.Basic} />
 
 <Stories of={ProgressBarStories} includePrimary={false} />

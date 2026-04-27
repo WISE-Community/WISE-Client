@@ -371,7 +371,8 @@ html {
   ));
 
   .mat-mdc-snackbar-surface {
-    border: 2px solid,
+    border: 1px solid;
+    border-color: var(--mat-sys-outline);
   }
 
   /* Tabs */

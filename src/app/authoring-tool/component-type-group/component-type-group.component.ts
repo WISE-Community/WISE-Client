@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
   imports: [ComponentTypeButtonComponent, MatCardModule],
   selector: 'component-type-group',
   styles: `
-    @import 'tailwindcss';
+    @reference 'tailwindcss';
     :host {
       --mat-card-filled-container-color: var(--color-gray-100);
       --mat-card-title-text-size: var(--mat-sys-title-medium-font-size);

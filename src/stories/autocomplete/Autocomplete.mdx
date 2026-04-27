@@ -6,12 +6,17 @@ import exampleTemplate from '!!raw-loader!./autocomplete-filter/autocomplete-fil
 import chipsCode from '!!raw-loader!./chips-autocomplete/chips-autocomplete.component.ts';
 import chipsTemplate from '!!raw-loader!./chips-autocomplete/chips-autocomplete.component.html';
 
-<Meta of={AutocompleteStories} name='Docs' />
+<Meta of={AutocompleteStories} name="Docs" />
 
 # Autocomplete
 
 <p>WISE autocompletes are text inputs enhanced by a panel of suggested options.</p>
-<p>WISE uses a customized version of the [Autocomplete](https://material.angular.io/components/autocomplete/overview) component from [Angular Material](https://material.angular.io). Check out the Angular Material documentation for more information.</p>
+<p>
+  WISE uses a customized version of the
+  [Autocomplete](https://material.angular.dev/components/autocomplete/overview) component from
+  [Angular Material](https://material.angular.dev). Check out the Angular Material documentation for
+  more information.
+</p>
 
 <Unstyled>
   <h2 class="stories-heading">
@@ -45,17 +50,17 @@ import chipsTemplate from '!!raw-loader!./chips-autocomplete/chips-autocomplete.
 
 <Unstyled>
   <div class="story-with-code">
-  <Story of={AutocompleteStories.ChipsAutocomplete} />
+    <Story of={AutocompleteStories.ChipsAutocomplete} />
     <div class="mt-4">
       <Tabs>
         <TabList>
           <Tab>HTML</Tab>
           <Tab>TS</Tab>
         </TabList>
-        <TabPanel style={{ minHeight: "560px" }}>
+        <TabPanel style={{ minHeight: '560px' }}>
           <Source code={chipsTemplate} language="html" dark />
         </TabPanel>
-        <TabPanel style={{ minHeight: "560px" }}>
+        <TabPanel style={{ minHeight: '560px' }}>
           <Source code={chipsCode} language="typescript" dark />
         </TabPanel>
       </Tabs>
