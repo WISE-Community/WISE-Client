@@ -20,7 +20,7 @@
     </details>
   } @else {
     <ng-container *ngTemplateOutlet="postContent; context: { $implicit: true }" />
-    <ng-container *ngTemplateOutlet="commentsSection; context: { $implicit: false }" />
+    <ng-container *ngTemplateOutlet="commentsSection" />
   }
 </mat-card>
 
