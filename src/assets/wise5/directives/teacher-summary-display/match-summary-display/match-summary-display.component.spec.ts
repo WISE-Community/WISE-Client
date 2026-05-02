@@ -51,7 +51,31 @@ describe('MatchSummaryDisplayComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('Bucket view', () => {
+    it('should display one card per unique non-source bucket', () => {
+      expect(fixtureQueryAll(fixture, '.bucket-card').length).toBe(2);
+    });
+
+    it('should show choices sorted by count within each bucket', () => {
+      const cards = fixtureQueryAll(fixture, '.bucket-card');
+      const bucket1Card = cards[0];
+      const choiceRows = bucket1Card.querySelectorAll('.choice-row');
+      expect(choiceRows.length).toBe(3);
+      expect(choiceRows[0].textContent).toContain('Choice B');
+      expect(choiceRows[0].textContent).toContain('3');
+      expect(choiceRows[1].textContent).toContain('Choice C');
+      expect(choiceRows[1].textContent).toContain('2');
+      expect(choiceRows[2].textContent).toContain('Choice D');
+      expect(choiceRows[2].textContent).toContain('1');
+    });
+  });
+
   describe('Choice view', () => {
+    beforeEach(() => {
+      component.viewMode = 'choice';
+      fixture.detectChanges();
+    });
+
     it('should display one card per unique choice', () => {
       expect(fixtureQueryAll(fixture, '.choice-card').length).toEqual(5);
     });
@@ -86,30 +110,6 @@ describe('MatchSummaryDisplayComponent', () => {
       const choiceACard = cards[4];
       expect(choiceACard.textContent).toContain('Not moved by any students');
       expect(choiceACard.querySelectorAll('.bucket-row').length).toEqual(1);
-    });
-  });
-
-  describe('Bucket view', () => {
-    beforeEach(() => {
-      component.viewMode = 'bucket';
-      fixture.detectChanges();
-    });
-
-    it('should display one card per unique non-source bucket', () => {
-      expect(fixtureQueryAll(fixture, '.bucket-card').length).toBe(2);
-    });
-
-    it('should show choices sorted by count within each bucket', () => {
-      const cards = fixtureQueryAll(fixture, '.bucket-card');
-      const bucket1Card = cards[0];
-      const choiceRows = bucket1Card.querySelectorAll('.choice-row');
-      expect(choiceRows.length).toBe(3);
-      expect(choiceRows[0].textContent).toContain('Choice B');
-      expect(choiceRows[0].textContent).toContain('3');
-      expect(choiceRows[1].textContent).toContain('Choice C');
-      expect(choiceRows[1].textContent).toContain('2');
-      expect(choiceRows[2].textContent).toContain('Choice D');
-      expect(choiceRows[2].textContent).toContain('1');
     });
   });
 });
