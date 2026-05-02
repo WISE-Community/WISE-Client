@@ -16271,7 +16271,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">81,83</context>
+          <context context-type="linenumber">85,88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8313145553257511938" datatype="html">
@@ -23272,7 +23272,7 @@ If this problem continues, let your teacher know and move on to the next activit
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">85,88</context>
+          <context context-type="linenumber">81,83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6966354927154117696" datatype="html">
@@ -23310,15 +23310,15 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">76,79</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8820191890545506313" datatype="html">
-        <source>Organize by choice</source>
+      <trans-unit id="3328715450847929611" datatype="html">
+        <source>Organize by bucket</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
           <context context-type="linenumber">79,80</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3328715450847929611" datatype="html">
-        <source>Organize by bucket</source>
+      <trans-unit id="8820191890545506313" datatype="html">
+        <source>Organize by choice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
           <context context-type="linenumber">83,84</context>
