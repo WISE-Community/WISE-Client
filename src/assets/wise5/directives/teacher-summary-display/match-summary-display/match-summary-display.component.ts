@@ -24,7 +24,7 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   @Input() expanded: boolean;
   protected isChoiceReuseMatch: boolean;
   private matchSummaryData: MatchSummaryData;
-  viewMode: SummaryViewMode = 'choice';
+  viewMode: SummaryViewMode = 'bucket';
 
   ngOnInit(): void {
     this.setIsChoiceReuseMatch();

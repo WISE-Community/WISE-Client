@@ -76,34 +76,34 @@
           aria-label="Organize by"
           i18n-aria-label
         >
-          <mat-button-toggle value="choice" aria-label="Organize by choice" i18n-aria-label>
-            <mat-icon class="mat-18">crop_16_9</mat-icon>&nbsp;
-            <span i18n>Item</span>
-          </mat-button-toggle>
           <mat-button-toggle value="bucket" aria-label="Organize by bucket" i18n-aria-label>
             <mat-icon class="mat-18">inventory_2</mat-icon>&nbsp;
             <span i18n>Bucket</span>
+          </mat-button-toggle>
+          <mat-button-toggle value="choice" aria-label="Organize by choice" i18n-aria-label>
+            <mat-icon class="mat-18">crop_16_9</mat-icon>&nbsp;
+            <span i18n>Item</span>
           </mat-button-toggle>
         </mat-button-toggle-group>
       </div>
     </div>
     <div class="max-h-160 overflow-y-auto @container" [class.max-h-none]="expanded">
       <div class="columns-1 @xl:columns-2 @4xl:columns-3 gap-2 mt-2">
-        @if (viewMode === 'choice') {
-          @for (choice of choiceData; track $index) {
-            <div class="break-inside-avoid">
-              <ng-container
-                [ngTemplateOutlet]="choiceTemplate"
-                [ngTemplateOutletContext]="{ choice: choice }"
-              />
-            </div>
-          }
-        } @else {
+        @if (viewMode === 'bucket') {
           @for (bucket of bucketData; track $index) {
             <div class="break-inside-avoid">
               <ng-container
                 [ngTemplateOutlet]="bucketTemplate"
                 [ngTemplateOutletContext]="{ bucket: bucket, first: false }"
+              />
+            </div>
+          }
+        } @else {
+          @for (choice of choiceData; track $index) {
+            <div class="break-inside-avoid">
+              <ng-container
+                [ngTemplateOutlet]="choiceTemplate"
+                [ngTemplateOutletContext]="{ choice: choice }"
               />
             </div>
           }
