@@ -1,4 +1,30 @@
 <mat-card appearance="outlined" class="class-response">
+  @if (isHidden(response)) {
+    <details>
+      <summary class="secondary-text notice-bg-bg">
+        <span class="flex-grow" i18n>This post is hidden from students.</span>
+        <span class="details-closed" i18n>(tap to view)</span>
+        <span class="details-open hidden" i18n>(tap to hide)</span>
+        <button
+          matIconButton
+          (click)="showPost(response); $event.preventDefault()"
+          matTooltip="Show to students"
+          matTooltipPosition="above"
+          i18n-matTooltip
+        >
+          <mat-icon color="warn">visibility_off</mat-icon>
+        </button>
+      </summary>
+      <ng-container *ngTemplateOutlet="postContent" />
+      <ng-container *ngTemplateOutlet="commentsSection; context: { $implicit: true }" />
+    </details>
+  } @else {
+    <ng-container *ngTemplateOutlet="postContent; context: { $implicit: true }" />
+    <ng-container *ngTemplateOutlet="commentsSection" />
+  }
+</mat-card>
+
+<ng-template #postContent let-showHideButton>
   <div class="p-2 w-full">
     <div class="flex flex-row items-center gap-2">
       <mat-icon
@@ -17,12 +43,8 @@
           />
         </div>
       </div>
-      <span class="flex-grow"></span>
-      @if (
-        response.latestInappropriateFlagAnnotation == null ||
-        response.latestInappropriateFlagAnnotation.data == null ||
-        response.latestInappropriateFlagAnnotation.data.action != 'Delete'
-      ) {
+      @if (showHideButton) {
+        <span class="flex-grow"></span>
         <button
           matIconButton
           (click)="hidePost(response)"
@@ -32,19 +54,6 @@
         >
           <mat-icon>visibility_on</mat-icon>
         </button>
-      } @else if (
-        response.latestInappropriateFlagAnnotation != null &&
-        response.latestInappropriateFlagAnnotation.data.action === 'Delete'
-      ) {
-        <button
-          matIconButton
-          (click)="showPost(response)"
-          matTooltip="Show to students"
-          matTooltipPosition="above"
-          i18n-matTooltip
-        >
-          <mat-icon color="warn">visibility_off</mat-icon>
-        </button>
       }
     </div>
     <div class="post" [innerHTML]="response.studentData.responseTextHTML"></div>
@@ -52,11 +61,12 @@
       <img [src]="attachment.iconURL" i18n-alt alt="Post attachment" class="attachment" />
     }
   </div>
+</ng-template>
+
+<ng-template #commentsSection let-parentHidden>
   @if (response.replies.length > 0) {
     <div class="notice-bg-bg">
-      @if (mode === 'student' || response.replies.length > 0) {
-        <mat-divider class="comment-divider" />
-      }
+      <mat-divider class="comment-divider" />
       <div class="comments-header" matSubheader>
         @if (response.replies.length === 1) {
           <span i18n> Comments ({{ response.replies.length }}) </span>
@@ -71,69 +81,78 @@
       <div class="comments">
         @for (reply of repliesToShow; track reply) {
           <div class="comment" [ngClass]="{ 'animate-show': !isLast }">
-            <div class="flex flex-row items-center gap-2">
-              <mat-icon
-                matListAvatar
-                class="mat-40"
-                style="color: {{ getAvatarColorForWorkgroupId(reply.workgroupId) }}"
+            @if (parentHidden || isHidden(reply)) {
+              <details
+                class="reply-details rounded-md notice-bg-border border-1 open:border-transparent open:pb-2"
               >
-                account_circle
-              </mat-icon>
-              <div class="flex flex-wrap gap-2 items-center">
-                <span class="strong">{{ reply.usernames }}</span>
-                <save-time-message
-                  [saveTime]="adjustClientSaveTime(reply.serverSaveTime)"
-                  [timeOnly]="true"
-                  tooltipPosition="after"
-                />
-              </div>
-              <span class="flex-grow"></span>
-              @if (
-                (response.latestInappropriateFlagAnnotation == null ||
-                  response.latestInappropriateFlagAnnotation.data.action !== 'Delete') &&
-                (reply.latestInappropriateFlagAnnotation == null ||
-                  reply.latestInappropriateFlagAnnotation.data.action != 'Delete')
-              ) {
-                <button
-                  matIconButton
-                  (click)="hidePost(reply)"
-                  matTooltip="Hide from students"
-                  matTooltipPosition="above"
-                  i18n-matTooltip
-                >
-                  <mat-icon>visibility_on</mat-icon>
-                </button>
-              } @else if (
-                response.latestInappropriateFlagAnnotation != null &&
-                response.latestInappropriateFlagAnnotation.data.action === 'Delete'
-              ) {
-                <mat-icon
-                  tabindex="0"
-                  color="warn"
-                  matTooltip="Parent post is hidden, so this comment is also hidden"
-                  matTooltipPosition="above"
-                  i18n-matTooltip
-                  >visibility_off</mat-icon
-                >
-              } @else if (
-                reply.latestInappropriateFlagAnnotation != null &&
-                reply.latestInappropriateFlagAnnotation.data.action === 'Delete'
-              ) {
-                <button
-                  matIconButton
-                  (click)="showPost(reply)"
-                  matTooltip="Show to students"
-                  matTooltipPosition="above"
-                  i18n-matTooltip
-                >
-                  <mat-icon color="warn">visibility_off</mat-icon>
-                </button>
-              }
-            </div>
-            <div class="pt-1" [innerHTML]="reply.studentData.responseHTML"></div>
+                <summary class="secondary-text notice-bg-bg rounded-md" [class.py-2]="parentHidden">
+                  @if (parentHidden) {
+                    <span class="flex-grow" i18n
+                      >Comment hidden because parent post is hidden.</span
+                    >
+                  } @else {
+                    <span class="flex-grow" i18n>This comment is hidden from students.</span>
+                  }
+                  <span class="details-closed" i18n>(tap to view)</span>
+                  <span class="details-open hidden" i18n>(tap to hide)</span>
+                  @if (!parentHidden && isHidden(reply)) {
+                    <button
+                      matIconButton
+                      (click)="showPost(reply); $event.preventDefault()"
+                      matTooltip="Show to students"
+                      matTooltipPosition="above"
+                      i18n-matTooltip
+                    >
+                      <mat-icon color="warn">visibility_off</mat-icon>
+                    </button>
+                  }
+                </summary>
+                <ng-container *ngTemplateOutlet="replyContent; context: { $implicit: reply }" />
+              </details>
+            } @else {
+              <ng-container
+                *ngTemplateOutlet="
+                  replyContent;
+                  context: { $implicit: reply, showHideButton: true }
+                "
+              />
+            }
           </div>
         }
       </div>
     </div>
   }
-</mat-card>
+</ng-template>
+
+<ng-template #replyContent let-reply let-showHideButton="showHideButton">
+  <div class="flex flex-row items-center gap-2 pt-1">
+    <mat-icon
+      matListAvatar
+      class="mat-40"
+      style="color: {{ getAvatarColorForWorkgroupId(reply.workgroupId) }}"
+    >
+      account_circle
+    </mat-icon>
+    <div class="flex flex-wrap gap-2 items-center">
+      <span class="strong">{{ reply.usernames }}</span>
+      <save-time-message
+        [saveTime]="adjustClientSaveTime(reply.serverSaveTime)"
+        [timeOnly]="true"
+        tooltipPosition="after"
+      />
+    </div>
+    @if (showHideButton) {
+      <span class="flex-grow"></span>
+      <button
+        matIconButton
+        (click)="hidePost(reply)"
+        matTooltip="Hide from students"
+        matTooltipPosition="above"
+        i18n-matTooltip
+      >
+        <mat-icon>visibility_on</mat-icon>
+      </button>
+    }
+  </div>
+  <div class="pt-1" [innerHTML]="reply.studentData.responseHTML"></div>
+</ng-template>

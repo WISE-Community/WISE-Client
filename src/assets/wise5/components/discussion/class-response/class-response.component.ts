@@ -82,6 +82,7 @@ export class ClassResponse {
   }
 
   private injectLinks(response: string): string {
+    if (response == null) return '';
     return response.replace(this.urlMatcher, (match) => {
       let matchUrl = match;
       if (!match.startsWith('http')) {

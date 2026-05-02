@@ -29,6 +29,35 @@ import { ClassResponse } from '../class-response/class-response.component';
   ],
   selector: 'class-response-teacher',
   styleUrl: '../class-response/class-response.component.scss',
+  styles: `
+    @reference "tailwindcss";
+
+    details:open > summary {
+      .details-closed {
+        @apply hidden;
+      }
+
+      .details-open {
+        @apply flex;
+      }
+    }
+
+    .reply-details:open {
+      @apply px-2;
+
+      > summary {
+        @apply -mx-2 mb-1 rounded-b-none;
+      }
+    }
+
+    summary {
+      @apply italic cursor-pointer px-2 flex items-center gap-2;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+  `,
   templateUrl: './class-response-teacher.component.html'
 })
 export class ClassResponseTeacherComponent extends ClassResponse {
@@ -47,6 +76,10 @@ export class ClassResponseTeacherComponent extends ClassResponse {
     if (confirm($localize`Are you sure you want to hide this content?`)) {
       this.hidePostEvent.emit(componentState);
     }
+  }
+
+  protected isHidden(post: any): boolean {
+    return post.latestInappropriateFlagAnnotation?.data?.action === 'Delete';
   }
 
   protected showPost(componentState: any): void {
