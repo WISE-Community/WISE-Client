@@ -17974,7 +17974,15 @@ Are you sure you want to proceed?</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">85,88</context>
         </context-group>
         <target state="needs-translation">Item</target>
       </trans-unit>
@@ -21438,35 +21446,67 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Discussion</target>
       </trans-unit>
-      <trans-unit id="6159543550097070213" datatype="html">
-        <source>Hide from students</source>
+      <trans-unit id="1412436253746963115" datatype="html">
+        <source>This post is hidden from students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
-          <context context-type="linenumber">29,32</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+        <target state="needs-translation">This post is hidden from students.</target>
+      </trans-unit>
+      <trans-unit id="5681541379200816319" datatype="html">
+        <source>(tap to view)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">6,7</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
-          <context context-type="linenumber">100,102</context>
+          <context context-type="linenumber">96,97</context>
         </context-group>
-        <target state="needs-translation">Hide from students</target>
+        <target state="needs-translation">(tap to view)</target>
+      </trans-unit>
+      <trans-unit id="3308519205068715103" datatype="html">
+        <source>(tap to hide)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">7,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">97,99</context>
+        </context-group>
+        <target state="needs-translation">(tap to hide)</target>
       </trans-unit>
       <trans-unit id="6724243278406717774" datatype="html">
         <source>Show to students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
-          <context context-type="linenumber">42,45</context>
+          <context context-type="linenumber">11,14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
-          <context context-type="linenumber">125,127</context>
+          <context context-type="linenumber">102,104</context>
         </context-group>
         <target state="needs-translation">Show to students</target>
+      </trans-unit>
+      <trans-unit id="6159543550097070213" datatype="html">
+        <source>Hide from students</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">51,54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">149,153</context>
+        </context-group>
+        <target state="needs-translation">Hide from students</target>
       </trans-unit>
       <trans-unit id="3681514094143393882" datatype="html">
         <source>Post attachment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
-          <context context-type="linenumber">52,55</context>
+          <context context-type="linenumber">61,66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
@@ -21478,7 +21518,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source> Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
-          <context context-type="linenumber">62,63</context>
+          <context context-type="linenumber">72,73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
@@ -21490,7 +21530,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
-          <context context-type="linenumber">66,67</context>
+          <context context-type="linenumber">76,77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response/class-response.component.html</context>
@@ -21498,19 +21538,27 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         </context-group>
         <target state="needs-translation">Comments (<x id="INTERPOLATION" equiv-text="{{ response.replies.length }}"/>)</target>
       </trans-unit>
-      <trans-unit id="3587038731559112650" datatype="html">
-        <source>Parent post is hidden, so this comment is also hidden</source>
+      <trans-unit id="1410061077038345346" datatype="html">
+        <source>Comment hidden because parent post is hidden.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
-          <context context-type="linenumber">113,115</context>
+          <context context-type="linenumber">91,94</context>
         </context-group>
-        <target state="needs-translation">Parent post is hidden, so this comment is also hidden</target>
+        <target state="needs-translation">Comment hidden because parent post is hidden.</target>
+      </trans-unit>
+      <trans-unit id="3208793939943994267" datatype="html">
+        <source>This comment is hidden from students.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.html</context>
+          <context context-type="linenumber">94,96</context>
+        </context-group>
+        <target state="needs-translation">This comment is hidden from students.</target>
       </trans-unit>
       <trans-unit id="1877738603549884080" datatype="html">
         <source>Are you sure you want to hide this content?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to hide this content?</target>
       </trans-unit>
@@ -21518,7 +21566,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></target>
         <source>Are you sure you want to show this content?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/class-response-teacher/class-response-teacher.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">86</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to show this content?</target>
       </trans-unit>
@@ -25878,47 +25926,79 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Bucket</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">12,15</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
-        <target state="needs-translation">Bucket</target>
-      </trans-unit>
-      <trans-unit id="3656239217373666781" datatype="html">
-        <source>Not moved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="linenumber">41,44</context>
         </context-group>
-        <target state="needs-translation">Not moved</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">81,83</context>
+        </context-group>
+        <target state="needs-translation">Bucket</target>
       </trans-unit>
       <trans-unit id="6966354927154117696" datatype="html">
         <source>Not moved by any students</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">27,33</context>
+          <context context-type="linenumber">56,62</context>
         </context-group>
         <target state="needs-translation">Not moved by any students</target>
       </trans-unit>
-      <trans-unit id="3730845672011729296" datatype="html">
-        <source>Bucket Frequency</source>
+      <trans-unit id="5731986766999662576" datatype="html">
+        <source>Choice Frequency</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">34,35</context>
+          <context context-type="linenumber">63,65</context>
         </context-group>
-        <target state="needs-translation">Bucket Frequency</target>
+        <target state="needs-translation">Choice Frequency</target>
       </trans-unit>
       <trans-unit id="7095065065333948401" datatype="html">
         <source> Number of times each item <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>crop_16_9<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> was moved into the different buckets <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>inventory_2<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">38,41</context>
+          <context context-type="linenumber">67,70</context>
         </context-group>
         <target state="needs-translation"> Number of times each item <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>crop_16_9<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/> was moved into the different buckets <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;mat-18 align-sub&quot;&gt;"/>inventory_2<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/>. </target>
+      </trans-unit>
+      <trans-unit id="2604441497936252366" datatype="html">
+        <source>Organize by:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">71,73</context>
+        </context-group>
+        <target state="needs-translation">Organize by:</target>
+      </trans-unit>
+      <trans-unit id="6609121112482902764" datatype="html">
+        <source>Organize by</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">76,79</context>
+        </context-group>
+        <target state="needs-translation">Organize by</target>
+      </trans-unit>
+      <trans-unit id="3328715450847929611" datatype="html">
+        <source>Organize by bucket</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">79,80</context>
+        </context-group>
+        <target state="needs-translation">Organize by bucket</target>
+      </trans-unit>
+      <trans-unit id="8820191890545506313" datatype="html">
+        <source>Organize by choice</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
+          <context context-type="linenumber">83,84</context>
+        </context-group>
+        <target state="needs-translation">Organize by choice</target>
       </trans-unit>
       <trans-unit id="2004123481203797507" datatype="html">
         <source> Your students&apos; choices will show up here when they complete the activity. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/match-summary-display/match-summary-display.component.html</context>
-          <context context-type="linenumber">53,58</context>
+          <context context-type="linenumber">115,119</context>
         </context-group>
         <target state="needs-translation"> Your students' choices will show up here when they complete the activity. </target>
       </trans-unit>
