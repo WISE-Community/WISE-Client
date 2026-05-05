@@ -1,0 +1,26 @@
+.choice-divider {
+  width: 100%;
+  position: relative;
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom-style: solid;
+    content: "";
+    border-bottom-width: var(--mdc-filled-text-field-focus-active-indicator-height);
+    border-bottom-color: var(--mdc-filled-text-field-focus-active-indicator-color);
+    transform: scaleX(0);
+    transform-origin: 100%;
+    transition: transform 360ms cubic-bezier(0.4, 0, 0.2, 1),opacity 360ms cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+  }
+
+  &.active {
+    &:after {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+}

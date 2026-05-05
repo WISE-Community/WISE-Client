@@ -649,7 +649,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">84,86</context>
+          <context context-type="linenumber">80,82</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -700,7 +700,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">95,98</context>
+          <context context-type="linenumber">91,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -803,7 +803,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">107,109</context>
+          <context context-type="linenumber">103,105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -10607,7 +10607,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">69,72</context>
+          <context context-type="linenumber">65,68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/componentAnnotations/component-annotations.component.ts</context>
@@ -11672,7 +11672,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">16,20</context>
+          <context context-type="linenumber">16,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1944363997751399240" datatype="html">
@@ -11683,7 +11683,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">58,63</context>
+          <context context-type="linenumber">54,59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4268291134905709874" datatype="html">
@@ -21104,6 +21104,10 @@ Warning: This will delete all existing choices and buckets in this activity.</so
           <context context-type="sourcefile">src/assets/wise5/components/match/match-authoring/match-authoring.component.html</context>
           <context context-type="linenumber">45,49</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/add-mc-choice/add-mc-choice.component.html</context>
+          <context context-type="linenumber">12,16</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="4030755619952900161" datatype="html">
         <source>There are no choices. Click the &quot;Add choice&quot; button to add a choice.</source>
@@ -21131,7 +21135,7 @@ Warning: This will delete all existing choices and buckets in this activity.</so
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">41,43</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="985440753084441959" datatype="html">
@@ -21233,7 +21237,7 @@ Warning: This will delete all existing choices and buckets in this activity.</so
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6683126302760629027" datatype="html">
@@ -21414,32 +21418,32 @@ Warning: This will delete all existing choices in this activity.</source>
           <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2347568298382192498" datatype="html">
-        <source> There are no choices. Click the &quot;Add Choice&quot; button to add a choice. </source>
+      <trans-unit id="4813161478333511893" datatype="html">
+        <source> There are no choices. Click the &quot;Add choice&quot; button to add a choice. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">30,33</context>
+          <context context-type="linenumber">20,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1672638997749394147" datatype="html">
         <source>Choice Text</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">39,42</context>
+          <context context-type="linenumber">35,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7866872947081726703" datatype="html">
         <source> Is Correct </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">61,65</context>
+          <context context-type="linenumber">57,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3915966149686975421" datatype="html">
         <source>Optional</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
-          <context context-type="linenumber">71,73</context>
+          <context context-type="linenumber">67,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7399297044492701223" datatype="html">

@@ -4,7 +4,9 @@ import { MatRadioButtonHarness } from '@angular/material/radio/testing';
 
 export class MultipleChoiceAuthoringHarness extends ComponentHarness {
   static hostSelector = 'multiple-choice-authoring';
-  getAddChoiceButton = this.locatorFor(MatButtonHarness.with({ selector: '.add-choice-button' }));
+  getAddChoiceButton = this.locatorFor(
+    MatButtonHarness.with({ selector: '[mattooltip="Add choice"]' })
+  );
   getChoices = this.locatorForAll('.choice-container');
   getDeleteChoiceButtons = this.locatorForAll(
     MatButtonHarness.with({ selector: '[mattooltip="Delete"]' })

@@ -14,23 +14,19 @@
   </mat-radio-group>
 </p>
 <span class="choices-label" i18n>Choices</span>
-<button
-  mat-raised-button
-  color="primary"
-  class="add-choice-button"
-  (click)="addChoice()"
-  i18nMatTooltip
-  matTooltip="Add Choice"
-  matTooltipPosition="above"
->
-  <mat-icon>add</mat-icon>
-</button>
+<add-mc-choice (newChoiceEvent)="addChoice(0)" />
 @if (componentContent.choices == null || componentContent.choices.length === 0) {
   <div class="info-block" i18n>
-    There are no choices. Click the "Add Choice" button to add a choice.
+    There are no choices. Click the "Add choice" button to add a choice.
   </div>
 }
-@for (choice of componentContent.choices; track choice.id; let last = $last; let first = $first) {
+@for (
+  choice of componentContent.choices;
+  track choice.id;
+  let last = $last;
+  let first = $first;
+  let index = $index
+) {
   <div class="choice-container">
     <div class="flex flex-row flex-wrap justify-start gap-2">
       <translatable-input
@@ -110,4 +106,5 @@
       </button>
     </div>
   </div>
+  <add-mc-choice (newChoiceEvent)="addChoice(index + 1)" />
 }
