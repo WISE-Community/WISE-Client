@@ -34,7 +34,6 @@ export class AuthoringToolComponent {
   protected isMenuOpen: boolean = false;
   protected logoPath: string;
   protected projectId: number;
-  protected projectTitle: string;
   protected runId: number;
   protected runCode: string;
   protected showToolbar: boolean = true;
@@ -279,11 +278,6 @@ export class AuthoringToolComponent {
       this.projectId = this.configService.getProjectId();
       this.runId = this.configService.getRunId();
       this.runCode = this.configService.getRunCode();
-    }
-    if (this.projectId) {
-      this.projectTitle = this.projectService.getProjectTitle();
-    } else {
-      this.projectTitle = null;
     }
     this.notificationService.hideJSONValidMessage();
     this.projectService.uiChanged();

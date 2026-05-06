@@ -37,7 +37,7 @@ export class TopBarComponent implements OnInit {
   @Input() projectId: number;
   protected projectInfo: string;
   protected projectLocale: ProjectLocale;
-  @Input() projectTitle: string;
+  protected projectTitle: string;
   @Input() runId: number;
   @Input() runCode: string;
   private subscriptions = new Subscription();
@@ -62,13 +62,20 @@ export class TopBarComponent implements OnInit {
     this.userInfo = this.configService.getMyUserInfo();
     this.contextPath = this.configService.getContextPath();
     this.subscriptions.add(
-      this.projectService.projectSaved$.subscribe(() => this.updateTranslationModel())
+      this.projectService.projectSaved$.subscribe(() => {
+        this.updateTranslationModel();
+        this.setTitle();
+      })
     );
   }
 
   private updateTranslationModel(): void {
     this.projectLocale = this.projectService.getLocale();
     this.hasTranslations = this.projectLocale.hasTranslations();
+  }
+
+  private setTitle(): void {
+    this.projectTitle = this.projectService.getProjectTitle();
   }
 
   ngOnDestroy(): void {
@@ -82,6 +89,7 @@ export class TopBarComponent implements OnInit {
     } else {
       this.hasTranslations = false;
     }
+    this.setTitle();
   }
 
   private getProjectInfo(): string {
