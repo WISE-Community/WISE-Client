@@ -9,7 +9,7 @@ export class MultipleChoiceAuthoringHarness extends ComponentHarness {
   );
   getChoices = this.locatorForAll('.choice-container');
   getDeleteChoiceButtons = this.locatorForAll(
-    MatButtonHarness.with({ selector: '[mattooltip="Delete"]' })
+    MatButtonHarness.with({ selector: '[mattooltip="Delete choice"]' })
   );
   getMoveDownButtons = this.locatorForAll(
     MatButtonHarness.with({ selector: '[mattooltip="Move down"]' })
