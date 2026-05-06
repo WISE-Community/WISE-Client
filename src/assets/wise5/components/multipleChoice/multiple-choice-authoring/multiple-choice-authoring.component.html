@@ -20,91 +20,92 @@
     There are no choices. Click the "Add choice" button to add a choice.
   </div>
 }
-@for (
-  choice of componentContent.choices;
-  track choice.id;
-  let last = $last;
-  let first = $first;
-  let index = $index
-) {
-  <div class="choice-container">
-    <div class="flex flex-row flex-wrap justify-start gap-2">
-      <translatable-input
-        [content]="choice"
-        key="text"
-        label="Choice Text"
-        i18n-label
-        placeholder="Type text or choose an image"
-        i18n-placeholder
-        (defaultLanguageTextChanged)="choiceTextChange.next($event)"
-        class="choice-text-input-container"
-      />
-      <translatable-asset-chooser
-        [content]="choice"
-        key="text"
-        [processAsset]="processSelectedAsset"
-        (defaultLanguageTextChanged)="componentChanged()"
-      />
-      <div>
-        <mat-checkbox
+@for (choice of componentContent.choices; track choice.id; let last = $last; let i = $index) {
+  <div class="flex flex-row">
+    <div class="choice-container w-full">
+      <div class="flex flex-row flex-wrap justify-start gap-2">
+        <translatable-input
+          [content]="choice"
+          key="text"
+          label="Choice Text"
+          i18n-label
+          placeholder="Type text or choose an image"
+          i18n-placeholder
+          (defaultLanguageTextChanged)="choiceTextChange.next($event)"
+          class="choice-text-input-container"
+        />
+        <translatable-asset-chooser
+          [content]="choice"
+          key="text"
+          [processAsset]="processSelectedAsset"
+          (defaultLanguageTextChanged)="componentChanged()"
+        />
+        <div>
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="choice.isCorrect"
+            (change)="feedbackChanged()"
+            i18n-aria-label
+            aria-label="Is Correct"
+            i18n
+          >
+            Is Correct
+          </mat-checkbox>
+        </div>
+      </div>
+      <div class="flex flex-row flex-wrap justify-start">
+        <translatable-input
+          [content]="choice"
+          key="feedback"
+          label="Feedback"
+          i18n-label
+          placeholder="Optional"
+          i18n-placeholder
+          (defaultLanguageTextChanged)="feedbackTextChange.next($event)"
+          class="choice-feedback-input-container"
+        />
+
+        <button
+          mat-raised-button
           color="primary"
-          [(ngModel)]="choice.isCorrect"
-          (change)="feedbackChanged()"
-          i18n-aria-label
-          aria-label="Is Correct"
-          i18n
+          class="choice-authoring-button"
+          (click)="deleteChoice(choice)"
+          i18n-matTooltip
+          matTooltip="Delete"
+          matTooltipPosition="above"
         >
-          Is Correct
-        </mat-checkbox>
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
-    <div class="flex flex-row flex-wrap justify-start">
-      <translatable-input
-        [content]="choice"
-        key="feedback"
-        label="Feedback"
-        i18n-label
-        placeholder="Optional"
-        i18n-placeholder
-        (defaultLanguageTextChanged)="feedbackTextChange.next($event)"
-        class="choice-feedback-input-container"
-      />
-      <button
-        mat-raised-button
-        color="primary"
-        class="choice-authoring-button"
-        [disabled]="first"
-        (click)="moveChoiceUp(choice)"
-        i18n-matTooltip
-        matTooltip="Move Up"
-        matTooltipPosition="above"
-      >
-        <mat-icon>arrow_upward</mat-icon>
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        class="choice-authoring-button"
-        [disabled]="last"
-        (click)="moveChoiceDown(choice)"
-        i18n-matTooltip
-        matTooltip="Move Down"
-        matTooltipPosition="above"
-      >
-        <mat-icon>arrow_downward</mat-icon>
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        class="choice-authoring-button"
-        (click)="deleteChoice(choice)"
-        i18n-matTooltip
-        matTooltip="Delete"
-        matTooltipPosition="above"
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
+    <div class="flex flex-col">
+      @if (i > 0) {
+        <button
+          mat-icon-button
+          color="primary"
+          class="choice-authoring-button"
+          (click)="moveChoiceUp(choice)"
+          i18n-matTooltip
+          matTooltip="Move up"
+          matTooltipPosition="above"
+        >
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+      }
+      @if (!last) {
+        <button
+          mat-icon-button
+          color="primary"
+          class="choice-authoring-button"
+          (click)="moveChoiceDown(choice)"
+          i18n-matTooltip
+          matTooltip="Move down"
+          matTooltipPosition="above"
+        >
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
+      }
     </div>
   </div>
-  <add-mc-choice (newChoiceEvent)="addChoice(index + 1)" />
+  <add-mc-choice (newChoiceEvent)="addChoice(i + 1)" />
 }
