@@ -1103,8 +1103,8 @@
           <context context-type="linenumber">9,12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1197041381998976714" datatype="html">
-        <source> *Setting the activities&apos; widths determines how they appear on the screen. For example, if two adjacent activities&apos; widths are both set to 50%, they will appear side-by-side. </source>
+      <trans-unit id="2306241230244820439" datatype="html">
+        <source> *Setting the activity&apos;s width determines how it appears on the screen. If two adjacent activities are set to 50% each (or 67% and 33%, for example), they will appear side-by-side. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-width/edit-component-width.component.ts</context>
           <context context-type="linenumber">23,27</context>
