@@ -6,7 +6,7 @@ import { MatSliderModule } from '@angular/material/slider';
 @Component({
   imports: [FormsModule, MatSliderModule],
   selector: 'edit-component-width',
-  template: `<span i18n>Activity width:</span>
+  template: `<span i18n>Activity width:</span>&nbsp;
     <mat-slider
       min="0"
       [max]="possibleValues.length - 1"
@@ -14,18 +14,18 @@ import { MatSliderModule } from '@angular/material/slider';
       discrete
       showTickMarks
       [displayWith]="formatLabel"
-      style="min-width: 300px;"
+      style="min-width: 240px;"
     >
       <input matSliderThumb (input)="onSliderChange($event)" [value]="selectedIndex" />
     </mat-slider>
     <span>{{ selectedValue }}%</span>
     <p i18n>
-      *Setting the activities' widths determines how they appear on the screen. For example, if two
-      adjacent activities' widths are both set to 50%, they will appear side-by-side.
+      *Setting the activity's width determines how it appears on the screen. If two adjacent
+      activities are set to 50% each (or 67% and 33%, for example), they will appear side-by-side.
     </p>`
 })
 export class EditComponentWidthComponent extends EditComponentFieldComponent {
-  protected possibleValues = [25, 33, 50, 66, 75, 100];
+  protected possibleValues = [25, 33, 50, 67, 75, 100];
   protected selectedIndex = 0;
   protected selectedValue = this.possibleValues[0];
 
