@@ -8,13 +8,17 @@ import { EditComponentFieldComponent } from '../edit-component-field.component';
 @Component({
   imports: [FormsModule, MatButtonToggleModule, MatIconModule, MatTooltipModule],
   selector: 'edit-component-width',
-  template: `<span i18n>Activity width</span
-    ><mat-icon
-      matTooltip="*Setting the activity's width determines how it appears on the screen. If two adjacent
-      activities are set to 50% each (or 67% and 33%, for example), they will appear side-by-side."
-      i18n-matTooltip
-      >help</mat-icon
-    ><br />
+  template: `<div class="flex items-center gap-2 my-2">
+      <span i18n>Activity width</span>
+      <mat-icon
+        tabindex="0"
+        matTooltip="The activity's width determines how it appears on the screen. If two adjacent
+        activities are set to 50% each (or 67% and 33%, for example), they will appear side-by-side."
+        matTooltipPosition="above"
+        i18n-matTooltip
+        >help</mat-icon
+      >
+    </div>
     <mat-button-toggle-group
       [(ngModel)]="selectedValue"
       (change)="onWidthChange()"
