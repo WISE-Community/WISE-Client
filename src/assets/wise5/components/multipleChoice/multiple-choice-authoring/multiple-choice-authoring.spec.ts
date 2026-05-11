@@ -120,7 +120,7 @@ function moveChoice() {
     });
     describe('move choice up is clicked on the second choice', () => {
       it('moves the choice up', async () => {
-        await (await multipleChoiceAuthoringHarness.getMoveChoiceUpButton(1)).click();
+        await (await multipleChoiceAuthoringHarness.getMoveChoiceUpButton(0)).click();
         expectChoiceOrder(['choice2', 'choice1']);
       });
     });
