@@ -13,7 +13,7 @@
     <mat-radio-button color="primary" value="checkbox" i18n>Multiple Answer</mat-radio-button>
   </mat-radio-group>
 </p>
-<span class="choices-label" i18n>Choices</span>
+<h2 class="mat-headline-6 !mb-0" i18n>Choices</h2>
 <add-mc-choice (newChoiceEvent)="addChoice(0)" />
 @if (componentContent.choices == null || componentContent.choices.length === 0) {
   <div class="info-block" i18n>
@@ -21,47 +21,49 @@
   </div>
 }
 @for (choice of componentContent.choices; track choice.id; let last = $last; let i = $index) {
-  <div class="flex flex-row">
-    <div class="choice-container w-full">
-      <div class="flex flex-row flex-wrap justify-start gap-2">
-        <translatable-input
-          [content]="choice"
-          key="text"
-          label="Choice Text"
-          i18n-label
-          placeholder="Type text or choose an image"
-          i18n-placeholder
-          (defaultLanguageTextChanged)="choiceTextChange.next($event)"
-          class="choice-text-input-container"
-        />
-        <translatable-asset-chooser
-          [content]="choice"
-          key="text"
-          [processAsset]="processSelectedAsset"
-          (defaultLanguageTextChanged)="componentChanged()"
-        />
-        <mat-checkbox
-          color="primary"
-          [(ngModel)]="choice.isCorrect"
-          (change)="feedbackChanged()"
-          i18n-aria-label
-          aria-label="Is Correct"
-          i18n
-        >
-          Is Correct
-        </mat-checkbox>
-        <div class="flex grow"></div>
-        <button
-          mat-icon-button
-          color="primary"
-          class="choice-authoring-button"
-          (click)="deleteChoice(choice)"
-          i18n-matTooltip
-          matTooltip="Delete choice"
-          matTooltipPosition="above"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+  <div class="flex">
+    <div class="choice-container w-full @container">
+      <div class="flex flex-col @md:flex-row items-start gap-2">
+        <div class="flex flex-1 gap-2 order-2 @md:order-1 w-full @md:w-auto">
+          <translatable-input
+            [content]="choice"
+            key="text"
+            label="Choice Text"
+            i18n-label
+            placeholder="Type text or choose an image"
+            i18n-placeholder
+            (defaultLanguageTextChanged)="choiceTextChange.next($event)"
+            class="choice-input-container"
+          />
+          <translatable-asset-chooser
+            [content]="choice"
+            key="text"
+            [processAsset]="processSelectedAsset"
+            (defaultLanguageTextChanged)="componentChanged()"
+          />
+        </div>
+        <div class="flex items-center justify-between gap-2 order-1 @md:order-2 w-full @md:w-auto">
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="choice.isCorrect"
+            (change)="feedbackChanged()"
+            i18n-aria-label
+            aria-label="Is Correct"
+            i18n
+          >
+            Is Correct
+          </mat-checkbox>
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="deleteChoice(choice)"
+            i18n-matTooltip
+            matTooltip="Delete choice"
+            matTooltipPosition="above"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
       <div class="flex flex-row flex-wrap justify-start">
         <translatable-input
@@ -72,7 +74,7 @@
           placeholder="Optional"
           i18n-placeholder
           (defaultLanguageTextChanged)="feedbackTextChange.next($event)"
-          class="choice-feedback-input-container"
+          class="choice-input-container"
         />
       </div>
     </div>
@@ -81,7 +83,6 @@
         <button
           mat-icon-button
           color="primary"
-          class="choice-authoring-button"
           (click)="moveChoiceUp(choice)"
           i18n-matTooltip
           matTooltip="Move up"
@@ -94,7 +95,6 @@
         <button
           mat-icon-button
           color="primary"
-          class="choice-authoring-button"
           (click)="moveChoiceDown(choice)"
           i18n-matTooltip
           matTooltip="Move down"
