@@ -1096,11 +1096,19 @@
           <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2810375050239191789" datatype="html">
-        <source>Activity Width</source>
+      <trans-unit id="8084155234460667951" datatype="html">
+        <source>Activity width</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-width/edit-component-width.component.ts</context>
-          <context context-type="linenumber">11,15</context>
+          <context context-type="linenumber">12,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6520102811746443451" datatype="html">
+        <source>The activity&apos;s width determines how it appears on the screen. If two adjacent
+        activities are set to 50% each (or 67% and 33%, for example), they will appear side-by-side.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-width/edit-component-width.component.ts</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8650499415827640724" datatype="html">
