@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-versions: [20.x]
+        node-versions: [24.x]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@6
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
