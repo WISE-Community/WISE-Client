@@ -3,8 +3,6 @@ permissions:
   id-token: write
 on:
   workflow_call:
-  push:
-    branches: [gh-actions-update-node-version-24]
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
