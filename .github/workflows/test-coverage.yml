@@ -3,6 +3,8 @@ permissions:
   id-token: write
 on:
   workflow_call:
+  push:
+    branches: [gh-actions-update-node-version-24]
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
@@ -13,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - run: |

@@ -4,6 +4,8 @@ on:
     secrets:
       token:
         required: true
+  push:
+    branches: [gh-actions-update-node-version-24]
 jobs:
   generate-messages:
     runs-on: ubuntu-latest
