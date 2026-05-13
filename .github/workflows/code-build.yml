@@ -8,6 +8,9 @@ on:
         required: true
   push:
     branches: [gh-actions-update-node-version-24]
+      secrets:
+        aws_key: ${{secrets.AWS_ACCESS_KEY_ID}}
+        aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 jobs:
   build:
     runs-on: ubuntu-latest
