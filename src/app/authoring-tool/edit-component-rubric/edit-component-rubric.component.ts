@@ -17,6 +17,6 @@ export class EditComponentRubricComponent {
   constructor(private projectService: TeacherProjectService) {}
 
   protected save(): void {
-    this.projectService.componentChanged();
+    this.projectService.saveProject();
   }
 }

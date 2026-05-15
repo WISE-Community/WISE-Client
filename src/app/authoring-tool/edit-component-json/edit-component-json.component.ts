@@ -56,7 +56,7 @@ export class EditComponentJsonComponent {
       this.projectService
         .getNode(this.component.nodeId)
         .replaceComponent(this.component.id, JSON.parse(this.componentContentJSONString));
-      this.projectService.componentChanged();
+      this.projectService.saveProject();
       this.notificationService.showJSONValidMessage();
     } catch (e) {
       this.notificationService.showJSONInvalidMessage();

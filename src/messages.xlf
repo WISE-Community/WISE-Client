@@ -824,32 +824,6 @@
           <context context-type="linenumber">16,19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5222210534332546893" datatype="html">
-        <source>Advanced Activity Settings</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-advanced/edit-component-advanced.component.html</context>
-          <context context-type="linenumber">2,5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5547981558491672240" datatype="html">
-        <source> Close </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-component-advanced/edit-component-advanced.component.html</context>
-          <context context-type="linenumber">10,14</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">33,38</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
-          <context context-type="linenumber">46,50</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
-          <context context-type="linenumber">114,119</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="7783846153124093220" datatype="html">
         <source>Add Visibility Constraint</source>
         <context-group purpose="location">
@@ -11172,22 +11146,40 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">22,26</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6201638315245239510" datatype="html">
-        <source>Advanced</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-advanced-button/edit-component-advanced-button.component.html</context>
-          <context context-type="linenumber">6,10</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-node-advanced-button/edit-node-advanced-button.component.ts</context>
-          <context context-type="linenumber">17,21</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="470340096537376877" datatype="html">
         <source>Edit Activity (<x id="INTERPOLATION" equiv-text="{{ componentTypeLabel }}"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6159883120617273592" datatype="html">
+        <source>Advanced mode</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5547981558491672240" datatype="html">
+        <source> Close </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
+          <context context-type="linenumber">38,43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
+          <context context-type="linenumber">46,50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
+          <context context-type="linenumber">114,119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6201638315245239510" datatype="html">
+        <source>Advanced</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-node-advanced-button/edit-node-advanced-button.component.ts</context>
+          <context context-type="linenumber">17,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3021342818793175999" datatype="html">

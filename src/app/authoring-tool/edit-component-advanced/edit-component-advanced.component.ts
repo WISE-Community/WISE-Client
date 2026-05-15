@@ -5,12 +5,12 @@ import {
   createComponent,
   ElementRef,
   EnvironmentInjector,
-  Inject,
+  Input,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDivider } from '@angular/material/divider';
 import { Component as WISEComponent } from '../../../assets/wise5/common/Component';
 import { components } from '../../../assets/wise5/components/Components';
@@ -18,6 +18,7 @@ import { components } from '../../../assets/wise5/components/Components';
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [MatDivider, MatDialogModule, MatButtonModule],
+  selector: 'edit-component-advanced',
   styles: [
     `
       .edit-component-advanced {
@@ -39,29 +40,25 @@ import { components } from '../../../assets/wise5/components/Components';
       }
     `
   ],
-  templateUrl: './edit-component-advanced.component.html'
+  template: '<div #component></div>'
 })
 export class EditComponentAdvancedComponent {
+  @Input() component: WISEComponent;
   @ViewChild('component') private componentElementRef: ElementRef;
   private componentRef: ComponentRef<WISEComponent>;
   constructor(
     private applicationRef: ApplicationRef,
-    @Inject(MAT_DIALOG_DATA) protected data: { component: WISEComponent; tab?: string },
     private injector: EnvironmentInjector
   ) {}
 
   ngAfterViewInit(): void {
-    this.componentRef = createComponent(
-      components[this.data.component.content.type].authoringAdvanced,
-      {
-        hostElement: this.componentElementRef.nativeElement,
-        environmentInjector: this.injector
-      }
-    );
+    this.componentRef = createComponent(components[this.component.content.type].authoringAdvanced, {
+      hostElement: this.componentElementRef.nativeElement,
+      environmentInjector: this.injector
+    });
     Object.assign(this.componentRef.instance, {
-      nodeId: this.data.component.nodeId,
-      componentId: this.data.component.id,
-      tab: this.data.tab
+      nodeId: this.component.nodeId,
+      componentId: this.component.id
     });
     this.applicationRef.attachView(this.componentRef.hostView);
   }
