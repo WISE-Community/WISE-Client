@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,7 +5,7 @@ import { Node } from '../../../common/Node';
 import { TeacherPeerGroupService } from '../../../services/teacherPeerGroupService';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule],
   selector: 'peer-group-button',
   templateUrl: './peer-group-button.component.html'
 })
