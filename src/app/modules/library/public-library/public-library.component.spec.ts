@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PublicLibraryComponent } from './public-library.component';
 import { MockProvider } from 'ng-mocks';
 import { LibraryService } from '../../../services/library.service';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { LibraryProject } from '../libraryProject';
 import { ProjectFilterValues } from '../../../domain/projectFilterValues';
 
@@ -22,7 +22,8 @@ describe('PublicLibraryComponent', () => {
           officialLibraryProjectsSource$: of([
             { id: 1, metadata: { publicUnitType: 'wiseTested', unitType: 'Platform' } },
             { id: 3, metadata: { publicUnitType: 'communityBuilt', unitType: 'Platform' } }
-          ] as LibraryProject[])
+          ] as LibraryProject[]),
+          numberOfPublicProjectsVisible: new BehaviorSubject<number>(4)
         }),
         ProjectFilterValues
       ]

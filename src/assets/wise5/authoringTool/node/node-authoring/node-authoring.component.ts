@@ -217,7 +217,7 @@ export class NodeAuthoringComponent implements OnInit {
     setTimeout(() => {
       if (components.length > 0) {
         const element = document.getElementById(components[0].id);
-        if (!this.isElementInViewport(element)) {
+        if (element && !this.isElementInViewport(element)) {
           element.scrollIntoView();
         }
         components.forEach((component) => temporarilyHighlightElement(component.id));
