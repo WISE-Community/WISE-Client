@@ -839,7 +839,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">37,42</context>
+          <context context-type="linenumber">38,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
@@ -11187,11 +11187,11 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
           <context context-type="linenumber">17,21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="470340096537376877" datatype="html">
-        <source>Edit Activity (<x id="INTERPOLATION" equiv-text="{{ componentTypeLabel }}"/>)</source>
+      <trans-unit id="7383335766319610131" datatype="html">
+        <source>Edit: <x id="INTERPOLATION" equiv-text="{{ componentIndex }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ componentTypeLabel }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">20,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3021342818793175999" datatype="html">

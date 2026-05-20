@@ -5,6 +5,7 @@ import { EditComponentAdvancedButtonComponent } from '../edit-component-advanced
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { ComponentTypeService } from '../../../services/componentTypeService';
+import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
   imports: [
@@ -16,7 +17,7 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
   ],
   template: `
     <div class="flex items-center">
-      <h2 mat-dialog-title i18n>Edit Activity ({{ componentTypeLabel }})</h2>
+      <h2 mat-dialog-title i18n>Edit: {{ componentIndex }}. {{ componentTypeLabel }}</h2>
       <span class="flex grow"></span>
       <edit-component-advanced-button
         [componentContent]="data.componentContent"
@@ -45,9 +46,17 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
   `
 })
 export class EditComponentDialogComponent {
+  protected componentIndex: number;
   protected componentTypeLabel: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private projectService: TeacherProjectService
+  ) {
+    this.componentIndex =
+      this.projectService
+        .getNode(this.data.nodeId)
+        .getComponentIndex(this.data.componentContent.id) + 1;
     this.componentTypeLabel = inject(ComponentTypeService).getComponentTypeLabel(
       this.data.componentContent.type
     );
