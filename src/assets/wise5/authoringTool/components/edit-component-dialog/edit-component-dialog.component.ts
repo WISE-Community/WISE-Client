@@ -15,7 +15,7 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
     MatDividerModule
   ],
   template: `
-    <div class="flex flex-row">
+    <div class="flex items-center">
       <h2 mat-dialog-title i18n>Edit Activity ({{ componentTypeLabel }})</h2>
       <span class="flex grow"></span>
       <edit-component-advanced-button
@@ -24,15 +24,24 @@ import { ComponentTypeService } from '../../../services/componentTypeService';
       />
     </div>
     <mat-divider />
-    <div mat-dialog-content>
-      <edit-component [componentContent]="data.componentContent" [nodeId]="data.nodeId" />
-    </div>
+    <mat-dialog-content>
+      <edit-component
+        class="block py-4"
+        [componentContent]="data.componentContent"
+        [nodeId]="data.nodeId"
+      />
+    </mat-dialog-content>
     <mat-divider />
     <mat-dialog-actions align="end">
       <button class="enable-in-translation" mat-button mat-dialog-close cdkFocusRegionstart i18n>
         Close
       </button>
     </mat-dialog-actions>
+  `,
+  styles: `
+    .mat-divider {
+      margin: 0;
+    }
   `
 })
 export class EditComponentDialogComponent {
