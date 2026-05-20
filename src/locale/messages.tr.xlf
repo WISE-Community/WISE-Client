@@ -998,7 +998,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">265,268</context>
+          <context context-type="linenumber">272,275</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-summary/component-summary.component.html</context>
@@ -2535,6 +2535,10 @@
           <context context-type="linenumber">28,29</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
+          <context context-type="linenumber">190,194</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peerChatService.ts</context>
           <context context-type="linenumber">65</context>
         </context-group>
@@ -2604,7 +2608,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">255,258</context>
+          <context context-type="linenumber">262,265</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/common/cRater/crater-rubric/crater-rubric.component.html</context>
@@ -3493,6 +3497,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-home/register-home.component.html</context>
           <context context-type="linenumber">18,19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
+          <context context-type="linenumber">4,8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/student-progress/student-progress.component.ts</context>
@@ -11988,10 +11996,6 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/shared/authoring-tool-bar/authoring-tool-bar.component.ts</context>
           <context context-type="linenumber">75</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">2,7</context>
-        </context-group>
         <target state="needs-translation">Notebook Settings</target>
       </trans-unit>
       <trans-unit id="8360107325291301836" datatype="html">
@@ -14364,13 +14368,13 @@ The branches will be removed but the steps will remain in the unit.</target>
 
 <x id="PH" equiv-text="componentNumber"/>. <x id="PH_1" equiv-text="component.type"/></target>
       </trans-unit>
-      <trans-unit id="8956408262591847852" datatype="html">
-        <source> Student Notebook </source>
+      <trans-unit id="5662379156935763798" datatype="html">
+        <source> Enable Student Notebook </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">12,16</context>
+          <context context-type="linenumber">13,16</context>
         </context-group>
-        <target state="needs-translation"> Student Notebook </target>
+        <target state="needs-translation"> Enable Student Notebook </target>
       </trans-unit>
       <trans-unit id="4080836711065708122" datatype="html">
         <source>Notebook Label</source>
@@ -14380,7 +14384,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">202,205</context>
+          <context context-type="linenumber">205,208</context>
         </context-group>
         <target state="needs-translation">Notebook Label</target>
       </trans-unit>
@@ -14404,7 +14408,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">223,226</context>
+          <context context-type="linenumber">226,229</context>
         </context-group>
         <target state="needs-translation">Label (Singular)</target>
       </trans-unit>
@@ -14420,7 +14424,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">231,234</context>
+          <context context-type="linenumber">234,237</context>
         </context-group>
         <target state="needs-translation">Label (Plural)</target>
       </trans-unit>
@@ -14436,7 +14440,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">239,242</context>
+          <context context-type="linenumber">242,245</context>
         </context-group>
         <target state="needs-translation">Label (Link)</target>
       </trans-unit>
@@ -14444,7 +14448,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> Enable Add Note Button </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">71,75</context>
+          <context context-type="linenumber">71,74</context>
         </context-group>
         <target state="needs-translation"> Enable Add Note Button </target>
       </trans-unit>
@@ -14452,7 +14456,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> Require students to write text on every note </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">81,85</context>
+          <context context-type="linenumber">81,84</context>
         </context-group>
         <target state="needs-translation"> Require students to write text on every note </target>
       </trans-unit>
@@ -14460,7 +14464,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         <source> Enable Clipping </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">90,94</context>
+          <context context-type="linenumber">90,93</context>
         </context-group>
         <target state="needs-translation"> Enable Clipping </target>
       </trans-unit>
@@ -14480,7 +14484,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">217,219</context>
+          <context context-type="linenumber">220,222</context>
         </context-group>
         <target state="needs-translation"> Enable Report </target>
       </trans-unit>
@@ -14492,7 +14496,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">250,251</context>
+          <context context-type="linenumber">253,256</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
@@ -14516,17 +14520,17 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">274,276</context>
+          <context context-type="linenumber">281,283</context>
         </context-group>
         <target state="needs-translation">Starter Text</target>
       </trans-unit>
-      <trans-unit id="5642130327490278395" datatype="html">
-        <source> Teacher Notebook </source>
+      <trans-unit id="8813126972024269116" datatype="html">
+        <source> Enable Teacher Notebook </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/notebook-authoring/notebook-authoring.component.html</context>
-          <context context-type="linenumber">195,199</context>
+          <context context-type="linenumber">199,202</context>
         </context-group>
-        <target state="needs-translation"> Teacher Notebook </target>
+        <target state="needs-translation"> Enable Teacher Notebook </target>
       </trans-unit>
       <trans-unit id="4199930238964775542" datatype="html">
         <source>Different Ideas</source>
