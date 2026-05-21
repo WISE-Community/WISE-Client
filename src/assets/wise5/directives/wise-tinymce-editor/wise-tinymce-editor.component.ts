@@ -166,7 +166,8 @@ export class WiseTinymceEditorComponent {
         }
       },
       paste_block_drop: true,
-      skin_url: '/assets/tinymce/wise'
+      skin_url: '/assets/tinymce/wise',
+      promotion: false
     };
   }
 
@@ -266,5 +267,5 @@ export class WiseTinymceEditorComponent {
     return content;
   }
 
-  protected filePicker(cb: any, value: any, meta: any): void {}
+  protected filePicker(cb: any, value: any, meta: any): void { }
 }
