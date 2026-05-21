@@ -131,7 +131,13 @@
   },
   "overrides": {
     "form-data": "^2.5.5",
-    "xmldom": "npm:@xmldom/xmldom@^0.9.10"
+    "xmldom": "npm:@xmldom/xmldom@^0.9.10",
+    "braces": "^3.0.3",
+    "flatted": "^3.4.2",
+    "lodash": "^4.18.1",
+    "micromatch": "^4.0.8",
+    "picomatch": "^4.0.4",
+    "npm": "^11.15.0"
   },
   "scripts": {
     "serve-dev": "npm install && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng serve --hmr --host 0.0.0.0",
