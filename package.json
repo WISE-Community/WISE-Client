@@ -70,7 +70,7 @@
     "tinymce": "^5.10.3",
     "tslib": "^2.3.1",
     "webfontloader": "^1.6.28",
-    "xmldom": "^0.1.31",
+    "xmldom": "npm:@xmldom/xmldom@^0.9.10",
     "zone.js": "^0.15.0"
   },
   "devDependencies": {
@@ -128,6 +128,10 @@
     "tslint": "~6.1.0",
     "typescript": "^5.5.0",
     "url-loader": "^4.1.1"
+  },
+  "overrides": {
+    "form-data": "^2.5.5",
+    "xmldom": "npm:@xmldom/xmldom@^0.9.10"
   },
   "scripts": {
     "serve-dev": "npm install && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng serve --hmr --host 0.0.0.0",
