@@ -24,23 +24,19 @@ import { components } from '../../../assets/wise5/components/Components';
       .edit-component-advanced {
         --mat-tab-divider-color: var(--mat-divider-color);
         --mat-tab-divider-height: 1px;
-        .mat-divider {
-          margin: 0 -16px;
-        }
         .mat-mdc-tab-body-content {
-          padding: 16px 0;
+          padding: 16px;
         }
         .mat-mdc-tab-header {
           position: sticky;
           top: 0;
           z-index: 2;
           background-color: white;
-          margin: 0 -16px;
         }
       }
     `
   ],
-  template: '<div #component></div>'
+  template: '<div class="edit-component-advanced" #component></div>'
 })
 export class EditComponentAdvancedComponent {
   @Input() component: WISEComponent;

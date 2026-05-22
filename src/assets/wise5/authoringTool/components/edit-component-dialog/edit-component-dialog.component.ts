@@ -21,12 +21,12 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
     MatSlideToggle
   ],
   template: `
-    <div class="flex items-center">
+    <div class="flex items-center justify-between pe-4">
       <h2 mat-dialog-title i18n>Edit: {{ componentIndex }}. {{ componentTypeLabel }}</h2>
-      <mat-slide-toggle [(ngModel)]="advancedMode" i18n>Advanced mode</mat-slide-toggle>
+      <mat-slide-toggle color="primary" [(ngModel)]="advancedMode" i18n>Advanced</mat-slide-toggle>
     </div>
     <mat-divider />
-    <mat-dialog-content>
+    <mat-dialog-content class="!max-h-none" [class.advanced]="advancedMode">
       @if (advancedMode) {
         <edit-component-advanced [component]="component" />
       } @else {
@@ -47,6 +47,9 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   styles: `
     .mat-divider {
       margin: 0;
+    }
+    .advanced {
+      padding: 0 !important;
     }
   `
 })
