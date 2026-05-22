@@ -97,6 +97,7 @@ export class ComponentAuthoringComponent {
         componentContent: this.componentContent,
         nodeId: this.nodeId
       },
+      height: '90vh',
       panelClass: 'dialog-xl'
     });
   }
