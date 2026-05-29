@@ -52,27 +52,19 @@ export class WiseTinymceEditorComponent {
     'emoticons',
     'fullscreen',
     'help',
-    'hr',
     'image',
-    'imagetools',
     'importcss',
     'insertdatetime',
     'link',
     'lists',
     'media',
     'nonbreaking',
-    'noneditable',
     'pagebreak',
-    'paste',
     'preview',
-    'print',
     'quickbars',
     'save',
     'searchreplace',
     'table',
-    'template',
-    'textpattern',
-    'toc',
     'visualblocks',
     'visualchars',
     'wordcount'
@@ -136,7 +128,7 @@ export class WiseTinymceEditorComponent {
       content_css: '/siteStyles.css',
       media_live_embeds: true,
       extended_valid_elements: this.extendedValidElements,
-      font_formats: `Roboto=Roboto,Helvetica Neue,sans-serif; Raleway=Raleway,sans-serif;
+      font_family_formats: `Roboto=Roboto,Helvetica Neue,sans-serif; Raleway=Raleway,sans-serif;
         Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde;
         Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino;
         Helvetica=helvetica; Impact=impact,chicago; Tahoma=tahoma,arial,helvetica,sans-serif;
@@ -267,5 +259,5 @@ export class WiseTinymceEditorComponent {
     return content;
   }
 
-  protected filePicker(cb: any, value: any, meta: any): void { }
+  protected filePicker(cb: any, value: any, meta: any): void {}
 }
