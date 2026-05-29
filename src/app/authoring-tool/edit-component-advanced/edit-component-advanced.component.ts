@@ -11,19 +11,23 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatDivider } from '@angular/material/divider';
 import { Component as WISEComponent } from '../../../assets/wise5/common/Component';
 import { components } from '../../../assets/wise5/components/Components';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [MatDivider, MatDialogModule, MatButtonModule],
+  imports: [MatDialogModule, MatButtonModule],
   selector: 'edit-component-advanced',
   styles: [
     `
       .edit-component-advanced {
         --mat-tab-divider-color: var(--mat-divider-color);
         --mat-tab-divider-height: 1px;
+        height: 100%;
+        .mat-mdc-tab-group,
+        .mat-mdc-tab-body-wrapper {
+          height: 100%;
+        }
         .mat-mdc-tab-body-content {
           padding: 16px;
         }

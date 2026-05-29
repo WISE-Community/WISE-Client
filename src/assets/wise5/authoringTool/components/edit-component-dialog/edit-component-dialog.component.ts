@@ -28,10 +28,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
     <mat-divider />
     <mat-dialog-content class="!max-h-none" [class.advanced]="advancedMode">
       @if (advancedMode) {
-        <edit-component-advanced [component]="component" />
+        <edit-component-advanced class="h-full" [component]="component" />
       } @else {
         <edit-component
-          class="block py-4"
+          class="block h-full py-4"
           [componentContent]="data.componentContent"
           [nodeId]="data.nodeId"
         />
