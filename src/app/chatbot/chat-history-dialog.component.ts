@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,7 +22,6 @@ export interface ChatHistoryDialogData {
 @Component({
   selector: 'chat-history-dialog',
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatDialogModule,

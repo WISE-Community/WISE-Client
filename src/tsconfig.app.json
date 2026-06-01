@@ -2,9 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "baseUrl": "./",
-    "types": ["jquery", "node", "dom-mediacapture-record"],
-    "paths": {}
+    "types": ["jquery", "node", "dom-mediacapture-record"]
   },
   "files": [
     "main.ts",

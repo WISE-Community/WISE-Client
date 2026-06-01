@@ -1,4 +1,9 @@
-import { enableProdMode, inject, provideAppInitializer } from '@angular/core';
+import {
+  enableProdMode,
+  inject,
+  provideAppInitializer,
+  provideZoneChangeDetection
+} from '@angular/core';
 import { MARKED_OPTIONS, provideMarkdown, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -57,6 +62,7 @@ export function markedOptionsFactory(): MarkedOptions {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideZoneChangeDetection(),
     ArchiveProjectService,
     ConfigService,
     StudentService,

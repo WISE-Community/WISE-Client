@@ -5,6 +5,9 @@
  */
 export function temporarilyHighlightElement(id: string, duration: number = 1000): void {
   const element = document.getElementById(id);
+  if (!element) {
+    return;
+  }
   element.classList.add('highlighted-bg');
   setTimeout(() => {
     element.style.transition = 'background-color 2s ease-in-out';
