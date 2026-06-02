@@ -68,6 +68,7 @@ export class ClassResponseTeacherComponent extends ClassResponse {
   @Input() response: any;
   @Output() showPostEvent: any = new EventEmitter();
   @Output() submitButtonClicked: any = new EventEmitter();
+  @Output() toggleHiddenPost: any = new EventEmitter();
 
   protected expanded: boolean = false;
   protected repliesToShow: any[] = [];
@@ -86,5 +87,9 @@ export class ClassResponseTeacherComponent extends ClassResponse {
     if (confirm($localize`Are you sure you want to show this content?`)) {
       this.showPostEvent.emit(componentState);
     }
+  }
+
+  protected onToggleHiddenPost(): void {
+    this.toggleHiddenPost.emit();
   }
 }

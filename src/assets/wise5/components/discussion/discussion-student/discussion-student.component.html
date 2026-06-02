@@ -1,129 +1,95 @@
 <component-header [component]="component" />
-<div class="discussion-content">
+<div class="discussion-content notice-bg-bg">
   @if (mode === 'student') {
     <component-annotations
-      class="annotations--inside"
+      class="annotations--inside block pt-1 px-2"
       [annotations]="latestAnnotations"
       [maxScore]="componentContent.maxScore"
       [nodeId]="nodeId"
       [componentId]="componentId"
     />
   }
-  <div class="flex @container">
-    <div class="discussion-posts w-full @md:w-1/2">
+  <div class="discussion-posts-wrap">
+    <div class="discussion-posts" #postsGrid>
       @if (mode === 'student' && !isDisabled) {
-        <mat-card
-          appearance="outlined"
-          class="discussion-new discussion-post"
-          [ngClass]="{
-            'discussion-new--focused md-whiteframe-z3': focus || newResponse || attachments.length
-          }"
-        >
-          <mat-form-field class="input--placeholder-only discussion-new__input-container">
-            <textarea
-              matInput
-              class="discussion-new__input--textarea"
-              placeholder="Share with class..."
-              i18n-placeholder
-              [(ngModel)]="newResponse"
-              [disabled]="isDisabled"
-              (ngModelChange)="studentDataChanged()"
-              (focus)="focus = true"
-              (blur)="focus = false"
-              cdkTextareaAutosize
-              maxlength="10000"
-            >
-            </textarea>
-          </mat-form-field>
-          @if (isStudentAttachmentEnabled && attachments.length) {
-            <div class="discussion-new__actions">
-              @for (attachment of attachments; track attachment) {
-                <div class="component__attachment discussion-new__attachment">
-                  <img
-                    [src]="attachment.iconURL"
-                    alt="Image"
-                    i18n-alt
-                    class="discussion-post__attachment discussion-new__attachment__content"
-                  />
-                  <button
-                    mat-button
-                    class="component__attachment__delete"
-                    (click)="removeAttachment(attachment)"
-                    title="Remove file"
-                    i18n-title
-                    [disabled]="isDisabled"
-                  >
-                    <mat-icon>cancel</mat-icon>
-                  </button>
-                </div>
-              }
-            </div>
-          }
-          <div class="discussion-new__actions flex justify-end items-center gap-5">
-            @if (isStudentAttachmentEnabled) {
-              <button
-                mat-button
-                color="accent"
-                (click)="showStudentAssets()"
-                title="Add picture"
-                i18n-title
+        <div class="pb-2">
+          <mat-card
+            #newPost
+            appearance="outlined"
+            class="w-full scale-95 transition-transform duration-200 ease-in-out p-2 pb-0"
+            [ngClass]="{
+              'scale-100': focus || newResponse || attachments.length
+            }"
+          >
+            <mat-form-field class="form-field-no-hint">
+              <textarea
+                matInput
+                placeholder="Share with class..."
+                i18n-placeholder
+                [(ngModel)]="newResponse"
                 [disabled]="isDisabled"
+                (ngModelChange)="studentDataChanged()"
+                (focus)="focus = true"
+                (blur)="focus = false"
+                cdkTextareaAutosize
+                maxlength="10000"
               >
-                <mat-icon>image</mat-icon>
-              </button>
+              </textarea>
+            </mat-form-field>
+            @if (isStudentAttachmentEnabled && attachments.length) {
+              <div>
+                @for (attachment of attachments; track attachment) {
+                  <div class="component__attachment">
+                    <img [src]="attachment.iconURL" class="w-full h-auto" alt="Image" i18n-alt />
+                    <button
+                      matIconButton
+                      class="component__attachment__delete"
+                      (click)="removeAttachment(attachment)"
+                      title="Remove file"
+                      i18n-title
+                      [disabled]="isDisabled"
+                    >
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </div>
+                }
+              </div>
             }
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="handleSubmitButtonClicked()"
-              [disabled]="isDisabled || (!newResponse && attachments.length == 0)"
-              i18n
-            >
-              Post
-            </button>
-          </div>
-        </mat-card>
-      } @else {
-        <div
-          class="discussion-new__input--textarea input--textarea--disabled"
-          [(ngModel)]="newResponse"
-        ></div>
+            <div class="flex justify-end items-center gap-2 mt-1">
+              @if (isStudentAttachmentEnabled) {
+                <button
+                  matIconButton
+                  class="accent"
+                  (click)="showStudentAssets()"
+                  title="Add picture"
+                  i18n-title
+                  [disabled]="isDisabled"
+                >
+                  <mat-icon>image</mat-icon>
+                </button>
+              }
+              <button
+                mat-flat-button
+                color="primary"
+                (click)="handleSubmitButtonClicked()"
+                [disabled]="isDisabled || (!newResponse && attachments.length == 0)"
+                i18n
+              >
+                Post
+              </button>
+            </div>
+          </mat-card>
+        </div>
       }
-      <div class="@md:hidden">
-        @for (componentState of topLevelResponses.all; track componentState) {
-          <class-response
-            [response]="componentState"
-            [numReplies]="componentState.replies.length"
-            (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
-            [mode]="mode"
-            [isDisabled]="isDisabled"
-            class="post"
-          />
-        }
-      </div>
-      <div class="hidden @sm:block">
-        @for (componentState of topLevelResponses.col2; track componentState) {
-          <class-response
-            [response]="componentState"
-            [numReplies]="componentState.replies.length"
-            (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
-            [mode]="mode"
-            [isDisabled]="isDisabled"
-            class="post"
-          />
-        }
-      </div>
-    </div>
-    <div class="discussion-posts hidden w-1/2 @md:block">
-      @for (componentState of topLevelResponses.col1; track componentState) {
+      @for (componentState of topLevelResponses.all; track componentState) {
         <class-response
           [response]="componentState"
           [numReplies]="componentState.replies.length"
           (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
           [mode]="mode"
           [isDisabled]="isDisabled"
+          (expandChanged)="applyMasonry()"
           class="post"
-          style="display: block"
         />
       }
     </div>
