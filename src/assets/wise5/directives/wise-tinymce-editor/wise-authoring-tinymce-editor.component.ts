@@ -107,7 +107,8 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
           isPopup: true,
           allowedFileTypes: this.getAllowedFileTypesFromMeta(meta)
         },
-        width: '80%'
+        panelClass: 'dialog-lg',
+        backdropClass: 'dialog-above'
       })
       .afterClosed()
       .subscribe((result: any) => {
