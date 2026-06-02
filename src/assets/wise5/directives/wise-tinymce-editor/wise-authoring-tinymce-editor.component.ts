@@ -30,7 +30,7 @@ declare let tinymce: any;
   />`
 })
 export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorComponent {
-  protected toolbar: string = `undo redo | fontselect | formatselect | fontsizeselect |
+  protected toolbar: string = `undo redo | fontfamily | blocks | fontsize |
     bold italic underline | image media link wiselink | forecolor backcolor | alignment numlist bullist |
     emoticons removeformat fullscreen`;
   protected toolbarGroups: any = {

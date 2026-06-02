@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SummaryDisplayComponent } from '../summary-display/summary-display.component';
 import { StudentDataService } from '../../services/studentDataService';
 import { Observable, Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
+
 import { HighchartsChartModule } from 'highcharts-angular';
 import { Annotation } from '../../common/Annotation';
 import { ComponentState } from '../../../../app/domain/componentState';
@@ -14,7 +14,7 @@ import { Choice } from '../../components/multipleChoice/Choice';
 import { MultipleChoiceContent } from '../../components/multipleChoice/MultipleChoiceContent';
 
 @Component({
-  imports: [CommonModule, HighchartsChartModule],
+  imports: [HighchartsChartModule],
   selector: 'student-summary-display',
   styleUrl: '../summary-display/summary-display.component.scss',
   templateUrl: '../summary-display/summary-display.component.html'

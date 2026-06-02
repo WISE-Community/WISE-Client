@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { ClassroomStatusService } from '../../../../services/classroomStatusService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { Node } from '../../../../common/Node';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   imports: [
-    CommonModule,
     ComponentSummaryComponent,
     FilterComponentsComponent,
     MatButtonModule,

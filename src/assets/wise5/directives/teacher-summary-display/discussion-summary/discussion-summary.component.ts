@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Component as WISEComponent } from '../../../common/Component';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
@@ -9,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TEACHER_SUMMARY_CONFIG } from '../TeacherSummaryConfig';
 
 @Component({
-  imports: [CommonModule, DiscussionTeacherComponent, FormsModule, MatSlideToggle],
+  imports: [DiscussionTeacherComponent, FormsModule, MatSlideToggle],
   selector: 'discussion-summary',
   styleUrl: '../../summary-display/summary-display.component.scss',
   template: `

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule],
+  imports: [],
   selector: 'audio-oscillator-show-work',
   templateUrl: 'audio-oscillator-show-work.component.html'
 })

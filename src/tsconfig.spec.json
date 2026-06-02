@@ -2,7 +2,6 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
-    "baseUrl": "./",
     "types": [
       "jasmine",
       "jquery",
@@ -15,7 +14,7 @@
     "polyfills.ts"
   ],
   "include": [
-    "../../**/*.spec.ts",
+    "test.ts",
     "**/*.spec.ts",
     "**/*.d.ts"
   ]
