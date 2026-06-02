@@ -5,6 +5,12 @@
     </button>
     @if (showStepTools) {
       <step-tools />
+      <!-- @if (content[key] && isTranslationServiceEnabled()) { -->
+      <span class="translation-link">
+        <mat-icon class="primary align-middle">auto_awesome</mat-icon>
+        <a href="#" role="button" (click)="translateAllText($event)" i18n>Translate Step with AI</a>
+      </span>
+      <!-- } -->
     } @else {
       <span class="toolbar__title">{{ viewName }}</span>
     }

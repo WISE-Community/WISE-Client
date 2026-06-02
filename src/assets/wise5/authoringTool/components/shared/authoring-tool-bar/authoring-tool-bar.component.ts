@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { StepToolsComponent } from '../../../../common/stepTools/step-tools.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TeacherProjectService } from '../../../../services/teacherProjectService';
+import { ProjectService } from '../../../../services/projectService';
+import { ComponentContent } from '../../../../common/ComponentContent';
 
 @Component({
   imports: [
@@ -30,7 +33,8 @@ export class AuthoringToolBarComponent {
 
   constructor(
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -82,5 +86,23 @@ export class AuthoringToolBarComponent {
 
   protected toggleMenu(): void {
     this.onMenuToggle.emit();
+  }
+
+  protected async translateAllText(event: Event): Promise<void> {
+    event.preventDefault();
+    this.projectService
+      .getStepNodeIds() // when would a step have multiple node ids?
+      .forEach((id) => console.log(this.projectService.getComponents(id)));
+
+    // loop through all components
+    // if no translation text -> translate and save
+    // if translation text -> add to array then open in dialog
+
+    const componentsToTranslate = new Array<ComponentContent>();
+    const componentsForDialog = new Array<ComponentContent>();
+
+    // this.projectService
+    //   .getStepNodeIds() // when would a step have multiple node ids?
+    //   .forEach((id) => this.projectService.getComponents(id).forEach());
   }
 }
