@@ -11154,14 +11154,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Edit: <x id="INTERPOLATION" equiv-text="{{ componentIndex }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ componentTypeLabel }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">25,26</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6201638315245239510" datatype="html">
         <source>Advanced</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">26,29</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-node-advanced-button/edit-node-advanced-button.component.ts</context>
@@ -11172,7 +11172,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Close </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">43,48</context>
+          <context context-type="linenumber">44,49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
@@ -11302,7 +11302,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">18,22</context>
+          <context context-type="linenumber">19,23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component.html</context>
@@ -11313,21 +11313,21 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Copy content from <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">13,14</context>
+          <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2987881625559241399" datatype="html">
         <source>Note: Editing is disabled. Please switch back to <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> if you want to edit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">33,34</context>
+          <context context-type="linenumber">36,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2602981828256525663" datatype="html">
         <source> Copy content to <x id="INTERPOLATION" equiv-text="{{ currentLanguage().language }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">43,44</context>
+          <context context-type="linenumber">46,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5046317553228226783" datatype="html">
