@@ -7,11 +7,12 @@ import { TranslatableRichTextEditorComponent } from '../../../assets/wise5/autho
   imports: [TranslatableRichTextEditorComponent],
   selector: 'edit-component-rubric',
   styles: `
-    translatable-rich-text-editor editor {
-      height: 100% !important;
+    translatable-rich-text-editor .mat-mdc-tab-body-content {
+      padding: 0 !important;
     }
   `,
   template: `<translatable-rich-text-editor
+    class="translatable-rich-text-full-height"
     [content]="componentContent"
     key="rubric"
     (defaultLanguageTextChanged)="save()"

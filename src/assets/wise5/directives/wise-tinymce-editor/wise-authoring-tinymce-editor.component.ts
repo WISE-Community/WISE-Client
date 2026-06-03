@@ -96,7 +96,7 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
 
   private openWISELinkChooser(): any {
     return this.dialog.open(WiseLinkAuthoringDialogComponent, {
-      width: '80%'
+      panelClass: 'dialog-lg'
     });
   }
 

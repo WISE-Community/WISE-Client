@@ -1,16 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractComponentAuthoring } from '../../../authoringTool/components/AbstractComponentAuthoring';
 import { TranslatableRichTextEditorComponent } from '../../../authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
   imports: [TranslatableRichTextEditorComponent],
-  styles: `
-    translatable-rich-text-editor editor {
-      height: 100% !important;
-    }
-  `,
   template: `<translatable-rich-text-editor
+    class="translatable-rich-text-full-height"
     [content]="componentContent"
     key="html"
     (defaultLanguageTextChanged)="componentChanged()"

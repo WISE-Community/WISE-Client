@@ -24,18 +24,20 @@ import { components } from '../../../assets/wise5/components/Components';
         --mat-tab-divider-color: var(--mat-divider-color);
         --mat-tab-divider-height: 1px;
         height: 100%;
-        .mat-mdc-tab-group,
-        .mat-mdc-tab-body-wrapper {
+        > .mat-mdc-tab-group {
           height: 100%;
-        }
-        .mat-mdc-tab-body-content {
-          padding: 16px;
-        }
-        .mat-mdc-tab-header {
-          position: sticky;
-          top: 0;
-          z-index: 2;
-          background-color: white;
+          .mat-mdc-tab-body-wrapper {
+            height: 100%;
+          }
+          .mat-mdc-tab-body-content {
+            padding: 16px;
+          }
+          .mat-mdc-tab-header {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background-color: white;
+          }
         }
       }
     `

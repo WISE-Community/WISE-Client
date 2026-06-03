@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { EditComponentComponent } from '../edit-component/edit-component.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,7 @@ import { EditComponentAdvancedComponent } from '../../../../../app/authoring-too
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   imports: [
     EditComponentComponent,
     EditComponentAdvancedComponent,
@@ -25,8 +26,8 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
       <h2 mat-dialog-title i18n>Edit: {{ componentIndex }}. {{ componentTypeLabel }}</h2>
       <mat-slide-toggle color="primary" [(ngModel)]="advancedMode" i18n>Advanced</mat-slide-toggle>
     </div>
-    <mat-divider />
-    <mat-dialog-content class="!max-h-none" [class.advanced]="advancedMode">
+    <mat-divider class="!m-0" />
+    <mat-dialog-content class="!max-h-none" [class.advanced-component-authoring]="advancedMode">
       @if (advancedMode) {
         <edit-component-advanced class="h-full" [component]="component" />
       } @else {
@@ -37,7 +38,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
         />
       }
     </mat-dialog-content>
-    <mat-divider />
+    <mat-divider class="!m-0" />
     <mat-dialog-actions align="end">
       <button class="enable-in-translation" mat-button mat-dialog-close cdkFocusRegionstart i18n>
         Close
@@ -45,11 +46,27 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
     </mat-dialog-actions>
   `,
   styles: `
-    .mat-divider {
-      margin: 0;
+    @reference "tailwindcss";
+    .advanced-component-authoring {
+      @apply !p-0;
     }
-    .advanced {
-      padding: 0 !important;
+    .translatable-rich-text-full-height {
+      @apply h-full block;
+      .mat-tab-group,
+      .mat-mdc-tab-group,
+      .mat-mdc-tab-body-wrapper,
+      .mat-mdc-tab-body-content {
+        @apply h-full;
+      }
+      .translatable-rich-text-editor {
+        @apply h-full flex flex-col;
+        wise-authoring-tinymce-editor {
+          @apply flex-1;
+        }
+      }
+      editor {
+        @apply !h-full;
+      }
     }
   `
 })
