@@ -7,11 +7,9 @@ import { PeerChatMembersComponent } from '../peer-chat-members/peer-chat-members
 import { PeerChatMessagesComponent } from '../peer-chat-messages/peer-chat-messages.component';
 import { PeerChatMessageInputComponent } from '../peer-chat-message-input/peer-chat-message-input.component';
 import { PeerChatMemberTypingIndicatorComponent } from '../peer-chat-member-typing-indicator/peer-chat-member-typing-indicator.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   imports: [
-    CommonModule,
     MatCardModule,
     PeerChatMembersComponent,
     PeerChatMemberTypingIndicatorComponent,

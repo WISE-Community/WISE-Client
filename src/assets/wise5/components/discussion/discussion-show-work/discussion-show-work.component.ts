@@ -6,10 +6,9 @@ import { ProjectService } from '../../../services/projectService';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
 import { TeacherDiscussionService } from '../teacherDiscussionService';
 import { ClassResponse } from '../class-response/class-response.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [ClassResponse, CommonModule],
+  imports: [ClassResponse],
   selector: 'discussion-show-work',
   styles: ['.discussion-content { padding: 16px; }'],
   templateUrl: 'discussion-show-work.component.html'

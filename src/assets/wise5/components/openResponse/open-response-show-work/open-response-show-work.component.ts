@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ComponentShowWorkDirective } from '../../component-show-work.directive';
-import { CommonModule } from '@angular/common';
+
 import { CRaterRubric } from '../../common/cRater/CRaterRubric';
 import { DetectedIdeasComponent } from '../../dialogGuidance/detected-ideas/detected-ideas.component';
 import { NodeService } from '../../../services/nodeService';
@@ -11,7 +11,7 @@ import { ShowCRaterRubricComponent } from '../../../../../app/classroom-monitor/
 import { UserService } from '../../../../../app/services/user.service';
 
 @Component({
-  imports: [CommonModule, DetectedIdeasComponent, ShowCRaterRubricComponent],
+  imports: [DetectedIdeasComponent, ShowCRaterRubricComponent],
   selector: 'open-response-show-work',
   templateUrl: 'open-response-show-work.component.html'
 })
