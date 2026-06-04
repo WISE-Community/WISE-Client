@@ -13,7 +13,7 @@ import { components } from '../../../components/Components';
 
 @Component({
   selector: 'edit-component',
-  template: '<div #component tabindex="-1"></div>'
+  template: '<div #component class="h-full" tabindex="-1"></div>'
 })
 export class EditComponentComponent {
   @Input() componentContent: ComponentContent;

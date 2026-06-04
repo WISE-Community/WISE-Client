@@ -24,7 +24,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { ComponentAuthoringComponent } from '../../components/component-authoring.component';
-import { EditComponentAdvancedButtonComponent } from '../../components/edit-component-advanced-button/edit-component-advanced-button.component';
 import { ToggleComponentTagComponent } from '../../components/toggle-component-tag/toggle-component-tag.component';
 import { VisibilityConstraintIconComponent } from '../../components/visibility-constraint-icon/visibility-constraint-icon.component';
 import { EditNodeAdvancedButtonComponent } from '../../components/edit-node-advanced-button/edit-node-advanced-button.component';
@@ -36,7 +35,6 @@ import { EditNodeAdvancedButtonComponent } from '../../components/edit-node-adva
     ComponentAuthoringComponent,
     CopyComponentButtonComponent,
     DragDropModule,
-    EditComponentAdvancedButtonComponent,
     EditNodeAdvancedButtonComponent,
     EditNodeTitleComponent,
     FormsModule,
@@ -56,7 +54,6 @@ import { EditNodeAdvancedButtonComponent } from '../../components/edit-node-adva
 })
 export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];
-  protected editingComponentId: string;
   protected isGroupNode: boolean;
   protected node: Node;
   private nodeJson: any;
@@ -86,7 +83,6 @@ export class NodeAuthoringComponent implements OnInit {
     this.isGroupNode = this.projectService.isGroupNode(this.nodeId);
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
-    this.editingComponentId = null;
 
     if (history.state.newComponents && history.state.newComponents.length > 0) {
       this.highlightComponents(history.state.newComponents);
@@ -255,9 +251,5 @@ export class NodeAuthoringComponent implements OnInit {
       this.highlightComponents([this.components[currentIndex]]);
     }
     this.projectService.saveProject();
-  }
-
-  protected editComponent(componentId: string): void {
-    this.editingComponentId = componentId;
   }
 }

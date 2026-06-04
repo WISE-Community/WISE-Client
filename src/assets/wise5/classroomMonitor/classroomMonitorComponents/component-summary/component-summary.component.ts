@@ -161,7 +161,7 @@ export class ComponentSummaryComponent {
     MatIconModule
   ],
   styles: `
-    @import 'tailwindcss';
+    @reference "tailwindcss";
 
     .summary-dialog {
       @apply w-full h-full !max-w-[120rem];

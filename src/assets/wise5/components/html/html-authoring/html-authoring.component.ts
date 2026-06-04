@@ -5,9 +5,10 @@ import { TranslatableRichTextEditorComponent } from '../../../authoringTool/comp
 @Component({
   imports: [TranslatableRichTextEditorComponent],
   template: `<translatable-rich-text-editor
+    class="translatable-rich-text-full-height"
     [content]="componentContent"
     key="html"
     (defaultLanguageTextChanged)="componentChanged()"
-  /> `
+  />`
 })
 export class HtmlAuthoringComponent extends AbstractComponentAuthoring {}

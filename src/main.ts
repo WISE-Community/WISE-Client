@@ -24,6 +24,7 @@ import {
   withRouterConfig
 } from '@angular/router';
 import { appRoutes } from './app/app-routing.module';
+import { OVERLAY_DEFAULT_CONFIG } from '@angular/cdk/overlay';
 
 if (environment.production) {
   enableProdMode();
@@ -86,6 +87,9 @@ bootstrapApplication(AppComponent, {
         horizontalPosition: 'start'
       }
     },
+    // Kludge to fix TinyMCE menus and dialogs appearing behind Angular Material overlays
+    // Resolve once issue is fixed by TinyMCE
+    { provide: OVERLAY_DEFAULT_CONFIG, useValue: { usePopover: false } },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
