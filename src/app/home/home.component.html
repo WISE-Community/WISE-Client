@@ -46,6 +46,10 @@
           queryString="order=latest"
         />
       </ng-template>
+    } @else {
+      <ng-template #sideTemplate>
+        <admin-latest-news />
+      </ng-template>
     }
   </app-hero-section>
   <section class="section">
