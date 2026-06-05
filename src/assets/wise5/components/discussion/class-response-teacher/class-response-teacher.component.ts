@@ -88,8 +88,4 @@ export class ClassResponseTeacherComponent extends ClassResponse {
       this.showPostEvent.emit(componentState);
     }
   }
-
-  protected onToggleHiddenPost(): void {
-    this.toggleHiddenPost.emit();
-  }
 }
