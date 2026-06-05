@@ -55,7 +55,13 @@
                 }
               </div>
             }
-            <div class="flex justify-end items-center gap-2 mt-1">
+            <div
+              class="flex justify-end items-center gap-2"
+              [ngClass]="{
+                'my-2': !isStudentAttachmentEnabled,
+                'my-0.5': isStudentAttachmentEnabled
+              }"
+            >
               @if (isStudentAttachmentEnabled) {
                 <button
                   matIconButton
