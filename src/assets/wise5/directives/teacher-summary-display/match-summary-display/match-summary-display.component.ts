@@ -5,12 +5,14 @@ import { BucketData, ChoiceData, MatchSummaryData } from '../summary-data/MatchS
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
+import { ConfigService } from '../../../services/configService';
 
 export type SummaryViewMode = 'choice' | 'bucket';
 
 @Component({
-  imports: [CommonModule, MatButtonToggleModule, MatIconModule],
+  imports: [CommonModule, MatButtonToggleModule, MatIconModule, MatTooltipModule],
   selector: 'match-summary-display',
   styleUrls: [
     './match-summary-display.component.scss',
@@ -79,6 +81,13 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
 
   private sortByCount(a: MatchSummaryDataPoint, b: MatchSummaryDataPoint): number {
     return b.getCount() - a.getCount();
+  }
+
+  protected getWorkgroupNames(dataPoint: MatchSummaryDataPoint): string {
+    return dataPoint
+      .getWorkgroupIds()
+      .map((id) => this.configService.getDisplayUsernamesByWorkgroupId(id))
+      .join('\n');
   }
 
   protected renderDisplay(): void {
