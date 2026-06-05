@@ -1,6 +1,6 @@
 <mat-card appearance="outlined" class="class-response">
   @if (isHidden(response)) {
-    <details>
+    <details (toggle)="toggleHiddenPost.emit()">
       <summary class="secondary-text notice-bg-bg">
         <span class="flex-grow" i18n>This post is hidden from students.</span>
         <span class="details-closed" i18n>(tap to view)</span>
@@ -84,6 +84,7 @@
             @if (parentHidden || isHidden(reply)) {
               <details
                 class="reply-details rounded-md notice-bg-border border-1 open:border-transparent open:pb-2"
+                (toggle)="toggleHiddenPost.emit()"
               >
                 <summary class="secondary-text notice-bg-bg rounded-md" [class.py-2]="parentHidden">
                   @if (parentHidden) {

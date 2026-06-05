@@ -68,6 +68,7 @@ export class ClassResponseTeacherComponent extends ClassResponse {
   @Input() response: any;
   @Output() showPostEvent: any = new EventEmitter();
   @Output() submitButtonClicked: any = new EventEmitter();
+  @Output() toggleHiddenPost: any = new EventEmitter();
 
   protected expanded: boolean = false;
   protected repliesToShow: any[] = [];

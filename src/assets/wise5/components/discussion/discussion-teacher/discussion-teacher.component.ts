@@ -147,4 +147,8 @@ export class DiscussionTeacherComponent extends DiscussionStudent {
     }
     return annotations;
   }
+
+  protected toggleHiddenPost(): void {
+    this.applyMasonry();
+  }
 }
