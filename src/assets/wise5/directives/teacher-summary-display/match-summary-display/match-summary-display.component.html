@@ -15,7 +15,7 @@
             @if (!isChoiceReuseMatch) {
               <span
                 class="shrink-0 cursor-pointer"
-                [matTooltip]="getWorkgroupNames(choice)"
+                [matTooltip]="workgroupNamesTooltips.get(choice)"
                 matTooltipClass="multiline-tooltip"
                 matTooltipPosition="above"
                 tabindex="0"
@@ -50,7 +50,7 @@
               <span class="flex-1" [innerHTML]="bucketDataPoint.getBucketValue()"></span>
               <span
                 class="shrink-0 cursor-pointer"
-                [matTooltip]="getWorkgroupNames(bucketDataPoint)"
+                [matTooltip]="workgroupNamesTooltips.get(bucketDataPoint)"
                 matTooltipClass="multiline-tooltip"
                 matTooltipPosition="above"
                 tabindex="0"

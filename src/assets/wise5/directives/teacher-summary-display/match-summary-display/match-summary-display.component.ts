@@ -27,6 +27,7 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   protected isChoiceReuseMatch: boolean;
   private matchSummaryData: MatchSummaryData;
   viewMode: SummaryViewMode = 'bucket';
+  protected workgroupNamesTooltips = new Map<MatchSummaryDataPoint, string>();
 
   ngOnInit(): void {
     this.setIsChoiceReuseMatch();
@@ -43,11 +44,13 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     this.getLatestWork().subscribe((componentStates) => {
       this.bucketData = [];
       this.choiceData = [];
+      this.workgroupNamesTooltips = new Map();
       this.matchSummaryData = new MatchSummaryData(
         this.projectService.injectAssetPaths(componentStates)
       );
       this.setChoiceData();
       this.setBucketData();
+      this.setWorkgroupNamesTooltips();
     });
   }
 
@@ -83,11 +86,17 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     return b.getCount() - a.getCount();
   }
 
-  protected getWorkgroupNames(dataPoint: MatchSummaryDataPoint): string {
-    return dataPoint
-      .getWorkgroupIds()
-      .map((id) => this.configService.getDisplayUsernamesByWorkgroupId(id))
-      .join('\n');
+  private setWorkgroupNamesTooltips(): void {
+    const allDataPoints = this.matchSummaryData.getChoicesData().flatMap((c) => c.choiceDataPoints);
+    for (const dp of allDataPoints) {
+      this.workgroupNamesTooltips.set(
+        dp,
+        dp
+          .getWorkgroupIds()
+          .map((id) => this.configService.getDisplayUsernamesByWorkgroupId(id))
+          .join('\n')
+      );
+    }
   }
 
   protected renderDisplay(): void {
