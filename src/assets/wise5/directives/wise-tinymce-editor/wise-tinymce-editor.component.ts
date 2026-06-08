@@ -158,6 +158,7 @@ export class WiseTinymceEditorComponent {
         }
       },
       paste_block_drop: true,
+      paste_data_images: false,
       skin_url: '/assets/tinymce/wise',
       promotion: false
     };
