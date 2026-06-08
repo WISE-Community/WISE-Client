@@ -47,7 +47,11 @@ export class MatchSummaryData extends SummaryData {
           bucketStudentData.items.forEach((choice) => this.registerChoice(choice.value));
         } else {
           bucketStudentData.items.forEach((choice) => {
-            this.extractBucketDataPerChoice(choice.value, bucketStudentData.value);
+            this.extractBucketDataPerChoice(
+              choice.value,
+              bucketStudentData.value,
+              componentState.workgroupId
+            );
           });
         }
       });
@@ -60,12 +64,18 @@ export class MatchSummaryData extends SummaryData {
     }
   }
 
-  private extractBucketDataPerChoice(choiceValue: string, bucketValue: string): void {
+  private extractBucketDataPerChoice(
+    choiceValue: string,
+    bucketValue: string,
+    workgroupId: number
+  ): void {
     const dataPoint = this.findSummaryDataPoint(choiceValue, bucketValue);
     if (dataPoint) {
       dataPoint.incrementCount(1);
+      dataPoint.addWorkgroupId(workgroupId);
     } else {
       const newDataPoint = new MatchSummaryDataPoint(bucketValue, 1, choiceValue);
+      newDataPoint.addWorkgroupId(workgroupId);
       this.summaryDataPoints.push(newDataPoint);
       this.addDataPointToChoiceData(choiceValue, newDataPoint);
     }
