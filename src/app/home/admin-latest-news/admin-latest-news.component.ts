@@ -17,7 +17,7 @@ export class AdminLatestNewsComponent {
 
   ngOnInit(): void {
     this.newsService.getAllNews().subscribe((news) => {
-      this.topics = news;
+      this.topics = news.slice(0, 3);
       this.isLoaded = true;
     });
   }
