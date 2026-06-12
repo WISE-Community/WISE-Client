@@ -1,3 +1,4 @@
+@if (topics) {
 <div class="latest-news dark-theme primary-border" [ngClass]="{ loaded: isLoaded }">
   <h2
     class="flex items-center"
@@ -17,16 +18,12 @@
           } @else {
             {{ topic.title }}
           }
-          @if (smallScreen) {
-            •
-          }
+            <span class="divider"> • </span>
         </li>
       }
     }
   </ul>
-  @if (isDiscourseNewsAvailable) {
     <div [ngClass]="{ 'mat-small': smallScreen, 'mat-body-1': !smallScreen }">
       <a href="{{ baseUrl }}/{{ category }}" i18n>More news</a>
     </div>
   }
-</div>

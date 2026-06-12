@@ -30,6 +30,12 @@
   vertical-align: sub;
 }
 
+.divider {
+  @media (min-width: functions.breakpoint('sm.max')) {
+    display: none;
+  }
+}
+
 ul {
   padding: 0;
 
