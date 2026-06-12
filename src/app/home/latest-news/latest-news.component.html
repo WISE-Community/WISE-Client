@@ -8,7 +8,7 @@
       <ng-container i18n>What's New?</ng-container>&nbsp;
     </h2>
     <ul>
-      @for (topic of topics; track topic; let index = $index) {
+      @for (topic of threeTopics; track topic; let index = $index) {
         @if (!xsScreen || index === 0) {
           <li [ngClass]="{ 'mat-small': smallScreen, 'mat-body-1': !smallScreen }">
             @if (isDiscourseNewsAvailable) {

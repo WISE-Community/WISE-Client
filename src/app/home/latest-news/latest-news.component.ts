@@ -7,6 +7,8 @@ import { News } from '../../domain/news';
 import { MatDialog } from '@angular/material/dialog';
 import { MoreNewsDialogComponent } from '../more-news-dialog/more-news-dialog.component';
 
+type Topic = News | { slug: string; id: number; title: string };
+
 @Component({
   selector: 'latest-news',
   imports: [CommonModule, MatIconModule],
@@ -17,7 +19,8 @@ export class LatestNewsComponent {
   protected smallScreen: boolean;
   protected xsScreen: boolean;
   @Input() isDiscourseNewsAvailable: boolean;
-  @Input() topics: News[] | { slug: string; id: number; title: string }[];
+  @Input() topics: Topic[];
+  protected threeTopics: Topic[];
   @Input() baseUrl?: string;
   @Input() category?: string;
   @Input() isLoaded: boolean;
@@ -35,6 +38,10 @@ export class LatestNewsComponent {
     this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
       this.xsScreen = result.matches;
     });
+  }
+
+  ngOnChanges(): void {
+    this.threeTopics = this.topics.slice(0, 3);
   }
 
   openNewsDialog(event: Event): void {
