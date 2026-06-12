@@ -13,12 +13,14 @@ import { HomePageProjectLibraryComponent } from '../modules/library/home-page-pr
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
+import { AdminLatestNewsComponent } from './admin-latest-news/admin-latest-news.component';
 
 @Component({
   animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn],
   imports: [
     HeroSectionComponent,
     MatIcon,
+    AdminLatestNewsComponent,
     DiscourseLatestNewsComponent,
     NgClass,
     BlurbComponent,
