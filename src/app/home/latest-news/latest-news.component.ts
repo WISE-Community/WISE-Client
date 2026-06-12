@@ -4,6 +4,8 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { News } from '../../domain/news';
+import { MatDialog } from '@angular/material/dialog';
+import { MoreNewsDialogComponent } from '../more-news-dialog/more-news-dialog.component';
 
 @Component({
   selector: 'latest-news',
@@ -21,8 +23,9 @@ export class LatestNewsComponent {
   @Input() isLoaded: boolean;
 
   constructor(
-    protected http: HttpClient,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    protected dialog: MatDialog,
+    protected http: HttpClient
   ) {
     this.breakpointObserver
       .observe(['(max-width: 40rem)', '(max-width: 48rem)'])
@@ -31,6 +34,14 @@ export class LatestNewsComponent {
       });
     this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
       this.xsScreen = result.matches;
+    });
+  }
+
+  openNewsDialog(event: Event): void {
+    event.preventDefault();
+    this.dialog.open(MoreNewsDialogComponent, {
+      panelClass: 'dialog-sm',
+      data: { topics: this.topics }
     });
   }
 }
