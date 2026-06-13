@@ -17,7 +17,9 @@ export class AdminLatestNewsComponent {
 
   ngOnInit(): void {
     this.newsService.getAllNews().subscribe((news) => {
-      this.topics = news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      this.topics = news
+        .filter((news) => news.type === 'public')
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.isLoaded = true;
     });
   }
