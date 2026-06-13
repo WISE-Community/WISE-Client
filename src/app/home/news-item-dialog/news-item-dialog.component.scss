@@ -2,15 +2,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #147997;
+  color: white;
 }
 
-.close-button {
-  margin-right: 10px;
-  :hover {
-    cursor: pointer;
-  }
+.dialog-title {
+  color: white;
 }
 
 .news-item-date {
   margin-right: 16px;
+}
+
+.dialog-divider {
+  margin: 0;
+  padding-bottom: 16px;
+}
+
+.dialog-content {
+  padding: 16px;
 }

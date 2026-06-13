@@ -1,11 +1,11 @@
 <div class="dialog-header">
-  <h1 mat-dialog-title i18n>Latest News</h1>
+  <h1 mat-dialog-title class="dialog-title" i18n>Latest News</h1>
   <button mat-icon-button mat-dialog-close class="close-button">
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<mat-divider />
-<mat-dialog-content>
+<mat-divider class="dialog-divider" />
+<mat-dialog-content class="dialog-content">
   <cdk-accordion class="news-accordion">
     @for (topic of data.topics; track topic.id) {
       <cdk-accordion-item #accordionItem="cdkAccordionItem" class="news-item">

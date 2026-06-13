@@ -2,14 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #147997;
+  color: white;
+}
+
+.dialog-title {
+  color: white;
 }
 
 .close-button {
-  margin-right: 10px;
+  margin-right: 16px;
   :hover {
     cursor: pointer;
   }
 } 
+
+.dialog-divider {
+  margin-top: 0;
+}
 
 .news-accordion {
   display: block;
@@ -33,7 +43,6 @@
   border: none;
   padding: 16px;
   text-align: left;
-
 }
 
 .news-item-body {

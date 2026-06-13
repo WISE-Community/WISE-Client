@@ -1,11 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
-import { News } from '../../domain/news';
 import { MatDialog } from '@angular/material/dialog';
 import { MoreNewsDialogComponent } from '../more-news-dialog/more-news-dialog.component';
+import { News } from '../../domain/news';
 import { NewsItemDialogComponent } from '../news-item-dialog/news-item-dialog.component';
 
 type Topic = News | { slug: string; id: number; title: string };
@@ -17,14 +17,14 @@ type Topic = News | { slug: string; id: number; title: string };
   styleUrl: './latest-news.component.scss'
 })
 export class LatestNewsComponent {
-  protected smallScreen: boolean;
-  protected xsScreen: boolean;
-  @Input() isDiscourseNewsAvailable: boolean;
-  @Input() topics: Topic[];
-  protected threeTopics: Topic[];
   @Input() baseUrl?: string;
   @Input() category?: string;
+  @Input() isDiscourseNewsAvailable: boolean;
   @Input() isLoaded: boolean;
+  @Input() topics: Topic[];
+  protected threeTopics: Topic[];
+  protected smallScreen: boolean;
+  protected xsScreen: boolean;
 
   constructor(
     private breakpointObserver: BreakpointObserver,

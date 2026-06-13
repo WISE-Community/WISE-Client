@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { LatestNewsComponent } from '../latest-news/latest-news.component';
 import { News } from '../../domain/news';
 import { NewsService } from '../../services/news.service';
-import { LatestNewsComponent } from '../latest-news/latest-news.component';
 
 @Component({
   selector: 'admin-latest-news',
