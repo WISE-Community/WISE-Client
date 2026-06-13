@@ -16,7 +16,9 @@
                 {{ topic.title }}
               </a>
             } @else {
-              {{ topic.title }}
+              <a href="#" (click)="openNewsItemDialog($event, topic)">
+                {{ topic.title }}
+              </a>
             }
             <span class="divider"> • </span>
           </li>

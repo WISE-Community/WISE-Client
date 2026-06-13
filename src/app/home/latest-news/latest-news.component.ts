@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { News } from '../../domain/news';
 import { MatDialog } from '@angular/material/dialog';
 import { MoreNewsDialogComponent } from '../more-news-dialog/more-news-dialog.component';
+import { NewsItemDialogComponent } from '../news-item-dialog/news-item-dialog.component';
 
 type Topic = News | { slug: string; id: number; title: string };
 
@@ -44,11 +45,19 @@ export class LatestNewsComponent {
     this.threeTopics = this.topics.slice(0, 3);
   }
 
-  openNewsDialog(event: Event): void {
+  protected openNewsDialog(event: Event): void {
     event.preventDefault();
     this.dialog.open(MoreNewsDialogComponent, {
       panelClass: 'dialog-sm',
       data: { topics: this.topics }
+    });
+  }
+
+  protected openNewsItemDialog(event: Event, newsItem: News): void {
+    event.preventDefault();
+    this.dialog.open(NewsItemDialogComponent, {
+      panelClass: 'dialog-sm',
+      data: { newsItem: newsItem }
     });
   }
 }

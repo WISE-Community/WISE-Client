@@ -1,0 +1,12 @@
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-button {
+  margin-right: 10px;
+  :hover {
+    cursor: pointer;
+  }
+}
