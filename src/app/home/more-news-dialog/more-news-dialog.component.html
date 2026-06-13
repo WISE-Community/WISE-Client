@@ -16,15 +16,7 @@
           [attr.id]="'news-item-header-' + topic.id"
         >
           {{ topic.title }}
-          @if (topic.news) {
-            <span class="news-item-toggle">
-              @if (accordionItem.expanded) {
-                <mat-icon>remove</mat-icon>
-              } @else {
-                <mat-icon>add</mat-icon>
-              }
-            </span>
-          }
+          <span class="news-item-date">{{ NewsService.getNewsDateMDY(topic) }}</span>
         </button>
 
         @if (topic.news && accordionItem.expanded) {

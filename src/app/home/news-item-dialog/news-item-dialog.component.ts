@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { News } from '../../domain/news';
+import { NewsService } from '../../services/news.service';
 
 @Component({
   selector: 'news-item-dialog',
@@ -13,4 +14,5 @@ import { News } from '../../domain/news';
 export class NewsItemDialogComponent {
   readonly dialogRef = inject(MatDialogRef<NewsItemDialogComponent>);
   readonly newsItem = inject<{ newsItem: News }>(MAT_DIALOG_DATA).newsItem;
+  readonly NewsService = inject(NewsService);
 }
