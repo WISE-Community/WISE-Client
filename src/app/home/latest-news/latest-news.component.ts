@@ -42,7 +42,7 @@ export class LatestNewsComponent {
   }
 
   ngOnChanges(): void {
-    this.threeTopics = this.topics.slice(0, 3);
+    this.threeTopics = this.topics?.slice(0, 3) ?? [];
   }
 
   protected openNewsDialog(event: Event): void {

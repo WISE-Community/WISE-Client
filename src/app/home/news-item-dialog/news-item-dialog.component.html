@@ -1,6 +1,6 @@
 <div class="dialog-header">
   <h1 mat-dialog-title class="dialog-title">{{ newsItem.title }}</h1>
-  <span class="news-item-date">{{ NewsService.getNewsDateMDY(newsItem) }}</span>
+  <span class="news-item-date">{{ NewsService.formatNewsDate(newsItem) }}</span>
 </div>
 @if (newsItem.news) {
   <mat-divider class="dialog-divider" />

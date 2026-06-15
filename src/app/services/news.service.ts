@@ -16,7 +16,7 @@ export class NewsService {
     return this.http.get(this.newsUrl, { headers: headers }) as Observable<News[]>;
   }
 
-  getNewsDateMDY(news: News): string {
+  formatNewsDate(news: News): string {
     const removeLeadingZero = (str: string) => str.replace(/^0+/, '');
 
     const month = removeLeadingZero(news.date.slice(5, 7));
