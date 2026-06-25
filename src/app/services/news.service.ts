@@ -15,14 +15,4 @@ export class NewsService {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
     return this.http.get(this.newsUrl, { headers: headers }) as Observable<News[]>;
   }
-
-  formatNewsDate(news: News): string {
-    const removeLeadingZero = (str: string) => str.replace(/^0+/, '');
-
-    const month = removeLeadingZero(news.date.slice(5, 7));
-    const day = removeLeadingZero(news.date.slice(8, 10));
-    const year = news.date.slice(2, 4);
-
-    return `${month}/${day}/${year}`;
-  }
 }

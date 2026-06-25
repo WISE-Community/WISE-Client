@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { News } from '../domain/news';
-// import { DomSanitizer } from '@angular/platform-browser';
 import { MatIcon } from '@angular/material/icon';
 import { TimelineComponent } from '../modules/timeline/timeline/timeline.component';
 import {
@@ -40,7 +39,6 @@ export class NewsComponent implements OnInit {
     private route: ActivatedRoute,
     private newsService: NewsService,
     private userService: UserService
-    // protected sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
