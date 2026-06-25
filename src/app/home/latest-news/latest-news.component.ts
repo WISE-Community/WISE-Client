@@ -4,15 +4,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { MoreNewsDialogComponent } from '../more-news-dialog/more-news-dialog.component';
 import { News } from '../../domain/news';
-import { NewsItemDialogComponent } from '../news-item-dialog/news-item-dialog.component';
+import { RouterLink } from '@angular/router';
 
 type Topic = News | { slug: string; id: number; title: string };
 
 @Component({
   selector: 'latest-news',
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, RouterLink],
   templateUrl: './latest-news.component.html',
   styleUrl: './latest-news.component.scss'
 })
@@ -43,21 +42,5 @@ export class LatestNewsComponent {
 
   ngOnChanges(): void {
     this.threeTopics = this.topics?.slice(0, 3) ?? [];
-  }
-
-  protected openNewsDialog(event: Event): void {
-    event.preventDefault();
-    this.dialog.open(MoreNewsDialogComponent, {
-      panelClass: 'dialog-sm',
-      data: { topics: this.topics }
-    });
-  }
-
-  protected openNewsItemDialog(event: Event, newsItem: News): void {
-    event.preventDefault();
-    this.dialog.open(NewsItemDialogComponent, {
-      panelClass: 'dialog-sm',
-      data: { newsItem: newsItem }
-    });
   }
 }

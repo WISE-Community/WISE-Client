@@ -16,7 +16,7 @@
                 {{ topic.title }}
               </a>
             } @else {
-              <a href="#" (click)="openNewsItemDialog($event, topic)">
+              <a routerLink="/news" fragment="{{ topic.id }}" i18n>
                 {{ topic.title }}
               </a>
             }
@@ -29,7 +29,7 @@
       @if (isDiscourseNewsAvailable) {
         <a href="{{ baseUrl }}/{{ category }}" i18n>More news</a>
       } @else {
-        <a href="#" (click)="openNewsDialog($event)" i18n>More news</a>
+        <a routerLink="/news" i18n>More news</a>
       }
     </div>
   </div>
