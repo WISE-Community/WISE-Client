@@ -4,6 +4,8 @@ import { AdminLatestNewsComponent } from './admin-latest-news.component';
 import { NewsService } from '../../services/news.service';
 import { News } from '../../domain/news';
 import { of } from 'rxjs';
+import { MockProvider } from 'ng-mocks';
+import { ActivatedRoute } from '@angular/router';
 
 describe('AdminLatestNewsComponent', () => {
   let component: AdminLatestNewsComponent;
@@ -40,7 +42,7 @@ describe('AdminLatestNewsComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [AdminLatestNewsComponent],
-      providers: [{ provide: NewsService, useValue: newsServiceSpy }]
+      providers: [{ provide: NewsService, useValue: newsServiceSpy }, MockProvider(ActivatedRoute)]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminLatestNewsComponent);
