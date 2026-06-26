@@ -20,10 +20,14 @@
                       <h2 class="accent-1">{{ newsItem.title }}</h2>
                       <div class="mat-body-2">
                         @if (newsOverLengthLimit(newsItem) && !newsShowMore[i]) {
-                          <p>{{ abbreviateNews(newsItem) }}</p>
+                          <p
+                            [innerHTML]="
+                              sanitizer.bypassSecurityTrustHtml(abbreviateNews(newsItem))
+                            "
+                          ></p>
                           <a href="#" (click)="expandNews($event, i)" i18n>Show More</a>
                         } @else {
-                          <p>{{ newsItem.news }}</p>
+                          <p [innerHTML]="sanitizer.bypassSecurityTrustHtml(newsItem.news)"></p>
                         }
                       </div>
                     </mat-card-content>

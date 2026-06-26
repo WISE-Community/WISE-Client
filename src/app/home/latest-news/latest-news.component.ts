@@ -1,28 +1,28 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { News } from '../../domain/news';
 import { RouterLink } from '@angular/router';
 
 type Topic = News | { slug: string; id: number; title: string };
 
 @Component({
-  selector: 'latest-news',
   imports: [CommonModule, MatIconModule, RouterLink],
-  templateUrl: './latest-news.component.html',
-  styleUrl: './latest-news.component.scss'
+  selector: 'latest-news',
+  styleUrl: './latest-news.component.scss',
+  templateUrl: './latest-news.component.html'
 })
 export class LatestNewsComponent {
   @Input() baseUrl?: string;
   @Input() category?: string;
   @Input() isDiscourseNewsAvailable: boolean;
-  @Input() isLoaded: boolean;
-  @Input() topics: Topic[];
-  protected threeTopics: Topic[];
+  @Input() loaded: boolean;
   protected smallScreen: boolean;
+  protected threeTopics: Topic[];
+  @Input() topics: Topic[];
   protected xsScreen: boolean;
 
   constructor(

@@ -1,30 +1,31 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NewsService } from '../services/news.service';
-import { News } from '../domain/news';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
+import { News } from '../domain/news';
+import { NewsService } from '../services/news.service';
 import { TimelineComponent } from '../modules/timeline/timeline/timeline.component';
 import {
   TimelineItemComponent,
   TimelineItemLabel,
   TimelineItemContent
 } from '../modules/timeline/timeline-item/timeline-item.component';
-import { MatCard, MatCardContent } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
-import { DatePipe } from '@angular/common';
 import { UserService } from '../services/user.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   imports: [
+    DatePipe,
+    MatButton,
+    MatCard,
+    MatCardContent,
     MatIcon,
     TimelineComponent,
     TimelineItemComponent,
-    TimelineItemLabel,
     TimelineItemContent,
-    MatCard,
-    MatCardContent,
-    MatButton,
-    DatePipe
+    TimelineItemLabel
   ],
   selector: 'app-news',
   templateUrl: './news.component.html'
@@ -36,8 +37,9 @@ export class NewsComponent implements OnInit {
   showTeacherNews: boolean = false;
 
   constructor(
-    private route: ActivatedRoute,
     private newsService: NewsService,
+    private route: ActivatedRoute,
+    protected sanitizer: DomSanitizer,
     private userService: UserService
   ) {}
 

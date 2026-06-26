@@ -4,14 +4,13 @@ import { News } from '../../domain/news';
 import { NewsService } from '../../services/news.service';
 
 @Component({
-  selector: 'admin-latest-news',
   imports: [LatestNewsComponent],
-  templateUrl: './admin-latest-news.component.html',
-  styleUrl: './admin-latest-news.component.scss'
+  selector: 'admin-latest-news',
+  templateUrl: './admin-latest-news.component.html'
 })
 export class AdminLatestNewsComponent {
+  protected loaded: boolean = false;
   protected topics: News[] = [];
-  protected isLoaded: boolean = false;
 
   constructor(private newsService: NewsService) {}
 
@@ -20,7 +19,7 @@ export class AdminLatestNewsComponent {
       this.topics = news
         .filter((news) => news.type === 'public')
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      this.isLoaded = true;
+      this.loaded = true;
     });
   }
 }

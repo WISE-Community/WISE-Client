@@ -1,33 +1,33 @@
-import { Component, OnInit, SecurityContext } from '@angular/core';
-import { bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn } from '../animations';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ConfigService } from '../services/config.service';
-import { Config } from '../domain/config';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { HeroSectionComponent } from '../modules/shared/hero-section/hero-section.component';
-import { MatIcon } from '@angular/material/icon';
-import { DiscourseLatestNewsComponent } from './discourse-latest-news/discourse-latest-news.component';
-import { NgClass } from '@angular/common';
+import { AdminLatestNewsComponent } from './admin-latest-news/admin-latest-news.component';
 import { BlurbComponent } from '../modules/shared/blurb/blurb.component';
+import { bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn } from '../animations';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
+import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Config } from '../domain/config';
+import { ConfigService } from '../services/config.service';
+import { DiscourseLatestNewsComponent } from './discourse-latest-news/discourse-latest-news.component';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HeroSectionComponent } from '../modules/shared/hero-section/hero-section.component';
 import { HomePageProjectLibraryComponent } from '../modules/library/home-page-project-library/home-page-project-library.component';
 import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
-import { AdminLatestNewsComponent } from './admin-latest-news/admin-latest-news.component';
 
 @Component({
   animations: [bounceIn, flipInX, flipInY, jackInTheBox, rotateIn, zoomIn],
   imports: [
-    HeroSectionComponent,
-    MatIcon,
     AdminLatestNewsComponent,
-    DiscourseLatestNewsComponent,
-    NgClass,
     BlurbComponent,
+    CallToActionComponent,
+    DiscourseLatestNewsComponent,
+    HeroSectionComponent,
     HomePageProjectLibraryComponent,
     MatButton,
-    RouterLink,
-    CallToActionComponent
+    MatIcon,
+    NgClass,
+    RouterLink
   ],
   selector: 'app-home',
   styleUrl: './home.component.scss',
