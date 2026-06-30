@@ -1,0 +1,36 @@
+@if (topics) {
+  <div class="latest-news dark-theme primary-border" [ngClass]="{ loaded: loaded }">
+    <h2
+      class="flex items-center"
+      [ngClass]="{ 'mat-small': xsScreen, 'mat-body-1': smallScreen && !xsScreen }"
+    >
+      <mat-icon>rss_feed</mat-icon>
+      <ng-container i18n>What's New?</ng-container>&nbsp;
+    </h2>
+    <ul>
+      @for (topic of threeTopics; track topic; let index = $index) {
+        @if (!xsScreen || index === 0) {
+          <li [ngClass]="{ 'mat-small': smallScreen, 'mat-body-1': !smallScreen }">
+            @if (isDiscourseNewsAvailable) {
+              <a href="{{ baseUrl }}/t/{{ topic.slug }}/{{ topic.id }}">
+                {{ topic.title }}
+              </a>
+            } @else {
+              <a routerLink="/news" fragment="{{ topic.id }}" i18n>
+                {{ topic.title }}
+              </a>
+            }
+            <span class="divider"> • </span>
+          </li>
+        }
+      }
+    </ul>
+    <div [ngClass]="{ 'mat-small': smallScreen, 'mat-body-1': !smallScreen }">
+      @if (isDiscourseNewsAvailable) {
+        <a href="{{ baseUrl }}/{{ category }}" i18n>More news</a>
+      } @else {
+        <a routerLink="/news" i18n>More news</a>
+      }
+    </div>
+  </div>
+}

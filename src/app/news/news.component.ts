@@ -1,45 +1,93 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from '../services/news.service';
-import { News } from '../domain/news';
+import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
+import { News } from '../domain/news';
+import { NewsService } from '../services/news.service';
 import { TimelineComponent } from '../modules/timeline/timeline/timeline.component';
 import {
   TimelineItemComponent,
   TimelineItemLabel,
   TimelineItemContent
 } from '../modules/timeline/timeline-item/timeline-item.component';
-import { MatCard, MatCardContent } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
-import { DatePipe } from '@angular/common';
+import { UserService } from '../services/user.service';
 
 @Component({
   imports: [
+    DatePipe,
+    MatButton,
+    MatCard,
+    MatCardContent,
     MatIcon,
     TimelineComponent,
     TimelineItemComponent,
-    TimelineItemLabel,
     TimelineItemContent,
-    MatCard,
-    MatCardContent,
-    MatButton,
-    DatePipe
+    TimelineItemLabel
   ],
   selector: 'app-news',
   templateUrl: './news.component.html'
 })
 export class NewsComponent implements OnInit {
   allNewsItems: any = [];
+  newsShowMore: boolean[] = [];
   showAll: boolean = false;
+  showTeacherNews: boolean = false;
 
   constructor(
     private newsService: NewsService,
-    protected sanitizer: DomSanitizer
+    private route: ActivatedRoute,
+    protected sanitizer: DomSanitizer,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
-    this.newsService.getAllNews().subscribe((allNewsItems: News[]) => {
-      this.allNewsItems = allNewsItems;
+    this.showTeacherNewsIfLoggedIn();
+    this.retrieveNews();
+  }
+
+  private showTeacherNewsIfLoggedIn(): void {
+    this.userService.getUser().subscribe((user) => {
+      this.showTeacherNews = user && user.roles?.length > 0;
     });
+  }
+
+  private retrieveNews(): void {
+    this.newsService.getAllNews().subscribe((allNewsItems: News[]) => {
+      this.prepareNewsItems(allNewsItems);
+      this.newsShowMore = new Array(this.allNewsItems.length).fill(false);
+      this.scrollToFragmentNewsItem();
+    });
+  }
+
+  private prepareNewsItems(allNewsItems: News[]) {
+    this.allNewsItems = allNewsItems
+      .filter((newsItem) => this.showTeacherNews || newsItem.type === 'public')
+      .reverse();
+  }
+
+  private scrollToFragmentNewsItem() {
+    setTimeout(() => {
+      const fragment = this.route.snapshot.fragment;
+      if (fragment) {
+        document.getElementById(fragment)?.scrollIntoView();
+      }
+    });
+  }
+
+  protected newsOverLengthLimit(news: News): boolean {
+    return news.news.split(' ').length > 75;
+  }
+
+  protected abbreviateNews(news: News): string {
+    const words = news.news.split(' ');
+    return words.slice(0, 75).join(' ') + '...';
+  }
+
+  protected expandNews(event: Event, index: number): void {
+    event.preventDefault();
+    this.newsShowMore[index] = true;
   }
 }

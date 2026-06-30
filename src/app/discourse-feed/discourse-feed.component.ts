@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Directive, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Directive()
 export abstract class DiscourseFeedComponent {
   @Input() baseUrl: string;
   @Input() category: string;
-  protected isLoaded: boolean;
+  protected loaded: boolean;
   @Input() queryString: string;
   protected topics: any;
 
@@ -18,7 +18,7 @@ export abstract class DiscourseFeedComponent {
           return !topic.pinned_globally;
         })
         .slice(0, 3);
-      this.isLoaded = true;
+      this.loaded = true;
     });
   }
 
