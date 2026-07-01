@@ -12,7 +12,7 @@ describe('AdminLatestNewsComponent', () => {
   let fixture: ComponentFixture<AdminLatestNewsComponent>;
 
   beforeEach(async () => {
-    const newsServiceSpy = jasmine.createSpyObj<NewsService>(['getAllNews']);
+    const newsServiceSpy = jasmine.createSpyObj<NewsService>(['getNews']);
     const news1 = new News({
       id: 1,
       date: '2026-02-01 19:14:23.0',
@@ -38,7 +38,7 @@ describe('AdminLatestNewsComponent', () => {
       owner: undefined
     });
 
-    newsServiceSpy.getAllNews.and.callFake(() => of<News[]>([news1, news2, news3]));
+    newsServiceSpy.getNews.and.callFake(() => of<News[]>([news1, news2, news3]));
 
     await TestBed.configureTestingModule({
       imports: [AdminLatestNewsComponent],

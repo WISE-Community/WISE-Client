@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LatestNewsComponent } from '../latest-news/latest-news.component';
 import { News } from '../../domain/news';
 import { NewsService } from '../../services/news.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   imports: [LatestNewsComponent],
@@ -10,15 +11,22 @@ import { NewsService } from '../../services/news.service';
 })
 export class AdminLatestNewsComponent {
   protected loaded: boolean = false;
+  private numberOfNewsItems = 3;
   protected topics: News[] = [];
 
-  constructor(private newsService: NewsService) {}
+  constructor(
+    private newsService: NewsService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.newsService.getAllNews().subscribe((news) => {
-      this.topics = news
-        .filter((news) => news.type === 'public')
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const newsType = this.userService.isSignedIn() ? undefined : 'public';
+    this.retrieveNews(newsType);
+  }
+
+  private retrieveNews(newsType: string | undefined) {
+    this.newsService.getNews(this.numberOfNewsItems, newsType).subscribe((news) => {
+      this.topics = news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.loaded = true;
     });
   }

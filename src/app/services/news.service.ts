@@ -11,8 +11,21 @@ export class NewsService {
 
   constructor(private http: HttpClient) {}
 
-  getAllNews(): Observable<News[]> {
+  getNews(numItems?: number, type?: string): Observable<News[]> {
     const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
-    return this.http.get(this.newsUrl, { headers: headers }) as Observable<News[]>;
+    const url = this.buildUrlWithParams(numItems, type);
+    return this.http.get(url, { headers: headers }) as Observable<News[]>;
+  }
+
+  private buildUrlWithParams(numItems?: number, type?: string): string {
+    if (numItems && type) {
+      return `${this.newsUrl}?num=${numItems}&type=${type}`;
+    } else if (numItems) {
+      return `${this.newsUrl}?num=${numItems}`;
+    } else if (type) {
+      return `${this.newsUrl}?type=${type}`;
+    } else {
+      return this.newsUrl;
+    }
   }
 }

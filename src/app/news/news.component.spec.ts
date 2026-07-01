@@ -39,7 +39,7 @@ const news2Text =
   'We have been working on a new portal website. The new website will have a more modern user interface.';
 
 export class MockNewsService {
-  getAllNews(): Observable<News[]> {
+  getNews(): Observable<News[]> {
     return new Observable((observer) => {
       const allNewsItems: News[] = [];
       const user1 = createUser(100, 'Spongebob', 'Squarepants', 'Spongebob Squarepants');
