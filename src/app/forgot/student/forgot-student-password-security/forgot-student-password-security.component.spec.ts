@@ -87,6 +87,11 @@ async function changePassword() {
       expect(getErrorMessage()).toContain('Incorrect answer');
     }));
 
+    it('should show the too many failed attempts message', waitForAsync(() => {
+      submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'tooManyFailedAnswerAttempts');
+      expect(getErrorMessage()).toContain('too many times');
+    }));
+
     it('should navigate to change password page', () => {
       const router = TestBed.inject(Router);
       const navigateSpy = spyOn(router, 'navigate');

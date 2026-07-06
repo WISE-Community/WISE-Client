@@ -99,6 +99,9 @@ export class ForgotStudentPasswordSecurityComponent {
       case 'incorrectAnswer':
         message = $localize`Incorrect answer, please try again. If you can't remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.`;
         break;
+      case 'tooManyFailedAnswerAttempts':
+        message = $localize`You have entered an incorrect answer too many times. Please wait a few minutes before trying again, or ask your teacher to change your password.`;
+        break;
       case 'recaptchaResponseInvalid':
         message = $localize`Recaptcha failed. Please reload the page and try again.`;
         break;

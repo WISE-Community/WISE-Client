@@ -77,6 +77,9 @@ export class ForgotStudentPasswordChangeComponent {
       case 'invalidPassword':
         injectPasswordErrors(this.changePasswordFormGroup, error);
         break;
+      case 'tooManyFailedAnswerAttempts':
+        this.message = $localize`You have entered an incorrect answer too many times. Please wait a few minutes before trying again, or ask your teacher to change your password.`;
+        break;
       default:
         this.setErrorOccurredMessage();
     }
