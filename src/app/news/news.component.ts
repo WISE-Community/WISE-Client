@@ -48,7 +48,7 @@ export class NewsComponent implements OnInit {
   }
 
   private retrieveNews(newsType: string | undefined): void {
-    this.newsService.getNews(undefined, newsType).subscribe((news: News[]) => {
+    this.newsService.getAllNews(undefined, newsType).subscribe((news: News[]) => {
       this.newsItems = news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.newsShowMore = new Array(this.newsItems.length).fill(false);
       this.scrollToFragmentNewsItem();

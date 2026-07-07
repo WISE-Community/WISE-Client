@@ -11,7 +11,6 @@ import { UserService } from '../../services/user.service';
 })
 export class AdminLatestNewsComponent {
   protected loaded: boolean = false;
-  private numberOfNewsItems = 3;
   protected topics: News[] = [];
 
   constructor(
@@ -25,7 +24,7 @@ export class AdminLatestNewsComponent {
   }
 
   private retrieveNews(newsType: string | undefined) {
-    this.newsService.getNews(this.numberOfNewsItems, newsType).subscribe((news) => {
+    this.newsService.getHomePageNews(newsType).subscribe((news) => {
       this.topics = news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.loaded = true;
     });
