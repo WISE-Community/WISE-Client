@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewsComponent } from './news.component';
 import { NewsService } from '../services/news.service';
 import { News } from '../domain/news';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../domain/user';
 import { ActivatedRoute } from '@angular/router';
 import { MockProvider, MockProviders } from 'ng-mocks';
@@ -102,28 +102,28 @@ describe('NewsComponent', () => {
   });
 
   it('should display the news date', () => {
-    const newsItem1 = getNewsItem(0);
+    const newsItem1 = getNewsItem(1);
     const date1 = getNewsDate(newsItem1);
     expect(date1).toContain('Oct 16, 2018');
-    const newsItem2 = getNewsItem(1);
+    const newsItem2 = getNewsItem(0);
     const date2 = getNewsDate(newsItem2);
     expect(date2).toContain('Sep 21, 2018');
   });
 
   it('should display the news title', () => {
-    const newsItem1 = getNewsItem(0);
+    const newsItem1 = getNewsItem(1);
     const title1 = getNewsTitle(newsItem1);
     expect(title1).toContain(news1Title);
-    const newsItem2 = getNewsItem(1);
+    const newsItem2 = getNewsItem(0);
     const title2 = getNewsTitle(newsItem2);
     expect(title2).toContain(news2Title);
   });
 
   it('should display the news text', () => {
-    const newsItem1 = getNewsItem(0);
+    const newsItem1 = getNewsItem(1);
     const text1 = getNewsText(newsItem1);
     expect(text1).toContain(news1Text);
-    const newsItem2 = getNewsItem(1);
+    const newsItem2 = getNewsItem(0);
     const text2 = getNewsText(newsItem2);
     expect(text2).toContain(news2Text);
   });

@@ -5,12 +5,14 @@ import { BucketData, ChoiceData, MatchSummaryData } from '../summary-data/MatchS
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
+import { ConfigService } from '../../../services/configService';
 
 export type SummaryViewMode = 'choice' | 'bucket';
 
 @Component({
-  imports: [CommonModule, MatButtonToggleModule, MatIconModule],
+  imports: [CommonModule, MatButtonToggleModule, MatIconModule, MatTooltipModule],
   selector: 'match-summary-display',
   styleUrls: [
     './match-summary-display.component.scss',
@@ -25,6 +27,7 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   protected isChoiceReuseMatch: boolean;
   private matchSummaryData: MatchSummaryData;
   viewMode: SummaryViewMode = 'bucket';
+  protected workgroupNamesTooltips = new Map<MatchSummaryDataPoint, string>();
 
   ngOnInit(): void {
     this.setIsChoiceReuseMatch();
@@ -41,11 +44,13 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
     this.getLatestWork().subscribe((componentStates) => {
       this.bucketData = [];
       this.choiceData = [];
+      this.workgroupNamesTooltips = new Map();
       this.matchSummaryData = new MatchSummaryData(
         this.projectService.injectAssetPaths(componentStates)
       );
       this.setChoiceData();
       this.setBucketData();
+      this.setWorkgroupNamesTooltips();
     });
   }
 
@@ -79,6 +84,19 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
 
   private sortByCount(a: MatchSummaryDataPoint, b: MatchSummaryDataPoint): number {
     return b.getCount() - a.getCount();
+  }
+
+  private setWorkgroupNamesTooltips(): void {
+    const allDataPoints = this.matchSummaryData.getChoicesData().flatMap((c) => c.choiceDataPoints);
+    for (const dp of allDataPoints) {
+      this.workgroupNamesTooltips.set(
+        dp,
+        dp
+          .getWorkgroupIds()
+          .map((id) => this.configService.getDisplayUsernamesByWorkgroupId(id))
+          .join('\n')
+      );
+    }
   }
 
   protected renderDisplay(): void {

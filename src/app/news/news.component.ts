@@ -34,6 +34,7 @@ export class NewsComponent implements OnInit {
   newsItems: any = [];
   newsShowMore: boolean[] = [];
   showAll: boolean = false;
+  showTeacherNews: boolean = false;
 
   constructor(
     private newsService: NewsService,

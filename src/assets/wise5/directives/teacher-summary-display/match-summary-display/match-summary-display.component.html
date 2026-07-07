@@ -13,7 +13,13 @@
             >
             <span class="flex-1" [innerHTML]="choice.getChoiceValue()"></span>
             @if (!isChoiceReuseMatch) {
-              <span class="shrink-0">
+              <span
+                class="shrink-0 cursor-pointer"
+                [matTooltip]="workgroupNamesTooltips.get(choice)"
+                matTooltipClass="multiline-tooltip"
+                matTooltipPosition="above"
+                tabindex="0"
+              >
                 <mat-icon class="mat-18 align-middle">person</mat-icon>{{ choice.getCount() }}
               </span>
             }
@@ -42,7 +48,13 @@
                 >inventory_2</mat-icon
               >
               <span class="flex-1" [innerHTML]="bucketDataPoint.getBucketValue()"></span>
-              <span class="shrink-0">
+              <span
+                class="shrink-0 cursor-pointer"
+                [matTooltip]="workgroupNamesTooltips.get(bucketDataPoint)"
+                matTooltipClass="multiline-tooltip"
+                matTooltipPosition="above"
+                tabindex="0"
+              >
                 <mat-icon class="mat-18 align-middle">person</mat-icon
                 >{{ bucketDataPoint.getCount() }}
               </span>
