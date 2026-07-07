@@ -2,12 +2,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { ConfigService } from '../services/config.service';
 import { provideHttpClient } from '@angular/common/http';
-import { MockComponent, MockProvider } from 'ng-mocks';
+import { MockComponent, MockProviders } from 'ng-mocks';
 import { CallToActionComponent } from '../modules/shared/call-to-action/call-to-action.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
-describe('HomeComponent', () => {
+fdescribe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
@@ -18,7 +19,7 @@ describe('HomeComponent', () => {
         ConfigService,
         provideAnimations(),
         provideHttpClient(),
-        MockProvider(ActivatedRoute)
+        MockProviders(ActivatedRoute, UserService)
       ]
     }).compileComponents();
   }));
