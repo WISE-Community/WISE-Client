@@ -19,11 +19,11 @@ export class AdminLatestNewsComponent {
   ) {}
 
   ngOnInit(): void {
-    const newsType = this.userService.isSignedIn() ? undefined : 'public';
+    const newsType = this.userService.isSignedIn() ? 'publicAndTeacher' : 'publicOnly';
     this.retrieveNews(newsType);
   }
 
-  private retrieveNews(newsType: string | undefined) {
+  private retrieveNews(newsType: string): void {
     this.newsService.getHomePageNews(newsType).subscribe((news) => {
       this.topics = news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.loaded = true;

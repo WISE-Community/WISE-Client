@@ -39,7 +39,7 @@ const news2Text =
   'We have been working on a new portal website. The new website will have a more modern user interface.';
 
 export class MockNewsService {
-  getAllNews(): Observable<News[]> {
+  getNewsPageNews(): Observable<News[]> {
     return new Observable((observer) => {
       const allNewsItems: News[] = [];
       const user1 = createUser(100, 'Spongebob', 'Squarepants', 'Spongebob Squarepants');
@@ -54,7 +54,7 @@ export class MockNewsService {
   }
 }
 
-fdescribe('NewsComponent', () => {
+describe('NewsComponent', () => {
   let component: NewsComponent;
   let fixture: ComponentFixture<NewsComponent>;
 

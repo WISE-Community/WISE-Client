@@ -12,13 +12,13 @@ export class NewsService {
 
   constructor(private http: HttpClient) {}
 
-  getAllNews(numItems?: number, type?: string): Observable<News[]> {
-    const params = this.buildUrlParams(numItems, type);
+  getNewsPageNews(type: string): Observable<News[]> {
+    const params = this.buildUrlParams(type);
     return this.getNews(this.allNewsEndpoint, params);
   }
 
-  getHomePageNews(type?: string): Observable<News[]> {
-    const params = this.buildUrlParams(undefined, type);
+  getHomePageNews(type: string): Observable<News[]> {
+    const params = this.buildUrlParams(type);
     return this.getNews(this.homeNewsEndpoint, params);
   }
 
@@ -27,14 +27,9 @@ export class NewsService {
     return this.http.get(endpoint, { headers: headers, params: params }) as Observable<News[]>;
   }
 
-  private buildUrlParams(numItems?: number, type?: string): HttpParams {
+  private buildUrlParams(type: string): HttpParams {
     let params = new HttpParams();
-    if (numItems) {
-      params = params.set('num', numItems.toString());
-    }
-    if (type) {
-      params = params.set('type', type);
-    }
+    params = params.set('type', type);
     return params;
   }
 }

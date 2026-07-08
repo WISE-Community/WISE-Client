@@ -44,12 +44,12 @@ export class NewsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const newsType = this.userService.isSignedIn() ? undefined : 'public';
+    const newsType = this.userService.isSignedIn() ? 'publicAndTeacher' : 'publicOnly';
     this.retrieveNews(newsType);
   }
 
-  private retrieveNews(newsType: string | undefined): void {
-    this.newsService.getAllNews(undefined, newsType).subscribe((news: News[]) => {
+  private retrieveNews(newsType: string): void {
+    this.newsService.getNewsPageNews(newsType).subscribe((news: News[]) => {
       this.newsItems = news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.newsShowMore = new Array(this.newsItems.length).fill(false);
       this.scrollToFragmentNewsItem();
