@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { News } from '../domain/news';
 import { Observable } from 'rxjs';
 
@@ -7,26 +7,24 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class NewsService {
-  private newsEndpoint = '/api/news';
-  private homePageNewsEndpoint = '/api/news/home';
+  private allNewsEndpoint = '/api/news';
+  private homeNewsEndpoint = '/api/news/home';
 
   constructor(private http: HttpClient) {}
 
   getAllNews(numItems?: number, type?: string): Observable<News[]> {
-    const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
     const params = this.buildUrlParams(numItems, type);
-    return this.http.get(this.newsEndpoint, { headers: headers, params: params }) as Observable<
-      News[]
-    >;
+    return this.getNews(this.allNewsEndpoint, params);
   }
 
   getHomePageNews(type?: string): Observable<News[]> {
-    const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
     const params = this.buildUrlParams(undefined, type);
-    return this.http.get(this.homePageNewsEndpoint, {
-      headers: headers,
-      params: params
-    }) as Observable<News[]>;
+    return this.getNews(this.homeNewsEndpoint, params);
+  }
+
+  private getNews(endpoint: string, params: HttpParams): Observable<News[]> {
+    const headers = new HttpHeaders({ 'Cache-Control': 'no-cache' });
+    return this.http.get(endpoint, { headers: headers, params: params }) as Observable<News[]>;
   }
 
   private buildUrlParams(numItems?: number, type?: string): HttpParams {

@@ -1,11 +1,11 @@
+import { ActivatedRoute } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockProvider } from 'ng-mocks';
 import { NewsComponent } from './news.component';
 import { NewsService } from '../services/news.service';
 import { News } from '../domain/news';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../domain/user';
-import { ActivatedRoute } from '@angular/router';
-import { MockProvider, MockProviders } from 'ng-mocks';
 import { UserService } from '../services/user.service';
 
 const createNewsItem = (id, date, type, title, news, owner) => {
