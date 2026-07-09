@@ -31,7 +31,7 @@ import { UserService } from '../services/user.service';
   templateUrl: './news.component.html'
 })
 export class NewsComponent implements OnInit {
-  allNewsItems: any = [];
+  newsItems: any = [];
   newsShowMore: boolean[] = [];
   showAll: boolean = false;
   showTeacherNews: boolean = false;
@@ -44,28 +44,16 @@ export class NewsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.showTeacherNewsIfLoggedIn();
-    this.retrieveNews();
+    const newsType = this.userService.isSignedIn() ? 'publicAndTeacher' : 'publicOnly';
+    this.retrieveNews(newsType);
   }
 
-  private showTeacherNewsIfLoggedIn(): void {
-    this.userService.getUser().subscribe((user) => {
-      this.showTeacherNews = user && user.roles?.length > 0;
-    });
-  }
-
-  private retrieveNews(): void {
-    this.newsService.getAllNews().subscribe((allNewsItems: News[]) => {
-      this.prepareNewsItems(allNewsItems);
-      this.newsShowMore = new Array(this.allNewsItems.length).fill(false);
+  private retrieveNews(newsType: string): void {
+    this.newsService.getNewsPageNews(newsType).subscribe((news: News[]) => {
+      this.newsItems = news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      this.newsShowMore = new Array(this.newsItems.length).fill(false);
       this.scrollToFragmentNewsItem();
     });
-  }
-
-  private prepareNewsItems(allNewsItems: News[]) {
-    this.allNewsItems = allNewsItems
-      .filter((newsItem) => this.showTeacherNews || newsItem.type === 'public')
-      .reverse();
   }
 
   private scrollToFragmentNewsItem() {

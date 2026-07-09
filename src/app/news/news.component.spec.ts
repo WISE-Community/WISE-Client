@@ -1,11 +1,11 @@
+import { ActivatedRoute } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockProvider } from 'ng-mocks';
 import { NewsComponent } from './news.component';
 import { NewsService } from '../services/news.service';
 import { News } from '../domain/news';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../domain/user';
-import { ActivatedRoute } from '@angular/router';
-import { MockProvider, MockProviders } from 'ng-mocks';
 import { UserService } from '../services/user.service';
 
 const createNewsItem = (id, date, type, title, news, owner) => {
@@ -39,7 +39,7 @@ const news2Text =
   'We have been working on a new portal website. The new website will have a more modern user interface.';
 
 export class MockNewsService {
-  getAllNews(): Observable<News[]> {
+  getNewsPageNews(): Observable<News[]> {
     return new Observable((observer) => {
       const allNewsItems: News[] = [];
       const user1 = createUser(100, 'Spongebob', 'Squarepants', 'Spongebob Squarepants');
@@ -76,11 +76,8 @@ describe('NewsComponent', () => {
   };
 
   beforeEach(() => {
-    const userServiceSpy = jasmine.createSpyObj<UserService>(['getUser']);
-    const user = new User({ roles: ['teacher'] });
-    userServiceSpy.getUser.and.callFake(() => {
-      return new BehaviorSubject<User>(user);
-    });
+    const userServiceSpy = jasmine.createSpyObj<UserService>(['isSignedIn']);
+    userServiceSpy.isSignedIn.and.callFake(() => true);
 
     TestBed.configureTestingModule({
       imports: [NewsComponent],
@@ -105,28 +102,28 @@ describe('NewsComponent', () => {
   });
 
   it('should display the news date', () => {
-    const newsItem1 = getNewsItem(1);
+    const newsItem1 = getNewsItem(0);
     const date1 = getNewsDate(newsItem1);
     expect(date1).toContain('Oct 16, 2018');
-    const newsItem2 = getNewsItem(0);
+    const newsItem2 = getNewsItem(1);
     const date2 = getNewsDate(newsItem2);
     expect(date2).toContain('Sep 21, 2018');
   });
 
   it('should display the news title', () => {
-    const newsItem1 = getNewsItem(1);
+    const newsItem1 = getNewsItem(0);
     const title1 = getNewsTitle(newsItem1);
     expect(title1).toContain(news1Title);
-    const newsItem2 = getNewsItem(0);
+    const newsItem2 = getNewsItem(1);
     const title2 = getNewsTitle(newsItem2);
     expect(title2).toContain(news2Title);
   });
 
   it('should display the news text', () => {
-    const newsItem1 = getNewsItem(1);
+    const newsItem1 = getNewsItem(0);
     const text1 = getNewsText(newsItem1);
     expect(text1).toContain(news1Text);
-    const newsItem2 = getNewsItem(0);
+    const newsItem2 = getNewsItem(1);
     const text2 = getNewsText(newsItem2);
     expect(text2).toContain(news2Text);
   });

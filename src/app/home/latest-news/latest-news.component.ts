@@ -21,7 +21,6 @@ export class LatestNewsComponent {
   @Input() isDiscourseNewsAvailable: boolean;
   @Input() loaded: boolean;
   protected smallScreen: boolean;
-  protected threeTopics: Topic[];
   @Input() topics: Topic[];
   protected xsScreen: boolean;
 
@@ -38,9 +37,5 @@ export class LatestNewsComponent {
     this.breakpointObserver.observe(['(max-width: 40rem)']).subscribe((result) => {
       this.xsScreen = result.matches;
     });
-  }
-
-  ngOnChanges(): void {
-    this.threeTopics = this.topics?.slice(0, 3) ?? [];
   }
 }

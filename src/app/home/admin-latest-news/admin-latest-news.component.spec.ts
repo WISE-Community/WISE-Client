@@ -6,13 +6,18 @@ import { News } from '../../domain/news';
 import { of } from 'rxjs';
 import { MockProvider } from 'ng-mocks';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 describe('AdminLatestNewsComponent', () => {
   let component: AdminLatestNewsComponent;
   let fixture: ComponentFixture<AdminLatestNewsComponent>;
 
   beforeEach(async () => {
-    const newsServiceSpy = jasmine.createSpyObj<NewsService>(['getAllNews']);
+    const newsServiceSpy = jasmine.createSpyObj<NewsService>([
+      'getNewsPageNews',
+      'getHomePageNews'
+    ]);
+    const userServiceSpy = jasmine.createSpyObj<UserService>(['isSignedIn']);
     const news1 = new News({
       id: 1,
       date: '2026-02-01 19:14:23.0',
@@ -38,11 +43,17 @@ describe('AdminLatestNewsComponent', () => {
       owner: undefined
     });
 
-    newsServiceSpy.getAllNews.and.callFake(() => of<News[]>([news1, news2, news3]));
+    newsServiceSpy.getNewsPageNews.and.callFake(() => of<News[]>([news1, news2, news3]));
+    newsServiceSpy.getHomePageNews.and.callFake(() => of<News[]>([news1, news2, news3]));
+    userServiceSpy.isSignedIn.and.callFake(() => true);
 
     await TestBed.configureTestingModule({
       imports: [AdminLatestNewsComponent],
-      providers: [{ provide: NewsService, useValue: newsServiceSpy }, MockProvider(ActivatedRoute)]
+      providers: [
+        { provide: NewsService, useValue: newsServiceSpy },
+        { provide: UserService, useValue: userServiceSpy },
+        MockProvider(ActivatedRoute)
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminLatestNewsComponent);
@@ -54,11 +65,10 @@ describe('AdminLatestNewsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should filter and sort topics', fakeAsync(() => {
+  it('should sort topics', fakeAsync(() => {
     component.ngOnInit();
     tick();
     expect(component['topics']).toBeTruthy();
-    expect(component['topics'].length).toBe(2);
     expect(component['topics'][0].title).toBe('Test News 3');
   }));
 });
