@@ -44,6 +44,7 @@ export class LoginHomeComponent implements OnInit {
   processing: boolean = false;
   @ViewChild('recaptchaRef', { static: false }) recaptchaRef: any;
   protected showSocialLogin: boolean;
+  protected showVerifiedConfirmation: boolean = false;
 
   constructor(
     private configService: ConfigService,
@@ -78,6 +79,9 @@ export class LoginHomeComponent implements OnInit {
       if (params['accessCode'] != null) {
         this.accessCode = params['accessCode'];
       }
+      if (params['verified'] != null) {
+        this.showVerifiedConfirmation = params['verified'] === 'true';
+      }
     });
     this.isReLoginDueToErrorSavingData = this.isRedirectToAppRoutes();
     this.isRecaptchaEnabled = this.configService.isRecaptchaEnabled();
@@ -91,6 +95,7 @@ export class LoginHomeComponent implements OnInit {
   async login(): Promise<void> {
     this.processing = true;
     this.passwordError = false;
+    this.showVerifiedConfirmation = false;
     if (this.isRecaptchaEnabled) {
       this.credentials.recaptchaResponse = await lastValueFrom(
         this.recaptchaV3Service.execute('importantAction')
