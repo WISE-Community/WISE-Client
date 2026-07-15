@@ -38,6 +38,7 @@ export class LoginHomeComponent implements OnInit {
   isRecaptchaEnabled: boolean = false;
   isRecaptchaVerificationFailed: boolean = false;
   isReLoginDueToErrorSavingData: boolean;
+  protected isTeacherVerificationFailed: boolean = false;
   protected microsoftAuthenticationEnabled: boolean;
   passwordError: boolean = false;
   processing: boolean = false;
@@ -95,6 +96,18 @@ export class LoginHomeComponent implements OnInit {
         this.recaptchaV3Service.execute('importantAction')
       );
     }
+    this.userService.isVerified(this.credentials.username).subscribe((isVerified) => {
+      if (isVerified) {
+        this.authenticateUser();
+      } else {
+        this.processing = false;
+        this.credentials.password = '';
+        this.isTeacherVerificationFailed = true;
+      }
+    });
+  }
+
+  private authenticateUser(): void {
     this.userService.authenticate(this.credentials, (response: any) => {
       if (this.userService.isAuthenticated) {
         this.router.navigateByUrl(this.getRedirectUrl(''));
