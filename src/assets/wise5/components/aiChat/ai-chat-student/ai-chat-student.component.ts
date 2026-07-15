@@ -22,6 +22,8 @@ import { MatCard } from '@angular/material/card';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.component';
+import { CRaterService } from '../../../services/cRaterService';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   imports: [
@@ -51,6 +53,7 @@ export class AiChatStudentComponent extends ComponentStudent {
     protected computerAvatarService: ComputerAvatarService,
     protected componentService: ComponentService,
     protected configService: ConfigService,
+    protected cRaterService: CRaterService,
     protected dataService: StudentDataService,
     protected dialog: MatDialog,
     protected nodeService: NodeService,
@@ -98,7 +101,28 @@ export class AiChatStudentComponent extends ComponentStudent {
       this.messages.push(new AiChatMessage('user', this.connectedComponentResponse, true));
       this.connectedComponentResponse = null;
     }
-    this.messages.push(new AiChatMessage('user', response));
+    const cRaterResponse = await firstValueFrom(
+      this.cRaterService.makeCRaterScoringRequest(
+        'berkeley_CarOnAColdDay',
+        new Date().getTime(),
+        response
+      )
+    );
+    const cRaterResult = this.cRaterService.getCRaterResponse(
+      cRaterResponse.responses,
+      this.submitCounter
+    );
+    const detectedIdeas = cRaterResult.getDetectedIdeaNames();
+    const kiScore = cRaterResult.getKIScore();
+    this.messages.push(new AiChatMessage('user', response, false, 'student'));
+    this.messages.push(
+      new AiChatMessage(
+        'user',
+        `Detected Ideas: ${detectedIdeas.join(', ')}. KI Score: ${kiScore}`,
+        true,
+        'nlp'
+      )
+    );
     this.scrollToBottom();
     try {
       const response = await this.aiChatService.sendChatMessage(
