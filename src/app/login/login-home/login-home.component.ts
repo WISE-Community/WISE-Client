@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
@@ -11,6 +11,7 @@ import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatDivider } from '@angular/material/divider';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   imports: [
@@ -38,16 +39,22 @@ export class LoginHomeComponent implements OnInit {
   isRecaptchaEnabled: boolean = false;
   isRecaptchaVerificationFailed: boolean = false;
   isReLoginDueToErrorSavingData: boolean;
-  protected isTeacherVerificationFailed: boolean = false;
   protected microsoftAuthenticationEnabled: boolean;
   passwordError: boolean = false;
   processing: boolean = false;
   @ViewChild('recaptchaRef', { static: false }) recaptchaRef: any;
+  private resendEmailEndpoint = '/api/teacher/verify-email';
+  private resendEmailInterval: any;
+  protected resendEmailWaitSeconds = signal<number>(0);
+  protected showEmailSentConfirmation = signal<boolean>(false);
+  protected showTeacherVerificationFailed = signal<boolean>(false);
   protected showSocialLogin: boolean;
-  protected showVerifiedConfirmation: boolean = false;
+  protected showVerificationResend = signal<boolean>(false);
+  protected showVerifiedConfirmation = signal<boolean>(false);
 
   constructor(
     private configService: ConfigService,
+    private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
     private recaptchaV3Service: ReCaptchaV3Service,
@@ -80,11 +87,19 @@ export class LoginHomeComponent implements OnInit {
         this.accessCode = params['accessCode'];
       }
       if (params['verified'] != null) {
-        this.showVerifiedConfirmation = params['verified'] === 'true';
+        this.showVerifiedConfirmation.set(params['verified'] === 'true');
       }
     });
     this.isReLoginDueToErrorSavingData = this.isRedirectToAppRoutes();
     this.isRecaptchaEnabled = this.configService.isRecaptchaEnabled();
+
+    this.resendEmailInterval = setInterval(() => {
+      this.resendEmailWaitSeconds.update((current) => current - 1);
+    }, 1000);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.resendEmailInterval);
   }
 
   private isRedirectToAppRoutes(): boolean {
@@ -95,7 +110,8 @@ export class LoginHomeComponent implements OnInit {
   async login(): Promise<void> {
     this.processing = true;
     this.passwordError = false;
-    this.showVerifiedConfirmation = false;
+    this.showVerifiedConfirmation.set(false);
+    this.showEmailSentConfirmation.set(false);
     if (this.isRecaptchaEnabled) {
       this.credentials.recaptchaResponse = await lastValueFrom(
         this.recaptchaV3Service.execute('importantAction')
@@ -107,7 +123,7 @@ export class LoginHomeComponent implements OnInit {
       } else {
         this.processing = false;
         this.credentials.password = '';
-        this.isTeacherVerificationFailed = true;
+        this.showTeacherVerificationFailed.set(true);
       }
     });
   }
@@ -153,5 +169,26 @@ export class LoginHomeComponent implements OnInit {
 
   private appendAccessCodeParameter(url: string): string {
     return `${url}${url.includes('?') ? '&' : '?'}accessCode=${this.accessCode}`;
+  }
+
+  protected toggleShowVerificationResend(e: Event): void {
+    e.preventDefault();
+    this.showVerificationResend.update((current) => !current);
+  }
+
+  protected allowResendEmail(): boolean {
+    return this.resendEmailWaitSeconds() <= 0;
+  }
+
+  protected resendEmail(e: Event): void {
+    e.preventDefault();
+    const params = new HttpParams().set('username', this.credentials.username);
+    this.http
+      .post<String>(`${this.resendEmailEndpoint}`, null, { params })
+      .subscribe((response) => {
+        this.showTeacherVerificationFailed.set(false);
+        this.resendEmailWaitSeconds.set(10);
+        this.showEmailSentConfirmation.set(true);
+      });
   }
 }
