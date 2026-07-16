@@ -11,6 +11,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatButton } from '@angular/material/button';
 import { PasswordModule } from '../../../password/password.module';
 import { MatCard, MatCardContent } from '@angular/material/card';
+import { AbstractForgotStudentPasswordComponent } from '../abstract-forgot-student-password.component';
 
 @Component({
   templateUrl: './forgot-student-password-change.component.html',
@@ -27,11 +28,9 @@ import { MatCard, MatCardContent } from '@angular/material/card';
     RouterLink
   ]
 })
-export class ForgotStudentPasswordChangeComponent {
+export class ForgotStudentPasswordChangeComponent extends AbstractForgotStudentPasswordComponent {
   @Input() answer: string;
   changePasswordFormGroup: FormGroup = this.fb.group({});
-  protected message: string = '';
-  protected processing: boolean = false;
   @Input() questionKey: string;
   @Input() username: string;
 
@@ -40,7 +39,13 @@ export class ForgotStudentPasswordChangeComponent {
     private fb: FormBuilder,
     private router: Router,
     private studentService: StudentService
-  ) {}
+  ) {
+    super();
+  }
+
+  protected getFormGroup(): FormGroup {
+    return this.changePasswordFormGroup;
+  }
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
@@ -78,7 +83,7 @@ export class ForgotStudentPasswordChangeComponent {
         injectPasswordErrors(this.changePasswordFormGroup, error);
         break;
       case 'tooManyFailedAnswerAttempts':
-        this.message = $localize`You have entered an incorrect answer too many times. Please wait a few minutes before trying again, or ask your teacher to change your password.`;
+        this.tooManyFailedAnswerAttempts();
         break;
       default:
         this.setErrorOccurredMessage();
@@ -97,14 +102,6 @@ export class ForgotStudentPasswordChangeComponent {
 
   private getControlFieldValue(fieldName: string): string {
     return this.changePasswordFormGroup.get(fieldName).value;
-  }
-
-  private setErrorOccurredMessage(): void {
-    this.message = $localize`An error occurred. Please try again.`;
-  }
-
-  private clearMessage(): void {
-    this.message = '';
   }
 
   private goToSuccessPage(): void {

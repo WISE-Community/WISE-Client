@@ -18,6 +18,7 @@ import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatCard, MatCardContent } from '@angular/material/card';
+import { AbstractForgotStudentPasswordComponent } from '../abstract-forgot-student-password.component';
 
 @Component({
   templateUrl: './forgot-student-password-security.component.html',
@@ -38,14 +39,12 @@ import { MatCard, MatCardContent } from '@angular/material/card';
     RecaptchaV3Module
   ]
 })
-export class ForgotStudentPasswordSecurityComponent {
+export class ForgotStudentPasswordSecurityComponent extends AbstractForgotStudentPasswordComponent {
   protected answer: string;
   protected answerSecurityQuestionFormGroup: FormGroup = this.fb.group({
     answer: new FormControl('', [Validators.required])
   });
   isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
-  protected message: string;
-  protected processing: boolean = false;
   @Input() question: string;
   @Input() questionKey: string;
   @Input() username: string;
@@ -56,7 +55,13 @@ export class ForgotStudentPasswordSecurityComponent {
     private recaptchaV3Service: ReCaptchaV3Service,
     private router: Router,
     private studentService: StudentService
-  ) {}
+  ) {
+    super();
+  }
+
+  protected getFormGroup(): FormGroup {
+    return this.answerSecurityQuestionFormGroup;
+  }
 
   async submit() {
     this.processing = true;
@@ -94,19 +99,19 @@ export class ForgotStudentPasswordSecurityComponent {
   }
 
   securityAnswerError(response: any): void {
-    let message;
     switch (response.messageCode) {
       case 'incorrectAnswer':
-        message = $localize`Incorrect answer, please try again. If you can't remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.`;
+        this.message = $localize`Incorrect answer, please try again. If you can't remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.`;
         break;
       case 'tooManyFailedAnswerAttempts':
-        message = $localize`You have entered an incorrect answer too many times. Please wait a few minutes before trying again, or ask your teacher to change your password.`;
+        this.tooManyFailedAnswerAttempts();
         break;
       case 'recaptchaResponseInvalid':
-        message = $localize`Recaptcha failed. Please reload the page and try again.`;
+        this.message = $localize`Recaptcha failed. Please reload the page and try again.`;
         break;
+      default:
+        this.setErrorOccurredMessage();
     }
-    this.message = message;
   }
 
   getAnswer() {
@@ -119,9 +124,5 @@ export class ForgotStudentPasswordSecurityComponent {
 
   setControlFieldValue(name: string, value: string): void {
     this.answerSecurityQuestionFormGroup.controls[name].setValue(value);
-  }
-
-  private clearMessage(): void {
-    this.message = '';
   }
 }
