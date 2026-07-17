@@ -47,6 +47,7 @@ export class LoginHomeComponent implements OnInit {
   private resendEmailInterval: any;
   protected resendEmailWaitSeconds = signal<number>(0);
   protected showEmailSentConfirmation = signal<boolean>(false);
+  protected showEmailSentError = signal<boolean>(false);
   protected showTeacherVerificationFailed = signal<boolean>(false);
   protected showSocialLogin: boolean;
   protected showVerificationResend = signal<boolean>(false);
@@ -112,6 +113,7 @@ export class LoginHomeComponent implements OnInit {
     this.passwordError = false;
     this.showVerifiedConfirmation.set(false);
     this.showEmailSentConfirmation.set(false);
+    this.showEmailSentError.set(false);
     if (this.isRecaptchaEnabled) {
       this.credentials.recaptchaResponse = await lastValueFrom(
         this.recaptchaV3Service.execute('importantAction')
@@ -182,13 +184,16 @@ export class LoginHomeComponent implements OnInit {
 
   protected resendEmail(e: Event): void {
     e.preventDefault();
+    this.resendEmailWaitSeconds.set(60);
+    this.showTeacherVerificationFailed.set(false);
     const params = new HttpParams().set('username', this.credentials.username);
-    this.http
-      .post<String>(`${this.resendEmailEndpoint}`, null, { params })
-      .subscribe((response) => {
-        this.showTeacherVerificationFailed.set(false);
-        this.resendEmailWaitSeconds.set(10);
+    this.http.post<String>(`${this.resendEmailEndpoint}`, null, { params }).subscribe({
+      next: () => {
         this.showEmailSentConfirmation.set(true);
-      });
+      },
+      error: () => {
+        this.showEmailSentError.set(true);
+      }
+    });
   }
 }

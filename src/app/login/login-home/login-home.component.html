@@ -68,6 +68,10 @@
       }
       @if (showEmailSentConfirmation()) {
         <p class="success center standalone__error" i18n>A verification email has been sent.</p>
+      } @else if (showEmailSentError()) {
+        <p class="warn center standalone__error" i18n>
+          There was an error sending the verification email. Please try again later.
+        </p>
       }
       @if (showVerifiedConfirmation()) {
         <p class="success center standalone__error" i18n>Your email has been verified.</p>
