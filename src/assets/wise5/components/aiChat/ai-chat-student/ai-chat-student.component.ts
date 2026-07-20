@@ -103,7 +103,7 @@ export class AiChatStudentComponent extends ComponentStudent {
     }
     const cRaterResponse = await firstValueFrom(
       this.cRaterService.makeCRaterScoringRequest(
-        'berkeley_CarOnAColdDay',
+        this.component.content.nlp.itemId,
         new Date().getTime(),
         response
       )
@@ -118,7 +118,7 @@ export class AiChatStudentComponent extends ComponentStudent {
     this.messages.push(
       new AiChatMessage(
         'user',
-        `Detected Ideas: ${detectedIdeas.join(', ')}. KI Score: ${kiScore}`,
+        `ID's of detected ideas: [${detectedIdeas.join(', ')}]. KI Score: ${kiScore}`,
         true,
         'nlp'
       )
