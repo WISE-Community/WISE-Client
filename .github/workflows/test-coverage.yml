@@ -19,7 +19,8 @@ jobs:
       - run: |
           npm ci
           npm run test-coverage
-      - uses: qltysh/qlty-action/coverage@v1
+      - uses: qltysh/qlty-action/coverage@v2
         with:
-          oidc: true
+          # Disables OIDC automatically if the PR comes from an outside fork
+          oidc: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
           files: ${{github.workspace}}/coverage/lcov.info
