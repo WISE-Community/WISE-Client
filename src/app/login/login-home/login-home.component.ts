@@ -48,7 +48,7 @@ export class LoginHomeComponent implements OnInit {
   protected resendEmailWaitSeconds = signal<number>(0);
   protected showSocialLogin: boolean;
   protected verificationState = signal<
-    'none' | 'confirmVerified' | 'emailSent' | 'emailError' | 'unverified'
+    'none' | 'confirmVerified' | 'emailError' | 'emailSent' | 'unverified' | 'verificationError'
   >('none');
 
   constructor(
@@ -85,8 +85,12 @@ export class LoginHomeComponent implements OnInit {
       if (params['accessCode'] != null) {
         this.accessCode = params['accessCode'];
       }
-      if (params['verified'] != null) {
-        this.verificationState.set('confirmVerified');
+      if (params['verified']) {
+        if (params['verified'] === 'true') {
+          this.verificationState.set('confirmVerified');
+        } else if (params['verified'] === 'error') {
+          this.verificationState.set('verificationError');
+        }
       }
     });
     this.isReLoginDueToErrorSavingData = this.isRedirectToAppRoutes();

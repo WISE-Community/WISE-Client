@@ -56,7 +56,15 @@
           >
         }
       }
-      @if (verificationState() === 'unverified') {
+      @if (verificationState() === 'confirmVerified') {
+        <p class="success center standalone__error" i18n>Your email has been verified.</p>
+      } @else if (verificationState() === 'emailError') {
+        <p class="warn center standalone__error" i18n>
+          There was an error sending the verification email. Please try again later.
+        </p>
+      } @else if (verificationState() === 'emailSent') {
+        <p class="success center standalone__error" i18n>A verification email has been sent.</p>
+      } @else if (verificationState() === 'unverified') {
         <p class="warn center standalone__error" i18n>
           Your email has not been verified. Check your email for a verification link.
           @if (allowResendEmail()) {
@@ -65,14 +73,10 @@
             Please wait to send another verification email ({{ resendEmailWaitSeconds() }}).
           }
         </p>
-      } @else if (verificationState() === 'emailSent') {
-        <p class="success center standalone__error" i18n>A verification email has been sent.</p>
-      } @else if (verificationState() === 'emailError') {
+      } @else if (verificationState() === 'verificationError') {
         <p class="warn center standalone__error" i18n>
-          There was an error sending the verification email. Please try again later.
+          Your account could not be verified. Make sure you click the link sent to your email.
         </p>
-      } @else if (verificationState() === 'confirmVerified') {
-        <p class="success center standalone__error" i18n>Your email has been verified.</p>
       }
       <p>
         <button
