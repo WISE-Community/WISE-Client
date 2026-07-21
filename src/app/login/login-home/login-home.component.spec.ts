@@ -8,6 +8,7 @@ import { By } from '@angular/platform-browser';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { provideRouter, Router } from '@angular/router';
 import { getErrorMessage } from '../../common/test-helper';
+import { DebugElement } from '@angular/core';
 
 let component: LoginHomeComponent;
 let configService: ConfigService;
@@ -76,39 +77,71 @@ function loginWithRecaptchaDisabled() {
       component.isRecaptchaEnabled = false;
     });
     incorrectPassword();
-    correctPassword();
+    correctPasswordVerifiedAccount();
+    unverifiedAccount();
+    unverifiedAccountWaitToResendEmail();
   });
 }
 
 function incorrectPassword() {
   describe('user enters incorrect password', () => {
-    it('should show error message', fakeAsync(() => {
+    it('should show authentication error message', fakeAsync(() => {
       spyOn(http, 'post').and.returnValue(of({}));
       spyOn(http, 'get').and.returnValue(of(null));
+      spyOn(userService, 'isVerified').and.returnValue(of(true));
       component.login();
       tickAndDetectChanges();
-      const errorMessageElement = fixture.debugElement
-        .queryAll(By.css('p'))
-        .find(
-          (element) =>
-            element.nativeElement.textContent.trim() ===
-            'Username and password not recognized. Please try again.'
-        );
-      expect(errorMessageElement.nativeElement.classList.contains('warn')).toBeTruthy();
+      const errorMessageElement = getErrorMessageElement(
+        'Username and password not recognized. Please try again.'
+      );
+      expect(errorMessageElement).toBeDefined();
+      expect(errorMessageElement!.nativeElement.classList.contains('warn')).toBeTruthy();
       expect(component.credentials.password).toEqual('');
     }));
   });
 }
 
-function correctPassword() {
-  describe('user enters correct password', () => {
+function correctPasswordVerifiedAccount() {
+  describe('user enters correct password and account is verified', () => {
     it('should navigate to home page', fakeAsync(() => {
       spyOn(http, 'post').and.returnValue(of({}));
       spyOn(http, 'get').and.returnValue(of({ id: 1 }));
+      spyOn(userService, 'isVerified').and.returnValue(of(true));
       const routerNavigateSpy = spyOn(router, 'navigateByUrl');
       component.login();
       tickAndDetectChanges();
       expect(routerNavigateSpy).toHaveBeenCalledWith(redirectUrl);
+    }));
+  });
+}
+
+function unverifiedAccount() {
+  describe('login attempt with unverified account', () => {
+    it('should show verification error message', fakeAsync(() => {
+      spyOn(userService, 'isVerified').and.returnValue(of(false));
+      component.login();
+      tickAndDetectChanges();
+      const errorMessageElement = getErrorMessageElement(
+        'Your email has not been verified. Check your email for a verification link. Click here resend the verification email.'
+      );
+      expect(errorMessageElement).toBeDefined();
+      expect(errorMessageElement!.nativeElement.classList.contains('warn')).toBeTruthy();
+    }));
+  });
+}
+
+function unverifiedAccountWaitToResendEmail() {
+  describe('login attempt with unverified account and must wait to resend the email', () => {
+    it('should show verification error message with countdown to resend', fakeAsync(() => {
+      spyOn(userService, 'isVerified').and.returnValue(of(false));
+      component['resendEmailWaitSeconds'].set(60);
+      component.login();
+      tickAndDetectChanges();
+      const errorMessageElement = getErrorMessageElement(
+        'Your email has not been verified. Check your email for a verification link.  Please wait to send another verification email (60).'
+      );
+      expect(errorMessageElement).toBeDefined();
+      expect(errorMessageElement!.nativeElement.classList.contains('warn')).toBeTruthy();
     }));
   });
 }
@@ -137,4 +170,10 @@ function loginWithRecaptchaEnabled() {
 function tickAndDetectChanges() {
   tick();
   fixture.detectChanges();
+}
+
+function getErrorMessageElement(errorMsg: string): DebugElement | undefined {
+  return fixture.debugElement
+    .queryAll(By.css('p'))
+    .find((element) => element.nativeElement.textContent.trim() === errorMsg);
 }
