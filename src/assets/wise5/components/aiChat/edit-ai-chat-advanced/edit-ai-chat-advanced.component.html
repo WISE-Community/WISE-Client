@@ -3,15 +3,6 @@
     <ng-template mat-tab-label>
       <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
     </ng-template>
-    <mat-form-field>
-      <mat-label i18n>Model</mat-label>
-      <mat-select [(ngModel)]="componentContent.model" (ngModelChange)="this.componentChanged()">
-        @for (model of models; track model) {
-          <mat-option [value]="model">{{ model }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-    <br />
     <edit-component-width [componentContent]="component.content" />
   </mat-tab>
   <mat-tab>
