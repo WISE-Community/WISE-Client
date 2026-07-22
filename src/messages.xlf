@@ -962,7 +962,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">46,47</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
@@ -10684,7 +10684,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">38,41</context>
+          <context context-type="linenumber">29,32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
@@ -10798,7 +10798,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">50,52</context>
+          <context context-type="linenumber">41,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
@@ -13754,7 +13754,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">4,7</context>
+          <context context-type="linenumber">4,6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
@@ -16690,11 +16690,18 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">46,49</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="1141886420788473147" datatype="html">
+        <source>Model</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="487123292048554984" datatype="html">
         <source>Enable Computer Avatar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-authoring/ai-chat-authoring.component.html</context>
-          <context context-type="linenumber">57,60</context>
+          <context context-type="linenumber">66,69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/dialog-guidance-authoring/dialog-guidance-authoring.component.html</context>
@@ -16734,18 +16741,11 @@ Are you sure you want to proceed?</source>
           <context context-type="linenumber">114</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1141886420788473147" datatype="html">
-        <source>Model</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="8271357500216966879" datatype="html">
         <source>Visibility</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">10,12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
@@ -16828,7 +16828,7 @@ Are you sure you want to proceed?</source>
         <source>Connections</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
