@@ -1,16 +1,34 @@
 <div class="openResponse">
   @if (!componentContent.showPreviousWork) {
     <div>
-      <mat-icon
-        matTooltip="If you want to use rich visuals (images, videos, links, bullets, etc.) in your prompt, use an HTML activity above this"
-        matTooltipPosition="above"
-        i18n-matTooltip
-        >announcement</mat-icon
-      >
-      <edit-component-prompt
-        [componentContent]="componentContent"
-        (promptChangedEvent)="promptChanged($event)"
-      />
+      <div class="flex flex-row justify-end mb-2">
+        <mat-form-field appearance="outline" class="w-48">
+          <mat-label i18n>Background color</mat-label>
+          <input
+            matInput
+            placeholder="#RRGGBB"
+            [(ngModel)]="componentContent.backgroundColor"
+            (ngModelChange)="componentChanged()"
+          />
+        </mat-form-field>
+      </div>
+      <div class="flex flex-col gap-4 mb-4">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label i18n>Header</mat-label>
+          <input
+            matInput
+            [(ngModel)]="componentContent.header"
+            (ngModelChange)="componentChanged()"
+          />
+        </mat-form-field>
+        <div>
+          <label class="text-sm text-gray-600 mb-1 block" i18n>Context</label>
+          <wise-authoring-tinymce-editor
+            [(model)]="componentContent.context"
+            (modelChange)="componentChanged()"
+          />
+        </div>
+      </div>
     </div>
   }
 </div>

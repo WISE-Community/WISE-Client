@@ -1,4 +1,6 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
+import { WiseLinkService } from '../../../../../app/services/wiseLinkService';
 import { MatDialog } from '@angular/material/dialog';
 import { timeout } from 'rxjs/operators';
 import { DialogWithoutCloseComponent } from '../../../directives/dialog-without-close/dialog-without-close.component';
@@ -56,6 +58,8 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
   templateUrl: 'open-response-student.component.html'
 })
 export class OpenResponseStudent extends ComponentStudent {
+  protected contextHtml: SafeHtml = '';
+  private wiseLinkService = inject(WiseLinkService);
   audioAttachments: any[] = [];
   cRaterTimeout: number = 40000;
   isPublicSpaceExist: boolean = false;
@@ -94,6 +98,9 @@ export class OpenResponseStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.contextHtml = this.wiseLinkService.generateHtmlWithWiseLink(
+      this.componentContent.context || ''
+    );
     if (hasConnectedComponent(this.componentContent, 'showWork')) {
       this.handleConnectedComponents();
     } else if (
