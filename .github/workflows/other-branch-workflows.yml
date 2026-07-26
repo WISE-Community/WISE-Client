@@ -14,6 +14,6 @@ jobs:
 
   generate-messages:
     needs: test-coverage
-    uses: WISE-Community/WISE-Client/.github/workflows/generate-messages.yml@develop
+    uses: WISE-Community/WISE-Client/.github/workflows/generate-messages.yml@actions-fails-on-fork
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
