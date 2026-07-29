@@ -2,9 +2,7 @@
   class="pt-4 px-6 pb-6 rounded-lg border-2 border-black"
   [style.background-color]="componentContent.backgroundColor ? (componentContent.backgroundColor.startsWith('#') ? componentContent.backgroundColor : '#' + componentContent.backgroundColor) : 'transparent'"
 >
-@if (componentContent.header) {
-  <h2 class="or-header text-2xl font-bold mb-4">{{ componentContent.header }}</h2>
-}
+<component-header [component]="component" />
 @if (componentContent.context) {
   <div class="or-body mb-4" [innerHTML]="contextHtml"></div>
 }

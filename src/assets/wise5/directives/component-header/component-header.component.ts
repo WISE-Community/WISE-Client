@@ -9,18 +9,20 @@ import { PromptComponent } from '../prompt/prompt.component';
 @Component({
   imports: [PossibleScoreComponent, PromptComponent],
   selector: 'component-header',
-  styles: ['.component-header { padding-bottom: 8px; } .prompt { font-weight: 500; }'],
+  styles: ['.component-header { padding-bottom: 8px; } .prompt { font-weight: 500; } .component-header-header:not(:empty) { font-size: 24px; line-height: 32px; font-weight: 700; margin-bottom: 8px; }'],
   templateUrl: 'component-header.component.html'
 })
 export class ComponentHeaderComponent {
   @Input() component: WISEComponent;
   protected dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
+  protected header: SafeHtml;
   protected prompt: SafeHtml;
 
   constructor(protected sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
+    this.header = this.sanitizer.bypassSecurityTrustHtml(this.component.content.header || '');
     this.prompt = this.sanitizer.bypassSecurityTrustHtml(this.component.content.prompt);
     this.dynamicPrompt = new DynamicPrompt(this.component.content.dynamicPrompt);
   }

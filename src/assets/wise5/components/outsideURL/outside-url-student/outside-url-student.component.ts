@@ -1,3 +1,4 @@
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -12,7 +13,8 @@ import { ComponentService } from '../../componentService';
 
 @Component({
   selector: 'outside-url-student',
-  templateUrl: 'outside-url-student.component.html'
+  templateUrl: 'outside-url-student.component.html',
+  imports: [ComponentHeaderComponent]
 })
 export class OutsideUrlStudent extends ComponentStudent {
   url: SafeUrl;

@@ -13,14 +13,6 @@
         </mat-form-field>
       </div>
       <div class="flex flex-col gap-4 mb-4">
-        <mat-form-field class="w-full" appearance="outline">
-          <mat-label i18n>Header</mat-label>
-          <input
-            matInput
-            [(ngModel)]="componentContent.header"
-            (ngModelChange)="componentChanged()"
-          />
-        </mat-form-field>
         <div>
           <label class="text-sm text-gray-600 mb-1 block" i18n>Context</label>
           <wise-authoring-tinymce-editor

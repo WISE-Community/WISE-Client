@@ -37,7 +37,7 @@ export class EditComponentComponent {
       nodeId: this.nodeId
     });
     this.applicationRef.attachView(this.componentRef.hostView);
-    setTimeout(() => hostElement.focus());
+    setTimeout(() => hostElement.focus({ preventScroll: true }));
   }
 
   ngOnDestroy(): void {

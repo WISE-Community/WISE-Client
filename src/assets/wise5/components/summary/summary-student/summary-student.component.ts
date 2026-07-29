@@ -1,3 +1,4 @@
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AnnotationService } from '../../../services/annotationService';
@@ -13,7 +14,8 @@ import { CompletionService } from '../../../services/completionService';
 import { StudentSummaryDisplay } from '../../../directives/student-summary-display/student-summary-display.component';
 
 @Component({
-  imports: [StudentSummaryDisplay],
+  imports: [
+    ComponentHeaderComponent,StudentSummaryDisplay],
   styles: ['.prompt { font-weight: 500; padding-bottom: 8px; }'],
   templateUrl: 'summary-student.component.html'
 })

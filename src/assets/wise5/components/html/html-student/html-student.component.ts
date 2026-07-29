@@ -1,3 +1,4 @@
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
@@ -14,7 +15,8 @@ import { ComponentService } from '../../componentService';
 @Component({
   selector: 'html-student',
   styleUrl: 'html-student.component.scss',
-  templateUrl: 'html-student.component.html'
+  templateUrl: 'html-student.component.html',
+  imports: [ComponentHeaderComponent]
 })
 export class HtmlStudentComponent extends ComponentStudent {
   protected html: SafeHtml = '';
