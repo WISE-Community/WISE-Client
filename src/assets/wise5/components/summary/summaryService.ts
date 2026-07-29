@@ -2,47 +2,40 @@
 
 import { ComponentService } from '../componentService';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+
 
 @Injectable()
 export class SummaryService extends ComponentService {
-  componentsWithScoresSummary: string[];
-  componentsWithResponsesSummary: string[];
-
-  constructor(private http: HttpClient) {
-    super();
-    this.componentsWithScoresSummary = [
-      'Animation',
-      'AudioOscillator',
-      'ConceptMap',
-      'DialogGuidance',
-      'Discussion',
-      'Draw',
-      'Embedded',
-      'Graph',
-      'Label',
-      'Match',
-      'MultipleChoice',
-      'OpenResponse',
-      'Table'
-    ];
-    this.componentsWithResponsesSummary = [
-      'DialogGuidance',
-      'Match',
-      'MultipleChoice',
-      'OpenResponse',
-      'Table'
-    ];
-  }
-
-  getComponentTypeLabel(): string {
-    return $localize`Summary Graph`;
-  }
+  protected type: string = 'Summary';
+  private http = inject(HttpClient);
+  componentsWithScoresSummary: string[] = [
+    'Animation',
+    'AudioOscillator',
+    'ConceptMap',
+    'DialogGuidance',
+    'Discussion',
+    'Draw',
+    'Embedded',
+    'Graph',
+    'Label',
+    'Match',
+    'MultipleChoice',
+    'OpenResponse',
+    'Table'
+  ];
+  componentsWithResponsesSummary: string[] = [
+    'DialogGuidance',
+    'Match',
+    'MultipleChoice',
+    'OpenResponse',
+    'Table'
+  ];
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Summary';
+    component.type = this.type;
     component.summaryNodeId = null;
     component.summaryComponentId = null;
     component.source = 'period';

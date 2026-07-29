@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConfigService } from '../../services/configService';
 import { ComponentService } from '../componentService';
@@ -8,17 +8,14 @@ import { getAvatarColorForWorkgroupId } from '../../common/workgroup/workgroup';
 
 @Injectable()
 export class PeerChatService extends ComponentService {
-  constructor(private configService: ConfigService, private http: HttpClient) {
-    super();
-  }
+  protected type: string = 'PeerChat';
 
-  getComponentTypeLabel() {
-    return $localize`Peer Chat`;
-  }
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
 
   createComponent(): any {
     const component: any = super.createComponent();
-    component.type = 'PeerChat';
+    component.type = this.type;
     component.peerGroupingTag = '';
     return component;
   }

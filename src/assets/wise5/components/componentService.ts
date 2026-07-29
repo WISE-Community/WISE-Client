@@ -1,19 +1,23 @@
 'use strict';
 
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { generateRandomKey } from '../common/string/string';
+import { ComponentInfoService } from '../services/componentInfoService';
 import { ComponentStateRequest } from './ComponentStateRequest';
 import { ComponentStateWrapper } from './ComponentStateWrapper';
 
 @Injectable()
 export class ComponentService {
+  protected type: string = '';
   private requestComponentStateSource = new Subject<ComponentStateRequest>();
   public requestComponentStateSource$ = this.requestComponentStateSource.asObservable();
   private sendComponentStateSource = new Subject<ComponentStateWrapper>();
   public sendComponentStateSource$ = this.sendComponentStateSource.asObservable();
   private notifyConnectedComponentSource = new Subject<any>();
   public notifyConnectedComponentSource$ = this.notifyConnectedComponentSource.asObservable();
+
+  protected componentInfoService = inject(ComponentInfoService);
 
   getDomIdEnding(nodeId: string, componentId: string, componentState: any): string {
     if (componentState == null) {
@@ -56,7 +60,15 @@ export class ComponentService {
    * @returns {string}
    */
   getComponentTypeLabel(): string {
-    return '';
+    return this.componentInfoService.getInfo(this.type)?.getLabel() || '';
+  }
+
+  /**
+   * Get the component type Google Font Material icon name. For example "edit_note".
+   * @returns {string}
+   */
+  getComponentTypeIcon(): string {
+    return this.componentInfoService.getInfo(this.type)?.getIcon() || '';
   }
 
   /**

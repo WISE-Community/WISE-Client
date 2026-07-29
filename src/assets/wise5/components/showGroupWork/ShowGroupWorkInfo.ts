@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class ShowGroupWorkInfo extends ComponentInfo {
   protected description: string = $localize`Students are shown work that everyone in their group submitted for a specific item.`;
+  protected icon: string = 'co_present';
   protected label: string = $localize`Show Group Work`;
   protected previewExamples: any[] = [
     {

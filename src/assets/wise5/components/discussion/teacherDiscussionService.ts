@@ -1,18 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ConfigService } from '../../services/configService';
+import { Injectable, inject, Injector } from '@angular/core';
 import { TeacherDataService } from '../../services/teacherDataService';
 import { DiscussionService } from './discussionService';
 import { getIntersectOfArrays } from '../../common/array/array';
 
 @Injectable()
 export class TeacherDiscussionService extends DiscussionService {
-  constructor(
-    protected http: HttpClient,
-    protected configService: ConfigService,
-    protected dataService: TeacherDataService
-  ) {
-    super(configService, http);
+  private injector = inject(Injector);
+
+  protected get dataService(): TeacherDataService {
+    return this.injector.get(TeacherDataService);
   }
 
   getPostsAssociatedWithComponentIdsAndWorkgroupId(componentIds: string[], workgroupId: number) {

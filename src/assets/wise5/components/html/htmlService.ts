@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class HTMLService extends ComponentService {
-  getComponentTypeLabel(): string {
-    return $localize`Display Content`;
-  }
+  protected type: string = 'HTML';
+
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'HTML';
+    component.type = this.type;
     component.html = $localize`Enter content here`;
     return component;
   }

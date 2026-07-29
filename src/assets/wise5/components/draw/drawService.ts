@@ -8,11 +8,12 @@ window['EventEmitter2'] = EventEmitter2;
 import DrawingTool from '@wise-community/drawing-tool/dist/drawing-tool';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class DrawService extends ComponentService {
+  protected type: string = 'Draw';
   toolFieldToLabel: any = {
     select: 'Select tool',
     line: 'Line tool (click and hold to show available line types)',
@@ -31,17 +32,11 @@ export class DrawService extends ComponentService {
     delete: 'Delete selected objects'
   };
 
-  constructor(private StudentAssetService: StudentAssetService) {
-    super();
-  }
-
-  getComponentTypeLabel(): string {
-    return $localize`Draw`;
-  }
+  private StudentAssetService = inject(StudentAssetService);
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Draw';
+    component.type = this.type;
     component.stamps = {
       Stamps: []
     };

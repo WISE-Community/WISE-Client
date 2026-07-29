@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class DialogGuidanceInfo extends ComponentInfo {
   protected description: string = $localize`Students chat with a computer avatar about a specific topic.`;
+  protected icon: string = 'chat';
   protected label: string = $localize`Dialog`;
   protected previewExamples: any[] = [
     {

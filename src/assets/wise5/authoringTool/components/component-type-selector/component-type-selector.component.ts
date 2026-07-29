@@ -12,7 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ComponentTypeSelectorComponent {
   @Input() componentType: string;
-  protected componentTypes: any[];
+  protected componentGroups: any[];
+  private componentTypes: any[];
+  protected selectedComponentTypeOption: any;
   @Output() componentTypeSelectedEvent: EventEmitter<string> = new EventEmitter<string>();
   protected firstComponent: boolean;
   protected lastComponent: boolean;
@@ -20,13 +22,15 @@ export class ComponentTypeSelectorComponent {
   constructor(private componentTypeService: ComponentTypeService) {}
 
   ngOnInit(): void {
-    this.componentTypes = this.componentTypeService.getComponentTypes();
+    this.componentGroups = this.componentTypeService.getComponentGroups();
+    this.componentTypes = this.componentGroups.flatMap((group) => group.types);
     this.selectComponent(this.componentType);
   }
 
   protected selectComponent(componentType: string): void {
     this.componentType = componentType;
     const index = this.getComponentIndex(this.componentType);
+    this.selectedComponentTypeOption = this.componentTypes[index];
     this.firstComponent = index === 0;
     this.lastComponent = index === this.componentTypes.length - 1;
     this.componentTypeSelectedEvent.emit(this.componentType);
@@ -41,6 +45,6 @@ export class ComponentTypeSelectorComponent {
   }
 
   private getComponentIndex(componentType: string): number {
-    return this.componentTypes.findIndex((type) => type.type === componentType);
+    return this.componentTypes?.findIndex((type) => type?.type === componentType) ?? -1;
   }
 }

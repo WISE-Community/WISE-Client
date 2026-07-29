@@ -6,6 +6,8 @@ import { MockProviders } from 'ng-mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { MultipleChoiceService } from '../../../components/multipleChoice/multipleChoiceService';
 
+import { ComponentInfoService } from '../../../services/componentInfoService';
+
 const choiceId1 = 'choice1';
 const choiceId2 = 'choice2';
 const choiceId3 = 'choice3';
@@ -28,13 +30,16 @@ describe('ChoiceChosenConstraintStrategy', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        MockProviders(ComponentServiceLookupService, MultipleChoiceService, StudentDataService),
+        MockProviders(ComponentInfoService, ComponentServiceLookupService, StudentDataService),
+        MultipleChoiceService,
         provideHttpClient()
       ]
     });
     strategy = new ChoiceChosenConstraintStrategy();
     componentServiceLookupService = TestBed.inject(ComponentServiceLookupService);
-    spyOn(componentServiceLookupService, 'getService').and.returnValue(new MultipleChoiceService());
+    spyOn(componentServiceLookupService, 'getService').and.returnValue(
+      TestBed.inject(MultipleChoiceService)
+    );
     strategy.componentServiceLookupService = componentServiceLookupService;
     dataService = TestBed.inject(StudentDataService);
     strategy.dataService = dataService;

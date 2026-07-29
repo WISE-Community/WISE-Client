@@ -3,12 +3,13 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { EditComponentComponent } from '../edit-component/edit-component.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { ComponentTypeService } from '../../../services/componentTypeService';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { Component as WISEComponent } from '../../../common/Component';
 import { EditComponentAdvancedComponent } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { ComponentInfoService } from '../../../services/componentInfoService';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -19,11 +20,15 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,
+    MatIconModule,
     MatSlideToggle
   ],
   template: `
-    <div class="flex items-center justify-between pe-4">
-      <h2 mat-dialog-title i18n>Edit: {{ componentIndex }}. {{ componentTypeLabel }}</h2>
+    <div class="flex items-center justify-between p-4">
+      <h2 class="flex items-center gap-1 !m-0">
+        <span i18n>Edit: {{ componentIndex }}. {{ componentTypeLabel }}</span>
+        <mat-icon>{{ componentTypeIcon }}</mat-icon>
+      </h2>
       <mat-slide-toggle color="primary" [(ngModel)]="advancedMode" i18n>Advanced</mat-slide-toggle>
     </div>
     <mat-divider class="!m-0" />
@@ -74,10 +79,11 @@ export class EditComponentDialogComponent {
   protected advancedMode = false;
   protected component: WISEComponent;
   protected componentIndex: number;
+  protected componentTypeIcon: string;
   protected componentTypeLabel: string;
 
   constructor(
-    private componentTypeService: ComponentTypeService,
+    private componentInfoService: ComponentInfoService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private projectService: TeacherProjectService
   ) {
@@ -86,8 +92,11 @@ export class EditComponentDialogComponent {
       this.projectService
         .getNode(this.data.nodeId)
         .getComponentIndex(this.data.componentContent.id) + 1;
-    this.componentTypeLabel = this.componentTypeService.getComponentTypeLabel(
-      this.data.componentContent.type
-    );
+    this.componentTypeIcon = this.componentInfoService
+      .getInfo(this.data.componentContent.type)
+      .getIcon();
+    this.componentTypeLabel = this.componentInfoService
+      .getInfo(this.data.componentContent.type)
+      .getLabel();
   }
 }

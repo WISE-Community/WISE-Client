@@ -5,9 +5,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AnimationService extends ComponentService {
-  getComponentTypeLabel(): string {
-    return $localize`Animation`;
-  }
+  protected type: string = 'Animation';
+
 
   getSvgId(domIdEnding: string): string {
     return `svg-${domIdEnding}`;
@@ -15,7 +14,7 @@ export class AnimationService extends ComponentService {
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Animation';
+    component.type = this.type;
     component.widthInPixels = 600;
     component.widthInUnits = 60;
     component.heightInPixels = 200;

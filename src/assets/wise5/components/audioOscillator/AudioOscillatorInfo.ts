@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class AudioOscillatorInfo extends ComponentInfo {
   protected description: string = $localize`Students change the frequency and amplitude of a sound wave. They listen to the resulting sounds and view graphs of the waves.`;
+  protected icon: string = 'waves';
   protected label: string = $localize`Audio Oscillator`;
   protected previewExamples: any[] = [
     {
