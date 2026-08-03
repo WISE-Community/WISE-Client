@@ -21,7 +21,7 @@ const redirectUrl: string = `${contextPath}/api/j_acegi_security_check`;
 let router: Router;
 let userService: UserService;
 
-fdescribe('LoginHomeComponent!', () => {
+describe('LoginHomeComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [LoginHomeComponent],
@@ -124,7 +124,9 @@ function unverifiedAccount() {
       const errorMessageElement = getErrorMessageElement(
         'Your email has not been verified. Check your email for a verification link.'
       );
-      const resendLinkElement = getErrorMessageElement('Click here resend the verification email.');
+      const resendLinkElement = getErrorMessageElement(
+        'Click here to resend the verification email.'
+      );
       expect(errorMessageElement).toBeDefined();
       expect(errorMessageElement!.nativeElement.classList.contains('warn')).toBeTruthy();
       expect(resendLinkElement).toBeDefined();
