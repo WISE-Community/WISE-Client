@@ -25,27 +25,127 @@ describe('ComponentTypeSelectorComponent', () => {
     });
     fixture = TestBed.createComponent(ComponentTypeSelectorComponent);
     const componentTypeService = TestBed.inject(ComponentTypeService);
-    spyOn(componentTypeService, 'getComponentTypes').and.returnValue([
-      { type: 'AiChat', name: 'AI Chat' },
-      { type: 'Animation', name: 'Animation' },
-      { type: 'AudioOscillator', name: 'Audio Oscillator' },
-      { type: 'ConceptMap', name: 'Concept Map' },
-      { type: 'DialogGuidance', name: 'Dialog Guidance' },
-      { type: 'Discussion', name: 'Discussion' },
-      { type: 'Draw', name: 'Draw' },
-      { type: 'Embedded', name: 'Embedded' },
-      { type: 'Graph', name: 'Graph' },
-      { type: 'Label', name: 'Label' },
-      { type: 'Match', name: 'Match' },
-      { type: 'MultipleChoice', name: 'Multiple Choice' },
-      { type: 'OpenResponse', name: 'Open Response' },
-      { type: 'OutsideURL', name: 'Outside URL' },
-      { type: 'PeerChat', name: 'Peer Chat' },
-      { type: 'HTML', name: 'HTML' },
-      { type: 'ShowGroupWork', name: 'Show Group Work' },
-      { type: 'ShowMyWork', name: 'Show My Work' },
-      { type: 'Summary', name: 'Summary' },
-      { type: 'Table', name: 'Table' }
+    spyOn(componentTypeService, 'getComponentGroups').and.returnValue([
+      {
+        name: 'View Information',
+        types: [
+          {
+            type: 'HTML',
+            name: 'Display Content',
+            icon: 'newspaper'
+          },
+          {
+            type: 'ShowMyWork',
+            name: 'Show Student Work',
+            icon: 'assignment'
+          },
+          {
+            type: 'Summary',
+            name: 'Summary Graph',
+            icon: 'pie_chart'
+          }
+        ]
+      },
+      {
+        name: 'Explain and Assess',
+        types: [
+          {
+            type: 'ConceptMap',
+            name: 'Concept Map',
+            icon: 'account_tree'
+          },
+          {
+            type: 'Draw',
+            name: 'Draw',
+            icon: 'draw'
+          },
+          {
+            type: 'Label',
+            name: 'Label',
+            icon: 'sticky_note_2'
+          },
+          {
+            type: 'MultipleChoice',
+            name: 'Multiple Choice',
+            icon: 'ballot'
+          },
+          {
+            type: 'OpenResponse',
+            name: 'Open Response',
+            icon: 'edit_note'
+          },
+          {
+            type: 'Match',
+            name: 'Sort',
+            icon: 'category'
+          }
+        ]
+      },
+      {
+        name: 'Experiment, Discover, Distinguish',
+        types: [
+          {
+            type: 'AiChat',
+            name: 'AI Chat',
+            icon: 'assistant'
+          },
+          {
+            type: 'Animation',
+            name: 'Animation',
+            icon: 'animation'
+          },
+          {
+            type: 'AudioOscillator',
+            name: 'Audio Oscillator',
+            icon: 'waves'
+          },
+          {
+            type: 'Embedded',
+            name: 'Custom',
+            icon: 'handyman'
+          },
+          {
+            type: 'Graph',
+            name: 'Graph',
+            icon: 'bar_chart'
+          },
+          {
+            type: 'OutsideURL',
+            name: 'Outside Resource',
+            icon: 'web'
+          },
+          {
+            type: 'Table',
+            name: 'Table',
+            icon: 'table_chart'
+          }
+        ]
+      },
+      {
+        name: 'Collaborate',
+        types: [
+          {
+            type: 'DialogGuidance',
+            name: 'Dialog',
+            icon: 'chat'
+          },
+          {
+            type: 'Discussion',
+            name: 'Discussion',
+            icon: 'forum'
+          },
+          {
+            type: 'PeerChat',
+            name: 'Peer Chat',
+            icon: 'people'
+          },
+          {
+            type: 'ShowGroupWork',
+            name: 'Show Group Work',
+            icon: 'co_present'
+          }
+        ]
+      }
     ]);
 
     configService = TestBed.inject(ConfigService);
@@ -81,7 +181,7 @@ function goToNextComponent() {
     it('changes to the next component type', async () => {
       expect(component.componentType).toEqual('OpenResponse');
       await (await componentTypeSelectorHarness.getNextComponentTypeButton()).click();
-      expect(component.componentType).toEqual('OutsideURL');
+      expect(component.componentType).toEqual('Match');
     });
   });
 }
@@ -92,9 +192,9 @@ function selectComponent() {
       await (
         await componentTypeSelectorHarness.getComponentTypeSelect()
       ).clickOptions({
-        text: 'AI Chat'
+        text: 'Display Content'
       });
-      expect(component.componentType).toEqual('AiChat');
+      expect(component.componentType).toEqual('HTML');
       expect(
         await (await componentTypeSelectorHarness.getPreviousComponentTypeButton()).isDisabled()
       ).toBeTrue();
@@ -105,9 +205,9 @@ function selectComponent() {
       await (
         await componentTypeSelectorHarness.getComponentTypeSelect()
       ).clickOptions({
-        text: 'Table'
+        text: 'Show Group Work'
       });
-      expect(component.componentType).toEqual('Table');
+      expect(component.componentType).toEqual('ShowGroupWork');
       expect(
         await (await componentTypeSelectorHarness.getNextComponentTypeButton()).isDisabled()
       ).toBeTrue();

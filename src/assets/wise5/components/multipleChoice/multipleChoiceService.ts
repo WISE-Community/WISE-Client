@@ -6,13 +6,12 @@ import { generateRandomKey } from '../../common/string/string';
 
 @Injectable()
 export class MultipleChoiceService extends ComponentService {
-  getComponentTypeLabel(): string {
-    return $localize`Multiple Choice`;
-  }
+  protected type: string = 'MultipleChoice';
+
 
   createComponent(): any {
     const component: any = super.createComponent();
-    component.type = 'MultipleChoice';
+    component.type = this.type;
     component.prompt = $localize`Choose an option from below`;
     component.choiceType = 'radio';
     component.choices = [

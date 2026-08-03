@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class OutsideUrlInfo extends ComponentInfo {
   protected description: string = $localize`Students view an external website.`;
+  protected icon: string = 'web';
   protected label: string = $localize`Outside Resource`;
   protected previewExamples: any[] = [
     {

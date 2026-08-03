@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class HtmlInfo extends ComponentInfo {
   protected description: string = $localize`Students view rich text (HTML) content.`;
+  protected icon: string = 'newspaper';
   protected label: string = $localize`Display Content`;
   protected previewExamples: any[] = [
     {

@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class DiscussionInfo extends ComponentInfo {
   protected description: string = $localize`Students post messages for the whole class to see and can reply to other students' posts.`;
+  protected icon: string = 'forum';
   protected label: string = $localize`Discussion`;
   protected previewExamples: any[] = [
     {

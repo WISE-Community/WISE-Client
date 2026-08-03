@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     <div class="@container">
-      <div class="grid @sm:grid-cols-2 gap-2">
+      <div class="grid @md:grid-cols-2 gap-1">
         @for (componentType of componentGroup.types; track componentType.type) {
           <component-type-button
             [componentType]="componentType.type"

@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class AnimationInfo extends ComponentInfo {
   protected description: string = $localize`Students watch an animation.`;
+  protected icon: string = 'animation';
   protected label: string = $localize`Animation`;
   protected previewExamples: any[] = [
     {

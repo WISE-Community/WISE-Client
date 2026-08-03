@@ -41,8 +41,10 @@
               class="component component--grading"
             >
               <div>
-                <h3 class="accent-1 gray-lightest-bg component__header">
-                  {{ component.displayIndex + '. ' + getComponentTypeLabel(component.type) }}&nbsp;
+                <h3 class="accent-1 gray-lightest-bg component__header flex items-center gap-1">
+                  <span>{{ component.displayIndex }}.</span>
+                  <mat-icon class="mat-18">{{ getComponentTypeIcon(component.type) }}</mat-icon>
+                  <span>{{ getComponentTypeLabel(component.type) }}</span>
                   <component-new-work-badge
                     [componentId]="component.id"
                     [workgroupId]="workgroup.workgroupId"

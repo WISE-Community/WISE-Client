@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class PeerChatInfo extends ComponentInfo {
   protected description: string = $localize`Students are grouped with other students to discuss a topic.`;
+  protected icon: string = 'people';
   protected label: string = $localize`Peer Chat`;
   protected previewExamples: any[] = [
     {

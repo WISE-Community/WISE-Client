@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class DrawInfo extends ComponentInfo {
   protected description: string = $localize`Students draw on a canvas using a variety of tools.`;
+  protected icon: string = 'draw';
   protected label: string = $localize`Draw`;
   protected previewExamples: any[] = [
     {

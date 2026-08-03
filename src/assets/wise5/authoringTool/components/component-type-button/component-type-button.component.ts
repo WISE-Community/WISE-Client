@@ -16,6 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class ComponentTypeButtonComponent {
   @Output() componentSelectedEvent: EventEmitter<void> = new EventEmitter<void>();
   @Input() componentType: string;
+  protected icon: string;
   protected label: string;
 
   constructor(
@@ -24,6 +25,7 @@ export class ComponentTypeButtonComponent {
   ) {}
 
   ngOnInit(): void {
+    this.icon = this.componentInfoService.getInfo(this.componentType).getIcon();
     this.label = this.componentInfoService.getInfo(this.componentType).getLabel();
   }
 

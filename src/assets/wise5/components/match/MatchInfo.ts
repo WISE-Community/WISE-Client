@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class MatchInfo extends ComponentInfo {
   protected description: string = $localize`Students sort items into different buckets.`;
+  protected icon: string = 'category';
   protected label: string = $localize`Sort`;
   protected previewExamples: any[] = [
     {

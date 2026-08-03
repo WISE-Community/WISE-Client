@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class SummaryInfo extends ComponentInfo {
   protected description: string = $localize`Students are shown an aggregate graph summarizing data from the class.`;
+  protected icon: string = 'pie_chart';
   protected label: string = $localize`Summary Graph`;
   protected previewExamples: any[] = [
     {

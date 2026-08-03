@@ -1,7 +1,7 @@
 'use strict';
 
 import html2canvas from 'html2canvas';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import { ConfigService } from '../../services/configService';
@@ -11,19 +11,12 @@ import { hasConnectedComponent } from '../../common/ComponentContent';
 
 @Injectable()
 export class GraphService extends ComponentService {
+  protected type: string = 'Graph';
   seriesColors: string[] = ['blue', 'red', 'green', 'orange', 'purple', 'black'];
 
-  constructor(
-    private configService: ConfigService,
-    private http: HttpClient,
-    private StudentAssetService: StudentAssetService
-  ) {
-    super();
-  }
-
-  getComponentTypeLabel(): string {
-    return $localize`Graph`;
-  }
+  private configService = inject(ConfigService);
+  private http = inject(HttpClient);
+  private StudentAssetService = inject(StudentAssetService);
 
   /**
    * Create a Graph component object
@@ -31,7 +24,7 @@ export class GraphService extends ComponentService {
    */
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Graph';
+    component.type = this.type;
     component.title = '';
     component.width = 800;
     component.height = 500;

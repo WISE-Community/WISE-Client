@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class OpenResponseInfo extends ComponentInfo {
   protected description: string = $localize`Students type a response to a question or prompt.`;
+  protected icon: string = 'edit_note';
   protected label: string = $localize`Open Response`;
   protected previewExamples: any[] = [
     {

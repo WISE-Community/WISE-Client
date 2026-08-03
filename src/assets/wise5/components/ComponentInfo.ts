@@ -1,5 +1,6 @@
 export abstract class ComponentInfo {
   protected abstract description: string;
+  protected abstract icon: string;
   protected abstract label: string;
   protected abstract previewExamples: any[];
 
@@ -9,6 +10,10 @@ export abstract class ComponentInfo {
 
   getLabel(): string {
     return this.label;
+  }
+
+  getIcon(): string {
+    return this.icon;
   }
 
   getPreviewExamples(): any[] {

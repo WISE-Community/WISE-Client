@@ -1,6 +1,6 @@
 import { ComponentService } from '../componentService';
 import { ConfigService } from '../../services/configService';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,20 +9,14 @@ import { Anonymizer } from './Anonymizer';
 
 @Injectable()
 export class DiscussionService extends ComponentService {
-  constructor(
-    protected configService: ConfigService,
-    protected http: HttpClient
-  ) {
-    super();
-  }
+  protected type: string = 'Discussion';
 
-  getComponentTypeLabel(): string {
-    return $localize`Discussion`;
-  }
+  protected configService = inject(ConfigService);
+  protected http = inject(HttpClient);
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Discussion';
+    component.type = this.type;
     component.prompt = '';
     component.isStudentAttachmentEnabled = true;
     component.gateClassmateResponses = true;

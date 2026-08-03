@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class ShowMyWorkInfo extends ComponentInfo {
   protected description: string = $localize`Students are shown work that they submitted for a specific item.`;
+  protected icon: string = 'assignment';
   protected label: string = $localize`Show Student Work`;
   protected previewExamples: any[] = [
     {
