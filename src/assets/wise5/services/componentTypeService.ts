@@ -16,129 +16,57 @@ export class ComponentTypeService {
       {
         name: $localize`View Information`,
         types: [
-          {
-            type: 'HTML',
-            name: this.getComponentTypeLabel('HTML'),
-            icon: this.getComponentTypeIcon('HTML')
-          },
-          {
-            type: 'ShowMyWork',
-            name: this.getComponentTypeLabel('ShowMyWork'),
-            icon: this.getComponentTypeIcon('ShowMyWork')
-          },
-          {
-            type: 'Summary',
-            name: this.getComponentTypeLabel('Summary'),
-            icon: this.getComponentTypeIcon('Summary')
-          }
+          this.createComponentType('HTML'),
+          this.createComponentType('ShowMyWork'),
+          this.createComponentType('Summary')
         ]
       },
       {
         name: $localize`Explain and Assess`,
         types: [
-          {
-            type: 'ConceptMap',
-            name: this.getComponentTypeLabel('ConceptMap'),
-            icon: this.getComponentTypeIcon('ConceptMap')
-          },
-          {
-            type: 'Draw',
-            name: this.getComponentTypeLabel('Draw'),
-            icon: this.getComponentTypeIcon('Draw')
-          },
-          {
-            type: 'Label',
-            name: this.getComponentTypeLabel('Label'),
-            icon: this.getComponentTypeIcon('Label')
-          },
-          {
-            type: 'MultipleChoice',
-            name: this.getComponentTypeLabel('MultipleChoice'),
-            icon: this.getComponentTypeIcon('MultipleChoice')
-          },
-          {
-            type: 'OpenResponse',
-            name: this.getComponentTypeLabel('OpenResponse'),
-            icon: this.getComponentTypeIcon('OpenResponse')
-          },
-          {
-            type: 'Match',
-            name: this.getComponentTypeLabel('Match'),
-            icon: this.getComponentTypeIcon('Match')
-          }
+          this.createComponentType('ConceptMap'),
+          this.createComponentType('Draw'),
+          this.createComponentType('Label'),
+          this.createComponentType('MultipleChoice'),
+          this.createComponentType('OpenResponse'),
+          this.createComponentType('Match')
         ]
       },
       {
         name: $localize`Experiment, Discover, Distinguish`,
         types: [
-          {
-            type: 'Animation',
-            name: this.getComponentTypeLabel('Animation'),
-            icon: this.getComponentTypeIcon('Animation')
-          },
-          {
-            type: 'AudioOscillator',
-            name: this.getComponentTypeLabel('AudioOscillator'),
-            icon: this.getComponentTypeIcon('AudioOscillator')
-          },
-          {
-            type: 'Embedded',
-            name: this.getComponentTypeLabel('Embedded'),
-            icon: this.getComponentTypeIcon('Embedded')
-          },
-          {
-            type: 'Graph',
-            name: this.getComponentTypeLabel('Graph'),
-            icon: this.getComponentTypeIcon('Graph')
-          },
-          {
-            type: 'OutsideURL',
-            name: this.getComponentTypeLabel('OutsideURL'),
-            icon: this.getComponentTypeIcon('OutsideURL')
-          },
-          {
-            type: 'Table',
-            name: this.getComponentTypeLabel('Table'),
-            icon: this.getComponentTypeIcon('Table')
-          }
+          this.createComponentType('Animation'),
+          this.createComponentType('AudioOscillator'),
+          this.createComponentType('Embedded'),
+          this.createComponentType('Graph'),
+          this.createComponentType('OutsideURL'),
+          this.createComponentType('Table')
         ]
       },
       {
         name: $localize`Collaborate`,
         types: [
-          {
-            type: 'DialogGuidance',
-            name: this.getComponentTypeLabel('DialogGuidance'),
-            icon: this.getComponentTypeIcon('DialogGuidance')
-          },
-          {
-            type: 'Discussion',
-            name: this.getComponentTypeLabel('Discussion'),
-            icon: this.getComponentTypeIcon('Discussion')
-          },
-          {
-            type: 'PeerChat',
-            name: this.getComponentTypeLabel('PeerChat'),
-            icon: this.getComponentTypeIcon('PeerChat')
-          },
-          {
-            type: 'ShowGroupWork',
-            name: this.getComponentTypeLabel('ShowGroupWork'),
-            icon: this.getComponentTypeIcon('ShowGroupWork')
-          }
+          this.createComponentType('DialogGuidance'),
+          this.createComponentType('Discussion'),
+          this.createComponentType('PeerChat'),
+          this.createComponentType('ShowGroupWork')
         ]
       }
     ];
 
     if (this.isAiChatAllowed()) {
-      groups[2].types.unshift({
-        type: 'AiChat',
-        name: this.getComponentTypeLabel('AiChat'),
-        icon: this.getComponentTypeIcon('AiChat')
-      });
+      groups[2].types.unshift(this.createComponentType('AiChat'));
     }
 
     return groups;
+  }
+
+  private createComponentType(componentType: string): any {
+    return {
+      type: componentType,
+      name: this.getComponentTypeLabel(componentType),
+      icon: this.getComponentTypeIcon(componentType)
+    };
   }
 
   getComponentTypeIcon(componentType: string): string {
