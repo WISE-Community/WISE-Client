@@ -9,13 +9,13 @@ import { FormsModule } from '@angular/forms';
 import { Component as WISEComponent } from '../../../common/Component';
 import { EditComponentAdvancedComponent } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { EditComponentHeaderComponent } from '../edit-component-header/edit-component-header.component';
+import { EditComponentTitleComponent } from '../edit-component-title/edit-component-title.component';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
     EditComponentComponent,
-    EditComponentHeaderComponent,
+    EditComponentTitleComponent,
     EditComponentAdvancedComponent,
     FormsModule,
     MatButtonModule,
@@ -33,7 +33,7 @@ import { EditComponentHeaderComponent } from '../edit-component-header/edit-comp
       @if (advancedMode) {
         <edit-component-advanced class="h-full" [component]="component" />
       } @else {
-        <edit-component-header [componentContent]="data.componentContent" />
+        <edit-component-title [componentContent]="data.componentContent" />
         <edit-component
           class="block h-full py-4"
           [componentContent]="data.componentContent"

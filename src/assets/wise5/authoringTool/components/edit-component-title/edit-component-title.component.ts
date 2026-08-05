@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  selector: 'edit-component-header',
+  selector: 'edit-component-title',
   imports: [FormsModule, MatFormFieldModule, MatInputModule],
   template: `
     <mat-form-field class="w-full">
@@ -14,7 +14,7 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
     </mat-form-field>
   `
 })
-export class EditComponentHeaderComponent {
+export class EditComponentTitleComponent {
   @Input() componentContent: any;
 
   constructor(private projectService: TeacherProjectService) {}
