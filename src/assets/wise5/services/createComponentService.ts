@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { TeacherProjectService } from './teacherProjectService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { Node } from '../common/Node';
+import { ComponentTypeService } from './componentTypeService';
 
 @Injectable()
 export class CreateComponentService {
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
+    private componentTypeService: ComponentTypeService,
     private projectService: TeacherProjectService
   ) {}
 
@@ -22,6 +24,7 @@ export class CreateComponentService {
     const node = this.projectService.getNode(nodeId);
     const service = this.componentServiceLookupService.getService(componentType);
     const component = service.createComponent();
+    component.title = this.componentTypeService.getComponentTypeLabel(componentType);
     if (service.componentHasWork(component)) {
       if (node.showSaveButton == false) {
         if (this.projectService.doesAnyComponentInNodeShowSubmitButton(node.id)) {
