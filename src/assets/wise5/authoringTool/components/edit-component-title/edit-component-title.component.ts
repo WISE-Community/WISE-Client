@@ -1,12 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
 @Component({
-  selector: 'edit-component-title',
   imports: [FormsModule, MatFormFieldModule, MatInputModule],
+  selector: 'edit-component-title',
   template: `
     <mat-form-field class="w-full">
       <mat-label i18n>Activity Title</mat-label>
@@ -15,9 +16,10 @@ import { TeacherProjectService } from '../../../services/teacherProjectService';
   `
 })
 export class EditComponentTitleComponent {
-  @Input() componentContent: any;
+  private projectService = inject(TeacherProjectService);
 
-  constructor(private projectService: TeacherProjectService) {}
+  @Input() componentContent: ComponentContent;
+  private title: string = '';
 
   titleChanged(): void {
     this.projectService.saveProject();
