@@ -23,8 +23,8 @@ export class ComponentHeaderComponent {
     return this.sanitizer.bypassSecurityTrustHtml(this.component.content.title || '');
   }
 
-  protected get prompt(): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(this.component.content.prompt || '');
+  protected get prompt(): string {
+    return this.component.content.prompt || '';
   }
 
   ngOnInit(): void {
