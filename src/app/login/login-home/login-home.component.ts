@@ -43,7 +43,7 @@ export class LoginHomeComponent implements OnInit {
   passwordError: boolean = false;
   processing: boolean = false;
   @ViewChild('recaptchaRef', { static: false }) recaptchaRef: any;
-  private resendEmailEndpoint = '/api/teacher/register/send-verify-email';
+  private resendEmailEndpoint = '/api/teacher/send-verify-email';
   private resendEmailInterval: any;
   protected resendEmailWaitSeconds = signal<number>(0);
   protected showSocialLogin: boolean;
