@@ -119,15 +119,7 @@ export class LoginHomeComponent implements OnInit {
         this.recaptchaV3Service.execute('importantAction')
       );
     }
-    this.userService.isVerified(this.credentials.username).subscribe((isVerified) => {
-      if (isVerified) {
-        this.authenticateUser();
-      } else {
-        this.processing = false;
-        this.credentials.password = '';
-        this.verificationState.set('unverified');
-      }
-    });
+    this.authenticateUser();
   }
 
   private authenticateUser(): void {
@@ -139,6 +131,8 @@ export class LoginHomeComponent implements OnInit {
         this.credentials.password = '';
         if (response.isRecaptchaVerificationFailed) {
           this.isRecaptchaVerificationFailed = true;
+        } else if (response.isTeacherVerificationFailed) {
+          this.verificationState.set('unverified');
         } else {
           this.passwordError = true;
         }
