@@ -21,7 +21,7 @@ const redirectUrl: string = `${contextPath}/api/j_acegi_security_check`;
 let router: Router;
 let userService: UserService;
 
-describe('LoginHomeComponent!', () => {
+describe('LoginHomeComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [LoginHomeComponent],
@@ -122,10 +122,15 @@ function unverifiedAccount() {
       component.login();
       tickAndDetectChanges();
       const errorMessageElement = getErrorMessageElement(
-        'Your email has not been verified. Check your email for a verification link. Click here resend the verification email.'
+        'Your email has not been verified. Check your email for a verification link.'
+      );
+      const resendLinkElement = getErrorMessageElement(
+        'Click here to resend the verification email.'
       );
       expect(errorMessageElement).toBeDefined();
       expect(errorMessageElement!.nativeElement.classList.contains('warn')).toBeTruthy();
+      expect(resendLinkElement).toBeDefined();
+      expect(resendLinkElement!.nativeElement.classList.contains('warn')).toBeTruthy();
     }));
   });
 }
@@ -138,10 +143,15 @@ function unverifiedAccountWaitToResendEmail() {
       component.login();
       tickAndDetectChanges();
       const errorMessageElement = getErrorMessageElement(
-        'Your email has not been verified. Check your email for a verification link.  Please wait to send another verification email (60).'
+        'Your email has not been verified. Check your email for a verification link.'
+      );
+      const resendLinkElement = getErrorMessageElement(
+        'Please wait to send another verification email (60).'
       );
       expect(errorMessageElement).toBeDefined();
       expect(errorMessageElement!.nativeElement.classList.contains('warn')).toBeTruthy();
+      expect(resendLinkElement).toBeDefined();
+      expect(resendLinkElement!.nativeElement.classList.contains('warn')).toBeTruthy();
     }));
   });
 }
