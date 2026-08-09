@@ -119,6 +119,9 @@ function unverifiedAccount() {
   describe('login attempt with unverified account', () => {
     it('should show verification error message', fakeAsync(() => {
       spyOn(userService, 'isVerified').and.returnValue(of(false));
+      spyOn(userService, 'authenticate').and.callFake(() => {
+        component['verificationState'].set('unverified');
+      });
       component.login();
       tickAndDetectChanges();
       const errorMessageElement = getErrorMessageElement(
@@ -139,6 +142,9 @@ function unverifiedAccountWaitToResendEmail() {
   describe('login attempt with unverified account and must wait to resend the email', () => {
     it('should show verification error message with countdown to resend', fakeAsync(() => {
       spyOn(userService, 'isVerified').and.returnValue(of(false));
+      spyOn(userService, 'authenticate').and.callFake(() => {
+        component['verificationState'].set('unverified');
+      });
       component['resendEmailWaitSeconds'].set(60);
       component.login();
       tickAndDetectChanges();
