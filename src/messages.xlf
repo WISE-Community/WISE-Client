@@ -878,8 +878,8 @@
           <context context-type="linenumber">18,22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8880132687084463323" datatype="html">
-        <source>Edit Activity JSON</source>
+      <trans-unit id="2535284120470664214" datatype="html">
+        <source>Test Change</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
           <context context-type="linenumber">10,14</context>
