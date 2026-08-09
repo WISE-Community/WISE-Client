@@ -12,19 +12,21 @@ import { MatButton } from '@angular/material/button';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatDivider } from '@angular/material/divider';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   imports: [
+    FormsModule,
+    MatButton,
     MatCard,
     MatCardContent,
-    FormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatError,
-    MatButton,
-    MatProgressBar,
     MatDivider,
+    MatError,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatProgressBar,
+    MatProgressSpinnerModule,
     RouterLink,
     RecaptchaV3Module
   ],
@@ -48,7 +50,13 @@ export class LoginHomeComponent implements OnInit {
   protected resendEmailWaitSeconds = signal<number>(0);
   protected showSocialLogin: boolean;
   protected verificationState = signal<
-    'none' | 'confirmVerified' | 'emailError' | 'emailSent' | 'unverified' | 'verificationError'
+    | 'none'
+    | 'confirmVerified'
+    | 'emailError'
+    | 'emailSent'
+    | 'sendingEmail'
+    | 'unverified'
+    | 'verificationError'
   >('none');
 
   constructor(
@@ -174,7 +182,7 @@ export class LoginHomeComponent implements OnInit {
   protected resendEmail(e: Event): void {
     e.preventDefault();
     this.resendEmailWaitSeconds.set(60);
-    this.verificationState.set('none');
+    this.verificationState.set('sendingEmail');
     const params = new HttpParams().set('username', this.credentials.username);
     this.http.post<String>(`${this.resendEmailEndpoint}`, null, { params }).subscribe({
       next: () => {

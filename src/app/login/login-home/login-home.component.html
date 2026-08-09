@@ -60,6 +60,10 @@
         </p>
       } @else if (verificationState() === 'emailSent') {
         <p class="success center" i18n>A verification email has been sent.</p>
+      } @else if (verificationState() === 'sendingEmail') {
+        <div class="email-spinner-parent">
+          <mat-spinner class="email-spinner" [diameter]="30" />
+        </div>
       } @else if (verificationState() === 'unverified') {
         <p class="warn center">
           <span i18n
