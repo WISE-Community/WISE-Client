@@ -75,7 +75,6 @@ import { EditComponentTitleComponent } from '../edit-component-title/edit-compon
 })
 export class EditComponentDialogComponent {
   protected advancedMode = false;
-
   protected component: WISEComponent;
   protected componentIndex: number;
   protected componentTypeLabel: string;
