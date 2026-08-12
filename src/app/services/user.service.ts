@@ -17,7 +17,6 @@ export class UserService {
   private googleUserUrl = '/api/google-user/get-user';
   private checkAuthenticationUrl = '/api/user/check-authentication';
   private changePasswordUrl = '/api/user/password';
-  private checkVerifiedUrl = '/api/teacher/is-verified';
   private languagesUrl = '/api/user/languages';
   private contactUrl = '/api/contact';
   private unlinkGoogleAccountUrl = '/api/google-user/unlink-account';
@@ -75,12 +74,6 @@ export class UserService {
 
   isGoogleUser(): boolean {
     return this.getUser().getValue().isGoogleUser;
-  }
-
-  isVerified(username: string): Observable<boolean> {
-    return this.http.get<boolean>(this.checkVerifiedUrl, {
-      params: new HttpParams().set('username', username)
-    });
   }
 
   retrieveUserPromise(): Promise<User> {
