@@ -53,6 +53,7 @@
     "iframe-resizer": "^3.6.6",
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
+    "lightningcss": "^1.33.0",
     "lz-string": "^1.4.4",
     "marked": "^18.0.3",
     "mathjax": "^3.2.2",
