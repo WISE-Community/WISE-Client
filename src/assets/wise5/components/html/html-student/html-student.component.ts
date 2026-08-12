@@ -1,4 +1,3 @@
-import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeHtml } from '@angular/platform-browser';
@@ -10,13 +9,14 @@ import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComponentService } from '../../componentService';
 
 @Component({
+  imports: [ComponentHeaderComponent],
   selector: 'html-student',
   styleUrl: 'html-student.component.scss',
-  templateUrl: 'html-student.component.html',
-  imports: [ComponentHeaderComponent]
+  templateUrl: 'html-student.component.html'
 })
 export class HtmlStudentComponent extends ComponentStudent {
   protected html: SafeHtml = '';

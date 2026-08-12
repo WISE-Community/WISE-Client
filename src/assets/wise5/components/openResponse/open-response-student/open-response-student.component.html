@@ -1,11 +1,4 @@
-<div
-  class="pt-4 px-6 pb-6 rounded-lg border-2 border-black"
-  [style.background-color]="componentContent.backgroundColor ? (componentContent.backgroundColor.startsWith('#') ? componentContent.backgroundColor : '#' + componentContent.backgroundColor) : 'transparent'"
->
 <component-header [component]="component" />
-@if (componentContent.context) {
-  <div class="or-body mb-4" [innerHTML]="contextHtml"></div>
-}
 <div class="flex flex-row flex-wrap justify-start items-center gap-4">
   @if (isAddToNotebookEnabled()) {
     <button
@@ -32,7 +25,7 @@
     </button>
   }
 </div>
-<div class="my-4 bg-white rounded-lg overflow-hidden or-answer-card">
+<div class="my-2">
   <mat-form-field class="w-full form-field-no-hint">
     <textarea
       matInput
@@ -94,7 +87,6 @@
     (submitButtonClicked)="submitButtonClicked($event)"
   />
 }
-</div>
 @if (mode === 'student') {
   <component-annotations
     [annotations]="latestAnnotations"
