@@ -1,7 +1,8 @@
 import { ComponentInfo } from '../ComponentInfo';
 
 export class AiChatInfo extends ComponentInfo {
-  protected description: string = $localize`Students chat with an AI bot.`;
+  protected description: string = $localize`Students chat with an AI chatbot.`;
+  protected icon: string = 'assistant';
   protected label: string = $localize`AI Chat`;
   protected previewExamples: any[] = [
     {

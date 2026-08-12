@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class EmbeddedInfo extends ComponentInfo {
   protected description: string = $localize`Students interact with a custom applicatio, such as a model or simulation.`;
+  protected icon: string = 'handyman';
   protected label: string = $localize`Custom`;
   protected previewExamples: any[] = [
     {

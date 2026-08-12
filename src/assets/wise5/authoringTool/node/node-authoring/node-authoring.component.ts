@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { Node } from '../../../common/Node';
 import { ComponentContent } from '../../../common/ComponentContent';
@@ -27,6 +26,7 @@ import { ComponentAuthoringComponent } from '../../components/component-authorin
 import { ToggleComponentTagComponent } from '../../components/toggle-component-tag/toggle-component-tag.component';
 import { VisibilityConstraintIconComponent } from '../../components/visibility-constraint-icon/visibility-constraint-icon.component';
 import { EditNodeAdvancedButtonComponent } from '../../components/edit-node-advanced-button/edit-node-advanced-button.component';
+import { ComponentInfoService } from '../../../services/componentInfoService';
 
 @Component({
   imports: [
@@ -61,8 +61,8 @@ export class NodeAuthoringComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private componentInfoService: ComponentInfoService,
     private componentServiceLookupService: ComponentServiceLookupService,
-    private componentTypeService: ComponentTypeService,
     private nodeService: TeacherNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
@@ -221,8 +221,12 @@ export class NodeAuthoringComponent implements OnInit {
     }, 100);
   }
 
+  protected getComponentTypeIcon(componentType: string): string {
+    return this.componentInfoService.getInfo(componentType).getIcon();
+  }
+
   protected getComponentTypeLabel(componentType: string): string {
-    return this.componentTypeService.getComponentTypeLabel(componentType);
+    return this.componentInfoService.getInfo(componentType).getLabel();
   }
 
   protected hasVisibilityConstraint(component: ComponentContent): boolean {

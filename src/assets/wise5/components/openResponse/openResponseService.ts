@@ -11,10 +11,6 @@ export class OpenResponseService extends ComponentService {
 
   private completionCriteriaService = inject(OpenResponseCompletionCriteriaService);
 
-  getComponentTypeLabel(): string {
-    return $localize`Open Response`;
-  }
-
   createComponent() {
     const component: any = super.createComponent();
     component.type = this.type;

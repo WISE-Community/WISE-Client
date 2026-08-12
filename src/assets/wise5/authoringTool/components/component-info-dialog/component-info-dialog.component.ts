@@ -20,7 +20,6 @@ import { MatDividerModule } from '@angular/material/divider';
     MatTabsModule,
     PreviewComponentComponent
   ],
-  styleUrl: './component-info-dialog.component.scss',
   templateUrl: './component-info-dialog.component.html'
 })
 export class ComponentInfoDialogComponent {

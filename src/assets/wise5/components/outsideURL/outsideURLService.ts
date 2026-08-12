@@ -1,22 +1,18 @@
 'use strict';
 
 import { ComponentService } from '../componentService';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class OutsideURLService extends ComponentService {
-  constructor(private http: HttpClient) {
-    super();
-  }
+  protected type: string = 'OutsideURL';
 
-  getComponentTypeLabel(): string {
-    return $localize`Outside Resource`;
-  }
+  private http = inject(HttpClient);
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'OutsideURL';
+    component.type = this.type;
     component.url = '';
     component.height = 600;
     return component;

@@ -44,7 +44,9 @@
             @for (component of components; track component; let i = $index) {
               <mat-tab>
                 <ng-template mat-tab-label>
-                  {{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}
+                  {{ i + 1 }}.&nbsp;
+                  <mat-icon class="mat-18">{{ getComponentTypeIcon(component.type) }}</mat-icon>
+                  &nbsp;{{ getComponentTypeLabel(component.type) }}
                   @if (component.tags?.includes('!important')) {
                     &nbsp;<mat-icon
                       color="primary"

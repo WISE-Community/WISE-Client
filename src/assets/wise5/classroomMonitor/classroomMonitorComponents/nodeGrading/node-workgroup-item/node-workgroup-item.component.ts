@@ -7,7 +7,6 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { calculateComponentVisibility } from '../../shared/grading-helpers/grading-helpers';
-import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { WorkgroupComponentGradingComponent } from '../../workgroup-component-grading/workgroup-component-grading.component';
 import { ComponentNewWorkBadgeComponent } from '../../../../../../app/classroom-monitor/component-new-work-badge/component-new-work-badge.component';
@@ -21,12 +20,15 @@ import { Node } from '../../../../common/Node';
 import { ComponentContent } from '../../../../common/ComponentContent';
 import { filter, Subscription } from 'rxjs';
 import { AnnotationService } from '../../../../services/annotationService';
+import { ComponentInfoService } from '../../../../services/componentInfoService';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
     MatButtonModule,
+    MatIconModule,
     MatListModule,
     WorkgroupInfoComponent,
     WorkgroupNodeStatusComponent,
@@ -59,7 +61,7 @@ export class NodeWorkgroupItemComponent {
 
   constructor(
     private annotationService: AnnotationService,
-    private componentTypeService: ComponentTypeService,
+    private componentInfoService: ComponentInfoService,
     private projectService: TeacherProjectService
   ) {}
 
@@ -119,8 +121,12 @@ export class NodeWorkgroupItemComponent {
     this.subscriptions.unsubscribe();
   }
 
-  protected getComponentTypeLabel(componentType): string {
-    return this.componentTypeService.getComponentTypeLabel(componentType);
+  protected getComponentTypeIcon(componentType: string): string {
+    return this.componentInfoService.getInfo(componentType).getIcon();
+  }
+
+  protected getComponentTypeLabel(componentType: string): string {
+    return this.componentInfoService.getInfo(componentType).getLabel();
   }
 
   private updateStatus(): void {

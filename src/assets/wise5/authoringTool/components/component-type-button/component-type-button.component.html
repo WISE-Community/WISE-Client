@@ -2,15 +2,10 @@
   <div class="flex justify-start items-center">
     <button mat-button (click)="componentSelectedEvent.emit()" class="select-button">
       {{ label }}
+      <mat-icon>{{ icon }}</mat-icon>
     </button>
-    <button
-      mat-icon-button
-      (click)="preview()"
-      matTooltip="More Info"
-      matTooltipPosition="above"
-      i18n-matTooltip
-    >
-      <mat-icon>info</mat-icon>
+    <button mat-icon-button (click)="preview()" title="More info" i18n-title>
+      <mat-icon>info_outline</mat-icon>
     </button>
   </div>
 </mat-card>

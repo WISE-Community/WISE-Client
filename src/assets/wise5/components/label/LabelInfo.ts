@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class LabelInfo extends ComponentInfo {
   protected description: string = $localize`Students add labels to a canvas.`;
+  protected icon: string = 'sticky_note_2';
   protected label: string = $localize`Label`;
   protected previewExamples: any[] = [
     {
