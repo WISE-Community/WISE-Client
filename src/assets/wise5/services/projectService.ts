@@ -804,7 +804,7 @@ export class ProjectService {
    */
   getThemeSettings(): any {
     let themeSettings = {};
-    if (this.project.themeSettings) {
+    if (this.project?.themeSettings) {
       if (this.project.theme) {
         // TODO: check if this is a valid theme (using ConfigService) rather than just truthy
         themeSettings = this.project.themeSettings[this.project.theme];
@@ -1873,7 +1873,7 @@ export class ProjectService {
   }
 
   getSpeechToTextSettings(): any {
-    return this.project.speechToText;
+    return this.project?.speechToText;
   }
 
   getPreviousNodeId(nodeId: string): string {
