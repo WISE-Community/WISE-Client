@@ -34,13 +34,13 @@ import { EditComponentTitleComponent } from '../edit-component-title/edit-compon
       <mat-slide-toggle color="primary" [(ngModel)]="advancedMode" i18n>Advanced</mat-slide-toggle>
     </div>
     <mat-divider class="!m-0" />
-    <mat-dialog-content class="!max-h-none" style="padding-top: 28px;" [class.advanced-component-authoring]="advancedMode">
+    <mat-dialog-content class="!max-h-none" [class.advanced-component-authoring]="advancedMode">
       @if (advancedMode) {
         <edit-component-advanced class="h-full" [component]="component" />
       } @else {
-        <edit-component-title [componentContent]="data.componentContent" />
+        <edit-component-title class="block pt-4" [componentContent]="data.componentContent" />
         <edit-component
-          class="block h-full py-4"
+          class="block h-full pb-4"
           [componentContent]="data.componentContent"
           [nodeId]="data.nodeId"
         />
