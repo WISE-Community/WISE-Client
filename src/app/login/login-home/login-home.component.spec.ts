@@ -88,7 +88,6 @@ function incorrectPassword() {
     it('should show authentication error message', fakeAsync(() => {
       spyOn(http, 'post').and.returnValue(of({}));
       spyOn(http, 'get').and.returnValue(of(null));
-      spyOn(userService, 'isVerified').and.returnValue(of(true));
       component.login();
       tickAndDetectChanges();
       const errorMessageElement = getErrorMessageElement(
@@ -106,7 +105,6 @@ function correctPasswordVerifiedAccount() {
     it('should navigate to home page', fakeAsync(() => {
       spyOn(http, 'post').and.returnValue(of({}));
       spyOn(http, 'get').and.returnValue(of({ id: 1 }));
-      spyOn(userService, 'isVerified').and.returnValue(of(true));
       const routerNavigateSpy = spyOn(router, 'navigateByUrl');
       component.login();
       tickAndDetectChanges();
@@ -118,7 +116,6 @@ function correctPasswordVerifiedAccount() {
 function unverifiedAccount() {
   describe('login attempt with unverified account', () => {
     it('should show verification error message', fakeAsync(() => {
-      spyOn(userService, 'isVerified').and.returnValue(of(false));
       spyOn(userService, 'authenticate').and.callFake(() => {
         component['verificationState'].set('unverified');
       });
@@ -141,7 +138,6 @@ function unverifiedAccount() {
 function unverifiedAccountWaitToResendEmail() {
   describe('login attempt with unverified account and must wait to resend the email', () => {
     it('should show verification error message with countdown to resend', fakeAsync(() => {
-      spyOn(userService, 'isVerified').and.returnValue(of(false));
       spyOn(userService, 'authenticate').and.callFake(() => {
         component['verificationState'].set('unverified');
       });
