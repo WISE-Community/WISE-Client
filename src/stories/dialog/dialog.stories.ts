@@ -1,9 +1,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
 
-type DialogStoryType = DialogOverviewComponent;
-
-const meta: Meta<DialogStoryType> = {
+const meta: Meta<DialogOverviewComponent> = {
   title: 'Components/Action/Dialog',
   component: DialogOverviewComponent,
   decorators: [
@@ -14,10 +12,10 @@ const meta: Meta<DialogStoryType> = {
 };
 
 export default meta;
-type Story = StoryObj<DialogStoryType>;
+type Story = StoryObj<DialogOverviewComponent>;
 
 export const Default: Story = {
-  render: (args) => ({
+  render: () => ({
     template: `<dialog-overview />`
   }),
   tags: ['!autodocs', '!dev']
