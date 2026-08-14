@@ -3,22 +3,18 @@
 import html2canvas from 'html2canvas';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class TableService extends ComponentService {
-  constructor(private StudentAssetService: StudentAssetService) {
-    super();
-  }
+  protected type: string = 'Table';
 
-  getComponentTypeLabel(): string {
-    return $localize`Table`;
-  }
+  private StudentAssetService = inject(StudentAssetService);
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Table';
+    component.type = this.type;
     component.globalCellSize = 10;
     component.numRows = 3;
     component.numColumns = 3;

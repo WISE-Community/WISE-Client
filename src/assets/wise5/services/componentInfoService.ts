@@ -21,7 +21,9 @@ import { TableInfo } from '../components/table/TableInfo';
 import { ComponentInfo } from '../components/ComponentInfo';
 import { AiChatInfo } from '../components/aiChat/AiChatInfo';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ComponentInfoService {
   private componentInfo = {
     AiChat: new AiChatInfo(),

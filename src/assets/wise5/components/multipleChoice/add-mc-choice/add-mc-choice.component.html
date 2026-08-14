@@ -1,0 +1,17 @@
+<div class="flex flex-row justify-end items-center">
+  <mat-divider class="choice-divider" [ngClass]="{ active: focus }" />
+  <button
+    mat-icon-button
+    color="primary"
+    (click)="newChoiceEvent.emit()"
+    (mouseover)="focus = true"
+    (mouseleave)="focus = false"
+    (focusin)="focus = true"
+    (focusout)="focus = false"
+    i18n-matTooltip
+    matTooltip="Add choice"
+    matTooltipPosition="above"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</div>

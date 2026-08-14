@@ -1,16 +1,24 @@
 @reference "tailwindcss";
 
+:host {
+  --mat-button-toggle-divider-color: transparent;
+  --mat-button-toggle-height: 32px;
+  .mat-button-toggle-group-appearance-standard, .mat-button-toggle-appearance-standard {
+    @apply rounded-md;
+  }
+}
+
 h3,
 .mat-subtitle-1 {
   margin-bottom: 8px;
   margin-top: 0;
 }
 
-.choice {
+.choice-card, .bucket-card {
   @apply p-2 mb-2 rounded-md;
 }
 
-.bucket {
+.choice-row, .bucket-row {
   @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm items-start justify-between;
 }
 

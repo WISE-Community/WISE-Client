@@ -15,7 +15,7 @@ export abstract class EditComponentFieldComponent {
     this.inputChangedSubscription = this.inputChanged
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(() => {
-        this.projectService.componentChanged();
+        this.projectService.saveProject();
       });
   }
 

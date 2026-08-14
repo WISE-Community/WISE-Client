@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class ConceptMapInfo extends ComponentInfo {
   protected description: string = $localize`Students add items to a canvas and connect the items with links.`;
+  protected icon: string = 'account_tree';
   protected label: string = $localize`Concept Map`;
   protected previewExamples: any[] = [
     {

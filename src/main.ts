@@ -1,4 +1,9 @@
-import { enableProdMode, inject, provideAppInitializer } from '@angular/core';
+import {
+  enableProdMode,
+  inject,
+  provideAppInitializer,
+  provideZoneChangeDetection
+} from '@angular/core';
 import { MARKED_OPTIONS, provideMarkdown, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -20,6 +25,7 @@ import {
 } from '@angular/router';
 import { appRoutes } from './app/app-routing.module';
 import { MAT_TABS_CONFIG } from '@angular/material/tabs';
+import { OVERLAY_DEFAULT_CONFIG } from '@angular/cdk/overlay';
 
 if (environment.production) {
   enableProdMode();
@@ -58,6 +64,7 @@ export function markedOptionsFactory(): MarkedOptions {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideZoneChangeDetection(),
     ArchiveProjectService,
     ConfigService,
     StudentService,
@@ -81,6 +88,9 @@ bootstrapApplication(AppComponent, {
         horizontalPosition: 'start'
       }
     },
+    // Kludge to fix TinyMCE menus and dialogs appearing behind Angular Material overlays
+    // Resolve once issue is fixed by TinyMCE
+    { provide: OVERLAY_DEFAULT_CONFIG, useValue: { usePopover: false } },
     {
       provide: MAT_TABS_CONFIG,
       useValue: {

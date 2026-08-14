@@ -39,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: 'class-response.component.html'
 })
 export class ClassResponse {
+  @Output() expandChanged: EventEmitter<any> = new EventEmitter();
   protected expanded: boolean = false;
   @Input() isDisabled: boolean;
   @Input() mode: any;
@@ -82,6 +83,7 @@ export class ClassResponse {
   }
 
   private injectLinks(response: string): string {
+    if (response == null) return '';
     return response.replace(this.urlMatcher, (match) => {
       let matchUrl = match;
       if (!match.startsWith('http')) {
@@ -128,6 +130,7 @@ export class ClassResponse {
     } else {
       this.showLastReply();
     }
+    setTimeout(() => this.expandChanged.emit(), 100);
   }
 
   private hasAnyReply(): boolean {

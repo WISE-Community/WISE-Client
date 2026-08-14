@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class TableInfo extends ComponentInfo {
   protected description: string = $localize`Students view and/or edit table data.`;
+  protected icon: string = 'table_chart';
   protected label: string = $localize`Table`;
   protected previewExamples: any[] = [
     {

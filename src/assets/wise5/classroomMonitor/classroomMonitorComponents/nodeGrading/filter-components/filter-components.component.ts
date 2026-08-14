@@ -1,17 +1,16 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { ComponentContent } from '../../../../common/ComponentContent';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { ComponentInfoService } from '../../../../services/componentInfoService';
 
 @Component({
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -32,7 +31,7 @@ export class FilterComponentsComponent {
   @Input() selectedComponents: ComponentContent[];
   protected selectedText: string;
 
-  constructor(private componentTypeService: ComponentTypeService) {}
+  constructor(private componentInfoService: ComponentInfoService) {}
 
   ngOnChanges(): void {
     this.updateSelectedText();
@@ -42,8 +41,12 @@ export class FilterComponentsComponent {
     this.selectedText = $localize`Showing ${this.selectedComponents.length}/${this.components.length} questions`;
   }
 
+  protected getComponentTypeIcon(componentType: string): string {
+    return this.componentInfoService.getInfo(componentType).getIcon();
+  }
+
   protected getComponentTypeLabel(componentType: string): string {
-    return this.componentTypeService.getComponentTypeLabel(componentType);
+    return this.componentInfoService.getInfo(componentType).getLabel();
   }
 
   protected compareById(component1: ComponentContent, component2: ComponentContent): boolean {

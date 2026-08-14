@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class MultipleChoiceInfo extends ComponentInfo {
   protected description: string = $localize`Students select one or more choices.`;
+  protected icon: string = 'ballot';
   protected label: string = $localize`Multiple Choice`;
   protected previewExamples: any[] = [
     {

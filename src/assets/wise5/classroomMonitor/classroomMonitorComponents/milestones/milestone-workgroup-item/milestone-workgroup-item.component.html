@@ -66,9 +66,10 @@
           >
             <div>
               <h3 class="accent-1 gray-lightest-bg component__header">
-                <span i18n>Step {{ getNodePosition(firstNodeId) }}</span> ({{
-                  getComponentTypeLabel(firstComponent.type)
-                }})&nbsp;
+                <span i18n>Step {{ getNodePosition(firstNodeId) }}</span> (<mat-icon>{{
+                  getComponentTypeIcon(firstComponent.type)
+                }}</mat-icon>
+                {{ getComponentTypeLabel(firstComponent.type) }})&nbsp;
                 <component-new-work-badge
                   [componentId]="firstComponentId"
                   [workgroupId]="workgroupId"
@@ -89,9 +90,10 @@
         >
           <div>
             <h3 class="accent-1 gray-lightest-bg component__header">
-              <span i18n>Step {{ getNodePosition(lastNodeId) }}</span> ({{
-                getComponentTypeLabel(lastComponent.type)
-              }})&nbsp;
+              <span i18n>Step {{ getNodePosition(lastNodeId) }}</span> (<mat-icon>{{
+                getComponentTypeIcon(lastComponent.type)
+              }}</mat-icon
+              >{{ getComponentTypeLabel(lastComponent.type) }})&nbsp;
               <component-new-work-badge
                 [componentId]="lastComponentId"
                 [workgroupId]="workgroupId"

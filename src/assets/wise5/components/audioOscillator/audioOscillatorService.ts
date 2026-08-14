@@ -3,13 +3,11 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AudioOscillatorService extends ComponentService {
+  protected type: string = 'AudioOscillator';
   defaultStartingAmplitude: number = 44;
   defaultStartingFrequency: number = 440;
   maxAmplitude: number = 50;
 
-  getComponentTypeLabel(): string {
-    return $localize`Audio Oscillator`;
-  }
 
   getOscilloscopeId(domIdEnding: string): string {
     return `oscilloscope-${domIdEnding}`;
@@ -17,7 +15,7 @@ export class AudioOscillatorService extends ComponentService {
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'AudioOscillator';
+    component.type = this.type;
     component.oscillatorTypes = ['sine'];
     component.startingAmplitude = this.defaultStartingAmplitude;
     component.startingFrequency = this.defaultStartingFrequency;

@@ -17,9 +17,13 @@ describe('DiscourseLatestNewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [DiscourseLatestNewsComponent, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [],
+      providers: [
+        DiscourseLatestNewsComponent,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
+    });
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(DiscourseLatestNewsComponent);
     component = fixture.componentInstance;

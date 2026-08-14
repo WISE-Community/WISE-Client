@@ -1,4 +1,12 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { generateRandomKey } from '../../../common/string/string';
 import { AnnotationService } from '../../../services/annotationService';
@@ -21,7 +29,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { ClassResponse } from '../class-response/class-response.component';
 
@@ -33,7 +41,7 @@ import { ClassResponse } from '../class-response/class-response.component';
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
     FormsModule,
-    MatButton,
+    MatButtonModule,
     MatCard,
     MatFormField,
     MatIcon,
@@ -44,10 +52,13 @@ import { ClassResponse } from '../class-response/class-response.component';
   styleUrl: 'discussion-student.component.scss',
   templateUrl: 'discussion-student.component.html'
 })
-export class DiscussionStudent extends ComponentStudent {
+export class DiscussionStudent extends ComponentStudent implements AfterViewInit, OnDestroy {
   classResponses: any[] = [];
   componentStateIdReplyingTo: number;
+  private masonryResizeObserver: ResizeObserver;
+  @ViewChild('newPost', { read: ElementRef, static: false }) newPostRef: ElementRef<HTMLElement>;
   newResponse: string = '';
+  @ViewChild('postsGrid', { static: false }) postsGridRef: ElementRef<HTMLElement>;
   responsesMap: any = {};
   retrievedClassmateResponses: boolean = false;
   studentMode: boolean = true;
@@ -64,7 +75,8 @@ export class DiscussionStudent extends ComponentStudent {
     protected notebookService: NotebookService,
     private notificationService: NotificationService,
     protected studentAssetService: StudentAssetService,
-    protected dataService: StudentDataService
+    protected dataService: StudentDataService,
+    private ngZone: NgZone
   ) {
     super(
       annotationService,
@@ -89,6 +101,48 @@ export class DiscussionStudent extends ComponentStudent {
         }
       })
     );
+  }
+
+  ngAfterViewInit(): void {
+    if (this.postsGridRef && !CSS.supports('display', 'grid-lanes')) {
+      this.masonryResizeObserver = new ResizeObserver(() => {
+        this.ngZone.run(() => this.applyMasonry());
+      });
+      this.masonryResizeObserver.observe(this.postsGridRef.nativeElement);
+      if (this.newPostRef?.nativeElement) {
+        this.masonryResizeObserver.observe(this.newPostRef.nativeElement);
+      }
+    }
+  }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.masonryResizeObserver?.disconnect();
+  }
+
+  /**
+   * Apply JS-based masonry layout using 1px row height if CSS grid-lanes is not supported
+   */
+  protected applyMasonry(): void {
+    const grid = this.postsGridRef?.nativeElement;
+    if (!grid) return;
+    const rowGap = parseInt(getComputedStyle(grid).rowGap) || 8;
+    const rowHeight = 1;
+    const items = Array.from(grid.children) as HTMLElement[];
+    items.forEach((item) => {
+      item.style.gridRowEnd = '';
+      const contentHeight = item.getBoundingClientRect().height;
+      const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
+      item.style.gridRowEnd = `span ${rowSpan}`;
+    });
+    // Re-run when any images finish loading
+    const pendingImages = Array.from(grid.querySelectorAll<HTMLImageElement>('img')).filter(
+      (img) => !img.complete
+    );
+    pendingImages.forEach((img) => {
+      img.addEventListener('load', () => this.applyMasonry(), { once: true });
+      img.addEventListener('error', () => this.applyMasonry(), { once: true });
+    });
   }
 
   protected renderDiscussion(): void {
@@ -477,6 +531,7 @@ export class DiscussionStudent extends ComponentStudent {
       this.workgroupId
     );
     this.retrievedClassmateResponses = true;
+    setTimeout(() => this.applyMasonry());
   }
 
   addClassResponse(componentState: any): void {
@@ -494,6 +549,7 @@ export class DiscussionStudent extends ComponentStudent {
         this.componentId,
         this.workgroupId
       );
+      setTimeout(() => this.applyMasonry());
     }
   }
 

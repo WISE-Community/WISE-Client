@@ -160,7 +160,7 @@ export class Node {
     this.components[this.getComponentIndex(componentId)] = component;
   }
 
-  private getComponentIndex(componentId: string): number {
+  getComponentIndex(componentId: string): number {
     return this.components.findIndex((component) => component.id === componentId);
   }
 

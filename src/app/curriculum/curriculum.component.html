@@ -33,6 +33,7 @@
               i18n-aria-label
               aria-label="Unit library navigation"
               [tabPanel]="tabPanel"
+              animationDuration="0ms"
             >
               <a mat-tab-link routerLink="/curriculum/public" [active]="isPublicRoute()">
                 {{ getPublicTabLabel() }}

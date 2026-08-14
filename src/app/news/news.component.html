@@ -8,9 +8,9 @@
     <section>
       <div class="content-block">
         <app-timeline>
-          @for (newsItem of allNewsItems; track newsItem; let i = $index) {
+          @for (newsItem of newsItems; track newsItem; let i = $index) {
             @if (i < 10 || showAll) {
-              <app-timeline-item>
+              <app-timeline-item id="{{ newsItem.id }}">
                 <app-timeline-item-label>
                   <strong>{{ newsItem.date | date: 'mediumDate' }}</strong>
                 </app-timeline-item-label>
@@ -18,10 +18,18 @@
                   <mat-card appearance="outlined">
                     <mat-card-content>
                       <h2 class="accent-1">{{ newsItem.title }}</h2>
-                      <div
-                        class="mat-body-2"
-                        [innerHTML]="sanitizer.bypassSecurityTrustHtml(newsItem.news)"
-                      ></div>
+                      <div class="mat-body-2">
+                        @if (newsOverLengthLimit(newsItem) && !newsShowMore[i]) {
+                          <p
+                            [innerHTML]="
+                              sanitizer.bypassSecurityTrustHtml(abbreviateNews(newsItem))
+                            "
+                          ></p>
+                          <a href="#" (click)="expandNews($event, i)" i18n>Show More</a>
+                        } @else {
+                          <p [innerHTML]="sanitizer.bypassSecurityTrustHtml(newsItem.news)"></p>
+                        }
+                      </div>
                     </mat-card-content>
                   </mat-card>
                 </app-timeline-item-content>
@@ -29,7 +37,7 @@
             }
           }
         </app-timeline>
-        @if (allNewsItems.length > 10 && !showAll) {
+        @if (newsItems.length > 10 && !showAll) {
           <div class="content-block__actions">
             <a mat-raised-button color="accent" (click)="showAll = true" i18n>Show More</a>
           </div>

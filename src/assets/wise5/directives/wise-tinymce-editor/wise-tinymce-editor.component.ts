@@ -52,27 +52,19 @@ export class WiseTinymceEditorComponent {
     'emoticons',
     'fullscreen',
     'help',
-    'hr',
     'image',
-    'imagetools',
     'importcss',
     'insertdatetime',
     'link',
     'lists',
     'media',
     'nonbreaking',
-    'noneditable',
     'pagebreak',
-    'paste',
     'preview',
-    'print',
     'quickbars',
     'save',
     'searchreplace',
     'table',
-    'template',
-    'textpattern',
-    'toc',
     'visualblocks',
     'visualchars',
     'wordcount'
@@ -166,7 +158,9 @@ export class WiseTinymceEditorComponent {
         }
       },
       paste_block_drop: true,
-      skin_url: '/assets/tinymce/wise'
+      paste_data_images: false,
+      skin_url: '/assets/tinymce/wise',
+      promotion: false
     };
   }
 
