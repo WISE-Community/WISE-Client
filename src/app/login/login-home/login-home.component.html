@@ -53,13 +53,17 @@
         }
       }
       @if (verificationState() === 'confirmVerified') {
-        <p class="success center" i18n>Your email has been verified.</p>
+        <p class="mat-body-1 center" i18n>
+          Thank you for verifying your email! Please sign in to access WISE.
+        </p>
       } @else if (verificationState() === 'emailError') {
         <p class="warn center" i18n>
-          There was an error sending the verification email. Please try again later.
+          Sorry, there was an error sending the verification email. Please try again later.
         </p>
       } @else if (verificationState() === 'emailSent') {
-        <p class="success center" i18n>A verification email has been sent.</p>
+        <p class="mat-body-1 center" i18n>
+          A verification email has been sent. Please check your email for instructions.
+        </p>
       } @else if (verificationState() === 'sendingEmail') {
         <div class="email-spinner-parent">
           <mat-spinner class="email-spinner" [diameter]="30" />
@@ -71,18 +75,18 @@
           >
         </p>
         @if (allowResendEmail()) {
-          <p class="warn center" i18n>
+          <p class="mat-body-1 center" i18n>
             <a href="#" (click)="resendEmail($event)">Click here</a> to resend the verification
             email.
           </p>
         } @else {
-          <p class="warn center" i18n>
+          <p class="mat-body-1 center" i18n>
             Please wait to send another verification email ({{ resendEmailWaitSeconds() }}).
           </p>
         }
       } @else if (verificationState() === 'verificationError') {
         <p class="warn center" i18n>
-          Your account could not be verified. Make sure you click the link sent to your email.
+          Your account could not be verified. Make sure you follow the link sent to your email.
         </p>
       }
       <p>
