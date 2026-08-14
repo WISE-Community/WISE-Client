@@ -12,10 +12,6 @@
     }
   }
 
-  h1, h2, .mat-headline-1, .mat-headline-2, .mat-headline-3, .mat-headline-4 {
-    font-family: variables.$heading-font-family
-  }
-
   h1 {
     .mat-icon {
       @include mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-5'));

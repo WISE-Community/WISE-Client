@@ -36,10 +36,7 @@ html {
       tertiary: theme-colors.$tertiary-palette,
       error: theme-colors.$error-palette,
     ),
-    typography: (
-      plain-family: "Noto Sans",
-      brand-family: Raleway,
-    ),
+    typography: Cabin,
   ));
 
   color: var(--mat-sys-on-background);
@@ -50,21 +47,21 @@ html {
   @include theme-typography.typography-hierarchy;
 
   @include mat.theme-overrides((
-    label-small: 500 0.75rem / 1rem Noto Sans,
-    label-medium: 500 0.875rem / 1.25rem Noto Sans,
-    label-large: 500 1rem / 1.5rem Noto Sans,
-    body-small: 400 0.875rem / 1.25rem Noto Sans,
-    body-medium: 400 1rem / 1.5rem Noto Sans,
-    body-large: 400 1.125rem / 1.625rem Noto Sans,
-    title-small: 500 1rem / 1.5rem Noto Sans,
-    title-medium: 500 1.125rem / 1.625rem Noto Sans,
-    title-large: 500 1.25rem / 1.75rem Noto Sans,
-    headline-small: 600 1.5rem / 2rem Raleway,
-    headline-medium: 600 1.75rem / 2.25rem Raleway,
-    headline-large: 600 2rem / 2.5rem Raleway,
-    display-small: 600 2.5rem / 3rem Raleway,
-    display-medium: 600 2.875rem / 3.25rem Raleway,
-    display-large: 600 3.25rem / 3.75rem Raleway,
+    label-small: 500 0.875rem / 1.25rem Cabin,
+    label-medium: 500 1rem / 1.5rem Cabin,
+    label-large: 500 1.125rem / 1.625rem Cabin,
+    body-small: 400 1rem / 1.5rem Cabin,
+    body-medium: 400 1.125rem / 1.625rem Cabin,
+    body-large: 400 1.25rem / 1.75rem Cabin,
+    title-small: 500 1.125rem / 1.625rem Cabin,
+    title-medium: 500 1.25rem / 1.75rem Cabin,
+    title-large: 600 1.5rem / 2rem Cabin,
+    headline-small: 500 1.625rem / 2.125rem Cabin,
+    headline-medium: 600 1.75rem / 2.25rem Cabin,
+    headline-large: 600 2rem / 2.5rem Cabin,
+    display-small: 600 2.5rem / 3rem Cabin,
+    display-medium: 600 2.875rem / 3.25rem Cabin,
+    display-large: 600 3.25rem / 3.75rem Cabin,
   ));
 
   /* Autocomplete */
@@ -145,7 +142,6 @@ html {
   /* Card */
 
   @include mat.card-overrides((
-    title-text-font: "Noto Sans",
     title-text-weight: 500,
     title-text-size: 20px,
     subtitle-text-weight: 400,

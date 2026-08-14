@@ -1,7 +1,12 @@
 @use 'tailwindcss';
 
 html {
-  font-family: "Noto Sans", sans-serif;
+  font-family: Cabin, sans-serif;
+}
+
+.sbdocs-content p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p),
+.sbdocs-content li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li) {
+  font-size: 1rem;
 }
 
 .toc-list-item {
