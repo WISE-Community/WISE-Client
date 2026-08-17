@@ -10,6 +10,7 @@ import { TranslatableInputComponent } from '../translatable-input/translatable-i
   template: `
     <translatable-input
       [content]="componentContent"
+      [hasClearButton]="true"
       key="title"
       label="Activity Title"
       i18n-label
