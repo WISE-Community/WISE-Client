@@ -1,27 +1,28 @@
 import { Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
+import { TranslatableInputComponent } from '../translatable-input/translatable-input.component';
 
 @Component({
-  imports: [FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [FormsModule, TranslatableInputComponent],
   selector: 'edit-component-title',
   template: `
-    <mat-form-field class="w-full">
-      <mat-label i18n>Activity Title</mat-label>
-      <input matInput [(ngModel)]="componentContent.title" (ngModelChange)="titleChanged()" />
-    </mat-form-field>
+    <translatable-input
+      [content]="componentContent"
+      key="title"
+      label="Activity Title"
+      i18n-label
+      (defaultLanguageTextChanged)="titleChanged($event)"
+    />
   `
 })
 export class EditComponentTitleComponent {
+  @Input() componentContent: ComponentContent;
   private projectService = inject(TeacherProjectService);
 
-  @Input() componentContent: ComponentContent;
-  private title: string = '';
-
-  titleChanged(): void {
+  titleChanged(title: string): void {
+    this.componentContent.title = title;
     this.projectService.saveProject();
   }
 }
