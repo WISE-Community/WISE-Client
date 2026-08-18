@@ -10,11 +10,13 @@ import { Component as WISEComponent } from '../../../common/Component';
 import { EditComponentAdvancedComponent } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced.component';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { ComponentInfoService } from '../../../services/componentInfoService';
+import { EditComponentTitleComponent } from '../edit-component-title/edit-component-title.component';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
     EditComponentComponent,
+    EditComponentTitleComponent,
     EditComponentAdvancedComponent,
     FormsModule,
     MatButtonModule,
@@ -36,8 +38,9 @@ import { ComponentInfoService } from '../../../services/componentInfoService';
       @if (advancedMode) {
         <edit-component-advanced class="h-full" [component]="component" />
       } @else {
+        <edit-component-title class="block pt-4" [componentContent]="data.componentContent" />
         <edit-component
-          class="block h-full py-4"
+          class="block h-full pb-4"
           [componentContent]="data.componentContent"
           [nodeId]="data.nodeId"
         />

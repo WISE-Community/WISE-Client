@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Component as WISEComponent } from '../../common/Component';
 import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule';
 import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
@@ -9,19 +8,24 @@ import { PromptComponent } from '../prompt/prompt.component';
 @Component({
   imports: [PossibleScoreComponent, PromptComponent],
   selector: 'component-header',
-  styles: ['.component-header { padding-bottom: 8px; } .prompt { font-weight: 500; }'],
   templateUrl: 'component-header.component.html'
 })
 export class ComponentHeaderComponent {
   @Input() component: WISEComponent;
   protected dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
-  protected prompt: SafeHtml;
 
-  constructor(protected sanitizer: DomSanitizer) {}
+  constructor() {}
+
+  protected get title(): string {
+    return this.component.content.title || '';
+  }
+
+  protected get prompt(): string {
+    return this.component.content.prompt || '';
+  }
 
   ngOnInit(): void {
-    this.prompt = this.sanitizer.bypassSecurityTrustHtml(this.component.content.prompt);
     this.dynamicPrompt = new DynamicPrompt(this.component.content.dynamicPrompt);
   }
 

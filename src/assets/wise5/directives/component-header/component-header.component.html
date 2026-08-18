@@ -1,6 +1,9 @@
-<div class="component-header flex flex-wrap gap-1">
+@if (title) {
+  <div class="mat-headline-6">{{ title }}</div>
+}
+<div class="flex flex-wrap gap-1 mb-4">
   <prompt
-    [prompt]="component.content.prompt"
+    [prompt]="prompt"
     [nodeId]="component.nodeId"
     [componentId]="component.id"
     [dynamicPrompt]="dynamicPrompt"

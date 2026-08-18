@@ -13,6 +13,7 @@ export interface ComponentContent {
   cRaterRubric?: CRaterRubric;
   dynamicPrompt?: DynamicPrompt;
   excludeFromTotalScore?: boolean;
+  title?: string;
   maxScore?: number;
   maxSubmitCount?: number;
   prompt?: string;

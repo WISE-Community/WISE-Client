@@ -8,9 +8,11 @@ import { NotebookService } from '../../../services/notebookService';
 import { StudentAssetService } from '../../../services/studentAssetService';
 import { StudentDataService } from '../../../services/studentDataService';
 import { ComponentStudent } from '../../component-student.component';
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ComponentService } from '../../componentService';
 
 @Component({
+  imports: [ComponentHeaderComponent],
   selector: 'outside-url-student',
   templateUrl: 'outside-url-student.component.html'
 })
