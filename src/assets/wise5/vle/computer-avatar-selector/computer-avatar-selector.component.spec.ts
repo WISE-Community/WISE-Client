@@ -33,13 +33,45 @@ describe('ComputerAvatarSelectorComponent', () => {
 
   ngOnInit();
   selectAvatar();
+  onlyOneAvatar();
 });
+
+function onlyOneAvatar() {
+  describe('only one avatar', () => {
+    beforeEach(() => {
+      component.computerAvatarSettings.ids = ['robot'];
+      component.ngOnInit();
+      fixture.detectChanges();
+    });
+
+    it('should automatically select the avatar and only show the continue button', () => {
+      expect(fixture.debugElement.queryAll(By.css('.avatar-button')).length).toEqual(0);
+      expect(fixture.debugElement.query(By.css('.selected-avatar-image'))).toBeTruthy();
+      expect(
+        fixture.debugElement.query(By.css('.selected-avatar-name')).nativeElement.textContent.trim()
+      ).toEqual('Robot');
+
+      const backButton = fixture.debugElement
+        .queryAll(By.css('button'))
+        .find((btn) => btn.nativeElement.textContent.includes('Back'));
+
+      expect(getContinueButton()).toBeTruthy();
+      expect(backButton).toBeUndefined();
+    });
+
+    it('clicking continue should emit selected avatar', () => {
+      const spy = spyOn(component.chooseAvatarEvent, 'emit');
+      getContinueButton().nativeElement.click();
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalledWith(avatars[0]);
+    });
+  });
+}
 
 function ngOnInit() {
   describe('ngOnInit()', () => {
-    it('should show avatars and the continue button should be disabled', () => {
-      expect(fixture.debugElement.queryAll(By.css('mat-button-toggle')).length).toEqual(2);
-      expect(getContinueButton().nativeElement.disabled).toBeTrue();
+    it('should show avatars', () => {
+      expect(fixture.debugElement.queryAll(By.css('.avatar-button')).length).toEqual(2);
     });
   });
 }
@@ -47,7 +79,7 @@ function ngOnInit() {
 function selectAvatar() {
   describe('select avatar', () => {
     beforeEach(() => {
-      fixture.debugElement.queryAll(By.css('mat-button-toggle'))[0].nativeElement.click();
+      fixture.debugElement.queryAll(By.css('.avatar-button'))[0].nativeElement.click();
       fixture.detectChanges();
     });
     it('should enable the continue button', () => {
@@ -72,5 +104,5 @@ function clickContinueButton_shouldEmitAvatar() {
 function getContinueButton() {
   return fixture.debugElement
     .queryAll(By.css('button'))
-    .find((buttonDebugEl) => buttonDebugEl.nativeElement.textContent.includes('Continue'));
+    .find((buttonDebugEl) => buttonDebugEl.nativeElement.textContent.includes('Chat with'));
 }

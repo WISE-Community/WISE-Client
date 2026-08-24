@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { ComponentTypeService } from '../../../services/componentTypeService';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { Node } from '../../../common/Node';
 import { ComponentContent } from '../../../common/ComponentContent';
@@ -24,8 +23,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { ComponentAuthoringComponent } from '../../components/component-authoring.component';
-import { RouterModule } from '@angular/router';
-import { EditComponentAdvancedButtonComponent } from '../../components/edit-component-advanced-button/edit-component-advanced-button.component';
+import { ToggleComponentTagComponent } from '../../components/toggle-component-tag/toggle-component-tag.component';
+import { VisibilityConstraintIconComponent } from '../../components/visibility-constraint-icon/visibility-constraint-icon.component';
+import { EditNodeAdvancedButtonComponent } from '../../components/edit-node-advanced-button/edit-node-advanced-button.component';
+import { ComponentInfoService } from '../../../services/componentInfoService';
 
 @Component({
   imports: [
@@ -34,7 +35,7 @@ import { EditComponentAdvancedButtonComponent } from '../../components/edit-comp
     ComponentAuthoringComponent,
     CopyComponentButtonComponent,
     DragDropModule,
-    EditComponentAdvancedButtonComponent,
+    EditNodeAdvancedButtonComponent,
     EditNodeTitleComponent,
     FormsModule,
     MatButtonModule,
@@ -44,15 +45,15 @@ import { EditComponentAdvancedButtonComponent } from '../../components/edit-comp
     MatIconModule,
     MatInputModule,
     MatTooltipModule,
-    RouterModule,
-    TeacherNodeIconComponent
+    TeacherNodeIconComponent,
+    ToggleComponentTagComponent,
+    VisibilityConstraintIconComponent
   ],
   styleUrl: './node-authoring.component.scss',
   templateUrl: './node-authoring.component.html'
 })
 export class NodeAuthoringComponent implements OnInit {
   components: ComponentContent[] = [];
-  protected editingComponentId: string;
   protected isGroupNode: boolean;
   protected node: Node;
   private nodeJson: any;
@@ -60,8 +61,8 @@ export class NodeAuthoringComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private componentInfoService: ComponentInfoService,
     private componentServiceLookupService: ComponentServiceLookupService,
-    private componentTypeService: ComponentTypeService,
     private nodeService: TeacherNodeService,
     private projectService: TeacherProjectService,
     private dataService: TeacherDataService,
@@ -82,7 +83,6 @@ export class NodeAuthoringComponent implements OnInit {
     this.isGroupNode = this.projectService.isGroupNode(this.nodeId);
     this.nodeJson = this.projectService.getNodeById(this.nodeId);
     this.components = this.projectService.getComponents(this.nodeId);
-    this.editingComponentId = null;
 
     if (history.state.newComponents && history.state.newComponents.length > 0) {
       this.highlightComponents(history.state.newComponents);
@@ -163,7 +163,7 @@ export class NodeAuthoringComponent implements OnInit {
     event.stopPropagation();
     if (
       confirm(
-        $localize`Are you sure you want to delete this component?\n\n${componentNumber}. ${component.type}`
+        $localize`Are you sure you want to delete this activity?\n\n${componentNumber}. ${component.type}`
       )
     ) {
       this.deleteComponentsOnServer([this.node.deleteComponent(component.id)]);
@@ -213,7 +213,7 @@ export class NodeAuthoringComponent implements OnInit {
     setTimeout(() => {
       if (components.length > 0) {
         const element = document.getElementById(components[0].id);
-        if (!this.isElementInViewport(element)) {
+        if (element && !this.isElementInViewport(element)) {
           element.scrollIntoView();
         }
         components.forEach((component) => temporarilyHighlightElement(component.id));
@@ -221,8 +221,16 @@ export class NodeAuthoringComponent implements OnInit {
     }, 100);
   }
 
+  protected getComponentTypeIcon(componentType: string): string {
+    return this.componentInfoService.getInfo(componentType).getIcon();
+  }
+
   protected getComponentTypeLabel(componentType: string): string {
-    return this.componentTypeService.getComponentTypeLabel(componentType);
+    return this.componentInfoService.getInfo(componentType).getLabel();
+  }
+
+  protected hasVisibilityConstraint(component: ComponentContent): boolean {
+    return component.constraints?.length > 0;
   }
 
   private setShowSaveButtonForAllComponents(node: Node, showSaveButton: boolean): void {
@@ -247,9 +255,5 @@ export class NodeAuthoringComponent implements OnInit {
       this.highlightComponents([this.components[currentIndex]]);
     }
     this.projectService.saveProject();
-  }
-
-  protected editComponent(componentId: string): void {
-    this.editingComponentId = componentId;
   }
 }

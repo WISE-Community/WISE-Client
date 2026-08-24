@@ -1,0 +1,80 @@
+<ng-template #ideaSummary let-idea="idea">
+  <li>
+    <idea-summary
+      [idea]="idea"
+      [nodeId]="nodeId"
+      [componentId]="componentId"
+      [periodId]="periodId"
+      [source]="source"
+    />
+  </li>
+</ng-template>
+<ng-template #ideaGroup let-ideaGroups="ideaGroups">
+  <div class="@container">
+    @if (ideaGroups.length === 1) {
+      <h3 class="mat-body-1 mb-2 center" i18n>{{ ideaGroups[0].title }}</h3>
+      <ul class="columns-1 @2xl:columns-2 @4xl:columns-3 gap-2 mb-4">
+        @for (idea of ideaGroups[0].ideas; track idea.id) {
+          <ng-container
+            [ngTemplateOutlet]="ideaSummary"
+            [ngTemplateOutletContext]="{ idea: idea }"
+          />
+        }
+      </ul>
+    } @else {
+      <div
+        class="grid @2xl:grid-cols-2 gap-2 mb-4"
+        [class.@4xl:grid-cols-3]="ideaGroups.length > 2"
+      >
+        @for (ideaGroup of ideaGroups; track ideaGroup.title) {
+          <div>
+            <h3 class="mat-body-1 mb-2 center" i18n>{{ ideaGroup.title }}</h3>
+            <ul>
+              @for (idea of ideaGroup.ideas; track idea.id) {
+                <ng-container
+                  [ngTemplateOutlet]="ideaSummary"
+                  [ngTemplateOutletContext]="{ idea: idea }"
+                />
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</ng-template>
+<div [class.expanded]="expanded">
+  <h2 class="mat-subtitle-1" i18n>Student Ideas Detected</h2>
+  @if (hasWarning) {
+    <p class="warn center">{{ warningMessage }}</p>
+  }
+  <div class="overflow-y-auto">
+    @if (doRender) {
+      @if (rubric.ideaColors) {
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span class="text-sm font-medium" i18n>Key:</span>
+          @for (ideaColor of rubric.ideaColors; track ideaColor.colorValue) {
+            <div class="py-0.5 px-1 rounded" [style.background-color]="ideaColor.colorValue">
+              <span class="text-sm">{{ ideaColor.tags.join(', ') }}</span>
+            </div>
+          }
+        </div>
+      }
+      <ng-container
+        [ngTemplateOutlet]="ideaGroup"
+        [ngTemplateOutletContext]="{ ideaGroups: initialGroups }"
+      />
+      @if (showMore) {
+        <ng-container
+          [ngTemplateOutlet]="ideaGroup"
+          [ngTemplateOutletContext]="{ ideaGroups: additionalGroups }"
+        />
+        <a tabindex="0" (click)="showMore = false" i18n>Show less</a>
+      } @else if (additionalGroups.length > 0) {
+        <a tabindex="0" (click)="showMore = true" i18n>Show more</a>
+      }
+    } @else {
+      <div i18n>Your students' ideas will show up here as they are detected in the activity.</div>
+    }
+  </div>
+</div>

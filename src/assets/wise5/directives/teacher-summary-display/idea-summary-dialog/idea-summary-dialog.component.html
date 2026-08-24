@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>
+  <span i18n>Responses for "{{ data.idea.text }}"</span> ({{ data.idea.count }})
+</h2>
+<mat-dialog-content class="dialog-content-scroll @container">
+  <div class="@2xl:columns-2 @4xl:columns-3 gap-2">
+    @for (response of data.responses; track response.timestamp) {
+      <div class="rounded-md bg-white p-2 mb-2 break-inside-avoid-column">
+        <div class="font-normal flex gap-2 mb-2">
+          <mat-icon class="shrink-0" [style.color]="response.avatarColor">account_circle</mat-icon>
+          <span class="mt-0.5">{{ response.usernames }}</span>
+        </div>
+        <div>"{{ response.text }}"</div>
+      </div>
+    }
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusRegionstart i18n>Close</button>
+</mat-dialog-actions>

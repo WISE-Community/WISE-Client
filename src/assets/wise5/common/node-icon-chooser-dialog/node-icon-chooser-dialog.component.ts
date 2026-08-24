@@ -9,6 +9,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { NODE_ICON_COLORS } from '../../vle/node-icon/NodeIconColor';
 
 interface KIIcon {
   imgAlt: string;
@@ -32,20 +33,7 @@ interface KIIcon {
   templateUrl: 'node-icon-chooser-dialog.component.html'
 })
 export class NodeIconChooserDialogComponent {
-  protected colors = [
-    '#66BB6A',
-    '#009688',
-    '#00B0FF',
-    '#1565C0',
-    '#673AB7',
-    '#AB47BC',
-    '#E91E63',
-    '#D50000',
-    '#F57C00',
-    '#FBC02D',
-    '#795548',
-    '#757575'
-  ];
+  protected colors = NODE_ICON_COLORS;
 
   protected fontNames = [
     'access_time',

@@ -5,6 +5,8 @@ import { ProjectService } from '../../../services/projectService';
 import { MockComponent, MockProviders } from 'ng-mocks';
 import { OpenResponseShowWorkComponent } from '../../openResponse/open-response-show-work/open-response-show-work.component';
 import { NodeService } from '../../../services/nodeService';
+import { AnnotationService } from '../../../services/annotationService';
+import { UserService } from '../../../../../app/services/user.service';
 
 let component: ShowMyWorkGradingComponent;
 const componentId: string = 'component1';
@@ -17,7 +19,15 @@ describe('ShowMyWorkGradingComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ShowMyWorkGradingComponent, MockComponent(OpenResponseShowWorkComponent)],
-      providers: [MockProviders(TeacherDataService, ProjectService, NodeService)]
+      providers: [
+        MockProviders(
+          AnnotationService,
+          NodeService,
+          ProjectService,
+          TeacherDataService,
+          UserService
+        )
+      ]
     });
     projectService = TestBed.inject(ProjectService);
     spyOn(projectService, 'getComponent').and.returnValue({

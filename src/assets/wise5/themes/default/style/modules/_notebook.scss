@@ -1,20 +1,9 @@
 // Variables
-$notebook-sidebar-width: 480px;
-$report-position-right: 96px;
+$notebook-sidebar-width: 450px;
+$report-position-right: 66px;
 $report-full-gap: 8px;
 
 // Base
-notebook-launcher {
-  position: absolute;
-  bottom: 24px;
-  right: 28px;
-
-  @media only screen and (min-width: $layout-breakpoint-xs) {
-    &.md-button.md-fab {
-      z-index: 61;
-    }
-  }
-}
 
 notebook-report {
   position: absolute;
@@ -32,7 +21,7 @@ notebook-report {
   
   @media only screen and (min-width: $layout-breakpoint-sm) {
     &.notes-visible {
-      right: $notebook-sidebar-width + 12;
+      right: $notebook-sidebar-width + 24;
     }
   }
 }

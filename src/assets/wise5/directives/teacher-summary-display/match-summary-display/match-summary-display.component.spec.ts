@@ -37,6 +37,9 @@ describe('MatchSummaryDisplayComponent', () => {
     spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
       of(getComponentStates())
     );
+    spyOn(TestBed.inject(ProjectService), 'injectAssetPaths').and.callFake((componentStates) => {
+      return componentStates;
+    });
     fixture = TestBed.createComponent(MatchSummaryDisplayComponent);
     component = fixture.componentInstance;
     component.nodeId = 'nId';
@@ -48,45 +51,66 @@ describe('MatchSummaryDisplayComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show the correct number of buckets and choices', () => {
-    expect(fixtureQueryAll(fixture, '.bucket').length).toEqual(3);
-    expect(fixtureQueryAll(fixture, '.choice').length).toEqual(5);
-    fixture.nativeElement.querySelector('a').click();
-    fixture.detectChanges();
-    expect(fixtureQueryAll(fixture, '.choice').length).toEqual(6);
+  describe('Bucket view', () => {
+    it('should display one card per unique non-source bucket', () => {
+      expect(fixtureQueryAll(fixture, '.bucket-card').length).toBe(2);
+    });
+
+    it('should show choices sorted by count within each bucket', () => {
+      const cards = fixtureQueryAll(fixture, '.bucket-card');
+      const bucket1Card = cards[0];
+      const choiceRows = bucket1Card.querySelectorAll('.choice-row');
+      expect(choiceRows.length).toBe(3);
+      expect(choiceRows[0].textContent).toContain('Choice B');
+      expect(choiceRows[0].textContent).toContain('3');
+      expect(choiceRows[1].textContent).toContain('Choice C');
+      expect(choiceRows[1].textContent).toContain('2');
+      expect(choiceRows[2].textContent).toContain('Choice D');
+      expect(choiceRows[2].textContent).toContain('1');
+    });
   });
 
-  it('should only show Show more button if more than 3 choices in bucket', () => {
-    expect(fixtureQueryAll(fixture, 'a').length).toEqual(1);
-  });
+  describe('Choice view', () => {
+    beforeEach(() => {
+      component.viewMode = 'choice';
+      fixture.detectChanges();
+    });
 
-  it('should display choices within bucket sorted by count', () => {
-    const choices = fixtureQueryAll(fixture, '.choice');
-    expect(choices[0].textContent.includes('Choice B'));
-    expect(choices[1].textContent.includes('Choice A'));
-    expect(choices[2].textContent.includes('Choice C'));
-    expect(choices[3].textContent.includes('Choice D'));
-  });
+    it('should display one card per unique choice', () => {
+      expect(fixtureQueryAll(fixture, '.choice-card').length).toEqual(5);
+    });
 
-  it('should show the correct count on each choice per bucket', () => {
-    const choices = fixtureQueryAll(fixture, '.choice');
-    expect(choices[0].textContent.includes('3'));
-    expect(choices[1].textContent.includes('2'));
-    expect(choices[2].textContent.includes('2'));
-    expect(choices[3].textContent.includes('1'));
-  });
+    it('should order choices by total count descending then alphabetically', () => {
+      const cards = fixtureQueryAll(fixture, '.choice-card');
+      const labels = Array.from(cards).map((el) => el.querySelector('h3')?.textContent?.trim());
+      expect(labels[0]).toContain('Choice B');
+      expect(labels[1]).toContain('Choice D');
+      expect(labels[2]).toContain('Choice C');
+      expect(labels[3]).toContain('Choice E');
+      expect(labels[4]).toContain('Choice A');
+    });
 
-  it('should change Show more to Show less when clicked', () => {
-    let button = fixture.nativeElement.querySelector('a');
-    expect(button.innerText).toEqual('Show more');
-    button.click();
-    fixture.detectChanges();
-    button = fixture.nativeElement.querySelector('a');
-    expect(button.innerText).toEqual('Show less');
-    button.click();
-    fixture.detectChanges();
-    button = fixture.nativeElement.querySelector('a');
-    expect(button.innerText).toEqual('Show more');
+    it('should show bucket rows sorted by count within each choice', () => {
+      const cards = fixtureQueryAll(fixture, '.choice-card');
+      const choiceDCard = cards[1];
+      const bucketRows = choiceDCard.querySelectorAll('.bucket-row');
+      expect(bucketRows.length).toEqual(2);
+      expect(bucketRows[0].textContent).toContain('Bucket 2');
+      expect(bucketRows[0].textContent).toContain('2');
+    });
+
+    it('should show the correct count for Choice B in Bucket 1', () => {
+      const cards = fixtureQueryAll(fixture, '.choice-card');
+      const choiceBCard = cards[0];
+      expect(choiceBCard.textContent).toContain('3');
+    });
+
+    it('should show "Not moved by any students" for choices left in the source bucket', () => {
+      const cards = fixtureQueryAll(fixture, '.choice-card');
+      const choiceACard = cards[4];
+      expect(choiceACard.textContent).toContain('Not moved by any students');
+      expect(choiceACard.querySelectorAll('.bucket-row').length).toEqual(1);
+    });
   });
 });
 
@@ -111,17 +135,18 @@ function getComponentStates(): any {
             id: '0',
             type: 'bucket',
             value: 'Choices',
-            items: []
-          },
-          {
-            id: 'b1',
-            value: 'Bucket 1',
             items: [
               {
                 isIncorrectPosition: null,
                 id: 'a',
                 value: 'Choice A'
-              },
+              }
+            ]
+          },
+          {
+            id: 'b1',
+            value: 'Bucket 1',
+            items: [
               {
                 isIncorrectPosition: null,
                 id: 'b',
@@ -166,17 +191,18 @@ function getComponentStates(): any {
             id: '0',
             type: 'bucket',
             value: 'Choices',
-            items: []
-          },
-          {
-            id: 'b1',
-            value: 'Bucket 1',
             items: [
               {
                 isIncorrectPosition: null,
                 id: 'a',
                 value: 'Choice A'
-              },
+              }
+            ]
+          },
+          {
+            id: 'b1',
+            value: 'Bucket 1',
+            items: [
               {
                 isIncorrectPosition: null,
                 id: 'b',
@@ -237,7 +263,13 @@ function getComponentStates(): any {
           {
             id: 'b2',
             value: 'Bucket 2',
-            items: []
+            items: [
+              {
+                isIncorrectPosition: null,
+                id: 'b',
+                value: 'Choice D'
+              }
+            ]
           }
         ]
       },

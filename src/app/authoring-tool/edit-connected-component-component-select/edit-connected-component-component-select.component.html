@@ -1,5 +1,5 @@
 <mat-form-field>
-  <mat-label i18n>Component</mat-label>
+  <mat-label i18n>Activity</mat-label>
   <mat-select
     [(ngModel)]="connectedComponent.componentId"
     (ngModelChange)="connectedComponentComponentIdChanged()"
@@ -17,7 +17,7 @@
       >
         <span>{{ componentIndex + 1 }}. {{ component.type }} </span>
         @if (component.id === componentId) {
-          <span i18n>(This Component)</span>
+          <span i18n>(This activity)</span>
         }
       </mat-option>
     }

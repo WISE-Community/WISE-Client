@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { EditCommonAdvancedComponent } from '../../../../../app/authoring-tool/edit-common-advanced/edit-common-advanced.component';
 import { EditAdvancedComponentComponent } from '../../../../../app/authoring-tool/edit-advanced-component/edit-advanced-component.component';
+import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-tool/edit-component-advanced/edit-component-advanced-shared.module';
 
 @Component({
-  imports: [EditCommonAdvancedComponent],
-  template: `<edit-common-advanced
-    [component]="component"
-    [allowedConnectedComponentTypes]="allowedConnectedComponentTypes"
-  />`
+  imports: [EditComponentAdvancedSharedModule],
+  templateUrl: './edit-audio-oscillator-advanced.component.html'
 })
 export class EditAudioOscillatorAdvancedComponent extends EditAdvancedComponentComponent {
   allowedConnectedComponentTypes = ['AudioOscillator'];

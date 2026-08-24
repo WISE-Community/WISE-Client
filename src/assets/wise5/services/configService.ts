@@ -241,13 +241,10 @@ export class ConfigService {
     return null;
   }
 
-  setClassmateDisplayNames() {
-    let classmateUserInfos = this.getClassmateUserInfos();
-    if (classmateUserInfos) {
-      for (let workgroup of classmateUserInfos) {
-        workgroup.displayNames = this.getDisplayUsernamesByWorkgroupId(workgroup.workgroupId);
-      }
-    }
+  private setClassmateDisplayNames(): void {
+    this.getClassmateUserInfos()?.forEach((workgroup) => {
+      workgroup.displayNames = this.getDisplayUsernamesByWorkgroupId(workgroup.workgroupId);
+    });
   }
 
   /**

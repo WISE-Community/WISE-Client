@@ -1,24 +1,24 @@
 'use strict';
 
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { OpenResponseCompletionCriteriaService } from './openResponseCompletionCriteriaService';
 
+
 @Injectable()
 export class OpenResponseService extends ComponentService {
-  constructor(private completionCriteriaService: OpenResponseCompletionCriteriaService) {
-    super();
-  }
+  protected type: string = 'OpenResponse';
 
-  getComponentTypeLabel(): string {
-    return $localize`Open Response`;
-  }
+  private completionCriteriaService = inject(OpenResponseCompletionCriteriaService);
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'OpenResponse';
+    component.type = this.type;
     component.starterSentence = null;
     component.isStudentAttachmentEnabled = false;
+    component.ai = {
+      teacherSummarySystemPrompt: this.getDefaultTeacherSummarySystemPrompt()
+    };
     return component;
   }
 
@@ -126,5 +126,11 @@ export class OpenResponseService extends ComponentService {
       }
     }
     return false;
+  }
+
+  getDefaultTeacherSummarySystemPrompt(): string {
+    return `You are a teacher who is summarizing student responses to the following question: "$QUESTION$".
+    Each student response is in the format: $RESPONSE_FORMAT$.
+    In the same language as the question, provide a summary of the responses in 100 words or less.`;
   }
 }

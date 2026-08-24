@@ -1,12 +1,15 @@
+import { ConfigService } from '../../../services/configService';
+import { copy } from '../../../common/object/object';
+import { generateRandomKey } from '../../../common/string/string';
 import { Input, Signal, Output, computed, Directive } from '@angular/core';
-import { Subject, Subscription, debounceTime } from 'rxjs';
 import { Language } from '../../../../../app/domain/language';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Subject, Subscription, debounceTime } from 'rxjs';
 import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { generateRandomKey } from '../../../common/string/string';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Translations } from '../../../../../app/domain/translations';
-import { copy } from '../../../common/object/object';
+import { TranslationSuggestionsDialogComponent } from '../translation-suggestions-dialog/translation-suggestions-dialog.component';
 
 @Directive()
 export abstract class AbstractTranslatableFieldComponent {
@@ -27,6 +30,8 @@ export abstract class AbstractTranslatableFieldComponent {
   protected translationText: string;
   protected translationTextChanged: Subject<string> = new Subject<string>();
   constructor(
+    protected configService: ConfigService,
+    protected dialog: MatDialog,
     protected projectService: TeacherProjectService,
     protected projectTranslationService: TeacherProjectTranslationService
   ) {}
@@ -71,8 +76,57 @@ export abstract class AbstractTranslatableFieldComponent {
   }
 
   protected saveTranslationText(text: string): void {
+    if (this.i18nId === undefined) {
+      this.createI18NField();
+    }
     const currentTranslations = copy(this.projectTranslationService.currentTranslations());
     currentTranslations[this.i18nId] = { value: text, modified: new Date().getTime() };
     this.projectTranslationService.saveCurrentTranslations(currentTranslations).subscribe();
+  }
+
+  protected isTranslationServiceEnabled(): boolean {
+    return this.configService.getConfigParam('translationServiceEnabled');
+  }
+
+  protected async translateText(event: Event): Promise<void> {
+    event.preventDefault();
+    if (this.translationText) {
+      this.openDialog();
+    } else {
+      this.projectTranslationService
+        .getTranslationSuggestion(
+          this.defaultLanguage.language,
+          this.currentLanguage().language,
+          this.content[this.key]
+        )
+        .subscribe({
+          next: (translation) => this.saveTranslationText(translation),
+          error: () =>
+            alert(
+              $localize`There was an error translating the text. Please contact WISE staff if the error persists.`
+            )
+        });
+    }
+  }
+
+  private openDialog(): void {
+    const dialogRef = this.createDialogRef();
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
+        this.saveTranslationText(result);
+      }
+    });
+  }
+
+  private createDialogRef(): MatDialogRef<TranslationSuggestionsDialogComponent> {
+    return this.dialog.open(TranslationSuggestionsDialogComponent, {
+      panelClass: 'dialog-md',
+      data: {
+        defaultLanguage: this.defaultLanguage.language,
+        currentLanguage: this.currentLanguage().language,
+        defaultLanguageContent: this.content[this.key],
+        currentLanguageContent: this.translationText
+      }
+    });
   }
 }

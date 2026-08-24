@@ -2,6 +2,7 @@ import { ComponentInfo } from '../ComponentInfo';
 
 export class GraphInfo extends ComponentInfo {
   protected description: string = $localize`Students view graph data or add points to a graph.`;
+  protected icon: string = 'bar_chart';
   protected label: string = $localize`Graph`;
   protected previewExamples: any[] = [
     {

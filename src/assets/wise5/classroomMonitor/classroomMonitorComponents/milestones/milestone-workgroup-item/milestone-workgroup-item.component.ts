@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { copy } from '../../../../common/object/object';
-import { ComponentTypeService } from '../../../../services/componentTypeService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
 import { NgClass } from '@angular/common';
 import { MatButton } from '@angular/material/button';
@@ -20,12 +19,15 @@ import { WorkgroupNodeStatusComponent } from '../../../../../../app/classroom-mo
 import { WorkgroupNodeScoreComponent } from '../../shared/workgroupNodeScore/workgroup-node-score.component';
 import { MatListItem } from '@angular/material/list';
 import { WorkgroupComponentGradingComponent } from '../../workgroup-component-grading/workgroup-component-grading.component';
+import { ComponentInfoService } from '../../../../services/componentInfoService';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
     NgClass,
     MatButton,
+    MatIcon,
     WorkgroupInfoComponent,
     WorkgroupNodeStatusComponent,
     WorkgroupNodeScoreComponent,
@@ -65,7 +67,7 @@ export class MilestoneWorkgroupItemComponent implements OnInit {
   @Input() workgroupData: any;
 
   constructor(
-    protected componentTypeService: ComponentTypeService,
+    protected componentInfoService: ComponentInfoService,
     protected projectService: TeacherProjectService
   ) {}
 
@@ -139,8 +141,12 @@ export class MilestoneWorkgroupItemComponent implements OnInit {
     this.subscriptions.unsubscribe();
   }
 
+  getComponentTypeIcon(componentType: string): string {
+    return this.componentInfoService.getInfo(componentType).getIcon();
+  }
+
   getComponentTypeLabel(componentType: string): string {
-    return this.componentTypeService.getComponentTypeLabel(componentType);
+    return this.componentInfoService.getInfo(componentType).getLabel();
   }
 
   getNodePosition(nodeId: string): string {

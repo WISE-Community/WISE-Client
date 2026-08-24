@@ -2,7 +2,7 @@ import { fabric } from 'fabric';
 import SVG from 'svg.js';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 import { wordWrap } from '../../common/string/string';
 import { hasConnectedComponent } from '../../common/ComponentContent';
@@ -10,18 +10,13 @@ import { labelArraysAreTheSame, makeSureValueIsWithinLimit } from './label';
 
 @Injectable()
 export class LabelService extends ComponentService {
+  protected type: string = 'Label';
   lineZIndex: number = 0;
   textZIndex: number = 1;
   circleZIndex: number = 2;
   defaultTextBackgroundColor: string = 'blue';
 
-  constructor(private assetService: StudentAssetService) {
-    super();
-  }
-
-  getComponentTypeLabel(): string {
-    return $localize`Label`;
-  }
+  private assetService = inject(StudentAssetService);
 
   getCanvasId(domIdEnding: string): string {
     return this.getElementId('canvas', domIdEnding);
@@ -29,7 +24,7 @@ export class LabelService extends ComponentService {
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Label';
+    component.type = this.type;
     component.backgroundImage = '';
     component.canCreateLabels = true;
     component.canEditLabels = true;
@@ -300,7 +295,10 @@ export class LabelService extends ComponentService {
     canvas.selection = false;
     canvas.hoverCursor = 'pointer';
     this.setCanvasDimension(canvas, width, height);
-    $('#canvasParent_' + canvasId).css('height', height + 2);
+    const canvasParent = document.getElementById('canvasParent_' + canvasId);
+    if (canvasParent != null) {
+      canvasParent.style.height = height + 2 + 'px';
+    }
     return canvas;
   }
 

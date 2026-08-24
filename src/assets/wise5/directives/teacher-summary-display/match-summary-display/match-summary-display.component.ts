@@ -1,39 +1,33 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatchContent } from '../../../components/match/MatchContent';
-import { MatchSummaryData } from '../summary-data/MatchSummaryData';
+import { BucketData, ChoiceData, MatchSummaryData } from '../summary-data/MatchSummaryData';
 import { MatchSummaryDataPoint } from '../summary-data/MatchSummaryDataPoint';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
+import { ConfigService } from '../../../services/configService';
+
+export type SummaryViewMode = 'choice' | 'bucket';
 
 @Component({
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatButtonToggleModule, MatIconModule, MatTooltipModule],
   selector: 'match-summary-display',
-  styles: `
-    @reference "tailwindcss";
-    h3,
-    .mat-subtitle-1 {
-      margin-bottom: 8px;
-      margin-top: 0;
-    }
-    .bucket {
-      @apply p-2 mb-2 rounded-md;
-    }
-    .choice {
-      @apply flex gap-1 px-2 py-1 mt-1 rounded-md bg-white border border-neutral-200 text-sm;
-    }
-    .mat-icon {
-      vertical-align: middle;
-    }
-  `,
+  styleUrls: [
+    './match-summary-display.component.scss',
+    '../../summary-display/summary-display.component.scss'
+  ],
   templateUrl: './match-summary-display.component.html'
 })
 export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent implements OnInit {
   protected bucketData: { value: string; choices: MatchSummaryDataPoint[] }[] = [];
-  private bucketsShowMore: Map<string, boolean> = new Map<string, boolean>();
-  private bucketValues: Set<string> = new Set<string>();
+  protected choiceData: ChoiceData[] = [];
+  @Input() expanded: boolean;
   protected isChoiceReuseMatch: boolean;
   private matchSummaryData: MatchSummaryData;
+  viewMode: SummaryViewMode = 'bucket';
+  protected workgroupNamesTooltips = new Map<MatchSummaryDataPoint, string>();
 
   ngOnInit(): void {
     this.setIsChoiceReuseMatch();
@@ -49,48 +43,60 @@ export class MatchSummaryDisplayComponent extends TeacherSummaryDisplayComponent
   private generateSummary(): void {
     this.getLatestWork().subscribe((componentStates) => {
       this.bucketData = [];
-      this.bucketValues.clear();
-      this.matchSummaryData = new MatchSummaryData(componentStates);
-      this.setBucketValues();
+      this.choiceData = [];
+      this.workgroupNamesTooltips = new Map();
+      this.matchSummaryData = new MatchSummaryData(
+        this.projectService.injectAssetPaths(componentStates)
+      );
+      this.setChoiceData();
       this.setBucketData();
-      this.setBucketShowMore();
+      this.setWorkgroupNamesTooltips();
     });
   }
 
-  protected setBucketValues(): void {
-    this.matchSummaryData
-      .getBucketsData()
-      .forEach((bucket) => this.bucketValues.add(bucket.bucketValue));
+  protected setChoiceData(): void {
+    this.matchSummaryData.getChoicesData().forEach((choice) => {
+      this.choiceData.push({
+        choiceValue: choice.choiceValue,
+        choiceDataPoints: choice.choiceDataPoints.sort(this.sortByCount)
+      });
+    });
+    this.choiceData.sort(this.sortChoices);
   }
+
+  private getTotalCount(choice: ChoiceData): number {
+    return choice.choiceDataPoints.reduce((sum, dp) => sum + dp.getCount(), 0);
+  }
+
+  private sortChoices = (a: ChoiceData, b: ChoiceData): number => {
+    const countDiff = this.getTotalCount(b) - this.getTotalCount(a);
+    return countDiff !== 0 ? countDiff : a.choiceValue.localeCompare(b.choiceValue);
+  };
 
   protected setBucketData(): void {
-    this.bucketValues.forEach((value) =>
-      this.bucketData.push({ value: value, choices: this.getBucketDataByValue(value) })
-    );
+    this.matchSummaryData.getBucketsData().forEach((bucket: BucketData) => {
+      this.bucketData.push({
+        value: bucket.bucketValue,
+        choices: bucket.bucketDataPoints.sort(this.sortByCount)
+      });
+    });
   }
 
-  private getBucketDataByValue(bucketValue: string): MatchSummaryDataPoint[] {
-    return this.matchSummaryData
-      .getBucketsData()
-      .find((bucket) => bucket.bucketValue === bucketValue)
-      .bucketDataPoints.sort(this.sortChoices);
+  private sortByCount(a: MatchSummaryDataPoint, b: MatchSummaryDataPoint): number {
+    return b.getCount() - a.getCount();
   }
 
-  private sortChoices(choiceA: MatchSummaryDataPoint, choiceB: MatchSummaryDataPoint): number {
-    return choiceB.getCount() - choiceA.getCount();
-  }
-
-  private setBucketShowMore(): void {
-    this.bucketValues.forEach((value) => this.bucketsShowMore.set(value, false));
-  }
-
-  protected getBucketShowMore(bucketValue: string): boolean {
-    return this.bucketsShowMore.get(bucketValue);
-  }
-
-  protected toggleBucketShowMore(bucketValue: string, event: Event): void {
-    event.preventDefault();
-    this.bucketsShowMore.set(bucketValue, !this.bucketsShowMore.get(bucketValue));
+  private setWorkgroupNamesTooltips(): void {
+    const allDataPoints = this.matchSummaryData.getChoicesData().flatMap((c) => c.choiceDataPoints);
+    for (const dp of allDataPoints) {
+      this.workgroupNamesTooltips.set(
+        dp,
+        dp
+          .getWorkgroupIds()
+          .map((id) => this.configService.getDisplayUsernamesByWorkgroupId(id))
+          .join('\n')
+      );
+    }
   }
 
   protected renderDisplay(): void {

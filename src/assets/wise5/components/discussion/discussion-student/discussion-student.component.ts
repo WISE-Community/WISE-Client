@@ -1,4 +1,12 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { generateRandomKey } from '../../../common/string/string';
 import { AnnotationService } from '../../../services/annotationService';
@@ -21,7 +29,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { ClassResponse } from '../class-response/class-response.component';
 
@@ -33,7 +41,7 @@ import { ClassResponse } from '../class-response/class-response.component';
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
     FormsModule,
-    MatButton,
+    MatButtonModule,
     MatCard,
     MatFormField,
     MatIcon,
@@ -44,12 +52,16 @@ import { ClassResponse } from '../class-response/class-response.component';
   styleUrl: 'discussion-student.component.scss',
   templateUrl: 'discussion-student.component.html'
 })
-export class DiscussionStudent extends ComponentStudent {
+export class DiscussionStudent extends ComponentStudent implements AfterViewInit, OnDestroy {
   classResponses: any[] = [];
   componentStateIdReplyingTo: number;
+  private masonryResizeObserver: ResizeObserver;
+  @ViewChild('newPost', { read: ElementRef, static: false }) newPostRef: ElementRef<HTMLElement>;
   newResponse: string = '';
+  @ViewChild('postsGrid', { static: false }) postsGridRef: ElementRef<HTMLElement>;
   responsesMap: any = {};
   retrievedClassmateResponses: boolean = false;
+  studentMode: boolean = true;
   studentResponse: string = '';
   topLevelResponses: any = {};
 
@@ -58,12 +70,13 @@ export class DiscussionStudent extends ComponentStudent {
     protected componentService: ComponentService,
     protected configService: ConfigService,
     protected dialog: MatDialog,
-    private discussionService: DiscussionService,
+    protected discussionService: DiscussionService,
     protected nodeService: NodeService,
     protected notebookService: NotebookService,
     private notificationService: NotificationService,
     protected studentAssetService: StudentAssetService,
-    protected dataService: StudentDataService
+    protected dataService: StudentDataService,
+    private ngZone: NgZone
   ) {
     super(
       annotationService,
@@ -79,7 +92,60 @@ export class DiscussionStudent extends ComponentStudent {
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.renderDiscussion();
+    this.subscriptions.add(
+      this.annotationService.annotationReceived$.subscribe((annotation) => {
+        // handle inappropriate flag annotations in real-time by re-rendering the discussion
+        if (this.isForThisComponent(annotation) && annotation.type === 'inappropriateFlag') {
+          this.renderDiscussion();
+        }
+      })
+    );
+  }
 
+  ngAfterViewInit(): void {
+    if (this.postsGridRef && !CSS.supports('display', 'grid-lanes')) {
+      this.masonryResizeObserver = new ResizeObserver(() => {
+        this.ngZone.run(() => this.applyMasonry());
+      });
+      this.masonryResizeObserver.observe(this.postsGridRef.nativeElement);
+      if (this.newPostRef?.nativeElement) {
+        this.masonryResizeObserver.observe(this.newPostRef.nativeElement);
+      }
+    }
+  }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.masonryResizeObserver?.disconnect();
+  }
+
+  /**
+   * Apply JS-based masonry layout using 1px row height if CSS grid-lanes is not supported
+   */
+  protected applyMasonry(): void {
+    const grid = this.postsGridRef?.nativeElement;
+    if (!grid) return;
+    const rowGap = parseInt(getComputedStyle(grid).rowGap) || 8;
+    const rowHeight = 1;
+    const items = Array.from(grid.children) as HTMLElement[];
+    items.forEach((item) => {
+      item.style.gridRowEnd = '';
+      const contentHeight = item.getBoundingClientRect().height;
+      const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
+      item.style.gridRowEnd = `span ${rowSpan}`;
+    });
+    // Re-run when any images finish loading
+    const pendingImages = Array.from(grid.querySelectorAll<HTMLImageElement>('img')).filter(
+      (img) => !img.complete
+    );
+    pendingImages.forEach((img) => {
+      img.addEventListener('load', () => this.applyMasonry(), { once: true });
+      img.addEventListener('error', () => this.applyMasonry(), { once: true });
+    });
+  }
+
+  protected renderDiscussion(): void {
     if (this.configService.isPreview()) {
       let componentStates = [];
       if (this.component.hasConnectedComponent()) {
@@ -140,10 +206,6 @@ export class DiscussionStudent extends ComponentStudent {
     this.disableComponentIfNecessary();
     this.registerStudentWorkReceivedListener();
     this.broadcastDoneRenderingComponent();
-  }
-
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
   }
 
   isConnectedComponentShowWorkMode() {
@@ -261,7 +323,7 @@ export class DiscussionStudent extends ComponentStudent {
     if (toWorkgroupId != null && toWorkgroupId !== fromWorkgroupId) {
       const notification = this.notificationService.createNewNotification(
         this.configService.getRunId(),
-        this.configService.getPeriodId(),
+        this.getPeriodId(),
         notificationType,
         nodeId,
         componentId,
@@ -295,7 +357,7 @@ export class DiscussionStudent extends ComponentStudent {
         ) {
           const notification = this.notificationService.createNewNotification(
             this.configService.getRunId(),
-            this.configService.getPeriodId(),
+            this.getPeriodId(),
             notificationType,
             nodeId,
             componentId,
@@ -335,7 +397,7 @@ export class DiscussionStudent extends ComponentStudent {
 
   getClassmateResponsesFromComponents(components: any[] = []): void {
     const runId = this.configService.getRunId();
-    const periodId = this.configService.getPeriodId();
+    const periodId = this.getPeriodId();
     this.discussionService
       .getClassmateResponsesFromComponents(runId, periodId, components)
       .subscribe((response: any) =>
@@ -345,7 +407,7 @@ export class DiscussionStudent extends ComponentStudent {
 
   getClassmateResponses(): void {
     const runId = this.configService.getRunId();
-    const periodId = this.configService.getPeriodId();
+    const periodId = this.getPeriodId();
     this.discussionService
       .getClassmateResponses(runId, periodId, this.nodeId, this.componentId)
       .subscribe((response: any) =>
@@ -446,16 +508,21 @@ export class DiscussionStudent extends ComponentStudent {
     return this.componentContent.showSubmitButton;
   }
 
-  isClassmateResponsesGated() {
+  protected isClassmateResponsesGated(): boolean {
     return this.componentContent.gateClassmateResponses;
   }
 
+  protected isAnonymizeResponses(): boolean {
+    return this.componentContent.anonymizeResponses;
+  }
+
   setClassResponses(componentStates: any[], annotations: any[] = []): void {
-    const isStudentMode = true;
     this.classResponses = this.discussionService.getClassResponses(
       componentStates,
       annotations,
-      isStudentMode
+      this.workgroupId,
+      this.studentMode,
+      this.isAnonymizeResponses()
     );
     this.responsesMap = this.discussionService.getResponsesMap(this.classResponses);
     this.topLevelResponses = this.discussionService.getLevel1Responses(
@@ -464,11 +531,16 @@ export class DiscussionStudent extends ComponentStudent {
       this.workgroupId
     );
     this.retrievedClassmateResponses = true;
+    setTimeout(() => this.applyMasonry());
   }
 
   addClassResponse(componentState: any): void {
     if (componentState.studentData.isSubmit) {
-      this.discussionService.setUsernames(componentState);
+      this.discussionService.setUsernames(
+        componentState,
+        this.workgroupId,
+        this.isAnonymizeResponses()
+      );
       componentState.replies = [];
       this.classResponses.push(componentState);
       this.addResponseToResponsesMap(this.responsesMap, componentState);
@@ -477,6 +549,7 @@ export class DiscussionStudent extends ComponentStudent {
         this.componentId,
         this.workgroupId
       );
+      setTimeout(() => this.applyMasonry());
     }
   }
 
@@ -495,5 +568,9 @@ export class DiscussionStudent extends ComponentStudent {
 
   shouldCreateComponentState(request: ComponentStateRequest): boolean {
     return this.isDirty && request.isSubmit;
+  }
+
+  protected getPeriodId(): number {
+    return this.configService.getPeriodId();
   }
 }

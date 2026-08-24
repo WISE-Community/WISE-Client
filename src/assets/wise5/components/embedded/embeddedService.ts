@@ -4,35 +4,28 @@ import $ from 'jquery';
 import html2canvas from 'html2canvas';
 import { ComponentService } from '../componentService';
 import { StudentAssetService } from '../../services/studentAssetService';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ConfigService } from '../../services/configService';
 import { copy } from '../../common/object/object';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class EmbeddedService extends ComponentService {
+  protected type: string = 'Embedded';
   defaultWidth: string = '100%';
   defaultHeight: string = '600px';
   iframePrefix: string = 'embedded-application-iframe-';
 
-  constructor(
-    protected ConfigService: ConfigService,
-    protected StudentAssetService: StudentAssetService
-  ) {
-    super();
-  }
+  protected ConfigService = inject(ConfigService);
+  protected StudentAssetService = inject(StudentAssetService);
 
   getEmbeddedApplicationIframeId(componentId: string): string {
     return `${this.iframePrefix}-${componentId}`;
   }
 
-  getComponentTypeLabel(): string {
-    return $localize`Embedded (Custom)`;
-  }
-
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Embedded';
+    component.type = this.type;
     component.url = '';
     component.height = 600;
     return component;

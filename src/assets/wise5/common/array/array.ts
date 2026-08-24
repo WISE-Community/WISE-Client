@@ -84,6 +84,17 @@ export function arraysContainSameValues(array1: string[], array2: string[]): boo
   return JSON.stringify(array1Copy) === JSON.stringify(array2Copy);
 }
 
+/**
+ * Check if array1 contains all elements of array2. Even if array1 contains more elements
+ * than array2, it will still return true if array1 contains all elements of array2.
+ * @param array1 an array of strings
+ * @param array2 an array of strings
+ * @returns whether array1 contains all elements of array2
+ */
+export function arrayContainsAll(array1: string[], array2: string[]): boolean {
+  return array2.every((value) => array1.includes(value));
+}
+
 export function reduceByUniqueId(objArr: any[]): any[] {
   const idToObj = {};
   const result = [];

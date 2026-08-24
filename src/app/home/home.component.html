@@ -37,16 +37,18 @@
         Integrated science learning and teaching with technology
       </div>
     </ng-template>
-    @if (isDiscourseNewsAvailable) {
-      <ng-template #sideTemplate>
+    <ng-template #sideTemplate>
+      @if (isDiscourseNewsAvailable) {
         <discourse-latest-news
           [@bounceIn]="{ value: '*', params: { duration: '1.25s', delay: '3500ms' } }"
           [baseUrl]="discourseUrl"
           [category]="discourseNewsCategory"
           queryString="order=latest"
         />
-      </ng-template>
-    }
+      } @else {
+        <admin-latest-news />
+      }
+    </ng-template>
   </app-hero-section>
   <section class="section">
     <div class="section--fullwidth section--slant mat-app-background">

@@ -2,42 +2,52 @@
   <mat-tab-group mat-stretch-tabs="false">
     <mat-tab label="{{ currentLanguage().language }}">
       <ng-template matTabContent>
-        <div class="translation-tools">
-          <button
-            class="enable-in-translation"
-            mat-stroked-button
-            color="primary"
-            (click)="copyDefaultLanguageText()"
-            i18n
-          >
-            Copy content from {{ defaultLanguage.language }}
-          </button>
+        <div class="translatable-rich-text-editor">
+          <div class="translation-tools my-2">
+            <button
+              class="enable-in-translation"
+              mat-stroked-button
+              color="primary"
+              (click)="copyDefaultLanguageText()"
+              i18n
+            >
+              Copy content from {{ defaultLanguage.language }}
+            </button>
+            @if (content[key] && isTranslationServiceEnabled()) {
+              <span class="translation-link">
+                <mat-icon class="primary align-middle">auto_awesome</mat-icon>
+                <a href="#" role="button" (click)="translateText($event)" i18n>Translate with AI</a>
+              </span>
+            }
+          </div>
+          <wise-authoring-tinymce-editor
+            [language]="currentLanguage()"
+            [(model)]="translationText"
+            (modelChange)="translationTextChanged.next($event)"
+          />
         </div>
-        <wise-authoring-tinymce-editor
-          [language]="currentLanguage()"
-          [(model)]="translationText"
-          (modelChange)="translationTextChanged.next($event)"
-        />
       </ng-template>
     </mat-tab>
     <mat-tab label="{{ defaultLanguage.language }}">
       <ng-template matTabContent>
-        <div class="translation-tools flex flex-row justify-start items-center gap-2">
-          <span class="info mat-caption" i18n
-            >Note: Editing is disabled. Please switch back to {{ defaultLanguage.language }} if you
-            want to edit.</span
-          >
-          <button
-            class="enable-in-translation"
-            mat-stroked-button
-            color="primary"
-            (click)="copyDefaultLanguageText()"
-            i18n
-          >
-            Copy content to {{ currentLanguage().language }}
-          </button>
+        <div class="translatable-rich-text-editor">
+          <div class="translation-tools my-2">
+            <span class="info mat-caption" i18n
+              >Note: Editing is disabled. Please switch back to {{ defaultLanguage.language }} if
+              you want to edit.</span
+            >
+            <button
+              class="enable-in-translation"
+              mat-stroked-button
+              color="primary"
+              (click)="copyDefaultLanguageText()"
+              i18n
+            >
+              Copy content to {{ currentLanguage().language }}
+            </button>
+          </div>
+          <wise-authoring-tinymce-editor [model]="html" [disabled]="true" />
         </div>
-        <wise-authoring-tinymce-editor [model]="html" disabled="true" />
       </ng-template>
     </mat-tab>
   </mat-tab-group>

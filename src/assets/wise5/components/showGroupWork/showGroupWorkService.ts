@@ -3,13 +3,12 @@ import { ComponentService } from '../componentService';
 
 @Injectable()
 export class ShowGroupWorkService extends ComponentService {
-  getComponentTypeLabel() {
-    return $localize`Show Group Work`;
-  }
+  protected type: string = 'ShowGroupWork';
+
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'ShowGroupWork';
+    component.type = this.type;
     component.showWorkNodeId = '';
     component.showWorkComponentId = '';
     component.peerGroupingTag = '';

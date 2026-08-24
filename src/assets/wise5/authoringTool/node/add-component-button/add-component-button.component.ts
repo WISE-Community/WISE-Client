@@ -16,9 +16,6 @@ import { MatMenuModule } from '@angular/material/menu';
   selector: 'add-component-button',
   styles: [
     `
-      .rotate-180 {
-        transform: rotate(180deg);
-      }
       .flip-vertical {
         transform: scaleY(-1);
       }
@@ -31,7 +28,7 @@ export class AddComponentButtonComponent {
   @Input() insertAfterComponentId: string = null;
   @Output() newComponentsEvent: EventEmitter<any> = new EventEmitter<any>();
   @Input() node: Node;
-  protected tooltipText = $localize`Add component`;
+  protected tooltipText = $localize`Add activity`;
 
   constructor(
     private createComponentService: CreateComponentService,
@@ -48,7 +45,7 @@ export class AddComponentButtonComponent {
   private updateUI(): void {
     this.firstComponent = this.node.getComponentPosition(this.insertAfterComponentId) === 0;
     if (this.node.components.length > 0 && !this.firstComponent) {
-      this.tooltipText = $localize`Add component after`;
+      this.tooltipText = $localize`Add activity after`;
     }
   }
 

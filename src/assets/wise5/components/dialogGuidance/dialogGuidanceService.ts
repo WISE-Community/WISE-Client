@@ -1,27 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
 import { ComponentService } from '../componentService';
+import { DEFAULT_IDEAS_SUMMARY_GROUPS } from '../common/cRater/CRaterRubric';
 
 @Injectable()
 export class DialogGuidanceService extends ComponentService {
-  constructor(protected computerAvatarService: ComputerAvatarService) {
-    super();
-  }
+  protected type: string = 'DialogGuidance';
 
-  getComponentTypeLabel(): string {
-    return $localize`Dialog Guidance`;
-  }
+  protected computerAvatarService = inject(ComputerAvatarService);
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'DialogGuidance';
+    component.type = this.type;
     component.itemId = '';
     component.feedbackRules = [];
     component.isComputerAvatarEnabled = false;
     component.computerAvatarSettings =
       this.computerAvatarService.getDefaultComputerAvatarSettings();
     component.version = 2;
-    component.cRaterRubric = { ideas: [] };
+    component.cRaterRubric = {
+      ideas: [],
+      ideaColors: [],
+      ideasSummaryGroups: DEFAULT_IDEAS_SUMMARY_GROUPS
+    };
     return component;
   }
 

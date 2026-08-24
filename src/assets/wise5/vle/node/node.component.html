@@ -9,12 +9,12 @@
       </div>
     }
     @for (component of components; track component) {
-      <div
-        id="component_{{ component.id }}"
-        class="component max-lg:!w-full"
-        [ngStyle]="{ width: component.componentWidth ? component.componentWidth + '%' : '100%' }"
-      >
-        @if (componentToVisible[component.id]) {
+      @if (componentToVisible[component.id]) {
+        <div
+          id="component_{{ component.id }}"
+          class="component max-lg:!w-full"
+          [ngStyle]="{ width: component.componentWidth ? component.componentWidth + '%' : '100%' }"
+        >
           <component
             [nodeId]="node.id"
             [componentId]="component.id"
@@ -22,8 +22,8 @@
             [workgroupId]="workgroupId"
             (saveComponentStateEvent)="saveComponentState($event)"
           />
-        }
-      </div>
+        </div>
+      }
     }
     <div class="node-content__actions flex items-center gap-3">
       @if (node.showSaveButton) {

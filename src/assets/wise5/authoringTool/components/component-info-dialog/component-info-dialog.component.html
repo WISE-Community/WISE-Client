@@ -1,7 +1,7 @@
-<div class="flex justify-start items-center">
-  <h2 mat-dialog-title i18n>Component Info</h2>
-  <div class="flex grow"></div>
+<div class="flex justify-between items-center">
+  <h2 mat-dialog-title i18n>Activity Info</h2>
   <component-type-selector
+    class="px-2"
     [componentType]="componentType"
     (componentTypeSelectedEvent)="displayComponent($event)"
   />

@@ -105,7 +105,7 @@
   let isLast = $last
 ) {
   <div class="object-container">
-    <div class="flex flex-row justify-start items-center">
+    <div class="flex flex-row justify-start">
       <div>
         <mat-radio-group
           [(ngModel)]="object.type"
@@ -121,7 +121,7 @@
         </mat-radio-group>
       </div>
       @if (object.type === 'image') {
-        <div class="object-image-input-container flex flex-row justify-start items-center">
+        <div class="object-image-input-container flex flex-row justify-start">
           <translatable-input
             [content]="object"
             key="image"
@@ -215,7 +215,7 @@
       </div>
     }
     @if (object.type === 'image') {
-      <div class="flex flex-row justify-start items-center">
+      <div class="flex flex-row justify-start">
         <translatable-input
           [content]="object"
           key="imageMovingLeft"
@@ -312,7 +312,7 @@
         let isFirst = $first;
         let isLast = $last
       ) {
-        <div class="data-point-container flex flex-row flex-wrap justify-start items-center">
+        <div class="data-point-container flex flex-row flex-wrap justify-start">
           <mat-form-field class="data-point-input">
             <mat-label i18n>Time</mat-label>
             <input
@@ -451,7 +451,7 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field class="choose-component">
-            <mat-label i18n>Component</mat-label>
+            <mat-label i18n>Activity</mat-label>
             <mat-select
               [(ngModel)]="object.dataSource.componentId"
               (ngModelChange)="dataSourceComponentChanged(object)"

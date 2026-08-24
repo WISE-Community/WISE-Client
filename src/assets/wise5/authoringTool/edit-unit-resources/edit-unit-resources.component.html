@@ -16,6 +16,10 @@
     <ng-container *ngTemplateOutlet="addButton; context: { addToTop: true }" />
     <span class="flex-1"></span>
   </h5>
+  <p i18n>
+    Add additional resources for this unit. They will appear in the unit info page in the curriculum
+    library.
+  </p>
   <ul cdkDropList [cdkDropListData]="resources" (cdkDropListDropped)="drop($event)" cdkScrollable>
     @for (
       resource of resources;

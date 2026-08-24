@@ -11,32 +11,66 @@ export class ComponentTypeService {
     private userService: UserService
   ) {}
 
-  getComponentTypes(): any[] {
-    const componentTypes = [
-      { type: 'Animation', name: this.getComponentTypeLabel('Animation') },
-      { type: 'AudioOscillator', name: this.getComponentTypeLabel('AudioOscillator') },
-      { type: 'ConceptMap', name: this.getComponentTypeLabel('ConceptMap') },
-      { type: 'DialogGuidance', name: this.getComponentTypeLabel('DialogGuidance') },
-      { type: 'Discussion', name: this.getComponentTypeLabel('Discussion') },
-      { type: 'Draw', name: this.getComponentTypeLabel('Draw') },
-      { type: 'Embedded', name: this.getComponentTypeLabel('Embedded') },
-      { type: 'Graph', name: this.getComponentTypeLabel('Graph') },
-      { type: 'Label', name: this.getComponentTypeLabel('Label') },
-      { type: 'Match', name: this.getComponentTypeLabel('Match') },
-      { type: 'MultipleChoice', name: this.getComponentTypeLabel('MultipleChoice') },
-      { type: 'OpenResponse', name: this.getComponentTypeLabel('OpenResponse') },
-      { type: 'OutsideURL', name: this.getComponentTypeLabel('OutsideURL') },
-      { type: 'PeerChat', name: this.getComponentTypeLabel('PeerChat') },
-      { type: 'HTML', name: this.getComponentTypeLabel('HTML') },
-      { type: 'ShowGroupWork', name: this.getComponentTypeLabel('ShowGroupWork') },
-      { type: 'ShowMyWork', name: this.getComponentTypeLabel('ShowMyWork') },
-      { type: 'Summary', name: this.getComponentTypeLabel('Summary') },
-      { type: 'Table', name: this.getComponentTypeLabel('Table') }
+  getComponentGroups(): any[] {
+    const groups = [
+      {
+        name: $localize`View Information`,
+        types: [
+          this.createComponentType('HTML'),
+          this.createComponentType('ShowMyWork'),
+          this.createComponentType('Summary')
+        ]
+      },
+      {
+        name: $localize`Explain and Assess`,
+        types: [
+          this.createComponentType('ConceptMap'),
+          this.createComponentType('Draw'),
+          this.createComponentType('Label'),
+          this.createComponentType('MultipleChoice'),
+          this.createComponentType('OpenResponse'),
+          this.createComponentType('Match')
+        ]
+      },
+      {
+        name: $localize`Experiment, Discover, Distinguish`,
+        types: [
+          this.createComponentType('Animation'),
+          this.createComponentType('AudioOscillator'),
+          this.createComponentType('Embedded'),
+          this.createComponentType('Graph'),
+          this.createComponentType('OutsideURL'),
+          this.createComponentType('Table')
+        ]
+      },
+      {
+        name: $localize`Collaborate`,
+        types: [
+          this.createComponentType('DialogGuidance'),
+          this.createComponentType('Discussion'),
+          this.createComponentType('PeerChat'),
+          this.createComponentType('ShowGroupWork')
+        ]
+      }
     ];
+
     if (this.isAiChatAllowed()) {
-      componentTypes.unshift({ type: 'AiChat', name: this.getComponentTypeLabel('AiChat') });
+      groups[2].types.unshift(this.createComponentType('AiChat'));
     }
-    return componentTypes;
+
+    return groups;
+  }
+
+  private createComponentType(componentType: string): any {
+    return {
+      type: componentType,
+      name: this.getComponentTypeLabel(componentType),
+      icon: this.getComponentTypeIcon(componentType)
+    };
+  }
+
+  getComponentTypeIcon(componentType: string): string {
+    return this.componentServiceLookupService.getService(componentType).getComponentTypeIcon();
   }
 
   getComponentTypeLabel(componentType: string): string {

@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.aws_key}}
-          aws-secret-access-key: ${{ secrets.aws_secret_key}}
+          aws-secret-access-key: ${{ secrets.aws_secret_key }}
           aws-region: us-west-1
       - name: Run CodeBuild
         id: code-build

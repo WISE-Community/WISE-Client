@@ -1,5 +1,48 @@
-<div class="component-summary mat-elevation-z1 app-background flex flex-col p-3">
-  <div class="notice !text-start flex justify-between gap-4">
+<ng-template #expandSummaryTpl let-type="type">
+  <button
+    matIconButton
+    class="!absolute top-0 end-0"
+    title="Expand summary"
+    i18n-title
+    (click)="expandSummary(type)"
+  >
+    <mat-icon>fullscreen</mat-icon>
+  </button>
+</ng-template>
+<ng-template #scoreSummary>
+  @if (showScoreSummary) {
+    <div>
+      <teacher-summary-display
+        [nodeId]="node.id"
+        [componentId]="component.id"
+        [periodId]="periodId"
+        [studentDataType]="'scores'"
+        [source]="source"
+        [chartType]="'column'"
+        [doRender]="true"
+        class="summary"
+      />
+    </div>
+  }
+</ng-template>
+<ng-template #ideasSummary>
+  <ng-container
+    [ngTemplateOutlet]="expandSummaryTpl"
+    [ngTemplateOutletContext]="{ type: 'ideas' }"
+  />
+  <ideas-summary
+    [nodeId]="node.id"
+    [componentId]="component.id"
+    [periodId]="periodId"
+    [studentDataType]="'responses'"
+    [source]="source"
+    [doRender]="true"
+    [componentType]="component.type"
+    class="summary"
+  />
+</ng-template>
+<div class="component-summary notice flex flex-col @container">
+  <div class="flex justify-between gap-4">
     <div>
       <div i18n>Prompt</div>
       @if (component.prompt) {
@@ -18,60 +61,94 @@
     <milestone-report-button [node]="node" [component]="component" [periodId]="periodId" />
     <peer-group-button [node]="node" [component]="component" />
   </div>
-  @if (hasSummaryData) {
-    <div class="flex flex-col sm:flex-row mt-3 gap-3">
-      @if (hasScoresSummary && hasScoreAnnotation) {
-        <teacher-summary-display
-          [nodeId]="node.id"
-          [componentId]="component.id"
-          [periodId]="periodId"
-          [studentDataType]="'scores'"
-          [source]="source"
-          [chartType]="'column'"
-          [doRender]="true"
-          class="w-full md:w-1/2"
-        />
-      }
-      @if (component?.type === 'MultipleChoice' && hasStudentWork) {
-        <teacher-summary-display
-          [nodeId]="node.id"
-          [componentId]="component.id"
-          [periodId]="periodId"
-          [studentDataType]="'responses'"
-          [source]="source"
-          [highlightCorrectAnswer]="hasCorrectAnswer"
-          [chartType]="component.choiceType === 'multiple' ? 'columnn' : 'pie'"
-          [doRender]="true"
-          class="w-full md:w-1/2"
-        />
-      }
-      @if (hasIdeaRubricData) {
-        <mat-card appearance="outlined" class="w-full">
-          <mat-card-content>
-            <ideas-summary
+  @if (showSummary) {
+    <div class="flex flex-col @2xl:grid @2xl:grid-cols-2 @5xl:grid-cols-3 mt-3 gap-3">
+      @if (component.type === 'Discussion') {
+        @if (aiEnabled) {
+          <div class="col-span-full">
+            <discussion-ai-summary
               [nodeId]="node.id"
               [componentId]="component.id"
               [periodId]="periodId"
-              [studentDataType]="'responses'"
-              [source]="source"
-              [doRender]="true"
-              [componentType]="component.type"
+              class="summary"
             />
-          </mat-card-content>
-        </mat-card>
-      }
-      @if (component?.type === 'Match') {
-        <mat-card appearance="outlined" class="w-full">
-          <mat-card-content>
-            <match-summary-display
+          </div>
+        }
+        <ng-container [ngTemplateOutlet]="scoreSummary" />
+        <div class="summary-content" [class.!col-span-full]="!showScoreSummary">
+          <ng-container
+            [ngTemplateOutlet]="expandSummaryTpl"
+            [ngTemplateOutletContext]="{ type: 'discussion' }"
+          />
+          <discussion-summary
+            [nodeId]="node.id"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [source]="source"
+            [doRender]="true"
+            class="summary"
+          />
+        </div>
+      } @else if (component.type === 'OpenResponse') {
+        @if (aiEnabled) {
+          <div
+            class="flex"
+            [class.summary-content]="showScoreSummary && !hasIdeaRubricData"
+            [class.order-2]="showScoreSummary && !hasIdeaRubricData"
+            [class.!col-span-full]="!showScoreSummary || hasIdeaRubricData"
+          >
+            <open-response-ai-summary
               [nodeId]="node.id"
               [componentId]="component.id"
               [periodId]="periodId"
-              [source]="source"
-              [doRender]="true"
+              class="summary"
             />
-          </mat-card-content>
-        </mat-card>
+          </div>
+        }
+        <ng-container [ngTemplateOutlet]="scoreSummary" />
+        @if (hasIdeaRubricData) {
+          <div class="summary-content" [class.!col-span-full]="!showScoreSummary">
+            <ng-container [ngTemplateOutlet]="ideasSummary" />
+          </div>
+        }
+      } @else if (component.type === 'Match') {
+        <ng-container [ngTemplateOutlet]="scoreSummary" />
+        <div class="summary-content" [class.!col-span-full]="!showScoreSummary">
+          <ng-container
+            [ngTemplateOutlet]="expandSummaryTpl"
+            [ngTemplateOutletContext]="{ type: 'match' }"
+          />
+          <match-summary-display
+            [nodeId]="node.id"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [source]="source"
+            [doRender]="true"
+            class="summary"
+          />
+        </div>
+      } @else if (component.type === 'MultipleChoice') {
+        <ng-container [ngTemplateOutlet]="scoreSummary" />
+        <div>
+          <teacher-summary-display
+            [nodeId]="node.id"
+            [componentId]="component.id"
+            [periodId]="periodId"
+            [studentDataType]="'responses'"
+            [source]="source"
+            [highlightCorrectAnswer]="hasCorrectAnswer"
+            [chartType]="component.choiceType === 'multiple' ? 'columnn' : 'pie'"
+            [doRender]="true"
+            class="summary"
+          />
+        </div>
+      } @else {
+        <ng-container [ngTemplateOutlet]="scoreSummary" />
+        @if (hasIdeaRubricData) {
+          <div class="summary-content" [class.!col-span-full]="!showScoreSummary">
+            <ng-container [ngTemplateOutlet]="ideasSummary" />
+          </div>
+        }
       }
     </div>
   }

@@ -3,18 +3,34 @@
   class="lesson flex grow"
   (opened)="toggleExpanded(true)"
   (closed)="toggleExpanded(false)"
+  cdkDrag
+  [cdkDragData]="{ type: 'group', id: lesson.id }"
+  (cdkDragStarted)="drag(true)"
+  (cdkDragEnded)="drag(false)"
+  [id]="lesson.id"
 >
   <mat-expansion-panel-header aria-label="Expand/collapse lesson" i18n-aria-label>
     <mat-panel-title>
-      <mat-checkbox
-        color="primary"
-        (change)="selectNode($event.checked)"
-        (click)="$event.stopPropagation()"
-        (keydown)="$event.stopPropagation()"
-        [disabled]="nodeTypeSelected() === 'step'"
-        aria-label="Select lesson"
-        i18n-aria-label
-      />
+      @if (batchEditMode) {
+        <mat-checkbox
+          color="primary"
+          (change)="selectNode($event.checked)"
+          (click)="$event.stopPropagation()"
+          (keydown)="$event.stopPropagation()"
+          [disabled]="nodeTypeSelected() === 'step'"
+          aria-label="Select lesson"
+          i18n-aria-label
+        />
+      } @else {
+        <mat-icon
+          cdkDragHandle
+          class="cursor-move me-2"
+          (click)="$event.stopPropagation()"
+          title="Drag to reorder"
+          i18n-title
+          >drag_indicator</mat-icon
+        >
+      }
       <node-icon-and-title [nodeId]="lesson.id" [showPosition]="showPosition" />
     </mat-panel-title>
     <mat-panel-description class="text flex justify-end items-center gap-1">
@@ -51,21 +67,33 @@
       </button>
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <div>
+  <div
+    class="ps-6 flex flex-col gap-1"
+    cdkDropList
+    [id]="lesson.id"
+    [cdkDropListData]="{ groupId: lesson.id, nodes: lesson.ids, idToNode: idToNode }"
+    cdkDropListLockAxis="y"
+    [cdkDropListConnectedTo]="allGroupIds"
+    [cdkDropListSortPredicate]="notAfterBranchingNode"
+    (cdkDropListDropped)="dropNode($event)"
+  >
     @for (childId of lesson.ids; track childId) {
       <div class="flex flex-row flex-wrap justify-start items-center">
         <project-authoring-step
+          [batchEditMode]="batchEditMode"
           [step]="idToNode[childId]"
           (selectNodeEvent)="selectNodeEvent.emit($event)"
           [showPosition]="showPosition"
           [projectId]="projectId"
-          class="flex grow"
+          class="grow"
+          (dragStarted)="drag(true)"
+          (dragEnded)="drag(false)"
         />
-        <add-step-button [nodeId]="childId" />
+        <add-step-button [nodeId]="childId" [class.hidden]="isDragging()" />
       </div>
     }
     @if (lesson.ids.length === 0) {
-      <div class="no-steps-message flex justify-start items-center">
+      <div class="px-2 flex justify-start items-center">
         <div i18n>This lesson has no steps</div>
         <button
           mat-icon-button
@@ -80,4 +108,5 @@
       </div>
     }
   </div>
+  <div class="drag-placeholder" *cdkDragPlaceholder></div>
 </mat-expansion-panel>

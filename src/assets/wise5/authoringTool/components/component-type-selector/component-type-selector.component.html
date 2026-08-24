@@ -10,8 +10,21 @@
   </button>
   <mat-form-field [subscriptSizing]="'dynamic'">
     <mat-select [(value)]="componentType" (selectionChange)="selectComponent(componentType)">
-      @for (componentTypeOption of componentTypes; track componentTypeOption.type) {
-        <mat-option [value]="componentTypeOption.type">{{ componentTypeOption.name }}</mat-option>
+      <mat-select-trigger>
+        <div class="flex items-center gap-2">
+          <mat-icon class="mat-18">{{ selectedComponentTypeOption?.icon }}</mat-icon>
+          {{ selectedComponentTypeOption?.name }}
+        </div>
+      </mat-select-trigger>
+      @for (group of componentGroups; track group.name) {
+        <mat-optgroup [label]="group.name">
+          @for (componentTypeOption of group.types; track componentTypeOption.type) {
+            <mat-option [value]="componentTypeOption.type">
+              <mat-icon class="mat-18">{{ componentTypeOption.icon }}</mat-icon>
+              {{ componentTypeOption.name }}
+            </mat-option>
+          }
+        </mat-optgroup>
       }
     </mat-select>
   </mat-form-field>

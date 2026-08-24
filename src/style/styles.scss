@@ -51,6 +51,10 @@ a {
   @include apps.apps-setup();
 }
 
+.cdk-overlay-container:has(.dialog-above) {
+  z-index: 2000;
+}
+
 $filled-input-bg: rgba(0, 0, 0, 0.04);
 
 // specify custom theme classes eg: <body class="common-styles default-theme"> ... </body>

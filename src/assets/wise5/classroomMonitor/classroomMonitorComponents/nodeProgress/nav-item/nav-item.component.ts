@@ -21,6 +21,7 @@ import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component
 import { NavItemScoreComponent } from '../navItemScore/nav-item-score.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
+import { TeamsOnNodeComponent } from '../../../../../../app/classroom-monitor/teams-on-node/teams-on-node.component';
 
 @Component({
   imports: [
@@ -34,7 +35,8 @@ import { CommonModule } from '@angular/common';
     NavItemProgressComponent,
     NavItemScoreComponent,
     NodeIconComponent,
-    StatusIconComponent
+    StatusIconComponent,
+    TeamsOnNodeComponent
   ],
   selector: 'nav-item',
   styleUrl: './nav-item.component.scss',
@@ -49,6 +51,7 @@ export class NavItemComponent implements OnInit {
   protected currentPeriod: any;
   private currentWorkgroup: any;
   protected expanded: boolean = false;
+  protected hasImportantComponent: boolean;
   protected hasRubrics: boolean;
   protected icon: any;
   private isCurrentNode: boolean;
@@ -92,9 +95,13 @@ export class NavItemComponent implements OnInit {
     this.currentPeriod = this.dataService.getCurrentPeriod();
     this.currentWorkgroup = this.dataService.getCurrentWorkgroup();
     this.maxScore = this.projectService.getMaxScoreForNode(this.nodeId);
-    this.icon = this.projectService.getNode(this.nodeId).getIcon();
+    const node = this.projectService.getNode(this.nodeId);
+    this.icon = node.getIcon();
     this.getAlertNotifications();
-    this.hasRubrics = this.projectService.getNode(this.nodeId).getNumRubrics() > 0;
+    this.hasRubrics = node.getNumRubrics() > 0;
+    this.hasImportantComponent = node
+      .getComponents()
+      .some((component) => component.tags?.includes('!important'));
     this.alertIconLabel = $localize`Has new alert(s)`;
     this.alertIconClass = 'warn';
     this.alertIconName = 'notifications';

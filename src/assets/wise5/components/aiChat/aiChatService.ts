@@ -1,25 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ComponentService } from '../componentService';
 import { AiChatMessage } from './AiChatMessage';
 import { AiChatMessageReponse } from './AiChatMessageResponse';
 import { ComputerAvatarService } from '../../services/computerAvatarService';
 
+
 @Injectable()
 export class AiChatService extends ComponentService {
-  constructor(protected computerAvatarService: ComputerAvatarService) {
-    super();
-  }
+  protected type: string = 'AiChat';
 
-  getComponentTypeLabel() {
-    return $localize`AI Chat`;
-  }
+  protected computerAvatarService = inject(ComputerAvatarService);
 
   createComponent(): any {
     const component: any = super.createComponent();
-    component.type = 'AiChat';
-    component.computerAvatarSettings = this.computerAvatarService.getDefaultComputerAvatarSettings();
+    component.type = this.type;
+    component.computerAvatarSettings =
+      this.computerAvatarService.getDefaultComputerAvatarSettings();
     component.isComputerAvatarEnabled = false;
-    component.model = 'gpt-4';
+    component.model = 'gpt-5.4-mini';
     component.systemPrompt = '';
     return component;
   }

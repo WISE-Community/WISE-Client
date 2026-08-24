@@ -4,14 +4,29 @@ import { SummaryDataPoint } from '../../summary-display/summary-data/SummaryData
  * Summary data for one choice in one bucket
  */
 export class MatchSummaryDataPoint extends SummaryDataPoint {
-  private bucketValue: string;
+  private choiceValue: string;
+  private workgroupIds: number[] = [];
 
-  constructor(id: number | string, count?: number, bucketValue?: string) {
+  constructor(id: number | string, count?: number, choiceValue?: string) {
     super(id, count);
-    this.bucketValue = bucketValue;
+    this.choiceValue = choiceValue;
+  }
+
+  getChoiceValue(): string {
+    return this.choiceValue;
   }
 
   getBucketValue(): string {
-    return this.bucketValue;
+    return this.getId() as string;
+  }
+
+  addWorkgroupId(workgroupId: number): void {
+    if (!this.workgroupIds.includes(workgroupId)) {
+      this.workgroupIds.push(workgroupId);
+    }
+  }
+
+  getWorkgroupIds(): number[] {
+    return this.workgroupIds;
   }
 }

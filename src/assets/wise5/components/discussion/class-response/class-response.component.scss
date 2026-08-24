@@ -1,6 +1,4 @@
 .class-response {
-  margin: 0 auto 16px;
-
   &.mat-mdc-card {
     padding: 0px;
   }
@@ -73,5 +71,9 @@
     &:focus {
       outline: none;
     }
+  }
+
+  .mat-icon {
+    vertical-align: top;
   }
 }

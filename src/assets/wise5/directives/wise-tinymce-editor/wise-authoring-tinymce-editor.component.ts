@@ -30,7 +30,7 @@ declare let tinymce: any;
   />`
 })
 export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorComponent {
-  protected toolbar: string = `undo redo | fontselect | formatselect | fontsizeselect |
+  protected toolbar: string = `undo redo | fontfamily | blocks | fontsize |
     bold italic underline | image media link wiselink | forecolor backcolor | alignment numlist bullist |
     emoticons removeformat fullscreen`;
   protected toolbarGroups: any = {
@@ -96,7 +96,7 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
 
   private openWISELinkChooser(): any {
     return this.dialog.open(WiseLinkAuthoringDialogComponent, {
-      width: '80%'
+      panelClass: 'dialog-lg'
     });
   }
 
@@ -107,7 +107,8 @@ export class WiseAuthoringTinymceEditorComponent extends WiseTinymceEditorCompon
           isPopup: true,
           allowedFileTypes: this.getAllowedFileTypesFromMeta(meta)
         },
-        width: '80%'
+        panelClass: 'dialog-lg',
+        backdropClass: 'dialog-above'
       })
       .afterClosed()
       .subscribe((result: any) => {

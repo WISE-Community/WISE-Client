@@ -57,6 +57,10 @@ export class Node {
     });
   }
 
+  getComponents(): any[] {
+    return this.components;
+  }
+
   getComponent(componentId: string): any {
     return this.components.find((component) => component.id === componentId);
   }
@@ -156,7 +160,7 @@ export class Node {
     this.components[this.getComponentIndex(componentId)] = component;
   }
 
-  private getComponentIndex(componentId: string): number {
+  getComponentIndex(componentId: string): number {
     return this.components.findIndex((component) => component.id === componentId);
   }
 
@@ -234,4 +238,19 @@ export class Node {
   getComponentPosition(componentId: string): number {
     return this.components.findIndex((component) => component.id === componentId);
   }
+}
+
+export function ensureDefaultIcon(nodes: Node[]): void {
+  nodes
+    .filter((node: Node) => !node.icon)
+    .forEach(
+      (node: Node) =>
+        (node.icon = {
+          color: '#00B0FF',
+          type: 'font',
+          fontSet: 'material-icons',
+          fontName: node.type === 'node' ? 'school' : 'dashboard',
+          imgSrc: ''
+        })
+    );
 }

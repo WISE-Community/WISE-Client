@@ -37,12 +37,26 @@
         <div class="mat-elevation-z1 app-background mt-4 mb-2">
           <mat-tab-group
             [selectedIndex]="selectedComponent.value"
-            (selectedIndexChange)="selectedComponent.setValue($event)"
+            (selectedIndexChange)="selectSummary($event)"
             mat-stretch-tabs="false"
             animationDuration="0"
           >
             @for (component of components; track component; let i = $index) {
-              <mat-tab label="{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}">
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  {{ i + 1 }}.&nbsp;
+                  <mat-icon class="mat-18">{{ getComponentTypeIcon(component.type) }}</mat-icon>
+                  &nbsp;{{ getComponentTypeLabel(component.type) }}
+                  @if (component.tags?.includes('!important')) {
+                    &nbsp;<mat-icon
+                      color="primary"
+                      matTooltip="Bookmarked activity"
+                      matTooltipPosition="above"
+                      i18n-matTooltip
+                      >bookmark</mat-icon
+                    >
+                  }
+                </ng-template>
                 <ng-template matTabContent>
                   <component-summary [component]="component" [node]="node" [periodId]="periodId" />
                 </ng-template>
@@ -54,11 +68,19 @@
     </div>
     <div class="flex gap-2 items-center flex-wrap mt-4 mb-2 mx-2">
       <h3 class="mat-body-1" i18n>Class Responses</h3>
-      <filter-components
-        [components]="components"
-        (componentsChange)="setVisibleComponents($event)"
-      />
+      @if (classResponsesVisible) {
+        <filter-components
+          [components]="components"
+          [selectedComponents]="visibleComponents"
+          (componentsChange)="setVisibleComponents($event)"
+        />
+        <a href="#" class="mat-caption" (click)="toggleClassResponses($event)" i18n>Hide</a>
+      } @else {
+        <a href="#" class="mat-caption" (click)="toggleClassResponses($event)" i18n>Show</a>
+      }
     </div>
-    <node-class-responses [node]="node" [components]="visibleComponents" />
+    @if (classResponsesVisible) {
+      <node-class-responses [node]="node" [components]="visibleComponents" />
+    }
   </div>
 </div>

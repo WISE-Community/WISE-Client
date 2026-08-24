@@ -4,13 +4,12 @@ import { MatchContent } from './MatchContent';
 
 @Injectable()
 export class MatchService extends ComponentService {
-  getComponentTypeLabel(): string {
-    return $localize`Match`;
-  }
+  protected type: string = 'Match';
+
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'Match';
+    component.type = this.type;
     component.choices = [];
     component.choiceReuseEnabled = false;
     component.buckets = [];

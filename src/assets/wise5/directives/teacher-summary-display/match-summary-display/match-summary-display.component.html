@@ -1,60 +1,130 @@
-<ng-template #bucketTemplate let-bucket="bucket" let-first="first">
-  <div class="bucket" [ngClass]="{ 'selected-bg-bg': first, 'notice-bg-bg': !first }">
+<ng-template #bucketTemplate let-bucket="bucket">
+  <div class="bucket-card notice-bg-bg">
     <h3 class="mat-body-2">
-      {{ bucket.value }}
-      @if (first) {
-        (<span i18n>Source Bucket</span>)
-      }
+      <mat-icon class="mat-18 align-sub" aria-label="Bucket" i18n-aria-label>inventory_2</mat-icon
+      >&nbsp;<span [innerHTML]="bucket.value"></span>
     </h3>
     <ul>
       @for (choice of bucket.choices; track $index) {
-        @if ($index < 3 || getBucketShowMore(bucket.value) || first) {
-          <li>
-            <div class="choice">
-              <div [innerHTML]="choice.getId()"></div>
-              @if (!isChoiceReuseMatch || !first) {
-                <div class="shrink-0">
-                  (<mat-icon class="mat-18">person</mat-icon>{{ choice.getCount() }})
-                </div>
-              }
-            </div>
-          </li>
-        }
-      }
-      @if (bucket.choices.length > 3 && !first) {
-        <a href="#" class="text-sm px-1" (click)="toggleBucketShowMore(bucket.value, $event)">
-          @if (getBucketShowMore(bucket.value)) {
-            <span i18n>Show less</span>
-          } @else {
-            <span i18n>Show more</span>
-          }
-        </a>
+        <li>
+          <div class="choice-row">
+            <mat-icon class="mat-18 shrink-0 mt-0.25" aria-label="Item" i18n-aria-label
+              >crop_16_9</mat-icon
+            >
+            <span class="flex-1" [innerHTML]="choice.getChoiceValue()"></span>
+            @if (!isChoiceReuseMatch) {
+              <span
+                class="shrink-0 cursor-pointer"
+                [matTooltip]="workgroupNamesTooltips.get(choice)"
+                matTooltipClass="multiline-tooltip"
+                matTooltipPosition="above"
+                tabindex="0"
+              >
+                <mat-icon class="mat-18 align-middle">person</mat-icon>{{ choice.getCount() }}
+              </span>
+            }
+          </div>
+        </li>
       }
     </ul>
   </div>
 </ng-template>
 
-<h2 class="mat-subtitle-1" i18n>Choice Frequency</h2>
-@if (bucketData.length > 0) {
-  <p i18n>Number of teams that moved each item (choice) into the different buckets (categories).</p>
-  <div class="columns-3xs gap-2">
-    <ng-container
-      [ngTemplateOutlet]="bucketTemplate"
-      [ngTemplateOutletContext]="{ bucket: bucketData[0], first: true }"
-    />
-    @for (bucket of bucketData; track $index) {
-      @if ($index > 0) {
-        <div class="break-inside-avoid">
-          <ng-container
-            [ngTemplateOutlet]="bucketTemplate"
-            [ngTemplateOutletContext]="{ bucket: bucket, first: false }"
-          />
-        </div>
-      }
+<ng-template #choiceTemplate let-choice="choice">
+  <div
+    class="choice-card notice-bg-bg"
+    [class.secondary-text]="choice.choiceDataPoints.length === 0"
+  >
+    <h3 class="mat-body-2">
+      <mat-icon class="mat-18 align-sub" aria-label="Item" i18n-aria-label>crop_16_9</mat-icon
+      >&nbsp;<span [innerHTML]="choice.choiceValue"></span>
+    </h3>
+    @if (choice.choiceDataPoints.length > 0) {
+      <ul>
+        @for (bucketDataPoint of choice.choiceDataPoints; track $index) {
+          <li>
+            <div class="bucket-row">
+              <mat-icon class="mat-18 shrink-0 mt-0.25" aria-label="Bucket" i18n-aria-label
+                >inventory_2</mat-icon
+              >
+              <span class="flex-1" [innerHTML]="bucketDataPoint.getBucketValue()"></span>
+              <span
+                class="shrink-0 cursor-pointer"
+                [matTooltip]="workgroupNamesTooltips.get(bucketDataPoint)"
+                matTooltipClass="multiline-tooltip"
+                matTooltipPosition="above"
+                tabindex="0"
+              >
+                <mat-icon class="mat-18 align-middle">person</mat-icon
+                >{{ bucketDataPoint.getCount() }}
+              </span>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <div class="bucket-row !justify-start">
+        <mat-icon class="mat-18 mt-0.25">do_not_disturb</mat-icon>
+        <span i18n>Not moved by any students</span>
+      </div>
     }
   </div>
-} @else {
-  <div class="notice" i18n>
-    Your students' choices will show up here when they complete the activity.
-  </div>
-}
+</ng-template>
+
+<div [class.expanded]="expanded">
+  <h2 class="mat-subtitle-1" i18n>Choice Frequency</h2>
+  @if (choiceData.length > 0) {
+    <div class="flex gap-2 flex-wrap justify-between items-center">
+      <p class="!mt-0" i18n>
+        Number of times each item <mat-icon class="mat-18 align-sub">crop_16_9</mat-icon> was moved
+        into the different buckets <mat-icon class="mat-18 align-sub">inventory_2</mat-icon>.
+      </p>
+      <div class="flex gap-2 items-center">
+        <span i18n>Organize by:</span>
+        <mat-button-toggle-group
+          [hideSingleSelectionIndicator]="true"
+          [value]="viewMode"
+          (change)="viewMode = $event.value"
+          aria-label="Organize by"
+          i18n-aria-label
+        >
+          <mat-button-toggle value="bucket" aria-label="Organize by bucket" i18n-aria-label>
+            <mat-icon class="mat-18">inventory_2</mat-icon>&nbsp;
+            <span i18n>Bucket</span>
+          </mat-button-toggle>
+          <mat-button-toggle value="choice" aria-label="Organize by choice" i18n-aria-label>
+            <mat-icon class="mat-18">crop_16_9</mat-icon>&nbsp;
+            <span i18n>Item</span>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <div class="max-h-160 overflow-y-auto @container" [class.max-h-none]="expanded">
+      <div class="columns-1 @xl:columns-2 @4xl:columns-3 gap-2 mt-2">
+        @if (viewMode === 'bucket') {
+          @for (bucket of bucketData; track $index) {
+            <div class="break-inside-avoid">
+              <ng-container
+                [ngTemplateOutlet]="bucketTemplate"
+                [ngTemplateOutletContext]="{ bucket: bucket, first: false }"
+              />
+            </div>
+          }
+        } @else {
+          @for (choice of choiceData; track $index) {
+            <div class="break-inside-avoid">
+              <ng-container
+                [ngTemplateOutlet]="choiceTemplate"
+                [ngTemplateOutletContext]="{ choice: choice }"
+              />
+            </div>
+          }
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="notice" i18n>
+      Your students' choices will show up here when they complete the activity.
+    </div>
+  }
+</div>

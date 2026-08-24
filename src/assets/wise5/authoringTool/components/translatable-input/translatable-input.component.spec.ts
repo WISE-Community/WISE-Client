@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ConfigService } from '../../../services/configService';
 import { MockProviders } from 'ng-mocks';
 import { ProjectLocale } from '../../../../../app/domain/projectLocale';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -12,7 +13,9 @@ describe('TranslatableInputComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TranslatableInputComponent],
-      providers: [MockProviders(TeacherProjectService, TeacherProjectTranslationService)]
+      providers: [
+        MockProviders(ConfigService, TeacherProjectService, TeacherProjectTranslationService)
+      ]
     });
     const projectService = TestBed.inject(TeacherProjectService);
     spyOn(projectService, 'getLocale').and.returnValue(new ProjectLocale({ default: 'en-US' }));

@@ -1,20 +1,10 @@
 <div class="node-authoring-header flex flex-row flex-wrap justify-start items-start gap-4">
   <teacher-node-icon [nodeId]="nodeId" [canEdit]="true" size="18" />
   <edit-node-title [node]="node" />
-  <button
-    class="enable-in-translation"
-    mat-raised-button
-    color="primary"
-    routerLink="advanced"
-    matTooltip="Advanced"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    <mat-icon>build</mat-icon>
-  </button>
+  <edit-node-advanced-button [nodeId]="nodeId" />
 </div>
 @if (components.length === 0 && !isGroupNode) {
-  <p i18n>This step does not have any components.</p>
+  <p i18n>This step does not have any activities.</p>
   <add-component [node]="node" (newComponentsEvent)="highlightComponents($event)" />
 }
 <div
@@ -31,28 +21,26 @@
   @for (component of components; track component.id; let i = $index; let last = $last) {
     <div cdkDrag [cdkDragDisabled]="components.length < 2">
       <div class="flex flex-row">
-        <mat-card
-          [id]="component.id"
-          class="component w-full"
-          [ngClass]="{ 'component-editing': component.id === editingComponentId }"
-        >
-          <div
-            class="component-header flex flex-row justify-start items-center"
-            [ngClass]="{ 'selected-bg-bg': component.id === editingComponentId }"
-          >
+        <mat-card [id]="component.id" class="component w-full min-w-0">
+          <div class="component-header flex flex-row justify-start items-center">
             <div class="flex flex-row justify-start items-center gap-2">
               @if (components.length > 1) {
                 <mat-icon class="drag-handle" cdkDragHandle title="Drag to reorder" i18n-title
                   >drag_indicator</mat-icon
                 >
               }
-              <span class="heavy">{{ i + 1 }}. {{ getComponentTypeLabel(component.type) }}</span>
+              <span class="heavy flex items-center gap-1">
+                {{ i + 1 }}.
+                <mat-icon class="mat-18">{{ getComponentTypeIcon(component.type) }}</mat-icon>
+                {{ getComponentTypeLabel(component.type) }}
+              </span>
             </div>
+            <toggle-component-tag [component]="component" />
+            @if (hasVisibilityConstraint(component)) {
+              <visibility-constraint-icon [componentContent]="component" [nodeId]="nodeId" />
+            }
             <span class="flex grow"></span>
             <div class="text flex justify-end items-center">
-              @if (component.id === editingComponentId) {
-                <edit-component-advanced-button [componentContent]="component" [nodeId]="nodeId" />
-              }
               <copy-component-button
                 [node]="node"
                 [componentId]="component.id"
@@ -62,7 +50,7 @@
                 mat-icon-button
                 (click)="$event.stopPropagation(); deleteComponent($event, i + 1, component)"
                 (keydown)="$event.stopPropagation()"
-                matTooltip="Delete Component"
+                matTooltip="Delete activity"
                 matTooltipPosition="above"
                 i18n-matTooltip
               >
@@ -72,12 +60,7 @@
           </div>
           <mat-divider />
           <div>
-            <component-authoring
-              [nodeId]="nodeId"
-              [componentContent]="component"
-              [editing]="component.id === editingComponentId"
-              (editComponentEvent)="editComponent(component.id)"
-            />
+            <component-authoring [nodeId]="nodeId" [componentContent]="component" />
           </div>
         </mat-card>
         <div class="flex flex-col">

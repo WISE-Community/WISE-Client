@@ -6,21 +6,15 @@ import { ConfigService } from '../../services/configService';
 import { StudentAssetService } from '../../services/studentAssetService';
 import ConceptMapNode from './conceptMapNode';
 import ConceptMapLink from './conceptMapLink';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { convertToPNGFile } from '../../common/canvas/canvas';
 
 @Injectable()
 export class ConceptMapService extends ComponentService {
-  constructor(
-    private ConfigService: ConfigService,
-    private StudentAssetService: StudentAssetService
-  ) {
-    super();
-  }
+  protected type: string = 'ConceptMap';
 
-  getComponentTypeLabel(): string {
-    return $localize`Concept Map`;
-  }
+  private ConfigService = inject(ConfigService);
+  private StudentAssetService = inject(StudentAssetService);
 
   getSVGId(domIdEnding: string): string {
     return this.getElementId('svg', domIdEnding);
@@ -40,7 +34,7 @@ export class ConceptMapService extends ComponentService {
 
   createComponent() {
     const component: any = super.createComponent();
-    component.type = 'ConceptMap';
+    component.type = this.type;
     component.width = 800;
     component.height = 600;
     component.background = null;

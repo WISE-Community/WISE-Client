@@ -47,7 +47,7 @@ export class EditComponentTagsComponent {
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(({ tagIndex, tag }) => {
         this.componentContent.tags[tagIndex] = tag;
-        this.projectService.componentChanged();
+        this.projectService.saveProject();
       });
   }
 
@@ -60,7 +60,7 @@ export class EditComponentTagsComponent {
       this.componentContent.tags = [];
     }
     this.componentContent.tags.push('');
-    this.projectService.componentChanged();
+    this.projectService.saveProject();
   }
 
   moveTagUp(index: number): void {
@@ -68,7 +68,7 @@ export class EditComponentTagsComponent {
       const tag = this.componentContent.tags[index];
       this.componentContent.tags.splice(index, 1);
       this.componentContent.tags.splice(index - 1, 0, tag);
-      this.projectService.componentChanged();
+      this.projectService.saveProject();
     }
   }
 
@@ -77,14 +77,14 @@ export class EditComponentTagsComponent {
       const tag = this.componentContent.tags[index];
       this.componentContent.tags.splice(index, 1);
       this.componentContent.tags.splice(index + 1, 0, tag);
-      this.projectService.componentChanged();
+      this.projectService.saveProject();
     }
   }
 
   deleteTag(indexOfTagToDelete: number): void {
     if (confirm($localize`Are you sure you want to delete this tag?`)) {
       this.componentContent.tags.splice(indexOfTagToDelete, 1);
-      this.projectService.componentChanged();
+      this.projectService.saveProject();
     }
   }
 }

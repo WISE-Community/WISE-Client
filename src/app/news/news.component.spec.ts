@@ -1,9 +1,12 @@
+import { ActivatedRoute } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockProvider } from 'ng-mocks';
 import { NewsComponent } from './news.component';
 import { NewsService } from '../services/news.service';
 import { News } from '../domain/news';
 import { Observable } from 'rxjs';
 import { User } from '../domain/user';
+import { UserService } from '../services/user.service';
 
 const createNewsItem = (id, date, type, title, news, owner) => {
   return new News({
@@ -36,7 +39,7 @@ const news2Text =
   'We have been working on a new portal website. The new website will have a more modern user interface.';
 
 export class MockNewsService {
-  getAllNews(): Observable<News[]> {
+  getNewsPageNews(): Observable<News[]> {
     return new Observable((observer) => {
       const allNewsItems: News[] = [];
       const user1 = createUser(100, 'Spongebob', 'Squarepants', 'Spongebob Squarepants');
@@ -73,9 +76,16 @@ describe('NewsComponent', () => {
   };
 
   beforeEach(() => {
+    const userServiceSpy = jasmine.createSpyObj<UserService>(['isSignedIn']);
+    userServiceSpy.isSignedIn.and.callFake(() => true);
+
     TestBed.configureTestingModule({
       imports: [NewsComponent],
-      providers: [{ provide: NewsService, useClass: MockNewsService }]
+      providers: [
+        { provide: NewsService, useClass: MockNewsService },
+        { provide: UserService, useValue: userServiceSpy },
+        MockProvider(ActivatedRoute)
+      ]
     });
     fixture = TestBed.createComponent(NewsComponent);
     component = fixture.componentInstance;

@@ -1,15 +1,36 @@
+@reference "tailwindcss";
+
 .discussion-content {
-  padding: 16px;
+  @apply rounded-md;
 }
 
-.discussion-new__input-container {
-  width: 100%;
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-  .mat-form-field-infix {
-    border-top: 0em;
+.discussion-posts-wrap {
+  @apply flex p-4 @container;
+}
+
+.discussion-posts {
+  @apply w-full grid @2xl:grid-cols-2 gap-3;
+}
+
+.discussion-posts {
+  grid-auto-rows: 1px;
+  align-items: start;
+}
+
+@supports (grid-template-rows: masonry) {
+  .discussion-posts {
+    grid-template-rows: masonry;
   }
 }
 
-.mat-icon {
-  margin: 0px !important;
+@supports (display: grid-lanes) {
+  .discussion-posts {
+    display: grid-lanes;
+  }
+}
+
+.component__attachment {
+  margin: 8px 0 0 !important;
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
 }

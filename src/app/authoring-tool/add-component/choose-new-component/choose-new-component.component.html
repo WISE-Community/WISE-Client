@@ -1,20 +1,21 @@
-<h2 mat-dialog-title i18n>Add New Component</h2>
-<mat-dialog-content>
+<h2 mat-dialog-title i18n>Add New Activity</h2>
+<mat-dialog-content class="@container">
   <p class="flex flex-wrap justify-start items-center gap-2">
-    <span i18n>Select the component type you want to add or</span>
+    <span i18n>Select the activity you want to add or</span>
     <button mat-raised-button color="primary" (click)="goToImportComponent()" i18n>
       import from another unit
     </button>
   </p>
-  <div class="flex flex-wrap justify-start items-center">
-    @for (componentType of componentTypes; track componentType.type) {
-      <component-type-button
-        [componentType]="componentType.type"
-        (componentSelectedEvent)="selectComponent(componentType.type)"
+  <div class="@lg:columns-2 @2xl:columns-3 @4xl:columns-4 gap-2">
+    @for (componentGroup of componentGroups; track componentGroup.name) {
+      <component-type-group
+        class="mb-2 block break-inside-avoid-column"
+        [componentGroup]="componentGroup"
+        (componentSelectedEvent)="selectComponent($event.type)"
       />
     }
   </div>
 </mat-dialog-content>
-<mat-dialog-actions class="flex justify-end items-center">
+<mat-dialog-actions align="end">
   <button mat-button color="primary" (click)="cancel()" i18n>Cancel</button>
 </mat-dialog-actions>

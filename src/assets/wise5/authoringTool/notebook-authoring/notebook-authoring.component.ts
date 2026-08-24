@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { WiseAuthoringTinymceEditorComponent } from '../../directives/wise-tinymce-editor/wise-authoring-tinymce-editor.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   imports: [
@@ -24,6 +25,7 @@ import { WiseAuthoringTinymceEditorComponent } from '../../directives/wise-tinym
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
+    MatTabsModule,
     TranslatableInputComponent,
     TranslatableRichTextEditorComponent,
     TranslatableTextareaComponent,

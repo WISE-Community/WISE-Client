@@ -15,12 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { WiseLinkComponent } from '../../../../directives/wise-link/wise-link.component';
-import { CommonModule } from '@angular/common';
+
 import { DragAndDropDirective } from '../../../../common/drag-and-drop/drag-and-drop.directive';
 
 @Component({
   imports: [
-    CommonModule,
     DragAndDropDirective,
     FormsModule,
     MatButtonModule,

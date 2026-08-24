@@ -48,6 +48,15 @@
   [componentContent]="componentContent"
   (promptChangedEvent)="promptChanged($event)"
 />
+<mat-form-field>
+  <mat-label i18n>Model</mat-label>
+  <mat-select [(ngModel)]="componentContent.model" (ngModelChange)="this.componentChanged()">
+    @for (model of models; track model) {
+      <mat-option [value]="model">{{ model }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+<br />
 <mat-checkbox
   color="primary"
   class="enable-computer-avatar-checkbox"

@@ -14,9 +14,11 @@ import { EditComponentPrompt } from '../../../../../app/authoring-tool/edit-comp
 import { TranslatableAssetChooserComponent } from '../../../authoringTool/components/translatable-asset-chooser/translatable-asset-chooser.component';
 import { TranslatableInputComponent } from '../../../authoringTool/components/translatable-input/translatable-input.component';
 import { Choice } from '../Choice';
+import { AddMCChoiceComponent } from '../add-mc-choice/add-mc-choice.component';
 
 @Component({
   imports: [
+    AddMCChoiceComponent,
     FormsModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -36,6 +38,7 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
   protected feedbackTextChange: Subject<string> = new Subject<string>();
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.subscriptions.add(
       this.choiceTextChange.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(() => {
         this.componentChanged();
@@ -66,8 +69,12 @@ export class MultipleChoiceAuthoring extends AbstractComponentAuthoring {
     return false;
   }
 
-  protected addChoice(): void {
-    this.componentContent.choices.push(new Choice(generateRandomKey(), '', false, ''));
+  protected addChoice(position: number): void {
+    this.componentContent.choices.splice(
+      position,
+      0,
+      new Choice(generateRandomKey(), '', false, '')
+    );
     this.componentChanged();
   }
 

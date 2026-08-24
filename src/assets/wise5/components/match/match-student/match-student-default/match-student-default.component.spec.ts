@@ -7,6 +7,8 @@ import { ClickToSnipImageService } from '../../../../services/clickToSnipImageSe
 import { ProjectService } from '../../../../services/projectService';
 import { MatchStudentDefaultComponent } from './match-student-default.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { CRaterService } from '../../../../services/cRaterService';
+import { CRaterRubric } from '../../../common/cRater/CRaterRubric';
 
 let component: MatchStudentDefaultComponent;
 let fixture: ComponentFixture<MatchStudentDefaultComponent>;
@@ -463,10 +465,16 @@ function createMergedComponentState() {
         }
       };
       expect(component.buckets[0].items.length).toEqual(3);
+      spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(
+        new CRaterRubric({
+          ideas: [{ name: '1', text: '1 description' }]
+        })
+      );
       component.createMergedComponentState([componentState]);
-      expect(component.buckets[0].items.length).toEqual(5);
-      expect(component.buckets[0].items[3].value).toEqual('1');
-      expect(component.buckets[0].items[4].value).toEqual('3');
+      // even though 1 and 3 were detected, only idea 1 should be added to the source bucket
+      // because 3 is not in the rubric
+      expect(component.buckets[0].items.length).toEqual(4);
+      expect(component.buckets[0].items[3].value).toEqual('1 description');
     });
   });
 }

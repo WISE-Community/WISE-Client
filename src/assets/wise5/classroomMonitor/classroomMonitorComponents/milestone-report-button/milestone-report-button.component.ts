@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MilestoneDetailsDialogComponent } from '../milestones/milestone-details-dialog/milestone-details-dialog.component';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule],
   selector: 'milestone-report-button',
   templateUrl: './milestone-report-button.component.html'
 })

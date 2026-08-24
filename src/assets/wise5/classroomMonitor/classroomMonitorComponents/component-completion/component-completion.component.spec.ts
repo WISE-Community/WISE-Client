@@ -8,6 +8,8 @@ import { MultipleChoiceService } from '../../../components/multipleChoice/multip
 import { ComponentCompletionComponent } from './component-completion.component';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 
+import { ComponentInfoService } from '../../../services/componentInfoService';
+
 let component: ComponentCompletionComponent;
 let fixture: ComponentFixture<ComponentCompletionComponent>;
 let workgroupService: WorkgroupService;
@@ -21,11 +23,12 @@ describe('ComponentCompletionComponent', () => {
       providers: [
         MockProviders(
           ClassroomStatusService,
+          ComponentInfoService,
           ComponentServiceLookupService,
-          MultipleChoiceService,
           TeacherDataService,
           WorkgroupService
-        )
+        ),
+        MultipleChoiceService
       ]
     }).compileComponents();
 
@@ -50,7 +53,7 @@ function ngOnChanges() {
       workgroups.set(2, {});
       spyOn(workgroupService, 'getWorkgroupsInPeriod').and.returnValue(workgroups);
       spyOn(componentServiceLookupService, 'getService').and.returnValue(
-        new MultipleChoiceService()
+        TestBed.inject(MultipleChoiceService)
       );
       spyOn(classroomStatusService, 'hasStudentStatus').and.returnValue(true);
     });
