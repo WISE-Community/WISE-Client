@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ConfigService } from '../../services/configService';
+import { CopyProjectService } from '../../services/copyProjectService';
+import { DialogWithCloseComponent } from '../../directives/dialog-with-close/dialog-with-close.component';
+import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterModule } from '@angular/router';
 import { scrollToTopOfPage, temporarilyHighlightElement } from '../../common/dom/dom';
-import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
-import { ConfigService } from '../../services/configService';
-import { CopyProjectService } from '../../services/copyProjectService';
 import { SessionService } from '../../services/sessionService';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatListModule } from '@angular/material/list';
 
 @Component({
   imports: [
@@ -105,9 +106,40 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     });
   }
 
-  protected openProject(projectId: number): void {
+  protected openProject(projectId: number, runId?: number): void {
     this.showMessageInModalDialog($localize`Loading Unit...`);
     this.router.navigate([`/teacher/edit/unit/${projectId}`]);
+    const contactPageLink = this.getContactPageLink(projectId, runId);
+    this.startTimer(contactPageLink);
+  }
+
+  private getContactPageLink(projectId: number, runId?: number): string {
+    let link = this.configService.getWISEBaseURL();
+    link += `/contact?authoringFailed=true&projectId=${projectId}`;
+    if (runId) {
+      link += `&runId=${runId}`;
+    }
+    return link;
+  }
+
+  private startTimer(link: string): void {
+    let seconds = 10;
+    const timer = setInterval(() => {
+      seconds--;
+      if (seconds <= 0) {
+        clearInterval(timer);
+        this.dialog.closeAll();
+        this.openContactPageLinkDialog(link);
+      }
+    }, 1000);
+  }
+
+  private openContactPageLinkDialog(link: string): void {
+    this.dialog.open(DialogWithCloseComponent, {
+      data: {
+        title: `<a href="${link}">${$localize`Having trouble loading unit? Contact WISE staff.`}</a>`
+      }
+    });
   }
 
   protected previewProject(projectId: number): void {
