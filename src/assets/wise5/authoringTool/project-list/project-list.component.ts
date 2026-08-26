@@ -108,9 +108,14 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   protected openProject(projectId: number, runId?: number): void {
     this.showMessageInModalDialog($localize`Loading Unit...`);
-    this.router.navigate([`/teacher/edit/unit/${projectId}`]);
     const contactPageLink = this.getContactPageLink(projectId, runId);
-    this.startTimer(contactPageLink);
+    const timer = this.startTimer(contactPageLink);
+    this.router.navigate([`/teacher/edit/unit/${projectId}`]).then((navigated) => {
+      if (navigated) {
+        clearInterval(timer);
+        this.dialog.closeAll();
+      }
+    });
   }
 
   private getContactPageLink(projectId: number, runId?: number): string {
@@ -122,12 +127,11 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     return link;
   }
 
-  private startTimer(link: string): void {
+  private startTimer(link: string): NodeJS.Timeout {
     let seconds = 10;
-    const timer = setInterval(() => {
+    return setInterval(() => {
       seconds--;
-      if (seconds <= 0) {
-        clearInterval(timer);
+      if (seconds === 0) {
         this.dialog.closeAll();
         this.openContactPageLinkDialog(link);
       }
