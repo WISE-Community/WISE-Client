@@ -5,7 +5,7 @@ import { ConfigService } from '../services/config.service';
 @Directive()
 export abstract class RegisterUserCompleteComponent implements OnInit {
   protected googleLogInURL = `${this.configService.getContextPath()}/oauth2/authorization/google`;
-  protected microsoftLogInURL = `${this.configService.getContextPath()}/api/microsoft-login?redirectUrl=/`;
+  protected microsoftLogInURL = `${this.configService.getContextPath()}/oauth2/authorization/microsoft`;
   protected socialAccount: boolean;
   protected isUsingGoogleId: boolean;
   protected isUsingMicrosoftId: boolean;

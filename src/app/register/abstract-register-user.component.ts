@@ -44,7 +44,7 @@ export abstract class AbstractRegisterUserComponent implements OnInit {
   }
 
   protected microsoftSignIn(): void {
-    window.location.href = `/api/microsoft-login?redirectUrl=${this.joinFormPath}`;
+    window.location.href = `/oauth2/authorization/microsoft?redirectUrl=${this.joinFormPath}`;
   }
 
   protected abstract getFormParams(): any;
