@@ -97,11 +97,12 @@
     </button>
   }
 </div>
-<div id="canvasParent_{{ canvasId }}" class="label-canvas-container">
+<div id="canvasParent_{{ canvasId }}">
   <canvas id="{{ canvasId }}" class="label-canvas" width="800" height="600"></canvas>
 </div>
 @if (isSaveOrSubmitButtonVisible) {
   <component-save-submit-buttons
+    class="block mt-3"
     [componentState]="latestComponentState"
     [isDirty]="isDirty"
     [isDisabled]="isDisabled"

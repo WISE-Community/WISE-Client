@@ -30,7 +30,6 @@ import { ConstraintService } from '../../../services/constraintService';
 import { applyMixins } from '../../../common/apply-mixins';
 import { ComputerAvatarInitializer } from '../../../common/computer-avatar/computer-avatar-initializer';
 import { ComputerAvatarSelectorComponent } from '../../../vle/computer-avatar-selector/computer-avatar-selector.component';
-import { MatCardModule } from '@angular/material/card';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { DialogResponsesComponent } from '../dialog-responses/dialog-responses.component';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
@@ -41,8 +40,7 @@ import { CRaterPingService } from '../../../services/cRaterPingService';
     ChatInputComponent,
     ComponentHeaderComponent,
     ComputerAvatarSelectorComponent,
-    DialogResponsesComponent,
-    MatCardModule
+    DialogResponsesComponent
   ],
   providers: [CRaterPingService, DialogGuidanceFeedbackService],
   selector: 'dialog-guidance-student',

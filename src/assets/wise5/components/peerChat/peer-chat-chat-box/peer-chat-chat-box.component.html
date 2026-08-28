@@ -1,28 +1,25 @@
-<mat-card appearance="outlined" class="chat-box mat-elevation-z2">
-  <peer-chat-members [peerChatWorkgroupInfos]="workgroupInfosWithoutTeachers" />
-  @if (messages.length > 0) {
-    <peer-chat-messages
-      [peerChatMessages]="messages"
-      [myWorkgroupId]="myWorkgroupId"
-      [workgroupInfos]="workgroupInfos"
-      [isGrading]="isGrading"
-      (deleteClickedEvent)="deleteClicked($event)"
-      (undeleteClickedEvent)="undeleteClicked($event)"
-    />
-  }
-  @if (isEnabled) {
-    <peer-chat-message-input
-      [component]="component"
-      [messageText]="response"
-      [peerGroup]="peerGroup"
-      (onSubmit)="submitResponse($event)"
-      (responseChangedEvent)="responseChanged($event)"
-    />
-  }
-  <peer-chat-member-typing-indicator
-    [component]="component"
+@if (messages.length > 0) {
+  <peer-chat-messages
+    [peerChatMessages]="messages"
     [myWorkgroupId]="myWorkgroupId"
-    [peerGroup]="peerGroup"
-    class="mat-caption secondary-text"
+    [workgroupInfos]="workgroupInfos"
+    [isGrading]="isGrading"
+    (deleteClickedEvent)="deleteClicked($event)"
+    (undeleteClickedEvent)="undeleteClicked($event)"
   />
-</mat-card>
+}
+@if (isEnabled) {
+  <peer-chat-message-input
+    [component]="component"
+    [messageText]="response"
+    [peerGroup]="peerGroup"
+    (onSubmit)="submitResponse($event)"
+    (responseChangedEvent)="responseChanged($event)"
+  />
+}
+<peer-chat-member-typing-indicator
+  [component]="component"
+  [myWorkgroupId]="myWorkgroupId"
+  [peerGroup]="peerGroup"
+  class="mat-caption secondary-text"
+/>

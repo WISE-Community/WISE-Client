@@ -11,7 +11,7 @@ import { TranslatableInputComponent } from '../translatable-input/translatable-i
     <translatable-input
       [content]="componentContent"
       [hasClearButton]="true"
-      key="title"
+      key="componentTitle"
       label="Activity Title"
       i18n-label
       (defaultLanguageTextChanged)="titleChanged($event)"
@@ -23,7 +23,7 @@ export class EditComponentTitleComponent {
   private projectService = inject(TeacherProjectService);
 
   titleChanged(title: string): void {
-    this.componentContent.title = title;
+    this.componentContent.componentTitle = title;
     this.projectService.saveProject();
   }
 }

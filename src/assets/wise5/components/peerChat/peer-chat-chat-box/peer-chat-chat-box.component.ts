@@ -1,17 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PeerChatMessage } from '../PeerChatMessage';
 import { PeerChatComponent } from '../PeerChatComponent';
 import { PeerGroup } from '../PeerGroup';
-import { MatCardModule } from '@angular/material/card';
-import { PeerChatMembersComponent } from '../peer-chat-members/peer-chat-members.component';
 import { PeerChatMessagesComponent } from '../peer-chat-messages/peer-chat-messages.component';
 import { PeerChatMessageInputComponent } from '../peer-chat-message-input/peer-chat-message-input.component';
 import { PeerChatMemberTypingIndicatorComponent } from '../peer-chat-member-typing-indicator/peer-chat-member-typing-indicator.component';
 
 @Component({
   imports: [
-    MatCardModule,
-    PeerChatMembersComponent,
     PeerChatMemberTypingIndicatorComponent,
     PeerChatMessageInputComponent,
     PeerChatMessagesComponent
@@ -20,7 +16,7 @@ import { PeerChatMemberTypingIndicatorComponent } from '../peer-chat-member-typi
   styleUrl: './peer-chat-chat-box.component.scss',
   templateUrl: './peer-chat-chat-box.component.html'
 })
-export class PeerChatChatBoxComponent implements OnInit {
+export class PeerChatChatBoxComponent {
   @Input() component: PeerChatComponent;
   @Output() deleteClickedEvent: EventEmitter<PeerChatMessage> = new EventEmitter<PeerChatMessage>();
   @Input() isEnabled: boolean = true;
@@ -34,15 +30,6 @@ export class PeerChatChatBoxComponent implements OnInit {
   @Output() undeleteClickedEvent: EventEmitter<PeerChatMessage> =
     new EventEmitter<PeerChatMessage>();
   @Input() workgroupInfos: any = {};
-  protected workgroupInfosWithoutTeachers: any[];
-
-  ngOnInit(): void {
-    this.workgroupInfosWithoutTeachers = this.filterOutTeachers(this.workgroupInfos);
-  }
-
-  private filterOutTeachers(workgroupInfos: any): any[] {
-    return Object.values(workgroupInfos).filter((workgroupInfo: any) => !workgroupInfo.isTeacher);
-  }
 
   protected deleteClicked(peerChatMessage: PeerChatMessage): void {
     this.deleteClickedEvent.emit(peerChatMessage);

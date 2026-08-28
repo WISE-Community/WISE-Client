@@ -9,11 +9,11 @@ export interface ComponentContent {
   };
   anonymizeResponses?: boolean;
   connectedComponents?: any[];
+  componentTitle?: string;
   constraints?: any[];
   cRaterRubric?: CRaterRubric;
   dynamicPrompt?: DynamicPrompt;
   excludeFromTotalScore?: boolean;
-  title?: string;
   maxScore?: number;
   maxSubmitCount?: number;
   prompt?: string;

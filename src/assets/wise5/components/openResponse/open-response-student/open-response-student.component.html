@@ -25,7 +25,7 @@
     </button>
   }
 </div>
-<div class="my-2">
+<div class="mt-2">
   <mat-form-field class="w-full form-field-no-hint">
     <textarea
       matInput
@@ -76,6 +76,7 @@
 }
 @if (isSaveOrSubmitButtonVisible) {
   <component-save-submit-buttons
+    class="block mt-3"
     [componentState]="latestComponentState"
     [isDirty]="isDirty"
     [isDisabled]="isDisabled"

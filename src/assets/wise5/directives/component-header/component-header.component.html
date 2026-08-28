@@ -1,13 +1,21 @@
-@if (title) {
-  <div class="mat-headline-6">{{ title }}</div>
+@if (title || hasPrompt || component.content.maxScore) {
+  <div class="flex justify-between gap-1 mb-4">
+    <div class="flex flex-col gap-3">
+      @if (title) {
+        <div class="mat-headline-6 primary !mb-0">
+          <mat-icon class="align-sub">{{ icon }}</mat-icon> {{ title }}
+        </div>
+      }
+      @if (hasPrompt) {
+        <prompt
+          [prompt]="prompt"
+          [nodeId]="component.nodeId"
+          [componentId]="component.id"
+          [dynamicPrompt]="dynamicPrompt"
+          (dynamicPromptChanged)="onDynamicPromptChanged($event)"
+        />
+      }
+    </div>
+    <possible-score [maxScore]="component.content.maxScore" class="mt-1.5 shrink-0" />
+  </div>
 }
-<div class="flex flex-wrap gap-1 mb-4">
-  <prompt
-    [prompt]="prompt"
-    [nodeId]="component.nodeId"
-    [componentId]="component.id"
-    [dynamicPrompt]="dynamicPrompt"
-    (dynamicPromptChanged)="onDynamicPromptChanged($event)"
-  />
-  <possible-score [maxScore]="component.content.maxScore" />
-</div>
