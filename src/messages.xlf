@@ -13971,11 +13971,25 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4304415946631753339" datatype="html">
-        <source>Having trouble loading the unit? Click here to contact WISE staff.</source>
+      <trans-unit id="8572680220219165444" datatype="html">
+        <source>Trouble Loading Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6848192494939890612" datatype="html">
+        <source>The unit is taking longer than expected to load.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="780109974941677602" datatype="html">
+        <source>Click here to contact WISE staff.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1278268521087394642" datatype="html">

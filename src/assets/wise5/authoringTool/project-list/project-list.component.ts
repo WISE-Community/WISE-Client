@@ -108,12 +108,32 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   protected openProject(projectId: number, runId?: number): void {
     this.showMessageInModalDialog($localize`Loading Unit...`);
-    const contactPageLink = this.getContactPageLink(projectId, runId);
-    const timer = this.startTimer(contactPageLink);
+    const timer = this.startLoadUnitTimer(projectId, runId);
     this.router.navigate([`/teacher/edit/unit/${projectId}`]).then((navigated) => {
       if (navigated) {
         clearInterval(timer);
         this.dialog.closeAll();
+      }
+    });
+  }
+
+  private startLoadUnitTimer(projectId: number, runId?: number): NodeJS.Timeout {
+    let seconds = 10;
+    return setInterval(() => {
+      seconds--;
+      if (seconds === 0) {
+        this.dialog.closeAll();
+        this.openContactPageDialog(projectId, runId);
+      }
+    }, 1000);
+  }
+
+  private openContactPageDialog(projectId: number, runId?: number): void {
+    this.dialog.open(DialogWithCloseComponent, {
+      data: {
+        title: $localize`Trouble Loading Unit`,
+        content: `<p>${$localize`The unit is taking longer than expected to load.`}</p>
+          <p><a href="${this.getContactPageLink(projectId, runId)}">${$localize`Click here to contact WISE staff.`}</a></p>`
       }
     });
   }
@@ -124,26 +144,6 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       link += `&runId=${runId}`;
     }
     return link;
-  }
-
-  private startTimer(link: string): NodeJS.Timeout {
-    let seconds = 10;
-    return setInterval(() => {
-      seconds--;
-      if (seconds === 0) {
-        this.dialog.closeAll();
-        this.openContactPageLinkDialog(link);
-      }
-    }, 1000);
-  }
-
-  private openContactPageLinkDialog(link: string): void {
-    this.dialog.open(DialogWithCloseComponent, {
-      data: {
-        title: $localize`Trouble Loading Unit`,
-        content: `<p>${$localize`The unit is taking longer than expected to load.`}</p><p><a href="${link}">${$localize`Click here to contact WISE staff.`}</a></p>`
-      }
-    });
   }
 
   protected previewProject(projectId: number): void {
