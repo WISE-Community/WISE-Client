@@ -11,7 +11,11 @@
           </button>
         </div>
         <ng-template #projectTemplate let-project="project">
-          <button class="projectItem" mat-list-item (click)="openProject(project.id)">
+          <button
+            class="projectItem"
+            mat-list-item
+            (click)="openProject(project.id, project.runId)"
+          >
             <span class="flex items-center justify-between gap-2">
               <span class="whitespace-normal">
                 <span>{{ project.id }} - {{ project.name }}</span>

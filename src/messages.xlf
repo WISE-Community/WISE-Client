@@ -339,7 +339,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-close/dialog-with-close.component.html</context>
-          <context context-type="linenumber">11,13</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component.html</context>
@@ -1739,7 +1739,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">50,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4794443509874758508" datatype="html">
@@ -2509,17 +2509,6 @@
         <source>Trouble Signing In</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">162</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">170</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6892681827231609313" datatype="html">
-        <source>Need Help Using WISE</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">163</context>
         </context-group>
         <context-group purpose="location">
@@ -2527,8 +2516,8 @@
           <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2072690839988671006" datatype="html">
-        <source>Problems with a WISE Unit</source>
+      <trans-unit id="6892681827231609313" datatype="html">
+        <source>Need Help Using WISE</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">164</context>
@@ -2538,19 +2527,19 @@
           <context context-type="linenumber">172</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2959002981630304422" datatype="html">
-        <source>Feedback to WISE</source>
+      <trans-unit id="2072690839988671006" datatype="html">
+        <source>Problems with a WISE Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">165</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8693603235657020323" datatype="html">
-        <source>Other</source>
+      <trans-unit id="2959002981630304422" datatype="html">
+        <source>Feedback to WISE</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">166</context>
@@ -2558,6 +2547,17 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">177</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8693603235657020323" datatype="html">
+        <source>Other</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
+          <context context-type="linenumber">167</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
+          <context context-type="linenumber">178</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/profile.constants.ts</context>
@@ -2568,7 +2568,7 @@
         <source>Student Management</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">173</context>
+          <context context-type="linenumber">174</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
@@ -2583,21 +2583,28 @@
         <source>Need Help with Authoring</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6193846139411583890" datatype="html">
         <source>Publish Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1936787644032074292" datatype="html">
         <source>Publish my unit to the WISE Community Built library</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6993881133783105369" datatype="html">
+        <source>Unit failed to load in the Authoring Tool</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4340256332658641886" datatype="html">
@@ -6096,7 +6103,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">27,28</context>
+          <context context-type="linenumber">31,32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
@@ -6402,7 +6409,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">36,37</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.html</context>
@@ -9143,7 +9150,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3570561190371217661" datatype="html">
@@ -13910,42 +13917,42 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>You have no units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">48,51</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9063616864663648521" datatype="html">
         <source>Shared Units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">60,62</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7727005768668091798" datatype="html">
         <source>You have no shared units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">62,65</context>
+          <context context-type="linenumber">66,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5269484094677699060" datatype="html">
         <source>Copying Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5317921744918848185" datatype="html">
         <source>There was an error copying this unit. Please contact WISE staff.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4550129747596313114" datatype="html">
         <source> (Run ID: <x id="PH" equiv-text="project.runId"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5435676366729047906" datatype="html">
@@ -13954,14 +13961,35 @@ The branches will be removed but the steps will remain in the unit.</source>
 <x id="PH" equiv-text="projectInfo"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1460984918484282139" datatype="html">
         <source>Loading Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8572680220219165444" datatype="html">
+        <source>Trouble Loading Unit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6848192494939890612" datatype="html">
+        <source>The unit is taking longer than expected to load.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="780109974941677602" datatype="html">
+        <source>Click here to contact WISE staff.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1278268521087394642" datatype="html">
