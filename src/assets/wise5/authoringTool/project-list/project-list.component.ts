@@ -119,8 +119,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   }
 
   private getContactPageLink(projectId: number, runId?: number): string {
-    let link = this.configService.getWISEBaseURL();
-    link += `/contact?authoringFailed=true&projectId=${projectId}`;
+    let link = `${this.configService.getWISEBaseURL()}/contact?authoringFailed=true&projectId=${projectId}`;
     if (runId) {
       link += `&runId=${runId}`;
     }
@@ -141,7 +140,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   private openContactPageLinkDialog(link: string): void {
     this.dialog.open(DialogWithCloseComponent, {
       data: {
-        title: `<a href="${link}">${$localize`Having trouble loading unit? Contact WISE staff.`}</a>`
+        title: $localize`Trouble Loading Unit`,
+        content: `<p>${$localize`The unit is taking longer than expected to load.`}</p><p><a href="${link}">${$localize`Click here to contact WISE staff.`}</a></p>`
       }
     });
   }
