@@ -2,8 +2,7 @@
 @if (dialogData.content) {
   @if (dialogData.scroll) {
     <div mat-dialog-content class="dialog-content-scroll" [innerHTML]="dialogData.content"></div>
-  }
-  @if (!dialogData.scroll) {
+  } @else {
     <div mat-dialog-content>
       <div class="info-block" [innerHTML]="dialogData.content"></div>
     </div>
