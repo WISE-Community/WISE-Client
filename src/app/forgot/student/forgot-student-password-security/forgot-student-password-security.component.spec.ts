@@ -82,6 +82,10 @@ async function changePassword() {
       expect(submitButton.disabled).toBe(false);
     });
 
+    it('should not render the message paragraph before anything has gone wrong', () => {
+      expect(getWarnElement()).toBeNull();
+    });
+
     it('should show the incorrect answer message', waitForAsync(() => {
       submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'incorrectAnswer');
       expect(getErrorMessage()).toContain('Incorrect answer');
@@ -167,6 +171,10 @@ function getErrorMessage() {
 
 function getSubmitButton() {
   return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
+}
+
+function getWarnElement() {
+  return fixture.debugElement.nativeElement.querySelector('.warn');
 }
 
 function getAnswerInput() {

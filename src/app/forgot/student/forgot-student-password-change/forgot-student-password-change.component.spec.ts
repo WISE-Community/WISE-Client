@@ -87,6 +87,10 @@ describe('ForgotStudentPasswordChangeComponent', () => {
     expect(getForgotPasswordLink()).not.toBeNull();
   });
 
+  it('should not render the message paragraph before anything has gone wrong', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('.warn')).toBeNull();
+  });
+
   it('should submit and navigate to the complete page', () => {
     const router = TestBed.inject(Router);
     const navigateSpy = spyOn(router, 'navigate');
