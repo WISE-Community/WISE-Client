@@ -46,7 +46,7 @@ export class GraphShowWorkComponent extends ComponentShowWorkDirective {
     }
     this.width = this.componentContent.width;
     this.height = this.componentContent.height;
-    this.title = this.componentContent.title;
+    this.title = this.componentContent.graphTitle;
     this.subtitle = this.componentContent.subtitle;
     if (this.componentContent.hideLegend) {
       this.isLegendEnabled = false;

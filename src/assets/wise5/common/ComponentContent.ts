@@ -9,7 +9,7 @@ export interface ComponentContent {
   };
   anonymizeResponses?: boolean;
   connectedComponents?: any[];
-  componentTitle?: string;
+  title?: string;
   constraints?: any[];
   cRaterRubric?: CRaterRubric;
   dynamicPrompt?: DynamicPrompt;

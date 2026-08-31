@@ -25,7 +25,7 @@ export class ComponentHeaderComponent {
   }
 
   protected get title(): string {
-    return this.component.content.componentTitle || '';
+    return this.component.content.title || '';
   }
 
   protected get prompt(): string {
