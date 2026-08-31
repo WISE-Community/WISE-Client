@@ -8,7 +8,7 @@
   <div class="flex justify-start flex-grow">
     <div class="response-text notice-bg-bg">
       <div class="mat-small secondary-text poster" i18n>{{ computerAvatar.name }}</div>
-      <div [innerHtml]="message.content"></div>
+      <markdown [data]="message.content"></markdown>
     </div>
   </div>
 </div>

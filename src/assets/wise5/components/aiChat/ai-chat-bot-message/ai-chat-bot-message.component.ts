@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { AiChatMessage } from '../AiChatMessage';
 import { ComputerAvatar } from '../../../common/computer-avatar/ComputerAvatar';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
+  imports: [MarkdownComponent],
   selector: 'ai-chat-bot-message',
   styleUrl: './ai-chat-bot-message.component.scss',
   templateUrl: './ai-chat-bot-message.component.html'
