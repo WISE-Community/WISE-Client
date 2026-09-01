@@ -8,11 +8,7 @@
   position: relative;
 
   @media (min-width: $layout-breakpoint-xs) {
-      width: $layout-breakpoint-md;
-  }
-
-  @media (min-width: $layout-breakpoint-lg) {
-      width: $layout-breakpoint-lg;
+    max-width: $layout-breakpoint-md;
   }
 }
 
