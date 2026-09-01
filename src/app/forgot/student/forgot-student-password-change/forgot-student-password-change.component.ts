@@ -11,6 +11,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatButton } from '@angular/material/button';
 import { PasswordModule } from '../../../password/password.module';
 import { MatCard, MatCardContent } from '@angular/material/card';
+import { AbstractForgotStudentPasswordComponent } from '../abstract-forgot-student-password.component';
 
 @Component({
   templateUrl: './forgot-student-password-change.component.html',
@@ -27,11 +28,9 @@ import { MatCard, MatCardContent } from '@angular/material/card';
     RouterLink
   ]
 })
-export class ForgotStudentPasswordChangeComponent {
+export class ForgotStudentPasswordChangeComponent extends AbstractForgotStudentPasswordComponent {
   @Input() answer: string;
   changePasswordFormGroup: FormGroup = this.fb.group({});
-  protected message: string = '';
-  protected processing: boolean = false;
   @Input() questionKey: string;
   @Input() username: string;
 
@@ -40,7 +39,13 @@ export class ForgotStudentPasswordChangeComponent {
     private fb: FormBuilder,
     private router: Router,
     private studentService: StudentService
-  ) {}
+  ) {
+    super();
+  }
+
+  protected getFormGroup(): FormGroup {
+    return this.changePasswordFormGroup;
+  }
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
@@ -77,9 +82,27 @@ export class ForgotStudentPasswordChangeComponent {
       case 'invalidPassword':
         injectPasswordErrors(this.changePasswordFormGroup, error);
         break;
+      case 'incorrectAnswer':
+        this.incorrectAnswer();
+        break;
+      case 'tooManyFailedAnswerAttempts':
+        this.tooManyFailedAnswerAttempts();
+        break;
       default:
         this.setErrorOccurredMessage();
     }
+  }
+
+  /**
+   * The answer was carried over from the security question step and cannot be corrected on this
+   * page, so resubmitting can only send the same rejected answer again while spending another of
+   * the attempts the server allows before it locks the reset. Send the student back to the start
+   * of the flow instead.
+   */
+  private incorrectAnswer(): void {
+    this.blockFurtherAttempts(
+      $localize`The answer to your security question was not accepted. Please go back to the Forgot Student Password page to try again, or ask your teacher to change your password.`
+    );
   }
 
   private getNewPassword(): string {
@@ -94,14 +117,6 @@ export class ForgotStudentPasswordChangeComponent {
 
   private getControlFieldValue(fieldName: string): string {
     return this.changePasswordFormGroup.get(fieldName).value;
-  }
-
-  private setErrorOccurredMessage(): void {
-    this.message = $localize`An error occurred. Please try again.`;
-  }
-
-  private clearMessage(): void {
-    this.message = '';
   }
 
   private goToSuccessPage(): void {
