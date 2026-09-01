@@ -17,7 +17,13 @@ export abstract class AbstractForgotStudentPasswordComponent {
    * them.
    */
   protected tooManyFailedAnswerAttempts(): void {
-    this.message = $localize`You have entered an incorrect answer too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Forgot Student Password page to try again, or ask your teacher to change your password.`;
+    this.blockFurtherAttempts(
+      $localize`You have entered an incorrect answer too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Forgot Student Password page to try again, or ask your teacher to change your password.`
+    );
+  }
+
+  protected blockFurtherAttempts(message: string): void {
+    this.message = message;
     this.getFormGroup().disable();
     this.showForgotPasswordLink = true;
   }

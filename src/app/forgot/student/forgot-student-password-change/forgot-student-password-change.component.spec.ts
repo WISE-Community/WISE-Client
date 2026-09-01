@@ -87,6 +87,27 @@ describe('ForgotStudentPasswordChangeComponent', () => {
     expect(getForgotPasswordLink()).not.toBeNull();
   });
 
+  it('should disable the form and show the forgot password link when the answer is rejected', () => {
+    const password = PasswordRequirementComponent.VALID_PASSWORD;
+    component.changePasswordFormGroup.controls['newPassword'].setValue(password);
+    component.changePasswordFormGroup.controls['confirmNewPassword'].setValue(password);
+    fixture.detectChanges();
+    const studentService = TestBed.inject(StudentService);
+    spyOn(studentService, 'changePassword').and.returnValue(
+      throwError(() => ({ error: { messageCode: 'incorrectAnswer' } }))
+    );
+    component.submit();
+    fixture.detectChanges();
+    expect(getErrorMessage()).toContain('was not accepted');
+    expect(component.changePasswordFormGroup.controls['newPassword'].disabled).toBe(true);
+    expect(getSubmitButton().disabled).toBe(true);
+    expect(getForgotPasswordLink()).not.toBeNull();
+  });
+
+  it('should keep the live region in the page before anything has gone wrong', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('[role="alert"]')).not.toBeNull();
+  });
+
   it('should not render the message paragraph before anything has gone wrong', () => {
     expect(fixture.debugElement.nativeElement.querySelector('.warn')).toBeNull();
   });

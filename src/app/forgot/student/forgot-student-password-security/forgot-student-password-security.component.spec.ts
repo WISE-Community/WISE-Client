@@ -86,6 +86,10 @@ async function changePassword() {
       expect(getWarnElement()).toBeNull();
     });
 
+    it('should keep the live region in the page before anything has gone wrong', () => {
+      expect(fixture.debugElement.nativeElement.querySelector('[role="alert"]')).not.toBeNull();
+    });
+
     it('should show the incorrect answer message', waitForAsync(() => {
       submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'incorrectAnswer');
       expect(getErrorMessage()).toContain('Incorrect answer');
