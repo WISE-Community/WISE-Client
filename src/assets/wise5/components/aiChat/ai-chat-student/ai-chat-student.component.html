@@ -1,4 +1,5 @@
 @if (computerAvatarSelectorVisible) {
+  <component-header [component]="component" [showPrompt]="false" />
   <computer-avatar-selector
     [computerAvatarSettings]="componentContent.computerAvatarSettings"
     (chooseAvatarEvent)="selectComputerAvatar($event)"
