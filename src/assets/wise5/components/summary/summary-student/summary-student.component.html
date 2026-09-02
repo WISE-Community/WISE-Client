@@ -1,8 +1,5 @@
 <component-header [component]="component" />
 <div class="summary">
-  @if (componentContent.prompt) {
-    <div [innerHTML]="prompt" class="prompt"></div>
-  }
   @if (componentContent.showPromptFromOtherComponent) {
     <div [innerHTML]="otherPrompt" class="prompt"></div>
   }

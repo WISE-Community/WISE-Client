@@ -43,8 +43,12 @@
   />
   <div
     id="content"
-    class="vle-content"
-    [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
+    class="vle-content mat-app-background"
+    [ngClass]="{
+      'nav-view': layoutState === 'nav',
+      'node-view': layoutState === 'node',
+      'pb-10': reportEnabled
+    }"
   >
     @if (runEndedAndLocked) {
       <run-ended-and-locked-message class="notice" />

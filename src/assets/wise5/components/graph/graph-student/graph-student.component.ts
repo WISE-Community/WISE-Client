@@ -164,7 +164,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   initializeComponentContentParams() {
-    this.title = this.componentContent.title;
+    this.title = this.componentContent.graphTitle;
     this.subtitle = this.componentContent.subtitle;
     this.width = this.componentContent.width;
     this.height = this.componentContent.height;
@@ -2308,7 +2308,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   importGraphSettings(component, componentState) {
-    this.title = component.title;
+    this.title = component.graphTitle;
     this.subtitle = component.subtitle;
     this.width = component.width;
     this.height = component.height;

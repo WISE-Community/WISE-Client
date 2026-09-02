@@ -142,32 +142,6 @@ md-content {
     }
 }
 
-.node-content__actions {
-    padding: 0 16px 16px;
-
-    @media only screen and (min-width: $layout-breakpoint-sm) {
-        padding: 0 24px 24px;
-    }
-
-    .md-button:first-child {
-        margin-left: 0;
-    }
-
-    .md-button:last-child {
-        margin-right: 0;
-    }
-}
-
-.node-content__actions__info {
-    font-style: italic;
-    margin-left: 8px;
-    color: color('text-secondary');
-}
-
-.node-content__actions__more {
-    border-bottom: 1px dotted;
-}
-
 .md-button.md-icon-button.node-nav {
     &:not(:first-of-type) {
     }

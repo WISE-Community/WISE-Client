@@ -18,7 +18,6 @@ import { ComputerAvatarInitializer } from '../../../common/computer-avatar/compu
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { StudentStatusService } from '../../../services/studentStatusService';
 import { ComputerAvatarSelectorComponent } from '../../../vle/computer-avatar-selector/computer-avatar-selector.component';
-import { MatCard } from '@angular/material/card';
 import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import { ChatInputComponent } from '../../../common/chat-input/chat-input.component';
 import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.component';
@@ -28,8 +27,7 @@ import { AiChatMessagesComponent } from '../ai-chat-messages/ai-chat-messages.co
     AiChatMessagesComponent,
     ChatInputComponent,
     ComponentHeaderComponent,
-    ComputerAvatarSelectorComponent,
-    MatCard
+    ComputerAvatarSelectorComponent
   ],
   styleUrl: './ai-chat-student.component.scss',
   templateUrl: './ai-chat-student.component.html'

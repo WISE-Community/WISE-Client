@@ -1,23 +1,22 @@
 @if (computerAvatarSelectorVisible) {
+  <component-header [component]="component" [showPrompt]="false" />
   <computer-avatar-selector
     [computerAvatarSettings]="componentContent.computerAvatarSettings"
     (chooseAvatarEvent)="selectComputerAvatar($event)"
   />
 }
 @if (!computerAvatarSelectorVisible) {
-  <mat-card appearance="outlined" class="mat-elevation-z2">
-    <component-header [component]="component" />
-    <div #messagesContainer class="messages">
-      <ai-chat-messages
-        [messages]="messages"
-        [workgroupId]="workgroupId"
-        [waitingForComputerResponse]="waitingForComputerResponse"
-        [computerAvatar]="computerAvatar"
-      />
-    </div>
-    <chat-input
-      [submitDisabled]="waitingForComputerResponse"
-      (submitEvent)="submitStudentResponse($event)"
+  <component-header [component]="component" />
+  <div #messagesContainer class="messages">
+    <ai-chat-messages
+      [messages]="messages"
+      [workgroupId]="workgroupId"
+      [waitingForComputerResponse]="waitingForComputerResponse"
+      [computerAvatar]="computerAvatar"
     />
-  </mat-card>
+  </div>
+  <chat-input
+    [submitDisabled]="waitingForComputerResponse"
+    (submitEvent)="submitStudentResponse($event)"
+  />
 }

@@ -1,9 +1,7 @@
 @if (maxScore > 0 && !hidePossibleScores) {
-  <span class="gray-darker md-body-1 possible-score">
-    @if (maxScore === 1) {
-      (<span i18n>{{ maxScore }} point</span>)
-    } @else {
-      (<span i18n>{{ maxScore }} points</span>)
-    }
-  </span>
+  @if (maxScore === 1) {
+    <span i18n class="rounded-md notice-bg-bg mat-caption p-1">{{ maxScore }} point</span>
+  } @else {
+    <span i18n class="rounded-md notice-bg-bg mat-caption p-1">{{ maxScore }} points</span>
+  }
 }
