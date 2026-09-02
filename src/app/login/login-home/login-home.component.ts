@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ConfigService } from '../../services/config.service';
@@ -11,19 +11,22 @@ import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatDivider } from '@angular/material/divider';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   imports: [
+    FormsModule,
+    MatButton,
     MatCard,
     MatCardContent,
-    FormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatError,
-    MatButton,
-    MatProgressBar,
     MatDivider,
+    MatError,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatProgressBar,
+    MatProgressSpinnerModule,
     RouterLink,
     RecaptchaV3Module
   ],
@@ -42,10 +45,23 @@ export class LoginHomeComponent implements OnInit {
   passwordError: boolean = false;
   processing: boolean = false;
   @ViewChild('recaptchaRef', { static: false }) recaptchaRef: any;
+  private resendEmailEndpoint = '/api/teacher/send-verify-email';
+  private resendEmailInterval: any;
+  protected resendEmailWaitSeconds = signal<number>(0);
   protected showSocialLogin: boolean;
+  protected verificationState = signal<
+    | 'none'
+    | 'confirmVerified'
+    | 'emailError'
+    | 'emailSent'
+    | 'sendingEmail'
+    | 'unverified'
+    | 'verificationError'
+  >('none');
 
   constructor(
     private configService: ConfigService,
+    private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
     private recaptchaV3Service: ReCaptchaV3Service,
@@ -77,9 +93,24 @@ export class LoginHomeComponent implements OnInit {
       if (params['accessCode'] != null) {
         this.accessCode = params['accessCode'];
       }
+      if (params['verified']) {
+        if (params['verified'] === 'true') {
+          this.verificationState.set('confirmVerified');
+        } else if (params['verified'] === 'error') {
+          this.verificationState.set('verificationError');
+        }
+      }
     });
     this.isReLoginDueToErrorSavingData = this.isRedirectToAppRoutes();
     this.isRecaptchaEnabled = this.configService.isRecaptchaEnabled();
+
+    this.resendEmailInterval = setInterval(() => {
+      this.resendEmailWaitSeconds.update((current) => current - 1);
+    }, 1000);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.resendEmailInterval);
   }
 
   private isRedirectToAppRoutes(): boolean {
@@ -90,11 +121,16 @@ export class LoginHomeComponent implements OnInit {
   async login(): Promise<void> {
     this.processing = true;
     this.passwordError = false;
+    this.verificationState.set('none');
     if (this.isRecaptchaEnabled) {
       this.credentials.recaptchaResponse = await lastValueFrom(
         this.recaptchaV3Service.execute('importantAction')
       );
     }
+    this.authenticateUser();
+  }
+
+  private authenticateUser(): void {
     this.userService.authenticate(this.credentials, (response: any) => {
       if (this.userService.isAuthenticated) {
         this.router.navigateByUrl(this.getRedirectUrl(''));
@@ -103,6 +139,8 @@ export class LoginHomeComponent implements OnInit {
         this.credentials.password = '';
         if (response.isRecaptchaVerificationFailed) {
           this.isRecaptchaVerificationFailed = true;
+        } else if (response.isTeacherVerificationFailed) {
+          this.verificationState.set('unverified');
         } else {
           this.passwordError = true;
         }
@@ -135,5 +173,24 @@ export class LoginHomeComponent implements OnInit {
 
   private appendAccessCodeParameter(url: string): string {
     return `${url}${url.includes('?') ? '&' : '?'}accessCode=${this.accessCode}`;
+  }
+
+  protected allowResendEmail(): boolean {
+    return this.resendEmailWaitSeconds() <= 0;
+  }
+
+  protected resendEmail(e: Event): void {
+    e.preventDefault();
+    this.resendEmailWaitSeconds.set(60);
+    this.verificationState.set('sendingEmail');
+    const params = new HttpParams().set('username', this.credentials.username);
+    this.http.post<String>(`${this.resendEmailEndpoint}`, null, { params }).subscribe({
+      next: () => {
+        this.verificationState.set('emailSent');
+      },
+      error: () => {
+        this.verificationState.set('emailError');
+      }
+    });
   }
 }
