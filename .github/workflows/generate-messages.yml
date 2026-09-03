@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-versions: [24.x]
+        node-version: [24.x]
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: ${{ github.head_ref || github.ref_name }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-      - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/checkout@v6
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
@@ -29,14 +29,13 @@ jobs:
       - name: Check for changes
         id: check-changes
         run: |
-          DIFF=$(git diff ${{ github.head_ref || github.ref_name }})
-          if [ -z "$DIFF" ]; then
+          if git diff --quiet src/messages.xlf; then
             echo "NO_CHANGES=true" >> $GITHUB_ENV
           else
             echo "NO_CHANGES=false" >> $GITHUB_ENV
           fi
-      - name: Commit messages
-        if: env.NO_CHANGES == 'false'
+      - name: Commit messages to main project
+        if: env.NO_CHANGES == 'false' && github.event.pull_request.head.repo.full_name == github.repository
         run: |
           git config --global user.name  'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -45,3 +44,8 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.token }}
+      - name: Verify messages are up to date on forked project
+        if: env.NO_CHANGES == 'false' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "Error: src/messages.xlf is out of date. Run 'npm run extract-i18n' and commit the updated file."
+          exit 1

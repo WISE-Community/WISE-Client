@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ConfigService } from '../../services/configService';
+import { CopyProjectService } from '../../services/copyProjectService';
+import { DialogWithCloseComponent } from '../../directives/dialog-with-close/dialog-with-close.component';
+import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterModule } from '@angular/router';
 import { scrollToTopOfPage, temporarilyHighlightElement } from '../../common/dom/dom';
-import { DialogWithSpinnerComponent } from '../../directives/dialog-with-spinner/dialog-with-spinner.component';
-import { ConfigService } from '../../services/configService';
-import { CopyProjectService } from '../../services/copyProjectService';
 import { SessionService } from '../../services/sessionService';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatListModule } from '@angular/material/list';
 
 @Component({
   imports: [
@@ -105,9 +106,44 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     });
   }
 
-  protected openProject(projectId: number): void {
+  protected openProject(projectId: number, runId?: number): void {
     this.showMessageInModalDialog($localize`Loading Unit...`);
-    this.router.navigate([`/teacher/edit/unit/${projectId}`]);
+    const timer = this.startLoadUnitTimer(projectId, runId);
+    this.router.navigate([`/teacher/edit/unit/${projectId}`]).then((navigated) => {
+      if (navigated) {
+        clearInterval(timer);
+        this.dialog.closeAll();
+      }
+    });
+  }
+
+  private startLoadUnitTimer(projectId: number, runId?: number): NodeJS.Timeout {
+    let seconds = 10;
+    return setInterval(() => {
+      seconds--;
+      if (seconds === 0) {
+        this.dialog.closeAll();
+        this.openContactPageDialog(projectId, runId);
+      }
+    }, 1000);
+  }
+
+  private openContactPageDialog(projectId: number, runId?: number): void {
+    this.dialog.open(DialogWithCloseComponent, {
+      data: {
+        title: $localize`Trouble Loading Unit`,
+        content: `<p>${$localize`The unit is taking longer than expected to load.`}</p>
+          <p><a href="${this.getContactPageLink(projectId, runId)}">${$localize`Click here to contact WISE staff.`}</a></p>`
+      }
+    });
+  }
+
+  private getContactPageLink(projectId: number, runId?: number): string {
+    let link = `${this.configService.getWISEBaseURL()}/contact?authoringFailed=true&projectId=${projectId}`;
+    if (runId) {
+      link += `&runId=${runId}`;
+    }
+    return link;
   }
 
   protected previewProject(projectId: number): void {
