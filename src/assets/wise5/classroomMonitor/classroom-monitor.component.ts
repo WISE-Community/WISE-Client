@@ -207,7 +207,9 @@ export class ClassroomMonitorComponent implements OnInit {
   }
 
   @HostListener('document:mousemove')
+  @HostListener('document:keydown')
+  @HostListener('document:touchstart')
   protected renewSession(): void {
-    this.sessionService.mouseMoved();
+    this.sessionService.userIsActive();
   }
 }
