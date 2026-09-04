@@ -100,7 +100,7 @@ export class SessionService {
   /**
    * Note: This does not get called when the warning popup is being shown.
    */
-  mouseMoved(): void {
+  userIsActive(): void {
     this.updateLastActivityTimestamp();
   }
 

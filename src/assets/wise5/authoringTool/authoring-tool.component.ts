@@ -288,8 +288,10 @@ export class AuthoringToolComponent {
   }
 
   @HostListener('document:mousemove')
+  @HostListener('document:keydown')
+  @HostListener('document:touchstart')
   protected renewSession(): void {
-    this.sessionService.mouseMoved();
+    this.sessionService.userIsActive();
   }
 
   private setGlobalMessage(message: string, progressIndicatorVisible: boolean, time: number): void {
