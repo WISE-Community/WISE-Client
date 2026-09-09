@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
 import { PromptComponent } from '../prompt/prompt.component';
 import { ComponentInfoService } from '../../services/componentInfoService';
+import { ProjectService } from '../../services/projectService';
+import { ThemeSettings } from '../../common/ThemeSettings';
 
 @Component({
   imports: [MatIconModule, PossibleScoreComponent, PromptComponent],
@@ -15,10 +17,12 @@ import { ComponentInfoService } from '../../services/componentInfoService';
 export class ComponentHeaderComponent {
   @Input() component: WISEComponent;
   private componentInfoService = inject(ComponentInfoService);
+  private projectService = inject(ProjectService);
   protected dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
   protected hasPrompt: boolean;
   @Input() showPrompt: boolean = true;
+  protected themeSettings: ThemeSettings;
 
   protected get icon(): string {
     return this.componentInfoService.getInfo(this.component.content.type).getIcon();
@@ -32,7 +36,16 @@ export class ComponentHeaderComponent {
     return this.component.content.prompt || '';
   }
 
+  protected get showTitle(): boolean {
+    return Boolean(this.title && this.themeSettings?.showComponentTitles);
+  }
+
+  protected get showIcon(): boolean {
+    return Boolean(this.showTitle && this.themeSettings?.showComponentTypeIcons);
+  }
+
   ngOnInit(): void {
+    this.themeSettings = new ThemeSettings(this.projectService.getThemeSettings());
     this.hasPrompt = this.prompt && this.showPrompt;
     this.dynamicPrompt = new DynamicPrompt(this.component.content.dynamicPrompt);
   }

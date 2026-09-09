@@ -38,9 +38,12 @@ import { EditComponentTitleComponent } from '../edit-component-title/edit-compon
       @if (advancedMode) {
         <edit-component-advanced class="h-full" [component]="component" />
       } @else {
-        <edit-component-title class="block pt-4" [componentContent]="data.componentContent" />
+        @if (showComponentTitles) {
+          <edit-component-title class="block pt-4" [componentContent]="data.componentContent" />
+        }
         <edit-component
           class="block h-full pb-4"
+          [class.pt-4]="!showComponentTitles"
           [componentContent]="data.componentContent"
           [nodeId]="data.nodeId"
         />
@@ -84,6 +87,7 @@ export class EditComponentDialogComponent {
   protected componentIndex: number;
   protected componentTypeIcon: string;
   protected componentTypeLabel: string;
+  protected showComponentTitles: boolean;
 
   constructor(
     private componentInfoService: ComponentInfoService,
@@ -101,5 +105,6 @@ export class EditComponentDialogComponent {
     this.componentTypeLabel = this.componentInfoService
       .getInfo(this.data.componentContent.type)
       .getLabel();
+    this.showComponentTitles = this.projectService.getThemeSettings().showComponentTitles;
   }
 }

@@ -1,9 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Subject, debounceTime } from 'rxjs';
 import { ConfigService } from '../../services/configService';
 import { TeacherProjectService } from '../../services/teacherProjectService';
@@ -20,11 +22,13 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     EditProjectLanguageSettingComponent,
     EditUnitResourcesComponent,
+    FormsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatRadioModule,
+    MatSlideToggleModule,
     MatTabsModule,
     TranslatableInputComponent,
     TranslatableTextareaComponent
@@ -42,6 +46,7 @@ export class ProjectInfoAuthoringComponent {
   metadataChanged: Subject<void> = new Subject<void>();
   projectIcon: string = '';
   projectIcons: any = [];
+  protected themeSettings: any;
 
   constructor(
     private configService: ConfigService,
@@ -50,6 +55,7 @@ export class ProjectInfoAuthoringComponent {
   ) {}
 
   ngOnInit(): void {
+    this.themeSettings = this.projectService.getThemeSettings();
     this.metadata = this.projectService.getProjectMetadata();
     if (this.metadata.resources == null) {
       this.metadata.resources = [];
@@ -237,7 +243,7 @@ export class ProjectInfoAuthoringComponent {
     this.isShowProjectIconLoading = true;
   }
 
-  private save(): void {
+  protected save(): void {
     this.projectService.saveProject();
   }
 }
