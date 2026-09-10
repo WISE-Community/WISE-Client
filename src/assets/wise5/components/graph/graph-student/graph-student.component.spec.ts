@@ -16,7 +16,7 @@ const sampleData = [
   [10, 20]
 ];
 let studentDataChangedSpy: jasmine.Spy;
-fdescribe('GraphStudentComponent', () => {
+describe('GraphStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StudentTeacherCommonServicesModule, GraphStudent],
