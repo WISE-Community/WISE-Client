@@ -82,9 +82,37 @@ async function changePassword() {
       expect(submitButton.disabled).toBe(false);
     });
 
+    it('should not render the message paragraph before anything has gone wrong', () => {
+      expect(getWarnElement()).toBeNull();
+    });
+
+    it('should keep the live region in the page before anything has gone wrong', () => {
+      expect(fixture.debugElement.nativeElement.querySelector('[role="alert"]')).not.toBeNull();
+    });
+
     it('should show the incorrect answer message', waitForAsync(() => {
       submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'incorrectAnswer');
       expect(getErrorMessage()).toContain('Incorrect answer');
+    }));
+
+    it('should show the too many failed attempts message', waitForAsync(() => {
+      submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'tooManyFailedAnswerAttempts');
+      expect(getErrorMessage()).toContain('too many times');
+    }));
+
+    it('should disable the form and show the forgot password link when there are too many failed attempts', waitForAsync(() => {
+      component.setControlFieldValue('answer', 'cookies');
+      fixture.detectChanges();
+      expect(getSubmitButton().disabled).toBe(false);
+      submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'tooManyFailedAnswerAttempts');
+      expect(getAnswerInput().disabled).toBe(true);
+      expect(getSubmitButton().disabled).toBe(true);
+      expect(getForgotPasswordLink()).not.toBeNull();
+    }));
+
+    it('should show the error occurred message for an unrecognized response code', waitForAsync(() => {
+      submitAndReceiveResponse('checkSecurityAnswer', 'failure', 'invalidUsername');
+      expect(getErrorMessage()).toContain('An error occurred');
     }));
 
     it('should navigate to change password page', () => {
@@ -142,9 +170,21 @@ function createObservableResponse(status, messageCode) {
 
 function getErrorMessage() {
   const errorMessageDiv = fixture.debugElement.nativeElement.querySelector('.warn');
-  return errorMessageDiv.textContent;
+  return errorMessageDiv == null ? '' : errorMessageDiv.textContent;
 }
 
 function getSubmitButton() {
   return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
+}
+
+function getWarnElement() {
+  return fixture.debugElement.nativeElement.querySelector('.warn');
+}
+
+function getAnswerInput() {
+  return fixture.debugElement.nativeElement.querySelector('#answer');
+}
+
+function getForgotPasswordLink() {
+  return fixture.debugElement.nativeElement.querySelector('a[href="/forgot/student/password"]');
 }

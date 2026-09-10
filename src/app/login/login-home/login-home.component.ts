@@ -121,9 +121,9 @@ export class LoginHomeComponent implements OnInit {
   getRedirectUrl(social: string): string {
     let redirectUrl = '';
     if (social === 'google') {
-      redirectUrl = `${this.configService.getContextPath()}/api/google-login?redirectUrl=${this.userService.getRedirectUrl()}`;
+      redirectUrl = `/oauth2/authorization/google?redirectUrl=${this.userService.getRedirectUrl()}`;
     } else if (social === 'microsoft') {
-      redirectUrl = `/api/microsoft-login?redirectUrl=/`;
+      redirectUrl = `/oauth2/authorization/microsoft?redirectUrl=${this.userService.getRedirectUrl()}`;
     } else {
       redirectUrl = this.userService.getRedirectUrl();
     }

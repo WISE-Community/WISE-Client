@@ -94,6 +94,7 @@ export class ContactFormComponent implements OnInit {
     this.setDefaultPublishSummary();
     this.setIsPublish();
     this.setIssueTypeIfNecessary();
+    this.setAuthoringFailedDefaultsIfNecessary();
   }
 
   private obtainRunIdOrProjectIdIfNecessary(): void {
@@ -199,6 +200,15 @@ export class ContactFormComponent implements OnInit {
   private setIsPublish(): void {
     this.route.queryParams.subscribe((params) => {
       this.isPublish = params['publish'];
+    });
+  }
+
+  private setAuthoringFailedDefaultsIfNecessary(): void {
+    this.route.queryParams.subscribe((params) => {
+      if (params['authoringFailed']) {
+        this.setControlFieldValue('issueType', 'PROJECT_PROBLEMS');
+        this.setControlFieldValue('summary', $localize`Unit failed to load in the Authoring Tool`);
+      }
     });
   }
 
