@@ -37,11 +37,11 @@ export class ComponentHeaderComponent {
   }
 
   protected get showTitle(): boolean {
-    return Boolean(this.title && this.themeSettings?.showComponentTitles);
+    return this.title && this.themeSettings?.showComponentTitles;
   }
 
   protected get showIcon(): boolean {
-    return Boolean(this.showTitle && this.themeSettings?.showComponentTypeIcons);
+    return this.showTitle && this.themeSettings?.showComponentTypeIcons;
   }
 
   ngOnInit(): void {

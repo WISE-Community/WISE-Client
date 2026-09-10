@@ -16,6 +16,7 @@ import { AssetChooser } from '../project-asset-authoring/asset-chooser';
 import { EditProjectLanguageSettingComponent } from '../project-info/edit-project-language-setting/edit-project-language-setting.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import { ThemeSettings } from '../../common/ThemeSettings';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -46,7 +47,7 @@ export class ProjectInfoAuthoringComponent {
   metadataChanged: Subject<void> = new Subject<void>();
   projectIcon: string = '';
   projectIcons: any = [];
-  protected themeSettings: any;
+  protected themeSettings: ThemeSettings;
 
   constructor(
     private configService: ConfigService,
