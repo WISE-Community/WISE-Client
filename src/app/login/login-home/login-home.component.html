@@ -13,32 +13,28 @@
           work. We apologize for the inconvenience.
         </p>
       }
-      <p>
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label i18n>Username</mat-label>
-          <input
-            matInput
-            id="username"
-            name="username"
-            [(ngModel)]="credentials.username"
-            [disabled]="processing"
-            autofocus
-          />
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label i18n>Password</mat-label>
-          <input
-            matInput
-            id="password"
-            name="password"
-            type="password"
-            [disabled]="processing"
-            [(ngModel)]="credentials.password"
-          />
-        </mat-form-field>
-      </p>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label i18n>Username</mat-label>
+        <input
+          matInput
+          id="username"
+          name="username"
+          [(ngModel)]="credentials.username"
+          [disabled]="processing"
+          autofocus
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label i18n>Password</mat-label>
+        <input
+          matInput
+          id="password"
+          name="password"
+          type="password"
+          [disabled]="processing"
+          [(ngModel)]="credentials.password"
+        />
+      </mat-form-field>
       @if (isRecaptchaEnabled) {
         <p class="center" i18n>
           This site is protected by reCAPTCHA and the Google
@@ -55,6 +51,43 @@
             >Recaptcha failed. Please reload the page and try again!</mat-error
           >
         }
+      }
+      @if (verificationState() === 'confirmVerified') {
+        <p class="mat-body-1 center" i18n>
+          Thank you for verifying your email! Please sign in to access WISE.
+        </p>
+      } @else if (verificationState() === 'emailError') {
+        <p class="warn center" i18n>
+          Sorry, there was an error sending the verification email. Please try again later.
+        </p>
+      } @else if (verificationState() === 'emailSent') {
+        <p class="mat-body-1 center" i18n>
+          A verification email has been sent. Please check your email for instructions.
+        </p>
+      } @else if (verificationState() === 'sendingEmail') {
+        <div class="email-spinner-parent">
+          <mat-spinner class="email-spinner" [diameter]="30" />
+        </div>
+      } @else if (verificationState() === 'unverified') {
+        <p class="warn center">
+          <span i18n
+            >Your email has not been verified. Check your email for a verification link.</span
+          >
+        </p>
+        @if (allowResendEmail()) {
+          <p class="mat-body-1 center" i18n>
+            <a href="#" (click)="resendEmail($event)">Click here</a> to resend the verification
+            email.
+          </p>
+        } @else {
+          <p class="mat-body-1 center" i18n>
+            Please wait to send another verification email ({{ resendEmailWaitSeconds() }}).
+          </p>
+        }
+      } @else if (verificationState() === 'verificationError') {
+        <p class="warn center" i18n>
+          Your account could not be verified. Make sure you follow the link sent to your email.
+        </p>
       }
       <p>
         <button

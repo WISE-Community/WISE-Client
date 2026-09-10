@@ -5,6 +5,7 @@ export class User {
   isGoogleUser: boolean = false;
   isRecaptchaInvalid: boolean = false;
   isRecaptchaRequired: boolean;
+  isVerified: boolean;
   language: string;
   lastName: string;
   microsoftUserId: string;
