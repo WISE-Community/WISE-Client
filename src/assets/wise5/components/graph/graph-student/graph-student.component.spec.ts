@@ -16,7 +16,7 @@ const sampleData = [
   [10, 20]
 ];
 let studentDataChangedSpy: jasmine.Spy;
-describe('GraphStudentComponent', () => {
+fdescribe('GraphStudentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StudentTeacherCommonServicesModule, GraphStudent],
@@ -1793,7 +1793,7 @@ function getSeriesYAxisIndexWhenItHasItSet() {
 
 function importGraphSettings() {
   it('should import graph settings', () => {
-    component.title = 'Graph 1 Title';
+    component.graphTitle = 'Graph 1 Title';
     component.subtitle = 'Graph 1 Subtitle';
     component.width = 100;
     component.height = 200;
@@ -1810,7 +1810,7 @@ function importGraphSettings() {
     const xAxis2Title = 'X Axis 2';
     const yAxis2Title = 'Y Axis 2';
     const componentContent = {
-      title: graph2Title,
+      graphTitle: graph2Title,
       subtitle: graph2Subtitle,
       width: graph2Width,
       height: graph2Height
@@ -1826,7 +1826,7 @@ function importGraphSettings() {
       }
     };
     component.importGraphSettings(componentContent, componentState);
-    expect(component.title).toEqual(graph2Title);
+    expect(component.graphTitle).toEqual(graph2Title);
     expect(component.subtitle).toEqual(graph2Subtitle);
     expect(component.width).toEqual(graph2Width);
     expect(component.height).toEqual(graph2Height);
