@@ -1,9 +1,12 @@
-@if (title || hasPrompt || component.content.maxScore) {
+@if (showTitle || hasPrompt || component.content.maxScore) {
   <div class="flex justify-between gap-1 mb-4">
     <div class="flex flex-col gap-3">
-      @if (title) {
+      @if (showTitle) {
         <div class="mat-headline-6 primary !mb-0">
-          <mat-icon class="align-sub">{{ icon }}</mat-icon> {{ title }}
+          @if (showIcon) {
+            <mat-icon class="align-sub">{{ icon }}</mat-icon>
+          }
+          {{ title }}
         </div>
       }
       @if (hasPrompt) {
