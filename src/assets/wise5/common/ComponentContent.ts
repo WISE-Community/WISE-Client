@@ -9,6 +9,7 @@ export interface ComponentContent {
   };
   anonymizeResponses?: boolean;
   connectedComponents?: any[];
+  title?: string;
   constraints?: any[];
   cRaterRubric?: CRaterRubric;
   dynamicPrompt?: DynamicPrompt;

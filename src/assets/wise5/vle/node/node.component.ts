@@ -20,6 +20,7 @@ import { HelpIconComponent } from '../../themes/default/themeComponents/helpIcon
 import { StudentNodeService } from '../../services/studentNodeService';
 import { SubmitSurveyComponent } from '../submit-survey/submit-survey.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   imports: [
@@ -28,11 +29,11 @@ import { MatDividerModule } from '@angular/material/divider';
     ComponentStateInfoComponent,
     HelpIconComponent,
     MatButtonModule,
+    MatCardModule,
     MatDividerModule,
     SubmitSurveyComponent
   ],
   selector: 'node',
-  styleUrl: './node.component.scss',
   templateUrl: './node.component.html'
 })
 export class NodeComponent implements OnInit {

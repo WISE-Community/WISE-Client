@@ -29,7 +29,7 @@ at-top-bar {
   top: variables.$toolbar-height;
   bottom: 0;
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .view-content {

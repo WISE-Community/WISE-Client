@@ -71,6 +71,7 @@ export class GraphStudent extends ComponentStudent {
   chartId: string = 'chart1';
   fileName: string;
   graphConnectedComponentManager: GraphConnectedComponentManager;
+  graphTitle: string;
   graphType: string;
   hasCustomLegendBeenSet: boolean = false;
   height: number = null;
@@ -99,7 +100,6 @@ export class GraphStudent extends ComponentStudent {
   showUndoButton: boolean = false;
   studentDataVersion: number = 2;
   subtitle: string;
-  title: string;
   trialIdsToShow: string[] = [];
   trials: any[] = [];
   undoStack: any = [];
@@ -164,7 +164,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   initializeComponentContentParams() {
-    this.title = this.componentContent.title;
+    this.graphTitle = this.componentContent.graphTitle;
     this.subtitle = this.componentContent.subtitle;
     this.width = this.componentContent.width;
     this.height = this.componentContent.height;
@@ -656,7 +656,7 @@ export class GraphStudent extends ComponentStudent {
     series = copy(series);
     this.chartConfig = this.createChartConfig(
       resolve,
-      this.title,
+      this.graphTitle,
       this.subtitle,
       this.xAxis,
       this.yAxis,
@@ -2308,7 +2308,7 @@ export class GraphStudent extends ComponentStudent {
   }
 
   importGraphSettings(component, componentState) {
-    this.title = component.title;
+    this.graphTitle = component.graphTitle;
     this.subtitle = component.subtitle;
     this.width = component.width;
     this.height = component.height;

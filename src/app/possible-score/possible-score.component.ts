@@ -12,6 +12,6 @@ export class PossibleScoreComponent {
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.hidePossibleScores = this.projectService.getThemeSettings().hidePossibleScores;
+    this.hidePossibleScores = this.projectService.getThemeSettings()?.hidePossibleScores;
   }
 }

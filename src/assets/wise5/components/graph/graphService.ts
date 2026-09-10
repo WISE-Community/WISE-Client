@@ -25,7 +25,7 @@ export class GraphService extends ComponentService {
   createComponent() {
     const component: any = super.createComponent();
     component.type = this.type;
-    component.title = '';
+    component.graphTitle = '';
     component.width = 800;
     component.height = 500;
     component.enableTrials = false;
