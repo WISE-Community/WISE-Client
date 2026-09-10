@@ -801,10 +801,10 @@ export class ProjectService {
   }
 
   getThemeSettings(): ThemeSettings {
-    if (!this.project.themeSettings) {
-      this.project.themeSettings = new ThemeSettings();
+    if (this.project) {
+      return (this.project.themeSettings ??= new ThemeSettings());
     }
-    return this.project.themeSettings;
+    return new ThemeSettings();
   }
 
   /**

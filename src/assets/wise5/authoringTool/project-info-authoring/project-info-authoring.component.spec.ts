@@ -71,7 +71,7 @@ describe('ProjectInfoAuthoringComponent', () => {
       const toggles = fixture.debugElement.queryAll(By.css('mat-slide-toggle'));
       expect(toggles.length).toBe(2);
       expect(toggles[0].nativeElement.textContent).toContain('Show activity titles');
-      expect(toggles[1].nativeElement.textContent).toContain('Show activity type icons');
+      expect(toggles[1].nativeElement.textContent).toContain('Show activity icons');
     });
 
     it('should hide activity type icons toggle when showComponentTitles is false', () => {
