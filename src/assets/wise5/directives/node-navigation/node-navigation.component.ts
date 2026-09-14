@@ -27,13 +27,9 @@ export class NodeNavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkPreviousAndNextNodes();
-    if (this.dir.value === 'rtl') {
-      this.nextIcon = 'chevron_left';
-      this.prevIcon = 'chevron_right';
-    } else {
-      this.nextIcon = 'chevron_right';
-      this.prevIcon = 'chevron_left';
-    }
+    const isRtl = this.dir.value === 'rtl';
+    this.nextIcon = isRtl ? 'chevron_left' : 'chevron_right';
+    this.prevIcon = isRtl ? 'chevron_right' : 'chevron_left';
     this.subscriptions.add(
       this.dataService.currentNodeChanged$.subscribe(() => {
         this.checkPreviousAndNextNodes();
