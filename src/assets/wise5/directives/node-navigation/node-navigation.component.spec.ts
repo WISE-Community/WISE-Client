@@ -42,15 +42,18 @@ function ngOnInit() {
     it("should not show buttons if next and prev steps don't exist", fakeAsync(() => {
       expectHasPrevNextNodeValues(null, null, false, false);
     }));
-    it('should show prev button if prev step exists', fakeAsync(() => {
-      expectHasPrevNextNodeValues('node1', null, true, false);
-    }));
-    xit('should show next button if next step exists', fakeAsync(() => {
-      // TODO: for some reason, the next button should appear but does not
+    it('should show next button if next step exists', fakeAsync(() => {
       expectHasPrevNextNodeValues(null, 'node3', false, true);
     }));
-    xit('should show prev and next button if prev and next steps exist', fakeAsync(() => {
-      // TODO: for some reason, the next button should appear but does not
+    it('should only show next button if showPrevNodeNav is false and next and previous exist', fakeAsync(() => {
+      expectHasPrevNextNodeValues('node1', 'node3', false, true);
+    }));
+    it('should show prev button if prev step exists and showPrevNodeNav is true', fakeAsync(() => {
+      component.showPrevNodeNav = true;
+      expectHasPrevNextNodeValues('node1', null, true, false);
+    }));
+    it('should show prev and next buttons if prev and next steps exist and showPrevNodeNav is true', fakeAsync(() => {
+      component.showPrevNodeNav = true;
       expectHasPrevNextNodeValues('node1', 'node3', true, true);
     }));
   });
@@ -65,16 +68,20 @@ function expectHasPrevNextNodeValues(
   prevNodeIdSpy.and.returnValue(prevNodeId);
   nextNodeIdSpy.and.returnValue(Promise.resolve(nextNodeId));
   fixture.detectChanges();
-  component.ngOnInit();
   tick(); // ensures component.hasNextNode to be set
+  fixture.detectChanges();
   const buttons = Array.from(fixture.debugElement.nativeElement.querySelectorAll('button'));
   const prevButton = buttons.find((el: any) => el.innerHTML.includes('Previous step'));
   const nextButton = buttons.find((el: any) => el.innerHTML.includes('Next step'));
   if (expectedHasPrevNode) {
     expect(prevButton).toBeDefined();
+  } else {
+    expect(prevButton).toBeUndefined();
   }
   if (expectedHasNextNode) {
     expect(nextButton).toBeDefined();
+  } else {
+    expect(nextButton).toBeUndefined();
   }
   expect(prevNodeIdSpy).toHaveBeenCalled();
   expect(nextNodeIdSpy).toHaveBeenCalled();

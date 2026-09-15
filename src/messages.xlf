@@ -1707,7 +1707,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">49,53</context>
+          <context context-type="linenumber">50,53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="135709947954147754" datatype="html">
@@ -1861,7 +1861,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">36,40</context>
+          <context context-type="linenumber">37,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2634265024545519524" datatype="html">
@@ -7220,7 +7220,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">39,43</context>
+          <context context-type="linenumber">40,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3947176614980068869" datatype="html">
@@ -11971,7 +11971,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">52,55</context>
+          <context context-type="linenumber">53,56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1035141360074485815" datatype="html">
@@ -23144,18 +23144,18 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">11,12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7745872778453660862" datatype="html">
-        <source> Previous step </source>
+      <trans-unit id="4786560771895410792" datatype="html">
+        <source>Previous step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">4,8</context>
+          <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6726890478056068381" datatype="html">
-        <source> Next step </source>
+      <trans-unit id="168761137939271501" datatype="html">
+        <source>Next step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">10,14</context>
+          <context context-type="linenumber">11,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="629070935308008546" datatype="html">

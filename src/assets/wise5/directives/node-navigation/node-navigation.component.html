@@ -1,13 +1,14 @@
-<div class="flex justify-start items-center">
-  @if (hasPrevNode) {
-    <button mat-button class="mat-raised-button mat-primary" (click)="goToPrevNode()" i18n>
-      Previous step
+<div class="flex gap-4">
+  @if (hasPrevNode && showPrevNodeNav) {
+    <button mat-raised-button color="primary" (click)="goToPrevNode()">
+      <mat-icon>{{ prevIcon }}</mat-icon>
+      <span i18n>Previous step</span>
     </button>
   }
-  <span class="flex-grow"></span>
   @if (hasNextNode) {
-    <button mat-button class="mat-raised-button mat-primary" (click)="goToNextNode()" i18n>
-      Next step
+    <button mat-raised-button color="primary" (click)="goToNextNode()">
+      <mat-icon>{{ nextIcon }}</mat-icon>
+      <span i18n>Next step</span>
     </button>
   }
 </div>
