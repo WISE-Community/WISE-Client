@@ -24,7 +24,6 @@ export class CreateComponentService {
     const node = this.projectService.getNode(nodeId);
     const service = this.componentServiceLookupService.getService(componentType);
     const component = service.createComponent();
-    component.title = this.componentInfoService.getInfo(componentType).getLabel();
     if (service.componentHasWork(component)) {
       if (node.showSaveButton == false) {
         if (this.projectService.doesAnyComponentInNodeShowSubmitButton(node.id)) {
