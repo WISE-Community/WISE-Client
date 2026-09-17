@@ -121,16 +121,20 @@ html {
   }
 
   @include mat.fab-overrides((
+    container-color: var(--mat-sys-primary),
     container-elevation-shadow: var(--mat-sys-level2),
     hover-container-elevation-shadow: var(--mat-sys-level3),
     focus-container-elevation-shadow: var(--mat-sys-level3),
+    foreground-color: var(--mat-sys-on-primary),
     extended-container-elevation-shadow: var(--mat-sys-level2),
     extended-hover-container-elevation-shadow: var(--mat-sys-level3),
     extended-focus-container-elevation-shadow: var(--mat-sys-level3),
     extended-container-height: var(--fab-size),
+    small-container-color: var(--mat-sys-primary),
     small-container-elevation-shadow: var(--mat-sys-level2),
     small-hover-container-elevation-shadow: var(--mat-sys-level3),
     small-focus-container-elevation-shadow: var(--mat-sys-level3),
+    small-foreground-color: var(--mat-sys-on-primary),
   ));
 
   /* Button Toggle */
