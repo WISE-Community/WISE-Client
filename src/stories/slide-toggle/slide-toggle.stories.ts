@@ -53,5 +53,28 @@ export const Basic: Story = {
     checked: false,
     disabled: false,
     hideIcon: false
-  }
+  },
+  tags: ['!autodocs', '!dev']
+};
+
+export const HideIcon: Story = {
+  render: () => ({
+    template: `
+      <div class="flex gap-4">
+        <mat-slide-toggle [checked]="true">With icon</mat-slide-toggle>
+        <mat-slide-toggle [checked]="true" hideIcon>Without icon</mat-slide-toggle>
+      </div>
+    `
+  })
+};
+
+export const LabelPosition: Story = {
+  render: () => ({
+    template: `
+      <div class="flex flex-col gap-4 items-start">
+        <mat-slide-toggle labelPosition="after">Label after</mat-slide-toggle>
+        <mat-slide-toggle labelPosition="before">Label before</mat-slide-toggle>
+      </div>
+    `
+  })
 };

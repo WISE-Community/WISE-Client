@@ -42,26 +42,31 @@ html {
   color: var(--mat-sys-on-background);
   line-height: 1.4;
 
+  a {
+    text-decoration: underline;
+    color: var(--mat-sys-primary);
+  }
+
   /* Typography */
 
   @include theme-typography.typography-hierarchy;
 
   @include mat.theme-overrides((
-    label-small: 500 0.875rem / 1.25rem Cabin,
-    label-medium: 500 1rem / 1.5rem Cabin,
-    label-large: 500 1.125rem / 1.625rem Cabin,
-    body-small: 400 1rem / 1.5rem Cabin,
-    body-medium: 400 1.125rem / 1.625rem Cabin,
-    body-large: 400 1.25rem / 1.75rem Cabin,
-    title-small: 500 1.125rem / 1.625rem Cabin,
-    title-medium: 500 1.25rem / 1.75rem Cabin,
-    title-large: 600 1.5rem / 2rem Cabin,
-    headline-small: 500 1.625rem / 2.125rem Cabin,
-    headline-medium: 600 1.75rem / 2.25rem Cabin,
-    headline-large: 600 2rem / 2.5rem Cabin,
-    display-small: 600 2.5rem / 3rem Cabin,
-    display-medium: 600 2.875rem / 3.25rem Cabin,
-    display-large: 600 3.25rem / 3.75rem Cabin,
+    label-small: 500 0.75rem / 1.125rem Cabin,
+    label-medium: 500 0.875rem / 1.25rem Cabin,
+    label-large: 500 1rem / 1.5rem Cabin,
+    body-small: 400 0.875rem / 1.25rem Cabin,
+    body-medium: 400 1rem / 1.5rem Cabin,
+    body-large: 400 1.125rem / 1.625rem Cabin,
+    title-small: 500 1rem / 1.5rem Cabin,
+    title-medium: 500 1.125rem / 1.625rem Cabin,
+    title-large: 600 1.25rem / 1.875rem Cabin,
+    headline-small: 500 1.5rem / 2rem Cabin,
+    headline-medium: 600 1.625rem / 2.25rem Cabin,
+    headline-large: 600 1.75rem / 2.5rem Cabin,
+    display-small: 600 2rem / 2.875rem Cabin,
+    display-medium: 600 2.5rem / 3.25rem Cabin,
+    display-large: 600 3rem / 3.75rem Cabin,
   ));
 
   /* Autocomplete */
