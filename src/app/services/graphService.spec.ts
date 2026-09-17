@@ -16,8 +16,8 @@ let service: GraphService;
 describe('GraphService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
+      imports: [],
+      providers: [
         AnnotationService,
         ConfigService,
         GraphService,
@@ -27,8 +27,8 @@ describe('GraphService', () => {
         TagService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-});
+      ]
+    });
     service = TestBed.inject(GraphService);
     http = TestBed.inject(HttpTestingController);
     spyOn(TestBed.inject(ConfigService), 'getRunId').and.returnValue(runId);
@@ -111,7 +111,7 @@ function createComponent() {
   it('should create a graph component', () => {
     const component = service.createComponent();
     expect(component.type).toEqual('Graph');
-    expect(component.title).toEqual('');
+    expect(component.graphTitle).toEqual('');
     expect(component.width).toEqual(800);
     expect(component.height).toEqual(500);
     expect(component.enableTrials).toEqual(false);
@@ -508,17 +508,14 @@ function getClassmateStudentWork() {
       .flush([]);
   });
 
-  it(
-    'should get classmate student work from class',
-    waitForAsync(() => {
-      service
-        .getClassmateStudentWork(nodeId2, componentId2, periodId, nodeId1, componentId1, 'class')
-        .subscribe();
-      http
-        .expectOne(
-          `/api/classmate/graph/student-work/${runId}/${nodeId2}/${componentId2}/${nodeId1}/${componentId1}/class`
-        )
-        .flush([]);
-    })
-  );
+  it('should get classmate student work from class', waitForAsync(() => {
+    service
+      .getClassmateStudentWork(nodeId2, componentId2, periodId, nodeId1, componentId1, 'class')
+      .subscribe();
+    http
+      .expectOne(
+        `/api/classmate/graph/student-work/${runId}/${nodeId2}/${componentId2}/${nodeId1}/${componentId1}/class`
+      )
+      .flush([]);
+  }));
 }

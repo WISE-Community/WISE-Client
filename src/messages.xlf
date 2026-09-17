@@ -339,7 +339,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-close/dialog-with-close.component.html</context>
-          <context context-type="linenumber">11,13</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/dialog-with-open-in-new-window/dialog-with-open-in-new-window.component.html</context>
@@ -1561,7 +1561,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">42,46</context>
+          <context context-type="linenumber">39,44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8132424293432274889" datatype="html">
@@ -1623,11 +1623,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">20,24</context>
+          <context context-type="linenumber">17,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">43,47</context>
+          <context context-type="linenumber">40,44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
@@ -1707,7 +1707,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">49,53</context>
+          <context context-type="linenumber">50,53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="135709947954147754" datatype="html">
@@ -1739,7 +1739,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">50,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4794443509874758508" datatype="html">
@@ -1861,7 +1861,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">36,40</context>
+          <context context-type="linenumber">37,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2634265024545519524" datatype="html">
@@ -2174,8 +2174,8 @@
           <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="sourcefile">src/app/forgot/student/abstract-forgot-student-password.component.ts</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.ts</context>
@@ -2222,11 +2222,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">28,31</context>
+          <context context-type="linenumber">37,40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">51,54</context>
+          <context context-type="linenumber">60,63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
@@ -2447,7 +2447,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">27,31</context>
+          <context context-type="linenumber">24,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
@@ -2509,17 +2509,6 @@
         <source>Trouble Signing In</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">162</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">170</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6892681827231609313" datatype="html">
-        <source>Need Help Using WISE</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">163</context>
         </context-group>
         <context-group purpose="location">
@@ -2527,8 +2516,8 @@
           <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2072690839988671006" datatype="html">
-        <source>Problems with a WISE Unit</source>
+      <trans-unit id="6892681827231609313" datatype="html">
+        <source>Need Help Using WISE</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">164</context>
@@ -2538,19 +2527,19 @@
           <context context-type="linenumber">172</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2959002981630304422" datatype="html">
-        <source>Feedback to WISE</source>
+      <trans-unit id="2072690839988671006" datatype="html">
+        <source>Problems with a WISE Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">165</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8693603235657020323" datatype="html">
-        <source>Other</source>
+      <trans-unit id="2959002981630304422" datatype="html">
+        <source>Feedback to WISE</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">166</context>
@@ -2558,6 +2547,17 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">177</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8693603235657020323" datatype="html">
+        <source>Other</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
+          <context context-type="linenumber">167</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
+          <context context-type="linenumber">178</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/profile.constants.ts</context>
@@ -2568,7 +2568,7 @@
         <source>Student Management</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">173</context>
+          <context context-type="linenumber">174</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
@@ -2583,21 +2583,28 @@
         <source>Need Help with Authoring</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6193846139411583890" datatype="html">
         <source>Publish Unit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1936787644032074292" datatype="html">
         <source>Publish my unit to the WISE Community Built library</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6993881133783105369" datatype="html">
+        <source>Unit failed to load in the Authoring Tool</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4340256332658641886" datatype="html">
@@ -3282,11 +3289,18 @@
           <context context-type="linenumber">61,63</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8529411548573789540" datatype="html">
+        <source>You have entered an incorrect answer too many times. For security reasons, we will lock the ability to change your password for 10 minutes. After 10 minutes, please go back to the Forgot Student Password page to try again, or ask your teacher to change your password.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/forgot/student/abstract-forgot-student-password.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6582573664846559511" datatype="html">
         <source>Change Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">4,7</context>
+          <context context-type="linenumber">4,5</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password-change/forgot-teacher-password-change.component.html</context>
@@ -3297,15 +3311,30 @@
           <context context-type="linenumber">38,40</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2830770750081682844" datatype="html">
+        <source>Forgot Student Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
+          <context context-type="linenumber">30,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
+          <context context-type="linenumber">53,58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="41074547664783243" datatype="html">
         <source>Create New Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.html</context>
-          <context context-type="linenumber">31,35</context>
+          <context context-type="linenumber">40,44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">54,58</context>
+          <context context-type="linenumber">63,67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
@@ -3332,6 +3361,13 @@
           <context context-type="linenumber">37,41</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6836735572532186849" datatype="html">
+        <source>The answer to your security question was not accepted. Please go back to the Forgot Student Password page to try again, or ask your teacher to change your password.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-change/forgot-student-password-change.component.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5980951580505110609" datatype="html">
         <source>Answer Security Question</source>
         <context-group purpose="location">
@@ -3343,32 +3379,25 @@
         <source>Answer required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
-          <context context-type="linenumber">21,25</context>
+          <context context-type="linenumber">18,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="18036423310428495" datatype="html">
         <source>Incorrect answer, please try again. If you can&apos;t remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.ts</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2665717943411228451" datatype="html">
         <source>Recaptcha failed. Please reload the page and try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">110</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.ts</context>
           <context context-type="linenumber">114</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2830770750081682844" datatype="html">
-        <source>Forgot Student Password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/forgot/student/forgot-student-password/forgot-student-password.component.html</context>
-          <context context-type="linenumber">4,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6524836038284478037" datatype="html">
@@ -6096,7 +6125,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">27,28</context>
+          <context context-type="linenumber">31,32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
@@ -6402,7 +6431,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">36,37</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/dataExport/export-item/export-item.component.html</context>
@@ -6777,6 +6806,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/share-run-dialog/share-run-dialog.component.html</context>
           <context context-type="linenumber">54,56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-input/translatable-input.component.html</context>
+          <context context-type="linenumber">17,20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-input/translatable-input.component.html</context>
+          <context context-type="linenumber">53,56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
@@ -7183,7 +7220,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">39,43</context>
+          <context context-type="linenumber">40,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3947176614980068869" datatype="html">
@@ -7309,14 +7346,14 @@
         <source><x id="INTERPOLATION" equiv-text="{{ maxScore }}"/> point</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/possible-score/possible-score.component.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">3,4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3272612818120648715" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ maxScore }}"/> points</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/possible-score/possible-score.component.html</context>
-          <context context-type="linenumber">6,8</context>
+          <context context-type="linenumber">5,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8966275495512914766" datatype="html">
@@ -8297,7 +8334,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">82,84</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7320027445219108849" datatype="html">
@@ -9143,7 +9180,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3570561190371217661" datatype="html">
@@ -11173,14 +11210,14 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Edit: <x id="INTERPOLATION" equiv-text="{{ componentIndex }}"/>. <x id="INTERPOLATION_1" equiv-text="{{ componentTypeLabel }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">31,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6201638315245239510" datatype="html">
         <source>Advanced</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">32,35</context>
+          <context context-type="linenumber">34,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-node-advanced-button/edit-node-advanced-button.component.ts</context>
@@ -11191,7 +11228,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source> Close </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-dialog/edit-component-dialog.component.ts</context>
-          <context context-type="linenumber">49,54</context>
+          <context context-type="linenumber">55,60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/node-advanced-authoring/node-advanced-authoring.component.html</context>
@@ -11200,6 +11237,13 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
           <context context-type="linenumber">114,119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6423582700668158689" datatype="html">
+        <source>Activity Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/components/edit-component-title/edit-component-title.component.ts</context>
+          <context context-type="linenumber">15,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3021342818793175999" datatype="html">
@@ -11317,7 +11361,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         <source>Translate with AI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-input/translatable-input.component.html</context>
-          <context context-type="linenumber">22,27</context>
+          <context context-type="linenumber">33,38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
@@ -11927,7 +11971,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">52,55</context>
+          <context context-type="linenumber">53,56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1035141360074485815" datatype="html">
@@ -12010,7 +12054,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">91,93</context>
+          <context context-type="linenumber">115,117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5263249600886629291" datatype="html">
@@ -13835,39 +13879,53 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="linenumber">32,35</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6612727015582273891" datatype="html">
-        <source>This unit does not have a unit icon.</source>
+      <trans-unit id="6870523388196972562" datatype="html">
+        <source> This unit does not have a unit icon. Click the edit button to set one. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">41,42</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8401624672824530115" datatype="html">
-        <source>Click the edit button to set one.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">42,45</context>
+          <context context-type="linenumber">41,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8945986900727189150" datatype="html">
         <source>Choose a new Unit Icon by clicking on one below or upload your own custom icon.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">53,56</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4842432534148275616" datatype="html">
         <source> Upload </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">57,60</context>
+          <context context-type="linenumber">56,59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6858185877388566421" datatype="html">
         <source>Choose this project icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
-          <context context-type="linenumber">69,72</context>
+          <context context-type="linenumber">68,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7103588127254721505" datatype="html">
+        <source>Theme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
+          <context context-type="linenumber">81,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1651144065738505799" datatype="html">
+        <source> Show activity titles </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
+          <context context-type="linenumber">90,92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8417343322191182680" datatype="html">
+        <source> Show activity icons </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-info-authoring/project-info-authoring.component.html</context>
+          <context context-type="linenumber">99,103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="509652731863088977" datatype="html">
@@ -13910,42 +13968,42 @@ The branches will be removed but the steps will remain in the unit.</source>
         <source>You have no units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">48,51</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9063616864663648521" datatype="html">
         <source>Shared Units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">60,62</context>
+          <context context-type="linenumber">64,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7727005768668091798" datatype="html">
         <source>You have no shared units</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.html</context>
-          <context context-type="linenumber">62,65</context>
+          <context context-type="linenumber">66,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5269484094677699060" datatype="html">
         <source>Copying Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5317921744918848185" datatype="html">
         <source>There was an error copying this unit. Please contact WISE staff.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4550129747596313114" datatype="html">
         <source> (Run ID: <x id="PH" equiv-text="project.runId"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5435676366729047906" datatype="html">
@@ -13954,14 +14012,35 @@ The branches will be removed but the steps will remain in the unit.</source>
 <x id="PH" equiv-text="projectInfo"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1460984918484282139" datatype="html">
         <source>Loading Unit...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8572680220219165444" datatype="html">
+        <source>Trouble Loading Unit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6848192494939890612" datatype="html">
+        <source>The unit is taking longer than expected to load.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="780109974941677602" datatype="html">
+        <source>Click here to contact WISE staff.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/authoringTool/project-list/project-list.component.ts</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1278268521087394642" datatype="html">
@@ -14977,7 +15056,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
-          <context context-type="linenumber">8,11</context>
+          <context context-type="linenumber">5,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3336830894168346534" datatype="html">
@@ -16734,7 +16813,7 @@ Are you sure you want to proceed?</source>
         <source>An error occurred.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/ai-chat-student/ai-chat-student.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">112</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8271357500216966879" datatype="html">
@@ -17346,7 +17425,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/draw-student/draw-student.component.html</context>
-          <context context-type="linenumber">43,47</context>
+          <context context-type="linenumber">43,48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/label-student/label-student.component.html</context>
@@ -22071,7 +22150,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Credit: <x id="INTERPOLATION" equiv-text="{{ infoString }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/outside-url-student/outside-url-student.component.html</context>
-          <context context-type="linenumber">7,9</context>
+          <context context-type="linenumber">8,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5734555357630269297" datatype="html">
@@ -22191,14 +22270,14 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You have new chat messages</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
-          <context context-type="linenumber">251</context>
+          <context context-type="linenumber">261</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8602610569031787041" datatype="html">
         <source>Are you sure you want to replace the current text in your response input box with this text?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-student/peer-chat-student.component.ts</context>
-          <context context-type="linenumber">301</context>
+          <context context-type="linenumber">311</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1798145324838976344" datatype="html">
@@ -22508,28 +22587,28 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3834814461916183420" datatype="html">
         <source>You must complete &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1745852243024604075" datatype="html">
         <source>You must submit work on &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the class summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8412691431688558361" datatype="html">
         <source>You must complete &quot;<x id="PH" equiv-text="this.otherStepTitle"/>&quot; to view the class summary.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-student/summary-student.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6594489851569621957" datatype="html">
@@ -23065,18 +23144,18 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">11,12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7745872778453660862" datatype="html">
-        <source> Previous step </source>
+      <trans-unit id="4786560771895410792" datatype="html">
+        <source>Previous step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">4,8</context>
+          <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6726890478056068381" datatype="html">
-        <source> Next step </source>
+      <trans-unit id="168761137939271501" datatype="html">
+        <source>Next step</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/node-navigation/node-navigation.component.html</context>
-          <context context-type="linenumber">10,14</context>
+          <context context-type="linenumber">11,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="629070935308008546" datatype="html">
@@ -23867,21 +23946,21 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">8,9</context>
+          <context context-type="linenumber">6,7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5926207769041293626" datatype="html">
         <source>Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="linenumber">24,25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="962551360143606449" datatype="html">
         <source> Chat with <x id="INTERPOLATION" equiv-text="{{ selectedAvatar.name }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/computer-avatar-selector/computer-avatar-selector.component.html</context>
-          <context context-type="linenumber">52,54</context>
+          <context context-type="linenumber">48,50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1098411996448900439" datatype="html">

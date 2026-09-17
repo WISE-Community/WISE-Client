@@ -57,7 +57,7 @@ function getRedirectUrl() {
   describe('getRedirectUrl()', () => {
     it('should add redirectUrl to Google login url', () => {
       expect(component.getRedirectUrl('google')).toEqual(
-        `${contextPath}/api/google-login?redirectUrl=${redirectUrl}`
+        `/oauth2/authorization/google?redirectUrl=/wise/api/j_acegi_security_check`
       );
     });
   });

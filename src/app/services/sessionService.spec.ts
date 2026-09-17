@@ -19,7 +19,7 @@ describe('SessionService', () => {
 
   calculateIntervals();
   initializeSession();
-  mouseMoved();
+  userIsActive();
   checkMouseevent();
   checkForLogout();
   renewSession();
@@ -61,10 +61,10 @@ function initializeSession() {
   });
 }
 
-function mouseMoved() {
-  describe('mouseMoved()', () => {
-    it('should set last activity timestamp when mouse is moved', () => {
-      service.mouseMoved();
+function userIsActive() {
+  describe('userIsActive()', () => {
+    it('should set last activity timestamp when the user interacts', () => {
+      service.userIsActive();
       const renewSessionSpy = spyOn(service, 'renewSession');
       service.checkMouseEvent();
       expect(renewSessionSpy).toHaveBeenCalled();

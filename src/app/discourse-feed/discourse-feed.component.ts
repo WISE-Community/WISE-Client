@@ -14,9 +14,7 @@ export abstract class DiscourseFeedComponent {
   ngOnInit(): void {
     this.http.get(this.getUrl()).subscribe(({ topic_list }: any) => {
       this.topics = topic_list.topics
-        .filter((topic) => {
-          return !topic.pinned_globally;
-        })
+        .filter((topic: any) => !(topic.pinned_globally || topic.archived))
         .slice(0, 3);
       this.loaded = true;
     });

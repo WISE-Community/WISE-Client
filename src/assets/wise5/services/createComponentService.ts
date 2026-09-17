@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { TeacherProjectService } from './teacherProjectService';
 import { ComponentServiceLookupService } from './componentServiceLookupService';
 import { Node } from '../common/Node';
+import { ComponentInfoService } from './componentInfoService';
 
 @Injectable()
 export class CreateComponentService {
   constructor(
     private componentServiceLookupService: ComponentServiceLookupService,
+    private componentInfoService: ComponentInfoService,
     private projectService: TeacherProjectService
   ) {}
 

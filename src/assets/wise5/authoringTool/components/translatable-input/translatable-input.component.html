@@ -8,6 +8,17 @@
       (ngModelChange)="translationTextChanged.next($event)"
       placeholder="{{ placeholder }}"
     />
+    @if (hasClearButton && translationText) {
+      <button
+        matSuffix
+        mat-icon-button
+        (click)="translationText = ''; translationTextChanged.next('')"
+        aria-label="Clear"
+        i18n-aria-label
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    }
     @if (hint) {
       <mat-hint>{{ hint }}</mat-hint>
     }
@@ -33,6 +44,17 @@
       (ngModelChange)="defaultLanguageTextChanged.next($event)"
       placeholder="{{ placeholder }}"
     />
+    @if (hasClearButton && content[key]) {
+      <button
+        matSuffix
+        mat-icon-button
+        (click)="content[key] = ''; defaultLanguageTextChanged.next('')"
+        aria-label="Clear"
+        i18n-aria-label
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    }
     @if (hint) {
       <mat-hint>{{ hint }}</mat-hint>
     }

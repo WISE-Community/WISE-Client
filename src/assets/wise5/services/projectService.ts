@@ -20,6 +20,7 @@ import { DynamicPrompt } from '../directives/dynamic-prompt/DynamicPrompt';
 import { Component } from '../common/Component';
 import { ProjectLocale } from '../../../app/domain/projectLocale';
 import { Language } from '../../../app/domain/language';
+import { ThemeSettings } from '../common/ThemeSettings';
 
 @Injectable()
 export class ProjectService {
@@ -799,21 +800,11 @@ export class ProjectService {
     return `${this.configService.getWISEBaseURL()}/assets/wise5/themes/default`;
   }
 
-  /**
-   * Returns the theme settings for the current project
-   */
-  getThemeSettings(): any {
-    let themeSettings = {};
-    if (this.project.themeSettings) {
-      if (this.project.theme) {
-        // TODO: check if this is a valid theme (using ConfigService) rather than just truthy
-        themeSettings = this.project.themeSettings[this.project.theme];
-      } else {
-        // TODO: get default theme name from ConfigService
-        themeSettings = this.project.themeSettings['default'];
-      }
+  getThemeSettings(): ThemeSettings {
+    if (this.project) {
+      return (this.project.themeSettings ??= new ThemeSettings());
     }
-    return themeSettings ? themeSettings : {};
+    return new ThemeSettings();
   }
 
   /**
@@ -1873,7 +1864,7 @@ export class ProjectService {
   }
 
   getSpeechToTextSettings(): any {
-    return this.project.speechToText;
+    return this.project?.speechToText;
   }
 
   getPreviousNodeId(nodeId: string): string {

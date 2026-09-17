@@ -43,14 +43,19 @@
   />
   <div
     id="content"
-    class="vle-content"
-    [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
+    class="vle-content mat-app-background"
+    [ngClass]="{
+      'nav-view': layoutState === 'nav',
+      'node-view': layoutState === 'node',
+      'pb-10': reportEnabled
+    }"
   >
     @if (runEndedAndLocked) {
       <run-ended-and-locked-message class="notice" />
     }
     @if (layoutState === 'node') {
       <node class="top" [node]="currentNode" />
+      <node-navigation class="l-constrained px-2 mb-12" />
     }
     @if (layoutState === 'nav') {
       <navigation class="top" />
@@ -78,7 +83,7 @@
         <node class="node-tabbed top" [node]="currentNode" />
       }
       <div class="node-nav">
-        <node-navigation class="l-constrained" />
+        <node-navigation class="l-constrained" [showPrevNodeNav]="true" />
       </div>
     </div>
   </div>

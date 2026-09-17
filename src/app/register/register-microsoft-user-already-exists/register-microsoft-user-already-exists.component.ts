@@ -8,6 +8,6 @@ import { MatButton } from '@angular/material/button';
 })
 export class RegisterMicrosoftUserAlreadyExistsComponent {
   protected login(): void {
-    window.location.href = `/api/microsoft-login?redirectUrl=/`;
+    window.location.href = `/oauth2/authorization/microsoft`;
   }
 }

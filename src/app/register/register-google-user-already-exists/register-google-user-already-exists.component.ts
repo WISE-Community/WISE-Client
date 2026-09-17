@@ -13,6 +13,6 @@ export class RegisterGoogleUserAlreadyExistsComponent {
   constructor(private configService: ConfigService) {}
 
   public socialSignIn(socialPlatform: string) {
-    window.location.href = `${this.configService.getContextPath()}/api/google-login`;
+    window.location.href = `${this.configService.getContextPath()}/oauth2/authorization/google`;
   }
 }

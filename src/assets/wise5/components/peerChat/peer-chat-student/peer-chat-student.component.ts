@@ -27,12 +27,14 @@ import { ComponentHeaderComponent } from '../../../directives/component-header/c
 import { PeerChatQuestionBankComponent } from '../peer-chat-question-bank/peer-chat-question-bank.component';
 import { PeerChatChatBoxComponent } from '../peer-chat-chat-box/peer-chat-chat-box.component';
 import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
+import { PeerChatMembersComponent } from '../peer-chat-members/peer-chat-members.component';
 
 @Component({
   imports: [
     ComponentAnnotationsComponent,
     ComponentHeaderComponent,
     PeerChatChatBoxComponent,
+    PeerChatMembersComponent,
     PeerChatQuestionBankComponent
   ],
   providers: [QuestionBankService],
@@ -55,6 +57,7 @@ export class PeerChatStudentComponent extends ComponentStudent {
   questionIdsUsed: string[] = [];
   requestTimeout: number = 10000;
   response: string = '';
+  protected workgroupInfosWithoutTeachers: any[];
 
   constructor(
     protected annotationService: AnnotationService,
@@ -128,6 +131,9 @@ export class PeerChatStudentComponent extends ComponentStudent {
             const peerGroupWorkgroupIds = peerGroup.getWorkgroupIds();
             this.addTeacherWorkgroupIds(peerGroupWorkgroupIds);
             this.setPeerChatWorkgroups(peerGroupWorkgroupIds);
+            this.workgroupInfosWithoutTeachers = this.filterOutTeachers(
+              this.peerChatWorkgroupInfos
+            );
             forkJoin([
               this.getPeerChatComponentStates(peerGroup),
               this.getPeerChatAnnotations(peerGroup)
@@ -142,6 +148,10 @@ export class PeerChatStudentComponent extends ComponentStudent {
           this.isPeerChatWorkgroupsResponseReceived = true;
         }
       );
+  }
+
+  private filterOutTeachers(workgroupInfos: any): any[] {
+    return Object.values(workgroupInfos).filter((workgroupInfo: any) => !workgroupInfo.isTeacher);
   }
 
   private addTeacherWorkgroupIds(workgroupIds: number[]): void {

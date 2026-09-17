@@ -1,3 +1,4 @@
+import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
 import html2canvas from 'html2canvas';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AnnotationService } from '../../../services/annotationService';
@@ -19,6 +20,7 @@ import { ComponentAnnotationsComponent } from '../../../directives/componentAnno
 
 @Component({
   imports: [
+    ComponentHeaderComponent,
     AddToNotebookButtonComponent,
     ComponentSaveSubmitButtonsComponent,
     ComponentAnnotationsComponent

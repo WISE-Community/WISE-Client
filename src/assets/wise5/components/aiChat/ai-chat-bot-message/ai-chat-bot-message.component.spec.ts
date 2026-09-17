@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AiChatBotMessageComponent } from './ai-chat-bot-message.component';
 import { ComputerAvatarService } from '../../../services/computerAvatarService';
 import { AiChatMessage } from '../AiChatMessage';
+import { MarkdownService } from 'ngx-markdown';
 
 describe('AiChatBotMessageComponent', () => {
   let component: AiChatBotMessageComponent;
@@ -10,7 +11,7 @@ describe('AiChatBotMessageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AiChatBotMessageComponent],
-      providers: [ComputerAvatarService]
+      providers: [ComputerAvatarService, MarkdownService]
     });
     fixture = TestBed.createComponent(AiChatBotMessageComponent);
     component = fixture.componentInstance;

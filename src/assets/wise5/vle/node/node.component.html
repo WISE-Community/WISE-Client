@@ -1,8 +1,5 @@
 <div class="l-constrained">
-  <div
-    class="node-content mat-elevation-z1 flex flex-wrap"
-    style="border-color: {{ nodeStatus?.icon?.color }}; position: relative;"
-  >
+  <div class="flex flex-wrap @container">
     @if (showRubric) {
       <div class="node-content__rubric flex items-center justify-center">
         <help-icon [content]="node.rubric" label="Step Info" i18n-label icon="info" />
@@ -11,51 +8,56 @@
     @for (component of components; track component) {
       @if (componentToVisible[component.id]) {
         <div
-          id="component_{{ component.id }}"
-          class="component max-lg:!w-full"
+          class="@max-4xl:!w-full p-2"
           [ngStyle]="{ width: component.componentWidth ? component.componentWidth + '%' : '100%' }"
         >
-          <component
-            [nodeId]="node.id"
-            [componentId]="component.id"
-            [componentState]="getComponentStateByComponentId(component.id)"
-            [workgroupId]="workgroupId"
-            (saveComponentStateEvent)="saveComponentState($event)"
-          />
+          <mat-card id="component_{{ component.id }}" class="h-full">
+            <mat-card-content>
+              <component
+                [nodeId]="node.id"
+                [componentId]="component.id"
+                [componentState]="getComponentStateByComponentId(component.id)"
+                [workgroupId]="workgroupId"
+                (saveComponentStateEvent)="saveComponentState($event)"
+              />
+            </mat-card-content>
+          </mat-card>
         </div>
       }
     }
-    <div class="node-content__actions flex items-center gap-3">
-      @if (node.showSaveButton) {
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="save()"
-          [disabled]="disabled || !dirtyComponentIds.length"
-          aria-label="Save"
-          i18n-aria-label
-          i18n
-        >
-          Save
-        </button>
-      }
-      @if (node.showSubmitButton) {
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="submit()"
-          [disabled]="disabled || !dirtySubmitComponentIds.length"
-          aria-label="Submit"
-          i18n-aria-label
-          i18n
-        >
-          Submit
-        </button>
-      }
-      @if (latestComponentState && (node.showSaveButton || node.showSubmitButton)) {
-        <component-state-info [componentState]="latestComponentState" />
-      }
-    </div>
+    @if (node.showSaveButton || node.showSubmitButton) {
+      <div class="flex items-center gap-3 p-2">
+        @if (node.showSaveButton) {
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="save()"
+            [disabled]="disabled || !dirtyComponentIds.length"
+            aria-label="Save"
+            i18n-aria-label
+            i18n
+          >
+            Save
+          </button>
+        }
+        @if (node.showSubmitButton) {
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="submit()"
+            [disabled]="disabled || !dirtySubmitComponentIds.length"
+            aria-label="Submit"
+            i18n-aria-label
+            i18n
+          >
+            Submit
+          </button>
+        }
+        @if (latestComponentState) {
+          <component-state-info [componentState]="latestComponentState" />
+        }
+      </div>
+    }
     @if (isSurvey && !isBranchNode && !nextNodeId) {
       <div class="node-content__actions w-full">
         <mat-divider class="!mt-2 border-2" />

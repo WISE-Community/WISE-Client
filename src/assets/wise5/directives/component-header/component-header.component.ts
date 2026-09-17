@@ -1,27 +1,52 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Component, EventEmitter, Input, inject, Output } from '@angular/core';
 import { Component as WISEComponent } from '../../common/Component';
 import { FeedbackRule } from '../../components/common/feedbackRule/FeedbackRule';
 import { DynamicPrompt } from '../dynamic-prompt/DynamicPrompt';
+import { MatIconModule } from '@angular/material/icon';
 import { PossibleScoreComponent } from '../../../../app/possible-score/possible-score.component';
 import { PromptComponent } from '../prompt/prompt.component';
+import { ComponentInfoService } from '../../services/componentInfoService';
+import { ProjectService } from '../../services/projectService';
+import { ThemeSettings } from '../../common/ThemeSettings';
 
 @Component({
-  imports: [PossibleScoreComponent, PromptComponent],
+  imports: [MatIconModule, PossibleScoreComponent, PromptComponent],
   selector: 'component-header',
-  styles: ['.component-header { padding-bottom: 8px; } .prompt { font-weight: 500; }'],
   templateUrl: 'component-header.component.html'
 })
 export class ComponentHeaderComponent {
   @Input() component: WISEComponent;
+  private componentInfoService = inject(ComponentInfoService);
+  private projectService = inject(ProjectService);
   protected dynamicPrompt: DynamicPrompt;
   @Output() dynamicPromptChanged: EventEmitter<FeedbackRule> = new EventEmitter<FeedbackRule>();
-  protected prompt: SafeHtml;
+  protected hasPrompt: boolean;
+  @Input() showPrompt: boolean = true;
+  protected themeSettings: ThemeSettings;
 
-  constructor(protected sanitizer: DomSanitizer) {}
+  protected get icon(): string {
+    return this.componentInfoService.getInfo(this.component.content.type).getIcon();
+  }
+
+  protected get title(): string {
+    return this.component.content.title || '';
+  }
+
+  protected get prompt(): string {
+    return this.component.content.prompt || '';
+  }
+
+  protected get showTitle(): boolean {
+    return this.title && this.themeSettings?.showComponentTitles;
+  }
+
+  protected get showIcon(): boolean {
+    return this.showTitle && this.themeSettings?.showComponentTypeIcons;
+  }
 
   ngOnInit(): void {
-    this.prompt = this.sanitizer.bypassSecurityTrustHtml(this.component.content.prompt);
+    this.themeSettings = new ThemeSettings(this.projectService.getThemeSettings());
+    this.hasPrompt = this.prompt && this.showPrompt;
     this.dynamicPrompt = new DynamicPrompt(this.component.content.dynamicPrompt);
   }
 
