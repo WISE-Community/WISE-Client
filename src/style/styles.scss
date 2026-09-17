@@ -329,6 +329,21 @@ html {
     right: calc(-1 * var(--outlined-button-horizontal-padding));
   }
 
+  /* Progress spinner */
+
+  .mdc-circular-progress[mode="determinate"] {
+    container-type: size;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 10cqmin solid var(--mat-sys-primary-container);
+      box-sizing: border-box;
+    }
+  }
+
   /* Select */
 
   @include mat.select-overrides((

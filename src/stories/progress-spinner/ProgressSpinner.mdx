@@ -1,0 +1,21 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as ProgressSpinnerStories from './progress-spinner.stories';
+
+<Meta of={ProgressSpinnerStories} name="Docs" />
+
+# Progress Spinner
+
+<p>
+  WISE progress spinners are used to give users feedback on the progress of a workflow or action..
+</p>
+<p>
+  WISE uses a customized version of the [Progress
+  Spinner](https://material.angular.dev/components/progress-spinner/overview) component from
+  [Angular Material](https://material.angular.dev). Check out the Angular Material documentation for
+  more information.
+</p>
+
+<Canvas of={ProgressSpinnerStories.Basic} />
+<Controls of={ProgressSpinnerStories.Basic} />
+
+<Stories of={ProgressSpinnerStories} includePrimary={false} />
