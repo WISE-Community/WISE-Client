@@ -1,8 +1,5 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatInputComponent } from './chat-input.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockProvider } from 'ng-mocks';
-import { CRaterPingService } from '../../services/cRaterPingService';
 
 describe('ChatInputComponent', () => {
   let component: ChatInputComponent;
@@ -10,8 +7,7 @@ describe('ChatInputComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, ChatInputComponent],
-      providers: [MockProvider(CRaterPingService)]
+      imports: [ChatInputComponent]
     });
     fixture = TestBed.createComponent(ChatInputComponent);
     component = fixture.componentInstance;
@@ -20,5 +16,9 @@ describe('ChatInputComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should focus the textarea when the component renders', () => {
+    expect(document.activeElement).toBe(component.textareaRef.nativeElement);
   });
 });

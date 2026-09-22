@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,6 +15,11 @@ export class ChatInputComponent {
   protected response: string = '';
   @Input() submitDisabled: boolean = false;
   @Output() submitEvent: EventEmitter<string> = new EventEmitter<string>();
+  @ViewChild('responseTextarea') textareaRef!: ElementRef<HTMLTextAreaElement>;
+
+  ngAfterViewInit(): void {
+    this.textareaRef.nativeElement.focus();
+  }
 
   protected keyPressed(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
