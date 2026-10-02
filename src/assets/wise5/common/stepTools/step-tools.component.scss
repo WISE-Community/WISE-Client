@@ -39,3 +39,10 @@
     display: none;
   }
 }
+
+.node-select-option.mat-mdc-option {
+  .mat-icon {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
