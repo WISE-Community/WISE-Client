@@ -22,12 +22,6 @@
     }
   }
 
-  h2 {
-    .mat-icon {
-      @include mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-6'));
-    }
-  }
-
   .mat-headline-4 {
     margin-bottom: 36px;
 
@@ -136,6 +130,19 @@
   .mat-mdc-progress-bar {
     --mat-progress-bar-track-height: 12px;
     --mat-progress-bar-active-indicator-height: 12px;
+  }
+
+  .mdc-circular-progress[mode="determinate"] {
+    container-type: size;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 10cqmin solid color-mix(in srgb, var(--mat-progress-spinner-active-indicator-color) 25%, transparent);
+      box-sizing: border-box;
+    }
   }
 
   .mat-mdc-option, .mat-mdc-optgroup-label {

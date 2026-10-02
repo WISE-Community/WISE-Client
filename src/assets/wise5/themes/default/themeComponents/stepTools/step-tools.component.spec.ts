@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockProvider } from 'ng-mocks';
+import { MockComponent, MockProvider } from 'ng-mocks';
+import { NodeService } from '../../../../services/nodeService';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { StepSelectComponent } from '../stepSelect/step-select.component';
 import { StepToolsComponent } from './step-tools.component';
 import { StudentDataService } from '../../../../services/studentDataService';
 import { StudentService } from '../../../../../../app/student/student.service';
@@ -15,13 +17,19 @@ const nodeId1 = 'node1';
 const nodeStatus1 = { icon: '', isCompleted: true };
 const nodeStatus2 = { icon: '', isCompleted: false };
 let getCurrentNodeIdSpy: jasmine.Spy;
+
 describe('StepToolsComponent', () => {
   let component: StepToolsComponent;
   let fixture: ComponentFixture<StepToolsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, StepToolsComponent, StudentTeacherCommonServicesModule],
+      imports: [
+        NoopAnimationsModule,
+        StepToolsComponent,
+        StudentTeacherCommonServicesModule,
+        MockComponent(StepSelectComponent)
+      ],
       providers: [MockProvider(StudentService), provideHttpClient(withInterceptorsFromDi())]
     }).compileComponents();
   });

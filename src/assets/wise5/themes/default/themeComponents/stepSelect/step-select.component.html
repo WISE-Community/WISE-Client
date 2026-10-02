@@ -1,0 +1,143 @@
+<button
+  class="!px-2 step-select"
+  mat-button
+  [matMenuTriggerFor]="stepSelect"
+  (menuOpened)="onMenuOpened()"
+>
+  <div class="flex gap-2 items-center">
+    <mat-icon>menu</mat-icon>
+    <node-icon [nodeId]="nodeId" size="18" />
+    <span class="normal-case truncate">{{ currentNodeTitle }}</span>
+    <node-status-icon [nodeId]="nodeId" size="18" />
+  </div>
+</button>
+<mat-menu #stepSelect="matMenu" [overlapTrigger]="true" class="step-select-menu">
+  <div class="mat-app-background" (keydown.tab)="$event.stopPropagation()">
+    <div class="sticky top-0 z-10" (click)="$event.stopPropagation()">
+      <div class="px-3 py-2 app-bg-bg" i18n>Unit Progress</div>
+      <div class="px-3 py-2 flex flex-row items-center gap-2 mat-caption mat-app-background">
+        <span i18n>Completion:</span>
+        <ng-container
+          *ngTemplateOutlet="progressIndicator; context: {
+            progress: nodeStatuses[rootNodeId]?.progress,
+            isVisitable: true
+          }"
+        />
+        <span>{{ nodeStatuses[rootNodeId]?.progress?.completionPct }}%</span>
+      </div>
+      <mat-divider />
+    </div>
+    <div class="px-2">
+      <mat-nav-list>
+        <mat-accordion multi>
+          <div class="flex flex-col gap-2">
+            @for (group of groups; track group.id) {
+              @if (nodeStatuses[group.id]?.isVisible) {
+                <mat-expansion-panel
+                  hideToggle
+                  [expanded]="expandedGroups[group.id]"
+                  (opened)="expandedGroups[group.id] = true"
+                  (closed)="expandedGroups[group.id] = false"
+                >
+                  <mat-expansion-panel-header
+                    mat-list-item
+                    (click)="$event.stopPropagation()"
+                    (keydown.enter)="$event.stopPropagation()"
+                    (keydown.space)="$event.stopPropagation()"
+                  >
+                    <mat-panel-title>
+                      <div class="flex flex-row flex-grow items-center gap-2">
+                        <node-icon
+                          class="flex!"
+                          [nodeId]="group.id"
+                          [icon]="nodeStatuses[group.id]?.icon"
+                          size="24"
+                        />
+                        <span class="mat-caption list-item-title">{{ group.title }}</span>
+                        <span class="flex-1"></span>
+                        <ng-container
+                          *ngTemplateOutlet="progressIndicator; context: {
+                            progress: nodeStatuses[group.id]?.progress,
+                            isVisitable: nodeStatuses[group.id]?.isVisitable,
+                            tooltip: getProgressTooltip(group.id)
+                          }"
+                        />
+                      </div>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  @for (child of group.children; track child.id) {
+                    @if (nodeStatuses[child.id]?.isVisible) {
+                      <button
+                        mat-list-item
+                        [activated]="child.id === nodeId"
+                        (click)="chooseNode(child.id)"
+                      >
+                        <div class="flex flex-row items-center gap-2 w-full">
+                          <node-icon
+                            [nodeId]="child.id"
+                            [icon]="nodeStatuses[child.id]?.icon"
+                            size="24"
+                            class="flex!"
+                          />
+                          <span class="mat-caption list-item-title">{{ child.title }}</span>
+                          <span class="flex-1"></span>
+                          <node-status-icon
+                            [nodeId]="child.id"
+                            size="18"
+                            class="shrink-0"
+                            [customClass]="child.id === nodeId ? 'primary' : ''"
+                          />
+                          @if (
+                            !nodeStatuses[child.id]?.isVisitable ||
+                            !nodeStatuses[group.id]?.isVisitable
+                          ) {
+                            <mat-icon
+                              class="shrink-0 mat-18"
+                              aria-label="Item is locked"
+                              i18n-aria-label
+                            >
+                              lock
+                            </mat-icon>
+                          }
+                        </div>
+                      </button>
+                    }
+                  }
+                </mat-expansion-panel>
+              }
+            }
+          </div>
+        </mat-accordion>
+      </mat-nav-list>
+    </div>
+  </div>
+</mat-menu>
+
+<ng-template
+  #progressIndicator
+  let-progress="progress"
+  let-isVisitable="isVisitable"
+  let-tooltip="tooltip"
+>
+  <span class="relative shrink-0">
+    @if (isVisitable === false) {
+      <mat-icon
+        class="icon-inside-progress"
+        aria-label="Item is locked"
+        i18n-aria-label
+      >
+        lock
+      </mat-icon>
+    } @else if (progress?.completionPct === 100) {
+      <mat-icon class="icon-inside-progress">check</mat-icon>
+    }
+    <mat-progress-spinner
+      [value]="progress?.completionPct"
+      [diameter]="24"
+      [matTooltip]="tooltip"
+      [matTooltipDisabled]="!tooltip"
+      i18n-matTooltip
+      matTooltipPosition="above"
+    />
+  </span>
+</ng-template>

@@ -1,18 +1,18 @@
 <ng-template #iconContent>
   @if (isImage()) {
-    <img
-      class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} {{ sizeClass }} avatar"
-      [src]="icon.imgSrc"
-      [alt]="icon.imgAlt"
-    />
+    <img class="{{ customClass }} {{ sizeClass }} avatar" [src]="icon.imgSrc" [alt]="icon.imgAlt" />
   }
   @if (isFont()) {
-    <div
+    <!-- <div
       style="background-color: {{ icon.color }}"
       class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} avatar"
+    > -->
+    <mat-icon
+      class="{{ sizeClass }} {{ icon.fontSet }} {{ customClass }}"
+      style="color: {{ icon.color }}"
+      >{{ icon.fontName }}</mat-icon
     >
-      <mat-icon class="{{ sizeClass }} {{ icon.fontSet }}">{{ icon.fontName }}</mat-icon>
-    </div>
+    <!-- </div> -->
   }
 </ng-template>
 
