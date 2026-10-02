@@ -1,5 +1,5 @@
 <button
-  class="!px-2 step-select"
+  class="!px-2 step-select w-48 sm:w-96"
   mat-button
   [matMenuTriggerFor]="stepSelect"
   (menuOpened)="onMenuOpened()"
@@ -18,10 +18,13 @@
       <div class="px-3 py-2 flex flex-row items-center gap-2 mat-caption mat-app-background">
         <span i18n>Completion:</span>
         <ng-container
-          *ngTemplateOutlet="progressIndicator; context: {
-            progress: nodeStatuses[rootNodeId]?.progress,
-            isVisitable: true
-          }"
+          *ngTemplateOutlet="
+            progressIndicator;
+            context: {
+              progress: nodeStatuses[rootNodeId]?.progress,
+              isVisitable: true
+            }
+          "
         />
         <span>{{ nodeStatuses[rootNodeId]?.progress?.completionPct }}%</span>
       </div>
@@ -56,11 +59,14 @@
                         <span class="mat-caption list-item-title">{{ group.title }}</span>
                         <span class="flex-1"></span>
                         <ng-container
-                          *ngTemplateOutlet="progressIndicator; context: {
-                            progress: nodeStatuses[group.id]?.progress,
-                            isVisitable: nodeStatuses[group.id]?.isVisitable,
-                            tooltip: getProgressTooltip(group.id)
-                          }"
+                          *ngTemplateOutlet="
+                            progressIndicator;
+                            context: {
+                              progress: nodeStatuses[group.id]?.progress,
+                              isVisitable: nodeStatuses[group.id]?.isVisitable,
+                              tooltip: getProgressTooltip(group.id)
+                            }
+                          "
                         />
                       </div>
                     </mat-panel-title>
@@ -121,11 +127,7 @@
 >
   <span class="relative shrink-0">
     @if (isVisitable === false) {
-      <mat-icon
-        class="icon-inside-progress"
-        aria-label="Item is locked"
-        i18n-aria-label
-      >
+      <mat-icon class="icon-inside-progress" aria-label="Item is locked" i18n-aria-label>
         lock
       </mat-icon>
     } @else if (progress?.completionPct === 100) {
