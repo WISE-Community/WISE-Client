@@ -3,16 +3,11 @@
     <img class="{{ customClass }} {{ sizeClass }} avatar" [src]="icon.imgSrc" [alt]="icon.imgAlt" />
   }
   @if (isFont()) {
-    <!-- <div
-      style="background-color: {{ icon.color }}"
-      class="{{ isGroup ? 'avatar--square ' : '' }}{{ customClass }} avatar"
-    > -->
     <mat-icon
       class="{{ sizeClass }} {{ icon.fontSet }} {{ customClass }}"
       style="color: {{ icon.color }}"
       >{{ icon.fontName }}</mat-icon
     >
-    <!-- </div> -->
   }
 </ng-template>
 

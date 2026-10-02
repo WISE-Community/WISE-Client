@@ -1,5 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { MockProvider } from 'ng-mocks';
+import { MockComponent, MockProvider } from 'ng-mocks';
+import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
 import { NodeService } from '../../../../services/nodeService';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,14 +13,15 @@ import { VLEProjectService } from '../../../../vle/vleProjectService';
 import { of } from 'rxjs';
 import { RunInfo } from '../../../../../../app/student/run-info';
 
+const mockIcon = { type: 'font', fontSet: 'material-icons', fontName: 'help', color: '#000000' };
 const nodeId1 = 'node1';
 const nodeStatus1 = {
-  icon: '',
+  icon: mockIcon,
   isCompleted: true,
   progress: { completionPct: 100, completedItems: 1, totalItems: 1 }
 };
 const nodeStatus2 = {
-  icon: '',
+  icon: mockIcon,
   isCompleted: false,
   progress: { completionPct: 0, completedItems: 0, totalItems: 1 }
 };
@@ -32,7 +34,12 @@ describe('StepSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, StepSelectComponent, StudentTeacherCommonServicesModule],
+      imports: [
+        NoopAnimationsModule,
+        StepSelectComponent,
+        StudentTeacherCommonServicesModule,
+        MockComponent(NodeIconComponent)
+      ],
       providers: [MockProvider(StudentService), provideHttpClient(withInterceptorsFromDi())]
     }).compileComponents();
   });
@@ -52,15 +59,28 @@ describe('StepSelectComponent', () => {
       id === 'group1' ? ['node1'] : []
     );
     spyOn(projectService, 'getParentGroupId').and.returnValue('group1');
+    spyOn(projectService, 'getNode').and.callFake(
+      (id: string) =>
+        ({
+          isGroup: () => id.startsWith('group'),
+          getIcon: () => mockIcon
+        }) as any
+    );
 
     getCurrentNodeIdSpy = spyOn(TestBed.inject(StudentDataService), 'getCurrentNodeId');
     getCurrentNodeIdSpy.and.returnValue(nodeId1);
     spyOn(TestBed.inject(NodeStatusService), 'getNodeStatuses').and.returnValue({
-      group0: { isVisible: true, isVisitable: true, progress: { completionPct: 50 } },
+      group0: {
+        isVisible: true,
+        isVisitable: true,
+        progress: { completionPct: 50 },
+        icon: mockIcon
+      },
       group1: {
         isVisible: true,
         isVisitable: true,
-        progress: { completionPct: 50, completedItems: 1, totalItems: 2 }
+        progress: { completionPct: 50, completedItems: 1, totalItems: 2 },
+        icon: mockIcon
       },
       node1: nodeStatus1,
       node2: nodeStatus2
@@ -116,6 +136,6 @@ describe('StepSelectComponent', () => {
 
   it('should format progress tooltip correctly', () => {
     const tooltip = (component as any).getProgressTooltip('group1');
-    expect(tooltip).toBe('50% completed (1/2)');
+    expect(tooltip).toBe('50% completed (1/2 steps)');
   });
 });
