@@ -13,6 +13,7 @@ let fixture: ComponentFixture<VLEParentComponent>;
 let initializeVLEService: InitializeVLEService;
 let dataService: StudentDataService;
 let projectService: VLEProjectService;
+const groupId1: string = 'group1';
 const nodeId1: string = 'node1';
 let router: Router;
 const runId1: string = '1';
@@ -45,6 +46,8 @@ function ngOnInit() {
   describe('ngOnInit()', () => {
     initialize();
     previewConstraints();
+    groupNode();
+    inactiveNode();
     initializeStudent();
   });
 }
@@ -67,13 +70,60 @@ function expectInitialize(functionName: any, runId: string): void {
 }
 
 function previewConstraints() {
-  it('should set the starting node id when constraints are enabled', () => {
-    setRouterUrl(`/preview/unit/${runId1}/${nodeId1}`);
-    expectSetCurrentNode(nodeId1, true);
+  describe('previewConstraints', () => {
+    beforeEach(() => {
+      spyOn(projectService, 'isNodeActive').and.returnValue(true);
+      spyOn(projectService, 'isGroupNode').and.returnValue(false);
+    });
+    it('should set the starting node id when constraints are enabled', () => {
+      setRouterUrl(`/preview/unit/${runId1}/${nodeId1}`);
+      expectSetCurrentNode(nodeId1, true);
+    });
+    it('should set the starting node id when constraints are disabled', () => {
+      setRouterUrl(`/preview/unit/${runId1}/${nodeId1}?constraints=false`);
+      expectSetCurrentNode(nodeId1, true);
+    });
   });
-  it('should set the starting node id when constraints are disabled', () => {
-    setRouterUrl(`/preview/unit/${runId1}/${nodeId1}?constraints=false`);
-    expectSetCurrentNode(nodeId1, true);
+}
+
+function groupNode() {
+  describe('when requested url is a group node', () => {
+    beforeEach(() => {
+      spyOn(projectService, 'isNodeActive').and.returnValue(true);
+      spyOn(projectService, 'isGroupNode').and.returnValue(true);
+    });
+    it('should set the starting node id to group start id', () => {
+      setRouterUrl(`/preview/unit/${runId1}/${groupId1}`);
+      spyOn(projectService, 'getGroupStartId').and.returnValue(nodeId1);
+      expectSetCurrentNode(nodeId1, true);
+    });
+    it('should set the starting node id to project start node id when group has no start id', () => {
+      setRouterUrl(`/preview/unit/${runId1}/${groupId1}`);
+      spyOn(projectService, 'getGroupStartId').and.returnValue(null);
+      spyOn(projectService, 'getStartNodeId').and.returnValue('node2');
+      expectSetCurrentNode('node2', true);
+    });
+  });
+}
+
+function inactiveNode() {
+  describe('when requested url is not an active node', () => {
+    beforeEach(() => {
+      spyOn(projectService, 'isNodeActive').and.returnValue(false);
+    });
+    it('should set the starting node id when there is no last NodeEntered event', () => {
+      setRouterUrl(`/preview/unit/${runId1}/${nodeId1}`);
+      spyOn(dataService, 'getEvents').and.returnValue([]);
+      spyOn(projectService, 'getStartNodeId').and.returnValue('node2');
+      expectSetCurrentNode('node2', true);
+    });
+    it('should set the starting node id when there is last NodeEntered event', () => {
+      setRouterUrl(`/preview/unit/${runId1}/${nodeId1}`);
+      spyOn(dataService, 'getEvents').and.returnValue([{ event: 'nodeEntered', nodeId: 'node32' }]);
+      spyOn(projectService, 'getNodeById').and.returnValue({});
+      spyOn(projectService, 'isActive').and.returnValue(true);
+      expectSetCurrentNode('node32', true);
+    });
   });
 }
 
