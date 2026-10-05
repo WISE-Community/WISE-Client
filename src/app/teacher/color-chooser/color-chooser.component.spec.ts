@@ -17,4 +17,20 @@ describe('ColorChooserComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should default color to empty string', () => {
+    expect(component.color()).toBe('');
+  });
+
+  it('should update color when model is set', () => {
+    fixture.componentRef.setInput('color', '#009688');
+    fixture.detectChanges();
+    expect(component.color()).toBe('#009688');
+  });
+
+  it('should emit colorChange when color model is modified', () => {
+    spyOn(component.color, 'set').and.callThrough();
+    component.color.set('#D50000');
+    expect(component.color()).toBe('#D50000');
+  });
 });

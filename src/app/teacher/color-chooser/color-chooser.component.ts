@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatChipsModule],
   selector: 'color-chooser',
   styleUrl: './color-chooser.component.scss',
   templateUrl: './color-chooser.component.html'
 })
 export class ColorChooserComponent {
-  @Output() chooseColorEvent: EventEmitter<string> = new EventEmitter();
-  @Input() chosenColor: string;
-  protected colors: string[] = [
+  readonly color = model<string>('');
+  protected colorOptions: string[] = [
     '#66BB6A',
     '#009688',
     '#00B0FF',
