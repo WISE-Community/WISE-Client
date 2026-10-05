@@ -1,7 +1,6 @@
 import { ProjectService } from '../../services/projectService';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Node } from '../../common/Node';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -15,8 +14,6 @@ export class NodeIconComponent {
   @Input() canEdit: boolean;
   @Input() customClass: string;
   @Input() icon: any;
-  protected isGroup: boolean;
-  protected node: Node;
   @Input() nodeId: string;
   @Input() size: number;
   protected sizeClass: string;
@@ -27,8 +24,6 @@ export class NodeIconComponent {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.node = this.projectService.getNode(this.nodeId);
-    this.isGroup = this.node.isGroup();
     if (changes.icon == null) {
       this.icon = this.projectService.getNode(this.nodeId).getIcon();
     }

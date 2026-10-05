@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent, MockProvider } from 'ng-mocks';
-import { NodeService } from '../../../../services/nodeService';
-import { NodeStatusService } from '../../../../services/nodeStatusService';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { StepSelectComponent } from '../stepSelect/step-select.component';
@@ -38,13 +36,6 @@ describe('StepToolsComponent', () => {
     fixture = TestBed.createComponent(StepToolsComponent);
     getCurrentNodeIdSpy = spyOn(TestBed.inject(StudentDataService), 'getCurrentNodeId');
     getCurrentNodeIdSpy.and.returnValue(nodeId1);
-    spyOn(TestBed.inject(NodeStatusService), 'getNodeStatuses').and.returnValue({
-      node1: nodeStatus1,
-      node2: nodeStatus2
-    });
-    spyOn(TestBed.inject(NodeStatusService), 'getNodeStatusByNodeId').and.returnValue({
-      isCompleted: true
-    });
     const projectService = TestBed.inject(VLEProjectService);
     spyOn(projectService, 'nodeHasWork').and.returnValue(true);
     spyOn(projectService, 'getNodesByToNodeId').and.returnValue([]);

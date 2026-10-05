@@ -16,7 +16,7 @@ import { NodeIconComponent } from '../../vle/node-icon/node-icon.component';
 export class TeacherNodeIconComponent extends NodeIconComponent {
   protected openNodeIconChooserDialog(): void {
     this.dialog.open(NodeIconChooserDialogComponent, {
-      data: { node: this.node },
+      data: { node: this.projectService.getNode(this.nodeId) },
       panelClass: 'dialog-md'
     });
   }
