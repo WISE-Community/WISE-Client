@@ -34,10 +34,13 @@ export class VLEParentComponent implements OnInit {
   }
 
   private getStartingNodeId(): string {
-    const urlMatch = this.router.url.match(/unit\/[0-9]*\/([^?]*)/);
-    return urlMatch != null
-      ? urlMatch[1]
-      : (this.getLastNodeEnteredEvent()?.nodeId ?? this.projectService.getStartNodeId());
+    const nodeId = this.router.url.match(/unit\/[0-9]*\/([^?]+)/)?.[1];
+    if (nodeId && this.projectService.isNodeActive(nodeId)) {
+      return this.projectService.isGroupNode(nodeId)
+        ? (this.projectService.getGroupStartId(nodeId) ?? this.projectService.getStartNodeId())
+        : nodeId;
+    }
+    return this.getLastNodeEnteredEvent()?.nodeId ?? this.projectService.getStartNodeId();
   }
 
   /**
