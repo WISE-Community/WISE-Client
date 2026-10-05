@@ -1,6 +1,5 @@
-<div class="flex justify-start items-center">
-  <node-icon [nodeId]="nodeId" size="18" class="hidden sm:block" />
-  <span class="hidden sm:block">&nbsp;&nbsp;</span>
+<div class="flex justify-start items-center gap-2">
+  <node-icon [nodeId]="nodeId" size="24" class="hidden sm:flex" />
   <span>{{ stepTitle }}</span>
   @if (hasAlert) {
     <status-icon [class]="alertIconClass" [name]="alertIconName" [tooltip]="alertIconLabel" />
