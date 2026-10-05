@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent, MockProvider } from 'ng-mocks';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { StepSelectComponent } from '../stepSelect/step-select.component';
 import { StepToolsComponent } from './step-tools.component';
@@ -12,8 +11,6 @@ import { of } from 'rxjs';
 import { RunInfo } from '../../../../../../app/student/run-info';
 
 const nodeId1 = 'node1';
-const nodeStatus1 = { icon: '', isCompleted: true };
-const nodeStatus2 = { icon: '', isCompleted: false };
 let getCurrentNodeIdSpy: jasmine.Spy;
 
 describe('StepToolsComponent', () => {
@@ -23,7 +20,6 @@ describe('StepToolsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        NoopAnimationsModule,
         StepToolsComponent,
         StudentTeacherCommonServicesModule,
         MockComponent(StepSelectComponent)

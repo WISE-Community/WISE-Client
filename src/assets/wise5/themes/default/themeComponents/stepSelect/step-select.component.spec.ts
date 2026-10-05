@@ -3,7 +3,6 @@ import { MockComponent, MockProvider } from 'ng-mocks';
 import { NodeIconComponent } from '../../../../vle/node-icon/node-icon.component';
 import { NodeService } from '../../../../services/nodeService';
 import { NodeStatusService } from '../../../../services/nodeStatusService';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { StepSelectComponent } from './step-select.component';
 import { StudentDataService } from '../../../../services/studentDataService';
@@ -35,7 +34,6 @@ describe('StepSelectComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        NoopAnimationsModule,
         StepSelectComponent,
         StudentTeacherCommonServicesModule,
         MockComponent(NodeIconComponent)
