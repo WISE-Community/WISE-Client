@@ -31,7 +31,6 @@ export class StepToolsComponent implements OnInit, OnDestroy {
   protected nextId: string;
   @Input() notebookConfig: any;
   protected prevId: string;
-  @Input() stepView: boolean;
   private subscriptions: Subscription = new Subscription();
   @Output() toggleChatbot = new EventEmitter<void>();
 
