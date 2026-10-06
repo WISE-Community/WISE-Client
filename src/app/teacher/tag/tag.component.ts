@@ -1,28 +1,28 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 import Color from 'colorjs.io';
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MatButtonModule, MatIconModule],
   selector: 'tag',
   styleUrl: './tag.component.scss',
   templateUrl: './tag.component.html'
 })
-export class TagComponent implements OnChanges {
-  @Input() allowRemove: boolean;
-  @Input() color: string;
-  @Output() removeTagEvent: EventEmitter<void> = new EventEmitter<void>();
-  @Input() text: string;
-  protected textColor: string;
+export class TagComponent {
+  readonly allowRemove = input<boolean>(false);
+  readonly color = input<string>('');
+  readonly removeTagEvent = output<void>();
+  readonly text = input<string>('');
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.color?.currentValue) {
-      this.textColor = this.getContrastColor(this.color);
+  protected textColor = computed(() => {
+    const color = this.color();
+    if (!color) {
+      return '';
     }
-  }
+    return this.getContrastColor(color);
+  });
 
   private getContrastColor(color: string): string {
     const colorObj = new Color(color);
