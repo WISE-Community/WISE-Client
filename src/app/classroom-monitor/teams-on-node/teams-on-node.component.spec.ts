@@ -59,158 +59,136 @@ describe('TeamsOnNodeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnInit', () => {
-    it('should subscribe to studentStatusReceived$ and call ngOnChanges', () => {
-      component.nodeId = nodeId;
-      component.period = { periodId, periodName };
+  describe('studentStatusReceived$', () => {
+    it('should react to studentStatusReceived$ and update workgroupsOnNode', () => {
       classroomStatusService.getWorkgroupsOnNode.and.returnValue([]);
       projectService.isApplicationNode.and.returnValue(true);
       configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
 
+      fixture.componentRef.setInput('nodeId', nodeId);
+      fixture.componentRef.setInput('period', { periodId, periodName });
       fixture.detectChanges();
 
-      spyOn(component, 'ngOnChanges');
+      expect(component['workgroupsOnNode']()).toEqual([]);
+
+      const updatedWorkgroups = [createMockWorkgroup(1)];
+      classroomStatusService.getWorkgroupsOnNode.and.returnValue(updatedWorkgroups);
       studentStatusReceivedSubject.next();
-
-      expect(component.ngOnChanges).toHaveBeenCalled();
-    });
-  });
-
-  describe('ngOnDestroy', () => {
-    it('should unsubscribe from subscriptions', () => {
-      component.nodeId = nodeId;
-      component.period = { periodId, periodName };
-      classroomStatusService.getWorkgroupsOnNode.and.returnValue([]);
-      projectService.isApplicationNode.and.returnValue(true);
-      configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
-
       fixture.detectChanges();
 
-      spyOn(component['subscriptions'], 'unsubscribe');
-
-      component.ngOnDestroy();
-
-      expect(component['subscriptions'].unsubscribe).toHaveBeenCalled();
+      expect(component['workgroupsOnNode']()).toEqual(updatedWorkgroups);
     });
   });
 
-  describe('ngOnChanges', () => {
+  describe('computed values', () => {
     describe('workgroups on node', () => {
       it('should get workgroups on node for the specified period', () => {
         const workgroups = [createMockWorkgroup(1), createMockWorkgroup(2)];
-        component.nodeId = nodeId;
-        component.period = { periodId, periodName };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
         projectService.isApplicationNode.and.returnValue(true);
         configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
 
-        component.ngOnChanges();
+        fixture.componentRef.setInput('nodeId', nodeId);
+        fixture.componentRef.setInput('period', { periodId, periodName });
+        fixture.detectChanges();
 
         expect(classroomStatusService.getWorkgroupsOnNode).toHaveBeenCalledWith(nodeId, periodId);
-        expect(component['workgroupsOnNode']).toEqual(workgroups);
+        expect(component['workgroupsOnNode']()).toEqual(workgroups);
       });
     });
 
     describe('tooltip text for step', () => {
       beforeEach(() => {
-        component.nodeId = stepNodeId;
+        fixture.componentRef.setInput('nodeId', stepNodeId);
         projectService.isApplicationNode.and.returnValue(true);
         configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
       });
 
       it('should create tooltip text for single team on step in specific period', () => {
         const workgroups = [createMockWorkgroup(1)];
-        component.period = { periodId, periodName };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
+        fixture.componentRef.setInput('period', { periodId, periodName });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('1 team on this step:');
+        expect(component['tooltipText']()).toBe('1 team on this step:');
       });
 
       it('should create tooltip text for multiple teams on step in specific period', () => {
         const workgroups = [createMockWorkgroup(1), createMockWorkgroup(2), createMockWorkgroup(3)];
-        component.period = { periodId, periodName };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
+        fixture.componentRef.setInput('period', { periodId, periodName });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('3 teams on this step:');
+        expect(component['tooltipText']()).toBe('3 teams on this step:');
       });
 
       it('should create tooltip text for single team on step in all periods', () => {
         const workgroups = [createMockWorkgroup(1)];
-        component.period = { periodId: -1, periodName: 'All Periods' };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
+        fixture.componentRef.setInput('period', { periodId: -1, periodName: 'All Periods' });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('1 team on this step:');
+        expect(component['tooltipText']()).toBe('1 team on this step:');
       });
 
       it('should create tooltip text for multiple teams on step in all periods', () => {
         const workgroups = [createMockWorkgroup(1), createMockWorkgroup(2)];
-        component.period = { periodId: -1, periodName: 'All Periods' };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
+        fixture.componentRef.setInput('period', { periodId: -1, periodName: 'All Periods' });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('2 teams on this step:');
+        expect(component['tooltipText']()).toBe('2 teams on this step:');
       });
     });
 
     describe('tooltip text for lesson', () => {
       beforeEach(() => {
-        component.nodeId = lessonNodeId;
+        fixture.componentRef.setInput('nodeId', lessonNodeId);
         projectService.isApplicationNode.and.returnValue(false);
         configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
       });
 
       it('should create tooltip text for single team on lesson in specific period', () => {
         const workgroups = [createMockWorkgroup(1)];
-        component.period = { periodId, periodName };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
+        fixture.componentRef.setInput('period', { periodId, periodName });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('1 team on this lesson:');
+        expect(component['tooltipText']()).toBe('1 team on this lesson:');
       });
 
       it('should create tooltip text for multiple teams on lesson in specific period', () => {
         const workgroups = [createMockWorkgroup(1), createMockWorkgroup(2)];
-        component.period = { periodId, periodName };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
+        fixture.componentRef.setInput('period', { periodId, periodName });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('2 teams on this lesson:');
+        expect(component['tooltipText']()).toBe('2 teams on this lesson:');
       });
 
       it('should create tooltip text for single team on lesson in all periods', () => {
         const workgroups = [createMockWorkgroup(1)];
-        component.period = { periodId: -1, periodName: 'All Periods' };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
+        fixture.componentRef.setInput('period', { periodId: -1, periodName: 'All Periods' });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('1 team on this lesson:');
+        expect(component['tooltipText']()).toBe('1 team on this lesson:');
       });
 
       it('should create tooltip text for multiple teams on lesson in all periods', () => {
         const workgroups = [createMockWorkgroup(1), createMockWorkgroup(2), createMockWorkgroup(3)];
-        component.period = { periodId: -1, periodName: 'All Periods' };
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
+        fixture.componentRef.setInput('period', { periodId: -1, periodName: 'All Periods' });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('3 teams on this lesson:');
+        expect(component['tooltipText']()).toBe('3 teams on this lesson:');
       });
     });
 
     describe('tooltip text with student names', () => {
       beforeEach(() => {
-        component.nodeId = stepNodeId;
-        component.period = { periodId, periodName };
+        fixture.componentRef.setInput('nodeId', stepNodeId);
+        fixture.componentRef.setInput('period', { periodId, periodName });
         projectService.isApplicationNode.and.returnValue(true);
         configService.getPermissions.and.returnValue({ canViewStudentNames: true } as any);
       });
@@ -223,10 +201,9 @@ describe('TeamsOnNodeComponent', () => {
           if (workgroupId === 2) return 'Charlie, David';
           return '';
         });
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe(
+        expect(component['tooltipText']()).toBe(
           '2 teams on this step:\nAlice, Bob\nCharlie, David\n'
         );
       });
@@ -235,10 +212,9 @@ describe('TeamsOnNodeComponent', () => {
         const workgroups = [createMockWorkgroup(1), createMockWorkgroup(2)];
         classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
         configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
+        fixture.detectChanges();
 
-        component.ngOnChanges();
-
-        expect(component['tooltipText']).toBe('2 teams on this step:');
+        expect(component['tooltipText']()).toBe('2 teams on this step:');
         expect(configService.getDisplayUsernamesByWorkgroupId).not.toHaveBeenCalled();
       });
     });
@@ -247,13 +223,12 @@ describe('TeamsOnNodeComponent', () => {
   describe('template rendering', () => {
     it('should display workgroup count when there are workgroups on node', () => {
       const workgroups = [createMockWorkgroup(1), createMockWorkgroup(2), createMockWorkgroup(3)];
-      component.nodeId = nodeId;
-      component.period = { periodId, periodName };
       classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
       projectService.isApplicationNode.and.returnValue(true);
       configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
 
-      component.ngOnChanges();
+      fixture.componentRef.setInput('nodeId', nodeId);
+      fixture.componentRef.setInput('period', { periodId, periodName });
       fixture.detectChanges();
 
       const countElement = fixture.nativeElement.querySelector('div');
@@ -262,13 +237,12 @@ describe('TeamsOnNodeComponent', () => {
     });
 
     it('should not display anything when there are no workgroups on node', () => {
-      component.nodeId = nodeId;
-      component.period = { periodId, periodName };
       classroomStatusService.getWorkgroupsOnNode.and.returnValue([]);
       projectService.isApplicationNode.and.returnValue(true);
       configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
 
-      component.ngOnChanges();
+      fixture.componentRef.setInput('nodeId', nodeId);
+      fixture.componentRef.setInput('period', { periodId, periodName });
       fixture.detectChanges();
 
       const countElement = fixture.nativeElement.querySelector('div');
@@ -277,13 +251,12 @@ describe('TeamsOnNodeComponent', () => {
 
     it('should display mat-icon with person icon', () => {
       const workgroups = [createMockWorkgroup(1)];
-      component.nodeId = nodeId;
-      component.period = { periodId, periodName };
       classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
       projectService.isApplicationNode.and.returnValue(true);
       configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
 
-      component.ngOnChanges();
+      fixture.componentRef.setInput('nodeId', nodeId);
+      fixture.componentRef.setInput('period', { periodId, periodName });
       fixture.detectChanges();
 
       const iconElement = fixture.nativeElement.querySelector('mat-icon');
@@ -293,16 +266,15 @@ describe('TeamsOnNodeComponent', () => {
 
     it('should set tooltip text for mat-icon', () => {
       const workgroups = [createMockWorkgroup(1), createMockWorkgroup(2)];
-      component.nodeId = stepNodeId;
-      component.period = { periodId, periodName };
       classroomStatusService.getWorkgroupsOnNode.and.returnValue(workgroups);
       projectService.isApplicationNode.and.returnValue(true);
       configService.getPermissions.and.returnValue({ canViewStudentNames: false } as any);
 
-      component.ngOnChanges();
+      fixture.componentRef.setInput('nodeId', stepNodeId);
+      fixture.componentRef.setInput('period', { periodId, periodName });
       fixture.detectChanges();
 
-      expect(component['tooltipText']).toBe('2 teams on this step:');
+      expect(component['tooltipText']()).toBe('2 teams on this step:');
     });
   });
 });

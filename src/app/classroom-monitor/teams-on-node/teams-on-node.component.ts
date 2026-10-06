@@ -1,12 +1,14 @@
-import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClassroomStatusService } from '../../../assets/wise5/services/classroomStatusService';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectService } from '../../../assets/wise5/services/projectService';
 import { ConfigService } from '../../../assets/wise5/services/configService';
-import { Subscription } from 'rxjs';
+import { scan } from 'rxjs';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatIconModule, MatTooltipModule],
   selector: 'teams-on-node',
   templateUrl: './teams-on-node.component.html'
@@ -16,43 +18,44 @@ export class TeamsOnNodeComponent {
   private configService = inject(ConfigService);
   private projectService = inject(ProjectService);
 
-  @Input() nodeId: string;
-  @Input() period: any;
-  private subscriptions: Subscription = new Subscription();
-  protected tooltipText: string;
-  protected workgroupsOnNode: any[] = [];
+  readonly nodeId = input<string>('');
+  readonly period = input<any>();
 
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.classroomStatusService.studentStatusReceived$.subscribe(() => {
-        this.ngOnChanges();
-      })
-    );
-  }
+  // using scan and count ensures we get a new value every time the source emits
+  private studentStatusReceived = this.classroomStatusService.studentStatusReceived$
+    ? toSignal(
+        this.classroomStatusService.studentStatusReceived$.pipe(scan((count) => count + 1, 0)),
+        { initialValue: 0 }
+      )
+    : undefined;
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
-  }
+  protected workgroupsOnNode = computed(() => {
+    this.studentStatusReceived?.();
+    const nodeId = this.nodeId();
+    const period = this.period();
+    if (!nodeId || period?.periodId == null) {
+      return [];
+    }
+    return this.classroomStatusService.getWorkgroupsOnNode(nodeId, period.periodId) ?? [];
+  });
 
-  ngOnChanges(): void {
-    this.workgroupsOnNode = this.classroomStatusService.getWorkgroupsOnNode(
-      this.nodeId,
-      this.period.periodId
-    );
-    const teams = this.workgroupsOnNode.length === 1 ? $localize`team` : $localize`teams`;
-    const stepOrLesson = this.projectService.isApplicationNode(this.nodeId)
-      ? $localize`step`
-      : $localize`lesson`;
-    this.tooltipText = $localize`${this.workgroupsOnNode.length} ${teams} on this ${stepOrLesson}\:`;
-    if (this.configService.getPermissions().canViewStudentNames) {
-      this.tooltipText +=
+  protected tooltipText = computed(() => {
+    const workgroups = this.workgroupsOnNode();
+    const nodeId = this.nodeId();
+    const teams = workgroups.length === 1 ? $localize`team` : $localize`teams`;
+    const stepOrLesson =
+      nodeId && this.projectService.isApplicationNode(nodeId) ? $localize`step` : $localize`lesson`;
+    let text = $localize`${workgroups.length} ${teams} on this ${stepOrLesson}\:`;
+    if (this.configService.getPermissions()?.canViewStudentNames) {
+      text +=
         `\n` +
-        this.workgroupsOnNode
+        workgroups
           .map(
             (workgroup) =>
               `${this.configService.getDisplayUsernamesByWorkgroupId(workgroup.workgroupId)}\n`
           )
           .join('');
     }
-  }
+    return text;
+  });
 }
