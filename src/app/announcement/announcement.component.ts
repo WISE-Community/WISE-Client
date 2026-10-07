@@ -1,10 +1,16 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation, Inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  output,
+  ViewEncapsulation
+} from '@angular/core';
 import { Announcement } from '../domain/announcement';
 import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatDialog,
-  MatDialogModule,
   MatDialogTitle,
   MatDialogContent,
   MatDialogActions,
@@ -15,27 +21,29 @@ import { MatButtonModule, MatButton } from '@angular/material/button';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MatButtonModule, MatDialogModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule],
   selector: 'app-announcement',
   styleUrl: './announcement.component.scss',
   templateUrl: './announcement.component.html'
 })
 export class AnnouncementComponent {
-  @Input() announcement: Announcement = new Announcement();
-  @Output() dismiss: EventEmitter<void> = new EventEmitter<void>();
+  private dialog = inject(MatDialog);
 
-  constructor(public dialog: MatDialog) {}
+  readonly announcement = input<Announcement>(new Announcement());
+  readonly dismiss = output<void>();
 
   protected showAnnouncementDetails(): void {
     this.dialog.open(AnnouncementDialogComponent, {
-      data: this.announcement,
+      data: this.announcement(),
       panelClass: 'dialog-md'
     });
   }
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatDialogTitle,
     CdkScrollable,
@@ -48,8 +56,6 @@ export class AnnouncementComponent {
   templateUrl: 'announcement-dialog.component.html'
 })
 export class AnnouncementDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<AnnouncementDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Announcement
-  ) {}
+  readonly data = inject<Announcement>(MAT_DIALOG_DATA);
+  readonly dialogRef = inject(MatDialogRef<AnnouncementDialogComponent>);
 }
