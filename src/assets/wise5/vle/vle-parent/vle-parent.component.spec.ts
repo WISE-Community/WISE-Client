@@ -99,7 +99,7 @@ function groupNode() {
     });
     it('should set the starting node id to project start node id when group has no start id', () => {
       setRouterUrl(`/preview/unit/${runId1}/${groupId1}`);
-      spyOn(projectService, 'getGroupStartId').and.returnValue(null);
+      spyOn(projectService, 'getGroupStartId').and.returnValue('');
       spyOn(projectService, 'getStartNodeId').and.returnValue('node2');
       expectSetCurrentNode('node2', true);
     });

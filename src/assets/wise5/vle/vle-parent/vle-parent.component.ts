@@ -37,10 +37,15 @@ export class VLEParentComponent implements OnInit {
     const nodeId = this.router.url.match(/unit\/[0-9]*\/([^?]+)/)?.[1];
     if (nodeId && this.projectService.isNodeActive(nodeId)) {
       return this.projectService.isGroupNode(nodeId)
-        ? (this.projectService.getGroupStartId(nodeId) ?? this.projectService.getStartNodeId())
+        ? (this.getGroupStartNodeId(nodeId) ?? this.projectService.getStartNodeId())
         : nodeId;
     }
     return this.getLastNodeEnteredEvent()?.nodeId ?? this.projectService.getStartNodeId();
+  }
+
+  private getGroupStartNodeId(nodeId: string): string {
+    const startNodeId = this.projectService.getGroupStartId(nodeId);
+    return startNodeId ? startNodeId : null;
   }
 
   /**
