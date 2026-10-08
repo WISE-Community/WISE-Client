@@ -52,6 +52,9 @@ export class AddLessonConfigureComponent {
   }
 
   protected submit(): void {
+    if (this.submitting || this.addLessonFormGroup.invalid) {
+      return;
+    }
     this.submitting = true;
     const newLesson = this.projectService.createGroup(
       this.addLessonFormGroup.controls['title'].value
