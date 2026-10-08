@@ -15,17 +15,22 @@ import { ConfigService } from '../services/configService';
   selector: 'teacher-presentation-button',
   imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
   template: `
-    <button
-      mat-stroked-button
-      color="primary"
-      [disabled]="isDisabled"
+    <span
+      class="inline-flex"
       [matTooltip]="tooltipText"
-      (click)="openPresentationDialog()"
-      class="flex items-center gap-1"
+      matTooltipPosition="above"
     >
-      <mat-icon>co_present</mat-icon>
-      <span i18n>Present Student Work</span>
-    </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        [disabled]="isDisabled"
+        (click)="openPresentationDialog()"
+        class="flex items-center gap-1"
+      >
+        <mat-icon>co_present</mat-icon>
+        <span i18n>Present Student Work</span>
+      </button>
+    </span>
   `
 })
 export class TeacherPresentationButtonComponent {
@@ -73,7 +78,7 @@ export class TeacherPresentationButtonComponent {
     }
     const store = this.effectiveStore;
     if (!store || !store.hasSelections()) {
-      return $localize`Select at least one post or comment to present.`;
+      return $localize`Choose a post or comment first to present student work.`;
     }
     return $localize`Launch classroom presentation view`;
   }

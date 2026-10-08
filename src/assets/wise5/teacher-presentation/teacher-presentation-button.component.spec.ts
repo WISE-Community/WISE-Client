@@ -54,7 +54,7 @@ describe('TeacherPresentationButtonComponent', () => {
     fixture.detectChanges();
 
     expect(component.isDisabled).toBeTrue();
-    expect(component.tooltipText).toContain('Select at least one post or comment');
+    expect(component.tooltipText).toContain('Choose a post or comment first');
   });
 
   it('should be enabled when a single period is chosen and at least one item is selected', () => {
