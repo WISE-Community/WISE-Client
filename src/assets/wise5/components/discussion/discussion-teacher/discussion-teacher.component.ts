@@ -12,6 +12,8 @@ import { MatIcon } from '@angular/material/icon';
 import { DiscussionStudent } from '../discussion-student/discussion-student.component';
 import { TeacherDiscussionService } from '../teacherDiscussionService';
 import { ClassResponseTeacherComponent } from '../class-response-teacher/class-response-teacher.component';
+import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
+import { StudentNamesDisplayMode } from '../../../teacher-presentation/teacher-presentation-config';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -35,8 +37,20 @@ import { ClassResponseTeacherComponent } from '../class-response-teacher/class-r
 export class DiscussionTeacherComponent extends DiscussionStudent {
   @Input() periodId: number;
   @Input() anonymizeResponses: boolean;
+  @Input() selectable: boolean = false;
+  @Input() presentationStore?: TeacherPresentationSelectionStore;
+  @Input() studentNamesDisplayMode?: StudentNamesDisplayMode;
+  @Input() presentationSelectedIds?: Set<number>;
   studentMode: boolean = false;
   private teacherDiscussionService = inject(TeacherDiscussionService);
+
+  get displayResponses(): any[] {
+    const responses = this.topLevelResponses?.all || [];
+    if (this.mode === 'presentation' && this.presentationSelectedIds) {
+      return responses.filter((post: any) => this.presentationSelectedIds.has(post.id));
+    }
+    return responses;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.component) {
@@ -47,22 +61,26 @@ export class DiscussionTeacherComponent extends DiscussionStudent {
     }
   }
 
-  protected getPeriodId(): number {
+  protected override getPeriodId(): number {
     return this.periodId;
   }
 
-  protected isClassmateResponsesGated(): boolean {
+  protected override isClassmateResponsesGated(): boolean {
     // allow teacher to always see all responses, no need to post to see others
     return false;
   }
 
-  disableComponentIfNecessary(): void {
+  override disableComponentIfNecessary(): void {
     // no need to disable the component for teacher
   }
 
-  protected isAnonymizeResponses(): boolean {
+  protected override isAnonymizeResponses(): boolean {
+    if (this.mode === 'presentation') {
+      return this.studentNamesDisplayMode === 'anonymize';
+    }
     return this.anonymizeResponses;
   }
+
 
   /**
    * The teacher has clicked the delete button to delete a post. We won't actually delete the

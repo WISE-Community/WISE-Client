@@ -20,5 +20,6 @@
     ],
     "useDefineForClassFields": false,
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["dist", "out-tsc", "tmp"]
 }

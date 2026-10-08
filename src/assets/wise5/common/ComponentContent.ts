@@ -23,6 +23,10 @@ export interface ComponentContent {
   showSubmitButton?: boolean;
   tags?: string[];
   type: string;
+  presentation?: {
+    prompt?: string;
+    reflectionQuestions?: Array<{ id: string; text: string }>;
+  };
 }
 
 export function hasConnectedComponent(
