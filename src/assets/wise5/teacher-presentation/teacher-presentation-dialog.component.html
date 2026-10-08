@@ -3,8 +3,8 @@
     <div class="flex items-center gap-3">
       <span class="mat-headline-6 font-semibold" i18n>Classroom Presentation</span>
       @if (data.periodName) {
-        <span class="text-sm px-2 py-0.5 rounded bg-gray-200 text-gray-700">
-          {{ data.periodName }}
+        <span class="text-sm px-2 py-0.5 rounded bg-gray-200 text-gray-700" i18n>
+          Period {{ data.periodName }}
         </span>
       }
     </div>
@@ -16,7 +16,7 @@
           aria-label="Student Names Display"
         >
           <mat-button-toggle value="hide" i18n>Hide Names</mat-button-toggle>
-          <mat-button-toggle value="anonymize" i18n>Anonymize</mat-button-toggle>
+          <mat-button-toggle value="anonymize" i18n>Anonymize Names</mat-button-toggle>
           <mat-button-toggle value="show" i18n>Show Names</mat-button-toggle>
         </mat-button-toggle-group>
       }
