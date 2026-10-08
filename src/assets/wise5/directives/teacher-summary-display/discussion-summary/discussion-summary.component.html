@@ -1,0 +1,58 @@
+<div [class.expanded]="expanded">
+  <div class="flex flex-wrap justify-between items-center mb-2 gap-2">
+    <h2 class="mat-subtitle-1 m-0" i18n>Class Discussion</h2>
+    <teacher-presentation-button
+      [node]="node"
+      [component]="component"
+      [periodId]="periodId"
+      [periodName]="periodName"
+      [store]="store"
+    />
+  </div>
+
+  <div class="mb-4 flex flex-wrap gap-4 justify-between items-center">
+    @if (component?.content?.anonymizeResponses) {
+      <span class="mat-caption" i18n
+        >Note: Students do not see each other's names in this activity.</span
+      >
+    }
+  </div>
+
+  @if (hasReflectionQuestions && isSinglePeriod) {
+    <mat-expansion-panel class="mb-4">
+      <mat-expansion-panel-header>
+        <mat-panel-title i18n>Teacher Reflection</mat-panel-title>
+        <mat-panel-description i18n>Reflect on selected student work</mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="flex flex-col gap-4 py-2">
+        @for (q of reflectionQuestions; track q.id) {
+          <div class="flex flex-col gap-1">
+            <label class="font-medium text-sm">{{ q.text }}</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <textarea
+                matInput
+                rows="2"
+                [ngModel]="getAnswerText(q.id)"
+                (ngModelChange)="onAnswerChange(q, $event)"
+                placeholder="Enter your reflection..."
+                i18n-placeholder
+              ></textarea>
+            </mat-form-field>
+          </div>
+        }
+      </div>
+    </mat-expansion-panel>
+  }
+
+  <discussion-teacher
+    class="max-h-160 block overflow-y-auto"
+    [class.max-h-none]="expanded"
+    [nodeId]="nodeId"
+    [component]="component"
+    [periodId]="periodId"
+    [anonymizeResponses]="teacherSummaryConfig.anonymizeStudentNames"
+    [selectable]="isSinglePeriod"
+    [presentationStore]="store"
+    [mode]="'summary'"
+  />
+</div>

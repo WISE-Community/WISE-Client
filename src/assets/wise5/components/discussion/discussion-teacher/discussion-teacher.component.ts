@@ -1,14 +1,4 @@
 import { Component, inject, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { ComponentHeaderComponent } from '../../../directives/component-header/component-header.component';
-import { ComponentAnnotationsComponent } from '../../../directives/componentAnnotations/component-annotations.component';
-import { MatCard } from '@angular/material/card';
-import { NgClass } from '@angular/common';
-import { MatFormField } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
 import { DiscussionStudent } from '../discussion-student/discussion-student.component';
 import { TeacherDiscussionService } from '../teacherDiscussionService';
 import { ClassResponseTeacherComponent } from '../class-response-teacher/class-response-teacher.component';
@@ -17,19 +7,7 @@ import { StudentNamesDisplayMode } from '../../../teacher-presentation/teacher-p
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    CdkTextareaAutosize,
-    ClassResponseTeacherComponent,
-    ComponentAnnotationsComponent,
-    ComponentHeaderComponent,
-    FormsModule,
-    MatButton,
-    MatCard,
-    MatFormField,
-    MatIcon,
-    MatInput,
-    NgClass
-  ],
+  imports: [ClassResponseTeacherComponent],
   selector: 'discussion-teacher',
   styleUrl: '../discussion-student/discussion-student.component.scss',
   templateUrl: './discussion-teacher.component.html'
@@ -46,10 +24,9 @@ export class DiscussionTeacherComponent extends DiscussionStudent {
 
   get displayResponses(): any[] {
     const responses = this.topLevelResponses?.all || [];
-    if (this.mode === 'presentation' && this.presentationSelectedIds) {
-      return responses.filter((post: any) => this.presentationSelectedIds.has(post.id));
-    }
-    return responses;
+    return this.mode === 'presentation' && this.presentationSelectedIds
+      ? responses.filter((post: any) => this.presentationSelectedIds.has(post.id))
+      : responses;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -75,12 +52,10 @@ export class DiscussionTeacherComponent extends DiscussionStudent {
   }
 
   protected override isAnonymizeResponses(): boolean {
-    if (this.mode === 'presentation') {
-      return this.studentNamesDisplayMode === 'anonymize';
-    }
-    return this.anonymizeResponses;
+    return this.mode === 'presentation'
+      ? this.studentNamesDisplayMode === 'anonymize'
+      : this.anonymizeResponses;
   }
-
 
   /**
    * The teacher has clicked the delete button to delete a post. We won't actually delete the

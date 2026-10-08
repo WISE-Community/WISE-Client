@@ -8,18 +8,13 @@ import { Node } from '../common/Node';
 import { ComponentContent } from '../common/ComponentContent';
 import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
 import { TeacherPresentationDialogComponent } from './teacher-presentation-dialog.component';
-
 import { ConfigService } from '../services/configService';
 
 @Component({
   selector: 'teacher-presentation-button',
   imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule],
   template: `
-    <span
-      class="inline-flex"
-      [matTooltip]="tooltipText"
-      matTooltipPosition="above"
-    >
+    <span class="inline-flex" [matTooltip]="tooltipText" matTooltipPosition="above">
       <button
         mat-stroked-button
         color="primary"
@@ -51,7 +46,9 @@ export class TeacherPresentationButtonComponent {
   get effectivePeriodName(): string | undefined {
     if (this.periodName) return this.periodName;
     if (this.configService && this.periodId != null) {
-      const period = this.configService.getPeriods()?.find((p: any) => p.periodId === this.periodId);
+      const period = this.configService
+        .getPeriods()
+        ?.find((p: any) => p.periodId === this.periodId);
       if (period) return period.periodName || period.name;
     }
     return undefined;

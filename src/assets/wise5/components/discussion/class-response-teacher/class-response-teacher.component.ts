@@ -8,8 +8,7 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
-import { CdkTextareaAutosize, TextFieldModule } from '@angular/cdk/text-field';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { SaveTimeMessageComponent } from '../../../common/save-time-message/save-time-message.component';
 import { RouterModule } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
@@ -27,7 +26,6 @@ import { StudentNamesDisplayMode } from '../../../teacher-presentation/teacher-p
 @Component({
   encapsulation: ViewEncapsulation.None,
   imports: [
-    CdkTextareaAutosize,
     CommonModule,
     FormsModule,
     MatButtonModule,
@@ -93,17 +91,13 @@ export class ClassResponseTeacherComponent extends ClassResponse implements OnIn
   }
 
   get showAuthorHeader(): boolean {
-    if (this.isPresentationMode && this.studentNamesDisplayMode === 'hide') {
-      return false;
-    }
-    return true;
+    return !(this.isPresentationMode && this.studentNamesDisplayMode === 'hide');
   }
 
   get hasRepliesToDisplay(): boolean {
-    if (this.isPresentationMode) {
-      return this.repliesToShow.length > 0;
-    }
-    return (this.response?.replies || []).length > 0;
+    return this.isPresentationMode
+      ? this.repliesToShow.length > 0
+      : (this.response?.replies || []).length > 0;
   }
 
   override ngOnInit(): void {
@@ -178,5 +172,3 @@ export class ClassResponseTeacherComponent extends ClassResponse implements OnIn
     this.presentationStore.toggleComment(reply.id, this.response.id);
   }
 }
-
-
