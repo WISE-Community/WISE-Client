@@ -145,16 +145,32 @@ export class ClassResponseTeacherComponent extends ClassResponse implements OnIn
     return false;
   }
 
+  protected isParentLockedByComments(commentIds: number[] = []): boolean {
+    if (this.presentationStore) {
+      return commentIds.some((cId) => this.presentationStore!.isSelected(cId));
+    }
+    if (this.presentationSelectedIds) {
+      return commentIds.some((cId) => this.presentationSelectedIds!.has(cId));
+    }
+    return false;
+  }
+
   protected isParentCheckboxDisabled(): boolean {
-    if (!this.presentationStore) return false;
-    const commentIds = (this.response.replies || []).map((r: any) => r.id);
-    return this.presentationStore.isParentLockedByComments(commentIds);
+    const commentIds = (this.response?.replies || []).map((r: any) => r.id);
+    return this.isParentLockedByComments(commentIds);
   }
 
   protected onParentCheckboxChange(): void {
     if (!this.presentationStore) return;
-    const commentIds = (this.response.replies || []).map((r: any) => r.id);
-    this.presentationStore.toggleParent(this.response.id, commentIds);
+    const parentId = this.response.id;
+    const commentIds = (this.response?.replies || []).map((r: any) => r.id);
+    if (this.presentationStore.isSelected(parentId)) {
+      // Uncheck parent -> uncheck parent and all child comments
+      this.presentationStore.deselectMultiple([parentId, ...commentIds]);
+    } else {
+      // Check parent only
+      this.presentationStore.select(parentId);
+    }
   }
 
   protected isReplySelected(reply: any): boolean {
@@ -169,6 +185,13 @@ export class ClassResponseTeacherComponent extends ClassResponse implements OnIn
 
   protected onReplyCheckboxChange(reply: any): void {
     if (!this.presentationStore) return;
-    this.presentationStore.toggleComment(reply.id, this.response.id);
+    const parentId = this.response.id;
+    if (this.presentationStore.isSelected(reply.id)) {
+      // Uncheck reply -> uncheck only this reply, parent remains selected
+      this.presentationStore.deselect(reply.id);
+    } else {
+      // Check reply -> check reply and ensure parent is also selected
+      this.presentationStore.selectMultiple([reply.id, parentId]);
+    }
   }
 }

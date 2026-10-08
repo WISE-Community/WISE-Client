@@ -14,6 +14,8 @@ describe('TeacherPresentationSelectionStore', () => {
       'saveConfig',
       'saveAnswer'
     ]);
+    configServiceSpy.getConfig.and.returnValue(of(null));
+    configServiceSpy.saveConfig.and.returnValue(of({} as TeacherPresentationConfig));
 
     TestBed.configureTestingModule({
       providers: [
@@ -32,59 +34,94 @@ describe('TeacherPresentationSelectionStore', () => {
     expect(store.prompt()).toBeNull();
   });
 
-  describe('Selection rules', () => {
-    it('checking a parent post should only select the parent', () => {
-      store.toggleParent(100, [101, 102]);
-
+  describe('Selection operations', () => {
+    it('should select and deselect items', () => {
+      store.select(100);
       expect(store.isSelected(100)).toBeTrue();
-      expect(store.isSelected(101)).toBeFalse();
-      expect(store.isSelected(102)).toBeFalse();
       expect(store.selectedCount()).toBe(1);
       expect(store.hasSelections()).toBeTrue();
-    });
 
-    it('unchecking the parent should uncheck the parent and all child comments', () => {
-      // First select parent and one comment
-      store.toggleParent(100, [101, 102]);
-      store.toggleComment(101, 100);
-      expect(store.selectedCount()).toBe(2);
-
-      // Now uncheck parent
-      store.toggleParent(100, [101, 102]);
+      store.deselect(100);
       expect(store.isSelected(100)).toBeFalse();
-      expect(store.isSelected(101)).toBeFalse();
       expect(store.selectedCount()).toBe(0);
       expect(store.hasSelections()).toBeFalse();
     });
 
-    it('selecting a comment should automatically select and lock the parent', () => {
-      store.toggleComment(201, 200);
+    it('should toggle item selection state', () => {
+      store.toggle(100);
+      expect(store.isSelected(100)).toBeTrue();
 
-      expect(store.isSelected(201)).toBeTrue();
-      expect(store.isSelected(200)).toBeTrue();
-      expect(store.isParentLockedByComments([201])).toBeTrue();
-      expect(store.selectedCount()).toBe(2);
+      store.toggle(100);
+      expect(store.isSelected(100)).toBeFalse();
     });
 
-    it('unchecking a comment should remove it and unlock parent if no other comments selected', () => {
-      store.toggleComment(201, 200);
-      expect(store.isParentLockedByComments([201])).toBeTrue();
+    it('should select and deselect multiple items', () => {
+      store.selectMultiple([100, 101, 102]);
+      expect(store.isSelected(100)).toBeTrue();
+      expect(store.isSelected(101)).toBeTrue();
+      expect(store.isSelected(102)).toBeTrue();
+      expect(store.selectedCount()).toBe(3);
 
-      store.toggleComment(201, 200);
-      expect(store.isSelected(201)).toBeFalse();
-      expect(store.isSelected(200)).toBeTrue(); // Parent remains selected
-      expect(store.isParentLockedByComments([201])).toBeFalse();
+      store.deselectMultiple([100, 102]);
+      expect(store.isSelected(100)).toBeFalse();
+      expect(store.isSelected(101)).toBeTrue();
+      expect(store.isSelected(102)).toBeFalse();
+      expect(store.selectedCount()).toBe(1);
+    });
+
+    it('should set and clear selections', () => {
+      store.setSelections([200, 201]);
+      expect(store.selectedCount()).toBe(2);
+      expect(store.isSelected(200)).toBeTrue();
+      expect(store.isSelected(201)).toBeTrue();
+
+      store.clearSelections();
+      expect(store.selectedCount()).toBe(0);
+      expect(store.hasSelections()).toBeFalse();
     });
   });
 
   describe('Config persistence', () => {
     beforeEach(() => {
+      configServiceSpy.getConfig.and.returnValue(of(null));
       configServiceSpy.saveConfig.and.returnValue(of({} as TeacherPresentationConfig));
       store.init(1, 10, 'node1', 'comp1', 'Discussion', []);
     });
 
-    it('should debounce autosave by 1 second when toggling items', fakeAsync(() => {
-      store.toggleParent(100);
+    it('should populate store state when existing config is loaded on init', () => {
+      const mockConfig: TeacherPresentationConfig = {
+        id: 1,
+        runId: 1,
+        periodId: 10,
+        nodeId: 'node1',
+        componentId: 'comp1',
+        componentType: 'Discussion',
+        items: [{ studentWorkId: 101 }, { studentWorkId: 102 }],
+        studentNamesDisplay: 'anonymize',
+        prompt: 'Initial prompt',
+        answers: [
+          {
+            questionId: 'q1',
+            questionText: 'Why?',
+            answerText: 'Because',
+            updatedAt: 1000
+          }
+        ]
+      };
+      configServiceSpy.getConfig.and.returnValue(of(mockConfig));
+
+      store.init(1, 10, 'node1', 'comp1', 'Discussion', []);
+
+      expect(store.selectedCount()).toBe(2);
+      expect(store.isSelected(101)).toBeTrue();
+      expect(store.isSelected(102)).toBeTrue();
+      expect(store.studentNamesDisplay()).toBe('anonymize');
+      expect(store.prompt()).toBe('Initial prompt');
+      expect(store.reflectionAnswers().get('q1')?.answerText).toBe('Because');
+    });
+
+    it('should debounce autosave by 1 second when selecting items', fakeAsync(() => {
+      store.select(100);
       expect(configServiceSpy.saveConfig).not.toHaveBeenCalled();
 
       tick(500);

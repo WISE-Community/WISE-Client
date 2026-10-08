@@ -29,6 +29,7 @@ describe('ClassResponseTeacherComponent', () => {
   hiddenParentReply();
   hidePost();
   showPost();
+  teacherPresentationSelection();
 });
 
 function createResponse(text: string = '', replies: any[] = []): any {
@@ -249,3 +250,68 @@ function showPost() {
     });
   });
 }
+
+function teacherPresentationSelection() {
+  describe('presentation selection', () => {
+    let mockStore: any;
+
+    beforeEach(() => {
+      const selected = new Set<number>();
+      mockStore = {
+        selectedIds: () => selected,
+        isSelected: (id: number) => selected.has(id),
+        select: (id: number) => selected.add(id),
+        deselect: (id: number) => selected.delete(id),
+        selectMultiple: (ids: number[]) => ids.forEach((id) => selected.add(id)),
+        deselectMultiple: (ids: number[]) => ids.forEach((id) => selected.delete(id))
+      };
+      component.presentationStore = mockStore;
+      component.selectable = true;
+      component.response = {
+        ...createResponse('Parent Post', [
+          { id: 201, ...createReply('Reply 1') },
+          { id: 202, ...createReply('Reply 2') }
+        ]),
+        id: 200
+      };
+      fixture.detectChanges();
+    });
+
+    it('checking parent selects only parent', () => {
+      component['onParentCheckboxChange']();
+      expect(mockStore.isSelected(200)).toBeTrue();
+      expect(mockStore.isSelected(201)).toBeFalse();
+      expect(mockStore.isSelected(202)).toBeFalse();
+      expect(component['isParentCheckboxDisabled']()).toBeFalse();
+    });
+
+    it('unchecking parent deselects parent and comments', () => {
+      mockStore.select(200);
+      mockStore.select(201);
+      component['onParentCheckboxChange']();
+      expect(mockStore.isSelected(200)).toBeFalse();
+      expect(mockStore.isSelected(201)).toBeFalse();
+      expect(mockStore.isSelected(202)).toBeFalse();
+    });
+
+    it('checking comment selects comment and parent, and locks parent checkbox', () => {
+      const reply = component.response.replies[0];
+      component['onReplyCheckboxChange'](reply);
+      expect(mockStore.isSelected(201)).toBeTrue();
+      expect(mockStore.isSelected(200)).toBeTrue();
+      expect(component['isParentCheckboxDisabled']()).toBeTrue();
+    });
+
+    it('unchecking comment deselects comment and unlocks parent if no other comments selected', () => {
+      const reply = component.response.replies[0];
+      component['onReplyCheckboxChange'](reply);
+      expect(component['isParentCheckboxDisabled']()).toBeTrue();
+
+      component['onReplyCheckboxChange'](reply);
+      expect(mockStore.isSelected(201)).toBeFalse();
+      expect(mockStore.isSelected(200)).toBeTrue(); // parent remains selected
+      expect(component['isParentCheckboxDisabled']()).toBeFalse();
+    });
+  });
+}
+

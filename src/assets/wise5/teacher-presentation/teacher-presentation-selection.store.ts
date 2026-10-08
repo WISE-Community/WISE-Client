@@ -22,7 +22,7 @@ export class TeacherPresentationSelectionStore {
   periodId = signal<number | null>(null);
   nodeId = signal<string>('');
   componentId = signal<string>('');
-  componentType = signal<string>('Discussion');
+  componentType = signal<string>('');
 
   selectedIds = signal<Set<number>>(new Set<number>());
   studentNamesDisplay = signal<StudentNamesDisplayMode>('hide');
@@ -85,43 +85,75 @@ export class TeacherPresentationSelectionStore {
     return this.selectedIds().has(id);
   }
 
-  /**
-   * Selection rules:
-   * 1. Selecting a comment also selects (and locks) its parent.
-   * 2. Unchecking the parent unchecks all its comments.
-   * 3. Selecting a post does NOT automatically select its comments.
-   */
-  toggleParent(parentId: number, commentIds: number[] = []): void {
+  select(id: number): void {
     const current = new Set(this.selectedIds());
-    if (current.has(parentId)) {
-      // Uncheck parent -> uncheck parent and all comments
-      current.delete(parentId);
-      for (const cId of commentIds) {
-        current.delete(cId);
+    if (!current.has(id)) {
+      current.add(id);
+      this.selectedIds.set(current);
+      this.triggerAutosave();
+    }
+  }
+
+  deselect(id: number): void {
+    const current = new Set(this.selectedIds());
+    if (current.has(id)) {
+      current.delete(id);
+      this.selectedIds.set(current);
+      this.triggerAutosave();
+    }
+  }
+
+  toggle(id: number): void {
+    const current = new Set(this.selectedIds());
+    if (current.has(id)) {
+      current.delete(id);
+    } else {
+      current.add(id);
+    }
+    this.selectedIds.set(current);
+    this.triggerAutosave();
+  }
+
+  selectMultiple(ids: number[]): void {
+    const current = new Set(this.selectedIds());
+    let changed = false;
+    for (const id of ids) {
+      if (!current.has(id)) {
+        current.add(id);
+        changed = true;
       }
-    } else {
-      // Check parent only
-      current.add(parentId);
     }
-    this.selectedIds.set(current);
-    this.triggerAutosave();
+    if (changed) {
+      this.selectedIds.set(current);
+      this.triggerAutosave();
+    }
   }
 
-  toggleComment(commentId: number, parentId: number): void {
+  deselectMultiple(ids: number[]): void {
     const current = new Set(this.selectedIds());
-    if (current.has(commentId)) {
-      current.delete(commentId);
-    } else {
-      current.add(commentId);
-      current.add(parentId); // Ensure parent is checked
+    let changed = false;
+    for (const id of ids) {
+      if (current.has(id)) {
+        current.delete(id);
+        changed = true;
+      }
     }
-    this.selectedIds.set(current);
+    if (changed) {
+      this.selectedIds.set(current);
+      this.triggerAutosave();
+    }
+  }
+
+  setSelections(ids: Set<number> | number[]): void {
+    this.selectedIds.set(new Set(ids));
     this.triggerAutosave();
   }
 
-  isParentLockedByComments(commentIds: number[] = []): boolean {
-    const current = this.selectedIds();
-    return commentIds.some((cId) => current.has(cId));
+  clearSelections(): void {
+    if (this.selectedIds().size > 0) {
+      this.selectedIds.set(new Set<number>());
+      this.triggerAutosave();
+    }
   }
 
   setStudentNamesDisplay(mode: StudentNamesDisplayMode): void {

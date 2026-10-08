@@ -42,7 +42,7 @@ describe('TeacherPresentationButtonComponent', () => {
 
   it('should be disabled when period is all periods (-1 or null)', () => {
     component.periodId = -1;
-    store.toggleParent(100);
+    store.select(100);
     fixture.detectChanges();
 
     expect(component.isDisabled).toBeTrue();
@@ -59,7 +59,7 @@ describe('TeacherPresentationButtonComponent', () => {
 
   it('should be enabled when a single period is chosen and at least one item is selected', () => {
     component.periodId = 10;
-    store.toggleParent(100);
+    store.select(100);
     fixture.detectChanges();
 
     expect(component.isDisabled).toBeFalse();
@@ -69,7 +69,7 @@ describe('TeacherPresentationButtonComponent', () => {
   it('should open TeacherPresentationDialogComponent when clicked and enabled', () => {
     component.periodId = 10;
     component.periodName = 'Period 1';
-    store.toggleParent(100);
+    store.select(100);
     fixture.detectChanges();
 
     component.openPresentationDialog();
