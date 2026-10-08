@@ -3,7 +3,6 @@ import { Component as WISEComponent } from '../../../common/Component';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 import { ComponentFactory } from '../../../common/ComponentFactory';
 import { DiscussionTeacherComponent } from '../../../components/discussion/discussion-teacher/discussion-teacher.component';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,7 +20,6 @@ import { Node } from '../../../common/Node';
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSlideToggle,
     TeacherPresentationButtonComponent
   ],
   providers: [TeacherPresentationSelectionStore],
@@ -41,9 +39,6 @@ import { Node } from '../../../common/Node';
       </div>
 
       <div class="mb-4 flex flex-wrap gap-4 justify-between items-center">
-        <mat-slide-toggle [(ngModel)]="teacherSummaryConfig.anonymizeStudentNames" i18n>
-          Hide student names
-        </mat-slide-toggle>
         @if (component?.content?.anonymizeResponses) {
           <span class="mat-caption" i18n
             >Note: Students do not see each other's names in this activity.</span
@@ -161,13 +156,7 @@ export class DiscussionSummaryComponent
 
   private initPresentationStore(): void {
     const runId = this.configService.getRunId();
-    if (
-      runId &&
-      this.periodId != null &&
-      this.periodId !== -1 &&
-      this.nodeId &&
-      this.componentId
-    ) {
+    if (runId && this.periodId != null && this.periodId !== -1 && this.nodeId && this.componentId) {
       this.store.init(
         runId,
         this.periodId,
@@ -179,4 +168,3 @@ export class DiscussionSummaryComponent
     }
   }
 }
-
