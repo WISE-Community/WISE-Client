@@ -19,9 +19,7 @@
       <ng-container *ngTemplateOutlet="commentsSection; context: { $implicit: true }" />
     </details>
   } @else {
-    <ng-container
-      *ngTemplateOutlet="postContent; context: { $implicit: !isPresentationMode }"
-    />
+    <ng-container *ngTemplateOutlet="postContent; context: { $implicit: !isPresentationMode }" />
     <ng-container *ngTemplateOutlet="commentsSection" />
   }
 </mat-card>
@@ -184,4 +182,3 @@
   </div>
   <div class="pt-1" [innerHTML]="reply.studentData.responseHTML"></div>
 </ng-template>
-

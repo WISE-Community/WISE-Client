@@ -60,4 +60,3 @@ export class DiscussionAuthoring extends AbstractComponentAuthoring implements O
     }
   }
 }
-
