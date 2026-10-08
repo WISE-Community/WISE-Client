@@ -1,0 +1,96 @@
+<div class="presentation-header flex flex-col gap-3">
+  <div class="flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <span class="mat-headline-6 font-semibold" i18n>Classroom Presentation</span>
+      @if (data.periodName) {
+        <span class="text-sm px-2 py-0.5 rounded bg-gray-200 text-gray-700">
+          {{ data.periodName }}
+        </span>
+      }
+    </div>
+    <div class="flex items-center gap-2">
+      @if (!hideControls) {
+        <mat-button-toggle-group
+          [ngModel]="store.studentNamesDisplay()"
+          (ngModelChange)="onNamesDisplayChange($event)"
+          aria-label="Student Names Display"
+        >
+          <mat-button-toggle value="hide" i18n>Hide Names</mat-button-toggle>
+          <mat-button-toggle value="anonymize" i18n>Anonymize</mat-button-toggle>
+          <mat-button-toggle value="show" i18n>Show Names</mat-button-toggle>
+        </mat-button-toggle-group>
+      }
+
+      <button
+        mat-stroked-button
+        (click)="hideControls = !hideControls"
+        matTooltip="Toggle presentation controls"
+        i18n
+      >
+        {{ hideControls ? 'Show Controls' : 'Hide Controls' }}
+      </button>
+
+      <button mat-icon-button (click)="close()" matTooltip="Close (Esc)" i18n-matTooltip>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Presentation Prompt Area -->
+  <div class="flex items-start gap-2 pt-1">
+    @if (!isEditingPrompt) {
+      <div class="prompt-text flex-grow">
+        {{ effectivePrompt }}
+      </div>
+      @if (!hideControls) {
+        <button
+          mat-icon-button
+          (click)="startEditPrompt()"
+          aria-label="Edit prompt"
+          matTooltip="Edit prompt"
+          i18n-matTooltip
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      }
+    } @else {
+      <div class="flex flex-col gap-2 w-full max-w-3xl">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label i18n>Presentation Prompt</mat-label>
+          <textarea matInput [(ngModel)]="editedPrompt" rows="3" maxlength="1000"></textarea>
+        </mat-form-field>
+        <div class="flex items-center gap-2">
+          <button mat-flat-button color="primary" (click)="savePrompt()" i18n>Save</button>
+          <button mat-button (click)="cancelEditPrompt()" i18n>Cancel</button>
+          @if (store.prompt() != null) {
+            <button mat-button color="warn" (click)="resetPromptToDefault()" i18n>
+              Reset to default
+            </button>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Presentation Body -->
+<div class="presentation-body">
+  @if (store.selectedCount() === 0) {
+    <div class="flex flex-col items-center justify-center p-12 text-center text-gray-500">
+      <mat-icon class="mat-48 mb-2">visibility_off</mat-icon>
+      <div class="mat-body-1" i18n>No posts selected. Close and check posts to display.</div>
+    </div>
+  } @else {
+    <discussion-teacher
+      #discussionTeacher
+      [nodeId]="data.nodeId"
+      [component]="data.component"
+      [periodId]="data.periodId"
+      [anonymizeResponses]="isAnonymize"
+      [studentNamesDisplayMode]="store.studentNamesDisplay()"
+      [presentationSelectedIds]="store.selectedIds()"
+      [presentationStore]="store"
+      [mode]="'presentation'"
+    />
+  }
+</div>
