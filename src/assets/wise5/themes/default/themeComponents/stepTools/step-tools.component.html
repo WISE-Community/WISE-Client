@@ -1,44 +1,28 @@
 <div class="flex flex-row justify-between items-center h-[42px]">
   <div class="ps-1 flex flex-row items-center min-w-0">
-    @if (stepView) {
-      <step-select />
-      <button
-        matIconButton
-        (click)="goToPrevNode()"
-        [disabled]="!prevId"
-        matTooltip="Previous Step"
-        i18n-matTooltip
-        class="shrink-0"
-      >
-        <mat-icon>{{ icons.prev }}</mat-icon>
-      </button>
-      <button
-        matIconButton
-        (click)="goToNextNode()"
-        [disabled]="!nextId"
-        matTooltip="Next Step"
-        i18n-matTooltip
-        class="shrink-0"
-      >
-        <mat-icon>{{ icons.next }}</mat-icon>
-      </button>
-    } @else {
-      <span i18n class="px-3">Unit Plan</span>
-    }
+    <step-select />
+    <button
+      matIconButton
+      (click)="goToPrevNode()"
+      [disabled]="!prevId"
+      matTooltip="Previous Step"
+      i18n-matTooltip
+      class="shrink-0"
+    >
+      <mat-icon>{{ icons.prev }}</mat-icon>
+    </button>
+    <button
+      matIconButton
+      (click)="goToNextNode()"
+      [disabled]="!nextId"
+      matTooltip="Next Step"
+      i18n-matTooltip
+      class="shrink-0"
+    >
+      <mat-icon>{{ icons.next }}</mat-icon>
+    </button>
   </div>
   <div class="shrink-0">
-    @if (stepView) {
-      <button
-        mat-icon-button
-        (click)="closeNode()"
-        aria-label="Unit Plan"
-        i18n-aria-label
-        matTooltip="Unit Plan"
-        i18n-matTooltip
-      >
-        <mat-icon class="unit-plan-icon">view_list</mat-icon>
-      </button>
-    }
     @if (notebookConfig.itemTypes.note.enabled) {
       <notebook-launcher [notebookConfig]="notebookConfig" />
     }

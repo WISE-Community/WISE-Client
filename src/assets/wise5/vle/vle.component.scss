@@ -30,7 +30,7 @@ step-tools, group-tabs {
   overflow: auto;
 }
 
-.node-view, .nav-view {
+.node-view {
   top: variables.$toolbar-height + variables.$secondary-toolbar-height;
 }
 

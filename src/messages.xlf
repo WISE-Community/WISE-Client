@@ -2069,10 +2069,6 @@
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-completion/component-completion.component.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">54,55</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="7920283242192845616" datatype="html">
         <source>Detectable ideas</source>
@@ -10993,7 +10989,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">224</context>
+          <context context-type="linenumber">221</context>
         </context-group>
       </trans-unit>
       <trans-unit id="537022937435161177" datatype="html">
@@ -11008,7 +11004,7 @@ Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</sourc
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/vle.component.ts</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">222</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3407061818321766940" datatype="html">
@@ -15610,10 +15606,6 @@ The branches will be removed but the steps will remain in the unit.</source>
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/notifications-menu/notifications-menu.component.html</context>
           <context context-type="linenumber">36,37</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">86,87</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="6853281750146333865" datatype="html">
         <source>Are you sure you want to clear all your alerts?</source>
@@ -16651,7 +16643,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">9,13</context>
+          <context context-type="linenumber">8,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="884032441322142017" datatype="html">
@@ -16692,7 +16684,7 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">19,23</context>
+          <context context-type="linenumber">18,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3352866516213011375" datatype="html">
@@ -23941,31 +23933,12 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepSelect/step-select.component.html</context>
           <context context-type="linenumber">131,134</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">99,102</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="5151283292977613922" datatype="html">
         <source><x id="PH" equiv-text="progress.completionPct"/>% completed (<x id="PH_1" equiv-text="progress.completedItems"/>/<x id="PH_2" equiv-text="progress.totalItems"/> steps)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepSelect/step-select.component.ts</context>
           <context context-type="linenumber">143</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4299173667761940990" datatype="html">
-        <source>Unit Plan</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">26,31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">34,37</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
-          <context context-type="linenumber">36,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2670863509967113900" datatype="html">
@@ -24024,31 +23997,6 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7013100931809351796" datatype="html">
-        <source>Expand or collapse lesson content</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">14,18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3419551734015470626" datatype="html">
-        <source> <x id="INTERPOLATION" equiv-text="{{ nodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ nodeStatus.progress.totalItems }}"/> items </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">58,59</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
-          <context context-type="linenumber">18,20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7791908931142149749" datatype="html">
-        <source>Lesson is locked</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
-          <context context-type="linenumber">69,72</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="1692980694443272897" datatype="html">
         <source>Choose an icon</source>
         <context-group purpose="location">
@@ -24100,6 +24048,13 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">16,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3419551734015470626" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ rootNodeStatus.progress.completedItems }}"/>/<x id="INTERPOLATION_1" equiv-text="{{ rootNodeStatus.progress.totalItems }}"/> items </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
+          <context context-type="linenumber">18,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="684101800965110565" datatype="html">

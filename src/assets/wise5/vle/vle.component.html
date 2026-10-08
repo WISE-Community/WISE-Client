@@ -36,30 +36,22 @@
 <ng-template #defaultVLETemplate>
   <step-tools
     class="control-bg-bg mat-elevation-z1"
-    [stepView]="layoutState === 'node'"
     [notebookConfig]="notebookConfig"
     [chatbotEnabled]="chatbotEnabled"
     (toggleChatbot)="chatbotVisible = !chatbotVisible"
   />
   <div
     id="content"
-    class="vle-content mat-app-background"
+    class="vle-content mat-app-background node-view"
     [ngClass]="{
-      'nav-view': layoutState === 'nav',
-      'node-view': layoutState === 'node',
       'pb-10': reportEnabled
     }"
   >
     @if (runEndedAndLocked) {
       <run-ended-and-locked-message class="notice" />
     }
-    @if (layoutState === 'node') {
-      <node class="top" [node]="currentNode" />
-      <node-navigation class="l-constrained px-2 min-[640px]:px-6 xl:px-2 mb-12" />
-    }
-    @if (layoutState === 'nav') {
-      <navigation class="top" />
-    }
+    <node class="top" [node]="currentNode" />
+    <node-navigation class="l-constrained px-2 min-[640px]:px-6 xl:px-2 mb-12" />
   </div>
 </ng-template>
 
@@ -70,18 +62,12 @@
     (toggleChatbot)="chatbotVisible = !chatbotVisible"
     class="app-bg-bg mat-elevation-z1"
   />
-  <div
-    id="content"
-    class="vle-content tabbed"
-    [ngClass]="{ 'nav-view': layoutState === 'nav', 'node-view': layoutState === 'node' }"
-  >
+  <div id="content" class="vle-content tabbed node-view">
     <div class="tab-content">
       @if (runEndedAndLocked) {
         <run-ended-and-locked-message />
       }
-      @if (layoutState === 'node') {
-        <node class="node-tabbed top" [node]="currentNode" />
-      }
+      <node class="node-tabbed top" [node]="currentNode" />
       <div class="node-nav">
         <node-navigation class="l-constrained" [showPrevNodeNav]="true" />
       </div>
