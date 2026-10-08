@@ -14,7 +14,6 @@
       id="title"
       name="title"
       formControlName="title"
-      (keyup)="$event.keyCode == 13 && submit()"
       required
     />
     @if (addLessonFormGroup.controls['title'].hasError('required')) {
