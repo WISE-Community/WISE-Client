@@ -23,7 +23,7 @@ import { ConfigService } from '../services/configService';
         class="flex items-center gap-1"
       >
         <mat-icon>co_present</mat-icon>
-        <span i18n>Present Student Work</span>
+        <span i18n>Present</span>
       </button>
     </span>
   `

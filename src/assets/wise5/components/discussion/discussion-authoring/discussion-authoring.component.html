@@ -37,7 +37,7 @@
       <input
         matInput
         [(ngModel)]="componentContent.teacher.presentation.prompt"
-        (ngModelChange)="componentChanged()"
+        (ngModelChange)="inputChange.next($event)"
         placeholder="Here are your classmates' posts and comments. Which posts do you agree with?"
         i18n-placeholder
       />

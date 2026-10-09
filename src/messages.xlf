@@ -1409,10 +1409,6 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
           <context context-type="linenumber">98,100</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
-          <context context-type="linenumber">78,81</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="7675140366572877866" datatype="html">
         <source>Add new question</source>
@@ -19629,35 +19625,7 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog.component.ts</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1593153448932371250" datatype="html">
-        <source>Teacher Reflection Questions</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
-          <context context-type="linenumber">48,52</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5081962522961732453" datatype="html">
-        <source>Add Question</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
-          <context context-type="linenumber">57,61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9153508585400405262" datatype="html">
-        <source>Question <x id="INTERPOLATION" equiv-text="{{ idx + 1 }}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
-          <context context-type="linenumber">64,65</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6781925955143423407" datatype="html">
-        <source>e.g. Why did you choose these posts?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
-          <context context-type="linenumber">69,72</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7695481917775533693" datatype="html">
@@ -23358,28 +23326,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Note: Students do not see each other&apos;s names in this activity.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.html</context>
-          <context context-type="linenumber">16,21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2958890122996894894" datatype="html">
-        <source>Teacher Reflection</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.html</context>
-          <context context-type="linenumber">24,25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7218107936104348892" datatype="html">
-        <source>Reflect on selected student work</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.html</context>
-          <context context-type="linenumber">25,27</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6385027676909711398" datatype="html">
-        <source>Enter your reflection...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/discussion-summary/discussion-summary.component.html</context>
-          <context context-type="linenumber">37,40</context>
+          <context context-type="linenumber">16,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7967732284579375900" datatype="html">
@@ -23950,8 +23897,8 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3328453084692515917" datatype="html">
-        <source>Present Student Work</source>
+      <trans-unit id="6522877977962061564" datatype="html">
+        <source>Present</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-button.component.ts</context>
           <context context-type="linenumber">26,31</context>
