@@ -1,0 +1,130 @@
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+  inject
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { ConfigService } from '../services/configService';
+import { TeacherReflectionService } from './teacher-reflection.service';
+import { TeacherReflectionQuestion } from '../common/ComponentContent';
+import { TeacherReflection } from './teacher-reflection.model';
+
+interface PendingAnswer {
+  question: TeacherReflectionQuestion;
+  text: string;
+}
+
+@Component({
+  selector: 'teacher-reflection',
+  imports: [CommonModule, FormsModule, MatExpansionModule, MatFormFieldModule, MatInputModule],
+  templateUrl: './teacher-reflection.component.html'
+})
+export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() nodeId!: string;
+  @Input() componentId!: string;
+  @Input() componentType!: string;
+  @Input() periodId!: number;
+  @Input() questions: TeacherReflectionQuestion[] = [];
+
+  private configService = inject(ConfigService);
+  private reflectionService = inject(TeacherReflectionService);
+
+  private answers: Record<string, string> = {};
+  private answerChangeSubject = new Subject<PendingAnswer>();
+  private subscriptions = new Subscription();
+
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.answerChangeSubject.pipe(debounceTime(1000)).subscribe(({ question, text }) => {
+        this.saveAnswer(question, text);
+      })
+    );
+    this.loadAnswers();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      (changes.periodId && !changes.periodId.firstChange) ||
+      (changes.nodeId && !changes.nodeId.firstChange) ||
+      (changes.componentId && !changes.componentId.firstChange)
+    ) {
+      this.loadAnswers();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  getAnswerText(questionId: string): string {
+    return this.answers[questionId] ?? '';
+  }
+
+  onAnswerChange(question: TeacherReflectionQuestion, text: string): void {
+    this.answers[question.id] = text;
+    this.answerChangeSubject.next({ question, text });
+  }
+
+  private loadAnswers(): void {
+    const runId = this.configService.getRunId();
+    if (
+      !runId ||
+      this.periodId == null ||
+      this.periodId === -1 ||
+      !this.nodeId ||
+      !this.componentId
+    ) {
+      return;
+    }
+
+    this.reflectionService
+      .getQuestions(runId, this.periodId, this.nodeId, this.componentId)
+      .subscribe({
+        next: (questions: TeacherReflection[]) => {
+          this.answers = {};
+          for (const q of questions) {
+            if (q.questionId && q.answerText != null) {
+              this.answers[q.questionId] = q.answerText;
+            }
+          }
+        },
+        error: (err) => {
+          console.error('Failed to load teacher reflection answers', err);
+        }
+      });
+  }
+
+  private saveAnswer(question: TeacherReflectionQuestion, text: string): void {
+    const runId = this.configService.getRunId();
+    if (!runId || this.periodId == null || this.periodId === -1) {
+      return;
+    }
+
+    this.reflectionService
+      .saveAnswer({
+        runId,
+        periodId: this.periodId,
+        nodeId: this.nodeId,
+        componentId: this.componentId,
+        componentType: this.componentType,
+        questionId: question.id,
+        questionText: question.text,
+        answerText: text
+      })
+      .subscribe({
+        error: (err) => {
+          console.error('Failed to save teacher reflection answer', err);
+        }
+      });
+  }
+}
