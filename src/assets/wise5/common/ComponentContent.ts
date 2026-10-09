@@ -23,6 +23,14 @@ export interface ComponentContent {
   showSubmitButton?: boolean;
   tags?: string[];
   type: string;
+  presentation?: {
+    prompt?: string;
+  };
+  teacher?: {
+    presentation?: {
+      prompt?: string;
+    };
+  };
 }
 
 export function hasConnectedComponent(

@@ -1,12 +1,16 @@
 <div class="discussion-content notice-bg-bg">
   <div class="discussion-posts-wrap">
     <div class="discussion-posts" #postsGrid>
-      @for (componentState of topLevelResponses.all; track componentState) {
+      @for (componentState of displayResponses; track componentState) {
         <class-response-teacher
           [response]="componentState"
           [numReplies]="componentState.replies.length"
           (submitButtonClicked)="handleSubmitButtonClicked(componentState)"
           [mode]="mode"
+          [selectable]="selectable"
+          [presentationStore]="presentationStore"
+          [studentNamesDisplayMode]="studentNamesDisplayMode"
+          [presentationSelectedIds]="presentationSelectedIds"
           (expandChanged)="applyMasonry()"
           (hidePostEvent)="hidePost($event)"
           (showPostEvent)="showPost($event)"

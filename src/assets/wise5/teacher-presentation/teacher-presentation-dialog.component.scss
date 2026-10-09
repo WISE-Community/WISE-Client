@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  background: var(--mat-dialog-container-background-color, #ffffff);
+}
+
+.presentation-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: var(--mat-sys-surface, #f8f9fa);
+}
+
+.presentation-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.prompt-text {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: 500;
+  color: var(--mat-sys-on-surface, #1f2937);
+}

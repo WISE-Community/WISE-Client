@@ -1,5 +1,5 @@
 <mat-card appearance="outlined" class="class-response">
-  @if (isHidden(response)) {
+  @if (!isPresentationMode && isHidden(response)) {
     <details (toggle)="toggleHiddenPost.emit()">
       <summary class="secondary-text notice-bg-bg">
         <span class="flex-grow" i18n>This post is hidden from students.</span>
@@ -19,7 +19,7 @@
       <ng-container *ngTemplateOutlet="commentsSection; context: { $implicit: true }" />
     </details>
   } @else {
-    <ng-container *ngTemplateOutlet="postContent; context: { $implicit: true }" />
+    <ng-container *ngTemplateOutlet="postContent; context: { $implicit: !isPresentationMode }" />
     <ng-container *ngTemplateOutlet="commentsSection" />
   }
 </mat-card>
@@ -27,23 +27,34 @@
 <ng-template #postContent let-showHideButton>
   <div class="p-2 w-full">
     <div class="flex flex-row items-center gap-2">
-      <mat-icon
-        class="mat-48"
-        style="color: {{ getAvatarColorForWorkgroupId(response.workgroupId) }};"
-      >
-        account_circle
-      </mat-icon>
-      <div>
-        <div class="strong">{{ response.usernames }}</div>
-        <div class="mat-caption secondary-text">
-          <save-time-message
-            [saveTime]="adjustClientSaveTime(response.serverSaveTime)"
-            [timeOnly]="true"
-            tooltipPosition="after"
-          />
+      @if (selectable && !isPresentationMode) {
+        <mat-checkbox
+          [checked]="isParentSelected()"
+          [disabled]="isParentCheckboxDisabled()"
+          (change)="onParentCheckboxChange()"
+          aria-label="Include post in presentation"
+          i18n-aria-label
+        />
+      }
+      @if (showAuthorHeader) {
+        <mat-icon
+          class="mat-48"
+          style="color: {{ getAvatarColorForWorkgroupId(response.workgroupId) }};"
+        >
+          account_circle
+        </mat-icon>
+        <div>
+          <div class="strong">{{ response.usernames }}</div>
+          <div class="mat-caption secondary-text">
+            <save-time-message
+              [saveTime]="adjustClientSaveTime(response.serverSaveTime)"
+              [timeOnly]="true"
+              tooltipPosition="after"
+            />
+          </div>
         </div>
-      </div>
-      @if (showHideButton) {
+      }
+      @if (showHideButton && !isPresentationMode) {
         <span class="flex-grow"></span>
         <button
           matIconButton
@@ -64,24 +75,28 @@
 </ng-template>
 
 <ng-template #commentsSection let-parentHidden>
-  @if (response.replies.length > 0) {
+  @if (hasRepliesToDisplay) {
     <div class="notice-bg-bg">
       <mat-divider class="comment-divider" />
       <div class="comments-header" matSubheader>
-        @if (response.replies.length === 1) {
-          <span i18n> Comments ({{ response.replies.length }}) </span>
-        }
-        @if (response.replies.length > 1) {
-          <a [routerLink]="" (click)="toggleExpanded()" class="flex items-center">
-            <span i18n>Comments ({{ response.replies.length }})</span>
-            <mat-icon>{{ expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
-          </a>
+        @if (isPresentationMode) {
+          <span i18n> Comments ({{ repliesToShow.length }}) </span>
+        } @else {
+          @if (response.replies.length === 1) {
+            <span i18n> Comments ({{ response.replies.length }}) </span>
+          }
+          @if (response.replies.length > 1) {
+            <a [routerLink]="" (click)="toggleExpanded()" class="flex items-center">
+              <span i18n>Comments ({{ response.replies.length }})</span>
+              <mat-icon>{{ expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+            </a>
+          }
         }
       </div>
       <div class="comments">
         @for (reply of repliesToShow; track reply) {
           <div class="comment" [ngClass]="{ 'animate-show': !isLast }">
-            @if (parentHidden || isHidden(reply)) {
+            @if (!isPresentationMode && (parentHidden || isHidden(reply))) {
               <details
                 class="reply-details rounded-md notice-bg-border border-1 open:border-transparent open:pb-2"
                 (toggle)="toggleHiddenPost.emit()"
@@ -114,7 +129,7 @@
               <ng-container
                 *ngTemplateOutlet="
                   replyContent;
-                  context: { $implicit: reply, showHideButton: true }
+                  context: { $implicit: reply, showHideButton: !isPresentationMode }
                 "
               />
             }
@@ -127,22 +142,32 @@
 
 <ng-template #replyContent let-reply let-showHideButton="showHideButton">
   <div class="flex flex-row items-center gap-2 pt-1">
-    <mat-icon
-      matListAvatar
-      class="mat-40"
-      style="color: {{ getAvatarColorForWorkgroupId(reply.workgroupId) }}"
-    >
-      account_circle
-    </mat-icon>
-    <div class="flex flex-wrap gap-2 items-center">
-      <span class="strong">{{ reply.usernames }}</span>
-      <save-time-message
-        [saveTime]="adjustClientSaveTime(reply.serverSaveTime)"
-        [timeOnly]="true"
-        tooltipPosition="after"
+    @if (selectable && !isPresentationMode) {
+      <mat-checkbox
+        [checked]="isReplySelected(reply)"
+        (change)="onReplyCheckboxChange(reply)"
+        aria-label="Include comment in presentation"
+        i18n-aria-label
       />
-    </div>
-    @if (showHideButton) {
+    }
+    @if (showAuthorHeader) {
+      <mat-icon
+        matListAvatar
+        class="mat-40"
+        style="color: {{ getAvatarColorForWorkgroupId(reply.workgroupId) }}"
+      >
+        account_circle
+      </mat-icon>
+      <div class="flex flex-wrap gap-2 items-center">
+        <span class="strong">{{ reply.usernames }}</span>
+        <save-time-message
+          [saveTime]="adjustClientSaveTime(reply.serverSaveTime)"
+          [timeOnly]="true"
+          tooltipPosition="after"
+        />
+      </div>
+    }
+    @if (showHideButton && !isPresentationMode) {
       <span class="flex-grow"></span>
       <button
         matIconButton

@@ -1,0 +1,32 @@
+<div [class.expanded]="expanded">
+  <div class="flex flex-wrap justify-between items-center mb-2 gap-2">
+    <h2 class="mat-subtitle-1 m-0" i18n>Class Discussion</h2>
+    <teacher-presentation-button
+      [node]="node"
+      [component]="component"
+      [periodId]="periodId"
+      [periodName]="periodName"
+      [store]="store"
+    />
+  </div>
+
+  <div class="mb-4 flex flex-wrap gap-4 justify-between items-center">
+    @if (component?.content?.anonymizeResponses) {
+      <span class="mat-caption" i18n
+        >Note: Students do not see each other's names in this activity.</span
+      >
+    }
+  </div>
+
+  <discussion-teacher
+    class="max-h-160 block overflow-y-auto"
+    [class.max-h-none]="expanded"
+    [nodeId]="nodeId"
+    [component]="component"
+    [periodId]="periodId"
+    [anonymizeResponses]="teacherSummaryConfig.anonymizeStudentNames"
+    [selectable]="isSinglePeriod"
+    [presentationStore]="store"
+    [mode]="'summary'"
+  />
+</div>
