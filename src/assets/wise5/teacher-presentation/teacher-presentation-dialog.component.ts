@@ -56,6 +56,7 @@ export class TeacherPresentationDialogComponent implements OnInit {
 
   get defaultPrompt(): string {
     return (
+      this.data.component?.content?.teacher?.presentation?.prompt ||
       this.data.component?.content?.presentation?.prompt ||
       $localize`Here are your classmates' posts and comments. Which posts do you agree with?`
     );

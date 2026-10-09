@@ -3,23 +3,14 @@ import { Component as WISEComponent } from '../../../common/Component';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 import { ComponentFactory } from '../../../common/ComponentFactory';
 import { DiscussionTeacherComponent } from '../../../components/discussion/discussion-teacher/discussion-teacher.component';
-import { FormsModule } from '@angular/forms';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { TEACHER_SUMMARY_CONFIG } from '../TeacherSummaryConfig';
 import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
 import { TeacherPresentationButtonComponent } from '../../../teacher-presentation/teacher-presentation-button.component';
-import { TeacherPresentationReflectionQuestion } from '../../../teacher-presentation/teacher-presentation-config';
 import { Node } from '../../../common/Node';
 
 @Component({
   imports: [
     DiscussionTeacherComponent,
-    FormsModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatInputModule,
     TeacherPresentationButtonComponent
   ],
   providers: [TeacherPresentationSelectionStore],
@@ -41,14 +32,6 @@ export class DiscussionSummaryComponent
     return this.projectService.getNode(this.nodeId);
   }
 
-  get reflectionQuestions(): TeacherPresentationReflectionQuestion[] {
-    return this.component?.content?.presentation?.reflectionQuestions || [];
-  }
-
-  get hasReflectionQuestions(): boolean {
-    return this.reflectionQuestions.length > 0;
-  }
-
   get isSinglePeriod(): boolean {
     return this.periodId != null && this.periodId !== -1;
   }
@@ -61,14 +44,6 @@ export class DiscussionSummaryComponent
       if (period) return period.periodName || period.name;
     }
     return undefined;
-  }
-
-  getAnswerText(questionId: string): string {
-    return this.store.reflectionAnswers().get(questionId)?.answerText || '';
-  }
-
-  onAnswerChange(q: TeacherPresentationReflectionQuestion, text: string): void {
-    this.store.saveReflectionAnswer(q.id, q.text, text);
   }
 
   override ngOnInit(): void {
@@ -103,8 +78,7 @@ export class DiscussionSummaryComponent
         this.periodId,
         this.nodeId,
         this.componentId,
-        'Discussion',
-        this.reflectionQuestions
+        'Discussion'
       );
     }
   }

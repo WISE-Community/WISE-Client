@@ -5,23 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { generateRandomKey } from '../../../common/string/string';
 
 @Component({
   imports: [
     EditComponentPrompt,
     FormsModule,
-    MatButtonModule,
     MatCheckboxModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatTooltipModule
+    MatInputModule
   ],
   styles: ['mat-checkbox { display: block; }'],
   templateUrl: 'discussion-authoring.component.html'
@@ -29,34 +22,16 @@ import { generateRandomKey } from '../../../common/string/string';
 export class DiscussionAuthoring extends AbstractComponentAuthoring implements OnInit {
   override ngOnInit(): void {
     super.ngOnInit();
-    if (!this.componentContent.presentation) {
-      this.componentContent.presentation = {
-        prompt: '',
-        reflectionQuestions: []
+    if (!this.componentContent.teacher) {
+      this.componentContent.teacher = {
+        presentation: {
+          prompt: this.componentContent.presentation?.prompt || ''
+        }
       };
-    } else if (!this.componentContent.presentation.reflectionQuestions) {
-      this.componentContent.presentation.reflectionQuestions = [];
-    }
-  }
-
-  addReflectionQuestion(): void {
-    if (!this.componentContent.presentation) {
-      this.componentContent.presentation = { prompt: '', reflectionQuestions: [] };
-    }
-    if (!this.componentContent.presentation.reflectionQuestions) {
-      this.componentContent.presentation.reflectionQuestions = [];
-    }
-    this.componentContent.presentation.reflectionQuestions.push({
-      id: generateRandomKey(),
-      text: ''
-    });
-    this.componentChanged();
-  }
-
-  deleteReflectionQuestion(index: number): void {
-    if (this.componentContent.presentation?.reflectionQuestions) {
-      this.componentContent.presentation.reflectionQuestions.splice(index, 1);
-      this.componentChanged();
+    } else if (!this.componentContent.teacher.presentation) {
+      this.componentContent.teacher.presentation = {
+        prompt: this.componentContent.presentation?.prompt || ''
+      };
     }
   }
 }

@@ -3,9 +3,7 @@ import { Subject, debounceTime } from 'rxjs';
 import {
   StudentNamesDisplayMode,
   TeacherPresentationConfig,
-  TeacherPresentationItem,
-  TeacherPresentationReflectionAnswer,
-  TeacherPresentationReflectionQuestion
+  TeacherPresentationItem
 } from './teacher-presentation-config';
 import { TeacherPresentationConfigService } from './teacher-presentation-config.service';
 
@@ -27,8 +25,6 @@ export class TeacherPresentationSelectionStore {
   selectedIds = signal<Set<number>>(new Set<number>());
   studentNamesDisplay = signal<StudentNamesDisplayMode>('hide');
   prompt = signal<string | null>(null);
-  reflectionAnswers = signal<Map<string, TeacherPresentationReflectionAnswer>>(new Map());
-  reflectionQuestions = signal<TeacherPresentationReflectionQuestion[]>([]);
 
   // Computed signals
   selectedCount = computed(() => this.selectedIds().size);
@@ -45,18 +41,16 @@ export class TeacherPresentationSelectionStore {
     periodId: number,
     nodeId: string,
     componentId: string,
-    componentType: string,
-    reflectionQuestions: TeacherPresentationReflectionQuestion[] = []
+    componentType: string
   ): void {
     this.runId.set(runId);
     this.periodId.set(periodId);
     this.nodeId.set(nodeId);
     this.componentId.set(componentId);
     this.componentType.set(componentType);
-    this.reflectionQuestions.set(reflectionQuestions);
 
     if (runId && periodId && periodId !== -1 && nodeId && componentId) {
-      this.configService.getConfig(runId, periodId, nodeId, componentId).subscribe({
+      this.configService.getConfig(runId, periodId, nodeId, componentId)?.subscribe({
         next: (config) => {
           if (config) {
             const ids = new Set<number>();
@@ -66,12 +60,6 @@ export class TeacherPresentationSelectionStore {
             this.selectedIds.set(ids);
             this.studentNamesDisplay.set(config.studentNamesDisplay || 'hide');
             this.prompt.set(config.prompt || null);
-
-            const ansMap = new Map<string, TeacherPresentationReflectionAnswer>();
-            if (config.answers) {
-              config.answers.forEach((ans) => ansMap.set(ans.questionId, ans));
-            }
-            this.reflectionAnswers.set(ansMap);
           }
         },
         error: (err) => {
@@ -165,34 +153,6 @@ export class TeacherPresentationSelectionStore {
     this.prompt.set(newPrompt);
     // Prompt save is immediate as specified in implementation plan
     this.persistConfig();
-  }
-
-  saveReflectionAnswer(questionId: string, questionText: string, answerText: string): void {
-    const rId = this.runId();
-    const pId = this.periodId();
-    if (!rId || !pId) return;
-
-    this.configService
-      .saveAnswer({
-        runId: rId,
-        periodId: pId,
-        nodeId: this.nodeId(),
-        componentId: this.componentId(),
-        componentType: this.componentType(),
-        questionId,
-        questionText,
-        answerText
-      })
-      .subscribe({
-        next: (savedAnswer) => {
-          const map = new Map(this.reflectionAnswers());
-          map.set(questionId, savedAnswer);
-          this.reflectionAnswers.set(map);
-        },
-        error: (err) => {
-          console.error('Failed to save reflection answer', err);
-        }
-      });
   }
 
   private triggerAutosave(): void {

@@ -11,8 +11,7 @@ describe('TeacherPresentationSelectionStore', () => {
   beforeEach(() => {
     configServiceSpy = jasmine.createSpyObj('TeacherPresentationConfigService', [
       'getConfig',
-      'saveConfig',
-      'saveAnswer'
+      'saveConfig'
     ]);
     configServiceSpy.getConfig.and.returnValue(of(null));
     configServiceSpy.saveConfig.and.returnValue(of({} as TeacherPresentationConfig));
@@ -85,7 +84,7 @@ describe('TeacherPresentationSelectionStore', () => {
     beforeEach(() => {
       configServiceSpy.getConfig.and.returnValue(of(null));
       configServiceSpy.saveConfig.and.returnValue(of({} as TeacherPresentationConfig));
-      store.init(1, 10, 'node1', 'comp1', 'Discussion', []);
+      store.init(1, 10, 'node1', 'comp1', 'Discussion');
     });
 
     it('should populate store state when existing config is loaded on init', () => {
@@ -98,26 +97,17 @@ describe('TeacherPresentationSelectionStore', () => {
         componentType: 'Discussion',
         items: [{ studentWorkId: 101 }, { studentWorkId: 102 }],
         studentNamesDisplay: 'anonymize',
-        prompt: 'Initial prompt',
-        answers: [
-          {
-            questionId: 'q1',
-            questionText: 'Why?',
-            answerText: 'Because',
-            updatedAt: 1000
-          }
-        ]
+        prompt: 'Initial prompt'
       };
       configServiceSpy.getConfig.and.returnValue(of(mockConfig));
 
-      store.init(1, 10, 'node1', 'comp1', 'Discussion', []);
+      store.init(1, 10, 'node1', 'comp1', 'Discussion');
 
       expect(store.selectedCount()).toBe(2);
       expect(store.isSelected(101)).toBeTrue();
       expect(store.isSelected(102)).toBeTrue();
       expect(store.studentNamesDisplay()).toBe('anonymize');
       expect(store.prompt()).toBe('Initial prompt');
-      expect(store.reflectionAnswers().get('q1')?.answerText).toBe('Because');
     });
 
     it('should debounce autosave by 1 second when selecting items', fakeAsync(() => {
@@ -141,30 +131,6 @@ describe('TeacherPresentationSelectionStore', () => {
       expect(configServiceSpy.saveConfig).toHaveBeenCalledTimes(1);
       const payload = configServiceSpy.saveConfig.calls.mostRecent().args[0];
       expect(payload.prompt).toBe('Custom teacher prompt');
-    });
-
-    it('should save reflection answer via API and update state', () => {
-      const mockAnswer = {
-        questionId: 'q1',
-        questionText: 'Why?',
-        answerText: 'Because of reasons',
-        updatedAt: 12345
-      };
-      configServiceSpy.saveAnswer.and.returnValue(of(mockAnswer));
-
-      store.saveReflectionAnswer('q1', 'Why?', 'Because of reasons');
-
-      expect(configServiceSpy.saveAnswer).toHaveBeenCalledWith({
-        runId: 1,
-        periodId: 10,
-        nodeId: 'node1',
-        componentId: 'comp1',
-        componentType: 'Discussion',
-        questionId: 'q1',
-        questionText: 'Why?',
-        answerText: 'Because of reasons'
-      });
-      expect(store.reflectionAnswers().get('q1')?.answerText).toBe('Because of reasons');
     });
   });
 });

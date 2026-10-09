@@ -25,7 +25,11 @@ export interface ComponentContent {
   type: string;
   presentation?: {
     prompt?: string;
-    reflectionQuestions?: Array<{ id: string; text: string }>;
+  };
+  teacher?: {
+    presentation?: {
+      prompt?: string;
+    };
   };
 }
 

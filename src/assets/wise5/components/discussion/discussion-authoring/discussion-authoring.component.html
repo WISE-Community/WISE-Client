@@ -36,52 +36,11 @@
       <mat-label i18n>Default Presentation Prompt</mat-label>
       <input
         matInput
-        [(ngModel)]="componentContent.presentation.prompt"
+        [(ngModel)]="componentContent.teacher.presentation.prompt"
         (ngModelChange)="componentChanged()"
         placeholder="Here are your classmates' posts and comments. Which posts do you agree with?"
         i18n-placeholder
       />
     </mat-form-field>
-
-    <div class="flex flex-col gap-2">
-      <div class="flex items-center justify-between">
-        <label class="font-medium text-sm" i18n>Teacher Reflection Questions</label>
-        <button
-          mat-button
-          color="primary"
-          type="button"
-          (click)="addReflectionQuestion()"
-          class="flex items-center gap-1"
-        >
-          <mat-icon>add</mat-icon>
-          <span i18n>Add Question</span>
-        </button>
-      </div>
-
-      @for (q of componentContent.presentation.reflectionQuestions; track q.id; let idx = $index) {
-        <div class="flex items-center gap-2">
-          <mat-form-field appearance="outline" class="flex-grow">
-            <mat-label i18n>Question {{ idx + 1 }}</mat-label>
-            <input
-              matInput
-              [(ngModel)]="q.text"
-              (ngModelChange)="componentChanged()"
-              placeholder="e.g. Why did you choose these posts?"
-              i18n-placeholder
-            />
-          </mat-form-field>
-          <button
-            mat-icon-button
-            color="warn"
-            type="button"
-            (click)="deleteReflectionQuestion(idx)"
-            matTooltip="Delete question"
-            i18n-matTooltip
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      }
-    </div>
   </div>
 </mat-expansion-panel>
