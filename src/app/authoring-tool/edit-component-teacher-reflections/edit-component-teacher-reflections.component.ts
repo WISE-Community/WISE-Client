@@ -23,6 +23,7 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
     MatInputModule,
     MatTooltipModule
   ],
+  styles: [':host { display: block; width: 100%; }'],
   templateUrl: 'edit-component-teacher-reflections.component.html'
 })
 export class EditComponentTeacherReflectionsComponent implements OnInit, OnDestroy {

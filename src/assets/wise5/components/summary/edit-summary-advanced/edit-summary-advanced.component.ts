@@ -12,6 +12,7 @@ import { EditComponentAdvancedSharedModule } from '../../../../../app/authoring-
         </ng-template>
         <div class="flex flex-col">
           <edit-component-width [componentContent]="componentContent" />
+          <edit-component-teacher-reflections [componentContent]="componentContent" />
         </div>
       </mat-tab>
       <mat-tab>
