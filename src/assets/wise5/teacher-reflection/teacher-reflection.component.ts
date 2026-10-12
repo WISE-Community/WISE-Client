@@ -18,6 +18,7 @@ import { ConfigService } from '../services/configService';
 import { TeacherReflectionService } from './teacher-reflection.service';
 import { TeacherReflectionQuestion } from '../common/ComponentContent';
 import { TeacherReflection } from './teacher-reflection.model';
+import { NotificationService } from '../services/notificationService';
 
 interface PendingAnswer {
   question: TeacherReflectionQuestion;
@@ -37,6 +38,7 @@ export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy 
   @Input() questions: TeacherReflectionQuestion[] = [];
 
   private configService = inject(ConfigService);
+  private notificationService = inject(NotificationService);
   private reflectionService = inject(TeacherReflectionService);
 
   private answers: Record<string, string> = {};
@@ -46,6 +48,7 @@ export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy 
   ngOnInit(): void {
     this.subscriptions.add(
       this.answerChangeSubject.pipe(debounceTime(1000)).subscribe(({ question, text }) => {
+        this.notificationService.showSavingMessage();
         this.saveAnswer(question, text);
       })
     );
@@ -122,6 +125,9 @@ export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy 
         answerText: text
       })
       .subscribe({
+        next: () => {
+          this.notificationService.showSavedMessage($localize`Answer saved`);
+        },
         error: (err) => {
           console.error('Failed to save teacher reflection answer', err);
         }
