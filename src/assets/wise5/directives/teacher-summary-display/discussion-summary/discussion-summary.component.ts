@@ -9,12 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { TEACHER_SUMMARY_CONFIG } from '../TeacherSummaryConfig';
 
 @Component({
-  imports: [
-    DiscussionTeacherComponent,
-    FormsModule,
-    MatSlideToggle,
-    TeacherReflectionComponent
-  ],
+  imports: [DiscussionTeacherComponent, FormsModule, MatSlideToggle, TeacherReflectionComponent],
   selector: 'discussion-summary',
   styleUrl: '../../summary-display/summary-display.component.scss',
   template: `
@@ -36,7 +31,7 @@ import { TEACHER_SUMMARY_CONFIG } from '../TeacherSummaryConfig';
           [componentId]="componentId"
           [componentType]="component.content.type"
           [periodId]="periodId"
-          [questions]="component.content.teacher?.reflectionQuestions || []"
+          [questions]="component.content.teacher?.reflectionQuestions"
         />
       }
       <discussion-teacher
@@ -58,9 +53,7 @@ export class DiscussionSummaryComponent extends TeacherSummaryDisplayComponent i
   protected teacherSummaryConfig = inject(TEACHER_SUMMARY_CONFIG);
 
   protected get hasReflectionQuestions(): boolean {
-    return (
-      (this.component?.content?.teacher?.reflectionQuestions?.length ?? 0) > 0
-    );
+    return (this.component?.content?.teacher?.reflectionQuestions?.length ?? 0) > 0;
   }
 
   protected get isSinglePeriod(): boolean {
