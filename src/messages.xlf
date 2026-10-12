@@ -2190,7 +2190,7 @@
         <source>Select language</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/common/project-language-chooser/project-language-chooser.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3885034872846800167" datatype="html">
