@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+  input,
+  output
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -13,7 +21,7 @@ import { generateRandomKey } from '../../../assets/wise5/common/string/string';
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 
 @Component({
-  selector: 'edit-component-teacher-reflections',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FormsModule,
     MatButtonModule,
@@ -23,20 +31,21 @@ import { TeacherProjectService } from '../../../assets/wise5/services/teacherPro
     MatInputModule,
     MatTooltipModule
   ],
+  selector: 'edit-component-teacher-reflections',
   styles: [':host { display: block; width: 100%; }'],
   templateUrl: 'edit-component-teacher-reflections.component.html'
 })
 export class EditComponentTeacherReflectionsComponent implements OnInit, OnDestroy {
-  @Input() componentContent!: ComponentContent;
-  @Output() componentChangedEvent = new EventEmitter<void>();
+  readonly componentContent = input.required<ComponentContent>();
+  readonly componentChangedEvent = output<void>();
 
   protected questionTextChanged = new Subject<void>();
   private projectService = inject(TeacherProjectService);
   private subscriptions = new Subscription();
 
   ngOnInit(): void {
-    if (!this.componentContent.teacher) {
-      this.componentContent.teacher = { reflectionQuestions: [] };
+    if (!this.componentContent().teacher) {
+      this.componentContent().teacher = { reflectionQuestions: [] };
     }
     this.subscriptions.add(
       this.questionTextChanged.pipe(debounceTime(1000)).subscribe(() => {
@@ -49,16 +58,16 @@ export class EditComponentTeacherReflectionsComponent implements OnInit, OnDestr
     this.subscriptions.unsubscribe();
   }
 
-  addReflectionQuestion(): void {
-    this.componentContent.teacher.reflectionQuestions.push({
+  addQuestion(): void {
+    this.componentContent().teacher.reflectionQuestions.push({
       id: generateRandomKey(),
       text: ''
     });
     this.notifyChanged();
   }
 
-  deleteReflectionQuestion(index: number): void {
-    this.componentContent.teacher.reflectionQuestions.splice(index, 1);
+  deleteQuestion(index: number): void {
+    this.componentContent().teacher.reflectionQuestions.splice(index, 1);
     this.notifyChanged();
   }
 
