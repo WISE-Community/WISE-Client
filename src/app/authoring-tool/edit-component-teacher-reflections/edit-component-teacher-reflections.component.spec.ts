@@ -3,7 +3,7 @@ import { EditComponentTeacherReflectionsComponent } from './edit-component-teach
 import { TeacherProjectService } from '../../../assets/wise5/services/teacherProjectService';
 import { ComponentContent } from '../../../assets/wise5/common/ComponentContent';
 
-fdescribe('EditComponentTeacherReflectionsComponent', () => {
+describe('EditComponentTeacherReflectionsComponent', () => {
   let component: EditComponentTeacherReflectionsComponent;
   let fixture: ComponentFixture<EditComponentTeacherReflectionsComponent>;
   let mockProjectService: jasmine.SpyObj<TeacherProjectService>;
