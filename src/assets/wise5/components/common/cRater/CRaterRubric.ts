@@ -38,8 +38,29 @@ export class CRaterRubric {
     );
   }
 
+  getTagColor(tag: string): string {
+    if (!this.ideaColors) {
+      return '';
+    }
+    const exact = this.ideaColors.find(
+      (ideaColor) =>
+        ideaColor.tags.length === 1 && ideaColor.tags[0].toLowerCase() === tag.toLowerCase()
+    );
+    if (exact) {
+      return exact.colorValue;
+    }
+    const match = this.ideaColors.find((ideaColor) =>
+      ideaColor.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+    );
+    return match ? match.colorValue : '';
+  }
+
   hasRubricData(): boolean {
     return (this.description ?? '') !== '' || this.ideas.length > 0;
+  }
+
+  hasAnyIdeaTags(): boolean {
+    return this.ideas?.some((idea) => (idea.tags ?? []).length > 0) ?? false;
   }
 
   getInitialIdeasSummaryGroups(): any[] {
