@@ -1090,8 +1090,8 @@
           <context context-type="linenumber">24,25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6781925955143423407" datatype="html">
-        <source>e.g. Why did you choose these posts?</source>
+      <trans-unit id="4908917081284438263" datatype="html">
+        <source>e.g. Which, if any, response surprised you?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
           <context context-type="linenumber">29,32</context>
@@ -1110,6 +1110,17 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
           <context context-type="linenumber">98,100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2774207815872923451" datatype="html">
+        <source>Are you sure you want to delete this question?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.ts</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8084155234460667951" datatype="html">
@@ -1468,13 +1479,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.ts</context>
           <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2774207815872923451" datatype="html">
-        <source>Are you sure you want to delete this question?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.ts</context>
-          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3579392162084914620" datatype="html">
@@ -23913,7 +23917,7 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Answer saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8784868761263923006" datatype="html">
