@@ -10,11 +10,7 @@ describe('TeacherReflectionService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        TeacherReflectionService,
-        provideHttpClient(),
-        provideHttpClientTesting()
-      ]
+      providers: [TeacherReflectionService, provideHttpClient(), provideHttpClientTesting()]
     });
     service = TestBed.inject(TeacherReflectionService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -39,7 +35,8 @@ describe('TeacherReflectionService', () => {
         componentType: 'Discussion',
         questionId: 'q1',
         questionText: 'Prompt 1',
-        answerText: 'Answer 1'
+        answerText: 'Answer 1',
+        answeredByWorkgroupId: 5
       }
     ];
 
@@ -68,7 +65,8 @@ describe('TeacherReflectionService', () => {
       componentType: 'Discussion',
       questionId: 'q1',
       questionText: 'Prompt 1',
-      answerText: 'New Answer'
+      answerText: 'New Answer',
+      answeredByWorkgroupId: 100
     };
 
     const mockResponse: TeacherReflection = {

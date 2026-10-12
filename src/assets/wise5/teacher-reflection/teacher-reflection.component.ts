@@ -109,10 +109,11 @@ export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy 
     });
   }
 
-  private saveAnswer(question: TeacherReflectionQuestion, text: string): void {
+  private saveAnswer(question: TeacherReflectionQuestion, answerText: string): void {
     const runId = this.configService.getRunId();
     const periodId = this.periodId();
-    if (!runId || periodId == null || periodId === -1) {
+    const answeredByWorkgroupId = this.configService.getWorkgroupId();
+    if (!runId || periodId == null || periodId === -1 || answeredByWorkgroupId == null) {
       return;
     }
 
@@ -125,7 +126,8 @@ export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy 
         componentType: this.componentType(),
         questionId: question.id,
         questionText: question.text,
-        answerText: text
+        answerText,
+        answeredByWorkgroupId
       })
       .subscribe({
         next: () => {

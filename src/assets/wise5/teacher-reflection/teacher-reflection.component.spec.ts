@@ -21,8 +21,9 @@ describe('TeacherReflectionComponent', () => {
     mockReflectionService.getQuestions.and.returnValue(of([]));
     mockReflectionService.saveAnswer.and.returnValue(of({} as any));
 
-    mockConfigService = jasmine.createSpyObj('ConfigService', ['getRunId']);
+    mockConfigService = jasmine.createSpyObj('ConfigService', ['getRunId', 'getWorkgroupId']);
     mockConfigService.getRunId.and.returnValue(100);
+    mockConfigService.getWorkgroupId.and.returnValue(50);
 
     await TestBed.configureTestingModule({
       imports: [TeacherReflectionComponent],
@@ -57,7 +58,8 @@ describe('TeacherReflectionComponent', () => {
           componentType: 'Discussion',
           questionId: 'q1',
           questionText: 'Question 1 text',
-          answerText: 'Saved answer 1'
+          answerText: 'Saved answer 1',
+          answeredByWorkgroupId: 5
         }
       ])
     );
@@ -98,7 +100,8 @@ describe('TeacherReflectionComponent', () => {
       componentType: 'Discussion',
       questionId: 'q1',
       questionText: 'Question 1 text',
-      answerText: 'Updated draft answer'
+      answerText: 'Updated draft answer',
+      answeredByWorkgroupId: 50
     });
   }));
 });

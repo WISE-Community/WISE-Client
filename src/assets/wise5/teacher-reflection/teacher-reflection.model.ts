@@ -7,8 +7,8 @@ export interface TeacherReflection {
   componentType: string;
   questionId: string;
   questionText: string;
-  answerText?: string;
-  answeredByWorkgroupId?: number;
+  answerText: string;
+  answeredByWorkgroupId: number;
   createdAt?: number;
   updatedAt?: number;
 }
@@ -22,4 +22,5 @@ export interface TeacherReflectionAnswerRequest {
   questionId: string;
   questionText: string;
   answerText: string;
+  answeredByWorkgroupId: number;
 }
