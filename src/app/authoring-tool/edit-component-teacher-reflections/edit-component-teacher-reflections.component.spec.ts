@@ -53,7 +53,7 @@ describe('EditComponentTeacherReflectionsComponent', () => {
       }
     } as ComponentContent);
     fixture.detectChanges();
-
+    spyOn(window, 'confirm').and.returnValue(true);
     component.deleteQuestion(0);
 
     expect(component.componentContent().teacher.reflectionQuestions.length).toBe(1);

@@ -67,8 +67,10 @@ export class EditComponentTeacherReflectionsComponent implements OnInit, OnDestr
   }
 
   deleteQuestion(index: number): void {
-    this.componentContent().teacher.reflectionQuestions.splice(index, 1);
-    this.notifyChanged();
+    if (confirm($localize`Are you sure you want to delete this question?`)) {
+      this.componentContent().teacher.reflectionQuestions.splice(index, 1);
+      this.notifyChanged();
+    }
   }
 
   protected onQuestionTextChanged(): void {
