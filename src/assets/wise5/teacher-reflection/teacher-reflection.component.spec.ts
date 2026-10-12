@@ -35,14 +35,14 @@ describe('TeacherReflectionComponent', () => {
 
     fixture = TestBed.createComponent(TeacherReflectionComponent);
     component = fixture.componentInstance;
-    component.nodeId = 'node1';
-    component.componentId = 'comp1';
-    component.componentType = 'Discussion';
-    component.periodId = 1;
-    component.questions = [
+    fixture.componentRef.setInput('nodeId', 'node1');
+    fixture.componentRef.setInput('componentId', 'comp1');
+    fixture.componentRef.setInput('componentType', 'Discussion');
+    fixture.componentRef.setInput('periodId', 1);
+    fixture.componentRef.setInput('questions', [
       { id: 'q1', text: 'Question 1 text' },
       { id: 'q2', text: 'Question 2 text' }
-    ];
+    ]);
   });
 
   it('should create and load answers on init', () => {
@@ -70,7 +70,7 @@ describe('TeacherReflectionComponent', () => {
   });
 
   it('should not load answers if periodId is -1 (all periods)', () => {
-    component.periodId = -1;
+    fixture.componentRef.setInput('periodId', -1);
     fixture.detectChanges();
 
     expect(mockReflectionService.getQuestions).not.toHaveBeenCalled();
@@ -79,12 +79,12 @@ describe('TeacherReflectionComponent', () => {
   it('should debounce saving answers by 1000ms', fakeAsync(() => {
     fixture.detectChanges();
 
-    component.onAnswerChange(component.questions[0], 'Draft answer');
+    component.onAnswerChange(component.questions()[0], 'Draft answer');
     expect(component.getAnswerText('q1')).toBe('Draft answer');
     expect(mockReflectionService.saveAnswer).not.toHaveBeenCalled();
 
     tick(500);
-    component.onAnswerChange(component.questions[0], 'Updated draft answer');
+    component.onAnswerChange(component.questions()[0], 'Updated draft answer');
     expect(mockReflectionService.saveAnswer).not.toHaveBeenCalled();
 
     tick(1000);

@@ -1,11 +1,14 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  OnInit,
   OnChanges,
   OnDestroy,
+  OnInit,
   SimpleChanges,
-  inject
+  inject,
+  input,
+  signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,22 +29,24 @@ interface PendingAnswer {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'teacher-reflection',
   imports: [CommonModule, FormsModule, MatExpansionModule, MatFormFieldModule, MatInputModule],
   templateUrl: './teacher-reflection.component.html'
 })
 export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() nodeId!: string;
-  @Input() componentId!: string;
-  @Input() componentType!: string;
-  @Input() periodId!: number;
-  @Input() questions: TeacherReflectionQuestion[] = [];
+  readonly nodeId = input<string>('');
+  readonly componentId = input<string>('');
+  readonly componentType = input<string>('');
+  readonly periodId = input<number>();
+  readonly questions = input<TeacherReflectionQuestion[]>([]);
 
+  private changeDetectorRef = inject(ChangeDetectorRef);
   private configService = inject(ConfigService);
   private notificationService = inject(NotificationService);
   private reflectionService = inject(TeacherReflectionService);
 
-  private answers: Record<string, string> = {};
+  private answers = signal<Record<string, string>>({});
   private answerChangeSubject = new Subject<PendingAnswer>();
   private subscriptions = new Subscription();
 
@@ -70,36 +75,41 @@ export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   getAnswerText(questionId: string): string {
-    return this.answers[questionId] ?? '';
+    return this.answers()[questionId] ?? '';
   }
 
   onAnswerChange(question: TeacherReflectionQuestion, text: string): void {
-    this.answers[question.id] = text;
+    this.answers.update((answers) => ({ ...answers, [question.id]: text }));
     this.answerChangeSubject.next({ question, text });
   }
 
   private loadAnswers(): void {
     const runId = this.configService.getRunId();
+    const periodId = this.periodId();
+    const nodeId = this.nodeId();
+    const componentId = this.componentId();
     if (
       !runId ||
-      this.periodId == null ||
-      this.periodId === -1 ||
-      !this.nodeId ||
-      !this.componentId
+      periodId == null ||
+      periodId === -1 ||
+      !nodeId ||
+      !componentId
     ) {
       return;
     }
 
     this.reflectionService
-      .getQuestions(runId, this.periodId, this.nodeId, this.componentId)
+      .getQuestions(runId, periodId, nodeId, componentId)
       .subscribe({
         next: (questions: TeacherReflection[]) => {
-          this.answers = {};
+          const loadedAnswers: Record<string, string> = {};
           for (const q of questions) {
             if (q.questionId && q.answerText != null) {
-              this.answers[q.questionId] = q.answerText;
+              loadedAnswers[q.questionId] = q.answerText;
             }
           }
+          this.answers.set(loadedAnswers);
+          this.changeDetectorRef.markForCheck();
         },
         error: (err) => {
           console.error('Failed to load teacher reflection answers', err);
@@ -109,17 +119,18 @@ export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy 
 
   private saveAnswer(question: TeacherReflectionQuestion, text: string): void {
     const runId = this.configService.getRunId();
-    if (!runId || this.periodId == null || this.periodId === -1) {
+    const periodId = this.periodId();
+    if (!runId || periodId == null || periodId === -1) {
       return;
     }
 
     this.reflectionService
       .saveAnswer({
         runId,
-        periodId: this.periodId,
-        nodeId: this.nodeId,
-        componentId: this.componentId,
-        componentType: this.componentType,
+        periodId,
+        nodeId: this.nodeId(),
+        componentId: this.componentId(),
+        componentType: this.componentType(),
         questionId: question.id,
         questionText: question.text,
         answerText: text
