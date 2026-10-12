@@ -30,8 +30,8 @@ interface PendingAnswer {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'teacher-reflection',
   imports: [CommonModule, FormsModule, MatExpansionModule, MatFormFieldModule, MatInputModule],
+  selector: 'teacher-reflection',
   templateUrl: './teacher-reflection.component.html'
 })
 export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy {
@@ -88,33 +88,25 @@ export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy 
     const periodId = this.periodId();
     const nodeId = this.nodeId();
     const componentId = this.componentId();
-    if (
-      !runId ||
-      periodId == null ||
-      periodId === -1 ||
-      !nodeId ||
-      !componentId
-    ) {
+    if (!runId || periodId == null || periodId === -1 || !nodeId || !componentId) {
       return;
     }
 
-    this.reflectionService
-      .getQuestions(runId, periodId, nodeId, componentId)
-      .subscribe({
-        next: (questions: TeacherReflection[]) => {
-          const loadedAnswers: Record<string, string> = {};
-          for (const q of questions) {
-            if (q.questionId && q.answerText != null) {
-              loadedAnswers[q.questionId] = q.answerText;
-            }
+    this.reflectionService.getQuestions(runId, periodId, nodeId, componentId).subscribe({
+      next: (questions: TeacherReflection[]) => {
+        const loadedAnswers: Record<string, string> = {};
+        for (const q of questions) {
+          if (q.questionId && q.answerText != null) {
+            loadedAnswers[q.questionId] = q.answerText;
           }
-          this.answers.set(loadedAnswers);
-          this.changeDetectorRef.markForCheck();
-        },
-        error: (err) => {
-          console.error('Failed to load teacher reflection answers', err);
         }
-      });
+        this.answers.set(loadedAnswers);
+        this.changeDetectorRef.markForCheck();
+      },
+      error: (err) => {
+        console.error('Failed to load teacher reflection answers', err);
+      }
+    });
   }
 
   private saveAnswer(question: TeacherReflectionQuestion, text: string): void {
