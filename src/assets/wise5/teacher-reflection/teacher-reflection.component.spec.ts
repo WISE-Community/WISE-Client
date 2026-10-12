@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { TeacherReflectionComponent } from './teacher-reflection.component';
 import { TeacherReflectionService } from './teacher-reflection.service';
 import { ConfigService } from '../services/configService';
+import { MockProvider } from 'ng-mocks';
+import { NotificationService } from '../services/notificationService';
 
 describe('TeacherReflectionComponent', () => {
   let component: TeacherReflectionComponent;
@@ -26,8 +27,8 @@ describe('TeacherReflectionComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TeacherReflectionComponent],
       providers: [
-        provideHttpClient(),
         provideHttpClientTesting(),
+        MockProvider(NotificationService),
         { provide: TeacherReflectionService, useValue: mockReflectionService },
         { provide: ConfigService, useValue: mockConfigService }
       ]
