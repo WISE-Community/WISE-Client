@@ -1,18 +1,25 @@
-import { CommonModule } from '@angular/common';
-import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  input,
+  TemplateRef
+} from '@angular/core';
 
 @Component({
-  imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgTemplateOutlet],
   selector: 'app-blurb',
   styleUrl: './blurb.component.scss',
   templateUrl: './blurb.component.html'
 })
 export class BlurbComponent {
-  @Input() content: string;
-  @ContentChild('contentTemplate', { static: false }) contentRef: TemplateRef<any>;
-  @Input() headline: string;
-  @ContentChild('headlineTemplate', { static: false }) headlineRef: TemplateRef<any>;
-  @Input() imgDescription: string;
-  @Input() imgSources: Object;
-  @Input() imgSrc: string;
+  readonly content = input<string>();
+  readonly contentRef = contentChild<TemplateRef<unknown>>('contentTemplate');
+  readonly headline = input<string>();
+  readonly headlineRef = contentChild<TemplateRef<unknown>>('headlineTemplate');
+  readonly imgDescription = input<string>();
+  readonly imgSources = input<any[]>([]);
+  readonly imgSrc = input<string>();
 }

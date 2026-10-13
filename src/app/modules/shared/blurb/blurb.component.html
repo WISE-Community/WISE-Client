@@ -1,7 +1,7 @@
 <div class="blurb mat-elevation-z3">
-  @if (imgSrc) {
+  @if (imgSrc()) {
     <picture>
-      @for (source of imgSources; track source) {
+      @for (source of imgSources(); track source) {
         <source
           media="{{ source.media }}"
           sizes="{{ source.sizes }}"
@@ -10,23 +10,25 @@
           type="{{ source.type }}"
         />
       }
-      <img class="blurb__image" src="{{ imgSrc }}" alt="{{ imgDescription }}" />
+      <img class="blurb__image" src="{{ imgSrc() }}" alt="{{ imgDescription() }}" />
     </picture>
   }
   <hr class="blurb__divider accent-2-bg" />
   <div class="blurb__content">
-    <ng-template #defaultHeadline>{{ headline }}</ng-template>
-    @if (headline || headlineRef) {
+    <ng-template #defaultHeadline>{{ headline() }}</ng-template>
+    @if (headline() || headlineRef()) {
       <h2 class="accent">
         <ng-container
-          *ngTemplateOutlet="headlineRef ? headlineRef : defaultHeadline"
+          *ngTemplateOutlet="headlineRef() ? headlineRef() : defaultHeadline"
         ></ng-container>
       </h2>
     }
-    <ng-template #defaultContent>{{ content }}</ng-template>
-    @if (content || contentRef) {
+    <ng-template #defaultContent>{{ content() }}</ng-template>
+    @if (content() || contentRef()) {
       <p>
-        <ng-container *ngTemplateOutlet="contentRef ? contentRef : defaultContent"></ng-container>
+        <ng-container
+          *ngTemplateOutlet="contentRef() ? contentRef() : defaultContent"
+        ></ng-container>
       </p>
     }
   </div>
