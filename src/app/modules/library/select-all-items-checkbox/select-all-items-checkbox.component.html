@@ -1,12 +1,13 @@
 <mat-checkbox
   color="primary"
   class="checkbox"
-  [checked]="status === 'all'"
-  [indeterminate]="status === 'some'"
+  [checked]="status() === 'all'"
+  [indeterminate]="status() === 'some'"
   (click)="select()"
-  [matTooltip]="tooltip"
+  [matTooltip]="tooltip()"
   matTooltipPosition="above"
   i18n-matTooltip
 >
   <ng-content />
 </mat-checkbox>
+
