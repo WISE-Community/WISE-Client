@@ -39,7 +39,7 @@ export interface IdeaTableRow {
   id: string;
   text: string;
   count: number;
-  tags: CategoryTag[];
+  tag: CategoryTag;
   responses: StudentResponseItem[];
 }
 
@@ -158,15 +158,15 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
         } else if (this.componentType === 'OpenResponse') {
           responses = this.getORResponsesWithIdea(componentStates, annotations, idea.id);
         }
-        const tags: CategoryTag[] = (idea.tags ?? []).map((tagName) => ({
-          name: tagName,
-          color: this.rubric?.getTagColor(tagName) ?? ''
-        }));
+        const tag: CategoryTag = {
+          name: (this.rubric?.getIdeaTags(idea.id) ?? []).join(', '),
+          color: this.rubric?.getIdeaColor(idea.id) ?? ''
+        };
         return {
           id: idea.id,
           text: idea.text,
           count: idea.count,
-          tags: tags,
+          tag: tag,
           responses: responses
         };
       });
@@ -187,11 +187,10 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       }
       return (
         row.text.toLowerCase().includes(q) ||
-        row.tags.some((t) => t.name.toLowerCase().includes(q)) ||
+        row.tag.name.toLowerCase().includes(q) ||
         row.responses.some(
           (r) =>
-            r.texts?.some((t) => t.toLowerCase().includes(q)) ||
-            r.text?.toLowerCase().includes(q)
+            r.texts?.some((t) => t.toLowerCase().includes(q)) || r.text?.toLowerCase().includes(q)
         )
       );
     };
@@ -202,7 +201,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       } else if (sortHeaderId === 'text') {
         return row.text.toLowerCase();
       } else if (sortHeaderId === 'category') {
-        return row.tags.map((t) => t.name).join(', ').toLowerCase();
+        return row.tag.name.toLowerCase();
       }
       return '';
     };
@@ -253,8 +252,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       .filter((state) =>
         matchingAnnotations.some(
           (annotation) =>
-            annotation.studentWorkId === state.id ||
-            annotation.toWorkgroupId === state.workgroupId
+            annotation.studentWorkId === state.id || annotation.toWorkgroupId === state.workgroupId
         )
       )
       .map((state) => {

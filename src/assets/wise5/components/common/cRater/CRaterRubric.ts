@@ -33,26 +33,9 @@ export class CRaterRubric {
   getIdeaColor(ideaId: string): string {
     const ideaTags = this.getIdeaTags(ideaId);
     return (
-      this.ideaColors?.find((ideaColor) => arrayContainsAll(ideaTags, ideaColor.tags))
+      this.ideaColors?.find((ideaColor) => arrayContainsAll(ideaColor.tags, ideaTags))
         ?.colorValue ?? ''
     );
-  }
-
-  getTagColor(tag: string): string {
-    if (!this.ideaColors) {
-      return '';
-    }
-    const exact = this.ideaColors.find(
-      (ideaColor) =>
-        ideaColor.tags.length === 1 && ideaColor.tags[0].toLowerCase() === tag.toLowerCase()
-    );
-    if (exact) {
-      return exact.colorValue;
-    }
-    const match = this.ideaColors.find((ideaColor) =>
-      ideaColor.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
-    );
-    return match ? match.colorValue : '';
   }
 
   hasRubricData(): boolean {
