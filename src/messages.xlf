@@ -6520,7 +6520,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/archive-projects-button/archive-projects-button.component.html</context>
-          <context context-type="linenumber">17,20</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/run-menu/run-menu.component.html</context>
@@ -9842,7 +9842,7 @@
         <source><x id="INTERPOLATION" equiv-text="{{ numSelectedRuns }}"/> selected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teacher/select-runs-controls/select-runs-controls.component.html</context>
-          <context context-type="linenumber">29,31</context>
+          <context context-type="linenumber">29,30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2784168796433474565" datatype="html">

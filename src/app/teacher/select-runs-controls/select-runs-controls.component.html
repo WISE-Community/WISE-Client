@@ -27,8 +27,6 @@
   </div>
   @if (numSelectedRuns > 0) {
     <div class="secondary-text" i18n>{{ numSelectedRuns }} selected</div>
-  }
-  @if (numSelectedRuns > 0) {
     <archive-projects-button
       [showArchive]="showArchive"
       (archiveProjectsEvent)="archiveProjectsEvent.emit($event)"

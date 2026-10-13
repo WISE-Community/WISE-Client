@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatButtonModule, MatIconModule, MatTooltipModule],
   selector: 'archive-projects-button',
-  templateUrl: './archive-projects-button.component.html',
-  styleUrls: ['./archive-projects-button.component.scss']
+  styleUrl: './archive-projects-button.component.scss',
+  templateUrl: './archive-projects-button.component.html'
 })
 export class ArchiveProjectsButtonComponent {
-  @Output() archiveProjectsEvent = new EventEmitter<boolean>();
-  @Input() showArchive: boolean = false;
+  readonly archiveProjectsEvent = output<boolean>();
+  readonly showArchive = input<boolean>(false);
 }
+
