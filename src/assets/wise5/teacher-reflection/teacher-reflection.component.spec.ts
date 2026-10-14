@@ -113,9 +113,9 @@ describe('TeacherReflectionComponent', () => {
 
     expect(labels.length).toBe(2);
     expect(textareas.length).toBe(2);
-    expect(labels[0].getAttribute('for')).toBe('q1');
-    expect(textareas[0].getAttribute('id')).toBe('q1');
-    expect(labels[1].getAttribute('for')).toBe('q2');
-    expect(textareas[1].getAttribute('id')).toBe('q2');
+    expect(labels[0].getAttribute('for')).toBe('reflection_q1');
+    expect(textareas[0].getAttribute('id')).toBe('reflection_q1');
+    expect(labels[1].getAttribute('for')).toBe('reflection_q2');
+    expect(textareas[1].getAttribute('id')).toBe('reflection_q2');
   });
 });
