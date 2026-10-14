@@ -107,6 +107,16 @@
             <ng-container [ngTemplateOutlet]="ideasSummary" />
           </div>
         }
+        @if (hasReflectionQuestions && isSinglePeriod) {
+          <teacher-reflection
+            [nodeId]="node.id"
+            [componentId]="component.id"
+            [componentType]="component.type"
+            [periodId]="periodId"
+            [questions]="component.teacher?.reflectionQuestions || []"
+            class="summary"
+          />
+        }
       } @else if (component.type === 'Match') {
         <ng-container [ngTemplateOutlet]="scoreSummary" />
         <div class="summary-content" [class.!col-span-full]="!showScoreSummary">
@@ -144,6 +154,16 @@
           <div class="summary-content" [class.!col-span-full]="!showScoreSummary">
             <ng-container [ngTemplateOutlet]="ideasSummary" />
           </div>
+        }
+        @if (hasReflectionQuestions && isSinglePeriod) {
+          <teacher-reflection
+            [nodeId]="node.id"
+            [componentId]="component.id"
+            [componentType]="component.type"
+            [periodId]="periodId"
+            [questions]="component.teacher?.reflectionQuestions || []"
+            class="summary"
+          />
         }
       }
     </div>

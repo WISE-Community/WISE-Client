@@ -22,15 +22,22 @@ export interface ComponentContent {
   showSaveButton?: boolean;
   showSubmitButton?: boolean;
   tags?: string[];
+  teacher?: ComponentTeacherContent;
   type: string;
-  presentation?: {
-    prompt?: string;
-  };
-  teacher?: {
-    presentation?: {
-      prompt?: string;
-    };
-  };
+}
+
+export interface TeacherReflectionQuestion {
+  id: string;
+  text: string;
+}
+
+export interface TeacherPresentationConfig {
+  prompt?: string;
+}
+
+export interface ComponentTeacherContent {
+  presentation?: TeacherPresentationConfig;
+  reflectionQuestions?: TeacherReflectionQuestion[];
 }
 
 export function hasConnectedComponent(
