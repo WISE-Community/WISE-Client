@@ -21,6 +21,16 @@ export abstract class IdeasSummaryData {
     return Array.from(this.getIdeaCountMap().values()).some((value) => value > 0);
   }
 
+  getDetectedIdeas(): IdeaData[] {
+    return this.ideaDataArray.filter(
+      (idea) => idea.count > 0 && this.rubric.hasIdeaDescriptionText(idea.id)
+    );
+  }
+
+  getAllIdeas(): IdeaData[] {
+    return this.ideaDataArray.filter((idea) => this.rubric.hasIdeaDescriptionText(idea.id));
+  }
+
   protected setIdeaDataArray(): void {
     this.ideaDataArray = [];
     this.getIdeaCountMap().forEach((count, ideaId) => {
@@ -45,6 +55,11 @@ export abstract class IdeasSummaryData {
           ideaCountMap.set(ideaId, 0);
         }
       });
+    });
+    this.rubric.ideas?.forEach((idea) => {
+      if (!ideaCountMap.has(idea.name)) {
+        ideaCountMap.set(idea.name, 0);
+      }
     });
     return ideaCountMap;
   }

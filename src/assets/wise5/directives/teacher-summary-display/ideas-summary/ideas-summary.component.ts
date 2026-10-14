@@ -1,21 +1,54 @@
+import { Annotation } from '../../../common/Annotation';
 import { AnnotationService } from '../../../services/annotationService';
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
+import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
 import { CRaterService } from '../../../services/cRaterService';
 import { DialogGuidanceSummaryData } from '../summary-data/DialogGuidanceSummaryData';
+import { FormsModule } from '@angular/forms';
+import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { IdeasSummaryData } from '../summary-data/IdeasSummaryData';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { OpenResponseSummaryData } from '../summary-data/OpenResponseSummaryData';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
-import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
-import { IdeaGroup } from '../summary-data/IdeasSummaryData';
-import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
+
+export interface StudentResponseItem {
+  text: string;
+  texts: string[];
+  timestamp: number;
+  usernames: string;
+  avatarColor: string;
+}
+
+export interface IdeaTableRow {
+  id: string;
+  text: string;
+  count: number;
+  sampleResponse: string;
+  fullSampleResponse: string;
+  isSampleResponseTruncated: boolean;
+  responses: StudentResponseItem[];
+}
 
 @Component({
-  imports: [CommonModule, IdeaSummaryComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSortModule,
+    MatTableModule
+  ],
   selector: 'ideas-summary',
   styleUrls: [
     './ideas-summary.component.scss',
@@ -24,12 +57,25 @@ import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
   templateUrl: 'ideas-summary.component.html'
 })
 export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
-  protected additionalGroups: IdeaGroup[] = [];
   @Input() componentType: string;
   @Input() expanded: boolean;
-  protected initialGroups: IdeaGroup[] = [];
-  protected showMore: boolean;
+
+  protected displayedColumns: string[] = ['text', 'sampleResponse', 'count'];
+  protected dataSource = new MatTableDataSource<IdeaTableRow>([]);
+  protected expandedIdeaIds = new Set<string>();
+  protected searchQuery = '';
   protected rubric: CRaterRubric;
+  protected workgroups: any[] = [];
+  protected readonly UNIQUE_THRESHOLD = 2;
+  protected readonly SAMPLE_RESPONSE_MAX_CHARS = 150;
+
+  @ViewChild(MatSort) set matSort(sort: MatSort) {
+    if (sort) {
+      this.sort = sort;
+      this.dataSource.sort = sort;
+    }
+  }
+  protected sort: MatSort;
 
   constructor(
     protected annotationService: AnnotationService,
@@ -55,10 +101,16 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
 
   private generateIdeasSummary(): void {
     this.rubric = this.cRaterService.getCRaterRubric(this.nodeId, this.componentId);
+    this.workgroups = this.configService.getClassmateUserInfos() ?? [];
+
     if (this.componentType === 'DialogGuidance') {
-      this.getLatestWork().subscribe((componentStates) =>
-        this.groupIdeas(new DialogGuidanceSummaryData(componentStates, this.rubric))
-      );
+      const work$ = this.getLatestWork();
+      if (work$) {
+        work$.subscribe((componentStates) => {
+          const states = componentStates ?? [];
+          this.groupIdeas(new DialogGuidanceSummaryData(states, this.rubric), states);
+        });
+      }
     } else if (this.componentType === 'OpenResponse') {
       const annotations = this.annotationService
         .getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
@@ -72,21 +124,208 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
               : latestAnnotations.concat(annotation),
           []
         );
-      this.groupIdeas(new OpenResponseSummaryData(annotations, this.rubric));
+      const summaryData = new OpenResponseSummaryData(annotations, this.rubric);
+      const work$ = this.getLatestWork();
+      if (work$) {
+        work$.subscribe((componentStates) => {
+          this.groupIdeas(summaryData, componentStates ?? [], annotations);
+        });
+      } else {
+        this.groupIdeas(summaryData, [], annotations);
+      }
     }
   }
 
-  private groupIdeas(ideasSummaryData: IdeasSummaryData) {
+  private groupIdeas(
+    ideasSummaryData: IdeasSummaryData,
+    componentStates: ComponentState[] = [],
+    annotations: Annotation[] = []
+  ): void {
     if (ideasSummaryData.hasAnyDetectedIdeas()) {
-      [this.initialGroups, this.additionalGroups] = ideasSummaryData.getIdeasSummaryGroups();
       this.doRender = true;
+      const allIdeas = ideasSummaryData.getAllIdeas();
+      const rows: IdeaTableRow[] = allIdeas.map((idea) => {
+        let responses: StudentResponseItem[] = [];
+        if (this.componentType === 'DialogGuidance') {
+          responses = this.getDGResponsesWithIdea(componentStates, idea.id);
+        } else if (this.componentType === 'OpenResponse') {
+          responses = this.getORResponsesWithIdea(componentStates, annotations, idea.id);
+        }
+        const fullSample = this.getRandomResponse(responses);
+        const { text: sampleResponse, isTruncated: isSampleResponseTruncated } =
+          this.truncateToChars(fullSample, this.SAMPLE_RESPONSE_MAX_CHARS);
+        return {
+          id: idea.id,
+          text: idea.text,
+          count: idea.count,
+          sampleResponse: sampleResponse,
+          fullSampleResponse: fullSample,
+          isSampleResponseTruncated: isSampleResponseTruncated,
+          responses: responses
+        };
+      });
+      rows.sort((a, b) => b.count - a.count);
+      this.dataSource.data = rows;
+      this.setupDataSource();
     } else {
       this.doRender = false;
+      this.dataSource.data = [];
     }
   }
 
-  protected renderDisplay(): void {
-    super.renderDisplay();
+  protected getRandomResponse(responses: StudentResponseItem[] = []): string {
+    const candidates = responses
+      .flatMap((r) => (r.texts && r.texts.length > 0 ? r.texts : [r.text]))
+      .map((t) => t?.trim())
+      .filter((t): t is string => !!t);
+    if (candidates.length === 0) {
+      return '';
+    }
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  }
+
+  protected truncateToChars(
+    text: string = '',
+    maxChars: number = this.SAMPLE_RESPONSE_MAX_CHARS
+  ): { text: string; isTruncated: boolean } {
+    const trimmed = text.trim();
+    if (trimmed.length <= maxChars) {
+      return { text: trimmed, isTruncated: false };
+    }
+    let cut = trimmed.slice(0, maxChars);
+    if (!/\s/.test(trimmed[maxChars]) && !/\s/.test(cut[cut.length - 1])) {
+      const lastSpaceIndex = cut.search(/\s\S*$/);
+      if (lastSpaceIndex > 0) {
+        cut = cut.slice(0, lastSpaceIndex);
+      }
+    }
+    return {
+      text: cut.trimEnd() + '...',
+      isTruncated: true
+    };
+  }
+
+  private setupDataSource(): void {
+    this.dataSource.filterPredicate = (row: IdeaTableRow, filter: string): boolean => {
+      const q = filter.trim().toLowerCase();
+      if (!q) {
+        return true;
+      }
+      return (
+        row.text.toLowerCase().includes(q) ||
+        row.responses.some(
+          (r) =>
+            r.texts?.some((t) => t.toLowerCase().includes(q)) || r.text?.toLowerCase().includes(q)
+        )
+      );
+    };
+
+    this.dataSource.sortingDataAccessor = (row: IdeaTableRow, sortHeaderId: string) => {
+      if (sortHeaderId === 'count') {
+        return row.count;
+      } else if (sortHeaderId === 'text') {
+        return row.text.toLowerCase();
+      }
+      return '';
+    };
+
+    if (this.sort) {
+      this.dataSource.sort = this.sort;
+    }
+  }
+
+  private getDGResponsesWithIdea(states: ComponentState[], ideaId: string): StudentResponseItem[] {
+    const responsesWithIdea: StudentResponseItem[] = [];
+    states.forEach((state) => {
+      const studentTexts: string[] = [];
+      let latestTimestamp = state.clientSaveTime;
+      state.studentData?.responses?.forEach((response, index, responses) => {
+        if (response?.ideas?.some((idea) => idea.detected && idea.name === ideaId)) {
+          const studentResponse = responses[index - 1];
+          if (studentResponse?.text != null) {
+            studentTexts.push(studentResponse.text);
+            if (studentResponse.timestamp) {
+              latestTimestamp = studentResponse.timestamp;
+            }
+          }
+        }
+      });
+      if (studentTexts.length > 0) {
+        responsesWithIdea.push({
+          text: studentTexts.join('\n'),
+          texts: studentTexts,
+          timestamp: latestTimestamp,
+          usernames: this.getDisplayNames(state.workgroupId),
+          avatarColor: getAvatarColorForWorkgroupId(state.workgroupId)
+        });
+      }
+    });
+    return responsesWithIdea;
+  }
+
+  private getORResponsesWithIdea(
+    states: ComponentState[],
+    annotations: Annotation[],
+    ideaId: string
+  ): StudentResponseItem[] {
+    const matchingAnnotations = annotations.filter((annotation) =>
+      annotation.data?.ideas?.some((idea) => idea.detected && idea.name === ideaId)
+    );
+    return states
+      .filter((state) =>
+        matchingAnnotations.some(
+          (annotation) =>
+            annotation.studentWorkId === state.id || annotation.toWorkgroupId === state.workgroupId
+        )
+      )
+      .map((state) => {
+        const text = state.studentData?.response ?? '';
+        return {
+          text: text,
+          texts: text ? [text] : [],
+          timestamp: state.clientSaveTime,
+          usernames: this.getDisplayNames(state.workgroupId),
+          avatarColor: getAvatarColorForWorkgroupId(state.workgroupId)
+        };
+      });
+  }
+
+  private getDisplayNames(workgroupId: number): string {
+    const wg = this.workgroups?.find((workgroup) => workgroup.workgroupId === workgroupId);
+    return wg?.displayNames ?? $localize`Student ${workgroupId}`;
+  }
+
+  protected isUnique(row: IdeaTableRow): boolean {
+    return row.count > 0 && row.count <= this.UNIQUE_THRESHOLD;
+  }
+
+  protected toggleRow(row: IdeaTableRow): void {
+    if (row.count === 0) {
+      return;
+    }
+    if (this.expandedIdeaIds.has(row.id)) {
+      this.expandedIdeaIds.delete(row.id);
+    } else {
+      this.expandedIdeaIds.add(row.id);
+    }
+  }
+
+  protected onRowKeydown(event: KeyboardEvent, row: IdeaTableRow): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.toggleRow(row);
+    }
+  }
+
+  protected isExpanded(row: IdeaTableRow): boolean {
+    return row.count > 0 && this.expandedIdeaIds.has(row.id);
+  }
+
+  protected applyFilter(): void {
+    this.dataSource.filter = this.searchQuery.trim().toLowerCase();
+  }
+
+  protected override renderDisplay(): void {
     this.generateIdeasSummary();
   }
 }

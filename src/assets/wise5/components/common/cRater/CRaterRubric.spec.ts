@@ -36,4 +36,29 @@ describe('CRaterRubric', () => {
       expect(ideas.map((idea) => idea.name)).toEqual(['idea1', 'idea2']);
     });
   });
+
+  describe('hasAnyIdeaTags', () => {
+    it('should return false when rubric has no ideas or ideas have no tags', () => {
+      const emptyRubric = new CRaterRubric({ ideas: [] });
+      expect(emptyRubric.hasAnyIdeaTags()).toBe(false);
+
+      const noTagsRubric = new CRaterRubric({
+        ideas: [
+          { name: 'idea1', text: 'description 1' },
+          { name: 'idea2', text: 'description 2', tags: [] }
+        ]
+      });
+      expect(noTagsRubric.hasAnyIdeaTags()).toBe(false);
+    });
+
+    it('should return true when at least one idea has tags', () => {
+      const withTagsRubric = new CRaterRubric({
+        ideas: [
+          { name: 'idea1', text: 'description 1', tags: [] },
+          { name: 'idea2', text: 'description 2', tags: ['mechanistic'] }
+        ]
+      });
+      expect(withTagsRubric.hasAnyIdeaTags()).toBe(true);
+    });
+  });
 });

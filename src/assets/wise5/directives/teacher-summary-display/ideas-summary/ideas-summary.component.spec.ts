@@ -1,27 +1,25 @@
+import { Annotation } from '../../../common/Annotation';
 import { AnnotationService } from '../../../services/annotationService';
-import { ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
 import { CRaterIdea } from '../../../components/common/cRater/CRaterIdea';
 import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
 import { CRaterService } from '../../../services/cRaterService';
-import { IdeasSummaryComponent } from './ideas-summary.component';
+import { IdeasSummaryComponent, StudentResponseItem } from './ideas-summary.component';
 import { MockProviders } from 'ng-mocks';
 import { of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TestBed } from '@angular/core/testing';
-import { Annotation } from '../../../common/Annotation';
-import { IdeaSummaryComponent } from '../idea-summary/idea-summary.component';
-import { MockComponent } from 'ng-mocks';
 
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;
+
 describe('IdeasSummaryComponent for Dialog Guidance component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IdeasSummaryComponent, MockComponent(IdeaSummaryComponent)],
+      imports: [IdeasSummaryComponent],
       providers: [
         MockProviders(
           AnnotationService,
@@ -39,25 +37,376 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
     component.doRender = true;
     component.componentType = 'DialogGuidance';
   });
+
   beforeEach(() => {
     const configService = TestBed.inject(ConfigService);
     spyOn(configService, 'isPreview').and.returnValue(false);
     spyOn(configService, 'isAuthoring').and.returnValue(false);
     spyOn(configService, 'isStudentRun').and.returnValue(false);
     spyOn(configService, 'getNumberOfWorkgroupsInPeriod').and.returnValue(1);
+    spyOn(configService, 'getClassmateUserInfos').and.returnValue([
+      { workgroupId: 1, displayNames: 'Student 1' }
+    ]);
   });
 
-  describe('ngOnChanges()', () => {
+  describe('ngOnInit()', () => {
     ngInit_DG_NoIdeasDetected_ShowMessage();
     ngInit_DG_IdeasDetected_ShowSummary();
-    ngInit_DG_ManyIdeasDetected_ShowTopAndBottomThree();
+  });
+
+  describe('table interactions', () => {
+    beforeEach(() => {
+      generateMockRubricForTable();
+      generateMockStudentWorkDialogGuidanceWithResponses();
+      component.ngOnInit();
+      fixture.detectChanges();
+    });
+
+    it('renders the ideas table with search and headers', () => {
+      expect(component['displayedColumns']).toEqual(['text', 'sampleResponse', 'count']);
+      expect(fixture.nativeElement.querySelector('table')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('input[matInput]')).toBeTruthy();
+      const headers = fixture.nativeElement.querySelectorAll('th');
+      expect(headers.length).toBe(3);
+      expect(headers[0].textContent).toContain('Idea');
+      expect(headers[1].textContent.trim()).toBe('');
+      expect(headers[1].getAttribute('aria-label')).toBe('Sample response');
+      expect(headers[2].textContent).toContain('Students');
+    });
+
+    it('displays unique label for ideas with count <= 2', () => {
+      const uniqueLabel = fixture.nativeElement.querySelector('.unique-label');
+      expect(uniqueLabel).toBeTruthy();
+      expect(uniqueLabel.textContent.trim()).toBe('unique');
+    });
+
+    it('provides keyboard accessibility attributes on table rows', () => {
+      const rows = fixture.nativeElement.querySelectorAll('tr.idea-row');
+      expect(rows.length).toBe(3);
+
+      // Active rows (count > 0) have tabIndex=0, aria-expanded=false, aria-disabled=false
+      expect(rows[0].getAttribute('tabindex')).toBe('0');
+      expect(rows[0].getAttribute('aria-expanded')).toBe('false');
+      expect(rows[0].getAttribute('aria-disabled')).toBe('false');
+
+      // Disabled row (count === 0) has tabIndex=-1, no aria-expanded, aria-disabled=true
+      const disabledRow = fixture.nativeElement.querySelector('tr.idea-row.disabled-row');
+      expect(disabledRow.getAttribute('tabindex')).toBe('-1');
+      expect(disabledRow.getAttribute('aria-expanded')).toBeNull();
+      expect(disabledRow.getAttribute('aria-disabled')).toBe('true');
+    });
+
+    it('toggles row expansion on Enter key', () => {
+      const rowData = component['dataSource'].data[0];
+      expect(component['isExpanded'](rowData)).toBe(false);
+
+      const rows = fixture.nativeElement.querySelectorAll('tr.idea-row');
+      const enterEvent = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true });
+      spyOn(enterEvent, 'preventDefault').and.callThrough();
+
+      rows[0].dispatchEvent(enterEvent);
+      fixture.detectChanges();
+
+      expect(enterEvent.preventDefault).toHaveBeenCalled();
+      expect(component['isExpanded'](rowData)).toBe(true);
+      expect(rows[0].getAttribute('aria-expanded')).toBe('true');
+    });
+
+    it('toggles row expansion on Space key and prevents default scroll', () => {
+      const rowData = component['dataSource'].data[0];
+      expect(component['isExpanded'](rowData)).toBe(false);
+
+      const rows = fixture.nativeElement.querySelectorAll('tr.idea-row');
+      const spaceEvent = new KeyboardEvent('keydown', { key: ' ', cancelable: true });
+      spyOn(spaceEvent, 'preventDefault').and.callThrough();
+
+      rows[0].dispatchEvent(spaceEvent);
+      fixture.detectChanges();
+
+      expect(spaceEvent.preventDefault).toHaveBeenCalled();
+      expect(component['isExpanded'](rowData)).toBe(true);
+    });
+
+    it('does not expand disabled row on Enter or Space key', () => {
+      const idea3Row = component['dataSource'].data.find((row) => row.id === 'idea 3');
+      expect(idea3Row.count).toBe(0);
+
+      const disabledRow = fixture.nativeElement.querySelector('tr.idea-row.disabled-row');
+      const enterEvent = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true });
+      disabledRow.dispatchEvent(enterEvent);
+      fixture.detectChanges();
+
+      expect(component['isExpanded'](idea3Row)).toBe(false);
+    });
+
+    it('allows multi-row expansion to show student responses', () => {
+      const rows = component['dataSource'].data;
+      expect(rows.length).toBeGreaterThan(0);
+
+      // Initially no rows expanded
+      expect(component['expandedIdeaIds'].size).toBe(0);
+
+      // Toggle first row
+      component['toggleRow'](rows[0]);
+      expect(component['isExpanded'](rows[0])).toBe(true);
+
+      // Toggle second row (both should now be expanded)
+      if (rows.length > 1) {
+        component['toggleRow'](rows[1]);
+        expect(component['isExpanded'](rows[0])).toBe(true);
+        expect(component['isExpanded'](rows[1])).toBe(true);
+        expect(component['expandedIdeaIds'].size).toBe(2);
+      }
+
+      // Collapse first row
+      component['toggleRow'](rows[0]);
+      expect(component['isExpanded'](rows[0])).toBe(false);
+    });
+
+    it('filters ideas by idea text', () => {
+      component['searchQuery'] = 'radiation';
+      component['applyFilter']();
+      fixture.detectChanges();
+      expect(
+        component['dataSource'].filteredData.every((row) =>
+          row.text.toLowerCase().includes('radiation')
+        )
+      ).toBe(true);
+    });
+
+    it('filters ideas by student response text', () => {
+      component['searchQuery'] = 'warms the car';
+      component['applyFilter']();
+      fixture.detectChanges();
+      expect(component['dataSource'].filteredData.length).toBeGreaterThan(0);
+      expect(
+        component['dataSource'].filteredData.every((row) =>
+          row.responses.some((r) => r.text.toLowerCase().includes('warms the car'))
+        )
+      ).toBe(true);
+    });
+
+    it('displays sample response without title attribute when response is not truncated', () => {
+      const sampleResponseCell = fixture.nativeElement.querySelector(
+        'td.mat-column-sampleResponse'
+      );
+      expect(sampleResponseCell).toBeTruthy();
+      const span = sampleResponseCell.querySelector('span');
+      expect(span).toBeTruthy();
+      expect(span.textContent).toContain('It warms the car up.');
+      expect(span.hasAttribute('title')).toBe(false);
+      expect(sampleResponseCell.querySelector('span[title]')).toBeNull();
+    });
+
+    it('displays sample response with title attribute when response is truncated', () => {
+      const longText =
+        'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car extremely rapidly.';
+      const longState = new ComponentState({
+        workgroupId: 1,
+        studentData: {
+          responses: [
+            { text: longText, timestamp: 12345 },
+            { ideas: [{ name: 'idea 1', detected: true }] }
+          ]
+        }
+      });
+      (TestBed.inject(SummaryService).getLatestClassmateStudentWork as jasmine.Spy).and.returnValue(
+        of([longState])
+      );
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const sampleResponseCell = fixture.nativeElement.querySelector(
+        'td.mat-column-sampleResponse'
+      );
+      const spanWithTitle = sampleResponseCell.querySelector('span[title]');
+      expect(spanWithTitle).toBeTruthy();
+      expect(spanWithTitle.getAttribute('title')).toBe(longText);
+      expect(spanWithTitle.textContent).toContain('car...');
+      expect(spanWithTitle.textContent).not.toContain('extremel');
+    });
+
+    describe('sample response helpers', () => {
+      describe('getRandomResponse', () => {
+        it('returns empty string when responses are empty or undefined', () => {
+          expect(component['getRandomResponse']([])).toBe('');
+          expect(component['getRandomResponse'](undefined as any)).toBe('');
+        });
+
+        it('returns empty string when all candidate responses are whitespace or empty', () => {
+          const responses: StudentResponseItem[] = [
+            {
+              text: '   ',
+              texts: ['   '],
+              timestamp: 1,
+              usernames: 'Student 1',
+              avatarColor: '#000'
+            }
+          ];
+          expect(component['getRandomResponse'](responses)).toBe('');
+        });
+
+        it('randomly selects a candidate response from available responses', () => {
+          const responses: StudentResponseItem[] = [
+            {
+              text: 'Response A',
+              texts: ['Response A'],
+              timestamp: 1,
+              usernames: 'Student 1',
+              avatarColor: '#000'
+            },
+            {
+              text: 'Response B',
+              texts: ['Response B'],
+              timestamp: 2,
+              usernames: 'Student 2',
+              avatarColor: '#000'
+            }
+          ];
+          const selected = component['getRandomResponse'](responses);
+          expect(['Response A', 'Response B']).toContain(selected);
+        });
+
+        it('supports responses with texts array', () => {
+          const responses: StudentResponseItem[] = [
+            {
+              text: '',
+              texts: ['First text', 'Second text'],
+              timestamp: 1,
+              usernames: 'Student 1',
+              avatarColor: '#000'
+            }
+          ];
+          const selected = component['getRandomResponse'](responses);
+          expect(['First text', 'Second text']).toContain(selected);
+        });
+      });
+
+      describe('truncateToChars', () => {
+        it('returns empty string and isTruncated false when text is empty or falsy', () => {
+          expect(component['truncateToChars']('')).toEqual({ text: '', isTruncated: false });
+          expect(component['truncateToChars'](undefined as any)).toEqual({
+            text: '',
+            isTruncated: false
+          });
+        });
+
+        it('does not truncate when character count is less than or equal to maxChars', () => {
+          const text = 'One two three four five';
+          expect(component['truncateToChars'](text)).toEqual({
+            text: 'One two three four five',
+            isTruncated: false
+          });
+          const exact150 = 'a'.repeat(150);
+          expect(component['truncateToChars'](exact150)).toEqual({
+            text: exact150,
+            isTruncated: false
+          });
+        });
+
+        it('truncates to maxChars with ellipsis and sets isTruncated true when exceeding maxChars', () => {
+          const text160 = 'a'.repeat(160);
+          const expected = 'a'.repeat(150) + '...';
+          expect(component['truncateToChars'](text160)).toEqual({
+            text: expected,
+            isTruncated: true
+          });
+        });
+
+        it('trims trailing whitespace before adding ellipsis', () => {
+          const text = 'a'.repeat(149) + '   ' + 'b'.repeat(10);
+          const expected = 'a'.repeat(149) + '...';
+          expect(component['truncateToChars'](text)).toEqual({
+            text: expected,
+            isTruncated: true
+          });
+        });
+
+        it('does not truncate mid-word when character limit falls inside a word', () => {
+          const text =
+            'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car extremely rapidly.';
+          const result = component['truncateToChars'](text);
+          expect(result).toEqual({
+            text:
+              'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car...',
+            isTruncated: true
+          });
+        });
+
+        it('supports a custom maxChars limit and avoids mid-word truncation', () => {
+          const text =
+            'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car rapidly.';
+          const result = component['truncateToChars'](text, 120);
+          expect(result).toEqual({
+            text:
+              'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped...',
+            isTruncated: true
+          });
+        });
+
+        it('preserves complete words when character limit falls at a word boundary', () => {
+          const text = 'Solar radiation easily enters';
+          const result = component['truncateToChars'](text, 15);
+          expect(result).toEqual({
+            text: 'Solar radiation...',
+            isTruncated: true
+          });
+        });
+
+        it('falls back to character truncation if a single word exceeds maxChars', () => {
+          const longWord = 'supercalifragilisticexpialidocious';
+          const result = component['truncateToChars'](longWord, 10);
+          expect(result).toEqual({
+            text: 'supercalif...',
+            isTruncated: true
+          });
+        });
+      });
+    });
+
+    it('shows all responses for a student that contain the same idea', () => {
+      const multiStates = [
+        new ComponentState({
+          workgroupId: 1,
+          studentData: {
+            responses: [
+              { text: 'First response with idea 1', timestamp: 100 },
+              { ideas: [{ name: 'idea 1', detected: true }] },
+              { text: 'Second response with idea 1', timestamp: 200 },
+              { ideas: [{ name: 'idea 1', detected: true }] }
+            ]
+          }
+        })
+      ];
+      const dgResponses = component['getDGResponsesWithIdea'](multiStates, 'idea 1');
+      expect(dgResponses.length).toBe(1);
+      expect(dgResponses[0].texts).toEqual([
+        'First response with idea 1',
+        'Second response with idea 1'
+      ]);
+    });
+
+    it('renders disabled rows for ideas with 0 student responses that are not expandable', () => {
+      const idea3Row = component['dataSource'].data.find((row) => row.id === 'idea 3');
+      expect(idea3Row).toBeTruthy();
+      expect(idea3Row.count).toBe(0);
+      expect(component['isUnique'](idea3Row)).toBe(false);
+
+      component['toggleRow'](idea3Row);
+      expect(component['isExpanded'](idea3Row)).toBe(false);
+      expect(component['expandedIdeaIds'].has('idea 3')).toBe(false);
+
+      const disabledRows = fixture.nativeElement.querySelectorAll('tr.disabled-row');
+      expect(disabledRows.length).toBe(1);
+      expect(disabledRows[0].textContent).toContain('Heat is trapped in car');
+    });
   });
 });
 
 describe('IdeasSummaryComponent for Open Response component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IdeasSummaryComponent, MockComponent(IdeaSummaryComponent)],
+      imports: [IdeasSummaryComponent],
       providers: [
         MockProviders(
           AnnotationService,
@@ -75,18 +424,21 @@ describe('IdeasSummaryComponent for Open Response component', () => {
     component.doRender = true;
     component.componentType = 'OpenResponse';
   });
+
   beforeEach(() => {
     const configService = TestBed.inject(ConfigService);
     spyOn(configService, 'isPreview').and.returnValue(false);
     spyOn(configService, 'isAuthoring').and.returnValue(false);
     spyOn(configService, 'isStudentRun').and.returnValue(false);
     spyOn(configService, 'getNumberOfWorkgroupsInPeriod').and.returnValue(1);
+    spyOn(configService, 'getClassmateUserInfos').and.returnValue([
+      { workgroupId: 1, displayNames: 'Student 1' }
+    ]);
   });
 
-  describe('ngOnChanges()', () => {
+  describe('ngOnInit()', () => {
     ngInit_OR_NoIdeasDetected_ShowMessage();
     ngInit_OR_IdeasDetected_ShowSummary();
-    ngInit_OR_ManyIdeasDetected_ShowTopAndBottomThree();
     ngInit_OR_FilterByPeriod();
   });
 });
@@ -145,36 +497,8 @@ function showsDisplaySummary(componentType: string) {
   it('shows summary display (' + componentType + ')', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Most Common');
-  });
-}
-
-function ngInit_DG_ManyIdeasDetected_ShowTopAndBottomThree() {
-  describe('more than 3 ideas detected', () => {
-    beforeEach(() => {
-      generateMockRubric(4, 4);
-      generateMockStudentWorkDialogGuidance(4);
-    });
-    onlyShowThreeIdeas('DG');
-  });
-}
-
-function ngInit_OR_ManyIdeasDetected_ShowTopAndBottomThree() {
-  describe('more than 3 ideas detected', () => {
-    beforeEach(() => {
-      generateMockRubric(4, 4);
-      generateMockStudentWorkOpenResponse(4);
-    });
-    onlyShowThreeIdeas('OR');
-  });
-}
-
-function onlyShowThreeIdeas(componentType: string) {
-  xit('shows only top and bottom three ideas (' + componentType + ')', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelectorAll('#most-common-ideas > li').length).toEqual(3);
-    expect(fixture.nativeElement.querySelectorAll('#least-common-ideas > li').length).toEqual(3);
+    expect(fixture.nativeElement.querySelector('table')).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain('Student Ideas Detected');
   });
 }
 
@@ -185,6 +509,17 @@ function generateMockRubric(numIdeas: number, numDetected: number): void {
     ideas.push(idea);
     numDetected--;
   }
+  spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(
+    new CRaterRubric({ ideas: ideas })
+  );
+}
+
+function generateMockRubricForTable(): void {
+  const ideas = [
+    new CRaterIdea('idea 1', true, 'Solar radiation enters car'),
+    new CRaterIdea('idea 2', true, 'Car is warmer than outside'),
+    new CRaterIdea('idea 3', true, 'Heat is trapped in car')
+  ];
   spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(
     new CRaterRubric({ ideas: ideas })
   );
@@ -202,11 +537,29 @@ function generateMockStudentWorkDialogGuidance(numIdeasDetected: number): void {
   );
 }
 
+function generateMockStudentWorkDialogGuidanceWithResponses(): void {
+  spyOn(TestBed.inject(SummaryService), 'getLatestClassmateStudentWork').and.returnValue(
+    of([
+      new ComponentState({
+        workgroupId: 1,
+        studentData: {
+          responses: [
+            { text: 'It warms the car up.', timestamp: 12345 },
+            { ideas: [{ name: 'idea 1', detected: true }] },
+            { text: 'Inside is warmer.', timestamp: 12346 },
+            { ideas: [{ name: 'idea 2', detected: true }] }
+          ]
+        }
+      })
+    ])
+  );
+}
+
 function generateMockStudentWorkOpenResponse(numIdeasDetected: number): void {
   const ideas = generateIdeas(numIdeasDetected);
   spyOn(TestBed.inject(AnnotationService), 'getAnnotationsByNodeIdComponentId').and.returnValue([
     new Annotation({
-      workgroupId: 1,
+      toWorkgroupId: 1,
       data: { ideas: ideas }
     })
   ]);
