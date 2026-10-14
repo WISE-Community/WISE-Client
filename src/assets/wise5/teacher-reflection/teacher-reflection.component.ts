@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Subject, Subscription } from 'rxjs';
@@ -30,8 +29,12 @@ interface PendingAnswer {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, FormsModule, MatExpansionModule, MatFormFieldModule, MatInputModule],
-  selector: 'teacher-reflection',
+  host: {
+    class: 'summary'
+  },
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
+  selector: 'teacher-reflection, teacher-reflections',
+  styleUrl: './teacher-reflection.component.scss',
   templateUrl: './teacher-reflection.component.html'
 })
 export class TeacherReflectionComponent implements OnInit, OnChanges, OnDestroy {

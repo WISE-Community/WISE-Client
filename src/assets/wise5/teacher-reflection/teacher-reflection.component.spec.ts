@@ -104,4 +104,18 @@ describe('TeacherReflectionComponent', () => {
       answeredByWorkgroupId: 50
     });
   }));
+
+  it('should associate question labels with textareas via for and id attributes', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const labels = compiled.querySelectorAll('label');
+    const textareas = compiled.querySelectorAll('textarea');
+
+    expect(labels.length).toBe(2);
+    expect(textareas.length).toBe(2);
+    expect(labels[0].getAttribute('for')).toBe('q1');
+    expect(textareas[0].getAttribute('id')).toBe('q1');
+    expect(labels[1].getAttribute('for')).toBe('q2');
+    expect(textareas[1].getAttribute('id')).toBe('q2');
+  });
 });
