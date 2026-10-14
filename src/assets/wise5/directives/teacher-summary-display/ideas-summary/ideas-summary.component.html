@@ -14,11 +14,11 @@
           (input)="applyFilter()"
         />
       </mat-form-field>
-      <span class="mat-caption" i18n>Select an idea to see student responses</span>
+      <span class="mat-caption" i18n>Select a row to see all student responses</span>
     </div>
 
     <div
-      class="border-3 selected-bg-border rounded-md overflow-y-auto w-full"
+      class="border-3 selected-bg-border rounded-md overflow-y-auto w-full @container"
       [class.max-h-80]="!expanded"
     >
       <table
@@ -36,7 +36,7 @@
             {{ row.text }}
             @if (isUnique(row)) {
               <span
-                class="unique-label inline-flex items-center text-xs font-normal px-1.5 rounded-sm ms-1 highlighted-bg"
+                class="unique-label inline-flex items-center text-xs font-normal rounded-sm px-1 ms-0.5 primary-bg text-white"
                 i18n
                 >unique</span
               >
@@ -44,20 +44,27 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="count">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Students</th>
-          <td mat-cell *matCellDef="let row">
-            <span class="flex items-center gap-1">
-              <mat-icon class="mat-18">person</mat-icon>
-              <span>{{ row.count }}</span>
-            </span>
+        <ng-container matColumnDef="sampleResponse">
+          <th mat-header-cell *matHeaderCellDef aria-label="Sample response" i18n-aria-label></th>
+          <td mat-cell *matCellDef="let row" class="secondary-text">
+            @if (row.sampleResponse) {
+              <span
+                class="truncate hidden max-w-56 @xl:block @xl:whitespace-normal @xl:max-w-none"
+                [attr.title]="row.isSampleResponseTruncated ? row.fullSampleResponse : null"
+              >
+                "{{ row.sampleResponse }}"
+              </span>
+            }
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Category</th>
+        <ng-container matColumnDef="count">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Students</th>
           <td mat-cell *matCellDef="let row">
-            <mat-chip [style.background-color]="row.tag.color">{{ row.tag.name }}</mat-chip>
+            <span class="flex items-center justify-center gap-1">
+              <mat-icon class="mat-18">person</mat-icon>
+              <span>{{ row.count }}</span>
+            </span>
           </td>
         </ng-container>
 
@@ -70,11 +77,11 @@
             [class.border-b-0!]="!isExpanded(row)"
           >
             @if (isExpanded(row)) {
-              <div class="@container p-2 pt-0">
-                <div class="@2xl:columns-2 @4xl:columns-3 gap-2">
+              <div class="@container p-2 pt-1">
+                <div class="@xl:columns-2 @4xl:columns-3 gap-2">
                   @for (response of row.responses; track response.timestamp) {
                     <div
-                      class="rounded-md notice-bg-bg text-sm p-2.5 mb-2 break-inside-avoid-column"
+                      class="rounded-md notice-bg-bg text-sm p-2.5 mb-2 last-of-type:mb-0 break-inside-avoid-column"
                     >
                       <div class="flex items-center gap-2 mb-1.5">
                         <mat-icon class="shrink-0 mat-18" [style.color]="response.avatarColor">

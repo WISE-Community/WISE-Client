@@ -10,7 +10,6 @@ import { DialogGuidanceSummaryData } from '../summary-data/DialogGuidanceSummary
 import { FormsModule } from '@angular/forms';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { IdeasSummaryData } from '../summary-data/IdeasSummaryData';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -30,16 +29,13 @@ export interface StudentResponseItem {
   avatarColor: string;
 }
 
-export interface CategoryTag {
-  name: string;
-  color: string;
-}
-
 export interface IdeaTableRow {
   id: string;
   text: string;
   count: number;
-  tag: CategoryTag;
+  sampleResponse: string;
+  fullSampleResponse: string;
+  isSampleResponseTruncated: boolean;
   responses: StudentResponseItem[];
 }
 
@@ -47,7 +43,6 @@ export interface IdeaTableRow {
   imports: [
     CommonModule,
     FormsModule,
-    MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -65,13 +60,14 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   @Input() componentType: string;
   @Input() expanded: boolean;
 
-  protected displayedColumns: string[] = ['text', 'count', 'category'];
+  protected displayedColumns: string[] = ['text', 'sampleResponse', 'count'];
   protected dataSource = new MatTableDataSource<IdeaTableRow>([]);
   protected expandedIdeaIds = new Set<string>();
   protected searchQuery = '';
   protected rubric: CRaterRubric;
   protected workgroups: any[] = [];
   protected readonly UNIQUE_THRESHOLD = 2;
+  protected readonly SAMPLE_RESPONSE_MAX_CHARS = 150;
 
   @ViewChild(MatSort) set matSort(sort: MatSort) {
     if (sort) {
@@ -145,9 +141,6 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     componentStates: ComponentState[] = [],
     annotations: Annotation[] = []
   ): void {
-    const hasTags = (this.rubric ?? (ideasSummaryData as any)?.rubric)?.hasAnyIdeaTags() ?? false;
-    this.displayedColumns = hasTags ? ['text', 'count', 'category'] : ['text', 'count'];
-
     if (ideasSummaryData.hasAnyDetectedIdeas()) {
       this.doRender = true;
       const allIdeas = ideasSummaryData.getAllIdeas();
@@ -158,15 +151,16 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
         } else if (this.componentType === 'OpenResponse') {
           responses = this.getORResponsesWithIdea(componentStates, annotations, idea.id);
         }
-        const tag: CategoryTag = {
-          name: (this.rubric?.getIdeaTags(idea.id) ?? []).join(', '),
-          color: this.rubric?.getIdeaColor(idea.id) ?? ''
-        };
+        const fullSample = this.getRandomResponse(responses);
+        const { text: sampleResponse, isTruncated: isSampleResponseTruncated } =
+          this.truncateToChars(fullSample, this.SAMPLE_RESPONSE_MAX_CHARS);
         return {
           id: idea.id,
           text: idea.text,
           count: idea.count,
-          tag: tag,
+          sampleResponse: sampleResponse,
+          fullSampleResponse: fullSample,
+          isSampleResponseTruncated: isSampleResponseTruncated,
           responses: responses
         };
       });
@@ -179,6 +173,38 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     }
   }
 
+  protected getRandomResponse(responses: StudentResponseItem[] = []): string {
+    const candidates = responses
+      .flatMap((r) => (r.texts && r.texts.length > 0 ? r.texts : [r.text]))
+      .map((t) => t?.trim())
+      .filter((t): t is string => !!t);
+    if (candidates.length === 0) {
+      return '';
+    }
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  }
+
+  protected truncateToChars(
+    text: string = '',
+    maxChars: number = this.SAMPLE_RESPONSE_MAX_CHARS
+  ): { text: string; isTruncated: boolean } {
+    const trimmed = text.trim();
+    if (trimmed.length <= maxChars) {
+      return { text: trimmed, isTruncated: false };
+    }
+    let cut = trimmed.slice(0, maxChars);
+    if (!/\s/.test(trimmed[maxChars]) && !/\s/.test(cut[cut.length - 1])) {
+      const lastSpaceIndex = cut.search(/\s\S*$/);
+      if (lastSpaceIndex > 0) {
+        cut = cut.slice(0, lastSpaceIndex);
+      }
+    }
+    return {
+      text: cut.trimEnd() + '...',
+      isTruncated: true
+    };
+  }
+
   private setupDataSource(): void {
     this.dataSource.filterPredicate = (row: IdeaTableRow, filter: string): boolean => {
       const q = filter.trim().toLowerCase();
@@ -187,7 +213,6 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       }
       return (
         row.text.toLowerCase().includes(q) ||
-        row.tag.name.toLowerCase().includes(q) ||
         row.responses.some(
           (r) =>
             r.texts?.some((t) => t.toLowerCase().includes(q)) || r.text?.toLowerCase().includes(q)
@@ -200,8 +225,6 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
         return row.count;
       } else if (sortHeaderId === 'text') {
         return row.text.toLowerCase();
-      } else if (sortHeaderId === 'category') {
-        return row.tag.name.toLowerCase();
       }
       return '';
     };

@@ -6,7 +6,7 @@ import { ConfigService } from '../../../services/configService';
 import { CRaterIdea } from '../../../components/common/cRater/CRaterIdea';
 import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
 import { CRaterService } from '../../../services/cRaterService';
-import { IdeasSummaryComponent } from './ideas-summary.component';
+import { IdeasSummaryComponent, StudentResponseItem } from './ideas-summary.component';
 import { MockProviders } from 'ng-mocks';
 import { of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -56,41 +56,22 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
 
   describe('table interactions', () => {
     beforeEach(() => {
-      generateMockRubricWithTags();
+      generateMockRubricForTable();
       generateMockStudentWorkDialogGuidanceWithResponses();
       component.ngOnInit();
       fixture.detectChanges();
     });
 
     it('renders the ideas table with search and headers', () => {
+      expect(component['displayedColumns']).toEqual(['text', 'sampleResponse', 'count']);
       expect(fixture.nativeElement.querySelector('table')).toBeTruthy();
       expect(fixture.nativeElement.querySelector('input[matInput]')).toBeTruthy();
       const headers = fixture.nativeElement.querySelectorAll('th');
       expect(headers.length).toBe(3);
       expect(headers[0].textContent).toContain('Idea');
-      expect(headers[1].textContent).toContain('Students');
-      expect(headers[2].textContent).toContain('Category');
-    });
-
-    it('omits the Category column when no rubric ideas have tags', () => {
-      const ideasWithoutTags = [
-        new CRaterIdea('idea 1', true, 'Solar radiation enters car'),
-        new CRaterIdea('idea 2', true, 'Car is warmer than outside'),
-        new CRaterIdea('idea 3', true, 'Heat is trapped in car')
-      ];
-      (TestBed.inject(CRaterService).getCRaterRubric as jasmine.Spy).and.returnValue(
-        new CRaterRubric({ ideas: ideasWithoutTags })
-      );
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      expect(component['displayedColumns']).toEqual(['text', 'count']);
-      const headers = fixture.nativeElement.querySelectorAll('th');
-      expect(headers.length).toBe(2);
-      expect(headers[0].textContent).toContain('Idea');
-      expect(headers[1].textContent).toContain('Students');
-      const headerTexts = Array.from(headers).map((th: any) => th.textContent);
-      expect(headerTexts.some((text: string) => text.includes('Category'))).toBe(false);
+      expect(headers[1].textContent.trim()).toBe('');
+      expect(headers[1].getAttribute('aria-label')).toBe('Sample response');
+      expect(headers[2].textContent).toContain('Students');
     });
 
     it('displays unique label for ideas with count <= 2', () => {
@@ -193,26 +174,194 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
       ).toBe(true);
     });
 
-    it('filters ideas by category tag', () => {
-      component['searchQuery'] = 'mechanistic';
-      component['applyFilter']();
-      fixture.detectChanges();
-      expect(
-        component['dataSource'].filteredData.every((row) =>
-          row.tags.some((t) => t.name.toLowerCase().includes('mechanistic'))
-        )
-      ).toBe(true);
-    });
-
     it('filters ideas by student response text', () => {
       component['searchQuery'] = 'warms the car';
       component['applyFilter']();
       fixture.detectChanges();
+      expect(component['dataSource'].filteredData.length).toBeGreaterThan(0);
       expect(
         component['dataSource'].filteredData.every((row) =>
           row.responses.some((r) => r.text.toLowerCase().includes('warms the car'))
         )
       ).toBe(true);
+    });
+
+    it('displays sample response without title attribute when response is not truncated', () => {
+      const sampleResponseCell = fixture.nativeElement.querySelector(
+        'td.mat-column-sampleResponse'
+      );
+      expect(sampleResponseCell).toBeTruthy();
+      const span = sampleResponseCell.querySelector('span');
+      expect(span).toBeTruthy();
+      expect(span.textContent).toContain('It warms the car up.');
+      expect(span.hasAttribute('title')).toBe(false);
+      expect(sampleResponseCell.querySelector('span[title]')).toBeNull();
+    });
+
+    it('displays sample response with title attribute when response is truncated', () => {
+      const longText =
+        'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car extremely rapidly.';
+      const longState = new ComponentState({
+        workgroupId: 1,
+        studentData: {
+          responses: [
+            { text: longText, timestamp: 12345 },
+            { ideas: [{ name: 'idea 1', detected: true }] }
+          ]
+        }
+      });
+      (TestBed.inject(SummaryService).getLatestClassmateStudentWork as jasmine.Spy).and.returnValue(
+        of([longState])
+      );
+      component.ngOnInit();
+      fixture.detectChanges();
+
+      const sampleResponseCell = fixture.nativeElement.querySelector(
+        'td.mat-column-sampleResponse'
+      );
+      const spanWithTitle = sampleResponseCell.querySelector('span[title]');
+      expect(spanWithTitle).toBeTruthy();
+      expect(spanWithTitle.getAttribute('title')).toBe(longText);
+      expect(spanWithTitle.textContent).toContain('car...');
+      expect(spanWithTitle.textContent).not.toContain('extremel');
+    });
+
+    describe('sample response helpers', () => {
+      describe('getRandomResponse', () => {
+        it('returns empty string when responses are empty or undefined', () => {
+          expect(component['getRandomResponse']([])).toBe('');
+          expect(component['getRandomResponse'](undefined as any)).toBe('');
+        });
+
+        it('returns empty string when all candidate responses are whitespace or empty', () => {
+          const responses: StudentResponseItem[] = [
+            {
+              text: '   ',
+              texts: ['   '],
+              timestamp: 1,
+              usernames: 'Student 1',
+              avatarColor: '#000'
+            }
+          ];
+          expect(component['getRandomResponse'](responses)).toBe('');
+        });
+
+        it('randomly selects a candidate response from available responses', () => {
+          const responses: StudentResponseItem[] = [
+            {
+              text: 'Response A',
+              texts: ['Response A'],
+              timestamp: 1,
+              usernames: 'Student 1',
+              avatarColor: '#000'
+            },
+            {
+              text: 'Response B',
+              texts: ['Response B'],
+              timestamp: 2,
+              usernames: 'Student 2',
+              avatarColor: '#000'
+            }
+          ];
+          const selected = component['getRandomResponse'](responses);
+          expect(['Response A', 'Response B']).toContain(selected);
+        });
+
+        it('supports responses with texts array', () => {
+          const responses: StudentResponseItem[] = [
+            {
+              text: '',
+              texts: ['First text', 'Second text'],
+              timestamp: 1,
+              usernames: 'Student 1',
+              avatarColor: '#000'
+            }
+          ];
+          const selected = component['getRandomResponse'](responses);
+          expect(['First text', 'Second text']).toContain(selected);
+        });
+      });
+
+      describe('truncateToChars', () => {
+        it('returns empty string and isTruncated false when text is empty or falsy', () => {
+          expect(component['truncateToChars']('')).toEqual({ text: '', isTruncated: false });
+          expect(component['truncateToChars'](undefined as any)).toEqual({
+            text: '',
+            isTruncated: false
+          });
+        });
+
+        it('does not truncate when character count is less than or equal to maxChars', () => {
+          const text = 'One two three four five';
+          expect(component['truncateToChars'](text)).toEqual({
+            text: 'One two three four five',
+            isTruncated: false
+          });
+          const exact150 = 'a'.repeat(150);
+          expect(component['truncateToChars'](exact150)).toEqual({
+            text: exact150,
+            isTruncated: false
+          });
+        });
+
+        it('truncates to maxChars with ellipsis and sets isTruncated true when exceeding maxChars', () => {
+          const text160 = 'a'.repeat(160);
+          const expected = 'a'.repeat(150) + '...';
+          expect(component['truncateToChars'](text160)).toEqual({
+            text: expected,
+            isTruncated: true
+          });
+        });
+
+        it('trims trailing whitespace before adding ellipsis', () => {
+          const text = 'a'.repeat(149) + '   ' + 'b'.repeat(10);
+          const expected = 'a'.repeat(149) + '...';
+          expect(component['truncateToChars'](text)).toEqual({
+            text: expected,
+            isTruncated: true
+          });
+        });
+
+        it('does not truncate mid-word when character limit falls inside a word', () => {
+          const text =
+            'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car extremely rapidly.';
+          const result = component['truncateToChars'](text);
+          expect(result).toEqual({
+            text:
+              'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car...',
+            isTruncated: true
+          });
+        });
+
+        it('supports a custom maxChars limit and avoids mid-word truncation', () => {
+          const text =
+            'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car rapidly.';
+          const result = component['truncateToChars'](text, 120);
+          expect(result).toEqual({
+            text:
+              'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped...',
+            isTruncated: true
+          });
+        });
+
+        it('preserves complete words when character limit falls at a word boundary', () => {
+          const text = 'Solar radiation easily enters';
+          const result = component['truncateToChars'](text, 15);
+          expect(result).toEqual({
+            text: 'Solar radiation...',
+            isTruncated: true
+          });
+        });
+
+        it('falls back to character truncation if a single word exceeds maxChars', () => {
+          const longWord = 'supercalifragilisticexpialidocious';
+          const result = component['truncateToChars'](longWord, 10);
+          expect(result).toEqual({
+            text: 'supercalif...',
+            isTruncated: true
+          });
+        });
+      });
     });
 
     it('shows all responses for a student that contain the same idea', () => {
@@ -365,18 +514,14 @@ function generateMockRubric(numIdeas: number, numDetected: number): void {
   );
 }
 
-function generateMockRubricWithTags(): void {
+function generateMockRubricForTable(): void {
   const ideas = [
-    new CRaterIdea('idea 1', true, 'Solar radiation enters car', ['mechanistic']),
-    new CRaterIdea('idea 2', true, 'Car is warmer than outside', ['descriptive']),
-    new CRaterIdea('idea 3', true, 'Heat is trapped in car', ['mechanistic'])
-  ];
-  const ideaColors = [
-    { tags: ['mechanistic'], colorValue: '#fed7aa' },
-    { tags: ['descriptive'], colorValue: '#bfdbfe' }
+    new CRaterIdea('idea 1', true, 'Solar radiation enters car'),
+    new CRaterIdea('idea 2', true, 'Car is warmer than outside'),
+    new CRaterIdea('idea 3', true, 'Heat is trapped in car')
   ];
   spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue(
-    new CRaterRubric({ ideas: ideas, ideaColors: ideaColors })
+    new CRaterRubric({ ideas: ideas })
   );
 }
 
