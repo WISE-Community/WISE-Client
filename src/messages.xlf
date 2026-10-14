@@ -1065,39 +1065,39 @@
           <context context-type="linenumber">3,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5368811868161245543" datatype="html">
-        <source>Reflection Questions for Teachers</source>
+      <trans-unit id="607486083731706123" datatype="html">
+        <source>These questions will only appear for teachers (in the Grade by Step view for this activity in the Teacher Tools).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
-          <context context-type="linenumber">8,12</context>
+          <context context-type="linenumber">9,14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5081962522961732453" datatype="html">
-        <source>Add Question</source>
+      <trans-unit id="538784795536579313" datatype="html">
+        <source>Add teacher reflection question</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
-          <context context-type="linenumber">17,21</context>
+          <context context-type="linenumber">18,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9153508585400405262" datatype="html">
         <source>Question <x id="INTERPOLATION" equiv-text="{{ idx + 1 }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">29,30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4908917081284438263" datatype="html">
         <source>e.g. Which, if any, response surprised you?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
-          <context context-type="linenumber">29,32</context>
+          <context context-type="linenumber">34,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="895780575634906211" datatype="html">
         <source>Delete question</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
-          <context context-type="linenumber">38,41</context>
+          <context context-type="linenumber">43,46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
@@ -23887,32 +23887,32 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2958890122996894894" datatype="html">
-        <source>Teacher Reflection</source>
+      <trans-unit id="5592957437854844960" datatype="html">
+        <source>Teacher Reflections</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.html</context>
-          <context context-type="linenumber">3,5</context>
+          <context context-type="linenumber">1,4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="9193064934175077399" datatype="html">
-        <source>Capture your thoughts as you reflect on this activity. Your answers won&apos;t be displayed to your students.</source>
+      <trans-unit id="7647281946467760200" datatype="html">
+        <source>Capture your thoughts as you reflect on this activity. Your answers won&apos;t be shown to students.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.html</context>
-          <context context-type="linenumber">7,11</context>
+          <context context-type="linenumber">4,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6385027676909711398" datatype="html">
         <source>Enter your reflection...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.html</context>
-          <context context-type="linenumber">19,22</context>
+          <context context-type="linenumber">17,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8524381391756395002" datatype="html">
         <source>Answer saved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8784868761263923006" datatype="html">
