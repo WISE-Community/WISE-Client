@@ -1,16 +1,45 @@
+@reference "tailwindcss";
+
 h3,
 .mat-subtitle-1,
 .mat-body-1 {
-  margin-bottom: 8px;
-  margin-top: 0;
+  @apply mb-2 mt-0;
 }
 
-ul {
-  list-style-type: none;
-  margin-block-start: 0;
-  padding-inline-start: 0;
+.mat-mdc-row {
+  --mat-table-row-item-container-height: 40px;
 }
 
-li:not(:last-child) {
-  margin-bottom: 4px;
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  @apply px-2;
+}
+
+.idea-row:not(:has(~ .idea-row)) .mat-mdc-cell, tr.expanded-row td, .mat-mdc-header-cell {
+  @apply border-b-0
+}
+
+.idea-row .mat-mdc-cell {
+  @apply leading-snug;
+}
+
+.idea-row:not(.disabled-row):not(.expanded-row):hover {
+  @apply bg-neutral-100;
+
+  .mat-mdc-cell {
+    @apply bg-inherit;
+  }
+}
+
+.mat-mdc-header-row {
+  --mat-table-header-container-height: 40px;
+}
+
+.disabled-row {
+  @apply opacity-50 cursor-default pointer-events-none;
+}
+
+
+.search-input {
+  --mat-form-field-container-height: 36px;
+  --mat-form-field-container-vertical-padding: 7px;
 }

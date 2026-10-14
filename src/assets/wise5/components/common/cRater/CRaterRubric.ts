@@ -33,13 +33,17 @@ export class CRaterRubric {
   getIdeaColor(ideaId: string): string {
     const ideaTags = this.getIdeaTags(ideaId);
     return (
-      this.ideaColors?.find((ideaColor) => arrayContainsAll(ideaTags, ideaColor.tags))
+      this.ideaColors?.find((ideaColor) => arrayContainsAll(ideaColor.tags, ideaTags))
         ?.colorValue ?? ''
     );
   }
 
   hasRubricData(): boolean {
     return (this.description ?? '') !== '' || this.ideas.length > 0;
+  }
+
+  hasAnyIdeaTags(): boolean {
+    return this.ideas?.some((idea) => (idea.tags ?? []).length > 0) ?? false;
   }
 
   getInitialIdeasSummaryGroups(): any[] {
