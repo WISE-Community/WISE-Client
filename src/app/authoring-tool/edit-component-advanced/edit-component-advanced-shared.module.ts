@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { EditComponentAddToNotebookButtonComponent } from '../edit-component-add-to-notebook-button/edit-component-add-to-notebook-button.component';
 import { EditConnectedComponentsComponent } from '../edit-connected-components/edit-connected-components.component';
 import { EditComponentSummarizerSystemPromptComponent } from '../edit-component-summarizer-system-prompt/edit-component-summarizer-system-prompt.component';
+import { EditComponentTeacherReflectionsComponent } from '../edit-component-teacher-reflections/edit-component-teacher-reflections.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { EditComponentSummarizerSystemPromptComponent } from '../edit-component-
     EditComponentWidthComponent,
     EditComponentRubricComponent,
     EditComponentSummarizerSystemPromptComponent,
+    EditComponentTeacherReflectionsComponent,
     EditComponentTagsComponent,
     EditComponentConstraintsComponent,
     EditComponentJsonComponent,
@@ -51,6 +53,7 @@ import { EditComponentSummarizerSystemPromptComponent } from '../edit-component-
     EditComponentWidthComponent,
     EditComponentRubricComponent,
     EditComponentSummarizerSystemPromptComponent,
+    EditComponentTeacherReflectionsComponent,
     EditComponentTagsComponent,
     EditComponentConstraintsComponent,
     EditComponentJsonComponent,

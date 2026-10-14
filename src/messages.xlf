@@ -958,59 +958,59 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">37,38</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
-          <context context-type="linenumber">47,48</context>
+          <context context-type="linenumber">48,49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
-          <context context-type="linenumber">47,48</context>
+          <context context-type="linenumber">48,49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">240,241</context>
+          <context context-type="linenumber">241,242</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
-          <context context-type="linenumber">39,40</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
-          <context context-type="linenumber">49,50</context>
+          <context context-type="linenumber">50,51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">54,55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
-          <context context-type="linenumber">60,61</context>
+          <context context-type="linenumber">61,62</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">237,238</context>
+          <context context-type="linenumber">238,239</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">54,55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
-          <context context-type="linenumber">69,70</context>
+          <context context-type="linenumber">70,71</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
-          <context context-type="linenumber">58,59</context>
+          <context context-type="linenumber">59,60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">611,612</context>
+          <context context-type="linenumber">612,613</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
-          <context context-type="linenumber">34,36</context>
+          <context context-type="linenumber">35,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component.ts</context>
@@ -1026,11 +1026,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
-          <context context-type="linenumber">34,36</context>
+          <context context-type="linenumber">35,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">303,304</context>
+          <context context-type="linenumber">304,305</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6486069346793029625" datatype="html">
@@ -1056,6 +1056,67 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-tags/edit-component-tags.component.ts</context>
           <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1593153448932371250" datatype="html">
+        <source>Teacher Reflection Questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="607486083731706123" datatype="html">
+        <source>These questions will only appear for teachers (in the Grade by Step view for this activity in the Teacher Tools).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
+          <context context-type="linenumber">9,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="538784795536579313" datatype="html">
+        <source>Add teacher reflection question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
+          <context context-type="linenumber">18,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9153508585400405262" datatype="html">
+        <source>Question <x id="INTERPOLATION" equiv-text="{{ idx + 1 }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4908917081284438263" datatype="html">
+        <source>e.g. Which, if any, response surprised you?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
+          <context context-type="linenumber">34,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="895780575634906211" datatype="html">
+        <source>Delete question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.html</context>
+          <context context-type="linenumber">43,46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
+          <context context-type="linenumber">75,77</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
+          <context context-type="linenumber">98,100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2774207815872923451" datatype="html">
+        <source>Are you sure you want to delete this question?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-component-teacher-reflections/edit-component-teacher-reflections.component.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.ts</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8084155234460667951" datatype="html">
@@ -1391,17 +1452,6 @@
           <context context-type="linenumber">62,63</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="895780575634906211" datatype="html">
-        <source>Delete question</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
-          <context context-type="linenumber">75,77</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
-          <context context-type="linenumber">98,100</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="7675140366572877866" datatype="html">
         <source>Add new question</source>
         <context-group purpose="location">
@@ -1425,13 +1475,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.ts</context>
           <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2774207815872923451" datatype="html">
-        <source>Are you sure you want to delete this question?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.ts</context>
-          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3579392162084914620" datatype="html">
@@ -1695,11 +1738,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">88,89</context>
+          <context context-type="linenumber">89,90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">547,548</context>
+          <context context-type="linenumber">548,549</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
@@ -1761,7 +1804,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">528,529</context>
+          <context context-type="linenumber">529,530</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -1776,7 +1819,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">538,541</context>
+          <context context-type="linenumber">539,542</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/show-group-work-authoring/show-group-work-authoring.component.html</context>
@@ -1815,7 +1858,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">516,517</context>
+          <context context-type="linenumber">517,518</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
@@ -1849,11 +1892,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">89,90</context>
+          <context context-type="linenumber">90,91</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">548,550</context>
+          <context context-type="linenumber">549,551</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
@@ -2735,7 +2778,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">155,158</context>
+          <context context-type="linenumber">156,159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8352660755693654653" datatype="html">
@@ -10721,63 +10764,63 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">29,32</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
-          <context context-type="linenumber">39,42</context>
+          <context context-type="linenumber">40,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
-          <context context-type="linenumber">39,42</context>
+          <context context-type="linenumber">40,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">232,235</context>
+          <context context-type="linenumber">233,236</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
-          <context context-type="linenumber">31,34</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
-          <context context-type="linenumber">41,44</context>
+          <context context-type="linenumber">42,45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
-          <context context-type="linenumber">45,48</context>
+          <context context-type="linenumber">46,49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
-          <context context-type="linenumber">52,55</context>
+          <context context-type="linenumber">53,56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">229,232</context>
+          <context context-type="linenumber">230,233</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component.html</context>
-          <context context-type="linenumber">16,18</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
-          <context context-type="linenumber">45,48</context>
+          <context context-type="linenumber">46,49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
-          <context context-type="linenumber">61,64</context>
+          <context context-type="linenumber">62,65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
-          <context context-type="linenumber">50,53</context>
+          <context context-type="linenumber">51,54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">603,606</context>
+          <context context-type="linenumber">604,607</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">26,29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component.ts</context>
@@ -10793,11 +10836,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">26,29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">295,298</context>
+          <context context-type="linenumber">296,299</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/helpIcon/help-icon.component.ts</context>
@@ -10835,63 +10878,63 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">41,43</context>
+          <context context-type="linenumber">44,46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">52,54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">244,246</context>
+          <context context-type="linenumber">245,247</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
-          <context context-type="linenumber">43,45</context>
+          <context context-type="linenumber">44,46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
-          <context context-type="linenumber">53,55</context>
+          <context context-type="linenumber">54,56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
-          <context context-type="linenumber">57,59</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">241,243</context>
+          <context context-type="linenumber">242,244</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">24,26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
-          <context context-type="linenumber">57,59</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
-          <context context-type="linenumber">73,75</context>
+          <context context-type="linenumber">74,76</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
-          <context context-type="linenumber">62,64</context>
+          <context context-type="linenumber">63,65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">615,617</context>
+          <context context-type="linenumber">616,618</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
-          <context context-type="linenumber">40,42</context>
+          <context context-type="linenumber">41,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component.ts</context>
@@ -10907,11 +10950,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
-          <context context-type="linenumber">40,42</context>
+          <context context-type="linenumber">41,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">307,309</context>
+          <context context-type="linenumber">308,310</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2475616145493399595" datatype="html">
@@ -13790,7 +13833,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">4,6</context>
+          <context context-type="linenumber">4,7</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
@@ -13826,7 +13869,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component.html</context>
-          <context context-type="linenumber">4,6</context>
+          <context context-type="linenumber">4,7</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
@@ -16812,63 +16855,63 @@ Are you sure you want to proceed?</source>
         <source>Visibility</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">10,12</context>
+          <context context-type="linenumber">13,15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
-          <context context-type="linenumber">20,22</context>
+          <context context-type="linenumber">21,23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
-          <context context-type="linenumber">20,22</context>
+          <context context-type="linenumber">21,23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">213,215</context>
+          <context context-type="linenumber">214,216</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
-          <context context-type="linenumber">12,14</context>
+          <context context-type="linenumber">13,15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
-          <context context-type="linenumber">14,16</context>
+          <context context-type="linenumber">15,17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
-          <context context-type="linenumber">26,28</context>
+          <context context-type="linenumber">27,29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
-          <context context-type="linenumber">33,35</context>
+          <context context-type="linenumber">34,36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">210,212</context>
+          <context context-type="linenumber">211,213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/html/edit-html-advanced/edit-html-advanced.component.html</context>
-          <context context-type="linenumber">10,12</context>
+          <context context-type="linenumber">13,15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
-          <context context-type="linenumber">26,28</context>
+          <context context-type="linenumber">27,29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
-          <context context-type="linenumber">42,44</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
-          <context context-type="linenumber">31,33</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">43,45</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">44,46</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/outsideURL/edit-outside-url-advanced/edit-outside-url-advanced.component.ts</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">20,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/edit-peer-chat-advanced-component/edit-peer-chat-advanced-component.component.ts</context>
@@ -16884,70 +16927,70 @@ Are you sure you want to proceed?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/summary/edit-summary-advanced/edit-summary-advanced.component.ts</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">20,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">276,278</context>
+          <context context-type="linenumber">277,279</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2557623954339695776" datatype="html">
         <source>Connections</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/aiChat/edit-ai-chat-advanced/edit-ai-chat-advanced.component.html</context>
-          <context context-type="linenumber">16,19</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/animation/edit-animation-advanced/edit-animation-advanced.component.html</context>
-          <context context-type="linenumber">26,29</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/audioOscillator/edit-audio-oscillator-advanced/edit-audio-oscillator-advanced.component.html</context>
-          <context context-type="linenumber">26,29</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/conceptMap/edit-concept-map-advanced/edit-concept-map-advanced.component.html</context>
-          <context context-type="linenumber">219,222</context>
+          <context context-type="linenumber">220,223</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/edit-dialog-guidance-advanced/edit-dialog-guidance-advanced.component.html</context>
-          <context context-type="linenumber">18,21</context>
+          <context context-type="linenumber">19,22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
-          <context context-type="linenumber">20,23</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/draw/edit-draw-advanced/edit-draw-advanced.component.html</context>
-          <context context-type="linenumber">32,35</context>
+          <context context-type="linenumber">33,36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/embedded/edit-embedded-advanced/edit-embedded-advanced.component.html</context>
-          <context context-type="linenumber">39,42</context>
+          <context context-type="linenumber">40,43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-advanced/edit-graph-advanced.component.html</context>
-          <context context-type="linenumber">216,219</context>
+          <context context-type="linenumber">217,220</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/label/edit-label-advanced/edit-label-advanced.component.html</context>
-          <context context-type="linenumber">32,35</context>
+          <context context-type="linenumber">33,36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/match/edit-match-advanced/edit-match-advanced.component.html</context>
-          <context context-type="linenumber">48,51</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
-          <context context-type="linenumber">37,40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
           <context context-type="linenumber">49,52</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/edit-multiple-choice-advanced/edit-multiple-choice-advanced.component.html</context>
+          <context context-type="linenumber">38,41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
+          <context context-type="linenumber">50,53</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/table/edit-table-advanced/edit-table-advanced.component.html</context>
-          <context context-type="linenumber">282,285</context>
+          <context context-type="linenumber">283,286</context>
         </context-group>
       </trans-unit>
       <trans-unit id="555720515547706264" datatype="html">
@@ -18457,7 +18500,7 @@ Are you ready to receive feedback on this answer?</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">341,342</context>
+          <context context-type="linenumber">342,343</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8185078869695276161" datatype="html">
@@ -19600,11 +19643,11 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
         <source>AI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/edit-discussion-advanced/edit-discussion-advanced.component.html</context>
-          <context context-type="linenumber">34,36</context>
+          <context context-type="linenumber">35,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">62,65</context>
+          <context context-type="linenumber">63,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="831017338718169987" datatype="html">
@@ -21452,7 +21495,7 @@ Warning: This will delete all existing choices and buckets in this activity.</so
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">112,115</context>
+          <context context-type="linenumber">113,116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3824537844289284943" datatype="html">
@@ -21609,201 +21652,201 @@ Warning: This will delete all existing choices in this activity.</source>
         <source> Enable AI Model </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">76,79</context>
+          <context context-type="linenumber">77,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9153897398545804453" datatype="html">
         <source>Score On</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">83,85</context>
+          <context context-type="linenumber">84,86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1230154438678955604" datatype="html">
         <source>Change</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">90,93</context>
+          <context context-type="linenumber">91,94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7401107549258505528" datatype="html">
         <source> Show Score </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">102,106</context>
+          <context context-type="linenumber">103,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6706329976663713413" datatype="html">
         <source> Enable Feedback Rules </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">122,124</context>
+          <context context-type="linenumber">123,125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5056621402071854825" datatype="html">
         <source>Scoring Rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">134,137</context>
+          <context context-type="linenumber">135,138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2840439048375115947" datatype="html">
         <source>Add Scoring Rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">139,142</context>
+          <context context-type="linenumber">140,143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1749702431264125217" datatype="html">
         <source>Feedback Text</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">167,169</context>
+          <context context-type="linenumber">168,170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6318060955337736972" datatype="html">
         <source>Move Scoring Rule Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">178,180</context>
+          <context context-type="linenumber">179,181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8741073904951621119" datatype="html">
         <source>Move Scoring Rule Down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">189,191</context>
+          <context context-type="linenumber">190,192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8481143767365565734" datatype="html">
         <source>Delete Scoring Rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">199,201</context>
+          <context context-type="linenumber">200,202</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4753983371217895606" datatype="html">
         <source> Enable Multiple Attempt Feedback </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">219,222</context>
+          <context context-type="linenumber">220,223</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6924674031457346140" datatype="html">
         <source>Multiple Attempt Scoring Rules</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">224,227</context>
+          <context context-type="linenumber">225,228</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2707777420645958826" datatype="html">
         <source>Add Multiple Attempt Scoring Rule</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">229,232</context>
+          <context context-type="linenumber">230,233</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2885623017281914681" datatype="html">
         <source>Previous Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">245,248</context>
+          <context context-type="linenumber">246,249</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">354,357</context>
+          <context context-type="linenumber">355,358</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2466216299740593982" datatype="html">
         <source>Current Score</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">254,257</context>
+          <context context-type="linenumber">255,258</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">364,367</context>
+          <context context-type="linenumber">365,368</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8219288603984689566" datatype="html">
         <source>Feedback to Student</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">265,267</context>
+          <context context-type="linenumber">266,268</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">452,454</context>
+          <context context-type="linenumber">453,455</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1237543279965214424" datatype="html">
         <source>Move Multiple Attempt Scoring Rule Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">281,283</context>
+          <context context-type="linenumber">282,284</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5646689888494364443" datatype="html">
         <source>Move Multiple Attempt Scoring Rule Down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">297,299</context>
+          <context context-type="linenumber">298,300</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8247485612014750779" datatype="html">
         <source>Delet Multiple Attempt Scoring</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">307,309</context>
+          <context context-type="linenumber">308,310</context>
         </context-group>
       </trans-unit>
       <trans-unit id="681347196878226021" datatype="html">
         <source> Enable Notifications </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">327,330</context>
+          <context context-type="linenumber">328,331</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5851560788527570644" datatype="html">
         <source>Notifications</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">332,335</context>
+          <context context-type="linenumber">333,336</context>
         </context-group>
       </trans-unit>
       <trans-unit id="370200567263525921" datatype="html">
         <source>Move Notification Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">385,387</context>
+          <context context-type="linenumber">386,388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2769177863929534863" datatype="html">
         <source>Move Notification Down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">401,403</context>
+          <context context-type="linenumber">402,404</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1807548935384776633" datatype="html">
         <source>Delete Notification</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">411,413</context>
+          <context context-type="linenumber">412,414</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6336206965755061198" datatype="html">
         <source> Enable Ambient Display Dismiss Mode </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">426,428</context>
+          <context context-type="linenumber">427,429</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4441143426637747672" datatype="html">
         <source>Dismiss Code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">430,433</context>
+          <context context-type="linenumber">431,434</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.html</context>
@@ -21814,63 +21857,63 @@ Warning: This will delete all existing choices in this activity.</source>
         <source> Notify Student </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">446,448</context>
+          <context context-type="linenumber">447,449</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6137238378032253613" datatype="html">
         <source> Notify Teacher </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">466,468</context>
+          <context context-type="linenumber">467,469</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6470995886890122968" datatype="html">
         <source>Feedback to Teacher</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">472,474</context>
+          <context context-type="linenumber">473,475</context>
         </context-group>
       </trans-unit>
       <trans-unit id="853281253580647095" datatype="html">
         <source> Use Custom Completion Criteria </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">491,493</context>
+          <context context-type="linenumber">492,494</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6321190757824576813" datatype="html">
         <source>Custom Completion Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">495,498</context>
+          <context context-type="linenumber">496,499</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3954026354727494376" datatype="html">
         <source>Add Completion Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">500,503</context>
+          <context context-type="linenumber">501,504</context>
         </context-group>
       </trans-unit>
       <trans-unit id="376261460573165321" datatype="html">
         <source>Move Completion Criteria Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">560,562</context>
+          <context context-type="linenumber">561,563</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2584224885214103035" datatype="html">
         <source>Move Completion Criteria Down</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">573,575</context>
+          <context context-type="linenumber">574,576</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4117701430807776885" datatype="html">
         <source>Delete Completion Criteria</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/openResponse/edit-open-response-advanced/edit-open-response-advanced.component.html</context>
-          <context context-type="linenumber">583,585</context>
+          <context context-type="linenumber">584,586</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8705933649296793690" datatype="html">
@@ -23842,6 +23885,34 @@ If this problem continues, let your teacher know and move on to the next activit
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5592957437854844960" datatype="html">
+        <source>Teacher Reflections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.html</context>
+          <context context-type="linenumber">1,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7647281946467760200" datatype="html">
+        <source>Capture your thoughts as you reflect on this activity. Your answers won&apos;t be shown to students.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.html</context>
+          <context context-type="linenumber">4,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6385027676909711398" datatype="html">
+        <source>Enter your reflection...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.html</context>
+          <context context-type="linenumber">17,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8524381391756395002" datatype="html">
+        <source>Answer saved</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/teacher-reflection/teacher-reflection.component.ts</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8784868761263923006" datatype="html">
