@@ -5,7 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  imports: [EditComponentPrompt, FormsModule, MatCheckboxModule],
+  imports: [
+    EditComponentPrompt,
+    FormsModule,
+    MatCheckboxModule
+  ],
   styles: ['mat-checkbox { display: block; }'],
   templateUrl: 'discussion-authoring.component.html'
 })

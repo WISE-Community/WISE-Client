@@ -1,0 +1,53 @@
+<mat-expansion-panel class="w-full !mt-4">
+  <mat-expansion-panel-header>
+    <mat-panel-title i18n>Teacher Reflection Questions</mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-2">
+        <span i18n
+          >These questions will only appear for teachers (in the Grade by Step view for this
+          activity in the Teacher Tools).</span
+        >
+        <button
+          mat-icon-button
+          color="primary"
+          type="button"
+          (click)="addQuestion()"
+          class="flex items-center gap-1"
+          matTooltip="Add teacher reflection question"
+          i18n-matTooltip
+          matTooltipPosition="above"
+        >
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+
+      @for (q of componentContent()?.teacher?.reflectionQuestions; track q.id; let idx = $index) {
+        <div class="flex items-center gap-2">
+          <mat-form-field appearance="fill" subscriptSizing="dynamic" class="flex-grow">
+            <mat-label i18n>Question {{ idx + 1 }}</mat-label>
+            <input
+              matInput
+              [(ngModel)]="q.text"
+              (ngModelChange)="onQuestionTextChanged()"
+              placeholder="e.g. Which, if any, response surprised you?"
+              i18n-placeholder
+            />
+          </mat-form-field>
+          <button
+            mat-icon-button
+            color="warn"
+            type="button"
+            (click)="deleteQuestion(idx)"
+            matTooltip="Delete question"
+            i18n-matTooltip
+            matTooltipPosition="above"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</mat-expansion-panel>

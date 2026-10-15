@@ -3,7 +3,10 @@
     <ng-template mat-tab-label>
       <mat-icon>settings</mat-icon>&nbsp;<span i18n>General</span>
     </ng-template>
-    <edit-component-width [componentContent]="componentContent" />
+    <div class="flex flex-col">
+      <edit-component-width [componentContent]="componentContent" />
+      <edit-component-teacher-reflections [componentContent]="componentContent" />
+    </div>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>

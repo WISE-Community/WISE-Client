@@ -24,7 +24,7 @@
   </div>
 </div>
 <div class="flex flex-col flex-wrap md:flex-row justify-start md:items-center gap-2">
-  <color-chooser [chosenColor]="colorControl.value" (chooseColorEvent)="chooseColor($event)" />
+  <color-chooser [color]="colorControl.value" (colorChange)="chooseColor($event)" />
   <span class="flex-auto"></span>
   <div class="flex gap-2 justify-end">
     <button mat-button (click)="close()" i18n>Cancel</button>

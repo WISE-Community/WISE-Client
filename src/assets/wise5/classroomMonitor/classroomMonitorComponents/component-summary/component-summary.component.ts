@@ -27,6 +27,7 @@ import {
   MatDialogRef
 } from '@angular/material/dialog';
 import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-display/discussion-summary/discussion-summary.component';
+import { TeacherReflectionComponent } from '../../../teacher-reflection/teacher-reflection.component';
 
 @Component({
   imports: [
@@ -42,6 +43,7 @@ import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-
     OpenResponseAiSummaryComponent,
     NgTemplateOutlet,
     PeerGroupButtonComponent,
+    TeacherReflectionComponent,
     TeacherSummaryDisplayComponent
   ],
   selector: 'component-summary',
@@ -147,6 +149,14 @@ export class ComponentSummaryComponent {
       },
       panelClass: 'summary-dialog'
     });
+  }
+
+  protected get hasReflectionQuestions(): boolean {
+    return (this.component.teacher?.reflectionQuestions?.length ?? 0) > 0;
+  }
+
+  protected get isSinglePeriod(): boolean {
+    return this.periodId != null && this.periodId !== -1;
   }
 }
 
