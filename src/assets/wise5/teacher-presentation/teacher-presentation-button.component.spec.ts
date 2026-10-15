@@ -15,9 +15,7 @@ describe('TeacherPresentationButtonComponent', () => {
   beforeEach(async () => {
     dialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
     configServiceSpy = jasmine.createSpyObj('ConfigService', ['getPeriods', 'getRunId']);
-    configServiceSpy.getPeriods.and.returnValue([
-      { periodId: 10, periodName: 'Period 1' }
-    ]);
+    configServiceSpy.getPeriods.and.returnValue([{ periodId: 10, periodName: 'Period 1' }]);
 
     await TestBed.configureTestingModule({
       imports: [TeacherPresentationButtonComponent],
@@ -25,7 +23,10 @@ describe('TeacherPresentationButtonComponent', () => {
         TeacherPresentationSelectionStore,
         {
           provide: TeacherPresentationConfigService,
-          useValue: jasmine.createSpyObj('TeacherPresentationConfigService', ['getConfig', 'saveConfig'])
+          useValue: jasmine.createSpyObj('TeacherPresentationConfigService', [
+            'getConfig',
+            'saveConfig'
+          ])
         },
         { provide: MatDialog, useValue: dialogSpy },
         { provide: ConfigService, useValue: configServiceSpy }
@@ -46,7 +47,7 @@ describe('TeacherPresentationButtonComponent', () => {
     fixture.detectChanges();
 
     expect(component.isDisabled).toBeTrue();
-    expect(component.tooltipText).toContain('Choose a specific period');
+    expect(component.tooltipText).toContain('Choose a specific period to present');
   });
 
   it('should be disabled when no posts or comments are selected', () => {
@@ -54,7 +55,7 @@ describe('TeacherPresentationButtonComponent', () => {
     fixture.detectChanges();
 
     expect(component.isDisabled).toBeTrue();
-    expect(component.tooltipText).toContain('Choose a post or comment first');
+    expect(component.tooltipText).toContain('Select some posts or comments to present');
   });
 
   it('should be enabled when a single period is chosen and at least one item is selected', () => {
@@ -63,7 +64,7 @@ describe('TeacherPresentationButtonComponent', () => {
     fixture.detectChanges();
 
     expect(component.isDisabled).toBeFalse();
-    expect(component.tooltipText).toContain('Launch classroom presentation view');
+    expect(component.tooltipText).toContain('Launch presentation view');
   });
 
   it('should open TeacherPresentationDialogComponent when clicked and enabled', () => {
@@ -76,11 +77,13 @@ describe('TeacherPresentationButtonComponent', () => {
 
     expect(dialogSpy.open).toHaveBeenCalledTimes(1);
     const dialogArgs = dialogSpy.open.calls.mostRecent().args;
-    expect(dialogArgs[1]?.data).toEqual(jasmine.objectContaining({
-      nodeId: 'node1',
-      periodId: 10,
-      periodName: 'Period 1',
-      store: store
-    }));
+    expect(dialogArgs[1]?.data).toEqual(
+      jasmine.objectContaining({
+        nodeId: 'node1',
+        periodId: 10,
+        periodName: 'Period 1',
+        store: store
+      })
+    );
   });
 });

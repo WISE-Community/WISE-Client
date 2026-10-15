@@ -71,13 +71,13 @@ export class TeacherPresentationButtonComponent {
 
   get tooltipText(): string {
     if (this.isAllPeriods) {
-      return $localize`Choose a specific period to present student work.`;
+      return $localize`Choose a specific period to present`;
     }
     const store = this.effectiveStore;
     if (!store || !store.hasSelections()) {
-      return $localize`Choose a post or comment first to present student work.`;
+      return $localize`Select some posts or comments to present`;
     }
-    return $localize`Launch classroom presentation view`;
+    return $localize`Launch presentation view`;
   }
 
   openPresentationDialog(): void {
