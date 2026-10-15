@@ -11,6 +11,7 @@
         <mat-button-toggle
           value="controls"
           [checked]="!hideControls"
+          [disabled]="isEditingPrompt && isPromptDirty"
           (click)="toggleControls()"
           matTooltip="Toggle presentation controls"
           i18n-matTooltip
@@ -79,6 +80,7 @@
           <textarea
             matInput
             [(ngModel)]="editedPrompt"
+            #promptInput="ngModel"
             (keydown.enter)="$event.preventDefault(); savePrompt()"
             rows="1"
             maxlength="1000"

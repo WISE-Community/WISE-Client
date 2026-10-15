@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -40,6 +40,8 @@ export interface TeacherPresentationDialogData {
   templateUrl: './teacher-presentation-dialog.component.html'
 })
 export class TeacherPresentationDialogComponent implements OnInit {
+  @ViewChild('promptInput', { read: NgModel }) protected promptInput?: NgModel;
+
   protected editedPrompt = '';
   protected hideControls = false;
   protected isEditingPrompt = false;
@@ -73,6 +75,10 @@ export class TeacherPresentationDialogComponent implements OnInit {
     return (this.effectivePrompt?.trim() ?? '') !== (this.defaultPrompt?.trim() ?? '');
   }
 
+  get isPromptDirty(): boolean {
+    return this.promptInput ? !!this.promptInput.dirty : this.editedPrompt !== this.effectivePrompt;
+  }
+
   get isAnonymize(): boolean {
     return this.store.studentNamesDisplay() === 'anonymize';
   }
@@ -85,6 +91,9 @@ export class TeacherPresentationDialogComponent implements OnInit {
 
   toggleControls(checked?: boolean): void {
     this.hideControls = checked !== undefined ? !checked : !this.hideControls;
+    if (this.hideControls) {
+      this.isEditingPrompt = false;
+    }
   }
 
   startEditPrompt(): void {

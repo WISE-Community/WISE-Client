@@ -42,7 +42,7 @@ describe('TeacherPresentationDialogComponent', () => {
                 }
               }
             },
-            periodId: 10,
+            periodId: 1,
             periodName: 'Period 1',
             store: s
           }),
@@ -169,6 +169,43 @@ describe('TeacherPresentationDialogComponent', () => {
 
     component.toggleControls();
     expect(component['hideControls']).toBeTrue();
+  });
+
+  it('should set isEditingPrompt to false when hiding controls via toggleControls', () => {
+    component.startEditPrompt();
+    fixture.detectChanges();
+    expect(component['isEditingPrompt']).toBeTrue();
+
+    component.toggleControls(false); // hide controls
+    expect(component['hideControls']).toBeTrue();
+    expect(component['isEditingPrompt']).toBeFalse();
+  });
+
+  it('should disable toggle controls button when editing prompt and textarea is dirty', () => {
+    component.startEditPrompt();
+    fixture.detectChanges();
+
+    // Pristine: toggle controls button is NOT disabled
+    const toggleButton = fixture.nativeElement.querySelector('mat-button-toggle');
+    expect(component.isPromptDirty).toBeFalse();
+    expect(
+      toggleButton.classList.contains('mat-button-toggle-disabled') ||
+        toggleButton.querySelector('button[disabled]') != null ||
+        toggleButton.attributes.getNamedItem('ng-reflect-disabled')?.value === 'true'
+    ).toBeFalse();
+
+    // Dirty: toggle controls button IS disabled
+    const textarea = fixture.nativeElement.querySelector('textarea') as HTMLTextAreaElement;
+    textarea.value = 'Changed prompt text';
+    textarea.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    expect(component.isPromptDirty).toBeTrue();
+    expect(
+      toggleButton.classList.contains('mat-button-toggle-disabled') ||
+        toggleButton.querySelector('button[disabled]') != null ||
+        toggleButton.attributes.getNamedItem('ng-reflect-disabled')?.value === 'true'
+    ).toBeTrue();
   });
 
   it('should show placeholder text when prompt is empty and controls are shown', () => {
