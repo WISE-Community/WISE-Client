@@ -47,86 +47,93 @@
     </div>
   </div>
 </div>
-<div class="pb-6 px-6">
-  <!-- Presentation Prompt -->
-  <div
-    class="flex items-center gap-1 mb-4"
-    [class.min-h-14]="!hideControls || effectivePrompt.trim()"
-  >
-    @if (!isEditingPrompt) {
-      @if (effectivePrompt.trim()) {
-        <span class="presentation-prompt">
-          {{ effectivePrompt }}
-        </span>
-      } @else if (!hideControls) {
-        <span class="presentation-prompt secondary-text" i18n>
-          [Add optional presentation prompt]
-        </span>
-      }
-      @if (!hideControls) {
-        <button
-          mat-icon-button
-          (click)="startEditPrompt()"
-          matTooltip="Edit prompt"
-          i18n-matTooltip
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-      }
-    } @else {
-      <div class="flex items-center gap-2 w-full">
-        <mat-form-field class="grow" appearance="fill" subscriptSizing="dynamic">
-          <mat-label i18n>Presentation Prompt</mat-label>
-          <textarea
-            matInput
-            [(ngModel)]="editedPrompt"
-            #promptInput="ngModel"
-            (keydown.enter)="$event.preventDefault(); savePrompt()"
-            rows="1"
-            maxlength="1000"
-          ></textarea>
-        </mat-form-field>
-        <div class="flex items-center shrink-0">
-          <button mat-icon-button (click)="savePrompt()" matTooltip="Save prompt" i18n-matTooltip>
-            <mat-icon>check</mat-icon>
+<div class="pb-6 px-6 w-full">
+  <div class="max-w-[1600px] mx-auto">
+    <!-- Presentation Prompt -->
+    <div
+      class="flex items-center gap-1 mb-4"
+      [class.min-h-14]="!hideControls || effectivePrompt.trim()"
+    >
+      @if (!isEditingPrompt) {
+        @if (effectivePrompt.trim()) {
+          <span class="presentation-prompt">
+            {{ effectivePrompt }}
+          </span>
+        } @else if (!hideControls) {
+          <span class="presentation-prompt secondary-text" i18n>
+            [Add optional presentation prompt]
+          </span>
+        }
+        @if (!hideControls) {
+          <button
+            mat-icon-button
+            (click)="startEditPrompt()"
+            matTooltip="Edit prompt"
+            i18n-matTooltip
+          >
+            <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="cancelEditPrompt()" matTooltip="Cancel" i18n-matTooltip>
-            <mat-icon>cancel</mat-icon>
-          </button>
-          @if (isSavedPromptDifferentFromDefault) {
+        }
+      } @else {
+        <div class="flex items-center gap-2 w-full max-w-5xl">
+          <mat-form-field class="grow" appearance="fill" subscriptSizing="dynamic">
+            <mat-label i18n>Presentation Prompt</mat-label>
+            <textarea
+              matInput
+              [(ngModel)]="editedPrompt"
+              #promptInput="ngModel"
+              (keydown.enter)="$event.preventDefault(); savePrompt()"
+              rows="1"
+              maxlength="1000"
+            ></textarea>
+          </mat-form-field>
+          <div class="flex items-center shrink-0">
+            <button mat-icon-button (click)="savePrompt()" matTooltip="Save prompt" i18n-matTooltip>
+              <mat-icon>check</mat-icon>
+            </button>
             <button
               mat-icon-button
-              (click)="resetPromptToDefault()"
-              matTooltip="Reset to default"
+              (click)="cancelEditPrompt()"
+              matTooltip="Cancel"
               i18n-matTooltip
             >
-              <mat-icon>restore</mat-icon>
+              <mat-icon>cancel</mat-icon>
             </button>
-          }
+            @if (isSavedPromptDifferentFromDefault) {
+              <button
+                mat-icon-button
+                (click)="resetPromptToDefault()"
+                matTooltip="Reset to default"
+                i18n-matTooltip
+              >
+                <mat-icon>restore</mat-icon>
+              </button>
+            }
+          </div>
         </div>
-      </div>
-    }
-  </div>
+      }
+    </div>
 
-  <!-- Presentation Body -->
-  <div class="presentation-body">
-    @if (store.selectedCount() === 0) {
-      <div class="flex flex-col items-center justify-center p-12 text-center text-gray-500">
-        <mat-icon class="mat-48 mb-2">visibility_off</mat-icon>
-        <div class="mat-body-1" i18n>No posts selected. Close and check posts to display.</div>
-      </div>
-    } @else {
-      <discussion-teacher
-        #discussionTeacher
-        [nodeId]="data.nodeId"
-        [component]="data.component"
-        [periodId]="data.periodId"
-        [anonymizeResponses]="isAnonymize"
-        [studentNamesDisplayMode]="store.studentNamesDisplay()"
-        [presentationSelectedIds]="store.selectedIds()"
-        [presentationStore]="store"
-        [mode]="'presentation'"
-      />
-    }
+    <!-- Presentation Body -->
+    <div class="presentation-body">
+      @if (store.selectedCount() === 0) {
+        <div class="flex flex-col items-center justify-center p-12 text-center text-gray-500">
+          <mat-icon class="mat-48 mb-2">visibility_off</mat-icon>
+          <div class="mat-body-1" i18n>No posts selected. Close and check posts to display.</div>
+        </div>
+      } @else {
+        <discussion-teacher
+          #discussionTeacher
+          [nodeId]="data.nodeId"
+          [component]="data.component"
+          [periodId]="data.periodId"
+          [anonymizeResponses]="isAnonymize"
+          [studentNamesDisplayMode]="store.studentNamesDisplay()"
+          [presentationSelectedIds]="store.selectedIds()"
+          [presentationStore]="store"
+          [mode]="'presentation'"
+        />
+      }
+    </div>
   </div>
 </div>
