@@ -1,0 +1,60 @@
+<div class="ideas-presentation flex flex-col gap-6 p-4">
+  @for (section of presentedSections; track section.ideaId ?? 'standalone') {
+    <div class="idea-section">
+      @if (section.ideaId != null) {
+        <div class="idea-category-card p-4 sm:p-5 rounded-xl bg-blue-50/70 border border-blue-200 shadow-xs flex flex-col gap-4">
+          <div class="idea-category-header flex items-center gap-3">
+            <mat-icon class="text-blue-600 mat-28 shrink-0">lightbulb</mat-icon>
+            <div class="mat-headline-6 font-semibold text-gray-900 m-0">
+              {{ section.ideaText }}
+            </div>
+          </div>
+
+          @if (section.responses.length > 0) {
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+              @for (response of section.responses; track $index) {
+                <div class="response-card p-3 rounded-lg border border-gray-200 bg-white shadow-xs flex flex-col gap-2">
+                  @if (studentNamesDisplayMode !== 'hide') {
+                    <div class="flex items-center gap-2">
+                      <mat-icon class="mat-18 shrink-0" [style.color]="response.avatarColor">
+                        account_circle
+                      </mat-icon>
+                      <span class="text-sm font-medium text-gray-700">{{ getDisplayName(response) }}</span>
+                    </div>
+                  }
+                  <div class="response-texts flex flex-col gap-1 text-gray-800 mat-body-1">
+                    @for (text of response.texts; track $index) {
+                      <div>"{{ text }}"</div>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      } @else {
+        @if (section.responses.length > 0) {
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+            @for (response of section.responses; track $index) {
+              <div class="response-card p-3 rounded-lg border border-gray-200 bg-white shadow-xs flex flex-col gap-2">
+                @if (studentNamesDisplayMode !== 'hide') {
+                  <div class="flex items-center gap-2">
+                    <mat-icon class="mat-18 shrink-0" [style.color]="response.avatarColor">
+                      account_circle
+                    </mat-icon>
+                    <span class="text-sm font-medium text-gray-700">{{ getDisplayName(response) }}</span>
+                  </div>
+                }
+                <div class="response-texts flex flex-col gap-1 text-gray-800 mat-body-1">
+                  @for (text of response.texts; track $index) {
+                    <div>"{{ text }}"</div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        }
+      }
+    </div>
+  }
+</div>

@@ -78,6 +78,7 @@ export class DiscussionSummaryComponent
         this.periodId,
         this.nodeId,
         this.componentId,
+        'Discussion',
         'Discussion'
       );
     }

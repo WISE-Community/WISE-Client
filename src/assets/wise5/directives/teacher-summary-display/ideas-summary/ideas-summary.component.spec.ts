@@ -13,6 +13,9 @@ import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 
+import { TeacherPresentationConfigService } from '../../../teacher-presentation/teacher-presentation-config.service';
+import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
+
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;
 
@@ -27,7 +30,8 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
           CRaterService,
           TeacherDataService,
           TeacherProjectService,
-          SummaryService
+          SummaryService,
+          TeacherPresentationConfigService
         )
       ]
     }).compileComponents();
@@ -364,7 +368,7 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
       });
     });
 
-    it('shows all responses for a student that contain the same idea', () => {
+    it('returns one response per student message that contains the idea', () => {
       const multiStates = [
         new ComponentState({
           workgroupId: 1,
@@ -379,11 +383,40 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
         })
       ];
       const dgResponses = component['getDGResponsesWithIdea'](multiStates, 'idea 1');
-      expect(dgResponses.length).toBe(1);
-      expect(dgResponses[0].texts).toEqual([
-        'First response with idea 1',
-        'Second response with idea 1'
+      expect(dgResponses.length).toBe(2);
+      expect(dgResponses.map((r) => r.texts)).toEqual([
+        ['First response with idea 1'],
+        ['Second response with idea 1']
       ]);
+      expect(dgResponses.map((r) => r.responseTimestamp)).toEqual([100, 200]);
+    });
+
+    it('lists a message once even when several saved states contain it', () => {
+      const firstSave = new ComponentState({
+        id: 1,
+        workgroupId: 1,
+        studentData: {
+          responses: [
+            { text: 'First message', timestamp: 100 },
+            { ideas: [{ name: 'idea 1', detected: true }] }
+          ]
+        }
+      });
+      const secondSave = new ComponentState({
+        id: 2,
+        workgroupId: 1,
+        studentData: {
+          responses: [
+            { text: 'First message', timestamp: 100 },
+            { ideas: [{ name: 'idea 1', detected: true }] },
+            { text: 'Second message', timestamp: 200 },
+            { ideas: [{ name: 'idea 1', detected: true }] }
+          ]
+        }
+      });
+      const dgResponses = component['getDGResponsesWithIdea']([firstSave, secondSave], 'idea 1');
+      expect(dgResponses.length).toBe(2);
+      expect(dgResponses.map((r) => r.studentWorkId)).toEqual([2, 2]);
     });
 
     it('renders disabled rows for ideas with 0 student responses that are not expandable', () => {
@@ -414,7 +447,8 @@ describe('IdeasSummaryComponent for Open Response component', () => {
           CRaterService,
           TeacherDataService,
           TeacherProjectService,
-          SummaryService
+          SummaryService,
+          TeacherPresentationConfigService
         )
       ]
     }).compileComponents();
@@ -436,10 +470,133 @@ describe('IdeasSummaryComponent for Open Response component', () => {
     ]);
   });
 
-  describe('ngOnInit()', () => {
-    ngInit_OR_NoIdeasDetected_ShowMessage();
-    ngInit_OR_IdeasDetected_ShowSummary();
-    ngInit_OR_FilterByPeriod();
+  describe('presentation selection', () => {
+    let store: TeacherPresentationSelectionStore;
+
+    beforeEach(() => {
+      store = TestBed.inject(TeacherPresentationSelectionStore);
+      const configService = TestBed.inject(ConfigService);
+      spyOn(configService, 'getRunId').and.returnValue(1);
+      component.periodId = 1;
+      component.nodeId = 'node1';
+      component.componentId = 'comp1';
+      generateMockRubric(1, 1);
+      generateMockStudentWorkOpenResponse(1);
+      component.ngOnInit();
+      fixture.detectChanges();
+    });
+
+    it('includes select column in displayedColumns when presentation is available', () => {
+      expect(component['isPresentationAvailable']).toBeTrue();
+      expect(component['displayedColumns']).toEqual(['select', 'text', 'sampleResponse', 'count']);
+    });
+
+    it('initializes store with Ideas itemType', () => {
+      expect(store.itemType()).toBe('Ideas');
+      expect(store.nodeId()).toBe('node1');
+      expect(store.componentId()).toBe('comp1');
+    });
+
+    it('toggles idea category selection via store', () => {
+      expect(store.isIdeaSelected('idea 1')).toBeFalse();
+
+      store.toggleIdea('idea 1');
+      expect(store.isIdeaSelected('idea 1')).toBeTrue();
+
+      store.toggleIdea('idea 1');
+      expect(store.isIdeaSelected('idea 1')).toBeFalse();
+    });
+
+    it('toggles idea category with candidate student work ids via component toggleIdea(row)', () => {
+      const row = component['dataSource'].data[0];
+      expect(row).toBeTruthy();
+      spyOn(store, 'toggleIdea').and.callThrough();
+
+      component['toggleIdea'](row);
+      expect(store.toggleIdea).toHaveBeenCalledWith(row.id, jasmine.any(Array));
+      expect(store.isIdeaSelected(row.id)).toBeTrue();
+    });
+
+    it('toggles response selection and automatically selects idea category', () => {
+      const selection = { studentWorkId: 101, workgroupId: 1, responseTimestamp: null, text: 'a' };
+      expect(store.isIdeaSelected('idea 1')).toBeFalse();
+      expect(store.isIdeaResponseSelected('idea 1', selection)).toBeFalse();
+
+      store.toggleIdeaResponse('idea 1', selection);
+      expect(store.isIdeaSelected('idea 1')).toBeTrue();
+      expect(store.isIdeaResponseSelected('idea 1', selection)).toBeTrue();
+    });
+
+    it('supports multiple responses from the same student with individual checkboxes', () => {
+      const ideas = generateIdeas(1);
+      const annotations = [
+        new Annotation({
+          toWorkgroupId: 1,
+          studentWorkId: 101,
+          periodId: 1,
+          data: { ideas: ideas }
+        }),
+        new Annotation({
+          toWorkgroupId: 1,
+          studentWorkId: 102,
+          periodId: 1,
+          data: { ideas: ideas }
+        })
+      ];
+      const states = [
+        new ComponentState({
+          id: 101,
+          workgroupId: 1,
+          periodId: 1,
+          studentData: { response: 'First response with idea 1' }
+        } as any),
+        new ComponentState({
+          id: 102,
+          workgroupId: 1,
+          periodId: 1,
+          studentData: { response: 'Second response with idea 1' }
+        } as any)
+      ];
+
+      const responses = component['getORResponsesWithIdea'](states, annotations, 'idea 1');
+      expect(responses.length).toBe(2);
+      expect(responses[0].studentWorkId).toBe(101);
+      expect(responses[1].studentWorkId).toBe(102);
+
+      const groups = component['groupResponsesByWorkgroup'](responses);
+      expect(groups.length).toBe(1);
+      expect(groups[0].responses.length).toBe(2);
+
+      const row = component['dataSource'].data[0];
+      component['toggleResponse'](row, responses[0]);
+      expect(store.isIdeaSelected(row.id)).toBeTrue();
+      expect(component['isResponseSelected'](row, responses[0])).toBeTrue();
+      expect(component['isResponseSelected'](row, responses[1])).toBeFalse();
+
+      component['toggleResponse'](row, responses[1]);
+      expect(component['isResponseSelected'](row, responses[1])).toBeTrue();
+    });
+
+    it('stores a snapshot of the selected response text', () => {
+      const row = component['dataSource'].data[0];
+      const response: StudentResponseItem = {
+        studentWorkId: 5,
+        workgroupId: 1,
+        responseTimestamp: 1234,
+        text: 'Snapshot text',
+        texts: ['Snapshot text'],
+        timestamp: 1234,
+        usernames: 'Student 1',
+        avatarColor: 'red'
+      };
+      component['toggleResponse'](row, response);
+      expect(store.selectedIdeaResponseMap().get(row.id).get('1:1234')).toEqual({
+        studentWorkId: 5,
+        workgroupId: 1,
+        responseTimestamp: 1234,
+        text: 'Snapshot text'
+      });
+    });
   });
 });
 

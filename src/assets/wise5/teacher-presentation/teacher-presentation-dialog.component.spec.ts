@@ -189,4 +189,52 @@ describe('TeacherPresentationDialogComponent', () => {
     component.close();
     expect(dialogRefSpy.close).toHaveBeenCalledTimes(1);
   });
+
+  it('should return component prompt from component content', () => {
+    expect(component.componentPrompt).toBeNull();
+
+    component.data.component = {
+      id: 'comp1',
+      type: 'OpenResponse',
+      prompt: 'What do you think happens to the energy?'
+    } as any;
+    expect(component.componentPrompt).toBe('What do you think happens to the energy?');
+  });
+
+  it('should use default Ideas prompt when itemType is Ideas and no authoring prompt is provided', () => {
+    component.data.component = {
+      id: 'comp1',
+      type: 'OpenResponse',
+      content: {}
+    } as any;
+    store.itemType.set('Ideas');
+    store.prompt.set(null);
+
+    expect(component.effectivePrompt).toBe(
+      "Here are your classmates' ideas. Which ideas do you agree with or want to explore further?"
+    );
+  });
+
+  it('should render ideas-presentation when itemType is Ideas and hasSelections is true', () => {
+    store.itemType.set('Ideas');
+    store.selectedIdeaIds.set(new Set(['idea_1']));
+    fixture.detectChanges();
+
+    const ideasEl = fixture.nativeElement.querySelector('ideas-presentation');
+    expect(ideasEl).toBeTruthy();
+    expect(fixture.nativeElement.textContent).not.toContain('No posts selected');
+    expect(fixture.nativeElement.textContent).not.toContain('No ideas selected');
+  });
+
+  it('should render Ideas empty state when itemType is Ideas and hasSelections is false', () => {
+    store.itemType.set('Ideas');
+    store.selectedIdeaIds.set(new Set());
+    store.standaloneResponses.set(new Map());
+    fixture.detectChanges();
+
+    const ideasEl = fixture.nativeElement.querySelector('ideas-presentation');
+    expect(ideasEl).toBeNull();
+    expect(fixture.nativeElement.textContent).toContain('No ideas selected. Close and check ideas to display.');
+  });
 });
+

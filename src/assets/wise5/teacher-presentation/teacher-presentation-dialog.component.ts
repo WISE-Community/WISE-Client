@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
 import { StudentNamesDisplayMode } from './teacher-presentation-config';
 import { DiscussionTeacherComponent } from '../components/discussion/discussion-teacher/discussion-teacher.component';
+import { IdeasPresentationComponent } from './ideas-presentation/ideas-presentation.component';
 
 export interface TeacherPresentationDialogData {
   nodeId: string;
@@ -34,7 +35,8 @@ export interface TeacherPresentationDialogData {
     MatButtonToggleModule,
     MatSelectModule,
     MatTooltipModule,
-    DiscussionTeacherComponent
+    DiscussionTeacherComponent,
+    IdeasPresentationComponent
   ],
   styleUrl: './teacher-presentation-dialog.component.scss',
   templateUrl: './teacher-presentation-dialog.component.html'
@@ -57,11 +59,18 @@ export class TeacherPresentationDialogComponent implements OnInit {
   }
 
   get defaultPrompt(): string {
-    return (
-      this.data.component?.content?.teacher?.presentation?.prompt ||
-      this.data.component?.content?.presentation?.prompt ||
-      $localize`Here are some of your classmates' posts. Pick one to discuss with your partner.`
-    );
+    const authoringPrompt = this.data.component?.content?.presentation?.prompt;
+    if (authoringPrompt) {
+      return authoringPrompt;
+    }
+    if (this.store.itemType() === 'Ideas') {
+      return $localize`Here are your classmates' ideas. Which ideas do you agree with or want to explore further?`;
+    }
+    return $localize`Here are some of your classmates' posts. Pick one to discuss with your partner`;
+  }
+
+  get componentPrompt(): string | null {
+    return this.data.component?.prompt || this.data.component?.content?.prompt || null;
   }
 
   get effectivePrompt(): string {

@@ -1,7 +1,7 @@
 import { Annotation } from '../../../common/Annotation';
 import { AnnotationService } from '../../../services/annotationService';
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
 import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
@@ -10,23 +10,40 @@ import { DialogGuidanceSummaryData } from '../summary-data/DialogGuidanceSummary
 import { FormsModule } from '@angular/forms';
 import { getAvatarColorForWorkgroupId } from '../../../common/workgroup/workgroup';
 import { IdeasSummaryData } from '../summary-data/IdeasSummaryData';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Node } from '../../../common/Node';
+import { ComponentContent } from '../../../common/ComponentContent';
 import { OpenResponseSummaryData } from '../summary-data/OpenResponseSummaryData';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
+import { TeacherPresentationButtonComponent } from '../../../teacher-presentation/teacher-presentation-button.component';
+import { IdeasPresentationResponse } from '../../../teacher-presentation/teacher-presentation-config';
+import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 
 export interface StudentResponseItem {
+  studentWorkId?: number;
+  workgroupId?: number;
+  /** Timestamp of the student's chat message (Dialog Guidance); null for single-response work. */
+  responseTimestamp?: number | null;
   text: string;
   texts: string[];
   timestamp: number;
   usernames: string;
   avatarColor: string;
+}
+
+export interface StudentResponseGroup {
+  workgroupId: number;
+  usernames: string;
+  avatarColor: string;
+  responses: StudentResponseItem[];
 }
 
 export interface IdeaTableRow {
@@ -37,18 +54,22 @@ export interface IdeaTableRow {
   fullSampleResponse: string;
   isSampleResponseTruncated: boolean;
   responses: StudentResponseItem[];
+  studentGroups: StudentResponseGroup[];
 }
 
 @Component({
   imports: [
     CommonModule,
     FormsModule,
+    MatCheckboxModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    TeacherPresentationButtonComponent
   ],
+  providers: [TeacherPresentationSelectionStore],
   selector: 'ideas-summary',
   styleUrls: [
     './ideas-summary.component.scss',
@@ -56,11 +77,11 @@ export interface IdeaTableRow {
   ],
   templateUrl: 'ideas-summary.component.html'
 })
-export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
+export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent implements OnInit, OnChanges {
   @Input() componentType: string;
   @Input() expanded: boolean;
 
-  protected displayedColumns: string[] = ['text', 'sampleResponse', 'count'];
+  protected store = inject(TeacherPresentationSelectionStore);
   protected dataSource = new MatTableDataSource<IdeaTableRow>([]);
   protected expandedIdeaIds = new Set<string>();
   protected searchQuery = '';
@@ -68,6 +89,35 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   protected workgroups: any[] = [];
   protected readonly UNIQUE_THRESHOLD = 2;
   protected readonly SAMPLE_RESPONSE_MAX_CHARS = 150;
+
+  get isSinglePeriod(): boolean {
+    return this.periodId != null && this.periodId !== -1;
+  }
+
+  get periodName(): string | undefined {
+    if (this.periodId != null) {
+      const period = this.configService
+        .getPeriods()
+        ?.find((p: any) => p.periodId === this.periodId);
+      if (period) return period.periodName || period.name;
+    }
+    return undefined;
+  }
+
+  get node(): Node {
+    return (this.projectService as TeacherProjectService).getNode(this.nodeId);
+  }
+
+  get component(): ComponentContent {
+    return (this.projectService as TeacherProjectService).getComponent(this.nodeId, this.componentId);
+  }
+
+  get displayedColumns(): string[] {
+    if (this.isSinglePeriod) {
+      return ['select', 'text', 'sampleResponse', 'count'];
+    }
+    return ['text', 'sampleResponse', 'count'];
+  }
 
   @ViewChild(MatSort) set matSort(sort: MatSort) {
     if (sort) {
@@ -95,8 +145,32 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     );
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.initPresentationStore();
     this.generateIdeasSummary();
+  }
+
+  override ngOnChanges(changes: SimpleChanges): void {
+    super.ngOnChanges(changes);
+    if (changes.periodId || changes.componentId || changes.nodeId) {
+      this.initPresentationStore();
+      this.generateIdeasSummary();
+    }
+  }
+
+  private initPresentationStore(): void {
+    const runId = this.configService.getRunId();
+    if (runId && this.isSinglePeriod && this.nodeId && this.componentId) {
+      this.store.init(
+        runId,
+        this.periodId,
+        this.nodeId,
+        this.componentId,
+        this.componentType || 'OpenResponse',
+        'Ideas'
+      );
+    }
   }
 
   private generateIdeasSummary(): void {
@@ -112,26 +186,34 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
         });
       }
     } else if (this.componentType === 'OpenResponse') {
-      const annotations = this.annotationService
+      const allAnnotations = this.annotationService
         .getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
-        .filter((annotation) => this.periodId === -1 || annotation.periodId === this.periodId)
-        .reduceRight(
-          (latestAnnotations, annotation) =>
-            latestAnnotations.some(
-              (latestAnnotation) => latestAnnotation.toWorkgroupId === annotation.toWorkgroupId
-            )
-              ? latestAnnotations
-              : latestAnnotations.concat(annotation),
-          []
-        );
-      const summaryData = new OpenResponseSummaryData(annotations, this.rubric);
+        .filter((annotation) => this.periodId === -1 || annotation.periodId === this.periodId);
+      const latestAnnotations = allAnnotations.reduceRight(
+        (latestAnnotations, annotation) =>
+          latestAnnotations.some(
+            (latestAnnotation) => latestAnnotation.toWorkgroupId === annotation.toWorkgroupId
+          )
+            ? latestAnnotations
+            : latestAnnotations.concat(annotation),
+        []
+      );
+      const summaryData = new OpenResponseSummaryData(latestAnnotations, this.rubric);
       const work$ = this.getLatestWork();
       if (work$) {
         work$.subscribe((componentStates) => {
-          this.groupIdeas(summaryData, componentStates ?? [], annotations);
+          const cachedStates = this.dataService
+            ?.getComponentStatesByComponentId?.(this.componentId)
+            ?.filter((s: any) => this.periodId === -1 || s.periodId === this.periodId);
+          const states =
+            cachedStates && cachedStates.length > 0 ? cachedStates : (componentStates ?? []);
+          this.groupIdeas(summaryData, states, allAnnotations);
         });
       } else {
-        this.groupIdeas(summaryData, [], annotations);
+        const cachedStates = this.dataService
+          ?.getComponentStatesByComponentId?.(this.componentId)
+          ?.filter((s: any) => this.periodId === -1 || s.periodId === this.periodId);
+        this.groupIdeas(summaryData, cachedStates ?? [], allAnnotations);
       }
     }
   }
@@ -161,7 +243,8 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
           sampleResponse: sampleResponse,
           fullSampleResponse: fullSample,
           isSampleResponseTruncated: isSampleResponseTruncated,
-          responses: responses
+          responses: responses,
+          studentGroups: this.groupResponsesByWorkgroup(responses)
         };
       });
       rows.sort((a, b) => b.count - a.count);
@@ -171,6 +254,28 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       this.doRender = false;
       this.dataSource.data = [];
     }
+  }
+
+  private groupResponsesByWorkgroup(responses: StudentResponseItem[]): StudentResponseGroup[] {
+    const groups: StudentResponseGroup[] = [];
+    responses.forEach((resp) => {
+      let group = groups.find(
+        (g) =>
+          (resp.workgroupId != null && g.workgroupId === resp.workgroupId) ||
+          (resp.workgroupId == null && g.usernames === resp.usernames)
+      );
+      if (!group) {
+        group = {
+          workgroupId: resp.workgroupId ?? 0,
+          usernames: resp.usernames,
+          avatarColor: resp.avatarColor,
+          responses: []
+        };
+        groups.push(group);
+      }
+      group.responses.push(resp);
+    });
+    return groups;
   }
 
   protected getRandomResponse(responses: StudentResponseItem[] = []): string {
@@ -234,33 +339,39 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     }
   }
 
+  /**
+   * Dialog Guidance work is additive: each saved state contains the whole chat history. Return one
+   * item per student message that expressed the idea, identified by workgroup and message
+   * timestamp, so a message is listed once no matter how many saved states contain it.
+   */
   private getDGResponsesWithIdea(states: ComponentState[], ideaId: string): StudentResponseItem[] {
-    const responsesWithIdea: StudentResponseItem[] = [];
+    const responsesByKey = new Map<string, StudentResponseItem>();
     states.forEach((state) => {
-      const studentTexts: string[] = [];
-      let latestTimestamp = state.clientSaveTime;
       state.studentData?.responses?.forEach((response, index, responses) => {
         if (response?.ideas?.some((idea) => idea.detected && idea.name === ideaId)) {
           const studentResponse = responses[index - 1];
           if (studentResponse?.text != null) {
-            studentTexts.push(studentResponse.text);
-            if (studentResponse.timestamp) {
-              latestTimestamp = studentResponse.timestamp;
+            const timestamp = studentResponse.timestamp ?? state.clientSaveTime;
+            const item: StudentResponseItem = {
+              studentWorkId: state.id!,
+              workgroupId: state.workgroupId,
+              responseTimestamp: studentResponse.timestamp ?? null,
+              text: studentResponse.text,
+              texts: [studentResponse.text],
+              timestamp: timestamp,
+              usernames: this.getDisplayNames(state.workgroupId),
+              avatarColor: getAvatarColorForWorkgroupId(state.workgroupId)
+            };
+            const key = `${state.workgroupId}:${timestamp}:${studentResponse.text}`;
+            const existing = responsesByKey.get(key);
+            if (!existing || (state.id ?? 0) >= (existing.studentWorkId ?? 0)) {
+              responsesByKey.set(key, item);
             }
           }
         }
       });
-      if (studentTexts.length > 0) {
-        responsesWithIdea.push({
-          text: studentTexts.join('\n'),
-          texts: studentTexts,
-          timestamp: latestTimestamp,
-          usernames: this.getDisplayNames(state.workgroupId),
-          avatarColor: getAvatarColorForWorkgroupId(state.workgroupId)
-        });
-      }
     });
-    return responsesWithIdea;
+    return Array.from(responsesByKey.values()).sort((a, b) => a.timestamp - b.timestamp);
   }
 
   private getORResponsesWithIdea(
@@ -273,14 +384,17 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     );
     return states
       .filter((state) =>
-        matchingAnnotations.some(
-          (annotation) =>
-            annotation.studentWorkId === state.id || annotation.toWorkgroupId === state.workgroupId
+        matchingAnnotations.some((annotation) =>
+          annotation.studentWorkId != null
+            ? annotation.studentWorkId === state.id
+            : annotation.toWorkgroupId === state.workgroupId
         )
       )
       .map((state) => {
         const text = state.studentData?.response ?? '';
         return {
+          studentWorkId: state.id!,
+          workgroupId: state.workgroupId,
           text: text,
           texts: text ? [text] : [],
           timestamp: state.clientSaveTime,
@@ -323,6 +437,30 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
 
   protected applyFilter(): void {
     this.dataSource.filter = this.searchQuery.trim().toLowerCase();
+  }
+
+  protected toSelection(response: StudentResponseItem): IdeasPresentationResponse {
+    return {
+      studentWorkId: response.studentWorkId,
+      workgroupId: response.workgroupId,
+      responseTimestamp: response.responseTimestamp ?? null,
+      text: response.text
+    };
+  }
+
+  protected isResponseSelected(row: IdeaTableRow, response: StudentResponseItem): boolean {
+    return this.store.isIdeaResponseSelected(row.id, this.toSelection(response));
+  }
+
+  protected toggleResponse(row: IdeaTableRow, response: StudentResponseItem): void {
+    this.store.toggleIdeaResponse(row.id, this.toSelection(response));
+  }
+
+  protected toggleIdea(row: IdeaTableRow): void {
+    this.store.toggleIdea(
+      row.id,
+      row.responses?.map((response) => this.toSelection(response))
+    );
   }
 
   protected override renderDisplay(): void {
