@@ -66,6 +66,12 @@ describe('TeacherPresentationDialogComponent', () => {
     expect(component.effectivePrompt).toBe('Custom teacher override prompt');
   });
 
+  it('should allow presentation prompt to be an empty string', () => {
+    store.prompt.set('');
+    expect(component.effectivePrompt).toBe('');
+    expect(component.isSavedPromptDifferentFromDefault).toBeTrue();
+  });
+
   it('should allow editing prompt and saving to store', () => {
     component.startEditPrompt();
     component['editedPrompt'] = 'Newly edited prompt';
@@ -74,6 +80,48 @@ describe('TeacherPresentationDialogComponent', () => {
     component.savePrompt();
 
     expect(store.setPrompt).toHaveBeenCalledWith('Newly edited prompt');
+    expect(component['isEditingPrompt']).toBeFalse();
+  });
+
+  it('should allow saving an empty string prompt to store', () => {
+    component.startEditPrompt();
+    component['editedPrompt'] = '   ';
+    spyOn(store, 'setPrompt');
+
+    component.savePrompt();
+
+    expect(store.setPrompt).toHaveBeenCalledWith('');
+    expect(component['isEditingPrompt']).toBeFalse();
+  });
+
+  it('should save prompt when Enter key is pressed in textarea', () => {
+    component.startEditPrompt();
+    fixture.detectChanges();
+
+    const textarea = fixture.nativeElement.querySelector('textarea') as HTMLTextAreaElement;
+    expect(textarea).toBeTruthy();
+
+    component['editedPrompt'] = 'Prompt via Enter key';
+    spyOn(component, 'savePrompt').and.callThrough();
+    spyOn(store, 'setPrompt');
+
+    const event = new KeyboardEvent('keydown', {
+      key: 'Enter',
+      cancelable: true
+    });
+    textarea.dispatchEvent(event);
+
+    expect(component.savePrompt).toHaveBeenCalled();
+    expect(store.setPrompt).toHaveBeenCalledWith('Prompt via Enter key');
+    expect(component['isEditingPrompt']).toBeFalse();
+    expect(event.defaultPrevented).toBeTrue();
+  });
+
+  it('should cancel prompt editing', () => {
+    component.startEditPrompt();
+    expect(component['isEditingPrompt']).toBeTrue();
+
+    component.cancelEditPrompt();
     expect(component['isEditingPrompt']).toBeFalse();
   });
 
@@ -87,7 +135,20 @@ describe('TeacherPresentationDialogComponent', () => {
     expect(component['isEditingPrompt']).toBeFalse();
   });
 
-  it('should update studentNamesDisplay mode in store when toggle changed', () => {
+  it('should determine whether saved prompt matches default prompt', () => {
+    // Initially store prompt is null, so effectivePrompt matches default prompt
+    expect(component.isSavedPromptDifferentFromDefault).toBeFalse();
+
+    // When store prompt has a custom value different from default prompt
+    store.prompt.set('Customized prompt text');
+    expect(component.isSavedPromptDifferentFromDefault).toBeTrue();
+
+    // When store prompt has text matching default prompt
+    store.prompt.set('Component default prompt');
+    expect(component.isSavedPromptDifferentFromDefault).toBeFalse();
+  });
+
+  it('should update studentNamesDisplay mode in store when names display changed', () => {
     spyOn(store, 'setStudentNamesDisplay');
 
     component.onNamesDisplayChange('anonymize');
@@ -95,6 +156,33 @@ describe('TeacherPresentationDialogComponent', () => {
 
     component.onNamesDisplayChange('show');
     expect(store.setStudentNamesDisplay).toHaveBeenCalledWith('show');
+  });
+
+  it('should toggle hideControls when toggleControls is called', () => {
+    expect(component['hideControls']).toBeFalse();
+
+    component.toggleControls(false);
+    expect(component['hideControls']).toBeTrue();
+
+    component.toggleControls(true);
+    expect(component['hideControls']).toBeFalse();
+
+    component.toggleControls();
+    expect(component['hideControls']).toBeTrue();
+  });
+
+  it('should show placeholder text when prompt is empty and controls are shown', () => {
+    store.prompt.set('');
+    component.toggleControls(true); // controls shown: hideControls = false
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('[Add optional presentation prompt]');
+
+    component.toggleControls(false); // controls hidden: hideControls = true
+    fixture.detectChanges();
+
+    expect(compiled.textContent).not.toContain('[Add optional presentation prompt]');
   });
 
   it('should close dialog when close() is called', () => {

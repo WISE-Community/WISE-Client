@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 :host {
   display: flex;
   flex-direction: column;
@@ -5,24 +7,16 @@
   height: 100vh;
   max-width: 100vw !important;
   max-height: 100vh !important;
-  background: var(--mat-dialog-container-background-color, #ffffff);
+
+  --mat-button-toggle-divider-color: transparent;
 }
 
 .presentation-header {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  background-color: var(--mat-sys-surface, #f8f9fa);
+  --mat-form-field-container-height: 48px;
+  --mat-form-field-filled-with-label-container-padding-top: 20px;
+  --mat-form-field-filled-with-label-container-padding-bottom: 4px;
 }
 
-.presentation-body {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  padding: 1.5rem;
-}
-
-.prompt-text {
-  font-size: 1.75rem;
-  line-height: 2.25rem;
-  font-weight: 500;
-  color: var(--mat-sys-on-surface, #1f2937);
+.presentation-prompt {
+  @apply text-xl font-medium mx-2;
 }

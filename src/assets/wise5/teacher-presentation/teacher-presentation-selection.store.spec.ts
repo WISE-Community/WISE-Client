@@ -110,6 +110,25 @@ describe('TeacherPresentationSelectionStore', () => {
       expect(store.prompt()).toBe('Initial prompt');
     });
 
+    it('should preserve empty string prompt when config has empty prompt', () => {
+      const mockConfig: TeacherPresentationConfig = {
+        id: 1,
+        runId: 1,
+        periodId: 10,
+        nodeId: 'node1',
+        componentId: 'comp1',
+        componentType: 'Discussion',
+        items: [],
+        studentNamesDisplay: 'hide',
+        prompt: ''
+      };
+      configServiceSpy.getConfig.and.returnValue(of(mockConfig));
+
+      store.init(1, 10, 'node1', 'comp1', 'Discussion');
+
+      expect(store.prompt()).toBe('');
+    });
+
     it('should debounce autosave by 1 second when selecting items', fakeAsync(() => {
       store.select(100);
       expect(configServiceSpy.saveConfig).not.toHaveBeenCalled();

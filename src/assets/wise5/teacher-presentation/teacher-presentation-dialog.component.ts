@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
 import { StudentNamesDisplayMode } from './teacher-presentation-config';
@@ -31,6 +32,7 @@ export interface TeacherPresentationDialogData {
     MatFormFieldModule,
     MatInputModule,
     MatButtonToggleModule,
+    MatSelectModule,
     MatTooltipModule,
     DiscussionTeacherComponent
   ],
@@ -58,13 +60,17 @@ export class TeacherPresentationDialogComponent implements OnInit {
     return (
       this.data.component?.content?.teacher?.presentation?.prompt ||
       this.data.component?.content?.presentation?.prompt ||
-      $localize`Here are your classmates' posts and comments. Which posts do you agree with?`
+      $localize`Here are some of your classmates' posts. Pick one to discuss with your partner.`
     );
   }
 
   get effectivePrompt(): string {
     const custom = this.store.prompt();
-    return custom != null && custom.trim() !== '' ? custom : this.defaultPrompt;
+    return custom != null ? custom : this.defaultPrompt;
+  }
+
+  get isSavedPromptDifferentFromDefault(): boolean {
+    return (this.effectivePrompt?.trim() ?? '') !== (this.defaultPrompt?.trim() ?? '');
   }
 
   get isAnonymize(): boolean {
@@ -75,6 +81,10 @@ export class TeacherPresentationDialogComponent implements OnInit {
     if (mode) {
       this.store.setStudentNamesDisplay(mode);
     }
+  }
+
+  toggleControls(checked?: boolean): void {
+    this.hideControls = checked !== undefined ? !checked : !this.hideControls;
   }
 
   startEditPrompt(): void {

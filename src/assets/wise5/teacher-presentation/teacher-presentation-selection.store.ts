@@ -59,7 +59,7 @@ export class TeacherPresentationSelectionStore {
             }
             this.selectedIds.set(ids);
             this.studentNamesDisplay.set(config.studentNamesDisplay || 'hide');
-            this.prompt.set(config.prompt || null);
+            this.prompt.set(config.prompt ?? null);
           }
         },
         error: (err) => {

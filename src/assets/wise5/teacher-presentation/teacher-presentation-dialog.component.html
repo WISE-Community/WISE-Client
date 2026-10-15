@@ -1,52 +1,71 @@
-<div class="presentation-header flex flex-col gap-3">
-  <div class="flex items-center justify-between gap-4">
-    <div class="flex items-center gap-3">
-      <span class="mat-headline-6 font-semibold" i18n>Classroom Presentation</span>
-      @if (data.periodName) {
-        <span class="text-sm px-2 py-0.5 rounded bg-gray-200 text-gray-700" i18n>
-          Period {{ data.periodName }}
-        </span>
+<!-- Presentation Header -->
+<div class="presentation-header flex items-center p-3 mb-2">
+  <div class="flex items-center justify-between gap-2 w-full">
+    <div class="flex flex-wrap items-center gap-2">
+      <mat-button-toggle-group
+        [value]="!hideControls ? 'controls' : ''"
+        [hideSingleSelectionIndicator]="true"
+        aria-label="Presentation controls"
+        i18n-aria-label
+      >
+        <mat-button-toggle
+          value="controls"
+          [checked]="!hideControls"
+          (click)="toggleControls()"
+          matTooltip="Toggle presentation controls"
+          i18n-matTooltip
+        >
+          <mat-icon>tune</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      @if (!hideControls) {
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <mat-label i18n>Student Names</mat-label>
+          <mat-select
+            [ngModel]="store.studentNamesDisplay()"
+            (ngModelChange)="onNamesDisplayChange($event)"
+            aria-label="Student Names Display"
+            i18n-aria-label
+          >
+            <mat-option value="hide" i18n>Hide</mat-option>
+            <mat-option value="anonymize" i18n>Anonymize</mat-option>
+            <mat-option value="show" i18n>Show</mat-option>
+          </mat-select>
+        </mat-form-field>
       }
     </div>
-    <div class="flex items-center gap-2">
-      @if (!hideControls) {
-        <mat-button-toggle-group
-          [ngModel]="store.studentNamesDisplay()"
-          (ngModelChange)="onNamesDisplayChange($event)"
-          aria-label="Student Names Display"
+    <div class="shrink-0 flex items-center gap-2">
+      @if (data.periodName) {
+        <span class="mat-caption py-1 px-2 rounded-md selected-bg-bg" i18n
+          >Period {{ data.periodName }}</span
         >
-          <mat-button-toggle value="hide" i18n>Hide Names</mat-button-toggle>
-          <mat-button-toggle value="anonymize" i18n>Anonymize Names</mat-button-toggle>
-          <mat-button-toggle value="show" i18n>Show Names</mat-button-toggle>
-        </mat-button-toggle-group>
       }
-
-      <button
-        mat-stroked-button
-        (click)="hideControls = !hideControls"
-        matTooltip="Toggle presentation controls"
-        i18n
-      >
-        {{ hideControls ? 'Show Controls' : 'Hide Controls' }}
-      </button>
-
       <button mat-icon-button (click)="close()" matTooltip="Close (Esc)" i18n-matTooltip>
         <mat-icon>close</mat-icon>
       </button>
     </div>
   </div>
-
-  <!-- Presentation Prompt Area -->
-  <div class="flex items-start gap-2 pt-1">
+</div>
+<div class="pb-6 px-6">
+  <!-- Presentation Prompt -->
+  <div
+    class="flex items-center gap-1 mb-4"
+    [class.min-h-14]="!hideControls || effectivePrompt.trim()"
+  >
     @if (!isEditingPrompt) {
-      <div class="prompt-text flex-grow">
-        {{ effectivePrompt }}
-      </div>
+      @if (effectivePrompt.trim()) {
+        <span class="presentation-prompt">
+          {{ effectivePrompt }}
+        </span>
+      } @else if (!hideControls) {
+        <span class="presentation-prompt secondary-text" i18n>
+          [Add optional presentation prompt]
+        </span>
+      }
       @if (!hideControls) {
         <button
           mat-icon-button
           (click)="startEditPrompt()"
-          aria-label="Edit prompt"
           matTooltip="Edit prompt"
           i18n-matTooltip
         >
@@ -54,43 +73,58 @@
         </button>
       }
     } @else {
-      <div class="flex flex-col gap-2 w-full max-w-3xl">
-        <mat-form-field appearance="outline" class="w-full">
+      <div class="flex items-center gap-2 w-full">
+        <mat-form-field class="grow" appearance="fill" subscriptSizing="dynamic">
           <mat-label i18n>Presentation Prompt</mat-label>
-          <textarea matInput [(ngModel)]="editedPrompt" rows="3" maxlength="1000"></textarea>
+          <textarea
+            matInput
+            [(ngModel)]="editedPrompt"
+            (keydown.enter)="$event.preventDefault(); savePrompt()"
+            rows="1"
+            maxlength="1000"
+          ></textarea>
         </mat-form-field>
-        <div class="flex items-center gap-2">
-          <button mat-flat-button color="primary" (click)="savePrompt()" i18n>Save</button>
-          <button mat-button (click)="cancelEditPrompt()" i18n>Cancel</button>
-          @if (store.prompt() != null) {
-            <button mat-button color="warn" (click)="resetPromptToDefault()" i18n>
-              Reset to default
+        <div class="flex items-center shrink-0">
+          <button mat-icon-button (click)="savePrompt()" matTooltip="Save prompt" i18n-matTooltip>
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-icon-button (click)="cancelEditPrompt()" matTooltip="Cancel" i18n-matTooltip>
+            <mat-icon>cancel</mat-icon>
+          </button>
+          @if (isSavedPromptDifferentFromDefault) {
+            <button
+              mat-icon-button
+              (click)="resetPromptToDefault()"
+              matTooltip="Reset to default"
+              i18n-matTooltip
+            >
+              <mat-icon>restore</mat-icon>
             </button>
           }
         </div>
       </div>
     }
   </div>
-</div>
 
-<!-- Presentation Body -->
-<div class="presentation-body">
-  @if (store.selectedCount() === 0) {
-    <div class="flex flex-col items-center justify-center p-12 text-center text-gray-500">
-      <mat-icon class="mat-48 mb-2">visibility_off</mat-icon>
-      <div class="mat-body-1" i18n>No posts selected. Close and check posts to display.</div>
-    </div>
-  } @else {
-    <discussion-teacher
-      #discussionTeacher
-      [nodeId]="data.nodeId"
-      [component]="data.component"
-      [periodId]="data.periodId"
-      [anonymizeResponses]="isAnonymize"
-      [studentNamesDisplayMode]="store.studentNamesDisplay()"
-      [presentationSelectedIds]="store.selectedIds()"
-      [presentationStore]="store"
-      [mode]="'presentation'"
-    />
-  }
+  <!-- Presentation Body -->
+  <div class="presentation-body">
+    @if (store.selectedCount() === 0) {
+      <div class="flex flex-col items-center justify-center p-12 text-center text-gray-500">
+        <mat-icon class="mat-48 mb-2">visibility_off</mat-icon>
+        <div class="mat-body-1" i18n>No posts selected. Close and check posts to display.</div>
+      </div>
+    } @else {
+      <discussion-teacher
+        #discussionTeacher
+        [nodeId]="data.nodeId"
+        [component]="data.component"
+        [periodId]="data.periodId"
+        [anonymizeResponses]="isAnonymize"
+        [studentNamesDisplayMode]="store.studentNamesDisplay()"
+        [presentationSelectedIds]="store.selectedIds()"
+        [presentationStore]="store"
+        [mode]="'presentation'"
+      />
+    }
+  </div>
 </div>
