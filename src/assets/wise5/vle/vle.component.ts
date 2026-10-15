@@ -16,7 +16,6 @@ import { GroupTabsComponent } from '../directives/group-tabs/group-tabs.componen
 import { InitializeVLEService } from '../services/initializeVLEService';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { NavigationComponent } from '../themes/default/navigation/navigation.component';
 import { Node } from '../common/Node';
 import { NodeComponent } from './node/node.component';
 import { NodeNavigationComponent } from '../directives/node-navigation/node-navigation.component';
@@ -45,7 +44,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
     CommonModule,
     GroupTabsComponent,
     MatSidenavModule,
-    NavigationComponent,
     NodeComponent,
     NodeNavigationComponent,
     NotebookReportComponent,
@@ -156,7 +154,6 @@ export class VLEComponent implements AfterViewInit {
 
     // TODO: set these variables dynamically from theme settings
     this.notebookConfig = this.notebookService.getNotebookConfig();
-    this.setLayoutState();
     this.initializeSubscriptions();
     this.saveNodeEnteredEvent();
     this.initializeChatbot();
@@ -256,7 +253,6 @@ export class VLEComponent implements AfterViewInit {
           this.scrollToTop();
         }
         this.router.navigate([currentNodeId], { relativeTo: this.route.parent });
-        this.setLayoutState();
       })
     );
   }
@@ -289,30 +285,6 @@ export class VLEComponent implements AfterViewInit {
       .then(() => {
         this.sessionService.logOut();
       });
-  }
-
-  /**
-   * Set the layout state of the vle
-   * @param state string specifying state (e.g. 'notebook'; optional)
-   */
-  private setLayoutState(state: string = null) {
-    let layoutState = 'nav'; // default layout state
-    if (state) {
-      layoutState = state;
-    } else {
-      // no state was sent, so set based on current node
-      if (this.currentNode) {
-        var id = this.currentNode.id;
-        if (this.projectService.isApplicationNode(id)) {
-          // currently viewing step, so show step view
-          layoutState = 'node';
-        } else if (this.projectService.isGroupNode(id)) {
-          // currently viewing group node, so show navigation view
-          layoutState = 'nav';
-        }
-      }
-    }
-    this.layoutState = layoutState;
   }
 
   private scrollToTop() {

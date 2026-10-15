@@ -22,12 +22,6 @@
     }
   }
 
-  h2 {
-    .mat-icon {
-      @include mat-icon-size(mat.m2-font-size(typography.$wise-typography, 'headline-6'));
-    }
-  }
-
   .mat-headline-4 {
     margin-bottom: 36px;
 
@@ -50,13 +44,19 @@
     }
   }
 
+  .mat-mdc-button, .mat-mdc-button .mdc-button__ripple,
+  .mat-mdc-raised-button, .mat-mdc-raised-button .mdc-button__ripple,
+  .mat-mdc-outlined-button, .mat-mdc-outlined-button .mdc-button__ripple,
+  .mat-mdc-unelevated-button, .mat-mdc-unelevated-button .mdc-button__ripple {
+    border-radius: variables.$button-border-radius;
+  }
+
   .mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-unelevated-button, .mat-mdc-outlined-button {
     min-width: 0;
-    text-transform: uppercase;
   }
 
   .mdc-button, .mat-mdc-button:has(.material-icons, mat-icon, [matButtonIcon]) {
-    padding: 0 16px;
+    padding: 0 12px;
   }
 
   .mat-mdc-raised-button, .mat-mdc-fab, .mat-mdc-mini-fab {
@@ -77,6 +77,10 @@
 
   .mat-divider-horizontal {
     margin: 16px 0;
+  }
+
+  .mat-mdc-menu-panel {
+    border-radius: variables.$feature-border-radius;
   }
 
   .mdc-menu-surface.mat-mdc-select-panel {
@@ -113,13 +117,6 @@
   }
 
   .mat-accordion .mat-expansion-panel {
-    @include mat.elevation(3);
-    @include mat.elevation-transition;
-
-    &.mat-expanded {
-      @include mat.elevation(6);
-    }
-
     &:not(.mat-expanded) {
       border-radius: variables.$button-border-radius;
 
@@ -136,6 +133,19 @@
   .mat-mdc-progress-bar {
     --mat-progress-bar-track-height: 12px;
     --mat-progress-bar-active-indicator-height: 12px;
+  }
+
+  .mdc-circular-progress[mode="determinate"] {
+    container-type: size;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 10cqmin solid color-mix(in srgb, var(--mat-progress-spinner-active-indicator-color) 25%, transparent);
+      box-sizing: border-box;
+    }
   }
 
   .mat-mdc-option, .mat-mdc-optgroup-label {
@@ -253,6 +263,10 @@
       background-color: map.get($colors, 'info');
       color: map.get($colors, 'info-contrast');
     }
+  }
+
+  .mat-mdc-dialog-surface {
+    border-radius: variables.$feature-border-radius;
   }
 
   .dialog-content-scroll {

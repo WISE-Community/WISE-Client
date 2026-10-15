@@ -7,13 +7,13 @@
         [ngClass]="{ 'nav-item--card--group': isGroup, 'expanded mat-elevation-z3': expanded }"
       >
         <mat-card-header
-          class="nav-item--card__content"
+          class="nav-item--card__content items-center"
           tabindex="0"
           (click)="itemClicked($event)"
           (keyup.enter)="itemClicked($event)"
           role="button"
         >
-          <node-icon mat-card-avatar class="group-icon" customClass="mat-24" [nodeId]="nodeId" />
+          <node-icon mat-card-avatar class="group-icon flex" size="30" [nodeId]="nodeId" />
           <mat-card-title class="title" style="color: {{ icon.color }}">
             <span>{{ nodeTitle }}</span>
           </mat-card-title>
@@ -68,7 +68,7 @@
         [ngClass]="{ 'nav-item--list--group': isGroup, 'text-secondary': !nodeHasWork }"
       >
         <div class="flex justify-start items-center gap-3">
-          <node-icon [nodeId]="nodeId" customClass="mat-24" />
+          <node-icon [nodeId]="nodeId" size="24" class="flex" />
           <span [ngClass]="{ warn: newAlert }">{{ nodeTitle }}</span>
           <span class="flex-grow sm:hidden"></span>
           @if (newAlert) {

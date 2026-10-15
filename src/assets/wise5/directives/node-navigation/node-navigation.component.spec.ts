@@ -71,8 +71,8 @@ function expectHasPrevNextNodeValues(
   tick(); // ensures component.hasNextNode to be set
   fixture.detectChanges();
   const buttons = Array.from(fixture.debugElement.nativeElement.querySelectorAll('button'));
-  const prevButton = buttons.find((el: any) => el.innerHTML.includes('Previous step'));
-  const nextButton = buttons.find((el: any) => el.innerHTML.includes('Next step'));
+  const prevButton = buttons.find((el: any) => el.innerHTML.includes('Previous Step'));
+  const nextButton = buttons.find((el: any) => el.innerHTML.includes('Next Step'));
   if (expectedHasPrevNode) {
     expect(prevButton).toBeDefined();
   } else {
