@@ -26,3 +26,21 @@
 >
   Anonymize (students cannot see classmates' names)
 </mat-checkbox>
+
+<mat-expansion-panel class="mt-4">
+  <mat-expansion-panel-header>
+    <mat-panel-title i18n>Classroom Presentation Settings</mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="flex flex-col gap-4 py-2">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label i18n>Default Presentation Prompt</mat-label>
+      <input
+        matInput
+        [(ngModel)]="componentContent.teacher.presentation.prompt"
+        (ngModelChange)="inputChange.next($event)"
+        placeholder="Here are your classmates' posts and comments. Which posts do you agree with?"
+        i18n-placeholder
+      />
+    </mat-form-field>
+  </div>
+</mat-expansion-panel>

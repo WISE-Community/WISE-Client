@@ -31,7 +31,12 @@ export interface TeacherReflectionQuestion {
   text: string;
 }
 
+export interface TeacherPresentationConfig {
+  prompt?: string;
+}
+
 export interface ComponentTeacherContent {
+  presentation?: TeacherPresentationConfig;
   reflectionQuestions?: TeacherReflectionQuestion[];
 }
 
