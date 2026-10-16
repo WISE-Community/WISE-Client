@@ -13,6 +13,13 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { PeerGroupButtonComponent } from '../peer-group-button/peer-group-button.component';
 import { ProjectService } from '../../../services/projectService';
+import { DiscussionAiSummaryComponent } from '../../../directives/teacher-summary-display/discussion-ai-summary/discussion-ai-summary.component';
+import { DiscussionSummaryComponent } from '../../../directives/teacher-summary-display/discussion-summary/discussion-summary.component';
+import { IdeasSummaryComponent } from '../../../directives/teacher-summary-display/ideas-summary/ideas-summary.component';
+import { MatchSummaryDisplayComponent } from '../../../directives/teacher-summary-display/match-summary-display/match-summary-display.component';
+import { OpenResponseAiSummaryComponent } from '../../../directives/teacher-summary-display/open-response-ai-summary/open-response-ai-summary.component';
+import { TeacherReflectionComponent } from '../../../teacher-reflection/teacher-reflection.component';
+import { TeacherSummaryDisplayComponent } from '../../../directives/teacher-summary-display/teacher-summary-display.component';
 
 let component: ComponentSummaryComponent;
 let fixture: ComponentFixture<ComponentSummaryComponent>;
@@ -23,8 +30,15 @@ describe('ComponentSummaryComponent', () => {
         ComponentSummaryComponent,
         MockComponents(
           ComponentCompletionComponent,
+          DiscussionAiSummaryComponent,
+          DiscussionSummaryComponent,
+          IdeasSummaryComponent,
+          MatchSummaryDisplayComponent,
           MilestoneReportButtonComponent,
-          PeerGroupButtonComponent
+          OpenResponseAiSummaryComponent,
+          PeerGroupButtonComponent,
+          TeacherReflectionComponent,
+          TeacherSummaryDisplayComponent
         )
       ],
       providers: [
@@ -50,6 +64,7 @@ describe('ComponentSummaryComponent', () => {
   });
   testHasStudentWork();
   testNoStudentWork();
+  testSummaryPriorityAndSizing();
 });
 
 function testHasStudentWork() {
@@ -72,6 +87,47 @@ function testNoStudentWork() {
     });
     it('should not show component completion', () => {
       expect(getComponentCompletion()).toBeFalsy();
+    });
+  });
+}
+
+function testSummaryPriorityAndSizing() {
+  describe('summary priority and sizing', () => {
+    it('should render OpenResponse summaries in priority order with large and small size classes', () => {
+      component.periodId = 1;
+      component.component = {
+        id: 'abc',
+        type: 'OpenResponse',
+        prompt: 'hi',
+        teacher: { reflectionQuestions: [{ id: 'q1', text: 'Reflect' }] }
+      } as any;
+      component['hasStudentWork'] = true;
+      component['showSummary'] = true;
+      component['hasIdeaRubricData'] = true;
+      component['showScoreSummary'] = true;
+      component['aiEnabled'] = true;
+      fixture.detectChanges();
+
+      const grid = fixture.debugElement.query(By.css('.summaries'));
+      expect(grid).toBeTruthy();
+      const children = Array.from(grid.nativeElement.children) as HTMLElement[];
+      expect(children.length).toBe(4);
+
+      expect(children[0].classList).toContain('summary-lg');
+      expect(children[0].classList).toContain('order-1');
+      expect(children[0].querySelector('ideas-summary')).toBeTruthy();
+
+      expect(children[1].classList).toContain('summary-sm');
+      expect(children[1].classList).toContain('order-3');
+      expect(children[1].querySelector('teacher-summary-display')).toBeTruthy();
+
+      expect(children[2].classList).toContain('summary-sm');
+      expect(children[2].classList).toContain('order-4');
+      expect(children[2].querySelector('open-response-ai-summary')).toBeTruthy();
+
+      expect(children[3].classList).toContain('summary-lg');
+      expect(children[3].classList).toContain('order-5');
+      expect(children[3].querySelector('teacher-reflection')).toBeTruthy();
     });
   });
 }

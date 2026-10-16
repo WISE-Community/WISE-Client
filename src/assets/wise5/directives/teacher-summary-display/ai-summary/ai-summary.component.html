@@ -1,21 +1,16 @@
-<div class="flex gap-2 items-center">
+<div class="flex flex-wrap gap-2 items-center justify-between mb-2">
+  <h2 class="mat-subtitle-1 !m-0" i18n>AI Summary</h2>
+  <span class="mat-caption" i18n>Summarize class responses using AI</span>
+</div>
+<div class="flex flex-wrap gap-1 items-center">
   <button
-    class="gap-2"
     mat-stroked-button
     (click)="generateSummary()"
     [disabled]="generatingSummary"
     color="primary"
   >
-    <span i18n>Generate Summary</span><mat-icon>auto_awesome</mat-icon>
+    <span i18n>Generate</span><mat-icon>auto_awesome</mat-icon>
   </button>
-  <mat-icon
-    tabindex="0"
-    matTooltip="Summarize class responses using AI"
-    matTooltipPosition="above"
-    i18n-matTooltip
-  >
-    info
-  </mat-icon>
   @if (generatingSummary) {
     <mat-spinner diameter="20" />
   }
