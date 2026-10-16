@@ -1,7 +1,7 @@
 import { Annotation } from '../../../common/Annotation';
 import { AnnotationService } from '../../../services/annotationService';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
 import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
@@ -77,7 +77,7 @@ export interface IdeaTableRow {
   ],
   templateUrl: 'ideas-summary.component.html'
 })
-export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent implements OnInit, OnChanges {
+export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   @Input() componentType: string;
   @Input() expanded: boolean;
 
@@ -109,7 +109,10 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent implem
   }
 
   get component(): ComponentContent {
-    return (this.projectService as TeacherProjectService).getComponent(this.nodeId, this.componentId);
+    return (this.projectService as TeacherProjectService).getComponent(
+      this.nodeId,
+      this.componentId
+    );
   }
 
   get displayedColumns(): string[] {
@@ -167,7 +170,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent implem
         this.periodId,
         this.nodeId,
         this.componentId,
-        this.componentType || 'OpenResponse',
+        this.componentType,
         'Ideas'
       );
     }

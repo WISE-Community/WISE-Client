@@ -104,6 +104,7 @@ describe('TeacherPresentationSelectionStore', () => {
         itemType: 'Discussion',
         items: [{ studentWorkId: 101 }, { studentWorkId: 102 }],
         studentNamesDisplay: 'anonymize',
+        showComponentPrompt: false,
         prompt: 'Initial prompt'
       };
       configServiceSpy.getConfig.and.returnValue(of(mockConfig));
@@ -114,7 +115,29 @@ describe('TeacherPresentationSelectionStore', () => {
       expect(store.isSelected(101)).toBeTrue();
       expect(store.isSelected(102)).toBeTrue();
       expect(store.studentNamesDisplay()).toBe('anonymize');
+      expect(store.showComponentPrompt()).toBeFalse();
       expect(store.prompt()).toBe('Initial prompt');
+    });
+
+    it('should default showComponentPrompt to true when config omits it', () => {
+      const mockConfig: TeacherPresentationConfig = {
+        id: 1,
+        runId: 1,
+        periodId: 10,
+        nodeId: 'node1',
+        componentId: 'comp1',
+        componentType: 'Discussion',
+        itemType: 'Discussion',
+        items: [],
+        studentNamesDisplay: 'hide',
+        showComponentPrompt: undefined as any,
+        prompt: null
+      };
+      configServiceSpy.getConfig.and.returnValue(of(mockConfig));
+
+      store.init(1, 10, 'node1', 'comp1', 'Discussion', 'Discussion');
+
+      expect(store.showComponentPrompt()).toBeTrue();
     });
 
     it('should preserve empty string prompt when config has empty prompt', () => {
@@ -127,11 +150,12 @@ describe('TeacherPresentationSelectionStore', () => {
         componentType: 'Discussion',
         items: [],
         studentNamesDisplay: 'hide',
+        showComponentPrompt: true,
         prompt: ''
       };
       configServiceSpy.getConfig.and.returnValue(of(mockConfig));
 
-      store.init(1, 10, 'node1', 'comp1', 'Discussion');
+      store.init(1, 10, 'node1', 'comp1', 'Discussion', 'Discussion');
 
       expect(store.prompt()).toBe('');
     });
@@ -151,6 +175,17 @@ describe('TeacherPresentationSelectionStore', () => {
       expect(payload.itemType).toBe('Discussion');
       expect(payload.items?.length).toBe(1);
       expect((payload.items?.[0] as DiscussionPresentationItem).studentWorkId).toBe(100);
+      expect(payload.showComponentPrompt).toBeTrue();
+    }));
+
+    it('should debounce autosave by 1 second when setShowComponentPrompt is called', fakeAsync(() => {
+      store.setShowComponentPrompt(false);
+      expect(store.showComponentPrompt()).toBeFalse();
+
+      tick(1000);
+      expect(configServiceSpy.saveConfig).toHaveBeenCalledTimes(1);
+      const payload = configServiceSpy.saveConfig.calls.mostRecent().args[0];
+      expect(payload.showComponentPrompt).toBeFalse();
     }));
 
     it('setPrompt should save immediately without waiting for debounce', () => {
@@ -212,7 +247,9 @@ describe('TeacherPresentationSelectionStore', () => {
     it('should identify a chat message by workgroup and timestamp, not by student work id', () => {
       store.toggleIdeaResponse('idea_1', message1);
       // The same message seen in a later save of the chat has a different studentWorkId
-      expect(store.isIdeaResponseSelected('idea_1', { ...message1, studentWorkId: 999 })).toBeTrue();
+      expect(
+        store.isIdeaResponseSelected('idea_1', { ...message1, studentWorkId: 999 })
+      ).toBeTrue();
     });
 
     it('should retain response as standalone when idea category is unchecked', () => {
@@ -255,6 +292,7 @@ describe('TeacherPresentationSelectionStore', () => {
       const ideaItem = payload.items?.[0] as IdeasPresentationItem;
       expect(ideaItem.ideaId).toBe('idea_1');
       expect(ideaItem.responses).toEqual([message1, message2]);
+      expect(payload.showComponentPrompt).toBeTrue();
     }));
 
     it('should save standalone responses with ideaId: null when idea category is unchecked', fakeAsync(() => {
@@ -346,6 +384,7 @@ describe('TeacherPresentationSelectionStore', () => {
         itemType: 'Discussion',
         items: [],
         studentNamesDisplay: 'hide',
+        showComponentPrompt: true,
         prompt: null
       };
       configServiceSpy.getConfig.and.returnValue(of(mockDiscussionConfig));
@@ -357,4 +396,3 @@ describe('TeacherPresentationSelectionStore', () => {
     });
   });
 });
-

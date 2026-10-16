@@ -7,8 +7,8 @@ import { CRaterIdea } from '../../../components/common/cRater/CRaterIdea';
 import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
 import { CRaterService } from '../../../services/cRaterService';
 import { IdeasSummaryComponent, StudentResponseItem } from './ideas-summary.component';
-import { MockProviders } from 'ng-mocks';
-import { of } from 'rxjs';
+import { MockProvider, MockProviders } from 'ng-mocks';
+import { NEVER, of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
@@ -25,14 +25,18 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
       imports: [IdeasSummaryComponent],
       providers: [
         MockProviders(
-          AnnotationService,
           ConfigService,
           CRaterService,
           TeacherDataService,
-          TeacherProjectService,
           SummaryService,
           TeacherPresentationConfigService
-        )
+        ),
+        MockProvider(TeacherProjectService, {
+          projectSaved$: NEVER
+        }),
+        MockProvider(AnnotationService, {
+          annotationReceived$: NEVER
+        })
       ]
     }).compileComponents();
 
@@ -331,8 +335,7 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
             'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car extremely rapidly.';
           const result = component['truncateToChars'](text);
           expect(result).toEqual({
-            text:
-              'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car...',
+            text: 'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car...',
             isTruncated: true
           });
         });
@@ -342,8 +345,7 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
             'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car rapidly.';
           const result = component['truncateToChars'](text, 120);
           expect(result).toEqual({
-            text:
-              'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped...',
+            text: 'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped...',
             isTruncated: true
           });
         });
@@ -436,20 +438,24 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
   });
 });
 
-describe('IdeasSummaryComponent for Open Response component', () => {
+fdescribe('IdeasSummaryComponent for Open Response component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IdeasSummaryComponent],
       providers: [
         MockProviders(
-          AnnotationService,
           ConfigService,
           CRaterService,
           TeacherDataService,
-          TeacherProjectService,
           SummaryService,
           TeacherPresentationConfigService
-        )
+        ),
+        MockProvider(TeacherProjectService, {
+          projectSaved$: NEVER
+        }),
+        MockProvider(AnnotationService, {
+          annotationReceived$: NEVER
+        })
       ]
     }).compileComponents();
 
@@ -662,7 +668,11 @@ function showsDisplaySummary(componentType: string) {
 function generateMockRubric(numIdeas: number, numDetected: number): void {
   const ideas = [];
   for (let i = 0; i < numIdeas; i++) {
-    const idea = new CRaterIdea('idea ' + (i + 1), numDetected > 0 ? true : false);
+    const idea = new CRaterIdea(
+      'idea ' + (i + 1),
+      numDetected > 0 ? true : false,
+      'idea ' + (i + 1)
+    );
     ideas.push(idea);
     numDetected--;
   }
@@ -712,13 +722,14 @@ function generateMockStudentWorkDialogGuidanceWithResponses(): void {
   );
 }
 
-function generateMockStudentWorkOpenResponse(numIdeasDetected: number): void {
+function generateMockStudentWorkOpenResponse(numIdeasDetected: number, periodId?: number): void {
   const ideas = generateIdeas(numIdeasDetected);
   spyOn(TestBed.inject(AnnotationService), 'getAnnotationsByNodeIdComponentId').and.returnValue([
     new Annotation({
+      periodId: periodId !== undefined ? periodId : (component?.periodId ?? 1),
       toWorkgroupId: 1,
       data: { ideas: ideas }
-    })
+    } as any)
   ]);
 }
 

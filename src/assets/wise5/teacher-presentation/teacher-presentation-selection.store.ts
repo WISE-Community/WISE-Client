@@ -64,7 +64,7 @@ export class TeacherPresentationSelectionStore {
     nodeId: string,
     componentId: string,
     componentType: string,
-    itemType: TeacherPresentationItemType = 'Discussion'
+    itemType: TeacherPresentationItemType
   ): void {
     this.runId.set(runId);
     this.periodId.set(periodId);

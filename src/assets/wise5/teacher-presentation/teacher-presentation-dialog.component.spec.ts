@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TeacherPresentationDialogComponent } from './teacher-presentation-dialog.component';
 import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
 import { TeacherPresentationConfigService } from './teacher-presentation-config.service';
 import { ConfigService } from '../services/configService';
+import { MockProvider } from 'ng-mocks';
+import { CRaterService } from '../services/cRaterService';
 
 describe('TeacherPresentationDialogComponent', () => {
   let component: TeacherPresentationDialogComponent;
@@ -16,16 +17,21 @@ describe('TeacherPresentationDialogComponent', () => {
 
   beforeEach(async () => {
     dialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    configServiceSpy = jasmine.createSpyObj('ConfigService', ['getRunId', 'getPeriods']);
+    configServiceSpy = jasmine.createSpyObj('ConfigService', [
+      'getRunId',
+      'getPeriods',
+      'getClassmateUserInfos'
+    ]);
     presentationConfigServiceSpy = jasmine.createSpyObj('TeacherPresentationConfigService', [
       'getConfig',
       'saveConfig'
     ]);
 
     await TestBed.configureTestingModule({
-      imports: [TeacherPresentationDialogComponent, NoopAnimationsModule],
+      imports: [TeacherPresentationDialogComponent],
       providers: [
         TeacherPresentationSelectionStore,
+        MockProvider(CRaterService),
         { provide: TeacherPresentationConfigService, useValue: presentationConfigServiceSpy },
         { provide: ConfigService, useValue: configServiceSpy },
         { provide: MatDialogRef, useValue: dialogRefSpy },
@@ -289,6 +295,6 @@ describe('TeacherPresentationDialogComponent', () => {
     const selects = fixture.nativeElement.querySelectorAll('mat-select');
     // There should be both Student Names and Original Question selects
     expect(selects.length).toBe(2);
-    expect(selects[1].getAttribute('aria-label')).toBe('Original Question Display');
+    expect(selects[1].getAttribute('aria-label')).toBe('Activity Question Display');
   });
 });
