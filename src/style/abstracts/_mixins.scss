@@ -193,6 +193,11 @@
   }
 }
 
+.user-list {
+  border-radius: variables.$card-border-radius;
+  overflow: hidden;
+}
+
 // Define a custom mixin that takes in the current material theme and colors
 @mixin theme-setup($theme, $colors) {
   a {
