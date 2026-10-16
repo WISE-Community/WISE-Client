@@ -59,7 +59,9 @@
         </ng-container>
 
         <ng-container matColumnDef="count">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Students</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" i18n>
+            Students
+          </th>
           <td mat-cell *matCellDef="let row">
             <span class="flex items-center justify-center gap-1">
               <mat-icon class="mat-18">person</mat-icon>
