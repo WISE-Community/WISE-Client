@@ -12,7 +12,6 @@ import { NEVER, of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-
 import { TeacherPresentationConfigService } from '../../../teacher-presentation/teacher-presentation-config.service';
 import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
 
@@ -24,13 +23,11 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
     await TestBed.configureTestingModule({
       imports: [IdeasSummaryComponent],
       providers: [
-        MockProviders(
-          ConfigService,
-          CRaterService,
-          TeacherDataService,
-          SummaryService,
-          TeacherPresentationConfigService
-        ),
+        MockProviders(ConfigService, CRaterService, TeacherDataService, SummaryService),
+        MockProvider(TeacherPresentationConfigService, {
+          getConfig: () => of(null as any),
+          saveConfig: () => of({} as any)
+        }),
         MockProvider(TeacherProjectService, {
           projectSaved$: NEVER
         }),
@@ -438,18 +435,16 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
   });
 });
 
-fdescribe('IdeasSummaryComponent for Open Response component', () => {
+describe('IdeasSummaryComponent for Open Response component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IdeasSummaryComponent],
       providers: [
-        MockProviders(
-          ConfigService,
-          CRaterService,
-          TeacherDataService,
-          SummaryService,
-          TeacherPresentationConfigService
-        ),
+        MockProviders(ConfigService, CRaterService, TeacherDataService, SummaryService),
+        MockProvider(TeacherPresentationConfigService, {
+          getConfig: () => of(null as any),
+          saveConfig: () => of({} as any)
+        }),
         MockProvider(TeacherProjectService, {
           projectSaved$: NEVER
         }),
@@ -476,11 +471,17 @@ fdescribe('IdeasSummaryComponent for Open Response component', () => {
     ]);
   });
 
+  describe('ngOnInit()', () => {
+    ngInit_OR_NoIdeasDetected_ShowMessage();
+    ngInit_OR_IdeasDetected_ShowSummary();
+    ngInit_OR_FilterByPeriod();
+  });
+
   describe('presentation selection', () => {
     let store: TeacherPresentationSelectionStore;
 
     beforeEach(() => {
-      store = TestBed.inject(TeacherPresentationSelectionStore);
+      store = fixture.debugElement.injector.get(TeacherPresentationSelectionStore);
       const configService = TestBed.inject(ConfigService);
       spyOn(configService, 'getRunId').and.returnValue(1);
       component.periodId = 1;

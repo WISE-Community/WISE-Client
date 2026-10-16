@@ -115,8 +115,12 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     );
   }
 
+  get isPresentationAvailable(): boolean {
+    return this.isSinglePeriod;
+  }
+
   get displayedColumns(): string[] {
-    if (this.isSinglePeriod) {
+    if (this.isPresentationAvailable) {
       return ['select', 'text', 'sampleResponse', 'count'];
     }
     return ['text', 'sampleResponse', 'count'];
@@ -191,7 +195,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     } else if (this.componentType === 'OpenResponse') {
       const allAnnotations = this.annotationService
         .getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
-        .filter((annotation) => this.periodId === -1 || annotation.periodId === this.periodId);
+        .filter((annotation) => !this.isSinglePeriod || annotation.periodId === this.periodId);
       const latestAnnotations = allAnnotations.reduceRight(
         (latestAnnotations, annotation) =>
           latestAnnotations.some(
@@ -207,7 +211,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
         work$.subscribe((componentStates) => {
           const cachedStates = this.dataService
             ?.getComponentStatesByComponentId?.(this.componentId)
-            ?.filter((s: any) => this.periodId === -1 || s.periodId === this.periodId);
+            ?.filter((s: any) => !this.isSinglePeriod || s.periodId === this.periodId);
           const states =
             cachedStates && cachedStates.length > 0 ? cachedStates : (componentStates ?? []);
           this.groupIdeas(summaryData, states, allAnnotations);
@@ -215,7 +219,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       } else {
         const cachedStates = this.dataService
           ?.getComponentStatesByComponentId?.(this.componentId)
-          ?.filter((s: any) => this.periodId === -1 || s.periodId === this.periodId);
+          ?.filter((s: any) => !this.isSinglePeriod || s.periodId === this.periodId);
         this.groupIdeas(summaryData, cachedStates ?? [], allAnnotations);
       }
     }
