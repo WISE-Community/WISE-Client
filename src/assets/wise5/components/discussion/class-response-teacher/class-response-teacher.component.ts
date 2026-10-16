@@ -39,36 +39,10 @@ import { StudentNamesDisplayMode } from '../../../teacher-presentation/teacher-p
     TextFieldModule
   ],
   selector: 'class-response-teacher',
-  styleUrl: '../class-response/class-response.component.scss',
-  styles: `
-    @reference "tailwindcss";
-
-    details:open > summary {
-      .details-closed {
-        @apply hidden;
-      }
-
-      .details-open {
-        @apply flex;
-      }
-    }
-
-    .reply-details:open {
-      @apply px-2;
-
-      > summary {
-        @apply -mx-2 mb-1 rounded-b-none;
-      }
-    }
-
-    summary {
-      @apply italic cursor-pointer px-2 flex items-center gap-2;
-
-      &::-webkit-details-marker {
-        display: none;
-      }
-    }
-  `,
+  styleUrls: [
+    '../class-response/class-response.component.scss',
+    './class-response-teacher.component.scss'
+  ],
   templateUrl: './class-response-teacher.component.html'
 })
 export class ClassResponseTeacherComponent extends ClassResponse implements OnInit, OnChanges {

@@ -26,13 +26,14 @@
 
 <ng-template #postContent let-showHideButton>
   <div class="p-2 w-full">
-    <div class="flex flex-row items-center gap-2">
+    <div class="flex flex-row items-center gap-1">
       @if (selectable && !isPresentationMode) {
         <mat-checkbox
+          color="primary"
           [checked]="isParentSelected()"
           [disabled]="isParentCheckboxDisabled()"
           (change)="onParentCheckboxChange()"
-          aria-label="Include post in presentation"
+          aria-label="Include in presentation view"
           i18n-aria-label
         />
       }
@@ -145,12 +146,13 @@
 </ng-template>
 
 <ng-template #replyContent let-reply let-showHideButton="showHideButton">
-  <div class="flex flex-row items-center gap-2 pt-1">
+  <div class="flex flex-row items-center gap-1 pt-1">
     @if (selectable && !isPresentationMode) {
       <mat-checkbox
+        color="primary"
         [checked]="isReplySelected(reply)"
         (change)="onReplyCheckboxChange(reply)"
-        aria-label="Include comment in presentation"
+        aria-label="Include in presentation view"
         i18n-aria-label
       />
     }
