@@ -22,6 +22,8 @@ export interface TeacherPresentationDialogData {
   store: TeacherPresentationSelectionStore;
 }
 
+export type ComponentPromptDisplayMode = 'show' | 'hide';
+
 @Component({
   selector: 'teacher-presentation-dialog',
   imports: [
@@ -86,9 +88,23 @@ export class TeacherPresentationDialogComponent implements OnInit {
     return this.store.studentNamesDisplay() === 'anonymize';
   }
 
+  get componentPromptDisplay(): ComponentPromptDisplayMode {
+    return this.store.showComponentPrompt() ? 'show' : 'hide';
+  }
+
+  get showComponentPrompt(): boolean {
+    return this.store.showComponentPrompt();
+  }
+
   onNamesDisplayChange(mode: StudentNamesDisplayMode): void {
     if (mode) {
       this.store.setStudentNamesDisplay(mode);
+    }
+  }
+
+  onComponentPromptDisplayChange(mode: ComponentPromptDisplayMode): void {
+    if (mode) {
+      this.store.setShowComponentPrompt(mode === 'show');
     }
   }
 

@@ -234,7 +234,61 @@ describe('TeacherPresentationDialogComponent', () => {
 
     const ideasEl = fixture.nativeElement.querySelector('ideas-presentation');
     expect(ideasEl).toBeNull();
-    expect(fixture.nativeElement.textContent).toContain('No ideas selected. Close and check ideas to display.');
+    expect(fixture.nativeElement.textContent).toContain(
+      'No ideas selected. Close and check ideas to display.'
+    );
+  });
+
+  it('should default componentPromptDisplay to show', () => {
+    expect(component.componentPromptDisplay).toBe('show');
+  });
+
+  it('should update componentPromptDisplay when onComponentPromptDisplayChange is called', () => {
+    spyOn(store, 'setShowComponentPrompt').and.callThrough();
+
+    component.onComponentPromptDisplayChange('hide');
+    expect(store.setShowComponentPrompt).toHaveBeenCalledWith(false);
+    expect(component.componentPromptDisplay).toBe('hide');
+
+    component.onComponentPromptDisplayChange('show');
+    expect(store.setShowComponentPrompt).toHaveBeenCalledWith(true);
+    expect(component.componentPromptDisplay).toBe('show');
+  });
+
+  it('should render original question section when prompt exists and componentPromptDisplay is show', () => {
+    component.data.component = {
+      id: 'comp1',
+      type: 'OpenResponse',
+      prompt: 'Why does ice float?'
+    } as any;
+    store.showComponentPrompt.set(true);
+    fixture.detectChanges();
+
+    const promptSection = fixture.nativeElement.querySelector('.component-prompt-section');
+    expect(promptSection).not.toBeNull();
+    expect(promptSection.textContent).toContain('Why does ice float?');
+  });
+
+  it('should hide original question section when componentPromptDisplay is hide', () => {
+    component.data.component = {
+      id: 'comp1',
+      type: 'OpenResponse',
+      prompt: 'Why does ice float?'
+    } as any;
+    store.showComponentPrompt.set(false);
+    fixture.detectChanges();
+
+    const promptSection = fixture.nativeElement.querySelector('.component-prompt-section');
+    expect(promptSection).toBeNull();
+  });
+
+  it('should render Original Question dropdown in header when controls are visible', () => {
+    component.toggleControls(true); // controls visible
+    fixture.detectChanges();
+
+    const selects = fixture.nativeElement.querySelectorAll('mat-select');
+    // There should be both Student Names and Original Question selects
+    expect(selects.length).toBe(2);
+    expect(selects[1].getAttribute('aria-label')).toBe('Original Question Display');
   });
 });
-

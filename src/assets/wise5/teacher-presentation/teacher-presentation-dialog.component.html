@@ -32,6 +32,18 @@
             <mat-option value="show" i18n>Show</mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <mat-label i18n>Activity Question</mat-label>
+          <mat-select
+            [ngModel]="componentPromptDisplay"
+            (ngModelChange)="onComponentPromptDisplayChange($event)"
+            aria-label="Activity Question Display"
+            i18n-aria-label
+          >
+            <mat-option value="show" i18n>Show</mat-option>
+            <mat-option value="hide" i18n>Hide</mat-option>
+          </mat-select>
+        </mat-form-field>
       }
     </div>
     <div class="shrink-0 flex items-center gap-2">
@@ -105,7 +117,7 @@
       </div>
     }
   </div>
-  @if (componentPrompt) {
+  @if (componentPrompt && componentPromptDisplay === 'show') {
     <div
       class="component-prompt-section p-3 rounded-lg bg-gray-100 border border-gray-200 mt-2 mb-1"
     >

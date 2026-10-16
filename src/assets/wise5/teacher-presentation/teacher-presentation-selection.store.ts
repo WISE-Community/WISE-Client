@@ -40,6 +40,7 @@ export class TeacherPresentationSelectionStore {
   );
 
   studentNamesDisplay = signal<StudentNamesDisplayMode>('hide');
+  showComponentPrompt = signal<boolean>(true);
   prompt = signal<string | null>(null);
 
   // Computed signals
@@ -109,6 +110,7 @@ export class TeacherPresentationSelectionStore {
               }
             }
             this.studentNamesDisplay.set(config.studentNamesDisplay || 'hide');
+            this.showComponentPrompt.set(config.showComponentPrompt ?? true);
             this.prompt.set(config.prompt ?? null);
           }
         },
@@ -280,6 +282,11 @@ export class TeacherPresentationSelectionStore {
     this.triggerAutosave();
   }
 
+  setShowComponentPrompt(show: boolean): void {
+    this.showComponentPrompt.set(show);
+    this.triggerAutosave();
+  }
+
   setPrompt(newPrompt: string | null): void {
     this.prompt.set(newPrompt);
     this.persistConfig();
@@ -325,6 +332,7 @@ export class TeacherPresentationSelectionStore {
       itemType: this.itemType(),
       items,
       studentNamesDisplay: this.studentNamesDisplay(),
+      showComponentPrompt: this.showComponentPrompt(),
       prompt: this.prompt()
     };
 

@@ -42,6 +42,7 @@ export interface TeacherPresentationConfig {
   itemType?: TeacherPresentationItemType;
   items: TeacherPresentationItem[];
   studentNamesDisplay: StudentNamesDisplayMode;
+  showComponentPrompt: boolean;
   prompt: string | null;
   updatedByWorkgroupId?: number;
   updatedAt?: number;

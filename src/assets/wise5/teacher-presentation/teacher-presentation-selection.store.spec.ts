@@ -35,6 +35,7 @@ describe('TeacherPresentationSelectionStore', () => {
     expect(store.selectedCount()).toBe(0);
     expect(store.hasSelections()).toBeFalse();
     expect(store.studentNamesDisplay()).toBe('hide');
+    expect(store.showComponentPrompt()).toBeTrue();
     expect(store.prompt()).toBeNull();
   });
 
@@ -306,6 +307,7 @@ describe('TeacherPresentationSelectionStore', () => {
           { ideaId: null, responses: [response(701)] }
         ],
         studentNamesDisplay: 'show',
+        showComponentPrompt: false,
         prompt: 'Custom ideas prompt'
       };
       configServiceSpy.getConfig.and.returnValue(of(mockIdeasConfig));
@@ -318,9 +320,20 @@ describe('TeacherPresentationSelectionStore', () => {
       expect(store.isIdeaResponseSelected('idea_1', response(602))).toBeTrue();
       expect(store.isIdeaResponseSelected('unrelated', response(701))).toBeTrue();
       expect(store.studentNamesDisplay()).toBe('show');
+      expect(store.showComponentPrompt()).toBeFalse();
       expect(store.prompt()).toBe('Custom ideas prompt');
       expect(store.hasSelections()).toBeTrue();
     });
+
+    it('should set showComponentPrompt and persist config', fakeAsync(() => {
+      store.init(1, 10, 'node1', 'comp1', 'OpenResponse', 'Ideas');
+      store.setShowComponentPrompt(false);
+      expect(store.showComponentPrompt()).toBeFalse();
+      tick(1000);
+      expect(configServiceSpy.saveConfig).toHaveBeenCalled();
+      const payload = configServiceSpy.saveConfig.calls.mostRecent().args[0];
+      expect(payload.showComponentPrompt).toBeFalse();
+    }));
 
     it('should not overwrite Ideas itemType even if an existing Discussion config was returned', () => {
       const mockDiscussionConfig: TeacherPresentationConfig = {
