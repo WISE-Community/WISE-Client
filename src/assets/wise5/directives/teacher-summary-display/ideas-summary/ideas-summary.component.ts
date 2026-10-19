@@ -341,6 +341,42 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
       return '';
     };
 
+    this.dataSource.sortData = (data: IdeaTableRow[], sort: MatSort): IdeaTableRow[] => {
+      const active = sort.active;
+      const direction = sort.direction;
+      if (!active || direction === '') {
+        return data;
+      }
+
+      return data.sort((a, b) => {
+        if (active === 'count') {
+          if (a.count === 0 && b.count > 0) {
+            return 1;
+          }
+          if (b.count === 0 && a.count > 0) {
+            return -1;
+          }
+          return (a.count - b.count) * (direction === 'asc' ? 1 : -1);
+        }
+
+        const valueA = this.dataSource.sortingDataAccessor(a, active);
+        const valueB = this.dataSource.sortingDataAccessor(b, active);
+        let comparatorResult = 0;
+        if (valueA != null && valueB != null) {
+          if (valueA > valueB) {
+            comparatorResult = 1;
+          } else if (valueA < valueB) {
+            comparatorResult = -1;
+          }
+        } else if (valueA != null) {
+          comparatorResult = 1;
+        } else if (valueB != null) {
+          comparatorResult = -1;
+        }
+        return comparatorResult * (direction === 'asc' ? 1 : -1);
+      });
+    };
+
     if (this.sort) {
       this.dataSource.sort = this.sort;
     }

@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockProvider } from 'ng-mocks';
-import { NodeStatusService } from '../../../../services/nodeStatusService';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MockComponent, MockProvider } from 'ng-mocks';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { StepSelectComponent } from '../stepSelect/step-select.component';
 import { StepToolsComponent } from './step-tools.component';
 import { StudentDataService } from '../../../../services/studentDataService';
 import { StudentService } from '../../../../../../app/student/student.service';
@@ -12,16 +11,19 @@ import { of } from 'rxjs';
 import { RunInfo } from '../../../../../../app/student/run-info';
 
 const nodeId1 = 'node1';
-const nodeStatus1 = { icon: '', isCompleted: true };
-const nodeStatus2 = { icon: '', isCompleted: false };
 let getCurrentNodeIdSpy: jasmine.Spy;
+
 describe('StepToolsComponent', () => {
   let component: StepToolsComponent;
   let fixture: ComponentFixture<StepToolsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, StepToolsComponent, StudentTeacherCommonServicesModule],
+      imports: [
+        StepToolsComponent,
+        StudentTeacherCommonServicesModule,
+        MockComponent(StepSelectComponent)
+      ],
       providers: [MockProvider(StudentService), provideHttpClient(withInterceptorsFromDi())]
     }).compileComponents();
   });
@@ -30,13 +32,6 @@ describe('StepToolsComponent', () => {
     fixture = TestBed.createComponent(StepToolsComponent);
     getCurrentNodeIdSpy = spyOn(TestBed.inject(StudentDataService), 'getCurrentNodeId');
     getCurrentNodeIdSpy.and.returnValue(nodeId1);
-    spyOn(TestBed.inject(NodeStatusService), 'getNodeStatuses').and.returnValue({
-      node1: nodeStatus1,
-      node2: nodeStatus2
-    });
-    spyOn(TestBed.inject(NodeStatusService), 'getNodeStatusByNodeId').and.returnValue({
-      isCompleted: true
-    });
     const projectService = TestBed.inject(VLEProjectService);
     spyOn(projectService, 'nodeHasWork').and.returnValue(true);
     spyOn(projectService, 'getNodesByToNodeId').and.returnValue([]);

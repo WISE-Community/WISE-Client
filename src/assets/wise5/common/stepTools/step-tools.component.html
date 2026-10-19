@@ -10,10 +10,6 @@
   >
     <mat-icon>{{ icons.prev }}</mat-icon>
   </button>
-  @if (nodeId) {
-    <node-icon [nodeId]="nodeId" size="18" />
-  }
-  &nbsp;
   <mat-form-field appearance="fill">
     <mat-select
       id="stepSelectMenu"
@@ -26,7 +22,10 @@
     >
       <mat-select-trigger>
         @if (nodeId) {
-          {{ getNodePositionAndTitle(nodeId) }}
+          <span class="flex gap-2 items-center">
+            <node-icon class="hidden sm:flex" [nodeId]="nodeId" size="18" />
+            <span>{{ getNodePositionAndTitle(nodeId) }}</span>
+          </span>
         } @else {
           <ng-container i18n> Select a Step </ng-container>
         }
@@ -34,7 +33,7 @@
       @for (nodeId of nodeIds; track nodeId) {
         <mat-option [value]="nodeId" class="node-select-option">
           <div class="flex justify-start items-center gap-2">
-            <node-icon [nodeId]="nodeId" size="18" />
+            <node-icon class="hidden sm:flex" [nodeId]="nodeId" size="24" />
             <span [ngClass]="{ strong: isGroupNode(nodeId) }">{{
               getNodePositionAndTitle(nodeId)
             }}</span>

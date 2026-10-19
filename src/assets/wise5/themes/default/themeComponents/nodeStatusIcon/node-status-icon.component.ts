@@ -11,11 +11,17 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class NodeStatusIconComponent {
   @Input() nodeId: string;
+  @Input() customClass: string;
   protected nodeStatus: any;
+  @Input() size: number;
+  protected sizeClass: string;
 
   constructor(private nodeStatusService: NodeStatusService) {}
 
   ngOnChanges(): void {
     this.nodeStatus = this.nodeStatusService.getNodeStatusByNodeId(this.nodeId);
+    if (this.size) {
+      this.sizeClass = `mat-${this.size}`;
+    }
   }
 }

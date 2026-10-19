@@ -1,0 +1,73 @@
+@reference "tailwindcss";
+
+.step-select {
+  background-color: var(--mat-form-field-filled-container-color);
+  min-width: 0;
+
+  node-icon {
+    @apply hidden sm:flex justify-center;
+  }
+
+  .mdc-button__label {
+    @apply min-w-0 w-full;
+  }
+}
+
+.step-select-menu {
+  --mat-expansion-header-collapsed-state-height: 40px;
+  --mat-expansion-header-expanded-state-height: 48px;
+  --mat-list-list-item-one-line-container-height: 40px;
+  --mat-list-active-indicator-color: var(--mat-form-field-filled-container-color);
+
+  &.mat-mdc-menu-panel {
+    max-width: none;
+    scroll-padding-top: 48px;
+  }
+
+  .mat-mdc-menu-content {
+    padding: 0;
+  }
+
+  .mat-accordion .mat-expansion-panel:not(.mat-expanded) {
+    margin-bottom: 0;
+  }
+
+  .mat-expansion-panel {
+    padding: 0;
+  }
+
+  .mat-expansion-panel-header {
+    padding: 0 12px;
+  }
+
+  .mat-expansion-panel-header-title,
+  .mat-content.mat-content-hide-toggle {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0;
+  }
+
+  .mdc-list-item {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    .mat-icon {
+      width: 24px;
+    }
+  }
+
+  .mat-caption.list-item-title {
+    @apply font-medium truncate;
+  }
+
+  .mat-divider-horizontal {
+    @apply m-0!;
+  }
+
+  .icon-inside-progress {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 !text-sm !h-auto !w-auto;
+  }
+}

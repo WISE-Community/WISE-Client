@@ -8,6 +8,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { applyMasonry } from '../../../common/dom/dom';
 import { generateRandomKey } from '../../../common/string/string';
 import { AnnotationService } from '../../../services/annotationService';
 import { ConfigService } from '../../../services/configService';
@@ -120,29 +121,8 @@ export class DiscussionStudent extends ComponentStudent implements AfterViewInit
     this.masonryResizeObserver?.disconnect();
   }
 
-  /**
-   * Apply JS-based masonry layout using 1px row height if CSS grid-lanes is not supported
-   */
   protected applyMasonry(): void {
-    const grid = this.postsGridRef?.nativeElement;
-    if (!grid) return;
-    const rowGap = parseInt(getComputedStyle(grid).rowGap) || 8;
-    const rowHeight = 1;
-    const items = Array.from(grid.children) as HTMLElement[];
-    items.forEach((item) => {
-      item.style.gridRowEnd = '';
-      const contentHeight = item.getBoundingClientRect().height;
-      const rowSpan = Math.ceil((contentHeight + rowGap) / (rowHeight + rowGap));
-      item.style.gridRowEnd = `span ${rowSpan}`;
-    });
-    // Re-run when any images finish loading
-    const pendingImages = Array.from(grid.querySelectorAll<HTMLImageElement>('img')).filter(
-      (img) => !img.complete
-    );
-    pendingImages.forEach((img) => {
-      img.addEventListener('load', () => this.applyMasonry(), { once: true });
-      img.addEventListener('error', () => this.applyMasonry(), { once: true });
-    });
+    applyMasonry(this.postsGridRef?.nativeElement);
   }
 
   protected renderDiscussion(): void {
