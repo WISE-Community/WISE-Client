@@ -1,5 +1,15 @@
-import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  NgZone,
+  OnDestroy,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { applyMasonry } from '../../../common/dom/dom';
 import { TeacherSummaryDisplayComponent } from '../../../directives/teacher-summary-display/teacher-summary-display.component';
 import { ComponentServiceLookupService } from '../../../services/componentServiceLookupService';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -50,19 +60,27 @@ import { TeacherReflectionComponent } from '../../../teacher-reflection/teacher-
   styleUrl: './component-summary.component.scss',
   templateUrl: './component-summary.component.html'
 })
-export class ComponentSummaryComponent {
+export class ComponentSummaryComponent implements OnDestroy {
   protected aiEnabled: boolean;
   protected avgScore: number;
   @Input() component: ComponentContent;
   protected hasCorrectAnswer: boolean;
   protected hasIdeaRubricData: boolean;
   protected hasStudentWork: boolean;
+  private masonryMutationObserver: MutationObserver;
+  private masonryResizeObserver: ResizeObserver;
   @Input() node: Node;
   @Input() periodId: number;
   protected showScoreSummary: boolean;
   protected showSummary: boolean;
   protected source: 'allPeriods' | 'period';
+  private summariesGridRef: ElementRef<HTMLElement>;
   private COMPONENTS_WITH_SUMMARY = ['Discussion', 'Match', 'MultipleChoice', 'OpenResponse'];
+
+  @ViewChild('summariesGrid') set summariesGrid(el: ElementRef<HTMLElement>) {
+    this.summariesGridRef = el;
+    this.setupMasonryObserver();
+  }
 
   constructor(
     private annotationService: AnnotationService,
@@ -70,6 +88,7 @@ export class ComponentSummaryComponent {
     private cRaterService: CRaterService,
     private dataService: TeacherDataService,
     private dialog: MatDialog,
+    private ngZone: NgZone,
     private projectService: ProjectService,
     private summaryService: SummaryService
   ) {}
@@ -82,6 +101,37 @@ export class ComponentSummaryComponent {
       const totalScore = annotations.reduce((sumSoFar, a) => sumSoFar + a.data.value, 0);
       this.avgScore = totalScore / annotations.length;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.disconnectMasonryObservers();
+  }
+
+  private setupMasonryObserver(): void {
+    this.disconnectMasonryObservers();
+    const grid = this.summariesGridRef?.nativeElement;
+    if (grid && !CSS.supports('display', 'grid-lanes')) {
+      this.masonryResizeObserver = new ResizeObserver(() => {
+        this.ngZone.run(() => applyMasonry(grid));
+      });
+      this.observeMasonryElements(grid);
+      this.masonryMutationObserver = new MutationObserver(() => {
+        this.observeMasonryElements(grid);
+        this.ngZone.run(() => applyMasonry(grid));
+      });
+      this.masonryMutationObserver.observe(grid, { childList: true });
+    }
+  }
+
+  private observeMasonryElements(grid: HTMLElement): void {
+    this.masonryResizeObserver.disconnect();
+    this.masonryResizeObserver.observe(grid);
+    Array.from(grid.children).forEach((child) => this.masonryResizeObserver.observe(child));
+  }
+
+  private disconnectMasonryObservers(): void {
+    this.masonryResizeObserver?.disconnect();
+    this.masonryMutationObserver?.disconnect();
   }
 
   private setComponent(): void {
@@ -101,7 +151,8 @@ export class ComponentSummaryComponent {
       this.hasStudentWork &&
       (this.COMPONENTS_WITH_SUMMARY.includes(this.component.type) ||
         this.showScoreSummary ||
-        this.hasIdeaRubricData);
+        this.hasIdeaRubricData ||
+        (this.hasReflectionQuestions && this.isSinglePeriod));
   }
 
   private setSource(): void {
