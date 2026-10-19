@@ -5,7 +5,7 @@ import {
   StudentNamesDisplayMode,
   TeacherPresentationConfig,
   TeacherPresentationItem,
-  TeacherPresentationItemType
+  TeacherPresentationType
 } from './teacher-presentation-config';
 import { TeacherPresentationConfigService } from './teacher-presentation-config.service';
 import { DiscussionSelectionState } from './discussion-selection-state';
@@ -25,7 +25,7 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
   readonly nodeId = signal<string>('');
   readonly componentId = signal<string>('');
   readonly componentType = signal<string>('');
-  readonly itemType = signal<TeacherPresentationItemType>('Discussion');
+  readonly type = signal<TeacherPresentationType>('Discussion');
 
   readonly discussion = new DiscussionSelectionState();
   readonly ideas = new IdeasSelectionState();
@@ -52,9 +52,7 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
   readonly prompt = signal<string | null>(null);
 
   readonly hasSelections = computed(() => {
-    return this.itemType() === 'Ideas'
-      ? this.ideas.hasSelections()
-      : this.discussion.hasSelections();
+    return this.type() === 'Ideas' ? this.ideas.hasSelections() : this.discussion.hasSelections();
   });
 
   constructor() {
@@ -74,25 +72,26 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
     nodeId: string,
     componentId: string,
     componentType: string,
-    itemType: TeacherPresentationItemType
+    type: TeacherPresentationType
   ): void {
     this.runId.set(runId);
     this.periodId.set(periodId);
     this.nodeId.set(nodeId);
     this.componentId.set(componentId);
     this.componentType.set(componentType);
-    this.itemType.set(itemType);
+    this.type.set(type);
 
     if (runId && periodId && periodId !== -1 && nodeId && componentId) {
       this.configService.getConfig(runId, periodId, nodeId, componentId)?.subscribe({
         next: (config) => {
           if (config && config.id != null) {
-            if (this.itemType() === 'Ideas') {
-              if (config.itemType === 'Ideas') {
+            const configType = config.type;
+            if (this.type() === 'Ideas') {
+              if (configType === 'Ideas') {
                 this.ideas.loadFromItems(config.items);
               }
             } else {
-              if (config.itemType === 'Discussion' || !config.itemType) {
+              if (configType === 'Discussion' || !configType) {
                 this.discussion.loadFromItems(config.items);
               }
             }
@@ -203,7 +202,7 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
     if (!rId || !pId || pId === -1) return;
 
     const items: TeacherPresentationItem[] =
-      this.itemType() === 'Ideas' ? this.ideas.toPayloadItems() : this.discussion.toPayloadItems();
+      this.type() === 'Ideas' ? this.ideas.toPayloadItems() : this.discussion.toPayloadItems();
 
     const payload: Partial<TeacherPresentationConfig> = {
       runId: rId,
@@ -211,7 +210,7 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
       nodeId: this.nodeId(),
       componentId: this.componentId(),
       componentType: this.componentType(),
-      itemType: this.itemType(),
+      type: this.type(),
       items,
       studentNamesDisplay: this.studentNamesDisplay(),
       showComponentPrompt: this.showComponentPrompt(),

@@ -75,7 +75,7 @@ export class TeacherPresentationButtonComponent {
     }
     const store = this.effectiveStore;
     if (!store || !store.hasSelections()) {
-      if (store?.itemType() === 'Ideas') {
+      if (store?.type() === 'Ideas') {
         return $localize`Choose an idea category or student response first to present`;
       }
       return $localize`Select some posts or comments to present`;

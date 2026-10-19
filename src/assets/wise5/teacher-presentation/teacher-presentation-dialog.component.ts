@@ -67,7 +67,7 @@ export class TeacherPresentationDialogComponent implements OnInit {
     if (authoringPrompt) {
       return authoringPrompt;
     }
-    if (this.store.itemType() === 'Ideas') {
+    if (this.store.type() === 'Ideas') {
       return $localize`Here are your classmates' ideas. Which ideas do you agree with or want to explore further?`;
     }
     return $localize`Here are some of your classmates' posts. Pick one to discuss with your partner`;

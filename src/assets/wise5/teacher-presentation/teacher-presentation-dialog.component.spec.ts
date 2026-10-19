@@ -244,13 +244,13 @@ describe('TeacherPresentationDialogComponent', () => {
     expect(component.componentPrompt).toBe('What do you think happens to the energy?');
   });
 
-  it('should use default Ideas prompt when itemType is Ideas and no authoring prompt is provided', () => {
+  it('should use default Ideas prompt when type is Ideas and no authoring prompt is provided', () => {
     component.data.component = {
       id: 'comp1',
       type: 'OpenResponse',
       content: {}
     } as any;
-    store.itemType.set('Ideas');
+    store.type.set('Ideas');
     store.prompt.set(null);
 
     expect(component.effectivePrompt).toBe(
@@ -258,8 +258,8 @@ describe('TeacherPresentationDialogComponent', () => {
     );
   });
 
-  it('should render ideas-presentation when itemType is Ideas and hasSelections is true', () => {
-    store.itemType.set('Ideas');
+  it('should render ideas-presentation when type is Ideas and hasSelections is true', () => {
+    store.type.set('Ideas');
     store.selectedIdeaIds.set(new Set(['idea_1']));
     fixture.detectChanges();
 
@@ -269,8 +269,8 @@ describe('TeacherPresentationDialogComponent', () => {
     expect(fixture.nativeElement.textContent).not.toContain('No ideas selected');
   });
 
-  it('should render Ideas empty state when itemType is Ideas and hasSelections is false', () => {
-    store.itemType.set('Ideas');
+  it('should render Ideas empty state when type is Ideas and hasSelections is false', () => {
+    store.type.set('Ideas');
     store.selectedIdeaIds.set(new Set());
     store.standaloneResponses.set(new Map());
     fixture.detectChanges();

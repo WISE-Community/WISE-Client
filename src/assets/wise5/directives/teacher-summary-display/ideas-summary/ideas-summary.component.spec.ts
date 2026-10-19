@@ -498,8 +498,8 @@ describe('IdeasSummaryComponent for Open Response component', () => {
       expect(component['displayedColumns']).toEqual(['select', 'text', 'sampleResponse', 'count']);
     });
 
-    it('initializes store with Ideas itemType', () => {
-      expect(store.itemType()).toBe('Ideas');
+    it('initializes store with Ideas type', () => {
+      expect(store.type()).toBe('Ideas');
       expect(store.nodeId()).toBe('node1');
       expect(store.componentId()).toBe('comp1');
     });

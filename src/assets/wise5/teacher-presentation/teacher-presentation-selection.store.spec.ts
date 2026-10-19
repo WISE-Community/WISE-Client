@@ -101,7 +101,7 @@ describe('TeacherPresentationSelectionStore', () => {
         nodeId: 'node1',
         componentId: 'comp1',
         componentType: 'Discussion',
-        itemType: 'Discussion',
+        type: 'Discussion',
         items: [{ studentWorkId: 101 }, { studentWorkId: 102 }],
         studentNamesDisplay: 'anonymize',
         showComponentPrompt: false,
@@ -127,7 +127,7 @@ describe('TeacherPresentationSelectionStore', () => {
         nodeId: 'node1',
         componentId: 'comp1',
         componentType: 'Discussion',
-        itemType: 'Discussion',
+        type: 'Discussion',
         items: [],
         studentNamesDisplay: 'hide',
         showComponentPrompt: undefined as any,
@@ -151,6 +151,7 @@ describe('TeacherPresentationSelectionStore', () => {
         items: [],
         studentNamesDisplay: 'hide',
         showComponentPrompt: true,
+        type: 'Discussion',
         prompt: ''
       };
       configServiceSpy.getConfig.and.returnValue(of(mockConfig));
@@ -172,7 +173,7 @@ describe('TeacherPresentationSelectionStore', () => {
       const payload = configServiceSpy.saveConfig.calls.mostRecent().args[0];
       expect(payload.runId).toBe(1);
       expect(payload.periodId).toBe(10);
-      expect(payload.itemType).toBe('Discussion');
+      expect(payload.type).toBe('Discussion');
       expect(payload.items?.length).toBe(1);
       expect((payload.items?.[0] as DiscussionPresentationItem).studentWorkId).toBe(100);
       expect(payload.showComponentPrompt).toBeTrue();
@@ -286,7 +287,7 @@ describe('TeacherPresentationSelectionStore', () => {
       tick(1000);
       expect(configServiceSpy.saveConfig).toHaveBeenCalledTimes(1);
       const payload = configServiceSpy.saveConfig.calls.mostRecent().args[0];
-      expect(payload.itemType).toBe('Ideas');
+      expect(payload.type).toBe('Ideas');
       expect(payload.items?.length).toBe(1);
 
       const ideaItem = payload.items?.[0] as IdeasPresentationItem;
@@ -303,7 +304,7 @@ describe('TeacherPresentationSelectionStore', () => {
       tick(1000);
       expect(configServiceSpy.saveConfig).toHaveBeenCalled();
       const payload = configServiceSpy.saveConfig.calls.mostRecent().args[0];
-      expect(payload.itemType).toBe('Ideas');
+      expect(payload.type).toBe('Ideas');
       expect(payload.items?.length).toBe(1);
 
       const standaloneItem = payload.items?.[0] as IdeasPresentationItem;
@@ -339,7 +340,7 @@ describe('TeacherPresentationSelectionStore', () => {
         nodeId: 'node1',
         componentId: 'comp1',
         componentType: 'OpenResponse',
-        itemType: 'Ideas',
+        type: 'Ideas',
         items: [
           { ideaId: 'idea_1', responses: [response(601), response(602)] },
           { ideaId: null, responses: [response(701)] }
@@ -352,7 +353,7 @@ describe('TeacherPresentationSelectionStore', () => {
 
       store.init(1, 10, 'node1', 'comp1', 'OpenResponse', 'Ideas');
 
-      expect(store.itemType()).toBe('Ideas');
+      expect(store.type()).toBe('Ideas');
       expect(store.isIdeaSelected('idea_1')).toBeTrue();
       expect(store.isIdeaResponseSelected('idea_1', response(601))).toBeTrue();
       expect(store.isIdeaResponseSelected('idea_1', response(602))).toBeTrue();
@@ -373,7 +374,7 @@ describe('TeacherPresentationSelectionStore', () => {
       expect(payload.showComponentPrompt).toBeFalse();
     }));
 
-    it('should not overwrite Ideas itemType even if an existing Discussion config was returned', () => {
+    it('should not overwrite Ideas type even if an existing Discussion config was returned', () => {
       const mockDiscussionConfig: TeacherPresentationConfig = {
         id: 3,
         runId: 1,
@@ -381,7 +382,7 @@ describe('TeacherPresentationSelectionStore', () => {
         nodeId: 'node1',
         componentId: 'comp1',
         componentType: 'OpenResponse',
-        itemType: 'Discussion',
+        type: 'Discussion',
         items: [],
         studentNamesDisplay: 'hide',
         showComponentPrompt: true,
@@ -391,7 +392,7 @@ describe('TeacherPresentationSelectionStore', () => {
 
       store.init(1, 10, 'node1', 'comp1', 'OpenResponse', 'Ideas');
 
-      expect(store.itemType()).toBe('Ideas');
+      expect(store.type()).toBe('Ideas');
       expect(store.hasSelections()).toBeFalse();
     });
   });

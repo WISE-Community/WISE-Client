@@ -141,13 +141,13 @@
       @if (!store.hasSelections()) {
         <div class="flex flex-col items-center justify-center p-12 text-center text-gray-500">
           <mat-icon class="mat-48 mb-2">visibility_off</mat-icon>
-          @if (store.itemType() === 'Ideas') {
+          @if (store.type() === 'Ideas') {
             <div class="mat-body-1" i18n>No ideas selected. Close and check ideas to display.</div>
           } @else {
             <div class="mat-body-1" i18n>No posts selected. Close and check posts to display.</div>
           }
         </div>
-      } @else if (store.itemType() === 'Ideas') {
+      } @else if (store.type() === 'Ideas') {
         <ideas-presentation
           [nodeId]="data.nodeId"
           [component]="data.component"

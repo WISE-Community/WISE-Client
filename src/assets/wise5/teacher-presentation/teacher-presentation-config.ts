@@ -1,4 +1,4 @@
-export type TeacherPresentationItemType = 'Discussion' | 'Ideas';
+export type TeacherPresentationType = 'Discussion' | 'Ideas';
 
 export interface DiscussionPresentationItem {
   studentWorkId: number;
@@ -39,7 +39,7 @@ export interface TeacherPresentationConfig {
   nodeId: string;
   componentId: string;
   componentType: string;
-  itemType?: TeacherPresentationItemType;
+  type: TeacherPresentationType;
   items: TeacherPresentationItem[];
   studentNamesDisplay: StudentNamesDisplayMode;
   showComponentPrompt: boolean;
