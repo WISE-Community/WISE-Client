@@ -34,7 +34,7 @@
         }
       </div>
       @if (summariesVisible) {
-        <div class="mat-elevation-z1 app-background mt-4 mb-2">
+        <div class="mat-elevation-z1 app-background rounded-md mt-4 mb-2">
           <mat-tab-group
             [selectedIndex]="selectedComponent.value"
             (selectedIndexChange)="selectSummary($event)"
@@ -80,7 +80,7 @@
       }
     </div>
     @if (classResponsesVisible) {
-      <node-class-responses [node]="node" [components]="visibleComponents" />
+      <node-class-responses class="block mb-16" [node]="node" [components]="visibleComponents" />
     }
   </div>
 </div>

@@ -6,7 +6,11 @@ import { ConfigService } from '../../../services/configService';
 import { CRaterIdea } from '../../../components/common/cRater/CRaterIdea';
 import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
 import { CRaterService } from '../../../services/cRaterService';
-import { IdeasSummaryComponent, StudentResponseItem } from './ideas-summary.component';
+import {
+  IdeaTableRow,
+  IdeasSummaryComponent,
+  StudentResponseItem
+} from './ideas-summary.component';
 import { MockProviders } from 'ng-mocks';
 import { of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
@@ -186,6 +190,161 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
       ).toBe(true);
     });
 
+    describe('sorting', () => {
+      it('keeps ideas with 0 students below ideas with at least 1 student when sorted ascending', () => {
+        const testData: IdeaTableRow[] = [
+          {
+            id: '1',
+            text: 'Idea 1',
+            count: 0,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '2',
+            text: 'Idea 2',
+            count: 5,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '3',
+            text: 'Idea 3',
+            count: 1,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '4',
+            text: 'Idea 4',
+            count: 0,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '5',
+            text: 'Idea 5',
+            count: 3,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          }
+        ];
+
+        const sortedAsc = component['dataSource'].sortData(testData.slice(), {
+          active: 'count',
+          direction: 'asc'
+        } as any);
+
+        expect(sortedAsc.map((r) => r.count)).toEqual([1, 3, 5, 0, 0]);
+      });
+
+      it('keeps ideas with 0 students below ideas with at least 1 student when sorted descending', () => {
+        const testData: IdeaTableRow[] = [
+          {
+            id: '1',
+            text: 'Idea 1',
+            count: 0,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '2',
+            text: 'Idea 2',
+            count: 5,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '3',
+            text: 'Idea 3',
+            count: 1,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '4',
+            text: 'Idea 4',
+            count: 0,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '5',
+            text: 'Idea 5',
+            count: 3,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          }
+        ];
+
+        const sortedDesc = component['dataSource'].sortData(testData.slice(), {
+          active: 'count',
+          direction: 'desc'
+        } as any);
+
+        expect(sortedDesc.map((r) => r.count)).toEqual([5, 3, 1, 0, 0]);
+      });
+
+      it('sorts by text when sorting by idea column', () => {
+        const testData: IdeaTableRow[] = [
+          {
+            id: '1',
+            text: 'Beta',
+            count: 0,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '2',
+            text: 'Alpha',
+            count: 5,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          },
+          {
+            id: '3',
+            text: 'Gamma',
+            count: 1,
+            sampleResponse: '',
+            fullSampleResponse: '',
+            isSampleResponseTruncated: false,
+            responses: []
+          }
+        ];
+
+        const sortedTextAsc = component['dataSource'].sortData(testData.slice(), {
+          active: 'text',
+          direction: 'asc'
+        } as any);
+
+        expect(sortedTextAsc.map((r) => r.text)).toEqual(['Alpha', 'Beta', 'Gamma']);
+      });
+    });
+
     it('displays sample response without title attribute when response is not truncated', () => {
       const sampleResponseCell = fixture.nativeElement.querySelector(
         'td.mat-column-sampleResponse'
@@ -327,8 +486,7 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
             'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car extremely rapidly.';
           const result = component['truncateToChars'](text);
           expect(result).toEqual({
-            text:
-              'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car...',
+            text: 'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car...',
             isTruncated: true
           });
         });
@@ -338,8 +496,7 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
             'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped inside heating up the car rapidly.';
           const result = component['truncateToChars'](text, 120);
           expect(result).toEqual({
-            text:
-              'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped...',
+            text: 'Solar radiation easily enters through the car windshield and windows but the resulting thermal heat becomes trapped...',
             isTruncated: true
           });
         });
