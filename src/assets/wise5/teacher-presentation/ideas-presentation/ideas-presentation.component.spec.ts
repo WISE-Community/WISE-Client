@@ -8,6 +8,7 @@ import { ConfigService } from '../../services/configService';
 import { CRaterService } from '../../services/cRaterService';
 import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';
 import { CRaterIdea } from '../../components/common/cRater/CRaterIdea';
+import { branchPathBackgroundColors } from '../../common/color/color';
 
 describe('IdeasPresentationComponent', () => {
   let component: IdeasPresentationComponent;
@@ -81,9 +82,7 @@ describe('IdeasPresentationComponent', () => {
 
   it('should present only the selected messages from the stored snapshots', () => {
     store.selectedIdeaIds.set(new Set(['idea_1']));
-    store.selectedIdeaResponseMap.set(
-      new Map([['idea_1', new Map([['1:1000', aliceFirst]])]])
-    );
+    store.selectedIdeaResponseMap.set(new Map([['idea_1', new Map([['1:1000', aliceFirst]])]]));
     fixture.detectChanges();
 
     const cards = fixture.nativeElement.querySelectorAll('.response-card');
@@ -113,47 +112,53 @@ describe('IdeasPresentationComponent', () => {
     expect(cards[1].textContent).toContain('Chlorophyll is green');
   });
 
-  it('should present standalone responses without an idea category card', () => {
-    store.standaloneResponses.set(new Map([['2:3000', bob]]));
+  it('should present each standalone response as its own separate card without an idea category card', () => {
+    store.standaloneResponses.set(
+      new Map([
+        ['1:1000', aliceFirst],
+        ['2:3000', bob]
+      ])
+    );
     fixture.detectChanges();
 
     const sections = fixture.nativeElement.querySelectorAll('.idea-section');
-    expect(sections.length).toBe(1);
+    expect(sections.length).toBe(2);
     expect(sections[0].querySelector('.idea-category-card')).toBeNull();
-    const cards = sections[0].querySelectorAll('.response-card');
-    expect(cards.length).toBe(1);
-    expect(cards[0].textContent).toContain('CO2 enters through the leaves');
+    expect(sections[1].querySelector('.idea-category-card')).toBeNull();
+    const cards = fixture.nativeElement.querySelectorAll('.response-card');
+    expect(cards.length).toBe(2);
+    expect(cards[0].textContent).toContain('Light is absorbed by chlorophyll');
+    expect(cards[1].textContent).toContain('CO2 enters through the leaves');
   });
 
   it('should respect studentNamesDisplayMode', () => {
     store.selectedIdeaIds.set(new Set(['idea_1']));
-    store.selectedIdeaResponseMap.set(
-      new Map([['idea_1', new Map([['1:1000', aliceFirst]])]])
-    );
+    store.selectedIdeaResponseMap.set(new Map([['idea_1', new Map([['1:1000', aliceFirst]])]]));
 
     component.studentNamesDisplayMode = 'hide';
     fixture.detectChanges();
     let card = fixture.nativeElement.querySelector('.response-card');
     expect(card.textContent).not.toContain('Alice');
     expect(card.textContent).not.toContain('Student');
+    expect(card.querySelector('mat-icon')).toBeNull();
 
     component.studentNamesDisplayMode = 'anonymize';
     fixture.detectChanges();
     card = fixture.nativeElement.querySelector('.response-card');
     expect(card.textContent).toContain('Student 1');
     expect(card.textContent).not.toContain('Alice');
+    expect(card.querySelector('mat-icon')?.textContent.trim()).toBe('account_circle');
 
     component.studentNamesDisplayMode = 'show';
     fixture.detectChanges();
     card = fixture.nativeElement.querySelector('.response-card');
     expect(card.textContent).toContain('Alice');
+    expect(card.querySelector('mat-icon')?.textContent.trim()).toBe('account_circle');
   });
 
   it('should render selected responses inside the idea-category-card when category is selected', () => {
     store.selectedIdeaIds.set(new Set(['idea_1']));
-    store.selectedIdeaResponseMap.set(
-      new Map([['idea_1', new Map([['1:1000', aliceFirst]])]])
-    );
+    store.selectedIdeaResponseMap.set(new Map([['idea_1', new Map([['1:1000', aliceFirst]])]]));
     fixture.detectChanges();
 
     const categoryCard = fixture.nativeElement.querySelector('.idea-category-card');
@@ -161,5 +166,30 @@ describe('IdeasPresentationComponent', () => {
     const nestedResponseCards = categoryCard.querySelectorAll('.response-card');
     expect(nestedResponseCards.length).toBe(1);
     expect(nestedResponseCards[0].textContent).toContain('Light is absorbed by chlorophyll');
+  });
+
+  it('should apply distinct pastel background colors from branchPathBackgroundColors to each card before repeating', () => {
+    store.selectedIdeaIds.set(new Set(['idea_1', 'idea_2']));
+    store.standaloneResponses.set(
+      new Map([
+        ['1:1000', aliceFirst],
+        ['2:3000', bob]
+      ])
+    );
+    fixture.detectChanges();
+
+    const sections = fixture.nativeElement.querySelectorAll('.idea-section');
+    expect(sections.length).toBe(4);
+
+    const card0Bg = sections[0].querySelector('.idea-category-card').style.backgroundColor;
+    const card1Bg = sections[1].querySelector('.idea-category-card').style.backgroundColor;
+    const card2Bg = sections[2].querySelector('.response-card').style.backgroundColor;
+    const card3Bg = sections[3].querySelector('.response-card').style.backgroundColor;
+
+    expect(card0Bg).toBeTruthy();
+    expect(new Set([card0Bg, card1Bg, card2Bg, card3Bg]).size).toBe(4);
+    expect(component['getCardBackgroundColor'](0)).toBe(
+      component['getCardBackgroundColor'](branchPathBackgroundColors.length)
+    );
   });
 });

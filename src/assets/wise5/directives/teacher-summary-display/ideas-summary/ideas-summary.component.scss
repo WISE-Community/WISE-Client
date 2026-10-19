@@ -6,6 +6,10 @@ h3,
   @apply mb-2 mt-0;
 }
 
+.mat-mdc-header-row {
+  --mat-table-header-container-height: 40px;
+}
+
 .mat-mdc-row {
   --mat-table-row-item-container-height: 40px;
 }
@@ -30,14 +34,13 @@ h3,
   }
 }
 
-.mat-mdc-header-row {
-  --mat-table-header-container-height: 40px;
-}
-
 .disabled-row {
   @apply opacity-50 cursor-default pointer-events-none;
 }
 
+.mat-mdc-checkbox {
+  --mat-checkbox-touch-target-size: 40px;
+}
 
 .search-input {
   --mat-form-field-container-height: 36px;

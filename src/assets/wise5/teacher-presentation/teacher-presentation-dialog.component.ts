@@ -68,9 +68,9 @@ export class TeacherPresentationDialogComponent implements OnInit {
       return authoringPrompt;
     }
     if (this.store.type() === 'Ideas') {
-      return $localize`Here are your classmates' ideas. Which ideas do you agree with or want to explore further?`;
+      return $localize`Here are some of your classmates' ideas. Pick one to discuss with your partner.`;
     }
-    return $localize`Here are some of your classmates' posts. Pick one to discuss with your partner`;
+    return $localize`Here are some of your classmates' posts. Pick one to discuss with your partner.`;
   }
 
   get componentPrompt(): string | null {

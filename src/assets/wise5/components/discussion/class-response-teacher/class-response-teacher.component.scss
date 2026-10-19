@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .mat-mdc-checkbox {
-  --mat-checkbox-state-layer-size: 32px;
+  --mat-checkbox-touch-target-size: 40px;
 }
 
 details:open > summary {
