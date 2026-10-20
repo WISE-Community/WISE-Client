@@ -4,8 +4,8 @@ import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.compo
 import { ComponentFactory } from '../../../common/ComponentFactory';
 import { DiscussionTeacherComponent } from '../../../components/discussion/discussion-teacher/discussion-teacher.component';
 import { TEACHER_SUMMARY_CONFIG } from '../TeacherSummaryConfig';
-import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
-import { TeacherPresentationButtonComponent } from '../../../teacher-presentation/teacher-presentation-button.component';
+import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/state/teacher-presentation-selection.store';
+import { TeacherPresentationButtonComponent } from '../../../teacher-presentation/teacher-presentation-button/teacher-presentation-button.component';
 import { Node } from '../../../common/Node';
 
 @Component({

@@ -20,8 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ClassResponse } from '../class-response/class-response.component';
-import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
-import { StudentNamesDisplayMode } from '../../../teacher-presentation/teacher-presentation-config';
+import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/state/teacher-presentation-selection.store';
+import { StudentNamesDisplayMode } from '../../../teacher-presentation/models/teacher-presentation-config';
 
 @Component({
   encapsulation: ViewEncapsulation.None,

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnChanges, inject, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { TeacherPresentationSelectionStore } from '../teacher-presentation-selection.store';
-import { IdeasPresentationResponse, StudentNamesDisplayMode } from '../teacher-presentation-config';
+import { TeacherPresentationSelectionStore } from '../state/teacher-presentation-selection.store';
+import { IdeasPresentationResponse, StudentNamesDisplayMode } from '../models/teacher-presentation-config';
 import { CRaterService } from '../../services/cRaterService';
 import { ConfigService } from '../../services/configService';
 import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';

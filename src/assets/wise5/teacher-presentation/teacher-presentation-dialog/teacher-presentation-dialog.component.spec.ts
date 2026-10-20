@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TeacherPresentationDialogComponent } from './teacher-presentation-dialog.component';
-import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
-import { TeacherPresentationConfigService } from './teacher-presentation-config.service';
-import { ConfigService } from '../services/configService';
+import { TeacherPresentationSelectionStore } from '../state/teacher-presentation-selection.store';
+import { TeacherPresentationConfigService } from '../services/teacher-presentation-config.service';
+import { ConfigService } from '../../services/configService';
 import { MockProvider } from 'ng-mocks';
-import { CRaterService } from '../services/cRaterService';
+import { CRaterService } from '../../services/cRaterService';
 
 describe('TeacherPresentationDialogComponent', () => {
   let component: TeacherPresentationDialogComponent;

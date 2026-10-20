@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { IdeasPresentationComponent } from './ideas-presentation.component';
-import { TeacherPresentationSelectionStore } from '../teacher-presentation-selection.store';
-import { TeacherPresentationConfigService } from '../teacher-presentation-config.service';
-import { IdeasPresentationResponse } from '../teacher-presentation-config';
+import { TeacherPresentationSelectionStore } from '../state/teacher-presentation-selection.store';
+import { TeacherPresentationConfigService } from '../services/teacher-presentation-config.service';
+import { IdeasPresentationResponse } from '../models/teacher-presentation-config';
 import { ConfigService } from '../../services/configService';
 import { CRaterService } from '../../services/cRaterService';
 import { CRaterRubric } from '../../components/common/cRater/CRaterRubric';

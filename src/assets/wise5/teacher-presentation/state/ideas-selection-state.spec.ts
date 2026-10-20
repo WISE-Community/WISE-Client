@@ -1,5 +1,5 @@
 import { IdeasSelectionState } from './ideas-selection-state';
-import { IdeasPresentationResponse } from './teacher-presentation-config';
+import { IdeasPresentationResponse } from '../models/teacher-presentation-config';
 
 describe('IdeasSelectionState', () => {
   let state: IdeasSelectionState;

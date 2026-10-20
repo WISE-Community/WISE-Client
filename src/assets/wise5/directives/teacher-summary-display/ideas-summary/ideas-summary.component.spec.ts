@@ -16,8 +16,8 @@ import { NEVER, of } from 'rxjs';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
-import { TeacherPresentationConfigService } from '../../../teacher-presentation/teacher-presentation-config.service';
-import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
+import { TeacherPresentationConfigService } from '../../../teacher-presentation/services/teacher-presentation-config.service';
+import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/state/teacher-presentation-selection.store';
 
 let component: IdeasSummaryComponent;
 let fixture: ComponentFixture<IdeasSummaryComponent>;

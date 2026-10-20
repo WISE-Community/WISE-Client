@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { TeacherPresentationButtonComponent } from './teacher-presentation-button.component';
-import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
-import { TeacherPresentationConfigService } from './teacher-presentation-config.service';
-import { ConfigService } from '../services/configService';
+import { TeacherPresentationSelectionStore } from '../state/teacher-presentation-selection.store';
+import { TeacherPresentationConfigService } from '../services/teacher-presentation-config.service';
+import { ConfigService } from '../../services/configService';
 
 describe('TeacherPresentationButtonComponent', () => {
   let component: TeacherPresentationButtonComponent;

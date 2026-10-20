@@ -1,5 +1,5 @@
 import { computed, signal } from '@angular/core';
-import { DiscussionPresentationItem } from './teacher-presentation-config';
+import { DiscussionPresentationItem } from '../models/teacher-presentation-config';
 
 export class DiscussionSelectionState {
   readonly selectedIds = signal<Set<number>>(new Set<number>());

@@ -9,10 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
-import { StudentNamesDisplayMode } from './teacher-presentation-config';
-import { DiscussionTeacherComponent } from '../components/discussion/discussion-teacher/discussion-teacher.component';
-import { IdeasPresentationComponent } from './ideas-presentation/ideas-presentation.component';
+import { TeacherPresentationSelectionStore } from '../state/teacher-presentation-selection.store';
+import { StudentNamesDisplayMode } from '../models/teacher-presentation-config';
+import { DiscussionTeacherComponent } from '../../components/discussion/discussion-teacher/discussion-teacher.component';
+import { IdeasPresentationComponent } from '../ideas-presentation/ideas-presentation.component';
 
 export interface TeacherPresentationDialogData {
   nodeId: string;

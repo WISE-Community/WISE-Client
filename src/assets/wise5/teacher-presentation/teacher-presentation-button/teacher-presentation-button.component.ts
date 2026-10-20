@@ -4,11 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
-import { Node } from '../common/Node';
-import { ComponentContent } from '../common/ComponentContent';
-import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
-import { TeacherPresentationDialogComponent } from './teacher-presentation-dialog.component';
-import { ConfigService } from '../services/configService';
+import { Node } from '../../common/Node';
+import { ComponentContent } from '../../common/ComponentContent';
+import { TeacherPresentationSelectionStore } from '../state/teacher-presentation-selection.store';
+import { TeacherPresentationDialogComponent } from '../teacher-presentation-dialog/teacher-presentation-dialog.component';
+import { ConfigService } from '../../services/configService';
 
 @Component({
   selector: 'teacher-presentation-button',

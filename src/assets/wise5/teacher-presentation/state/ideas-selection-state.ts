@@ -3,7 +3,7 @@ import {
   IdeasPresentationItem,
   IdeasPresentationResponse,
   getIdeasResponseKey
-} from './teacher-presentation-config';
+} from '../models/teacher-presentation-config';
 
 export class IdeasSelectionState {
   readonly selectedIdeaIds = signal<Set<string>>(new Set<string>());

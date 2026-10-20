@@ -2,8 +2,8 @@ import { Component, inject, Input, SimpleChanges, ViewEncapsulation } from '@ang
 import { DiscussionStudent } from '../discussion-student/discussion-student.component';
 import { TeacherDiscussionService } from '../teacherDiscussionService';
 import { ClassResponseTeacherComponent } from '../class-response-teacher/class-response-teacher.component';
-import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
-import { StudentNamesDisplayMode } from '../../../teacher-presentation/teacher-presentation-config';
+import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/state/teacher-presentation-selection.store';
+import { StudentNamesDisplayMode } from '../../../teacher-presentation/models/teacher-presentation-config';
 
 @Component({
   encapsulation: ViewEncapsulation.None,

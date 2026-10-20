@@ -6,8 +6,8 @@ import {
   TeacherPresentationConfig,
   TeacherPresentationItem,
   TeacherPresentationType
-} from './teacher-presentation-config';
-import { TeacherPresentationConfigService } from './teacher-presentation-config.service';
+} from '../models/teacher-presentation-config';
+import { TeacherPresentationConfigService } from '../services/teacher-presentation-config.service';
 import { DiscussionSelectionState } from './discussion-selection-state';
 import { IdeasSelectionState } from './ideas-selection-state';
 

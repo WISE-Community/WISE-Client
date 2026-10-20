@@ -1,13 +1,13 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { TeacherPresentationSelectionStore } from './teacher-presentation-selection.store';
-import { TeacherPresentationConfigService } from './teacher-presentation-config.service';
+import { TeacherPresentationConfigService } from '../services/teacher-presentation-config.service';
 import {
   DiscussionPresentationItem,
   IdeasPresentationItem,
   IdeasPresentationResponse,
   TeacherPresentationConfig
-} from './teacher-presentation-config';
+} from '../models/teacher-presentation-config';
 
 describe('TeacherPresentationSelectionStore', () => {
   let store: TeacherPresentationSelectionStore;

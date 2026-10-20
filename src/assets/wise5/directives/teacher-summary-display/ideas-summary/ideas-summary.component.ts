@@ -21,9 +21,9 @@ import { ComponentContent } from '../../../common/ComponentContent';
 import { OpenResponseSummaryData } from '../summary-data/OpenResponseSummaryData';
 import { SummaryService } from '../../../components/summary/summaryService';
 import { TeacherDataService } from '../../../services/teacherDataService';
-import { TeacherPresentationButtonComponent } from '../../../teacher-presentation/teacher-presentation-button.component';
-import { IdeasPresentationResponse } from '../../../teacher-presentation/teacher-presentation-config';
-import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/teacher-presentation-selection.store';
+import { TeacherPresentationButtonComponent } from '../../../teacher-presentation/teacher-presentation-button/teacher-presentation-button.component';
+import { IdeasPresentationResponse } from '../../../teacher-presentation/models/teacher-presentation-config';
+import { TeacherPresentationSelectionStore } from '../../../teacher-presentation/state/teacher-presentation-selection.store';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { TeacherSummaryDisplayComponent } from '../teacher-summary-display.component';
 
