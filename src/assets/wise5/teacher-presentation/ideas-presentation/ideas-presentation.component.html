@@ -1,0 +1,58 @@
+<div class="columns-1 md:columns-2 gap-6 py-4">
+  @for (section of presentedSections; track $index; let sectionIndex = $index) {
+    <div class="idea-section break-inside-avoid-column mb-6">
+      @if (section.ideaId != null) {
+        <div
+          class="idea-category-card p-2 sm:p-4 rounded-md flex flex-col gap-4"
+          [style.background-color]="getCardBackgroundColor(sectionIndex)"
+        >
+          <div class="idea-category-header flex items-start gap-1">
+            <mat-icon class="shrink-0 mt-0.5">lightbulb</mat-icon>
+            <div class="font-medium text-lg">
+              {{ section.ideaText }}
+            </div>
+          </div>
+
+          @if (section.responses.length > 0) {
+            <div class="flex flex-col gap-4">
+              @for (response of section.responses; track $index) {
+                <div class="response-card">
+                  <ng-container
+                    *ngTemplateOutlet="responseContent; context: { $implicit: response }"
+                  />
+                </div>
+              }
+            </div>
+          }
+        </div>
+      } @else {
+        @for (response of section.responses; track $index) {
+          <div
+            class="response-card p-2 sm:p-4 rounded-lg"
+            [style.background-color]="getCardBackgroundColor(sectionIndex)"
+          >
+            <ng-container *ngTemplateOutlet="responseContent; context: { $implicit: response }" />
+          </div>
+        }
+      }
+    </div>
+  }
+</div>
+
+<ng-template #responseContent let-response>
+  <div class="flex flex-col gap-1">
+    @if (studentNamesDisplayMode !== 'hide') {
+      <div class="flex items-center gap-1">
+        <mat-icon class="mat-24 shrink-0" [style.color]="response.avatarColor">
+          account_circle
+        </mat-icon>
+        <span>{{ getDisplayName(response) }}</span>
+      </div>
+    }
+    <div class="response-texts text-lg flex flex-col gap-1">
+      @for (text of response.texts; track $index) {
+        <span>"{{ text }}"</span>
+      }
+    </div>
+  </div>
+</ng-template>
