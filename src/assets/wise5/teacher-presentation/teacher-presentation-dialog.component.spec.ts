@@ -254,7 +254,7 @@ describe('TeacherPresentationDialogComponent', () => {
     store.prompt.set(null);
 
     expect(component.effectivePrompt).toBe(
-      "Here are your classmates' ideas. Which ideas do you agree with or want to explore further?"
+      "Here are some of your classmates' ideas. Pick one to discuss with your partner."
     );
   });
 
