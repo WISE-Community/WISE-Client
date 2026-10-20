@@ -14926,11 +14926,11 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/ideas-presentation/ideas-presentation.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">99</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/ideas-presentation/ideas-presentation.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5008745968518267369" datatype="html">
@@ -19661,11 +19661,15 @@ Category Name: <x id="PH_1" equiv-text="categoryName"/></source>
           <context context-type="linenumber">36,39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="542631431937970935" datatype="html">
-        <source>Here are your classmates&apos; posts and comments. Which posts do you agree with?</source>
+      <trans-unit id="8294713557657174548" datatype="html">
+        <source>Here are some of your classmates&apos; posts. Pick one to discuss with your partner.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/components/discussion/discussion-authoring/discussion-authoring.component.html</context>
           <context context-type="linenumber">41,46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog.component.ts</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7695481917775533693" datatype="html">
@@ -23395,49 +23399,49 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Select idea category</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">54,58</context>
+          <context context-type="linenumber">55,59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9208062061277346632" datatype="html">
         <source>Idea</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">61,63</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4531614921533219568" datatype="html">
         <source>unique</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">68,72</context>
+          <context context-type="linenumber">69,73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6474762385091490687" datatype="html">
         <source>Sample response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">75,76</context>
+          <context context-type="linenumber">76,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6906890174812415657" datatype="html">
         <source> Students </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">90,93</context>
+          <context context-type="linenumber">91,94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="296587834600612606" datatype="html">
         <source>Select student response</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="linenumber">131,133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4191006504398748947" datatype="html">
         <source>Your students&apos; ideas will show up here as they are detected in the activity.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.html</context>
-          <context context-type="linenumber">175,178</context>
+          <context context-type="linenumber">178,181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8720332287407681000" datatype="html">
@@ -24092,39 +24096,25 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="linenumber">118,121</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4746329347973931127" datatype="html">
-        <source> Original Question </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">133,135</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="8754890991138613434" datatype="html">
         <source>No ideas selected. Close and check ideas to display.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">145,147</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4444841150052442731" datatype="html">
         <source>No posts selected. Close and check posts to display.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">147,150</context>
+          <context context-type="linenumber">142,145</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5010165693543644741" datatype="html">
-        <source>Here are your classmates&apos; ideas. Which ideas do you agree with or want to explore further?</source>
+      <trans-unit id="5582115095715308623" datatype="html">
+        <source>Here are some of your classmates&apos; ideas. Pick one to discuss with your partner.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog.component.ts</context>
           <context context-type="linenumber">71</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8412718797212014947" datatype="html">
-        <source>Here are some of your classmates&apos; posts. Pick one to discuss with your partner</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog.component.ts</context>
-          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5592957437854844960" datatype="html">
