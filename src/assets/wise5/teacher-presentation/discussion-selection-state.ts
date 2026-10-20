@@ -81,8 +81,12 @@ export class DiscussionSelectionState {
     if (this.selectedIds().size === 0) {
       return false;
     }
-    this.selectedIds.set(new Set<number>());
+    this.reset();
     return true;
+  }
+
+  reset(): void {
+    this.selectedIds.set(new Set<number>());
   }
 
   loadFromItems(items: any[]): void {

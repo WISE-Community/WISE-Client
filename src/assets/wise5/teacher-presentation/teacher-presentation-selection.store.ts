@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, computed, inject, signal } from '@angular/core';
-import { Subject, debounceTime, takeUntil } from 'rxjs';
+import { Subject, Subscription, debounceTime, repeat, takeUntil } from 'rxjs';
 import {
   IdeasPresentationResponse,
   StudentNamesDisplayMode,
@@ -18,7 +18,9 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
   private configService = inject(TeacherPresentationConfigService);
 
   private saveSubject = new Subject<void>();
+  private cancelPendingSave$ = new Subject<void>();
   private destroy$ = new Subject<void>();
+  private loadSubscription?: Subscription;
 
   readonly runId = signal<number | null>(null);
   readonly periodId = signal<number | null>(null);
@@ -56,14 +58,31 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
   });
 
   constructor() {
-    this.saveSubject.pipe(debounceTime(1000), takeUntil(this.destroy$)).subscribe(() => {
-      this.persistConfig();
-    });
+    this.saveSubject
+      .pipe(
+        debounceTime(1000),
+        takeUntil(this.cancelPendingSave$),
+        repeat(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.persistConfig();
+      });
   }
 
   ngOnDestroy(): void {
+    this.loadSubscription?.unsubscribe();
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  reset(): void {
+    this.cancelPendingSave$.next();
+    this.discussion.reset();
+    this.ideas.reset();
+    this.studentNamesDisplay.set('hide');
+    this.showComponentPrompt.set(true);
+    this.prompt.set(null);
   }
 
   init(
@@ -74,6 +93,9 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
     componentType: string,
     type: TeacherPresentationType
   ): void {
+    this.loadSubscription?.unsubscribe();
+    this.reset();
+
     this.runId.set(runId);
     this.periodId.set(periodId);
     this.nodeId.set(nodeId);
@@ -82,28 +104,34 @@ export class TeacherPresentationSelectionStore implements OnDestroy {
     this.type.set(type);
 
     if (runId && periodId && periodId !== -1 && nodeId && componentId) {
-      this.configService.getConfig(runId, periodId, nodeId, componentId)?.subscribe({
-        next: (config) => {
-          if (config && config.id != null) {
-            const configType = config.type;
-            if (this.type() === 'Ideas') {
-              if (configType === 'Ideas') {
-                this.ideas.loadFromItems(config.items);
+      this.loadSubscription = this.configService
+        .getConfig(runId, periodId, nodeId, componentId)
+        ?.pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (config) => {
+            if (config && config.id != null) {
+              const configType = config.type;
+              if (this.type() === 'Ideas') {
+                if (configType === 'Ideas') {
+                  this.ideas.loadFromItems(config.items);
+                }
+              } else {
+                if (configType === 'Discussion' || !configType) {
+                  this.discussion.loadFromItems(config.items);
+                }
               }
+              this.studentNamesDisplay.set(config.studentNamesDisplay || 'hide');
+              this.showComponentPrompt.set(config.showComponentPrompt ?? true);
+              this.prompt.set(config.prompt ?? null);
             } else {
-              if (configType === 'Discussion' || !configType) {
-                this.discussion.loadFromItems(config.items);
-              }
+              this.reset();
             }
-            this.studentNamesDisplay.set(config.studentNamesDisplay || 'hide');
-            this.showComponentPrompt.set(config.showComponentPrompt ?? true);
-            this.prompt.set(config.prompt ?? null);
+          },
+          error: (err) => {
+            console.error('Failed to load presentation config', err);
+            this.reset();
           }
-        },
-        error: (err) => {
-          console.error('Failed to load presentation config', err);
-        }
-      });
+        });
     }
   }
 

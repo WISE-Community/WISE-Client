@@ -168,7 +168,7 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
 
   private initPresentationStore(): void {
     const runId = this.configService.getRunId();
-    if (runId && this.isSinglePeriod && this.nodeId && this.componentId) {
+    if (runId && this.nodeId && this.componentId) {
       this.store.init(
         runId,
         this.periodId,

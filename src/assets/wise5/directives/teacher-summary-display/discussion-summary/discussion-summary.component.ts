@@ -72,7 +72,7 @@ export class DiscussionSummaryComponent
 
   private initPresentationStore(): void {
     const runId = this.configService.getRunId();
-    if (runId && this.periodId != null && this.periodId !== -1 && this.nodeId && this.componentId) {
+    if (runId && this.nodeId && this.componentId) {
       this.store.init(
         runId,
         this.periodId,

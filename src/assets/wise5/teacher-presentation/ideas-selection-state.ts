@@ -93,10 +93,14 @@ export class IdeasSelectionState {
     if (this.selectedIdeaIds().size === 0 && this.standaloneResponses().size === 0) {
       return false;
     }
+    this.reset();
+    return true;
+  }
+
+  reset(): void {
     this.selectedIdeaIds.set(new Set<string>());
     this.selectedIdeaResponseMap.set(new Map<string, Map<string, IdeasPresentationResponse>>());
     this.standaloneResponses.set(new Map<string, IdeasPresentationResponse>());
-    return true;
   }
 
   loadFromItems(items: any[]): void {

@@ -395,5 +395,58 @@ describe('TeacherPresentationSelectionStore', () => {
       expect(store.type()).toBe('Ideas');
       expect(store.hasSelections()).toBeFalse();
     });
+
+    it('should reset selections when switching from a period with config to a period without config', () => {
+      const mockConfig: TeacherPresentationConfig = {
+        id: 1,
+        runId: 1,
+        periodId: 10,
+        nodeId: 'node1',
+        componentId: 'comp1',
+        componentType: 'OpenResponse',
+        type: 'Ideas',
+        items: [{ ideaId: 'idea_1', responses: [response(101)] }],
+        studentNamesDisplay: 'show',
+        showComponentPrompt: false,
+        prompt: 'Period 1 prompt'
+      };
+      configServiceSpy.getConfig.and.returnValue(of(mockConfig));
+      store.init(1, 10, 'node1', 'comp1', 'OpenResponse', 'Ideas');
+
+      expect(store.hasSelections()).toBeTrue();
+      expect(store.isIdeaSelected('idea_1')).toBeTrue();
+      expect(store.studentNamesDisplay()).toBe('show');
+      expect(store.showComponentPrompt()).toBeFalse();
+      expect(store.prompt()).toBe('Period 1 prompt');
+
+      // Now switch to period 20 which has no saved config (returns null or id: null)
+      configServiceSpy.getConfig.and.returnValue(of({ id: null } as any));
+      store.init(1, 20, 'node1', 'comp1', 'OpenResponse', 'Ideas');
+
+      expect(store.periodId()).toBe(20);
+      expect(store.hasSelections()).toBeFalse();
+      expect(store.isIdeaSelected('idea_1')).toBeFalse();
+      expect(store.studentNamesDisplay()).toBe('hide');
+      expect(store.showComponentPrompt()).toBeTrue();
+      expect(store.prompt()).toBeNull();
+    });
+
+    it('should cancel pending debounced autosave when switching period', fakeAsync(() => {
+      configServiceSpy.getConfig.and.returnValue(of(null));
+      store.init(1, 10, 'node1', 'comp1', 'OpenResponse', 'Ideas');
+
+      store.toggleIdea('idea_1');
+      expect(store.hasSelections()).toBeTrue();
+
+      // Switch period before the 1000ms debounce fires
+      tick(500);
+      configServiceSpy.saveConfig.calls.reset();
+      store.init(1, 20, 'node1', 'comp1', 'OpenResponse', 'Ideas');
+
+      // Finish remaining time from first period
+      tick(600);
+      expect(configServiceSpy.saveConfig).not.toHaveBeenCalled();
+      expect(store.hasSelections()).toBeFalse();
+    }));
   });
 });
