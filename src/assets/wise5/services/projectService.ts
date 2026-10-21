@@ -1039,6 +1039,10 @@ export class ProjectService {
       const transitions = this.getTransitionsByFromNodeId(groupNode.id);
       if (transitions.length > 0) {
         for (const transition of transitions) {
+          if (pathSoFar.includes(transition.to)) {
+            allPaths.push([groupId]);
+            continue;
+          }
           const allPathsFromToNode = this.getAllPaths(pathSoFar, transition.to, includeGroups);
           for (const tempPath of allPathsFromToNode) {
             tempPath.unshift(groupId);
