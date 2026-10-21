@@ -1,18 +1,15 @@
 <h2 mat-dialog-title class="mat-dialog-title--icons !flex items-center gap-2">
   @if (newNodeIcon.type === 'font') {
-    <div
-      style="background-color: {{ newNodeIcon.color }}"
-      class="avatar preview-icon"
+    <mat-icon
+      class="mat-30"
+      style="color: {{ newNodeIcon.color }}"
       aria-label="Selected icon"
       i18n-aria-label
-      [ngClass]="{ 'avatar--square': node.isGroup() }"
+      >{{ newNodeIcon.fontName }}</mat-icon
     >
-      <mat-icon class="mat-24 material-icons">{{ newNodeIcon.fontName }}</mat-icon>
-    </div>
   } @else if (newNodeIcon.type === 'img') {
     <img
-      class="mat-24 avatar"
-      [ngClass]="{ 'avatar--square': node.isGroup() }"
+      class="mat-30 avatar"
       [src]="newNodeIcon.imgSrc"
       alt="newNodeIcon.imgAlt"
       aria-label="Selected icon"

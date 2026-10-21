@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="post" [innerHTML]="response.studentData.responseTextHTML"></div>
+    <div class="post mt-4" [innerHTML]="response.studentData.responseTextHTML"></div>
     @for (attachment of response.studentData.attachments; track attachment) {
       <img [src]="attachment.iconURL" i18n-alt alt="Post attachment" class="attachment" />
     }

@@ -1,0 +1,29 @@
+<h2 class="mat-subtitle-1" i18n>Teacher Reflections</h2>
+<div class="flex flex-col gap-3 @container">
+  <span i18n
+    >Capture your thoughts as you reflect on this activity. Your answers won't be shown to
+    students.</span
+  >
+  <div
+    class="grid grid-cols-1 gap-3 flex"
+    [class.@xl:grid-cols-2]="questions().length > 1"
+    [class.@4xl:grid-cols-3]="questions().length > 2"
+  >
+    @for (q of questions(); track q.id) {
+      <div class="flex flex-col gap-1 justify-between">
+        <label [for]="'reflection_' + q.id">{{ q.text }}</label>
+        <mat-form-field appearance="fill" subscriptSizing="dynamic" class="w-full">
+          <textarea
+            matInput
+            rows="2"
+            [id]="'reflection_' + q.id"
+            [ngModel]="getAnswerText(q.id)"
+            (ngModelChange)="onAnswerChange(q, $event)"
+            placeholder="Enter your reflection..."
+            i18n-placeholder
+          ></textarea>
+        </mat-form-field>
+      </div>
+    }
+  </div>
+</div>

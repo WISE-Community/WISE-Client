@@ -1,9 +1,9 @@
 @if (nodeStatus.isCompleted || nodeStatus.isWarn) {
   <mat-icon
-    class="secondary-text"
+    class="{{ sizeClass }} {{ customClass }}"
     [ngClass]="{ success: nodeStatus.isSuccess, warn: nodeStatus.isWarn }"
   >
-    {{ nodeStatus.isWarn ? 'error' : 'check_circle' }}
+    {{ nodeStatus.isWarn ? 'error' : 'check' }}
   </mat-icon>
 }
 @if (nodeStatus.isWarn) {

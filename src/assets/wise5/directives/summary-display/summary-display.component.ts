@@ -476,9 +476,7 @@ export abstract class SummaryDisplayComponent {
         enabled: false
       },
       legend: {
-        enabled: function () {
-          return chartType === 'pie' ? true : false;
-        }
+        enabled: chartType === 'pie'
       },
       plotOptions: {
         series: {
@@ -536,6 +534,7 @@ export abstract class SummaryDisplayComponent {
         }
       },
       yAxis: {
+        allowDecimals: false,
         title: {
           text: $localize`Count`,
           style: { fontFamily: fontFamily, fontSize: '14px' }

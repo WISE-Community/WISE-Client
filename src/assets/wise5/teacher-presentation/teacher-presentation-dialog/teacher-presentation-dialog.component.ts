@@ -1,0 +1,147 @@
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgModel } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TeacherPresentationSelectionStore } from '../state/teacher-presentation-selection.store';
+import { StudentNamesDisplayMode } from '../models/teacher-presentation-config';
+import { DiscussionTeacherComponent } from '../../components/discussion/discussion-teacher/discussion-teacher.component';
+import { IdeasPresentationComponent } from '../ideas-presentation/ideas-presentation.component';
+
+export interface TeacherPresentationDialogData {
+  nodeId: string;
+  component: any;
+  periodId: number;
+  periodName?: string;
+  store: TeacherPresentationSelectionStore;
+}
+
+export type ComponentPromptDisplayMode = 'show' | 'hide';
+
+@Component({
+  selector: 'teacher-presentation-dialog',
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonToggleModule,
+    MatSelectModule,
+    MatTooltipModule,
+    DiscussionTeacherComponent,
+    IdeasPresentationComponent
+  ],
+  styleUrl: './teacher-presentation-dialog.component.scss',
+  templateUrl: './teacher-presentation-dialog.component.html'
+})
+export class TeacherPresentationDialogComponent implements OnInit {
+  @ViewChild('promptInput', { read: NgModel }) protected promptInput?: NgModel;
+
+  protected editedPrompt = '';
+  protected hideControls = false;
+  protected isEditingPrompt = false;
+  protected store: TeacherPresentationSelectionStore;
+
+  public dialogRef = inject(MatDialogRef<TeacherPresentationDialogComponent>);
+  public data: TeacherPresentationDialogData = inject(MAT_DIALOG_DATA);
+
+  constructor() {
+    this.store = this.data.store;
+  }
+
+  ngOnInit(): void {
+    this.editedPrompt = this.effectivePrompt;
+  }
+
+  get defaultPrompt(): string {
+    const authoringPrompt = this.data.component?.content?.presentation?.prompt;
+    if (authoringPrompt) {
+      return authoringPrompt;
+    }
+    if (this.store.type() === 'Ideas') {
+      return $localize`Here are some of your classmates' ideas. Pick one to discuss with your partner.`;
+    }
+    return $localize`Here are some of your classmates' posts. Pick one to discuss with your partner.`;
+  }
+
+  get componentPrompt(): string | null {
+    return this.data.component?.prompt || this.data.component?.content?.prompt || null;
+  }
+
+  get effectivePrompt(): string {
+    const custom = this.store.prompt();
+    return custom != null ? custom : this.defaultPrompt;
+  }
+
+  get isSavedPromptDifferentFromDefault(): boolean {
+    return (this.effectivePrompt?.trim() ?? '') !== (this.defaultPrompt?.trim() ?? '');
+  }
+
+  get isPromptDirty(): boolean {
+    return this.promptInput ? !!this.promptInput.dirty : this.editedPrompt !== this.effectivePrompt;
+  }
+
+  get isAnonymize(): boolean {
+    return this.store.studentNamesDisplay() === 'anonymize';
+  }
+
+  get componentPromptDisplay(): ComponentPromptDisplayMode {
+    return this.store.showComponentPrompt() ? 'show' : 'hide';
+  }
+
+  get showComponentPrompt(): boolean {
+    return this.store.showComponentPrompt();
+  }
+
+  onNamesDisplayChange(mode: StudentNamesDisplayMode): void {
+    if (mode) {
+      this.store.setStudentNamesDisplay(mode);
+    }
+  }
+
+  onComponentPromptDisplayChange(mode: ComponentPromptDisplayMode): void {
+    if (mode) {
+      this.store.setShowComponentPrompt(mode === 'show');
+    }
+  }
+
+  toggleControls(checked?: boolean): void {
+    this.hideControls = checked !== undefined ? !checked : !this.hideControls;
+    if (this.hideControls) {
+      this.isEditingPrompt = false;
+    }
+  }
+
+  startEditPrompt(): void {
+    this.editedPrompt = this.effectivePrompt;
+    this.isEditingPrompt = true;
+  }
+
+  savePrompt(): void {
+    this.store.setPrompt(this.editedPrompt.trim());
+    this.isEditingPrompt = false;
+  }
+
+  cancelEditPrompt(): void {
+    this.isEditingPrompt = false;
+  }
+
+  resetPromptToDefault(): void {
+    this.store.setPrompt(null);
+    this.editedPrompt = this.defaultPrompt;
+    this.isEditingPrompt = false;
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
+}
