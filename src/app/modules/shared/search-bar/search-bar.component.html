@@ -4,14 +4,14 @@
   [subscriptSizing]="'dynamic'"
   (click)="$event.stopPropagation()"
 >
-  <mat-label>{{ placeholderText }}</mat-label>
+  <mat-label>{{ placeholderText() }}</mat-label>
   <mat-icon matPrefix>search</mat-icon>
   <input matInput [formControl]="searchField" (keydown)="$event.stopPropagation()" />
   <button
     mat-icon-button
     matSuffix
-    [disabled]="disable"
-    [ngClass]="{ invisible: !searchField.value }"
+    [disabled]="disable()"
+    [class.invisible]="!searchField.value"
     i18n-aria-label
     aria-label="Clear"
     (click)="clear()"

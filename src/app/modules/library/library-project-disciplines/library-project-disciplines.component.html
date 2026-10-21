@@ -1,9 +1,9 @@
-@if (disciplines && disciplines.length) {
+@if (disciplines().length) {
   <div class="library-project-disciplines flex gap-1">
-    @for (discipline of disciplines; track discipline) {
+    @for (discipline of disciplines(); track discipline.id) {
       <span
         class="library-project-disciplines__icon"
-        [ngStyle]="{ 'background-color': discipline.color }"
+        [style.background-color]="discipline.color"
         matTooltip="{{ discipline.name }}"
         [matTooltipPosition]="'above'"
       >

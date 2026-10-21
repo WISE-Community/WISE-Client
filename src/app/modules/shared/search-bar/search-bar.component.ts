@@ -1,24 +1,27 @@
-import { CommonModule } from '@angular/common';
 import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  SimpleChanges,
+  effect,
+  inject,
+  input,
+  output,
   ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { timer } from 'rxjs';
+import { debounce, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
@@ -29,36 +32,44 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrl: './search-bar.component.scss',
   templateUrl: './search-bar.component.html'
 })
-export class SearchBarComponent implements OnInit {
-  @Output('update') change: EventEmitter<string> = new EventEmitter<string>();
-  @Input() debounce: number = 250;
-  @Input() disable: boolean;
-  @Input() placeholderText: string = $localize`Search`;
-  protected searchField = new FormControl('');
-  @Input() value: string = '';
+export class SearchBarComponent {
+  private cdr = inject(ChangeDetectorRef);
 
-  ngOnInit(): void {
-    this.searchField = new FormControl({
-      value: this.value,
-      disabled: this.disable
-    });
+  readonly change = output<string>({ alias: 'update' });
+  readonly debounce = input<number>(250);
+  readonly disable = input<boolean, unknown>(false, { transform: booleanAttribute });
+  readonly placeholderText = input<string>($localize`Search`);
+  readonly value = input<string>('');
+
+  protected readonly searchField = new FormControl<string>('', { nonNullable: true });
+
+  constructor() {
     this.searchField.valueChanges
-      .pipe(debounceTime(this.debounce))
-      .pipe(distinctUntilChanged())
+      .pipe(
+        debounce(() => timer(this.debounce())),
+        distinctUntilChanged(),
+        takeUntilDestroyed()
+      )
       .subscribe((value) => {
-        this.change.emit(this.searchField.value);
+        this.change.emit(value);
       });
-  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.value) {
-      this.value = changes.value.currentValue;
-      this.searchField.setValue(this.value);
-    }
-    if (changes.disable) {
-      this.disable = changes.disable.currentValue;
-      this.disable ? this.searchField.disable() : this.searchField.enable();
-    }
+    effect(() => {
+      const val = this.value();
+      if (this.searchField.value !== val) {
+        this.searchField.setValue(val, { emitEvent: false });
+        this.cdr.markForCheck();
+      }
+    });
+
+    effect(() => {
+      if (this.disable()) {
+        this.searchField.disable({ emitEvent: false });
+      } else {
+        this.searchField.enable({ emitEvent: false });
+      }
+      this.cdr.markForCheck();
+    });
   }
 
   protected clear(): void {

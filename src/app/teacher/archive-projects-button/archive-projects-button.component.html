@@ -1,4 +1,4 @@
-@if (showArchive) {
+@if (showArchive()) {
   <button
     mat-icon-button
     (click)="archiveProjectsEvent.emit(true)"
@@ -8,8 +8,7 @@
   >
     <mat-icon>archive</mat-icon>
   </button>
-}
-@if (!showArchive) {
+} @else {
   <button
     mat-icon-button
     (click)="archiveProjectsEvent.emit(false)"
@@ -20,3 +19,4 @@
     <mat-icon>unarchive</mat-icon>
   </button>
 }
+

@@ -1,8 +1,6 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectLanguageChooserComponent } from './project-language-chooser.component';
 import { ProjectLocale } from '../../domain/projectLocale';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatMenuHarness, MatMenuItemHarness } from '@angular/material/menu/testing';
@@ -20,7 +18,7 @@ let fixture: ComponentFixture<ProjectLanguageChooserComponent>;
 describe('ProjectLanguageChooserComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, HttpClientTestingModule, ProjectLanguageChooserComponent],
+      imports: [ProjectLanguageChooserComponent],
       providers: [{ provide: ProjectService, useClass: MockProjectService }]
     }).compileComponents();
   });
@@ -54,11 +52,19 @@ describe('ProjectLanguageChooserComponent', () => {
     const selected = await options[3].host();
     expect(await selected.getAttribute('class')).toContain('primary');
   });
+
+  it('emits languageChangedEvent when a language is chosen', async () => {
+    spyOn(component.languageChangedEvent, 'emit');
+    const menuHarness = await loader.getHarness(MatMenuHarness);
+    await menuHarness.clickItem({ text: 'Spanish' });
+    expect(component.languageChangedEvent.emit).toHaveBeenCalledWith(
+      jasmine.objectContaining({ locale: 'es', language: 'Spanish' })
+    );
+  });
 });
 
 function setProjectLocale(locale: ProjectLocale): void {
-  component.projectLocale = locale;
-  component.ngOnChanges();
+  fixture.componentRef.setInput('projectLocale', locale);
   fixture.detectChanges();
 }
 

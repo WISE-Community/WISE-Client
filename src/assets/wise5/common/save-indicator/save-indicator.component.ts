@@ -1,30 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { NotificationService } from '../../services/notificationService';
-import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { map } from 'rxjs/operators';
+import { NotificationService } from '../../services/notificationService';
 
 @Component({
-  imports: [CommonModule, MatProgressSpinnerModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [DatePipe, MatProgressSpinnerModule],
   selector: 'save-indicator',
   styles: ['.global-message { margin-right: 20px }'],
   templateUrl: './save-indicator.component.html'
 })
-export class SaveIndicatorComponent implements OnInit {
-  protected globalMessage: any = {};
-  private subscriptions: Subscription = new Subscription();
+export class SaveIndicatorComponent {
+  private notificationService = inject(NotificationService);
 
-  constructor(private notificationService: NotificationService) {}
-
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.notificationService.setGlobalMessage$.subscribe(({ globalMessage }) => {
-        this.globalMessage = globalMessage;
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
-  }
+  protected readonly globalMessage = toSignal(
+    this.notificationService.setGlobalMessage$.pipe(map((data) => data?.globalMessage ?? {})),
+    { initialValue: {} }
+  );
 }
+

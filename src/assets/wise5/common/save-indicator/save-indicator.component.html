@@ -1,10 +1,10 @@
 <div class="flex flex-wrap justify-start items-center">
-  @if (globalMessage.isProgressIndicatorVisible) {
+  @if (globalMessage().isProgressIndicatorVisible) {
     <mat-spinner [mode]="'indeterminate'" [diameter]="24" />
   }
-  @if (globalMessage.text) {
+  @if (globalMessage().text) {
     <span class="component__actions__info mat-small global-message">
-      {{ globalMessage.text }} {{ globalMessage.time | date: 'medium' }}
+      {{ globalMessage().text }} {{ globalMessage().time | date: 'medium' }}
     </span>
   }
 </div>

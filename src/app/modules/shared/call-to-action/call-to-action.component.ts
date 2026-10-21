@@ -1,25 +1,34 @@
-import { CommonModule } from '@angular/common';
-import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  input,
+  TemplateRef,
+  ViewEncapsulation
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, MatButtonModule, MatIconModule, RouterModule],
+  imports: [NgClass, NgTemplateOutlet, MatButtonModule, MatIconModule, RouterLink],
   selector: 'app-call-to-action',
   styleUrl: './call-to-action.component.scss',
   templateUrl: './call-to-action.component.html'
 })
 export class CallToActionComponent {
-  @Input() content: string;
-  @ContentChild('contentTemplate', { static: false }) contentRef: TemplateRef<any>;
-  @Input() destination: string;
-  @Input() headline: string;
-  @ContentChild('headlineTemplate', { static: false }) headlineRef: TemplateRef<any>;
-  @Input() icon: string;
-  @Input() iconColor: string;
-  @Input() isOutsideLink: boolean = false;
-  @Input() isSvgIcon: boolean = false;
-  @Input() linkTarget: string;
+  readonly content = input<string>();
+  readonly contentRef = contentChild<TemplateRef<unknown>>('contentTemplate');
+  readonly destination = input<string>();
+  readonly headline = input<string>();
+  readonly headlineRef = contentChild<TemplateRef<unknown>>('headlineTemplate');
+  readonly icon = input<string>();
+  readonly iconColor = input<string>();
+  readonly isOutsideLink = input<boolean, unknown>(false, { transform: booleanAttribute });
+  readonly isSvgIcon = input<boolean, unknown>(false, { transform: booleanAttribute });
+  readonly linkTarget = input<string>();
 }
