@@ -1,51 +1,61 @@
 import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  SimpleChanges,
+  effect,
+  inject,
+  input,
+  output,
   ViewEncapsulation
 } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [FormsModule, MatSelectModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule],
   selector: 'app-select-menu',
   styleUrl: './select-menu.component.scss',
   templateUrl: './select-menu.component.html'
 })
-export class SelectMenuComponent implements OnInit {
-  @Output('update') change: EventEmitter<string> = new EventEmitter<string>();
-  @Input() disable: boolean;
-  @Input() multiple: boolean;
-  @Input() options: any[] = [];
-  @Input() placeholderText: string = $localize`Select an option`;
-  protected selectField = new FormControl('');
-  @Input() value: any;
-  @Input() valueProp: string = 'value';
-  @Input() viewValueProp: string = 'viewValue';
+export class SelectMenuComponent {
+  protected cdr = inject(ChangeDetectorRef);
 
-  ngOnInit(): void {
-    this.selectField = new FormControl({
-      value: this.value,
-      disabled: this.disable
-    });
-    this.selectField.valueChanges.subscribe((value) => {
-      this.change.emit(this.selectField.value);
-    });
-  }
+  readonly change = output<any>({ alias: 'update' });
+  readonly disable = input<boolean, unknown>(false, { transform: booleanAttribute });
+  readonly multiple = input<boolean, unknown>(false, { transform: booleanAttribute });
+  readonly options = input<any[]>([]);
+  readonly placeholderText = input<string>($localize`Select an option`);
+  readonly value = input<any>();
+  readonly valueProp = input<string>('value');
+  readonly viewValueProp = input<string>('viewValue');
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.value) {
-      this.value = changes.value.currentValue;
-      this.selectField.setValue(this.value);
-    }
-    if (changes.disable) {
-      this.disable = changes.disable.currentValue;
-      this.disable ? this.selectField.disable() : this.selectField.enable();
-    }
+  protected readonly selectField = new FormControl<any>('');
+
+  constructor() {
+    this.selectField.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
+      this.change.emit(value);
+    });
+
+    effect(() => {
+      const val = this.value();
+      if (this.selectField.value !== val) {
+        this.selectField.setValue(val, { emitEvent: false });
+        this.cdr.markForCheck();
+      }
+    });
+
+    effect(() => {
+      if (this.disable()) {
+        this.selectField.disable({ emitEvent: false });
+      } else {
+        this.selectField.enable({ emitEvent: false });
+      }
+      this.cdr.markForCheck();
+    });
   }
 }

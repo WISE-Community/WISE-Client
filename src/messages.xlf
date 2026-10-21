@@ -7071,22 +7071,22 @@
         <source>more</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/location-select-menu/location-select-menu.component.html</context>
-          <context context-type="linenumber">13,17</context>
+          <context context-type="linenumber">8,12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/select-menu/select-menu.component.html</context>
-          <context context-type="linenumber">14,18</context>
+          <context context-type="linenumber">9,13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/standards-select-menu/standards-select-menu.component.html</context>
-          <context context-type="linenumber">14,18</context>
+          <context context-type="linenumber">9,13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="213925514828623262" datatype="html">
         <source>Select an option</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/shared/select-menu/select-menu.component.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6306856502437332499" datatype="html">

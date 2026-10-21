@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { SelectMenuComponent } from '../select-menu/select-menu.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {
   Location,
@@ -10,43 +11,48 @@ import {
 } from '../../library/Location';
 
 @Component({
-  imports: [FormsModule, MatSelectModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule],
   selector: 'location-select-menu',
   templateUrl: './location-select-menu.component.html'
 })
 export class LocationSelectMenuComponent extends SelectMenuComponent {
-  protected labels: LocationType[];
-  protected locationOptions = { level3: [], level2: [], level1: [] };
   protected locationTypeToLabel = locationTypeToLabel;
 
-  ngOnInit(): void {
-    super.ngOnInit();
-    this.populateLocationOptions();
-    this.alphabetizeOptions();
-    this.keepNonEmptyLabels();
-  }
+  protected readonly groupedLocations = computed(() => {
+    const options = this.options();
+    const locationOptions: Record<LocationType, LocationOption[]> = {
+      level3: [],
+      level2: [],
+      level1: []
+    };
 
-  private populateLocationOptions(): void {
-    this.options
+    options
       .flatMap((option: Location) => option.getLocationOptions())
       .forEach((option: LocationOption) => {
-        if (!this.locationOptions[option.type].some((opt) => opt.name === option.name)) {
-          this.locationOptions[option.type].push(option);
+        if (!locationOptions[option.type].some((opt) => opt.name === option.name)) {
+          locationOptions[option.type].push(option);
         }
       });
-  }
 
-  private alphabetizeOptions(): void {
-    (Object.keys(this.locationOptions) as LocationType[]).forEach((key: LocationType) =>
-      this.locationOptions[key].sort((a: LocationOption, b: LocationOption) =>
+    (Object.keys(locationOptions) as LocationType[]).forEach((key: LocationType) =>
+      locationOptions[key].sort((a: LocationOption, b: LocationOption) =>
         a.name.localeCompare(b.name)
       )
     );
+
+    const labels = (Object.keys(locationOptions) as LocationType[]).filter(
+      (key: LocationType) => locationOptions[key].length > 0
+    );
+
+    return { labels, locationOptions };
+  });
+
+  protected get labels(): LocationType[] {
+    return this.groupedLocations().labels;
   }
 
-  private keepNonEmptyLabels(): void {
-    this.labels = Object.keys(this.locationOptions).filter(
-      (key: LocationType) => this.locationOptions[key].length > 0
-    ) as LocationType[];
+  protected get locationOptions(): Record<LocationType, LocationOption[]> {
+    return this.groupedLocations().locationOptions;
   }
 }

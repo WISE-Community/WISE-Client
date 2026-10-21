@@ -1,12 +1,7 @@
 <mat-form-field class="select-menu" appearance="fill" [subscriptSizing]="'dynamic'">
-  <mat-label>{{ placeholderText }}</mat-label>
-  <mat-select
-    [formControl]="selectField"
-    [placeholder]="placeholderText"
-    [(value)]="value"
-    [multiple]="multiple"
-  >
-    @if (multiple) {
+  <mat-label>{{ placeholderText() }}</mat-label>
+  <mat-select [formControl]="selectField" [placeholder]="placeholderText()" [multiple]="multiple()">
+    @if (multiple()) {
       <mat-select-trigger>
         {{ selectField.value ? selectField.value[0] : '' }}
         @if (selectField.value?.length > 1) {
@@ -16,8 +11,8 @@
     }
     @for (label of labels; track label) {
       <mat-optgroup [label]="locationTypeToLabel[label]">
-        @for (option of locationOptions[label]; track option.id) {
-          <mat-option [value]="option[valueProp]">{{ option[viewValueProp] }}</mat-option>
+        @for (option of locationOptions[label]; track option.name ?? $index) {
+          <mat-option [value]="option[valueProp()]">{{ option[viewValueProp()] }}</mat-option>
         }
       </mat-optgroup>
     }

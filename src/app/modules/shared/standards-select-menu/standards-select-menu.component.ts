@@ -1,29 +1,42 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { SelectMenuComponent } from '../select-menu/select-menu.component';
 import { StandardType } from '../../library/standard';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-  imports: [FormsModule, MatSelectModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule],
   selector: 'standards-select-menu',
   templateUrl: './standards-select-menu.component.html'
 })
 export class StandardsSelectMenuComponent extends SelectMenuComponent {
-  @Input() possibleLabels: StandardType[];
-  protected labels: StandardType[] = [];
-  protected standardOptions = {};
+  readonly possibleLabels = input<StandardType[]>([]);
 
-  ngOnInit(): void {
-    super.ngOnInit();
+  protected readonly groupedStandards = computed(() => {
+    const options = this.options();
+    const possible = this.possibleLabels();
+    const standardOptions: Record<string, any[]> = {};
     const uniqueLabels = new Set<StandardType>();
-    this.options.forEach((option) => {
+
+    options.forEach((option) => {
       uniqueLabels.add(option.type);
-      if (!this.standardOptions[option.type]) {
-        this.standardOptions[option.type] = [];
+      if (!standardOptions[option.type]) {
+        standardOptions[option.type] = [];
       }
-      this.standardOptions[option.type].push(option);
+      standardOptions[option.type].push(option);
     });
-    this.labels = this.possibleLabels.filter((label) => uniqueLabels.has(label));
+
+    const labels = possible.filter((label) => uniqueLabels.has(label));
+    return { labels, standardOptions };
+  });
+
+  protected get labels(): StandardType[] {
+    return this.groupedStandards().labels;
+  }
+
+  protected get standardOptions(): Record<string, any[]> {
+    return this.groupedStandards().standardOptions;
   }
 }

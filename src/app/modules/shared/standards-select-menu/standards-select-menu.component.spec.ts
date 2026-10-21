@@ -17,12 +17,12 @@ describe('StandardSelectMenuComponent', () => {
     fixture = TestBed.createComponent(StandardsSelectMenuComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
-    component.options = [
+    fixture.componentRef.setInput('options', [
       new Standard('cc1', 'Common Core 3', 'Common Core', 'cc1.com'),
       new Standard('ngss1', 'NGSS 1', 'NGSS', 'ngss1.com'),
       new Standard('ngss2', 'NGSS 2', 'NGSS', 'ngss2,com')
-    ];
-    component.possibleLabels = ['NGSS', 'Common Core', 'Learning For Justice'];
+    ]);
+    fixture.componentRef.setInput('possibleLabels', ['NGSS', 'Common Core', 'Learning For Justice']);
     fixture.detectChanges();
   });
 

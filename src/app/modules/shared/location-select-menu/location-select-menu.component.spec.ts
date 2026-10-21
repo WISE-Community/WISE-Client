@@ -17,8 +17,8 @@ describe('LocationSelectMenuComponent', () => {
     fixture = TestBed.createComponent(LocationSelectMenuComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
-    component['viewValueProp'] = 'name';
-    component.options = [
+    fixture.componentRef.setInput('viewValueProp', 'name');
+    fixture.componentRef.setInput('options', [
       Object.assign(new Location(), {
         level1: 'USA',
         level2: 'California'
@@ -31,7 +31,7 @@ describe('LocationSelectMenuComponent', () => {
         level1: 'Canada',
         level2: 'Ontario'
       })
-    ];
+    ]);
     fixture.detectChanges();
   });
 
