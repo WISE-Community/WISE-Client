@@ -354,6 +354,25 @@ function getAllPaths() {
       expect(allPaths2.length).toEqual(1);
       expect(allPaths2[0]).toEqual(['node5', 'node6', 'node7', 'node8']);
     });
+    it('should end the path at an empty lesson that transitions to itself', () => {
+      const project = copy(twoStepsProjectJSON);
+      project.nodes.find((node) => node.id === 'group0').ids.push('group3');
+      project.nodes.find((node) => node.id === 'group1').transitionLogic = {
+        transitions: [{ to: 'group3' }]
+      };
+      project.nodes.push({
+        id: 'group3',
+        type: 'group',
+        title: 'Empty Lesson',
+        startId: '',
+        ids: [],
+        transitionLogic: { transitions: [{ to: 'group3' }] }
+      });
+      service.setProject(project);
+      expect(service.getAllPaths([], service.getStartNodeId())).toEqual([
+        ['node1', 'node2', 'group3']
+      ]);
+    });
   });
 }
 
