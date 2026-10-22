@@ -24,7 +24,7 @@ import { TeacherSummaryDisplayComponent } from '../../../directives/teacher-summ
 
 let component: ComponentSummaryComponent;
 let fixture: ComponentFixture<ComponentSummaryComponent>;
-fdescribe('ComponentSummaryComponent', () => {
+describe('ComponentSummaryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
