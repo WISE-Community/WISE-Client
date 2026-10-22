@@ -1,6 +1,6 @@
 import { Annotation } from '../../../common/Annotation';
 import { AnnotationService } from '../../../services/annotationService';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
 import { CRaterIdea } from '../../../components/common/cRater/CRaterIdea';
@@ -194,6 +194,103 @@ describe('IdeasSummaryComponent for Dialog Guidance component', () => {
         )
       ).toBe(true);
     });
+
+    it('logs IdeasSummaryRowToggled when row is expanded and collapsed', () => {
+      const teacherDataService = TestBed.inject(TeacherDataService);
+      const saveEventSpy = spyOn(teacherDataService, 'saveEvent').and.callFake(() =>
+        Promise.resolve([])
+      );
+      component.nodeId = 'node1';
+      component.componentId = 'comp1';
+      component.componentType = 'DialogGuidance';
+
+      const rows = component['dataSource'].data;
+      component['toggleRow'](rows[0]);
+
+      expect(saveEventSpy).toHaveBeenCalledWith(
+        'ClassroomMonitor',
+        'node1',
+        'comp1',
+        'DialogGuidance',
+        'TeacherSummary',
+        'IdeasSummaryRowToggled',
+        {
+          ideaId: rows[0].id,
+          expanded: true,
+          studentCount: rows[0].count,
+          isUnique: component['isUnique'](rows[0])
+        }
+      );
+
+      component['toggleRow'](rows[0]);
+
+      expect(saveEventSpy).toHaveBeenCalledWith(
+        'ClassroomMonitor',
+        'node1',
+        'comp1',
+        'DialogGuidance',
+        'TeacherSummary',
+        'IdeasSummaryRowToggled',
+        {
+          ideaId: rows[0].id,
+          expanded: false,
+          studentCount: rows[0].count,
+          isUnique: component['isUnique'](rows[0])
+        }
+      );
+    });
+
+    it('logs IdeasSummarySortChanged when sort changes', () => {
+      const teacherDataService = TestBed.inject(TeacherDataService);
+      const saveEventSpy = spyOn(teacherDataService, 'saveEvent').and.callFake(() =>
+        Promise.resolve([])
+      );
+      component.nodeId = 'node1';
+      component.componentId = 'comp1';
+      component.componentType = 'DialogGuidance';
+
+      component['sort'].sortChange.emit({ active: 'count', direction: 'desc' });
+
+      expect(saveEventSpy).toHaveBeenCalledWith(
+        'ClassroomMonitor',
+        'node1',
+        'comp1',
+        'DialogGuidance',
+        'TeacherSummary',
+        'IdeasSummarySortChanged',
+        {
+          column: 'count',
+          direction: 'desc'
+        }
+      );
+    });
+
+    it('logs IdeasSummaryFilterChanged after debounce when filter is applied', fakeAsync(() => {
+      const teacherDataService = TestBed.inject(TeacherDataService);
+      const saveEventSpy = spyOn(teacherDataService, 'saveEvent').and.callFake(() =>
+        Promise.resolve([])
+      );
+      component.nodeId = 'node1';
+      component.componentId = 'comp1';
+      component.componentType = 'DialogGuidance';
+
+      component['searchQuery'] = 'radiation';
+      component['applyFilter']();
+      tick(2000);
+
+      expect(saveEventSpy).toHaveBeenCalledWith(
+        'ClassroomMonitor',
+        'node1',
+        'comp1',
+        'DialogGuidance',
+        'TeacherSummary',
+        'IdeasSummaryFilterChanged',
+        jasmine.objectContaining({
+          query: 'radiation',
+          resultCount: jasmine.any(Number)
+        })
+      );
+    }));
 
     describe('sorting', () => {
       it('keeps ideas with 0 students below ideas with at least 1 student when sorted ascending', () => {

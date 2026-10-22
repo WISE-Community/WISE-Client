@@ -1,7 +1,15 @@
 import { Annotation } from '../../../common/Annotation';
 import { AnnotationService } from '../../../services/annotationService';
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+  inject
+} from '@angular/core';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
 import { CRaterRubric } from '../../../components/common/cRater/CRaterRubric';
@@ -14,8 +22,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Node } from '../../../common/Node';
 import { ComponentContent } from '../../../common/ComponentContent';
 import { OpenResponseSummaryData } from '../summary-data/OpenResponseSummaryData';
@@ -77,7 +86,10 @@ export interface IdeaTableRow {
   ],
   templateUrl: 'ideas-summary.component.html'
 })
-export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
+export class IdeasSummaryComponent
+  extends TeacherSummaryDisplayComponent
+  implements OnInit, OnDestroy
+{
   @Input() componentType: string;
   @Input() expanded: boolean;
 
@@ -89,6 +101,10 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   protected workgroups: any[] = [];
   protected readonly UNIQUE_THRESHOLD = 2;
   protected readonly SAMPLE_RESPONSE_MAX_CHARS = 150;
+
+  private filterSubject = new Subject<string>();
+  private filterSubscription?: Subscription;
+  private sortSubscription?: Subscription;
 
   get isSinglePeriod(): boolean {
     return this.periodId != null && this.periodId !== -1;
@@ -130,6 +146,15 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     if (sort) {
       this.sort = sort;
       this.dataSource.sort = sort;
+      this.sortSubscription?.unsubscribe();
+      this.sortSubscription = sort.sortChange.subscribe((sortChange: Sort) => {
+        if (sortChange.direction) {
+          this.saveEvent('IdeasSummarySortChanged', {
+            column: sortChange.active,
+            direction: sortChange.direction
+          });
+        }
+      });
     }
   }
   protected sort: MatSort;
@@ -155,7 +180,27 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   override ngOnInit(): void {
     super.ngOnInit();
     this.initPresentationStore();
+    this.initFilterSubscription();
     this.generateIdeasSummary();
+  }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.sortSubscription?.unsubscribe();
+    this.filterSubscription?.unsubscribe();
+    this.filterSubject.complete();
+  }
+
+  private initFilterSubscription(): void {
+    this.filterSubscription?.unsubscribe();
+    this.filterSubscription = this.filterSubject
+      .pipe(debounceTime(2000), distinctUntilChanged())
+      .subscribe((query) => {
+        this.saveEvent('IdeasSummaryFilterChanged', {
+          query: query,
+          resultCount: this.dataSource.filteredData.length
+        });
+      });
   }
 
   override ngOnChanges(changes: SimpleChanges): void {
@@ -460,11 +505,18 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
     if (row.count === 0) {
       return;
     }
-    if (this.expandedIdeaIds.has(row.id)) {
-      this.expandedIdeaIds.delete(row.id);
-    } else {
+    const isExpanding = !this.expandedIdeaIds.has(row.id);
+    if (isExpanding) {
       this.expandedIdeaIds.add(row.id);
+    } else {
+      this.expandedIdeaIds.delete(row.id);
     }
+    this.saveEvent('IdeasSummaryRowToggled', {
+      ideaId: row.id,
+      expanded: isExpanding,
+      studentCount: row.count,
+      isUnique: this.isUnique(row)
+    });
   }
 
   protected onRowKeydown(event: KeyboardEvent, row: IdeaTableRow): void {
@@ -479,7 +531,21 @@ export class IdeasSummaryComponent extends TeacherSummaryDisplayComponent {
   }
 
   protected applyFilter(): void {
-    this.dataSource.filter = this.searchQuery.trim().toLowerCase();
+    const trimmed = this.searchQuery.trim();
+    this.dataSource.filter = trimmed.toLowerCase();
+    this.filterSubject.next(trimmed);
+  }
+
+  private saveEvent(eventName: string, data: any): void {
+    this.dataService.saveEvent(
+      'ClassroomMonitor',
+      this.nodeId,
+      this.componentId,
+      this.componentType,
+      'TeacherSummary',
+      eventName,
+      data
+    );
   }
 
   protected toSelection(response: StudentResponseItem): IdeasPresentationResponse {

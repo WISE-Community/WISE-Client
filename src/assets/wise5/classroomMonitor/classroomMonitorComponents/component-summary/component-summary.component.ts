@@ -189,7 +189,17 @@ export class ComponentSummaryComponent implements OnDestroy {
   }
 
   protected expandSummary(type: 'ideas' | 'match' | 'discussion'): void {
-    this.dialog.open(SummaryDialogComponent, {
+    const startTime = Date.now();
+    this.dataService.saveEvent(
+      'ClassroomMonitor',
+      this.node.id,
+      this.component.id,
+      this.component.type,
+      'TeacherSummary',
+      'LargeSummaryViewOpened',
+      { type }
+    );
+    const dialogRef = this.dialog.open(SummaryDialogComponent, {
       data: {
         type: type,
         node: this.node,
@@ -199,6 +209,18 @@ export class ComponentSummaryComponent implements OnDestroy {
         componentType: this.component.type
       },
       panelClass: 'summary-dialog'
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      const durationMs = Date.now() - startTime;
+      this.dataService.saveEvent(
+        'ClassroomMonitor',
+        this.node.id,
+        this.component.id,
+        this.component.type,
+        'TeacherSummary',
+        'LargeSummaryViewClosed',
+        { type, durationMs }
+      );
     });
   }
 
