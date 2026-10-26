@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentSummaryComponent } from './component-summary.component';
 import { ActivatedRoute } from '@angular/router';
@@ -46,11 +47,13 @@ describe('ComponentSummaryComponent', () => {
           AnnotationService,
           ComponentServiceLookupService,
           CRaterService,
+          MatDialog,
           ProjectService,
           SummaryService
         ),
         MockProvider(TeacherDataService, {
-          currentPeriodChanged$: of({ currentPeriod: { periodId: 1 } })
+          currentPeriodChanged$: of({ currentPeriod: { periodId: 1 } }),
+          saveEvent: () => Promise.resolve([])
         }),
         { provide: ActivatedRoute, useValue: { parent: { params: of({ nodeId: 'node1' }) } } }
       ]
@@ -65,6 +68,7 @@ describe('ComponentSummaryComponent', () => {
   testHasStudentWork();
   testNoStudentWork();
   testSummaryPriorityAndSizing();
+  testExpandSummaryLogging();
 });
 
 function testHasStudentWork() {
@@ -134,4 +138,45 @@ function testSummaryPriorityAndSizing() {
 
 function getComponentCompletion() {
   return fixture.debugElement.query(By.css('component-completion'));
+}
+
+function testExpandSummaryLogging() {
+  describe('expandSummary event logging', () => {
+    it('should log LargeSummaryViewOpened and LargeSummaryViewClosed events', () => {
+      const teacherDataService = TestBed.inject(TeacherDataService);
+      const saveEventSpy = spyOn(teacherDataService, 'saveEvent').and.callFake(() =>
+        Promise.resolve([])
+      );
+      const matDialog = TestBed.inject(MatDialog);
+      spyOn(matDialog, 'open').and.returnValue({
+        afterClosed: () => of(undefined)
+      } as any);
+
+      component.node = { id: 'node1' } as any;
+      component.component = { id: 'comp1', type: 'OpenResponse' } as any;
+      component.periodId = 1;
+
+      component['expandSummary']('ideas');
+
+      expect(saveEventSpy).toHaveBeenCalledWith(
+        'ClassroomMonitor',
+        'node1',
+        'comp1',
+        'OpenResponse',
+        'TeacherSummary',
+        'LargeSummaryViewOpened',
+        { type: 'ideas' }
+      );
+
+      expect(saveEventSpy).toHaveBeenCalledWith(
+        'ClassroomMonitor',
+        'node1',
+        'comp1',
+        'OpenResponse',
+        'TeacherSummary',
+        'LargeSummaryViewClosed',
+        jasmine.objectContaining({ type: 'ideas', durationMs: jasmine.any(Number) })
+      );
+    });
+  });
 }

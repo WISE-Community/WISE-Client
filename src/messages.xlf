@@ -14918,7 +14918,7 @@ The branches will be removed but the steps will remain in the unit.</source>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/directives/teacher-summary-display/ideas-summary/ideas-summary.component.ts</context>
-          <context context-type="linenumber">452</context>
+          <context context-type="linenumber">497</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/configService.ts</context>
@@ -23974,35 +23974,35 @@ If this problem continues, let your teacher know and move on to the next activit
         <source>Present</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-button/teacher-presentation-button.component.ts</context>
-          <context context-type="linenumber">26,31</context>
+          <context context-type="linenumber">27,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5313882385946212493" datatype="html">
         <source>Choose a specific period to present</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-button/teacher-presentation-button.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1494028711022664666" datatype="html">
         <source>Choose an idea category or student response first to present</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-button/teacher-presentation-button.component.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2139117303080914602" datatype="html">
         <source>Select some posts or comments to present</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-button/teacher-presentation-button.component.ts</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3091150346072752347" datatype="html">
         <source>Launch presentation view</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-button/teacher-presentation-button.component.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5946680715994082332" datatype="html">

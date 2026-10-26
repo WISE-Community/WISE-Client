@@ -80,13 +80,14 @@ export class TeacherDataService extends DataService {
   saveEvent(context, nodeId, componentId, componentType, category, event, data) {
     const newEvent = {
       projectId: this.configService.getProjectId(),
+      periodId: this.getCurrentPeriodId(),
       runId: this.configService.getRunId(),
       workgroupId: this.configService.getWorkgroupId(),
       clientSaveTime: new Date().getTime(),
       context: context,
       nodeId: nodeId,
       componentId: componentId,
-      type: componentType,
+      componentType: componentType,
       category: category,
       event: event,
       data: data
@@ -401,7 +402,7 @@ export class TeacherDataService extends DataService {
   }
 
   getCurrentPeriodId(): number {
-    return this.currentPeriod.periodId;
+    return this.currentPeriod?.periodId;
   }
 
   getPeriods(): any[] {
