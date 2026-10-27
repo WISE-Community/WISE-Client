@@ -25,6 +25,7 @@ let component: NodeGradingComponent;
 let dataService: TeacherDataService;
 let fixture: ComponentFixture<NodeGradingComponent>;
 let nodeCompletionSpy;
+let studentStatusReceivedSource: Subject<any>;
 
 class MockDataService {
   private currentNodeChangedSource: Subject<any> = new Subject<any>();
@@ -104,6 +105,8 @@ describe('NodeGradingComponent', () => {
     }).compileComponents();
     const projectService = TestBed.inject(TeacherProjectService);
     classroomStatusService = TestBed.inject(ClassroomStatusService);
+    studentStatusReceivedSource = new Subject<any>();
+    classroomStatusService.studentStatusReceived$ = studentStatusReceivedSource.asObservable();
     spyOn(projectService, 'nodeHasWork').and.returnValue(false);
     const node = new Node();
     node.components = [{ id: 'component1' }];
@@ -125,8 +128,19 @@ describe('NodeGradingComponent', () => {
   annotationReceived_RecalculateNodeCompletion();
   periodChanged_RecalculateNodeCompletion();
   projectSaved_RecalculateNodeCompletion();
+  studentStatusReceived_RecalculateNodeCompletion();
   componentTags_importantTag();
 });
+
+function studentStatusReceived_RecalculateNodeCompletion() {
+  describe('student status received', () => {
+    it('recalculates node completion', () => {
+      nodeCompletionSpy.calls.reset();
+      studentStatusReceivedSource.next({ studentStatus: { workgroupId: 1 } });
+      expect(nodeCompletionSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+}
 
 function componentTags_importantTag() {
   describe('component tags', () => {

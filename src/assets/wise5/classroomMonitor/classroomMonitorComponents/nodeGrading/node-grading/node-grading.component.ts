@@ -75,6 +75,11 @@ export class NodeGradingComponent implements OnInit, OnDestroy, OnChanges {
     this.subscriptions.add(
       this.annotationService.annotationReceived$.subscribe(() => this.setPeriod())
     );
+    this.subscriptions.add(
+      this.classroomStatusService.studentStatusReceived$.subscribe(() =>
+        this.setNodeCompletionPercent()
+      )
+    );
     this.subscriptions.add(this.projectService.projectSaved$.subscribe(() => this.setFields()));
     this.subscriptions.add(
       this.dataService.currentNodeChanged$.subscribe(() => this.selectedComponent.setValue(0))
