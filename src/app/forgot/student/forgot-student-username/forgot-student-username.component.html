@@ -42,36 +42,6 @@
           }
         </mat-form-field>
       </p>
-      <p>
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label i18n>Birthday (Month)</mat-label>
-          <mat-select formControlName="birthMonth" required>
-            @for (month of months; track month) {
-              <mat-option [value]="month.value">
-                {{ month.text }}
-              </mat-option>
-            }
-          </mat-select>
-          @if (forgotStudentUsernameFormGroup.controls['birthMonth'].hasError('required')) {
-            <mat-error i18n>Month required</mat-error>
-          }
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label i18n>Birthday (Day)</mat-label>
-          <mat-select formControlName="birthDay" required>
-            @for (day of days; track day) {
-              <mat-option [value]="day">
-                {{ day }}
-              </mat-option>
-            }
-          </mat-select>
-          @if (forgotStudentUsernameFormGroup.controls['birthDay'].hasError('required')) {
-            <mat-error i18n>Day required</mat-error>
-          }
-        </mat-form-field>
-      </p>
       <button
         mat-flat-button
         color="primary"
