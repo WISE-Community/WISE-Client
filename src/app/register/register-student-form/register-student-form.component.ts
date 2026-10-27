@@ -48,31 +48,14 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
   createStudentAccountFormGroup: FormGroup = this.fb.group({
     firstName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
     lastName: new FormControl('', [Validators.required, Validators.pattern(this.NAME_REGEX)]),
-    gender: new FormControl('', [Validators.required]),
-    birthMonth: new FormControl('', [Validators.required]),
-    birthDay: new FormControl({ value: '', disabled: true }, [Validators.required])
+    gender: new FormControl('', [Validators.required])
   });
-  days: string[] = [];
   genders: any[] = [
     { code: 'FEMALE', label: $localize`Female` },
     { code: 'MALE', label: $localize`Male` },
     { code: 'NO_ANSWER', label: $localize`No Answer/Other` }
   ];
   isRecaptchaEnabled: boolean = this.configService.isRecaptchaEnabled();
-  months: any[] = [
-    { code: '1', label: $localize`01 (Jan)` },
-    { code: '2', label: $localize`02 (Feb)` },
-    { code: '3', label: $localize`03 (Mar)` },
-    { code: '4', label: $localize`04 (Apr)` },
-    { code: '5', label: $localize`05 (May)` },
-    { code: '6', label: $localize`06 (Jun)` },
-    { code: '7', label: $localize`07 (Jul)` },
-    { code: '8', label: $localize`08 (Aug)` },
-    { code: '9', label: $localize`09 (Sep)` },
-    { code: '10', label: $localize`10 (Oct)` },
-    { code: '11', label: $localize`11 (Nov)` },
-    { code: '12', label: $localize`12 (Dec)` }
-  ];
   securityQuestions: object;
   user: Student = new Student();
 
@@ -118,9 +101,6 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
       }
     });
 
-    this.createStudentAccountFormGroup.controls['birthMonth'].valueChanges.subscribe((value) => {
-      this.setBirthDayOptions();
-    });
     this.createStudentAccountFormGroup.controls['firstName'].markAsTouched();
     this.createStudentAccountFormGroup.controls['lastName'].markAsTouched();
   }
@@ -170,11 +150,7 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
 
   async populateStudentUser() {
     for (let key of Object.keys(this.createStudentAccountFormGroup.controls)) {
-      if (key == 'birthMonth' || key == 'birthDay') {
-        this.user[key] = parseInt(this.createStudentAccountFormGroup.get(key).value);
-      } else {
-        this.user[key] = this.createStudentAccountFormGroup.get(key).value;
-      }
+      this.user[key] = this.createStudentAccountFormGroup.get(key).value;
     }
     if (this.isRecaptchaEnabled) {
       const token = await this.recaptchaV3Service.execute('importantAction').toPromise();
@@ -196,35 +172,5 @@ export class RegisterStudentFormComponent extends RegisterUserFormComponent impl
 
   setControlFieldValue(name: string, value: string) {
     this.createStudentAccountFormGroup.controls[name].setValue(value);
-  }
-
-  setBirthDayOptions() {
-    const month = this.createStudentAccountFormGroup.get('birthMonth').value;
-    let days = 0;
-    switch (month) {
-      case '2':
-        days = 29;
-        break;
-      case '4':
-      case '6':
-      case '9':
-      case '11':
-        days = 30;
-        break;
-      default:
-        days = 31;
-    }
-    this.days = [];
-    for (let i = 0; i < days; i++) {
-      let day = (i + 1).toString();
-      if (i < 9) {
-        day = '0' + day;
-      }
-      this.days.push(day);
-    }
-    if (days < this.createStudentAccountFormGroup.get('birthDay').value) {
-      this.createStudentAccountFormGroup.controls['birthDay'].reset();
-    }
-    this.createStudentAccountFormGroup.controls['birthDay'].enable();
   }
 }
