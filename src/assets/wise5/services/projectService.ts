@@ -22,6 +22,17 @@ import { ProjectLocale } from '../../../app/domain/projectLocale';
 import { Language } from '../../../app/domain/language';
 import { ThemeSettings } from '../common/ThemeSettings';
 
+// Wider than the name class in replaceAssetPaths because nothing surrounds a standalone value for
+// a match to run into. Sentence punctuation is excluded so prose ending in a file name is not
+// mistaken for one.
+const RELATIVE_ASSET_FILE_NAME = new RegExp(
+  '^(?!/)[a-zA-Z0-9@%&;()._/ \\-' +
+    '\\u3008-\\u3011\\u3014-\\u301b\\u3040-\\u30ff\\u3400-\\u4dbf\\u4e00-\\u9fff\\uac00-\\ud7af' +
+    '\\uff08\\uff09\\uff10-\\uff19\\uff21-\\uff3a\\uff3b\\uff3d\\uff41-\\uff5a]+' +
+    '\\.(png|jpe?g|pdf|gif|mov|mp4|mp3|wav|swf|css|txt|json|xlsx?|doc|html?|js)$',
+  'i'
+);
+
 @Injectable()
 export class ProjectService {
   achievements: any = [];
@@ -414,11 +425,9 @@ export class ProjectService {
   injectAssetPaths(content: any): any {
     if (content != null) {
       if (typeof content === 'object') {
-        let contentString = JSON.stringify(content);
+        const contentString = JSON.stringify(content);
         if (contentString != null) {
-          // replace the relative asset paths with the absolute paths
-          contentString = this.replaceAssetPaths(contentString);
-          content = JSON.parse(contentString);
+          content = this.injectAssetPathsInValue(JSON.parse(contentString));
         }
       } else if (typeof content === 'string') {
         // replace the relative asset paths with the absolute paths
@@ -426,6 +435,23 @@ export class ProjectService {
       }
     }
     return content;
+  }
+
+  // Each string is handled on its own so that a match cannot run from one JSON string into the
+  // next, which would put the prefix outside any string and make JSON.parse throw.
+  private injectAssetPathsInValue(value: any): any {
+    if (typeof value === 'string') {
+      if (RELATIVE_ASSET_FILE_NAME.test(value)) {
+        return this.configService.getConfigParam('projectBaseURL') + 'assets/' + value;
+      }
+      return JSON.parse(this.replaceAssetPaths(JSON.stringify(value)));
+    }
+    if (value != null && typeof value === 'object') {
+      for (const key of Object.keys(value)) {
+        value[key] = this.injectAssetPathsInValue(value[key]);
+      }
+    }
+    return value;
   }
 
   /**
@@ -444,52 +470,18 @@ export class ProjectService {
       // note that this also works for \"abc.png and \'abc.png, where the quotes are escaped
       contentString = contentString.replace(
         new RegExp(
-          "('|\"|\\\\'|\\\\\")[^:][^/]?[^/]?[a-zA-Z0-9\u4e00-\u9fa5@%&;\\._\\/\\s\\-']*[.]" +
+          "('|\"|\\\\'|\\\\\")([^:][^/]?[^/]?[a-zA-Z0-9\u4e00-\u9fa5@%&;\\._\\/\\s\\-']*[.]" +
             '(png|jpe?g|pdf|gif|mov|mp4|mp3|wav|swf|css|txt|json|xlsx?|doc|html.*?|js).*?' +
-            '(\'|"|\\\\\'|\\\\")',
+            '(\'|"|\\\\\'|\\\\"))',
           'gi'
         ),
-        (matchedString) => {
-          /*
-           * once found, we prepend the contentBaseURL + "assets/" to the string within the quotes
-           * and keep everything else the same.
-           */
-          let delimiter = '';
-          let matchedStringWithoutQuotes = '';
-
-          if (matchedString.length > 2 && matchedString.substr(0, 1) == '\\') {
-            // the string has escaped quotes for example \"hello.png\"
-
-            // get everything between the escaped quotes
-            matchedStringWithoutQuotes = matchedString.substr(2, matchedString.length - 4);
-
-            // get the delimiter which will be \' or \"
-            delimiter = matchedString.substr(0, 2);
-          } else {
-            // the string does not have escaped quotes for example "hello.png"
-
-            // get everything between the quotes
-            matchedStringWithoutQuotes = matchedString.substr(1, matchedString.length - 2);
-
-            // get the delimiter which will be ' or "
-            delimiter = matchedString.substr(0, 1);
+        (matchedString, delimiter: string, rest: string) => {
+          // Rebuilding a match that closes on a different quote with the opening one rewrites a
+          // quote and can leave a JSON string unterminated.
+          if (rest.charAt(0) == '/' || !matchedString.endsWith(delimiter)) {
+            return matchedString;
           }
-
-          if (
-            matchedStringWithoutQuotes != null &&
-            matchedStringWithoutQuotes.length > 0 &&
-            matchedStringWithoutQuotes.charAt(0) == '/'
-          ) {
-            /*
-             * the matched string starts with a "/" which means it's
-             * an absolute path and does not require path prepending
-             * so we will just return the original unmodified string
-             */
-            return delimiter + matchedStringWithoutQuotes + delimiter;
-          } else {
-            // make a new string with the contentBaseURL + assets/ prepended to the path
-            return delimiter + contentBaseURL + 'assets/' + matchedStringWithoutQuotes + delimiter;
-          }
+          return delimiter + contentBaseURL + 'assets/' + rest;
         }
       );
     }

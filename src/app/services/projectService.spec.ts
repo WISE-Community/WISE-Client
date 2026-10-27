@@ -47,6 +47,7 @@ describe('ProjectService', () => {
   shouldReplaceAssetPathsInNonHtmlComponentContent();
   shouldReplaceAssetPathsInHtmlComponentContent();
   shouldNotReplaceAssetPathsInHtmlComponentContent();
+  injectAssetPaths();
   shouldRetrieveProjectWhenConfigProjectURLIsValid();
   shouldGetDefaultThemePath();
   shouldReturnTheStartNodeOfTheProject();
@@ -147,6 +148,55 @@ function shouldNotReplaceAssetPathsInHtmlComponentContent() {
     const contentStringReplacedAssetPathActual = service.replaceAssetPaths(contentString);
     expect(configService.getConfigParam).toHaveBeenCalledWith('projectBaseURL');
     expect(contentStringReplacedAssetPathActual).toEqual(contentStringReplacedAssetPathExpected);
+  });
+}
+
+function injectAssetPaths() {
+  describe('injectAssetPaths()', () => {
+    beforeEach(() => {
+      createNormalSpy();
+    });
+    it('should inject a file name with parentheses followed by another file name', () => {
+      expect(service.injectAssetPaths(['image (1).png', 'heart.png'])).toEqual([
+        `${projectBaseURL}assets/image (1).png`,
+        `${projectBaseURL}assets/heart.png`
+      ]);
+    });
+    it('should not break the JSON when a file name it cannot match precedes one it can', () => {
+      const content = { stamps: { Stamps: ['image#1.png', 'b.png'] } };
+      expect(service.injectAssetPaths(content).stamps.Stamps).toEqual([
+        'image#1.png',
+        `${projectBaseURL}assets/b.png`
+      ]);
+    });
+    it('should inject file names with parentheses and CJK punctuation', () => {
+      const content = {
+        stamps: { Stamps: ['示意圖 (chatgpt生成) 1.png', '細胞（核）【卵】.png', 'b.png'] }
+      };
+      expect(service.injectAssetPaths(content).stamps.Stamps).toEqual([
+        `${projectBaseURL}assets/示意圖 (chatgpt生成) 1.png`,
+        `${projectBaseURL}assets/細胞（核）【卵】.png`,
+        `${projectBaseURL}assets/b.png`
+      ]);
+    });
+    it('should leave a match alone when it closes on a different quote than it opened with', () => {
+      const content = { prompt: "Hi: ok: it's x.png" };
+      expect(service.injectAssetPaths(content)).toEqual(content);
+    });
+    it('should not let parentheses in HTML text swallow the next image', () => {
+      const html = '<p title="x">(see) a.png</p><img src="b.png">';
+      const expected = `<p title="x">(see) a.png</p><img src="${projectBaseURL}assets/b.png">`;
+      expect(service.injectAssetPaths({ html }).html).toEqual(expected);
+      expect(service.replaceAssetPaths(html)).toEqual(expected);
+    });
+    it('should not prefix prose that contains punctuation and mentions a file', () => {
+      const content = { a: 'Hello, see b.png', b: '請看下圖，再回答 a.png' };
+      expect(service.injectAssetPaths(content)).toEqual(content);
+    });
+    it('should not change absolute paths', () => {
+      const content = { src: '/curriculum/1/assets/a (1).png' };
+      expect(service.injectAssetPaths(content).src).toEqual('/curriculum/1/assets/a (1).png');
+    });
   });
 }
 
