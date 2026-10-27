@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AnnotationService } from './annotationService';
 import { ConfigService } from './configService';
 import { ProjectService } from './projectService';
-import { Observable, Subject, tap } from 'rxjs';
+import { defer, finalize, map, Observable, Subject, tap } from 'rxjs';
 import { ProjectCompletion } from '../common/ProjectCompletion';
 import { StudentStatus } from '../common/StudentStatus';
 import { CompletionCounter } from '../common/CompletionCounter';
@@ -11,6 +11,7 @@ import { CompletionCounter } from '../common/CompletionCounter';
 @Injectable()
 export class ClassroomStatusService {
   studentStatuses = [];
+  private workgroupIdsReceivedDuringRefreshes: Set<Set<number>> = new Set();
   private studentStatusReceivedSource: Subject<any> = new Subject<any>();
   public studentStatusReceived$: Observable<any> = this.studentStatusReceivedSource.asObservable();
 
@@ -77,7 +78,65 @@ export class ClassroomStatusService {
     return this.getStudentStatusForWorkgroupId(workgroupId) != null;
   }
 
+  /**
+   * Unlike retrieveStudentStatuses(), never replaces a status with an older one and keeps statuses
+   * that arrived over the socket while the request was in flight, since the response may be older
+   * than they are.
+   * @returns the statuses that changed
+   */
+  refreshStudentStatuses(): Observable<any[]> {
+    return defer(() => {
+      const received = new Set<number>();
+      this.workgroupIdsReceivedDuringRefreshes.add(received);
+      return this.http
+        .get<any[]>(`/api/teacher/run/${this.configService.getRunId()}/student-status`)
+        .pipe(
+          map((rows: any[]) => this.mergeStudentStatuses(rows, received)),
+          finalize(() => this.workgroupIdsReceivedDuringRefreshes.delete(received))
+        );
+    });
+  }
+
+  private mergeStudentStatuses(rows: any[], received: Set<number>): any[] {
+    const changed = [];
+    for (const status of this.parseStudentStatuses(rows)) {
+      const current = this.getStudentStatusForWorkgroupId(status.workgroupId);
+      if (
+        received.has(status.workgroupId) ||
+        this.isNotNewer(status, current) ||
+        (current != null && this.isSameStatus(current, status))
+      ) {
+        continue;
+      }
+      this.replaceStudentStatus(status);
+      changed.push(status);
+    }
+    return changed;
+  }
+
+  // Only statuses fetched from the server carry a timestamp; those received over the socket do not.
+  private isNotNewer(status: any, current: any): boolean {
+    return (
+      current?.postTimestamp != null &&
+      new Date(status.postTimestamp).getTime() <= new Date(current.postTimestamp).getTime()
+    );
+  }
+
+  private isSameStatus(a: any, b: any): boolean {
+    return (
+      JSON.stringify({ ...a, postTimestamp: undefined }) ===
+      JSON.stringify({ ...b, postTimestamp: undefined })
+    );
+  }
+
   setStudentStatus(studentStatus: any): void {
+    this.workgroupIdsReceivedDuringRefreshes.forEach((received) =>
+      received.add(studentStatus.workgroupId)
+    );
+    this.replaceStudentStatus(studentStatus);
+  }
+
+  private replaceStudentStatus(studentStatus: any): void {
     let isStudentStatusFound = false;
     const studentStatuses = this.getStudentStatuses();
     for (let x = 0; x < studentStatuses.length; x++) {
