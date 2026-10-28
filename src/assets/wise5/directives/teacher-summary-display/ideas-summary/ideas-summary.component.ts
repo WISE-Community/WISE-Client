@@ -238,18 +238,18 @@ export class IdeasSummaryComponent
         });
       }
     } else if (this.componentType === 'OpenResponse') {
-      const allAnnotations = this.annotationService
+      const latestAnnotations = this.annotationService
         .getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
-        .filter((annotation) => !this.isSinglePeriod || annotation.periodId === this.periodId);
-      const latestAnnotations = allAnnotations.reduceRight(
-        (latestAnnotations, annotation) =>
-          latestAnnotations.some(
-            (latestAnnotation) => latestAnnotation.toWorkgroupId === annotation.toWorkgroupId
-          )
-            ? latestAnnotations
-            : latestAnnotations.concat(annotation),
-        []
-      );
+        .filter((annotation) => !this.isSinglePeriod || annotation.periodId === this.periodId)
+        .reduceRight(
+          (latestAnnotations, annotation) =>
+            latestAnnotations.some(
+              (latestAnnotation) => latestAnnotation.toWorkgroupId === annotation.toWorkgroupId
+            )
+              ? latestAnnotations
+              : latestAnnotations.concat(annotation),
+          []
+        );
       const summaryData = new OpenResponseSummaryData(latestAnnotations, this.rubric);
       const work$ = this.getLatestWork();
       if (work$) {
@@ -259,13 +259,13 @@ export class IdeasSummaryComponent
             ?.filter((s: any) => !this.isSinglePeriod || s.periodId === this.periodId);
           const states =
             cachedStates && cachedStates.length > 0 ? cachedStates : (componentStates ?? []);
-          this.groupIdeas(summaryData, states, allAnnotations);
+          this.groupIdeas(summaryData, states, latestAnnotations);
         });
       } else {
         const cachedStates = this.dataService
           ?.getComponentStatesByComponentId?.(this.componentId)
           ?.filter((s: any) => !this.isSinglePeriod || s.periodId === this.periodId);
-        this.groupIdeas(summaryData, cachedStates ?? [], allAnnotations);
+        this.groupIdeas(summaryData, cachedStates ?? [], latestAnnotations);
       }
     }
   }
