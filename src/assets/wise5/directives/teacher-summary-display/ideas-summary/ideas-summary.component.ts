@@ -467,28 +467,16 @@ export class IdeasSummaryComponent
     annotations: Annotation[],
     ideaId: string
   ): StudentResponseItem[] {
-    const latestAnnotations = annotations.reduceRight<Annotation[]>(
-      (latest, annotation) =>
-        latest.some((a) => a.toWorkgroupId === annotation.toWorkgroupId)
-          ? latest
-          : latest.concat(annotation),
-      []
-    );
-    const matchingAnnotations = latestAnnotations.filter((annotation) =>
+    const matchingAnnotations = annotations.filter((annotation) =>
       annotation.data?.ideas?.some((idea) => idea.detected && idea.name === ideaId)
     );
     return states
-      .reduceRight<ComponentState[]>(
-        (matchedStates, state) =>
-          matchedStates.some((s) => s.workgroupId === state.workgroupId) ||
-          !matchingAnnotations.some((annotation) =>
-            annotation.studentWorkId != null
-              ? annotation.studentWorkId === state.id
-              : annotation.toWorkgroupId === state.workgroupId
-          )
-            ? matchedStates
-            : [state, ...matchedStates],
-        []
+      .filter((state) =>
+        matchingAnnotations.some((annotation) =>
+          annotation.studentWorkId != null
+            ? annotation.studentWorkId === state.id
+            : annotation.toWorkgroupId === state.workgroupId
+        )
       )
       .map((state) => {
         const text = state.studentData?.response ?? '';
