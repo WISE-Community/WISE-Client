@@ -803,7 +803,7 @@ describe('IdeasSummaryComponent for Open Response component', () => {
       expect(store.isIdeaResponseSelected('idea 1', selection)).toBeTrue();
     });
 
-    it('supports multiple responses from the same student with individual checkboxes', () => {
+    it('only includes the latest revision for a workgroup with multiple revisions', () => {
       const ideas = generateIdeas(1);
       const annotations = [
         new Annotation({
@@ -835,22 +835,52 @@ describe('IdeasSummaryComponent for Open Response component', () => {
       ];
 
       const responses = component['getORResponsesWithIdea'](states, annotations, 'idea 1');
-      expect(responses.length).toBe(2);
-      expect(responses[0].studentWorkId).toBe(101);
-      expect(responses[1].studentWorkId).toBe(102);
+      expect(responses.length).toBe(1);
+      expect(responses[0].studentWorkId).toBe(102);
+      expect(responses[0].text).toBe('Second response with idea 1');
 
       const groups = component['groupResponsesByWorkgroup'](responses);
       expect(groups.length).toBe(1);
-      expect(groups[0].responses.length).toBe(2);
+      expect(groups[0].responses.length).toBe(1);
 
       const row = component['dataSource'].data[0];
       component['toggleResponse'](row, responses[0]);
       expect(store.isIdeaSelected(row.id)).toBeTrue();
       expect(component['isResponseSelected'](row, responses[0])).toBeTrue();
-      expect(component['isResponseSelected'](row, responses[1])).toBeFalse();
+    });
 
-      component['toggleResponse'](row, responses[1]);
-      expect(component['isResponseSelected'](row, responses[1])).toBeTrue();
+    it('excludes a workgroup when an idea was only detected in an earlier revision', () => {
+      const annotations = [
+        new Annotation({
+          toWorkgroupId: 1,
+          studentWorkId: 101,
+          periodId: 1,
+          data: { ideas: [{ name: 'idea 1', detected: true }] }
+        }),
+        new Annotation({
+          toWorkgroupId: 1,
+          studentWorkId: 102,
+          periodId: 1,
+          data: { ideas: [{ name: 'idea 1', detected: false }] }
+        })
+      ];
+      const states = [
+        new ComponentState({
+          id: 101,
+          workgroupId: 1,
+          periodId: 1,
+          studentData: { response: 'First response with idea 1' }
+        } as any),
+        new ComponentState({
+          id: 102,
+          workgroupId: 1,
+          periodId: 1,
+          studentData: { response: 'Second response without idea 1' }
+        } as any)
+      ];
+
+      const responses = component['getORResponsesWithIdea'](states, annotations, 'idea 1');
+      expect(responses.length).toBe(0);
     });
 
     it('stores a snapshot of the selected response text', () => {

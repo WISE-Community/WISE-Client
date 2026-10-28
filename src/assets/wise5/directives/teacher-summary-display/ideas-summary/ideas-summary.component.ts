@@ -238,18 +238,18 @@ export class IdeasSummaryComponent
         });
       }
     } else if (this.componentType === 'OpenResponse') {
-      const allAnnotations = this.annotationService
+      const latestAnnotations = this.annotationService
         .getAnnotationsByNodeIdComponentId(this.nodeId, this.componentId)
-        .filter((annotation) => !this.isSinglePeriod || annotation.periodId === this.periodId);
-      const latestAnnotations = allAnnotations.reduceRight(
-        (latestAnnotations, annotation) =>
-          latestAnnotations.some(
-            (latestAnnotation) => latestAnnotation.toWorkgroupId === annotation.toWorkgroupId
-          )
-            ? latestAnnotations
-            : latestAnnotations.concat(annotation),
-        []
-      );
+        .filter((annotation) => !this.isSinglePeriod || annotation.periodId === this.periodId)
+        .reduceRight(
+          (latestAnnotations, annotation) =>
+            latestAnnotations.some(
+              (latestAnnotation) => latestAnnotation.toWorkgroupId === annotation.toWorkgroupId
+            )
+              ? latestAnnotations
+              : latestAnnotations.concat(annotation),
+          []
+        );
       const summaryData = new OpenResponseSummaryData(latestAnnotations, this.rubric);
       const work$ = this.getLatestWork();
       if (work$) {
@@ -259,13 +259,13 @@ export class IdeasSummaryComponent
             ?.filter((s: any) => !this.isSinglePeriod || s.periodId === this.periodId);
           const states =
             cachedStates && cachedStates.length > 0 ? cachedStates : (componentStates ?? []);
-          this.groupIdeas(summaryData, states, allAnnotations);
+          this.groupIdeas(summaryData, states, latestAnnotations);
         });
       } else {
         const cachedStates = this.dataService
           ?.getComponentStatesByComponentId?.(this.componentId)
           ?.filter((s: any) => !this.isSinglePeriod || s.periodId === this.periodId);
-        this.groupIdeas(summaryData, cachedStates ?? [], allAnnotations);
+        this.groupIdeas(summaryData, cachedStates ?? [], latestAnnotations);
       }
     }
   }
@@ -467,16 +467,28 @@ export class IdeasSummaryComponent
     annotations: Annotation[],
     ideaId: string
   ): StudentResponseItem[] {
-    const matchingAnnotations = annotations.filter((annotation) =>
+    const latestAnnotations = annotations.reduceRight<Annotation[]>(
+      (latest, annotation) =>
+        latest.some((a) => a.toWorkgroupId === annotation.toWorkgroupId)
+          ? latest
+          : latest.concat(annotation),
+      []
+    );
+    const matchingAnnotations = latestAnnotations.filter((annotation) =>
       annotation.data?.ideas?.some((idea) => idea.detected && idea.name === ideaId)
     );
     return states
-      .filter((state) =>
-        matchingAnnotations.some((annotation) =>
-          annotation.studentWorkId != null
-            ? annotation.studentWorkId === state.id
-            : annotation.toWorkgroupId === state.workgroupId
-        )
+      .reduceRight<ComponentState[]>(
+        (matchedStates, state) =>
+          matchedStates.some((s) => s.workgroupId === state.workgroupId) ||
+          !matchingAnnotations.some((annotation) =>
+            annotation.studentWorkId != null
+              ? annotation.studentWorkId === state.id
+              : annotation.toWorkgroupId === state.workgroupId
+          )
+            ? matchedStates
+            : [state, ...matchedStates],
+        []
       )
       .map((state) => {
         const text = state.studentData?.response ?? '';
