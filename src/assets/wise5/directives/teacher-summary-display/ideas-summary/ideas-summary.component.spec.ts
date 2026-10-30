@@ -928,6 +928,14 @@ describe('IdeasSummaryComponent for Open Response component', () => {
     });
 
     it('unchecking an idea does not select the same response in another idea row', () => {
+      (TestBed.inject(CRaterService).getCRaterRubric as jasmine.Spy).and.returnValue(
+        new CRaterRubric({
+          ideas: [
+            new CRaterIdea('idea 1', true, 'idea 1'),
+            new CRaterIdea('idea 2', true, 'idea 2')
+          ]
+        })
+      );
       const ideas = generateIdeas(2);
       const annotations = [
         new Annotation({
