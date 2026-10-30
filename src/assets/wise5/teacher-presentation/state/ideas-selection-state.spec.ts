@@ -41,17 +41,25 @@ describe('IdeasSelectionState', () => {
     expect(state.hasSelections()).toBeFalse();
   });
 
-  it('unchecking a category preserves its responses as standalone', () => {
+  it('unchecking a category preserves its responses as standalone only for that category', () => {
     state.toggleIdeaResponse('idea 1', response1);
     expect(state.isIdeaSelected('idea 1')).toBeTrue();
     expect(state.isIdeaResponseSelected('idea 1', response1)).toBeTrue();
+    expect(state.isIdeaResponseSelected('idea 2', response1)).toBeFalse();
 
     // Uncheck category
     state.toggleIdea('idea 1');
     expect(state.isIdeaSelected('idea 1')).toBeFalse();
-    // Response remains selected as standalone
+    // Response remains selected in idea 1, but not in other unselected categories
     expect(state.isIdeaResponseSelected('idea 1', response1)).toBeTrue();
+    expect(state.isIdeaResponseSelected('idea 2', response1)).toBeFalse();
     expect(state.standaloneResponses().size).toBe(1);
+
+    // Checking another category containing the same response does not adopt it from idea 1
+    state.toggleIdea('idea 2', [response1]);
+    expect(state.isIdeaSelected('idea 2')).toBeTrue();
+    expect(state.isIdeaResponseSelected('idea 2', response1)).toBeFalse();
+    expect(state.isIdeaResponseSelected('idea 1', response1)).toBeTrue();
   });
 
   it('checking a category adopts standalone responses matching candidates', () => {

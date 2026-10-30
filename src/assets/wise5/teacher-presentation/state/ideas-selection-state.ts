@@ -27,6 +27,9 @@ export class IdeasSelectionState {
     if (this.selectedIdeaResponseMap().get(ideaId)?.has(key)) {
       return true;
     }
+    if (this.isResponseInAnyIdea(key)) {
+      return false;
+    }
     return !this.selectedIdeaIds().has(ideaId) && this.standaloneResponses().has(key);
   }
 
@@ -46,12 +49,16 @@ export class IdeasSelectionState {
       candidates?.forEach((candidate) => {
         const key = getIdeasResponseKey(candidate);
         const standalone = currentStandalone.get(key);
-        if (standalone) {
+        if (standalone && !this.isResponseInAnyIdea(key, currentMap)) {
           ideaResponses.set(key, standalone);
           currentStandalone.delete(key);
         }
       });
-      ideaResponses.forEach((_, key) => currentStandalone.delete(key));
+      ideaResponses.forEach((_, key) => {
+        if (!this.isResponseInAnyUnselectedIdea(key, currentIdeas, currentMap)) {
+          currentStandalone.delete(key);
+        }
+      });
       currentMap.set(ideaId, ideaResponses);
     }
 
@@ -68,25 +75,55 @@ export class IdeasSelectionState {
     const currentStandalone = new Map(this.standaloneResponses());
 
     const ideaResponses = new Map(currentMap.get(ideaId) ?? []);
-    const isSelected = ideaResponses.has(key) || currentStandalone.has(key);
+    const isSelected = this.isIdeaResponseSelected(ideaId, response);
 
     if (isSelected) {
       ideaResponses.delete(key);
-      currentStandalone.delete(key);
       currentMap.set(ideaId, ideaResponses);
+      if (!this.isResponseInAnyUnselectedIdea(key, currentIdeas, currentMap)) {
+        currentStandalone.delete(key);
+      }
       // Category remains selected per requirements
     } else {
       ideaResponses.set(key, response);
       currentMap.set(ideaId, ideaResponses);
       // Auto-check parent category
       currentIdeas.add(ideaId);
-      currentStandalone.delete(key);
+      if (!this.isResponseInAnyUnselectedIdea(key, currentIdeas, currentMap)) {
+        currentStandalone.delete(key);
+      }
     }
 
     this.selectedIdeaIds.set(currentIdeas);
     this.selectedIdeaResponseMap.set(currentMap);
     this.standaloneResponses.set(currentStandalone);
     return true;
+  }
+
+  private isResponseInAnyIdea(
+    key: string,
+    responseMap: Map<string, Map<string, IdeasPresentationResponse>> =
+      this.selectedIdeaResponseMap()
+  ): boolean {
+    for (const responses of responseMap.values()) {
+      if (responses.has(key)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private isResponseInAnyUnselectedIdea(
+    key: string,
+    selectedIdeas: Set<string>,
+    responseMap: Map<string, Map<string, IdeasPresentationResponse>>
+  ): boolean {
+    for (const [ideaId, responses] of responseMap.entries()) {
+      if (!selectedIdeas.has(ideaId) && responses.has(key)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   clear(): boolean {
