@@ -1,6 +1,8 @@
 import { Annotation } from '../../../common/Annotation';
 import { AnnotationService } from '../../../services/annotationService';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { MatTooltip } from '@angular/material/tooltip';
 import { ComponentState } from '../../../../../app/domain/componentState';
 import { ConfigService } from '../../../services/configService';
 import { CRaterIdea } from '../../../components/common/cRater/CRaterIdea';
@@ -803,7 +805,7 @@ describe('IdeasSummaryComponent for Open Response component', () => {
       expect(store.isIdeaResponseSelected('idea 1', selection)).toBeTrue();
     });
 
-    it('supports multiple responses from the same student with individual checkboxes', () => {
+    it('only includes the latest revision for a workgroup with multiple revisions', () => {
       const ideas = generateIdeas(1);
       const annotations = [
         new Annotation({
@@ -833,24 +835,213 @@ describe('IdeasSummaryComponent for Open Response component', () => {
           studentData: { response: 'Second response with idea 1' }
         } as any)
       ];
+      (
+        TestBed.inject(AnnotationService).getAnnotationsByNodeIdComponentId as jasmine.Spy
+      ).and.returnValue(annotations);
+      spyOn(TestBed.inject(TeacherDataService), 'getComponentStatesByComponentId').and.returnValue(
+        states
+      );
 
-      const responses = component['getORResponsesWithIdea'](states, annotations, 'idea 1');
-      expect(responses.length).toBe(2);
-      expect(responses[0].studentWorkId).toBe(101);
-      expect(responses[1].studentWorkId).toBe(102);
-
-      const groups = component['groupResponsesByWorkgroup'](responses);
-      expect(groups.length).toBe(1);
-      expect(groups[0].responses.length).toBe(2);
+      component['generateIdeasSummary']();
 
       const row = component['dataSource'].data[0];
-      component['toggleResponse'](row, responses[0]);
-      expect(store.isIdeaSelected(row.id)).toBeTrue();
-      expect(component['isResponseSelected'](row, responses[0])).toBeTrue();
-      expect(component['isResponseSelected'](row, responses[1])).toBeFalse();
+      expect(row.responses.length).toBe(1);
+      expect(row.responses[0].studentWorkId).toBe(102);
+      expect(row.responses[0].text).toBe('Second response with idea 1');
+      expect(row.studentGroups.length).toBe(1);
+      expect(row.studentGroups[0].responses.length).toBe(1);
 
-      component['toggleResponse'](row, responses[1]);
-      expect(component['isResponseSelected'](row, responses[1])).toBeTrue();
+      component['toggleResponse'](row, row.responses[0]);
+      expect(store.isIdeaSelected(row.id)).toBeTrue();
+      expect(component['isResponseSelected'](row, row.responses[0])).toBeTrue();
+    });
+
+    it('sets idea checkbox to indeterminate when idea is not selected but responses for that idea are selected', () => {
+      const ideas = generateIdeas(1);
+      const annotations = [
+        new Annotation({
+          toWorkgroupId: 1,
+          studentWorkId: 101,
+          periodId: 1,
+          data: { ideas: ideas }
+        })
+      ];
+      const states = [
+        new ComponentState({
+          id: 101,
+          workgroupId: 1,
+          periodId: 1,
+          studentData: { response: 'Response with idea 1' }
+        } as any)
+      ];
+      (
+        TestBed.inject(AnnotationService).getAnnotationsByNodeIdComponentId as jasmine.Spy
+      ).and.returnValue(annotations);
+      spyOn(TestBed.inject(TeacherDataService), 'getComponentStatesByComponentId').and.returnValue(
+        states
+      );
+
+      component['generateIdeasSummary']();
+      fixture.detectChanges();
+
+      const row = component['dataSource'].data[0];
+      const checkboxInput: HTMLInputElement = fixture.nativeElement.querySelector(
+        'td.mat-column-select input[type="checkbox"]'
+      );
+      const tooltip = fixture.debugElement
+        .query(By.css('td.mat-column-select mat-checkbox'))
+        .injector.get(MatTooltip);
+
+      expect(component['isIdeaIndeterminate'](row)).toBeFalse();
+      expect(checkboxInput.checked).toBeFalse();
+      expect(checkboxInput.indeterminate).toBeFalse();
+      expect(tooltip.disabled).toBeTrue();
+
+      // Select a response (auto-selects idea category)
+      component['toggleResponse'](row, row.responses[0]);
+      fixture.detectChanges();
+      expect(store.isIdeaSelected(row.id)).toBeTrue();
+      expect(component['isIdeaIndeterminate'](row)).toBeFalse();
+      expect(checkboxInput.checked).toBeTrue();
+      expect(checkboxInput.indeterminate).toBeFalse();
+      expect(tooltip.disabled).toBeTrue();
+
+      // Unselect the idea category while the response remains selected
+      component['toggleIdea'](row);
+      fixture.detectChanges();
+      expect(store.isIdeaSelected(row.id)).toBeFalse();
+      expect(component['isResponseSelected'](row, row.responses[0])).toBeTrue();
+      expect(component['isIdeaIndeterminate'](row)).toBeTrue();
+      expect(checkboxInput.checked).toBeFalse();
+      expect(checkboxInput.indeterminate).toBeTrue();
+      expect(tooltip.disabled).toBeFalse();
+      expect(tooltip.message).toBe('Some responses for this idea are selected');
+
+      // Deselect the response -> idea checkbox returns to unchecked and not indeterminate
+      component['toggleResponse'](row, row.responses[0]);
+      fixture.detectChanges();
+      expect(store.isIdeaSelected(row.id)).toBeFalse();
+      expect(component['isIdeaIndeterminate'](row)).toBeFalse();
+      expect(checkboxInput.checked).toBeFalse();
+      expect(checkboxInput.indeterminate).toBeFalse();
+      expect(tooltip.disabled).toBeTrue();
+    });
+
+    it('unchecking an idea does not select the same response in another idea row', () => {
+      (TestBed.inject(CRaterService).getCRaterRubric as jasmine.Spy).and.returnValue(
+        new CRaterRubric({
+          ideas: [
+            new CRaterIdea('idea 1', true, 'idea 1'),
+            new CRaterIdea('idea 2', true, 'idea 2')
+          ]
+        })
+      );
+      const ideas = generateIdeas(2);
+      const annotations = [
+        new Annotation({
+          toWorkgroupId: 1,
+          studentWorkId: 101,
+          periodId: 1,
+          data: { ideas: ideas }
+        })
+      ];
+      const states = [
+        new ComponentState({
+          id: 101,
+          workgroupId: 1,
+          periodId: 1,
+          studentData: { response: 'Response with idea 1 and idea 2' }
+        } as any)
+      ];
+      (
+        TestBed.inject(AnnotationService).getAnnotationsByNodeIdComponentId as jasmine.Spy
+      ).and.returnValue(annotations);
+      spyOn(TestBed.inject(TeacherDataService), 'getComponentStatesByComponentId').and.returnValue(
+        states
+      );
+
+      component['generateIdeasSummary']();
+      fixture.detectChanges();
+
+      const row1 = component['dataSource'].data[0];
+      const row2 = component['dataSource'].data[1];
+
+      // Select response in row 1
+      component['toggleResponse'](row1, row1.responses[0]);
+      fixture.detectChanges();
+      expect(store.isIdeaSelected(row1.id)).toBeTrue();
+      expect(component['isResponseSelected'](row1, row1.responses[0])).toBeTrue();
+      expect(store.isIdeaSelected(row2.id)).toBeFalse();
+      expect(component['isResponseSelected'](row2, row2.responses[0])).toBeFalse();
+      expect(component['isIdeaIndeterminate'](row2)).toBeFalse();
+
+      // Uncheck idea 1
+      component['toggleIdea'](row1);
+      fixture.detectChanges();
+      expect(store.isIdeaSelected(row1.id)).toBeFalse();
+      expect(component['isResponseSelected'](row1, row1.responses[0])).toBeTrue();
+      expect(component['isIdeaIndeterminate'](row1)).toBeTrue();
+
+      // Row 2 and its shared response should remain unselected
+      expect(store.isIdeaSelected(row2.id)).toBeFalse();
+      expect(component['isResponseSelected'](row2, row2.responses[0])).toBeFalse();
+      expect(component['isIdeaIndeterminate'](row2)).toBeFalse();
+    });
+
+    it('excludes a workgroup when an idea was only detected in an earlier revision', () => {
+      const annotations = [
+        new Annotation({
+          toWorkgroupId: 1,
+          studentWorkId: 101,
+          periodId: 1,
+          data: { ideas: [{ name: 'idea 1', detected: true }] }
+        }),
+        new Annotation({
+          toWorkgroupId: 1,
+          studentWorkId: 102,
+          periodId: 1,
+          data: { ideas: [{ name: 'idea 1', detected: false }] }
+        }),
+        new Annotation({
+          toWorkgroupId: 2,
+          studentWorkId: 201,
+          periodId: 1,
+          data: { ideas: [{ name: 'idea 1', detected: true }] }
+        })
+      ];
+      const states = [
+        new ComponentState({
+          id: 101,
+          workgroupId: 1,
+          periodId: 1,
+          studentData: { response: 'First response with idea 1' }
+        } as any),
+        new ComponentState({
+          id: 102,
+          workgroupId: 1,
+          periodId: 1,
+          studentData: { response: 'Second response without idea 1' }
+        } as any),
+        new ComponentState({
+          id: 201,
+          workgroupId: 2,
+          periodId: 1,
+          studentData: { response: 'Workgroup 2 response with idea 1' }
+        } as any)
+      ];
+      (
+        TestBed.inject(AnnotationService).getAnnotationsByNodeIdComponentId as jasmine.Spy
+      ).and.returnValue(annotations);
+      spyOn(TestBed.inject(TeacherDataService), 'getComponentStatesByComponentId').and.returnValue(
+        states
+      );
+
+      component['generateIdeasSummary']();
+
+      const row = component['dataSource'].data[0];
+      expect(row.responses.length).toBe(1);
+      expect(row.responses[0].workgroupId).toBe(2);
+      expect(row.responses[0].studentWorkId).toBe(201);
     });
 
     it('stores a snapshot of the selected response text', () => {

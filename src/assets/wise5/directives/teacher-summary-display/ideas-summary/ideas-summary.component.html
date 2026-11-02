@@ -1,20 +1,30 @@
-<div [class.expanded]="expanded">
-  <div class="flex flex-wrap items-center mb-3 gap-2">
+<div [class.expanded]="expanded" class="@container">
+  <div class="flex flex-wrap items-end mb-3 gap-2 me-8">
     <h2 class="mat-subtitle-1 mb-0!" i18n>Student Ideas Detected</h2>
-    <teacher-presentation-button
-      [node]="node"
-      [component]="component"
-      [periodId]="periodId"
-      [periodName]="periodName"
-      [store]="store"
-    />
+    <span class="mat-caption @xl:order-2" i18n
+      >Select a row to see student responses with that idea</span
+    >
   </div>
   @if (hasWarning) {
     <p class="warn center">{{ warningMessage }}</p>
   }
   @if (doRender) {
-    <div class="flex flex-wrap items-center gap-4 mb-3">
-      <mat-form-field appearance="fill" class="search-input mat-caption" subscriptSizing="dynamic">
+    <div class="flex flex-col @xl:flex-row @xl:items-center @xl:justify-between gap-3 mb-3">
+      <div class="flex items-center gap-2">
+        <teacher-presentation-button
+          [node]="node"
+          [component]="component"
+          [periodId]="periodId"
+          [periodName]="periodName"
+          [store]="store"
+        />
+        <span i18n>Select ideas and responses to present</span>
+      </div>
+      <mat-form-field
+        appearance="fill"
+        class="search-input mat-caption w-full @xl:w-auto"
+        subscriptSizing="dynamic"
+      >
         <input
           matInput
           placeholder="Search"
@@ -23,7 +33,6 @@
           (input)="applyFilter()"
         />
       </mat-form-field>
-      <span class="mat-caption" i18n>Select a row to see all student responses</span>
     </div>
 
     <div
@@ -51,6 +60,11 @@
             <mat-checkbox
               color="primary"
               [checked]="store.isIdeaSelected(row.id)"
+              [indeterminate]="isIdeaIndeterminate(row)"
+              matTooltip="Some responses for this idea are selected"
+              matTooltipPosition="above"
+              [matTooltipDisabled]="!isIdeaIndeterminate(row)"
+              i18n-matTooltip
               (change)="toggleIdea(row)"
               aria-label="Select idea category"
               i18n-aria-label
