@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Node } from '../../../common/Node';
 import { ComponentContent } from '../../../common/ComponentContent';
@@ -76,6 +77,7 @@ export interface IdeaTableRow {
     MatInputModule,
     MatSortModule,
     MatTableModule,
+    MatTooltipModule,
     TeacherPresentationButtonComponent
   ],
   providers: [TeacherPresentationSelectionStore],
@@ -559,6 +561,13 @@ export class IdeasSummaryComponent
 
   protected isResponseSelected(row: IdeaTableRow, response: StudentResponseItem): boolean {
     return this.store.isIdeaResponseSelected(row.id, this.toSelection(response));
+  }
+
+  protected isIdeaIndeterminate(row: IdeaTableRow): boolean {
+    return (
+      !this.store.isIdeaSelected(row.id) &&
+      row.responses.some((response) => this.isResponseSelected(row, response))
+    );
   }
 
   protected toggleResponse(row: IdeaTableRow, response: StudentResponseItem): void {

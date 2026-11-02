@@ -1,8 +1,8 @@
-<div class="flex flex-wrap gap-2 items-center justify-between mb-2">
+<div class="flex flex-wrap gap-2 items-center mb-2">
   <h2 class="mat-subtitle-1 !m-0" i18n>AI Summary</h2>
   <span class="mat-caption" i18n>Summarize class responses using AI</span>
 </div>
-<div class="flex flex-wrap gap-1 items-center">
+<div class="flex flex-wrap gap-2 items-center">
   <button
     mat-stroked-button
     (click)="generateSummary()"
@@ -14,10 +14,10 @@
   @if (generatingSummary) {
     <mat-spinner diameter="20" />
   }
+  @if (newSummaryAvailable) {
+    <span class="info" i18n>*New responses since last summary</span>
+  }
 </div>
-@if (newSummaryAvailable) {
-  <p class="info" i18n>*New responses since last summary</p>
-}
 @if (summary) {
   <markdown [data]="summary" />
   <div class="mat-caption text-secondary mt-1">{{ summaryCaption }}</div>
