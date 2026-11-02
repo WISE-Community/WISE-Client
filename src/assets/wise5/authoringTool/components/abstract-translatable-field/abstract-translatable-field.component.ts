@@ -5,7 +5,10 @@ import { Input, Signal, Output, computed, Directive } from '@angular/core';
 import { Language } from '../../../../../app/domain/language';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject, Subscription, debounceTime } from 'rxjs';
-import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
+import {
+  TeacherProjectTranslationService,
+  TranslationContentType
+} from '../../../services/teacherProjectTranslationService';
 import { TeacherProjectService } from '../../../services/teacherProjectService';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Translations } from '../../../../../app/domain/translations';
@@ -23,6 +26,7 @@ export abstract class AbstractTranslatableFieldComponent {
   @Input() key: string;
   @Input() label: string;
   @Input() placeholder: string;
+  protected readonly translationContentType: TranslationContentType = 'text';
   protected showTranslationInput: Signal<boolean> = computed(
     () => !this.projectService.isDefaultLocale()
   );
@@ -97,7 +101,8 @@ export abstract class AbstractTranslatableFieldComponent {
         .getTranslationSuggestion(
           this.defaultLanguage.language,
           this.currentLanguage().language,
-          this.content[this.key]
+          this.content[this.key],
+          this.translationContentType
         )
         .subscribe({
           next: (translation) => this.saveTranslationText(translation),
@@ -125,6 +130,7 @@ export abstract class AbstractTranslatableFieldComponent {
         defaultLanguage: this.defaultLanguage.language,
         currentLanguage: this.currentLanguage().language,
         defaultLanguageContent: this.content[this.key],
+        contentType: this.translationContentType,
         currentLanguageContent: this.translationText
       }
     });
