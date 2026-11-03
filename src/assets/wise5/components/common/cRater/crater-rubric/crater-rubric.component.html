@@ -20,18 +20,26 @@
     </div>
   }
   @if (ideas.length > 0) {
-    <table class="text-sm">
+    <table class="text-sm w-full">
       <thead>
         <tr>
-          <th i18n>ID</th>
-          <th i18n>Description</th>
+          <th i18n>Idea</th>
+          @if (rubric.hasSampleResponses) {
+            <th i18n>Sample Response</th>
+          }
         </tr>
       </thead>
       <tbody>
         @for (idea of ideas; track idea.name) {
           <tr [style.background-color]="idea.color">
-            <td>{{ idea.name }}</td>
-            <td>{{ idea.text }}</td>
+            <td class="font-semibold sm:min-w-52">{{ idea.text }}</td>
+            @if (rubric.hasSampleResponses) {
+              <td>
+                @for (response of idea.sampleResponses; track $index) {
+                  <div class="mb-1 last:mb-0">"{{ response }}"</div>
+                }
+              </td>
+            }
           </tr>
         }
       </tbody>

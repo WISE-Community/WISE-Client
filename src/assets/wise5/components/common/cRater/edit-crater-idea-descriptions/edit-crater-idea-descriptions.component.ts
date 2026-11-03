@@ -1,5 +1,5 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { CRaterIdea } from '../CRaterIdea';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +27,7 @@ import { TeacherProjectService } from '../../../../services/teacherProjectServic
   templateUrl: './edit-crater-idea-descriptions.component.html',
   styleUrl: './edit-crater-idea-descriptions.component.scss'
 })
-export class EditCRaterIdeaDescriptionsComponent implements OnInit {
+export class EditCRaterIdeaDescriptionsComponent implements OnInit, OnChanges {
   @Input() ideaDescriptions: CRaterIdea[] = [];
   @Input() enableAutoscrolling: boolean = true;
   protected inputChanged: Subject<string> = new Subject<string>();
@@ -43,8 +43,28 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
     );
   }
 
+  ngOnChanges(): void {
+    this.ideaDescriptions?.forEach((idea) => {
+      if (!idea.sampleResponses?.length) {
+        idea.sampleResponses = [''];
+      }
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  protected addNewSampleResponse(idea: CRaterIdea): void {
+    idea.sampleResponses.push('');
+    this.projectService.nodeChanged();
+  }
+
+  protected deleteSampleResponse(idea: CRaterIdea, responseIndex: number): void {
+    if (confirm($localize`Are you sure you want to delete this sample response?`)) {
+      idea.sampleResponses.splice(responseIndex, 1);
+      this.projectService.nodeChanged();
+    }
   }
 
   protected addNewIdeaDescription(addToTop: boolean): void {
@@ -63,6 +83,7 @@ export class EditCRaterIdeaDescriptionsComponent implements OnInit {
   private createNewIdea(): CRaterIdea {
     const idea = new CRaterIdea('');
     idea.text = '';
+    idea.sampleResponses = [''];
     return idea;
   }
 

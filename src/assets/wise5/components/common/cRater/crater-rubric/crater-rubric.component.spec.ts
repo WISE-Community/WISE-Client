@@ -40,4 +40,24 @@ describe('LibraryProjectDetailsComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(0);
   });
+
+  it('should display non-empty sample responses in the table when rubric has sample responses', () => {
+    component['rubric'] = new CRaterRubric({
+      description: '',
+      ideas: [
+        { name: '1', text: 'Idea 1', sampleResponses: ['Sample response 1', ''] },
+        { name: '2', text: 'Idea 2', sampleResponses: [''] }
+      ]
+    });
+    component.ngOnInit();
+    fixture.detectChanges();
+    const headers = Array.from(fixture.nativeElement.querySelectorAll('th')).map(
+      (th: HTMLElement) => th.textContent.trim()
+    );
+    expect(headers).toEqual(['Idea', 'Sample Response']);
+    const sampleResponseDivs = Array.from(
+      fixture.nativeElement.querySelectorAll('td div.mb-1')
+    ).map((div: HTMLElement) => div.textContent.trim());
+    expect(sampleResponseDivs).toEqual(['"Sample response 1"']);
+  });
 });
