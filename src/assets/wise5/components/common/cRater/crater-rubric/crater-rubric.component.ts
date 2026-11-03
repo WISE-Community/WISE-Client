@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class CRaterRubricComponent {
   protected ideas: CRaterIdea[];
+  protected showSampleResponses: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) protected rubric: CRaterRubric,
@@ -43,5 +44,9 @@ export class CRaterRubricComponent {
 
   protected closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  protected toggleSampleResponses(): void {
+    this.showSampleResponses = !this.showSampleResponses;
   }
 }

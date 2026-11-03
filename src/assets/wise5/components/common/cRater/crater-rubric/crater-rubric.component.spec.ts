@@ -58,7 +58,41 @@ describe('LibraryProjectDetailsComponent', () => {
     expect(rows[1].textContent.trim()).toEqual('Second idea');
   });
 
-  it('should display non-empty sample responses in the table when rubric has sample responses', () => {
+  it('should display non-empty sample responses below idea text when toggled on', () => {
+    setRubricWithSampleResponses();
+    const headers = fixture.nativeElement.querySelectorAll('th');
+    expect(headers.length).toEqual(1);
+    expect(headers[0].querySelector('span').textContent.trim()).toEqual('Ideas');
+    expect(fixture.nativeElement.querySelectorAll('tbody tr:first-child td').length).toEqual(1);
+    expect(getSampleResponseTexts()).toEqual([]);
+
+    const toggle = fixture.nativeElement.querySelector('a[role="button"]');
+    toggle.click();
+    fixture.detectChanges();
+    expect(getSampleResponseTexts()).toEqual(['"Sample response 1"']);
+  });
+
+  it('should not show sample responses toggle when rubric has no sample responses', () => {
+    expect(fixture.nativeElement.querySelector('a[role="button"]')).toBeNull();
+  });
+
+  it('should toggle sample response visibility when link is clicked', () => {
+    setRubricWithSampleResponses();
+    const toggle = fixture.nativeElement.querySelector('a[role="button"]');
+    expect(toggle.textContent.trim()).toEqual('Show sample responses');
+    expect(getSampleResponseTexts()).toEqual([]);
+
+    toggle.click();
+    fixture.detectChanges();
+    expect(getSampleResponseTexts()).toEqual(['"Sample response 1"']);
+    expect(toggle.textContent.trim()).toEqual('Hide sample responses');
+
+    toggle.click();
+    fixture.detectChanges();
+    expect(getSampleResponseTexts()).toEqual([]);
+  });
+
+  function setRubricWithSampleResponses(): void {
     component['rubric'] = new CRaterRubric({
       description: '',
       ideas: [
@@ -68,13 +102,11 @@ describe('LibraryProjectDetailsComponent', () => {
     });
     component.ngOnInit();
     fixture.detectChanges();
-    const headers = Array.from(fixture.nativeElement.querySelectorAll('th')).map(
-      (th: HTMLElement) => th.textContent.trim()
+  }
+
+  function getSampleResponseTexts(): string[] {
+    return Array.from(fixture.nativeElement.querySelectorAll('.sample-responses div')).map(
+      (div: HTMLElement) => div.textContent.trim()
     );
-    expect(headers).toEqual(['Idea', 'Sample Response']);
-    const sampleResponseDivs = Array.from(
-      fixture.nativeElement.querySelectorAll('td div.mb-1')
-    ).map((div: HTMLElement) => div.textContent.trim());
-    expect(sampleResponseDivs).toEqual(['"Sample response 1"']);
-  });
+  }
 });
