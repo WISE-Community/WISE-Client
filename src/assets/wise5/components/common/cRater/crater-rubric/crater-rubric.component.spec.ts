@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CRaterRubricComponent } from './crater-rubric.component';
 import { MockProvider } from 'ng-mocks';
 import { CRaterRubric } from '../CRaterRubric';
+import { CRaterIdea } from '../CRaterIdea';
 
 describe('LibraryProjectDetailsComponent', () => {
   let component: CRaterRubricComponent;
@@ -39,5 +40,18 @@ describe('LibraryProjectDetailsComponent', () => {
     component['rubric'].description = '';
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelectorAll('p').length).toEqual(0);
+  });
+
+  it('should show idea text', () => {
+    component['rubric'] = new CRaterRubric({
+      description: '',
+      ideas: [new CRaterIdea('1', undefined, 'First idea'), new CRaterIdea('2', undefined, 'Second idea')]
+    });
+    component.ngOnInit();
+    fixture.detectChanges();
+    const rows = fixture.nativeElement.querySelectorAll('tbody tr');
+    expect(rows.length).toEqual(2);
+    expect(rows[0].textContent.trim()).toEqual('First idea');
+    expect(rows[1].textContent.trim()).toEqual('Second idea');
   });
 });
