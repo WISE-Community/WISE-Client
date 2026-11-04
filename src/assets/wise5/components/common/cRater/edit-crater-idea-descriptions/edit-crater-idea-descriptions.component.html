@@ -26,7 +26,7 @@
               <span class="mat-subtitle-1">{{ ideaIndex + 1 }}</span>
             </div>
             <div class="flex flex-col items-start gap-2 flex-1">
-              <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
+              <mat-form-field class="idea-input" appearance="fill" subscriptSizing="dynamic">
                 <mat-label i18n>Idea ID</mat-label>
                 <input
                   matInput
@@ -34,7 +34,7 @@
                   (ngModelChange)="inputChanged.next($event)"
                 />
               </mat-form-field>
-              <mat-form-field class="idea-input form-field-no-hint" appearance="fill">
+              <mat-form-field class="idea-input" appearance="fill" subscriptSizing="dynamic">
                 <mat-label i18n>User-Friendly Description</mat-label>
                 <textarea
                   matInput
@@ -44,6 +44,52 @@
                 >
                 </textarea>
               </mat-form-field>
+              @for (
+                sampleResponse of idea.sampleResponses;
+                track $index;
+                let responseIndex = $index, last = $last
+              ) {
+                <div class="w-full flex flex-row items-center gap-2">
+                  <mat-form-field class="idea-input" appearance="fill" subscriptSizing="dynamic">
+                    @if (idea.sampleResponses.length === 1) {
+                      <mat-label i18n>Sample Response</mat-label>
+                    }
+                    @if (idea.sampleResponses.length > 1) {
+                      <mat-label i18n>Sample Response #{{ responseIndex + 1 }}</mat-label>
+                    }
+                    <textarea
+                      matInput
+                      [(ngModel)]="idea.sampleResponses[responseIndex]"
+                      (ngModelChange)="inputChanged.next($event)"
+                      cdkTextareaAutosize
+                    >
+                    </textarea>
+                    @if (idea.sampleResponses.length > 1) {
+                      <button
+                        mat-icon-button
+                        matSuffix
+                        matTooltip="Delete sample response"
+                        i18n-matTooltip
+                        matTooltipPosition="before"
+                        (click)="deleteSampleResponse(idea, responseIndex)"
+                      >
+                        <mat-icon>clear</mat-icon>
+                      </button>
+                    }
+                  </mat-form-field>
+                  @if (last) {
+                    <button
+                      mat-icon-button
+                      matTooltip="Add sample response"
+                      matTooltipPosition="above"
+                      i18n-matTooltip
+                      (click)="addNewSampleResponse(idea)"
+                    >
+                      <mat-icon>add_circle</mat-icon>
+                    </button>
+                  }
+                </div>
+              }
             </div>
             <div class="flex flex-col items-center">
               <button

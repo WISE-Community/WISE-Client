@@ -61,4 +61,30 @@ describe('CRaterRubric', () => {
       expect(withTagsRubric.hasAnyIdeaTags()).toBe(true);
     });
   });
+
+  describe('hasSampleResponses', () => {
+    it('should be false when rubric has no ideas or ideas have no non-empty sampleResponses', () => {
+      const emptyRubric = new CRaterRubric({ ideas: [] });
+      expect(emptyRubric.hasSampleResponses).toBe(false);
+
+      const noSampleResponsesRubric = new CRaterRubric({
+        ideas: [
+          { name: 'idea1', text: 'description 1' },
+          { name: 'idea2', text: 'description 2', sampleResponses: [] },
+          { name: 'idea3', text: 'description 3', sampleResponses: ['', '   '] }
+        ]
+      });
+      expect(noSampleResponsesRubric.hasSampleResponses).toBe(false);
+    });
+
+    it('should be true when at least one idea has a non-empty sampleResponse', () => {
+      const withSampleResponsesRubric = new CRaterRubric({
+        ideas: [
+          { name: 'idea1', text: 'description 1', sampleResponses: [''] },
+          { name: 'idea2', text: 'description 2', sampleResponses: ['Sample response 1'] }
+        ]
+      });
+      expect(withSampleResponsesRubric.hasSampleResponses).toBe(true);
+    });
+  });
 });

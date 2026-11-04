@@ -20,16 +20,46 @@
     </div>
   }
   @if (ideas.length > 0) {
-    <table class="text-sm">
+    <table class="text-sm w-full">
       <thead>
         <tr>
-          <th i18n>Idea</th>
+          <th>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span i18n>Ideas</span>
+              @if (rubric.hasSampleResponses) {
+                <a
+                  href="#"
+                  role="button"
+                  class="font-normal"
+                  (click)="$event.preventDefault(); toggleSampleResponses()"
+                  (keydown.space)="$event.preventDefault(); toggleSampleResponses()"
+                >
+                  @if (showSampleResponses) {
+                    <span i18n>Hide sample responses</span>
+                  } @else {
+                    <span i18n>Show sample responses</span>
+                  }
+                </a>
+              }
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>
         @for (idea of ideas; track idea.name) {
           <tr [style.background-color]="idea.color">
-            <td>{{ idea.text }}</td>
+            <td>
+              <div [class.font-medium]="showSampleResponses && rubric.hasSampleResponses">
+                {{ idea.text }}
+              </div>
+              @if (showSampleResponses && idea.sampleResponses?.length > 0) {
+                <div class="sample-responses mt-1 ps-1">
+                  @for (response of idea.sampleResponses; track $index) {
+                    <div class="mb-1 last:mb-0">"{{ response }}"</div>
+                  }
+                </div>
+              }
+            </td>
           </tr>
         }
       </tbody>
