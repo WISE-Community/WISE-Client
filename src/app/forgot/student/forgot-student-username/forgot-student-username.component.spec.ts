@@ -3,21 +3,26 @@ import { ForgotStudentUsernameComponent } from './forgot-student-username.compon
 import { StudentService } from '../../../student/student.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Router } from '@angular/router';
+import { of } from 'rxjs';
 
-class MockStudentService {}
+class MockStudentService {
+  getStudentUsernames = jasmine.createSpy('getStudentUsernames').and.returnValue(of([]));
+}
 
 describe('ForgotStudentUsernameComponent', () => {
   let component: ForgotStudentUsernameComponent;
   let fixture: ComponentFixture<ForgotStudentUsernameComponent>;
+  let studentService: MockStudentService;
 
   const getSubmitButton = () => {
     return fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
   };
 
   beforeEach(() => {
+    studentService = new MockStudentService();
     TestBed.configureTestingModule({
       imports: [BrowserAnimationsModule, ForgotStudentUsernameComponent],
-      providers: [{ provide: StudentService, useClass: MockStudentService }, provideRouter([])]
+      providers: [{ provide: StudentService, useValue: studentService }, provideRouter([])]
     });
     fixture = TestBed.createComponent(ForgotStudentUsernameComponent);
     component = fixture.componentInstance;
@@ -61,14 +66,30 @@ describe('ForgotStudentUsernameComponent', () => {
     expect(submitButton.disabled).toBe(true);
   });
 
-  it('should enable the search button when all the input fields are filled in', () => {
+  it('should enable the search button with first and last name alone', () => {
     component.setControlFieldValue('firstName', 'Spongebob');
     component.setControlFieldValue('lastName', 'Squarepants');
-    component.setControlFieldValue('birthMonth', '1');
-    component.setControlFieldValue('birthDay', '01');
     fixture.detectChanges();
     const submitButton = getSubmitButton();
     expect(submitButton.disabled).toBe(false);
+    expect(
+      fixture.debugElement.nativeElement.querySelector('[formControlName="birthMonth"]')
+    ).toBeNull();
+    expect(
+      fixture.debugElement.nativeElement.querySelector('[formControlName="birthDay"]')
+    ).toBeNull();
+  });
+
+  it('should search with names alone and display the no-match message', () => {
+    component.setControlFieldValue('firstName', 'Spongebob');
+    component.setControlFieldValue('lastName', 'Squarepants');
+    component.submit();
+    fixture.detectChanges();
+
+    expect(studentService.getStudentUsernames).toHaveBeenCalledOnceWith('Spongebob', 'Squarepants');
+    expect(fixture.debugElement.nativeElement.querySelector('.warn').textContent).toContain(
+      'We did not find any usernames'
+    );
   });
 
   it('should navigate to the login page', () => {
