@@ -4,7 +4,7 @@ import { ConfigService } from './configService';
 import { TeacherProjectService } from './teacherProjectService';
 import { TeacherWebSocketService } from './teacherWebSocketService';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { finalize, Observable, shareReplay, Subject, tap } from 'rxjs';
 import { DataService } from '../../../app/services/data.service';
 import { Node } from '../common/Node';
 import { compressToEncodedURIComponent } from 'lz-string';
@@ -22,6 +22,7 @@ export class TeacherDataService extends DataService {
   nodeGradingSort = 'team';
   studentGradingSort = 'step';
   studentProgressSort = 'team';
+  private requestsInFlight = new Map<string, Observable<any>>();
   private currentPeriodChangedSource: Subject<any> = new Subject<any>();
   public currentPeriodChanged$: Observable<any> = this.currentPeriodChangedSource.asObservable();
   private currentWorkgroupChangedSource: Subject<any> = new Subject<any>();
@@ -138,7 +139,22 @@ export class TeacherDataService extends DataService {
     if (components.length > 0) {
       params = params.set('components', compressToEncodedURIComponent(JSON.stringify(components)));
     }
-    return this.retrieveStudentData(params);
+    return this.shareRequestInFlight(params);
+  }
+
+  // A step's response list and its question summary request the same node at once, and the
+  // response holds every revision of the step's work.
+  private shareRequestInFlight(params: HttpParams): Observable<any> {
+    const key = params.toString();
+    let request = this.requestsInFlight.get(key);
+    if (request == null) {
+      request = this.retrieveStudentData(params).pipe(
+        finalize(() => this.requestsInFlight.delete(key)),
+        shareReplay({ bufferSize: 1, refCount: false })
+      );
+      this.requestsInFlight.set(key, request);
+    }
+    return request;
   }
 
   retrieveStudentDataByWorkgroupId(workgroupId: string): Observable<any> {
