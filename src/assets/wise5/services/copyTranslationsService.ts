@@ -19,9 +19,7 @@ export class CopyTranslationsService extends EditTranslationsService {
   }
 
   private async copyNodes(nodes: Node[]): Promise<void> {
-    const i18nKeys = nodes.flatMap((node) =>
-      node.components.flatMap((component) => this.getI18NKeys(component))
-    );
+    const i18nKeys = nodes.flatMap((node) => this.getI18NKeys(node));
     forkJoin(await this.getSaveTranslationRequests(i18nKeys)).subscribe();
     this.projectService.saveProject();
   }
