@@ -16,6 +16,7 @@ export abstract class AbstractClassResponsesComponent {
   protected node: Node;
   protected sortBy: string;
   protected sortedWorkgroups: any[] = [];
+  protected studentDataLoaded: boolean = false;
   protected workgroups: any[] = [];
   protected workgroupExpanded: Record<number, boolean> = {}; // workgroup is expanded or not
   private workgroupInView: Record<number, boolean> = {}; // workgroup is in view or not
@@ -31,7 +32,9 @@ export abstract class AbstractClassResponsesComponent {
   ) {}
 
   protected retrieveStudentData(node: Node): void {
+    this.studentDataLoaded = false;
     this.dataService.retrieveStudentDataForNode(node).subscribe(() => {
+      this.studentDataLoaded = true;
       this.workgroups = copy(this.configService.getClassmateUserInfos()).filter(
         (workgroup) =>
           workgroup.workgroupId != null &&
@@ -86,7 +89,8 @@ export abstract class AbstractClassResponsesComponent {
     if (!this.hasWork()) {
       completionStatus.isCompleted = nodeStatus.isVisited;
     }
-    if (completionStatus.latestWorkTime) {
+    // The local work cache can lag behind the status, e.g. after a websocket reconnect.
+    if (completionStatus.latestWorkTime || (this.hasWork() && nodeStatus.isCompleted)) {
       completionStatus.isCompleted = this.isCompleted(workgroupId, nodeStatus);
     }
     return completionStatus;
