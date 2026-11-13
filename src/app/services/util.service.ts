@@ -25,32 +25,6 @@ export class UtilService {
     return this.mobileMenuState$;
   }
 
-  getDaysInMonth(month): string[] {
-    let numberOfDays = 0;
-    switch (month) {
-      case 2:
-        numberOfDays = 29;
-        break;
-      case 4:
-      case 6:
-      case 9:
-      case 11:
-        numberOfDays = 30;
-        break;
-      default:
-        numberOfDays = 31;
-    }
-    const days = [];
-    for (let i = 0; i < numberOfDays; i++) {
-      let day = (i + 1).toString();
-      if (i < 9) {
-        day = '0' + day;
-      }
-      days.push(day);
-    }
-    return days;
-  }
-
   removeObjectArrayDuplicatesByProperty(array: any[], prop: string): any[] {
     return array.filter((obj, pos, arr) => {
       return arr.map((mapObj) => mapObj[prop]).indexOf(obj[prop]) === pos;
