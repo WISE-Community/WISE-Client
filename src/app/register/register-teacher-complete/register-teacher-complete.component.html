@@ -7,11 +7,15 @@
         >.
       </p>
     }
-    <p i18n>You should receive an email with your account details shortly.</p>
+    @if (!socialAccount) {
+      <p i18n>To sign in, you must verify your account.</p>
+      <p class="mat-subtitle-1" i18n>
+        You should receive an email shortly with instructions to complete your registration.
+      </p>
+    } @else {
+      <p i18n>You should receive an email with your account details shortly.</p>
+    }
     <p>
-      @if (!socialAccount) {
-        <a mat-flat-button color="primary" (click)="login()" i18n>Sign In to Get Started</a>
-      }
       @if (isUsingGoogleId) {
         <a
           class="button--social-login button--google"
