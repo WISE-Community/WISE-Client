@@ -197,7 +197,74 @@ function injectAssetPaths() {
       const content = { src: '/curriculum/1/assets/a (1).png' };
       expect(service.injectAssetPaths(content).src).toEqual('/curriculum/1/assets/a (1).png');
     });
+    it('should inject a src with parentheses as multiple choice authoring writes it', () => {
+      expectHtmlInjected(
+        '<img src="image (1).png" alt="image (1).png" />',
+        `<img src="${projectBaseURL}assets/image (1).png" alt="image (1).png" />`
+      );
+    });
+    it('should inject an upper-case, single-quoted attribute with spaces around =', () => {
+      expectHtmlInjected(
+        "<IMG SRC = 'a (1).jpg'>",
+        `<IMG SRC = '${projectBaseURL}assets/a (1).jpg'>`
+      );
+    });
+    it('should inject href, poster and source src with parentheses', () => {
+      expectHtmlInjected(
+        '<a href="doc (2).pdf">doc</a><video poster="p (1).png">' +
+          '<source src="v (1).mp4" type="video/mp4"></video>',
+        `<a href="${projectBaseURL}assets/doc (2).pdf">doc</a>` +
+          `<video poster="${projectBaseURL}assets/p (1).png">` +
+          `<source src="${projectBaseURL}assets/v (1).mp4" type="video/mp4"></video>`
+      );
+    });
+    it('should inject quoted CSS url() values with parentheses', () => {
+      expectHtmlInjected(
+        `<div style="background-image: url('bg (1).jpg')"></div>` +
+          '<style>div { background: url("bg (2).jpg"); }</style>',
+        `<div style="background-image: url('${projectBaseURL}assets/bg (1).jpg')"></div>` +
+          `<style>div { background: url("${projectBaseURL}assets/bg (2).jpg"); }</style>`
+      );
+    });
+    it('should inject an attribute that follows a newline', () => {
+      expectHtmlInjected(
+        '<img\nsrc="a (1).png">',
+        `<img\nsrc="${projectBaseURL}assets/a (1).png">`
+      );
+    });
+    it('should inject a src with CJK brackets', () => {
+      expectHtmlInjected(
+        '<img src="細胞（核）【卵】.png">',
+        `<img src="${projectBaseURL}assets/細胞（核）【卵】.png">`
+      );
+    });
+    it('should not change absolute URLs, data URIs or other attributes in HTML', () => {
+      const html =
+        '<img src="/curriculum/1/assets/a (1).png"><a href="https://example.com/a (1).pdf">a</a>' +
+        '<img src="data:image/png;base64,AAAA"><img data-filename="a (1).png" data-src="a (1).png">';
+      expectHtmlInjected(html, html);
+    });
+    it('should not change prose or an unquoted url() with parentheses', () => {
+      const html = '<p>(see) a (1).png</p><div style="background: url(a (1).png)"></div>';
+      expectHtmlInjected(html, html);
+    });
+    it('should not inject twice with a root-relative base URL', () => {
+      (configService.getConfigParam as jasmine.Spy).and.returnValue('/curriculum/12345/');
+      const html = '<img src="a (1).png"><a href="b.pdf">b</a>';
+      const once = service.replaceAssetPaths(html);
+      expect(once).toEqual(
+        '<img src="/curriculum/12345/assets/a (1).png">' +
+          '<a href="/curriculum/12345/assets/b.pdf">b</a>'
+      );
+      expect(service.replaceAssetPaths(once)).toEqual(once);
+      expect(service.injectAssetPaths(service.injectAssetPaths({ html })).html).toEqual(once);
+    });
   });
+}
+
+function expectHtmlInjected(html: string, expected: string): void {
+  expect(service.replaceAssetPaths(html)).toEqual(expected);
+  expect(service.injectAssetPaths({ html }).html).toEqual(expected);
 }
 
 function shouldRetrieveProjectWhenConfigProjectURLIsValid() {

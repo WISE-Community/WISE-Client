@@ -22,8 +22,9 @@ import { ProjectLocale } from '../../../app/domain/projectLocale';
 import { Language } from '../../../app/domain/language';
 import { ThemeSettings } from '../common/ThemeSettings';
 
-// Wider than the name class in replaceAssetPaths because nothing surrounds a standalone value for
-// a match to run into. Sentence punctuation is excluded so prose ending in a file name is not
+// Tested against a whole value: a standalone string, or a quoted attribute or url() value in
+// replaceAssetPaths. Wider than the name class of the regex there because nothing around a whole
+// value can be swallowed. Sentence punctuation is excluded so prose ending in a file name is not
 // mistaken for one.
 const RELATIVE_ASSET_FILE_NAME = new RegExp(
   '^(?!/)[a-zA-Z0-9@%&;()._/ \\-' +
@@ -32,6 +33,12 @@ const RELATIVE_ASSET_FILE_NAME = new RegExp(
     '\\.(png|jpe?g|pdf|gif|mov|mp4|mp3|wav|swf|css|txt|json|xlsx?|doc|html?|js)$',
   'i'
 );
+
+// A quoted URL attribute or CSS url() value. The matching closing quote bounds the value, so a
+// name with parentheses can be tested whole without running into the next string. \\[nrt] covers
+// whitespace that JSON.stringify has escaped.
+const QUOTED_ASSET_REFERENCE =
+  /((?:\s|\\[nrt])(?:src|href|poster)\s*=\s*|url\(\s*)(\\?["'])(.*?)\2/gi;
 
 @Injectable()
 export class ProjectService {
@@ -483,6 +490,13 @@ export class ProjectService {
           }
           return delimiter + contentBaseURL + 'assets/' + rest;
         }
+      );
+      contentString = contentString.replace(
+        QUOTED_ASSET_REFERENCE,
+        (matchedString, lead: string, quote: string, value: string) =>
+          RELATIVE_ASSET_FILE_NAME.test(value)
+            ? lead + quote + contentBaseURL + 'assets/' + value + quote
+            : matchedString
       );
     }
     return contentString;
