@@ -15,6 +15,8 @@ export class ProjectAssetService {
   totalFileSize: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalUnusedFileSize: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   projectThumbnailFileName = 'project_thumb.png';
+  private entityDecoder: HTMLTextAreaElement;
+  private decodedEntities = new Map<string, string>();
 
   constructor(
     protected configService: ConfigService,
@@ -116,7 +118,8 @@ export class ProjectAssetService {
 
   calculateAssetUsage(assets: any = this.getProjectAssets().getValue()): void {
     const usedTextContent =
-      JSON.stringify(this.projectService.project) + this.projectThumbnailFileName;
+      this.withDecodedReferences(JSON.stringify(this.projectService.project)) +
+      this.projectThumbnailFileName;
     const allTextFiles = this.getAllTextFiles(assets);
     if (allTextFiles.length == 0) {
       this.calculateUsedFiles(assets, usedTextContent);
@@ -192,7 +195,7 @@ export class ProjectAssetService {
           this.isFileReferencedInContent(usedTextContentSoFar, fileName)
         ) {
           usedTextFileNames.push(fileName);
-          usedTextContentSoFar += textFile.body;
+          usedTextContentSoFar += this.withDecodedReferences(textFile.body);
           foundNewUsedTextFile = true;
         }
       }
@@ -206,6 +209,32 @@ export class ProjectAssetService {
 
   isFileReferencedInContent(content: string, fileName: string) {
     return content.indexOf(fileName) != -1;
+  }
+
+  // A reference is not always stored as the file name: TinyMCE writes attribute values with named
+  // entities (Q&amp;A.pdf, caf&eacute;.png) and its link dialog writes spaces as %20, and a URL
+  // copied from the browser is percent-encoded. A decoded copy is searched alongside the original,
+  // which still matches names that themselves contain % or &.
+  private withDecodedReferences(text: string): string {
+    const decoded = text
+      .replace(/&(#\d+|#x[\da-f]+|[a-z][a-z\d]*);/gi, (entity) => this.decodeEntity(entity))
+      .replace(/(%[\da-f]{2})+/gi, (encoded) => {
+        try {
+          return decodeURIComponent(encoded);
+        } catch {
+          return encoded;
+        }
+      });
+    return decoded === text ? text : text + '\n' + decoded;
+  }
+
+  private decodeEntity(entity: string): string {
+    if (!this.decodedEntities.has(entity)) {
+      this.entityDecoder ??= document.createElement('textarea');
+      this.entityDecoder.innerHTML = entity;
+      this.decodedEntities.set(entity, this.entityDecoder.value);
+    }
+    return this.decodedEntities.get(entity);
   }
 
   getFileNameFromURL(url: string) {
