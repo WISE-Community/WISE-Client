@@ -2,8 +2,8 @@
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
-import { forkJoin, BehaviorSubject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { forkJoin, BehaviorSubject, of } from 'rxjs';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { ProjectService } from '../../assets/wise5/services/projectService';
 import { isAudio, isImage, isVideo } from '../../assets/wise5/common/file/file';
@@ -169,9 +169,24 @@ export class ProjectAssetService {
     allTextFiles: any[]
   ) {
     this.getTextFiles(allTextFiles).subscribe((textFiles: any[]) => {
-      const allUsedTextContent = this.getAllUsedTextContent(usedTextContent, textFiles);
-      this.calculateUsedFiles(assets, allUsedTextContent);
+      if (textFiles.some((textFile) => textFile.body == null)) {
+        this.markAllFilesUsed(assets);
+      } else {
+        const allUsedTextContent = this.getAllUsedTextContent(usedTextContent, textFiles);
+        this.calculateUsedFiles(assets, allUsedTextContent);
+      }
     });
+  }
+
+  // An asset loaded only by a text file that could not be read is indistinguishable from an unused
+  // one, and a false "Not Used" invites deleting a file that is in use.
+  private markAllFilesUsed(assets: any): void {
+    console.warn('Could not read every text asset, so no asset is marked as not used');
+    for (const asset of assets.files) {
+      asset.used = true;
+    }
+    this.setTotalFileSize(assets.totalFileSize);
+    this.setTotalUnusedFileSize(0);
   }
 
   /*
@@ -223,10 +238,18 @@ export class ProjectAssetService {
     const requests = [];
     const projectAssetsDirectoryPath = this.configService.getProjectAssetsDirectoryPath();
     for (const textFileName of textFileNames) {
-      const request = this.http.get(`${projectAssetsDirectoryPath}/${textFileName}`, {
-        observe: 'response',
-        responseType: 'text'
-      });
+      // The response URL comes back percent-encoded, so the requested name is what gets matched
+      // against the project. A failed request yields a null body instead of failing forkJoin.
+      const url = `${projectAssetsDirectoryPath}/${textFileName}`;
+      const request = this.http
+        .get(`${projectAssetsDirectoryPath}/${encodeURIComponent(textFileName)}`, {
+          observe: 'response',
+          responseType: 'text'
+        })
+        .pipe(
+          map((response) => ({ url, body: response.body ?? '' })),
+          catchError(() => of({ url, body: null }))
+        );
       requests.push(request);
     }
     return forkJoin(requests);
