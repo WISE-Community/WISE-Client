@@ -12,6 +12,7 @@ export class SessionService {
   private forceLogoutAfterWarningInterval: number;
   private showWarningInterval: number;
   private checkMouseEventInterval: number;
+  private checkMouseEventTimer: ReturnType<typeof setInterval>;
   private lastActivityTimestamp: number;
   private exitSource: Subject<void> = new Subject<void>();
   public exit$: Observable<void> = this.exitSource.asObservable();
@@ -73,9 +74,13 @@ export class SessionService {
   }
 
   initializeSession() {
-    const intervals: any = this.calculateIntervals(
-      this.configService.getConfigParam('sessionTimeout')
-    );
+    this.stopCheckMouseEvent();
+    this.warningVisible = false;
+    const sessionTimeout = this.configService.getConfigParam('sessionTimeout');
+    if (!(sessionTimeout > 0)) {
+      return;
+    }
+    const intervals: any = this.calculateIntervals(sessionTimeout);
     this.showWarningInterval = intervals.showWarningInterval;
     this.forceLogoutAfterWarningInterval = intervals.forceLogoutAfterWarningInterval;
     this.checkMouseEventInterval = this.convertMinutesToMilliseconds(1);
@@ -84,9 +89,14 @@ export class SessionService {
   }
 
   startCheckMouseEvent(): void {
-    setInterval(() => {
+    this.checkMouseEventTimer = setInterval(() => {
       this.checkMouseEvent();
     }, this.checkMouseEventInterval);
+  }
+
+  stopCheckMouseEvent(): void {
+    clearInterval(this.checkMouseEventTimer);
+    this.checkMouseEventTimer = undefined;
   }
 
   private convertMinutesToSeconds(minutes: number): number {
@@ -119,8 +129,8 @@ export class SessionService {
   checkForLogout(): void {
     if (this.isInactiveLongEnoughToForceLogout()) {
       this.checkIfSessionIsActive().subscribe((isSessionActive) => {
-        this.sessionActive = isSessionActive;
-        if (!isSessionActive) {
+        this.sessionActive = isSessionActive !== false;
+        if (isSessionActive === false) {
           this.forceLogOut();
         }
       });
@@ -181,7 +191,7 @@ export class SessionService {
 
   renewSession(): void {
     this.checkIfSessionIsActive().subscribe((isSessionActive) => {
-      if (!isSessionActive) {
+      if (isSessionActive === false) {
         this.logOut();
       }
     });
