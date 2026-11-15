@@ -57,9 +57,8 @@ export class AdvancedProjectAuthoringComponent {
     this.navigationType = this.projectService.project.theme ?? 'default';
     this.projectJSONString = JSON.stringify(this.projectService.project, null, 4);
     this.publishUnitUrl = `${this.configService.getContextPath()}/contact?projectId=${this.configService.getProjectId()}&publish=true`;
-    this.isMyUnit = this.metadata.authors.some(
-      (author) => author.id === this.userService.getUserId()
-    );
+    this.isMyUnit =
+      this.metadata.authors?.some((author) => author.id === this.userService.getUserId()) ?? false;
   }
 
   protected tabChanged(event: MatTabChangeEvent): void {
