@@ -5,6 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { map, Observable, Subject } from 'rxjs';
 
+export type SessionState = 'active' | 'ended' | 'closed' | 'unknown';
+
+const EXIT_SAVE_TIMEOUT_MILLISECONDS = 10000;
+
 @Injectable()
 export class SessionService {
   private warningVisible: boolean = false;
@@ -20,6 +24,8 @@ export class SessionService {
   private logOutSource: Subject<void> = new Subject<void>();
   public logOut$ = this.logOutSource.asObservable();
   private sessionActive: boolean = true;
+  private exitSavers = new Set<() => Promise<unknown>>();
+  private leavingClosedSite: boolean = false;
 
   constructor(
     protected http: HttpClient,
@@ -118,9 +124,13 @@ export class SessionService {
 
   checkForLogout(): void {
     if (this.isInactiveLongEnoughToForceLogout()) {
-      this.checkIfSessionIsActive().subscribe((isSessionActive) => {
-        this.sessionActive = isSessionActive;
-        if (!isSessionActive) {
+      this.checkSession().subscribe((state) => {
+        if (state === 'closed') {
+          this.leaveClosedSite();
+          return;
+        }
+        this.sessionActive = state !== 'ended';
+        if (state === 'ended') {
           this.forceLogOut();
         }
       });
@@ -175,15 +185,71 @@ export class SessionService {
     this.renewSession();
   }
 
-  checkIfSessionIsActive(): Observable<boolean> {
-    return this.http.get<boolean>(this.configService.getConfigParam('renewSessionURL'));
+  checkSession(): Observable<SessionState> {
+    return this.http
+      .get(this.configService.getConfigParam('renewSessionURL'), { responseType: 'text' })
+      .pipe(
+        map((answer: string): SessionState => {
+          switch ((answer ?? '').trim()) {
+            case 'true':
+              return 'active';
+            case 'false':
+              return 'ended';
+            case 'requestLogout':
+              return 'closed';
+            default:
+              return 'unknown';
+          }
+        })
+      );
   }
 
   renewSession(): void {
-    this.checkIfSessionIsActive().subscribe((isSessionActive) => {
-      if (!isSessionActive) {
+    this.checkSession().subscribe((state) => {
+      if (state === 'closed') {
+        this.leaveClosedSite();
+      } else if (state === 'ended') {
         this.logOut();
       }
     });
+  }
+
+  /**
+   * Registers work to save before the user is signed out because sign-in has been disabled.
+   * @return a function that unregisters it
+   */
+  registerExitSaver(save: () => Promise<unknown>): () => void {
+    this.exitSavers.add(save);
+    return () => this.exitSavers.delete(save);
+  }
+
+  /**
+   * The session is still valid when sign-in is disabled, so unsaved work can be saved before
+   * signing out. If signing out fails, the next renewal tries again, because the sign-in page would
+   * send a user whose session is still valid back to where they were.
+   */
+  private leaveClosedSite(): void {
+    if (this.leavingClosedSite) {
+      return;
+    }
+    this.leavingClosedSite = true;
+    const saves = Promise.allSettled(
+      [...this.exitSavers].map((save) => Promise.resolve().then(save))
+    );
+    let timer: ReturnType<typeof setTimeout>;
+    const timeout = new Promise(
+      (resolve) => (timer = setTimeout(resolve, EXIT_SAVE_TIMEOUT_MILLISECONDS))
+    );
+    Promise.race([saves, timeout]).then(() => {
+      clearTimeout(timer);
+      this.logOutWithoutHomeRedirect().subscribe({
+        next: () => this.navigateTo('/login?loginDisabled=true'),
+        error: () => (this.leavingClosedSite = false)
+      });
+    });
+  }
+
+  protected navigateTo(url: string): void {
+    window.location.href = url;
   }
 }

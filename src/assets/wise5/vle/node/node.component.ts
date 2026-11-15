@@ -467,6 +467,14 @@ export class NodeComponent implements OnInit {
         this.stopAutoSaveInterval();
       })
     );
+    this.subscriptions.add(
+      this.sessionService.registerExitSaver(() => {
+        this.stopAutoSaveInterval();
+        return this.dirtyComponentIds.length
+          ? this.createAndSaveComponentData(true)
+          : Promise.resolve();
+      })
+    );
   }
 
   protected saveComponentState($event: any): Promise<any> {
