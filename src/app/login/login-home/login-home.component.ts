@@ -36,6 +36,7 @@ export class LoginHomeComponent implements OnInit {
   credentials: any = { username: '', password: '', recaptchaResponse: null };
   protected googleAuthenticationEnabled: boolean = false;
   isRecaptchaEnabled: boolean = false;
+  isLoginDisabled: boolean = false;
   isRecaptchaVerificationFailed: boolean = false;
   isReLoginDueToErrorSavingData: boolean;
   protected microsoftAuthenticationEnabled: boolean;
@@ -77,6 +78,7 @@ export class LoginHomeComponent implements OnInit {
       if (params['accessCode'] != null) {
         this.accessCode = params['accessCode'];
       }
+      this.isLoginDisabled = params['loginDisabled'] === 'true';
     });
     this.isReLoginDueToErrorSavingData = this.isRedirectToAppRoutes();
     this.isRecaptchaEnabled = this.configService.isRecaptchaEnabled();
@@ -90,6 +92,7 @@ export class LoginHomeComponent implements OnInit {
   async login(): Promise<void> {
     this.processing = true;
     this.passwordError = false;
+    this.isLoginDisabled = false;
     if (this.isRecaptchaEnabled) {
       this.credentials.recaptchaResponse = await lastValueFrom(
         this.recaptchaV3Service.execute('importantAction')
@@ -103,6 +106,8 @@ export class LoginHomeComponent implements OnInit {
         this.credentials.password = '';
         if (response.isRecaptchaVerificationFailed) {
           this.isRecaptchaVerificationFailed = true;
+        } else if (response.isLoginDisabled) {
+          this.isLoginDisabled = true;
         } else {
           this.passwordError = true;
         }
