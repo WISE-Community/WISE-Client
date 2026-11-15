@@ -1856,6 +1856,9 @@ export class ProjectService {
   }
 
   isDefaultLocale(): boolean {
+    if (this.project == null) {
+      return true;
+    }
     return this.getLocale().isDefaultLocale(this.currentLanguage().locale);
   }
 
