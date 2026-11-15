@@ -142,7 +142,7 @@ export class ComponentSummaryComponent implements OnDestroy {
     this.hasStudentWork =
       this.dataService
         .getComponentStatesByComponentId(this.component.id)
-        .filter((state) => state.periodId === this.periodId).length > 0;
+        .filter((state) => isMatchingPeriods(state.periodId, this.periodId)).length > 0;
     this.hasIdeaRubricData = this.cRaterService
       .getCRaterRubric(this.node.id, this.component.id)
       .hasRubricData();
