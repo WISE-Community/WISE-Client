@@ -43,38 +43,28 @@ describe('AdvancedProjectAuthoringComponent', () => {
 
   it('shows the invalid JSON message when opening the JSON tab with invalid JSON', () => {
     component['tabChanged']({ index: 3 } as MatTabChangeEvent);
-
     expect(notificationService.showJSONInvalidMessage).toHaveBeenCalled();
   });
 
   it('shows the valid JSON message when opening the JSON tab with valid JSON', () => {
     component['projectJSONString'] = '{"valid": true}';
-
     component['tabChanged']({ index: 3 } as MatTabChangeEvent);
-
     expect(notificationService.showJSONValidMessage).toHaveBeenCalled();
   });
 
   it('updates the JSON message when the JSON text changes', () => {
     component['tabChanged']({ index: 3 } as MatTabChangeEvent);
     component['projectJSONString'] = '{"valid": true}';
-
     component['saveProjectJSONString']();
-
     expect(notificationService.showJSONValidMessage).toHaveBeenCalled();
-
     component['projectJSONString'] = '{ invalid JSON';
-
     component['saveProjectJSONString']();
-
     expect(notificationService.showJSONInvalidMessage).toHaveBeenCalledTimes(2);
   });
 
   it('hides the JSON message when leaving the JSON tab', () => {
     component['tabChanged']({ index: 3 } as MatTabChangeEvent);
-
     component['tabChanged']({ index: 1 } as MatTabChangeEvent);
-
     expect(notificationService.hideJSONValidMessage).toHaveBeenCalled();
   });
 });
