@@ -10964,15 +10964,6 @@
           <context context-type="linenumber">65,69</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="19198353055300541" datatype="html">
-        <source>The JSON is invalid. Invalid JSON will not be saved.
-Click &quot;OK&quot; to revert back to the last valid JSON.
-Click &quot;Cancel&quot; to keep the invalid JSON open so you can fix it.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/assets/wise5/authoringTool/advanced/advanced-project-authoring.component.ts</context>
-          <context context-type="linenumber">82</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="82388219829106287" datatype="html">
         <source>Unit Home</source>
         <context-group purpose="location">
