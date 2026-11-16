@@ -71,19 +71,14 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   private showJSON(): void {
-    this.notificationService.showJSONValidMessage();
+    if (isValidJSONString(this.projectJSONString)) {
+      this.notificationService.showJSONValidMessage();
+    }
   }
 
   private hideJSON(): void {
     if (isValidJSONString(this.projectJSONString)) {
       this.notificationService.hideJSONValidMessage();
-    } else if (
-      confirm(
-        $localize`The JSON is invalid. Invalid JSON will not be saved.\nClick "OK" to revert back to the last valid JSON.\nClick "Cancel" to keep the invalid JSON open so you can fix it.`
-      )
-    ) {
-      this.notificationService.hideJSONValidMessage();
-      this.selectedTab = 2; // re-open JSON tab so user can review JSON
     }
   }
 
