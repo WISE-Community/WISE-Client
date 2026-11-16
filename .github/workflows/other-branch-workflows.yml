@@ -7,9 +7,3 @@ on:
 jobs:
   test-coverage:
     uses: WISE-Community/WISE-Client/.github/workflows/test-coverage.yml@develop
-
-  generate-messages:
-    needs: test-coverage
-    uses: WISE-Community/WISE-Client/.github/workflows/generate-messages.yml@develop
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
