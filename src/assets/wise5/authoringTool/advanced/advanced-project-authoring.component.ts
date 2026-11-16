@@ -40,7 +40,6 @@ export class AdvancedProjectAuthoringComponent {
   protected navigationType: 'default' | 'tab';
   protected projectJSONString: string;
   protected publishUnitUrl;
-  protected selectedTab: number;
 
   constructor(
     private configService: ConfigService,
@@ -63,31 +62,33 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   protected tabChanged(event: MatTabChangeEvent): void {
-    if (event.index === 2) {
+    if (event.index === 3) {
       this.showJSON();
     } else {
       this.hideJSON();
     }
   }
 
+  ngOnDestroy(): void {
+    this.hideJSON();
+  }
+
   private showJSON(): void {
     if (isValidJSONString(this.projectJSONString)) {
       this.notificationService.showJSONValidMessage();
+    } else {
+      this.notificationService.showJSONInvalidMessage();
     }
   }
 
   private hideJSON(): void {
-    if (isValidJSONString(this.projectJSONString)) {
-      this.notificationService.hideJSONValidMessage();
-    }
+    this.notificationService.hideJSONValidMessage();
   }
 
   protected saveProjectJSONString(): void {
-    try {
+    this.showJSON();
+    if (isValidJSONString(this.projectJSONString)) {
       this.saveProjectJSON(this.projectJSONString);
-      this.notificationService.showJSONValidMessage();
-    } catch (e) {
-      this.notificationService.showJSONInvalidMessage();
     }
   }
 
