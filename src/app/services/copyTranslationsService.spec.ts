@@ -1,5 +1,5 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, flushMicrotasks } from '@angular/core/testing';
 import { TeacherProjectService } from '../../assets/wise5/services/teacherProjectService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { ProjectLocale } from '../domain/projectLocale';
@@ -25,7 +25,44 @@ describe('CopyTranslationsService', () => {
     service = TestBed.inject(CopyTranslationsService);
   });
   tryCopyComponents();
+  tryCopyNodes();
 });
+
+function tryCopyNodes() {
+  describe('tryCopyNodes()', () => {
+    it('gives the step title and its components new i18n ids with copied translations', fakeAsync(() => {
+      spyOn(projectService, 'getLocale').and.returnValue(
+        new ProjectLocale({ default: 'en_us', supported: ['es'] })
+      );
+      spyOn(configService, 'getProjectId').and.returnValue('123');
+      spyOn(configService, 'getConfigParam').and.returnValue('/123/project.json');
+      spyOn(projectService, 'saveProject');
+      const node = {
+        id: 'node2',
+        title: 'step',
+        'title.i18n': { id: 'titleId' },
+        components: [{ id: 'abc', prompt: 'hello', 'prompt.i18n': { id: 'promptId' } }]
+      } as any;
+      service.tryCopyNodes([node]);
+      http.expectOne(`/123/translations.es.json`).flush({
+        titleId: { value: 'Step title' },
+        promptId: { value: 'Prompt' }
+      });
+      flushMicrotasks();
+      const newTitleId = node['title.i18n'].id;
+      const newPromptId = node.components[0]['prompt.i18n'].id;
+      expect(newTitleId).not.toEqual('titleId');
+      expect(newPromptId).not.toEqual('promptId');
+      const saved = http.expectOne('/api/author/project/translate/123/es').request.body;
+      expect(saved[newTitleId]).toEqual({ value: 'Step title' });
+      expect(saved[newPromptId]).toEqual({ value: 'Prompt' });
+      expect(saved['titleId']).toEqual({ value: 'Step title' });
+      expect(saved['promptId']).toEqual({ value: 'Prompt' });
+      expect(projectService.saveProject).toHaveBeenCalled();
+      http.verify();
+    }));
+  });
+}
 
 function tryCopyComponents() {
   describe('tryCopyComponents()', () => {
