@@ -66,6 +66,7 @@ describe('ProjectService', () => {
   getMaxScoreForNode();
   getPeerGrouping();
   parseProject();
+  isDefaultLocale();
   // TODO: add test for service.getFlattenedProjectAsNodeIds()
   // TODO: add test for service.getFirstNodeIdInPathAtIndex()
   // TODO: add test for service.removeNodeIdFromPaths()
@@ -601,4 +602,13 @@ function expectNodeIdsToHaveNumbers(objs: any[]): void {
 
 function expectNodeIdToHaveNumber(nodeId: string, number: string): void {
   expect(service.nodeIdToNumber[nodeId]).toEqual(number);
+}
+
+function isDefaultLocale() {
+  describe('isDefaultLocale()', () => {
+    it('should return true when no project is loaded', () => {
+      service.project = null;
+      expect(service.isDefaultLocale()).toBeTrue();
+    });
+  });
 }
