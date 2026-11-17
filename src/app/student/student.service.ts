@@ -99,11 +99,9 @@ export class StudentService {
     return this.http.get<any>(this.teacherListUrl);
   }
 
-  getStudentUsernames(firstName, lastName, birthMonth, birthDay) {
+  getStudentUsernames(firstName: string, lastName: string) {
     let params = new HttpParams().set('firstName', firstName);
     params = params.set('lastName', lastName);
-    params = params.set('birthMonth', birthMonth);
-    params = params.set('birthDay', birthDay);
     return this.http.get<string[]>(this.usernameSearchUrl, { params: params });
   }
 
