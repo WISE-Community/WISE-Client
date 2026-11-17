@@ -244,7 +244,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">224,226</context>
         </context-group>
-        <target state="needs-translation">Accessible to All</target>
+        <target state="translated">すべての人が利用可能</target>
       </trans-unit>
       <trans-unit id="3760603678378366834" datatype="html">
         <source> WISE is <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>free<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> and <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>open source<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>! WISE subsists on generous support from the National Science Foundation, which means it&apos;s available to anyone with an internet connection. Driven by an active community of developers, WISE is continually being expanded and improved. Bring science inquiry into the classroom, the museum, the after-school, or the home-school environment! </source>
@@ -260,7 +260,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">234,236</context>
         </context-group>
-        <target state="needs-translation">Increase Participation in Science</target>
+        <target state="translated">科学への参加を増加</target>
       </trans-unit>
       <trans-unit id="2183605563604000940" datatype="html">
         <source> WISE gives more teachers and students the opportunity to do inquiry-based science. Our units make difficult concepts accessible both for teachers to teach and students to learn. WISE curricula help students see themselves as capable of doing science and realize that, no matter their backgrounds, science can be a potential career. </source>
@@ -284,7 +284,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">285,289</context>
         </context-group>
-        <target state="needs-translation">WISE researcher</target>
+        <target state="translated">WISE研究者</target>
       </trans-unit>
       <trans-unit id="6409130474199019565" datatype="html">
         <source>WISE teachers and researcher</source>
@@ -292,7 +292,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">306,310</context>
         </context-group>
-        <target state="needs-translation">WISE teachers and researcher</target>
+        <target state="translated">WISEの先生と研究者</target>
       </trans-unit>
       <trans-unit id="1718407813321864548" datatype="html">
         <source>WISE developers and teacher</source>
@@ -300,7 +300,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">327,333</context>
         </context-group>
-        <target state="needs-translation">WISE developers and teacher</target>
+        <target state="translated">WISE 開発者と教師</target>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
@@ -392,7 +392,7 @@
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component.html</context>
           <context context-type="linenumber">6,8</context>
         </context-group>
-        <target state="needs-translation">Close</target>
+        <target state="translated">閉じる</target>
       </trans-unit>
       <trans-unit id="1536087519743707362" datatype="html">
         <source>Dismiss</source>
@@ -408,7 +408,7 @@
           <context context-type="sourcefile">src/assets/wise5/vle/notifications-dialog/notifications-dialog.component.html</context>
           <context context-type="linenumber">60,62</context>
         </context-group>
-        <target state="needs-translation">Dismiss</target>
+        <target state="translated">閉じる</target>
       </trans-unit>
       <trans-unit id="852504722388981795" datatype="html">
         <source>Back to Top</source>
@@ -424,7 +424,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">1,3</context>
         </context-group>
-        <target state="needs-translation">Add New Activity</target>
+        <target state="translated">新しいアクティビティを追加</target>
       </trans-unit>
       <trans-unit id="787242500793495382" datatype="html">
         <source>Select the activity you want to add or</source>
@@ -432,7 +432,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">4,5</context>
         </context-group>
-        <target state="needs-translation">Select the activity you want to add or</target>
+        <target state="translated">追加したいアクティビティを選択するか</target>
       </trans-unit>
       <trans-unit id="4621152840989537823" datatype="html">
         <source> import from another unit </source>
@@ -440,7 +440,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/add-component/choose-new-component/choose-new-component.component.html</context>
           <context context-type="linenumber">6,9</context>
         </context-group>
-        <target state="needs-translation"> import from another unit </target>
+        <target state="translated"> 別のユニットからインポート </target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
@@ -884,7 +884,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-constraints/edit-component-constraints.component.html</context>
           <context context-type="linenumber">9,13</context>
         </context-group>
-        <target state="needs-translation">Add Constraint</target>
+        <target state="translated">制約の追加</target>
       </trans-unit>
       <trans-unit id="6490552974626100164" datatype="html">
         <source>Constraint</source>
@@ -892,7 +892,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-constraints/edit-component-constraints.component.html</context>
           <context context-type="linenumber">19,22</context>
         </context-group>
-        <target state="needs-translation">Constraint</target>
+        <target state="translated">制約</target>
       </trans-unit>
       <trans-unit id="7582422264172439684" datatype="html">
         <source>Delete Constraint</source>
@@ -904,7 +904,7 @@
           <context context-type="sourcefile">src/assets/wise5/authoringTool/node/advanced/constraint/node-advanced-constraint-authoring.component.html</context>
           <context context-type="linenumber">26,29</context>
         </context-group>
-        <target state="needs-translation">Delete Constraint</target>
+        <target state="translated">制約を削除</target>
       </trans-unit>
       <trans-unit id="2161849927542361453" datatype="html">
         <source> Do not count score on this activity towards the total score </source>
@@ -936,7 +936,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-json/edit-component-json.component.html</context>
           <context context-type="linenumber">10,14</context>
         </context-group>
-        <target state="needs-translation">Edit Activity JSON</target>
+        <target state="translated">アクティビティ JSON を編集</target>
       </trans-unit>
       <trans-unit id="269492429034038872" datatype="html">
         <source>Max Score</source>
@@ -980,7 +980,7 @@
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/component-summary/component-summary.component.html</context>
           <context context-type="linenumber">47,49</context>
         </context-group>
-        <target state="needs-translation">Prompt</target>
+        <target state="translated">プロンプト</target>
       </trans-unit>
       <trans-unit id="7561343662252105417" datatype="html">
         <source>Enter Prompt Here</source>
@@ -1124,7 +1124,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-component-tags/edit-component-tags.component.ts</context>
           <context context-type="linenumber">85</context>
         </context-group>
-        <target state="needs-translation">Are you sure you want to delete this tag?</target>
+        <target state="translated">本当にこのタグを削除していいですか？</target>
       </trans-unit>
       <trans-unit id="8084155234460667951" datatype="html">
         <source>Activity width</source>
@@ -1166,7 +1166,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">442,443</context>
         </context-group>
-        <target state="needs-translation">Type</target>
+        <target state="translated">タイプ</target>
       </trans-unit>
       <trans-unit id="911224237431865196" datatype="html">
         <source>Import Work</source>
@@ -1178,7 +1178,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/graph/edit-graph-connected-components/edit-graph-connected-components.component.html</context>
           <context context-type="linenumber">22,23</context>
         </context-group>
-        <target state="needs-translation">Import Work</target>
+        <target state="translated">作業をインポート</target>
       </trans-unit>
       <trans-unit id="498054539617944204" datatype="html">
         <source>Show Work</source>
@@ -1198,7 +1198,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-connected-components-add-button/edit-connected-components-add-button.component.ts</context>
           <context context-type="linenumber">13,17</context>
         </context-group>
-        <target state="needs-translation">Connected Activities</target>
+        <target state="translated">接続されたアクティビティ</target>
       </trans-unit>
       <trans-unit id="2346934958152395597" datatype="html">
         <source>Are you sure you want to delete this connected activity?</source>
@@ -1326,7 +1326,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/edit-feedback-rules/edit-feedback-rules.component.html</context>
           <context context-type="linenumber">115,117</context>
         </context-group>
-        <target state="needs-translation">Delete rule</target>
+        <target state="translated">ルールを削除</target>
       </trans-unit>
       <trans-unit id="8502065112576581103" datatype="html">
         <source>Move up</source>
@@ -1362,7 +1362,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
           <context context-type="linenumber">89,91</context>
         </context-group>
-        <target state="needs-translation">Move up</target>
+        <target state="translated">上へ移動</target>
       </trans-unit>
       <trans-unit id="2207764482815871800" datatype="html">
         <source>Move down</source>
@@ -1398,7 +1398,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/multipleChoice/multiple-choice-authoring/multiple-choice-authoring.component.html</context>
           <context context-type="linenumber">100,103</context>
         </context-group>
-        <target state="needs-translation">Move down</target>
+        <target state="translated">下へ移動</target>
       </trans-unit>
       <trans-unit id="1502469155879345941" datatype="html">
         <source>Add a new rule at the end</source>
@@ -1474,7 +1474,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.ts</context>
           <context context-type="linenumber">74</context>
         </context-group>
-        <target state="needs-translation">Question</target>
+        <target state="translated">質問</target>
       </trans-unit>
       <trans-unit id="7827407208749809032" datatype="html">
         <source>Question #<x id="INTERPOLATION" equiv-text="{{ questionIndex + 1 }}"/></source>
@@ -1494,7 +1494,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/edit-question-bank-rules/edit-question-bank-rules.component.html</context>
           <context context-type="linenumber">98,100</context>
         </context-group>
-        <target state="needs-translation">Delete question</target>
+        <target state="translated">質問を削除</target>
       </trans-unit>
       <trans-unit id="7675140366572877866" datatype="html">
         <source>Add new question</source>
@@ -1822,7 +1822,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component.html</context>
           <context context-type="linenumber">7,12</context>
         </context-group>
-        <target state="needs-translation">Run ID</target>
+        <target state="translated">Run ID</target>
       </trans-unit>
       <trans-unit id="2730983416898826491" datatype="html">
         <source>Choose a unit from which to import step(s).</source>
@@ -1830,7 +1830,7 @@
           <context context-type="sourcefile">src/app/authoring-tool/import-step/choose-import-unit/choose-import-unit.component.html</context>
           <context context-type="linenumber">14,16</context>
         </context-group>
-        <target state="needs-translation">Choose a unit from which to import step(s).</target>
+        <target state="translated">ステップをインポートするユニットを選択します。</target>
       </trans-unit>
       <trans-unit id="8094381161211658587" datatype="html">
         <source>Choose a unit from which to import activities.</source>
@@ -1882,7 +1882,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">22,24</context>
         </context-group>
-        <target state="needs-translation">Activity</target>
+        <target state="translated">アクティビティ</target>
       </trans-unit>
       <trans-unit id="5995283214427196521" datatype="html">
         <source>(This activity)</source>
@@ -1906,7 +1906,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">41,46</context>
         </context-group>
-        <target state="needs-translation">(This activity)</target>
+        <target state="translated">(このアクティビティ)</target>
       </trans-unit>
       <trans-unit id="8980375993935541237" datatype="html">
         <source>Step</source>
@@ -1938,7 +1938,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/summary/summary-authoring/summary-authoring.component.html</context>
           <context context-type="linenumber">8,11</context>
         </context-group>
-        <target state="needs-translation">Step</target>
+        <target state="translated">ステップ</target>
       </trans-unit>
       <trans-unit id="552642818921774648" datatype="html">
         <source>Conversation History</source>
@@ -1946,7 +1946,7 @@
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
           <context context-type="linenumber">1,4</context>
         </context-group>
-        <target state="needs-translation">Conversation History</target>
+        <target state="translated">メッセージ履歴</target>
       </trans-unit>
       <trans-unit id="3768927257183755959" datatype="html">
         <source>Save</source>
@@ -1978,7 +1978,7 @@
           <context context-type="sourcefile">src/assets/wise5/vle/node/node.component.html</context>
           <context context-type="linenumber">36,40</context>
         </context-group>
-        <target state="needs-translation">Save</target>
+        <target state="translated">保存</target>
       </trans-unit>
       <trans-unit id="2634265024545519524" datatype="html">
         <source>(current)</source>
@@ -1986,7 +1986,7 @@
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
           <context context-type="linenumber">48,51</context>
         </context-group>
-        <target state="needs-translation">(current)</target>
+        <target state="translated">（現在のもの）</target>
       </trans-unit>
       <trans-unit id="2154216727411550160" datatype="html">
         <source>message</source>
@@ -1994,7 +1994,7 @@
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
           <context context-type="linenumber">54,57</context>
         </context-group>
-        <target state="needs-translation">message</target>
+        <target state="translated">メッセージ</target>
       </trans-unit>
       <trans-unit id="4101852533995361725" datatype="html">
         <source>messages</source>
@@ -2002,7 +2002,7 @@
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
           <context context-type="linenumber">56,60</context>
         </context-group>
-        <target state="needs-translation">messages</target>
+        <target state="translated">メッセージ</target>
       </trans-unit>
       <trans-unit id="1133994986091402323" datatype="html">
         <source>Edit title</source>
@@ -2010,7 +2010,7 @@
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
           <context context-type="linenumber">63,66</context>
         </context-group>
-        <target state="needs-translation">Edit title</target>
+        <target state="translated">タイトルを編集</target>
       </trans-unit>
       <trans-unit id="6972864965174955313" datatype="html">
         <source>Delete chat</source>
@@ -2018,7 +2018,7 @@
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.html</context>
           <context context-type="linenumber">72,75</context>
         </context-group>
-        <target state="needs-translation">Delete chat</target>
+        <target state="translated">チャットを削除</target>
       </trans-unit>
       <trans-unit id="5741972031757698073" datatype="html">
         <source>Are you sure you want to delete &quot;<x id="PH" equiv-text="chat.title"/>&quot;? This action cannot be undone.</source>
@@ -2034,7 +2034,7 @@
           <context context-type="sourcefile">src/app/chatbot/chat-history-dialog.component.ts</context>
           <context context-type="linenumber">110</context>
         </context-group>
-        <target state="needs-translation">Just now</target>
+        <target state="translated">たった今</target>
       </trans-unit>
       <trans-unit id="904495321169432083" datatype="html">
         <source><x id="PH" equiv-text="diffMins"/>m ago</source>
@@ -2118,7 +2118,7 @@
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
           <context context-type="linenumber">74,76</context>
         </context-group>
-        <target state="needs-translation">You</target>
+        <target state="translated">あなた</target>
       </trans-unit>
       <trans-unit id="4361487192183535591" datatype="html">
         <source>Assistant</source>
@@ -2130,7 +2130,7 @@
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
           <context context-type="linenumber">98,101</context>
         </context-group>
-        <target state="needs-translation">Assistant</target>
+        <target state="translated">アシスタント</target>
       </trans-unit>
       <trans-unit id="8763211465841977542" datatype="html">
         <source>Thinking...</source>
@@ -2138,7 +2138,7 @@
           <context context-type="sourcefile">src/app/chatbot/chatbot.component.html</context>
           <context context-type="linenumber">102,107</context>
         </context-group>
-        <target state="needs-translation">Thinking...</target>
+        <target state="translated">思考中…</target>
       </trans-unit>
       <trans-unit id="1070556603859709137" datatype="html">
         <source>Type your message...</source>
@@ -2238,7 +2238,7 @@
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/nodeProgress/nav-item/nav-item.component.ts</context>
           <context context-type="linenumber">105</context>
         </context-group>
-        <target state="needs-translation">Has new alert(s)</target>
+        <target state="translated">新しい通知があります</target>
       </trans-unit>
       <trans-unit id="1217086124949795770" datatype="html">
         <source>Has dismissed alert(s)</source>
@@ -2270,7 +2270,7 @@
           <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
           <context context-type="linenumber">42</context>
         </context-group>
-        <target state="needs-translation">team</target>
+        <target state="translated">チーム</target>
       </trans-unit>
       <trans-unit id="2863460046387544768" datatype="html">
         <source>teams</source>
@@ -2278,7 +2278,7 @@
           <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
           <context context-type="linenumber">42</context>
         </context-group>
-        <target state="needs-translation">teams</target>
+        <target state="translated">チーム</target>
       </trans-unit>
       <trans-unit id="268563843519645044" datatype="html">
         <source>step</source>
@@ -2286,7 +2286,7 @@
           <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <target state="needs-translation">step</target>
+        <target state="translated">ステップ</target>
       </trans-unit>
       <trans-unit id="1427183831879496231" datatype="html">
         <source>lesson</source>
@@ -2294,7 +2294,7 @@
           <context context-type="sourcefile">src/app/classroom-monitor/teams-on-node/teams-on-node.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <target state="needs-translation">lesson</target>
+        <target state="translated">レッスン</target>
       </trans-unit>
       <trans-unit id="8193319701881840038" datatype="html">
         <source><x id="PH" equiv-text="this.workgroupsOnNode.length"/><x id="PH_1" equiv-text="teams"/> on this <x id="PH_2" equiv-text="stepOrLesson"/>:</source>
@@ -2346,7 +2346,7 @@
           <context context-type="sourcefile">src/app/common/project-language-chooser/project-language-chooser.component.ts</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <target state="needs-translation">Select language</target>
+        <target state="translated">言語を選ぶ</target>
       </trans-unit>
       <trans-unit id="3885034872846800167" datatype="html">
         <source>Thank you for contacting WISE!</source>
@@ -2362,7 +2362,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">12,14</context>
         </context-group>
-        <target state="needs-translation">Your message has been sent. We will get back to you as soon as possible.</target>
+        <target state="translated">メッセージが送信されました。できるだけ早くご連絡いたします。</target>
       </trans-unit>
       <trans-unit id="8864930425454064488" datatype="html">
         <source>Return to WISE Home</source>
@@ -2434,7 +2434,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">421,422</context>
         </context-group>
-        <target state="needs-translation">Name</target>
+        <target state="translated">題名</target>
       </trans-unit>
       <trans-unit id="4520880229441666139" datatype="html">
         <source>Name required</source>
@@ -2534,7 +2534,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">58,60</context>
         </context-group>
-        <target state="needs-translation">Issue Type</target>
+        <target state="translated">問題の種類</target>
       </trans-unit>
       <trans-unit id="305786410811878097" datatype="html">
         <source>Issue Type required</source>
@@ -2674,7 +2674,7 @@
           <context context-type="sourcefile">src/app/student/survey/survey-completed/survey-completed.component.html</context>
           <context context-type="linenumber">19,23</context>
         </context-group>
-        <target state="needs-translation">Thank you!</target>
+        <target state="translated">ありがとうござます！</target>
       </trans-unit>
       <trans-unit id="7330209395505773206" datatype="html">
         <source>Submit for Review</source>
@@ -2682,7 +2682,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.html</context>
           <context context-type="linenumber">142,144</context>
         </context-group>
-        <target state="needs-translation">Submit for Review</target>
+        <target state="translated">審査に提出</target>
       </trans-unit>
       <trans-unit id="6178733511992894634" datatype="html">
         <source>Trouble Signing In</source>
@@ -2694,7 +2694,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">170</context>
         </context-group>
-        <target state="needs-translation">Trouble Signing In</target>
+        <target state="translated">サインインできない</target>
       </trans-unit>
       <trans-unit id="6892681827231609313" datatype="html">
         <source>Need Help Using WISE</source>
@@ -2718,7 +2718,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">172</context>
         </context-group>
-        <target state="needs-translation">Problems with a WISE Unit</target>
+        <target state="translated">WISE ユニットの問題</target>
       </trans-unit>
       <trans-unit id="2959002981630304422" datatype="html">
         <source>Feedback to WISE</source>
@@ -2730,7 +2730,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">176</context>
         </context-group>
-        <target state="needs-translation">Feedback to WISE</target>
+        <target state="translated">WISEへのフィードバック</target>
       </trans-unit>
       <trans-unit id="8693603235657020323" datatype="html">
         <source>Other</source>
@@ -2770,7 +2770,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">174</context>
         </context-group>
-        <target state="needs-translation">Need Help with Authoring</target>
+        <target state="translated">オーサリングに関するヘルプが必要です</target>
       </trans-unit>
       <trans-unit id="6193846139411583890" datatype="html">
         <source>Publish Unit</source>
@@ -2778,7 +2778,7 @@
           <context context-type="sourcefile">src/app/contact/contact-form/contact-form.component.ts</context>
           <context context-type="linenumber">175</context>
         </context-group>
-        <target state="needs-translation">Publish Unit</target>
+        <target state="translated">ユニットを公開</target>
       </trans-unit>
       <trans-unit id="1936787644032074292" datatype="html">
         <source>Publish my unit to the WISE Community Built library</source>
@@ -2978,7 +2978,7 @@
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/peer-chat-authoring/peer-chat-logic-options.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="needs-translation">Random</target>
+        <target state="translated">ランダム</target>
       </trans-unit>
       <trans-unit id="511208907501917679" datatype="html">
         <source>Chinese (Simplified)</source>
@@ -3054,7 +3054,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">35</context>
         </context-group>
-        <target state="needs-translation">Japanese</target>
+        <target state="translated">日本語</target>
       </trans-unit>
       <trans-unit id="6145439649200570157" datatype="html">
         <source>Korean</source>
@@ -3066,7 +3066,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">36</context>
         </context-group>
-        <target state="needs-translation">Korean</target>
+        <target state="translated">韓国語</target>
       </trans-unit>
       <trans-unit id="5190825892106392539" datatype="html">
         <source>Spanish</source>
@@ -3078,7 +3078,7 @@
           <context context-type="sourcefile">src/assets/wise5/services/transcribeService.ts</context>
           <context context-type="linenumber">38</context>
         </context-group>
-        <target state="needs-translation">Spanish</target>
+        <target state="translated">スペイン語</target>
       </trans-unit>
       <trans-unit id="3611216939636790848" datatype="html">
         <source>Vietnamese</source>
@@ -3086,7 +3086,7 @@
           <context context-type="sourcefile">src/app/domain/localeToLanguage.ts</context>
           <context context-type="linenumber">11</context>
         </context-group>
-        <target state="needs-translation">Vietnamese</target>
+        <target state="translated">ベトナム語</target>
       </trans-unit>
       <trans-unit id="8954371642157143595" datatype="html">
         <source>Elementary School</source>
@@ -3126,7 +3126,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">6,9</context>
         </context-group>
-        <target state="needs-translation">WISE Features</target>
+        <target state="translated">WISE 機能</target>
       </trans-unit>
       <trans-unit id="8188392167317719559" datatype="html">
         <source> A powerful online platform for designing, developing, and implementing science inquiry units </source>
@@ -3270,7 +3270,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">124,127</context>
         </context-group>
-        <target state="needs-translation">WISE solar ovens unit</target>
+        <target state="translated">WISE ソーラーオーブンユニット</target>
       </trans-unit>
       <trans-unit id="7458937773188764265" datatype="html">
         <source>WISE students building solar oven</source>
@@ -3302,7 +3302,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">203,206</context>
         </context-group>
-        <target state="needs-translation">WISE design report</target>
+        <target state="translated">WISE デザインレポート</target>
       </trans-unit>
       <trans-unit id="8325453650503384497" datatype="html">
         <source>WISE thermodynamics insulator model</source>
@@ -3318,7 +3318,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">230,232</context>
         </context-group>
-        <target state="needs-translation">Powerful Learning Technologies</target>
+        <target state="translated">強力な学習技術</target>
       </trans-unit>
       <trans-unit id="8665276044322989079" datatype="html">
         <source> WISE provides a simple user interface, cognitive hints, embedded assessments, and online discussions, as well as tools for drawing, annotation, concept mapping, diagramming, and graphing. </source>
@@ -3366,7 +3366,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">279,282</context>
         </context-group>
-        <target state="needs-translation">WISE teacher progress</target>
+        <target state="translated">WISE 先生の進捗状況</target>
       </trans-unit>
       <trans-unit id="5535887869299414056" datatype="html">
         <source>WISE teacher grading</source>
@@ -3374,7 +3374,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">300,305</context>
         </context-group>
-        <target state="needs-translation">WISE teacher grading</target>
+        <target state="translated">WISE 先生の評価ツール</target>
       </trans-unit>
       <trans-unit id="8669839450693538583" datatype="html">
         <source>Featured Teacher Tools:</source>
@@ -3382,7 +3382,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">308,310</context>
         </context-group>
-        <target state="needs-translation">Featured Teacher Tools:</target>
+        <target state="translated">注目の先生向けツール：</target>
       </trans-unit>
       <trans-unit id="6857127320537626439" datatype="html">
         <source>Real-time progress monitor</source>
@@ -3390,7 +3390,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">312,315</context>
         </context-group>
-        <target state="needs-translation">Real-time progress monitor</target>
+        <target state="translated">リアルタイム進行状況モニター</target>
       </trans-unit>
       <trans-unit id="7161764554026859890" datatype="html">
         <source>Grade and give feedback + sample scoring rubrics</source>
@@ -3422,7 +3422,7 @@
           <context context-type="sourcefile">src/app/features/features.component.html</context>
           <context context-type="linenumber">328,331</context>
         </context-group>
-        <target state="needs-translation">Share and collaborate with colleagues</target>
+        <target state="translated">共有し、同僚と共同作業</target>
       </trans-unit>
       <trans-unit id="1147391623414245928" datatype="html">
         <source>Authoring environment that supports customization and creation of new units</source>
@@ -3606,7 +3606,7 @@
           <context context-type="sourcefile">src/app/forgot/student/forgot-student-password-security/forgot-student-password-security.component.html</context>
           <context context-type="linenumber">21,25</context>
         </context-group>
-        <target state="needs-translation">Answer required</target>
+        <target state="translated">回答が必要です</target>
       </trans-unit>
       <trans-unit id="18036423310428495" datatype="html">
         <source>Incorrect answer, please try again. If you can&apos;t remember the answer to your security question, please ask your teacher to change your password or contact us for assistance.</source>
@@ -3766,7 +3766,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">8,13</context>
         </context-group>
-        <target state="needs-translation">First Name required</target>
+        <target state="translated">名は必須です</target>
       </trans-unit>
       <trans-unit id="4407559560004943843" datatype="html">
         <source>Last Name</source>
@@ -3822,7 +3822,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit-profile/edit-profile.component.html</context>
           <context context-type="linenumber">17,22</context>
         </context-group>
-        <target state="needs-translation">Last Name required</target>
+        <target state="translated">姓は必須です</target>
       </trans-unit>
       <trans-unit id="5276949455874274575" datatype="html">
         <source>Birthday (Month)</source>
@@ -4082,7 +4082,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher/forgot-teacher.component.html</context>
           <context context-type="linenumber">10,14</context>
         </context-group>
-        <target state="needs-translation">Look up username</target>
+        <target state="translated">ユーザー名を検索</target>
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
@@ -4142,7 +4142,7 @@
           <context context-type="sourcefile">src/app/forgot/teacher/forgot-teacher-password/forgot-teacher-password.component.html</context>
           <context context-type="linenumber">4,7</context>
         </context-group>
-        <target state="needs-translation">Teacher Forgot Password</target>
+        <target state="translated">先生のパスワードを忘れました</target>
       </trans-unit>
       <trans-unit id="5604597042379546047" datatype="html">
         <source>The verification code has expired. Verification codes are valid for 10 minutes. Please go back to the Teacher Forgot Password page to generate a new one.</source>
@@ -4306,7 +4306,7 @@
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
           <context context-type="linenumber">9,12</context>
         </context-group>
-        <target state="needs-translation">Getting Started</target>
+        <target state="translated">はじめに</target>
       </trans-unit>
       <trans-unit id="7517033109105721446" datatype="html">
         <source>Creating an Account</source>
@@ -4314,7 +4314,7 @@
           <context context-type="sourcefile">src/app/help/faq/getting-started/getting-started.component.html</context>
           <context context-type="linenumber">6,8</context>
         </context-group>
-        <target state="needs-translation">Creating an Account</target>
+        <target state="translated">アカウントの作成</target>
       </trans-unit>
       <trans-unit id="3803774907606350806" datatype="html">
         <source> All users must create their own account. Teachers must create a teacher account and students must create a student account. Users can create an account by going to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ contextPath }}&quot; target=&quot;_blank&quot;&gt;"/>WISE Home Page<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and clicking on the <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ contextPath }}/join&quot; target=&quot;_blank&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> link at the upper right of the screen. </source>
@@ -4454,7 +4454,7 @@
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">201,203</context>
         </context-group>
-        <target state="needs-translation">Click the "Unit Library" tab.</target>
+        <target state="translated">「ユニットライブラリ」タブをクリックします。</target>
       </trans-unit>
       <trans-unit id="2047431984648226214" datatype="html">
         <source>Find a project that you would like to use with your class.</source>
@@ -4490,7 +4490,7 @@
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">47,49</context>
         </context-group>
-        <target state="needs-translation">Click the "Use With Class" button.</target>
+        <target state="translated">「クラスで使用」ボタンをクリックします。</target>
       </trans-unit>
       <trans-unit id="5507739128924541515" datatype="html">
         <source>Choose the periods you will use the project in.</source>
@@ -4578,7 +4578,7 @@
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
           <context context-type="linenumber">19,22</context>
         </context-group>
-        <target state="needs-translation">Teacher FAQ</target>
+        <target state="translated">先生のよくある質問</target>
       </trans-unit>
       <trans-unit id="2486948483215076043" datatype="html">
         <source>Questions from teachers.</source>
@@ -4594,7 +4594,7 @@
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
           <context context-type="linenumber">21,25</context>
         </context-group>
-        <target state="needs-translation">Questions from teachers.</target>
+        <target state="translated">先生からの質問。</target>
       </trans-unit>
       <trans-unit id="5327650578137881121" datatype="html">
         <source>Student FAQ</source>
@@ -4610,7 +4610,7 @@
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
           <context context-type="linenumber">29,32</context>
         </context-group>
-        <target state="needs-translation">Student FAQ</target>
+        <target state="translated">学生のよくある質問</target>
       </trans-unit>
       <trans-unit id="8631937243382662611" datatype="html">
         <source>Questions from students.</source>
@@ -4626,7 +4626,7 @@
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
           <context context-type="linenumber">31,37</context>
         </context-group>
-        <target state="needs-translation">Questions from students.</target>
+        <target state="translated">学生からの質問</target>
       </trans-unit>
       <trans-unit id="2206462199601912572" datatype="html">
         <source>Student Frequently Asked Questions</source>
@@ -4650,7 +4650,7 @@
           <context context-type="sourcefile">src/app/privacy/privacy.component.html</context>
           <context context-type="linenumber">4,6</context>
         </context-group>
-        <target state="needs-translation">Table of Contents</target>
+        <target state="translated">目次</target>
       </trans-unit>
       <trans-unit id="6666239055510430738" datatype="html">
         <source>General Questions</source>
@@ -4730,7 +4730,7 @@
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">29,32</context>
         </context-group>
-        <target state="needs-translation">I forgot my username, how can I find it?</target>
+        <target state="translated">ユーザー名を忘れてしまったのですが、どうやって見つけることができますか？</target>
       </trans-unit>
       <trans-unit id="242703261906703846" datatype="html">
         <source> Go to the forgot username page and follow the instructions to retrieve your username. </source>
@@ -4746,7 +4746,7 @@
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">35,37</context>
         </context-group>
-        <target state="needs-translation">I forgot my password, how can I change it?</target>
+        <target state="translated">パスワードを忘れてしまったので、どうすれば変更できますか？</target>
       </trans-unit>
       <trans-unit id="2618679274507370803" datatype="html">
         <source>Go to the forgot password page and follow the instructions to reset your password.</source>
@@ -4762,7 +4762,7 @@
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">39,41</context>
         </context-group>
-        <target state="needs-translation">How do I start working on a project?</target>
+        <target state="translated">プロジェクトを始めるにはどうすればいいですか？</target>
       </trans-unit>
       <trans-unit id="5041356795945392838" datatype="html">
         <source> In order to start working on a project you must obtain an Access Code from your teacher. Once you have an Access Code, follow the directions below. </source>
@@ -4810,7 +4810,7 @@
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">52,54</context>
         </context-group>
-        <target state="needs-translation">Click "Add".</target>
+        <target state="translated">「追加」をクリックします。</target>
       </trans-unit>
       <trans-unit id="5124096115556056708" datatype="html">
         <source>The run will be added to your list of runs.</source>
@@ -4826,7 +4826,7 @@
           <context context-type="sourcefile">src/app/help/faq/student-faq/student-faq.component.html</context>
           <context context-type="linenumber">54,56</context>
         </context-group>
-        <target state="needs-translation">Click "Launch" to open the project.</target>
+        <target state="translated">「Launch」をクリックしてプロジェクトを開きます。</target>
       </trans-unit>
       <trans-unit id="2759387475828669823" datatype="html">
         <source>I chose the wrong period, how can I change it?</source>
@@ -4890,7 +4890,7 @@
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">348,351</context>
         </context-group>
-        <target state="needs-translation">What if I have trouble logging in?</target>
+        <target state="translated">ログインできない場合はどうなりますか？</target>
       </trans-unit>
       <trans-unit id="2517302969482797797" datatype="html">
         <source> If you do not remember your username or password click the Lost Username or Password link and follow the instructions. </source>
@@ -4914,7 +4914,7 @@
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">355,358</context>
         </context-group>
-        <target state="needs-translation">Can I use WISE in another language?</target>
+        <target state="translated">別の言語でWISEを使用することはできますか？</target>
       </trans-unit>
       <trans-unit id="5171974880898596817" datatype="html">
         <source>Sign into WISE with your student account.</source>
@@ -5034,7 +5034,7 @@
           <context context-type="sourcefile">src/app/help/help-home/help-home.component.html</context>
           <context context-type="linenumber">11,14</context>
         </context-group>
-        <target state="needs-translation">Information for new users.</target>
+        <target state="translated">新しいユーザーのための情報。</target>
       </trans-unit>
       <trans-unit id="603413250364178961" datatype="html">
         <source>Teacher Frequently Asked Questions</source>
@@ -5710,7 +5710,7 @@
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">266,268</context>
         </context-group>
-        <target state="needs-translation">Open the project.</target>
+        <target state="translated">プロジェクトを開きます。</target>
       </trans-unit>
       <trans-unit id="8904187041010040473" datatype="html">
         <source>Go to the step that the teacher graded.</source>
@@ -5854,7 +5854,7 @@
           <context context-type="sourcefile">src/app/help/faq/teacher-faq/teacher-faq.component.html</context>
           <context context-type="linenumber">357,359</context>
         </context-group>
-        <target state="needs-translation">Yes!</target>
+        <target state="translated">はい！</target>
       </trans-unit>
       <trans-unit id="6951262668523548859" datatype="html">
         <source>Add Ideas</source>
@@ -5886,7 +5886,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">96,99</context>
         </context-group>
-        <target state="needs-translation"> Curriculum Offerings </target>
+        <target state="translated"> カリキュラムオファリング </target>
       </trans-unit>
       <trans-unit id="7303979114499756666" datatype="html">
         <source>Curriculum Offerings</source>
@@ -5894,7 +5894,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">101,105</context>
         </context-group>
-        <target state="needs-translation">Curriculum Offerings</target>
+        <target state="translated">カリキュラムオファリング</target>
       </trans-unit>
       <trans-unit id="8254507243031097369" datatype="html">
         <source>Ready to try WISE in the Classroom?</source>
@@ -5902,7 +5902,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">107,108</context>
         </context-group>
-        <target state="needs-translation">Ready to try WISE in the Classroom?</target>
+        <target state="translated">教室でWISEを試してみませんか？</target>
       </trans-unit>
       <trans-unit id="8559814757060095671" datatype="html">
         <source>Sign up for free!</source>
@@ -5918,7 +5918,7 @@
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">121,124</context>
         </context-group>
-        <target state="needs-translation">Connect</target>
+        <target state="translated">つながる</target>
       </trans-unit>
       <trans-unit id="1879845826079889803" datatype="html">
         <source>WISE on Facebook</source>
@@ -5974,7 +5974,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">40,41</context>
         </context-group>
-        <target state="needs-translation">Community</target>
+        <target state="translated">コミュニティ</target>
       </trans-unit>
       <trans-unit id="252934162837620634" datatype="html">
         <source>Join us! Discuss all things WISE.</source>
@@ -6180,7 +6180,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-form/register-teacher-form.component.html</context>
           <context context-type="linenumber">160,164</context>
         </context-group>
-        <target state="needs-translation">Recaptcha failed. Please reload the page and try again!</target>
+        <target state="translated">りキャプチャに失敗しました。ページを再読み込みしてもう一度お試しください！</target>
       </trans-unit>
       <trans-unit id="2734138791192936323" datatype="html">
         <source>Sign in with Google</source>
@@ -6200,7 +6200,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
           <context context-type="linenumber">24,28</context>
         </context-group>
-        <target state="needs-translation">Sign in with Google</target>
+        <target state="translated">Googleでサインイン</target>
       </trans-unit>
       <trans-unit id="5250220125646261119" datatype="html">
         <source>Sign in with Microsoft</source>
@@ -6220,7 +6220,7 @@
           <context context-type="sourcefile">src/app/register/register-teacher-complete/register-teacher-complete.component.html</context>
           <context context-type="linenumber">36,41</context>
         </context-group>
-        <target state="needs-translation">Sign in with Microsoft</target>
+        <target state="translated">Microsoft でサインイン</target>
       </trans-unit>
       <trans-unit id="7938452962184054866" datatype="html">
         <source>Forgot username or password?</source>
@@ -6264,7 +6264,7 @@
           <context context-type="sourcefile">src/assets/wise5/classroomMonitor/classroomMonitorComponents/shared/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">4,7</context>
         </context-group>
-        <target state="needs-translation">WISE logo</target>
+        <target state="translated">WISE ロゴ</target>
       </trans-unit>
       <trans-unit id="1267967133679326155" datatype="html">
         <source>Create Account</source>
@@ -6328,7 +6328,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">38,40</context>
         </context-group>
-        <target state="needs-translation">Curriculum</target>
+        <target state="translated">カリキュラム</target>
       </trans-unit>
       <trans-unit id="7524563838003613794" datatype="html">
         <source>Privacy + Use</source>
@@ -6472,7 +6472,7 @@
           <context context-type="sourcefile">src/app/teacher/account/edit/edit.component.html</context>
           <context context-type="linenumber">3,8</context>
         </context-group>
-        <target state="needs-translation">Edit Profile</target>
+        <target state="translated">プロフィールを編集する</target>
       </trans-unit>
       <trans-unit id="2960013701218248208" datatype="html">
         <source>Researcher Tools</source>
@@ -6520,7 +6520,7 @@
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
           <context context-type="linenumber">41,43</context>
         </context-group>
-        <target state="needs-translation">Research</target>
+        <target state="translated">研究</target>
       </trans-unit>
       <trans-unit id="2306568267159950683" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> or <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/login&quot;&gt;"/>Sign In<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
@@ -6536,7 +6536,7 @@
           <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
           <context context-type="linenumber">13,17</context>
         </context-group>
-        <target state="needs-translation">WISE header logo</target>
+        <target state="translated">WISE ヘッダーのロゴ</target>
       </trans-unit>
       <trans-unit id="8359660888243306571" datatype="html">
         <source>Main menu</source>
@@ -6680,7 +6680,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.html</context>
           <context context-type="linenumber">29,34</context>
         </context-group>
-        <target state="needs-translation">Clear all</target>
+        <target state="translated">全クリア</target>
       </trans-unit>
       <trans-unit id="1624029534372813530" datatype="html">
         <source>Type filter explanation</source>
@@ -6728,7 +6728,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.ts</context>
           <context context-type="linenumber">52</context>
         </context-group>
-        <target state="needs-translation">WISE Platform</target>
+        <target state="translated">WISE プラットフォーム</target>
       </trans-unit>
       <trans-unit id="8239294784362097209" datatype="html">
         <source>Other Platform</source>
@@ -6736,7 +6736,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-filters/library-filters.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
-        <target state="needs-translation">Other Platform</target>
+        <target state="translated">他のプラットフォーム</target>
       </trans-unit>
       <trans-unit id="3437559734835046374" datatype="html">
         <source>NGSS</source>
@@ -6870,7 +6870,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">83,85</context>
         </context-group>
-        <target state="needs-translation">Resources:</target>
+        <target state="translated">リソース：</target>
       </trans-unit>
       <trans-unit id="5615583660036576020" datatype="html">
         <source>Discipline:</source>
@@ -6878,7 +6878,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">96,98</context>
         </context-group>
-        <target state="needs-translation">Discipline:</target>
+        <target state="translated">分野：</target>
       </trans-unit>
       <trans-unit id="3217999400450328473" datatype="html">
         <source>Features:</source>
@@ -6894,7 +6894,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">121,123</context>
         </context-group>
-        <target state="needs-translation">Standards Addressed:</target>
+        <target state="translated">指定された標準:</target>
       </trans-unit>
       <trans-unit id="6644602411705618484" datatype="html">
         <source>Locations:</source>
@@ -6902,7 +6902,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">153,154</context>
         </context-group>
-        <target state="needs-translation">Locations:</target>
+        <target state="translated">位置：</target>
       </trans-unit>
       <trans-unit id="8316240444829030702" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
@@ -6910,7 +6910,7 @@
           <context context-type="sourcefile">src/app/modules/library/library-project-details/library-project-details.component.html</context>
           <context context-type="linenumber">174,176</context>
         </context-group>
-        <target state="needs-translation"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</target>
+        <target state="translated"><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>このユニット<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> は <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> ( <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> の下で使用) のコピーです。</target>
       </trans-unit>
       <trans-unit id="1086545303898503399" datatype="html">
         <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;{{ project.uri }}&quot; target=&quot;_blank&quot;&gt;"/>This unit<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> is a copy of <x id="START_LINK_1" equiv-text="&lt;a href=&quot;{{ parentProject.uri }}&quot; target=&quot;_blank&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ parentProject.title }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> by <x id="INTERPOLATION_1" equiv-text="{{ parentAuthorsString }}"/> (used under <x id="START_LINK_2" equiv-text="&lt;a href=&quot;{{ licenseUrl }}&quot; target=&quot;_blank&quot;&gt;"/>CC BY-SA<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>).</source>
@@ -26428,7 +26428,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
           <context context-type="linenumber">133</context>
         </context-group>
-        <target state="needs-translation">You have new feedback from your teacher!</target>
+        <target state="translated">先生から新しいフィードバックがあります！</target>
       </trans-unit>
       <trans-unit id="5013145827213980080" datatype="html">
         <source>You have new feedback!</source>
@@ -26436,7 +26436,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/services/notificationService.ts</context>
           <context context-type="linenumber">148</context>
         </context-group>
-        <target state="needs-translation">You have new feedback!</target>
+        <target state="translated">新しいフィードバックがあります！</target>
       </trans-unit>
       <trans-unit id="4484876679373170309" datatype="html">
         <source>Your teacher has paused all the screens in the class.</source>
@@ -26444,7 +26444,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/services/pauseScreenService.ts</context>
           <context context-type="linenumber">39</context>
         </context-group>
-        <target state="needs-translation">Your teacher has paused all the screens in the class.</target>
+        <target state="translated">先生がクラスのすべての画面を一時停止しました。</target>
       </trans-unit>
       <trans-unit id="6670906177291724132" datatype="html">
         <source>Screen Paused</source>
@@ -26452,7 +26452,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/services/pauseScreenService.ts</context>
           <context context-type="linenumber">40</context>
         </context-group>
-        <target state="needs-translation">Screen Paused</target>
+        <target state="translated">画面が一時停止されました</target>
       </trans-unit>
       <trans-unit id="8770055323459972095" datatype="html">
         <source>There was an error uploading.</source>
@@ -26460,7 +26460,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
           <context context-type="linenumber">117</context>
         </context-group>
-        <target state="needs-translation">There was an error uploading.</target>
+        <target state="translated">アップロード中にエラーが発生しました。</target>
       </trans-unit>
       <trans-unit id="7911256030566990381" datatype="html">
         <source>There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</source>
@@ -26468,7 +26468,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/services/studentAssetService.ts</context>
           <context context-type="linenumber">128</context>
         </context-group>
-        <target state="needs-translation">There was an error uploading. You might have reached your file upload limit or the file you tried to upload was too large. Please ask your teacher for help.</target>
+        <target state="translated">アップロード中にエラーが発生しました。ファイルのアップロード制限に達したか、アップロードしようとしたファイルが大きすぎます。 先生に助けを求めてください。</target>
       </trans-unit>
       <trans-unit id="7178340069631637479" datatype="html">
         <source>Preview Student</source>
@@ -26564,7 +26564,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/themes/default/notebook/edit-notebook-item-dialog/edit-notebook-item-dialog.component.html</context>
           <context context-type="linenumber">27,31</context>
         </context-group>
-        <target state="needs-translation">Remove File</target>
+        <target state="translated">ファイル削除</target>
       </trans-unit>
       <trans-unit id="1183674375697618673" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;mat-small&quot;&gt;"/>Share with Class<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
@@ -26653,7 +26653,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/themes/default/themeComponents/stepTools/step-tools.component.html</context>
           <context context-type="linenumber">70,73</context>
         </context-group>
-        <target state="needs-translation">Unit Plan</target>
+        <target state="translated">ユニットプラン</target>
       </trans-unit>
       <trans-unit id="2670863509967113900" datatype="html">
         <source>Choose Your <x id="INTERPOLATION" equiv-text="{{ label }}"/>:</source>
@@ -26745,7 +26745,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
           <context context-type="linenumber">69,72</context>
         </context-group>
-        <target state="needs-translation">Lesson is locked</target>
+        <target state="translated">レッスンはロックされています</target>
       </trans-unit>
       <trans-unit id="3869393913986306957" datatype="html">
         <source>Item is locked</source>
@@ -26753,7 +26753,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/vle/nav-item/nav-item.component.html</context>
           <context context-type="linenumber">99,102</context>
         </context-group>
-        <target state="needs-translation">Item is locked</target>
+        <target state="translated">アイテムはロックされています</target>
       </trans-unit>
       <trans-unit id="1692980694443272897" datatype="html">
         <source>Choose an icon</source>
@@ -26765,7 +26765,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/vle/node-icon/node-icon.component.html</context>
           <context context-type="linenumber">22,26</context>
         </context-group>
-        <target state="needs-translation">Choose an icon</target>
+        <target state="translated">アイコンを選択してください</target>
       </trans-unit>
       <trans-unit id="1537989701921033638" datatype="html">
         <source>Dismiss all alerts</source>
@@ -26829,7 +26829,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/vle/student-account-menu/student-account-menu.component.html</context>
           <context context-type="linenumber">64,66</context>
         </context-group>
-        <target state="needs-translation">Go Home</target>
+        <target state="translated">ホームへ戻る</target>
       </trans-unit>
       <trans-unit id="3691827129718672864" datatype="html">
         <source>My Files</source>
@@ -26837,7 +26837,7 @@ If this problem continues, let your teacher know and move on to the next activit
           <context context-type="sourcefile">src/assets/wise5/vle/studentAsset/student-assets-dialog/student-assets-dialog.component.html</context>
           <context context-type="linenumber">1,4</context>
         </context-group>
-        <target state="needs-translation">My Files</target>
+        <target state="translated">マイファイル</target>
       </trans-unit>
       <trans-unit id="425755073092096425" datatype="html">
         <source>Use this file</source>
