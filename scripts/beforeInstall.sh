@@ -35,8 +35,8 @@ curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | tee /usr/share/k
 echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
 apt update
 
-echo "Installing Nginx 1.26.2"
-apt-get install nginx=1.26.2-1~$(lsb_release -sc) -y
+echo "Installing Nginx"
+apt-get install nginx -y
 
 echo "Adding gzip_types to nginx.conf"
 sed 's/#gzip  on;/gzip on;\n    gzip_types text\/plain text\/xml image\/gif image\/jpeg image\/png image\/svg+xml application\/json application\/javascript application\/x-javascript text\/javascript text\/css;/' -i /etc/nginx/nginx.conf
