@@ -97,11 +97,11 @@
               "baseHref": "/"
             },
             "development": {
-              "optimization": true,
-              "outputHashing": "all",
+              "optimization": false,
+              "outputHashing": "none",
               "sourceMap": true,
               "namedChunks": true,
-              "verbose": true,
+              "verbose": false,
               "aot": true,
               "extractLicenses": false,
               "budgets": []
