@@ -7,6 +7,11 @@
           Username and password not recognized. Please try again.
         </p>
       }
+      @if (isLoginDisabled) {
+        <p class="warn center standalone__error" i18n>
+          Signing in is disabled right now. Please try again later.
+        </p>
+      }
       @if (isReLoginDueToErrorSavingData) {
         <p class="warn center standalone__error" i18n>
           There was an error saving data. Please log in again. You may need to re-do your recent
