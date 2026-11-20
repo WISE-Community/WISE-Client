@@ -325,13 +325,30 @@ describe('TeacherPresentationDialogComponent', () => {
     expect(promptSection).toBeNull();
   });
 
-  it('should render Original Question dropdown in header when controls are visible', () => {
+  it('should render Activity Question dropdown in header when controls are visible and componentPrompt exists', () => {
+    component.data.component = {
+      id: 'comp1',
+      type: 'OpenResponse',
+      prompt: 'Why does ice float?'
+    } as any;
     component.toggleControls(true); // controls visible
     fixture.detectChanges();
 
     const selects = fixture.nativeElement.querySelectorAll('mat-select');
-    // There should be both Student Names and Original Question selects
+    // There should be both Student Names and Activity Question selects
     expect(selects.length).toBe(2);
     expect(selects[1].getAttribute('aria-label')).toBe('Activity Question Display');
+  });
+
+  it('should not render Activity Question dropdown when componentPrompt does not exist', () => {
+    component.toggleControls(true); // controls visible, but component has no prompt
+    fixture.detectChanges();
+
+    const selects = fixture.nativeElement.querySelectorAll('mat-select');
+    // Only Student Names select should be rendered
+    expect(selects.length).toBe(1);
+    expect(
+      fixture.nativeElement.querySelector('mat-select[aria-label="Activity Question Display"]')
+    ).toBeNull();
   });
 });
