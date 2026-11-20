@@ -32,6 +32,14 @@ export class AddMatchChoiceDialogComponent {
     private dialogRef: MatDialogRef<AddMatchChoiceDialogComponent>
   ) {}
 
+  protected enterPressed(event: KeyboardEvent): void {
+    if (event.isComposing || event.keyCode === 229) {
+      return;
+    }
+    event.preventDefault();
+    this.save();
+  }
+
   protected save(): void {
     const choiceText: string = this.addChoiceFormGroup.get('choiceText').value;
     if (choiceText) {
