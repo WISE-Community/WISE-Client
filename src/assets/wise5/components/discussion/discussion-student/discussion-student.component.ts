@@ -102,6 +102,15 @@ export class DiscussionStudent extends ComponentStudent implements AfterViewInit
         }
       })
     );
+    this.subscriptions.add(
+      this.configService.configRetrieved$.subscribe(() => {
+        if (!this.isAnonymizeResponses()) {
+          this.classResponses.forEach((response) =>
+            this.discussionService.setUsernames(response, this.workgroupId)
+          );
+        }
+      })
+    );
   }
 
   ngAfterViewInit(): void {

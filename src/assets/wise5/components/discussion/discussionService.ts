@@ -13,6 +13,7 @@ export class DiscussionService extends ComponentService {
 
   protected configService = inject(ConfigService);
   protected http = inject(HttpClient);
+  private anonymousWorkgroupIdOrders: Map<string, number[]> = new Map<string, number[]>();
 
   createComponent() {
     const component: any = super.createComponent();
@@ -270,12 +271,26 @@ export class DiscussionService extends ComponentService {
 
   private setAnonymousUsername(componentState: any): void {
     const { workgroupId, periodId } = componentState;
-    const workgroupIds = this.configService
-      .getClassmateUserInfos()
-      .filter((userInfo) => userInfo.periodId === periodId)
-      .map((userInfo) => userInfo.workgroupId)
-      .concat(workgroupId);
+    const workgroupIds = this.getAnonymousWorkgroupIdOrder(periodId, workgroupId);
     componentState.usernames = new Anonymizer(workgroupId, workgroupIds).getName();
+  }
+
+  private getAnonymousWorkgroupIdOrder(periodId: number, workgroupId: number): number[] {
+    const key = `${this.configService.getRunId()}-${periodId}`;
+    if (!this.anonymousWorkgroupIdOrders.has(key)) {
+      this.anonymousWorkgroupIdOrders.set(
+        key,
+        this.configService
+          .getClassmateUserInfos()
+          .filter((userInfo) => userInfo.periodId === periodId)
+          .map((userInfo) => userInfo.workgroupId)
+      );
+    }
+    const workgroupIds = this.anonymousWorkgroupIdOrders.get(key);
+    if (!workgroupIds.includes(workgroupId)) {
+      workgroupIds.push(workgroupId);
+    }
+    return workgroupIds;
   }
 
   getResponsesMap(componentStates: any[]): any {

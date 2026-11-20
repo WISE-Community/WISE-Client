@@ -9,9 +9,13 @@ import { StompService } from './stompService';
 import { ConfigService } from './configService';
 import { Annotation } from '../common/Annotation';
 import { StudentNodeService } from './studentNodeService';
+import { auditTime, catchError, EMPTY, Subject, Subscription, switchMap } from 'rxjs';
 
 @Injectable()
 export class StudentWebSocketService {
+  private newWorkgroupJoinedRunSource: Subject<void> = new Subject<void>();
+  private newWorkgroupJoinedRunSubscription: Subscription;
+
   constructor(
     private AnnotationService: AnnotationService,
     private configService: ConfigService,
@@ -26,6 +30,7 @@ export class StudentWebSocketService {
   initialize(): void {
     this.subscribeToClassroomTopic();
     this.subscribeToWorkgroupTopic();
+    this.subscribeToNewWorkgroupJoinedRun();
   }
 
   subscribeToClassroomTopic(): void {
@@ -41,11 +46,23 @@ export class StudentWebSocketService {
       } else if (body.type === 'node') {
         this.updateNode(body.content);
       } else if (body.type === 'newWorkgroupJoinedRun') {
-        this.configService.retrieveConfig(
-          `/api/config/studentRun/${this.configService.getRunId()}`
-        );
+        this.newWorkgroupJoinedRunSource.next();
       }
     });
+  }
+
+  private subscribeToNewWorkgroupJoinedRun(): void {
+    this.newWorkgroupJoinedRunSubscription?.unsubscribe();
+    this.newWorkgroupJoinedRunSubscription = this.newWorkgroupJoinedRunSource
+      .pipe(
+        auditTime(2000 + Math.floor(Math.random() * 3000)),
+        switchMap(() =>
+          this.configService
+            .retrieveConfig(`/api/config/studentRun/${this.configService.getRunId()}`)
+            .pipe(catchError(() => EMPTY))
+        )
+      )
+      .subscribe();
   }
 
   subscribeToWorkgroupTopic(): void {
