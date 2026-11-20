@@ -9,7 +9,7 @@ import { StompService } from './stompService';
 import { ConfigService } from './configService';
 import { Annotation } from '../common/Annotation';
 import { StudentNodeService } from './studentNodeService';
-import { auditTime, catchError, EMPTY, Subject, Subscription, switchMap } from 'rxjs';
+import { auditTime, catchError, concatMap, EMPTY, Subject, Subscription } from 'rxjs';
 
 @Injectable()
 export class StudentWebSocketService {
@@ -56,7 +56,7 @@ export class StudentWebSocketService {
     this.newWorkgroupJoinedRunSubscription = this.newWorkgroupJoinedRunSource
       .pipe(
         auditTime(2000 + Math.floor(Math.random() * 3000)),
-        switchMap(() =>
+        concatMap(() =>
           this.configService
             .retrieveConfig(`/api/config/studentRun/${this.configService.getRunId()}`)
             .pipe(catchError(() => EMPTY))

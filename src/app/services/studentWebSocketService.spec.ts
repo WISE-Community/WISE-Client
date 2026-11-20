@@ -1,6 +1,6 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { MockProvider, MockProviders } from 'ng-mocks';
-import { defer, of, Subject, throwError } from 'rxjs';
+import { defer, delay, of, Subject, tap, throwError } from 'rxjs';
 import { Message } from '@stomp/stompjs';
 import { AnnotationService } from '../../assets/wise5/services/annotationService';
 import { ConfigService } from '../../assets/wise5/services/configService';
@@ -83,6 +83,23 @@ function newWorkgroupJoinedRun() {
         tick(1000);
       }
       expect(configRequestCount).toBeGreaterThanOrEqual(3);
+    }));
+
+    it('should finish slow config requests while joins keep arriving', fakeAsync(() => {
+      let answered = 0;
+      (configService.retrieveConfig as jasmine.Spy).and.returnValue(
+        of({}).pipe(
+          delay(6000),
+          tap(() => answered++)
+        )
+      );
+      service.initialize();
+      for (let i = 0; i < 20; i++) {
+        sendNewWorkgroupJoinedRun();
+        tick(1000);
+      }
+      expect(answered).toBeGreaterThanOrEqual(2);
+      flush();
     }));
 
     it('should keep listening after a config request fails', fakeAsync(() => {
