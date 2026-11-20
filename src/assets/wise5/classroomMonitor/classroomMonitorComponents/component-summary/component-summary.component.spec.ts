@@ -67,6 +67,7 @@ describe('ComponentSummaryComponent', () => {
   });
   testHasStudentWork();
   testNoStudentWork();
+  testStudentWorkInSelectedPeriod();
   testSummaryPriorityAndSizing();
   testExpandSummaryLogging();
 });
@@ -90,6 +91,52 @@ function testNoStudentWork() {
       fixture.detectChanges();
     });
     it('should not show component completion', () => {
+      expect(getComponentCompletion()).toBeFalsy();
+    });
+  });
+}
+
+function testStudentWorkInSelectedPeriod() {
+  describe('student work in the selected period', () => {
+    beforeEach(() => {
+      component.component = { id: 'abc', type: 'OpenResponse', prompt: 'hi' } as any;
+      spyOn(TestBed.inject(TeacherDataService), 'getComponentStatesByComponentId').and.returnValue([
+        { periodId: 1 }
+      ] as any);
+      spyOn(TestBed.inject(TeacherDataService), 'getCurrentNode').and.returnValue({
+        id: 'node1'
+      } as any);
+      spyOn(TestBed.inject(ComponentServiceLookupService), 'getService').and.returnValue({
+        componentHasCorrectAnswer: () => false
+      } as any);
+      spyOn(TestBed.inject(AnnotationService), 'getAnnotationsByNodeIdComponentId').and.returnValue(
+        []
+      );
+      spyOn(TestBed.inject(CRaterService), 'getCRaterRubric').and.returnValue({
+        hasRubricData: () => false
+      } as any);
+      spyOn(TestBed.inject(ProjectService), 'getProject').and.returnValue({} as any);
+    });
+
+    it('should show the summaries when all periods are selected', () => {
+      component.periodId = -1;
+      component['setComponent']();
+      fixture.detectChanges();
+      expect(getComponentCompletion()).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('.summaries'))).toBeTruthy();
+    });
+
+    it('should show the summaries when the period with the work is selected', () => {
+      component.periodId = 1;
+      component['setComponent']();
+      fixture.detectChanges();
+      expect(getComponentCompletion()).toBeTruthy();
+    });
+
+    it('should not show the summaries when another period is selected', () => {
+      component.periodId = 2;
+      component['setComponent']();
+      fixture.detectChanges();
       expect(getComponentCompletion()).toBeFalsy();
     });
   });
