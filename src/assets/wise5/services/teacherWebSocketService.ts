@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { ClassroomStatusService } from './classroomStatusService';
 import { NotificationService } from './notificationService';
-import { auditTime, catchError, EMPTY, Observable, Subject, Subscription, switchMap } from 'rxjs';
+import { auditTime, catchError, concatMap, EMPTY, Observable, Subject, Subscription } from 'rxjs';
 import { AchievementService } from './achievementService';
 import { RxStomp } from '@stomp/rx-stomp';
 import { Message } from '@stomp/stompjs';
@@ -116,7 +116,7 @@ export class TeacherWebSocketService {
     this.newWorkgroupJoinedRunSubscription = this.newWorkgroupJoinedRunSource
       .pipe(
         auditTime(2000),
-        switchMap(() =>
+        concatMap(() =>
           this.configService
             .retrieveConfig(`/api/config/classroomMonitor/${this.configService.getRunId()}`)
             .pipe(catchError(() => EMPTY))
