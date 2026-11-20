@@ -1,4 +1,4 @@
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { StudentTeacherCommonServicesModule } from '../../../../../app/student-teacher-common-services.module';
@@ -72,6 +72,7 @@ describe('DiscussionStudentComponent', () => {
   sendPostToThreadCreator();
   sendPostToThreadRepliers();
   setClassResponses();
+  configRetrieved();
 });
 
 function createComponentStateObject(
@@ -302,6 +303,35 @@ function isConnectedComponentImportWorkMode() {
     it('should check if there is a import work connected component when there is not', () => {
       component.componentContent.connectedComponents[0].type = 'showWork';
       expect(component.isConnectedComponentImportWorkMode()).toEqual(false);
+    });
+  });
+}
+
+function createConfig(classmateUserInfos: any[]): any {
+  return {
+    runId: 1,
+    userInfo: {
+      myUserInfo: {
+        workgroupId: 10,
+        periodId: 1,
+        myClassInfo: { classmateUserInfos: classmateUserInfos }
+      }
+    }
+  };
+}
+
+function configRetrieved() {
+  describe('config retrieved', () => {
+    it('should set the name on a post by a team that joined after the run was loaded', () => {
+      const configService = TestBed.inject(ConfigService);
+      configService.setConfig(createConfig([]));
+      const lateTeamPost = createComponentStateObject(3, 12, 'Hi');
+      component.addClassResponse(lateTeamPost);
+      configService.retrieveConfig('/api/config/studentRun/1').subscribe();
+      TestBed.inject(HttpTestingController)
+        .expectOne('/api/config/studentRun/1')
+        .flush(createConfig([{ workgroupId: 12, username: 'Carol Lee (carol)', periodId: 1 }]));
+      expect(lateTeamPost.usernames).toEqual('Carol Lee');
     });
   });
 }
