@@ -63,9 +63,11 @@ export class AuthoringToolComponent {
     this.subscribeToRouterEvents();
     this.subscribeToUIChangeEvents();
     this.checkPermission();
+    this.sessionService.initializeSession();
   }
 
   ngOnDestroy(): void {
+    this.sessionService.stopCheckMouseEvent();
     this.subscriptions.unsubscribe();
   }
 
@@ -128,10 +130,10 @@ export class AuthoringToolComponent {
           })
           .afterClosed()
           .subscribe((isRenew: boolean) => {
-            if (isRenew) {
-              this.sessionService.closeWarningAndRenewSession();
-            } else {
+            if (isRenew === false) {
               this.logOut();
+            } else {
+              this.sessionService.closeWarningAndRenewSession();
             }
           });
       })
