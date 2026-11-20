@@ -13,7 +13,9 @@
             >
               Copy content from {{ defaultLanguage.language }}
             </button>
-            @if (content[key] && isTranslationServiceEnabled()) {
+            @if (
+              content[key] && isTranslationServiceEnabled() && isTranslationSuggestionAvailable()
+            ) {
               <span class="translation-link">
                 <mat-icon class="primary align-middle">auto_awesome</mat-icon>
                 <a href="#" role="button" (click)="translateText($event)" i18n>Translate with AI</a>

@@ -92,8 +92,19 @@ export abstract class AbstractTranslatableFieldComponent {
     return this.configService.getConfigParam('translationServiceEnabled');
   }
 
+  protected isTranslationSuggestionAvailable(): boolean {
+    return (
+      this.translationContentType === 'text' ||
+      this.defaultLanguage.locale.toLowerCase().startsWith('en') ||
+      this.currentLanguage().locale.toLowerCase().startsWith('en')
+    );
+  }
+
   protected async translateText(event: Event): Promise<void> {
     event.preventDefault();
+    if (!this.isTranslationSuggestionAvailable()) {
+      return;
+    }
     if (this.translationText) {
       this.openDialog();
     } else {
