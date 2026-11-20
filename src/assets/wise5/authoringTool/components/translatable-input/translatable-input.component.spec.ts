@@ -26,7 +26,7 @@ describe('TranslatableInputComponent', () => {
           provide: TeacherProjectService,
           useValue: {
             currentLanguage: signal({ language: 'Spanish', locale: 'es' }),
-            getLocale: () => new ProjectLocale({ default: 'en-US' }),
+            getLocale: () => new ProjectLocale({ default: 'en_US' }),
             isDefaultLocale: () => false
           }
         },

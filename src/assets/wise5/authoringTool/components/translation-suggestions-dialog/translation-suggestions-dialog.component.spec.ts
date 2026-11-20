@@ -8,16 +8,23 @@ import { of } from 'rxjs';
 describe('TranslationSuggestionsDialogComponent', () => {
   let component: TranslationSuggestionsDialogComponent;
   let fixture: ComponentFixture<TranslationSuggestionsDialogComponent>;
-  const data = {
-    defaultLanguage: 'English',
-    currentLanguage: 'Spanish',
-    defaultLanguageContent: 'source text',
-    currentLanguageContent: '',
-    contentType: 'text'
+  let data: {
+    defaultLanguage: string;
+    currentLanguage: string;
+    defaultLanguageContent: string;
+    currentLanguageContent: string;
+    contentType: string;
   };
   let getTranslationSuggestion: jasmine.Spy;
 
   beforeEach(async () => {
+    data = {
+      defaultLanguage: 'English',
+      currentLanguage: 'Spanish',
+      defaultLanguageContent: 'source text',
+      currentLanguageContent: '',
+      contentType: 'text'
+    };
     await TestBed.configureTestingModule({
       imports: [TranslationSuggestionsDialogComponent],
       providers: [
@@ -40,6 +47,7 @@ describe('TranslationSuggestionsDialogComponent', () => {
   }
 
   it('should create', () => {
+    createComponent();
     expect(component).toBeTruthy();
   });
 
