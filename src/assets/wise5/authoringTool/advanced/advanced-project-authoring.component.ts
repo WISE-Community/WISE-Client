@@ -40,7 +40,6 @@ export class AdvancedProjectAuthoringComponent {
   protected navigationType: 'default' | 'tab';
   protected projectJSONString: string;
   protected publishUnitUrl;
-  protected selectedTab: number;
 
   constructor(
     private configService: ConfigService,
@@ -63,36 +62,33 @@ export class AdvancedProjectAuthoringComponent {
   }
 
   protected tabChanged(event: MatTabChangeEvent): void {
-    if (event.index === 2) {
+    if (event.index === 3) {
       this.showJSON();
     } else {
       this.hideJSON();
     }
   }
 
-  private showJSON(): void {
-    this.notificationService.showJSONValidMessage();
+  ngOnDestroy(): void {
+    this.hideJSON();
   }
 
-  private hideJSON(): void {
+  private showJSON(): void {
     if (isValidJSONString(this.projectJSONString)) {
-      this.notificationService.hideJSONValidMessage();
-    } else if (
-      confirm(
-        $localize`The JSON is invalid. Invalid JSON will not be saved.\nClick "OK" to revert back to the last valid JSON.\nClick "Cancel" to keep the invalid JSON open so you can fix it.`
-      )
-    ) {
-      this.notificationService.hideJSONValidMessage();
-      this.selectedTab = 2; // re-open JSON tab so user can review JSON
+      this.notificationService.showJSONValidMessage();
+    } else {
+      this.notificationService.showJSONInvalidMessage();
     }
   }
 
+  private hideJSON(): void {
+    this.notificationService.hideJSONValidMessage();
+  }
+
   protected saveProjectJSONString(): void {
-    try {
+    this.showJSON();
+    if (isValidJSONString(this.projectJSONString)) {
       this.saveProjectJSON(this.projectJSONString);
-      this.notificationService.showJSONValidMessage();
-    } catch (e) {
-      this.notificationService.showJSONInvalidMessage();
     }
   }
 
