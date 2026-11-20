@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from './configService';
 import { ClassroomStatusService } from './classroomStatusService';
 import { NotificationService } from './notificationService';
-import { Observable, Subject } from 'rxjs';
+import { auditTime, catchError, EMPTY, Observable, Subject, Subscription, switchMap } from 'rxjs';
 import { AchievementService } from './achievementService';
 import { RxStomp } from '@stomp/rx-stomp';
 import { Message } from '@stomp/stompjs';
@@ -18,6 +18,8 @@ export class TeacherWebSocketService {
   public newAnnotationReceived$: Observable<Annotation> = this.newAnnotationReceivedSource.asObservable();
   private newStudentWorkReceivedSource: Subject<any> = new Subject<any>();
   public newStudentWorkReceived$: Observable<any> = this.newStudentWorkReceivedSource.asObservable();
+  private newWorkgroupJoinedRunSource: Subject<void> = new Subject<void>();
+  private newWorkgroupJoinedRunSubscription: Subscription;
 
   constructor(
     private AchievementService: AchievementService,
@@ -32,6 +34,7 @@ export class TeacherWebSocketService {
     this.subscribeToTeacherTopic();
     this.subscribeToTeacherWorkgroupTopic();
     this.subscribeToClassroomTopics();
+    this.subscribeToNewWorkgroupJoinedRun();
   }
 
   initializeStomp() {
@@ -102,11 +105,23 @@ export class TeacherWebSocketService {
         .subscribe((message: Message) => {
           const body = JSON.parse(message.body);
           if (body.type === 'newWorkgroupJoinedRun') {
-            this.configService.retrieveConfig(
-              `/api/config/classroomMonitor/${this.configService.getRunId()}`
-            );
+            this.newWorkgroupJoinedRunSource.next();
           }
         });
     }
+  }
+
+  private subscribeToNewWorkgroupJoinedRun(): void {
+    this.newWorkgroupJoinedRunSubscription?.unsubscribe();
+    this.newWorkgroupJoinedRunSubscription = this.newWorkgroupJoinedRunSource
+      .pipe(
+        auditTime(2000),
+        switchMap(() =>
+          this.configService
+            .retrieveConfig(`/api/config/classroomMonitor/${this.configService.getRunId()}`)
+            .pipe(catchError(() => EMPTY))
+        )
+      )
+      .subscribe();
   }
 }
