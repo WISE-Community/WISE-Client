@@ -71,7 +71,7 @@
       <textarea
         class="new-reply-input"
         [(ngModel)]="response.replyText"
-        (keyup)="replyEntered($event)"
+        (keydown)="replyEntered($event)"
         placeholder="Add Comment"
         i18n-placeholder
         aria-label="Add Comment"
