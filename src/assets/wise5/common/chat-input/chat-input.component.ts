@@ -18,7 +18,7 @@ export class ChatInputComponent {
   @ViewChild('responseTextarea') textareaRef!: ElementRef<HTMLTextAreaElement>;
 
   ngAfterViewInit(): void {
-    this.textareaRef.nativeElement.focus();
+    this.textareaRef.nativeElement.focus({ preventScroll: true });
   }
 
   protected keyPressed(event: KeyboardEvent): void {
