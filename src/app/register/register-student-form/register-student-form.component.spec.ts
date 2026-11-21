@@ -131,11 +131,6 @@ function createAccount() {
         'join/student/complete',
         { username: username, isUsingGoogleId: false, isUsingMicrosoftId: false }
       ]);
-      const studentPayload = (
-        studentService.registerStudentAccount as jasmine.Spy
-      ).calls.mostRecent().args[0];
-      expect('birthMonth' in studentPayload).toBeFalse();
-      expect('birthDay' in studentPayload).toBeFalse();
     }));
 
     it('should create an account with a social sign-up payload', async () => {

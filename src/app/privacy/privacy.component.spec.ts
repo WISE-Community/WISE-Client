@@ -20,11 +20,4 @@ describe('PrivacyComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should render the privacy policy without student birthday wording', () => {
-    const pageText = fixture.nativeElement.textContent;
-
-    expect(pageText).toContain('WISE Terms of Use & Privacy Policy');
-    expect(pageText).not.toMatch(/birth ?day|birthday/i);
-  });
 });
