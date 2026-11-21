@@ -108,6 +108,61 @@ function exportDiscussion(): void {
         exportStrategyTester.createExpectedFileName('discussion')
       );
     });
+
+    it('exports a reply whose thread starts in a connected component', () => {
+      exportStrategyTester.setComponent({
+        id: exportStrategyTester.componentId,
+        type: componentType,
+        prompt: exportStrategyTester.componentPrompt
+      });
+      exportStrategyTester.setStudentData([
+        exportStrategyTester.createComponentState(
+          componentType,
+          exportStrategyTester.studentWorkId2,
+          exportStrategyTester.studentWorkTimestampMilliseconds2,
+          true,
+          studentData2,
+          exportStrategyTester.workgroupId2
+        )
+      ]);
+      setUpExportStrategy();
+      exportStrategyTester.componentExportStrategy.export();
+      expect(exportStrategyTester.componentExportStrategy.generateCSVFile).toHaveBeenCalledWith(
+        [
+          exportStrategyTester.componentExportStrategy.defaultColumnNames,
+          [
+            1,
+            exportStrategyTester.workgroupId2,
+            exportStrategyTester.userId2,
+            exportStrategyTester.studentName2,
+            '',
+            '',
+            '',
+            '',
+            exportStrategyTester.periodName,
+            exportStrategyTester.projectId,
+            exportStrategyTester.projectTitle,
+            exportStrategyTester.runId,
+            exportStrategyTester.startDate,
+            exportStrategyTester.endDate,
+            exportStrategyTester.studentWorkTimestamp2,
+            exportStrategyTester.studentWorkTimestamp2,
+            exportStrategyTester.nodeId,
+            exportStrategyTester.componentId,
+            exportStrategyTester.componentPartNumber,
+            exportStrategyTester.nodePositionAndTitle,
+            exportStrategyTester.component.type,
+            exportStrategyTester.component.prompt,
+            studentData2,
+            exportStrategyTester.studentWorkId1,
+            exportStrategyTester.studentWorkId2,
+            2,
+            exportStrategyTester.studentWorkResponse2
+          ]
+        ],
+        exportStrategyTester.createExpectedFileName('discussion')
+      );
+    });
   });
 }
 

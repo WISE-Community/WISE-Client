@@ -45,41 +45,26 @@ export class DiscussionComponentDataExportStrategy extends AbstractComponentData
   ) {
     const rows = [];
     const componentStates = this.dataService.getComponentStatesByComponentId(component.id);
-    const structuredPosts = this.getStructuredPosts(componentStates);
+    const threads = this.getThreads(componentStates);
     let rowCounter = 1;
-    for (let threadId of Object.keys(structuredPosts)) {
-      let topLevelPost = structuredPosts[threadId];
-      rows.push(
-        this.generateDiscussionComponentWorkRow(
-          component,
-          topLevelPost.workgroupId,
-          columnNames,
-          columnNameToNumber,
-          nodeId,
-          component.id,
-          rowCounter,
-          topLevelPost,
-          threadId
-        )
-      );
-      rowCounter++;
-      if (topLevelPost.replies != null) {
-        for (let replyPost of topLevelPost.replies) {
-          rows.push(
-            this.generateDiscussionComponentWorkRow(
-              component,
-              replyPost.workgroupId,
-              columnNames,
-              columnNameToNumber,
-              nodeId,
-              component.id,
-              rowCounter,
-              replyPost,
-              threadId
-            )
-          );
-          rowCounter++;
-        }
+    for (const [threadId, thread] of threads) {
+      for (const post of thread.topLevelPost == null
+        ? thread.replies
+        : [thread.topLevelPost, ...thread.replies]) {
+        rows.push(
+          this.generateDiscussionComponentWorkRow(
+            component,
+            post.workgroupId,
+            columnNames,
+            columnNameToNumber,
+            nodeId,
+            component.id,
+            rowCounter,
+            post,
+            threadId
+          )
+        );
+        rowCounter++;
       }
     }
     return rows;
@@ -180,25 +165,24 @@ export class DiscussionComponentDataExportStrategy extends AbstractComponentData
     return componentState.studentData.componentStateIdReplyingTo != null;
   }
 
-  private getStructuredPosts(componentStates) {
-    const structuredPosts = {};
-    for (let componentState of componentStates) {
+  private getThreads(componentStates: any[]): Map<number, { topLevelPost?: any; replies: any[] }> {
+    const threads = new Map<number, { topLevelPost?: any; replies: any[] }>();
+    const getThread = (threadId: number) => {
+      if (!threads.has(threadId)) {
+        threads.set(threadId, { replies: [] });
+      }
+      return threads.get(threadId);
+    };
+    for (const componentState of componentStates) {
       if (this.isTopLevelPost(componentState)) {
-        structuredPosts[componentState.id] = componentState;
+        getThread(componentState.id).topLevelPost = componentState;
       } else if (this.isReply(componentState)) {
-        this.addReplyToTopLevelPost(structuredPosts, componentState);
+        getThread(componentState.studentData.componentStateIdReplyingTo).replies.push(
+          componentState
+        );
       }
     }
-    return structuredPosts;
-  }
-
-  private addReplyToTopLevelPost(structuredPosts, replyComponentState) {
-    const parentComponentStateId = replyComponentState.studentData.componentStateIdReplyingTo;
-    const parentPost = structuredPosts[parentComponentStateId];
-    if (parentPost.replies == null) {
-      parentPost.replies = [];
-    }
-    parentPost.replies.push(replyComponentState);
+    return new Map([...threads].sort(([threadId1], [threadId2]) => threadId1 - threadId2));
   }
 
   protected getComponentTypeWithUnderscore(): string {
