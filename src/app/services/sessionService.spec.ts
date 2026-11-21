@@ -1,9 +1,9 @@
 import { TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { ConfigService } from '../../assets/wise5/services/configService';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { of } from 'rxjs';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { of, throwError } from 'rxjs';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 let service: SessionService;
 let configService: ConfigService;
 
@@ -23,6 +23,8 @@ describe('SessionService', () => {
   checkMouseevent();
   checkForLogout();
   renewSession();
+  serverAnswers();
+  leaveClosedSite();
 });
 
 function calculateIntervals() {
@@ -94,7 +96,7 @@ function checkForLogout() {
   describe('checkForLogout()', () => {
     it('should force logout when user is inactive for long enough', () => {
       spyOn(service, 'isInactiveLongEnoughToForceLogout').and.returnValue(true);
-      spyOn(service, 'checkIfSessionIsActive').and.returnValue(of(false));
+      spyOn(service, 'checkSession').and.returnValue(of('ended'));
       const forceLogOutSpy = spyOn(service, 'forceLogOut');
       service.checkForLogout();
       expect(forceLogOutSpy).toHaveBeenCalled();
@@ -102,7 +104,7 @@ function checkForLogout() {
 
     it('should not force logout when user is inactive for long enough but session is active', () => {
       spyOn(service, 'isInactiveLongEnoughToForceLogout').and.returnValue(true);
-      spyOn(service, 'checkIfSessionIsActive').and.returnValue(of(true));
+      spyOn(service, 'checkSession').and.returnValue(of('active'));
       const forceLogOutSpy = spyOn(service, 'forceLogOut');
       service.checkForLogout();
       expect(forceLogOutSpy).not.toHaveBeenCalled();
@@ -122,7 +124,7 @@ function checkForLogout() {
 function renewSession() {
   describe('renewSession()', () => {
     it('should renew the session', fakeAsync(() => {
-      spyOn(service, 'checkIfSessionIsActive').and.returnValue(of(true));
+      spyOn(service, 'checkSession').and.returnValue(of('active'));
       const logOutSpy = spyOn(service, 'logOut');
       service.renewSession();
       tick();
@@ -130,11 +132,127 @@ function renewSession() {
     }));
 
     it('should log the user out when renew session fails', fakeAsync(() => {
-      spyOn(service, 'checkIfSessionIsActive').and.returnValue(of(false));
+      spyOn(service, 'checkSession').and.returnValue(of('ended'));
       const logOutSpy = spyOn(service, 'logOut');
       service.renewSession();
       tick();
       expect(logOutSpy).toHaveBeenCalled();
+    }));
+  });
+}
+
+function serverAnswers() {
+  describe('the answer to a session renewal', () => {
+    let http: HttpTestingController;
+    let navigateSpy: jasmine.Spy;
+
+    beforeEach(() => {
+      spyOn(configService, 'getConfigParam').and.returnValue('/api/session/renew');
+      spyOn(configService, 'getSessionLogOutURL').and.returnValue('/api/logout');
+      http = TestBed.inject(HttpTestingController);
+      navigateSpy = jasmine.createSpy('navigateTo');
+      (service as any).navigateTo = navigateSpy;
+    });
+
+    it('should sign out when the session has ended', fakeAsync(() => {
+      const logOutSpy = spyOn(service, 'logOut');
+      service.renewSession();
+      http.expectOne('/api/session/renew').flush('false');
+      tick();
+      expect(logOutSpy).toHaveBeenCalled();
+    }));
+
+    it('should sign out to the sign-in page when sign-in has been disabled', fakeAsync(() => {
+      service.renewSession();
+      http.expectOne('/api/session/renew').flush('requestLogout');
+      tick();
+      http.expectOne('/api/logout').flush({});
+      expect(navigateSpy).toHaveBeenCalledWith('/login?loginDisabled=true');
+    }));
+
+    it('should keep the user signed in when the answer is empty', fakeAsync(() => {
+      const logOutSpy = spyOn(service, 'logOut');
+      service.renewSession();
+      http.expectOne('/api/session/renew').flush('');
+      tick();
+      expect(logOutSpy).not.toHaveBeenCalled();
+      http.verify();
+    }));
+  });
+}
+
+function leaveClosedSite() {
+  describe('when sign-in has been closed', () => {
+    let navigateSpy: jasmine.Spy;
+    let logOutRequest: jasmine.Spy;
+
+    beforeEach(() => {
+      spyOn(service, 'checkSession').and.returnValue(of('closed'));
+      spyOn(configService, 'getSessionLogOutURL').and.returnValue('/api/logout');
+      logOutRequest = spyOn(TestBed.inject(HttpClient), 'get').and.returnValue(of({}));
+      navigateSpy = spyOn<any>(service, 'navigateTo');
+    });
+
+    it('should save unsaved work before signing out', fakeAsync(() => {
+      let finishSave: () => void;
+      service.registerExitSaver(() => new Promise<void>((resolve) => (finishSave = resolve)));
+      service.renewSession();
+      tick();
+      expect(logOutRequest).not.toHaveBeenCalled();
+      finishSave();
+      tick();
+      expect(logOutRequest).toHaveBeenCalledWith('/api/logout');
+      expect(navigateSpy).toHaveBeenCalledWith('/login?loginDisabled=true');
+    }));
+
+    it('should sign out anyway when a save never answers', fakeAsync(() => {
+      service.registerExitSaver(() => new Promise<void>(() => {}));
+      service.renewSession();
+      tick(9999);
+      expect(navigateSpy).not.toHaveBeenCalled();
+      tick(1);
+      expect(navigateSpy).toHaveBeenCalledWith('/login?loginDisabled=true');
+    }));
+
+    it('should not save work whose component has gone', fakeAsync(() => {
+      const save = jasmine.createSpy('save').and.returnValue(Promise.resolve());
+      const unregister = service.registerExitSaver(save);
+      unregister();
+      service.renewSession();
+      tick();
+      expect(save).not.toHaveBeenCalled();
+      expect(navigateSpy).toHaveBeenCalledWith('/login?loginDisabled=true');
+    }));
+
+    it('should sign out even when a save throws before it starts', fakeAsync(() => {
+      service.registerExitSaver(() => {
+        throw new TypeError('no node status');
+      });
+      service.renewSession();
+      tick();
+      expect(navigateSpy).toHaveBeenCalledWith('/login?loginDisabled=true');
+    }));
+
+    it('should try again at the next renewal when signing out fails', fakeAsync(() => {
+      logOutRequest.and.returnValues(
+        throwError(() => new Error('network')),
+        of({})
+      );
+      service.renewSession();
+      tick();
+      expect(navigateSpy).not.toHaveBeenCalled();
+      service.renewSession();
+      tick();
+      expect(navigateSpy).toHaveBeenCalledWith('/login?loginDisabled=true');
+    }));
+
+    it('should leave an idle session the same way', fakeAsync(() => {
+      spyOn(service, 'isInactiveLongEnoughToForceLogout').and.returnValue(true);
+      const forceLogOutSpy = spyOn(service, 'forceLogOut');
+      service.checkForLogout();
+      tick();
+      expect(forceLogOutSpy).not.toHaveBeenCalled();
+      expect(navigateSpy).toHaveBeenCalledWith('/login?loginDisabled=true');
     }));
   });
 }
