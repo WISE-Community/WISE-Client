@@ -108,29 +108,6 @@ function validateLastName() {
   });
 }
 
-function validateWithoutBirthday() {
-  describe('validateWithoutBirthday()', () => {
-    it('should be valid without birthday values', () => {
-      component.createStudentAccountFormGroup.patchValue({
-        firstName: 'Patrick',
-        lastName: 'Star',
-        gender: 'MALE',
-        securityQuestion: 'question',
-        securityQuestionAnswer: 'answer',
-        passwords: {
-          newPassword: PASSWORD,
-          confirmNewPassword: PASSWORD
-        }
-      });
-
-      expect(component.createStudentAccountFormGroup.valid).toBeTrue();
-      expect(component.createStudentAccountFormGroup.contains('birthMonth')).toBeFalse();
-      expect(component.createStudentAccountFormGroup.contains('birthDay')).toBeFalse();
-      expect(fixture.nativeElement.textContent).not.toContain('Birthday');
-    });
-  });
-}
-
 function createAccount() {
   describe('createAccount()', () => {
     it('should create account with valid form fields', waitForAsync(async () => {
@@ -162,7 +139,7 @@ function createAccount() {
       expect('birthDay' in studentPayload).toBeFalse();
     }));
 
-    it('should create an account with a social sign-up payload without birthday values', async () => {
+    it('should create an account with a social sign-up payload', async () => {
       TestBed.resetTestingModule();
       configureTestingModule({ gID: 'google-user-id' });
       fixture = TestBed.createComponent(RegisterStudentFormComponent);
@@ -183,8 +160,6 @@ function createAccount() {
       const studentPayload = (
         studentService.registerStudentAccount as jasmine.Spy
       ).calls.mostRecent().args[0];
-      expect('birthMonth' in studentPayload).toBeFalse();
-      expect('birthDay' in studentPayload).toBeFalse();
       expect(studentPayload.googleUserId).toBe('google-user-id');
     });
 

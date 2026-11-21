@@ -6,10 +6,17 @@ export type IdeaData = {
   count: number;
   tags?: string[];
   color?: string;
+  sampleResponses?: string[];
 };
 
 export function cRaterIdeaToIdeaData(cRaterIdea: CRaterIdea): IdeaData {
-  return { id: cRaterIdea.name, text: cRaterIdea.text, count: 0, tags: cRaterIdea.tags };
+  return {
+    id: cRaterIdea.name,
+    text: cRaterIdea.text,
+    count: 0,
+    tags: cRaterIdea.tags,
+    sampleResponses: cRaterIdea.sampleResponses
+  };
 }
 
 export function sortIdeasByCount(ideas: IdeaData[], sortOrder: 'asc' | 'desc'): IdeaData[] {

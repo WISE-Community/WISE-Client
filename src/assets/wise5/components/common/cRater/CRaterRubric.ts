@@ -3,6 +3,7 @@ import { CRaterIdea } from './CRaterIdea';
 
 export class CRaterRubric {
   description: string = '';
+  hasSampleResponses: boolean = false;
   ideas: CRaterIdea[] = [];
   ideasSummaryGroups?: any;
   ideaColors?: { tags: string[]; colorValue: string }[];
@@ -12,6 +13,10 @@ export class CRaterRubric {
     this.ideas = rubric.ideas;
     this.ideasSummaryGroups = rubric.ideasSummaryGroups ?? DEFAULT_IDEAS_SUMMARY_GROUPS;
     this.ideaColors = rubric.ideaColors;
+    this.hasSampleResponses =
+      this.ideas?.some((idea) =>
+        idea.sampleResponses?.some((response) => response.trim() !== '')
+      ) ?? false;
   }
 
   getIdea(ideaId: string): CRaterIdea {

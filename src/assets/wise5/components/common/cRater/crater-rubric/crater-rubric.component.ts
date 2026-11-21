@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class CRaterRubricComponent {
   protected ideas: CRaterIdea[];
+  protected showSampleResponses: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) protected rubric: CRaterRubric,
@@ -25,7 +26,14 @@ export class CRaterRubricComponent {
   ngOnInit(): void {
     this.ideas = sortIdeasById(this.rubric.ideas.map(cRaterIdeaToIdeaData)).map(
       (idea: IdeaData) =>
-        new CRaterIdea(idea.id, undefined, idea.text, idea.tags, this.rubric.getIdeaColor(idea.id))
+        new CRaterIdea(
+          idea.id,
+          undefined,
+          idea.text,
+          idea.tags,
+          this.rubric.getIdeaColor(idea.id),
+          idea.sampleResponses?.filter((response) => response.trim() !== '')
+        )
     );
     this.rubricEventService.toggleRubricDisplayed();
   }
@@ -36,5 +44,9 @@ export class CRaterRubricComponent {
 
   protected closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  protected toggleSampleResponses(): void {
+    this.showSampleResponses = !this.showSampleResponses;
   }
 }
