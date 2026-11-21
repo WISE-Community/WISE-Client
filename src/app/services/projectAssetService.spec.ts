@@ -3,7 +3,14 @@ import { ConfigService } from '../../assets/wise5/services/configService';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProjectAssetService } from './projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpResponse,
+  provideHttpClient,
+  withInterceptorsFromDi
+} from '@angular/common/http';
+import { of, throwError } from 'rxjs';
 let service: ProjectAssetService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -178,6 +185,54 @@ function retrieveTextFilesAndCalculateUsedFiles() {
       allUsedTextContent
     );
   }));
+  it('should search a text file whose name the browser percent-encodes', () => {
+    serveTextFiles({ '模型 (1).html': '<img src="sprite.png">' });
+    expectUsedFlags('{"src":"模型 (1).html"}', {
+      '模型 (1).html': true,
+      'sprite.png': true,
+      'unused.png': false
+    });
+  });
+  it('should fetch a text file whose name contains #', () => {
+    serveTextFiles({ 'lesson#2.html': '<img src="sprite.png">' });
+    expectUsedFlags('{"src":"lesson#2.html"}', { 'lesson#2.html': true, 'sprite.png': true });
+  });
+  it('should mark no asset as not used when a text file cannot be fetched', () => {
+    serveTextFiles({ 'model.html': '<img src="a.png">' });
+    expectUsedFlags('{"src":"model.html"}', {
+      'model.html': true,
+      'gone.html': true,
+      'a.png': true,
+      'unused.png': true
+    });
+    expect(service.getTotalUnusedFileSize().getValue()).toEqual(0);
+  });
+}
+
+// Stands in for the browser and server: the request path is decoded to find the file, and the
+// response URL is the serialized, percent-encoded form the browser reports.
+function serveTextFiles(files: { [fileName: string]: string }) {
+  spyOn(TestBed.inject(HttpClient), 'get').and.callFake(((url: string) => {
+    const resolved = new URL(url, 'http://localhost/');
+    const path = resolved.pathname;
+    const fileName = decodeURIComponent(path.substring(path.lastIndexOf('/') + 1));
+    return fileName in files
+      ? of(new HttpResponse({ body: files[fileName], url: resolved.href }))
+      : throwError(() => new HttpErrorResponse({ status: 404, url: resolved.href }));
+  }) as any);
+}
+
+function expectUsedFlags(usedTextContent: string, expected: { [fileName: string]: boolean }) {
+  const fileNames = Object.keys(expected);
+  const assets = {
+    files: fileNames.map((fileName) => ({ fileName, fileSize: 1 })),
+    totalFileSize: 0
+  };
+  const textFileNames = fileNames.filter((fileName) => /\.(html?|js)$/.test(fileName));
+  service.retrieveTextFilesAndCalculateUsedFiles(assets, usedTextContent, textFileNames);
+  expect(Object.fromEntries(assets.files.map((file: any) => [file.fileName, file.used]))).toEqual(
+    expected
+  );
 }
 
 function getAllUsedTextContent() {
