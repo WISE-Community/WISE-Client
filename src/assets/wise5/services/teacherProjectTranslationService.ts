@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './configService';
 import { toObservable } from '@angular/core/rxjs-interop';
 
+export type TranslationContentType = 'html' | 'text';
+
 @Injectable()
 export class TeacherProjectTranslationService extends ProjectTranslationService {
   private currentTranslationsSignal: WritableSignal<Translations> = signal({});
@@ -52,33 +54,18 @@ export class TeacherProjectTranslationService extends ProjectTranslationService 
   getTranslationSuggestion(
     defaultLanguage: string,
     currentLanguage: string,
-    defaultLanguageText: string
+    defaultLanguageText: string,
+    contentType: TranslationContentType
   ): Observable<string> {
-    return this.http
-      .post(
-        `/api/author/project/translate/suggest`,
-        {
-          srcLang: defaultLanguage,
-          targetLang: currentLanguage,
-          srcText: this.addDoNotTranslateTags(defaultLanguageText)
-        },
-        { responseType: 'text' }
-      )
-      .pipe(map(this.removeDoNotTranslateTags));
-  }
-
-  private addDoNotTranslateTags(textToTranslate: string): string {
-    return textToTranslate
-      .replaceAll(/<.*?>/g, (match) => '<span translate="no">' + match + '</span>')
-      .replaceAll(
-        /link-text='.*?'/g,
-        (match) => match.slice(0, 11) + '</span>' + match.slice(11, -1) + '<span translate="no">\''
-      );
-  }
-
-  private removeDoNotTranslateTags(translatedText: string): string {
-    return translatedText.replaceAll(/<span translate="no"><.*?><\/span>/g, (match) =>
-      match.slice(21, -7)
+    return this.http.post(
+      `/api/author/project/translate/suggest`,
+      {
+        srcLang: defaultLanguage,
+        targetLang: currentLanguage,
+        srcText: defaultLanguageText,
+        contentType
+      },
+      { responseType: 'text' }
     );
   }
 }

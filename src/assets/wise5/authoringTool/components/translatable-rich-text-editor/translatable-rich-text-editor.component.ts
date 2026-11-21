@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './translatable-rich-text-editor.component.html'
 })
 export class TranslatableRichTextEditorComponent extends AbstractTranslatableFieldComponent {
+  protected readonly translationContentType = 'html';
   protected html: string = '';
   @ViewChild(MatTabGroup) private tabs: MatTabGroup;
 

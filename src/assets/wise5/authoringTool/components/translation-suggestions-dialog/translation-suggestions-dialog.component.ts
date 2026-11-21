@@ -4,12 +4,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
-import { TeacherProjectTranslationService } from '../../../services/teacherProjectTranslationService';
+import {
+  TeacherProjectTranslationService,
+  TranslationContentType
+} from '../../../services/teacherProjectTranslationService';
 
 interface TranslationSuggestionsDialogData {
   defaultLanguage: string;
   currentLanguage: string;
   defaultLanguageContent: string;
+  contentType: TranslationContentType;
   currentLanguageContent?: string;
 }
 
@@ -39,7 +43,8 @@ export class TranslationSuggestionsDialogComponent {
       .getTranslationSuggestion(
         this.data.defaultLanguage,
         this.data.currentLanguage,
-        this.data.defaultLanguageContent
+        this.data.defaultLanguageContent,
+        this.data.contentType
       )
       .subscribe({
         next: (suggestedTranslation) => (this.translation = suggestedTranslation),
