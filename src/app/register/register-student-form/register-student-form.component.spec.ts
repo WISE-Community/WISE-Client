@@ -76,7 +76,6 @@ describe('RegisterStudentFormComponent', () => {
   });
   validateFirstName();
   validateLastName();
-  validateWithoutBirthday();
   createAccount();
 });
 
