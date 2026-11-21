@@ -19794,7 +19794,7 @@ Are you ready to receive feedback on this answer?</source>
           <context context-type="sourcefile">src/assets/wise5/components/common/feedbackRule/feedback-rule-help/feedback-rule-help.component.html</context>
           <context context-type="linenumber">16,17</context>
         </context-group>
-        <target state="final"><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Expresiones<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> están hechas de términos, operadores y paréntesis:</target>
+        <target state="final"><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Las expresiones<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> están compuestas de términos, operadores y paréntesis:</target>
       </trans-unit>
       <trans-unit id="2544569632476723854" datatype="html" approved="yes">
         <source>Terms</source>
@@ -20598,7 +20598,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/dialogGuidance/DialogGuidanceInfo.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="final">Diálogo</target>
+        <target state="final">Diálogo con IA</target>
       </trans-unit>
       <trans-unit id="8279275402849122525" datatype="html" approved="yes">
         <source>Ideas detected:</source>
@@ -22580,7 +22580,7 @@ Nombre de la categoría: <x id="PH_1" equiv-text="categoryName"/></target>
           <context context-type="sourcefile">src/assets/wise5/components/graph/graph-authoring/graph-authoring.component.html</context>
           <context context-type="linenumber">372,377</context>
         </context-group>
-        <target state="final"> Si los estudiantes pueden ocultar las series cliqueando en la leyenda </target>
+        <target state="final"> Permitir que los estudiantes oculten las series de datos cliqueando en la leyenda </target>
       </trans-unit>
       <trans-unit id="2702227795121551467" datatype="html" approved="yes">
         <source> Enable File Upload </source>
@@ -24620,7 +24620,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/peerChat/PeerChatInfo.ts</context>
           <context context-type="linenumber">4</context>
         </context-group>
-        <target state="final">Los estudiantes están agrupados con otros estudiantes para discutir un tema.</target>
+        <target state="final">Los estudiantes se agrupan con otros estudiantes para discutir un tema.</target>
       </trans-unit>
       <trans-unit id="6310961320545154131" datatype="html" approved="yes">
         <source>Peer Chat</source>
@@ -24776,7 +24776,7 @@ Si este problema continúa, informale a tu docente y continuá con la siguiente 
           <context context-type="sourcefile">src/assets/wise5/components/showGroupWork/ShowGroupWorkInfo.ts</context>
           <context context-type="linenumber">9</context>
         </context-group>
-        <target state="final">Mostrar grupo de trabajo</target>
+        <target state="final">Mostrar el trabajo de los demás grupos</target>
       </trans-unit>
       <trans-unit id="2841866601837436247" datatype="html" approved="yes">
         <source>Show Work Step</source>
