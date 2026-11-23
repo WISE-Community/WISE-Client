@@ -236,7 +236,7 @@
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">215,220</context>
         </context-group>
-        <target state="needs-translation"> Individual students differ in their experiences, interests, and abilities. WISE provides a variety of tools, activity patterns, and instructional scaffolds that afford multiple ways for expressing and assessing understanding. That way, no students' abilities go unrecognized, and all have the chance to succeed. </target>
+        <target state="translated"> 個々の学生は自分の経験、興味、能力によって異なります。 WISE はさまざまなツール、アクティビティパターン、および理解を表現し評価するための複数のツールを提供します。 そのようにして、学生の能力が認識され、成功する機会を作ります。 </target>
       </trans-unit>
       <trans-unit id="4325716354146500231" datatype="html">
         <source>Accessible to All</source>
