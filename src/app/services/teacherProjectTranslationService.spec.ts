@@ -49,17 +49,35 @@ describe('TeacherProjectTranslationService', () => {
     });
   });
   describe('getTranslationSuggestion()', () => {
-    it('makes a POST request to backend with do not translate tags', () => {
+    it('sends HTML unchanged and returns the suggested HTML unchanged', () => {
+      const sourceText = '<p><wiselink link-text="Read this">Read this</wiselink></p>';
+      const suggestedTranslation = '<p>Translated <strong>text</strong></p>';
+      let translation: string;
       service
-        .getTranslationSuggestion('srcLang', 'targetLang', '<span>srcText</span> untagged')
-        .subscribe();
+        .getTranslationSuggestion('srcLang', 'targetLang', sourceText, 'html')
+        .subscribe((result) => (translation = result));
       const request = http.expectOne(`/api/author/project/translate/suggest`);
       expect(request.request.method).toEqual('POST');
       expect(request.request.body).toEqual({
         srcLang: 'srcLang',
         targetLang: 'targetLang',
-        srcText:
-          '<span translate="no"><span></span>srcText<span translate="no"></span></span> untagged'
+        srcText: sourceText,
+        contentType: 'html'
+      });
+      request.flush(suggestedTranslation);
+      expect(translation).toEqual(suggestedTranslation);
+    });
+
+    it('sends plain text unchanged', () => {
+      const sourceText = 'Plain text with <characters> & symbols';
+      service.getTranslationSuggestion('srcLang', 'targetLang', sourceText, 'text').subscribe();
+      const request = http.expectOne(`/api/author/project/translate/suggest`);
+      expect(request.request.method).toEqual('POST');
+      expect(request.request.body).toEqual({
+        srcLang: 'srcLang',
+        targetLang: 'targetLang',
+        srcText: sourceText,
+        contentType: 'text'
       });
     });
   });

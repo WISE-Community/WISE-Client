@@ -8,28 +8,67 @@ import { of } from 'rxjs';
 describe('TranslationSuggestionsDialogComponent', () => {
   let component: TranslationSuggestionsDialogComponent;
   let fixture: ComponentFixture<TranslationSuggestionsDialogComponent>;
+  let data: {
+    defaultLanguage: string;
+    currentLanguage: string;
+    defaultLanguageContent: string;
+    currentLanguageContent: string;
+    contentType: string;
+  };
+  let getTranslationSuggestion: jasmine.Spy;
 
   beforeEach(async () => {
+    data = {
+      defaultLanguage: 'English',
+      currentLanguage: 'Spanish',
+      defaultLanguageContent: 'source text',
+      currentLanguageContent: '',
+      contentType: 'text'
+    };
     await TestBed.configureTestingModule({
       imports: [TranslationSuggestionsDialogComponent],
       providers: [
         MockProvider(TeacherProjectTranslationService),
-        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: data },
         { provide: MatDialogRef, useValue: {} }
       ]
     }).compileComponents();
 
-    spyOn(
+    getTranslationSuggestion = spyOn(
       TestBed.inject(TeacherProjectTranslationService),
       'getTranslationSuggestion'
     ).and.returnValue(of('Example translated text'));
+  });
 
+  function createComponent(): void {
     fixture = TestBed.createComponent(TranslationSuggestionsDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }
 
   it('should create', () => {
+    createComponent();
     expect(component).toBeTruthy();
+  });
+
+  it('passes the plain text content type to the translation service', () => {
+    createComponent();
+    expect(getTranslationSuggestion).toHaveBeenCalledWith(
+      'English',
+      'Spanish',
+      'source text',
+      'text'
+    );
+  });
+
+  it('passes the HTML content type to the translation service', () => {
+    data.contentType = 'html';
+    createComponent();
+    expect(getTranslationSuggestion).toHaveBeenCalledWith(
+      'English',
+      'Spanish',
+      'source text',
+      'html'
+    );
   });
 });
