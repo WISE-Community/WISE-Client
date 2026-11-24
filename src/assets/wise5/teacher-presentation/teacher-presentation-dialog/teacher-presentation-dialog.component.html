@@ -33,18 +33,20 @@
             <mat-option value="show" i18n>Show</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="fill" subscriptSizing="dynamic">
-          <mat-label i18n>Activity Question</mat-label>
-          <mat-select
-            [ngModel]="componentPromptDisplay"
-            (ngModelChange)="onComponentPromptDisplayChange($event)"
-            aria-label="Activity Question Display"
-            i18n-aria-label
-          >
-            <mat-option value="show" i18n>Show</mat-option>
-            <mat-option value="hide" i18n>Hide</mat-option>
-          </mat-select>
-        </mat-form-field>
+        @if (componentPrompt) {
+          <mat-form-field appearance="fill" subscriptSizing="dynamic">
+            <mat-label i18n>Activity Question</mat-label>
+            <mat-select
+              [ngModel]="componentPromptDisplay"
+              (ngModelChange)="onComponentPromptDisplayChange($event)"
+              aria-label="Activity Question Display"
+              i18n-aria-label
+            >
+              <mat-option value="show" i18n>Show</mat-option>
+              <mat-option value="hide" i18n>Hide</mat-option>
+            </mat-select>
+          </mat-form-field>
+        }
       }
     </div>
     <div class="shrink-0 flex items-center gap-2">
