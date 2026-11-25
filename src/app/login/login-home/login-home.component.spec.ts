@@ -77,6 +77,31 @@ function loginWithRecaptchaDisabled() {
     });
     incorrectPassword();
     correctPassword();
+    loginDisabled();
+  });
+}
+
+function loginDisabled() {
+  describe('sign-in is disabled on the site', () => {
+    it('should show the sign-in disabled message instead of the password error', fakeAsync(() => {
+      spyOn(http, 'post').and.returnValue(of('{"status":"error","isLoginDisabled":true}'));
+      spyOn(http, 'get').and.returnValue(of(null));
+      component.login();
+      tickAndDetectChanges();
+      const messages = fixture.debugElement
+        .queryAll(By.css('p.warn'))
+        .map((element) => element.nativeElement.textContent.trim());
+      expect(messages).toEqual(['Signing in is disabled right now. Please try again later.']);
+    }));
+
+    it('should show the sign-in disabled message when opened with loginDisabled', fakeAsync(() => {
+      router.navigateByUrl('/?loginDisabled=true');
+      tickAndDetectChanges();
+      const messages = fixture.debugElement
+        .queryAll(By.css('p.warn'))
+        .map((element) => element.nativeElement.textContent.trim());
+      expect(messages).toEqual(['Signing in is disabled right now. Please try again later.']);
+    }));
   });
 }
 
