@@ -106,21 +106,18 @@ export class ClassResponse {
     return this.configService.convertToClientTimestamp(time);
   }
 
-  protected replyEntered($event: any): void {
-    if (this.isEnterKeyEvent($event)) {
-      $event.preventDefault();
-      this.response.replyText = this.removeLastChar(this.response.replyText);
-      this.expandAndShowAllReplies();
-      this.submitButtonClicked.emit(this.response);
+  protected replyEntered(event: KeyboardEvent): void {
+    if (this.isEnterKeyEvent(event)) {
+      event.preventDefault();
+      if (this.response.replyText) {
+        this.expandAndShowAllReplies();
+        this.submitButtonClicked.emit(this.response);
+      }
     }
   }
 
-  protected isEnterKeyEvent(event: any): boolean {
-    return event.keyCode == 13 && !event.shiftKey && this.response.replyText;
-  }
-
-  private removeLastChar(responseText: string): string {
-    return responseText.substring(0, responseText.length - 1);
+  protected isEnterKeyEvent(event: KeyboardEvent): boolean {
+    return event.key === 'Enter' && !event.shiftKey && !event.isComposing && event.keyCode !== 229;
   }
 
   protected toggleExpanded(): void {
