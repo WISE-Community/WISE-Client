@@ -4,6 +4,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { ProjectAssetService } from './projectAssetService';
 import { StudentTeacherCommonServicesModule } from '../student-teacher-common-services.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ProjectService } from '../../assets/wise5/services/projectService';
 let service: ProjectAssetService;
 let configService: ConfigService;
 let http: HttpTestingController;
@@ -122,6 +123,32 @@ function calculateAssetUsage() {
     service.calculateAssetUsage(assets);
     expect(service.retrieveTextFilesAndCalculateUsedFiles).toHaveBeenCalled();
   }));
+  it('should count a file referenced with spaces written as %20 as used', () => {
+    expectUsedFlags('<a href="doc%20(2).pdf">doc</a>', {
+      'doc (2).pdf': true,
+      'doc (3).pdf': false
+    });
+  });
+  it('should count files referenced as percent-encoded URLs as used', () => {
+    expectUsedFlags('<a href="%E8%AC%9B%E7%BE%A9%201.pdf">a</a><a href="q%26a%20%231.pdf">b</a>', {
+      '講義 1.pdf': true,
+      'q&a #1.pdf': true
+    });
+  });
+  it('should count files referenced with HTML entities as used', () => {
+    expectUsedFlags(
+      '<a href="Q&amp;A.pdf">a</a><img src="caf&eacute;.png"><a href="r&eacute;sum&eacute;%201.pdf">b</a>',
+      { 'Q&A.pdf': true, 'café.png': true, 'résumé 1.pdf': true }
+    );
+  });
+  it('should still count literal references and leave unreferenced files unused', () => {
+    expectUsedFlags('<img src="raw (3).png"><img src="細胞.png"><img src="100%.png">%E8%zz', {
+      'raw (3).png': true,
+      '細胞.png': true,
+      '100%.png': true,
+      'unused.png': false
+    });
+  });
   it('should calculate asset usage with usedTextContent containing project_thumb.png', () => {
     spyOn(service, 'calculateUsedFiles');
     service.calculateAssetUsage(spongeBobAndPatrickAssets);
@@ -152,6 +179,21 @@ function calculateUsedFiles() {
     expect(service.getTotalFileSize().getValue()).toEqual(3000);
     expect(service.getTotalUnusedFileSize().getValue()).toEqual(0);
   });
+}
+
+function expectUsedFlags(html: string, expected: { [fileName: string]: boolean }) {
+  TestBed.inject(ProjectService).project = { html };
+  const assets = {
+    files: Object.keys(expected).map((fileName) => ({ fileName, fileSize: 1 })),
+    totalFileSize: Object.keys(expected).length
+  };
+  service.calculateAssetUsage(assets);
+  expect(Object.fromEntries(assets.files.map((file: any) => [file.fileName, file.used]))).toEqual(
+    expected
+  );
+  expect(service.getTotalUnusedFileSize().getValue()).toEqual(
+    Object.values(expected).filter((used) => !used).length
+  );
 }
 
 function retrieveTextFilesAndCalculateUsedFiles() {
