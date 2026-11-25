@@ -1,4 +1,4 @@
-import { TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { TestBed, tick, fakeAsync, discardPeriodicTasks } from '@angular/core/testing';
 import { SessionService } from '../../assets/wise5/services/sessionService';
 import { ConfigService } from '../../assets/wise5/services/configService';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -52,12 +52,48 @@ function calculateIntervals() {
 
 function initializeSession() {
   describe('initializeSession()', () => {
-    it('should start check mouse event if not in preview mode', () => {
-      spyOn(configService, 'isPreview').and.returnValue(false);
+    it('should start check mouse event when the session has a timeout', () => {
+      spyOn(configService, 'getConfigParam').and.returnValue(1800);
       const startCheckMouseEventSpy = spyOn(service, 'startCheckMouseEvent');
       service.initializeSession();
       expect(startCheckMouseEventSpy).toHaveBeenCalled();
     });
+
+    it('does not start the check timer when the session never expires', () => {
+      spyOn(configService, 'getConfigParam').and.returnValue(-1);
+      const startCheckMouseEventSpy = spyOn(service, 'startCheckMouseEvent');
+      service.initializeSession();
+      expect(startCheckMouseEventSpy).not.toHaveBeenCalled();
+    });
+
+    it('keeps a single check timer when called more than once', fakeAsync(() => {
+      spyOn(configService, 'getConfigParam').and.returnValue(1800);
+      const checkMouseEventSpy = spyOn(service, 'checkMouseEvent');
+      service.initializeSession();
+      service.initializeSession();
+      tick(60000);
+      expect(checkMouseEventSpy).toHaveBeenCalledTimes(1);
+      discardPeriodicTasks();
+    }));
+
+    it('clears a warning left over from an earlier session', () => {
+      spyOn(configService, 'getConfigParam').and.returnValue(1800);
+      spyOn(service, 'startCheckMouseEvent');
+      service.showWarning();
+      service.initializeSession();
+      expect(service.isShowingWarning()).toBeFalse();
+    });
+  });
+
+  describe('stopCheckMouseEvent()', () => {
+    it('stops the check timer', fakeAsync(() => {
+      spyOn(configService, 'getConfigParam').and.returnValue(1800);
+      const checkMouseEventSpy = spyOn(service, 'checkMouseEvent');
+      service.initializeSession();
+      service.stopCheckMouseEvent();
+      tick(120000);
+      expect(checkMouseEventSpy).not.toHaveBeenCalled();
+    }));
   });
 }
 
@@ -108,6 +144,14 @@ function checkForLogout() {
       expect(forceLogOutSpy).not.toHaveBeenCalled();
     });
 
+    it('should not force logout when the server sends an empty answer', () => {
+      spyOn(service, 'isInactiveLongEnoughToForceLogout').and.returnValue(true);
+      spyOn(service, 'checkIfSessionIsActive').and.returnValue(of(null));
+      const forceLogOutSpy = spyOn(service, 'forceLogOut');
+      service.checkForLogout();
+      expect(forceLogOutSpy).not.toHaveBeenCalled();
+    });
+
     it('should show warning when user is inactive for long enough to warn and warning is not showing', () => {
       spyOn(service, 'isInactiveLongEnoughToForceLogout').and.returnValue(false);
       spyOn(service, 'isInactiveLongEnoughToWarn').and.returnValue(true);
@@ -135,6 +179,14 @@ function renewSession() {
       service.renewSession();
       tick();
       expect(logOutSpy).toHaveBeenCalled();
+    }));
+
+    it('keeps the user logged in when the server sends an empty answer', fakeAsync(() => {
+      spyOn(service, 'checkIfSessionIsActive').and.returnValue(of(null));
+      const logOutSpy = spyOn(service, 'logOut');
+      service.renewSession();
+      tick();
+      expect(logOutSpy).not.toHaveBeenCalled();
     }));
   });
 }
