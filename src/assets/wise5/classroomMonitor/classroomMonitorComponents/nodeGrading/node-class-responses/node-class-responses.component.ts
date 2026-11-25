@@ -16,7 +16,8 @@ import { ConfigService } from '../../../../services/configService';
 import { TeacherDataService } from '../../../../services/teacherDataService';
 import { NotificationService } from '../../../../services/notificationService';
 import { TeacherProjectService } from '../../../../services/teacherProjectService';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
+import { copy } from '../../../../common/object/object';
 
 @Component({
   imports: [
@@ -59,6 +60,56 @@ export class NodeClassResponsesComponent extends AbstractClassResponsesComponent
 
   ngOnInit(): void {
     this.subscriptions.add(this.projectService.projectSaved$.subscribe(() => this.setMaxScore()));
+    this.subscriptions.add(
+      this.dataService.studentWorkReceived$
+        .pipe(filter(({ studentWork }) => studentWork.nodeId === this.node?.id))
+        .subscribe(({ studentWork }) => this.refreshWorkgroup(studentWork.workgroupId))
+    );
+    this.subscriptions.add(
+      this.classroomStatusService.studentStatusReceived$.subscribe(({ studentStatus }) =>
+        this.refreshWorkgroup(studentStatus.workgroupId)
+      )
+    );
+    // A team can post its first status before the reloaded config lists it.
+    this.subscriptions.add(
+      this.configService.configRetrieved$.subscribe(() => this.addMissingWorkgroups())
+    );
+  }
+
+  private addMissingWorkgroups(): void {
+    for (const workgroup of this.configService.getClassmateUserInfos()) {
+      if (workgroup.workgroupId != null && this.workgroupsById[workgroup.workgroupId] == null) {
+        this.refreshWorkgroup(workgroup.workgroupId);
+      }
+    }
+  }
+
+  // A new object, because the row only recalculates when its input reference changes.
+  private refreshWorkgroup(workgroupId: number): void {
+    if (this.node == null || !this.studentDataLoaded) {
+      return;
+    }
+    const existing = this.workgroupsById[workgroupId];
+    const source =
+      existing ??
+      this.configService
+        .getClassmateUserInfos()
+        .find((workgroup) => workgroup.workgroupId === workgroupId);
+    if (source == null || !this.classroomStatusService.hasStudentStatus(workgroupId)) {
+      return;
+    }
+    const workgroup = copy(source);
+    this.updateWorkgroup(workgroup);
+    this.workgroupsById[workgroupId] = workgroup;
+    if (existing == null) {
+      this.workgroups = [...this.workgroups, workgroup];
+      this.sortedWorkgroups = [...this.sortedWorkgroups, workgroup];
+    } else {
+      this.workgroups = this.workgroups.map((w) => (w.workgroupId === workgroupId ? workgroup : w));
+      this.sortedWorkgroups = this.sortedWorkgroups.map((w) =>
+        w.workgroupId === workgroupId ? workgroup : w
+      );
+    }
   }
 
   ngOnChanges(): void {
@@ -96,10 +147,24 @@ export class NodeClassResponsesComponent extends AbstractClassResponsesComponent
   }
 
   protected isCompleted(workgroupId: number, nodeStatus: any): boolean {
-    return this.components.every((component) => this.isComponentCompleted(workgroupId, component));
+    return this.components.every((component) =>
+      this.isComponentCompleted(workgroupId, component, nodeStatus)
+    );
   }
 
-  private isComponentCompleted(workgroupId: number, component: ComponentContent): boolean {
+  private isComponentCompleted(
+    workgroupId: number,
+    component: ComponentContent,
+    nodeStatus: any
+  ): boolean {
+    const componentStatus = nodeStatus?.componentStatuses?.[component.id];
+    if (componentStatus?.isCompleted != null) {
+      return componentStatus.isCompleted || componentStatus.isVisible === false;
+    }
+    if (nodeStatus?.isCompleted === true) {
+      // Statuses posted by older clients have no componentStatuses.
+      return true;
+    }
     const service = this.componentServiceLookupService.getService(component.type);
     const workgroupComponentStates = this.dataService.getComponentStatesByWorkgroupIdAndComponentId(
       workgroupId,

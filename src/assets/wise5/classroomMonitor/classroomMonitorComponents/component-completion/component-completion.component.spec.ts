@@ -7,6 +7,7 @@ import { TeacherDataService } from '../../../services/teacherDataService';
 import { MultipleChoiceService } from '../../../components/multipleChoice/multipleChoiceService';
 import { ComponentCompletionComponent } from './component-completion.component';
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
+import { Subject } from 'rxjs';
 
 import { ComponentInfoService } from '../../../services/componentInfoService';
 
@@ -16,6 +17,7 @@ let workgroupService: WorkgroupService;
 let componentServiceLookupService: ComponentServiceLookupService;
 let teacherDataService: TeacherDataService;
 let classroomStatusService: ClassroomStatusService;
+let studentStatusReceivedSource: Subject<any>;
 describe('ComponentCompletionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,9 +43,64 @@ describe('ComponentCompletionComponent', () => {
     componentServiceLookupService = TestBed.inject(ComponentServiceLookupService);
     teacherDataService = TestBed.inject(TeacherDataService);
     classroomStatusService = TestBed.inject(ClassroomStatusService);
+    studentStatusReceivedSource = new Subject<any>();
+    classroomStatusService.studentStatusReceived$ = studentStatusReceivedSource.asObservable();
   });
   ngOnChanges();
+  studentStatus();
 });
+
+function studentStatus() {
+  describe('the student status says whether the component is completed', () => {
+    let statuses: any;
+    beforeEach(() => {
+      const workgroups = new Map<number, any>();
+      workgroups.set(1, {});
+      workgroups.set(2, {});
+      spyOn(workgroupService, 'getWorkgroupsInPeriod').and.returnValue(workgroups);
+      spyOn(classroomStatusService, 'hasStudentStatus').and.returnValue(true);
+      statuses = { 1: componentStatus(false), 2: componentStatus(false) };
+      spyOn(classroomStatusService, 'getStudentStatusForWorkgroupId').and.callFake(
+        (workgroupId: number) => statuses[workgroupId]
+      );
+      spyOn(teacherDataService, 'getComponentStatesByWorkgroupIdAndComponentId').and.returnValue(
+        []
+      );
+    });
+    it('counts the status even when no work is cached locally', () => {
+      statuses[2] = componentStatus(true);
+      component.ngOnChanges();
+      fixture.detectChanges();
+      expect(fixture.nativeElement.textContent.trim()).toEqual('Responses: 1');
+    });
+    it('updates when a new student status arrives', () => {
+      component.ngOnChanges();
+      fixture.detectChanges();
+      expect(fixture.nativeElement.textContent.trim()).toEqual('Responses: 0');
+      statuses[1] = componentStatus(true);
+      studentStatusReceivedSource.next({ studentStatus: statuses[1] });
+      fixture.detectChanges();
+      expect(fixture.nativeElement.textContent.trim()).toEqual('Responses: 1');
+    });
+    it('leaves out teams the component is hidden from', () => {
+      statuses[1] = componentStatus(true);
+      statuses[2] = componentStatus(false, false);
+      component.ngOnChanges();
+      expect(component['workgroups'].size).toEqual(1);
+      expect(component['completion']).toEqual(100);
+    });
+  });
+}
+
+function componentStatus(isCompleted: boolean, isVisible: boolean = true): any {
+  return {
+    nodeStatuses: {
+      node1: {
+        componentStatuses: { component1: { isCompleted: isCompleted, isVisible: isVisible } }
+      }
+    }
+  };
+}
 
 function ngOnChanges() {
   describe('ngOnChanges()', () => {

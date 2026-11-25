@@ -6,6 +6,7 @@ import { ComponentServiceLookupService } from '../../../services/componentServic
 import { ClassroomStatusService } from '../../../services/classroomStatusService';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Subscription } from 'rxjs';
 
 @Component({
   imports: [MatProgressBarModule, MatTooltipModule],
@@ -18,6 +19,7 @@ export class ComponentCompletionComponent {
   @Input() node: Node;
   protected numWorkgroupsCompleted: number;
   @Input() periodId: number;
+  private subscriptions: Subscription = new Subscription();
   protected workgroups: Map<number, any>;
 
   constructor(
@@ -27,11 +29,27 @@ export class ComponentCompletionComponent {
     private workgroupService: WorkgroupService
   ) {}
 
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.statusService.studentStatusReceived$.subscribe(() => this.calculateCompletion())
+    );
+  }
+
   ngOnChanges(): void {
+    this.calculateCompletion();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  private calculateCompletion(): void {
     if (this.component && this.node) {
       this.workgroups = new Map(
         Array.from(this.workgroupService.getWorkgroupsInPeriod(this.periodId)).filter(
-          ([workgroupId]) => this.statusService.hasStudentStatus(workgroupId)
+          ([workgroupId]) =>
+            this.statusService.hasStudentStatus(workgroupId) &&
+            this.getComponentStatus(workgroupId)?.isVisible !== false
         )
       );
       this.numWorkgroupsCompleted = Array.from(this.workgroups.keys()).filter((workgroupId) =>
@@ -44,7 +62,17 @@ export class ComponentCompletionComponent {
     }
   }
 
+  private getComponentStatus(workgroupId: number): any {
+    return this.statusService.getStudentStatusForWorkgroupId(workgroupId)?.nodeStatuses?.[
+      this.node.id
+    ]?.componentStatuses?.[this.component.id];
+  }
+
   private isCompleted(workgroupId: number): boolean {
+    const componentStatus = this.getComponentStatus(workgroupId);
+    if (componentStatus?.isCompleted != null) {
+      return componentStatus.isCompleted;
+    }
     const service = this.componentServiceLookupService.getService(this.component.type);
     const componentStates = this.dataService.getComponentStatesByWorkgroupIdAndComponentId(
       workgroupId,
