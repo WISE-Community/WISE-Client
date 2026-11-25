@@ -50,8 +50,78 @@ describe('ClassroomStatusService', () => {
     projectService.setProject(copy(project));
   });
   retrieveStudentStatuses();
+  refreshStudentStatuses();
   getNodeCompletion();
 });
+
+function refreshStudentStatuses() {
+  describe('refreshStudentStatuses', () => {
+    const row = (workgroupId: number, nodeId: string) => ({
+      status: JSON.stringify({ workgroupId: workgroupId, currentNodeId: nodeId }),
+      timestamp: 2,
+      workgroupId: workgroupId
+    });
+    let changed: any[];
+    beforeEach(() => {
+      spyOn(configService, 'getRunId').and.returnValue(runId1);
+      spyOn(configService, 'getClassmateUserInfos').and.returnValue([
+        { workgroupId: 1 },
+        { workgroupId: 2 },
+        { workgroupId: 3 }
+      ]);
+      service.studentStatuses = [
+        { workgroupId: 1, currentNodeId: nodeId1, postTimestamp: 1 },
+        { workgroupId: 2, currentNodeId: nodeId1, postTimestamp: 1 },
+        { workgroupId: 4, currentNodeId: nodeId1, postTimestamp: 1 }
+      ];
+      service.refreshStudentStatuses().subscribe((statuses) => (changed = statuses));
+    });
+
+    it('merges newer statuses and returns only those that changed', () => {
+      http
+        .expectOne(`/api/teacher/run/${runId1}/student-status`)
+        .flush([row(1, nodeId1), row(2, nodeId2), row(3, nodeId3), row(99, nodeId1)]);
+      expect(changed.map((s) => s.workgroupId)).toEqual([2, 3]);
+      expect(service.getStudentStatusForWorkgroupId(2).currentNodeId).toEqual(nodeId2);
+      expect(service.getStudentStatusForWorkgroupId(3).currentNodeId).toEqual(nodeId3);
+      expect(service.hasStudentStatus(4)).toBeTrue();
+      expect(service.hasStudentStatus(99)).toBeFalse();
+    });
+
+    it('keeps a status that arrived over the socket during the request', () => {
+      service.setStudentStatus({ workgroupId: 2, currentNodeId: nodeId4 });
+      http.expectOne(`/api/teacher/run/${runId1}/student-status`).flush([row(2, nodeId2)]);
+      expect(changed).toEqual([]);
+      expect(service.getStudentStatusForWorkgroupId(2).currentNodeId).toEqual(nodeId4);
+    });
+
+    it('stops keeping socket statuses once the request has finished', () => {
+      http.expectOne(`/api/teacher/run/${runId1}/student-status`).flush([]);
+      service.setStudentStatus({ workgroupId: 2, currentNodeId: nodeId4 });
+      service.refreshStudentStatuses().subscribe((statuses) => (changed = statuses));
+      http.expectOne(`/api/teacher/run/${runId1}/student-status`).flush([row(2, nodeId2)]);
+      expect(service.getStudentStatusForWorkgroupId(2).currentNodeId).toEqual(nodeId2);
+    });
+
+    it('does not let an older response that returns last overwrite a newer one', () => {
+      service.refreshStudentStatuses().subscribe();
+      const [first, second] = http.match(`/api/teacher/run/${runId1}/student-status`);
+      second.flush([{ ...row(2, nodeId4), timestamp: 3 }]);
+      first.flush([row(2, nodeId2)]);
+      expect(service.getStudentStatusForWorkgroupId(2).currentNodeId).toEqual(nodeId4);
+    });
+
+    it('keeps a status that arrived during an earlier request that was still in flight', () => {
+      service.refreshStudentStatuses().subscribe();
+      service.setStudentStatus({ workgroupId: 2, currentNodeId: nodeId4 });
+      const [first, second] = http.match(`/api/teacher/run/${runId1}/student-status`);
+      first.flush([row(2, nodeId2)]);
+      second.flush([row(2, nodeId2)]);
+      expect(changed).toEqual([]);
+      expect(service.getStudentStatusForWorkgroupId(2).currentNodeId).toEqual(nodeId4);
+    });
+  });
+}
 
 function retrieveStudentStatuses() {
   describe('retrieveStudentStatuses', () => {
