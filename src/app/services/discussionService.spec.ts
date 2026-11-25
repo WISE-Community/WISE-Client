@@ -63,6 +63,7 @@ describe('DiscussionService', () => {
   isStudentWorkHasAttachment();
   isTopLevelComponentStateIdFound();
   isTopLevelPost();
+  setUsernamesAnonymized();
 });
 
 function createComponentStateFromOnlyResponse(response: string, attachments: any[] = []) {
@@ -360,5 +361,80 @@ function checkThatAComponentStateHasStudentWorkWhenStudentOnlyAttachedAFile() {
     };
     const hasStudentWork = service.componentStateHasStudentWork(componentState, componentContent);
     expect(hasStudentWork).toEqual(true);
+  });
+}
+
+function setClassmates(classmates: { workgroupId: number; username: string }[]): void {
+  TestBed.inject(ConfigService).setConfig({
+    canViewStudentNames: true,
+    runId: runId,
+    userInfo: {
+      myUserInfo: {
+        workgroupId: 100,
+        periodId: periodId,
+        myClassInfo: {
+          classmateUserInfos: classmates.map((classmate) => ({ ...classmate, periodId: periodId }))
+        }
+      }
+    }
+  });
+}
+
+function getAnonymousUsername(workgroupId: number): string {
+  const componentState = { workgroupId: workgroupId, periodId: periodId };
+  service.setUsernames(componentState, 100, true);
+  return (componentState as any).usernames;
+}
+
+function setUsernamesAnonymized() {
+  describe('setUsernames with anonymized responses', () => {
+    beforeEach(() => {
+      setClassmates([
+        { workgroupId: 11, username: 'Bob' },
+        { workgroupId: 13, username: 'Dan' }
+      ]);
+    });
+
+    it('should keep a classmate pseudonym after a newcomer joins', () => {
+      const danPseudonym = getAnonymousUsername(13);
+      setClassmates([
+        { workgroupId: 14, username: 'Alice' },
+        { workgroupId: 11, username: 'Bob' },
+        { workgroupId: 13, username: 'Dan' }
+      ]);
+      expect(getAnonymousUsername(13)).toEqual(danPseudonym);
+    });
+
+    it('should keep a classmate pseudonym after a team leaves', () => {
+      const danPseudonym = getAnonymousUsername(13);
+      setClassmates([{ workgroupId: 13, username: 'Dan' }]);
+      expect(getAnonymousUsername(13)).toEqual(danPseudonym);
+    });
+
+    it('should not give an author missing from the roster a classmate pseudonym', () => {
+      const bobPseudonym = getAnonymousUsername(11);
+      const danPseudonym = getAnonymousUsername(13);
+      setClassmates([{ workgroupId: 13, username: 'Dan' }]);
+      const missingAuthorPseudonym = getAnonymousUsername(99);
+      expect(missingAuthorPseudonym).not.toEqual(bobPseudonym);
+      expect(missingAuthorPseudonym).not.toEqual(danPseudonym);
+    });
+
+    it('should give each author missing from the roster its own stable pseudonym', () => {
+      const bobPseudonym = getAnonymousUsername(11);
+      const firstNewcomerPseudonym = getAnonymousUsername(98);
+      const secondNewcomerPseudonym = getAnonymousUsername(99);
+      expect(firstNewcomerPseudonym).not.toEqual(secondNewcomerPseudonym);
+      expect(firstNewcomerPseudonym).not.toEqual(bobPseudonym);
+      setClassmates([
+        { workgroupId: 99, username: 'Aaron' },
+        { workgroupId: 98, username: 'Abby' },
+        { workgroupId: 11, username: 'Bob' },
+        { workgroupId: 13, username: 'Dan' }
+      ]);
+      expect(getAnonymousUsername(98)).toEqual(firstNewcomerPseudonym);
+      expect(getAnonymousUsername(99)).toEqual(secondNewcomerPseudonym);
+      expect(getAnonymousUsername(11)).toEqual(bobPseudonym);
+    });
   });
 }
