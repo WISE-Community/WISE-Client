@@ -80,6 +80,7 @@ export class DiscussionShowWorkComponent extends ComponentShowWorkDirective {
       this.workgroupId,
       isStudentMode
     );
+    this.discussionService.getResponsesMap(classResponses);
     const isGradingMode = true;
     this.topLevelResponses = this.discussionService.getLevel1Responses(
       classResponses,
