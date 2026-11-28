@@ -610,7 +610,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">110,112</context>
+          <context context-type="linenumber">112,114</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/vle/dismiss-ambient-notification-dialog/dismiss-ambient-notification-dialog.component.html</context>
@@ -2668,7 +2668,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">44,48</context>
+          <context context-type="linenumber">49,53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
@@ -3576,7 +3576,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">70,74</context>
+          <context context-type="linenumber">75,79</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/mobile-menu/mobile-menu.component.html</context>
@@ -3740,7 +3740,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">18,21</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/student/account/edit-profile/edit-profile.component.html</context>
@@ -3980,7 +3980,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">31,34</context>
+          <context context-type="linenumber">36,39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-user-form/register-user-form.component.ts</context>
@@ -6038,15 +6038,23 @@
         <source> Username and password not recognized. Please try again. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">7,10</context>
+          <context context-type="linenumber">7,11</context>
         </context-group>
         <target state="needs-review-translation" state-qualifier="leveraged-tm"> Kullanıcı adı ve parola tanınmadı. Lütfen tekrar deneyin. </target>
+      </trans-unit>
+      <trans-unit id="4965001183488621459" datatype="html">
+        <source> Signing in is disabled right now. Please try again later. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
+          <context context-type="linenumber">12,15</context>
+        </context-group>
+        <target state="needs-translation"> Signing in is disabled right now. Please try again later. </target>
       </trans-unit>
       <trans-unit id="3520364270607157736" datatype="html">
         <source> There was an error saving data. Please log in again. You may need to re-do your recent work. We apologize for the inconvenience. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">12,17</context>
+          <context context-type="linenumber">17,22</context>
         </context-group>
         <target state="needs-translation"> There was an error saving data. Please log in again. You may need to re-do your recent work. We apologize for the inconvenience. </target>
       </trans-unit>
@@ -6054,7 +6062,7 @@
         <source>Recaptcha failed. Please reload the page and try again!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">55,61</context>
+          <context context-type="linenumber">60,66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-student-form/register-student-form.component.html</context>
@@ -6070,7 +6078,7 @@
         <source>Sign in with Google</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">86,90</context>
+          <context context-type="linenumber">91,95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-google-user-already-exists/register-google-user-already-exists.component.html</context>
@@ -6090,7 +6098,7 @@
         <source>Sign in with Microsoft</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">99,103</context>
+          <context context-type="linenumber">104,108</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/register-microsoft-user-already-exists/register-microsoft-user-already-exists.component.html</context>
@@ -6110,7 +6118,7 @@
         <source>Forgot username or password?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">108,109</context>
+          <context context-type="linenumber">113,114</context>
         </context-group>
         <target state="needs-review-translation" state-qualifier="leveraged-tm">Kullanıcı adı veya parolanızı unuttunuz mu?</target>
       </trans-unit>
@@ -6118,7 +6126,7 @@
         <source>New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/login/login-home/login-home.component.html</context>
-          <context context-type="linenumber">109,110</context>
+          <context context-type="linenumber">114,115</context>
         </context-group>
         <target state="needs-translation">New to WISE? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/join&quot;&gt;"/>Join for free!<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
@@ -12068,7 +12076,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>There was an error translating the text. Please contact WISE staff if the error persists.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/abstract-translatable-field/abstract-translatable-field.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target state="needs-translation">There was an error translating the text. Please contact WISE staff if the error persists.</target>
       </trans-unit>
@@ -12332,7 +12340,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">19,23</context>
+          <context context-type="linenumber">21,25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-textarea/translatable-textarea.component.html</context>
@@ -12352,7 +12360,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Note: Editing is disabled. Please switch back to <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> if you want to edit.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">36,37</context>
+          <context context-type="linenumber">38,39</context>
         </context-group>
         <target state="needs-translation">Note: Editing is disabled. Please switch back to <x id="INTERPOLATION" equiv-text="{{ defaultLanguage.language }}"/> if you want to edit.</target>
       </trans-unit>
@@ -12360,7 +12368,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source> Copy content to <x id="INTERPOLATION" equiv-text="{{ currentLanguage().language }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.html</context>
-          <context context-type="linenumber">46,47</context>
+          <context context-type="linenumber">48,49</context>
         </context-group>
         <target state="needs-translation"> Copy content to <x id="INTERPOLATION" equiv-text="{{ currentLanguage().language }}"/> </target>
       </trans-unit>
@@ -12368,7 +12376,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>Are you sure you want to replace the content in <x id="PH" equiv-text="this.currentLanguage().language"/> with content in <x id="PH_1" equiv-text="this.defaultLanguage.language"/> for this item?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translatable-rich-text-editor/translatable-rich-text-editor.component.ts</context>
-          <context context-type="linenumber">59,61</context>
+          <context context-type="linenumber">60,62</context>
         </context-group>
         <target state="needs-translation">Are you sure you want to replace the content in <x id="PH" equiv-text="this.currentLanguage().language"/> with content in <x id="PH_1" equiv-text="this.defaultLanguage.language"/> for this item?</target>
       </trans-unit>
@@ -12424,7 +12432,7 @@ Geçesiz JSON'u açık tutup düzeltebilmek için "İptal"e tıkla.</target>
         <source>There was an error translating the text. Please talk to WISE staff.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/authoringTool/components/translation-suggestions-dialog/translation-suggestions-dialog.component.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <target state="needs-translation">There was an error translating the text. Please talk to WISE staff.</target>
       </trans-unit>
@@ -16042,7 +16050,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">53,55</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
         <target state="needs-translation">Period <x id="INTERPOLATION" equiv-text="{{ period.periodName }}"/></target>
       </trans-unit>
@@ -16750,7 +16758,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">45,49</context>
+          <context context-type="linenumber">46,49</context>
         </context-group>
         <target state="needs-translation">Hide</target>
       </trans-unit>
@@ -16770,7 +16778,7 @@ The branches will be removed but the steps will remain in the unit.</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">44,46</context>
+          <context context-type="linenumber">45,46</context>
         </context-group>
         <target state="needs-review-translation" state-qualifier="leveraged-tm">Göster</target>
       </trans-unit>
@@ -26546,7 +26554,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Error saving translation. Please try again later.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/services/teacherProjectTranslationService.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <target state="needs-translation">Error saving translation. Please try again later.</target>
       </trans-unit>
@@ -26650,7 +26658,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Activity Question</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">37,39</context>
+          <context context-type="linenumber">38,40</context>
         </context-group>
         <target state="needs-translation">Activity Question</target>
       </trans-unit>
@@ -26658,7 +26666,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Activity Question Display</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">41,44</context>
+          <context context-type="linenumber">42,45</context>
         </context-group>
         <target state="needs-translation">Activity Question Display</target>
       </trans-unit>
@@ -26666,7 +26674,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Close (Esc)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">56,59</context>
+          <context context-type="linenumber">58,61</context>
         </context-group>
         <target state="needs-translation">Close (Esc)</target>
       </trans-unit>
@@ -26674,7 +26682,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source> [Add optional presentation prompt] </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">76,80</context>
+          <context context-type="linenumber">78,82</context>
         </context-group>
         <target state="needs-translation"> [Add optional presentation prompt] </target>
       </trans-unit>
@@ -26682,7 +26690,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Edit prompt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">83,86</context>
+          <context context-type="linenumber">85,88</context>
         </context-group>
         <target state="needs-translation">Edit prompt</target>
       </trans-unit>
@@ -26690,7 +26698,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Presentation Prompt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">92,95</context>
+          <context context-type="linenumber">94,97</context>
         </context-group>
         <target state="needs-translation">Presentation Prompt</target>
       </trans-unit>
@@ -26698,7 +26706,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Save prompt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">103,105</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
         <target state="needs-translation">Save prompt</target>
       </trans-unit>
@@ -26706,7 +26714,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>Reset to default</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">118,121</context>
+          <context context-type="linenumber">120,123</context>
         </context-group>
         <target state="needs-translation">Reset to default</target>
       </trans-unit>
@@ -26714,7 +26722,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>No ideas selected. Close and check ideas to display.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">140,142</context>
+          <context context-type="linenumber">142,144</context>
         </context-group>
         <target state="needs-translation">No ideas selected. Close and check ideas to display.</target>
       </trans-unit>
@@ -26722,7 +26730,7 @@ Bu sorun devam ederse, öğretmeninize bildirin ve bir sonraki etkinliğe geçin
         <source>No posts selected. Close and check posts to display.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/assets/wise5/teacher-presentation/teacher-presentation-dialog/teacher-presentation-dialog.component.html</context>
-          <context context-type="linenumber">142,145</context>
+          <context context-type="linenumber">144,147</context>
         </context-group>
         <target state="needs-translation">No posts selected. Close and check posts to display.</target>
       </trans-unit>
